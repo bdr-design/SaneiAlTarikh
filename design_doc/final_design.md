@@ -2073,6 +2073,7 @@ These answers override the defaults below. They are logged in `decisions/decisio
 | D-27 | Equipment: 20-year spending + legacy stock + imports | As recommended. |
 | D-30 | No personality traits for real leaders | As recommended. |
 | D-31 | Small-phone top row | Covered: the owner approved screen 1 (B3) after seeing all 7 devices. |
+| **Military control** | **Full control of each army** (owner's reference: «الجنرال | الحرب العالمية») | **Replaces "automated fronts only" (§5.4).** The player orders each army: move, attack, halt and waypoints. AI countries run their own armies the same way. Consequences: an order queue and unit selection UI, per-army routing on demand (the daily routing budget in §5.4 must be re-measured), operational AI per army, and the M4 estimate grows (roughly +3–5 weeks; unverified, re-estimate at M4 planning). Equipment stays generic; air and naval stay simplified in v1. |
 
 ### 13.1 Design and technical choices
 
