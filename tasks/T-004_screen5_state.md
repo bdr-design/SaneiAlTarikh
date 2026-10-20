@@ -29,3 +29,27 @@ The proposal only, in `design/proposals/S5_state`, rendered on the iPhone 17 Pro
 3. The content covers every item of the §6.5 row: leader and rename, regime, constitution, political capital, policies (tab), projects with start and cancel and the refund shown, preset and cheats status.
 4. No photo and no traits for the real leader. Western digits. Money in US dollars.
 5. No cut or overlapping text on the 17 Pro Max (render check: 0 issues). I look at every render myself.
+
+## Reference: the «Modern Age» series (العصر الحديث 1–3, Oxiwyle), checked 2026-10-20 at the owner's request («راجع لعبة عصر الحداثة»)
+The store pages and screenshots could not be opened: the environment's network policy denies apps.apple.com and play.google.com. The notes below come from web search results (store text quoted by search, Steam pages, player reviews). The game's look is not reviewed until the owner sends screenshots.
+- **Sections:** the president's rating (to avoid riots, protests and revolutions); production and trade; about 20 ministries; construction; the army; international relations and UN votes.
+- **Ministries:** health, education, infrastructure, culture, sports, justice, police, defence, security service, tourism. Each has its own funding, and the player appoints the ministers.
+- **Other levers:**
+  - economic and military laws; ideology and religion (the player can change them);
+  - taxes, a central bank, loans;
+  - trade in goods, mines and factories.
+- **Victory:** military, religious or ideological, or leading in revenue, army, population and industry.
+- **Players praise:** the depth of the economy and of the army battles.
+- **Players complain about:**
+  - hard menus (MA 1: "absolutely horrendous", no way back); MA 3's categories helped;
+  - a weak tutorial;
+  - ads and paywalls (2x speed behind a subscription);
+  - slow timers (troop training in "centuries");
+  - holding a button to build many things;
+  - relations not colour-coded on the map.
+- **Taken for this game:**
+  - a clear way back from every deeper view;
+  - grouped laws (economy / security / society) for the «السياسات» tab;
+  - a cabinet view as an option for «القيادة».
+
+  **Avoided:** unrealistic switches (changing the state religion at will), paywalls, timers that block play.
