@@ -1,0 +1,34 @@
+  /* ================= State panel (proposal): additions to the approved province panel's CSS =================
+     The look, sizes and fit levels come from ../../screen4/R/_build/panel.css (read by assemble.py, so the two panels
+     cannot drift). The sheet is the full-height side sheet of the province details: dock left of it, or hidden on
+     the 375 pt phones. One tab body shows at a time (?tab=overview|leader|projects). */
+  .r-body[data-tab] { display: none; }
+  [data-tab="overview"] .r-body[data-tab="overview"], [data-tab="leader"] .r-body[data-tab="leader"],
+  [data-tab="projects"] .r-body[data-tab="projects"] { display: flex; }
+  .r-body[data-tab="leader"], .r-body[data-tab="projects"] { padding-top: var(--s2); gap: var(--s2); }
+
+  /* the open section in the dock */
+  .dock-item.on, .dock-item.on svg.i { color: var(--cyan); opacity: 1; }
+
+  /* القيادة: office rows, seat bar */
+  .s-off { display: flex; align-items: center; gap: var(--s2); height: 40px; }
+  .s-off .r-tile { width: 32px; height: 32px; }
+  .s-vac { color: var(--t2); }
+  .s-seats { display: flex; flex-direction: column; gap: var(--s1); }
+  .s-bar { position: relative; height: 8px; border-radius: 4px; background: rgba(169, 188, 203, .22); overflow: hidden; }
+  .s-bar i { position: absolute; inset: 0 0 0 auto; border-radius: 4px; background: var(--teal); }
+  .s-leg { font-size: var(--fs-sec); line-height: var(--lh-sec); font-weight: 500; color: var(--t2); white-space: nowrap; }
+  .s-leg b { font-weight: 600; color: var(--t1); }
+  .s-st2 { border-top: 1px solid var(--hair); grid-template-columns: 1fr; }
+  .s-st2 .r-sc:nth-child(-n+2) { border-bottom: 0; }
+  .s-st2 .r-sc:first-child { border-bottom: 1px solid var(--hair); }
+  .s-st2 .r-sc::after { display: none; }
+
+  /* المشاريع: project rows with progress, cancel (refund shown) or start */
+  .s-proj { display: flex; align-items: center; gap: var(--s2); height: 52px; padding-inline: 5px var(--s2); border-radius: var(--r-ctl); background: var(--card); box-shadow: inset 0 0 0 1px var(--stroke); }
+  .s-proj + .s-proj { margin-top: var(--s1); }
+  .s-prog { position: relative; height: 4px; margin-top: 4px; border-radius: 2px; background: rgba(169, 188, 203, .22); overflow: hidden; }
+  .s-prog i { position: absolute; inset: 0 0 0 auto; border-radius: 2px; background: var(--teal); }
+  .s-pa { flex: none; display: flex; flex-direction: column; align-items: center; gap: 2px; }
+  .s-ref { font-size: var(--fs-label); line-height: var(--lh-label); font-weight: 500; color: var(--t2); white-space: nowrap; }
+  .s-note { font-size: var(--fs-label); line-height: 14px; font-weight: 500; color: var(--t2); }
