@@ -1,0 +1,72 @@
+  /* ================= Province panel, version 3 (owner, 2026-10-20) =================
+     Reference: «الجنرال | الحرب العالمية» (Conflict of Nations). The feeling of running a state = many indicators,
+     tidy: a 4 x 3 grid of indicators with rates, five tabs, a steel panel with an orange accent, and timed decision
+     buttons. Panels only; the HUD keeps the approved look. Opaque (D-3). Values are illustrative. */
+  :root { --sheet-w: 433px; --sheet-b: 0px; --g-or: #F39C33; --g-good: #7ED957; --g-bad: #FF6B5E; --g-flat: #9AA3AC; }
+  .sheet { --r: 8px; position: absolute; right: 0; top: calc(var(--row) + var(--s2)); bottom: var(--sheet-b); width: var(--sheet-w); z-index: 2; overflow: hidden;
+    border-color: rgb(92, 102, 112) !important; box-shadow: 0 12px 30px rgba(0, 0, 0, .5); }
+  .sheet > .frost::after { background: linear-gradient(180deg, rgb(44, 51, 58) 0%, rgb(32, 37, 43) 100%) !important; }
+  .g-in { position: absolute; inset: 0; padding: 0 10px 10px; display: flex; flex-direction: column; gap: 6px; color: #EEF2F5; }
+  .g-in > * { flex: none; }
+  .g-dot { color: #8E979F; }
+  .up-good, .down-good { color: var(--g-good); } .up-bad, .down-bad { color: var(--g-bad); } .flat { color: var(--g-flat); }
+
+  /* header bar */
+  .g-hd { display: flex; align-items: center; gap: 10px; height: 46px; margin: 0 -10px; padding: 0 10px;
+    background: linear-gradient(180deg, rgb(74, 84, 94) 0%, rgb(54, 62, 70) 100%); border-bottom: 1px solid rgb(22, 26, 30); box-shadow: inset 0 1px 0 rgba(255, 255, 255, .12); }
+  .g-flag { position: relative; width: 40px; height: 30px; border-radius: 3px; overflow: hidden; flex: none; box-shadow: 0 0 0 1px rgba(0, 0, 0, .5), 0 2px 5px rgba(0, 0, 0, .4); }
+  .g-flag img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .g-flag::after { content: ""; position: absolute; inset: 0; background: linear-gradient(100deg, rgba(255, 255, 255, .22) 0%, rgba(255, 255, 255, 0) 30%, rgba(0, 0, 0, .2) 55%, rgba(255, 255, 255, .1) 78%, rgba(0, 0, 0, .12) 100%); }
+  .g-tt { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+  .g-row { display: flex; align-items: center; gap: 6px; }
+  .g-name { font-size: 18px; line-height: 22px; font-weight: 700; text-shadow: 0 1px 2px rgba(0, 0, 0, .5); }
+  .g-cap { display: inline-flex; align-items: center; gap: 3px; height: 18px; padding-inline: 6px; border-radius: 3px; font-size: var(--fs-label); font-weight: 700; color: #241A0B; background: linear-gradient(180deg, #FFB75A, var(--g-or)); }
+  .g-cap svg.i { width: 10px; height: 10px; }
+  .g-sub { font-size: var(--fs-label); line-height: 12px; color: #C3CAD1; white-space: nowrap; }
+  .g-ctl { margin-inline-start: auto; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 34px; padding-inline: 8px; border-radius: 4px;
+    background: rgb(28, 33, 38); box-shadow: inset 0 1px 3px rgba(0, 0, 0, .6); }
+  .g-ctl-n { font-size: var(--fs-name); font-weight: 700; line-height: 16px; color: var(--g-good); }
+  .g-ctl-l { font-size: 9px; line-height: 11px; color: #AEB6BE; white-space: nowrap; }
+  .g-x { width: 32px; height: 32px; border-radius: 4px; display: grid; place-items: center; color: #EEF2F5; position: relative;
+    background: linear-gradient(180deg, rgb(92, 102, 112), rgb(64, 72, 80)); box-shadow: inset 0 1px 0 rgba(255, 255, 255, .15), 0 1px 2px rgba(0, 0, 0, .5); }
+  .g-x::before { content: ""; position: absolute; inset: -6px; }
+
+  /* tabs */
+  .g-tabs { display: grid; grid-template-columns: repeat(5, 1fr); gap: 3px; height: 32px; }
+  .g-tab { border-radius: 5px 5px 0 0; font-size: var(--fs-sec); font-weight: 600; color: #AEB6BE; background: rgb(30, 35, 40); box-shadow: inset 0 -1px 0 rgb(64, 72, 80); position: relative; }
+  .g-tab.on { color: #fff; background: rgb(60, 68, 76); box-shadow: inset 0 2px 0 var(--g-or); }
+  .g-tab::before { content: ""; position: absolute; top: -6px; bottom: -6px; left: 0; right: 0; }
+
+  /* indicators: 4 x 3 */
+  .g-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
+  .g-t { --c: #AEB6BE; display: grid; grid-template-columns: 24px 1fr; grid-template-areas: "ic v" "ic l" "r r"; column-gap: 6px; row-gap: 1px; align-items: center;
+    height: 46px; padding: 3px 6px; border-radius: 5px; background: rgb(26, 31, 36); box-shadow: inset 0 1px 2px rgba(0, 0, 0, .55), 0 1px 0 rgba(255, 255, 255, .05); min-width: 0; }
+  .g-ic { grid-area: ic; width: 24px; height: 24px; border-radius: 5px; display: grid; place-items: center; color: var(--c); background: color-mix(in srgb, var(--c) 18%, transparent); box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--c) 40%, transparent); }
+  .g-ic svg.i { width: 14px; height: 14px; }
+  .g-v { grid-area: v; font-size: var(--fs-name); line-height: 16px; font-weight: 700; white-space: nowrap; }
+  .g-l { grid-area: l; font-size: 9.5px; line-height: 11px; color: #AEB6BE; white-space: nowrap; overflow: hidden; }
+  .g-r { grid-area: r; font-size: 9.5px; line-height: 11px; font-weight: 700; white-space: nowrap; }
+  .warn { box-shadow: inset 0 0 0 1px rgba(255, 107, 94, .55), inset 0 1px 2px rgba(0, 0, 0, .55); }
+  .warn .g-v { color: #FF8A7E; }
+  .c-blue { --c: #5AA9FF; } .c-green { --c: #6CD46A; } .c-gold { --c: #E9C46A; } .c-red { --c: #FF5A4E; } .c-orange { --c: #F39C33; } .c-teal { --c: #3FD0C0; }
+  .c-cyan { --c: #7FE9FF; } .c-yellow { --c: #F5D90A; } .c-steel { --c: #AEB6BE; } .c-violet { --c: #B48CFF; } .c-blue2 { --c: #7FB2FF; } .c-green2 { --c: #9BD65E; }
+
+  /* timed decision buttons */
+  .g-acts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
+  .g-act { display: grid; grid-template-columns: 16px 1fr auto; grid-template-areas: "i n n" "c c t" "e e e"; column-gap: 5px; row-gap: 2px; align-items: center; height: 56px; padding: 5px 8px; border-radius: 5px; text-align: start;
+    color: #EEF2F5; background: linear-gradient(180deg, rgb(78, 88, 98), rgb(56, 64, 72)); box-shadow: inset 0 1px 0 rgba(255, 255, 255, .14), inset 0 0 0 1px rgb(98, 108, 118), 0 2px 4px rgba(0, 0, 0, .45); }
+  .g-act > svg.i { grid-area: i; width: 15px; height: 15px; }
+  .g-an { grid-area: n; font-size: var(--fs-sec); line-height: 14px; font-weight: 700; white-space: nowrap; }
+  .g-ac { grid-area: c; font-size: 9.5px; line-height: 11px; font-weight: 700; color: #F2C14E; white-space: nowrap; }
+  .g-at { grid-area: t; display: flex; align-items: center; gap: 2px; font-size: 9.5px; line-height: 11px; color: #C3CAD1; white-space: nowrap; }
+  .g-at svg.i { width: 10px; height: 10px; }
+  .g-ae { grid-area: e; justify-self: start; font-size: 9.5px; line-height: 11px; font-weight: 700; white-space: nowrap; }
+  .g-ae .down-bad { margin-inline-start: 3px; }
+  .g-first { color: #20170A; background: linear-gradient(180deg, #FFB75A 0%, var(--g-or) 55%, #D9801C 100%); box-shadow: inset 0 1px 0 rgba(255, 255, 255, .45), inset 0 0 0 1px #B86A12, 0 2px 5px rgba(0, 0, 0, .5); }
+  .g-first .g-ac { color: #4A2D05; } .g-first .g-at { color: #4A2D05; } .g-first .up-good { color: #1F5A12; }
+
+  /* map labels and the tapped province (from variant A) */
+  .map svg.labels { position: absolute; inset: 0; width: 100%; height: 100%; direction: ltr; }
+  .labels .cut { display: none; }
+  .map svg.sel { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+  .sel path { vector-effect: non-scaling-stroke; stroke-linejoin: round; }
