@@ -1,10 +1,13 @@
 // Screen 4 variant A (province panel as a tabbed side sheet): render the given iPhones (default: i16promax se)
 // and run the checks. Writes <id>.png to the variant folder, <id>_hit.png and report.json to _build.
 // Checks: opaque panels (D-3), control heights 32/36/44, radii 10/12, spacing 4/8/12, icons, type sizes and weights,
-// 44 pt hit boxes (no overlap), side safe insets, nothing tappable in the bottom inset, panel and text overlaps,
-// clipped or ellipsised text, contrast >= 4.5:1 over the real rendered backdrop, the sheet geometry,
-// the brief's content, and that Cairo's highlight (and the delta, and Egypt) is not covered by any panel or hit box.
-// Usage: NODE_PATH=.../node_modules node render.js [ids...] [--tabs]   |   node render.js --selftest
+// 44 pt hit boxes (no overlap), side safe insets, nothing tappable in the bottom inset, panel overlaps, text over
+// text and icons over text, clipped or ellipsised text, % after its digits, contrast >= 4.5:1 over the real rendered
+// backdrop, the sheet geometry (pinned action card: whole rows, no blank band), every HUD element at its exact place
+// and size on the play screen B3 (loaded side by side), the brief's content (trend glyphs and colours, chevrons),
+// that Cairo's highlight (and the delta, and Egypt) is not covered by any panel or hit box, and no map label cut by
+// a panel edge.
+// Usage: NODE_PATH=.../node_modules node render.js [ids...] [--tabs]   |   node render.js --selftest  (i16promax and se)
 //   --tabs also renders the other three tabs on the 17 Pro Max to _build/i16promax_tab_<name>.png and checks them.
 const { chromium } = require('playwright');
 const path = require('path');
@@ -24,7 +27,8 @@ const TOK = {
   type: { 10: [400, 500, 700], 11.5: [500, 600], 13: [600], 14: [700], 18: [700] },
   icon: { ctl: 16, stat: 14, dock: 17, glyph: 10 }, stroke: 1.75,
   panel: 'rgb(12, 20, 28)', border: 'rgba(127, 233, 255, 0.14)',
-  colors: ['rgb(234, 242, 247)', 'rgb(169, 188, 203)', 'rgb(162, 182, 198)', 'rgb(127, 233, 255)', 'rgb(63, 224, 208)', 'rgb(242, 177, 76)', 'rgb(242, 112, 90)', 'rgb(111, 182, 255)', 'rgb(11, 18, 24)'],
+  // text colours allowed in the sheet: exactly the brief's tokens (#EAF2F7, #A9BCCB, cyan, teal, amber, red, blue)
+  colors: ['rgb(234, 242, 247)', 'rgb(169, 188, 203)', 'rgb(127, 233, 255)', 'rgb(63, 224, 208)', 'rgb(242, 177, 76)', 'rgb(242, 112, 90)', 'rgb(111, 182, 255)'],
 };
 // Every string the brief asks for (Arabic as written in the page). "now" must be visible on screen in every render
 // (header, status, the 3 numbers, the tab row, the first action); "tab" is visible when that tab is open;
@@ -32,9 +36,9 @@ const TOK = {
 const BRIEF = {
   now: ['القاهرة', 'العاصمة', 'مصر', 'السيادة', 'الإدارة', 'حكومة مصر', 'السيطرة', 'الحكومة · 100%', 'المطالبات', 'لا توجد',
     'السكان', '8.8 مليون', 'الاضطراب', '64', 'البنية التحتية', '8 / 10', 'لماذا؟',
-    'عام', 'المجتمع', 'الاقتصاد', 'الأمن', 'مشروع بنية تحتية', '0.8 مليار $ · 24 شهرًا', '+1 بنية تحتية'],
+    'السياسة', 'المجتمع', 'الاقتصاد', 'الأمن', 'مشروع بنية تحتية', '0.8 مليار $ · 24 شهرًا', '+1 بنية تحتية'],
   tab: {
-    general: ['الحزب الحاكم في المحافظة', 'الحزب الوطني الديمقراطي', 'التأييد', 'حاكم'],
+    politics: ['الحزب الحاكم في المحافظة', 'الحزب الوطني الديمقراطي', 'التأييد', 'حاكم'],
     society: ['نسبة الحضر', '100%', 'مسلمون سنة 90%', 'مسيحيون أقباط 10%'],
     economy: ['نحو 22% من ناتج مصر', 'الأنشطة الرئيسية', 'خدمات · صناعة · سياحة'],
     security: ['القوات الموجودة', 'أمن داخلي · فرقة واحدة', 'السيطرة', '100%'],
@@ -42,8 +46,26 @@ const BRIEF = {
   dom: ['دعم الخدمات', '0.3 مليار $', '−5 اضطراب', 'تعزيز الأمن', '0.2 مليار $ / سنة', '−8 اضطراب', '−3 شرعية'],
 };
 
-async function measure(p, d) {
-  return p.evaluate(({ d, TOK, BRIEF }) => {
+// HUD elements of the play screen that must keep their B3 place and size while the sheet is open
+const HUDSEL = ['.top > .nation', '.top > .stats', '.top > .date', '.toast', '.btn.mode', '.btn.home', '.dock', '.dock-item'];
+const B3 = 'file://' + path.resolve(OUT, '../../screen1/B3/index.html');
+async function hudRects(p) {
+  return p.evaluate((HUDSEL) => {
+    const o = {};
+    HUDSEL.forEach((s) => { o[s] = [...document.querySelectorAll(s)].map((e) => { const r = e.getBoundingClientRect(); return { x0: r.left, y0: r.top, x1: r.right, y1: r.bottom }; }); });
+    return o;
+  }, HUDSEL);
+}
+async function b3Rects(b, d) {
+  const ctx = await b.newContext({ viewport: { width: d.w, height: d.h }, deviceScaleFactor: 1 });
+  const p = await open(ctx, B3 + qs(d));
+  const r = await hudRects(p);
+  await ctx.close();
+  return r;
+}
+
+async function measure(p, d, b3) {
+  return p.evaluate(({ d, TOK, BRIEF, b3 }) => {
     const R = (r) => ({ x0: +r.left.toFixed(2), y0: +r.top.toFixed(2), x1: +r.right.toFixed(2), y1: +r.bottom.toFixed(2), w: +r.width.toFixed(2), h: +r.height.toFixed(2) });
     const issues = [], W = d.w, H = d.h, S = d.side, B = d.bottom, eps = 0.01, lu = 1 / 32;
     const near = (a, b, t = 0.05) => Math.abs(a - b) < t;
@@ -97,14 +119,23 @@ async function measure(p, d) {
       if (!/flex|grid/.test(cs.display)) return;
       [cs.columnGap, cs.rowGap].forEach((g) => { const v = g === 'normal' ? 0 : parseFloat(g); if (!TOK.space.some((s) => near(s, v))) issues.push(`gap ${v} on ${label(e)}`); });
     });
+    // fit level (index.html): 0 all gaps 8; 1 header/status/numbers 4; 2 also tab row/details/actions 4; 3 also sheet padding 4; 4 also one-line header
+    const lvl = +document.documentElement.dataset.sheetfit, gBlk = lvl >= 1 ? 4 : 8, gDet = lvl >= 2 ? 4 : 8, padSh = lvl >= 3 ? 4 : 8;
     const sheet = q('.sheet'), scs = getComputedStyle(sheet), sr = sheet.getBoundingClientRect();
-    if (!near(parseFloat(scs.paddingLeft), 12) || !near(parseFloat(scs.paddingRight), 12) || !near(parseFloat(scs.paddingTop), 8)) issues.push(`sheet padding ${scs.padding}`);
+    if (!near(parseFloat(scs.paddingLeft), 12) || !near(parseFloat(scs.paddingRight), 12) || !near(parseFloat(scs.paddingTop), padSh) || !near(parseFloat(scs.paddingBottom), padSh)) issues.push(`sheet padding ${scs.padding} (want ${padSh} 12)`);
     const blocks = ['.sh-head', '.status', '.kpis', '.seg', '.body'].map((s) => q(s).getBoundingClientRect());
-    { const pane = qa('.pane')[0].getBoundingClientRect(), g = pane.top - blocks[3].bottom; if (!near(g, 8)) issues.push(`tab row -> details gap ${g.toFixed(2)} (want 8)`); }
-    { const pane = qa('.pane')[0].getBoundingClientRect(), a = q('.acts').getBoundingClientRect(), g = a.top - pane.bottom;
-      if (document.documentElement.dataset.sheetfit === '1' ? !near(g, 8) : g < 8 - 0.05) issues.push(`details -> actions gap ${g.toFixed(2)} (want 8${document.documentElement.dataset.sheetfit === '1' ? '' : ' or more'})`); }
-    for (let i = 1; i < blocks.length; i++) { const g = blocks[i].top - blocks[i - 1].bottom; if (!TOK.space.slice(1).some((s) => near(s, g))) issues.push(`sheet block gap ${g.toFixed(2)} before ${['.sh-head', '.status', '.kpis', '.seg', '.body'][i]}`); }
-    { const g = blocks[0].top - sr.top - 1; if (!near(g, 8)) issues.push(`sheet top padding ${g.toFixed(2)}`); }
+    const wantGap = [gBlk, gBlk, 8, gDet];
+    for (let i = 1; i < blocks.length; i++) { const g = blocks[i].top - blocks[i - 1].bottom; if (!near(g, wantGap[i - 1])) issues.push(`sheet block gap ${g.toFixed(2)} before ${['.sh-head', '.status', '.kpis', '.seg', '.body'][i]} (want ${wantGap[i - 1]})`); }
+    { const pane = qa('.pane')[0].getBoundingClientRect(), g = pane.top - blocks[3].bottom; if (!near(g, gDet)) issues.push(`tab row -> details gap ${g.toFixed(2)} (want ${gDet})`); }
+    { const g = blocks[0].top - sr.top - 1; if (!near(g, padSh)) issues.push(`sheet top padding ${g.toFixed(2)} (want ${padSh})`); }
+    // the action card: pinned to the bottom (no blank band under it), whole rows only, at least the first row, indicator when it scrolls
+    { const ac = q('.acts'), a = ac.getBoundingClientRect(), tb = q('.sheet .tabs').getBoundingClientRect(), rowH = q('.act').getBoundingClientRect().height;
+      const g = a.top - tb.bottom, band = (sr.bottom - 1 - padSh) - a.bottom;
+      if (g < gDet - 0.05 || g >= gDet + rowH - 0.05) issues.push(`details -> actions gap ${g.toFixed(2)} (want ${gDet}, plus less than one row of spare)`);
+      if (Math.abs(band) > 0.5) issues.push(`blank band of ${band.toFixed(1)} pt under the action card`);
+      const scrolls = ac.scrollHeight > ac.clientHeight + 1, k = ac.clientHeight / rowH;
+      if (scrolls && (Math.abs(k - Math.round(k)) > 0.02 || Math.round(k) < 1)) issues.push(`action card cuts a row (${ac.clientHeight.toFixed(1)} pt = ${k.toFixed(2)} rows)`);
+      if (scrolls !== visible(q('.sbar'))) issues.push(`action card ${scrolls ? 'scrolls without' : 'does not scroll but shows'} its scroll indicator`); }
     // ---------- 4. icons ----------
     document.querySelectorAll('.hud svg').forEach((s) => {
       if (!s.getClientRects().length) return;
@@ -139,7 +170,7 @@ async function measure(p, d) {
         const b = box(r);
         // line box (the content area is taller than the line height, so stacked lines' content areas overlap by design)
         const lh = parseFloat(cs.lineHeight), mid = (b.y0 + b.y1) / 2;
-        texts.push({ t, fs, color: cs.color, sheet: inSheet, r: R(r), line: { x0: b.x0, x1: b.x1, y0: mid - lh / 2, y1: mid + lh / 2 } });
+        texts.push({ t, fs, color: cs.color, sheet: inSheet, badge: !!el.closest('.badge'), r: R(r), line: { x0: b.x0, x1: b.x1, y0: mid - lh / 2, y1: mid + lh / 2 } });
         if (b.x0 < S - eps || b.x1 > W - S + eps) issues.push(`text in side inset: ${t}`);
         if (b.y1 > H - B + eps) issues.push(`text in bottom inset: ${t}`);
         if (b.x0 < c.x0 - 0.5 || b.x1 > c.x1 + 0.5 || b.y0 < c.y0 - 0.5 || b.y1 > c.y1 + 0.5) issues.push(`clipped text: "${t}" ${R(r).x0}..${R(r).x1} y ${R(r).y0}..${R(r).y1}`);
@@ -152,6 +183,24 @@ async function measure(p, d) {
       const a = st[i].line, b = st[j].line;
       if (Math.min(a.x1, b.x1) - Math.max(a.x0, b.x0) > 0.5 && Math.min(a.y1, b.y1) - Math.max(a.y0, b.y0) > 0.5) issues.push(`text overlap "${st[i].t}" / "${st[j].t}"`);
     }
+    // no icon is drawn over a text run, in the sheet or the HUD (the bell's count badge sits on the bell by design)
+    const icons = [...document.querySelectorAll('.hud svg')].filter((s) => s.getClientRects().length && !s.closest('.frost') && getComputedStyle(s).visibility !== 'hidden')
+      .map((s) => ({ s, r: box(s.getBoundingClientRect()) })).filter((o) => !hiddenByScroll(o.r, o.s));
+    texts.forEach((t) => {
+      if (t.badge) return;
+      icons.forEach((o) => { const a = t.line, b = o.r; if (Math.min(a.x1, b.x1) - Math.max(a.x0, b.x0) > 0.5 && Math.min(a.y1, b.y1) - Math.max(a.y0, b.y0) > 0.5) issues.push(`icon over text: ${label(o.s)} / "${t.t}"`); });
+    });
+    // every % sits right after its digits on screen ("65%"), never before them ("%65", the bidi trap of Western digits after Arabic letters)
+    { const w2 = document.createTreeWalker(q('.hud'), NodeFilter.SHOW_TEXT); let n2;
+      while ((n2 = w2.nextNode())) {
+        const s = n2.textContent; if (!s.includes('%') || !visible(n2.parentElement)) continue;
+        for (let i = s.indexOf('%'); i >= 0; i = s.indexOf('%', i + 1)) {
+          if (i === 0 || !/[0-9]/.test(s[i - 1])) { issues.push(`% without its digits right before it: "${s.trim()}"`); continue; }
+          const r1 = document.createRange(); r1.setStart(n2, i - 1); r1.setEnd(n2, i);
+          const r2 = document.createRange(); r2.setStart(n2, i); r2.setEnd(n2, i + 1);
+          if (!(r2.getBoundingClientRect().left >= r1.getBoundingClientRect().right - 0.5)) issues.push(`% shown before its number: "${s.trim()}"`);
+        }
+      } }
     // content stays inside its control
     qa('.sheet .tap, .capital').forEach((c) => {
       const cr = c.getBoundingClientRect(); if (hiddenByScroll(box(cr), c)) return;
@@ -196,19 +245,33 @@ async function measure(p, d) {
     const gut = Math.max(S, 8), top = q('.top').getBoundingClientRect(), hud = q('.hud').getBoundingClientRect();
     if (!near(sr.right, W - gut)) issues.push(`sheet not at the right safe edge: ${sr.right} (want ${W - gut})`);
     if (sr.top < top.bottom + 8 - 0.05) issues.push(`sheet covers the top row (top ${sr.top})`);
-    if (sr.bottom > H - B + eps || !near(sr.bottom, hud.bottom)) issues.push(`sheet bottom ${sr.bottom} (want the dock line ${hud.bottom})`);
+    { const dkr = q('.dock').getBoundingClientRect(), shared = dkr.right > sr.left - 8 && dkr.left < sr.right + 8, wantB = shared ? dkr.top - 8 : hud.bottom;
+      if (sr.bottom > H - B + eps || !near(sr.bottom, wantB, 0.6)) issues.push(`sheet bottom ${sr.bottom} (want ${shared ? '8 pt above the dock' : 'the dock line'} ${wantB})`); }
     const hd = q('.sh-head'), xb = q('.xbtn').getBoundingClientRect(), nm = q('.pname').getBoundingClientRect();
     if (!(xb.right <= nm.left)) issues.push('close button is not at the RTL end of the header');
-    const segs = qa('.sg'); if (segs[0].textContent.trim() !== 'عام' || segs[0].getBoundingClientRect().left < segs[1].getBoundingClientRect().left) issues.push('first tab «عام» is not at the right');
+    const segs = qa('.sg'); if (segs[0].textContent.trim() !== 'السياسة' || segs[0].getBoundingClientRect().left < segs[1].getBoundingClientRect().left) issues.push('first tab «السياسة» is not at the right');
     if (qa('.sg[aria-selected="true"]').length !== 1) issues.push('exactly one tab must be selected');
-    const ac = q('.act'), ai = ac.querySelector('.a-ico').getBoundingClientRect(), ach = ac.querySelector('.chev').getBoundingClientRect();
-    if (!(ai.left > ach.right)) issues.push('action row: icon must be at the right, chevron at the left');
-    const dk = q('.dock');
-    if (visible(dk)) {
-      const r = dk.getBoundingClientRect();
-      if (r.right > sr.left - 8 + 0.05) issues.push('dock under the sheet');
-      if (!near(r.bottom, hud.bottom)) issues.push('dock left its bottom line');
-    }
+    // every action row: 16 pt icon at the right, title, cost, 16 pt chevron at the left (RTL)
+    document.querySelectorAll('.act').forEach((a, i) => {
+      const ic = a.querySelector('.a-ico'), ch = a.querySelector('.chev'), t = a.querySelector('.a-t'), c = a.querySelector('.a-c');
+      const ok16 = (e) => e && visible(e) && near(e.getBoundingClientRect().width, 16) && near(e.getBoundingClientRect().height, 16);
+      if (!ok16(ch)) issues.push(`action row ${i + 1}: chevron missing or not 16 pt`);
+      if (!ok16(ic)) issues.push(`action row ${i + 1}: icon missing or not 16 pt`);
+      if (ok16(ch) && ok16(ic)) { const [ri, rt, rc, rh] = [ic, t, c, ch].map((e) => e.getBoundingClientRect());
+        if (!(ri.left >= rt.right - 0.5 && rc.right <= rt.left + 0.5 && rh.right <= rc.left + 0.5)) issues.push(`action row ${i + 1}: order must be icon, title, cost, chevron (right to left)`); }
+    });
+    // the HUD stays where it is: every top-row element, the left stack and the dock keep their exact B3 place and size
+    if (!b3) issues.push('B3 reference not measured');
+    else Object.entries(b3).forEach(([sel, refs]) => {
+      const cur = [...document.querySelectorAll(sel)];
+      if (cur.length !== refs.length) { issues.push(`HUD element count ${sel}: ${cur.length} (B3 has ${refs.length})`); return; }
+      cur.forEach((e, i) => {
+        const nm = sel + (refs.length > 1 ? ` #${i + 1}` : ''), cs = getComputedStyle(e), ref = refs[i], r = e.getBoundingClientRect();
+        if (!visible(e) || cs.opacity === '0') { issues.push(`HUD element hidden: ${nm}`); return; }
+        const dev = Math.max(Math.abs(r.left - ref.x0), Math.abs(r.top - ref.y0), Math.abs(r.right - ref.x1), Math.abs(r.bottom - ref.y1));
+        if (dev > 0.5) issues.push(`HUD element moved from its B3 position: ${nm} x ${r.left.toFixed(1)}..${r.right.toFixed(1)} y ${r.top.toFixed(1)}..${r.bottom.toFixed(1)} (B3 ${ref.x0.toFixed(1)}..${ref.x1.toFixed(1)}, ${ref.y0.toFixed(1)}..${ref.y1.toFixed(1)})`);
+      });
+    });
     // must be visible without scrolling: header, status, the 3 numbers, the tab row and the first action
     ['.sh-head', '.status', '.kpis', '.seg', '.act'].forEach((s) => {
       const e = q(s), r = box(e.getBoundingClientRect()), { c } = clipOf(e);
@@ -223,6 +286,12 @@ async function measure(p, d) {
     if (q('.sg[aria-selected="true"]').dataset.for !== tab) issues.push('selected tab does not match the open details');
     if (qa('.why').length !== 3) issues.push(`«لماذا؟» links: ${qa('.why').length} (want 3)`);
     if (qa('.kpi .trend').length !== 3) issues.push('every headline number needs a trend arrow');
+    // the brief's trends: population flat, unrest up in amber, infrastructure flat (neutral #A9BCCB)
+    [['#t-flat', 'rgb(169, 188, 203)'], ['#t-up', 'rgb(242, 177, 76)'], ['#t-flat', 'rgb(169, 188, 203)']].forEach(([h, c], i) => {
+      const k = document.querySelectorAll('.kpi')[i], s = k && k.querySelector('.trend'), u = s && s.querySelector('use');
+      const href = u && (u.getAttribute('href') || u.getAttribute('xlink:href')), col = s && getComputedStyle(s).color;
+      if (!s || !visible(s) || href !== h || col !== c) issues.push(`headline number ${i + 1} trend ${href} ${col} (want ${h} ${c})`);
+    });
     const flag = q('.pflag'); const fr = flag.getBoundingClientRect(); if (!near(fr.width / fr.height, 4 / 3, 0.01)) issues.push('flag is not 4:3');
     if (!q('.pflag img').getAttribute('src').endsWith('shared/flags/eg.svg')) issues.push('flag file');
     if (getComputedStyle(q('.harm')).color !== 'rgb(242, 177, 76)') issues.push('legitimacy cost is not amber');
@@ -242,10 +311,20 @@ async function measure(p, d) {
     const me = q('.map').getBoundingClientRect();
     if (me.left > 0.5 || me.top > 0.5 || me.right < W - 0.5 || me.bottom < H - 0.5) issues.push('map not full-bleed');
     if (getComputedStyle(q('#cairo')).stroke !== 'rgb(127, 245, 234)') issues.push('Cairo outline colour');
+    // map labels: each one fully visible or fully under a panel, never cut by a panel edge (2 pt margin, halo included)
+    const hiddenLabels = [];
+    document.querySelectorAll('.labels text').forEach((t) => {
+      if (!t.getClientRects().length) { hiddenLabels.push(t.textContent); return; }
+      const r = t.getBoundingClientRect(), sw = parseFloat(t.getAttribute('stroke-width') || 0) / 2 * m.s;
+      const b = { x0: r.left - sw - 2, y0: r.top - sw - 2, x1: r.right + sw + 2, y1: r.bottom + sw + 2 };
+      if (b.x1 <= 0 || b.x0 >= W || b.y1 <= 0 || b.y0 >= H) return;
+      const under = prs.some((o) => r.left - sw >= o.r.x0 && r.right + sw <= o.r.x1 && r.top - sw >= o.r.y0 && r.bottom + sw <= o.r.y1);
+      if (!under && prs.some((o) => inter(b, o.r))) issues.push(`map label cut by a panel edge: ${t.textContent}`);
+    });
 
-    return { issues, typeSeen, texts, fit: { top: window.__fit, sheet: window.__sheetfit, dock: window.__dock }, map: m, cairo: R(cairo),
+    return { issues, typeSeen, texts, fit: { top: window.__fit, status: window.__status, sheet: window.__sheetfit, sheetPos: window.__sheetpos }, map: m, hiddenLabels, cairo: R(cairo),
       sheet: R(sr), blocks: blocks.map(R), hits: taps.map((t) => ({ l: t.label, x0: +t.hit.x0.toFixed(1), x1: +t.hit.x1.toFixed(1), y0: +t.hit.y0.toFixed(1), y1: +t.hit.y1.toFixed(1) })) };
-  }, { d, TOK, BRIEF });
+  }, { d, TOK, BRIEF, b3 });
 }
 
 async function contrast(p, texts) {
@@ -286,8 +365,8 @@ async function open(ctx, url) {
 }
 const qs = (d) => `?w=${d.w}&h=${d.h}&side=${d.side}&bottom=${d.bottom}&cutout=${d.cutout}`;
 
-async function check(p, d) {
-  const m = await measure(p, d);
+async function check(p, d, b3) {
+  const m = await measure(p, d, b3);
   const c = await contrast(p, m.texts);
   c.filter((x) => x.worst < 4.5).forEach((x) => m.issues.push(`contrast ${x.worst} for "${x.t}"`));
   return { m, c };
@@ -295,64 +374,88 @@ async function check(p, d) {
 
 // Self-test: plant defects and prove the checks catch each one (and that the clean page has none).
 async function selftest(b) {
-  const d = ALL.find((x) => x.id === 'i16promax');
-  const ctx = await b.newContext({ viewport: { width: d.w, height: d.h }, deviceScaleFactor: 1 });
+  const d = ALL.find((x) => x.id === 'i16promax'), se = ALL.find((x) => x.id === 'se');
+  const ref = { i16promax: await b3Rects(b, d), se: await b3Rects(b, se) };
+  const ctxs = {};
+  for (const x of [d, se]) ctxs[x.id] = await b.newContext({ viewport: { width: x.w, height: x.h }, deviceScaleFactor: 1 });
+  // [name, css, expected issue, optional page script]
   const cases = [
     ['type size', '.pname { font-size: 17px !important; }', /font size 17 for "القاهرة"/],
     ['18 pt misuse', '.ctry span { font-size: 18px !important; font-weight: 700 !important; }', /18 pt is for the province name only/],
     ['control height', '.xbtn { height: 30px !important; }', /control height 30.*(إغلاق|xbtn)/],
     ['radius', '.kpi { border-radius: 8px !important; }', /control radius 8: السكان/],
     ['gap', '.kpis { gap: 6px !important; }', /gap 6 on/],
-    ['hit overlap', '.seg { margin-top: 2px !important; }', /hit overlap .*(السكان|الاضطراب|البنية).* \/ عام|hit overlap .*عام/],
+    ['hit overlap', '.seg { margin-top: 2px !important; }', /hit overlap .*(السكان|الاضطراب|البنية).* \/ السياسة|hit overlap .*السياسة/],
     ['side inset', '.sheet { right: -30px !important; }', /tap in side inset|text in side inset|panel in side inset/],
     ['bottom inset', '.sheet { bottom: -16px !important; }', /tap in bottom inset/],
     ['contrast', '.ctry span { color: #46535e !important; }', /contrast [0-3](\.\d+)? for "مصر"/],
     ['ellipsis', '.kv .v { overflow: hidden; text-overflow: ellipsis; max-width: 60px; }', /ellipsis on "الحزب الوطني الديمقراطي"/],
     ['clipped', '.kpi { overflow: hidden; } .k-v .why { margin-inline-start: 40px !important; }', /clipped text: "لماذا؟"/],
     ['text overlap', '.capital { margin-inline-start: -40px !important; }', /text overlap "القاهرة" \/ "العاصمة"|text overlap "العاصمة" \/ "القاهرة"/],
+    ['icon over text', '.act .a-ico { grid-column: 2 !important; }', /icon over text: i a-ico \/ "مشروع بنية تحتية"/],
     ['panel not opaque', '.sheet > .frost::after { background: rgba(9, 17, 25, 0.66) !important; }', /panel not opaque: المحافظة/],
     ['Cairo covered', ':root { --map-cx: 760px !important; }', /Cairo highlight covered by panel المحافظة/],
     ['sheet width', ':root { --sheet-w: 330px !important; }', /sheet width 330/],
-    ['dock under sheet', '[data-dock="shift"] .dock { margin-left: 300px !important; }', /dock under the sheet|panel overlap/],
+    ['dock hidden', '.dock { display: none !important; }', /HUD element hidden: \.dock/],
+    ['dock moved', '.dock { margin-left: 120px !important; }', /HUD element moved from its B3 position: \.dock /],
+    ['left stack moved', '.lstack { margin-left: 8px; }', /HUD element moved from its B3 position: \.toast/],
+    ['top row covered', '.sheet { top: 30px !important; }', /sheet covers the top row|panel overlap/],
+    ['blank band', '.acts { margin-top: 0 !important; max-height: 44px !important; }', /blank band of \d/],
+    ['cut action row', '.acts { max-height: 70px !important; }', /action card cuts a row|control cut by its scroll area/],
     ['icon', '.sheet svg.i.chev { width: 18px !important; }', /icon size ctl 18x/],
+    ['chevron hidden', '.act .chev { display: none !important; }', /action row 1: chevron missing/],
+    ['unrest trend', '', /headline number 2 trend #t-flat/, () => { const s = document.querySelectorAll('.kpi .trend')[1]; s.classList.replace('bad', 'up'); s.querySelector('use').setAttribute('href', '#t-flat'); }],
     ['off-token colour', '.kv .k { color: #8899aa !important; }', /text colour off-token/],
+    ['off-token #A2B6C6', '.kv .k { color: #A2B6C6 !important; }', /text colour off-token rgb\(162, 182, 198\)/],
+    ['% before its number', '', /% shown before its number/, () => { document.querySelectorAll('.sf dd')[2].textContent = 'الحكومة · 100%'; }],
+    ['map label cut', '.labels text.cut { display: inline !important; }', /map label cut by a panel edge/],
   ];
   const results = [];
-  for (const [name, css, re] of cases) {
-    const p = await open(ctx, PAGE + qs(d));
-    await p.addStyleTag({ content: css });
+  for (const [name, css, re, js] of cases) {
+    const p = await open(ctxs[d.id], PAGE + qs(d));
+    if (css) await p.addStyleTag({ content: css });
+    if (js) await p.evaluate(js);
     await p.waitForTimeout(80);
-    const { m } = await check(p, d);
+    const { m } = await check(p, d, ref[d.id]);
     const ok = m.issues.some((i) => re.test(i));
     results.push({ name, ok, sample: m.issues.slice(0, 3) });
     console.log(`${ok ? 'caught ' : 'MISSED '} ${name}${ok ? '' : '  -> ' + m.issues.slice(0, 4).join(' || ')}`);
     await p.close();
   }
-  // disputed / occupied province: long status values must switch the strip to two rows (and the sheet re-fits),
-  // and the same values forced into one strip must be reported
-  const LONG = ['اليمن', 'حكومة الوحدة الوطنية', 'قوات المعارضة · 65%', 'دولتان مجاورتان'];
-  for (const forced of [false, true]) {
-    const p = await open(ctx, PAGE + qs(d));
-    const lv = await p.evaluate(({ LONG, forced }) => {
-      document.querySelectorAll('.sf dd').forEach((e, i) => { e.textContent = LONG[i]; });
-      fitSheet();
-      if (forced) { document.documentElement.dataset.status = '0'; }
-      return window.__status.level;
-    }, { LONG, forced });
-    const { m } = await check(p, d);
-    const statusIssues = m.issues.filter((i) => !/brief text/.test(i));
-    const ok = forced ? statusIssues.some((i) => /text overlap|outside the sheet|horizontal overflow|clipped/.test(i)) : lv === 1 && statusIssues.length === 0;
-    results.push({ name: forced ? 'long status forced into one strip' : 'long status re-fits to two rows', ok, sample: statusIssues.slice(0, 3) });
-    console.log(`${ok ? (forced ? 'caught ' : 'passes ') : 'FAILED '} ${forced ? 'long status forced into one strip' : 'long status re-fits to two rows (level ' + lv + ')'}${ok ? '' : '  -> ' + statusIssues.slice(0, 4).join(' || ')}`);
+  // disputed / occupied province: long status values (numbers isolated left-to-right, as the page does) must switch
+  // the strip to two rows and re-fit the sheet with the actions still pinned (17 Pro Max: 2 whole rows, SE: 1) and
+  // nothing else changed; the same values forced into one strip, or with the % left bare, must be reported
+  const LONG = ['اليمن', 'حكومة الوحدة الوطنية', 'قوات المعارضة · <span class="ltr">65%</span>', 'دولتان مجاورتان'];
+  const runs = [['re-fits to two rows', d, 'ok', 2], ['re-fits to two rows', se, 'ok', 1], ['forced into one strip', d, 'forced'], ['bare % (no LTR isolate)', d, 'bare']];
+  for (const [what, x, mode, minRows] of runs) {
+    const p = await open(ctxs[x.id], PAGE + qs(x));
+    const fit = await p.evaluate(({ LONG, mode }) => {
+      document.querySelectorAll('.sf dd').forEach((e, i) => { e.innerHTML = mode === 'bare' ? LONG[i].replace(/<[^>]+>/g, '') : LONG[i]; });
+      fitSheet(); placeMap();
+      if (mode === 'forced') document.documentElement.dataset.status = '0';
+      return { status: window.__status.level, sheet: window.__sheetfit };
+    }, { LONG, mode });
+    const { m } = await check(p, x, ref[x.id]);
+    const iss = m.issues.filter((i) => !/brief text/.test(i));
+    const ok = mode === 'forced' ? iss.some((i) => /text overlap|outside the sheet|horizontal overflow|clipped/.test(i))
+      : mode === 'bare' ? iss.some((i) => /% shown before its number/.test(i))
+        : fit.status === 1 && fit.sheet.rows >= minRows && iss.length === 0;
+    const nm = `long status ${what} (${x.id})`;
+    results.push({ name: nm, ok, fit, sample: iss.slice(0, 3) });
+    console.log(`${ok ? (mode === 'ok' ? 'passes ' : 'caught ') : 'FAILED '} ${nm} status ${fit.status}, sheet level ${fit.sheet.level}, ${fit.sheet.rows} pinned rows${ok ? '' : '  -> ' + iss.slice(0, 4).join(' || ')}`);
     await p.close();
   }
-  const p0 = await open(ctx, PAGE + qs(d));
-  const { m: m0 } = await check(p0, d);
-  console.log(`clean page: ${m0.issues.length} issues`);
-  await ctx.close();
-  const missed = results.filter((r) => !r.ok).map((r) => r.name);
-  fs.writeFileSync(path.join(__dirname, 'selftest.json'), JSON.stringify({ ranAt: new Date().toISOString(), device: d.id, cleanIssues: m0.issues, results }, null, 1));
-  console.log(missed.length || m0.issues.length ? `SELFTEST FAILED (missed: ${missed.join(', ') || 'none'}; clean issues ${m0.issues.length})` : `selftest OK: ${results.length - 1} planted defects caught, long status values re-fit cleanly, clean page 0 issues`);
+  const clean = {};
+  for (const x of [d, se]) {
+    const p0 = await open(ctxs[x.id], PAGE + qs(x));
+    clean[x.id] = (await check(p0, x, ref[x.id])).m.issues;
+    console.log(`clean page ${x.id}: ${clean[x.id].length} issues${clean[x.id].length ? ' -> ' + clean[x.id].slice(0, 4).join(' || ') : ''}`);
+    await p0.close();
+  }
+  for (const c of Object.values(ctxs)) await c.close();
+  const missed = results.filter((r) => !r.ok).map((r) => r.name), dirty = Object.values(clean).some((v) => v.length);
+  fs.writeFileSync(path.join(__dirname, 'selftest.json'), JSON.stringify({ ranAt: new Date().toISOString(), devices: [d.id, se.id], cleanIssues: clean, results }, null, 1));
+  console.log(missed.length || dirty ? `SELFTEST FAILED (missed: ${missed.join(', ') || 'none'}; clean issues ${Object.values(clean).map((v) => v.length).join('/')})` : `selftest OK: ${cases.length + 2} planted defects caught, long status values re-fit cleanly on both devices, clean pages 0 issues`);
 }
 
 (async () => {
@@ -365,7 +468,9 @@ async function selftest(b) {
     const pm = ALL.find((x) => x.id === 'i16promax');
     ['society', 'economy', 'security'].forEach((t) => jobs.push({ d: pm, out: `i16promax_tab_${t}`, extra: `&tab=${t}`, png: path.join(__dirname, `i16promax_tab_${t}.png`) }));
   }
+  const refs = {};
   for (const { d, out, extra, png } of jobs) {
+    if (!refs[d.id]) refs[d.id] = await b3Rects(b, d);
     const ctx = await b.newContext({ viewport: { width: d.w, height: d.h }, deviceScaleFactor: 3 });
     const p = await open(ctx, PAGE + qs(d) + extra);
     await p.screenshot({ path: png });
@@ -374,14 +479,14 @@ async function selftest(b) {
       await ph.screenshot({ path: path.join(__dirname, d.id + '_hit.png') });
       await ph.close();
     }
-    const { m, c } = await check(p, d);
+    const { m, c } = await check(p, d, refs[d.id]);
     report[out] = { device: `${d.w}x${d.h} side ${d.side} bottom ${d.bottom} ${d.cutout}`, renderedAt: new Date().toISOString(), issueCount: m.issues.length,
-      issues: m.issues, fit: m.fit, sheet: m.sheet, blocks: m.blocks, map: m.map, cairo: m.cairo, typeSeen: m.typeSeen, hits: m.hits,
+      issues: m.issues, fit: m.fit, sheet: m.sheet, blocks: m.blocks, map: m.map, hiddenLabels: m.hiddenLabels, cairo: m.cairo, typeSeen: m.typeSeen, hits: m.hits,
       minContrast: Math.min(...c.map((x) => x.worst)), contrast: c };
     console.log(`\n== ${out} ${d.w}x${d.h} side ${d.side} bottom ${d.bottom} ${d.cutout}`);
     console.log('fit', JSON.stringify(m.fit));
     console.log('sheet', JSON.stringify(m.sheet), 'blocks', JSON.stringify(m.blocks.map((r) => [r.y0, r.h])));
-    console.log('map', JSON.stringify({ ok: m.map.ok, egyptClear: m.map.egyptClear, zoom: m.map.zoom, s: +m.map.s.toFixed(3), cairo: m.cairo }));
+    console.log('map', JSON.stringify({ ok: m.map.ok, egyptClear: m.map.egyptClear, zoom: m.map.zoom, s: +m.map.s.toFixed(3), cairo: m.cairo, hiddenLabels: m.hiddenLabels }));
     console.log('type', JSON.stringify(m.typeSeen));
     console.log('contrast min', report[out].minContrast, c.sort((a, b2) => a.worst - b2.worst).slice(0, 3).map((x) => `${x.t}:${x.worst}`).join(' | '));
     console.log(m.issues.length ? 'ISSUES:\n  ' + m.issues.join('\n  ') : 'no issues');

@@ -1,7 +1,13 @@
 {
- "ranAt": "2026-10-20T10:38:10.681Z",
- "device": "i16promax",
- "cleanIssues": [],
+ "ranAt": "2026-10-20T11:21:02.963Z",
+ "devices": [
+  "i16promax",
+  "se"
+ ],
+ "cleanIssues": {
+  "i16promax": [],
+  "se": []
+ },
  "results": [
   {
    "name": "type size",
@@ -46,8 +52,8 @@
    "name": "hit overlap",
    "ok": true,
    "sample": [
-    "sheet block gap 2.00 before .seg",
-    "hit overlap السكان 8.8 مليون، ثابت. لم / عام",
+    "sheet block gap 2.00 before .seg (want 8)",
+    "hit overlap السكان 8.8 مليون، ثابت. لم / السياسة",
     "hit overlap السكان 8.8 مليون، ثابت. لم / المجتمع"
    ]
   },
@@ -64,8 +70,9 @@
    "name": "bottom inset",
    "ok": true,
    "sample": [
-    "tap in bottom inset/off top: تعزيز الأمن 0.2 مليار $ /  381.0..425.0",
-    "sheet bottom 434 (want the dock line 418)"
+    "details -> actions gap 76.00 (want 8, plus less than one row of spare)",
+    "icon over text: i chev / \"الداخلية والسياسة\"",
+    "icon over text: i / \"0.3 مليار $\""
    ]
   },
   {
@@ -81,24 +88,34 @@
    "ok": true,
    "sample": [
     "ellipsis on \"الحزب الوطني الديمقراطي\"",
-    "clipped text: \"الحزب الوطني الديمقراطي\" 488.72..618 y 231..250",
-    "text outside the sheet's 12 pt padding: \"الحزب الوطني الديمقراطي\""
+    "text outside the sheet's 12 pt padding: \"الحزب الوطني الديمقراطي\"",
+    "ellipsis on \"حاكم\""
    ]
   },
   {
    "name": "clipped",
    "ok": true,
    "sample": [
-    "clipped text: \"مليون\" 850.22..873 y 179..194",
-    "clipped text: \"لماذا؟\" 774.91..802.22 y 161..178",
-    "clipped text: \"8 / 10\" 646.66..652.34 y 175..194"
+    "clipped text: \"مليون\" 850.22..873 y 171..186",
+    "clipped text: \"لماذا؟\" 774.91..802.22 y 153..170",
+    "clipped text: \"8 / 10\" 646.66..652.34 y 167..186"
    ]
   },
   {
    "name": "text overlap",
    "ok": true,
    "sample": [
-    "text overlap \"القاهرة\" / \"العاصمة\""
+    "text overlap \"القاهرة\" / \"العاصمة\"",
+    "icon over text: i / \"القاهرة\""
+   ]
+  },
+  {
+   "name": "icon over text",
+   "ok": true,
+   "sample": [
+    "icon over text: i a-ico / \"مشروع بنية تحتية\"",
+    "icon over text: i a-ico / \"+1\"",
+    "icon over text: i a-ico / \"دعم الخدمات\""
    ]
   },
   {
@@ -106,8 +123,8 @@
    "ok": true,
    "sample": [
     "panel not opaque: المحافظة: القاهرة rgba(9, 17, 25, 0.66)",
-    "contrast 4.21 for \"السكان\"",
-    "contrast 4.21 for \"مليون\""
+    "contrast 4.21 for \"مليون\"",
+    "contrast 3.96 for \"لماذا؟\""
    ]
   },
   {
@@ -127,12 +144,55 @@
    ]
   },
   {
-   "name": "dock under sheet",
+   "name": "dock hidden",
    "ok": true,
    "sample": [
-    "hit overlap الدولة / تعزيز الأمن 0.2 مليار $ / ",
-    "hit overlap الاقتصاد / تعزيز الأمن 0.2 مليار $ / ",
-    "hit overlap الداخلية والسياسة / تعزيز الأمن 0.2 مليار $ / "
+    "sheet bottom 366 (want the dock line 418)",
+    "HUD element hidden: .dock",
+    "HUD element hidden: .dock-item #1"
+   ]
+  },
+  {
+   "name": "dock moved",
+   "ok": true,
+   "sample": [
+    "HUD element moved from its B3 position: .dock x 344.5..731.5 y 374.0..418.0 (B3 284.5..671.5, 374.0..418.0)",
+    "HUD element moved from its B3 position: .dock-item #1 x 691.3..722.5 y 375.0..417.0 (B3 631.3..662.5, 375.0..417.0)",
+    "HUD element moved from its B3 position: .dock-item #2 x 647.3..691.3 y 375.0..417.0 (B3 587.3..631.3, 375.0..417.0)"
+   ]
+  },
+  {
+   "name": "left stack moved",
+   "ok": true,
+   "sample": [
+    "HUD element moved from its B3 position: .toast x 70.0..275.6 y 56.0..88.0 (B3 62.0..267.6, 56.0..88.0)",
+    "HUD element moved from its B3 position: .btn.mode x 70.0..191.6 y 96.0..128.0 (B3 62.0..183.6, 96.0..128.0)",
+    "HUD element moved from its B3 position: .btn.home x 70.0..141.5 y 136.0..168.0 (B3 62.0..133.5, 136.0..168.0)"
+   ]
+  },
+  {
+   "name": "top row covered",
+   "ok": true,
+   "sample": [
+    "hit overlap الخزينة 36.0 مليار $ / إغلاق",
+    "hit overlap الاستقرار 58% / إغلاق",
+    "panel overlap الدولة: مصر، حسني مبارك، ج / المحافظة: القاهرة"
+   ]
+  },
+  {
+   "name": "blank band",
+   "ok": true,
+   "sample": [
+    "blank band of 44.0 pt under the action card"
+   ]
+  },
+  {
+   "name": "cut action row",
+   "ok": true,
+   "sample": [
+    "action card cuts a row (70.0 pt = 1.59 rows)",
+    "clipped text: \"−5\" 819..831 y 353..368",
+    "clipped text: \"اضطراب\" 783.33..819 y 353..368"
    ]
   },
   {
@@ -145,6 +205,22 @@
    ]
   },
   {
+   "name": "chevron hidden",
+   "ok": true,
+   "sample": [
+    "action row 1: chevron missing or not 16 pt",
+    "action row 2: chevron missing or not 16 pt",
+    "action row 3: chevron missing or not 16 pt"
+   ]
+  },
+  {
+   "name": "unrest trend",
+   "ok": true,
+   "sample": [
+    "headline number 2 trend #t-flat rgb(111, 182, 255) (want #t-up rgb(242, 177, 76))"
+   ]
+  },
+  {
    "name": "off-token colour",
    "ok": true,
    "sample": [
@@ -153,16 +229,176 @@
    ]
   },
   {
-   "name": "long status re-fits to two rows",
+   "name": "off-token #A2B6C6",
    "ok": true,
+   "sample": [
+    "text colour off-token rgb(162, 182, 198): \"الحزب الحاكم في المحافظة\"",
+    "text colour off-token rgb(162, 182, 198): \"التأييد\""
+   ]
+  },
+  {
+   "name": "% before its number",
+   "ok": true,
+   "sample": [
+    "% shown before its number: \"الحكومة · 100%\""
+   ]
+  },
+  {
+   "name": "map label cut",
+   "ok": true,
+   "sample": [
+    "map label cut by a panel edge: العراق",
+    "map label cut by a panel edge: الأردن",
+    "map label cut by a panel edge: بنغازي"
+   ]
+  },
+  {
+   "name": "long status re-fits to two rows (i16promax)",
+   "ok": true,
+   "fit": {
+    "status": 1,
+    "sheet": {
+     "level": 2,
+     "rows": 2,
+     "of": 3,
+     "spare": 0,
+     "tried": [
+      [
+       0,
+       72,
+       1
+      ],
+      [
+       1,
+       80,
+       1
+      ],
+      [
+       2,
+       88,
+       2
+      ],
+      [
+       3,
+       96,
+       2
+      ]
+     ]
+    }
+   },
    "sample": []
   },
   {
-   "name": "long status forced into one strip",
+   "name": "long status re-fits to two rows (se)",
    "ok": true,
+   "fit": {
+    "status": 1,
+    "sheet": {
+     "level": 3,
+     "rows": 1,
+     "of": 3,
+     "spare": 1,
+     "tried": [
+      [
+       0,
+       21,
+       0
+      ],
+      [
+       1,
+       29,
+       0
+      ],
+      [
+       2,
+       37,
+       0
+      ],
+      [
+       3,
+       45,
+       1
+      ]
+     ]
+    }
+   },
+   "sample": []
+  },
+  {
+   "name": "long status forced into one strip (i16promax)",
+   "ok": true,
+   "fit": {
+    "status": 1,
+    "sheet": {
+     "level": 2,
+     "rows": 2,
+     "of": 3,
+     "spare": 0,
+     "tried": [
+      [
+       0,
+       72,
+       1
+      ],
+      [
+       1,
+       80,
+       1
+      ],
+      [
+       2,
+       88,
+       2
+      ],
+      [
+       3,
+       96,
+       2
+      ]
+     ]
+    }
+   },
    "sample": [
     "text outside the sheet's 12 pt padding: \"دولتان مجاورتان\"",
-    "contrast 2.24 for \"دولتان مجاورتان\""
+    "contrast 3.37 for \"دولتان مجاورتان\""
+   ]
+  },
+  {
+   "name": "long status bare % (no LTR isolate) (i16promax)",
+   "ok": true,
+   "fit": {
+    "status": 1,
+    "sheet": {
+     "level": 2,
+     "rows": 2,
+     "of": 3,
+     "spare": 0,
+     "tried": [
+      [
+       0,
+       72,
+       1
+      ],
+      [
+       1,
+       80,
+       1
+      ],
+      [
+       2,
+       88,
+       2
+      ],
+      [
+       3,
+       96,
+       2
+      ]
+     ]
+    }
+   },
+   "sample": [
+    "% shown before its number: \"قوات المعارضة · 65%\""
    ]
   }
  ]

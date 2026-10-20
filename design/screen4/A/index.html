@@ -7,7 +7,7 @@
 <script>
   /* Device frame from the URL (points): ?w=844&h=390&side=47&bottom=21&cutout=notch|island|none
      Optional: &speedmenu=1 renders the speed menu open, &hit=1 draws the 44 pt hit boxes,
-     &tab=general|society|economy|security opens that tab of the province sheet (default general = «عام»).
+     &tab=politics|society|economy|security opens that tab of the province sheet (default politics = «السياسة»).
      Everything below is laid out with flexbox from these CSS variables; nothing is tied to 844x390. */
   (function () {
     var q = new URLSearchParams(location.search);
@@ -26,7 +26,7 @@
     r.dataset.home = BOTTOM > 0 ? 'yes' : 'no';
     if (q.get('hit') === '1') r.classList.add('show-hit');
     if (q.get('speedmenu') === '1') r.classList.add('menu-open');
-    r.dataset.tab = ['general', 'society', 'economy', 'security'].indexOf(q.get('tab')) >= 0 ? q.get('tab') : 'general';
+    r.dataset.tab = ['politics', 'society', 'economy', 'security'].indexOf(q.get('tab')) >= 0 ? q.get('tab') : 'politics';
     window.__dev = { W: W, H: H, SIDE: SIDE, BOTTOM: BOTTOM, CUT: CUT };
   })();
 </script>
@@ -274,17 +274,30 @@
 <style>
   /* ================= Screen 4, variant A: the province panel as a tabbed side sheet =================
      Right side sheet (RTL start), width clamp(42% of the safe width, 340, 440) pt, from 8 pt under the
-     top row down to the dock's bottom line, so the whole top row stays visible.
+     top row down to 8 pt above the section dock. The whole HUD (top row, left stack, dock) keeps the
+     exact place and size it has on the play screen B3; nothing in the HUD moves or hides.
      Top part fixed: header, status, the 3 headline numbers. Then a 32 pt segmented tab row that shows one
-     group of details at a time («عام» = the politics group), and the action rows pinned at the bottom.
-     Fit 1 (measured, short screens such as the SE): the action rows can no longer be pinned under the
-     tab content, so the tab content and the actions share one scroll area; the header, status and
-     numbers stay fixed and the first action stays in view. */
-  :root { --title: 18px; --lh-title: 22px; --sheet-w: 340px; --g-blk: var(--s2); }
+     group of details at a time (السياسة / المجتمع / الاقتصاد / الأمن), and the action card pinned at the
+     bottom of the sheet. The card shows as many whole 44 pt action rows as fit and scrolls the rest
+     inside itself (17 Pro Max: 2 of 3, SE: 1 of 3); the details above it never scroll.
+     Fit levels, measured by fitSheet() (not by device name), each step only to show more whole action rows:
+       0: every gap 8 pt
+       1: header -> status -> numbers 4 pt
+       2: also tab row -> details -> actions 4 pt (long status values on the 17 Pro Max)
+       3: also the sheet's top and bottom padding 4 pt
+       4: also the header on one 32 pt line (name, capital chip, flag and country) and the detail rows
+          without a gap (16 pt line pitch); only where nothing else shows a whole action row
+     The numbers -> tab row gap stays 8 pt at every level: the 44 pt hit boxes of both need it. */
+  :root { --title: 18px; --lh-title: 22px; --sheet-w: 340px; --sheet-b: 0px; --g-blk: var(--s2); --g-det: var(--s2); --pad-sh: var(--s2); }
   [data-sheetfit="1"] { --g-blk: var(--s1); }
+  [data-sheetfit="2"] { --g-blk: var(--s1); --g-det: var(--s1); }
+  [data-sheetfit="3"], [data-sheetfit="4"] { --g-blk: var(--s1); --g-det: var(--s1); --pad-sh: var(--s1); }
+  [data-sheetfit="4"] .sh-head { height: var(--ctl); }
+  [data-sheetfit="4"] .ttl { flex-direction: row; align-items: center; gap: var(--s2); }
+  [data-sheetfit="4"] .pane { gap: 0; }
 
-  .sheet { --r: var(--r-bar); position: absolute; right: 0; top: calc(var(--row) + var(--s2)); bottom: 0; width: var(--sheet-w);
-    display: flex; flex-direction: column; padding: var(--s2) var(--pad-bar); z-index: 2; }
+  .sheet { --r: var(--r-bar); position: absolute; right: 0; top: calc(var(--row) + var(--s2)); bottom: var(--sheet-b); width: var(--sheet-w);
+    display: flex; flex-direction: column; padding: var(--pad-sh) var(--pad-bar); z-index: 2; }
 
   /* header: name + capital chip, the country line under it, close at the RTL end */
   .sh-head { flex: none; height: 36px; display: flex; align-items: center; gap: var(--s2); }
@@ -312,7 +325,7 @@
      controller all different, a long claims list), do not fit one strip: two rows of label + value pairs */
   [data-status="1"] .status { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); justify-content: stretch; column-gap: var(--s3); row-gap: var(--s1); }
   [data-status="1"] .vr { display: none; }
-  [data-status="1"] .sf { flex-direction: row; align-items: baseline; gap: var(--s2); min-width: 0; }
+  [data-status="1"] .sf { height: var(--lh-val); flex-direction: row; align-items: baseline; gap: var(--s2); min-width: 0; }   /* 16 pt rows: baseline alignment of 10 and 13 pt text would add 1 pt per row */
   [data-status="1"] .sf dt { line-height: var(--lh-val); }
 
   /* headline numbers: three 44 pt tiles; the whole tile is the «لماذا؟» link to the why-sheet */
@@ -331,12 +344,11 @@
   .sg span { font-size: var(--fs-val); font-weight: 600; line-height: var(--lh-val); white-space: nowrap; }
   .sg[aria-selected="true"] { color: var(--cyan); background: rgba(127, 233, 255, 0.14); box-shadow: inset 0 0 0 1px rgba(127, 233, 255, 0.50); }
 
-  /* tab content + pinned actions */
-  /* each scroll area keeps 4 pt of its 8 pt gaps inside itself, so no glyph ink is ever cut by its edge */
-  .body { flex: 1 1 auto; min-height: 0; margin-top: var(--s1); display: flex; flex-direction: column; gap: var(--s1); }
-  .tabs { flex: 1 1 auto; min-height: 0; overflow-y: auto; padding-block: var(--s1); }
+  /* tab content (never scrolls; as tall as the tallest tab) + the action card pinned at the bottom */
+  .body { flex: 1 1 auto; min-height: 0; margin-top: var(--g-det); display: flex; flex-direction: column; gap: var(--g-det); }
+  .tabs { flex: none; }
   .pane { display: none; flex-direction: column; gap: var(--s1); }
-  [data-tab="general"] .pane[data-tab="general"], [data-tab="society"] .pane[data-tab="society"],
+  [data-tab="politics"] .pane[data-tab="politics"], [data-tab="society"] .pane[data-tab="society"],
   [data-tab="economy"] .pane[data-tab="economy"], [data-tab="security"] .pane[data-tab="security"] { display: flex; }
   .kv { height: var(--lh-val); display: flex; align-items: baseline; justify-content: space-between; gap: var(--s3); }
   .kv .k { font-size: var(--fs-sec); font-weight: 500; line-height: var(--lh-val); color: var(--t2); white-space: nowrap; }
@@ -349,8 +361,10 @@
   .gbar i:first-child { background: rgba(127, 233, 255, 0.75); }
   .gbar i:last-child { background: rgba(169, 188, 203, 0.45); border-right: 1px solid rgb(12, 20, 28); }
 
-  .acts { flex: none; display: flex; flex-direction: column; border-radius: var(--r-bar);
+  /* margin-top: auto pins the card to the bottom; fitSheet() caps it to whole rows and it scrolls the rest */
+  .acts { flex: 0 1 auto; min-height: 0; margin-top: auto; overflow-y: auto; display: flex; flex-direction: column; border-radius: var(--r-bar);
     background: rgba(234, 242, 247, 0.04); box-shadow: inset 0 0 0 1px rgba(127, 233, 255, 0.10); }
+  .act { flex: none; }
   .act { height: var(--dock-h); border-radius: var(--r-ctl); padding-inline: var(--pad-bar); display: grid; align-items: center; text-align: right;
     grid-template-columns: var(--ico) minmax(0, 1fr) auto var(--ico); grid-template-rows: var(--lh-val) var(--lh-label); column-gap: var(--s2); align-content: center; }
   .act + .act::after { content: ""; position: absolute; top: 0; left: var(--pad-bar); right: var(--pad-bar); height: 1px; background: var(--hair); }
@@ -365,16 +379,14 @@
   .a-e .dot { color: var(--t2); }
   .a-e .eff { display: flex; align-items: center; gap: var(--s1); }
 
-  /* fit 1: one scroll area for the tab content and the actions (the scroll indicator sits on the RTL side) */
-  [data-sheetfit="1"] .body { overflow-y: auto; }
-  [data-sheetfit="1"] .tabs { flex: none; overflow: visible; }
-  .sbar { display: none; position: absolute; left: 3px; width: 3px; border-radius: 1.5px; background: rgba(169, 188, 203, 0.55); pointer-events: none; }
-  [data-sheetfit="1"] .sbar { display: block; }
+  /* the card's scroll indicator, beside the card on the RTL side (shown only while rows are scrolled away) */
+  .sbar { display: none; position: absolute; left: 4px; width: 3px; border-radius: 1.5px; background: rgba(169, 188, 203, 0.55); pointer-events: none; }
+  [data-actscroll="1"] .sbar { display: block; }
 
-  /* the HUD while the sheet is open: the dock keeps its size and bottom line and re-centres on the map
-     area left of the sheet; where it does not fit there (SE), it slides away until the sheet closes */
-  [data-dock="shift"] .dock { align-self: flex-end; margin-left: var(--dock-ml, 0px); }
-  [data-dock="away"] .dock { display: none; }
+  /* map labels: drawn left-to-right exactly as inside the overlay image; a label a panel edge would slice
+     is hidden (placeMap), so every label on screen is either whole or fully under a panel */
+  .map svg.labels { position: absolute; inset: 0; width: 100%; height: 100%; direction: ltr; }
+  .labels text.cut { display: none; }
 
   /* the tapped province on the map: teal outline like the player's country, tighter */
   .map svg.sel { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
@@ -425,6 +437,42 @@
 <div class="map" aria-hidden="true">
   <img src="../../shared/map_mena_d1.jpg" alt="">
   <img src="map_overlay_cairo.svg" alt="">
+  <!-- map labels: generated by _build/make_overlay.py from the D1 overlay -->
+  <svg class="labels" viewBox="0 0 1688 1097">
+    <text x="734" y="587" font-family="-apple-system, 'SF Arabic', 'Geeza Pro', 'Noto Sans Arabic', sans-serif" font-size="36" font-weight="700" fill="#FFFFFF" stroke="#0B1218" stroke-width="5" stroke-opacity="0.75" paint-order="stroke" text-anchor="middle">مصر</text>
+    <text x="370" y="574" font-family="-apple-system, 'SF Arabic', 'Geeza Pro', 'Noto Sans Arabic', sans-serif" font-size="28" font-weight="700" fill="#FFFFFF" stroke="#0B1218" stroke-width="5" stroke-opacity="0.75" paint-order="stroke" text-anchor="middle">ليبيا</text>
+    <text x="740" y="992" font-family="-apple-system, 'SF Arabic', 'Geeza Pro', 'Noto Sans Arabic', sans-serif" font-size="28" font-weight="700" fill="#FFFFFF" stroke="#0B1218" stroke-width="5" stroke-opacity="0.75" paint-order="stroke" text-anchor="middle">السودان</text>
+    <text x="1170" y="669" font-family="-apple-system, 'SF Arabic', 'Geeza Pro', 'Noto Sans Arabic', sans-serif" font-size="28" font-weight="700" fill="#FFFFFF" stroke="#0B1218" stroke-width="5" stroke-opacity="0.75" paint-order="stroke" text-anchor="middle">السعودية</text>
+    <text x="874" y="177" font-family="-apple-system, 'SF Arabic', 'Geeza Pro', 'Noto Sans Arabic', sans-serif" font-size="28" font-weight="700" fill="#FFFFFF" stroke="#0B1218" stroke-width="5" stroke-opacity="0.75" paint-order="stroke" text-anchor="middle">تركيا</text>
+    <text x="1451" y="396" font-family="-apple-system, 'SF Arabic', 'Geeza Pro', 'Noto Sans Arabic', sans-serif" font-size="28" font-weight="700" fill="#FFFFFF" stroke="#0B1218" stroke-width="5" stroke-opacity="0.75" paint-order="stroke" text-anchor="middle">إيران</text>
+    <text x="1131" y="393" font-family="-apple-system, 'SF Arabic', 'Geeza Pro', 'Noto Sans Arabic', sans-serif" font-size="28" font-weight="700" fill="#FFFFFF" stroke="#0B1218" stroke-width="5" stroke-opacity="0.75" paint-order="stroke" text-anchor="middle">العراق</text>
+    <text x="992" y="307" font-family="-apple-system, 'SF Arabic', 'Geeza Pro', 'Noto Sans Arabic', sans-serif" font-size="28" font-weight="700" fill="#FFFFFF" stroke="#0B1218" stroke-width="5" stroke-opacity="0.75" paint-order="stroke" text-anchor="middle">سوريا</text>
+    <text x="957" y="449" font-family="-apple-system, 'SF Arabic', 'Geeza Pro', 'Noto Sans Arabic', sans-serif" font-size="28" font-weight="700" fill="#FFFFFF" stroke="#0B1218" stroke-width="5" stroke-opacity="0.75" paint-order="stroke" text-anchor="middle">الأردن</text>
+    <text x="130" y="347" font-family="-apple-system, 'SF Arabic', 'Geeza Pro', 'Noto Sans Arabic', sans-serif" font-size="28" font-weight="700" fill="#FFFFFF" stroke="#0B1218" stroke-width="5" stroke-opacity="0.75" paint-order="stroke" text-anchor="middle">تونس</text>
+    <text x="-74" y="543" font-family="-apple-system, 'SF Arabic', 'Geeza Pro', 'Noto Sans Arabic', sans-serif" font-size="28" font-weight="700" fill="#FFFFFF" stroke="#0B1218" stroke-width="5" stroke-opacity="0.75" paint-order="stroke" text-anchor="middle">الجزائر</text>
+    <text x="1259" y="928" font-family="-apple-system, 'SF Arabic', 'Geeza Pro', 'Noto Sans Arabic', sans-serif" font-size="28" font-weight="700" fill="#FFFFFF" stroke="#0B1218" stroke-width="5" stroke-opacity="0.75" paint-order="stroke" text-anchor="middle">اليمن</text>
+    <text x="1525" y="763" font-family="-apple-system, 'SF Arabic', 'Geeza Pro', 'Noto Sans Arabic', sans-serif" font-size="28" font-weight="700" fill="#FFFFFF" stroke="#0B1218" stroke-width="5" stroke-opacity="0.75" paint-order="stroke" text-anchor="middle">عمان</text>
+    <text x="1460" y="682" font-family="-apple-system, 'SF Arabic', 'Geeza Pro', 'Noto Sans Arabic', sans-serif" font-size="28" font-weight="700" fill="#FFFFFF" stroke="#0B1218" stroke-width="5" stroke-opacity="0.75" paint-order="stroke" text-anchor="middle">الإمارات</text>
+    <text x="406" y="931" font-family="-apple-system, 'SF Arabic', 'Geeza Pro', 'Noto Sans Arabic', sans-serif" font-size="28" font-weight="700" fill="#FFFFFF" stroke="#0B1218" stroke-width="5" stroke-opacity="0.75" paint-order="stroke" text-anchor="middle">تشاد</text>
+    <text x="133" y="870" font-family="-apple-system, 'SF Arabic', 'Geeza Pro', 'Noto Sans Arabic', sans-serif" font-size="28" font-weight="700" fill="#FFFFFF" stroke="#0B1218" stroke-width="5" stroke-opacity="0.75" paint-order="stroke" text-anchor="middle">النيجر</text>
+    <text x="995" y="928" font-family="-apple-system, 'SF Arabic', 'Geeza Pro', 'Noto Sans Arabic', sans-serif" font-size="28" font-weight="700" fill="#FFFFFF" stroke="#0B1218" stroke-width="5" stroke-opacity="0.75" paint-order="stroke" text-anchor="middle">إريتريا</text>
+    <text x="503" y="160" font-family="-apple-system, 'SF Arabic', 'Geeza Pro', 'Noto Sans Arabic', sans-serif" font-size="28" font-weight="700" fill="#FFFFFF" stroke="#0B1218" stroke-width="5" stroke-opacity="0.75" paint-order="stroke" text-anchor="middle">اليونان</text>
+    <text x="252" y="54" font-family="-apple-system, 'SF Arabic', 'Geeza Pro', 'Noto Sans Arabic', sans-serif" font-size="28" font-weight="700" fill="#FFFFFF" stroke="#0B1218" stroke-width="5" stroke-opacity="0.75" paint-order="stroke" text-anchor="middle">إيطاليا</text>
+    <text x="1262" y="501" font-family="-apple-system, 'SF Arabic', 'Geeza Pro', 'Noto Sans Arabic', sans-serif" font-size="28" font-weight="700" fill="#FFFFFF" stroke="#0B1218" stroke-width="5" stroke-opacity="0.75" paint-order="stroke" text-anchor="middle">الكويت</text>
+    <text x="1368" y="628" font-family="-apple-system, 'SF Arabic', 'Geeza Pro', 'Noto Sans Arabic', sans-serif" font-size="28" font-weight="700" fill="#FFFFFF" stroke="#0B1218" stroke-width="5" stroke-opacity="0.75" paint-order="stroke" text-anchor="middle">قطر</text>
+    <text x="767" y="484" font-family="-apple-system, 'SF Arabic', 'Geeza Pro', 'Noto Sans Arabic', sans-serif" font-size="21" font-weight="600" fill="#FFFFFF" stroke="#0B1218" stroke-width="4" stroke-opacity="0.7" paint-order="stroke" text-anchor="start" direction="rtl">القاهرة</text>
+    <text x="728" y="446" font-family="-apple-system, 'SF Arabic', 'Geeza Pro', 'Noto Sans Arabic', sans-serif" font-size="21" font-weight="600" fill="#FFFFFF" stroke="#0B1218" stroke-width="4" stroke-opacity="0.7" paint-order="stroke" text-anchor="start">الإسكندرية</text>
+    <text x="816" y="673" font-family="-apple-system, 'SF Arabic', 'Geeza Pro', 'Noto Sans Arabic', sans-serif" font-size="21" font-weight="600" fill="#FFFFFF" stroke="#0B1218" stroke-width="4" stroke-opacity="0.7" paint-order="stroke" text-anchor="start">أسوان</text>
+    <text x="233" y="391" font-family="-apple-system, 'SF Arabic', 'Geeza Pro', 'Noto Sans Arabic', sans-serif" font-size="21" font-weight="600" fill="#FFFFFF" stroke="#0B1218" stroke-width="4" stroke-opacity="0.7" paint-order="stroke" text-anchor="start">طرابلس</text>
+    <text x="436" y="416" font-family="-apple-system, 'SF Arabic', 'Geeza Pro', 'Noto Sans Arabic', sans-serif" font-size="21" font-weight="600" fill="#FFFFFF" stroke="#0B1218" stroke-width="4" stroke-opacity="0.7" paint-order="stroke" text-anchor="start">بنغازي</text>
+    <text x="805" y="935" font-family="-apple-system, 'SF Arabic', 'Geeza Pro', 'Noto Sans Arabic', sans-serif" font-size="21" font-weight="600" fill="#FFFFFF" stroke="#0B1218" stroke-width="4" stroke-opacity="0.7" paint-order="stroke" text-anchor="start">الخرطوم</text>
+    <text x="1225" y="655" font-family="-apple-system, 'SF Arabic', 'Geeza Pro', 'Noto Sans Arabic', sans-serif" font-size="21" font-weight="600" fill="#FFFFFF" stroke="#0B1218" stroke-width="4" stroke-opacity="0.7" paint-order="stroke" text-anchor="start">الرياض</text>
+    <text x="1156" y="377" font-family="-apple-system, 'SF Arabic', 'Geeza Pro', 'Noto Sans Arabic', sans-serif" font-size="21" font-weight="600" fill="#FFFFFF" stroke="#0B1218" stroke-width="4" stroke-opacity="0.7" paint-order="stroke" text-anchor="start">بغداد</text>
+    <text x="1151" y="943" font-family="-apple-system, 'SF Arabic', 'Geeza Pro', 'Noto Sans Arabic', sans-serif" font-size="21" font-weight="600" fill="#FFFFFF" stroke="#0B1218" stroke-width="4" stroke-opacity="0.7" paint-order="stroke" text-anchor="start">صنعاء</text>
+    <text x="815" y="152" font-family="-apple-system, 'SF Arabic', 'Geeza Pro', 'Noto Sans Arabic', sans-serif" font-size="21" font-weight="600" fill="#FFFFFF" stroke="#0B1218" stroke-width="4" stroke-opacity="0.7" paint-order="stroke" text-anchor="start">أنقرة</text>
+    <text x="1364" y="297" font-family="-apple-system, 'SF Arabic', 'Geeza Pro', 'Noto Sans Arabic', sans-serif" font-size="21" font-weight="600" fill="#FFFFFF" stroke="#0B1218" stroke-width="4" stroke-opacity="0.7" paint-order="stroke" text-anchor="start">طهران</text>
+  </svg>
+  <!-- /map labels -->
   <!-- the tapped province: Cairo Governorate (same 1688 x 1097 space as the overlay) -->
   <svg class="sel" viewBox="0 0 1688 1097">
     <path d="M795,467L797,485L779,486L777,474Z" fill="none" stroke="#7FF5EA" stroke-opacity="0.5" stroke-width="6"/>
@@ -552,7 +600,7 @@
 
     <!-- one group of details at a time -->
     <div class="seg" role="tablist" aria-label="تفاصيل المحافظة">
-      <button class="sg tap" role="tab" data-for="general"><span>عام</span></button>
+      <button class="sg tap" role="tab" data-for="politics"><span>السياسة</span></button>
       <button class="sg tap" role="tab" data-for="society"><span>المجتمع</span></button>
       <button class="sg tap" role="tab" data-for="economy"><span>الاقتصاد</span></button>
       <button class="sg tap" role="tab" data-for="security"><span>الأمن</span></button>
@@ -560,7 +608,7 @@
 
     <div class="body">
       <div class="tabs">
-        <div class="pane" data-tab="general" role="tabpanel">
+        <div class="pane" data-tab="politics" role="tabpanel">
           <div class="kv"><span class="k">الحزب الحاكم في المحافظة</span><span class="v">الحزب الوطني الديمقراطي</span></div>
           <div class="kv"><span class="k">التأييد</span><span class="v">حاكم</span></div>
         </div>
@@ -646,9 +694,17 @@
     window.__sheet = { safe: safe, want: want };
   }
 
-  /* Fit 0: every tab's details fit above the pinned actions without scrolling.
-     Fit 1 (measured): they do not, so the details and the actions share one scroll area, the gaps in the
-     fixed part step down from 8 to 4 pt, and the scroll area ends on a whole row (no cut text). */
+  /* The sheet ends 8 pt above the section dock wherever the two share a column (every iPhone), so the dock
+     keeps its B3 place and size. Only where the dock is clear of the sheet's column would the sheet run
+     down to the dock line. */
+  function placeSheet() {
+    var root = document.documentElement, hud = $('.hud').getBoundingClientRect(), dk = $('.dock').getBoundingClientRect(), sh = $('.sheet').getBoundingClientRect();
+    var shared = dk.right > sh.left - 8 && dk.left < sh.right + 8;
+    var b = shared ? Math.round(hud.bottom - dk.top + 8) : 0;
+    root.style.setProperty('--sheet-b', b + 'px');
+    window.__sheetpos = { aboveDock: shared, bottomGap: b };
+  }
+
   function fitStatus() {
     var root = document.documentElement, st = $('.status');
     root.dataset.status = '0';
@@ -657,65 +713,88 @@
     window.__status = { level: +root.dataset.status, need: need, avail: st.clientWidth };
   }
 
+  /* Pick the fit level that shows the most whole action rows in the pinned card (the loosest level wins a tie).
+     The card is then capped to those whole rows and scrolls the rest; any spare height goes to the gap
+     above the pinned card, never to a blank band under it or to a cut row. */
   function fitSheet() {
     fitStatus();
-    var root = document.documentElement, tabs = $('.sheet .tabs'), body = $('.sheet .body');
-    root.dataset.sheetfit = '0';
-    body.style.maxHeight = '';
-    var cur = root.dataset.tab, need = 0;
-    ['general', 'society', 'economy', 'security'].forEach(function (t) {
-      root.dataset.tab = t;
-      need = Math.max(need, $('.pane[data-tab="' + t + '"]').getBoundingClientRect().height);
-    });
-    root.dataset.tab = cur;
-    var area = tabs.getBoundingClientRect().height;
-    window.__sheetfit = { level: 0, need: need, area: area };
-    if (need <= area + 0.01) return;
-    root.dataset.sheetfit = '1';
-    var top = body.getBoundingClientRect().top, view = body.clientHeight;
-    var stops = [$('.pane[data-tab="' + cur + '"]').getBoundingClientRect().bottom - top]
-      .concat(Array.prototype.map.call(document.querySelectorAll('.act'), function (e) { return e.getBoundingClientRect().bottom - top; }));
-    var keep = stops.filter(function (y) { return y <= view + 0.01; }).pop();
-    if (keep) body.style.maxHeight = keep + 'px';
-    var full = body.scrollHeight, shown = body.clientHeight, sr = $('.sheet').getBoundingClientRect();
-    var bar = $('.sbar');
-    bar.style.top = (top - sr.top - 1 + 2) + 'px';
-    bar.style.height = Math.max(24, (shown - 4) * shown / full) + 'px';
-    window.__sheetfit = { level: 1, need: need, area: area, view: view, shown: shown, full: full };
-  }
-
-  /* The dock keeps its size and bottom line; with the sheet open it re-centres on the map area that
-     stays visible (left of the sheet), or slides away where it does not fit there. */
-  function placeDock() {
-    var root = document.documentElement, dock = $('.dock');
-    root.dataset.dock = '';
-    var hud = $('.hud').getBoundingClientRect(), sh = $('.sheet').getBoundingClientRect(), w = dock.getBoundingClientRect().width;
-    var free = sh.left - 8 - hud.left;
-    if (w <= free) { root.dataset.dock = 'shift'; root.style.setProperty('--dock-ml', Math.floor((free - w) / 2) + 'px'); }
-    else root.dataset.dock = 'away';
-    window.__dock = { mode: root.dataset.dock, w: w, free: free };
+    var root = document.documentElement, acts = $('.acts'), rows = document.querySelectorAll('.act');
+    var body = $('.sheet .body'), tabs = $('.sheet .tabs'), cur = root.dataset.tab;
+    acts.style.maxHeight = ''; tabs.style.minHeight = ''; root.dataset.actscroll = '0';
+    var n = rows.length, rowH = rows[0].getBoundingClientRect().height, best = null, tried = [];
+    for (var lv = 0; lv <= 4; lv++) {
+      root.dataset.sheetfit = String(lv);
+      if (lv === 4 && best.rows > 0) break;                 /* level 4 only when nothing else shows a whole row */
+      var need = 0;
+      ['politics', 'society', 'economy', 'security'].forEach(function (t) {
+        root.dataset.tab = t;
+        need = Math.max(need, $('.pane[data-tab="' + t + '"]').getBoundingClientRect().height);
+      });
+      root.dataset.tab = cur;
+      var room = body.clientHeight - need - parseFloat(getComputedStyle(body).rowGap);
+      var k = Math.max(0, Math.min(n, Math.floor((room + 0.01) / rowH)));
+      tried.push([lv, +room.toFixed(2), k]);
+      if (!best || k > best.rows || (k === 0 && room > best.room)) best = { level: lv, rows: k, room: room, need: need };
+      if (k === n) break;
+    }
+    root.dataset.sheetfit = String(best.level);
+    tabs.style.minHeight = best.need + 'px';                 /* switching tabs never moves anything */
+    if (best.rows < n) {
+      acts.style.maxHeight = Math.max(1, best.rows) * rowH + 'px';
+      root.dataset.actscroll = '1';
+      var bar = $('.sbar'), ar = acts.getBoundingClientRect(), sr = $('.sheet').getBoundingClientRect();
+      var shown = acts.clientHeight, full = acts.scrollHeight;
+      bar.style.top = (ar.top - sr.top - 1 + 4) + 'px';
+      bar.style.height = Math.max(16, (shown - 8) * shown / full) + 'px';
+    }
+    window.__sheetfit = { level: best.level, rows: best.rows, of: n, spare: +(best.room - best.rows * rowH).toFixed(2), tried: tried };
   }
 
   /* Place the map so Cairo and the Nile delta, and if possible all of Egypt, sit in the map area left
      of the sheet, clear of every panel (and its hit boxes), near the middle of that area. The largest
-     zoom (0.8 to 1.3 x the play screen's) that keeps all of Egypt clear wins. */
+     zoom (0.8 to 1.3 x the play screen's) that keeps all of Egypt clear wins. Within that zoom a place that
+     slices fewer map labels with a panel edge is preferred (one label is worth about 45 pt of distance),
+     and any label still sliced is then hidden, so no label is ever shown cut in two. */
   function placeMap() {
     var d = window.__dev, W = d.W, H = d.H;
     var s0 = 0.63 * H / 390, MW0 = 1688, MH0 = 1097;
     var EG = { x0: 583, y0: 424, x1: 945, y1: 732, cx: 764, cy: 578 };
     var DELTA = { x0: 722, y0: 428, x1: 836, y1: 492 };        /* Cairo Governorate + the Nile delta */
     var PAD = 8;                                                /* covers the 44 pt hit boxes (at most 6 beyond a control) */
+    var LPAD = 2;                                               /* a label closer than 2 pt to a panel edge counts as cut */
     var obs = Array.prototype.filter.call(document.querySelectorAll('.hud .glass'), function (e) { return !e.classList.contains('menu') && e.getClientRects().length; })
       .map(function (e) { return e.getBoundingClientRect(); });
     var top = $('.top').getBoundingClientRect(), sh = $('.sheet').getBoundingClientRect(), hud = $('.hud').getBoundingClientRect();
     var dk = $('.dock').getClientRects().length ? $('.dock').getBoundingClientRect() : null;
     var tx = (hud.left + sh.left) / 2, ty = (top.bottom + (dk ? dk.top : hud.bottom)) / 2;
     var safe = { x0: Math.max(d.SIDE, 0), x1: W - Math.max(d.SIDE, 0), y0: 0, y1: H - d.BOTTOM };
+    /* label boxes in map space (glyph box plus half the halo stroke) */
+    var texts = Array.prototype.slice.call(document.querySelectorAll('.labels text'));
+    texts.forEach(function (t) { t.classList.remove('cut'); });
+    var LB = texts.map(function (t) { var bb = t.getBBox(), sw = parseFloat(t.getAttribute('stroke-width') || 0) / 2; return [bb.x - sw, bb.y - sw, bb.x + bb.width + sw, bb.y + bb.height + sw]; });
     function clear(r) {
       if (r.x0 < safe.x0 || r.x1 > safe.x1 || r.y0 < safe.y0 || r.y1 > safe.y1) return false;
       return !obs.some(function (o) { return !(r.x1 <= o.left || r.x0 >= o.right || r.y1 <= o.top || r.y0 >= o.bottom); });
     }
     function box(B, s, cx, cy) { return { x0: cx + (B.x0 - EG.cx) * s - PAD, x1: cx + (B.x1 - EG.cx) * s + PAD, y0: cy + (B.y0 - EG.cy) * s - PAD, y1: cy + (B.y1 - EG.cy) * s + PAD }; }
+    /* is a label box cut by a panel edge (partly under a panel, or squeezed against one)? */
+    function cutBox(x0, y0, x1, y1) {
+      if (x1 <= 0 || x0 >= W || y1 <= 0 || y0 >= H) return false;
+      for (var j = 0; j < obs.length; j++) {
+        var o = obs[j];
+        if (x0 >= o.left && x1 <= o.right && y0 >= o.top && y1 <= o.bottom) return false;     /* fully under this panel */
+      }
+      for (j = 0; j < obs.length; j++) {
+        o = obs[j];
+        if (x1 > o.left - LPAD && x0 < o.right + LPAD && y1 > o.top - LPAD && y0 < o.bottom + LPAD) return true;
+      }
+      return false;
+    }
+    function cuts(s, cx, cy) {
+      var n = 0;
+      for (var i = 0; i < LB.length; i++) { var l = LB[i]; if (cutBox(cx + (l[0] - EG.cx) * s, cy + (l[1] - EG.cy) * s, cx + (l[2] - EG.cx) * s, cy + (l[3] - EG.cy) * s)) n++; }
+      return n;
+    }
     function search(s, B) {
       var best = null, MW = MW0 * s, MH = MH0 * s;
       for (var cy = 0; cy <= H; cy += 2) for (var cx = 0; cx <= W; cx += 2) {
@@ -723,6 +802,8 @@
         if (L > 0 || L + MW < W || T > 0 || T + MH < H) continue;       /* map stays full-bleed */
         if (!clear(box(B, s, cx, cy))) continue;
         var cost = (cx - tx) * (cx - tx) + 2 * (cy - ty) * (cy - ty);
+        if (best && cost >= best.cost) continue;                          /* labels only ever add cost */
+        cost += 2000 * cuts(s, cx, cy);
         if (!best || cost < best.cost) best = { cost: cost, cx: cx, cy: cy };
       }
       return best;
@@ -735,8 +816,12 @@
     root.setProperty('--map-s', String(s));
     root.setProperty('--map-cx', cx + 'px');
     root.setProperty('--map-cy', cy + 'px');
+    /* hide what is still cut, measured on the rendered labels */
+    var hidden = [];
+    texts.forEach(function (t) { var r = t.getBoundingClientRect(), sw = parseFloat(t.getAttribute('stroke-width') || 0) / 2 * s;
+      if (cutBox(r.left - sw, r.top - sw, r.right + sw, r.bottom + sw)) { t.classList.add('cut'); hidden.push(t.textContent); } });
     function scr(B) { return { x0: cx + (B.x0 - EG.cx) * s, x1: cx + (B.x1 - EG.cx) * s, y0: cy + (B.y0 - EG.cy) * s, y1: cy + (B.y1 - EG.cy) * s }; }
-    window.__map = { ok: !!pick.b, egyptClear: pick.egypt, s: s, zoom: +pick.z.toFixed(2), cx: cx, cy: cy, target: [tx, ty], egypt: scr(EG), delta: scr(DELTA) };
+    window.__map = { ok: !!pick.b, egyptClear: pick.egypt, s: s, zoom: +pick.z.toFixed(2), cx: cx, cy: cy, target: [tx, ty], egypt: scr(EG), delta: scr(DELTA), hiddenLabels: hidden };
   }
 
   /* Frosted glass for the mockup render. The headless Chromium used for these PNGs leaves a sharp
@@ -762,7 +847,7 @@
   }
 
   (document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve())
-    .then(fitTop).then(sizeSheet).then(fitSheet).then(placeDock).then(placeMap).then(frost).then(function () { window.__ready = true; });
+    .then(fitTop).then(sizeSheet).then(placeSheet).then(fitSheet).then(placeMap).then(frost).then(function () { window.__ready = true; });
 </script>
 </body>
 </html>
