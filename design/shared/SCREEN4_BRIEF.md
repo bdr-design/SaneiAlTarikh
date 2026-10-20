@@ -1,5 +1,41 @@
 # Screen 4 brief: province panel (لوحة المحافظة)
 
+## Chosen direction (2026-10-20): variant R, built from the owner's two reference images
+The owner rejected the first three variants and eleven styles, then sent two images of the panel they want (an overview, and the details' governance tab). On «شوف المناسب اللي مايثقل على اللعبة وسوه» the panel was built from them as `../screen4/R`. **Where this section and the original brief below disagree, this section wins.**
+
+- **Views:**
+  - The overview shows the header, the 3 headline numbers with a monthly rate and «لماذا؟», the status table, 2 action rows with an effect chip, and «تفاصيل المحافظة».
+  - The details view has 4 tabs (الحكم, الإنشاءات, القوات, السياسات); only «الحكم» is designed so far. It holds:
+    - the governor and «تغيير»;
+    - the development priority and the tax burden, each as 3 radios;
+    - two link rows;
+    - a proposed decision with «اعتماد البرنامج» and «تأجيل».
+- **Look:**
+  - The panel is opaque, as D-3 requires.
+  - The header is a satellite image of the province. In the app it is a crop of the map texture already in memory, not a separate photo.
+  - The selected province gets a blue-violet fill with a white outline, a white ring and a white name pill.
+  - The approved dark HUD stays; the owner left the choice to Claude.
+  - Digits are Western and money is in US dollars.
+- **Geometry:**
+  - The panel runs from 8 pt under the top row down to the dock line.
+  - Width is clamp(43% of the safe width, 340, 380) pt. Where the dock would just miss the room beside the panel, the panel narrows to make room, down to 330 pt (336 on the 15/16).
+  - The dock moves to the left end of its line, 4 pt in and 8 pt clear of the panel. On the 375 pt phones (SE, 13 mini) it cannot fit, so it hides while the panel is open.
+  - Every other HUD element keeps its B3 place.
+- **Fit:**
+  - Six fit levels (`R/_build/panel.css`) tighten gaps, the header and the status rows until the overview shows everything without scrolling. Level 0 on the 17 Pro Max, level 5 on the 13 mini.
+  - The details tab scrolls inside the panel, with a 24 pt fade on an edge that hides content.
+- **Panel sizes added to the tokens** (all on the 4/8/12 spacing scale, plus 2 pt between stacked text lines and a 16 pt status-column gap):
+  - Cards: radius 10.
+  - Inner tiles, chips and small buttons: radius 6 (concentric).
+  - Small outlined buttons and chips: 24 pt tall.
+  - Radio rows 26 pt, tabs and action rows 44, «تفاصيل» row 36.
+  - Each control keeps a 44 × 44 pt hit box.
+  - 18 pt bold is for the province name and the 3 headline numbers.
+- **Gate:**
+  - `R/_build/render.js` checks all 7 phones in all 3 views. Its `--selftest` plants 32 defects and must catch every one.
+  - `python3 -I tools/check_screen.py design/screen4/R` must PASS.
+
+
 Visual mockups for the owner to choose from. NOT app code.
 
 ## When it appears
