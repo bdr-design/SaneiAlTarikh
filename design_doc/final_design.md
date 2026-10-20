@@ -1445,9 +1445,14 @@ As in final-1.0, plus:
 
 | Status | Screens |
 |---|---|
-| **Approved** | Main play screen (as designed for the 17 Pro Max); UI tokens; main menu; new-game flow |
-| **Pending design** (user's list) | Province panel; state; economy budget; markets; politics and parties; internal and unrest; military fronts; forces and production; diplomacy; UN Security Council; intelligence; research; event and decision modal; war and peace; notifications; saves and settings; the "why" sheet; end screens |
+| **Approved** | Main play screen (as designed for the 17 Pro Max); UI tokens; main menu; new-game flow; **province panel** (2026-10-20: a 320 pt card first, the map stays the centre; «تفاصيل المحافظة» opens the full-height details with 4 tabs; `design/screen4/R`, brief `design/shared/SCREEN4_BRIEF.md`) |
+| **Pending design** (user's list) | Province details tabs الإنشاءات / القوات / السياسات; state (proposal shown 2026-10-20); economy budget; markets; politics and parties; internal and unrest; military fronts; forces and production; diplomacy; UN Security Council; intelligence; research; event and decision modal; war and peace; notifications; saves and settings; the "why" sheet; end screens |
 | **Pending design** (added) | Speed popover; map-mode popover; **front-sector arrow interaction** (own sector highlighted, partner sectors shown read-only); pending-orders list; credits and sources; onboarding; country info card; **government chooser** (D-29); **small-phone variants of the top row** (D-31); **save mirror prompt** (D-28) |
+
+**Province details, engine follow-up (from the approved province panel, 2026-10-20).** The «الحكم» tab shows three levers the engine does not model yet. Each needs a data model before it is built; until then the values are illustrative.
+- **Governor:** an office per admin region, appointed by the head of state (Egypt 2011: presidential appointment), with a defined effect on administration and on unrest response.
+- **Development priority** (industry, services, infrastructure): a share of the public-investment budget line per admin region.
+- **Tax burden** (low, balanced, high): Egypt's taxes were national in 2011. The lever is to be defined as local fees and collection effort, or removed for unitary states.
 
 ### 6.2 Approved tokens (`design/tokens.json`)
 

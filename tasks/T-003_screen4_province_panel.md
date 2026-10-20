@@ -73,3 +73,38 @@
   - The owner's image is 16:9; the iPhone is wider and shorter. The overview fits on the 16 / 17 Pro Max; the governance tab scrolls 126 pt inside the panel.
   - The render checker reports 0 cut or overlapping texts on i16promax in all three renders.
   - Waiting for the owner's verdict. Fitting all 7 devices, the independent review and the gate come after approval.
+
+## Approval, fitting and review (2026-10-20)
+- **Owner:**
+  - «لابد التركيز يكون الخريطة هي مركز الاساس»: the panel became two steps, a 320 pt card first, then the full-height details.
+  - «ممتاز»: approved.
+- **Fitting:** all 7 iPhones, in 3 views: the card, the details, and the details scrolled to the end.
+- **Independent review:**
+  - 4 read-only reviewers, one lens each: fidelity, visual, gate, and lightness / realism / Arabic.
+  - One skeptic per finding tried to refute it.
+  - Result: 45 findings; 26 confirmed (1 must, 12 should, 13 nit) and 19 refuted.
+  - All 26 were fixed by Claude. Fixes in the design:
+    - hairlines between the «الحكم» sections;
+    - crane and plain-shield icons as in the image;
+    - blue-outlined action buttons with cyan text, and «لماذا؟» in cyan;
+    - the details keep the card's 56 pt header;
+    - 12 pt under the last card, 8 pt under the card's last row;
+    - Cairo without the square outline at the country zoom;
+    - labels squeezed between a panel and the screen edge are hidden;
+    - «البنية التحتية» on both steps;
+    - the old comparison overview removed.
+  - Fixes in the gate:
+    - The must: the "brief text visible" check could never fail. It now checks the deepest element holding each string, and the details must be reachable by scrolling.
+    - Fades are trusted only when the computed mask fades that edge.
+    - Opacity counts in visibility, panels and contrast. Contrast is now measured per pixel.
+    - RTL order is checked in the details too.
+    - The loosest fit level is enforced.
+    - Hit boxes are clipped by every clipping ancestor.
+    - A scroll hint is required at a bottom edge that hides content.
+    - The report and the self-test carry an input hash. `check_screen.py` refuses a stale report or a failing self-test (screens 1–3 still PASS).
+- **Gate:** the checker reports 0 issues on 7 phones × 3 views. The self-test catches all 46 planted defects. `check_screen.py design/screen4/R`: PASS.
+- **Engine follow-up:** governor, development priority and tax burden are recorded in `final_design.md` §6.1.
+- **Evaluation (rule 11):**
+  - The review took about 56 minutes with 49 agents and found real defects the gate had passed (1 must, 7 gate gaps).
+  - The fidelity reviewer's pixel comparison against the owner's image was the most useful.
+  - 19 refuted findings would have been wasted fixes. The skeptic step paid for itself.

@@ -8,7 +8,7 @@
   /* Device frame from the URL (points): ?w=844&h=390&side=47&bottom=21&cutout=notch|island|none
      Optional: &speedmenu=1 renders the speed menu open, &hit=1 draws the 44 pt hit boxes,
      &view=govern opens «تفاصيل المحافظة» (the full-height details, governance tab) instead of the card,
-     &view=overview the full-height overview, &scroll=end scrolls the open view to its end.
+     &scroll=end scrolls the open view to its end.
      Everything below is laid out with flexbox from these CSS variables; nothing is tied to 844x390. */
   (function () {
     var q = new URLSearchParams(location.search);
@@ -27,7 +27,7 @@
     r.dataset.home = BOTTOM > 0 ? 'yes' : 'no';
     if (q.get('hit') === '1') r.classList.add('show-hit');
     if (q.get('speedmenu') === '1') r.classList.add('menu-open');
-    r.dataset.view = ['govern', 'overview'].indexOf(q.get('view')) >= 0 ? q.get('view') : 'card';
+    r.dataset.view = q.get('view') === 'govern' ? 'govern' : 'card';
     window.__scrollEnd = q.get('scroll') === 'end';
     window.__dev = { W: W, H: H, SIDE: SIDE, BOTTOM: BOTTOM, CUT: CUT };
   })();
@@ -281,10 +281,9 @@
           table and «تفاصيل المحافظة», 320 pt wide at the top right, as tall as its content, ending at least 8 pt above
           the section dock; the whole HUD, dock included, keeps its B3 place;
        2. «تفاصيل المحافظة» opens the full-height sheet with the tabs (?view=govern, the owner's 1st image).
-     ?view=overview keeps the full-height overview of the owner's 2nd image (with the two action rows) for comparison.
      The full-height sheet: a side sheet from the right, from 8 pt under the
      top row down to the dock line. Width clamp(43% of the safe width, 340, 380) pt; where the section dock would just miss
-     the room beside it, the sheet narrows (to 330 at the least) so the dock still fits (15/16: 336). The dock moves to
+     the room beside it, the sheet narrows (to 330 at the least) so the dock still fits (15/16: 335). The dock moves to
      the left end of its line, 4 pt in, 8 pt clear of the sheet (11, 14, 15/16, 16 Pro, 17 Pro Max); on the two 375 pt
      phones (SE, 13 mini) it cannot fit, so it hides while the sheet is open and comes back when the sheet closes.
      Every other HUD element keeps its B3 place and size.
@@ -292,7 +291,9 @@
        overview (?view=overview, the owner's 2nd image): 3 headline numbers, status table, 2 actions, «تفاصيل المحافظة»;
        details (?view=govern, the owner's 1st image): 4 tabs, the governance tab (governor, priority, tax, links,
        a proposed decision). The details body scrolls inside the sheet; a 24 pt fade marks an edge that hides content.
-     Fit levels (fitSheet() measures; the loosest level where the overview needs no scrolling wins):
+     Fit levels (shared with the other panels built on this file). Here: the card takes the loosest level at which it
+     ends 8 pt above the dock (0, or up to 2 on the 13 mini, so its header stays 56 pt); the details always use level 0,
+     so the header keeps the card's 56 pt and the body scrolls. Levels 3-5 serve full-height overviews (the state panel):
        0: as designed (17 Pro Max)          1: block gaps 8 -> 4
        2: also the numbers' padding and the status rows 28 -> 24, body bottom padding 4
        3: also the header 56 -> 48 and the numbers' inner gaps 0
@@ -308,11 +309,10 @@
   [data-rfit="3"] { --rgap: 4px; --rkt: 4px; --rst: 24px; --rpb: 4px; --rh: 48px; --rkl: 14px; --rkm: 0px; --rkr: 0px; }
   [data-rfit="4"] { --rgap: 4px; --rkt: 4px; --rst: 22px; --rpb: 4px; --rh: 48px; --rkl: 14px; --rkm: 0px; --rkr: 0px; }
   [data-rfit="5"] { --rgap: 4px; --rkt: 4px; --rkb: 0px; --rst: 20px; --rpb: 4px; --rh: 44px; --rkl: 14px; --rkm: 0px; --rkr: 0px; }
-  [data-view="overview"] .r-gv, [data-view="govern"] .r-ov { display: none !important; }
-  [data-view="card"] .r-gv, [data-view="card"] .r-acts { display: none !important; }
+  [data-view="govern"] .r-ov, [data-view="card"] .r-gv { display: none !important; }
   [data-view="card"] .sheet { bottom: auto; }
   [data-view="card"] .r-in { position: relative; }          /* the card's height follows its content */
-  [data-view="card"] .r-body { flex: none !important; }
+  [data-view="card"] .r-body { flex: none !important; padding-bottom: var(--s2); }   /* 8 pt under «تفاصيل» at every level */
   /* 4 pt in from the safe edge: the end item «المزيد» is 31 pt wide and its 44 pt hit box must stay out of the side inset */
   [data-dock="left"] .dock { align-self: flex-end; margin-left: var(--s1); }
   [data-dock="hidden"] .dock { display: none; }
@@ -363,7 +363,7 @@
   .r-kv b { font-size: var(--title); line-height: var(--lh-title); font-weight: 700; }
   .r-kv > span { font-size: var(--fs-sec); line-height: var(--lh-sec); font-weight: 500; color: var(--t2); }
   .r-kr { margin-top: var(--rkr); font-size: var(--fs-sec); line-height: var(--lh-sec); font-weight: 500; color: var(--t1); white-space: nowrap; }
-  .r-why { margin-top: var(--rkr); height: 14px; font-size: var(--fs-label); line-height: 14px; font-weight: 700; color: var(--blue); }
+  .r-why { margin-top: var(--rkr); height: 14px; font-size: var(--fs-sec); line-height: 14px; font-weight: 500; color: var(--cyan); }
 
   /* overview: status table */
   .r-st { display: grid; grid-template-columns: 1fr 1fr; column-gap: 16px; border-bottom: 1px solid var(--hair); }
@@ -398,29 +398,33 @@
   .r-tab.on { color: var(--teal); box-shadow: inset 0 -2px 0 var(--teal); }
 
   /* details: governance */
-  .r-gv.r-body { padding-top: var(--s2); gap: var(--s2); }
-  .r-sec { display: flex; flex-direction: column; gap: var(--s1); }
+  .r-gv.r-body { padding-top: var(--s2); padding-bottom: var(--s3); gap: var(--s2); }
+  /* ruled sections, as in the owner's image: a hairline under the first heading and under each section */
+  .r-sec { display: flex; flex-direction: column; gap: var(--s1); padding-bottom: var(--s1); border-bottom: 1px solid var(--hair); }
+  .r-sec:first-child h3 { padding-bottom: var(--s1); border-bottom: 1px solid var(--hair); }
   .r-sec h3, .r-dec h3 { font-size: var(--fs-sec); line-height: var(--lh-sec); font-weight: 600; }
   .r-gov { display: flex; align-items: center; gap: var(--s2); height: 26px; }
   .r-gl { font-size: var(--fs-sec); line-height: var(--lh-sec); font-weight: 500; color: var(--t2); }
   .r-gn { flex: 1; text-align: center; font-size: var(--fs-sec); line-height: var(--lh-sec); font-weight: 600; }
   .r-btn.tap::before { width: max(100% + 2px, 44px); height: max(100% + 2px, 44px); }   /* cover the 1 pt border too */
-  .r-btn { flex: none; height: 24px; padding-inline: var(--s3); border-radius: 6px; border: 1px solid rgba(63, 224, 208, .75); background: rgba(63, 224, 208, .06);
-    color: var(--teal); font-size: var(--fs-sec); line-height: 22px; font-weight: 600; white-space: nowrap; }
-  .r-grey { border-color: rgba(169, 188, 203, .5); background: transparent; color: var(--t1); }
+  /* actions: a blue outline with cyan text (teal stays for selected states: the open tab, the chosen radio), as in the image */
+  .r-btn { flex: none; height: 24px; padding-inline: var(--s3); border-radius: 6px; border: 1px solid rgba(111, 182, 255, .6); background: rgba(111, 182, 255, .06);
+    color: var(--cyan); font-size: var(--fs-sec); line-height: 22px; font-weight: 600; white-space: nowrap; }
+  .r-grey { border-color: rgba(111, 182, 255, .3); background: transparent; color: var(--cyan); }
   .r-radios { display: grid; grid-template-columns: repeat(3, 1fr); height: 26px; align-items: center; }
   .r-rd { display: flex; align-items: center; gap: var(--s2); height: 26px; font-size: var(--fs-sec); line-height: var(--lh-sec); font-weight: 500; color: var(--t1); white-space: nowrap; }
   .r-rd i { position: relative; flex: none; width: 16px; height: 16px; border-radius: 50%; box-shadow: inset 0 0 0 1.5px var(--t2); }
   .r-rd.on { color: var(--teal); font-weight: 600; }
   .r-rd.on i { box-shadow: inset 0 0 0 1.5px var(--teal); }
   .r-rd.on i::after { content: ""; position: absolute; inset: 4px; border-radius: 50%; background: var(--teal); }
-  .r-links { display: flex; flex-direction: column; gap: var(--s1); margin-top: var(--s1); }   /* 12 pt after the radios: their hit boxes reach 9 pt below them */
+  .r-links { display: flex; flex-direction: column; gap: var(--s1); }   /* 13 pt after the radios (section padding 4 + rule 1 + gap 8): their hit boxes reach 9 pt below them */
   .r-link { display: flex; align-items: center; gap: var(--s2); height: 44px; padding-inline: 5px var(--s2); }
   .r-link .r-tile { width: 34px; height: 34px; }
   .r-link .r-at > span { font-size: var(--fs-label); line-height: var(--lh-label); }
   .r-dec { padding: 0 var(--s3) var(--s2); }
-  .r-dec h3 { height: 24px; display: flex; align-items: center; margin-inline: calc(-1 * var(--s3)); padding-inline: var(--s3); border-bottom: 1px solid var(--hair); color: var(--t2); font-weight: 600; }
-  .r-dbody { display: grid; grid-template-columns: var(--ico-dock) 1fr; column-gap: var(--s2); padding-top: var(--s2); }
+  .r-dec h3 { height: 24px; display: flex; align-items: center; margin-inline: calc(-1 * var(--s3)); padding-inline: var(--s3); border-bottom: 1px solid var(--hair); color: var(--cyan); font-weight: 600; }
+  .r-dbody { position: relative; display: grid; grid-template-columns: var(--ico-dock) 1fr; column-gap: var(--s2); padding-top: var(--s2); }
+  .r-dbody::before { content: ""; position: absolute; top: var(--s2); bottom: 0; right: calc(var(--ico-dock) + var(--s1)); width: 1px; background: var(--hair); }   /* divider beside the icon */
   .r-dic { width: var(--ico-dock) !important; height: var(--ico-dock) !important; color: var(--cyan); margin-top: 0; }
   .r-dtx { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
   .r-dtx b { font-size: var(--fs-val); line-height: var(--lh-val); font-weight: 600; }
@@ -477,6 +481,7 @@
     <symbol id="i-chev" viewBox="0 0 24 24"><path d="M14.5 5.5 8 12l6.5 6.5"/></symbol>
     <symbol id="i-flame" viewBox="0 0 24 24"><path d="M12 21c-3.9 0-6.75-2.6-6.75-6.3 0-3.2 2.2-5.1 3.6-7.4.3 1.9 1.3 3 2.4 3.5C11 7.6 12.2 5 14.6 3c-.2 3 1.3 4.6 2.6 6.2 1.1 1.4 1.55 2.9 1.55 4.5C18.75 18.4 15.9 21 12 21z"/><path d="M12 21c-1.6 0-2.75-1.1-2.75-2.6 0-1.7 1.4-2.6 2.1-4 .9 1.1 3.4 2.3 3.4 4 0 1.5-1.15 2.6-2.75 2.6z"/></symbol>
     <symbol id="i-pylon" viewBox="0 0 24 24"><path d="M12 2.75 7 21.25M12 2.75l5 18.5"/><path d="M5 7h14M6.5 11.5h11M8.45 16h7.1"/><path d="M5 7v2.25M19 7v2.25M6.5 11.5v2M17.5 11.5v2"/></symbol>
+    <symbol id="i-shield-plain" viewBox="0 0 24 24"><path d="M12 3.5l7 2.75v5.25c0 4.3-2.9 7.6-7 9-4.1-1.4-7-4.7-7-9V6.25z"/></symbol>
     <symbol id="i-doc" viewBox="0 0 24 24"><path d="M6.25 3.5h8.25l3.25 3.25V20.5H6.25z"/><path d="M14.25 3.5v3.5h3.5"/><path d="M9 11h6M9 14h6M9 17h3.5"/></symbol>
     <symbol id="i-bus" viewBox="0 0 24 24"><rect x="5" y="3.5" width="14" height="15" rx="2.5"/><path d="M5 7.25h14M5 12h14"/><path d="M8 18.5v2M16 18.5v2"/><path d="M8.5 15.25h.01M15.5 15.25h.01" stroke-width="2.4"/></symbol>
   </defs>
@@ -535,7 +540,7 @@
   <svg class="sel" viewBox="0 0 1688 1097">
     <defs><radialGradient id="selhalo"><stop offset="0" stop-color="#7A6CFF" stop-opacity=".75"/><stop offset=".55" stop-color="#6458FF" stop-opacity=".35"/><stop offset="1" stop-color="#5A4FFF" stop-opacity="0"/></radialGradient></defs>
     <circle class="halo" cx="787" cy="477" r="38" fill="url(#selhalo)"/>
-    <path id="cairo" d="M795,467L797,485L779,486L777,474Z" fill="#6E6BFF" fill-opacity="0.75" stroke="#D2CEFF" stroke-width="2.5"/>
+    <path id="cairo" d="M795,467L797,485L779,486L777,474Z" fill="#6E6BFF" fill-opacity="0.55"/>
     <circle class="ring" cx="787" cy="477" r="7" fill="#3E63F2" stroke="#FFFFFF" stroke-width="3.5"/>
     <g class="pin">
       <rect x="808" y="464" width="78" height="32" rx="8" fill="#FFFFFF"/>
@@ -628,8 +633,10 @@
     <button class="dock-item tap end end-l"><svg class="i"><use href="#i-more"/></svg><span>المزيد</span></button>
   </nav>
 
-  <!-- Province panel (variant R, after the owner's two reference images, 2026-10-20). One panel, two views:
-       ?view=overview (default, the owner's 2nd image) and ?view=govern («تفاصيل المحافظة», the owner's 1st image).
+  <!-- Province panel (variant R, after the owner's two reference images, 2026-10-20). Two steps of one sheet:
+       the card (default, step 1: header, numbers, status, «تفاصيل المحافظة»; the upper part of the owner's 2nd image)
+       and ?view=govern (step 2, «تفاصيل المحافظة», the owner's 1st image). The 2nd image's two action rows move into the
+       details tabs (توسعة شبكة الكهرباء -> الإنشاءات, دعم الخدمات الأساسية -> السياسات), designed with those tabs.
        Values and the governor's name are illustrative. -->
   <section class="sheet glass" aria-label="المحافظة: القاهرة">
     <div class="r-in">
@@ -642,7 +649,7 @@
         <button class="r-x tap" aria-label="إغلاق"><svg class="i"><use href="#i-close"/></svg></button>
       </header>
 
-      <!-- view 1: overview -->
+      <!-- step 1: the card -->
       <div class="r-body r-ov">
         <div class="r-kpis">
           <div class="r-kpi">
@@ -658,7 +665,7 @@
             <button class="r-why tap">لماذا؟</button>
           </div>
           <div class="r-kpi">
-            <span class="r-kl"><svg class="i"><use href="#i-pylon"/></svg>البنية التحتية</span>
+            <span class="r-kl"><svg class="i"><use href="#i-build"/></svg>البنية التحتية</span>
             <span class="r-kv"><b class="ltr">8</b><span>/ <span class="ltr">10</span></span></span>
             <span class="r-kr">دون تغير</span>
             <button class="r-why tap">لماذا؟</button>
@@ -672,27 +679,14 @@
           <div class="r-sc"><dt>المطالبات</dt><dd>لا توجد</dd></div>
         </dl>
 
-        <div class="r-acts" aria-label="الإجراءات">
-          <button class="r-act tap r-first">
-            <span class="r-tile"><svg class="i"><use href="#i-pylon"/></svg></span>
-            <span class="r-at"><b>توسعة شبكة الكهرباء</b><span><span class="ltr">0.8</span> مليار $ · <span class="ltr">24</span> شهرًا</span></span>
-            <span class="r-chip"><svg class="r-arr"><use href="#t-up"/></svg>زيادة القدرة</span>
-          </button>
-          <button class="r-act tap">
-            <span class="r-tile"><svg class="i"><use href="#i-state"/></svg></span>
-            <span class="r-at"><b>دعم الخدمات الأساسية</b><span><span class="ltr">0.3</span> مليار $</span></span>
-            <span class="r-chip">تحسين الخدمات</span>
-          </button>
-        </div>
-
         <button class="r-more tap"><svg class="i"><use href="#i-doc"/></svg><span>تفاصيل المحافظة</span><svg class="i r-chev"><use href="#i-chev"/></svg></button>
       </div>
 
       <!-- view 2: details, governance tab -->
       <nav class="r-tabs r-gv" aria-label="أقسام المحافظة">
         <button class="r-tab on tap"><svg class="i"><use href="#i-state"/></svg><span>الحكم</span></button>
-        <button class="r-tab tap"><svg class="i"><use href="#i-pylon"/></svg><span>الإنشاءات</span></button>
-        <button class="r-tab tap"><svg class="i"><use href="#i-shield"/></svg><span>القوات</span></button>
+        <button class="r-tab tap"><svg class="i"><use href="#i-build"/></svg><span>الإنشاءات</span></button>
+        <button class="r-tab tap"><svg class="i"><use href="#i-shield-plain"/></svg><span>القوات</span></button>
         <button class="r-tab tap"><svg class="i"><use href="#i-doc"/></svg><span>السياسات</span></button>
       </nav>
       <div class="r-body r-gv">
@@ -705,7 +699,7 @@
           <div class="r-radios" role="radiogroup" aria-label="الأولوية التنموية">
             <button class="r-rd tap" role="radio" aria-checked="false"><i></i>الصناعة</button>
             <button class="r-rd tap on" role="radio" aria-checked="true"><i></i>الخدمات</button>
-            <button class="r-rd tap" role="radio" aria-checked="false"><i></i>البنية الأساسية</button>
+            <button class="r-rd tap" role="radio" aria-checked="false"><i></i>البنية التحتية</button>
           </div>
         </section>
         <section class="r-sec">
@@ -719,13 +713,13 @@
 
         <div class="r-links">
           <div class="r-link tap" role="button" tabindex="0" aria-label="الإنشاءات والمرافق">
-            <span class="r-tile"><svg class="i"><use href="#i-pylon"/></svg></span>
+            <span class="r-tile"><svg class="i"><use href="#i-build"/></svg></span>
             <span class="r-at"><b>الإنشاءات والمرافق</b><span>الكهرباء · النقل · المرافق العامة</span></span>
             <button class="r-btn tap">تخطيط التوسعة</button>
             <svg class="i r-chev"><use href="#i-chev"/></svg>
           </div>
           <div class="r-link tap" role="button" tabindex="0" aria-label="إدارة القوات">
-            <span class="r-tile"><svg class="i"><use href="#i-shield"/></svg></span>
+            <span class="r-tile"><svg class="i"><use href="#i-shield-plain"/></svg></span>
             <span class="r-at"><b>إدارة القوات</b><span>الحامية · التمركز · إسناد المهام</span></span>
             <svg class="i r-chev"><use href="#i-chev"/></svg>
           </div>
@@ -751,7 +745,6 @@
           </div>
         </section>
       </div>
-      <span class="r-fade" aria-hidden="true"></span>
     </div>
   </section>
 </div>
@@ -808,35 +801,22 @@
     window.__sheetpos = { dock: root.dataset.dock, dockRight: dk.right, sheetLeft: sh.left };
   }
 
-  /* Pick the loosest fit level (panel.css). The card: the loosest level at which it ends at least 8 pt above the dock.
-     The full-height sheet: the loosest level at which the overview shows everything without scrolling (the details
-     share it, so the header keeps its size when the player switches between them). */
+  /* Pick the fit level (panel.css). The card: the loosest level at which it ends at least 8 pt above the dock.
+     The details: level 0 on every phone (the header keeps the card's 56 pt when the card opens into them; the body
+     scrolls). */
   function fitSheet() {
-    var root = document.documentElement, view = root.dataset.view, b = $('.r-body.r-ov'), tried = [], lv;
-    if (view === 'card') {
-      var dockTop = $('.dock').getBoundingClientRect().top;
-      for (lv = 0; lv <= 5; lv++) {
-        root.dataset.rfit = String(lv);
-        var gap = dockTop - $('.sheet').getBoundingClientRect().bottom;
-        tried.push([lv, +gap.toFixed(2)]);
-        if (gap >= 8 - 0.01) break;
-      }
-      if (lv > 5) lv = 5;
-      root.dataset.rfit = String(lv);
-      window.__sheetfit = { level: lv, tried: tried, fits: tried[tried.length - 1][1] >= 8 - 0.01 };
-      return;
-    }
-    root.dataset.view = 'overview';
+    var root = document.documentElement, tried = [], lv;
+    if (root.dataset.view === 'govern') { root.dataset.rfit = '0'; window.__sheetfit = { level: 0, tried: [], fits: true }; return; }
+    var dockTop = $('.dock').getBoundingClientRect().top;
     for (lv = 0; lv <= 5; lv++) {
       root.dataset.rfit = String(lv);
-      var over = b.scrollHeight - b.clientHeight;
-      tried.push([lv, over]);
-      if (over <= 0.5) break;
+      var gap = dockTop - $('.sheet').getBoundingClientRect().bottom;
+      tried.push([lv, +gap.toFixed(2)]);
+      if (gap >= 8 - 0.01) break;
     }
     if (lv > 5) lv = 5;
     root.dataset.rfit = String(lv);
-    root.dataset.view = view;
-    window.__sheetfit = { level: lv, tried: tried, fits: tried[tried.length - 1][1] <= 0.5 };
+    window.__sheetfit = { level: lv, tried: tried, fits: tried[tried.length - 1][1] >= 8 - 0.01 };
   }
 
   /* The open view's body scrolls inside the sheet when it is taller than the sheet (?scroll=end shows its end);
@@ -884,8 +864,14 @@
     }
     function box(B, s, cx, cy) { return { x0: cx + (B.x0 - EG.cx) * s - PAD, x1: cx + (B.x1 - EG.cx) * s + PAD, y0: cy + (B.y0 - EG.cy) * s - PAD, y1: cy + (B.y1 - EG.cy) * s + PAD }; }
     /* is a label box cut by a panel edge (partly under a panel, or squeezed against one)? */
+    /* a panel that leaves less than 70 pt to a screen edge counts as reaching it: a label in that strip is squeezed */
+    var EDGE = 70;
     function cutBox(x0, y0, x1, y1) {
       if (x1 <= 0 || x0 >= W || y1 <= 0 || y0 >= H) return false;
+      for (var e = 0; e < obs.length; e++) {
+        var p = obs[e], sx0 = p.left < EDGE ? 0 : p.left, sx1 = W - p.right < EDGE ? W : p.right;
+        if ((sx0 !== p.left || sx1 !== p.right) && x1 > sx0 && x0 < sx1 && y1 > p.top - 2 && y0 < p.bottom + 2 && (x0 < p.left || x1 > p.right)) return true;
+      }
       for (var j = 0; j < obs.length; j++) {
         var o = obs[j];
         if (x0 >= o.left && x1 <= o.right && y0 >= o.top && y1 <= o.bottom) return false;     /* fully under this panel */

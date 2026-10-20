@@ -1,39 +1,51 @@
 # Screen 4 brief: province panel (لوحة المحافظة)
 
-## Chosen direction (2026-10-20): variant R, built from the owner's two reference images
-The owner rejected the first three variants and eleven styles, then sent two images of the panel they want (an overview, and the details' governance tab). On «شوف المناسب اللي مايثقل على اللعبة وسوه» the panel was built from them as `../screen4/R`. **Where this section and the original brief below disagree, this section wins.**
+## Approved design (2026-10-20): variant R, from the owner's two reference images
+The owner rejected the first three variants and eleven styles, then sent two images of the panel they want: an overview, and the details' governance tab. On «شوف المناسب اللي مايثقل على اللعبة وسوه» the panel was built from them as `../screen4/R`. After «لابد التركيز يكون الخريطة هي مركز الاساس» it became two steps, and the owner approved it («ممتاز»). **Where this section and the original brief below disagree, this section wins.**
 
-- **Views:**
-  - The overview shows the header, the 3 headline numbers with a monthly rate and «لماذا؟», the status table, 2 action rows with an effect chip, and «تفاصيل المحافظة».
-  - The details view has 4 tabs (الحكم, الإنشاءات, القوات, السياسات); only «الحكم» is designed so far. It holds:
+- **Step 1: the card.** Tapping a province opens a 320 pt card at the top right. The map stays the centre, and the whole HUD, dock included, keeps its B3 place.
+  - Contents: the header, the 3 headline numbers with a monthly rate and «لماذا؟», the 2x2 status table, and «تفاصيل المحافظة».
+  - The card is as tall as its content and ends at least 8 pt above the dock.
+  - It takes the loosest fit level at which it ends there: 0 on most phones, up to 2 on the 13 mini, so the header stays 56 pt.
+- **Step 2: the details.** «تفاصيل المحافظة» opens the full-height sheet, with 4 tabs: الحكم, الإنشاءات, القوات, السياسات.
+  - Only «الحكم» is designed so far. It holds:
     - the governor and «تغيير»;
     - the development priority and the tax burden, each as 3 radios;
     - two link rows;
     - a proposed decision with «اعتماد البرنامج» and «تأجيل».
+
+    Each section is ruled off with a hairline.
+  - The two action rows of the owner's overview image move into the tabs: «توسعة شبكة الكهرباء» to الإنشاءات, «دعم الخدمات الأساسية» to السياسات. They are designed with those tabs.
+  - The body scrolls inside the sheet, with a 24 pt fade on any edge that hides content.
+  - The header keeps the card's 56 pt (fit level 0).
+- **Geometry of the details sheet:**
+  - It runs from 8 pt under the top row down to the dock line.
+  - Width is clamp(43% of the safe width, 340, 380) pt. Where the dock would just miss the room beside the sheet, the sheet narrows to make room, down to 330 pt (335 on the 15/16).
+  - The dock moves to the left end of its line, 4 pt in and 8 pt clear of the sheet. On the 375 pt phones (SE, 13 mini) it cannot fit, so it hides while the details are open.
 - **Look:**
-  - The panel is opaque, as D-3 requires.
-  - The header is a satellite image of the province. In the app it is a crop of the map texture already in memory, not a separate photo.
-  - The selected province gets a blue-violet fill with a white outline, a white ring and a white name pill.
-  - The approved dark HUD stays; the owner left the choice to Claude.
-  - Digits are Western and money is in US dollars.
-- **Geometry:**
-  - The panel runs from 8 pt under the top row down to the dock line.
-  - Width is clamp(43% of the safe width, 340, 380) pt. Where the dock would just miss the room beside the panel, the panel narrows to make room, down to 330 pt (336 on the 15/16).
-  - The dock moves to the left end of its line, 4 pt in and 8 pt clear of the panel. On the 375 pt phones (SE, 13 mini) it cannot fit, so it hides while the panel is open.
-  - Every other HUD element keeps its B3 place.
-- **Fit:**
-  - Six fit levels (`R/_build/panel.css`) tighten gaps, the header and the status rows until the overview shows everything without scrolling. Level 0 on the 17 Pro Max, level 5 on the 13 mini.
-  - The details tab scrolls inside the panel, with a 24 pt fade on an edge that hides content.
-- **Panel sizes added to the tokens** (all on the 4/8/12 spacing scale, plus 2 pt between stacked text lines and a 16 pt status-column gap):
-  - Cards: radius 10.
-  - Inner tiles, chips and small buttons: radius 6 (concentric).
+  - The panel is opaque (D-3).
+  - The header is a satellite strip of the province.
+  - The selected province gets a blue-violet halo, a faint fill and a white ring with a white name pill. At the country zoom Cairo is smaller than its ring, so no outline is drawn.
+  - Teal marks selected states: the open tab, the chosen radio, the «العاصمة» chip. Actions are outlined in blue (`#6FB6FF`) with cyan (`#7FE9FF`) text, and «لماذا؟» is cyan.
+  - The dark HUD stays (the owner left the choice to Claude). Digits are Western; money is in US dollars.
+- **Panel sizes added to the tokens.** Spacing stays on the 4/8/12 scale, plus 2 pt between stacked text lines and a 16 pt status-column gap.
+  - Cards: radius 10. Inner tiles, chips and small buttons: radius 6 (concentric).
   - Small outlined buttons and chips: 24 pt tall.
-  - Radio rows 26 pt, tabs and action rows 44, «تفاصيل» row 36.
-  - Each control keeps a 44 × 44 pt hit box.
+  - Radio rows: 26 pt. Tabs and link rows: 44. «تفاصيل» row: 36.
+  - Every control keeps a 44 × 44 pt hit box.
   - 18 pt bold is for the province name and the 3 headline numbers.
+- **Light build rules for the app** («مايثقل على اللعبة»):
+  1. **No blur anywhere.** The panels are opaque (D-3).
+  2. **No masks on scrolling content.** An edge fade is a 24 pt gradient overlay from the panel colour to clear, drawn above the scroll view, with hit testing off. It shows only while that edge hides content. It looks the same as the mockup's mask, which only reveals the same opaque panel colour.
+  3. **The header strip is a crop of the map imagery already in memory.** It is not a separate photo per province.
+  4. **The province highlight is one pre-rendered halo sprite plus the ring,** drawn only for the selected province.
+  5. **The fit level is a lookup from the safe height and the insets.** It is computed once at launch and again on an inset change, with no trial-layout loop and no re-fit per province or per tick.
+  6. **The card appears over the live map without moving the camera.**
 - **Gate:**
-  - `R/_build/render.js` checks all 7 phones in all 3 views. Its `--selftest` plants 32 defects and must catch every one.
-  - `python3 -I tools/check_screen.py design/screen4/R` must PASS.
+  - `R/_build/render.js` checks all 7 phones in 3 views: card, details, and details at the end of the scroll.
+  - `--selftest` plants 46 defects and must catch every one.
+  - `python3 -I tools/check_screen.py design/screen4/R` must PASS. The gate also recomputes the report's input hash, requires every view clean, and requires a passing self-test made from the same files.
+- **Engine follow-up:** the governor, the development priority and the per-province tax burden have no model in `final_design.md` yet. See its §6.1 note. Values are illustrative.
 
 
 Visual mockups for the owner to choose from. NOT app code.

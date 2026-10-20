@@ -1,5 +1,7 @@
-  <!-- Province panel (variant R, after the owner's two reference images, 2026-10-20). One panel, two views:
-       ?view=overview (default, the owner's 2nd image) and ?view=govern («تفاصيل المحافظة», the owner's 1st image).
+  <!-- Province panel (variant R, after the owner's two reference images, 2026-10-20). Two steps of one sheet:
+       the card (default, step 1: header, numbers, status, «تفاصيل المحافظة»; the upper part of the owner's 2nd image)
+       and ?view=govern (step 2, «تفاصيل المحافظة», the owner's 1st image). The 2nd image's two action rows move into the
+       details tabs (توسعة شبكة الكهرباء -> الإنشاءات, دعم الخدمات الأساسية -> السياسات), designed with those tabs.
        Values and the governor's name are illustrative. -->
   <section class="sheet glass" aria-label="المحافظة: القاهرة">
     <div class="r-in">
@@ -12,7 +14,7 @@
         <button class="r-x tap" aria-label="إغلاق"><svg class="i"><use href="#i-close"/></svg></button>
       </header>
 
-      <!-- view 1: overview -->
+      <!-- step 1: the card -->
       <div class="r-body r-ov">
         <div class="r-kpis">
           <div class="r-kpi">
@@ -28,7 +30,7 @@
             <button class="r-why tap">لماذا؟</button>
           </div>
           <div class="r-kpi">
-            <span class="r-kl"><svg class="i"><use href="#i-pylon"/></svg>البنية التحتية</span>
+            <span class="r-kl"><svg class="i"><use href="#i-build"/></svg>البنية التحتية</span>
             <span class="r-kv"><b class="ltr">8</b><span>/ <span class="ltr">10</span></span></span>
             <span class="r-kr">دون تغير</span>
             <button class="r-why tap">لماذا؟</button>
@@ -42,27 +44,14 @@
           <div class="r-sc"><dt>المطالبات</dt><dd>لا توجد</dd></div>
         </dl>
 
-        <div class="r-acts" aria-label="الإجراءات">
-          <button class="r-act tap r-first">
-            <span class="r-tile"><svg class="i"><use href="#i-pylon"/></svg></span>
-            <span class="r-at"><b>توسعة شبكة الكهرباء</b><span><span class="ltr">0.8</span> مليار $ · <span class="ltr">24</span> شهرًا</span></span>
-            <span class="r-chip"><svg class="r-arr"><use href="#t-up"/></svg>زيادة القدرة</span>
-          </button>
-          <button class="r-act tap">
-            <span class="r-tile"><svg class="i"><use href="#i-state"/></svg></span>
-            <span class="r-at"><b>دعم الخدمات الأساسية</b><span><span class="ltr">0.3</span> مليار $</span></span>
-            <span class="r-chip">تحسين الخدمات</span>
-          </button>
-        </div>
-
         <button class="r-more tap"><svg class="i"><use href="#i-doc"/></svg><span>تفاصيل المحافظة</span><svg class="i r-chev"><use href="#i-chev"/></svg></button>
       </div>
 
       <!-- view 2: details, governance tab -->
       <nav class="r-tabs r-gv" aria-label="أقسام المحافظة">
         <button class="r-tab on tap"><svg class="i"><use href="#i-state"/></svg><span>الحكم</span></button>
-        <button class="r-tab tap"><svg class="i"><use href="#i-pylon"/></svg><span>الإنشاءات</span></button>
-        <button class="r-tab tap"><svg class="i"><use href="#i-shield"/></svg><span>القوات</span></button>
+        <button class="r-tab tap"><svg class="i"><use href="#i-build"/></svg><span>الإنشاءات</span></button>
+        <button class="r-tab tap"><svg class="i"><use href="#i-shield-plain"/></svg><span>القوات</span></button>
         <button class="r-tab tap"><svg class="i"><use href="#i-doc"/></svg><span>السياسات</span></button>
       </nav>
       <div class="r-body r-gv">
@@ -75,7 +64,7 @@
           <div class="r-radios" role="radiogroup" aria-label="الأولوية التنموية">
             <button class="r-rd tap" role="radio" aria-checked="false"><i></i>الصناعة</button>
             <button class="r-rd tap on" role="radio" aria-checked="true"><i></i>الخدمات</button>
-            <button class="r-rd tap" role="radio" aria-checked="false"><i></i>البنية الأساسية</button>
+            <button class="r-rd tap" role="radio" aria-checked="false"><i></i>البنية التحتية</button>
           </div>
         </section>
         <section class="r-sec">
@@ -89,13 +78,13 @@
 
         <div class="r-links">
           <div class="r-link tap" role="button" tabindex="0" aria-label="الإنشاءات والمرافق">
-            <span class="r-tile"><svg class="i"><use href="#i-pylon"/></svg></span>
+            <span class="r-tile"><svg class="i"><use href="#i-build"/></svg></span>
             <span class="r-at"><b>الإنشاءات والمرافق</b><span>الكهرباء · النقل · المرافق العامة</span></span>
             <button class="r-btn tap">تخطيط التوسعة</button>
             <svg class="i r-chev"><use href="#i-chev"/></svg>
           </div>
           <div class="r-link tap" role="button" tabindex="0" aria-label="إدارة القوات">
-            <span class="r-tile"><svg class="i"><use href="#i-shield"/></svg></span>
+            <span class="r-tile"><svg class="i"><use href="#i-shield-plain"/></svg></span>
             <span class="r-at"><b>إدارة القوات</b><span>الحامية · التمركز · إسناد المهام</span></span>
             <svg class="i r-chev"><use href="#i-chev"/></svg>
           </div>
@@ -121,6 +110,5 @@
           </div>
         </section>
       </div>
-      <span class="r-fade" aria-hidden="true"></span>
     </div>
   </section>

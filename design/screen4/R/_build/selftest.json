@@ -1,14 +1,22 @@
 {
- "ranAt": "2026-10-20T14:57:20.534Z",
+ "ranAt": "2026-10-20T16:14:27.530Z",
+ "inputs": {
+  "files": [
+   "index.html",
+   "_build/render.js",
+   "_build/panel.css",
+   "_build/sheet.html",
+   "_build/assemble.py"
+  ],
+  "sha1": "2fbf5d9c28fb340afd941177bd89b2f9bc6ba88b"
+ },
  "cleanIssues": {
   "i16promax": [],
   "i16promax_govern": [],
   "i16promax_govern_end": [],
-  "i16promax_full": [],
   "se": [],
   "se_govern": [],
-  "se_govern_end": [],
-  "se_full": []
+  "se_govern_end": []
  },
  "results": [
   {
@@ -31,8 +39,8 @@
    "name": "font weight",
    "ok": true,
    "sample": [
-    "font weight 13/700 for \"توسعة شبكة الكهرباء\"",
-    "font weight 13/700 for \"دعم الخدمات الأساسية\""
+    "font weight 13/700 for \"الإنشاءات والمرافق\"",
+    "font weight 13/700 for \"إدارة القوات\""
    ]
   },
   {
@@ -48,26 +56,23 @@
    "name": "control height",
    "ok": true,
    "sample": [
-    "control height 46.00 for .r-act (want 44): توسعة شبكة الكهرباء0.8 ملي",
-    "control height 46.00 for .r-act (want 44): دعم الخدمات الأساسية0.3 مل",
-    "overview needs scrolling: 4.0 pt (fit level 0)"
+    "control height 40.00 for .r-more (want 36): تفاصيل المحافظة"
    ]
   },
   {
    "name": "radius",
    "ok": true,
    "sample": [
-    "radius 8 for .r-act (want 10)",
-    "radius 8 for .r-act (want 10)"
+    "radius 8 for .r-more (want 10)"
    ]
   },
   {
    "name": "gap",
    "ok": true,
    "sample": [
-    "gap 10 on توسعة شبكة الكهرباء0.8 ملي",
-    "gap 10 on توسعة شبكة الكهرباء0.8 ملي",
-    "gap 10 on دعم الخدمات الأساسية0.3 مل"
+    "gap 6 on السكان",
+    "gap 6 on السكان",
+    "gap 6 on الاضطرابات"
    ]
   },
   {
@@ -82,7 +87,9 @@
    "name": "hit overlap",
    "ok": true,
    "sample": [
-    "hit overlap دعم الخدمات الأساسية0.3 مل / تفاصيل المحافظة"
+    "clipped text (bottom): \"السيطرة\" 844.7..881 y 237..254",
+    "clipped text (bottom): \"الحكومة ·\" 777.89..829.86 y 236..255",
+    "clipped text (bottom): \"100%\" 742..777.89 y 236..255"
    ]
   },
   {
@@ -127,7 +134,7 @@
    "sample": [
     "panel not opaque: المحافظة: القاهرة rgba(9, 17, 25, 0.66)",
     "contrast 4.36 for \"ألف شهريًا\"",
-    "contrast 4.41 for \"لماذا؟\""
+    "contrast 3.28 for \"64\""
    ]
   },
   {
@@ -143,7 +150,7 @@
    "name": "sheet width",
    "ok": true,
    "sample": [
-    "sheet width 330 (want round(clamp(43% of 832, 340, 380)), or the room the dock leaves if 330..: 320)"
+    "sheet width 330 (the card is 320 pt)"
    ]
   },
   {
@@ -166,9 +173,9 @@
    "name": "dock not moved left",
    "ok": true,
    "sample": [
-    "hit overlap الدولة / إدارة القوات",
-    "hit overlap الاقتصاد / إدارة القوات",
-    "hit overlap الداخلية والسياسة / إدارة القوات"
+    "icon over text: i r-chev / \"الداخلية والسياسة\"",
+    "hit overlap الدولة / الإنشاءات والمرافق",
+    "hit overlap الدولة / تخطيط التوسعة"
    ]
   },
   {
@@ -192,9 +199,9 @@
    "name": "dock shown on the SE",
    "ok": true,
    "sample": [
+    "icon over text: i r-chev / \"الجيش\"",
     "icon over text: i / \"الإنشاءات والمرافق\"",
-    "icon over text: i / \"الكهرباء · النقل · المرافق العامة\"",
-    "icon over text: i / \"تخطيط التوسعة\""
+    "hit overlap الدولة / متوازن"
    ]
   },
   {
@@ -207,28 +214,21 @@
    ]
   },
   {
-   "name": "overview scrolls",
-   "ok": true,
-   "sample": [
-    "control cut by its scroll area (bottom): تفاصيل المحافظة",
-    "hit box shaved by the scroll area: تفاصيل المحافظة",
-    "overview needs scrolling: 37.0 pt (fit level 4)"
-   ]
-  },
-  {
    "name": "fades wrong",
    "ok": true,
    "sample": [
-    "fades 0/0 do not match the scroll state (top 0, over 143.0)"
+    "clipped text (bottom): \"الحامية · التمركز · إسناد المهام\" 718.56..834 y 409..424",
+    "control cut by its scroll area (bottom): إدارة القوات",
+    "hit box shaved by its clip: إدارة القوات"
    ]
   },
   {
    "name": "cut at a hard edge",
    "ok": true,
    "sample": [
-    "control cut by its scroll area (bottom): إدارة القوات",
-    "hit box shaved by the scroll area: إدارة القوات",
-    "fades 0/0 do not match the scroll state (top 0, over 182.0)"
+    "clipped text (bottom): \"الكهرباء · النقل · المرافق العامة\" 481.03..599 y 361..376",
+    "clipped text (bottom): \"تخطيط التوسعة\" 377..447.28 y 351..368",
+    "control cut by its scroll area (bottom): الإنشاءات والمرافق"
    ]
   },
   {
@@ -242,7 +242,6 @@
    "name": "brief text",
    "ok": true,
    "sample": [
-    "brief text not fully visible: لماذا؟",
     "brief text missing: لماذا؟",
     "brief text missing: لماذا؟"
    ]
@@ -252,25 +251,107 @@
    "ok": true,
    "sample": [
     "map label السعودية cut by a panel edge",
-    "map label العراق cut by a panel edge",
-    "map city dot 4 cut by a panel edge"
+    "map label إيران squeezed between a panel and the screen edge",
+    "map label العراق cut by a panel edge"
    ]
   },
   {
    "name": "contrast",
    "ok": true,
    "sample": [
-    "text colour off-token rgb(70, 83, 94): \"السيادة\"",
-    "text colour off-token rgb(70, 83, 94): \"الإدارة\"",
-    "text colour off-token rgb(70, 83, 94): \"السيطرة\""
+    "contrast 1.73 for \"السيادة\"",
+    "contrast 1 for \"مصر\"",
+    "contrast 1.73 for \"الإدارة\""
+   ]
+  },
+  {
+   "name": "brief text scrolled away",
+   "ok": true,
+   "sample": [
+    "clipped text (top): \"مخفض\" 823.48..857 y 140..157",
+    "clipped text (top): \"متوازن\" 717.38..746.34 y 140..157",
+    "clipped text (top): \"مرتفع\" 610.94..635.67 y 140..157"
+   ]
+  },
+  {
+   "name": "fade flag without a mask",
+   "ok": true,
+   "sample": [
+    "clipped text (bottom): \"الكهرباء · النقل · المرافق العامة\" 481.03..599 y 361..376",
+    "clipped text (bottom): \"تخطيط التوسعة\" 377..447.28 y 351..368",
+    "control cut by its scroll area (bottom): الإنشاءات والمرافق"
+   ]
+  },
+  {
+   "name": "see-through panel",
+   "ok": true,
+   "sample": [
+    "panel not opaque (opacity 0.60): المحافظة: القاهرة",
+    "brief text not fully visible: القاهرة",
+    "brief text not fully visible: العاصمة"
+   ]
+  },
+  {
+   "name": "faint text",
+   "ok": true,
+   "sample": [
+    "brief text not fully visible: السيادة",
+    "brief text not fully visible: الإدارة",
+    "brief text not fully visible: السيطرة"
+   ]
+  },
+  {
+   "name": "radio order",
+   "ok": true,
+   "sample": [
+    "radio group 1: choices not right to left",
+    "radio group 1: choices not right to left",
+    "radio group 1: circle not right of «الصناعة»"
+   ]
+  },
+  {
+   "name": "decision buttons swapped",
+   "ok": true,
+   "sample": [
+    "decision: «اعتماد البرنامج» must be right of «تأجيل»"
+   ]
+  },
+  {
+   "name": "fit level not the loosest",
+   "ok": true,
+   "sample": [
+    "card at fit level 3: its header would drop below the details' 56 pt",
+    "fit level 3 is not the loosest that fits (level 0 fits)",
+    "fit level 3 is not the loosest that fits (level 1 fits)"
+   ]
+  },
+  {
+   "name": "details not at level 0",
+   "ok": true,
+   "sample": [
+    "details at fit level 2 (want 0: the header keeps the card's 56 pt)"
+   ]
+  },
+  {
+   "name": "no scroll hint",
+   "ok": true,
+   "sample": [
+    "no scroll hint: nothing fades into the bottom edge"
+   ]
+  },
+  {
+   "name": "close not round",
+   "ok": true,
+   "sample": [
+    "close button is not round"
    ]
   },
   {
    "name": "RTL order",
    "ok": true,
    "sample": [
-    "action row 1: order must be tile, text, chip (right to left)",
-    "action row 2: order must be tile, text, chip (right to left)"
+    "link row 1: order must be tile, text, ..., chevron 8 pt from the left edge",
+    "link row 2: order must be tile, text, ..., chevron 8 pt from the left edge"
    ]
   },
   {
@@ -303,24 +384,26 @@
    "ok": true,
    "sample": [
     "card bottom 314.0 (want at least 8 pt above the dock)",
-    "dock hidden under the card"
+    "dock hidden under the card",
+    "the card does not end 8 pt above the dock: [[0,60]]"
    ]
   },
   {
-   "name": "card shows the actions",
+   "name": "card shows the details",
    "ok": true,
    "sample": [
-    "hit overlap الدولة / تفاصيل المحافظة",
-    "hit overlap الاقتصاد / تفاصيل المحافظة",
-    "hit overlap الداخلية والسياسة / تفاصيل المحافظة"
+    "text in bottom inset: الأولوية التنموية",
+    "text in bottom inset: الصناعة",
+    "text in bottom inset: الخدمات"
    ]
   },
   {
    "name": "card width",
    "ok": true,
    "sample": [
-    "sheet width 358 (want round(clamp(43% of 832, 340, 380)), or the room the dock leaves if 330..: 320)",
-    "map label الأردن cut by a panel edge"
+    "sheet width 358 (the card is 320 pt)",
+    "map label الأردن cut by a panel edge",
+    "map label الأردن squeezed between a panel and the screen edge"
    ]
   }
  ]

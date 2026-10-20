@@ -5,10 +5,9 @@
           table and «تفاصيل المحافظة», 320 pt wide at the top right, as tall as its content, ending at least 8 pt above
           the section dock; the whole HUD, dock included, keeps its B3 place;
        2. «تفاصيل المحافظة» opens the full-height sheet with the tabs (?view=govern, the owner's 1st image).
-     ?view=overview keeps the full-height overview of the owner's 2nd image (with the two action rows) for comparison.
      The full-height sheet: a side sheet from the right, from 8 pt under the
      top row down to the dock line. Width clamp(43% of the safe width, 340, 380) pt; where the section dock would just miss
-     the room beside it, the sheet narrows (to 330 at the least) so the dock still fits (15/16: 336). The dock moves to
+     the room beside it, the sheet narrows (to 330 at the least) so the dock still fits (15/16: 335). The dock moves to
      the left end of its line, 4 pt in, 8 pt clear of the sheet (11, 14, 15/16, 16 Pro, 17 Pro Max); on the two 375 pt
      phones (SE, 13 mini) it cannot fit, so it hides while the sheet is open and comes back when the sheet closes.
      Every other HUD element keeps its B3 place and size.
@@ -16,7 +15,9 @@
        overview (?view=overview, the owner's 2nd image): 3 headline numbers, status table, 2 actions, «تفاصيل المحافظة»;
        details (?view=govern, the owner's 1st image): 4 tabs, the governance tab (governor, priority, tax, links,
        a proposed decision). The details body scrolls inside the sheet; a 24 pt fade marks an edge that hides content.
-     Fit levels (fitSheet() measures; the loosest level where the overview needs no scrolling wins):
+     Fit levels (shared with the other panels built on this file). Here: the card takes the loosest level at which it
+     ends 8 pt above the dock (0, or up to 2 on the 13 mini, so its header stays 56 pt); the details always use level 0,
+     so the header keeps the card's 56 pt and the body scrolls. Levels 3-5 serve full-height overviews (the state panel):
        0: as designed (17 Pro Max)          1: block gaps 8 -> 4
        2: also the numbers' padding and the status rows 28 -> 24, body bottom padding 4
        3: also the header 56 -> 48 and the numbers' inner gaps 0
@@ -32,11 +33,10 @@
   [data-rfit="3"] { --rgap: 4px; --rkt: 4px; --rst: 24px; --rpb: 4px; --rh: 48px; --rkl: 14px; --rkm: 0px; --rkr: 0px; }
   [data-rfit="4"] { --rgap: 4px; --rkt: 4px; --rst: 22px; --rpb: 4px; --rh: 48px; --rkl: 14px; --rkm: 0px; --rkr: 0px; }
   [data-rfit="5"] { --rgap: 4px; --rkt: 4px; --rkb: 0px; --rst: 20px; --rpb: 4px; --rh: 44px; --rkl: 14px; --rkm: 0px; --rkr: 0px; }
-  [data-view="overview"] .r-gv, [data-view="govern"] .r-ov { display: none !important; }
-  [data-view="card"] .r-gv, [data-view="card"] .r-acts { display: none !important; }
+  [data-view="govern"] .r-ov, [data-view="card"] .r-gv { display: none !important; }
   [data-view="card"] .sheet { bottom: auto; }
   [data-view="card"] .r-in { position: relative; }          /* the card's height follows its content */
-  [data-view="card"] .r-body { flex: none !important; }
+  [data-view="card"] .r-body { flex: none !important; padding-bottom: var(--s2); }   /* 8 pt under «تفاصيل» at every level */
   /* 4 pt in from the safe edge: the end item «المزيد» is 31 pt wide and its 44 pt hit box must stay out of the side inset */
   [data-dock="left"] .dock { align-self: flex-end; margin-left: var(--s1); }
   [data-dock="hidden"] .dock { display: none; }
@@ -87,7 +87,7 @@
   .r-kv b { font-size: var(--title); line-height: var(--lh-title); font-weight: 700; }
   .r-kv > span { font-size: var(--fs-sec); line-height: var(--lh-sec); font-weight: 500; color: var(--t2); }
   .r-kr { margin-top: var(--rkr); font-size: var(--fs-sec); line-height: var(--lh-sec); font-weight: 500; color: var(--t1); white-space: nowrap; }
-  .r-why { margin-top: var(--rkr); height: 14px; font-size: var(--fs-label); line-height: 14px; font-weight: 700; color: var(--blue); }
+  .r-why { margin-top: var(--rkr); height: 14px; font-size: var(--fs-sec); line-height: 14px; font-weight: 500; color: var(--cyan); }
 
   /* overview: status table */
   .r-st { display: grid; grid-template-columns: 1fr 1fr; column-gap: 16px; border-bottom: 1px solid var(--hair); }
@@ -122,29 +122,33 @@
   .r-tab.on { color: var(--teal); box-shadow: inset 0 -2px 0 var(--teal); }
 
   /* details: governance */
-  .r-gv.r-body { padding-top: var(--s2); gap: var(--s2); }
-  .r-sec { display: flex; flex-direction: column; gap: var(--s1); }
+  .r-gv.r-body { padding-top: var(--s2); padding-bottom: var(--s3); gap: var(--s2); }
+  /* ruled sections, as in the owner's image: a hairline under the first heading and under each section */
+  .r-sec { display: flex; flex-direction: column; gap: var(--s1); padding-bottom: var(--s1); border-bottom: 1px solid var(--hair); }
+  .r-sec:first-child h3 { padding-bottom: var(--s1); border-bottom: 1px solid var(--hair); }
   .r-sec h3, .r-dec h3 { font-size: var(--fs-sec); line-height: var(--lh-sec); font-weight: 600; }
   .r-gov { display: flex; align-items: center; gap: var(--s2); height: 26px; }
   .r-gl { font-size: var(--fs-sec); line-height: var(--lh-sec); font-weight: 500; color: var(--t2); }
   .r-gn { flex: 1; text-align: center; font-size: var(--fs-sec); line-height: var(--lh-sec); font-weight: 600; }
   .r-btn.tap::before { width: max(100% + 2px, 44px); height: max(100% + 2px, 44px); }   /* cover the 1 pt border too */
-  .r-btn { flex: none; height: 24px; padding-inline: var(--s3); border-radius: 6px; border: 1px solid rgba(63, 224, 208, .75); background: rgba(63, 224, 208, .06);
-    color: var(--teal); font-size: var(--fs-sec); line-height: 22px; font-weight: 600; white-space: nowrap; }
-  .r-grey { border-color: rgba(169, 188, 203, .5); background: transparent; color: var(--t1); }
+  /* actions: a blue outline with cyan text (teal stays for selected states: the open tab, the chosen radio), as in the image */
+  .r-btn { flex: none; height: 24px; padding-inline: var(--s3); border-radius: 6px; border: 1px solid rgba(111, 182, 255, .6); background: rgba(111, 182, 255, .06);
+    color: var(--cyan); font-size: var(--fs-sec); line-height: 22px; font-weight: 600; white-space: nowrap; }
+  .r-grey { border-color: rgba(111, 182, 255, .3); background: transparent; color: var(--cyan); }
   .r-radios { display: grid; grid-template-columns: repeat(3, 1fr); height: 26px; align-items: center; }
   .r-rd { display: flex; align-items: center; gap: var(--s2); height: 26px; font-size: var(--fs-sec); line-height: var(--lh-sec); font-weight: 500; color: var(--t1); white-space: nowrap; }
   .r-rd i { position: relative; flex: none; width: 16px; height: 16px; border-radius: 50%; box-shadow: inset 0 0 0 1.5px var(--t2); }
   .r-rd.on { color: var(--teal); font-weight: 600; }
   .r-rd.on i { box-shadow: inset 0 0 0 1.5px var(--teal); }
   .r-rd.on i::after { content: ""; position: absolute; inset: 4px; border-radius: 50%; background: var(--teal); }
-  .r-links { display: flex; flex-direction: column; gap: var(--s1); margin-top: var(--s1); }   /* 12 pt after the radios: their hit boxes reach 9 pt below them */
+  .r-links { display: flex; flex-direction: column; gap: var(--s1); }   /* 13 pt after the radios (section padding 4 + rule 1 + gap 8): their hit boxes reach 9 pt below them */
   .r-link { display: flex; align-items: center; gap: var(--s2); height: 44px; padding-inline: 5px var(--s2); }
   .r-link .r-tile { width: 34px; height: 34px; }
   .r-link .r-at > span { font-size: var(--fs-label); line-height: var(--lh-label); }
   .r-dec { padding: 0 var(--s3) var(--s2); }
-  .r-dec h3 { height: 24px; display: flex; align-items: center; margin-inline: calc(-1 * var(--s3)); padding-inline: var(--s3); border-bottom: 1px solid var(--hair); color: var(--t2); font-weight: 600; }
-  .r-dbody { display: grid; grid-template-columns: var(--ico-dock) 1fr; column-gap: var(--s2); padding-top: var(--s2); }
+  .r-dec h3 { height: 24px; display: flex; align-items: center; margin-inline: calc(-1 * var(--s3)); padding-inline: var(--s3); border-bottom: 1px solid var(--hair); color: var(--cyan); font-weight: 600; }
+  .r-dbody { position: relative; display: grid; grid-template-columns: var(--ico-dock) 1fr; column-gap: var(--s2); padding-top: var(--s2); }
+  .r-dbody::before { content: ""; position: absolute; top: var(--s2); bottom: 0; right: calc(var(--ico-dock) + var(--s1)); width: 1px; background: var(--hair); }   /* divider beside the icon */
   .r-dic { width: var(--ico-dock) !important; height: var(--ico-dock) !important; color: var(--cyan); margin-top: 0; }
   .r-dtx { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
   .r-dtx b { font-size: var(--fs-val); line-height: var(--lh-val); font-weight: 600; }
