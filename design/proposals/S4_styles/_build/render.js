@@ -12,7 +12,7 @@ const IDS = process.argv.slice(2).length ? process.argv.slice(2) : ['i16promax']
   const b = await chromium.launch({ executablePath: process.env.CHROMIUM_PATH || undefined, args: ['--no-sandbox'] });
   for (const id of IDS) {
     const d = DEV.find((x) => x.id === id);
-    for (const th of [1, 2, 3]) {
+    for (const th of (process.env.THEMES || "1,2,3,4,5").split(",").map(Number)) {
       const ctx = await b.newContext({ viewport: { width: d.w, height: d.h }, deviceScaleFactor: 3 });
       const p = await ctx.newPage();
       const errs = [];
