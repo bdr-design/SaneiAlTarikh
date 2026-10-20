@@ -1,0 +1,169 @@
+{
+ "ranAt": "2026-10-20T10:38:10.681Z",
+ "device": "i16promax",
+ "cleanIssues": [],
+ "results": [
+  {
+   "name": "type size",
+   "ok": true,
+   "sample": [
+    "font size 17 for \"القاهرة\""
+   ]
+  },
+  {
+   "name": "18 pt misuse",
+   "ok": true,
+   "sample": [
+    "18 pt is for the province name only: \"مصر\""
+   ]
+  },
+  {
+   "name": "control height",
+   "ok": true,
+   "sample": [
+    "control height 30.00: إغلاق",
+    "control height 30.00 for .xbtn (want 32)"
+   ]
+  },
+  {
+   "name": "radius",
+   "ok": true,
+   "sample": [
+    "control radius 8: السكان 8.8 مليون، ثابت. لم",
+    "control radius 8: الاضطراب 64، في ارتفاع. لم",
+    "control radius 8: البنية التحتية 8 من 10، ثا"
+   ]
+  },
+  {
+   "name": "gap",
+   "ok": true,
+   "sample": [
+    "gap 6 on السكان 8.8 مليونلماذا؟ الا",
+    "gap 6 on السكان 8.8 مليونلماذا؟ الا"
+   ]
+  },
+  {
+   "name": "hit overlap",
+   "ok": true,
+   "sample": [
+    "sheet block gap 2.00 before .seg",
+    "hit overlap السكان 8.8 مليون، ثابت. لم / عام",
+    "hit overlap السكان 8.8 مليون، ثابت. لم / المجتمع"
+   ]
+  },
+  {
+   "name": "side inset",
+   "ok": true,
+   "sample": [
+    "text in side inset: القاهرة",
+    "text in side inset: السيادة",
+    "text in side inset: مصر"
+   ]
+  },
+  {
+   "name": "bottom inset",
+   "ok": true,
+   "sample": [
+    "tap in bottom inset/off top: تعزيز الأمن 0.2 مليار $ /  381.0..425.0",
+    "sheet bottom 434 (want the dock line 418)"
+   ]
+  },
+  {
+   "name": "contrast",
+   "ok": true,
+   "sample": [
+    "text colour off-token rgb(70, 83, 94): \"مصر\"",
+    "contrast 2.35 for \"مصر\""
+   ]
+  },
+  {
+   "name": "ellipsis",
+   "ok": true,
+   "sample": [
+    "ellipsis on \"الحزب الوطني الديمقراطي\"",
+    "clipped text: \"الحزب الوطني الديمقراطي\" 488.72..618 y 231..250",
+    "text outside the sheet's 12 pt padding: \"الحزب الوطني الديمقراطي\""
+   ]
+  },
+  {
+   "name": "clipped",
+   "ok": true,
+   "sample": [
+    "clipped text: \"مليون\" 850.22..873 y 179..194",
+    "clipped text: \"لماذا؟\" 774.91..802.22 y 161..178",
+    "clipped text: \"8 / 10\" 646.66..652.34 y 175..194"
+   ]
+  },
+  {
+   "name": "text overlap",
+   "ok": true,
+   "sample": [
+    "text overlap \"القاهرة\" / \"العاصمة\""
+   ]
+  },
+  {
+   "name": "panel not opaque",
+   "ok": true,
+   "sample": [
+    "panel not opaque: المحافظة: القاهرة rgba(9, 17, 25, 0.66)",
+    "contrast 4.21 for \"السكان\"",
+    "contrast 4.21 for \"مليون\""
+   ]
+  },
+  {
+   "name": "Cairo covered",
+   "ok": true,
+   "sample": [
+    "Cairo highlight covered by panel المحافظة: القاهرة",
+    "Cairo highlight under the hit box of السكان 8.8 مليون، ثابت. لم",
+    "Cairo highlight under the hit box of الاضطراب 64، في ارتفاع. لم"
+   ]
+  },
+  {
+   "name": "sheet width",
+   "ok": true,
+   "sample": [
+    "sheet width 330 (want clamp(42% of 832, 340, 440) = 349.4)"
+   ]
+  },
+  {
+   "name": "dock under sheet",
+   "ok": true,
+   "sample": [
+    "hit overlap الدولة / تعزيز الأمن 0.2 مليار $ / ",
+    "hit overlap الاقتصاد / تعزيز الأمن 0.2 مليار $ / ",
+    "hit overlap الداخلية والسياسة / تعزيز الأمن 0.2 مليار $ / "
+   ]
+  },
+  {
+   "name": "icon",
+   "ok": true,
+   "sample": [
+    "icon size ctl 18x16",
+    "icon size ctl 18x16",
+    "icon size ctl 18x16"
+   ]
+  },
+  {
+   "name": "off-token colour",
+   "ok": true,
+   "sample": [
+    "text colour off-token rgb(136, 153, 170): \"الحزب الحاكم في المحافظة\"",
+    "text colour off-token rgb(136, 153, 170): \"التأييد\""
+   ]
+  },
+  {
+   "name": "long status re-fits to two rows",
+   "ok": true,
+   "sample": []
+  },
+  {
+   "name": "long status forced into one strip",
+   "ok": true,
+   "sample": [
+    "text outside the sheet's 12 pt padding: \"دولتان مجاورتان\"",
+    "contrast 2.24 for \"دولتان مجاورتان\""
+   ]
+  }
+ ]
+}
