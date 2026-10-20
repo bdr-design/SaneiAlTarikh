@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>هوية الأقسام</title>
+<style>
+  /* Section identity board (proposal, 2026-10-20): the 8 dock sections, each with one identity colour (kept out of the
+     colours that carry meaning: teal, cyan, blue, amber, red), its icon and its contents. Colours from identity.css. */
+  :root {
+    --sec-state: #E9EEF4;      /* الدولة: لؤلؤي */
+    --sec-econ: #43C08A;       /* الاقتصاد: زمردي */
+    --sec-pol: #A08CFF;        /* الداخلية والسياسة: بنفسجي */
+    --sec-army: #BDB46A;       /* الجيش: زيتي */
+    --sec-foreign: #5B86F2;    /* الخارجية: أزرق ملكي */
+    --sec-intel: #C873D6;      /* الاستخبارات: أرجواني */
+    --sec-research: #9EDB5B;   /* البحث: ليموني */
+    --sec-more: #A9BCCB;       /* المزيد: رمادي */
+    --sec: var(--sec-state);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 956px; height: 440px; overflow: hidden; }
+  body { background: rgb(9, 15, 21); color: #EAF2F7; font-family: "IBM Plex Sans Arabic", system-ui, sans-serif; -webkit-font-smoothing: antialiased; padding: 18px 62px 0; line-height: 1; }
+  svg.i { width: 17px; height: 17px; fill: none; stroke: currentColor; stroke-width: 1.75; stroke-linecap: round; stroke-linejoin: round; display: block; }
+  header { display: flex; align-items: baseline; gap: 12px; height: 28px; }
+  header h1 { white-space: nowrap; font-size: 18px; line-height: 22px; font-weight: 700; }
+  header span { font-size: 11.5px; line-height: 14px; color: #A9BCCB; white-space: nowrap; }
+  .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-top: 10px; }
+  .card { position: relative; height: 132px; padding: 12px 12px 10px; border-radius: 12px; background: rgb(12, 20, 28); box-shadow: inset 0 0 0 1px rgba(127, 233, 255, .14); overflow: hidden;
+    display: flex; flex-direction: column; gap: 8px; }
+  .line { position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--c); }
+  .hd { display: flex; align-items: center; gap: 8px; }
+  .emb { flex: none; width: 32px; height: 32px; border-radius: 8px; display: grid; place-items: center; color: var(--c);
+    background: color-mix(in srgb, var(--c) 16%, rgb(6, 11, 16)); box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--c) 45%, transparent); }
+  h2 { font-size: 14px; line-height: 17px; font-weight: 700; white-space: nowrap; }
+  .cn { font-size: 10px; line-height: 12px; font-weight: 500; color: var(--c); }
+  p { font-size: 10px; line-height: 14px; font-weight: 500; color: #A9BCCB; height: 28px; }
+  .tabs { margin-top: auto; display: flex; gap: 12px; height: 24px; border-bottom: 1px solid rgba(127, 233, 255, .13); }
+  .tabs span { font-size: 11.5px; line-height: 22px; font-weight: 600; color: #EAF2F7; }
+  .tabs .on { color: var(--c); box-shadow: inset 0 -2px 0 var(--c); }
+  .dockcap { margin-top: 12px; font-size: 11.5px; line-height: 14px; color: #A9BCCB; }
+  .dock { margin-top: 6px; height: 44px; display: flex; justify-content: center; gap: 2px; padding-inline: 8px; border-radius: 12px; background: rgb(12, 20, 28); box-shadow: inset 0 0 0 1px rgba(127, 233, 255, .14); width: max-content; margin-inline: auto; }
+  .di { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; padding-inline: 6px; color: var(--c); }
+  .di b { font-size: 10px; line-height: 12px; font-weight: 500; white-space: nowrap; }
+</style>
+</head>
+<body>
+  <svg width="0" height="0" style="position: absolute"><defs>
+    <symbol id="i-state" viewBox="0 0 24 24"><path d="M3.5 9 12 4l8.5 5"/><path d="M3.5 9h17"/><path d="M6 12v5.5M10 12v5.5M14 12v5.5M18 12v5.5"/><path d="M4 20.5h16"/></symbol>
+    <symbol id="i-econ" viewBox="0 0 24 24"><path d="M4 20h16"/><path d="M7 16.5v-4M11 16.5V8.5M15 16.5v-6M19 16.5V5"/></symbol>
+    <symbol id="i-pol" viewBox="0 0 24 24"><path d="M4 11.5h16v8.5H4z"/><path d="M8 11.5V4h8v7.5"/><path d="M10.2 7.8l1.4 1.4 2.3-2.6"/><path d="M8.5 15.5h7"/></symbol>
+    <symbol id="i-army" viewBox="0 0 24 24"><path d="M12 3l7 2.8v5.4c0 4.3-2.9 7.9-7 9.8-4.1-1.9-7-5.5-7-9.8V5.8z"/><path d="M9 10l3 2 3-2"/><path d="M9 13.5l3 2 3-2"/></symbol>
+    <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.75"/><path d="M3.25 12h17.5"/><path d="M12 3.25c2.4 2.4 3.6 5.3 3.6 8.75S14.4 18.35 12 20.75C9.6 18.35 8.4 15.45 8.4 12S9.6 5.65 12 3.25z"/></symbol>
+    <symbol id="i-eye" viewBox="0 0 24 24"><path d="M2.75 12S6.2 5.75 12 5.75 21.25 12 21.25 12 17.8 18.25 12 18.25 2.75 12 2.75 12z"/><circle cx="12" cy="12" r="2.9"/></symbol>
+    <symbol id="i-flask" viewBox="0 0 24 24"><path d="M9 3.5h6"/><path d="M10 3.5v5.7L5.1 17.8A2 2 0 0 0 6.8 20.75h10.4a2 2 0 0 0 1.7-2.95L14 9.2V3.5"/><path d="M7.3 15h9.4"/></symbol>
+    <symbol id="i-more" viewBox="0 0 24 24"><rect x="4" y="4" width="6.5" height="6.5" rx="1.6"/><rect x="13.5" y="4" width="6.5" height="6.5" rx="1.6"/><rect x="4" y="13.5" width="6.5" height="6.5" rx="1.6"/><rect x="13.5" y="13.5" width="6.5" height="6.5" rx="1.6"/></symbol>
+  </defs></svg>
+  <header><h1>هوية الأقسام</h1><span>لون القسم على إطاره فقط: خط اللوحة، الشارة، التبويب المفتوح، زر الشريط. ألوان البيانات ثابتة في كل الأقسام.</span></header>
+  <section class="grid">
+      <article class="card" style="--c: var(--sec-state)"><span class="line"></span>
+        <div class="hd"><span class="emb"><svg class="i"><use href="#i-state"/></svg></span><div><h2>الدولة</h2><span class="cn">لؤلؤي</span></div></div>
+        <p>القيادة · الدستور · السياسات · المشاريع</p>
+        <div class="tabs"><span class="on">تبويب مفتوح</span><span>تبويب</span></div>
+      </article>
+      <article class="card" style="--c: var(--sec-econ)"><span class="line"></span>
+        <div class="hd"><span class="emb"><svg class="i"><use href="#i-econ"/></svg></span><div><h2>الاقتصاد</h2><span class="cn">زمردي</span></div></div>
+        <p>الميزانية · الضرائب · الدين · الأسواق</p>
+        <div class="tabs"><span class="on">تبويب مفتوح</span><span>تبويب</span></div>
+      </article>
+      <article class="card" style="--c: var(--sec-pol)"><span class="line"></span>
+        <div class="hd"><span class="emb"><svg class="i"><use href="#i-pol"/></svg></span><div><h2>الداخلية والسياسة</h2><span class="cn">بنفسجي</span></div></div>
+        <p>السكان · الاضطرابات · الأحزاب · الانتخابات</p>
+        <div class="tabs"><span class="on">تبويب مفتوح</span><span>تبويب</span></div>
+      </article>
+      <article class="card" style="--c: var(--sec-army)"><span class="line"></span>
+        <div class="hd"><span class="emb"><svg class="i"><use href="#i-army"/></svg></span><div><h2>الجيش</h2><span class="cn">زيتي</span></div></div>
+        <p>الجيوش · الإنتاج · الحروب · الردع</p>
+        <div class="tabs"><span class="on">تبويب مفتوح</span><span>تبويب</span></div>
+      </article>
+      <article class="card" style="--c: var(--sec-foreign)"><span class="line"></span>
+        <div class="hd"><span class="emb"><svg class="i"><use href="#i-globe"/></svg></span><div><h2>الخارجية</h2><span class="cn">أزرق ملكي</span></div></div>
+        <p>العلاقات · المعاهدات · العقوبات · مجلس الأمن</p>
+        <div class="tabs"><span class="on">تبويب مفتوح</span><span>تبويب</span></div>
+      </article>
+      <article class="card" style="--c: var(--sec-intel)"><span class="line"></span>
+        <div class="hd"><span class="emb"><svg class="i"><use href="#i-eye"/></svg></span><div><h2>الاستخبارات</h2><span class="cn">أرجواني</span></div></div>
+        <p>الشبكات · العمليات · مكافحة التجسس</p>
+        <div class="tabs"><span class="on">تبويب مفتوح</span><span>تبويب</span></div>
+      </article>
+      <article class="card" style="--c: var(--sec-research)"><span class="line"></span>
+        <div class="hd"><span class="emb"><svg class="i"><use href="#i-flask"/></svg></span><div><h2>البحث</h2><span class="cn">ليموني</span></div></div>
+        <p>المجالات الثمانية · الأولوية · التعاون</p>
+        <div class="tabs"><span class="on">تبويب مفتوح</span><span>تبويب</span></div>
+      </article>
+      <article class="card" style="--c: var(--sec-more)"><span class="line"></span>
+        <div class="hd"><span class="emb"><svg class="i"><use href="#i-more"/></svg></span><div><h2>المزيد</h2><span class="cn">رمادي</span></div></div>
+        <p>الحفظ · الإعدادات · الإحصاءات · المصادر</p>
+        <div class="tabs"><span class="on">تبويب مفتوح</span><span>تبويب</span></div>
+      </article>
+  </section>
+  <p class="dockcap">خيار: الشريط تحت ملوّن دايمًا بألوان الأقسام (يسهل الوصول)، أو محايد ويتلوّن القسم المفتوح فقط.</p>
+  <nav class="dock"><span class="di" style="--c: var(--sec-state)"><svg class="i"><use href="#i-state"/></svg><b>الدولة</b></span><span class="di" style="--c: var(--sec-econ)"><svg class="i"><use href="#i-econ"/></svg><b>الاقتصاد</b></span><span class="di" style="--c: var(--sec-pol)"><svg class="i"><use href="#i-pol"/></svg><b>الداخلية والسياسة</b></span><span class="di" style="--c: var(--sec-army)"><svg class="i"><use href="#i-army"/></svg><b>الجيش</b></span><span class="di" style="--c: var(--sec-foreign)"><svg class="i"><use href="#i-globe"/></svg><b>الخارجية</b></span><span class="di" style="--c: var(--sec-intel)"><svg class="i"><use href="#i-eye"/></svg><b>الاستخبارات</b></span><span class="di" style="--c: var(--sec-research)"><svg class="i"><use href="#i-flask"/></svg><b>البحث</b></span><span class="di" style="--c: var(--sec-more)"><svg class="i"><use href="#i-more"/></svg><b>المزيد</b></span></nav>
+</body>
+</html>
