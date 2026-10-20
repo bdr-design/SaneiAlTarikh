@@ -2051,6 +2051,28 @@ These answers override the defaults below. They are logged in `decisions/decisio
 | D-21 | **No device loan possible** | Replaced by: an "XR budget mode" in debug builds on the owner's phone (XR memory cap, 16 MB tile cache, 60 Hz cap, time budgets tightened by the measured speed gap); deterministic work counters in Linux CI; and XR-size layout and UI tests on the iOS Simulator in GitHub Actions. Real A12 heat, GPU and battery remain unmeasured: an accepted risk. |
 | D-28 | Saves in Documents plus an optional mirror | As recommended. |
 | D-29 | Government chooser | As recommended. Needs one screen design. |
+| D-2 | Medium imagery (z7) | As recommended; final after the device test. |
+| D-2b | Light label method (glyph distance-field atlas) | As recommended. |
+| D-3 | **Opaque panels always, no blur** | The owner chose lightness over the approved glass. Shown as a proposal first (`design/proposals/D3_panels`); not applied to any approved design until the owner confirms the look. |
+| D-5 | Maximum zoom about 1 km/pt | As recommended; final after the device test. |
+| D-7 | يناير… with a setting | As recommended. |
+| D-10 | Parties: tier A about 40 by province, tier B about 80 modelled | As recommended. |
+| D-11 | About 10 releasable states | As recommended. |
+| D-13 | Generic agency names | As recommended. |
+| D-14 | Historical killings as neutral news only | As recommended. |
+| D-15 | **Smooth, realistic unit movement** (owner's reference: a "General / World War" style mobile game) | Replaces discrete jumps. Must stay light: animate only on-screen moving units, draw frames only while something moves, simplify at maximum speed or when hot. A moving prototype needs the owner's approval with the military screen. |
+| D-17 | Free OFL Arabic logo font from 3 samples | As recommended. |
+| D-18 | Flexible historical events | As recommended. |
+| D-19 | Fog of war as estimates | As recommended. |
+| D-20 | Climate on, with a toggle | As recommended. |
+| D-22 | Events 80 / 50 / 40 | As recommended. |
+| D-23 | Historical packs reuse the 2004 imagery | As recommended. |
+| D-24 | Campaign ends at 2100 | As recommended. |
+| D-25 | **Early version first** | A playable v0.5 after M3 (map, economy, politics, events; no military yet), then M4–M8. Same total range, re-estimated after M0b and M1a. |
+| D-26 | NASA Blue Marble NG with topography and bathymetry | Chosen from the owner's criteria (light and realistic). An AI-generated map was declined because it cannot match real geography. Pending: bathymetry licence check; owner approves the look on the device. |
+| D-27 | Equipment: 20-year spending + legacy stock + imports | As recommended. |
+| D-30 | No personality traits for real leaders | As recommended. |
+| D-31 | Small-phone top row | Covered: the owner approved screen 1 (B3) after seeing all 7 devices. |
 
 ### 13.1 Design and technical choices
 
