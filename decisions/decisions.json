@@ -42,7 +42,7 @@
   "repository": "D-1: new PUBLIC repository (user's choice; free standard CI runners; code visible to everyone)",
   "autosaveCadence": "D-4: each in-game month, at most once per 2 real minutes",
   "maxSpeed": "D-16: 30 in-game days per second (2011 to 2100 in about 18 min)",
-  "godPresetName": "D-12: the 'God' preset is named «حكم مطلق» (user's own wording)",
+  "godPresetName": "D-12: the preset keeps the English name 'God'. On 2026-10-20 the owner first chose «حكم مطلق», then approved the original settings page with 'God', knowing this reverses that choice",
   "electionLoss": "D-9: player plays on in OPPOSITION after losing an election until returning to power (+3-4 weeks; needs opposition gameplay and its screens)",
   "disputed2011": "D-8: as in reality on 1 Jan 2011 (PA playable; Gaza Hamas-led de facto government inside polity pse; East Jerusalem and Golan 'annexation not recognised'; Western Sahara split at the berm; limited-recognition label)",
   "rivalGovernments": "D-29: any government administering a province at start is playable via a small chooser (UN-seat holder default); chooser needs a design approval",
@@ -53,6 +53,7 @@
   "menuBackground": "user will send a larger version (>= 2868x1320, same composition)",
   "imageGenerator": "all game images made by the owner with ChatGPT (OpenAI) on a paid plan; terms to re-check before release",
   "publicPersonalDetails": "owner keeps phone model, no-Mac and sideload-with-signing-certificate details public",
-  "oldGameMentions": "remove mentions of the old game's failures from public documents (done 2026-10-20)"
+  "oldGameMentions": "remove mentions of the old game's failures from public documents (done 2026-10-20)",
+  "screen3NewGame": "APPROVED 2026-10-20: the three pages exactly as the owner first chose them on iPhone 17 Pro Max (p1A, p2B, p3B; pixel-identical), fitted to all 7 iPhones. The cross-page header unification was declined, so page 1 keeps its plain-text back button"
  }
 }

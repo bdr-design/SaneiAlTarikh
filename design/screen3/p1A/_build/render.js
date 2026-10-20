@@ -116,8 +116,6 @@ async function measure(p, d) {
       ['paddingTop', 'paddingBottom', 'paddingLeft', 'paddingRight'].forEach((k) => {
         const v = parseFloat(cs[k]);
         if (e.matches('.step .n') && k === 'paddingTop' && near(v, 1)) return;
-        // the header holds the 32 pt back chip 2 pt inside the 36 pt bar (10 pt radius concentric with the bar's 12), as on p2B / p3B
-        if (e.matches('.hdr') && (k === 'paddingLeft' || k === 'paddingRight') && near(v, 2)) return;
         if (![0, 4, 8, 10, 12].some((x) => near(x, v))) issues.push(`padding off scale ${e.className} ${k} ${v}`);
       });
       if (cs.textOverflow === 'ellipsis') issues.push(`ellipsis on ${e.className}`);

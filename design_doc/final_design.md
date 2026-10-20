@@ -2046,7 +2046,7 @@ These answers override the defaults below. They are logged in `decisions/decisio
 | D-6 | Nominal current USD | As recommended. |
 | D-8 | Disputed areas as in reality on 1 Jan 2011 | As recommended (§4.5). |
 | D-9 | **Play on in opposition** after losing an election | About +3–4 weeks in M3. Needs opposition gameplay and a designed opposition screen. |
-| D-12 | God preset named **«حكم مطلق»** | The owner's own wording; replaces «صلاحيات مطلقة». |
+| D-12 | God preset keeps the name **God** | The owner first chose «حكم مطلق», then approved the settings page with "God" (2026-10-20). |
 | D-16 | Maximum speed 30 days/s | As recommended. |
 | D-21 | **No device loan possible** | Replaced by: an "XR budget mode" in debug builds on the owner's phone (XR memory cap, 16 MB tile cache, 60 Hz cap, time budgets tightened by the measured speed gap); deterministic work counters in Linux CI; and XR-size layout and UI tests on the iOS Simulator in GitHub Actions. Real A12 heat, GPU and battery remain unmeasured: an accepted risk. |
 | D-28 | Saves in Documents plus an optional mirror | As recommended. |
