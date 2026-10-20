@@ -33,10 +33,10 @@ t = t[:m0] + (S / 'sheet.html').read_text(encoding='utf-8').rstrip('\n') + t[m1:
 
 sub('<title>لوحة المحافظة A</title>', '<title>لوحة المحافظة R</title>')
 sub("     &tab=politics|society|economy|security opens that tab of the province sheet (default politics = «السياسة»).\n",
-    "     &view=govern opens «تفاصيل المحافظة» (the governance tab) instead of the overview, &scroll=end scrolls the open\n"
-    "     view to its end.\n")
+    "     &view=govern opens «تفاصيل المحافظة» (the full-height details, governance tab) instead of the card,\n"
+    "     &view=overview the full-height overview, &scroll=end scrolls the open view to its end.\n")
 sub("    r.dataset.tab = ['politics', 'society', 'economy', 'security'].indexOf(q.get('tab')) >= 0 ? q.get('tab') : 'politics';\n",
-    "    r.dataset.view = q.get('view') === 'govern' ? 'govern' : 'overview';\n"
+    "    r.dataset.view = ['govern', 'overview'].indexOf(q.get('view')) >= 0 ? q.get('view') : 'card';\n"
     "    window.__scrollEnd = q.get('scroll') === 'end';\n")
 
 # the sheet's layout functions (A's fitStatus / fitSheet were for A's markup)
@@ -46,10 +46,12 @@ cut('  /* ---------- Province sheet ---------- */', '  /* Place the map so Cairo
   /* Width = clamp(43% of the safe width, 340, 380) pt, rounded to whole points (the owner's image: about 37% of the
      whole screen, which is 43% of the safe width on the 17 Pro Max). Where the section dock would just miss the room
      left of the sheet (4 pt in + dock + 8 pt), the sheet narrows to make that room, down to 330 pt at the least. */
+  var CARD_W = 320;   /* the card: wide enough for the status table's longest pair («السيطرة» + «الحكومة · 100%») */
   function sizeSheet() {
     var d = window.__dev, safe = d.W - 2 * d.SIDE, want = Math.round(Math.min(380, Math.max(340, 0.43 * safe)));
     var hud = $('.hud').getBoundingClientRect(), room = Math.floor(hud.width - 4 - $('.dock').getBoundingClientRect().width - 8);
     if (room < want && room >= 330) want = room;
+    if (document.documentElement.dataset.view === 'card') want = CARD_W;
     document.documentElement.style.setProperty('--sheet-w', want + 'px');
     window.__sheet = { safe: safe, want: want, roomForDock: room };
   }
@@ -60,16 +62,31 @@ cut('  /* ---------- Province sheet ---------- */', '  /* Place the map so Cairo
   function placeSheet() {
     var root = document.documentElement;
     root.style.setProperty('--sheet-b', '0px');
+    if (root.dataset.view === 'card') { root.dataset.dock = 'b3'; window.__sheetpos = { dock: 'b3' }; return; }   /* the card leaves the dock alone */
     root.dataset.dock = 'left';
     var dk = $('.dock').getBoundingClientRect(), sh = $('.sheet').getBoundingClientRect();
     if (dk.right > sh.left - 8) root.dataset.dock = 'hidden';
     window.__sheetpos = { dock: root.dataset.dock, dockRight: dk.right, sheetLeft: sh.left };
   }
 
-  /* Pick the loosest fit level (panel.css) at which the overview shows everything without scrolling. Both views
-     share the level, so the header does not change size when the player opens the details. */
+  /* Pick the loosest fit level (panel.css). The card: the loosest level at which it ends at least 8 pt above the dock.
+     The full-height sheet: the loosest level at which the overview shows everything without scrolling (the details
+     share it, so the header keeps its size when the player switches between them). */
   function fitSheet() {
     var root = document.documentElement, view = root.dataset.view, b = $('.r-body.r-ov'), tried = [], lv;
+    if (view === 'card') {
+      var dockTop = $('.dock').getBoundingClientRect().top;
+      for (lv = 0; lv <= 5; lv++) {
+        root.dataset.rfit = String(lv);
+        var gap = dockTop - $('.sheet').getBoundingClientRect().bottom;
+        tried.push([lv, +gap.toFixed(2)]);
+        if (gap >= 8 - 0.01) break;
+      }
+      if (lv > 5) lv = 5;
+      root.dataset.rfit = String(lv);
+      window.__sheetfit = { level: lv, tried: tried, fits: tried[tried.length - 1][1] >= 8 - 0.01 };
+      return;
+    }
     root.dataset.view = 'overview';
     for (lv = 0; lv <= 5; lv++) {
       root.dataset.rfit = String(lv);
@@ -105,7 +122,8 @@ sub('  </defs>', '''    <symbol id="i-flame" viewBox="0 0 24 24"><path d="M12 21
     <symbol id="i-bus" viewBox="0 0 24 24"><rect x="5" y="3.5" width="14" height="15" rx="2.5"/><path d="M5 7.25h14M5 12h14"/><path d="M8 18.5v2M16 18.5v2"/><path d="M8.5 15.25h.01M15.5 15.25h.01" stroke-width="2.4"/></symbol>
   </defs>''')
 
-# the tapped province as in the owner's images: a blue-violet halo and fill, a white ring, a white name pill.
+# the tapped province as in the owner's images: a blue-violet halo and fill, a white ring, a white name pill
+# (set a little below the ring, clear of the «الإسكندرية» label at the smallest zoom).
 # One soft halo + one outline, drawn only for the selected province (in the app: one pre-blurred sprite, no live blur).
 s0 = t.index('  <svg class="sel" viewBox="0 0 1688 1097">')
 s1 = t.index('  </svg>', s0) + len('  </svg>')
@@ -115,8 +133,8 @@ t = t[:s0] + '''  <svg class="sel" viewBox="0 0 1688 1097">
     <path id="cairo" d="M795,467L797,485L779,486L777,474Z" fill="#6E6BFF" fill-opacity="0.75" stroke="#D2CEFF" stroke-width="2.5"/>
     <circle class="ring" cx="787" cy="477" r="7" fill="#3E63F2" stroke="#FFFFFF" stroke-width="3.5"/>
     <g class="pin">
-      <rect x="808" y="458" width="78" height="32" rx="8" fill="#FFFFFF"/>
-      <text x="847" y="480" text-anchor="middle" font-size="18" font-weight="700" fill="#0B1218">القاهرة</text>
+      <rect x="808" y="464" width="78" height="32" rx="8" fill="#FFFFFF"/>
+      <text x="847" y="486" text-anchor="middle" font-size="18" font-weight="700" fill="#0B1218">القاهرة</text>
     </g>
   </svg>''' + t[s1:]
 # Cairo's own dot and name give way to the selection ring and pill

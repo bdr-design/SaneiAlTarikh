@@ -1,5 +1,12 @@
   /* ================= Screen 4, variant R: the province panel after the owner's two reference images =================
-     (2026-10-20; go-ahead: «شوف المناسب اللي مايثقل على اللعبة وسوه»). A side sheet from the right, from 8 pt under the
+     (2026-10-20; go-ahead: «شوف المناسب اللي مايثقل على اللعبة وسوه»; then «لابد التركيز يكون الخريطة هي مركز الاساس»).
+     Two steps, so the map stays the centre:
+       1. the card (?view=card, the default when a province is tapped): header, the 3 headline numbers, the status
+          table and «تفاصيل المحافظة», 320 pt wide at the top right, as tall as its content, ending at least 8 pt above
+          the section dock; the whole HUD, dock included, keeps its B3 place;
+       2. «تفاصيل المحافظة» opens the full-height sheet with the tabs (?view=govern, the owner's 1st image).
+     ?view=overview keeps the full-height overview of the owner's 2nd image (with the two action rows) for comparison.
+     The full-height sheet: a side sheet from the right, from 8 pt under the
      top row down to the dock line. Width clamp(43% of the safe width, 340, 380) pt; where the section dock would just miss
      the room beside it, the sheet narrows (to 330 at the least) so the dock still fits (15/16: 336). The dock moves to
      the left end of its line, 4 pt in, 8 pt clear of the sheet (11, 14, 15/16, 16 Pro, 17 Pro Max); on the two 375 pt
@@ -26,6 +33,10 @@
   [data-rfit="4"] { --rgap: 4px; --rkt: 4px; --rst: 22px; --rpb: 4px; --rh: 48px; --rkl: 14px; --rkm: 0px; --rkr: 0px; }
   [data-rfit="5"] { --rgap: 4px; --rkt: 4px; --rkb: 0px; --rst: 20px; --rpb: 4px; --rh: 44px; --rkl: 14px; --rkm: 0px; --rkr: 0px; }
   [data-view="overview"] .r-gv, [data-view="govern"] .r-ov { display: none !important; }
+  [data-view="card"] .r-gv, [data-view="card"] .r-acts { display: none !important; }
+  [data-view="card"] .sheet { bottom: auto; }
+  [data-view="card"] .r-in { position: relative; }          /* the card's height follows its content */
+  [data-view="card"] .r-body { flex: none !important; }
   /* 4 pt in from the safe edge: the end item «المزيد» is 31 pt wide and its 44 pt hit box must stay out of the side inset */
   [data-dock="left"] .dock { align-self: flex-end; margin-left: var(--s1); }
   [data-dock="hidden"] .dock { display: none; }

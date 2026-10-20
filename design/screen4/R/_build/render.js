@@ -1,11 +1,13 @@
 // Screen 4 variant R (the province panel after the owner's two reference images): render the iPhones and run the checks.
-// Writes <id>.png (overview) to the variant folder; <id>_govern.png, <id>_govern_end.png, <id>_hit.png and report.json to _build.
+// Writes <id>.png (the card, step 1) to the variant folder; <id>_govern.png, <id>_govern_end.png (step 2, the details),
+// <id>_full.png (the full-height overview, kept for comparison), <id>_hit.png and report.json to _build.
 // Checks: opaque panels (D-3); each control's height from the panel's size table; radii; flex/grid gaps; icon sizes and
 // strokes; type sizes, weights and colours; 44 pt hit boxes (cover the control, no overlap, clipped to their scroll
 // area); safe insets; panels never overlap; text over text, icons over text, clipped text (a cut is allowed only at a
 // faded scroll edge), % after its digits; contrast >= 4.5:1 over the real rendered backdrop (faded text excluded);
-// the sheet geometry; the overview fits without scrolling; the dock rule (left beside the sheet, else hidden); every
-// other HUD element at its exact B3 place and size (B3 loaded side by side); RTL order; the brief's content per view;
+// the sheet geometry (the card: 320 pt, ends 8+ pt above the dock, the whole HUD at its B3 place; the full-height sheet:
+// the overview fits without scrolling, the dock left beside it or hidden); every other HUD element at its exact B3 place
+// and size (B3 loaded side by side); RTL order; the brief's content per view;
 // and on the map: Cairo's highlight, ring and name pill clear of every panel and hit box, Egypt and the delta clear,
 // no map label cut by a panel edge.
 // Usage: NODE_PATH=.../node_modules node render.js [ids...]   (default: all 7)   |   node render.js --selftest
@@ -20,7 +22,7 @@ const args = process.argv.slice(2);
 const SELFTEST = args.includes('--selftest');
 const want = args.filter((a) => !a.startsWith('--'));
 const DEVICES = (want.length ? want : ALL.map((d) => d.id)).map((id) => ALL.find((d) => d.id === id) || (() => { throw new Error('unknown device ' + id); })());
-const VIEWS = [['', ''], ['_govern', '&view=govern'], ['_govern_end', '&view=govern&scroll=end']];
+const VIEWS = [['', ''], ['_govern', '&view=govern'], ['_govern_end', '&view=govern&scroll=end'], ['_full', '&view=overview']];
 
 const TOK = {
   heights: [32, 36, 44], hudSpace: [0, 4, 8, 12], rCtl: 10, rCard: 12,
@@ -38,6 +40,8 @@ const TOK = {
 };
 // The brief's strings (as the page writes them). "now": fully visible in that render; "dom": in the sheet (by scroll).
 const BRIEF = {
+  card: ['القاهرة', 'العاصمة', 'مصر · محافظة', 'السكان', '8.8', 'مليون', '+14 ألف شهريًا', 'الاضطرابات', '64', '/ 100', '+2 شهريًا',
+    'البنية التحتية', '/ 10', 'دون تغير', 'لماذا؟', 'السيادة', 'الإدارة', 'حكومة مصر', 'السيطرة', 'الحكومة · 100%', 'المطالبات', 'لا توجد', 'تفاصيل المحافظة'],
   overview: ['القاهرة', 'العاصمة', 'مصر · محافظة', 'السكان', '8.8', 'مليون', '+14 ألف شهريًا', 'الاضطرابات', '64', '/ 100', '+2 شهريًا',
     'البنية التحتية', '/ 10', 'دون تغير', 'لماذا؟', 'السيادة', 'الإدارة', 'حكومة مصر', 'السيطرة', 'الحكومة · 100%', 'المطالبات', 'لا توجد',
     'توسعة شبكة الكهرباء', '0.8 مليار $ · 24 شهرًا', 'زيادة القدرة', 'دعم الخدمات الأساسية', '0.3 مليار $', 'تحسين الخدمات', 'تفاصيل المحافظة'],
@@ -263,12 +267,26 @@ async function measure(p, d, b3, view) {
     const safeW = W - 2 * S, dockW = b3 && b3['.dock'][0] ? b3['.dock'][0].x1 - b3['.dock'][0].x0 : 0, room = Math.floor(hud.width - 4 - dockW - 8);
     let wantW = Math.round(Math.min(380, Math.max(340, 0.43 * safeW)));
     if (room < wantW && room >= 330) wantW = room;                          // narrower, so the dock keeps its place beside it
+    if (view === 'card') wantW = 320;
     if (Math.abs(sr.width - wantW) > 0.5) issues.push(`sheet width ${sr.width} (want round(clamp(43% of ${safeW}, 340, 380)), or the room the dock leaves if 330..: ${wantW})`);
     if (!near(sr.right, W - gut)) issues.push(`sheet not at the right safe edge: ${sr.right} (want ${W - gut})`);
     if (!near(sr.top, top.bottom + 8)) issues.push(`sheet top ${sr.top} (want 8 pt under the top row: ${top.bottom + 8})`);
-    if (!near(sr.bottom, hud.bottom, 0.6) || sr.bottom > H - B + eps) issues.push(`sheet bottom ${sr.bottom} (want the dock line ${hud.bottom})`);
+    if (view === 'card') {
+      const dk = q('.dock');
+      if (!visible(dk) || sr.bottom > dk.getBoundingClientRect().top - 8 + eps) issues.push(`card bottom ${sr.bottom.toFixed(1)} (want at least 8 pt above the dock)`);
+      if (qa('.r-acts').length || qa('.r-gv').length || !qa('.r-ov').length) issues.push('the card shows more than header, numbers, status and «تفاصيل المحافظة»');
+      const inn = q('.r-in'); if (inn.scrollHeight > inn.clientHeight + 0.5 || Math.abs(inn.getBoundingClientRect().height - (sr.height - 2)) > 0.6) issues.push('the card is not as tall as its content');
+    } else if (!near(sr.bottom, hud.bottom, 0.6) || sr.bottom > H - B + eps) issues.push(`sheet bottom ${sr.bottom} (want the dock line ${hud.bottom})`);
     // the dock: left end of its line when it clears the sheet by 8 pt, else hidden while the sheet is open
-    { const ref = b3 && b3['.dock'] && b3['.dock'][0], dk = q('.dock'), shown = visible(dk);
+    if (view === 'card') {        // the card leaves the dock exactly where B3 has it
+      const ref = b3 && b3['.dock'] && b3['.dock'][0], dk = q('.dock');
+      if (!visible(dk)) issues.push('dock hidden under the card');
+      else if (ref) {
+        const r = dk.getBoundingClientRect();
+        if (Math.max(Math.abs(r.left - ref.x0), Math.abs(r.top - ref.y0), Math.abs(r.right - ref.x1), Math.abs(r.bottom - ref.y1)) > 0.5) issues.push(`HUD element moved from its B3 position: .dock x ${r.left.toFixed(1)}..${r.right.toFixed(1)}`);
+        [...dk.querySelectorAll('.dock-item')].forEach((e, i) => { const a = e.getBoundingClientRect(), b = b3['.dock-item'][i]; if (Math.max(Math.abs(a.left - b.x0), Math.abs(a.right - b.x1), Math.abs(a.top - b.y0)) > 0.5) issues.push(`dock item ${i + 1} changed`); });
+      }
+    } else { const ref = b3 && b3['.dock'] && b3['.dock'][0], dk = q('.dock'), shown = visible(dk);
       if (ref) {
         const w = ref.x1 - ref.x0, x0 = hud.left + 4, fits = x0 + w <= sr.left - 8 + eps;
         if (fits && !shown) issues.push('dock hidden although it fits left of the sheet');
@@ -296,15 +314,16 @@ async function measure(p, d, b3, view) {
     });
     // the overview shows everything without scrolling; the fades match the scroll state
     const fit = window.__sheetfit, body = window.__body;
-    { const ov = q('.r-body.r-ov'), was = root.dataset.view;
+    if (view !== 'card') { const ov = q('.r-body.r-ov'), was = root.dataset.view;
       root.dataset.view = 'overview'; const over = ov.scrollHeight - ov.clientHeight; root.dataset.view = was;
       if (over > 0.5) issues.push(`overview needs scrolling: ${over.toFixed(1)} pt (fit level ${fit.level})`); }
-    { const bd = q(view === 'overview' ? '.r-body.r-ov' : '.r-body.r-gv'), over = bd.scrollHeight - bd.clientHeight;
+    else if (!fit.fits) issues.push(`the card does not end 8 pt above the dock at any fit level: ${JSON.stringify(fit.tried)}`);
+    { const bd = q(view === 'card' || view === 'overview' ? '.r-body.r-ov' : '.r-body.r-gv'), over = bd.scrollHeight - bd.clientHeight;
       const wantTop = bd.scrollTop > 0.5, wantBot = bd.scrollTop < over - 0.5;
       if ((root.dataset.ftop === '1') !== wantTop || (root.dataset.fbot === '1') !== wantBot) issues.push(`fades ${root.dataset.ftop}/${root.dataset.fbot} do not match the scroll state (top ${bd.scrollTop}, over ${over.toFixed(1)})`); }
     // the open view only
     if (view === 'overview' && (qa('.r-gv').length || !qa('.r-ov').length)) issues.push('overview render shows the details');
-    if (view !== 'overview' && (qa('.r-ov').length || !qa('.r-gv').length)) issues.push('details render shows the overview');
+    if (/govern/.test(view) && (qa('.r-ov').length || !qa('.r-gv').length)) issues.push('details render shows the overview');
     // RTL order: flag | name ... close (left end); action rows: tile | text | chip; link rows: tile | text | (button) | chevron; first tab «الحكم» at the right
     { const fl = q('.r-flag').getBoundingClientRect(), nm = q('.r-name').getBoundingClientRect(), xb = q('.r-x').getBoundingClientRect();
       if (!(fl.left >= nm.right - 0.5 && xb.right <= nm.left)) issues.push('header order must be flag, name, ..., close (right to left)'); }
@@ -400,7 +419,7 @@ async function open(ctx, url) {
   return p;
 }
 const qs = (d) => `?w=${d.w}&h=${d.h}&side=${d.side}&bottom=${d.bottom}&cutout=${d.cutout}`;
-const viewOf = (extra) => (/scroll=end/.test(extra) ? 'govern_end' : /view=govern/.test(extra) ? 'govern' : 'overview');
+const viewOf = (extra) => (/scroll=end/.test(extra) ? 'govern_end' : /view=govern/.test(extra) ? 'govern' : /view=overview/.test(extra) ? 'overview' : 'card');
 
 async function check(p, d, b3, view) {
   const m = await measure(p, d, b3, view);
@@ -419,13 +438,13 @@ async function selftest(b) {
   const cases = [
     ['type size', d, '', '.r-name { font-size: 17px !important; }', /font size 17 for "القاهرة"/],
     ['18 pt misuse', d, '', '.r-sub { font-size: 18px !important; font-weight: 700 !important; }', /18 pt is for the province name/],
-    ['font weight', d, '', '.r-at b { font-weight: 700 !important; }', /font weight 13\/700/],
+    ['font weight', d, '&view=overview', '.r-at b { font-weight: 700 !important; }', /font weight 13\/700/],
     ['off-token colour', d, '', '.r-sc dt { color: #8899aa !important; }', /text colour off-token/],
-    ['control height', d, '', '.r-act { height: 46px !important; }', /control height 46.00 for \.r-act/],
-    ['radius', d, '', '.r-act { border-radius: 8px !important; }', /radius 8 for \.r-act/],
-    ['gap', d, '', '.r-act { gap: 10px !important; }', /gap 10 on/],
-    ['icon size', d, '', '.r-tile svg.i { width: 19px !important; height: 19px !important; }', /icon size 19x19 \(want 17\)/],
-    ['hit overlap', d, '', '.r-more { margin-top: -6px !important; }', /hit overlap/],
+    ['control height', d, '&view=overview', '.r-act { height: 46px !important; }', /control height 46.00 for \.r-act/],
+    ['radius', d, '&view=overview', '.r-act { border-radius: 8px !important; }', /radius 8 for \.r-act/],
+    ['gap', d, '&view=overview', '.r-act { gap: 10px !important; }', /gap 10 on/],
+    ['icon size', d, '&view=overview', '.r-tile svg.i { width: 19px !important; height: 19px !important; }', /icon size 19x19 \(want 17\)/],
+    ['hit overlap', d, '&view=overview', '.r-more { margin-top: -6px !important; }', /hit overlap/],
     ['side inset', d, '', '.sheet { right: -30px !important; }', /tap in side inset|text in side inset|panel in side inset/],
     ['clipped text', d, '', '.r-sc dd { margin-inline-end: -40px !important; }', /clipped text|text outside the sheet|horizontal overflow/],
     ['text overlap', d, '', '.r-cap { margin-inline-start: -40px !important; }', /text overlap "القاهرة" \/ "العاصمة"|text overlap "العاصمة" \/ "القاهرة"/],
@@ -434,21 +453,26 @@ async function selftest(b) {
     ['Cairo covered', d, '', ':root { --map-cx: 760px !important; }', /(Cairo highlight|selection ring|name pill) covered by panel المحافظة/],
     ['sheet width', d, '', ':root { --sheet-w: 330px !important; }', /sheet width 330/],
     ['top row covered', d, '', '.sheet { top: 30px !important; }', /sheet top 38|panel overlap/],
-    ['dock hidden although it fits', d, '', '[data-dock="left"] .dock { display: none !important; }', /dock hidden although it fits/],
-    ['dock not moved left', d, '', '[data-dock="left"] .dock { align-self: center !important; }', /dock not 4 pt in from the left end|dock closer than 8 pt|panel overlap/],
-    ['dock hit box in the side inset', d, '', '[data-dock="left"] .dock { margin-left: 0 !important; }', /tap in side inset: المزيد/],
+    ['dock hidden although it fits', d, '&view=govern', '[data-dock="left"] .dock { display: none !important; }', /dock hidden although it fits/],
+    ['dock not moved left', d, '&view=govern', '[data-dock="left"] .dock { align-self: center !important; }', /dock not 4 pt in from the left end|dock closer than 8 pt|panel overlap/],
+    ['dock hit box in the side inset', d, '&view=govern', '[data-dock="left"] .dock { margin-left: 0 !important; }', /tap in side inset: المزيد/],
     ['radio hit boxes touch the links', d, '&view=govern', '.r-links { margin-top: 0 !important; }', /hit overlap (مخفض|متوازن|مرتفع)/],
-    ['dock shown on the SE', se, '', '[data-dock="hidden"] .dock { display: flex !important; }', /dock shown although it does not fit|panel overlap/],
+    ['dock shown on the SE', se, '&view=govern', '[data-dock="hidden"] .dock { display: flex !important; }', /dock shown although it does not fit|panel overlap/],
     ['left stack moved', d, '', '.lstack { margin-left: 8px; }', /HUD element moved from its B3 position: \.toast/],
-    ['overview scrolls', se, '', '.r-more { height: 36px !important; margin-top: 40px !important; }', /overview needs scrolling/, () => { window.__noop = 1; }],
+    ['overview scrolls', se, '&view=overview', '.r-more { height: 36px !important; margin-top: 40px !important; }', /overview needs scrolling/, () => { window.__noop = 1; }],
     ['fades wrong', d, '&view=govern', '', /fades .* do not match the scroll state/, () => { document.documentElement.dataset.fbot = '0'; }],
     ['cut at a hard edge', se, '&view=govern', '', /clipped text \(bottom\)|control cut by its scroll area \(bottom\)/, () => { document.documentElement.dataset.fbot = '0'; }],
     ['% before its number', d, '', '', /% shown before its number/, () => { document.querySelectorAll('.r-sc dd')[2].textContent = 'الحكومة · 100%'; }],
     ['brief text', d, '', '', /brief text not fully visible: لماذا؟|brief text missing/, () => { document.querySelectorAll('.r-why').forEach((e) => { e.textContent = 'لماذا'; }); }],
     ['map label cut', d, '', '.labels .cut { display: inline !important; }', /map (label|city dot) .* cut by a panel edge/],
     ['contrast', d, '', '.r-sc dt { color: #46535e !important; }', /contrast [0-3](\.\d+)? for "السيادة"|text colour off-token/],
-    ['RTL order', d, '', '.r-act .r-chip { order: -1; }', /action row 1: order must be tile, text, chip/],
+    ['RTL order', d, '&view=overview', '.r-act .r-chip { order: -1; }', /action row 1: order must be tile, text, chip/],
     ['two tabs selected', d, '&view=govern', '', /exactly one tab must be selected/, () => { document.querySelectorAll('.r-tab')[1].classList.add('on'); }],
+    ['card reaches the dock', se, '', '.r-more { margin-top: 60px !important; }', /card bottom .* \(want at least 8 pt above the dock\)/],
+    ['card moves the dock', d, '', '[data-dock="b3"] .dock { align-self: flex-end !important; }', /HUD element moved from its B3 position: \.dock/],
+    ['card hides the dock', d, '', '.dock { display: none !important; }', /dock hidden under the card/],
+    ['card shows the actions', d, '', '[data-view="card"] .r-acts { display: flex !important; }', /the card shows more than/],
+    ['card width', d, '', '.sheet { width: 358px !important; }', /sheet width 358/],
   ];
   const results = [];
   for (const [name, x, extra, css, re, js] of cases) {

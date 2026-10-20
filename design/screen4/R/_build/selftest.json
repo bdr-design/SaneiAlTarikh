@@ -1,12 +1,14 @@
 {
- "ranAt": "2026-10-20T14:45:29.050Z",
+ "ranAt": "2026-10-20T14:57:20.534Z",
  "cleanIssues": {
   "i16promax": [],
   "i16promax_govern": [],
   "i16promax_govern_end": [],
+  "i16promax_full": [],
   "se": [],
   "se_govern": [],
-  "se_govern_end": []
+  "se_govern_end": [],
+  "se_full": []
  },
  "results": [
   {
@@ -96,9 +98,9 @@
    "name": "clipped text",
    "ok": true,
    "sample": [
-    "clipped text (sides): \"حكومة مصر\" 509..568.2 y 207.5..226.5",
+    "clipped text (sides): \"حكومة مصر\" 547..606.2 y 207.5..226.5",
     "text outside the sheet's 12 pt padding: \"حكومة مصر\"",
-    "clipped text (sides): \"لا توجد\" 509..544.91 y 236..255"
+    "clipped text (sides): \"لا توجد\" 547..582.91 y 236..255"
    ]
   },
   {
@@ -141,7 +143,7 @@
    "name": "sheet width",
    "ok": true,
    "sample": [
-    "sheet width 330 (want round(clamp(43% of 832, 340, 380)), or the room the dock leaves if 330..: 358)"
+    "sheet width 330 (want round(clamp(43% of 832, 340, 380)), or the room the dock leaves if 330..: 320)"
    ]
   },
   {
@@ -149,8 +151,8 @@
    "ok": true,
    "sample": [
     "hit overlap الخزينة 36.0 مليار $ / إغلاق",
-    "hit overlap الاستقرار 58% / إغلاق",
-    "panel overlap الدولة: مصر، حسني مبارك، ج / المحافظة: القاهرة"
+    "panel overlap الدولة: مصر، حسني مبارك، ج / المحافظة: القاهرة",
+    "panel overlap الخزينة 36.0 مليار $ الاست / المحافظة: القاهرة"
    ]
   },
   {
@@ -164,9 +166,9 @@
    "name": "dock not moved left",
    "ok": true,
    "sample": [
-    "hit overlap الدولة / تفاصيل المحافظة",
-    "hit overlap الاقتصاد / تفاصيل المحافظة",
-    "hit overlap الداخلية والسياسة / تفاصيل المحافظة"
+    "hit overlap الدولة / إدارة القوات",
+    "hit overlap الاقتصاد / إدارة القوات",
+    "hit overlap الداخلية والسياسة / إدارة القوات"
    ]
   },
   {
@@ -190,9 +192,9 @@
    "name": "dock shown on the SE",
    "ok": true,
    "sample": [
-    "icon over text: i r-chev / \"الجيش\"",
-    "hit overlap الدولة / تفاصيل المحافظة",
-    "hit overlap الاقتصاد / تفاصيل المحافظة"
+    "icon over text: i / \"الإنشاءات والمرافق\"",
+    "icon over text: i / \"الكهرباء · النقل · المرافق العامة\"",
+    "icon over text: i / \"تخطيط التوسعة\""
    ]
   },
   {
@@ -241,6 +243,7 @@
    "ok": true,
    "sample": [
     "brief text not fully visible: لماذا؟",
+    "brief text missing: لماذا؟",
     "brief text missing: لماذا؟"
    ]
   },
@@ -248,8 +251,8 @@
    "name": "map label cut",
    "ok": true,
    "sample": [
+    "map label السعودية cut by a panel edge",
     "map label العراق cut by a panel edge",
-    "map label الأردن cut by a panel edge",
     "map city dot 4 cut by a panel edge"
    ]
   },
@@ -275,6 +278,49 @@
    "ok": true,
    "sample": [
     "exactly one tab must be selected"
+   ]
+  },
+  {
+   "name": "card reaches the dock",
+   "ok": true,
+   "sample": [
+    "icon over text: i r-chev / \"الداخلية والسياسة\"",
+    "hit overlap الدولة / تفاصيل المحافظة",
+    "hit overlap الاقتصاد / تفاصيل المحافظة"
+   ]
+  },
+  {
+   "name": "card moves the dock",
+   "ok": true,
+   "sample": [
+    "tap in side inset: المزيد",
+    "HUD element moved from its B3 position: .dock x 62.0..449.0",
+    "dock item 1 changed"
+   ]
+  },
+  {
+   "name": "card hides the dock",
+   "ok": true,
+   "sample": [
+    "card bottom 314.0 (want at least 8 pt above the dock)",
+    "dock hidden under the card"
+   ]
+  },
+  {
+   "name": "card shows the actions",
+   "ok": true,
+   "sample": [
+    "hit overlap الدولة / تفاصيل المحافظة",
+    "hit overlap الاقتصاد / تفاصيل المحافظة",
+    "hit overlap الداخلية والسياسة / تفاصيل المحافظة"
+   ]
+  },
+  {
+   "name": "card width",
+   "ok": true,
+   "sample": [
+    "sheet width 358 (want round(clamp(43% of 832, 340, 380)), or the room the dock leaves if 330..: 320)",
+    "map label الأردن cut by a panel edge"
    ]
   }
  ]
