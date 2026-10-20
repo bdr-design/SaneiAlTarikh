@@ -1,0 +1,72 @@
+[
+ {
+  "id": "se",
+  "name": "iPhone SE",
+  "ar": "آيفون SE",
+  "w": 667,
+  "h": 375,
+  "side": 0,
+  "bottom": 0,
+  "cutout": "none"
+ },
+ {
+  "id": "mini",
+  "name": "iPhone 13 mini",
+  "ar": "آيفون 13 ميني",
+  "w": 812,
+  "h": 375,
+  "side": 50,
+  "bottom": 21,
+  "cutout": "notch"
+ },
+ {
+  "id": "i14",
+  "name": "iPhone 14",
+  "ar": "آيفون 14",
+  "w": 844,
+  "h": 390,
+  "side": 47,
+  "bottom": 21,
+  "cutout": "notch"
+ },
+ {
+  "id": "i16",
+  "name": "iPhone 15 / 16",
+  "ar": "آيفون 15 / 16",
+  "w": 852,
+  "h": 393,
+  "side": 59,
+  "bottom": 21,
+  "cutout": "island"
+ },
+ {
+  "id": "i16pro",
+  "name": "iPhone 16 Pro",
+  "ar": "آيفون 16 برو / 17 / 17 برو",
+  "w": 874,
+  "h": 402,
+  "side": 62,
+  "bottom": 21,
+  "cutout": "island"
+ },
+ {
+  "id": "i11",
+  "name": "iPhone 11 / XR",
+  "ar": "آيفون 11 / XR",
+  "w": 896,
+  "h": 414,
+  "side": 48,
+  "bottom": 21,
+  "cutout": "notch"
+ },
+ {
+  "id": "i16promax",
+  "name": "iPhone 16 Pro Max",
+  "ar": "آيفون 16 / 17 برو ماكس",
+  "w": 956,
+  "h": 440,
+  "side": 62,
+  "bottom": 21,
+  "cutout": "island"
+ }
+]

@@ -1,0 +1,312 @@
+4/0/0| etopo1/ETOPO1_Bed_g.tif
+4/0/3| gmted/70N180W_20101117_gmted_mea300.tif, gmted/50N180W_20101117_gmted_mea300.tif, etopo1/ETOPO1_Bed_g.tif
+4/0/1| etopo1/ETOPO1_Bed_g.tif
+4/1/6| gmted/10N180W_20101117_gmted_mea300.tif, etopo1/ETOPO1_Bed_g.tif
+4/0/4| gmted/50N180W_20101117_gmted_mea300.tif, etopo1/ETOPO1_Bed_g.tif
+4/0/10| gmted/50S180W_20101117_gmted_mea300.tif, etopo1/ETOPO1_Bed_g.tif
+4/1/0| etopo1/ETOPO1_Bed_g.tif
+4/0/11| etopo1/ETOPO1_Bed_g.tif
+4/0/7| gmted/10N180W_20101117_gmted_mea300.tif, gmted/10S180W_20101117_gmted_mea300.tif, etopo1/ETOPO1_Bed_g.tif
+4/0/6| gmted/10N180W_20101117_gmted_mea300.tif, etopo1/ETOPO1_Bed_g.tif
+4/0/8| gmted/30S180W_20101117_gmted_mea300.tif, gmted/10S180W_20101117_gmted_mea300.tif, etopo1/ETOPO1_Bed_g.tif
+4/1/2| etopo1/ETOPO1_Bed_g.tif
+4/1/1| etopo1/ETOPO1_Bed_g.tif
+4/0/5| gmted/50N180W_20101117_gmted_mea300.tif, etopo1/ETOPO1_Bed_g.tif
+4/0/2| etopo1/ETOPO1_Bed_g.tif
+4/1/3| gmted/50N150W_20101117_gmted_mea300.tif, gmted/70N180W_20101117_gmted_mea300.tif, gmted/50N180W_20101117_gmted_mea300.tif, gmted/70N150W_20101117_gmted_mea300.tif, etopo1/ETOPO1_Bed_g.tif
+4/0/9| gmted/50S180W_20101117_gmted_mea300.tif, gmted/30S180W_20101117_gmted_mea300.tif, etopo1/ETOPO1_Bed_g.tif
+4/1/4| gmted/50N150W_20101117_gmted_mea300.tif, gmted/50N180W_20101117_gmted_mea300.tif, etopo1/ETOPO1_Bed_g.tif
+4/1/9| gmted/30S150W_20101117_gmted_mea300.tif, gmted/30S180W_20101117_gmted_mea300.tif, etopo1/ETOPO1_Bed_g.tif
+4/1/7| gmted/10N180W_20101117_gmted_mea300.tif, gmted/10S180W_20101117_gmted_mea300.tif, etopo1/ETOPO1_Bed_g.tif
+4/1/5| gmted/50N150W_20101117_gmted_mea300.tif, gmted/50N180W_20101117_gmted_mea300.tif, etopo1/ETOPO1_Bed_g.tif
+4/1/8| gmted/10S150W_20101117_gmted_mea300.tif, gmted/30S150W_20101117_gmted_mea300.tif, gmted/10S180W_20101117_gmted_mea300.tif, gmted/30S180W_20101117_gmted_mea300.tif, etopo1/ETOPO1_Bed_g.tif
+4/2/2| gmted/70N150W_20101117_gmted_mea300.tif, gmted/70N120W_20101117_gmted_mea300.tif, etopo1/ETOPO1_Bed_g.tif
+4/1/10| etopo1/ETOPO1_Bed_g.tif
+4/2/7| gmted/10N120W_20101117_gmted_mea300.tif, etopo1/ETOPO1_Bed_g.tif
+4/2/8| etopo1/ETOPO1_Bed_g.tif
+4/2/6| gmted/30N150W_20101117_gmted_mea300.tif, gmted/30N120W_20101117_gmted_mea300.tif, gmted/10N120W_20101117_gmted_mea300.tif, etopo1/ETOPO1_Bed_g.tif
+4/2/3| gmted/70N150W_20101117_gmted_mea300.tif, gmted/50N150W_20101117_gmted_mea300.tif, gmted/70N120W_20101117_gmted_mea300.tif, gmted/50N120W_20101117_gmted_mea300.tif, etopo1/ETOPO1_Bed_g.tif
+4/2/5| gmted/30N150W_20101117_gmted_mea300.tif, gmted/50N150W_20101117_gmted_mea300.tif, gmted/30N120W_20101117_gmted_mea300.tif, gmted/50N120W_20101117_gmted_mea300.tif, etopo1/ETOPO1_Bed_g.tif
+4/2/4| gmted/50N150W_20101117_gmted_mea300.tif, gmted/50N120W_20101117_gmted_mea300.tif, etopo1/ETOPO1_Bed_g.tif
+4/2/9| gmted/30S150W_20101117_gmted_mea300.tif, etopo1/ETOPO1_Bed_g.tif
+4/3/1| gmted/70N120W_20101117_gmted_mea300.tif, gmted/70N090W_20101117_gmted_mea300.tif, etopo1/ETOPO1_Bed_g.tif
+4/2/11| etopo1/ETOPO1_Bed_g.tif
+4/3/0| etopo1/ETOPO1_Bed_g.tif
+4/3/4| gmted/50N120W_20101117_gmted_mea300.tif, gmted/50N090W_20101117_gmted_mea300.tif, etopo1/ETOPO1_Bed_g.tif
+4/2/0| etopo1/ETOPO1_Bed_g.tif
+4/3/5| gmted/30N120W_20101117_gmted_mea300.tif, gmted/50N120W_20101117_gmted_mea300.tif
+4/2/1| etopo1/ETOPO1_Bed_g.tif
+4/3/6| gmted/10N120W_20101117_gmted_mea300.tif, gmted/30N120W_20101117_gmted_mea300.tif, gmted/30N090W_20101117_gmted_mea300.tif, gmted/10N090W_20101117_gmted_mea300.tif, etopo1/ETOPO1_Bed_g.tif
+4/1/11| etopo1/ETOPO1_Bed_g.tif
+4/3/8| gmted/10S120W_20101117_gmted_mea300.tif, gmted/10S090W_20101117_gmted_mea300.tif, etopo1/ETOPO1_Bed_g.tif
+4/3/7| gmted/10N120W_20101117_gmted_mea300.tif, gmted/10S120W_20101117_gmted_mea300.tif, gmted/10N090W_20101117_gmted_mea300.tif, gmted/10S090W_20101117_gmted_mea300.tif, etopo1/ETOPO1_Bed_g.tif
+4/3/9| gmted/30S120W_20101117_gmted_mea300.tif, etopo1/ETOPO1_Bed_g.tif
+4/3/10| etopo1/ETOPO1_Bed_g.tif
+4/3/11| etopo1/ETOPO1_Bed_g.tif
+4/4/0| gmted/70N090W_20101117_gmted_mea300.tif, etopo1/ETOPO1_Bed_g.tif
+4/4/1| gmted/70N090W_20101117_gmted_mea300.tif, etopo1/ETOPO1_Bed_g.tif
+4/3/2| gmted/70N120W_20101117_gmted_mea300.tif, gmted/70N090W_20101117_gmted_mea300.tif, etopo1/ETOPO1_Bed_g.tif
+4/4/3| gmted/70N090W_20101117_gmted_mea300.tif, gmted/50N090W_20101117_gmted_mea300.tif, etopo1/ETOPO1_Bed_g.tif
+4/4/6| gmted/30N090W_20101117_gmted_mea300.tif, gmted/10N090W_20101117_gmted_mea300.tif, etopo1/ETOPO1_Bed_g.tif
+4/2/10| etopo1/ETOPO1_Bed_g.tif
+4/4/5| gmted/30N090W_20101117_gmted_mea300.tif, gmted/50N090W_20101117_gmted_mea300.tif, etopo1/ETOPO1_Bed_g.tif
+4/4/7| gmted/10N090W_20101117_gmted_mea300.tif, gmted/10S090W_20101117_gmted_mea300.tif, etopo1/ETOPO1_Bed_g.tif
+4/4/9| gmted/50S090W_20101117_gmted_mea300.tif, gmted/30S090W_20101117_gmted_mea300.tif, etopo1/ETOPO1_Bed_g.tif
+4/3/3| gmted/70N120W_20101117_gmted_mea300.tif, gmted/50N120W_20101117_gmted_mea300.tif, gmted/70N090W_20101117_gmted_mea300.tif, gmted/50N090W_20101117_gmted_mea300.tif, etopo1/ETOPO1_Bed_g.tif
+4/4/4| gmted/50N090W_20101117_gmted_mea300.tif, etopo1/ETOPO1_Bed_g.tif
+4/4/8| gmted/10S090W_20101117_gmted_mea300.tif, gmted/30S090W_20101117_gmted_mea300.tif, etopo1/ETOPO1_Bed_g.tif
+4/4/11| gmted/70S090W_20101117_gmted_mea300.tif, etopo1/ETOPO1_Bed_g.tif
+4/4/10| gmted/50S090W_20101117_gmted_mea300.tif, gmted/70S090W_20101117_gmted_mea300.tif, etopo1/ETOPO1_Bed_g.tif
+4/5/0| gmted/70N060W_20101117_gmted_mea300.tif, gmted/70N090W_20101117_gmted_mea300.tif, etopo1/ETOPO1_Bed_g.tif
+4/5/2| gmted/70N060W_20101117_gmted_mea300.tif, gmted/70N090W_20101117_gmted_mea300.tif, etopo1/ETOPO1_Bed_g.tif
+4/5/1| gmted/70N060W_20101117_gmted_mea300.tif, gmted/70N090W_20101117_gmted_mea300.tif, etopo1/ETOPO1_Bed_g.tif
+4/5/4| gmted/50N060W_20101117_gmted_mea300.tif, gmted/50N090W_20101117_gmted_mea300.tif, etopo1/ETOPO1_Bed_g.tif
+4/5/3| gmted/50N060W_20101117_gmted_mea300.tif, gmted/70N060W_20101117_gmted_mea300.tif, gmted/50N090W_20101117_gmted_mea300.tif, gmted/70N090W_20101117_gmted_mea300.tif, etopo1/ETOPO1_Bed_g.tif
+4/5/6| gmted/30N090W_20101117_gmted_mea300.tif, etopo1/ETOPO1_Bed_g.tif
+4/5/5| gmted/30N060W_20101117_gmted_mea300.tif, gmted/50N060W_20101117_gmted_mea300.tif, gmted/50N090W_20101117_gmted_mea300.tif, gmted/30N090W_20101117_gmted_mea300.tif, etopo1/ETOPO1_Bed_g.tif
+4/4/2| gmted/70N090W_20101117_gmted_mea300.tif, etopo1/ETOPO1_Bed_g.tif
+4/5/7| gmted/10N060W_20101117_gmted_mea300.tif, gmted/10S060W_20101117_gmted_mea300.tif, gmted/10S090W_20101117_gmted_mea300.tif, gmted/10N090W_20101117_gmted_mea300.tif, etopo1/ETOPO1_Bed_g.tif
+4/5/8| gmted/30S060W_20101117_gmted_mea300.tif, gmted/10S060W_20101117_gmted_mea300.tif, gmted/30S090W_20101117_gmted_mea300.tif, gmted/10S090W_20101117_gmted_mea300.tif, etopo1/ETOPO1_Bed_g.tif
+4/5/9| gmted/50S060W_20101117_gmted_mea300.tif, gmted/30S060W_20101117_gmted_mea300.tif, gmted/50S090W_20101117_gmted_mea300.tif, gmted/30S090W_20101117_gmted_mea300.tif, etopo1/ETOPO1_Bed_g.tif
+4/5/10| gmted/70S060W_20101117_gmted_mea300.tif, gmted/50S090W_20101117_gmted_mea300.tif, gmted/70S090W_20101117_gmted_mea300.tif, etopo1/ETOPO1_Bed_g.tif
+4/6/0| gmted/70N060W_20101117_gmted_mea300.tif, gmted/70N030W_20101117_gmted_mea300.tif, etopo1/ETOPO1_Bed_g.tif
+4/6/1| gmted/70N060W_20101117_gmted_mea300.tif, gmted/70N030W_20101117_gmted_mea300.tif, etopo1/ETOPO1_Bed_g.tif
+4/6/5| etopo1/ETOPO1_Bed_g.tif
+4/6/2| gmted/70N060W_20101117_gmted_mea300.tif, gmted/70N030W_20101117_gmted_mea300.tif, etopo1/ETOPO1_Bed_g.tif
+4/6/6| gmted/30N060W_20101117_gmted_mea300.tif, gmted/30N030W_20101117_gmted_mea300.tif, etopo1/ETOPO1_Bed_g.tif
+4/6/4| gmted/50N060W_20101117_gmted_mea300.tif, gmted/50N030W_20101117_gmted_mea300.tif, etopo1/ETOPO1_Bed_g.tif
+4/6/8| gmted/10S060W_20101117_gmted_mea300.tif, gmted/30S030W_20101117_gmted_mea300.tif, gmted/30S060W_20101117_gmted_mea300.tif, etopo1/ETOPO1_Bed_g.tif
+4/6/3| gmted/70N060W_20101117_gmted_mea300.tif, gmted/70N030W_20101117_gmted_mea300.tif, gmted/50N060W_20101117_gmted_mea300.tif, gmted/50N030W_20101117_gmted_mea300.tif, etopo1/ETOPO1_Bed_g.tif
+4/7/0| gmted/70N030W_20101117_gmted_mea300.tif, etopo1/ETOPO1_Bed_g.tif
+4/7/1| gmted/70N030W_20101117_gmted_mea300.tif, etopo1/ETOPO1_Bed_g.tif
+4/6/11| gmted/70S030W_20101117_gmted_mea300.tif, gmted/70S060W_20101117_gmted_mea300.tif, etopo1/ETOPO1_Bed_g.tif
+4/7/2| gmted/70N030W_20101117_gmted_mea300.tif, etopo1/ETOPO1_Bed_g.tif
+4/7/3| gmted/50N030W_20101117_gmted_mea300.tif, gmted/70N030W_20101117_gmted_mea300.tif, etopo1/ETOPO1_Bed_g.tif
+4/7/4| gmted/50N030W_20101117_gmted_mea300.tif, etopo1/ETOPO1_Bed_g.tif
+4/7/5| gmted/30N030W_20101117_gmted_mea300.tif, gmted/50N030W_20101117_gmted_mea300.tif, gmted/30N000E_20101117_gmted_mea300.tif, gmted/50N000E_20101117_gmted_mea300.tif, etopo1/ETOPO1_Bed_g.tif
+4/7/6| gmted/30N030W_20101117_gmted_mea300.tif, gmted/10N030W_20101117_gmted_mea300.tif, gmted/30N000E_20101117_gmted_mea300.tif, gmted/10N000E_20101117_gmted_mea300.tif, etopo1/ETOPO1_Bed_g.tif
+4/7/9| gmted/50S030W_20101117_gmted_mea300.tif, etopo1/ETOPO1_Bed_g.tif
+4/5/11| gmted/70S060W_20101117_gmted_mea300.tif, gmted/70S090W_20101117_gmted_mea300.tif, etopo1/ETOPO1_Bed_g.tif
+4/7/8| gmted/30S030W_20101117_gmted_mea300.tif, gmted/10S030W_20101117_gmted_mea300.tif, etopo1/ETOPO1_Bed_g.tif
+4/7/7| gmted/10S030W_20101117_gmted_mea300.tif, gmted/10N030W_20101117_gmted_mea300.tif, gmted/10N000E_20101117_gmted_mea300.tif, gmted/10S000E_20101117_gmted_mea300.tif, etopo1/ETOPO1_Bed_g.tif
+4/7/11| etopo1/ETOPO1_Bed_g.tif
+4/7/10| etopo1/ETOPO1_Bed_g.tif
+4/8/0| etopo1/ETOPO1_Bed_g.tif
+4/6/10| gmted/70S060W_20101117_gmted_mea300.tif, etopo1/ETOPO1_Bed_g.tif
+4/8/2| gmted/70N000E_20101117_gmted_mea300.tif, etopo1/ETOPO1_Bed_g.tif
+4/6/7| gmted/10N030W_20101117_gmted_mea300.tif, etopo1/ETOPO1_Bed_g.tif
+4/8/4| gmted/50N000E_20101117_gmted_mea300.tif, etopo1/ETOPO1_Bed_g.tif
+4/8/3| gmted/70N000E_20101117_gmted_mea300.tif, gmted/50N000E_20101117_gmted_mea300.tif, etopo1/ETOPO1_Bed_g.tif
+4/8/1| gmted/70N000E_20101117_gmted_mea300.tif, etopo1/ETOPO1_Bed_g.tif
+4/6/9| gmted/30S060W_20101117_gmted_mea300.tif, etopo1/ETOPO1_Bed_g.tif
+4/8/6| gmted/30N000E_20101117_gmted_mea300.tif, gmted/10N000E_20101117_gmted_mea300.tif, etopo1/ETOPO1_Bed_g.tif
+4/8/5| gmted/30N000E_20101117_gmted_mea300.tif, gmted/50N000E_20101117_gmted_mea300.tif, etopo1/ETOPO1_Bed_g.tif
+4/8/7| gmted/10N000E_20101117_gmted_mea300.tif, gmted/10S000E_20101117_gmted_mea300.tif, etopo1/ETOPO1_Bed_g.tif
+4/8/8| gmted/30S000E_20101117_gmted_mea300.tif, gmted/10S000E_20101117_gmted_mea300.tif, etopo1/ETOPO1_Bed_g.tif
+4/8/9| gmted/50S000E_20101117_gmted_mea300.tif, gmted/30S000E_20101117_gmted_mea300.tif, etopo1/ETOPO1_Bed_g.tif
+4/8/10| gmted/70S000E_20101117_gmted_mea300.tif, etopo1/ETOPO1_Bed_g.tif
+4/9/1| gmted/70N000E_20101117_gmted_mea300.tif, gmted/70N030E_20101117_gmted_mea300.tif, etopo1/ETOPO1_Bed_g.tif
+4/9/2| gmted/70N000E_20101117_gmted_mea300.tif, gmted/70N030E_20101117_gmted_mea300.tif, etopo1/ETOPO1_Bed_g.tif
+4/9/8| gmted/30S030E_20101117_gmted_mea300.tif, gmted/10S030E_20101117_gmted_mea300.tif, gmted/30S000E_20101117_gmted_mea300.tif, gmted/10S000E_20101117_gmted_mea300.tif, etopo1/ETOPO1_Bed_g.tif
+4/9/6| gmted/30N030E_20101117_gmted_mea300.tif, gmted/10N030E_20101117_gmted_mea300.tif, gmted/30N000E_20101117_gmted_mea300.tif, gmted/10N000E_20101117_gmted_mea300.tif, etopo1/ETOPO1_Bed_g.tif
+4/9/3| gmted/70N000E_20101117_gmted_mea300.tif, gmted/50N030E_20101117_gmted_mea300.tif, gmted/70N030E_20101117_gmted_mea300.tif, gmted/50N000E_20101117_gmted_mea300.tif, etopo1/ETOPO1_Bed_g.tif
+4/9/5| gmted/30N030E_20101117_gmted_mea300.tif, gmted/50N030E_20101117_gmted_mea300.tif, gmted/50N000E_20101117_gmted_mea300.tif, gmted/30N000E_20101117_gmted_mea300.tif, etopo1/ETOPO1_Bed_g.tif
+4/9/9| gmted/50S000E_20101117_gmted_mea300.tif, gmted/30S030E_20101117_gmted_mea300.tif, gmted/50S030E_20101117_gmted_mea300.tif, gmted/30S000E_20101117_gmted_mea300.tif, etopo1/ETOPO1_Bed_g.tif
+4/9/7| gmted/10S030E_20101117_gmted_mea300.tif, gmted/10N030E_20101117_gmted_mea300.tif, gmted/10S000E_20101117_gmted_mea300.tif, gmted/10N000E_20101117_gmted_mea300.tif, etopo1/ETOPO1_Bed_g.tif
+4/9/11| etopo1/ETOPO1_Bed_g.tif
+4/10/0| etopo1/ETOPO1_Bed_g.tif
+4/10/1| gmted/70N030E_20101117_gmted_mea300.tif, gmted/70N060E_20101117_gmted_mea300.tif, etopo1/ETOPO1_Bed_g.tif
+4/9/10| gmted/50S030E_20101117_gmted_mea300.tif, etopo1/ETOPO1_Bed_g.tif
+4/10/2| gmted/70N030E_20101117_gmted_mea300.tif, gmted/70N060E_20101117_gmted_mea300.tif, etopo1/ETOPO1_Bed_g.tif
+4/10/3| gmted/70N030E_20101117_gmted_mea300.tif, gmted/50N030E_20101117_gmted_mea300.tif, gmted/70N060E_20101117_gmted_mea300.tif, gmted/50N060E_20101117_gmted_mea300.tif, etopo1/ETOPO1_Bed_g.tif
+4/10/4| gmted/50N030E_20101117_gmted_mea300.tif, gmted/50N060E_20101117_gmted_mea300.tif, etopo1/ETOPO1_Bed_g.tif
+4/9/0| etopo1/ETOPO1_Bed_g.tif
+4/10/5| gmted/30N030E_20101117_gmted_mea300.tif, gmted/50N030E_20101117_gmted_mea300.tif, gmted/30N060E_20101117_gmted_mea300.tif, gmted/50N060E_20101117_gmted_mea300.tif, etopo1/ETOPO1_Bed_g.tif
+4/10/8| gmted/30S060E_20101117_gmted_mea300.tif, gmted/30S030E_20101117_gmted_mea300.tif, gmted/10S030E_20101117_gmted_mea300.tif, etopo1/ETOPO1_Bed_g.tif
+4/10/7| gmted/10N030E_20101117_gmted_mea300.tif, gmted/10S030E_20101117_gmted_mea300.tif, etopo1/ETOPO1_Bed_g.tif
+4/10/6| gmted/30N030E_20101117_gmted_mea300.tif, gmted/10N030E_20101117_gmted_mea300.tif, gmted/30N060E_20101117_gmted_mea300.tif, gmted/10N060E_20101117_gmted_mea300.tif, etopo1/ETOPO1_Bed_g.tif
+4/8/11| etopo1/ETOPO1_Bed_g.tif
+4/10/9| gmted/30S030E_20101117_gmted_mea300.tif, etopo1/ETOPO1_Bed_g.tif
+4/10/11| gmted/70S030E_20101117_gmted_mea300.tif, etopo1/ETOPO1_Bed_g.tif
+4/11/1| gmted/70N060E_20101117_gmted_mea300.tif, gmted/70N090E_20101117_gmted_mea300.tif, etopo1/ETOPO1_Bed_g.tif
+4/10/10| gmted/50S030E_20101117_gmted_mea300.tif, gmted/50S060E_20101117_gmted_mea300.tif, etopo1/ETOPO1_Bed_g.tif
+4/9/4| gmted/50N030E_20101117_gmted_mea300.tif, gmted/50N000E_20101117_gmted_mea300.tif, etopo1/ETOPO1_Bed_g.tif
+4/11/0| etopo1/ETOPO1_Bed_g.tif
+4/11/2| gmted/70N060E_20101117_gmted_mea300.tif, gmted/70N090E_20101117_gmted_mea300.tif, etopo1/ETOPO1_Bed_g.tif
+4/11/3| gmted/70N060E_20101117_gmted_mea300.tif, gmted/50N060E_20101117_gmted_mea300.tif, gmted/70N090E_20101117_gmted_mea300.tif, gmted/50N090E_20101117_gmted_mea300.tif, etopo1/ETOPO1_Bed_g.tif
+4/11/4| gmted/50N060E_20101117_gmted_mea300.tif, gmted/50N090E_20101117_gmted_mea300.tif, etopo1/ETOPO1_Bed_g.tif
+4/11/9| gmted/50S060E_20101117_gmted_mea300.tif, etopo1/ETOPO1_Bed_g.tif
+4/11/5| gmted/30N060E_20101117_gmted_mea300.tif, gmted/50N060E_20101117_gmted_mea300.tif, gmted/30N090E_20101117_gmted_mea300.tif, gmted/50N090E_20101117_gmted_mea300.tif, etopo1/ETOPO1_Bed_g.tif
+4/11/8| gmted/10S060E_20101117_gmted_mea300.tif, etopo1/ETOPO1_Bed_g.tif
+4/11/10| gmted/50S060E_20101117_gmted_mea300.tif, gmted/70S060E_20101117_gmted_mea300.tif, etopo1/ETOPO1_Bed_g.tif
+4/12/0| etopo1/ETOPO1_Bed_g.tif
+4/11/11| gmted/70S060E_20101117_gmted_mea300.tif, gmted/70S090E_20101117_gmted_mea300.tif, etopo1/ETOPO1_Bed_g.tif
+4/11/7| gmted/10S060E_20101117_gmted_mea300.tif, gmted/10N060E_20101117_gmted_mea300.tif, gmted/10N090E_20101117_gmted_mea300.tif, etopo1/ETOPO1_Bed_g.tif
+4/12/2| gmted/70N090E_20101117_gmted_mea300.tif, etopo1/ETOPO1_Bed_g.tif
+4/12/4| gmted/50N090E_20101117_gmted_mea300.tif
+4/12/3| gmted/70N090E_20101117_gmted_mea300.tif, gmted/50N090E_20101117_gmted_mea300.tif, etopo1/ETOPO1_Bed_g.tif
+4/12/6| gmted/30N090E_20101117_gmted_mea300.tif, gmted/10N090E_20101117_gmted_mea300.tif, etopo1/ETOPO1_Bed_g.tif
+4/12/9| gmted/30S090E_20101117_gmted_mea300.tif, etopo1/ETOPO1_Bed_g.tif
+4/12/7| gmted/10N090E_20101117_gmted_mea300.tif, gmted/10S090E_20101117_gmted_mea300.tif, etopo1/ETOPO1_Bed_g.tif
+4/12/11| gmted/70S090E_20101117_gmted_mea300.tif, etopo1/ETOPO1_Bed_g.tif
+4/11/6| gmted/10N060E_20101117_gmted_mea300.tif, gmted/30N060E_20101117_gmted_mea300.tif, gmted/10N090E_20101117_gmted_mea300.tif, gmted/30N090E_20101117_gmted_mea300.tif, etopo1/ETOPO1_Bed_g.tif
+4/12/10| etopo1/ETOPO1_Bed_g.tif
+4/12/8| gmted/10S090E_20101117_gmted_mea300.tif, gmted/30S090E_20101117_gmted_mea300.tif, etopo1/ETOPO1_Bed_g.tif
+4/13/0| etopo1/ETOPO1_Bed_g.tif
+4/13/2| gmted/70N120E_20101117_gmted_mea300.tif, gmted/70N090E_20101117_gmted_mea300.tif, etopo1/ETOPO1_Bed_g.tif
+4/13/1| etopo1/ETOPO1_Bed_g.tif
+4/13/3| gmted/70N120E_20101117_gmted_mea300.tif, gmted/50N120E_20101117_gmted_mea300.tif, gmted/50N090E_20101117_gmted_mea300.tif, gmted/70N090E_20101117_gmted_mea300.tif, etopo1/ETOPO1_Bed_g.tif
+4/13/4| gmted/50N120E_20101117_gmted_mea300.tif, gmted/50N090E_20101117_gmted_mea300.tif, etopo1/ETOPO1_Bed_g.tif
+4/13/6| gmted/10N120E_20101117_gmted_mea300.tif, gmted/30N120E_20101117_gmted_mea300.tif, gmted/30N090E_20101117_gmted_mea300.tif, gmted/10N090E_20101117_gmted_mea300.tif, etopo1/ETOPO1_Bed_g.tif
+4/13/7| gmted/10N120E_20101117_gmted_mea300.tif, gmted/10S120E_20101117_gmted_mea300.tif, gmted/10S090E_20101117_gmted_mea300.tif, gmted/10N090E_20101117_gmted_mea300.tif, etopo1/ETOPO1_Bed_g.tif
+4/13/10| etopo1/ETOPO1_Bed_g.tif
+4/13/5| gmted/30N120E_20101117_gmted_mea300.tif, gmted/50N120E_20101117_gmted_mea300.tif, gmted/30N090E_20101117_gmted_mea300.tif, gmted/50N090E_20101117_gmted_mea300.tif, etopo1/ETOPO1_Bed_g.tif
+4/14/2| gmted/70N120E_20101117_gmted_mea300.tif, gmted/70N150E_20101117_gmted_mea300.tif, etopo1/ETOPO1_Bed_g.tif
+4/14/1| etopo1/ETOPO1_Bed_g.tif
+4/12/5| gmted/30N090E_20101117_gmted_mea300.tif, gmted/50N090E_20101117_gmted_mea300.tif
+4/13/11| gmted/70S120E_20101117_gmted_mea300.tif, gmted/70S090E_20101117_gmted_mea300.tif, etopo1/ETOPO1_Bed_g.tif
+4/14/3| gmted/70N120E_20101117_gmted_mea300.tif, gmted/70N150E_20101117_gmted_mea300.tif, gmted/50N120E_20101117_gmted_mea300.tif, gmted/50N150E_20101117_gmted_mea300.tif, etopo1/ETOPO1_Bed_g.tif
+4/14/0| etopo1/ETOPO1_Bed_g.tif
+4/14/5| gmted/30N150E_20101117_gmted_mea300.tif, gmted/30N120E_20101117_gmted_mea300.tif, gmted/50N120E_20101117_gmted_mea300.tif, gmted/50N150E_20101117_gmted_mea300.tif, etopo1/ETOPO1_Bed_g.tif
+4/14/4| gmted/50N120E_20101117_gmted_mea300.tif, gmted/50N150E_20101117_gmted_mea300.tif, etopo1/ETOPO1_Bed_g.tif
+4/12/1| gmted/70N090E_20101117_gmted_mea300.tif, etopo1/ETOPO1_Bed_g.tif
+4/13/8| gmted/10S120E_20101117_gmted_mea300.tif, gmted/30S120E_20101117_gmted_mea300.tif, gmted/30S090E_20101117_gmted_mea300.tif, gmted/10S090E_20101117_gmted_mea300.tif, etopo1/ETOPO1_Bed_g.tif
+4/14/6| gmted/30N120E_20101117_gmted_mea300.tif, gmted/10N120E_20101117_gmted_mea300.tif, gmted/10N150E_20101117_gmted_mea300.tif, etopo1/ETOPO1_Bed_g.tif
+4/14/7| gmted/10S120E_20101117_gmted_mea300.tif, gmted/10S150E_20101117_gmted_mea300.tif, gmted/10N120E_20101117_gmted_mea300.tif, etopo1/ETOPO1_Bed_g.tif
+4/13/9| gmted/50S090E_20101117_gmted_mea300.tif, gmted/30S090E_20101117_gmted_mea300.tif, gmted/30S120E_20101117_gmted_mea300.tif, gmted/50S120E_20101117_gmted_mea300.tif, etopo1/ETOPO1_Bed_g.tif
+4/14/8| gmted/30S120E_20101117_gmted_mea300.tif, gmted/10S120E_20101117_gmted_mea300.tif, gmted/30S150E_20101117_gmted_mea300.tif, gmted/10S150E_20101117_gmted_mea300.tif, etopo1/ETOPO1_Bed_g.tif
+4/14/9| gmted/50S120E_20101117_gmted_mea300.tif, gmted/30S120E_20101117_gmted_mea300.tif, gmted/30S150E_20101117_gmted_mea300.tif, gmted/50S150E_20101117_gmted_mea300.tif, etopo1/ETOPO1_Bed_g.tif
+4/14/10| gmted/50S120E_20101117_gmted_mea300.tif, etopo1/ETOPO1_Bed_g.tif
+4/15/2| etopo1/ETOPO1_Bed_g.tif
+4/15/0| etopo1/ETOPO1_Bed_g.tif
+4/14/11| gmted/70S120E_20101117_gmted_mea300.tif, etopo1/ETOPO1_Bed_g.tif
+4/15/1| etopo1/ETOPO1_Bed_g.tif
+4/15/4| gmted/50N150E_20101117_gmted_mea300.tif, gmted/50N180W_20101117_gmted_mea300.tif, etopo1/ETOPO1_Bed_g.tif
+4/15/5| gmted/50N150E_20101117_gmted_mea300.tif, gmted/50N180W_20101117_gmted_mea300.tif, etopo1/ETOPO1_Bed_g.tif
+4/15/3| gmted/70N150E_20101117_gmted_mea300.tif, gmted/50N150E_20101117_gmted_mea300.tif, gmted/50N180W_20101117_gmted_mea300.tif, gmted/70N180W_20101117_gmted_mea300.tif, etopo1/ETOPO1_Bed_g.tif
+4/15/7| gmted/10N150E_20101117_gmted_mea300.tif, gmted/10S150E_20101117_gmted_mea300.tif, etopo1/ETOPO1_Bed_g.tif
+4/15/6| etopo1/ETOPO1_Bed_g.tif
+4/15/8| gmted/30S150E_20101117_gmted_mea300.tif, gmted/10S150E_20101117_gmted_mea300.tif, gmted/30S180W_20101117_gmted_mea300.tif, etopo1/ETOPO1_Bed_g.tif
+4/15/10| gmted/50S150E_20101117_gmted_mea300.tif, gmted/70S150E_20101117_gmted_mea300.tif, etopo1/ETOPO1_Bed_g.tif
+4/15/9| gmted/50S150E_20101117_gmted_mea300.tif, gmted/30S150E_20101117_gmted_mea300.tif, etopo1/ETOPO1_Bed_g.tif
+6/32/22| gmted/30N000E_20101117_gmted_mea075.tif
+6/32/24| gmted/30N000E_20101117_gmted_mea075.tif, etopo1/ETOPO1_Bed_g.tif
+6/32/23| gmted/30N000E_20101117_gmted_mea075.tif, etopo1/ETOPO1_Bed_g.tif
+6/32/25| gmted/30N000E_20101117_gmted_mea075.tif, etopo1/ETOPO1_Bed_g.tif
+6/32/26| gmted/10N000E_20101117_gmted_mea075.tif, gmted/30N000E_20101117_gmted_mea075.tif
+6/32/27| gmted/10N000E_20101117_gmted_mea075.tif
+6/32/28| gmted/10N000E_20101117_gmted_mea075.tif
+6/32/30| gmted/10N000E_20101117_gmted_mea075.tif, gmted/10S000E_20101117_gmted_mea075.tif, etopo1/ETOPO1_Bed_g.tif
+4/15/11| gmted/70S150E_20101117_gmted_mea300.tif, etopo1/ETOPO1_Bed_g.tif
+6/32/31| gmted/10S000E_20101117_gmted_mea075.tif, etopo1/ETOPO1_Bed_g.tif
+6/33/23| gmted/30N000E_20101117_gmted_mea075.tif, etopo1/ETOPO1_Bed_g.tif
+6/32/29| gmted/10N000E_20101117_gmted_mea075.tif
+6/33/24| gmted/30N000E_20101117_gmted_mea075.tif, etopo1/ETOPO1_Bed_g.tif
+6/33/25| gmted/30N000E_20101117_gmted_mea075.tif, etopo1/ETOPO1_Bed_g.tif
+6/33/29| gmted/10N000E_20101117_gmted_mea075.tif
+6/33/28| gmted/10N000E_20101117_gmted_mea075.tif
+6/34/22| gmted/30N000E_20101117_gmted_mea075.tif, etopo1/ETOPO1_Bed_g.tif
+6/33/30| gmted/10S000E_20101117_gmted_mea075.tif, gmted/10N000E_20101117_gmted_mea075.tif
+6/33/27| gmted/10N000E_20101117_gmted_mea075.tif
+6/33/31| gmted/10S000E_20101117_gmted_mea075.tif, etopo1/ETOPO1_Bed_g.tif
+6/34/23| gmted/30N000E_20101117_gmted_mea075.tif, etopo1/ETOPO1_Bed_g.tif
+6/34/29| gmted/10N000E_20101117_gmted_mea075.tif
+6/34/26| gmted/10N000E_20101117_gmted_mea075.tif, gmted/30N000E_20101117_gmted_mea075.tif, etopo1/ETOPO1_Bed_g.tif
+6/34/28| gmted/10N000E_20101117_gmted_mea075.tif
+6/34/27| gmted/10N000E_20101117_gmted_mea075.tif
+6/34/24| gmted/30N000E_20101117_gmted_mea075.tif, etopo1/ETOPO1_Bed_g.tif
+6/34/25| gmted/30N000E_20101117_gmted_mea075.tif, etopo1/ETOPO1_Bed_g.tif
+6/34/30| gmted/10S000E_20101117_gmted_mea075.tif, gmted/10N000E_20101117_gmted_mea075.tif
+6/35/22| gmted/30N000E_20101117_gmted_mea075.tif
+6/33/22| gmted/30N000E_20101117_gmted_mea075.tif
+6/33/26| gmted/10N000E_20101117_gmted_mea075.tif, gmted/30N000E_20101117_gmted_mea075.tif
+6/34/31| gmted/10S000E_20101117_gmted_mea075.tif
+6/35/25| gmted/30N000E_20101117_gmted_mea075.tif, etopo1/ETOPO1_Bed_g.tif
+6/35/24| gmted/30N000E_20101117_gmted_mea075.tif, etopo1/ETOPO1_Bed_g.tif
+6/35/26| gmted/10N000E_20101117_gmted_mea075.tif, gmted/30N000E_20101117_gmted_mea075.tif, etopo1/ETOPO1_Bed_g.tif
+6/35/27| gmted/10N000E_20101117_gmted_mea075.tif
+6/36/23| gmted/30N000E_20101117_gmted_mea075.tif, etopo1/ETOPO1_Bed_g.tif
+6/35/28| gmted/10N000E_20101117_gmted_mea075.tif
+6/35/30| gmted/10S000E_20101117_gmted_mea075.tif, gmted/10N000E_20101117_gmted_mea075.tif
+6/35/29| gmted/10N000E_20101117_gmted_mea075.tif
+6/35/31| gmted/10S000E_20101117_gmted_mea075.tif
+6/36/25| gmted/30N000E_20101117_gmted_mea075.tif, etopo1/ETOPO1_Bed_g.tif
+6/36/22| gmted/30N000E_20101117_gmted_mea075.tif, etopo1/ETOPO1_Bed_g.tif
+6/36/24| gmted/30N000E_20101117_gmted_mea075.tif, etopo1/ETOPO1_Bed_g.tif
+6/36/27| gmted/10N000E_20101117_gmted_mea075.tif
+6/36/26| gmted/10N000E_20101117_gmted_mea075.tif, gmted/30N000E_20101117_gmted_mea075.tif, etopo1/ETOPO1_Bed_g.tif
+6/36/28| gmted/10N000E_20101117_gmted_mea075.tif
+6/36/29| gmted/10N000E_20101117_gmted_mea075.tif
+6/36/31| gmted/10S000E_20101117_gmted_mea075.tif
+6/35/23| gmted/30N000E_20101117_gmted_mea075.tif, etopo1/ETOPO1_Bed_g.tif
+6/37/22| gmted/30N030E_20101117_gmted_mea075.tif, gmted/30N000E_20101117_gmted_mea075.tif, etopo1/ETOPO1_Bed_g.tif
+6/37/23| gmted/30N030E_20101117_gmted_mea075.tif, gmted/30N000E_20101117_gmted_mea075.tif, etopo1/ETOPO1_Bed_g.tif
+6/37/25| gmted/30N030E_20101117_gmted_mea075.tif, gmted/30N000E_20101117_gmted_mea075.tif, etopo1/ETOPO1_Bed_g.tif
+6/37/27| gmted/10N030E_20101117_gmted_mea075.tif, gmted/10N000E_20101117_gmted_mea075.tif
+6/37/26| gmted/10N030E_20101117_gmted_mea075.tif, gmted/30N030E_20101117_gmted_mea075.tif, gmted/10N000E_20101117_gmted_mea075.tif, gmted/30N000E_20101117_gmted_mea075.tif, etopo1/ETOPO1_Bed_g.tif
+6/37/28| gmted/10N030E_20101117_gmted_mea075.tif, gmted/10N000E_20101117_gmted_mea075.tif
+6/37/30| gmted/10S030E_20101117_gmted_mea075.tif, gmted/10S000E_20101117_gmted_mea075.tif, gmted/10N030E_20101117_gmted_mea075.tif, gmted/10N000E_20101117_gmted_mea075.tif
+6/38/22| gmted/30N030E_20101117_gmted_mea075.tif, etopo1/ETOPO1_Bed_g.tif
+6/38/23| gmted/30N030E_20101117_gmted_mea075.tif, etopo1/ETOPO1_Bed_g.tif
+6/37/29| gmted/10N030E_20101117_gmted_mea075.tif, gmted/10N000E_20101117_gmted_mea075.tif
+6/38/25| gmted/30N030E_20101117_gmted_mea075.tif, etopo1/ETOPO1_Bed_g.tif
+6/37/31| gmted/10S030E_20101117_gmted_mea075.tif, gmted/10S000E_20101117_gmted_mea075.tif
+6/38/24| gmted/30N030E_20101117_gmted_mea075.tif, etopo1/ETOPO1_Bed_g.tif
+6/38/26| gmted/10N030E_20101117_gmted_mea075.tif, gmted/30N030E_20101117_gmted_mea075.tif, etopo1/ETOPO1_Bed_g.tif
+6/38/27| gmted/10N030E_20101117_gmted_mea075.tif, etopo1/ETOPO1_Bed_g.tif
+6/36/30| gmted/10S000E_20101117_gmted_mea075.tif, gmted/10N000E_20101117_gmted_mea075.tif
+6/38/29| gmted/10N030E_20101117_gmted_mea075.tif, etopo1/ETOPO1_Bed_g.tif
+6/37/24| gmted/30N030E_20101117_gmted_mea075.tif, gmted/30N000E_20101117_gmted_mea075.tif, etopo1/ETOPO1_Bed_g.tif
+6/39/22| gmted/30N030E_20101117_gmted_mea075.tif, etopo1/ETOPO1_Bed_g.tif
+6/38/30| gmted/10S030E_20101117_gmted_mea075.tif, gmted/10N030E_20101117_gmted_mea075.tif
+6/38/31| gmted/10S030E_20101117_gmted_mea075.tif
+6/39/23| gmted/30N030E_20101117_gmted_mea075.tif, etopo1/ETOPO1_Bed_g.tif
+6/39/24| gmted/30N030E_20101117_gmted_mea075.tif, etopo1/ETOPO1_Bed_g.tif
+6/39/26| gmted/10N030E_20101117_gmted_mea075.tif, gmted/30N030E_20101117_gmted_mea075.tif
+6/39/29| gmted/10N030E_20101117_gmted_mea075.tif, etopo1/ETOPO1_Bed_g.tif
+6/39/25| gmted/30N030E_20101117_gmted_mea075.tif
+6/39/28| gmted/10N030E_20101117_gmted_mea075.tif, etopo1/ETOPO1_Bed_g.tif
+6/39/30| gmted/10S030E_20101117_gmted_mea075.tif, gmted/10N030E_20101117_gmted_mea075.tif, etopo1/ETOPO1_Bed_g.tif
+6/39/31| gmted/10S030E_20101117_gmted_mea075.tif, etopo1/ETOPO1_Bed_g.tif
+6/40/22| gmted/30N030E_20101117_gmted_mea075.tif, etopo1/ETOPO1_Bed_g.tif
+6/40/23| gmted/30N030E_20101117_gmted_mea075.tif, etopo1/ETOPO1_Bed_g.tif
+6/40/25| gmted/30N030E_20101117_gmted_mea075.tif
+6/40/26| gmted/10N030E_20101117_gmted_mea075.tif, gmted/30N030E_20101117_gmted_mea075.tif, etopo1/ETOPO1_Bed_g.tif
+6/40/24| gmted/30N030E_20101117_gmted_mea075.tif, etopo1/ETOPO1_Bed_g.tif
+6/40/27| gmted/10N030E_20101117_gmted_mea075.tif, etopo1/ETOPO1_Bed_g.tif
+6/40/28| gmted/10N030E_20101117_gmted_mea075.tif
+6/40/29| gmted/10N030E_20101117_gmted_mea075.tif, etopo1/ETOPO1_Bed_g.tif
+6/41/23| gmted/30N030E_20101117_gmted_mea075.tif, etopo1/ETOPO1_Bed_g.tif
+6/40/30| gmted/10S030E_20101117_gmted_mea075.tif, gmted/10N030E_20101117_gmted_mea075.tif, etopo1/ETOPO1_Bed_g.tif
+6/38/28| gmted/10N030E_20101117_gmted_mea075.tif, etopo1/ETOPO1_Bed_g.tif
+6/41/25| gmted/30N030E_20101117_gmted_mea075.tif, etopo1/ETOPO1_Bed_g.tif
+6/41/24| gmted/30N030E_20101117_gmted_mea075.tif, etopo1/ETOPO1_Bed_g.tif
+6/41/26| gmted/30N030E_20101117_gmted_mea075.tif, gmted/10N030E_20101117_gmted_mea075.tif, etopo1/ETOPO1_Bed_g.tif
+6/41/27| gmted/10N030E_20101117_gmted_mea075.tif, etopo1/ETOPO1_Bed_g.tif
+6/41/28| gmted/10N030E_20101117_gmted_mea075.tif, etopo1/ETOPO1_Bed_g.tif
+6/41/30| gmted/10N030E_20101117_gmted_mea075.tif, gmted/10S030E_20101117_gmted_mea075.tif, etopo1/ETOPO1_Bed_g.tif
+6/41/29| gmted/10N030E_20101117_gmted_mea075.tif, etopo1/ETOPO1_Bed_g.tif
+6/41/31| etopo1/ETOPO1_Bed_g.tif
+6/39/27| gmted/10N030E_20101117_gmted_mea075.tif
+6/42/22| gmted/30N030E_20101117_gmted_mea075.tif, gmted/30N060E_20101117_gmted_mea075.tif, etopo1/ETOPO1_Bed_g.tif
+6/42/23| gmted/30N030E_20101117_gmted_mea075.tif, gmted/30N060E_20101117_gmted_mea075.tif, etopo1/ETOPO1_Bed_g.tif
+6/42/25| gmted/30N030E_20101117_gmted_mea075.tif, gmted/30N060E_20101117_gmted_mea075.tif
+6/42/24| gmted/30N030E_20101117_gmted_mea075.tif, gmted/30N060E_20101117_gmted_mea075.tif, etopo1/ETOPO1_Bed_g.tif
+6/42/27| gmted/10N030E_20101117_gmted_mea075.tif, gmted/10N060E_20101117_gmted_mea075.tif, etopo1/ETOPO1_Bed_g.tif
+6/42/26| gmted/30N030E_20101117_gmted_mea075.tif, gmted/10N030E_20101117_gmted_mea075.tif, gmted/10N060E_20101117_gmted_mea075.tif, gmted/30N060E_20101117_gmted_mea075.tif, etopo1/ETOPO1_Bed_g.tif
+6/42/28| gmted/10N030E_20101117_gmted_mea075.tif, etopo1/ETOPO1_Bed_g.tif
+6/42/30| etopo1/ETOPO1_Bed_g.tif
+6/42/29| etopo1/ETOPO1_Bed_g.tif
+6/42/31| etopo1/ETOPO1_Bed_g.tif
+6/43/23| gmted/30N060E_20101117_gmted_mea075.tif, etopo1/ETOPO1_Bed_g.tif
+6/41/22| gmted/30N030E_20101117_gmted_mea075.tif, etopo1/ETOPO1_Bed_g.tif
+6/40/31| gmted/10S030E_20101117_gmted_mea075.tif, etopo1/ETOPO1_Bed_g.tif
+6/43/25| gmted/30N060E_20101117_gmted_mea075.tif
+6/43/22| gmted/30N060E_20101117_gmted_mea075.tif
+6/43/24| gmted/30N060E_20101117_gmted_mea075.tif
+6/43/26| gmted/10N060E_20101117_gmted_mea075.tif, gmted/30N060E_20101117_gmted_mea075.tif
+6/43/27| gmted/10N060E_20101117_gmted_mea075.tif, etopo1/ETOPO1_Bed_g.tif
+6/43/28| etopo1/ETOPO1_Bed_g.tif
+6/43/29| etopo1/ETOPO1_Bed_g.tif
+6/43/30| etopo1/ETOPO1_Bed_g.tif
+6/43/31| etopo1/ETOPO1_Bed_g.tif

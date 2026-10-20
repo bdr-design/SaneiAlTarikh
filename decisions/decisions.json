@@ -1,0 +1,58 @@
+{
+ "game": "صانع التاريخ (Sanei Al-Tarikh): grand strategy, player leads one nation on a world map. Rebuild from zero; keep only the idea.",
+ "userConditions": [
+  "Lightness: never heavy on the iPhone (smooth map, low memory, low battery and heat, fast start).",
+  "Realism: realistic simulation and real-world data.",
+  "Strong foundation: the base must hold for the future so we never go back to fix or rebuild it."
+ ],
+ "decisions": {
+  "platform": "iPhone only, native Swift, iOS 17+",
+  "orientation": "landscape only",
+  "install": "user has a signing certificate; GitHub Actions builds an unsigned IPA; user signs and installs; user has no Mac",
+  "time": "real-time with pause and speed levels, daily tick",
+  "map": "countries divided into provinces; our own curated province layer (~2,500-3,000) built from Natural Earth admin-1 with stable IDs; owner vs controller per province",
+  "focus": "balance across all systems",
+  "publishing": "may be sold: only commercially licensable data and assets; license registry per data source; CI rejects non-commercial/share-alike sources; generated attribution screen",
+  "scenarios": {
+   "first": "2011, start date 1 January 2011",
+   "later_in_order": [
+    "2026",
+    "1990",
+    "1985",
+    "1979"
+   ],
+   "rule": "each scenario is data only; no code changes to add one"
+  },
+  "endDate": "2100 (realistic data/tech to ~2050 from published projections, studied projections 2050-2100; UN WPP projections to 2100 for population calibration; IPCC climate scenarios)",
+  "economy": "detailed markets and goods from the start: ~20 goods, province industries with inputs/outputs, 3 labour skill tiers, national markets with monthly price clearing, world market with transport/tariff friction, trade blocs and sanctions, top-10 trading partners per country (no full bilateral matrix)",
+  "politics": "detailed parties and elections from the start: real 2011 parties in all countries with elections (~120), top 3-6 parties each + 'others', support per province seeded from last real election, real election calendar, coalitions, interest groups backing parties; non-democracies have ruling party/factions and emergent opposition",
+  "leaders": "real names, no photos, neutral text",
+  "presets": "realistic default; presets (strong, superpower, god) and cheats optional and clearly labelled on setup screen",
+  "military": "automated fronts only (player assigns armies to fronts and gives hold/attack orders with target arrows; same operational AI runs player and AI fronts); generic equipment generations (no real weapon names); simplified air (air superiority per region) and naval (fleets per sea zone with missions) in v1, base ready for detail later; equipment strength modelled from 20-year defence spending, personnel and tech tier, shown as estimates",
+  "nuclear": "deterrence; use that reaches top escalation rung ends the game with a sober text screen",
+  "events": "conditional historical events + generic events + player decisions",
+  "espionage": "full from the start: agency budget/level, agent networks per country, intel gathering, counter-intelligence, sabotage, cyber, tech theft, support opposition/insurgents, election/media influence, coup support; exposure risk with diplomatic fallout. NO assassinations.",
+  "disputedTerritories": "show de facto control with dashed borders for disputed areas + toggle for de jure (international legal) view; neutral labels",
+  "visualStyle": "modern command room, comfortable for the eyes, strong sense of control and command (calm low-glare palette, not pure black, no harsh neon)",
+  "digits": "Western digits 123",
+  "sound": "UI sounds + haptics in v1; licensed music later",
+  "saves": "autosave each in-game month rotating 3 slots + on background + unlimited named manual saves + export/import via Files (default, user did not object yet)",
+  "language": "Arabic only in v1, RTL, localization-ready for English later (default)",
+  "font": "iOS system Arabic font (default)",
+  "repository": "D-1: new PUBLIC repository (user's choice; free standard CI runners; code visible to everyone)",
+  "autosaveCadence": "D-4: each in-game month, at most once per 2 real minutes",
+  "maxSpeed": "D-16: 30 in-game days per second (2011 to 2100 in about 18 min)",
+  "godPresetName": "D-12: the 'God' preset is named «حكم مطلق» (user's own wording)",
+  "electionLoss": "D-9: player plays on in OPPOSITION after losing an election until returning to power (+3-4 weeks; needs opposition gameplay and its screens)",
+  "disputed2011": "D-8: as in reality on 1 Jan 2011 (PA playable; Gaza Hamas-led de facto government inside polity pse; East Jerusalem and Golan 'annexation not recognised'; Western Sahara split at the berm; limited-recognition label)",
+  "rivalGovernments": "D-29: any government administering a province at start is playable via a small chooser (UN-seat holder default); chooser needs a design approval",
+  "saveLocation": "D-28: Documents (visible in Files) + optional automatic mirror folder chosen once (e.g. iCloud Drive)",
+  "testDevices": "D-21: no XR loan possible. Replace with: (a) an 'XR budget mode' in debug builds on the user's iPhone 17 Pro Max (memory cap 160 MB, tile cache 16 MB, 60 Hz cap, XR texture limits) with time budgets tightened by the A12-to-A19 Pro speed gap (roughly 3-4x, to measure); (b) deterministic work counters on Linux CI; (c) iOS Simulator XR layout and UI tests on GitHub macOS runners. Residual risk accepted: real heat, GPU and battery on an A12 are not measured.",
+  "moneyDisplay": "D-6: nominal current USD; «لماذا؟» also shows constant 2011 USD",
+  "protestImages": "keep both: Arab city for Arab countries, European city for the rest",
+  "menuBackground": "user will send a larger version (>= 2868x1320, same composition)",
+  "imageGenerator": "all game images made by the owner with ChatGPT (OpenAI) on a paid plan; terms to re-check before release",
+  "publicPersonalDetails": "owner keeps phone model, no-Mac and sideload-with-signing-certificate details public",
+  "oldGameMentions": "remove mentions of the old game's failures from public documents (done 2026-10-20)"
+ }
+}

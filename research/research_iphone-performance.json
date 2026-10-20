@@ -1,0 +1,254 @@
+{
+ "summary": "I looked up and measured each part of the technical stack. No project file was changed. Scratch work is in wf (bench.c, stats.py, adj.py, graph.txt).\n\nRecommended stack:\n- **Toolchain.** Native Swift 6 with the iOS 17.0 deployment target. Build with Xcode 26.6 and the iOS 26 SDK; the App Store has required an Xcode 26 / iOS 26 SDK build since 28 April 2026. Use the SwiftUI App lifecycle, which is scene-based and meets TN3187: in the next major release after iOS 26, apps built with the latest SDK must use the UIScene lifecycle or they will not launch.\n- **Four modules.** The code is split into four parts:\n  - **SimCore**: a pure Swift package with no UIKit and, where possible, no Foundation. It holds the whole simulation.\n  - **MapCore**: a pure Swift package that reads the binary map, holds province adjacency and does tap picking on the CPU.\n  - **ContentBake**: a Swift command-line tool that runs on Linux. It turns the map and scenario text files kept in git into versioned binary bundles and checks them.\n  - **iOS app target**: SwiftUI panels and HUD, a custom Metal map, the simulation host, saving and the lifecycle controls.\n- **Project generation.** XcodeGen 2.46.0, pinned, builds the Xcode project from project.yml. The project file and zip files are never committed.\n\nMap (a): measured on real data. Natural Earth's detailed provinces layer (10m admin-1, public domain) has 4,596 provinces, 8,535 polygon parts and 1,286,673 vertices (about 1.27M triangles). It has 847k unique edges, of which 439k are shared between provinces. My simplification test gives four detail levels:\n\n| Simplification tolerance | Vertices |\n|---|---|\n| 0.5 km | 585k |\n| 2 km | 251k |\n| 5 km | 122k |\n| 10 km | 65k |\n\nThe province adjacency graph has 10,769 neighbour pairs, about 4.7 neighbours per province on average.\n- **Renderer choice.** A custom Metal renderer is clearly the best option. Bake one pre-triangulated mesh per detail level offline, with 12-byte vertices carrying a province id. Country colours come from a small colour table of about 20 KB per map mode, kept in three copies because writing a texture or buffer does not wait for the GPU.\n- **Borders.** Border segments are drawn instanced and carry the left and right province ids. The shader compares the two owners, so country borders follow conquests with no CPU work.\n- **Cost.** About 4 detail levels need roughly 25 MB for province shapes and 13 MB for borders. A frame needs 10–15 draw calls and about 120k triangles at world zoom.\n- **Rejected options.** SpriteKit's SKShapeNode costs one draw call per node and is reported slow with many nodes. MapKit shows modern borders and labels, needs network tiles and cannot use our own projection. CAShapeLayer re-rasterizes on the CPU when zooming, and Apple says its rasterization \"may favor speed over accuracy\".\n- **Picking.** Use a CPU grid index plus a point-in-polygon test (microseconds, testable on Linux) rather than reading back an ID buffer from the GPU.\n- **Map modes.** Each mode is just a different colour table.\n- **Projection.** Use Miller cylindrical, baked offline. Its straight edges allow horizontal wrap-around by drawing the world again with an offset. Polygons that cross the 180° line are split offline.\n- **Labels.** Arabic shaping needs Core Text: either per-label bitmaps in an atlas, or a glyph atlas built from Core Text's already-shaped glyph runs.\n\nUI (b): SwiftUI with @Observable (iOS 17+) only redraws views that read the changed property. On iOS 17, assign a value only when it actually changed. HUD numbers are rounded to display precision before assigning and updated at about 10 Hz. Long lists use List or LazyVStack, which create rows only as needed. Map gestures use UIKit gesture recognizers. Arabic is set as the app's own language so iOS mirrors the layout natively; forcing right-to-left on part of the screen is reported to misplace toolbar and search-bar items.\n\nSimulation (c):\n- **Data layout.** State is stored as parallel arrays of integers, one array per field, with typed 16-bit ids for provinces and countries.\n- **Exact numbers (fixed-point).** Money and population are Int64; ratios are Int32 basis points (1/10,000). There is no Double in saved state and no sin/exp/pow, because those return slightly different results on different platforms.\n- **Repeatable randomness.** The simulation uses its own seeded random generator (SplitMix64 or Xoshiro), with one stream per subsystem. It never loops over a Dictionary or Set, because Swift randomizes their order on every run.\n- **Overflow.** Arithmetic must clamp at its limits instead of crashing, since Swift stops the app on integer overflow. The \"unlimited money\" cheat should be a flag, not a huge number.\n- **Commands.** Player orders are queued and applied at the start of the next day. That makes a replay exactly reproducible from the starting state, the seed and the command log.\n- **Threading.** One plain Swift actor runs the simulation off the main thread and sends the UI an immutable snapshot through a buffer that keeps only the newest one. Avoid Mutex (iOS 18+ only). Avoid putting the actor on a custom dispatch queue: isolation checks crash on iOS 17, and the needed queue type is missing on Linux.\n\nCost per day: a C test of 5,000 provinces, 170 countries and 2,000 units ran at 0.05 ms per day. The monthly pass (population groups plus 170×170 trade and relations tables) took 0.31 ms. One route search across the real 4,596-province graph took 0.136 ms. That machine was a 2.1 GHz Xeon, not an iPhone.\n\nBudgets:\n\n| Area | Budget |\n|---|---|\n| Simulation, average day (A12) | ≤ 2 ms |\n| Simulation, worst 1% of days | ≤ 8 ms |\n| Countries running monthly logic per day (spread over the month) | about 6 |\n| AI route searches per day | ≤ 20, cached |\n\nSpeed levels:\n\n| Speed | Days per second | 40-year game in real time |\n|---|---|---|\n| 1x | 1 | 4.1 h |\n| 2x | 2 | 2.0 h |\n| 5x | 5 | 49 min |\n| 10x | 10 | 24 min |\n| Max | 30 | 8 min, using ≤ 6% of one CPU core |\n\nSaves (d): a custom binary format. The header holds a magic code, format version, scenario id, checksum and compression type. The body is a series of tagged, individually versioned chunks, and unknown chunks are skipped. Each save is a full snapshot that never depends on the bundled scenario files. Migrations run in a chain (v1 to v2 to v3), and CI loads saved example files from every released version. Compression is LZFSE, which matches zlib level 5 for size, runs 2–3x faster and uses less energy. The newer LZMESH format needs iOS 27, so the compression type is recorded in the header. Writes are atomic. Saving takes a short copy on the simulation thread, then encodes and writes in the background. Writing to disk starts only after asking iOS for extra background time.\n\nBuild without a Mac (e):\n- **Runners.** macos-latest now means macos-26 (arm64), whose image ships Xcode 26.0.1 to 26.6 (default 26.6). macos-15 still defaults to Xcode 16.4, which can no longer produce App Store builds, so pin Xcode explicitly.\n- **Metal toolchain.** Xcode 26 no longer bundles the Metal shader compiler; CI must run `xcodebuild -downloadComponent MetalToolchain`. This step is reported to be flaky, so keep a runtime shader-compile fallback.\n- **XcodeGen.** I confirmed it has no target-level `resources` key. Resources must be listed under `sources` (optionally with `buildPhase: resources`).\n- **Two pipelines.** Engine tests run with `swift test` on ubuntu-24.04 on every push. The macOS build runs only on main, tags or manual trigger, because macOS minutes are expensive.\n- **IPA gate.** After building, CI unzips the IPA and checks: the binary exists and is arm64; minimum OS 17.0; only landscape orientations; required resources present (map file, scenario file, compiled shaders, asset catalog, Arabic strings); app icon name; and a size floor and ceiling.\n\nLifecycle (f):\n- Pause on going inactive; autosave on going to the background.\n- On a memory warning, drop caches only, never game state.\n- Thermal throttling: at \"serious\", drop to 30 fps and limit speed (Apple suggests 60 to 30 fps); at \"critical\", pause.\n- In Low Power Mode, cap at 60 fps.\n- Draw the map only when needed: 0 fps when paused and idle, 120 Hz while interacting on ProMotion phones (Info.plist key CADisableMinimumFrameDurationOnPhone), and 30 fps while units animate.\n\nTop-level budgets:\n\n| Area | Budget |\n|---|---|\n| Frame time, 120 Hz | 8.3 ms; GPU ≤ 4 ms; main thread ≤ 4 ms |\n| Frame time, 60 Hz on A12 | GPU ≤ 8 ms |\n| Memory | target ≤ 250 MB, hard ceiling 350 MB (about 23% of the ~1.5 GB developers report as usable on 3 GB A12 phones) |\n| First frame | ≤ 400 ms (Apple's WWDC19 target) |\n| Menu ready | ≤ 1 s |\n| 1985 scenario playable | ≤ 2 s on iPhone XR or SE 2nd generation |\n| Save size | ≤ 1 MB compressed |\n\nMain risks: license-clean 1985 borders, because CShapes and GADM do not allow commercial use; the flaky Metal toolchain step in CI; no Instruments without a Mac; Arabic map labels; strict discipline to keep the simulation repeatable; and memory limits that shift between iOS versions.",
+ "items": [
+  {
+   "topic": "build/CI runners",
+   "finding": "GitHub-hosted runner labels as of 2026-10-19: macos-latest = macOS 26 arm64 (labels macos-latest, macos-26, macos-26-xlarge); macos-15 (arm64) and macos-15-intel; macos-14 deprecated; 'xcode-27' preview image; ubuntu-latest = Ubuntu 24.04, ubuntu-26.04 also available. At most two GA images plus one beta at a time.",
+   "evidence": "https://github.com/actions/runner-images (README table fetched 2026-10-19)",
+   "verified": true
+  },
+  {
+   "topic": "build/CI Xcode pinning",
+   "finding": "macos-26 arm64 image 20261013.0424.1 ships Xcode 26.0.1, 26.1.1, 26.2, 26.3, 26.4.1, 26.5 and 26.6 (default) at /Applications/Xcode_26.x.app, with iOS SDKs 26.0–26.5. macos-15 arm64 defaults to Xcode 16.4, which can no longer produce App Store builds, so pin with `sudo xcode-select -s /Applications/Xcode_26.6.app` on runs-on: macos-26. XcodeGen is not preinstalled on either image.",
+   "evidence": "https://github.com/actions/runner-images/blob/main/images/macos/macos-26-arm64-Readme.md ; https://github.com/actions/runner-images/blob/main/images/macos/macos-15-arm64-Readme.md",
+   "verified": true
+  },
+  {
+   "topic": "App Store SDK requirement",
+   "finding": "Since April 28, 2026, uploads to App Store Connect must be built with Xcode 26 or later and the iOS 26 SDK. The deployment target can stay at iOS 17; Xcode 26 reportedly accepts targets well below iOS 15.",
+   "evidence": "https://developer.apple.com/news/upcoming-requirements/ ; https://developer.apple.com/forums/thread/799576",
+   "verified": true
+  },
+  {
+   "topic": "build/CI Metal toolchain",
+   "finding": "Since Xcode 26 the Metal shader compiler is a separate download (`xcodebuild -downloadComponent MetalToolchain`; check with `-showComponent metalToolchain`). Xcode Cloud, MacPorts and CircleCI all report intermittent 'cannot execute tool metal' failures, and CircleCI listed the toolchain as non-functional on some images. A fallback exists: compile shader source at runtime with MTLDevice.makeLibrary(source:options:).",
+   "evidence": "https://developer.apple.com/forums/thread/802155 ; https://developer.apple.com/forums/thread/809974 ; https://circleci.com/changelog/xcode-26-1-available/ ; https://developer.apple.com/documentation/metal/mtldevice/makelibrary(source:options:)",
+   "verified": true
+  },
+  {
+   "topic": "XcodeGen resources",
+   "finding": "The Target keys are: type, platform, supportedDestinations, deploymentTarget, sources, configFiles, settings, dependencies, info, entitlements, templates, templateAttributes, transitivelyLinkDependencies, directlyEmbedCarthageDependencies, requiresObjCLinking, onlyCopyFilesOnInstall, buildToolPlugins, the pre/post build script keys, buildRules, scheme, legacy, attributes and putResourcesBeforeSourcesBuildPhase. There is no target-level 'resources' key: resources go in 'sources', optionally with buildPhase: resources. Local packages are declared under top-level 'packages: Name: path:'. 'info: path + properties' generates Info.plist. Latest release is 2.46.0.",
+   "evidence": "https://github.com/yonaskolb/XcodeGen/blob/master/Docs/ProjectSpec.md ; https://github.com/yonaskolb/XcodeGen/releases",
+   "verified": true
+  },
+  {
+   "topic": "app lifecycle / future-proofing",
+   "finding": "TN3187: in the next major release after iOS 26, apps built with the latest SDK must use the UIScene lifecycle or they won't launch. A SwiftUI App lifecycle is scene-based, so it already meets this.",
+   "evidence": "https://developer.apple.com/documentation/technotes/tn3187-migrating-to-the-uikit-scene-based-life-cycle",
+   "verified": true
+  },
+  {
+   "topic": "Info.plist",
+   "finding": "CADisableMinimumFrameDurationOnPhone (iOS 15+) must be YES for an iPhone app to request frame rates above the system default (60 Hz) on ProMotion screens. UIRequiresFullScreen is deprecated in iOS 26 and isn't needed for an iPhone-only app.",
+   "evidence": "https://developer.apple.com/documentation/bundleresources/information-property-list/cadisableminimumframedurationonphone ; https://developer.apple.com/documentation/bundleresources/information-property-list/uirequiresfullscreen",
+   "verified": true
+  },
+  {
+   "topic": "rendering / battery",
+   "finding": "MTKView: with isPaused = true and enableSetNeedsDisplay = true, the draw loop stops and drawing becomes event-driven. preferredFramesPerSecond defaults to 60, and the actual rate is a factor of the display maximum. CAMetalDisplayLink (iOS 17+) gives Metal apps control over frame timing and latency, and its isPaused stops callbacks. CAMetalLayer.maximumDrawableCount can only be 2 or 3 (default 3).",
+   "evidence": "https://developer.apple.com/documentation/metalkit/mtkview/enablesetneedsdisplay ; https://developer.apple.com/documentation/metalkit/mtkview/preferredframespersecond ; https://developer.apple.com/documentation/quartzcore/cametaldisplaylink ; https://developer.apple.com/documentation/quartzcore/cametallayer/maximumdrawablecount",
+   "verified": true
+  },
+  {
+   "topic": "thermal / power",
+   "finding": "ProcessInfo.ThermalState.serious: Apple advises reducing CPU and GPU use and 'Reduce the target framerate from 60 FPS to 30 FPS'. .critical: reduce to the minimum needed for user interaction. In Low Power Mode the system reduces CPU and GPU performance; apps read isLowPowerModeEnabled and observe NSProcessInfoPowerStateDidChange.",
+   "evidence": "https://developer.apple.com/documentation/foundation/processinfo/thermalstate-swift.enum/serious ; https://developer.apple.com/documentation/foundation/processinfo/thermalstate-swift.enum/critical ; https://developer.apple.com/documentation/foundation/processinfo/islowpowermodeenabled",
+   "verified": true
+  },
+  {
+   "topic": "memory limits",
+   "finding": "os_proc_available_memory() returns the current limit minus the app's footprint. Apple says it is advisory, should not be cached, and limits change over the app's life. Developer reports: about 1.5 GB usable on 3 GB-RAM iOS devices; jetsam ActiveHard 2098 MB on 4 GB iPhones; per-app limit cut from about 6 GB to 3 GB on an 8 GB iPad from iPadOS 26.4. Footprint is dirty plus compressed memory (WWDC18 416 / WWDC21 10180).",
+   "evidence": "https://developer.apple.com/documentation/os/os_proc_available_memory ; https://developer.apple.com/forums/thread/826949 ; https://developer.apple.com/forums/thread/688973 ; https://developer.apple.com/forums/thread/826325 ; https://developer.apple.com/videos/play/wwdc2021/10180",
+   "verified": true
+  },
+  {
+   "topic": "device floor",
+   "finding": "iOS 17 runs on A12 devices and newer: iPhone XS, XS Max, XR and SE (2nd generation). iOS 26 dropped the XS, XS Max and XR, so A12 phones on iOS 17/18 are the slowest devices to budget for. The XR and SE 2nd generation have 3 GB RAM.",
+   "evidence": "https://9to5mac.com/2023/06/05/ios-17-compatible-iphone/ ; https://9to5mac.com/2025/07/24/ios-26-supports-these-recent-iphones-but-drops-three-models/",
+   "verified": true
+  },
+  {
+   "topic": "launch time",
+   "finding": "Apple's WWDC19 'Optimizing App Launch' sets a target of the first frame within 400 ms. The system uses about 100 ms, leaving about 300 ms for the app.",
+   "evidence": "https://developer.apple.com/videos/play/wwdc2019/423/ ; https://wwdcnotes.com/notes/wwdc19/423",
+   "verified": true
+  },
+  {
+   "topic": "UI / Observation",
+   "finding": "The Observation framework is iOS 17+. SwiftUI and withObservationTracking track only the properties actually read, so changing a property no view reads invalidates nothing. Secondary sources say SwiftUI skips updates when an Equatable value is unchanged, but notifications still fire, so the app should compare before assigning.",
+   "evidence": "https://developer.apple.com/documentation/observation ; https://developer.apple.com/videos/play/wwdc2023/10149 ; https://forums.swift.org/t/manually-trigger-update-for-an-observable-object-property/80054",
+   "verified": true
+  },
+  {
+   "topic": "UI / lists and RTL",
+   "finding": "LazyVStack creates items only as needed, so 170 countries or 5,000 provinces are cheap if rows are lightweight. Forcing .environment(\\.layoutDirection, .rightToLeft) on parts of the screen has reported bugs: NavigationSplitView toolbar items end up misplaced and searchable Lists flip again. An Apple engineer recommends running the app in an RTL language instead, which supports shipping Arabic as the app's own localization.",
+   "evidence": "https://developer.apple.com/documentation/swiftui/lazyvstack ; https://developer.apple.com/forums/thread/850699",
+   "verified": true
+  },
+  {
+   "topic": "Swift concurrency on iOS 17",
+   "finding": "Synchronization.Mutex requires iOS 18 or macOS 15, so an iOS 17 target can't use it; OSAllocatedUnfairLock (iOS 16+) is Apple-only. Actors on a custom DispatchSerialQueue executor: assumeIsolated/preconditionIsolated crash on iOS 17 because the needed runtime support (SE-0424) is newer, and DispatchSerialQueue is missing on Linux. A plain actor on the default executor avoids both problems.",
+   "evidence": "https://forums.swift.org/t/sychronization-mutex-t-in-standard-library-but-restricted-to-ios-18/74803 ; https://forums.swift.org/t/dispatch-queue-based-custom-executor-of-actor-does-not-work-on-ios-17/77136 ; https://forums.swift.org/t/using-dispatchqueue-as-actors-serial-executor-under-linux/75260",
+   "verified": true
+  },
+  {
+   "topic": "Swift 6.2 defaults",
+   "finding": "SE-0466 lets a module default to @MainActor (build setting SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor; SwiftPM .defaultIsolation(MainActor.self)). New Xcode 26 projects enable it along with Approachable Concurrency (SE-0461, SE-0470). Use it for the app target only, never for the simulation package.",
+   "evidence": "https://useyourloaf.com/blog/approachable-concurrency-in-swift-packages/",
+   "verified": true
+  },
+  {
+   "topic": "determinism",
+   "finding": "Swift's Hasher uses a random seed per process, so Dictionary and Set iteration order changes between runs; the simulation must iterate dense arrays in id order. IEEE-754 + - * / and sqrt give the same bits across platforms, but libm functions (sin, exp, pow) differ by about 1 ulp between Apple and glibc, and fused multiply-add can change rounding. Fixed-point integer state avoids all of this and lets the Linux tests match the iPhone exactly.",
+   "evidence": "https://forums.swift.org/t/psa-the-stdlib-now-uses-randomly-seeded-hash-values/10789 ; https://docs.rs/alice-det-math ; https://github.com/mas-bandwidth/fixed",
+   "verified": true
+  },
+  {
+   "topic": "save compression",
+   "finding": "LZFSE matches zlib level 5 for size, runs 2–3x faster for encoding and decoding, and is more energy-efficient. NSData.compressed(using:) is available from iOS 13. LZMESH, which Apple now recommends, needs OS version 27, so record the compression type in the save header. For data that must be decoded on Linux, Apple suggests LZ4, zlib or LZMA.",
+   "evidence": "https://developer.apple.com/documentation/compression/compression_lzfse ; https://developer.apple.com/documentation/compression/compression_lzmesh ; https://developer.apple.com/documentation/foundation/nsdata/compressed(using:)",
+   "verified": true
+  },
+  {
+   "topic": "background save",
+   "finding": "Apple's beginBackgroundTask docs say to call it before writing data so the app isn't suspended mid-write, and as early as possible; calling it at the very end of the background transition may be too late. Every begin must be matched by endBackgroundTask, or the app is killed.",
+   "evidence": "https://developer.apple.com/documentation/uikit/uiapplication/beginbackgroundtask(withname:expirationhandler:)",
+   "verified": true
+  },
+  {
+   "topic": "GPU colour table updates",
+   "finding": "MTLTexture.replace(region:...) copies on the CPU right away without waiting for GPU work. Colour and owner tables updated during play therefore need 3 copies used in rotation, or a sync point. This costs about 3 × 5,000 × 4 B = 60 KB.",
+   "evidence": "https://developer.apple.com/documentation/metal/mtltexture/replace(region:mipmaplevel:withbytes:bytesperrow:)",
+   "verified": true
+  },
+  {
+   "topic": "MSAA on Apple GPUs",
+   "finding": "In an Apple Metal tech talk: A-series GPUs track primitive edges so per-sample blending runs only on edge pixels. Multisample attachments marked memoryless live only in on-chip tile memory and use no system memory, and the resolve step writes straight from tile memory. So 4x MSAA for crisp borders is cheap.",
+   "evidence": "https://developer.apple.com/videos/play/tech-talks/606/",
+   "verified": true
+  },
+  {
+   "topic": "alternatives to Metal",
+   "finding": "SKShapeNode doesn't batch (one draw call per node), and developers report poor FPS and high power with many shape nodes. CAShapeLayer: Apple says 'Shape rasterization may favor speed over accuracy', and shapes are re-rasterized in screen space, so zooming re-rasterizes on the CPU. MapKit was rejected by reasoning: it shows modern borders and labels, needs network tiles and can't use a custom projection.",
+   "evidence": "https://developer.apple.com/forums/thread/693593 ; https://developer.apple.com/documentation/quartzcore/cashapelayer",
+   "verified": true
+  },
+  {
+   "topic": "map data measurements",
+   "finding": "Measured on Natural Earth's ne_10m_admin_1_states_provinces GeoJSON (40.7 MB): 4,596 provinces, 8,535 polygon parts, 111 holes, 1,286,673 vertices, about 1.27M triangles, and 847,302 unique edges (439,371 shared between provinces, 407,931 coast or outer). Douglas-Peucker simplification gives 585k vertices at 0.5 km, 251k at 2 km, 122k at 5 km and 65k at 10 km. At 10 km, only 4,810 of the 8,535 polygon parts survive (small islands vanish), so the coarsest level needs minimum-size rules. The adjacency graph has 10,769 neighbour pairs, average 4.69 neighbours, 268 provinces with no land neighbour, and 251 distinct country codes. Python took 1.25 s just to parse the JSON on a server, so the app must load pre-baked binary files instead.",
+   "evidence": "Own measurement: scripts wf/stats.py and adj.py on https://raw.githubusercontent.com/nvkelso/natural-earth-vector/master/geojson/ne_10m_admin_1_states_provinces.geojson",
+   "verified": true
+  },
+  {
+   "topic": "GPU memory and draw-call estimate",
+   "finding": "Derived from the measurements above. Province shapes at 12 B per vertex with 32-bit indices: 0.5 km level about 7.0 + 6.8 MB, 2 km about 3.0 + 2.9 MB, 5 km about 1.5 + 1.4 MB, 10 km about 0.8 + 0.7 MB, roughly 24 MB in total (about 18 MB with 16-bit indices in chunks). Borders drawn as 20 B instances: about 385k segments at 0.5 km = 7.7 MB, about 13 MB for all levels. Three screen buffers at 2868×1320 BGRA8 = 45 MB; the MSAA buffer is memoryless (0 MB). Draw calls per frame are about 10–15: ocean, terrain, province fill, borders, selection, units, labels and overlays. Wrap-around adds instances, not draw calls.",
+   "evidence": "Arithmetic from the measured counts; buffer counts from the Apple maximumDrawableCount doc",
+   "verified": true
+  },
+  {
+   "topic": "simulation cost",
+   "finding": "C -O2 micro-benchmark on a Xeon at 2.1 GHz, using integer parallel arrays for 5,000 provinces, 170 countries and 2,000 units:\n\n| Work | Time |\n|---|---|\n| Province daily update | 0.025 ms |\n| Unit movement + 100 combats | 0.003 ms |\n| Country totals | 0.005 ms |\n| Monthly pass (10 population groups per province, 170×170 trade and relations tables) | 0.31 ms |\n| 10 simulated years | 180 ms total (0.049 ms/day) |\n| One route search (A*) on the real 4,596-province graph | 0.136 ms, about 900 provinces visited |\n\nWith 20–40x headroom for real game logic, the budget is ≤ 2 ms per average day and ≤ 8 ms for the worst 1% of days on A12. AI route searches must be capped and cached.",
+   "evidence": "Own benchmark: wf/bench.c with graph.txt",
+   "verified": true
+  },
+  {
+   "topic": "speed levels",
+   "finding": "For 1985–2025 (14,610 days):\n\n| Speed | Days/s | Real time | CPU at 2 ms/day |\n|---|---|---|---|\n| 1x | 1 | 4.06 h | 0.2% |\n| 2x | 2 | 2.03 h | — |\n| 5x | 5 | 48.7 min | — |\n| 10x | 10 | 24.4 min | 2% of one core |\n| Max | 30 | 8.1 min | 6% of one core |\n\nKeep the table in data so it can be tuned without code changes.",
+   "evidence": "Arithmetic",
+   "verified": true
+  },
+  {
+   "topic": "data licensing (affects map pipeline)",
+   "finding": "Natural Earth is public domain, so it is safe as the base geometry. CShapes 2.0 (historical borders 1886–2019) is listed as CC BY-NC 4.0 by ETH and CC BY-NC-SA 4.0 by BTAA; either way it bans commercial use. GADM is non-commercial without permission. geoBoundaries licenses vary per file: the most common is ODbL 1.0 (402 sets), plus CC-BY (61), public domain (12) and others.",
+   "evidence": "https://www.naturalearthdata.com/about/terms-of-use/ ; https://www.research-collection.ethz.ch/handle/20.500.11850/487987 ; https://geo.btaa.org/catalog/b23a624e-f1ab-4989-8c94-f99f6e6fa414 ; https://www.naturalearthdata.com/?p=3348 ; https://pmc.ncbi.nlm.nih.gov/articles/PMC7182183/table/pone.0231866.t003",
+   "verified": true
+  },
+  {
+   "topic": "profiling without a Mac",
+   "finding": "MetricKit: MXMetricManager (iOS 13+) delivers on-device daily metric reports and immediate diagnostics from iOS 15. It is deprecated in 27.2 in favour of MetricManager (iOS 27+). Reports need a physical device, so the app should offer an in-app export of these payloads.",
+   "evidence": "https://developer.apple.com/documentation/metrickit/mxmetricmanager ; https://developer.apple.com/documentation/metrickit",
+   "verified": true
+  },
+  {
+   "topic": "audio",
+   "finding": "AVAudioSession category .ambient mixes with other apps' audio and is silenced by the Silent switch and screen lock. It suits game music and sound effects that the game doesn't depend on.",
+   "evidence": "https://developer.apple.com/documentation/avfaudio/avaudiosession/category-swift.struct/ambient",
+   "verified": true
+  },
+  {
+   "topic": "Linux test toolchain",
+   "finding": "swift-actions/setup-swift 2.4.0 supports Swift 6.2 on Ubuntu and macOS, and v3 (built on Swiftly) is coming. Pin the Linux Swift version to the one in the pinned Xcode, using this action or an official swift Docker image.",
+   "evidence": "https://swiftpackageregistry.com/swift-actions/setup-swift",
+   "verified": true
+  },
+  {
+   "topic": "CI cost",
+   "finding": "macOS minutes reportedly count 10x against the private-repo free quota (2,000 Linux minutes ≈ 200 macOS minutes), at about $0.062 per macOS minute. Run Linux tests on every push and macOS builds rarely.",
+   "evidence": "https://docs.github.com/en/enterprise-server@3.17/billing/reference/actions-runner-pricing ; third-party pricing blogs",
+   "verified": false
+  },
+  {
+   "topic": "on-demand rendering practice",
+   "finding": "Zed (GPUI) keeps rendering frames for 1 s after the last input so ProMotion stays responsive, then stops so the display can clock down. The same policy fits the map: 120 Hz while interacting, 0 fps when idle.",
+   "evidence": "https://zed.dev/blog/120fps",
+   "verified": true
+  }
+ ],
+ "recommendations": [
+  "Repo layout: SimCore (pure Swift package, no UIKit, avoid Foundation), MapCore (map file reader, adjacency, CPU picking, detail-level choice), ContentBake (Linux command-line tool: authoring data to versioned binary + checks), App (iOS target). project.yml for XcodeGen 2.46.0. All sources as plain text in git; never commit .xcodeproj or zips.",
+  "Simulation: parallel integer arrays with typed ProvinceID/CountryID (UInt16 behind a wrapper so the width can change later). Int64 fixed-point for money and population, Int32 basis points for ratios. No Float/Double in saved state; no libm functions in the simulation (use baked lookup tables). Own seeded generator (SplitMix64/Xoshiro256**) with one stream per subsystem. Never iterate a Dictionary or Set. Clamp arithmetic instead of crashing on overflow. Implement cheats as flags, not huge numbers.",
+  "Simulation loop: player commands queue up and apply at the start of the next day in (day, sequence) order. step(days:) is synchronous and pure. A plain actor GameHost (default executor) runs the clock loop with ContinuousClock.sleep(until:) and publishes Sendable snapshots through an AsyncStream that keeps only the newest (.bufferingNewest(1)) at ≤10 Hz. Map tables carry version counters and are re-uploaded only when they change.",
+  "Tick schedule: daily = unit movement, combat, sieges, supply, construction counters, due events (from a queue sorted by date, not polling every event). Monthly = budget, taxes, GDP, trade, population, stability, elections, research, AI strategy, relations decay, spread evenly over the month (≈6 countries per day). Yearly = population aging and historical checkpoints. Budget: ≤2 ms average and ≤8 ms worst 1% per day on A12; ≤20 cached AI route searches per day.",
+  "Speed table as data: pause, 1x=1 day/s, 2x=2, 5x=5, 10x=10, max=30 days/s. Under thermal 'serious' cap at 5x and 30 fps; at 'critical' auto-pause with a toast message.",
+  "Map renderer: Metal with a CAMetalLayer view (CAMetalDisplayLink, iOS 17+) or MTKView with isPaused/enableSetNeedsDisplay, inside a UIViewRepresentable; UIKit pinch, pan with momentum, and tap gestures. Bake 4 detail levels offline (about 0.5/2/5/10 km) with topology-preserving simplification on shared border arcs. Use 12 B vertices with province id, split into spatial chunks for culling, and pre-project to Miller cylindrical (latitude about −58° to 84°). Split polygons that cross the 180° line offline, and draw a second offset copy only when the 180° line is on screen.",
+  "Map modes and borders: CPU fills one colour per province (5,000 × RGBA8) per mode in three rotating copies. The fill shader looks up colour by province id; selection and hover are a shader uniform. Borders are instanced segments with left/right province ids; the shader compares owner[left] and owner[right] to choose province, country or coast style and pixel width. Occupation stripes come from a controller array in the shader. Use 4x MSAA on a memoryless attachment.",
+  "Picking: CPU uniform grid (e.g., 512×256 cells) of candidate province ids, then a point-in-polygon test on the 0.5 km rings. Lives in MapCore and is unit-tested on Linux. No GPU ID buffer readback.",
+  "Labels: shape Arabic with Core Text (CTLine/CTRun). Version 1 rasterizes each label into an atlas of about 2048² R8, with province labels loaded lazily in the visible area and evicted least-recently-used. A later version can build a glyph atlas from CTRun glyphs and positions for curved country names. Use the system Arabic font, or an OFL font if bundling one.",
+  "UI: SwiftUI for HUD, dock, sheets and menus; one small @Observable model per panel. Round values to display precision and assign only when changed, at ≤10 Hz. List or LazyVStack for long tables, with sorting and filtering done off the main thread from snapshots. Avoid live blur materials over the moving map; use opaque or simple translucent HUD backgrounds.",
+  "Arabic: set CFBundleDevelopmentRegion=ar and use a String Catalog (.xcstrings) so iOS mirrors the layout natively. Force left-to-right only for the map view itself. Use leading/trailing everywhere. Put all number and date formatting in one place and decide Arabic-Indic vs Western digits there. Add English later through the system's per-app language setting.",
+  "Saves: chunked binary format (header: magic, format version, scenario id, content hash, checksum, compression type, uncompressed size; chunks with tag, version and length; unknown chunks skipped). Each save is a full snapshot that doesn't depend on bundled data. The compression wrapper (LZFSE now; LZMESH possible on iOS 27+) stays in the app layer so SimCore round-trips are tested on Linux. Write atomically into Application Support/Saves. Keep 3 rotating autosaves: on background, every ~5 real minutes, and at most every 2 min at month ends. Never copy bundled content into writable folders.",
+  "Migrations: v(n) to v(n+1) chain. CI keeps example saves from every released format version and requires the current build to load them all. Store a command journal since the last autosave for bug reports and replays.",
+  "Lifecycle: scenePhase .inactive pauses; .background calls beginBackgroundTask before saving, saves, stops drawing and suspends the audio engine. On a memory warning, drop label atlases, the finest map detail when zoomed out, and flag and sound-effect caches; keep game state. Thermal and Low Power governor: 120 Hz only while interacting; in Low Power Mode cap at 60 fps and render on demand; at 'serious' 30 fps, no MSAA and a lower render scale; show os_proc_available_memory in the debug overlay.",
+  "CI engine.yml (ubuntu-24.04, every push): setup-swift pinned to the Swift version in the chosen Xcode; swift build and swift test for SimCore, MapCore and ContentBake; a determinism test (fixed seed, 10 simulated years, state hash compared to a stored value, also run on macOS in the release job); invariant checks (money and population conserved); data checks (symmetric adjacency, every province owned, every country has a flag and an Arabic name, valid polygons, population totals within tolerance); performance regression check (ms per day must stay ≤ 2× baseline).",
+  "CI ios.yml (runs-on: macos-26, on main, tags or manual trigger): xcode-select /Applications/Xcode_26.6.app; xcodebuild -downloadComponent MetalToolchain plus a check (keep a build flag to compile shaders at runtime if this fails); install a pinned XcodeGen; xcodegen generate; xcodebuild -sdk iphoneos -configuration Release CODE_SIGNING_ALLOWED=NO; package Payload/*.app into an .ipa. Then the IPA gate: unzip; check the binary exists and is arm64; MinimumOSVersion=17.0; UISupportedInterfaceOrientations only LandscapeLeft and LandscapeRight; CADisableMinimumFrameDurationOnPhone=true; CFBundleIconName present plus Assets.car; default.metallib (unless using the runtime fallback); map and scenario files with the expected hashes; ar.lproj strings; IPA size between a floor (e.g., ≥5 MB) and a ceiling (e.g., ≤120 MB). Upload the artifact.",
+  "Info.plist via XcodeGen info.properties: UISupportedInterfaceOrientations [LandscapeLeft, LandscapeRight]; UILaunchScreen; CADisableMinimumFrameDurationOnPhone YES; UIRequiresFullScreen not needed; hidden status bar and home indicator in SwiftUI; ITSAppUsesNonExemptEncryption NO; TARGETED_DEVICE_FAMILY=1; minimal entitlements so the user can re-sign easily; app icon as a single 1024 px AppIcon in Assets.xcassets.",
+  "Profiling without a Mac: hidden debug overlay showing frame time (from display-link timestamps), GPU time (MTLCommandBuffer gpuStartTime/gpuEndTime), simulation ms per day (average and worst 1%), phys_footprint and os_proc_available_memory, thermal state, draw calls and vertex count. Export MetricKit payloads through the share sheet. Run a short simulator UI smoke test in the release CI job.",
+  "Performance budgets to enforce:\n\n| Area | Budget |\n|---|---|\n| GPU per frame | ≤4 ms at 120 Hz; ≤8 ms at 60 Hz on A12 |\n| Main thread per frame | ≤4 ms |\n| Draw calls | ≤15 |\n| Visible vertices | ≤250k per frame |\n| Map geometry | ≤45 MB |\n| Textures | ≤30 MB |\n| Screen buffers | ≤45 MB |\n| Memory footprint | target ≤250 MB, hard ceiling 350 MB |\n| First frame | ≤400 ms |\n| Menu ready | ≤1 s |\n| Scenario playable | ≤2 s on XR or SE 2nd gen |\n| Save | ≤1 MB compressed; ≤2 ms main-thread stall; ≤100 ms background |\n| Simulation CPU | ≤6% of one core at max speed |\n| IPA | ≤80–120 MB |",
+  "Map data plan: start from Natural Earth admin-1 (public domain) as the basic province units. Rebuild 1985 sovereignty by assigning provinces to 1985 states, and hand-edit the few lines that don't follow modern admin-1 borders, with documented, commercially usable sources. Use CShapes and GADM at most as non-shipped reference after legal review. Keep the authoring data as diffable text in git; ContentBake produces the binaries."
+ ],
+ "risks": [
+  "1985 historical borders with a commercial-use license: the free historical datasets (CShapes 2.0, GADM) are non-commercial, and Natural Earth admin-1 reflects modern divisions. Hand edits are needed for the USSR, Yugoslavia, Czechoslovakia, the two Germanys, the two Yemens, Ethiopia/Eritrea, Sudan, Namibia/SWA and others. This is the biggest risk to 'realism' and to publishing.",
+  "Xcode 26 Metal toolchain is a separate download and has been flaky on CI (Xcode Cloud, CircleCI, MacPorts reports). A broken step can block every iOS build; keep the runtime shader-compile fallback and pin Xcode point releases.",
+  "No Mac means no Instruments, no local simulator and no debugger. Performance and memory problems must be caught through the in-app overlay, MetricKit exports and CI tests, so device-specific GPU or thermal problems may be found late.",
+  "macOS CI minutes are expensive on private repos (reportedly a 10x multiplier), so frequent iOS builds can exhaust the quota. Gate macOS jobs, cache artifacts, and do most testing on Linux.",
+  "Determinism needs constant discipline. One Double in saved state, a libm call, a Dictionary loop, or an unordered parallel merge breaks the Linux-vs-iPhone match and replay. Integer overflow crashes in production unless arithmetic clamps.",
+  "Swift 6 strict concurrency on iOS 17: no Mutex (iOS 18+), custom actor executors are buggy on iOS 17, and SE-0466 MainActor defaults could leak into the simulation package if misconfigured. Keep SimCore free of concurrency and nonisolated.",
+  "Memory limits change between OS releases (e.g., iPadOS 26.4 halved the per-app limit on 8 GB iPads). Keep the footprint far below the limit and watch os_proc_available_memory.",
+  "Arabic text on the Metal map (shaping, mixed-direction text, curved labels) is real engineering work. Arabic-Indic vs Western digits and font licensing must be decided early.",
+  "SwiftUI over a live Metal view: blur materials, over-broad @Observable reads, or a 10 Hz HUD with unrounded values can cause redraw storms and frame drops on A12. iOS 17's Observation may not skip equal assignments (unverified).",
+  "Admin-1 provinces vary hugely in size (e.g., huge Russian or Canadian units vs tiny European ones). Gameplay balance may require splitting or merging, which changes province ids. Save files and scenario data need stable province ids from day one (a mapping table in the baked content).",
+  "Antimeridian and wrap-around edge cases (Fiji, Chukotka, Aleutians, labels and units crossing the 180° line) need offline polygon splitting and careful camera math.",
+  "Future toolchains may raise the minimum deployment target above iOS 17 or add new rules (UIScene is now required after iOS 26; App Store SDK minimums move every year). Re-check each spring.",
+  "Saves must survive years of updates. Without saved example files per format version in CI, a field rename or scenario content change can silently break old saves.",
+  "Distributing an unsigned IPA and re-signing it with the user's own certificate: entitlements must stay minimal, and certificate expiry or revocation can stop the app launching (operational, not architectural)."
+ ],
+ "unverified": [
+  "Exact per-device memory kill limits (jetsam) for iPhone XR, XS and SE 2nd gen on iOS 17/18. The ~1.5 GB (3 GB devices) and 2098 MB (4 GB iPhones) figures are developer reports, not Apple specs.",
+  "Whether CAMetalLayer screen buffers (IOSurfaces) count fully toward the app's memory footprint, and whether read-only memory-mapped asset files used as Metal buffers via makeBuffer(bytesNoCopy:) stay 'clean' memory.",
+  "Whether the macos-26 runner image preinstalls the Metal toolchain; the image README lists no Metal-toolchain entry.",
+  "Whether the @Observable generated setter skips notification for equal Equatable values on the iOS 17 runtime, or only with newer Swift/OS versions.",
+  "A12 single-core speed relative to the 2.1 GHz Xeon used for the C benchmark, and the Swift-vs-C overhead (assumed 1–2x with bounds checks and no ARC in hot loops).",
+  "GPU throughput and fill-rate numbers for A12 and A15+ supporting the ≤4 ms / ≤8 ms GPU budgets; the budgets are engineering estimates to be confirmed with the in-app overlay on real devices.",
+  "Swift compiler default behaviour for fusing a*b+c into FMA (floating-point contraction).",
+  "Low Power Mode capping ProMotion to 60 Hz (secondary sources only).",
+  "GitHub Actions macOS 10x minute multiplier and current github.com per-minute prices (secondary sources; only Enterprise Server docs found).",
+  "LZFSE compression ratio on this game's save data (assumed 3–5x, giving ≤1 MB saves), and encode-plus-write time (assumed ≤100 ms in the background).",
+  "Time to compile shaders at runtime with makeLibrary(source:) on A12 (assumed tens to a few hundred ms on first launch), and whether the system caches the compiled result.",
+  "That a SwiftUI List on iOS 17 is backed by UICollectionView (only laziness of LazyVStack was verified).",
+  "That an app with only an Arabic localization (development region ar) runs in Arabic RTL on a device set to another language, and that iOS per-app language settings will cover adding English later.",
+  "Which Swift version Xcode 26.6 bundles (6.2.x vs 6.3.x); the Linux CI toolchain must match it.",
+  "Rough IPA size (≤80–120 MB) and memory breakdown items: UI and fonts 30–50 MB, code/runtime about 30 MB, audio about 7 MB.",
+  "Whether historical flags on Wikimedia Commons (USSR, GDR, Yugoslavia, Zaire, etc.) are all public domain; check each flag.",
+  "Speed levels of comparable commercial grand-strategy games (days per second) for calibration; the proposed table is a design choice, not a benchmark."
+ ]
+}

@@ -1,0 +1,122 @@
+[
+ {
+  "proposal": "B-realism",
+  "flaw": "Map tiling cannot work as written. The 0.5 km detail level is cut into 8x4 tiles (about 5,000 km) with 16-bit indices per tile. Measured on Natural Earth admin-1 in Miller projection, the densest tile has 109,721 vertices, above the 65,535 limit, so it would render corrupted or force 32-bit indices. Tiles this coarse also make culling useless (the GPU processes a 5,000 km tile to show about 500 km), which inflates visible vertices toward the 250k budget for no benefit.",
+  "fix": "Use A's scheme: 3 detail levels at 10/2/1 km (1 km is under 2 pt of error at the deepest zoom), 1,024 km chunks at the finest level and 2,048 km at the middle one. Measured worst chunks are 11k and 17k vertices. Use 8-byte quantized vertices and drop the 0.5 km level. Any streaming must load chunks asynchronously and draw the coarser level until the chunk is ready."
+ },
+ {
+  "proposal": "B-realism",
+  "flaw": "Its budgets accept a heavier app than the user's 'never heavy' condition allows: a 250 MB memory target with a 350 MB ceiling, IPA up to 80 MB including about 25 MB of commissioned music, 120 fps as the interaction target, a hillshade texture sampled every frame, and the yearly 1 January work spiking to 20 ms instead of being spread.",
+  "fix": "Adopt A's budgets as gates: memory target 150 MB or less with a 200 MB ceiling, IPA 40 MB or less, audio 7 MB or less (2 ambient tracks), 120 Hz only while a finger is on the screen and the phone is cool, yearly work spread over 1-28 January, and hillshade deferred until a device test shows 1 ms or less of GPU time."
+ },
+ {
+  "proposal": "C-foundation",
+  "flaw": "Unit animation runs at 30 fps whenever visible units move. The 1985 start already has active wars (Iran-Iraq, Afghanistan), so whenever a front is on screen the map renders at 30 fps continuously at any game speed. The 0 fps idle guarantee then holds only in peacetime, and battery and heat budgets are blown in exactly the scenes players watch most. B has the same flaw.",
+  "fix": "Default to A's discrete province-to-province jumps plus static arrows (0 extra frames). If motion is wanted, use a short tween (200-300 ms) only on the day a unit arrives, only at 2x speed or slower, and let the governor turn it off at the 'fair' thermal state or worse and in Low Power Mode. Add a smoke test that counts frames with a war front on screen at 1x."
+ },
+ {
+  "proposal": "C-foundation",
+  "flaw": "The engine's fixed-point type `Fx` is decimal (Int64 x 10^6) and multiplies through multipliedFullWidth/dividingFullWidth, which puts a 128-bit division on every multiply in hot loops. My microbenchmark (C, x86, -O2) shows 4.6 ns per op against 1.0 ns for a binary Q32.32 multiply with a shift. Swift's dividingFullWidth is unlikely to be faster on arm64 (unverified). Spread over hundreds of thousands of ops a day, this alone can take a large share of the 2 ms/day budget.",
+  "fix": "Use binary fixed-point (Q32.32 for growth maths, Q16.16 or basis-point integers with a 64-bit divide by a constant for ratios). Convert to decimal only at the GameFormatter display boundary. Lock the results with golden-value tests."
+ },
+ {
+  "proposal": "C-foundation",
+  "flaw": "The IPA gate accepts either default.metallib or shader source plus a flag in any build, release builds included. A CI failure to download the Metal toolchain can therefore silently ship a build that compiles shaders at runtime on every cold launch (cost on A12 unverified, plausibly hundreds of ms), which breaks the 400 ms first-frame budget.",
+  "fix": "Take A's rule: the fallback is allowed only for dev-only builds. Tagged and release builds must contain a precompiled default.metallib, and the IPA gate fails otherwise."
+ },
+ {
+  "proposal": "A-lightness",
+  "flaw": "The route-search budget does not add up. All three proposals allow up to 20 new A* searches a day, but the research benchmark measured 0.136 ms per search in C on a server, so 20 searches is about 2.7 ms. That is more than the whole 2 ms/day mean budget before the Swift and A12 penalties, and C's sub-budget gives AI only 0.5 ms. Wars are active from 1 Jan 1985, so heavy days are the normal case, not the exception. B and C share this flaw.",
+  "fix": "Use hierarchical routing: precompute a coarse region graph offline, cache a distance field per front that is rebuilt only when ownership changes, and spread the remaining cold searches over several days (about 3-5 a day). Make the CI bench run the 1985 war scenario so the mean and worst-1% gates cover wartime days."
+ },
+ {
+  "proposal": "A-lightness",
+  "flaw": "GDP is a single nominal measure, with UNSD AMA (official exchange rates) canonical for socialist states, and every cost is paid in constant 1985 USD. This mis-scales the USSR, China and India. Their 1985 force structures (PLA about 4M, Soviet forces about 5M) cost more than their nominal budgets on day 1, so superpower parity, which is the core of a 1985 Cold War game, is lost. It is also a missing foundation column, so fixing it later means rework.",
+  "fix": "Add a per-country price-level column in M1 (PPP conversion factor: PWT/Maddison where available, CIA Handbook dollar-cost ratios for the Soviet bloc, tagged 'estimate'). Use nominal USD at market exchange rates for trade, external debt and the treasury display. Use real PPP output for the production function, military production and research. Scale domestic costs (pay, construction, research labour) by the price level. Add a t0 budget-closure test: on 1 Jan 1985 every country's force upkeep plus civil spending must reproduce its WMEAT military-expenditure share and its fiscal balance within a band."
+ },
+ {
+  "proposal": "C-foundation",
+  "flaw": "The same single-GDP problem: AMA nominal, with CIA used only for 'weak' series. In addition, α per country is taken from PWT labour share, which is probably missing for the USSR, GDR, Czechoslovakia and Yugoslavia before 1990 (unverified) and is imputed for many developing countries. The production dynamics are therefore not calibratable for the Soviet bloc.",
+  "fix": "Use the dual nominal + price-level design above. Use α = 1/3, or one value per development tier, with A (TFP) as the residual. Use PWT only for K/Y and human capital where it exists, and tagged CIA or Easterly–Fischer-style estimates elsewhere."
+ },
+ {
+  "proposal": "C-foundation",
+  "flaw": "Decision D3 assigns Gaza and the West Bank to 'Palestine' as owner in 1985. That entity did not exist until the declaration of 15 Nov 1988. This is a factual anachronism on the most sensitive territory for an Arabic-language audience.",
+  "fix": "Adopt B's model. Set sovereign = none (contested) and administrator/controller = Israel. Give Jordan a claim on the West Bank until a dated 31 Jul 1988 disengagement event. Model the PLO as a claimant movement (Arab League–recognised representative, headquarters in Tunis). A dated 15 Nov 1988 event can create Palestine as a claimant with recognitions. Add these as facts_1985.yaml assertions."
+ },
+ {
+  "proposal": "A-lightness",
+  "flaw": "There are no age cohorts (C has only 3). Military-age manpower uses a static WPP share, so 1985–2025 ageing (China, the USSR, Europe) and the manpower trends of the Iran–Iraq war cannot be reproduced. Adding cohorts later changes the population system and the save chunks, which breaks the 'never rework' condition.",
+  "fix": "Store WPP 5-year × 2-sex cohorts (34 values) per country, about 50 KB in total, aged once a year, with provinces inheriting the country structure (B's design). Manpower comes from males 15–49 × fit share × conscription tier. Calibrate against WPP 1990/2000 in the nightly band."
+ },
+ {
+  "proposal": "A-lightness",
+  "flaw": "Combat attrition is 2%/day for the attacker and 1.5%/day for the defender at R=1, applied daily in every contested province with no intensity or posture distinction. A static front such as Iran–Iraq would lose most of both armies within months, so the 'not decided before 1988' band can only be met by hacks.",
+  "fix": "Separate positional fronts (attrition of roughly 0.02–0.1%/day) from offensives (QJM-scale 1–3%/day for a limited duration, ended by organisation or supply). Add C's frontage cap. Calibrate against published totals: Soviet Afghan war dead (about 14–15k over 1979–89) and Iran–Iraq total-loss ranges, both stored as source-tagged bands."
+ },
+ {
+  "proposal": "All",
+  "flaw": "The debt-crisis trigger (debt service above 30% of exports) is a level test. In 1985 much of Latin America, Africa and Eastern Europe was already above it and already in rescheduling or IMF programmes (Mexico, Brazil, Argentina, Peru, the Philippines, Poland, Nigeria, Zaire and others), so crisis events would fire on day 1 for dozens of countries, contradicting history.",
+  "fix": "Add a debtStatus start column (current / arrears / rescheduling / IMF programme) from World Bank International Debt Statistics (CC BY 4.0; licence to be verified) plus a hand-coded 1985 programme list. Trigger crises on transitions, not levels. Add a t0 invariant: no non-historical crisis event fires in the first 30 days."
+ },
+ {
+  "proposal": "B-realism",
+  "flaw": "The scope cannot be delivered by one developer plus AI, and it conflicts with the lightness condition. M1 alone holds about 3,000 provinces, every border case, 250 sea zones, 180 air zones, 4 tiled and streamed detail levels, and the 1985 administrative-region layer. Later work adds a bilateral trade matrix, about 150 historical events, intelligence estimates in 1.0 and a 25 MB commissioned soundtrack, with a 250 MB memory target and an 80 MB IPA. The likely result is an unfinished foundation, a common failure mode for large solo projects.",
+  "fix": "Keep B's realism model (status fields, cohorts, shortage index, anachronism cost, trajectory gate) but adopt A's budgets:\n- about 2,200–2,500 provinces, with B's population-aware merge and conflict-zone refinement\n- 3 detail levels at a 1 km finest level\n- theatres derived from region clusters instead of separate air zones\n- aggregate trade, with a gravity model deferred\n- 80 historical + 40 generic events at 1.0\n- at most 2 music tracks, an IPA of 60 MB or less, memory of 150–200 MB"
+ },
+ {
+  "proposal": "All",
+  "flaw": "The licence allowlist includes 'IMF data terms' (WEO, GFS, HPDD; B adds DOTS) as safe for commercial redistribution. That is unverified: the official page could not be fetched, and IMF terms have historically required permission for some commercial reuse. HYDE 3.3's licence and 1985 time step, and FAOSTAT's prohibited-use terms, are also unverified, yet all three are planned as shipped inputs for a paid app.",
+  "fix": "Treat IMF data as cross-check only, or ship it only after written permission. Ship World Bank WDI/IDS (CC BY 4.0) and CIA Handbook (public domain) values for fiscal and debt start values. Mark HYDE and FAOSTAT 'pending-verification' in SOURCES.yaml so the licence gate blocks a release build until a human records the verified licence URL."
+ },
+ {
+  "proposal": "A-lightness, B-realism, C-foundation (all)",
+  "flaw": "All three treat the country set as fixed (A: about 180 rows; B: 'provinces, countries and country-pair tables are fixed'; C L3: 'provinces and countries are fixed sets'). Yet the 1985 to 2025 sandbox and their own content need countries to be born and to die: Yemeni unification (C lists it as a scripted event), German reunification, the breakups of the USSR, Yugoslavia and Czechoslovakia, Namibia in 1990, Eritrea in 1993, and insurgents or factions that 'become states' (A, B). Adding this later means resizing the dense pair table, the stagger slots, the flag atlas, label anchors, colour assignment, AI personality tables and the save chunks, which is a rework of the base.",
+  "fix": "Use a fixed registry with dynamic existence, starting in M1. country_registry.csv lists every 1985 state plus every successor, releasable or insurgent-state candidate up to 2025 (about 250–260 rows). Each row has a stable tag, Arabic name, flag, offline graph-coloured colour, capital province and an `exists` column. Size the pair table to registry capacity (260² × 8 B is about 0.5 MB). Monthly staggering and the AI skip rows that do not exist. Add CreateCountry, ReleaseCountry and UnifyCountries Commands to the M1 Command enum, with one Linux test each (for example YAR + PDRY → YEM). New candidates later are append-only registry rows, which the ID-lock gate allows."
+ },
+ {
+  "proposal": "A-lightness",
+  "flaw": "The price index, exchange-rate index and TFP are 'Indices: Q16' (16.16), which saturates at 32,767. The proposal explicitly models hyperinflation (Bolivia, Argentina and Israel in 1985, using the Cagan cap), and 30% a year inflation over the 40-year sandbox already exceeds the range (1.3^40 is about 36,000). Saturating arithmetic hides the overflow and corrupts the economy without any error. Changing the unit later changes every save and every formula.",
+  "fix": "Store the price level and exchange-rate index as log2 in Int64 fixed point. Alternatively, use Int64 scaled by 1e6 as C does, and add a currency-redenomination event that rebases the index. Use Q32.32 or the 1e6 Int64 type for TFP and growth maths. Adopt C's invariant that the saturation counter stays at 0 in games without cheats."
+ },
+ {
+  "proposal": "A-lightness",
+  "flaw": "Save chunks are positional binary layouts with per-chunk upgraders that run on an unspecified 'decoded intermediate'. Each format bump therefore needs the old binary decoder kept forever, which contradicts the proposal's own rule against keeping old structs. Over years of additive features this becomes the main source of save breakage.",
+  "fix": "Adopt C's self-describing tables: each chunk is rows plus columns {name, typeTag, encoding}. Migrations run on an untyped SaveTree of named columns, using addColumn, rename, convertUnits and remapIDs. Add a test that fails when an engine column has no SaveDefaults entry."
+ },
+ {
+  "proposal": "A-lightness",
+  "flaw": "Province IDs `p.<country>.<slug>` put a political owner into an ID that can never change. The owner differs between scenarios (Crimea, Eritrea, Kosovo, Walvis Bay, Hong Kong), which contradicts A's own rule R5 ('geography is data') and will mislead every future maintainer and AI session.",
+  "fix": "Use politics-free IDs, either `p.<slug>` (B) or `p00001` plus a slug column (C). Record the source atoms and modern ISO code as registry columns, not in the ID."
+ },
+ {
+  "proposal": "B-realism",
+  "flaw": "SaneiEngine depends on SaneiMap, which owns map.bin LOD tiles, picking and A*. Gameplay logic is coupled to the render geometry format, so engine unit tests need the geometry pack and a change to the map format or LODs touches the engine.",
+  "fix": "Bake adjacency (in CSR form with edge flags), the sea-zone and air-zone graphs, terrain statistics and A* inputs into ContentDB/content.bin. Keep SaneiMap for rendering and picking only, and have Engine and AI never import it, enforced by imports.sh (C's boundary)."
+ },
+ {
+  "proposal": "B-realism (also C-foundation's Golden/hashes and replays)",
+  "flaw": "A blocking gate requires a 2-year 1985 run to match a stored hash, and golden replays are compared by hash. Every balance or formula PR changes the hash, so one developer plus an AI will either face constant red CI or learn to auto-regenerate the hash. Either way the determinism gate stops protecting anything.",
+  "fix": "Check determinism within the build only: run twice and compare, compare x86_64 with arm64, and check that save, load and continue matches an uninterrupted run, with no stored hash. Store hashes only for DetRNG and DMath golden values. Golden replays assert invariants plus a bug-specific predicate (for example 'treasury never negative after CancelProject'), never a final-state hash."
+ },
+ {
+  "proposal": "B-realism, C-foundation",
+  "flaw": "Saves and bug bundles are LZFSE-compressed on the phone, but `simcli replay` runs on Linux, which has no LZFSE decoder: B uses zlib only as a test proxy, and C's .saneibug is LZFSE. With no Mac, replaying the phone's bug report on Linux is the only real debugging loop, and as designed it cannot read the file.",
+  "fix": "Use raw DEFLATE (COMPRESSION_ZLIB in Apple's Compression framework, which Linux zlib reads) for every save and bug bundle. Saves are 1 MB or less, so speed does not matter. Alternatively, vendor the BSD-3 reference LZFSE into simcli as A does. Add a CI test that decodes a device-format fixture on Linux."
+ },
+ {
+  "proposal": "A-lightness, B-realism, C-foundation (all)",
+  "flaw": "The blocking tick benchmark gate fails at 25% above a wall-clock baseline on shared GitHub runners, whose run-to-run variance is often that large. The likely result is flaky merges, and then the gate gets disabled.",
+  "fix": "Block merges on deterministic work counters: systems run per day, route searches, supply recomputes, allocations per tick, entity counts and state bytes. Block on wall-clock only above 2× the baseline. Track wall-clock trends nightly and open an issue instead of blocking."
+ },
+ {
+  "proposal": "A-lightness, C-foundation",
+  "flaw": "The province index order in the Python-built map.bin or mappack (the uint16 province in each vertex and border segment) must match the Swift Interner's dense order in content.bin, and neither proposal states this contract. A mismatch colours the wrong provinces with no error, a 'green build, broken game' failure.",
+  "fix": "The map pack embeds its ordered province ID list and a hash of that list. content.bin records the same hash. The app refuses to load on a mismatch, and both the Linux bake gate and the IPA gate compare the two hashes."
+ },
+ {
+  "proposal": "B-realism",
+  "flaw": "The M1 'never rework' milestone bundles about 3,000 provinces with ADM2 refinement zones, every 1985 special case, future-scenario cut lines, air and sea zones, an LRU tile-streaming renderer, labels, the setup screen and all CI gates, at an estimated 6–8 weeks. For one developer plus an AI, the foundation milestone is likely to stall or be finished with shortcuts.",
+  "fix": "Precede it with A's M0 install-path proof. Split M1 into M1a (engine, saves, CI and a map from Natural Earth grouping only, with the registry, aliases and mapVersion in place) and M1b (own-work polygons and refinement zones as map version 2 with alias migration). Drop tile streaming in favour of A's and C's single memory-mapped pack."
+ }
+]

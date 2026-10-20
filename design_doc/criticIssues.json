@@ -1,0 +1,434 @@
+[
+ {
+  "critic": "rework-hunter",
+  "area": "Scenario pipeline / content schema (event effect vocabulary and enums)",
+  "problem": "The rule 'each scenario is data only' is enforced by a CI gate that rejects Swift changes. But the effect vocabulary and the fixed Swift enums were sized for 2011 only: regime types (10), electoral systems (FPTP / two-round / list PR / mixed / indirect), monetary regimes (float / managed / peg / union / dollarized), and lifecycle effects (createCountry, Release, Unify, Annex). There are no effects for dissolving a state into successors and allocating its assets, for continuator rules (UN seat, treaties, debt, forces, nuclear stock), for a government in exile, for a franchise restricted by group, or for non-convertible or multiple exchange rates.",
+  "consequence": "The planned packs need exactly these things:\n- 1990: Iraq annexes Kuwait as a governorate (28 Aug 1990) while Kuwait's government sits in exile at Taif. Yemen unifies (22 May 1990). Germany reunifies (3 Oct 1990) and the DDR's treaties lapse. The USSR dissolves in Dec 1991, with Russia as continuator and nuclear weapons stationed in Ukraine, Belarus and Kazakhstan. Czechoslovakia splits on 1 Jan 1993 with no continuator.\n- 1979/1985: Iran's 1979 constitution. Rhodesia becomes Zimbabwe (Apr 1980) with a franchise change. South Africa has a whites-only parliament, then the 1984 tricameral one. COMECON and USSR currencies are non-convertible.\n\nEach of these needs a Swift change, so the scenario gate rejects the 2026, 1990, 1985 and 1979 packs, breaking the user's 'no code changes per scenario' rule.",
+  "fix": "Before M1a closes, list the headline events and institutions of all five planned packs and derive the effect vocabulary from that list. Add a 'succession' effect with explicit allocation tables (provinces, debt, treasury, formations, equipment, treaties, UN seat, bloc seats, party rows, nuclear stock). Add government-in-exile and franchise-by-group parameters. Turn regime types, electoral systems and monetary regimes into data-defined parameter sets instead of closed Swift enums. Add a CI test that parses a stub pack for each planned scenario.",
+  "severity": "high"
+ },
+ {
+  "critic": "rework-hunter",
+  "area": "Data model: state vs government (recognition, rival governments)",
+  "problem": "Recognition is one bit per country pair and only covers states. Each country has exactly one leader and one government. There is no way to hold two governments competing for the same state, or a government that is recognised by some states and not others, while the state itself stays universally recognised.",
+  "consequence": "The first scenario already needs this:\n- On day 1, Côte d'Ivoire has Gbagbo and Ouattara as rival presidents (the UN accepted Ouattara's credentials).\n- In 2011, Libya's NTC is recognised country by country and takes the UN seat on 16 Sep 2011. That is a change of government recognition, not a new state.\n\nThe 2026 pack needs it everywhere:\n- Afghanistan: the Taliban government has been recognised only by Russia, since 3 Jul 2025.\n- Sudan: the SAF-led government versus the RSF 'Tasis' government sworn in at Nyala in Aug 2025, which the UN Security Council and the AU refuse to recognise.\n- Libya (GNU versus the eastern government) and Yemen (Presidential Leadership Council versus the Houthis).\n\nThe only workarounds are fake country tags plus UnifyCountries hacks. Those break UN seats, sanctions on frozen assets, treaty continuity and the player's choice of side. Fixing it later changes the pair table, the country table, saves and the AI.",
+  "fix": "Separate a 'polity' (the state: territory, sovereignty, UN membership) from a 'government' (the authority holding the executive role, a budget and forces). Allow N governments per polity, with one marked as holding the UN seat. Add a pair bit for 'recognises government G' next to state recognition. The player picks a government, not a tag. Declare these tables in M1a with SaveDefaults.",
+  "severity": "high"
+ },
+ {
+  "critic": "rework-hunter",
+  "area": "Data model: one political actor across party, movement, faction and government",
+  "problem": "Five separate entity kinds with separate ID spaces describe what is often a single real actor: parties (≤8 slots per country), emerging opposition movements (≤4), insurgent movements (handle table, ≤300), controller factions (Hamas, al-Shabaab, Forces Nouvelles) and ruling-party internal factions. Moving from one kind to another means copying data into a new entity.",
+  "consequence": "On 1 Jan 2011 one actor already plays several roles at once:\n- Hezbollah is a party in parliament and cabinet and also an armed force controlling south Lebanon.\n- Hamas won the 2006 legislative election, controls Gaza and has an armed wing.\n- The SPLM is a Sudanese party that becomes South Sudan's ruling party on 9 Jul.\n- Egypt's Muslim Brotherhood goes from opposition to the FJP party (2011) to ruling (2012) to banned (2013).\n- In flexible play the Taliban go from insurgency to government.\n\nEvery copy loses identity: province support, foreign-support links, spy networks, history, and the target IDs of 'support opposition or insurgents' and 'election influence' operations. Unifying the kinds later means a save migration for every chunk that references them (PRTY, MOVE, SPYO, PROV controller).",
+  "fix": "Create one registry of political actors with stable IDs (country-scoped, plus runtime serials) and role components: party role (support, seats), armed role (formations, movement strength), controller role (control%), and government role (budget, executive). Changing role keeps the ID. Renderer controller arrays and spy-operation targets reference the actor ID. Decide this in M1a together with the polity/government split.",
+  "severity": "high"
+ },
+ {
+  "critic": "rework-hunter",
+  "area": "Data model: party slots, lifecycle and ownership change",
+  "problem": "Party support is stored per province in up to 8 slots, read against the administrator's party table, and coalitions are enumerated over those 8 slots. There is no global party ID, no rule for when a party dissolves, merges or appears, and no rule for remapping when a province changes administrator.",
+  "consequence": "- Slot overflow: 6 real parties + 'others' + up to 4 legalised opposition movements = 11, more than 8.\n- New parties are needed inside the first scenario. Egypt's NDP was dissolved in April 2011, and the 2011–12 winners (FJP, Nour) did not exist on 1 Jan 2011.\n- When South Sudan is created on day 190, the 10 southern provinces' slot k still points at Sudan's slot-k party (NCP, SPLM, …). Support silently becomes another country's party.\n- Over 90 years, reusing slots corrupts history and old saves.",
+  "fix": "Give every party a stable ID with a country (or polity) owner. Store support as sparse (province, party) rows, or as slots plus a per-province party-ID column. Add effects for creating, dissolving and merging parties. Remap or reseed support explicitly on every administrator change (CreateCountry, Annex, peace transfer). Raise the per-country cap to about 12 (coalition enumeration grows from 162 to 793 combinations, which is still cheap).",
+  "severity": "high"
+ },
+ {
+  "critic": "rework-hunter",
+  "area": "Economy data model: unit of account, money stock and reserves",
+  "problem": "`Money` is defined only as constant 2011 USD. Yet the rules depend on nominal local-currency quantities:\n- domestic debt eroded by inflation\n- pegs and devaluation\n- a Cagan seigniorage cap, which needs a money stock\n- the crisis trigger 'reserves below 3 months of imports' and the reserve-months premium\n\nThe country table has no money stock, no FX reserves account and no local-currency debt. The world state has no USD deflator, which D-6 (display in nominal USD) and the conversion of 2026 and 1979 data both need.",
+  "consequence": "Take a 50% devaluation, like Egypt's float in Nov 2016. It should halve the USD value of domestic debt, raise imported inflation and test the peg's reserves. With a constant-USD-only ledger it has no fiscal effect unless every system adds its own conversion code. Adding a nominal ledger later changes the Ledger invariant, every posting, every closure test and every save.",
+  "fix": "Write an ADR now. Each country gets a nominal ledger in its own currency (Int64 with a per-currency scale), a separate FX-reserves account in USD, a money base, and domestic and external debt split by currency. `Money` (constant 2011 USD) stays as the reporting and aggregation unit, derived from the LogQ price and exchange-rate indices. Add a world USD deflator. Run the day-1 closure tests in both units.",
+  "severity": "high"
+ },
+ {
+  "critic": "rework-hunter",
+  "area": "Military data model: the equipment stock formula ignores losses (affects naval and air detail later)",
+  "problem": "The equipment stock is defined as E_c(t) = Σ_{k=0..19} P_c(t−k)(1−δ)^k and 'rolled forward' every January. That is a closed-form function of past spending. Formations also hold their own strength and equipment generation, so there are two sources of truth and no rule for losses, captures or arms transfers.",
+  "consequence": "- If Gaddafi's forces lose half their armour in 2011, the January recomputation restores it, because the stock depends only on past spending.\n- Arms-supply treaties and captured equipment cannot be represented.\n- Formation strength and the national stock drift apart (double counting).\n- Detailed naval and air play after v1 needs per-fleet or per-wing composition drawn from a pool that does not exist, so the equipment model would have to be rebuilt.",
+  "fix": "Make the stock a state variable updated recursively for each (category, generation vintage): E' = (1−δ)E + procurement − losses ± transfers. Use the 20-year formula only to seed the start date. Formations, fleets and air groups hold allocations debited from and credited to that pool. Declare the pool and allocation columns in M1a.",
+  "severity": "high"
+ },
+ {
+  "critic": "rework-hunter",
+  "area": "IDs / country lifecycle at runtime",
+  "problem": "Countries come from an offline, append-only registry (about 236 rows in use out of 320). Each has a pre-assigned tag, flag, offline colour, label anchor and a monthly slot of idx % 28. Yet the design lets insurgent movements (up to 300) 'become a state through CreateCountry', and flexible play allows partitions.",
+  "consequence": "- A state that was not pre-registered (for example eastern Libya in 2011, or an Azawad-type state) has no tag, flag, Arabic name, colour, anchor or slot rule.\n- An ad-hoc ID can collide with a registry row added later and break old saves.\n- Pre-registering every possible state overflows 320 rows and the dense 320² pair table.\n- With slots taken from the index, a new or reindexed country can run its monthly or yearly work twice or not at all in the month it appears.",
+  "fix": "Reserve a runtime country-ID namespace (for example `dyn:<serial>`) stored in the save's ID list. Generate its name from the movement or region, its flag from a template plus colours, and its colour, anchor and capital at runtime. Size the pair table and renderer arrays to registry plus runtime capacity. Store each country's monthly slot and last monthly and yearly run dates as columns instead of deriving them from the index.",
+  "severity": "high"
+ },
+ {
+  "critic": "rework-hunter",
+  "area": "Localization: Arabic grammar in templates and the name schema",
+  "problem": "Content strings are plain substitutions such as {country} and {leader}. Name records carry no grammatical data. Apple's automatic grammar agreement covers English, Spanish, French, Italian, German and Portuguese, not Arabic (per WWDC21/23 material; verify the current list).",
+  "consequence": "- Arabic verbs and adjectives must agree with the subject's gender: «أعلنت مصر» but «أعلن العراق».\n- Definiteness and prepositions combine with names: ل + ال → لل, as in «للعراق» but «لمصر».\n- Templates written without this metadata produce ungrammatical text across about 205 countries, 120 party sets and every leader name, or fall back to stilted neutral phrasing.\n- Retrofitting means touching the 80 + 50 + 40 events, every notification and every name row authored from M2 to M8. English later needs articles ('the United States') and possessives on the same records.",
+  "fix": "In M1a, give every name record gender, a definite or indefinite form, a short form, and an attached-preposition form. Add a small morphology layer to `GameFormatter` (selectors such as {verb:m|f}, {name.li}). Make the validator reject templates that interpolate a name without an agreement selector. Keep the fields per locale so English adds its own.",
+  "severity": "high"
+ },
+ {
+  "critic": "rework-hunter",
+  "area": "Population groups and electoral rules (Lebanon, Iraq, Jordan, Afghanistan)",
+  "problem": "Each province holds at most 3 groups from a single mixed list (ethnic, religious or language). The electoral-system list lacks SNTV, block vote, reserved or confessional seats, and parliament-elected presidents with posts allocated by sect.",
+  "consequence": "In the first scenario:\n- Lebanon has confessional seat quotas (64/64 by sect), block voting in 2009 and a sect-allocated presidency, premiership and speakership. It is in a refinement zone with at least 6 provinces.\n- Afghanistan's 2010 and Jordan's 2010 elections used SNTV.\n- Iraq has minority quota seats.\n- Beirut or Nineveh need 4–6 groups along two dimensions (sect and ethnicity).\n\nThese central Arab cases are mis-modelled, and fixing them later changes the province table, the PRTY and election chunks, and the code of the election system.",
+  "fix": "Create a global group registry with two dimensions (ethno-linguistic and religious) and sparse per-province group rows with no fixed limit of 3. Make the electoral system data: district magnitude, formula (including SNTV and block vote), reserved seats by group or gender, and the electing body for indirect offices.",
+  "severity": "medium"
+ },
+ {
+  "critic": "rework-hunter",
+  "area": "Trade and naval: trade has no geography (affects trade and naval later)",
+  "problem": "All trade settles through a world pool. The top-10 partners only affect friction and statistics, and no country has any sea-route exposure.",
+  "consequence": "- Closing a chokepoint (Hormuz, Bab el-Mandeb as in the 2023–2025 Red Sea attacks, Suez, Malacca) cannot hit specific exporters or importers.\n- Fleet 'sea control' and blockades cannot cut a country's trade except through hand-written country flags.\n- Adding trade routes later means a new trade model and recalibrating every market.",
+  "fix": "Bake data now: for each country, a vector of how much of its seaborne trade passes each of about 8 chokepoints and each sea-zone cluster, from the route graph. Landed-price friction then includes Σ exposure × disruption, where naval control and blockades set the disruption. No bilateral matrix is needed.",
+  "severity": "medium"
+ },
+ {
+  "critic": "rework-hunter",
+  "area": "Military: front ownership in coalition wars",
+  "problem": "A front is created per contiguous contested border between two sides. The design does not say which country owns a front, or how formations from several allied countries on the same provinces are allocated by the one shared FrontExecution system.",
+  "consequence": "Libya 2011 (NTC forces plus NATO air), Afghanistan (ISAF plus the Afghan army) and Iraq have several countries' armies on the same provinces. Either several front entities fight over the same provinces, or one country's orders move another country's formations. Changing the front schema later changes the FRNT save chunk, the operational AI and the arrow interaction the user has to approve.",
+  "fix": "Define the front as a side-level entity with per-country contributions and a lead country, or as per-country sectors with rules for sharing provinces. Decide before M4's design approval and declare it in M1a.",
+  "severity": "medium"
+ },
+ {
+  "critic": "rework-hunter",
+  "area": "Military: formation cap vs mobilisation",
+  "problem": "Formations are fixed at about 10,000 personnel, with a global cap of 4,096, while manpower is males aged 18–49 × fit share × a conscription tier of up to 20%.",
+  "consequence": "China in 2011 has roughly 340 million males aged 18–49 (approximate). At the 20% tier that is about 54 million, or about 5,400 formations from one country, more than the global cap. India is similar, and population growth to 2100 makes it worse. Recruit commands are rejected or the counters saturate, and total-war mobilisation stops working.",
+  "fix": "Choose now between formations whose size scales with mobilisation (merge or grow) and a pooled reserve of manpower that is not made of formations, with per-country caps scaled to population. Frontage and combat already use strength, so only the entity model changes. Declare it in the FORM schema.",
+  "severity": "medium"
+ },
+ {
+  "critic": "rework-hunter",
+  "area": "Determinism and saves: entity identity after load",
+  "problem": "Dense runtime indices are never saved, and handle tables are rebuilt on load. RNG keys `rng(seed, day, stream, entity)` and the 'stable-ID index' tiebreak in sorts need an entity key, but handle entities (formations, armies, fronts, spy operations, movements, projects) have no persistent serial.",
+  "consequence": "After load, compacted slots and free lists differ from the running game. RNG streams, sort order and iteration order then diverge, so the 'save → load → continue equals an uninterrupted run' gate fails, and `.saneibug` replays diverge from what the user saw.",
+  "fix": "Give every handle entity a persistent u32 serial from a saved counter. Use it for RNG keys, sort tiebreaks and iteration order, or save the slot, generation and free list explicitly. Put it in the save format 1 columns.",
+  "severity": "medium"
+ },
+ {
+  "critic": "rework-hunter",
+  "area": "Engine pattern: 'why' terms vs zero allocation per tick",
+  "problem": "R9 says each derived value is one function returning a list of signed terms, which the simulation sums. The benchmark gate requires 0 heap allocations per steady-state tick.",
+  "consequence": "Returning `[Term]` allocates on every evaluation: unrest targets with 13 terms per province, stability, prices and so on, thousands of allocations per day. M1a either fails the gate or developers write separate fast paths that drift away from what «لماذا؟» shows, breaking R9.",
+  "fix": "Fix the pattern in M1a. Each value is written once as `func f<S: TermSink>(…, into: inout S)`. A summing sink with no allocation is used by the simulation, and a list sink by the UI. Terms go into a fixed-capacity inline buffer of 12. Add a lint rule.",
+  "severity": "medium"
+ },
+ {
+  "critic": "rework-hunter",
+  "area": "Saves: JSON metadata and Codable commands",
+  "problem": "The save metadata is uncompressed JSON, and the save list and continue card read it. But `imports.sh` bans `JSONDecoder` outside `SaneiBake`, which is never linked into the app. `Command` is `Codable` and is stored in the CMDJ journal and in pending orders.",
+  "consequence": "The gate fails, or a hand-written JSON parser appears. Synthesised `Codable` encodes Swift case and label names, so renaming a command case or parameter breaks loading old saves, against the promise that saves load forever. Changing the header format after release forces a container-version migration.",
+  "fix": "Encode metadata as a small self-describing binary table with the same column codec, or allow a narrow `JSONSerialization` exception in Platform for metadata only. Serialise commands with explicit stable numeric tags in the column format. Allow CMDJ to be dropped across versions.",
+  "severity": "medium"
+ },
+ {
+  "critic": "rework-hunter",
+  "area": "Saves: memory and time spike on load from the untyped SaveTree",
+  "problem": "Migrations run on an untyped `SaveTree`, but its in-memory representation is not specified.",
+  "consequence": "A save has roughly 1.1–1.4 million cells: sparse pairs about 420k, history about 370–580k, provinces, industries and countries about 300k. If each is a boxed enum value (about 24 B), that is about 30 MB or more of temporary memory, plus the raw buffer, the new `WorldState` and the old state still alive. An A12 goes past its 160 MB target, and the 1.0 s load budget is at risk. Every migration written against the wrong representation must be rewritten.",
+  "fix": "Define `SaveTree` as typed column buffers (raw bytes plus a type tag) with column-level migration operations. Release the old game state before decoding. Add a test that measures peak memory while loading a save from year 90.",
+  "severity": "medium"
+ },
+ {
+  "critic": "rework-hunter",
+  "area": "Content packaging: one monolithic content.bin for all scenarios",
+  "problem": "`content.bin` (budget ≤6 MB) holds the static rules and the start data of every scenario: 16,000 industry rows, party support, partners, military and so on. Saves record one `contentHash`.",
+  "consequence": "Each historical pack adds roughly 1–2 MB (estimate), so the 6 MB gate fails at about the third pack. If `ContentDB` loads every scenario's start tables, memory and launch time grow with each pack. Adding a pack also changes the content hash of every 2011 save, which triggers spurious 'content changed' paths and replay mismatches. Splitting the file then counts as a format change.",
+  "fix": "Bake static rules into `content.bin` and each scenario into its own `scenario-<id>.bin`. Map a scenario file only when a new game starts and release it once the state is built. Record each file's hash separately in save metadata. Give each file its own size budget.",
+  "severity": "medium"
+ },
+ {
+  "critic": "rework-hunter",
+  "area": "Saves location vs the user's sideload install path",
+  "problem": "Saves live in `Application Support/Saves`, which the Files app cannot see and which is deleted with the app. Export is manual.",
+  "consequence": "The user re-signs the IPA with their own certificate. When that certificate expires or is revoked, or the signing tool changes the team or bundle ID, iOS commonly refuses to install over the existing app (identifier mismatch) or installs a separate copy. The user then deletes the app and loses every autosave and manual save. Moving the save location after release needs a migration.",
+  "fix": "Store saves in Documents with `UIFileSharingEnabled` and `LSSupportsOpeningDocumentsInPlace`, so they appear under On My iPhone. Add an optional automatic mirror to a folder the user picks through a security-scoped bookmark from the document picker; this needs no entitlement and survives deleting the app. Decide in M1a.",
+  "severity": "medium"
+ },
+ {
+  "critic": "rework-hunter",
+  "area": "Rendering: imagery tile cache smaller than the working set",
+  "problem": "The texture array has 64 slices with LRU eviction. Up to 45 tiles are visible, the prefetch ring adds about 32 more (an 11×7 ring around 9×5), and fallback parents compete for the same slices.",
+  "consequence": "Once the map settles, prefetch evicts visible tiles, because rendering has stopped and they are no longer touched. The next data redraw (1 Hz at ×1) finds them missing and draws blurry ancestors, the visible tiles are decoded again, and the ring is evicted. The result is flicker, wasted decodes and energy. An iPad later shows about 63 tiles, so this gets worse.",
+  "fix": "Pin the visible set. Let prefetch use only free slots. Size the array from the drawable: visible maximum + ring + about 16 parents, which is 96–128 slices or 24–32 MB in RGBA8. Update the memory budget, or pick ASTC in D-2.",
+  "severity": "medium"
+ },
+ {
+  "critic": "rework-hunter",
+  "area": "Rendering/heat: blur cost is invisible to the planned measurement",
+  "problem": "In M0b, blur falls back to opaque glass if it costs more than 1 ms of GPU time per frame, measured with the app's own command-buffer timestamps. System blur (backdrop layers) is rendered by the system's render-server process, outside the app's command buffers (likely; verify).",
+  "consequence": "The measurement reports blur as almost free, so the approved six blurred regions (including the full-width dock and top strip) re-blur on every 120 Hz pan frame with no fallback. The extra heat and battery drain go undetected, against the lightness condition.",
+  "fix": "Measure blur with end-to-end signals instead: dropped or hitched frames from display-link and present times, the hitch rate in MetricKit animation metrics, and a 10-minute scripted pan comparing blur with opaque glass for thermal state and battery. Keep a Metal-rendered blur of the map under the HUD rectangles as an alternative.",
+  "severity": "medium"
+ },
+ {
+  "critic": "rework-hunter",
+  "area": "Rendering: label atlas capacity and Arabic cursive joins",
+  "problem": "There is one 2048×1024 atlas (2.1 Mpx) for country labels at 3 sizes plus 256 province labels, all at 3× scale.",
+  "consequence": "If whole strings are stored: a 9-letter name at 14 pt is about 14.5k px, and 3 sizes make about 48k px per country, so 215 countries need about 10 Mpx, roughly 5 times the atlas, before about 2.5 Mpx of province labels. Labels are re-rasterised while panning, giving pop-in and main or background CPU spikes, and a memory warning triggers a re-rasterisation storm. If glyphs are stored instead, drawing each glyph quad with halo and fill together lets each glyph's halo cut into the previous glyph's join, which marks every connection in Arabic's cursive script.",
+  "fix": "Decide in M0b. Either use a single-size SDF/MSDF glyph atlas shaped once by Core Text (glyph IDs and positions cached per label), drawn in two passes (all halos, then all fills, which fits the ≤2 draw budget), or use a string atlas holding only the visible labels with size snapping. Measure atlas pressure in the overlay.",
+  "severity": "medium"
+ },
+ {
+  "critic": "rework-hunter",
+  "area": "Rendering: country label anchors are static",
+  "problem": "Country label anchors (primary and alternate) are baked into the map pack, but country shapes change during play.",
+  "consequence": "- When South Sudan is created on day 190, Sudan's anchor (baked for pre-2011 Sudan) can land near or across the new border.\n- In 1990, Iraq absorbs Kuwait.\n- Any conquest, partition or new runtime state leaves labels misplaced or missing.\n- The occluder logic only picks between the two baked anchors.",
+  "fix": "Compute anchors at runtime, off the main thread, whenever the administrator array's version changes. For example, use the province farthest from the country's border on the adjacency graph, weighted by area, within the largest component. Size the label by the country's extent. Keep baked anchors only as a cache.",
+  "severity": "medium"
+ },
+ {
+  "critic": "rework-hunter",
+  "area": "Rendering: border instance format (dashes and translucent joins)",
+  "problem": "Each border instance is 12 bytes: two endpoints plus the left and right province. There is no arc length along the line and no neighbouring vertices. Borders at 60% opacity and the glow are separate overlapping quads.",
+  "consequence": "Disputed borders and front lines are supposed to be dashed. Segments after simplification are often shorter than one dash period on screen, and every segment restarts the dash pattern, so dashed lines look solid. The translucent quads overlap at every joint, so borders and glow show bright beads along curves. Fixing this changes the map pack format, which means a re-bake and a new map version.",
+  "fix": "Add cumulative arc length per level (about 16 bytes per instance) or store polylines with per-vertex distance and join data. Draw translucent borders and glow with a stencil-once or max-blend technique.",
+  "severity": "medium"
+ },
+ {
+  "critic": "rework-hunter",
+  "area": "UI: width classes ignore safe areas",
+  "problem": "The width classes are chosen from the full screen width (Wide ≥900, Regular 760–899). Face ID iPhones lose about 44–62 pt on each side in landscape, and the insets are symmetrical.",
+  "consequence": "- iPhone X, XS, 11 Pro and the minis (812 pt wide) have only about 712–724 pt usable but get the Regular layout, with trend arrows and a wider card.\n- A 17 Pro Max has about 832 pt usable, but the Wide layout's full name and regime line are long for names such as «جمهورية الكونغو الديمقراطية». The 13 pt card plus six chips with trends goes over about 830 pt.\n\nSo the approved top row truncates or overlaps on common iPhones.",
+  "fix": "Choose the width class from the safe-area width. Run a fit test for each device class with the longest Arabic country name and the widest values (such as negative trillions), and switch to a smaller variant before anything clips.",
+  "severity": "medium"
+ },
+ {
+  "critic": "rework-hunter",
+  "area": "Fog of war: estimates re-rolled every day",
+  "problem": "Estimate noise is seeded through `rng(seed, day, …)`.",
+  "consequence": "Military estimates such as «≈ 12–16 فرقة» jump every simulated day (every second at ×1, constantly at maximum speed), which causes panel churn. AI and front-execution threat ratios also jitter around the 1.5 attack threshold, so fronts flip between attack and hold.",
+  "fix": "Key the noise to (observer, target, intelligence-report epoch), where the epoch advances only on an intelligence refresh such as a monthly update or a completed gathering operation.",
+  "severity": "low"
+ },
+ {
+  "critic": "rework-hunter",
+  "area": "Long-horizon ranges (history window, GameDate)",
+  "problem": "Yearly history keeps 90 samples, and `GameDate` is described as valid for 1979–2100.",
+  "consequence": "- 1979 to 2100 is 122 years (1985: 116, 1990: 111), so the end report and charts lose the first 20–32 years, including the starting baseline the 'prosperity' pillar needs.\n- Leader birth dates (leaders in office in 1979 were born around 1900) and treaty dates (NATO 1949) are negative day counts, which any unsigned varint-delta encoding breaks.",
+  "fix": "Make the yearly window 125 samples or store a campaign-start baseline row. Test `GameDate` for 1850–2200 and use zigzag varints for dates.",
+  "severity": "low"
+ },
+ {
+  "critic": "rework-hunter",
+  "area": "CI: scenario gate path allowlist",
+  "problem": "A PR labelled scenario may change only `content/scenarios/**`.",
+  "consequence": "Historical packs also need flag artwork, scenario card art, image-registry entries and sometimes country-registry rows or admin-region names, all outside that path. Every real pack PR fails the gate, or the gate gets bypassed.",
+  "fix": "Allow `content/scenarios`, `content/registry` (append-only, checked by the ID lock), `content/art` and the flag sources. Map lines go through a separate map-version PR. Still forbid `Sources/` and `App/Sources/`.",
+  "severity": "low"
+ },
+ {
+  "critic": "rework-hunter",
+  "area": "CI: imagery reproducibility gate",
+  "problem": "`map-repro` (on Linux and macOS) rebuilds the packs and compares their SHA-256 with `map.lock.json`, but HEIC is encoded with ImageIO on the macOS runner.",
+  "consequence": "HEIC cannot be built on Linux, and ImageIO's output bytes may change when the runner image updates (unverified). The weekly gate then fails with no real change, and people learn to ignore it.",
+  "fix": "Hash the graded raster tiles before encoding to check reproducibility. Treat the encoded pack as a pinned release artifact, or use a pinned encoder binary (astcenc for ASTC).",
+  "severity": "low"
+ },
+ {
+  "critic": "realism-feasibility",
+  "area": "Scope and milestones (§9)",
+  "problem": "The 60–70 week plan is not credible for one non-programmer user plus an AI. M1a (4–5 weeks) contains everything M0b builds (2–3 weeks) plus all of the following: the engine foundation with every M1–M6 column group, saves with migrations, golden saves and replay, about 15 CI gates, 18 ADRs, a 300-row country registry, the full renderer (overlays, glow, dashed disputes, picking, occluded labels), the approved menus and HUD, DialogPresenter, and the settings and saves screens. Every one of 25+ screens also needs its own design and approval round first. PRs are capped at about 400 lines and merged by the user from a phone, and every device check needs the user to sign and install by hand.",
+  "consequence": "Milestones slip by about 2–3×. A realistic total is 2–3 years, not 15 months. The pressure to recover the schedule then pushes toward skipped gates and stubbed data, which breaks the 'never rebuild' condition.",
+  "fix": "Split M1a into M1a (engine, saves, CI) and M1c (renderer and UI shell). Re-estimate every milestone after M0b from measured velocity (PRs merged per week, approval turnaround). Publish a cut list per system, for example data-tier depth and espionage operations staged across M5 and M7, so slips cut content and never the foundation.",
+  "severity": "high"
+ },
+ {
+  "critic": "realism-feasibility",
+  "area": "Economy data (§4.2, §4.6, §5.1)",
+  "problem": "The model needs 2011 production, consumption and trade for 20 goods, and input coefficients for 25 industries, for about 205 countries. The licensed sources only cover energy (EIA), minerals (USGS) and grain (USDA). WDI gives just 3–4 sector value-added shares. UN Comtrade and BACI are denied. No input-output source is listed for machinery, electronics, vehicles, chemicals, medicines, textiles or consumer goods.",
+  "consequence": "Day-1 national markets per good are invented, so they start out of equilibrium. Prices jump by the ±8% clamp in month 1 and trade flows per good are fiction (for example, who exports electronics). The 'day-1 closure' can only hold for aggregate GDP, and the 2011–2013 trajectory bands for food and oil prices are polluted by start-up transients.",
+  "fix": "Add OECD ICIO 2023 (76 economies plus the rest of the world, covers 2011; CC BY 4.0 under OECD's 2024 open licence, to verify) as the source for industry structure and input-output coefficients. Map other countries to regional templates. Calibrate household and government budget shares so every national market clears exactly at base prices on day 1, and add a 'month-1 price change ≤1%' invariant.",
+  "severity": "high"
+ },
+ {
+  "critic": "realism-feasibility",
+  "area": "CI cost (D-1, §2.8)",
+  "problem": "D-1 says a private repo has 'no extra cost'. GitHub bills private-repo macOS minutes at 10× against the included quota: 2,000 included minutes on Free means about 200 macOS minutes. ios.yml runs on main, on tags and on every PR touching App/**, at about 20–30 minutes per run (Metal toolchain download, bake, simulator tests, smoke UI test, release build). Paid macOS time is about $0.062/min from January 2026 (secondary sources), and the default spending limit is $0. The Linux CI (x86 plus arm, ≤12 min each per push) and the nightly 90-year runs also come out of the same 2,000 minutes, and private arm runners have only 2 vCPUs.",
+  "consequence": "About 7–10 iOS builds a month exhaust the quota. After that, ios.yml stops producing IPAs (spending limit $0) or costs roughly $50–200/month at the planned PR cadence. Linux CI also overruns the free minutes once nightly runs are added.",
+  "fix": "Rewrite the D-1 cost line. Run ios.yml only on merges to main and on manual dispatch, not on every PR, and cache derived data and the Metal toolchain. Move the nightly long runs to a weekly schedule, or run them on the x86 job only. Give the user a monthly minutes and cost estimate before M0.",
+  "severity": "high"
+ },
+ {
+  "critic": "realism-feasibility",
+  "area": "Internal unrest calibration (§5.2)",
+  "problem": "The unrest target adds 10 weighted terms with up to 140 points of weight, and its thresholds act on levels (40 protests, 60 mass protests, 75 insurgency). Nothing anchors day 1 to an observed 2011 unrest level. The day-1 'no crisis' invariant covers debt only. No licensed source for protest or unrest data is listed (ACLED is non-commercial).",
+  "consequence": "Poor, young, low-legitimacy countries (Niger, Chad, DR Congo and others) compute targets above 60–75 from day 1. That spawns non-historical mass protests and insurgencies within the first quarter in dozens of countries: the same level-versus-transition flaw that flaw 12 fixed for debt. The Arab Spring stops being distinctive.",
+  "fix": "Add a per-country baseline offset so that the day-1 target equals a seeded 2011 unrest value (hand-coded with evidence, or from GDELT or the Mass Mobilization data, licences to verify). Fire unrest thresholds on upward crossings only. Add a day-1 invariant: no non-historical insurgency or revolution in the first 90 days.",
+  "severity": "high"
+ },
+ {
+  "critic": "realism-feasibility",
+  "area": "Military equipment model (§5.4)",
+  "problem": "Stocks come only from 1991–2010 spending (WMEAT) through a 20-year perpetual inventory with 6–7% yearly depreciation. Nothing accounts for Soviet-era legacy inventories or arms received as aid or imports.",
+  "consequence": "Ukraine, Belarus, Kazakhstan, Syria, North Korea, Vietnam and Cuba start 2011 with a fraction of their real holdings, because their big stocks predate 1991 or were imported. Egypt's US-funded procurement may also be missed, since Egypt's official budget excludes US aid. Korea, Syria 2011 and any Russia–Ukraine play are therefore unrealistic from day 1.",
+  "fix": "Keep the user's spending-based rule, but add two terms. First, an opening stock in 1991 derived from ACDA WMEAT editions covering 1971–1990 (public domain), with split rules for the USSR, Yugoslavia and Czechoslovakia. Second, add WMEAT arms-import values to P_c. Record both terms in the 'why' breakdown.",
+  "severity": "high"
+ },
+ {
+  "critic": "realism-feasibility",
+  "area": "2011 military seed data (§4.2)",
+  "problem": "The design takes 2011 military spending and manpower from the 2011 Factbook. That edition's 'Military expenditures' field mostly carried stale 2005 estimates: CNN in 2011 quoted Egypt at 3.4% of GDP as a 2005 Factbook estimate. The 2011 Factbook also appears to have no active-personnel field; the 'personnel strengths' field shows up only in the 2021+ archives (exact first edition unverified). Force templates come from Library of Congress Country Studies, which date from 1986–1998.",
+  "consequence": "The R4 closure test (military share ±10%) is checked against figures six years old, and they conflict with WMEAT's 2010 values. Formation counts have no source for active strength. 2011 orders of battle are modelled on armies from the 1980s and 1990s (Libya 1987, Iraq 1988).",
+  "fix": "Use WMEAT 2013/2015 (public domain) for both 2010 spending and armed-forces personnel. Use DoD and CRS reports (public domain) for the force structure of the roughly 40 key countries. Keep the Country Studies for the 1985 and 1990 packs. Record Factbook values in `notes` only.",
+  "severity": "medium"
+ },
+ {
+  "critic": "realism-feasibility",
+  "area": "Data provenance (R1, R3, §9 'parallel AI sessions')",
+  "problem": "Thousands of rows (party results, events, facts, deposits, force structures) are compiled by AI sessions, each with an evidence URL. The 'facts are tests' gate only compares values against assertions that the same process wrote. Nothing checks that a URL exists or supports its value.",
+  "consequence": "Hallucinated or misread values with plausible URLs pass every gate. The realism condition is then unverifiable, and the user, who cannot audit the data from a phone, ships wrong 2011 facts.",
+  "fix": "Add an evidence gate. Check that every URL resolves and is archived (a Wayback snapshot ID stored with the row). Store a quoted snippet that must contain the value. Have a second, independent AI pass re-extract a random 10% sample per PR and block the PR on any mismatch.",
+  "severity": "medium"
+ },
+ {
+  "critic": "realism-feasibility",
+  "area": "Country totals and territory definitions (R4, §4.4, §4.6)",
+  "problem": "Dependencies are provinces of their sovereign (Hong Kong and Macau in China, Puerto Rico in the US, Greenland in Denmark). But WPP and WDI report those territories separately and exclude them from the parent's total. De facto states (Abkhazia, Transnistria, Northern Cyprus, Somaliland, Nagorno-Karabakh) are inside their parent's WPP total. Taiwan is absent from WDI and ILOSTAT, and WDI has no GDP for North Korea.",
+  "consequence": "The ±0.5% closure fails by construction. China's GDP would be about 3.8% above WDI with Hong Kong and Macau included, and US GDP about 0.6% above with Puerto Rico. Unrecognised entities are either double-counted or carved out with no stated method, and several countries have no price-level or education data.",
+  "fix": "Add a territory-composition table that maps each game country to the source location codes it sums or subtracts. Define carve-out methods for de facto states (with an `estimate:` tag). Name fallback sources per gap, such as the Factbook or PWT (CC BY 4.0) for Taiwan and North Korea, and compare closure against the composed targets.",
+  "severity": "medium"
+ },
+ {
+  "critic": "realism-feasibility",
+  "area": "Population ageing (§5.2)",
+  "problem": "Each year, one fifth of every 5-year band moves up a band. This geometric rule spreads cohorts out: of people aged 45, about 10% have already reached the 65+ bands (binomial with 45 trials, p = 0.2, at least 13 moves). A cohort's arrival at 100+ is spread over decades.",
+  "consequence": "Old-age mortality hits people who are really 45–60. Manpower (males 18–49), women of fertile age and dependency ratios all drift from WPP. Mortality has to be mis-tuned to hit the 2050 and 2100 bands, which distorts life expectancy and age pyramids by 2100.",
+  "fix": "Use single-year ages 0–100+ × 2 sexes (WPP 2024 publishes single ages; about 41k Int32 values in all) and shift them exactly once a year. Keep 5-year bands for display only.",
+  "severity": "medium"
+ },
+ {
+  "critic": "realism-feasibility",
+  "area": "Licences: education data (§4.2 WDI row)",
+  "problem": "WDI's education series are sourced from the UNESCO Institute for Statistics. The UIS Data Browser terms state CC BY-SA 4.0, and the main UIS terms say non-commercial use. The design lists 'education' under WDI as CC BY 4.0.",
+  "consequence": "Share-alike or non-commercial data enters the app under a CC BY label, which breaks the user's 'no SA/NC' rule. If the per-series check catches it, the skill tiers, fertility drivers and new-entrant education have no licensed source.",
+  "fix": "Mark the UIS-sourced WDI series as denied in SOURCES.yaml. Seed the skill tiers from ILOSTAT (CC BY 4.0) plus labelled estimates, and record the Barro-Lee and Wittgenstein licences as pending.",
+  "severity": "medium"
+ },
+ {
+  "critic": "realism-feasibility",
+  "area": "Province count (§4.4, L3)",
+  "problem": "The 2,700 ± 300 figure comes from area-only runs. Re-running B's actual rule (area/6,000 + population/1.5M, protected capitals and the 441 units containing cities of 1 M or more, splits above 200k/400k km²) on Natural Earth admin-1 gives 2,871 provinces after merging and 3,183 after splitting. This is before the ~20 refinement zones that halve the thresholds, the 1979–2026 'never merge across' lines and the per-country floors. Script: wf/audit/merge_pop2.py; populations are estimated from cities plus a rural share by area.",
+  "consequence": "Land provinces likely land around 3,300–3,500. That is above the user's 2,500–3,000 range, and with about 250 sea zones it breaks the L3 hard cap of 3,300 at M1b, forcing threshold churn after IDs are released.",
+  "fix": "Measure the full rule in M1a, not M1b. Raise the thresholds (for example area/8,000 + population/2.5M) or limit protection to cities of 2 M or more. Set L3 to land ≤3,000 plus separate sea and total caps.",
+  "severity": "medium"
+ },
+ {
+  "critic": "realism-feasibility",
+  "area": "Blur measurement (D-3, §3.7)",
+  "problem": "M0b is meant to decide the blur fallback by measuring 'GPU time with and without blur' through command-buffer timestamps. System blur (SwiftUI materials) is composited by the iOS render server outside the app process, so the app's Metal timings do not include it. With no Mac there is no Instruments.",
+  "consequence": "The '>1 ms per frame' trigger can never fire. Blur heat and battery cost go unmeasured, and D-3 gets decided on a number that is always about 0.",
+  "fix": "Measure end to end instead. Compare missed-deadline counts from presentation timestamps (drawable presentedTime against target), thermal-state time series, and battery drain over 20 minutes of scripted panning, each with blur on and off. Decide D-3 from those.",
+  "severity": "medium"
+ },
+ {
+  "critic": "realism-feasibility",
+  "area": "Layout classes (§6.3)",
+  "problem": "Width classes are keyed to the full screen width. Face ID phones lose about 44–62 pt per side in landscape, so the 812–896 pt 'Regular' phones have only about 712–808 pt usable. The 844, 852 and 874 pt models have about 734–750 pt. The SE check also gives a 68 pt chip only about 40 pt for text such as «3.1 مليار», which needs roughly 45–50 pt at 11.5 pt (estimate).",
+  "consequence": "The Regular layout (chips with trends, flag plus name) overflows or truncates the top row on most iPhones that support iOS 17 (XS, 11, 12–16 non-Max). On the SE, treasury and manpower values truncate.",
+  "fix": "Key the classes to the safe-area width after margins. Measure chip widths from the longest formatted values (money words, Western digits) in a snapshot test for each device size, including the SE and the 12/13 mini.",
+  "severity": "medium"
+ },
+ {
+  "critic": "realism-feasibility",
+  "area": "AI difficulty cadence (§2.4 step 10, §5.10)",
+  "problem": "Strategic AI runs only inside each country's monthly economy slot ('AIStrategic, if its period is due'). Yet the difficulty table sets strategic periods of 20 days (hard) and 14 days (expert).",
+  "consequence": "Hard and expert can never re-plan faster than about 30 days, so they differ from normal only in choice temperature and coordination. The difficulty table, the main lever under R8, partly does nothing.",
+  "fix": "Schedule strategic AI on its own stagger, independent of the economy slot. Budget about 15 countries a day at expert, roughly 0.3 ms, or change the table to monthly-only periods.",
+  "severity": "medium"
+ },
+ {
+  "critic": "realism-feasibility",
+  "area": "Trade accounting (§5.1)",
+  "problem": "Transport costs are paid into the world-market account. No flow out of that account is defined.",
+  "consequence": "About 5–8% of goods trade, roughly $1 trillion a year in 2011 terms, leaves national economies for good. Demand and income are drained by about 1% of world GDP a year, and the account holds tens of trillions of sterile dollars by 2100. This biases the growth and price bands.",
+  "fix": "Pay transport as service exports to countries in proportion to their shipping and logistics capacity, or as an explicit, logged deadweight sink. Add an invariant that the world account balance stays near zero.",
+  "severity": "medium"
+ },
+ {
+  "critic": "realism-feasibility",
+  "area": "Monetary units (§2.3, §5.1, D-6)",
+  "problem": "`Money` is constant 2011 USD, yet the design models local-currency inflation, monetization, exchange rates, inflation eroding domestic debt and a 'nominal current USD' display. No USD numeraire deflator is defined, and 'nominal output in constant 2011 USD' is self-contradictory.",
+  "consequence": "Inflation cannot change nominal GDP or debt ratios through the ledger. Debt erosion would need off-ledger revaluations, which break the 'Δtreasury = Σ postings' invariant. Crises such as Venezuela 2016–19, Egypt's 2016 devaluation or Turkey 2018 cannot play out, and D-6's nominal display has no path to follow.",
+  "fix": "Keep national accounts in nominal local-currency units (Int64 scaled per country), plus a simulated USD price index as numeraire. Convert to constant USD only for comparisons and the score, and post revaluations as explicit ledger categories.",
+  "severity": "medium"
+ },
+ {
+  "critic": "realism-feasibility",
+  "area": "Long-run calibration (R6, §8.11)",
+  "problem": "For 2011–2100 the only economic gate is that the largest economy stays under 40% of world output. Growth emerges from investment, research and markets over 89 years with no band at all.",
+  "consequence": "World GDP in 2100 can come out anywhere from about 2× to 20× its 2011 level without failing a gate. Emissions, and so the AR6 warming gate, depend on that GDP, so the two gates can pass or fail for the wrong reason.",
+  "fix": "Add GDP bands from SSP2 (IIASA SSP database v3; licence to verify) or the OECD long-term baseline (CC BY 4.0, to verify) for 2050 and 2100, at world level and for the top 10 countries.",
+  "severity": "medium"
+ },
+ {
+  "critic": "realism-feasibility",
+  "area": "Debugging without a Mac (§3.8, M0b)",
+  "problem": "The plan relies on signposts, MetricKit and the overlay. Signposts need Instruments. MetricKit metric payloads arrive about once a day, aggregated over 24 h. os_log is invisible without Console.app on a Mac. Crash logs on the phone are reachable only through manual steps in Settings.",
+  "consequence": "Device-only Metal or launch crashes and the M0b measurements cannot be read in the same session, so each M0b iteration costs a day or more. The 2–3 week M0b estimate slips.",
+  "fix": "In M0, build an in-app ring-buffer log with export through the share sheet. Export MXDiagnosticPayload crash reports, which arrive on the next launch (iOS 15+). Add an overlay 'record 60 s' button that writes frame and thermal CSVs. Drop signposts from the exit criteria.",
+  "severity": "medium"
+ },
+ {
+  "critic": "realism-feasibility",
+  "area": "Imagery pipeline (§2.5 bake, map-repro.yml)",
+  "problem": "The raw inputs are tens of GB uncompressed: Blue Marble NG 500 m is about 3.7 Gpx (≈11 GB as RGB), GMTED 7.5″ and ETOPO 15″ are multi-GB grids. Standard macOS runners have 14 GB SSD and 7 GB RAM, and the Actions cache defaults to 10 GB. HEIC output from ImageIO is not guaranteed to be bit-identical across macOS image updates.",
+  "consequence": "The bake cannot run as written on a macOS runner. The weekly 'rebuild from cached raw sources' cannot be cached. The SHA-256 reproducibility gate goes red after any runner-image update, with nothing wrong in the content.",
+  "fix": "Use NASA's Blue Marble NG 'with topography and bathymetry' variant, which already has relief and depth shading under the same NASA terms. That removes GMTED and ETOPO from the imagery bake and the pending ETOPO licence. Run reprojection and grading on Linux. Pin the lossless graded tiles (about 1 GB) as a release asset, and check reproducibility on them, not on the encoded HEIC or ASTC.",
+  "severity": "medium"
+ },
+ {
+  "critic": "realism-feasibility",
+  "area": "Historical packs as data only (§4.2, rule F5)",
+  "problem": "The 2011 source stack does not exist for 1985 or 1979. The Kummu province GDP grid starts in 1990. WDI and ICP have no USSR, GDR, Czechoslovakia or Yugoslavia. Comtrade, BACI and IMF DOTS are denied, so there is no licensed bilateral trade source before 2000. The pinned Factbook is the 2011 edition, ILOSTAT education data is essentially absent for 1985, and the OCHA Yemen districts used for the YAR/PDRY line are not in SOURCES.yaml at all.",
+  "consequence": "The 1985 and 1979 packs cannot pass R1 and R4 with the stated sources. New pipeline stages and sources would be needed, which delays the packs and invites unlabelled guesses.",
+  "fix": "Draw up a source plan per era now. Possible sources: ACDA WMEAT (1970s–80s, public domain), the CIA Handbook of Economic Statistics (public domain) for Soviet-bloc GDP, PWT (CC BY 4.0) for price levels, GHS 1975/1980/1985 shares used as a GDP proxy with an estimate tag, scanned Factbook editions, and the Yemen admin-2 licence verified. Mark which R4 tests apply in which era.",
+  "severity": "medium"
+ },
+ {
+  "critic": "realism-feasibility",
+  "area": "Coefficients with no data (R5, §5.3, §5.6, §5.10)",
+  "problem": "R5 requires `calibratedAgainst` for every coefficient. No dataset exists to calibrate agency levels, network strengths, operation success rates, interest-group power weights or leader traits. Rating real named leaders on 'repression tendency' or 'aggression' is invented editorial judgement.",
+  "consequence": "Either the validator blocks CI, or the field gets filled with meaningless text. Showing invented traits for real people also contradicts the user's 'neutral text' rule and adds legal and App Store risk.",
+  "fix": "Add an explicit `calibratedAgainst: design-target` class, tied to balance-bot targets and excluded from realism claims. Derive AI personality from regime, bloc and data, never from authored traits of named people, and do not display traits for real leaders.",
+  "severity": "medium"
+ },
+ {
+  "critic": "realism-feasibility",
+  "area": "Device floor facts (§3)",
+  "problem": "The design lists the 'A12 floor' phones as XR, XS and SE 2nd generation with 3 GB of RAM. The SE 2nd generation has an A13, and the XS has 4 GB.",
+  "consequence": "If the user borrows an SE 2 for the D-21 floor test, the A12 budgets are never validated, and the memory floor rests on the wrong device.",
+  "fix": "Name the XR (A12, 3 GB) as the floor test device, and treat the SE 2 or 3 as the 667 pt layout device only.",
+  "severity": "low"
+ },
+ {
+  "critic": "realism-feasibility",
+  "area": "Entity caps (L3, §5.4)",
+  "problem": "The formation cap is 4,096 at about 10,000 personnel each, against about 2,000 formations in 2011. Reserves are large: South Korea about 3–4.5 M, North Korea several million (Red Guard), Vietnam about 5 M, Russia about 2 M (unverified). Insurgencies also spawn militia formations.",
+  "consequence": "One Korean war with mobilisation, plus active insurgencies, reaches the cap. After that, Mobilize and Recruit are rejected for whoever comes second, which gives arbitrary outcomes.",
+  "fix": "Use per-country quotas proportional to manpower, larger 'cadre' reserve formations that grow strength rather than count, or a cap of 8,192 measured in the wartime benchmark.",
+  "severity": "low"
+ },
+ {
+  "critic": "realism-feasibility",
+  "area": "Sea-level impacts (§5.8)",
+  "problem": "Low-elevation coastal shares come from relief data (GMTED2010). Its stated RMSE is about 26–30 m at 7.5″, while sea-level rise to 2100 is under about 1 m.",
+  "consequence": "Coastal flooding exposure per province (the Nile Delta, Bangladesh, the Netherlands) is essentially noise. This is the main climate-to-economy link toward 2100.",
+  "fix": "Use a coastal elevation product with commercial-use terms (licence to verify), thresholds of 10 m or less, and an estimate tag. Otherwise impacts are only roughly calibrated to published national exposure figures.",
+  "severity": "low"
+ },
+ {
+  "critic": "realism-feasibility",
+  "area": "1979 and 1985 Palestinian-territories status (§0.3 #9)",
+  "problem": "The text applies 'sovereign none, administrator Israel, Jordanian claim until 31 Jul 1988' to 'Palestine' as a whole. Jordan never claimed Gaza. The status of East Jerusalem and the Golan also changed between packs: the Jerusalem Law of 30 Jul 1980 and the Golan Heights Law of 14 Dec 1981.",
+  "consequence": "If facts are written from this summary, the 1979 and 1985 packs carry a wrong Jordanian claim on Gaza and the same annexation flags in 1979 as in 1985.",
+  "fix": "Assert per-pack status per area in the facts files. Gaza: no Jordanian claim. East Jerusalem: annexation flag from 30 Jul 1980. Golan: annexation not recognised from 14 Dec 1981; occupied in 1979.",
+  "severity": "low"
+ },
+ {
+  "critic": "realism-feasibility",
+  "area": "Infrastructure index (§4.6)",
+  "problem": "Infrastructure 0–10 is computed from Natural Earth road and rail density. Natural Earth roads are a small-scale cartographic selection whose density varies by region and editor, not a measure of the real network.",
+  "consequence": "Infrastructure, which feeds supply capacity, insurgency capacity and movement, reflects map-making choices. For example, sparse Natural Earth coverage in Africa understates supply there.",
+  "fix": "Base it on GDP per capita and urban share, plus a source of measured road density with verified commercial terms. Tag the result as an estimate and calibrate it against a few countries' known network lengths from the Factbook (public domain).",
+  "severity": "low"
+ }
+]

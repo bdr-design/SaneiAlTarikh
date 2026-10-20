@@ -1,0 +1,424 @@
+{
+ "summary": "Scope: research and design only. No project files were changed. The only file I wrote is a benchmark at wf/simbench/simbench.c.\n\nThe user set three conditions: the game must be light, realistic and built on a strong foundation. They are best met by a layered, data-calibrated, aggregate simulation. It should not simulate individual population groups the way Victoria 3 does, and it should not use code patched over and over. The established games point the same way. Victoria 3's population-group economy is praised for depth, but its pop count grew over time and slowed late games (Dev Diary 105 says migration was splitting pops; players report heavy lag after about 1880). Its AI and complexity draw frequent complaints. HOI4's combat model (organization vs strength, combat width, terrain, air, entrenchment) and its supply hubs with rail and trucks are proven ideas that can be simplified. EU4's province unrest that feeds rebel progress is a clean stability-to-rebellion link. Mobile real-time titles (Conflict of Nations, Supremacy, Call of War) show that \"days that pass in real time\" works on phones and that players praise the diplomacy. Their main criticisms are pay-to-win morale and mechanics that are hard to understand. Call of War's province morale (distance from the capital, a penalty per war, rebellion below about 35%) is a simple stability analogue that works on phones. Power & Revolution is praised for modern-era realism but criticised for bugs and dated, dense UI. Civilization V's AI uses four layers (grand strategic, strategic, operational, tactical) plus 10-point personality \"flavors\", which is a good template.\n\nReal-world models that can be calibrated:\n- **Production:** Cobb-Douglas Y = A·K^α·(hc·L)^(1−α), using PWT 10.01 capital, human capital and TFP (CC BY 4.0) and Maddison GDP (CC BY 4.0).\n- **Growth:** Solow-style capital accumulation.\n- **Debt:** d' = (1+r)/(1+g)·d − primary balance.\n- **Inflation:** deficit monetization with a Cagan seigniorage limit, so hyperinflation emerges as in Bolivia, Argentina and Israel in 1985.\n- **Unemployment:** Okun's law (coefficient varies by country).\n- **Tax capacity:** rises with development (Besley-Persson: about 10–20% of GDP in low-income countries vs about 40% in high-income ones).\n- **Demographic transition:** death rates fall before birth rates; Preston curve.\n- **Instability:** the Goldstone/PITF model, where regime type dominates and partial democracies with factionalism carry over 30x the odds of full autocracies, plus infant mortality, neighbour conflict and state-led discrimination. Fearon-Laitin: poverty, large population, rough terrain and political instability predict insurgency.\n- **Elite politics:** selectorate theory (large coalitions reward public goods, small ones private goods).\n- **Combat:** Dupuy QJM, P = S·V·CEV, with posture factors 1.0 / 1.3 / 1.5 / 1.6 (from a secondary source), and Lanchester laws for air and naval duels.\n- **Alliances:** Walt's balance of threat (power, proximity, offensive capability, intent).\n- **Nuclear escalation:** Kahn's 44-rung ladder, compressed.\n\nProposed architecture: a deterministic fixed-step core where one tick is one day.\n- **Daily:** movement, combat, supply draw, cash accrual and dated events.\n- **Monthly, staggered so each day handles about 1/30 of countries:** macro-economy, budget, province unrest and output, population, opinions, research and strategic AI.\n- **Quarterly:** oil and commodity prices, interest rates and credit ratings.\n- **Yearly:** demographic targets, depreciation and technology diffusion.\n\nMy C benchmark covered 4,596 Natural Earth admin-1 provinces and 10,769 adjacencies, a monthly macro step for 170 countries and a staggered utility AI. It ran 15 years in 0.30 s, about 55 µs per game day, on a Linux server. It is a proxy, not an iPhone measurement. It suggests simulation cost is negligible and rendering is the real performance budget. The 4,596 admin-1 units are very uneven (UK 232, Slovenia 193, Latvia 119, Saudi Arabia 13) and use modern borders. A merged set of about 1,500–2,500 game provinces with 1985 corrections is needed for both balance and realism.\n\nBalance across pillars comes from shared, limited currencies:\n- **Money:** budget shares sum to 100%.\n- **Manpower:** conscripts are removed from the labour input L.\n- **Legitimacy and political capital:** reforms and decrees cost them.\n- **Influence:** spent on diplomacy.\n- **Research points.**\n\nEach pillar both feeds and drains the others. A composite score weights growth, stability, security, influence and technology equally, so no single pillar wins on its own. The AI is utility-based (Dave Mark's Infinite Axis Utility System, IAUS), with personalities set by regime type, bloc and leader. Difficulty changes decision quality, reaction frequency and selection noise. Hidden bonuses appear only through an explicit, labelled toggle.\n\nThe 1985 hooks are verified with dates: Gorbachev (11 Mar 1985); Plaza Accord (22 Sep 1985); South Africa's emergency (20 Jul 1985, 36 districts), the Rubicon speech (15 Aug) and the debt standstill; the Baker Plan (Seoul, Oct 1985, 15 debtors); Peru's 10%-of-exports cap; Bolivia's Decree 21060 (29 Aug 1985); OPEC's December 1985 \"fair share\" decision leading to the 1986 crash (spot average about $28 in 1985 vs about $14 in 1986; WTI $9.95 on 1 Apr 1986); Iran-Iraq (War of the Cities 1985, al-Faw 9 Feb 1986, UNSCR 598, ceasefire Aug 1988); Afghanistan (Stingers Sept 1986, Geneva Accords 14 Apr 1988, withdrawal complete 15 Feb 1989); Lebanon (War of the Camps from 19 May 1985, Israeli security zone June 1985); and the Geneva, Reykjavik and INF summits.\n\nData licensing matters for commercial release:\n- **Usable:** Natural Earth (public domain); PWT and Maddison (CC BY 4.0); the CIA World Factbook 1985 (US government public domain).\n- **Problems:** CShapes 2.0 is non-commercial. SIPRI requires permission and royalties for commercial use. historical-basemaps is reportedly GPL-3. Correlates of War, Polity, V-Dem, UCDP and UN population licences were not confirmed.\n\nFirst version: every pillar present but shallow and coupled. Later versions add depth, such as bilateral trade, parties and elections, intelligence and fog of war, detailed air and naval warfare, and more scenarios.",
+ "items": [
+  {
+   "topic": "Survey: Victoria 3 (internal politics)",
+   "finding": "Legitimacy runs 0-100 in five bands. Below 25 the government is illegitimate: laws are blocked and radicals spawn steadily. From 25 to 49 radicals grow more slowly, 50-74 is neutral, 75 and above trickles loyalists, and 90 and above halves law enactment time. Pops become radical when their standard of living (SoL) falls or stays below expectations, and loyal when it rises. Radicals and loyalists are fractions inside pops, not whole pops. Lesson: changes in living standards relative to expectation drive unrest, and banded thresholds read well on a phone.",
+   "evidence": "https://www.paradoxinteractive.com/games/victoria-3/news/victoria-3-dev-diary-65-patch-1-1-pt1 ; https://admin-forum.paradoxplaza.com/forum/developer-diary/victoria-3-dev-diary-14-political-movements.1490045",
+   "verified": true
+  },
+  {
+   "topic": "Survey: Victoria 3 (performance and AI criticism)",
+   "finding": "Late-game slowdowns are tied to large pop counts. Dev Diary 105 says migration kept splitting pops, which raised the pop count and slowed the game, and version 1.6 tried to avoid it. Players report lag after about 1880-1890 from pops, markets and trade routes. Players also report a passive AI that neglects raw materials and railroads, plus 'overly complex mechanics'. Lesson for lightness: never let the number of simulated entities grow without bound. Use a fixed set of province and country aggregates.",
+   "evidence": "https://admin-forum.paradoxplaza.com/forum/developer-diary/victoria-3-dev-diary-105-migration-in-1-6.1624226 ; https://vaporlens.app/app/529340/victoria_3 ; https://steamcommunity.com/app/529340/discussions/0/596265621109359338 (player reports, anecdotal)",
+   "verified": true
+  },
+  {
+   "topic": "Survey: Victoria 3 (economy)",
+   "finding": "The economy is a web of buildings that produce and consume goods, staffed by pops. Production methods set inputs, outputs and job types, with trade-offs. A national market sets prices from supply and demand, and overproduction sells at depressed prices. It is deep and realistic but expensive and opaque on a small screen. For a phone, keep only the idea of sector capacity plus a few world prices (oil, food, metals).",
+   "evidence": "https://admin-forum.paradoxplaza.com/forum/developer-diary/victoria-3-dev-diary-9-national-markets.1484917 ; https://admin-forum.paradoxplaza.com/forum/developer-diary/victoria-3-dev-diary-4-goods.1479730 ; https://admin-forum.paradoxplaza.com/forum/developer-diary/victoria-3-dev-diary-5-production-methods.1480760",
+   "verified": true
+  },
+  {
+   "topic": "Survey: Hearts of Iron IV (land combat)",
+   "finding": "Combat uses organization (a unit retreats at 0 regardless of strength) separately from strength. Soft and hard attack are weighted by the target's hardness. Combat width is set by terrain and grows with attacks from several directions. Terrain, weather, generals, air superiority, morale and entrenchment (a percentage modifier lost when moving) all modify results. Lesson: the org/strength split plus a frontage cap prevents doom-stacks and gives readable retreats. The exact hourly formulas could not be confirmed.",
+   "evidence": "https://gameslantern.com/article/all-combat-stats-explained-in-hearts-of-iron-iv ; https://eip.gg/hoi4/guides/warfare/ ; https://steamcommunity.com/app/394360/discussions/0/357288572136275083/?ctp=4",
+   "verified": true
+  },
+  {
+   "topic": "Survey: Hearts of Iron IV (supply)",
+   "finding": "The supply rework (No Step Back / patch 1.11) uses supply hubs fed by railways, with trucks for the last stretch. A province can be served by several hubs. When supply is short, the deficit is shared evenly among the divisions drawing from that hub. A dedicated supply map mode was added for clarity. This is a good template: hubs plus graph distance plus infrastructure, with an even split of shortages.",
+   "evidence": "https://www.pcgamesn.com/hearts-of-iron-iv/supply-changes ; https://www.pcgamesn.com/hearts-of-iron-iv/supply-trains",
+   "verified": true
+  },
+  {
+   "topic": "Survey: Hearts of Iron IV (manpower, stability, war support)",
+   "finding": "Conscription laws give tiers of the recruitable population: Volunteer Only 1.5%, Limited 2.5%, Extensive 5%, up to Scraping the Barrel 25%. Higher tiers cut industry output and slow training, and are gated by war support (for example 60%). Stability drives factory output and political power. War support drives manpower laws and capitulation resistance. Splitting 'stability' from 'war support' maps well to 1985 (for example the USSR in Afghanistan, or Iran's war mobilization).",
+   "evidence": "https://eip.gg/hoi4/guides/impact-of-laws/ ; https://michaelkleen.com/2017/02/07/hearts-of-iron-iv-minor-nation-strategies-sweden/ ; https://hoi4commands.com/guides/stability-war-support (fan guides; values are version-dependent)",
+   "verified": true
+  },
+  {
+   "topic": "Survey: Europa Universalis IV (unrest to rebels)",
+   "finding": "Each province has an unrest value built from national factors (stability, legitimacy, overextension) and local modifiers. While unrest is above 0 it pushes rebel-faction progress up monthly, and the rebels rise at 100. Harsh treatment reduces progress at a cost that grows with unrest. This is a simple, cheap and readable pipeline from unrest to progress to an uprising.",
+   "evidence": "https://steamcommunity.com/app/236850/discussions/0/558748566744707207 and related EU4 Steam threads (community explanations, not official docs)",
+   "verified": false
+  },
+  {
+   "topic": "Survey: mobile real-time titles (Conflict of Nations, Supremacy 1914, Call of War)",
+   "finding": "Matches last days to weeks in real time, and players praise the diplomacy. The main criticisms are pay-to-win (buying morale and speed-ups) and difficulty understanding the mechanics. Call of War province morale falls with distance from the capital and by about -5 per war, low morale cuts production, and provinces below about 35% can rebel. Lessons: a single-player game must have no pay-to-win levers, mechanics must be explained in the UI, and the morale/stability concept is proven on phones.",
+   "evidence": "https://www.pockettactics.com/conflict-of-nations-world-war-3/review ; https://www.gamerbraves.com/?p=63714 ; https://www.pocketgamer.com/supremacy-1914/ ; https://www.playsupremacy.com/en/forums/call-of-war-1942/call-of-war-1942-questions-and-answers/detailed-updated-morale-explanation-please-d6fd68df (forum, numbers approximate)",
+   "verified": true
+  },
+  {
+   "topic": "Survey: Power & Revolution / Geopolitical Simulator (modern realism)",
+   "finding": "Praised for geopolitical depth. The developers say they consult political and economic specialists, and a Worldcrunch feature reports use in training. Criticised for bugs, a dated and dense interface, and 'Mixed' Steam ratings for the 2019 and 2022 editions. Lesson: realism without clarity and stability alienates players. Invest in clear 'why' breakdowns and in tests.",
+   "evidence": "https://worldcrunch.com/tech-science/this-video-game-grooms-future-world-leaders ; https://steamcommunity.com/app/467520/discussions/0/154645512754043573",
+   "verified": true
+  },
+  {
+   "topic": "Survey: Civilization V AI structure",
+   "finding": "Each AI leader's personality is a set of 'flavors' on a 10-point scale with small random variation per game. The AI runs on four levels: grand strategic (long-term goals), strategic (empire management), operational (war fronts) and tactical (units). This directly supports a hierarchical, personality-weighted AI.",
+   "evidence": "https://en.wikipedia.org/wiki/Civilization_V ; https://forums.civfanatics.com/threads/vox-populi-diplomacy-guides.683886/latest",
+   "verified": true
+  },
+  {
+   "topic": "Technique: utility AI (IAUS)",
+   "finding": "Utility AI scores each option as a product of 'considerations'. Each consideration is an input normalized to 0-1 and passed through a response curve. Dave Mark and Kevin Dill presented it at GDC (2010, 2012). The Infinite Axis Utility System was used in Guild Wars 2: Heart of Thorns (GDC 2015, Mark and Mike Lewis). Designers could author AI packages in minutes. It is cheap to evaluate and data-driven, so personalities are just weight tables.",
+   "evidence": "https://en.wikipedia.org/wiki/Utility_system ; https://gdcvault.com/play/1012410/Improving-AI-Decision-Modeling-Through ; https://gameai.com/iaus.php",
+   "verified": true
+  },
+  {
+   "topic": "Model: production and growth (Cobb-Douglas / Solow)",
+   "finding": "Use Y = A·K^α·(hc·L)^(1−α) per country, with K' = (1−δ)K + I. Penn World Table 10.01 provides capital stock, a human-capital index and TFP for 183 countries, 1950-2019, under CC BY 4.0 (citation: Feenstra, Inklaar and Timmer 2015). Calibrate A as the residual so that 1985 GDP matches the data exactly. Then growth emerges from investment, labour, human capital and TFP catch-up.",
+   "evidence": "https://www.rug.nl/ggdc/productivity/pwt/ ; https://www.rug.nl/ggdc/productivity/pwt/pwt-releases/pwt1001 (licence CC BY 4.0). Using α≈1/3 and δ≈5%/yr is conventional, but I did not verify it with a source here.",
+   "verified": true
+  },
+  {
+   "topic": "Dataset: Maddison Project Database 2023",
+   "finding": "GDP per capita and population for 169 countries, up to 2022, under CC BY 4.0. Citation: Bolt and van Zanden (2024). The original papers must also be cited when data appear in graphs or when fewer than 12 countries are used. Good for 1985 GDP and population, including the USSR and Eastern Bloc reconstructions, with an attribution screen.",
+   "evidence": "https://www.rug.nl/ggdc/historicaldevelopment/maddison/releases/maddison-project-database-2023",
+   "verified": true
+  },
+  {
+   "topic": "Model: government debt dynamics",
+   "finding": "d_t = ((1+r)/(1+g))·d_{t−1} − pb, approximately Δd ≈ ((r−g)/(1+g))·d − pb. The debt-stabilizing primary surplus is ((r−g)/(1+g))·d. Combined with a risk premium on r, this reproduces 1980s debt spirals (Latin America) with one line per country per month.",
+   "evidence": "https://www.ecb.europa.eu/press/economic-bulletin/focus/2019/html/ecb.ebbox201902_06~0c96ee6f7c.sr.html ; https://www.tresor.economie.gouv.fr/Articles/ec72ac87-7440-4257-83a8-4d44f487670e/files/4dabec3d-3f1f-4775-a3e8-3c3a91b6c2d2",
+   "verified": true
+  },
+  {
+   "topic": "Model: inflation via deficit monetization (Cagan)",
+   "finding": "Seigniorage = inflation × real money balances (an inflation tax). Cagan's semi-log money demand implies a Laffer curve: there is a maximum seigniorage, and trying to extract more makes inflation accelerate unstably (Kiguel). The Laffer-curve form is contested (Benati), so use it as a gameplay limit rather than a precise law. It produces 1985 hyperinflation episodes (Bolivia, Argentina, Israel) without extra code.",
+   "evidence": "https://www.nber.org/papers/w4578.pdf ; https://econviews.com/wp-content/uploads/2024/02/kiguel_1989.pdf ; https://www.nuff.ox.ac.uk/economics/papers/2004/w31/NielsenYugo.pdf",
+   "verified": true
+  },
+  {
+   "topic": "Model: unemployment (Okun's law)",
+   "finding": "Change in unemployment ≈ −β × (growth − potential growth). Classic US ratios are about 2:1 to 3:1 (output points per unemployment point), or a coefficient of about −0.5. The IMF finds large variation across countries, so store β per country (or per development tier).",
+   "evidence": "https://www.imf.org/en/publications/wp/issues/2016/12/31/okun-s-law-fit-at-50-40236 ; https://modeldiplomat.com/learn/glossary/okuns-law",
+   "verified": true
+  },
+  {
+   "topic": "Model: tax capacity by development",
+   "finding": "Low-income countries typically collect 10-20% of GDP in taxes, against about 40% for high-income countries. Weak tax capacity has both structural and political causes. Model the effective revenue ceiling as rising with GDP per capita, administrative capacity and stability. Raising the tax level above that ceiling should cost compliance and stability rather than produce revenue.",
+   "evidence": "https://ideas.repec.org/a/aea/jecper/v28y2014i4p99-120.html (Besley and Persson 2014, JEP)",
+   "verified": true
+  },
+  {
+   "topic": "Model: demographic transition",
+   "finding": "Death rates fall first and birth rates later, and both move with GDP per capita. The Preston curve links life expectancy to income per capita, with gains flattening at high income. Transitions spread between neighbours. Implement this as crude birth and death rates relaxing slowly toward income-, urbanization- and health-dependent targets, starting from actual 1985 values.",
+   "evidence": "https://www.aapss.org/fellows/fellow/samuel-h-preston/ ; https://docs.iza.org/dp15575.pdf ; https://mpra.ub.uni-muenchen.de/45255/1/MPRA_paper_45003.pdf",
+   "verified": true
+  },
+  {
+   "topic": "Model: political instability (Goldstone / PITF)",
+   "finding": "Four variables (regime type, infant mortality, armed conflict in neighbouring states and state-led discrimination) predicted about 80% of instability onsets two years ahead, on a 1955-2003 sample. Regime type is the strongest predictor: partial democracies with factionalism had over 30 times the odds of full autocracies. This gives a realistic, calibratable structure for country-level instability hazard.",
+   "evidence": "https://scip.gmu.edu/a-global-model-for-forecasting-political-instability/ ; https://journalistsresource.org/politics-and-government/global-model-for-forecasting-political-instability/",
+   "verified": true
+  },
+  {
+   "topic": "Model: insurgency conditions (Fearon and Laitin 2003)",
+   "finding": "After controlling for income, ethnic and religious diversity did not predict civil war. Poverty (a proxy for weak state capacity), political instability, rough terrain and large population did. Use these as the insurgency-capacity term per province: terrain roughness, low infrastructure, low state presence, and group size and support.",
+   "evidence": "https://cpi.stanford.edu/_media/pdf/Reference%20Media/Fearon%20and%20Laitin_2003_Conflict,%20War,%20and%20Instability.pdf ; https://econpapers.repec.org/article/cupapsrev/v_3a97_3ay_3a2003_3ai_3a01_3ap_3a75-90_5f00.htm",
+   "verified": true
+  },
+  {
+   "topic": "Model: regime survival (selectorate theory)",
+   "finding": "Leaders keep their winning coalition with public goods (large coalitions, as in democracies) or private goods (small coalitions, as in autocracies). Small-coalition backers stay loyal because a new leader would replace them. In game terms, interest groups have a power weight and a satisfaction score. Democracies reward growth and social spending, while juntas and personalist regimes reward patronage and military pay. This differentiates gameplay by regime realistically.",
+   "evidence": "https://en.wikipedia.org/wiki/Selectorate_theory ; https://www.nyudri.org/research-index/2009/tanzaniaselectorate",
+   "verified": true
+  },
+  {
+   "topic": "Model: Lanchester laws",
+   "finding": "Aimed fire follows the square law: B' = −ρR, R' = −βB, and the conserved quantity β(B0²−B²) = ρ(R0²−R²) means doubling numbers quadruples effectiveness. Unaimed area fire follows the linear law. Use the square law for air and naval duels (fleets and air wings per zone). Do not use it for land fronts, because it is explosive and rewards doom-stacks.",
+   "evidence": "https://faculty.nps.edu/mkress/docs/Lanchester_Models.pdf ; https://en.wikipedia.org/wiki/Lanchester%27s_laws ; https://arxiv.org/pdf/1903.06666",
+   "verified": true
+  },
+  {
+   "topic": "Model: Dupuy QJM / TNDM factors",
+   "finding": "Combat power P = S × V × CEV, where S is force strength, V is environmental and operational factors (terrain, weather, season, posture) and CEV is the combat effectiveness value. Posture multipliers are attack 1.0, hasty defence 1.3, prepared 1.5 and fortified 1.6. Example terrain values: rugged-mixed 1.5, urban 1.4. The QJM standard daily attrition rates are about 2.8% for the attacker and 1.5% for the defender, scaled by size, mission, force ratio and day/night. The TNDM adds surprise, terrain, weather, season, advance rate, river crossing and fatigue.",
+   "evidence": "Secondary source (C. Lawrence, Dupuy Institute blog, citing Numbers, Predictions and War 1979/1985): https://dupuyinstitute.org/2022/08/16/the-defensive-value-of-urban-terrain-according-to-the-qjm/ ; https://dupuyinstitute.org/2019/12/26/how-attrition-is-calculated-in-the-qjm-vs-the-tndm/ ; https://dupuyinstitute.org/2019/05/12/dupuys-verities-combat-power-firepower/",
+   "verified": true
+  },
+  {
+   "topic": "Model: alliance behaviour (Walt's balance of threat)",
+   "finding": "States align against the greatest threat, not simply the strongest state. Threat comes from aggregate power, geographic proximity, offensive capability and perceived aggressive intentions. Weak states facing a near, overwhelming threat may bandwagon instead. As an AI rule: threat_ij = power_j × proximity_ij × offense_j × intent_ij. Seek alliances or patrons against the top threat, and bandwagon if weak and the threat is adjacent.",
+   "evidence": "https://en.wikipedia.org/wiki/Balance_of_threat",
+   "verified": true
+  },
+  {
+   "topic": "Model: nuclear escalation (Kahn's ladder)",
+   "finding": "Kahn's 'On Escalation' (1965) has 44 rungs in 7 units separated by 6 'firebreaks'. It is a heuristic, not a fixed script. The Cuban Missile Crisis sits at about rung 9. Compress it to 5-6 game rungs (crisis, mobilization, alert, limited threat, central exchange) as an abstract deterrence and escalation-risk mechanic with no graphic depiction.",
+   "evidence": "https://www.globalsecurity.org/military/intro/escalation.htm ; https://www.nybooks.com/articles/1965/07/15/up-the-doomsday-ladder/ ; https://prospectmagazine.co.uk/politics/policy/defence-news/62117/imagining-armageddon-herman-kahn-nuclear-ladder",
+   "verified": true
+  },
+  {
+   "topic": "1985 world variable: oil price and the OPEC 'fair share' decision",
+   "finding": "In December 1985 OPEC decided to 'secure and defend a fair share' of the market. Saudi Arabia dropped its swing-producer role and moved to netback pricing. Spot prices averaged about $28/bbl in 1985 and about $14/bbl in 1986. Brent was about $26 at the end of 1985 and about $12 in April 1986, and WTI hit $9.95 on 1 Apr 1986. Yamani was dismissed in October 1986, and OPEC set an $18 reference basket in December 1986. Sources disagree on the cause (Saudi market-share strategy vs netback pricing). Model the oil price as a global state variable driven by OPEC quota choices and Saudi policy.",
+   "evidence": "https://www.mofa.go.jp/policy/other/bluebook/1987/1987-4-6.htm ; https://merip.org/1992/05/opec-since-the-gulf-war/ ; https://www.cia.gov/readingroom/node/1946708 ; https://www.oxfordenergy.org/?p=27995 ; https://www.brookings.edu/wp-content/uploads/1986/06/1986b_bpea_gately_adelman_griffin.pdf",
+   "verified": true
+  },
+  {
+   "topic": "1985 calibration: superpower defence burden",
+   "finding": "CIA and DIA estimated Soviet defence spending at 15-17% of GNP in the early 1980s. Critics put it at 20-25%, and Gorbachev later claimed about 20%. For the US, President Reagan's 1985 figure was about 6.4%, and CRS and OMB give a peak of 6.2% of GDP in FY1986. Use ranges and store each source in the data notes.",
+   "evidence": "https://www.cia.gov/readingroom/node/1940613 ; https://www.airandspaceforces.com/article/0789edit/ ; https://www.everycrsreport.com/reports/RL30447.html",
+   "verified": true
+  },
+  {
+   "topic": "Map data: Natural Earth admin-1 (performance and balance input)",
+   "finding": "Natural Earth is public domain. The 10m admin-1 layer in the sibling workflow scratch folder has 4,596 features across 251 country codes, and a computed graph of 10,769 adjacency edges. It is very uneven: UK 232, Slovenia 193, Latvia 119, Philippines 118, Uganda 112, vs Saudi Arabia 13, South Africa 9, Lebanon 6, USA 51, Russia 86. It reflects modern units, not 1985 ones (two Germanys, two Yemens, USSR, Yugoslavia, Czechoslovakia, Ethiopia with Eritrea, South Africa's 4 provinces plus homelands, Namibia). Merge to about 1,500-2,500 game provinces with 1985 corrections.",
+   "evidence": "https://www.naturalearthdata.com/?p=480 ; https://purl.stanford.edu/hx046pz3375 (no restrictions). Counts computed locally from wf/ne/ne10_admin1.geojson and the header of wf/graph.txt.",
+   "verified": true
+  },
+  {
+   "topic": "Data licence: CShapes 2.0 historical borders",
+   "finding": "CShapes 2.0 maps state borders 1886-2019, but it is licensed CC BY-NC-SA 4.0 (BTAA record) or CC BY-NC 4.0 (ETH record for the article). Both are non-commercial, so it is not shippable in a game that may be sold. It can serve only as a private reference for checking hand-built 1985 borders.",
+   "evidence": "https://geo.btaa.org/catalog/b23a624e-f1ab-4989-8c94-f99f6e6fa414 ; https://www.research-collection.ethz.ch/handle/20.500.11850/487987?show=full",
+   "verified": true
+  },
+  {
+   "topic": "Data licence: SIPRI military expenditure",
+   "finding": "SIPRI's terms require authorization, and normally a reasonable royalty, for commercial use of its data. Fair use is limited to non-commercial use and to less than 10% of a dataset. Do not ship SIPRI figures without permission. Prefer public-domain or CC BY sources (the CIA World Factbook 1985, PWT and Maddison) and documented estimates.",
+   "evidence": "https://www.sipri.org/about/terms-and-conditions ; https://www.sipri.org/databases/terms",
+   "verified": true
+  },
+  {
+   "topic": "Dataset: CIA World Factbook 1985",
+   "finding": "The 1985 edition (published 1 May 1985, 112 pages) is available as a PDF in the CIA FOIA reading room. As a US government work it is public domain in the US. It is a commercially safe source for 1985 population, GDP estimates, government type, leaders, military manpower and natural resources. Wikipedia reports the Factbook was discontinued in February 2026, with archives still available.",
+   "evidence": "https://www.cia.gov/readingroom/print/2012649 ; https://www.cia.gov/the-world-factbook/about/cover-gallery/1985-cover/ ; https://en.wikipedia.org/wiki/The_World_Factbook",
+   "verified": true
+  },
+  {
+   "topic": "Dataset: Correlates of War National Material Capabilities",
+   "finding": "Covers military expenditure, military personnel, energy consumption, iron and steel, and urban and total population, plus the CINC power index. v7.0 covers 1816-2022. The site asks users to cite the version and articles of record. I could not read its terms page (unreachable), so its commercial status is unknown. Use it for calibration and checks only until its terms are confirmed.",
+   "evidence": "https://correlatesofwar.org/data-sets/national-material-capabilities ; https://rdrr.io/cran/peacesciencer/man/cow_nmc.html",
+   "verified": true
+  },
+  {
+   "topic": "1985 hook: Gorbachev becomes General Secretary",
+   "finding": "Chernenko died on 10 March 1985 (19:20). The Politburo chose Gorbachev on 11 March 1985, and sources differ on whether the Politburo nominated or the Central Committee elected. Use this as a dated event for the USSR AI. If the player is the USSR, offer a succession choice (reformer vs hardliner) instead of forcing history.",
+   "evidence": "https://en.wikipedia.org/wiki/General_secretaryship_of_Mikhail_Gorbachev ; https://nsarchive.gwu.edu/sites/default/files/documents/rd4698-elmo6/1985.03.11-Politburo-Session%2C-Gorbachev-Election.pdf",
+   "verified": true
+  },
+  {
+   "topic": "1985 hook: Plaza Accord",
+   "finding": "G5 finance ministers met at the Plaza Hotel, New York, on 22 September 1985. Coordinated intervention brought down a dollar that had been overvalued, by roughly 50% since 1980. The dollar fell about 4% the next trading day. Model it as an event that shifts the USD exchange-rate index and US trade balance over 1-2 years.",
+   "evidence": "https://en.wikipedia.org/wiki/Plaza_Accord ; https://www.jeffrey-frankel.com/?p=578",
+   "verified": true
+  },
+  {
+   "topic": "1985 hook: apartheid South Africa crisis",
+   "finding": "A partial state of emergency was declared on 20 July 1985 in 36 magisterial districts, extended to 8 more areas on 26 October 1985, lifted on 7 March 1986 and reimposed nationwide on 12 June 1986. Botha's 'Rubicon' speech came on 15 August 1985. Banks refused to roll over short-term debt (Chase in July), the rand fell from about 52 to 33 US cents, and a debt standstill on private foreign debt followed. These are ready-made chained events tying unrest, finance and sanctions.",
+   "evidence": "https://sahistory.org.za/article/partial-state-emergency-july-1985 ; https://sabctrc.saha.org.za/glossary/states_of_emergency.htm?tab=report ; https://en.wikipedia.org/wiki/1985_in_South_Africa ; https://mg.co.za/article/2017-04-03-south-africa-is-on-a-cliff-edge-just-as-it-was-in-1985",
+   "verified": true
+  },
+  {
+   "topic": "1985 hook: Latin American debt crisis",
+   "finding": "The Baker Plan was announced at the IMF/World Bank meetings in Seoul in October 1985 (IMF history says 6 Oct). It covered 15 heavily indebted middle-income countries: Argentina, Brazil, Mexico, Venezuela, Chile, Philippines, Nigeria, Yugoslavia and others. It asked for $20bn in new bank lending plus about $9bn from multilateral lenders, tied to reforms. The Brady Plan replaced it in March 1989. In July 1985 Peru's Alan García pledged to cap debt payments at 10% of export earnings and bypass the IMF.",
+   "evidence": "https://en.wikipedia.org/wiki/Baker_Plan_(debt_relief) ; https://imf.org/external/pubs/Ft/history/2001/ch10.pdf ; https://csmonitor.com/1985/0801/ogarcia.html",
+   "verified": true
+  },
+  {
+   "topic": "1985 hook: hyperinflation stabilizations",
+   "finding": "Bolivia signed Supreme Decree 21060 on 29 August 1985. Inflation peaked at 183% in February 1985, and the 1985 annual figure is reported as 8,170% (year-on-year) or 11,750% (average), depending on the measure. Argentina launched Plan Austral in June 1985 after nearly 500% inflation in 1984. Israel launched its Economic Stabilization Plan in July 1985: about 20% devaluation, a price and wage freeze, and a Histadrut pact. Israel succeeded and Argentina did not. These are 'stabilization package' decisions with a short-term stability cost and a long-term inflation cure.",
+   "evidence": "https://en.wikipedia.org/wiki/Supreme_Decree_21060 ; https://learn.planetbanknote.com/hyperinflation-bolivia/ ; https://wider.unu.edu/publication/inflation-stabilization ; https://link.springer.com/doi/10.1007/BF02802947",
+   "verified": true
+  },
+  {
+   "topic": "1985 hook: Iran-Iraq War",
+   "finding": "1985 saw a 'War of the Cities' campaign after Iran's Operation Badr. Dates vary by source: 22 Mar-8 Apr, or 14 Mar-7 Apr plus 25 May-15 Jun. Operation Dawn 8 captured al-Faw from 9 February 1986, and Iraq retook it in 1988. UNSC Resolution 598 was adopted unanimously on 20 July 1987. Iran accepted it on 17 July 1988, and the ceasefire took effect on 20 August 1988 (ICRC). This is an ongoing war at scenario start: both sides at total mobilization, with oil exports, Gulf shipping and missile strikes as levers.",
+   "evidence": "https://en.wikipedia.org/wiki/War_of_the_cities ; https://www.globalsecurity.org/military/world/war/iran-iraq-3.htm ; https://en.wikipedia.org/wiki/First_Battle_of_al-Faw ; https://en.wikipedia.org/wiki/United_Nations_Security_Council_Resolution_598 ; https://international-review.icrc.org/articles/conflict-between-iran-and-iraq",
+   "verified": true
+  },
+  {
+   "topic": "1985 hook: Soviet-Afghan War",
+   "finding": "The 1986 US decision to supply Stingers led to first use at Jalalabad in September 1986. Nearly 270 aircraft were reportedly downed over the next three years. The Geneva Accords were signed on 14 April 1988, and the withdrawal ran from 15 May 1988 to 15 February 1989. The war is a proxy-support mechanic: foreign aid to insurgents raises their capacity and cuts the occupier's air factor and war support.",
+   "evidence": "https://foreignpolicy.com/2010/07/28/stop-panicking-about-the-stingers/ ; https://heritage.org/middle-east/report/afghanistan-the-us-role-the-approaching-endgame ; https://policyarchive.org/download/9402",
+   "verified": true
+  },
+  {
+   "topic": "1985 hook: Lebanese Civil War",
+   "finding": "The War of the Camps (Amal, backed by Syria, against the Palestinian camps) began on 19 May 1985 and continued on and off until July 1988. Israel completed a phased pullback in June 1985 but kept a 'security zone' (about 3-12 miles deep, roughly 1,000-1,500 IDF soldiers plus the 2,500-strong SLA). In game terms Lebanon is a fragmented-control country: provinces have a control owner separate from the legal owner, and militias are non-state actors.",
+   "evidence": "https://en.wikipedia.org/wiki/War_of_the_Camps ; https://www.csmonitor.com/1985/0422/ojune.html ; https://www.meforum.org/middle-east-quarterly/israels-security-zone-in-lebanon-a-tragedy ; https://adl.org/resources/backgrounder/lebanon-war-1982",
+   "verified": true
+  },
+  {
+   "topic": "1985 hook: superpower summitry and arms control",
+   "finding": "Geneva Summit 19-20 November 1985 (the first of five Reagan-Gorbachev meetings), Reykjavik 11-12 October 1986 (no agreement, but close on strategic arms), and INF Treaty signed 8 December 1987 (eliminated a whole class of nuclear weapons). Use them as decisions that lower world tension and free military budget, gated by both sides' leaders and tension level.",
+   "evidence": "https://margaretthatcher.org/archive/Geneva ; https://en.wikipedia.org/wiki/Reykjav%C3%ADk_Summit ; https://www.reaganlibrary.gov/public/2020-06/table-of-contents.pdf ; https://history.state.gov/departmenthistory/short-history/gorbachev",
+   "verified": true
+  },
+  {
+   "topic": "1985-86 hooks: other dated events",
+   "finding": "- **Coups:** Sudan, 6 Apr 1985 (Nimeiry ousted amid IMF subsidy-cut protests); Uganda, Okello, 27 or 29 Jul 1985.\n- **Wars:** Agacher Strip War, Burkina Faso vs Mali, 25-30 Dec 1985; South Yemen civil war, 13-24 Jan 1986; US strike on Libya (El Dorado Canyon), 15 Apr 1986 local time.\n- **Disasters:** Mexico City earthquake, 19 Sep 1985 (M8.1, more than 10,000 dead); Chernobyl, 26 Apr 1986.\n- **Other:** Live Aid, 13 Jul 1985; Achille Lauro hijacking, Oct 1985; Soviet anti-alcohol campaign launched May 1985 (it cut budget revenue); Spain and Portugal joined the EC on 1 Jan 1986; EDSA People Power ousted Marcos, Feb 1986.",
+   "evidence": "https://en.wikipedia.org/wiki/1985_Sudanese_coup_d%27%C3%A9tat ; https://c-r.org/accord/northern-uganda/reaching-1985-nairobi-agreement-2002 ; https://en.wikipedia.org/wiki/Agacher_Strip_War ; https://www.intrescue.info/hub/index_php/missions/mexico-city-earthquake-september-1985/ ; https://www.history.com/this-day-in-history/year/1985 ; https://jamestown.org/?p=29509 ; https://en.wikipedia.org/wiki/1986_enlargement_of_the_European_Communities ; https://Wikipedia.com/wiki/1986",
+   "verified": true
+  },
+  {
+   "topic": "Design: time model and tick cadence (foundation and lightness)",
+   "finding": "Use a deterministic fixed step where one tick is one day, with seeded random-number streams per system.\n- **Daily:** movement, combat in contested provinces only, occupation, supply draw, cash accrual (monthly net / 30), project progress and the dated-event queue.\n- **Monthly, staggered by countryId mod 30:** macro-economy, budget, province output and unrest, population, opinions, research and strategic AI.\n- **Quarterly:** oil and commodity prices, interest rates, credit ratings and election checks.\n- **Yearly:** birth and death rate targets, depreciation, technology diffusion and the statistics archive.\n\nSpeeds: pause, 1x about 1 day/s, 2x, 5x, and max capped at about 20-30 days/s for battery. The simulation runs on a background actor, and the UI renders immutable snapshots.",
+   "evidence": "Design proposal. Benchmark: wf/simbench/simbench.c simulated 15 years (5,475 days) in 0.299 s, about 55 µs per day. The workload was 4,596 provinces, 10,769 edges of daily diffusion, monthly Cobb-Douglas and debt updates for 170 countries, and a staggered 40-option × 8-consideration utility AI. It ran as C -O2 on a Linux x86 machine, not on an iPhone.",
+   "verified": false
+  },
+  {
+   "topic": "Design: economy model (country macro + province distribution)",
+   "finding": "Country state: Y, K, A, hc, L, unemployment u, price index P, inflation π, savings rate s, effective tax τ, six budget shares (military, security, social, investment, subsidies, administration), domestic debt D_dom, external debt D_ext, interest rate r, credit rating, oil capacity and output, trade openness, terms of trade. Province state: population, urban share, infrastructure 0-5, sector capacity (agriculture, industry, resources), deposits, damage, occupier. Monthly:\n- Y_pot = A·K^0.33·(hc·L)^0.67 + Q_oil·p_oil.\n- Y = Y_pot·(1 − damage − disruption(unrest, blockade)).\n- K' = (1−δ/12)K + s·Y/12 + I_pub·efficiency(corruption).\n- TFP grows by catch-up λ·ln(A_frontier/A), plus research and reform, minus war and instability.\n- Province output share = pop × (0.5 + urban) × (1 + 0.1·infra) × sector × (1 − damage).\n\nPlayer levers (about 10): tax level (5 steps), 6 budget sliders, monetary stance, borrowing source (domestic, IMF, patron), projects (cancellable with partial refund), food and fuel subsidies, devaluation, economic system policy, OPEC quota compliance.",
+   "evidence": "Design proposal built on Cobb-Douglas/Solow with PWT calibration (CC BY 4.0), Besley-Persson tax ceilings and Okun's law (sources in the model items above).",
+   "verified": false
+  },
+  {
+   "topic": "Design: fiscal, debt and inflation loop",
+   "finding": "Monthly fiscal flows:\n- Revenue = min(τ, τ_cap(GDP per capita, admin capacity))·Y·compliance(stability) + state oil take·Q·p + tariffs + aid.\n- Deficit = spending + r·D − revenue. It is financed by domestic borrowing, external borrowing (limited by rating and bloc patron) or monetization share m.\n- Debt: d' = (1+r)/(1+g)·d − pb, with r = r_world + premium(d, debt service/exports, default history).\n\nInflation: π = 0.7·π_prev + 0.3·(money growth − real growth) + 0.2·output gap + FX and oil pass-through. If the monetized deficit exceeds the country's seigniorage cap, π accelerates each month (Cagan instability) until the player takes a 'stabilization package' decision (Israel/Bolivia style: stability −, inflation reset). When debt service exceeds about 30% of exports, a crisis event offers an IMF programme (austerity, stability −) or default/moratorium (rating collapse, trade −).\n\nFeedback to stability: a 'living standard' index = Δ real consumption per capita − 0.5·inflation − unemployment gap + subsidies.",
+   "evidence": "Design proposal. Debt equation (ECB, French Treasury), Cagan and Kiguel, Baker Plan, Peru García, Bolivia 21060 (sources above). The coefficients are starting values for calibration and are not empirically fitted.",
+   "verified": false
+  },
+  {
+   "topic": "Design: world oil and commodity market",
+   "finding": "Global variables: p_oil, plus food and metals indices, updated quarterly as p' = p·exp(κ·(D−S)/S). Demand D = Σ consumption with a small short-run price elasticity, growing with GDP. Supply S = non-OPEC capacity (run at full) + OPEC output chosen by AI or player quota policy. Saudi Arabia has a 'swing vs market share' stance that the December 1985 historical event flips. Calibrate κ so the event drives the price from about $27 to about $12-15 within 4-6 months. Oil exporters (Saudi Arabia, Iraq, Iran, Libya, Nigeria, Mexico, Venezuela, and the USSR for hard currency) feel it through revenue and debt; importers gain. There is no bilateral trade simulation in v1. Trade is openness × terms of trade × bloc and sanction multipliers.",
+   "evidence": "Design proposal anchored to the verified 1985-86 oil facts (MOFA 1987, MERIP, CIA 1986 outlook, Brookings 1986).",
+   "verified": false
+  },
+  {
+   "topic": "Design: population and manpower",
+   "finding": "Province: population, urban share, up to 3 ethnic or religious groups (id + share), refugee inflow. Country: crude birth rate, crude death rate, working-age share, hc. Monthly: pop += pop·(CBR − CDR)/12 + migration. Yearly, CBR and CDR relax with a 10-15 year time constant toward targets set by GDP per capita, health spending, urbanization, hc and policy (such as China's birth policy). War, famine and occupation push refugees to adjacent safe provinces or neighbours (for example Afghanistan to Pakistan and Iran). Manpower pool = pop × military-age share (from age structure) × conscription law. Mobilized men are removed from L, so war costs GDP. Start values come from UN WPP and the CIA Factbook 1985, so year 1 matches the data.",
+   "evidence": "Design proposal on the demographic transition and Preston evidence (above) and HOI4-style conscription tiers. The UN WPP licence is unverified.",
+   "verified": false
+  },
+  {
+   "topic": "Design: government, regime types and interest groups",
+   "finding": "Regime types (about 8): liberal democracy, partial democracy, one-party communist, military junta, personalist dictatorship, absolute monarchy, theocracy, and restricted-franchise ethnocracy (apartheid South Africa). Each regime has legitimacy sources: elections and economy; ideology plus economy plus patron; tradition plus rent distribution; religion plus mobilization; order and security. Five to seven interest groups (military, party or bureaucracy, business, labour, clergy, rural, minorities), each with a regime-specific power weight and a satisfaction score. Political capital accrues monthly from legitimacy and leader skill and is spent on policy changes and decrees. There are about 10 policy axes with 3-5 settings: economic system, civil liberties, press, security posture, conscription, religion and state, minority policy, labour law, foreign alignment, emergency rule. Democracies hold elections on their real 1985-90 calendars. Leaders are renamable and have traits and succession events.",
+   "evidence": "Design proposal on selectorate theory, PITF regime-type findings and HOI4 stability/war-support split (sources above).",
+   "verified": false
+  },
+  {
+   "topic": "Design: stability, unrest, rebellion and coups",
+   "finding": "Per province, monthly: target unrest = clamp(15·misery + 20·living-standard drop + 25·group grievance (discrimination, repression of that group) + 15·repression gap (low freedoms vs high urbanization and hc) + 10·war weariness + 10·neighbour conflict + 15·foreign support − 0.5·(legitimacy − 50) − police effect, 0..100). Unrest relaxes toward the target with a time constant of about 3 months.\n\nThresholds:\n- **Above 40:** protests (output −10%, compliance −).\n- **Above 60:** strikes or riots event chain (output −25%).\n- **Above 75, with insurgency capacity:** roughness × (1 − infra/5) × group share × (1 + foreign aid) above a threshold spawns insurgent units and sets province 'control' below 1.\n\nCountry: stability = 0.5·pop-weighted (100 − unrest) + 0.3·legitimacy + 0.2·elite satisfaction. Coup hazard per month is a logistic function of military satisfaction, regime type (juntas and personalist regimes higher), recent coups and economic crisis. Warnings appear before the roll.",
+   "evidence": "Design proposal combining EU4 unrest-to-progress, Victoria 3 living-standard radicalization, Goldstone/PITF, Fearon-Laitin and Call of War morale thresholds (sources above). The weights are untuned starting values.",
+   "verified": false
+  },
+  {
+   "topic": "Design: land combat (QJM-style daily resolution)",
+   "finding": "Each contested province, daily:\n- P_side = Σ(strength × type firepower × equipment-generation multiplier × org factor × supply factor × morale) × national CEV × V.\n- V_defender = terrain × posture (1.0 / 1.3 / 1.5 / 1.6) × river × fortification.\n- V_attacker = weather × air factor (0.75 + 0.5·regional air-superiority share). Frontage cap: units engaged ≤ terrain width.\n- R = P_a / P_d. Daily casualties: attacker ≈ 2%·(1/R)^0.5, defender ≈ 1.5%·R^0.5, scaled by intensity. Organization loss is about 4× casualties.\n- The defender retreats when org < 20%. Advance progress per day = f(R, terrain, mobility), and the province flips at 100.\n\nAbout 6 land unit types (infantry, mechanized, armor, airborne/marine, artillery/missile, militia/insurgent). Air power is an abstract per-region air-superiority share. Navies are fleets per sea zone that resolve with the Lanchester square law (blockade, transport, Gulf tanker attacks).",
+   "evidence": "Design proposal. Uses Dupuy posture factors and standard rates (secondary source), HOI4 org, width and air lessons, and Lanchester for duels. The air factor and exponents are untuned assumptions.",
+   "verified": false
+  },
+  {
+   "topic": "Design: logistics and supply",
+   "finding": "Supply hubs are the capital, major ports and player-built depots. Hub-to-province capacity runs over the province graph, scaled by infrastructure, and decays about 15-25% per hop (rail and truck abstraction). Recompute only when ownership or front lines change (a dirty flag), not daily. Units draw daily by type (armor more than infantry). A shortage is shared evenly among the units on that hub. Out-of-supply units lose org each day and cannot attack. Sea supply goes through ports and lanes, and blockades reduce it. A supply map mode reuses the same arrays.",
+   "evidence": "Design proposal mirroring HOI4's hub, rail and truck model with even deficit sharing (PCGamesN). The per-hop decay value is an assumption.",
+   "verified": false
+  },
+  {
+   "topic": "Design: war goals, war weariness and peace",
+   "finding": "War score comes from controlled-province value, battle outcomes, blockades and lost oil exports. War exhaustion rises with casualties per capita and duration and feeds both stability and war support. Peace terms: white peace, cede provinces, reparations, puppet or regime change, withdrawal, UN-mediated ceasefire (the UNSCR 598 hook). Iran-Iraq starts already at war, at high exhaustion and total mobilization.",
+   "evidence": "Design proposal (EU4/HOI4 conventions plus verified Iran-Iraq dates).",
+   "verified": false
+  },
+  {
+   "topic": "Design: nuclear deterrence (abstract, non-graphic)",
+   "finding": "Nuclear states in 1985: US, USSR, UK, France and China. Israel is undeclared, and South Africa, Pakistan and India are thresholds (India tested in 1974). Model a world Tension value from 0 to 100 and a per-dyad escalation rung from 0 to 5 (a compressed Kahn ladder). Actions raise the rung: mobilizing on a bloc border, attacking a superpower client, naval incidents. Arms-control decisions and summits lower it. The probability of reaching the top rung is tiny but rises steeply. If it happens, the game ends in catastrophe for everyone, shown on a sober text screen. Nuclear-umbrella targets carry a huge negative utility for invasion in AI scoring, so extended deterrence works and the player learns why.",
+   "evidence": "Design proposal on Kahn (verified source) and the verified Geneva/Reykjavik/INF dates. The list of nuclear states is general knowledge and not re-verified here.",
+   "verified": false
+  },
+  {
+   "topic": "Design: diplomacy and blocs",
+   "finding": "Relations are a dense int8 matrix of about 170 × 170 (about 29 KB), plus an alignment axis (−100 Soviet to +100 US, with China as a third pole) and bloc memberships: NATO, Warsaw Pact, NAM, Arab League, OPEC, EC, Comecon, ASEAN, OAU, GCC. Treaties: alliance, defensive pact, non-aggression, military access, trade deal, arms supply, economic aid, sanctions or embargo, guarantee. Influence is a currency earned from GDP, diplomatic spending and bloc leadership. Opinion drifts monthly toward a baseline set by ideology, bloc, claims, trade and historical rivalries (Iran-Iraq, Israel-Arab states, India-Pakistan, Greece-Turkey, Ethiopia-Somalia, Morocco-Algeria). Countries decide whether to join wars using Walt's threat score. Patron-client aid and arms are the main 1985 levers. UN votes are alignment-based utility.",
+   "evidence": "Design proposal on Walt's balance of threat (verified) and 1985 bloc structure (general knowledge).",
+   "verified": false
+  },
+  {
+   "topic": "Design: research and technology (realistic 1985-2000 domains)",
+   "finding": "No sci-fi tree. Use 6-7 domains (industry, energy and extraction, computing and electronics, health and agriculture, land military, air/naval/missile, nuclear and space), each with 10-12 levels. Research points = R&D and education budget × hc × stability factor. Cost rises with level and with the distance to the world frontier. Diffusion adds a catch-up bonus proportional to the gap × trade openness × bloc access. A CoCom-style embargo blocks Western computing diffusion to Comecon unless espionage or trade deals work around it. Effects are modest and concrete: TFP, unit generation multiplier, oil recovery, death rate (health), missile range. Starting levels come from data (GDP per capita, known programmes).",
+   "evidence": "Design proposal. Uses the TFP catch-up framing from the Solow model. That CoCom applies is general historical knowledge and not re-verified here.",
+   "verified": false
+  },
+  {
+   "topic": "Design: events and decisions system",
+   "finding": "Events are data-driven content files: id, date window or condition, a 'historical-only' flag, options with effect lists, and AI weights per option. They are indexed by trigger date (a daily queue lookup, O(1)) and by watched variable (checked in the staggered monthly pass), so there is no global scan. Historical events fire only if their preconditions still hold. Gorbachev fires only if the USSR leadership is unchanged; otherwise a dynamic succession event fires. Decisions are player-initiated: IMF request, state of emergency, stabilization package, OPEC quota change, arms deal, reform programme, peace proposal. Target for v1: about 60-100 historical events (1985-1990), about 40 generic events and about 30 decisions.",
+   "evidence": "Design proposal (Paradox-style events). Uses the verified 1985-88 hooks above.",
+   "verified": false
+  },
+  {
+   "topic": "Design: AI countries (hierarchical utility AI)",
+   "finding": "Strategic layer: monthly, staggered so about 6 countries run per day. It scores about 40 options (budget shifts, tax changes, reform or repress, alliance seeking, war or peace, aid requests, projects, research focus) as a product of 4-8 consideration curves over cached monthly aggregates (power, threat, budget gap, unrest, debt service). Operational layer: every 3-7 days only for countries at war. It allocates units to fronts by threat and objective value and launches offensives where the local ratio R > 1.5-3. Tactical layer: daily, only for units in contact, using cached paths. Personalities are weight tables by regime type × bloc × leader traits (aggression, risk tolerance, ideological zeal, bloc loyalty, economic priority, repression tendency, opportunism). Countries at peace cost almost nothing per day.",
+   "evidence": "Design proposal on Civilization V's four-layer AI and flavors, IAUS utility AI, and the local benchmark (the staggered AI cost is included in the 55 µs/day figure).",
+   "verified": false
+  },
+  {
+   "topic": "Design: difficulty without hidden cheating",
+   "finding": "Easy, Normal, Hard and Expert change decision quality only: utility-selection noise (softmax temperature high to low), reaction frequency (strategic every 2 months down to 2 weeks), coordination (allies coordinating fronts), and whether the AI uses advanced levers (debt management, stabilization packages, multi-front planning). Any resource or combat bonus for the AI is a separate, explicitly labelled toggle. Player presets (historical, strong, superpower, god) and cheats stay separate and are shown on the setup screen.",
+   "evidence": "Design proposal reflecting the user's requirement and player criticism of opaque AI (Victoria 3 and HOI4 forum reports).",
+   "verified": false
+  },
+  {
+   "topic": "Design: espionage decision",
+   "finding": "Include a minimal version in v1, because proxy war is central to 1985 (Afghanistan, Angola, Nicaragua, Cambodia). Two actions only: 'support insurgents / proxy aid', which raises the target province's insurgency capacity and air denial, costs money and influence, and carries a blowback or exposure risk event (an Iran-Contra-style scandal); and an 'intelligence level' per rival that controls how precise its unit counts and stats are on the map. Full covert operations (coups, tech theft, sabotage, counter-intelligence) come in v2.",
+   "evidence": "Design proposal tied to the verified Stinger/Afghanistan facts. Iran-Contra is general knowledge and not re-verified here.",
+   "verified": false
+  },
+  {
+   "topic": "Design: balance mechanism across pillars",
+   "finding": "Five limited currencies, each traded off against the others:\n- **Money:** budget shares are capped at 100%.\n- **Manpower:** taken directly out of labour L.\n- **Legitimacy and political capital:** reforms and repression spend them.\n- **Influence:** spent on diplomacy.\n- **Research points.**\n\nNo pillar can be maxed for free. A military build-up cuts investment and social spending, which cuts growth and stability, and raises tension, which triggers balancing coalitions. Repression lowers unrest short-term but drains legitimacy in large-coalition regimes. The scenario score weights GDP-per-capita growth, stability, security (power vs top threat), influence and technology equally. Scenario objectives such as 'survive the debt crisis' or 'end the Gulf war on favourable terms' reward mixed play. Monte Carlo AI-only runs check that no single-pillar strategy dominates.",
+   "evidence": "Design proposal (reasoning) addressing the user's 'balance across all systems' decision.",
+   "verified": false
+  },
+  {
+   "topic": "Design: phone-readable presentation of systems",
+   "finding": "Each system shows at most 3 headline numbers with trend arrows, plus a 'why' sheet listing the top 3-5 signed contributors (the Paradox tooltip pattern, without hover). Banded states with clear thresholds (Victoria 3-style legitimacy bands) trigger warnings such as 'unrest above 60 in 3 provinces'. Map modes (political, unrest/security, supply/infrastructure, resources, military) read the same province arrays, so they need no extra simulation.",
+   "evidence": "Design proposal. Uses Victoria 3 bands, mobile reviews ('hard to understand') and Power & Revolution criticism (sources above).",
+   "verified": false
+  },
+  {
+   "topic": "Design: foundation and engineering rules for the simulation core",
+   "finding": "- The simulation core is a pure Swift package with no UIKit or SwiftUI dependency, so its tests run headless on Linux CI with `swift test`.\n- All formula constants live in one versioned 'defines' data file, so rebalancing needs no code changes.\n- Scenario content (countries, provinces, events, techs, leaders) is read-only data from the app bundle, never copied to Application Support.\n- Saves hold state only, plus a schema version and content hash, with explicit migrations.\n- Seeded per-system random-number streams make saves and bug reports reproducible.\n- Golden tests: a 1985-1990 AI-only replay must stay inside calibration bands (world growth, oil path, population, Iran-Iraq stalemate, Soviet stability trend), plus save round-trip and multi-seed balance tests.\n\nThis directly prevents patch-over-patch code, shadowed content and missing tests.",
+   "evidence": "Design proposal mapped to oldProjectLessons in the task context.",
+   "verified": false
+  }
+ ],
+ "recommendations": [
+  "**First playable version (v1): one shallow but fully coupled system per pillar.** Economy: Cobb-Douglas with PWT/Maddison calibration, 6-way budget, tax level, deficit/debt/interest, simple inflation with a monetization cap, and a world oil price with OPEC/Saudi policy. Internal: monthly population, province unrest with the 40/60/75 thresholds, legitimacy, 5-7 interest groups, about 10 policies, coups and insurgencies. Military: about 6 land unit types, daily QJM-style combat with a frontage cap, hub supply, conscription tiers, abstract air superiority, fleets per sea zone, war score and peace deals, abstract nuclear deterrence. Diplomacy: relations, alignment axis, blocs, about 9 treaty types, arms and aid, sanctions, threat-based war joining. Research: 6-7 domains of 10-12 levels with diffusion and embargo. Events: about 60-100 historical, about 40 generic, about 30 decisions. AI: hierarchical utility AI and honest difficulty. Espionage: proxy aid and intelligence level only.",
+  "**Later versions:** bilateral trade and commodity markets (food, metals, arms); party systems and detailed elections; detailed migration and age pyramids; full covert operations and fog of war; detailed air and naval campaigns and unit equipment variants; more scenarios (for example 1979, 1990, 2000) on the same data schema; English localization; modding through content packs.",
+  "**Province set:** build a merged set of about 1,500-2,500 game provinces from Natural Earth admin-1 (public domain), balanced by population and area, with hand-applied 1985 corrections (FRG/GDR, YAR/PDRY, USSR republics and oblasts, Yugoslavia, Czechoslovakia, Ethiopia with Eritrea, South Africa's 4 provinces plus homelands, SA-administered Namibia, Western Sahara). Do not ship CShapes (non-commercial) or GPL basemaps.",
+  "**Calibrate from commercially safe data first:** Maddison 2023 and PWT 10.01 (CC BY 4.0, with an attribution screen), the CIA World Factbook 1985 (US public domain), and Natural Earth. Use SIPRI, COW, Polity, V-Dem and UCDP only as private cross-checks until their commercial terms are confirmed in writing.",
+  "**Keep every recurring computation O(provinces) daily or cheaper.** Stagger monthly country work across days, recompute supply only on front changes, keep AI at peace on a monthly cadence, and cap max speed at about 20-30 days/s to limit heat and battery use. The benchmark suggests simulation cost is negligible, about 55 µs per day on a server CPU, so spend the performance budget on map rendering.",
+  "**Make the simulation core a standalone, deterministic Swift package with headless tests in CI.** Run 1985-1990 historical replay bands, Monte Carlo balance runs, and save/load migration tests on every commit, so formulas can be tuned without touching UI code.",
+  "**Put all coefficients in a single versioned defines file and all content in data files.** Rebalancing then means changing data, not patching code (avoiding the old 'late patch functions' problem).",
+  "**Write the historical events as conditional.** Each fires only if its preconditions still hold, with dynamic alternatives such as a USSR succession choice, so player divergence never produces contradictions.",
+  "**Keep sensitive 1985 content in neutral, non-graphic language.** This covers apartheid, terrorism incidents, chemical weapons and nuclear war. Agree a naming policy for disputed territories (Kashmir, Western Sahara, Palestine/Israel, Kurdistan) before content writing."
+ ],
+ "risks": [
+  "**Realism vs fun.** Faithful 1985 starting conditions make some countries nearly unplayable (Lebanon, Afghanistan, Bolivia in hyperinflation). Presets and scenario objectives must compensate.",
+  "**Coupled feedback loops can oscillate or create death spirals** (debt, then inflation, then unrest, then lower revenue). This needs exponential smoothing, caps, AI stabilization decisions and Monte Carlo tests. Otherwise many AI countries collapse unrealistically within a few years.",
+  "**Data uncertainty for communist economies.** CIA estimates of Soviet defence share (15-17%) vs critics (20-25%), and Eastern Bloc GDP reconstructions, can change balance between the blocs significantly.",
+  "**Licensing.** SIPRI (royalty for commercial use), CShapes (non-commercial) and historical-basemaps (reportedly GPL-3) are unsafe to ship. COW, Polity, V-Dem, UCDP and some World Bank series that come from third parties have unconfirmed terms. EU database rights may apply even to factual compilations.",
+  "**Complexity on a phone.** Victoria 3 and Supremacy are criticised for being hard to understand. Each added variable needs a visible 'why'. Otherwise the realism condition undermines usability.",
+  "**Real leaders, apartheid, terrorism, chemical weapons and nuclear themes** can draw App Store review issues and regional sensitivities for an Arabic-language release.",
+  "**Determinism across app versions.** Any formula change breaks replay compatibility. Saves must store full state, not input logs.",
+  "**Performance assumption not yet measured on an iPhone.** The 55 µs/day figure is a C benchmark on a server CPU without combat or pathfinding. Swift implementation and many simultaneous wars could cost more, though likely still far below rendering cost.",
+  "**Combat calibration.** QJM constants come from a secondary source and target WWII-to-1970s division battles. 1985 brigade and day pacing needs tuning against known outcomes (Iran-Iraq stalemate, the al-Faw capture).",
+  "**Modern admin-1 vs 1985 borders.** Natural Earth units are modern, and fixing 1985 internal divisions by hand is labour-intensive and error-prone."
+ ],
+ "unverified": [
+  "Cobb-Douglas calibration constants α≈1/3 and δ≈5%/yr are conventional values that I did not verify with a source in this session.",
+  "QJM figures came only through a secondary source (Dupuy Institute blog by C. Lawrence): posture factors 1.0/1.3/1.5/1.6, terrain values and the 2.8%/1.5% daily attrition rates. The primary tables in Numbers, Predictions and War were not accessed (the site was unreachable for direct fetch).",
+  "HOI4 exact hourly combat formulas, the hourly tick, the EU4 monthly tick and the EU4 mean-time-to-happen event mechanic are not confirmed from official documentation.",
+  "The EU4 unrest-to-rebel progress mechanism (×5 monthly, uprising at 100) is from community explanations only.",
+  "Call of War morale numbers (−5 per war, rebellion below about 35%, distance penalty up to about −39) are from player forum posts.",
+  "UN World Population Prospects licence (CC BY 3.0 IGO) is reported only by a third-party site.",
+  "World Bank WDI licence (CC BY 4.0) and the terms of third-party series inside it were not checked in this session.",
+  "Commercial-use terms for COW NMC, Polity5, V-Dem and UCDP/PRIO are unknown, and the historical-basemaps GPL-3 licence is reported only by a third-party site.",
+  "Public-domain status of ACDA WMEAT 1986 edition data is not confirmed.",
+  "Stinger first use on exactly 25 September 1986 rests on a single source (FP confirms September 1986).",
+  "Uganda coup date: 27 vs 29 July 1985, sources disagree.",
+  "1985 War of the Cities exact dates: sources disagree.",
+  "Iran-Iraq ceasefire: 8 Aug (agreement) vs 20 Aug 1988 (effective, per ICRC).",
+  "Single European Act signing on 17 Feb 1986 rests on a single source.",
+  "Rainbow Warrior on 10 July 1985 and Brazil's return to civilian rule on 15 March 1985 (Sarney) were not confirmed in this session.",
+  "US defence share for 1985: 6.4% (Reagan) vs 6.2% (FY1986 peak), not reconciled.",
+  "Bolivia's 1985 annual inflation varies by measure (8,170% / 11,750% / annualized about 26,000%).",
+  "Kahn ladder first-nuclear-use rung: 15 vs 23, sources conflict.",
+  "Tanker War and Operation Earnest Will (1987) details were not verified.",
+  "Nuclear-state list and thresholds for 1985, CoCom embargo, Iran-Contra and the China birth policy are general knowledge, not re-verified here.",
+  "All coefficients in my proposed unrest, combat, supply, inflation and oil-price formulas are untuned design starting values, not empirically fitted.",
+  "The iPhone performance figure is extrapolated from a Linux x86 C benchmark."
+ ]
+}

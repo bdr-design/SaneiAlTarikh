@@ -1,0 +1,378 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>اختيار السيناريو A</title>
+<script>
+  /* Device frame from the URL (points): ?w=956&h=440&side=62&bottom=21&cutout=notch|island|none
+     Optional: &hit=1 draws the 44 pt hit boxes and the safe area.
+     Same responsive system as the approved screens (screen1/B3, screen2/B). */
+  (function () {
+    var q = new URLSearchParams(location.search);
+    function n(k, d) { var v = parseFloat(q.get(k)); return isFinite(v) ? v : d; }
+    var W = n('w', 956), H = n('h', 440), SIDE = n('side', 62), BOTTOM = n('bottom', 21);
+    var CUT = q.get('cutout') || 'island';
+    if (['notch', 'island', 'none'].indexOf(CUT) < 0) CUT = 'none';
+    var r = document.documentElement, s = r.style;
+    s.setProperty('--w', W + 'px');
+    s.setProperty('--h', H + 'px');
+    s.setProperty('--side', SIDE + 'px');
+    s.setProperty('--bottom', BOTTOM + 'px');
+    s.setProperty('--corner', (CUT === 'none' ? 0 : 39) + 'px');
+    r.dataset.cutout = CUT;
+    r.dataset.home = BOTTOM > 0 ? 'yes' : 'no';
+    if (q.get('hit') === '1') r.classList.add('show-hit');
+    window.__dev = { W: W, H: H, SIDE: SIDE, BOTTOM: BOTTOM, CUT: CUT };
+  })();
+</script>
+<style>
+  :root {
+    /* device (overwritten from the URL) */
+    --w: 956px; --h: 440px; --side: 62px; --bottom: 21px; --corner: 39px;
+    /* safe layout box: never inside the side insets; the bottom row ends 4 pt above the home indicator inset */
+    --gutter: max(var(--side), 8px);
+    --top-gap: 8px;
+    --bar-gap: max(calc(var(--bottom) + 4px), 8px);
+
+    /* ===== the approved slim system (screen1/B3, screen2/B) ===== */
+    --ctl: 32px;  --row: 36px;  --big: 44px;      /* the only control heights */
+    --r-bar: 12px;  --r-ctl: 10px;                 /* cards / controls */
+    --pad-bar: 12px;  --pad-ctl: 10px;
+    --s1: 4px; --s2: 8px; --s3: 12px;               /* spacing scale */
+    --fs-label: 10px;   --lh-label: 12px;
+    --fs-sec: 11.5px;   --lh-sec: 14px;
+    --fs-val: 13px;     --lh-val: 16px;            /* semibold, tabular */
+    --fs-name: 14px;    --lh-name: 17px;           /* bold */
+    --fs-title: 18px;   --lh-title: 22px;          /* the page title only */
+    --ico: 16px;
+
+    --glass: rgba(9, 17, 25, 0.66);
+    --stroke: rgba(127, 233, 255, 0.14);
+    --hair: rgba(127, 233, 255, 0.13);
+    --t1: #EAF2F7;
+    --t2: #A9BCCB;
+    --cyan: #7FE9FF;
+    --teal: #3FE0D0;
+    --amber: #F2B14C;
+    --ink: #060B10;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: var(--w); height: var(--h); overflow: hidden; }
+  body {
+    position: relative;
+    background: #0B1218;
+    color: var(--t1);
+    font-family: "IBM Plex Sans Arabic", system-ui, sans-serif;
+    font-variant-numeric: tabular-nums;
+    -webkit-font-smoothing: antialiased;
+    line-height: 1;
+  }
+  button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; -webkit-tap-highlight-color: transparent; text-align: inherit; }
+  svg.i { width: var(--ico); height: var(--ico); fill: none; stroke: currentColor; stroke-width: 1.75; stroke-linecap: round; stroke-linejoin: round; flex: none; display: block; }
+  .ltr { direction: ltr; unicode-bidi: isolate; }
+  ol, li { list-style: none; }
+
+  /* ---------- Touch targets: invisible ::before box of at least 44 x 44 pt ---------- */
+  .tap { position: relative; }
+  .tap::before {
+    content: ""; position: absolute;
+    left: calc(50% + var(--hx, 0px)); top: calc(50% + var(--hy, 0px));
+    width: max(100%, 44px); height: max(100%, 44px);
+    transform: translate(-50%, -50%);
+  }
+  .glass.tap::before { width: max(100% + 2px, 44px); height: max(100% + 2px, 44px); }
+  .show-hit .tap::before { outline: 1px solid rgba(255, 60, 160, 0.9); background: rgba(255, 60, 160, 0.12); z-index: 5; }
+
+  /* ---------- Backdrop: the approved world map, darkened (page 1 is not a map page) ---------- */
+  .scene { position: absolute; left: 0; top: 0; width: var(--w); height: var(--h); overflow: hidden; }
+  .map { position: absolute; filter: blur(1.25px); }   /* slightly out of focus: a backdrop, not the play map */
+  .map img { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+  .shade { position: absolute; inset: 0; pointer-events: none;
+    background:
+      /* lens vignette at the edges */
+      radial-gradient(ellipse 75% 85% at 50% 50%, rgba(6, 11, 16, 0) 40%, rgba(6, 11, 16, 0.55) 100%),
+      /* a little more weight at the top and bottom rows */
+      linear-gradient(to bottom, rgba(6, 11, 16, 0.35) 0%, rgba(6, 11, 16, 0) 22%, rgba(6, 11, 16, 0) 72%, rgba(6, 11, 16, 0.45) 100%),
+      /* overall dim: the map is a quiet backdrop here */
+      linear-gradient(rgba(6, 11, 16, 0.62), rgba(6, 11, 16, 0.62));
+  }
+
+  /* ---------- Glass: one look for every panel ---------- */
+  .glass {
+    position: relative;
+    isolation: isolate;
+    background: var(--glass);
+    -webkit-backdrop-filter: blur(18px) saturate(1.1);
+    backdrop-filter: blur(18px) saturate(1.1);
+    border: 1px solid var(--stroke);
+    border-radius: var(--r);
+    box-shadow: 0 3px 14px rgba(0, 0, 0, 0.26);
+  }
+  .card { --r: var(--r-bar); }
+  .ctl { --r: var(--r-ctl); }
+  /* render-side frost (see frost() below): a blurred copy of the backdrop + the same 0.66 tint */
+  .frost { position: absolute; inset: 0; z-index: -1; overflow: hidden; border-radius: calc(var(--r) - 1px); pointer-events: none; background: #0B1218; }
+  .frost i { position: absolute; display: block; filter: blur(18px) saturate(1.1); }
+  .frost i img, .frost i b { position: absolute; display: block; }
+  .frost::after { content: ""; position: absolute; inset: 0; background: var(--glass); }
+  .frosted .glass { background: transparent; -webkit-backdrop-filter: none; backdrop-filter: none; }
+
+  /* ---------- Page box = safe area ---------- */
+  .ui {
+    position: absolute;
+    top: var(--top-gap);
+    bottom: var(--bar-gap);
+    left: var(--gutter);
+    right: var(--gutter);
+    display: flex;
+    flex-direction: column;
+    gap: var(--s3);
+  }
+
+  /* ---------- Header: back | steps (centred) | balance, one 36 pt glass bar ---------- */
+  .hdr { flex: none; height: var(--row); display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; padding-inline: var(--s1); }
+  .back { justify-self: start; height: var(--ctl); display: flex; align-items: center; gap: var(--s1); padding-inline: var(--s2) var(--pad-ctl);
+    font-size: var(--fs-val); font-weight: 600; line-height: var(--lh-val); color: var(--t1); border-radius: 8px; }
+  .back svg.i { color: var(--t2); }
+  .steps { display: flex; align-items: center; gap: var(--s2); }
+  .step { display: flex; align-items: center; gap: var(--s2); white-space: nowrap; }
+  .step .n { width: 18px; height: 18px; border-radius: 9px; display: flex; align-items: center; justify-content: center;
+    font-size: var(--fs-label); font-weight: 700; line-height: var(--lh-label); color: var(--t2); box-shadow: inset 0 0 0 1px rgba(169, 188, 203, 0.45);
+    padding-top: 1px; }   /* optical: Plex Arabic digits sit high in a centred line box */
+  .step .l { font-size: var(--fs-sec); font-weight: 600; line-height: var(--lh-sec); color: var(--t2); }
+  .step.on .n { background: var(--cyan); color: var(--ink); box-shadow: none; }
+  .step.on .l { color: var(--cyan); }
+  .step.done .n { color: var(--teal); box-shadow: inset 0 0 0 1px rgba(63, 224, 208, 0.6); }
+  .link { width: 24px; height: 1px; background: rgba(169, 188, 203, 0.35); flex: none; }
+
+  /* ---------- Page title ---------- */
+  .ttl { flex: none; display: flex; align-items: baseline; gap: var(--s3); white-space: nowrap; }
+  .ttl h1 { font-size: var(--fs-title); font-weight: 700; line-height: var(--lh-title); color: var(--t1); text-shadow: 0 1px 10px rgba(0, 0, 0, 0.5); }
+  .ttl p { font-size: var(--fs-sec); font-weight: 500; line-height: var(--lh-sec); color: var(--t2); text-shadow: 0 1px 8px rgba(0, 0, 0, 0.6); }
+
+  /* ---------- Scenario cards: one row, the available one first (RTL start) and larger ---------- */
+  .cards { flex: 1 1 0; min-height: 0; display: flex; align-items: center; gap: var(--s2); }
+  .sc { flex: none; display: flex; flex-direction: column; overflow: visible; }
+  .sc .ph { display: block; position: relative; width: 100%; aspect-ratio: 3 / 2; overflow: hidden;
+    border-radius: calc(var(--r-bar) - 1px) calc(var(--r-bar) - 1px) 0 0; background: #0B1218; }
+  .sc .ph img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+  .sc .cap { display: flex; flex-direction: column; align-items: flex-start; gap: var(--s1); padding: var(--s2); min-width: 0;
+    border-top: 1px solid var(--hair); }
+  /* no overflow clipping here: it would cut the dots under final yeh (العربي); fit is measured in layoutCards() */
+  .sc .t, .sc .y { display: block; white-space: nowrap; }
+  .sc .y { font-size: var(--fs-val); font-weight: 600; line-height: var(--lh-val); }
+
+  /* the selected, playable scenario: larger, thin cyan edge, soft lift */
+  .sc.sel { margin-inline-end: var(--s1); border-color: rgba(127, 233, 255, 0.72);
+    box-shadow: 0 0 0 3px rgba(127, 233, 255, 0.07), 0 8px 26px rgba(0, 0, 0, 0.42); }
+  .sc.sel .cap { padding-inline: var(--pad-bar); }
+  .sc.sel .t { font-size: var(--fs-name); font-weight: 700; line-height: var(--lh-name); color: var(--t1); }
+  .sc.sel .y { color: var(--cyan); }
+
+  /* the four coming-soon scenarios: image dimmed, quiet text, not interactive */
+  .sc.lock { cursor: default; box-shadow: 0 3px 14px rgba(0, 0, 0, 0.22); }
+  .sc.lock .ph img { filter: saturate(0.4) brightness(0.48); }
+  .sc.lock .t { font-size: var(--fs-sec); font-weight: 600; line-height: var(--lh-sec); color: var(--t2); }
+  .sc.lock .y { color: var(--t2); }
+  [data-fit="1"] .sc.lock .t { font-size: var(--fs-label); font-weight: 500; line-height: var(--lh-sec); }
+
+  /* small status chip on the image (RTL start corner) */
+  .chip { position: absolute; top: var(--s2); right: var(--s2); display: flex; align-items: center; gap: var(--s1);
+    padding-block: var(--s1); padding-inline: var(--s1) var(--s2); border-radius: 8px;
+    background: rgba(6, 11, 16, 0.74); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+    font-size: var(--fs-label); font-weight: 700; line-height: var(--lh-label); color: var(--t1); white-space: nowrap; }
+  .chip svg.i { color: var(--t2); }
+  .chip.ok { color: var(--teal); box-shadow: inset 0 0 0 1px rgba(63, 224, 208, 0.30); }
+  .chip.ok svg.i { color: var(--teal); }
+
+  /* ---------- Bottom row: description of the selected scenario + the primary action ---------- */
+  /* bottom edges aligned: the 44 pt button sits on the same bottom line as the description bar, and on the
+     same spot as the primary button on pages 2 and 3 (p2A, p3A) */
+  .foot { flex: none; display: flex; align-items: flex-end; gap: var(--s3); }
+  .desc { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; align-items: flex-start; gap: var(--s1);
+    padding: var(--s2) var(--pad-bar); }
+  .d1 { display: flex; align-items: baseline; gap: var(--s1); white-space: nowrap; }
+  .d1 .nm { font-size: var(--fs-name); font-weight: 700; line-height: var(--lh-name); color: var(--t1); }
+  .d1 .dot, .d1 .dt { font-size: var(--fs-val); font-weight: 600; line-height: var(--lh-val); }
+  .d1 .dot { color: var(--t2); }
+  .d1 .dt { color: var(--t1); }
+  .d2 { font-size: var(--fs-sec); font-weight: 500; line-height: var(--lh-sec); color: var(--t2); }
+
+  .next { flex: none; height: var(--big); min-width: 120px; padding-inline: var(--pad-bar);
+    display: flex; align-items: center; justify-content: center; gap: var(--s2);
+    border-radius: var(--r-ctl); background: var(--cyan); color: var(--ink);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.32), inset 0 1px 0 rgba(255, 255, 255, 0.35); }
+  .next span { font-size: var(--fs-name); font-weight: 700; line-height: var(--lh-name); white-space: nowrap; }
+  .next svg.i { stroke-width: 2; }
+
+  /* ---------- Device overlay ---------- */
+  .dev { position: absolute; inset: 0; pointer-events: none; z-index: 50; }
+  .corners { position: absolute; inset: 0; border-radius: var(--corner); box-shadow: 0 0 0 60px #000; }
+  .cutout { position: absolute; background: #000; display: none; }
+  [data-cutout="island"] .cutout { display: block; left: 11px; top: calc(50% - 63px); width: 37px; height: 126px; border-radius: 18.5px; }
+  [data-cutout="notch"] .cutout { display: block; left: 0; top: calc(50% - 105px); width: 30px; height: 210px; border-radius: 0 20px 20px 0; }
+  .homebar { position: absolute; display: none; left: calc(50% - 67px); bottom: 8px; width: 134px; height: 5px; border-radius: 3px; background: rgba(255, 255, 255, 0.55); }
+  [data-home="yes"] .homebar { display: block; }
+  .show-hit .safe { position: absolute; top: 0; bottom: var(--bottom); left: var(--side); right: var(--side); outline: 1px dashed rgba(255, 255, 0, 0.8); }
+</style>
+</head>
+<body>
+
+<!-- SVG symbol library (24 grid, round stroke 1.75, drawn at 16 pt) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-back" viewBox="0 0 24 24"><path d="M9.5 5.5 16 12l-6.5 6.5"/></symbol>
+    <symbol id="i-next" viewBox="0 0 24 24"><path d="M14.5 5.5 8 12l6.5 6.5"/></symbol>
+    <symbol id="i-lock" viewBox="0 0 24 24"><rect x="5.25" y="10.5" width="13.5" height="9.75" rx="2"/><path d="M8.25 10.5V8a3.75 3.75 0 0 1 7.5 0v2.5"/><path d="M12 14.25v2.25"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.75"/><path d="m8.4 12.2 2.4 2.4 4.8-4.9"/></symbol>
+  </defs>
+</svg>
+
+<!-- Backdrop: approved world map (base + overlay, one box), darkened -->
+<div class="scene" aria-hidden="true">
+  <div class="map">
+    <img class="m0" src="../../shared/world_d1.jpg" alt="">
+    <img class="m1" src="../../shared/world_d1_overlay.svg" alt="">
+  </div>
+  <div class="shade"></div>
+</div>
+
+<main class="ui">
+
+  <!-- Header: back (RTL start) + the three steps in the centre -->
+  <header class="hdr glass card">
+    <button class="back tap"><svg class="i"><use href="#i-back"/></svg><span>رجوع</span></button>
+    <ol class="steps" aria-label="الخطوات">
+      <li class="step on" aria-current="step"><span class="n">1</span><span class="l">السيناريو</span></li>
+      <li class="link" aria-hidden="true"></li>
+      <li class="step"><span class="n">2</span><span class="l">الدولة</span></li>
+      <li class="link" aria-hidden="true"></li>
+      <li class="step"><span class="n">3</span><span class="l">الإعدادات</span></li>
+    </ol>
+    <span></span>
+  </header>
+
+  <div class="ttl">
+    <h1>اختيار السيناريو</h1>
+    <p>من أين تبدأ كتابة التاريخ؟</p>
+  </div>
+
+  <!-- Five scenarios in one row: 2011 is the only playable one -->
+  <section class="cards" aria-label="السيناريوهات">
+    <button class="sc sel glass card tap" aria-pressed="true" aria-label="الربيع العربي، 1 يناير 2011، مختار">
+      <span class="ph"><img src="../../shared/scenarios/2011.png" alt="">
+        <span class="chip ok"><svg class="i"><use href="#i-check"/></svg><span>متاح</span></span></span>
+      <span class="cap"><b class="t">الربيع العربي</b><span class="y">2011</span></span>
+    </button>
+    <div class="sc lock glass card" aria-disabled="true" aria-label="العالم اليوم، 2026، قريبًا">
+      <span class="ph"><img src="../../shared/scenarios/2026.png" alt="">
+        <span class="chip"><svg class="i"><use href="#i-lock"/></svg><span>قريبًا</span></span></span>
+      <span class="cap"><b class="t">العالم اليوم</b><span class="y">2026</span></span>
+    </div>
+    <div class="sc lock glass card" aria-disabled="true" aria-label="نهاية الحرب الباردة، 1990، قريبًا">
+      <span class="ph"><img src="../../shared/scenarios/1990.png" alt="">
+        <span class="chip"><svg class="i"><use href="#i-lock"/></svg><span>قريبًا</span></span></span>
+      <span class="cap"><b class="t">نهاية الحرب الباردة</b><span class="y">1990</span></span>
+    </div>
+    <div class="sc lock glass card" aria-disabled="true" aria-label="آخر الحرب الباردة، 1985، قريبًا">
+      <span class="ph"><img src="../../shared/scenarios/1985.png" alt="">
+        <span class="chip"><svg class="i"><use href="#i-lock"/></svg><span>قريبًا</span></span></span>
+      <span class="cap"><b class="t">آخر الحرب الباردة</b><span class="y">1985</span></span>
+    </div>
+    <div class="sc lock glass card" aria-disabled="true" aria-label="عام التحولات، 1979، قريبًا">
+      <span class="ph"><img src="../../shared/scenarios/1979.png" alt="">
+        <span class="chip"><svg class="i"><use href="#i-lock"/></svg><span>قريبًا</span></span></span>
+      <span class="cap"><b class="t">عام التحولات</b><span class="y">1979</span></span>
+    </div>
+  </section>
+
+  <!-- The selected scenario in one slim bar + the primary action at the RTL end -->
+  <footer class="foot">
+    <div class="desc glass card" aria-live="polite">
+      <p class="d1"><b class="nm">الربيع العربي</b><span class="dot">·</span><span class="dt">1 يناير 2011</span></p>
+      <p class="d2">احتجاجات تونس بدأت والمنطقة على حافة التغيير. أزمة ديون في أوروبا، والنفط قرب 100 دولار.</p>
+    </div>
+    <button class="next tap"><span>التالي</span><svg class="i"><use href="#i-next"/></svg></button>
+  </footer>
+</main>
+
+<!-- Device silhouette drawn on top: rounded corners, camera cutout, home indicator -->
+<div class="dev" aria-hidden="true">
+  <div class="corners"></div>
+  <div class="cutout"></div>
+  <div class="homebar"></div>
+  <div class="safe"></div>
+</div>
+
+<script>
+  var MAP = { W: 2400, H: 1202, fx: 1330, fy: 560, zoom: 1.3 };   /* focus a little west of Egypt: Europe, Africa, Middle East */
+
+  /* Backdrop: cover the screen, zoomed a little, focused on the region, never showing an edge. */
+  function placeMap() {
+    var W = window.__dev.W, H = window.__dev.H;
+    var s = Math.max(W / MAP.W, H / MAP.H) * MAP.zoom, mw = MAP.W * s, mh = MAP.H * s;
+    var x = W / 2 - MAP.fx * s, y = H / 2 - MAP.fy * s;
+    x = Math.min(0, Math.max(W - mw, x)); y = Math.min(0, Math.max(H - mh, y));
+    var m = document.querySelector('.map');
+    m.style.left = x + 'px'; m.style.top = y + 'px'; m.style.width = mw + 'px'; m.style.height = mh + 'px';
+    window.__map = { s: s, x: x, y: y, w: mw, h: mh };
+  }
+
+  /* Card sizes from the free row box: the selected card takes about a third of the width
+     (less if the height is short), the four locked cards share the rest equally. */
+  function layoutCards() {
+    var row = document.querySelector('.cards'), r = row.getBoundingClientRect();
+    var sel = row.querySelector('.sc.sel'), locks = Array.prototype.slice.call(row.querySelectorAll('.sc.lock'));
+    var gap = 8, extra = 4;   /* gap between cards + 4 pt more after the selected card */
+    var capF = sel.querySelector('.cap').getBoundingClientRect().height + 2;
+    var F = Math.floor(Math.min(r.width * 0.34, (r.height - 8 - capF) * 1.5 + 2));
+    var w = (r.width - F - extra - gap * locks.length) / locks.length;
+    sel.style.width = F + 'px';
+    locks.forEach(function (c) { c.style.width = w + 'px'; });
+    /* fit: locked titles drop from 11.5 to 10 pt only when one would be cut */
+    var root = document.documentElement;
+    root.dataset.fit = '0';
+    function cutOff(c) {   /* the title's ink width against the caption's content box */
+      var cap = c.querySelector('.cap'), cs = getComputedStyle(cap), rg = document.createRange();
+      rg.selectNodeContents(c.querySelector('.t'));
+      return rg.getBoundingClientRect().width > cap.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight) + 0.05;
+    }
+    var cut = locks.some(cutOff);
+    if (cut) root.dataset.fit = '1';
+    window.__cards = { row: { w: r.width, h: r.height }, F: F, w: w, fit: +root.dataset.fit };
+  }
+
+  /* Frosted glass for the mockup render (as screen1/screen2): headless Chromium leaves a sharp copy
+     of image content under backdrop-filter, so each panel gets its own clipped copy of the backdrop,
+     blurred with filter: blur(), under the same 0.66 tint. backdrop-filter stays as the fallback. */
+  function frost() {
+    var W = window.__dev.W, H = window.__dev.H, M = window.__map;
+    var shade = getComputedStyle(document.querySelector('.shade')).backgroundImage;
+    Array.prototype.forEach.call(document.querySelectorAll('.ui .glass'), function (g) {
+      var f = g.querySelector(':scope > .frost');
+      if (!f) {
+        f = document.createElement('span'); f.className = 'frost'; f.setAttribute('aria-hidden', 'true');
+        var i = document.createElement('i');
+        ['../../shared/world_d1.jpg', '../../shared/world_d1_overlay.svg'].forEach(function (src) { var im = document.createElement('img'); im.src = src; i.appendChild(im); });
+        i.appendChild(document.createElement('b'));
+        f.appendChild(i);
+        g.insertBefore(f, g.firstChild);
+      }
+      var r = g.getBoundingClientRect(), cs = getComputedStyle(g), i = f.firstChild;
+      i.style.left = (-r.left - parseFloat(cs.borderLeftWidth)) + 'px'; i.style.top = (-r.top - parseFloat(cs.borderTopWidth)) + 'px';
+      i.style.width = W + 'px'; i.style.height = H + 'px';
+      Array.prototype.forEach.call(i.querySelectorAll('img'), function (im) {
+        im.style.left = M.x + 'px'; im.style.top = M.y + 'px'; im.style.width = M.w + 'px'; im.style.height = M.h + 'px';
+      });
+      var b = i.querySelector('b');
+      b.style.left = '0px'; b.style.top = '0px'; b.style.width = W + 'px'; b.style.height = H + 'px'; b.style.backgroundImage = shade;
+    });
+    document.documentElement.classList.add('frosted');
+  }
+
+  (document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve())
+    .then(placeMap).then(layoutCards).then(frost).then(function () { window.__ready = true; });
+</script>
+</body>
+</html>

@@ -1,0 +1,56 @@
+{
+ "data": [
+  "Licence verification limits: direct fetches were blocked during research for gadm.org, naturalearthdata.com, geoboundaries.org, worldbank.org, rug.nl, zenodo.org and others. Licences were confirmed through search summaries of the official pages, GitHub-hosted licence files and the geoBoundaries metadata CSV. Each must be re-verified on the official page before commercial release.",
+  "CC BY and CC BY 3.0 IGO forbid licensees from applying DRM that restricts recipients' rights. Distribution through the App Store (FairPlay) is legally untested for this. Prefer PD and CC0 sources and publish the processed data in parallel.",
+  "The licence labels in geoBoundaries metadata can be wrong or out of date. Re-check each chosen file (YEM ADM2, ZAF ADM3/4, NAM ADM2, DEU) at its original source (HDX, BKG, Stanford).",
+  "Facts are not copyrightable in the US, but the EU and UK sui generis database right can protect substantial extraction from SIPRI, IISS and other compilations. Copying their tables, even manually, carries legal risk.",
+  "Natural Earth admin-1 mixes vintages and names (Kenya pre-2013, India post-2019, Crimea coded RUS). Units may change between NE releases. Pin the NE version and key everything by own stable IDs; joining by NE codes risks save breakage and data drift.",
+  "1985 economic data for socialist and centrally planned economies is uncertain. CIA, Maddison and UNSD estimates disagree, sometimes by large margins. Any single choice will be disputed by some players, so document it in-game or in the credits.",
+  "Hand-digitised polygons (bantustans, the Western Sahara 1985 line, the Berlin sector line, the Aouzou Strip) will be approximations and can be politically sensitive. App Store availability in some countries may be affected by how disputed territories are shown.",
+  "Gridded proxies introduce bias: the GHS-POP 1985 epoch is modelled, not a census, and using Kummu 1990 as a 1985 productivity proxy misses 1985-90 changes, including the effects of the Iran-Iraq war.",
+  "Wikidata may contain errors or vandalism, and time qualifiers are often missing. A snapshot must be human-reviewed against the CIA February 1985 directory.",
+  "Performance: shipping raw NE 10m (1.3M vertices, 40.7 MB GeoJSON) or GeoJSON parsing at launch would break the lightness requirement. Simplification and binary packing are mandatory.",
+  "Over-detailed provinces (thousands of tiny municipalities) would hurt the AI's processing time, the user interface on a phone screen, and memory. Under-detailed provinces would hurt the realism of war and economy. The merge rules need playtesting.",
+  "Flags and state emblems can be legally protected (Paris Convention 6ter, national symbol laws). Commons flag files have mixed licences."
+ ],
+ "tech": [
+  "1985 historical borders with a commercial-use license: the free historical datasets (CShapes 2.0, GADM) are non-commercial, and Natural Earth admin-1 reflects modern divisions. Hand edits are needed for the USSR, Yugoslavia, Czechoslovakia, the two Germanys, the two Yemens, Ethiopia/Eritrea, Sudan, Namibia/SWA and others. This is the biggest risk to 'realism' and to publishing.",
+  "Xcode 26 Metal toolchain is a separate download and has been flaky on CI (Xcode Cloud, CircleCI, MacPorts reports). A broken step can block every iOS build; keep the runtime shader-compile fallback and pin Xcode point releases.",
+  "No Mac means no Instruments, no local simulator and no debugger. Performance and memory problems must be caught through the in-app overlay, MetricKit exports and CI tests, so device-specific GPU or thermal problems may be found late.",
+  "macOS CI minutes are expensive on private repos (reportedly a 10x multiplier), so frequent iOS builds can exhaust the quota. Gate macOS jobs, cache artifacts, and do most testing on Linux.",
+  "Determinism needs constant discipline. One Double in saved state, a libm call, a Dictionary loop, or an unordered parallel merge breaks the Linux-vs-iPhone match and replay. Integer overflow crashes in production unless arithmetic clamps.",
+  "Swift 6 strict concurrency on iOS 17: no Mutex (iOS 18+), custom actor executors are buggy on iOS 17, and SE-0466 MainActor defaults could leak into the simulation package if misconfigured. Keep SimCore free of concurrency and nonisolated.",
+  "Memory limits change between OS releases (e.g., iPadOS 26.4 halved the per-app limit on 8 GB iPads). Keep the footprint far below the limit and watch os_proc_available_memory.",
+  "Arabic text on the Metal map (shaping, mixed-direction text, curved labels) is real engineering work. Arabic-Indic vs Western digits and font licensing must be decided early.",
+  "SwiftUI over a live Metal view: blur materials, over-broad @Observable reads, or a 10 Hz HUD with unrounded values can cause redraw storms and frame drops on A12. iOS 17's Observation may not skip equal assignments (unverified).",
+  "Admin-1 provinces vary hugely in size (e.g., huge Russian or Canadian units vs tiny European ones). Gameplay balance may require splitting or merging, which changes province ids. Save files and scenario data need stable province ids from day one (a mapping table in the baked content).",
+  "Antimeridian and wrap-around edge cases (Fiji, Chukotka, Aleutians, labels and units crossing the 180° line) need offline polygon splitting and careful camera math.",
+  "Future toolchains may raise the minimum deployment target above iOS 17 or add new rules (UIScene is now required after iOS 26; App Store SDK minimums move every year). Re-check each spring.",
+  "Saves must survive years of updates. Without saved example files per format version in CI, a field rename or scenario content change can silently break old saves.",
+  "Distributing an unsigned IPA and re-signing it with the user's own certificate: entitlements must stay minimal, and certificate expiry or revocation can stop the app launching (operational, not architectural)."
+ ],
+ "realism": [
+  "**Realism vs fun.** Faithful 1985 starting conditions make some countries nearly unplayable (Lebanon, Afghanistan, Bolivia in hyperinflation). Presets and scenario objectives must compensate.",
+  "**Coupled feedback loops can oscillate or create death spirals** (debt, then inflation, then unrest, then lower revenue). This needs exponential smoothing, caps, AI stabilization decisions and Monte Carlo tests. Otherwise many AI countries collapse unrealistically within a few years.",
+  "**Data uncertainty for communist economies.** CIA estimates of Soviet defence share (15-17%) vs critics (20-25%), and Eastern Bloc GDP reconstructions, can change balance between the blocs significantly.",
+  "**Licensing.** SIPRI (royalty for commercial use), CShapes (non-commercial) and historical-basemaps (reportedly GPL-3) are unsafe to ship. COW, Polity, V-Dem, UCDP and some World Bank series that come from third parties have unconfirmed terms. EU database rights may apply even to factual compilations.",
+  "**Complexity on a phone.** Victoria 3 and Supremacy are criticised for being hard to understand. Each added variable needs a visible 'why'. Otherwise the realism condition undermines usability.",
+  "**Real leaders, apartheid, terrorism, chemical weapons and nuclear themes** can draw App Store review issues and regional sensitivities for an Arabic-language release.",
+  "**Determinism across app versions.** Any formula change breaks replay compatibility. Saves must store full state, not input logs.",
+  "**Performance assumption not yet measured on an iPhone.** The 55 µs/day figure is a C benchmark on a server CPU without combat or pathfinding. Swift implementation and many simultaneous wars could cost more, though likely still far below rendering cost.",
+  "**Combat calibration.** QJM constants come from a secondary source and target WWII-to-1970s division battles. 1985 brigade and day pacing needs tuning against known outcomes (Iran-Iraq stalemate, the al-Faw capture).",
+  "**Modern admin-1 vs 1985 borders.** Natural Earth units are modern, and fixing 1985 internal divisions by hand is labour-intensive and error-prone."
+ ],
+ "foundation": [
+  "The province set is built from present-day admin-1 units, which are not 1985 administrative units. Many countries reorganised regions after 1985. Realism here means correct 1985 national borders (USSR republics, GDR/FRG, North and South Yemen, Ethiopia with Eritrea, South-African-administered Namibia, Yugoslavia, Czechoslovakia, Sudan undivided, and so on) made from unions of modern units. This must be stated in an ADR so nobody later treats it as a bug.",
+  "Disputed and occupied territories in 1985 (Kashmir, Western Sahara, the West Bank, Gaza, Golan, northern Cyprus, Taiwan, the Falklands claim, and others) are politically sensitive for an Arabic-language commercial app. A data model that separates owner, controller and claims is needed from day one, along with an explicit display policy.",
+  "Cross-architecture floating-point determinism is not guaranteed if the compiler contracts multiply-add into FMA or a dependency uses libm. The x86_64-vs-arm64 hash test is the detector. The fallback is fixed-point arithmetic for rates.",
+  "Licensing: Natural Earth admin-1 attribute columns partly depend on GADM, which is non-commercial, per Natural Earth's own forum. Only geometry and names should be taken, and a lawyer should review before selling. CShapes and GADM must not feed any shipped geometry. Flags for 1985-era states must be sourced individually as public domain.",
+  "Over-engineering: a generic ECS framework or scripting language added too early would slow every milestone. Keep plain SoA tables, systems and typed enums, and add abstractions only through an ADR.",
+  "AI assistant drift: large PRs, re-implementing helpers that already exist, and skipping docs and tests. This is mitigated only if CI gates block merges, so branch protection must actually be turned on.",
+  "Toolchain drift: XcodeGen, Xcode and runner images change. Pin versions and checksums. GitHub deprecates macOS images (macOS 14 is already deprecated), so plan a yearly runner bump ADR.",
+  "Save performance: columnar JSON plus compression for about 5k provinces plus entities should be acceptable, but it is unmeasured on device. If encoding exceeds about 300 ms, a binary codec can replace it behind the same SaveCodec interface, with the same migration semantics.",
+  "The balance sanity bands are judgement calls. Bands set too tight will make nightly runs flaky, and bands set too loose will hide unrealistic outcomes. Start loose and tighten as systems mature.",
+  "On-device budgets (A12-class iPhone, thermal behaviour) cannot be tested in CI. Performance there depends on the user measuring on their own phone with the debug overlay and docs/perf.md."
+ ]
+}

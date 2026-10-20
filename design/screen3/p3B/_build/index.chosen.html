@@ -1,0 +1,418 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>إعدادات الحملة B</title>
+<script>
+  /* Device frame from the URL (points): ?w=956&h=440&side=62&bottom=21&cutout=notch|island|none
+     Optional: &hit=1 draws the 44 pt hit boxes and the safe area.
+     Same responsive system as the approved screens (screen1/B3, screen2/B). */
+  (function () {
+    var q = new URLSearchParams(location.search);
+    function n(k, d) { var v = parseFloat(q.get(k)); return isFinite(v) ? v : d; }
+    var W = n('w', 956), H = n('h', 440), SIDE = n('side', 62), BOTTOM = n('bottom', 21);
+    var CUT = q.get('cutout') || 'island';
+    if (['notch', 'island', 'none'].indexOf(CUT) < 0) CUT = 'none';
+    var r = document.documentElement, s = r.style;
+    s.setProperty('--w', W + 'px');
+    s.setProperty('--h', H + 'px');
+    s.setProperty('--side', SIDE + 'px');
+    s.setProperty('--bottom', BOTTOM + 'px');
+    s.setProperty('--corner', (CUT === 'none' ? 0 : 39) + 'px');
+    r.dataset.cutout = CUT;
+    r.dataset.home = BOTTOM > 0 ? 'yes' : 'no';
+    if (q.get('hit') === '1') r.classList.add('show-hit');
+    window.__dev = { W: W, H: H, SIDE: SIDE, BOTTOM: BOTTOM, CUT: CUT };
+  })();
+</script>
+<style>
+  :root {
+    /* device (overwritten from the URL) */
+    --w: 956px; --h: 440px; --side: 62px; --bottom: 21px; --corner: 39px;
+    /* safe layout box: never inside the side insets; the bottom row ends 4 pt above the home indicator inset */
+    --gutter: max(var(--side), 8px);
+    --top-gap: 8px;
+    --bar-gap: max(calc(var(--bottom) + 4px), 8px);
+
+    /* ===== the approved slim system (screen1/B3, screen2/B) ===== */
+    --ctl: 32px;  --row: 36px;  --big: 44px;      /* the only control heights */
+    --r-bar: 12px;  --r-ctl: 10px;                 /* cards / controls */
+    --pad-bar: 12px;  --pad-ctl: 10px;
+    --s1: 4px; --s2: 8px; --s3: 12px;               /* spacing scale */
+    --fs-label: 10px;   --lh-label: 12px;
+    --fs-sec: 11.5px;   --lh-sec: 14px;
+    --fs-val: 13px;     --lh-val: 16px;            /* semibold, tabular */
+    --fs-name: 14px;    --lh-name: 17px;           /* bold */
+    --ico: 16px;
+
+    --glass: rgba(9, 17, 25, 0.66);
+    --stroke: rgba(127, 233, 255, 0.14);
+    --hair: rgba(127, 233, 255, 0.13);
+    --t1: #EAF2F7;
+    --t2: #A9BCCB;
+    --cyan: #7FE9FF;
+    --teal: #3FE0D0;
+    --amber: #F2B14C;
+    --ink: #060B10;
+
+    /* page rhythm, stepped down by fitLayout() only when the 44 pt row pitch would not fit */
+    --gap-main: var(--s3);      /* header / cards / bottom bar */
+    --card-pb: var(--s3);       /* card padding, top and bottom */
+    --g-head: var(--s3);        /* card title -> first choice */
+    --g-note: var(--s2);        /* last choice -> note (at least) */
+  }
+  [data-fit="1"] { --gap-main: var(--s2); --card-pb: var(--s2); --g-head: var(--s2); }
+  [data-fit="2"] { --gap-main: var(--s2); --card-pb: var(--s2); --g-head: var(--s1); --g-note: var(--s1); }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: var(--w); height: var(--h); overflow: hidden; }
+  body {
+    position: relative;
+    background: #0B1218;
+    color: var(--t1);
+    font-family: "IBM Plex Sans Arabic", system-ui, sans-serif;
+    font-variant-numeric: tabular-nums;
+    -webkit-font-smoothing: antialiased;
+    line-height: 1;
+  }
+  button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; -webkit-tap-highlight-color: transparent; text-align: inherit; }
+  svg.i { width: var(--ico); height: var(--ico); fill: none; stroke: currentColor; stroke-width: 1.75; stroke-linecap: round; stroke-linejoin: round; flex: none; display: block; }
+  .ltr { direction: ltr; unicode-bidi: isolate; }
+  ol, li { list-style: none; }
+
+  /* ---------- Touch targets: invisible ::before box of at least 44 x 44 pt ---------- */
+  .tap { position: relative; }
+  .tap::before {
+    content: ""; position: absolute;
+    left: calc(50% + var(--hx, 0px)); top: calc(50% + var(--hy, 0px));
+    width: max(100%, 44px); height: max(100%, 44px);
+    transform: translate(-50%, -50%);
+  }
+  .glass.tap::before { width: max(100% + 2px, 44px); height: max(100% + 2px, 44px); }
+  .show-hit .tap::before { outline: 1px solid rgba(255, 60, 160, 0.9); background: rgba(255, 60, 160, 0.12); z-index: 5; }
+
+  /* ---------- Backdrop: the approved world map, darkened (page 3 is not a map page) ---------- */
+  .scene { position: absolute; left: 0; top: 0; width: var(--w); height: var(--h); overflow: hidden; }
+  .map { position: absolute; filter: blur(1.25px); }
+  .map img { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+  .shade { position: absolute; inset: 0; pointer-events: none;
+    background:
+      radial-gradient(ellipse 75% 85% at 50% 50%, rgba(6, 11, 16, 0) 40%, rgba(6, 11, 16, 0.55) 100%),
+      linear-gradient(to bottom, rgba(6, 11, 16, 0.35) 0%, rgba(6, 11, 16, 0) 22%, rgba(6, 11, 16, 0) 72%, rgba(6, 11, 16, 0.45) 100%),
+      linear-gradient(rgba(6, 11, 16, 0.64), rgba(6, 11, 16, 0.64));
+  }
+
+  /* ---------- Glass: one look for every panel ---------- */
+  .glass {
+    position: relative;
+    isolation: isolate;
+    background: var(--glass);
+    -webkit-backdrop-filter: blur(18px) saturate(1.1);
+    backdrop-filter: blur(18px) saturate(1.1);
+    border: 1px solid var(--stroke);
+    border-radius: var(--r);
+    box-shadow: 0 3px 14px rgba(0, 0, 0, 0.26);
+  }
+  .card { --r: var(--r-bar); }
+  .ctl { --r: var(--r-ctl); }
+  .frost { position: absolute; inset: 0; z-index: -1; overflow: hidden; border-radius: calc(var(--r) - 1px); pointer-events: none; background: #0B1218; }
+  .frost i { position: absolute; display: block; filter: blur(18px) saturate(1.1); }
+  .frost i img, .frost i b { position: absolute; display: block; }
+  .frost::after { content: ""; position: absolute; inset: 0; background: var(--glass); }
+  .frosted .glass { background: transparent; -webkit-backdrop-filter: none; backdrop-filter: none; }
+
+  /* ---------- Page box = safe area ---------- */
+  .ui {
+    position: absolute;
+    top: var(--top-gap);
+    bottom: var(--bar-gap);
+    left: var(--gutter);
+    right: var(--gutter);
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-main);
+  }
+
+  /* ---------- Shared header: back | steps (centred) | empty, one 36 pt glass bar ---------- */
+  .hdr { flex: none; height: var(--row); display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; padding-inline: 2px; }
+  .back { justify-self: start; height: var(--ctl); display: flex; align-items: center; gap: var(--s1);
+    padding-inline: var(--s2) var(--pad-ctl); border-radius: var(--r-ctl); color: var(--t1); background: rgba(127, 233, 255, 0.07); }
+  .back span { font-size: var(--fs-val); font-weight: 600; line-height: var(--lh-val); white-space: nowrap; }
+  .back svg.i { color: var(--t2); }
+  .steps { display: flex; align-items: center; gap: var(--s2); }
+  .step { display: flex; align-items: center; gap: var(--s2); white-space: nowrap; }
+  .step .n { flex: none; width: 20px; height: 20px; border-radius: 10px; display: grid; place-items: center;
+    font-size: var(--fs-sec); font-weight: 600; line-height: var(--lh-sec); color: var(--t2); box-shadow: inset 0 0 0 1px rgba(169, 188, 203, 0.45); }
+  .step .l { font-size: var(--fs-val); font-weight: 600; line-height: var(--lh-val); color: var(--t2); }
+  .step.done .n { color: var(--teal); background: rgba(63, 224, 208, 0.14); box-shadow: inset 0 0 0 1px rgba(63, 224, 208, 0.50); }
+  .step.done .l { color: var(--t1); }
+  .step.cur .n { background: var(--cyan); color: var(--ink); box-shadow: none; }
+  .step.cur .l { color: var(--cyan); }
+  .sep { flex: none; width: 20px; height: 1px; background: rgba(169, 188, 203, 0.35); }
+  .sep.done { background: rgba(63, 224, 208, 0.55); }
+
+  /* ---------- Three option cards side by side ---------- */
+  /* RTL: الوضع (start) | ذكاء الدول | divider | خيارات غير واقعية (end, set apart) */
+  .cards { flex: 1 1 0; min-height: 0; display: grid; grid-template-columns: 1fr 1fr 1px 1fr; grid-template-rows: minmax(0, 1fr); column-gap: var(--s2); }
+  .opt { --r: var(--r-bar); min-width: 0; min-height: 0; display: flex; flex-direction: column; padding: var(--card-pb) var(--pad-bar); }
+  .divider { align-self: stretch; margin-block: var(--s3); width: 1px;
+    background: linear-gradient(to bottom, rgba(169, 188, 203, 0), rgba(169, 188, 203, 0.30) 18%, rgba(169, 188, 203, 0.30) 82%, rgba(169, 188, 203, 0)); }
+
+  .oh { flex: none; height: var(--lh-name); display: flex; align-items: center; gap: var(--s2); }
+  .oh svg.i { color: var(--t2); }
+  .oh h2 { font-size: var(--fs-name); font-weight: 700; line-height: var(--lh-name); color: var(--t1); white-space: nowrap; }
+  .oh .opt-chip { margin-inline-start: auto; height: 16px; display: flex; align-items: center; padding-inline: var(--s2); border-radius: 8px;
+    font-size: var(--fs-label); font-weight: 700; line-height: var(--lh-label); color: var(--t2); white-space: nowrap;
+    box-shadow: inset 0 0 0 1px rgba(169, 188, 203, 0.35); }
+
+  /* the choice list: 32 pt rows on a 44 pt pitch, so every 44 pt hit box is free of its neighbours */
+  .list { flex: none; display: flex; flex-direction: column; gap: var(--s3); margin-top: var(--g-head); margin-bottom: var(--g-note); }
+
+  /* radio choice (الوضع, ذكاء الدول) */
+  .ch { height: var(--ctl); display: flex; align-items: center; gap: var(--s2); padding-inline: var(--pad-ctl);
+    border-radius: var(--r-ctl); background: rgba(234, 242, 247, 0.04); box-shadow: inset 0 0 0 1px rgba(127, 233, 255, 0.10); }
+  .ch .lb { font-size: var(--fs-val); font-weight: 600; line-height: var(--lh-val); color: var(--t1); white-space: nowrap; }
+  .ch svg.i { color: var(--t2); }
+  .ch .end { margin-inline-start: auto; display: flex; align-items: center; }
+  .ch.sel { background: rgba(127, 233, 255, 0.10); box-shadow: inset 0 0 0 1px rgba(127, 233, 255, 0.55); }
+  .ch.sel svg.i { color: var(--cyan); }
+  .ch .rec { height: 16px; display: flex; align-items: center; padding-inline: var(--s2); border-radius: 8px;
+    font-size: var(--fs-label); font-weight: 700; line-height: var(--lh-label); color: var(--teal); white-space: nowrap;
+    background: rgba(63, 224, 208, 0.10); box-shadow: inset 0 0 0 1px rgba(63, 224, 208, 0.38); }
+  /* AI level: four quiet bars */
+  .lvl { display: flex; align-items: center; gap: 2px; }
+  .lvl i { display: block; width: 3px; height: 10px; border-radius: 1.5px; background: rgba(169, 188, 203, 0.22); }
+  .lvl i.on { background: var(--t2); }
+  .ch.sel .lvl i.on { background: var(--cyan); }
+
+  /* toggle rows (خيارات غير واقعية): a plain list with hairlines, switches off */
+  .tg { height: var(--ctl); display: flex; align-items: center; gap: var(--s2); padding-inline: 2px; }
+  .tg + .tg::after { content: ""; position: absolute; left: 0; right: 0; top: -6.5px; height: 1px; background: rgba(169, 188, 203, 0.14); }
+  .tg .lb { font-size: var(--fs-val); font-weight: 600; line-height: var(--lh-val); color: var(--t1); white-space: nowrap; }
+  .sw { margin-inline-start: auto; flex: none; position: relative; width: 30px; height: 18px; border-radius: 9px;
+    background: rgba(169, 188, 203, 0.16); box-shadow: inset 0 0 0 1px rgba(169, 188, 203, 0.32); }
+  .sw::after { content: ""; position: absolute; top: 2px; right: 2px; width: 14px; height: 14px; border-radius: 7px; background: var(--t2); }   /* RTL off: knob at the start */
+  .tg[aria-checked="true"] .sw { background: var(--teal); box-shadow: none; }
+  .tg[aria-checked="true"] .sw::after { right: auto; left: 2px; background: var(--ink); }
+
+  /* the note at the foot of each card: aligned across the three cards */
+  .note { margin-top: auto; flex: none; display: flex; align-items: flex-start; gap: var(--s1);
+    font-size: var(--fs-sec); font-weight: 500; line-height: var(--lh-sec); color: var(--t2); }
+  .note svg.i { margin-block: -1px; }
+  .note span { text-wrap: balance; }
+  .note.warn { color: var(--amber); }
+  [data-fit="2"] .note { font-size: var(--fs-label); line-height: var(--lh-label); }
+  /* fit 2 also steps the cards' side padding down to 8 pt (as their top/bottom padding), so the AI note
+     "الصعوبة تغيّر ذكاء القرارات فقط، بدون غش." stays on one line on SE instead of wrapping */
+  [data-fit="2"] .opt { padding-inline: var(--s2); }
+  [data-fit="2"] .note svg.i { margin-block: -2px; }
+
+  /* ---------- Bottom row: the summary bar + the primary action at the RTL end ---------- */
+  .foot { flex: none; height: var(--big); display: flex; align-items: stretch; gap: var(--s3); }
+  .sum { flex: 1 1 auto; min-width: 0; display: flex; align-items: center; gap: var(--s3); padding-inline: var(--pad-bar); }
+  .flag { width: 24px; height: 18px; border-radius: 2px; overflow: hidden; flex: none; box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.22); }
+  .flag img { width: 100%; height: 100%; display: block; }
+  .sl { display: flex; align-items: baseline; gap: var(--s1); white-space: nowrap; }
+  .sl .nm { font-size: var(--fs-name); font-weight: 700; line-height: var(--lh-name); color: var(--t1); }
+  .sl .v { font-size: var(--fs-val); font-weight: 600; line-height: var(--lh-val); color: var(--t1); }
+  .sl .dot { font-size: var(--fs-val); font-weight: 600; line-height: var(--lh-val); color: var(--t2); }
+  .sum .x { margin-inline-start: auto; display: flex; align-items: center; gap: var(--s1); white-space: nowrap;
+    font-size: var(--fs-sec); font-weight: 500; line-height: var(--lh-sec); color: var(--t2); }
+  .sum .x svg.i { color: var(--t2); }
+  [data-sumx="0"] .sum .x { display: none; }
+
+  .next { flex: none; height: var(--big); min-width: 120px; padding-inline: var(--pad-bar);
+    display: flex; align-items: center; justify-content: center; gap: var(--s2);
+    border-radius: var(--r-ctl); background: var(--cyan); color: var(--ink);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.32), inset 0 1px 0 rgba(255, 255, 255, 0.35); }
+  .next span { font-size: var(--fs-name); font-weight: 700; line-height: var(--lh-name); white-space: nowrap; }
+  .next svg.i { stroke-width: 2; }
+
+  /* ---------- Device overlay ---------- */
+  .dev { position: absolute; inset: 0; pointer-events: none; z-index: 50; }
+  .corners { position: absolute; inset: 0; border-radius: var(--corner); box-shadow: 0 0 0 60px #000; }
+  .cutout { position: absolute; background: #000; display: none; }
+  [data-cutout="island"] .cutout { display: block; left: 11px; top: calc(50% - 63px); width: 37px; height: 126px; border-radius: 18.5px; }
+  [data-cutout="notch"] .cutout { display: block; left: 0; top: calc(50% - 105px); width: 30px; height: 210px; border-radius: 0 20px 20px 0; }
+  .homebar { position: absolute; display: none; left: calc(50% - 67px); bottom: 8px; width: 134px; height: 5px; border-radius: 3px; background: rgba(255, 255, 255, 0.55); }
+  [data-home="yes"] .homebar { display: block; }
+  .show-hit .safe { position: absolute; top: 0; bottom: var(--bottom); left: var(--side); right: var(--side); outline: 1px dashed rgba(255, 255, 0, 0.8); }
+</style>
+</head>
+<body>
+
+<!-- SVG symbol library (24 grid, round stroke 1.75, drawn at 16 pt) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-back" viewBox="0 0 24 24"><path d="M9.5 5.5 16 12l-6.5 6.5"/></symbol>
+    <symbol id="i-next" viewBox="0 0 24 24"><path d="M14.5 5.5 8 12l6.5 6.5"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M6 12.5l3.75 3.75L18 8"/></symbol>
+    <!-- card titles -->
+    <symbol id="i-mode" viewBox="0 0 24 24"><path d="M4.5 7.5h8M16.5 7.5h3M4.5 16.5h3M11.5 16.5h8"/><circle cx="14.5" cy="7.5" r="2"/><circle cx="9.5" cy="16.5" r="2"/></symbol>
+    <symbol id="i-ai" viewBox="0 0 24 24"><rect x="7" y="7" width="10" height="10" rx="2"/><path d="M10 4v3M14 4v3M10 17v3M14 17v3M4 10h3M4 14h3M17 10h3M17 14h3"/><path d="M10.5 12h3"/></symbol>
+    <symbol id="i-wand" viewBox="0 0 24 24"><path d="M5 19 15 9"/><path d="m13.5 7.5 3 3"/><path d="M18 3.5v3M16.5 5h3M19.5 12.5v2M18.5 13.5h2M9 4.5v2M8 5.5h2"/></symbol>
+    <!-- radio -->
+    <symbol id="i-radio" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.25"/></symbol>
+    <symbol id="i-radio-on" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.25"/><circle cx="12" cy="12" r="4.25" fill="currentColor" stroke="none"/></symbol>
+    <!-- notes -->
+    <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.75"/><path d="M12 11v5.25"/><path d="M12 7.75h.01"/></symbol>
+    <symbol id="i-fair" viewBox="0 0 24 24"><path d="M12 3.75 5.5 6.25v5.5c0 4 2.8 7 6.5 8.5 3.7-1.5 6.5-4.5 6.5-8.5v-5.5z"/><path d="m9.25 12 2 2 3.75-3.9"/></symbol>
+    <symbol id="i-warn" viewBox="0 0 24 24"><path d="M10.4 4.6 3.3 17a1.8 1.8 0 0 0 1.6 2.7h14.2a1.8 1.8 0 0 0 1.6-2.7L13.6 4.6a1.8 1.8 0 0 0-3.2 0z"/><path d="M12 9.5v4"/><path d="M12 16.75h.01"/></symbol>
+    <symbol id="i-off" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.75"/><path d="m7.5 16.5 9-9"/></symbol>
+  </defs>
+</svg>
+
+<!-- Backdrop: approved world map (base + overlay, one box), darkened -->
+<div class="scene" aria-hidden="true">
+  <div class="map">
+    <img class="m0" src="../../shared/world_d1.jpg" alt="">
+    <img class="m1" src="../../shared/world_d1_overlay.svg" alt="">
+  </div>
+  <div class="shade"></div>
+</div>
+
+<main class="ui">
+
+  <!-- Shared header: back (RTL start) + the three steps in the centre (1 and 2 done, 3 current) -->
+  <header class="hdr glass card">
+    <button class="back tap"><svg class="i"><use href="#i-back"/></svg><span>رجوع</span></button>
+    <ol class="steps" aria-label="الخطوات">
+      <li class="step done"><span class="n"><svg class="i"><use href="#i-check"/></svg></span><span class="l">السيناريو</span></li>
+      <li class="sep done" aria-hidden="true"></li>
+      <li class="step done"><span class="n"><svg class="i"><use href="#i-check"/></svg></span><span class="l">الدولة</span></li>
+      <li class="sep done" aria-hidden="true"></li>
+      <li class="step cur" aria-current="step"><span class="n">3</span><span class="l">الإعدادات</span></li>
+    </ol>
+    <span></span>
+  </header>
+
+  <!-- Three cards: each option group is a vertical list of 32 pt choices -->
+  <section class="cards" aria-label="إعدادات الحملة">
+
+    <section class="opt glass card" aria-labelledby="h-mode">
+      <header class="oh"><svg class="i"><use href="#i-mode"/></svg><h2 id="h-mode">الوضع</h2></header>
+      <div class="list" role="radiogroup" aria-labelledby="h-mode">
+        <button class="ch sel tap" role="radio" aria-checked="true"><svg class="i"><use href="#i-radio-on"/></svg><span class="lb">واقعي</span><span class="end"><span class="rec">الوضع الموصى به</span></span></button>
+        <button class="ch tap" role="radio" aria-checked="false"><svg class="i"><use href="#i-radio"/></svg><span class="lb">قوي</span></button>
+        <button class="ch tap" role="radio" aria-checked="false"><svg class="i"><use href="#i-radio"/></svg><span class="lb">قوة عظمى</span></button>
+        <button class="ch tap" role="radio" aria-checked="false"><svg class="i"><use href="#i-radio"/></svg><span class="lb ltr">God</span></button>
+      </div>
+      <p class="note"><svg class="i"><use href="#i-info"/></svg><span>كل دولة تبدأ بقدراتها الحقيقية.</span></p>
+    </section>
+
+    <section class="opt glass card" aria-labelledby="h-ai">
+      <header class="oh"><svg class="i"><use href="#i-ai"/></svg><h2 id="h-ai">ذكاء الدول الأخرى</h2></header>
+      <div class="list" role="radiogroup" aria-labelledby="h-ai">
+        <button class="ch tap" role="radio" aria-checked="false"><svg class="i"><use href="#i-radio"/></svg><span class="lb">سهل</span><span class="end lvl" aria-hidden="true"><i class="on"></i><i></i><i></i><i></i></span></button>
+        <button class="ch sel tap" role="radio" aria-checked="true"><svg class="i"><use href="#i-radio-on"/></svg><span class="lb">متوازن</span><span class="end lvl" aria-hidden="true"><i class="on"></i><i class="on"></i><i></i><i></i></span></button>
+        <button class="ch tap" role="radio" aria-checked="false"><svg class="i"><use href="#i-radio"/></svg><span class="lb">صعب</span><span class="end lvl" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span></button>
+        <button class="ch tap" role="radio" aria-checked="false"><svg class="i"><use href="#i-radio"/></svg><span class="lb">خبير</span><span class="end lvl" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span></button>
+      </div>
+      <p class="note"><svg class="i"><use href="#i-fair"/></svg><span>الصعوبة تغيّر ذكاء القرارات فقط، بدون غش.</span></p>
+    </section>
+
+    <i class="divider" aria-hidden="true"></i>
+
+    <section class="opt unreal glass card" aria-labelledby="h-un">
+      <header class="oh"><svg class="i"><use href="#i-wand"/></svg><h2 id="h-un">خيارات غير واقعية</h2><span class="opt-chip">اختيارية</span></header>
+      <div class="list" aria-labelledby="h-un">
+        <button class="tg tap" role="switch" aria-checked="false"><span class="lb">أموال غير محدودة</span><span class="sw" aria-hidden="true"></span></button>
+        <button class="tg tap" role="switch" aria-checked="false"><span class="lb">موارد غير محدودة</span><span class="sw" aria-hidden="true"></span></button>
+        <button class="tg tap" role="switch" aria-checked="false"><span class="lb">بناء فوري</span><span class="sw" aria-hidden="true"></span></button>
+        <button class="tg tap" role="switch" aria-checked="false"><span class="lb">بحث فوري</span><span class="sw" aria-hidden="true"></span></button>
+        <button class="tg tap" role="switch" aria-checked="false"><span class="lb">استقرار كامل</span><span class="sw" aria-hidden="true"></span></button>
+      </div>
+      <p class="note warn"><svg class="i"><use href="#i-warn"/></svg><span>تفعيلها يخرج اللعبة عن الواقعية</span></p>
+    </section>
+  </section>
+
+  <!-- Summary of the whole setup + the primary action at the RTL end -->
+  <footer class="foot">
+    <div class="sum glass card" aria-live="polite">
+      <span class="flag"><img src="../../shared/flags/eg.svg" alt="علم مصر"></span>
+      <p class="sl"><b class="nm">مصر</b><span class="dot">·</span><span class="v">1 يناير 2011</span><span class="dot">·</span><span class="v">واقعي</span><span class="dot">·</span><span class="v">ذكاء متوازن</span></p>
+      <span class="x"><svg class="i"><use href="#i-off"/></svg><span>بدون خيارات غير واقعية</span></span>
+    </div>
+    <button class="next tap"><span>ابدأ الحملة</span><svg class="i"><use href="#i-next"/></svg></button>
+  </footer>
+</main>
+
+<!-- Device silhouette drawn on top: rounded corners, camera cutout, home indicator -->
+<div class="dev" aria-hidden="true">
+  <div class="corners"></div>
+  <div class="cutout"></div>
+  <div class="homebar"></div>
+  <div class="safe"></div>
+</div>
+
+<script>
+  var MAP = { W: 2400, H: 1202, fx: 1390, fy: 540, zoom: 1.45 };   /* Egypt and its region, quiet */
+
+  function placeMap() {
+    var W = window.__dev.W, H = window.__dev.H;
+    var s = Math.max(W / MAP.W, H / MAP.H) * MAP.zoom, mw = MAP.W * s, mh = MAP.H * s;
+    var x = W / 2 - MAP.fx * s, y = H / 2 - MAP.fy * s;
+    x = Math.min(0, Math.max(W - mw, x)); y = Math.min(0, Math.max(H - mh, y));
+    var m = document.querySelector('.map');
+    m.style.left = x + 'px'; m.style.top = y + 'px'; m.style.width = mw + 'px'; m.style.height = mh + 'px';
+    window.__map = { s: s, x: x, y: y, w: mw, h: mh };
+  }
+
+  /* What a card needs: padding + title + list + note, with the note's minimum gap (no free space). */
+  function need(c) {
+    var cs = getComputedStyle(c), list = c.querySelector('.list'), ls = getComputedStyle(list);
+    var h = parseFloat(cs.borderTopWidth) + parseFloat(cs.borderBottomWidth) + parseFloat(cs.paddingTop) + parseFloat(cs.paddingBottom);
+    h += c.querySelector('.oh').getBoundingClientRect().height;
+    h += parseFloat(ls.marginTop) + list.getBoundingClientRect().height + parseFloat(ls.marginBottom);
+    h += c.querySelector('.note').getBoundingClientRect().height;
+    return h;
+  }
+  /* Step the page rhythm down (12 -> 8 -> 4) only as far as the 44 pt row pitch needs. */
+  function fitLayout() {
+    var root = document.documentElement, cards = Array.prototype.slice.call(document.querySelectorAll('.opt'));
+    var lv, worst;
+    for (lv = 0; lv <= 2; lv++) {
+      root.dataset.fit = String(lv);
+      worst = Math.max.apply(null, cards.map(function (c) { return need(c) - c.getBoundingClientRect().height; }));
+      if (worst <= 0.01) break;
+    }
+    /* summary bar: the extra "no unrealistic options" text only when it fits with 12 pt to spare */
+    root.dataset.sumx = '1';
+    var sum = document.querySelector('.sum'), sl = sum.querySelector('.sl'), x = sum.querySelector('.x');
+    var used = sum.querySelector('.flag').getBoundingClientRect().width + sl.getBoundingClientRect().width + x.getBoundingClientRect().width + 2 * 12 + 2 * 12 + 2;
+    if (used > sum.getBoundingClientRect().width - 12) root.dataset.sumx = '0';
+    window.__fit = { level: +root.dataset.fit, slack: -worst, sumx: +root.dataset.sumx };
+  }
+
+  /* Frosted glass for the mockup render (as screen1/screen2) */
+  function frost() {
+    var W = window.__dev.W, H = window.__dev.H, M = window.__map;
+    var shade = getComputedStyle(document.querySelector('.shade')).backgroundImage;
+    Array.prototype.forEach.call(document.querySelectorAll('.ui .glass'), function (g) {
+      var f = g.querySelector(':scope > .frost');
+      if (!f) {
+        f = document.createElement('span'); f.className = 'frost'; f.setAttribute('aria-hidden', 'true');
+        var i = document.createElement('i');
+        ['../../shared/world_d1.jpg', '../../shared/world_d1_overlay.svg'].forEach(function (src) { var im = document.createElement('img'); im.src = src; i.appendChild(im); });
+        i.appendChild(document.createElement('b'));
+        f.appendChild(i);
+        g.insertBefore(f, g.firstChild);
+      }
+      var r = g.getBoundingClientRect(), cs = getComputedStyle(g), i = f.firstChild;
+      i.style.left = (-r.left - parseFloat(cs.borderLeftWidth)) + 'px'; i.style.top = (-r.top - parseFloat(cs.borderTopWidth)) + 'px';
+      i.style.width = W + 'px'; i.style.height = H + 'px';
+      Array.prototype.forEach.call(i.querySelectorAll('img'), function (im) {
+        im.style.left = M.x + 'px'; im.style.top = M.y + 'px'; im.style.width = M.w + 'px'; im.style.height = M.h + 'px';
+      });
+      var b = i.querySelector('b');
+      b.style.left = '0px'; b.style.top = '0px'; b.style.width = W + 'px'; b.style.height = H + 'px'; b.style.backgroundImage = shade;
+    });
+    document.documentElement.classList.add('frosted');
+  }
+
+  (document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve())
+    .then(placeMap).then(fitLayout).then(frost).then(function () { window.__ready = true; });
+</script>
+</body>
+</html>

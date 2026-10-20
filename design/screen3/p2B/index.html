@@ -1,0 +1,434 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>اختيار الدولة B</title>
+<script>
+  /* Device frame from the URL (points): ?w=844&h=390&side=47&bottom=21&cutout=notch|island|none
+     Optional: &hit=1 draws the 44 pt hit boxes and the safe area.
+     Same responsive system as the approved screens (screen1/B3, screen2/B). */
+  (function () {
+    var q = new URLSearchParams(location.search);
+    function n(k, d) { var v = parseFloat(q.get(k)); return isFinite(v) ? v : d; }
+    var W = n('w', 844), H = n('h', 390), SIDE = n('side', 47), BOTTOM = n('bottom', 21);
+    var CUT = q.get('cutout') || 'notch';
+    if (['notch', 'island', 'none'].indexOf(CUT) < 0) CUT = 'none';
+    var r = document.documentElement, s = r.style;
+    s.setProperty('--w', W + 'px');
+    s.setProperty('--h', H + 'px');
+    s.setProperty('--side', SIDE + 'px');
+    s.setProperty('--bottom', BOTTOM + 'px');
+    s.setProperty('--corner', (CUT === 'none' ? 0 : 39) + 'px');
+    r.dataset.cutout = CUT;
+    r.dataset.home = BOTTOM > 0 ? 'yes' : 'no';
+    if (q.get('hit') === '1') r.classList.add('show-hit');
+    window.__dev = { W: W, H: H, SIDE: SIDE, BOTTOM: BOTTOM, CUT: CUT };
+  })();
+</script>
+<style>
+  :root {
+    /* device (overwritten from the URL) */
+    --w: 844px; --h: 390px; --side: 47px; --bottom: 21px; --corner: 39px;
+    /* safe layout box: never inside the side insets; the 44 pt bottom row ends 4 pt above the home indicator
+       inset, 8 pt from the edge on SE (the same spot for the primary button as on pages 1 and 3) */
+    --gutter: max(var(--side), 8px);
+    --top-gap: 8px;
+    --row-gap: max(calc(var(--bottom) + 4px), 8px);
+
+    /* ===== the approved slim system (screen1/B3, screen2/B) ===== */
+    --ctl: 32px;  --row: 36px;  --big: 44px;      /* the only control heights */
+    --r-bar: 12px;  --r-ctl: 10px;                 /* cards / bars, controls */
+    --pad-bar: 12px;  --pad-ctl: 10px;
+    --s1: 4px; --s2: 8px; --s3: 12px;               /* spacing scale */
+    --fs-label: 10px;   --lh-label: 12px;
+    --fs-sec: 11.5px;   --lh-sec: 14px;
+    --fs-val: 13px;     --lh-val: 16px;            /* semibold, tabular */
+    --fs-name: 14px;    --lh-name: 17px;           /* bold */
+    --fs-title: 18px;   --lh-title: 22px;          /* page title only */
+    --ico: 16px;
+
+    --glass: rgba(9, 17, 25, 0.66);
+    --stroke: rgba(127, 233, 255, 0.14);
+    --hair: rgba(127, 233, 255, 0.13);
+    --t1: #EAF2F7;
+    --t2: #A9BCCB;
+    --cyan: #7FE9FF;
+    --teal: #3FE0D0;
+    --amber: #F2B14C;
+    --red: #F2705A;
+    --on-cyan: #060B10;   /* the same dark ink as p1B / p3B */
+
+    /* difficulty scale */
+    --d1: var(--teal);   /* سهلة */
+    --d2: var(--t2);     /* متوسطة: the secondary text colour (no off-palette blue), as p2A */
+    --d3: var(--amber);  /* صعبة */
+    --d4: var(--red);    /* صعبة جدًا */
+
+    --card-w: 264px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: var(--w); height: var(--h); overflow: hidden; }
+  body {
+    position: relative;
+    background: #0B1218;
+    color: var(--t1);
+    font-family: "IBM Plex Sans Arabic", system-ui, sans-serif;
+    font-variant-numeric: tabular-nums;
+    -webkit-font-smoothing: antialiased;
+    line-height: 1;
+  }
+  button, input { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; -webkit-tap-highlight-color: transparent; text-align: inherit; }
+  ol, ul { list-style: none; }
+  svg.i { width: var(--ico); height: var(--ico); fill: none; stroke: currentColor; stroke-width: 1.75; stroke-linecap: round; stroke-linejoin: round; flex: none; display: block; }
+  .ltr { direction: ltr; unicode-bidi: isolate; }
+
+  /* ---------- Touch targets: invisible ::before box of at least 44 x 44 pt (as screen1) ---------- */
+  .tap { position: relative; }
+  .tap::before {
+    content: ""; position: absolute;
+    left: calc(50% + var(--hx, 0px)); top: calc(50% + var(--hy, 0px));
+    width: max(100%, 44px); height: max(100%, 44px);
+    transform: translate(-50%, -50%);
+  }
+  .glass.tap::before { width: max(100% + 2px, 44px); height: max(100% + 2px, 44px); }
+  .show-hit .tap::before { outline: 1px solid rgba(255, 60, 160, 0.9); background: rgba(255, 60, 160, 0.12); z-index: 5; }
+
+  /* ---------- The map: approved world satellite + overlay, full-bleed, interactive ---------- */
+  .map { position: absolute; left: 0; top: 0; width: calc(2400px * var(--map-s, 1)); height: calc(1202px * var(--map-s, 1)); }
+  .map img, .map svg { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+  /* borders and names sit back a little, so the map stays calm; the selected country is redrawn at full strength on top */
+  .map .ov, .frost img.ov { opacity: 0.82; }
+  /* calm shade: a little overall dim, a soft lens vignette, and darker bands where the glass sits */
+  .shade { position: absolute; inset: 0; pointer-events: none;
+    background:
+      linear-gradient(to bottom, rgba(6, 11, 16, 0.60) 0, rgba(6, 11, 16, 0.20) 24%, rgba(6, 11, 16, 0) 40%),
+      linear-gradient(to top, rgba(6, 11, 16, 0.74) 0, rgba(6, 11, 16, 0.30) 20%, rgba(6, 11, 16, 0) 40%),
+      radial-gradient(ellipse 85% 95% at 55% 50%, rgba(6, 11, 16, 0) 55%, rgba(6, 11, 16, 0.45) 100%),
+      linear-gradient(rgba(6, 11, 16, 0.14), rgba(6, 11, 16, 0.14));
+  }
+  /* the link from the selected country to its card */
+  .lead { position: absolute; left: 0; top: 0; width: var(--w); height: var(--h); pointer-events: none; overflow: visible; }
+
+  /* ---------- Glass: one look for every panel (as screen1/screen2) ---------- */
+  .glass {
+    position: relative;
+    isolation: isolate;
+    background: var(--glass);
+    -webkit-backdrop-filter: blur(18px) saturate(1.1);
+    backdrop-filter: blur(18px) saturate(1.1);
+    border: 1px solid var(--stroke);
+    border-radius: var(--r);
+    box-shadow: 0 3px 14px rgba(0, 0, 0, 0.26);
+  }
+  .bar, .card { --r: var(--r-bar); }
+  .ctl { --r: var(--r-ctl); }
+  /* render-side frost (see frost() below): a blurred copy of the map + shade under the same 0.66 tint */
+  .frost { position: absolute; inset: 0; z-index: -1; overflow: hidden; border-radius: calc(var(--r) - 1px); pointer-events: none; background: #0B1218; }
+  .frost i { position: absolute; display: block; filter: blur(18px) saturate(1.1); }
+  .frost i img, .frost i b { position: absolute; display: block; }
+  .frost::after { content: ""; position: absolute; inset: 0; background: var(--glass); }
+  .frosted .glass { background: transparent; -webkit-backdrop-filter: none; backdrop-filter: none; }
+
+  .ui { position: absolute; inset: 0; pointer-events: none; }
+  .ui .glass, .ui .tap { pointer-events: auto; }
+
+  /* ---------- Shared header: one 36 pt glass bar ---------- */
+  .top { position: absolute; top: var(--top-gap); left: var(--gutter); right: var(--gutter); height: var(--row);
+    display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; padding-inline: 2px var(--pad-bar); }
+  /* back: a 32 pt control 2 pt inside the bar (12 - 2 = 10 pt radius, concentric, as the screen1 speed chip) */
+  .back { --r: var(--r-ctl); justify-self: start; height: var(--ctl); display: flex; align-items: center; gap: var(--s1);
+    padding-inline: var(--s2) var(--pad-ctl); border-radius: var(--r); color: var(--t1);
+    background: rgba(127, 233, 255, 0.07); }
+  .back span { font-size: var(--fs-val); font-weight: 600; line-height: var(--lh-val); white-space: nowrap; }
+  .back svg.i { color: var(--t2); }
+
+  .steps { display: flex; align-items: center; gap: var(--s2); }
+  .step { display: flex; align-items: center; gap: var(--s2); white-space: nowrap; }
+  .step .n { flex: none; width: 20px; height: 20px; border-radius: 10px; display: grid; place-items: center;
+    font-size: var(--fs-sec); font-weight: 600; line-height: var(--lh-sec); color: var(--t2); box-shadow: inset 0 0 0 1px rgba(169, 188, 203, 0.45); }
+  .step .l { font-size: var(--fs-val); font-weight: 600; line-height: var(--lh-val); color: var(--t2); }
+  .step.done .n { color: var(--teal); background: rgba(63, 224, 208, 0.14); box-shadow: inset 0 0 0 1px rgba(63, 224, 208, 0.50); }
+  .step.done .n svg.i { width: 16px; height: 16px; stroke-width: 1.75; }
+  .step.done .l { color: var(--t1); }
+  .step.cur .n { background: var(--cyan); color: var(--on-cyan); box-shadow: none; }
+  .step.cur .l { color: var(--cyan); }
+  .sep { flex: none; width: 20px; height: 1px; background: rgba(169, 188, 203, 0.35); }
+  .sep.done { background: rgba(63, 224, 208, 0.55); }
+
+  .ctx { justify-self: end; display: flex; align-items: center; gap: var(--s1); white-space: nowrap;
+    font-size: var(--fs-sec); font-weight: 500; line-height: var(--lh-sec); color: var(--t2); }
+  .ctx b { font-weight: 600; color: var(--t1); }
+
+  /* ---------- Search: a floating 32 pt field, top centre under the header ---------- */
+  .search { position: absolute; top: calc(var(--top-gap) + var(--row) + var(--s2)); left: calc(50% - 132px); width: 264px; height: var(--ctl);
+    display: flex; align-items: center; gap: var(--s2); padding-inline: var(--pad-ctl); color: var(--t2); cursor: text; }
+  .search .ph { flex: 1 1 auto; font-size: var(--fs-val); font-weight: 600; line-height: var(--lh-val); color: var(--t2); white-space: nowrap; }
+  .search .cnt { flex: none; font-size: var(--fs-label); font-weight: 500; line-height: var(--lh-label); color: var(--t2); white-space: nowrap;
+    padding-inline-start: var(--s2); border-inline-start: 1px solid var(--hair); }
+
+  /* ---------- Selected-country card: floats at the right, next to Egypt ---------- */
+  .card.sel { position: absolute; right: var(--gutter); width: var(--card-w); padding: var(--pad-bar);
+    display: flex; flex-direction: column; gap: var(--s3); }
+  .sel .head { display: flex; align-items: center; gap: var(--s3); }
+  .flag { flex: none; border-radius: 3px; overflow: hidden; box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.22); }
+  .flag img { width: 100%; height: 100%; display: block; object-fit: cover; }
+  .sel .flag { width: 32px; height: 24px; }
+  .sel .nm { font-size: var(--fs-name); font-weight: 700; line-height: var(--lh-name); color: var(--t1); flex: 1 1 auto; }
+  .sel .pick { flex: none; display: flex; align-items: center; gap: var(--s1); color: var(--cyan);
+    font-size: var(--fs-sec); font-weight: 600; line-height: var(--lh-sec); white-space: nowrap; }
+  .sel hr { border: 0; height: 1px; background: var(--hair); }
+  .facts { display: grid; grid-template-columns: 1fr 1fr; column-gap: var(--s3); row-gap: var(--s3); }
+  .fact { display: flex; flex-direction: column; min-width: 0; }
+  .fact .k { font-size: var(--fs-label); font-weight: 500; line-height: var(--lh-label); color: var(--t2); white-space: nowrap; }
+  .fact .v { display: flex; align-items: center; gap: var(--s2); font-size: var(--fs-val); font-weight: 600; line-height: var(--lh-val); color: var(--t1); white-space: nowrap; }
+  .fact .v .u { font-size: var(--fs-label); font-weight: 500; color: var(--t2); }
+  .fact .v.hard { color: var(--amber); }
+  /* difficulty meter: four short bars, filled up to the level */
+  .meter { display: flex; align-items: center; gap: 2px; direction: rtl; }   /* RTL: the level fills from the right */
+  .meter i { display: block; width: 4px; height: 10px; border-radius: 1px; background: rgba(169, 188, 203, 0.28); }
+  .meter i.on { background: currentColor; }
+  .warn { display: flex; align-items: flex-start; gap: var(--s2); }
+  .warn svg.i { color: var(--amber); margin-top: -1px; }
+  .warn p { font-size: var(--fs-sec); font-weight: 500; line-height: var(--lh-sec); color: var(--t1); }
+  .warn p b { font-weight: 600; color: var(--amber); }
+
+  /* ---------- Bottom row: country chips (scrolls) + the primary action ---------- */
+  .bottom { position: absolute; left: var(--gutter); right: var(--gutter); bottom: var(--row-gap); height: var(--big);
+    display: flex; align-items: center; gap: var(--s3); }
+  /* the strip scrolls sideways; its box is taller than the row only so the chips' soft shadow is not cut.
+     That extra box reaches into the home-indicator inset, so the box itself takes no touches: the chips do
+     (the app's scroller is the 44 pt row, above the inset) */
+  .strip { flex: 1 1 auto; min-width: 0; align-self: stretch; margin-block: -8px; padding-block: 12px;
+    display: flex; align-items: center; gap: var(--s2); overflow-x: clip; overflow-y: visible;
+    /* the RTL end of the strip (left, next to the primary action) fades out: more countries scroll in from there */
+    -webkit-mask-image: linear-gradient(to right, rgba(0, 0, 0, 0) 0, #000 64px);
+    mask-image: linear-gradient(to right, rgba(0, 0, 0, 0) 0, #000 64px); pointer-events: none; }
+  .chip { flex: none; height: var(--row); display: flex; align-items: center; gap: var(--s2); padding-inline: var(--pad-ctl) var(--pad-bar); }
+  .chip .flag { width: 22px; height: 16.5px; }
+  .chip .tx { display: flex; flex-direction: column; align-items: flex-start; }
+  .chip .nm { font-size: var(--fs-val); font-weight: 600; line-height: var(--lh-val); color: var(--t1); white-space: nowrap; }
+  .chip .df { font-size: var(--fs-label); font-weight: 500; line-height: var(--lh-label); white-space: nowrap; }
+  .df.d1 { color: var(--d1); } .df.d2 { color: var(--d2); } .df.d3 { color: var(--d3); } .df.d4 { color: var(--d4); }
+  .chip.on { box-shadow: 0 3px 14px rgba(0, 0, 0, 0.26), inset 0 0 0 1px rgba(127, 233, 255, 0.55); border-color: rgba(127, 233, 255, 0.55); }
+  .chip.on .frost::before { content: ""; position: absolute; inset: 0; z-index: 1; background: linear-gradient(180deg, rgba(127, 233, 255, 0.20), rgba(127, 233, 255, 0.10)); }
+
+  .next { --r: var(--r-ctl); flex: none; height: var(--big); min-width: 120px; padding-inline: var(--pad-bar);
+    display: flex; align-items: center; justify-content: center; gap: var(--s2); border-radius: var(--r);
+    background: var(--cyan); color: var(--on-cyan); box-shadow: 0 3px 14px rgba(0, 0, 0, 0.30); }
+  .next span { font-size: var(--fs-name); font-weight: 700; line-height: var(--lh-name); white-space: nowrap; }
+  .next svg.i { stroke-width: 2; }
+
+  /* ---------- Fit levels (set by fit() from measurement, not from the device name) ----------
+     0: everything   1: header context shows only the scenario name   2: no header context */
+  [data-fit="1"] .ctx .dt { display: none; }
+  [data-fit="2"] .ctx { visibility: hidden; }
+  /* card fit (set by placeCard() when the free band is short, e.g. iPhone SE): 8 pt instead of 12 pt between its blocks */
+  [data-cardfit="1"] .card.sel { gap: var(--s2); }
+  [data-cardfit="1"] .facts { row-gap: var(--s2); }
+
+  /* ---------- Device overlay (as screen1/screen2) ---------- */
+  .dev { position: absolute; inset: 0; pointer-events: none; z-index: 50; }
+  .corners { position: absolute; inset: 0; border-radius: var(--corner); box-shadow: 0 0 0 60px #000; }
+  .cutout { position: absolute; background: #000; display: none; }
+  [data-cutout="island"] .cutout { display: block; left: 11px; top: calc(50% - 63px); width: 37px; height: 126px; border-radius: 18.5px; }
+  [data-cutout="notch"] .cutout { display: block; left: 0; top: calc(50% - 105px); width: 30px; height: 210px; border-radius: 0 20px 20px 0; }
+  .homebar { position: absolute; display: none; left: calc(50% - 67px); bottom: 8px; width: 134px; height: 5px; border-radius: 3px; background: rgba(255, 255, 255, 0.55); }
+  [data-home="yes"] .homebar { display: block; }
+  .show-hit .safe { position: absolute; top: 0; bottom: var(--bottom); left: var(--side); right: var(--side); outline: 1px dashed rgba(255, 255, 0, 0.8); }
+</style>
+</head>
+<body>
+
+<!-- SVG symbol library (24 grid, round stroke 1.75, drawn at 16 pt) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-chev-r" viewBox="0 0 24 24"><path d="M9.5 5.75 15.75 12 9.5 18.25"/></symbol>
+    <symbol id="i-chev-l" viewBox="0 0 24 24"><path d="M14.5 5.75 8.25 12l6.25 6.25"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="10.75" cy="10.75" r="6.25"/><path d="M15.3 15.3 20 20"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M6 12.5l3.75 3.75L18 8"/></symbol>
+    <symbol id="i-warn" viewBox="0 0 24 24"><path d="M10.4 4.6a1.85 1.85 0 0 1 3.2 0l7.1 12.6a1.85 1.85 0 0 1-1.6 2.8H4.9a1.85 1.85 0 0 1-1.6-2.8z"/><path d="M12 9.5v4"/><path d="M12 16.6v.05"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.75"/><path d="M8.25 12.25l2.6 2.6 5-5.35"/></symbol>
+  </defs>
+</svg>
+
+<!-- The map: approved world satellite + overlay (Egypt highlighted), placed by placeMap() -->
+<div class="map" aria-label="خريطة العالم: اضغط على دولة لاختيارها">
+  <img src="../../shared/world_d1.jpg" alt="">
+  <img class="ov" src="world_d1_overlay_declutter.svg" alt="">   <!-- the approved overlay with its 7 colliding labels resolved (Spain/Portugal etc.) -->
+  <!-- selected country: the same highlight as the approved overlay (fill 0.16, soft 7 pt glow, 2 pt line), at full strength -->
+  <svg viewBox="0 0 2400 1202" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M1445.8,615.6L1409.6,615.6L1409.9,614.5L1409.3,614.1L1408.1,615.6L1366.5,615.6L1366.5,564.4L1364.7,557.0L1366.4,553.5L1365.7,548.7L1367.4,546.5L1369.2,547.3L1372.6,546.6L1381.7,548.3L1383.6,549.6L1390.1,550.8L1393.8,552.4L1396.2,551.7L1399.5,549.5L1401.5,549.2L1402.6,547.8L1406.2,547.0L1403.8,548.1L1406.7,547.7L1407.2,546.7L1410.2,547.8L1412.6,547.1L1414.2,548.6L1412.6,547.6L1411.8,549.0L1413.4,549.5L1414.0,550.4L1415.2,549.6L1414.8,549.0L1417.4,550.6L1420.9,549.9L1421.3,550.5L1424.4,550.2L1428.0,548.8L1432.7,562.3L1431.6,563.8L1429.3,572.8L1428.1,574.6L1425.1,572.6L1421.7,568.8L1420.9,565.9L1418.1,561.9L1417.1,558.6L1416.5,559.0L1415.7,561.1L1417.3,563.4L1417.5,565.8L1419.3,568.9L1423.6,573.7L1423.7,575.8L1425.7,578.8L1426.4,582.7L1430.4,589.5L1434.6,598.1L1438.6,601.9L1436.9,602.0L1436.7,603.0L1436.8,605.4L1438.0,608.9L1439.4,610.4L1441.5,611.1Z" fill="#3FE0D0" fill-opacity="0.16"/>
+    <path d="M1445.8,615.6L1409.6,615.6L1409.9,614.5L1409.3,614.1L1408.1,615.6L1366.5,615.6L1366.5,564.4L1364.7,557.0L1366.4,553.5L1365.7,548.7L1367.4,546.5L1369.2,547.3L1372.6,546.6L1381.7,548.3L1383.6,549.6L1390.1,550.8L1393.8,552.4L1396.2,551.7L1399.5,549.5L1401.5,549.2L1402.6,547.8L1406.2,547.0L1403.8,548.1L1406.7,547.7L1407.2,546.7L1410.2,547.8L1412.6,547.1L1414.2,548.6L1412.6,547.6L1411.8,549.0L1413.4,549.5L1414.0,550.4L1415.2,549.6L1414.8,549.0L1417.4,550.6L1420.9,549.9L1421.3,550.5L1424.4,550.2L1428.0,548.8L1432.7,562.3L1431.6,563.8L1429.3,572.8L1428.1,574.6L1425.1,572.6L1421.7,568.8L1420.9,565.9L1418.1,561.9L1417.1,558.6L1416.5,559.0L1415.7,561.1L1417.3,563.4L1417.5,565.8L1419.3,568.9L1423.6,573.7L1423.7,575.8L1425.7,578.8L1426.4,582.7L1430.4,589.5L1434.6,598.1L1438.6,601.9L1436.9,602.0L1436.7,603.0L1436.8,605.4L1438.0,608.9L1439.4,610.4L1441.5,611.1Z" fill="none" stroke="#7FF5EA" stroke-opacity="0.35" stroke-width="7" stroke-linejoin="round"/>
+    <path d="M1445.8,615.6L1409.6,615.6L1409.9,614.5L1409.3,614.1L1408.1,615.6L1366.5,615.6L1366.5,564.4L1364.7,557.0L1366.4,553.5L1365.7,548.7L1367.4,546.5L1369.2,547.3L1372.6,546.6L1381.7,548.3L1383.6,549.6L1390.1,550.8L1393.8,552.4L1396.2,551.7L1399.5,549.5L1401.5,549.2L1402.6,547.8L1406.2,547.0L1403.8,548.1L1406.7,547.7L1407.2,546.7L1410.2,547.8L1412.6,547.1L1414.2,548.6L1412.6,547.6L1411.8,549.0L1413.4,549.5L1414.0,550.4L1415.2,549.6L1414.8,549.0L1417.4,550.6L1420.9,549.9L1421.3,550.5L1424.4,550.2L1428.0,548.8L1432.7,562.3L1431.6,563.8L1429.3,572.8L1428.1,574.6L1425.1,572.6L1421.7,568.8L1420.9,565.9L1418.1,561.9L1417.1,558.6L1416.5,559.0L1415.7,561.1L1417.3,563.4L1417.5,565.8L1419.3,568.9L1423.6,573.7L1423.7,575.8L1425.7,578.8L1426.4,582.7L1430.4,589.5L1434.6,598.1L1438.6,601.9L1436.9,602.0L1436.7,603.0L1436.8,605.4L1438.0,608.9L1439.4,610.4L1441.5,611.1Z" fill="none" stroke="#7FF5EA" stroke-width="2" stroke-linejoin="round"/>
+  </svg>
+</div>
+<div class="shade" aria-hidden="true"></div>
+<svg class="lead" aria-hidden="true">
+  <line id="leadLine" x1="0" y1="0" x2="0" y2="0" stroke="#7FE9FF" stroke-opacity="0.75" stroke-width="1.25" stroke-linecap="round"/>
+  <circle id="leadHalo" cx="0" cy="0" r="7" fill="#7FE9FF" fill-opacity="0.18"/>
+  <circle id="leadDot" cx="0" cy="0" r="3" fill="#7FE9FF" stroke="#0B1218" stroke-width="1.25"/>
+</svg>
+
+<div class="ui">
+  <!-- Shared header: back (RTL start), the three steps (centre), the chosen scenario (RTL end) -->
+  <header class="top glass bar">
+    <button class="back tap" aria-label="رجوع إلى اختيار السيناريو"><svg class="i"><use href="#i-chev-r"/></svg><span>رجوع</span></button>
+    <ol class="steps" aria-label="خطوات اللعبة الجديدة">
+      <li class="step done"><span class="n"><svg class="i"><use href="#i-check"/></svg></span><span class="l">السيناريو</span></li>
+      <li class="sep done" aria-hidden="true"></li>
+      <li class="step cur" aria-current="step"><span class="n">2</span><span class="l">الدولة</span></li>
+      <li class="sep" aria-hidden="true"></li>
+      <li class="step"><span class="n">3</span><span class="l">الإعدادات</span></li>
+    </ol>
+    <p class="ctx"><b>الربيع العربي</b><span class="dt">·</span><span class="dt">1 يناير 2011</span></p>
+  </header>
+
+  <!-- Search: floating field, top centre -->
+  <label class="search glass ctl tap" role="search">
+    <svg class="i"><use href="#i-search"/></svg>
+    <span class="ph">ابحث عن دولة</span>
+    <span class="cnt">14 دولة</span>
+  </label>
+
+  <!-- The selected country, linked to Egypt on the map -->
+  <section class="card sel glass" aria-label="الدولة المختارة: مصر">
+    <div class="head">
+      <span class="flag"><img src="../../shared/flags/eg.svg" alt="علم مصر"></span>
+      <b class="nm">مصر</b>
+      <span class="pick"><svg class="i"><use href="#i-pin"/></svg>مختارة</span>
+    </div>
+    <hr>
+    <div class="facts">
+      <div class="fact"><span class="k">القائد</span><span class="v">حسني مبارك</span></div>
+      <div class="fact"><span class="k">نظام الحكم</span><span class="v">جمهورية رئاسية</span></div>
+      <div class="fact"><span class="k">السكان</span><span class="v"><span>83 <span class="u">مليون</span></span></span></div>
+      <div class="fact"><span class="k">الناتج</span><span class="v"><span>219 <span class="u">مليار $</span></span></span></div>
+      <div class="fact"><span class="k">الاستقرار</span><span class="v"><span class="ltr">58%</span></span></div>
+      <div class="fact"><span class="k">الصعوبة</span><span class="v hard"><span>صعبة</span><span class="meter" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span></span></div>
+    </div>
+    <hr>
+    <div class="warn"><svg class="i"><use href="#i-warn"/></svg><p><b>تحذير:</b> بطالة الشباب مرتفعة واحتجاجات محتملة</p></div>
+  </section>
+
+  <!-- Bottom row: the country chips (scroll sideways) and the primary action at the RTL end -->
+  <div class="bottom">
+    <div class="strip" role="listbox" aria-label="الدول">
+      <button class="chip glass ctl tap on" role="option" aria-selected="true"><span class="flag"><img src="../../shared/flags/eg.svg" alt=""></span><span class="tx"><span class="nm">مصر</span><span class="df d3">صعبة</span></span></button>
+      <button class="chip glass ctl tap" role="option"><span class="flag"><img src="../../shared/flags/sa.svg" alt=""></span><span class="tx"><span class="nm">السعودية</span><span class="df d2">متوسطة</span></span></button>
+      <button class="chip glass ctl tap" role="option"><span class="flag"><img src="../../shared/flags/ly_2011.svg" alt=""></span><span class="tx"><span class="nm">ليبيا</span><span class="df d4">صعبة جدًا</span></span></button>
+      <button class="chip glass ctl tap" role="option"><span class="flag"><img src="../../shared/flags/tn.svg" alt=""></span><span class="tx"><span class="nm">تونس</span><span class="df d4">صعبة جدًا</span></span></button>
+      <button class="chip glass ctl tap" role="option"><span class="flag"><img src="../../shared/flags/sy.svg" alt=""></span><span class="tx"><span class="nm">سوريا</span><span class="df d3">صعبة</span></span></button>
+      <button class="chip glass ctl tap" role="option"><span class="flag"><img src="../../shared/flags/iq.svg" alt=""></span><span class="tx"><span class="nm">العراق</span><span class="df d4">صعبة جدًا</span></span></button>
+      <button class="chip glass ctl tap" role="option"><span class="flag"><img src="../../shared/flags/ye.svg" alt=""></span><span class="tx"><span class="nm">اليمن</span><span class="df d4">صعبة جدًا</span></span></button>
+      <button class="chip glass ctl tap" role="option"><span class="flag"><img src="../../shared/flags/jo.svg" alt=""></span><span class="tx"><span class="nm">الأردن</span><span class="df d2">متوسطة</span></span></button>
+      <button class="chip glass ctl tap" role="option"><span class="flag"><img src="../../shared/flags/sd.svg" alt=""></span><span class="tx"><span class="nm">السودان</span><span class="df d4">صعبة جدًا</span></span></button>
+      <button class="chip glass ctl tap" role="option"><span class="flag"><img src="../../shared/flags/tr.svg" alt=""></span><span class="tx"><span class="nm">تركيا</span><span class="df d2">متوسطة</span></span></button>
+      <button class="chip glass ctl tap" role="option"><span class="flag"><img src="../../shared/flags/ir.svg" alt=""></span><span class="tx"><span class="nm">إيران</span><span class="df d3">صعبة</span></span></button>
+      <button class="chip glass ctl tap" role="option"><span class="flag"><img src="../../shared/flags/us.svg" alt=""></span><span class="tx"><span class="nm">الولايات المتحدة</span><span class="df d1">سهلة</span></span></button>
+      <button class="chip glass ctl tap" role="option"><span class="flag"><img src="../../shared/flags/ru.svg" alt=""></span><span class="tx"><span class="nm">روسيا</span><span class="df d2">متوسطة</span></span></button>
+      <button class="chip glass ctl tap" role="option"><span class="flag"><img src="../../shared/flags/cn.svg" alt=""></span><span class="tx"><span class="nm">الصين</span><span class="df d1">سهلة</span></span></button>
+    </div>
+    <button class="next tap"><span>التالي</span><svg class="i"><use href="#i-chev-l"/></svg></button>
+  </div>
+</div>
+
+<!-- Device silhouette drawn on top: rounded corners, camera cutout, home indicator -->
+<div class="dev" aria-hidden="true">
+  <div class="corners"></div>
+  <div class="cutout"></div>
+  <div class="homebar"></div>
+  <div class="safe"></div>
+</div>
+
+<script>
+  /* Header: hide the scenario context step by step if the bar gets tight (measured, not by device). */
+  function fit() {
+    var root = document.documentElement, top = document.querySelector('.top');
+    var parts = ['.back', '.steps', '.ctx'].map(function (s) { return document.querySelector(s); });
+    for (var lv = 0; lv <= 2; lv++) {
+      root.dataset.fit = String(lv);
+      var cs = getComputedStyle(top), inner = top.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight);
+      var steps = parts[1].getBoundingClientRect().width, side = (inner - steps) / 2;
+      var ok = parts[0].getBoundingClientRect().width + 12 <= side && (lv === 2 || parts[2].getBoundingClientRect().width + 12 <= side);
+      if (ok) break;
+    }
+    window.__fit = { level: +root.dataset.fit };
+  }
+
+  /* Composition. Egypt sits a little below the middle of the free band (so southern and central
+     Europe stay in view above it), just to the left of the card; the card floats at the right,
+     vertically centred on Egypt as far as the band allows. The band runs from the search field
+     (or 8 pt under it, when the card would sit beside it) to 12 pt above the bottom row. */
+  var EG = { x0: 1364.7, x1: 1445.8, y0: 546.5, y1: 615.6, cy: 581, ax: 1426, ay: 566 };
+  function placeCard() {
+    var root = document.documentElement, card = document.querySelector('.sel');
+    var s = document.querySelector('.search').getBoundingClientRect(), b = document.querySelector('.bottom').getBoundingClientRect();
+    var c = card.getBoundingClientRect();
+    var beside = c.left < s.right + 12;                       /* would the card touch the search field horizontally? */
+    var y0 = beside ? s.bottom + 8 : s.top, y1 = b.top - 12;
+    root.dataset.cardfit = '0';
+    if (card.getBoundingClientRect().height > y1 - y0) root.dataset.cardfit = '1';
+    var h = card.getBoundingClientRect().height;
+    var ey = y0 + (y1 - y0) * 0.6;                             /* Egypt's centre on screen */
+    var top = Math.min(Math.max(ey - h / 2, y0), y1 - h);
+    card.style.top = top + 'px';
+    window.__band = { y0: y0, y1: y1, ey: ey };
+    window.__card = { y0: y0, y1: y1, h: h, top: top, fits: h <= y1 - y0, fit: +root.dataset.cardfit };
+  }
+
+  /* Map: zoom scales with the screen height so Europe, the Mediterranean, North and East Africa
+     and the Middle East fill the screen; Egypt's east edge sits 36 pt left of the card. */
+  function placeMap() {
+    var d = window.__dev, W = d.W, H = d.H;
+    var s = H / 440;
+    var card = document.querySelector('.sel').getBoundingClientRect();
+    var GAP = 36;
+    var L = card.left - GAP - EG.x1 * s;
+    var T = window.__band.ey - EG.cy * s;
+    L = Math.min(0, Math.max(W - 2400 * s, L)); T = Math.min(0, Math.max(H - 1202 * s, T));
+    var m = document.querySelector('.map');
+    m.style.setProperty('--map-s', s); m.style.left = L + 'px'; m.style.top = T + 'px';
+    var ax = L + EG.ax * s, ay = T + EG.ay * s;          /* in Sinai, clear of Egypt's name; the line runs north of the Saudi label */
+    var line = document.getElementById('leadLine');
+    line.setAttribute('x1', ax); line.setAttribute('y1', ay); line.setAttribute('x2', card.left); line.setAttribute('y2', ay);
+    ['leadDot', 'leadHalo'].forEach(function (id) { var c = document.getElementById(id); c.setAttribute('cx', ax); c.setAttribute('cy', ay); });
+    window.__map = { s: s, L: L, T: T, egypt: { x0: L + EG.x0 * s, x1: L + EG.x1 * s, y0: T + EG.y0 * s, y1: T + EG.y1 * s } };
+  }
+
+  /* Frosted glass for the mockup render (as screen1/screen2): headless Chromium leaves a sharp copy
+     of image content under backdrop-filter, so each panel gets its own clipped copy of the map and
+     the shade, blurred with filter: blur(), under the same 0.66 tint. backdrop-filter stays as the fallback. */
+  function frost() {
+    var d = window.__dev, W = d.W, H = d.H;
+    var m = document.querySelector('.map').getBoundingClientRect();
+    var imgs = document.querySelectorAll('.map img');
+    var shade = getComputedStyle(document.querySelector('.shade')).backgroundImage;
+    Array.prototype.forEach.call(document.querySelectorAll('.ui .glass'), function (g) {
+      var f = g.querySelector(':scope > .frost');
+      if (!f) {
+        f = document.createElement('span'); f.className = 'frost'; f.setAttribute('aria-hidden', 'true');
+        var i = document.createElement('i');
+        Array.prototype.forEach.call(imgs, function (src) { var im = document.createElement('img'); im.src = src.src; im.className = src.className; i.appendChild(im); });
+        i.appendChild(document.createElement('b'));
+        f.appendChild(i);
+        g.insertBefore(f, g.firstChild);
+      }
+      var r = g.getBoundingClientRect(), cs = getComputedStyle(g), i2 = f.firstChild;
+      i2.style.left = (-r.left - parseFloat(cs.borderLeftWidth)) + 'px';
+      i2.style.top = (-r.top - parseFloat(cs.borderTopWidth)) + 'px';
+      i2.style.width = W + 'px'; i2.style.height = H + 'px';
+      Array.prototype.forEach.call(i2.querySelectorAll('img'), function (im) {
+        im.style.left = m.left + 'px'; im.style.top = m.top + 'px'; im.style.width = m.width + 'px'; im.style.height = m.height + 'px';
+      });
+      var b = i2.querySelector('b');
+      b.style.left = '0px'; b.style.top = '0px'; b.style.width = W + 'px'; b.style.height = H + 'px'; b.style.backgroundImage = shade;
+    });
+    document.documentElement.classList.add('frosted');
+  }
+
+  (document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve())
+    .then(fit).then(placeCard).then(placeMap).then(frost).then(function () { window.__ready = true; });
+</script>
+</body>
+</html>
