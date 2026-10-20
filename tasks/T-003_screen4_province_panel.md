@@ -63,3 +63,13 @@
   - The designs plus reviews took about 1.5 hours with 2 agents at a time.
   - The reviews found real defects in all 3 variants (A: 2 must; B: 4 should; C: 1 must).
   - Reviewing unchosen variants is the waste to remove: from now on, review only after the owner chooses.
+
+## Style rounds (2026-10-20)
+- **Rejected by the owner:** themes 1–7 (`design/proposals/S4_styles`), 8–10 (`S4_v2`), 11 (`S4_v3`). Their words: not modern, cartoonish, crowded, too dark, too small, no feeling of running a state.
+- **The owner's reference:** two images they generated, an overview and the details' governance tab.
+- **Proposal built from them:** `design/proposals/S4_ref` (assembled from variant A by `_build/assemble.py`; renders `i16promax.png`, `i16promax_govern.png`, `i16promax_govern_end.png`).
+  - Kept from the approved work: the dark HUD, Western digits, USD (D-6).
+  - The dock moves to the left of the panel wherever it fits, so the panel runs down to the dock line.
+  - The owner's image is 16:9; the iPhone is wider and shorter. The overview fits on the 16 / 17 Pro Max; the governance tab scrolls 126 pt inside the panel.
+  - The render checker reports 0 cut or overlapping texts on i16promax in all three renders.
+  - Waiting for the owner's verdict. Fitting all 7 devices, the independent review and the gate come after approval.

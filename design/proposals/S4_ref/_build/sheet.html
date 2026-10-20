@@ -1,0 +1,126 @@
+  <!-- Province panel after the owner's two reference images (2026-10-20). One panel, two views:
+       ?view=overview (default, the owner's 2nd image) and ?view=govern («تفاصيل المحافظة», the owner's 1st image).
+       Values and the governor's name are illustrative. -->
+  <section class="sheet glass" aria-label="المحافظة: القاهرة">
+    <div class="r-in">
+      <header class="r-hd">
+        <span class="r-flag"><img src="../../shared/flags/eg.svg" alt="علم مصر"></span>
+        <div class="r-tt">
+          <div class="r-row"><h2 class="r-name">القاهرة</h2><span class="r-cap"><svg class="i"><use href="#i-star"/></svg>العاصمة</span></div>
+          <div class="r-sub">مصر<span class="r-dot"> · </span>محافظة</div>
+        </div>
+        <button class="r-x tap" aria-label="إغلاق"><svg class="i"><use href="#i-close"/></svg></button>
+      </header>
+
+      <!-- view 1: overview -->
+      <div class="r-body r-ov">
+        <div class="r-kpis">
+          <div class="r-kpi">
+            <span class="r-kl"><svg class="i"><use href="#i-people"/></svg>السكان</span>
+            <span class="r-kv"><b class="ltr">8.8</b><span>مليون</span></span>
+            <span class="r-kr r-blue"><span class="ltr">+14</span> ألف شهريًا</span>
+            <button class="r-why tap">لماذا؟</button>
+          </div>
+          <div class="r-kpi">
+            <span class="r-kl"><svg class="i r-amber"><use href="#i-flame"/></svg>الاضطرابات</span>
+            <span class="r-kv"><b class="ltr r-amber">64</b><span>/ <span class="ltr">100</span></span></span>
+            <span class="r-kr"><span class="ltr">+2</span> شهريًا</span>
+            <button class="r-why tap">لماذا؟</button>
+          </div>
+          <div class="r-kpi">
+            <span class="r-kl"><svg class="i"><use href="#i-pylon"/></svg>البنية التحتية</span>
+            <span class="r-kv"><b class="ltr">8</b><span>/ <span class="ltr">10</span></span></span>
+            <span class="r-kr">دون تغير</span>
+            <button class="r-why tap">لماذا؟</button>
+          </div>
+        </div>
+
+        <dl class="r-st">
+          <div class="r-sc"><dt>السيادة</dt><dd>مصر</dd></div>
+          <div class="r-sc"><dt>الإدارة</dt><dd>حكومة مصر</dd></div>
+          <div class="r-sc"><dt>السيطرة</dt><dd class="r-teal">الحكومة · <span class="ltr">100%</span></dd></div>
+          <div class="r-sc"><dt>المطالبات</dt><dd>لا توجد</dd></div>
+        </dl>
+
+        <div class="r-acts" aria-label="الإجراءات">
+          <button class="r-act tap r-first">
+            <span class="r-tile"><svg class="i"><use href="#i-pylon"/></svg></span>
+            <span class="r-at"><b>توسعة شبكة الكهرباء</b><span><span class="ltr">0.8</span> مليار $ · <span class="ltr">24</span> شهرًا</span></span>
+            <span class="r-chip"><svg class="r-arr"><use href="#t-up"/></svg>زيادة القدرة</span>
+          </button>
+          <button class="r-act tap">
+            <span class="r-tile"><svg class="i"><use href="#i-state"/></svg></span>
+            <span class="r-at"><b>دعم الخدمات الأساسية</b><span><span class="ltr">0.3</span> مليار $</span></span>
+            <span class="r-chip">تحسين الخدمات</span>
+          </button>
+        </div>
+
+        <button class="r-more tap"><svg class="i"><use href="#i-doc"/></svg><span>تفاصيل المحافظة</span><svg class="i r-chev"><use href="#i-chev"/></svg></button>
+      </div>
+
+      <!-- view 2: details, governance tab -->
+      <nav class="r-tabs r-gv" aria-label="أقسام المحافظة">
+        <button class="r-tab on tap"><svg class="i"><use href="#i-state"/></svg><span>الحكم</span></button>
+        <button class="r-tab tap"><svg class="i"><use href="#i-pylon"/></svg><span>الإنشاءات</span></button>
+        <button class="r-tab tap"><svg class="i"><use href="#i-shield"/></svg><span>القوات</span></button>
+        <button class="r-tab tap"><svg class="i"><use href="#i-doc"/></svg><span>السياسات</span></button>
+      </nav>
+      <div class="r-body r-gv">
+        <section class="r-sec">
+          <h3>إدارة المحافظة</h3>
+          <div class="r-gov"><span class="r-gl">المحافظ</span><span class="r-gn">د. عمر منصور</span><button class="r-btn tap">تغيير</button></div>
+        </section>
+        <section class="r-sec">
+          <h3>الأولوية التنموية</h3>
+          <div class="r-radios" role="radiogroup" aria-label="الأولوية التنموية">
+            <button class="r-rd tap" role="radio" aria-checked="false"><i></i>الصناعة</button>
+            <button class="r-rd tap on" role="radio" aria-checked="true"><i></i>الخدمات</button>
+            <button class="r-rd tap" role="radio" aria-checked="false"><i></i>البنية الأساسية</button>
+          </div>
+        </section>
+        <section class="r-sec">
+          <h3>العبء الضريبي</h3>
+          <div class="r-radios" role="radiogroup" aria-label="العبء الضريبي">
+            <button class="r-rd tap" role="radio" aria-checked="false"><i></i>مخفض</button>
+            <button class="r-rd tap on" role="radio" aria-checked="true"><i></i>متوازن</button>
+            <button class="r-rd tap" role="radio" aria-checked="false"><i></i>مرتفع</button>
+          </div>
+        </section>
+
+        <div class="r-links">
+          <div class="r-link">
+            <span class="r-tile"><svg class="i"><use href="#i-pylon"/></svg></span>
+            <span class="r-at"><b>الإنشاءات والمرافق</b><span>الكهرباء · النقل · المرافق العامة</span></span>
+            <button class="r-btn tap">تخطيط التوسعة</button>
+            <svg class="i r-chev"><use href="#i-chev"/></svg>
+          </div>
+          <div class="r-link">
+            <span class="r-tile"><svg class="i"><use href="#i-shield"/></svg></span>
+            <span class="r-at"><b>إدارة القوات</b><span>الحامية · التمركز · إسناد المهام</span></span>
+            <svg class="i r-chev"><use href="#i-chev"/></svg>
+          </div>
+        </div>
+
+        <section class="r-dec">
+          <h3>قرار مقترح</h3>
+          <div class="r-dbody">
+            <svg class="i r-dic"><use href="#i-bus"/></svg>
+            <div class="r-dtx">
+              <b>دعم النقل العام</b>
+              <span>تخفيض تعرفة الحافلات لمدة سنة</span>
+              <span><span class="ltr">10</span> ملايين $ · شهريًا · يبدأ خلال <span class="ltr">30</span> يومًا</span>
+              <span>تخفيف أعباء التنقل · زيادة الإنفاق العام</span>
+              <div class="r-dfoot">
+                <span>المحافظ: <em>مؤيد</em> · المالية: <em>تحفظ</em></span>
+                <div class="r-dbtn">
+                  <button class="r-btn tap">اعتماد البرنامج</button>
+                  <button class="r-btn r-grey tap">تأجيل</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+      <span class="r-fade" aria-hidden="true"></span>
+    </div>
+  </section>
