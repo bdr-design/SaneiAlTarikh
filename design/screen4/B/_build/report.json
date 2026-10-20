@@ -1,7 +1,7 @@
 {
  "se": {
   "device": "667x375 side 0 bottom 0 none",
-  "renderedAt": "2026-10-20T10:45:14.633Z",
+  "renderedAt": "2026-10-20T11:28:50.588Z",
   "issueCount": 0,
   "issues": [],
   "firstActionWithoutScroll": false,
@@ -22,11 +22,11 @@
       "y1": 315
      },
      "scrollTop": 0,
-     "max": 496,
+     "max": 504,
      "client": 212,
      "pinned": false,
      "firstShown": false,
-     "clearHeight": 200,
+     "clearHeight": 188,
      "pin": false
     },
     "tealPx": 160,
@@ -190,22 +190,22 @@
       "l": "السكان 8.8 مليون، ثابت. لماذ",
       "x0": 534,
       "x1": 646,
-      "y0": 186,
-      "y1": 230
+      "y0": 194,
+      "y1": 238
      },
      {
       "l": "الاضطراب 64، يرتفع. لماذا؟",
       "x0": 442.5,
       "x1": 526,
-      "y0": 186,
-      "y1": 230
+      "y0": 194,
+      "y1": 238
      },
      {
       "l": "البنية التحتية 8 من 10، ثابت",
       "x0": 332,
       "x1": 434.5,
-      "y0": 186,
-      "y1": 230
+      "y0": 194,
+      "y1": 238
      }
     ],
     "contrast": [
@@ -544,24 +544,12 @@
       "t": "السكان والمجتمع",
       "fs": 14,
       "worst": 16.37
-     },
-     {
-      "id": 58,
-      "t": "نسبة الحضر",
-      "fs": 11.5,
-      "worst": 9.49
-     },
-     {
-      "id": 59,
-      "t": "100%",
-      "fs": 13,
-      "worst": 16.37
      }
     ]
    },
    {
     "file": "se_scroll1.png",
-    "scrollTop": 152,
+    "scrollTop": 140,
     "pinned": false,
     "issues": 0,
     "info": [
@@ -574,12 +562,12 @@
       "x1": 659,
       "y1": 315
      },
-     "scrollTop": 152,
-     "max": 496,
+     "scrollTop": 140,
+     "max": 504,
      "client": 212,
      "pinned": false,
      "firstShown": false,
-     "clearHeight": 188,
+     "clearHeight": 164,
      "pin": false
     },
     "tealPx": 160,
@@ -587,7 +575,7 @@
    },
    {
     "file": "se_scroll2.png",
-    "scrollTop": 292,
+    "scrollTop": 256,
     "pinned": false,
     "issues": 0,
     "info": [
@@ -600,12 +588,12 @@
       "x1": 659,
       "y1": 315
      },
-     "scrollTop": 292,
-     "max": 496,
+     "scrollTop": 256,
+     "max": 504,
      "client": 212,
      "pinned": false,
      "firstShown": false,
-     "clearHeight": 188,
+     "clearHeight": 164,
      "pin": false
     },
     "tealPx": 160,
@@ -613,7 +601,7 @@
    },
    {
     "file": "se_scroll3.png",
-    "scrollTop": 432,
+    "scrollTop": 372,
     "pinned": false,
     "issues": 0,
     "info": [
@@ -626,12 +614,12 @@
       "x1": 659,
       "y1": 315
      },
-     "scrollTop": 432,
-     "max": 496,
+     "scrollTop": 372,
+     "max": 504,
      "client": 212,
      "pinned": false,
      "firstShown": false,
-     "clearHeight": 188,
+     "clearHeight": 164,
      "pin": false
     },
     "tealPx": 160,
@@ -639,7 +627,7 @@
    },
    {
     "file": "se_scroll4.png",
-    "scrollTop": 496,
+    "scrollTop": 504,
     "pinned": false,
     "issues": 0,
     "info": [
@@ -652,12 +640,12 @@
       "x1": 659,
       "y1": 315
      },
-     "scrollTop": 496,
-     "max": 496,
+     "scrollTop": 504,
+     "max": 504,
      "client": 212,
      "pinned": false,
      "firstShown": false,
-     "clearHeight": 200,
+     "clearHeight": 188,
      "pin": false
     },
     "tealPx": 160,
@@ -667,7 +655,7 @@
  },
  "i16promax": {
   "device": "956x440 side 62 bottom 21 island",
-  "renderedAt": "2026-10-20T10:45:08.178Z",
+  "renderedAt": "2026-10-20T11:28:44.348Z",
   "issueCount": 0,
   "issues": [],
   "firstActionWithoutScroll": true,
@@ -688,7 +676,7 @@
       "y1": 366
      },
      "scrollTop": 0,
-     "max": 445,
+     "max": 453,
      "client": 263,
      "pinned": true,
      "firstShown": true,
@@ -856,22 +844,22 @@
       "l": "السكان 8.8 مليون، ثابت. لماذ",
       "x0": 765.9,
       "x1": 881,
-      "y0": 186,
-      "y1": 230
+      "y0": 194,
+      "y1": 238
      },
      {
       "l": "الاضطراب 64، يرتفع. لماذا؟",
       "x0": 671.3,
       "x1": 757.9,
-      "y0": 186,
-      "y1": 230
+      "y0": 194,
+      "y1": 238
      },
      {
       "l": "البنية التحتية 8 من 10، ثابت",
       "x0": 557.6,
       "x1": 663.3,
-      "y0": 186,
-      "y1": 230
+      "y0": 194,
+      "y1": 238
      },
      {
       "l": "مشروع بنية تحتية0.8 مليار $ ",
@@ -1231,18 +1219,6 @@
       "worst": 16.37
      },
      {
-      "id": 58,
-      "t": "نسبة الحضر",
-      "fs": 11.5,
-      "worst": 9.49
-     },
-     {
-      "id": 59,
-      "t": "100%",
-      "fs": 13,
-      "worst": 16.37
-     },
-     {
       "id": 89,
       "t": "مشروع بنية تحتية",
       "fs": 13,
@@ -1308,11 +1284,11 @@
       "y1": 366
      },
      "scrollTop": 143,
-     "max": 445,
+     "max": 453,
      "client": 263,
      "pinned": true,
      "firstShown": false,
-     "clearHeight": 179,
+     "clearHeight": 167,
      "pin": true
     },
     "tealPx": 206,
@@ -1320,7 +1296,7 @@
    },
    {
     "file": "i16promax_scroll2.png",
-    "scrollTop": 274,
+    "scrollTop": 262,
     "pinned": true,
     "issues": 0,
     "info": [
@@ -1333,12 +1309,12 @@
       "x1": 894,
       "y1": 366
      },
-     "scrollTop": 274,
-     "max": 445,
+     "scrollTop": 262,
+     "max": 453,
      "client": 263,
      "pinned": true,
      "firstShown": false,
-     "clearHeight": 179,
+     "clearHeight": 167,
      "pin": true
     },
     "tealPx": 206,
@@ -1346,7 +1322,7 @@
    },
    {
     "file": "i16promax_scroll3.png",
-    "scrollTop": 405,
+    "scrollTop": 381,
     "pinned": false,
     "issues": 0,
     "info": [
@@ -1359,12 +1335,12 @@
       "x1": 894,
       "y1": 366
      },
-     "scrollTop": 405,
-     "max": 445,
+     "scrollTop": 381,
+     "max": 453,
      "client": 263,
      "pinned": false,
      "firstShown": false,
-     "clearHeight": 239,
+     "clearHeight": 215,
      "pin": true
     },
     "tealPx": 206,
@@ -1372,7 +1348,7 @@
    },
    {
     "file": "i16promax_scroll4.png",
-    "scrollTop": 445,
+    "scrollTop": 453,
     "pinned": false,
     "issues": 0,
     "info": [
@@ -1385,12 +1361,12 @@
       "x1": 894,
       "y1": 366
      },
-     "scrollTop": 445,
-     "max": 445,
+     "scrollTop": 453,
+     "max": 453,
      "client": 263,
      "pinned": false,
      "firstShown": false,
-     "clearHeight": 251,
+     "clearHeight": 239,
      "pin": true
     },
     "tealPx": 206,
