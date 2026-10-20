@@ -24,7 +24,34 @@ async function measure(p, d) {
     const visible = (e) => e.getClientRects().length > 0 && getComputedStyle(e).visibility !== 'hidden';
     const q = (s) => document.querySelector(s), qa = (s) => [...document.querySelectorAll(s)].filter(visible);
     const strip = q('.strip').getBoundingClientRect();
-    const inStrip = (r) => r.right > strip.left + 64 && r.left < strip.right;   // fully shown (not in the fade / scrolled out)
+    // The strip's mask, read back from the computed style (not from the page's own numbers): alpha at a screen x.
+    const maskStops = (() => {
+      const g = getComputedStyle(q('.strip')).maskImage, m = g.match(/^linear-gradient\(to right, (.*)\)$/);
+      if (!m) return null;
+      return m[1].split(/,(?![^(]*\))/).map((t) => { const c = t.trim().match(/^(rgba?\(([^)]*)\))\s+([\d.]+)px$/); if (!c) return null; const v = c[2].split(',').map(Number); return { a: v.length > 3 ? v[3] : 1, x: strip.left + +c[3] }; });
+    })();
+    if (!maskStops || maskStops.some((x) => !x)) issues.push(`strip mask not understood: ${getComputedStyle(q('.strip')).maskImage}`);
+    const alphaAt = (x) => {
+      const st = maskStops || [];
+      if (!st.length) return 1;
+      if (x <= st[0].x) return st[0].a;
+      for (let i = 1; i < st.length; i++) if (x <= st[i].x) return st[i].x === st[i - 1].x ? st[i].a : st[i - 1].a + (st[i].a - st[i - 1].a) * (x - st[i - 1].x) / (st[i].x - st[i - 1].x);
+      return st[st.length - 1].a;
+    };
+    // A chip's name at the faded RTL end is either fully shown, a readable hint (at least HINT at its left end, as the
+    // approved iPhone 17 Pro Max shows اليمن), or fully out (nothing left at its right end). Anything between reads as a cut word.
+    const HINT = 0.55;
+    const nameState = (chip) => {
+      const t = chip.querySelector('.tx').getBoundingClientRect();
+      if (t.right <= strip.left + eps || t.left >= strip.right) return { s: 'out', aL: 0, aR: 0 };
+      const aL = t.left < strip.left - eps ? 0 : alphaAt(t.left), aR = alphaAt(t.right);
+      if (aL >= 0.999) return { s: 'shown', aL, aR };
+      if (aR <= 0.02) return { s: 'out', aL, aR };
+      if (aL >= HINT - 0.005) return { s: 'hint', aL, aR };
+      return { s: 'cut', aL, aR };
+    };
+    const inStrip = (r) => r.left >= strip.left - eps && r.right <= strip.right + eps;   // the whole chip box lies inside the strip (not scrolled out)
+    const nameShown = (chip) => ['shown', 'hint'].includes(nameState(chip).s);
 
     qa('.ui .glass').forEach((g) => {
       const cs = getComputedStyle(g), f = g.querySelector(':scope > .frost');
@@ -55,8 +82,9 @@ async function measure(p, d) {
       if (fs === 13 && !/tabular-nums/.test(cs.fontVariantNumeric)) issues.push(`not tabular: ${t}`);
       rr.forEach((r) => {
         const chip = el.closest('.chip');
-        if (chip && !inStrip(chip.getBoundingClientRect())) return;
-        texts.push({ t, fs, color: cs.color, r: R(r), onGlass: !!el.closest('.glass') });
+        if (chip && !nameShown(chip)) return;
+        const hint = chip && nameState(chip).s === 'hint';
+        texts.push({ t, fs, color: cs.color, r: R(r), onGlass: !!el.closest('.glass'), mask: hint ? maskStops.map((x) => ({ a: x.a, x: x.x })) : null });
         if (r.left < S - eps || r.right > W - S + eps) issues.push(`text in side inset: ${t}`);
         if (r.bottom > H - B + eps) issues.push(`text in bottom inset: ${t}`);
       });
@@ -106,7 +134,7 @@ async function measure(p, d) {
       const r = e.getBoundingClientRect(), p = e.parentElement.getBoundingClientRect();
       if (e.scrollWidth > e.clientWidth + 1 && getComputedStyle(e).overflow !== 'visible') issues.push(`overflow: ${e.className}`);
       const chip = e.closest('.strip > .chip.glass');
-      if (r.width && (r.left < p.left - 0.5 || r.right > p.right + 0.5) && !e.classList.contains('frost') && (!chip || inStrip(chip.getBoundingClientRect()))) issues.push(`sticks out of parent: ${e.className || e.tagName} ${e.textContent.trim().slice(0, 20)}`);
+      if (r.width && (r.left < p.left - 0.5 || r.right > p.right + 0.5) && !e.classList.contains('frost') && (!chip || (inStrip(chip.getBoundingClientRect()) && nameShown(chip)))) issues.push(`sticks out of parent: ${e.className || e.tagName} ${e.textContent.trim().slice(0, 20)}`);
       if (getComputedStyle(e).textOverflow === 'ellipsis') issues.push(`ellipsis: ${e.className}`);
     });
     // Egypt fully visible (inside the safe area) and not under any panel, with air around it
@@ -163,13 +191,38 @@ async function measure(p, d) {
       [ph, cn].forEach((r, i) => { if (r.left < sr.left + 1 || r.right > sr.right - 1) issues.push(`search ${i ? 'count' : 'placeholder'} clipped`); });
       if (ph.left - cn.right < 8 - eps) issues.push('search placeholder runs into the count');
     }
-    // the strip signals that it scrolls: more chips than fit, and one chip runs into the faded RTL end
+    // the strip signals that it scrolls: more chips than fit, and one chip shows partly in the faded RTL end
     {
       const cs = qa('.chip').map((c) => c.getBoundingClientRect());
       if (!cs.some((r) => r.left < strip.left - eps)) issues.push('strip: every chip fits, nothing scrolls');
-      if (!cs.some((r) => r.left < strip.left + 64 && r.right > strip.left + 8)) issues.push('strip: no chip runs into the fade (scrolling not signalled)');
-      const sel = q('.chip.on').getBoundingClientRect();
-      if (!inStrip(sel) || sel.right > strip.right + eps) issues.push('strip: the selected chip is not fully shown');
+      if (!cs.some((r) => alphaAt(Math.max(r.left, strip.left)) < 0.999 && alphaAt(Math.min(r.right, strip.right)) > 0.1)) issues.push('strip: no chip runs into the fade (scrolling not signalled)');
+      const sel = q('.chip.on');
+      if (!inStrip(sel.getBoundingClientRect()) || nameState(sel).s !== 'shown') issues.push('strip: the selected chip is not fully shown');
+      // no name fades across: it is shown, a readable hint, or fully out
+      qa('.chip').forEach((c) => { const n = nameState(c); if (n.s === 'cut') issues.push(`strip: the fade cuts across a name: ${c.querySelector('.nm').textContent} (alpha ${n.aL.toFixed(2)}..${n.aR.toFixed(2)})`); });
+      audit.stripEnd = qa('.chip').map((c) => [c.querySelector('.nm').textContent, nameState(c)]).filter(([, n]) => n.s !== 'shown' && (n.aR > 0 || n.aL > 0)).map(([t, n]) => `${t} ${n.s} ${n.aL.toFixed(2)}..${n.aR.toFixed(2)}`);
+    }
+    // map names (overlay) that stay drawn must not be cut by the top edge of the bottom row, nor show inside the
+    // strip's clear/faded end at the chips' height (where they read as a chip's name): uses the page's ink boxes
+    {
+      const m = window.__map, chip = q('.strip .chip').getBoundingClientRect(), nx = q('.next').getBoundingClientRect();
+      // names actually taken out: read back from the overlay's computed mask (holes in the shape of those names)
+      const mk = getComputedStyle(q('.map img.ov')).maskImage, hid = new Set();
+      if (mk && mk !== 'none') { const svg = decodeURIComponent(mk.replace(/^url\("data:image\/svg\+xml,/, '').replace(/"\)$/, '')); (svg.match(/<text[^>]*>[^<]*<\/text>/g) || []).forEach((t) => hid.add(t.replace(/<[^>]*>/g, ''))); }
+      const cv = document.createElement('canvas').getContext('2d');
+      let fadeEnd = strip.left; for (let x = strip.left; x < strip.right; x += 1) { if (alphaAt(x) >= 0.999) { fadeEnd = x; break; } }
+      if (!Array.isArray(window.LABELS) || !window.LABELS.length) issues.push('map names not checked: the page has no label table (LABELS)');
+      (window.LABELS || []).forEach((lb) => {
+        if (hid.has(lb[3])) return;
+        cv.font = '700 ' + lb[2] + 'px ' + window.LABEL_FONT; cv.textAlign = 'center';
+        const tm = cv.measureText(lb[3]), h = 2 * m.s;
+        const x0 = m.L + (lb[0] - tm.actualBoundingBoxLeft) * m.s, x1 = m.L + (lb[0] + tm.actualBoundingBoxRight) * m.s;
+        const y0 = m.T + (lb[1] - tm.actualBoundingBoxAscent) * m.s, y1 = m.T + (lb[1] + tm.actualBoundingBoxDescent) * m.s;
+        const cut = (a, b, edge) => x1 + h > a && x0 - h < b && y0 < edge - 1 && y1 > edge + 4;
+        if (cut(fadeEnd - 64, strip.right, chip.top) || cut(nx.left, nx.right, nx.top)) issues.push(`map name cut by the bottom row: ${lb[3]}`);
+        if (x1 + h > strip.left && x0 - h < fadeEnd && y1 > chip.top + 4 && y0 < chip.bottom - 4) issues.push(`map name inside the strip's faded end: ${lb[3]}`);
+      });
+      audit.mapNamesHidden = [...hid];
     }
     // no two text runs overlap (rects trimmed by 20% top and bottom: line boxes of stacked lines may touch)
     for (let i = 0; i < texts.length; i++) for (let j = i + 1; j < texts.length; j++) {
@@ -179,7 +232,7 @@ async function measure(p, d) {
     }
     audit.layout = Object.fromEntries(blocks.map((b) => [b.s, R(b.r)]));
     audit.map = window.__map; audit.card = window.__card; audit.fit = window.__fit;
-    audit.chipsShown = qa('.chip').filter((c) => inStrip(c.getBoundingClientRect())).length;
+    audit.chipsShown = qa('.chip').filter((c) => nameState(c).s === 'shown').length;
     return { issues, audit, typeSeen, texts };
   }, { d, TOK });
 }
@@ -204,7 +257,19 @@ async function contrast(p, texts) {
       ls.sort((a, b) => a - b);
       const [r, gg, b] = parse(t.color); const lt = L(r, gg, b);
       const cr = (a, bb) => (Math.max(a, bb) + 0.05) / (Math.min(a, bb) + 0.05);
-      return { t: t.t, fs: t.fs, worst: +Math.min(cr(lt, ls[ls.length - 1]), cr(lt, ls[0])).toFixed(2), p95: +cr(lt, ls[Math.floor(ls.length * 0.95)]).toFixed(2) };
+      if (!t.mask) return { t: t.t, fs: t.fs, worst: +Math.min(cr(lt, ls[ls.length - 1]), cr(lt, ls[0])).toFixed(2), p95: +cr(lt, ls[Math.floor(ls.length * 0.95)]).toFixed(2) };
+      // a name in the strip's faded end: the mask fades the text as well, so each pixel's text colour is the text colour
+      // blended with that pixel's backdrop by the mask alpha. Scored per pixel; the last 12 pt at the faded (left) end
+      // is the scroll hint and is scored apart (the approved iPhone 17 Pro Max: about 3.2:1 there, 4.5:1 and up elsewhere).
+      const st = t.mask, alpha = (x) => { if (x <= st[0].x) return st[0].a; for (let i = 1; i < st.length; i++) if (x <= st[i].x) return st[i].x === st[i - 1].x ? st[i].a : st[i - 1].a + (st[i].a - st[i - 1].a) * (x - st[i - 1].x) / (st[i].x - st[i - 1].x); return st[st.length - 1].a; };
+      const body = [], tail = [];
+      for (let yy = 0; yy < h; yy++) for (let xx = 0; xx < w; xx++) {
+        const i = (yy * w + xx) * 4, px = (x0 + xx + 0.5) / k, a = alpha(px);
+        const bl = L(d[i], d[i + 1], d[i + 2]), tl = L(a * r + (1 - a) * d[i], a * gg + (1 - a) * d[i + 1], a * b + (1 - a) * d[i + 2]);
+        (px < t.r.x0 + 12 ? tail : body).push(cr(tl, bl));
+      }
+      const p5 = (v) => { if (!v.length) return 99; v.sort((a, bb) => a - bb); return v[Math.floor(v.length * 0.05)]; };
+      return { t: t.t, fs: t.fs, faded: true, p95: +p5(body).toFixed(2), tail12: +p5(tail).toFixed(2) };
     });
   }, { b64: buf.toString('base64'), texts });
 }
@@ -230,6 +295,10 @@ async function selftest(b) {
     ['.top { left: 4px !important; }', [/outside the safe area: \.top/, /in a rounded screen corner: \.top/, /text in side inset/]],
     ['.ctx { transform: translateX(200px); }', [/header: context too close to the steps/, /text overlap/]],
     ['.fact .v { font-size: 12px !important; } .sel .nm { text-overflow: ellipsis; overflow: hidden; }', [/font size off/, /ellipsis: nm/]],
+    // the fade lands across a chip's name (as it did on iPhone 11 / 13 mini)
+    ['.strip { -webkit-mask-image: linear-gradient(to right, rgba(0,0,0,0) 0, #000 120px) !important; mask-image: linear-gradient(to right, rgba(0,0,0,0) 0, #000 120px) !important; }', [/the fade cuts across a name: العراق/]],
+    // the colliding map names are drawn again (no overlay mask)
+    ['.map img.ov { -webkit-mask-image: none !important; mask-image: none !important; }', [/map name cut by the bottom row: نيجيريا/]],
   ];
   let failed = 0;
   for (const [css, want] of cases) {
@@ -264,13 +333,17 @@ async function selftest(b) {
     await ph.screenshot({ path: path.join(__dirname, id + '_hit.png') });
     await ph.close();
     const cr = await contrast(p, m.texts);
-    const low = cr.filter((c) => c.p95 < 4.5);
-    low.forEach((c) => m.issues.push(`low contrast ${c.p95}: ${c.t}`));
+    // names fully shown: 4.5:1. A name at the strip's faded end is a deliberately fading scroll hint; its bar is the
+    // approved iPhone 17 Pro Max (اليمن / صعبة جدًا there: 4.26 over the name, 2.75 in its last 12 pt, measured this way)
+    const low = cr.filter((c) => (c.faded ? c.p95 < 4.0 || c.tail12 < 2.5 : c.p95 < 4.5));
+    low.forEach((c) => m.issues.push(c.faded ? `low contrast at the faded end ${c.p95} (last 12 pt ${c.tail12}): ${c.t}` : `low contrast ${c.p95}: ${c.t}`));
     report[id] = { issues: m.issues, lowContrast: low, audit: m.audit, typeSeen: m.typeSeen };
     console.log(`\n== ${id} ==`);
     console.log('issues:', m.issues.length ? m.issues : 'none');
     console.log('low contrast (p95 < 4.5):', low.length ? low : 'none');
     console.log('min contrast:', Math.min(...cr.map((c) => c.p95)).toFixed(2), 'type:', JSON.stringify(m.typeSeen));
+    const fadedC = cr.filter((c) => c.faded); if (fadedC.length) console.log('faded-end names (p95 body / last 12 pt):', JSON.stringify(fadedC));
+    m.audit.fadedContrast = fadedC;
     console.log('audit:', JSON.stringify(m.audit));
     await ctx.close();
   }

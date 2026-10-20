@@ -3,6 +3,14 @@
   "issues": [],
   "lowContrast": [],
   "audit": {
+   "stripEnd": [
+    "سوريا hint 0.86..1.00"
+   ],
+   "mapNamesHidden": [
+    "غانا",
+    "إثيوبيا",
+    "الكاميرون"
+   ],
    "layout": {
     ".top": {
      "x0": 8,
@@ -59,7 +67,23 @@
    "fit": {
     "level": 0
    },
-   "chipsShown": 5
+   "chipsShown": 4,
+   "fadedContrast": [
+    {
+     "t": "سوريا",
+     "fs": 13,
+     "faded": true,
+     "p95": 16.02,
+     "tail12": 12.37
+    },
+    {
+     "t": "صعبة",
+     "fs": 10,
+     "faded": true,
+     "p95": 9.89,
+     "tail12": 9.54
+    }
+   ]
   },
   "typeSeen": {
    "13/600": 25,
@@ -73,6 +97,14 @@
   "issues": [],
   "lowContrast": [],
   "audit": {
+   "stripEnd": [
+    "سوريا hint 0.96..1.00"
+   ],
+   "mapNamesHidden": [
+    "نيجيريا",
+    "غانا",
+    "الكاميرون"
+   ],
    "layout": {
     ".top": {
      "x0": 50,
@@ -92,9 +124,9 @@
     },
     ".sel": {
      "x0": 498,
-     "y0": 94,
+     "y0": 96,
      "x1": 762,
-     "y1": 294,
+     "y1": 296,
      "w": 264,
      "h": 200
     },
@@ -122,14 +154,30 @@
     "y0": 92,
     "y1": 294,
     "h": 200,
-    "top": 94,
+    "top": 96,
     "fits": true,
     "fit": 1
    },
    "fit": {
     "level": 0
    },
-   "chipsShown": 6
+   "chipsShown": 4,
+   "fadedContrast": [
+    {
+     "t": "سوريا",
+     "fs": 13,
+     "faded": true,
+     "p95": 15.71,
+     "tail12": 14.95
+    },
+    {
+     "t": "صعبة",
+     "fs": 10,
+     "faded": true,
+     "p95": 9.89,
+     "tail12": 9.89
+    }
+   ]
   },
   "typeSeen": {
    "13/600": 25,
@@ -143,6 +191,12 @@
   "issues": [],
   "lowContrast": [],
   "audit": {
+   "stripEnd": [
+    "العراق hint 0.84..1.00"
+   ],
+   "mapNamesHidden": [
+    "نيجيريا"
+   ],
    "layout": {
     ".top": {
      "x0": 47,
@@ -199,7 +253,23 @@
    "fit": {
     "level": 0
    },
-   "chipsShown": 6
+   "chipsShown": 5,
+   "fadedContrast": [
+    {
+     "t": "العراق",
+     "fs": 13,
+     "faded": true,
+     "p95": 15.86,
+     "tail12": 15.09
+    },
+    {
+     "t": "صعبة جدًا",
+     "fs": 10,
+     "faded": true,
+     "p95": 6.41,
+     "tail12": 4.84
+    }
+   ]
   },
   "typeSeen": {
    "13/600": 25,
@@ -213,6 +283,13 @@
   "issues": [],
   "lowContrast": [],
   "audit": {
+   "stripEnd": [
+    "العراق hint 0.59..1.00"
+   ],
+   "mapNamesHidden": [
+    "نيجيريا",
+    "إثيوبيا"
+   ],
    "layout": {
     ".top": {
      "x0": 59,
@@ -269,7 +346,23 @@
    "fit": {
     "level": 0
    },
-   "chipsShown": 6
+   "chipsShown": 5,
+   "fadedContrast": [
+    {
+     "t": "العراق",
+     "fs": 13,
+     "faded": true,
+     "p95": 13.7,
+     "tail12": 8.52
+    },
+    {
+     "t": "صعبة جدًا",
+     "fs": 10,
+     "faded": true,
+     "p95": 4.51,
+     "tail12": 2.87
+    }
+   ]
   },
   "typeSeen": {
    "13/600": 25,
@@ -283,6 +376,13 @@
   "issues": [],
   "lowContrast": [],
   "audit": {
+   "stripEnd": [
+    "العراق hint 0.84..1.00"
+   ],
+   "mapNamesHidden": [
+    "نيجيريا",
+    "إثيوبيا"
+   ],
    "layout": {
     ".top": {
      "x0": 62,
@@ -302,9 +402,9 @@
     },
     ".sel": {
      "x0": 548,
-     "y0": 97,
+     "y0": 96,
      "x1": 812,
-     "y1": 321,
+     "y1": 320,
      "w": 264,
      "h": 224
     },
@@ -332,14 +432,30 @@
     "y0": 92,
     "y1": 321,
     "h": 224,
-    "top": 97,
+    "top": 96,
     "fits": true,
     "fit": 0
    },
    "fit": {
     "level": 0
    },
-   "chipsShown": 6
+   "chipsShown": 5,
+   "fadedContrast": [
+    {
+     "t": "العراق",
+     "fs": 13,
+     "faded": true,
+     "p95": 15.86,
+     "tail12": 15.09
+    },
+    {
+     "t": "صعبة جدًا",
+     "fs": 10,
+     "faded": true,
+     "p95": 6.41,
+     "tail12": 4.83
+    }
+   ]
   },
   "typeSeen": {
    "13/600": 25,
@@ -353,6 +469,13 @@
   "issues": [],
   "lowContrast": [],
   "audit": {
+   "stripEnd": [
+    "العراق hint 0.97..1.00"
+   ],
+   "mapNamesHidden": [
+    "نيجيريا",
+    "إثيوبيا"
+   ],
    "layout": {
     ".top": {
      "x0": 48,
@@ -409,7 +532,23 @@
    "fit": {
     "level": 0
    },
-   "chipsShown": 7
+   "chipsShown": 5,
+   "fadedContrast": [
+    {
+     "t": "العراق",
+     "fs": 13,
+     "faded": true,
+     "p95": 15.88,
+     "tail12": 16
+    },
+    {
+     "t": "صعبة جدًا",
+     "fs": 10,
+     "faded": true,
+     "p95": 6.46,
+     "tail12": 6.08
+    }
+   ]
   },
   "typeSeen": {
    "13/600": 25,
@@ -423,6 +562,10 @@
   "issues": [],
   "lowContrast": [],
   "audit": {
+   "stripEnd": [
+    "اليمن hint 0.55..1.00"
+   ],
+   "mapNamesHidden": [],
    "layout": {
     ".top": {
      "x0": 62,
@@ -479,7 +622,23 @@
    "fit": {
     "level": 0
    },
-   "chipsShown": 7
+   "chipsShown": 6,
+   "fadedContrast": [
+    {
+     "t": "اليمن",
+     "fs": 13,
+     "faded": true,
+     "p95": 14.36,
+     "tail12": 8.91
+    },
+    {
+     "t": "صعبة جدًا",
+     "fs": 10,
+     "faded": true,
+     "p95": 4.26,
+     "tail12": 2.75
+    }
+   ]
   },
   "typeSeen": {
    "13/600": 25,

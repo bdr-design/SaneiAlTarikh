@@ -1,6 +1,7 @@
 // Render screen 3 page 3 variant B (campaign settings) on every iPhone in shared/devices.json (or the ids given) and run the checks:
 // glass / height / radius tokens, type tokens, 44 pt hit boxes (no overlap), safe areas, overlaps, clipped text,
-// text inside its card, contrast over the real backdrop.
+// text inside its card, no clipped / ellipsised / wrapped notes, contrast over the real backdrop.
+// The page picks its own layout from the safe area (window.__fit: rhythm level, narrow notes, paired "instant" row).
 // Usage: NODE_PATH=.../tools/node_modules node render.js [ids...]   (no ids: all 7 devices)
 // Writes <id>.png to the page folder, <id>_hit.png and report.json to _build.
 const { chromium } = require('playwright');
@@ -72,7 +73,7 @@ async function measure(p, d) {
     // every text and icon stays inside its card / control with room to spare
     qa('.opt, .hdr, .sum, .next, .ch, .tg, .back').forEach((c) => {
       const cr = c.getBoundingClientRect();
-      const pad = c.matches('.opt, .sum') ? parseFloat(getComputedStyle(c).paddingLeft) - 0.05 : c.matches('.ch') ? 9.95 : 0;   // the card padding is 8 pt at fit 2
+      const pad = c.matches('.opt, .sum') ? parseFloat(getComputedStyle(c).paddingLeft) - 0.05 : c.matches('.ch') ? 9.95 : 0;   // the card side padding is 8 pt when narrow
       c.querySelectorAll('b, span, p, h2, svg').forEach((e) => {
         if (e.closest('.frost') || !visible(e) || e.closest('.lvl') || e.classList.contains('sw')) return;
         let b;
@@ -99,6 +100,10 @@ async function measure(p, d) {
       if (notes[i].bottom > r.bottom - 1 - pb + 0.05) issues.push(`note overflows card ${i} by ${(notes[i].bottom - (r.bottom - 1 - pb)).toFixed(2)}`);
       if (notes[i].top < lists[i].bottom + 3.95) issues.push(`note too close to list in card ${i}`);
       if (Math.abs(lists[i].top - lists[0].top) > 0.05) issues.push('lists not aligned');
+      const nr = document.createRange(); nr.selectNodeContents(c.querySelector('.note span'));
+      const lines = new Set([...nr.getClientRects()].filter((b) => b.width).map((b) => Math.round(b.top)));
+      if (lines.size > 1) issues.push(`note wraps to ${lines.size} lines in card ${i}`);
+      if (Math.abs(notes[i].bottom - notes[0].bottom) > 0.05) issues.push('notes not aligned');
     });
     // hit boxes
     const taps = [...document.querySelectorAll('.tap')].filter(visible).map((e) => {

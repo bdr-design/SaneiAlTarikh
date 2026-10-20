@@ -1,10 +1,10 @@
-// Build overview.png (screen 3, page 1, variant A): every device at the same scale on #0b1218, 3 per row, ~2400 px wide.
+// Build overview.png (screen 3, page 1 A: scenario): every device at the same scale on #0b1218, 3 per row, ~2400 px wide.
 const { chromium } = require('playwright');
 const path = require('path');
 const fs = require('fs');
 
 const OUT = path.resolve(__dirname, '..');
-const DEV = JSON.parse(fs.readFileSync(path.join(__dirname, 'devices.json'), 'utf8'));
+const DEV = JSON.parse(fs.readFileSync(path.resolve(OUT, '../../shared/devices.json'), 'utf8'));
 const TOTAL = 2400, PAD = 56, GAP = 48, BEZEL = 8, PER_ROW = 3;
 const maxW = Math.max(...DEV.map((d) => d.w));
 const cellW = Math.floor((TOTAL - 2 * PAD - (PER_ROW - 1) * GAP) / PER_ROW);
@@ -37,7 +37,7 @@ figcaption .sz{font-size:21px;color:#C9D6E0;font-weight:500}
 figcaption .mt{font-size:18px;color:#A9BCCB}
 .ltr{direction:ltr;unicode-bidi:isolate;font-variant-numeric:tabular-nums}
 </style></head><body>
-<header><h1>اختيار السيناريو (أ): على كل الآيفونات</h1><p>كل الأجهزة بنفس المقياس (${k.toFixed(3)} بكسل لكل نقطة) · أفقي</p></header>
+<header><h1>لعبة جديدة · 1 السيناريو: على كل الآيفونات</h1><p>كل الأجهزة بنفس المقياس (${k.toFixed(3)} بكسل لكل نقطة) · أفقي</p></header>
 <div class="grid">${cells}</div></body></html>`;
 
 fs.writeFileSync(path.join(__dirname, 'overview.html'), html);

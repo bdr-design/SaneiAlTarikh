@@ -1,4 +1,4 @@
-// Build overview.png (screen 3, page 2 B: country picker): every device at the same scale on #0b1218, 3 per row, ~2400 px wide.
+// Build overview.png (screen 3, page 2 B: country): every device at the same scale on #0b1218, 3 per row, ~2400 px wide.
 const { chromium } = require('playwright');
 const path = require('path');
 const fs = require('fs');
@@ -37,7 +37,7 @@ figcaption .sz{font-size:21px;color:#C9D6E0;font-weight:500}
 figcaption .mt{font-size:18px;color:#A9BCCB}
 .ltr{direction:ltr;unicode-bidi:isolate;font-variant-numeric:tabular-nums}
 </style></head><body>
-<header><h1>اختيار الدولة (ب): على كل الآيفونات</h1><p>كل الأجهزة بنفس المقياس (${k.toFixed(3)} بكسل لكل نقطة) · أفقي</p></header>
+<header><h1>لعبة جديدة · 2 الدولة: على كل الآيفونات</h1><p>كل الأجهزة بنفس المقياس (${k.toFixed(3)} بكسل لكل نقطة) · أفقي</p></header>
 <div class="grid">${cells}</div></body></html>`;
 
 fs.writeFileSync(path.join(__dirname, 'overview.html'), html);

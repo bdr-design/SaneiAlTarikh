@@ -63,8 +63,12 @@
     --g-note: var(--s2);        /* last choice -> note (at least) */
   }
   [data-fit="1"] { --gap-main: var(--s2); --card-pb: var(--s2); --g-head: var(--s2); }
-  [data-fit="2"] { --gap-main: var(--s2); --card-pb: var(--s2); --g-head: var(--s1); --g-note: var(--s1); }
-  [data-fit="3"] { --gap-main: var(--s2); --card-pb: var(--s1); --g-head: var(--s1); --g-note: var(--s1); }
+  /* fit 2 (no slack at all, SE): the card's top padding gives 4 pt to the list -> note gap, so the last row's
+     44 pt hit box (6 pt below the row) ends above the note instead of 2 pt into the amber warning */
+  [data-fit="2"] { --gap-main: var(--s2); --card-pb: var(--s2); --card-pt: var(--s1); --g-head: var(--s1); --g-note: var(--s2); }
+  /* ... and the list's hit boxes are nudged 2 pt down (house method: --hy toward free space), so the first row's box
+     starts at the bottom of the card title's line box instead of 2 pt into the title (4 pt above the row, 8 pt below) */
+  [data-fit="2"] .opt .list .tap { --hy: 2px; }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html, body { width: var(--w); height: var(--h); overflow: hidden; }
@@ -156,7 +160,7 @@
   /* ---------- Three option cards side by side ---------- */
   /* RTL: الوضع (start) | ذكاء الدول | divider | خيارات غير واقعية (end, set apart) */
   .cards { flex: 1 1 0; min-height: 0; display: grid; grid-template-columns: 1fr 1fr 1px 1fr; grid-template-rows: minmax(0, 1fr); column-gap: var(--s2); }
-  .opt { --r: var(--r-bar); min-width: 0; min-height: 0; display: flex; flex-direction: column; padding: var(--card-pb) var(--pad-bar); }
+  .opt { --r: var(--r-bar); min-width: 0; min-height: 0; display: flex; flex-direction: column; padding: var(--card-pt, var(--card-pb)) var(--pad-bar) var(--card-pb); }
   .divider { align-self: stretch; margin-block: var(--s3); width: 1px;
     background: linear-gradient(to bottom, rgba(169, 188, 203, 0), rgba(169, 188, 203, 0.30) 18%, rgba(169, 188, 203, 0.30) 82%, rgba(169, 188, 203, 0)); }
 
@@ -198,12 +202,18 @@
   .tg[aria-checked="true"] .sw::after { right: auto; left: 2px; background: var(--ink); }
   /* Short screens (set by fitLayout() only when five 44 pt rows cannot fit the card): the two "instant"
      switches share one row, so the unrealistic list has four rows like the other two cards and every
-     row still sits on the 44 pt pitch. A faint upright hairline keeps each switch with its own label. */
+     row still sits on the 44 pt pitch. Each half keeps its switch 8 pt from its own label (label + switch
+     packed together); the spare width sits in the middle of the row, split by a hairline that joins the
+     row hairlines above and below, so the row reads as two cells:
+     [بحث فوري + switch, at the card's left end, in the switch column] | [بناء فوري + switch, at the right]. */
   [data-pair="1"] .unreal .list { display: grid; grid-template-columns: auto auto; column-gap: var(--s3); row-gap: var(--s3); }
   [data-pair="1"] .unreal .tg { grid-column: 1 / -1; }
   [data-pair="1"] .unreal .tg.half { grid-column: auto; }
+  [data-pair="1"] .unreal .tg.half .sw { margin-inline-start: 0; }
+  [data-pair="1"] .unreal .tg.half + .tg.half { justify-content: flex-end; }                   /* RTL end = the card's left edge */
   [data-pair="1"] .unreal .tg.half + .tg.half::after { right: calc(-1 * var(--s3)); }          /* close the row hairline over the gap */
-  [data-pair="1"] .unreal .tg.half:not(.half + .half) .sw::before { content: ""; position: absolute; left: -8.5px; top: -1px; width: 1px; height: 20px; background: rgba(169, 188, 203, 0.14); }
+  /* cell divider in the middle of the 12 pt column gap, from the hairline above the row to the one below it */
+  [data-pair="1"] .unreal .tg.half:not(.half + .half) .lb::before { content: ""; position: absolute; left: -6.5px; top: -5.5px; width: 1px; height: 43px; background: rgba(169, 188, 203, 0.14); }
 
   /* the note at the foot of each card: aligned across the three cards */
   .note { margin-top: auto; flex: none; display: flex; align-items: flex-start; gap: var(--s1);
@@ -211,11 +221,12 @@
   .note svg.i { margin-block: -1px; }
   .note span { text-wrap: balance; }
   .note.warn { color: var(--amber); }
-  [data-fit="2"] .note, [data-fit="3"] .note { font-size: var(--fs-label); line-height: var(--lh-label); }
-  /* fit 2 also steps the cards' side padding down to 8 pt (as their top/bottom padding), so the AI note
-     "الصعوبة تغيّر ذكاء القرارات فقط، بدون غش." stays on one line on SE instead of wrapping */
-  [data-fit="2"] .opt, [data-fit="3"] .opt { padding-inline: var(--s2); }
-  [data-fit="2"] .note svg.i, [data-fit="3"] .note svg.i { margin-block: -2px; }
+  [data-narrow="1"] .note { font-size: var(--fs-label); line-height: var(--lh-label); }
+  /* narrow (always with fit 2, and with fit 0/1 when a card is too narrow for its note): the notes use the
+     10 pt label size and the cards' side padding steps down to 8 pt, so the AI note
+     "الصعوبة تغيّر ذكاء القرارات فقط، بدون غش." stays on one line (SE, 13 mini) instead of wrapping */
+  [data-narrow="1"] .opt { padding-inline: var(--s2); }
+  [data-narrow="1"] .note svg.i { margin-block: -2px; }
 
   /* ---------- Bottom row: the summary bar + the primary action at the RTL end ---------- */
   .foot { flex: none; height: var(--big); display: flex; align-items: stretch; gap: var(--s3); }
@@ -385,21 +396,31 @@
       return Object.keys(tops).length <= 1;
     });
   }
-  /* Step the page rhythm down (12 -> 8 -> 4) only as far as the 44 pt row pitch needs, measured on the
-     safe area (no device names). When five 44 pt rows cannot fit the card even at the tightest rhythm,
-     the two "instant" switches share a row (data-pair) and the rhythm is stepped down again from 12.
-     Forced from the URL for review only: &fit=0..3&pair=0|1. */
+  /* No card content wider than its card (the paired switch row needs about 200 pt). */
+  function noSideOverflow(cards) {
+    return cards.every(function (c) {
+      return Array.prototype.every.call(c.querySelectorAll('.oh, .list, .note'), function (e) { return e.scrollWidth <= e.clientWidth + 0.5; });
+    });
+  }
+  /* Fit the cards to the safe area, measured (no device names), in this order of preference:
+     five toggle rows at rhythm 12, then 8; then the paired "instant" row (data-pair) at rhythm 12, then 8
+     (only where the card is wide enough for the pair); then five rows at the tightest rhythm (fit 2: 8/4),
+     then the pair at fit 2. Each step first keeps the 11.5 pt notes and 12 pt card sides, then tries the
+     narrow notes (fit 2 is always narrow). Forced from the URL for review only: &pair=0|1&fit=0..2&narrow=0|1. */
   function fitLayout() {
     var root = document.documentElement, cards = Array.prototype.slice.call(document.querySelectorAll('.opt'));
     var q = new URLSearchParams(location.search), seq = [];
-    [0, 1].forEach(function (pr) { [0, 1, 2].forEach(function (lv) { seq.push([pr, lv]); }); });
-    if (q.get('fit') !== null) seq = [[+(q.get('pair') || 0), +q.get('fit')]];
+    [[0, 0], [0, 1], [1, 0], [1, 1], [0, 2], [1, 2]].forEach(function (pl) {
+      (pl[1] === 2 ? [1] : [0, 1]).forEach(function (nw) { seq.push([pl[0], pl[1], nw]); });
+    });
+    if (q.get('fit') !== null) seq = [[+(q.get('pair') || 0), +q.get('fit'), +(q.get('narrow') || (q.get('fit') === '2' ? 1 : 0))]];
     var k, worst;
     for (k = 0; k < seq.length; k++) {
       root.dataset.pair = String(seq[k][0]);
       root.dataset.fit = String(seq[k][1]);
+      root.dataset.narrow = String(seq[k][2]);
       worst = Math.max.apply(null, cards.map(function (c) { return need(c) - c.getBoundingClientRect().height; }));
-      if (worst <= 0.01 && notesOneLine()) break;
+      if (worst <= 0.01 && notesOneLine() && noSideOverflow(cards)) break;
     }
     var lv = +root.dataset.fit;
     /* summary bar: the extra "no unrealistic options" text only when it fits with 12 pt to spare */
@@ -407,7 +428,7 @@
     var sum = document.querySelector('.sum'), sl = sum.querySelector('.sl'), x = sum.querySelector('.x');
     var used = sum.querySelector('.flag').getBoundingClientRect().width + sl.getBoundingClientRect().width + x.getBoundingClientRect().width + 2 * 12 + 2 * 12 + 2;
     if (used > sum.getBoundingClientRect().width - 12) root.dataset.sumx = '0';
-    window.__fit = { level: lv, pair: +root.dataset.pair, slack: -worst, sumx: +root.dataset.sumx };
+    window.__fit = { level: lv, narrow: +root.dataset.narrow, pair: +root.dataset.pair, slack: -worst, sumx: +root.dataset.sumx };
   }
 
   /* Frosted glass for the mockup render (as screen1/screen2) */
