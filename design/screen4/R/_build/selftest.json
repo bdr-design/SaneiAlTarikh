@@ -1,0 +1,281 @@
+{
+ "ranAt": "2026-10-20T14:45:29.050Z",
+ "cleanIssues": {
+  "i16promax": [],
+  "i16promax_govern": [],
+  "i16promax_govern_end": [],
+  "se": [],
+  "se_govern": [],
+  "se_govern_end": []
+ },
+ "results": [
+  {
+   "name": "type size",
+   "ok": true,
+   "sample": [
+    "font size 17 for \"القاهرة\""
+   ]
+  },
+  {
+   "name": "18 pt misuse",
+   "ok": true,
+   "sample": [
+    "18 pt is for the province name and the headline numbers only: \"مصر\"",
+    "18 pt is for the province name and the headline numbers only: \"·\"",
+    "18 pt is for the province name and the headline numbers only: \"محافظة\""
+   ]
+  },
+  {
+   "name": "font weight",
+   "ok": true,
+   "sample": [
+    "font weight 13/700 for \"توسعة شبكة الكهرباء\"",
+    "font weight 13/700 for \"دعم الخدمات الأساسية\""
+   ]
+  },
+  {
+   "name": "off-token colour",
+   "ok": true,
+   "sample": [
+    "text colour off-token rgb(136, 153, 170): \"السيادة\"",
+    "text colour off-token rgb(136, 153, 170): \"الإدارة\"",
+    "text colour off-token rgb(136, 153, 170): \"السيطرة\""
+   ]
+  },
+  {
+   "name": "control height",
+   "ok": true,
+   "sample": [
+    "control height 46.00 for .r-act (want 44): توسعة شبكة الكهرباء0.8 ملي",
+    "control height 46.00 for .r-act (want 44): دعم الخدمات الأساسية0.3 مل",
+    "overview needs scrolling: 4.0 pt (fit level 0)"
+   ]
+  },
+  {
+   "name": "radius",
+   "ok": true,
+   "sample": [
+    "radius 8 for .r-act (want 10)",
+    "radius 8 for .r-act (want 10)"
+   ]
+  },
+  {
+   "name": "gap",
+   "ok": true,
+   "sample": [
+    "gap 10 on توسعة شبكة الكهرباء0.8 ملي",
+    "gap 10 on توسعة شبكة الكهرباء0.8 ملي",
+    "gap 10 on دعم الخدمات الأساسية0.3 مل"
+   ]
+  },
+  {
+   "name": "icon size",
+   "ok": true,
+   "sample": [
+    "icon size 19x19 (want 17): i",
+    "icon size 19x19 (want 17): i"
+   ]
+  },
+  {
+   "name": "hit overlap",
+   "ok": true,
+   "sample": [
+    "hit overlap دعم الخدمات الأساسية0.3 مل / تفاصيل المحافظة"
+   ]
+  },
+  {
+   "name": "side inset",
+   "ok": true,
+   "sample": [
+    "text in side inset: 8.8",
+    "text in side inset: +14",
+    "text in side inset: لماذا؟"
+   ]
+  },
+  {
+   "name": "clipped text",
+   "ok": true,
+   "sample": [
+    "clipped text (sides): \"حكومة مصر\" 509..568.2 y 207.5..226.5",
+    "text outside the sheet's 12 pt padding: \"حكومة مصر\"",
+    "clipped text (sides): \"لا توجد\" 509..544.91 y 236..255"
+   ]
+  },
+  {
+   "name": "text overlap",
+   "ok": true,
+   "sample": [
+    "text overlap \"القاهرة\" / \"العاصمة\"",
+    "icon over text: i / \"القاهرة\"",
+    "contrast 1.45 for \"القاهرة\""
+   ]
+  },
+  {
+   "name": "icon over text",
+   "ok": true,
+   "sample": [
+    "text outside the sheet's 12 pt padding: \"السكان\"",
+    "icon over text: i / \"السكان\"",
+    "icon over text: i r-amber / \"الاضطرابات\""
+   ]
+  },
+  {
+   "name": "panel not opaque",
+   "ok": true,
+   "sample": [
+    "panel not opaque: المحافظة: القاهرة rgba(9, 17, 25, 0.66)",
+    "contrast 4.36 for \"ألف شهريًا\"",
+    "contrast 4.41 for \"لماذا؟\""
+   ]
+  },
+  {
+   "name": "Cairo covered",
+   "ok": true,
+   "sample": [
+    "Cairo highlight covered by panel المحافظة: القاهرة",
+    "selection ring covered by panel المحافظة: القاهرة",
+    "name pill covered by panel المحافظة: القاهرة"
+   ]
+  },
+  {
+   "name": "sheet width",
+   "ok": true,
+   "sample": [
+    "sheet width 330 (want round(clamp(43% of 832, 340, 380)), or the room the dock leaves if 330..: 358)"
+   ]
+  },
+  {
+   "name": "top row covered",
+   "ok": true,
+   "sample": [
+    "hit overlap الخزينة 36.0 مليار $ / إغلاق",
+    "hit overlap الاستقرار 58% / إغلاق",
+    "panel overlap الدولة: مصر، حسني مبارك، ج / المحافظة: القاهرة"
+   ]
+  },
+  {
+   "name": "dock hidden although it fits",
+   "ok": true,
+   "sample": [
+    "dock hidden although it fits left of the sheet"
+   ]
+  },
+  {
+   "name": "dock not moved left",
+   "ok": true,
+   "sample": [
+    "hit overlap الدولة / تفاصيل المحافظة",
+    "hit overlap الاقتصاد / تفاصيل المحافظة",
+    "hit overlap الداخلية والسياسة / تفاصيل المحافظة"
+   ]
+  },
+  {
+   "name": "dock hit box in the side inset",
+   "ok": true,
+   "sample": [
+    "tap in side inset: المزيد",
+    "dock not 4 pt in from the left end of its B3 line: x 62.0 w 387.0 y 374.0 (want x 66 w 387.0 y 374.0)"
+   ]
+  },
+  {
+   "name": "radio hit boxes touch the links",
+   "ok": true,
+   "sample": [
+    "hit overlap مخفض / الإنشاءات والمرافق",
+    "hit overlap متوازن / الإنشاءات والمرافق",
+    "hit overlap متوازن / تخطيط التوسعة"
+   ]
+  },
+  {
+   "name": "dock shown on the SE",
+   "ok": true,
+   "sample": [
+    "icon over text: i r-chev / \"الجيش\"",
+    "hit overlap الدولة / تفاصيل المحافظة",
+    "hit overlap الاقتصاد / تفاصيل المحافظة"
+   ]
+  },
+  {
+   "name": "left stack moved",
+   "ok": true,
+   "sample": [
+    "HUD element moved from its B3 position: .toast x 70.0..275.6 y 56.0..88.0",
+    "HUD element moved from its B3 position: .btn.mode x 70.0..191.6 y 96.0..128.0",
+    "HUD element moved from its B3 position: .btn.home x 70.0..141.5 y 136.0..168.0"
+   ]
+  },
+  {
+   "name": "overview scrolls",
+   "ok": true,
+   "sample": [
+    "control cut by its scroll area (bottom): تفاصيل المحافظة",
+    "hit box shaved by the scroll area: تفاصيل المحافظة",
+    "overview needs scrolling: 37.0 pt (fit level 4)"
+   ]
+  },
+  {
+   "name": "fades wrong",
+   "ok": true,
+   "sample": [
+    "fades 0/0 do not match the scroll state (top 0, over 143.0)"
+   ]
+  },
+  {
+   "name": "cut at a hard edge",
+   "ok": true,
+   "sample": [
+    "control cut by its scroll area (bottom): إدارة القوات",
+    "hit box shaved by the scroll area: إدارة القوات",
+    "fades 0/0 do not match the scroll state (top 0, over 182.0)"
+   ]
+  },
+  {
+   "name": "% before its number",
+   "ok": true,
+   "sample": [
+    "% shown before its number: \"الحكومة · 100%\""
+   ]
+  },
+  {
+   "name": "brief text",
+   "ok": true,
+   "sample": [
+    "brief text not fully visible: لماذا؟",
+    "brief text missing: لماذا؟"
+   ]
+  },
+  {
+   "name": "map label cut",
+   "ok": true,
+   "sample": [
+    "map label العراق cut by a panel edge",
+    "map label الأردن cut by a panel edge",
+    "map city dot 4 cut by a panel edge"
+   ]
+  },
+  {
+   "name": "contrast",
+   "ok": true,
+   "sample": [
+    "text colour off-token rgb(70, 83, 94): \"السيادة\"",
+    "text colour off-token rgb(70, 83, 94): \"الإدارة\"",
+    "text colour off-token rgb(70, 83, 94): \"السيطرة\""
+   ]
+  },
+  {
+   "name": "RTL order",
+   "ok": true,
+   "sample": [
+    "action row 1: order must be tile, text, chip (right to left)",
+    "action row 2: order must be tile, text, chip (right to left)"
+   ]
+  },
+  {
+   "name": "two tabs selected",
+   "ok": true,
+   "sample": [
+    "exactly one tab must be selected"
+   ]
+  }
+ ]
+}
