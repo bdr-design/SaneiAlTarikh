@@ -311,15 +311,18 @@ async function measure(p, d, b3) {
     const me = q('.map').getBoundingClientRect();
     if (me.left > 0.5 || me.top > 0.5 || me.right < W - 0.5 || me.bottom < H - 0.5) issues.push('map not full-bleed');
     if (getComputedStyle(q('#cairo')).stroke !== 'rgb(127, 245, 234)') issues.push('Cairo outline colour');
-    // map labels: each one fully visible or fully under a panel, never cut by a panel edge (2 pt margin, halo included)
+    // map labels and city dots: each fully visible or fully under a panel, never cut by a panel edge (2 pt margin,
+    // halo included), and no city dot shown without its name
     const hiddenLabels = [];
-    document.querySelectorAll('.labels text').forEach((t) => {
-      if (!t.getClientRects().length) { hiddenLabels.push(t.textContent); return; }
+    document.querySelectorAll('.labels text, .labels circle').forEach((t) => {
+      const what = t.tagName === 'text' ? `label ${t.textContent}` : `city dot ${t.getAttribute('data-city')}`;
+      if (!t.getClientRects().length) { if (t.tagName === 'text') hiddenLabels.push(t.textContent); return; }
+      if (t.tagName === 'circle' && !document.querySelector(`.labels text[data-city="${t.getAttribute('data-city')}"]`).getClientRects().length) issues.push(`map city dot shown without its name: ${t.getAttribute('data-city')}`);
       const r = t.getBoundingClientRect(), sw = parseFloat(t.getAttribute('stroke-width') || 0) / 2 * m.s;
       const b = { x0: r.left - sw - 2, y0: r.top - sw - 2, x1: r.right + sw + 2, y1: r.bottom + sw + 2 };
       if (b.x1 <= 0 || b.x0 >= W || b.y1 <= 0 || b.y0 >= H) return;
       const under = prs.some((o) => r.left - sw >= o.r.x0 && r.right + sw <= o.r.x1 && r.top - sw >= o.r.y0 && r.bottom + sw <= o.r.y1);
-      if (!under && prs.some((o) => inter(b, o.r))) issues.push(`map label cut by a panel edge: ${t.textContent}`);
+      if (!under && prs.some((o) => inter(b, o.r))) issues.push(`map ${what} cut by a panel edge`);
     });
 
     return { issues, typeSeen, texts, fit: { top: window.__fit, status: window.__status, sheet: window.__sheetfit, sheetPos: window.__sheetpos }, map: m, hiddenLabels, cairo: R(cairo),
@@ -408,7 +411,8 @@ async function selftest(b) {
     ['off-token colour', '.kv .k { color: #8899aa !important; }', /text colour off-token/],
     ['off-token #A2B6C6', '.kv .k { color: #A2B6C6 !important; }', /text colour off-token rgb\(162, 182, 198\)/],
     ['% before its number', '', /% shown before its number/, () => { document.querySelectorAll('.sf dd')[2].textContent = 'الحكومة · 100%'; }],
-    ['map label cut', '.labels text.cut { display: inline !important; }', /map label cut by a panel edge/],
+    ['map label cut', '.labels .cut { display: inline !important; }', /map (label|city dot) .* cut by a panel edge/],
+    ['city dot without its name', '', /map city dot shown without its name/, () => { const t = [...document.querySelectorAll('.labels text[data-city]')].find((e) => e.getClientRects().length); t.style.display = 'none'; }],
   ];
   const results = [];
   for (const [name, css, re, js] of cases) {

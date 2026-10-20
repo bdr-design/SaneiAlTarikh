@@ -566,6 +566,32 @@
         </button>
       </div>
 
+      <!-- actions: the compact card shows the first; the sheet shows all three. Each row shows its cost and an
+           effect preview; tapping it opens the confirmation. -->
+      <section class="sec" id="pv-actions" aria-labelledby="h-act">
+        <h3 class="sh x-only" id="h-act"><svg class="i"><use href="#i-bolt"/></svg>الإجراءات</h3>
+        <div class="acts">
+          <button class="act tap">
+            <svg class="i"><use href="#i-road"/></svg>
+            <span class="at"><span class="an">مشروع بنية تحتية</span><span class="ac">0.8 مليار $<span class="dot"> · </span>24 شهرًا</span></span>
+            <span class="ef"><span class="eff good"><svg class="trend"><use href="#t-up"/></svg><span class="ltr">+1</span> بنية تحتية</span></span>
+            <svg class="i go"><use href="#i-chev-fwd"/></svg>
+          </button>
+          <button class="act tap x-only">
+            <svg class="i"><use href="#i-care"/></svg>
+            <span class="at"><span class="an">دعم الخدمات</span><span class="ac">0.3 مليار $</span></span>
+            <span class="ef"><span class="eff good"><svg class="trend"><use href="#t-down"/></svg><span class="ltr">−5</span> اضطراب</span></span>
+            <svg class="i go"><use href="#i-chev-fwd"/></svg>
+          </button>
+          <button class="act tap x-only">
+            <svg class="i"><use href="#i-shield"/></svg>
+            <span class="at"><span class="an">تعزيز الأمن</span><span class="ac">0.2 مليار $ / سنة</span></span>
+            <span class="ef"><span class="eff good"><svg class="trend"><use href="#t-down"/></svg><span class="ltr">−8</span> اضطراب</span><span class="eff bad"><svg class="trend"><use href="#t-down"/></svg><span class="ltr">−3</span> شرعية</span></span>
+            <svg class="i go"><use href="#i-chev-fwd"/></svg>
+          </button>
+        </div>
+      </section>
+
       <!-- expanded: details, four groups -->
       <section class="sec x-only" id="pv-details" aria-label="التفاصيل">
         <div class="groups">
@@ -592,32 +618,6 @@
             <div><span class="k">القوات الموجودة</span><span class="v">أمن داخلي<span class="dot"> · </span>فرقة واحدة</span></div>
             <div><span class="k">السيطرة</span><span class="v"><span class="ltr">100%</span></span></div>
           </section>
-        </div>
-      </section>
-
-      <!-- actions: the compact card shows the first; the sheet shows all three. Each row shows its cost and an
-           effect preview; tapping it opens the confirmation. -->
-      <section class="sec" id="pv-actions" aria-labelledby="h-act">
-        <h3 class="sh x-only" id="h-act"><svg class="i"><use href="#i-bolt"/></svg>الإجراءات</h3>
-        <div class="acts">
-          <button class="act tap">
-            <svg class="i"><use href="#i-road"/></svg>
-            <span class="at"><span class="an">مشروع بنية تحتية</span><span class="ac">0.8 مليار $<span class="dot"> · </span>24 شهرًا</span></span>
-            <span class="ef"><span class="eff good"><svg class="trend"><use href="#t-up"/></svg><span class="ltr">+1</span> بنية تحتية</span></span>
-            <svg class="i go"><use href="#i-chev-fwd"/></svg>
-          </button>
-          <button class="act tap x-only">
-            <svg class="i"><use href="#i-care"/></svg>
-            <span class="at"><span class="an">دعم الخدمات</span><span class="ac">0.3 مليار $</span></span>
-            <span class="ef"><span class="eff good"><svg class="trend"><use href="#t-down"/></svg><span class="ltr">−5</span> اضطراب</span></span>
-            <svg class="i go"><use href="#i-chev-fwd"/></svg>
-          </button>
-          <button class="act tap x-only">
-            <svg class="i"><use href="#i-shield"/></svg>
-            <span class="at"><span class="an">تعزيز الأمن</span><span class="ac">0.2 مليار $ / سنة</span></span>
-            <span class="ef"><span class="eff good"><svg class="trend"><use href="#t-down"/></svg><span class="ltr">−8</span> اضطراب</span><span class="eff bad"><svg class="trend"><use href="#t-down"/></svg><span class="ltr">−3</span> شرعية</span></span>
-            <svg class="i go"><use href="#i-chev-fwd"/></svg>
-          </button>
         </div>
       </section>
     </div>

@@ -383,10 +383,10 @@
   .sbar { display: none; position: absolute; left: 4px; width: 3px; border-radius: 1.5px; background: rgba(169, 188, 203, 0.55); pointer-events: none; }
   [data-actscroll="1"] .sbar { display: block; }
 
-  /* map labels: drawn left-to-right exactly as inside the overlay image; a label a panel edge would slice
-     is hidden (placeMap), so every label on screen is either whole or fully under a panel */
+  /* map labels and city dots: drawn left-to-right exactly as inside the overlay image; a label (or a city's
+     dot and name) that a panel edge would slice is hidden (placeMap), so each is whole or fully under a panel */
   .map svg.labels { position: absolute; inset: 0; width: 100%; height: 100%; direction: ltr; }
-  .labels text.cut { display: none; }
+  .labels .cut { display: none; }
 
   /* the tapped province on the map: teal outline like the player's country, tighter */
   .map svg.sel { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
@@ -460,17 +460,28 @@
     <text x="252" y="54" font-family="-apple-system, 'SF Arabic', 'Geeza Pro', 'Noto Sans Arabic', sans-serif" font-size="28" font-weight="700" fill="#FFFFFF" stroke="#0B1218" stroke-width="5" stroke-opacity="0.75" paint-order="stroke" text-anchor="middle">إيطاليا</text>
     <text x="1262" y="501" font-family="-apple-system, 'SF Arabic', 'Geeza Pro', 'Noto Sans Arabic', sans-serif" font-size="28" font-weight="700" fill="#FFFFFF" stroke="#0B1218" stroke-width="5" stroke-opacity="0.75" paint-order="stroke" text-anchor="middle">الكويت</text>
     <text x="1368" y="628" font-family="-apple-system, 'SF Arabic', 'Geeza Pro', 'Noto Sans Arabic', sans-serif" font-size="28" font-weight="700" fill="#FFFFFF" stroke="#0B1218" stroke-width="5" stroke-opacity="0.75" paint-order="stroke" text-anchor="middle">قطر</text>
-    <text x="767" y="484" font-family="-apple-system, 'SF Arabic', 'Geeza Pro', 'Noto Sans Arabic', sans-serif" font-size="21" font-weight="600" fill="#FFFFFF" stroke="#0B1218" stroke-width="4" stroke-opacity="0.7" paint-order="stroke" text-anchor="start" direction="rtl">القاهرة</text>
-    <text x="728" y="446" font-family="-apple-system, 'SF Arabic', 'Geeza Pro', 'Noto Sans Arabic', sans-serif" font-size="21" font-weight="600" fill="#FFFFFF" stroke="#0B1218" stroke-width="4" stroke-opacity="0.7" paint-order="stroke" text-anchor="start">الإسكندرية</text>
-    <text x="816" y="673" font-family="-apple-system, 'SF Arabic', 'Geeza Pro', 'Noto Sans Arabic', sans-serif" font-size="21" font-weight="600" fill="#FFFFFF" stroke="#0B1218" stroke-width="4" stroke-opacity="0.7" paint-order="stroke" text-anchor="start">أسوان</text>
-    <text x="233" y="391" font-family="-apple-system, 'SF Arabic', 'Geeza Pro', 'Noto Sans Arabic', sans-serif" font-size="21" font-weight="600" fill="#FFFFFF" stroke="#0B1218" stroke-width="4" stroke-opacity="0.7" paint-order="stroke" text-anchor="start">طرابلس</text>
-    <text x="436" y="416" font-family="-apple-system, 'SF Arabic', 'Geeza Pro', 'Noto Sans Arabic', sans-serif" font-size="21" font-weight="600" fill="#FFFFFF" stroke="#0B1218" stroke-width="4" stroke-opacity="0.7" paint-order="stroke" text-anchor="start">بنغازي</text>
-    <text x="805" y="935" font-family="-apple-system, 'SF Arabic', 'Geeza Pro', 'Noto Sans Arabic', sans-serif" font-size="21" font-weight="600" fill="#FFFFFF" stroke="#0B1218" stroke-width="4" stroke-opacity="0.7" paint-order="stroke" text-anchor="start">الخرطوم</text>
-    <text x="1225" y="655" font-family="-apple-system, 'SF Arabic', 'Geeza Pro', 'Noto Sans Arabic', sans-serif" font-size="21" font-weight="600" fill="#FFFFFF" stroke="#0B1218" stroke-width="4" stroke-opacity="0.7" paint-order="stroke" text-anchor="start">الرياض</text>
-    <text x="1156" y="377" font-family="-apple-system, 'SF Arabic', 'Geeza Pro', 'Noto Sans Arabic', sans-serif" font-size="21" font-weight="600" fill="#FFFFFF" stroke="#0B1218" stroke-width="4" stroke-opacity="0.7" paint-order="stroke" text-anchor="start">بغداد</text>
-    <text x="1151" y="943" font-family="-apple-system, 'SF Arabic', 'Geeza Pro', 'Noto Sans Arabic', sans-serif" font-size="21" font-weight="600" fill="#FFFFFF" stroke="#0B1218" stroke-width="4" stroke-opacity="0.7" paint-order="stroke" text-anchor="start">صنعاء</text>
-    <text x="815" y="152" font-family="-apple-system, 'SF Arabic', 'Geeza Pro', 'Noto Sans Arabic', sans-serif" font-size="21" font-weight="600" fill="#FFFFFF" stroke="#0B1218" stroke-width="4" stroke-opacity="0.7" paint-order="stroke" text-anchor="start">أنقرة</text>
-    <text x="1364" y="297" font-family="-apple-system, 'SF Arabic', 'Geeza Pro', 'Noto Sans Arabic', sans-serif" font-size="21" font-weight="600" fill="#FFFFFF" stroke="#0B1218" stroke-width="4" stroke-opacity="0.7" paint-order="stroke" text-anchor="start">طهران</text>
+    <circle data-city="0" cx="777" cy="477" r="5" fill="#FFFFFF" stroke="#0B1218" stroke-width="2"/>
+    <text data-city="0" x="767" y="484" font-family="-apple-system, 'SF Arabic', 'Geeza Pro', 'Noto Sans Arabic', sans-serif" font-size="21" font-weight="600" fill="#FFFFFF" stroke="#0B1218" stroke-width="4" stroke-opacity="0.7" paint-order="stroke" text-anchor="start" direction="rtl">القاهرة</text>
+    <circle data-city="1" cx="738" cy="439" r="5" fill="#FFFFFF" stroke="#0B1218" stroke-width="2"/>
+    <text data-city="1" x="728" y="446" font-family="-apple-system, 'SF Arabic', 'Geeza Pro', 'Noto Sans Arabic', sans-serif" font-size="21" font-weight="600" fill="#FFFFFF" stroke="#0B1218" stroke-width="4" stroke-opacity="0.7" paint-order="stroke" text-anchor="start">الإسكندرية</text>
+    <circle data-city="2" cx="826" cy="666" r="5" fill="#FFFFFF" stroke="#0B1218" stroke-width="2"/>
+    <text data-city="2" x="816" y="673" font-family="-apple-system, 'SF Arabic', 'Geeza Pro', 'Noto Sans Arabic', sans-serif" font-size="21" font-weight="600" fill="#FFFFFF" stroke="#0B1218" stroke-width="4" stroke-opacity="0.7" paint-order="stroke" text-anchor="start">أسوان</text>
+    <circle data-city="3" cx="243" cy="384" r="5" fill="#FFFFFF" stroke="#0B1218" stroke-width="2"/>
+    <text data-city="3" x="233" y="391" font-family="-apple-system, 'SF Arabic', 'Geeza Pro', 'Noto Sans Arabic', sans-serif" font-size="21" font-weight="600" fill="#FFFFFF" stroke="#0B1218" stroke-width="4" stroke-opacity="0.7" paint-order="stroke" text-anchor="start">طرابلس</text>
+    <circle data-city="4" cx="446" cy="409" r="5" fill="#FFFFFF" stroke="#0B1218" stroke-width="2"/>
+    <text data-city="4" x="436" y="416" font-family="-apple-system, 'SF Arabic', 'Geeza Pro', 'Noto Sans Arabic', sans-serif" font-size="21" font-weight="600" fill="#FFFFFF" stroke="#0B1218" stroke-width="4" stroke-opacity="0.7" paint-order="stroke" text-anchor="start">بنغازي</text>
+    <circle data-city="5" cx="815" cy="928" r="5" fill="#FFFFFF" stroke="#0B1218" stroke-width="2"/>
+    <text data-city="5" x="805" y="935" font-family="-apple-system, 'SF Arabic', 'Geeza Pro', 'Noto Sans Arabic', sans-serif" font-size="21" font-weight="600" fill="#FFFFFF" stroke="#0B1218" stroke-width="4" stroke-opacity="0.7" paint-order="stroke" text-anchor="start">الخرطوم</text>
+    <circle data-city="6" cx="1235" cy="648" r="5" fill="#FFFFFF" stroke="#0B1218" stroke-width="2"/>
+    <text data-city="6" x="1225" y="655" font-family="-apple-system, 'SF Arabic', 'Geeza Pro', 'Noto Sans Arabic', sans-serif" font-size="21" font-weight="600" fill="#FFFFFF" stroke="#0B1218" stroke-width="4" stroke-opacity="0.7" paint-order="stroke" text-anchor="start">الرياض</text>
+    <circle data-city="7" cx="1166" cy="370" r="5" fill="#FFFFFF" stroke="#0B1218" stroke-width="2"/>
+    <text data-city="7" x="1156" y="377" font-family="-apple-system, 'SF Arabic', 'Geeza Pro', 'Noto Sans Arabic', sans-serif" font-size="21" font-weight="600" fill="#FFFFFF" stroke="#0B1218" stroke-width="4" stroke-opacity="0.7" paint-order="stroke" text-anchor="start">بغداد</text>
+    <circle data-city="8" cx="1161" cy="936" r="5" fill="#FFFFFF" stroke="#0B1218" stroke-width="2"/>
+    <text data-city="8" x="1151" y="943" font-family="-apple-system, 'SF Arabic', 'Geeza Pro', 'Noto Sans Arabic', sans-serif" font-size="21" font-weight="600" fill="#FFFFFF" stroke="#0B1218" stroke-width="4" stroke-opacity="0.7" paint-order="stroke" text-anchor="start">صنعاء</text>
+    <circle data-city="9" cx="825" cy="145" r="5" fill="#FFFFFF" stroke="#0B1218" stroke-width="2"/>
+    <text data-city="9" x="815" y="152" font-family="-apple-system, 'SF Arabic', 'Geeza Pro', 'Noto Sans Arabic', sans-serif" font-size="21" font-weight="600" fill="#FFFFFF" stroke="#0B1218" stroke-width="4" stroke-opacity="0.7" paint-order="stroke" text-anchor="start">أنقرة</text>
+    <circle data-city="10" cx="1374" cy="290" r="5" fill="#FFFFFF" stroke="#0B1218" stroke-width="2"/>
+    <text data-city="10" x="1364" y="297" font-family="-apple-system, 'SF Arabic', 'Geeza Pro', 'Noto Sans Arabic', sans-serif" font-size="21" font-weight="600" fill="#FFFFFF" stroke="#0B1218" stroke-width="4" stroke-opacity="0.7" paint-order="stroke" text-anchor="start">طهران</text>
   </svg>
   <!-- /map labels -->
   <!-- the tapped province: Cairo Governorate (same 1688 x 1097 space as the overlay) -->
@@ -754,7 +765,8 @@
      of the sheet, clear of every panel (and its hit boxes), near the middle of that area. The largest
      zoom (0.8 to 1.3 x the play screen's) that keeps all of Egypt clear wins. Within that zoom a place that
      slices fewer map labels with a panel edge is preferred (one label is worth about 45 pt of distance),
-     and any label still sliced is then hidden, so no label is ever shown cut in two. */
+     and any label still sliced is then hidden (a city's dot and name as one unit), so no label or dot is
+     ever shown cut in two, and no dot without its name. */
   function placeMap() {
     var d = window.__dev, W = d.W, H = d.H;
     var s0 = 0.63 * H / 390, MW0 = 1688, MH0 = 1097;
@@ -768,10 +780,15 @@
     var dk = $('.dock').getClientRects().length ? $('.dock').getBoundingClientRect() : null;
     var tx = (hud.left + sh.left) / 2, ty = (top.bottom + (dk ? dk.top : hud.bottom)) / 2;
     var safe = { x0: Math.max(d.SIDE, 0), x1: W - Math.max(d.SIDE, 0), y0: 0, y1: H - d.BOTTOM };
-    /* label boxes in map space (glyph box plus half the halo stroke) */
-    var texts = Array.prototype.slice.call(document.querySelectorAll('.labels text'));
-    texts.forEach(function (t) { t.classList.remove('cut'); });
-    var LB = texts.map(function (t) { var bb = t.getBBox(), sw = parseFloat(t.getAttribute('stroke-width') || 0) / 2; return [bb.x - sw, bb.y - sw, bb.x + bb.width + sw, bb.y + bb.height + sw]; });
+    /* label units (a country name, or a city's dot + name) and their boxes in map space (halo stroke included) */
+    var units = Array.prototype.map.call(document.querySelectorAll('.labels text'), function (t) {
+      var k = t.getAttribute('data-city');
+      return k === null ? [t] : [t, document.querySelector('.labels circle[data-city="' + k + '"]')];
+    });
+    units.forEach(function (u) { u.forEach(function (e) { e.classList.remove('cut'); }); });
+    function hw(e) { return parseFloat(e.getAttribute('stroke-width') || 0) / 2; }
+    function union(rs) { return rs.reduce(function (a, r) { return [Math.min(a[0], r[0]), Math.min(a[1], r[1]), Math.max(a[2], r[2]), Math.max(a[3], r[3])]; }); }
+    var LB = units.map(function (u) { return union(u.map(function (e) { var bb = e.getBBox(), w = hw(e); return [bb.x - w, bb.y - w, bb.x + bb.width + w, bb.y + bb.height + w]; })); });
     function clear(r) {
       if (r.x0 < safe.x0 || r.x1 > safe.x1 || r.y0 < safe.y0 || r.y1 > safe.y1) return false;
       return !obs.some(function (o) { return !(r.x1 <= o.left || r.x0 >= o.right || r.y1 <= o.top || r.y0 >= o.bottom); });
@@ -816,10 +833,12 @@
     root.setProperty('--map-s', String(s));
     root.setProperty('--map-cx', cx + 'px');
     root.setProperty('--map-cy', cy + 'px');
-    /* hide what is still cut, measured on the rendered labels */
+    /* hide what is still cut, measured on the rendered labels and dots */
     var hidden = [];
-    texts.forEach(function (t) { var r = t.getBoundingClientRect(), sw = parseFloat(t.getAttribute('stroke-width') || 0) / 2 * s;
-      if (cutBox(r.left - sw, r.top - sw, r.right + sw, r.bottom + sw)) { t.classList.add('cut'); hidden.push(t.textContent); } });
+    units.forEach(function (u) {
+      var b = union(u.map(function (e) { var r = e.getBoundingClientRect(), w = hw(e) * s; return [r.left - w, r.top - w, r.right + w, r.bottom + w]; }));
+      if (cutBox(b[0], b[1], b[2], b[3])) { u.forEach(function (e) { e.classList.add('cut'); }); hidden.push(u[0].textContent); }
+    });
     function scr(B) { return { x0: cx + (B.x0 - EG.cx) * s, x1: cx + (B.x1 - EG.cx) * s, y0: cy + (B.y0 - EG.cy) * s, y1: cy + (B.y1 - EG.cy) * s }; }
     window.__map = { ok: !!pick.b, egyptClear: pick.egypt, s: s, zoom: +pick.z.toFixed(2), cx: cx, cy: cy, target: [tx, ty], egypt: scr(EG), delta: scr(DELTA), hiddenLabels: hidden };
   }

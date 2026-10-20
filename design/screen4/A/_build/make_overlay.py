@@ -4,10 +4,12 @@
    which is the right-to-left placement (label to the west of the dot). Rendered left-to-right, the
    label «القاهرة» lands on top of the Cairo governorate itself and would hide the selection outline.
    Here only that label gets direction="rtl", so it sits west of its dot as intended.
-2. The 32 map labels move out of the overlay image into an inline SVG layer in ../index.html (same
-   1688 x 1097 space, same elements, same order, drawn right above the overlay), so the page can hide
-   a label that a panel edge would slice in two (placeMap() in index.html). Every shape stays in
-   ../map_overlay_cairo.svg byte for byte.
+2. The 32 map labels and the 11 city dots (drawn last in the overlay: country names, then each city's
+   dot followed by its name) move out of the overlay image into an inline SVG layer in ../index.html (same 1688 x 1097 space, same elements,
+   same order, drawn right above the overlay), so the page can hide a label, or a city's dot and name
+   together, that a panel edge would slice in two (placeMap() in index.html). Each city dot and its
+   name get a matching data-city number (the name starts 10 px left of the dot, 7 px below its centre).
+   Every other shape stays in ../map_overlay_cairo.svg byte for byte.
 
 Usage: python3 -I make_overlay.py   (writes ../map_overlay_cairo.svg and the label block in ../index.html)
 """
@@ -29,16 +31,27 @@ tag = svg[svg.index(old):end]
 assert tag.endswith('text-anchor="start"') and "القاهرة" in svg[end:end + 20], "unexpected Cairo label"
 svg = svg[:end] + ' direction="rtl"' + svg[end:]
 
-texts = re.findall(r"<text [^>]*>[^<]*</text>", svg)
-assert len(texts) == svg.count("<text") == 32, "unexpected label count"
-shapes = svg
-for t in texts:
-    shapes = shapes.replace(t, "", 1)
-assert "<text" not in shapes and shapes.endswith("</svg>")
+first = svg.index("<text")
+tail = svg[first:-len("</svg>")]
+els = re.findall(r"<text [^>]*>[^<]*</text>|<circle [^>]*/>", tail)
+assert "".join(els) == tail and svg.endswith("</svg>"), "labels and dots are expected to close the overlay"
+assert sum(e.startswith("<text") for e in els) == 32 and sum(e.startswith("<circle") for e in els) == 11, "unexpected label or dot count"
+shapes = svg[:first] + "</svg>"
+assert "<text" not in shapes and "<circle" not in shapes
+# pair every dot with the name drawn right after it
+n = 0
+for i, e in enumerate(els):
+    if not e.startswith("<circle"):
+        continue
+    cx, cy = (int(re.search(f' {a}="([0-9.]+)"', e).group(1)) for a in ("cx", "cy"))
+    assert els[i + 1].startswith(f'<text x="{cx - 10}" y="{cy + 7}"'), f"no name right after the dot at {cx},{cy}"
+    els[i] = e.replace("<circle ", f'<circle data-city="{n}" ', 1)
+    els[i + 1] = els[i + 1].replace("<text ", f'<text data-city="{n}" ', 1)
+    n += 1
 DST.write_text(shapes, encoding="utf-8")
 
 page = PAGE.read_text(encoding="utf-8")
 a, b = page.index(BEGIN) + len(BEGIN), page.index(END)
-block = '\n  <svg class="labels" viewBox="0 0 1688 1097">\n' + "".join("    " + t + "\n" for t in texts) + "  </svg>\n  "
+block = '\n  <svg class="labels" viewBox="0 0 1688 1097">\n' + "".join("    " + e + "\n" for e in els) + "  </svg>\n  "
 PAGE.write_text(page[:a] + block + page[b:], encoding="utf-8")
-print("wrote", DST.name, len(shapes), "bytes and", len(texts), "labels into", PAGE.name)
+print("wrote", DST.name, len(shapes), "bytes and", len(els), "labels and city dots into", PAGE.name)
