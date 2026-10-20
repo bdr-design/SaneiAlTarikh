@@ -212,3 +212,81 @@
   [data-theme="5"] .p-fx { border-radius: 8px; }
   [data-theme="5"] .p-fx.p-good { color: #8CC8FF; background: rgba(78, 123, 255, .16); }
   [data-theme="5"] .p-grp { background: rgb(19, 29, 40); border-radius: 12px; padding: var(--s2); }
+
+  /* ================= Realistic (owner, 2026-10-20: "realistic, not cartoonish") =================
+     theme 6 = و1 professional dashboard: real satellite header, line icons, hairlines, 12-month sparklines
+     theme 7 = و2 real operations centre: same, with a precise grid, framed cells and status lights */
+  .p-spark { display: none; }
+  [data-theme="6"] .p-spark, [data-theme="7"] .p-spark { display: block; grid-area: sp; width: 100%; height: 16px; overflow: visible; direction: ltr; }
+  .p-spark polyline { fill: none; stroke: var(--cyan); stroke-width: 1.5; vector-effect: non-scaling-stroke; stroke-linejoin: round; stroke-linecap: round; }
+  .p-warn .p-spark polyline { stroke: var(--amber); }
+
+  /* ---------- theme 6: professional dashboard ---------- */
+  [data-theme="6"] .sheet { --r: 14px; }
+  [data-theme="6"] .p-hd { position: relative; isolation: isolate; overflow: hidden; margin: calc(-1 * var(--s3)) calc(-1 * var(--s3)) 0; height: 72px; padding: var(--s3); align-items: flex-end;
+    border-radius: 13px 13px 0 0; background: url("header_cairo.jpg") center / cover no-repeat; height: 60px; padding-block: var(--s2); }
+  [data-theme="6"] .p-hd::after { content: ""; position: absolute; inset: 0; z-index: -1;
+    background: linear-gradient(0deg, rgba(12, 20, 28, .92) 0%, rgba(12, 20, 28, .35) 55%, rgba(12, 20, 28, .05) 100%), linear-gradient(270deg, rgba(12, 20, 28, .55) 0%, rgba(12, 20, 28, 0) 55%); }
+  [data-theme="6"] .p-hd-flag { position: relative; width: 36px; height: 27px; border-radius: 4px; box-shadow: 0 0 0 1px rgba(255, 255, 255, .28), 0 4px 10px rgba(0, 0, 0, .45); }
+  [data-theme="6"] .p-hd-flag::after, [data-theme="7"] .p-hd-flag::after { content: ""; position: absolute; inset: 0;
+    background: linear-gradient(100deg, rgba(255, 255, 255, .20) 0%, rgba(255, 255, 255, 0) 30%, rgba(0, 0, 0, .20) 55%, rgba(255, 255, 255, .10) 78%, rgba(0, 0, 0, .12) 100%); }
+  [data-theme="6"] .p-hd-name { text-shadow: 0 1px 6px rgba(0, 0, 0, .7); }
+  [data-theme="6"] .p-hd-sub { color: #C9D6E0; }
+  [data-theme="6"] .p-cap { background: rgba(12, 20, 28, .55); box-shadow: inset 0 0 0 1px rgba(63, 224, 208, .55); }
+  [data-theme="6"] .p-x { align-self: flex-start; background: rgba(12, 20, 28, .60); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .16); color: var(--t1); }
+  [data-theme="6"] .p-kpis, [data-theme="7"] .p-kpis { gap: 0; }
+  [data-theme="6"] .p-kpis { border-top: 1px solid var(--hair); border-bottom: 1px solid var(--hair); }
+  [data-theme="6"] .p-kpi, [data-theme="7"] .p-kpi { grid-template-columns: 14px 1fr auto; grid-template-areas: "kb kl kl" "kv kv kv" "sp sp w"; row-gap: 4px; column-gap: 4px; }
+  [data-theme="6"] .p-kpi { border-radius: 0; padding: 6px 10px; background: none; row-gap: 2px; }
+  [data-theme="6"] .p-kpi + .p-kpi { box-shadow: inset -1px 0 0 var(--hair); }
+  [data-theme="6"] .p-kb, [data-theme="7"] .p-kb { width: 14px; height: 14px; background: none; color: var(--t2); border-radius: 0; }
+  [data-theme="6"] .p-kb svg.i, [data-theme="7"] .p-kb svg.i { width: 13px; height: 13px; }
+  [data-theme="6"] .p-meter, [data-theme="7"] .p-meter { display: none; }
+  [data-theme="6"] .p-kv .p-n, [data-theme="7"] .p-kv .p-n { font-weight: 600; }
+  [data-theme="6"] .p-why, [data-theme="7"] .p-why { align-self: center; }
+  [data-theme="6"] .p-stat { gap: 0; }
+  [data-theme="6"] .p-st { height: 26px; border-radius: 0; background: none; padding-inline: 2px; border-bottom: 1px solid rgba(169, 188, 203, .10); }
+  [data-theme="6"] .p-st:nth-child(even) { box-shadow: inset -1px 0 0 rgba(169, 188, 203, .10); padding-inline-start: 10px; }
+  [data-theme="6"] .p-st:nth-child(3) .p-sv { color: var(--teal); }
+  [data-theme="6"] .p-acts { gap: 0; }
+  [data-theme="6"] .p-act { border-radius: 0; background: none; border-bottom: 1px solid rgba(169, 188, 203, .10); padding-inline: 2px 4px; }
+  [data-theme="6"] .p-a-build { box-shadow: inset -2px 0 0 var(--cyan); padding-inline-start: 8px; background: linear-gradient(270deg, rgba(127, 233, 255, .07), rgba(127, 233, 255, 0) 70%); }
+  [data-theme="6"] .p-ab { background: none; color: var(--t2); box-shadow: inset 0 0 0 1px rgba(169, 188, 203, .28); border-radius: 8px; }
+  [data-theme="6"] .p-a-build .p-ab { color: var(--cyan); box-shadow: inset 0 0 0 1px rgba(127, 233, 255, .45); }
+  [data-theme="6"] .p-fx.p-good, [data-theme="7"] .p-fx.p-good { color: #8CC8FF; background: none; box-shadow: inset 0 0 0 1px rgba(111, 182, 255, .38); }
+  [data-theme="6"] .p-fx.p-bad, [data-theme="7"] .p-fx.p-bad { background: none; box-shadow: inset 0 0 0 1px rgba(242, 177, 76, .45); }
+  [data-theme="6"] .p-grp { border-top: 1px solid var(--hair); padding-top: var(--s2); }
+
+  /* ---------- theme 7: real operations centre ---------- */
+  [data-theme="7"] .sheet { --r: 6px; border-color: rgba(127, 233, 255, .26); }
+  [data-theme="7"] .p-hd { position: relative; isolation: isolate; overflow: hidden; margin: calc(-1 * var(--s3)) calc(-1 * var(--s3)) 0; height: 72px; padding: var(--s3); align-items: flex-end;
+    border-radius: 5px 5px 0 0; background: url("header_cairo.jpg") center / cover no-repeat; height: 60px; padding-block: var(--s2); border-bottom: 1px solid rgba(127, 233, 255, .30); }
+  [data-theme="7"] .p-hd::before { content: ""; position: absolute; inset: 0; z-index: -1;
+    background:
+      radial-gradient(circle at 25% 45%, rgba(127, 233, 255, 0) 0 8px, rgba(127, 233, 255, .9) 8.5px 9.6px, rgba(127, 233, 255, 0) 10.2px),
+      repeating-linear-gradient(90deg, rgba(127, 233, 255, .13) 0 1px, transparent 1px 22px),
+      repeating-linear-gradient(0deg, rgba(127, 233, 255, .13) 0 1px, transparent 1px 22px); }
+  [data-theme="7"] .p-hd::after { content: ""; position: absolute; inset: 0; z-index: -2;
+    background: linear-gradient(0deg, rgba(12, 20, 28, .92) 0%, rgba(12, 20, 28, .35) 55%, rgba(12, 20, 28, .05) 100%), linear-gradient(270deg, rgba(12, 20, 28, .55) 0%, rgba(12, 20, 28, 0) 55%); }
+  [data-theme="7"] .p-hd { background-blend-mode: normal; }
+  [data-theme="7"] .p-hd-flag { position: relative; width: 36px; height: 27px; border-radius: 2px; box-shadow: 0 0 0 1px rgba(255, 255, 255, .30), 0 4px 10px rgba(0, 0, 0, .45); }
+  [data-theme="7"] .p-hd-name { text-shadow: 0 1px 6px rgba(0, 0, 0, .7); }
+  [data-theme="7"] .p-hd-sub { color: #C9D6E0; }
+  [data-theme="7"] .p-cap { border-radius: 3px; background: rgba(12, 20, 28, .6); box-shadow: inset 0 0 0 1px rgba(63, 224, 208, .55); }
+  [data-theme="7"] .p-x { align-self: flex-start; border-radius: 4px; background: rgba(12, 20, 28, .6); box-shadow: inset 0 0 0 1px rgba(127, 233, 255, .35); color: var(--cyan); }
+  [data-theme="7"] .p-kpis { gap: var(--s2); }
+  [data-theme="7"] .p-kpi { border-radius: 4px; padding: 6px var(--s2); row-gap: 2px; background: rgba(127, 233, 255, .03); box-shadow: inset 0 0 0 1px rgba(127, 233, 255, .18); }
+  [data-theme="7"] .p-kl::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--teal); box-shadow: 0 0 6px rgba(63, 224, 208, .8); margin-inline-end: 2px; flex: none; }
+  [data-theme="7"] .p-warn .p-kl::before { background: var(--amber); box-shadow: 0 0 6px rgba(242, 177, 76, .9); }
+  [data-theme="7"] .p-warn { box-shadow: inset 0 0 0 1px rgba(242, 177, 76, .40); }
+  [data-theme="7"] .p-kb { display: none; }
+  [data-theme="7"] .p-kpi { grid-template-columns: 1fr auto; grid-template-areas: "kl kl" "kv kv" "sp w"; }
+  [data-theme="7"] .p-st { height: 24px; border-radius: 3px; background: rgba(127, 233, 255, .03); box-shadow: inset -2px 0 0 rgba(127, 233, 255, .45); }
+  [data-theme="7"] .p-st:nth-child(3) { box-shadow: inset -2px 0 0 var(--teal); }
+  [data-theme="7"] .p-st:nth-child(3) .p-sv { color: var(--teal); }
+  [data-theme="7"] .p-acts { gap: var(--s1); }
+  [data-theme="7"] .p-act { border-radius: 4px; background: rgba(127, 233, 255, .03); box-shadow: inset 0 0 0 1px rgba(127, 233, 255, .14); }
+  [data-theme="7"] .p-a-build { box-shadow: inset 0 0 0 1px rgba(127, 233, 255, .45), inset -3px 0 0 var(--cyan); }
+  [data-theme="7"] .p-ab { border-radius: 3px; background: none; color: var(--cyan); box-shadow: inset 0 0 0 1px rgba(127, 233, 255, .35); }
+  [data-theme="7"] .p-fx { border-radius: 3px; }
+  [data-theme="7"] .p-grp { border-inline-start: 2px solid rgba(127, 233, 255, .30); padding-inline-start: var(--s2); }
