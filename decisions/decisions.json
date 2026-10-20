@@ -77,7 +77,7 @@
   "D-26": "imagery: NASA Blue Marble NG with topography and bathymetry (real satellite imagery; equally light on the phone as our own bake). Chosen from the owner's criteria (light + realistic). AI-generated map declined: cannot match real coastlines and borders. Pending: bathymetry licence check, and the owner's approval of the look on the device",
   "D-25": "schedule: EARLY VERSION first. A playable v0.5 after M3 (map, economy, politics, events; no military yet), then M4-M8. Same total of about 95-125 weeks, re-estimated after M0b and M1a; cut content before foundation; anything touching an owner decision goes back to the owner",
   "workProcess": "Claude is the only executor; subagents are read-only reviewers. Variants: Claude designs and checks them, the owner chooses, then the chosen one gets independent review and all-device fitting",
-  "screen4ProvincePanel": "GO-AHEAD 2026-10-20 (owner: «شوف المناسب اللي مايثقل على اللعبة وسوه»): build the panel from the owner's two reference images (design/proposals/S4_ref -> design/screen4/R): overview + details with tabs; dock moves left of the panel where it fits; fit to all 7 iPhones; final look shown to the owner",
+  "screen4ProvincePanel": "APPROVED 2026-10-20 («ممتاز»): design/screen4/R: step 1 the 320 pt card (map stays the centre, HUD unchanged), step 2 «تفاصيل المحافظة» = full-height details with 4 tabs; the overview's two actions live in the details tabs (الإنشاءات, السياسات); dark HUD; Western digits; USD",
   "hudColour": "DARK (owner delegated the choice 2026-10-20 with the criterion 'does not weigh on the game'): the approved dark bars stay; the white bars of the owner's reference images are not used"
  }
 }
