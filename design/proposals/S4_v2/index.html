@@ -1,0 +1,844 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>لوحة المحافظة A</title>
+<script>
+  /* Device frame from the URL (points): ?w=844&h=390&side=47&bottom=21&cutout=notch|island|none
+     Optional: &speedmenu=1 renders the speed menu open, &hit=1 draws the 44 pt hit boxes,
+     &tab=politics|society|economy|security opens that tab of the province sheet (default politics = «السياسة»).
+     Everything below is laid out with flexbox from these CSS variables; nothing is tied to 844x390. */
+  (function () {
+    var q = new URLSearchParams(location.search);
+    function n(k, d) { var v = parseFloat(q.get(k)); return isFinite(v) ? v : d; }
+    var W = n('w', 844), H = n('h', 390), SIDE = n('side', 47), BOTTOM = n('bottom', 21);
+    var CUT = q.get('cutout') || 'notch';
+    if (['notch', 'island', 'none'].indexOf(CUT) < 0) CUT = 'none';
+    var r = document.documentElement, s = r.style;
+    s.setProperty('--w', W + 'px');
+    s.setProperty('--h', H + 'px');
+    s.setProperty('--side', SIDE + 'px');
+    s.setProperty('--bottom', BOTTOM + 'px');
+    s.setProperty('--map-s', String(0.63 * H / 390));          /* map scales with the screen height */
+    s.setProperty('--corner', (CUT === 'none' ? 0 : 39) + 'px');
+    r.dataset.cutout = CUT;
+    r.dataset.home = BOTTOM > 0 ? 'yes' : 'no';
+    if (q.get('hit') === '1') r.classList.add('show-hit');
+    if (q.get('speedmenu') === '1') r.classList.add('menu-open');
+    r.dataset.tab = ['politics', 'society', 'economy', 'security'].indexOf(q.get('tab')) >= 0 ? q.get('tab') : 'politics';
+    window.__dev = { W: W, H: H, SIDE: SIDE, BOTTOM: BOTTOM, CUT: CUT };
+    document.documentElement.dataset.theme = q.get('theme') || '8';
+  })();
+</script>
+<style>
+  :root {
+    /* device (overwritten from the URL) */
+    --w: 844px; --h: 390px; --side: 47px; --bottom: 21px; --map-s: 0.63; --corner: 39px;
+    /* safe layout box: never inside the side insets; the dock sits just above the home indicator */
+    --gutter: max(var(--side), 8px);
+    --top-gap: 8px;
+    --dock-gap: max(calc(var(--bottom) + 1px), 8px);
+    --map-cx: calc(var(--w) * 0.56);
+    --map-cy: calc(var(--h) * 0.5);
+
+    /* ===== Uniform slim system: the only sizes used below ===== */
+    --row: 36px;        /* every top-row element: nation card, indicator strip, date/speed pill */
+    --ctl: 32px;        /* every small control: toast, map mode, my country, speed buttons, menu rows */
+    --dock-h: 44px;     /* section dock */
+    --r-bar: 12px;      /* radius of 36 pt elements, the dock and the menu panel */
+    --r-ctl: 10px;      /* radius of 32 pt controls */
+    --pad-bar: 12px;    /* inner horizontal padding of bars */
+    --pad-ctl: 10px;    /* inner horizontal padding of controls */
+    --s1: 4px; --s2: 8px; --s3: 12px;               /* spacing scale */
+    --fs-label: 10px;   --lh-label: 12px;           /* labels */
+    --fs-sec: 11.5px;   --lh-sec: 14px;             /* secondary */
+    --fs-val: 13px;     --lh-val: 16px;             /* values: semibold, tabular */
+    --fs-name: 14px;    --lh-name: 17px;            /* country name: bold */
+    --ico: 16px; --ico-stat: 14px; --ico-dock: 17px; --glyph: 10px;
+
+    /* one glass, one border */
+    --glass: rgba(9, 17, 25, 0.66);
+    --stroke: rgba(127, 233, 255, 0.14);
+    --hair: rgba(127, 233, 255, 0.13);
+    --t1: #EAF2F7;
+    --t2: #A9BCCB;
+    --t3: #A2B6C6;
+    --cyan: #7FE9FF;
+    --teal: #3FE0D0;
+    --amber: #F2B14C;
+    --red: #F2705A;
+    --blue: #6FB6FF;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: var(--w); height: var(--h); overflow: hidden; }
+  body {
+    position: relative;
+    background: #0B1218;
+    color: var(--t1);
+    font-family: "IBM Plex Sans Arabic", system-ui, sans-serif;
+    font-variant-numeric: tabular-nums;
+    -webkit-font-smoothing: antialiased;
+    line-height: 1;
+  }
+  button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; -webkit-tap-highlight-color: transparent; }
+  svg.i { width: var(--ico); height: var(--ico); fill: none; stroke: currentColor; stroke-width: 1.75; stroke-linecap: round; stroke-linejoin: round; flex: none; display: block; }
+  .ltr { direction: ltr; unicode-bidi: isolate; }
+
+  /* ---------- Touch targets ----------
+     Every tappable control (.tap) carries an invisible ::before hit box of at least 44 x 44 pt.
+     It is centred on the control and can be nudged with --hx / --hy toward free space, so that
+     32 pt controls stacked 8 pt apart (40 pt pitch) still get 44 pt boxes that never overlap:
+     toast -2, map mode +2, my country +6 (each box borders the next one exactly). */
+  .tap { position: relative; }
+  .tap::before {
+    content: ""; position: absolute;
+    left: calc(50% + var(--hx, 0px)); top: calc(50% + var(--hy, 0px));
+    width: max(100%, 44px); height: max(100%, 44px);
+    transform: translate(-50%, -50%);
+  }
+  /* glass buttons: 100% is the padding box, so add the 1 px border on each side to cover the whole control */
+  .glass.tap::before { width: max(100% + 2px, 44px); height: max(100% + 2px, 44px); }
+  .show-hit .tap::before { outline: 1px solid rgba(255, 60, 160, 0.9); background: rgba(255, 60, 160, 0.12); z-index: 5; }
+
+  /* ---------- Map: full-bleed under the insets, two aligned layers ---------- */
+  .map {
+    position: absolute;
+    width: calc(1688px * var(--map-s));
+    height: calc(1097px * var(--map-s));
+    /* Egypt's bounding-box centre in the image is (764, 578) */
+    left: calc(var(--map-cx) - 764px * var(--map-s));
+    top: calc(var(--map-cy) - 578px * var(--map-s));
+  }
+  .map img { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+
+  /* ---------- Glass: one look for every panel ---------- */
+  .glass {
+    position: relative;
+    isolation: isolate;
+    background: var(--glass);
+    -webkit-backdrop-filter: blur(18px) saturate(1.1);
+    backdrop-filter: blur(18px) saturate(1.1);
+    border: 1px solid var(--stroke);
+    border-radius: var(--r);
+    box-shadow: 0 3px 14px rgba(0, 0, 0, 0.26);
+  }
+  .bar { --r: var(--r-bar); }
+  .ctl { --r: var(--r-ctl); }
+  /* render-side frost (see frost() below): blurred map copy + the same 0.66 tint */
+  .frost { position: absolute; inset: 0; z-index: -1; overflow: hidden; border-radius: calc(var(--r) - 1px); pointer-events: none; }
+  .frost i { position: absolute; display: block;
+    background: url("../../shared/map_mena_d1_overlay.svg") 0 0 / 100% 100% no-repeat, url("../../shared/map_mena_d1.jpg") 0 0 / 100% 100% no-repeat;
+    filter: blur(18px) saturate(1.1); }
+  .frost::after { content: ""; position: absolute; inset: 0; background: var(--glass); }
+  .frosted .glass { background: transparent; -webkit-backdrop-filter: none; backdrop-filter: none; }
+
+  /* ---------- HUD box = safe area ---------- */
+  .hud {
+    position: absolute;
+    top: var(--top-gap);
+    bottom: var(--dock-gap);
+    left: var(--gutter);
+    right: var(--gutter);
+    display: flex;
+    flex-direction: column;
+    pointer-events: none;          /* the map stays pannable between panels */
+  }
+  .hud .glass { pointer-events: auto; }
+
+  /* ---------- Top row: three 36 pt elements, all at 8 pt from the top ---------- */
+  .top { flex: none; height: var(--row); display: flex; align-items: stretch; gap: var(--s2); }
+
+  /* Nation card: top-right */
+  .nation { flex: none; display: flex; align-items: center; gap: var(--s2); padding-inline: var(--pad-bar); text-align: right; }
+  .flag { width: 22px; height: 16.5px; border-radius: 3px; overflow: hidden; flex: none; box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.22); }
+  .flag img { width: 100%; height: 100%; display: block; }
+  /* Name over "leader · regime" (fit 0). A grid, so the narrower fit 1 can re-flow the same three
+     items into "name  leader" over "regime" without hiding any of them. */
+  .ntext { display: grid; grid-template-columns: auto auto; grid-template-areas: "nm nm" "ldr rg"; justify-content: start; align-items: baseline; }
+  .ntext .nm { grid-area: nm; font-size: var(--fs-name); font-weight: 700; line-height: var(--lh-name); color: var(--t1); }
+  .ntext .ldr, .ntext .rg { font-size: var(--fs-label); font-weight: 500; line-height: var(--lh-label); color: var(--t2); white-space: nowrap; }
+  .ntext .ldr { grid-area: ldr; }
+  .ntext .rg { grid-area: rg; }
+  .ntext .rg::before { content: "\00a0·\00a0"; }
+
+  /* Indicator strip: top-centre, content-sized (extra width on wide screens stays map) */
+  .stats { flex: none; margin-inline: auto; display: flex; align-items: stretch; padding-inline: var(--s2); }
+  /* 4 pt on each side of an indicator = 8 pt between indicators, 8 + 4 = 12 pt at the strip ends */
+  .stat { flex: none; min-width: 44px; display: flex; align-items: center; justify-content: center; padding-inline: var(--s1); }
+  .stat + .stat::after { content: ""; position: absolute; right: 0; top: 9px; bottom: 9px; width: 1px; background: var(--hair); }
+  .stat-in { display: flex; flex-direction: column; align-items: flex-start; }
+  .lblrow { display: flex; align-items: center; gap: var(--s1); height: var(--lh-label); }
+  .lbl { font-size: var(--fs-label); font-weight: 500; line-height: var(--lh-label); color: var(--t2); white-space: nowrap; }
+  .trend { width: var(--glyph); height: var(--glyph); fill: none; stroke: currentColor; stroke-width: 1.75; stroke-linecap: round; stroke-linejoin: round; flex: none; display: block; }
+  .trend.down { color: var(--amber); }
+  .trend.up { color: var(--blue); }
+  .trend.flat { color: var(--t2); }
+  .valrow { display: flex; align-items: center; gap: var(--s1); height: var(--lh-val); white-space: nowrap; }
+  .valrow svg.i { width: var(--ico-stat); height: var(--ico-stat); color: var(--t2); }
+  .num { font-size: var(--fs-val); font-weight: 600; line-height: var(--lh-val); color: var(--t1); }
+  .unit { font-size: var(--fs-label); font-weight: 500; line-height: var(--lh-val); color: var(--t2); }   /* unit follows its value after a word space */
+
+  /* Date + speed pill: top-left. RTL: date text on the right, the speed control at the left end. */
+  .date { flex: none; display: flex; align-items: center; gap: var(--s1); padding-inline: var(--pad-bar) 1px; }
+  .dtext { display: flex; flex-direction: column; }
+  .dow { font-size: var(--fs-label); font-weight: 500; line-height: var(--lh-label); color: var(--t2); }
+  .dmy { font-size: var(--fs-val); font-weight: 600; line-height: var(--lh-val); color: var(--t1); white-space: nowrap; }
+  /* The single speed control: a plain play/pause icon button + the speed chip, both 32 pt, sitting
+     2 pt inside the 36 pt pill (12 pt pill radius - 2 pt inset = 10 pt chip radius, concentric).
+     The 4 pt gap to the date text reads as 12 pt to the pause glyph (centred in its 32 pt box). */
+  .cap { --r: var(--r-ctl); flex: none; height: var(--ctl); display: flex; border-radius: var(--r); }
+  .cap > button { height: 100%; display: grid; place-items: center; }
+  .play { width: 32px; color: var(--t1); --hx: 6px; }           /* hit box grows toward the date text, not into the speed chip */
+  .play svg.i { fill: currentColor; }
+  .spd { width: 44px; color: var(--cyan); font-size: var(--fs-val); font-weight: 600; line-height: var(--lh-val); border-radius: var(--r-ctl);
+    background: rgba(127, 233, 255, 0.10); box-shadow: inset 0 0 0 1px rgba(127, 233, 255, 0.16); }
+  .menu-open .spd { background: rgba(127, 233, 255, 0.20); box-shadow: inset 0 0 0 1px rgba(127, 233, 255, 0.40); }
+
+  /* Speed menu: popover directly under the pill. Rows are 32 pt (radius 10) on a 44 pt pitch,
+     so each row keeps its own 44 x 44 pt hit box. */
+  .menu { --r: var(--r-bar); position: absolute; left: 0; top: calc(var(--row) + var(--s2)); z-index: 10;
+    display: none; flex-direction: column; gap: var(--s3); padding: var(--s1);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45); }            /* popover sits one level above the other glass */
+  .menu-open .menu { display: flex; }
+  .mrow { --r: var(--r-ctl); height: var(--ctl); display: flex; align-items: center; gap: var(--s2); padding-inline: var(--pad-ctl);
+    border-radius: var(--r); font-size: var(--fs-val); font-weight: 600; line-height: var(--lh-val); color: var(--t1); white-space: nowrap; }
+  .mrow .chk { color: var(--cyan); visibility: hidden; }
+  .mrow.on { color: var(--cyan); background: rgba(127, 233, 255, 0.12); }
+  .mrow.on .chk { visibility: visible; }
+  /* إيقاف | speeds. A class, not :first-child: frost() inserts its .frost layer as the first child of every panel. */
+  .mrow.stop::after { content: ""; position: absolute; left: var(--pad-ctl); right: var(--pad-ctl); bottom: -6.5px; height: 1px; background: var(--hair); }
+
+  /* ---------- Left stack: right under the top row ---------- */
+  .mid { flex: 1 1 auto; min-height: 0; display: flex; flex-direction: column; align-items: flex-end; /* = left in RTL */ padding-top: var(--s3); }
+  .lstack { flex: none; display: flex; flex-direction: column; align-items: flex-end; gap: var(--s2); }
+
+  /* Notification toast: preview + bell (bell on the outer edge) */
+  .toast { height: var(--ctl); display: flex; align-items: stretch; }
+  .toast .tap { --hy: -2px; }
+  .alert-prev { display: flex; align-items: center; gap: var(--s2); padding-inline: var(--pad-ctl); }
+  .alert-prev svg.i { color: var(--amber); }
+  .alert-prev .txt { font-size: var(--fs-sec); font-weight: 500; line-height: var(--lh-sec); color: var(--t1); white-space: nowrap; }
+  .alert-prev::after { content: ""; position: absolute; left: 0; top: 8px; bottom: 8px; width: 1px; background: var(--hair); }
+  .bell { width: 44px; display: grid; place-items: center; color: var(--t1); }
+  .badge { position: absolute; top: -4px; left: 4px; min-width: 16px; height: 16px; padding: 0 4px; border-radius: 8px; background: var(--red); color: #0B1218;
+    font-size: var(--fs-label); font-weight: 700; line-height: 16px; text-align: center; box-shadow: 0 0 0 2px rgba(9, 17, 25, 0.9); }
+
+  /* Map controls */
+  .btn { height: var(--ctl); display: flex; align-items: center; gap: var(--s2); padding-inline: var(--pad-ctl);
+    font-size: var(--fs-sec); font-weight: 600; line-height: var(--lh-sec); color: var(--t1); white-space: nowrap; }
+  .btn svg.i { color: var(--t2); }
+  .btn .k { color: var(--t3); font-weight: 500; }
+  .btn.mode { --hy: 2px; }
+  .btn.home { --hy: 6px; }
+  .btn.home svg.i { color: var(--teal); }
+
+  /* ---------- Bottom dock (just above the home indicator) ---------- */
+  .dock { flex: none; align-self: center; height: var(--dock-h); display: flex; padding-inline: var(--s2); }
+  .dock-item { min-width: 44px; padding-inline: var(--s1); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: var(--s1); color: var(--t2); }
+  .dock-item svg.i { width: var(--ico-dock); height: var(--ico-dock); color: var(--t1); opacity: 0.92; }
+  .dock-item span { font-size: var(--fs-label); font-weight: 500; line-height: var(--lh-label); white-space: nowrap; }
+  /* The two end items hug their label, so the dock reads 12 pt (8 + 4) from its edge to the outer
+     label, like every other bar. Their 44 pt hit box grows outward (past the dock edge), never into
+     the neighbour. RTL: the first item is the right end, the last item the left end.
+     (Classes, not :first-child: frost() inserts a .frost layer as the first child of the dock.) */
+  .dock-item.end { min-width: 0; }
+  .dock-item.end-r { --hx: max(0px, (44px - 100%) / 2); }
+  .dock-item.end-l { --hx: min(0px, (100% - 44px) / 2); }
+
+  /* ---------- Fit levels (set by fitTop() from the measured top row, not from the device name) ----------
+     Only the nation card condenses; every other element keeps the same tokens on every device.
+     0: flag, name over "leader · regime"
+     1: flag, "name  leader" over "regime": same content, same type, about 36 pt narrower
+     2: flag and name                   3: flag only (the map already labels Egypt) */
+  [data-fit="1"] .ntext { grid-template-areas: "nm ldr" "rg rg"; column-gap: var(--s2); }
+  [data-fit="1"] .ntext .rg::before { content: none; }
+  [data-fit="2"] .ntext { grid-template-columns: auto; grid-template-areas: "nm"; }
+  [data-fit="2"] .ntext .ldr, [data-fit="2"] .ntext .rg { display: none; }
+  [data-fit="3"] .ntext { display: none; }
+
+  /* ---------- Device overlay (on top of the render, for the fit check) ---------- */
+  .dev { position: absolute; inset: 0; pointer-events: none; z-index: 50; }
+  .corners { position: absolute; inset: 0; border-radius: var(--corner); box-shadow: 0 0 0 60px #000; }
+  .cutout { position: absolute; background: #000; display: none; }
+  [data-cutout="island"] .cutout { display: block; left: 11px; top: calc(50% - 63px); width: 37px; height: 126px; border-radius: 18.5px; }
+  [data-cutout="notch"] .cutout { display: block; left: 0; top: calc(50% - 105px); width: 30px; height: 210px; border-radius: 0 20px 20px 0; }
+  .homebar { position: absolute; display: none; left: calc(50% - 67px); bottom: 8px; width: 134px; height: 5px; border-radius: 3px; background: rgba(255, 255, 255, 0.55); }
+  [data-home="yes"] .homebar { display: block; }
+  .show-hit .safe { position: absolute; top: 0; bottom: var(--bottom); left: var(--side); right: var(--side); outline: 1px dashed rgba(255, 255, 0, 0.8); }
+</style>
+<style>/* D-3 (confirmed): opaque panels, applied to the HUD exactly as ../../proposals/D3_panels/opaque.html */
+  .glass { -webkit-backdrop-filter: none !important; backdrop-filter: none !important; }
+  .frost i { display: none !important; }
+  .frost::after { background: rgb(12, 20, 28) !important; }
+</style>
+<style>
+  /* ================= Province panel, version 2 (owner, 2026-10-20) =================
+     Feedback on seven earlier styles: looks like software not a game, too crowded, dark/blue colours, too small.
+     So: a wider sheet (52% of the safe width), fewer things at once (status on one line, 3 big numbers, 3 big
+     actions; details behind «التفاصيل»), realistic game materials instead of flat or glossy UI.
+     The new colours apply to panels only; the HUD keeps the approved look (owner's choice).
+     ?theme=8 olive military with brass; ?theme=9 sand dossier (light panel, dark text). */
+  :root { --sheet-w: 433px; --sheet-b: 0px; }
+  .sheet { --r: 14px; position: absolute; right: 0; top: calc(var(--row) + var(--s2)); bottom: var(--sheet-b); width: var(--sheet-w); z-index: 2; overflow: hidden; }
+  .q-in { position: absolute; inset: 0; padding: var(--s3); display: flex; flex-direction: column; gap: var(--s2); }
+  .q-in > * { flex: none; }
+  .q-dot { opacity: .7; }
+  svg.q-tr { width: 11px; height: 11px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; flex: none; }
+
+  /* header */
+  .q-hd { display: flex; align-items: center; gap: var(--s3); height: 48px; }
+  .q-flag { position: relative; width: 44px; height: 33px; border-radius: 4px; overflow: hidden; flex: none; }
+  .q-flag img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .q-flag::after { content: ""; position: absolute; inset: 0; background: linear-gradient(100deg, rgba(255, 255, 255, .22) 0%, rgba(255, 255, 255, 0) 30%, rgba(0, 0, 0, .22) 55%, rgba(255, 255, 255, .12) 78%, rgba(0, 0, 0, .14) 100%); }
+  .q-tt { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+  .q-row { display: flex; align-items: center; gap: var(--s2); }
+  .q-name { font-size: 20px; line-height: 24px; font-weight: 700; }
+  .q-cap { display: inline-flex; align-items: center; gap: 3px; height: 20px; padding-inline: 7px; border-radius: 4px; font-size: var(--fs-label); font-weight: 700; }
+  .q-cap svg.i { width: 11px; height: 11px; }
+  .q-sub { font-size: var(--fs-val); line-height: 16px; }
+  .q-more { margin-inline-start: auto; display: flex; align-items: center; gap: 4px; height: 32px; padding-inline: 12px 8px; border-radius: 8px; font-size: var(--fs-val); font-weight: 600; position: relative; }
+  .q-more svg.i { width: 14px; height: 14px; }
+  .q-x { width: 32px; height: 32px; border-radius: 8px; display: grid; place-items: center; position: relative; }
+  .q-more::before, .q-x::before { content: ""; position: absolute; inset: -6px -2px; }
+
+  /* status: one line */
+  .q-status { display: flex; align-items: center; gap: var(--s2); height: 30px; padding-inline: var(--s3); border-radius: 8px; font-size: var(--fs-sec); white-space: nowrap; }
+  .q-status svg.i { width: 15px; height: 15px; }
+  .q-status b { font-weight: 700; }
+
+  /* three big numbers */
+  .q-kpis { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--s2); }
+  .q-kpi { display: grid; grid-template-columns: 34px 1fr; grid-template-areas: "ic kl" "ic kv" "wy wy"; column-gap: var(--s2); row-gap: 4px; align-items: center; padding: 10px; border-radius: 10px; text-align: start; }
+  .q-ic { grid-area: ic; width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center; align-self: center; }
+  .q-ic svg.i { width: 17px; height: 17px; }
+  .q-kl { grid-area: kl; font-size: var(--fs-sec); line-height: 14px; font-weight: 600; white-space: nowrap; }
+  .q-kv { grid-area: kv; display: flex; align-items: baseline; gap: 4px; white-space: nowrap; }
+  .q-n { font-size: 22px; line-height: 26px; font-weight: 700; }
+  .q-u { font-size: var(--fs-label); font-weight: 600; }
+  .q-why { grid-area: wy; display: flex; align-items: center; gap: 4px; font-size: var(--fs-label); line-height: 12px; font-weight: 700; padding-top: 6px; }
+
+  /* three big actions */
+  .q-acts { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--s2); }
+  .q-act { display: grid; grid-template-columns: 26px 1fr; grid-template-areas: "ai an" "ac ac" "ae ae"; column-gap: 6px; row-gap: 5px; align-content: start; padding: 10px; border-radius: 10px; text-align: start; min-height: 44px; }
+  .q-ai { grid-area: ai; width: 26px; height: 26px; border-radius: 6px; display: grid; place-items: center; }
+  .q-ai svg.i { width: 15px; height: 15px; }
+  .q-an { grid-area: an; font-size: var(--fs-val); line-height: 16px; font-weight: 700; white-space: nowrap; }
+  .q-ac { grid-area: ac; font-size: var(--fs-label); line-height: 13px; font-weight: 600; }
+  .q-ae { grid-area: ae; display: flex; flex-wrap: wrap; align-items: center; gap: 3px 6px; font-size: var(--fs-label); line-height: 13px; font-weight: 700; }
+  .q-bad { display: inline-flex; align-items: center; gap: 2px; }
+
+  /* ---------- theme 8: olive military with brass ---------- */
+  [data-theme="8"] .sheet { border-color: rgba(214, 190, 130, .45) !important; box-shadow: 0 10px 30px rgba(0, 0, 0, .45); }
+  [data-theme="8"] .sheet > .frost::after { background:
+      repeating-linear-gradient(135deg, rgba(0, 0, 0, .05) 0 2px, rgba(0, 0, 0, 0) 2px 5px),
+      linear-gradient(180deg, #414A35 0%, #333A2A 60%, #2C3224 100%) !important; }
+  [data-theme="8"] .q-in { color: #EEE8D6; }
+  [data-theme="8"] .q-hd { padding-bottom: var(--s2); height: 56px; border-bottom: 1px solid rgba(214, 190, 130, .30); }
+  [data-theme="8"] .q-flag { box-shadow: 0 0 0 1px rgba(214, 190, 130, .7), 0 4px 10px rgba(0, 0, 0, .45); }
+  [data-theme="8"] .q-name { color: #F4EFDF; text-shadow: 0 2px 4px rgba(0, 0, 0, .45); }
+  [data-theme="8"] .q-sub { color: #C9C1A6; }
+  [data-theme="8"] .q-cap { color: #2C3224; background: linear-gradient(180deg, #E3C98A, #C3A262); box-shadow: inset 0 1px 0 rgba(255, 255, 255, .35); }
+  [data-theme="8"] .q-more { color: #E3C98A; box-shadow: inset 0 0 0 1px rgba(214, 190, 130, .55); background: rgba(0, 0, 0, .12); }
+  [data-theme="8"] .q-x { color: #EEE8D6; background: rgba(0, 0, 0, .22); box-shadow: inset 0 1px 2px rgba(0, 0, 0, .45), 0 1px 0 rgba(255, 255, 255, .06); }
+  [data-theme="8"] .q-status { color: #DDD6BF; background: rgba(0, 0, 0, .20); box-shadow: inset 0 1px 3px rgba(0, 0, 0, .40), 0 1px 0 rgba(255, 255, 255, .05); }
+  [data-theme="8"] .q-status svg.i { color: #A9CF7E; }
+  [data-theme="8"] .q-status b { color: #F4EFDF; }
+  [data-theme="8"] .q-kpi { background: rgba(0, 0, 0, .20); box-shadow: inset 0 1px 3px rgba(0, 0, 0, .45), 0 1px 0 rgba(255, 255, 255, .06); }
+  [data-theme="8"] .q-ic { color: #E3C98A; background: radial-gradient(circle at 35% 30%, #56603F, #2E3425); box-shadow: inset 0 0 0 1px rgba(214, 190, 130, .65), 0 2px 4px rgba(0, 0, 0, .4); }
+  [data-theme="8"] .q-warn .q-ic { color: #F2A54A; box-shadow: inset 0 0 0 1px rgba(242, 165, 74, .8), 0 2px 4px rgba(0, 0, 0, .4); }
+  [data-theme="8"] .q-kl { color: #C9C1A6; }
+  [data-theme="8"] .q-n { color: #F4EFDF; }
+  [data-theme="8"] .q-warn .q-n { color: #F2A54A; }
+  [data-theme="8"] .q-u { color: #C9C1A6; }
+  [data-theme="8"] .q-why { color: #E3C98A; border-top: 1px solid rgba(214, 190, 130, .20); }
+  [data-theme="8"] .q-flat { color: #C9C1A6; } [data-theme="8"] .q-up { color: #F2A54A; } [data-theme="8"] .q-down { color: #A9CF7E; }
+  [data-theme="8"] .q-act { color: #EEE8D6; background: linear-gradient(180deg, #4E583F 0%, #3C4431 100%); box-shadow: inset 0 1px 0 rgba(255, 255, 255, .10), inset 0 0 0 1px rgba(214, 190, 130, .28), 0 3px 8px rgba(0, 0, 0, .35); }
+  [data-theme="8"] .q-first { box-shadow: inset 0 1px 0 rgba(255, 255, 255, .12), inset 0 0 0 1.5px rgba(227, 201, 138, .85), 0 3px 10px rgba(0, 0, 0, .4); }
+  [data-theme="8"] .q-ai { color: #2C3224; background: linear-gradient(180deg, #E3C98A, #B9975A); box-shadow: inset 0 1px 0 rgba(255, 255, 255, .35); }
+  [data-theme="8"] .q-ac { color: #E3C98A; }
+  [data-theme="8"] .q-good { color: #B4DA8A; }
+  [data-theme="8"] .q-bad { color: #F2A54A; }
+
+  /* ---------- theme 9: sand dossier (light panel, dark text) ---------- */
+  [data-theme="9"] .sheet { border-color: #8E7A50 !important; box-shadow: 0 10px 30px rgba(0, 0, 0, .45); }
+  [data-theme="9"] .sheet > .frost::after { background:
+      repeating-linear-gradient(0deg, rgba(110, 90, 50, .035) 0 1px, rgba(0, 0, 0, 0) 1px 3px),
+      linear-gradient(180deg, #EADFC3 0%, #DCCDA8 100%) !important; }
+  [data-theme="9"] .q-in { color: #2E2718; }
+  [data-theme="9"] .q-hd { padding-bottom: var(--s2); height: 56px; border-bottom: 1px solid rgba(94, 76, 40, .30); }
+  [data-theme="9"] .q-flag { box-shadow: 0 0 0 1px rgba(60, 48, 24, .45), 0 3px 8px rgba(60, 40, 10, .35); }
+  [data-theme="9"] .q-name { color: #231D10; }
+  [data-theme="9"] .q-sub { color: #5B5038; }
+  [data-theme="9"] .q-cap { color: #A33124; background: none; box-shadow: inset 0 0 0 1.5px #A33124; transform: rotate(-4deg); }
+  [data-theme="9"] .q-more { color: #3F4D24; box-shadow: inset 0 0 0 1.5px #56663A; background: rgba(255, 255, 255, .25); }
+  [data-theme="9"] .q-x { color: #2E2718; background: rgba(94, 76, 40, .12); }
+  [data-theme="9"] .q-status { color: #3D3422; background: rgba(94, 76, 40, .10); box-shadow: inset 0 0 0 1px rgba(94, 76, 40, .18); }
+  [data-theme="9"] .q-status svg.i { color: #3E6B2E; }
+  [data-theme="9"] .q-status b { color: #231D10; }
+  [data-theme="9"] .q-kpi { background: rgba(255, 255, 255, .32); box-shadow: inset 0 0 0 1px rgba(94, 76, 40, .22); }
+  [data-theme="9"] .q-ic { color: #F3EBD6; background: #56663A; }
+  [data-theme="9"] .q-warn .q-ic { background: #B5541F; }
+  [data-theme="9"] .q-kl { color: #5B5038; }
+  [data-theme="9"] .q-n { color: #231D10; }
+  [data-theme="9"] .q-warn .q-n { color: #A8461A; }
+  [data-theme="9"] .q-u { color: #5B5038; }
+  [data-theme="9"] .q-why { color: #3F4D24; border-top: 1px solid rgba(94, 76, 40, .20); }
+  [data-theme="9"] .q-flat { color: #6E6248; } [data-theme="9"] .q-up { color: #A8461A; } [data-theme="9"] .q-down { color: #3E6B2E; }
+  [data-theme="9"] .q-act { color: #2E2718; background: rgba(255, 255, 255, .38); box-shadow: inset 0 0 0 1px rgba(94, 76, 40, .28), 0 2px 5px rgba(60, 40, 10, .15); }
+  [data-theme="9"] .q-first { box-shadow: inset 0 0 0 2px #56663A, 0 2px 6px rgba(60, 40, 10, .2); }
+  [data-theme="9"] .q-ai { color: #F3EBD6; background: #56663A; }
+  [data-theme="9"] .q-ac { color: #7A4F12; }
+  [data-theme="9"] .q-good { color: #2F5A22; }
+  [data-theme="9"] .q-bad { color: #A8461A; }
+
+  /* map labels and the tapped province (from variant A) */
+  .map svg.labels { position: absolute; inset: 0; width: 100%; height: 100%; direction: ltr; }
+  .labels .cut { display: none; }
+  .map svg.sel { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+  .sel path { vector-effect: non-scaling-stroke; stroke-linejoin: round; }
+</style>
+</head>
+<body>
+
+<!-- SVG symbol library (24 grid, round stroke 1.75) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <!-- sections -->
+    <symbol id="i-state" viewBox="0 0 24 24"><path d="M3.5 9 12 4l8.5 5"/><path d="M3.5 9h17"/><path d="M6 12v5.5M10 12v5.5M14 12v5.5M18 12v5.5"/><path d="M4 20.5h16"/></symbol>
+    <symbol id="i-econ" viewBox="0 0 24 24"><path d="M4 20h16"/><path d="M7 16.5v-4M11 16.5V8.5M15 16.5v-6M19 16.5V5"/></symbol>
+    <symbol id="i-pol" viewBox="0 0 24 24"><path d="M4 11.5h16v8.5H4z"/><path d="M8 11.5V4h8v7.5"/><path d="M10.2 7.8l1.4 1.4 2.3-2.6"/><path d="M8.5 15.5h7"/></symbol>
+    <symbol id="i-army" viewBox="0 0 24 24"><path d="M12 3l7 2.8v5.4c0 4.3-2.9 7.9-7 9.8-4.1-1.9-7-5.5-7-9.8V5.8z"/><path d="M9 10l3 2 3-2"/><path d="M9 13.5l3 2 3-2"/></symbol>
+    <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.75"/><path d="M3.25 12h17.5"/><path d="M12 3.25c2.4 2.4 3.6 5.3 3.6 8.75S14.4 18.35 12 20.75C9.6 18.35 8.4 15.45 8.4 12S9.6 5.65 12 3.25z"/></symbol>
+    <symbol id="i-eye" viewBox="0 0 24 24"><path d="M2.75 12S6.2 5.75 12 5.75 21.25 12 21.25 12 17.8 18.25 12 18.25 2.75 12 2.75 12z"/><circle cx="12" cy="12" r="2.9"/></symbol>
+    <symbol id="i-flask" viewBox="0 0 24 24"><path d="M9 3.5h6"/><path d="M10 3.5v5.7L5.1 17.8A2 2 0 0 0 6.8 20.75h10.4a2 2 0 0 0 1.7-2.95L14 9.2V3.5"/><path d="M7.3 15h9.4"/></symbol>
+    <symbol id="i-more" viewBox="0 0 24 24"><rect x="4" y="4" width="6.5" height="6.5" rx="1.6"/><rect x="13.5" y="4" width="6.5" height="6.5" rx="1.6"/><rect x="4" y="13.5" width="6.5" height="6.5" rx="1.6"/><rect x="13.5" y="13.5" width="6.5" height="6.5" rx="1.6"/></symbol>
+    <!-- indicators -->
+    <symbol id="i-coins" viewBox="0 0 24 24"><ellipse cx="12" cy="6" rx="7" ry="2.75"/><path d="M5 6v4c0 1.5 3.1 2.75 7 2.75S19 11.5 19 10V6"/><path d="M5 10v4c0 1.5 3.1 2.75 7 2.75S19 15.5 19 14v-4"/><path d="M5 14v4c0 1.5 3.1 2.75 7 2.75S19 19.5 19 18v-4"/></symbol>
+    <symbol id="i-anchor" viewBox="0 0 24 24"><circle cx="12" cy="5.5" r="2.25"/><path d="M12 7.75V20.5"/><path d="M8.5 11h7"/><path d="M4.5 13.5c0 4 3.4 7 7.5 7s7.5-3 7.5-7"/><path d="M3 15l1.5-1.5L6 15M18 15l1.5-1.5L21 15"/></symbol>
+    <symbol id="i-seal" viewBox="0 0 24 24"><circle cx="12" cy="9.25" r="5.75"/><path d="M8.6 13.9 7.5 21l4.5-2.4 4.5 2.4-1.1-7.1"/><path d="M9.7 9.3l1.6 1.6 3-3.1"/></symbol>
+    <symbol id="i-people" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.25"/><path d="M3 19.5c0-3.3 2.7-5.75 6-5.75s6 2.45 6 5.75"/><path d="M15.5 4.9a3.25 3.25 0 0 1 0 6.2"/><path d="M17.5 14.1c2.1.7 3.5 2.7 3.5 5.4"/></symbol>
+    <symbol id="i-signal" viewBox="0 0 24 24"><circle cx="12" cy="12" r="1.9"/><path d="M8.6 15.4a4.8 4.8 0 0 1 0-6.8M15.4 8.6a4.8 4.8 0 0 1 0 6.8"/><path d="M5.6 18.4a9 9 0 0 1 0-12.8M18.4 5.6a9 9 0 0 1 0 12.8"/></symbol>
+    <!-- controls -->
+    <symbol id="i-bell" viewBox="0 0 24 24"><path d="M18 15.5V11a6 6 0 1 0-12 0v4.5L4.5 18h15z"/><path d="M10 20.75a2.2 2.2 0 0 0 4 0"/></symbol>
+    <symbol id="i-warn" viewBox="0 0 24 24"><path d="M10.4 4.6a1.85 1.85 0 0 1 3.2 0l7.1 12.6a1.85 1.85 0 0 1-1.6 2.8H4.9a1.85 1.85 0 0 1-1.6-2.8z"/><path d="M12 9.5v4"/><path d="M12 16.6v.05"/></symbol>
+    <symbol id="i-layers" viewBox="0 0 24 24"><path d="M12 4 3.5 8.75 12 13.5l8.5-4.75z"/><path d="M3.5 12.75 12 17.5l8.5-4.75"/><path d="M3.5 16.5 12 21.25l8.5-4.75" opacity=".55"/></symbol>
+    <symbol id="i-locate" viewBox="0 0 24 24"><circle cx="12" cy="12" r="6.5"/><circle cx="12" cy="12" r="1.6" fill="currentColor" stroke="none"/><path d="M12 2.75v3M12 18.25v3M2.75 12h3M18.25 12h3"/></symbol>
+    <symbol id="i-pause" viewBox="0 0 24 24"><rect x="6.75" y="5.5" width="3.5" height="13" rx="1.2"/><rect x="13.75" y="5.5" width="3.5" height="13" rx="1.2"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.75l4.25 4.25L19 7.25"/></symbol>
+    <symbol id="t-down" viewBox="0 0 10 10"><path d="M5 1.5v7M2 5.5l3 3 3-3"/></symbol>
+    <symbol id="t-up" viewBox="0 0 10 10"><path d="M5 8.5v-7M2 4.5l3-3 3 3"/></symbol>
+    <symbol id="t-flat" viewBox="0 0 10 10"><path d="M1.5 5h7"/></symbol>
+    <!-- province sheet -->
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="M6.75 6.75l10.5 10.5M17.25 6.75 6.75 17.25"/></symbol>
+    <symbol id="i-star" viewBox="0 0 24 24"><path d="M12 3.75l2.55 5.2 5.7.83-4.13 4.02.98 5.68L12 16.8l-5.1 2.68.98-5.68-4.13-4.02 5.7-.83z"/></symbol>
+    <symbol id="i-build" viewBox="0 0 24 24"><path d="M4 20.5h9"/><path d="M8.5 20.5V4"/><path d="M5 6.75h15"/><path d="M8.5 4 5 6.75M8.5 4l3.5 2.75"/><path d="M17.5 6.75v5"/><path d="M15.75 11.75h3.5v2.5h-3.5z"/></symbol>
+    <symbol id="i-care" viewBox="0 0 24 24"><path d="M12 19.5s-7.25-4.3-7.25-9.4A3.85 3.85 0 0 1 12 8a3.85 3.85 0 0 1 7.25 2.1c0 5.1-7.25 9.4-7.25 9.4z"/><path d="M12 10.75v4.5M9.75 13h4.5"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3.5l7 2.75v5.25c0 4.3-2.9 7.6-7 9-4.1-1.4-7-4.7-7-9V6.25z"/><path d="M9.25 12l2 2 3.75-3.9"/></symbol>
+    <symbol id="i-chev" viewBox="0 0 24 24"><path d="M14.5 5.5 8 12l6.5 6.5"/></symbol>
+    <symbol id="i-flame" viewBox="0 0 24 24"><path d="M12 21c-3.9 0-6.75-2.6-6.75-6.3 0-3.2 2.2-5.1 3.6-7.4.3 1.9 1.3 3 2.4 3.5C11 7.6 12.2 5 14.6 3c-.2 3 1.3 4.6 2.6 6.2 1.1 1.4 1.55 2.9 1.55 4.5C18.75 18.4 15.9 21 12 21z"/><path d="M12 21c-1.6 0-2.75-1.1-2.75-2.6 0-1.7 1.4-2.6 2.1-4 .9 1.1 3.4 2.3 3.4 4 0 1.5-1.15 2.6-2.75 2.6z"/></symbol>
+  </defs>
+</svg>
+
+<!-- Map: approved D1 base + overlay, identical box, full-bleed -->
+<div class="map" aria-hidden="true">
+  <img src="../../shared/map_mena_d1.jpg" alt="">
+  <img src="map_overlay_cairo.svg" alt="">
+  <!-- map labels: generated by _build/make_overlay.py from the D1 overlay -->
+  <svg class="labels" viewBox="0 0 1688 1097">
+    <text x="734" y="587" font-family="-apple-system, 'SF Arabic', 'Geeza Pro', 'Noto Sans Arabic', sans-serif" font-size="36" font-weight="700" fill="#FFFFFF" stroke="#0B1218" stroke-width="5" stroke-opacity="0.75" paint-order="stroke" text-anchor="middle">مصر</text>
+    <text x="370" y="574" font-family="-apple-system, 'SF Arabic', 'Geeza Pro', 'Noto Sans Arabic', sans-serif" font-size="28" font-weight="700" fill="#FFFFFF" stroke="#0B1218" stroke-width="5" stroke-opacity="0.75" paint-order="stroke" text-anchor="middle">ليبيا</text>
+    <text x="740" y="992" font-family="-apple-system, 'SF Arabic', 'Geeza Pro', 'Noto Sans Arabic', sans-serif" font-size="28" font-weight="700" fill="#FFFFFF" stroke="#0B1218" stroke-width="5" stroke-opacity="0.75" paint-order="stroke" text-anchor="middle">السودان</text>
+    <text x="1170" y="669" font-family="-apple-system, 'SF Arabic', 'Geeza Pro', 'Noto Sans Arabic', sans-serif" font-size="28" font-weight="700" fill="#FFFFFF" stroke="#0B1218" stroke-width="5" stroke-opacity="0.75" paint-order="stroke" text-anchor="middle">السعودية</text>
+    <text x="874" y="177" font-family="-apple-system, 'SF Arabic', 'Geeza Pro', 'Noto Sans Arabic', sans-serif" font-size="28" font-weight="700" fill="#FFFFFF" stroke="#0B1218" stroke-width="5" stroke-opacity="0.75" paint-order="stroke" text-anchor="middle">تركيا</text>
+    <text x="1451" y="396" font-family="-apple-system, 'SF Arabic', 'Geeza Pro', 'Noto Sans Arabic', sans-serif" font-size="28" font-weight="700" fill="#FFFFFF" stroke="#0B1218" stroke-width="5" stroke-opacity="0.75" paint-order="stroke" text-anchor="middle">إيران</text>
+    <text x="1131" y="393" font-family="-apple-system, 'SF Arabic', 'Geeza Pro', 'Noto Sans Arabic', sans-serif" font-size="28" font-weight="700" fill="#FFFFFF" stroke="#0B1218" stroke-width="5" stroke-opacity="0.75" paint-order="stroke" text-anchor="middle">العراق</text>
+    <text x="992" y="307" font-family="-apple-system, 'SF Arabic', 'Geeza Pro', 'Noto Sans Arabic', sans-serif" font-size="28" font-weight="700" fill="#FFFFFF" stroke="#0B1218" stroke-width="5" stroke-opacity="0.75" paint-order="stroke" text-anchor="middle">سوريا</text>
+    <text x="957" y="449" font-family="-apple-system, 'SF Arabic', 'Geeza Pro', 'Noto Sans Arabic', sans-serif" font-size="28" font-weight="700" fill="#FFFFFF" stroke="#0B1218" stroke-width="5" stroke-opacity="0.75" paint-order="stroke" text-anchor="middle">الأردن</text>
+    <text x="130" y="347" font-family="-apple-system, 'SF Arabic', 'Geeza Pro', 'Noto Sans Arabic', sans-serif" font-size="28" font-weight="700" fill="#FFFFFF" stroke="#0B1218" stroke-width="5" stroke-opacity="0.75" paint-order="stroke" text-anchor="middle">تونس</text>
+    <text x="-74" y="543" font-family="-apple-system, 'SF Arabic', 'Geeza Pro', 'Noto Sans Arabic', sans-serif" font-size="28" font-weight="700" fill="#FFFFFF" stroke="#0B1218" stroke-width="5" stroke-opacity="0.75" paint-order="stroke" text-anchor="middle">الجزائر</text>
+    <text x="1259" y="928" font-family="-apple-system, 'SF Arabic', 'Geeza Pro', 'Noto Sans Arabic', sans-serif" font-size="28" font-weight="700" fill="#FFFFFF" stroke="#0B1218" stroke-width="5" stroke-opacity="0.75" paint-order="stroke" text-anchor="middle">اليمن</text>
+    <text x="1525" y="763" font-family="-apple-system, 'SF Arabic', 'Geeza Pro', 'Noto Sans Arabic', sans-serif" font-size="28" font-weight="700" fill="#FFFFFF" stroke="#0B1218" stroke-width="5" stroke-opacity="0.75" paint-order="stroke" text-anchor="middle">عمان</text>
+    <text x="1460" y="682" font-family="-apple-system, 'SF Arabic', 'Geeza Pro', 'Noto Sans Arabic', sans-serif" font-size="28" font-weight="700" fill="#FFFFFF" stroke="#0B1218" stroke-width="5" stroke-opacity="0.75" paint-order="stroke" text-anchor="middle">الإمارات</text>
+    <text x="406" y="931" font-family="-apple-system, 'SF Arabic', 'Geeza Pro', 'Noto Sans Arabic', sans-serif" font-size="28" font-weight="700" fill="#FFFFFF" stroke="#0B1218" stroke-width="5" stroke-opacity="0.75" paint-order="stroke" text-anchor="middle">تشاد</text>
+    <text x="133" y="870" font-family="-apple-system, 'SF Arabic', 'Geeza Pro', 'Noto Sans Arabic', sans-serif" font-size="28" font-weight="700" fill="#FFFFFF" stroke="#0B1218" stroke-width="5" stroke-opacity="0.75" paint-order="stroke" text-anchor="middle">النيجر</text>
+    <text x="995" y="928" font-family="-apple-system, 'SF Arabic', 'Geeza Pro', 'Noto Sans Arabic', sans-serif" font-size="28" font-weight="700" fill="#FFFFFF" stroke="#0B1218" stroke-width="5" stroke-opacity="0.75" paint-order="stroke" text-anchor="middle">إريتريا</text>
+    <text x="503" y="160" font-family="-apple-system, 'SF Arabic', 'Geeza Pro', 'Noto Sans Arabic', sans-serif" font-size="28" font-weight="700" fill="#FFFFFF" stroke="#0B1218" stroke-width="5" stroke-opacity="0.75" paint-order="stroke" text-anchor="middle">اليونان</text>
+    <text x="252" y="54" font-family="-apple-system, 'SF Arabic', 'Geeza Pro', 'Noto Sans Arabic', sans-serif" font-size="28" font-weight="700" fill="#FFFFFF" stroke="#0B1218" stroke-width="5" stroke-opacity="0.75" paint-order="stroke" text-anchor="middle">إيطاليا</text>
+    <text x="1262" y="501" font-family="-apple-system, 'SF Arabic', 'Geeza Pro', 'Noto Sans Arabic', sans-serif" font-size="28" font-weight="700" fill="#FFFFFF" stroke="#0B1218" stroke-width="5" stroke-opacity="0.75" paint-order="stroke" text-anchor="middle">الكويت</text>
+    <text x="1368" y="628" font-family="-apple-system, 'SF Arabic', 'Geeza Pro', 'Noto Sans Arabic', sans-serif" font-size="28" font-weight="700" fill="#FFFFFF" stroke="#0B1218" stroke-width="5" stroke-opacity="0.75" paint-order="stroke" text-anchor="middle">قطر</text>
+    <circle data-city="0" cx="777" cy="477" r="5" fill="#FFFFFF" stroke="#0B1218" stroke-width="2"/>
+    <text data-city="0" x="767" y="484" font-family="-apple-system, 'SF Arabic', 'Geeza Pro', 'Noto Sans Arabic', sans-serif" font-size="21" font-weight="600" fill="#FFFFFF" stroke="#0B1218" stroke-width="4" stroke-opacity="0.7" paint-order="stroke" text-anchor="start" direction="rtl">القاهرة</text>
+    <circle data-city="1" cx="738" cy="439" r="5" fill="#FFFFFF" stroke="#0B1218" stroke-width="2"/>
+    <text data-city="1" x="728" y="446" font-family="-apple-system, 'SF Arabic', 'Geeza Pro', 'Noto Sans Arabic', sans-serif" font-size="21" font-weight="600" fill="#FFFFFF" stroke="#0B1218" stroke-width="4" stroke-opacity="0.7" paint-order="stroke" text-anchor="start">الإسكندرية</text>
+    <circle data-city="2" cx="826" cy="666" r="5" fill="#FFFFFF" stroke="#0B1218" stroke-width="2"/>
+    <text data-city="2" x="816" y="673" font-family="-apple-system, 'SF Arabic', 'Geeza Pro', 'Noto Sans Arabic', sans-serif" font-size="21" font-weight="600" fill="#FFFFFF" stroke="#0B1218" stroke-width="4" stroke-opacity="0.7" paint-order="stroke" text-anchor="start">أسوان</text>
+    <circle data-city="3" cx="243" cy="384" r="5" fill="#FFFFFF" stroke="#0B1218" stroke-width="2"/>
+    <text data-city="3" x="233" y="391" font-family="-apple-system, 'SF Arabic', 'Geeza Pro', 'Noto Sans Arabic', sans-serif" font-size="21" font-weight="600" fill="#FFFFFF" stroke="#0B1218" stroke-width="4" stroke-opacity="0.7" paint-order="stroke" text-anchor="start">طرابلس</text>
+    <circle data-city="4" cx="446" cy="409" r="5" fill="#FFFFFF" stroke="#0B1218" stroke-width="2"/>
+    <text data-city="4" x="436" y="416" font-family="-apple-system, 'SF Arabic', 'Geeza Pro', 'Noto Sans Arabic', sans-serif" font-size="21" font-weight="600" fill="#FFFFFF" stroke="#0B1218" stroke-width="4" stroke-opacity="0.7" paint-order="stroke" text-anchor="start">بنغازي</text>
+    <circle data-city="5" cx="815" cy="928" r="5" fill="#FFFFFF" stroke="#0B1218" stroke-width="2"/>
+    <text data-city="5" x="805" y="935" font-family="-apple-system, 'SF Arabic', 'Geeza Pro', 'Noto Sans Arabic', sans-serif" font-size="21" font-weight="600" fill="#FFFFFF" stroke="#0B1218" stroke-width="4" stroke-opacity="0.7" paint-order="stroke" text-anchor="start">الخرطوم</text>
+    <circle data-city="6" cx="1235" cy="648" r="5" fill="#FFFFFF" stroke="#0B1218" stroke-width="2"/>
+    <text data-city="6" x="1225" y="655" font-family="-apple-system, 'SF Arabic', 'Geeza Pro', 'Noto Sans Arabic', sans-serif" font-size="21" font-weight="600" fill="#FFFFFF" stroke="#0B1218" stroke-width="4" stroke-opacity="0.7" paint-order="stroke" text-anchor="start">الرياض</text>
+    <circle data-city="7" cx="1166" cy="370" r="5" fill="#FFFFFF" stroke="#0B1218" stroke-width="2"/>
+    <text data-city="7" x="1156" y="377" font-family="-apple-system, 'SF Arabic', 'Geeza Pro', 'Noto Sans Arabic', sans-serif" font-size="21" font-weight="600" fill="#FFFFFF" stroke="#0B1218" stroke-width="4" stroke-opacity="0.7" paint-order="stroke" text-anchor="start">بغداد</text>
+    <circle data-city="8" cx="1161" cy="936" r="5" fill="#FFFFFF" stroke="#0B1218" stroke-width="2"/>
+    <text data-city="8" x="1151" y="943" font-family="-apple-system, 'SF Arabic', 'Geeza Pro', 'Noto Sans Arabic', sans-serif" font-size="21" font-weight="600" fill="#FFFFFF" stroke="#0B1218" stroke-width="4" stroke-opacity="0.7" paint-order="stroke" text-anchor="start">صنعاء</text>
+    <circle data-city="9" cx="825" cy="145" r="5" fill="#FFFFFF" stroke="#0B1218" stroke-width="2"/>
+    <text data-city="9" x="815" y="152" font-family="-apple-system, 'SF Arabic', 'Geeza Pro', 'Noto Sans Arabic', sans-serif" font-size="21" font-weight="600" fill="#FFFFFF" stroke="#0B1218" stroke-width="4" stroke-opacity="0.7" paint-order="stroke" text-anchor="start">أنقرة</text>
+    <circle data-city="10" cx="1374" cy="290" r="5" fill="#FFFFFF" stroke="#0B1218" stroke-width="2"/>
+    <text data-city="10" x="1364" y="297" font-family="-apple-system, 'SF Arabic', 'Geeza Pro', 'Noto Sans Arabic', sans-serif" font-size="21" font-weight="600" fill="#FFFFFF" stroke="#0B1218" stroke-width="4" stroke-opacity="0.7" paint-order="stroke" text-anchor="start">طهران</text>
+  </svg>
+  <!-- /map labels -->
+  <!-- the tapped province: Cairo Governorate (same 1688 x 1097 space as the overlay) -->
+  <svg class="sel" viewBox="0 0 1688 1097">
+    <path d="M795,467L797,485L779,486L777,474Z" fill="none" stroke="#7FF5EA" stroke-opacity="0.5" stroke-width="6"/>
+    <path id="cairo" d="M795,467L797,485L779,486L777,474Z" fill="#3FE0D0" fill-opacity="0.45" stroke="#7FF5EA" stroke-width="2"/>
+  </svg>
+</div>
+
+<div class="hud">
+  <!-- Top row: identity (right), indicators (centre), date + speed (left); all 36 pt, all at y = 8 -->
+  <header class="top">
+    <button class="nation glass bar tap" aria-label="الدولة: مصر، حسني مبارك، جمهورية رئاسية">
+      <span class="flag"><img src="../../shared/flag_eg.svg" alt="علم مصر"></span>
+      <span class="ntext">
+        <b class="nm">مصر</b>
+        <span class="ldr">حسني مبارك</span>
+        <span class="rg">جمهورية رئاسية</span>
+      </span>
+    </button>
+
+    <div class="stats glass bar">
+      <button class="stat tap"><span class="stat-in">
+        <span class="lblrow"><span class="lbl">الخزينة</span><svg class="trend down"><use href="#t-down"/></svg></span>
+        <span class="valrow"><svg class="i"><use href="#i-coins"/></svg><span class="num">36.0<span class="unit"> مليار $</span></span></span>
+      </span></button>
+      <button class="stat tap"><span class="stat-in">
+        <span class="lblrow"><span class="lbl">الاستقرار</span><svg class="trend down"><use href="#t-down"/></svg></span>
+        <span class="valrow"><svg class="i"><use href="#i-anchor"/></svg><span class="num ltr">58%</span></span>
+      </span></button>
+      <button class="stat tap"><span class="stat-in">
+        <span class="lblrow"><span class="lbl">الشرعية</span><svg class="trend down"><use href="#t-down"/></svg></span>
+        <span class="valrow"><svg class="i"><use href="#i-seal"/></svg><span class="num">44</span></span>
+      </span></button>
+      <button class="stat tap"><span class="stat-in">
+        <span class="lblrow"><span class="lbl">القوة البشرية</span><svg class="trend flat"><use href="#t-flat"/></svg></span>
+        <span class="valrow"><svg class="i"><use href="#i-people"/></svg><span class="num">2.4<span class="unit"> مليون</span></span></span>
+      </span></button>
+      <button class="stat tap"><span class="stat-in">
+        <span class="lblrow"><span class="lbl">النفوذ</span><svg class="trend up"><use href="#t-up"/></svg></span>
+        <span class="valrow"><svg class="i"><use href="#i-signal"/></svg><span class="num">62</span></span>
+      </span></button>
+      <button class="stat tap"><span class="stat-in">
+        <span class="lblrow"><span class="lbl">البحث</span><svg class="trend up"><use href="#t-up"/></svg></span>
+        <span class="valrow"><svg class="i"><use href="#i-flask"/></svg><span class="num"><span class="ltr">+18</span><span class="unit"> / شهر</span></span></span>
+      </span></button>
+    </div>
+
+    <div class="date glass bar">
+      <span class="dtext"><span class="dow">السبت</span><span class="dmy">1 يناير 2011</span></span>
+      <!-- The single speed control. Play/pause toggles the clock; the speed button opens the menu below.
+           Long-press on the speed button = pause (same as choosing إيقاف), so one finger can stop time fast. -->
+      <span class="cap" role="group" aria-label="سرعة اللعب">
+        <button class="play tap" aria-label="إيقاف مؤقت (اللعبة تعمل)"><svg class="i"><use href="#i-pause"/></svg></button>
+        <button class="spd tap" aria-label="السرعة 1×" aria-haspopup="menu" aria-controls="speedmenu"><span class="ltr">1×</span></button>
+      </span>
+    </div>
+  </header>
+
+  <!-- Speed menu (open with ?speedmenu=1) -->
+  <div class="menu glass" id="speedmenu" role="menu" aria-label="سرعة اللعب">
+    <button class="mrow tap stop" role="menuitemradio" aria-checked="false"><svg class="i chk"><use href="#i-check"/></svg><span>إيقاف</span></button>
+    <button class="mrow tap on" role="menuitemradio" aria-checked="true"><svg class="i chk"><use href="#i-check"/></svg><span class="ltr">1×</span></button>
+    <button class="mrow tap" role="menuitemradio" aria-checked="false"><svg class="i chk"><use href="#i-check"/></svg><span class="ltr">2×</span></button>
+    <button class="mrow tap" role="menuitemradio" aria-checked="false"><svg class="i chk"><use href="#i-check"/></svg><span class="ltr">5×</span></button>
+    <button class="mrow tap" role="menuitemradio" aria-checked="false"><svg class="i chk"><use href="#i-check"/></svg><span class="ltr">10×</span></button>
+    <button class="mrow tap" role="menuitemradio" aria-checked="false"><svg class="i chk"><use href="#i-check"/></svg><span>أقصى</span></button>
+  </div>
+
+  <div class="mid">
+    <!-- Left stack: notifications, map mode, my country (32 pt each, 8 pt apart) -->
+    <div class="lstack">
+      <div class="toast glass ctl">
+        <button class="alert-prev tap"><svg class="i"><use href="#i-warn"/></svg><span class="txt">احتجاجات واسعة في تونس</span></button>
+        <button class="bell tap" aria-label="الإشعارات"><svg class="i"><use href="#i-bell"/></svg><span class="badge">3</span></button>
+      </div>
+      <button class="btn glass ctl tap mode"><svg class="i"><use href="#i-layers"/></svg><span><span class="k">الخريطة:</span> سياسية</span></button>
+      <button class="btn glass ctl tap home"><svg class="i"><use href="#i-locate"/></svg><span>دولتي</span></button>
+    </div>
+  </div>
+
+  <!-- Section dock -->
+  <nav class="dock glass bar" aria-label="الأقسام">
+    <button class="dock-item tap end end-r"><svg class="i"><use href="#i-state"/></svg><span>الدولة</span></button>
+    <button class="dock-item tap"><svg class="i"><use href="#i-econ"/></svg><span>الاقتصاد</span></button>
+    <button class="dock-item tap"><svg class="i"><use href="#i-pol"/></svg><span>الداخلية والسياسة</span></button>
+    <button class="dock-item tap"><svg class="i"><use href="#i-army"/></svg><span>الجيش</span></button>
+    <button class="dock-item tap"><svg class="i"><use href="#i-globe"/></svg><span>الخارجية</span></button>
+    <button class="dock-item tap"><svg class="i"><use href="#i-eye"/></svg><span>الاستخبارات</span></button>
+    <button class="dock-item tap"><svg class="i"><use href="#i-flask"/></svg><span>البحث</span></button>
+    <button class="dock-item tap end end-l"><svg class="i"><use href="#i-more"/></svg><span>المزيد</span></button>
+  </nav>
+
+  <!-- Province panel, version 2 (bigger, calmer): ?theme=8 olive military, ?theme=9 sand dossier -->
+  <section class="sheet glass" aria-label="المحافظة: القاهرة">
+    <div class="q-in">
+      <header class="q-hd">
+        <span class="q-flag"><img src="../../shared/flags/eg.svg" alt="علم مصر"></span>
+        <div class="q-tt">
+          <div class="q-row"><h2 class="q-name">القاهرة</h2><span class="q-cap"><svg class="i"><use href="#i-star"/></svg><span>العاصمة</span></span></div>
+          <div class="q-sub">مصر<span class="q-dot"> · </span>محافظة</div>
+        </div>
+        <button class="q-more tap"><span>التفاصيل</span><svg class="i"><use href="#i-chev"/></svg></button>
+        <button class="q-x tap" aria-label="إغلاق"><svg class="i"><use href="#i-close"/></svg></button>
+      </header>
+
+      <p class="q-status"><svg class="i"><use href="#i-shield"/></svg><span>سيادة وإدارة <b>مصر</b><span class="q-dot"> · </span>سيطرة <b>الحكومة <span class="ltr">100%</span></b><span class="q-dot"> · </span>لا مطالبات</span></p>
+
+      <div class="q-kpis">
+        <button class="q-kpi tap" aria-label="السكان 8.8 مليون، لماذا؟">
+          <span class="q-ic"><svg class="i"><use href="#i-people"/></svg></span>
+          <span class="q-kl">السكان</span>
+          <span class="q-kv"><span class="q-n ltr">8.8</span><span class="q-u">مليون</span></span>
+          <span class="q-why"><svg class="q-tr q-flat"><use href="#t-flat"/></svg>لماذا؟</span>
+        </button>
+        <button class="q-kpi tap q-warn" aria-label="الاضطراب 64، يرتفع، لماذا؟">
+          <span class="q-ic"><svg class="i"><use href="#i-flame"/></svg></span>
+          <span class="q-kl">الاضطراب</span>
+          <span class="q-kv"><span class="q-n ltr">64</span><span class="q-u">/ 100</span></span>
+          <span class="q-why"><svg class="q-tr q-up"><use href="#t-up"/></svg>لماذا؟</span>
+        </button>
+        <button class="q-kpi tap" aria-label="البنية التحتية 8 من 10، لماذا؟">
+          <span class="q-ic"><svg class="i"><use href="#i-build"/></svg></span>
+          <span class="q-kl">البنية التحتية</span>
+          <span class="q-kv"><span class="q-n ltr">8</span><span class="q-u">/ 10</span></span>
+          <span class="q-why"><svg class="q-tr q-flat"><use href="#t-flat"/></svg>لماذا؟</span>
+        </button>
+      </div>
+
+      <div class="q-acts" aria-label="الإجراءات">
+        <button class="q-act tap q-first">
+          <span class="q-ai"><svg class="i"><use href="#i-build"/></svg></span>
+          <span class="q-an">مشروع بنية تحتية</span>
+          <span class="q-ac"><span class="ltr">0.8</span> مليار $ · <span class="ltr">24</span> شهرًا</span>
+          <span class="q-ae q-good"><svg class="q-tr q-up"><use href="#t-up"/></svg><span class="ltr">+1</span> بنية تحتية</span>
+        </button>
+        <button class="q-act tap">
+          <span class="q-ai"><svg class="i"><use href="#i-care"/></svg></span>
+          <span class="q-an">دعم الخدمات</span>
+          <span class="q-ac"><span class="ltr">0.3</span> مليار $</span>
+          <span class="q-ae q-good"><svg class="q-tr q-down"><use href="#t-down"/></svg><span class="ltr">−5</span> اضطراب</span>
+        </button>
+        <button class="q-act tap">
+          <span class="q-ai"><svg class="i"><use href="#i-shield"/></svg></span>
+          <span class="q-an">تعزيز الأمن</span>
+          <span class="q-ac"><span class="ltr">0.2</span> مليار $ / سنة</span>
+          <span class="q-ae q-good"><svg class="q-tr q-down"><use href="#t-down"/></svg><span class="ltr">−8</span> اضطراب <span class="q-bad"><span class="ltr">−3</span> شرعية</span></span>
+        </button>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- Device silhouette drawn on top: rounded corners, camera cutout, home indicator -->
+<div class="dev" aria-hidden="true">
+  <div class="corners"></div>
+  <div class="cutout"></div>
+  <div class="homebar"></div>
+  <div class="safe"></div>
+</div>
+
+<script>
+  /* Condense the nation card step by step until the top row fits the safe width
+     (nation + 8 + indicators + 8 + date/speed pill). */
+  function fitTop() {
+    var root = document.documentElement, top = document.querySelector('.top');
+    var kids = [document.querySelector('.nation'), document.querySelector('.stats'), document.querySelector('.date')];
+    var gap = parseFloat(getComputedStyle(top).columnGap) || 0;
+    for (var lv = 0; lv <= 3; lv++) {
+      root.dataset.fit = String(lv);
+      var need = kids.reduce(function (a, e) { return a + e.getBoundingClientRect().width; }, 0) + gap * (kids.length - 1);
+      if (need <= top.clientWidth + 0.01) break;
+    }
+    window.__fit = { level: +root.dataset.fit, need: need, avail: top.clientWidth };
+  }
+
+  /* ---------- Province sheet ---------- */
+  var $ = function (sel) { return document.querySelector(sel); };
+
+  /* Width = clamp(42% of the safe width, 340, 440) pt, rounded to whole points. */
+  function sizeSheet() {
+    var d = window.__dev, safe = d.W - 2 * d.SIDE, want = Math.min(480, Math.max(360, 0.52 * safe));
+    document.documentElement.style.setProperty('--sheet-w', Math.round(want) + 'px');
+    var tab = document.documentElement.dataset.tab;
+    Array.prototype.forEach.call(document.querySelectorAll('.sg'), function (b) { b.setAttribute('aria-selected', String(b.dataset.for === tab)); });
+    window.__sheet = { safe: safe, want: want };
+  }
+
+  /* The sheet ends 8 pt above the section dock wherever the two share a column (every iPhone), so the dock
+     keeps its B3 place and size. Only where the dock is clear of the sheet's column would the sheet run
+     down to the dock line. */
+  function placeSheet() {
+    var root = document.documentElement, hud = $('.hud').getBoundingClientRect(), dk = $('.dock').getBoundingClientRect(), sh = $('.sheet').getBoundingClientRect();
+    var shared = dk.right > sh.left - 8 && dk.left < sh.right + 8;
+    var b = shared ? Math.round(hud.bottom - dk.top + 8) : 0;
+    root.style.setProperty('--sheet-b', b + 'px');
+    window.__sheetpos = { aboveDock: shared, bottomGap: b };
+  }
+
+  function fitStatus() {
+    var root = document.documentElement, st = $('.status');
+    root.dataset.status = '0';
+    var need = Array.prototype.reduce.call(st.children, function (a, e) { return a + e.getBoundingClientRect().width; }, 0) + 3 * 2 * 8;
+    if (need > st.clientWidth + 0.01) root.dataset.status = '1';
+    window.__status = { level: +root.dataset.status, need: need, avail: st.clientWidth };
+  }
+
+  /* Pick the fit level that shows the most whole action rows in the pinned card (the loosest level wins a tie).
+     The card is then capped to those whole rows and scrolls the rest; any spare height goes to the gap
+     above the pinned card, never to a blank band under it or to a cut row. */
+  function fitSheet() {
+    fitStatus();
+    var root = document.documentElement, acts = $('.acts'), rows = document.querySelectorAll('.act');
+    var body = $('.sheet .body'), tabs = $('.sheet .tabs'), cur = root.dataset.tab;
+    acts.style.maxHeight = ''; tabs.style.minHeight = ''; root.dataset.actscroll = '0';
+    var n = rows.length, rowH = rows[0].getBoundingClientRect().height, best = null, tried = [];
+    for (var lv = 0; lv <= 4; lv++) {
+      root.dataset.sheetfit = String(lv);
+      if (lv === 4 && best.rows > 0) break;                 /* level 4 only when nothing else shows a whole row */
+      var need = 0;
+      ['politics', 'society', 'economy', 'security'].forEach(function (t) {
+        root.dataset.tab = t;
+        need = Math.max(need, $('.pane[data-tab="' + t + '"]').getBoundingClientRect().height);
+      });
+      root.dataset.tab = cur;
+      var room = body.clientHeight - need - parseFloat(getComputedStyle(body).rowGap);
+      var k = Math.max(0, Math.min(n, Math.floor((room + 0.01) / rowH)));
+      tried.push([lv, +room.toFixed(2), k]);
+      if (!best || k > best.rows || (k === 0 && room > best.room)) best = { level: lv, rows: k, room: room, need: need };
+      if (k === n) break;
+    }
+    root.dataset.sheetfit = String(best.level);
+    tabs.style.minHeight = best.need + 'px';                 /* switching tabs never moves anything */
+    if (best.rows < n) {
+      acts.style.maxHeight = Math.max(1, best.rows) * rowH + 'px';
+      root.dataset.actscroll = '1';
+      var bar = $('.sbar'), ar = acts.getBoundingClientRect(), sr = $('.sheet').getBoundingClientRect();
+      var shown = acts.clientHeight, full = acts.scrollHeight;
+      bar.style.top = (ar.top - sr.top - 1 + 4) + 'px';
+      bar.style.height = Math.max(16, (shown - 8) * shown / full) + 'px';
+    }
+    window.__sheetfit = { level: best.level, rows: best.rows, of: n, spare: +(best.room - best.rows * rowH).toFixed(2), tried: tried };
+  }
+
+  /* Place the map so Cairo and the Nile delta, and if possible all of Egypt, sit in the map area left
+     of the sheet, clear of every panel (and its hit boxes), near the middle of that area. The largest
+     zoom (0.8 to 1.3 x the play screen's) that keeps all of Egypt clear wins. Within that zoom a place that
+     slices fewer map labels with a panel edge is preferred (one label is worth about 45 pt of distance),
+     and any label still sliced is then hidden (a city's dot and name as one unit), so no label or dot is
+     ever shown cut in two, and no dot without its name. */
+  function placeMap() {
+    var d = window.__dev, W = d.W, H = d.H;
+    var s0 = 0.63 * H / 390, MW0 = 1688, MH0 = 1097;
+    var EG = { x0: 583, y0: 424, x1: 945, y1: 732, cx: 764, cy: 578 };
+    var DELTA = { x0: 722, y0: 428, x1: 836, y1: 492 };        /* Cairo Governorate + the Nile delta */
+    var PAD = 8;                                                /* covers the 44 pt hit boxes (at most 6 beyond a control) */
+    var LPAD = 2;                                               /* a label closer than 2 pt to a panel edge counts as cut */
+    var obs = Array.prototype.filter.call(document.querySelectorAll('.hud .glass'), function (e) { return !e.classList.contains('menu') && e.getClientRects().length; })
+      .map(function (e) { return e.getBoundingClientRect(); });
+    var top = $('.top').getBoundingClientRect(), sh = $('.sheet').getBoundingClientRect(), hud = $('.hud').getBoundingClientRect();
+    var dk = $('.dock').getClientRects().length ? $('.dock').getBoundingClientRect() : null;
+    var tx = (hud.left + sh.left) / 2, ty = (top.bottom + (dk ? dk.top : hud.bottom)) / 2;
+    var safe = { x0: Math.max(d.SIDE, 0), x1: W - Math.max(d.SIDE, 0), y0: 0, y1: H - d.BOTTOM };
+    /* label units (a country name, or a city's dot + name) and their boxes in map space (halo stroke included) */
+    var units = Array.prototype.map.call(document.querySelectorAll('.labels text'), function (t) {
+      var k = t.getAttribute('data-city');
+      return k === null ? [t] : [t, document.querySelector('.labels circle[data-city="' + k + '"]')];
+    });
+    units.forEach(function (u) { u.forEach(function (e) { e.classList.remove('cut'); }); });
+    function hw(e) { return parseFloat(e.getAttribute('stroke-width') || 0) / 2; }
+    function union(rs) { return rs.reduce(function (a, r) { return [Math.min(a[0], r[0]), Math.min(a[1], r[1]), Math.max(a[2], r[2]), Math.max(a[3], r[3])]; }); }
+    var LB = units.map(function (u) { return union(u.map(function (e) { var bb = e.getBBox(), w = hw(e); return [bb.x - w, bb.y - w, bb.x + bb.width + w, bb.y + bb.height + w]; })); });
+    function clear(r) {
+      if (r.x0 < safe.x0 || r.x1 > safe.x1 || r.y0 < safe.y0 || r.y1 > safe.y1) return false;
+      return !obs.some(function (o) { return !(r.x1 <= o.left || r.x0 >= o.right || r.y1 <= o.top || r.y0 >= o.bottom); });
+    }
+    function box(B, s, cx, cy) { return { x0: cx + (B.x0 - EG.cx) * s - PAD, x1: cx + (B.x1 - EG.cx) * s + PAD, y0: cy + (B.y0 - EG.cy) * s - PAD, y1: cy + (B.y1 - EG.cy) * s + PAD }; }
+    /* is a label box cut by a panel edge (partly under a panel, or squeezed against one)? */
+    function cutBox(x0, y0, x1, y1) {
+      if (x1 <= 0 || x0 >= W || y1 <= 0 || y0 >= H) return false;
+      for (var j = 0; j < obs.length; j++) {
+        var o = obs[j];
+        if (x0 >= o.left && x1 <= o.right && y0 >= o.top && y1 <= o.bottom) return false;     /* fully under this panel */
+      }
+      for (j = 0; j < obs.length; j++) {
+        o = obs[j];
+        if (x1 > o.left - LPAD && x0 < o.right + LPAD && y1 > o.top - LPAD && y0 < o.bottom + LPAD) return true;
+      }
+      return false;
+    }
+    function cuts(s, cx, cy) {
+      var n = 0;
+      for (var i = 0; i < LB.length; i++) { var l = LB[i]; if (cutBox(cx + (l[0] - EG.cx) * s, cy + (l[1] - EG.cy) * s, cx + (l[2] - EG.cx) * s, cy + (l[3] - EG.cy) * s)) n++; }
+      return n;
+    }
+    function search(s, B) {
+      var best = null, MW = MW0 * s, MH = MH0 * s;
+      for (var cy = 0; cy <= H; cy += 2) for (var cx = 0; cx <= W; cx += 2) {
+        var L = cx - EG.cx * s, T = cy - EG.cy * s;
+        if (L > 0 || L + MW < W || T > 0 || T + MH < H) continue;       /* map stays full-bleed */
+        if (!clear(box(B, s, cx, cy))) continue;
+        var cost = (cx - tx) * (cx - tx) + 2 * (cy - ty) * (cy - ty);
+        if (best && cost >= best.cost) continue;                          /* labels only ever add cost */
+        cost += 2000 * cuts(s, cx, cy);
+        if (!best || cost < best.cost) best = { cost: cost, cx: cx, cy: cy };
+      }
+      return best;
+    }
+    var pick = null, z;
+    for (z = 1.3; z >= 0.8 - 1e-6 && !pick; z -= 0.05) { var b = search(s0 * z, EG); if (b) pick = { s: s0 * z, z: z, b: b, egypt: true }; }
+    if (!pick) { var b2 = search(s0, DELTA); pick = { s: s0, z: 1, b: b2, egypt: false }; }
+    var s = pick.s, cx = pick.b ? pick.b.cx : tx, cy = pick.b ? pick.b.cy : ty;
+    var root = document.documentElement.style;
+    root.setProperty('--map-s', String(s));
+    root.setProperty('--map-cx', cx + 'px');
+    root.setProperty('--map-cy', cy + 'px');
+    /* hide what is still cut, measured on the rendered labels and dots */
+    var hidden = [];
+    units.forEach(function (u) {
+      var b = union(u.map(function (e) { var r = e.getBoundingClientRect(), w = hw(e) * s; return [r.left - w, r.top - w, r.right + w, r.bottom + w]; }));
+      if (cutBox(b[0], b[1], b[2], b[3])) { u.forEach(function (e) { e.classList.add('cut'); }); hidden.push(u[0].textContent); }
+    });
+    function scr(B) { return { x0: cx + (B.x0 - EG.cx) * s, x1: cx + (B.x1 - EG.cx) * s, y0: cy + (B.y0 - EG.cy) * s, y1: cy + (B.y1 - EG.cy) * s }; }
+    window.__map = { ok: !!pick.b, egyptClear: pick.egypt, s: s, zoom: +pick.z.toFixed(2), cx: cx, cy: cy, target: [tx, ty], egypt: scr(EG), delta: scr(DELTA), hiddenLabels: hidden };
+  }
+
+  /* Frosted glass for the mockup render. The headless Chromium used for these PNGs leaves a sharp
+     copy of image content under backdrop-filter (map labels showed through the panels). So each
+     panel gets its own clipped copy of the map, blurred with filter: blur(), under the 0.66 tint:
+     the same look the native blur gives in the app. backdrop-filter stays as the fallback. */
+  function frost() {
+    var m = document.querySelector('.map').getBoundingClientRect();
+    Array.prototype.forEach.call(document.querySelectorAll('.hud .glass'), function (g) {
+      var f = g.querySelector(':scope > .frost');
+      if (!f) {
+        f = document.createElement('span'); f.className = 'frost'; f.setAttribute('aria-hidden', 'true');
+        f.appendChild(document.createElement('i'));
+        g.insertBefore(f, g.firstChild);
+      }
+      var r = g.getBoundingClientRect(), cs = getComputedStyle(g), i = f.firstChild;
+      i.style.left = (m.left - r.left - parseFloat(cs.borderLeftWidth)) + 'px';
+      i.style.top = (m.top - r.top - parseFloat(cs.borderTopWidth)) + 'px';
+      i.style.width = m.width + 'px';
+      i.style.height = m.height + 'px';
+    });
+    document.documentElement.classList.add('frosted');
+  }
+
+  (document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve())
+    .then(fitTop).then(sizeSheet).then(placeSheet).then(placeMap).then(frost).then(function () { window.__ready = true; });
+</script>
+</body>
+</html>
