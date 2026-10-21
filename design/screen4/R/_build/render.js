@@ -1,6 +1,8 @@
 // Screen 4 variant R (the province panel after the owner's two reference images): render the iPhones and run the checks.
 // Writes <id>.png (the card, step 1) to the variant folder; <id>_govern.png, <id>_govern_end.png (step 2, the details),
-// <id>_hit.png and report.json to _build.
+// <id>_hit.png and report.json to _build. The details are also checked at the middle scroll offsets the top and end
+// views leave out (no PNG), and every string of the details must be shown clear of the fades in one of those views.
+// Before anything, index.html must be the current output of assemble.py.
 // Checks: opaque panels (D-3); each control's height from the panel's size table; radii; flex/grid gaps; icon sizes and
 // strokes; type sizes, weights and colours; 44 pt hit boxes (cover the control, no overlap, clipped to their scroll
 // area); safe insets; panels never overlap; text over text, icons over text, clipped text (a cut is allowed only at a
@@ -8,13 +10,16 @@
 // the sheet geometry (the card: 320 pt, ends 8+ pt above the dock, the whole HUD at its B3 place; the full-height sheet:
 // the overview fits without scrolling, the dock left beside it or hidden); every other HUD element at its exact B3 place
 // and size (B3 loaded side by side); RTL order; the brief's content per view;
-// and on the map: Cairo's highlight, ring and name pill clear of every panel and hit box, Egypt and the delta clear,
-// no map label cut by a panel edge.
+// a scroll hint centred in its clear strip under the bottom fade; and on the map: Cairo's highlight, ring and name pill
+// clear of every panel and hit box, Egypt and the delta clear, no map label cut by a panel edge or sliced by the
+// screen edge or the side inset.
 // Usage: NODE_PATH=.../node_modules node render.js [ids...]   (default: all 7)   |   node render.js --selftest
 const { chromium } = require('playwright');
 const path = require('path');
 const fs = require('fs');
 const crypto = require('crypto');
+const os = require('os');
+const { execFileSync } = require('child_process');
 
 const OUT = path.resolve(__dirname, '..');
 const PAGE = 'file://' + path.join(OUT, 'index.html');
@@ -23,9 +28,30 @@ const args = process.argv.slice(2);
 const SELFTEST = args.includes('--selftest');
 const want = args.filter((a) => !a.startsWith('--'));
 const DEVICES = (want.length ? want : ALL.map((d) => d.id)).map((id) => ALL.find((d) => d.id === id) || (() => { throw new Error('unknown device ' + id); })());
-// the files a report or self-test is made from; check_screen.py recomputes this hash and refuses a stale report
-const INPUTS = ['index.html', '_build/render.js', '_build/panel.css', '_build/sheet.html', '_build/assemble.py'];
+// the files a report or self-test is made from; check_screen.py recomputes this hash and refuses a stale report.
+// The sources assemble.py reads, the B3 page the HUD is compared with, devices.json, and every file the two pages
+// load (the header strip, the flags, the map images), as recorded when they open.
+const REPO = path.resolve(OUT, '../../..');
+const STATIC_INPUTS = ['index.html', '_build/render.js', '_build/panel.css', '_build/sheet.html', '_build/assemble.py', '../A/index.html',
+  '../../screen1/B3/index.html', '../../shared/devices.json'];
+let INPUTS = STATIC_INPUTS.slice();
 const inputsHash = () => crypto.createHash('sha1').update(Buffer.concat(INPUTS.map((f) => fs.readFileSync(path.join(OUT, f))))).digest('hex');
+async function recordInputs(b) {
+  const d = ALL.find((x) => x.id === 'i16promax'), seen = new Set();
+  const ctx = await b.newContext({ viewport: { width: d.w, height: d.h } });
+  ctx.on('request', (r) => { if (r.url().startsWith('file://')) seen.add(path.relative(OUT, decodeURIComponent(new URL(r.url()).pathname))); });
+  for (const u of [PAGE + qs(d), PAGE + qs(d) + '&view=govern', B3 + qs(d)]) { const p = await open(ctx, u); await p.close(); }
+  await ctx.close();
+  INPUTS = [...new Set(STATIC_INPUTS.concat([...seen].sort()))];
+}
+// refuse to judge a page that is not what assemble.py makes from the current sources
+function assertAssembled() {
+  const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'screen4r-'));
+  try {
+    execFileSync('python3', ['-I', path.join(__dirname, 'assemble.py'), REPO, __dirname, tmp], { stdio: 'pipe' });
+    if (!fs.readFileSync(path.join(tmp, 'index.html')).equals(fs.readFileSync(path.join(OUT, 'index.html')))) throw new Error('index.html is not the current output of assemble.py: run assemble.py first');
+  } finally { fs.rmSync(tmp, { recursive: true, force: true }); }
+}
 const VIEWS = [['', ''], ['_govern', '&view=govern'], ['_govern_end', '&view=govern&scroll=end']];
 
 const TOK = {
@@ -37,17 +63,21 @@ const TOK = {
   // the panel's size table (the owner's reference): control heights, radii, icon sizes, gaps
   ctlH: { '.r-x': 32, '.r-why': 14, '.r-act': 44, '.r-more': 36, '.r-tab': 44, '.r-btn': 24, '.r-rd': 26, '.r-link': 44 },
   radius: { '.sheet': 12, '.r-act': 10, '.r-link': 10, '.r-more': 10, '.r-dec': 10, '.r-tile': 6, '.r-chip': 6, '.r-btn': 6, '.r-cap': 10 },
-  sheetIcon: [['.r-cap svg', 10], ['.r-arr', 10], ['.r-kl svg', 14], ['.r-x svg', 16], ['.r-more svg', 16], ['.r-chev', 16], ['.r-tile svg', 17], ['.r-tab svg', 17], ['.r-dic', 17]],
+  sheetIcon: [['.r-cap svg', 10], ['.r-arr', 10], ['.r-kl svg', 14], ['.r-x svg', 16], ['.r-hint svg', 16], ['.r-more svg', 16], ['.r-chev', 16], ['.r-tile svg', 17], ['.r-tab svg', 17], ['.r-dic', 17]],
   sheetSpace: [0, 2, 4, 8, 12, 16],
   title18: ['r-name', 'r-kv'],
-  fade: 24,
+  fade: 24, strip: 22,                                // the fade, and the clear strip under the bottom fade for the scroll hint
+  overlap: 56,                                        // the middle views overlap their neighbours by this much
 };
 // The brief's strings (as the page writes them). "now": fully visible in that render; "dom": in the sheet (by scroll).
 const BRIEF = {
   card: ['القاهرة', 'العاصمة', 'مصر · محافظة', 'السكان', '8.8', 'مليون', '+14 ألف شهريًا', 'الاضطرابات', '64', '/ 100', '+2 شهريًا',
     'البنية التحتية', '/ 10', 'دون تغير', 'لماذا؟', 'السيادة', 'الإدارة', 'حكومة مصر', 'السيطرة', 'الحكومة · 100%', 'المطالبات', 'لا توجد', 'تفاصيل المحافظة'],
+  // (the tax burden's three choices sit under the bottom fade on the SE since the scroll hint got its clear strip; the
+  // coverage check across the details' views shows them clear there)
   govern: ['القاهرة', 'العاصمة', 'الحكم', 'الإنشاءات', 'القوات', 'السياسات', 'إدارة المحافظة', 'المحافظ', 'د. عمر منصور', 'تغيير',
-    'الأولوية التنموية', 'الصناعة', 'الخدمات', 'البنية التحتية', 'العبء الضريبي', 'مخفض', 'متوازن', 'مرتفع'],
+    'الأولوية التنموية', 'الصناعة', 'الخدمات', 'البنية التحتية', 'العبء الضريبي'],
+  govern_mid: ['القاهرة', 'العاصمة', 'الحكم', 'الإنشاءات', 'القوات', 'السياسات'],
   govern_end: ['القاهرة', 'الحكم',
     'قرار مقترح', 'دعم النقل العام', 'تخفيض تعرفة الحافلات لمدة سنة', '10 ملايين $ · شهريًا · يبدأ خلال 30 يومًا',
     'تخفيف أعباء التنقل · زيادة الإنفاق العام', 'المحافظ: مؤيد · المالية: تحفظ', 'اعتماد البرنامج', 'تأجيل'],
@@ -106,7 +136,8 @@ async function measure(p, d, b3, view) {
         const sc = getComputedStyle(scroller), mk = sc.webkitMaskImage && sc.webkitMaskImage !== 'none' ? sc.webkitMaskImage : (sc.maskImage || 'none');
         const clr = '(?:rgba\\(0, 0, 0, 0\\)|transparent)';
         ftop = root.dataset.ftop === '1' && new RegExp('^linear-gradient\\((?:[^,()]*deg, )?' + clr + ', ').test(mk) && /\) 24px/.test(mk);
-        fbot = root.dataset.fbot === '1' && /calc\(100% - 24px\)/.test(mk) && new RegExp(clr + '\\)$').test(mk);
+        // the bottom fade runs 46..22 pt above the edge and the last 22 pt (the hint's strip) are clear
+        fbot = root.dataset.fbot === '1' && new RegExp('calc\\(100% - ' + (TOK.fade + TOK.strip) + 'px\\), ' + clr + ' calc\\(100% - ' + TOK.strip + 'px\\)\\)$').test(mk);
       }
       return { c, scroller, ftop, fbot };
     };
@@ -119,7 +150,7 @@ async function measure(p, d, b3, view) {
       if (r.y1 > c.y1 + 0.5 && !fbot) return 'bottom';
       return '';
     };
-    const inFade = (r, e) => { const { c, ftop, fbot } = clipOf(e); return (ftop && r.y0 < c.y0 + TOK.fade) || (fbot && r.y1 > c.y1 - TOK.fade); };
+    const inFade = (r, e) => { const { c, ftop, fbot } = clipOf(e); return (ftop && r.y0 < c.y0 + TOK.fade) || (fbot && r.y1 > c.y1 - TOK.fade - TOK.strip); };
 
     // ---------- 1. panels: opaque (D-3), border, radius ----------
     const panels = qa('.hud .glass').filter((e) => !e.classList.contains('menu') || root.classList.contains('menu-open'));
@@ -213,7 +244,7 @@ async function measure(p, d, b3, view) {
       const a = st[i].line, b = st[j].line;
       if (Math.min(a.x1, b.x1) - Math.max(a.x0, b.x0) > 0.5 && Math.min(a.y1, b.y1) - Math.max(a.y0, b.y0) > 0.5) issues.push(`text overlap "${st[i].t}" / "${st[j].t}"`);
     }
-    const icons = [...document.querySelectorAll('.hud svg')].filter((s) => s.getClientRects().length && !s.closest('.frost') && getComputedStyle(s).visibility !== 'hidden')
+    const icons = [...document.querySelectorAll('.hud svg')].filter((s) => s.getClientRects().length && !s.closest('.frost') && !s.closest('.r-hint') && getComputedStyle(s).visibility !== 'hidden')   // the scroll hint sits in the fade by design
       .map((s) => { const r = box(s.getBoundingClientRect()), c = clipOf(s).c; return { s, r: { x0: Math.max(r.x0, c.x0), x1: Math.min(r.x1, c.x1), y0: Math.max(r.y0, c.y0), y1: Math.min(r.y1, c.y1) } }; })
       .filter((o) => o.r.x1 - o.r.x0 > 0.05 && o.r.y1 - o.r.y0 > 0.05);
     texts.forEach((t) => {
@@ -343,10 +374,18 @@ async function measure(p, d, b3, view) {
       const wantTop = bd.scrollTop > 0.5, wantBot = bd.scrollTop < over - 0.5;
       if ((root.dataset.ftop === '1') !== wantTop || (root.dataset.fbot === '1') !== wantBot) issues.push(`fades ${root.dataset.ftop}/${root.dataset.fbot} do not match the scroll state (top ${bd.scrollTop}, over ${over.toFixed(1)})`); }
     // scroll hint: when the bottom edge hides content, content visibly fades into it (at least 8 pt of a row in the fade)
-    { const bd = q(view === 'card' ? '.r-body.r-ov' : '.r-body.r-gv'), c = bd.getBoundingClientRect();
+    { const bd = q(view === 'card' ? '.r-body.r-ov' : '.r-body.r-gv'), c = bd.getBoundingClientRect(), fb = c.bottom - TOK.strip;
       const rows = [...bd.querySelectorAll('.r-link, .r-dec h3, .r-dbody, .r-gov, .r-radios, .r-sec h3, .r-act, .r-more, .r-sc, .r-kpi')].filter(visible).map((e) => e.getBoundingClientRect());
       const inBand = (y0, y1) => rows.some((r) => Math.min(r.bottom, y1) - Math.max(r.top, y0) >= 8);
-      if (root.dataset.fbot === '1' && !inBand(c.bottom - TOK.fade, c.bottom)) issues.push('no scroll hint: nothing fades into the bottom edge');
+      if (root.dataset.fbot === '1' && !inBand(fb - TOK.fade, fb) && !visible(q('.r-hint'))) issues.push('no scroll hint: nothing fades into the bottom edge');
+      if ((root.dataset.fbot === '1') !== visible(q('.r-hint'))) issues.push(`scroll hint chevron ${visible(q('.r-hint')) ? 'shown without' : 'missing with'} content below`);
+      // the chevron sits centred in the clear strip under the fade, over no legible text
+      const h = q('.r-hint');
+      if (visible(h)) {
+        const hb = h.getBoundingClientRect();
+        if (hb.top < fb - 0.5 || hb.bottom > c.bottom + 0.5 || Math.abs((hb.left + hb.right) / 2 - (c.left + c.right) / 2) > 0.6) issues.push(`scroll hint not centred in the clear strip under the fade: y ${hb.top.toFixed(1)}..${hb.bottom.toFixed(1)} (strip ${fb.toFixed(1)}..${c.bottom.toFixed(1)})`);
+        texts.filter((x) => x.sheet && !x.faded).forEach((x) => { if (inter(x.line, box(hb))) issues.push(`scroll hint over text: "${x.t}"`); });
+      }
       // (the top edge needs no hint: the player reaches it by scrolling down, so they know content is above)
     }
     // the open view only
@@ -384,11 +423,15 @@ async function measure(p, d, b3, view) {
       return cands.filter((e) => !cands.some((o) => o !== e && e.contains(o))); };
     const clearShown = (e) => { const r = box(e.getBoundingClientRect()), { c } = clipOf(e);
       return r.y0 >= c.y0 - 0.5 && r.y1 <= c.y1 + 0.5 && r.x0 >= c.x0 - 0.5 && r.x1 <= c.x1 + 0.5 && !inFade(r, e) && effOp(e) >= 0.99; };
-    BRIEF[view].forEach((s) => { const L = leafs(s); if (!L.length) issues.push(`brief text missing: ${s}`); else if (!L.some(clearShown)) issues.push(`brief text not fully visible: ${s}`); });
+    (BRIEF[view] || BRIEF.govern_mid).forEach((s) => { const L = leafs(s); if (!L.length) issues.push(`brief text missing: ${s}`); else if (!L.some(clearShown)) issues.push(`brief text not fully visible: ${s}`); });
+    // the details' strings: each must fit between the fades; the ones shown clear here are reported (each must be shown
+    // clear in one of the details' views: checked across the views)
+    const clearNow = [];
     if (/govern/.test(view)) BRIEF.details.forEach((s) => {
       const L = leafs(s); if (!L.length) { issues.push(`brief text missing: ${s}`); return; }
-      const ok = L.some((e) => { const { scroller } = clipOf(e); return scroller ? e.getBoundingClientRect().height <= scroller.clientHeight - 2 * TOK.fade + 0.5 && effOp(e) >= 0.99 : clearShown(e); });
-      if (!ok) issues.push(`brief text cannot be scrolled clear of the fades: ${s}`); });
+      const ok = L.some((e) => { const { scroller } = clipOf(e); return scroller ? e.getBoundingClientRect().height <= scroller.clientHeight - 2 * TOK.fade - TOK.strip + 0.5 && effOp(e) >= 0.99 : clearShown(e); });
+      if (!ok) issues.push(`brief text cannot be scrolled clear of the fades: ${s}`);
+      if (L.some(clearShown)) clearNow.push(s); });
     const all = q('.sheet').textContent.replace(/\s+/g, ' ');
     Object.values(BRIEF).flat().forEach((s) => { if (!all.includes(s)) issues.push(`brief text missing: ${s}`); });
     // ---------- 10. map: Cairo's highlight, ring and name pill clear of every panel and hit box ----------
@@ -419,12 +462,13 @@ async function measure(p, d, b3, view) {
       if (r.right + sw <= 0 || r.left - sw >= W || r.bottom + sw <= 0 || r.top - sw >= H) return;      // off screen
       const under = prs.some((o) => r.left - sw >= o.r.x0 && r.right + sw <= o.r.x1 && r.top - sw >= o.r.y0 && r.bottom + sw <= o.r.y1);
       if (!under && prs.some((o) => inter(b, o.r))) issues.push(`map ${what} cut by a panel edge`);
+      if (r.left - sw < Math.max(S, 0) || r.right + sw > W - Math.max(S, 0) || r.top - sw < 0 || r.bottom + sw > H) issues.push(`map ${what} sliced by the screen edge or the side inset`);
       if (inter(b, grow(pin, 0))) issues.push(`map ${what} under the name pill`);
       prs.forEach((o) => { const sx0 = o.r.x0 < 70 ? 0 : o.r.x0, sx1 = W - o.r.x1 < 70 ? W : o.r.x1;
         if ((sx0 !== o.r.x0 || sx1 !== o.r.x1) && b.x1 > sx0 && b.x0 < sx1 && b.y1 > o.r.y0 && b.y0 < o.r.y1 && (r.left - sw < o.r.x0 || r.right + sw > o.r.x1)) issues.push(`map ${what} squeezed between a panel and the screen edge`); });
     });
 
-    return { issues, typeSeen, texts, fit: { top: window.__fit, sheet: fit, sheetPos: window.__sheetpos, body }, map: m, hiddenLabels, cairo: R(cairo), pin: R(pin),
+    return { issues, typeSeen, texts, clearNow, fit: { top: window.__fit, sheet: fit, sheetPos: window.__sheetpos, body }, map: m, hiddenLabels, cairo: R(cairo), pin: R(pin),
       sheet: R(sr), hits: taps.map((t) => ({ l: t.label, x0: +t.hit.x0.toFixed(1), x1: +t.hit.x1.toFixed(1), y0: +t.hit.y0.toFixed(1), y1: +t.hit.y1.toFixed(1) })) };
   }, { d, TOK, BRIEF, b3, view, HUDSEL_REST });
 }
@@ -467,7 +511,28 @@ async function open(ctx, url) {
   return p;
 }
 const qs = (d) => `?w=${d.w}&h=${d.h}&side=${d.side}&bottom=${d.bottom}&cutout=${d.cutout}`;
-const viewOf = (extra) => (/scroll=end/.test(extra) ? 'govern_end' : /view=govern/.test(extra) ? 'govern' : 'card');
+const viewOf = (extra) => { const s = (extra.match(/scroll=(\d+)/) || [0, ''])[1];
+  return /scroll=end/.test(extra) ? 'govern_end' : s ? 'govern_at' + s : /view=govern/.test(extra) ? 'govern' : 'card'; };
+// the middle scroll offsets the details need so that every part is clear of the fades in one view: the top view shows
+// 0..h-46 clear, the end view over+24..full, a middle one at s shows s+24..s+h-46; neighbours overlap by 56 pt
+function midScrolls(h, over) {
+  const out = [], band = h - TOK.fade - TOK.fade - TOK.strip;
+  if (over <= 0.5 || band <= TOK.overlap) return out;
+  let end = h - TOK.fade - TOK.strip;
+  while (over + TOK.fade > end - TOK.overlap) {
+    const s = Math.round(end - TOK.overlap - TOK.fade);
+    if (s >= over) break;
+    out.push(s); end = s + h - TOK.fade - TOK.strip;
+  }
+  return out;
+}
+async function viewsFor(ctx, d) {
+  const out = VIEWS.map(([suffix, extra]) => ({ suffix, extra, png: true }));
+  const p = await open(ctx, PAGE + qs(d) + '&view=govern'), bo = await p.evaluate(() => window.__body); await p.close();
+  midScrolls(bo.shown, bo.over).forEach((s) => out.push({ suffix: '_govern_at' + s, extra: '&view=govern&scroll=' + s, png: false }));
+  return out;
+}
+const coverage = (seen) => BRIEF.details.filter((s) => !seen.has(s)).map((s) => `details: never shown clear of the fades in any view: ${s}`);
 
 async function check(p, d, b3, view) {
   const m = await measure(p, d, b3, view);
@@ -484,6 +549,10 @@ async function selftest(b) {
   for (const x of [d, se]) ctxs[x.id] = await b.newContext({ viewport: { width: x.w, height: x.h }, deviceScaleFactor: 1 });
   // [name, device, extra url, css, expected issue, optional page script]
   const cases = [
+    ['fade without the hint strip', se, '&view=govern', '[data-fbot="1"] .r-body { -webkit-mask-image: linear-gradient(180deg, #000 calc(100% - 24px), transparent) !important; mask-image: linear-gradient(180deg, #000 calc(100% - 24px), transparent) !important; }', /clipped text \(bottom\)|control cut by its scroll area \(bottom\)/],
+    ['hint over the content', d, '&view=govern', '.r-hint { bottom: 150px !important; }', /scroll hint not centred in the clear strip/],
+    ['hint over legible text', d, '&view=govern', '.r-hint { bottom: 150px !important; }', /scroll hint over text/],
+    ['map label at the screen edge', d, '', '.labels .cut { display: inline !important; }', /map (label|city dot) .* sliced by the screen edge or the side inset/],
     ['type size', d, '', '.r-name { font-size: 17px !important; }', /font size 17 for "القاهرة"/],
     ['18 pt misuse', d, '', '.r-sub { font-size: 18px !important; font-weight: 700 !important; }', /18 pt is for the province name/],
     ['font weight', d, '&view=govern', '.r-at b { font-weight: 700 !important; }', /font weight 13\/700/],
@@ -521,7 +590,8 @@ async function selftest(b) {
     ['decision buttons swapped', d, '&view=govern&scroll=end', '.r-dbtn { flex-direction: row-reverse; }', /«اعتماد البرنامج» must be right of «تأجيل»/],
     ['fit level not the loosest', d, '', '', /fit level 3 is not the loosest that fits/, () => { document.documentElement.dataset.rfit = '3'; }],
     ['details not at level 0', d, '&view=govern', '', /details at fit level 2/, () => { document.documentElement.dataset.rfit = '2'; }],
-    ['no scroll hint', d, '&view=govern', '.r-links { margin-top: 400px !important; }', /no scroll hint: nothing fades into the bottom edge/],
+    ['no scroll hint', d, '&view=govern', '.r-links { margin-top: 400px !important; } .r-hint { display: none !important; }', /no scroll hint: nothing fades into the bottom edge/],
+    ['hint chevron missing', d, '&view=govern', '.r-hint { display: none !important; }', /scroll hint chevron missing with content below/],
     ['close not round', d, '', '.r-x { width: 40px !important; }', /close button is not round/],
     ['RTL order', d, '&view=govern', '.r-link .r-chev { order: -1; }', /link row 1: order must be tile, text/],
     ['two tabs selected', d, '&view=govern', '', /exactly one tab must be selected/, () => { document.querySelectorAll('.r-tab')[1].classList.add('on'); }],
@@ -544,20 +614,33 @@ async function selftest(b) {
     await p.close();
   }
   const clean = {};
-  for (const x of [d, se]) for (const [suffix, extra] of VIEWS) {
-    const p0 = await open(ctxs[x.id], PAGE + qs(x) + extra);
-    clean[x.id + suffix] = (await check(p0, x, ref[x.id], viewOf(extra))).m.issues;
-    console.log(`clean page ${x.id}${suffix}: ${clean[x.id + suffix].length} issues${clean[x.id + suffix].length ? ' -> ' + clean[x.id + suffix].slice(0, 4).join(' || ') : ''}`);
-    await p0.close();
+  for (const x of [d, se]) {
+    const seen = new Set();
+    for (const v of await viewsFor(ctxs[x.id], x)) {
+      const p0 = await open(ctxs[x.id], PAGE + qs(x) + v.extra), { m } = await check(p0, x, ref[x.id], viewOf(v.extra));
+      clean[x.id + v.suffix] = m.issues; m.clearNow.forEach((s) => seen.add(s));
+      console.log(`clean page ${x.id}${v.suffix}: ${m.issues.length} issues${m.issues.length ? ' -> ' + m.issues.slice(0, 4).join(' || ') : ''}`);
+      await p0.close();
+    }
+    clean[x.id + ' coverage'] = coverage(seen);
+    console.log(`clean coverage ${x.id}: ${clean[x.id + ' coverage'].length} issues`);
   }
+  // the coverage check itself: with the end view left out, the decision at the end of the details is never shown
+  { const seen = new Set(), p0 = await open(ctxs[d.id], PAGE + qs(d) + '&view=govern'), { m } = await check(p0, d, ref[d.id], 'govern'); await p0.close();
+    m.clearNow.forEach((s) => seen.add(s));
+    const miss = coverage(seen), ok = miss.some((i) => /never shown clear of the fades in any view: (اعتماد البرنامج|تأجيل)/.test(i));
+    results.push({ name: 'coverage without the end view', ok, sample: miss.slice(0, 3) });
+    console.log(`${ok ? 'caught ' : 'MISSED '} coverage without the end view`); }
   for (const c of Object.values(ctxs)) await c.close();
   const missed = results.filter((r) => !r.ok).map((r) => r.name), dirty = Object.values(clean).some((v) => v.length);
   fs.writeFileSync(path.join(__dirname, 'selftest.json'), JSON.stringify({ ranAt: new Date().toISOString(), inputs: { files: INPUTS, sha1: inputsHash() }, cleanIssues: clean, results }, null, 1));
-  console.log(missed.length || dirty ? `SELFTEST FAILED (missed: ${missed.join(', ') || 'none'}; clean issues ${Object.values(clean).map((v) => v.length).join('/')})` : `selftest OK: ${cases.length} planted defects caught, clean pages 0 issues`);
+  console.log(missed.length || dirty ? `SELFTEST FAILED (missed: ${missed.join(', ') || 'none'}; clean issues ${Object.values(clean).map((v) => v.length).join('/')})` : `selftest OK: ${results.length} planted defects caught, clean pages 0 issues`);
 }
 
 (async () => {
+  assertAssembled();
   const b = await chromium.launch({ executablePath: process.env.CHROMIUM_PATH || undefined, args: ['--no-sandbox'] });
+  await recordInputs(b);
   if (SELFTEST) { await selftest(b); await b.close(); return; }
   let report = {};
   try { report = JSON.parse(fs.readFileSync(path.join(__dirname, 'report.json'), 'utf8')); } catch (e) { report = {}; }
@@ -566,20 +649,29 @@ async function selftest(b) {
     const ctx = await b.newContext({ viewport: { width: d.w, height: d.h }, deviceScaleFactor: 3 });
     const entry = { device: `${d.w}x${d.h} side ${d.side} bottom ${d.bottom} ${d.cutout}`, renderedAt: new Date().toISOString(), inputs: { files: INPUTS, sha1: inputsHash() },
       issues: [], views: {}, pngs: [] };
-    for (const [suffix, extra] of VIEWS) {
-      const png = suffix ? path.join(__dirname, d.id + suffix + '.png') : path.join(OUT, d.id + '.png');
+    const ctx1 = await b.newContext({ viewport: { width: d.w, height: d.h }, deviceScaleFactor: 1 }), seen = new Set();
+    for (const { suffix, extra, png: save } of await viewsFor(ctx1, d)) {
       const p = await open(ctx, PAGE + qs(d) + extra);
-      await p.screenshot({ path: png });
-      entry.pngs.push(path.relative(OUT, png));
+      if (save) {
+        const png = suffix ? path.join(__dirname, d.id + suffix + '.png') : path.join(OUT, d.id + '.png');
+        await p.screenshot({ path: png });
+        entry.pngs.push(path.relative(OUT, png));
+      }
       if (!suffix) { const ph = await open(ctx, PAGE + qs(d) + '&hit=1'); await ph.screenshot({ path: path.join(__dirname, d.id + '_hit.png') }); await ph.close(); }
       const { m, c } = await check(p, d, b3, viewOf(extra));
+      m.clearNow.forEach((s) => seen.add(s));
       m.issues.forEach((i) => entry.issues.push(`${viewOf(extra)}: ${i}`));
-      entry.views[viewOf(extra)] = { issueCount: m.issues.length, fit: m.fit, sheet: m.sheet, map: { ok: m.map.ok, egyptClear: m.map.egyptClear, zoom: m.map.zoom }, hiddenLabels: m.hiddenLabels,
+      entry.views[viewOf(extra)] = { issueCount: m.issues.length, png: save, fit: m.fit, sheet: m.sheet, map: { ok: m.map.ok, egyptClear: m.map.egyptClear, zoom: m.map.zoom }, hiddenLabels: m.hiddenLabels,
         cairo: m.cairo, pin: m.pin, typeSeen: m.typeSeen, hits: m.hits, minContrast: Math.min(...c.map((x) => x.worst)), contrast: c };
       console.log(`== ${d.id}${suffix} fit ${JSON.stringify(m.fit.sheet)} dock ${m.fit.sheetPos.dock} body ${JSON.stringify(m.fit.body)} minContrast ${entry.views[viewOf(extra)].minContrast} zoom ${m.map.zoom} hidden ${JSON.stringify(m.hiddenLabels)}`);
       console.log(m.issues.length ? '  ISSUES:\n    ' + m.issues.join('\n    ') : '  no issues');
       await p.close();
     }
+    const cov = coverage(seen);
+    cov.forEach((i) => entry.issues.push(`coverage: ${i}`));
+    entry.views.coverage = { issueCount: cov.length, shownClear: seen.size, of: BRIEF.details.length };
+    console.log(`== ${d.id} coverage: ${cov.length ? cov.join(' || ') : 'every string of the details shown clear in some view'}`);
+    await ctx1.close();
     entry.issueCount = entry.issues.length;
     report[d.id] = entry;
     await ctx.close();

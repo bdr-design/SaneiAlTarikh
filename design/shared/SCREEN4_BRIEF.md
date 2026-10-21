@@ -17,6 +17,7 @@ The owner rejected the first three variants and eleven styles, then sent two ima
     Each section is ruled off with a hairline.
   - The two action rows of the owner's overview image move into the tabs: «توسعة شبكة الكهرباء» to الإنشاءات, «دعم الخدمات الأساسية» to السياسات. They are designed with those tabs.
   - The body scrolls inside the sheet, with a 24 pt fade on any edge that hides content.
+  - While the bottom edge hides content, a small chevron marks it. After the screen 5 review (2026-10-21), the chevron sits in a clear 22 pt strip under the bottom fade, so it never covers content. Only the mask changes, never the layout.
   - The header keeps the card's 56 pt (fit level 0).
 - **Geometry of the details sheet:**
   - It runs from 8 pt under the top row down to the dock line.
@@ -36,15 +37,27 @@ The owner rejected the first three variants and eleven styles, then sent two ima
   - 18 pt bold is for the province name and the 3 headline numbers.
 - **Light build rules for the app** («مايثقل على اللعبة»):
   1. **No blur anywhere.** The panels are opaque (D-3).
-  2. **No masks on scrolling content.** An edge fade is a 24 pt gradient overlay from the panel colour to clear, drawn above the scroll view, with hit testing off. It shows only while that edge hides content. It looks the same as the mockup's mask, which only reveals the same opaque panel colour.
+  2. **No masks on scrolling content.** An edge fade is a 24 pt gradient overlay from the panel colour to clear, drawn above the scroll view, with hit testing off. It shows only while that edge hides content. It looks the same as the mockup's mask, which only reveals the same opaque panel colour. At the bottom, the overlay ends in a 22 pt band of solid panel colour that holds the scroll hint.
   3. **The header strip is a crop of the map imagery already in memory.** It is not a separate photo per province.
   4. **The province highlight is one pre-rendered halo sprite plus the ring,** drawn only for the selected province.
   5. **The fit level is a lookup from the safe height and the insets.** It is computed once at launch and again on an inset change, with no trial-layout loop and no re-fit per province or per tick.
   6. **The card appears over the live map without moving the camera.**
+- **Changes carried over from the screen 5 review (2026-10-21)**, through the shared files:
+  - the scroll hint's clear strip (above);
+  - the first action's accent bar runs on the card's straight edge, inset 8 pt from the corners;
+  - a map label that the screen edge or the side inset (the notch, the Dynamic Island) would slice is hidden, like a label a panel cuts;
+  - the fit levels gain a step for the state panel (0 to 6). The card still uses 0 to 2.
 - **Gate:**
-  - `R/_build/render.js` checks all 7 phones in 3 views: card, details, and details at the end of the scroll.
-  - `--selftest` plants 46 defects and must catch every one.
-  - `python3 -I tools/check_screen.py design/screen4/R` must PASS. The gate also recomputes the report's input hash, requires every view clean, and requires a passing self-test made from the same files.
+  - `R/_build/render.js` checks all 7 phones.
+    - It saves 3 views: card, details, and details at the end of the scroll.
+    - It also checks the details at the middle scroll offsets those views leave out.
+    - Every string of the details must be shown whole and clear of the fades in one of these views.
+  - Before it judges anything, it re-runs `assemble.py` and refuses an `index.html` that differs.
+  - `--selftest` plants defects and must catch every one.
+  - `python3 -I tools/check_screen.py design/screen4/R` must PASS. The gate:
+    - recomputes the input hash over the sources, the base page, B3, `devices.json` and every file the pages load;
+    - matches each phone with `devices.json`;
+    - requires every view clean and a passing self-test made from the same files.
 - **Engine follow-up:** the governor, the development priority and the per-province tax burden have no model in `final_design.md` yet. See its §6.1 note. Values are illustrative.
 
 

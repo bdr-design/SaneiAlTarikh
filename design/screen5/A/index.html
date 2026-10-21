@@ -1,0 +1,1144 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>لوحة الدولة</title>
+<script>
+  /* Device frame from the URL (points): ?w=844&h=390&side=47&bottom=21&cutout=notch|island|none
+     Optional: &speedmenu=1 renders the speed menu open, &hit=1 draws the 44 pt hit boxes,
+     &tab=overview|leader|policies|projects opens that tab of the state panel (default «نظرة عامة»), &scroll=end scrolls
+     it to its end and &scroll=<pt> to that offset; &states=1 draws the later states (see the sheet's comment).
+     Everything below is laid out with flexbox from these CSS variables; nothing is tied to 844x390. */
+  (function () {
+    var q = new URLSearchParams(location.search);
+    function n(k, d) { var v = parseFloat(q.get(k)); return isFinite(v) ? v : d; }
+    var W = n('w', 844), H = n('h', 390), SIDE = n('side', 47), BOTTOM = n('bottom', 21);
+    var CUT = q.get('cutout') || 'notch';
+    if (['notch', 'island', 'none'].indexOf(CUT) < 0) CUT = 'none';
+    var r = document.documentElement, s = r.style;
+    s.setProperty('--w', W + 'px');
+    s.setProperty('--h', H + 'px');
+    s.setProperty('--side', SIDE + 'px');
+    s.setProperty('--bottom', BOTTOM + 'px');
+    s.setProperty('--map-s', String(0.63 * H / 390));          /* map scales with the screen height */
+    s.setProperty('--corner', (CUT === 'none' ? 0 : 39) + 'px');
+    r.dataset.cutout = CUT;
+    r.dataset.home = BOTTOM > 0 ? 'yes' : 'no';
+    if (q.get('hit') === '1') r.classList.add('show-hit');
+    if (q.get('speedmenu') === '1') r.classList.add('menu-open');
+    r.dataset.tab = ['overview', 'leader', 'policies', 'projects'].indexOf(q.get('tab')) >= 0 ? q.get('tab') : 'overview';
+    r.dataset.sec = 'state';
+    r.dataset.states = q.get('states') === '1' ? '1' : '0';
+    window.__scroll = q.get('scroll') === 'end' ? 'end' : (isFinite(parseFloat(q.get('scroll'))) ? parseFloat(q.get('scroll')) : 0);
+    window.__dev = { W: W, H: H, SIDE: SIDE, BOTTOM: BOTTOM, CUT: CUT };
+  })();
+</script>
+<style>
+  :root {
+    /* device (overwritten from the URL) */
+    --w: 844px; --h: 390px; --side: 47px; --bottom: 21px; --map-s: 0.63; --corner: 39px;
+    /* safe layout box: never inside the side insets; the dock sits just above the home indicator */
+    --gutter: max(var(--side), 8px);
+    --top-gap: 8px;
+    --dock-gap: max(calc(var(--bottom) + 1px), 8px);
+    --map-cx: calc(var(--w) * 0.56);
+    --map-cy: calc(var(--h) * 0.5);
+
+    /* ===== Uniform slim system: the only sizes used below ===== */
+    --row: 36px;        /* every top-row element: nation card, indicator strip, date/speed pill */
+    --ctl: 32px;        /* every small control: toast, map mode, my country, speed buttons, menu rows */
+    --dock-h: 44px;     /* section dock */
+    --r-bar: 12px;      /* radius of 36 pt elements, the dock and the menu panel */
+    --r-ctl: 10px;      /* radius of 32 pt controls */
+    --pad-bar: 12px;    /* inner horizontal padding of bars */
+    --pad-ctl: 10px;    /* inner horizontal padding of controls */
+    --s1: 4px; --s2: 8px; --s3: 12px;               /* spacing scale */
+    --fs-label: 10px;   --lh-label: 12px;           /* labels */
+    --fs-sec: 11.5px;   --lh-sec: 14px;             /* secondary */
+    --fs-val: 13px;     --lh-val: 16px;             /* values: semibold, tabular */
+    --fs-name: 14px;    --lh-name: 17px;            /* country name: bold */
+    --ico: 16px; --ico-stat: 14px; --ico-dock: 17px; --glyph: 10px;
+
+    /* one glass, one border */
+    --glass: rgba(9, 17, 25, 0.66);
+    --stroke: rgba(127, 233, 255, 0.14);
+    --hair: rgba(127, 233, 255, 0.13);
+    --t1: #EAF2F7;
+    --t2: #A9BCCB;
+    --t3: #A2B6C6;
+    --cyan: #7FE9FF;
+    --teal: #3FE0D0;
+    --amber: #F2B14C;
+    --red: #F2705A;
+    --blue: #6FB6FF;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: var(--w); height: var(--h); overflow: hidden; }
+  body {
+    position: relative;
+    background: #0B1218;
+    color: var(--t1);
+    font-family: "IBM Plex Sans Arabic", system-ui, sans-serif;
+    font-variant-numeric: tabular-nums;
+    -webkit-font-smoothing: antialiased;
+    line-height: 1;
+  }
+  button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; -webkit-tap-highlight-color: transparent; }
+  svg.i { width: var(--ico); height: var(--ico); fill: none; stroke: currentColor; stroke-width: 1.75; stroke-linecap: round; stroke-linejoin: round; flex: none; display: block; }
+  .ltr { direction: ltr; unicode-bidi: isolate; }
+
+  /* ---------- Touch targets ----------
+     Every tappable control (.tap) carries an invisible ::before hit box of at least 44 x 44 pt.
+     It is centred on the control and can be nudged with --hx / --hy toward free space, so that
+     32 pt controls stacked 8 pt apart (40 pt pitch) still get 44 pt boxes that never overlap:
+     toast -2, map mode +2, my country +6 (each box borders the next one exactly). */
+  .tap { position: relative; }
+  .tap::before {
+    content: ""; position: absolute;
+    left: calc(50% + var(--hx, 0px)); top: calc(50% + var(--hy, 0px));
+    width: max(100%, 44px); height: max(100%, 44px);
+    transform: translate(-50%, -50%);
+  }
+  /* glass buttons: 100% is the padding box, so add the 1 px border on each side to cover the whole control */
+  .glass.tap::before { width: max(100% + 2px, 44px); height: max(100% + 2px, 44px); }
+  .show-hit .tap::before { outline: 1px solid rgba(255, 60, 160, 0.9); background: rgba(255, 60, 160, 0.12); z-index: 5; }
+
+  /* ---------- Map: full-bleed under the insets, two aligned layers ---------- */
+  .map {
+    position: absolute;
+    width: calc(1688px * var(--map-s));
+    height: calc(1097px * var(--map-s));
+    /* Egypt's bounding-box centre in the image is (764, 578) */
+    left: calc(var(--map-cx) - 764px * var(--map-s));
+    top: calc(var(--map-cy) - 578px * var(--map-s));
+  }
+  .map img { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+
+  /* ---------- Glass: one look for every panel ---------- */
+  .glass {
+    position: relative;
+    isolation: isolate;
+    background: var(--glass);
+    -webkit-backdrop-filter: blur(18px) saturate(1.1);
+    backdrop-filter: blur(18px) saturate(1.1);
+    border: 1px solid var(--stroke);
+    border-radius: var(--r);
+    box-shadow: 0 3px 14px rgba(0, 0, 0, 0.26);
+  }
+  .bar { --r: var(--r-bar); }
+  .ctl { --r: var(--r-ctl); }
+  /* render-side frost (see frost() below): blurred map copy + the same 0.66 tint */
+  .frost { position: absolute; inset: 0; z-index: -1; overflow: hidden; border-radius: calc(var(--r) - 1px); pointer-events: none; }
+  .frost i { position: absolute; display: block;
+    background: url("../../shared/map_mena_d1_overlay.svg") 0 0 / 100% 100% no-repeat, url("../../shared/map_mena_d1.jpg") 0 0 / 100% 100% no-repeat;
+    filter: blur(18px) saturate(1.1); }
+  .frost::after { content: ""; position: absolute; inset: 0; background: var(--glass); }
+  .frosted .glass { background: transparent; -webkit-backdrop-filter: none; backdrop-filter: none; }
+
+  /* ---------- HUD box = safe area ---------- */
+  .hud {
+    position: absolute;
+    top: var(--top-gap);
+    bottom: var(--dock-gap);
+    left: var(--gutter);
+    right: var(--gutter);
+    display: flex;
+    flex-direction: column;
+    pointer-events: none;          /* the map stays pannable between panels */
+  }
+  .hud .glass { pointer-events: auto; }
+
+  /* ---------- Top row: three 36 pt elements, all at 8 pt from the top ---------- */
+  .top { flex: none; height: var(--row); display: flex; align-items: stretch; gap: var(--s2); }
+
+  /* Nation card: top-right */
+  .nation { flex: none; display: flex; align-items: center; gap: var(--s2); padding-inline: var(--pad-bar); text-align: right; }
+  .flag { width: 22px; height: 16.5px; border-radius: 3px; overflow: hidden; flex: none; box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.22); }
+  .flag img { width: 100%; height: 100%; display: block; }
+  /* Name over "leader · regime" (fit 0). A grid, so the narrower fit 1 can re-flow the same three
+     items into "name  leader" over "regime" without hiding any of them. */
+  .ntext { display: grid; grid-template-columns: auto auto; grid-template-areas: "nm nm" "ldr rg"; justify-content: start; align-items: baseline; }
+  .ntext .nm { grid-area: nm; font-size: var(--fs-name); font-weight: 700; line-height: var(--lh-name); color: var(--t1); }
+  .ntext .ldr, .ntext .rg { font-size: var(--fs-label); font-weight: 500; line-height: var(--lh-label); color: var(--t2); white-space: nowrap; }
+  .ntext .ldr { grid-area: ldr; }
+  .ntext .rg { grid-area: rg; }
+  .ntext .rg::before { content: "\00a0·\00a0"; }
+
+  /* Indicator strip: top-centre, content-sized (extra width on wide screens stays map) */
+  .stats { flex: none; margin-inline: auto; display: flex; align-items: stretch; padding-inline: var(--s2); }
+  /* 4 pt on each side of an indicator = 8 pt between indicators, 8 + 4 = 12 pt at the strip ends */
+  .stat { flex: none; min-width: 44px; display: flex; align-items: center; justify-content: center; padding-inline: var(--s1); }
+  .stat + .stat::after { content: ""; position: absolute; right: 0; top: 9px; bottom: 9px; width: 1px; background: var(--hair); }
+  .stat-in { display: flex; flex-direction: column; align-items: flex-start; }
+  .lblrow { display: flex; align-items: center; gap: var(--s1); height: var(--lh-label); }
+  .lbl { font-size: var(--fs-label); font-weight: 500; line-height: var(--lh-label); color: var(--t2); white-space: nowrap; }
+  .trend { width: var(--glyph); height: var(--glyph); fill: none; stroke: currentColor; stroke-width: 1.75; stroke-linecap: round; stroke-linejoin: round; flex: none; display: block; }
+  .trend.down { color: var(--amber); }
+  .trend.up { color: var(--blue); }
+  .trend.flat { color: var(--t2); }
+  .valrow { display: flex; align-items: center; gap: var(--s1); height: var(--lh-val); white-space: nowrap; }
+  .valrow svg.i { width: var(--ico-stat); height: var(--ico-stat); color: var(--t2); }
+  .num { font-size: var(--fs-val); font-weight: 600; line-height: var(--lh-val); color: var(--t1); }
+  .unit { font-size: var(--fs-label); font-weight: 500; line-height: var(--lh-val); color: var(--t2); }   /* unit follows its value after a word space */
+
+  /* Date + speed pill: top-left. RTL: date text on the right, the speed control at the left end. */
+  .date { flex: none; display: flex; align-items: center; gap: var(--s1); padding-inline: var(--pad-bar) 1px; }
+  .dtext { display: flex; flex-direction: column; }
+  .dow { font-size: var(--fs-label); font-weight: 500; line-height: var(--lh-label); color: var(--t2); }
+  .dmy { font-size: var(--fs-val); font-weight: 600; line-height: var(--lh-val); color: var(--t1); white-space: nowrap; }
+  /* The single speed control: a plain play/pause icon button + the speed chip, both 32 pt, sitting
+     2 pt inside the 36 pt pill (12 pt pill radius - 2 pt inset = 10 pt chip radius, concentric).
+     The 4 pt gap to the date text reads as 12 pt to the pause glyph (centred in its 32 pt box). */
+  .cap { --r: var(--r-ctl); flex: none; height: var(--ctl); display: flex; border-radius: var(--r); }
+  .cap > button { height: 100%; display: grid; place-items: center; }
+  .play { width: 32px; color: var(--t1); --hx: 6px; }           /* hit box grows toward the date text, not into the speed chip */
+  .play svg.i { fill: currentColor; }
+  .spd { width: 44px; color: var(--cyan); font-size: var(--fs-val); font-weight: 600; line-height: var(--lh-val); border-radius: var(--r-ctl);
+    background: rgba(127, 233, 255, 0.10); box-shadow: inset 0 0 0 1px rgba(127, 233, 255, 0.16); }
+  .menu-open .spd { background: rgba(127, 233, 255, 0.20); box-shadow: inset 0 0 0 1px rgba(127, 233, 255, 0.40); }
+
+  /* Speed menu: popover directly under the pill. Rows are 32 pt (radius 10) on a 44 pt pitch,
+     so each row keeps its own 44 x 44 pt hit box. */
+  .menu { --r: var(--r-bar); position: absolute; left: 0; top: calc(var(--row) + var(--s2)); z-index: 10;
+    display: none; flex-direction: column; gap: var(--s3); padding: var(--s1);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45); }            /* popover sits one level above the other glass */
+  .menu-open .menu { display: flex; }
+  .mrow { --r: var(--r-ctl); height: var(--ctl); display: flex; align-items: center; gap: var(--s2); padding-inline: var(--pad-ctl);
+    border-radius: var(--r); font-size: var(--fs-val); font-weight: 600; line-height: var(--lh-val); color: var(--t1); white-space: nowrap; }
+  .mrow .chk { color: var(--cyan); visibility: hidden; }
+  .mrow.on { color: var(--cyan); background: rgba(127, 233, 255, 0.12); }
+  .mrow.on .chk { visibility: visible; }
+  /* إيقاف | speeds. A class, not :first-child: frost() inserts its .frost layer as the first child of every panel. */
+  .mrow.stop::after { content: ""; position: absolute; left: var(--pad-ctl); right: var(--pad-ctl); bottom: -6.5px; height: 1px; background: var(--hair); }
+
+  /* ---------- Left stack: right under the top row ---------- */
+  .mid { flex: 1 1 auto; min-height: 0; display: flex; flex-direction: column; align-items: flex-end; /* = left in RTL */ padding-top: var(--s3); }
+  .lstack { flex: none; display: flex; flex-direction: column; align-items: flex-end; gap: var(--s2); }
+
+  /* Notification toast: preview + bell (bell on the outer edge) */
+  .toast { height: var(--ctl); display: flex; align-items: stretch; }
+  .toast .tap { --hy: -2px; }
+  .alert-prev { display: flex; align-items: center; gap: var(--s2); padding-inline: var(--pad-ctl); }
+  .alert-prev svg.i { color: var(--amber); }
+  .alert-prev .txt { font-size: var(--fs-sec); font-weight: 500; line-height: var(--lh-sec); color: var(--t1); white-space: nowrap; }
+  .alert-prev::after { content: ""; position: absolute; left: 0; top: 8px; bottom: 8px; width: 1px; background: var(--hair); }
+  .bell { width: 44px; display: grid; place-items: center; color: var(--t1); }
+  .badge { position: absolute; top: -4px; left: 4px; min-width: 16px; height: 16px; padding: 0 4px; border-radius: 8px; background: var(--red); color: #0B1218;
+    font-size: var(--fs-label); font-weight: 700; line-height: 16px; text-align: center; box-shadow: 0 0 0 2px rgba(9, 17, 25, 0.9); }
+
+  /* Map controls */
+  .btn { height: var(--ctl); display: flex; align-items: center; gap: var(--s2); padding-inline: var(--pad-ctl);
+    font-size: var(--fs-sec); font-weight: 600; line-height: var(--lh-sec); color: var(--t1); white-space: nowrap; }
+  .btn svg.i { color: var(--t2); }
+  .btn .k { color: var(--t3); font-weight: 500; }
+  .btn.mode { --hy: 2px; }
+  .btn.home { --hy: 6px; }
+  .btn.home svg.i { color: var(--teal); }
+
+  /* ---------- Bottom dock (just above the home indicator) ---------- */
+  .dock { flex: none; align-self: center; height: var(--dock-h); display: flex; padding-inline: var(--s2); }
+  .dock-item { min-width: 44px; padding-inline: var(--s1); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: var(--s1); color: var(--t2); }
+  .dock-item svg.i { width: var(--ico-dock); height: var(--ico-dock); color: var(--t1); opacity: 0.92; }
+  .dock-item span { font-size: var(--fs-label); font-weight: 500; line-height: var(--lh-label); white-space: nowrap; }
+  /* The two end items hug their label, so the dock reads 12 pt (8 + 4) from its edge to the outer
+     label, like every other bar. Their 44 pt hit box grows outward (past the dock edge), never into
+     the neighbour. RTL: the first item is the right end, the last item the left end.
+     (Classes, not :first-child: frost() inserts a .frost layer as the first child of the dock.) */
+  .dock-item.end { min-width: 0; }
+  .dock-item.end-r { --hx: max(0px, (44px - 100%) / 2); }
+  .dock-item.end-l { --hx: min(0px, (100% - 44px) / 2); }
+
+  /* ---------- Fit levels (set by fitTop() from the measured top row, not from the device name) ----------
+     Only the nation card condenses; every other element keeps the same tokens on every device.
+     0: flag, name over "leader · regime"
+     1: flag, "name  leader" over "regime": same content, same type, about 36 pt narrower
+     2: flag and name                   3: flag only (the map already labels Egypt) */
+  [data-fit="1"] .ntext { grid-template-areas: "nm ldr" "rg rg"; column-gap: var(--s2); }
+  [data-fit="1"] .ntext .rg::before { content: none; }
+  [data-fit="2"] .ntext { grid-template-columns: auto; grid-template-areas: "nm"; }
+  [data-fit="2"] .ntext .ldr, [data-fit="2"] .ntext .rg { display: none; }
+  [data-fit="3"] .ntext { display: none; }
+
+  /* ---------- Device overlay (on top of the render, for the fit check) ---------- */
+  .dev { position: absolute; inset: 0; pointer-events: none; z-index: 50; }
+  .corners { position: absolute; inset: 0; border-radius: var(--corner); box-shadow: 0 0 0 60px #000; }
+  .cutout { position: absolute; background: #000; display: none; }
+  [data-cutout="island"] .cutout { display: block; left: 11px; top: calc(50% - 63px); width: 37px; height: 126px; border-radius: 18.5px; }
+  [data-cutout="notch"] .cutout { display: block; left: 0; top: calc(50% - 105px); width: 30px; height: 210px; border-radius: 0 20px 20px 0; }
+  .homebar { position: absolute; display: none; left: calc(50% - 67px); bottom: 8px; width: 134px; height: 5px; border-radius: 3px; background: rgba(255, 255, 255, 0.55); }
+  [data-home="yes"] .homebar { display: block; }
+  .show-hit .safe { position: absolute; top: 0; bottom: var(--bottom); left: var(--side); right: var(--side); outline: 1px dashed rgba(255, 255, 0, 0.8); }
+</style>
+<style>/* D-3 (confirmed): opaque panels, applied to the HUD exactly as ../../proposals/D3_panels/opaque.html */
+  .glass { -webkit-backdrop-filter: none !important; backdrop-filter: none !important; }
+  .frost i { display: none !important; }
+  .frost::after { background: rgb(12, 20, 28) !important; }
+</style>
+<style>
+  /* ================= Screen 4, variant R: the province panel after the owner's two reference images =================
+     (2026-10-20; go-ahead: «شوف المناسب اللي مايثقل على اللعبة وسوه»; then «لابد التركيز يكون الخريطة هي مركز الاساس»).
+     Two steps, so the map stays the centre:
+       1. the card (?view=card, the default when a province is tapped): header, the 3 headline numbers, the status
+          table and «تفاصيل المحافظة», 320 pt wide at the top right, as tall as its content, ending at least 8 pt above
+          the section dock; the whole HUD, dock included, keeps its B3 place;
+       2. «تفاصيل المحافظة» opens the full-height sheet with the tabs (?view=govern, the owner's 1st image).
+     The full-height sheet: a side sheet from the right, from 8 pt under the
+     top row down to the dock line. Width clamp(43% of the safe width, 340, 380) pt; where the section dock would just miss
+     the room beside it, the sheet narrows (to 330 at the least) so the dock still fits (15/16: 335). The dock moves to
+     the left end of its line, 4 pt in, 8 pt clear of the sheet (11, 14, 15/16, 16 Pro, 17 Pro Max); on the two 375 pt
+     phones (SE, 13 mini) it cannot fit, so it hides while the sheet is open and comes back when the sheet closes.
+     Every other HUD element keeps its B3 place and size.
+     Header: satellite image, flag, name + «العاصمة» chip, «مصر · محافظة», close. Then one of two views:
+       overview (?view=overview, the owner's 2nd image): 3 headline numbers, status table, 2 actions, «تفاصيل المحافظة»;
+       details (?view=govern, the owner's 1st image): 4 tabs, the governance tab (governor, priority, tax, links,
+       a proposed decision). The details body scrolls inside the sheet; a 24 pt fade marks an edge that hides content
+       (at the bottom it ends above the scroll hint's 22 pt strip).
+     Fit levels (shared with the other panels built on this file). Here: the card takes the loosest level at which it
+     ends 8 pt above the dock (0, or up to 2 on the 13 mini, so its header stays 56 pt); the details always use level 0,
+     so the header keeps the card's 56 pt and the body scrolls. Levels 3-6 serve full-height overviews (the state panel):
+       0: as designed (17 Pro Max)          1: block gaps 8 -> 4
+       2: also the numbers' padding and the status rows 28 -> 24, body bottom padding 4
+       3: also the header 56 -> 48 and the numbers' inner gaps 0
+       4: also the status rows 22             5: also the header 44
+       6: also the status rows 18 and no padding under the numbers
+     Panel sizes (the owner's reference; colours and type stay on the approved tokens):
+       cards (action / link / decision rows) radius 10, inner tiles, chips and small buttons radius 6 (concentric);
+       small outlined buttons and chips 24 pt tall, radio rows 26, tabs 44, action rows 44, «تفاصيل» row 36;
+       every one keeps a 44 x 44 pt hit box. Opaque (D-3). Values are illustrative. */
+  :root { --sheet-w: 358px; --sheet-b: 0px; --card: rgb(16, 27, 38); --tile: rgb(9, 16, 24); --title: 18px; --lh-title: 22px;
+    --rh: 56px; --rgap: 8px; --rkt: 8px; --rkb: 4px; --rkl: 16px; --rkm: 4px; --rkr: 2px; --rst: 28px; --rpb: 8px; }
+  [data-rfit="1"] { --rgap: 4px; }
+  [data-rfit="2"] { --rgap: 4px; --rkt: 4px; --rst: 24px; --rpb: 4px; }
+  [data-rfit="3"] { --rgap: 4px; --rkt: 4px; --rst: 24px; --rpb: 4px; --rh: 48px; --rkl: 14px; --rkm: 0px; --rkr: 0px; }
+  [data-rfit="4"] { --rgap: 4px; --rkt: 4px; --rst: 22px; --rpb: 4px; --rh: 48px; --rkl: 14px; --rkm: 0px; --rkr: 0px; }
+  [data-rfit="5"] { --rgap: 4px; --rkt: 4px; --rst: 22px; --rpb: 4px; --rh: 44px; --rkl: 14px; --rkm: 0px; --rkr: 0px; }
+  [data-rfit="6"] { --rgap: 4px; --rkt: 4px; --rkb: 0px; --rst: 18px; --rpb: 4px; --rh: 44px; --rkl: 14px; --rkm: 0px; --rkr: 0px; }
+  [data-view="govern"] .r-ov, [data-view="card"] .r-gv { display: none !important; }
+  [data-view="card"] .sheet { bottom: auto; }
+  [data-view="card"] .r-in { position: relative; }          /* the card's height follows its content */
+  [data-view="card"] .r-body { flex: none !important; padding-bottom: var(--s2); }   /* 8 pt under «تفاصيل» at every level */
+  /* 4 pt in from the safe edge: the end item «المزيد» is 31 pt wide and its 44 pt hit box must stay out of the side inset */
+  [data-dock="left"] .dock { align-self: flex-end; margin-left: var(--s1); }
+  [data-dock="hidden"] .dock { display: none; }
+
+  .sheet { --r: var(--r-bar); position: absolute; right: 0; top: calc(var(--row) + var(--s2)); bottom: var(--sheet-b); width: var(--sheet-w); z-index: 2;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, .45); }
+  .r-in { position: absolute; inset: 0; display: flex; flex-direction: column; overflow: hidden; border-radius: calc(var(--r) - 1px); }
+  .r-in > * { flex: none; }
+  .r-dot { color: var(--t2); }
+  .r-teal { color: var(--teal) !important; } .r-blue { color: var(--blue) !important; } .r-amber { color: var(--amber) !important; }
+
+  /* header: satellite image, flag, name + capital chip, country, close */
+  /* the hairline under the header is drawn inside it (inset shadow), so the header's full height centres the 44 pt hit boxes */
+  .r-hd { position: relative; height: var(--rh); display: flex; align-items: center; gap: var(--s2); padding-inline: var(--s3); box-shadow: inset 0 -1px 0 var(--hair);
+    background: linear-gradient(to left, rgba(12, 20, 28, .62) 0%, rgba(12, 20, 28, .2) 55%, rgba(12, 20, 28, 0) 75%),
+                linear-gradient(180deg, rgba(12, 20, 28, .15) 0%, rgba(12, 20, 28, .75) 100%),
+                url("header_cairo.jpg") center / cover no-repeat; }
+  .r-flag { width: 40px; height: 30px; border-radius: 4px; overflow: hidden; flex: none; box-shadow: 0 0 0 1px rgba(255, 255, 255, .28), 0 2px 6px rgba(0, 0, 0, .45); }
+  .r-flag img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .r-tt { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+  .r-row { display: flex; align-items: center; gap: var(--s2); }
+  .r-name { font-size: var(--title); line-height: var(--lh-title); font-weight: 700; text-shadow: 0 1px 3px rgba(0, 0, 0, .6); }
+  .r-cap { display: inline-flex; align-items: center; gap: var(--s1); height: 20px; padding-inline: var(--s2); border-radius: 10px; border: 1px solid var(--teal);
+    font-size: var(--fs-label); line-height: var(--lh-label); font-weight: 700; color: var(--teal); background: rgba(12, 20, 28, .7); }
+  .r-cap svg.i { width: var(--glyph); height: var(--glyph); }
+  .r-sub { font-size: var(--fs-sec); line-height: var(--lh-sec); font-weight: 500; color: var(--t1); text-shadow: 0 1px 3px rgba(0, 0, 0, .8); white-space: nowrap; }
+  .r-sub .r-dot { color: var(--t1); }
+  .r-x { margin-inline-start: auto; width: var(--ctl); height: var(--ctl); border-radius: 50%; display: grid; place-items: center; color: var(--t1);
+    background: rgba(6, 11, 16, .85); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .18), 0 2px 6px rgba(0, 0, 0, .4); }
+
+  /* scrolling body + edge fades */
+  .r-body { flex: 1 1 auto !important; min-height: 0; overflow-y: auto; scrollbar-width: none; display: flex; flex-direction: column; gap: var(--rgap); padding: 0 var(--s3) var(--rpb); }
+  .r-body::-webkit-scrollbar { display: none; }
+  .r-body > * { flex: none; }
+  /* while the bottom edge hides content, a small chevron marks it: the player sees there is more below, wherever the
+     edge happens to fall (between two sections too). The chevron gets a clear 22 pt strip at the bottom (its 18 pt and
+     4 pt under it), so it never sits on content: the 24 pt fade ends above the strip. The mask only changes, never the
+     layout, so nothing moves when the player reaches the end. */
+  [data-fbot="1"] .r-body { -webkit-mask-image: linear-gradient(180deg, #000 calc(100% - 46px), transparent calc(100% - 22px)); mask-image: linear-gradient(180deg, #000 calc(100% - 46px), transparent calc(100% - 22px)); }
+  [data-ftop="1"] .r-body { -webkit-mask-image: linear-gradient(180deg, transparent, #000 24px); mask-image: linear-gradient(180deg, transparent, #000 24px); }
+  .r-hint { position: absolute; left: 50%; bottom: 4px; width: 28px; height: 18px; margin-left: -14px; display: none; place-items: center; z-index: 2; pointer-events: none;
+    color: var(--t2); border-radius: 9px; background: rgb(12, 20, 28); box-shadow: inset 0 0 0 1px var(--hair); }
+  .r-hint svg.i { width: 16px; height: 16px; transform: rotate(-90deg); }
+  [data-fbot="1"] .r-hint { display: grid; }
+  [data-ftop="1"][data-fbot="1"] .r-body { -webkit-mask-image: linear-gradient(180deg, transparent, #000 24px, #000 calc(100% - 46px), transparent calc(100% - 22px));
+    mask-image: linear-gradient(180deg, transparent, #000 24px, #000 calc(100% - 46px), transparent calc(100% - 22px)); }
+
+  /* overview: three headline numbers */
+  .r-kpis { display: grid; grid-template-columns: repeat(3, 1fr); padding-block: var(--rkt) var(--rkb); border-bottom: 1px solid var(--hair); }
+  .r-kpi { display: flex; flex-direction: column; align-items: flex-start; padding-inline: var(--s2); min-width: 0; }
+  .r-kpi:first-child { padding-inline-start: 0; }
+  .r-kpi:last-child { padding-inline-end: 0; }
+  .r-kpi + .r-kpi { border-inline-start: 1px solid var(--hair); }
+  .r-kl { display: flex; align-items: center; gap: var(--s1); height: var(--rkl); font-size: var(--fs-sec); line-height: var(--lh-sec); font-weight: 500; color: var(--t1); white-space: nowrap; }
+  .r-kl svg.i { width: var(--ico-stat); height: var(--ico-stat); }
+  .r-kv { display: flex; align-items: baseline; gap: var(--s1); margin-top: var(--rkm); height: 22px; white-space: nowrap; }
+  .r-kv b { font-size: var(--title); line-height: var(--lh-title); font-weight: 700; }
+  .r-kv > span { font-size: var(--fs-sec); line-height: var(--lh-sec); font-weight: 500; color: var(--t2); }
+  .r-kr { margin-top: var(--rkr); font-size: var(--fs-sec); line-height: var(--lh-sec); font-weight: 500; color: var(--t1); white-space: nowrap; }
+  .r-why { margin-top: var(--rkr); height: 14px; font-size: var(--fs-sec); line-height: 14px; font-weight: 500; color: var(--cyan); }
+
+  /* overview: status table */
+  .r-st { display: grid; grid-template-columns: 1fr 1fr; column-gap: 16px; border-bottom: 1px solid var(--hair); }
+  .r-sc { position: relative; display: flex; align-items: center; justify-content: space-between; gap: var(--s2); height: var(--rst); }
+  .r-sc:nth-child(-n+2) { border-bottom: 1px solid var(--hair); }
+  .r-sc:nth-child(odd)::after { content: ""; position: absolute; top: 0; bottom: 0; inset-inline-end: -8px; width: 1px; background: var(--hair); }
+  .r-sc dt { font-size: var(--fs-sec); line-height: var(--lh-sec); font-weight: 500; color: var(--t2); white-space: nowrap; }
+  .r-sc dd { font-size: var(--fs-val); line-height: var(--lh-val); font-weight: 600; white-space: nowrap; }
+
+  /* overview: action rows */
+  .r-acts { display: flex; flex-direction: column; gap: var(--rgap); margin-top: auto; }
+  .r-act, .r-link, .r-more, .r-dec { border-radius: var(--r-ctl); background: var(--card); box-shadow: inset 0 0 0 1px var(--stroke); }
+  .r-act { display: flex; align-items: center; gap: var(--s2); height: 44px; padding-inline: 5px var(--s3); text-align: start; }
+  /* the accent bar runs on the straight part of the card's edge, inside its rounded corners */
+  .r-first::after { content: ""; position: absolute; top: 8px; bottom: 8px; right: 0; width: 3px; border-radius: 2px 0 0 2px; background: var(--teal); }
+  .r-tile { flex: none; width: 34px; height: 34px; border-radius: 6px; display: grid; place-items: center; color: var(--cyan); background: var(--tile); box-shadow: inset 0 0 0 1px var(--stroke); }
+  .r-tile svg.i { width: var(--ico-dock); height: var(--ico-dock); }
+  .r-at { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: 2px; text-align: start; }
+  .r-at b { font-size: var(--fs-val); line-height: var(--lh-val); font-weight: 600; white-space: nowrap; }
+  .r-at > span { font-size: var(--fs-sec); line-height: var(--lh-sec); font-weight: 500; color: var(--t2); white-space: nowrap; }
+  .r-chip { flex: none; display: inline-flex; align-items: center; gap: var(--s1); height: 24px; padding-inline: var(--s2); border-radius: 6px;
+    border: 1px solid rgba(63, 224, 208, .7); background: rgba(63, 224, 208, .06); color: var(--teal); font-size: var(--fs-sec); line-height: var(--lh-sec); font-weight: 600; white-space: nowrap; }
+  .r-arr { width: var(--glyph); height: var(--glyph); fill: none; stroke: currentColor; stroke-width: 1.75; stroke-linecap: round; stroke-linejoin: round; }
+  .r-more { display: flex; align-items: center; gap: var(--s2); height: 36px; padding-inline: var(--s3); font-size: var(--fs-val); line-height: var(--lh-val); font-weight: 600; }
+  .r-more > span { flex: 1; text-align: start; }
+  .r-chev { flex: none; color: var(--t2); }
+
+  /* details: tabs */
+  .r-tabs { display: grid; grid-template-columns: repeat(4, 1fr); height: 45px; margin-inline: var(--s3); border-bottom: 1px solid var(--hair); }
+  .r-tab { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: var(--s1); color: var(--t1); font-size: var(--fs-sec); line-height: var(--lh-sec); font-weight: 600; }
+  .r-tab svg.i { width: var(--ico-dock); height: var(--ico-dock); }
+  .r-tab + .r-tab::after { content: ""; position: absolute; top: 8px; bottom: 10px; right: 0; width: 1px; background: var(--hair); }
+  .r-tab.on { color: var(--teal); box-shadow: inset 0 -2px 0 var(--teal); }
+
+  /* details: governance */
+  .r-gv.r-body { padding-top: var(--s2); padding-bottom: var(--s3); gap: var(--s2); }
+  /* ruled sections, as in the owner's image: a hairline under the first heading and under each section */
+  .r-sec { display: flex; flex-direction: column; gap: var(--s1); padding-bottom: var(--s1); border-bottom: 1px solid var(--hair); }
+  .r-sec:first-child h3 { padding-bottom: var(--s1); border-bottom: 1px solid var(--hair); }
+  .r-sec h3, .r-dec h3 { font-size: var(--fs-sec); line-height: var(--lh-sec); font-weight: 600; }
+  .r-gov { display: flex; align-items: center; gap: var(--s2); height: 26px; }
+  .r-gl { font-size: var(--fs-sec); line-height: var(--lh-sec); font-weight: 500; color: var(--t2); }
+  .r-gn { flex: 1; text-align: center; font-size: var(--fs-sec); line-height: var(--lh-sec); font-weight: 600; }
+  .r-btn.tap::before { width: max(100% + 2px, 44px); height: max(100% + 2px, 44px); }   /* cover the 1 pt border too */
+  /* actions: a blue outline with cyan text (teal stays for selected states: the open tab, the chosen radio), as in the image */
+  .r-btn { flex: none; height: 24px; padding-inline: var(--s3); border-radius: 6px; border: 1px solid rgba(111, 182, 255, .6); background: rgba(111, 182, 255, .06);
+    color: var(--cyan); font-size: var(--fs-sec); line-height: 22px; font-weight: 600; white-space: nowrap; }
+  .r-grey { border-color: rgba(111, 182, 255, .3); background: transparent; color: var(--cyan); }
+  .r-radios { display: grid; grid-template-columns: repeat(3, 1fr); height: 26px; align-items: center; }
+  .r-rd { display: flex; align-items: center; gap: var(--s2); height: 26px; font-size: var(--fs-sec); line-height: var(--lh-sec); font-weight: 500; color: var(--t1); white-space: nowrap; }
+  .r-rd i { position: relative; flex: none; width: 16px; height: 16px; border-radius: 50%; box-shadow: inset 0 0 0 1.5px var(--t2); }
+  .r-rd.on { color: var(--teal); font-weight: 600; }
+  .r-rd.on i { box-shadow: inset 0 0 0 1.5px var(--teal); }
+  .r-rd.on i::after { content: ""; position: absolute; inset: 4px; border-radius: 50%; background: var(--teal); }
+  .r-links { display: flex; flex-direction: column; gap: var(--s1); }   /* 13 pt after the radios (section padding 4 + rule 1 + gap 8): their hit boxes reach 9 pt below them */
+  .r-link { display: flex; align-items: center; gap: var(--s2); height: 44px; padding-inline: 5px var(--s2); }
+  .r-link .r-tile { width: 34px; height: 34px; }
+  .r-link .r-at > span { font-size: var(--fs-label); line-height: var(--lh-label); }
+  .r-dec { padding: 0 var(--s3) var(--s2); }
+  .r-dec h3 { height: 24px; display: flex; align-items: center; margin-inline: calc(-1 * var(--s3)); padding-inline: var(--s3); border-bottom: 1px solid var(--hair); color: var(--cyan); font-weight: 600; }
+  .r-dbody { position: relative; display: grid; grid-template-columns: var(--ico-dock) 1fr; column-gap: var(--s2); padding-top: var(--s2); }
+  .r-dbody::before { content: ""; position: absolute; top: var(--s2); bottom: 0; right: calc(var(--ico-dock) + var(--s1)); width: 1px; background: var(--hair); }   /* divider beside the icon */
+  .r-dic { width: var(--ico-dock) !important; height: var(--ico-dock) !important; color: var(--cyan); margin-top: 0; }
+  .r-dtx { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+  .r-dtx b { font-size: var(--fs-val); line-height: var(--lh-val); font-weight: 600; }
+  .r-dtx span { font-size: var(--fs-label); line-height: 14px; font-weight: 500; color: var(--t2); white-space: nowrap; }
+  .r-dtx em { font-style: normal; color: var(--t1); }
+  .r-dfoot { display: flex; align-items: center; justify-content: space-between; gap: var(--s2); }
+  .r-dbtn { display: flex; gap: var(--s1); }
+  .r-dbtn .r-btn { padding-inline: var(--s2); }
+
+  /* map labels and the tapped province: blue-violet glow, white ring, name pill (the owner's images) */
+  .map svg.labels { position: absolute; inset: 0; width: 100%; height: 100%; direction: ltr; }
+  .labels .cut { display: none; }
+  .map svg.sel { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+  .sel path { stroke-linejoin: round; }
+  .sel .pin rect { filter: drop-shadow(0 2px 4px rgba(0, 0, 0, .4)); }
+  /* ================= Section identity and white touches (owner: «كمل الباقي بدقه», 2026-10-21) =================
+     One identity colour per dock section, kept out of the hues that carry meaning everywhere (teal = the player's
+     country and selected states in map panels, cyan = interactive, blue = positive, amber = warning, red = danger).
+     It appears only on the section's chrome: a 2 pt line on top of its panel, the emblem in the header, the open tab,
+     and the dock item while the section is open (with a 2 pt underline). Data colours never change with the section.
+     White touches on the dark panels (D-3 stands), in the text white #EAF2F7: white tile icons, filled white primary
+     buttons with dark #0B1218 text, white-outlined secondary buttons and chips. The page sets data-sec on <html>.
+     The white lines come in two strengths, both built on the text white: --w-line for outlines (buttons, chips, the
+     header chip) and --w-line-dim for quieter ones (grey buttons, the segment track and its dividers). */
+  :root {
+    --sec-state: #E9EEF4;      /* الدولة: لؤلؤي */
+    --sec-econ: #43C08A;       /* الاقتصاد: زمردي */
+    --sec-pol: #A08CFF;        /* الداخلية والسياسة: بنفسجي */
+    --sec-army: #BDB46A;       /* الجيش: زيتي */
+    --sec-foreign: #5B86F2;    /* الخارجية: أزرق ملكي */
+    --sec-intel: #C873D6;      /* الاستخبارات: أرجواني */
+    --sec-research: #9EDB5B;   /* البحث: ليموني */
+    --sec-more: #A9BCCB;       /* المزيد: رمادي */
+    --w-line: rgba(234, 242, 247, .5);
+    --w-line-dim: rgba(234, 242, 247, .28);
+    --w-fill: rgba(234, 242, 247, .06);
+  }
+  [data-sec="state"] { --sec: var(--sec-state); }     [data-sec="econ"] { --sec: var(--sec-econ); }
+  [data-sec="pol"] { --sec: var(--sec-pol); }         [data-sec="army"] { --sec: var(--sec-army); }
+  [data-sec="foreign"] { --sec: var(--sec-foreign); } [data-sec="intel"] { --sec: var(--sec-intel); }
+  [data-sec="research"] { --sec: var(--sec-research); } [data-sec="more"] { --sec: var(--sec-more); }
+
+  /* the open section in the dock */
+  .dock-item.on, .dock-item.on svg.i { color: var(--sec); opacity: 1; }
+  .dock-item.on::after { content: ""; position: absolute; left: 50%; bottom: 3px; width: 16px; height: 2px; margin-left: -8px; border-radius: 1px; background: var(--sec); }
+
+  /* the section's line on top of its panel, and its emblem in the header */
+  [data-sec] .r-in::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--sec); z-index: 3; }
+  .s-emb { flex: none; width: var(--ctl); height: var(--ctl); border-radius: var(--r-ctl); display: grid; place-items: center; margin-inline-start: auto;
+    color: var(--sec); background: color-mix(in srgb, var(--sec) 16%, rgb(6, 11, 16)); box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--sec) 45%, transparent); }
+  .s-emb + .r-x { margin-inline-start: 0; }
+  /* the open tab: the section colour, its underline and a faint fill; the closed tabs step back to the secondary grey,
+     so the open one stands out in every section (الدولة's pearl is close to the text white) */
+  [data-sec] .r-tab { color: var(--t2); }
+  [data-sec] .r-tab.on { color: var(--sec); background: color-mix(in srgb, var(--sec) 8%, transparent); box-shadow: inset 0 -2px 0 var(--sec); }
+
+  /* white touches */
+  [data-sec] .r-tile { color: var(--t1); }
+  [data-sec] .r-btn { border-color: var(--w-line); background: transparent; color: var(--t1); }
+  [data-sec] .r-btn.r-primary { background: var(--t1); border-color: var(--t1); color: #0B1218; }
+  [data-sec] .r-btn.r-grey { border-color: var(--w-line-dim); color: var(--t2); }
+  [data-sec] .r-first::after { background: var(--t1); }
+  [data-sec] .r-chip { border-color: var(--w-line); background: var(--w-fill); color: var(--t1); }
+  [data-sec] .r-cap { border-color: var(--w-line); color: var(--t1); }
+  /* ================= Screen 5, variant A: the state panel («الدولة») =================
+     The look, sizes and fit levels come from ../../screen4/R/_build/panel.css and the section identity and white
+     touches from ../../shared/section_identity.css (both read by assemble.py, so the panels cannot drift). The sheet is
+     the province details' full-height side sheet: the dock moves left of it, or hides on the 375 pt phones.
+     One tab body shows at a time (?tab=overview|leader|policies|projects). ?states=1 swaps in the later states
+     (the .s-alt elements for the .s-def ones): an unrealistic mode, a law in its cooldown, a law the player cannot
+     afford, the reshuffle waiting for its next turn. */
+  :root:not([data-states="1"]) .s-alt, [data-states="1"] .s-def { display: none !important; }
+  .r-body[data-tab] { display: none; }
+  [data-tab="overview"] .r-body[data-tab="overview"], [data-tab="leader"] .r-body[data-tab="leader"],
+  [data-tab="policies"] .r-body[data-tab="policies"], [data-tab="projects"] .r-body[data-tab="projects"] { display: flex; }
+  .r-body[data-tab="leader"], .r-body[data-tab="policies"], .r-body[data-tab="projects"] { padding-top: var(--s2); padding-bottom: var(--s3); gap: var(--s2); }
+  .r-body[data-tab="overview"] { padding-bottom: var(--s1); }   /* the last action row needs no more: its hit box is its own 44 pt */
+
+  /* the mode chip: white for واقعي, amber for any other mode or while unrealistic options are on (screen 3's terms) */
+  [data-sec] .r-cap.s-unreal { border-color: rgba(242, 177, 76, .7); color: var(--amber); }
+  /* a cost in political capital: the number and the capital glyph of «رأس المال السياسي» */
+  /* the glyph sits centred in the 14 pt line without making the line taller (top-aligned, 2 pt down) */
+  .s-cost svg.i { display: inline-block; width: var(--glyph); height: var(--glyph); margin-inline-start: 2px; margin-top: 2px; vertical-align: top; }
+  /* a decision waiting for its next turn: still readable, its tile and chip step back */
+  .r-act.s-wait .r-tile { color: var(--t2); }
+  [data-sec] .r-act.s-wait .r-chip { border-color: var(--w-line-dim); background: transparent; color: var(--t2); }
+
+
+  /* القيادة: office rows, seat bar */
+  .s-off { display: flex; align-items: center; gap: var(--s2); height: 40px; }
+  .s-vac { color: var(--t2); }
+  .s-seats { display: flex; flex-direction: column; gap: var(--s1); }
+  .s-bar { position: relative; height: 8px; border-radius: 4px; background: rgba(169, 188, 203, .22); overflow: hidden; }
+  .s-bar i { position: absolute; inset: 0 0 0 auto; border-radius: 4px; background: var(--teal); }
+  .s-leg { font-size: var(--fs-sec); line-height: var(--lh-sec); font-weight: 500; color: var(--t2); white-space: nowrap; }
+  .s-leg b { font-weight: 600; color: var(--t1); }
+  .s-st2 { grid-template-columns: 1fr; }
+  .s-st2 .r-sc:nth-child(-n+2) { border-bottom: 0; }
+  .s-st2 .r-sc:first-child { border-bottom: 1px solid var(--hair); }
+  .s-st2 .r-sc::after { display: none; }
+
+  /* المشاريع: project rows with progress, cancel (refund shown) or start */
+  .s-proj { display: flex; align-items: center; gap: var(--s2); height: 52px; padding-inline: 5px var(--s2); border-radius: var(--r-ctl); background: var(--card); box-shadow: inset 0 0 0 1px var(--stroke); }
+  .s-proj + .s-proj { margin-top: var(--s1); }
+  .s-prog { position: relative; height: 4px; margin-top: 4px; border-radius: 2px; background: rgba(169, 188, 203, .22); overflow: hidden; }
+  .s-prog i { position: absolute; inset: 0 0 0 auto; border-radius: 2px; background: var(--teal); }
+  .s-pa { flex: none; display: flex; flex-direction: column; align-items: flex-end; gap: 2px; }   /* «إلغاء» and «بدء» share their left edge */
+  .s-ref { font-size: var(--fs-label); line-height: var(--lh-label); font-weight: 500; color: var(--t2); white-space: nowrap; }
+  .s-note { font-size: var(--fs-label); line-height: 14px; font-weight: 500; color: var(--t2); }
+
+  /* السياسات: one row per law: name and the cost of a change, then its setting as 3 segments (the chosen one white) */
+  .s-pol { display: flex; align-items: center; gap: var(--s2); height: 40px; }
+  /* 4 pt between rows (the section's gap): the segments' 44 pt hit boxes reach 2 pt past each 40 pt row, so they meet */
+  .s-seg { flex: none; display: grid; grid-template-columns: repeat(3, 60px); height: 26px; border-radius: 6px; box-shadow: inset 0 0 0 1px var(--w-line-dim); }
+  .s-sg { font-size: var(--fs-sec); line-height: 26px; font-weight: 500; color: var(--t1); white-space: nowrap; border-radius: 6px; }
+  .s-sg + .s-sg::after { content: ""; position: absolute; top: 6px; bottom: 6px; right: 0; width: 1px; background: var(--w-line-dim); }
+  .s-sg.on { background: var(--t1); color: #0B1218; font-weight: 600; }
+  .s-sg.on::after, .s-sg.on + .s-sg::after { display: none; }
+  /* states (?states=1): a law in its cooldown shows when it opens again, its choices step back and cannot be tapped;
+     a change the player cannot afford shows its cost in amber */
+  [data-states="1"] .s-wait-1 .s-sg { color: var(--t2); }
+  [data-states="1"] .s-wait-1 .s-sg.on { background: var(--w-line-dim); color: var(--t1); }
+  [data-states="1"] .s-short-1 .s-cost { color: var(--amber); }
+</style>
+</head>
+<body>
+
+<!-- SVG symbol library (24 grid, round stroke 1.75) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <!-- sections -->
+    <symbol id="i-state" viewBox="0 0 24 24"><path d="M3.5 9 12 4l8.5 5"/><path d="M3.5 9h17"/><path d="M6 12v5.5M10 12v5.5M14 12v5.5M18 12v5.5"/><path d="M4 20.5h16"/></symbol>
+    <symbol id="i-econ" viewBox="0 0 24 24"><path d="M4 20h16"/><path d="M7 16.5v-4M11 16.5V8.5M15 16.5v-6M19 16.5V5"/></symbol>
+    <symbol id="i-pol" viewBox="0 0 24 24"><path d="M4 11.5h16v8.5H4z"/><path d="M8 11.5V4h8v7.5"/><path d="M10.2 7.8l1.4 1.4 2.3-2.6"/><path d="M8.5 15.5h7"/></symbol>
+    <symbol id="i-army" viewBox="0 0 24 24"><path d="M12 3l7 2.8v5.4c0 4.3-2.9 7.9-7 9.8-4.1-1.9-7-5.5-7-9.8V5.8z"/><path d="M9 10l3 2 3-2"/><path d="M9 13.5l3 2 3-2"/></symbol>
+    <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.75"/><path d="M3.25 12h17.5"/><path d="M12 3.25c2.4 2.4 3.6 5.3 3.6 8.75S14.4 18.35 12 20.75C9.6 18.35 8.4 15.45 8.4 12S9.6 5.65 12 3.25z"/></symbol>
+    <symbol id="i-eye" viewBox="0 0 24 24"><path d="M2.75 12S6.2 5.75 12 5.75 21.25 12 21.25 12 17.8 18.25 12 18.25 2.75 12 2.75 12z"/><circle cx="12" cy="12" r="2.9"/></symbol>
+    <symbol id="i-flask" viewBox="0 0 24 24"><path d="M9 3.5h6"/><path d="M10 3.5v5.7L5.1 17.8A2 2 0 0 0 6.8 20.75h10.4a2 2 0 0 0 1.7-2.95L14 9.2V3.5"/><path d="M7.3 15h9.4"/></symbol>
+    <symbol id="i-more" viewBox="0 0 24 24"><rect x="4" y="4" width="6.5" height="6.5" rx="1.6"/><rect x="13.5" y="4" width="6.5" height="6.5" rx="1.6"/><rect x="4" y="13.5" width="6.5" height="6.5" rx="1.6"/><rect x="13.5" y="13.5" width="6.5" height="6.5" rx="1.6"/></symbol>
+    <!-- indicators -->
+    <symbol id="i-coins" viewBox="0 0 24 24"><ellipse cx="12" cy="6" rx="7" ry="2.75"/><path d="M5 6v4c0 1.5 3.1 2.75 7 2.75S19 11.5 19 10V6"/><path d="M5 10v4c0 1.5 3.1 2.75 7 2.75S19 15.5 19 14v-4"/><path d="M5 14v4c0 1.5 3.1 2.75 7 2.75S19 19.5 19 18v-4"/></symbol>
+    <symbol id="i-anchor" viewBox="0 0 24 24"><circle cx="12" cy="5.5" r="2.25"/><path d="M12 7.75V20.5"/><path d="M8.5 11h7"/><path d="M4.5 13.5c0 4 3.4 7 7.5 7s7.5-3 7.5-7"/><path d="M3 15l1.5-1.5L6 15M18 15l1.5-1.5L21 15"/></symbol>
+    <symbol id="i-seal" viewBox="0 0 24 24"><circle cx="12" cy="9.25" r="5.75"/><path d="M8.6 13.9 7.5 21l4.5-2.4 4.5 2.4-1.1-7.1"/><path d="M9.7 9.3l1.6 1.6 3-3.1"/></symbol>
+    <symbol id="i-people" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.25"/><path d="M3 19.5c0-3.3 2.7-5.75 6-5.75s6 2.45 6 5.75"/><path d="M15.5 4.9a3.25 3.25 0 0 1 0 6.2"/><path d="M17.5 14.1c2.1.7 3.5 2.7 3.5 5.4"/></symbol>
+    <symbol id="i-signal" viewBox="0 0 24 24"><circle cx="12" cy="12" r="1.9"/><path d="M8.6 15.4a4.8 4.8 0 0 1 0-6.8M15.4 8.6a4.8 4.8 0 0 1 0 6.8"/><path d="M5.6 18.4a9 9 0 0 1 0-12.8M18.4 5.6a9 9 0 0 1 0 12.8"/></symbol>
+    <!-- controls -->
+    <symbol id="i-bell" viewBox="0 0 24 24"><path d="M18 15.5V11a6 6 0 1 0-12 0v4.5L4.5 18h15z"/><path d="M10 20.75a2.2 2.2 0 0 0 4 0"/></symbol>
+    <symbol id="i-warn" viewBox="0 0 24 24"><path d="M10.4 4.6a1.85 1.85 0 0 1 3.2 0l7.1 12.6a1.85 1.85 0 0 1-1.6 2.8H4.9a1.85 1.85 0 0 1-1.6-2.8z"/><path d="M12 9.5v4"/><path d="M12 16.6v.05"/></symbol>
+    <symbol id="i-layers" viewBox="0 0 24 24"><path d="M12 4 3.5 8.75 12 13.5l8.5-4.75z"/><path d="M3.5 12.75 12 17.5l8.5-4.75"/><path d="M3.5 16.5 12 21.25l8.5-4.75" opacity=".55"/></symbol>
+    <symbol id="i-locate" viewBox="0 0 24 24"><circle cx="12" cy="12" r="6.5"/><circle cx="12" cy="12" r="1.6" fill="currentColor" stroke="none"/><path d="M12 2.75v3M12 18.25v3M2.75 12h3M18.25 12h3"/></symbol>
+    <symbol id="i-pause" viewBox="0 0 24 24"><rect x="6.75" y="5.5" width="3.5" height="13" rx="1.2"/><rect x="13.75" y="5.5" width="3.5" height="13" rx="1.2"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.75l4.25 4.25L19 7.25"/></symbol>
+    <symbol id="t-down" viewBox="0 0 10 10"><path d="M5 1.5v7M2 5.5l3 3 3-3"/></symbol>
+    <symbol id="t-up" viewBox="0 0 10 10"><path d="M5 8.5v-7M2 4.5l3-3 3 3"/></symbol>
+    <symbol id="t-flat" viewBox="0 0 10 10"><path d="M1.5 5h7"/></symbol>
+    <!-- province sheet -->
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="M6.75 6.75l10.5 10.5M17.25 6.75 6.75 17.25"/></symbol>
+    <symbol id="i-star" viewBox="0 0 24 24"><path d="M12 3.75l2.55 5.2 5.7.83-4.13 4.02.98 5.68L12 16.8l-5.1 2.68.98-5.68-4.13-4.02 5.7-.83z"/></symbol>
+    <symbol id="i-build" viewBox="0 0 24 24"><path d="M4 20.5h9"/><path d="M8.5 20.5V4"/><path d="M5 6.75h15"/><path d="M8.5 4 5 6.75M8.5 4l3.5 2.75"/><path d="M17.5 6.75v5"/><path d="M15.75 11.75h3.5v2.5h-3.5z"/></symbol>
+    <symbol id="i-care" viewBox="0 0 24 24"><path d="M12 19.5s-7.25-4.3-7.25-9.4A3.85 3.85 0 0 1 12 8a3.85 3.85 0 0 1 7.25 2.1c0 5.1-7.25 9.4-7.25 9.4z"/><path d="M12 10.75v4.5M9.75 13h4.5"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3.5l7 2.75v5.25c0 4.3-2.9 7.6-7 9-4.1-1.4-7-4.7-7-9V6.25z"/><path d="M9.25 12l2 2 3.75-3.9"/></symbol>
+    <symbol id="i-chev" viewBox="0 0 24 24"><path d="M14.5 5.5 8 12l6.5 6.5"/></symbol>
+    <symbol id="i-grid" viewBox="0 0 24 24"><rect x="3.5" y="4.5" width="17" height="15" rx="2"/><path d="M3.5 9.5h17"/><path d="M9.5 9.5v10"/></symbol>
+    <symbol id="i-podium" viewBox="0 0 24 24"><path d="M4.5 10h15"/><path d="M6.5 10 8 20.5h8L17.5 10"/><path d="M12 10V6"/><circle cx="12" cy="4.5" r="1.5"/><path d="M10 14h4"/></symbol>
+    <symbol id="i-briefcase" viewBox="0 0 24 24"><rect x="3.5" y="7.5" width="17" height="12" rx="2"/><path d="M9 7.5V5.75a1.25 1.25 0 0 1 1.25-1.25h3.5A1.25 1.25 0 0 1 15 5.75V7.5"/><path d="M3.5 12.5h17"/><path d="M12 11.5v2"/></symbol>
+    <symbol id="i-person" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c0-3.9 3.1-6.5 7-6.5s7 2.6 7 6.5"/></symbol>
+    <symbol id="i-mode" viewBox="0 0 24 24"><path d="M4.5 7.5h8M16.5 7.5h3M4.5 16.5h3M11.5 16.5h8"/><circle cx="14.5" cy="7.5" r="2"/><circle cx="9.5" cy="16.5" r="2"/></symbol>
+    <symbol id="i-wand" viewBox="0 0 24 24"><path d="M5 19 15 9"/><path d="m13.5 7.5 3 3"/><path d="M18 3.5v3M16.5 5h3M19.5 12.5v2M18.5 13.5h2M9 4.5v2M8 5.5h2"/></symbol>
+    <symbol id="i-capital" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.25l1.45 2.95 3.25.45-2.35 2.3.55 3.2L12 14.6l-2.9 1.55.55-3.2-2.35-2.3 3.25-.45z"/></symbol>
+    <symbol id="i-unlock" viewBox="0 0 24 24"><rect x="5" y="10.5" width="14" height="10" rx="2"/><path d="M8.5 10.5V7.75a3.5 3.5 0 0 1 6.75-1.3"/><path d="M12 14.25v2.5"/></symbol>
+    <symbol id="i-swap" viewBox="0 0 24 24"><path d="M5 8.5h13.5L15 5"/><path d="M19 15.5H5.5L9 19"/></symbol>
+    <symbol id="i-train" viewBox="0 0 24 24"><rect x="6" y="3.5" width="12" height="13" rx="3"/><path d="M6 10h12"/><path d="M10 6.5h4"/><path d="M9.25 13.5h.01M14.75 13.5h.01" stroke-width="2.4"/><path d="M9 16.5 7 20.5M15 16.5l2 4"/></symbol>
+    <symbol id="i-ship" viewBox="0 0 24 24"><path d="M3.5 15.5h17l-2.5 4.5H6z"/><path d="M6 15.5V9.5h12v6"/><path d="M9 9.5V6h6v3.5"/><path d="M12 3.5V6"/></symbol>
+    <symbol id="i-doc" viewBox="0 0 24 24"><path d="M6.25 3.5h8.25l3.25 3.25V20.5H6.25z"/><path d="M14.25 3.5v3.5h3.5"/><path d="M9 11h6M9 14h6M9 17h3.5"/></symbol>
+    <symbol id="i-drop" viewBox="0 0 24 24"><path d="M12 3.5c3 3.9 6 7.3 6 10.6a6 6 0 0 1-12 0c0-3.3 3-6.7 6-10.6z"/><path d="M9.25 14.5a2.75 2.75 0 0 0 2.75 2.75"/></symbol>
+    <symbol id="i-atom" viewBox="0 0 24 24"><circle cx="12" cy="12" r="1.5"/><ellipse cx="12" cy="12" rx="9" ry="3.5"/><ellipse cx="12" cy="12" rx="9" ry="3.5" transform="rotate(60 12 12)"/><ellipse cx="12" cy="12" rx="9" ry="3.5" transform="rotate(-60 12 12)"/></symbol>
+  </defs>
+</svg>
+
+<!-- Map: approved D1 base + overlay, identical box, full-bleed -->
+<div class="map" aria-hidden="true">
+  <img src="../../shared/map_mena_d1.jpg" alt="">
+  <img src="map_overlay_cairo.svg" alt="">
+  <!-- map labels: generated by _build/make_overlay.py from the D1 overlay -->
+  <svg class="labels" viewBox="0 0 1688 1097">
+    <text x="734" y="587" font-family="-apple-system, 'SF Arabic', 'Geeza Pro', 'Noto Sans Arabic', sans-serif" font-size="36" font-weight="700" fill="#FFFFFF" stroke="#0B1218" stroke-width="5" stroke-opacity="0.75" paint-order="stroke" text-anchor="middle">مصر</text>
+    <text x="370" y="574" font-family="-apple-system, 'SF Arabic', 'Geeza Pro', 'Noto Sans Arabic', sans-serif" font-size="28" font-weight="700" fill="#FFFFFF" stroke="#0B1218" stroke-width="5" stroke-opacity="0.75" paint-order="stroke" text-anchor="middle">ليبيا</text>
+    <text x="740" y="992" font-family="-apple-system, 'SF Arabic', 'Geeza Pro', 'Noto Sans Arabic', sans-serif" font-size="28" font-weight="700" fill="#FFFFFF" stroke="#0B1218" stroke-width="5" stroke-opacity="0.75" paint-order="stroke" text-anchor="middle">السودان</text>
+    <text x="1170" y="669" font-family="-apple-system, 'SF Arabic', 'Geeza Pro', 'Noto Sans Arabic', sans-serif" font-size="28" font-weight="700" fill="#FFFFFF" stroke="#0B1218" stroke-width="5" stroke-opacity="0.75" paint-order="stroke" text-anchor="middle">السعودية</text>
+    <text x="874" y="177" font-family="-apple-system, 'SF Arabic', 'Geeza Pro', 'Noto Sans Arabic', sans-serif" font-size="28" font-weight="700" fill="#FFFFFF" stroke="#0B1218" stroke-width="5" stroke-opacity="0.75" paint-order="stroke" text-anchor="middle">تركيا</text>
+    <text x="1451" y="396" font-family="-apple-system, 'SF Arabic', 'Geeza Pro', 'Noto Sans Arabic', sans-serif" font-size="28" font-weight="700" fill="#FFFFFF" stroke="#0B1218" stroke-width="5" stroke-opacity="0.75" paint-order="stroke" text-anchor="middle">إيران</text>
+    <text x="1131" y="393" font-family="-apple-system, 'SF Arabic', 'Geeza Pro', 'Noto Sans Arabic', sans-serif" font-size="28" font-weight="700" fill="#FFFFFF" stroke="#0B1218" stroke-width="5" stroke-opacity="0.75" paint-order="stroke" text-anchor="middle">العراق</text>
+    <text x="992" y="307" font-family="-apple-system, 'SF Arabic', 'Geeza Pro', 'Noto Sans Arabic', sans-serif" font-size="28" font-weight="700" fill="#FFFFFF" stroke="#0B1218" stroke-width="5" stroke-opacity="0.75" paint-order="stroke" text-anchor="middle">سوريا</text>
+    <text x="957" y="449" font-family="-apple-system, 'SF Arabic', 'Geeza Pro', 'Noto Sans Arabic', sans-serif" font-size="28" font-weight="700" fill="#FFFFFF" stroke="#0B1218" stroke-width="5" stroke-opacity="0.75" paint-order="stroke" text-anchor="middle">الأردن</text>
+    <text x="130" y="347" font-family="-apple-system, 'SF Arabic', 'Geeza Pro', 'Noto Sans Arabic', sans-serif" font-size="28" font-weight="700" fill="#FFFFFF" stroke="#0B1218" stroke-width="5" stroke-opacity="0.75" paint-order="stroke" text-anchor="middle">تونس</text>
+    <text x="-74" y="543" font-family="-apple-system, 'SF Arabic', 'Geeza Pro', 'Noto Sans Arabic', sans-serif" font-size="28" font-weight="700" fill="#FFFFFF" stroke="#0B1218" stroke-width="5" stroke-opacity="0.75" paint-order="stroke" text-anchor="middle">الجزائر</text>
+    <text x="1259" y="928" font-family="-apple-system, 'SF Arabic', 'Geeza Pro', 'Noto Sans Arabic', sans-serif" font-size="28" font-weight="700" fill="#FFFFFF" stroke="#0B1218" stroke-width="5" stroke-opacity="0.75" paint-order="stroke" text-anchor="middle">اليمن</text>
+    <text x="1525" y="763" font-family="-apple-system, 'SF Arabic', 'Geeza Pro', 'Noto Sans Arabic', sans-serif" font-size="28" font-weight="700" fill="#FFFFFF" stroke="#0B1218" stroke-width="5" stroke-opacity="0.75" paint-order="stroke" text-anchor="middle">عمان</text>
+    <text x="1460" y="682" font-family="-apple-system, 'SF Arabic', 'Geeza Pro', 'Noto Sans Arabic', sans-serif" font-size="28" font-weight="700" fill="#FFFFFF" stroke="#0B1218" stroke-width="5" stroke-opacity="0.75" paint-order="stroke" text-anchor="middle">الإمارات</text>
+    <text x="406" y="931" font-family="-apple-system, 'SF Arabic', 'Geeza Pro', 'Noto Sans Arabic', sans-serif" font-size="28" font-weight="700" fill="#FFFFFF" stroke="#0B1218" stroke-width="5" stroke-opacity="0.75" paint-order="stroke" text-anchor="middle">تشاد</text>
+    <text x="133" y="870" font-family="-apple-system, 'SF Arabic', 'Geeza Pro', 'Noto Sans Arabic', sans-serif" font-size="28" font-weight="700" fill="#FFFFFF" stroke="#0B1218" stroke-width="5" stroke-opacity="0.75" paint-order="stroke" text-anchor="middle">النيجر</text>
+    <text x="995" y="928" font-family="-apple-system, 'SF Arabic', 'Geeza Pro', 'Noto Sans Arabic', sans-serif" font-size="28" font-weight="700" fill="#FFFFFF" stroke="#0B1218" stroke-width="5" stroke-opacity="0.75" paint-order="stroke" text-anchor="middle">إريتريا</text>
+    <text x="503" y="160" font-family="-apple-system, 'SF Arabic', 'Geeza Pro', 'Noto Sans Arabic', sans-serif" font-size="28" font-weight="700" fill="#FFFFFF" stroke="#0B1218" stroke-width="5" stroke-opacity="0.75" paint-order="stroke" text-anchor="middle">اليونان</text>
+    <text x="252" y="54" font-family="-apple-system, 'SF Arabic', 'Geeza Pro', 'Noto Sans Arabic', sans-serif" font-size="28" font-weight="700" fill="#FFFFFF" stroke="#0B1218" stroke-width="5" stroke-opacity="0.75" paint-order="stroke" text-anchor="middle">إيطاليا</text>
+    <text x="1262" y="501" font-family="-apple-system, 'SF Arabic', 'Geeza Pro', 'Noto Sans Arabic', sans-serif" font-size="28" font-weight="700" fill="#FFFFFF" stroke="#0B1218" stroke-width="5" stroke-opacity="0.75" paint-order="stroke" text-anchor="middle">الكويت</text>
+    <text x="1368" y="628" font-family="-apple-system, 'SF Arabic', 'Geeza Pro', 'Noto Sans Arabic', sans-serif" font-size="28" font-weight="700" fill="#FFFFFF" stroke="#0B1218" stroke-width="5" stroke-opacity="0.75" paint-order="stroke" text-anchor="middle">قطر</text>
+    <circle data-city="0" cx="777" cy="477" r="5" fill="#FFFFFF" stroke="#0B1218" stroke-width="2"/>
+    <text data-city="0" x="767" y="484" font-family="-apple-system, 'SF Arabic', 'Geeza Pro', 'Noto Sans Arabic', sans-serif" font-size="21" font-weight="600" fill="#FFFFFF" stroke="#0B1218" stroke-width="4" stroke-opacity="0.7" paint-order="stroke" text-anchor="start" direction="rtl">القاهرة</text>
+    <circle data-city="1" cx="738" cy="439" r="5" fill="#FFFFFF" stroke="#0B1218" stroke-width="2"/>
+    <text data-city="1" x="728" y="446" font-family="-apple-system, 'SF Arabic', 'Geeza Pro', 'Noto Sans Arabic', sans-serif" font-size="21" font-weight="600" fill="#FFFFFF" stroke="#0B1218" stroke-width="4" stroke-opacity="0.7" paint-order="stroke" text-anchor="start">الإسكندرية</text>
+    <circle data-city="2" cx="826" cy="666" r="5" fill="#FFFFFF" stroke="#0B1218" stroke-width="2"/>
+    <text data-city="2" x="816" y="673" font-family="-apple-system, 'SF Arabic', 'Geeza Pro', 'Noto Sans Arabic', sans-serif" font-size="21" font-weight="600" fill="#FFFFFF" stroke="#0B1218" stroke-width="4" stroke-opacity="0.7" paint-order="stroke" text-anchor="start">أسوان</text>
+    <circle data-city="3" cx="243" cy="384" r="5" fill="#FFFFFF" stroke="#0B1218" stroke-width="2"/>
+    <text data-city="3" x="233" y="391" font-family="-apple-system, 'SF Arabic', 'Geeza Pro', 'Noto Sans Arabic', sans-serif" font-size="21" font-weight="600" fill="#FFFFFF" stroke="#0B1218" stroke-width="4" stroke-opacity="0.7" paint-order="stroke" text-anchor="start">طرابلس</text>
+    <circle data-city="4" cx="446" cy="409" r="5" fill="#FFFFFF" stroke="#0B1218" stroke-width="2"/>
+    <text data-city="4" x="436" y="416" font-family="-apple-system, 'SF Arabic', 'Geeza Pro', 'Noto Sans Arabic', sans-serif" font-size="21" font-weight="600" fill="#FFFFFF" stroke="#0B1218" stroke-width="4" stroke-opacity="0.7" paint-order="stroke" text-anchor="start">بنغازي</text>
+    <circle data-city="5" cx="815" cy="928" r="5" fill="#FFFFFF" stroke="#0B1218" stroke-width="2"/>
+    <text data-city="5" x="805" y="935" font-family="-apple-system, 'SF Arabic', 'Geeza Pro', 'Noto Sans Arabic', sans-serif" font-size="21" font-weight="600" fill="#FFFFFF" stroke="#0B1218" stroke-width="4" stroke-opacity="0.7" paint-order="stroke" text-anchor="start">الخرطوم</text>
+    <circle data-city="6" cx="1235" cy="648" r="5" fill="#FFFFFF" stroke="#0B1218" stroke-width="2"/>
+    <text data-city="6" x="1225" y="655" font-family="-apple-system, 'SF Arabic', 'Geeza Pro', 'Noto Sans Arabic', sans-serif" font-size="21" font-weight="600" fill="#FFFFFF" stroke="#0B1218" stroke-width="4" stroke-opacity="0.7" paint-order="stroke" text-anchor="start">الرياض</text>
+    <circle data-city="7" cx="1166" cy="370" r="5" fill="#FFFFFF" stroke="#0B1218" stroke-width="2"/>
+    <text data-city="7" x="1156" y="377" font-family="-apple-system, 'SF Arabic', 'Geeza Pro', 'Noto Sans Arabic', sans-serif" font-size="21" font-weight="600" fill="#FFFFFF" stroke="#0B1218" stroke-width="4" stroke-opacity="0.7" paint-order="stroke" text-anchor="start">بغداد</text>
+    <circle data-city="8" cx="1161" cy="936" r="5" fill="#FFFFFF" stroke="#0B1218" stroke-width="2"/>
+    <text data-city="8" x="1151" y="943" font-family="-apple-system, 'SF Arabic', 'Geeza Pro', 'Noto Sans Arabic', sans-serif" font-size="21" font-weight="600" fill="#FFFFFF" stroke="#0B1218" stroke-width="4" stroke-opacity="0.7" paint-order="stroke" text-anchor="start">صنعاء</text>
+    <circle data-city="9" cx="825" cy="145" r="5" fill="#FFFFFF" stroke="#0B1218" stroke-width="2"/>
+    <text data-city="9" x="815" y="152" font-family="-apple-system, 'SF Arabic', 'Geeza Pro', 'Noto Sans Arabic', sans-serif" font-size="21" font-weight="600" fill="#FFFFFF" stroke="#0B1218" stroke-width="4" stroke-opacity="0.7" paint-order="stroke" text-anchor="start">أنقرة</text>
+    <circle data-city="10" cx="1374" cy="290" r="5" fill="#FFFFFF" stroke="#0B1218" stroke-width="2"/>
+    <text data-city="10" x="1364" y="297" font-family="-apple-system, 'SF Arabic', 'Geeza Pro', 'Noto Sans Arabic', sans-serif" font-size="21" font-weight="600" fill="#FFFFFF" stroke="#0B1218" stroke-width="4" stroke-opacity="0.7" paint-order="stroke" text-anchor="start">طهران</text>
+  </svg>
+  <!-- /map labels -->
+</div>
+
+<div class="hud">
+  <!-- Top row: identity (right), indicators (centre), date + speed (left); all 36 pt, all at y = 8 -->
+  <header class="top">
+    <button class="nation glass bar tap" aria-label="الدولة: مصر، حسني مبارك، جمهورية رئاسية">
+      <span class="flag"><img src="../../shared/flag_eg.svg" alt="علم مصر"></span>
+      <span class="ntext">
+        <b class="nm">مصر</b>
+        <span class="ldr">حسني مبارك</span>
+        <span class="rg">جمهورية رئاسية</span>
+      </span>
+    </button>
+
+    <div class="stats glass bar">
+      <button class="stat tap"><span class="stat-in">
+        <span class="lblrow"><span class="lbl">الخزينة</span><svg class="trend down"><use href="#t-down"/></svg></span>
+        <span class="valrow"><svg class="i"><use href="#i-coins"/></svg><span class="num">36.0<span class="unit"> مليار $</span></span></span>
+      </span></button>
+      <button class="stat tap"><span class="stat-in">
+        <span class="lblrow"><span class="lbl">الاستقرار</span><svg class="trend down"><use href="#t-down"/></svg></span>
+        <span class="valrow"><svg class="i"><use href="#i-anchor"/></svg><span class="num ltr">58%</span></span>
+      </span></button>
+      <button class="stat tap"><span class="stat-in">
+        <span class="lblrow"><span class="lbl">الشرعية</span><svg class="trend down"><use href="#t-down"/></svg></span>
+        <span class="valrow"><svg class="i"><use href="#i-seal"/></svg><span class="num">44</span></span>
+      </span></button>
+      <button class="stat tap"><span class="stat-in">
+        <span class="lblrow"><span class="lbl">القوة البشرية</span><svg class="trend flat"><use href="#t-flat"/></svg></span>
+        <span class="valrow"><svg class="i"><use href="#i-people"/></svg><span class="num">2.4<span class="unit"> مليون</span></span></span>
+      </span></button>
+      <button class="stat tap"><span class="stat-in">
+        <span class="lblrow"><span class="lbl">النفوذ</span><svg class="trend up"><use href="#t-up"/></svg></span>
+        <span class="valrow"><svg class="i"><use href="#i-signal"/></svg><span class="num">62</span></span>
+      </span></button>
+      <button class="stat tap"><span class="stat-in">
+        <span class="lblrow"><span class="lbl">البحث</span><svg class="trend up"><use href="#t-up"/></svg></span>
+        <span class="valrow"><svg class="i"><use href="#i-flask"/></svg><span class="num"><span class="ltr">+18</span><span class="unit"> / شهر</span></span></span>
+      </span></button>
+    </div>
+
+    <div class="date glass bar">
+      <span class="dtext"><span class="dow">السبت</span><span class="dmy">1 يناير 2011</span></span>
+      <!-- The single speed control. Play/pause toggles the clock; the speed button opens the menu below.
+           Long-press on the speed button = pause (same as choosing إيقاف), so one finger can stop time fast. -->
+      <span class="cap" role="group" aria-label="سرعة اللعب">
+        <button class="play tap" aria-label="إيقاف مؤقت (اللعبة تعمل)"><svg class="i"><use href="#i-pause"/></svg></button>
+        <button class="spd tap" aria-label="السرعة 1×" aria-haspopup="menu" aria-controls="speedmenu"><span class="ltr">1×</span></button>
+      </span>
+    </div>
+  </header>
+
+  <!-- Speed menu (open with ?speedmenu=1) -->
+  <div class="menu glass" id="speedmenu" role="menu" aria-label="سرعة اللعب">
+    <button class="mrow tap stop" role="menuitemradio" aria-checked="false"><svg class="i chk"><use href="#i-check"/></svg><span>إيقاف</span></button>
+    <button class="mrow tap on" role="menuitemradio" aria-checked="true"><svg class="i chk"><use href="#i-check"/></svg><span class="ltr">1×</span></button>
+    <button class="mrow tap" role="menuitemradio" aria-checked="false"><svg class="i chk"><use href="#i-check"/></svg><span class="ltr">2×</span></button>
+    <button class="mrow tap" role="menuitemradio" aria-checked="false"><svg class="i chk"><use href="#i-check"/></svg><span class="ltr">5×</span></button>
+    <button class="mrow tap" role="menuitemradio" aria-checked="false"><svg class="i chk"><use href="#i-check"/></svg><span class="ltr">10×</span></button>
+    <button class="mrow tap" role="menuitemradio" aria-checked="false"><svg class="i chk"><use href="#i-check"/></svg><span>أقصى</span></button>
+  </div>
+
+  <div class="mid">
+    <!-- Left stack: notifications, map mode, my country (32 pt each, 8 pt apart) -->
+    <div class="lstack">
+      <div class="toast glass ctl">
+        <button class="alert-prev tap"><svg class="i"><use href="#i-warn"/></svg><span class="txt">احتجاجات واسعة في تونس</span></button>
+        <button class="bell tap" aria-label="الإشعارات"><svg class="i"><use href="#i-bell"/></svg><span class="badge">3</span></button>
+      </div>
+      <button class="btn glass ctl tap mode"><svg class="i"><use href="#i-layers"/></svg><span><span class="k">الخريطة:</span> سياسية</span></button>
+      <button class="btn glass ctl tap home"><svg class="i"><use href="#i-locate"/></svg><span>دولتي</span></button>
+    </div>
+  </div>
+
+  <!-- Section dock -->
+  <nav class="dock glass bar" aria-label="الأقسام">
+    <button class="dock-item tap end end-r on" aria-current="page"><svg class="i"><use href="#i-state"/></svg><span>الدولة</span></button>
+    <button class="dock-item tap"><svg class="i"><use href="#i-econ"/></svg><span>الاقتصاد</span></button>
+    <button class="dock-item tap"><svg class="i"><use href="#i-pol"/></svg><span>الداخلية والسياسة</span></button>
+    <button class="dock-item tap"><svg class="i"><use href="#i-army"/></svg><span>الجيش</span></button>
+    <button class="dock-item tap"><svg class="i"><use href="#i-globe"/></svg><span>الخارجية</span></button>
+    <button class="dock-item tap"><svg class="i"><use href="#i-eye"/></svg><span>الاستخبارات</span></button>
+    <button class="dock-item tap"><svg class="i"><use href="#i-flask"/></svg><span>البحث</span></button>
+    <button class="dock-item tap end end-l"><svg class="i"><use href="#i-more"/></svg><span>المزيد</span></button>
+  </nav>
+
+  <!-- State panel (screen 5, variant A), opened from the dock's «الدولة». The approved province panel's look (screen 4 R)
+       with the section identity (الدولة: pearl white) and white touches. Tabs: نظرة عامة (?tab=overview, default),
+       القيادة (?tab=leader), السياسات (?tab=policies), المشاريع (?tab=projects). Values are illustrative.
+       Real leaders: real name, no photo, no traits (D-30). Economic levers live in the Economy section.
+       ?states=1 draws the states a player meets later (illustrative): the mode chip for a preset other than واقعي
+       with unrealistic options on (D-12 «God»), a law in its cooldown, a law the player cannot afford, and the
+       once-a-year reshuffle waiting for its next turn. -->
+  <section class="sheet glass" aria-label="الدولة: مصر">
+    <div class="r-in">
+      <header class="r-hd">
+        <span class="r-flag"><img src="../../shared/flags/eg.svg" alt="علم مصر"></span>
+        <div class="r-tt">
+          <div class="r-row"><h2 class="r-name">مصر</h2><span class="r-cap s-def"><svg class="i"><use href="#i-mode"/></svg>الوضع: واقعي</span><span class="r-cap s-unreal s-alt"><svg class="i"><use href="#i-wand"/></svg><span class="ltr">God</span> · خيارات غير واقعية</span></div>
+          <div class="r-sub">الرئيس محمد حسني مبارك<span class="r-dot"> · </span>منذ <span class="ltr">1981</span></div>
+        </div>
+        <span class="s-emb" aria-hidden="true"><svg class="i"><use href="#i-state"/></svg></span>
+        <button class="r-x tap" aria-label="إغلاق"><svg class="i"><use href="#i-close"/></svg></button>
+      </header>
+
+      <nav class="r-tabs" aria-label="أقسام الدولة">
+        <button class="r-tab tap" data-for="overview"><svg class="i"><use href="#i-grid"/></svg><span>نظرة عامة</span></button>
+        <button class="r-tab tap" data-for="leader"><svg class="i"><use href="#i-people"/></svg><span>القيادة</span></button>
+        <button class="r-tab tap" data-for="policies"><svg class="i"><use href="#i-doc"/></svg><span>السياسات</span></button>
+        <button class="r-tab tap" data-for="projects"><svg class="i"><use href="#i-build"/></svg><span>المشاريع</span></button>
+      </nav>
+
+      <!-- نظرة عامة -->
+      <div class="r-body" data-tab="overview">
+        <div class="r-kpis">
+          <div class="r-kpi">
+            <span class="r-kl"><svg class="i"><use href="#i-capital"/></svg>رأس المال السياسي</span>
+            <span class="r-kv"><b class="ltr">86</b></span>
+            <span class="r-kr r-blue"><span class="ltr">+4</span> شهريًا</span>
+            <button class="r-why tap">لماذا؟</button>
+          </div>
+          <div class="r-kpi">
+            <span class="r-kl"><svg class="i"><use href="#i-anchor"/></svg>الاستقرار</span>
+            <span class="r-kv"><b class="ltr">58%</b></span>
+            <span class="r-kr"><span class="ltr">−1</span> شهريًا</span>
+            <button class="r-why tap">لماذا؟</button>
+          </div>
+          <div class="r-kpi">
+            <span class="r-kl"><svg class="i r-amber"><use href="#i-seal"/></svg>الشرعية</span>
+            <span class="r-kv"><b class="ltr r-amber">44</b><span>/ <span class="ltr">100</span></span></span>
+            <span class="r-kr"><span class="ltr">−2</span> شهريًا</span>
+            <button class="r-why tap">لماذا؟</button>
+          </div>
+        </div>
+
+        <dl class="r-st">
+          <div class="r-sc"><dt>نظام الحكم</dt><dd>جمهورية رئاسية</dd></div>
+          <div class="r-sc"><dt>الدستور</dt><dd><span class="ltr">1971</span> · عُدّل في <span class="ltr">2007</span></dd></div>
+          <div class="r-sc"><dt>الحزب الحاكم</dt><dd>الحزب الوطني</dd></div>
+          <div class="r-sc"><dt>الطوارئ</dt><dd class="r-amber">سارية منذ <span class="ltr">1981</span></dd></div>
+        </dl>
+
+        <div class="r-acts" aria-label="قرارات">
+          <button class="r-act tap r-first">
+            <span class="r-tile"><svg class="i"><use href="#i-unlock"/></svg></span>
+            <span class="r-at"><b>رفع حالة الطوارئ</b><span class="s-cost">الكلفة: <span class="ltr">60</span><svg class="i"><use href="#i-capital"/></svg></span></span>
+            <span class="r-chip"><svg class="r-arr"><use href="#t-up"/></svg>الشرعية</span>
+          </button>
+          <button class="r-act tap s-def">
+            <span class="r-tile"><svg class="i"><use href="#i-swap"/></svg></span>
+            <span class="r-at"><b>تعديل وزاري</b><span class="s-cost">الكلفة: <span class="ltr">25</span><svg class="i"><use href="#i-capital"/></svg> · مرة في السنة</span></span>
+            <span class="r-chip">تهدئة مؤقتة</span>
+          </button>
+          <button class="r-act tap s-wait s-alt" aria-disabled="true">
+            <span class="r-tile"><svg class="i"><use href="#i-swap"/></svg></span>
+            <span class="r-at"><b>تعديل وزاري</b><span>متاح في يناير <span class="ltr">2012</span></span></span>
+            <span class="r-chip">تهدئة مؤقتة</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- القيادة -->
+      <div class="r-body" data-tab="leader">
+        <section class="r-sec">
+          <h3>المناصب</h3>
+          <div class="s-off"><span class="r-tile"><svg class="i"><use href="#i-podium"/></svg></span>
+            <span class="r-at"><b>محمد حسني مبارك</b><span>رئيس الجمهورية · العمر <span class="ltr">82</span> · منذ <span class="ltr">1981</span></span></span>
+            <button class="r-btn tap">تغيير الاسم</button></div>
+          <div class="s-off"><span class="r-tile"><svg class="i"><use href="#i-briefcase"/></svg></span>
+            <span class="r-at"><b>أحمد نظيف</b><span>رئيس الوزراء · منذ <span class="ltr">2004</span></span></span></div>
+          <div class="s-off"><span class="r-tile"><svg class="i"><use href="#i-person"/></svg></span>
+            <span class="r-at"><b class="s-vac">شاغر</b><span>نائب الرئيس</span></span></div>
+        </section>
+        <section class="r-sec">
+          <h3>مجلس الشعب</h3>
+          <div class="s-seats" role="img" aria-label="الحزب الوطني: نحو 420 من 518 مقعدًا">
+            <span class="s-bar"><i style="width: 81%"></i></span>
+            <span class="s-leg"><b>الحزب الوطني:</b> نحو <span class="ltr">420</span> من <span class="ltr">518</span> مقعدًا</span>
+          </div>
+        </section>
+        <dl class="r-st s-st2">
+          <div class="r-sc"><dt>الانتخابات القادمة</dt><dd>رئاسية · سبتمبر <span class="ltr">2011</span></dd></div>
+          <div class="r-sc"><dt>عند خلوّ منصب الرئيس</dt><dd>رئيس مجلس الشعب مؤقتًا</dd></div>
+        </dl>
+      </div>
+
+      <!-- السياسات: political, security and social laws (each: its setting, and the political capital a change costs) -->
+      <div class="r-body" data-tab="policies">
+        <section class="r-sec">
+          <h3>الأمن والنظام</h3>
+          <div class="s-pol s-short-1">
+            <span class="r-at"><b>حالة الطوارئ</b><span class="s-cost">كلفة التغيير: <span class="ltr">60</span><svg class="i"><use href="#i-capital"/></svg></span></span>
+            <span class="s-seg" role="radiogroup" aria-label="حالة الطوارئ"><button class="s-sg tap" role="radio" aria-checked="false">ملغاة</button><button class="s-sg tap" role="radio" aria-checked="false">محدودة</button><button class="s-sg tap on" role="radio" aria-checked="true">شاملة</button></span>
+          </div>
+          <div class="s-pol">
+            <span class="r-at"><b>التجنيد</b><span class="s-cost">كلفة التغيير: <span class="ltr">50</span><svg class="i"><use href="#i-capital"/></svg></span></span>
+            <span class="s-seg" role="radiogroup" aria-label="التجنيد"><button class="s-sg tap" role="radio" aria-checked="false">تطوعي</button><button class="s-sg tap" role="radio" aria-checked="false">انتقائي</button><button class="s-sg tap on" role="radio" aria-checked="true">إلزامي</button></span>
+          </div>
+          <div class="s-pol">
+            <span class="r-at"><b>التظاهر</b><span class="s-cost">كلفة التغيير: <span class="ltr">40</span><svg class="i"><use href="#i-capital"/></svg></span></span>
+            <span class="s-seg" role="radiogroup" aria-label="التظاهر"><button class="s-sg tap" role="radio" aria-checked="false">مسموح</button><button class="s-sg tap" role="radio" aria-checked="false">بإخطار</button><button class="s-sg tap on" role="radio" aria-checked="true">محظور</button></span>
+          </div>
+        </section>
+        <section class="r-sec">
+          <h3>الحريات</h3>
+          <div class="s-pol s-wait-1">
+            <span class="r-at"><b>الإعلام</b><span class="s-cost s-def">كلفة التغيير: <span class="ltr">30</span><svg class="i"><use href="#i-capital"/></svg></span><span class="s-alt">متاح بعد <span class="ltr">4</span> أشهر</span></span>
+            <span class="s-seg" role="radiogroup" aria-label="الإعلام"><button class="s-sg tap" role="radio" aria-checked="false">حر</button><button class="s-sg tap on" role="radio" aria-checked="true">مقيد</button><button class="s-sg tap" role="radio" aria-checked="false">موجَّه</button></span>
+          </div>
+          <div class="s-pol">
+            <span class="r-at"><b>الأحزاب</b><span class="s-cost">كلفة التغيير: <span class="ltr">40</span><svg class="i"><use href="#i-capital"/></svg></span></span>
+            <span class="s-seg" role="radiogroup" aria-label="الأحزاب"><button class="s-sg tap" role="radio" aria-checked="false">حرة</button><button class="s-sg tap on" role="radio" aria-checked="true">بترخيص</button><button class="s-sg tap" role="radio" aria-checked="false">محظورة</button></span>
+          </div>
+          <div class="s-pol">
+            <span class="r-at"><b>الإنترنت</b><span class="s-cost">كلفة التغيير: <span class="ltr">20</span><svg class="i"><use href="#i-capital"/></svg></span></span>
+            <span class="s-seg" role="radiogroup" aria-label="الإنترنت"><button class="s-sg tap" role="radio" aria-checked="false">مفتوح</button><button class="s-sg tap on" role="radio" aria-checked="true">مراقَب</button><button class="s-sg tap" role="radio" aria-checked="false">محجوب</button></span>
+          </div>
+        </section>
+        <section class="r-sec">
+          <h3>الخدمات العامة</h3>
+          <div class="s-pol">
+            <span class="r-at"><b>التعليم الحكومي</b><span class="s-cost">كلفة التغيير: <span class="ltr">30</span><svg class="i"><use href="#i-capital"/></svg></span></span>
+            <span class="s-seg" role="radiogroup" aria-label="التعليم الحكومي"><button class="s-sg tap on" role="radio" aria-checked="true">مجاني</button><button class="s-sg tap" role="radio" aria-checked="false">مدعوم</button><button class="s-sg tap" role="radio" aria-checked="false">برسوم</button></span>
+          </div>
+          <div class="s-pol">
+            <span class="r-at"><b>الرعاية الصحية</b><span class="s-cost">كلفة التغيير: <span class="ltr">30</span><svg class="i"><use href="#i-capital"/></svg></span></span>
+            <span class="s-seg" role="radiogroup" aria-label="الرعاية الصحية"><button class="s-sg tap" role="radio" aria-checked="false">مجانية</button><button class="s-sg tap on" role="radio" aria-checked="true">مدعومة</button><button class="s-sg tap" role="radio" aria-checked="false">برسوم</button></span>
+          </div>
+        </section>
+        <p class="s-note">بعد تغيير أي سياسة تنتظر <span class="ltr">6</span> أشهر قبل أن تغيّرها مرة أخرى.</p>
+      </div>
+
+      <!-- المشاريع -->
+      <div class="r-body" data-tab="projects">
+        <section class="r-sec">
+          <h3>مشاريع جارية</h3>
+          <div class="s-proj">
+            <span class="r-tile"><svg class="i"><use href="#i-train"/></svg></span>
+            <span class="r-at"><b>الخط الثالث لمترو القاهرة</b><span>المرحلة الأولى · تكتمل في <span class="ltr">2012</span></span>
+              <span class="s-prog"><i style="width: 85%"></i></span></span>
+            <span class="s-pa"><button class="r-btn r-grey tap">إلغاء</button><span class="s-ref">يُسترد <span class="ltr">90</span> مليون $</span></span>
+          </div>
+          <div class="s-proj">
+            <span class="r-tile"><svg class="i"><use href="#i-drop"/></svg></span>
+            <span class="r-at"><b>توشكى: استصلاح الأراضي</b><span>جنوب الوادي · تكتمل في <span class="ltr">2017</span></span>
+              <span class="s-prog"><i style="width: 35%"></i></span></span>
+            <span class="s-pa"><button class="r-btn r-grey tap">إلغاء</button><span class="s-ref">يُسترد <span class="ltr">410</span> ملايين $</span></span>
+          </div>
+        </section>
+        <section class="r-sec">
+          <h3>مشاريع متاحة</h3>
+          <div class="s-proj">
+            <span class="r-tile"><svg class="i"><use href="#i-atom"/></svg></span>
+            <span class="r-at"><b>محطة الضبعة النووية</b><span><span class="ltr">4.5</span> مليار $ · <span class="ltr">8</span> سنوات</span></span>
+            <span class="s-pa"><button class="r-btn r-primary tap">بدء</button></span>
+          </div>
+          <div class="s-proj">
+            <span class="r-tile"><svg class="i"><use href="#i-ship"/></svg></span>
+            <span class="r-at"><b>توسعة ميناء شرق بورسعيد</b><span><span class="ltr">1.2</span> مليار $ · <span class="ltr">3</span> سنوات</span></span>
+            <span class="s-pa"><button class="r-btn r-primary tap">بدء</button></span>
+          </div>
+        </section>
+        <p class="s-note">عند إلغاء مشروع يُرجع المبلغ غير المصروف بعد خصم <span class="ltr">10%</span> منه.</p>
+      </div>
+      <span class="r-hint" aria-hidden="true"><svg class="i"><use href="#i-chev"/></svg></span>
+    </div>
+  </section>
+</div>
+
+<!-- Device silhouette drawn on top: rounded corners, camera cutout, home indicator -->
+<div class="dev" aria-hidden="true">
+  <div class="corners"></div>
+  <div class="cutout"></div>
+  <div class="homebar"></div>
+  <div class="safe"></div>
+</div>
+
+<script>
+  /* Condense the nation card step by step until the top row fits the safe width
+     (nation + 8 + indicators + 8 + date/speed pill). */
+  function fitTop() {
+    var root = document.documentElement, top = document.querySelector('.top');
+    var kids = [document.querySelector('.nation'), document.querySelector('.stats'), document.querySelector('.date')];
+    var gap = parseFloat(getComputedStyle(top).columnGap) || 0;
+    for (var lv = 0; lv <= 3; lv++) {
+      root.dataset.fit = String(lv);
+      var need = kids.reduce(function (a, e) { return a + e.getBoundingClientRect().width; }, 0) + gap * (kids.length - 1);
+      if (need <= top.clientWidth + 0.01) break;
+    }
+    window.__fit = { level: +root.dataset.fit, need: need, avail: top.clientWidth };
+  }
+
+  /* ---------- State sheet (the province details' full-height side sheet) ---------- */
+  var $ = function (sel) { return document.querySelector(sel); };
+
+  /* Width = clamp(43% of the safe width, 340, 380) pt; where the dock would just miss the room left of the sheet
+     (4 pt in + dock + 8 pt), the sheet narrows to make that room, down to 330 pt at the least. */
+  function sizeSheet() {
+    var d = window.__dev, safe = d.W - 2 * d.SIDE, want = Math.round(Math.min(380, Math.max(340, 0.43 * safe)));
+    var hud = $('.hud').getBoundingClientRect(), room = Math.floor(hud.width - 4 - $('.dock').getBoundingClientRect().width - 8);
+    if (room < want && room >= 330) want = room;
+    document.documentElement.style.setProperty('--sheet-w', want + 'px');
+    var tab = document.documentElement.dataset.tab;
+    Array.prototype.forEach.call(document.querySelectorAll('.r-tab'), function (b) {
+      var on = b.dataset.for === tab; b.classList.toggle('on', on); b.setAttribute('aria-selected', String(on));
+    });
+    /* the states view: the law in its cooldown cannot be tapped */
+    Array.prototype.forEach.call(document.querySelectorAll('.s-wait-1 .s-sg'), function (b) {
+      if (document.documentElement.dataset.states === '1') b.setAttribute('aria-disabled', 'true'); else b.removeAttribute('aria-disabled');
+    });
+    window.__sheet = { safe: safe, want: want, roomForDock: room };
+  }
+
+  /* From 8 pt under the top row down to the dock line; the dock moves to the left end of its line, 4 pt in, or hides
+     while the sheet is open where it cannot clear the sheet by 8 pt (the 375 pt phones). */
+  function placeSheet() {
+    var root = document.documentElement;
+    root.style.setProperty('--sheet-b', '0px');
+    root.dataset.dock = 'left';
+    var dk = $('.dock').getBoundingClientRect(), sh = $('.sheet').getBoundingClientRect();
+    if (dk.right > sh.left - 8) root.dataset.dock = 'hidden';
+    window.__sheetpos = { dock: root.dataset.dock };
+  }
+
+  /* The loosest fit level (the province panel's) at which «نظرة عامة» shows everything without scrolling. */
+  function fitSheet() {
+    var root = document.documentElement, tab = root.dataset.tab, b = $('.r-body[data-tab="overview"]'), tried = [], lv;
+    root.dataset.tab = 'overview';
+    for (lv = 0; lv <= 6; lv++) {
+      root.dataset.rfit = String(lv);
+      var over = b.scrollHeight - b.clientHeight;
+      tried.push([lv, over]);
+      if (over <= 0.5) break;
+    }
+    if (lv > 6) lv = 6;
+    root.dataset.rfit = String(lv);
+    root.dataset.tab = tab;
+    window.__sheetfit = { level: lv, tried: tried, fits: tried[tried.length - 1][1] <= 0.5 };
+  }
+
+  /* The open tab scrolls inside the sheet when it is taller than the sheet; fades mark the edges that hide content. */
+  function fitBody() {
+    var root = document.documentElement, b = $('.r-body[data-tab="' + root.dataset.tab + '"]');
+    b.scrollTop = window.__scroll === 'end' ? b.scrollHeight : window.__scroll;
+    var over = b.scrollHeight - b.clientHeight;
+    root.dataset.ftop = b.scrollTop > 0.5 ? '1' : '0';
+    root.dataset.fbot = b.scrollTop < over - 0.5 ? '1' : '0';
+    window.__body = { tab: root.dataset.tab, shown: b.clientHeight, full: b.scrollHeight, over: over, top: b.scrollTop };
+  }
+
+  /* Place the map so Cairo and the Nile delta, and if possible all of Egypt, sit in the map area left
+     of the sheet, clear of every panel (and its hit boxes), near the middle of that area. The largest
+     zoom (0.8 to 1.3 x the play screen's) that keeps all of Egypt clear wins. Within that zoom a place that
+     slices fewer map labels with a panel edge is preferred (one label is worth about 45 pt of distance),
+     and any label still sliced is then hidden (a city's dot and name as one unit), so no label or dot is
+     ever shown cut in two, and no dot without its name. */
+  function placeMap() {
+    var d = window.__dev, W = d.W, H = d.H;
+    var s0 = 0.63 * H / 390, MW0 = 1688, MH0 = 1097;
+    var EG = { x0: 583, y0: 424, x1: 945, y1: 732, cx: 764, cy: 578 };
+    var DELTA = { x0: 722, y0: 428, x1: 836, y1: 492 };        /* Cairo Governorate + the Nile delta */
+    var PAD = 8;                                                /* covers the 44 pt hit boxes (at most 6 beyond a control) */
+    var LPAD = 2;                                               /* a label closer than 2 pt to a panel edge counts as cut */
+    var obs = Array.prototype.filter.call(document.querySelectorAll('.hud .glass'), function (e) { return !e.classList.contains('menu') && e.getClientRects().length; })
+      .map(function (e) { return e.getBoundingClientRect(); });
+    var top = $('.top').getBoundingClientRect(), sh = $('.sheet').getBoundingClientRect(), hud = $('.hud').getBoundingClientRect();
+    var dk = $('.dock').getClientRects().length ? $('.dock').getBoundingClientRect() : null;
+    var tx = (hud.left + sh.left) / 2, ty = (top.bottom + (dk ? dk.top : hud.bottom)) / 2;
+    var safe = { x0: Math.max(d.SIDE, 0), x1: W - Math.max(d.SIDE, 0), y0: 0, y1: H - d.BOTTOM };
+    /* label units (a country name, or a city's dot + name) and their boxes in map space (halo stroke included) */
+    var units = Array.prototype.map.call(document.querySelectorAll('.labels text'), function (t) {
+      var k = t.getAttribute('data-city');
+      return k === null ? [t] : [t, document.querySelector('.labels circle[data-city="' + k + '"]')];
+    });
+    units.forEach(function (u) { u.forEach(function (e) { e.classList.remove('cut'); }); });
+    function hw(e) { return parseFloat(e.getAttribute('stroke-width') || 0) / 2; }
+    function union(rs) { return rs.reduce(function (a, r) { return [Math.min(a[0], r[0]), Math.min(a[1], r[1]), Math.max(a[2], r[2]), Math.max(a[3], r[3])]; }); }
+    var LB = units.map(function (u) { return union(u.map(function (e) { var bb = e.getBBox(), w = hw(e); return [bb.x - w, bb.y - w, bb.x + bb.width + w, bb.y + bb.height + w]; })); });
+    function clear(r) {
+      if (r.x0 < safe.x0 || r.x1 > safe.x1 || r.y0 < safe.y0 || r.y1 > safe.y1) return false;
+      return !obs.some(function (o) { return !(r.x1 <= o.left || r.x0 >= o.right || r.y1 <= o.top || r.y0 >= o.bottom); });
+    }
+    function box(B, s, cx, cy) { return { x0: cx + (B.x0 - EG.cx) * s - PAD, x1: cx + (B.x1 - EG.cx) * s + PAD, y0: cy + (B.y0 - EG.cy) * s - PAD, y1: cy + (B.y1 - EG.cy) * s + PAD }; }
+    /* is a label box cut by a panel edge (partly under a panel, or squeezed against one)? */
+    /* a panel that leaves less than 70 pt to a screen edge counts as reaching it: a label in that strip is squeezed */
+    var EDGE = 70;
+    function cutBox(x0, y0, x1, y1) {
+      if (x1 <= 0 || x0 >= W || y1 <= 0 || y0 >= H) return false;
+      for (var e = 0; e < obs.length; e++) {
+        var p = obs[e], sx0 = p.left < EDGE ? 0 : p.left, sx1 = W - p.right < EDGE ? W : p.right;
+        if ((sx0 !== p.left || sx1 !== p.right) && x1 > sx0 && x0 < sx1 && y1 > p.top - 2 && y0 < p.bottom + 2 && (x0 < p.left || x1 > p.right)) return true;
+      }
+      for (var j = 0; j < obs.length; j++) {
+        var o = obs[j];
+        if (x0 >= o.left && x1 <= o.right && y0 >= o.top && y1 <= o.bottom) return false;     /* fully under this panel */
+      }
+      for (j = 0; j < obs.length; j++) {
+        o = obs[j];
+        if (x1 > o.left - LPAD && x0 < o.right + LPAD && y1 > o.top - LPAD && y0 < o.bottom + LPAD) return true;
+      }
+      return false;
+    }
+    function cuts(s, cx, cy) {
+      var n = 0;
+      for (var i = 0; i < LB.length; i++) { var l = LB[i]; if (cutBox(cx + (l[0] - EG.cx) * s, cy + (l[1] - EG.cy) * s, cx + (l[2] - EG.cx) * s, cy + (l[3] - EG.cy) * s)) n++; }
+      return n;
+    }
+    function search(s, B) {
+      var best = null, MW = MW0 * s, MH = MH0 * s;
+      for (var cy = 0; cy <= H; cy += 2) for (var cx = 0; cx <= W; cx += 2) {
+        var L = cx - EG.cx * s, T = cy - EG.cy * s;
+        if (L > 0 || L + MW < W || T > 0 || T + MH < H) continue;       /* map stays full-bleed */
+        if (!clear(box(B, s, cx, cy))) continue;
+        var cost = (cx - tx) * (cx - tx) + 2 * (cy - ty) * (cy - ty);
+        if (best && cost >= best.cost) continue;                          /* labels only ever add cost */
+        cost += 2000 * cuts(s, cx, cy);
+        if (!best || cost < best.cost) best = { cost: cost, cx: cx, cy: cy };
+      }
+      return best;
+    }
+    var pick = null, z;
+    for (z = 1.3; z >= 0.8 - 1e-6 && !pick; z -= 0.05) { var b = search(s0 * z, EG); if (b) pick = { s: s0 * z, z: z, b: b, egypt: true }; }
+    if (!pick) { var b2 = search(s0, DELTA); pick = { s: s0, z: 1, b: b2, egypt: false }; }
+    var s = pick.s, cx = pick.b ? pick.b.cx : tx, cy = pick.b ? pick.b.cy : ty;
+    var root = document.documentElement.style;
+    root.setProperty('--map-s', String(s));
+    root.setProperty('--map-cx', cx + 'px');
+    root.setProperty('--map-cy', cy + 'px');
+    /* hide what is still cut, measured on the rendered labels and dots; also a label the screen edge or the side inset
+       (the notch, the Dynamic Island) would slice. That last rule is for this final pass only, so the map does not move. */
+    function edgeCut(b) {
+      var sx = Math.max(d.SIDE, 0);
+      if (b[2] <= 0 || b[0] >= W || b[3] <= 0 || b[1] >= H) return false;
+      return b[0] < sx || b[2] > W - sx || b[1] < 0 || b[3] > H;
+    }
+    /* hide what is still cut, measured on the rendered labels and dots */
+    var hidden = [];
+    units.forEach(function (u) {
+      var b = union(u.map(function (e) { var r = e.getBoundingClientRect(), w = hw(e) * s; return [r.left - w, r.top - w, r.right + w, r.bottom + w]; }));
+      if (cutBox(b[0], b[1], b[2], b[3]) || edgeCut(b)) { u.forEach(function (e) { e.classList.add('cut'); }); hidden.push(u[0].textContent); }
+    });
+    function scr(B) { return { x0: cx + (B.x0 - EG.cx) * s, x1: cx + (B.x1 - EG.cx) * s, y0: cy + (B.y0 - EG.cy) * s, y1: cy + (B.y1 - EG.cy) * s }; }
+    window.__map = { ok: !!pick.b, egyptClear: pick.egypt, s: s, zoom: +pick.z.toFixed(2), cx: cx, cy: cy, target: [tx, ty], egypt: scr(EG), delta: scr(DELTA), hiddenLabels: hidden };
+  }
+
+  /* Frosted glass for the mockup render. The headless Chromium used for these PNGs leaves a sharp
+     copy of image content under backdrop-filter (map labels showed through the panels). So each
+     panel gets its own clipped copy of the map, blurred with filter: blur(), under the 0.66 tint:
+     the same look the native blur gives in the app. backdrop-filter stays as the fallback. */
+  function frost() {
+    var m = document.querySelector('.map').getBoundingClientRect();
+    Array.prototype.forEach.call(document.querySelectorAll('.hud .glass'), function (g) {
+      var f = g.querySelector(':scope > .frost');
+      if (!f) {
+        f = document.createElement('span'); f.className = 'frost'; f.setAttribute('aria-hidden', 'true');
+        f.appendChild(document.createElement('i'));
+        g.insertBefore(f, g.firstChild);
+      }
+      var r = g.getBoundingClientRect(), cs = getComputedStyle(g), i = f.firstChild;
+      i.style.left = (m.left - r.left - parseFloat(cs.borderLeftWidth)) + 'px';
+      i.style.top = (m.top - r.top - parseFloat(cs.borderTopWidth)) + 'px';
+      i.style.width = m.width + 'px';
+      i.style.height = m.height + 'px';
+    });
+    document.documentElement.classList.add('frosted');
+  }
+
+  (document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve())
+    .then(fitTop).then(sizeSheet).then(placeSheet).then(fitSheet).then(fitBody).then(placeMap).then(frost).then(function () { window.__ready = true; });
+</script>
+</body>
+</html>
