@@ -2,6 +2,8 @@
 
 Visual mockups for the owner. NOT app code. The build is `../screen5/A`.
 
+**Approved by the owner on 2026-10-21** («اعتمد كل شي»), together with one owner per law (design doc §6.5). Logged in `decisions/`.
+
 ## When it appears
 The player taps «الدولة», the first item of the section dock. The panel opens as the full-height side sheet of the approved province details (`SCREEN4_BRIEF.md`). The map stays visible and Egypt stays clear of every panel. The dock item «الدولة» shows the open section.
 

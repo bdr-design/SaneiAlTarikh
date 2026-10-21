@@ -133,3 +133,11 @@ The store pages and screenshots could not be opened: the environment's network p
   - the 2010 narrowing of the emergency law;
   - East Port Said already under way;
   - the light rules being incomplete.
+
+## Approved (2026-10-21)
+- **Owner:** «اعتمد كل شي», in answer to three questions: approve the state screen; one owner per law; move it to `main`. Approved:
+  - the state screen;
+  - one owner per law;
+  - the three shared refinements in the approved screen 4 R;
+  - the move to `main`.
+- **Logged in `decisions/`.** The same answer is taken as the go-ahead for the economy proposal (screen 6, task T-005).
