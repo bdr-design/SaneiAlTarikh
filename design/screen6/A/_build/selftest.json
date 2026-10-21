@@ -1,0 +1,777 @@
+{
+ "ranAt": "2026-10-21T06:33:38.826Z",
+ "inputs": {
+  "files": [
+   "index.html",
+   "_build/render.js",
+   "_build/econ.css",
+   "_build/sheet.html",
+   "_build/assemble.py",
+   "../../shared/section_identity.css",
+   "../../screen4/R/_build/panel.css",
+   "../../screen5/A/_build/state.css",
+   "../../screen4/A/index.html",
+   "../../screen1/B3/index.html",
+   "../../shared/devices.json",
+   "../../shared/flag_eg.svg",
+   "../../shared/flags/eg.svg",
+   "../../shared/map_mena_d1.jpg",
+   "../../shared/map_mena_d1_overlay.svg",
+   "header_cairo.jpg",
+   "map_overlay_cairo.svg"
+  ],
+  "sha1": "be43d4f138da3879d1693a6bd2b87ee5b7011baa"
+ },
+ "cleanIssues": {
+  "i16promax": [],
+  "i16promax_budget": [],
+  "i16promax_budget_end": [],
+  "i16promax_taxes": [],
+  "i16promax_taxes_end": [],
+  "i16promax_trade": [],
+  "i16promax_trade_end": [],
+  "i16promax_budget_at137": [],
+  "i16promax_budget_at274": [],
+  "i16promax_taxes_at137": [],
+  "i16promax_trade_at137": [],
+  "i16promax coverage": [],
+  "se": [],
+  "se_budget": [],
+  "se_budget_end": [],
+  "se_taxes": [],
+  "se_taxes_end": [],
+  "se_trade": [],
+  "se_trade_end": [],
+  "se_budget_at98": [],
+  "se_budget_at196": [],
+  "se_budget_at294": [],
+  "se_taxes_at98": [],
+  "se_taxes_at196": [],
+  "se_trade_at98": [],
+  "se coverage": []
+ },
+ "results": [
+  {
+   "name": "type size",
+   "ok": true,
+   "sample": [
+    "font size 17 for \"الاقتصاد\""
+   ]
+  },
+  {
+   "name": "18 pt misuse",
+   "ok": true,
+   "sample": [
+    "close button is not round",
+    "18 pt is for the panel's name and the headline numbers only: \"مصر\"",
+    "18 pt is for the panel's name and the headline numbers only: \"·\""
+   ]
+  },
+  {
+   "name": "font weight",
+   "ok": true,
+   "sample": [
+    "font weight 13/700 for \"الدعم والحماية الاجتماعية\"",
+    "font weight 13/700 for \"الفوائد\"",
+    "font weight 13/700 for \"الإدارة العامة\""
+   ]
+  },
+  {
+   "name": "off-token colour",
+   "ok": true,
+   "sample": [
+    "text colour off-token rgb(136, 153, 170): \"عجز الموازنة\"",
+    "text colour off-token rgb(136, 153, 170): \"الدين العام\"",
+    "text colour off-token rgb(136, 153, 170): \"سعر الصرف\""
+   ]
+  },
+  {
+   "name": "control height",
+   "ok": true,
+   "sample": [
+    "control height 40.00 for .e-row (want 44): الدعم والحماية الاجتماعية1",
+    "control height 40.00 for .e-row (want 44): الإدارة العامة9.9 مليار $ ",
+    "control height 40.00 for .e-row (want 44): التعليم7.3 مليار $ · 11%"
+   ]
+  },
+  {
+   "name": "radius",
+   "ok": true,
+   "sample": [
+    "radius 8 for .r-act (want 10)",
+    "radius 8 for .r-act (want 10)"
+   ]
+  },
+  {
+   "name": "gap",
+   "ok": true,
+   "sample": [
+    "gap 6 on الدعم والحماية الاجتماعية1",
+    "gap 6 on الدعم والحماية الاجتماعية1",
+    "gap 6 on الفوائد13.3 مليار $ · 20% "
+   ]
+  },
+  {
+   "name": "icon size",
+   "ok": true,
+   "sample": [
+    "icon size 19x19 (want 17): i",
+    "icon size 19x19 (want 17): i"
+   ]
+  },
+  {
+   "name": "chevron size",
+   "ok": true,
+   "sample": [
+    "icon size 12x12 (want 16): i r-chev",
+    "icon size 12x12 (want 16): i r-chev",
+    "icon size 12x12 (want 16): i r-chev"
+   ]
+  },
+  {
+   "name": "hit overlap",
+   "ok": true,
+   "sample": [
+    "hit overlap الإدارة العامة9.9 مليار $  / التعليم7.3 مليار $ · 11%",
+    "hit overlap التعليم7.3 مليار $ · 11% / الاستثمار العام7.3 مليار $"
+   ]
+  },
+  {
+   "name": "tap in the side inset",
+   "ok": true,
+   "sample": [
+    "text in side inset: 219",
+    "text in side inset: +5.1%",
+    "text in side inset: لماذا؟"
+   ]
+  },
+  {
+   "name": "text in the side inset",
+   "ok": true,
+   "sample": [
+    "text in side inset: 219",
+    "text in side inset: +5.1%",
+    "text in side inset: لماذا؟"
+   ]
+  },
+  {
+   "name": "panel in the side inset",
+   "ok": true,
+   "sample": [
+    "text in side inset: 219",
+    "text in side inset: +5.1%",
+    "text in side inset: لماذا؟"
+   ]
+  },
+  {
+   "name": "clipped text",
+   "ok": true,
+   "sample": [
+    "clipped text (sides): \"من الناتج\" 509..557.98 y 252.5..271.5",
+    "text outside the sheet's 12 pt padding: \"من الناتج\"",
+    "text outside the sheet's 12 pt padding: \"BB+\""
+   ]
+  },
+  {
+   "name": "text outside the padding",
+   "ok": true,
+   "sample": [
+    "clipped text (sides): \"من الناتج\" 509..557.98 y 252.5..271.5",
+    "text outside the sheet's 12 pt padding: \"من الناتج\"",
+    "text outside the sheet's 12 pt padding: \"BB+\""
+   ]
+  },
+  {
+   "name": "horizontal overflow",
+   "ok": true,
+   "sample": [
+    "clipped text (sides): \"من الناتج\" 509..557.98 y 252.5..271.5",
+    "text outside the sheet's 12 pt padding: \"من الناتج\"",
+    "text outside the sheet's 12 pt padding: \"BB+\""
+   ]
+  },
+  {
+   "name": "text overlap",
+   "ok": true,
+   "sample": [
+    "text overlap \"الاقتصاد\" / \"الجنيه المصري\"",
+    "icon over text: i / \"الاقتصاد\"",
+    "contrast 3.01 for \"الاقتصاد\""
+   ]
+  },
+  {
+   "name": "icon over text",
+   "ok": true,
+   "sample": [
+    "text outside the sheet's 12 pt padding: \"الناتج المحلي\"",
+    "icon over text: i / \"الناتج المحلي\"",
+    "icon over text: i r-amber / \"التضخم\""
+   ]
+  },
+  {
+   "name": "panel not opaque",
+   "ok": true,
+   "sample": [
+    "panel not opaque: الاقتصاد: مصر rgba(9, 17, 25, 0.66)",
+    "contrast 3.56 for \"نظرة عامة\"",
+    "contrast 4.08 for \"الميزانية\""
+   ]
+  },
+  {
+   "name": "see-through panel",
+   "ok": true,
+   "sample": [
+    "panel not opaque (opacity 0.60): الاقتصاد: مصر",
+    "brief text not fully visible: الاقتصاد",
+    "brief text not fully visible: الجنيه المصري"
+   ]
+  },
+  {
+   "name": "Egypt covered",
+   "ok": true,
+   "sample": [
+    "Nile delta covered by panel الاقتصاد: مصر",
+    "Nile delta under the hit box of نظرة عامة",
+    "Nile delta under the hit box of الميزانية"
+   ]
+  },
+  {
+   "name": "delta covered",
+   "ok": true,
+   "sample": [
+    "Nile delta covered by panel الاقتصاد: مصر",
+    "Nile delta under the hit box of نظرة عامة",
+    "Nile delta under the hit box of الميزانية"
+   ]
+  },
+  {
+   "name": "sheet width",
+   "ok": true,
+   "sample": [
+    "sheet width 330 (want round(clamp(43% of 832, 340, 380)), or the room the dock leaves if 330..: 358)"
+   ]
+  },
+  {
+   "name": "sheet top",
+   "ok": true,
+   "sample": [
+    "hit overlap الخزينة 36.0 مليار $ / إغلاق",
+    "hit overlap الاستقرار 58% / إغلاق",
+    "panel overlap الدولة: مصر، حسني مبارك، ج / الاقتصاد: مصر"
+   ]
+  },
+  {
+   "name": "panel overlap",
+   "ok": true,
+   "sample": [
+    "hit overlap الخزينة 36.0 مليار $ / إغلاق",
+    "hit overlap الاستقرار 58% / إغلاق",
+    "panel overlap الدولة: مصر، حسني مبارك، ج / الاقتصاد: مصر"
+   ]
+  },
+  {
+   "name": "dock hidden although it fits",
+   "ok": true,
+   "sample": [
+    "dock hidden although it fits left of the sheet"
+   ]
+  },
+  {
+   "name": "dock not moved left",
+   "ok": true,
+   "sample": [
+    "icon over text: i / \"الشرعية\"",
+    "hit overlap الدولة / خفض دعم الوقود 10%يوفّر 1.",
+    "hit overlap الاقتصاد / خفض دعم الوقود 10%يوفّر 1."
+   ]
+  },
+  {
+   "name": "dock too close to the sheet",
+   "ok": true,
+   "sample": [
+    "icon over text: i / \"الشرعية\"",
+    "hit overlap الدولة / خفض دعم الوقود 10%يوفّر 1.",
+    "panel overlap الأقسام / الاقتصاد: مصر"
+   ]
+  },
+  {
+   "name": "dock hit box in the side inset",
+   "ok": true,
+   "sample": [
+    "tap in side inset: المزيد",
+    "dock not 4 pt in from the left end of its B3 line: x 62.0 w 387.0 y 374.0 (want x 66 w 387.0 y 374.0)"
+   ]
+  },
+  {
+   "name": "dock shown on the SE",
+   "ok": true,
+   "sample": [
+    "icon over text: i / \"خفض دعم الوقود\"",
+    "icon over text: i / \"10%\"",
+    "icon over text: i / \"مليار $ سنويًا\""
+   ]
+  },
+  {
+   "name": "left stack moved",
+   "ok": true,
+   "sample": [
+    "HUD element moved from its B3 position: .toast x 70.0..275.6 y 56.0..88.0",
+    "HUD element moved from its B3 position: .btn.mode x 70.0..191.6 y 96.0..128.0",
+    "HUD element moved from its B3 position: .btn.home x 70.0..141.5 y 136.0..168.0"
+   ]
+  },
+  {
+   "name": "overview scrolls",
+   "ok": true,
+   "sample": [
+    "clipped text (bottom): \"خفض دعم الوقود\" 503.59..599 y 360..379",
+    "clipped text (bottom): \"10%\" 475.5..503.59 y 360..379",
+    "control cut by its scroll area (bottom): خفض دعم الوقود 10%يوفّر 1."
+   ]
+  },
+  {
+   "name": "fit level not the loosest",
+   "ok": true,
+   "sample": [
+    "fit level 4 is not the loosest that fits (level 0 fits)",
+    "fit level 4 is not the loosest that fits (level 1 fits)",
+    "fit level 4 is not the loosest that fits (level 2 fits)"
+   ]
+  },
+  {
+   "name": "fades wrong",
+   "ok": true,
+   "sample": [
+    "clipped text (bottom): \"7.3\" 863.86..881 y 401..418",
+    "clipped text (bottom): \"مليار $ ·\" 822.52..863.86 y 401..418",
+    "clipped text (bottom): \"11%\" 797.81..822.52 y 401..418"
+   ]
+  },
+  {
+   "name": "cut at a hard edge",
+   "ok": true,
+   "sample": [
+    "clipped text (top): \"48.6\" 569.05..607.03 y 134..161",
+    "clipped text (top): \"66.3\" 484.09..522.08 y 134..161",
+    "clipped text (top): \"−17.7\" 399.14..447.92 y 134..161"
+   ]
+  },
+  {
+   "name": "fade flag without a mask",
+   "ok": true,
+   "sample": [
+    "clipped text (top): \"48.6\" 569.05..607.03 y 134..161",
+    "clipped text (top): \"66.3\" 484.09..522.08 y 134..161",
+    "clipped text (top): \"−17.7\" 399.14..447.92 y 134..161"
+   ]
+  },
+  {
+   "name": "fade without the hint strip",
+   "ok": true,
+   "sample": [
+    "clipped text (top): \"48.6\" 569.05..607.03 y 134..161",
+    "clipped text (top): \"66.3\" 484.09..522.08 y 134..161",
+    "clipped text (top): \"−17.7\" 399.14..447.92 y 134..161"
+   ]
+  },
+  {
+   "name": "no scroll hint",
+   "ok": true,
+   "sample": [
+    "no scroll hint: nothing fades into the bottom edge",
+    "scroll hint chevron missing with content below",
+    "brief text not fully visible: بنود الإنفاق"
+   ]
+  },
+  {
+   "name": "hint chevron missing",
+   "ok": true,
+   "sample": [
+    "scroll hint chevron missing with content below"
+   ]
+  },
+  {
+   "name": "hint over the content",
+   "ok": true,
+   "sample": [
+    "scroll hint not centred in the clear strip under the fade: y 249.0..267.0 (strip 395.0..417.0)"
+   ]
+  },
+  {
+   "name": "hint over legible text",
+   "ok": true,
+   "sample": [
+    "scroll hint not centred in the clear strip under the fade: y 241.0..259.0 (strip 395.0..417.0)",
+    "scroll hint over text: \"الدعم والحماية الاجتماعية\"",
+    "scroll hint over text: \"17.2\""
+   ]
+  },
+  {
+   "name": "% before its number",
+   "ok": true,
+   "sample": [
+    "% shown before its number: \"من الناتج 8.1%\"",
+    "amber check: «8.1% من الناتج» not found",
+    "brief text missing: 8.1% من الناتج"
+   ]
+  },
+  {
+   "name": "brief text scrolled away",
+   "ok": true,
+   "sample": [
+    "clipped text (top): \"7.3\" 863.86..881 y 150..167",
+    "clipped text (top): \"مليار $ ·\" 822.52..863.86 y 150..167",
+    "clipped text (top): \"11%\" 797.81..822.52 y 150..167"
+   ]
+  },
+  {
+   "name": "brief text",
+   "ok": true,
+   "sample": [
+    "brief text missing: لماذا؟",
+    "brief text missing: لماذا؟"
+   ]
+  },
+  {
+   "name": "map label cut",
+   "ok": true,
+   "sample": [
+    "map label ليبيا sliced by the screen edge or the side inset",
+    "map label إيران sliced by the screen edge or the side inset",
+    "map label إيران squeezed between a panel and the screen edge"
+   ]
+  },
+  {
+   "name": "map label at the screen edge",
+   "ok": true,
+   "sample": [
+    "map label ليبيا sliced by the screen edge or the side inset",
+    "map label إيران sliced by the screen edge or the side inset",
+    "map label إيران squeezed between a panel and the screen edge"
+   ]
+  },
+  {
+   "name": "contrast",
+   "ok": true,
+   "sample": [
+    "contrast 1.73 for \"عجز الموازنة\"",
+    "contrast 1.66 for \"8.1%\"",
+    "contrast 1.66 for \"من الناتج\""
+   ]
+  },
+  {
+   "name": "faint text",
+   "ok": true,
+   "sample": [
+    "brief text not fully visible: عجز الموازنة",
+    "brief text not fully visible: الدين العام",
+    "brief text not fully visible: سعر الصرف"
+   ]
+  },
+  {
+   "name": "RTL order",
+   "ok": true,
+   "sample": [
+    "line 1: order must be .r-at, .e-bar, .r-chev (right to left)",
+    "line 2: order must be .r-at, .e-bar, .e-lock (right to left)",
+    "line 3: order must be .r-at, .e-bar, .r-chev (right to left)"
+   ]
+  },
+  {
+   "name": "flow order",
+   "ok": true,
+   "sample": [
+    "flow 1: order must be .r-at, .e-val (right to left)",
+    "flow 2: order must be .r-at, .e-val (right to left)",
+    "flow 3: order must be .r-at, .e-val (right to left)"
+   ]
+  },
+  {
+   "name": "two tabs selected",
+   "ok": true,
+   "sample": [
+    "exactly the open tab must be selected"
+   ]
+  },
+  {
+   "name": "dock item not marked",
+   "ok": true,
+   "sample": [
+    "the open section «الاقتصاد» is not marked in the dock"
+   ]
+  },
+  {
+   "name": "dock underline missing",
+   "ok": true,
+   "sample": [
+    "dock underline missing or off: none 16pxx2px rgb(67, 192, 138) (want 16 x 2 in the section colour)"
+   ]
+  },
+  {
+   "name": "closed dock item coloured",
+   "ok": true,
+   "sample": [
+    "dock item 1 (closed) not neutral as on B3: rgb(233, 238, 244) / rgb(234, 242, 247)",
+    "dock item 3 (closed) not neutral as on B3: rgb(233, 238, 244) / rgb(234, 242, 247)",
+    "dock item 4 (closed) not neutral as on B3: rgb(233, 238, 244) / rgb(234, 242, 247)"
+   ]
+  },
+  {
+   "name": "identity line colour",
+   "ok": true,
+   "sample": [
+    "panel top line \"\" rgb(233, 238, 244) 2px (want the section colour, 2 pt, at the top)"
+   ]
+  },
+  {
+   "name": "identity line missing",
+   "ok": true,
+   "sample": [
+    "panel top line none rgb(67, 192, 138) 2px (want the section colour, 2 pt, at the top)"
+   ]
+  },
+  {
+   "name": "identity line short",
+   "ok": true,
+   "sample": [
+    "panel top line width 316px at 0px (want the panel's 356 pt)"
+   ]
+  },
+  {
+   "name": "emblem missing",
+   "ok": true,
+   "sample": [
+    "section emblem missing or not in the section colour",
+    "header order must be flag, name, ..., emblem, close (right to left)"
+   ]
+  },
+  {
+   "name": "closed tabs like the open one",
+   "ok": true,
+   "sample": [
+    "open tab not in the section colour",
+    "closed tab not in the secondary grey: الميزانية rgb(234, 242, 247)",
+    "closed tab not in the secondary grey: الضرائب والدعم rgb(234, 242, 247)"
+   ]
+  },
+  {
+   "name": "open tab without its fill",
+   "ok": true,
+   "sample": [
+    "open tab without its fill"
+   ]
+  },
+  {
+   "name": "section colour on data",
+   "ok": true,
+   "sample": [
+    "section colour on data text: \"8.1%\"",
+    "section colour on data text: \"من الناتج\"",
+    "section colour on data text: \"73%\""
+   ]
+  },
+  {
+   "name": "bars in the section colour",
+   "ok": true,
+   "sample": [
+    "a share bar in the section colour (bars are data)",
+    "a share bar in the section colour (bars are data)",
+    "a share bar in the section colour (bars are data)"
+   ]
+  },
+  {
+   "name": "inflation not amber",
+   "ok": true,
+   "sample": [
+    "«10.3%» not in amber: rgb(234, 242, 247)"
+   ]
+  },
+  {
+   "name": "legitimacy cost not amber",
+   "ok": true,
+   "sample": [
+    "«الشرعية» not in amber: rgb(234, 242, 247)"
+   ]
+  },
+  {
+   "name": "deficit not amber",
+   "ok": true,
+   "sample": [
+    "«−17.7» not in amber: rgb(234, 242, 247)"
+   ]
+  },
+  {
+   "name": "emblem size",
+   "ok": true,
+   "sample": [
+    "size 26.0x26.0 for .s-emb (want 32 x 32)"
+   ]
+  },
+  {
+   "name": "bar size",
+   "ok": true,
+   "sample": [
+    "size 60.0x6.0 for .e-bar (want 72 x 6)",
+    "size 60.0x6.0 for .e-bar (want 72 x 6)",
+    "size 60.0x6.0 for .e-bar (want 72 x 6)"
+   ]
+  },
+  {
+   "name": "flow height",
+   "ok": true,
+   "sample": [
+    "size 332.0x32.0 for .e-flow (want any x 36)",
+    "size 332.0x32.0 for .e-flow (want any x 36)",
+    "size 332.0x32.0 for .e-flow (want any x 36)"
+   ]
+  },
+  {
+   "name": "tile icons cyan",
+   "ok": true,
+   "sample": [
+    "white touch off: .r-tile color rgb(127, 233, 255) (want rgb(234, 242, 247))",
+    "white touch off: .r-tile color rgb(127, 233, 255) (want rgb(234, 242, 247))"
+   ]
+  },
+  {
+   "name": "chip not white",
+   "ok": true,
+   "sample": [
+    "white touch off: .r-chip borderTopColor rgba(63, 224, 208, 0.7) (want rgba(234, 242, 247, 0.5))"
+   ]
+  },
+  {
+   "name": "interest adjustable",
+   "ok": true,
+   "sample": [
+    "«الفوائد»: a mandatory line must show a lock and not be a control"
+   ]
+  },
+  {
+   "name": "a line without its adjuster",
+   "ok": true,
+   "sample": [
+    "«ضريبة الدخل»: a line must open its adjuster (a control with a chevron)"
+   ]
+  },
+  {
+   "name": "an image in the sheet",
+   "ok": true,
+   "sample": [
+    "an image in the sheet"
+   ]
+  },
+  {
+   "name": "deficit does not add up",
+   "ok": true,
+   "sample": [
+    "numbers: revenue 50 - spending 66.3 is not the deficit -17.7",
+    "numbers: the note's revenue 48.6 is not the budget's 50"
+   ]
+  },
+  {
+   "name": "deficit share wrong",
+   "ok": true,
+   "sample": [
+    "numbers: the deficit 17.7 is 7.08% of GDP 250, not 8.1%",
+    "brief text missing: 219",
+    "brief text missing: 219"
+   ]
+  },
+  {
+   "name": "lines do not add up",
+   "ok": true,
+   "sample": [
+    "numbers: the lines add up to 68.4, not the spending 66.3",
+    "numbers: line 3 is 18.1% of the spending, shown 15%",
+    "numbers: bar 3 is 58% (want 69.8% of the largest line)"
+   ]
+  },
+  {
+   "name": "line shown differs from its data",
+   "ok": true,
+   "sample": [
+    "numbers: line 3 shows 12 but its data is 9.9",
+    "brief text missing: 9.9 مليار $ · 15%",
+    "brief text missing: 9.9 مليار $ · 15%"
+   ]
+  },
+  {
+   "name": "shares wrong",
+   "ok": true,
+   "sample": [
+    "numbers: the shares add up to 102%",
+    "numbers: line 1 is 25.9% of the spending, shown 28%",
+    "brief text missing: 17.2 مليار $ · 26%"
+   ]
+  },
+  {
+   "name": "bar out of proportion",
+   "ok": true,
+   "sample": [
+    "numbers: bar 3 is 80% (want 57.6% of the largest line)"
+   ]
+  },
+  {
+   "name": "subsidies exceed their line",
+   "ok": true,
+   "sample": [
+    "numbers: the subsidies listed (19.8) exceed their budget line (17.2)",
+    "numbers: cutting the fuel subsidy 10% saves 1.60, shown 1.2",
+    "brief text missing: 11.7"
+   ]
+  },
+  {
+   "name": "saving wrong",
+   "ok": true,
+   "sample": [
+    "numbers: cutting the fuel subsidy 10% saves 1.17, shown 2",
+    "brief text missing: يوفّر 1.2 مليار $ سنويًا",
+    "brief text missing: يوفّر 1.2 مليار $ سنويًا"
+   ]
+  },
+  {
+   "name": "taxes do not add up",
+   "ok": true,
+   "sample": [
+    "numbers: the taxes add up to 30.1, the note says 35",
+    "brief text missing: الضرائب 30.1 مليار $ من إيرادات 48.6. الباقي من قناة السويس والبترول والمنح.",
+    "brief text missing: الضرائب 30.1 مليار $ من إيرادات 48.6. الباقي من قناة السويس والبترول والمنح."
+   ]
+  },
+  {
+   "name": "trade balance wrong",
+   "ok": true,
+   "sample": [
+    "numbers: exports - imports is not the trade balance",
+    "brief text missing: 52.9",
+    "brief text missing: 52.9"
+   ]
+  },
+  {
+   "name": "bar fills from the left",
+   "ok": true,
+   "sample": [
+    "a bar does not fill from the right",
+    "a bar does not fill from the right",
+    "a bar does not fill from the right"
+   ]
+  },
+  {
+   "name": "close not round",
+   "ok": true,
+   "sample": [
+    "close button is not round"
+   ]
+  },
+  {
+   "name": "coverage without the middle views",
+   "ok": true,
+   "sample": [
+    "budget: never shown clear of the fades in any view: الإدارة العامة",
+    "budget: never shown clear of the fades in any view: 9.9 مليار $ · 15%",
+    "budget: never shown clear of the fades in any view: التعليم"
+   ]
+  }
+ ]
+}
