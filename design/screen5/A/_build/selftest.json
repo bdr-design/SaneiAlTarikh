@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-10-21T04:17:56.314Z",
+ "ranAt": "2026-10-21T05:41:59.939Z",
  "inputs": {
   "files": [
    "index.html",
@@ -8,23 +8,49 @@
    "_build/sheet.html",
    "_build/assemble.py",
    "../../shared/section_identity.css",
-   "../../screen4/R/_build/panel.css"
+   "../../screen4/R/_build/panel.css",
+   "../../screen4/A/index.html",
+   "../../screen1/B3/index.html",
+   "../../shared/devices.json",
+   "../../shared/flag_eg.svg",
+   "../../shared/flags/eg.svg",
+   "../../shared/map_mena_d1.jpg",
+   "../../shared/map_mena_d1_overlay.svg",
+   "header_cairo.jpg",
+   "map_overlay_cairo.svg"
   ],
-  "sha1": "dadefc53c56b2a00468bfe9dd077a7080126d1f8"
+  "sha1": "928e529b7dae1f3050ea369f182ecc24ef1c22fe"
  },
  "cleanIssues": {
   "i16promax": [],
   "i16promax_leader": [],
+  "i16promax_leader_end": [],
   "i16promax_policies": [],
   "i16promax_policies_end": [],
   "i16promax_projects": [],
   "i16promax_projects_end": [],
+  "i16promax_states": [],
+  "i16promax_policies_states": [],
+  "i16promax_policies_at137": [],
+  "i16promax_policies_states_end": [],
+  "i16promax_policies_states_at137": [],
+  "i16promax coverage": [],
   "se": [],
   "se_leader": [],
+  "se_leader_end": [],
   "se_policies": [],
   "se_policies_end": [],
   "se_projects": [],
-  "se_projects_end": []
+  "se_projects_end": [],
+  "se_states": [],
+  "se_policies_states": [],
+  "se_policies_at98": [],
+  "se_policies_at196": [],
+  "se_projects_at98": [],
+  "se_policies_states_end": [],
+  "se_policies_states_at98": [],
+  "se_policies_states_at196": [],
+  "se coverage": []
  },
  "results": [
   {
@@ -39,8 +65,8 @@
    "ok": true,
    "sample": [
     "close button is not round",
-    "18 pt is for the province name and the headline numbers only: \"الرئيس محمد حسني مبارك\"",
-    "18 pt is for the province name and the headline numbers only: \"·\""
+    "18 pt is for the country name and the headline numbers only: \"الرئيس محمد حسني مبارك\"",
+    "18 pt is for the country name and the headline numbers only: \"·\""
    ]
   },
   {
@@ -83,9 +109,9 @@
    "name": "gap",
    "ok": true,
    "sample": [
-    "gap 6 on حالة الطوارئالتغيير: 60 رأ",
-    "gap 6 on حالة الطوارئالتغيير: 60 رأ",
-    "gap 6 on التجنيدالتغيير: 50 رأس مال"
+    "gap 6 on حالة الطوارئكلفة التغيير: ",
+    "gap 6 on حالة الطوارئكلفة التغيير: ",
+    "gap 6 on التجنيدكلفة التغيير: 50 تط"
    ]
   },
   {
@@ -94,6 +120,15 @@
    "sample": [
     "icon size 19x19 (want 17): i",
     "icon size 19x19 (want 17): i"
+   ]
+  },
+  {
+   "name": "cost glyph size",
+   "ok": true,
+   "sample": [
+    "icon size 14x14 (want 10): i",
+    "icon size 14x14 (want 10): i",
+    "icon size 14x14 (want 10): i"
    ]
   },
   {
@@ -106,7 +141,25 @@
    ]
   },
   {
-   "name": "side inset",
+   "name": "tap in the side inset",
+   "ok": true,
+   "sample": [
+    "text in side inset: 86",
+    "text in side inset: +4",
+    "text in side inset: شهريًا"
+   ]
+  },
+  {
+   "name": "text in the side inset",
+   "ok": true,
+   "sample": [
+    "text in side inset: 86",
+    "text in side inset: +4",
+    "text in side inset: شهريًا"
+   ]
+  },
+  {
+   "name": "panel in the side inset",
    "ok": true,
    "sample": [
     "text in side inset: 86",
@@ -118,8 +171,26 @@
    "name": "clipped text",
    "ok": true,
    "sample": [
-    "text outside the sheet's 12 pt padding: \"· عُدّل\"",
-    "clipped text (sides): \"2007\" 509..540.2 y 248.5..267.5",
+    "text outside the sheet's 12 pt padding: \"· عُدّل في\"",
+    "clipped text (sides): \"2007\" 509..540.2 y 252.5..271.5",
+    "text outside the sheet's 12 pt padding: \"2007\""
+   ]
+  },
+  {
+   "name": "text outside the padding",
+   "ok": true,
+   "sample": [
+    "text outside the sheet's 12 pt padding: \"· عُدّل في\"",
+    "clipped text (sides): \"2007\" 509..540.2 y 252.5..271.5",
+    "text outside the sheet's 12 pt padding: \"2007\""
+   ]
+  },
+  {
+   "name": "horizontal overflow",
+   "ok": true,
+   "sample": [
+    "text outside the sheet's 12 pt padding: \"· عُدّل في\"",
+    "clipped text (sides): \"2007\" 509..540.2 y 252.5..271.5",
     "text outside the sheet's 12 pt padding: \"2007\""
    ]
   },
@@ -127,9 +198,9 @@
    "name": "text overlap",
    "ok": true,
    "sample": [
-    "text overlap \"مصر\" / \"إعداد واقعي\"",
+    "text overlap \"مصر\" / \"الوضع: واقعي\"",
     "icon over text: i / \"مصر\"",
-    "contrast 2.36 for \"مصر\""
+    "contrast 3.09 for \"مصر\""
    ]
   },
   {
@@ -146,8 +217,8 @@
    "ok": true,
    "sample": [
     "panel not opaque: الدولة: مصر rgba(9, 17, 25, 0.66)",
-    "contrast 3.15 for \"نظام الحكم\"",
-    "contrast 4.07 for \"الحزب الحاكم\""
+    "contrast 4.08 for \"القيادة\"",
+    "contrast 4.07 for \"السياسات\""
    ]
   },
   {
@@ -156,7 +227,7 @@
    "sample": [
     "panel not opaque (opacity 0.60): الدولة: مصر",
     "brief text not fully visible: مصر",
-    "brief text not fully visible: إعداد واقعي"
+    "brief text not fully visible: الوضع: واقعي"
    ]
   },
   {
@@ -169,14 +240,34 @@
    ]
   },
   {
+   "name": "delta covered",
+   "ok": true,
+   "sample": [
+    "Nile delta covered by panel الدولة: مصر",
+    "Nile delta under the hit box of نظرة عامة",
+    "Nile delta under the hit box of القيادة"
+   ]
+  },
+  {
    "name": "sheet width",
    "ok": true,
    "sample": [
+    "text outside the sheet's 12 pt padding: \"2007\"",
+    "text outside the sheet's 12 pt padding: \"1981\"",
     "sheet width 330 (want round(clamp(43% of 832, 340, 380)), or the room the dock leaves if 330..: 358)"
    ]
   },
   {
-   "name": "top row covered",
+   "name": "sheet top",
+   "ok": true,
+   "sample": [
+    "hit overlap الخزينة 36.0 مليار $ / إغلاق",
+    "hit overlap الاستقرار 58% / إغلاق",
+    "panel overlap الدولة: مصر، حسني مبارك، ج / الدولة: مصر"
+   ]
+  },
+  {
+   "name": "panel overlap",
    "ok": true,
    "sample": [
     "hit overlap الخزينة 36.0 مليار $ / إغلاق",
@@ -196,8 +287,17 @@
    "ok": true,
    "sample": [
     "icon over text: i / \"تهدئة مؤقتة\"",
-    "hit overlap الدولة / تعديل وزاري25 رأس مال سياس",
-    "hit overlap الاقتصاد / تعديل وزاري25 رأس مال سياس"
+    "hit overlap الدولة / تعديل وزاريالكلفة: 25 · مر",
+    "hit overlap الاقتصاد / تعديل وزاريالكلفة: 25 · مر"
+   ]
+  },
+  {
+   "name": "dock too close to the sheet",
+   "ok": true,
+   "sample": [
+    "icon over text: i / \"تهدئة مؤقتة\"",
+    "hit overlap الدولة / تعديل وزاريالكلفة: 25 · مر",
+    "panel overlap الأقسام / الدولة: مصر"
    ]
   },
   {
@@ -212,9 +312,9 @@
    "name": "dock shown on the SE",
    "ok": true,
    "sample": [
-    "icon over text: i / \"رأس مال سياسي · مرة في السنة\"",
-    "icon over text: i / \"رأس مال سياسي · مرة في السنة\"",
-    "icon over text: i / \"تهدئة مؤقتة\""
+    "icon over text: i / \"· مرة في السنة\"",
+    "icon over text: i / \"تهدئة مؤقتة\"",
+    "hit overlap الدولة / تعديل وزاريالكلفة: 25 · مر"
    ]
   },
   {
@@ -230,45 +330,54 @@
    "name": "overview scrolls",
    "ok": true,
    "sample": [
-    "clipped text (bottom): \"تعديل وزاري\" 538.16..599 y 348..367",
-    "clipped text (bottom): \"تهدئة مؤقتة\" 353..406.97 y 357..374",
-    "control cut by its scroll area (bottom): تعديل وزاري25 رأس مال سياس"
+    "clipped text (bottom): \"تعديل وزاري\" 538.16..599 y 360..379",
+    "control cut by its scroll area (bottom): تعديل وزاريالكلفة: 25 · مر",
+    "hit box shaved by its clip: تعديل وزاريالكلفة: 25 · مر"
    ]
   },
   {
    "name": "fit level not the loosest",
    "ok": true,
    "sample": [
+    "fit level 4 is not the loosest that fits (level 0 fits)",
     "fit level 4 is not the loosest that fits (level 1 fits)",
-    "fit level 4 is not the loosest that fits (level 2 fits)",
-    "fit level 4 is not the loosest that fits (level 3 fits)"
+    "fit level 4 is not the loosest that fits (level 2 fits)"
    ]
   },
   {
    "name": "fades wrong",
    "ok": true,
    "sample": [
-    "clipped text (bottom): \"الأحزاب\" 843.84..881 y 402..421",
-    "clipped text (bottom): \"حرة\" 690.77..707.23 y 411..428",
-    "clipped text (bottom): \"بترخيص\" 620.92..657.08 y 411..428"
+    "clipped text (bottom): \"كلفة التغيير:\" 827.55..881 y 408..425",
+    "clipped text (bottom): \"40\" 813.73..827.55 y 408..425",
+    "control cut by its scroll area (bottom): حرة"
    ]
   },
   {
    "name": "cut at a hard edge",
    "ok": true,
    "sample": [
-    "clipped text (bottom): \"التغيير:\" 614.02..646 y 360..377",
-    "clipped text (bottom): \"30\" 600.2..614.02 y 360..377",
-    "clipped text (bottom): \"رأس مال سياسي\" 525.69..600.2 y 360..377"
+    "clipped text (bottom): \"كلفة التغيير:\" 592.55..646 y 352..369",
+    "clipped text (bottom): \"30\" 578.73..592.55 y 352..369",
+    "hit box shaved by its clip: حر"
    ]
   },
   {
    "name": "fade flag without a mask",
    "ok": true,
    "sample": [
-    "clipped text (bottom): \"التغيير:\" 614.02..646 y 360..377",
-    "clipped text (bottom): \"30\" 600.2..614.02 y 360..377",
-    "clipped text (bottom): \"رأس مال سياسي\" 525.69..600.2 y 360..377"
+    "clipped text (bottom): \"كلفة التغيير:\" 592.55..646 y 352..369",
+    "clipped text (bottom): \"30\" 578.73..592.55 y 352..369",
+    "hit box shaved by its clip: حر"
+   ]
+  },
+  {
+   "name": "fade without the hint strip",
+   "ok": true,
+   "sample": [
+    "clipped text (bottom): \"كلفة التغيير:\" 592.55..646 y 352..369",
+    "clipped text (bottom): \"30\" 578.73..592.55 y 352..369",
+    "hit box shaved by its clip: حر"
    ]
   },
   {
@@ -287,19 +396,37 @@
    ]
   },
   {
+   "name": "hint over the content",
+   "ok": true,
+   "sample": [
+    "scroll hint not centred in the clear strip under the fade: y 249.0..267.0 (strip 395.0..417.0)",
+    "scroll hint over text: \"تطوعي\""
+   ]
+  },
+  {
+   "name": "hint over legible text",
+   "ok": true,
+   "sample": [
+    "scroll hint not centred in the clear strip under the fade: y 249.0..267.0 (strip 395.0..417.0)",
+    "scroll hint over text: \"تطوعي\""
+   ]
+  },
+  {
    "name": "% before its number",
    "ok": true,
    "sample": [
-    "% shown before its number: \"إلغاء مشروع يُرجع ما دُفع فيه ناقص 10%.\""
+    "% shown before its number: \"إلغاء مشروع يُرجع ما دُفع فيه ناقص 10%.\"",
+    "brief text missing: عند إلغاء مشروع يُرجع المبلغ غير المصروف بعد خصم 10% منه.",
+    "brief text missing: عند إلغاء مشروع يُرجع المبلغ غير المصروف بعد خصم 10% منه."
    ]
   },
   {
    "name": "brief text scrolled away",
    "ok": true,
    "sample": [
-    "clipped text (top): \"التغيير:\" 849.02..881 y 143..160",
-    "clipped text (top): \"30\" 835.2..849.02 y 143..160",
-    "clipped text (top): \"رأس مال سياسي\" 760.69..835.2 y 143..160"
+    "clipped text (top): \"الإعلام\" 848.3..881 y 137..156",
+    "clipped text (top): \"حر\" 693.38..704.63 y 146..163",
+    "clipped text (top): \"مقيد\" 628.14..649.84 y 146..163"
    ]
   },
   {
@@ -314,9 +441,18 @@
    "name": "map label cut",
    "ok": true,
    "sample": [
-    "map label إيران squeezed between a panel and the screen edge",
-    "map label العراق cut by a panel edge",
-    "map label الأردن cut by a panel edge"
+    "map label ليبيا sliced by the screen edge or the side inset",
+    "map label إيران sliced by the screen edge or the side inset",
+    "map label إيران squeezed between a panel and the screen edge"
+   ]
+  },
+  {
+   "name": "map label at the screen edge",
+   "ok": true,
+   "sample": [
+    "map label ليبيا sliced by the screen edge or the side inset",
+    "map label إيران sliced by the screen edge or the side inset",
+    "map label إيران squeezed between a panel and the screen edge"
    ]
   },
   {
@@ -363,6 +499,13 @@
    ]
   },
   {
+   "name": "chosen is not the checked one",
+   "ok": true,
+   "sample": [
+    "law row 1: the chosen segment is not the aria-checked one"
+   ]
+  },
+  {
    "name": "two tabs selected",
    "ok": true,
    "sample": [
@@ -377,10 +520,40 @@
    ]
   },
   {
+   "name": "dock underline missing",
+   "ok": true,
+   "sample": [
+    "dock underline missing or off: none 16pxx2px rgb(233, 238, 244) (want 16 x 2 in the section colour)"
+   ]
+  },
+  {
+   "name": "closed dock item coloured",
+   "ok": true,
+   "sample": [
+    "dock item 2 (closed) not neutral as on B3: rgb(67, 192, 138) / rgb(234, 242, 247)",
+    "dock item 3 (closed) not neutral as on B3: rgb(67, 192, 138) / rgb(234, 242, 247)",
+    "dock item 4 (closed) not neutral as on B3: rgb(67, 192, 138) / rgb(234, 242, 247)"
+   ]
+  },
+  {
    "name": "identity line colour",
    "ok": true,
    "sample": [
-    "panel top line rgb(67, 192, 138) 2px (want the section colour, 2 pt, at the top)"
+    "panel top line \"\" rgb(67, 192, 138) 2px (want the section colour, 2 pt, at the top)"
+   ]
+  },
+  {
+   "name": "identity line missing",
+   "ok": true,
+   "sample": [
+    "panel top line none rgb(233, 238, 244) 2px (want the section colour, 2 pt, at the top)"
+   ]
+  },
+  {
+   "name": "identity line short",
+   "ok": true,
+   "sample": [
+    "panel top line width 316px at 0px (want the panel's 356 pt)"
    ]
   },
   {
@@ -389,6 +562,169 @@
    "sample": [
     "section emblem missing or not in the section colour",
     "header order must be flag, name, ..., emblem, close (right to left)"
+   ]
+  },
+  {
+   "name": "closed tabs like the open one",
+   "ok": true,
+   "sample": [
+    "open tab not in the section colour",
+    "closed tab not in the secondary grey: القيادة rgb(234, 242, 247)",
+    "closed tab not in the secondary grey: السياسات rgb(234, 242, 247)"
+   ]
+  },
+  {
+   "name": "open tab without its fill",
+   "ok": true,
+   "sample": [
+    "open tab without its fill"
+   ]
+  },
+  {
+   "name": "section colour on data",
+   "ok": true,
+   "sample": [
+    "section colour on data text: \"جمهورية رئاسية\"",
+    "section colour on data text: \"1971\"",
+    "section colour on data text: \"· عُدّل في\""
+   ]
+  },
+  {
+   "name": "legitimacy not amber",
+   "ok": true,
+   "sample": [
+    "«44» not in amber: rgb(234, 242, 247)"
+   ]
+  },
+  {
+   "name": "emblem size",
+   "ok": true,
+   "sample": [
+    "size 26.0x26.0 for .s-emb (want 32 x 32)"
+   ]
+  },
+  {
+   "name": "segment width",
+   "ok": true,
+   "sample": [
+    "size 52.0x26.0 for .s-sg (want 60 x 26)",
+    "size 52.0x26.0 for .s-sg (want 60 x 26)",
+    "size 52.0x26.0 for .s-sg (want 60 x 26)"
+   ]
+  },
+  {
+   "name": "law row height",
+   "ok": true,
+   "sample": [
+    "size 332.0x48.0 for .s-pol (want any x 40)",
+    "size 332.0x48.0 for .s-pol (want any x 40)",
+    "size 332.0x48.0 for .s-pol (want any x 40)"
+   ]
+  },
+  {
+   "name": "law rows apart",
+   "ok": true,
+   "sample": [
+    "law rows 8.0 pt apart (want 4)",
+    "law rows 8.0 pt apart (want 4)",
+    "law rows 8.0 pt apart (want 4)"
+   ]
+  },
+  {
+   "name": "office tile size",
+   "ok": true,
+   "sample": [
+    "size 32.0x32.0 for .r-tile (want 34 x 34)",
+    "size 32.0x32.0 for .r-tile (want 34 x 34)",
+    "size 32.0x32.0 for .r-tile (want 34 x 34)"
+   ]
+  },
+  {
+   "name": "project row height",
+   "ok": true,
+   "sample": [
+    "size 332.0x48.0 for .s-proj (want any x 52)",
+    "size 332.0x48.0 for .s-proj (want any x 52)",
+    "size 332.0x48.0 for .s-proj (want any x 52)"
+   ]
+  },
+  {
+   "name": "chosen segment not white",
+   "ok": true,
+   "sample": [
+    "white touch off: .s-sg.on backgroundColor rgba(0, 0, 0, 0) (want rgb(234, 242, 247))",
+    "white touch off: .s-sg.on color rgb(63, 224, 208) (want rgb(11, 18, 24))",
+    "white touch off: .s-sg.on backgroundColor rgba(0, 0, 0, 0) (want rgb(234, 242, 247))"
+   ]
+  },
+  {
+   "name": "primary button not white",
+   "ok": true,
+   "sample": [
+    "white touch off: .r-btn.r-primary backgroundColor rgba(0, 0, 0, 0) (want rgb(234, 242, 247))",
+    "white touch off: .r-btn.r-primary color rgb(127, 233, 255) (want rgb(11, 18, 24))",
+    "white touch off: .r-btn.r-primary backgroundColor rgba(0, 0, 0, 0) (want rgb(234, 242, 247))"
+   ]
+  },
+  {
+   "name": "tile icons cyan",
+   "ok": true,
+   "sample": [
+    "white touch off: .r-tile color rgb(127, 233, 255) (want rgb(234, 242, 247))",
+    "white touch off: .r-tile color rgb(127, 233, 255) (want rgb(234, 242, 247))"
+   ]
+  },
+  {
+   "name": "outline not white",
+   "ok": true,
+   "sample": [
+    "white touch off: .r-btn:not(.r-primary):not(.r-grey) borderTopColor rgba(111, 182, 255, 0.6) (want rgba(234, 242, 247, 0.5))"
+   ]
+  },
+  {
+   "name": "portrait of a leader",
+   "ok": true,
+   "sample": [
+    "D-30: an image in the sheet",
+    "D-30: a trait or picture on an office row"
+   ]
+  },
+  {
+   "name": "a trait on an office",
+   "ok": true,
+   "sample": [
+    "D-30: a trait or picture on an office row"
+   ]
+  },
+  {
+   "name": "cooldown still tappable",
+   "ok": true,
+   "sample": [
+    "cooldown: «حر» can be tapped in its cooldown",
+    "cooldown: «مقيد» can be tapped in its cooldown",
+    "cooldown: «موجَّه» can be tapped in its cooldown"
+   ]
+  },
+  {
+   "name": "cooldown not stepped back",
+   "ok": true,
+   "sample": [
+    "cooldown: «حر» does not step back",
+    "cooldown: «موجَّه» does not step back"
+   ]
+  },
+  {
+   "name": "unaffordable not amber",
+   "ok": true,
+   "sample": [
+    "«كلفة التغيير: 60» not in amber: rgb(169, 188, 203)"
+   ]
+  },
+  {
+   "name": "unrealistic mode not amber",
+   "ok": true,
+   "sample": [
+    "«God · خيارات غير واقعية» not in amber: rgb(234, 242, 247)"
    ]
   },
   {
@@ -403,6 +739,15 @@
    "ok": true,
    "sample": [
     "close button is not round"
+   ]
+  },
+  {
+   "name": "coverage without the middle views",
+   "ok": true,
+   "sample": [
+    "policies: never shown clear of the fades in any view: الحريات",
+    "policies: never shown clear of the fades in any view: الإعلام",
+    "policies: never shown clear of the fades in any view: الأحزاب"
    ]
   }
  ]

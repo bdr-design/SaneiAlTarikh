@@ -14,14 +14,16 @@
      Header: satellite image, flag, name + «العاصمة» chip, «مصر · محافظة», close. Then one of two views:
        overview (?view=overview, the owner's 2nd image): 3 headline numbers, status table, 2 actions, «تفاصيل المحافظة»;
        details (?view=govern, the owner's 1st image): 4 tabs, the governance tab (governor, priority, tax, links,
-       a proposed decision). The details body scrolls inside the sheet; a 24 pt fade marks an edge that hides content.
+       a proposed decision). The details body scrolls inside the sheet; a 24 pt fade marks an edge that hides content
+       (at the bottom it ends above the scroll hint's 22 pt strip).
      Fit levels (shared with the other panels built on this file). Here: the card takes the loosest level at which it
      ends 8 pt above the dock (0, or up to 2 on the 13 mini, so its header stays 56 pt); the details always use level 0,
-     so the header keeps the card's 56 pt and the body scrolls. Levels 3-5 serve full-height overviews (the state panel):
+     so the header keeps the card's 56 pt and the body scrolls. Levels 3-6 serve full-height overviews (the state panel):
        0: as designed (17 Pro Max)          1: block gaps 8 -> 4
        2: also the numbers' padding and the status rows 28 -> 24, body bottom padding 4
        3: also the header 56 -> 48 and the numbers' inner gaps 0
-       4: also the status rows 22             5: also the header 44, the status rows 18, no padding under the numbers
+       4: also the status rows 22             5: also the header 44
+       6: also the status rows 18 and no padding under the numbers
      Panel sizes (the owner's reference; colours and type stay on the approved tokens):
        cards (action / link / decision rows) radius 10, inner tiles, chips and small buttons radius 6 (concentric);
        small outlined buttons and chips 24 pt tall, radio rows 26, tabs 44, action rows 44, «تفاصيل» row 36;
@@ -32,7 +34,8 @@
   [data-rfit="2"] { --rgap: 4px; --rkt: 4px; --rst: 24px; --rpb: 4px; }
   [data-rfit="3"] { --rgap: 4px; --rkt: 4px; --rst: 24px; --rpb: 4px; --rh: 48px; --rkl: 14px; --rkm: 0px; --rkr: 0px; }
   [data-rfit="4"] { --rgap: 4px; --rkt: 4px; --rst: 22px; --rpb: 4px; --rh: 48px; --rkl: 14px; --rkm: 0px; --rkr: 0px; }
-  [data-rfit="5"] { --rgap: 4px; --rkt: 4px; --rkb: 0px; --rst: 18px; --rpb: 4px; --rh: 44px; --rkl: 14px; --rkm: 0px; --rkr: 0px; }
+  [data-rfit="5"] { --rgap: 4px; --rkt: 4px; --rst: 22px; --rpb: 4px; --rh: 44px; --rkl: 14px; --rkm: 0px; --rkr: 0px; }
+  [data-rfit="6"] { --rgap: 4px; --rkt: 4px; --rkb: 0px; --rst: 18px; --rpb: 4px; --rh: 44px; --rkl: 14px; --rkm: 0px; --rkr: 0px; }
   [data-view="govern"] .r-ov, [data-view="card"] .r-gv { display: none !important; }
   [data-view="card"] .sheet { bottom: auto; }
   [data-view="card"] .r-in { position: relative; }          /* the card's height follows its content */
@@ -71,16 +74,18 @@
   .r-body { flex: 1 1 auto !important; min-height: 0; overflow-y: auto; scrollbar-width: none; display: flex; flex-direction: column; gap: var(--rgap); padding: 0 var(--s3) var(--rpb); }
   .r-body::-webkit-scrollbar { display: none; }
   .r-body > * { flex: none; }
-  [data-fbot="1"] .r-body { -webkit-mask-image: linear-gradient(180deg, #000 calc(100% - 24px), transparent); mask-image: linear-gradient(180deg, #000 calc(100% - 24px), transparent); }
+  /* while the bottom edge hides content, a small chevron marks it: the player sees there is more below, wherever the
+     edge happens to fall (between two sections too). The chevron gets a clear 22 pt strip at the bottom (its 18 pt and
+     4 pt under it), so it never sits on content: the 24 pt fade ends above the strip. The mask only changes, never the
+     layout, so nothing moves when the player reaches the end. */
+  [data-fbot="1"] .r-body { -webkit-mask-image: linear-gradient(180deg, #000 calc(100% - 46px), transparent calc(100% - 22px)); mask-image: linear-gradient(180deg, #000 calc(100% - 46px), transparent calc(100% - 22px)); }
   [data-ftop="1"] .r-body { -webkit-mask-image: linear-gradient(180deg, transparent, #000 24px); mask-image: linear-gradient(180deg, transparent, #000 24px); }
-  /* while the bottom edge hides content, a small chevron sits in its fade: the player sees there is more below,
-     wherever the edge happens to fall (between two sections too) */
   .r-hint { position: absolute; left: 50%; bottom: 4px; width: 28px; height: 18px; margin-left: -14px; display: none; place-items: center; z-index: 2; pointer-events: none;
     color: var(--t2); border-radius: 9px; background: rgb(12, 20, 28); box-shadow: inset 0 0 0 1px var(--hair); }
   .r-hint svg.i { width: 16px; height: 16px; transform: rotate(-90deg); }
   [data-fbot="1"] .r-hint { display: grid; }
-  [data-ftop="1"][data-fbot="1"] .r-body { -webkit-mask-image: linear-gradient(180deg, transparent, #000 24px, #000 calc(100% - 24px), transparent);
-    mask-image: linear-gradient(180deg, transparent, #000 24px, #000 calc(100% - 24px), transparent); }
+  [data-ftop="1"][data-fbot="1"] .r-body { -webkit-mask-image: linear-gradient(180deg, transparent, #000 24px, #000 calc(100% - 46px), transparent calc(100% - 22px));
+    mask-image: linear-gradient(180deg, transparent, #000 24px, #000 calc(100% - 46px), transparent calc(100% - 22px)); }
 
   /* overview: three headline numbers */
   .r-kpis { display: grid; grid-template-columns: repeat(3, 1fr); padding-block: var(--rkt) var(--rkb); border-bottom: 1px solid var(--hair); }
@@ -108,7 +113,8 @@
   .r-acts { display: flex; flex-direction: column; gap: var(--rgap); margin-top: auto; }
   .r-act, .r-link, .r-more, .r-dec { border-radius: var(--r-ctl); background: var(--card); box-shadow: inset 0 0 0 1px var(--stroke); }
   .r-act { display: flex; align-items: center; gap: var(--s2); height: 44px; padding-inline: 5px var(--s3); text-align: start; }
-  .r-first::after { content: ""; position: absolute; top: 0; bottom: 0; right: 0; width: 3px; border-radius: 0 var(--r-ctl) var(--r-ctl) 0; background: var(--teal); }
+  /* the accent bar runs on the straight part of the card's edge, inside its rounded corners */
+  .r-first::after { content: ""; position: absolute; top: 8px; bottom: 8px; right: 0; width: 3px; border-radius: 2px 0 0 2px; background: var(--teal); }
   .r-tile { flex: none; width: 34px; height: 34px; border-radius: 6px; display: grid; place-items: center; color: var(--cyan); background: var(--tile); box-shadow: inset 0 0 0 1px var(--stroke); }
   .r-tile svg.i { width: var(--ico-dock); height: var(--ico-dock); }
   .r-at { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: 2px; text-align: start; }

@@ -1,21 +1,28 @@
 // Screen 5 variant A (the state panel «الدولة»): render the iPhones and run the checks.
-// Writes <id>.png (the overview tab) to the variant folder; <id>_leader.png, <id>_policies.png, <id>_policies_end.png,
-// <id>_projects.png, <id>_projects_end.png, <id>_hit.png and report.json to _build.
+// Writes <id>.png (the overview tab) to the variant folder; <id>_leader.png, <id>_leader_end.png, <id>_policies.png,
+// <id>_policies_end.png, <id>_projects.png, <id>_projects_end.png, <id>_states.png, <id>_policies_states.png,
+// <id>_hit.png and report.json to _build. Each long tab is also checked at the middle scroll offsets its top and end
+// views leave out (no PNG), so every row is checked once clear of the fades; and every brief string of a tab must be
+// shown clear in one of its views. Before anything, index.html must be the current output of assemble.py.
 // Checks (shared with the province panel's checker, screen 4 R): opaque panels (D-3); each control's height from the
 // size table; radii; gaps; icon sizes and strokes; type sizes, weights and colours; 44 pt hit boxes (cover, no overlap,
 // clipped by every clip); safe insets; panels never overlap; text over text, icons over text, clipped text (a cut only
 // at a faded scroll edge, verified from the computed mask), % after its digits; contrast >= 4.5:1 per pixel over the
 // rendered backdrop (opacity counted, faded text excluded). Screen 5 rules: the full-height sheet geometry; the dock
 // left beside it (4 pt in, 8 pt clear) or hidden on the 375 pt phones; every other HUD element at its B3 place; the
-// overview tab fits without scrolling at the loosest fit level; the section identity (pearl white on the dock item,
-// the panel's top line, the emblem and the open tab); RTL order of every row; one choice per segmented law; the
-// brief's strings per tab (visible, or reachable by scrolling clear of the fades); a bottom scroll hint; and on the
-// map, Egypt and the delta clear, no label cut or squeezed between a panel and the screen edge.
+// overview tab fits without scrolling at the loosest fit level; the section identity (pearl white on the dock item
+// and its underline, the panel's top line across its width, the emblem and the open tab with its fill; the closed
+// tabs and dock items neutral); the white touches; the panel's sizes; the section colour only on chrome, amber where
+// the brief says; RTL order of every row; one choice per segmented law, the same one aria-checked; the later states
+// (?states=1); D-30 (no portrait, no traits); the brief's strings per view; a bottom scroll hint in its clear strip;
+// and on the map, Egypt and the delta clear, no label cut, squeezed, or sliced by the screen edge or the side inset.
 // Usage: NODE_PATH=.../node_modules node render.js [ids...]   (default: all 7)   |   node render.js --selftest
 const { chromium } = require('playwright');
 const path = require('path');
 const fs = require('fs');
 const crypto = require('crypto');
+const os = require('os');
+const { execFileSync } = require('child_process');
 
 const OUT = path.resolve(__dirname, '..');
 const PAGE = 'file://' + path.join(OUT, 'index.html');
@@ -24,10 +31,35 @@ const args = process.argv.slice(2);
 const SELFTEST = args.includes('--selftest');
 const want = args.filter((a) => !a.startsWith('--'));
 const DEVICES = (want.length ? want : ALL.map((d) => d.id)).map((id) => ALL.find((d) => d.id === id) || (() => { throw new Error('unknown device ' + id); })());
-// the files a report or self-test is made from; check_screen.py recomputes this hash and refuses a stale report
-const INPUTS = ['index.html', '_build/render.js', '_build/state.css', '_build/sheet.html', '_build/assemble.py', '../../shared/section_identity.css', '../../screen4/R/_build/panel.css'];
+// the files a report or self-test is made from; check_screen.py recomputes this hash and refuses a stale report.
+// The sources assemble.py reads, the B3 page the HUD is compared with, devices.json, and every file the two pages
+// load (the header strip, the flags, the map images), as recorded when they open.
+const REPO = path.resolve(OUT, '../../..');
+const STATIC_INPUTS = ['index.html', '_build/render.js', '_build/state.css', '_build/sheet.html', '_build/assemble.py', '../../shared/section_identity.css',
+  '../../screen4/R/_build/panel.css', '../../screen4/A/index.html', '../../screen1/B3/index.html', '../../shared/devices.json'];
+let INPUTS = STATIC_INPUTS.slice();
 const inputsHash = () => crypto.createHash('sha1').update(Buffer.concat(INPUTS.map((f) => fs.readFileSync(path.join(OUT, f))))).digest('hex');
-const VIEWS = [['', ''], ['_leader', '&tab=leader'], ['_policies', '&tab=policies'], ['_policies_end', '&tab=policies&scroll=end'], ['_projects', '&tab=projects'], ['_projects_end', '&tab=projects&scroll=end']];
+async function recordInputs(b) {
+  const d = ALL.find((x) => x.id === 'i16promax'), seen = new Set();
+  const ctx = await b.newContext({ viewport: { width: d.w, height: d.h } });
+  ctx.on('request', (r) => { if (r.url().startsWith('file://')) seen.add(path.relative(OUT, decodeURIComponent(new URL(r.url()).pathname))); });
+  for (const u of [PAGE + qs(d), B3 + qs(d)]) { const p = await open(ctx, u); await p.close(); }
+  await ctx.close();
+  INPUTS = [...new Set(STATIC_INPUTS.concat([...seen].sort()))];
+}
+// refuse to judge a page that is not what assemble.py makes from the current sources
+function assertAssembled() {
+  const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'screen5-'));
+  try {
+    execFileSync('python3', ['-I', path.join(__dirname, 'assemble.py'), REPO, __dirname, tmp], { stdio: 'pipe' });
+    if (!fs.readFileSync(path.join(tmp, 'index.html')).equals(fs.readFileSync(path.join(OUT, 'index.html')))) throw new Error('index.html is not the current output of assemble.py: run assemble.py first');
+  } finally { fs.rmSync(tmp, { recursive: true, force: true }); }
+}
+// the saved views (PNG + checks); the middle scroll offsets of each long tab are added per phone (checks only)
+const VIEWS = [['', ''], ['_leader', '&tab=leader'], ['_leader_end', '&tab=leader&scroll=end'], ['_policies', '&tab=policies'], ['_policies_end', '&tab=policies&scroll=end'],
+  ['_projects', '&tab=projects'], ['_projects_end', '&tab=projects&scroll=end'], ['_states', '&states=1'], ['_policies_states', '&tab=policies&states=1']];
+// the scrolling sequences: each gets its top view, its end view and the middle offsets between them
+const SEQS = [['leader', '&tab=leader'], ['policies', '&tab=policies'], ['projects', '&tab=projects'], ['policies_states', '&tab=policies&states=1']];
 
 const TOK = {
   heights: [32, 36, 44], hudSpace: [0, 4, 8, 12], rCtl: 10, rCard: 12,
@@ -37,36 +69,48 @@ const TOK = {
   colors: ['rgb(234, 242, 247)', 'rgb(169, 188, 203)', 'rgb(127, 233, 255)', 'rgb(63, 224, 208)', 'rgb(242, 177, 76)', 'rgb(242, 112, 90)', 'rgb(111, 182, 255)',
     'rgb(233, 238, 244)', 'rgb(11, 18, 24)'],          // + the section's pearl white (open tab) and the dark text on white (primary button, chosen segment)
   sec: 'rgb(233, 238, 244)',                          // الدولة's identity colour
+  t1: 'rgb(234, 242, 247)', t2: 'rgb(169, 188, 203)', dark: 'rgb(11, 18, 24)', amber: 'rgb(242, 177, 76)',
+  wLine: 'rgba(234, 242, 247, 0.5)', wLineDim: 'rgba(234, 242, 247, 0.28)',
+  // the brief's sizes for this panel: [selector, width, height] (null: not fixed)
+  size: [['.s-emb', 32, 32], ['.s-sg', 60, 26], ['.s-pol', null, 40], ['.s-off', null, 40], ['.s-proj', null, 52], ['.r-tile', 34, 34]],
   // the panel's size table (the owner's reference): control heights, radii, icon sizes, gaps
   ctlH: { '.r-x': 32, '.r-why': 14, '.r-act': 44, '.r-tab': 44, '.r-btn': 24, '.s-sg': 26 },
   radius: { '.sheet': 12, '.r-act': 10, '.s-proj': 10, '.r-tile': 6, '.r-chip': 6, '.r-btn': 6, '.r-cap': 10, '.s-seg': 6, '.s-emb': 10 },
-  sheetIcon: [['.r-cap svg', 10], ['.r-arr', 10], ['.r-kl svg', 14], ['.r-x svg', 16], ['.r-hint svg', 16], ['.s-emb svg', 16], ['.r-tile svg', 17], ['.r-tab svg', 17]],
+  sheetIcon: [['.r-cap svg', 10], ['.r-arr', 10], ['.s-cost svg', 10], ['.r-kl svg', 14], ['.r-x svg', 16], ['.r-hint svg', 16], ['.s-emb svg', 16], ['.r-tile svg', 17], ['.r-tab svg', 17]],
   sheetSpace: [0, 2, 4, 8, 12, 16],
   title18: ['r-name', 'r-kv'],
-  fade: 24,
+  fade: 24, strip: 22,                                // the fade, and the clear strip under the bottom fade for the scroll hint
+  overlap: 56,                                        // the middle views overlap their neighbours by this much (a whole project row)
 };
 // The brief's strings (as the page writes them). <view>: fully visible and clear of the fades in that render;
 // reach_<tab>: every string of the tab, each of which some scroll position must show whole and clear of the fades.
-const HEAD = ['مصر', 'إعداد واقعي', 'الرئيس محمد حسني مبارك · منذ 1981', 'نظرة عامة', 'القيادة', 'السياسات', 'المشاريع'];
+const HEAD = ['مصر', 'الوضع: واقعي', 'الرئيس محمد حسني مبارك · منذ 1981', 'نظرة عامة', 'القيادة', 'السياسات', 'المشاريع'];
+const HEAD_ST = ['مصر', 'God · خيارات غير واقعية', 'الرئيس محمد حسني مبارك · منذ 1981', 'نظرة عامة', 'القيادة', 'السياسات', 'المشاريع'];
 const BRIEF = {
   overview: HEAD.concat(['رأس المال السياسي', '86', '+4 شهريًا', 'الاستقرار', '58%', '−1 شهريًا', 'الشرعية', '44', '/ 100', '−2 شهريًا', 'لماذا؟',
-    'نظام الحكم', 'جمهورية رئاسية', 'الدستور', '1971 · عُدّل 2007', 'الحزب الحاكم', 'الحزب الوطني', 'الطوارئ', 'سارية منذ 1981',
-    'رفع حالة الطوارئ', '60 رأس مال سياسي', 'تعديل وزاري', '25 رأس مال سياسي · مرة في السنة', 'تهدئة مؤقتة']),
+    'نظام الحكم', 'جمهورية رئاسية', 'الدستور', '1971 · عُدّل في 2007', 'الحزب الحاكم', 'الحزب الوطني', 'الطوارئ', 'سارية منذ 1981',
+    'رفع حالة الطوارئ', 'الكلفة: 60', 'تعديل وزاري', 'الكلفة: 25 · مرة في السنة', 'تهدئة مؤقتة']),
+  overview_states: HEAD_ST.concat(['رفع حالة الطوارئ', 'الكلفة: 60', 'تعديل وزاري', 'متاح في يناير 2012', 'تهدئة مؤقتة']),
   leader: HEAD.concat(['المناصب', 'محمد حسني مبارك', 'رئيس الجمهورية · العمر 82 · منذ 1981', 'تغيير الاسم']),
-  policies: HEAD.concat(['الأمن والنظام', 'حالة الطوارئ', 'التغيير: 60 رأس مال سياسي', 'ملغاة', 'محدودة', 'شاملة']),
-  policies_end: HEAD.concat(['الصحة العامة', 'مجانية', 'مدعومة', 'برسوم', 'بعد تغيير أي سياسة تنتظر 6 أشهر قبل أن تغيّرها مرة أخرى.']),
-  projects: HEAD.concat(['مشاريع جارية', 'الخط الثالث لمترو القاهرة', 'المرحلة الأولى · تكتمل 2012', 'إلغاء', 'يُسترد 0.09 مليار $']),
-  projects_end: HEAD.concat(['توسعة ميناء شرق بورسعيد', '1.2 مليار $ · 3 سنوات', 'بدء', 'إلغاء مشروع يُرجع ما دُفع فيه ناقص 10%.']),
+  leader_end: HEAD.concat(['الانتخابات القادمة', 'رئاسية · سبتمبر 2011', 'عند خلوّ منصب الرئيس', 'رئيس مجلس الشعب مؤقتًا']),
+  policies: HEAD.concat(['الأمن والنظام', 'حالة الطوارئ', 'كلفة التغيير: 60', 'ملغاة', 'محدودة', 'شاملة']),
+  policies_end: HEAD.concat(['الرعاية الصحية', 'مجانية', 'مدعومة', 'برسوم', 'بعد تغيير أي سياسة تنتظر 6 أشهر قبل أن تغيّرها مرة أخرى.']),
+  policies_states: HEAD_ST.concat(['حالة الطوارئ', 'كلفة التغيير: 60']),
+  projects: HEAD.concat(['مشاريع جارية', 'الخط الثالث لمترو القاهرة', 'المرحلة الأولى · تكتمل في 2012', 'إلغاء', 'يُسترد 90 مليون $']),
+  projects_end: HEAD.concat(['توسعة ميناء شرق بورسعيد', '1.2 مليار $ · 3 سنوات', 'بدء', 'عند إلغاء مشروع يُرجع المبلغ غير المصروف بعد خصم 10% منه.']),
+  // every string of a scrolling tab: each must be shown whole and clear of the fades in one of the tab's views
   reach_leader: ['المناصب', 'محمد حسني مبارك', 'رئيس الجمهورية · العمر 82 · منذ 1981', 'تغيير الاسم', 'أحمد نظيف', 'رئيس الوزراء · منذ 2004', 'شاغر', 'نائب الرئيس',
-    'مجلس الشعب', 'الحزب الوطني نحو 420 من 518 مقعدًا', 'الانتخابات القادمة', 'رئاسية · سبتمبر 2011', 'عند خلو المنصب', 'رئيس مجلس الشعب مؤقتًا'],
-  reach_policies: ['الأمن والنظام', 'حالة الطوارئ', 'التجنيد', 'التظاهر', 'الحريات', 'الإعلام', 'الأحزاب', 'الإنترنت', 'الخدمات العامة', 'التعليم الحكومي', 'الصحة العامة',
-    'التغيير: 50 رأس مال سياسي', 'التغيير: 40 رأس مال سياسي', 'التغيير: 30 رأس مال سياسي', 'التغيير: 20 رأس مال سياسي', 'تطوعي', 'انتقائي', 'إلزامي', 'مسموح', 'بإخطار', 'محظور',
-    'حر', 'مقيد', 'موجَّه', 'حرة', 'بترخيص', 'محظورة', 'مفتوح', 'مراقَب', 'مجاني', 'مدعوم', 'برسوم', 'بعد تغيير أي سياسة تنتظر 6 أشهر قبل أن تغيّرها مرة أخرى.'],
-  reach_projects: ['مشاريع جارية', 'الخط الثالث لمترو القاهرة', 'المرحلة الأولى · تكتمل 2012', 'يُسترد 0.09 مليار $', 'توشكى: استصلاح الأراضي', 'جنوب الوادي · تكتمل 2017',
-    'يُسترد 0.41 مليار $', 'مشاريع متاحة', 'محطة الضبعة النووية', '4.5 مليار $ · 8 سنوات', 'توسعة ميناء شرق بورسعيد', '1.2 مليار $ · 3 سنوات', 'إلغاء مشروع يُرجع ما دُفع فيه ناقص 10%.'],
+    'مجلس الشعب', 'الحزب الوطني: نحو 420 من 518 مقعدًا', 'الانتخابات القادمة', 'رئاسية · سبتمبر 2011', 'عند خلوّ منصب الرئيس', 'رئيس مجلس الشعب مؤقتًا'],
+  reach_policies: ['الأمن والنظام', 'حالة الطوارئ', 'التجنيد', 'التظاهر', 'الحريات', 'الإعلام', 'الأحزاب', 'الإنترنت', 'الخدمات العامة', 'التعليم الحكومي', 'الرعاية الصحية',
+    'كلفة التغيير: 60', 'كلفة التغيير: 50', 'كلفة التغيير: 40', 'كلفة التغيير: 30', 'كلفة التغيير: 20', 'ملغاة', 'محدودة', 'شاملة', 'تطوعي', 'انتقائي', 'إلزامي', 'مسموح', 'بإخطار', 'محظور',
+    'حر', 'مقيد', 'موجَّه', 'حرة', 'بترخيص', 'محظورة', 'مفتوح', 'مراقَب', 'محجوب', 'مجاني', 'مدعوم', 'برسوم', 'مجانية', 'مدعومة', 'بعد تغيير أي سياسة تنتظر 6 أشهر قبل أن تغيّرها مرة أخرى.'],
+  reach_projects: ['مشاريع جارية', 'الخط الثالث لمترو القاهرة', 'المرحلة الأولى · تكتمل في 2012', 'يُسترد 90 مليون $', 'توشكى: استصلاح الأراضي', 'جنوب الوادي · تكتمل في 2017',
+    'يُسترد 410 ملايين $', 'مشاريع متاحة', 'محطة الضبعة النووية', '4.5 مليار $ · 8 سنوات', 'توسعة ميناء شرق بورسعيد', '1.2 مليار $ · 3 سنوات', 'عند إلغاء مشروع يُرجع المبلغ غير المصروف بعد خصم 10% منه.'],
 };
-// the open tab's body, per view
-const TABOF = { overview: 'overview', leader: 'leader', policies: 'policies', policies_end: 'policies', projects: 'projects', projects_end: 'projects' };
+BRIEF.reach_policies_states = BRIEF.reach_policies.concat(['متاح بعد 4 أشهر']);
+// a view's name: <tab>[_states][_end|_at<offset>]; its tab is the first part, its scrolling sequence all but the scroll part
+const tabOf = (view) => view.split('_')[0];
+const seqOf = (view) => view.replace(/_(end|at\d+)$/, '');
 
 const HUDSEL = ['.top > .nation', '.top > .stats', '.top > .date', '.toast', '.btn.mode', '.btn.home', '.dock', '.dock-item'];
 const HUDSEL_REST = HUDSEL.slice(0, 6);   // everything but the dock keeps its exact B3 place
@@ -76,6 +120,9 @@ async function hudRects(p) {
     const o = {};
     HUDSEL.forEach((s) => { o[s] = [...document.querySelectorAll(s)].map((e) => { const r = e.getBoundingClientRect(); return { x0: r.left, y0: r.top, x1: r.right, y1: r.bottom }; }); });
     o.hud = (() => { const r = document.querySelector('.hud').getBoundingClientRect(); return { x0: r.left, y0: r.top, x1: r.right, y1: r.bottom }; })();
+    // the dock items' neutral look (label, icon colour and opacity)
+    o.dockLook = [...document.querySelectorAll('.dock-item')].map((e) => { const s = e.querySelector('svg'), l = e.querySelector('span');
+      return { label: getComputedStyle(l).color, icon: getComputedStyle(s).color, op: getComputedStyle(s).opacity }; });
     return o;
   }, HUDSEL);
 }
@@ -88,7 +135,7 @@ async function b3Rects(b, d) {
 }
 
 async function measure(p, d, b3, view) {
-  return p.evaluate(({ d, TOK, BRIEF, b3, view, HUDSEL_REST, TABOF }) => {
+  return p.evaluate(({ d, TOK, BRIEF, HEAD, HEAD_ST, b3, view, HUDSEL_REST }) => {
     const R = (r) => ({ x0: +r.left.toFixed(2), y0: +r.top.toFixed(2), x1: +r.right.toFixed(2), y1: +r.bottom.toFixed(2), w: +r.width.toFixed(2), h: +r.height.toFixed(2) });
     const issues = [], W = d.w, H = d.h, S = d.side, B = d.bottom, eps = 0.01, lu = 1 / 32;
     const root = document.documentElement;
@@ -116,7 +163,8 @@ async function measure(p, d, b3, view) {
         const sc = getComputedStyle(scroller), mk = sc.webkitMaskImage && sc.webkitMaskImage !== 'none' ? sc.webkitMaskImage : (sc.maskImage || 'none');
         const clr = '(?:rgba\\(0, 0, 0, 0\\)|transparent)';
         ftop = root.dataset.ftop === '1' && new RegExp('^linear-gradient\\((?:[^,()]*deg, )?' + clr + ', ').test(mk) && /\) 24px/.test(mk);
-        fbot = root.dataset.fbot === '1' && /calc\(100% - 24px\)/.test(mk) && new RegExp(clr + '\\)$').test(mk);
+        // the bottom fade runs 46..22 pt above the edge and the last 22 pt (the hint's strip) are clear
+        fbot = root.dataset.fbot === '1' && new RegExp('calc\\(100% - ' + (TOK.fade + TOK.strip) + 'px\\), ' + clr + ' calc\\(100% - ' + TOK.strip + 'px\\)\\)$').test(mk);
       }
       return { c, scroller, ftop, fbot };
     };
@@ -129,7 +177,7 @@ async function measure(p, d, b3, view) {
       if (r.y1 > c.y1 + 0.5 && !fbot) return 'bottom';
       return '';
     };
-    const inFade = (r, e) => { const { c, ftop, fbot } = clipOf(e); return (ftop && r.y0 < c.y0 + TOK.fade) || (fbot && r.y1 > c.y1 - TOK.fade); };
+    const inFade = (r, e) => { const { c, ftop, fbot } = clipOf(e); return (ftop && r.y0 < c.y0 + TOK.fade) || (fbot && r.y1 > c.y1 - TOK.fade - TOK.strip); };
 
     // ---------- 1. panels: opaque (D-3), border, radius ----------
     const panels = qa('.hud .glass').filter((e) => !e.classList.contains('menu') || root.classList.contains('menu-open'));
@@ -198,7 +246,7 @@ async function measure(p, d, b3, view) {
       typeSeen[`${fs}/${fw}`] = (typeSeen[`${fs}/${fw}`] || 0) + 1;
       if (!(fs in TOK.type)) issues.push(`font size ${fs} for "${t}"`);
       else if (!TOK.type[fs].includes(fw)) issues.push(`font weight ${fs}/${fw} for "${t}"`);
-      if (fs === 18 && !TOK.title18.some((c) => el.closest('.' + c))) issues.push(`18 pt is for the province name and the headline numbers only: "${t}"`);
+      if (fs === 18 && !TOK.title18.some((c) => el.closest('.' + c))) issues.push(`18 pt is for the country name and the headline numbers only: "${t}"`);
       if (fs === 13 && !/tabular-nums/.test(cs.fontVariantNumeric)) issues.push(`13 pt not tabular: "${t}"`);
       if (inSheet && !TOK.colors.includes(cs.color)) issues.push(`text colour off-token ${cs.color}: "${t}"`);
       if (cs.textOverflow === 'ellipsis') issues.push(`ellipsis on "${t}"`);
@@ -208,7 +256,7 @@ async function measure(p, d, b3, view) {
         const vb = { x0: Math.max(b.x0, cl.x0), x1: Math.min(b.x1, cl.x1), y0: Math.max(b.y0, cl.y0), y1: Math.min(b.y1, cl.y1) };   // the part on screen
         if (vb.x1 - vb.x0 <= 0.05 || vb.y1 - vb.y0 <= 0.05) return;
         const faded = inSheet && inFade(b, el);
-        texts.push({ t, fs, color: cs.color, op: effOp(el), sheet: inSheet, faded, badge: !!el.closest('.badge'), r: R(r),
+        texts.push({ t, fs, color: cs.color, op: effOp(el), sheet: inSheet, faded, badge: !!el.closest('.badge'), chrome: !!el.closest('.r-tab.on, .s-emb'), r: R(r),
           line: { x0: vb.x0, x1: vb.x1, y0: Math.max(mid - lh / 2, cl.y0), y1: Math.min(mid + lh / 2, cl.y1) } });
         if (vb.x0 < S - eps || vb.x1 > W - S + eps) issues.push(`text in side inset: ${t}`);
         if (vb.y1 > H - B + eps) issues.push(`text in bottom inset: ${t}`);
@@ -324,7 +372,7 @@ async function measure(p, d, b3, view) {
       });
     });
     // fit: the overview tab shows everything without scrolling, at the loosest level that does
-    const fit = window.__sheetfit, body = window.__body, tab = TABOF[view], lvNow = +root.dataset.rfit;
+    const fit = window.__sheetfit, body = window.__body, tab = view.split('_')[0], lvNow = +root.dataset.rfit, states = /_states/.test(view);
     const ovOver = () => { const was = root.dataset.tab; root.dataset.tab = 'overview'; const o = q('.r-body[data-tab="overview"]'), v = o.scrollHeight - o.clientHeight; root.dataset.tab = was; return v; };
     if (ovOver() > 0.5) issues.push(`overview needs scrolling: ${ovOver().toFixed(1)} pt (fit level ${lvNow})`);
     for (let L = 0; L < lvNow; L++) { root.dataset.rfit = String(L); if (ovOver() <= 0.5) issues.push(`fit level ${lvNow} is not the loosest that fits (level ${L} fits)`); }
@@ -335,22 +383,77 @@ async function measure(p, d, b3, view) {
     if (qa('.r-body').length !== 1 || !visible(bd)) issues.push(`more or less than the «${tab}» body is shown`);
     { const over = bd.scrollHeight - bd.clientHeight, wantTop = bd.scrollTop > 0.5, wantBot = bd.scrollTop < over - 0.5;
       if ((root.dataset.ftop === '1') !== wantTop || (root.dataset.fbot === '1') !== wantBot) issues.push(`fades ${root.dataset.ftop}/${root.dataset.fbot} do not match the scroll state (top ${bd.scrollTop}, over ${over.toFixed(1)})`);
-      if (/_end$/.test(view) && over > 0.5 && bd.scrollTop < over - 0.5) issues.push('the _end render is not scrolled to the end'); }
-    // scroll hint: when the bottom edge hides content, content visibly fades into it (at least 8 pt of a row in the fade)
-    { const c = bd.getBoundingClientRect();
+      if (/_end$/.test(view) && over > 0.5 && bd.scrollTop < over - 0.5) issues.push('the _end render is not scrolled to the end');
+      if ((root.dataset.states === '1') !== states) issues.push(`states ${root.dataset.states} (want ${states ? 1 : 0})`); }
+    // scroll hint: when the bottom edge hides content, content visibly fades into it (at least 8 pt of a row in the fade),
+    // and the chevron sits centred in the clear strip under the fade, over no legible text
+    { const c = bd.getBoundingClientRect(), fb = c.bottom - TOK.strip;
       const rows = [...bd.querySelectorAll('.r-sec h3, .s-off, .s-pol, .s-proj, .s-seats, .r-sc, .r-act, .r-kpi, .s-note')].filter(visible).map((e) => e.getBoundingClientRect());
-      if (root.dataset.fbot === '1' && !rows.some((rr) => Math.min(rr.bottom, c.bottom) - Math.max(rr.top, c.bottom - TOK.fade) >= 8) && !visible(q('.r-hint'))) issues.push('no scroll hint: nothing fades into the bottom edge');
-      if ((root.dataset.fbot === '1') !== visible(q('.r-hint'))) issues.push(`scroll hint chevron ${visible(q('.r-hint')) ? 'shown without' : 'missing with'} content below`); }
+      if (root.dataset.fbot === '1' && !rows.some((rr) => Math.min(rr.bottom, fb) - Math.max(rr.top, fb - TOK.fade) >= 8) && !visible(q('.r-hint'))) issues.push('no scroll hint: nothing fades into the bottom edge');
+      if ((root.dataset.fbot === '1') !== visible(q('.r-hint'))) issues.push(`scroll hint chevron ${visible(q('.r-hint')) ? 'shown without' : 'missing with'} content below`);
+      const h = q('.r-hint');
+      if (visible(h)) {
+        const hb = h.getBoundingClientRect();
+        if (hb.top < fb - 0.5 || hb.bottom > c.bottom + 0.5 || Math.abs((hb.left + hb.right) / 2 - (c.left + c.right) / 2) > 0.6) issues.push(`scroll hint not centred in the clear strip under the fade: y ${hb.top.toFixed(1)}..${hb.bottom.toFixed(1)} (strip ${fb.toFixed(1)}..${c.bottom.toFixed(1)})`);
+        texts.filter((x) => x.sheet && !x.faded).forEach((x) => { if (inter(x.line, box(hb))) issues.push(`scroll hint over text: "${x.t}"`); });
+      } }
     // section identity: the open «الدولة» dock item, the panel's top line, the emblem and the open tab in pearl white
-    { const on = qa('.dock-item.on');
+    { const on = qa('.dock-item.on'), drawn = (cs) => cs.content !== 'none' && cs.content !== 'normal' && cs.display !== 'none';
       if (visible(q('.dock'))) {
         if (on.length !== 1 || on[0].textContent.trim() !== 'الدولة' || on[0].getAttribute('aria-current') !== 'page') issues.push('the open section «الدولة» is not marked in the dock');
-        else if (getComputedStyle(on[0]).color !== TOK.sec || getComputedStyle(on[0], '::after').backgroundColor !== TOK.sec) issues.push(`dock item «الدولة» not in the section colour: ${getComputedStyle(on[0]).color}`);
+        else {
+          const ul = getComputedStyle(on[0], '::after');
+          if (getComputedStyle(on[0]).color !== TOK.sec || getComputedStyle(on[0].querySelector('svg')).color !== TOK.sec) issues.push(`dock item «الدولة» not in the section colour: ${getComputedStyle(on[0]).color}`);
+          if (!drawn(ul) || ul.backgroundColor !== TOK.sec || ul.width !== '16px' || ul.height !== '2px') issues.push(`dock underline missing or off: ${ul.content} ${ul.width}x${ul.height} ${ul.backgroundColor} (want 16 x 2 in the section colour)`);
+        }
+        // the dock stays neutral as on B3: only the open section takes its colour
+        [...document.querySelectorAll('.dock-item')].forEach((e, i) => {
+          const ref = b3 && b3.dockLook && b3.dockLook[i]; if (!ref || e.classList.contains('on')) return;
+          const s = e.querySelector('svg'), l = e.querySelector('span');
+          if (getComputedStyle(l).color !== ref.label || getComputedStyle(s).color !== ref.icon || getComputedStyle(s).opacity !== ref.op) issues.push(`dock item ${i + 1} (closed) not neutral as on B3: ${getComputedStyle(l).color} / ${getComputedStyle(s).color}`);
+        });
       }
-      const ln = getComputedStyle(q('.r-in'), '::before');
-      if (ln.backgroundColor !== TOK.sec || ln.height !== '2px' || ln.top !== '0px') issues.push(`panel top line ${ln.backgroundColor} ${ln.height} (want the section colour, 2 pt, at the top)`);
+      const inr = q('.r-in'), ln = getComputedStyle(inr, '::before');
+      if (!drawn(ln) || ln.backgroundColor !== TOK.sec || ln.height !== '2px' || ln.top !== '0px') issues.push(`panel top line ${ln.content} ${ln.backgroundColor} ${ln.height} (want the section colour, 2 pt, at the top)`);
+      else if (Math.abs(parseFloat(ln.width) - inr.clientWidth) > 0.5 || ln.left !== '0px') issues.push(`panel top line width ${ln.width} at ${ln.left} (want the panel's ${inr.clientWidth} pt)`);
       const em = q('.s-emb'); if (!em || !visible(em) || getComputedStyle(em).color !== TOK.sec) issues.push('section emblem missing or not in the section colour');
-      const tb = q('.r-tab.on'); if (tb && (getComputedStyle(tb).color !== TOK.sec || !getComputedStyle(tb).boxShadow.includes(TOK.sec))) issues.push('open tab not in the section colour'); }
+      const tb = q('.r-tab.on');
+      if (tb && (getComputedStyle(tb).color !== TOK.sec || !getComputedStyle(tb).boxShadow.includes(TOK.sec))) issues.push('open tab not in the section colour');
+      if (tb && /rgba\(0, 0, 0, 0\)|transparent/.test(getComputedStyle(tb).backgroundColor)) issues.push('open tab without its fill');
+      qa('.r-tab:not(.on)').forEach((e) => { if (getComputedStyle(e).color !== TOK.t2) issues.push(`closed tab not in the secondary grey: ${e.textContent.trim()} ${getComputedStyle(e).color}`); }); }
+    // the section colour is for chrome only: no data text takes it; amber where the brief says
+    texts.filter((x) => x.sheet && !x.chrome && x.color === TOK.sec).forEach((x) => issues.push(`section colour on data text: "${x.t}"`));
+    { const amberOf = (sel, txt) => { const e = [...document.querySelectorAll(sel)].find((n) => visible(n) && n.textContent.replace(/\s+/g, ' ').trim() === txt);
+        if (!e) issues.push(`amber check: «${txt}» not found`); else if (getComputedStyle(e).color !== TOK.amber) issues.push(`«${txt}» not in amber: ${getComputedStyle(e).color}`); };
+      if (tab === 'overview') { amberOf('.r-kv b', '44'); amberOf('.r-sc dd', 'سارية منذ 1981'); }
+      if (states && tab === 'policies') amberOf('.s-short-1 .s-cost', 'كلفة التغيير: 60');
+      if (states) amberOf('.r-cap.s-unreal', 'God · خيارات غير واقعية'); }
+    // the panel's sizes (the brief), and 4 pt between law rows
+    TOK.size.forEach(([s, w, h]) => qa('.sheet ' + s).forEach((e) => { const r = e.getBoundingClientRect(); if (hiddenByScroll(box(r), e)) return;
+      if ((w && !near(r.width, w)) || (h && !near(r.height, h))) issues.push(`size ${r.width.toFixed(1)}x${r.height.toFixed(1)} for ${s} (want ${w || 'any'} x ${h || 'any'})`); }));
+    qa('.s-pol').forEach((e) => { const pr = e.previousElementSibling; if (!pr || !pr.classList.contains('s-pol')) return;
+      const g = e.getBoundingClientRect().top - pr.getBoundingClientRect().bottom; if (!near(g, 4)) issues.push(`law rows ${g.toFixed(1)} pt apart (want 4)`); });
+    // the white touches the owner confirmed: white tiles, filled white primary buttons and chosen segments with dark text,
+    // white-outlined buttons, chips and the mode chip
+    { const wt = (sel, want, skip) => qa('.sheet ' + sel).filter((e) => !(skip && e.matches(skip))).forEach((e) => { const cs = getComputedStyle(e);
+        Object.entries(want).forEach(([k, v]) => { if (cs[k] !== v) issues.push(`white touch off: ${sel} ${k} ${cs[k]} (want ${v})`); }); });
+      wt('.s-sg.on', { backgroundColor: TOK.t1, color: TOK.dark }, '[data-states="1"] .s-wait-1 .s-sg');
+      wt('.r-btn.r-primary', { backgroundColor: TOK.t1, color: TOK.dark });
+      wt('.r-tile', { color: TOK.t1 }, '.s-wait .r-tile');
+      wt('.r-btn:not(.r-primary):not(.r-grey)', { borderTopColor: TOK.wLine, color: TOK.t1 });
+      wt('.r-btn.r-grey', { borderTopColor: TOK.wLineDim });
+      wt('.r-chip', { borderTopColor: TOK.wLine, color: TOK.t1 }, '.s-wait .r-chip');
+      wt('.r-cap:not(.s-unreal)', { borderTopColor: TOK.wLine, color: TOK.t1 }); }
+    // the later states: the law in its cooldown says when it opens and cannot be tapped; elsewhere nothing is disabled
+    qa('.s-sg').forEach((e) => { const wait = states && !!e.closest('.s-wait-1');
+      if (wait !== (e.getAttribute('aria-disabled') === 'true')) issues.push(`cooldown: «${e.textContent}» ${wait ? 'can be tapped in its cooldown' : 'disabled outside a cooldown'}`);
+      if (wait && !e.classList.contains('on') && getComputedStyle(e).color !== TOK.t2) issues.push(`cooldown: «${e.textContent}» does not step back`); });
+    // D-30: real leaders get a name only: no portrait (no image in the sheet but the flag and the header strip), no traits
+    [...q('.sheet').querySelectorAll('*')].forEach((e) => {
+      if (e.closest('.frost')) return;                                   // the panel's own backdrop layer
+      if (e.tagName === 'IMG' && !e.closest('.r-flag')) issues.push('D-30: an image in the sheet');
+      if (/url\(/.test(getComputedStyle(e).backgroundImage) && !e.matches('.r-hd')) issues.push(`D-30: a background image in the sheet (${label(e)})`); });
+    qa('.s-off .r-chip, .s-off .badge, .s-off img').forEach(() => issues.push('D-30: a trait or picture on an office row'));
     // RTL order: header flag | name ... emblem | close; tabs right to left from «نظرة عامة»; action rows tile | text | chip;
     // office rows tile | text | button; project rows tile | text | actions; law rows text | segments, segments right to left
     { const fl = q('.r-flag').getBoundingClientRect(), nm = q('.r-name').getBoundingClientRect(), em = q('.s-emb').getBoundingClientRect(), xb = q('.r-x').getBoundingClientRect();
@@ -367,7 +470,8 @@ async function measure(p, d, b3, view) {
     qa('.s-pol').forEach((a, i) => { order(a, ['.r-at', '.s-seg'], `law row ${i + 1}`);
       const sg = [...a.querySelectorAll('.s-sg')];
       for (let k = 1; k < sg.length; k++) if (!(sg[k].getBoundingClientRect().right <= sg[k - 1].getBoundingClientRect().left + 0.5)) issues.push(`law row ${i + 1}: choices not right to left`);
-      if (sg.filter((e) => e.classList.contains('on')).length !== 1 || sg.filter((e) => e.getAttribute('aria-checked') === 'true').length !== 1) issues.push(`law row ${i + 1}: exactly one choice`); });
+      if (sg.filter((e) => e.classList.contains('on')).length !== 1 || sg.filter((e) => e.getAttribute('aria-checked') === 'true').length !== 1) issues.push(`law row ${i + 1}: exactly one choice`);
+      else if (sg.findIndex((e) => e.classList.contains('on')) !== sg.findIndex((e) => e.getAttribute('aria-checked') === 'true')) issues.push(`law row ${i + 1}: the chosen segment is not the aria-checked one`); });
     // bars fill from the right (RTL)
     qa('.s-bar i, .s-prog i').forEach((e) => { const pb = e.parentElement.getBoundingClientRect(), rr = e.getBoundingClientRect(); if (!near(rr.right, pb.right, 0.6)) issues.push('a bar does not fill from the right'); });
     { const f = q('.r-flag').getBoundingClientRect(); if (!near(f.width / f.height, 4 / 3, 0.01)) issues.push('flag is not 4:3'); }
@@ -376,11 +480,15 @@ async function measure(p, d, b3, view) {
       return cands.filter((e) => !cands.some((o) => o !== e && e.contains(o))); };
     const clearShown = (e) => { const r = box(e.getBoundingClientRect()), { c } = clipOf(e);
       return r.y0 >= c.y0 - 0.5 && r.y1 <= c.y1 + 0.5 && r.x0 >= c.x0 - 0.5 && r.x1 <= c.x1 + 0.5 && !inFade(r, e) && effOp(e) >= 0.99; };
-    BRIEF[view].forEach((s) => { const L = leafs(s); if (!L.length) issues.push(`brief text missing: ${s}`); else if (!L.some(clearShown)) issues.push(`brief text not fully visible: ${s}`); });
-    (BRIEF['reach_' + tab] || []).forEach((s) => {
+    (BRIEF[view] || (states ? HEAD_ST : HEAD)).forEach((s) => { const L = leafs(s); if (!L.length) issues.push(`brief text missing: ${s}`); else if (!L.some(clearShown)) issues.push(`brief text not fully visible: ${s}`); });
+    // the tab's strings: each must fit between the fades, and the ones shown clear here are reported (each must be
+    // shown clear in one of the tab's views: checked across the views)
+    const reach = BRIEF['reach_' + view.replace(/_(end|at\d+)$/, '')] || [], clearNow = [];
+    reach.forEach((s) => {
       const L = leafs(s); if (!L.length) { issues.push(`brief text missing: ${s}`); return; }
-      const ok = L.some((e) => { const { scroller } = clipOf(e); return scroller ? e.getBoundingClientRect().height <= scroller.clientHeight - 2 * TOK.fade + 0.5 && effOp(e) >= 0.99 : clearShown(e); });
-      if (!ok) issues.push(`brief text cannot be scrolled clear of the fades: ${s}`); });
+      const ok = L.some((e) => { const { scroller } = clipOf(e); return scroller ? e.getBoundingClientRect().height <= scroller.clientHeight - 2 * TOK.fade - TOK.strip + 0.5 && effOp(e) >= 0.99 : clearShown(e); });
+      if (!ok) issues.push(`brief text cannot be scrolled clear of the fades: ${s}`);
+      if (L.some(clearShown)) clearNow.push(s); });
     const all = q('.sheet').textContent.replace(/\s+/g, ' ');
     Object.values(BRIEF).flat().forEach((s) => { if (!all.includes(s)) issues.push(`brief text missing: ${s}`); });
     // ---------- 10. map: Egypt and the delta clear of every panel and hit box ----------
@@ -395,7 +503,8 @@ async function measure(p, d, b3, view) {
     cover(live(583, 424, 945, 732), 'Egypt');
     const me = q('.map').getBoundingClientRect();
     if (me.left > 0.5 || me.top > 0.5 || me.right < W - 0.5 || me.bottom < H - 0.5) issues.push('map not full-bleed');
-    // map labels and city dots never cut by a panel edge (2 pt margin, halo included), never under the name pill
+    // map labels and city dots never cut by a panel edge (2 pt margin, halo included), squeezed against a panel, or
+    // sliced by the screen edge or the side inset (the notch, the Dynamic Island)
     const hiddenLabels = [];
     document.querySelectorAll('.labels text, .labels circle').forEach((t) => {
       const what = t.tagName === 'text' ? `label ${t.textContent}` : `city dot ${t.getAttribute('data-city')}`;
@@ -406,17 +515,18 @@ async function measure(p, d, b3, view) {
       if (r.right + sw <= 0 || r.left - sw >= W || r.bottom + sw <= 0 || r.top - sw >= H) return;      // off screen
       const under = prs.some((o) => r.left - sw >= o.r.x0 && r.right + sw <= o.r.x1 && r.top - sw >= o.r.y0 && r.bottom + sw <= o.r.y1);
       if (!under && prs.some((o) => inter(b, o.r))) issues.push(`map ${what} cut by a panel edge`);
+      if (r.left - sw < Math.max(S, 0) || r.right + sw > W - Math.max(S, 0) || r.top - sw < 0 || r.bottom + sw > H) issues.push(`map ${what} sliced by the screen edge or the side inset`);
       prs.forEach((o) => { const sx0 = o.r.x0 < 70 ? 0 : o.r.x0, sx1 = W - o.r.x1 < 70 ? W : o.r.x1;
         if ((sx0 !== o.r.x0 || sx1 !== o.r.x1) && b.x1 > sx0 && b.x0 < sx1 && b.y1 > o.r.y0 && b.y0 < o.r.y1 && (r.left - sw < o.r.x0 || r.right + sw > o.r.x1)) issues.push(`map ${what} squeezed between a panel and the screen edge`); });
     });
 
-    return { issues, typeSeen, texts, fit: { top: window.__fit, sheet: fit, sheetPos: window.__sheetpos, body }, map: m, hiddenLabels,
+    return { issues, typeSeen, texts, clearNow, fit: { top: window.__fit, sheet: fit, sheetPos: window.__sheetpos, body }, map: m, hiddenLabels,
       sheet: R(sr), hits: taps.map((t) => ({ l: t.label, x0: +t.hit.x0.toFixed(1), x1: +t.hit.x1.toFixed(1), y0: +t.hit.y0.toFixed(1), y1: +t.hit.y1.toFixed(1) })) };
-  }, { d, TOK, BRIEF, b3, view, HUDSEL_REST, TABOF });
+  }, { d, TOK, BRIEF, HEAD, HEAD_ST, b3, view, HUDSEL_REST });
 }
 
 async function contrast(p, texts) {
-  await p.addStyleTag({ content: ':root body .hud, :root body .hud * { color: transparent !important; -webkit-text-fill-color: transparent !important; text-shadow: none !important; } :root body .hud svg, :root body .hud .flag, :root body .hud .r-flag, .dev { visibility: hidden !important; } :root body .hud .r-rd i { box-shadow: none !important; } :root body .hud .r-rd i::after { display: none !important; }' });
+  await p.addStyleTag({ content: ':root body .hud, :root body .hud * { color: transparent !important; -webkit-text-fill-color: transparent !important; text-shadow: none !important; } :root body .hud svg, :root body .hud .flag, :root body .hud .r-flag, .dev { visibility: hidden !important; }' });
   await p.waitForTimeout(150);
   const buf = await p.screenshot({ scale: 'css' });
   return p.evaluate(async ({ b64, texts }) => {
@@ -453,7 +563,38 @@ async function open(ctx, url) {
   return p;
 }
 const qs = (d) => `?w=${d.w}&h=${d.h}&side=${d.side}&bottom=${d.bottom}&cutout=${d.cutout}`;
-const viewOf = (extra) => { const t = (extra.match(/tab=(\w+)/) || [0, 'overview'])[1]; return /scroll=end/.test(extra) ? t + '_end' : t; };
+const viewOf = (extra) => { const t = (extra.match(/tab=(\w+)/) || [0, 'overview'])[1], s = (extra.match(/scroll=(\w+)/) || [0, ''])[1];
+  return t + (/states=1/.test(extra) ? '_states' : '') + (s === 'end' ? '_end' : s ? '_at' + s : ''); };
+// the middle scroll offsets a sequence needs so that every part of it is clear of the fades in one view: the top view
+// shows 0..h-46 clear, the end view over+24..full, a middle one at s shows s+24..s+h-46; neighbours overlap by 56 pt
+function midScrolls(h, over) {
+  const out = [], band = h - TOK.fade - TOK.fade - TOK.strip;
+  if (over <= 0.5 || band <= TOK.overlap) return out;
+  let end = h - TOK.fade - TOK.strip;
+  while (over + TOK.fade > end - TOK.overlap) {
+    const s = Math.round(end - TOK.overlap - TOK.fade);
+    if (s >= over) break;
+    out.push(s); end = s + h - TOK.fade - TOK.strip;
+  }
+  return out;
+}
+// every view of a phone: the saved ones, then each sequence's end (if not saved) and middle offsets (checks only)
+async function viewsFor(ctx, d) {
+  const out = VIEWS.map(([suffix, extra]) => ({ suffix, extra, png: true }));
+  for (const [seq, extra] of SEQS) {
+    const p = await open(ctx, PAGE + qs(d) + extra), bo = await p.evaluate(() => window.__body); await p.close();
+    if (!out.some((v) => v.extra === extra + '&scroll=end') && bo.over > 0.5) out.push({ suffix: '_' + seq + '_end', extra: extra + '&scroll=end', png: false });
+    midScrolls(bo.shown, bo.over).forEach((s) => out.push({ suffix: '_' + seq + '_at' + s, extra: extra + '&scroll=' + s, png: false }));
+  }
+  return out;
+}
+// every brief string of a sequence must be shown clear in one of its views
+function coverage(clearBy) {
+  const issues = [];
+  Object.entries(clearBy).forEach(([seq, seen]) => (BRIEF['reach_' + seq] || []).forEach((s) => { if (!seen.has(s)) issues.push(`${seq}: never shown clear of the fades in any view: ${s}`); }));
+  return issues;
+}
+const addClear = (clearBy, view, list) => { const k = seqOf(view); if (!BRIEF['reach_' + k]) return; (clearBy[k] = clearBy[k] || new Set()); list.forEach((s) => clearBy[k].add(s)); };
 
 async function check(p, d, b3, view) {
   const m = await measure(p, d, b3, view);
@@ -468,51 +609,88 @@ async function selftest(b) {
   const ref = { i16promax: await b3Rects(b, d), se: await b3Rects(b, se) };
   const ctxs = {};
   for (const x of [d, se]) ctxs[x.id] = await b.newContext({ viewport: { width: x.w, height: x.h }, deviceScaleFactor: 1 });
-  // [name, device, extra url, css, expected issue, optional page script]
+  // [name, device, extra url, css, expected issue, optional page script]. Each regex names the one check under test.
   const cases = [
     ['type size', d, '', '.r-name { font-size: 17px !important; }', /font size 17 for "مصر"/],
-    ['18 pt misuse', d, '', '.r-sub { font-size: 18px !important; font-weight: 700 !important; }', /18 pt is for the province name/],
+    ['18 pt misuse', d, '', '.r-sub { font-size: 18px !important; font-weight: 700 !important; }', /18 pt is for the country name/],
     ['font weight', d, '&tab=leader', '.s-off .r-at b { font-weight: 700 !important; }', /font weight 13\/700/],
     ['off-token colour', d, '', '.r-sc dt { color: #8899aa !important; }', /text colour off-token/],
     ['control height', d, '&tab=policies', '.s-sg { height: 30px !important; }', /control height 30.00 for \.s-sg/],
     ['radius', d, '&tab=projects', '.s-proj { border-radius: 8px !important; }', /radius 8 for \.s-proj/],
     ['gap', d, '&tab=policies', '.s-pol { gap: 6px !important; }', /gap 6 on/],
     ['icon size', d, '', '.r-tile svg.i { width: 19px !important; height: 19px !important; }', /icon size 19x19 \(want 17\)/],
+    ['cost glyph size', d, '&tab=policies', '.s-cost svg.i { width: 14px !important; height: 14px !important; }', /icon size 14x14 \(want 10\)/],
     ['hit overlap', d, '&tab=policies', '.s-pol + .s-pol { margin-top: -6px !important; }', /hit overlap/],
-    ['side inset', d, '', '.sheet { right: -30px !important; }', /tap in side inset|text in side inset|panel in side inset/],
-    ['clipped text', d, '', '.r-sc dd { margin-inline-end: -40px !important; }', /clipped text|text outside the sheet|horizontal overflow/],
-    ['text overlap', d, '', '.r-cap { margin-inline-start: -40px !important; }', /text overlap "مصر" \/ "إعداد واقعي"|text overlap "إعداد واقعي" \/ "مصر"/],
+    ['tap in the side inset', d, '', '.sheet { right: -30px !important; }', /tap in side inset/],
+    ['text in the side inset', d, '', '.sheet { right: -30px !important; }', /text in side inset/],
+    ['panel in the side inset', d, '', '.sheet { right: -30px !important; }', /panel in side inset/],
+    ['clipped text', d, '', '.r-sc dd { margin-inline-end: -40px !important; }', /clipped text \(sides\)/],
+    ['text outside the padding', d, '', '.r-sc dd { margin-inline-end: -40px !important; }', /text outside the sheet's 12 pt padding/],
+    ['horizontal overflow', d, '', '.r-sc dd { margin-inline-end: -40px !important; }', /horizontal overflow/],
+    ['text overlap', d, '', '.r-cap { margin-inline-start: -40px !important; }', /text overlap "مصر" \/ "الوضع: واقعي"|text overlap "الوضع: واقعي" \/ "مصر"/],
     ['icon over text', d, '', '.r-kl svg.i { margin-inline-end: -30px !important; }', /icon over text/],
     ['panel not opaque', d, '', '.sheet > .frost::after { background: rgba(9, 17, 25, 0.66) !important; }', /panel not opaque: الدولة/],
     ['see-through panel', d, '', '.sheet { opacity: .6 !important; }', /panel not opaque \(opacity 0\.60\)/],
-    ['Egypt covered', d, '', ':root { --map-cx: 760px !important; }', /(Egypt|Nile delta) covered by panel الدولة/],
+    ['Egypt covered', d, '', ':root { --map-cx: 760px !important; }', /Egypt covered by panel الدولة/],
+    ['delta covered', d, '', ':root { --map-cx: 760px !important; }', /Nile delta covered by panel الدولة/],
     ['sheet width', d, '', ':root { --sheet-w: 330px !important; }', /sheet width 330/],
-    ['top row covered', d, '', '.sheet { top: 30px !important; }', /sheet top 38|panel overlap/],
+    ['sheet top', d, '', '.sheet { top: 30px !important; }', /sheet top [\d.]+ \(want 8 pt under the top row/],
+    ['panel overlap', d, '', '.sheet { top: 30px !important; }', /panel overlap/],
     ['dock hidden although it fits', d, '', '[data-dock="left"] .dock { display: none !important; }', /dock hidden although it fits/],
-    ['dock not moved left', d, '', '[data-dock="left"] .dock { align-self: center !important; }', /dock not 4 pt in from the left end|dock closer than 8 pt|panel overlap/],
+    ['dock not moved left', d, '', '[data-dock="left"] .dock { align-self: center !important; }', /dock not 4 pt in from the left end/],
+    ['dock too close to the sheet', d, '', '[data-dock="left"] .dock { margin-left: 140px !important; }', /dock closer than 8 pt/],
     ['dock hit box in the side inset', d, '', '[data-dock="left"] .dock { margin-left: 0 !important; }', /tap in side inset: المزيد/],
-    ['dock shown on the SE', se, '', '[data-dock="hidden"] .dock { display: flex !important; }', /dock shown although it does not fit|panel overlap/],
+    ['dock shown on the SE', se, '', '[data-dock="hidden"] .dock { display: flex !important; }', /dock shown although it does not fit/],
     ['left stack moved', d, '', '.lstack { margin-left: 8px; }', /HUD element moved from its B3 position: \.toast/],
     ['overview scrolls', se, '', '.r-acts { margin-top: 40px !important; }', /overview needs scrolling/],
     ['fit level not the loosest', d, '', '', /fit level 4 is not the loosest that fits/, () => { document.documentElement.dataset.rfit = '4'; }],
     ['fades wrong', d, '&tab=policies', '', /fades .* do not match the scroll state/, () => { document.documentElement.dataset.fbot = '0'; }],
     ['cut at a hard edge', se, '&tab=policies', '', /clipped text \(bottom\)|control cut by its scroll area \(bottom\)/, () => { document.documentElement.dataset.fbot = '0'; }],
     ['fade flag without a mask', se, '&tab=policies', '.r-body { -webkit-mask-image: none !important; mask-image: none !important; }', /clipped text \(bottom\)|control cut by its scroll area \(bottom\)/],
+    ['fade without the hint strip', se, '&tab=policies', '[data-fbot="1"] .r-body { -webkit-mask-image: linear-gradient(180deg, #000 calc(100% - 24px), transparent) !important; mask-image: linear-gradient(180deg, #000 calc(100% - 24px), transparent) !important; }', /clipped text \(bottom\)|control cut by its scroll area \(bottom\)/],
     ['no scroll hint', d, '&tab=policies', '.r-body[data-tab="policies"] .r-sec:first-child { margin-bottom: 600px !important; } .r-hint { display: none !important; }', /no scroll hint: nothing fades into the bottom edge/],
     ['hint chevron missing', d, '&tab=leader', '.r-hint { display: none !important; }', /scroll hint chevron missing with content below/],
+    ['hint over the content', d, '&tab=policies', '.r-hint { bottom: 150px !important; }', /scroll hint not centred in the clear strip/],
+    ['hint over legible text', d, '&tab=policies', '.r-hint { bottom: 150px !important; }', /scroll hint over text/],
     ['% before its number', d, '&tab=projects', '', /% shown before its number/, () => { document.querySelector('.r-body[data-tab="projects"] .s-note').textContent = 'إلغاء مشروع يُرجع ما دُفع فيه ناقص 10%.'; }],
     ['brief text scrolled away', d, '&tab=policies', '', /brief text not fully visible: حالة الطوارئ/, () => { const b = document.querySelector('.r-body[data-tab="policies"]'); b.scrollTop = b.scrollHeight; }],
     ['brief text', d, '', '', /brief text not fully visible: لماذا؟|brief text missing/, () => { document.querySelectorAll('.r-why').forEach((e) => { e.textContent = 'لماذا'; }); }],
-    ['map label cut', d, '', '.labels .cut { display: inline !important; }', /map (label|city dot) .* (cut by a panel edge|squeezed)/],
+    ['map label cut', d, '', '.labels .cut { display: inline !important; }', /map (label|city dot) .* cut by a panel edge/],
+    ['map label at the screen edge', d, '', '.labels .cut { display: inline !important; }', /map (label|city dot) .* sliced by the screen edge or the side inset/],
     ['contrast', d, '', '.r-st { background: rgb(234, 242, 247) !important; }', /^contrast [0-3](\.\d+)? for "نظام الحكم"/],
-    ['faint text', d, '', '.r-sc dt { opacity: .35 !important; }', /^contrast [0-3](\.\d+)? for "نظام الحكم"|brief text not fully visible: نظام الحكم/],
+    ['faint text', d, '', '.r-sc dt { opacity: .35 !important; }', /^contrast [0-3](\.\d+)? for "نظام الحكم"/],
     ['RTL order', d, '&tab=projects', '.s-proj .s-pa { order: -1; }', /project row 1: order must be/],
     ['law choices order', d, '&tab=policies', '.s-seg { direction: ltr; }', /law row 1: choices not right to left/],
     ['two choices in a law', d, '&tab=policies', '', /law row 1: exactly one choice/, () => { document.querySelector('.s-sg').classList.add('on'); }],
+    ['chosen is not the checked one', d, '&tab=policies', '', /law row 1: the chosen segment is not the aria-checked one/, () => { const s = document.querySelectorAll('.s-pol')[0].querySelectorAll('.s-sg'); s[2].setAttribute('aria-checked', 'false'); s[0].setAttribute('aria-checked', 'true'); }],
     ['two tabs selected', d, '', '', /exactly the open tab must be selected/, () => { document.querySelectorAll('.r-tab')[1].classList.add('on'); }],
     ['dock item not marked', d, '', '', /the open section «الدولة» is not marked in the dock/, () => { document.querySelector('.dock-item.on').classList.remove('on'); }],
-    ['identity line colour', d, '', '[data-sec] .r-in::before { background: #43C08A !important; }', /panel top line rgb\(67, 192, 138\)/],
+    ['dock underline missing', d, '', '.dock-item.on::after { content: none !important; }', /dock underline missing or off/],
+    ['closed dock item coloured', d, '', '.dock-item:not(.on) span { color: #43C08A !important; }', /dock item \d+ \(closed\) not neutral as on B3/],
+    ['identity line colour', d, '', '[data-sec] .r-in::before { background: #43C08A !important; }', /panel top line .*rgb\(67, 192, 138\)/],
+    ['identity line missing', d, '', '[data-sec] .r-in::before { content: none !important; }', /panel top line none/],
+    ['identity line short', d, '', '[data-sec] .r-in::before { right: 40px !important; }', /panel top line width/],
     ['emblem missing', d, '', '.s-emb { display: none !important; }', /section emblem missing/],
+    ['closed tabs like the open one', d, '', '[data-sec] .r-tab { color: var(--t1) !important; }', /closed tab not in the secondary grey/],
+    ['open tab without its fill', d, '', '[data-sec] .r-tab.on { background: none !important; }', /open tab without its fill/],
+    ['section colour on data', d, '', '.r-sc dd { color: var(--sec) !important; }', /section colour on data text/],
+    ['legitimacy not amber', d, '', '.r-kv b.r-amber { color: var(--t1) !important; }', /«44» not in amber/],
+    ['emblem size', d, '', '.s-emb { width: 26px !important; height: 26px !important; }', /size 26\.0x26\.0 for \.s-emb/],
+    ['segment width', d, '&tab=policies', '.s-seg { grid-template-columns: repeat(3, 52px) !important; }', /size 52\.0x26\.0 for \.s-sg/],
+    ['law row height', d, '&tab=policies', '.s-pol { height: 48px !important; }', /for \.s-pol \(want any x 40\)/],
+    ['law rows apart', d, '&tab=policies', '.s-pol + .s-pol { margin-top: 4px !important; }', /law rows 8\.0 pt apart/],
+    ['office tile size', d, '&tab=leader', '.s-off .r-tile { width: 32px !important; height: 32px !important; }', /size 32\.0x32\.0 for \.r-tile/],
+    ['project row height', d, '&tab=projects', '.s-proj { height: 48px !important; }', /for \.s-proj \(want any x 52\)/],
+    ['chosen segment not white', d, '&tab=policies', '.s-sg.on { background: transparent !important; color: rgb(63, 224, 208) !important; }', /white touch off: \.s-sg\.on/],
+    ['primary button not white', d, '&tab=projects', '[data-sec] .r-btn.r-primary { background: transparent !important; color: var(--cyan) !important; }', /white touch off: \.r-btn\.r-primary/],
+    ['tile icons cyan', d, '', '[data-sec] .r-tile { color: rgb(127, 233, 255) !important; }', /white touch off: \.r-tile/],
+    ['outline not white', d, '&tab=leader', '[data-sec] .r-btn { border-color: rgba(111, 182, 255, .6) !important; }', /white touch off: \.r-btn:not/],
+    ['portrait of a leader', d, '&tab=leader', '', /D-30: an image in the sheet/, () => { const i = document.createElement('img'); i.src = '../../shared/flags/eg.svg'; i.style.cssText = 'width:17px;height:17px'; document.querySelector('.s-off .r-tile').replaceChildren(i); }],
+    ['a trait on an office', d, '&tab=leader', '', /D-30: a trait or picture on an office row/, () => { const c = document.createElement('span'); c.className = 'r-chip'; c.textContent = 'حازم'; document.querySelectorAll('.s-off')[1].appendChild(c); }],
+    ['cooldown still tappable', d, '&tab=policies&states=1', '', /cooldown: .* can be tapped in its cooldown/, () => { document.querySelectorAll('.s-wait-1 .s-sg').forEach((e) => e.removeAttribute('aria-disabled')); }],
+    ['cooldown not stepped back', d, '&tab=policies&states=1', '[data-states="1"] .s-wait-1 .s-sg { color: var(--t1) !important; }', /cooldown: .* does not step back/],
+    ['unaffordable not amber', d, '&tab=policies&states=1', '[data-states="1"] .s-short-1 .s-cost { color: var(--t2) !important; }', /«كلفة التغيير: 60» not in amber/],
+    ['unrealistic mode not amber', d, '&states=1', '[data-sec] .r-cap.s-unreal { color: var(--t1) !important; }', /«God · خيارات غير واقعية» not in amber/],
     ['bar fills from the left', d, '&tab=leader', '.s-bar i { inset: 0 auto 0 0 !important; }', /a bar does not fill from the right/],
     ['close not round', d, '', '.r-x { width: 40px !important; }', /close button is not round/],
   ];
@@ -529,42 +707,68 @@ async function selftest(b) {
     await p.close();
   }
   const clean = {};
-  for (const x of [d, se]) for (const [suffix, extra] of VIEWS) {
-    const p0 = await open(ctxs[x.id], PAGE + qs(x) + extra);
-    clean[x.id + suffix] = (await check(p0, x, ref[x.id], viewOf(extra))).m.issues;
-    console.log(`clean page ${x.id}${suffix}: ${clean[x.id + suffix].length} issues${clean[x.id + suffix].length ? ' -> ' + clean[x.id + suffix].slice(0, 4).join(' || ') : ''}`);
-    await p0.close();
+  for (const x of [d, se]) {
+    const clearBy = {}, skipMid = {};
+    for (const v of await viewsFor(ctxs[x.id], x)) {
+      const p0 = await open(ctxs[x.id], PAGE + qs(x) + v.extra), view = viewOf(v.extra);
+      const { m } = await check(p0, x, ref[x.id], view);
+      clean[x.id + v.suffix] = m.issues;
+      addClear(clearBy, view, m.clearNow);
+      if (!/_at\d+$/.test(view)) addClear(skipMid, view, m.clearNow);
+      console.log(`clean page ${x.id}${v.suffix}: ${m.issues.length} issues${m.issues.length ? ' -> ' + m.issues.slice(0, 4).join(' || ') : ''}`);
+      await p0.close();
+    }
+    clean[x.id + ' coverage'] = coverage(clearBy);
+    console.log(`clean coverage ${x.id}: ${clean[x.id + ' coverage'].length} issues ${clean[x.id + ' coverage'].slice(0, 3).join(' || ')}`);
+    // the coverage check itself: without the middle views, the SE's policies tab leaves rows unchecked
+    if (x === se) {
+      const miss = coverage(skipMid), ok = miss.some((i) => /^policies: never shown clear of the fades in any view: (الإعلام|الأحزاب)/.test(i));
+      results.push({ name: 'coverage without the middle views', ok, sample: miss.slice(0, 3) });
+      console.log(`${ok ? 'caught ' : 'MISSED '} coverage without the middle views`);
+    }
   }
   for (const c of Object.values(ctxs)) await c.close();
   const missed = results.filter((r) => !r.ok).map((r) => r.name), dirty = Object.values(clean).some((v) => v.length);
   fs.writeFileSync(path.join(__dirname, 'selftest.json'), JSON.stringify({ ranAt: new Date().toISOString(), inputs: { files: INPUTS, sha1: inputsHash() }, cleanIssues: clean, results }, null, 1));
-  console.log(missed.length || dirty ? `SELFTEST FAILED (missed: ${missed.join(', ') || 'none'}; clean issues ${Object.values(clean).map((v) => v.length).join('/')})` : `selftest OK: ${cases.length} planted defects caught, clean pages 0 issues`);
+  console.log(missed.length || dirty ? `SELFTEST FAILED (missed: ${missed.join(', ') || 'none'}; clean issues ${Object.values(clean).map((v) => v.length).join('/')})` : `selftest OK: ${results.length} planted defects caught, clean pages 0 issues`);
 }
 
 (async () => {
+  assertAssembled();
   const b = await chromium.launch({ executablePath: process.env.CHROMIUM_PATH || undefined, args: ['--no-sandbox'] });
+  await recordInputs(b);
   if (SELFTEST) { await selftest(b); await b.close(); return; }
   let report = {};
   try { report = JSON.parse(fs.readFileSync(path.join(__dirname, 'report.json'), 'utf8')); } catch (e) { report = {}; }
   for (const d of DEVICES) {
     const b3 = await b3Rects(b, d);
     const ctx = await b.newContext({ viewport: { width: d.w, height: d.h }, deviceScaleFactor: 3 });
+    const ctx1 = await b.newContext({ viewport: { width: d.w, height: d.h }, deviceScaleFactor: 1 });
     const entry = { device: `${d.w}x${d.h} side ${d.side} bottom ${d.bottom} ${d.cutout}`, renderedAt: new Date().toISOString(), inputs: { files: INPUTS, sha1: inputsHash() },
       issues: [], views: {}, pngs: [] };
-    for (const [suffix, extra] of VIEWS) {
-      const png = suffix ? path.join(__dirname, d.id + suffix + '.png') : path.join(OUT, d.id + '.png');
-      const p = await open(ctx, PAGE + qs(d) + extra);
-      await p.screenshot({ path: png });
-      entry.pngs.push(path.relative(OUT, png));
+    const clearBy = {};
+    for (const { suffix, extra, png: save } of await viewsFor(ctx1, d)) {
+      const view = viewOf(extra), p = await open(ctx, PAGE + qs(d) + extra);
+      if (save) {
+        const png = suffix ? path.join(__dirname, d.id + suffix + '.png') : path.join(OUT, d.id + '.png');
+        await p.screenshot({ path: png });
+        entry.pngs.push(path.relative(OUT, png));
+      }
       if (!suffix) { const ph = await open(ctx, PAGE + qs(d) + '&hit=1'); await ph.screenshot({ path: path.join(__dirname, d.id + '_hit.png') }); await ph.close(); }
-      const { m, c } = await check(p, d, b3, viewOf(extra));
-      m.issues.forEach((i) => entry.issues.push(`${viewOf(extra)}: ${i}`));
-      entry.views[viewOf(extra)] = { issueCount: m.issues.length, fit: m.fit, sheet: m.sheet, map: { ok: m.map.ok, egyptClear: m.map.egyptClear, zoom: m.map.zoom }, hiddenLabels: m.hiddenLabels,
+      const { m, c } = await check(p, d, b3, view);
+      addClear(clearBy, view, m.clearNow);
+      m.issues.forEach((i) => entry.issues.push(`${view}: ${i}`));
+      entry.views[view] = { issueCount: m.issues.length, png: save, fit: m.fit, sheet: m.sheet, map: { ok: m.map.ok, egyptClear: m.map.egyptClear, zoom: m.map.zoom }, hiddenLabels: m.hiddenLabels,
         typeSeen: m.typeSeen, hits: m.hits, minContrast: Math.min(...c.map((x) => x.worst)), contrast: c };
-      console.log(`== ${d.id}${suffix} fit ${JSON.stringify(m.fit.sheet)} dock ${m.fit.sheetPos.dock} body ${JSON.stringify(m.fit.body)} minContrast ${entry.views[viewOf(extra)].minContrast} zoom ${m.map.zoom} hidden ${JSON.stringify(m.hiddenLabels)}`);
+      console.log(`== ${d.id} ${view}${save ? '' : ' (checks only)'} fit ${JSON.stringify(m.fit.sheet)} dock ${m.fit.sheetPos.dock} body ${JSON.stringify(m.fit.body)} minContrast ${entry.views[view].minContrast} zoom ${m.map.zoom} hidden ${JSON.stringify(m.hiddenLabels)}`);
       console.log(m.issues.length ? '  ISSUES:\n    ' + m.issues.join('\n    ') : '  no issues');
       await p.close();
     }
+    const cov = coverage(clearBy);
+    cov.forEach((i) => entry.issues.push(`coverage: ${i}`));
+    entry.views.coverage = { issueCount: cov.length, sequences: Object.fromEntries(Object.entries(clearBy).map(([k, v]) => [k, v.size])) };
+    console.log(`== ${d.id} coverage: ${cov.length ? cov.join(' || ') : 'every brief string shown clear in some view'}`);
+    await ctx1.close();
     entry.issueCount = entry.issues.length;
     report[d.id] = entry;
     await ctx.close();

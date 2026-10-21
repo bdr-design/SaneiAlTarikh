@@ -41,20 +41,27 @@ for d in devices:
     issues = entry.get("issues") if isinstance(entry, dict) else None
     check(issues == [], f"{d['id']}: report issues = {len(issues) if issues is not None else 'missing'}")
 # Reports that name their inputs (newer screens): the report and the self-test must come from the current files,
-# every view must be clean, and every PNG they list must exist at 3x.
+# each device as devices.json defines it now, every view clean, every PNG they list at 3x, and the self-test present.
 inputs = next((e["inputs"] for e in report.values() if isinstance(e, dict) and "inputs" in e), None)
 if inputs:
     import hashlib
-    digest = hashlib.sha1(b"".join((screen / f).read_bytes() for f in inputs["files"])).hexdigest()
+    for need in ("index.html", "_build/render.js"):
+        check(need in inputs["files"], f"the inputs include {need}")
+    missing = [f for f in inputs["files"] if not (screen / f).exists()]
+    check(not missing, f"every input exists{': missing ' + ', '.join(missing) if missing else ''}")
+    digest = hashlib.sha1(b"".join((screen / f).read_bytes() for f in inputs["files"] if (screen / f).exists())).hexdigest()
     for d in devices:
         entry = report.get(d["id"], {})
-        check(entry.get("inputs", {}).get("sha1") == digest, f"{d['id']}: report made from the current {', '.join(inputs['files'])}")
+        check(entry.get("inputs", {}).get("sha1") == digest, f"{d['id']}: report made from the current inputs ({len(inputs['files'])} files)")
+        want_dev = f"{d['w']}x{d['h']} side {d['side']} bottom {d['bottom']} {d['cutout']}"
+        check(entry.get("device") == want_dev, f"{d['id']}: rendered as devices.json defines it ({want_dev})")
         for view, v in entry.get("views", {}).items():
             check(v.get("issueCount") == 0, f"{d['id']}: view {view} has 0 issues")
         for rel in entry.get("pngs", []):
             png = screen / rel
             check(png.exists() and Image.open(png).size == (d["w"] * 3, d["h"] * 3), f"{d['id']}: {rel} exists at 3x")
     selftest = screen / "_build/selftest.json"
+    check(selftest.exists(), "_build/selftest.json exists")
     if selftest.exists():
         st = json.loads(selftest.read_text())
         check(st.get("inputs", {}).get("sha1") == digest, "selftest.json made from the current inputs")

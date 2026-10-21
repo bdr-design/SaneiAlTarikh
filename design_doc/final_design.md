@@ -1087,7 +1087,7 @@ Each type has up to 4 inputs, labour per tier, capital cost and emissions. **Coe
 - Crisis options: IMF-type programme, union bailout, patron rescue, default.
 - Day-1 invariant: no non-historical crisis in the first 30 days.
 
-**Projects:** as before; escrow in LCU; `CancelProject` refunds escrow minus 10%.
+**Projects:** as before; escrow in LCU. The escrow is the unspent balance: money already spent on construction is gone. `CancelProject` refunds that unspent balance minus 10%, and the panel shows the refund before the player confirms (screen 5: «عند إلغاء مشروع يُرجع المبلغ غير المصروف بعد خصم 10% منه.»).
 
 **Player levers:** as before, plus the exchange-rate regime and convertibility (a gradual reform) and capital controls.
 
@@ -1185,7 +1185,7 @@ Each type has up to 4 inputs, labour per tier, capital cost and emissions. **Coe
 - **Armies:** 3–30 formations.
 - **Fronts:** one per contiguous contested border **between two sides of a war** (side-level). Each side's **lead** is the government with the largest committed strength. A front is divided into **per-government sectors**: contiguous runs of front provinces allocated in proportion to assigned strength, recomputed when assignments change. Sectors may share a province where they meet.
 
-**The player's tools:** `CreateArmy`, `AssignArmyToFront`, `SetSectorOrder(hold «تثبيت» | attack «هجوم», arrows ≤3 inside or adjacent to the own sector)`, `SetFrontPosture`, `Mobilize`, `Recruit`, `Disband`, `SetConscription`, `AirMission`, `FleetMission`, `DeclareWar`, `ProposePeace`.
+**The player's tools:** `CreateArmy`, `AssignArmyToFront`, `SetSectorOrder(hold «تثبيت» | attack «هجوم», arrows ≤3 inside or adjacent to the own sector)`, `SetFrontPosture`, `Mobilize`, `Recruit`, `Disband`, `SetConscription` (the conscription law: changed in State › السياسات, §6.5), `AirMission`, `FleetMission`, `DeclareWar`, `ProposePeace`.
 - Without its own order, a contributor follows the lead's front-wide order when allied coordination is on (AI difficulty table).
 
 **Front execution** (one engine system for player and AI):
@@ -1416,7 +1416,7 @@ As before:
   1. Scenario card.
   2. Country on the world satellite map. **Where a polity has more than one government on the start date, a small chooser lists them** (default: the UN-seat holder) (D-29).
   3. Campaign options.
-- **Presets:** واقعي (realistic, default); قوي (strong); قوة عظمى (superpower); «صلاحيات مطلقة» (absolute powers, D-12). Every preset other than realistic is labelled «غير واقعي» (not realistic).
+- **Presets** (the group is called «الوضع» on the approved new-game page): واقعي (realistic, default); قوي (strong); قوة عظمى (superpower); «God» (D-12, the owner's answer, which replaced the earlier «صلاحيات مطلقة»). Every preset other than realistic is labelled «غير واقعي» (not realistic). In play, the State panel's header chip shows the mode: «الوضع: واقعي» in white, or the mode in amber; while unrealistic options are on it reads «<mode> · خيارات غير واقعية» with the wand icon (screen 5, `?states=1`).
 - **Cheats** (collapsed, with a warning): unlimited money (posted from a `cheat` ledger source in LCU), unlimited resources, instant build, instant research, no rebellions. Saves record `cheatsUsed`, and the score is turned off.
 - **Other options:** AI difficulty, historical mode, fog of war, climate impacts.
 - **Score («تقرير الأمة», the nation report):** 5 equal pillars, computed in `Money` (constant 2011 USD) and from the campaign-start baseline row.
@@ -1446,7 +1446,7 @@ As in final-1.0, plus:
 | Status | Screens |
 |---|---|
 | **Approved** | Main play screen (as designed for the 17 Pro Max); UI tokens; main menu; new-game flow; **province panel** (2026-10-20: a 320 pt card first, the map stays the centre; «تفاصيل المحافظة» opens the full-height details with 4 tabs; `design/screen4/R`, brief `design/shared/SCREEN4_BRIEF.md`) |
-| **Pending design** (user's list) | Province details tabs الإنشاءات / القوات / السياسات; state (go-ahead 2026-10-21, `design/screen5/A`, being fitted and reviewed); economy budget; markets; politics and parties; internal and unrest; military fronts; forces and production; diplomacy; UN Security Council; intelligence; research; event and decision modal; war and peace; notifications; saves and settings; the "why" sheet; end screens |
+| **Pending design** (user's list) | Province details tabs الإنشاءات / القوات / السياسات; state (go-ahead 2026-10-21, `design/screen5/A`, brief `design/shared/SCREEN5_BRIEF.md`; reviewed, every confirmed finding fixed, awaiting the owner's approval); economy (proposal `design/proposals/S6_economy`, awaiting the owner); markets; politics and parties; internal and unrest; military fronts; forces and production; diplomacy; UN Security Council; intelligence; research; event and decision modal; war and peace; notifications; saves and settings; the "why" sheet; end screens |
 | **Pending design** (added) | Speed popover; map-mode popover; **front-sector arrow interaction** (own sector highlighted, partner sectors shown read-only); pending-orders list; credits and sources; onboarding; country info card; **government chooser** (D-29); **small-phone variants of the top row** (D-31); **save mirror prompt** (D-28) |
 
 **Province details, engine follow-up (from the approved province panel, 2026-10-20).** The «الحكم» tab shows three levers the engine does not model yet. Each needs a data model before it is built; until then the values are illustrative.
@@ -1551,14 +1551,21 @@ As before. Custom side sheets from the right; width = clamp(42% of the safe widt
 
 | Dock section | Contents |
 |---|---|
-| الدولة (State) | Leader (rename), regime, constitution, policies, political capital, projects (start, cancel with the refund shown), presets and cheats status |
+| الدولة (State) | Leader (rename), regime, constitution, the national laws (see below), political capital, projects (start, cancel with the refund shown), presets and cheats status |
 | الاقتصاد (Economy) | Budget, taxes, debt and status, money and exchange rate, markets per good, trading partners, industries, subsidies |
-| الداخلية والسياسة (Internal and politics) | Population, unrest list (worst first), movements, parties, elections, coalitions, interest groups, emergency rule |
-| الجيش (Military) | Fronts and orders, armies, forces and production, conscription, air regions, fleets, wars and peace, nuclear posture |
+| الداخلية والسياسة (Internal and politics) | Population, unrest list (worst first), movements, parties, elections, coalitions, interest groups, emergency regions (per province) |
+| الجيش (Military) | Fronts and orders, armies, forces and production, conscription (shown, changed in State › السياسات), air regions, fleets, wars and peace, nuclear posture |
 | الخارجية (Foreign) | Relations, treaties, blocs, sanctions, aid and arms, recognition, UN Security Council |
 | الاستخبارات (Intelligence) | Agency, networks per country, operations, counter-intelligence, exposure log |
 | البحث (Research) | 8 domains, focus, cooperation and licences |
 | المزيد (More) | Saves, settings, statistics charts (Swift Charts, ≤120 points, only while open), event log, sources and rights, help |
+
+**One owner per law (screen 5 review, 2026-10-21).** State › السياسات owns the 8 national laws: the state of emergency, conscription, protest, media, parties, internet, public education and healthcare. Each change goes through `SetPolicy`, costs political capital and starts a 6-month cooldown. Other panels only show a law and link to it:
+- Military shows the conscription level read-only, with a link. `SetConscription` (§5.4) becomes this law's `SetPolicy`.
+- Internal's emergency rule is the per-province emergency regions of §5.2, not the national law.
+- The State overview's decision «رفع حالة الطوارئ» is a shortcut to the same law change: one command, one cost (60), one cooldown.
+
+Economic levers stay in the Economy section.
 
 Additions in this revision:
 - **Economy:** currency and convertibility, reserves in months of imports, chokepoint exposure.

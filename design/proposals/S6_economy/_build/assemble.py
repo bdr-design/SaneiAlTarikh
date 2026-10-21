@@ -79,13 +79,13 @@ cut('  /* ---------- Province sheet ---------- */', '  /* Place the map so Cairo
   function fitSheet() {
     var root = document.documentElement, tab = root.dataset.tab, b = $('.r-body[data-tab="overview"]'), tried = [], lv;
     root.dataset.tab = 'overview';
-    for (lv = 0; lv <= 5; lv++) {
+    for (lv = 0; lv <= 6; lv++) {
       root.dataset.rfit = String(lv);
       var over = b.scrollHeight - b.clientHeight;
       tried.push([lv, over]);
       if (over <= 0.5) break;
     }
-    if (lv > 5) lv = 5;
+    if (lv > 6) lv = 6;
     root.dataset.rfit = String(lv);
     root.dataset.tab = tab;
     window.__sheetfit = { level: lv, tried: tried, fits: tried[tried.length - 1][1] <= 0.5 };

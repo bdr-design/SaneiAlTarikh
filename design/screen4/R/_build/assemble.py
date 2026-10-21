@@ -34,10 +34,10 @@ t = t[:m0] + (S / 'sheet.html').read_text(encoding='utf-8').rstrip('\n') + t[m1:
 sub('<title>لوحة المحافظة A</title>', '<title>لوحة المحافظة R</title>')
 sub("     &tab=politics|society|economy|security opens that tab of the province sheet (default politics = «السياسة»).\n",
     "     &view=govern opens «تفاصيل المحافظة» (the full-height details, governance tab) instead of the card,\n"
-    "     &scroll=end scrolls the open view to its end.\n")
+    "     &scroll=end scrolls the open view to its end, &scroll=<pt> to that offset.\n")
 sub("    r.dataset.tab = ['politics', 'society', 'economy', 'security'].indexOf(q.get('tab')) >= 0 ? q.get('tab') : 'politics';\n",
     "    r.dataset.view = q.get('view') === 'govern' ? 'govern' : 'card';\n"
-    "    window.__scrollEnd = q.get('scroll') === 'end';\n")
+    "    window.__scroll = q.get('scroll') === 'end' ? 'end' : (isFinite(parseFloat(q.get('scroll'))) ? parseFloat(q.get('scroll')) : 0);\n")
 
 # the sheet's layout functions (A's fitStatus / fitSheet were for A's markup)
 cut('  /* ---------- Province sheet ---------- */', '  /* Place the map so Cairo and the Nile delta', '''  /* ---------- Province sheet ---------- */
@@ -76,13 +76,13 @@ cut('  /* ---------- Province sheet ---------- */', '  /* Place the map so Cairo
     var root = document.documentElement, tried = [], lv;
     if (root.dataset.view === 'govern') { root.dataset.rfit = '0'; window.__sheetfit = { level: 0, tried: [], fits: true }; return; }
     var dockTop = $('.dock').getBoundingClientRect().top;
-    for (lv = 0; lv <= 5; lv++) {
+    for (lv = 0; lv <= 6; lv++) {
       root.dataset.rfit = String(lv);
       var gap = dockTop - $('.sheet').getBoundingClientRect().bottom;
       tried.push([lv, +gap.toFixed(2)]);
       if (gap >= 8 - 0.01) break;
     }
-    if (lv > 5) lv = 5;
+    if (lv > 6) lv = 6;
     root.dataset.rfit = String(lv);
     window.__sheetfit = { level: lv, tried: tried, fits: tried[tried.length - 1][1] >= 8 - 0.01 };
   }
@@ -91,7 +91,7 @@ cut('  /* ---------- Province sheet ---------- */', '  /* Place the map so Cairo
      fades mark the edges that hide content. */
   function fitBody() {
     var root = document.documentElement, b = $(root.dataset.view === 'govern' ? '.r-body.r-gv' : '.r-body.r-ov');
-    b.scrollTop = window.__scrollEnd ? b.scrollHeight : 0;
+    b.scrollTop = window.__scroll === 'end' ? b.scrollHeight : window.__scroll;
     var over = b.scrollHeight - b.clientHeight;
     root.dataset.ftop = b.scrollTop > 0.5 ? '1' : '0';
     root.dataset.fbot = b.scrollTop < over - 0.5 ? '1' : '0';
@@ -140,5 +140,19 @@ t = t.replace(old_cut, """    /* a panel that leaves less than 70 pt to a screen
 n0 = len(t)
 t = re.sub(r'\n    <circle data-city="0"[^\n]*/>\n    <text data-city="0"[^\n]*</text>', '', t)
 assert len(t) < n0
+# a label the screen edge or the side inset (the notch, the Dynamic Island) would slice is hidden too, in the final
+# pass only, so the map does not move
+old_hide = """      if (cutBox(b[0], b[1], b[2], b[3])) { u.forEach(function (e) { e.classList.add('cut'); }); hidden.push(u[0].textContent); }"""
+assert t.count(old_hide) == 1
+t = t.replace(old_hide, """      if (cutBox(b[0], b[1], b[2], b[3]) || edgeCut(b)) { u.forEach(function (e) { e.classList.add('cut'); }); hidden.push(u[0].textContent); }""")
+old_hw = """    /* hide what is still cut, measured on the rendered labels and dots */"""
+assert t.count(old_hw) == 1
+t = t.replace(old_hw, """    /* hide what is still cut, measured on the rendered labels and dots; also a label the screen edge or the side inset
+       (the notch, the Dynamic Island) would slice. That last rule is for this final pass only, so the map does not move. */
+    function edgeCut(b) {
+      var sx = Math.max(d.SIDE, 0);
+      if (b[2] <= 0 || b[0] >= W || b[3] <= 0 || b[1] >= H) return false;
+      return b[0] < sx || b[2] > W - sx || b[1] < 0 || b[3] > H;
+    }""" + '\n' + old_hw)
 (D / 'index.html').write_text(t, encoding='utf-8')
 print('assembled', D / 'index.html')

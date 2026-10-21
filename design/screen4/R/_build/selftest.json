@@ -1,24 +1,72 @@
 {
- "ranAt": "2026-10-21T04:19:44.851Z",
+ "ranAt": "2026-10-21T05:41:37.239Z",
  "inputs": {
   "files": [
    "index.html",
    "_build/render.js",
    "_build/panel.css",
    "_build/sheet.html",
-   "_build/assemble.py"
+   "_build/assemble.py",
+   "../A/index.html",
+   "../../screen1/B3/index.html",
+   "../../shared/devices.json",
+   "../../shared/flag_eg.svg",
+   "../../shared/flags/eg.svg",
+   "../../shared/map_mena_d1.jpg",
+   "../../shared/map_mena_d1_overlay.svg",
+   "header_cairo.jpg",
+   "map_overlay_cairo.svg"
   ],
-  "sha1": "344a0414737f680fc7b7a797847730bd3cf95825"
+  "sha1": "a2a7c7ab519d7f21569a85b8b7fe22b1a1a190d5"
  },
  "cleanIssues": {
   "i16promax": [],
   "i16promax_govern": [],
   "i16promax_govern_end": [],
+  "i16promax_govern_at137": [],
+  "i16promax coverage": [],
   "se": [],
   "se_govern": [],
-  "se_govern_end": []
+  "se_govern_end": [],
+  "se_govern_at86": [],
+  "se_govern_at172": [],
+  "se coverage": []
  },
  "results": [
+  {
+   "name": "fade without the hint strip",
+   "ok": true,
+   "sample": [
+    "clipped text (bottom): \"الكهرباء · النقل · المرافق العامة\" 481.03..599 y 361..376",
+    "clipped text (bottom): \"تخطيط التوسعة\" 377..447.28 y 351..368",
+    "control cut by its scroll area (bottom): الإنشاءات والمرافق"
+   ]
+  },
+  {
+   "name": "hint over the content",
+   "ok": true,
+   "sample": [
+    "scroll hint not centred in the clear strip under the fade: y 249.0..267.0 (strip 395.0..417.0)",
+    "scroll hint over text: \"الخدمات\""
+   ]
+  },
+  {
+   "name": "hint over legible text",
+   "ok": true,
+   "sample": [
+    "scroll hint not centred in the clear strip under the fade: y 249.0..267.0 (strip 395.0..417.0)",
+    "scroll hint over text: \"الخدمات\""
+   ]
+  },
+  {
+   "name": "map label at the screen edge",
+   "ok": true,
+   "sample": [
+    "map label ليبيا sliced by the screen edge or the side inset",
+    "map label السعودية cut by a panel edge",
+    "map label إيران sliced by the screen edge or the side inset"
+   ]
+  },
   {
    "name": "type size",
    "ok": true,
@@ -250,9 +298,9 @@
    "name": "map label cut",
    "ok": true,
    "sample": [
+    "map label ليبيا sliced by the screen edge or the side inset",
     "map label السعودية cut by a panel edge",
-    "map label إيران squeezed between a panel and the screen edge",
-    "map label العراق cut by a panel edge"
+    "map label إيران sliced by the screen edge or the side inset"
    ]
   },
   {
@@ -412,6 +460,15 @@
     "sheet width 358 (the card is 320 pt)",
     "map label الأردن cut by a panel edge",
     "map label الأردن squeezed between a panel and the screen edge"
+   ]
+  },
+  {
+   "name": "coverage without the end view",
+   "ok": true,
+   "sample": [
+    "details: never shown clear of the fades in any view: الكهرباء · النقل · المرافق العامة",
+    "details: never shown clear of the fades in any view: تخطيط التوسعة",
+    "details: never shown clear of the fades in any view: إدارة القوات"
    ]
   }
  ]

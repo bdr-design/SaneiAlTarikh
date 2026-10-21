@@ -291,14 +291,16 @@
      Header: satellite image, flag, name + «العاصمة» chip, «مصر · محافظة», close. Then one of two views:
        overview (?view=overview, the owner's 2nd image): 3 headline numbers, status table, 2 actions, «تفاصيل المحافظة»;
        details (?view=govern, the owner's 1st image): 4 tabs, the governance tab (governor, priority, tax, links,
-       a proposed decision). The details body scrolls inside the sheet; a 24 pt fade marks an edge that hides content.
+       a proposed decision). The details body scrolls inside the sheet; a 24 pt fade marks an edge that hides content
+       (at the bottom it ends above the scroll hint's 22 pt strip).
      Fit levels (shared with the other panels built on this file). Here: the card takes the loosest level at which it
      ends 8 pt above the dock (0, or up to 2 on the 13 mini, so its header stays 56 pt); the details always use level 0,
-     so the header keeps the card's 56 pt and the body scrolls. Levels 3-5 serve full-height overviews (the state panel):
+     so the header keeps the card's 56 pt and the body scrolls. Levels 3-6 serve full-height overviews (the state panel):
        0: as designed (17 Pro Max)          1: block gaps 8 -> 4
        2: also the numbers' padding and the status rows 28 -> 24, body bottom padding 4
        3: also the header 56 -> 48 and the numbers' inner gaps 0
-       4: also the status rows 22             5: also the header 44, the status rows 18, no padding under the numbers
+       4: also the status rows 22             5: also the header 44
+       6: also the status rows 18 and no padding under the numbers
      Panel sizes (the owner's reference; colours and type stay on the approved tokens):
        cards (action / link / decision rows) radius 10, inner tiles, chips and small buttons radius 6 (concentric);
        small outlined buttons and chips 24 pt tall, radio rows 26, tabs 44, action rows 44, «تفاصيل» row 36;
@@ -309,7 +311,8 @@
   [data-rfit="2"] { --rgap: 4px; --rkt: 4px; --rst: 24px; --rpb: 4px; }
   [data-rfit="3"] { --rgap: 4px; --rkt: 4px; --rst: 24px; --rpb: 4px; --rh: 48px; --rkl: 14px; --rkm: 0px; --rkr: 0px; }
   [data-rfit="4"] { --rgap: 4px; --rkt: 4px; --rst: 22px; --rpb: 4px; --rh: 48px; --rkl: 14px; --rkm: 0px; --rkr: 0px; }
-  [data-rfit="5"] { --rgap: 4px; --rkt: 4px; --rkb: 0px; --rst: 18px; --rpb: 4px; --rh: 44px; --rkl: 14px; --rkm: 0px; --rkr: 0px; }
+  [data-rfit="5"] { --rgap: 4px; --rkt: 4px; --rst: 22px; --rpb: 4px; --rh: 44px; --rkl: 14px; --rkm: 0px; --rkr: 0px; }
+  [data-rfit="6"] { --rgap: 4px; --rkt: 4px; --rkb: 0px; --rst: 18px; --rpb: 4px; --rh: 44px; --rkl: 14px; --rkm: 0px; --rkr: 0px; }
   [data-view="govern"] .r-ov, [data-view="card"] .r-gv { display: none !important; }
   [data-view="card"] .sheet { bottom: auto; }
   [data-view="card"] .r-in { position: relative; }          /* the card's height follows its content */
@@ -348,16 +351,18 @@
   .r-body { flex: 1 1 auto !important; min-height: 0; overflow-y: auto; scrollbar-width: none; display: flex; flex-direction: column; gap: var(--rgap); padding: 0 var(--s3) var(--rpb); }
   .r-body::-webkit-scrollbar { display: none; }
   .r-body > * { flex: none; }
-  [data-fbot="1"] .r-body { -webkit-mask-image: linear-gradient(180deg, #000 calc(100% - 24px), transparent); mask-image: linear-gradient(180deg, #000 calc(100% - 24px), transparent); }
+  /* while the bottom edge hides content, a small chevron marks it: the player sees there is more below, wherever the
+     edge happens to fall (between two sections too). The chevron gets a clear 22 pt strip at the bottom (its 18 pt and
+     4 pt under it), so it never sits on content: the 24 pt fade ends above the strip. The mask only changes, never the
+     layout, so nothing moves when the player reaches the end. */
+  [data-fbot="1"] .r-body { -webkit-mask-image: linear-gradient(180deg, #000 calc(100% - 46px), transparent calc(100% - 22px)); mask-image: linear-gradient(180deg, #000 calc(100% - 46px), transparent calc(100% - 22px)); }
   [data-ftop="1"] .r-body { -webkit-mask-image: linear-gradient(180deg, transparent, #000 24px); mask-image: linear-gradient(180deg, transparent, #000 24px); }
-  /* while the bottom edge hides content, a small chevron sits in its fade: the player sees there is more below,
-     wherever the edge happens to fall (between two sections too) */
   .r-hint { position: absolute; left: 50%; bottom: 4px; width: 28px; height: 18px; margin-left: -14px; display: none; place-items: center; z-index: 2; pointer-events: none;
     color: var(--t2); border-radius: 9px; background: rgb(12, 20, 28); box-shadow: inset 0 0 0 1px var(--hair); }
   .r-hint svg.i { width: 16px; height: 16px; transform: rotate(-90deg); }
   [data-fbot="1"] .r-hint { display: grid; }
-  [data-ftop="1"][data-fbot="1"] .r-body { -webkit-mask-image: linear-gradient(180deg, transparent, #000 24px, #000 calc(100% - 24px), transparent);
-    mask-image: linear-gradient(180deg, transparent, #000 24px, #000 calc(100% - 24px), transparent); }
+  [data-ftop="1"][data-fbot="1"] .r-body { -webkit-mask-image: linear-gradient(180deg, transparent, #000 24px, #000 calc(100% - 46px), transparent calc(100% - 22px));
+    mask-image: linear-gradient(180deg, transparent, #000 24px, #000 calc(100% - 46px), transparent calc(100% - 22px)); }
 
   /* overview: three headline numbers */
   .r-kpis { display: grid; grid-template-columns: repeat(3, 1fr); padding-block: var(--rkt) var(--rkb); border-bottom: 1px solid var(--hair); }
@@ -385,7 +390,8 @@
   .r-acts { display: flex; flex-direction: column; gap: var(--rgap); margin-top: auto; }
   .r-act, .r-link, .r-more, .r-dec { border-radius: var(--r-ctl); background: var(--card); box-shadow: inset 0 0 0 1px var(--stroke); }
   .r-act { display: flex; align-items: center; gap: var(--s2); height: 44px; padding-inline: 5px var(--s3); text-align: start; }
-  .r-first::after { content: ""; position: absolute; top: 0; bottom: 0; right: 0; width: 3px; border-radius: 0 var(--r-ctl) var(--r-ctl) 0; background: var(--teal); }
+  /* the accent bar runs on the straight part of the card's edge, inside its rounded corners */
+  .r-first::after { content: ""; position: absolute; top: 8px; bottom: 8px; right: 0; width: 3px; border-radius: 2px 0 0 2px; background: var(--teal); }
   .r-tile { flex: none; width: 34px; height: 34px; border-radius: 6px; display: grid; place-items: center; color: var(--cyan); background: var(--tile); box-shadow: inset 0 0 0 1px var(--stroke); }
   .r-tile svg.i { width: var(--ico-dock); height: var(--ico-dock); }
   .r-at { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: 2px; text-align: start; }
@@ -454,7 +460,9 @@
      It appears only on the section's chrome: a 2 pt line on top of its panel, the emblem in the header, the open tab,
      and the dock item while the section is open (with a 2 pt underline). Data colours never change with the section.
      White touches on the dark panels (D-3 stands), in the text white #EAF2F7: white tile icons, filled white primary
-     buttons with dark #0B1218 text, white-outlined secondary buttons and chips. The page sets data-sec on <html>. */
+     buttons with dark #0B1218 text, white-outlined secondary buttons and chips. The page sets data-sec on <html>.
+     The white lines come in two strengths, both built on the text white: --w-line for outlines (buttons, chips, the
+     header chip) and --w-line-dim for quieter ones (grey buttons, the segment track and its dividers). */
   :root {
     --sec-state: #E9EEF4;      /* الدولة: لؤلؤي */
     --sec-econ: #43C08A;       /* الاقتصاد: زمردي */
@@ -464,6 +472,9 @@
     --sec-intel: #C873D6;      /* الاستخبارات: أرجواني */
     --sec-research: #9EDB5B;   /* البحث: ليموني */
     --sec-more: #A9BCCB;       /* المزيد: رمادي */
+    --w-line: rgba(234, 242, 247, .5);
+    --w-line-dim: rgba(234, 242, 247, .28);
+    --w-fill: rgba(234, 242, 247, .06);
   }
   [data-sec="state"] { --sec: var(--sec-state); }     [data-sec="econ"] { --sec: var(--sec-econ); }
   [data-sec="pol"] { --sec: var(--sec-pol); }         [data-sec="army"] { --sec: var(--sec-army); }
@@ -479,37 +490,52 @@
   .s-emb { flex: none; width: var(--ctl); height: var(--ctl); border-radius: var(--r-ctl); display: grid; place-items: center; margin-inline-start: auto;
     color: var(--sec); background: color-mix(in srgb, var(--sec) 16%, rgb(6, 11, 16)); box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--sec) 45%, transparent); }
   .s-emb + .r-x { margin-inline-start: 0; }
-  [data-sec] .r-tab.on { color: var(--sec); box-shadow: inset 0 -2px 0 var(--sec); }
+  /* the open tab: the section colour, its underline and a faint fill; the closed tabs step back to the secondary grey,
+     so the open one stands out in every section (الدولة's pearl is close to the text white) */
+  [data-sec] .r-tab { color: var(--t2); }
+  [data-sec] .r-tab.on { color: var(--sec); background: color-mix(in srgb, var(--sec) 8%, transparent); box-shadow: inset 0 -2px 0 var(--sec); }
 
   /* white touches */
   [data-sec] .r-tile { color: var(--t1); }
-  [data-sec] .r-btn { border-color: rgba(238, 243, 247, .55); background: transparent; color: var(--t1); }
+  [data-sec] .r-btn { border-color: var(--w-line); background: transparent; color: var(--t1); }
   [data-sec] .r-btn.r-primary { background: var(--t1); border-color: var(--t1); color: #0B1218; }
-  [data-sec] .r-btn.r-grey { border-color: rgba(238, 243, 247, .3); color: var(--t2); }
+  [data-sec] .r-btn.r-grey { border-color: var(--w-line-dim); color: var(--t2); }
   [data-sec] .r-first::after { background: var(--t1); }
-  [data-sec] .r-chip { border-color: rgba(238, 243, 247, .5); background: rgba(238, 243, 247, .06); color: var(--t1); }
-  [data-sec] .r-cap { border-color: rgba(238, 243, 247, .6); color: var(--t1); }
+  [data-sec] .r-chip { border-color: var(--w-line); background: var(--w-fill); color: var(--t1); }
+  [data-sec] .r-cap { border-color: var(--w-line); color: var(--t1); }
   /* ================= Screen 5, variant A: the state panel («الدولة») =================
      The look, sizes and fit levels come from ../../screen4/R/_build/panel.css and the section identity and white
      touches from ../../shared/section_identity.css (both read by assemble.py, so the panels cannot drift). The sheet is
      the province details' full-height side sheet: the dock moves left of it, or hides on the 375 pt phones.
-     One tab body shows at a time (?tab=overview|leader|policies|projects). */
+     One tab body shows at a time (?tab=overview|leader|policies|projects). ?states=1 swaps in the later states
+     (the .s-alt elements for the .s-def ones): an unrealistic mode, a law in its cooldown, a law the player cannot
+     afford, the reshuffle waiting for its next turn. */
+  :root:not([data-states="1"]) .s-alt, [data-states="1"] .s-def { display: none !important; }
   .r-body[data-tab] { display: none; }
   [data-tab="overview"] .r-body[data-tab="overview"], [data-tab="leader"] .r-body[data-tab="leader"],
   [data-tab="policies"] .r-body[data-tab="policies"], [data-tab="projects"] .r-body[data-tab="projects"] { display: flex; }
   .r-body[data-tab="leader"], .r-body[data-tab="policies"], .r-body[data-tab="projects"] { padding-top: var(--s2); padding-bottom: var(--s3); gap: var(--s2); }
+  .r-body[data-tab="overview"] { padding-bottom: var(--s1); }   /* the last action row needs no more: its hit box is its own 44 pt */
+
+  /* the mode chip: white for واقعي, amber for any other mode or while unrealistic options are on (screen 3's terms) */
+  [data-sec] .r-cap.s-unreal { border-color: rgba(242, 177, 76, .7); color: var(--amber); }
+  /* a cost in political capital: the number and the capital glyph of «رأس المال السياسي» */
+  /* the glyph sits centred in the 14 pt line without making the line taller (top-aligned, 2 pt down) */
+  .s-cost svg.i { display: inline-block; width: var(--glyph); height: var(--glyph); margin-inline-start: 2px; margin-top: 2px; vertical-align: top; }
+  /* a decision waiting for its next turn: still readable, its tile and chip step back */
+  .r-act.s-wait .r-tile { color: var(--t2); }
+  [data-sec] .r-act.s-wait .r-chip { border-color: var(--w-line-dim); background: transparent; color: var(--t2); }
 
 
   /* القيادة: office rows, seat bar */
   .s-off { display: flex; align-items: center; gap: var(--s2); height: 40px; }
-  .s-off .r-tile { width: 32px; height: 32px; }
   .s-vac { color: var(--t2); }
   .s-seats { display: flex; flex-direction: column; gap: var(--s1); }
   .s-bar { position: relative; height: 8px; border-radius: 4px; background: rgba(169, 188, 203, .22); overflow: hidden; }
   .s-bar i { position: absolute; inset: 0 0 0 auto; border-radius: 4px; background: var(--teal); }
   .s-leg { font-size: var(--fs-sec); line-height: var(--lh-sec); font-weight: 500; color: var(--t2); white-space: nowrap; }
   .s-leg b { font-weight: 600; color: var(--t1); }
-  .s-st2 { border-top: 1px solid var(--hair); grid-template-columns: 1fr; }
+  .s-st2 { grid-template-columns: 1fr; }
   .s-st2 .r-sc:nth-child(-n+2) { border-bottom: 0; }
   .s-st2 .r-sc:first-child { border-bottom: 1px solid var(--hair); }
   .s-st2 .r-sc::after { display: none; }
@@ -519,18 +545,23 @@
   .s-proj + .s-proj { margin-top: var(--s1); }
   .s-prog { position: relative; height: 4px; margin-top: 4px; border-radius: 2px; background: rgba(169, 188, 203, .22); overflow: hidden; }
   .s-prog i { position: absolute; inset: 0 0 0 auto; border-radius: 2px; background: var(--teal); }
-  .s-pa { flex: none; display: flex; flex-direction: column; align-items: center; gap: 2px; }
+  .s-pa { flex: none; display: flex; flex-direction: column; align-items: flex-end; gap: 2px; }   /* «إلغاء» and «بدء» share their left edge */
   .s-ref { font-size: var(--fs-label); line-height: var(--lh-label); font-weight: 500; color: var(--t2); white-space: nowrap; }
   .s-note { font-size: var(--fs-label); line-height: 14px; font-weight: 500; color: var(--t2); }
 
   /* السياسات: one row per law: name and the cost of a change, then its setting as 3 segments (the chosen one white) */
   .s-pol { display: flex; align-items: center; gap: var(--s2); height: 40px; }
-  .s-pol + .s-pol { margin-top: var(--s1); }
-  .s-seg { flex: none; display: grid; grid-template-columns: repeat(3, 60px); height: 26px; border-radius: 6px; box-shadow: inset 0 0 0 1px rgba(234, 242, 247, .25); }
+  /* 4 pt between rows (the section's gap): the segments' 44 pt hit boxes reach 2 pt past each 40 pt row, so they meet */
+  .s-seg { flex: none; display: grid; grid-template-columns: repeat(3, 60px); height: 26px; border-radius: 6px; box-shadow: inset 0 0 0 1px var(--w-line-dim); }
   .s-sg { font-size: var(--fs-sec); line-height: 26px; font-weight: 500; color: var(--t1); white-space: nowrap; border-radius: 6px; }
-  .s-sg + .s-sg::after { content: ""; position: absolute; top: 6px; bottom: 6px; right: 0; width: 1px; background: var(--hair); }
+  .s-sg + .s-sg::after { content: ""; position: absolute; top: 6px; bottom: 6px; right: 0; width: 1px; background: var(--w-line-dim); }
   .s-sg.on { background: var(--t1); color: #0B1218; font-weight: 600; }
   .s-sg.on::after, .s-sg.on + .s-sg::after { display: none; }
+  /* states (?states=1): a law in its cooldown shows when it opens again, its choices step back and cannot be tapped;
+     a change the player cannot afford shows its cost in amber */
+  [data-states="1"] .s-wait-1 .s-sg { color: var(--t2); }
+  [data-states="1"] .s-wait-1 .s-sg.on { background: var(--w-line-dim); color: var(--t1); }
+  [data-states="1"] .s-short-1 .s-cost { color: var(--amber); }
   /* ================= Economy panel (proposal, screen 6) =================
      The look, sizes and fit levels from ../../screen4/R/_build/panel.css; the section identity (الاقتصاد: emerald) and
      white touches from ../../shared/section_identity.css; the state panel's tab and row rules from
@@ -992,13 +1023,13 @@
   function fitSheet() {
     var root = document.documentElement, tab = root.dataset.tab, b = $('.r-body[data-tab="overview"]'), tried = [], lv;
     root.dataset.tab = 'overview';
-    for (lv = 0; lv <= 5; lv++) {
+    for (lv = 0; lv <= 6; lv++) {
       root.dataset.rfit = String(lv);
       var over = b.scrollHeight - b.clientHeight;
       tried.push([lv, over]);
       if (over <= 0.5) break;
     }
-    if (lv > 5) lv = 5;
+    if (lv > 6) lv = 6;
     root.dataset.rfit = String(lv);
     root.dataset.tab = tab;
     window.__sheetfit = { level: lv, tried: tried, fits: tried[tried.length - 1][1] <= 0.5 };

@@ -67,3 +67,69 @@ The store pages and screenshots could not be opened: the environment's network p
   - Brief: `design/shared/SCREEN5_BRIEF.md`.
 - **Gate:** `_build/render.js` is adapted from screen 4 R's checker. It checks 7 phones × 6 views, plus a self-test of planted defects.
 - **Shared change:** the header hairline is now drawn inside the header (inset shadow). Its 1 pt border had pushed the close button's 44 pt hit box half a point out of the panel at the tighter fit levels. Screen 4 R is re-rendered and re-gated with it.
+
+## Independent review and fixes (2026-10-21)
+- **Review:** read-only reviewers (separate context, no edits) looked at screen 5 through 4 lenses:
+  - the checker;
+  - consistency with the approved panels;
+  - the renders;
+  - language, realism and the light rules.
+
+  A skeptic re-checked each finding: 35 were confirmed and 6 refuted. The findings and verdicts are kept out of the repo (scratchpad).
+- **Fixed, in the design:**
+  - **Open tab:**
+    - the closed tabs are grey;
+    - the open tab gets a faint fill of the section colour.
+  - **Hairlines and spacing:**
+    - no double hairline in القيادة;
+    - law rows 4 pt apart, as the brief says;
+    - office tiles back to 34 pt;
+    - one white line token pair (`--w-line`, `--w-line-dim`).
+  - **Scroll hint:** it gets a clear 22 pt strip under the bottom fade, so it covers nothing.
+  - **Overview fit:**
+    - a fit step between 4 and 5;
+    - 4 pt under the last action, so the 17 Pro Max fits at level 0 with even gaps.
+  - **Small fixes:**
+    - the accent bar is inset;
+    - «إلغاء» and «بدء» share their left edge;
+    - the dead `.r-fade` span is gone.
+  - **Map:** labels the screen edge or the notch would slice are hidden (also in screen 4 R).
+- **Fixed, in the content:**
+  - **Refunds:** the refund note matches the numbers: the unspent balance, minus 10%. Refunds are in millions.
+  - **Mode chip:** it uses screen 3's terms («الوضع: واقعي»), and the unrealistic state is drawn.
+  - **Icons:** no crown for a republic. The president, the PM and the VP get their own icons, and the port and the metro get theirs.
+  - **Laws:**
+    - internet «محجوب»;
+    - «الرعاية الصحية»;
+    - «كلفة التغيير: N» with the capital glyph.
+  - **Other wording:** «تكتمل في», «عُدّل في», «عند خلوّ منصب الرئيس», «الحزب الوطني:».
+  - **States** (`?states=1`): a law in its cooldown, a law the player cannot afford, and the reshuffle waiting for its turn.
+  - **One owner per law:** written in design doc §6.5. **Not yet approved by the owner:** it is part of what the owner approves with this screen.
+- **Fixed, in the gate:**
+  - **New views:** the leader tab's end view; middle scroll views for every long tab; a coverage check, so every brief string is shown clear of the fades in some view.
+  - **Section identity:**
+    - the identity checks see a missing line or underline;
+    - the closed dock items must stay neutral as on B3.
+  - **Sizes and colours:**
+    - the brief's sizes;
+    - the white touches;
+    - amber where the brief says;
+    - the section colour only on chrome.
+  - **Rules:**
+    - D-30 (no picture, no traits);
+    - the chosen segment is the aria-checked one;
+    - the hint's place.
+  - **Inputs:**
+    - the input hash covers every file the pages load, plus B3 and `devices.json`;
+    - `render.js` refuses an `index.html` that `assemble.py` would not produce.
+  - **`check_screen.py`:**
+    - it matches each phone with `devices.json`;
+    - it fails without a self-test.
+  - **Self-test:** each case names the one check it tests, with new cases for every new check.
+- **Refuted (no change):**
+  - the grey «إلغاء»;
+  - the chosen-segment style living in state.css;
+  - the emblem looking like a button;
+  - the 2010 narrowing of the emergency law;
+  - East Port Said already under way;
+  - the light rules being incomplete.

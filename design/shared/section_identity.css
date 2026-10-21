@@ -4,7 +4,9 @@
      It appears only on the section's chrome: a 2 pt line on top of its panel, the emblem in the header, the open tab,
      and the dock item while the section is open (with a 2 pt underline). Data colours never change with the section.
      White touches on the dark panels (D-3 stands), in the text white #EAF2F7: white tile icons, filled white primary
-     buttons with dark #0B1218 text, white-outlined secondary buttons and chips. The page sets data-sec on <html>. */
+     buttons with dark #0B1218 text, white-outlined secondary buttons and chips. The page sets data-sec on <html>.
+     The white lines come in two strengths, both built on the text white: --w-line for outlines (buttons, chips, the
+     header chip) and --w-line-dim for quieter ones (grey buttons, the segment track and its dividers). */
   :root {
     --sec-state: #E9EEF4;      /* الدولة: لؤلؤي */
     --sec-econ: #43C08A;       /* الاقتصاد: زمردي */
@@ -14,6 +16,9 @@
     --sec-intel: #C873D6;      /* الاستخبارات: أرجواني */
     --sec-research: #9EDB5B;   /* البحث: ليموني */
     --sec-more: #A9BCCB;       /* المزيد: رمادي */
+    --w-line: rgba(234, 242, 247, .5);
+    --w-line-dim: rgba(234, 242, 247, .28);
+    --w-fill: rgba(234, 242, 247, .06);
   }
   [data-sec="state"] { --sec: var(--sec-state); }     [data-sec="econ"] { --sec: var(--sec-econ); }
   [data-sec="pol"] { --sec: var(--sec-pol); }         [data-sec="army"] { --sec: var(--sec-army); }
@@ -29,13 +34,16 @@
   .s-emb { flex: none; width: var(--ctl); height: var(--ctl); border-radius: var(--r-ctl); display: grid; place-items: center; margin-inline-start: auto;
     color: var(--sec); background: color-mix(in srgb, var(--sec) 16%, rgb(6, 11, 16)); box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--sec) 45%, transparent); }
   .s-emb + .r-x { margin-inline-start: 0; }
-  [data-sec] .r-tab.on { color: var(--sec); box-shadow: inset 0 -2px 0 var(--sec); }
+  /* the open tab: the section colour, its underline and a faint fill; the closed tabs step back to the secondary grey,
+     so the open one stands out in every section (الدولة's pearl is close to the text white) */
+  [data-sec] .r-tab { color: var(--t2); }
+  [data-sec] .r-tab.on { color: var(--sec); background: color-mix(in srgb, var(--sec) 8%, transparent); box-shadow: inset 0 -2px 0 var(--sec); }
 
   /* white touches */
   [data-sec] .r-tile { color: var(--t1); }
-  [data-sec] .r-btn { border-color: rgba(238, 243, 247, .55); background: transparent; color: var(--t1); }
+  [data-sec] .r-btn { border-color: var(--w-line); background: transparent; color: var(--t1); }
   [data-sec] .r-btn.r-primary { background: var(--t1); border-color: var(--t1); color: #0B1218; }
-  [data-sec] .r-btn.r-grey { border-color: rgba(238, 243, 247, .3); color: var(--t2); }
+  [data-sec] .r-btn.r-grey { border-color: var(--w-line-dim); color: var(--t2); }
   [data-sec] .r-first::after { background: var(--t1); }
-  [data-sec] .r-chip { border-color: rgba(238, 243, 247, .5); background: rgba(238, 243, 247, .06); color: var(--t1); }
-  [data-sec] .r-cap { border-color: rgba(238, 243, 247, .6); color: var(--t1); }
+  [data-sec] .r-chip { border-color: var(--w-line); background: var(--w-fill); color: var(--t1); }
+  [data-sec] .r-cap { border-color: var(--w-line); color: var(--t1); }
