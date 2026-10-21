@@ -1,0 +1,41 @@
+  /* ================= Section identity and white touches (owner: «كمل الباقي بدقه», 2026-10-21) =================
+     One identity colour per dock section, kept out of the hues that carry meaning everywhere (teal = the player's
+     country and selected states in map panels, cyan = interactive, blue = positive, amber = warning, red = danger).
+     It appears only on the section's chrome: a 2 pt line on top of its panel, the emblem in the header, the open tab,
+     and the dock item while the section is open (with a 2 pt underline). Data colours never change with the section.
+     White touches on the dark panels (D-3 stands), in the text white #EAF2F7: white tile icons, filled white primary
+     buttons with dark #0B1218 text, white-outlined secondary buttons and chips. The page sets data-sec on <html>. */
+  :root {
+    --sec-state: #E9EEF4;      /* الدولة: لؤلؤي */
+    --sec-econ: #43C08A;       /* الاقتصاد: زمردي */
+    --sec-pol: #A08CFF;        /* الداخلية والسياسة: بنفسجي */
+    --sec-army: #BDB46A;       /* الجيش: زيتي */
+    --sec-foreign: #5B86F2;    /* الخارجية: أزرق ملكي */
+    --sec-intel: #C873D6;      /* الاستخبارات: أرجواني */
+    --sec-research: #9EDB5B;   /* البحث: ليموني */
+    --sec-more: #A9BCCB;       /* المزيد: رمادي */
+  }
+  [data-sec="state"] { --sec: var(--sec-state); }     [data-sec="econ"] { --sec: var(--sec-econ); }
+  [data-sec="pol"] { --sec: var(--sec-pol); }         [data-sec="army"] { --sec: var(--sec-army); }
+  [data-sec="foreign"] { --sec: var(--sec-foreign); } [data-sec="intel"] { --sec: var(--sec-intel); }
+  [data-sec="research"] { --sec: var(--sec-research); } [data-sec="more"] { --sec: var(--sec-more); }
+
+  /* the open section in the dock */
+  .dock-item.on, .dock-item.on svg.i { color: var(--sec); opacity: 1; }
+  .dock-item.on::after { content: ""; position: absolute; left: 50%; bottom: 3px; width: 16px; height: 2px; margin-left: -8px; border-radius: 1px; background: var(--sec); }
+
+  /* the section's line on top of its panel, and its emblem in the header */
+  [data-sec] .r-in::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--sec); z-index: 3; }
+  .s-emb { flex: none; width: var(--ctl); height: var(--ctl); border-radius: var(--r-ctl); display: grid; place-items: center; margin-inline-start: auto;
+    color: var(--sec); background: color-mix(in srgb, var(--sec) 16%, rgb(6, 11, 16)); box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--sec) 45%, transparent); }
+  .s-emb + .r-x { margin-inline-start: 0; }
+  [data-sec] .r-tab.on { color: var(--sec); box-shadow: inset 0 -2px 0 var(--sec); }
+
+  /* white touches */
+  [data-sec] .r-tile { color: var(--t1); }
+  [data-sec] .r-btn { border-color: rgba(238, 243, 247, .55); background: transparent; color: var(--t1); }
+  [data-sec] .r-btn.r-primary { background: var(--t1); border-color: var(--t1); color: #0B1218; }
+  [data-sec] .r-btn.r-grey { border-color: rgba(238, 243, 247, .3); color: var(--t2); }
+  [data-sec] .r-first::after { background: var(--t1); }
+  [data-sec] .r-chip { border-color: rgba(238, 243, 247, .5); background: rgba(238, 243, 247, .06); color: var(--t1); }
+  [data-sec] .r-cap { border-color: rgba(238, 243, 247, .6); color: var(--t1); }

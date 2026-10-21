@@ -53,3 +53,17 @@ The store pages and screenshots could not be opened: the environment's network p
   - a cabinet view as an option for «القيادة».
 
   **Avoided:** unrealistic switches (changing the state religion at will), paywalls, timers that block play.
+
+## Go-ahead and build (2026-10-21)
+- **Owner, after the section-identity proposal:** «كمل الباقي بدقه». Taken as a go-ahead with Claude's recommendation:
+  - the identity colours as proposed;
+  - white touches on the dark panels (D-3 stands; white panels not used);
+  - the dock neutral, with only the open section coloured.
+
+  Logged in `decisions/`.
+- **Built:** `design/screen5/A`.
+  - It reuses screen 4 R's CSS and the new shared `design/shared/section_identity.css`.
+  - The «السياسات» tab holds 8 laws in 3 groups, each with 3 segments and the political-capital cost of a change, plus a 6-month cooldown.
+  - Brief: `design/shared/SCREEN5_BRIEF.md`.
+- **Gate:** `_build/render.js` is adapted from screen 4 R's checker. It checks 7 phones × 6 views, plus a self-test of planted defects.
+- **Shared change:** the header hairline is now drawn inside the header (inset shadow). Its 1 pt border had pushed the close button's 44 pt hit box half a point out of the panel at the tighter fit levels. Screen 4 R is re-rendered and re-gated with it.

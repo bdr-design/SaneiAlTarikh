@@ -1,0 +1,173 @@
+  <!-- State panel (screen 5, variant A), opened from the dock's «الدولة». The approved province panel's look (screen 4 R)
+       with the section identity (الدولة: pearl white) and white touches. Tabs: نظرة عامة (?tab=overview, default),
+       القيادة (?tab=leader), السياسات (?tab=policies), المشاريع (?tab=projects). Values are illustrative.
+       Real leaders: real name, no photo, no traits (D-30). Economic levers live in the Economy section. -->
+  <section class="sheet glass" aria-label="الدولة: مصر">
+    <div class="r-in">
+      <header class="r-hd">
+        <span class="r-flag"><img src="../../shared/flags/eg.svg" alt="علم مصر"></span>
+        <div class="r-tt">
+          <div class="r-row"><h2 class="r-name">مصر</h2><span class="r-cap"><svg class="i"><use href="#i-shield"/></svg>إعداد واقعي</span></div>
+          <div class="r-sub">الرئيس محمد حسني مبارك<span class="r-dot"> · </span>منذ <span class="ltr">1981</span></div>
+        </div>
+        <span class="s-emb" aria-hidden="true"><svg class="i"><use href="#i-state"/></svg></span>
+        <button class="r-x tap" aria-label="إغلاق"><svg class="i"><use href="#i-close"/></svg></button>
+      </header>
+
+      <nav class="r-tabs" aria-label="أقسام الدولة">
+        <button class="r-tab tap" data-for="overview"><svg class="i"><use href="#i-grid"/></svg><span>نظرة عامة</span></button>
+        <button class="r-tab tap" data-for="leader"><svg class="i"><use href="#i-crown"/></svg><span>القيادة</span></button>
+        <button class="r-tab tap" data-for="policies"><svg class="i"><use href="#i-doc"/></svg><span>السياسات</span></button>
+        <button class="r-tab tap" data-for="projects"><svg class="i"><use href="#i-build"/></svg><span>المشاريع</span></button>
+      </nav>
+
+      <!-- نظرة عامة -->
+      <div class="r-body" data-tab="overview">
+        <div class="r-kpis">
+          <div class="r-kpi">
+            <span class="r-kl"><svg class="i"><use href="#i-capital"/></svg>رأس المال السياسي</span>
+            <span class="r-kv"><b class="ltr">86</b></span>
+            <span class="r-kr r-blue"><span class="ltr">+4</span> شهريًا</span>
+            <button class="r-why tap">لماذا؟</button>
+          </div>
+          <div class="r-kpi">
+            <span class="r-kl"><svg class="i"><use href="#i-anchor"/></svg>الاستقرار</span>
+            <span class="r-kv"><b class="ltr">58%</b></span>
+            <span class="r-kr"><span class="ltr">−1</span> شهريًا</span>
+            <button class="r-why tap">لماذا؟</button>
+          </div>
+          <div class="r-kpi">
+            <span class="r-kl"><svg class="i r-amber"><use href="#i-seal"/></svg>الشرعية</span>
+            <span class="r-kv"><b class="ltr r-amber">44</b><span>/ <span class="ltr">100</span></span></span>
+            <span class="r-kr"><span class="ltr">−2</span> شهريًا</span>
+            <button class="r-why tap">لماذا؟</button>
+          </div>
+        </div>
+
+        <dl class="r-st">
+          <div class="r-sc"><dt>نظام الحكم</dt><dd>جمهورية رئاسية</dd></div>
+          <div class="r-sc"><dt>الدستور</dt><dd><span class="ltr">1971</span> · عُدّل <span class="ltr">2007</span></dd></div>
+          <div class="r-sc"><dt>الحزب الحاكم</dt><dd>الحزب الوطني</dd></div>
+          <div class="r-sc"><dt>الطوارئ</dt><dd class="r-amber">سارية منذ <span class="ltr">1981</span></dd></div>
+        </dl>
+
+        <div class="r-acts" aria-label="قرارات">
+          <button class="r-act tap r-first">
+            <span class="r-tile"><svg class="i"><use href="#i-unlock"/></svg></span>
+            <span class="r-at"><b>رفع حالة الطوارئ</b><span><span class="ltr">60</span> رأس مال سياسي</span></span>
+            <span class="r-chip"><svg class="r-arr"><use href="#t-up"/></svg>الشرعية</span>
+          </button>
+          <button class="r-act tap">
+            <span class="r-tile"><svg class="i"><use href="#i-swap"/></svg></span>
+            <span class="r-at"><b>تعديل وزاري</b><span><span class="ltr">25</span> رأس مال سياسي · مرة في السنة</span></span>
+            <span class="r-chip">تهدئة مؤقتة</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- القيادة -->
+      <div class="r-body" data-tab="leader">
+        <section class="r-sec">
+          <h3>المناصب</h3>
+          <div class="s-off"><span class="r-tile"><svg class="i"><use href="#i-crown"/></svg></span>
+            <span class="r-at"><b>محمد حسني مبارك</b><span>رئيس الجمهورية · العمر <span class="ltr">82</span> · منذ <span class="ltr">1981</span></span></span>
+            <button class="r-btn tap">تغيير الاسم</button></div>
+          <div class="s-off"><span class="r-tile"><svg class="i"><use href="#i-pol"/></svg></span>
+            <span class="r-at"><b>أحمد نظيف</b><span>رئيس الوزراء · منذ <span class="ltr">2004</span></span></span></div>
+          <div class="s-off"><span class="r-tile"><svg class="i"><use href="#i-people"/></svg></span>
+            <span class="r-at"><b class="s-vac">شاغر</b><span>نائب الرئيس</span></span></div>
+        </section>
+        <section class="r-sec">
+          <h3>مجلس الشعب</h3>
+          <div class="s-seats" role="img" aria-label="الحزب الوطني نحو 420 من 518 مقعدًا">
+            <span class="s-bar"><i style="width: 81%"></i></span>
+            <span class="s-leg"><b>الحزب الوطني</b> نحو <span class="ltr">420</span> من <span class="ltr">518</span> مقعدًا</span>
+          </div>
+        </section>
+        <dl class="r-st s-st2">
+          <div class="r-sc"><dt>الانتخابات القادمة</dt><dd>رئاسية · سبتمبر <span class="ltr">2011</span></dd></div>
+          <div class="r-sc"><dt>عند خلو المنصب</dt><dd>رئيس مجلس الشعب مؤقتًا</dd></div>
+        </dl>
+      </div>
+
+      <!-- السياسات: political, security and social laws (each: its setting, and the political capital a change costs) -->
+      <div class="r-body" data-tab="policies">
+        <section class="r-sec">
+          <h3>الأمن والنظام</h3>
+          <div class="s-pol">
+            <span class="r-at"><b>حالة الطوارئ</b><span>التغيير: <span class="ltr">60</span> رأس مال سياسي</span></span>
+            <span class="s-seg" role="radiogroup" aria-label="حالة الطوارئ"><button class="s-sg tap" role="radio" aria-checked="false">ملغاة</button><button class="s-sg tap" role="radio" aria-checked="false">محدودة</button><button class="s-sg tap on" role="radio" aria-checked="true">شاملة</button></span>
+          </div>
+          <div class="s-pol">
+            <span class="r-at"><b>التجنيد</b><span>التغيير: <span class="ltr">50</span> رأس مال سياسي</span></span>
+            <span class="s-seg" role="radiogroup" aria-label="التجنيد"><button class="s-sg tap" role="radio" aria-checked="false">تطوعي</button><button class="s-sg tap" role="radio" aria-checked="false">انتقائي</button><button class="s-sg tap on" role="radio" aria-checked="true">إلزامي</button></span>
+          </div>
+          <div class="s-pol">
+            <span class="r-at"><b>التظاهر</b><span>التغيير: <span class="ltr">40</span> رأس مال سياسي</span></span>
+            <span class="s-seg" role="radiogroup" aria-label="التظاهر"><button class="s-sg tap" role="radio" aria-checked="false">مسموح</button><button class="s-sg tap" role="radio" aria-checked="false">بإخطار</button><button class="s-sg tap on" role="radio" aria-checked="true">محظور</button></span>
+          </div>
+        </section>
+        <section class="r-sec">
+          <h3>الحريات</h3>
+          <div class="s-pol">
+            <span class="r-at"><b>الإعلام</b><span>التغيير: <span class="ltr">30</span> رأس مال سياسي</span></span>
+            <span class="s-seg" role="radiogroup" aria-label="الإعلام"><button class="s-sg tap" role="radio" aria-checked="false">حر</button><button class="s-sg tap on" role="radio" aria-checked="true">مقيد</button><button class="s-sg tap" role="radio" aria-checked="false">موجَّه</button></span>
+          </div>
+          <div class="s-pol">
+            <span class="r-at"><b>الأحزاب</b><span>التغيير: <span class="ltr">40</span> رأس مال سياسي</span></span>
+            <span class="s-seg" role="radiogroup" aria-label="الأحزاب"><button class="s-sg tap" role="radio" aria-checked="false">حرة</button><button class="s-sg tap on" role="radio" aria-checked="true">بترخيص</button><button class="s-sg tap" role="radio" aria-checked="false">محظورة</button></span>
+          </div>
+          <div class="s-pol">
+            <span class="r-at"><b>الإنترنت</b><span>التغيير: <span class="ltr">20</span> رأس مال سياسي</span></span>
+            <span class="s-seg" role="radiogroup" aria-label="الإنترنت"><button class="s-sg tap" role="radio" aria-checked="false">مفتوح</button><button class="s-sg tap on" role="radio" aria-checked="true">مراقَب</button><button class="s-sg tap" role="radio" aria-checked="false">مقيد</button></span>
+          </div>
+        </section>
+        <section class="r-sec">
+          <h3>الخدمات العامة</h3>
+          <div class="s-pol">
+            <span class="r-at"><b>التعليم الحكومي</b><span>التغيير: <span class="ltr">30</span> رأس مال سياسي</span></span>
+            <span class="s-seg" role="radiogroup" aria-label="التعليم الحكومي"><button class="s-sg tap on" role="radio" aria-checked="true">مجاني</button><button class="s-sg tap" role="radio" aria-checked="false">مدعوم</button><button class="s-sg tap" role="radio" aria-checked="false">برسوم</button></span>
+          </div>
+          <div class="s-pol">
+            <span class="r-at"><b>الصحة العامة</b><span>التغيير: <span class="ltr">30</span> رأس مال سياسي</span></span>
+            <span class="s-seg" role="radiogroup" aria-label="الصحة العامة"><button class="s-sg tap" role="radio" aria-checked="false">مجانية</button><button class="s-sg tap on" role="radio" aria-checked="true">مدعومة</button><button class="s-sg tap" role="radio" aria-checked="false">برسوم</button></span>
+          </div>
+        </section>
+        <p class="s-note">بعد تغيير أي سياسة تنتظر <span class="ltr">6</span> أشهر قبل أن تغيّرها مرة أخرى.</p>
+      </div>
+
+      <!-- المشاريع -->
+      <div class="r-body" data-tab="projects">
+        <section class="r-sec">
+          <h3>مشاريع جارية</h3>
+          <div class="s-proj">
+            <span class="r-tile"><svg class="i"><use href="#i-bus"/></svg></span>
+            <span class="r-at"><b>الخط الثالث لمترو القاهرة</b><span>المرحلة الأولى · تكتمل <span class="ltr">2012</span></span>
+              <span class="s-prog"><i style="width: 85%"></i></span></span>
+            <span class="s-pa"><button class="r-btn r-grey tap">إلغاء</button><span class="s-ref">يُسترد <span class="ltr">0.09</span> مليار $</span></span>
+          </div>
+          <div class="s-proj">
+            <span class="r-tile"><svg class="i"><use href="#i-drop"/></svg></span>
+            <span class="r-at"><b>توشكى: استصلاح الأراضي</b><span>جنوب الوادي · تكتمل <span class="ltr">2017</span></span>
+              <span class="s-prog"><i style="width: 35%"></i></span></span>
+            <span class="s-pa"><button class="r-btn r-grey tap">إلغاء</button><span class="s-ref">يُسترد <span class="ltr">0.41</span> مليار $</span></span>
+          </div>
+        </section>
+        <section class="r-sec">
+          <h3>مشاريع متاحة</h3>
+          <div class="s-proj">
+            <span class="r-tile"><svg class="i"><use href="#i-atom"/></svg></span>
+            <span class="r-at"><b>محطة الضبعة النووية</b><span><span class="ltr">4.5</span> مليار $ · <span class="ltr">8</span> سنوات</span></span>
+            <span class="s-pa"><button class="r-btn r-primary tap">بدء</button></span>
+          </div>
+          <div class="s-proj">
+            <span class="r-tile"><svg class="i"><use href="#i-anchor"/></svg></span>
+            <span class="r-at"><b>توسعة ميناء شرق بورسعيد</b><span><span class="ltr">1.2</span> مليار $ · <span class="ltr">3</span> سنوات</span></span>
+            <span class="s-pa"><button class="r-btn r-primary tap">بدء</button></span>
+          </div>
+        </section>
+        <p class="s-note">إلغاء مشروع يُرجع ما دُفع فيه ناقص <span class="ltr">10%</span>.</p>
+      </div>
+      <span class="r-fade" aria-hidden="true"></span>
+    </div>
+  </section>
