@@ -68,6 +68,8 @@ if inputs:
         # newer reports bind every PNG (and the hit render) to the report by its content
         for rel, sha in (entry.get("pngSha1") or {}).items():
             png = screen / rel
+            if rel.endswith("_hit.png") and not png.exists():
+                continue                                  # the hit-box render is a local debug file, kept out of git (.gitignore)
             check(png.exists() and hashlib.sha1(png.read_bytes()).hexdigest() == sha, f"{d['id']}: {rel} is the render the report checked")
         for rel in entry.get("pngs", []):
             png = screen / rel
