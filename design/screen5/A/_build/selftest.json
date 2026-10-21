@@ -1,0 +1,409 @@
+{
+ "ranAt": "2026-10-21T04:17:56.314Z",
+ "inputs": {
+  "files": [
+   "index.html",
+   "_build/render.js",
+   "_build/state.css",
+   "_build/sheet.html",
+   "_build/assemble.py",
+   "../../shared/section_identity.css",
+   "../../screen4/R/_build/panel.css"
+  ],
+  "sha1": "dadefc53c56b2a00468bfe9dd077a7080126d1f8"
+ },
+ "cleanIssues": {
+  "i16promax": [],
+  "i16promax_leader": [],
+  "i16promax_policies": [],
+  "i16promax_policies_end": [],
+  "i16promax_projects": [],
+  "i16promax_projects_end": [],
+  "se": [],
+  "se_leader": [],
+  "se_policies": [],
+  "se_policies_end": [],
+  "se_projects": [],
+  "se_projects_end": []
+ },
+ "results": [
+  {
+   "name": "type size",
+   "ok": true,
+   "sample": [
+    "font size 17 for \"مصر\""
+   ]
+  },
+  {
+   "name": "18 pt misuse",
+   "ok": true,
+   "sample": [
+    "close button is not round",
+    "18 pt is for the province name and the headline numbers only: \"الرئيس محمد حسني مبارك\"",
+    "18 pt is for the province name and the headline numbers only: \"·\""
+   ]
+  },
+  {
+   "name": "font weight",
+   "ok": true,
+   "sample": [
+    "font weight 13/700 for \"محمد حسني مبارك\"",
+    "font weight 13/700 for \"أحمد نظيف\"",
+    "font weight 13/700 for \"شاغر\""
+   ]
+  },
+  {
+   "name": "off-token colour",
+   "ok": true,
+   "sample": [
+    "text colour off-token rgb(136, 153, 170): \"نظام الحكم\"",
+    "text colour off-token rgb(136, 153, 170): \"الدستور\"",
+    "text colour off-token rgb(136, 153, 170): \"الحزب الحاكم\""
+   ]
+  },
+  {
+   "name": "control height",
+   "ok": true,
+   "sample": [
+    "control height 30.00 for .s-sg (want 26): ملغاة",
+    "control height 30.00 for .s-sg (want 26): محدودة",
+    "control height 30.00 for .s-sg (want 26): شاملة"
+   ]
+  },
+  {
+   "name": "radius",
+   "ok": true,
+   "sample": [
+    "radius 8 for .s-proj (want 10)",
+    "radius 8 for .s-proj (want 10)",
+    "radius 8 for .s-proj (want 10)"
+   ]
+  },
+  {
+   "name": "gap",
+   "ok": true,
+   "sample": [
+    "gap 6 on حالة الطوارئالتغيير: 60 رأ",
+    "gap 6 on حالة الطوارئالتغيير: 60 رأ",
+    "gap 6 on التجنيدالتغيير: 50 رأس مال"
+   ]
+  },
+  {
+   "name": "icon size",
+   "ok": true,
+   "sample": [
+    "icon size 19x19 (want 17): i",
+    "icon size 19x19 (want 17): i"
+   ]
+  },
+  {
+   "name": "hit overlap",
+   "ok": true,
+   "sample": [
+    "hit overlap ملغاة / تطوعي",
+    "hit overlap محدودة / انتقائي",
+    "hit overlap شاملة / إلزامي"
+   ]
+  },
+  {
+   "name": "side inset",
+   "ok": true,
+   "sample": [
+    "text in side inset: 86",
+    "text in side inset: +4",
+    "text in side inset: شهريًا"
+   ]
+  },
+  {
+   "name": "clipped text",
+   "ok": true,
+   "sample": [
+    "text outside the sheet's 12 pt padding: \"· عُدّل\"",
+    "clipped text (sides): \"2007\" 509..540.2 y 248.5..267.5",
+    "text outside the sheet's 12 pt padding: \"2007\""
+   ]
+  },
+  {
+   "name": "text overlap",
+   "ok": true,
+   "sample": [
+    "text overlap \"مصر\" / \"إعداد واقعي\"",
+    "icon over text: i / \"مصر\"",
+    "contrast 2.36 for \"مصر\""
+   ]
+  },
+  {
+   "name": "icon over text",
+   "ok": true,
+   "sample": [
+    "text outside the sheet's 12 pt padding: \"رأس المال السياسي\"",
+    "icon over text: i / \"رأس المال السياسي\"",
+    "icon over text: i / \"الاستقرار\""
+   ]
+  },
+  {
+   "name": "panel not opaque",
+   "ok": true,
+   "sample": [
+    "panel not opaque: الدولة: مصر rgba(9, 17, 25, 0.66)",
+    "contrast 3.15 for \"نظام الحكم\"",
+    "contrast 4.07 for \"الحزب الحاكم\""
+   ]
+  },
+  {
+   "name": "see-through panel",
+   "ok": true,
+   "sample": [
+    "panel not opaque (opacity 0.60): الدولة: مصر",
+    "brief text not fully visible: مصر",
+    "brief text not fully visible: إعداد واقعي"
+   ]
+  },
+  {
+   "name": "Egypt covered",
+   "ok": true,
+   "sample": [
+    "Nile delta covered by panel الدولة: مصر",
+    "Nile delta under the hit box of نظرة عامة",
+    "Nile delta under the hit box of القيادة"
+   ]
+  },
+  {
+   "name": "sheet width",
+   "ok": true,
+   "sample": [
+    "sheet width 330 (want round(clamp(43% of 832, 340, 380)), or the room the dock leaves if 330..: 358)"
+   ]
+  },
+  {
+   "name": "top row covered",
+   "ok": true,
+   "sample": [
+    "hit overlap الخزينة 36.0 مليار $ / إغلاق",
+    "hit overlap الاستقرار 58% / إغلاق",
+    "panel overlap الدولة: مصر، حسني مبارك، ج / الدولة: مصر"
+   ]
+  },
+  {
+   "name": "dock hidden although it fits",
+   "ok": true,
+   "sample": [
+    "dock hidden although it fits left of the sheet"
+   ]
+  },
+  {
+   "name": "dock not moved left",
+   "ok": true,
+   "sample": [
+    "icon over text: i / \"تهدئة مؤقتة\"",
+    "hit overlap الدولة / تعديل وزاري25 رأس مال سياس",
+    "hit overlap الاقتصاد / تعديل وزاري25 رأس مال سياس"
+   ]
+  },
+  {
+   "name": "dock hit box in the side inset",
+   "ok": true,
+   "sample": [
+    "tap in side inset: المزيد",
+    "dock not 4 pt in from the left end of its B3 line: x 62.0 w 387.0 y 374.0 (want x 66 w 387.0 y 374.0)"
+   ]
+  },
+  {
+   "name": "dock shown on the SE",
+   "ok": true,
+   "sample": [
+    "icon over text: i / \"رأس مال سياسي · مرة في السنة\"",
+    "icon over text: i / \"رأس مال سياسي · مرة في السنة\"",
+    "icon over text: i / \"تهدئة مؤقتة\""
+   ]
+  },
+  {
+   "name": "left stack moved",
+   "ok": true,
+   "sample": [
+    "HUD element moved from its B3 position: .toast x 70.0..275.6 y 56.0..88.0",
+    "HUD element moved from its B3 position: .btn.mode x 70.0..191.6 y 96.0..128.0",
+    "HUD element moved from its B3 position: .btn.home x 70.0..141.5 y 136.0..168.0"
+   ]
+  },
+  {
+   "name": "overview scrolls",
+   "ok": true,
+   "sample": [
+    "clipped text (bottom): \"تعديل وزاري\" 538.16..599 y 348..367",
+    "clipped text (bottom): \"تهدئة مؤقتة\" 353..406.97 y 357..374",
+    "control cut by its scroll area (bottom): تعديل وزاري25 رأس مال سياس"
+   ]
+  },
+  {
+   "name": "fit level not the loosest",
+   "ok": true,
+   "sample": [
+    "fit level 4 is not the loosest that fits (level 1 fits)",
+    "fit level 4 is not the loosest that fits (level 2 fits)",
+    "fit level 4 is not the loosest that fits (level 3 fits)"
+   ]
+  },
+  {
+   "name": "fades wrong",
+   "ok": true,
+   "sample": [
+    "clipped text (bottom): \"الأحزاب\" 843.84..881 y 402..421",
+    "clipped text (bottom): \"حرة\" 690.77..707.23 y 411..428",
+    "clipped text (bottom): \"بترخيص\" 620.92..657.08 y 411..428"
+   ]
+  },
+  {
+   "name": "cut at a hard edge",
+   "ok": true,
+   "sample": [
+    "clipped text (bottom): \"التغيير:\" 614.02..646 y 360..377",
+    "clipped text (bottom): \"30\" 600.2..614.02 y 360..377",
+    "clipped text (bottom): \"رأس مال سياسي\" 525.69..600.2 y 360..377"
+   ]
+  },
+  {
+   "name": "fade flag without a mask",
+   "ok": true,
+   "sample": [
+    "clipped text (bottom): \"التغيير:\" 614.02..646 y 360..377",
+    "clipped text (bottom): \"30\" 600.2..614.02 y 360..377",
+    "clipped text (bottom): \"رأس مال سياسي\" 525.69..600.2 y 360..377"
+   ]
+  },
+  {
+   "name": "no scroll hint",
+   "ok": true,
+   "sample": [
+    "no scroll hint: nothing fades into the bottom edge",
+    "scroll hint chevron missing with content below"
+   ]
+  },
+  {
+   "name": "hint chevron missing",
+   "ok": true,
+   "sample": [
+    "scroll hint chevron missing with content below"
+   ]
+  },
+  {
+   "name": "% before its number",
+   "ok": true,
+   "sample": [
+    "% shown before its number: \"إلغاء مشروع يُرجع ما دُفع فيه ناقص 10%.\""
+   ]
+  },
+  {
+   "name": "brief text scrolled away",
+   "ok": true,
+   "sample": [
+    "clipped text (top): \"التغيير:\" 849.02..881 y 143..160",
+    "clipped text (top): \"30\" 835.2..849.02 y 143..160",
+    "clipped text (top): \"رأس مال سياسي\" 760.69..835.2 y 143..160"
+   ]
+  },
+  {
+   "name": "brief text",
+   "ok": true,
+   "sample": [
+    "brief text missing: لماذا؟",
+    "brief text missing: لماذا؟"
+   ]
+  },
+  {
+   "name": "map label cut",
+   "ok": true,
+   "sample": [
+    "map label إيران squeezed between a panel and the screen edge",
+    "map label العراق cut by a panel edge",
+    "map label الأردن cut by a panel edge"
+   ]
+  },
+  {
+   "name": "contrast",
+   "ok": true,
+   "sample": [
+    "contrast 1.73 for \"نظام الحكم\"",
+    "contrast 1 for \"جمهورية رئاسية\"",
+    "contrast 1.73 for \"الدستور\""
+   ]
+  },
+  {
+   "name": "faint text",
+   "ok": true,
+   "sample": [
+    "brief text not fully visible: نظام الحكم",
+    "brief text not fully visible: الدستور",
+    "brief text not fully visible: الحزب الحاكم"
+   ]
+  },
+  {
+   "name": "RTL order",
+   "ok": true,
+   "sample": [
+    "project row 1: order must be .r-tile, .r-at, .s-pa (right to left)",
+    "project row 2: order must be .r-tile, .r-at, .s-pa (right to left)",
+    "project row 3: order must be .r-tile, .r-at, .s-pa (right to left)"
+   ]
+  },
+  {
+   "name": "law choices order",
+   "ok": true,
+   "sample": [
+    "law row 1: choices not right to left",
+    "law row 1: choices not right to left",
+    "law row 2: choices not right to left"
+   ]
+  },
+  {
+   "name": "two choices in a law",
+   "ok": true,
+   "sample": [
+    "law row 1: exactly one choice"
+   ]
+  },
+  {
+   "name": "two tabs selected",
+   "ok": true,
+   "sample": [
+    "exactly the open tab must be selected"
+   ]
+  },
+  {
+   "name": "dock item not marked",
+   "ok": true,
+   "sample": [
+    "the open section «الدولة» is not marked in the dock"
+   ]
+  },
+  {
+   "name": "identity line colour",
+   "ok": true,
+   "sample": [
+    "panel top line rgb(67, 192, 138) 2px (want the section colour, 2 pt, at the top)"
+   ]
+  },
+  {
+   "name": "emblem missing",
+   "ok": true,
+   "sample": [
+    "section emblem missing or not in the section colour",
+    "header order must be flag, name, ..., emblem, close (right to left)"
+   ]
+  },
+  {
+   "name": "bar fills from the left",
+   "ok": true,
+   "sample": [
+    "a bar does not fill from the right"
+   ]
+  },
+  {
+   "name": "close not round",
+   "ok": true,
+   "sample": [
+    "close button is not round"
+   ]
+  }
+ ]
+}

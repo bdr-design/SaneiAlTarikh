@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-10-20T16:14:27.530Z",
+ "ranAt": "2026-10-21T04:19:44.851Z",
  "inputs": {
   "files": [
    "index.html",
@@ -8,7 +8,7 @@
    "_build/sheet.html",
    "_build/assemble.py"
   ],
-  "sha1": "2fbf5d9c28fb340afd941177bd89b2f9bc6ba88b"
+  "sha1": "344a0414737f680fc7b7a797847730bd3cf95825"
  },
  "cleanIssues": {
   "i16promax": [],
@@ -336,7 +336,15 @@
    "name": "no scroll hint",
    "ok": true,
    "sample": [
-    "no scroll hint: nothing fades into the bottom edge"
+    "no scroll hint: nothing fades into the bottom edge",
+    "scroll hint chevron missing with content below"
+   ]
+  },
+  {
+   "name": "hint chevron missing",
+   "ok": true,
+   "sample": [
+    "scroll hint chevron missing with content below"
    ]
   },
   {
