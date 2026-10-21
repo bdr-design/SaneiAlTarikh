@@ -1,0 +1,23 @@
+  /* ================= Economy panel (proposal, screen 6) =================
+     The look, sizes and fit levels from ../../screen4/R/_build/panel.css; the section identity (الاقتصاد: emerald) and
+     white touches from ../../shared/section_identity.css; the state panel's tab and row rules from
+     ../../screen5/A/_build/state.css (all read by assemble.py). Below: what only this panel needs. */
+  [data-tab="budget"] .r-body[data-tab="budget"], [data-tab="taxes"] .r-body[data-tab="taxes"], [data-tab="trade"] .r-body[data-tab="trade"] { display: flex; }
+  .r-body[data-tab="budget"], .r-body[data-tab="taxes"], .r-body[data-tab="trade"] { padding-top: var(--s2); padding-bottom: var(--s3); gap: var(--s2); }
+  /* a budget, tax or subsidy row: name and amount, a share bar (relative to the largest line) or the rate, a chevron to
+     the adjuster (interest: a lock, it cannot be cut) */
+  .e-row { display: flex; align-items: center; gap: var(--s2); height: 44px; }
+  .e-bar { flex: none; position: relative; width: 72px; height: 6px; border-radius: 3px; background: rgba(169, 188, 203, .22); overflow: hidden; }
+  .e-bar i { position: absolute; inset: 0 0 0 auto; border-radius: 3px; background: var(--sec); max-width: 100%; }
+  .e-lock { flex: none; color: var(--t2); }
+  .e-val { flex: none; font-size: var(--fs-val); line-height: var(--lh-val); font-weight: 600; }
+  .e-flow { display: flex; align-items: center; gap: var(--s2); height: 36px; }
+  .e-flow .e-val { margin-inline-start: auto; }
+  .e-bad { border-color: rgba(242, 177, 76, .7) !important; color: var(--amber) !important; background: rgba(242, 177, 76, .06) !important; }
+  /* the budget at a glance: revenue, spending, deficit */
+  .e-sum { display: grid; grid-template-columns: repeat(3, 1fr) auto; align-items: end; column-gap: var(--s2); padding-bottom: var(--s2); border-bottom: 1px solid var(--hair); }
+  .e-sum span { display: flex; flex-direction: column; gap: 2px; font-size: var(--fs-sec); line-height: var(--lh-sec); font-weight: 500; color: var(--t2); }
+  .e-sum b { font-size: var(--title); line-height: var(--lh-title); font-weight: 700; color: var(--t1); text-align: start; }
+  .e-sum em { font-style: normal; font-size: var(--fs-label); line-height: var(--lh-label); font-weight: 500; color: var(--t2); }
+  .e-st { grid-template-columns: 1fr 1fr; }
+  .e-partners { font-size: var(--fs-sec); line-height: 18px; font-weight: 500; color: var(--t1); }
