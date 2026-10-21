@@ -1,0 +1,160 @@
+  <!-- The economy adjusters (screen 7, variant A): what a player gets when they tap a line of the economy panel (screen 6,
+       approved). The adjuster opens inside the same sheet as a pushed view: the header stays (assemble.py takes it from
+       screen 6's sheet), a back control replaces the tabs, the body scrolls, and a fixed footer keeps the timing and the
+       two buttons in view. The header collapses to its compact height (fit level 6), as a pushed view does. Views (?adjust=): tax (income tax, 20% → 22%), line (education, 7.3 → 8.0 مليار $),
+       subsidy (fuel, 11.7 → 10.5 مليار $, the overview's «خفض دعم الوقود 10%»), money (the central bank's rate,
+       8.25% → 9.25%, with the exchange regime and capital controls). Effects are the model's estimate before the change
+       is committed: blue an improvement, amber a worsening. Values are illustrative and agree with screen 6. -->
+  <section class="sheet glass" aria-label="الاقتصاد: مصر">
+    <div class="r-in">
+<!--HEADER-->
+
+      <!-- ضريبة الدخل -->
+      <div class="a-view" data-adjust="tax">
+        <nav class="a-nav"><button class="a-back tap" aria-label="رجوع إلى الضرائب والدعم"><svg class="i a-bk"><use href="#i-chev"/></svg>الضرائب والدعم</button></nav>
+        <div class="r-body a-body">
+          <div class="a-title"><b>ضريبة الدخل</b><span>الشريحة العليا</span></div>
+          <div class="a-val">
+            <span class="a-now"><em>الحالي</em><b class="ltr">20%</b></span>
+            <svg class="i a-to" aria-hidden="true"><use href="#i-chev"/></svg>
+            <span class="a-new"><em>الجديد</em><b class="ltr">22%</b></span>
+            <span class="r-chip a-delta"><span class="ltr">+2</span> نقطة</span>
+          </div>
+          <div class="a-step" data-min="10" data-max="35" data-now="20" data-new="22">
+            <button class="a-pm tap" aria-label="أنقص نقطة"><svg class="i"><use href="#i-minus"/></svg></button>
+            <span class="a-lim ltr" aria-hidden="true">10%</span>
+            <span class="a-track" role="img" aria-label="من 10% إلى 35%: الحالي 20%، الجديد 22%"><i class="a-fill"></i><i class="a-cur"></i><i class="a-knob"></i></span>
+            <span class="a-lim ltr" aria-hidden="true">35%</span>
+            <button class="a-pm tap" aria-label="زد نقطة"><svg class="i"><use href="#i-plus"/></svg></button>
+          </div>
+                    <section class="a-eff">
+            <h3>الأثر المتوقع</h3>
+            <dl class="a-grid">
+              <div class="a-e" data-good="1"><dt>الإيرادات</dt><dd><span class="ltr">+300</span> مليون $ سنويًا</dd></div>
+              <div class="a-e" data-good="1"><dt>العجز</dt><dd><span class="ltr">17.4</span> مليار $ بدل <span class="ltr">17.7</span></dd></div>
+              <div class="a-e" data-good="0"><dt>اضطرابات المحافظات الأفقر</dt><dd><span class="ltr">+2</span></dd></div>
+              <div class="a-e" data-good="0"><dt>النمو</dt><dd><span class="ltr">−0.1</span> نقطة</dd></div>
+            </dl>
+          </section>
+        </div>
+        <footer class="a-foot">
+          <span class="a-when">يبدأ الشهر القادم · مرة كل <span class="ltr">3</span> أشهر · الأثر تقدير</span>
+          <div class="a-btns"><button class="a-btn a-ok tap">اعتماد</button><button class="a-btn a-no tap">إلغاء</button></div>
+        </footer>
+      </div>
+
+      <!-- بند التعليم -->
+      <div class="a-view" data-adjust="line">
+        <nav class="a-nav"><button class="a-back tap" aria-label="رجوع إلى الميزانية"><svg class="i a-bk"><use href="#i-chev"/></svg>الميزانية</button></nav>
+        <div class="r-body a-body">
+          <div class="a-title"><b>التعليم</b><span><span class="ltr">11%</span> من الإنفاق</span></div>
+          <div class="a-val">
+            <span class="a-now"><em>الحالي</em><b class="ltr">7.3</b></span>
+            <svg class="i a-to" aria-hidden="true"><use href="#i-chev"/></svg>
+            <span class="a-new"><em>الجديد</em><b class="ltr">8.0</b><i class="a-unit">مليار $</i></span>
+            <span class="r-chip a-delta"><span class="ltr">+10%</span></span>
+          </div>
+          <div class="a-step" data-min="3.7" data-max="11.0" data-now="7.3" data-new="8.0">
+            <button class="a-pm tap" aria-label="أنقص 5%"><svg class="i"><use href="#i-minus"/></svg></button>
+            <span class="a-lim ltr" aria-hidden="true">3.7</span>
+            <span class="a-track" role="img" aria-label="من 3.7 إلى 11.0 مليار دولار: الحالي 7.3، الجديد 8.0"><i class="a-fill"></i><i class="a-cur"></i><i class="a-knob"></i></span>
+            <span class="a-lim ltr" aria-hidden="true">11.0</span>
+            <button class="a-pm tap" aria-label="زد 5%"><svg class="i"><use href="#i-plus"/></svg></button>
+          </div>
+                    <section class="a-eff">
+            <h3>الأثر المتوقع</h3>
+            <dl class="a-grid">
+              <div class="a-e" data-good="0"><dt>العجز</dt><dd><span class="ltr">18.4</span> مليار $ بدل <span class="ltr">17.7</span></dd></div>
+              <div class="a-e" data-good="0"><dt>الدين إلى الناتج</dt><dd><span class="ltr">+0.3</span> نقطة سنويًا</dd></div>
+              <div class="a-e" data-good="1"><dt>مستوى التعليم</dt><dd>يرتفع خلال <span class="ltr">5</span> سنوات</dd></div>
+              <div class="a-e" data-good="1"><dt>الشرعية</dt><dd><span class="ltr">+1</span></dd></div>
+            </dl>
+          </section>
+        </div>
+        <footer class="a-foot">
+          <span class="a-when">يبدأ الشهر القادم · مرة كل <span class="ltr">3</span> أشهر · الأثر تقدير</span>
+          <div class="a-btns"><button class="a-btn a-ok tap">اعتماد</button><button class="a-btn a-no tap">إلغاء</button></div>
+        </footer>
+      </div>
+
+      <!-- دعم الوقود (the overview's «خفض دعم الوقود 10%» opens this view with the same numbers) -->
+      <div class="a-view" data-adjust="subsidy">
+        <nav class="a-nav"><button class="a-back tap" aria-label="رجوع إلى الضرائب والدعم"><svg class="i a-bk"><use href="#i-chev"/></svg>الضرائب والدعم</button></nav>
+        <div class="r-body a-body">
+          <div class="a-title"><b>دعم الوقود</b><span>بنزين وسولار وغاز</span></div>
+          <div class="a-val">
+            <span class="a-now"><em>الحالي</em><b class="ltr">11.7</b></span>
+            <svg class="i a-to" aria-hidden="true"><use href="#i-chev"/></svg>
+            <span class="a-new"><em>الجديد</em><b class="ltr">10.5</b><i class="a-unit">مليار $</i></span>
+            <span class="r-chip a-delta"><span class="ltr">−10%</span></span>
+          </div>
+          <div class="a-step" data-min="0" data-max="15" data-now="11.7" data-new="10.5">
+            <button class="a-pm tap" aria-label="أنقص 5%"><svg class="i"><use href="#i-minus"/></svg></button>
+            <span class="a-lim ltr" aria-hidden="true">0</span>
+            <span class="a-track" role="img" aria-label="من صفر إلى 15 مليار دولار: الحالي 11.7، الجديد 10.5"><i class="a-fill"></i><i class="a-cur"></i><i class="a-knob"></i></span>
+            <span class="a-lim ltr" aria-hidden="true">15</span>
+            <button class="a-pm tap" aria-label="زد 5%"><svg class="i"><use href="#i-plus"/></svg></button>
+          </div>
+                    <section class="a-eff">
+            <h3>الأثر المتوقع</h3>
+            <dl class="a-grid">
+              <div class="a-e" data-good="1"><dt>الوفر</dt><dd><span class="ltr">1.2</span> مليار $ سنويًا</dd></div>
+              <div class="a-e" data-good="0"><dt>التضخم</dt><dd><span class="ltr">+0.6</span> نقطة</dd></div>
+              <div class="a-e" data-good="0"><dt>اضطرابات المحافظات الأفقر</dt><dd><span class="ltr">+4</span></dd></div>
+              <div class="a-e" data-good="0"><dt>الشرعية</dt><dd><span class="ltr">−3</span></dd></div>
+            </dl>
+          </section>
+        </div>
+        <footer class="a-foot">
+          <span class="a-when">يبدأ الشهر القادم · مرة كل <span class="ltr">3</span> أشهر · الأثر تقدير</span>
+          <div class="a-btns"><button class="a-btn a-ok tap">اعتماد</button><button class="a-btn a-no tap">إلغاء</button></div>
+        </footer>
+      </div>
+
+      <!-- السياسة النقدية والعملة -->
+      <div class="a-view" data-adjust="money">
+        <nav class="a-nav"><button class="a-back tap" aria-label="رجوع إلى التجارة والعملة"><svg class="i a-bk"><use href="#i-chev"/></svg>التجارة والعملة</button></nav>
+        <div class="r-body a-body">
+          <div class="a-title"><b>فائدة المركزي</b><span>سعر الإيداع لليلة واحدة</span></div>
+          <div class="a-val">
+            <span class="a-now"><em>الحالي</em><b class="ltr">8.25%</b></span>
+            <svg class="i a-to" aria-hidden="true"><use href="#i-chev"/></svg>
+            <span class="a-new"><em>الجديد</em><b class="ltr">9.25%</b></span>
+            <span class="r-chip a-delta"><span class="ltr">+1</span> نقطة</span>
+          </div>
+          <div class="a-step" data-min="2" data-max="20" data-now="8.25" data-new="9.25">
+            <button class="a-pm tap" aria-label="أنقص ربع نقطة"><svg class="i"><use href="#i-minus"/></svg></button>
+            <span class="a-lim ltr" aria-hidden="true">2%</span>
+            <span class="a-track" role="img" aria-label="من 2% إلى 20%: الحالي 8.25%، الجديد 9.25%"><i class="a-fill"></i><i class="a-cur"></i><i class="a-knob"></i></span>
+            <span class="a-lim ltr" aria-hidden="true">20%</span>
+            <button class="a-pm tap" aria-label="زد ربع نقطة"><svg class="i"><use href="#i-plus"/></svg></button>
+          </div>
+                    <section class="r-sec a-set">
+            <h3>الصرف ورأس المال</h3>
+            <div class="s-pol">
+              <span class="r-at"><b>نظام الصرف</b><span>تغيير تدريجي خلال <span class="ltr">6</span> أشهر</span></span>
+              <span class="s-seg" role="radiogroup" aria-label="نظام الصرف"><button class="s-sg tap" role="radio" aria-checked="false">ثابت</button><button class="s-sg tap on" role="radio" aria-checked="true">مُدار</button><button class="s-sg tap" role="radio" aria-checked="false">حر</button></span>
+            </div>
+            <div class="s-pol">
+              <span class="r-at"><b>ضوابط رأس المال</b><span>تغيير تدريجي خلال <span class="ltr">6</span> أشهر</span></span>
+              <span class="s-seg" role="radiogroup" aria-label="ضوابط رأس المال"><button class="s-sg tap on" role="radio" aria-checked="true">محدودة</button><button class="s-sg tap" role="radio" aria-checked="false">متوسطة</button><button class="s-sg tap" role="radio" aria-checked="false">مشددة</button></span>
+            </div>
+          </section>
+          <section class="a-eff">
+            <h3>الأثر المتوقع</h3>
+            <dl class="a-grid">
+              <div class="a-e" data-good="1"><dt>التضخم</dt><dd><span class="ltr">−0.4</span> نقطة خلال سنة</dd></div>
+              <div class="a-e" data-good="0"><dt>النمو</dt><dd><span class="ltr">−0.2</span> نقطة</dd></div>
+              <div class="a-e" data-good="0"><dt>فوائد الدين المحلي</dt><dd><span class="ltr">+600</span> مليون $ سنويًا</dd></div>
+              <div class="a-e" data-good="1"><dt>الجنيه</dt><dd>أقوى قليلًا</dd></div>
+            </dl>
+          </section>
+        </div>
+        <footer class="a-foot">
+          <span class="a-when">الفائدة من الشهر القادم · الصرف والضوابط تدريجيًا · الأثر تقدير</span>
+          <div class="a-btns"><button class="a-btn a-ok tap">اعتماد</button><button class="a-btn a-no tap">إلغاء</button></div>
+        </footer>
+      </div>
+      <span class="r-hint" aria-hidden="true"><svg class="i"><use href="#i-chev"/></svg></span>
+    </div>
+  </section>

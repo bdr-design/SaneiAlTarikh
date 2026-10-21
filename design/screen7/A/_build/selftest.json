@@ -1,0 +1,728 @@
+{
+ "ranAt": "2026-10-21T08:20:53.565Z",
+ "inputs": {
+  "files": [
+   "index.html",
+   "_build/render.js",
+   "_build/adjust.css",
+   "_build/sheet.html",
+   "_build/assemble.py",
+   "../../shared/section_identity.css",
+   "../../screen4/R/_build/panel.css",
+   "../../screen5/A/_build/state.css",
+   "../../screen6/A/_build/econ.css",
+   "../../screen6/A/_build/sheet.html",
+   "../../screen4/A/index.html",
+   "../../screen1/B3/index.html",
+   "../../shared/devices.json",
+   "../../shared/flag_eg.svg",
+   "../../shared/flags/eg.svg",
+   "../../shared/map_mena_d1.jpg",
+   "../../shared/map_mena_d1_overlay.svg",
+   "header_cairo.jpg",
+   "map_overlay_cairo.svg"
+  ],
+  "sha1": "27330e7a9b04e78aa77f6cb00260696c5edb4d0d"
+ },
+ "cleanIssues": {
+  "i16promax": [],
+  "i16promax_line": [],
+  "i16promax_subsidy": [],
+  "i16promax_money": [],
+  "i16promax_money_end": [],
+  "i16promax_money_at89": [],
+  "i16promax coverage": [],
+  "se": [],
+  "se_line": [],
+  "se_subsidy": [],
+  "se_money": [],
+  "se_money_end": [],
+  "se_tax_end": [],
+  "se_tax_at38": [],
+  "se_line_end": [],
+  "se_line_at38": [],
+  "se_subsidy_end": [],
+  "se_subsidy_at38": [],
+  "se_money_at38": [],
+  "se_money_at76": [],
+  "se_money_at114": [],
+  "se_money_at152": [],
+  "se coverage": []
+ },
+ "results": [
+  {
+   "name": "type size",
+   "ok": true,
+   "sample": [
+    "font size 17 for \"الاقتصاد\""
+   ]
+  },
+  {
+   "name": "18 pt misuse",
+   "ok": true,
+   "sample": [
+    "18 pt is for the panel's name and the adjusted values only: \"ضريبة الدخل\""
+   ]
+  },
+  {
+   "name": "font weight",
+   "ok": true,
+   "sample": [
+    "font weight 13/700 for \"+300\"",
+    "font weight 13/700 for \"مليون $ سنويًا\"",
+    "font weight 13/700 for \"17.4\""
+   ]
+  },
+  {
+   "name": "off-token colour",
+   "ok": true,
+   "sample": [
+    "text colour off-token rgb(136, 153, 170): \"الإيرادات\"",
+    "text colour off-token rgb(136, 153, 170): \"العجز\"",
+    "text colour off-token rgb(136, 153, 170): \"اضطرابات المحافظات الأفقر\""
+   ]
+  },
+  {
+   "name": "control height",
+   "ok": true,
+   "sample": [
+    "control height 40.00 for .a-btn (want 36): اعتماد",
+    "control height 40.00 for .a-btn (want 36): إلغاء",
+    "vertical overflow in الاقتصادالجنيه المصري مصر "
+   ]
+  },
+  {
+   "name": "radius",
+   "ok": true,
+   "sample": [
+    "radius 6 for .a-btn (want 10)",
+    "radius 6 for .a-btn (want 10)"
+   ]
+  },
+  {
+   "name": "gap",
+   "ok": true,
+   "sample": [
+    "gap 6 on 10% 35%",
+    "gap 6 on 10% 35%"
+   ]
+  },
+  {
+   "name": "icon size",
+   "ok": true,
+   "sample": [
+    "icon size 19x19 (want 16): i",
+    "icon size 19x19 (want 16): i"
+   ]
+  },
+  {
+   "name": "hit overlap",
+   "ok": true,
+   "sample": [
+    "hit overlap اعتماد / إلغاء",
+    "footer buttons: order must be .a-ok, .a-no (right to left)"
+   ]
+  },
+  {
+   "name": "tap in the side inset",
+   "ok": true,
+   "sample": [
+    "text in side inset: ضريبة الدخل",
+    "text in side inset: الحالي",
+    "text in side inset: الأثر المتوقع"
+   ]
+  },
+  {
+   "name": "text in the side inset",
+   "ok": true,
+   "sample": [
+    "text in side inset: ضريبة الدخل",
+    "text in side inset: الحالي",
+    "text in side inset: الأثر المتوقع"
+   ]
+  },
+  {
+   "name": "panel in the side inset",
+   "ok": true,
+   "sample": [
+    "text in side inset: ضريبة الدخل",
+    "text in side inset: الحالي",
+    "text in side inset: الأثر المتوقع"
+   ]
+  },
+  {
+   "name": "clipped text",
+   "ok": true,
+   "sample": [
+    "clipped text (sides): \"ضريبة الدخل\" 854.89..921 y 148..167",
+    "text outside the sheet's 12 pt padding: \"ضريبة الدخل\"",
+    "brief text not fully visible: ضريبة الدخل"
+   ]
+  },
+  {
+   "name": "text outside the padding",
+   "ok": true,
+   "sample": [
+    "text outside the sheet's 12 pt padding: \"ضريبة الدخل\""
+   ]
+  },
+  {
+   "name": "horizontal overflow",
+   "ok": true,
+   "sample": [
+    "horizontal overflow in ضريبة الدخلالشريحة العليا "
+   ]
+  },
+  {
+   "name": "text overlap",
+   "ok": true,
+   "sample": [
+    "text overlap \"20%\" / \"الجديد\"",
+    "icon over text: i a-to / \"22%\"",
+    "value block: order must be .a-now, .a-to, .a-new, .a-delta (right to left)"
+   ]
+  },
+  {
+   "name": "icon over text",
+   "ok": true,
+   "sample": [
+    "icon over text: i a-to / \"الجديد\"",
+    "value block: order must be .a-now, .a-to, .a-new, .a-delta (right to left)"
+   ]
+  },
+  {
+   "name": "panel not opaque",
+   "ok": true,
+   "sample": [
+    "panel not opaque: الاقتصاد: مصر rgba(9, 17, 25, 0.66)",
+    "contrast 3.15 for \"الشريحة العليا\"",
+    "contrast 4.25 for \"الجديد\""
+   ]
+  },
+  {
+   "name": "see-through panel",
+   "ok": true,
+   "sample": [
+    "panel not opaque (opacity 0.60): الاقتصاد: مصر",
+    "brief text not fully visible: الاقتصاد",
+    "brief text not fully visible: الجنيه المصري"
+   ]
+  },
+  {
+   "name": "Egypt covered",
+   "ok": true,
+   "sample": [
+    "Nile delta covered by panel الاقتصاد: مصر",
+    "Nile delta under the hit box of رجوع إلى الضرائب والدعم",
+    "Egypt covered by panel الاقتصاد: مصر"
+   ]
+  },
+  {
+   "name": "sheet width",
+   "ok": true,
+   "sample": [
+    "sheet width 330 (want round(clamp(43% of 832, 340, 380)), or the room the dock leaves if 330..: 358)"
+   ]
+  },
+  {
+   "name": "sheet top",
+   "ok": true,
+   "sample": [
+    "hit overlap الخزينة 36.0 مليار $ / إغلاق",
+    "hit overlap الاستقرار 58% / إغلاق",
+    "panel overlap الدولة: مصر، حسني مبارك، ج / الاقتصاد: مصر"
+   ]
+  },
+  {
+   "name": "panel overlap",
+   "ok": true,
+   "sample": [
+    "hit overlap الخزينة 36.0 مليار $ / إغلاق",
+    "hit overlap الاستقرار 58% / إغلاق",
+    "panel overlap الدولة: مصر، حسني مبارك، ج / الاقتصاد: مصر"
+   ]
+  },
+  {
+   "name": "dock hidden although it fits",
+   "ok": true,
+   "sample": [
+    "dock hidden although it fits left of the sheet"
+   ]
+  },
+  {
+   "name": "dock not moved left",
+   "ok": true,
+   "sample": [
+    "icon over text: i / \"إلغاء\"",
+    "icon over text: i / \"إلغاء\"",
+    "hit overlap الدولة / إلغاء"
+   ]
+  },
+  {
+   "name": "dock shown on the SE",
+   "ok": true,
+   "sample": [
+    "icon over text: i / \"إلغاء\"",
+    "hit overlap الدولة / اعتماد",
+    "hit overlap الاقتصاد / إلغاء"
+   ]
+  },
+  {
+   "name": "left stack moved",
+   "ok": true,
+   "sample": [
+    "HUD element moved from its B3 position: .toast x 70.0..275.6 y 56.0..88.0",
+    "HUD element moved from its B3 position: .btn.mode x 70.0..191.6 y 96.0..128.0",
+    "HUD element moved from its B3 position: .btn.home x 70.0..141.5 y 136.0..168.0"
+   ]
+  },
+  {
+   "name": "header not compact",
+   "ok": true,
+   "sample": [
+    "fit level 0 (want 6: the pushed view's compact header)",
+    "fades 0/0 do not match the scroll state (top 0, over 3.0)"
+   ]
+  },
+  {
+   "name": "fades wrong",
+   "ok": true,
+   "sample": [
+    "fades 0/0 do not match the scroll state (top 0, over 111.0)"
+   ]
+  },
+  {
+   "name": "cut at a hard edge",
+   "ok": true,
+   "sample": [
+    "clipped text (bottom): \"ضوابط رأس المال\" 556.58..646 y 300..319",
+    "control cut by its scroll area (bottom): محدودة",
+    "hit box shaved by its clip: محدودة"
+   ]
+  },
+  {
+   "name": "fade flag without a mask",
+   "ok": true,
+   "sample": [
+    "clipped text (top): \"فائدة المركزي\" 577.64..646 y 133..152",
+    "clipped text (top): \"سعر الإيداع لليلة واحدة\" 468.25..569.64 y 135..152",
+    "clipped text (bottom): \"ضوابط رأس المال\" 556.58..646 y 300..319"
+   ]
+  },
+  {
+   "name": "fade without the hint strip",
+   "ok": true,
+   "sample": [
+    "clipped text (top): \"فائدة المركزي\" 577.64..646 y 133..152",
+    "clipped text (top): \"سعر الإيداع لليلة واحدة\" 468.25..569.64 y 135..152",
+    "clipped text (bottom): \"ضوابط رأس المال\" 556.58..646 y 300..319"
+   ]
+  },
+  {
+   "name": "hint chevron missing",
+   "ok": true,
+   "sample": [
+    "scroll hint chevron missing with content below"
+   ]
+  },
+  {
+   "name": "hint over the footer",
+   "ok": true,
+   "sample": [
+    "scroll hint not centred in the clear strip under the fade: y 379.0..397.0 (strip 335.0..357.0)"
+   ]
+  },
+  {
+   "name": "footer scrolls away",
+   "ok": true,
+   "sample": [
+    "footer not fixed under the body: footer 262.0..322.0, body ends 262.0, panel ends 417.0",
+    "scroll hint not centred in the clear strip under the fade: y 335.0..353.0 (strip 240.0..262.0)",
+    "brief text not fully visible: 2%"
+   ]
+  },
+  {
+   "name": "% before its number",
+   "ok": true,
+   "sample": [
+    "% shown before its number: \"الشريحة العليا 20%\"",
+    "brief rows differ: title: [\"ضريبة الدخل\",\"الشريحة العليا 20%\"]"
+   ]
+  },
+  {
+   "name": "brief text scrolled away",
+   "ok": true,
+   "sample": [
+    "clipped text (top): \"الصرف ورأس المال\" 797.05..881 y 133..150",
+    "fades 0/1 do not match the scroll state (top 111, over 111.0)",
+    "brief text not fully visible: فائدة المركزي"
+   ]
+  },
+  {
+   "name": "map label cut",
+   "ok": true,
+   "sample": [
+    "map label ليبيا sliced by the screen edge or the side inset",
+    "map label إيران sliced by the screen edge or the side inset",
+    "map label إيران squeezed between a panel and the screen edge"
+   ]
+  },
+  {
+   "name": "map label at the screen edge",
+   "ok": true,
+   "sample": [
+    "map label ليبيا sliced by the screen edge or the side inset",
+    "map label إيران sliced by the screen edge or the side inset",
+    "map label إيران squeezed between a panel and the screen edge"
+   ]
+  },
+  {
+   "name": "contrast",
+   "ok": true,
+   "sample": [
+    "contrast 1 for \"الأثر المتوقع\"",
+    "contrast 1.73 for \"الإيرادات\"",
+    "contrast 1.89 for \"+300\""
+   ]
+  },
+  {
+   "name": "faint text",
+   "ok": true,
+   "sample": [
+    "brief text cannot be scrolled clear of the fades: الإيرادات",
+    "brief text cannot be scrolled clear of the fades: العجز",
+    "brief text cannot be scrolled clear of the fades: اضطرابات المحافظات الأفقر"
+   ]
+  },
+  {
+   "name": "dock item not marked",
+   "ok": true,
+   "sample": [
+    "the open section «الاقتصاد» is not marked in the dock"
+   ]
+  },
+  {
+   "name": "identity line missing",
+   "ok": true,
+   "sample": [
+    "panel top line none rgb(67, 192, 138) 2px (want the section colour, 2 pt, at the top)"
+   ]
+  },
+  {
+   "name": "emblem missing",
+   "ok": true,
+   "sample": [
+    "section emblem missing or not in the section colour",
+    "header order must be flag, name, ..., emblem, close (right to left)"
+   ]
+  },
+  {
+   "name": "tabs shown",
+   "ok": true,
+   "sample": [
+    "clipped text (bottom): \"x\" 711.88..718.14 y 401..418",
+    "fades 0/0 do not match the scroll state (top 0, over 5.0)",
+    "footer not fixed under the body: footer 343.0..403.0, body ends 343.0, panel ends 417.0"
+   ]
+  },
+  {
+   "name": "section colour on data",
+   "ok": true,
+   "sample": [
+    "section colour on data text: \"+300\"",
+    "section colour on data text: \"مليون $ سنويًا\"",
+    "section colour on data text: \"17.4\""
+   ]
+  },
+  {
+   "name": "section colour on chrome",
+   "ok": true,
+   "sample": [
+    "section colour on data chrome: أنقص نقطة",
+    "section colour on data chrome: i",
+    "section colour on data chrome: [object SVGAnimatedString]"
+   ]
+  },
+  {
+   "name": "fill in the section colour",
+   "ok": true,
+   "sample": [
+    "section colour on data chrome: a-fill",
+    "the track's fill not in teal (it is data): rgb(67, 192, 138)"
+   ]
+  },
+  {
+   "name": "effect colour wrong",
+   "ok": true,
+   "sample": [
+    "effect «الإيرادات» not in blue: rgb(242, 177, 76)",
+    "effect «العجز» not in blue: rgb(242, 177, 76)"
+   ]
+  },
+  {
+   "name": "worsening not amber",
+   "ok": true,
+   "sample": [
+    "effect «التضخم» not in amber: rgb(234, 242, 247)",
+    "effect «اضطرابات المحافظات الأفقر» not in amber: rgb(234, 242, 247)",
+    "effect «الشرعية» not in amber: rgb(234, 242, 247)"
+   ]
+  },
+  {
+   "name": "size of the knob",
+   "ok": true,
+   "sample": [
+    "size 24.0x24.0 for .a-knob (want 20 x 20)",
+    "the knob is not at the new value: 716.9 (want 718.9)"
+   ]
+  },
+  {
+   "name": "footer height",
+   "ok": true,
+   "sample": [
+    "fades 0/0 do not match the scroll state (top 0, over 1.0)",
+    "size 356.0x70.0 for .a-foot (want any x 60)"
+   ]
+  },
+  {
+   "name": "primary not white",
+   "ok": true,
+   "sample": [
+    "white touch off: .a-ok backgroundColor rgba(0, 0, 0, 0) (want rgb(234, 242, 247))",
+    "white touch off: .a-ok color rgb(234, 242, 247) (want rgb(11, 18, 24))"
+   ]
+  },
+  {
+   "name": "cancel without its outline",
+   "ok": true,
+   "sample": [
+    "white touch off: إلغاء without its white outline"
+   ]
+  },
+  {
+   "name": "chosen setting not white",
+   "ok": true,
+   "sample": [
+    "white touch off: .s-sg.on backgroundColor rgba(0, 0, 0, 0) (want rgb(234, 242, 247))",
+    "white touch off: .s-sg.on color rgb(234, 242, 247) (want rgb(11, 18, 24))",
+    "white touch off: .s-sg.on backgroundColor rgba(0, 0, 0, 0) (want rgb(234, 242, 247))"
+   ]
+  },
+  {
+   "name": "back label wrong",
+   "ok": true,
+   "sample": [
+    "brief rows differ: back: \"الضرائب والدعم\"",
+    "brief text missing: الميزانية",
+    "brief text missing: الميزانية"
+   ]
+  },
+  {
+   "name": "back not labelled",
+   "ok": true,
+   "sample": [
+    "a11y: the back control does not say where it goes"
+   ]
+  },
+  {
+   "name": "back chevron forward",
+   "ok": true,
+   "sample": [
+    "the back chevron does not point back: none"
+   ]
+  },
+  {
+   "name": "back chevron left of its label",
+   "ok": true,
+   "sample": [
+    "back control: the chevron must be right of its label (RTL)"
+   ]
+  },
+  {
+   "name": "value differs from its data",
+   "ok": true,
+   "sample": [
+    "brief rows differ: val: [\"20%\",\"23%\",\"+2 نقطة\"]",
+    "the value block does not show the stepper's data",
+    "brief text missing: 22%"
+   ]
+  },
+  {
+   "name": "limits differ",
+   "ok": true,
+   "sample": [
+    "brief rows differ: lim: [\"5%\",\"35%\"]",
+    "the limits do not show the stepper's range",
+    "brief text missing: 10%"
+   ]
+  },
+  {
+   "name": "knob misplaced",
+   "ok": true,
+   "sample": [
+    "the knob is not at the new value: 772.9 (want 718.9)"
+   ]
+  },
+  {
+   "name": "tick misplaced",
+   "ok": true,
+   "sample": [
+    "the current tick is not at the current value: 772.9 (want 734.3)"
+   ]
+  },
+  {
+   "name": "fill from the left",
+   "ok": true,
+   "sample": [
+    "the fill does not run from the minimum (right) to the new value"
+   ]
+  },
+  {
+   "name": "stepper reversed",
+   "ok": true,
+   "sample": [
+    "stepper: − must be at the minimum's end (right), + at the maximum's (left)",
+    "stepper: order must be .a-pm:first-of-type, .a-lim:first-of-type, .a-track, .a-lim:last-of-type, .a-pm:last-of-type (right to left)"
+   ]
+  },
+  {
+   "name": "stepper not labelled",
+   "ok": true,
+   "sample": [
+    "a11y: a stepper button has no label"
+   ]
+  },
+  {
+   "name": "track silent",
+   "ok": true,
+   "sample": [
+    "a11y: the track does not read its range and values"
+   ]
+  },
+  {
+   "name": "change in points wrong",
+   "ok": true,
+   "sample": [
+    "brief rows differ: val: [\"20%\",\"22%\",\"+3 نقطة\"]",
+    "the change says 3 points, the values differ by 2.00",
+    "brief text missing: +2 نقطة"
+   ]
+  },
+  {
+   "name": "change in percent wrong",
+   "ok": true,
+   "sample": [
+    "brief rows differ: val: [\"7.3\",\"8.0\",\"+20%\"]",
+    "the change says 20%, the values differ by 9.6%",
+    "brief text missing: +10%"
+   ]
+  },
+  {
+   "name": "effects differ",
+   "ok": true,
+   "sample": [
+    "brief rows differ: eff: [[\"الإيرادات\",\"+400 مليون $ سنويًا\",1],[\"العجز\",\"17.4 مليار $ بدل 17.7\",1],[\"اضطرابات المحافظات الأفقر\",\"+2\",0],[\"النمو\",\"−0.1 نقطة\",0]]",
+    "numbers: the new deficit is not 17.7 minus the extra revenue",
+    "brief text missing: +300 مليون $ سنويًا"
+   ]
+  },
+  {
+   "name": "deficit does not follow",
+   "ok": true,
+   "sample": [
+    "brief rows differ: eff: [[\"الإيرادات\",\"+300 مليون $ سنويًا\",1],[\"العجز\",\"17.0 مليار $ بدل 17.7\",1],[\"اضطرابات المحافظات الأفقر\",\"+2\",0],[\"النمو\",\"−0.1 نقطة\",0]]",
+    "numbers: the new deficit is not 17.7 minus the extra revenue",
+    "brief text missing: 17.4 مليار $ بدل 17.7"
+   ]
+  },
+  {
+   "name": "spending does not follow",
+   "ok": true,
+   "sample": [
+    "brief rows differ: eff: [[\"العجز\",\"18.9 مليار $ بدل 17.7\",0],[\"الدين إلى الناتج\",\"+0.3 نقطة سنويًا\",0],[\"مستوى التعليم\",\"يرتفع خلال 5 سنوات\",1],[\"الشرعية\",\"+1\",1]]",
+    "numbers: the new deficit is not 17.7 plus the extra spending",
+    "brief text missing: 18.4 مليار $ بدل 17.7"
+   ]
+  },
+  {
+   "name": "debt does not follow",
+   "ok": true,
+   "sample": [
+    "brief rows differ: eff: [[\"العجز\",\"18.4 مليار $ بدل 17.7\",0],[\"الدين إلى الناتج\",\"+0.9 نقطة سنويًا\",0],[\"مستوى التعليم\",\"يرتفع خلال 5 سنوات\",1],[\"الشرعية\",\"+1\",1]]",
+    "numbers: the debt change is not the extra spending over GDP 219",
+    "brief text missing: +0.3 نقطة سنويًا"
+   ]
+  },
+  {
+   "name": "saving is not the cut",
+   "ok": true,
+   "sample": [
+    "brief rows differ: eff: [[\"الوفر\",\"2.0 مليار $ سنويًا\",1],[\"التضخم\",\"+0.6 نقطة\",0],[\"اضطرابات المحافظات الأفقر\",\"+4\",0],[\"الشرعية\",\"−3\",0]]",
+    "numbers: the saving is not the cut",
+    "brief text missing: 1.2 مليار $ سنويًا"
+   ]
+  },
+  {
+   "name": "money unit",
+   "ok": true,
+   "sample": [
+    "brief rows differ: eff: [[\"الإيرادات\",\"+0.3 مليار $ سنويًا\",1],[\"العجز\",\"17.4 مليار $ بدل 17.7\",1],[\"اضطرابات المحافظات الأفقر\",\"+2\",0],[\"النمو\",\"−0.1 نقطة\",0]]",
+    "money unit: «0.3 مليار» (under 1 billion is written in millions)",
+    "brief text missing: +300 مليون $ سنويًا"
+   ]
+  },
+  {
+   "name": "setting chosen wrong",
+   "ok": true,
+   "sample": [
+    "law 1: the chosen segment is not the aria-checked one"
+   ]
+  },
+  {
+   "name": "setting choices reversed",
+   "ok": true,
+   "sample": [
+    "setting 1: choices not right to left",
+    "setting 1: choices not right to left",
+    "setting 2: choices not right to left"
+   ]
+  },
+  {
+   "name": "value block order",
+   "ok": true,
+   "sample": [
+    "value block: order must be .a-now, .a-to, .a-new, .a-delta (right to left)"
+   ]
+  },
+  {
+   "name": "footer buttons order",
+   "ok": true,
+   "sample": [
+    "footer buttons: order must be .a-ok, .a-no (right to left)"
+   ]
+  },
+  {
+   "name": "an image in the sheet",
+   "ok": true,
+   "sample": [
+    "an image in the sheet"
+   ]
+  },
+  {
+   "name": "close not round",
+   "ok": true,
+   "sample": [
+    "close button is not round"
+   ]
+  },
+  {
+   "name": "coverage without the middle views",
+   "ok": true,
+   "sample": [
+    "money: never shown clear of the fades in any view: نظام الصرف",
+    "money: never shown clear of the fades in any view: ثابت",
+    "money: never shown clear of the fades in any view: مُدار"
+   ]
+  }
+ ]
+}

@@ -1,0 +1,63 @@
+  /* ================= Screen 7, variant A: the economy adjusters («الضبط») =================
+     Built on the approved panels: the province panel's look and levels (screen 4 R, panel.css), the section identity
+     and white touches (shared), the state panel's notes and law segments (screen 5 A, state.css) and the economy
+     panel's rows and colours (screen 6 A, econ.css), all read by assemble.py. The adjuster is a pushed view inside the
+     economy sheet: the header stays, a back control replaces the tabs, the body scrolls, a fixed footer holds the
+     timing and the buttons. One view shows at a time (?adjust=tax|line|subsidy|money). */
+  .a-view { display: none; flex-direction: column; min-height: 0; }
+  .r-in > .a-view { flex: 1 1 auto; }
+  [data-adjust="tax"] .a-view[data-adjust="tax"], [data-adjust="line"] .a-view[data-adjust="line"],
+  [data-adjust="subsidy"] .a-view[data-adjust="subsidy"], [data-adjust="money"] .a-view[data-adjust="money"] { display: flex; }
+  .a-view > * { flex: none; }
+  .a-view > .r-body { flex: 1 1 auto; padding-top: var(--s2); padding-bottom: var(--s3); gap: var(--s2); }
+
+  /* the back control: where the tabs were (45 pt with the rule), the tab it returns to, a chevron pointing back (RTL) */
+  .a-nav { display: flex; align-items: center; height: 45px; margin-inline: var(--s3); border-bottom: 1px solid var(--hair); }
+  .a-back { display: flex; align-items: center; gap: var(--s1); height: 44px; color: var(--t1); font-size: var(--fs-val); line-height: var(--lh-val); font-weight: 600; }
+  .a-bk { transform: rotate(180deg); color: var(--t2); }
+
+  /* what is adjusted, on one line */
+  .a-title { display: flex; align-items: baseline; gap: var(--s2); }
+  .a-title b { font-size: var(--fs-val); line-height: var(--lh-val); font-weight: 600; }
+  .a-title span { font-size: var(--fs-sec); line-height: var(--lh-sec); font-weight: 500; color: var(--t2); }
+
+  /* the current value, then the new one (RTL: right to left), each after its small label on one line, and the change */
+  .a-val { display: flex; align-items: center; gap: var(--s2); height: 24px; }
+  .a-now, .a-new { display: flex; align-items: baseline; gap: var(--s1); }
+  .a-val em { font-style: normal; font-size: var(--fs-label); line-height: var(--lh-label); font-weight: 500; color: var(--t2); }
+  .a-val b { font-size: var(--title); line-height: var(--lh-title); font-weight: 700; white-space: nowrap; }
+  .a-now b { color: var(--t2); }
+  .a-unit { font-style: normal; font-size: var(--fs-sec); line-height: var(--lh-sec); font-weight: 500; color: var(--t2); white-space: nowrap; }   /* once, after the new amount */
+  .a-to { color: var(--t2); }
+  .a-delta { margin-inline-start: auto; }
+
+  /* the stepper: − at the minimum's end (right), + at the maximum's end (left), the range track between them; the fill
+     and the knob mark the new value, a tick marks the current one (positions set by assemble.py from the data) */
+  .a-step { display: flex; align-items: center; gap: var(--s2); height: 32px; }   /* the buttons' 44 pt hit boxes reach 6 pt into the gaps */
+  .a-pm { flex: none; width: 32px; height: 32px; border-radius: 50%; display: grid; place-items: center; color: var(--t1); box-shadow: inset 0 0 0 1px var(--w-line); }
+  .a-lim { flex: none; font-size: var(--fs-label); line-height: var(--lh-label); font-weight: 500; color: var(--t2); }
+  .a-track { position: relative; flex: 1 1 auto; height: 6px; border-radius: 3px; background: rgba(169, 188, 203, .22); }
+  .a-fill { position: absolute; top: 0; bottom: 0; right: 0; width: var(--new); border-radius: 3px; background: var(--teal); }
+  .a-cur { position: absolute; top: -5px; right: var(--now); width: 2px; height: 16px; margin-right: -1px; border-radius: 1px; background: var(--t2); }
+  .a-knob { position: absolute; top: -7px; right: var(--new); width: 20px; height: 20px; margin-right: -10px; border-radius: 50%; background: var(--t1); box-shadow: 0 1px 4px rgba(0, 0, 0, .5); }
+
+  /* the expected effects: a heading, then a two-column grid of label over value, blue an improvement, amber a worsening */
+  .a-eff { display: flex; flex-direction: column; gap: var(--s1); }
+  .a-eff h3 { font-size: var(--fs-sec); line-height: var(--lh-sec); font-weight: 600; }
+  .a-grid { display: grid; grid-template-columns: 1fr 1fr; column-gap: 16px; row-gap: var(--s2); }
+  .a-e { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+  .a-e dt { font-size: var(--fs-sec); line-height: var(--lh-sec); font-weight: 500; color: var(--t2); white-space: nowrap; }
+  .a-e dd { font-size: var(--fs-val); line-height: var(--lh-val); font-weight: 600; white-space: nowrap; }
+  .a-e[data-good="1"] dd { color: var(--blue); }
+  .a-e[data-good="0"] dd { color: var(--amber); }
+
+  /* the footer stays in view: when the change starts and how often, then confirm (filled white) and cancel (outline) */
+  /* 4 pt above the timing line, 4 pt under the buttons: the buttons' 44 pt hit boxes (4 pt beyond each edge) stay inside the panel */
+  .a-foot { display: flex; flex-direction: column; gap: var(--s1); height: 60px; padding: var(--s1) var(--s3); box-shadow: inset 0 1px 0 var(--hair); }
+  .a-when { font-size: var(--fs-label); line-height: var(--lh-label); font-weight: 500; color: var(--t2); text-align: center; white-space: nowrap; }
+  .a-btns { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s2); }
+  .a-btn { height: 36px; border-radius: var(--r-ctl); font-size: var(--fs-val); line-height: var(--lh-val); font-weight: 600; }
+  .a-ok { background: var(--t1); color: #0B1218; }
+  .a-no { color: var(--t1); box-shadow: inset 0 0 0 1px var(--w-line); }
+  /* the scroll hint sits in the body's clear strip, above the footer */
+  [data-adjust] .r-hint { bottom: 64px; }
