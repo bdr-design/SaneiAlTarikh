@@ -40,7 +40,7 @@ const TOK = {
   // the panel's size table (the owner's reference): control heights, radii, icon sizes, gaps
   ctlH: { '.r-x': 32, '.r-why': 14, '.r-act': 44, '.r-tab': 44, '.r-btn': 24, '.s-sg': 26 },
   radius: { '.sheet': 12, '.r-act': 10, '.s-proj': 10, '.r-tile': 6, '.r-chip': 6, '.r-btn': 6, '.r-cap': 10, '.s-seg': 6, '.s-emb': 10 },
-  sheetIcon: [['.r-cap svg', 10], ['.r-arr', 10], ['.r-kl svg', 14], ['.r-x svg', 16], ['.s-emb svg', 16], ['.r-tile svg', 17], ['.r-tab svg', 17]],
+  sheetIcon: [['.r-cap svg', 10], ['.r-arr', 10], ['.r-kl svg', 14], ['.r-x svg', 16], ['.r-hint svg', 16], ['.s-emb svg', 16], ['.r-tile svg', 17], ['.r-tab svg', 17]],
   sheetSpace: [0, 2, 4, 8, 12, 16],
   title18: ['r-name', 'r-kv'],
   fade: 24,
@@ -223,7 +223,7 @@ async function measure(p, d, b3, view) {
       const a = st[i].line, b = st[j].line;
       if (Math.min(a.x1, b.x1) - Math.max(a.x0, b.x0) > 0.5 && Math.min(a.y1, b.y1) - Math.max(a.y0, b.y0) > 0.5) issues.push(`text overlap "${st[i].t}" / "${st[j].t}"`);
     }
-    const icons = [...document.querySelectorAll('.hud svg')].filter((s) => s.getClientRects().length && !s.closest('.frost') && getComputedStyle(s).visibility !== 'hidden')
+    const icons = [...document.querySelectorAll('.hud svg')].filter((s) => s.getClientRects().length && !s.closest('.frost') && !s.closest('.r-hint') && getComputedStyle(s).visibility !== 'hidden')   // the scroll hint sits in the fade by design
       .map((s) => { const r = box(s.getBoundingClientRect()), c = clipOf(s).c; return { s, r: { x0: Math.max(r.x0, c.x0), x1: Math.min(r.x1, c.x1), y0: Math.max(r.y0, c.y0), y1: Math.min(r.y1, c.y1) } }; })
       .filter((o) => o.r.x1 - o.r.x0 > 0.05 && o.r.y1 - o.r.y0 > 0.05);
     texts.forEach((t) => {
@@ -339,7 +339,8 @@ async function measure(p, d, b3, view) {
     // scroll hint: when the bottom edge hides content, content visibly fades into it (at least 8 pt of a row in the fade)
     { const c = bd.getBoundingClientRect();
       const rows = [...bd.querySelectorAll('.r-sec h3, .s-off, .s-pol, .s-proj, .s-seats, .r-sc, .r-act, .r-kpi, .s-note')].filter(visible).map((e) => e.getBoundingClientRect());
-      if (root.dataset.fbot === '1' && !rows.some((rr) => Math.min(rr.bottom, c.bottom) - Math.max(rr.top, c.bottom - TOK.fade) >= 8)) issues.push('no scroll hint: nothing fades into the bottom edge'); }
+      if (root.dataset.fbot === '1' && !rows.some((rr) => Math.min(rr.bottom, c.bottom) - Math.max(rr.top, c.bottom - TOK.fade) >= 8) && !visible(q('.r-hint'))) issues.push('no scroll hint: nothing fades into the bottom edge');
+      if ((root.dataset.fbot === '1') !== visible(q('.r-hint'))) issues.push(`scroll hint chevron ${visible(q('.r-hint')) ? 'shown without' : 'missing with'} content below`); }
     // section identity: the open «الدولة» dock item, the panel's top line, the emblem and the open tab in pearl white
     { const on = qa('.dock-item.on');
       if (visible(q('.dock'))) {
@@ -383,14 +384,15 @@ async function measure(p, d, b3, view) {
     const all = q('.sheet').textContent.replace(/\s+/g, ' ');
     Object.values(BRIEF).flat().forEach((s) => { if (!all.includes(s)) issues.push(`brief text missing: ${s}`); });
     // ---------- 10. map: Egypt and the delta clear of every panel and hit box ----------
-    const m = window.__map;
+    const m = window.__map, mr = q('.map').getBoundingClientRect(), mk = mr.width / 1688;
+    const live = (x0, y0, x1, y1) => ({ x0: mr.left + x0 * mk, y0: mr.top + y0 * mk, x1: mr.left + x1 * mk, y1: mr.top + y1 * mk });   // map-space box -> screen, as drawn now
     const cover = (rr, what) => {
       prs.forEach((pp) => { if (inter(rr, pp.r)) issues.push(`${what} covered by panel ${pp.l}`); });
       taps.forEach((t) => { if (inter(rr, t.hit)) issues.push(`${what} under the hit box of ${t.label}`); });
       if (rr.x0 < S - eps || rr.x1 > W - S + eps || rr.y0 < 0 || rr.y1 > H - B + eps) issues.push(`${what} outside the safe screen`);
     };
-    cover(m.delta, 'Nile delta');
-    cover(m.egypt, 'Egypt');
+    cover(live(722, 428, 836, 492), 'Nile delta');      // the boxes placeMap keeps clear (index.html: DELTA and EG)
+    cover(live(583, 424, 945, 732), 'Egypt');
     const me = q('.map').getBoundingClientRect();
     if (me.left > 0.5 || me.top > 0.5 || me.right < W - 0.5 || me.bottom < H - 0.5) issues.push('map not full-bleed');
     // map labels and city dots never cut by a panel edge (2 pt margin, halo included), never under the name pill
@@ -496,8 +498,9 @@ async function selftest(b) {
     ['fades wrong', d, '&tab=policies', '', /fades .* do not match the scroll state/, () => { document.documentElement.dataset.fbot = '0'; }],
     ['cut at a hard edge', se, '&tab=policies', '', /clipped text \(bottom\)|control cut by its scroll area \(bottom\)/, () => { document.documentElement.dataset.fbot = '0'; }],
     ['fade flag without a mask', se, '&tab=policies', '.r-body { -webkit-mask-image: none !important; mask-image: none !important; }', /clipped text \(bottom\)|control cut by its scroll area \(bottom\)/],
-    ['no scroll hint', d, '&tab=policies', '.r-body[data-tab="policies"] .r-sec:first-child { margin-bottom: 600px !important; }', /no scroll hint: nothing fades into the bottom edge/],
-    ['% before its number', d, '&tab=projects', '', /% shown before its number/, () => { document.querySelector('.s-note').textContent = 'إلغاء مشروع يُرجع ما دُفع فيه ناقص 10%.'; }],
+    ['no scroll hint', d, '&tab=policies', '.r-body[data-tab="policies"] .r-sec:first-child { margin-bottom: 600px !important; } .r-hint { display: none !important; }', /no scroll hint: nothing fades into the bottom edge/],
+    ['hint chevron missing', d, '&tab=leader', '.r-hint { display: none !important; }', /scroll hint chevron missing with content below/],
+    ['% before its number', d, '&tab=projects', '', /% shown before its number/, () => { document.querySelector('.r-body[data-tab="projects"] .s-note').textContent = 'إلغاء مشروع يُرجع ما دُفع فيه ناقص 10%.'; }],
     ['brief text scrolled away', d, '&tab=policies', '', /brief text not fully visible: حالة الطوارئ/, () => { const b = document.querySelector('.r-body[data-tab="policies"]'); b.scrollTop = b.scrollHeight; }],
     ['brief text', d, '', '', /brief text not fully visible: لماذا؟|brief text missing/, () => { document.querySelectorAll('.r-why').forEach((e) => { e.textContent = 'لماذا'; }); }],
     ['map label cut', d, '', '.labels .cut { display: inline !important; }', /map (label|city dot) .* (cut by a panel edge|squeezed)/],

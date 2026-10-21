@@ -37,7 +37,7 @@ const TOK = {
   // the panel's size table (the owner's reference): control heights, radii, icon sizes, gaps
   ctlH: { '.r-x': 32, '.r-why': 14, '.r-act': 44, '.r-more': 36, '.r-tab': 44, '.r-btn': 24, '.r-rd': 26, '.r-link': 44 },
   radius: { '.sheet': 12, '.r-act': 10, '.r-link': 10, '.r-more': 10, '.r-dec': 10, '.r-tile': 6, '.r-chip': 6, '.r-btn': 6, '.r-cap': 10 },
-  sheetIcon: [['.r-cap svg', 10], ['.r-arr', 10], ['.r-kl svg', 14], ['.r-x svg', 16], ['.r-more svg', 16], ['.r-chev', 16], ['.r-tile svg', 17], ['.r-tab svg', 17], ['.r-dic', 17]],
+  sheetIcon: [['.r-cap svg', 10], ['.r-arr', 10], ['.r-kl svg', 14], ['.r-x svg', 16], ['.r-hint svg', 16], ['.r-more svg', 16], ['.r-chev', 16], ['.r-tile svg', 17], ['.r-tab svg', 17], ['.r-dic', 17]],
   sheetSpace: [0, 2, 4, 8, 12, 16],
   title18: ['r-name', 'r-kv'],
   fade: 24,
@@ -213,7 +213,7 @@ async function measure(p, d, b3, view) {
       const a = st[i].line, b = st[j].line;
       if (Math.min(a.x1, b.x1) - Math.max(a.x0, b.x0) > 0.5 && Math.min(a.y1, b.y1) - Math.max(a.y0, b.y0) > 0.5) issues.push(`text overlap "${st[i].t}" / "${st[j].t}"`);
     }
-    const icons = [...document.querySelectorAll('.hud svg')].filter((s) => s.getClientRects().length && !s.closest('.frost') && getComputedStyle(s).visibility !== 'hidden')
+    const icons = [...document.querySelectorAll('.hud svg')].filter((s) => s.getClientRects().length && !s.closest('.frost') && !s.closest('.r-hint') && getComputedStyle(s).visibility !== 'hidden')   // the scroll hint sits in the fade by design
       .map((s) => { const r = box(s.getBoundingClientRect()), c = clipOf(s).c; return { s, r: { x0: Math.max(r.x0, c.x0), x1: Math.min(r.x1, c.x1), y0: Math.max(r.y0, c.y0), y1: Math.min(r.y1, c.y1) } }; })
       .filter((o) => o.r.x1 - o.r.x0 > 0.05 && o.r.y1 - o.r.y0 > 0.05);
     texts.forEach((t) => {
@@ -346,7 +346,8 @@ async function measure(p, d, b3, view) {
     { const bd = q(view === 'card' ? '.r-body.r-ov' : '.r-body.r-gv'), c = bd.getBoundingClientRect();
       const rows = [...bd.querySelectorAll('.r-link, .r-dec h3, .r-dbody, .r-gov, .r-radios, .r-sec h3, .r-act, .r-more, .r-sc, .r-kpi')].filter(visible).map((e) => e.getBoundingClientRect());
       const inBand = (y0, y1) => rows.some((r) => Math.min(r.bottom, y1) - Math.max(r.top, y0) >= 8);
-      if (root.dataset.fbot === '1' && !inBand(c.bottom - TOK.fade, c.bottom)) issues.push('no scroll hint: nothing fades into the bottom edge');
+      if (root.dataset.fbot === '1' && !inBand(c.bottom - TOK.fade, c.bottom) && !visible(q('.r-hint'))) issues.push('no scroll hint: nothing fades into the bottom edge');
+      if ((root.dataset.fbot === '1') !== visible(q('.r-hint'))) issues.push(`scroll hint chevron ${visible(q('.r-hint')) ? 'shown without' : 'missing with'} content below`);
       // (the top edge needs no hint: the player reaches it by scrolling down, so they know content is above)
     }
     // the open view only
@@ -521,7 +522,8 @@ async function selftest(b) {
     ['decision buttons swapped', d, '&view=govern&scroll=end', '.r-dbtn { flex-direction: row-reverse; }', /«اعتماد البرنامج» must be right of «تأجيل»/],
     ['fit level not the loosest', d, '', '', /fit level 3 is not the loosest that fits/, () => { document.documentElement.dataset.rfit = '3'; }],
     ['details not at level 0', d, '&view=govern', '', /details at fit level 2/, () => { document.documentElement.dataset.rfit = '2'; }],
-    ['no scroll hint', d, '&view=govern', '.r-links { margin-top: 400px !important; }', /no scroll hint: nothing fades into the bottom edge/],
+    ['no scroll hint', d, '&view=govern', '.r-links { margin-top: 400px !important; } .r-hint { display: none !important; }', /no scroll hint: nothing fades into the bottom edge/],
+    ['hint chevron missing', d, '&view=govern', '.r-hint { display: none !important; }', /scroll hint chevron missing with content below/],
     ['close not round', d, '', '.r-x { width: 40px !important; }', /close button is not round/],
     ['RTL order', d, '&view=govern', '.r-link .r-chev { order: -1; }', /link row 1: order must be tile, text/],
     ['two tabs selected', d, '&view=govern', '', /exactly one tab must be selected/, () => { document.querySelectorAll('.r-tab')[1].classList.add('on'); }],

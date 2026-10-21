@@ -1446,7 +1446,7 @@ As in final-1.0, plus:
 | Status | Screens |
 |---|---|
 | **Approved** | Main play screen (as designed for the 17 Pro Max); UI tokens; main menu; new-game flow; **province panel** (2026-10-20: a 320 pt card first, the map stays the centre; «تفاصيل المحافظة» opens the full-height details with 4 tabs; `design/screen4/R`, brief `design/shared/SCREEN4_BRIEF.md`) |
-| **Pending design** (user's list) | Province details tabs الإنشاءات / القوات / السياسات; state (proposal shown 2026-10-20); economy budget; markets; politics and parties; internal and unrest; military fronts; forces and production; diplomacy; UN Security Council; intelligence; research; event and decision modal; war and peace; notifications; saves and settings; the "why" sheet; end screens |
+| **Pending design** (user's list) | Province details tabs الإنشاءات / القوات / السياسات; state (go-ahead 2026-10-21, `design/screen5/A`, being fitted and reviewed); economy budget; markets; politics and parties; internal and unrest; military fronts; forces and production; diplomacy; UN Security Council; intelligence; research; event and decision modal; war and peace; notifications; saves and settings; the "why" sheet; end screens |
 | **Pending design** (added) | Speed popover; map-mode popover; **front-sector arrow interaction** (own sector highlighted, partner sectors shown read-only); pending-orders list; credits and sources; onboarding; country info card; **government chooser** (D-29); **small-phone variants of the top row** (D-31); **save mirror prompt** (D-28) |
 
 **Province details, engine follow-up (from the approved province panel, 2026-10-20).** The «الحكم» tab shows three levers the engine does not model yet. Each needs a data model before it is built; until then the values are illustrative.
@@ -1469,6 +1469,28 @@ Unchanged:
 | Glass | `rgba(9,17,25,0.66)`, system blur, 1 px cyan-tinted border |
 | Accents | Cyan and teal; calm, low-glare palette; not pure black; no harsh neon |
 | Map grade | Brightness ≈0.72, saturation ≈0.78, cool tint; cyan borders at about 60%; faint cyan province lines; cyan glow and light fill on the player's country |
+
+**Panels (2026-10-20/21, owner decisions D-3, `whiteTouches` and `sectionIdentity`).**
+- **Panels are opaque** `rgb(12,20,28)` with no blur (D-3: «غامق دايمًا»). This replaces the glass row above for panels.
+- **White touches** on the dark panels, confirmed by the owner («حلو الاسود ممزوج مع المربعات البيضه»):
+  - white tile icons;
+  - filled white primary buttons and chosen segments with dark text;
+  - white-outlined secondary buttons.
+- **Section identity:** each dock section has one colour, used only on its chrome: the panel's top line, the header emblem, the open tab, and the dock item while open.
+
+  | Section | Colour |
+  |---|---|
+  | الدولة | `#E9EEF4` |
+  | الاقتصاد | `#43C08A` |
+  | الداخلية والسياسة | `#A08CFF` |
+  | الجيش | `#BDB46A` |
+  | الخارجية | `#5B86F2` |
+  | الاستخبارات | `#C873D6` |
+  | البحث | `#9EDB5B` |
+  | المزيد | `#A9BCCB` |
+
+  Data colours (teal, cyan, blue, amber, red) never change with the section.
+- **The shared files:** `design/shared/section_identity.css`, and the province panel's `design/screen4/R/_build/panel.css` for the panel sizes.
 
 ### 6.3 Main play screen (approved)
 

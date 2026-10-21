@@ -80,6 +80,6 @@
   "screen4ProvincePanel": "APPROVED 2026-10-20 («ممتاز»): design/screen4/R: step 1 the 320 pt card (map stays the centre, HUD unchanged), step 2 «تفاصيل المحافظة» = full-height details with 4 tabs; the overview's two actions live in the details tabs (الإنشاءات, السياسات); dark HUD; Western digits; USD",
   "hudColour": "DARK (owner delegated the choice 2026-10-20 with the criterion 'does not weigh on the game'): the approved dark bars stay; the white bars of the owner's reference images are not used",
   "sectionIdentity": "GO-AHEAD 2026-10-21 (owner: «كمل الباقي بدقه»): one colour per dock section on its chrome only (top line, header emblem, open tab, dock item while open): State #E9EEF4, Economy #43C08A, Internal/Politics #A08CFF, Military #BDB46A, Foreign #5B86F2, Intelligence #C873D6, Research #9EDB5B, More #A9BCCB; data colours unchanged; dock neutral except the open section",
-  "whiteTouches": "GO-AHEAD 2026-10-21: white touches on the dark panels (identity line/emblem, open tab, filled white primary buttons, white tile icons); white panels NOT used (D-3 dark always stands)"
+  "whiteTouches": "CONFIRMED 2026-10-21 (owner: «حلو الاسود ممزوج مع المربعات البيضه»): white touches on the dark panels (identity line/emblem, open tab, filled white primary buttons and chosen segments, white tile icons); white panels NOT used (D-3 dark always stands)"
  }
 }
