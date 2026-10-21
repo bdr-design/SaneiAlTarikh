@@ -34,7 +34,7 @@ The owner rejected the first three variants and eleven styles, then sent two ima
   - Small outlined buttons and chips: 24 pt tall.
   - Radio rows: 26 pt. Tabs and link rows: 44. «تفاصيل» row: 36.
   - Every control keeps a 44 × 44 pt hit box.
-  - 18 pt bold is for the province name and the 3 headline numbers.
+  - 18 pt bold is for the province name and the 3 headline numbers. Since screen 6 (2026-10-21, under the owner's delegation), it also covers a tab's own summary numbers, such as the budget's revenue, spending and deficit. They are never shown with the headline numbers.
 - **Light build rules for the app** («مايثقل على اللعبة»):
   1. **No blur anywhere.** The panels are opaque (D-3).
   2. **No masks on scrolling content.** An edge fade is a 24 pt gradient overlay from the panel colour to clear, drawn above the scroll view, with hit testing off. It shows only while that edge hides content. It looks the same as the mockup's mask, which only reveals the same opaque panel colour. At the bottom, the overlay ends in a 22 pt band of solid panel colour that holds the scroll hint.
