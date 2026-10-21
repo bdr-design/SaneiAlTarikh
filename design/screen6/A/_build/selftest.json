@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-10-21T06:33:38.826Z",
+ "ranAt": "2026-10-21T08:01:19.017Z",
  "inputs": {
   "files": [
    "index.html",
@@ -20,7 +20,7 @@
    "header_cairo.jpg",
    "map_overlay_cairo.svg"
   ],
-  "sha1": "be43d4f138da3879d1693a6bd2b87ee5b7011baa"
+  "sha1": "a447e54024651ff54108ec3015ad53ac02f2a720"
  },
  "cleanIssues": {
   "i16promax": [],
@@ -48,6 +48,7 @@
   "se_taxes_at98": [],
   "se_taxes_at196": [],
   "se_trade_at98": [],
+  "se_trade_at196": [],
   "se coverage": []
  },
  "results": [
@@ -89,9 +90,9 @@
    "name": "control height",
    "ok": true,
    "sample": [
-    "control height 40.00 for .e-row (want 44): الدعم والحماية الاجتماعية1",
-    "control height 40.00 for .e-row (want 44): الإدارة العامة9.9 مليار $ ",
-    "control height 40.00 for .e-row (want 44): التعليم7.3 مليار $ · 11%"
+    "control height 40.00 for .e-row (want 44): الدعم والحماية الاجتماعية:",
+    "control height 40.00 for .e-row (want 44): الإدارة العامة: 9.9 مليار ",
+    "control height 40.00 for .e-row (want 44): التعليم: 7.3 مليار دولار ·"
    ]
   },
   {
@@ -106,9 +107,9 @@
    "name": "gap",
    "ok": true,
    "sample": [
-    "gap 6 on الدعم والحماية الاجتماعية1",
-    "gap 6 on الدعم والحماية الاجتماعية1",
-    "gap 6 on الفوائد13.3 مليار $ · 20% "
+    "gap 6 on الدعم والحماية الاجتماعية:",
+    "gap 6 on الدعم والحماية الاجتماعية:",
+    "gap 6 on الفوائد: 13.3 مليار دولار "
    ]
   },
   {
@@ -132,35 +133,34 @@
    "name": "hit overlap",
    "ok": true,
    "sample": [
-    "hit overlap الإدارة العامة9.9 مليار $  / التعليم7.3 مليار $ · 11%",
-    "hit overlap التعليم7.3 مليار $ · 11% / الاستثمار العام7.3 مليار $"
+    "hit overlap الإدارة العامة: 9.9 مليار  / التعليم: 7.3 مليار دولار ·"
    ]
   },
   {
    "name": "tap in the side inset",
    "ok": true,
    "sample": [
+    "text in side inset: نظرة عامة",
     "text in side inset: 219",
-    "text in side inset: +5.1%",
-    "text in side inset: لماذا؟"
+    "text in side inset: +5.1%"
    ]
   },
   {
    "name": "text in the side inset",
    "ok": true,
    "sample": [
+    "text in side inset: نظرة عامة",
     "text in side inset: 219",
-    "text in side inset: +5.1%",
-    "text in side inset: لماذا؟"
+    "text in side inset: +5.1%"
    ]
   },
   {
    "name": "panel in the side inset",
    "ok": true,
    "sample": [
+    "text in side inset: نظرة عامة",
     "text in side inset: 219",
-    "text in side inset: +5.1%",
-    "text in side inset: لماذا؟"
+    "text in side inset: +5.1%"
    ]
   },
   {
@@ -214,7 +214,7 @@
    "sample": [
     "panel not opaque: الاقتصاد: مصر rgba(9, 17, 25, 0.66)",
     "contrast 3.56 for \"نظرة عامة\"",
-    "contrast 4.08 for \"الميزانية\""
+    "contrast 3.15 for \"الميزانية\""
    ]
   },
   {
@@ -342,36 +342,36 @@
    "name": "fades wrong",
    "ok": true,
    "sample": [
-    "clipped text (bottom): \"7.3\" 863.86..881 y 401..418",
-    "clipped text (bottom): \"مليار $ ·\" 822.52..863.86 y 401..418",
-    "clipped text (bottom): \"11%\" 797.81..822.52 y 401..418"
+    "clipped text (bottom): \"التعليم\" 834.13..869 y 410..429",
+    "control cut by its scroll area (bottom): التعليم: 7.3 مليار دولار ·",
+    "hit box shaved by its clip: التعليم: 7.3 مليار دولار ·"
    ]
   },
   {
    "name": "cut at a hard edge",
    "ok": true,
    "sample": [
-    "clipped text (top): \"48.6\" 569.05..607.03 y 134..161",
-    "clipped text (top): \"66.3\" 484.09..522.08 y 134..161",
-    "clipped text (top): \"−17.7\" 399.14..447.92 y 134..161"
+    "clipped text (bottom): \"التعليم\" 599.13..634 y 358..377",
+    "control cut by its scroll area (bottom): التعليم: 7.3 مليار دولار ·",
+    "hit box shaved by its clip: التعليم: 7.3 مليار دولار ·"
    ]
   },
   {
    "name": "fade flag without a mask",
    "ok": true,
    "sample": [
-    "clipped text (top): \"48.6\" 569.05..607.03 y 134..161",
-    "clipped text (top): \"66.3\" 484.09..522.08 y 134..161",
-    "clipped text (top): \"−17.7\" 399.14..447.92 y 134..161"
+    "clipped text (top): \"48.6\" 608.02..646 y 123..150",
+    "clipped text (top): \"66.3\" 519.61..557.59 y 123..150",
+    "clipped text (top): \"17.7\" 431.19..469.17 y 123..150"
    ]
   },
   {
    "name": "fade without the hint strip",
    "ok": true,
    "sample": [
-    "clipped text (top): \"48.6\" 569.05..607.03 y 134..161",
-    "clipped text (top): \"66.3\" 484.09..522.08 y 134..161",
-    "clipped text (top): \"−17.7\" 399.14..447.92 y 134..161"
+    "clipped text (top): \"48.6\" 608.02..646 y 123..150",
+    "clipped text (top): \"66.3\" 519.61..557.59 y 123..150",
+    "clipped text (top): \"17.7\" 431.19..469.17 y 123..150"
    ]
   },
   {
@@ -380,7 +380,7 @@
    "sample": [
     "no scroll hint: nothing fades into the bottom edge",
     "scroll hint chevron missing with content below",
-    "brief text not fully visible: بنود الإنفاق"
+    "brief text not fully visible: الخزينة 36.0 مليار $ · تنقص 1.5 مليار $ شهريًا"
    ]
   },
   {
@@ -401,7 +401,7 @@
    "name": "hint over legible text",
    "ok": true,
    "sample": [
-    "scroll hint not centred in the clear strip under the fade: y 241.0..259.0 (strip 395.0..417.0)",
+    "scroll hint not centred in the clear strip under the fade: y 268.0..286.0 (strip 395.0..417.0)",
     "scroll hint over text: \"الدعم والحماية الاجتماعية\"",
     "scroll hint over text: \"17.2\""
    ]
@@ -412,22 +412,23 @@
    "sample": [
     "% shown before its number: \"من الناتج 8.1%\"",
     "amber check: «8.1% من الناتج» not found",
-    "brief text missing: 8.1% من الناتج"
+    "brief rows differ: status: [[\"عجز الموازنة\",\"من الناتج 8.1%\"],[\"الدين العام\",\"73% من الناتج\"],[\"سعر الصرف\",\"5.80 جنيه للدولار\"],[\"التصنيف\",\"BB+ مستقر\"],[\"نظام الصرف\",\"تعويم مُدار\"],[\"قابل"
    ]
   },
   {
    "name": "brief text scrolled away",
    "ok": true,
    "sample": [
-    "clipped text (top): \"7.3\" 863.86..881 y 150..167",
-    "clipped text (top): \"مليار $ ·\" 822.52..863.86 y 150..167",
-    "clipped text (top): \"11%\" 797.81..822.52 y 150..167"
+    "clipped text (top): \"الاستثمار العام\" 798.22..869 y 146..165",
+    "control cut by its scroll area (top): الاستثمار العام: 7.3 مليار",
+    "hit box shaved by its clip: الاستثمار العام: 7.3 مليار"
    ]
   },
   {
    "name": "brief text",
    "ok": true,
    "sample": [
+    "brief rows differ: headline numbers: [[\"الناتج المحلي\",\"219\",\"مليار $\",\"+5.1% سنويًا\",\"لماذا\"],[\"التضخم\",\"10.3%\",\"\",\"+0.1 نقطة شهريًا\",\"لماذا\"],[\"البطالة\",\"8.9%\",\"\",\"دون تغير\",\"لماذا\"]]",
     "brief text missing: لماذا؟",
     "brief text missing: لماذا؟"
    ]
@@ -574,9 +575,34 @@
    "name": "bars in the section colour",
    "ok": true,
    "sample": [
-    "a share bar in the section colour (bars are data)",
-    "a share bar in the section colour (bars are data)",
-    "a share bar in the section colour (bars are data)"
+    "section colour on data chrome: I",
+    "section colour on data chrome: I",
+    "section colour on data chrome: I"
+   ]
+  },
+  {
+   "name": "bars in another colour",
+   "ok": true,
+   "sample": [
+    "a share bar not in teal (bars are data): rgb(111, 182, 255)",
+    "a share bar not in teal (bars are data): rgb(111, 182, 255)",
+    "a share bar not in teal (bars are data): rgb(111, 182, 255)"
+   ]
+  },
+  {
+   "name": "section colour on an icon",
+   "ok": true,
+   "sample": [
+    "section colour on data chrome: i r-chev",
+    "section colour on data chrome: [object SVGAnimatedString]",
+    "section colour on data chrome: i r-chev"
+   ]
+  },
+  {
+   "name": "section colour on a border",
+   "ok": true,
+   "sample": [
+    "section colour on data chrome: عجز الموازنة8.1% من الناتج"
    ]
   },
   {
@@ -590,14 +616,179 @@
    "name": "legitimacy cost not amber",
    "ok": true,
    "sample": [
-    "«الشرعية» not in amber: rgb(234, 242, 247)"
+    "«الشرعية» not in amber: rgb(234, 242, 247)",
+    "white touch off: .r-chip.e-bad color rgb(234, 242, 247) (want rgb(242, 177, 76))"
    ]
   },
   {
    "name": "deficit not amber",
    "ok": true,
    "sample": [
-    "«−17.7» not in amber: rgb(234, 242, 247)"
+    "«17.7» not in amber: rgb(234, 242, 247)"
+   ]
+  },
+  {
+   "name": "trade deficit not amber",
+   "ok": true,
+   "sample": [
+    "«−26.6» not in amber: rgb(234, 242, 247)",
+    "«−4.3» not in amber: rgb(234, 242, 247)"
+   ]
+  },
+  {
+   "name": "deficit share not amber",
+   "ok": true,
+   "sample": [
+    "«8.1% من الناتج» not in amber: rgb(234, 242, 247)"
+   ]
+  },
+  {
+   "name": "legitimacy chip outline white",
+   "ok": true,
+   "sample": [
+    "white touch off: .r-chip.e-bad borderTopColor rgba(234, 242, 247, 0.5) (want rgba(242, 177, 76, 0.7))"
+   ]
+  },
+  {
+   "name": "legitimacy chip without its arrow",
+   "ok": true,
+   "sample": [
+    "legitimacy chip without its down arrow"
+   ]
+  },
+  {
+   "name": "tab icons swapped",
+   "ok": true,
+   "sample": [
+    "tab icons must be grid, pie, percent, ship: #i-grid,#i-ship,#i-percent,#i-pie"
+   ]
+  },
+  {
+   "name": "18 pt on a summary label",
+   "ok": true,
+   "sample": [
+    "18 pt is for the panel's name and the headline numbers only: \"الإيرادات\"",
+    "18 pt is for the panel's name and the headline numbers only: \"الإنفاق\"",
+    "18 pt is for the panel's name and the headline numbers only: \"العجز\""
+   ]
+  },
+  {
+   "name": "summary number not 18",
+   "ok": true,
+   "sample": [
+    "summary number not 18/700: 48.6 14px/700",
+    "summary number not 18/700: 66.3 14px/700",
+    "summary number not 18/700: 17.7 14px/700"
+   ]
+  },
+  {
+   "name": "summary number off its label",
+   "ok": true,
+   "sample": [
+    "summary number 48.6 not under its label",
+    "summary number 66.3 not under its label",
+    "summary number 17.7 not under its label"
+   ]
+  },
+  {
+   "name": "fixed row height",
+   "ok": true,
+   "sample": [
+    "size 332.0x40.0 for .e-row (want any x 44)"
+   ]
+  },
+  {
+   "name": "line radius",
+   "ok": true,
+   "sample": [
+    "radius 6 for .e-row (want 10)",
+    "radius 6 for .e-row (want 10)",
+    "radius 6 for .e-row (want 10)"
+   ]
+  },
+  {
+   "name": "bar radius",
+   "ok": true,
+   "sample": [
+    "radius 1 for .e-bar (want 3)",
+    "radius 1 for .e-bar (want 3)",
+    "radius 1 for .e-bar (want 3)"
+   ]
+  },
+  {
+   "name": "lock size",
+   "ok": true,
+   "sample": [
+    "icon size 12x12 (want 16): i e-lock"
+   ]
+  },
+  {
+   "name": "background image",
+   "ok": true,
+   "sample": [
+    "a background image in the sheet (الناتج المحلي 219مليار $ +)",
+    "a background image in the sheet (التضخم 10.3% +0.1 نقطة شهر)",
+    "a background image in the sheet (البطالة 8.9% دون تغير لماذ)"
+   ]
+  },
+  {
+   "name": "treasury not the HUD's",
+   "ok": true,
+   "sample": [
+    "numbers: the treasury 40 is not the HUD's 36.0 مليار $",
+    "brief text missing: الخزينة 36.0 مليار $ · تنقص 1.5 مليار $ شهريًا",
+    "brief text missing: الخزينة 36.0 مليار $ · تنقص 1.5 مليار $ شهريًا"
+   ]
+  },
+  {
+   "name": "treasury falls the wrong amount",
+   "ok": true,
+   "sample": [
+    "amber check: «تنقص 1.5 مليار $ شهريًا» not found",
+    "numbers: the treasury falls 3 a month, but the deficit 17.7 is 1.47 a month",
+    "brief text missing: الخزينة 36.0 مليار $ · تنقص 1.5 مليار $ شهريًا"
+   ]
+  },
+  {
+   "name": "treasury fall not amber",
+   "ok": true,
+   "sample": [
+    "«تنقص 1.5 مليار $ شهريًا» not in amber: rgb(169, 188, 203)"
+   ]
+  },
+  {
+   "name": "tabs not a tab list",
+   "ok": true,
+   "sample": [
+    "a11y: the tabs are not a tab list"
+   ]
+  },
+  {
+   "name": "why without its subject",
+   "ok": true,
+   "sample": [
+    "a11y: «لماذا؟» 2 does not name its subject"
+   ]
+  },
+  {
+   "name": "warning chip silent",
+   "ok": true,
+   "sample": [
+    "a11y: the warning chip does not say which way"
+   ]
+  },
+  {
+   "name": "line without a label",
+   "ok": true,
+   "sample": [
+    "a11y: «ضريبة الشركات» has no label"
+   ]
+  },
+  {
+   "name": "bar read out",
+   "ok": true,
+   "sample": [
+    "a11y: bar 1 is read out"
    ]
   },
   {
@@ -637,7 +828,8 @@
    "name": "chip not white",
    "ok": true,
    "sample": [
-    "white touch off: .r-chip borderTopColor rgba(63, 224, 208, 0.7) (want rgba(234, 242, 247, 0.5))"
+    "white touch off: .r-chip borderTopColor rgba(63, 224, 208, 0.7) (want rgba(234, 242, 247, 0.5))",
+    "white touch off: .r-chip.e-bad borderTopColor rgba(63, 224, 208, 0.7) (want rgba(242, 177, 76, 0.7))"
    ]
   },
   {
@@ -645,6 +837,22 @@
    "ok": true,
    "sample": [
     "«الفوائد»: a mandatory line must show a lock and not be a control"
+   ]
+  },
+  {
+   "name": "interest made a normal line",
+   "ok": true,
+   "sample": [
+    "«الفوائد»: the e-fixed marker on the wrong line",
+    "«الفوائد»: a mandatory line must show a lock and not be a control"
+   ]
+  },
+  {
+   "name": "another line locked",
+   "ok": true,
+   "sample": [
+    "«الدفاع»: the e-fixed marker on the wrong line",
+    "«الدفاع»: a line must open its adjuster (a control with a chevron)"
    ]
   },
   {
@@ -665,7 +873,8 @@
    "name": "deficit does not add up",
    "ok": true,
    "sample": [
-    "numbers: revenue 50 - spending 66.3 is not the deficit -17.7",
+    "brief rows differ: budget summary: [[\"الإيرادات\",\"50.0\"],[\"الإنفاق\",\"66.3\"],[\"العجز\",\"17.7\"]]",
+    "numbers: spending 66.3 - revenue 50 is not the deficit 17.7",
     "numbers: the note's revenue 48.6 is not the budget's 50"
    ]
   },
@@ -673,8 +882,8 @@
    "name": "deficit share wrong",
    "ok": true,
    "sample": [
+    "brief rows differ: headline numbers: [[\"الناتج المحلي\",\"250\",\"مليار $\",\"+5.1% سنويًا\",\"لماذا؟\"],[\"التضخم\",\"10.3%\",\"\",\"+0.1 نقطة شهريًا\",\"لماذا؟\"],[\"البطالة\",\"8.9%\",\"\",\"دون تغير\",\"لماذا؟\"]]",
     "numbers: the deficit 17.7 is 7.08% of GDP 250, not 8.1%",
-    "brief text missing: 219",
     "brief text missing: 219"
    ]
   },
@@ -682,17 +891,17 @@
    "name": "lines do not add up",
    "ok": true,
    "sample": [
+    "brief rows differ: budget lines: [[\"الدعم والحماية الاجتماعية\",\"17.2 مليار $ · 26%\"],[\"الفوائد\",\"13.3 مليار $ · 20% · إلزامية\"],[\"الإدارة العامة\",\"12.0 مليار $ · 15%\"],[\"التعليم\",\"7.3 مليار $ ·",
     "numbers: the lines add up to 68.4, not the spending 66.3",
-    "numbers: line 3 is 18.1% of the spending, shown 15%",
-    "numbers: bar 3 is 58% (want 69.8% of the largest line)"
+    "numbers: line 3 is 18.1% of the spending, shown 15%"
    ]
   },
   {
    "name": "line shown differs from its data",
    "ok": true,
    "sample": [
+    "brief rows differ: budget lines: [[\"الدعم والحماية الاجتماعية\",\"17.2 مليار $ · 26%\"],[\"الفوائد\",\"13.3 مليار $ · 20% · إلزامية\"],[\"الإدارة العامة\",\"12.0 مليار $ · 15%\"],[\"التعليم\",\"7.3 مليار $ ·",
     "numbers: line 3 shows 12 but its data is 9.9",
-    "brief text missing: 9.9 مليار $ · 15%",
     "brief text missing: 9.9 مليار $ · 15%"
    ]
   },
@@ -700,9 +909,76 @@
    "name": "shares wrong",
    "ok": true,
    "sample": [
+    "brief rows differ: budget lines: [[\"الدعم والحماية الاجتماعية\",\"17.2 مليار $ · 28%\"],[\"الفوائد\",\"13.3 مليار $ · 20% · إلزامية\"],[\"الإدارة العامة\",\"9.9 مليار $ · 15%\"],[\"التعليم\",\"7.3 مليار $ · ",
     "numbers: the shares add up to 102%",
-    "numbers: line 1 is 25.9% of the spending, shown 28%",
-    "brief text missing: 17.2 مليار $ · 26%"
+    "numbers: line 1 is 25.9% of the spending, shown 28%"
+   ]
+  },
+  {
+   "name": "bar overridden by CSS",
+   "ok": true,
+   "sample": [
+    "numbers: bar 3 is 80% (want 57.6% of the largest line)"
+   ]
+  },
+  {
+   "name": "amount unreadable",
+   "ok": true,
+   "sample": [
+    "numbers: line 3 shows 9.9 but its data is NaN",
+    "numbers: the lines add up to NaN, not the spending 66.3",
+    "numbers: line 3 is NaN% of the spending, shown 15%"
+   ]
+  },
+  {
+   "name": "a name not found",
+   "ok": true,
+   "sample": [
+    "brief rows differ: external balance: [[\"السلع\",\"نفط وغاز · كيماويات · منسوجات · غذاء\",\"26.3\"],[\"الواردات\",\"قمح · آلات · وقود مكرر · سيارات\",\"52.9\"],[\"الميزان التجاري\",\"الصادرات ناقص الواردات\",\"−26.",
+    "numbers: exports - imports is not the trade balance"
+   ]
+  },
+  {
+   "name": "note revenue wrong",
+   "ok": true,
+   "sample": [
+    "numbers: the note's revenue 50 is not the budget's 48.6",
+    "brief text missing: الضرائب 30.1 مليار $ من إيرادات 48.6، والباقي من قناة السويس والبترول والمنح. رفع ضريبة أو خفض دعم يزيد الاضطراب في المحافظات الأفقر أولًا.",
+    "brief text missing: الضرائب 30.1 مليار $ من إيرادات 48.6، والباقي من قناة السويس والبترول والمنح. رفع ضريبة أو خفض دعم يزيد الاضطراب في المحافظات الأفقر أولًا."
+   ]
+  },
+  {
+   "name": "one share wrong",
+   "ok": true,
+   "sample": [
+    "brief rows differ: budget lines: [[\"الدعم والحماية الاجتماعية\",\"17.2 مليار $ · 27%\"],[\"الفوائد\",\"13.3 مليار $ · 19% · إلزامية\"],[\"الإدارة العامة\",\"9.9 مليار $ · 15%\"],[\"التعليم\",\"7.3 مليار $ · ",
+    "numbers: line 1 is 25.9% of the spending, shown 27%",
+    "numbers: line 2 is 20.1% of the spending, shown 19%"
+   ]
+  },
+  {
+   "name": "money unit",
+   "ok": true,
+   "sample": [
+    "brief rows differ: subsidies: [[\"دعم الوقود\",\"سنويًا · بنزين وسولار وغاز\",\"11.7 مليار $\"],[\"دعم الخبز والتموين\",\"سنويًا · 63 مليون مستفيد\",\"2.9 مليار $\"],[\"دعم الكهرباء\",\"سنويًا · للمنازل وا",
+    "money unit: «0.9 مليار» (under 1 billion is written in millions)",
+    "brief text missing: 900 مليون $"
+   ]
+  },
+  {
+   "name": "brief rows swapped",
+   "ok": true,
+   "sample": [
+    "brief rows differ: budget lines: [[\"الدعم والحماية الاجتماعية\",\"17.2 مليار $ · 26%\"],[\"الفوائد\",\"13.3 مليار $ · 20% · إلزامية\"],[\"الإدارة العامة\",\"9.9 مليار $ · 15%\"],[\"التعليم\",\"7.3 مليار $ · ",
+    "a11y: «الأمن الداخلي» has no label",
+    "a11y: «الدفاع» has no label"
+   ]
+  },
+  {
+   "name": "a rate changed",
+   "ok": true,
+   "sample": [
+    "brief rows differ: taxes: [[\"ضريبة الدخل\",\"الشريحة العليا · 3.6 مليار $ سنويًا\",\"20%\"],[\"ضريبة الشركات\",\"11.6 مليار $ سنويًا\",\"25%\"],[\"ضريبة المبيعات\",\"السعر العام · 12.2 مليار $ سنويًا\""
    ]
   },
   {
@@ -716,17 +992,17 @@
    "name": "subsidies exceed their line",
    "ok": true,
    "sample": [
+    "brief rows differ: subsidies: [[\"دعم الوقود\",\"سنويًا · بنزين وسولار وغاز\",\"16.0\"],[\"دعم الخبز والتموين\",\"سنويًا · 63 مليون مستفيد\",\"2.9 مليار $\"],[\"دعم الكهرباء\",\"سنويًا · للمنازل والمصانع\",",
     "numbers: the subsidies listed (19.8) exceed their budget line (17.2)",
-    "numbers: cutting the fuel subsidy 10% saves 1.60, shown 1.2",
-    "brief text missing: 11.7"
+    "numbers: cutting the fuel subsidy 10% saves 1.60, shown 1.2"
    ]
   },
   {
    "name": "saving wrong",
    "ok": true,
    "sample": [
+    "brief rows differ: decisions: [[\"طرح سندات دولية\",\"1 مليار $ · فائدة 6.2% · 10 سنوات\",\"تمويل العجز\"],[\"خفض دعم الوقود 10%\",\"يوفّر 2.0 مليار $ سنويًا\",\"الشرعية\"]]",
     "numbers: cutting the fuel subsidy 10% saves 1.17, shown 2",
-    "brief text missing: يوفّر 1.2 مليار $ سنويًا",
     "brief text missing: يوفّر 1.2 مليار $ سنويًا"
    ]
   },
@@ -735,16 +1011,16 @@
    "ok": true,
    "sample": [
     "numbers: the taxes add up to 30.1, the note says 35",
-    "brief text missing: الضرائب 30.1 مليار $ من إيرادات 48.6. الباقي من قناة السويس والبترول والمنح.",
-    "brief text missing: الضرائب 30.1 مليار $ من إيرادات 48.6. الباقي من قناة السويس والبترول والمنح."
+    "brief text missing: الضرائب 30.1 مليار $ من إيرادات 48.6، والباقي من قناة السويس والبترول والمنح. رفع ضريبة أو خفض دعم يزيد الاضطراب في المحافظات الأفقر أولًا.",
+    "brief text missing: الضرائب 30.1 مليار $ من إيرادات 48.6، والباقي من قناة السويس والبترول والمنح. رفع ضريبة أو خفض دعم يزيد الاضطراب في المحافظات الأفقر أولًا."
    ]
   },
   {
    "name": "trade balance wrong",
    "ok": true,
    "sample": [
+    "brief rows differ: external balance: [[\"الصادرات\",\"نفط وغاز · كيماويات · منسوجات · غذاء\",\"26.3\"],[\"الواردات\",\"قمح · آلات · وقود مكرر · سيارات\",\"50.0\"],[\"الميزان التجاري\",\"الصادرات ناقص الواردات\",\"−",
     "numbers: exports - imports is not the trade balance",
-    "brief text missing: 52.9",
     "brief text missing: 52.9"
    ]
   },
@@ -768,9 +1044,9 @@
    "name": "coverage without the middle views",
    "ok": true,
    "sample": [
+    "budget: never shown clear of the fades in any view: 13.3 مليار $ · 20% · إلزامية",
     "budget: never shown clear of the fades in any view: الإدارة العامة",
-    "budget: never shown clear of the fades in any view: 9.9 مليار $ · 15%",
-    "budget: never shown clear of the fades in any view: التعليم"
+    "budget: never shown clear of the fades in any view: 9.9 مليار $ · 15%"
    ]
   }
  ]

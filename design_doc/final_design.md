@@ -1445,9 +1445,21 @@ As in final-1.0, plus:
 
 | Status | Screens |
 |---|---|
-| **Approved** | Main play screen (as designed for the 17 Pro Max); UI tokens; main menu; new-game flow; **province panel** (2026-10-20: a 320 pt card first, the map stays the centre; «تفاصيل المحافظة» opens the full-height details with 4 tabs; `design/screen4/R`, brief `design/shared/SCREEN4_BRIEF.md`); **state panel** (2026-10-21, «اعتمد كل شي»: the full-height sheet with نظرة عامة / القيادة / السياسات / المشاريع, the section identity and white touches, one owner per law; `design/screen5/A`, brief `design/shared/SCREEN5_BRIEF.md`) |
-| **Pending design** (user's list) | Province details tabs الإنشاءات / القوات / السياسات; economy (go-ahead 2026-10-21 on the proposal; being built as `design/screen6/A`, then reviewed and shown for approval); markets; politics and parties; internal and unrest; military fronts; forces and production; diplomacy; UN Security Council; intelligence; research; event and decision modal; war and peace; notifications; saves and settings; the "why" sheet; end screens |
+| **Approved** | Main play screen (as designed for the 17 Pro Max); UI tokens; main menu; new-game flow; **province panel** (2026-10-20: a 320 pt card first, the map stays the centre; «تفاصيل المحافظة» opens the full-height details with 4 tabs; `design/screen4/R`, brief `design/shared/SCREEN4_BRIEF.md`); **state panel** (2026-10-21, «اعتمد كل شي»: the full-height sheet with نظرة عامة / القيادة / السياسات / المشاريع, the section identity and white touches, one owner per law; `design/screen5/A`, brief `design/shared/SCREEN5_BRIEF.md`); **economy panel** (2026-10-21, approved by Claude under the owner's delegation: نظرة عامة / الميزانية / الضرائب والدعم / التجارة والعملة; `design/screen6/A`, brief `design/shared/SCREEN6_BRIEF.md`) |
+| **Pending design** (user's list) | the economy adjusters (budget line, tax, subsidy, money and currency; next); province details tabs الإنشاءات / القوات / السياسات; markets; politics and parties; internal and unrest; military fronts; forces and production; diplomacy; UN Security Council; intelligence; research; event and decision modal; war and peace; notifications; saves and settings; the "why" sheet; end screens |
 | **Pending design** (added) | Speed popover; map-mode popover; **front-sector arrow interaction** (own sector highlighted, partner sectors shown read-only); pending-orders list; credits and sources; onboarding; country info card; **government chooser** (D-29); **small-phone variants of the top row** (D-31); **save mirror prompt** (D-28) |
+
+**Economy panel, engine follow-up (from screen 6, 2026-10-21).** The economy panel shows items that §5.1 does not model yet. Until each one has a model, its values stay illustrative:
+- tourism receipts, as a traded-services flow;
+- workers' remittances;
+- canal transit fees paid to the chokepoint's owner, and the canal as a revenue line;
+- the current account after services and income;
+- the credit rating as letters plus an outlook, mapped from the 0..20 score;
+- the bond's tenor;
+- the fuel, bread and electricity subsidies as separate instruments, with their beneficiaries;
+- the names of the 9 budget lines;
+- the central bank's policy rate;
+- how the deficit is financed (domestic, external, IMF, central bank).
 
 **Province details, engine follow-up (from the approved province panel, 2026-10-20).** The «الحكم» tab shows three levers the engine does not model yet. Each needs a data model before it is built; until then the values are illustrative.
 - **Governor:** an office per admin region, appointed by the head of state (Egypt 2011: presidential appointment), with a defined effect on administration and on unrest response.
@@ -1543,7 +1555,7 @@ As before:
   - Notification toast: one at a time, about 3 s, similar ones merged; tap to jump.
   - Map-mode button (32 pt visual, 44 pt hit area).
   - «دولتي» (my country): flies the camera to the player in 0.6 s, or jumps with Reduce Motion.
-- **Dock (44 pt):** 8 sections, the active one in cyan, with badges.
+- **Dock (44 pt):** 8 sections, neutral as on B3; the open section in its identity colour (§6.2) with a 2 pt underline; with badges.
 
 ### 6.5 Panels
 

@@ -1,9 +1,11 @@
   <!-- Economy panel (screen 6, variant A), opened from the dock's «الاقتصاد». The approved panel look (screens 4 R and 5 A)
        with the section identity (الاقتصاد: emerald) and white touches. Tabs: نظرة عامة (?tab=overview, default), الميزانية
        (?tab=budget), الضرائب والدعم (?tab=taxes), التجارة والعملة (?tab=trade). Egypt, 1 January 2011; values are
-       illustrative, in US dollars (D-6), and agree with each other: revenue 48.6 − spending 66.3 = deficit 17.7 = 8.1%
+       illustrative, in US dollars (D-6), and agree with each other: spending 66.3 − revenue 48.6 = deficit 17.7 = 8.1%
        of GDP 219; the budget lines add up to 66.3 and their shares to 100%; the bars are relative to the largest line.
-       A budget, tax or subsidy row opens its adjuster (designed next); interest is mandatory (locked). -->
+       A budget, tax, subsidy or currency row opens its adjuster (designed next); interest is mandatory (locked). Each
+       sum of money has one owner: the three subsidy rows own their 15.5 (a change there moves the 17.2 budget line),
+       the budget line's adjuster sets only the rest; the overview's fuel cut is a shortcut to the fuel row. -->
   <section class="sheet glass" aria-label="الاقتصاد: مصر">
     <div class="r-in">
       <header class="r-hd">
@@ -16,33 +18,33 @@
         <button class="r-x tap" aria-label="إغلاق"><svg class="i"><use href="#i-close"/></svg></button>
       </header>
 
-      <nav class="r-tabs" aria-label="أقسام الاقتصاد">
-        <button class="r-tab tap" data-for="overview"><svg class="i"><use href="#i-grid"/></svg><span>نظرة عامة</span></button>
-        <button class="r-tab tap" data-for="budget"><svg class="i"><use href="#i-pie"/></svg><span>الميزانية</span></button>
-        <button class="r-tab tap" data-for="taxes"><svg class="i"><use href="#i-percent"/></svg><span>الضرائب والدعم</span></button>
-        <button class="r-tab tap" data-for="trade"><svg class="i"><use href="#i-ship"/></svg><span>التجارة والعملة</span></button>
+      <nav class="r-tabs" role="tablist" aria-label="أقسام الاقتصاد">
+        <button class="r-tab tap" role="tab" data-for="overview"><svg class="i"><use href="#i-grid"/></svg><span>نظرة عامة</span></button>
+        <button class="r-tab tap" role="tab" data-for="budget"><svg class="i"><use href="#i-pie"/></svg><span>الميزانية</span></button>
+        <button class="r-tab tap" role="tab" data-for="taxes"><svg class="i"><use href="#i-percent"/></svg><span>الضرائب والدعم</span></button>
+        <button class="r-tab tap" role="tab" data-for="trade"><svg class="i"><use href="#i-ship"/></svg><span>التجارة والعملة</span></button>
       </nav>
 
       <!-- نظرة عامة -->
       <div class="r-body" data-tab="overview">
         <div class="r-kpis">
           <div class="r-kpi">
-            <span class="r-kl"><svg class="i"><use href="#i-econ"/></svg>الناتج المحلي</span>
+            <span class="r-kl"><svg class="i"><use href="#i-chart"/></svg>الناتج المحلي</span>
             <span class="r-kv"><b class="ltr">219</b><span>مليار $</span></span>
             <span class="r-kr r-blue"><span class="ltr">+5.1%</span> سنويًا</span>
-            <button class="r-why tap">لماذا؟</button>
+            <button class="r-why tap" aria-label="لماذا؟ الناتج المحلي">لماذا؟</button>
           </div>
           <div class="r-kpi">
-            <span class="r-kl"><svg class="i r-amber"><use href="#i-flame"/></svg>التضخم</span>
+            <span class="r-kl"><svg class="i r-amber"><use href="#i-price"/></svg>التضخم</span>
             <span class="r-kv"><b class="ltr r-amber">10.3%</b></span>
-            <span class="r-kr"><span class="ltr">+0.4</span> نقطة شهريًا</span>
-            <button class="r-why tap">لماذا؟</button>
+            <span class="r-kr"><span class="ltr">+0.1</span> نقطة شهريًا</span>
+            <button class="r-why tap" aria-label="لماذا؟ التضخم">لماذا؟</button>
           </div>
           <div class="r-kpi">
             <span class="r-kl"><svg class="i"><use href="#i-people"/></svg>البطالة</span>
             <span class="r-kv"><b class="ltr">8.9%</b></span>
-            <span class="r-kr">دون تغيّر</span>
-            <button class="r-why tap">لماذا؟</button>
+            <span class="r-kr">دون تغير</span>
+            <button class="r-why tap" aria-label="لماذا؟ البطالة">لماذا؟</button>
           </div>
         </div>
 
@@ -60,9 +62,9 @@
             <span class="r-chip">تمويل العجز</span>
           </button>
           <button class="r-act tap">
-            <span class="r-tile"><svg class="i"><use href="#i-flame"/></svg></span>
+            <span class="r-tile"><svg class="i"><use href="#i-fuel"/></svg></span>
             <span class="r-at"><b>خفض دعم الوقود <span class="ltr">10%</span></b><span>يوفّر <span class="ltr">1.2</span> مليار $ سنويًا</span></span>
-            <span class="r-chip e-bad"><svg class="r-arr"><use href="#t-down"/></svg>الشرعية</span>
+            <span class="r-chip e-bad" aria-label="الشرعية: تنخفض"><svg class="r-arr" aria-hidden="true"><use href="#t-down"/></svg>الشرعية</span>
           </button>
         </div>
       </div>
@@ -70,131 +72,138 @@
       <!-- الميزانية: revenue, spending, deficit; the spending lines (share bars relative to the largest line) -->
       <div class="r-body" data-tab="budget">
         <div class="e-sum">
-          <span><b class="ltr">48.6</b>الإيرادات</span>
-          <span><b class="ltr">66.3</b>الإنفاق</span>
-          <span><b class="ltr r-amber">−17.7</b>العجز</span>
-          <em>مليار $ في السنة</em>
+          <span>الإيرادات<b class="ltr">48.6</b></span>
+          <span>الإنفاق<b class="ltr">66.3</b></span>
+          <span>العجز<b class="ltr r-amber">17.7</b></span>
+          <em>مليار $ سنويًا</em>
         </div>
+        <p class="e-trs">الخزينة <b><span class="ltr">36.0</span> مليار $</b><span class="r-dot"> · </span><span class="r-amber">تنقص <span class="ltr">1.5</span> مليار $ شهريًا</span></p>
         <section class="r-sec">
           <h3>بنود الإنفاق</h3>
-          <div class="e-row tap" role="button" tabindex="0" data-amount="17.2">
+          <div aria-label="الدعم والحماية الاجتماعية: 17.2 مليار دولار · 26%" class="e-row tap" role="button" tabindex="0" data-amount="17.2">
             <span class="r-at"><b>الدعم والحماية الاجتماعية</b><span><span class="ltr">17.2</span> مليار $ · <span class="ltr">26%</span></span></span>
-            <span class="e-bar"><i style="width: 100%"></i></span>
+            <span class="e-bar" aria-hidden="true"><i style="width: 100%"></i></span>
             <svg class="i r-chev"><use href="#i-chev"/></svg>
           </div>
-          <div class="e-row e-fixed" data-amount="13.3">
+          <div aria-label="الفوائد: 13.3 مليار دولار · 20% · إلزامية" class="e-row e-fixed" data-amount="13.3">
             <span class="r-at"><b>الفوائد</b><span><span class="ltr">13.3</span> مليار $ · <span class="ltr">20%</span> · إلزامية</span></span>
-            <span class="e-bar"><i style="width: 77%"></i></span>
+            <span class="e-bar" aria-hidden="true"><i style="width: 77%"></i></span>
             <svg class="i e-lock"><use href="#i-lock"/></svg>
           </div>
-          <div class="e-row tap" role="button" tabindex="0" data-amount="9.9">
+          <div aria-label="الإدارة العامة: 9.9 مليار دولار · 15%" class="e-row tap" role="button" tabindex="0" data-amount="9.9">
             <span class="r-at"><b>الإدارة العامة</b><span><span class="ltr">9.9</span> مليار $ · <span class="ltr">15%</span></span></span>
-            <span class="e-bar"><i style="width: 58%"></i></span>
+            <span class="e-bar" aria-hidden="true"><i style="width: 58%"></i></span>
             <svg class="i r-chev"><use href="#i-chev"/></svg>
           </div>
-          <div class="e-row tap" role="button" tabindex="0" data-amount="7.3">
+          <div aria-label="التعليم: 7.3 مليار دولار · 11%" class="e-row tap" role="button" tabindex="0" data-amount="7.3">
             <span class="r-at"><b>التعليم</b><span><span class="ltr">7.3</span> مليار $ · <span class="ltr">11%</span></span></span>
-            <span class="e-bar"><i style="width: 42%"></i></span>
+            <span class="e-bar" aria-hidden="true"><i style="width: 42%"></i></span>
             <svg class="i r-chev"><use href="#i-chev"/></svg>
           </div>
-          <div class="e-row tap" role="button" tabindex="0" data-amount="7.3">
+          <div aria-label="الاستثمار العام: 7.3 مليار دولار · 11%" class="e-row tap" role="button" tabindex="0" data-amount="7.3">
             <span class="r-at"><b>الاستثمار العام</b><span><span class="ltr">7.3</span> مليار $ · <span class="ltr">11%</span></span></span>
-            <span class="e-bar"><i style="width: 42%"></i></span>
+            <span class="e-bar" aria-hidden="true"><i style="width: 42%"></i></span>
             <svg class="i r-chev"><use href="#i-chev"/></svg>
           </div>
-          <div class="e-row tap" role="button" tabindex="0" data-amount="4.0">
+          <div aria-label="الدفاع: 4.0 مليار دولار · 6%" class="e-row tap" role="button" tabindex="0" data-amount="4.0">
             <span class="r-at"><b>الدفاع</b><span><span class="ltr">4.0</span> مليار $ · <span class="ltr">6%</span></span></span>
-            <span class="e-bar"><i style="width: 23%"></i></span>
+            <span class="e-bar" aria-hidden="true"><i style="width: 23%"></i></span>
             <svg class="i r-chev"><use href="#i-chev"/></svg>
           </div>
-          <div class="e-row tap" role="button" tabindex="0" data-amount="3.3">
+          <div aria-label="الأمن الداخلي: 3.3 مليار دولار · 5%" class="e-row tap" role="button" tabindex="0" data-amount="3.3">
             <span class="r-at"><b>الأمن الداخلي</b><span><span class="ltr">3.3</span> مليار $ · <span class="ltr">5%</span></span></span>
-            <span class="e-bar"><i style="width: 19%"></i></span>
+            <span class="e-bar" aria-hidden="true"><i style="width: 19%"></i></span>
             <svg class="i r-chev"><use href="#i-chev"/></svg>
           </div>
-          <div class="e-row tap" role="button" tabindex="0" data-amount="3.3">
+          <div aria-label="الصحة: 3.3 مليار دولار · 5%" class="e-row tap" role="button" tabindex="0" data-amount="3.3">
             <span class="r-at"><b>الصحة</b><span><span class="ltr">3.3</span> مليار $ · <span class="ltr">5%</span></span></span>
-            <span class="e-bar"><i style="width: 19%"></i></span>
+            <span class="e-bar" aria-hidden="true"><i style="width: 19%"></i></span>
             <svg class="i r-chev"><use href="#i-chev"/></svg>
           </div>
-          <div class="e-row tap" role="button" tabindex="0" data-amount="0.7">
+          <div aria-label="البحث العلمي: 700 مليون دولار · 1%" class="e-row tap" role="button" tabindex="0" data-amount="0.7">
             <span class="r-at"><b>البحث العلمي</b><span><span class="ltr">700</span> مليون $ · <span class="ltr">1%</span></span></span>
-            <span class="e-bar"><i style="width: 4%"></i></span>
+            <span class="e-bar" aria-hidden="true"><i style="width: 4%"></i></span>
             <svg class="i r-chev"><use href="#i-chev"/></svg>
           </div>
         </section>
-        <p class="s-note">الفوائد إلزامية ولا تُخفَّض. خفض أي بند آخر يظهر أثره على الخدمات والاستقرار قبل اعتماده.</p>
+        <p class="s-note">الفوائد لا تُخفَّض، ودعم الوقود والخبز والكهرباء يُعدَّل من تبويب الضرائب والدعم.</p>
       </div>
 
       <!-- الضرائب والدعم -->
       <div class="r-body" data-tab="taxes">
         <section class="r-sec">
           <h3>الضرائب</h3>
-          <div class="e-row tap" role="button" tabindex="0">
+          <div aria-label="ضريبة الدخل: 20%، الشريحة العليا · 3.6 مليار دولار سنويًا" class="e-row tap" role="button" tabindex="0">
             <span class="r-at"><b>ضريبة الدخل</b><span>الشريحة العليا · <span class="ltr">3.6</span> مليار $ سنويًا</span></span>
             <b class="e-val ltr">20%</b>
             <svg class="i r-chev"><use href="#i-chev"/></svg>
           </div>
-          <div class="e-row tap" role="button" tabindex="0">
+          <div aria-label="ضريبة الشركات: 20%، 11.6 مليار دولار سنويًا" class="e-row tap" role="button" tabindex="0">
             <span class="r-at"><b>ضريبة الشركات</b><span><span class="ltr">11.6</span> مليار $ سنويًا</span></span>
             <b class="e-val ltr">20%</b>
             <svg class="i r-chev"><use href="#i-chev"/></svg>
           </div>
-          <div class="e-row tap" role="button" tabindex="0">
+          <div aria-label="ضريبة المبيعات: 10%، السعر العام · 12.2 مليار دولار سنويًا" class="e-row tap" role="button" tabindex="0">
             <span class="r-at"><b>ضريبة المبيعات</b><span>السعر العام · <span class="ltr">12.2</span> مليار $ سنويًا</span></span>
             <b class="e-val ltr">10%</b>
             <svg class="i r-chev"><use href="#i-chev"/></svg>
           </div>
-          <div class="e-row tap" role="button" tabindex="0">
-            <span class="r-at"><b>الرسوم الجمركية</b><span>المتوسط المرجّح · <span class="ltr">2.7</span> مليار $ سنويًا</span></span>
-            <b class="e-val ltr">9%</b>
+          <div aria-label="الرسوم الجمركية: 5%، المعدل الفعلي · 2.7 مليار دولار سنويًا" class="e-row tap" role="button" tabindex="0">
+            <span class="r-at"><b>الرسوم الجمركية</b><span>المعدل الفعلي · <span class="ltr">2.7</span> مليار $ سنويًا</span></span>
+            <b class="e-val ltr">5%</b>
             <svg class="i r-chev"><use href="#i-chev"/></svg>
           </div>
-          <p class="s-note">الضرائب <span class="ltr">30.1</span> مليار $ من إيرادات <span class="ltr">48.6</span>. الباقي من قناة السويس والبترول والمنح.</p>
         </section>
         <section class="r-sec">
           <h3>الدعم</h3>
-          <div class="e-row tap" role="button" tabindex="0">
-            <span class="r-at"><b>دعم الوقود</b><span>مليار $ سنويًا · بنزين وسولار وغاز</span></span>
-            <b class="e-val ltr">11.7</b>
+          <div aria-label="دعم الوقود: 11.7 مليار دولار، سنويًا · بنزين وسولار وغاز" class="e-row tap" role="button" tabindex="0">
+            <span class="r-at"><b>دعم الوقود</b><span>سنويًا · بنزين وسولار وغاز</span></span>
+            <b class="e-val"><span class="ltr">11.7</span> مليار $</b>
             <svg class="i r-chev"><use href="#i-chev"/></svg>
           </div>
-          <div class="e-row tap" role="button" tabindex="0">
-            <span class="r-at"><b>دعم الخبز والتموين</b><span>مليار $ سنويًا · <span class="ltr">63</span> مليون مستفيد</span></span>
-            <b class="e-val ltr">2.9</b>
+          <div aria-label="دعم الخبز والتموين: 2.9 مليار دولار، سنويًا · 63 مليون مستفيد" class="e-row tap" role="button" tabindex="0">
+            <span class="r-at"><b>دعم الخبز والتموين</b><span>سنويًا · <span class="ltr">63</span> مليون مستفيد</span></span>
+            <b class="e-val"><span class="ltr">2.9</span> مليار $</b>
             <svg class="i r-chev"><use href="#i-chev"/></svg>
           </div>
-          <div class="e-row tap" role="button" tabindex="0">
-            <span class="r-at"><b>دعم الكهرباء</b><span>مليار $ سنويًا</span></span>
-            <b class="e-val ltr">0.9</b>
+          <div aria-label="دعم الكهرباء: 900 مليون دولار، سنويًا · للمنازل والمصانع" class="e-row tap" role="button" tabindex="0">
+            <span class="r-at"><b>دعم الكهرباء</b><span>سنويًا · للمنازل والمصانع</span></span>
+            <b class="e-val"><span class="ltr">900</span> مليون $</b>
             <svg class="i r-chev"><use href="#i-chev"/></svg>
           </div>
         </section>
-        <p class="s-note">رفع ضريبة أو خفض دعم يزيد الاضطراب في المحافظات الأفقر أولًا.</p>
+        <p class="s-note">الضرائب <span class="ltr">30.1</span> مليار $ من إيرادات <span class="ltr">48.6</span>، والباقي من قناة السويس والبترول والمنح. رفع ضريبة أو خفض دعم يزيد الاضطراب في المحافظات الأفقر أولًا.</p>
       </div>
 
       <!-- التجارة والعملة -->
       <div class="r-body" data-tab="trade">
-        <dl class="r-st e-st">
+        <dl class="r-st">
           <div class="r-sc"><dt>نظام الصرف</dt><dd>تعويم مُدار</dd></div>
-          <div class="r-sc"><dt>التحويل</dt><dd>كامل</dd></div>
+          <div class="r-sc"><dt>قابلية التحويل</dt><dd>كاملة</dd></div>
           <div class="r-sc"><dt>الاحتياطي الأجنبي</dt><dd><span class="ltr">8</span> أشهر واردات</dd></div>
-          <div class="r-sc"><dt>القيود على الأموال</dt><dd>خفيفة</dd></div>
+          <div class="r-sc"><dt>ضوابط رأس المال</dt><dd>محدودة</dd></div>
+          <div class="r-sc"><dt>فائدة المركزي</dt><dd><span class="ltr">8.25%</span></dd></div>
+          <div class="r-sc"><dt>تمويل العجز</dt><dd>اقتراض محلي</dd></div>
         </dl>
+        <div aria-label="السياسة النقدية والعملة: الفائدة والصرف وضوابط رأس المال · تغيير تدريجي" class="e-row tap" role="button" tabindex="0">
+          <span class="r-at"><b>السياسة النقدية والعملة</b><span>الفائدة والصرف وضوابط رأس المال · تغيير تدريجي</span></span>
+          <svg class="i r-chev"><use href="#i-chev"/></svg>
+        </div>
         <section class="r-sec">
-          <h3>الميزان الخارجي في السنة</h3>
+          <h3>الميزان الخارجي · مليار $ سنويًا</h3>
           <div class="e-flow"><span class="r-at"><b>الصادرات</b><span>نفط وغاز · كيماويات · منسوجات · غذاء</span></span><b class="e-val ltr">26.3</b></div>
           <div class="e-flow"><span class="r-at"><b>الواردات</b><span>قمح · آلات · وقود مكرر · سيارات</span></span><b class="e-val ltr">52.9</b></div>
-          <div class="e-flow"><span class="r-at"><b>عجز الميزان التجاري</b><span>الصادرات ناقص الواردات</span></span><b class="e-val ltr r-amber">−26.6</b></div>
-          <div class="e-flow"><span class="r-at"><b>قناة السويس</b><span>رسوم العبور · ممر تملكه مصر</span></span><b class="e-val ltr">4.8</b></div>
+          <div class="e-flow"><span class="r-at"><b>الميزان التجاري</b><span>الصادرات ناقص الواردات</span></span><b class="e-val ltr r-amber">−26.6</b></div>
+          <div class="e-flow"><span class="r-at"><b>قناة السويس</b><span>رسوم العبور · ممر ملاحي تملكه مصر</span></span><b class="e-val ltr">4.8</b></div>
           <div class="e-flow"><span class="r-at"><b>السياحة</b><span><span class="ltr">14.7</span> مليون زائر</span></span><b class="e-val ltr">12.5</b></div>
           <div class="e-flow"><span class="r-at"><b>تحويلات المصريين بالخارج</b><span>الخليج · أوروبا · أمريكا</span></span><b class="e-val ltr">12.6</b></div>
+          <div class="e-flow"><span class="r-at"><b>الحساب الجاري</b><span>بعد الخدمات والأرباح المحوّلة للخارج</span></span><b class="e-val ltr r-amber">−4.3</b></div>
         </section>
         <section class="r-sec">
           <h3>أكبر الشركاء</h3>
           <p class="e-partners">الاتحاد الأوروبي · الولايات المتحدة · الصين · السعودية · الهند</p>
         </section>
-        <p class="s-note">المبالغ بمليارات الدولارات. تغيير نظام الصرف إصلاح تدريجي يستغرق أشهرًا.</p>
+        <p class="s-note">تغيير نظام الصرف إصلاح تدريجي يستغرق أشهرًا.</p>
       </div>
       <span class="r-hint" aria-hidden="true"><svg class="i"><use href="#i-chev"/></svg></span>
     </div>

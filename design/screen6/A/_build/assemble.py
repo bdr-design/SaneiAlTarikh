@@ -110,7 +110,9 @@ sub('  </defs>', '''    <symbol id="i-grid" viewBox="0 0 24 24"><rect x="3.5" y=
     <symbol id="i-percent" viewBox="0 0 24 24"><path d="M18.5 5.5 5.5 18.5"/><circle cx="7.5" cy="7.5" r="2.5"/><circle cx="16.5" cy="16.5" r="2.5"/></symbol>
     <symbol id="i-ship" viewBox="0 0 24 24"><path d="M3.5 15.5h17l-2.5 4.5H6z"/><path d="M6 15.5V9.5h12v6"/><path d="M9 9.5V6h6v3.5"/><path d="M12 3.5V6"/></symbol>
     <symbol id="i-lock" viewBox="0 0 24 24"><rect x="5" y="10.5" width="14" height="10" rx="2"/><path d="M8.5 10.5V7.75a3.5 3.5 0 0 1 7 0v2.75"/></symbol>
-    <symbol id="i-flame" viewBox="0 0 24 24"><path d="M12 21c-3.9 0-6.75-2.6-6.75-6.3 0-3.2 2.2-5.1 3.6-7.4.3 1.9 1.3 3 2.4 3.5C11 7.6 12.2 5 14.6 3c-.2 3 1.3 4.6 2.6 6.2 1.1 1.4 1.55 2.9 1.55 4.5C18.75 18.4 15.9 21 12 21z"/><path d="M12 21c-1.6 0-2.75-1.1-2.75-2.6 0-1.7 1.4-2.6 2.1-4 .9 1.1 3.4 2.3 3.4 4 0 1.5-1.15 2.6-2.75 2.6z"/></symbol>
+    <symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 20h16"/><path d="M5 16.5l4.5-4.5 3.5 3 6-6.5"/><path d="M15 8.5h4v4"/></symbol>
+    <symbol id="i-price" viewBox="0 0 24 24"><path d="M3.5 11.5V4.5a1 1 0 0 1 1-1h7l8.5 8.5a1 1 0 0 1 0 1.4l-7.1 7.1a1 1 0 0 1-1.4 0z"/><circle cx="7.75" cy="7.75" r="1.25"/><path d="M12.5 16v-5.5M10.25 12.75l2.25-2.25 2.25 2.25"/></symbol>
+    <symbol id="i-fuel" viewBox="0 0 24 24"><rect x="4.5" y="4" width="9" height="16.5" rx="1.5"/><path d="M4.5 10h9"/><path d="M3 20.5h12"/><path d="M13.5 8.5h2a1.5 1.5 0 0 1 1.5 1.5v6.5a1.5 1.5 0 0 0 3 0V8l-2.5-2.5"/></symbol>
   </defs>''')
 # labels squeezed into a strip under 70 pt between a panel and the screen edge are hidden like labels a panel cuts
 # (the same rule as the province panel, screen 4 R)

@@ -13,9 +13,11 @@
 // overview tab fits without scrolling at the loosest fit level; the section identity (emerald on the dock item and its
 // underline, the panel's top line across its width, the emblem and the open tab with its fill; the closed tabs and dock
 // items neutral); the white touches; the panel's sizes; the section colour only on chrome (the share bars are a data
-// colour), amber where the brief says; RTL order of every row; the numbers agree (revenue - spending = deficit = 8.1%
-// of GDP, the lines add up to the spending and their shares to 100%, every bar in proportion to its amount, the
-// subsidies inside their line, the taxes and the trade balance add up); interest is locked, every other line opens its
+// colour, teal; the section colour on no other element), amber where the brief says; RTL order of every row; the rows
+// read exactly as the brief's tables (name, line and value together); the money rule (under 1 billion in millions);
+// the numbers agree (spending - revenue = deficit = 8.1% of GDP, the lines add up to the spending and their shares to
+// 100%, every bar as drawn in proportion to its amount, the subsidies inside their line, the fuel cut's saving, the
+// taxes and the trade balance; an unreadable number fails); interest (by name) is locked, every other line opens its
 // adjuster; no image in the sheet but the flag and the header strip; the brief's strings per view; a bottom scroll hint
 // in its clear strip; and on the map, Egypt and the delta clear, no label cut, squeezed, or sliced by the screen edge
 // or the side inset.
@@ -73,15 +75,16 @@ const TOK = {
     'rgb(67, 192, 138)'],                             // + the section's emerald (the open tab only)
   sec: 'rgb(67, 192, 138)',                           // الاقتصاد's identity colour
   t1: 'rgb(234, 242, 247)', t2: 'rgb(169, 188, 203)', dark: 'rgb(11, 18, 24)', amber: 'rgb(242, 177, 76)',
-  wLine: 'rgba(234, 242, 247, 0.5)', wLineDim: 'rgba(234, 242, 247, 0.28)',
+  wLine: 'rgba(234, 242, 247, 0.5)', wLineDim: 'rgba(234, 242, 247, 0.28)', teal: 'rgb(63, 224, 208)', amberLine: 'rgba(242, 177, 76, 0.7)',
+  tabIcons: '#i-grid,#i-pie,#i-percent,#i-ship',
   // the brief's sizes for this panel: [selector, width, height] (null: not fixed)
   size: [['.s-emb', 32, 32], ['.e-row', null, 44], ['.e-flow', null, 36], ['.e-bar', 72, 6], ['.r-tile', 34, 34]],
   // the panel's size table (the owner's reference): control heights, radii, icon sizes, gaps
   ctlH: { '.r-x': 32, '.r-why': 14, '.r-act': 44, '.r-tab': 44, '.e-row': 44 },
-  radius: { '.sheet': 12, '.r-act': 10, '.r-tile': 6, '.r-chip': 6, '.r-cap': 10, '.s-emb': 10, '.e-bar': 3 },
+  radius: { '.sheet': 12, '.r-act': 10, '.e-row': 10, '.r-tile': 6, '.r-chip': 6, '.r-cap': 10, '.s-emb': 10, '.e-bar': 3 },
   sheetIcon: [['.r-cap svg', 10], ['.r-arr', 10], ['.r-kl svg', 14], ['.r-x svg', 16], ['.r-hint svg', 16], ['.r-chev', 16], ['.e-lock', 16], ['.s-emb svg', 16], ['.r-tile svg', 17], ['.r-tab svg', 17]],
   sheetSpace: [0, 2, 4, 8, 12, 16],
-  title18: ['r-name', 'r-kv', 'e-sum'],
+  title18: ['.r-name', '.r-kv b', '.e-sum b'],
   fade: 24, strip: 22,                                // the fade, and the clear strip under the bottom fade for the scroll hint
   overlap: 56,                                        // the middle views overlap their neighbours by this much (a whole project row)
 };
@@ -91,27 +94,43 @@ const HEAD = ['الاقتصاد', 'الجنيه المصري', 'مصر · الس
 const LINES = [['الدعم والحماية الاجتماعية', '17.2 مليار $ · 26%'], ['الفوائد', '13.3 مليار $ · 20% · إلزامية'], ['الإدارة العامة', '9.9 مليار $ · 15%'],
   ['التعليم', '7.3 مليار $ · 11%'], ['الاستثمار العام', '7.3 مليار $ · 11%'], ['الدفاع', '4.0 مليار $ · 6%'], ['الأمن الداخلي', '3.3 مليار $ · 5%'],
   ['الصحة', '3.3 مليار $ · 5%'], ['البحث العلمي', '700 مليون $ · 1%']];
+// the brief's tables, row by row (each cell as the page writes it): the checker compares them in every view
+const ROWS = {
+  kpis: [['الناتج المحلي', '219', 'مليار $', '+5.1% سنويًا', 'لماذا؟'], ['التضخم', '10.3%', '', '+0.1 نقطة شهريًا', 'لماذا؟'], ['البطالة', '8.9%', '', 'دون تغير', 'لماذا؟']],
+  status: [['عجز الموازنة', '8.1% من الناتج'], ['الدين العام', '73% من الناتج'], ['سعر الصرف', '5.80 جنيه للدولار'], ['التصنيف', 'BB+ مستقر'],
+    ['نظام الصرف', 'تعويم مُدار'], ['قابلية التحويل', 'كاملة'], ['الاحتياطي الأجنبي', '8 أشهر واردات'], ['ضوابط رأس المال', 'محدودة'], ['فائدة المركزي', '8.25%'], ['تمويل العجز', 'اقتراض محلي']],
+  acts: [['طرح سندات دولية', '1 مليار $ · فائدة 6.2% · 10 سنوات', 'تمويل العجز'], ['خفض دعم الوقود 10%', 'يوفّر 1.2 مليار $ سنويًا', 'الشرعية']],
+  sum: [['الإيرادات', '48.6'], ['الإنفاق', '66.3'], ['العجز', '17.7']],
+  lines: LINES,
+  taxes: [['ضريبة الدخل', 'الشريحة العليا · 3.6 مليار $ سنويًا', '20%'], ['ضريبة الشركات', '11.6 مليار $ سنويًا', '20%'], ['ضريبة المبيعات', 'السعر العام · 12.2 مليار $ سنويًا', '10%'],
+    ['الرسوم الجمركية', 'المعدل الفعلي · 2.7 مليار $ سنويًا', '5%']],
+  subsidies: [['دعم الوقود', 'سنويًا · بنزين وسولار وغاز', '11.7 مليار $'], ['دعم الخبز والتموين', 'سنويًا · 63 مليون مستفيد', '2.9 مليار $'], ['دعم الكهرباء', 'سنويًا · للمنازل والمصانع', '900 مليون $']],
+  currency: [['السياسة النقدية والعملة', 'الفائدة والصرف وضوابط رأس المال · تغيير تدريجي']],
+  flows: [['الصادرات', 'نفط وغاز · كيماويات · منسوجات · غذاء', '26.3'], ['الواردات', 'قمح · آلات · وقود مكرر · سيارات', '52.9'], ['الميزان التجاري', 'الصادرات ناقص الواردات', '−26.6'],
+    ['قناة السويس', 'رسوم العبور · ممر ملاحي تملكه مصر', '4.8'], ['السياحة', '14.7 مليون زائر', '12.5'], ['تحويلات المصريين بالخارج', 'الخليج · أوروبا · أمريكا', '12.6'],
+    ['الحساب الجاري', 'بعد الخدمات والأرباح المحوّلة للخارج', '−4.3']],
+};
+const NOTE_BUDGET = 'الفوائد لا تُخفَّض، ودعم الوقود والخبز والكهرباء يُعدَّل من تبويب الضرائب والدعم.';
+const NOTE_TAXES = 'الضرائب 30.1 مليار $ من إيرادات 48.6، والباقي من قناة السويس والبترول والمنح. رفع ضريبة أو خفض دعم يزيد الاضطراب في المحافظات الأفقر أولًا.';
+const NOTE_TRADE = 'تغيير نظام الصرف إصلاح تدريجي يستغرق أشهرًا.';
+const PARTNERS = 'الاتحاد الأوروبي · الولايات المتحدة · الصين · السعودية · الهند';
 const BRIEF = {
-  overview: HEAD.concat(['الناتج المحلي', '219', 'مليار $', '+5.1% سنويًا', 'التضخم', '10.3%', '+0.4 نقطة شهريًا', 'البطالة', '8.9%', 'دون تغيّر', 'لماذا؟',
+  overview: HEAD.concat(['الناتج المحلي', '219', 'مليار $', '+5.1% سنويًا', 'التضخم', '10.3%', '+0.1 نقطة شهريًا', 'البطالة', '8.9%', 'دون تغير', 'لماذا؟',
     'عجز الموازنة', '8.1% من الناتج', 'الدين العام', '73% من الناتج', 'سعر الصرف', '5.80 جنيه للدولار', 'التصنيف', 'BB+ مستقر',
     'طرح سندات دولية', '1 مليار $ · فائدة 6.2% · 10 سنوات', 'تمويل العجز', 'خفض دعم الوقود 10%', 'يوفّر 1.2 مليار $ سنويًا', 'الشرعية']),
-  budget: HEAD.concat(['48.6', 'الإيرادات', '66.3', 'الإنفاق', '−17.7', 'العجز', 'مليار $ في السنة', 'بنود الإنفاق', 'الدعم والحماية الاجتماعية', '17.2 مليار $ · 26%']),
-  budget_end: HEAD.concat(['البحث العلمي', '700 مليون $ · 1%', 'الفوائد إلزامية ولا تُخفَّض. خفض أي بند آخر يظهر أثره على الخدمات والاستقرار قبل اعتماده.']),
+  budget: HEAD.concat(['48.6', 'الإيرادات', '66.3', 'الإنفاق', '17.7', 'العجز', 'مليار $ سنويًا', 'الخزينة 36.0 مليار $ · تنقص 1.5 مليار $ شهريًا', 'بنود الإنفاق', 'الدعم والحماية الاجتماعية', '17.2 مليار $ · 26%']),
+  budget_end: HEAD.concat(['البحث العلمي', '700 مليون $ · 1%', NOTE_BUDGET]),
   taxes: HEAD.concat(['الضرائب', 'ضريبة الدخل', 'الشريحة العليا · 3.6 مليار $ سنويًا', '20%']),
-  taxes_end: HEAD.concat(['دعم الكهرباء', '0.9', 'رفع ضريبة أو خفض دعم يزيد الاضطراب في المحافظات الأفقر أولًا.']),
-  trade: HEAD.concat(['نظام الصرف', 'تعويم مُدار', 'التحويل', 'كامل', 'الاحتياطي الأجنبي', '8 أشهر واردات', 'القيود على الأموال', 'خفيفة']),
-  trade_end: HEAD.concat(['أكبر الشركاء', 'الاتحاد الأوروبي · الولايات المتحدة · الصين · السعودية · الهند', 'المبالغ بمليارات الدولارات. تغيير نظام الصرف إصلاح تدريجي يستغرق أشهرًا.']),
+  taxes_end: HEAD.concat(['دعم الكهرباء', '900 مليون $', NOTE_TAXES]),
+  trade: HEAD.concat(['نظام الصرف', 'تعويم مُدار', 'قابلية التحويل', 'كاملة', 'الاحتياطي الأجنبي', '8 أشهر واردات', 'ضوابط رأس المال', 'محدودة',
+    'فائدة المركزي', '8.25%', 'تمويل العجز', 'اقتراض محلي', 'السياسة النقدية والعملة', 'الفائدة والصرف وضوابط رأس المال · تغيير تدريجي', 'الميزان الخارجي · مليار $ سنويًا']),
+  trade_end: HEAD.concat(['أكبر الشركاء', PARTNERS, NOTE_TRADE]),
   // every string of a scrolling tab: each must be shown whole and clear of the fades in one of the tab's views
-  reach_budget: ['48.6', 'الإيرادات', '66.3', 'الإنفاق', '−17.7', 'العجز', 'مليار $ في السنة', 'بنود الإنفاق'].concat(LINES.flat(),
-    ['الفوائد إلزامية ولا تُخفَّض. خفض أي بند آخر يظهر أثره على الخدمات والاستقرار قبل اعتماده.']),
-  reach_taxes: ['الضرائب', 'ضريبة الدخل', 'الشريحة العليا · 3.6 مليار $ سنويًا', 'ضريبة الشركات', '11.6 مليار $ سنويًا', 'ضريبة المبيعات', 'السعر العام · 12.2 مليار $ سنويًا',
-    'الرسوم الجمركية', 'المتوسط المرجّح · 2.7 مليار $ سنويًا', '20%', '10%', '9%', 'الضرائب 30.1 مليار $ من إيرادات 48.6. الباقي من قناة السويس والبترول والمنح.',
-    'الدعم', 'دعم الوقود', 'مليار $ سنويًا · بنزين وسولار وغاز', '11.7', 'دعم الخبز والتموين', 'مليار $ سنويًا · 63 مليون مستفيد', '2.9', 'دعم الكهرباء', '0.9',
-    'رفع ضريبة أو خفض دعم يزيد الاضطراب في المحافظات الأفقر أولًا.'],
-  reach_trade: ['نظام الصرف', 'تعويم مُدار', 'التحويل', 'كامل', 'الاحتياطي الأجنبي', '8 أشهر واردات', 'القيود على الأموال', 'خفيفة', 'الميزان الخارجي في السنة',
-    'الصادرات', 'نفط وغاز · كيماويات · منسوجات · غذاء', '26.3', 'الواردات', 'قمح · آلات · وقود مكرر · سيارات', '52.9', 'عجز الميزان التجاري', 'الصادرات ناقص الواردات', '−26.6',
-    'قناة السويس', 'رسوم العبور · ممر تملكه مصر', '4.8', 'السياحة', '14.7 مليون زائر', '12.5', 'تحويلات المصريين بالخارج', 'الخليج · أوروبا · أمريكا', '12.6',
-    'أكبر الشركاء', 'الاتحاد الأوروبي · الولايات المتحدة · الصين · السعودية · الهند', 'المبالغ بمليارات الدولارات. تغيير نظام الصرف إصلاح تدريجي يستغرق أشهرًا.'],
+  reach_budget: ['48.6', 'الإيرادات', '66.3', 'الإنفاق', '17.7', 'العجز', 'مليار $ سنويًا', 'الخزينة 36.0 مليار $ · تنقص 1.5 مليار $ شهريًا', 'بنود الإنفاق'].concat(LINES.flat(), [NOTE_BUDGET]),
+  reach_taxes: ['الضرائب', 'الدعم'].concat(ROWS.taxes.flat(), ROWS.subsidies.flat(), [NOTE_TAXES]),
+  reach_trade: ['نظام الصرف', 'تعويم مُدار', 'قابلية التحويل', 'كاملة', 'الاحتياطي الأجنبي', '8 أشهر واردات', 'ضوابط رأس المال', 'محدودة', 'فائدة المركزي', '8.25%',
+    'تمويل العجز', 'اقتراض محلي', 'الميزان الخارجي · مليار $ سنويًا',
+    'أكبر الشركاء', PARTNERS, NOTE_TRADE].concat(ROWS.currency.flat(), ROWS.flows.flat()),
 };
 // a view's name: <tab>[_end|_at<offset>]; its tab is the first part, its scrolling sequence all but the scroll part
 const tabOf = (view) => view.split('_')[0];
@@ -140,7 +159,7 @@ async function b3Rects(b, d) {
 }
 
 async function measure(p, d, b3, view) {
-  return p.evaluate(({ d, TOK, BRIEF, HEAD, b3, view, HUDSEL_REST }) => {
+  return p.evaluate(({ d, TOK, BRIEF, ROWS, HEAD, b3, view, HUDSEL_REST }) => {
     const R = (r) => ({ x0: +r.left.toFixed(2), y0: +r.top.toFixed(2), x1: +r.right.toFixed(2), y1: +r.bottom.toFixed(2), w: +r.width.toFixed(2), h: +r.height.toFixed(2) });
     const issues = [], W = d.w, H = d.h, S = d.side, B = d.bottom, eps = 0.01, lu = 1 / 32;
     const root = document.documentElement;
@@ -251,7 +270,7 @@ async function measure(p, d, b3, view) {
       typeSeen[`${fs}/${fw}`] = (typeSeen[`${fs}/${fw}`] || 0) + 1;
       if (!(fs in TOK.type)) issues.push(`font size ${fs} for "${t}"`);
       else if (!TOK.type[fs].includes(fw)) issues.push(`font weight ${fs}/${fw} for "${t}"`);
-      if (fs === 18 && !TOK.title18.some((c) => el.closest('.' + c))) issues.push(`18 pt is for the panel's name and the headline numbers only: "${t}"`);
+      if (fs === 18 && !TOK.title18.some((c) => el.closest(c))) issues.push(`18 pt is for the panel's name and the headline numbers only: "${t}"`);
       if (fs === 13 && !/tabular-nums/.test(cs.fontVariantNumeric)) issues.push(`13 pt not tabular: "${t}"`);
       if (inSheet && !TOK.colors.includes(cs.color)) issues.push(`text colour off-token ${cs.color}: "${t}"`);
       if (cs.textOverflow === 'ellipsis') issues.push(`ellipsis on "${t}"`);
@@ -425,54 +444,100 @@ async function measure(p, d, b3, view) {
       if (tb && (getComputedStyle(tb).color !== TOK.sec || !getComputedStyle(tb).boxShadow.includes(TOK.sec))) issues.push('open tab not in the section colour');
       if (tb && /rgba\(0, 0, 0, 0\)|transparent/.test(getComputedStyle(tb).backgroundColor)) issues.push('open tab without its fill');
       qa('.r-tab:not(.on)').forEach((e) => { if (getComputedStyle(e).color !== TOK.t2) issues.push(`closed tab not in the secondary grey: ${e.textContent.trim()} ${getComputedStyle(e).color}`); }); }
-    // the section colour is for chrome only: no data text takes it, no data bar either; amber where the brief says
+    // the section colour is for chrome only (the open tab, the emblem; the top line and the dock are pseudo-elements and
+    // outside the sheet): no text, border, fill or icon of the sheet takes it; the share bars are a data colour, teal
     texts.filter((x) => x.sheet && !x.chrome && x.color === TOK.sec).forEach((x) => issues.push(`section colour on data text: "${x.t}"`));
-    qa('.e-bar i').forEach((e) => { if (getComputedStyle(e).backgroundColor === TOK.sec) issues.push('a share bar in the section colour (bars are data)'); });
+    qa('.sheet *').filter((e) => !e.closest('.r-tab.on, .s-emb, .frost')).forEach((e) => { const cs = getComputedStyle(e);
+      if ([cs.borderTopColor, cs.backgroundColor].includes(TOK.sec) || (e.closest('svg') && [cs.color, cs.stroke, cs.fill].includes(TOK.sec))) issues.push(`section colour on data chrome: ${label(e)}`); });
+    qa('.e-bar i').forEach((e) => { if (getComputedStyle(e).backgroundColor !== TOK.teal) issues.push(`a share bar not in teal (bars are data): ${getComputedStyle(e).backgroundColor}`); });
     { const amberOf = (sel, txt) => { const e = [...document.querySelectorAll(sel)].find((n) => visible(n) && n.textContent.replace(/\s+/g, ' ').trim() === txt);
         if (!e) issues.push(`amber check: «${txt}» not found`); else if (getComputedStyle(e).color !== TOK.amber) issues.push(`«${txt}» not in amber: ${getComputedStyle(e).color}`); };
       if (tab === 'overview') { amberOf('.r-kv b', '10.3%'); amberOf('.r-sc dd', '8.1% من الناتج'); amberOf('.r-chip', 'الشرعية'); }
-      if (tab === 'budget') amberOf('.e-sum b', '−17.7');
-      if (tab === 'trade' && visible(q('.e-flow:nth-child(4) .e-val'))) amberOf('.e-val', '−26.6'); }
-    // the panel's sizes (the brief)
+      if (tab === 'budget') { amberOf('.e-sum b', '17.7'); amberOf('.e-trs .r-amber', 'تنقص 1.5 مليار $ شهريًا'); }
+      if (tab === 'trade') { amberOf('.e-flow .e-val', '−26.6'); amberOf('.e-flow .e-val', '−4.3'); } }
+    // the panel's sizes (the brief); the budget summary: 18 pt bold numbers, each under its label (same right edge)
     TOK.size.forEach(([s, w, h]) => qa('.sheet ' + s).forEach((e) => { const r = e.getBoundingClientRect(); if (hiddenByScroll(box(r), e)) return;
       if ((w && !near(r.width, w)) || (h && !near(r.height, h))) issues.push(`size ${r.width.toFixed(1)}x${r.height.toFixed(1)} for ${s} (want ${w || 'any'} x ${h || 'any'})`); }));
-    // the white touches the owner confirmed: white tiles, white-outlined chips and the header chip (a warning chip stays amber)
+    if (tab === 'budget') qa('.e-sum span').forEach((s) => { const b = s.querySelector('b'), cs = getComputedStyle(b), rg = document.createRange(); rg.setStart(s, 0); rg.setEnd(s, 1);
+      if (parseFloat(cs.fontSize) !== 18 || +cs.fontWeight !== 700) issues.push(`summary number not 18/700: ${b.textContent.trim()} ${cs.fontSize}/${cs.fontWeight}`);
+      if (Math.abs(b.getBoundingClientRect().right - rg.getBoundingClientRect().right) > 1) issues.push(`summary number ${b.textContent.trim()} not under its label`); });
+    // the white touches the owner confirmed: white tiles, white-outlined chips and the header chip; the warning chip is
+    // amber with its down arrow
     { const wt = (sel, want, skip) => qa('.sheet ' + sel).filter((e) => !(skip && e.matches(skip))).forEach((e) => { const cs = getComputedStyle(e);
         Object.entries(want).forEach(([k, v]) => { if (cs[k] !== v) issues.push(`white touch off: ${sel} ${k} ${cs[k]} (want ${v})`); }); });
       wt('.r-tile', { color: TOK.t1 });
       wt('.r-chip', { borderTopColor: TOK.wLine, color: TOK.t1 }, '.e-bad');
+      wt('.r-chip.e-bad', { borderTopColor: TOK.amberLine, color: TOK.amber });
+      qa('.sheet .r-chip.e-bad').forEach((e) => { if (!e.querySelector('svg.r-arr use[href="#t-down"]')) issues.push('legitimacy chip without its down arrow'); });
       wt('.r-cap', { borderTopColor: TOK.wLine, color: TOK.t1 }); }
-    // the lines: interest is locked (a lock, not a control); every other budget, tax and subsidy line opens its adjuster
-    qa('.e-row').forEach((e) => { const nm = (e.querySelector('.r-at b') || e).textContent.trim(), fixed = e.classList.contains('e-fixed');
+    // the lines: interest (by its name) is locked: a lock, not a control; every other budget, tax, subsidy and currency
+    // line opens its adjuster
+    qa('.e-row').forEach((e) => { const nm = (e.querySelector('.r-at b') || e).textContent.trim(), fixed = nm === 'الفوائد';
+      if (e.classList.contains('e-fixed') !== fixed) issues.push(`«${nm}»: the e-fixed marker on the wrong line`);
       if (fixed && (e.classList.contains('tap') || e.getAttribute('role') === 'button' || !e.querySelector('.e-lock') || e.querySelector('.r-chev'))) issues.push(`«${nm}»: a mandatory line must show a lock and not be a control`);
       if (!fixed && (!e.classList.contains('tap') || e.getAttribute('role') !== 'button' || !e.querySelector('.r-chev') || e.querySelector('.e-lock'))) issues.push(`«${nm}»: a line must open its adjuster (a control with a chevron)`); });
-    // the numbers agree with each other (they are in the page whichever tab is open)
-    { const num = (s) => parseFloat(s.replace('−', '-').replace(/[^\d.\-]/g, ''));
-      const sumEl = [...document.querySelectorAll('.e-sum b')].map((e) => num(e.textContent)), [rev, spend, def] = sumEl;
-      if (Math.abs(rev - spend - def) > 0.051) issues.push(`numbers: revenue ${rev} - spending ${spend} is not the deficit ${def}`);
+    // the rows read exactly as the brief's tables (they are in the page whichever tab is open)
+    { const T = (e) => (e ? e.textContent.replace(/\s+/g, ' ').trim() : '');
+      const rowsAre = (what, sel, parts, want) => { const got = [...document.querySelectorAll(sel)].map((r) => parts.map((p) => (typeof p === 'function' ? p(r) : T(r.querySelector(p)))));
+        if (JSON.stringify(got) !== JSON.stringify(want)) issues.push(`brief rows differ: ${what}: ${JSON.stringify(got).slice(0, 160)}`); };
+      rowsAre('headline numbers', '.r-kpi', ['.r-kl', '.r-kv b', '.r-kv > span', '.r-kr', '.r-why'], ROWS.kpis);
+      rowsAre('status', '.r-sc', ['dt', 'dd'], ROWS.status);
+      rowsAre('decisions', '.r-act', ['.r-at > b', '.r-at > span', '.r-chip'], ROWS.acts);
+      rowsAre('budget summary', '.e-sum span', [(r) => r.firstChild.textContent.trim(), 'b'], ROWS.sum);
+      rowsAre('budget lines', '.r-body[data-tab="budget"] .e-row', ['.r-at > b', '.r-at > span'], ROWS.lines);
+      rowsAre('taxes', '.r-body[data-tab="taxes"] .r-sec:nth-of-type(1) .e-row', ['.r-at > b', '.r-at > span', '.e-val'], ROWS.taxes);
+      rowsAre('subsidies', '.r-body[data-tab="taxes"] .r-sec:nth-of-type(2) .e-row', ['.r-at > b', '.r-at > span', '.e-val'], ROWS.subsidies);
+      rowsAre('currency', '.r-body[data-tab="trade"] .e-row', ['.r-at > b', '.r-at > span'], ROWS.currency);
+      rowsAre('external balance', '.e-flow', ['.r-at > b', '.r-at > span', '.e-val'], ROWS.flows); }
+    // the money rule: under 1 billion in millions, never 1000 millions or more
+    { const all = q('.sheet').textContent.replace(/\s+/g, ' ');
+      for (const m of all.matchAll(/(\d+(?:\.\d+)?) مليار/g)) if (parseFloat(m[1]) < 1) issues.push(`money unit: «${m[0]}» (under 1 billion is written in millions)`);
+      for (const m of all.matchAll(/(\d+(?:\.\d+)?) (?:مليون|ملايين) \$/g)) if (parseFloat(m[1]) >= 1000) issues.push(`money unit: «${m[0]}» (1000 millions and more are billions)`); }
+    // the numbers agree with each other (they are in the page whichever tab is open); a number that cannot be read fails
+    { const num = (s) => parseFloat(s.replace('−', '-').replace(/[^\d.\-]/g, '')), off = (x, tol) => !(Math.abs(x) <= tol);
+      const [rev, spend, def] = [...document.querySelectorAll('.e-sum b')].map((e) => num(e.textContent));
+      if (off(spend - rev - def, 0.051)) issues.push(`numbers: spending ${spend} - revenue ${rev} is not the deficit ${def}`);
       const gdp = num(document.querySelector('.r-kpi .r-kv b').textContent), defPct = num(document.querySelector('.r-sc dd').textContent);
-      if (Math.abs(-def / gdp * 100 - defPct) > 0.06) issues.push(`numbers: the deficit ${-def} is ${(-def / gdp * 100).toFixed(2)}% of GDP ${gdp}, not ${defPct}%`);
+      if (off(def / gdp * 100 - defPct, 0.06)) issues.push(`numbers: the deficit ${def} is ${(def / gdp * 100).toFixed(2)}% of GDP ${gdp}, not ${defPct}%`);
       const rows = [...document.querySelectorAll('.r-body[data-tab="budget"] .e-row')];
-      const amt = rows.map((e) => parseFloat(e.dataset.amount)), shown = rows.map((e) => { const s = e.querySelector('.r-at > span').textContent; return /مليون/.test(s) ? num(s.split('·')[0]) / 1000 : num(s.split('·')[0]); });
-      amt.forEach((a, i) => { if (Math.abs(a - shown[i]) > 0.001) issues.push(`numbers: line ${i + 1} shows ${shown[i]} but its data is ${a}`); });
+      const amt = rows.map((e) => parseFloat(e.dataset.amount)), shown = rows.map((e) => { const s = e.querySelector('.r-at > span').textContent.split('·')[0]; return /مليون/.test(s) ? num(s) / 1000 : num(s); });
+      amt.forEach((a, i) => { if (off(a - shown[i], 0.001)) issues.push(`numbers: line ${i + 1} shows ${shown[i]} but its data is ${a}`); });
       const total = amt.reduce((a, b) => a + b, 0), max = Math.max(...amt);
-      if (Math.abs(total - spend) > 0.051) issues.push(`numbers: the lines add up to ${total.toFixed(1)}, not the spending ${spend}`);
+      if (off(total - spend, 0.051)) issues.push(`numbers: the lines add up to ${total.toFixed(1)}, not the spending ${spend}`);
       const pct = rows.map((e) => num(e.querySelector('.r-at > span').textContent.split('·')[1]));
       if (pct.reduce((a, b) => a + b, 0) !== 100) issues.push(`numbers: the shares add up to ${pct.reduce((a, b) => a + b, 0)}%`);
-      pct.forEach((p, i) => { if (Math.abs(amt[i] / spend * 100 - p) > 0.6) issues.push(`numbers: line ${i + 1} is ${(amt[i] / spend * 100).toFixed(1)}% of the spending, shown ${p}%`); });
-      rows.forEach((e, i) => { const w = parseFloat(e.querySelector('.e-bar i').style.width); if (Math.abs(w - amt[i] / max * 100) > 1.5) issues.push(`numbers: bar ${i + 1} is ${w}% (want ${(amt[i] / max * 100).toFixed(1)}% of the largest line)`); });
-      const val = (txt) => { const r = [...document.querySelectorAll('.e-row, .e-flow')].find((e) => e.querySelector('.r-at b').textContent.trim() === txt); return r ? num(r.querySelector('.e-val').textContent) : NaN; };
-      const subs = val('دعم الوقود') + val('دعم الخبز والتموين') + val('دعم الكهرباء');
-      if (!(subs <= amt[0] + 0.001)) issues.push(`numbers: the subsidies listed (${subs.toFixed(1)}) exceed their budget line (${amt[0]})`);
+      pct.forEach((p, i) => { if (off(amt[i] / spend * 100 - p, 0.6)) issues.push(`numbers: line ${i + 1} is ${(amt[i] / spend * 100).toFixed(1)}% of the spending, shown ${p}%`); });
+      // each bar as drawn (clipped to its track), against its amount over the largest line's
+      rows.forEach((e, i) => { const bi = e.querySelector('.e-bar i'), rr = bi.getBoundingClientRect(), pb = bi.parentElement.getBoundingClientRect();
+        if (!pb.width) return;                                            // drawn only while the budget tab is open
+        const w = +((Math.min(rr.right, pb.right) - Math.max(rr.left, pb.left)) / pb.width * 100).toFixed(1);
+        if (off(w - amt[i] / max * 100, 1.5)) issues.push(`numbers: bar ${i + 1} is ${w}% (want ${(amt[i] / max * 100).toFixed(1)}% of the largest line)`); });
+      // a value in billions (a «مليون $» value counts as thousandths)
+      const val = (txt) => { const r = [...document.querySelectorAll('.e-row, .e-flow')].find((e) => e.querySelector('.r-at b').textContent.trim() === txt); if (!r || !r.querySelector('.e-val')) return NaN;
+        const s = r.querySelector('.e-val').textContent; return /مليون \$/.test(s) ? num(s) / 1000 : num(s); };
+      const subs = val('دعم الوقود') + val('دعم الخبز والتموين') + val('دعم الكهرباء'), subLine = amt[rows.findIndex((e) => e.querySelector('.r-at b').textContent.trim() === 'الدعم والحماية الاجتماعية')];
+      if (!(subs <= subLine + 0.001)) issues.push(`numbers: the subsidies listed (${subs.toFixed(1)}) exceed their budget line (${subLine})`);
       const cut = [...document.querySelectorAll('.r-act')].find((e) => /دعم الوقود/.test(e.textContent));
       if (cut) { const share = num(cut.querySelector('b').textContent) / 100, save = num(cut.querySelector('.r-at > span').textContent);
-        if (Math.abs(share * val('دعم الوقود') - save) > 0.051) issues.push(`numbers: cutting the fuel subsidy ${share * 100}% saves ${(share * val('دعم الوقود')).toFixed(2)}, shown ${save}`); }
-      const taxes = [...document.querySelectorAll('.r-body[data-tab="taxes"] .r-sec:first-child .e-row')].map((e) => num(e.querySelector('.r-at > span').textContent.replace(/^[^·]*·/, (m) => (/\d/.test(m) ? m : ''))));
-      const tnote = document.querySelector('.r-body[data-tab="taxes"] .r-sec:first-child .s-note'), tsum = taxes.reduce((a, b) => a + b, 0);
-      const [tTot, tRev] = [...tnote.querySelectorAll('.ltr')].map((e) => num(e.textContent));
-      if (Math.abs(tsum - tTot) > 0.051) issues.push(`numbers: the taxes add up to ${tsum.toFixed(1)}, the note says ${tTot}`);
-      if (Math.abs(tRev - rev) > 0.051 || tTot > tRev) issues.push(`numbers: the note's revenue ${tRev} is not the budget's ${rev}`);
-      if (Math.abs(val('الصادرات') - val('الواردات') - val('عجز الميزان التجاري')) > 0.051) issues.push('numbers: exports - imports is not the trade balance'); }
+        if (off(share * val('دعم الوقود') - save, 0.051)) issues.push(`numbers: cutting the fuel subsidy ${share * 100}% saves ${(share * val('دعم الوقود')).toFixed(2)}, shown ${save}`); }
+      const taxes = [...document.querySelectorAll('.r-body[data-tab="taxes"] .r-sec:nth-of-type(1) .e-row')].map((e) => num(e.querySelector('.r-at > span').textContent.replace(/^[^·]*·/, (m) => (/\d/.test(m) ? m : ''))));
+      const tnote = document.querySelector('.r-body[data-tab="taxes"] > .s-note'), tsum = taxes.reduce((a, b) => a + b, 0);
+      const [tTot, tRev] = tnote ? [...tnote.querySelectorAll('.ltr')].map((e) => num(e.textContent)) : [NaN, NaN];
+      if (off(tsum - tTot, 0.051)) issues.push(`numbers: the taxes add up to ${tsum.toFixed(1)}, the note says ${tTot}`);
+      if (off(tRev - rev, 0.051) || !(tTot <= tRev)) issues.push(`numbers: the note's revenue ${tRev} is not the budget's ${rev}`);
+      if (off(val('الصادرات') - val('الواردات') - val('الميزان التجاري'), 0.051)) issues.push('numbers: exports - imports is not the trade balance');
+      const trs = document.querySelector('.e-trs'), hudT = [...document.querySelectorAll('.top .num')].map((e) => e.textContent).find((s) => /مليار \$/.test(s));
+      const [tNow, tMonth] = trs ? [...trs.querySelectorAll('.ltr')].map((e) => num(e.textContent)) : [NaN, NaN];
+      if (off(tNow - num(hudT || ''), 0.001)) issues.push(`numbers: the treasury ${tNow} is not the HUD's ${hudT}`);
+      if (off(tMonth - def / 12, 0.06)) issues.push(`numbers: the treasury falls ${tMonth} a month, but the deficit ${def} is ${(def / 12).toFixed(2)} a month`); }
+    // VoiceOver: the tabs are a tab list; each «لماذا؟» names its subject; the warning chip says which way; every line
+    // reads as one phrase (name: value and unit); the share bars are drawing only
+    { const tl = q('.r-tabs');
+      if (!tl || tl.getAttribute('role') !== 'tablist' || [...document.querySelectorAll('.r-tab')].some((e) => e.getAttribute('role') !== 'tab')) issues.push('a11y: the tabs are not a tab list');
+      [...document.querySelectorAll('.r-why')].forEach((e, i) => { if (!/^لماذا؟ \S/.test(e.getAttribute('aria-label') || '')) issues.push(`a11y: «لماذا؟» ${i + 1} does not name its subject`); });
+      [...document.querySelectorAll('.r-chip.e-bad')].forEach((e) => { if (!/تنخفض|ترتفع/.test(e.getAttribute('aria-label') || '')) issues.push('a11y: the warning chip does not say which way'); });
+      [...document.querySelectorAll('.e-row')].forEach((e) => { const nm = e.querySelector('.r-at b').textContent.trim(); if (!(e.getAttribute('aria-label') || '').startsWith(nm + ': ')) issues.push(`a11y: «${nm}» has no label`); });
+      [...document.querySelectorAll('.e-bar')].forEach((e, i) => { if (e.getAttribute('aria-hidden') !== 'true') issues.push(`a11y: bar ${i + 1} is read out`); }); }
     // no image in the sheet but the flag and the header strip
     [...q('.sheet').querySelectorAll('*')].forEach((e) => {
       if (e.closest('.frost')) return;                                   // the panel's own backdrop layer
@@ -484,6 +549,7 @@ async function measure(p, d, b3, view) {
       if (!(fl.left >= nm.right - 0.5 && em.right <= nm.left && xb.right <= em.left + 0.5)) issues.push('header order must be flag, name, ..., emblem, close (right to left)'); }
     { const tabs = qa('.r-tab');
       if (tabs.length !== 4 || tabs[0].textContent.trim() !== 'نظرة عامة') issues.push('tabs must be the 4, «نظرة عامة» first');
+      const ic = tabs.map((e) => e.querySelector('svg use').getAttribute('href')).join(','); if (ic !== TOK.tabIcons) issues.push(`tab icons must be grid, pie, percent, ship: ${ic}`);
       for (let k = 1; k < tabs.length; k++) if (!(tabs[k].getBoundingClientRect().right <= tabs[k - 1].getBoundingClientRect().left + 0.5)) issues.push(`tab ${k + 1} is not left of tab ${k}`);
       const ons = qa('.r-tab.on'); if (ons.length !== 1 || ons[0].dataset.for !== tab || ons[0].getAttribute('aria-selected') !== 'true') issues.push('exactly the open tab must be selected'); }
     const order = (row, sels, what) => { const bx = sels.map((s) => row.querySelector(s)).filter(Boolean).map((e) => e.getBoundingClientRect());
@@ -541,7 +607,7 @@ async function measure(p, d, b3, view) {
 
     return { issues, typeSeen, texts, clearNow, fit: { top: window.__fit, sheet: fit, sheetPos: window.__sheetpos, body }, map: m, hiddenLabels,
       sheet: R(sr), hits: taps.map((t) => ({ l: t.label, x0: +t.hit.x0.toFixed(1), x1: +t.hit.x1.toFixed(1), y0: +t.hit.y0.toFixed(1), y1: +t.hit.y1.toFixed(1) })) };
-  }, { d, TOK, BRIEF, HEAD, b3, view, HUDSEL_REST });
+  }, { d, TOK, BRIEF, ROWS, HEAD, b3, view, HUDSEL_REST });
 }
 
 async function contrast(p, texts) {
@@ -632,10 +698,12 @@ async function selftest(b) {
   // these functions from their source, so each is self-contained (the hard one also drops the bottom fade flag)
   const straddleSoft = () => { const b = [...document.querySelectorAll('.r-body')].find((e) => e.getClientRects().length), bb = b.getBoundingClientRect();
     const r = [...b.querySelectorAll('.e-row, .e-flow')].find((e) => e.getBoundingClientRect().top + 12 > bb.bottom);
-    b.scrollTop += r.getBoundingClientRect().top + 12 - bb.bottom; };
+    b.scrollTop += r.getBoundingClientRect().top + 12 - bb.bottom;
+    document.documentElement.dataset.ftop = b.scrollTop > 0.5 ? '1' : '0'; };
   const straddleHard = () => { const b = [...document.querySelectorAll('.r-body')].find((e) => e.getClientRects().length), bb = b.getBoundingClientRect();
     const r = [...b.querySelectorAll('.e-row, .e-flow')].find((e) => e.getBoundingClientRect().top + 12 > bb.bottom);
     b.scrollTop += r.getBoundingClientRect().top + 12 - bb.bottom;
+    document.documentElement.dataset.ftop = b.scrollTop > 0.5 ? '1' : '0';
     document.documentElement.dataset.fbot = '0'; };
   // place the scroll hint over the name of the first line
   const hintOverText = () => { const h = document.querySelector('.r-hint'), n = document.querySelector('.r-body[data-tab="budget"] .e-row .r-at b').getBoundingClientRect(), r = document.querySelector('.r-in').getBoundingClientRect();
@@ -685,7 +753,7 @@ async function selftest(b) {
     ['hint over legible text', d, '&tab=budget', '', /scroll hint over text/, hintOverText],
     ['% before its number', d, '', '', /% shown before its number/, () => { document.querySelector('.r-sc dd').textContent = 'من الناتج 8.1%'; }],
     ['brief text scrolled away', d, '&tab=budget', '', /brief text not fully visible: بنود الإنفاق/, () => { const b = document.querySelector('.r-body[data-tab="budget"]'); b.scrollTop = b.scrollHeight; }],
-    ['brief text', d, '', '', /brief text not fully visible: لماذا؟|brief text missing/, () => { document.querySelectorAll('.r-why').forEach((e) => { e.textContent = 'لماذا'; }); }],
+    ['brief text', d, '', '', /brief text missing: لماذا؟/, () => { document.querySelectorAll('.r-why').forEach((e) => { e.textContent = 'لماذا'; }); }],
     ['map label cut', d, '', '.labels .cut { display: inline !important; }', /map (label|city dot) .* cut by a panel edge/],
     ['map label at the screen edge', d, '', '.labels .cut { display: inline !important; }', /map (label|city dot) .* sliced by the screen edge or the side inset/],
     ['contrast', d, '', '.r-st { background: rgb(234, 242, 247) !important; }', /^contrast [0-3](\.\d+)? for "عجز الموازنة"/],
@@ -703,28 +771,65 @@ async function selftest(b) {
     ['closed tabs like the open one', d, '', '[data-sec] .r-tab { color: var(--t1) !important; }', /closed tab not in the secondary grey/],
     ['open tab without its fill', d, '', '[data-sec] .r-tab.on { background: none !important; }', /open tab without its fill/],
     ['section colour on data', d, '', '.r-sc dd { color: var(--sec) !important; }', /section colour on data text/],
-    ['bars in the section colour', d, '&tab=budget', '.e-bar i { background: var(--sec) !important; }', /a share bar in the section colour/],
+    ['bars in the section colour', d, '&tab=budget', '.e-bar i { background: var(--sec) !important; }', /a share bar not in teal/],
+    ['bars in another colour', d, '&tab=budget', '.e-bar i { background: var(--blue) !important; }', /a share bar not in teal/],
+    ['section colour on an icon', d, '&tab=taxes', '.r-chev { color: var(--sec) !important; }', /section colour on data chrome/],
+    ['section colour on a border', d, '', '.r-st { border-color: var(--sec) !important; }', /section colour on data chrome/],
     ['inflation not amber', d, '', '.r-kv b.r-amber { color: var(--t1) !important; }', /«10\.3%» not in amber/],
     ['legitimacy cost not amber', d, '', '[data-sec] .r-chip.e-bad { color: var(--t1) !important; }', /«الشرعية» not in amber/],
-    ['deficit not amber', d, '&tab=budget', '.e-sum b.r-amber { color: var(--t1) !important; }', /«−17\.7» not in amber/],
+    ['deficit not amber', d, '&tab=budget', '.e-sum b.r-amber { color: var(--t1) !important; }', /«17\.7» not in amber/],
+    ['trade deficit not amber', d, '&tab=trade', '.e-flow b.e-val.r-amber { color: var(--t1) !important; }', /«−26\.6» not in amber/],
+    ['deficit share not amber', d, '', '.r-sc dd.r-amber { color: var(--t1) !important; }', /«8\.1% من الناتج» not in amber/],
+    ['legitimacy chip outline white', d, '', '[data-sec] .r-chip.e-bad { border-color: rgba(234, 242, 247, .5) !important; }', /white touch off: \.r-chip\.e-bad/],
+    ['legitimacy chip without its arrow', d, '', '', /legitimacy chip without its down arrow/, () => { document.querySelector('.r-chip.e-bad svg').remove(); }],
+    ['tab icons swapped', d, '', '', /tab icons must be/, () => { const u = document.querySelectorAll('.r-tab svg use'); u[1].setAttribute('href', '#i-ship'); u[3].setAttribute('href', '#i-pie'); }],
+    ['18 pt on a summary label', d, '&tab=budget', '.e-sum span { font-size: 18px !important; font-weight: 700 !important; }', /18 pt is for the panel's name.*"الإيرادات"/],
+    ['summary number not 18', d, '&tab=budget', '.e-sum b { font-size: 14px !important; }', /summary number not 18\/700/],
+    ['summary number off its label', d, '&tab=budget', '.e-sum span { align-items: flex-end !important; }', /summary number .* not under its label/],
+    ['fixed row height', d, '&tab=budget', '.e-fixed { height: 40px !important; }', /size [\d.]+x40\.0 for \.e-row/],
+    ['line radius', d, '&tab=budget', '.e-row { border-radius: 6px !important; }', /radius 6 for \.e-row/],
+    ['bar radius', d, '&tab=budget', '.e-bar { border-radius: 1px !important; }', /radius 1 for \.e-bar/],
+    ['lock size', d, '&tab=budget', '.e-lock { width: 12px !important; height: 12px !important; }', /icon size 12x12 \(want 16\)/],
+    ['background image', d, '', '.r-kpi { background-image: url(header_cairo.jpg) !important; }', /a background image in the sheet/],
+    ['treasury not the HUD\'s', d, '&tab=budget', '', /numbers: the treasury 40 is not the HUD's/, () => { document.querySelector('.e-trs .ltr').textContent = '40.0'; }],
+    ['treasury falls the wrong amount', d, '&tab=budget', '', /numbers: the treasury falls 3 a month/, () => { document.querySelectorAll('.e-trs .ltr')[1].textContent = '3.0'; }],
+    ['treasury fall not amber', d, '&tab=budget', '.e-trs .r-amber { color: var(--t2) !important; }', /«تنقص 1\.5 مليار \$ شهريًا» not in amber/],
+    ['tabs not a tab list', d, '', '', /a11y: the tabs are not a tab list/, () => { document.querySelector('.r-tabs').removeAttribute('role'); }],
+    ['why without its subject', d, '', '', /a11y: «لماذا؟» 2 does not name its subject/, () => { document.querySelectorAll('.r-why')[1].removeAttribute('aria-label'); }],
+    ['warning chip silent', d, '', '', /a11y: the warning chip does not say which way/, () => { document.querySelector('.r-chip.e-bad').removeAttribute('aria-label'); }],
+    ['line without a label', d, '&tab=taxes', '', /a11y: «ضريبة الشركات» has no label/, () => { document.querySelectorAll('.r-body[data-tab="taxes"] .e-row')[1].removeAttribute('aria-label'); }],
+    ['bar read out', d, '&tab=budget', '', /a11y: bar 1 is read out/, () => { document.querySelector('.e-bar').removeAttribute('aria-hidden'); }],
     ['emblem size', d, '', '.s-emb { width: 26px !important; height: 26px !important; }', /size 26\.0x26\.0 for \.s-emb/],
     ['bar size', d, '&tab=budget', '.e-bar { width: 60px !important; }', /size 60\.0x6\.0 for \.e-bar/],
     ['flow height', d, '&tab=trade', '.e-flow { height: 32px !important; }', /for \.e-flow \(want any x 36\)/],
     ['tile icons cyan', d, '', '[data-sec] .r-tile { color: rgb(127, 233, 255) !important; }', /white touch off: \.r-tile/],
-    ['chip not white', d, '', '[data-sec] .r-chip { border-color: rgba(63, 224, 208, .7) !important; }', /white touch off: \.r-chip/],
+    ['chip not white', d, '', '[data-sec] .r-chip { border-color: rgba(63, 224, 208, .7) !important; }', /white touch off: \.r-chip borderTopColor/],
     ['interest adjustable', d, '&tab=budget', '', /«الفوائد»: a mandatory line must show a lock/, () => { const r = document.querySelector('.e-fixed'); r.classList.add('tap'); r.setAttribute('role', 'button'); }],
+    ['interest made a normal line', d, '&tab=budget', '', /«الفوائد»: a mandatory line must show a lock/, () => { const r = document.querySelector('.e-fixed'); r.classList.remove('e-fixed'); r.classList.add('tap'); r.setAttribute('role', 'button');
+      const l = r.querySelector('.e-lock'); l.classList.remove('e-lock'); l.classList.add('r-chev'); }],
+    ['another line locked', d, '&tab=budget', '', /«الدفاع»: a line must open its adjuster/, () => { const r = [...document.querySelectorAll('.e-row')].find((e) => /الدفاع/.test(e.textContent)); r.classList.add('e-fixed'); r.classList.remove('tap'); r.removeAttribute('role');
+      const c = r.querySelector('.r-chev'); c.classList.remove('r-chev'); c.classList.add('e-lock'); }],
     ['a line without its adjuster', d, '&tab=taxes', '', /«ضريبة الدخل»: a line must open its adjuster/, () => { document.querySelector('.r-body[data-tab="taxes"] .e-row .r-chev').remove(); }],
     ['an image in the sheet', d, '', '', /an image in the sheet/, () => { const i = document.createElement('img'); i.src = '../../shared/flags/eg.svg'; i.style.cssText = 'width:17px;height:17px'; document.querySelector('.r-act .r-tile').replaceChildren(i); }],
-    ['deficit does not add up', d, '', '', /numbers: revenue .* is not the deficit/, () => { document.querySelector('.e-sum b').textContent = '50.0'; }],
+    ['deficit does not add up', d, '', '', /numbers: spending .* is not the deficit/, () => { document.querySelector('.e-sum b').textContent = '50.0'; }],
     ['deficit share wrong', d, '', '', /numbers: the deficit .* of GDP/, () => { document.querySelector('.r-kpi .r-kv b').textContent = '250'; }],
     ['lines do not add up', d, '&tab=budget', '', /numbers: the lines add up to/, () => { const r = document.querySelectorAll('.r-body[data-tab="budget"] .e-row')[2]; r.dataset.amount = '12.0'; r.querySelector('.r-at > span .ltr').textContent = '12.0'; }],
     ['line shown differs from its data', d, '&tab=budget', '', /numbers: line 3 shows 12 but its data is 9\.9/, () => { document.querySelectorAll('.r-body[data-tab="budget"] .e-row')[2].querySelector('.r-at > span .ltr').textContent = '12.0'; }],
     ['shares wrong', d, '&tab=budget', '', /numbers: the shares add up to 102%/, () => { document.querySelectorAll('.r-body[data-tab="budget"] .e-row')[0].querySelectorAll('.r-at > span .ltr')[1].textContent = '28%'; }],
+    ['bar overridden by CSS', d, '&tab=budget', '.r-body[data-tab="budget"] .e-row:nth-of-type(3) .e-bar i { width: 80% !important; }', /numbers: bar 3 is 80%/],
+    ['amount unreadable', d, '&tab=budget', '', /numbers: line 3 shows 9\.9 but its data is NaN/, () => { delete document.querySelectorAll('.r-body[data-tab="budget"] .e-row')[2].dataset.amount; }],
+    ['a name not found', d, '&tab=trade', '', /numbers: exports - imports is not the trade balance/, () => { [...document.querySelectorAll('.e-flow b')].find((e) => e.textContent === 'الصادرات').textContent = 'السلع'; }],
+    ['note revenue wrong', d, '&tab=taxes', '', /numbers: the note's revenue 50/, () => { document.querySelectorAll('.r-body[data-tab="taxes"] > .s-note .ltr')[1].textContent = '50.0'; }],
+    ['one share wrong', d, '&tab=budget', '', /numbers: line 1 is 25\.9% of the spending, shown 27%/, () => { const r = document.querySelectorAll('.r-body[data-tab="budget"] .e-row');
+      r[0].querySelectorAll('.r-at > span .ltr')[1].textContent = '27%'; r[1].querySelectorAll('.r-at > span .ltr')[1].textContent = '19%'; }],
+    ['money unit', d, '&tab=taxes', '', /money unit: «0\.9 مليار»/, () => { [...document.querySelectorAll('.e-row')].find((e) => /الكهرباء/.test(e.textContent)).querySelector('.e-val').innerHTML = '<span class="ltr">0.9</span> مليار $'; }],
+    ['brief rows swapped', d, '&tab=budget', '', /brief rows differ: budget lines/, () => { const r = document.querySelectorAll('.r-body[data-tab="budget"] .e-row'); const a = r[5].querySelector('.r-at > b'), b = r[6].querySelector('.r-at > b'); [a.textContent, b.textContent] = [b.textContent, a.textContent]; }],
+    ['a rate changed', d, '&tab=taxes', '', /brief rows differ: taxes/, () => { document.querySelectorAll('.r-body[data-tab="taxes"] .e-row .e-val')[1].textContent = '25%'; }],
     ['bar out of proportion', d, '&tab=budget', '', /numbers: bar 3 is 80%/, () => { document.querySelectorAll('.r-body[data-tab="budget"] .e-row')[2].querySelector('.e-bar i').style.width = '80%'; }],
     ['subsidies exceed their line', d, '&tab=taxes', '', /numbers: the subsidies listed/, () => { [...document.querySelectorAll('.e-row')].find((e) => /دعم الوقود/.test(e.textContent)).querySelector('.e-val').textContent = '16.0'; }],
     ['saving wrong', d, '', '', /numbers: cutting the fuel subsidy/, () => { [...document.querySelectorAll('.r-act')].find((e) => /دعم الوقود/.test(e.textContent)).querySelector('.r-at > span .ltr').textContent = '2.0'; }],
-    ['taxes do not add up', d, '&tab=taxes', '', /numbers: the taxes add up to/, () => { document.querySelector('.r-body[data-tab="taxes"] .s-note .ltr').textContent = '35.0'; }],
-    ['trade balance wrong', d, '&tab=trade', '', /numbers: exports - imports/, () => { [...document.querySelectorAll('.e-flow')].find((e) => /الواردات/.test(e.querySelector('b').textContent)).querySelector('.e-val').textContent = '50.0'; }],
+    ['taxes do not add up', d, '&tab=taxes', '', /numbers: the taxes add up to/, () => { document.querySelector('.r-body[data-tab="taxes"] > .s-note .ltr').textContent = '35.0'; }],
+    ['trade balance wrong', d, '&tab=trade', '', /numbers: exports - imports/, () => { [...document.querySelectorAll('.e-flow')].find((e) => e.querySelector('b').textContent === 'الواردات').querySelector('.e-val').textContent = '50.0'; }],
     ['bar fills from the left', d, '&tab=budget', '.e-bar i { inset: 0 auto 0 0 !important; }', /a bar does not fill from the right/],
     ['close not round', d, '', '.r-x { width: 40px !important; }', /close button is not round/],
   ];
@@ -779,7 +884,7 @@ async function selftest(b) {
     const ctx = await b.newContext({ viewport: { width: d.w, height: d.h }, deviceScaleFactor: 3 });
     const ctx1 = await b.newContext({ viewport: { width: d.w, height: d.h }, deviceScaleFactor: 1 });
     const entry = { device: `${d.w}x${d.h} side ${d.side} bottom ${d.bottom} ${d.cutout}`, renderedAt: new Date().toISOString(), inputs: { files: INPUTS, sha1: inputsHash() },
-      issues: [], views: {}, pngs: [] };
+      issues: [], views: {}, pngs: [], pngSha1: {}, env: { chromium: b.version() } };
     const clearBy = {};
     for (const { suffix, extra, png: save } of await viewsFor(ctx1, d)) {
       const view = viewOf(extra), p = await open(ctx, PAGE + qs(d) + extra);
@@ -787,8 +892,10 @@ async function selftest(b) {
         const png = suffix ? path.join(__dirname, d.id + suffix + '.png') : path.join(OUT, d.id + '.png');
         await p.screenshot({ path: png });
         entry.pngs.push(path.relative(OUT, png));
+        entry.pngSha1[path.relative(OUT, png)] = crypto.createHash('sha1').update(fs.readFileSync(png)).digest('hex');
       }
-      if (!suffix) { const ph = await open(ctx, PAGE + qs(d) + '&hit=1'); await ph.screenshot({ path: path.join(__dirname, d.id + '_hit.png') }); await ph.close(); }
+      if (!suffix) { const hp = path.join(__dirname, d.id + '_hit.png'), ph = await open(ctx, PAGE + qs(d) + '&hit=1'); await ph.screenshot({ path: hp }); await ph.close();
+        entry.pngSha1[path.relative(OUT, hp)] = crypto.createHash('sha1').update(fs.readFileSync(hp)).digest('hex'); }
       const { m, c } = await check(p, d, b3, view);
       addClear(clearBy, view, m.clearNow);
       m.issues.forEach((i) => entry.issues.push(`${view}: ${i}`));

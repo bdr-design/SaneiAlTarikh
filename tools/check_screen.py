@@ -43,6 +43,10 @@ for d in devices:
 # Reports that name their inputs (newer screens): the report and the self-test must come from the current files,
 # each device as devices.json defines it now, every view clean, every PNG they list at 3x, and the self-test present.
 inputs = next((e["inputs"] for e in report.values() if isinstance(e, dict) and "inputs" in e), None)
+# a screen whose renderer writes its inputs is held to that, even if a report was stripped of them
+rjs = screen / "_build/render.js"
+strict = rjs.exists() and "inputs:" in rjs.read_text(encoding="utf-8")
+check(bool(inputs) or not strict, "the report names its inputs (its render.js writes them)")
 if inputs:
     import hashlib
     for need in ("index.html", "_build/render.js"):
@@ -55,8 +59,16 @@ if inputs:
         check(entry.get("inputs", {}).get("sha1") == digest, f"{d['id']}: report made from the current inputs ({len(inputs['files'])} files)")
         want_dev = f"{d['w']}x{d['h']} side {d['side']} bottom {d['bottom']} {d['cutout']}"
         check(entry.get("device") == want_dev, f"{d['id']}: rendered as devices.json defines it ({want_dev})")
-        for view, v in entry.get("views", {}).items():
+        views, pngs = entry.get("views") or {}, entry.get("pngs") or []
+        check(bool(views) and f"{d['id']}.png" in pngs, f"{d['id']}: the report lists its views and the main render")
+        if any("png" in v for v in views.values()):
+            check(len(pngs) == sum(v.get("png") is True for v in views.values()), f"{d['id']}: one PNG per saved view")
+        for view, v in views.items():
             check(v.get("issueCount") == 0, f"{d['id']}: view {view} has 0 issues")
+        # newer reports bind every PNG (and the hit render) to the report by its content
+        for rel, sha in (entry.get("pngSha1") or {}).items():
+            png = screen / rel
+            check(png.exists() and hashlib.sha1(png.read_bytes()).hexdigest() == sha, f"{d['id']}: {rel} is the render the report checked")
         for rel in entry.get("pngs", []):
             png = screen / rel
             check(png.exists() and Image.open(png).size == (d["w"] * 3, d["h"] * 3), f"{d['id']}: {rel} exists at 3x")
