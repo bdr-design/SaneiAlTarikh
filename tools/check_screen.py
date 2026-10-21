@@ -40,6 +40,26 @@ for d in devices:
     entry = report.get(d["id"])
     issues = entry.get("issues") if isinstance(entry, dict) else None
     check(issues == [], f"{d['id']}: report issues = {len(issues) if issues is not None else 'missing'}")
+# Reports that name their inputs (newer screens): the report and the self-test must come from the current files,
+# every view must be clean, and every PNG they list must exist at 3x.
+inputs = next((e["inputs"] for e in report.values() if isinstance(e, dict) and "inputs" in e), None)
+if inputs:
+    import hashlib
+    digest = hashlib.sha1(b"".join((screen / f).read_bytes() for f in inputs["files"])).hexdigest()
+    for d in devices:
+        entry = report.get(d["id"], {})
+        check(entry.get("inputs", {}).get("sha1") == digest, f"{d['id']}: report made from the current {', '.join(inputs['files'])}")
+        for view, v in entry.get("views", {}).items():
+            check(v.get("issueCount") == 0, f"{d['id']}: view {view} has 0 issues")
+        for rel in entry.get("pngs", []):
+            png = screen / rel
+            check(png.exists() and Image.open(png).size == (d["w"] * 3, d["h"] * 3), f"{d['id']}: {rel} exists at 3x")
+    selftest = screen / "_build/selftest.json"
+    if selftest.exists():
+        st = json.loads(selftest.read_text())
+        check(st.get("inputs", {}).get("sha1") == digest, "selftest.json made from the current inputs")
+        check(bool(st.get("results")) and all(r.get("ok") for r in st["results"]), f"selftest: every planted defect caught ({sum(1 for r in st.get('results', []) if r.get('ok'))}/{len(st.get('results', []))})")
+        check(all(not v for v in st.get("cleanIssues", {}).values()), "selftest: clean pages have 0 issues")
 if baseline:
     a = np.asarray(Image.open(screen / "i16promax.png").convert("RGB"), dtype=np.float32)
     b = np.asarray(Image.open(baseline).convert("RGB"), dtype=np.float32)

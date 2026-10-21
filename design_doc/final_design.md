@@ -1445,9 +1445,14 @@ As in final-1.0, plus:
 
 | Status | Screens |
 |---|---|
-| **Approved** | Main play screen (as designed for the 17 Pro Max); UI tokens; main menu; new-game flow |
-| **Pending design** (user's list) | Province panel; state; economy budget; markets; politics and parties; internal and unrest; military fronts; forces and production; diplomacy; UN Security Council; intelligence; research; event and decision modal; war and peace; notifications; saves and settings; the "why" sheet; end screens |
+| **Approved** | Main play screen (as designed for the 17 Pro Max); UI tokens; main menu; new-game flow; **province panel** (2026-10-20: a 320 pt card first, the map stays the centre; «تفاصيل المحافظة» opens the full-height details with 4 tabs; `design/screen4/R`, brief `design/shared/SCREEN4_BRIEF.md`) |
+| **Pending design** (user's list) | Province details tabs الإنشاءات / القوات / السياسات; state (proposal shown 2026-10-20); economy budget; markets; politics and parties; internal and unrest; military fronts; forces and production; diplomacy; UN Security Council; intelligence; research; event and decision modal; war and peace; notifications; saves and settings; the "why" sheet; end screens |
 | **Pending design** (added) | Speed popover; map-mode popover; **front-sector arrow interaction** (own sector highlighted, partner sectors shown read-only); pending-orders list; credits and sources; onboarding; country info card; **government chooser** (D-29); **small-phone variants of the top row** (D-31); **save mirror prompt** (D-28) |
+
+**Province details, engine follow-up (from the approved province panel, 2026-10-20).** The «الحكم» tab shows three levers the engine does not model yet. Each needs a data model before it is built; until then the values are illustrative.
+- **Governor:** an office per admin region, appointed by the head of state (Egypt 2011: presidential appointment), with a defined effect on administration and on unrest response.
+- **Development priority** (industry, services, infrastructure): a share of the public-investment budget line per admin region.
+- **Tax burden** (low, balanced, high): Egypt's taxes were national in 2011. The lever is to be defined as local fees and collection effort, or removed for unitary states.
 
 ### 6.2 Approved tokens (`design/tokens.json`)
 
@@ -2051,6 +2056,29 @@ These answers override the defaults below. They are logged in `decisions/decisio
 | D-21 | **No device loan possible** | Replaced by: an "XR budget mode" in debug builds on the owner's phone (XR memory cap, 16 MB tile cache, 60 Hz cap, time budgets tightened by the measured speed gap); deterministic work counters in Linux CI; and XR-size layout and UI tests on the iOS Simulator in GitHub Actions. Real A12 heat, GPU and battery remain unmeasured: an accepted risk. |
 | D-28 | Saves in Documents plus an optional mirror | As recommended. |
 | D-29 | Government chooser | As recommended. Needs one screen design. |
+| D-2 | Medium imagery (z7) | As recommended; final after the device test. |
+| D-2b | Light label method (glyph distance-field atlas) | As recommended. |
+| D-3 | **Opaque panels always, no blur** | The owner chose lightness over the approved glass. Shown as a proposal first (`design/proposals/D3_panels`); not applied to any approved design until the owner confirms the look. |
+| D-5 | Maximum zoom about 1 km/pt | As recommended; final after the device test. |
+| D-7 | يناير… with a setting | As recommended. |
+| D-10 | Parties: tier A about 40 by province, tier B about 80 modelled | As recommended. |
+| D-11 | About 10 releasable states | As recommended. |
+| D-13 | Generic agency names | As recommended. |
+| D-14 | Historical killings as neutral news only | As recommended. |
+| D-15 | **Smooth, realistic unit movement** (owner's reference: a "General / World War" style mobile game) | Replaces discrete jumps. Must stay light: animate only on-screen moving units, draw frames only while something moves, simplify at maximum speed or when hot. A moving prototype needs the owner's approval with the military screen. |
+| D-17 | Free OFL Arabic logo font from 3 samples | As recommended. |
+| D-18 | Flexible historical events | As recommended. |
+| D-19 | Fog of war as estimates | As recommended. |
+| D-20 | Climate on, with a toggle | As recommended. |
+| D-22 | Events 80 / 50 / 40 | As recommended. |
+| D-23 | Historical packs reuse the 2004 imagery | As recommended. |
+| D-24 | Campaign ends at 2100 | As recommended. |
+| D-25 | **Early version first** | A playable v0.5 after M3 (map, economy, politics, events; no military yet), then M4–M8. Same total range, re-estimated after M0b and M1a. |
+| D-26 | NASA Blue Marble NG with topography and bathymetry | Chosen from the owner's criteria (light and realistic). An AI-generated map was declined because it cannot match real geography. Pending: bathymetry licence check; owner approves the look on the device. |
+| D-27 | Equipment: 20-year spending + legacy stock + imports | As recommended. |
+| D-30 | No personality traits for real leaders | As recommended. |
+| D-31 | Small-phone top row | Covered: the owner approved screen 1 (B3) after seeing all 7 devices. |
+| **Military control** | **Full control of each army** (owner's reference: «الجنرال | الحرب العالمية») | **Replaces "automated fronts only" (§5.4).** The player orders each army: move, attack, halt and waypoints. AI countries run their own armies the same way. Consequences: an order queue and unit selection UI, per-army routing on demand (the daily routing budget in §5.4 must be re-measured), operational AI per army, and the M4 estimate grows (roughly +3–5 weeks; unverified, re-estimate at M4 planning). Equipment stays generic; air and naval stay simplified in v1. |
 
 ### 13.1 Design and technical choices
 

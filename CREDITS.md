@@ -27,7 +27,7 @@
 
 The z4 and z6 tiles used here (312 tiles) are built only from **ETOPO1** (NOAA) and **GMTED2010** (USGS), per each tile's `x-amz-meta-x-imagery-sources` header, checked 2026-10-20. The per-tile list is in `evidence/terrain_tile_sources_2026-10-20.txt`. None of the providers marked "All rights reserved" above appear in these tiles.
 
-`design/shared/world_d1.jpg`, `design/shared/map_mena_d1.jpg` and the screen renders that show them are derived mainly from US Government works (NASA, NOAA, USGS), which carry no copyright. The project claims rights only in its own changes (grading, borders, labels and layout).
+`design/shared/world_d1.jpg`, `design/shared/map_mena_d1.jpg` and the screen renders that show them are derived mainly from US Government works (NASA, NOAA, USGS), which carry no copyright. The project claims rights only in its own changes (grading, borders, labels and layout). The panel header strips (`header_cairo.jpg` in `design/screen4/R` and the proposals) are crops of `map_mena_d1.jpg`, with the same source.
 
 ## Vector data
 - **Natural Earth** (public domain): admin-0, admin-1, disputed areas.
