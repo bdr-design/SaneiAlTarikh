@@ -26,17 +26,19 @@ def cut(start, end, new):
 # the panel's CSS replaces variant A's; the sheet markup replaces A's sheet
 t0 = t.index('<style>\n  /* ================= Screen 4, variant A')
 t1 = t.index('</style>', t0) + len('</style>')
-t = t[:t0] + '<style>\n' + (S / 'panel.css').read_text(encoding='utf-8') + '</style>' + t[t1:]
+t = t[:t0] + '<style>\n' + (S / 'panel.css').read_text(encoding='utf-8') + (S / 'province.css').read_text(encoding='utf-8') + '</style>' + t[t1:]
 m0 = t.index('  <!-- Province panel: tabbed side sheet from the right -->')
 m1 = t.index('  </section>', t.index('<section class="sheet glass"', m0)) + len('  </section>')
 t = t[:m0] + (S / 'sheet.html').read_text(encoding='utf-8').rstrip('\n') + t[m1:]
 
 sub('<title>لوحة المحافظة A</title>', '<title>لوحة المحافظة R</title>')
 sub("     &tab=politics|society|economy|security opens that tab of the province sheet (default politics = «السياسة»).\n",
-    "     &view=govern opens «تفاصيل المحافظة» (the full-height details, governance tab) instead of the card,\n"
+    "     &view=govern opens «تفاصيل المحافظة» (the full-height details) instead of the card, on its «الحكم» tab;\n"
+    "     &tab=build|forces|policy opens the details on that tab (الإنشاءات / القوات / السياسات),\n"
     "     &scroll=end scrolls the open view to its end, &scroll=<pt> to that offset.\n")
 sub("    r.dataset.tab = ['politics', 'society', 'economy', 'security'].indexOf(q.get('tab')) >= 0 ? q.get('tab') : 'politics';\n",
-    "    r.dataset.view = q.get('view') === 'govern' ? 'govern' : 'card';\n"
+    "    r.dataset.view = q.get('view') === 'govern' || ['build', 'forces', 'policy'].indexOf(q.get('tab')) >= 0 ? 'govern' : 'card';\n"
+    "    r.dataset.dtabOpen = ['build', 'forces', 'policy'].indexOf(q.get('tab')) >= 0 ? q.get('tab') : 'govern';\n"
     "    window.__scroll = q.get('scroll') === 'end' ? 'end' : (isFinite(parseFloat(q.get('scroll'))) ? parseFloat(q.get('scroll')) : 0);\n")
 
 # the sheet's layout functions (A's fitStatus / fitSheet were for A's markup)
@@ -90,12 +92,14 @@ cut('  /* ---------- Province sheet ---------- */', '  /* Place the map so Cairo
   /* The open view's body scrolls inside the sheet when it is taller than the sheet (?scroll=end shows its end);
      fades mark the edges that hide content. */
   function fitBody() {
-    var root = document.documentElement, b = $(root.dataset.view === 'govern' ? '.r-body.r-gv' : '.r-body.r-ov');
+    var root = document.documentElement, b = $(root.dataset.view === 'govern' ? '.r-body.r-gv[data-dtab="' + root.dataset.dtabOpen + '"]' : '.r-body.r-ov');
+    Array.prototype.forEach.call(document.querySelectorAll('.r-tab'), function (t) {
+      var on = t.dataset.for === root.dataset.dtabOpen; t.classList.toggle('on', on); t.setAttribute('aria-selected', String(on)); });
     b.scrollTop = window.__scroll === 'end' ? b.scrollHeight : window.__scroll;
     var over = b.scrollHeight - b.clientHeight;
     root.dataset.ftop = b.scrollTop > 0.5 ? '1' : '0';
     root.dataset.fbot = b.scrollTop < over - 0.5 ? '1' : '0';
-    window.__body = { view: root.dataset.view, shown: b.clientHeight, full: b.scrollHeight, over: over, top: b.scrollTop };
+    window.__body = { view: root.dataset.view, tab: root.dataset.dtabOpen, shown: b.clientHeight, full: b.scrollHeight, over: over, top: b.scrollTop };
   }
 
 ''')
@@ -107,6 +111,7 @@ sub('  </defs>', '''    <symbol id="i-flame" viewBox="0 0 24 24"><path d="M12 21
     <symbol id="i-pylon" viewBox="0 0 24 24"><path d="M12 2.75 7 21.25M12 2.75l5 18.5"/><path d="M5 7h14M6.5 11.5h11M8.45 16h7.1"/><path d="M5 7v2.25M19 7v2.25M6.5 11.5v2M17.5 11.5v2"/></symbol>
     <symbol id="i-shield-plain" viewBox="0 0 24 24"><path d="M12 3.5l7 2.75v5.25c0 4.3-2.9 7.6-7 9-4.1-1.4-7-4.7-7-9V6.25z"/></symbol>
     <symbol id="i-doc" viewBox="0 0 24 24"><path d="M6.25 3.5h8.25l3.25 3.25V20.5H6.25z"/><path d="M14.25 3.5v3.5h3.5"/><path d="M9 11h6M9 14h6M9 17h3.5"/></symbol>
+    <symbol id="i-train" viewBox="0 0 24 24"><rect x="6" y="3.5" width="12" height="13" rx="3"/><path d="M6 10h12"/><path d="M10 6.5h4"/><path d="M9.25 13.5h.01M14.75 13.5h.01" stroke-width="2.4"/><path d="M9 16.5 7 20.5M15 16.5l2 4"/></symbol>
     <symbol id="i-bus" viewBox="0 0 24 24"><rect x="5" y="3.5" width="14" height="15" rx="2.5"/><path d="M5 7.25h14M5 12h14"/><path d="M8 18.5v2M16 18.5v2"/><path d="M8.5 15.25h.01M15.5 15.25h.01" stroke-width="2.4"/></symbol>
   </defs>''')
 

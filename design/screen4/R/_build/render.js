@@ -1,7 +1,8 @@
 // Screen 4 variant R (the province panel after the owner's two reference images): render the iPhones and run the checks.
-// Writes <id>.png (the card, step 1) to the variant folder; <id>_govern.png, <id>_govern_end.png (step 2, the details),
-// <id>_hit.png and report.json to _build. The details are also checked at the middle scroll offsets the top and end
-// views leave out (no PNG), and every string of the details must be shown clear of the fades in one of those views.
+// Writes <id>.png (the card, step 1) to the variant folder; <id>_<tab>.png and <id>_<tab>_end.png for each details tab
+// (govern = «الحكم», build = «الإنشاءات», forces = «القوات», policy = «السياسات»; step 2), <id>_hit.png and report.json
+// to _build. Each tab is also checked at the middle scroll offsets the top and end views leave out (no PNG), and every
+// string of a tab must be shown clear of the fades in one of its views.
 // Before anything, index.html must be the current output of assemble.py.
 // Checks: opaque panels (D-3); each control's height from the panel's size table; radii; flex/grid gaps; icon sizes and
 // strokes; type sizes, weights and colours; 44 pt hit boxes (cover the control, no overlap, clipped to their scroll
@@ -32,15 +33,15 @@ const DEVICES = (want.length ? want : ALL.map((d) => d.id)).map((id) => ALL.find
 // The sources assemble.py reads, the B3 page the HUD is compared with, devices.json, and every file the two pages
 // load (the header strip, the flags, the map images), as recorded when they open.
 const REPO = path.resolve(OUT, '../../..');
-const STATIC_INPUTS = ['index.html', '_build/render.js', '_build/panel.css', '_build/sheet.html', '_build/assemble.py', '../A/index.html',
-  '../../screen1/B3/index.html', '../../shared/devices.json'];
+const STATIC_INPUTS = ['index.html', '_build/render.js', '_build/panel.css', '_build/province.css', '_build/sheet.html', '_build/assemble.py', '../A/index.html',
+  '../../screen1/B3/index.html', '../../shared/devices.json', '../../screen5/A/_build/sheet.html'];
 let INPUTS = STATIC_INPUTS.slice();
 const inputsHash = () => crypto.createHash('sha1').update(Buffer.concat(INPUTS.map((f) => fs.readFileSync(path.join(OUT, f))))).digest('hex');
 async function recordInputs(b) {
   const d = ALL.find((x) => x.id === 'i16promax'), seen = new Set();
   const ctx = await b.newContext({ viewport: { width: d.w, height: d.h } });
   ctx.on('request', (r) => { if (r.url().startsWith('file://')) seen.add(path.relative(OUT, decodeURIComponent(new URL(r.url()).pathname))); });
-  for (const u of [PAGE + qs(d), PAGE + qs(d) + '&view=govern', B3 + qs(d)]) { const p = await open(ctx, u); await p.close(); }
+  for (const u of [PAGE + qs(d), B3 + qs(d)].concat(TABS.map((tb) => PAGE + qs(d) + tabQ(tb)))) { const p = await open(ctx, u); await p.close(); }
   await ctx.close();
   INPUTS = [...new Set(STATIC_INPUTS.concat([...seen].sort()))];
 }
@@ -52,7 +53,18 @@ function assertAssembled() {
     if (!fs.readFileSync(path.join(tmp, 'index.html')).equals(fs.readFileSync(path.join(OUT, 'index.html')))) throw new Error('index.html is not the current output of assemble.py: run assemble.py first');
   } finally { fs.rmSync(tmp, { recursive: true, force: true }); }
 }
-const VIEWS = [['', ''], ['_govern', '&view=govern'], ['_govern_end', '&view=govern&scroll=end']];
+// the details' tabs, right to left; each opens with &view=govern (govern) or &tab=<tab>
+const TABS = ['govern', 'build', 'forces', 'policy'];
+const tabQ = (tb) => (tb === 'govern' ? '&view=govern' : '&tab=' + tb);
+const VIEWS = [['', '']].concat(TABS.map((tb) => [['_' + tb, tabQ(tb)], ['_' + tb + '_end', tabQ(tb) + '&scroll=end']]).flat());
+// the state panel's numbers this panel repeats, read from its sheet (not copied): the metro project's progress and year
+function screen5() {
+  const s = fs.readFileSync(path.join(OUT, '../../screen5/A/_build/sheet.html'), 'utf8');
+  const m = s.match(/الخط الثالث لمترو القاهرة<\/b><span>المرحلة الأولى · تكتمل في <span class="ltr">(\d{4})<\/span><\/span>\s*<span class="s-prog"><i style="width: (\d+)%"><\/i>/);
+  if (!m) throw new Error('screen 5: cannot read the metro project');
+  return { metro: +m[2], metroYear: +m[1] };
+}
+const S5 = screen5();
 
 const TOK = {
   heights: [32, 36, 44], hudSpace: [0, 4, 8, 12], rCtl: 10, rCard: 12,
@@ -61,9 +73,9 @@ const TOK = {
   panel: 'rgb(12, 20, 28)', border: 'rgba(127, 233, 255, 0.14)',
   colors: ['rgb(234, 242, 247)', 'rgb(169, 188, 203)', 'rgb(127, 233, 255)', 'rgb(63, 224, 208)', 'rgb(242, 177, 76)', 'rgb(242, 112, 90)', 'rgb(111, 182, 255)'],
   // the panel's size table (the owner's reference): control heights, radii, icon sizes, gaps
-  ctlH: { '.r-x': 32, '.r-why': 14, '.r-act': 44, '.r-more': 36, '.r-tab': 44, '.r-btn': 24, '.r-rd': 26, '.r-link': 44 },
+  ctlH: { '.r-x': 32, '.p-all': 22, '.r-why': 14, '.r-act': 44, '.r-more': 36, '.r-tab': 44, '.r-btn': 24, '.r-rd': 26, '.r-link': 44 },
   radius: { '.sheet': 12, '.r-act': 10, '.r-link': 10, '.r-more': 10, '.r-dec': 10, '.r-tile': 6, '.r-chip': 6, '.r-btn': 6, '.r-cap': 10 },
-  sheetIcon: [['.r-cap svg', 10], ['.r-arr', 10], ['.r-kl svg', 14], ['.r-x svg', 16], ['.r-hint svg', 16], ['.r-more svg', 16], ['.r-chev', 16], ['.r-tile svg', 17], ['.r-tab svg', 17], ['.r-dic', 17]],
+  sheetIcon: [['.r-cap svg', 10], ['.r-arr', 10], ['.r-kl svg', 14], ['.r-x svg', 16], ['.r-hint svg', 16], ['.r-more svg', 16], ['.r-chev', 16], ['.r-tile svg', 17], ['.r-tab svg', 17], ['.r-dic', 17], ['.p-warn svg', 14]],
   sheetSpace: [0, 2, 4, 8, 12, 16],
   title18: ['r-name', 'r-kv'],
   fade: 24, strip: 22,                                // the fade, and the clear strip under the bottom fade for the scroll hint
@@ -77,15 +89,30 @@ const BRIEF = {
   // coverage check across the details' views shows them clear there)
   govern: ['القاهرة', 'العاصمة', 'الحكم', 'الإنشاءات', 'القوات', 'السياسات', 'إدارة المحافظة', 'المحافظ', 'د. عمر منصور', 'تغيير',
     'الأولوية التنموية', 'الصناعة', 'الخدمات', 'البنية التحتية', 'العبء الضريبي'],
-  govern_mid: ['القاهرة', 'العاصمة', 'الحكم', 'الإنشاءات', 'القوات', 'السياسات'],
+  govern_mid: ['القاهرة', 'العاصمة', 'الحكم', 'الإنشاءات', 'القوات', 'السياسات'],    // any middle or end view of a tab without its own list
   govern_end: ['القاهرة', 'الحكم',
     'قرار مقترح', 'دعم النقل العام', 'تخفيض تعرفة الحافلات لمدة سنة', '10 ملايين $ · شهريًا · يبدأ خلال 30 يومًا',
     'تخفيف أعباء التنقل · زيادة الإنفاق العام', 'المحافظ: مؤيد · المالية: تحفظ', 'اعتماد البرنامج', 'تأجيل'],
-  // every string of the details body: some scroll position must show each one whole and clear of the fades
-  details: ['إدارة المحافظة', 'المحافظ', 'د. عمر منصور', 'تغيير', 'الأولوية التنموية', 'الصناعة', 'الخدمات', 'البنية التحتية', 'العبء الضريبي',
+  // every string of a tab's body: some scroll position must show each one whole and clear of the fades
+  reach_govern: ['إدارة المحافظة', 'المحافظ', 'د. عمر منصور', 'تغيير', 'الأولوية التنموية', 'الصناعة', 'الخدمات', 'البنية التحتية', 'العبء الضريبي',
     'مخفض', 'متوازن', 'مرتفع', 'الإنشاءات والمرافق', 'الكهرباء · النقل · المرافق العامة', 'تخطيط التوسعة', 'إدارة القوات', 'الحامية · التمركز · إسناد المهام',
     'قرار مقترح', 'دعم النقل العام', 'تخفيض تعرفة الحافلات لمدة سنة', '10 ملايين $ · شهريًا · يبدأ خلال 30 يومًا', 'تخفيف أعباء التنقل · زيادة الإنفاق العام',
     'المحافظ: مؤيد · المالية: تحفظ', 'اعتماد البرنامج', 'تأجيل'],
+  // T-007: the other three tabs (their top views: the header, the tabs and the first rows, which show on every phone)
+  build: ['القاهرة', 'العاصمة', 'الحكم', 'الإنشاءات', 'القوات', 'السياسات', 'البنية التحتية', 'الكهرباء', '7 / 10', 'النقل'],
+  reach_build: ['البنية التحتية', 'الكهرباء', '7 / 10', 'النقل', '8 / 10', 'المياه والصرف', 'الاتصالات', '9 / 10', 'الكهرباء: الطلب قريب من القدرة، وانقطاعات في الصيف.',
+    'منشآت رئيسية', 'المترو', 'خطان يعملان', 'المطار', 'القاهرة الدولي', 'الصناعة', 'خفيفة وغذائية', 'المستشفيات', 'جامعية وعامة',
+    'مشاريع الدولة هنا', 'الخط الثالث لمترو القاهرة', 'المرحلة الأولى · 85% · تكتمل في 2012', 'توسعة شبكة الكهرباء', '800 مليون $ · 24 شهرًا', 'الكهرباء 8'],
+  forces: ['القاهرة', 'العاصمة', 'الحكم', 'الإنشاءات', 'القوات', 'السياسات', 'السيطرة', 'الحكومة · 100%', 'الشرطة', '8 / 10', 'الطوارئ', 'شاملة منذ 1981', 'منطقة طوارئ', 'لا'],
+  reach_forces: ['السيطرة', 'الحكومة · 100%', 'الشرطة', '8 / 10', 'الطوارئ', 'شاملة منذ 1981', 'منطقة طوارئ', 'لا', 'القوات المتمركزة',
+    'فرقة مدرعة', 'الجيش · المنطقة المركزية', 'الجاهزية 85%', 'لواء حرس', 'الجيش · حماية مقار الحكم', 'الجاهزية 95%',
+    'قوات الأمن المركزي', 'الداخلية · مكافحة الشغب', 'الجاهزية 80%', 'إدارة القوات', 'قسم الجيش · الأوامر والتمركز',
+    'تُحرَّك الوحدات من الخريطة: اضغط الوحدة ثم وجهتها. حالة الطوارئ قانون وطني يُغيَّر من الدولة › السياسات.'],
+  policy: ['القاهرة', 'العاصمة', 'الحكم', 'الإنشاءات', 'القوات', 'السياسات', 'المجتمع', 'مسلمون سنة 90%', 'التذمر متوسط', 'مسيحيون أقباط 10%', 'التذمر مرتفع'],
+  reach_policy: ['المجتمع', 'مسلمون سنة 90%', 'التذمر متوسط', 'مسيحيون أقباط 10%', 'التذمر مرتفع', 'أكبر أسباب الاضطرابات', 'القمع ونقص الحريات', '+12',
+    'تراجع مستوى المعيشة', '+10', 'بطالة الشباب', '+9', 'الشرطة', '−8', 'لماذا؟ · كل الأسباب', 'تأييد الأحزاب هنا', 'الحزب الوطني 62%', 'مستقلون 25%', 'أخرى 13%',
+    'دعم الخدمات الأساسية', '300 مليون $ · مرة واحدة', 'الاضطرابات −4', 'تعزيز الأمن', '200 مليون $ سنويًا · الشرعية −1', 'الاضطرابات −3',
+    'منطقة طوارئ في المحافظة', 'لا · تُعلن من قسم الداخلية والسياسة'],
 };
 
 const HUDSEL = ['.top > .nation', '.top > .stats', '.top > .date', '.toast', '.btn.mode', '.btn.home', '.dock', '.dock-item'];

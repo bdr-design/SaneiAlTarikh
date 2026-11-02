@@ -1,0 +1,38 @@
+  /* ================= Screen 4 R, the province details' other three tabs (T-007, 2026-11-02) =================
+     Read after panel.css by assemble.py (this file is the province panel's own; the shared panel.css is unchanged).
+     One tab body shows at a time (&tab=govern|build|forces|policy; default «الحكم»). Teal marks the open tab, as on the
+     approved panel; data colours keep their meanings: blue better, amber worse, each paired with an arrow or a word. */
+  .r-gv.r-body[data-dtab] { display: none; }
+  [data-dtab-open="govern"] .r-gv.r-body[data-dtab="govern"], [data-dtab-open="build"] .r-gv.r-body[data-dtab="build"],
+  [data-dtab-open="forces"] .r-gv.r-body[data-dtab="forces"], [data-dtab-open="policy"] .r-gv.r-body[data-dtab="policy"] { display: flex; }
+
+  /* الإنشاءات: one row per sector: name, a 4 pt teal meter out of 10, the value */
+  .p-lvl { display: grid; grid-template-columns: 96px 1fr auto; align-items: center; column-gap: var(--s2); height: 22px; }
+  .p-lvl > span { font-size: var(--fs-sec); line-height: var(--lh-sec); font-weight: 500; color: var(--t2); white-space: nowrap; }
+  .p-meter { position: relative; height: 4px; border-radius: 2px; background: rgba(169, 188, 203, .22); }
+  .p-meter::after { content: ""; position: absolute; top: 0; bottom: 0; right: 0; width: var(--v); border-radius: 2px; background: var(--teal); }
+  .p-lvl b { font-size: var(--fs-val); line-height: var(--lh-val); font-weight: 600; white-space: nowrap; }
+  /* a warning: amber text led by the warning icon (never colour alone) */
+  .p-warn { display: flex; align-items: center; gap: var(--s1); font-size: var(--fs-label); line-height: 14px; font-weight: 500; color: var(--amber); }
+  .p-warn svg.i { flex: none; width: var(--ico-stat); height: var(--ico-stat); }
+
+  /* القوات: one row per unit: tile, name and its command, readiness */
+  .p-unit { display: flex; align-items: center; gap: var(--s2); height: 40px; }
+  .p-unit .r-tile { width: 32px; height: 32px; }
+  .p-rdy { flex: none; display: flex; align-items: baseline; gap: var(--s1); font-size: var(--fs-label); line-height: var(--lh-label); font-weight: 500; color: var(--t2); white-space: nowrap; }
+  .p-rdy b { font-size: var(--fs-val); line-height: var(--lh-val); font-weight: 600; color: var(--t1); }
+  .r-sc dd .r-arr { margin-inline-end: 2px; vertical-align: -1px; }
+
+  /* السياسات: a share bar (the parts in the panel's data greys and teal, right to left), keyed rows under it */
+  .p-split { display: flex; height: 6px; border-radius: 3px; overflow: hidden; gap: 2px; }
+  .p-split i { width: var(--w); background: var(--teal); }
+  /* the parts: teal, half teal, grey (one data hue, so no part reads as better or worse); each row's key matches */
+  .p-split i:nth-child(2), .p-k2 { background: rgba(63, 224, 208, .5); }
+  .p-split i:nth-child(3), .p-k3 { background: var(--t2); }
+  .p-grp { display: flex; align-items: center; justify-content: space-between; gap: var(--s2); height: 22px; font-size: var(--fs-sec); line-height: var(--lh-sec); font-weight: 500; color: var(--t1); white-space: nowrap; }
+  .p-grp > span { display: inline-flex; align-items: center; gap: var(--s1); }
+  .p-grp b { display: inline-flex; align-items: center; gap: 2px; font-weight: 600; }
+  .p-key { flex: none; width: 8px; height: 8px; border-radius: 2px; background: var(--teal); }
+  .p-why { display: flex; align-items: center; justify-content: space-between; height: 22px; font-size: var(--fs-sec); line-height: var(--lh-sec); font-weight: 500; color: var(--t1); }
+  .p-why b { display: inline-flex; align-items: center; gap: 2px; font-size: var(--fs-val); line-height: var(--lh-val); font-weight: 600; }
+  .p-all { align-self: flex-start; height: 22px; line-height: 22px; margin-top: 0; }

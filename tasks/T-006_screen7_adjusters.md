@@ -79,3 +79,17 @@ The map stays the centre, so the adjuster opens inside the same side sheet, as a
 
 ## Risks
 - **The small phones:** the sheet is short on the SE and the 13 mini, so the body scrolls behind a fixed footer. The hint and fades must sit above the footer.
+
+## Review and fixes (2026-10-28 to 2026-11-02)
+- **The review:** a read-only workflow ran four lenses (checker, consistency, renders, realism and Arabic), then a skeptic per finding. 54 findings were checked: 49 confirmed and 5 refuted. The completeness critic did not run (session limit).
+- **The 49 confirmed findings, fixed as follows:**
+  - **Effects visible on opening** (the main problem: they needed scrolling on 6 phones, and on all 7 in money): the title moved into the back row, as an iOS pushed view's bar holds it; the effects heading went (the footer and VoiceOver name them); the body's padding and gaps went to 4. Tax, line and subsidy now fit whole on all 7 phones, and money shows its effects before its settings.
+  - **The stepper:** the track is a slider with a 44 pt hit box, so the knob that looks draggable is draggable; the tick is 26 pt, taller than the knob and under it, so it always shows; the track sits 12 pt from each limit, so the knob clears them at the ends; «أنقص» and «زد» labels.
+  - **The value block:** an arrow with a shaft instead of the row chevron; only the new value is 18 pt bold (the rule is recorded in SCREEN4_BRIEF); the title is 14 pt bold, above the back label.
+  - **Realism:** the top-bracket tax goes 20% → 25% (Egypt's own 2011 step), its unrest falls on the urban provinces, its revenue stays within screen 6's yield; every effect has an amount and a time frame; the fuel cut and the rate show the deficit, the interest line and the exchange rate in screen 6's terms; education shows the skilled-labour share.
+  - **Colour never alone:** each effect has an arrow for its direction, and a VoiceOver phrase with its verdict.
+  - **Money:** convertibility added (a §5.1 lever with no home before); the regime runs freest on the right like every screen 5 setting; one note replaces three repeated lines and says the settings cost no political capital; the footer says how often.
+  - **Navigation and states:** the back control names where the player came from (the fuel view from the overview); back and «إلغاء» both discard; the 3-month wait is drawn (`?states=1`).
+  - **Section headings:** one treatment (unruled; a hairline sets the money settings off).
+  - **The checker:** every gap the lenses proved (marks invisible or off the track, signs outside their numbers, VoiceOver, the measured header and fit, strings matched as substrings, the value block's style, the grid's layout, the identity's borders and shadows, the back row's place, the footer's order, the knob at the ends, screen 6's numbers read from its sheet, the money rule over the shown text, the redundant fade rule) has a check and a self-test plant.
+- **Refuted (5):** the hash without fonts; the back control styled like a heading; «اضطرابات» versus «الاضطراب»; the ranges (Egypt's rate reached 27.25% in 2024: noted for the engine, the mockup's range is illustrative); the button order.
