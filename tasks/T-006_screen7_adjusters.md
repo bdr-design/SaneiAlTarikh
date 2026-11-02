@@ -12,7 +12,7 @@ The map stays the centre, so the adjuster opens inside the same side sheet, as a
 
 ## Scope
 - **In scope:** four kinds, one shared layout. Each has a view (`?adjust=`):
-  - **tax:** income tax, top bracket, 20% → 22%;
+  - **tax:** income tax, top bracket, 20% → 25%;
   - **line:** the education line, 7.3 → 8.0 مليار $ (+10%);
   - **subsidy:** the fuel subsidy, 11.7 → 10.5 مليار $ (−10%). The overview's «خفض دعم الوقود 10%» opens this view with the same numbers.
   - **money:** the central bank's rate 8.25% → 9.25%. The exchange regime and capital controls are shown with their current setting.
@@ -28,7 +28,7 @@ The map stays the centre, so the adjuster opens inside the same side sheet, as a
 3. **The value block:**
    - the current and the new value, RTL;
    - a stepper (− and +, 44 pt hit boxes) and a range track showing the minimum, the maximum, the current mark and the new mark;
-   - the change in words («+2 نقطة», «+10%»).
+   - the change in words («+5 نقاط», «+10%»).
 4. **The effects block («الأثر المتوقع»):**
    - one row per effect, in amounts with units;
    - blue for an improvement and amber for a worsening, the panel's meanings;
@@ -93,3 +93,12 @@ The map stays the centre, so the adjuster opens inside the same side sheet, as a
   - **Section headings:** one treatment (unruled; a hairline sets the money settings off).
   - **The checker:** every gap the lenses proved (marks invisible or off the track, signs outside their numbers, VoiceOver, the measured header and fit, strings matched as substrings, the value block's style, the grid's layout, the identity's borders and shadows, the back row's place, the footer's order, the knob at the ends, screen 6's numbers read from its sheet, the money rule over the shown text, the redundant fade rule) has a check and a self-test plant.
 - **Refuted (5):** the hash without fonts; the back control styled like a heading; «اضطرابات» versus «الاضطراب»; the ranges (Egypt's rate reached 27.25% in 2024: noted for the engine, the mockup's range is illustrative); the button order.
+
+## Second review: two independent reviewers (2026-11-02, under `finishEverything`)
+- **Reviewer A (the checker and consistency), 13 findings; reviewer B (renders, realism, Arabic, UX), 13.** All confirmed findings fixed:
+  - **Wait state:** «اعتماد» loses its outline and fill and gets a lock; the line names what becomes available («الاعتماد متاح بعد شهرين»).
+  - **Money:** titled «السياسة النقدية والعملة» (the row tapped); the exchange rate as «سعر الدولار بعد 3 أشهر» in the first row; a pending currency change drawn (`&pending=1`) with the current setting outlined, the combined effects (the reserves rise once the pound is not defended; the interest line is left out because a devaluation lowers its dollar value) and the footer's timing; «جزئية» explained to everyone; the note's wording; «مشدّدة».
+  - **Realism:** the top-bracket rise yields +300 مليون (growth −0.1), since screen 6's 3.6 is the whole personal income tax; the fuel subsidy's range is ±50% (0 to 17.6), above the 2010/11 outturn; screen 6's note narrowed to consumption taxes and subsidies (its brief and gate updated).
+  - **Wording:** «تعديل كل 3 أشهر»; the stepper labels name the item.
+  - **The checker:** the pending sequence with its end and middle views and coverage; the effects' phrases say the way they move; the arrows' stroke and rotation; the back label's 13 pt; the title's note; the back row's hairline; the grid's spoken name; dead code removed; all with self-test plants.
+- **Not changed:** the second row of the money effects starting in the fade on the smaller phones (the panels' scroll rule; the brief's claim about it was dropped).

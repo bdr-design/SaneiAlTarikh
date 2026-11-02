@@ -662,7 +662,7 @@ async function selftest(b) {
     ['RTL order', d, '&tab=projects', '.s-proj .s-pa { order: -1; }', /project row 1: order must be/],
     ['law choices order', d, '&tab=policies', '.s-seg { direction: ltr; }', /law row 1: choices not right to left/],
     ['two choices in a law', d, '&tab=policies', '', /law row 1: exactly one choice/, () => { document.querySelector('.s-sg').classList.add('on'); }],
-    ['chosen is not the checked one', d, '&tab=policies', '', /law row 1: the chosen segment is not the aria-checked one/, () => { const s = document.querySelectorAll('.s-pol')[0].querySelectorAll('.s-sg'); s[2].setAttribute('aria-checked', 'false'); s[0].setAttribute('aria-checked', 'true'); }],
+    ['chosen is not the checked one', d, '&tab=policies', '', /law row 1: the chosen segment is not the aria-checked one/, () => { const s = document.querySelectorAll('.s-pol')[0].querySelectorAll('.s-sg'); s[1].setAttribute('aria-checked', 'false'); s[0].setAttribute('aria-checked', 'true'); }],
     ['two tabs selected', d, '', '', /exactly the open tab must be selected/, () => { document.querySelectorAll('.r-tab')[1].classList.add('on'); }],
     ['dock item not marked', d, '', '', /the open section «الدولة» is not marked in the dock/, () => { document.querySelector('.dock-item.on').classList.remove('on'); }],
     ['dock underline missing', d, '', '.dock-item.on::after { content: none !important; }', /dock underline missing or off/],

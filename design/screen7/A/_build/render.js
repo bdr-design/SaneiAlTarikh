@@ -1,6 +1,7 @@
 // Screen 7 variant A (the economy adjusters «الضبط»): render the iPhones and run the checks.
 // Writes <id>.png (the tax adjuster) to the variant folder; <id>_line.png, <id>_subsidy.png, <id>_money.png,
-// <id>_money_end.png, <id>_hit.png and report.json to _build. Every adjuster is also checked at its end and at the middle
+// <id>_money_end.png, <id>_wait.png, <id>_money_pending.png, <id>_money_pending_end.png, <id>_hit.png and report.json
+// to _build. Every adjuster is also checked at its end and at the middle
 // scroll offsets (no PNG), so every row is checked once clear of the fades; and every brief string of a view must be
 // shown clear in one of its views. Before anything, index.html must be the current output of assemble.py.
 // Checks (shared with the approved panels' checkers, screens 5 A and 6 A): opaque panels (D-3); each control's height
@@ -56,11 +57,12 @@ function assertAssembled() {
   } finally { fs.rmSync(tmp, { recursive: true, force: true }); }
 }
 // the saved views (PNG + checks); the middle scroll offsets of each long tab are added per phone (checks only)
-const VIEWS = [['', ''], ['_line', '&adjust=line'], ['_subsidy', '&adjust=subsidy'], ['_money', '&adjust=money'], ['_money_end', '&adjust=money&scroll=end'], ['_wait', '&adjust=tax&states=1']];
+const VIEWS = [['', ''], ['_line', '&adjust=line'], ['_subsidy', '&adjust=subsidy'], ['_money', '&adjust=money'], ['_money_end', '&adjust=money&scroll=end'], ['_wait', '&adjust=tax&states=1'],
+  ['_money_pending', '&adjust=money&pending=1'], ['_money_pending_end', '&adjust=money&pending=1&scroll=end']];
 // checks only: every adjuster with its new value at the minimum and at the maximum (the knob at the track's ends)
 const ENDS = ['tax', 'line', 'subsidy', 'money'].map((a) => [['_' + a + '_min', '&adjust=' + a + '&at=0'], ['_' + a + '_max', '&adjust=' + a + '&at=100']]).flat();
 // the scrolling sequences: each gets its top view, its end view and the middle offsets between them
-const SEQS = [['tax', '&adjust=tax'], ['line', '&adjust=line'], ['subsidy', '&adjust=subsidy'], ['money', '&adjust=money']];
+const SEQS = [['tax', '&adjust=tax'], ['line', '&adjust=line'], ['subsidy', '&adjust=subsidy'], ['money', '&adjust=money'], ['money_pending', '&adjust=money&pending=1']];
 
 const TOK = {
   heights: [32, 36, 44], hudSpace: [0, 4, 8, 12], rCtl: 10, rCard: 12,
@@ -71,7 +73,7 @@ const TOK = {
     'rgb(67, 192, 138)', 'rgb(11, 18, 24)'],          // + the section's emerald, and the dark text on white (the primary button, a chosen segment)
   sec: 'rgb(67, 192, 138)',                           // الاقتصاد's identity colour
   t1: 'rgb(234, 242, 247)', t2: 'rgb(169, 188, 203)', dark: 'rgb(11, 18, 24)', amber: 'rgb(242, 177, 76)',
-  wLine: 'rgba(234, 242, 247, 0.5)', wLineDim: 'rgba(234, 242, 247, 0.28)', teal: 'rgb(63, 224, 208)', amberLine: 'rgba(242, 177, 76, 0.7)',
+  wLine: 'rgba(234, 242, 247, 0.5)', wLineDim: 'rgba(234, 242, 247, 0.28)', teal: 'rgb(63, 224, 208)',
   fit: '6',                                           // a pushed view: the header at its compact height (44 pt, measured below)
   blue: 'rgb(111, 182, 255)',
   // the brief's sizes for this panel: [selector, width, height] (null: not fixed)
@@ -79,7 +81,7 @@ const TOK = {
   // the panel's size table (the owner's reference): control heights, radii, icon sizes, gaps
   ctlH: { '.r-x': 32, '.a-back': 44, '.a-pm': 32, '.a-track': 6, '.a-btn': 36, '.s-sg': 26 },
   radius: { '.sheet': 12, '.r-chip': 6, '.r-cap': 10, '.s-emb': 10, '.a-btn': 10, '.a-track': 3, '.s-seg': 6 },
-  sheetIcon: [['.r-cap svg', 10], ['.r-x svg', 16], ['.r-hint svg', 16], ['.s-emb svg', 16], ['.a-bk', 16], ['.a-to', 16], ['.a-pm svg', 16], ['.r-arr', 10]],
+  sheetIcon: [['.r-cap svg', 10], ['.r-x svg', 16], ['.r-hint svg', 16], ['.s-emb svg', 16], ['.a-bk', 16], ['.a-to', 16], ['.a-pm svg', 16], ['.r-arr', 10], ['.a-lk', 16]],
   sheetSpace: [0, 2, 4, 8, 12, 16],
   title18: ['.r-name', '.a-new b'],                  // the panel's name and the adjuster's new value only
   fade: 24, strip: 22,                                // the fade, and the clear strip under the bottom fade for the scroll hint
@@ -89,23 +91,27 @@ const TOK = {
 // reach_<tab>: every string of the tab, each of which some scroll position must show whole and clear of the fades.
 // A string is found only as the whole text of an element (so no other element can stand in for it).
 const HEAD = ['الاقتصاد', 'الجنيه المصري', 'مصر · السنة المالية 2010/11'];
-const WHEN = 'يبدأ الشهر القادم · مرة كل 3 أشهر · الأثر تقديري';
+const WHEN = 'يبدأ الشهر القادم · تعديل كل 3 أشهر · الأثر تقديري';
 // each adjuster: back label, title and its note, the value block (current, new, change), the limits, the effects
 // ([label, value, improvement?, arrow]), the footer line
 const ADJ = {
   tax: { back: 'الضرائب والدعم', title: ['ضريبة الدخل', 'الشريحة العليا'], val: ['20%', '25%', '+5 نقاط'], lim: ['10%', '35%'],
-    eff: [['الإيرادات', '+600 مليون $ سنويًا', 1, 'up'], ['العجز', '17.1 مليار $ بدل 17.7', 1, 'down'], ['اضطرابات المحافظات الحضرية', '+1 خلال 3 أشهر', 0, 'up'], ['النمو', '−0.2 نقطة خلال سنة', 0, 'down']],
-    when: WHEN, wait: 'متاح بعد شهرين · الأثر تقديري' },
+    eff: [['الإيرادات', '+300 مليون $ سنويًا', 1, 'up'], ['العجز', '17.4 مليار $ بدل 17.7', 1, 'down'], ['اضطرابات المحافظات الحضرية', '+1 خلال 3 أشهر', 0, 'up'], ['النمو', '−0.1 نقطة خلال سنة', 0, 'down']],
+    when: WHEN, wait: 'الاعتماد متاح بعد شهرين · الأثر تقديري' },
   line: { back: 'الميزانية', title: ['التعليم', '11% من الإنفاق'], val: ['7.3', '8.0', '+10%'], unit: 'مليار $', lim: ['3.7', '11.0'],
     eff: [['العجز', '18.4 مليار $ بدل 17.7', 0, 'up'], ['الدين إلى الناتج', '+0.3 نقطة سنويًا', 0, 'up'], ['العمالة الماهرة', '+0.3 نقطة بعد 5 سنوات', 1, 'up'], ['الشرعية', '+1 خلال 3 أشهر', 1, 'up']], when: WHEN },
-  subsidy: { back: 'نظرة عامة', title: ['دعم الوقود', 'بنزين وسولار وغاز'], val: ['11.7', '10.5', '−10%'], unit: 'مليار $', lim: ['0', '15'],
+  subsidy: { back: 'نظرة عامة', title: ['دعم الوقود', 'بنزين وسولار وغاز'], val: ['11.7', '10.5', '−10%'], unit: 'مليار $', lim: ['0', '17.6'],
     eff: [['العجز', '16.5 مليار $ بدل 17.7', 1, 'down'], ['التضخم', '+0.6 نقطة خلال سنة', 0, 'up'], ['اضطرابات المحافظات الأفقر', '+4 خلال 3 أشهر', 0, 'up'], ['الشرعية', '−3 خلال 3 أشهر', 0, 'down']], when: WHEN },
-  money: { back: 'التجارة والعملة', title: ['فائدة المركزي', 'سعر الإيداع لليلة واحدة'], val: ['8.25%', '9.25%', '+1 نقطة'], lim: ['2%', '20%'],
-    eff: [['التضخم', '−0.4 نقطة خلال سنة', 1, 'down'], ['النمو', '−0.2 نقطة خلال سنة', 0, 'down'], ['الفوائد', '13.9 مليار $ بدل 13.3', 0, 'up'], ['سعر الصرف', '5.75 جنيه بدل 5.80', 1, 'down']],
-    when: 'الفائدة من الشهر القادم · مرة كل 3 أشهر · الأثر تقديري',
-    set: 'الصرف ورأس المال', note: 'كل تغيير هنا تدريجي خلال 6 أشهر، ولا يتغيّر مرة أخرى قبل أن يكتمل، ولا يكلّف رأس مال سياسي.',
+  money: { back: 'التجارة والعملة', title: ['السياسة النقدية والعملة', 'فائدة المركزي: الإيداع لليلة واحدة'], val: ['8.25%', '9.25%', '+1 نقطة'], lim: ['2%', '20%'],
+    eff: [['التضخم', '−0.4 نقطة خلال سنة', 1, 'down'], ['سعر الدولار بعد 3 أشهر', '5.75 جنيه بدل 5.80', 1, 'down'], ['الفوائد', '13.9 مليار $ بدل 13.3', 0, 'up'], ['النمو', '−0.2 نقطة خلال سنة', 0, 'down']],
+    when: 'الفائدة من الشهر القادم · تعديل كل 3 أشهر · الأثر تقديري',
+    set: 'الصرف ورأس المال', note: 'كل تغيير هنا يتم تدريجيًا خلال 6 أشهر، ولا يُعدَّل الإعداد مرة أخرى قبل اكتماله، ولا يكلّف رأس مال سياسي. التحويل الجزئي: للحساب الجاري فقط.',
     // [name, choices (freest first, so on the right), the chosen one]
-    laws: [['نظام الصرف', ['حر', 'مُدار', 'ثابت'], 1], ['قابلية التحويل', ['كاملة', 'جزئية', 'معلّقة'], 0], ['ضوابط رأس المال', ['محدودة', 'متوسطة', 'مشددة'], 0]] },
+    laws: [['نظام الصرف', ['حر', 'مُدار', 'ثابت'], 1], ['قابلية التحويل', ['كاملة', 'جزئية', 'معلّقة'], 0], ['ضوابط رأس المال', ['محدودة', 'متوسطة', 'مشدّدة'], 0]],
+    // with the regime change from مُدار to حر pending: the rate's and the float's effects together, and when it lands
+    // (the float no longer spends reserves to hold the rate: the reserves grow)
+    pend: { eff: [['التضخم', '+2.6 نقطة خلال سنة', 0, 'up'], ['سعر الدولار بعد 6 أشهر', '7.00 جنيه بدل 5.80', 0, 'up'], ['الاحتياطي', '+2.0 مليار $ خلال 6 أشهر', 1, 'up'], ['الصادرات', '+1.6 مليار $ سنويًا', 1, 'up']],
+      when: 'الفائدة من الشهر القادم · الصرف خلال 6 أشهر · الأثر تقديري', chosen: [0, 0, 0], cur: 1 } },
 };
 // the freest choice of each setting (screen 5's rule: freest on the right, so first)
 const FREEST = ['حر', 'كاملة', 'محدودة'];
@@ -121,6 +127,9 @@ Object.entries(ADJ).forEach(([k, a]) => {
 });
 BRIEF.money_end = HEAD.concat(ADJ.money.laws.map((l) => [l[0]].concat(l[1])).flat(), [ADJ.money.when, 'اعتماد', 'إلغاء']);
 BRIEF.tax_wait = BRIEF.tax.filter((s) => s !== WHEN).concat([ADJ.tax.wait]);
+BRIEF.money_pending = HEAD.concat([ADJ.money.back, ADJ.money.title[0], ADJ.money.title[1]], ADJ.money.val, ADJ.money.pend.eff.slice(0, 2).map((e) => e.slice(0, 2)).flat(), [ADJ.money.pend.when, 'اعتماد', 'إلغاء']);
+BRIEF.reach_money_pending = BRIEF.reach_money.filter((s) => !ADJ.money.eff.flat().includes(s) && s !== ADJ.money.when).concat(ADJ.money.pend.eff.map((e) => e.slice(0, 2)).flat(), [ADJ.money.pend.when]);
+BRIEF.money_pending_end = HEAD.concat(ADJ.money.laws.map((l) => [l[0]].concat(l[1])).flat(), [ADJ.money.pend.when, 'اعتماد', 'إلغاء']);
 // a view's name: <tab>[_end|_at<offset>|_wait|_min|_max]; its tab is the first part, its scrolling sequence all but the scroll part
 const tabOf = (view) => view.split('_')[0];
 const seqOf = (view) => view.replace(/_(end|at\d+)$/, '');
@@ -456,18 +465,16 @@ async function measure(p, d, b3, view) {
       const em = q('.s-emb'); if (!em || !visible(em) || getComputedStyle(em).color !== TOK.sec || !em.querySelector('svg') || getComputedStyle(em.querySelector('svg')).color !== TOK.sec) issues.push('section emblem missing or not in the section colour');
       if (qa('.r-tab').length) issues.push('a pushed view shows the tabs'); }
     // the section colour is for chrome only (the open tab, the emblem; the top line and the dock are pseudo-elements and
-    // outside the sheet): no text, border, fill or icon of the sheet takes it; the share bars are a data colour, teal
+    // outside the sheet): no text, border, fill, shadow or icon of the sheet takes it; the track's fill is a data colour, teal
     texts.filter((x) => x.sheet && x.color === TOK.sec).forEach((x) => issues.push(`section colour on data text: "${x.t}"`));
     qa('.sheet *').filter((e) => !e.closest('.r-tab.on, .s-emb, .frost')).forEach((e) => { const cs = getComputedStyle(e);
       const borders = ['Top', 'Right', 'Bottom', 'Left'].filter((s) => parseFloat(cs['border' + s + 'Width']) > 0).map((s) => cs['border' + s + 'Color']);
       if (borders.concat([cs.backgroundColor, parseFloat(cs.outlineWidth) > 0 ? cs.outlineColor : '']).includes(TOK.sec) || cs.boxShadow.includes(TOK.sec) || (e.closest('svg') && [cs.color, cs.stroke, cs.fill].includes(TOK.sec))) issues.push(`section colour on data chrome: ${label(e)}`); });
     qa('.a-fill').forEach((e) => { if (getComputedStyle(e).backgroundColor !== TOK.teal) issues.push(`the track's fill not in teal (it is data): ${getComputedStyle(e).backgroundColor}`); });
-    { const amberOf = (sel, txt) => { const e = [...document.querySelectorAll(sel)].find((n) => visible(n) && n.textContent.replace(/\s+/g, ' ').trim() === txt);
-        if (!e) issues.push(`amber check: «${txt}» not found`); else if (getComputedStyle(e).color !== TOK.amber) issues.push(`«${txt}» not in amber: ${getComputedStyle(e).color}`); };
-      // the effects: blue an improvement, amber a worsening
-      qa('.a-e').forEach((e) => { const want = e.dataset.good === '1' ? TOK.blue : TOK.amber, dd = e.querySelector('dd');
+    // the effects: blue an improvement, amber a worsening
+    { qa('.a-e').forEach((e) => { const want = e.dataset.good === '1' ? TOK.blue : TOK.amber, dd = e.querySelector('dd');
         if (getComputedStyle(dd).color !== want) issues.push(`effect «${e.querySelector('dt').textContent}» not in ${e.dataset.good === '1' ? 'blue' : 'amber'}: ${getComputedStyle(dd).color}`); }); }
-    // the panel's sizes (the brief); the budget summary: 18 pt bold numbers, each under its label (same right edge)
+    // the panel's sizes (the brief)
     TOK.size.forEach(([s, w, h]) => qa('.sheet ' + s).forEach((e) => { const r = e.getBoundingClientRect(); if (hiddenByScroll(box(r), e)) return;
       if ((w && !near(r.width, w)) || (h && !near(r.height, h))) issues.push(`size ${r.width.toFixed(1)}x${r.height.toFixed(1)} for ${s} (want ${w || 'any'} x ${h || 'any'})`); }));
     // the white touches the owner confirmed: white tiles, white-outlined chips and the header chip; the warning chip is
@@ -481,7 +488,7 @@ async function measure(p, d, b3, view) {
       wt('.s-sg.on', { backgroundColor: TOK.t1, color: TOK.dark });
       wt('.r-cap', { borderTopColor: TOK.wLine, color: TOK.t1 }); }
     // the adjuster reads as the brief: back label, title, value block, limits, effects, footer line (each view's own)
-    const T = (e) => (e ? e.textContent.replace(/\s+/g, ' ').trim() : ''), a = ADJ[adj], waitView = /_wait$/.test(view), atView = (view.match(/_(min|max)$/) || [])[1];
+    const T = (e) => (e ? e.textContent.replace(/\s+/g, ' ').trim() : ''), a = ADJ[adj], waitView = /_wait$/.test(view), atView = (view.match(/_(min|max)$/) || [])[1], pendView = /_pending/.test(view);
     const num = (s) => parseFloat((String(s).replace('−', '-').match(/-?\d+(?:\.\d+)?/) || [NaN])[0]);
     const nums = (s) => [...String(s).replace(/−/g, '-').matchAll(/-?\d+(?:\.\d+)?/g)].map((m) => parseFloat(m[0]));
     { const arrow = (e) => { const u = e.querySelector('dd > .r-arr:first-child use'); return u ? (u.getAttribute('href') || '').replace('#t-', '') : ''; };
@@ -489,10 +496,17 @@ async function measure(p, d, b3, view) {
         val: [T(av.querySelector('.a-now b')), T(av.querySelector('.a-new b')), T(av.querySelector('.a-delta'))], unit: T(av.querySelector('.a-unit')) || undefined, lim: [...av.querySelectorAll('.a-lim')].map(T),
         eff: [...av.querySelectorAll('.a-e')].map((e) => [T(e.querySelector('dt')), T(e.querySelector('dd')), +e.dataset.good, arrow(e)]),
         when: T([...av.querySelectorAll('.a-when')].find(visible)) };
-      const want = Object.assign({}, a, { when: waitView ? a.wait : a.when });
+      got.eff = [...av.querySelectorAll('.a-grid')].filter(visible).map((g) => [...g.querySelectorAll('.a-e')].map((e) => [T(e.querySelector('dt')), T(e.querySelector('dd')), +e.dataset.good, arrow(e)])).flat();
+      const want = Object.assign({}, a, { when: waitView ? a.wait : pendView ? a.pend.when : a.when, eff: pendView ? a.pend.eff : a.eff });
       ['back', 'title', 'val', 'unit', 'lim', 'eff', 'when'].forEach((k) => { if (JSON.stringify(got[k]) !== JSON.stringify(want[k])) issues.push(`brief rows differ: ${k}: ${JSON.stringify(got[k]).slice(0, 160)}`); });
       if (a.laws) { const laws = [...av.querySelectorAll('.s-pol')].map((r) => [T(r.querySelector('.r-at')), [...r.querySelectorAll('.s-sg')].map(T), [...r.querySelectorAll('.s-sg')].findIndex((s) => s.classList.contains('on'))]);
-        if (JSON.stringify(laws) !== JSON.stringify(a.laws)) issues.push(`brief rows differ: laws: ${JSON.stringify(laws).slice(0, 160)}`);
+        const wantLaws = a.laws.map((l, i) => [l[0], l[1], pendView ? a.pend.chosen[i] : l[2]]);
+        if (JSON.stringify(laws) !== JSON.stringify(wantLaws)) issues.push(`brief rows differ: laws: ${JSON.stringify(laws).slice(0, 160)}`);
+        // a pending change: the current setting keeps a white outline and says «الحالي»; otherwise nothing is marked so
+        const curs = [...av.querySelectorAll('.s-sg.s-cur')];
+        if (pendView) { const reg = [...av.querySelectorAll('.s-pol')][0].querySelectorAll('.s-sg')[a.pend.cur];
+          if (curs.length !== 1 || curs[0] !== reg || !getComputedStyle(reg).boxShadow.includes(TOK.wLine) || !(reg.getAttribute('aria-label') || '').endsWith('، الحالي')) issues.push('a pending change: the current setting is not marked (white outline, «الحالي»)'); }
+        else if (curs.length) issues.push('a current-setting mark without a pending change');
         const set = av.querySelector('.a-set');
         if (T(set && set.querySelector('h3')) !== a.set || T(set && set.querySelector('.s-note')) !== a.note) issues.push('brief rows differ: the money settings\' heading or note');
         av.querySelectorAll('.s-pol').forEach((r, i) => { const sg = [...r.querySelectorAll('.s-sg')]; if (sg.findIndex((e) => e.classList.contains('on')) !== sg.findIndex((e) => e.getAttribute('aria-checked') === 'true')) issues.push(`law ${i + 1}: the chosen segment is not the aria-checked one`);
@@ -506,7 +520,9 @@ async function measure(p, d, b3, view) {
       if (!/matrix\(-1, [^,]+, [^,]+, -1/.test(getComputedStyle(av.querySelector('.a-bk')).transform)) issues.push(`the back chevron does not point back: ${getComputedStyle(av.querySelector('.a-bk')).transform}`);
       // the wait: «اعتماد» steps back (grey on no fill, the dim outline) and cannot be tapped; otherwise it is live
       const ok = av.querySelector('.a-ok'), oc = getComputedStyle(ok);
-      if (waitView) { if (ok.getAttribute('aria-disabled') !== 'true' || oc.color !== TOK.t2 || oc.backgroundColor !== 'rgba(0, 0, 0, 0)' || !oc.boxShadow.includes(TOK.wLineDim)) issues.push(`the wait: «اعتماد» does not step back (${oc.color} on ${oc.backgroundColor}, aria-disabled ${ok.getAttribute('aria-disabled')})`); }
+      // (no fill and no outline, so it no longer reads as a button, and the lock says why)
+      if (waitView) { const lk = ok.querySelector('.a-lk');
+        if (ok.getAttribute('aria-disabled') !== 'true' || oc.color !== TOK.t2 || oc.backgroundColor !== 'rgba(0, 0, 0, 0)' || oc.boxShadow !== 'none' || !lk || !visible(lk)) issues.push(`the wait: «اعتماد» does not step back (${oc.color} on ${oc.backgroundColor}, ${oc.boxShadow}, aria-disabled ${ok.getAttribute('aria-disabled')})`); }
       else if (ok.hasAttribute('aria-disabled')) issues.push('«اعتماد» is disabled outside the wait'); }
     // the value block: the current value 13 pt semibold grey, the arrow (with its shaft) pointing from it to the new value,
     // the new value 18 pt bold white with an amount's unit once after it; the labels grey
@@ -555,7 +571,7 @@ async function measure(p, d, b3, view) {
       if (track.getAttribute('role') !== 'slider' || !track.classList.contains('tap') || !ar('label') || +ar('valuemin') !== lo || +ar('valuemax') !== hi || +ar('valuenow') !== nw || nums(vt)[0] !== nw || !vt.includes('الحالي') || nums(vt).slice(-1)[0] !== now) issues.push(`a11y: the track must be a slider reading its range, the new value and the current one: ${ar('valuemin')}..${ar('valuemax')} now ${ar('valuenow')} «${vt}»`); }
     // the effects: a 2-column grid read right to left, label over value; blue an improvement, amber a worsening, each value
     // led by an arrow in its colour for the way the quantity moves; VoiceOver reads each as one phrase ending in its verdict
-    { const es = [...av.querySelectorAll('.a-e')], rr = es.map((e) => e.getBoundingClientRect());
+    { const es = [...av.querySelectorAll('.a-e')].filter(visible), rr = es.map((e) => e.getBoundingClientRect());
       if (es.length === 4 && !(rr[0].left >= rr[1].right - 0.5 && rr[2].left >= rr[3].right - 0.5 && Math.abs(rr[0].top - rr[1].top) < 0.5 && Math.abs(rr[2].top - rr[3].top) < 0.5 && rr[2].top >= rr[0].bottom - 0.5)) issues.push('the effects are not a 2-column grid read right to left');
       es.forEach((e) => { const dt = e.querySelector('dt'), dd = e.querySelector('dd'), al = e.getAttribute('aria-label') || '', good = e.dataset.good === '1';
         if (dt.getBoundingClientRect().bottom > dd.getBoundingClientRect().top + 0.5) issues.push(`effect «${T(dt)}»: the label must sit over the value`);
@@ -565,12 +581,15 @@ async function measure(p, d, b3, view) {
         if (!ar || dd.firstElementChild !== ar || getComputedStyle(ar).color !== want) issues.push(`effect «${T(dt)}»: no arrow in its colour before the value`);
         else { const up = ar.querySelector('use').getAttribute('href') === '#t-up', v = T(dd), n = nums(v);
           const rises = /بدل/.test(v) ? n[0] > n[1] : /^\+/.test(v) ? true : /^[−-]/.test(v) ? false : null;
-          if (rises === null || rises !== up) issues.push(`effect «${T(dt)}»: the arrow does not show the way it moves`); }
+          if (rises === null || rises !== up) issues.push(`effect «${T(dt)}»: the arrow does not show the way it moves`);
+          const sk = getComputedStyle(ar).stroke;
+          if ((sk !== want && sk !== 'currentcolor' && sk !== 'currentColor') || getComputedStyle(ar).transform !== 'none') issues.push(`effect «${T(dt)}»: the arrow is not drawn as it should (${sk}, ${getComputedStyle(ar).transform})`);
+          if (!/بدل/.test(v) && !(up ? /تزيد|يزيد|ترتفع|يرتفع/ : /تنخفض|ينخفض|تقل|يقل/).test(al)) issues.push(`a11y: effect «${T(dt)}» does not say the way it moves`); }
         const words = T(dd);
         if (!al.startsWith(T(dt) + ': ') || !al.endsWith(good ? '، أفضل' : '، أسوأ') || al.includes('$') || (words.includes('$') && !al.includes('دولار')) || nums(words).some((x) => !nums(al).map(Math.abs).includes(Math.abs(x)))) issues.push(`a11y: effect «${T(dt)}» does not read as one phrase with its numbers, «دولار» and its verdict: «${al}»`); }); }
     // the numbers agree with screen 6 (read from its sheet): the deficit, the GDP, the lines, the tax, the rate, the
     // interest line, the exchange rate and the three money settings
-    { const effOf = (dt) => { const e = [...av.querySelectorAll('.a-e')].find((x) => T(x.querySelector('dt')) === dt); return e ? T(e.querySelector('dd')) : ''; };
+    { const effOf = (dt) => { const e = [...av.querySelectorAll('.a-e')].filter(visible).find((x) => T(x.querySelector('dt')) === dt); return e ? T(e.querySelector('dd')) : ''; };
       const money = (s) => (/مليون \$/.test(s) ? num(s) / 1000 : num(s)), pair = (s) => nums(s);
       const st = av.querySelector('.a-step'), now = +st.dataset.now, nw = +st.dataset.new;
       const deficitIs = (v, what) => { const [x, y] = pair(effOf('العجز')); if (y !== S6.deficit) issues.push(`numbers: the old deficit is not screen 6's ${S6.deficit}`); if (!(Math.abs(v - x) <= 0.051)) issues.push(`numbers: the new deficit is not ${what}`); };
@@ -584,10 +603,10 @@ async function measure(p, d, b3, view) {
       if (adj === 'subsidy') { if (now !== S6.fuel) issues.push(`numbers: the fuel subsidy is not screen 6's ${S6.fuel}`);
         deficitIs(S6.deficit - (now - nw), `${S6.deficit} minus the cut`); }
       if (adj === 'money') { if (now !== S6.rate) issues.push(`numbers: the rate is not screen 6's ${S6.rate}%`);
-        const [i1, i0] = pair(effOf('الفوائد')), [f1, f0] = pair(effOf('سعر الصرف'));
-        if (i0 !== S6.interest || !(i1 > i0)) issues.push(`numbers: the interest line is not screen 6's ${S6.interest}, rising`);
-        if (f0 !== S6.fx || !(f1 < f0)) issues.push(`numbers: the exchange rate is not screen 6's ${S6.fx}, the pound stronger`);
-        const chosen = a.laws.map((l) => l[1][l[2]]);
+        const [i1, i0] = pair(effOf('الفوائد')), [f1, f0] = pair(effOf(pendView ? 'سعر الدولار بعد 6 أشهر' : 'سعر الدولار بعد 3 أشهر')).slice(-2);
+        if (!pendView && (i0 !== S6.interest || !(i1 > i0))) issues.push(`numbers: the interest line is not screen 6's ${S6.interest}, rising`);
+        if (f0 !== S6.fx || !(pendView ? f1 > f0 : f1 < f0)) issues.push(`numbers: the exchange rate is not screen 6's ${S6.fx}, the pound ${pendView ? 'weaker after the float' : 'stronger'}`);
+        const chosen = a.laws.map((l, i) => l[1][pendView && i === 0 ? a.pend.cur : l[2]]);   // the settings in force now
         if (!S6.regime.endsWith(chosen[0]) || chosen[1] !== S6.conv || chosen[2] !== S6.controls) issues.push(`numbers: the money settings are not screen 6's (${S6.regime}, ${S6.conv}, ${S6.controls})`); } }
     // the money rule: under 1 billion in millions, never 1000 millions or more (over the text as shown)
     { const all = q('.sheet').innerText.replace(/\s+/g, ' ');
@@ -609,8 +628,7 @@ async function measure(p, d, b3, view) {
       if (e.closest('.frost')) return;                                   // the panel's own backdrop layer
       if (e.tagName === 'IMG' && !e.closest('.r-flag')) issues.push('an image in the sheet');
       if (/url\(/.test(getComputedStyle(e).backgroundImage) && !e.matches('.r-hd')) issues.push(`a background image in the sheet (${label(e)})`); });
-    // RTL order: header flag | name ... emblem | close; tabs right to left from «نظرة عامة»; action rows tile | text | chip;
-    // budget, tax and subsidy lines text | bar or rate | chevron or lock; external flows text | amount
+    // RTL order: header flag | name ... emblem | close; the back row, the value block, the stepper, the footer
     { const fl = q('.r-flag').getBoundingClientRect(), nm = q('.r-name').getBoundingClientRect(), em = q('.s-emb').getBoundingClientRect(), xb = q('.r-x').getBoundingClientRect();
       if (!(fl.left >= nm.right - 0.5 && em.right <= nm.left && xb.right <= em.left + 0.5)) issues.push('header order must be flag, name, ..., emblem, close (right to left)'); }
     const order = (row, sels, what) => { const bx = sels.map((s) => row.querySelector(s)).filter(Boolean).map((e) => e.getBoundingClientRect());
@@ -625,6 +643,12 @@ async function measure(p, d, b3, view) {
       if (Math.abs(ti.left - (s.left + 1 + 12)) > 0.5) issues.push(`the title is not at the trailing edge: ${ti.left.toFixed(1)} (want ${(s.left + 13).toFixed(1)})`);
       const tb = getComputedStyle(av.querySelector('.a-title b'));
       if (tb.fontSize !== '14px' || tb.fontWeight !== '700') issues.push(`the title is not 14 pt bold (it must outrank the back label): ${tb.fontSize}/${tb.fontWeight}`);
+      const bkc = getComputedStyle(av.querySelector('.a-back')), ns = av.querySelector('.a-title > span'), nsc = getComputedStyle(ns), nv = getComputedStyle(av.querySelector('.a-nav'));
+      if (bkc.fontSize !== '13px' || bkc.fontWeight !== '600') issues.push(`the back label is not 13 pt semibold: ${bkc.fontSize}/${bkc.fontWeight}`);
+      if (nsc.fontSize !== '10px' || nsc.color !== TOK.t2 || ns.getBoundingClientRect().top < av.querySelector('.a-title b').getBoundingClientRect().bottom - 0.5) issues.push('the title\'s note must be 10 pt grey, under the title');
+      if (nv.borderBottomWidth !== '1px' || nv.borderBottomStyle !== 'solid') issues.push('the back row has lost its hairline');
+      const gl = [...av.querySelectorAll('.a-grid')].find(visible);
+      if (!gl || !/^الأثر المتوقع/.test(gl.getAttribute('aria-label') || '')) issues.push('a11y: the effects are not named «الأثر المتوقع»');
       const wn = [...av.querySelectorAll('.a-when')].find(visible), bt = av.querySelector('.a-btns');
       if (!wn || wn.getBoundingClientRect().bottom > bt.getBoundingClientRect().top + 0.5) issues.push('footer: the timing line must sit above the buttons'); }
     order(av.querySelector('.a-val'), ['.a-now', '.a-to', '.a-new', '.a-delta'], 'value block');
@@ -723,7 +747,7 @@ async function open(ctx, url) {
 }
 const qs = (d) => `?w=${d.w}&h=${d.h}&side=${d.side}&bottom=${d.bottom}&cutout=${d.cutout}`;
 const viewOf = (extra) => { const t = (extra.match(/adjust=(\w+)/) || [0, 'tax'])[1], s = (extra.match(/scroll=(\w+)/) || [0, ''])[1], at = (extra.match(/[?&]at=(\d+)/) || [0, ''])[1];
-  return t + (s === 'end' ? '_end' : s ? '_at' + s : '') + (/states=1/.test(extra) ? '_wait' : '') + (at === '0' ? '_min' : at === '100' ? '_max' : ''); };
+  return t + (/pending=1/.test(extra) ? '_pending' : '') + (s === 'end' ? '_end' : s ? '_at' + s : '') + (/states=1/.test(extra) ? '_wait' : '') + (at === '0' ? '_min' : at === '100' ? '_max' : ''); };
 // the middle scroll offsets a sequence needs so that every part of it is clear of the fades in one view: the top view
 // shows 0..h-46 clear, the end view over+24..full, a middle one at s shows s+24..s+h-46; neighbours overlap by 56 pt
 function midScrolls(h, over) {
@@ -889,6 +913,18 @@ async function selftest(b) {
     ['freest not on the right', d, '&adjust=money', '', /setting 1: the freest choice is not on the right/, () => { const s = document.querySelector('.a-view[data-adjust="money"] .s-seg'); s.appendChild(s.firstElementChild); }],
     ['wait: «اعتماد» live', d, '&states=1', '[data-states="1"] .a-view[data-adjust="tax"] .a-ok { background: var(--t1) !important; color: #0B1218 !important; }', /the wait: «اعتماد» does not step back/],
     ['wait: «اعتماد» tappable', d, '&states=1', '', /the wait: «اعتماد» does not step back/, () => { document.querySelector('.a-view[data-adjust="tax"] .a-ok').removeAttribute('aria-disabled'); }],
+    ['pending: current not marked', d, '&adjust=money&pending=1&scroll=end', '', /a pending change: the current setting is not marked/, () => { document.querySelector('.s-cur').classList.remove('s-cur'); }],
+    ['current marked without a change', d, '&adjust=money&scroll=end', '', /a current-setting mark without a pending change/, () => { document.querySelectorAll('.a-view[data-adjust="money"] .s-sg')[0].classList.add('s-cur'); }],
+    ['pending: the float shown stronger', d, '&adjust=money&pending=1', '', /the pound weaker after the float/, () => { document.querySelectorAll('.a-view[data-adjust="money"] .m-alt .a-e')[1].querySelector('.ltr').textContent = '5.60'; }],
+    ['pending: the rate effects alone', d, '&adjust=money&pending=1', '[data-pending="1"] .m-def { display: grid !important; } [data-pending="1"] .m-alt { display: none !important; }', /brief rows differ: eff/],
+    ['effect phrase says the opposite', d, '', '', /a11y: effect «الإيرادات» does not say the way it moves/, () => { document.querySelector('.a-view[data-adjust="tax"] .a-e').setAttribute('aria-label', 'الإيرادات: تنخفض 300 مليون دولار سنويًا، أفضل'); }],
+    ['effect arrow in the wrong colour', d, '', '.a-e[data-good="0"] .r-arr { stroke: var(--blue) !important; }', /effect «اضطرابات المحافظات الحضرية»: the arrow is not drawn as it should/],
+    ['effect arrow turned', d, '', '.a-e .r-arr { transform: rotate(180deg); }', /the arrow is not drawn as it should/],
+    ['back label as big as the title', d, '', '.a-back { font-size: 14px !important; line-height: 18px !important; font-weight: 700 !important; }', /the back label is not 13 pt semibold/],
+    ['effects unnamed', d, '', '', /a11y: the effects are not named/, () => { document.querySelectorAll('.a-grid').forEach((g) => g.removeAttribute('aria-label')); }],
+    ['note beside the title', d, '', '.a-title { flex-direction: row !important; } .a-title span { color: var(--t1) !important; }', /the title's note must be 10 pt grey, under the title/],
+    ['back row without its hairline', d, '', '.a-nav { border-bottom: 0 !important; }', /the back row has lost its hairline/],
+    ['pending effect faded away', se, '&adjust=money&pending=1&scroll=end', '[data-pending="1"] .m-alt .a-e:nth-child(4) dd { opacity: .25 !important; }', /brief text cannot be scrolled clear|brief text not fully visible/],
     ['disabled outside the wait', d, '', '', /«اعتماد» is disabled outside the wait/, () => { document.querySelector('.a-view[data-adjust="tax"] .a-ok').setAttribute('aria-disabled', 'true'); }],
     ['change in points wrong', d, '', '', /the change says 3 points/, () => { document.querySelector('.a-view[data-adjust="tax"] .a-delta .ltr').textContent = '+3'; }],
     ['change in percent wrong', d, '&adjust=line', '', /the change says 20%/, () => { document.querySelector('.a-view[data-adjust="line"] .a-delta .ltr').textContent = '+20%'; }],

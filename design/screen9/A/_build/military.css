@@ -1,0 +1,24 @@
+  /* ================= Screen 9, variant A: the military panel («الجيش») =================
+     Built with the shared builder on the approved panels (screen 4 R's look and levels, the shared section identity and
+     white touches, screen 5 A's notes and states). One tab body at a time (&tab=overview|forces|equipment|wars). Data
+     keeps its colours: bars teal; amber a worsening, always with its arrow. */
+  [data-tab="forces"] .r-body[data-tab="forces"], [data-tab="equipment"] .r-body[data-tab="equipment"], [data-tab="wars"] .r-body[data-tab="wars"] { display: flex; }
+  .r-body[data-tab="forces"], .r-body[data-tab="equipment"], .r-body[data-tab="wars"] { padding-top: var(--s2); padding-bottom: var(--s3); gap: var(--s2); }
+
+  /* an army: its name, region and formations, then its readiness */
+  .m-army { display: flex; align-items: center; gap: var(--s2); height: 36px; }
+  .p-rdy { flex: none; display: flex; align-items: baseline; gap: var(--s1); font-size: var(--fs-label); line-height: var(--lh-label); font-weight: 500; color: var(--t2); white-space: nowrap; }
+  .p-rdy b { font-size: var(--fs-val); line-height: var(--lh-val); font-weight: 600; color: var(--t1); }
+
+  /* an equipment category: name, the estimated value, a teal bar of its modern share, the share in words */
+  .m-eq { display: grid; grid-template-columns: 84px 76px 1fr 64px; align-items: center; column-gap: var(--s2); height: 22px; }
+  .m-eq > span { font-size: var(--fs-sec); line-height: var(--lh-sec); font-weight: 500; color: var(--t1); white-space: nowrap; }
+  .m-eq > b { font-size: var(--fs-val); line-height: var(--lh-val); font-weight: 600; white-space: nowrap; }
+  .m-eq > em { font-style: normal; font-size: var(--fs-label); line-height: var(--lh-label); font-weight: 500; color: var(--t2); white-space: nowrap; text-align: left; }
+  .i-bar { position: relative; height: 4px; border-radius: 2px; background: rgba(169, 188, 203, .22); }
+  .i-bar::after { content: ""; position: absolute; top: 0; bottom: 0; right: 0; width: var(--v); border-radius: 2px; background: var(--teal); }
+
+  /* the empty state: no war, no front */
+  .m-empty { display: flex; align-items: center; gap: var(--s2); min-height: 32px; font-size: var(--fs-sec); line-height: var(--lh-sec); font-weight: 500; color: var(--t1); }
+  .m-empty svg.i { flex: none; color: var(--t2); }
+  .p-cost { display: inline-flex; align-items: center; gap: 2px; margin-inline-start: var(--s1); font-size: var(--fs-sec); font-weight: 600; }

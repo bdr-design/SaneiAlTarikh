@@ -41,28 +41,29 @@ The section identity (الاقتصاد, emerald) stays on chrome only: the top l
    - Every value has an amount and a time frame where it is not a yearly flow («خلال سنة», «خلال 3 أشهر», «بعد 5 سنوات»), so a change is not read as the monthly trends of screens 4 and 6.
    - Amounts carry their units, under 1 billion in millions.
    - VoiceOver reads each effect as one phrase: the label, the value in words with «دولار», and its verdict «أفضل» or «أسوأ».
-5. **Money only:** under the effects, a hairline, then «الصرف ورأس المال» with one note («كل تغيير هنا تدريجي خلال 6 أشهر، ولا يتغيّر مرة أخرى قبل أن يكتمل، ولا يكلّف رأس مال سياسي.») and three rows of screen 5's 3-segment settings, freest on the right:
+5. **Money only:** the view is titled «السياسة النقدية والعملة», the row the player tapped, with «فائدة المركزي: الإيداع لليلة واحدة» as its note. Under the effects, a hairline, then «الصرف ورأس المال» with one note («كل تغيير هنا يتم تدريجيًا خلال 6 أشهر، ولا يُعدَّل الإعداد مرة أخرى قبل اكتماله، ولا يكلّف رأس مال سياسي. التحويل الجزئي: للحساب الجاري فقط.») and three rows of screen 5's 3-segment settings, freest on the right:
    - نظام الصرف: حر / مُدار / ثابت (مُدار, screen 6's «تعويم مُدار»);
    - قابلية التحويل: كاملة / جزئية (للحساب الجاري فقط) / معلّقة (كاملة);
-   - ضوابط رأس المال: محدودة / متوسطة / مشددة (محدودة).
+   - ضوابط رأس المال: محدودة / متوسطة / مشدّدة (محدودة).
    The rows have no cost line, so they do not read as screen 5's priced laws.
+   **A pending change** (`&pending=1`: the regime from مُدار to حر): the new choice is filled white and the current one keeps a white outline, read «مُدار، الحالي»; the effects grid shows the rate's and the float's effects together (التضخم +2.6 نقطة خلال سنة; سعر الدولار بعد 6 أشهر 7.00 جنيه بدل 5.80; الاحتياطي +2.0 مليار $ خلال 6 أشهر, since the pound is no longer defended with reserves; الصادرات +1.6 مليار $ سنويًا) and the footer says when the change lands.
 6. **Footer** (60 pt, never scrolls):
-   - the timing line: «يبدأ الشهر القادم · مرة كل 3 أشهر · الأثر تقديري»; for money «الفائدة من الشهر القادم · مرة كل 3 أشهر · الأثر تقديري»;
+   - the timing line: «يبدأ الشهر القادم · تعديل كل 3 أشهر · الأثر تقديري»; for money «الفائدة من الشهر القادم · تعديل كل 3 أشهر · الأثر تقديري», and with a currency setting pending «الفائدة من الشهر القادم · الصرف خلال 6 أشهر · الأثر تقديري»;
    - then «اعتماد» (36 pt, filled white, dark text) and «إلغاء» (36 pt, white outline).
-   - **The wait** (`?states=1`, drawn on the tax adjuster): during the 3-month cooldown the line reads «متاح بعد شهرين · الأثر تقديري» and «اعتماد» steps back (grey text, dim outline, not tappable). The preview still works, so the player can study a change before it is allowed.
+   - **The wait** (`?states=1`, drawn on the tax adjuster): during the 3-month cooldown the line reads «الاعتماد متاح بعد شهرين · الأثر تقديري» and «اعتماد» steps back: grey text with a lock, no fill and no outline, so it no longer reads as a button, and not tappable. The preview still works, so the player can study a change before it is allowed.
 
    The scroll hint sits in the body's clear strip above the footer.
 
 ## Content (Egypt, 1 January 2011; illustrative, agreeing with screen 6)
 | View | From → to | Effects |
 |---|---|---|
-| tax: ضريبة الدخل (الشريحة العليا) | 20% → 25% (+5 نقاط), range 10% to 35% | الإيرادات +600 مليون $ سنويًا; العجز 17.1 مليار $ بدل 17.7; اضطرابات المحافظات الحضرية +1 خلال 3 أشهر; النمو −0.2 نقطة خلال سنة |
+| tax: ضريبة الدخل (الشريحة العليا) | 20% → 25% (+5 نقاط), range 10% to 35% | الإيرادات +300 مليون $ سنويًا; العجز 17.4 مليار $ بدل 17.7; اضطرابات المحافظات الحضرية +1 خلال 3 أشهر; النمو −0.1 نقطة خلال سنة |
 | line: التعليم (11% من الإنفاق) | 7.3 → 8.0 مليار $ (+10%), range 3.7 to 11.0 | العجز 18.4 مليار $ بدل 17.7; الدين إلى الناتج +0.3 نقطة سنويًا; العمالة الماهرة +0.3 نقطة بعد 5 سنوات; الشرعية +1 خلال 3 أشهر |
-| subsidy: دعم الوقود, from the overview | 11.7 → 10.5 مليار $ (−10%), range 0 to 15 | العجز 16.5 مليار $ بدل 17.7; التضخم +0.6 نقطة خلال سنة; اضطرابات المحافظات الأفقر +4 خلال 3 أشهر; الشرعية −3 خلال 3 أشهر |
-| money: فائدة المركزي | 8.25% → 9.25% (+1 نقطة), range 2% to 20% | التضخم −0.4 نقطة خلال سنة; النمو −0.2 نقطة خلال سنة; الفوائد 13.9 مليار $ بدل 13.3; سعر الصرف 5.75 جنيه بدل 5.80 |
+| subsidy: دعم الوقود, from the overview | 11.7 → 10.5 مليار $ (−10%), range 0 to 17.6 (±50%, as the line view) | العجز 16.5 مليار $ بدل 17.7; التضخم +0.6 نقطة خلال سنة; اضطرابات المحافظات الأفقر +4 خلال 3 أشهر; الشرعية −3 خلال 3 أشهر |
+| money: السياسة النقدية والعملة (فائدة المركزي) | 8.25% → 9.25% (+1 نقطة), range 2% to 20% | التضخم −0.4 نقطة خلال سنة; سعر الدولار بعد 3 أشهر 5.75 جنيه بدل 5.80 (the price of the dollar, so a fall is the pound getting stronger); الفوائد 13.9 مليار $ بدل 13.3; النمو −0.2 نقطة خلال سنة |
 
 **Why these numbers:**
-- **Tax:** Egypt added a 25% top bracket in 2011, so 20% → 25% is a real step. Screen 6's top-bracket yield is 3.6 مليار $ at 20%; 5 more points can add at most 0.9, and +600 مليون allows for avoidance. The top bracket's earners live mostly in Cairo, Giza and Alexandria, so the unrest is in the urban provinces, not the poorest.
+- **Tax:** Egypt added a 25% top bracket in 2011, so 20% → 25% is a real step. Screen 6's personal income tax row (shown with its top rate) yields 3.6 مليار $; 5 more points on the top bracket can add at most 0.9 even if all of it were taxed at the top rate, and the top bracket is a minority of that base, so +300 مليون (with growth −0.1) is the estimate. The top bracket's earners live mostly in Cairo, Giza and Alexandria, so the unrest is in the urban provinces, not the poorest.
 - **Education:** the model has three labour skill tiers (§5.2), so the gain is the skilled tier's share, after 5 years.
 - **Fuel:** screen 6's rule moves the subsidy line, and so the deficit, by the cut: 17.7 − 1.2 = 16.5.
 - **Rate:** the interest line is screen 6's 13.3 (mandatory, never cut by the player, but it moves with the rate), and the exchange rate is its 5.80.
@@ -75,12 +76,12 @@ The section identity (الاقتصاد, emerald) stays on chrome only: the top l
 
 ## Geometry and fit
 - **The sheet:** the economy sheet's rules (width, place, the dock beside it or hidden).
-- **What shows without scrolling:** tax, line and subsidy fit whole on all 7 phones. Money scrolls to its settings; its first row of effects is clear on every phone, and the second is clear on the 11 and the 17 Pro Max (a short scroll on the others).
+- **What shows without scrolling:** tax, line and subsidy fit whole on all 7 phones. Money scrolls to its settings; its first row of effects (inflation and the price of the dollar, the two a rate decision is judged on) is clear on every phone, and the second may need a short scroll.
 - **Signs and numbers:** signs sit inside the left-to-right number spans («+5», «−0.2»), so they stay on the number's left in RTL text.
 
 ## Gate
 - **`screen7/A/_build/render.js`** is the economy checker, ported. It checks all 7 phones:
-  - 6 saved views (tax, line, subsidy, money, money's end, the wait);
+  - 8 saved views (tax, line, subsidy, money, money's end, the wait, the pending currency change and its end);
   - every adjuster's end and middle offsets, and every adjuster with its new value at the minimum and at the maximum, without saving PNGs.
 - **It checks:**
   - the frame and the identity (any border, outline or shadow in emerald; the emblem's icon; the open dock item's label);

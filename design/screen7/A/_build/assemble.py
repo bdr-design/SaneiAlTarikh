@@ -51,11 +51,13 @@ sub('<title>لوحة المحافظة A</title>', '<title>ضبط الاقتصا�
 sub("     &tab=politics|society|economy|security opens that tab of the province sheet (default politics = «السياسة»).\n",
     "     &adjust=tax|line|subsidy|money opens that adjuster of the economy panel (default tax), &scroll=end scrolls its\n"
     "     body to its end and &scroll=<pt> to that offset; &states=1 draws the tax adjuster in its 3-month wait;\n"
-    "     &at=0|100 puts every adjuster's new value at its minimum or maximum (a check of the knob at the ends).\n")
+    "     &at=0|100 puts every adjuster's new value at its minimum or maximum (a check of the knob at the ends);\n"
+    "     &pending=1 draws the money adjuster with the regime change from مُدار to حر pending.\n")
 sub("    r.dataset.tab = ['politics', 'society', 'economy', 'security'].indexOf(q.get('tab')) >= 0 ? q.get('tab') : 'politics';\n",
     "    r.dataset.adjust = ['tax', 'line', 'subsidy', 'money'].indexOf(q.get('adjust')) >= 0 ? q.get('adjust') : 'tax';\n"
     "    r.dataset.sec = 'econ';\n"
     "    r.dataset.states = q.get('states') === '1' ? '1' : '0';\n"
+    "    r.dataset.pending = q.get('pending') === '1' ? '1' : '0';\n"
     "    if (q.get('at') === '0' || q.get('at') === '100') r.dataset.at = q.get('at');\n"
     "    window.__scroll = q.get('scroll') === 'end' ? 'end' : (isFinite(parseFloat(q.get('scroll'))) ? parseFloat(q.get('scroll')) : 0);\n")
 # the dock shows «الاقتصاد» as the open section
@@ -101,6 +103,12 @@ cut('  /* ---------- Province sheet ---------- */', '  /* Place the map so Cairo
     /* the wait: «اعتماد» cannot be tapped (VoiceOver says so) */
     var ok = $('.a-view[data-adjust="tax"] .a-ok');
     if (document.documentElement.dataset.states === '1') ok.setAttribute('aria-disabled', 'true'); else ok.removeAttribute('aria-disabled');
+    /* a pending regime change: the chosen segment is the new one, the current one keeps its outline and says so */
+    if (document.documentElement.dataset.pending === '1') {
+      var sg = document.querySelectorAll('.a-view[data-adjust="money"] .s-pol')[0].querySelectorAll('.s-sg');
+      Array.prototype.forEach.call(sg, function (b, i) { b.classList.toggle('on', i === 0); b.setAttribute('aria-checked', String(i === 0)); });
+      sg[1].classList.add('s-cur'); sg[1].setAttribute('aria-label', sg[1].textContent + '، الحالي');
+    }
     window.__sheetfit = { level: 6, tried: [], fits: true };
   }
 

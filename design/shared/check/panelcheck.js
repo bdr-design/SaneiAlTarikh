@@ -594,12 +594,12 @@ module.exports = function makeChecker(cfg) {
       ['open tab neutral', d, '', '[data-sec] .r-tab.on { color: var(--t1) !important; }', /open tab not in the section colour/],
       ['section colour on data', d, '', '.r-sec h3 { color: var(--sec) !important; }', /section colour on data text/],
       ['section colour on a rule', d, '', '.r-tabs { border-bottom-color: var(--sec) !important; }', /section colour on data chrome/],
-      ['money unit', d, '', '', /money unit: «0\.4 مليار»/, () => { const b = document.querySelector('.r-body[data-tab="' + TABS[0] + '"]'); const s = document.createElement('p'); s.innerHTML = '<span class="ltr">0.4</span> مليار $'; s.className = 's-note'; b.prepend(s); }],
-      ['sign outside its number', d, '', '', /a sign outside its number/, () => { const b = document.querySelector('.r-body[data-tab="' + TABS[0] + '"]'); const s = document.createElement('p'); s.className = 's-note'; s.innerHTML = 'تغير +<span class="ltr">3</span>'; b.prepend(s); }],
-      ['colour alone', d, '', '', /colour alone: «تراجع»/, () => { const b = document.querySelector('.r-body[data-tab="' + TABS[0] + '"]'); const s = document.createElement('p'); s.className = 's-note r-amber'; s.textContent = 'تراجع'; b.prepend(s); }],
-      ['an image in the sheet', d, '', '', /an image in the sheet/, () => { const i = document.createElement('img'); i.src = '../../shared/flags/eg.svg'; i.style.cssText = 'width:17px;height:17px'; document.querySelector('.r-body[data-tab="' + TABS[0] + '"]').prepend(i); }],
+      ['money unit', d, '', '', /money unit: «0\.4 مليار»/, () => { const b = [...document.querySelectorAll('.r-body')].find((e) => e.getClientRects().length); const s = document.createElement('p'); s.innerHTML = '<span class="ltr">0.4</span> مليار $'; s.className = 's-note'; b.prepend(s); }],
+      ['sign outside its number', d, '', '', /a sign outside its number/, () => { const b = [...document.querySelectorAll('.r-body')].find((e) => e.getClientRects().length); const s = document.createElement('p'); s.className = 's-note'; s.innerHTML = 'تغير +<span class="ltr">3</span>'; b.prepend(s); }],
+      ['colour alone', d, '', '', /colour alone: «تراجع»/, () => { const b = [...document.querySelectorAll('.r-body')].find((e) => e.getClientRects().length); const s = document.createElement('p'); s.className = 's-note r-amber'; s.textContent = 'تراجع'; b.prepend(s); }],
+      ['an image in the sheet', d, '', '', /an image in the sheet/, () => { const i = document.createElement('img'); i.src = '../../shared/flags/eg.svg'; i.style.cssText = 'width:17px;height:17px'; [...document.querySelectorAll('.r-body')].find((e) => e.getClientRects().length).prepend(i); }],
       ['close not round', d, '', '.r-x { width: 40px !important; }', /close button is not round/],
-      ['brief text hidden', d, '', '', /brief text not fully visible/, () => { const b = document.querySelector('.r-body[data-tab="' + TABS[0] + '"] .r-sec h3, .r-body[data-tab="' + TABS[0] + '"] h3'); if (b) b.style.opacity = '0'; }],
+      ['brief text hidden', d, '', '', /brief text not fully visible/, () => { const b = [...document.querySelectorAll('.r-body')].find((e) => e.getClientRects().length).querySelector('h3'); if (b) b.style.opacity = '0'; }],
     ];
     const cases = generic.concat(cfg.cases ? cfg.cases(d, se) : []);
     const results = [];

@@ -379,7 +379,7 @@ Dependencies run one way: Core ← Content ← Engine ← AI; Core ← Map; Pres
 
 | Table | Rows | Main columns | Size (est.) |
 |---|---|---|---|
-| Provinces | ~3,150 (≤3,000 land + ~250 sea) | <ul><li>Status: sovereign (polity), administrator (government), controller (`AgentRef`: a government or an actor in one uint16 space), controlPct, claims, flags</li><li>People: population, urban share, 3 skill-tier shares</li><li>Condition: unrest, unrest offset, infrastructure, damage, fortification, supply capacity, admin-region ID</li></ul> | 0.40 MB |
+| Provinces | ~3,150 (≤3,000 land + ~250 sea) | <ul><li>Status: sovereign (polity), administrator (government), controller (`AgentRef`: a government or an actor in one uint16 space), controlPct, claims, flags</li><li>People: population, urban share, 3 skill-tier shares</li><li>Condition: unrest, unrest offset, infrastructure (4 sector sub-indices, 0–10 each: electricity, transport, water and sanitation, telecom; the province's index is their mean, T-007), damage, fortification, supply capacity, admin-region ID</li></ul> | 0.40 MB |
 | Group rows (sparse) | ~8,000 | (province, group, share, grievance). Groups come from a global registry with two dimensions, ethno-linguistic and religious. No limit per province. | 0.06 MB |
 | Industries | ~17,000 | Province, type, capacity, utilisation, damage, state share, last margin | 0.43 MB |
 | Polities | ≤384 (`exists`) | Territory summary, UN membership, the UN-seat government, bloc seats, continuator links, flags | 0.03 MB |
@@ -2081,7 +2081,7 @@ All 54 issues were accepted. Five were merged with a duplicate from the other cr
 | 51 | RF · entity caps | Accepted (merged into #12) | Quotas, reserve pool, 8,192 cap measured |
 | 52 | RF · sea-level impacts | Accepted | DeltaDTM (CC BY 4.0) thresholds ≤1/2/5/10 m with `estimate` tag and calibration to national exposure figures; GMTED no longer used for coasts (§4.2, §5.8) |
 | 53 | RF · Palestinian status 1979/1985 | Accepted | Per-area, per-pack table: no Jordanian claim on Gaza; East Jerusalem law from 1967 plus the 30 Jul 1980 event; Golan occupied in 1979 and law of 14 Dec 1981 not recognised (§4.5) |
-| 54 | RF · infrastructure index | Accepted | Index from GDP per capita, urban share and Factbook road and rail lengths (PD); GRIP pending; Natural Earth roads dropped; `estimate` (§4.6) |
+| 54 | RF · infrastructure index | Accepted | Index from GDP per capita, urban share and Factbook road and rail lengths (PD); GRIP pending; Natural Earth roads dropped; `estimate` (§4.6). **2026-11-02 (T-007):** stored as 4 sector sub-indices (electricity, transport, water and sanitation, telecom) whose mean is the index; seeded by splitting the index with the sector shares of access data where they exist (electricity access, piped water, phone lines), else equal; a project raises one sector |
 
 ---
 

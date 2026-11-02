@@ -1,6 +1,6 @@
   /* ================= Screen 4 R, the province details' other three tabs (T-007, 2026-11-02) =================
      Read after panel.css by assemble.py (this file is the province panel's own; the shared panel.css is unchanged).
-     One tab body shows at a time (&tab=govern|build|forces|policy; default «الحكم»). Teal marks the open tab, as on the
+     One tab body shows at a time (&view=govern opens «الحكم»; &tab=build|forces|policy the others). Teal marks the open tab, as on the
      approved panel; data colours keep their meanings: blue better, amber worse, each paired with an arrow or a word. */
   .r-gv.r-body[data-dtab] { display: none; }
   [data-dtab-open="govern"] .r-gv.r-body[data-dtab="govern"], [data-dtab-open="build"] .r-gv.r-body[data-dtab="build"],
@@ -21,6 +21,8 @@
   .p-unit .r-tile { width: 32px; height: 32px; }
   .p-rdy { flex: none; display: flex; align-items: baseline; gap: var(--s1); font-size: var(--fs-label); line-height: var(--lh-label); font-weight: 500; color: var(--t2); white-space: nowrap; }
   .p-rdy b { font-size: var(--fs-val); line-height: var(--lh-val); font-weight: 600; color: var(--t1); }
+  .p-wi { width: var(--glyph) !important; height: var(--glyph) !important; }
+  .p-cost { display: inline-flex; align-items: center; gap: 2px; margin-inline-start: var(--s1); font-size: var(--fs-sec); font-weight: 600; }
   .p-note { font-size: var(--fs-label); line-height: 14px; font-weight: 500; color: var(--t2); }
   .r-sc dd .r-arr { margin-inline-end: 2px; vertical-align: -1px; }
 

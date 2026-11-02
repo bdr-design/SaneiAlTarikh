@@ -50,12 +50,12 @@
 
       <!-- view 2: details, governance tab -->
       <nav class="r-tabs r-gv" role="tablist" aria-label="أقسام المحافظة">
-        <button class="r-tab on tap" role="tab" aria-selected="true" data-for="govern"><svg class="i"><use href="#i-state"/></svg><span>الحكم</span></button>
-        <button class="r-tab tap" role="tab" aria-selected="false" data-for="build"><svg class="i"><use href="#i-build"/></svg><span>الإنشاءات</span></button>
-        <button class="r-tab tap" role="tab" aria-selected="false" data-for="forces"><svg class="i"><use href="#i-shield-plain"/></svg><span>القوات</span></button>
-        <button class="r-tab tap" role="tab" aria-selected="false" data-for="policy"><svg class="i"><use href="#i-doc"/></svg><span>السياسات</span></button>
+        <button class="r-tab on tap" role="tab" aria-selected="true" data-for="govern" id="rt-govern"><svg class="i"><use href="#i-state"/></svg><span>الحكم</span></button>
+        <button class="r-tab tap" role="tab" aria-selected="false" data-for="build" id="rt-build"><svg class="i"><use href="#i-build"/></svg><span>الإنشاءات</span></button>
+        <button class="r-tab tap" role="tab" aria-selected="false" data-for="forces" id="rt-forces"><svg class="i"><use href="#i-shield-plain"/></svg><span>القوات</span></button>
+        <button class="r-tab tap" role="tab" aria-selected="false" data-for="policy" id="rt-policy"><svg class="i"><use href="#i-doc"/></svg><span>السياسات</span></button>
       </nav>
-      <div class="r-body r-gv" data-dtab="govern">
+      <div class="r-body r-gv" data-dtab="govern" role="tabpanel" aria-labelledby="rt-govern">
         <section class="r-sec">
           <h3>إدارة المحافظة</h3>
           <div class="r-gov"><span class="r-gl">المحافظ</span><span class="r-gn">د. عمر منصور</span><button class="r-btn tap">تغيير</button></div>
@@ -114,13 +114,13 @@
       <!-- details, construction tab (&tab=build): infrastructure by sector (their mean is the card's 8 / 10), the main
            facilities, the state's projects running here (the state panel's projects) and the power-grid expansion (the
            owner's 2nd image's first action row) -->
-      <div class="r-body r-gv" data-dtab="build">
+      <div class="r-body r-gv" data-dtab="build" role="tabpanel" aria-labelledby="rt-build">
         <section class="r-sec">
           <h3>البنية التحتية</h3>
-          <div class="p-lvl" aria-label="الكهرباء: 7 من 10"><span>الكهرباء</span><i class="p-meter" style="--v: 70%"></i><b><span class="ltr">7</span> / <span class="ltr">10</span></b></div>
-          <div class="p-lvl" aria-label="النقل: 8 من 10"><span>النقل</span><i class="p-meter" style="--v: 80%"></i><b><span class="ltr">8</span> / <span class="ltr">10</span></b></div>
-          <div class="p-lvl" aria-label="المياه والصرف: 8 من 10"><span>المياه والصرف</span><i class="p-meter" style="--v: 80%"></i><b><span class="ltr">8</span> / <span class="ltr">10</span></b></div>
-          <div class="p-lvl" aria-label="الاتصالات: 9 من 10"><span>الاتصالات</span><i class="p-meter" style="--v: 90%"></i><b><span class="ltr">9</span> / <span class="ltr">10</span></b></div>
+          <div class="p-lvl" role="img" aria-label="الكهرباء: 7 من 10"><span>الكهرباء</span><i class="p-meter" style="--v: 70%"></i><b><span class="ltr">7</span> / <span class="ltr">10</span></b></div>
+          <div class="p-lvl" role="img" aria-label="النقل: 8 من 10"><span>النقل</span><i class="p-meter" style="--v: 80%"></i><b><span class="ltr">8</span> / <span class="ltr">10</span></b></div>
+          <div class="p-lvl" role="img" aria-label="المياه والصرف: 8 من 10"><span>المياه والصرف</span><i class="p-meter" style="--v: 80%"></i><b><span class="ltr">8</span> / <span class="ltr">10</span></b></div>
+          <div class="p-lvl" role="img" aria-label="الاتصالات: 9 من 10"><span>الاتصالات</span><i class="p-meter" style="--v: 90%"></i><b><span class="ltr">9</span> / <span class="ltr">10</span></b></div>
           <p class="p-warn"><svg class="i"><use href="#i-warn"/></svg>الكهرباء: الطلب قريب من القدرة، وانقطاعات في الصيف.</p>
         </section>
         <section class="r-sec">
@@ -128,7 +128,7 @@
           <dl class="r-st">
             <div class="r-sc"><dt>المترو</dt><dd>خطان يعملان</dd></div>
             <div class="r-sc"><dt>المطار</dt><dd>القاهرة الدولي</dd></div>
-            <div class="r-sc"><dt>الصناعة</dt><dd>خفيفة وغذائية</dd></div>
+            <div class="r-sc"><dt>الصناعة</dt><dd>ثقيلة وخفيفة</dd></div>
             <div class="r-sc"><dt>المستشفيات</dt><dd>جامعية وعامة</dd></div>
           </dl>
         </section>
@@ -140,49 +140,54 @@
             <svg class="i r-chev"><use href="#i-chev"/></svg>
           </div>
         </section>
-        <button class="r-act tap r-first" aria-label="توسعة شبكة الكهرباء: 800 مليون دولار، 24 شهرًا. ترفع الكهرباء من 7 إلى 8">
+        <button class="r-act tap r-first" aria-label="توسعة شبكة الكهرباء: 800 مليون دولار، 24 شهرًا، إلى 8 من 10. ترفع الكهرباء +1، أفضل">
           <span class="r-tile"><svg class="i"><use href="#i-pylon"/></svg></span>
-          <span class="r-at"><b>توسعة شبكة الكهرباء</b><span><span class="ltr">800</span> مليون $ · <span class="ltr">24</span> شهرًا</span></span>
-          <span class="r-chip"><svg class="r-arr" aria-hidden="true"><use href="#t-up"/></svg>الكهرباء <span class="ltr">8</span></span>
+          <span class="r-at"><b>توسعة شبكة الكهرباء</b><span><span class="ltr">800</span> مليون $ · <span class="ltr">24</span> شهرًا · إلى <span class="ltr">8</span></span></span>
+          <span class="r-chip"><svg class="r-arr" aria-hidden="true"><use href="#t-up"/></svg>الكهرباء <span class="ltr">+1</span></span>
         </button>
       </div>
 
-      <!-- details, forces tab (&tab=forces): control, police and the emergency (the national law, read-only here, and
-           the province's emergency region, Internal's lever), the units stationed here (generic designations, army or
-           interior, readiness) and the link to the military section. Units are moved on the map, not from here. -->
-      <div class="r-body r-gv" data-dtab="forces">
+      <!-- details, forces tab (&tab=forces): control, police and the province's emergency region (Internal's lever); the
+           national emergency law as a link to its owner (الدولة › السياسات); the formations stationed here (§5.4 types,
+           with their army and organization) and the link to the military section. Units are moved on the map. -->
+      <div class="r-body r-gv" data-dtab="forces" role="tabpanel" aria-labelledby="rt-forces">
         <dl class="r-st">
           <div class="r-sc"><dt>السيطرة</dt><dd class="r-teal">الحكومة · <span class="ltr">100%</span></dd></div>
           <div class="r-sc"><dt>الشرطة</dt><dd><span class="ltr">8</span> / <span class="ltr">10</span></dd></div>
-          <div class="r-sc"><dt>الطوارئ</dt><dd class="r-amber"><svg class="r-arr" aria-hidden="true"><use href="#t-up"/></svg>شاملة منذ <span class="ltr">1981</span></dd></div>
           <div class="r-sc"><dt>منطقة طوارئ</dt><dd>لا</dd></div>
+          <div class="r-sc"><dt>القيادة</dt><dd>المنطقة المركزية</dd></div>
         </dl>
         <section class="r-sec">
-          <h3>القوات المتمركزة</h3>
-          <div class="p-unit" aria-label="فرقة مدرعة، الجيش، المنطقة المركزية: الجاهزية 85%"><span class="r-tile"><svg class="i"><use href="#i-army"/></svg></span>
-            <span class="r-at"><b>فرقة مدرعة</b><span>الجيش · المنطقة المركزية</span></span><span class="p-rdy">الجاهزية <b class="ltr">85%</b></span></div>
-          <div class="p-unit" aria-label="لواء حرس، الجيش، حماية مقار الحكم: الجاهزية 95%"><span class="r-tile"><svg class="i"><use href="#i-shield-plain"/></svg></span>
-            <span class="r-at"><b>لواء حرس</b><span>الجيش · حماية مقار الحكم</span></span><span class="p-rdy">الجاهزية <b class="ltr">95%</b></span></div>
-          <div class="p-unit" aria-label="قوات الأمن المركزي، الداخلية، مكافحة الشغب: الجاهزية 80%"><span class="r-tile"><svg class="i"><use href="#i-people"/></svg></span>
-            <span class="r-at"><b>قوات الأمن المركزي</b><span>الداخلية · مكافحة الشغب</span></span><span class="p-rdy">الجاهزية <b class="ltr">80%</b></span></div>
+          <h3>التشكيلات المتمركزة</h3>
+          <div class="p-unit" role="img" aria-label="فرقة مدرعة: المنطقة المركزية، التنظيم 85%"><span class="r-tile"><svg class="i"><use href="#i-army"/></svg></span>
+            <span class="r-at"><b>فرقة مدرعة</b><span>المنطقة المركزية</span></span><span class="p-rdy">التنظيم <b class="ltr">85%</b></span></div>
+          <div class="p-unit" role="img" aria-label="فرقة مشاة آلية: المنطقة المركزية، التنظيم 80%"><span class="r-tile"><svg class="i"><use href="#i-army"/></svg></span>
+            <span class="r-at"><b>فرقة مشاة آلية</b><span>المنطقة المركزية</span></span><span class="p-rdy">التنظيم <b class="ltr">80%</b></span></div>
+          <div class="p-unit" role="img" aria-label="فرقة مشاة: الحرس الجمهوري، التنظيم 95%"><span class="r-tile"><svg class="i"><use href="#i-shield-plain"/></svg></span>
+            <span class="r-at"><b>فرقة مشاة</b><span>الحرس الجمهوري</span></span><span class="p-rdy">التنظيم <b class="ltr">95%</b></span></div>
         </section>
+        <div class="r-link tap" role="button" tabindex="0" aria-label="حالة الطوارئ: محدودة منذ 2010، قانون وطني. يفتح الدولة › السياسات">
+          <span class="r-tile"><svg class="i"><use href="#i-doc"/></svg></span>
+          <span class="r-at"><b>حالة الطوارئ: محدودة منذ <span class="ltr">2010</span></b><span>قانون وطني · يُغيَّر من الدولة › السياسات</span></span>
+          <svg class="i r-chev"><use href="#i-chev"/></svg>
+        </div>
         <div class="r-link tap" role="button" tabindex="0" aria-label="إدارة القوات: يفتح قسم الجيش">
           <span class="r-tile"><svg class="i"><use href="#i-army"/></svg></span>
           <span class="r-at"><b>إدارة القوات</b><span>قسم الجيش · الأوامر والتمركز</span></span>
           <svg class="i r-chev"><use href="#i-chev"/></svg>
         </div>
-        <p class="p-note">تُحرَّك الوحدات من الخريطة: اضغط الوحدة ثم وجهتها. حالة الطوارئ قانون وطني يُغيَّر من الدولة › السياسات.</p>
+        <p class="p-note">تُحرَّك الجيوش من الخريطة: اضغط الجيش ثم وجهته. الشرطة وقوات مكافحة الشغب تتبع الداخلية وتظهر في مستوى الشرطة.</p>
       </div>
 
       <!-- details, policies tab (&tab=policy): society (the groups, their share and grievance), the biggest causes of the
-           card's unrest 64 (all of them in «لماذا؟»), party support here, the local measures with cost and effect (the
-           owner's 2nd image's second action row and «تعزيز الأمن») and the emergency-region state (Internal's lever) -->
-      <div class="r-body r-gv" data-dtab="policy">
+           card's unrest 64 (all of them in «لماذا؟»), party support here (per actor, §5.3), the local measures with cost
+           and effect (the owner's 2nd image's second action row and «تعزيز الأمن») and the emergency-region state -->
+      <div class="r-body r-gv" data-dtab="policy" role="tabpanel" aria-labelledby="rt-policy">
         <section class="r-sec">
           <h3>المجتمع</h3>
           <div class="p-split" role="img" aria-label="مسلمون سنة 90%، مسيحيون أقباط 10%"><i style="--w: 90%"></i><i style="--w: 10%"></i></div>
           <div class="p-grp"><span><i class="p-key"></i>مسلمون سنة <span class="ltr">90%</span></span><span>التذمر <b>متوسط</b></span></div>
-          <div class="p-grp"><span><i class="p-key p-k2"></i>مسيحيون أقباط <span class="ltr">10%</span></span><span>التذمر <b class="r-amber"><svg class="r-arr" aria-hidden="true"><use href="#t-up"/></svg>مرتفع</b></span></div>
+          <div class="p-grp"><span><i class="p-key p-k2"></i>مسيحيون أقباط <span class="ltr">10%</span></span><span>التذمر <b class="r-amber"><svg class="i p-wi" aria-hidden="true"><use href="#i-warn"/></svg>مرتفع</b></span></div>
         </section>
         <section class="r-sec">
           <h3>أكبر أسباب الاضطرابات</h3>
@@ -194,22 +199,22 @@
         </section>
         <section class="r-sec">
           <h3>تأييد الأحزاب هنا</h3>
-          <div class="p-split" role="img" aria-label="الحزب الوطني 62%، مستقلون 25%، أحزاب أخرى 13%"><i style="--w: 62%"></i><i style="--w: 25%"></i><i style="--w: 13%"></i></div>
-          <div class="p-grp"><span><i class="p-key"></i>الحزب الوطني <span class="ltr">62%</span></span><span><i class="p-key p-k2"></i>مستقلون <span class="ltr">25%</span></span><span><i class="p-key p-k3"></i>أخرى <span class="ltr">13%</span></span></div>
+          <div class="p-split" role="img" aria-label="الحزب الوطني 52%، الإخوان المسلمون 30%، أخرى 18%"><i style="--w: 52%"></i><i style="--w: 30%"></i><i style="--w: 18%"></i></div>
+          <div class="p-grp"><span><i class="p-key"></i>الحزب الوطني <span class="ltr">52%</span></span><span><i class="p-key p-k2"></i>الإخوان <span class="ltr">30%</span></span><span><i class="p-key p-k3"></i>أخرى <span class="ltr">18%</span></span></div>
         </section>
         <div class="r-acts">
-          <button class="r-act tap r-first" aria-label="دعم الخدمات الأساسية: 300 مليون دولار مرة واحدة. تخفض الاضطرابات 4 خلال 3 أشهر">
+          <button class="r-act tap r-first" aria-label="دعم الخدمات الأساسية: 300 مليون دولار مرة واحدة. تخفض الاضطرابات 4 نقاط، أفضل">
             <span class="r-tile"><svg class="i"><use href="#i-care"/></svg></span>
             <span class="r-at"><b>دعم الخدمات الأساسية</b><span><span class="ltr">300</span> مليون $ · مرة واحدة</span></span>
             <span class="r-chip"><svg class="r-arr" aria-hidden="true"><use href="#t-down"/></svg>الاضطرابات <span class="ltr">−4</span></span>
           </button>
-          <button class="r-act tap" aria-label="تعزيز الأمن: 200 مليون دولار سنويًا، الشرعية تنخفض 1. تخفض الاضطرابات 3 خلال 3 أشهر">
+          <button class="r-act tap" aria-label="تعزيز الأمن: 200 مليون دولار سنويًا، الشرطة إلى 9، تنخفض الشرعية 1. تخفض الاضطرابات 1، أفضل">
             <span class="r-tile"><svg class="i"><use href="#i-shield-plain"/></svg></span>
-            <span class="r-at"><b>تعزيز الأمن</b><span><span class="ltr">200</span> مليون $ سنويًا · الشرعية <span class="ltr">−1</span></span></span>
-            <span class="r-chip"><svg class="r-arr" aria-hidden="true"><use href="#t-down"/></svg>الاضطرابات <span class="ltr">−3</span></span>
+            <span class="r-at"><b>تعزيز الأمن <span class="r-amber p-cost"><svg class="r-arr" aria-hidden="true"><use href="#t-down"/></svg>الشرعية <span class="ltr">−1</span></span></b><span><span class="ltr">200</span> مليون $ سنويًا</span></span>
+            <span class="r-chip"><svg class="r-arr" aria-hidden="true"><use href="#t-down"/></svg>الاضطرابات <span class="ltr">−1</span></span>
           </button>
         </div>
-        <div class="r-link tap" role="button" tabindex="0" aria-label="منطقة طوارئ في المحافظة: لا. تُعلن من قسم الداخلية والسياسة">
+        <div class="r-link tap" role="button" tabindex="0" aria-label="منطقة طوارئ في المحافظة: لا. يفتح قسم الداخلية والسياسة">
           <span class="r-tile"><svg class="i"><use href="#i-pol"/></svg></span>
           <span class="r-at"><b>منطقة طوارئ في المحافظة</b><span>لا · تُعلن من قسم الداخلية والسياسة</span></span>
           <svg class="i r-chev"><use href="#i-chev"/></svg>

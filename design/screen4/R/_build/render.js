@@ -75,7 +75,7 @@ const TOK = {
   // the panel's size table (the owner's reference): control heights, radii, icon sizes, gaps
   ctlH: { '.r-x': 32, '.p-all': 22, '.r-why': 14, '.r-act': 44, '.r-more': 36, '.r-tab': 44, '.r-btn': 24, '.r-rd': 26, '.r-link': 44 },
   radius: { '.sheet': 12, '.r-act': 10, '.r-link': 10, '.r-more': 10, '.r-dec': 10, '.r-tile': 6, '.r-chip': 6, '.r-btn': 6, '.r-cap': 10 },
-  sheetIcon: [['.r-cap svg', 10], ['.r-arr', 10], ['.r-kl svg', 14], ['.r-x svg', 16], ['.r-hint svg', 16], ['.r-more svg', 16], ['.r-chev', 16], ['.r-tile svg', 17], ['.r-tab svg', 17], ['.r-dic', 17], ['.p-warn svg', 14]],
+  sheetIcon: [['.r-cap svg', 10], ['.r-arr', 10], ['.r-kl svg', 14], ['.r-x svg', 16], ['.r-hint svg', 16], ['.r-more svg', 16], ['.r-chev', 16], ['.r-tile svg', 17], ['.r-tab svg', 17], ['.r-dic', 17], ['.p-warn svg', 14], ['.p-wi', 10]],
   sheetSpace: [0, 2, 4, 8, 12, 16],
   title18: ['r-name', 'r-kv'],
   fade: 24, strip: 22,                                // the fade, and the clear strip under the bottom fade for the scroll hint
@@ -99,19 +99,20 @@ const BRIEF = {
     'قرار مقترح', 'دعم النقل العام', 'تخفيض تعرفة الحافلات لمدة سنة', '10 ملايين $ · شهريًا · يبدأ خلال 30 يومًا', 'تخفيف أعباء التنقل · زيادة الإنفاق العام',
     'المحافظ: مؤيد · المالية: تحفظ', 'اعتماد البرنامج', 'تأجيل'],
   // T-007: the other three tabs (their top views: the header, the tabs and the first rows, which show on every phone)
-  build: ['القاهرة', 'العاصمة', 'الحكم', 'الإنشاءات', 'القوات', 'السياسات', 'البنية التحتية', 'الكهرباء', '7 / 10', 'النقل'],
-  reach_build: ['البنية التحتية', 'الكهرباء', '7 / 10', 'النقل', '8 / 10', 'المياه والصرف', 'الاتصالات', '9 / 10', 'الكهرباء: الطلب قريب من القدرة، وانقطاعات في الصيف.',
-    'منشآت رئيسية', 'المترو', 'خطان يعملان', 'المطار', 'القاهرة الدولي', 'الصناعة', 'خفيفة وغذائية', 'المستشفيات', 'جامعية وعامة',
-    'مشاريع الدولة هنا', 'الخط الثالث لمترو القاهرة', 'المرحلة الأولى · 85% · تكتمل في 2012', 'توسعة شبكة الكهرباء', '800 مليون $ · 24 شهرًا', 'الكهرباء 8'],
-  forces: ['القاهرة', 'العاصمة', 'الحكم', 'الإنشاءات', 'القوات', 'السياسات', 'السيطرة', 'الحكومة · 100%', 'الشرطة', '8 / 10', 'الطوارئ', 'شاملة منذ 1981', 'منطقة طوارئ', 'لا'],
-  reach_forces: ['السيطرة', 'الحكومة · 100%', 'الشرطة', '8 / 10', 'الطوارئ', 'شاملة منذ 1981', 'منطقة طوارئ', 'لا', 'القوات المتمركزة',
-    'فرقة مدرعة', 'الجيش · المنطقة المركزية', 'الجاهزية 85%', 'لواء حرس', 'الجيش · حماية مقار الحكم', 'الجاهزية 95%',
-    'قوات الأمن المركزي', 'الداخلية · مكافحة الشغب', 'الجاهزية 80%', 'إدارة القوات', 'قسم الجيش · الأوامر والتمركز',
-    'تُحرَّك الوحدات من الخريطة: اضغط الوحدة ثم وجهتها. حالة الطوارئ قانون وطني يُغيَّر من الدولة › السياسات.'],
+  build: ['القاهرة', 'العاصمة', 'الحكم', 'الإنشاءات', 'القوات', 'السياسات', 'البنية التحتية', 'الكهرباء 7 / 10', 'النقل 8 / 10'],
+  // each sector as its whole row (name and value), so no other row can stand in for it
+  reach_build: ['البنية التحتية', 'الكهرباء 7 / 10', 'النقل 8 / 10', 'المياه والصرف 8 / 10', 'الاتصالات 9 / 10', 'الكهرباء: الطلب قريب من القدرة، وانقطاعات في الصيف.',
+    'منشآت رئيسية', 'المترو', 'خطان يعملان', 'المطار', 'القاهرة الدولي', 'الصناعة', 'ثقيلة وخفيفة', 'المستشفيات', 'جامعية وعامة',
+    'مشاريع الدولة هنا', 'الخط الثالث لمترو القاهرة', 'المرحلة الأولى · 85% · تكتمل في 2012', 'توسعة شبكة الكهرباء', '800 مليون $ · 24 شهرًا · إلى 8', 'الكهرباء +1'],
+  forces: ['القاهرة', 'العاصمة', 'الحكم', 'الإنشاءات', 'القوات', 'السياسات', 'السيطرة', 'الحكومة · 100%', 'الشرطة', '8 / 10', 'منطقة طوارئ', 'لا', 'القيادة', 'المنطقة المركزية'],
+  reach_forces: ['السيطرة', 'الحكومة · 100%', 'الشرطة', '8 / 10', 'منطقة طوارئ', 'لا', 'القيادة', 'التشكيلات المتمركزة',
+    'فرقة مدرعة', 'التنظيم 85%', 'فرقة مشاة آلية', 'التنظيم 80%', 'فرقة مشاة', 'الحرس الجمهوري', 'التنظيم 95%',
+    'حالة الطوارئ: محدودة منذ 2010', 'قانون وطني · يُغيَّر من الدولة › السياسات', 'إدارة القوات', 'قسم الجيش · الأوامر والتمركز',
+    'تُحرَّك الجيوش من الخريطة: اضغط الجيش ثم وجهته. الشرطة وقوات مكافحة الشغب تتبع الداخلية وتظهر في مستوى الشرطة.'],
   policy: ['القاهرة', 'العاصمة', 'الحكم', 'الإنشاءات', 'القوات', 'السياسات', 'المجتمع', 'مسلمون سنة 90%', 'التذمر متوسط', 'مسيحيون أقباط 10%', 'التذمر مرتفع'],
   reach_policy: ['المجتمع', 'مسلمون سنة 90%', 'التذمر متوسط', 'مسيحيون أقباط 10%', 'التذمر مرتفع', 'أكبر أسباب الاضطرابات', 'القمع ونقص الحريات', '+12',
-    'تراجع مستوى المعيشة', '+10', 'بطالة الشباب', '+9', 'الشرطة', '−8', 'لماذا؟ · كل الأسباب', 'تأييد الأحزاب هنا', 'الحزب الوطني 62%', 'مستقلون 25%', 'أخرى 13%',
-    'دعم الخدمات الأساسية', '300 مليون $ · مرة واحدة', 'الاضطرابات −4', 'تعزيز الأمن', '200 مليون $ سنويًا · الشرعية −1', 'الاضطرابات −3',
+    'تراجع مستوى المعيشة', '+10', 'بطالة الشباب', '+9', 'الشرطة', '−8', 'لماذا؟ · كل الأسباب', 'تأييد الأحزاب هنا', 'الحزب الوطني 52%', 'الإخوان 30%', 'أخرى 18%',
+    'دعم الخدمات الأساسية', '300 مليون $ · مرة واحدة', 'الاضطرابات −4', 'تعزيز الأمن الشرعية −1', '200 مليون $ سنويًا', 'الاضطرابات −1',
     'منطقة طوارئ في المحافظة', 'لا · تُعلن من قسم الداخلية والسياسة'],
 };
 
@@ -415,6 +416,8 @@ async function measure(p, d, b3, view) {
     }
     // the open view only
     if (tab && (qa('.r-ov').length || !qa('.r-gv').length)) issues.push('details render shows the overview');
+    if (tab) { const on = q('.r-tab.on'); if (on && (getComputedStyle(on).color !== TOK.colors[3] || !getComputedStyle(on).boxShadow.includes(TOK.colors[3]))) issues.push('the open tab is not teal');
+      qa('.r-tab:not(.on)').forEach((e) => { if (getComputedStyle(e).color === TOK.colors[3]) issues.push(`a closed tab is teal: ${e.textContent.trim()}`); }); }
     // one tab body at a time, the open tab marked (teal, aria-selected) and its body the one shown
     if (tab) { const shown = qa('.r-gv.r-body'), on = qa('.r-tab.on');
       if (shown.length !== 1 || shown[0].dataset.dtab !== tab) issues.push(`tab bodies shown: ${shown.map((e) => e.dataset.dtab).join(', ')} (want only ${tab})`);
@@ -452,12 +455,14 @@ async function measure(p, d, b3, view) {
     { const T = (e) => (e ? e.textContent.replace(/\s+/g, ' ').trim() : ''), nums = (s) => [...String(s).replace(/−/g, '-').matchAll(/-?\d+(?:\.\d+)?/g)].map((m) => parseFloat(m[0]));
       const bd = tab ? q(bodySel) : null, here = (sel) => (bd ? [...bd.querySelectorAll(sel)] : []);
       // colour is never the only cue: amber or blue data text sits beside an arrow or the warning icon
-      if (bd && tab !== 'govern') here('*').filter((e) => visible(e) && [...e.childNodes].some((n) => n.nodeType === 3 && n.textContent.trim()) && [TOK.colors[4], TOK.colors[6]].includes(getComputedStyle(e).color))
-        .forEach((e) => { const box0 = e.closest('b, dd, p, .r-chip, .p-warn') || e; if (!box0.querySelector('svg')) issues.push(`colour alone: «${T(e)}» has no arrow or icon`); });
+      if (bd && tab !== 'govern') here('*').filter((e) => visible(e) && [...e.childNodes].some((n) => n.nodeType === 3 && n.textContent.trim()) && [TOK.colors[4], TOK.colors[5], TOK.colors[6]].includes(getComputedStyle(e).color))
+        .forEach((e) => { const box0 = e.closest('b, dd, p, .r-chip, .p-warn, .p-cost') || e; if (!box0.querySelector('svg')) issues.push(`colour alone: «${T(e)}» has no arrow or icon`); });
       // الإنشاءات: each sector's meter drawn at its value out of 10; their mean is the card's infrastructure; the warning has its icon
       if (tab === 'build') {
         const vals = here('.p-lvl').map((r) => { const n = nums(T(r.querySelector('b'))), m = r.querySelector('.p-meter'), mw = m.getBoundingClientRect().width, fw = parseFloat(getComputedStyle(m, '::after').width);
           if (n[1] !== 10 || Math.abs(fw - mw * n[0] / 10) > 0.6) issues.push(`meter «${T(r.querySelector('span'))}» not drawn at ${n[0]} / 10: ${fw.toFixed(1)} of ${mw.toFixed(1)}`);
+          { const vb = r.querySelector('b'); if (!visible(vb) || getComputedStyle(vb).visibility !== 'visible' || effOp(vb) < 0.99) issues.push(`meter «${T(r.querySelector('span'))}»: its value is not shown`); }
+          if (Math.abs(m.getBoundingClientRect().height - 4) > 0.05 || getComputedStyle(m, '::after').backgroundColor !== TOK.colors[3]) issues.push(`meter «${T(r.querySelector('span'))}» is not a 4 pt teal bar`);
           if (r.getAttribute('aria-label') !== `${T(r.querySelector('span'))}: ${n[0]} من 10`) issues.push(`a11y: meter «${T(r.querySelector('span'))}» does not read its value`);
           return n[0]; });
         const card = nums(T(document.querySelectorAll('.r-kpi')[2].querySelector('.r-kv b')))[0];
@@ -466,14 +471,14 @@ async function measure(p, d, b3, view) {
         const metro = here('.r-link').find((l) => /مترو/.test(T(l)));
         if (!metro || !T(metro).includes(S5.metro + '%') || !T(metro).includes(String(S5.metroYear))) issues.push(`the metro project does not match the state panel's ${S5.metro}% and ${S5.metroYear}`);
         const act = here('.r-act')[0], elec = vals[0];
-        if (!act || nums(T(act.querySelector('.r-chip'))).slice(-1)[0] !== elec + 1) issues.push(`the grid expansion's chip does not show the electricity level after it (${elec + 1})`); }
+        if (!act || nums(T(act.querySelector('.r-chip'))).slice(-1)[0] !== 1 || nums(T(act.querySelector('.r-at > span'))).slice(-1)[0] !== elec + 1) issues.push(`the grid expansion must show its change (+1) on the chip and the level after it (${elec + 1}) in its cost line`); }
       // القوات: unit rows tile | name | readiness, each read whole by VoiceOver; no control moves a unit
       if (tab === 'forces') {
         here('.p-unit').forEach((u, i) => { const [ti, tx, rd] = ['.r-tile', '.r-at', '.p-rdy'].map((s) => u.querySelector(s).getBoundingClientRect());
           if (!(ti.left >= tx.right - 0.5 && rd.right <= tx.left + 0.5)) issues.push(`unit row ${i + 1}: order must be tile, name, readiness (right to left)`);
           const al = u.getAttribute('aria-label') || '';
-          if (!al.startsWith(T(u.querySelector('.r-at b'))) || !al.includes(T(u.querySelector('.p-rdy b')))) issues.push(`a11y: unit row ${i + 1} does not read its name and readiness`);
-          if (u.querySelector('.tap')) issues.push(`unit row ${i + 1} has a control (units move on the map)`); }); }
+          if (!al.startsWith(T(u.querySelector('.r-at b'))) || !al.includes(T(u.querySelector('.r-at > span'))) || !al.includes(T(u.querySelector('.p-rdy b'))) || u.getAttribute('role') !== 'img') issues.push(`a11y: unit row ${i + 1} does not read its name, command and organization as one element`);
+          if (u.matches('button, a, [role=button], [tabindex], .tap') || u.querySelector('button, a, [role=button], [tabindex], .tap')) issues.push(`unit row ${i + 1} has a control (units move on the map)`); }); }
       // السياسات: share bars in proportion to their labelled parts (summing to 100), each row's key the colour of its part
       if (tab === 'policy') {
         here('.p-split').forEach((s, i) => { const parts = nums(s.getAttribute('aria-label')), segs = [...s.children], tot = segs.reduce((x, e) => x + e.getBoundingClientRect().width, 0);
@@ -482,13 +487,22 @@ async function measure(p, d, b3, view) {
           for (let k = 1; k < segs.length; k++) if (!(segs[k].getBoundingClientRect().right <= segs[k - 1].getBoundingClientRect().left + 0.5)) issues.push(`share bar ${i + 1}: parts not right to left`);
           const sec = s.closest('section'), keys = [...sec.querySelectorAll('.p-key')];
           if (keys.length !== segs.length || keys.some((k, j) => getComputedStyle(k).backgroundColor !== getComputedStyle(segs[j]).backgroundColor)) issues.push(`share bar ${i + 1}: the keys do not match its parts`);
+          const steps = ['rgb(63, 224, 208)', 'rgba(63, 224, 208, 0.5)', 'rgb(169, 188, 203)'];
+          segs.forEach((e, k) => { if (getComputedStyle(e).backgroundColor !== steps[k]) issues.push(`share bar ${i + 1}: part ${k + 1} is not the one-hue step ${steps[k]}`); });
           keys.forEach((k, j) => { const lbl = T(k.parentElement); if (nums(lbl)[0] !== parts[j]) issues.push(`share bar ${i + 1}: «${lbl}» is not part ${j + 1} (${parts[j]}%)`); }); });
+        here('.p-grp b.r-amber').forEach((b) => { if (!b.querySelector('use[href="#i-warn"]') || b.querySelector('.r-arr')) issues.push(`grievance «${T(b)}»: a level carries the warning icon, not a trend arrow`); });
         here('.p-why b').forEach((b) => { const up = b.querySelector('use') && b.querySelector('use').getAttribute('href') === '#t-up', v = T(b);
           if (up !== /^\+/.test(v) || getComputedStyle(b).color !== (up ? TOK.colors[4] : TOK.colors[6])) issues.push(`cause «${v}»: a rise must be amber with an up arrow, a fall blue with a down arrow`); }); }
       // every action and link row reads whole to VoiceOver, with the numbers it shows
-      here('.r-act, .r-link').forEach((a) => { const al = a.getAttribute('aria-label') || '', want = nums(T(a.querySelector('.r-at')));
-        if (!al || want.some((x) => !nums(al).map(Math.abs).includes(Math.abs(x)))) issues.push(`a11y: «${T(a.querySelector('.r-at b'))}» does not read its numbers`);
-        if (al.includes('$')) issues.push(`a11y: «${T(a.querySelector('.r-at b'))}» reads «$» (say «دولار»)`); });
+      here('.r-act, .r-link').forEach((a) => { const al = a.getAttribute('aria-label') || '', chip = a.querySelector('.r-chip'), want = nums(a.querySelector('.r-at').innerText).concat(chip ? nums(chip.innerText) : []);   // as shown (textContent would glue adjacent numbers)
+        const nm = T(a.querySelector('.r-at b'));
+        if (!al || want.some((x) => !nums(al).map(Math.abs).includes(Math.abs(x)))) issues.push(`a11y: «${nm}» does not read its numbers`);
+        if (al.includes('$')) issues.push(`a11y: «${nm}» reads «$» (say «دولار»)`);
+        if (T(a.querySelector('.r-at')).includes('$') && !al.includes('دولار')) issues.push(`a11y: «${nm}» does not say «دولار»`);
+        const use = chip && chip.querySelector('use');
+        if (use) { const up = use.getAttribute('href') === '#t-up', sg = nums(T(chip)).slice(-1)[0];
+          if (sg !== undefined && (sg > 0) !== up) issues.push(`«${nm}»: the chip's arrow does not agree with its sign`);
+          if (!(up ? /ترفع|ترتفع|تزيد/ : /تخفض|تنخفض|تقل/).test(al)) issues.push(`a11y: «${nm}» does not say the chip's direction in words`); } });
       // the money rule over the text as shown, and signs inside their numbers, drawn left of them
       { const all = q('.sheet').innerText.replace(/\s+/g, ' ');
         for (const m of all.matchAll(/(\d+(?:\.\d+)?) مليار/g)) if (parseFloat(m[1]) < 1) issues.push(`money unit: «${m[0]}» (under 1 billion is written in millions)`);
@@ -517,7 +531,8 @@ async function measure(p, d, b3, view) {
       if (!ok) issues.push(`brief text cannot be scrolled clear of the fades: ${s}`);
       if (L.some(clearShown)) clearNow.push(s); });
     const all = q('.sheet').textContent.replace(/\s+/g, ' ');
-    Object.values(BRIEF).flat().forEach((s) => { if (!all.includes(s)) issues.push(`brief text missing: ${s}`); });
+    { const tight = all.replace(/\s+/g, '');   // a string spanning sibling elements has no space between them in textContent
+      Object.values(BRIEF).flat().forEach((s) => { if (!all.includes(s) && !tight.includes(s.replace(/\s+/g, ''))) issues.push(`brief text missing: ${s}`); }); }
     // ---------- 10. map: Cairo's highlight, ring and name pill clear of every panel and hit box ----------
     const m = window.__map, cairo = q('#cairo').getBoundingClientRect(), ring = q('.sel .ring').getBoundingClientRect(), pin = q('.sel .pin').getBoundingClientRect();
     const grow = (r, k) => ({ x0: r.left - k, y0: r.top - k, x1: r.right + k, y1: r.bottom + k });
@@ -697,14 +712,27 @@ async function selftest(b) {
     ['meter silent', d, '&tab=build', '', /a11y: meter «النقل» does not read its value/, () => { document.querySelectorAll('.p-lvl')[1].removeAttribute('aria-label'); }],
     ['sectors off the card', d, '&tab=build', '', /the sectors' mean .* is not the card's infrastructure 8/, () => { const b = document.querySelectorAll('.p-lvl b .ltr'); b[6].textContent = '4'; document.querySelectorAll('.p-lvl')[3].setAttribute('aria-label', 'الاتصالات: 4 من 10'); document.querySelectorAll('.p-meter')[3].style.setProperty('--v', '40%'); }],
     ['warning without its icon', d, '&tab=build', '', /colour alone|the warning needs its icon/, () => { document.querySelector('.p-warn svg').remove(); }],
-    ['metro off the state panel', d, '&tab=build', '', /the metro project does not match the state panel's 85%/, () => { const l = [...document.querySelectorAll('.r-gv[data-dtab="build"] .r-link .ltr')]; l[0].textContent = '80%'; }],
-    ['grid chip wrong', d, '&tab=build', '', /the grid expansion's chip does not show the electricity level after it/, () => { document.querySelector('.r-gv[data-dtab="build"] .r-act .r-chip .ltr').textContent = '9'; }],
+    ['metro off the state panel', d, '&tab=build', '', /the metro project does not match the state panel's 85%/, () => { const l = [...document.querySelectorAll('.r-gv[data-dtab="build"] .r-link .ltr')]; l[0].textContent = '80%'; document.querySelector('.r-gv[data-dtab="build"] .r-link').setAttribute('aria-label', 'الخط الثالث لمترو القاهرة، المرحلة الأولى: 80%، تكتمل في 2012. يفتح مشاريع الدولة'); }],
+    ['grid chip wrong', d, '&tab=build', '', /the grid expansion must show its change \(\+1\)/, () => { document.querySelector('.r-gv[data-dtab="build"] .r-act .r-chip .ltr').textContent = '+2'; }],
     ['action silent', d, '&tab=build', '', /a11y: «توسعة شبكة الكهرباء» does not read its numbers/, () => { document.querySelector('.r-gv[data-dtab="build"] .r-act').removeAttribute('aria-label'); }],
     ['action reads $', d, '&tab=policy', '', /reads «\$»/, () => { document.querySelector('.r-gv[data-dtab="policy"] .r-act').setAttribute('aria-label', 'دعم الخدمات الأساسية: 300 مليون $ مرة واحدة. تخفض الاضطرابات 4 خلال 3 أشهر'); }],
     ['unit row reversed', d, '&tab=forces', '.p-unit { flex-direction: row-reverse !important; }', /unit row 1: order must be tile, name, readiness/],
     ['unit silent', d, '&tab=forces', '', /a11y: unit row 2 does not read/, () => { document.querySelectorAll('.p-unit')[1].removeAttribute('aria-label'); }],
     ['unit movable here', d, '&tab=forces', '', /unit row 1 has a control/, () => { const b = document.createElement('button'); b.className = 'r-btn tap'; b.textContent = 'تحريك'; document.querySelector('.p-unit').appendChild(b); }],
-    ['amber alone', d, '&tab=forces', '', /colour alone: «شاملة منذ 1981»/, () => { document.querySelector('.r-gv[data-dtab="forces"] dd.r-amber svg').remove(); }],
+    ['amber alone', d, '&tab=policy', '', /colour alone: «مرتفع»/, () => { document.querySelector('.p-grp b.r-amber svg').remove(); }],
+    ['red alone', d, '&tab=policy', '', /colour alone: «متوسط»/, () => { document.querySelector('.p-grp b').classList.add('r-red'); document.querySelector('.p-grp b').style.color = 'rgb(242, 112, 90)'; }],
+    ['grievance with a trend arrow', d, '&tab=policy', '', /grievance «مرتفع»: a level carries the warning icon/, () => { document.querySelector('.p-grp b.r-amber use').setAttribute('href', '#t-up'); document.querySelector('.p-grp b.r-amber svg').setAttribute('class', 'r-arr'); }],
+    ['label says the opposite', d, '&tab=policy', '', /a11y: «دعم الخدمات الأساسية» does not say the chip's direction in words/, () => { document.querySelector('.r-gv[data-dtab="policy"] .r-act').setAttribute('aria-label', 'دعم الخدمات الأساسية: 300 مليون دولار مرة واحدة. ترفع الاضطرابات 4 نقاط'); }],
+    ['label without the chip number', d, '&tab=build', '', /a11y: «توسعة شبكة الكهرباء» does not read its numbers/, () => { document.querySelector('.r-gv[data-dtab="build"] .r-act').setAttribute('aria-label', 'توسعة شبكة الكهرباء: 800 مليون دولار، 24 شهرًا، إلى 8 من 10. ترفع الكهرباء، أفضل'); }],
+    ['label without «دولار»', d, '&tab=policy', '', /a11y: «دعم الخدمات الأساسية» does not say «دولار»/, () => { document.querySelector('.r-gv[data-dtab="policy"] .r-act').setAttribute('aria-label', 'دعم الخدمات الأساسية: 300 مليون مرة واحدة. تخفض الاضطرابات 4 نقاط'); }],
+    ['chip arrow against its sign', d, '&tab=policy', '', /the chip's arrow does not agree with its sign/, () => { document.querySelector('.r-gv[data-dtab="policy"] .r-act .r-chip use').setAttribute('href', '#t-up'); }],
+    ['unit as a button', d, '&tab=forces', '', /unit row 1 has a control/, () => { const u = document.querySelector('.p-unit'); u.setAttribute('role', 'button'); u.setAttribute('tabindex', '0'); }],
+    ['unit label with the wrong command', d, '&tab=forces', '', /a11y: unit row 1 does not read its name, command/, () => { document.querySelector('.p-unit').setAttribute('aria-label', 'فرقة مدرعة: الداخلية، التنظيم 85%'); }],
+    ['hidden duplicate value', d, '&tab=build', '.p-lvl:nth-of-type(3) b { visibility: hidden; }', /meter «المياه والصرف»: its value is not shown/],
+    ['share parts one colour', se, '&tab=policy', '.p-split i:nth-child(2), .p-key.p-k2 { background: #3FE0D0 !important; }', /share bar \d: part 2 is not the one-hue step/],
+    ['share part amber', se, '&tab=policy', '.p-split i:nth-child(2), .p-key.p-k2 { background: #F2B14C !important; }', /share bar \d: part 2 is not the one-hue step/],
+    ['open tab cyan', d, '&tab=forces', '.r-tab.on { color: #7FE9FF !important; box-shadow: inset 0 -2px 0 #7FE9FF !important; }', /the open tab is not teal/],
+    ['meter amber and thick', se, '&tab=build', '.p-meter { height: 8px !important; } .p-meter::after { background: #F2B14C !important; }', /meter «الكهرباء» is not a 4 pt teal bar/],
     ['share bar off', d, '&tab=policy', '', /share bar 2: part 1 not drawn at 62%/, () => { document.querySelectorAll('.p-split')[1].children[0].style.setProperty('--w', '40%'); }],
     ['share parts not 100', d, '&tab=policy', '', /share bar 1: its parts do not sum to 100/, () => { document.querySelector('.p-split').setAttribute('aria-label', 'مسلمون سنة 90%، مسيحيون أقباط 20%'); }],
     ['share key wrong', d, '&tab=policy', '', /share bar 1: the keys do not match its parts/, () => { document.querySelectorAll('.p-key')[1].classList.remove('p-k2'); }],

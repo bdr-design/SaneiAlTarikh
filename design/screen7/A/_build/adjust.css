@@ -72,6 +72,11 @@
   [data-at="0"] .a-step { --new: 0% !important; }
   [data-at="100"] .a-step { --new: 100% !important; }
   /* the wait (?states=1): «اعتماد» steps back and cannot be tapped until the cooldown ends; the preview still works */
-  [data-states="1"] .a-view[data-adjust="tax"] .a-ok { background: transparent; color: var(--t2); box-shadow: inset 0 0 0 1px var(--w-line-dim); }
+  [data-states="1"] .a-view[data-adjust="tax"] .a-ok { display: flex; align-items: center; justify-content: center; gap: var(--s1); background: transparent; color: var(--t2); box-shadow: none; }
+  .a-lk { width: 16px; height: 16px; }
+  /* a currency setting pending (&pending=1): its effects replace the rate's alone, the footer says when it lands, and
+     the current setting keeps a white outline beside the chosen (filled) one */
+  :root:not([data-pending="1"]) .m-alt, [data-pending="1"] .m-def { display: none !important; }
+  .s-sg.s-cur { box-shadow: inset 0 0 0 1px var(--w-line); }
   /* the scroll hint sits in the body's clear strip, above the footer */
   [data-adjust] .r-hint { bottom: 64px; }

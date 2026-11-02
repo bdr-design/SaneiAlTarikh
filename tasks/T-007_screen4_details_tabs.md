@@ -55,7 +55,7 @@ The build extends `design/screen4/R`: the same sheet, with tabs switching as in 
 ## Evidence (to be completed while designing)
 - **Cairo 2011:** population about 8.8 million (CAPMAS). Metro lines 1 and 2 in service, with line 3 phase 1 under construction (state panel: 85%, done in 2012). Cairo International Airport.
 - **Electricity:** demand was close to capacity. There were summer outages in 2010.
-- **Politics:** the NDP won about 90% of the seats in the 2010 People's Assembly election (state panel: about 420 of 518).
+- **Politics:** the NDP won about 80% of the seats in the 2010 People's Assembly election (state panel: about 420 of 518).
 - **Society:** Copts are about 10% (approved card).
 - **Security:** large Central Security Forces deployments under the Interior. The army's Central Military Zone and the Republican Guard are based in Cairo.
 
@@ -66,3 +66,13 @@ The build extends `design/screen4/R`: the same sheet, with tabs switching as in 
 - **The «الحكم» tab's two link rows** («الإنشاءات والمرافق», «إدارة القوات») stay as approved: they now lead to the الإنشاءات tab and to the military section.
 - **Styles in a file of the province panel's own** (`province.css`), so the shared `panel.css` that screens 5 to 7 read is untouched.
 - **The checker** (screen 4 R's `render.js`) now covers every tab: per-tab views (top, end, middle offsets), per-tab coverage, the tab marks, the meters against their values and the card, the metro against the state panel's sheet (read, not copied), unit rows, share bars, causes, colour never alone, VoiceOver labels with their numbers, the money rule over the shown text, signs inside their numbers, strings matched as whole element text, and the PNG hashes.
+
+## Review: two independent reviewers (2026-11-02)
+- **Reviewer A (the checker and consistency), 18 findings; reviewer B (renders, realism, Arabic, UX), 10.** Fixed:
+  - **The model:** formations of §5.4's types («فرقة مدرعة», «فرقة مشاة آلية», «فرقة مشاة» of the Republican Guard) with their army and «التنظيم» (organization), instead of a brigade and readiness; the Interior's riot police are part of the police level, not a unit; infrastructure stored as 4 sector sub-indices whose mean is the index (design doc table and decision 54 updated); party support per actor (§5.3): الحزب الوطني, الإخوان, أخرى.
+  - **Realism:** Cairo's NDP support below the national figure (52%), the Brotherhood 30%; Cairo's industry «ثقيلة وخفيفة» (Helwan); the emergency law «محدودة منذ 2010» (the May 2010 extension limited it to terrorism and drugs), changed at its owner, the state panel, and in the internal panel.
+  - **Meaning:** a level («مرتفع») carries the warning icon, not a trend arrow; the grid chip shows its change (+1) and the cost line the level after it («إلى 8»); «تعزيز الأمن» shows its legitimacy cost in amber with its arrow in its title, and its effect is what the police term allows (−1).
+  - **One owner per law:** the emergency law is a link row to الدولة › السياسات.
+  - **VoiceOver:** meter and unit rows are single elements (role img) read whole; the tab bodies are tab panels labelled by their tabs; every action label reads its chip's number, its direction in words, «دولار» and its verdict; the emergency link says where it leads.
+  - **The checker:** chip numbers and direction words in the labels; «دولار» required; no control on or in a unit row and the command in its label; each sector matched as its whole row and its value shown; the share bars' one-hue steps; the open tab teal; red in the colour-alone rule; chip arrows against their signs; the meters 4 pt teal; whole-sheet strings matched across sibling elements; all with self-test plants.
+- **Refuted or not changed:** none of the 28 was refuted; the province.css comment and the task card's 90% were corrected.
