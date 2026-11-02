@@ -241,6 +241,8 @@ A rule that nothing enforces is not a rule here. Rule IDs are referenced in the 
 | L11 | **SwiftUI discipline.** <ul><li>Views read only models built from snapshots.</li><li>The HUD updates at most 4 times a second.</li><li>At most 6 regions are blurred.</li><li>Long lists are lazy.</li><li>Panels ask for their data only while open.</li></ul> | `Displayed<T>` tests; SwiftLint custom rules. |
 | L12 | **Every feature has a cost line** in `docs/perf.md`. | PR template; a CI warning when `Systems/` or `content/` change without a `perf.md` change. |
 | L13 | **Every asset class has a size budget** (§3.6), including each scenario file. | The IPA gate's size manifest. |
+| L14 | **The load is spread across engines, never piled in one place** (the owner, 2026-11-02: «توزيع الثقل على محركات عشان مايتجمع بمكان واحد»). Each engine has its own thread or core and its own budget: <ul><li>**the main thread** only takes touches and hands finished models to the views (≤1.0 ms per frame); it never simulates, decodes, shapes text or builds buffers;</li><li>**the simulation engine** (`GameHost`) runs on its own task, and its per-government monthly work runs in parallel across the cores (below, §2.4);</li><li>**the AI engine** (`SaneiAI`) thinks on its own task over a snapshot and only sends Commands (§2.4);</li><li>**the map engine** draws on the GPU; imagery decoding, label shaping and map-buffer building each run as background work with their own in-flight limits;</li><li>**the platform engine** writes saves and logs off the main thread.</li></ul> No system takes more than its line in the per-day sub-budget (§3.2), and work that comes in bulk (monthly, yearly, route searches, strategic AI) is staggered over the days so no single day spikes. | Per-engine counters in the overlay and the recorder; the work-counter gate checks each system against its sub-budget line and fails a day over 16 ms; a parallel-vs-serial test proves the same state hash. |
+| L15 | **No hot spot grows with play time.** History, notifications and logs live in fixed rings; caches are bounded and droppable; no list scanned per day grows with the years played. | The 2011 → 2100 all-AI run checks that the mean day in 2100 stays within 10% of the mean day in 2011. |
 
 ### 1.2 Realism (الواقعية)
 
@@ -449,6 +451,12 @@ Dependencies run one way: Core ← Content ← Engine ← AI; Core ← Map; Pres
   - `ViewSnapshot`, sent through `AsyncStream(.bufferingNewest(1))` at most 10 times a second.
   - Detail panels call `await host.query(…)` only while open.
 - **On the main actor**, `GameStore` updates panel models through `Displayed<T>`. Map buffers and runtime label anchors are rebuilt in background tasks when their versions change.
+
+**Spreading the work across cores (L14).** Determinism stays exact, because each parallel job writes only its own rows and the results are merged in serial order:
+- **Monthly slot in parallel.** The governments due today run `Economy`, `Population`, `Internal`, `Politics`, `Intelligence`, `Research` and `DiplomacyDrift` in a `TaskGroup`, one task per government. Each reads yesterday's shared state and writes only that government's rows. Anything that crosses to another government (trade, aid, migration, ledger postings) goes into the task's own outbox. After the group, the outboxes are applied in (government serial, sequence) order. `ConditionalEvents` then run serially.
+- **AI on its own task.** Strategic and diplomatic AI read an immutable snapshot on a separate task and return Commands. The host applies them at a fixed latency (the next day boundary after the snapshot's day plus 1), in (day, issuerRank, sequence) order, so the result does not depend on how fast the AI task ran. Operational AI stays inside the day, within its 0.25 ms line.
+- **Bounded per day.** The monthly slots spread about 7–8 governments over each day; strategic AI runs at most 15 a day; route searches at most 12 a day; front execution every 3 days, staggered.
+- **One core is enough.** On a phone under thermal pressure the governor can run the group serially; the state hash is the same either way (tested on Linux in CI).
 
 **Lifecycle.**
 
