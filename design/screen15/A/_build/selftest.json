@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-02T23:39:49.661Z",
+ "ranAt": "2026-11-02T23:41:43.091Z",
  "inputs": {
   "files": [
    "index.html",
@@ -21,7 +21,7 @@
    "../../shared/map_mena_d1_overlay.svg",
    "map_overlay_cairo.svg"
   ],
-  "sha1": "00ff564a6e16472a509c007f9eea24cf11a3c1e3"
+  "sha1": "c27776cabbb86da438a2b35eb20b59e2986d94b1"
  },
  "cleanIssues": {
   "i16promax": [],
@@ -322,8 +322,9 @@
   },
   {
    "name": "list cut without a fade",
-   "ok": false,
+   "ok": true,
    "sample": [
+    "text cut by the list's edge without a fade: \"قرارات تنتظرك\"",
     "the centre's fades do not match its scroll"
    ]
   },
@@ -353,8 +354,11 @@
   },
   {
    "name": "hit overlap",
-   "ok": false,
-   "sample": []
+   "ok": true,
+   "sample": [
+    "hit overlap قرار: احتجاجات واسعة في تو / إلغاء أمر المنطقة الغربية ",
+    "hit overlap إلغاء أمر المنطقة الغربية  / السودان: استفتاء الجنوب بع"
+   ]
   },
   {
    "name": "coverage reports a string no view shows",
