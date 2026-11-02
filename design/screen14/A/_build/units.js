@@ -240,7 +240,8 @@
         advance(Math.max(0, now - LIVE.last) / 1000 * LIVE.speed); LIVE.last = now; LIVE.raf = 0;
         render();
         if (!moving()) { go(); arrived(); return; }
-        LIVE.timer = setTimeout(function () { LIVE.raf = requestAnimationFrame(frame); }, 25);   /* + the wait for the frame: about 30 a second */
+        /* the next frame no sooner than 34 ms after this one (≤30 a second whatever the display's rate) */
+        LIVE.timer = setTimeout(function () { LIVE.raf = requestAnimationFrame(frame); }, Math.max(0, 34 - (performance.now() - now)));
       };
       LIVE.timer = setTimeout(function () { LIVE.raf = requestAnimationFrame(frame); }, 33);
       return;

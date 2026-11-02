@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-02T21:47:43.651Z",
+ "ranAt": "2026-11-02T22:42:12.699Z",
  "inputs": {
   "files": [
    "index.html",
@@ -24,7 +24,7 @@
    "header_cairo.jpg",
    "map_overlay_cairo.svg"
   ],
-  "sha1": "dbca4c01968ea5f943ccd7d9f97927cfcdb1e0a4"
+  "sha1": "8cbc105b6fe1c1fc0e77c9da96090567a09f7e44"
  },
  "cleanIssues": {
   "i16promax": [],
@@ -78,7 +78,8 @@
    "name": "off-token colour",
    "ok": true,
    "sample": [
-    "text colour off-token rgb(136, 153, 170): \"الأكثر اضطرابًا\""
+    "text colour off-token rgb(136, 153, 170): \"الداخلية والسياسة\"",
+    "contrast 2.87 for \"الداخلية والسياسة\""
    ]
   },
   {
@@ -163,7 +164,7 @@
    "sample": [
     "icon over text: i / \"· مرة في السنة\"",
     "icon over text: i / \"الاضطرابات\"",
-    "hit overlap الدولة / فتح حوار وطني: 20 من رأس ا"
+    "hit overlap الدولة / فتح حوار وطني: الكلفة 20 م"
    ]
   },
   {
@@ -287,7 +288,9 @@
    "name": "section colour on data",
    "ok": true,
    "sample": [
-    "section colour on data text: \"الأكثر اضطرابًا\""
+    "section colour on data text: \"مصر\"",
+    "section colour on data text: \"29\"",
+    "section colour on data text: \"محافظة\""
    ]
   },
   {
@@ -359,7 +362,7 @@
    "sample": [
     "overview needs scrolling: 398.0 pt over",
     "fades 0/0 do not match the scroll state (top 0, over 398.0)",
-    "brief text not fully visible: فتح حوار وطني"
+    "brief text not fully visible: السكان"
    ]
   },
   {
@@ -400,8 +403,21 @@
   },
   {
    "name": "text overlap",
-   "ok": false,
-   "sample": []
+   "ok": true,
+   "sample": [
+    "text overlap \"الداخلية والسياسة\" / \"مصر\"",
+    "text overlap \"الداخلية والسياسة\" / \"·\"",
+    "text overlap \"الداخلية والسياسة\" / \"29\""
+   ]
+  },
+  {
+   "name": "text into a control",
+   "ok": true,
+   "sample": [
+    "text overlap \"· مرة في السنة\" / \"الاضطرابات\"",
+    "text over a control: \"فتح حوار وطني\" runs into «الاضطرابات −3»",
+    "text over a control: \"· مرة في السنة\" runs into «الاضطرابات −3»"
+   ]
   },
   {
    "name": "clipped text",
@@ -755,9 +771,12 @@
    ]
   },
   {
-   "name": "coverage without the middle views",
+   "name": "coverage reports a string no view shows",
    "ok": true,
    "sample": [
+    "overview: never shown clear of the fades in any view: نص غير معروض للاختبار"
+   ],
+   "midViewsAdd": [
     "unrest: never shown clear of the fades in any view: الغربية",
     "unrest: never shown clear of the fades in any view: 58",
     "unrest: never shown clear of the fades in any view: الجيزة"
