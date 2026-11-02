@@ -1,0 +1,568 @@
+{
+ "ranAt": "2026-11-02T23:05:12.900Z",
+ "inputs": {
+  "files": [
+   "index.html",
+   "_build/render.js",
+   "_build/sheet.html",
+   "_build/assemble.py",
+   "../../shared/check/panelcheck.js",
+   "../../shared/check/panel_page.py",
+   "../../screen4/R/_build/panel.css",
+   "../../shared/section_identity.css",
+   "../../screen5/A/_build/state.css",
+   "../../screen4/A/index.html",
+   "../../screen1/B3/index.html",
+   "../../shared/devices.json",
+   "_build/more.css",
+   "../../shared/flag_eg.svg",
+   "../../shared/flags/eg.svg",
+   "../../shared/map_mena_d1.jpg",
+   "../../shared/map_mena_d1_overlay.svg",
+   "header_cairo.jpg",
+   "map_overlay_cairo.svg"
+  ],
+  "sha1": "d06ec86a6c8ca7174a5992d54c2cdaf073712f2e"
+ },
+ "cleanIssues": {
+  "i16promax": [],
+  "i16promax_saves_end": [],
+  "i16promax_settings": [],
+  "i16promax_settings_end": [],
+  "i16promax_log": [],
+  "i16promax_log_end": [],
+  "i16promax_about": [],
+  "i16promax_about_end": [],
+  "i16promax coverage": [],
+  "se": [],
+  "se_saves_end": [],
+  "se_settings": [],
+  "se_settings_end": [],
+  "se_log": [],
+  "se_log_end": [],
+  "se_about": [],
+  "se_about_end": [],
+  "se_settings_at86": [],
+  "se coverage": []
+ },
+ "results": [
+  {
+   "name": "type size",
+   "ok": true,
+   "sample": [
+    "font size 17 for \"المزيد\""
+   ]
+  },
+  {
+   "name": "font weight",
+   "ok": true,
+   "sample": [
+    "font weight 11.5/700 for \"الحفظ\"",
+    "font weight 11.5/700 for \"الإعدادات\"",
+    "font weight 11.5/700 for \"السجل\""
+   ]
+  },
+  {
+   "name": "off-token colour",
+   "ok": true,
+   "sample": [
+    "text colour off-token rgb(136, 153, 170): \"المزيد\"",
+    "contrast 2.4 for \"المزيد\""
+   ]
+  },
+  {
+   "name": "radius",
+   "ok": true,
+   "sample": [
+    "panel radius المزيد: 6 (want 12)",
+    "radius 6 for .sheet (want 12)"
+   ]
+  },
+  {
+   "name": "tap in the side inset",
+   "ok": true,
+   "sample": [
+    "text in side inset: ملفات الحفظ في هذه الحملة",
+    "text in side inset: يُحفظ تلقائيًا أول كل شهر وعند الخروج من اللعبة.",
+    "tap in side inset: الحفظ"
+   ]
+  },
+  {
+   "name": "panel in the side inset",
+   "ok": true,
+   "sample": [
+    "text in side inset: ملفات الحفظ في هذه الحملة",
+    "text in side inset: يُحفظ تلقائيًا أول كل شهر وعند الخروج من اللعبة.",
+    "tap in side inset: الحفظ"
+   ]
+  },
+  {
+   "name": "panel not opaque",
+   "ok": true,
+   "sample": [
+    "panel not opaque: المزيد rgba(9, 17, 25, 0.66)",
+    "contrast 4.22 for \"الحفظ\"",
+    "contrast 4.08 for \"الإعدادات\""
+   ]
+  },
+  {
+   "name": "see-through panel",
+   "ok": true,
+   "sample": [
+    "panel not opaque (opacity 0.60): المزيد",
+    "brief text not fully visible: المزيد",
+    "brief text not fully visible: حملة مصر · 1 يناير 2011"
+   ]
+  },
+  {
+   "name": "Egypt covered",
+   "ok": true,
+   "sample": [
+    "Nile delta covered by panel المزيد",
+    "Nile delta under the hit box of الحفظ",
+    "Nile delta under the hit box of الإعدادات"
+   ]
+  },
+  {
+   "name": "sheet width",
+   "ok": true,
+   "sample": [
+    "sheet width 330 (want round(clamp(43% of 832, 340, 380)), or the room the dock leaves if 330..: 358)"
+   ]
+  },
+  {
+   "name": "sheet top",
+   "ok": true,
+   "sample": [
+    "hit overlap الخزينة 36.0 مليار $ / إغلاق",
+    "hit overlap الاستقرار 58% / إغلاق",
+    "panel overlap الدولة: مصر، حسني مبارك، ج / المزيد"
+   ]
+  },
+  {
+   "name": "dock hidden although it fits",
+   "ok": true,
+   "sample": [
+    "dock hidden although it fits left of the sheet"
+   ]
+  },
+  {
+   "name": "dock shown on the SE",
+   "ok": true,
+   "sample": [
+    "icon over text: i / \"نسخة في مجلد آخر\"",
+    "icon over text: i / \"لم يُختر مجلد · تحمي الحفظ إذا حُذفت اللعبة\"",
+    "icon over text: i / \"لم يُختر مجلد · تحمي الحفظ إذا حُذفت اللعبة\""
+   ]
+  },
+  {
+   "name": "left stack moved",
+   "ok": true,
+   "sample": [
+    "HUD element moved from its B3 position: .toast x 70.0..275.6 y 56.0..88.0",
+    "HUD element moved from its B3 position: .btn.mode x 70.0..191.6 y 96.0..128.0",
+    "HUD element moved from its B3 position: .btn.home x 70.0..141.5 y 136.0..168.0"
+   ]
+  },
+  {
+   "name": "fit not the loosest",
+   "ok": true,
+   "sample": [
+    "fit level 6 is not the loosest that fits: [[0,0]]"
+   ]
+  },
+  {
+   "name": "two tab bodies",
+   "ok": true,
+   "sample": [
+    "clipped text (bottom): \"الصوت واللمس والحركة\" 774.48..881 y 400.64..417.64",
+    "control cut by its scroll area (bottom): حفظ تلقائي: 1 يناير 2011، ",
+    "hit box shaved by its clip: حفظ تلقائي: 1 يناير 2011، "
+   ]
+  },
+  {
+   "name": "two tabs selected",
+   "ok": true,
+   "sample": [
+    "exactly the open tab must be selected"
+   ]
+  },
+  {
+   "name": "tabs not a tab list",
+   "ok": true,
+   "sample": [
+    "a11y: the tabs are not a tab list"
+   ]
+  },
+  {
+   "name": "tabs reversed",
+   "ok": true,
+   "sample": [
+    "tab 2 is not left of tab 1",
+    "tab 3 is not left of tab 2",
+    "tab 4 is not left of tab 3"
+   ]
+  },
+  {
+   "name": "fades wrong",
+   "ok": true,
+   "sample": [
+    "clipped text (bottom): \"تتبع خيار تقليل الحركة\" 787.03..881 y 408..425",
+    "control cut by its scroll area (bottom): حسب الجهاز",
+    "hit box shaved by its clip: حسب الجهاز"
+   ]
+  },
+  {
+   "name": "hint chevron missing",
+   "ok": true,
+   "sample": [
+    "scroll hint chevron missing with content below"
+   ]
+  },
+  {
+   "name": "hint over the content",
+   "ok": true,
+   "sample": [
+    "scroll hint not centred in the clear strip under the fade: y 249.0..267.0 (strip 395.0..417.0)",
+    "scroll hint over text: \"×\""
+   ]
+  },
+  {
+   "name": "map label cut",
+   "ok": true,
+   "sample": [
+    "map label ليبيا sliced by the screen edge or the side inset",
+    "map label إيران sliced by the screen edge or the side inset",
+    "map label إيران squeezed between a panel and the screen edge"
+   ]
+  },
+  {
+   "name": "contrast",
+   "ok": true,
+   "sample": [
+    "contrast 1 for \"ملفات الحفظ في هذه الحمل\"",
+    "contrast 1.73 for \"يُحفظ تلقائيًا أول كل شه\""
+   ]
+  },
+  {
+   "name": "dock item not marked",
+   "ok": true,
+   "sample": [
+    "the open section «المزيد» is not marked in the dock"
+   ]
+  },
+  {
+   "name": "identity line missing",
+   "ok": true,
+   "sample": [
+    "panel top line none rgb(169, 188, 203) 2px (want the section colour, 2 pt, at the top)"
+   ]
+  },
+  {
+   "name": "open tab neutral",
+   "ok": true,
+   "sample": [
+    "open tab not in the section colour"
+   ]
+  },
+  {
+   "name": "money unit",
+   "ok": true,
+   "sample": [
+    "clipped text (bottom): \"عبر تطبيق الملفات\" 764.8..834 y 404..419",
+    "control cut by its scroll area (bottom): استيراد حفظ أو تصديره عبر ",
+    "hit box shaved by its clip: استيراد حفظ أو تصديره عبر "
+   ]
+  },
+  {
+   "name": "sign outside its number",
+   "ok": true,
+   "sample": [
+    "clipped text (bottom): \"عبر تطبيق الملفات\" 764.8..834 y 404..419",
+    "control cut by its scroll area (bottom): استيراد حفظ أو تصديره عبر ",
+    "hit box shaved by its clip: استيراد حفظ أو تصديره عبر "
+   ]
+  },
+  {
+   "name": "colour alone",
+   "ok": true,
+   "sample": [
+    "clipped text (bottom): \"عبر تطبيق الملفات\" 764.8..834 y 404..419",
+    "control cut by its scroll area (bottom): استيراد حفظ أو تصديره عبر ",
+    "hit box shaved by its clip: استيراد حفظ أو تصديره عبر "
+   ]
+  },
+  {
+   "name": "an image in the sheet",
+   "ok": true,
+   "sample": [
+    "clipped text (bottom): \"عبر تطبيق الملفات\" 764.8..834 y 407..422",
+    "control cut by its scroll area (bottom): استيراد حفظ أو تصديره عبر ",
+    "hit box shaved by its clip: استيراد حفظ أو تصديره عبر "
+   ]
+  },
+  {
+   "name": "close not round",
+   "ok": true,
+   "sample": [
+    "close button is not round"
+   ]
+  },
+  {
+   "name": "label without a role",
+   "ok": true,
+   "sample": [
+    "clipped text (bottom): \"عبر تطبيق الملفات\" 764.8..834 y 404..419",
+    "control cut by its scroll area (bottom): استيراد حفظ أو تصديره عبر ",
+    "hit box shaved by its clip: استيراد حفظ أو تصديره عبر "
+   ]
+  },
+  {
+   "name": "overview scrolls",
+   "ok": true,
+   "sample": [
+    "log needs scrolling: 380.0 pt over",
+    "fades 0/0 do not match the scroll state (top 0, over 380.0)",
+    "brief text not fully visible: الأحداث، الأحدث أولًا"
+   ]
+  },
+  {
+   "name": "control height",
+   "ok": true,
+   "sample": [
+    "control height 40.00 for .r-tab (want 44): الحفظ",
+    "control height 40.00 for .r-tab (want 44): الإعدادات",
+    "control height 40.00 for .r-tab (want 44): السجل"
+   ]
+  },
+  {
+   "name": "icon size",
+   "ok": true,
+   "sample": [
+    "icon size 19x19 (want 17): i",
+    "icon size 19x19 (want 17): i",
+    "icon size 19x19 (want 17): i"
+   ]
+  },
+  {
+   "name": "dock underline missing",
+   "ok": true,
+   "sample": [
+    "dock underline missing or off: none 16pxx2px rgb(169, 188, 203) (want 16 x 2 in the section colour)"
+   ]
+  },
+  {
+   "name": "identity line colour",
+   "ok": true,
+   "sample": [
+    "panel top line \"\" rgb(63, 224, 208) 2px (want the section colour, 2 pt, at the top)"
+   ]
+  },
+  {
+   "name": "closed tabs like the open one",
+   "ok": true,
+   "sample": [
+    "open tab not in the section colour",
+    "closed tab not in the secondary grey: الإعدادات rgb(234, 242, 247)",
+    "closed tab not in the secondary grey: السجل rgb(234, 242, 247)"
+   ]
+  },
+  {
+   "name": "emblem size",
+   "ok": true,
+   "sample": [
+    "size 28.0x32.0 for .s-emb (want 32 x 32)"
+   ]
+  },
+  {
+   "name": "tile icons cyan",
+   "ok": true,
+   "sample": [
+    "white touch off: .r-tile color rgb(127, 233, 255) (want rgb(234, 242, 247))",
+    "white touch off: .r-tile color rgb(127, 233, 255) (want rgb(234, 242, 247))",
+    "white touch off: .r-tile color rgb(127, 233, 255) (want rgb(234, 242, 247))"
+   ]
+  },
+  {
+   "name": "row read in part",
+   "ok": true,
+   "sample": [
+    "a11y: «حفظ الآن» does not read its numbers",
+    "a11y: «جزء» does not read all it shows: حفظ الآن حفظ جديد"
+   ]
+  },
+  {
+   "name": "brief text hidden (saves)",
+   "ok": true,
+   "sample": [
+    "brief text not fully visible: حفظ الآن",
+    "brief text cannot be scrolled clear of the fades: حفظ الآن"
+   ]
+  },
+  {
+   "name": "18 pt misuse (saves)",
+   "ok": true,
+   "sample": [
+    "18 pt is for the panel's name and the adjusted values only: \"حفظ جديد · مصر ·\"",
+    "18 pt is for the panel's name and the adjusted values only: \"1\"",
+    "18 pt is for the panel's name and the adjusted values only: \"يناير\""
+   ]
+  },
+  {
+   "name": "text overlap (saves)",
+   "ok": true,
+   "sample": [
+    "text overlap \"حفظ الآن\" / \"حفظ جديد · مصر ·\""
+   ]
+  },
+  {
+   "name": "clipped text (saves)",
+   "ok": true,
+   "sample": [
+    "clipped text (sides): \"ملفات الحفظ في هذه الحملة\" 795.41..921 y 212..229",
+    "text outside the sheet's 12 pt padding: \"ملفات الحفظ في هذه الحملة\"",
+    "clipped text (sides): \"يُحفظ تلقائيًا أول كل شهر وعند الخروج من اللعبة.\" 737.08..921 y 279..294"
+   ]
+  },
+  {
+   "name": "faint text (saves)",
+   "ok": true,
+   "sample": [
+    "brief text not fully visible: حفظ جديد · مصر · 1 يناير 2011",
+    "brief text cannot be scrolled clear of the fades: حفظ جديد · مصر · 1 يناير 2011",
+    "brief text cannot be scrolled clear of the fades: 1 يناير 2011 · مصر · 2 ميغابايت"
+   ]
+  },
+  {
+   "name": "% before its number (saves)",
+   "ok": true,
+   "sample": [
+    "% shown before its number: \"نسبة 20%\"",
+    "brief text missing: يُحفظ تلقائيًا أول كل شهر وعند الخروج من اللعبة.",
+    "brief text missing: يُحفظ تلقائيًا أول كل شهر وعند الخروج من اللعبة."
+   ]
+  },
+  {
+   "name": "setting without its group",
+   "ok": true,
+   "sample": [
+    "a11y: a label VoiceOver may skip (no role): «الجودة»",
+    "setting «الجودة» is not a named group of three choices"
+   ]
+  },
+  {
+   "name": "group named wrong",
+   "ok": true,
+   "sample": [
+    "setting «حد السرعة» is not a named group of three choices"
+   ]
+  },
+  {
+   "name": "two chosen",
+   "ok": true,
+   "sample": [
+    "setting 1: 2 chosen segments (2 aria-checked), not one"
+   ]
+  },
+  {
+   "name": "none chosen",
+   "ok": true,
+   "sample": [
+    "setting 1: 0 chosen segments (0 aria-checked), not one",
+    "setting 1 is not «الجودة · التوفير أخف على البطارية · توفير/متوازن/أعلى · متوازن»: «الجودة · التوفير أخف على البطارية · توفير/متوازن/أعلى · »"
+   ]
+  },
+  {
+   "name": "settings choices swapped",
+   "ok": true,
+   "sample": [
+    "setting 1 is not «الجودة · التوفير أخف على البطارية · توفير/متوازن/أعلى · متوازن»: «الجودة · التوفير أخف على البطارية · ×5/×10/أقصى · أقصى»",
+    "setting 2 is not «حد السرعة · تقل تلقائيًا إذا سخن الجهاز · ×5/×10/أقصى · أقصى»: «حد السرعة · تقل تلقائيًا إذا سخن الجهاز · توفير/متوازن/أعلى · متوازن»",
+    "the speed cap cannot reach the HUD's «أقصى» (D-16)"
+   ]
+  },
+  {
+   "name": "settings lines swapped",
+   "ok": true,
+   "sample": [
+    "setting 1 is not «الجودة · التوفير أخف على البطارية · توفير/متوازن/أعلى · متوازن»: «الجودة · تقل تلقائيًا إذا سخن الجهاز · توفير/متوازن/أعلى · متوازن»",
+    "setting 2 is not «حد السرعة · تقل تلقائيًا إذا سخن الجهاز · ×5/×10/أقصى · أقصى»: «حد السرعة · التوفير أخف على البطارية · ×5/×10/أقصى · أقصى»"
+   ]
+  },
+  {
+   "name": "speed capped at ×10",
+   "ok": true,
+   "sample": [
+    "setting 2 is not «حد السرعة · تقل تلقائيًا إذا سخن الجهاز · ×5/×10/أقصى · أقصى»: «حد السرعة · تقل تلقائيًا إذا سخن الجهاز · ×5/×10/×20 · ×20»",
+    "the speed cap cannot reach the HUD's «أقصى» (D-16)"
+   ]
+  },
+  {
+   "name": "a music setting",
+   "ok": true,
+   "sample": [
+    "a music setting (no music in v1)",
+    "brief text missing: الأرقام غربية دائمًا، والمبالغ بالدولار الأمريكي.",
+    "brief text missing: الأرقام غربية دائمًا، والمبالغ بالدولار الأمريكي."
+   ]
+  },
+  {
+   "name": "a digit setting",
+   "ok": true,
+   "sample": [
+    "setting 5 is not «الحركة · تتبع خيار تقليل الحركة · حسب الجهاز/كاملة/مخففة · حسب الجهاز»: «الأرقام · تتبع خيار تقليل الحركة · حسب الجهاز/كاملة/مخففة · حسب الجهاز»",
+    "setting «الأرقام» is not a named group of three choices",
+    "a digit setting (Western digits always)"
+   ]
+  },
+  {
+   "name": "log not newest first",
+   "ok": true,
+   "sample": [
+    "the log is not newest first",
+    "brief text missing: 1 يناير 2011 · الجوار",
+    "brief text missing: 1 يناير 2011 · الجوار"
+   ]
+  },
+  {
+   "name": "an event undated",
+   "ok": true,
+   "sample": [
+    "event «بدأت الحملة» is not dated",
+    "brief text missing: 1 يناير 2011 · مصر · الوضع واقعي",
+    "brief text missing: 1 يناير 2011 · مصر · الوضع واقعي"
+   ]
+  },
+  {
+   "name": "link silent on where it leads",
+   "ok": true,
+   "sample": [
+    "a11y: «المساعدة» does not say where it leads"
+   ]
+  },
+  {
+   "name": "action row read in part",
+   "ok": true,
+   "sample": [
+    "a11y: «حفظ الآن: 1 يناير 2011» does not read all it shows: جديد مصر"
+   ]
+  },
+  {
+   "name": "mirror on the device",
+   "ok": true,
+   "sample": [
+    "the mirror copy is not a folder the player picks (D-28)",
+    "brief text missing: لم يُختر مجلد · تحمي الحفظ إذا حُذفت اللعبة",
+    "brief text missing: لم يُختر مجلد · تحمي الحفظ إذا حُذفت اللعبة"
+   ]
+  },
+  {
+   "name": "coverage reports a string no view shows",
+   "ok": true,
+   "sample": [
+    "saves: never shown clear of the fades in any view: نص غير معروض للاختبار"
+   ],
+   "midViewsAdd": []
+  }
+ ]
+}
