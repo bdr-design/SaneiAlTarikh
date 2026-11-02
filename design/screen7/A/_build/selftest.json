@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-02T20:39:06.921Z",
+ "ranAt": "2026-11-02T21:49:50.771Z",
  "inputs": {
   "files": [
    "index.html",
@@ -22,7 +22,7 @@
    "header_cairo.jpg",
    "map_overlay_cairo.svg"
   ],
-  "sha1": "8bea2ab82cd6a89a1ff974baf77fb30207a93247"
+  "sha1": "a72afb9c83e74f60a6cb65144cc103b6ad21eb9c"
  },
  "cleanIssues": {
   "i16promax": [],
@@ -31,6 +31,8 @@
   "i16promax_money": [],
   "i16promax_money_end": [],
   "i16promax_wait": [],
+  "i16promax_money_pending": [],
+  "i16promax_money_pending_end": [],
   "i16promax_tax_min": [],
   "i16promax_tax_max": [],
   "i16promax_line_min": [],
@@ -40,6 +42,7 @@
   "i16promax_money_min": [],
   "i16promax_money_max": [],
   "i16promax_money_at89": [],
+  "i16promax_money_pending_at89": [],
   "i16promax coverage": [],
   "se": [],
   "se_line": [],
@@ -47,6 +50,8 @@
   "se_money": [],
   "se_money_end": [],
   "se_wait": [],
+  "se_money_pending": [],
+  "se_money_pending_end": [],
   "se_tax_min": [],
   "se_tax_max": [],
   "se_line_min": [],
@@ -59,6 +64,10 @@
   "se_money_at76": [],
   "se_money_at114": [],
   "se_money_at152": [],
+  "se_money_pending_at38": [],
+  "se_money_pending_at76": [],
+  "se_money_pending_at114": [],
+  "se_money_pending_at152": [],
   "se coverage": []
  },
  "results": [
@@ -81,9 +90,9 @@
    "name": "font weight",
    "ok": true,
    "sample": [
-    "font weight 13/700 for \"+600\"",
+    "font weight 13/700 for \"+300\"",
     "font weight 13/700 for \"مليون $ سنويًا\"",
-    "font weight 13/700 for \"17.1\""
+    "font weight 13/700 for \"17.4\""
    ]
   },
   {
@@ -142,7 +151,7 @@
    "sample": [
     "text in side inset: الحالي",
     "text in side inset: الإيرادات",
-    "text in side inset: +600"
+    "text in side inset: +300"
    ]
   },
   {
@@ -151,7 +160,7 @@
    "sample": [
     "text in side inset: الحالي",
     "text in side inset: الإيرادات",
-    "text in side inset: +600"
+    "text in side inset: +300"
    ]
   },
   {
@@ -160,7 +169,7 @@
    "sample": [
     "text in side inset: الحالي",
     "text in side inset: الإيرادات",
-    "text in side inset: +600"
+    "text in side inset: +300"
    ]
   },
   {
@@ -211,7 +220,7 @@
    "sample": [
     "panel not opaque: الاقتصاد: مصر rgba(9, 17, 25, 0.66)",
     "contrast 3.15 for \"الجديد\"",
-    "contrast 4.44 for \"+600\""
+    "contrast 4.44 for \"+300\""
    ]
   },
   {
@@ -339,7 +348,7 @@
    "sample": [
     "clipped text (top): \"2%\" 590.52..606 y 131..146",
     "clipped text (top): \"20%\" 372..393.48 y 131..146",
-    "control cut by its scroll area (top): أنقص ربع نقطة"
+    "control cut by its scroll area (top): أنقص فائدة المركزي ربع نقط"
    ]
   },
   {
@@ -348,7 +357,7 @@
    "sample": [
     "clipped text (top): \"2%\" 590.52..606 y 131..146",
     "clipped text (top): \"20%\" 372..393.48 y 131..146",
-    "control cut by its scroll area (top): أنقص ربع نقطة"
+    "control cut by its scroll area (top): أنقص فائدة المركزي ربع نقط"
    ]
   },
   {
@@ -423,7 +432,7 @@
    "ok": true,
    "sample": [
     "contrast 1.73 for \"الإيرادات\"",
-    "contrast 1.89 for \"+600\"",
+    "contrast 1.89 for \"+300\"",
     "contrast 1.89 for \"مليون $ سنويًا\""
    ]
   },
@@ -471,9 +480,9 @@
    "name": "section colour on data",
    "ok": true,
    "sample": [
-    "section colour on data text: \"+600\"",
+    "section colour on data text: \"+300\"",
     "section colour on data text: \"مليون $ سنويًا\"",
-    "section colour on data text: \"17.1\""
+    "section colour on data text: \"17.4\""
    ]
   },
   {
@@ -721,31 +730,32 @@
    "name": "knob over a limit at the other end",
    "ok": true,
    "sample": [
-    "the knob comes within 1.5 pt of the limit «15»",
-    "contrast 1.04 for \"15\""
+    "the knob comes within 1.5 pt of the limit «17.6»",
+    "contrast 1.04 for \"17.6\""
    ]
   },
   {
    "name": "sign outside its number",
    "ok": true,
    "sample": [
-    "a sign outside its number: «+600»",
-    "brief text missing: +600 مليون $ سنويًا",
-    "brief text missing: +600 مليون $ سنويًا"
+    "brief rows differ: eff: [[\"الإيرادات\",\"+600 مليون $ سنويًا\",1,\"up\"],[\"العجز\",\"17.4 مليار $ بدل 17.7\",1,\"down\"],[\"اضطرابات المحافظات الحضرية\",\"+1 خلال 3 أشهر\",0,\"up\"],[\"النمو\",\"−0.1 نقط",
+    "a11y: effect «الإيرادات» does not read as one phrase with its numbers, «دولار» and its verdict: «الإيرادات: تزيد 300 مليون دولار سنويًا، أفضل»",
+    "numbers: the new deficit is not 17.7 minus the extra revenue"
    ]
   },
   {
    "name": "sign in an RTL run",
    "ok": true,
    "sample": [
-    "a sign not in a left-to-right number: «+600»",
-    "a sign drawn right of its number: «+600»"
+    "a sign not in a left-to-right number: «+300»",
+    "a sign drawn right of its number: «+300»"
    ]
   },
   {
    "name": "effect unlabelled",
    "ok": true,
    "sample": [
+    "a11y: effect «الإيرادات» does not say the way it moves",
     "a11y: effect «الإيرادات» does not read as one phrase with its numbers, «دولار» and its verdict: «»"
    ]
   },
@@ -767,15 +777,16 @@
    "name": "effect arrow wrong",
    "ok": true,
    "sample": [
-    "brief rows differ: eff: [[\"الإيرادات\",\"+600 مليون $ سنويًا\",1,\"down\"],[\"العجز\",\"17.1 مليار $ بدل 17.7\",1,\"down\"],[\"اضطرابات المحافظات الحضرية\",\"+1 خلال 3 أشهر\",0,\"up\"],[\"النمو\",\"−0.2 ن",
-    "effect «الإيرادات»: the arrow does not show the way it moves"
+    "brief rows differ: eff: [[\"الإيرادات\",\"+300 مليون $ سنويًا\",1,\"down\"],[\"العجز\",\"17.4 مليار $ بدل 17.7\",1,\"down\"],[\"اضطرابات المحافظات الحضرية\",\"+1 خلال 3 أشهر\",0,\"up\"],[\"النمو\",\"−0.1 ن",
+    "effect «الإيرادات»: the arrow does not show the way it moves",
+    "a11y: effect «الإيرادات» does not say the way it moves"
    ]
   },
   {
    "name": "effect without its arrow",
    "ok": true,
    "sample": [
-    "brief rows differ: eff: [[\"الإيرادات\",\"+600 مليون $ سنويًا\",1,\"\"],[\"العجز\",\"17.1 مليار $ بدل 17.7\",1,\"down\"],[\"اضطرابات المحافظات الحضرية\",\"+1 خلال 3 أشهر\",0,\"up\"],[\"النمو\",\"−0.2 نقطة ",
+    "brief rows differ: eff: [[\"الإيرادات\",\"+300 مليون $ سنويًا\",1,\"\"],[\"العجز\",\"17.4 مليار $ بدل 17.7\",1,\"down\"],[\"اضطرابات المحافظات الحضرية\",\"+1 خلال 3 أشهر\",0,\"up\"],[\"النمو\",\"−0.1 نقطة ",
     "effect «الإيرادات»: no arrow in its colour before the value"
    ]
   },
@@ -783,7 +794,7 @@
    "name": "effects in one column",
    "ok": true,
    "sample": [
-    "clipped text (bottom): \"−0.2\" 839.72..867 y 344..363",
+    "clipped text (bottom): \"−0.1\" 839.72..867 y 344..363",
     "clipped text (bottom): \"نقطة خلال سنة\" 757.92..835.72 y 344..363",
     "the tax adjuster does not fit whole: 9.0 pt over"
    ]
@@ -859,7 +870,7 @@
    "name": "section colour in a shadow",
    "ok": true,
    "sample": [
-    "section colour on data chrome: يبدأ الشهر القادم · مرة كل"
+    "section colour on data chrome: يبدأ الشهر القادم · تعديل "
    ]
   },
   {
@@ -912,7 +923,7 @@
    "name": "freest not on the right",
    "ok": true,
    "sample": [
-    "brief rows differ: laws: [[\"نظام الصرف\",[\"مُدار\",\"ثابت\",\"حر\"],0],[\"قابلية التحويل\",[\"كاملة\",\"جزئية\",\"معلّقة\"],0],[\"ضوابط رأس المال\",[\"محدودة\",\"متوسطة\",\"مشددة\"],0]]",
+    "brief rows differ: laws: [[\"نظام الصرف\",[\"مُدار\",\"ثابت\",\"حر\"],0],[\"قابلية التحويل\",[\"كاملة\",\"جزئية\",\"معلّقة\"],0],[\"ضوابط رأس المال\",[\"محدودة\",\"متوسطة\",\"مشدّدة\"],0]]",
     "setting 1: the freest choice is not on the right (first): مُدار"
    ]
   },
@@ -920,7 +931,7 @@
    "name": "wait: «اعتماد» live",
    "ok": true,
    "sample": [
-    "the wait: «اعتماد» does not step back (rgb(11, 18, 24) on rgb(234, 242, 247), aria-disabled true)"
+    "the wait: «اعتماد» does not step back (rgb(11, 18, 24) on rgb(234, 242, 247), none, aria-disabled true)"
    ]
   },
   {
@@ -929,7 +940,98 @@
    "sample": [
     "white touch off: .a-ok backgroundColor rgba(0, 0, 0, 0) (want rgb(234, 242, 247))",
     "white touch off: .a-ok color rgb(169, 188, 203) (want rgb(11, 18, 24))",
-    "the wait: «اعتماد» does not step back (rgb(169, 188, 203) on rgba(0, 0, 0, 0), aria-disabled null)"
+    "the wait: «اعتماد» does not step back (rgb(169, 188, 203) on rgba(0, 0, 0, 0), none, aria-disabled null)"
+   ]
+  },
+  {
+   "name": "pending: current not marked",
+   "ok": true,
+   "sample": [
+    "a pending change: the current setting is not marked (white outline, «الحالي»)"
+   ]
+  },
+  {
+   "name": "current marked without a change",
+   "ok": true,
+   "sample": [
+    "a current-setting mark without a pending change"
+   ]
+  },
+  {
+   "name": "pending: the float shown stronger",
+   "ok": true,
+   "sample": [
+    "brief rows differ: eff: [[\"التضخم\",\"+2.6 نقطة خلال سنة\",0,\"up\"],[\"سعر الدولار بعد 5.60 أشهر\",\"7.00 جنيه بدل 5.80\",0,\"up\"],[\"الاحتياطي\",\"+2.0 مليار $ خلال 6 أشهر\",1,\"up\"],[\"الصادرات\",\"+",
+    "a11y: effect «سعر الدولار بعد 5.60 أشهر» does not read as one phrase with its numbers, «دولار» and its verdict: «سعر الدولار بعد 6 أشهر: 7.00 جنيه بدل 5.80، أسوأ»",
+    "numbers: the exchange rate is not screen 6's 5.8, the pound weaker after the float"
+   ]
+  },
+  {
+   "name": "pending: the rate effects alone",
+   "ok": true,
+   "sample": [
+    "clipped text (bottom): \"اعتماد\" 783.95..816.03 y 409..428",
+    "clipped text (bottom): \"إلغاء\" 618.7..641.3 y 409..428",
+    "vertical overflow in الاقتصادالجنيه المصري مصر "
+   ]
+  },
+  {
+   "name": "effect phrase says the opposite",
+   "ok": true,
+   "sample": [
+    "a11y: effect «الإيرادات» does not say the way it moves"
+   ]
+  },
+  {
+   "name": "effect arrow in the wrong colour",
+   "ok": true,
+   "sample": [
+    "effect «اضطرابات المحافظات الحضرية»: the arrow is not drawn as it should (rgb(111, 182, 255), none)",
+    "effect «النمو»: the arrow is not drawn as it should (rgb(111, 182, 255), none)"
+   ]
+  },
+  {
+   "name": "effect arrow turned",
+   "ok": true,
+   "sample": [
+    "effect «الإيرادات»: the arrow is not drawn as it should (rgb(111, 182, 255), matrix(-1, 0, 0, -1, 0, 0))",
+    "effect «العجز»: the arrow is not drawn as it should (rgb(111, 182, 255), matrix(-1, 0, 0, -1, 0, 0))",
+    "effect «اضطرابات المحافظات الحضرية»: the arrow is not drawn as it should (rgb(242, 177, 76), matrix(-1, 0, 0, -1, 0, 0))"
+   ]
+  },
+  {
+   "name": "back label as big as the title",
+   "ok": true,
+   "sample": [
+    "the back label is not 13 pt semibold: 14px/700"
+   ]
+  },
+  {
+   "name": "effects unnamed",
+   "ok": true,
+   "sample": [
+    "a11y: the effects are not named «الأثر المتوقع»"
+   ]
+  },
+  {
+   "name": "note beside the title",
+   "ok": true,
+   "sample": [
+    "the title's note must be 10 pt grey, under the title"
+   ]
+  },
+  {
+   "name": "back row without its hairline",
+   "ok": true,
+   "sample": [
+    "the back row has lost its hairline"
+   ]
+  },
+  {
+   "name": "pending effect faded away",
+   "ok": true,
+   "sample": [
+    "brief text cannot be scrolled clear of the fades: +1.6 مليار $ سنويًا"
    ]
   },
   {
@@ -961,17 +1063,17 @@
    "name": "effects differ",
    "ok": true,
    "sample": [
-    "brief rows differ: eff: [[\"الإيرادات\",\"+400 مليون $ سنويًا\",1,\"\"],[\"العجز\",\"17.1 مليار $ بدل 17.7\",1,\"down\"],[\"اضطرابات المحافظات الحضرية\",\"+1 خلال 3 أشهر\",0,\"up\"],[\"النمو\",\"−0.2 نقطة ",
+    "brief rows differ: eff: [[\"الإيرادات\",\"+400 مليون $ سنويًا\",1,\"\"],[\"العجز\",\"17.4 مليار $ بدل 17.7\",1,\"down\"],[\"اضطرابات المحافظات الحضرية\",\"+1 خلال 3 أشهر\",0,\"up\"],[\"النمو\",\"−0.1 نقطة ",
     "effect «الإيرادات»: no arrow in its colour before the value",
-    "a11y: effect «الإيرادات» does not read as one phrase with its numbers, «دولار» and its verdict: «الإيرادات: تزيد 600 مليون دولار سنويًا، أفضل»"
+    "a11y: effect «الإيرادات» does not read as one phrase with its numbers, «دولار» and its verdict: «الإيرادات: تزيد 300 مليون دولار سنويًا، أفضل»"
    ]
   },
   {
    "name": "deficit does not follow",
    "ok": true,
    "sample": [
-    "brief rows differ: eff: [[\"الإيرادات\",\"+600 مليون $ سنويًا\",1,\"up\"],[\"العجز\",\"17.0 مليار $ بدل 17.7\",1,\"down\"],[\"اضطرابات المحافظات الحضرية\",\"+1 خلال 3 أشهر\",0,\"up\"],[\"النمو\",\"−0.2 نقط",
-    "a11y: effect «العجز» does not read as one phrase with its numbers, «دولار» and its verdict: «العجز: 17.1 مليار دولار بدل 17.7، أفضل»",
+    "brief rows differ: eff: [[\"الإيرادات\",\"+300 مليون $ سنويًا\",1,\"up\"],[\"العجز\",\"17.0 مليار $ بدل 17.7\",1,\"down\"],[\"اضطرابات المحافظات الحضرية\",\"+1 خلال 3 أشهر\",0,\"up\"],[\"النمو\",\"−0.1 نقط",
+    "a11y: effect «العجز» does not read as one phrase with its numbers, «دولار» and its verdict: «العجز: 17.4 مليار دولار بدل 17.7، أفضل»",
     "numbers: the new deficit is not 17.7 minus the extra revenue"
    ]
   },
@@ -1006,8 +1108,8 @@
    "name": "old deficit not screen 6's",
    "ok": true,
    "sample": [
-    "brief rows differ: eff: [[\"الإيرادات\",\"+600 مليون $ سنويًا\",1,\"up\"],[\"العجز\",\"17.1 مليار $ بدل 17.9\",1,\"down\"],[\"اضطرابات المحافظات الحضرية\",\"+1 خلال 3 أشهر\",0,\"up\"],[\"النمو\",\"−0.2 نقط",
-    "a11y: effect «العجز» does not read as one phrase with its numbers, «دولار» and its verdict: «العجز: 17.1 مليار دولار بدل 17.7، أفضل»",
+    "brief rows differ: eff: [[\"الإيرادات\",\"+300 مليون $ سنويًا\",1,\"up\"],[\"العجز\",\"17.4 مليار $ بدل 17.9\",1,\"down\"],[\"اضطرابات المحافظات الحضرية\",\"+1 خلال 3 أشهر\",0,\"up\"],[\"النمو\",\"−0.1 نقط",
+    "a11y: effect «العجز» does not read as one phrase with its numbers, «دولار» and its verdict: «العجز: 17.4 مليار دولار بدل 17.7، أفضل»",
     "numbers: the old deficit is not screen 6's 17.7"
    ]
   },
@@ -1015,8 +1117,8 @@
    "name": "revenue beyond the yield",
    "ok": true,
    "sample": [
-    "brief rows differ: eff: [[\"الإيرادات\",\"+950 مليون $ سنويًا\",1,\"up\"],[\"العجز\",\"17.1 مليار $ بدل 17.7\",1,\"down\"],[\"اضطرابات المحافظات الحضرية\",\"+1 خلال 3 أشهر\",0,\"up\"],[\"النمو\",\"−0.2 نقط",
-    "a11y: effect «الإيرادات» does not read as one phrase with its numbers, «دولار» and its verdict: «الإيرادات: تزيد 600 مليون دولار سنويًا، أفضل»",
+    "brief rows differ: eff: [[\"الإيرادات\",\"+950 مليون $ سنويًا\",1,\"up\"],[\"العجز\",\"17.4 مليار $ بدل 17.7\",1,\"down\"],[\"اضطرابات المحافظات الحضرية\",\"+1 خلال 3 أشهر\",0,\"up\"],[\"النمو\",\"−0.1 نقط",
+    "a11y: effect «الإيرادات» does not read as one phrase with its numbers, «دولار» and its verdict: «الإيرادات: تزيد 300 مليون دولار سنويًا، أفضل»",
     "numbers: the extra revenue is not within the yield's share of the rise (0.90)"
    ]
   },
@@ -1024,7 +1126,7 @@
    "name": "interest not screen 6's",
    "ok": true,
    "sample": [
-    "brief rows differ: eff: [[\"التضخم\",\"−0.4 نقطة خلال سنة\",1,\"down\"],[\"النمو\",\"−0.2 نقطة خلال سنة\",0,\"down\"],[\"الفوائد\",\"13.9 مليار $ بدل 13.5\",0,\"up\"],[\"سعر الصرف\",\"5.75 جنيه بدل 5.80\",1",
+    "brief rows differ: eff: [[\"التضخم\",\"−0.4 نقطة خلال سنة\",1,\"down\"],[\"سعر الدولار بعد 3 أشهر\",\"5.75 جنيه بدل 5.80\",1,\"down\"],[\"الفوائد\",\"13.9 مليار $ بدل 13.5\",0,\"up\"],[\"النمو\",\"−0.2 نقط",
     "a11y: effect «الفوائد» does not read as one phrase with its numbers, «دولار» and its verdict: «الفوائد: 13.9 مليار دولار بدل 13.3، أسوأ»",
     "numbers: the interest line is not screen 6's 13.3, rising"
    ]
@@ -1033,9 +1135,9 @@
    "name": "exchange rate not screen 6's",
    "ok": true,
    "sample": [
-    "brief rows differ: eff: [[\"التضخم\",\"−0.4 نقطة خلال سنة\",1,\"down\"],[\"النمو\",\"−0.2 نقطة خلال سنة\",0,\"down\"],[\"الفوائد\",\"13.9 مليار $ بدل 13.3\",0,\"up\"],[\"سعر الصرف\",\"5.75 جنيه بدل 5.90\",1",
-    "a11y: effect «سعر الصرف» does not read as one phrase with its numbers, «دولار» and its verdict: «سعر الصرف: 5.75 جنيه للدولار بدل 5.80، أفضل»",
-    "numbers: the exchange rate is not screen 6's 5.8, the pound stronger"
+    "brief rows differ: eff: [[\"التضخم\",\"−0.4 نقطة خلال سنة\",1,\"down\"],[\"سعر الدولار بعد 3 أشهر\",\"5.90 جنيه بدل 5.80\",1,\"down\"],[\"الفوائد\",\"13.9 مليار $ بدل 13.3\",0,\"up\"],[\"النمو\",\"−0.2 نقط",
+    "effect «سعر الدولار بعد 3 أشهر»: the arrow does not show the way it moves",
+    "a11y: effect «سعر الدولار بعد 3 أشهر» does not read as one phrase with its numbers, «دولار» and its verdict: «سعر الدولار بعد 3 أشهر: 5.75 جنيه بدل 5.80، أفضل»"
    ]
   },
   {
@@ -1051,9 +1153,9 @@
    "name": "money unit",
    "ok": true,
    "sample": [
-    "brief rows differ: eff: [[\"الإيرادات\",\"+0.3 مليار $ سنويًا\",1,\"\"],[\"العجز\",\"17.1 مليار $ بدل 17.7\",1,\"down\"],[\"اضطرابات المحافظات الحضرية\",\"+1 خلال 3 أشهر\",0,\"up\"],[\"النمو\",\"−0.2 نقطة ",
+    "brief rows differ: eff: [[\"الإيرادات\",\"+0.3 مليار $ سنويًا\",1,\"\"],[\"العجز\",\"17.4 مليار $ بدل 17.7\",1,\"down\"],[\"اضطرابات المحافظات الحضرية\",\"+1 خلال 3 أشهر\",0,\"up\"],[\"النمو\",\"−0.1 نقطة ",
     "effect «الإيرادات»: no arrow in its colour before the value",
-    "a11y: effect «الإيرادات» does not read as one phrase with its numbers, «دولار» and its verdict: «الإيرادات: تزيد 600 مليون دولار سنويًا، أفضل»"
+    "a11y: effect «الإيرادات» does not read as one phrase with its numbers, «دولار» and its verdict: «الإيرادات: تزيد 300 مليون دولار سنويًا، أفضل»"
    ]
   },
   {
@@ -1107,7 +1209,7 @@
    "sample": [
     "money: never shown clear of the fades in any view: الفوائد",
     "money: never shown clear of the fades in any view: 13.9 مليار $ بدل 13.3",
-    "money: never shown clear of the fades in any view: سعر الصرف"
+    "money: never shown clear of the fades in any view: النمو"
    ]
   }
  ]

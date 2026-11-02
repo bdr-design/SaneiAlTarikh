@@ -578,7 +578,7 @@
   /* a domain: its name, a teal bar of its level out of 15, the level (and «التركيز» for the focus) */
   .b-dom { display: grid; grid-template-columns: 120px 1fr 72px; align-items: center; column-gap: var(--s2); height: 22px; }
   .b-dom > span { font-size: var(--fs-sec); line-height: var(--lh-sec); font-weight: 500; color: var(--t1); white-space: nowrap; }
-  .b-dom > b { display: inline-flex; align-items: baseline; justify-content: flex-end; gap: var(--s1); font-size: var(--fs-val); line-height: var(--lh-val); font-weight: 600; white-space: nowrap; }
+  .b-dom > b { display: inline-flex; align-items: baseline; justify-content: flex-start; gap: var(--s1); font-size: var(--fs-val); line-height: var(--lh-val); font-weight: 600; white-space: nowrap; }
   .b-dom em { font-style: normal; font-size: var(--fs-label); line-height: var(--lh-label); font-weight: 500; color: var(--t2); }
   .i-bar { position: relative; height: 4px; border-radius: 2px; background: rgba(169, 188, 203, .22); }
   .i-bar::after { content: ""; position: absolute; top: 0; bottom: 0; right: 0; width: var(--v); border-radius: 2px; background: var(--teal); }
@@ -793,13 +793,13 @@
           <div class="r-kpi">
             <span class="r-kl"><svg class="i"><use href="#i-flask"/></svg>البحث</span>
             <span class="r-kv"><b class="ltr">+18</b><span>شهريًا</span></span>
-            <span class="r-kr">دون تغير</span>
+            <span class="r-kr r-blue"><svg class="r-arr" aria-hidden="true"><use href="#t-up"/></svg><span class="ltr">+1</span> شهريًا</span>
             <button class="r-why tap" aria-label="لماذا؟ البحث">لماذا؟</button>
           </div>
           <div class="r-kpi">
             <span class="r-kl"><svg class="i"><use href="#i-coins"/></svg>الإنفاق</span>
-            <span class="r-kv"><b class="ltr">900</b><span>مليون $</span></span>
-            <span class="r-kr"><span class="ltr">0.4%</span> من الناتج</span>
+            <span class="r-kv"><b class="ltr">700</b><span>مليون $</span></span>
+            <span class="r-kr"><span class="ltr">0.3%</span> من الناتج</span>
             <button class="r-why tap" aria-label="لماذا؟ الإنفاق">لماذا؟</button>
           </div>
           <div class="r-kpi">
@@ -811,13 +811,13 @@
         </div>
         <section class="r-sec">
           <h3>قيد البحث</h3>
-          <div class="b-now" role="img" aria-label="الطاقة، المستوى 5: 62%، يكتمل بعد 14 شهرًا"><span class="r-at"><b>الطاقة · المستوى <span class="ltr">5</span></b><span>يكتمل بعد <span class="ltr">14</span> شهرًا</span></span><span class="n-pr"><i style="--v: 62%"></i></span><b class="n-v"><span class="ltr">62%</span></b></div>
+          <div class="b-now" role="img" aria-label="الطاقة، نحو المستوى 5: أُنجز 62%، يكتمل بعد 14 شهرًا"><span class="r-at"><b>الطاقة · نحو المستوى <span class="ltr">5</span></b><span>يكتمل بعد <span class="ltr">14</span> شهرًا</span></span><span class="n-pr"><i style="--v: 62%"></i></span><b class="n-v"><span class="ltr">62%</span></b></div>
         </section>
         <div class="r-acts">
-          <button class="r-act tap r-first" aria-label="رفع الإنفاق على البحث: 300 مليون دولار سنويًا. يرفع البحث 6 شهريًا، أفضل">
+          <button class="r-act tap r-first" aria-label="رفع الإنفاق على البحث: 300 مليون دولار سنويًا. يرفع البحث 8 شهريًا، أفضل">
             <span class="r-tile"><svg class="i"><use href="#i-coins"/></svg></span>
             <span class="r-at"><b>رفع الإنفاق على البحث</b><span><span class="ltr">300</span> مليون $ سنويًا</span></span>
-            <span class="r-chip"><svg class="r-arr" aria-hidden="true"><use href="#t-up"/></svg>البحث <span class="ltr">+6</span></span>
+            <span class="r-chip"><svg class="r-arr" aria-hidden="true"><use href="#t-up"/></svg>البحث <span class="ltr">+8</span></span>
           </button>
         </div>
       </div>
@@ -830,25 +830,25 @@
           <div class="b-dom" role="img" aria-label="الصناعة والتصنيع: المستوى 4 من 15"><span>الصناعة والتصنيع</span><i class="i-bar" style="--v: 26.67%"></i><b><span class="ltr">4</span></b></div>
           <div class="b-dom" role="img" aria-label="الصحة والزراعة: المستوى 4 من 15"><span>الصحة والزراعة</span><i class="i-bar" style="--v: 26.67%"></i><b><span class="ltr">4</span></b></div>
           <div class="b-dom" role="img" aria-label="الأنظمة البرية: المستوى 4 من 15"><span>الأنظمة البرية</span><i class="i-bar" style="--v: 26.67%"></i><b><span class="ltr">4</span></b></div>
-          <div class="b-dom" role="img" aria-label="الحاسوب والذكاء الاصطناعي: المستوى 3 من 15"><span>الحاسوب والذكاء</span><i class="i-bar" style="--v: 20%"></i><b><span class="ltr">3</span></b></div>
+          <div class="b-dom" role="img" aria-label="الحاسوب والإلكترونيات والذكاء الاصطناعي: المستوى 3 من 15"><span>الحاسوب والإلكترونيات</span><i class="i-bar" style="--v: 20%"></i><b><span class="ltr">3</span></b></div>
           <div class="b-dom" role="img" aria-label="الجو والبحر والفضاء: المستوى 3 من 15"><span>الجو والبحر والفضاء</span><i class="i-bar" style="--v: 20%"></i><b><span class="ltr">3</span></b></div>
           <div class="b-dom" role="img" aria-label="الصواريخ والردع: المستوى 3 من 15"><span>الصواريخ والردع</span><i class="i-bar" style="--v: 20%"></i><b><span class="ltr">3</span></b></div>
-          <div class="b-dom" role="img" aria-label="الأمن الإلكتروني: المستوى 4 من 15"><span>الأمن الإلكتروني</span><i class="i-bar" style="--v: 26.67%"></i><b><span class="ltr">4</span></b></div>
+          <div class="b-dom" role="img" aria-label="السيبراني والاستخبارات: المستوى 4 من 15"><span>السيبراني والاستخبارات</span><i class="i-bar" style="--v: 26.67%"></i><b><span class="ltr">4</span></b></div>
           <p class="s-note">المستويات <span class="ltr">1–7</span> حتى <span class="ltr">2025</span> تقريبًا، و<span class="ltr">8–11</span> حتى <span class="ltr">2050</span>، و<span class="ltr">12–15</span> مُسقَطة.</p>
         </section>
-        <div class="r-link tap" role="button" tabindex="0" aria-label="تغيير التركيز: الطاقة الآن. يفتح اختيار المجال">
+        <div class="r-link tap" role="button" tabindex="0" aria-label="تغيير التركيز: الطاقة الآن، مجال واحد في كل مرة. يفتح اختيار المجال">
           <span class="r-tile"><svg class="i"><use href="#i-flask"/></svg></span>
           <span class="r-at"><b>تغيير التركيز</b><span>الطاقة الآن · مجال واحد في كل مرة</span></span>
           <svg class="i r-chev"><use href="#i-chev"/></svg>
         </div>
       </div>
 
-      <!-- التعاون: research agreements and licences (§5.7: cooperation transfers progress) -->
+      <!-- التعاون: research agreements and licences (§5.7: cooperation transfers progress). Dabaa's site studies (2009) were a foreign consultant's, not Russia's; Russia's tie in 2011 is the 2008 agreement -->
       <div class="r-body" data-tab="coop">
         <section class="r-sec">
           <h3>اتفاقيات التعاون</h3>
-          <div class="f-tr" role="img" aria-label="روسيا: الطاقة النووية السلمية، دراسات موقع الضبعة"><span class="r-at"><b>روسيا · الطاقة النووية السلمية</b><span>دراسات موقع الضبعة</span></span></div>
-          <div class="f-tr" role="img" aria-label="أوكرانيا: الأقمار الصناعية، قمر للرصد أُطلق في 2007"><span class="r-at"><b>أوكرانيا · الأقمار الصناعية</b><span>قمر للرصد أُطلق في <span class="ltr">2007</span></span></span></div>
+          <div class="f-tr" role="img" aria-label="روسيا: الطاقة النووية السلمية، اتفاقية تعاون منذ 2008"><span class="r-at"><b>روسيا · الطاقة النووية السلمية</b><span>اتفاقية تعاون منذ <span class="ltr">2008</span></span></span></div>
+          <div class="f-tr" role="img" aria-label="أوكرانيا: الأقمار الصناعية، قمر رصد أُطلق 2007، فُقد الاتصال به 2010"><span class="r-at"><b>أوكرانيا · الأقمار الصناعية</b><span>قمر رصد أُطلق <span class="ltr">2007</span> · فُقد الاتصال به <span class="ltr">2010</span></span></span></div>
           <div class="f-tr" role="img" aria-label="الاتحاد الأوروبي: البحث العلمي، برامج تمويل مشتركة"><span class="r-at"><b>الاتحاد الأوروبي · البحث العلمي</b><span>برامج تمويل مشتركة</span></span></div>
         </section>
         <section class="r-sec">

@@ -13,7 +13,7 @@
   /* a domain: its name, a teal bar of its level out of 15, the level (and «التركيز» for the focus) */
   .b-dom { display: grid; grid-template-columns: 120px 1fr 72px; align-items: center; column-gap: var(--s2); height: 22px; }
   .b-dom > span { font-size: var(--fs-sec); line-height: var(--lh-sec); font-weight: 500; color: var(--t1); white-space: nowrap; }
-  .b-dom > b { display: inline-flex; align-items: baseline; justify-content: flex-end; gap: var(--s1); font-size: var(--fs-val); line-height: var(--lh-val); font-weight: 600; white-space: nowrap; }
+  .b-dom > b { display: inline-flex; align-items: baseline; justify-content: flex-start; gap: var(--s1); font-size: var(--fs-val); line-height: var(--lh-val); font-weight: 600; white-space: nowrap; }
   .b-dom em { font-style: normal; font-size: var(--fs-label); line-height: var(--lh-label); font-weight: 500; color: var(--t2); }
   .i-bar { position: relative; height: 4px; border-radius: 2px; background: rgba(169, 188, 203, .22); }
   .i-bar::after { content: ""; position: absolute; top: 0; bottom: 0; right: 0; width: var(--v); border-radius: 2px; background: var(--teal); }

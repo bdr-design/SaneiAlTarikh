@@ -197,7 +197,7 @@ module.exports = function makeChecker(cfg) {
       if (!near(parseFloat(cs.strokeWidth), TOK.stroke)) issues.push(`icon stroke ${cs.strokeWidth}: ${label(s)}`);
     });
     // ---------- 5. type, colour, placement, clipping of every text run ----------
-    const typeSeen = {}, texts = [];
+    const typeSeen = {}, texts = [], elOf = new Map();   // elOf: each text record's element (kept out of the returned records)
     const walker = document.createTreeWalker(q('.hud'), NodeFilter.SHOW_TEXT);
     let tn;
     while ((tn = walker.nextNode())) {
@@ -225,6 +225,7 @@ module.exports = function makeChecker(cfg) {
         const faded = inSheet && inFade(b, el);
         texts.push({ t, fs, color: cs.color, op: effOp(el), sheet: inSheet, faded, badge: !!el.closest('.badge'), chrome: !!el.closest('.r-tab.on, .s-emb'), r: R(r),
           line: { x0: vb.x0, x1: vb.x1, y0: Math.max(mid - lh / 2, cl.y0), y1: Math.min(mid + lh / 2, cl.y1) } });
+        elOf.set(texts[texts.length - 1], el);
         if (vb.x0 < S - eps || vb.x1 > W - S + eps) issues.push(`text in side inset: ${t}`);
         if (vb.y1 > H - B + eps) issues.push(`text in bottom inset: ${t}`);
         const cutAt = badCut(b, el);
@@ -238,6 +239,10 @@ module.exports = function makeChecker(cfg) {
       const a = st[i].line, b = st[j].line;
       if (Math.min(a.x1, b.x1) - Math.max(a.x0, b.x0) > 0.5 && Math.min(a.y1, b.y1) - Math.max(a.y0, b.y0) > 0.5) issues.push(`text overlap "${st[i].t}" / "${st[j].t}"`);
     }
+    // text running into a chip, a «لماذا؟» button, a segment group or the close button it is not part of
+    const ctls = [...document.querySelectorAll('.sheet .r-chip, .sheet .r-why, .sheet .s-seg, .sheet .r-x')].filter((c) => c.getClientRects().length);
+    st.forEach((x) => ctls.forEach((c) => { if (c.contains(elOf.get(x))) return; const r = c.getBoundingClientRect(), a = x.line;
+      if (Math.min(a.x1, r.right) - Math.max(a.x0, r.left) > 0.5 && Math.min(a.y1, r.bottom) - Math.max(a.y0, r.top) > 0.5) issues.push(`text over a control: "${x.t}" runs into «${(c.textContent || c.getAttribute('aria-label') || '').trim().slice(0, 20)}»`); }));
     const icons = [...document.querySelectorAll('.hud svg')].filter((s) => s.getClientRects().length && !s.closest('.frost') && !s.closest('.r-hint') && getComputedStyle(s).visibility !== 'hidden')   // the scroll hint sits in the fade by design
       .map((s) => { const r = box(s.getBoundingClientRect()), c = clipOf(s).c; return { s, r: { x0: Math.max(r.x0, c.x0), x1: Math.min(r.x1, c.x1), y0: Math.max(r.y0, c.y0), y1: Math.min(r.y1, c.y1) } }; })
       .filter((o) => o.r.x1 - o.r.x0 > 0.05 && o.r.y1 - o.r.y0 > 0.05);
@@ -446,7 +451,7 @@ module.exports = function makeChecker(cfg) {
         if (!(up ? /ترفع|ترتفع|تزيد|يرفع|يزيد|يرتفع/ : /تخفض|تنخفض|تقل|يخفض|ينخفض|يقل/).test(al)) issues.push(`a11y: «${T(at.querySelector('b'))}» does not say the chip's direction in words`); } });
     // a row read as one element (role img, or a row button) reads everything it shows: every number and every word
     // of its visible text is in its label (the separator «·» aside)
-    qa('.sheet [role="img"], .sheet .tap[role="button"]').filter((e) => e.innerText.trim() && !e.matches('.r-tab')).forEach((e) => { const al = (e.getAttribute('aria-label') || '').replace(/[،.:؛]/g, ' '), shown = e.innerText.replace(/[·،.:؛]/g, ' ');
+    qa('.sheet [role="img"], .sheet .tap[role="button"], .sheet .r-act[aria-label]').filter((e) => e.innerText.trim() && !e.matches('.r-tab')).forEach((e) => { const al = (e.getAttribute('aria-label') || '').replace(/[،.:؛]/g, ' '), shown = e.innerText.replace(/[·،.:؛]/g, ' ');
       const words = shown.split(/\s+/).filter((w) => w.length > 1 && !/^[\d.%+−-]+$/.test(w)), missW = words.filter((w) => !al.includes(w.replace(/[«»]/g, '')));
       const missN = nums(shown).filter((x) => !nums(al).map(Math.abs).includes(Math.abs(x)));
       if (missW.length || missN.length) issues.push(`a11y: «${(e.getAttribute('aria-label') || '').slice(0, 24)}» does not read all it shows: ${missW.concat(missN).slice(0, 4).join(' ')}`); });
@@ -470,7 +475,9 @@ module.exports = function makeChecker(cfg) {
     qa('.sheet .r-link').forEach((a, i) => order(a, ['.r-tile', '.r-at', '.r-chev'], `link row ${i + 1}`));
     qa('.sheet .s-pol').forEach((a, i) => { order(a, ['.r-at', '.s-seg'], `setting ${i + 1}`);
       const sg = [...a.querySelectorAll('.s-sg')]; for (let k = 1; k < sg.length; k++) if (!(sg[k].getBoundingClientRect().right <= sg[k - 1].getBoundingClientRect().left + 0.5)) issues.push(`setting ${i + 1}: choices not right to left`);
-      if (sg.findIndex((e) => e.classList.contains('on')) !== sg.findIndex((e) => e.getAttribute('aria-checked') === 'true')) issues.push(`setting ${i + 1}: the chosen segment is not the aria-checked one`); });
+      const on = sg.filter((e) => e.classList.contains('on')), ck = sg.filter((e) => e.getAttribute('aria-checked') === 'true');
+      if (on.length !== 1 || ck.length !== 1) issues.push(`setting ${i + 1}: ${on.length} chosen segments (${ck.length} aria-checked), not one`);
+      else if (on[0] !== ck[0]) issues.push(`setting ${i + 1}: the chosen segment is not the aria-checked one`); });
     { const f = q('.r-flag').getBoundingClientRect(); if (!near(f.width / f.height, 4 / 3, 0.01)) issues.push('flag is not 4:3'); }
     // ---------- 8e. the screen's own checks ----------
     try { new Function('X', SCREEN.src)({ issues, q, qa, visible, effOp, near, box, inter, label, clipOf, inFade, hiddenByScroll, texts, taps, prs, order, T, nums, root, TOK, BRIEF, view, tab, bd, DATA, sr }); }
@@ -637,7 +644,8 @@ module.exports = function makeChecker(cfg) {
       ['control height', d, '', '.r-tab { height: 40px !important; }', /control height 40.00 for \.r-tab/],
       ['gap', d, '', '.r-kpi { display: flex !important; gap: 6px !important; }', /gap 6 on/],
       ['icon size', d, '', '.r-tab svg.i { width: 19px !important; height: 19px !important; }', /icon size 19x19/],
-      ['text overlap', d, '', '.r-kl { margin-inline-end: -70px !important; }', /text overlap|icon over text/],
+      ['text overlap', d, '', '.r-sub { transform: translateY(-14px) !important; }', /text overlap|icon over text/],
+      ['text into a control', d, '', '.r-body .r-act .r-chip { margin-right: -120px !important; }', /text over a control|text overlap/],
       ['clipped text', d, '', '.r-kpis { margin-inline-start: -40px !important; }', /clipped text \(sides\)/],
       ['dock underline missing', d, '', '.dock-item.on::after { content: none !important; }', /dock underline missing/],
       ['closed dock item coloured', d, '', '.dock-item:not(.on) span { color: var(--sec) !important; }', /dock item \d \(closed\) not neutral/],

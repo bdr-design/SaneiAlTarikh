@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-02T21:30:47.541Z",
+ "ranAt": "2026-11-02T21:47:43.651Z",
  "inputs": {
   "files": [
    "index.html",
@@ -24,7 +24,7 @@
    "header_cairo.jpg",
    "map_overlay_cairo.svg"
   ],
-  "sha1": "8da2646e3e7c580c18c7f8dd177149d0d6ad1bf8"
+  "sha1": "dbca4c01968ea5f943ccd7d9f97927cfcdb1e0a4"
  },
  "cleanIssues": {
   "i16promax": [],
@@ -47,12 +47,14 @@
   "se_parties_end": [],
   "se_groups": [],
   "se_groups_end": [],
-  "se_unrest_at98": [],
-  "se_unrest_at196": [],
-  "se_unrest_at294": [],
-  "se_parties_at98": [],
-  "se_groups_at98": [],
-  "se_groups_at196": [],
+  "se_unrest_at86": [],
+  "se_unrest_at172": [],
+  "se_unrest_at258": [],
+  "se_unrest_at344": [],
+  "se_parties_at86": [],
+  "se_parties_at172": [],
+  "se_groups_at86": [],
+  "se_groups_at172": [],
   "se coverage": []
  },
  "results": [
@@ -136,7 +138,6 @@
    "name": "sheet width",
    "ok": true,
    "sample": [
-    "text outside the sheet's 12 pt padding: \"60\"",
     "sheet width 330 (want round(clamp(43% of 832, 340, 380)), or the room the dock leaves if 330..: 358)"
    ]
   },
@@ -302,7 +303,7 @@
    "sample": [
     "clipped text (top): \"0.4\" 866.09..881 y 153..168",
     "clipped text (top): \"مليار $\" 838.42..866.09 y 153..168",
-    "control cut by its scroll area (bottom): فتح حوار وطني: 20 من رأس ا"
+    "money unit: «0.4 مليار» (under 1 billion is written in millions)"
    ]
   },
   {
@@ -311,7 +312,7 @@
    "sample": [
     "clipped text (top): \"تغير +\" 859.06..881 y 153..168",
     "clipped text (top): \"3\" 853.06..859.06 y 153..168",
-    "control cut by its scroll area (bottom): فتح حوار وطني: 20 من رأس ا"
+    "a sign outside its number: «تغير +3»"
    ]
   },
   {
@@ -319,17 +320,14 @@
    "ok": true,
    "sample": [
     "clipped text (top): \"تراجع\" 860.27..881 y 153..168",
-    "control cut by its scroll area (bottom): فتح حوار وطني: 20 من رأس ا",
-    "hit box shaved by its clip: فتح حوار وطني: 20 من رأس ا"
+    "colour alone: «تراجع» has no arrow or icon"
    ]
   },
   {
    "name": "an image in the sheet",
    "ok": true,
    "sample": [
-    "clipped text (bottom): \"الكلفة:\" 801.73..834 y 401..418",
-    "clipped text (bottom): \"20\" 787.92..801.73 y 401..418",
-    "clipped text (bottom): \"· مرة في السنة\" 712.75..775.92 y 401..418"
+    "an image in the sheet"
    ]
   },
   {
@@ -344,8 +342,7 @@
    "ok": true,
    "sample": [
     "clipped text (top): \"اختبار\" 860.25..881 y 153..168",
-    "control cut by its scroll area (bottom): فتح حوار وطني: 20 من رأس ا",
-    "hit box shaved by its clip: فتح حوار وطني: 20 من رأس ا"
+    "a11y: a label VoiceOver may skip (no role): «اختبار»"
    ]
   },
   {
@@ -367,8 +364,12 @@
   },
   {
    "name": "18 pt misuse",
-   "ok": false,
-   "sample": []
+   "ok": true,
+   "sample": [
+    "18 pt is for the panel's name and the adjusted values only: \"+180\"",
+    "18 pt is for the panel's name and the adjusted values only: \"ألف شهريًا\"",
+    "18 pt is for the panel's name and the adjusted values only: \"+1\""
+   ]
   },
   {
    "name": "control height",
@@ -467,8 +468,12 @@
   },
   {
    "name": "faint text",
-   "ok": false,
-   "sample": []
+   "ok": true,
+   "sample": [
+    "brief text not fully visible: +180 ألف شهريًا",
+    "brief text not fully visible: +1 شهريًا",
+    "brief text not fully visible: اضطراب فوق 60"
+   ]
   },
   {
    "name": "why without its subject",
@@ -494,10 +499,21 @@
    ]
   },
   {
-   "name": "% before its number",
-   "ok": false,
+   "name": "row read in part",
+   "ok": true,
    "sample": [
-    "brief text missing: القادمة"
+    "a11y: «جزء» does not read all it shows: القاهرة 64",
+    "a11y: row «القاهرة» does not read its value",
+    "row «القاهرة»: the arrow does not show the trend «»"
+   ]
+  },
+  {
+   "name": "% before its number",
+   "ok": true,
+   "sample": [
+    "% shown before its number: \"نسبة 20%\"",
+    "brief text missing: +180 ألف شهريًا",
+    "brief text missing: +180 ألف شهريًا"
    ]
   },
   {
@@ -511,9 +527,9 @@
    "name": "row silent",
    "ok": true,
    "sample": [
+    "a11y: «السويس» does not read all it shows: 63",
     "a11y: row «السويس» does not read its value",
-    "row «السويس»: the arrow does not show the trend «»",
-    "row «السويس»: amber must mark a worsening, and only that"
+    "row «السويس»: the arrow does not show the trend «»"
    ]
   },
   {
@@ -550,9 +566,9 @@
    "name": "Cairo off the card",
    "ok": true,
    "sample": [
+    "a11y: «القاهرة: 64 من 100، ترتف» does not read all it shows: 66",
     "row «القاهرة»: the bar is not drawn at 66 / 100",
-    "a11y: row «القاهرة» does not read its value",
-    "Cairo is not the province card's 64"
+    "a11y: row «القاهرة» does not read its value"
    ]
   },
   {
@@ -577,17 +593,17 @@
    "name": "count above 60 off",
    "ok": true,
    "sample": [
+    "a11y: «الغربية: 58 من 100، ترتف» does not read all it shows: 60 5",
     "row «الغربية»: the bar is not drawn at 60.5 / 100",
-    "a11y: row «الغربية» does not read its value",
-    "the provinces above 60 are not the headline 3"
+    "a11y: row «الغربية» does not read its value"
    ]
   },
   {
    "name": "emergency off the state",
    "ok": true,
    "sample": [
+    "a11y: «حالة الطوارئ: محدودة منذ» does not read all it shows: شاملة",
     "the emergency law shown is not the state panel's «محدودة»",
-    "brief text missing: حالة الطوارئ: محدودة منذ 2010",
     "brief text missing: حالة الطوارئ: محدودة منذ 2010"
    ]
   },
@@ -604,9 +620,9 @@
    "name": "overview top three off",
    "ok": true,
    "sample": [
-    "a11y: row «الجيزة» does not read its value",
-    "the overview's worst three are not the unrest tab's first three: القاهرة64,الجيزة63,الإسكندرية61",
-    "brief text missing: السويس"
+    "a11y: «القاهرة: 64 من 100، ترتف» does not read all it shows: الجيزة",
+    "a11y: row «القاهرة» does not read its value",
+    "the overview's worst provinces are not the unrest tab's first: القاهرةundefined,السويس63"
    ]
   },
   {
@@ -680,6 +696,7 @@
    "name": "movement silent",
    "ok": true,
    "sample": [
+    "a11y: «» does not read all it shows: كفاية غير مرخصة منخفضة",
     "a11y: movement «كفاية» is not read as shown"
    ]
   },
@@ -687,6 +704,7 @@
    "name": "movement status off",
    "ok": true,
    "sample": [
+    "a11y: «الجمعية الوطنية للتغيير:» does not read all it shows: غير مرخصة حول البرادعي",
     "a11y: movement «الجمعية الوطنية للتغيير» is not read as shown"
    ]
   },

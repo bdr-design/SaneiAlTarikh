@@ -1,0 +1,662 @@
+{
+ "ranAt": "2026-11-02T21:56:13.520Z",
+ "inputs": {
+  "files": [
+   "index.html",
+   "_build/render.js",
+   "_build/sheet.html",
+   "_build/assemble.py",
+   "../../shared/check/panelcheck.js",
+   "../../shared/check/panel_page.py",
+   "../../screen4/R/_build/panel.css",
+   "../../shared/section_identity.css",
+   "../../screen5/A/_build/state.css",
+   "../../screen4/A/index.html",
+   "../../screen1/B3/index.html",
+   "../../shared/devices.json",
+   "_build/research.css",
+   "../../shared/flag_eg.svg",
+   "../../shared/flags/eg.svg",
+   "../../shared/map_mena_d1.jpg",
+   "../../shared/map_mena_d1_overlay.svg",
+   "header_cairo.jpg",
+   "map_overlay_cairo.svg"
+  ],
+  "sha1": "e124f3a14adc1ab475c39af9d4c906c42378d51b"
+ },
+ "cleanIssues": {
+  "i16promax": [],
+  "i16promax_overview_end": [],
+  "i16promax_domains": [],
+  "i16promax_domains_end": [],
+  "i16promax_coop": [],
+  "i16promax_coop_end": [],
+  "i16promax coverage": [],
+  "se": [],
+  "se_overview_end": [],
+  "se_domains": [],
+  "se_domains_end": [],
+  "se_coop": [],
+  "se_coop_end": [],
+  "se_domains_at86": [],
+  "se coverage": []
+ },
+ "results": [
+  {
+   "name": "type size",
+   "ok": true,
+   "sample": [
+    "font size 17 for \"البحث\""
+   ]
+  },
+  {
+   "name": "font weight",
+   "ok": true,
+   "sample": [
+    "font weight 11.5/700 for \"نظرة عامة\"",
+    "font weight 11.5/700 for \"المجالات\"",
+    "font weight 11.5/700 for \"التعاون\""
+   ]
+  },
+  {
+   "name": "off-token colour",
+   "ok": true,
+   "sample": [
+    "text colour off-token rgb(136, 153, 170): \"قيد البحث\""
+   ]
+  },
+  {
+   "name": "radius",
+   "ok": true,
+   "sample": [
+    "panel radius البحث: مصر: 6 (want 12)",
+    "radius 6 for .sheet (want 12)"
+   ]
+  },
+  {
+   "name": "tap in the side inset",
+   "ok": true,
+   "sample": [
+    "text in side inset: +18",
+    "text in side inset: +1",
+    "text in side inset: لماذا؟"
+   ]
+  },
+  {
+   "name": "panel in the side inset",
+   "ok": true,
+   "sample": [
+    "text in side inset: +18",
+    "text in side inset: +1",
+    "text in side inset: لماذا؟"
+   ]
+  },
+  {
+   "name": "panel not opaque",
+   "ok": true,
+   "sample": [
+    "panel not opaque: البحث: مصر rgba(9, 17, 25, 0.66)",
+    "contrast 3.35 for \"نظرة عامة\"",
+    "contrast 4.07 for \"يكتمل بعد\""
+   ]
+  },
+  {
+   "name": "see-through panel",
+   "ok": true,
+   "sample": [
+    "panel not opaque (opacity 0.60): البحث: مصر",
+    "brief text not fully visible: البحث",
+    "brief text not fully visible: التركيز: الطاقة"
+   ]
+  },
+  {
+   "name": "Egypt covered",
+   "ok": true,
+   "sample": [
+    "Nile delta covered by panel البحث: مصر",
+    "Nile delta under the hit box of نظرة عامة",
+    "Nile delta under the hit box of المجالات"
+   ]
+  },
+  {
+   "name": "sheet width",
+   "ok": true,
+   "sample": [
+    "sheet width 330 (want round(clamp(43% of 832, 340, 380)), or the room the dock leaves if 330..: 358)"
+   ]
+  },
+  {
+   "name": "sheet top",
+   "ok": true,
+   "sample": [
+    "hit overlap الخزينة 36.0 مليار $ / إغلاق",
+    "hit overlap الاستقرار 58% / إغلاق",
+    "panel overlap الدولة: مصر، حسني مبارك، ج / البحث: مصر"
+   ]
+  },
+  {
+   "name": "dock hidden although it fits",
+   "ok": true,
+   "sample": [
+    "dock hidden although it fits left of the sheet"
+   ]
+  },
+  {
+   "name": "dock shown on the SE",
+   "ok": true,
+   "sample": [
+    "icon over text: i / \"رفع الإنفاق على البحث\"",
+    "icon over text: i / \"البحث\"",
+    "hit overlap الدولة / رفع الإنفاق على البحث: 300"
+   ]
+  },
+  {
+   "name": "left stack moved",
+   "ok": true,
+   "sample": [
+    "HUD element moved from its B3 position: .toast x 70.0..275.6 y 56.0..88.0",
+    "HUD element moved from its B3 position: .btn.mode x 70.0..191.6 y 96.0..128.0",
+    "HUD element moved from its B3 position: .btn.home x 70.0..141.5 y 136.0..168.0"
+   ]
+  },
+  {
+   "name": "fit not the loosest",
+   "ok": true,
+   "sample": [
+    "fit level 6 is not the loosest that fits: [[0,0]]"
+   ]
+  },
+  {
+   "name": "two tab bodies",
+   "ok": true,
+   "sample": [
+    "clipped text (bottom): \"قيد البحث\" 834.05..881 y 247..264",
+    "clipped text (bottom): \"3\" 613.19..621 y 416.92..435.92",
+    "text over a control: \"4\" runs into «البحث +8»"
+   ]
+  },
+  {
+   "name": "two tabs selected",
+   "ok": true,
+   "sample": [
+    "exactly the open tab must be selected"
+   ]
+  },
+  {
+   "name": "tabs not a tab list",
+   "ok": true,
+   "sample": [
+    "a11y: the tabs are not a tab list"
+   ]
+  },
+  {
+   "name": "tabs reversed",
+   "ok": true,
+   "sample": [
+    "tab 2 is not left of tab 1",
+    "tab 3 is not left of tab 2"
+   ]
+  },
+  {
+   "name": "fades wrong",
+   "ok": true,
+   "sample": [
+    "fades 0/0 do not match the scroll state (top 0, over 59.0)"
+   ]
+  },
+  {
+   "name": "hint chevron missing",
+   "ok": true,
+   "sample": [
+    "scroll hint chevron missing with content below"
+   ]
+  },
+  {
+   "name": "hint over the content",
+   "ok": true,
+   "sample": [
+    "scroll hint not centred in the clear strip under the fade: y 249.0..267.0 (strip 395.0..417.0)"
+   ]
+  },
+  {
+   "name": "map label cut",
+   "ok": true,
+   "sample": [
+    "map label ليبيا sliced by the screen edge or the side inset",
+    "map label إيران sliced by the screen edge or the side inset",
+    "map label إيران squeezed between a panel and the screen edge"
+   ]
+  },
+  {
+   "name": "contrast",
+   "ok": true,
+   "sample": [
+    "contrast 1 for \"البحث\"",
+    "contrast 1 for \"+18\"",
+    "contrast 1.73 for \"شهريًا\""
+   ]
+  },
+  {
+   "name": "dock item not marked",
+   "ok": true,
+   "sample": [
+    "the open section «البحث» is not marked in the dock"
+   ]
+  },
+  {
+   "name": "identity line missing",
+   "ok": true,
+   "sample": [
+    "panel top line none rgb(158, 219, 91) 2px (want the section colour, 2 pt, at the top)"
+   ]
+  },
+  {
+   "name": "emblem drawn grey",
+   "ok": true,
+   "sample": [
+    "section emblem missing or not in the section colour"
+   ]
+  },
+  {
+   "name": "open tab neutral",
+   "ok": true,
+   "sample": [
+    "open tab not in the section colour"
+   ]
+  },
+  {
+   "name": "section colour on data",
+   "ok": true,
+   "sample": [
+    "section colour on data text: \"قيد البحث\""
+   ]
+  },
+  {
+   "name": "section colour on a rule",
+   "ok": true,
+   "sample": [
+    "section colour on data chrome: أقسام البحث"
+   ]
+  },
+  {
+   "name": "money unit",
+   "ok": true,
+   "sample": [
+    "clipped text (top): \"0.4\" 866.09..881 y 153..168",
+    "clipped text (top): \"مليار $\" 838.42..866.09 y 153..168",
+    "money unit: «0.4 مليار» (under 1 billion is written in millions)"
+   ]
+  },
+  {
+   "name": "sign outside its number",
+   "ok": true,
+   "sample": [
+    "clipped text (top): \"تغير +\" 859.06..881 y 153..168",
+    "clipped text (top): \"3\" 853.06..859.06 y 153..168",
+    "a sign outside its number: «تغير +3»"
+   ]
+  },
+  {
+   "name": "colour alone",
+   "ok": true,
+   "sample": [
+    "clipped text (top): \"تراجع\" 860.27..881 y 153..168",
+    "colour alone: «تراجع» has no arrow or icon"
+   ]
+  },
+  {
+   "name": "an image in the sheet",
+   "ok": true,
+   "sample": [
+    "an image in the sheet"
+   ]
+  },
+  {
+   "name": "close not round",
+   "ok": true,
+   "sample": [
+    "close button is not round"
+   ]
+  },
+  {
+   "name": "label without a role",
+   "ok": true,
+   "sample": [
+    "clipped text (top): \"اختبار\" 860.25..881 y 153..168",
+    "a11y: a label VoiceOver may skip (no role): «اختبار»"
+   ]
+  },
+  {
+   "name": "brief text hidden",
+   "ok": true,
+   "sample": [
+    "the research rate is not the HUD's",
+    "brief text not fully visible: +18"
+   ]
+  },
+  {
+   "name": "overview scrolls",
+   "ok": true,
+   "sample": [
+    "overview needs scrolling: 398.0 pt over",
+    "fades 0/0 do not match the scroll state (top 0, over 398.0)"
+   ]
+  },
+  {
+   "name": "18 pt misuse",
+   "ok": true,
+   "sample": [
+    "18 pt is for the panel's name and the adjusted values only: \"+1\"",
+    "18 pt is for the panel's name and the adjusted values only: \"شهريًا\"",
+    "18 pt is for the panel's name and the adjusted values only: \"0.3%\""
+   ]
+  },
+  {
+   "name": "control height",
+   "ok": true,
+   "sample": [
+    "control height 40.00 for .r-tab (want 44): نظرة عامة",
+    "control height 40.00 for .r-tab (want 44): المجالات",
+    "control height 40.00 for .r-tab (want 44): التعاون"
+   ]
+  },
+  {
+   "name": "gap",
+   "ok": true,
+   "sample": [
+    "gap 6 on البحث +18شهريًا +1 شهريًا ",
+    "gap 6 on البحث +18شهريًا +1 شهريًا ",
+    "gap 6 on الإنفاق 700مليون $ 0.3% من"
+   ]
+  },
+  {
+   "name": "icon size",
+   "ok": true,
+   "sample": [
+    "icon size 19x19 (want 17): i",
+    "icon size 19x19 (want 17): i",
+    "icon size 19x19 (want 17): i"
+   ]
+  },
+  {
+   "name": "text overlap",
+   "ok": true,
+   "sample": [
+    "text overlap \"البحث\" / \"مصر\"",
+    "text overlap \"البحث\" / \"·\"",
+    "text overlap \"البحث\" / \"8\""
+   ]
+  },
+  {
+   "name": "text into a control",
+   "ok": false,
+   "sample": [
+    "content outside its control (رفع الإنفاق على البحث: 300): رفع الإنفاق على البح",
+    "horizontal overflow in البحث +18شهريًا +1 شهريًا ",
+    "action row 1: order must be .r-tile, .r-at, .r-chip (right to left)"
+   ]
+  },
+  {
+   "name": "clipped text",
+   "ok": true,
+   "sample": [
+    "clipped text (sides): \"البحث\" 875.02..903 y 161..178",
+    "text outside the sheet's 12 pt padding: \"البحث\"",
+    "clipped text (sides): \"+18\" 888.59..921 y 179..206"
+   ]
+  },
+  {
+   "name": "dock underline missing",
+   "ok": true,
+   "sample": [
+    "dock underline missing or off: none 16pxx2px rgb(158, 219, 91) (want 16 x 2 in the section colour)"
+   ]
+  },
+  {
+   "name": "closed dock item coloured",
+   "ok": true,
+   "sample": [
+    "dock item 1 (closed) not neutral as on B3: rgb(158, 219, 91) / rgb(234, 242, 247)",
+    "dock item 2 (closed) not neutral as on B3: rgb(158, 219, 91) / rgb(234, 242, 247)",
+    "dock item 3 (closed) not neutral as on B3: rgb(158, 219, 91) / rgb(234, 242, 247)"
+   ]
+  },
+  {
+   "name": "identity line colour",
+   "ok": true,
+   "sample": [
+    "panel top line \"\" rgb(63, 224, 208) 2px (want the section colour, 2 pt, at the top)"
+   ]
+  },
+  {
+   "name": "closed tabs like the open one",
+   "ok": true,
+   "sample": [
+    "open tab not in the section colour",
+    "closed tab not in the secondary grey: المجالات rgb(234, 242, 247)",
+    "closed tab not in the secondary grey: التعاون rgb(234, 242, 247)"
+   ]
+  },
+  {
+   "name": "emblem size",
+   "ok": true,
+   "sample": [
+    "size 28.0x32.0 for .s-emb (want 32 x 32)"
+   ]
+  },
+  {
+   "name": "chip not white",
+   "ok": true,
+   "sample": [
+    "white touch off: .r-chip borderTopColor rgb(63, 224, 208) (want rgba(234, 242, 247, 0.5))",
+    "white touch off: .r-chip color rgb(63, 224, 208) (want rgb(234, 242, 247))"
+   ]
+  },
+  {
+   "name": "tile icons cyan",
+   "ok": true,
+   "sample": [
+    "white touch off: .r-tile color rgb(127, 233, 255) (want rgb(234, 242, 247))"
+   ]
+  },
+  {
+   "name": "faint text",
+   "ok": true,
+   "sample": [
+    "brief text not fully visible: +1 شهريًا",
+    "brief text not fully visible: 0.3% من الناتج",
+    "brief text not fully visible: من 8 مجالات"
+   ]
+  },
+  {
+   "name": "why without its subject",
+   "ok": true,
+   "sample": [
+    "a11y: «لماذا؟» does not name its subject «الإنفاق»"
+   ]
+  },
+  {
+   "name": "amber value without its icon",
+   "ok": true,
+   "sample": [
+    "colour alone: «+18» (its label's icon is not in its colour)"
+   ]
+  },
+  {
+   "name": "chip arrow against its sign",
+   "ok": true,
+   "sample": [
+    "«رفع الإنفاق على البحث»: the chip's arrow does not agree with its sign",
+    "a11y: «رفع الإنفاق على البحث» does not say the chip's direction in words"
+   ]
+  },
+  {
+   "name": "row read in part",
+   "ok": true,
+   "sample": [
+    "a11y: «جزء» does not read all it shows: الطاقة نحو المستوى يكتمل"
+   ]
+  },
+  {
+   "name": "% before its number",
+   "ok": true,
+   "sample": [
+    "% shown before its number: \"نسبة 20%\"",
+    "colour alone: «نسبة 20%» has no arrow or icon",
+    "the research trend is not the HUD's (up there, ? here)"
+   ]
+  },
+  {
+   "name": "rate off the HUD",
+   "ok": true,
+   "sample": [
+    "the research rate is not the HUD's",
+    "headline 1 is not «البحث +18 شهريًا +1 شهريًا»: «البحث +20 شهريًا +1 شهريًا»",
+    "brief text missing: +18"
+   ]
+  },
+  {
+   "name": "project bar off",
+   "ok": true,
+   "sample": [
+    "the project's bar is not at 62%"
+   ]
+  },
+  {
+   "name": "project outside the focus",
+   "ok": true,
+   "sample": [
+    "the project under way is not in the focus (الصناعة والتصنيع)",
+    "brief text missing: التركيز: الطاقة",
+    "brief text missing: التركيز: الطاقة"
+   ]
+  },
+  {
+   "name": "domain bar off",
+   "ok": true,
+   "sample": [
+    "domain «الصحة والزراعة»: the bar is not at 4 / 15"
+   ]
+  },
+  {
+   "name": "mean off",
+   "ok": true,
+   "sample": [
+    "a11y: «الصناعة والتصنيع: المستو» does not read all it shows: 7",
+    "the domains' mean is not the headline 3.6",
+    "domain «الصناعة والتصنيع»: the bar is not at 7 / 15"
+   ]
+  },
+  {
+   "name": "domain silent",
+   "ok": true,
+   "sample": [
+    "a11y: «السيبراني والاستخبارات» does not read all it shows: 4",
+    "a11y: domain «السيبراني والاستخبارات» is not read whole"
+   ]
+  },
+  {
+   "name": "two focuses",
+   "ok": true,
+   "sample": [
+    "a11y: «الصناعة والتصنيع: المستو» does not read all it shows: التركيز",
+    "the focus is not marked once, in words"
+   ]
+  },
+  {
+   "name": "trend off the HUD",
+   "ok": true,
+   "sample": [
+    "the research trend is not the HUD's (up there, flat here)",
+    "headline 1 is not «البحث +18 شهريًا +1 شهريًا»: «البحث +18 شهريًا دون تغير»",
+    "brief text missing: +1 شهريًا"
+   ]
+  },
+  {
+   "name": "HUD trend flipped",
+   "ok": true,
+   "sample": [
+    "the research trend is not the HUD's (down there, up here)"
+   ]
+  },
+  {
+   "name": "headline values swapped",
+   "ok": true,
+   "sample": [
+    "headline 2 is not «الإنفاق 700 مليون $ 0.3% من الناتج»: «الإنفاق 3.6 / 15 0.3% من الناتج»",
+    "headline 3 is not «المتوسط 3.6 / 15 من 8 مجالات»: «المتوسط 700 مليون $ من 8 مجالات»"
+   ]
+  },
+  {
+   "name": "project level not the next",
+   "ok": true,
+   "sample": [
+    "a11y: «الطاقة، نحو المستوى 5: أ» does not read all it shows: 6",
+    "the project is not toward the focus's next level 5",
+    "brief text missing: الطاقة · نحو المستوى 5"
+   ]
+  },
+  {
+   "name": "levels swapped",
+   "ok": true,
+   "sample": [
+    "a11y: «الصناعة والتصنيع: المستو» does not read all it shows: 3",
+    "a11y: «الحاسوب والإلكترونيات وا» does not read all it shows: 4",
+    "domain «الصناعة والتصنيع»: the bar is not at 3 / 15"
+   ]
+  },
+  {
+   "name": "focus moved",
+   "ok": true,
+   "sample": [
+    "a11y: «الصناعة والتصنيع: المستو» does not read all it shows: التركيز",
+    "the focus is not marked once, in words",
+    "the marked focus is not the header's (الطاقة)"
+   ]
+  },
+  {
+   "name": "focus read twice",
+   "ok": true,
+   "sample": [
+    "VoiceOver reads more than one focus"
+   ]
+  },
+  {
+   "name": "a shorter track",
+   "ok": true,
+   "sample": [
+    "the domain bars do not share one track width"
+   ]
+  },
+  {
+   "name": "agreement lines swapped",
+   "ok": true,
+   "sample": [
+    "a11y: «روسيا: الطاقة النووية ال» does not read all it shows: قمر رصد أُطلق فُقد",
+    "a11y: «أوكرانيا: الأقمار الصناع» does not read all it shows: اتفاقية تعاون منذ 2008",
+    "agreement 1 is not «اتفاقيات التعاون · روسيا · الطاقة النووية السلمية · اتفاقية تعاون منذ 2008»: «اتفاقيات التعاون · روسيا · الطاقة النووية السلمية · قمر رصد أُطلق 2007 · فُقد الاتصال به 2010»"
+   ]
+  },
+  {
+   "name": "licence filed as an agreement",
+   "ok": true,
+   "sample": [
+    "agreement 4 is not «التراخيص · الولايات المتحدة · تجميع دبابات · منذ 1992»: «اتفاقيات التعاون · الولايات المتحدة · تجميع دبابات · منذ 1992»"
+   ]
+  },
+  {
+   "name": "a domain missing",
+   "ok": true,
+   "sample": [
+    "the domains are not the 8 of §5.7",
+    "brief text missing: السيبراني والاستخبارات",
+    "brief text missing: السيبراني والاستخبارات"
+   ]
+  },
+  {
+   "name": "coverage without the middle views",
+   "ok": false,
+   "sample": []
+  }
+ ]
+}
