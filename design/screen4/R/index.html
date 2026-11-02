@@ -7,7 +7,8 @@
 <script>
   /* Device frame from the URL (points): ?w=844&h=390&side=47&bottom=21&cutout=notch|island|none
      Optional: &speedmenu=1 renders the speed menu open, &hit=1 draws the 44 pt hit boxes,
-     &view=govern opens «تفاصيل المحافظة» (the full-height details, governance tab) instead of the card,
+     &view=govern opens «تفاصيل المحافظة» (the full-height details) instead of the card, on its «الحكم» tab;
+     &tab=build|forces|policy opens the details on that tab (الإنشاءات / القوات / السياسات),
      &scroll=end scrolls the open view to its end, &scroll=<pt> to that offset.
      Everything below is laid out with flexbox from these CSS variables; nothing is tied to 844x390. */
   (function () {
@@ -27,7 +28,8 @@
     r.dataset.home = BOTTOM > 0 ? 'yes' : 'no';
     if (q.get('hit') === '1') r.classList.add('show-hit');
     if (q.get('speedmenu') === '1') r.classList.add('menu-open');
-    r.dataset.view = q.get('view') === 'govern' ? 'govern' : 'card';
+    r.dataset.view = q.get('view') === 'govern' || ['build', 'forces', 'policy'].indexOf(q.get('tab')) >= 0 ? 'govern' : 'card';
+    r.dataset.dtabOpen = ['build', 'forces', 'policy'].indexOf(q.get('tab')) >= 0 ? q.get('tab') : 'govern';
     window.__scroll = q.get('scroll') === 'end' ? 'end' : (isFinite(parseFloat(q.get('scroll'))) ? parseFloat(q.get('scroll')) : 0);
     window.__dev = { W: W, H: H, SIDE: SIDE, BOTTOM: BOTTOM, CUT: CUT };
   })();
@@ -453,6 +455,47 @@
   .map svg.sel { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
   .sel path { stroke-linejoin: round; }
   .sel .pin rect { filter: drop-shadow(0 2px 4px rgba(0, 0, 0, .4)); }
+  /* ================= Screen 4 R, the province details' other three tabs (T-007, 2026-11-02) =================
+     Read after panel.css by assemble.py (this file is the province panel's own; the shared panel.css is unchanged).
+     One tab body shows at a time (&view=govern opens «الحكم»; &tab=build|forces|policy the others). Teal marks the open tab, as on the
+     approved panel; data colours keep their meanings: blue better, amber worse, each paired with an arrow or a word. */
+  .r-gv.r-body[data-dtab] { display: none; }
+  [data-dtab-open="govern"] .r-gv.r-body[data-dtab="govern"], [data-dtab-open="build"] .r-gv.r-body[data-dtab="build"],
+  [data-dtab-open="forces"] .r-gv.r-body[data-dtab="forces"], [data-dtab-open="policy"] .r-gv.r-body[data-dtab="policy"] { display: flex; }
+
+  /* الإنشاءات: one row per sector: name, a 4 pt teal meter out of 10, the value */
+  .p-lvl { display: grid; grid-template-columns: 96px 1fr auto; align-items: center; column-gap: var(--s2); height: 22px; }
+  .p-lvl > span { font-size: var(--fs-sec); line-height: var(--lh-sec); font-weight: 500; color: var(--t2); white-space: nowrap; }
+  .p-meter { position: relative; height: 4px; border-radius: 2px; background: rgba(169, 188, 203, .22); }
+  .p-meter::after { content: ""; position: absolute; top: 0; bottom: 0; right: 0; width: var(--v); border-radius: 2px; background: var(--teal); }
+  .p-lvl b { font-size: var(--fs-val); line-height: var(--lh-val); font-weight: 600; white-space: nowrap; }
+  /* a warning: amber text led by the warning icon (never colour alone) */
+  .p-warn { display: flex; align-items: center; gap: var(--s1); font-size: var(--fs-label); line-height: 14px; font-weight: 500; color: var(--amber); }
+  .p-warn svg.i { flex: none; width: var(--ico-stat); height: var(--ico-stat); }
+
+  /* القوات: one row per unit: tile, name and its command, readiness */
+  .p-unit { display: flex; align-items: center; gap: var(--s2); height: 40px; }
+  .p-unit .r-tile { width: 32px; height: 32px; }
+  .p-rdy { flex: none; display: flex; align-items: baseline; gap: var(--s1); font-size: var(--fs-label); line-height: var(--lh-label); font-weight: 500; color: var(--t2); white-space: nowrap; }
+  .p-rdy b { font-size: var(--fs-val); line-height: var(--lh-val); font-weight: 600; color: var(--t1); }
+  .p-wi { width: var(--glyph) !important; height: var(--glyph) !important; }
+  .p-cost { display: inline-flex; align-items: center; gap: 2px; margin-inline-start: var(--s1); font-size: var(--fs-sec); font-weight: 600; }
+  .p-note { font-size: var(--fs-label); line-height: 14px; font-weight: 500; color: var(--t2); }
+  .r-sc dd .r-arr { margin-inline-end: 2px; vertical-align: -1px; }
+
+  /* السياسات: a share bar (the parts in the panel's data greys and teal, right to left), keyed rows under it */
+  .p-split { display: flex; height: 6px; border-radius: 3px; overflow: hidden; gap: 2px; }
+  .p-split i { width: var(--w); background: var(--teal); }
+  /* the parts: teal, half teal, grey (one data hue, so no part reads as better or worse); each row's key matches */
+  .p-grp { display: flex; align-items: center; justify-content: space-between; gap: var(--s2); height: 22px; font-size: var(--fs-sec); line-height: var(--lh-sec); font-weight: 500; color: var(--t1); white-space: nowrap; }
+  .p-grp > span { display: inline-flex; align-items: center; gap: var(--s1); }
+  .p-grp b { display: inline-flex; align-items: center; gap: 2px; font-weight: 600; }
+  .p-key { flex: none; width: 8px; height: 8px; border-radius: 2px; background: var(--teal); }
+  .p-split i:nth-child(2), .p-key.p-k2 { background: rgba(63, 224, 208, .5); }
+  .p-split i:nth-child(3), .p-key.p-k3 { background: var(--t2); }
+  .p-why { display: flex; align-items: center; justify-content: space-between; height: 22px; font-size: var(--fs-sec); line-height: var(--lh-sec); font-weight: 500; color: var(--t1); }
+  .p-why b { display: inline-flex; align-items: center; gap: 2px; font-size: var(--fs-val); line-height: var(--lh-val); font-weight: 600; }
+  .p-all { align-self: flex-start; height: 22px; line-height: 22px; margin-top: 0; }
 </style>
 </head>
 <body>
@@ -496,6 +539,7 @@
     <symbol id="i-pylon" viewBox="0 0 24 24"><path d="M12 2.75 7 21.25M12 2.75l5 18.5"/><path d="M5 7h14M6.5 11.5h11M8.45 16h7.1"/><path d="M5 7v2.25M19 7v2.25M6.5 11.5v2M17.5 11.5v2"/></symbol>
     <symbol id="i-shield-plain" viewBox="0 0 24 24"><path d="M12 3.5l7 2.75v5.25c0 4.3-2.9 7.6-7 9-4.1-1.4-7-4.7-7-9V6.25z"/></symbol>
     <symbol id="i-doc" viewBox="0 0 24 24"><path d="M6.25 3.5h8.25l3.25 3.25V20.5H6.25z"/><path d="M14.25 3.5v3.5h3.5"/><path d="M9 11h6M9 14h6M9 17h3.5"/></symbol>
+    <symbol id="i-train" viewBox="0 0 24 24"><rect x="6" y="3.5" width="12" height="13" rx="3"/><path d="M6 10h12"/><path d="M10 6.5h4"/><path d="M9.25 13.5h.01M14.75 13.5h.01" stroke-width="2.4"/><path d="M9 16.5 7 20.5M15 16.5l2 4"/></symbol>
     <symbol id="i-bus" viewBox="0 0 24 24"><rect x="5" y="3.5" width="14" height="15" rx="2.5"/><path d="M5 7.25h14M5 12h14"/><path d="M8 18.5v2M16 18.5v2"/><path d="M8.5 15.25h.01M15.5 15.25h.01" stroke-width="2.4"/></symbol>
   </defs>
 </svg>
@@ -649,8 +693,9 @@
   <!-- Province panel (variant R, after the owner's two reference images, 2026-10-20). Two steps of one sheet:
        the card (default, step 1: header, numbers, status, «تفاصيل المحافظة»; the upper part of the owner's 2nd image)
        and ?view=govern (step 2, «تفاصيل المحافظة», the owner's 1st image). The 2nd image's two action rows move into the
-       details tabs (توسعة شبكة الكهرباء -> الإنشاءات, دعم الخدمات الأساسية -> السياسات), designed with those tabs.
-       Values and the governor's name are illustrative. -->
+       details tabs (توسعة شبكة الكهرباء -> الإنشاءات, دعم الخدمات الأساسية -> السياسات). The details open on «الحكم»;
+       &tab=build|forces|policy opens the other three (T-007, 2026-11-02, under the owner's delegation). Values and the
+       governor's name are illustrative. -->
   <section class="sheet glass" aria-label="المحافظة: القاهرة">
     <div class="r-in">
       <header class="r-hd">
@@ -696,13 +741,13 @@
       </div>
 
       <!-- view 2: details, governance tab -->
-      <nav class="r-tabs r-gv" aria-label="أقسام المحافظة">
-        <button class="r-tab on tap"><svg class="i"><use href="#i-state"/></svg><span>الحكم</span></button>
-        <button class="r-tab tap"><svg class="i"><use href="#i-build"/></svg><span>الإنشاءات</span></button>
-        <button class="r-tab tap"><svg class="i"><use href="#i-shield-plain"/></svg><span>القوات</span></button>
-        <button class="r-tab tap"><svg class="i"><use href="#i-doc"/></svg><span>السياسات</span></button>
+      <nav class="r-tabs r-gv" role="tablist" aria-label="أقسام المحافظة">
+        <button class="r-tab on tap" role="tab" aria-selected="true" data-for="govern" id="rt-govern"><svg class="i"><use href="#i-state"/></svg><span>الحكم</span></button>
+        <button class="r-tab tap" role="tab" aria-selected="false" data-for="build" id="rt-build"><svg class="i"><use href="#i-build"/></svg><span>الإنشاءات</span></button>
+        <button class="r-tab tap" role="tab" aria-selected="false" data-for="forces" id="rt-forces"><svg class="i"><use href="#i-shield-plain"/></svg><span>القوات</span></button>
+        <button class="r-tab tap" role="tab" aria-selected="false" data-for="policy" id="rt-policy"><svg class="i"><use href="#i-doc"/></svg><span>السياسات</span></button>
       </nav>
-      <div class="r-body r-gv">
+      <div class="r-body r-gv" data-dtab="govern" role="tabpanel" aria-labelledby="rt-govern">
         <section class="r-sec">
           <h3>إدارة المحافظة</h3>
           <div class="r-gov"><span class="r-gl">المحافظ</span><span class="r-gn">د. عمر منصور</span><button class="r-btn tap">تغيير</button></div>
@@ -757,6 +802,115 @@
             </div>
           </div>
         </section>
+      </div>
+      <!-- details, construction tab (&tab=build): infrastructure by sector (their mean is the card's 8 / 10), the main
+           facilities, the state's projects running here (the state panel's projects) and the power-grid expansion (the
+           owner's 2nd image's first action row) -->
+      <div class="r-body r-gv" data-dtab="build" role="tabpanel" aria-labelledby="rt-build">
+        <section class="r-sec">
+          <h3>البنية التحتية</h3>
+          <div class="p-lvl" role="img" aria-label="الكهرباء: 7 من 10"><span>الكهرباء</span><i class="p-meter" style="--v: 70%"></i><b><span class="ltr">7</span> / <span class="ltr">10</span></b></div>
+          <div class="p-lvl" role="img" aria-label="النقل: 8 من 10"><span>النقل</span><i class="p-meter" style="--v: 80%"></i><b><span class="ltr">8</span> / <span class="ltr">10</span></b></div>
+          <div class="p-lvl" role="img" aria-label="المياه والصرف: 8 من 10"><span>المياه والصرف</span><i class="p-meter" style="--v: 80%"></i><b><span class="ltr">8</span> / <span class="ltr">10</span></b></div>
+          <div class="p-lvl" role="img" aria-label="الاتصالات: 9 من 10"><span>الاتصالات</span><i class="p-meter" style="--v: 90%"></i><b><span class="ltr">9</span> / <span class="ltr">10</span></b></div>
+          <p class="p-warn"><svg class="i"><use href="#i-warn"/></svg>الكهرباء: الطلب قريب من القدرة، وانقطاعات في الصيف.</p>
+        </section>
+        <section class="r-sec">
+          <h3>منشآت رئيسية</h3>
+          <dl class="r-st">
+            <div class="r-sc"><dt>المترو</dt><dd>خطان يعملان</dd></div>
+            <div class="r-sc"><dt>المطار</dt><dd>القاهرة الدولي</dd></div>
+            <div class="r-sc"><dt>الصناعة</dt><dd>ثقيلة وخفيفة</dd></div>
+            <div class="r-sc"><dt>المستشفيات</dt><dd>جامعية وعامة</dd></div>
+          </dl>
+        </section>
+        <section class="r-sec">
+          <h3>مشاريع الدولة هنا</h3>
+          <div class="r-link tap" role="button" tabindex="0" aria-label="الخط الثالث لمترو القاهرة، المرحلة الأولى: 85%، تكتمل في 2012. يفتح مشاريع الدولة">
+            <span class="r-tile"><svg class="i"><use href="#i-train"/></svg></span>
+            <span class="r-at"><b>الخط الثالث لمترو القاهرة</b><span>المرحلة الأولى · <span class="ltr">85%</span> · تكتمل في <span class="ltr">2012</span></span></span>
+            <svg class="i r-chev"><use href="#i-chev"/></svg>
+          </div>
+        </section>
+        <button class="r-act tap r-first" aria-label="توسعة شبكة الكهرباء: 800 مليون دولار، 24 شهرًا، إلى 8 من 10. ترفع الكهرباء +1، أفضل">
+          <span class="r-tile"><svg class="i"><use href="#i-pylon"/></svg></span>
+          <span class="r-at"><b>توسعة شبكة الكهرباء</b><span><span class="ltr">800</span> مليون $ · <span class="ltr">24</span> شهرًا · إلى <span class="ltr">8</span></span></span>
+          <span class="r-chip"><svg class="r-arr" aria-hidden="true"><use href="#t-up"/></svg>الكهرباء <span class="ltr">+1</span></span>
+        </button>
+      </div>
+
+      <!-- details, forces tab (&tab=forces): control, police and the province's emergency region (Internal's lever); the
+           national emergency law as a link to its owner (الدولة › السياسات); the formations stationed here (§5.4 types,
+           with their army and organization) and the link to the military section. Units are moved on the map. -->
+      <div class="r-body r-gv" data-dtab="forces" role="tabpanel" aria-labelledby="rt-forces">
+        <dl class="r-st">
+          <div class="r-sc"><dt>السيطرة</dt><dd class="r-teal">الحكومة · <span class="ltr">100%</span></dd></div>
+          <div class="r-sc"><dt>الشرطة</dt><dd><span class="ltr">8</span> / <span class="ltr">10</span></dd></div>
+          <div class="r-sc"><dt>منطقة طوارئ</dt><dd>لا</dd></div>
+          <div class="r-sc"><dt>القيادة</dt><dd>المنطقة المركزية</dd></div>
+        </dl>
+        <section class="r-sec">
+          <h3>التشكيلات المتمركزة</h3>
+          <div class="p-unit" role="img" aria-label="فرقة مدرعة: المنطقة المركزية، التنظيم 85%"><span class="r-tile"><svg class="i"><use href="#i-army"/></svg></span>
+            <span class="r-at"><b>فرقة مدرعة</b><span>المنطقة المركزية</span></span><span class="p-rdy">التنظيم <b class="ltr">85%</b></span></div>
+          <div class="p-unit" role="img" aria-label="فرقة مشاة آلية: المنطقة المركزية، التنظيم 80%"><span class="r-tile"><svg class="i"><use href="#i-army"/></svg></span>
+            <span class="r-at"><b>فرقة مشاة آلية</b><span>المنطقة المركزية</span></span><span class="p-rdy">التنظيم <b class="ltr">80%</b></span></div>
+          <div class="p-unit" role="img" aria-label="فرقة مشاة: الحرس الجمهوري، التنظيم 95%"><span class="r-tile"><svg class="i"><use href="#i-shield-plain"/></svg></span>
+            <span class="r-at"><b>فرقة مشاة</b><span>الحرس الجمهوري</span></span><span class="p-rdy">التنظيم <b class="ltr">95%</b></span></div>
+        </section>
+        <div class="r-link tap" role="button" tabindex="0" aria-label="حالة الطوارئ: محدودة منذ 2010، قانون وطني. يفتح الدولة › السياسات">
+          <span class="r-tile"><svg class="i"><use href="#i-doc"/></svg></span>
+          <span class="r-at"><b>حالة الطوارئ: محدودة منذ <span class="ltr">2010</span></b><span>قانون وطني · يُغيَّر من الدولة › السياسات</span></span>
+          <svg class="i r-chev"><use href="#i-chev"/></svg>
+        </div>
+        <div class="r-link tap" role="button" tabindex="0" aria-label="إدارة القوات: يفتح قسم الجيش">
+          <span class="r-tile"><svg class="i"><use href="#i-army"/></svg></span>
+          <span class="r-at"><b>إدارة القوات</b><span>قسم الجيش · الأوامر والتمركز</span></span>
+          <svg class="i r-chev"><use href="#i-chev"/></svg>
+        </div>
+        <p class="p-note">تُحرَّك الجيوش من الخريطة: اضغط الجيش ثم وجهته. الشرطة وقوات مكافحة الشغب تتبع الداخلية وتظهر في مستوى الشرطة.</p>
+      </div>
+
+      <!-- details, policies tab (&tab=policy): society (the groups, their share and grievance), the biggest causes of the
+           card's unrest 64 (all of them in «لماذا؟»), party support here (per actor, §5.3), the local measures with cost
+           and effect (the owner's 2nd image's second action row and «تعزيز الأمن») and the emergency-region state -->
+      <div class="r-body r-gv" data-dtab="policy" role="tabpanel" aria-labelledby="rt-policy">
+        <section class="r-sec">
+          <h3>المجتمع</h3>
+          <div class="p-split" role="img" aria-label="مسلمون سنة 90%، مسيحيون أقباط 10%"><i style="--w: 90%"></i><i style="--w: 10%"></i></div>
+          <div class="p-grp"><span><i class="p-key"></i>مسلمون سنة <span class="ltr">90%</span></span><span>التذمر <b>متوسط</b></span></div>
+          <div class="p-grp"><span><i class="p-key p-k2"></i>مسيحيون أقباط <span class="ltr">10%</span></span><span>التذمر <b class="r-amber"><svg class="i p-wi" aria-hidden="true"><use href="#i-warn"/></svg>مرتفع</b></span></div>
+        </section>
+        <section class="r-sec">
+          <h3>أكبر أسباب الاضطرابات</h3>
+          <div class="p-why"><span>القمع ونقص الحريات</span><b class="r-amber"><svg class="r-arr" aria-hidden="true"><use href="#t-up"/></svg><span class="ltr">+12</span></b></div>
+          <div class="p-why"><span>تراجع مستوى المعيشة</span><b class="r-amber"><svg class="r-arr" aria-hidden="true"><use href="#t-up"/></svg><span class="ltr">+10</span></b></div>
+          <div class="p-why"><span>بطالة الشباب</span><b class="r-amber"><svg class="r-arr" aria-hidden="true"><use href="#t-up"/></svg><span class="ltr">+9</span></b></div>
+          <div class="p-why"><span>الشرطة</span><b class="r-blue"><svg class="r-arr" aria-hidden="true"><use href="#t-down"/></svg><span class="ltr">−8</span></b></div>
+          <button class="r-why p-all tap">لماذا؟ · كل الأسباب</button>
+        </section>
+        <section class="r-sec">
+          <h3>تأييد الأحزاب هنا</h3>
+          <div class="p-split" role="img" aria-label="الحزب الوطني 52%، الإخوان المسلمون 30%، أخرى 18%"><i style="--w: 52%"></i><i style="--w: 30%"></i><i style="--w: 18%"></i></div>
+          <div class="p-grp"><span><i class="p-key"></i>الحزب الوطني <span class="ltr">52%</span></span><span><i class="p-key p-k2"></i>الإخوان <span class="ltr">30%</span></span><span><i class="p-key p-k3"></i>أخرى <span class="ltr">18%</span></span></div>
+        </section>
+        <div class="r-acts">
+          <button class="r-act tap r-first" aria-label="دعم الخدمات الأساسية: 300 مليون دولار مرة واحدة. تخفض الاضطرابات 4 نقاط، أفضل">
+            <span class="r-tile"><svg class="i"><use href="#i-care"/></svg></span>
+            <span class="r-at"><b>دعم الخدمات الأساسية</b><span><span class="ltr">300</span> مليون $ · مرة واحدة</span></span>
+            <span class="r-chip"><svg class="r-arr" aria-hidden="true"><use href="#t-down"/></svg>الاضطرابات <span class="ltr">−4</span></span>
+          </button>
+          <button class="r-act tap" aria-label="تعزيز الأمن: 200 مليون دولار سنويًا، الشرطة إلى 9، تنخفض الشرعية 1. تخفض الاضطرابات 1، أفضل">
+            <span class="r-tile"><svg class="i"><use href="#i-shield-plain"/></svg></span>
+            <span class="r-at"><b>تعزيز الأمن <span class="r-amber p-cost"><svg class="r-arr" aria-hidden="true"><use href="#t-down"/></svg>الشرعية <span class="ltr">−1</span></span></b><span><span class="ltr">200</span> مليون $ سنويًا</span></span>
+            <span class="r-chip"><svg class="r-arr" aria-hidden="true"><use href="#t-down"/></svg>الاضطرابات <span class="ltr">−1</span></span>
+          </button>
+        </div>
+        <div class="r-link tap" role="button" tabindex="0" aria-label="منطقة طوارئ في المحافظة: لا. يفتح قسم الداخلية والسياسة">
+          <span class="r-tile"><svg class="i"><use href="#i-pol"/></svg></span>
+          <span class="r-at"><b>منطقة طوارئ في المحافظة</b><span>لا · تُعلن من قسم الداخلية والسياسة</span></span>
+          <svg class="i r-chev"><use href="#i-chev"/></svg>
+        </div>
       </div>
       <span class="r-hint" aria-hidden="true"><svg class="i"><use href="#i-chev"/></svg></span>
     </div>
@@ -836,12 +990,14 @@
   /* The open view's body scrolls inside the sheet when it is taller than the sheet (?scroll=end shows its end);
      fades mark the edges that hide content. */
   function fitBody() {
-    var root = document.documentElement, b = $(root.dataset.view === 'govern' ? '.r-body.r-gv' : '.r-body.r-ov');
+    var root = document.documentElement, b = $(root.dataset.view === 'govern' ? '.r-body.r-gv[data-dtab="' + root.dataset.dtabOpen + '"]' : '.r-body.r-ov');
+    Array.prototype.forEach.call(document.querySelectorAll('.r-tab'), function (t) {
+      var on = t.dataset.for === root.dataset.dtabOpen; t.classList.toggle('on', on); t.setAttribute('aria-selected', String(on)); });
     b.scrollTop = window.__scroll === 'end' ? b.scrollHeight : window.__scroll;
     var over = b.scrollHeight - b.clientHeight;
     root.dataset.ftop = b.scrollTop > 0.5 ? '1' : '0';
     root.dataset.fbot = b.scrollTop < over - 0.5 ? '1' : '0';
-    window.__body = { view: root.dataset.view, shown: b.clientHeight, full: b.scrollHeight, over: over, top: b.scrollTop };
+    window.__body = { view: root.dataset.view, tab: root.dataset.dtabOpen, shown: b.clientHeight, full: b.scrollHeight, over: over, top: b.scrollTop };
   }
 
   /* Place the map so Cairo and the Nile delta, and if possible all of Egypt, sit in the map area left

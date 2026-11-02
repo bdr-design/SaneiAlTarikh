@@ -1,15 +1,17 @@
 {
- "ranAt": "2026-10-21T05:41:37.239Z",
+ "ranAt": "2026-11-02T21:42:43.196Z",
  "inputs": {
   "files": [
    "index.html",
    "_build/render.js",
    "_build/panel.css",
+   "_build/province.css",
    "_build/sheet.html",
    "_build/assemble.py",
    "../A/index.html",
    "../../screen1/B3/index.html",
    "../../shared/devices.json",
+   "../../screen5/A/_build/sheet.html",
    "../../shared/flag_eg.svg",
    "../../shared/flags/eg.svg",
    "../../shared/map_mena_d1.jpg",
@@ -17,19 +19,37 @@
    "header_cairo.jpg",
    "map_overlay_cairo.svg"
   ],
-  "sha1": "a2a7c7ab519d7f21569a85b8b7fe22b1a1a190d5"
+  "sha1": "e90b19311041c6497b7028e09163120182a840b0"
  },
  "cleanIssues": {
   "i16promax": [],
   "i16promax_govern": [],
   "i16promax_govern_end": [],
+  "i16promax_build": [],
+  "i16promax_build_end": [],
+  "i16promax_forces": [],
+  "i16promax_forces_end": [],
+  "i16promax_policy": [],
+  "i16promax_policy_end": [],
   "i16promax_govern_at137": [],
+  "i16promax_policy_at137": [],
   "i16promax coverage": [],
   "se": [],
   "se_govern": [],
   "se_govern_end": [],
+  "se_build": [],
+  "se_build_end": [],
+  "se_forces": [],
+  "se_forces_end": [],
+  "se_policy": [],
+  "se_policy_end": [],
   "se_govern_at86": [],
   "se_govern_at172": [],
+  "se_build_at86": [],
+  "se_forces_at86": [],
+  "se_policy_at86": [],
+  "se_policy_at172": [],
+  "se_policy_at258": [],
   "se coverage": []
  },
  "results": [
@@ -291,7 +311,8 @@
    "ok": true,
    "sample": [
     "brief text missing: لماذا؟",
-    "brief text missing: لماذا؟"
+    "brief text missing: لماذا؟",
+    "brief text missing: لماذا؟ · كل الأسباب"
    ]
   },
   {
@@ -384,7 +405,6 @@
    "name": "no scroll hint",
    "ok": true,
    "sample": [
-    "no scroll hint: nothing fades into the bottom edge",
     "scroll hint chevron missing with content below"
    ]
   },
@@ -414,6 +434,7 @@
    "name": "two tabs selected",
    "ok": true,
    "sample": [
+    "the open tab is not marked: govern, build",
     "exactly one tab must be selected"
    ]
   },
@@ -463,12 +484,298 @@
    ]
   },
   {
+   "name": "two tab bodies shown",
+   "ok": true,
+   "sample": [
+    "scroll hint not centred in the clear strip under the fade: y 395.0..413.0 (strip 264.3..286.3)",
+    "tab bodies shown: build, forces (want only build)"
+   ]
+  },
+  {
+   "name": "open tab not marked",
+   "ok": true,
+   "sample": [
+    "the open tab is not marked: govern"
+   ]
+  },
+  {
+   "name": "tabs not a tab list",
+   "ok": true,
+   "sample": [
+    "a11y: the tabs are not a tab list"
+   ]
+  },
+  {
+   "name": "meter drawn wrong",
+   "ok": true,
+   "sample": [
+    "meter «الكهرباء» not drawn at 7 / 10: 92.4 of 184.8",
+    "meter «النقل» not drawn at 8 / 10: 92.4 of 184.8",
+    "meter «المياه والصرف» not drawn at 8 / 10: 92.4 of 184.8"
+   ]
+  },
+  {
+   "name": "meter silent",
+   "ok": true,
+   "sample": [
+    "a11y: meter «النقل» does not read its value"
+   ]
+  },
+  {
+   "name": "sectors off the card",
+   "ok": true,
+   "sample": [
+    "the sectors' mean 6.75 is not the card's infrastructure 8 / 10",
+    "brief text missing: الاتصالات 9 / 10",
+    "brief text missing: الاتصالات 9 / 10"
+   ]
+  },
+  {
+   "name": "warning without its icon",
+   "ok": true,
+   "sample": [
+    "colour alone: «الكهرباء: الطلب قريب من القدرة، وانقطاعات في الصيف.» has no arrow or icon",
+    "the warning needs its icon, in amber"
+   ]
+  },
+  {
+   "name": "metro off the state panel",
+   "ok": true,
+   "sample": [
+    "the metro project does not match the state panel's 85% and 2012",
+    "brief text missing: المرحلة الأولى · 85% · تكتمل في 2012",
+    "brief text missing: المرحلة الأولى · 85% · تكتمل في 2012"
+   ]
+  },
+  {
+   "name": "grid chip wrong",
+   "ok": true,
+   "sample": [
+    "the grid expansion must show its change (+1) on the chip and the level after it (8) in its cost line",
+    "a11y: «توسعة شبكة الكهرباء» does not read its numbers",
+    "brief text missing: الكهرباء +1"
+   ]
+  },
+  {
+   "name": "action silent",
+   "ok": true,
+   "sample": [
+    "a11y: «توسعة شبكة الكهرباء» does not read its numbers",
+    "a11y: «توسعة شبكة الكهرباء» does not say «دولار»",
+    "a11y: «توسعة شبكة الكهرباء» does not say the chip's direction in words"
+   ]
+  },
+  {
+   "name": "action reads $",
+   "ok": true,
+   "sample": [
+    "a11y: «دعم الخدمات الأساسية» reads «$» (say «دولار»)",
+    "a11y: «دعم الخدمات الأساسية» does not say «دولار»"
+   ]
+  },
+  {
+   "name": "unit row reversed",
+   "ok": true,
+   "sample": [
+    "unit row 1: order must be tile, name, readiness (right to left)",
+    "unit row 2: order must be tile, name, readiness (right to left)",
+    "unit row 3: order must be tile, name, readiness (right to left)"
+   ]
+  },
+  {
+   "name": "unit silent",
+   "ok": true,
+   "sample": [
+    "a11y: unit row 2 does not read its name, command and organization as one element"
+   ]
+  },
+  {
+   "name": "unit movable here",
+   "ok": true,
+   "sample": [
+    "unit row 1 has a control (units move on the map)"
+   ]
+  },
+  {
+   "name": "amber alone",
+   "ok": true,
+   "sample": [
+    "colour alone: «مرتفع» has no arrow or icon",
+    "grievance «مرتفع»: a level carries the warning icon, not a trend arrow"
+   ]
+  },
+  {
+   "name": "red alone",
+   "ok": true,
+   "sample": [
+    "colour alone: «متوسط» has no arrow or icon"
+   ]
+  },
+  {
+   "name": "grievance with a trend arrow",
+   "ok": true,
+   "sample": [
+    "grievance «مرتفع»: a level carries the warning icon, not a trend arrow"
+   ]
+  },
+  {
+   "name": "label says the opposite",
+   "ok": true,
+   "sample": [
+    "a11y: «دعم الخدمات الأساسية» does not say the chip's direction in words"
+   ]
+  },
+  {
+   "name": "label without the chip number",
+   "ok": true,
+   "sample": [
+    "a11y: «توسعة شبكة الكهرباء» does not read its numbers"
+   ]
+  },
+  {
+   "name": "label without «دولار»",
+   "ok": true,
+   "sample": [
+    "a11y: «دعم الخدمات الأساسية» does not say «دولار»"
+   ]
+  },
+  {
+   "name": "chip arrow against its sign",
+   "ok": true,
+   "sample": [
+    "«دعم الخدمات الأساسية»: the chip's arrow does not agree with its sign",
+    "a11y: «دعم الخدمات الأساسية» does not say the chip's direction in words"
+   ]
+  },
+  {
+   "name": "unit as a button",
+   "ok": true,
+   "sample": [
+    "a11y: unit row 1 does not read its name, command and organization as one element",
+    "unit row 1 has a control (units move on the map)"
+   ]
+  },
+  {
+   "name": "unit label with the wrong command",
+   "ok": true,
+   "sample": [
+    "a11y: unit row 1 does not read its name, command and organization as one element"
+   ]
+  },
+  {
+   "name": "hidden duplicate value",
+   "ok": true,
+   "sample": [
+    "meter «المياه والصرف»: its value is not shown",
+    "brief text missing: المياه والصرف 8 / 10"
+   ]
+  },
+  {
+   "name": "share parts one colour",
+   "ok": true,
+   "sample": [
+    "share bar 1: part 2 is not the one-hue step rgba(63, 224, 208, 0.5)",
+    "share bar 2: part 2 is not the one-hue step rgba(63, 224, 208, 0.5)"
+   ]
+  },
+  {
+   "name": "share part amber",
+   "ok": true,
+   "sample": [
+    "share bar 1: part 2 is not the one-hue step rgba(63, 224, 208, 0.5)",
+    "share bar 2: part 2 is not the one-hue step rgba(63, 224, 208, 0.5)"
+   ]
+  },
+  {
+   "name": "open tab cyan",
+   "ok": true,
+   "sample": [
+    "the open tab is not teal"
+   ]
+  },
+  {
+   "name": "meter amber and thick",
+   "ok": true,
+   "sample": [
+    "meter «الكهرباء» is not a 4 pt teal bar",
+    "meter «النقل» is not a 4 pt teal bar",
+    "meter «المياه والصرف» is not a 4 pt teal bar"
+   ]
+  },
+  {
+   "name": "share bar off",
+   "ok": true,
+   "sample": [
+    "share bar 2: part 1 not drawn at 52%",
+    "share bar 2: part 2 not drawn at 30%",
+    "share bar 2: part 3 not drawn at 18%"
+   ]
+  },
+  {
+   "name": "share parts not 100",
+   "ok": true,
+   "sample": [
+    "share bar 1: its parts do not sum to 100",
+    "share bar 1: part 2 not drawn at 20%",
+    "share bar 1: «مسيحيون أقباط 10%» is not part 2 (20%)"
+   ]
+  },
+  {
+   "name": "share key wrong",
+   "ok": true,
+   "sample": [
+    "share bar 1: the keys do not match its parts"
+   ]
+  },
+  {
+   "name": "share bar left to right",
+   "ok": true,
+   "sample": [
+    "share bar 1: parts not right to left",
+    "share bar 2: parts not right to left",
+    "share bar 2: parts not right to left"
+   ]
+  },
+  {
+   "name": "cause arrow wrong",
+   "ok": true,
+   "sample": [
+    "cause «+12»: a rise must be amber with an up arrow, a fall blue with a down arrow"
+   ]
+  },
+  {
+   "name": "sign outside its number",
+   "ok": true,
+   "sample": [
+    "a sign outside its number: «+12»",
+    "brief text missing: +12"
+   ]
+  },
+  {
+   "name": "money unit (shown text)",
+   "ok": true,
+   "sample": [
+    "the grid expansion must show its change (+1) on the chip and the level after it (8) in its cost line",
+    "a11y: «توسعة شبكة الكهرباء» does not read its numbers",
+    "money unit: «0.8 مليار» (under 1 billion is written in millions)"
+   ]
+  },
+  {
+   "name": "tab string hidden",
+   "ok": true,
+   "sample": [
+    "meter «الكهرباء»: its value is not shown",
+    "brief text not fully visible: الكهرباء 7 / 10",
+    "brief text cannot be scrolled clear of the fades: الكهرباء 7 / 10"
+   ]
+  },
+  {
    "name": "coverage without the end view",
    "ok": true,
    "sample": [
-    "details: never shown clear of the fades in any view: الكهرباء · النقل · المرافق العامة",
-    "details: never shown clear of the fades in any view: تخطيط التوسعة",
-    "details: never shown clear of the fades in any view: إدارة القوات"
+    "govern: never shown clear of the fades in any view: الكهرباء · النقل · المرافق العامة",
+    "govern: never shown clear of the fades in any view: تخطيط التوسعة",
+    "govern: never shown clear of the fades in any view: إدارة القوات"
    ]
   }
  ]

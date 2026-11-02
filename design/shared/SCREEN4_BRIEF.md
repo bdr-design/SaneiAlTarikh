@@ -34,7 +34,7 @@ The owner rejected the first three variants and eleven styles, then sent two ima
   - Small outlined buttons and chips: 24 pt tall.
   - Radio rows: 26 pt. Tabs and link rows: 44. «تفاصيل» row: 36.
   - Every control keeps a 44 × 44 pt hit box.
-  - 18 pt bold is for the province name and the 3 headline numbers. Since screen 6 (2026-10-21, under the owner's delegation), it also covers a tab's own summary numbers, such as the budget's revenue, spending and deficit. They are never shown with the headline numbers.
+  - 18 pt bold is for the province name and the 3 headline numbers. Since screen 6 (2026-10-21, under the owner's delegation), it also covers a tab's own summary numbers, such as the budget's revenue, spending and deficit. They are never shown with the headline numbers. Since screen 7 (2026-11-02, under the owner's delegation), it also covers an adjuster's new value; the current value beside it is 13 pt semibold grey.
 - **Light build rules for the app** («مايثقل على اللعبة»):
   1. **No blur anywhere.** The panels are opaque (D-3).
   2. **No masks on scrolling content.** An edge fade is a 24 pt gradient overlay from the panel colour to clear, drawn above the scroll view, with hit testing off. It shows only while that edge hides content. It looks the same as the mockup's mask, which only reveals the same opaque panel colour. At the bottom, the overlay ends in a 22 pt band of solid panel colour that holds the scroll hint.
@@ -62,6 +62,27 @@ The owner rejected the first three variants and eleven styles, then sent two ima
 
 
 Visual mockups for the owner to choose from. NOT app code.
+
+## The details' other three tabs (T-007, 2026-11-02, under the owner's delegation)
+The details open on «الحكم»; `&tab=build|forces|policy` opens the others. One tab body shows at a time; the tab row is a VoiceOver tab list, and the open tab is teal (the province panel has no section colour). The approved frame, «الحكم» and the card are unchanged; the new tabs' styles live in `screen4/R/_build/province.css`, so the shared `panel.css` does not change.
+- **الإنشاءات (build):**
+  - «البنية التحتية»: four sectors, each a row of name, a 4 pt teal meter and «N / 10» (الكهرباء 7, النقل 8, المياه والصرف 8, الاتصالات 9). Their mean is the card's 8 / 10.
+  - An amber warning with its icon: «الكهرباء: الطلب قريب من القدرة، وانقطاعات في الصيف.» (the 2010 summer outages).
+  - «منشآت رئيسية»: the status table's 2 × 2 layout (المترو، المطار، الصناعة «ثقيلة وخفيفة» (Helwan is inside the card's boundaries)، المستشفيات).
+  - «مشاريع الدولة هنا»: the metro's line 3 as a link row to the state panel's projects, with the state panel's own numbers (85%, 2012).
+  - The owner's action row «توسعة شبكة الكهرباء»: 800 مليون $ · 24 شهرًا · إلى 8, its chip «↑ الكهرباء +1» (the change; the level after it is in the cost line). The sectors are the province's 4 infrastructure sub-indices (design doc, decision 54).
+- **القوات (forces):**
+  - The status table: السيطرة, الشرطة 8 / 10 (the Interior's police and riot police are this level, §5.2), منطقة طوارئ «لا» (Internal's lever), القيادة المنطقة المركزية.
+  - «التشكيلات المتمركزة»: §5.4 formations, each a row of tile, type and army, and its organization («التنظيم»): فرقة مدرعة 85%, فرقة مشاة آلية 80% (المنطقة المركزية), فرقة مشاة 95% (الحرس الجمهوري). No row is a control; each is read whole by VoiceOver.
+  - The national emergency law as a link row to its owner: «حالة الطوارئ: محدودة منذ 2010 · قانون وطني · يُغيَّر من الدولة › السياسات».
+  - A link row to the military section, and the note that armies are moved on the map (press the army, then its destination).
+- **السياسات (policy):**
+  - «المجتمع»: a share bar (teal, half teal, grey: one data hue, so no part reads as better or worse) with keyed rows and each group's grievance in words («مرتفع» also in amber with the warning icon: a level, not a trend).
+  - «أكبر أسباب الاضطرابات»: the largest terms of the unrest target (§5.2), rises in amber with an up arrow, the police's fall in blue with a down arrow, and «لماذا؟ · كل الأسباب» to the full breakdown (the card's 64 is the sum there, offset included; this list does not claim to add up).
+  - «تأييد الأحزاب هنا»: the same share bar per actor (§5.3): الحزب الوطني 52% (below its national 58%: Cairo was the opposition's centre), الإخوان 30%, أخرى 18%.
+  - The local measures as action rows: «دعم الخدمات الأساسية» (300 مليون $ مرة واحدة, «↓ الاضطرابات −4»), «تعزيز الأمن» (200 مليون $ سنويًا, its cost «↓ الشرعية −1» in amber in its title, «↓ الاضطرابات −1»: the police term of §5.2 moves 1 per level, and the police go to 9).
+  - A link row for the province's emergency region («لا · تُعلن من قسم الداخلية والسياسة»).
+- **Rules:** colour is never alone (amber, blue or red text always has an arrow or an icon; a level takes the warning icon, a change an arrow); every action, link, meter and unit row has a VoiceOver label with its numbers, «دولار» and the chip's direction in words; the tab bodies are tab panels; signs sit inside the number spans; under 1 billion in millions.
 
 ## When it appears
 The player taps a province on the main play screen. The panel opens over the play screen. The map stays visible, the tapped province is highlighted, and the rest of the HUD stays where it is.
