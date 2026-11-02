@@ -18,6 +18,11 @@
   .i-bar::after { content: ""; position: absolute; top: 0; bottom: 0; right: 0; width: var(--v); border-radius: 2px; background: var(--teal); }
   .i-row > b { display: inline-flex; align-items: center; justify-content: flex-end; gap: 2px; font-size: var(--fs-val); line-height: var(--lh-val); font-weight: 600; white-space: nowrap; }
 
+  /* a province in the unrest list: a 44 pt row that opens its card (name, bar, value with its arrow, chevron) */
+  .i-prov { display: grid; grid-template-columns: 104px 1fr 48px 16px; align-items: center; column-gap: var(--s2); height: 44px; }
+  .i-prov > span { font-size: var(--fs-sec); line-height: var(--lh-sec); font-weight: 500; color: var(--t1); white-space: nowrap; }
+  .i-prov > b { display: inline-flex; align-items: center; justify-content: flex-end; gap: 2px; font-size: var(--fs-val); line-height: var(--lh-val); font-weight: 600; white-space: nowrap; }
+  .p-cost { display: inline-flex; align-items: center; gap: 2px; margin-inline-start: var(--s1); font-size: var(--fs-sec); font-weight: 600; }
   /* a movement: its name and status, then its strength in words (with an arrow when it is rising) */
   .i-grp { display: flex; align-items: center; gap: var(--s2); height: 36px; }
   .i-str { flex: none; display: inline-flex; align-items: center; gap: 2px; font-size: var(--fs-sec); line-height: var(--lh-sec); font-weight: 600; white-space: nowrap; }

@@ -885,7 +885,7 @@ async function selftest(b) {
     ['tick hidden by the knob', d, '', '.a-cur { top: -5px !important; height: 16px !important; }', /the current tick does not show past the knob/],
     ['tick over the knob', d, '', '.a-cur { z-index: 1; }', /the knob must paint over the tick/],
     ['knob over a limit at the end', d, '&at=0', '.a-track { margin-inline: 0 !important; }', /the knob comes within 1\.5 pt of the limit «10%»/],
-    ['knob over a limit at the other end', se, '&adjust=subsidy&at=100', '.a-track { margin-inline: 0 !important; }', /the knob comes within 1\.5 pt of the limit «15»/],
+    ['knob over a limit at the other end', se, '&adjust=subsidy&at=100', '.a-track { margin-inline: 0 !important; }', /the knob comes within 1\.5 pt of the limit «17\.6»/],
     ['sign outside its number', d, '', '', /a sign outside its number/, () => { const s = document.querySelector('.a-view[data-adjust="tax"] .a-e dd .ltr'); s.textContent = '600'; s.before(document.createTextNode('+')); }],
     ['sign in an RTL run', d, '', '', /a sign not in a left-to-right number/, () => { document.querySelector('.a-view[data-adjust="tax"] .a-e dd .ltr').classList.remove('ltr'); }],
     ['effect unlabelled', d, '', '', /a11y: effect «الإيرادات» does not read/, () => { document.querySelector('.a-view[data-adjust="tax"] .a-e').removeAttribute('aria-label'); }],

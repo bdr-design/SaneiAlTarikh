@@ -346,6 +346,8 @@ module.exports = function makeChecker(cfg) {
     // the fit level is the loosest at which the fit tab's body fits (screen 6's rule), the same for every tab
     if (fit && fit.tried && fit.tried.length) { const lv = +root.dataset.rfit, firstFit = fit.tried.findIndex((x) => x[1] <= 0.5);
       if (lv !== (firstFit < 0 ? 6 : fit.tried[firstFit][0])) issues.push(`fit level ${lv} is not the loosest that fits: ${JSON.stringify(fit.tried)}`); }
+    // the fit tab (the overview) shows whole, without scrolling, on every phone (screens 5 and 6's rule); measured now
+    if (tab === SCREEN.fitTab && bd.scrollHeight - bd.clientHeight > 0.5) issues.push(`${tab} needs scrolling: ${(bd.scrollHeight - bd.clientHeight).toFixed(1)} pt over`);
     { const over = bd.scrollHeight - bd.clientHeight, wantTop = bd.scrollTop > 0.5, wantBot = bd.scrollTop < over - 0.5;
       if ((root.dataset.ftop === '1') !== wantTop || (root.dataset.fbot === '1') !== wantBot) issues.push(`fades ${root.dataset.ftop}/${root.dataset.fbot} do not match the scroll state (top ${bd.scrollTop}, over ${over.toFixed(1)})`);
       if (/_end/.test(view) && over > 0.5 && bd.scrollTop < over - 0.5) issues.push('the _end render is not scrolled to the end'); }
@@ -399,6 +401,7 @@ module.exports = function makeChecker(cfg) {
     { const wt = (sel, want, skip) => qa('.sheet ' + sel).filter((e) => !(skip && e.matches(skip))).forEach((e) => { const cs = getComputedStyle(e);
         Object.entries(want).forEach(([k, v]) => { if (cs[k] !== v) issues.push(`white touch off: ${sel} ${k} ${cs[k]} (want ${v})`); }); });
       wt('.r-chip', { borderTopColor: TOK.wLine, color: TOK.t1 }, '.e-bad, .p-bad');
+      wt('.r-tile', { color: TOK.t1 });
       wt('.s-sg.on', { backgroundColor: TOK.t1, color: TOK.dark }, '[data-states="1"] .s-wait-1 *');
       wt('.r-cap', { borderTopColor: TOK.wLine, color: TOK.t1 }); }
     // ---------- 8d. words and numbers ----------
@@ -420,11 +423,26 @@ module.exports = function makeChecker(cfg) {
           if (r1.getBoundingClientRect().right > r2.getBoundingClientRect().left + 0.5) issues.push(`a sign drawn right of its number: «${s.trim()}»`); } } }
     // colour never alone: amber, blue or red data text sits beside an arrow or an icon (or is a word that says it)
     qa('.sheet .r-body *').filter((e) => [...e.childNodes].some((n) => n.nodeType === 3 && n.textContent.trim()) && [TOK.amber, TOK.blue, TOK.red].includes(getComputedStyle(e).color) && !e.closest('.r-btn, .r-why'))
-      .forEach((e) => { const host = e.closest('.r-kpi') || e.closest('b, dd, p, .r-chip, .r-at, .p-warn, .s-word') || e; if (!host.querySelector('svg') && !host.closest('.s-word')) issues.push(`colour alone: «${T(e)}» has no arrow or icon`); });
+      .forEach((e) => { const col = getComputedStyle(e).color, kpi = e.closest('.r-kpi');
+        if (kpi && e.closest('.r-kv')) { const ic = kpi.querySelector('.r-kl svg'); if (!ic || getComputedStyle(ic).color !== col) issues.push(`colour alone: «${T(e)}» (its label's icon is not in its colour)`); return; }
+        const host = (kpi && (e.closest('.r-kr') || e.closest('.r-kl'))) || e.closest('b, dd, p, .r-chip, .r-at, .p-warn, .s-word') || e;
+        if (!host.querySelector('svg') && !host.closest('.s-word')) issues.push(`colour alone: «${T(e)}» has no arrow or icon`); });
+    // «لماذا؟» names its subject: the headline it explains
+    qa('.sheet .r-kpi').forEach((k) => { const w = k.querySelector('.r-why'), kl = T(k.querySelector('.r-kl'));
+      if (w && !((w.getAttribute('aria-label') || '').startsWith('لماذا؟ ') && (w.getAttribute('aria-label') || '').includes(kl))) issues.push(`a11y: «لماذا؟» does not name its subject «${kl}»`); });
+    // bars are data: teal, filling from the right (RTL)
+    qa('.sheet .i-bar, .sheet .p-meter').forEach((b) => { const a = getComputedStyle(b, '::after');
+      if (a.backgroundColor !== TOK.teal || a.right !== '0px') issues.push(`a bar not teal from the right: ${a.backgroundColor} right ${a.right}`); });
+    qa('.sheet .n-pr i, .sheet .s-prog i').forEach((b) => { const cs = getComputedStyle(b); if (cs.backgroundColor !== TOK.teal || Math.abs(b.getBoundingClientRect().right - b.parentElement.getBoundingClientRect().right) > 0.6) issues.push('a progress bar not teal from the right'); });
     // VoiceOver: every action and link row reads whole, with the numbers it shows and «دولار», never «$»
-    qa('.sheet .r-act, .sheet .r-link').forEach((a) => { const al = a.getAttribute('aria-label') || '', at = a.querySelector('.r-at'), want = nums(T(at));
+    qa('.sheet .r-act, .sheet .r-link').forEach((a) => { const al = a.getAttribute('aria-label') || '', at = a.querySelector('.r-at'), want = nums(at.innerText).concat(a.querySelector('.r-chip') ? nums(a.querySelector('.r-chip').innerText) : []);
       if (!al || want.some((x) => !nums(al).map(Math.abs).includes(Math.abs(x)))) issues.push(`a11y: «${T(at && at.querySelector('b'))}» does not read its numbers`);
-      if (al.includes('$')) issues.push(`a11y: «${T(at && at.querySelector('b'))}» reads «$» (say «دولار»)`); });
+      if (al.includes('$')) issues.push(`a11y: «${T(at && at.querySelector('b'))}» reads «$» (say «دولار»)`);
+      if (at && at.innerText.includes('$') && !al.includes('دولار')) issues.push(`a11y: «${T(at.querySelector('b'))}» does not say «دولار»`);
+      const chip = a.querySelector('.r-chip'), use = chip && chip.querySelector('use');
+      if (use && /#t-(up|down)/.test(use.getAttribute('href'))) { const up = use.getAttribute('href') === '#t-up', sg = nums(chip.innerText).slice(-1)[0];
+        if (sg !== undefined && sg !== 0 && (sg > 0) !== up) issues.push(`«${T(at.querySelector('b'))}»: the chip's arrow does not agree with its sign`);
+        if (!(up ? /ترفع|ترتفع|تزيد|يرفع|يزيد|يرتفع/ : /تخفض|تنخفض|تقل|يخفض|ينخفض|يقل/).test(al)) issues.push(`a11y: «${T(at.querySelector('b'))}» does not say the chip's direction in words`); } });
     // a VoiceOver label only on an element that can carry a name (a role, a control, a landmark): VoiceOver skips the
     // label of a plain element and reads its pieces instead
     qa('.sheet [aria-label]').filter((e) => !e.getAttribute('role') && !['BUTTON', 'SECTION', 'NAV', 'DL', 'A', 'IMG'].includes(e.tagName) && !e.classList.contains('tap'))
@@ -496,7 +514,7 @@ module.exports = function makeChecker(cfg) {
 
       return { issues, typeSeen, texts, clearNow, fit: { top: window.__fit, sheet: fit, sheetPos: window.__sheetpos, body }, map: m, hiddenLabels,
         sheet: R(sr), hits: taps.map((t) => ({ l: t.label, x0: +t.hit.x0.toFixed(1), x1: +t.hit.x1.toFixed(1), y0: +t.hit.y0.toFixed(1), y1: +t.hit.y1.toFixed(1) })) };
-    }, { d, TOK, BRIEF, HEAD, b3, view, HUDSEL_REST, DATA: cfg.DATA || {}, SCREEN: { src: cfg.screenChecks || '', tabs: TABS }, DOCK: cfg.dock });
+    }, { d, TOK, BRIEF, HEAD, b3, view, HUDSEL_REST, DATA: cfg.DATA || {}, SCREEN: { src: cfg.screenChecks || '', tabs: TABS, fitTab: cfg.fitTab || TABS[0] }, DOCK: cfg.dock });
   }
 
   async function contrast(p, texts) {
@@ -604,7 +622,26 @@ module.exports = function makeChecker(cfg) {
       ['an image in the sheet', d, '', '', /an image in the sheet/, () => { const i = document.createElement('img'); i.src = '../../shared/flags/eg.svg'; i.style.cssText = 'width:17px;height:17px'; [...document.querySelectorAll('.r-body')].find((e) => e.getClientRects().length).prepend(i); }],
       ['close not round', d, '', '.r-x { width: 40px !important; }', /close button is not round/],
       ['label without a role', d, '', '', /a11y: a label VoiceOver may skip/, () => { const b = [...document.querySelectorAll('.r-body')].find((e) => e.getClientRects().length); const s = document.createElement('div'); s.className = 's-note'; s.setAttribute('aria-label', 'اختبار'); s.textContent = 'اختبار'; b.prepend(s); }],
-      ['brief text hidden', d, '', '', /brief text not fully visible/, () => { const b = [...document.querySelectorAll('.r-body')].find((e) => e.getClientRects().length).querySelector('h3'); if (b) b.style.opacity = '0'; }],
+      ['brief text hidden', d, '', '', /brief text not fully visible/, () => { document.querySelector('.r-kv b').style.opacity = '0'; }],
+      ['overview scrolls', se, '', '.r-body > .r-acts, .r-body > .r-act { margin-top: 400px !important; }', new RegExp(TABS[0] + ' needs scrolling')],
+      ['18 pt misuse', d, '', '.r-sc dd { font-size: 18px !important; font-weight: 700 !important; }', /18 pt is for/],
+      ['control height', d, '', '.r-tab { height: 40px !important; }', /control height 40.00 for \.r-tab/],
+      ['gap', d, '', '.r-kpi { display: flex !important; gap: 6px !important; }', /gap 6 on/],
+      ['icon size', d, '', '.r-tab svg.i { width: 19px !important; height: 19px !important; }', /icon size 19x19/],
+      ['text overlap', d, '', '.r-sc dd { margin-inline-end: -60px !important; }', /text overlap/],
+      ['clipped text', d, '', '.r-kpis { margin-inline-start: -40px !important; }', /clipped text \(sides\)/],
+      ['dock underline missing', d, '', '.dock-item.on::after { content: none !important; }', /dock underline missing/],
+      ['closed dock item coloured', d, '', '.dock-item:not(.on) span { color: var(--sec) !important; }', /dock item \d \(closed\) not neutral/],
+      ['identity line colour', d, '', '[data-sec] .r-in::before { background: var(--teal) !important; }', /panel top line/],
+      ['closed tabs like the open one', d, '', '[data-sec] .r-tab { color: var(--t1) !important; }', /closed tab not in the secondary grey/],
+      ['emblem size', d, '', '.s-emb { width: 28px !important; }', /size 28.0x32.0 for \.s-emb/],
+      ['chip not white', d, '', '.r-chip { border-color: var(--teal) !important; color: var(--teal) !important; }', /white touch off: \.r-chip/],
+      ['tile icons cyan', d, '', '[data-sec] .r-tile { color: rgb(127, 233, 255) !important; }', /white touch off: \.r-tile/],
+      ['faint text', d, '', '.r-sc dt { opacity: .35 !important; }', /^contrast [0-3](\.\d+)? for/],
+      ['why without its subject', d, '', '', /a11y: «لماذا؟» does not name its subject/, () => { document.querySelectorAll('.r-why')[1].removeAttribute('aria-label'); }],
+      ['amber value without its icon', d, '', '', /colour alone: .* \(its label's icon is not in its colour\)/, () => { const b = document.querySelector('.r-kv b'); b.classList.add('r-amber'); }],
+      ['chip arrow against its sign', d, '', '', /the chip's arrow does not agree with its sign|does not say the chip's direction/, () => { const u = document.querySelector('.r-act .r-chip use'); if (u) u.setAttribute('href', u.getAttribute('href') === '#t-up' ? '#t-down' : '#t-up'); }],
+      ['% before its number', d, '', '', /% shown before its number/, () => { document.querySelector('.r-sc dt').textContent = 'نسبة 20%'; }],
     ];
     const cases = generic.concat(cfg.cases ? cfg.cases(d, se) : []);
     const results = [];

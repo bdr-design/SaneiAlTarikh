@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-02T20:41:54.931Z",
+ "ranAt": "2026-11-02T21:25:35.567Z",
  "inputs": {
   "files": [
    "index.html",
@@ -19,7 +19,7 @@
    "header_cairo.jpg",
    "map_overlay_cairo.svg"
   ],
-  "sha1": "64962658c4eb0205c99bc5fe851416405498989f"
+  "sha1": "e3e020d1220a7b29f0c9592f6a5bf2a0f12e1225"
  },
  "cleanIssues": {
   "i16promax": [],
@@ -487,7 +487,7 @@
    "name": "two tab bodies shown",
    "ok": true,
    "sample": [
-    "scroll hint not centred in the clear strip under the fade: y 395.0..413.0 (strip 273.1..295.1)",
+    "scroll hint not centred in the clear strip under the fade: y 395.0..413.0 (strip 264.3..286.3)",
     "tab bodies shown: build, forces (want only build)"
    ]
   },
@@ -526,8 +526,8 @@
    "ok": true,
    "sample": [
     "the sectors' mean 6.75 is not the card's infrastructure 8 / 10",
-    "brief text missing: 9 / 10",
-    "brief text missing: 9 / 10"
+    "brief text missing: الاتصالات 9 / 10",
+    "brief text missing: الاتصالات 9 / 10"
    ]
   },
   {
@@ -543,7 +543,7 @@
    "ok": true,
    "sample": [
     "the metro project does not match the state panel's 85% and 2012",
-    "a11y: «الخط الثالث لمترو القاهرة» does not read its numbers",
+    "brief text missing: المرحلة الأولى · 85% · تكتمل في 2012",
     "brief text missing: المرحلة الأولى · 85% · تكتمل في 2012"
    ]
   },
@@ -551,23 +551,26 @@
    "name": "grid chip wrong",
    "ok": true,
    "sample": [
-    "the grid expansion's chip does not show the electricity level after it (8)",
-    "brief text missing: الكهرباء 8",
-    "brief text missing: الكهرباء 8"
+    "the grid expansion must show its change (+1) on the chip and the level after it (8) in its cost line",
+    "a11y: «توسعة شبكة الكهرباء» does not read its numbers",
+    "brief text missing: الكهرباء +1"
    ]
   },
   {
    "name": "action silent",
    "ok": true,
    "sample": [
-    "a11y: «توسعة شبكة الكهرباء» does not read its numbers"
+    "a11y: «توسعة شبكة الكهرباء» does not read its numbers",
+    "a11y: «توسعة شبكة الكهرباء» does not say «دولار»",
+    "a11y: «توسعة شبكة الكهرباء» does not say the chip's direction in words"
    ]
   },
   {
    "name": "action reads $",
    "ok": true,
    "sample": [
-    "a11y: «دعم الخدمات الأساسية» reads «$» (say «دولار»)"
+    "a11y: «دعم الخدمات الأساسية» reads «$» (say «دولار»)",
+    "a11y: «دعم الخدمات الأساسية» does not say «دولار»"
    ]
   },
   {
@@ -583,7 +586,7 @@
    "name": "unit silent",
    "ok": true,
    "sample": [
-    "a11y: unit row 2 does not read its name and readiness"
+    "a11y: unit row 2 does not read its name, command and organization as one element"
    ]
   },
   {
@@ -597,17 +600,115 @@
    "name": "amber alone",
    "ok": true,
    "sample": [
-    "colour alone: «شاملة منذ 1981» has no arrow or icon",
-    "colour alone: «1981» has no arrow or icon"
+    "colour alone: «مرتفع» has no arrow or icon",
+    "grievance «مرتفع»: a level carries the warning icon, not a trend arrow"
+   ]
+  },
+  {
+   "name": "red alone",
+   "ok": true,
+   "sample": [
+    "colour alone: «متوسط» has no arrow or icon"
+   ]
+  },
+  {
+   "name": "grievance with a trend arrow",
+   "ok": true,
+   "sample": [
+    "grievance «مرتفع»: a level carries the warning icon, not a trend arrow"
+   ]
+  },
+  {
+   "name": "label says the opposite",
+   "ok": true,
+   "sample": [
+    "a11y: «دعم الخدمات الأساسية» does not say the chip's direction in words"
+   ]
+  },
+  {
+   "name": "label without the chip number",
+   "ok": true,
+   "sample": [
+    "a11y: «توسعة شبكة الكهرباء» does not read its numbers"
+   ]
+  },
+  {
+   "name": "label without «دولار»",
+   "ok": true,
+   "sample": [
+    "a11y: «دعم الخدمات الأساسية» does not say «دولار»"
+   ]
+  },
+  {
+   "name": "chip arrow against its sign",
+   "ok": true,
+   "sample": [
+    "«دعم الخدمات الأساسية»: the chip's arrow does not agree with its sign",
+    "a11y: «دعم الخدمات الأساسية» does not say the chip's direction in words"
+   ]
+  },
+  {
+   "name": "unit as a button",
+   "ok": true,
+   "sample": [
+    "a11y: unit row 1 does not read its name, command and organization as one element",
+    "unit row 1 has a control (units move on the map)"
+   ]
+  },
+  {
+   "name": "unit label with the wrong command",
+   "ok": true,
+   "sample": [
+    "a11y: unit row 1 does not read its name, command and organization as one element"
+   ]
+  },
+  {
+   "name": "hidden duplicate value",
+   "ok": true,
+   "sample": [
+    "meter «المياه والصرف»: its value is not shown",
+    "brief text missing: المياه والصرف 8 / 10"
+   ]
+  },
+  {
+   "name": "share parts one colour",
+   "ok": true,
+   "sample": [
+    "share bar 1: part 2 is not the one-hue step rgba(63, 224, 208, 0.5)",
+    "share bar 2: part 2 is not the one-hue step rgba(63, 224, 208, 0.5)"
+   ]
+  },
+  {
+   "name": "share part amber",
+   "ok": true,
+   "sample": [
+    "share bar 1: part 2 is not the one-hue step rgba(63, 224, 208, 0.5)",
+    "share bar 2: part 2 is not the one-hue step rgba(63, 224, 208, 0.5)"
+   ]
+  },
+  {
+   "name": "open tab cyan",
+   "ok": true,
+   "sample": [
+    "the open tab is not teal"
+   ]
+  },
+  {
+   "name": "meter amber and thick",
+   "ok": true,
+   "sample": [
+    "meter «الكهرباء» is not a 4 pt teal bar",
+    "meter «النقل» is not a 4 pt teal bar",
+    "meter «المياه والصرف» is not a 4 pt teal bar"
    ]
   },
   {
    "name": "share bar off",
-   "ok": true,
+   "ok": false,
    "sample": [
-    "share bar 2: part 1 not drawn at 62%",
-    "share bar 2: part 2 not drawn at 25%",
-    "share bar 2: part 3 not drawn at 13%"
+    "share bar 2: part 1 not drawn at 52%",
+    "share bar 2: part 2 not drawn at 30%",
+    "share bar 2: part 3 not drawn at 18%"
    ]
   },
   {
@@ -654,18 +755,15 @@
    "name": "money unit (shown text)",
    "ok": true,
    "sample": [
+    "the grid expansion must show its change (+1) on the chip and the level after it (8) in its cost line",
     "a11y: «توسعة شبكة الكهرباء» does not read its numbers",
-    "money unit: «0.8 مليار» (under 1 billion is written in millions)",
-    "brief text missing: 800 مليون $ · 24 شهرًا"
+    "money unit: «0.8 مليار» (under 1 billion is written in millions)"
    ]
   },
   {
    "name": "tab string hidden",
-   "ok": true,
-   "sample": [
-    "brief text not fully visible: الكهرباء",
-    "brief text cannot be scrolled clear of the fades: الكهرباء"
-   ]
+   "ok": false,
+   "sample": []
   },
   {
    "name": "coverage without the end view",

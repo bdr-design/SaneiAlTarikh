@@ -583,6 +583,11 @@
   .i-bar::after { content: ""; position: absolute; top: 0; bottom: 0; right: 0; width: var(--v); border-radius: 2px; background: var(--teal); }
   .i-row > b { display: inline-flex; align-items: center; justify-content: flex-end; gap: 2px; font-size: var(--fs-val); line-height: var(--lh-val); font-weight: 600; white-space: nowrap; }
 
+  /* a province in the unrest list: a 44 pt row that opens its card (name, bar, value with its arrow, chevron) */
+  .i-prov { display: grid; grid-template-columns: 104px 1fr 48px 16px; align-items: center; column-gap: var(--s2); height: 44px; }
+  .i-prov > span { font-size: var(--fs-sec); line-height: var(--lh-sec); font-weight: 500; color: var(--t1); white-space: nowrap; }
+  .i-prov > b { display: inline-flex; align-items: center; justify-content: flex-end; gap: 2px; font-size: var(--fs-val); line-height: var(--lh-val); font-weight: 600; white-space: nowrap; }
+  .p-cost { display: inline-flex; align-items: center; gap: 2px; margin-inline-start: var(--s1); font-size: var(--fs-sec); font-weight: 600; }
   /* a movement: its name and status, then its strength in words (with an arrow when it is rising) */
   .i-grp { display: flex; align-items: center; gap: var(--s2); height: 36px; }
   .i-str { flex: none; display: inline-flex; align-items: center; gap: 2px; font-size: var(--fs-sec); line-height: var(--lh-sec); font-weight: 600; white-space: nowrap; }
@@ -809,7 +814,7 @@
         <button class="r-tab tap" role="tab" data-for="groups"><svg class="i"><use href="#i-people"/></svg><span>الحركات</span></button>
       </nav>
 
-      <!-- نظرة عامة: the three headline numbers, the status table, the three worst provinces, one action -->
+      <!-- نظرة عامة: the three headline numbers, the three worst provinces, one action (it fits whole on every phone) -->
       <div class="r-body" data-tab="overview">
         <div class="r-kpis">
           <div class="r-kpi">
@@ -821,33 +826,26 @@
           <div class="r-kpi">
             <span class="r-kl"><svg class="i r-amber"><use href="#i-flame"/></svg>الاضطرابات</span>
             <span class="r-kv"><b class="ltr r-amber">45</b><span>/ <span class="ltr">100</span></span></span>
-            <span class="r-kr r-amber"><svg class="r-arr" aria-hidden="true"><use href="#t-up"/></svg><span class="ltr">+2</span> شهريًا</span>
+            <span class="r-kr r-amber"><svg class="r-arr" aria-hidden="true"><use href="#t-up"/></svg><span class="ltr">+1</span> شهريًا</span>
             <button class="r-why tap" aria-label="لماذا؟ الاضطرابات">لماذا؟</button>
           </div>
           <div class="r-kpi">
-            <span class="r-kl"><svg class="i"><use href="#i-warn"/></svg>فوق <span class="ltr">60</span></span>
+            <span class="r-kl"><svg class="i"><use href="#i-warn"/></svg>اضطراب فوق <span class="ltr">60</span></span>
             <span class="r-kv"><b class="ltr">3</b><span>محافظات</span></span>
             <span class="r-kr">من <span class="ltr">29</span></span>
-            <button class="r-why tap" aria-label="لماذا؟ المحافظات فوق 60">لماذا؟</button>
+            <button class="r-why tap" aria-label="لماذا؟ اضطراب فوق 60">لماذا؟</button>
           </div>
         </div>
 
-        <dl class="r-st">
-          <div class="r-sc"><dt>الحزب الحاكم</dt><dd>الحزب الوطني</dd></div>
-          <div class="r-sc"><dt>الطوارئ</dt><dd>شاملة</dd></div>
-          <div class="r-sc"><dt>التظاهر</dt><dd>محظور</dd></div>
-          <div class="r-sc"><dt>الأحزاب</dt><dd>بترخيص</dd></div>
-        </dl>
-
         <section class="r-sec">
           <h3>الأكثر اضطرابًا</h3>
-          <div class="i-row" aria-label="القاهرة: 64 من 100، تزيد 2 شهريًا"><span>القاهرة</span><i class="i-bar" style="--v: 64%"></i><b class="r-amber"><svg class="r-arr" aria-hidden="true"><use href="#t-up"/></svg><span class="ltr">64</span></b></div>
-          <div class="i-row" aria-label="السويس: 63 من 100، تزيد 3 شهريًا"><span>السويس</span><i class="i-bar" style="--v: 63%"></i><b class="r-amber"><svg class="r-arr" aria-hidden="true"><use href="#t-up"/></svg><span class="ltr">63</span></b></div>
-          <div class="i-row" aria-label="الإسكندرية: 61 من 100، تزيد 2 شهريًا"><span>الإسكندرية</span><i class="i-bar" style="--v: 61%"></i><b class="r-amber"><svg class="r-arr" aria-hidden="true"><use href="#t-up"/></svg><span class="ltr">61</span></b></div>
+          <div class="i-row" role="img" aria-label="القاهرة: 64 من 100، ترتفع نقطتين شهريًا"><span>القاهرة</span><i class="i-bar" style="--v: 64%"></i><b class="r-amber"><svg class="r-arr" aria-hidden="true"><use href="#t-up"/></svg><span class="ltr">64</span></b></div>
+          <div class="i-row" role="img" aria-label="السويس: 63 من 100، ترتفع 3 نقاط شهريًا"><span>السويس</span><i class="i-bar" style="--v: 63%"></i><b class="r-amber"><svg class="r-arr" aria-hidden="true"><use href="#t-up"/></svg><span class="ltr">63</span></b></div>
+          <div class="i-row" role="img" aria-label="الإسكندرية: 61 من 100، ترتفع نقطتين شهريًا"><span>الإسكندرية</span><i class="i-bar" style="--v: 61%"></i><b class="r-amber"><svg class="r-arr" aria-hidden="true"><use href="#t-up"/></svg><span class="ltr">61</span></b></div>
         </section>
 
         <div class="r-acts">
-          <button class="r-act tap r-first" aria-label="فتح حوار وطني: 20 من رأس المال السياسي، مرة في السنة. تخفض الاضطرابات 3 خلال 3 أشهر">
+          <button class="r-act tap r-first" aria-label="فتح حوار وطني: 20 من رأس المال السياسي، مرة في السنة. تخفض الاضطرابات 3 نقاط، أفضل">
             <span class="r-tile"><svg class="i"><use href="#i-people"/></svg></span>
             <span class="r-at"><b>فتح حوار وطني</b><span><span class="s-cost">الكلفة: <span class="ltr">20</span><svg class="i"><use href="#i-capital"/></svg></span> · مرة في السنة</span></span>
             <span class="r-chip"><svg class="r-arr" aria-hidden="true"><use href="#t-down"/></svg>الاضطرابات <span class="ltr">−3</span></span>
@@ -855,56 +853,65 @@
         </div>
       </div>
 
-      <!-- الاضطرابات: every province worst first (8 shown, the rest summed up), each opening its card; the emergency
-           regions, this panel's own lever, and the national law shown read-only -->
+      <!-- الاضطرابات: every province worst first (8 shown, the rest summed up), each a 44 pt row that opens its card; the
+           emergency regions, this panel's own lever, chosen per province; the national law as a link to its owner -->
       <div class="r-body" data-tab="unrest">
         <section class="r-sec">
           <h3>المحافظات، الأعلى أولًا</h3>
-          <div class="i-row" aria-label="القاهرة: 64 من 100، تزيد 2 شهريًا"><span>القاهرة</span><i class="i-bar" style="--v: 64%"></i><b class="r-amber"><svg class="r-arr" aria-hidden="true"><use href="#t-up"/></svg><span class="ltr">64</span></b></div>
-          <div class="i-row" aria-label="السويس: 63 من 100، تزيد 3 شهريًا"><span>السويس</span><i class="i-bar" style="--v: 63%"></i><b class="r-amber"><svg class="r-arr" aria-hidden="true"><use href="#t-up"/></svg><span class="ltr">63</span></b></div>
-          <div class="i-row" aria-label="الإسكندرية: 61 من 100، تزيد 2 شهريًا"><span>الإسكندرية</span><i class="i-bar" style="--v: 61%"></i><b class="r-amber"><svg class="r-arr" aria-hidden="true"><use href="#t-up"/></svg><span class="ltr">61</span></b></div>
-          <div class="i-row" aria-label="الغربية: 58 من 100، تزيد 2 شهريًا"><span>الغربية</span><i class="i-bar" style="--v: 58%"></i><b class="r-amber"><svg class="r-arr" aria-hidden="true"><use href="#t-up"/></svg><span class="ltr">58</span></b></div>
-          <div class="i-row" aria-label="الجيزة: 55 من 100، تزيد 1 شهريًا"><span>الجيزة</span><i class="i-bar" style="--v: 55%"></i><b class="r-amber"><svg class="r-arr" aria-hidden="true"><use href="#t-up"/></svg><span class="ltr">55</span></b></div>
-          <div class="i-row" aria-label="بورسعيد: 52 من 100، تزيد 1 شهريًا"><span>بورسعيد</span><i class="i-bar" style="--v: 52%"></i><b class="r-amber"><svg class="r-arr" aria-hidden="true"><use href="#t-up"/></svg><span class="ltr">52</span></b></div>
-          <div class="i-row" aria-label="الإسماعيلية: 50 من 100، دون تغير"><span>الإسماعيلية</span><i class="i-bar" style="--v: 50%"></i><b><svg class="r-arr" aria-hidden="true"><use href="#t-flat"/></svg><span class="ltr">50</span></b></div>
-          <div class="i-row" aria-label="شمال سيناء: 49 من 100، دون تغير"><span>شمال سيناء</span><i class="i-bar" style="--v: 49%"></i><b><svg class="r-arr" aria-hidden="true"><use href="#t-flat"/></svg><span class="ltr">49</span></b></div>
-          <p class="s-note"><span class="ltr">21</span> محافظة أخرى بين <span class="ltr">32</span> و<span class="ltr">48</span>. اضغط محافظة لفتح بطاقتها.</p>
+          <div class="i-prov tap" role="button" tabindex="0" aria-label="القاهرة: 64 من 100، ترتفع نقطتين شهريًا. يفتح بطاقتها"><span>القاهرة</span><i class="i-bar" style="--v: 64%"></i><b class="r-amber"><svg class="r-arr" aria-hidden="true"><use href="#t-up"/></svg><span class="ltr">64</span></b><svg class="i r-chev"><use href="#i-chev"/></svg></div>
+          <div class="i-prov tap" role="button" tabindex="0" aria-label="السويس: 63 من 100، ترتفع 3 نقاط شهريًا. يفتح بطاقتها"><span>السويس</span><i class="i-bar" style="--v: 63%"></i><b class="r-amber"><svg class="r-arr" aria-hidden="true"><use href="#t-up"/></svg><span class="ltr">63</span></b><svg class="i r-chev"><use href="#i-chev"/></svg></div>
+          <div class="i-prov tap" role="button" tabindex="0" aria-label="الإسكندرية: 61 من 100، ترتفع نقطتين شهريًا. يفتح بطاقتها"><span>الإسكندرية</span><i class="i-bar" style="--v: 61%"></i><b class="r-amber"><svg class="r-arr" aria-hidden="true"><use href="#t-up"/></svg><span class="ltr">61</span></b><svg class="i r-chev"><use href="#i-chev"/></svg></div>
+          <div class="i-prov tap" role="button" tabindex="0" aria-label="الغربية: 58 من 100، ترتفع نقطتين شهريًا. يفتح بطاقتها"><span>الغربية</span><i class="i-bar" style="--v: 58%"></i><b class="r-amber"><svg class="r-arr" aria-hidden="true"><use href="#t-up"/></svg><span class="ltr">58</span></b><svg class="i r-chev"><use href="#i-chev"/></svg></div>
+          <div class="i-prov tap" role="button" tabindex="0" aria-label="الجيزة: 55 من 100، ترتفع نقطة شهريًا. يفتح بطاقتها"><span>الجيزة</span><i class="i-bar" style="--v: 55%"></i><b class="r-amber"><svg class="r-arr" aria-hidden="true"><use href="#t-up"/></svg><span class="ltr">55</span></b><svg class="i r-chev"><use href="#i-chev"/></svg></div>
+          <div class="i-prov tap" role="button" tabindex="0" aria-label="بورسعيد: 52 من 100، ترتفع نقطة شهريًا. يفتح بطاقتها"><span>بورسعيد</span><i class="i-bar" style="--v: 52%"></i><b class="r-amber"><svg class="r-arr" aria-hidden="true"><use href="#t-up"/></svg><span class="ltr">52</span></b><svg class="i r-chev"><use href="#i-chev"/></svg></div>
+          <div class="i-prov tap" role="button" tabindex="0" aria-label="الإسماعيلية: 50 من 100، دون تغير. يفتح بطاقتها"><span>الإسماعيلية</span><i class="i-bar" style="--v: 50%"></i><b><svg class="r-arr" aria-hidden="true"><use href="#t-flat"/></svg><span class="ltr">50</span></b><svg class="i r-chev"><use href="#i-chev"/></svg></div>
+          <div class="i-prov tap" role="button" tabindex="0" aria-label="شمال سيناء: 49 من 100، دون تغير. يفتح بطاقتها"><span>شمال سيناء</span><i class="i-bar" style="--v: 49%"></i><b><svg class="r-arr" aria-hidden="true"><use href="#t-flat"/></svg><span class="ltr">49</span></b><svg class="i r-chev"><use href="#i-chev"/></svg></div>
+          <p class="s-note"><span class="ltr">21</span> محافظة أخرى بين <span class="ltr">32</span> و<span class="ltr">48</span>.</p>
         </section>
         <section class="r-sec">
           <h3>مناطق الطوارئ</h3>
-          <p class="s-note">لا توجد مناطق طوارئ، وتُعلن لكل محافظة على حدة. حالة الطوارئ الوطنية شاملة منذ <span class="ltr">1981</span>، وتُغيَّر من الدولة › السياسات.</p>
+          <p class="s-note">لا توجد مناطق طوارئ. تُعلن لكل محافظة على حدة: اختر المحافظة بعد الضغط.</p>
         </section>
-        <button class="r-act tap r-first" aria-label="إعلان منطقة طوارئ: 15 من رأس المال السياسي لكل محافظة، الشرعية تنخفض 2. تخفض الاضطرابات 6 خلال شهر">
+        <button class="r-act tap r-first" aria-label="إعلان منطقة طوارئ: 15 من رأس المال السياسي لكل محافظة، تنخفض الشرعية 2. تخفض الاضطرابات 6 نقاط في المحافظة، أفضل">
           <span class="r-tile"><svg class="i"><use href="#i-shield"/></svg></span>
-          <span class="r-at"><b>إعلان منطقة طوارئ</b><span><span class="s-cost">الكلفة: <span class="ltr">15</span><svg class="i"><use href="#i-capital"/></svg></span> · الشرعية <span class="ltr">−2</span></span></span>
+          <span class="r-at"><b>منطقة طوارئ <span class="r-amber p-cost"><svg class="r-arr" aria-hidden="true"><use href="#t-down"/></svg>الشرعية <span class="ltr">−2</span></span></b><span><span class="s-cost">الكلفة: <span class="ltr">15</span><svg class="i"><use href="#i-capital"/></svg></span> لكل محافظة</span></span>
           <span class="r-chip"><svg class="r-arr" aria-hidden="true"><use href="#t-down"/></svg>الاضطرابات <span class="ltr">−6</span></span>
         </button>
+        <div class="r-link tap" role="button" tabindex="0" aria-label="حالة الطوارئ: محدودة منذ 2010، قانون وطني. يفتح الدولة › السياسات">
+          <span class="r-tile"><svg class="i"><use href="#i-doc"/></svg></span>
+          <span class="r-at"><b>حالة الطوارئ: محدودة منذ <span class="ltr">2010</span></b><span>قانون وطني · يُغيَّر من الدولة › السياسات</span></span>
+          <svg class="i r-chev"><use href="#i-chev"/></svg>
+        </div>
       </div>
 
-      <!-- الأحزاب والانتخابات: the People's Assembly (518 seats), party support in the country, the elections, and the
-           parties law (the state panel's) shown read-only -->
+      <!-- الأحزاب والانتخابات: the People's Assembly (518 seats), support per actor in the country, the elections, and the
+           parties law (the state panel's) as a link -->
       <div class="r-body" data-tab="parties">
         <section class="r-sec">
           <h3>مجلس الشعب · <span class="ltr">518</span> مقعدًا</h3>
-          <div class="p-split" role="img" aria-label="الحزب الوطني 420، مستقلون 69، المعارضة 19، معيّنون 10"><i style="--w: 81.08%"></i><i style="--w: 13.32%"></i><i style="--w: 3.67%"></i><i style="--w: 1.93%"></i></div>
+          <div class="p-split" role="img" aria-label="مقاعد مجلس الشعب: الحزب الوطني 420، مستقلون 73، المعارضة 15، معيّنون 10"><i style="--w: 81.08%"></i><i style="--w: 14.09%"></i><i style="--w: 2.90%"></i><i style="--w: 1.93%"></i></div>
           <div class="p-grp"><span><i class="p-key"></i>الحزب الوطني</span><b class="ltr">420</b></div>
-          <div class="p-grp"><span><i class="p-key p-k2"></i>مستقلون</span><b class="ltr">69</b></div>
-          <div class="p-grp"><span><i class="p-key p-k3"></i>المعارضة: الوفد <span class="ltr">6</span> · التجمع <span class="ltr">5</span> · أخرى <span class="ltr">8</span></span><b class="ltr">19</b></div>
+          <div class="p-grp"><span><i class="p-key p-k2"></i>مستقلون</span><b class="ltr">73</b></div>
+          <div class="p-grp"><span><i class="p-key p-k3"></i>المعارضة: الوفد <span class="ltr">6</span> · التجمع <span class="ltr">5</span> · أخرى <span class="ltr">4</span></span><b class="ltr">15</b></div>
           <div class="p-grp"><span><i class="p-key p-k4"></i>معيّنون بقرار الرئيس</span><b class="ltr">10</b></div>
         </section>
         <section class="r-sec">
           <h3>التأييد في البلد</h3>
-          <div class="p-split" role="img" aria-label="الحزب الوطني 58%، مستقلون 27%، أخرى 15%"><i style="--w: 58%"></i><i style="--w: 27%"></i><i style="--w: 15%"></i></div>
-          <div class="p-grp"><span><i class="p-key"></i>الحزب الوطني <span class="ltr">58%</span></span><span><i class="p-key p-k2"></i>مستقلون <span class="ltr">27%</span></span><span><i class="p-key p-k3"></i>أخرى <span class="ltr">15%</span></span></div>
+          <div class="p-split" role="img" aria-label="التأييد: الحزب الوطني 58%، الإخوان 20%، أخرى 22%"><i style="--w: 58%"></i><i style="--w: 20%"></i><i style="--w: 22%"></i></div>
+          <div class="p-grp"><span><i class="p-key"></i>الحزب الوطني <span class="ltr">58%</span></span><span><i class="p-key p-k2"></i>الإخوان <span class="ltr">20%</span></span><span><i class="p-key p-k3"></i>أخرى <span class="ltr">22%</span></span></div>
+          <p class="s-note">مرشحو الإخوان يترشحون مستقلين لأن الجماعة محظورة.</p>
         </section>
-        <dl class="r-st">
-          <div class="r-sc"><dt>القادمة</dt><dd>رئاسية · سبتمبر <span class="ltr">2011</span></dd></div>
-          <div class="r-sc"><dt>مجلس الشعب</dt><dd><span class="ltr">2015</span></dd></div>
-          <div class="r-sc"><dt>مجلس الشورى</dt><dd>نصفه في <span class="ltr">2013</span></dd></div>
-          <div class="r-sc"><dt>النظام</dt><dd>فردي بجولتين</dd></div>
-        </dl>
-        <p class="s-note">نصف المقاعد على الأقل للعمال والفلاحين، و<span class="ltr">64</span> مقعدًا للنساء.</p>
-        <div class="r-link tap" role="button" tabindex="0" aria-label="قانون الأحزاب: بترخيص. يُغيَّر من الدولة › السياسات">
+        <section class="r-sec">
+          <h3>الانتخابات</h3>
+          <dl class="r-st">
+            <div class="r-sc"><dt>القادمة</dt><dd>رئاسية · سبتمبر <span class="ltr">2011</span></dd></div>
+            <div class="r-sc"><dt>مجلس الشعب</dt><dd><span class="ltr">2015</span></dd></div>
+            <div class="r-sc"><dt>مجلس الشورى</dt><dd>نصفه في <span class="ltr">2013</span></dd></div>
+            <div class="r-sc"><dt>النظام</dt><dd>فردي بجولتين</dd></div>
+          </dl>
+          <p class="s-note">نصف المقاعد على الأقل للعمال والفلاحين، و<span class="ltr">64</span> مقعدًا للنساء.</p>
+        </section>
+        <div class="r-link tap" role="button" tabindex="0" aria-label="قانون الأحزاب: بترخيص. يفتح الدولة › السياسات">
           <span class="r-tile"><svg class="i"><use href="#i-doc"/></svg></span>
           <span class="r-at"><b>قانون الأحزاب: بترخيص</b><span>يُغيَّر من الدولة › السياسات</span></span>
           <svg class="i r-chev"><use href="#i-chev"/></svg>
@@ -915,22 +922,22 @@
            groups with their satisfaction; a movement can be legalised as a party on the same ID -->
       <div class="r-body" data-tab="groups">
         <section class="r-sec">
-          <h3>حركات المعارضة</h3>
-          <div class="i-grp" aria-label="الإخوان المسلمون: محظورة، شبكة واسعة. القوة عالية"><span class="r-at"><b>الإخوان المسلمون</b><span>محظورة · شبكة واسعة</span></span><b class="i-str">عالية</b></div>
-          <div class="i-grp" aria-label="الجمعية الوطنية للتغيير: غير مرخصة. القوة متوسطة"><span class="r-at"><b>الجمعية الوطنية للتغيير</b><span>غير مرخصة · حول البرادعي</span></span><b class="i-str">متوسطة</b></div>
-          <div class="i-grp" aria-label="حركة 6 أبريل: شبابية. القوة متوسطة، في صعود"><span class="r-at"><b>حركة <span class="ltr">6</span> أبريل</b><span>شبابية · على الإنترنت والشارع</span></span><b class="i-str r-amber"><svg class="r-arr" aria-hidden="true"><use href="#t-up"/></svg>متوسطة</b></div>
-          <div class="i-grp" aria-label="كلنا خالد سعيد: صفحة على الإنترنت. القوة متوسطة، في صعود"><span class="r-at"><b>كلنا خالد سعيد</b><span>صفحة على الإنترنت</span></span><b class="i-str r-amber"><svg class="r-arr" aria-hidden="true"><use href="#t-up"/></svg>متوسطة</b></div>
-          <div class="i-grp" aria-label="كفاية: غير مرخصة. القوة منخفضة"><span class="r-at"><b>كفاية</b><span>غير مرخصة</span></span><b class="i-str">منخفضة</b></div>
+          <h3>حركات المعارضة · القوة</h3>
+          <div class="i-grp" role="img" aria-label="الإخوان المسلمون: محظورة، شبكة واسعة. القوة عالية"><span class="r-at"><b>الإخوان المسلمون</b><span>محظورة · شبكة واسعة</span></span><b class="i-str">عالية</b></div>
+          <div class="i-grp" role="img" aria-label="الجمعية الوطنية للتغيير: غير مرخصة، حول البرادعي. القوة متوسطة"><span class="r-at"><b>الجمعية الوطنية للتغيير</b><span>غير مرخصة · حول البرادعي</span></span><b class="i-str">متوسطة</b></div>
+          <div class="i-grp" role="img" aria-label="حركة 6 أبريل: شبابية، على الإنترنت والشارع. القوة متوسطة، في صعود"><span class="r-at"><b>حركة <span class="ltr">6</span> أبريل</b><span>شبابية · على الإنترنت والشارع</span></span><b class="i-str r-amber"><svg class="r-arr" aria-hidden="true"><use href="#t-up"/></svg>متوسطة</b></div>
+          <div class="i-grp" role="img" aria-label="كلنا خالد سعيد: صفحة على الإنترنت. القوة متوسطة، في صعود"><span class="r-at"><b>كلنا خالد سعيد</b><span>صفحة على الإنترنت</span></span><b class="i-str r-amber"><svg class="r-arr" aria-hidden="true"><use href="#t-up"/></svg>متوسطة</b></div>
+          <div class="i-grp" role="img" aria-label="كفاية: غير مرخصة. القوة منخفضة"><span class="r-at"><b>كفاية</b><span>غير مرخصة</span></span><b class="i-str">منخفضة</b></div>
           <p class="s-note">تظهر حركة جديدة إذا تجاوز اضطراب محافظة <span class="ltr">60</span> والحريات مقيدة.</p>
         </section>
         <section class="r-sec">
           <h3>جماعات المصالح · الرضا</h3>
-          <div class="i-row" aria-label="الجيش: 72 من 100، دون تغير"><span>الجيش</span><i class="i-bar i-sat" style="--v: 72%"></i><b><svg class="r-arr" aria-hidden="true"><use href="#t-flat"/></svg><span class="ltr">72</span></b></div>
-          <div class="i-row" aria-label="رجال الأعمال: 68 من 100، دون تغير"><span>رجال الأعمال</span><i class="i-bar i-sat" style="--v: 68%"></i><b><svg class="r-arr" aria-hidden="true"><use href="#t-flat"/></svg><span class="ltr">68</span></b></div>
-          <div class="i-row" aria-label="الأزهر: 60 من 100، دون تغير"><span>الأزهر</span><i class="i-bar i-sat" style="--v: 60%"></i><b><svg class="r-arr" aria-hidden="true"><use href="#t-flat"/></svg><span class="ltr">60</span></b></div>
-          <div class="i-row" aria-label="الكنيسة القبطية: 55 من 100، تنخفض 1 شهريًا"><span>الكنيسة القبطية</span><i class="i-bar i-sat" style="--v: 55%"></i><b class="r-amber"><svg class="r-arr" aria-hidden="true"><use href="#t-down"/></svg><span class="ltr">55</span></b></div>
-          <div class="i-row" aria-label="القضاة: 47 من 100، دون تغير"><span>القضاة</span><i class="i-bar i-sat" style="--v: 47%"></i><b><svg class="r-arr" aria-hidden="true"><use href="#t-flat"/></svg><span class="ltr">47</span></b></div>
-          <div class="i-row" aria-label="العمال: 41 من 100، تنخفض 2 شهريًا"><span>العمال</span><i class="i-bar i-sat" style="--v: 41%"></i><b class="r-amber"><svg class="r-arr" aria-hidden="true"><use href="#t-down"/></svg><span class="ltr">41</span></b></div>
+          <div class="i-row" role="img" aria-label="الجيش: 72 من 100، دون تغير"><span>الجيش</span><i class="i-bar" style="--v: 72%"></i><b><svg class="r-arr" aria-hidden="true"><use href="#t-flat"/></svg><span class="ltr">72</span></b></div>
+          <div class="i-row" role="img" aria-label="رجال الأعمال: 68 من 100، دون تغير"><span>رجال الأعمال</span><i class="i-bar" style="--v: 68%"></i><b><svg class="r-arr" aria-hidden="true"><use href="#t-flat"/></svg><span class="ltr">68</span></b></div>
+          <div class="i-row" role="img" aria-label="الأزهر: 60 من 100، دون تغير"><span>الأزهر</span><i class="i-bar" style="--v: 60%"></i><b><svg class="r-arr" aria-hidden="true"><use href="#t-flat"/></svg><span class="ltr">60</span></b></div>
+          <div class="i-row" role="img" aria-label="الكنيسة القبطية: 55 من 100، تنخفض نقطة شهريًا"><span>الكنيسة القبطية</span><i class="i-bar" style="--v: 55%"></i><b class="r-amber"><svg class="r-arr" aria-hidden="true"><use href="#t-down"/></svg><span class="ltr">55</span></b></div>
+          <div class="i-row" role="img" aria-label="القضاة: 47 من 100، دون تغير"><span>القضاة</span><i class="i-bar" style="--v: 47%"></i><b><svg class="r-arr" aria-hidden="true"><use href="#t-flat"/></svg><span class="ltr">47</span></b></div>
+          <div class="i-row" role="img" aria-label="العمال: 41 من 100، تنخفض نقطتين شهريًا"><span>العمال</span><i class="i-bar" style="--v: 41%"></i><b class="r-amber"><svg class="r-arr" aria-hidden="true"><use href="#t-down"/></svg><span class="ltr">41</span></b></div>
         </section>
       </div>
       <span class="r-hint" aria-hidden="true"><svg class="i"><use href="#i-chev"/></svg></span>
