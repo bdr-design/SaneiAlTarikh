@@ -368,14 +368,18 @@ module.exports = function makeChecker(cfg) {
         texts.filter((x) => x.sheet && !x.faded).forEach((x) => { if (inter(x.line, box(hb))) issues.push(`scroll hint over text: "${x.t}"`); });
       } }
     // the tabs: a tab list right to left in the brief's order, exactly the open one selected
-    { const tl = q('.r-tabs'), tabs = qa('.r-tab');
+    // (a sheet with one body and no tab row, such as a decision or a dialog: SCREEN.noTabs; it has no tab list at all)
+    if (SCREEN.noTabs) { if (q('.r-tabs') || document.querySelectorAll('.r-tab').length) issues.push('a tab row on a sheet that has one body'); }
+    else { const tl = q('.r-tabs'), tabs = qa('.r-tab');
       if (!tl || tl.getAttribute('role') !== 'tablist' || [...document.querySelectorAll('.r-tab')].some((e) => e.getAttribute('role') !== 'tab')) issues.push('a11y: the tabs are not a tab list');
       if (tabs.map((e) => e.dataset.for).join(',') !== SCREEN.tabs.join(',')) issues.push(`tabs must be ${SCREEN.tabs.join(', ')} in that order`);
       for (let k = 1; k < tabs.length; k++) if (!(tabs[k].getBoundingClientRect().right <= tabs[k - 1].getBoundingClientRect().left + 0.5)) issues.push(`tab ${k + 1} is not left of tab ${k}`);
       const ons = qa('.r-tab.on'); if (ons.length !== 1 || ons[0].dataset.for !== tab || ons[0].getAttribute('aria-selected') !== 'true' || qa('.r-tab[aria-selected="true"]').length !== 1) issues.push('exactly the open tab must be selected'); }
     // ---------- 8c. section identity: the open dock item, the top line, the emblem and the open tab, never data ----------
     { const on = qa('.dock-item.on'), drawn = (cs) => cs.content !== 'none' && cs.content !== 'normal' && cs.display !== 'none';
-      if (visible(q('.dock'))) {
+      // a sheet that belongs to no section (a decision, a dialog: DOCK null) marks no dock item
+      if (visible(q('.dock')) && !DOCK) { if (on.length) issues.push('a dock item is marked open under a sheet of no section'); }
+      else if (visible(q('.dock'))) {
         if (on.length !== 1 || on[0].textContent.trim() !== DOCK || on[0].getAttribute('aria-current') !== 'page') issues.push(`the open section «${DOCK}» is not marked in the dock`);
         else {
           const ul = getComputedStyle(on[0], '::after');
@@ -531,7 +535,7 @@ module.exports = function makeChecker(cfg) {
 
       return { issues, typeSeen, texts, clearNow, fit: { top: window.__fit, sheet: fit, sheetPos: window.__sheetpos, body }, map: m, hiddenLabels,
         sheet: R(sr), hits: taps.map((t) => ({ l: t.label, x0: +t.hit.x0.toFixed(1), x1: +t.hit.x1.toFixed(1), y0: +t.hit.y0.toFixed(1), y1: +t.hit.y1.toFixed(1) })) };
-    }, { d, TOK, BRIEF, HEAD, b3, view, HUDSEL_REST, DATA: cfg.DATA || {}, SCREEN: { src: cfg.screenChecks || '', tabs: TABS, fitTab: cfg.fitTab || TABS[0] }, DOCK: cfg.dock });
+    }, { d, TOK, BRIEF, HEAD, b3, view, HUDSEL_REST, DATA: cfg.DATA || {}, SCREEN: { src: cfg.screenChecks || '', tabs: TABS, fitTab: cfg.fitTab === false ? null : (cfg.fitTab || TABS[0]), noTabs: !!cfg.noTabs }, DOCK: cfg.dock || null });
   }
 
   async function contrast(p, texts) {
@@ -664,7 +668,20 @@ module.exports = function makeChecker(cfg) {
     ];
     // a panel whose first tab has no headline numbers or status table (المزيد) leaves out the plants aimed at them and
     // brings its own
-    const cases = generic.filter((c) => !(cfg.skipGeneric || []).includes(c[0])).concat(cfg.cases ? cfg.cases(d, se) : []);
+    // a sheet with no tab row and no section (a decision, a dialog) leaves out the plants aimed at them and gets the same
+    // defects planted on its own elements
+    const noTab = cfg.noTabs ? ['font weight', 'two tab bodies', 'two tabs selected', 'tabs not a tab list', 'tabs reversed', 'fades wrong', 'hint chevron missing', 'hint over the content', 'control height', 'icon size', 'open tab neutral', 'closed tabs like the open one', 'section colour on a rule'] : [];
+    const noDock = (cfg.dock ? [] : ['dock item not marked', 'dock underline missing', 'closed dock item coloured']).concat(cfg.fitTab === false ? ['overview scrolls', 'fit not the loosest'] : []);   // (fitTab false: no body must fit whole)
+    const alt = [].concat(cfg.noTabs ? [
+      ['font weight (no tabs)', d, '', '.r-sub { font-weight: 700 !important; }', /font weight 11\.5\/700/],
+      ['a tab row on a one-body sheet', d, '', '', /a tab row on a sheet that has one body/, () => { const n = document.createElement('nav'); n.className = 'r-tabs'; n.setAttribute('role', 'tablist'); document.querySelector('.r-in').insertBefore(n, document.querySelector('.r-body')); }],
+      ['control height (no tabs)', d, '', '.r-x { height: 40px !important; }', /control height 40.00 for \.r-x/],
+      ['icon size (no tabs)', d, '', '.r-x svg.i { width: 19px !important; height: 19px !important; }', /icon size 19x19/],
+      ['fades wrong (no tabs)', se, '', '', /fades .* do not match the scroll state/, () => { document.documentElement.dataset.fbot = document.documentElement.dataset.fbot === '1' ? '0' : '1'; }],
+    ] : [], cfg.dock ? [] : [
+      ['a dock item marked open', d, '', '', /a dock item is marked open under a sheet of no section/, () => { const e = document.querySelectorAll('.dock-item')[1]; e.classList.add('on'); }],
+    ]);
+    const cases = generic.filter((c) => !(cfg.skipGeneric || []).concat(noTab, noDock).includes(c[0])).concat(alt, cfg.cases ? cfg.cases(d, se) : []);
     const results = [];
     for (const [name, x, extra, css, re, js] of cases) {
       const p = await open(ctxs[x.id], PAGE + qs(x) + extra);

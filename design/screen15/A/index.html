@@ -3,11 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>الأحداث والإشعارات</title>
+<title>قرار</title>
 <script>
   /* Device frame from the URL (points): ?w=844&h=390&side=47&bottom=21&cutout=notch|island|none
      Optional: &speedmenu=1 renders the speed menu open, &hit=1 draws the 44 pt hit boxes,
-     &state=event|center: the decision modal (default) or the notification centre (screen 15).
+     &tab=event opens that tab of the panel (default event), &scroll=end scrolls the open tab
+     to its end and &scroll=<pt> to that offset; &states=1 draws the later states.
      Everything below is laid out with flexbox from these CSS variables; nothing is tied to 844x390. */
   (function () {
     var q = new URLSearchParams(location.search);
@@ -26,6 +27,10 @@
     r.dataset.home = BOTTOM > 0 ? 'yes' : 'no';
     if (q.get('hit') === '1') r.classList.add('show-hit');
     if (q.get('speedmenu') === '1') r.classList.add('menu-open');
+    r.dataset.tab = ['event'].indexOf(q.get('tab')) >= 0 ? q.get('tab') : 'event';
+    r.dataset.sec = 'more';
+    r.dataset.states = q.get('states') === '1' ? '1' : '0';
+    window.__scroll = q.get('scroll') === 'end' ? 'end' : (isFinite(parseFloat(q.get('scroll'))) ? parseFloat(q.get('scroll')) : 0);
     window.__dev = { W: W, H: H, SIDE: SIDE, BOTTOM: BOTTOM, CUT: CUT };
   })();
 </script>
@@ -271,189 +276,303 @@
   .frost::after { background: rgb(12, 20, 28) !important; }
 </style>
 <style>
-  /* ================= Screen 4, variant A: the province panel as a tabbed side sheet =================
-     Right side sheet (RTL start), width clamp(42% of the safe width, 340, 440) pt, from 8 pt under the
-     top row down to 8 pt above the section dock. The whole HUD (top row, left stack, dock) keeps the
-     exact place and size it has on the play screen B3; nothing in the HUD moves or hides.
-     Top part fixed: header, status, the 3 headline numbers. Then a 32 pt segmented tab row that shows one
-     group of details at a time (السياسة / المجتمع / الاقتصاد / الأمن), and the action card pinned at the
-     bottom of the sheet. The card shows as many whole 44 pt action rows as fit and scrolls the rest
-     inside itself (17 Pro Max: 2 of 3, SE: 1 of 3); the details above it never scroll.
-     Fit levels, measured by fitSheet() (not by device name), each step only to show more whole action rows:
-       0: every gap 8 pt
-       1: header -> status -> numbers 4 pt
-       2: also tab row -> details -> actions 4 pt (long status values on the 17 Pro Max)
-       3: also the sheet's top and bottom padding 4 pt
-       4: also the header on one 32 pt line (name, capital chip, flag and country) and the detail rows
-          without a gap (16 pt line pitch); only where nothing else shows a whole action row
-     The numbers -> tab row gap stays 8 pt at every level: the 44 pt hit boxes of both need it. */
-  :root { --title: 18px; --lh-title: 22px; --sheet-w: 340px; --sheet-b: 0px; --g-blk: var(--s2); --g-det: var(--s2); --pad-sh: var(--s2); }
-  [data-sheetfit="1"] { --g-blk: var(--s1); }
-  [data-sheetfit="2"] { --g-blk: var(--s1); --g-det: var(--s1); }
-  [data-sheetfit="3"], [data-sheetfit="4"] { --g-blk: var(--s1); --g-det: var(--s1); --pad-sh: var(--s1); }
-  [data-sheetfit="4"] .sh-head { height: var(--ctl); }
-  [data-sheetfit="4"] .ttl { flex-direction: row; align-items: center; gap: var(--s2); }
-  [data-sheetfit="4"] .pane { gap: 0; }
+  /* ================= Screen 4, variant R: the province panel after the owner's two reference images =================
+     (2026-10-20; go-ahead: «شوف المناسب اللي مايثقل على اللعبة وسوه»; then «لابد التركيز يكون الخريطة هي مركز الاساس»).
+     Two steps, so the map stays the centre:
+       1. the card (?view=card, the default when a province is tapped): header, the 3 headline numbers, the status
+          table and «تفاصيل المحافظة», 320 pt wide at the top right, as tall as its content, ending at least 8 pt above
+          the section dock; the whole HUD, dock included, keeps its B3 place;
+       2. «تفاصيل المحافظة» opens the full-height sheet with the tabs (?view=govern, the owner's 1st image).
+     The full-height sheet: a side sheet from the right, from 8 pt under the
+     top row down to the dock line. Width clamp(43% of the safe width, 340, 380) pt; where the section dock would just miss
+     the room beside it, the sheet narrows (to 330 at the least) so the dock still fits (15/16: 335). The dock moves to
+     the left end of its line, 4 pt in, 8 pt clear of the sheet (11, 14, 15/16, 16 Pro, 17 Pro Max); on the two 375 pt
+     phones (SE, 13 mini) it cannot fit, so it hides while the sheet is open and comes back when the sheet closes.
+     Every other HUD element keeps its B3 place and size.
+     Header: satellite image, flag, name + «العاصمة» chip, «مصر · محافظة», close. Then one of two views:
+       overview (?view=overview, the owner's 2nd image): 3 headline numbers, status table, 2 actions, «تفاصيل المحافظة»;
+       details (?view=govern, the owner's 1st image): 4 tabs, the governance tab (governor, priority, tax, links,
+       a proposed decision). The details body scrolls inside the sheet; a 24 pt fade marks an edge that hides content
+       (at the bottom it ends above the scroll hint's 22 pt strip).
+     Fit levels (shared with the other panels built on this file). Here: the card takes the loosest level at which it
+     ends 8 pt above the dock (0, or up to 2 on the 13 mini, so its header stays 56 pt); the details always use level 0,
+     so the header keeps the card's 56 pt and the body scrolls. Levels 3-6 serve full-height overviews (the state panel):
+       0: as designed (17 Pro Max)          1: block gaps 8 -> 4
+       2: also the numbers' padding and the status rows 28 -> 24, body bottom padding 4
+       3: also the header 56 -> 48 and the numbers' inner gaps 0
+       4: also the status rows 22             5: also the header 44
+       6: also the status rows 18 and no padding under the numbers
+     Panel sizes (the owner's reference; colours and type stay on the approved tokens):
+       cards (action / link / decision rows) radius 10, inner tiles, chips and small buttons radius 6 (concentric);
+       small outlined buttons and chips 24 pt tall, radio rows 26, tabs 44, action rows 44, «تفاصيل» row 36;
+       every one keeps a 44 x 44 pt hit box. Opaque (D-3). Values are illustrative. */
+  :root { --sheet-w: 358px; --sheet-b: 0px; --card: rgb(16, 27, 38); --tile: rgb(9, 16, 24); --title: 18px; --lh-title: 22px;
+    --rh: 56px; --rgap: 8px; --rkt: 8px; --rkb: 4px; --rkl: 16px; --rkm: 4px; --rkr: 2px; --rst: 28px; --rpb: 8px; }
+  [data-rfit="1"] { --rgap: 4px; }
+  [data-rfit="2"] { --rgap: 4px; --rkt: 4px; --rst: 24px; --rpb: 4px; }
+  [data-rfit="3"] { --rgap: 4px; --rkt: 4px; --rst: 24px; --rpb: 4px; --rh: 48px; --rkl: 14px; --rkm: 0px; --rkr: 0px; }
+  [data-rfit="4"] { --rgap: 4px; --rkt: 4px; --rst: 22px; --rpb: 4px; --rh: 48px; --rkl: 14px; --rkm: 0px; --rkr: 0px; }
+  [data-rfit="5"] { --rgap: 4px; --rkt: 4px; --rst: 22px; --rpb: 4px; --rh: 44px; --rkl: 14px; --rkm: 0px; --rkr: 0px; }
+  [data-rfit="6"] { --rgap: 4px; --rkt: 4px; --rkb: 0px; --rst: 18px; --rpb: 4px; --rh: 44px; --rkl: 14px; --rkm: 0px; --rkr: 0px; }
+  [data-view="govern"] .r-ov, [data-view="card"] .r-gv { display: none !important; }
+  [data-view="card"] .sheet { bottom: auto; }
+  [data-view="card"] .r-in { position: relative; }          /* the card's height follows its content */
+  [data-view="card"] .r-body { flex: none !important; padding-bottom: var(--s2); }   /* 8 pt under «تفاصيل» at every level */
+  /* 4 pt in from the safe edge: the end item «المزيد» is 31 pt wide and its 44 pt hit box must stay out of the side inset */
+  [data-dock="left"] .dock { align-self: flex-end; margin-left: var(--s1); }
+  [data-dock="hidden"] .dock { display: none; }
 
-  .sheet { --r: var(--r-bar); position: absolute; right: 0; top: calc(var(--row) + var(--s2)); bottom: var(--sheet-b); width: var(--sheet-w);
-    display: flex; flex-direction: column; padding: var(--pad-sh) var(--pad-bar); z-index: 2; }
+  .sheet { --r: var(--r-bar); position: absolute; right: 0; top: calc(var(--row) + var(--s2)); bottom: var(--sheet-b); width: var(--sheet-w); z-index: 2;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, .45); }
+  .r-in { position: absolute; inset: 0; display: flex; flex-direction: column; overflow: hidden; border-radius: calc(var(--r) - 1px); }
+  .r-in > * { flex: none; }
+  .r-dot { color: var(--t2); }
+  .r-teal { color: var(--teal) !important; } .r-blue { color: var(--blue) !important; } .r-amber { color: var(--amber) !important; }
 
-  /* header: name + capital chip, the country line under it, close at the RTL end */
-  .sh-head { flex: none; height: 36px; display: flex; align-items: center; gap: var(--s2); }
-  .ttl { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; }
-  .nmrow { height: var(--lh-title); display: flex; align-items: center; gap: var(--s2); }
-  .pname { font-size: var(--title); font-weight: 700; line-height: var(--lh-title); color: var(--t1); white-space: nowrap; }
-  .capital { height: 20px; display: flex; align-items: center; gap: var(--s1); padding-inline: var(--s1) var(--s2); border-radius: 10px;
-    background: rgba(127, 233, 255, 0.08); box-shadow: inset 0 0 0 1px rgba(127, 233, 255, 0.28); }
-  .capital svg.i { color: var(--cyan); }
-  .capital span { font-size: var(--fs-label); font-weight: 700; line-height: var(--lh-label); color: var(--t1); white-space: nowrap; }
-  .ctry { height: var(--lh-sec); display: flex; align-items: center; gap: var(--s1); }
-  .pflag { width: 16px; height: 12px; border-radius: 2px; overflow: hidden; flex: none; box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.22); }
-  .pflag img { width: 100%; height: 100%; display: block; }
-  .ctry span { font-size: var(--fs-sec); font-weight: 500; line-height: var(--lh-sec); color: var(--t2); white-space: nowrap; }
-  .xbtn { flex: none; width: var(--ctl); height: var(--ctl); border-radius: var(--r-ctl); display: grid; place-items: center; color: var(--t1);
-    background: rgba(234, 242, 247, 0.06); box-shadow: inset 0 0 0 1px rgba(127, 233, 255, 0.10); }
+  /* header: satellite image, flag, name + capital chip, country, close */
+  /* the hairline under the header is drawn inside it (inset shadow), so the header's full height centres the 44 pt hit boxes */
+  .r-hd { position: relative; height: var(--rh); display: flex; align-items: center; gap: var(--s2); padding-inline: var(--s3); box-shadow: inset 0 -1px 0 var(--hair);
+    background: linear-gradient(to left, rgba(12, 20, 28, .62) 0%, rgba(12, 20, 28, .2) 55%, rgba(12, 20, 28, 0) 75%),
+                linear-gradient(180deg, rgba(12, 20, 28, .15) 0%, rgba(12, 20, 28, .75) 100%),
+                url("header_cairo.jpg") center / cover no-repeat; }
+  .r-flag { width: 40px; height: 30px; border-radius: 4px; overflow: hidden; flex: none; box-shadow: 0 0 0 1px rgba(255, 255, 255, .28), 0 2px 6px rgba(0, 0, 0, .45); }
+  .r-flag img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .r-tt { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+  .r-row { display: flex; align-items: center; gap: var(--s2); }
+  .r-name { font-size: var(--title); line-height: var(--lh-title); font-weight: 700; text-shadow: 0 1px 3px rgba(0, 0, 0, .6); }
+  .r-cap { display: inline-flex; align-items: center; gap: var(--s1); height: 20px; padding-inline: var(--s2); border-radius: 10px; border: 1px solid var(--teal);
+    font-size: var(--fs-label); line-height: var(--lh-label); font-weight: 700; color: var(--teal); background: rgba(12, 20, 28, .7); }
+  .r-cap svg.i { width: var(--glyph); height: var(--glyph); }
+  .r-sub { font-size: var(--fs-sec); line-height: var(--lh-sec); font-weight: 500; color: var(--t1); text-shadow: 0 1px 3px rgba(0, 0, 0, .8); white-space: nowrap; }
+  .r-sub .r-dot { color: var(--t1); }
+  .r-x { margin-inline-start: auto; width: var(--ctl); height: var(--ctl); border-radius: 50%; display: grid; place-items: center; color: var(--t1);
+    background: rgba(6, 11, 16, .85); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .18), 0 2px 6px rgba(0, 0, 0, .4); }
 
-  /* status: the engine's five fields in one strip (label over value, like the indicator strip) */
-  .status { flex: none; margin-top: var(--g-blk); display: grid; grid-template-columns: auto 1px auto 1px auto 1px auto; justify-content: space-between; align-items: center; }
-  .sf { display: flex; flex-direction: column; }
-  .sf dt { font-size: var(--fs-label); font-weight: 500; line-height: var(--lh-label); color: var(--t2); white-space: nowrap; }
-  .sf dd { font-size: var(--fs-val); font-weight: 600; line-height: var(--lh-val); color: var(--t1); white-space: nowrap; }
-  .vr { width: 1px; height: 20px; background: var(--hair); }
-  /* status fit 1 (measured): long values, as in disputed or occupied provinces (sovereign, administrator and
-     controller all different, a long claims list), do not fit one strip: two rows of label + value pairs */
-  [data-status="1"] .status { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); justify-content: stretch; column-gap: var(--s3); row-gap: var(--s1); }
-  [data-status="1"] .vr { display: none; }
-  [data-status="1"] .sf { height: var(--lh-val); flex-direction: row; align-items: baseline; gap: var(--s2); min-width: 0; }   /* 16 pt rows: baseline alignment of 10 and 13 pt text would add 1 pt per row */
-  [data-status="1"] .sf dt { line-height: var(--lh-val); }
+  /* scrolling body + edge fades */
+  .r-body { flex: 1 1 auto !important; min-height: 0; overflow-y: auto; scrollbar-width: none; display: flex; flex-direction: column; gap: var(--rgap); padding: 0 var(--s3) var(--rpb); }
+  .r-body::-webkit-scrollbar { display: none; }
+  .r-body > * { flex: none; }
+  /* while the bottom edge hides content, a small chevron marks it: the player sees there is more below, wherever the
+     edge happens to fall (between two sections too). The chevron gets a clear 22 pt strip at the bottom (its 18 pt and
+     4 pt under it), so it never sits on content: the 24 pt fade ends above the strip. The mask only changes, never the
+     layout, so nothing moves when the player reaches the end. */
+  [data-fbot="1"] .r-body { -webkit-mask-image: linear-gradient(180deg, #000 calc(100% - 46px), transparent calc(100% - 22px)); mask-image: linear-gradient(180deg, #000 calc(100% - 46px), transparent calc(100% - 22px)); }
+  [data-ftop="1"] .r-body { -webkit-mask-image: linear-gradient(180deg, transparent, #000 24px); mask-image: linear-gradient(180deg, transparent, #000 24px); }
+  .r-hint { position: absolute; left: 50%; bottom: 4px; width: 28px; height: 18px; margin-left: -14px; display: none; place-items: center; z-index: 2; pointer-events: none;
+    color: var(--t2); border-radius: 9px; background: rgb(12, 20, 28); box-shadow: inset 0 0 0 1px var(--hair); }
+  .r-hint svg.i { width: 16px; height: 16px; transform: rotate(-90deg); }
+  [data-fbot="1"] .r-hint { display: grid; }
+  [data-ftop="1"][data-fbot="1"] .r-body { -webkit-mask-image: linear-gradient(180deg, transparent, #000 24px, #000 calc(100% - 46px), transparent calc(100% - 22px));
+    mask-image: linear-gradient(180deg, transparent, #000 24px, #000 calc(100% - 46px), transparent calc(100% - 22px)); }
 
-  /* headline numbers: three 44 pt tiles; the whole tile is the «لماذا؟» link to the why-sheet */
-  .kpis { flex: none; margin-top: var(--g-blk); display: flex; gap: var(--s2); }
-  .kpi { flex: 1 1 0; min-width: 0; height: var(--dock-h); border-radius: var(--r-ctl); padding-inline: var(--s2); display: flex; flex-direction: column; justify-content: center;
-    background: rgba(234, 242, 247, 0.05); box-shadow: inset 0 0 0 1px rgba(127, 233, 255, 0.10); text-align: right; }
-  .k-l { height: var(--lh-label); display: flex; align-items: center; gap: var(--s1); }
-  .k-v { height: var(--lh-val); display: flex; align-items: baseline; gap: var(--s2); }
-  .k-v .why { margin-inline-start: auto; font-size: var(--fs-sec); font-weight: 600; line-height: var(--lh-val); color: var(--cyan); white-space: nowrap; }
-  .trend.bad { color: var(--amber); }
+  /* overview: three headline numbers */
+  .r-kpis { display: grid; grid-template-columns: repeat(3, 1fr); padding-block: var(--rkt) var(--rkb); border-bottom: 1px solid var(--hair); }
+  .r-kpi { display: flex; flex-direction: column; align-items: flex-start; padding-inline: var(--s2); min-width: 0; }
+  .r-kpi:first-child { padding-inline-start: 0; }
+  .r-kpi:last-child { padding-inline-end: 0; }
+  .r-kpi + .r-kpi { border-inline-start: 1px solid var(--hair); }
+  .r-kl { display: flex; align-items: center; gap: var(--s1); height: var(--rkl); font-size: var(--fs-sec); line-height: var(--lh-sec); font-weight: 500; color: var(--t1); white-space: nowrap; }
+  .r-kl svg.i { width: var(--ico-stat); height: var(--ico-stat); }
+  .r-kv { display: flex; align-items: baseline; gap: var(--s1); margin-top: var(--rkm); height: 22px; white-space: nowrap; }
+  .r-kv b { font-size: var(--title); line-height: var(--lh-title); font-weight: 700; }
+  .r-kv > span { font-size: var(--fs-sec); line-height: var(--lh-sec); font-weight: 500; color: var(--t2); }
+  .r-kr { margin-top: var(--rkr); font-size: var(--fs-sec); line-height: var(--lh-sec); font-weight: 500; color: var(--t1); white-space: nowrap; }
+  .r-why { margin-top: var(--rkr); height: 14px; font-size: var(--fs-sec); line-height: 14px; font-weight: 500; color: var(--cyan); }
 
-  /* segmented tab row, 32 pt */
-  .seg { flex: none; margin-top: var(--s2); height: var(--ctl); display: flex; border-radius: var(--r-ctl);
-    background: rgba(234, 242, 247, 0.05); box-shadow: inset 0 0 0 1px rgba(127, 233, 255, 0.10); }
-  .sg { flex: 1 1 0; min-width: 0; height: var(--ctl); border-radius: var(--r-ctl); display: grid; place-items: center; color: var(--t2); }
-  .sg span { font-size: var(--fs-val); font-weight: 600; line-height: var(--lh-val); white-space: nowrap; }
-  .sg[aria-selected="true"] { color: var(--cyan); background: rgba(127, 233, 255, 0.14); box-shadow: inset 0 0 0 1px rgba(127, 233, 255, 0.50); }
+  /* overview: status table */
+  .r-st { display: grid; grid-template-columns: 1fr 1fr; column-gap: 16px; border-bottom: 1px solid var(--hair); }
+  .r-sc { position: relative; display: flex; align-items: center; justify-content: space-between; gap: var(--s2); height: var(--rst); }
+  .r-sc:nth-child(-n+2) { border-bottom: 1px solid var(--hair); }
+  .r-sc:nth-child(odd)::after { content: ""; position: absolute; top: 0; bottom: 0; inset-inline-end: -8px; width: 1px; background: var(--hair); }
+  .r-sc dt { font-size: var(--fs-sec); line-height: var(--lh-sec); font-weight: 500; color: var(--t2); white-space: nowrap; }
+  .r-sc dd { font-size: var(--fs-val); line-height: var(--lh-val); font-weight: 600; white-space: nowrap; }
 
-  /* tab content (never scrolls; as tall as the tallest tab) + the action card pinned at the bottom */
-  .body { flex: 1 1 auto; min-height: 0; margin-top: var(--g-det); display: flex; flex-direction: column; gap: var(--g-det); }
-  .tabs { flex: none; }
-  .pane { display: none; flex-direction: column; gap: var(--s1); }
-  [data-tab="politics"] .pane[data-tab="politics"], [data-tab="society"] .pane[data-tab="society"],
-  [data-tab="economy"] .pane[data-tab="economy"], [data-tab="security"] .pane[data-tab="security"] { display: flex; }
-  .kv { height: var(--lh-val); display: flex; align-items: baseline; justify-content: space-between; gap: var(--s3); }
-  .kv .k { font-size: var(--fs-sec); font-weight: 500; line-height: var(--lh-val); color: var(--t2); white-space: nowrap; }
-  .kv .v { font-size: var(--fs-val); font-weight: 600; line-height: var(--lh-val); color: var(--t1); white-space: nowrap; }
-  /* population groups: a slim stacked bar between its two labels */
-  .groups { height: var(--lh-val); display: flex; align-items: center; gap: var(--s2); }
-  .groups > span { font-size: var(--fs-sec); font-weight: 500; line-height: var(--lh-val); color: var(--t1); white-space: nowrap; }
-  .gbar { flex: 1 1 auto; min-width: 44px; height: 6px; display: flex; border-radius: 3px; overflow: hidden; }
-  .gbar i { display: block; height: 100%; }
-  .gbar i:first-child { background: rgba(127, 233, 255, 0.75); }
-  .gbar i:last-child { background: rgba(169, 188, 203, 0.45); border-right: 1px solid rgb(12, 20, 28); }
+  /* overview: action rows */
+  .r-acts { display: flex; flex-direction: column; gap: var(--rgap); margin-top: auto; }
+  .r-act, .r-link, .r-more, .r-dec { border-radius: var(--r-ctl); background: var(--card); box-shadow: inset 0 0 0 1px var(--stroke); }
+  .r-act { display: flex; align-items: center; gap: var(--s2); height: 44px; padding-inline: 5px var(--s3); text-align: start; }
+  /* the accent bar runs on the straight part of the card's edge, inside its rounded corners */
+  .r-first::after { content: ""; position: absolute; top: 8px; bottom: 8px; right: 0; width: 3px; border-radius: 2px 0 0 2px; background: var(--teal); }
+  .r-tile { flex: none; width: 34px; height: 34px; border-radius: 6px; display: grid; place-items: center; color: var(--cyan); background: var(--tile); box-shadow: inset 0 0 0 1px var(--stroke); }
+  .r-tile svg.i { width: var(--ico-dock); height: var(--ico-dock); }
+  .r-at { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: 2px; text-align: start; }
+  .r-at b { font-size: var(--fs-val); line-height: var(--lh-val); font-weight: 600; white-space: nowrap; }
+  .r-at > span { font-size: var(--fs-sec); line-height: var(--lh-sec); font-weight: 500; color: var(--t2); white-space: nowrap; }
+  .r-chip { flex: none; display: inline-flex; align-items: center; gap: var(--s1); height: 24px; padding-inline: var(--s2); border-radius: 6px;
+    border: 1px solid rgba(63, 224, 208, .7); background: rgba(63, 224, 208, .06); color: var(--teal); font-size: var(--fs-sec); line-height: var(--lh-sec); font-weight: 600; white-space: nowrap; }
+  .r-arr { width: var(--glyph); height: var(--glyph); fill: none; stroke: currentColor; stroke-width: 1.75; stroke-linecap: round; stroke-linejoin: round; }
+  .r-more { display: flex; align-items: center; gap: var(--s2); height: 36px; padding-inline: var(--s3); font-size: var(--fs-val); line-height: var(--lh-val); font-weight: 600; }
+  .r-more > span { flex: 1; text-align: start; }
+  .r-chev { flex: none; color: var(--t2); }
 
-  /* margin-top: auto pins the card to the bottom; fitSheet() caps it to whole rows and it scrolls the rest */
-  .acts { flex: 0 1 auto; min-height: 0; margin-top: auto; overflow-y: auto; display: flex; flex-direction: column; border-radius: var(--r-bar);
-    background: rgba(234, 242, 247, 0.04); box-shadow: inset 0 0 0 1px rgba(127, 233, 255, 0.10); }
-  .act { flex: none; }
-  .act { height: var(--dock-h); border-radius: var(--r-ctl); padding-inline: var(--pad-bar); display: grid; align-items: center; text-align: right;
-    grid-template-columns: var(--ico) minmax(0, 1fr) auto var(--ico); grid-template-rows: var(--lh-val) var(--lh-label); column-gap: var(--s2); align-content: center; }
-  .act + .act::after { content: ""; position: absolute; top: 0; left: var(--pad-bar); right: var(--pad-bar); height: 1px; background: var(--hair); }
-  .act .a-ico { grid-row: 1 / 3; grid-column: 1; color: var(--teal); }
-  .act .a-t { grid-row: 1; grid-column: 2; font-size: var(--fs-val); font-weight: 600; line-height: var(--lh-val); color: var(--t1); white-space: nowrap; }
-  .act .a-c { grid-row: 1; grid-column: 3; font-size: var(--fs-sec); font-weight: 500; line-height: var(--lh-val); color: var(--t2); white-space: nowrap; }
-  .act .a-e { grid-row: 2; grid-column: 2 / 4; display: flex; align-items: center; gap: var(--s1); white-space: nowrap; }
-  .act .a-e span { font-size: var(--fs-label); font-weight: 700; line-height: var(--lh-label); }
-  .act .chev { grid-row: 1 / 3; grid-column: 4; color: var(--t2); }
-  .good { color: var(--blue); }
-  .harm { color: var(--amber); }
-  .a-e .dot { color: var(--t2); }
-  .a-e .eff { display: flex; align-items: center; gap: var(--s1); }
+  /* details: tabs */
+  .r-tabs { display: grid; grid-template-columns: repeat(4, 1fr); height: 45px; margin-inline: var(--s3); border-bottom: 1px solid var(--hair); }
+  .r-tab { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: var(--s1); color: var(--t1); font-size: var(--fs-sec); line-height: var(--lh-sec); font-weight: 600; }
+  .r-tab svg.i { width: var(--ico-dock); height: var(--ico-dock); }
+  .r-tab + .r-tab::after { content: ""; position: absolute; top: 8px; bottom: 10px; right: 0; width: 1px; background: var(--hair); }
+  .r-tab.on { color: var(--teal); box-shadow: inset 0 -2px 0 var(--teal); }
 
-  /* the card's scroll indicator, beside the card on the RTL side (shown only while rows are scrolled away) */
-  .sbar { display: none; position: absolute; left: 4px; width: 3px; border-radius: 1.5px; background: rgba(169, 188, 203, 0.55); pointer-events: none; }
-  [data-actscroll="1"] .sbar { display: block; }
+  /* details: governance */
+  .r-gv.r-body { padding-top: var(--s2); padding-bottom: var(--s3); gap: var(--s2); }
+  /* ruled sections, as in the owner's image: a hairline under the first heading and under each section */
+  .r-sec { display: flex; flex-direction: column; gap: var(--s1); padding-bottom: var(--s1); border-bottom: 1px solid var(--hair); }
+  .r-sec:first-child h3 { padding-bottom: var(--s1); border-bottom: 1px solid var(--hair); }
+  .r-sec h3, .r-dec h3 { font-size: var(--fs-sec); line-height: var(--lh-sec); font-weight: 600; }
+  .r-gov { display: flex; align-items: center; gap: var(--s2); height: 26px; }
+  .r-gl { font-size: var(--fs-sec); line-height: var(--lh-sec); font-weight: 500; color: var(--t2); }
+  .r-gn { flex: 1; text-align: center; font-size: var(--fs-sec); line-height: var(--lh-sec); font-weight: 600; }
+  .r-btn.tap::before { width: max(100% + 2px, 44px); height: max(100% + 2px, 44px); }   /* cover the 1 pt border too */
+  /* actions: a blue outline with cyan text (teal stays for selected states: the open tab, the chosen radio), as in the image */
+  .r-btn { flex: none; height: 24px; padding-inline: var(--s3); border-radius: 6px; border: 1px solid rgba(111, 182, 255, .6); background: rgba(111, 182, 255, .06);
+    color: var(--cyan); font-size: var(--fs-sec); line-height: 22px; font-weight: 600; white-space: nowrap; }
+  .r-grey { border-color: rgba(111, 182, 255, .3); background: transparent; color: var(--cyan); }
+  .r-radios { display: grid; grid-template-columns: repeat(3, 1fr); height: 26px; align-items: center; }
+  .r-rd { display: flex; align-items: center; gap: var(--s2); height: 26px; font-size: var(--fs-sec); line-height: var(--lh-sec); font-weight: 500; color: var(--t1); white-space: nowrap; }
+  .r-rd i { position: relative; flex: none; width: 16px; height: 16px; border-radius: 50%; box-shadow: inset 0 0 0 1.5px var(--t2); }
+  .r-rd.on { color: var(--teal); font-weight: 600; }
+  .r-rd.on i { box-shadow: inset 0 0 0 1.5px var(--teal); }
+  .r-rd.on i::after { content: ""; position: absolute; inset: 4px; border-radius: 50%; background: var(--teal); }
+  .r-links { display: flex; flex-direction: column; gap: var(--s1); }   /* 13 pt after the radios (section padding 4 + rule 1 + gap 8): their hit boxes reach 9 pt below them */
+  .r-link { display: flex; align-items: center; gap: var(--s2); height: 44px; padding-inline: 5px var(--s2); }
+  .r-link .r-tile { width: 34px; height: 34px; }
+  .r-link .r-at > span { font-size: var(--fs-label); line-height: var(--lh-label); }
+  .r-dec { padding: 0 var(--s3) var(--s2); }
+  .r-dec h3 { height: 24px; display: flex; align-items: center; margin-inline: calc(-1 * var(--s3)); padding-inline: var(--s3); border-bottom: 1px solid var(--hair); color: var(--cyan); font-weight: 600; }
+  .r-dbody { position: relative; display: grid; grid-template-columns: var(--ico-dock) 1fr; column-gap: var(--s2); padding-top: var(--s2); }
+  .r-dbody::before { content: ""; position: absolute; top: var(--s2); bottom: 0; right: calc(var(--ico-dock) + var(--s1)); width: 1px; background: var(--hair); }   /* divider beside the icon */
+  .r-dic { width: var(--ico-dock) !important; height: var(--ico-dock) !important; color: var(--cyan); margin-top: 0; }
+  .r-dtx { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+  .r-dtx b { font-size: var(--fs-val); line-height: var(--lh-val); font-weight: 600; }
+  .r-dtx span { font-size: var(--fs-label); line-height: 14px; font-weight: 500; color: var(--t2); white-space: nowrap; }
+  .r-dtx em { font-style: normal; color: var(--t1); }
+  .r-dfoot { display: flex; align-items: center; justify-content: space-between; gap: var(--s2); }
+  .r-dbtn { display: flex; gap: var(--s1); }
+  .r-dbtn .r-btn { padding-inline: var(--s2); }
 
-  /* map labels and city dots: drawn left-to-right exactly as inside the overlay image; a label (or a city's
-     dot and name) that a panel edge would slice is hidden (placeMap), so each is whole or fully under a panel */
+  /* map labels and the tapped province: blue-violet glow, white ring, name pill (the owner's images) */
   .map svg.labels { position: absolute; inset: 0; width: 100%; height: 100%; direction: ltr; }
   .labels .cut { display: none; }
-
-  /* the tapped province on the map: teal outline like the player's country, tighter */
   .map svg.sel { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
-  .sel path { vector-effect: non-scaling-stroke; stroke-linejoin: round; }
-  /* ================= Screen 15, variant A: the event and decision modal, the notification centre =================
-     The approved play screen (B3, opaque panels), paused. &state=event: an urgent decision as a modal over a scrim (the
-     HUD under it inert); &state=center: the notification centre under the bell, the map-mode and my-country buttons
-     yielding to it. */
-  .scrim { position: absolute; inset: 0; background: rgba(4, 8, 12, .55); z-index: 3; display: none; }
-  [data-state="event"] .scrim { display: block; }
-  /* the modal: text and options on the right, the category image in a column on the left */
-  .ev { position: absolute; z-index: 4; display: none; grid-template-columns: 1fr var(--ev-img); width: var(--ev-w); border-radius: 12px;
-    background: rgb(12, 20, 28); border: 1px solid var(--stroke); box-shadow: 0 10px 30px rgba(0, 0, 0, .45); overflow: hidden; }
-  [data-state="event"] .ev { display: grid; }
-  .ev-in { display: flex; flex-direction: column; gap: var(--s2); padding: var(--s3); min-width: 0; }
-  .ev-pic { position: relative; margin: 0; }
-  .ev-pic img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
-  .ev-cat { position: absolute; right: var(--s2); bottom: var(--s2); height: 20px; display: flex; align-items: center; gap: var(--s1); padding-inline: 6px 7px;
-    border-radius: 6px; background: rgb(12, 20, 28); font-size: var(--fs-label); line-height: var(--lh-label); font-weight: 700; color: var(--t1); white-space: nowrap; }
-  .ev-cat svg.i { width: var(--glyph); height: var(--glyph); color: var(--t1); }
-  .ev-k { font-size: var(--fs-label); line-height: var(--lh-label); font-weight: 500; color: var(--t2); }
-  .ev-t { margin: 0; font-size: var(--fs-name); line-height: var(--lh-name); font-weight: 700; color: var(--t1); }
-  .ev-p { margin: 0; font-size: var(--fs-sec); line-height: var(--lh-sec); font-weight: 500; color: var(--t1); }
-  .ev-ops { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s2); }
-  /* an option: its title, its cost, its effects (arrow, sign and words; costs amber with their arrow) */
-  .ev-op { min-height: 60px; display: flex; flex-direction: column; align-items: stretch; justify-content: center; gap: 2px; padding: 6px var(--s2);
-    border-radius: 10px; background: rgba(234, 242, 247, .06); border: 1px solid var(--stroke); text-align: right; color: var(--t1); min-width: 0; }
-  .ev-op b { font-size: var(--fs-sec); line-height: var(--lh-sec); font-weight: 600; color: var(--t1); white-space: nowrap; }
-  .ev-op .ev-c { font-size: var(--fs-label); line-height: var(--lh-label); font-weight: 500; color: var(--t2); white-space: nowrap; }
-  .ev-fx { display: flex; flex-wrap: wrap; align-items: center; gap: 0 var(--s2); font-size: var(--fs-label); line-height: var(--lh-label); font-weight: 700; color: var(--t1); white-space: nowrap; }
-  .ev-fx > span { display: inline-flex; align-items: center; gap: 2px; }
-  .ev-fx .r-amber { color: var(--amber); }
-  .ev-fx svg.r-arr { width: var(--glyph); height: var(--glyph); fill: none; stroke: currentColor; stroke-width: 1.75; stroke-linecap: round; stroke-linejoin: round; }
-  .ev-def { font-size: var(--fs-label); line-height: var(--lh-label); font-weight: 700; color: rgb(11, 18, 24); background: var(--t1); border-radius: 4px; padding-inline: 4px; margin-inline-start: var(--s1); }
-  .ev-foot { margin: 0; font-size: var(--fs-label); line-height: var(--lh-label); font-weight: 500; color: var(--t2); }
-  /* the notification centre: under the toast, down to 8 pt above the dock; the left stack's two buttons yield to it */
-  .nc { position: absolute; z-index: 2; display: none; flex-direction: column; width: var(--nc-w); border-radius: 12px; }
-  [data-state="center"] .nc { display: flex; }
-  [data-state="center"] .btn.mode, [data-state="center"] .btn.home { visibility: hidden; }
-  .nc-h { display: flex; align-items: center; justify-content: space-between; height: 44px; padding-inline: var(--s3) var(--s2); flex: none; }
-  .nc-h h2 { margin: 0; font-size: var(--fs-name); line-height: var(--lh-name); font-weight: 700; color: var(--t1); }
-  .nc-b { overflow-y: auto; padding: 0 var(--s3) var(--s3); display: flex; flex-direction: column; gap: var(--s2); min-height: 0; }
-  .nc-b h3 { margin: var(--s1) 0 0; font-size: var(--fs-label); line-height: var(--lh-label); font-weight: 700; color: var(--t2); }
-  .nc-r { height: 44px; display: flex; align-items: center; gap: var(--s2); padding-inline: var(--s2); border-radius: 10px; background: rgba(234, 242, 247, .06); color: var(--t1); text-align: right; flex: none; }
-  .nc-r .nc-ic { flex: none; width: 28px; height: 28px; border-radius: 6px; display: flex; align-items: center; justify-content: center; background: rgba(234, 242, 247, .08); }
-  .nc-r .nc-ic svg.i { width: var(--ico); height: var(--ico); color: var(--t1); }
-  .nc-r .nc-ic.r-amber svg.i { color: var(--amber); }
-  .nc-r .nc-at { flex: 1; min-width: 0; display: flex; flex-direction: column; }
-  .nc-r .nc-at b { font-size: var(--fs-sec); line-height: var(--lh-sec); font-weight: 600; color: var(--t1); white-space: nowrap; }
-  .nc-r .nc-at > span { font-size: var(--fs-label); line-height: var(--lh-label); font-weight: 500; color: var(--t2); white-space: nowrap; }
-  .nc-r .nc-chev { flex: none; width: var(--ico); height: var(--ico); color: var(--t2); }
-  .nc-x { flex: none; height: 32px; padding-inline: var(--pad-ctl); border-radius: 8px; border: 1px solid var(--t1); font-size: var(--fs-sec); line-height: var(--lh-sec); font-weight: 600; color: var(--t1); background: none; }
-  .nc-close { flex: none; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: rgba(234, 242, 247, .08); color: var(--t1); }
-  .nc-close svg.i { width: var(--ico); height: var(--ico); }
-  /* the list scrolls inside the centre; a 24 pt fade marks an edge that hides content (the panels' rule) */
-  .nc[data-ftop="1"] .nc-b { -webkit-mask-image: linear-gradient(to bottom, transparent, #000 24px); mask-image: linear-gradient(to bottom, transparent, #000 24px); }
-  .nc[data-fbot="1"] .nc-b { -webkit-mask-image: linear-gradient(to top, transparent, #000 24px); mask-image: linear-gradient(to top, transparent, #000 24px); }
-  .nc[data-ftop="1"][data-fbot="1"] .nc-b { -webkit-mask-image: linear-gradient(to bottom, transparent, #000 24px, #000 calc(100% - 24px), transparent); mask-image: linear-gradient(to bottom, transparent, #000 24px, #000 calc(100% - 24px), transparent); }
-  /* buttons with a 1 pt border: the hit box covers the border too */
-  .ev-op.tap::before, .nc-x.tap::before { width: max(100% + 2px, 44px); height: max(100% + 2px, 44px); }
-  /* the modal's end: the expiry and «لاحقًا» (a 32 pt outlined button) side by side */
-  .ev-end { display: flex; align-items: center; justify-content: space-between; gap: var(--s2); }
-  .ev-later { flex: none; height: 32px; padding-inline: var(--pad-ctl); border-radius: 8px; border: 1px solid var(--t1); background: none; font-size: var(--fs-sec); line-height: var(--lh-sec); font-weight: 600; color: var(--t1); }
-  .ev-later.tap::before { width: max(100% + 2px, 44px); height: max(100% + 2px, 44px); }
-  /* with the modal open the dock is out of the way (the modal spans the safe width under the top row) */
-  [data-state="event"] .dock, [data-state="event"] .lstack { visibility: hidden; }
-  /* an unread row: a 6 pt teal dot before the chevron (the words are in VoiceOver) */
-  .nc-dot { flex: none; width: 6px; height: 6px; border-radius: 50%; background: var(--teal); }
+  .sel path { stroke-linejoin: round; }
+  .sel .pin rect { filter: drop-shadow(0 2px 4px rgba(0, 0, 0, .4)); }
+  /* ================= Section identity and white touches (owner: «كمل الباقي بدقه», 2026-10-21) =================
+     One identity colour per dock section, kept out of the hues that carry meaning everywhere (teal = the player's
+     country and selected states in map panels, cyan = interactive, blue = positive, amber = warning, red = danger).
+     It appears only on the section's chrome: a 2 pt line on top of its panel, the emblem in the header, the open tab,
+     and the dock item while the section is open (with a 2 pt underline). Data colours never change with the section.
+     White touches on the dark panels (D-3 stands), in the text white #EAF2F7: white tile icons, filled white primary
+     buttons with dark #0B1218 text, white-outlined secondary buttons and chips. The page sets data-sec on <html>.
+     The white lines come in two strengths, both built on the text white: --w-line for outlines (buttons, chips, the
+     header chip) and --w-line-dim for quieter ones (grey buttons, the segment track and its dividers). */
+  :root {
+    --sec-state: #E9EEF4;      /* الدولة: لؤلؤي */
+    --sec-econ: #43C08A;       /* الاقتصاد: زمردي */
+    --sec-pol: #A08CFF;        /* الداخلية والسياسة: بنفسجي */
+    --sec-army: #BDB46A;       /* الجيش: زيتي */
+    --sec-foreign: #5B86F2;    /* الخارجية: أزرق ملكي */
+    --sec-intel: #C873D6;      /* الاستخبارات: أرجواني */
+    --sec-research: #9EDB5B;   /* البحث: ليموني */
+    --sec-more: #A9BCCB;       /* المزيد: رمادي */
+    --w-line: rgba(234, 242, 247, .5);
+    --w-line-dim: rgba(234, 242, 247, .28);
+    --w-fill: rgba(234, 242, 247, .06);
+  }
+  [data-sec="state"] { --sec: var(--sec-state); }     [data-sec="econ"] { --sec: var(--sec-econ); }
+  [data-sec="pol"] { --sec: var(--sec-pol); }         [data-sec="army"] { --sec: var(--sec-army); }
+  [data-sec="foreign"] { --sec: var(--sec-foreign); } [data-sec="intel"] { --sec: var(--sec-intel); }
+  [data-sec="research"] { --sec: var(--sec-research); } [data-sec="more"] { --sec: var(--sec-more); }
+
+  /* the open section in the dock */
+  .dock-item.on, .dock-item.on svg.i { color: var(--sec); opacity: 1; }
+  .dock-item.on::after { content: ""; position: absolute; left: 50%; bottom: 3px; width: 16px; height: 2px; margin-left: -8px; border-radius: 1px; background: var(--sec); }
+
+  /* the section's line on top of its panel, and its emblem in the header */
+  [data-sec] .r-in::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--sec); z-index: 3; }
+  .s-emb { flex: none; width: var(--ctl); height: var(--ctl); border-radius: var(--r-ctl); display: grid; place-items: center; margin-inline-start: auto;
+    color: var(--sec); background: color-mix(in srgb, var(--sec) 16%, rgb(6, 11, 16)); box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--sec) 45%, transparent); }
+  .s-emb + .r-x { margin-inline-start: 0; }
+  /* the open tab: the section colour, its underline and a faint fill; the closed tabs step back to the secondary grey,
+     so the open one stands out in every section (الدولة's pearl is close to the text white) */
+  [data-sec] .r-tab { color: var(--t2); }
+  [data-sec] .r-tab.on { color: var(--sec); background: color-mix(in srgb, var(--sec) 8%, transparent); box-shadow: inset 0 -2px 0 var(--sec); }
+
+  /* white touches */
+  [data-sec] .r-tile { color: var(--t1); }
+  [data-sec] .r-btn { border-color: var(--w-line); background: transparent; color: var(--t1); }
+  [data-sec] .r-btn.r-primary { background: var(--t1); border-color: var(--t1); color: #0B1218; }
+  [data-sec] .r-btn.r-grey { border-color: var(--w-line-dim); color: var(--t2); }
+  [data-sec] .r-first::after { background: var(--t1); }
+  [data-sec] .r-chip { border-color: var(--w-line); background: var(--w-fill); color: var(--t1); }
+  [data-sec] .r-cap { border-color: var(--w-line); color: var(--t1); }
+  /* ================= Screen 5, variant A: the state panel («الدولة») =================
+     The look, sizes and fit levels come from ../../screen4/R/_build/panel.css and the section identity and white
+     touches from ../../shared/section_identity.css (both read by assemble.py, so the panels cannot drift). The sheet is
+     the province details' full-height side sheet: the dock moves left of it, or hides on the 375 pt phones.
+     One tab body shows at a time (?tab=overview|leader|policies|projects). ?states=1 swaps in the later states
+     (the .s-alt elements for the .s-def ones): an unrealistic mode, a law in its cooldown, a law the player cannot
+     afford, the reshuffle waiting for its next turn. */
+  :root:not([data-states="1"]) .s-alt, [data-states="1"] .s-def { display: none !important; }
+  .r-body[data-tab] { display: none; }
+  [data-tab="overview"] .r-body[data-tab="overview"], [data-tab="leader"] .r-body[data-tab="leader"],
+  [data-tab="policies"] .r-body[data-tab="policies"], [data-tab="projects"] .r-body[data-tab="projects"] { display: flex; }
+  .r-body[data-tab="leader"], .r-body[data-tab="policies"], .r-body[data-tab="projects"] { padding-top: var(--s2); padding-bottom: var(--s3); gap: var(--s2); }
+  .r-body[data-tab="overview"] { padding-bottom: var(--s1); }   /* the last action row needs no more: its hit box is its own 44 pt */
+
+  /* the mode chip: white for واقعي, amber for any other mode or while unrealistic options are on (screen 3's terms) */
+  [data-sec] .r-cap.s-unreal { border-color: rgba(242, 177, 76, .7); color: var(--amber); }
+  /* a cost in political capital: the number and the capital glyph of «رأس المال السياسي» */
+  /* the glyph sits centred in the 14 pt line without making the line taller (top-aligned, 2 pt down) */
+  .s-cost svg.i { display: inline-block; width: var(--glyph); height: var(--glyph); margin-inline-start: 2px; margin-top: 2px; vertical-align: top; }
+  /* a decision waiting for its next turn: still readable, its tile and chip step back */
+  .r-act.s-wait .r-tile { color: var(--t2); }
+  [data-sec] .r-act.s-wait .r-chip { border-color: var(--w-line-dim); background: transparent; color: var(--t2); }
+
+
+  /* القيادة: office rows, seat bar */
+  .s-off { display: flex; align-items: center; gap: var(--s2); height: 40px; }
+  .s-vac { color: var(--t2); }
+  .s-seats { display: flex; flex-direction: column; gap: var(--s1); }
+  .s-bar { position: relative; height: 8px; border-radius: 4px; background: rgba(169, 188, 203, .22); overflow: hidden; }
+  .s-bar i { position: absolute; inset: 0 0 0 auto; border-radius: 4px; background: var(--teal); }
+  .s-leg { font-size: var(--fs-sec); line-height: var(--lh-sec); font-weight: 500; color: var(--t2); white-space: nowrap; }
+  .s-leg b { font-weight: 600; color: var(--t1); }
+  .s-st2 { grid-template-columns: 1fr; }
+  .s-st2 .r-sc:nth-child(-n+2) { border-bottom: 0; }
+  .s-st2 .r-sc:first-child { border-bottom: 1px solid var(--hair); }
+  .s-st2 .r-sc::after { display: none; }
+
+  /* المشاريع: project rows with progress, cancel (refund shown) or start */
+  .s-proj { display: flex; align-items: center; gap: var(--s2); height: 52px; padding-inline: 5px var(--s2); border-radius: var(--r-ctl); background: var(--card); box-shadow: inset 0 0 0 1px var(--stroke); }
+  .s-proj + .s-proj { margin-top: var(--s1); }
+  .s-prog { position: relative; height: 4px; margin-top: 4px; border-radius: 2px; background: rgba(169, 188, 203, .22); overflow: hidden; }
+  .s-prog i { position: absolute; inset: 0 0 0 auto; border-radius: 2px; background: var(--teal); }
+  .s-pa { flex: none; display: flex; flex-direction: column; align-items: flex-end; gap: 2px; }   /* «إلغاء» and «بدء» share their left edge */
+  .s-ref { font-size: var(--fs-label); line-height: var(--lh-label); font-weight: 500; color: var(--t2); white-space: nowrap; }
+  .s-note { font-size: var(--fs-label); line-height: 14px; font-weight: 500; color: var(--t2); }
+
+  /* السياسات: one row per law: name and the cost of a change, then its setting as 3 segments (the chosen one white) */
+  .s-pol { display: flex; align-items: center; gap: var(--s2); height: 40px; }
+  /* 4 pt between rows (the section's gap): the segments' 44 pt hit boxes reach 2 pt past each 40 pt row, so they meet */
+  .s-seg { flex: none; display: grid; grid-template-columns: repeat(3, 60px); height: 26px; border-radius: 6px; box-shadow: inset 0 0 0 1px var(--w-line-dim); }
+  .s-sg { font-size: var(--fs-sec); line-height: 26px; font-weight: 500; color: var(--t1); white-space: nowrap; border-radius: 6px; }
+  .s-sg + .s-sg::after { content: ""; position: absolute; top: 6px; bottom: 6px; right: 0; width: 1px; background: var(--w-line-dim); }
+  .s-sg.on { background: var(--t1); color: #0B1218; font-weight: 600; }
+  .s-sg.on::after, .s-sg.on + .s-sg::after { display: none; }
+  /* states (?states=1): a law in its cooldown shows when it opens again, its choices step back and cannot be tapped;
+     a change the player cannot afford shows its cost in amber */
+  [data-states="1"] .s-wait-1 .s-sg { color: var(--t2); }
+  [data-states="1"] .s-wait-1 .s-sg.on { background: var(--w-line-dim); color: var(--t1); }
+  [data-states="1"] .s-short-1 .s-cost { color: var(--amber); }
+  /* ================= Screen 15, variant A: the decision sheet =================
+     Built with the shared builder on the approved panels; one body, no tab row; the header strip is the category image. */
+  .r-tabs { display: none; }
+  .r-hd { background: linear-gradient(to left, rgba(12, 20, 28, .62) 0%, rgba(12, 20, 28, .2) 55%, rgba(12, 20, 28, 0) 75%),
+    linear-gradient(180deg, rgba(12, 20, 28, .15) 0%, rgba(12, 20, 28, .75) 100%), url("event_header.jpg") center / cover no-repeat; }
+  [data-tab="event"] .r-body[data-tab="event"] { display: flex; }
+  .r-body[data-tab="event"] { padding-top: var(--s2); padding-bottom: var(--s3); gap: var(--s2); }
+  .d-text { margin: 0; font-size: var(--fs-sec); line-height: 18px; font-weight: 500; color: var(--t1); }
+  /* a cost in an option's line: amber, its arrow beside it */
+  .p-cost { display: inline-flex; align-items: center; gap: 2px; margin-inline-start: var(--s1); font-size: var(--fs-sec); font-weight: 600; }   /* as screen 9 */
 </style>
 </head>
 <body>
@@ -493,9 +612,11 @@
     <symbol id="i-care" viewBox="0 0 24 24"><path d="M12 19.5s-7.25-4.3-7.25-9.4A3.85 3.85 0 0 1 12 8a3.85 3.85 0 0 1 7.25 2.1c0 5.1-7.25 9.4-7.25 9.4z"/><path d="M12 10.75v4.5M9.75 13h4.5"/></symbol>
     <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3.5l7 2.75v5.25c0 4.3-2.9 7.6-7 9-4.1-1.4-7-4.7-7-9V6.25z"/><path d="M9.25 12l2 2 3.75-3.9"/></symbol>
     <symbol id="i-chev" viewBox="0 0 24 24"><path d="M14.5 5.5 8 12l6.5 6.5"/></symbol>
-    <!-- screen 15: play (the paused clock), the protests category -->
-    <symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5.5v13l10.5-6.5z"/></symbol>
     <symbol id="i-flame" viewBox="0 0 24 24"><path d="M12 21c-3.9 0-6.5-2.6-6.5-6.2 0-3.3 2.3-5.4 3.8-7.3.3 1.8 1.2 3 2.4 3.6-.2-3.2 1.2-5.9 3.4-7.6.4 3 2.1 4.6 3.3 6.4 1 1.4 1.6 2.9 1.6 4.9C20 18.4 16.5 21 12 21z"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5.5v13l10.5-6.5z"/></symbol>
+    <symbol id="i-wheat" viewBox="0 0 24 24"><path d="M12 21V8"/><path d="M12 12c-2.5 0-4-1.5-4-4 2.5 0 4 1.5 4 4zM12 12c2.5 0 4-1.5 4-4-2.5 0-4 1.5-4 4z"/><path d="M12 16.5c-2.5 0-4-1.5-4-4 2.5 0 4 1.5 4 4zM12 16.5c2.5 0 4-1.5 4-4-2.5 0-4 1.5-4 4z"/><path d="M12 7.5c-1.4-.9-1.9-2.4-1.3-4 1.6.6 2.1 2.1 1.3 4z"/></symbol>
+    <symbol id="i-hands" viewBox="0 0 24 24"><path d="M2.5 11.5 6 8l3 1.5 3-2 3 2 3-1.5 3.5 3.5"/><path d="M6 8v5.5l4.5 4a1.5 1.5 0 0 0 2.1 0l5.4-4.75V8"/><path d="M9.5 13.5l2 1.75M12 11.5l2.5 2"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></symbol>
   </defs>
 </svg>
 
@@ -596,7 +717,7 @@
       <!-- The single speed control. Play/pause toggles the clock; the speed button opens the menu below.
            Long-press on the speed button = pause (same as choosing إيقاف), so one finger can stop time fast. -->
       <span class="cap" role="group" aria-label="سرعة اللعب">
-        <button class="play tap" aria-label="إيقاف مؤقت (اللعبة تعمل)"><svg class="i"><use href="#i-pause"/></svg></button>
+        <button class="play tap" aria-label="تشغيل (اللعبة متوقفة للقرار)"><svg class="i"><use href="#i-play"/></svg></button>
         <button class="spd tap" aria-label="السرعة 1×" aria-haspopup="menu" aria-controls="speedmenu"><span class="ltr">1×</span></button>
       </span>
     </div>
@@ -624,39 +745,6 @@
     </div>
   </div>
 
-  <!-- Screen 15: the notification centre (&state=center), opened from the bell: sections in words; the badge counts the
-       unread notifications (the decision and the two news items); a pending order is not a notification and can be
-       cancelled before time resumes (§6.7). Unread rows carry a dot and say «غير مقروء»; the bell reads its count. -->
-  <section class="nc glass bar" aria-label="الإشعارات">
-    <div class="nc-h"><h2>الإشعارات</h2><button class="nc-close tap" aria-label="إغلاق الإشعارات"><svg class="i"><use href="#i-close"/></svg></button></div>
-    <div class="nc-b">
-      <h3>قرارات تنتظرك</h3>
-      <button class="nc-r tap" data-unread="1" aria-label="غير مقروء، قرار: احتجاجات واسعة في تونس، يُختار الافتراضي بعد 7 أيام. يفتح القرار">
-        <span class="nc-ic r-amber"><svg class="i"><use href="#i-warn"/></svg></span>
-        <span class="nc-at"><b>احتجاجات واسعة في تونس</b><span>قرار · يُختار الافتراضي بعد <span class="ltr">7</span> أيام</span></span>
-        <i class="nc-dot" aria-hidden="true"></i><svg class="i nc-chev"><use href="#i-chev"/></svg>
-      </button>
-      <h3>أوامر معلقة</h3>
-      <div class="nc-r" role="group" aria-label="أمر معلق: المنطقة الغربية إلى سيوة، يُنفَّذ عند استئناف الوقت">
-        <span class="nc-ic" aria-hidden="true"><svg class="i"><use href="#i-army"/></svg></span>
-        <span class="nc-at" aria-hidden="true"><b>المنطقة الغربية إلى سيوة</b><span>يُنفَّذ عند استئناف الوقت</span></span>
-        <button class="nc-x tap" aria-label="إلغاء أمر المنطقة الغربية إلى سيوة">إلغاء</button>
-      </div>
-      <h3>مهم</h3>
-      <button class="nc-r tap" data-unread="1" aria-label="غير مقروء، السودان: استفتاء الجنوب بعد 8 أيام، 9 يناير 2011، الجوار. يفتح الخبر">
-        <span class="nc-ic"><svg class="i"><use href="#i-globe"/></svg></span>
-        <span class="nc-at"><b>السودان: استفتاء الجنوب بعد <span class="ltr">8</span> أيام</b><span><span class="ltr">9</span> يناير <span class="ltr">2011</span> · الجوار</span></span>
-        <i class="nc-dot" aria-hidden="true"></i><svg class="i nc-chev"><use href="#i-chev"/></svg>
-      </button>
-      <h3>للعلم</h3>
-      <button class="nc-r tap" data-unread="1" aria-label="غير مقروء، أسعار القمح العالمية عند أعلى مستوى منذ 2008، السلع، ديسمبر 2010. يفتح الخبر">
-        <span class="nc-ic"><svg class="i"><use href="#i-coins"/></svg></span>
-        <span class="nc-at"><b>أسعار القمح العالمية عند أعلى مستوى منذ <span class="ltr">2008</span></b><span>السلع · ديسمبر <span class="ltr">2010</span></span></span>
-        <i class="nc-dot" aria-hidden="true"></i><svg class="i nc-chev"><use href="#i-chev"/></svg>
-      </button>
-    </div>
-  </section>
-
   <!-- Section dock -->
   <nav class="dock glass bar" aria-label="الأقسام">
     <button class="dock-item tap end end-r"><svg class="i"><use href="#i-state"/></svg><span>الدولة</span></button>
@@ -669,40 +757,57 @@
     <button class="dock-item tap end end-l"><svg class="i"><use href="#i-more"/></svg><span>المزيد</span></button>
   </nav>
 
-</div>
+  <!-- The decision sheet (screen 15, variant A): an urgent decision in the approved panel frame from the right, so the map
+       stays central and visible (the owner's rule mapCentral). The game is paused for it (§6.7). The header strip is the
+       owner's generic protests image (design/generated/event_protests.png); the text is neutral (§6.8, ≤90 words); every
+       option is a row with its cost and its effects; «لاحقًا» puts it off to the notifications and lets time run, so the
+       default can come. The sheet belongs to no section: the identity is the neutral grey and no dock item is open. -->
+  <section class="sheet glass" aria-label="قرار: احتجاجات واسعة في تونس">
+    <div class="r-in">
+      <header class="r-hd">
+        <span class="r-flag"><img src="../../shared/flags/eg.svg" alt="علم مصر"></span>
+        <div class="r-tt">
+          <div class="r-row"><h2 class="r-name">احتجاجات في تونس</h2></div>
+          <div class="r-sub">قرار<span class="r-dot"> · </span>احتجاجات وثورات<span class="r-dot"> · </span>الوقت متوقف</div>
+        </div>
+        <span class="s-emb" aria-hidden="true"><svg class="i"><use href="#i-flame"/></svg></span>
+        <button class="r-x tap" aria-label="لاحقًا: تأجيل القرار إلى الإشعارات، يُختار الافتراضي بعد 7 أيام"><svg class="i"><use href="#i-close"/></svg></button>
+      </header>
 
-<!-- Screen 15: the scrim and the decision modal (&state=event). The game is paused for it (§6.7: an urgent decision, the
-     category's auto-pause on), and the head says so. The text is neutral (§6.8, ≤90 words); every option shows its cost and
-     its effects; «لاحقًا» puts it off to the centre and lets time run, so the default can come. The category image is the
-     owner's generic one (design/generated/event_protests.png: no Egyptian landmark). -->
-<div class="scrim" aria-hidden="true"></div>
-<section class="ev" role="dialog" aria-modal="true" aria-labelledby="ev-t" aria-describedby="ev-p">
-  <div class="ev-in">
-    <span class="ev-k">قرار · تونس · <span class="ltr">1</span> يناير <span class="ltr">2011</span> · الوقت متوقف</span>
-    <h2 class="ev-t" id="ev-t">احتجاجات واسعة في تونس</h2>
-    <p class="ev-p" id="ev-p">تتسع الاحتجاجات في تونس منذ <span class="ltr">17</span> ديسمبر بعد أن أحرق شاب نفسه في سيدي بوزيد. يطالب المحتجون بفرص عمل وبخفض الأسعار، وتنقل القنوات العربية ما يجري كل يوم. يرى مستشاروك أن البطالة وارتفاع الأسعار في مصر قد يجعلان الشارع يتأثر بما يحدث.</p>
-    <div class="ev-ops" role="group" aria-label="الخيارات">
-      <button class="ev-op tap" data-op="subsidy" aria-label="توسيع دعم الخبز والتموين: 500 مليون دولار سنويًا. تنخفض الاضطرابات 3 نقاط، أفضل؛ يرتفع العجز 0.5 مليار دولار، أسوأ">
-        <b>توسيع دعم الخبز والتموين</b><span class="ev-c"><span class="ltr">500</span> مليون $ سنويًا</span>
-        <span class="ev-fx"><span><svg class="r-arr" aria-hidden="true"><use href="#t-down"/></svg>الاضطرابات <span class="ltr">−3</span></span><span class="r-amber"><svg class="r-arr" aria-hidden="true"><use href="#t-up"/></svg>العجز <span class="ltr">+0.5</span> مليار $</span></span>
-      </button>
-      <button class="ev-op tap" data-op="security" aria-label="تشديد الانتشار الأمني في المدن: لا كلفة إضافية، من بند الأمن الداخلي. تنخفض الاضطرابات نقطتين، أفضل؛ تنخفض الشرعية 2، أسوأ">
-        <b>تشديد الانتشار الأمني في المدن</b><span class="ev-c">لا كلفة إضافية · من بند الأمن الداخلي</span>
-        <span class="ev-fx"><span><svg class="r-arr" aria-hidden="true"><use href="#t-down"/></svg>الاضطرابات <span class="ltr">−2</span></span><span class="r-amber"><svg class="r-arr" aria-hidden="true"><use href="#t-down"/></svg>الشرعية <span class="ltr">−2</span></span></span>
-      </button>
-      <button class="ev-op tap" data-op="dialogue" aria-label="حوار مع النقابات والأحزاب: الكلفة 10 من رأس المال السياسي. تنخفض الاضطرابات نقطة واحدة، أفضل؛ ترتفع الشرعية 1، أفضل">
-        <b>حوار مع النقابات والأحزاب</b><span class="ev-c">الكلفة: <span class="ltr">10</span> من رأس المال السياسي</span>
-        <span class="ev-fx"><span><svg class="r-arr" aria-hidden="true"><use href="#t-down"/></svg>الاضطرابات <span class="ltr">−1</span></span><span><svg class="r-arr" aria-hidden="true"><use href="#t-up"/></svg>الشرعية <span class="ltr">+1</span></span></span>
-      </button>
-      <button class="ev-op tap" data-op="watch" data-default="1" aria-label="المتابعة دون إجراء، الخيار الافتراضي: لا كلفة. يرتفع خطر الاضطرابات، أسوأ">
-        <b>المتابعة دون إجراء <span class="ev-def">الافتراضي</span></b><span class="ev-c">لا كلفة</span>
-        <span class="ev-fx"><span class="r-amber"><svg class="r-arr" aria-hidden="true"><use href="#t-up"/></svg>خطر الاضطرابات</span></span>
-      </button>
+      <div class="r-body" data-tab="event">
+        <p class="d-text">تتسع الاحتجاجات في تونس منذ <span class="ltr">17</span> ديسمبر بعد أن أحرق شاب نفسه في سيدي بوزيد. يطالب المحتجون بفرص عمل وبخفض الأسعار، وتنقل القنوات العربية ما يجري كل يوم. يرى مستشاروك أن البطالة وارتفاع الأسعار في مصر قد يجعلان الشارع يتأثر بما يحدث.</p>
+        <section class="r-sec">
+          <h3>خياراتك</h3>
+          <button class="r-act tap r-first" data-op="subsidy" aria-label="توسيع دعم الخبز والتموين: 500 مليون دولار سنويًا. تنخفض الاضطرابات 3 نقاط، أفضل؛ يرتفع العجز 0.5 مليار دولار، أسوأ">
+            <span class="r-tile"><svg class="i"><use href="#i-wheat"/></svg></span>
+            <span class="r-at"><b>توسيع دعم الخبز <span class="r-amber p-cost"><svg class="r-arr" aria-hidden="true"><use href="#t-up"/></svg>العجز <span class="ltr">+0.5</span></span></b><span><span class="ltr">500</span> مليون $ سنويًا</span></span>
+            <span class="r-chip"><svg class="r-arr" aria-hidden="true"><use href="#t-down"/></svg>الاضطرابات <span class="ltr">−3</span></span>
+          </button>
+          <button class="r-act tap" data-op="security" aria-label="تشديد الانتشار الأمني: لا كلفة إضافية. تنخفض الاضطرابات بمقدار 2، أفضل؛ تنخفض الشرعية 2، أسوأ">
+            <span class="r-tile"><svg class="i"><use href="#i-shield"/></svg></span>
+            <span class="r-at"><b>تشديد الانتشار الأمني</b><span>لا كلفة إضافية · <span class="r-amber p-cost"><svg class="r-arr" aria-hidden="true"><use href="#t-down"/></svg>الشرعية <span class="ltr">−2</span></span></span></span>
+            <span class="r-chip"><svg class="r-arr" aria-hidden="true"><use href="#t-down"/></svg>الاضطرابات <span class="ltr">−2</span></span>
+          </button>
+          <button class="r-act tap" data-op="dialogue" aria-label="حوار مع النقابات والأحزاب: الكلفة 10 من رأس المال السياسي. تنخفض الاضطرابات بمقدار 1، أفضل">
+            <span class="r-tile"><svg class="i"><use href="#i-hands"/></svg></span>
+            <span class="r-at"><b>حوار مع النقابات والأحزاب</b><span>الكلفة: <span class="ltr">10</span> من رأس المال السياسي</span></span>
+            <span class="r-chip"><svg class="r-arr" aria-hidden="true"><use href="#t-down"/></svg>الاضطرابات <span class="ltr">−1</span></span>
+          </button>
+          <button class="r-act tap" data-op="watch" data-default="1" aria-label="المتابعة دون إجراء، الخيار الافتراضي: لا كلفة. يرتفع خطر الاضطرابات، أسوأ">
+            <span class="r-tile"><svg class="i"><use href="#i-eye"/></svg></span>
+            <span class="r-at"><b>المتابعة دون إجراء</b><span>الافتراضي · لا كلفة · <span class="r-amber p-cost"><svg class="r-arr" aria-hidden="true"><use href="#t-up"/></svg>خطر الاضطرابات</span></span></span>
+          </button>
+        </section>
+        <div class="r-link tap" role="button" tabindex="0" aria-label="لاحقًا: يبقى القرار في الإشعارات، ويُختار الافتراضي بعد 7 أيام إن لم تختر. يعيد إلى الخريطة">
+          <span class="r-tile"><svg class="i"><use href="#i-clock"/></svg></span>
+          <span class="r-at"><b>لاحقًا</b><span>يبقى في الإشعارات · الافتراضي بعد <span class="ltr">7</span> أيام</span></span>
+          <svg class="i r-chev"><use href="#i-chev"/></svg>
+        </div>
+      </div>
+      <span class="r-hint" aria-hidden="true"><svg class="i"><use href="#i-chev"/></svg></span>
     </div>
-    <div class="ev-end"><p class="ev-foot">إن لم تختر، يُختار الافتراضي بعد <span class="ltr">7</span> أيام.</p><button class="ev-later tap" aria-label="لاحقًا: تأجيل القرار إلى الإشعارات ومتابعة الوقت، يُختار الافتراضي بعد 7 أيام">لاحقًا</button></div>
-  </div>
-  <figure class="ev-pic"><img src="event_protests.jpg" alt=""><figcaption class="ev-cat"><svg class="i" aria-hidden="true"><use href="#i-flame"/></svg>احتجاجات وثورات</figcaption></figure>
-</section>
+  </section>
+</div>
 
 <!-- Device silhouette drawn on top: rounded corners, camera cutout, home indicator -->
 <div class="dev" aria-hidden="true">
@@ -727,66 +832,146 @@
     window.__fit = { level: +root.dataset.fit, need: need, avail: top.clientWidth };
   }
 
-  /* ---------- Screen 15: the decision modal and the notification centre ----------
-     The game is paused (the play button shows play and says so). &state=event: the modal centred in the safe screen
-     over the scrim, the HUD inert under it; &state=center: the centre under the toast, down to 8 pt above the dock. */
+  /* ---------- Dock panel (the province details' full-height side sheet; shared builder) ---------- */
   var $ = function (sel) { return document.querySelector(sel); };
-  function startEvents() {
-    var q = new URLSearchParams(location.search), st = q.get('state') === 'center' ? 'center' : 'event', root = document.documentElement, d = window.__dev;
-    root.dataset.state = st;
-    var play = $('.play'); play.setAttribute('aria-label', 'تشغيل (اللعبة متوقفة)'); play.querySelector('use').setAttribute('href', '#i-play');
-    /* the bell reads its count, and whether the centre is open */
-    var bell = $('.bell'), n = document.querySelectorAll('.nc-b [data-unread="1"]').length;
-    $('.badge').textContent = String(n); bell.setAttribute('aria-label', 'الإشعارات، ' + n + ' غير مقروءة'); bell.setAttribute('aria-expanded', String(st === 'center'));
-    if (st === 'event') {
-      Array.prototype.forEach.call(document.querySelectorAll('.hud, .map'), function (e) { e.setAttribute('inert', ''); e.setAttribute('aria-hidden', 'true'); });
-      /* the modal: the safe width, from 8 pt under the top row (the left stack wholly under it, the dock out of the way),
-         the image column a third of it at most 220 pt; centred in the height left above the home indicator */
-      var g = Math.max(d.SIDE, 8), w = d.W - 2 * g, img = Math.round(Math.min(220, w * 0.32)), top = $('.top').getBoundingClientRect();
-      root.style.setProperty('--ev-w', w + 'px'); root.style.setProperty('--ev-img', img + 'px');
-      var ev = $('.ev'), h = ev.offsetHeight, room = d.H - d.BOTTOM - 8 - (top.bottom + 8);
-      ev.style.left = g + 'px'; ev.style.top = Math.round(top.bottom + 8 + Math.max(0, (room - h) / 2)) + 'px';
-      window.__ev = { w: w, img: img, h: h, words: $('.ev-p').textContent.trim().split(/\s+/).length };
-    } else {
-      /* the centre: the toast's width or 340 pt (the wider), under the toast, down to 8 pt above the dock line */
-      var t = $('.toast').getBoundingClientRect(), dk = $('.dock').getBoundingClientRect(), hud = $('.hud').getBoundingClientRect(), nc = $('.nc');
-      var w2 = Math.max(340, Math.round(t.width)); root.style.setProperty('--nc-w', w2 + 'px');
-      nc.style.left = (t.left - hud.left) + 'px'; nc.style.top = (t.bottom + 8 - hud.top) + 'px';
-      nc.style.height = (Math.min(dk.top - 8, d.H) - (t.bottom + 8)) + 'px';
-      /* &scroll=end shows the end of the list, &scroll=mid its middle; the fades follow what the edges hide */
-      var bd = $('.nc-b'); bd.scrollTop = q.get('scroll') === 'end' ? bd.scrollHeight : q.get('scroll') === 'mid' ? Math.round((bd.scrollHeight - bd.clientHeight) / 2) : 0;
-      var over = bd.scrollHeight - bd.clientHeight;
-      nc.dataset.ftop = bd.scrollTop > 0.5 ? '1' : '0'; nc.dataset.fbot = bd.scrollTop < over - 0.5 ? '1' : '0';
-      window.__nc = { w: w2, over: over, top: bd.scrollTop };
-    }
+
+  /* Width = clamp(43% of the safe width, 340, 380) pt; where the dock would just miss the room left of the sheet
+     (4 pt in + dock + 8 pt), the sheet narrows to make that room, down to 330 pt at the least. */
+  function sizeSheet() {
+    var d = window.__dev, safe = d.W - 2 * d.SIDE, want = Math.round(Math.min(380, Math.max(340, 0.43 * safe)));
+    var hud = $('.hud').getBoundingClientRect(), room = Math.floor(hud.width - 4 - $('.dock').getBoundingClientRect().width - 8);
+    if (room < want && room >= 330) want = room;
+    document.documentElement.style.setProperty('--sheet-w', want + 'px');
+    var tab = document.documentElement.dataset.tab;
+    Array.prototype.forEach.call(document.querySelectorAll('.r-tab'), function (b) {
+      var on = b.dataset.for === tab; b.classList.toggle('on', on); b.setAttribute('aria-selected', String(on));
+    });
+    window.__sheet = { safe: safe, want: want, roomForDock: room };
   }
-  /* The map: as on the approved play screen (B3); a name a panel edge would cut, or the screen
-     edge or the side inset would slice, is hidden (the screens' label rule). */
-  function placeMap15() {
-    /* the approved play screen's own placement (B3): the CSS defaults for --map-cx and --map-cy, the scale from the height */
-    var d = window.__dev, W = d.W, H = d.H, SIDE = Math.max(d.SIDE, 0), s = 0.63 * H / 390;
-    var obs = Array.prototype.filter.call(document.querySelectorAll('.hud .glass, .ev'), function (e) { return e.getClientRects().length && getComputedStyle(e).visibility !== 'hidden' && !e.classList.contains('menu'); })
-      .map(function (e) { return e.getBoundingClientRect(); }), hidden = [];
-    Array.prototype.forEach.call(document.querySelectorAll('.labels text'), function (t) {
-      var k = t.getAttribute('data-city'), u = k === null ? [t] : [t, document.querySelector('.labels circle[data-city="' + k + '"]')];
-      u.forEach(function (e) { e.classList.remove('cut'); });
-      var b = u.map(function (e) { var r = e.getBoundingClientRect(), w = parseFloat(e.getAttribute('stroke-width') || 0) / 2 * s; return [r.left - w - 2, r.top - w - 2, r.right + w + 2, r.bottom + w + 2]; })
-        .reduce(function (a, r) { return [Math.min(a[0], r[0]), Math.min(a[1], r[1]), Math.max(a[2], r[2]), Math.max(a[3], r[3])]; });
-      if (b[2] <= 0 || b[0] >= W || b[3] <= 0 || b[1] >= H) return;
-      var cut = b[0] < SIDE || b[2] > W - SIDE || b[1] < 0 || b[3] > H || obs.some(function (o) {
-        var inside = b[0] >= o.left && b[2] <= o.right && b[1] >= o.top && b[3] <= o.bottom;
-        return !inside && b[2] > o.left && b[0] < o.right && b[3] > o.top && b[1] < o.bottom; });
-      if (cut) { u.forEach(function (e) { e.classList.add('cut'); }); hidden.push(t.textContent); }
+
+  /* From 8 pt under the top row down to the dock line; the dock moves to the left end of its line, 4 pt in, or hides
+     while the sheet is open where it cannot clear the sheet by 8 pt (the 375 pt phones). */
+  function placeSheet() {
+    var root = document.documentElement;
+    root.style.setProperty('--sheet-b', '0px');
+    root.dataset.dock = 'left';
+    var dk = $('.dock').getBoundingClientRect(), sh = $('.sheet').getBoundingClientRect();
+    if (dk.right > sh.left - 8) root.dataset.dock = 'hidden';
+    window.__sheetpos = { dock: root.dataset.dock };
+  }
+
+  /* The fit level: the loosest at which the chosen tab's body fits (the header stays the same for every tab). */
+  function fitSheet() {
+    document.documentElement.dataset.rfit = '0';
+    window.__sheetfit = { level: 0, tried: [], fits: true };
+  }
+
+  /* The open tab's body scrolls inside the sheet when it is taller; fades mark the edges that hide content. In the
+     states view, a control in its wait cannot be tapped. */
+  function fitBody() {
+    var root = document.documentElement, b = $('.r-body[data-tab="' + root.dataset.tab + '"]');
+    Array.prototype.forEach.call(document.querySelectorAll('.s-wait-ctl'), function (c) {
+      if (root.dataset.states === '1') c.setAttribute('aria-disabled', 'true'); else c.removeAttribute('aria-disabled'); });
+    b.scrollTop = window.__scroll === 'end' ? b.scrollHeight : window.__scroll;
+    var over = b.scrollHeight - b.clientHeight;
+    root.dataset.ftop = b.scrollTop > 0.5 ? '1' : '0';
+    root.dataset.fbot = b.scrollTop < over - 0.5 ? '1' : '0';
+    window.__body = { tab: root.dataset.tab, shown: b.clientHeight, full: b.scrollHeight, over: over, top: b.scrollTop };
+  }
+
+  /* Place the map so Cairo and the Nile delta, and if possible all of Egypt, sit in the map area left
+     of the sheet, clear of every panel (and its hit boxes), near the middle of that area. The largest
+     zoom (0.8 to 1.3 x the play screen's) that keeps all of Egypt clear wins. Within that zoom a place that
+     slices fewer map labels with a panel edge is preferred (one label is worth about 45 pt of distance),
+     and any label still sliced is then hidden (a city's dot and name as one unit), so no label or dot is
+     ever shown cut in two, and no dot without its name. */
+  function placeMap() {
+    var d = window.__dev, W = d.W, H = d.H;
+    var s0 = 0.63 * H / 390, MW0 = 1688, MH0 = 1097;
+    var EG = { x0: 583, y0: 424, x1: 945, y1: 732, cx: 764, cy: 578 };
+    var DELTA = { x0: 722, y0: 428, x1: 836, y1: 492 };        /* Cairo Governorate + the Nile delta */
+    var PAD = 8;                                                /* covers the 44 pt hit boxes (at most 6 beyond a control) */
+    var LPAD = 2;                                               /* a label closer than 2 pt to a panel edge counts as cut */
+    var obs = Array.prototype.filter.call(document.querySelectorAll('.hud .glass'), function (e) { return !e.classList.contains('menu') && e.getClientRects().length; })
+      .map(function (e) { return e.getBoundingClientRect(); });
+    var top = $('.top').getBoundingClientRect(), sh = $('.sheet').getBoundingClientRect(), hud = $('.hud').getBoundingClientRect();
+    var dk = $('.dock').getClientRects().length ? $('.dock').getBoundingClientRect() : null;
+    var tx = (hud.left + sh.left) / 2, ty = (top.bottom + (dk ? dk.top : hud.bottom)) / 2;
+    var safe = { x0: Math.max(d.SIDE, 0), x1: W - Math.max(d.SIDE, 0), y0: 0, y1: H - d.BOTTOM };
+    /* label units (a country name, or a city's dot + name) and their boxes in map space (halo stroke included) */
+    var units = Array.prototype.map.call(document.querySelectorAll('.labels text'), function (t) {
+      var k = t.getAttribute('data-city');
+      return k === null ? [t] : [t, document.querySelector('.labels circle[data-city="' + k + '"]')];
     });
-    /* a city name that runs into a country's name yields to it */
-    var countries = Array.prototype.filter.call(document.querySelectorAll('.labels text:not([data-city])'), function (e) { return !e.classList.contains('cut'); }).map(function (e) { return e.getBoundingClientRect(); });
-    Array.prototype.forEach.call(document.querySelectorAll('.labels text[data-city]'), function (t) {
-      if (t.classList.contains('cut')) return;
-      var r = t.getBoundingClientRect();
-      if (countries.some(function (c) { return r.right > c.left && r.left < c.right && r.bottom > c.top && r.top < c.bottom; })) {
-        t.classList.add('cut'); document.querySelector('.labels circle[data-city="' + t.getAttribute('data-city') + '"]').classList.add('cut'); hidden.push(t.textContent); }
+    units.forEach(function (u) { u.forEach(function (e) { e.classList.remove('cut'); }); });
+    function hw(e) { return parseFloat(e.getAttribute('stroke-width') || 0) / 2; }
+    function union(rs) { return rs.reduce(function (a, r) { return [Math.min(a[0], r[0]), Math.min(a[1], r[1]), Math.max(a[2], r[2]), Math.max(a[3], r[3])]; }); }
+    var LB = units.map(function (u) { return union(u.map(function (e) { var bb = e.getBBox(), w = hw(e); return [bb.x - w, bb.y - w, bb.x + bb.width + w, bb.y + bb.height + w]; })); });
+    function clear(r) {
+      if (r.x0 < safe.x0 || r.x1 > safe.x1 || r.y0 < safe.y0 || r.y1 > safe.y1) return false;
+      return !obs.some(function (o) { return !(r.x1 <= o.left || r.x0 >= o.right || r.y1 <= o.top || r.y0 >= o.bottom); });
+    }
+    function box(B, s, cx, cy) { return { x0: cx + (B.x0 - EG.cx) * s - PAD, x1: cx + (B.x1 - EG.cx) * s + PAD, y0: cy + (B.y0 - EG.cy) * s - PAD, y1: cy + (B.y1 - EG.cy) * s + PAD }; }
+    /* is a label box cut by a panel edge (partly under a panel, or squeezed against one)? */
+    /* a panel that leaves less than 70 pt to a screen edge counts as reaching it: a label in that strip is squeezed */
+    var EDGE = 70;
+    function cutBox(x0, y0, x1, y1) {
+      if (x1 <= 0 || x0 >= W || y1 <= 0 || y0 >= H) return false;
+      for (var e = 0; e < obs.length; e++) {
+        var p = obs[e], sx0 = p.left < EDGE ? 0 : p.left, sx1 = W - p.right < EDGE ? W : p.right;
+        if ((sx0 !== p.left || sx1 !== p.right) && x1 > sx0 && x0 < sx1 && y1 > p.top - 2 && y0 < p.bottom + 2 && (x0 < p.left || x1 > p.right)) return true;
+      }
+      for (var j = 0; j < obs.length; j++) {
+        var o = obs[j];
+        if (x0 >= o.left && x1 <= o.right && y0 >= o.top && y1 <= o.bottom) return false;     /* fully under this panel */
+      }
+      for (j = 0; j < obs.length; j++) {
+        o = obs[j];
+        if (x1 > o.left - LPAD && x0 < o.right + LPAD && y1 > o.top - LPAD && y0 < o.bottom + LPAD) return true;
+      }
+      return false;
+    }
+    function cuts(s, cx, cy) {
+      var n = 0;
+      for (var i = 0; i < LB.length; i++) { var l = LB[i]; if (cutBox(cx + (l[0] - EG.cx) * s, cy + (l[1] - EG.cy) * s, cx + (l[2] - EG.cx) * s, cy + (l[3] - EG.cy) * s)) n++; }
+      return n;
+    }
+    function search(s, B) {
+      var best = null, MW = MW0 * s, MH = MH0 * s;
+      for (var cy = 0; cy <= H; cy += 2) for (var cx = 0; cx <= W; cx += 2) {
+        var L = cx - EG.cx * s, T = cy - EG.cy * s;
+        if (L > 0 || L + MW < W || T > 0 || T + MH < H) continue;       /* map stays full-bleed */
+        if (!clear(box(B, s, cx, cy))) continue;
+        var cost = (cx - tx) * (cx - tx) + 2 * (cy - ty) * (cy - ty);
+        if (best && cost >= best.cost) continue;                          /* labels only ever add cost */
+        cost += 2000 * cuts(s, cx, cy);
+        if (!best || cost < best.cost) best = { cost: cost, cx: cx, cy: cy };
+      }
+      return best;
+    }
+    var pick = null, z;
+    for (z = 1.3; z >= 0.8 - 1e-6 && !pick; z -= 0.05) { var b = search(s0 * z, EG); if (b) pick = { s: s0 * z, z: z, b: b, egypt: true }; }
+    if (!pick) { var b2 = search(s0, DELTA); pick = { s: s0, z: 1, b: b2, egypt: false }; }
+    var s = pick.s, cx = pick.b ? pick.b.cx : tx, cy = pick.b ? pick.b.cy : ty;
+    var root = document.documentElement.style;
+    root.setProperty('--map-s', String(s));
+    root.setProperty('--map-cx', cx + 'px');
+    root.setProperty('--map-cy', cy + 'px');
+    /* hide what is still cut, measured on the rendered labels and dots; also a label the screen edge or the side inset
+       (the notch, the Dynamic Island) would slice. That last rule is for this final pass only, so the map does not move. */
+    function edgeCut(b) {
+      var sx = Math.max(d.SIDE, 0);
+      if (b[2] <= 0 || b[0] >= W || b[3] <= 0 || b[1] >= H) return false;
+      return b[0] < sx || b[2] > W - sx || b[1] < 0 || b[3] > H;
+    }
+    /* hide what is still cut, measured on the rendered labels and dots */
+    var hidden = [];
+    units.forEach(function (u) {
+      var b = union(u.map(function (e) { var r = e.getBoundingClientRect(), w = hw(e) * s; return [r.left - w, r.top - w, r.right + w, r.bottom + w]; }));
+      if (cutBox(b[0], b[1], b[2], b[3]) || edgeCut(b)) { u.forEach(function (e) { e.classList.add('cut'); }); hidden.push(u[0].textContent); }
     });
-    window.__map = { s: s, hiddenLabels: hidden };
+    function scr(B) { return { x0: cx + (B.x0 - EG.cx) * s, x1: cx + (B.x1 - EG.cx) * s, y0: cy + (B.y0 - EG.cy) * s, y1: cy + (B.y1 - EG.cy) * s }; }
+    window.__map = { ok: !!pick.b, egyptClear: pick.egypt, s: s, zoom: +pick.z.toFixed(2), cx: cx, cy: cy, target: [tx, ty], egypt: scr(EG), delta: scr(DELTA), hiddenLabels: hidden };
   }
 
   /* Frosted glass for the mockup render. The headless Chromium used for these PNGs leaves a sharp
@@ -812,7 +997,7 @@
   }
 
   (document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve())
-    .then(fitTop).then(startEvents).then(placeMap15).then(frost).then(function () { window.__ready = true; });
+    .then(fitTop).then(sizeSheet).then(placeSheet).then(fitSheet).then(fitBody).then(placeMap).then(frost).then(function () { window.__ready = true; });
 </script>
 </body>
 </html>
