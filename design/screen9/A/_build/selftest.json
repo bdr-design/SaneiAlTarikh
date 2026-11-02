@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-02T22:14:44.889Z",
+ "ranAt": "2026-11-02T22:34:54.590Z",
  "inputs": {
   "files": [
    "index.html",
@@ -26,7 +26,7 @@
    "header_cairo.jpg",
    "map_overlay_cairo.svg"
   ],
-  "sha1": "cced837b511436b266a9e9137ff85611bfd7c6a2"
+  "sha1": "3bf56ed4688b0c92576232585259a291e7eaa488"
  },
  "cleanIssues": {
   "i16promax": [],
@@ -74,8 +74,11 @@
   },
   {
    "name": "off-token colour",
-   "ok": false,
-   "sample": []
+   "ok": true,
+   "sample": [
+    "text colour off-token rgb(136, 153, 170): \"الجيش\"",
+    "contrast 2.4 for \"الجيش\""
+   ]
   },
   {
    "name": "radius",
@@ -282,8 +285,12 @@
   },
   {
    "name": "section colour on data",
-   "ok": false,
-   "sample": []
+   "ok": true,
+   "sample": [
+    "section colour on data text: \"مصر\"",
+    "section colour on data text: \"القوات المسلحة\"",
+    "contrast 4.27 for \"القوات المسلحة\""
+   ]
   },
   {
    "name": "section colour on a rule",
@@ -353,7 +360,7 @@
    "sample": [
     "overview needs scrolling: 396.0 pt over",
     "fades 0/0 do not match the scroll state (top 0, over 396.0)",
-    "brief text not fully visible: تعبئة جزئية النمو −0.2"
+    "brief text not fully visible: القوات العاملة"
    ]
   },
   {
@@ -403,9 +410,11 @@
   },
   {
    "name": "text into a control",
-   "ok": false,
+   "ok": true,
    "sample": [
-    "action row 1: order must be .r-tile, .r-at, .r-chip (right to left)"
+    "text overlap \"النمو\" / \"القوام\"",
+    "text overlap \"−0.2\" / \"القوام\"",
+    "text over a control: \"النمو\" runs into «القوام +40 ألفًا»"
    ]
   },
   {
@@ -503,8 +512,12 @@
   },
   {
    "name": "row read in part",
-   "ok": false,
-   "sample": []
+   "ok": true,
+   "sample": [
+    "a11y: «تعبئة جزئية النمو −0.2» does not read its numbers",
+    "a11y: «تعبئة جزئية النمو −0.2» does not say «دولار»",
+    "a11y: «تعبئة جزئية النمو −0.2» does not say the chip's direction in words"
+   ]
   },
   {
    "name": "% before its number",

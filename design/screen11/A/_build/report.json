@@ -1,7 +1,7 @@
 {
  "se": {
   "device": "667x375 side 0 bottom 0 none",
-  "renderedAt": "2026-11-02T21:59:40.616Z",
+  "renderedAt": "2026-11-02T22:23:19.234Z",
   "inputs": {
    "files": [
     "index.html",
@@ -24,7 +24,7 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "941c7a976621a52009c786e5f2ce633942159d2e"
+   "sha1": "51f20c1fbbeec67f79b2716afbaa7936cafd0021"
   },
   "issues": [],
   "views": {
@@ -4236,7 +4236,7 @@
  },
  "mini": {
   "device": "812x375 side 50 bottom 21 notch",
-  "renderedAt": "2026-11-02T21:59:56.734Z",
+  "renderedAt": "2026-11-02T22:23:34.838Z",
   "inputs": {
    "files": [
     "index.html",
@@ -4259,7 +4259,7 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "941c7a976621a52009c786e5f2ce633942159d2e"
+   "sha1": "51f20c1fbbeec67f79b2716afbaa7936cafd0021"
   },
   "issues": [],
   "views": {
@@ -8600,7 +8600,7 @@
  },
  "i14": {
   "device": "844x390 side 47 bottom 21 notch",
-  "renderedAt": "2026-11-02T22:00:13.986Z",
+  "renderedAt": "2026-11-02T22:23:51.983Z",
   "inputs": {
    "files": [
     "index.html",
@@ -8623,7 +8623,7 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "941c7a976621a52009c786e5f2ce633942159d2e"
+   "sha1": "51f20c1fbbeec67f79b2716afbaa7936cafd0021"
   },
   "issues": [],
   "views": {
@@ -13834,7 +13834,7 @@
  },
  "i16": {
   "device": "852x393 side 59 bottom 21 island",
-  "renderedAt": "2026-11-02T22:00:31.168Z",
+  "renderedAt": "2026-11-02T22:24:09.372Z",
   "inputs": {
    "files": [
     "index.html",
@@ -13857,7 +13857,7 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "941c7a976621a52009c786e5f2ce633942159d2e"
+   "sha1": "51f20c1fbbeec67f79b2716afbaa7936cafd0021"
   },
   "issues": [],
   "views": {
@@ -19069,7 +19069,7 @@
  },
  "i16pro": {
   "device": "874x402 side 62 bottom 21 island",
-  "renderedAt": "2026-11-02T22:00:48.450Z",
+  "renderedAt": "2026-11-02T22:24:26.592Z",
   "inputs": {
    "files": [
     "index.html",
@@ -19092,7 +19092,7 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "941c7a976621a52009c786e5f2ce633942159d2e"
+   "sha1": "51f20c1fbbeec67f79b2716afbaa7936cafd0021"
   },
   "issues": [],
   "views": {
@@ -23820,7 +23820,7 @@
  },
  "i11": {
   "device": "896x414 side 48 bottom 21 notch",
-  "renderedAt": "2026-11-02T22:01:05.429Z",
+  "renderedAt": "2026-11-02T22:24:42.966Z",
   "inputs": {
    "files": [
     "index.html",
@@ -23843,7 +23843,7 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "941c7a976621a52009c786e5f2ce633942159d2e"
+   "sha1": "51f20c1fbbeec67f79b2716afbaa7936cafd0021"
   },
   "issues": [],
   "views": {
@@ -28580,7 +28580,7 @@
  },
  "i16promax": {
   "device": "956x440 side 62 bottom 21 island",
-  "renderedAt": "2026-11-02T22:01:22.722Z",
+  "renderedAt": "2026-11-02T22:25:00.262Z",
   "inputs": {
    "files": [
     "index.html",
@@ -28603,7 +28603,7 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "941c7a976621a52009c786e5f2ce633942159d2e"
+   "sha1": "51f20c1fbbeec67f79b2716afbaa7936cafd0021"
   },
   "issues": [],
   "views": {

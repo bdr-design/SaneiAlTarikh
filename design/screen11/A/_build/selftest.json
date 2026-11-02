@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-02T22:03:30.351Z",
+ "ranAt": "2026-11-02T22:27:06.614Z",
  "inputs": {
   "files": [
    "index.html",
@@ -22,7 +22,7 @@
    "header_cairo.jpg",
    "map_overlay_cairo.svg"
   ],
-  "sha1": "941c7a976621a52009c786e5f2ce633942159d2e"
+  "sha1": "51f20c1fbbeec67f79b2716afbaa7936cafd0021"
  },
  "cleanIssues": {
   "i16promax": [],
@@ -64,8 +64,11 @@
   },
   {
    "name": "off-token colour",
-   "ok": false,
-   "sample": []
+   "ok": true,
+   "sample": [
+    "text colour off-token rgb(136, 153, 170): \"الاستخبارات\"",
+    "contrast 2.26 for \"الاستخبارات\""
+   ]
   },
   {
    "name": "radius",
@@ -270,8 +273,12 @@
   },
   {
    "name": "section colour on data",
-   "ok": false,
-   "sample": []
+   "ok": true,
+   "sample": [
+    "section colour on data text: \"مصر\"",
+    "section colour on data text: \"جهاز الاستخبارات\"",
+    "contrast 4.39 for \"مصر\""
+   ]
   },
   {
    "name": "section colour on a rule",
@@ -340,7 +347,8 @@
    "ok": true,
    "sample": [
     "overview needs scrolling: 396.0 pt over",
-    "fades 0/0 do not match the scroll state (top 0, over 396.0)"
+    "fades 0/0 do not match the scroll state (top 0, over 396.0)",
+    "brief text not fully visible: الجهاز"
    ]
   },
   {
@@ -390,10 +398,11 @@
   },
   {
    "name": "text into a control",
-   "ok": false,
+   "ok": true,
    "sample": [
-    "content outside its control (تمويل القدرات السيبرانية: ): تمويل القدرات السيبر",
-    "action row 1: order must be .r-tile, .r-at, .r-chip (right to left)"
+    "text overlap \"تمويل القدرات السيبرانية\" / \"السيبراني\"",
+    "text overlap \"مليون $ سنويًا · خلال سنة\" / \"السيبراني\"",
+    "text over a control: \"تمويل القدرات السيبرانية\" runs into «السيبراني +1»"
    ]
   },
   {
@@ -492,8 +501,12 @@
   },
   {
    "name": "row read in part",
-   "ok": false,
-   "sample": []
+   "ok": true,
+   "sample": [
+    "a11y: «تمويل القدرات السيبرانية» does not read its numbers",
+    "a11y: «تمويل القدرات السيبرانية» does not say «دولار»",
+    "a11y: «تمويل القدرات السيبرانية» does not say the chip's direction in words"
+   ]
   },
   {
    "name": "% before its number",

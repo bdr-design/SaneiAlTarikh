@@ -542,7 +542,7 @@ Per-province arrays (sovereign, administrator, controller, flags, mode colour) a
 | `Settling` | 0.5 s after the last input |
 | `DataChanged` | 1 frame |
 | `TileArrival` | At most 10 Hz |
-| `Tween` | While an on-screen unit moves: ≤30 fps at ×1–×5; one step per game day at ×10 and above, when hot, or with Reduce Motion; 0 frames when nothing moves (D-15, screen 14) |
+| `Tween` | While an on-screen unit moves: ≤30 fps at ×1–×5 (the display link's preferred rate set to 30); steps at ×10 and above (several days a step at «أقصى», ≤10 a second), when hot, or with Reduce Motion; 0 map frames when nothing moves (D-15, screen 14) |
 
 The view uses `CAMetalDisplayLink` (iOS 17+).
 

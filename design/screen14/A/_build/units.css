@@ -1,7 +1,7 @@
   /* ================= Screen 14, variant A: the military map (D-15: units that glide along their route) =================
-     The approved play screen (B3 with opaque panels) in the military map mode. Unit tokens sit on the map at fixed size
-     (the map zooms, the tokens do not), each a small dark pill: the flag, a generic glyph (tank, ship, plane) and the
-     strength (formations, ships or aircraft). The selected army has a teal ring, its route a dashed teal line through its
+     The approved play screen (B3 with opaque panels) in the military map mode. Units sit on the map at fixed size (the map
+     zooms, the units do not), each the owner's generic image (tank, destroyer, fighter) under a small tag with the flag
+     and the strength (formations, ships or aircraft). The selected army has a teal ring, its route a dashed teal line through its
      waypoint to the destination, and the order bar takes the dock's place while it is selected. */
   .units { position: absolute; inset: 0; pointer-events: none; z-index: 1; }
   .units .tap { pointer-events: auto; }
@@ -49,3 +49,7 @@
   /* not available now (no war): grey, with a lock instead of its glyph */
   .o-btn[aria-disabled="true"] svg.i { color: var(--t2); }
   .o-sep { flex: none; width: 1px; height: 24px; background: var(--stroke); }
+  /* why attack is locked: a 32 pt note above the bar, centred on the attack button */
+  .o-tip { position: absolute; bottom: calc(var(--dock-h) + var(--s2)); height: var(--ctl); margin: 0; display: flex; align-items: center;
+    padding-inline: var(--pad-ctl); font-size: var(--fs-sec); line-height: var(--lh-sec); font-weight: 500; color: var(--t1); white-space: nowrap; }
+  .o-tip[hidden] { display: none; }

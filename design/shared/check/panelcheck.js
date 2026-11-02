@@ -692,11 +692,13 @@ module.exports = function makeChecker(cfg) {
       clean[x.id + ' coverage'] = coverage(clearBy);
       console.log(`clean coverage ${x.id}: ${clean[x.id + ' coverage'].length} issues ${clean[x.id + ' coverage'].slice(0, 3).join(' || ')}`);
       if (x === se) {
-        // the probe only means something where a tab has middle views (a body taller than its top and end views)
-        const hasMid = Object.keys(clean).some((k) => k.startsWith(x.id + '_') && /_at\d+$/.test(k));
-        const miss = coverage(skipMid), ok = !hasMid || miss.length > 0;
-        results.push({ name: 'coverage without the middle views', ok, sample: hasMid ? miss.slice(0, 3) : ['no middle views on this panel'] });
-        console.log(`${ok ? 'caught ' : 'MISSED '} coverage without the middle views`);
+        // the coverage check must report a brief string no view shows (a planted one); what the middle views add is kept
+        // in the record (on short panels the top and end views already show everything)
+        const k0 = 'reach_' + TABS[0], had = BRIEF[k0], probe = 'نص غير معروض للاختبار';
+        BRIEF[k0] = (had || []).concat([probe]); const miss = coverage(clearBy); if (had) BRIEF[k0] = had; else delete BRIEF[k0];
+        const ok = miss.some((m) => m.includes(probe));
+        results.push({ name: 'coverage reports a string no view shows', ok, sample: miss.slice(0, 3), midViewsAdd: coverage(skipMid).slice(0, 3) });
+        console.log(`${ok ? 'caught ' : 'MISSED '} coverage reports a string no view shows`);
       }
     }
     for (const c of Object.values(ctxs)) await c.close();

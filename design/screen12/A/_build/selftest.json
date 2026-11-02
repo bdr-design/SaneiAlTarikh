@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-02T22:06:46.767Z",
+ "ranAt": "2026-11-02T22:30:22.746Z",
  "inputs": {
   "files": [
    "index.html",
@@ -22,7 +22,7 @@
    "header_cairo.jpg",
    "map_overlay_cairo.svg"
   ],
-  "sha1": "3fad03acc34276e40583bb983a61d79d49346036"
+  "sha1": "7c2e59257120909e4893c2827266ad402104835c"
  },
  "cleanIssues": {
   "i16promax": [],
@@ -62,7 +62,8 @@
    "name": "off-token colour",
    "ok": true,
    "sample": [
-    "text colour off-token rgb(136, 153, 170): \"قيد البحث\""
+    "text colour off-token rgb(136, 153, 170): \"البحث\"",
+    "contrast 2.4 for \"البحث\""
    ]
   },
   {
@@ -172,7 +173,7 @@
    "sample": [
     "clipped text (bottom): \"قيد البحث\" 834.05..881 y 247..264",
     "clipped text (bottom): \"3\" 613.19..621 y 416.92..435.92",
-    "text over a control: \"4\" runs into «البحث +8»"
+    "tab bodies shown: overview, domains (want only overview)"
    ]
   },
   {
@@ -268,7 +269,9 @@
    "name": "section colour on data",
    "ok": true,
    "sample": [
-    "section colour on data text: \"قيد البحث\""
+    "section colour on data text: \"مصر\"",
+    "section colour on data text: \"8\"",
+    "section colour on data text: \"مجالات\""
    ]
   },
   {
@@ -339,7 +342,8 @@
    "ok": true,
    "sample": [
     "overview needs scrolling: 398.0 pt over",
-    "fades 0/0 do not match the scroll state (top 0, over 398.0)"
+    "fades 0/0 do not match the scroll state (top 0, over 398.0)",
+    "brief text not fully visible: +18"
    ]
   },
   {
@@ -389,10 +393,10 @@
   },
   {
    "name": "text into a control",
-   "ok": false,
+   "ok": true,
    "sample": [
-    "content outside its control (رفع الإنفاق على البحث: 300): رفع الإنفاق على البح",
-    "horizontal overflow in البحث +18شهريًا +1 شهريًا ",
+    "text over a control: \"رفع الإنفاق على البحث\" runs into «البحث +8»",
+    "icon over text: r-arr / \"رفع الإنفاق على البحث\"",
     "action row 1: order must be .r-tile, .r-at, .r-chip (right to left)"
    ]
   },

@@ -1,14 +1,16 @@
-  <!-- The order bar (the dock's place while an army is selected): the army, then its orders; the one in force is white -->
+  <!-- The order bar (the dock's place while an army is selected): the army, then its orders; the one in force is white. The words are the military panel's (screen 9): تقدّم، هجوم، توقّف، نقاط عبور -->
   <nav class="orders glass bar" aria-label="أوامر الجيش">
     <div class="o-unit" role="group" aria-label="">
       <span class="flag"><img src="../../shared/flag_eg.svg" alt="علم مصر"></span>
       <span class="o-tt"><b class="o-name"></b><span class="o-sub"></span></span>
     </div>
     <span class="o-sep" aria-hidden="true"></span>
-    <button class="o-btn tap" data-o="move"><svg class="i"><use href="#i-move"/></svg><span>تحرّك</span></button>
-    <button class="o-btn tap" data-o="attack" aria-disabled="true" aria-label="هجوم: غير متاح، لا حرب"><svg class="i"><use href="#i-lock"/></svg><span>هجوم</span></button>
-    <button class="o-btn tap" data-o="halt"><svg class="i"><use href="#i-halt"/></svg><span>توقف</span></button>
-    <button class="o-btn tap" data-o="waypoint"><svg class="i"><use href="#i-pin"/></svg><span>نقطة مرور</span></button>
+    <button class="o-btn tap" data-o="move"><svg class="i"><use href="#i-move"/></svg><span>تقدّم</span></button>
+    <button class="o-btn tap" data-o="attack" aria-disabled="true" aria-label="هجوم: غير متاح، لا حرب. يُفتح عند إعلان الحرب"><svg class="i"><use href="#i-lock"/></svg><span>هجوم</span></button>
+    <button class="o-btn tap" data-o="halt"><svg class="i"><use href="#i-halt"/></svg><span>توقّف</span></button>
+    <button class="o-btn tap" data-o="waypoint"><svg class="i"><use href="#i-pin"/></svg><span>نقطة عبور</span></button>
     <span class="o-sep" aria-hidden="true"></span>
     <button class="o-btn tap o-x" aria-label="إغلاق: إلغاء تحديد الجيش"><svg class="i"><use href="#i-close"/></svg><span>إغلاق</span></button>
   </nav>
+  <!-- why attack is locked: shown on a tap (&tip=1 draws it), above the bar over the attack button -->
+  <p class="o-tip glass ctl" hidden>لا حرب: يُفتح الهجوم عند إعلان الحرب</p>

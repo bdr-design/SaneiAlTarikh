@@ -2,9 +2,9 @@
 opaque panels and the map): the province sheet and Cairo's selection layer come out; the map mode reads «عسكرية»; the
 unit tokens, the route and the order bar (units.html, orders.html, units.css) go in; units.js replaces the sheet and map
 placement code (placeUnits picks the zoom and position; the tokens glide in the live view).
-URL: &state=order (default: the western army selected and ordered to Salloum) | idle (nothing selected);
-&t=0..1 freezes the march at that share (the checker's views), without &t the clock runs (&loop=0 stops after arrival,
-&motion=reduce steps a day at a time).
+URL: &state=order (default: the western army selected and ordered to Siwa) | idle (nothing selected);
+&t=0..1 freezes the march at that share (the checker's views; &halt=1 halts it there, &tip=1 shows why attack is
+locked), without &t the clock runs (&speed=1|2|5|10|max, &loop=0 stops after arrival, &motion=reduce steps a day at a time).
 Usage: python3 -I assemble.py <repo> <this _build dir> <out dir>"""
 import sys
 from pathlib import Path
@@ -35,7 +35,8 @@ sub("    r.dataset.tab = ['politics', 'society', 'economy', 'security'].indexOf(
 sub('</style>\n</head>', (S / 'units.css').read_text(encoding='utf-8') + '</style>\n</head>')
 # icons: generic unit glyphs and the orders
 SYMBOLS = """    <!-- military map (screen 14): the orders (the units are the owner's images) -->
-    <symbol id="i-move" viewBox="0 0 24 24"><path d="M4 12h15"/><path d="M14 7l5 5-5 5"/></symbol>
+    <symbol id="i-move" viewBox="0 0 24 24"><path d="M20 12H5"/><path d="M10 7l-5 5 5 5"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5.5v13l10.5-6.5z"/></symbol>
     <symbol id="i-halt" viewBox="0 0 24 24"><path d="M8.6 3.75h6.8l4.85 4.85v6.8l-4.85 4.85H8.6l-4.85-4.85V8.6z"/><path d="M8.5 12h7"/></symbol>
     <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s-6.25-5.6-6.25-10.75a6.25 6.25 0 0 1 12.5 0C18.25 15.4 12 21 12 21z"/><circle cx="12" cy="10.25" r="2.25"/></symbol>
     <symbol id="i-lock" viewBox="0 0 24 24"><rect x="5.5" y="10.5" width="13" height="9.5" rx="2"/><path d="M8.5 10.5V8a3.5 3.5 0 0 1 7 0v2.5"/></symbol>
