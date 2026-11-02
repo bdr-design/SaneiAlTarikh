@@ -1,0 +1,15 @@
+  /* ================= Screen 10, variant A: the foreign panel («الخارجية») =================
+     Built with the shared builder on the approved panels. One tab body at a time (&tab=overview|relations|treaties|un).
+     Relations run from −100 to 100; each value carries its sign, a word and its trend arrow, so colour is never alone. */
+  [data-tab="relations"] .r-body[data-tab="relations"], [data-tab="treaties"] .r-body[data-tab="treaties"], [data-tab="un"] .r-body[data-tab="un"] { display: flex; }
+  .r-body[data-tab="relations"], .r-body[data-tab="treaties"], .r-body[data-tab="un"] { padding-top: var(--s2); padding-bottom: var(--s3); gap: var(--s2); }
+
+  /* a relation: the country and its standing in words, then the value with its trend arrow */
+  .f-rel { display: flex; align-items: center; gap: var(--s2); height: 44px; }
+  .f-v { flex: none; display: inline-flex; align-items: center; gap: 2px; font-size: var(--fs-val); line-height: var(--lh-val); font-weight: 600; white-space: nowrap; }
+  /* a treaty or an agenda item: its name and what it does */
+  .f-tr { display: flex; align-items: center; height: 36px; }
+  /* the Security Council: a label over its members */
+  .f-un { display: flex; flex-direction: column; gap: 2px; }
+  .f-un > span:last-child { font-size: var(--fs-sec); line-height: var(--lh-sec); font-weight: 500; color: var(--t1); }
+  .f-l { font-size: var(--fs-label); line-height: var(--lh-label); font-weight: 500; color: var(--t2); }
