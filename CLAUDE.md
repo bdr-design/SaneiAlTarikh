@@ -4,6 +4,7 @@
 - Owner's rule (2026-10-20): Claude does all the work itself. Subagents are reviewers only: read-only, separate context, they never edit files.
 - Design phase: no game code until the owner approves. Every screen, section or option needs a visual design the owner approves before it is built. The owner generates all AI images; ask for them.
 - Owner's delegation (2026-10-21, «قلتلك انت تولى كل شي»): Claude makes the design calls and approves each finished screen itself (reviewed, fixed, gated), logs it as approved under the delegation, moves it to `main`, shows it to the owner, and goes on without asking. The owner can change anything at any time (`decisions.json`: `ownerDelegation`).
+- Owner's instruction (2026-11-02, «كمل كلها بدقه ومعك وكيلين مراجعين لكل شي لاتوقف لين تنهي كل شي وتكون اللعبة جاهزة»): carry on without stopping through every remaining item and, once the design is finished, into building the game until it is ready. Every item gets two independent read-only reviewers (each its own lens); every confirmed finding is fixed before approval (`decisions.json`: `finishEverything`).
 - Agreed decisions live in `decisions/decisions.json`. Never change one without the owner's explicit answer, and log every approval in `decisions/decisions_log.txt`.
 - Mockups use the approved tokens (see `design/shared/SCREEN3_BRIEF.md`) and must pass `python3 -I tools/check_screen.py <screen_dir>` on all 7 devices in `design/shared/devices.json`.
 - Talk to the owner in simple Gulf Arabic, with Western digits. Never claim "tested on iPhone" for browser mockups.

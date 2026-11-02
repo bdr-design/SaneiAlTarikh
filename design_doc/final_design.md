@@ -241,6 +241,8 @@ A rule that nothing enforces is not a rule here. Rule IDs are referenced in the 
 | L11 | **SwiftUI discipline.** <ul><li>Views read only models built from snapshots.</li><li>The HUD updates at most 4 times a second.</li><li>At most 6 regions are blurred.</li><li>Long lists are lazy.</li><li>Panels ask for their data only while open.</li></ul> | `Displayed<T>` tests; SwiftLint custom rules. |
 | L12 | **Every feature has a cost line** in `docs/perf.md`. | PR template; a CI warning when `Systems/` or `content/` change without a `perf.md` change. |
 | L13 | **Every asset class has a size budget** (§3.6), including each scenario file. | The IPA gate's size manifest. |
+| L14 | **The load is spread across engines, never piled in one place** (the owner, 2026-11-02: «توزيع الثقل على محركات عشان مايتجمع بمكان واحد»). Each engine has its own thread or core and its own budget: <ul><li>**the main thread** only takes touches and hands finished models to the views (≤1.0 ms per frame); it never simulates, decodes, shapes text or builds buffers;</li><li>**the simulation engine** (`GameHost`) runs on its own task, and its per-government monthly work runs in parallel across the cores (below, §2.4);</li><li>**the AI engine** (`SaneiAI`) thinks on its own task over a snapshot and only sends Commands (§2.4);</li><li>**the map engine** draws on the GPU; imagery decoding, label shaping and map-buffer building each run as background work with their own in-flight limits;</li><li>**the platform engine** writes saves and logs off the main thread.</li></ul> No system takes more than its line in the per-day sub-budget (§3.2), and work that comes in bulk (monthly, yearly, route searches, strategic AI) is staggered over the days so no single day spikes. | Per-engine counters in the overlay and the recorder; the work-counter gate checks each system against its sub-budget line and fails a day over 16 ms; a parallel-vs-serial test proves the same state hash. |
+| L15 | **No hot spot grows with play time.** History, notifications and logs live in fixed rings; caches are bounded and droppable; no list scanned per day grows with the years played. | The 2011 → 2100 all-AI run checks that the mean day in 2100 stays within 10% of the mean day in 2011. |
 
 ### 1.2 Realism (الواقعية)
 
@@ -377,7 +379,7 @@ Dependencies run one way: Core ← Content ← Engine ← AI; Core ← Map; Pres
 
 | Table | Rows | Main columns | Size (est.) |
 |---|---|---|---|
-| Provinces | ~3,150 (≤3,000 land + ~250 sea) | <ul><li>Status: sovereign (polity), administrator (government), controller (`AgentRef`: a government or an actor in one uint16 space), controlPct, claims, flags</li><li>People: population, urban share, 3 skill-tier shares</li><li>Condition: unrest, unrest offset, infrastructure, damage, fortification, supply capacity, admin-region ID</li></ul> | 0.40 MB |
+| Provinces | ~3,150 (≤3,000 land + ~250 sea) | <ul><li>Status: sovereign (polity), administrator (government), controller (`AgentRef`: a government or an actor in one uint16 space), controlPct, claims, flags</li><li>People: population, urban share, 3 skill-tier shares</li><li>Condition: unrest, unrest offset, infrastructure (4 sector sub-indices, 0–10 each: electricity, transport, water and sanitation, telecom; the province's index is their mean, T-007), damage, fortification, supply capacity, admin-region ID</li></ul> | 0.40 MB |
 | Group rows (sparse) | ~8,000 | (province, group, share, grievance). Groups come from a global registry with two dimensions, ethno-linguistic and religious. No limit per province. | 0.06 MB |
 | Industries | ~17,000 | Province, type, capacity, utilisation, damage, state share, last margin | 0.43 MB |
 | Polities | ≤384 (`exists`) | Territory summary, UN membership, the UN-seat government, bloc seats, continuator links, flags | 0.03 MB |
@@ -449,6 +451,12 @@ Dependencies run one way: Core ← Content ← Engine ← AI; Core ← Map; Pres
   - `ViewSnapshot`, sent through `AsyncStream(.bufferingNewest(1))` at most 10 times a second.
   - Detail panels call `await host.query(…)` only while open.
 - **On the main actor**, `GameStore` updates panel models through `Displayed<T>`. Map buffers and runtime label anchors are rebuilt in background tasks when their versions change.
+
+**Spreading the work across cores (L14).** Determinism stays exact, because each parallel job writes only its own rows and the results are merged in serial order:
+- **Monthly slot in parallel.** The governments due today run `Economy`, `Population`, `Internal`, `Politics`, `Intelligence`, `Research` and `DiplomacyDrift` in a `TaskGroup`, one task per government. Each reads yesterday's shared state and writes only that government's rows. Anything that crosses to another government (trade, aid, migration, ledger postings) goes into the task's own outbox. After the group, the outboxes are applied in (government serial, sequence) order. `ConditionalEvents` then run serially.
+- **AI on its own task.** Strategic and diplomatic AI read an immutable snapshot on a separate task and return Commands. The host applies them at a fixed latency (the next day boundary after the snapshot's day plus 1), in (day, issuerRank, sequence) order, so the result does not depend on how fast the AI task ran. Operational AI stays inside the day, within its 0.25 ms line.
+- **Bounded per day.** The monthly slots spread about 7–8 governments over each day; strategic AI runs at most 15 a day; route searches at most 12 a day; front execution every 3 days, staggered.
+- **One core is enough.** On a phone under thermal pressure the governor can run the group serially; the state hash is the same either way (tested on Linux in CI).
 
 **Lifecycle.**
 
@@ -534,7 +542,7 @@ Per-province arrays (sovereign, administrator, controller, flags, mode colour) a
 | `Settling` | 0.5 s after the last input |
 | `DataChanged` | 1 frame |
 | `TileArrival` | At most 10 Hz |
-| `Tween` | ≤300 ms (D-15) |
+| `Tween` | While an on-screen unit moves: ≤30 fps at ×1–×5 (the display link's preferred rate set to 30); steps at ×10 and above (several days a step at «أقصى», ≤10 a second), when hot, or with Reduce Motion; 0 map frames when nothing moves (D-15, screen 14) |
 
 The view uses `CAMetalDisplayLink` (iOS 17+).
 
@@ -2073,7 +2081,7 @@ All 54 issues were accepted. Five were merged with a duplicate from the other cr
 | 51 | RF · entity caps | Accepted (merged into #12) | Quotas, reserve pool, 8,192 cap measured |
 | 52 | RF · sea-level impacts | Accepted | DeltaDTM (CC BY 4.0) thresholds ≤1/2/5/10 m with `estimate` tag and calibration to national exposure figures; GMTED no longer used for coasts (§4.2, §5.8) |
 | 53 | RF · Palestinian status 1979/1985 | Accepted | Per-area, per-pack table: no Jordanian claim on Gaza; East Jerusalem law from 1967 plus the 30 Jul 1980 event; Golan occupied in 1979 and law of 14 Dec 1981 not recognised (§4.5) |
-| 54 | RF · infrastructure index | Accepted | Index from GDP per capita, urban share and Factbook road and rail lengths (PD); GRIP pending; Natural Earth roads dropped; `estimate` (§4.6) |
+| 54 | RF · infrastructure index | Accepted | Index from GDP per capita, urban share and Factbook road and rail lengths (PD); GRIP pending; Natural Earth roads dropped; `estimate` (§4.6). **2026-11-02 (T-007):** stored as 4 sector sub-indices (electricity, transport, water and sanitation, telecom) whose mean is the index; seeded by splitting the index with the sector shares of access data where they exist (electricity access, piped water, phone lines), else equal; a project raises one sector |
 
 ---
 
@@ -2133,7 +2141,7 @@ These answers override the defaults below. They are logged in `decisions/decisio
 | D-5 Maximum zoom | End of M0b | <ul><li>**Default: 1.0 km/pt.**</li><li>2 km/pt: sharper imagery, but small areas such as Lebanon and the West Bank become hard to tap.</li><li>0.6 km/pt: needs z8 imagery (+50–90 MB).</li></ul> |
 | D-6 Money display | M1a | <ul><li>**Default: nominal current USD**, now backed by the nominal ledger, so devaluations and inflation show as in the news. «لماذا؟» also shows constant 2011 USD.</li><li>Constant 2011 USD: easier to compare across decades, but values drift from real headlines.</li></ul> |
 | D-7 Month names | M1c | <ul><li>**Default: يناير… with a setting.** One extra string set.</li><li>Levantine names only.</li><li>Both side by side: needs more width in the HUD.</li></ul> |
-| D-15 Unit movement | M4 | <ul><li>**Default: discrete jumps.** 0 extra frames.</li><li>Tween: a few extra frames on arrival days at ×2 or slower.</li></ul> |
+| D-15 Unit movement | M4 | <ul><li>**Decided by the owner (2026-10-20): smooth glide** along the route, light: only on-screen moving units, ≤30 fps at ×1–×5, a step per game day at ×10 and above, when hot, or with Reduce Motion; 0 frames when nothing moves. Prototype: screen 14.</li><li>(Earlier default, replaced: discrete jumps.)</li></ul> |
 | D-16 Maximum speed | M1a | <ul><li>**Default: 30 days/s.** 2011 → 2100 in 18 min, 6% CPU.</li><li>20 days/s: 27 min, cooler.</li><li>60 days/s: 9 min, about 12% CPU and more heat.</li></ul> |
 | D-21 Test devices | M0b | <ul><li>**Default: borrow an iPhone XR (A12, 3 GB)** for M0b, M4 and M8, and an SE (2nd or 3rd generation) for one layout check. A few hours each time.</li><li>Pro Max and counters only: no effort, but older-phone problems found late.</li></ul> |
 | D-23 Imagery for historical packs | Before the 1990 pack | <ul><li>**Default: reuse the 2004 mosaic.** No cost; coastlines and the Aral Sea show their 2004 state.</li><li>Per-era imagery: no comparable licensable mosaic found; large work.</li></ul> |

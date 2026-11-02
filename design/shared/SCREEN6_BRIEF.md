@@ -69,7 +69,7 @@ The numbers agree with each other. The sources are in T-005: Egypt's FY2009/10 b
        - sales 10%, 12.2;
        - customs 5%, the effective rate (2.7 of goods imports of 52.9), 2.7.
      - **Subsidies:** the amount and its unit beside the value: fuel 11.7 مليار $, bread and rations 2.9 مليار $ (63 million beneficiaries), electricity 900 مليون $. Together 15.5, which fits inside the 17.2 line.
-     - **One note at the end:** the taxes are 30.1 of the 48.6 revenue, and the rest comes from the canal, petroleum and grants. A tax rise or a subsidy cut raises unrest in the poorest provinces first.
+     - **One note at the end:** the taxes are 30.1 of the 48.6 revenue, and the rest comes from the canal, petroleum and grants. A consumption-tax rise or a subsidy cut raises unrest in the poorest provinces first (changed 2026-11-02 after screen 7's review: a top-bracket income tax rise falls on the cities, so the note no longer covers every tax).
   4. **التجارة والعملة:**
      - **Status table** (3 rows): a managed float, fully convertible (قابلية التحويل: كاملة), reserves of 8 months of imports, limited capital controls (ضوابط رأس المال: محدودة), the central bank's rate 8.25%, the deficit financed by domestic borrowing.
      - **«السياسة النقدية والعملة»:** a lever card that opens its adjuster (designed next). It sets the rate, the exchange regime and capital controls, as a gradual change.

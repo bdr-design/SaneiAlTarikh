@@ -1,7 +1,7 @@
 {
  "se": {
   "device": "667x375 side 0 bottom 0 none",
-  "renderedAt": "2026-10-21T05:39:48.482Z",
+  "renderedAt": "2026-11-02T21:02:49.948Z",
   "inputs": {
    "files": [
     "index.html",
@@ -21,7 +21,7 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "928e529b7dae1f3050ea369f182ecc24ef1c22fe"
+   "sha1": "c39d9913b1b3384680b6f2a150b8c6eab4bc389f"
   },
   "issues": [],
   "views": {
@@ -2069,12 +2069,12 @@
      {
       "t": "محدودة",
       "fs": 11.5,
-      "worst": 16.37
+      "worst": 16.65
      },
      {
       "t": "شاملة",
       "fs": 11.5,
-      "worst": 16.65
+      "worst": 16.37
      },
      {
       "t": "التجنيد",
@@ -4819,12 +4819,12 @@
      {
       "t": "محدودة",
       "fs": 11.5,
-      "worst": 16.37
+      "worst": 16.65
      },
      {
       "t": "شاملة",
       "fs": 11.5,
-      "worst": 16.65
+      "worst": 16.37
      },
      {
       "t": "التجنيد",
@@ -8288,7 +8288,7 @@
  },
  "mini": {
   "device": "812x375 side 50 bottom 21 notch",
-  "renderedAt": "2026-10-21T05:40:14.265Z",
+  "renderedAt": "2026-11-02T21:03:13.704Z",
   "inputs": {
    "files": [
     "index.html",
@@ -8308,7 +8308,7 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "928e529b7dae1f3050ea369f182ecc24ef1c22fe"
+   "sha1": "c39d9913b1b3384680b6f2a150b8c6eab4bc389f"
   },
   "issues": [],
   "views": {
@@ -10409,12 +10409,12 @@
      {
       "t": "محدودة",
       "fs": 11.5,
-      "worst": 16.37
+      "worst": 16.65
      },
      {
       "t": "شاملة",
       "fs": 11.5,
-      "worst": 16.65
+      "worst": 16.37
      },
      {
       "t": "التجنيد",
@@ -13224,12 +13224,12 @@
      {
       "t": "محدودة",
       "fs": 11.5,
-      "worst": 16.37
+      "worst": 16.65
      },
      {
       "t": "شاملة",
       "fs": 11.5,
-      "worst": 16.65
+      "worst": 16.37
      },
      {
       "t": "التجنيد",
@@ -17854,7 +17854,7 @@
  },
  "i14": {
   "device": "844x390 side 47 bottom 21 notch",
-  "renderedAt": "2026-10-21T05:40:44.661Z",
+  "renderedAt": "2026-11-02T21:03:41.677Z",
   "inputs": {
    "files": [
     "index.html",
@@ -17874,7 +17874,7 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "928e529b7dae1f3050ea369f182ecc24ef1c22fe"
+   "sha1": "c39d9913b1b3384680b6f2a150b8c6eab4bc389f"
   },
   "issues": [],
   "views": {
@@ -20366,12 +20366,12 @@
      {
       "t": "محدودة",
       "fs": 11.5,
-      "worst": 16.37
+      "worst": 16.65
      },
      {
       "t": "شاملة",
       "fs": 11.5,
-      "worst": 16.65
+      "worst": 16.37
      },
      {
       "t": "التجنيد",
@@ -23671,12 +23671,12 @@
      {
       "t": "محدودة",
       "fs": 11.5,
-      "worst": 16.37
+      "worst": 16.65
      },
      {
       "t": "شاملة",
       "fs": 11.5,
-      "worst": 16.65
+      "worst": 16.37
      },
      {
       "t": "التجنيد",
@@ -27841,7 +27841,7 @@
  },
  "i16": {
   "device": "852x393 side 59 bottom 21 island",
-  "renderedAt": "2026-10-21T05:41:12.727Z",
+  "renderedAt": "2026-11-02T21:04:08.889Z",
   "inputs": {
    "files": [
     "index.html",
@@ -27861,7 +27861,7 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "928e529b7dae1f3050ea369f182ecc24ef1c22fe"
+   "sha1": "c39d9913b1b3384680b6f2a150b8c6eab4bc389f"
   },
   "issues": [],
   "views": {
@@ -30333,12 +30333,12 @@
      {
       "t": "محدودة",
       "fs": 11.5,
-      "worst": 16.37
+      "worst": 16.65
      },
      {
       "t": "شاملة",
       "fs": 11.5,
-      "worst": 16.65
+      "worst": 16.37
      },
      {
       "t": "التجنيد",
@@ -33613,12 +33613,12 @@
      {
       "t": "محدودة",
       "fs": 11.5,
-      "worst": 16.37
+      "worst": 16.65
      },
      {
       "t": "شاملة",
       "fs": 11.5,
-      "worst": 16.65
+      "worst": 16.37
      },
      {
       "t": "التجنيد",
@@ -37718,7 +37718,7 @@
  },
  "i16pro": {
   "device": "874x402 side 62 bottom 21 island",
-  "renderedAt": "2026-10-21T05:41:40.046Z",
+  "renderedAt": "2026-11-02T21:04:35.738Z",
   "inputs": {
    "files": [
     "index.html",
@@ -37738,7 +37738,7 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "928e529b7dae1f3050ea369f182ecc24ef1c22fe"
+   "sha1": "c39d9913b1b3384680b6f2a150b8c6eab4bc389f"
   },
   "issues": [],
   "views": {
@@ -40207,12 +40207,12 @@
      {
       "t": "محدودة",
       "fs": 11.5,
-      "worst": 16.37
+      "worst": 16.65
      },
      {
       "t": "شاملة",
       "fs": 11.5,
-      "worst": 16.65
+      "worst": 16.37
      },
      {
       "t": "التجنيد",
@@ -43497,12 +43497,12 @@
      {
       "t": "محدودة",
       "fs": 11.5,
-      "worst": 16.37
+      "worst": 16.65
      },
      {
       "t": "شاملة",
       "fs": 11.5,
-      "worst": 16.65
+      "worst": 16.37
      },
      {
       "t": "التجنيد",
@@ -47030,7 +47030,7 @@
  },
  "i11": {
   "device": "896x414 side 48 bottom 21 notch",
-  "renderedAt": "2026-10-21T05:42:07.024Z",
+  "renderedAt": "2026-11-02T21:05:01.700Z",
   "inputs": {
    "files": [
     "index.html",
@@ -47050,7 +47050,7 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "928e529b7dae1f3050ea369f182ecc24ef1c22fe"
+   "sha1": "c39d9913b1b3384680b6f2a150b8c6eab4bc389f"
   },
   "issues": [],
   "views": {
@@ -49500,12 +49500,12 @@
      {
       "t": "محدودة",
       "fs": 11.5,
-      "worst": 16.37
+      "worst": 16.65
      },
      {
       "t": "شاملة",
       "fs": 11.5,
-      "worst": 16.65
+      "worst": 16.37
      },
      {
       "t": "التجنيد",
@@ -52770,12 +52770,12 @@
      {
       "t": "محدودة",
       "fs": 11.5,
-      "worst": 16.37
+      "worst": 16.65
      },
      {
       "t": "شاملة",
       "fs": 11.5,
-      "worst": 16.65
+      "worst": 16.37
      },
      {
       "t": "التجنيد",
@@ -56211,7 +56211,7 @@
  },
  "i16promax": {
   "device": "956x440 side 62 bottom 21 island",
-  "renderedAt": "2026-10-21T05:42:33.100Z",
+  "renderedAt": "2026-11-02T21:05:28.222Z",
   "inputs": {
    "files": [
     "index.html",
@@ -56231,7 +56231,7 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "928e529b7dae1f3050ea369f182ecc24ef1c22fe"
+   "sha1": "c39d9913b1b3384680b6f2a150b8c6eab4bc389f"
   },
   "issues": [],
   "views": {
@@ -58700,12 +58700,12 @@
      {
       "t": "محدودة",
       "fs": 11.5,
-      "worst": 16.37
+      "worst": 16.65
      },
      {
       "t": "شاملة",
       "fs": 11.5,
-      "worst": 16.65
+      "worst": 16.37
      },
      {
       "t": "التجنيد",
@@ -62054,12 +62054,12 @@
      {
       "t": "محدودة",
       "fs": 11.5,
-      "worst": 16.37
+      "worst": 16.65
      },
      {
       "t": "شاملة",
       "fs": 11.5,
-      "worst": 16.65
+      "worst": 16.37
      },
      {
       "t": "التجنيد",

@@ -1,0 +1,61 @@
+  /* ================= Section identity + white (proposal, 2026-10-20) =================
+     Owner: «ماذا لو ضفنا اللون الابيض ولكل قسم هوية بصرية؟»
+     Each dock section gets one identity colour, kept out of the hues that carry meaning everywhere (teal = the player's
+     country and selected states, cyan = interactive, blue = positive, amber = warning, red = danger). The identity
+     colour appears only on the section's chrome: a 2 pt line on top of its panel, an emblem in the header, the open
+     tab, and the dock item while the section is open. Data colours never change with the section.
+     الدولة's identity is pearl white, so the state panel also shows the «white» idea.
+     ?theme=touch (default): the dark panels (D-3) + white touches: the white identity line and emblem, a white open
+       tab, filled white primary buttons with dark text, white icons in the tiles.
+     ?theme=light: white panels with dark text, for comparison (would change D-3 «غامق دايمًا»). */
+  :root {
+    --sec-state: #E9EEF4;      /* الدولة: لؤلؤي */
+    --sec-econ: #43C08A;       /* الاقتصاد: زمردي */
+    --sec-pol: #A08CFF;        /* الداخلية والسياسة: بنفسجي */
+    --sec-army: #BDB46A;       /* الجيش: زيتي */
+    --sec-foreign: #5B86F2;    /* الخارجية: أزرق ملكي */
+    --sec-intel: #C873D6;      /* الاستخبارات: أرجواني */
+    --sec-research: #9EDB5B;   /* البحث: ليموني */
+    --sec-more: #A9BCCB;       /* المزيد: رمادي */
+    --sec: var(--sec-state);
+  }
+  /* the open section in the dock takes its identity colour */
+  .dock-item.on, .dock-item.on svg.i { color: var(--sec) !important; opacity: 1; }
+  .dock-item.on::after { content: ""; position: absolute; left: 50%; bottom: 3px; width: 16px; height: 2px; margin-left: -8px; border-radius: 1px; background: var(--sec); }
+
+  /* the section's line on top of its panel and its emblem in the header */
+  .r-in::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--sec); z-index: 3; }
+  .s-emb { flex: none; width: 32px; height: 32px; border-radius: 8px; display: grid; place-items: center; margin-inline-start: auto;
+    color: var(--sec); background: color-mix(in srgb, var(--sec) 16%, rgba(6, 11, 16, .85)); box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--sec) 45%, transparent); }
+  .s-emb + .r-x { margin-inline-start: 0; }
+
+  /* ---------- touch: dark panels + white ---------- */
+  [data-theme="touch"] .r-tab.on { color: var(--sec); box-shadow: inset 0 -2px 0 var(--sec); }
+  [data-theme="touch"] .r-tile { color: #EEF3F7; }
+  [data-theme="touch"] .r-btn.r-primary { background: #EEF3F7; border-color: #EEF3F7; color: #0B1218; }
+  [data-theme="touch"] .r-btn:not(.r-primary):not(.r-grey) { border-color: rgba(238, 243, 247, .55); background: transparent; color: #EEF3F7; }
+  [data-theme="touch"] .r-grey { border-color: rgba(238, 243, 247, .3); background: transparent; color: #C9D3DB; }
+  [data-theme="touch"] .r-first::after { background: #EEF3F7; }
+  [data-theme="touch"] .r-chip { border-color: rgba(238, 243, 247, .5); background: rgba(238, 243, 247, .06); color: #EEF3F7; }
+  [data-theme="touch"] .s-bar i, [data-theme="touch"] .s-prog i { background: #EEF3F7; }
+  [data-theme="touch"] .r-cap { border-color: rgba(238, 243, 247, .6); color: #EEF3F7; }
+
+  /* ---------- light: white panels ---------- */
+  [data-theme="light"] { --sec: #22364F; }    /* الدولة's identity on white: deep navy (pearl white would vanish) */
+  [data-theme="light"] .dock-item.on, [data-theme="light"] .dock-item.on svg.i { color: var(--sec-state) !important; }   /* the dock stays dark */
+  [data-theme="light"] .dock-item.on::after { background: var(--sec-state); }
+  [data-theme="light"] .sheet { --t1: #0E1A24; --t2: #4A5D6C; --hair: rgba(14, 26, 36, .12); --stroke: rgba(14, 26, 36, .14);
+    --card: #FFFFFF; --tile: #EDF1F5; --teal: #0B8276; --cyan: #136F8C; --blue: #2C64C4; --amber: #A3660F; --red: #B8402E;
+    color: var(--t1); border-color: rgba(14, 26, 36, .18) !important; }
+  [data-theme="light"] .sheet > .frost::after { background: #F3F6F9 !important; }
+  [data-theme="light"] .r-hd { border-bottom-color: rgba(14, 26, 36, .14); }
+  [data-theme="light"] .r-hd .r-name, [data-theme="light"] .r-hd .r-sub, [data-theme="light"] .r-hd .r-sub .r-dot { color: #FFFFFF; }
+  [data-theme="light"] .r-cap { background: rgba(255, 255, 255, .92); border-color: #0B8276; color: #0B8276; }
+  [data-theme="light"] .r-x { background: rgba(255, 255, 255, .92); color: #0E1A24; }
+  [data-theme="light"] .s-emb { color: #22364F; background: rgba(255, 255, 255, .92); box-shadow: inset 0 0 0 1px rgba(34, 54, 79, .4); }
+  [data-theme="light"] .r-tab.on { color: var(--sec); box-shadow: inset 0 -2px 0 var(--sec); }
+  [data-theme="light"] .r-act, [data-theme="light"] .s-proj { box-shadow: inset 0 0 0 1px rgba(14, 26, 36, .12), 0 1px 3px rgba(14, 26, 36, .08); }
+  [data-theme="light"] .r-btn.r-primary { background: #22364F; border-color: #22364F; color: #FFFFFF; }
+  [data-theme="light"] .r-first::after { background: #22364F; }
+  [data-theme="light"] .s-bar, [data-theme="light"] .s-prog { background: rgba(14, 26, 36, .12); }
+  [data-theme="light"] .s-bar i, [data-theme="light"] .s-prog i { background: #0B8276; }
