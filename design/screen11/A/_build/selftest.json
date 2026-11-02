@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-02T22:27:06.614Z",
+ "ranAt": "2026-11-02T22:58:13.640Z",
  "inputs": {
   "files": [
    "index.html",
@@ -22,7 +22,7 @@
    "header_cairo.jpg",
    "map_overlay_cairo.svg"
   ],
-  "sha1": "51f20c1fbbeec67f79b2716afbaa7936cafd0021"
+  "sha1": "3aee643bdf3dce671713ec6563842f09d02f26da"
  },
  "cleanIssues": {
   "i16promax": [],
@@ -702,9 +702,12 @@
    ]
   },
   {
-   "name": "coverage without the middle views",
-   "ok": false,
-   "sample": []
+   "name": "coverage reports a string no view shows",
+   "ok": true,
+   "sample": [
+    "overview: never shown clear of the fades in any view: نص غير معروض للاختبار"
+   ],
+   "midViewsAdd": []
   }
  ]
 }
