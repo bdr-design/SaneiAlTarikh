@@ -416,7 +416,7 @@
   .route .halo { fill: none; stroke: rgba(11, 18, 24, .75); stroke-width: 5; stroke-linecap: round; stroke-linejoin: round; }
   .route .line { fill: none; stroke: var(--teal); stroke-width: 2.5; stroke-dasharray: 6 5; stroke-linecap: round; stroke-linejoin: round; }
   .route .head { fill: var(--teal); stroke: rgba(11, 18, 24, .75); stroke-width: 1; }
-  .u-wp { position: absolute; width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  .u-wp { position: absolute; width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
     background: rgb(12, 20, 28); box-shadow: inset 0 0 0 2px var(--teal); font-size: var(--fs-label); line-height: var(--lh-label); font-weight: 700; color: var(--t1); }
   .u-dest { position: absolute; height: 20px; display: flex; align-items: center; gap: 2px; padding-inline: 6px 7px; border-radius: 6px;
     background: rgb(12, 20, 28); box-shadow: inset 0 0 0 1px var(--teal); font-size: var(--fs-sec); line-height: var(--lh-sec); font-weight: 600; color: var(--t1); white-space: nowrap; }
@@ -748,7 +748,7 @@
       var tip = [z[0], z[1]], bl = [z[0] - h * Math.cos(ang) + w * Math.sin(ang), z[1] - h * Math.sin(ang) - w * Math.cos(ang)], br = [z[0] - h * Math.cos(ang) - w * Math.sin(ang), z[1] - h * Math.sin(ang) + w * Math.cos(ang)];
       $('.route .head').setAttribute('d', 'M' + [tip, bl, br].map(function (p) { return p[0].toFixed(1) + ',' + p[1].toFixed(1); }).join('L') + 'Z');
       var wp = $('.u-wp'), passed = legs[0].from + legs[0].km <= k + 1e-9, wq = scr(ROUTE.pts[1]);
-      wp.style.display = passed ? 'none' : ''; wp.style.left = (wq[0] - 9) + 'px'; wp.style.top = (wq[1] - 9) + 'px';
+      wp.style.display = passed ? 'none' : ''; wp.style.left = (wq[0] - 10) + 'px'; wp.style.top = (wq[1] - 10) + 'px';
       var ds = $('.u-dest'), dq = scr(ROUTE.pts[ROUTE.pts.length - 1]);
       ds.style.left = (dq[0] - ds.offsetWidth / 2) + 'px'; ds.style.top = (dq[1] - 14 - ds.offsetHeight) + 'px';
     }
@@ -793,7 +793,7 @@
     var wb = tb(tokEl(ROUTE.unit));
     for (var k = 0; k <= TOTAL; k += 6) objs.push({ p: along(k), hw: wb.hw, hh: wb.hh, oy: wb.oy, sweep: true });
     var dst = $('.u-dest'), dw = dst.offsetWidth / 2, dh = dst.offsetHeight;
-    objs.push({ p: ROUTE.pts[1], hw: 9, hh: 9 });
+    objs.push({ p: ROUTE.pts[1], hw: 10, hh: 10 });
     objs.push({ p: ROUTE.pts[2], hw: dw, hh: 14 + dh, up: true });
     var toks = objs.filter(function (o) { return o.id; });
     function sepOK(s) {

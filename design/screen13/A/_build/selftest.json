@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-02T22:10:16.863Z",
+ "ranAt": "2026-11-02T22:23:15.047Z",
  "inputs": {
   "files": [
    "index.html",
@@ -22,38 +22,27 @@
    "header_cairo.jpg",
    "map_overlay_cairo.svg"
   ],
-  "sha1": "f35645bb176bf72d0d960273f27a64d2578f8d0a"
+  "sha1": "ae4976347e7afd4f62c97185f9073d5606a021ef"
  },
  "cleanIssues": {
   "i16promax": [],
   "i16promax_saves_end": [],
   "i16promax_settings": [],
-  "i16promax_settings_end": [
-   "text over a control: \"السجل\" runs into «توفيرمتوازنأعلى»",
-   "text over a control: \"حول\" runs into «توفيرمتوازنأعلى»"
-  ],
+  "i16promax_settings_end": [],
   "i16promax_log": [],
   "i16promax_log_end": [],
   "i16promax_about": [],
   "i16promax_about_end": [],
   "i16promax coverage": [],
-  "se": [
-   "saves needs scrolling: 37.0 pt over"
-  ],
-  "se_saves_end": [
-   "saves needs scrolling: 37.0 pt over"
-  ],
+  "se": [],
+  "se_saves_end": [],
   "se_settings": [],
-  "se_settings_end": [
-   "text over a control: \"2011\" runs into «توفيرمتوازنأعلى»",
-   "text over a control: \"الإعدادات\" runs into «×5×10أقصى»",
-   "text over a control: \"السجل\" runs into «×5×10أقصى»",
-   "text over a control: \"حول\" runs into «×5×10أقصى»"
-  ],
+  "se_settings_end": [],
   "se_log": [],
   "se_log_end": [],
   "se_about": [],
   "se_about_end": [],
+  "se_settings_at86": [],
   "se coverage": []
  },
  "results": [
@@ -77,7 +66,8 @@
    "name": "off-token colour",
    "ok": true,
    "sample": [
-    "text colour off-token rgb(136, 153, 170): \"ملفات الحفظ في هذه الحملة\""
+    "text colour off-token rgb(136, 153, 170): \"المزيد\"",
+    "contrast 2.4 for \"المزيد\""
    ]
   },
   {
@@ -160,9 +150,9 @@
    "name": "dock shown on the SE",
    "ok": true,
    "sample": [
+    "icon over text: i / \"نسخة في مجلد آخر\"",
     "icon over text: i / \"لم يُختر مجلد · تحمي الحفظ إذا حُذفت اللعبة\"",
-    "icon over text: i / \"لم يُختر مجلد · تحمي الحفظ إذا حُذفت اللعبة\"",
-    "hit overlap الدولة / نسخة في مجلد آخر: لم يُختر"
+    "icon over text: i / \"لم يُختر مجلد · تحمي الحفظ إذا حُذفت اللعبة\""
    ]
   },
   {
@@ -269,11 +259,6 @@
    ]
   },
   {
-   "name": "emblem drawn grey",
-   "ok": false,
-   "sample": []
-  },
-  {
    "name": "open tab neutral",
    "ok": true,
    "sample": [
@@ -336,9 +321,9 @@
    "name": "overview scrolls",
    "ok": true,
    "sample": [
-    "saves needs scrolling: 437.0 pt over",
-    "brief text not fully visible: حفظ الآن",
-    "brief text not fully visible: حفظ جديد · مصر · 1 يناير 2011"
+    "log needs scrolling: 380.0 pt over",
+    "fades 0/0 do not match the scroll state (top 0, over 380.0)",
+    "brief text not fully visible: الأحداث، الأحدث أولًا"
    ]
   },
   {
@@ -390,11 +375,6 @@
    ]
   },
   {
-   "name": "chip not white",
-   "ok": false,
-   "sample": []
-  },
-  {
    "name": "tile icons cyan",
    "ok": true,
    "sample": [
@@ -407,9 +387,8 @@
    "name": "row read in part",
    "ok": true,
    "sample": [
-    "a11y: «حفظ تلقائي» does not read its numbers",
-    "a11y: «جزء» does not read all it shows: حفظ تلقائي يناير مصر",
-    "a11y: «حفظ تلقائي» does not say where it leads"
+    "a11y: «حفظ الآن» does not read its numbers",
+    "a11y: «جزء» does not read all it shows: حفظ الآن حفظ جديد"
    ]
   },
   {

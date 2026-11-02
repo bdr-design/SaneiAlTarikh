@@ -66,7 +66,7 @@
       var tip = [z[0], z[1]], bl = [z[0] - h * Math.cos(ang) + w * Math.sin(ang), z[1] - h * Math.sin(ang) - w * Math.cos(ang)], br = [z[0] - h * Math.cos(ang) - w * Math.sin(ang), z[1] - h * Math.sin(ang) + w * Math.cos(ang)];
       $('.route .head').setAttribute('d', 'M' + [tip, bl, br].map(function (p) { return p[0].toFixed(1) + ',' + p[1].toFixed(1); }).join('L') + 'Z');
       var wp = $('.u-wp'), passed = legs[0].from + legs[0].km <= k + 1e-9, wq = scr(ROUTE.pts[1]);
-      wp.style.display = passed ? 'none' : ''; wp.style.left = (wq[0] - 9) + 'px'; wp.style.top = (wq[1] - 9) + 'px';
+      wp.style.display = passed ? 'none' : ''; wp.style.left = (wq[0] - 10) + 'px'; wp.style.top = (wq[1] - 10) + 'px';
       var ds = $('.u-dest'), dq = scr(ROUTE.pts[ROUTE.pts.length - 1]);
       ds.style.left = (dq[0] - ds.offsetWidth / 2) + 'px'; ds.style.top = (dq[1] - 14 - ds.offsetHeight) + 'px';
     }
@@ -111,7 +111,7 @@
     var wb = tb(tokEl(ROUTE.unit));
     for (var k = 0; k <= TOTAL; k += 6) objs.push({ p: along(k), hw: wb.hw, hh: wb.hh, oy: wb.oy, sweep: true });
     var dst = $('.u-dest'), dw = dst.offsetWidth / 2, dh = dst.offsetHeight;
-    objs.push({ p: ROUTE.pts[1], hw: 9, hh: 9 });
+    objs.push({ p: ROUTE.pts[1], hw: 10, hh: 10 });
     objs.push({ p: ROUTE.pts[2], hw: dw, hh: 14 + dh, up: true });
     var toks = objs.filter(function (o) { return o.id; });
     function sepOK(s) {

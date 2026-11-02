@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-02T22:18:12.671Z",
+ "ranAt": "2026-11-02T22:22:34.500Z",
  "inputs": {
   "files": [
    "index.html",
@@ -21,7 +21,7 @@
    "../../shared/map_mena_d1_overlay.svg",
    "map_overlay_cairo.svg"
   ],
-  "sha1": "a40ca5986ca8bd4de86703fe4c47b9754299798e"
+  "sha1": "96351edb4c05b220380f5472a410af07622637bb"
  },
  "cleanIssues": {
   "i16promax": [],
@@ -225,8 +225,10 @@
   },
   {
    "name": "date not the march",
-   "ok": false,
-   "sample": []
+   "ok": true,
+   "sample": [
+    "the date is not الثلاثاء 4 يناير 2011: «الثلاثاء 5 يناير 2011»"
+   ]
   },
   {
    "name": "weekday wrong",
@@ -370,7 +372,7 @@
    "name": "no frame cap",
    "ok": true,
    "sample": [
-    "gliding at ×1 draws 90 frames a second (want 8..30)",
+    "gliding at ×1 draws 87 frames a second (want 8..30)",
     "×10 draws 35 frames in half a second (want one a game day: 2..5)",
     "Reduce Motion draws 128 frames in 2.1 s (want one a game day: 2)"
    ]
