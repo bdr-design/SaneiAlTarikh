@@ -135,7 +135,7 @@ async function b3Rects(b, d) {
 }
 
 async function measure(p, d, b3, view) {
-  return p.evaluate(({ d, TOK, BRIEF, b3, view, HUDSEL_REST }) => {
+  return p.evaluate(({ d, TOK, BRIEF, b3, view, HUDSEL_REST, S5 }) => {
     const R = (r) => ({ x0: +r.left.toFixed(2), y0: +r.top.toFixed(2), x1: +r.right.toFixed(2), y1: +r.bottom.toFixed(2), w: +r.width.toFixed(2), h: +r.height.toFixed(2) });
     const issues = [], W = d.w, H = d.h, S = d.side, B = d.bottom, eps = 0.01, lu = 1 / 32;
     const root = document.documentElement;
@@ -392,19 +392,17 @@ async function measure(p, d, b3, view) {
     const fitsAt = () => q('.dock').getBoundingClientRect().top - q('.sheet').getBoundingClientRect().bottom >= 8 - 0.01;
     if (view === 'card' && !fitsAt()) issues.push(`the card does not end 8 pt above the dock: ${JSON.stringify(fit.tried)}`);
     if (view === 'card' && lvNow > 2) issues.push(`card at fit level ${lvNow}: its header would drop below the details' 56 pt`);
-    if (/govern/.test(view) && lvNow !== 0) issues.push(`details at fit level ${lvNow} (want 0: the header keeps the card's 56 pt)`);
+    if (view !== 'card' && lvNow !== 0) issues.push(`details at fit level ${lvNow} (want 0: the header keeps the card's 56 pt)`);
     if (view === 'card') {         // the loosest level that fits wins
       for (let L = 0; L < lvNow; L++) { root.dataset.rfit = String(L); if (fitsAt()) issues.push(`fit level ${lvNow} is not the loosest that fits (level ${L} fits)`); }
       root.dataset.rfit = String(lvNow);
     }
-    { const bd = q(view === 'card' ? '.r-body.r-ov' : '.r-body.r-gv'), over = bd.scrollHeight - bd.clientHeight;
+    const tab = view === 'card' ? null : view.split('_')[0], bodySel = tab ? `.r-body.r-gv[data-dtab="${tab}"]` : '.r-body.r-ov';
+    { const bd = q(bodySel), over = bd.scrollHeight - bd.clientHeight;
       const wantTop = bd.scrollTop > 0.5, wantBot = bd.scrollTop < over - 0.5;
       if ((root.dataset.ftop === '1') !== wantTop || (root.dataset.fbot === '1') !== wantBot) issues.push(`fades ${root.dataset.ftop}/${root.dataset.fbot} do not match the scroll state (top ${bd.scrollTop}, over ${over.toFixed(1)})`); }
     // scroll hint: when the bottom edge hides content, content visibly fades into it (at least 8 pt of a row in the fade)
-    { const bd = q(view === 'card' ? '.r-body.r-ov' : '.r-body.r-gv'), c = bd.getBoundingClientRect(), fb = c.bottom - TOK.strip;
-      const rows = [...bd.querySelectorAll('.r-link, .r-dec h3, .r-dbody, .r-gov, .r-radios, .r-sec h3, .r-act, .r-more, .r-sc, .r-kpi')].filter(visible).map((e) => e.getBoundingClientRect());
-      const inBand = (y0, y1) => rows.some((r) => Math.min(r.bottom, y1) - Math.max(r.top, y0) >= 8);
-      if (root.dataset.fbot === '1' && !inBand(fb - TOK.fade, fb) && !visible(q('.r-hint'))) issues.push('no scroll hint: nothing fades into the bottom edge');
+    { const bd = q(bodySel), c = bd.getBoundingClientRect(), fb = c.bottom - TOK.strip;
       if ((root.dataset.fbot === '1') !== visible(q('.r-hint'))) issues.push(`scroll hint chevron ${visible(q('.r-hint')) ? 'shown without' : 'missing with'} content below`);
       // the chevron sits centred in the clear strip under the fade, over no legible text
       const h = q('.r-hint');
@@ -416,7 +414,12 @@ async function measure(p, d, b3, view) {
       // (the top edge needs no hint: the player reaches it by scrolling down, so they know content is above)
     }
     // the open view only
-    if (/govern/.test(view) && (qa('.r-ov').length || !qa('.r-gv').length)) issues.push('details render shows the overview');
+    if (tab && (qa('.r-ov').length || !qa('.r-gv').length)) issues.push('details render shows the overview');
+    // one tab body at a time, the open tab marked (teal, aria-selected) and its body the one shown
+    if (tab) { const shown = qa('.r-gv.r-body'), on = qa('.r-tab.on');
+      if (shown.length !== 1 || shown[0].dataset.dtab !== tab) issues.push(`tab bodies shown: ${shown.map((e) => e.dataset.dtab).join(', ')} (want only ${tab})`);
+      if (on.length !== 1 || on[0].dataset.for !== tab || on[0].getAttribute('aria-selected') !== 'true' || qa('.r-tab[aria-selected="true"]').length !== 1) issues.push(`the open tab is not marked: ${on.map((e) => e.dataset.for).join(', ')}`);
+      if (q('.r-tabs').getAttribute('role') !== 'tablist' || qa('.r-tab').some((e) => e.getAttribute('role') !== 'tab')) issues.push('a11y: the tabs are not a tab list'); }
     // RTL order: flag | name ... close (left end); action rows: tile | text | chip; link rows: tile | text | (button) | chevron; first tab «الحكم» at the right
     { const fl = q('.r-flag').getBoundingClientRect(), nm = q('.r-name').getBoundingClientRect(), xb = q('.r-x').getBoundingClientRect();
       if (!(fl.left >= nm.right - 0.5 && xb.right <= nm.left)) issues.push('header order must be flag, name, ..., close (right to left)'); }
@@ -445,8 +448,62 @@ async function measure(p, d, b3, view) {
       if (!(sp.left >= bt.right - 0.5)) issues.push('decision: the positions line must be right of the buttons');
       if (!(bs[0].left >= bs[1].right - 0.5)) issues.push('decision: «اعتماد البرنامج» must be right of «تأجيل»'); });
     { const f = q('.r-flag').getBoundingClientRect(); if (!near(f.width / f.height, 4 / 3, 0.01)) issues.push('flag is not 4:3'); }
+    // ---------- 8b. the details' other three tabs (T-007) ----------
+    { const T = (e) => (e ? e.textContent.replace(/\s+/g, ' ').trim() : ''), nums = (s) => [...String(s).replace(/−/g, '-').matchAll(/-?\d+(?:\.\d+)?/g)].map((m) => parseFloat(m[0]));
+      const bd = tab ? q(bodySel) : null, here = (sel) => (bd ? [...bd.querySelectorAll(sel)] : []);
+      // colour is never the only cue: amber or blue data text sits beside an arrow or the warning icon
+      if (bd && tab !== 'govern') here('*').filter((e) => visible(e) && [...e.childNodes].some((n) => n.nodeType === 3 && n.textContent.trim()) && [TOK.colors[4], TOK.colors[6]].includes(getComputedStyle(e).color))
+        .forEach((e) => { const box0 = e.closest('b, dd, p, .r-chip, .p-warn') || e; if (!box0.querySelector('svg')) issues.push(`colour alone: «${T(e)}» has no arrow or icon`); });
+      // الإنشاءات: each sector's meter drawn at its value out of 10; their mean is the card's infrastructure; the warning has its icon
+      if (tab === 'build') {
+        const vals = here('.p-lvl').map((r) => { const n = nums(T(r.querySelector('b'))), m = r.querySelector('.p-meter'), mw = m.getBoundingClientRect().width, fw = parseFloat(getComputedStyle(m, '::after').width);
+          if (n[1] !== 10 || Math.abs(fw - mw * n[0] / 10) > 0.6) issues.push(`meter «${T(r.querySelector('span'))}» not drawn at ${n[0]} / 10: ${fw.toFixed(1)} of ${mw.toFixed(1)}`);
+          if (r.getAttribute('aria-label') !== `${T(r.querySelector('span'))}: ${n[0]} من 10`) issues.push(`a11y: meter «${T(r.querySelector('span'))}» does not read its value`);
+          return n[0]; });
+        const card = nums(T(document.querySelectorAll('.r-kpi')[2].querySelector('.r-kv b')))[0];
+        if (vals.length !== 4 || Math.round(vals.reduce((x, y) => x + y, 0) / vals.length) !== card) issues.push(`the sectors' mean ${(vals.reduce((x, y) => x + y, 0) / vals.length).toFixed(2)} is not the card's infrastructure ${card} / 10`);
+        here('.p-warn').forEach((w) => { if (!w.querySelector('svg use[href="#i-warn"]') || getComputedStyle(w).color !== TOK.colors[4]) issues.push('the warning needs its icon, in amber'); });
+        const metro = here('.r-link').find((l) => /مترو/.test(T(l)));
+        if (!metro || !T(metro).includes(S5.metro + '%') || !T(metro).includes(String(S5.metroYear))) issues.push(`the metro project does not match the state panel's ${S5.metro}% and ${S5.metroYear}`);
+        const act = here('.r-act')[0], elec = vals[0];
+        if (!act || nums(T(act.querySelector('.r-chip'))).slice(-1)[0] !== elec + 1) issues.push(`the grid expansion's chip does not show the electricity level after it (${elec + 1})`); }
+      // القوات: unit rows tile | name | readiness, each read whole by VoiceOver; no control moves a unit
+      if (tab === 'forces') {
+        here('.p-unit').forEach((u, i) => { const [ti, tx, rd] = ['.r-tile', '.r-at', '.p-rdy'].map((s) => u.querySelector(s).getBoundingClientRect());
+          if (!(ti.left >= tx.right - 0.5 && rd.right <= tx.left + 0.5)) issues.push(`unit row ${i + 1}: order must be tile, name, readiness (right to left)`);
+          const al = u.getAttribute('aria-label') || '';
+          if (!al.startsWith(T(u.querySelector('.r-at b'))) || !al.includes(T(u.querySelector('.p-rdy b')))) issues.push(`a11y: unit row ${i + 1} does not read its name and readiness`);
+          if (u.querySelector('.tap')) issues.push(`unit row ${i + 1} has a control (units move on the map)`); }); }
+      // السياسات: share bars in proportion to their labelled parts (summing to 100), each row's key the colour of its part
+      if (tab === 'policy') {
+        here('.p-split').forEach((s, i) => { const parts = nums(s.getAttribute('aria-label')), segs = [...s.children], tot = segs.reduce((x, e) => x + e.getBoundingClientRect().width, 0);
+          if (parts.reduce((x, y) => x + y, 0) !== 100 || parts.length !== segs.length) issues.push(`share bar ${i + 1}: its parts do not sum to 100`);
+          segs.forEach((e, k) => { if (Math.abs(e.getBoundingClientRect().width - tot * parts[k] / 100) > 0.6) issues.push(`share bar ${i + 1}: part ${k + 1} not drawn at ${parts[k]}%`); });
+          for (let k = 1; k < segs.length; k++) if (!(segs[k].getBoundingClientRect().right <= segs[k - 1].getBoundingClientRect().left + 0.5)) issues.push(`share bar ${i + 1}: parts not right to left`);
+          const sec = s.closest('section'), keys = [...sec.querySelectorAll('.p-key')];
+          if (keys.length !== segs.length || keys.some((k, j) => getComputedStyle(k).backgroundColor !== getComputedStyle(segs[j]).backgroundColor)) issues.push(`share bar ${i + 1}: the keys do not match its parts`);
+          keys.forEach((k, j) => { const lbl = T(k.parentElement); if (nums(lbl)[0] !== parts[j]) issues.push(`share bar ${i + 1}: «${lbl}» is not part ${j + 1} (${parts[j]}%)`); }); });
+        here('.p-why b').forEach((b) => { const up = b.querySelector('use') && b.querySelector('use').getAttribute('href') === '#t-up', v = T(b);
+          if (up !== /^\+/.test(v) || getComputedStyle(b).color !== (up ? TOK.colors[4] : TOK.colors[6])) issues.push(`cause «${v}»: a rise must be amber with an up arrow, a fall blue with a down arrow`); }); }
+      // every action and link row reads whole to VoiceOver, with the numbers it shows
+      here('.r-act, .r-link').forEach((a) => { const al = a.getAttribute('aria-label') || '', want = nums(T(a.querySelector('.r-at')));
+        if (!al || want.some((x) => !nums(al).map(Math.abs).includes(Math.abs(x)))) issues.push(`a11y: «${T(a.querySelector('.r-at b'))}» does not read its numbers`);
+        if (al.includes('$')) issues.push(`a11y: «${T(a.querySelector('.r-at b'))}» reads «$» (say «دولار»)`); });
+      // the money rule over the text as shown, and signs inside their numbers, drawn left of them
+      { const all = q('.sheet').innerText.replace(/\s+/g, ' ');
+        for (const m of all.matchAll(/(\d+(?:\.\d+)?) مليار/g)) if (parseFloat(m[1]) < 1) issues.push(`money unit: «${m[0]}» (under 1 billion is written in millions)`);
+        for (const m of all.matchAll(/(\d+(?:\.\d+)?) (?:مليون|ملايين) \$/g)) if (parseFloat(m[1]) >= 1000) issues.push(`money unit: «${m[0]}» (1000 millions and more are billions)`); }
+      { const w3 = document.createTreeWalker(q('.sheet'), NodeFilter.SHOW_TEXT); let n3;
+        while ((n3 = w3.nextNode())) { const s = n3.textContent; if (!visible(n3.parentElement)) continue;
+          for (let i = 0; i < s.length; i++) { if (!/[+−]/.test(s[i])) continue;
+            const nx = n3.nextSibling;
+            if (!s.slice(i + 1).trim() && nx && nx.nodeType === 1 && nx.matches('.ltr') && /^\d/.test(nx.textContent)) { issues.push(`a sign outside its number: «${s.trim()}${nx.textContent}»`); continue; }
+            if (!/\d/.test(s[i + 1] || '')) continue;
+            if (!n3.parentElement.closest('.ltr')) issues.push(`a sign not in a left-to-right number: «${s.trim()}»`);
+            const r1 = document.createRange(); r1.setStart(n3, i); r1.setEnd(n3, i + 1); const r2 = document.createRange(); r2.setStart(n3, i + 1); r2.setEnd(n3, i + 2);
+            if (r1.getBoundingClientRect().right > r2.getBoundingClientRect().left + 0.5) issues.push(`a sign drawn right of its number: «${s.trim()}»`); } } } }
     // ---------- 9. the brief's content: fully visible in this render ----------
-    const leafs = (s) => { const cands = [...q('.sheet').querySelectorAll('*')].filter((e) => e.getClientRects().length && e.innerText && e.innerText.replace(/\s+/g, ' ').includes(s));
+    const leafs = (s) => { const cands = [...q('.sheet').querySelectorAll('*')].filter((e) => e.getClientRects().length && e.innerText && e.innerText.replace(/\s+/g, ' ').trim() === s);
       return cands.filter((e) => !cands.some((o) => o !== e && e.contains(o))); };
     const clearShown = (e) => { const r = box(e.getBoundingClientRect()), { c } = clipOf(e);
       return r.y0 >= c.y0 - 0.5 && r.y1 <= c.y1 + 0.5 && r.x0 >= c.x0 - 0.5 && r.x1 <= c.x1 + 0.5 && !inFade(r, e) && effOp(e) >= 0.99; };
@@ -454,7 +511,7 @@ async function measure(p, d, b3, view) {
     // the details' strings: each must fit between the fades; the ones shown clear here are reported (each must be shown
     // clear in one of the details' views: checked across the views)
     const clearNow = [];
-    if (/govern/.test(view)) BRIEF.details.forEach((s) => {
+    if (tab) BRIEF['reach_' + tab].forEach((s) => {
       const L = leafs(s); if (!L.length) { issues.push(`brief text missing: ${s}`); return; }
       const ok = L.some((e) => { const { scroller } = clipOf(e); return scroller ? e.getBoundingClientRect().height <= scroller.clientHeight - 2 * TOK.fade - TOK.strip + 0.5 && effOp(e) >= 0.99 : clearShown(e); });
       if (!ok) issues.push(`brief text cannot be scrolled clear of the fades: ${s}`);
@@ -497,7 +554,7 @@ async function measure(p, d, b3, view) {
 
     return { issues, typeSeen, texts, clearNow, fit: { top: window.__fit, sheet: fit, sheetPos: window.__sheetpos, body }, map: m, hiddenLabels, cairo: R(cairo), pin: R(pin),
       sheet: R(sr), hits: taps.map((t) => ({ l: t.label, x0: +t.hit.x0.toFixed(1), x1: +t.hit.x1.toFixed(1), y0: +t.hit.y0.toFixed(1), y1: +t.hit.y1.toFixed(1) })) };
-  }, { d, TOK, BRIEF, b3, view, HUDSEL_REST });
+  }, { d, TOK, BRIEF, b3, view, HUDSEL_REST, S5 });
 }
 
 async function contrast(p, texts) {
@@ -538,8 +595,9 @@ async function open(ctx, url) {
   return p;
 }
 const qs = (d) => `?w=${d.w}&h=${d.h}&side=${d.side}&bottom=${d.bottom}&cutout=${d.cutout}`;
-const viewOf = (extra) => { const s = (extra.match(/scroll=(\d+)/) || [0, ''])[1];
-  return /scroll=end/.test(extra) ? 'govern_end' : s ? 'govern_at' + s : /view=govern/.test(extra) ? 'govern' : 'card'; };
+const viewOf = (extra) => { const s = (extra.match(/scroll=(\d+)/) || [0, ''])[1], tb = (extra.match(/tab=(\w+)/) || [0, /view=govern/.test(extra) ? 'govern' : ''])[1];
+  if (!tb) return 'card';
+  return tb + (/scroll=end/.test(extra) ? '_end' : s ? '_at' + s : ''); };
 // the middle scroll offsets the details need so that every part is clear of the fades in one view: the top view shows
 // 0..h-46 clear, the end view over+24..full, a middle one at s shows s+24..s+h-46; neighbours overlap by 56 pt
 function midScrolls(h, over) {
@@ -555,11 +613,15 @@ function midScrolls(h, over) {
 }
 async function viewsFor(ctx, d) {
   const out = VIEWS.map(([suffix, extra]) => ({ suffix, extra, png: true }));
-  const p = await open(ctx, PAGE + qs(d) + '&view=govern'), bo = await p.evaluate(() => window.__body); await p.close();
-  midScrolls(bo.shown, bo.over).forEach((s) => out.push({ suffix: '_govern_at' + s, extra: '&view=govern&scroll=' + s, png: false }));
+  for (const tb of TABS) {
+    const p = await open(ctx, PAGE + qs(d) + tabQ(tb)), bo = await p.evaluate(() => window.__body); await p.close();
+    midScrolls(bo.shown, bo.over).forEach((s) => out.push({ suffix: '_' + tb + '_at' + s, extra: tabQ(tb) + '&scroll=' + s, png: false }));
+  }
   return out;
 }
-const coverage = (seen) => BRIEF.details.filter((s) => !seen.has(s)).map((s) => `details: never shown clear of the fades in any view: ${s}`);
+// every string of a tab must be shown clear in one of that tab's views
+const coverage = (seenBy) => TABS.map((tb) => BRIEF['reach_' + tb].filter((s) => !(seenBy[tb] && seenBy[tb].has(s))).map((s) => `${tb}: never shown clear of the fades in any view: ${s}`)).flat();
+const addSeen = (seenBy, view, list) => { if (view === 'card') return; const tb = view.split('_')[0]; (seenBy[tb] = seenBy[tb] || new Set()); list.forEach((s) => seenBy[tb].add(s)); };
 
 async function check(p, d, b3, view) {
   const m = await measure(p, d, b3, view);
@@ -617,7 +679,7 @@ async function selftest(b) {
     ['decision buttons swapped', d, '&view=govern&scroll=end', '.r-dbtn { flex-direction: row-reverse; }', /«اعتماد البرنامج» must be right of «تأجيل»/],
     ['fit level not the loosest', d, '', '', /fit level 3 is not the loosest that fits/, () => { document.documentElement.dataset.rfit = '3'; }],
     ['details not at level 0', d, '&view=govern', '', /details at fit level 2/, () => { document.documentElement.dataset.rfit = '2'; }],
-    ['no scroll hint', d, '&view=govern', '.r-links { margin-top: 400px !important; } .r-hint { display: none !important; }', /no scroll hint: nothing fades into the bottom edge/],
+    ['no scroll hint', d, '&view=govern', '.r-links { margin-top: 400px !important; } .r-hint { display: none !important; }', /scroll hint chevron missing with content below/],
     ['hint chevron missing', d, '&view=govern', '.r-hint { display: none !important; }', /scroll hint chevron missing with content below/],
     ['close not round', d, '', '.r-x { width: 40px !important; }', /close button is not round/],
     ['RTL order', d, '&view=govern', '.r-link .r-chev { order: -1; }', /link row 1: order must be tile, text/],
@@ -627,6 +689,30 @@ async function selftest(b) {
     ['card hides the dock', d, '', '.dock { display: none !important; }', /dock hidden under the card/],
     ['card shows the details', d, '', '[data-view="card"] .r-gv { display: flex !important; }', /the card shows more than/],
     ['card width', d, '', '.sheet { width: 358px !important; }', /sheet width 358/],
+    // T-007: the details' other three tabs
+    ['two tab bodies shown', d, '&tab=build', '.r-gv.r-body[data-dtab="forces"] { display: flex !important; }', /tab bodies shown: build, forces/],
+    ['open tab not marked', d, '&tab=forces', '', /the open tab is not marked/, () => { document.querySelectorAll('.r-tab')[2].classList.remove('on'); document.querySelectorAll('.r-tab')[0].classList.add('on'); }],
+    ['tabs not a tab list', d, '&tab=policy', '', /a11y: the tabs are not a tab list/, () => { document.querySelector('.r-tabs').removeAttribute('role'); }],
+    ['meter drawn wrong', d, '&tab=build', '.p-meter::after { width: 50% !important; }', /meter «الكهرباء» not drawn at 7 \/ 10/],
+    ['meter silent', d, '&tab=build', '', /a11y: meter «النقل» does not read its value/, () => { document.querySelectorAll('.p-lvl')[1].removeAttribute('aria-label'); }],
+    ['sectors off the card', d, '&tab=build', '', /the sectors' mean .* is not the card's infrastructure 8/, () => { const b = document.querySelectorAll('.p-lvl b .ltr'); b[6].textContent = '4'; document.querySelectorAll('.p-lvl')[3].setAttribute('aria-label', 'الاتصالات: 4 من 10'); document.querySelectorAll('.p-meter')[3].style.setProperty('--v', '40%'); }],
+    ['warning without its icon', d, '&tab=build', '', /colour alone|the warning needs its icon/, () => { document.querySelector('.p-warn svg').remove(); }],
+    ['metro off the state panel', d, '&tab=build', '', /the metro project does not match the state panel's 85%/, () => { const l = [...document.querySelectorAll('.r-gv[data-dtab="build"] .r-link .ltr')]; l[0].textContent = '80%'; }],
+    ['grid chip wrong', d, '&tab=build', '', /the grid expansion's chip does not show the electricity level after it/, () => { document.querySelector('.r-gv[data-dtab="build"] .r-act .r-chip .ltr').textContent = '9'; }],
+    ['action silent', d, '&tab=build', '', /a11y: «توسعة شبكة الكهرباء» does not read its numbers/, () => { document.querySelector('.r-gv[data-dtab="build"] .r-act').removeAttribute('aria-label'); }],
+    ['action reads $', d, '&tab=policy', '', /reads «\$»/, () => { document.querySelector('.r-gv[data-dtab="policy"] .r-act').setAttribute('aria-label', 'دعم الخدمات الأساسية: 300 مليون $ مرة واحدة. تخفض الاضطرابات 4 خلال 3 أشهر'); }],
+    ['unit row reversed', d, '&tab=forces', '.p-unit { flex-direction: row-reverse !important; }', /unit row 1: order must be tile, name, readiness/],
+    ['unit silent', d, '&tab=forces', '', /a11y: unit row 2 does not read/, () => { document.querySelectorAll('.p-unit')[1].removeAttribute('aria-label'); }],
+    ['unit movable here', d, '&tab=forces', '', /unit row 1 has a control/, () => { const b = document.createElement('button'); b.className = 'r-btn tap'; b.textContent = 'تحريك'; document.querySelector('.p-unit').appendChild(b); }],
+    ['amber alone', d, '&tab=forces', '', /colour alone: «شاملة منذ 1981»/, () => { document.querySelector('.r-gv[data-dtab="forces"] dd.r-amber svg').remove(); }],
+    ['share bar off', d, '&tab=policy', '', /share bar 2: part 1 not drawn at 62%/, () => { document.querySelectorAll('.p-split')[1].children[0].style.setProperty('--w', '40%'); }],
+    ['share parts not 100', d, '&tab=policy', '', /share bar 1: its parts do not sum to 100/, () => { document.querySelector('.p-split').setAttribute('aria-label', 'مسلمون سنة 90%، مسيحيون أقباط 20%'); }],
+    ['share key wrong', d, '&tab=policy', '', /share bar 1: the keys do not match its parts/, () => { document.querySelectorAll('.p-key')[1].classList.remove('p-k2'); }],
+    ['share bar left to right', d, '&tab=policy', '.p-split { flex-direction: row-reverse !important; }', /share bar 1: parts not right to left/],
+    ['cause arrow wrong', d, '&tab=policy', '', /cause «\+12»: a rise must be amber with an up arrow/, () => { document.querySelector('.p-why b use').setAttribute('href', '#t-down'); }],
+    ['sign outside its number', d, '&tab=policy', '', /a sign outside its number/, () => { const s = document.querySelector('.p-why b .ltr'); s.textContent = '12'; s.before(document.createTextNode('+')); }],
+    ['money unit (shown text)', d, '&tab=build', '', /money unit: «0\.8 مليار»/, () => { const s = document.querySelector('.r-gv[data-dtab="build"] .r-act .r-at > span'); s.innerHTML = '<span class="ltr">0.8</span> مليار $ · <span class="ltr">24</span> شهرًا'; }],
+    ['tab string hidden', d, '&tab=build', '', /brief text not fully visible: الكهرباء/, () => { document.querySelector('.p-lvl span').style.opacity = '0'; }],
   ];
   const results = [];
   for (const [name, x, extra, css, re, js] of cases) {
@@ -642,10 +728,10 @@ async function selftest(b) {
   }
   const clean = {};
   for (const x of [d, se]) {
-    const seen = new Set();
+    const seen = {};
     for (const v of await viewsFor(ctxs[x.id], x)) {
       const p0 = await open(ctxs[x.id], PAGE + qs(x) + v.extra), { m } = await check(p0, x, ref[x.id], viewOf(v.extra));
-      clean[x.id + v.suffix] = m.issues; m.clearNow.forEach((s) => seen.add(s));
+      clean[x.id + v.suffix] = m.issues; addSeen(seen, viewOf(v.extra), m.clearNow);
       console.log(`clean page ${x.id}${v.suffix}: ${m.issues.length} issues${m.issues.length ? ' -> ' + m.issues.slice(0, 4).join(' || ') : ''}`);
       await p0.close();
     }
@@ -653,9 +739,9 @@ async function selftest(b) {
     console.log(`clean coverage ${x.id}: ${clean[x.id + ' coverage'].length} issues`);
   }
   // the coverage check itself: with the end view left out, the decision at the end of the details is never shown
-  { const seen = new Set(), p0 = await open(ctxs[d.id], PAGE + qs(d) + '&view=govern'), { m } = await check(p0, d, ref[d.id], 'govern'); await p0.close();
-    m.clearNow.forEach((s) => seen.add(s));
-    const miss = coverage(seen), ok = miss.some((i) => /never shown clear of the fades in any view: (اعتماد البرنامج|تأجيل)/.test(i));
+  { const seen = {}, p0 = await open(ctxs[d.id], PAGE + qs(d) + '&view=govern'), { m } = await check(p0, d, ref[d.id], 'govern'); await p0.close();
+    addSeen(seen, 'govern', m.clearNow);
+    const miss = coverage(seen), ok = miss.some((i) => /^govern: never shown clear of the fades in any view: (اعتماد البرنامج|تأجيل)/.test(i));
     results.push({ name: 'coverage without the end view', ok, sample: miss.slice(0, 3) });
     console.log(`${ok ? 'caught ' : 'MISSED '} coverage without the end view`); }
   for (const c of Object.values(ctxs)) await c.close();
@@ -675,18 +761,20 @@ async function selftest(b) {
     const b3 = await b3Rects(b, d);
     const ctx = await b.newContext({ viewport: { width: d.w, height: d.h }, deviceScaleFactor: 3 });
     const entry = { device: `${d.w}x${d.h} side ${d.side} bottom ${d.bottom} ${d.cutout}`, renderedAt: new Date().toISOString(), inputs: { files: INPUTS, sha1: inputsHash() },
-      issues: [], views: {}, pngs: [] };
-    const ctx1 = await b.newContext({ viewport: { width: d.w, height: d.h }, deviceScaleFactor: 1 }), seen = new Set();
+      issues: [], views: {}, pngs: [], pngSha1: {}, env: { chromium: b.version() } };
+    const ctx1 = await b.newContext({ viewport: { width: d.w, height: d.h }, deviceScaleFactor: 1 }), seen = {};
     for (const { suffix, extra, png: save } of await viewsFor(ctx1, d)) {
       const p = await open(ctx, PAGE + qs(d) + extra);
       if (save) {
         const png = suffix ? path.join(__dirname, d.id + suffix + '.png') : path.join(OUT, d.id + '.png');
         await p.screenshot({ path: png });
         entry.pngs.push(path.relative(OUT, png));
+        entry.pngSha1[path.relative(OUT, png)] = crypto.createHash('sha1').update(fs.readFileSync(png)).digest('hex');
       }
-      if (!suffix) { const ph = await open(ctx, PAGE + qs(d) + '&hit=1'); await ph.screenshot({ path: path.join(__dirname, d.id + '_hit.png') }); await ph.close(); }
+      if (!suffix) { const hp = path.join(__dirname, d.id + '_hit.png'), ph = await open(ctx, PAGE + qs(d) + '&hit=1'); await ph.screenshot({ path: hp }); await ph.close();
+        entry.pngSha1[path.relative(OUT, hp)] = crypto.createHash('sha1').update(fs.readFileSync(hp)).digest('hex'); }
       const { m, c } = await check(p, d, b3, viewOf(extra));
-      m.clearNow.forEach((s) => seen.add(s));
+      addSeen(seen, viewOf(extra), m.clearNow);
       m.issues.forEach((i) => entry.issues.push(`${viewOf(extra)}: ${i}`));
       entry.views[viewOf(extra)] = { issueCount: m.issues.length, png: save, fit: m.fit, sheet: m.sheet, map: { ok: m.map.ok, egyptClear: m.map.egyptClear, zoom: m.map.zoom }, hiddenLabels: m.hiddenLabels,
         cairo: m.cairo, pin: m.pin, typeSeen: m.typeSeen, hits: m.hits, minContrast: Math.min(...c.map((x) => x.worst)), contrast: c };
@@ -696,8 +784,8 @@ async function selftest(b) {
     }
     const cov = coverage(seen);
     cov.forEach((i) => entry.issues.push(`coverage: ${i}`));
-    entry.views.coverage = { issueCount: cov.length, shownClear: seen.size, of: BRIEF.details.length };
-    console.log(`== ${d.id} coverage: ${cov.length ? cov.join(' || ') : 'every string of the details shown clear in some view'}`);
+    entry.views.coverage = { issueCount: cov.length, tabs: Object.fromEntries(TABS.map((tb) => [tb, `${seen[tb] ? seen[tb].size : 0} of ${BRIEF['reach_' + tb].length}`])) };
+    console.log(`== ${d.id} coverage: ${cov.length ? cov.join(' || ') : 'every string of every tab shown clear in some view'}`);
     await ctx1.close();
     entry.issueCount = entry.issues.length;
     report[d.id] = entry;

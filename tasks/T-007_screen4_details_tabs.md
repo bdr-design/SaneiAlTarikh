@@ -58,3 +58,11 @@ The build extends `design/screen4/R`: the same sheet, with tabs switching as in 
 - **Politics:** the NDP won about 90% of the seats in the 2010 People's Assembly election (state panel: about 420 of 518).
 - **Society:** Copts are about 10% (approved card).
 - **Security:** large Central Security Forces deployments under the Interior. The army's Central Military Zone and the Republican Guard are based in Cairo.
+
+## Design calls (2026-11-02, under the owner's delegation)
+- **Unrest causes do not claim a sum.** The card's 64 is the model's target with the 2011 offset (§5.2), so a short list cannot add up to it honestly. The tab shows the largest terms and links to «لماذا؟» for the whole breakdown.
+- **The emergency law is shown, not set, here.** It is the state panel's national law («شاملة منذ 1981», screen 5). The province's emergency region is Internal's lever; the tab shows its state and links there.
+- **Share bars use one data hue** (teal, half teal, grey), so no group or party reads as better or worse; each row has a key of its part's colour and its share in words.
+- **The «الحكم» tab's two link rows** («الإنشاءات والمرافق», «إدارة القوات») stay as approved: they now lead to the الإنشاءات tab and to the military section.
+- **Styles in a file of the province panel's own** (`province.css`), so the shared `panel.css` that screens 5 to 7 read is untouched.
+- **The checker** (screen 4 R's `render.js`) now covers every tab: per-tab views (top, end, middle offsets), per-tab coverage, the tab marks, the meters against their values and the card, the metro against the state panel's sheet (read, not copied), unit rows, share bars, causes, colour never alone, VoiceOver labels with their numbers, the money rule over the shown text, signs inside their numbers, strings matched as whole element text, and the PNG hashes.

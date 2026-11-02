@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-02T20:25:31.136Z",
+ "ranAt": "2026-11-02T20:39:06.921Z",
  "inputs": {
   "files": [
    "index.html",
@@ -22,7 +22,7 @@
    "header_cairo.jpg",
    "map_overlay_cairo.svg"
   ],
-  "sha1": "14bf2c90e504a3ca86b462f3d13049b2eb27e8b2"
+  "sha1": "8bea2ab82cd6a89a1ff974baf77fb30207a93247"
  },
  "cleanIssues": {
   "i16promax": [],
@@ -308,8 +308,12 @@
   },
   {
    "name": "tax does not fit whole",
-   "ok": false,
-   "sample": []
+   "ok": true,
+   "sample": [
+    "clipped text (bottom): \"+1\" 616.39..632 y 294..313",
+    "clipped text (bottom): \"خلال\" 587.13..612.39 y 294..313",
+    "clipped text (bottom): \"3\" 575.31..583.13 y 294..313"
+   ]
   },
   {
    "name": "fades wrong",
@@ -781,7 +785,7 @@
    "sample": [
     "clipped text (bottom): \"−0.2\" 839.72..867 y 344..363",
     "clipped text (bottom): \"نقطة خلال سنة\" 757.92..835.72 y 344..363",
-    "fades 0/0 do not match the scroll state (top 0, over 9.0)"
+    "the tax adjuster does not fit whole: 9.0 pt over"
    ]
   },
   {

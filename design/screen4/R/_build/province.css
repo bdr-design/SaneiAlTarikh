@@ -21,18 +21,19 @@
   .p-unit .r-tile { width: 32px; height: 32px; }
   .p-rdy { flex: none; display: flex; align-items: baseline; gap: var(--s1); font-size: var(--fs-label); line-height: var(--lh-label); font-weight: 500; color: var(--t2); white-space: nowrap; }
   .p-rdy b { font-size: var(--fs-val); line-height: var(--lh-val); font-weight: 600; color: var(--t1); }
+  .p-note { font-size: var(--fs-label); line-height: 14px; font-weight: 500; color: var(--t2); }
   .r-sc dd .r-arr { margin-inline-end: 2px; vertical-align: -1px; }
 
   /* السياسات: a share bar (the parts in the panel's data greys and teal, right to left), keyed rows under it */
   .p-split { display: flex; height: 6px; border-radius: 3px; overflow: hidden; gap: 2px; }
   .p-split i { width: var(--w); background: var(--teal); }
   /* the parts: teal, half teal, grey (one data hue, so no part reads as better or worse); each row's key matches */
-  .p-split i:nth-child(2), .p-k2 { background: rgba(63, 224, 208, .5); }
-  .p-split i:nth-child(3), .p-k3 { background: var(--t2); }
   .p-grp { display: flex; align-items: center; justify-content: space-between; gap: var(--s2); height: 22px; font-size: var(--fs-sec); line-height: var(--lh-sec); font-weight: 500; color: var(--t1); white-space: nowrap; }
   .p-grp > span { display: inline-flex; align-items: center; gap: var(--s1); }
   .p-grp b { display: inline-flex; align-items: center; gap: 2px; font-weight: 600; }
   .p-key { flex: none; width: 8px; height: 8px; border-radius: 2px; background: var(--teal); }
+  .p-split i:nth-child(2), .p-key.p-k2 { background: rgba(63, 224, 208, .5); }
+  .p-split i:nth-child(3), .p-key.p-k3 { background: var(--t2); }
   .p-why { display: flex; align-items: center; justify-content: space-between; height: 22px; font-size: var(--fs-sec); line-height: var(--lh-sec); font-weight: 500; color: var(--t1); }
   .p-why b { display: inline-flex; align-items: center; gap: 2px; font-size: var(--fs-val); line-height: var(--lh-val); font-weight: 600; }
   .p-all { align-self: flex-start; height: 22px; line-height: 22px; margin-top: 0; }

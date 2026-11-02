@@ -810,7 +810,7 @@ async function selftest(b) {
     ['left stack moved', d, '', '.lstack { margin-left: 8px; }', /HUD element moved from its B3 position: \.toast/],
     ['header not compact', d, '', '', /fit level 0 \(want 6/, () => { document.documentElement.dataset.rfit = '0'; }],
     ['header 56 pt', d, '', '.r-hd { height: 56px !important; }', /size [\d.]+x56\.0 for \.r-hd/],
-    ['tax does not fit whole', se, '', '.a-view > .r-body { gap: 12px !important; }', /the tax adjuster does not fit whole/],
+    ['tax does not fit whole', se, '', '.a-val { margin-bottom: 30px !important; }', /the tax adjuster does not fit whole/],
     ['fades wrong', d, '&adjust=money', '', /fades .* do not match the scroll state/, () => { document.documentElement.dataset.fbot = '0'; }],
     ['cut at a hard edge', se, '&adjust=money', '', /clipped text \(bottom\)|control cut by its scroll area \(bottom\)/, straddleHard],
     ['fade flag without a mask', se, '&adjust=money', '.r-body { -webkit-mask-image: none !important; mask-image: none !important; }', /clipped text \(bottom\)|control cut by its scroll area \(bottom\)/, straddleSoft],
