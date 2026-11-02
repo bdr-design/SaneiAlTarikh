@@ -10,7 +10,7 @@ The dock's «الجيش» panel (design doc §6.5: fronts and orders, armies, fo
 ## Acceptance criteria
 1. Same frame as the approved dock panels; identity olive on chrome only.
 2. One tab body at a time, a tab list; long tabs scroll with the fades and the hint; every string shown clear in some view.
-3. Numbers agree: formations 72 = the armies' sum, within the quota 94; the budget = screen 6's defence line; conscription = screen 5's law; the guard = the province panel's 95%; the stock = its categories.
+3. Numbers agree: formations 36 = the armies' sum, within the quota 93; the budget = screen 6's defence line; conscription = screen 5's law; the guard = the province panel's 95%; the stock = its categories.
 4. Equipment generic: no real weapon or model name, in text or VoiceOver.
 5. Colour never alone; every row and action read whole by VoiceOver with its numbers and «دولار».
 6. Gate: 0 issues on 7 phones, the self-test catches every plant, `check_screen.py` PASS; two independent read-only reviews with every confirmed finding fixed.
@@ -18,3 +18,10 @@ The dock's «الجيش» panel (design doc §6.5: fronts and orders, armies, fo
 ## Still assumptions
 - The armies' formation counts, the organization levels and the equipment values are illustrative; the engine's seed (§5.4: WMEAT, DoD/CRS templates) will set them.
 - The mobilization's cost (150 مليون $ a month) and the fighter order's +10 modern share are illustrative.
+
+## Review: two independent reviewers (2026-11-02)
+- **Reviewer A (the checker and consistency), 10 findings; reviewer B (renders, realism, Arabic, UX), 12.** All fixed:
+  - **Realism:** 36 formations (about 340,000 over formations of about 10,000; IISS lists about 12 divisions and 13 brigades), not 72; the Republican Guard one formation, as the province panel shows; mobilization fills the existing formations (§5.4) and shows the strength added; the quota rounded down (93); procurement from the budget beside aid (no part larger than its whole); the 2010 fighter order shown as being delivered, not as a button; «القوات العاملة», «مصانع حربية», «السيطرة الجوية: كاملة فوق مصر»; the note's wording with waypoints.
+  - **Full control:** each army row is a button that shows the army on the map; the unassigned formations open «make an army».
+  - **Names:** no real weapon name in Arabic letters either, or in the markup's comments.
+  - **The checker:** Arabic weapon names and codes; equipment labels with their values and «دولار»; equipment never a control; the conscription link against the state panel; army labels with their regions (and the shared rule that every row reads all it shows); the mobilization's cost marked.

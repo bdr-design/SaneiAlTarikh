@@ -28,8 +28,8 @@ const PROV = [['القاهرة', '64'], ['السويس', '63'], ['الإسكند
 const MOVES = ['الإخوان المسلمون', 'الجمعية الوطنية للتغيير', 'حركة 6 أبريل', 'كلنا خالد سعيد', 'كفاية'];
 const GROUPS = ['الجيش', 'رجال الأعمال', 'الأزهر', 'الكنيسة القبطية', 'القضاة', 'العمال'];
 const BRIEF = {
-  overview: HEAD.concat(['السكان', '79.7', 'مليون', '+180 ألف شهريًا', '45', '/ 100', '+1 شهريًا', 'اضطراب فوق 60', '3', 'محافظات', 'من 29', 'لماذا؟',
-    'الأكثر اضطرابًا', 'القاهرة', '64', 'السويس', '63', 'الإسكندرية', '61', 'فتح حوار وطني', 'الكلفة: 20 · مرة في السنة', 'الاضطرابات −3']),
+  overview: HEAD.concat(['السكان', '79.7', 'مليون', '+180 ألف شهريًا', '45', '/ 100', '+1 شهريًا', 'مضطربة', '3', '/ 29', 'اضطراب فوق 60', 'لماذا؟',
+    'الأكثر اضطرابًا', 'القاهرة', '64', 'السويس', '63', 'فتح حوار وطني', 'الكلفة: 20 · مرة في السنة', 'الاضطرابات −3']),
   unrest: HEAD.concat(['المحافظات، الأعلى أولًا', 'القاهرة', '64']),
   reach_unrest: ['المحافظات، الأعلى أولًا'].concat(PROV.flat(), ['21 محافظة أخرى بين 32 و48.', 'مناطق الطوارئ', 'لا توجد مناطق طوارئ. تُعلن لكل محافظة على حدة: اختر المحافظة بعد الضغط.',
     'منطقة طوارئ الشرعية −2', 'الكلفة: 15 لكل محافظة', 'الاضطرابات −6', 'حالة الطوارئ: محدودة منذ 2010', 'قانون وطني · يُغيَّر من الدولة › السياسات']),
@@ -72,7 +72,7 @@ qa('.sheet .i-row, .sheet .i-prov').forEach((r) => { const name = T(r.querySelec
   if (tab === 'overview') { const top = qa(B('overview') + '.i-row').map((r) => T(r.querySelector('span')) + nums(T(r.querySelector('b')))[0]);
     const kv = qa('.sheet .r-kv b').map((b) => nums(T(b))[0]);
     if (kv[1] !== DATA.avg || kv[2] !== DATA.above) issues.push('the headline numbers are not ' + DATA.avg + ' and ' + DATA.above);
-    if (top.join(',') !== DATA.top) issues.push('the overview\\'s worst three are not the unrest tab\\'s first three: ' + top.join(','));
+    if (top.join(',') !== DATA.top) issues.push('the overview\\'s worst provinces are not the unrest tab\\'s first: ' + top.join(','));
     // the unrest headline is amber (a worsening, its flame and its rising arrow); the other two are not
     const k = qa('.sheet .r-kpi'), amb = (e) => e && getComputedStyle(e).color === TOK.amber;
     if (!amb(k[1].querySelector('.r-kv b')) || !amb(k[1].querySelector('.r-kl svg')) || !amb(k[1].querySelector('.r-kr')) || (k[1].querySelector('.r-kr use') || {}).getAttribute?.('href') !== '#t-up') issues.push('the unrest headline is not amber with its flame and rising arrow');
@@ -109,7 +109,7 @@ require(path.join(OUT, '../../shared/check/panelcheck.js'))({
   inputs: ['_build/internal.css', '../../screen4/R/_build/sheet.html', '../../screen5/A/_build/sheet.html'],
   TOK: { sec: 'rgb(160, 140, 255)', ctlH: { '.i-prov': 44 }, sheetIcon: [['.s-cost svg', 10]], size: [['.i-row', null, 22], ['.i-prov', null, 44], ['.i-grp', null, 36], ['.p-split', null, 6]] },
   HEAD, BRIEF, screenChecks,
-  DATA: Object.assign({}, A, { avg: 45, above: 3, top: 'القاهرة64,السويس63,الإسكندرية61', moves: MOVES.join('|'), groups: GROUPS.join('|') }),
+  DATA: Object.assign({}, A, { avg: 45, above: 3, top: 'القاهرة64,السويس63', moves: MOVES.join('|'), groups: GROUPS.join('|') }),
   cases: (d, se) => {
     const U = '.r-body[data-tab="unrest"] ', P = '.r-body[data-tab="parties"] ', G = '.r-body[data-tab="groups"] ';
     return [
@@ -125,7 +125,7 @@ require(path.join(OUT, '../../shared/check/panelcheck.js'))({
       ['count above 60 off', d, '&tab=unrest', '', /the provinces above 60 are not the headline 3/, new Function("document.querySelectorAll('" + U + ".i-prov b .ltr')[3].textContent = '60.5';")],
       ['emergency off the state', d, '&tab=unrest', '', /the emergency law shown is not the state panel's/, new Function("document.querySelector('" + U + ".r-link .r-at b').firstChild.textContent = 'حالة الطوارئ: شاملة منذ ';")],
       ['headline off', d, '', '', /the headline numbers are not 45 and 3/, () => { document.querySelectorAll('.r-kv b')[1].textContent = '52'; }],
-      ['overview top three off', d, '', '', /the overview's worst three are not/, () => { document.querySelectorAll('.r-body[data-tab="overview"] .i-row span')[2].textContent = 'الجيزة'; }],
+      ['overview top three off', d, '', '', /the overview's worst provinces are not/, () => { document.querySelectorAll('.r-body[data-tab="overview"] .i-row span')[1].textContent = 'الجيزة'; }],
       ['unrest headline not amber', d, '', '.r-kpi:nth-child(2) .r-kv b, .r-kpi:nth-child(2) .r-kr, .r-kpi:nth-child(2) .r-kl svg { color: var(--t1) !important; }', /the unrest headline is not amber/],
       ['amber on population', d, '', '.r-kpi:first-child .r-kr { color: var(--amber) !important; }', /amber on a headline that is not a worsening|colour alone/],
       ['seats off', d, '&tab=parties', '', /the seats do not add up to 518/, new Function("document.querySelectorAll('" + P + ".p-grp > b')[1].textContent = '70';")],

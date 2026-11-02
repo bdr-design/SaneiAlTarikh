@@ -3851,7 +3851,7 @@
  },
  "i16promax": {
   "device": "956x440 side 62 bottom 21 island",
-  "renderedAt": "2026-11-02T21:24:58.913Z",
+  "renderedAt": "2026-11-02T21:35:08.392Z",
   "inputs": {
    "files": [
     "index.html",
@@ -3874,9 +3874,14 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "4d075c24c65ce46db0a648953493bdc923baca41"
+   "sha1": "9e69815bd833e063c67ba516f7f831d77417e7db"
   },
-  "issues": [],
+  "issues": [
+   "ops: a11y: «مكافحة شبكة في القاهرة: » does not read all it shows: تفكيك",
+   "ops_end: a11y: «مكافحة شبكة في القاهرة: » does not read all it shows: تفكيك",
+   "counter: a11y: «تمويل جماعة مسلحة، غزة، » does not read all it shows: مصدر خارجي",
+   "counter_end: a11y: «تمويل جماعة مسلحة، غزة، » does not read all it shows: مصدر خارجي"
+  ],
   "views": {
    "overview": {
     "issueCount": 0,
@@ -6455,7 +6460,7 @@
     ]
    },
    "ops": {
-    "issueCount": 0,
+    "issueCount": 1,
     "png": true,
     "fit": {
      "top": {
@@ -7057,7 +7062,7 @@
     ]
    },
    "ops_end": {
-    "issueCount": 0,
+    "issueCount": 1,
     "png": true,
     "fit": {
      "top": {
@@ -7659,7 +7664,7 @@
     ]
    },
    "counter": {
-    "issueCount": 0,
+    "issueCount": 1,
     "png": true,
     "fit": {
      "top": {
@@ -8209,7 +8214,7 @@
     ]
    },
    "counter_end": {
-    "issueCount": 0,
+    "issueCount": 1,
     "png": true,
     "fit": {
      "top": {
@@ -8792,6 +8797,6 @@
   "env": {
    "chromium": "141.0.7390.37"
   },
-  "issueCount": 0
+  "issueCount": 4
  }
 }

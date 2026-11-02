@@ -6,7 +6,9 @@
   .r-body[data-tab="forces"], .r-body[data-tab="equipment"], .r-body[data-tab="wars"] { padding-top: var(--s2); padding-bottom: var(--s3); gap: var(--s2); }
 
   /* an army: its name, region and formations, then its readiness */
-  .m-army { display: flex; align-items: center; gap: var(--s2); height: 36px; }
+  .m-army { display: flex; align-items: center; gap: var(--s2); height: 44px; }
+  .m-acts { margin-top: 0; }
+  .f-tr { display: flex; align-items: center; height: 36px; }
   .p-rdy { flex: none; display: flex; align-items: baseline; gap: var(--s1); font-size: var(--fs-label); line-height: var(--lh-label); font-weight: 500; color: var(--t2); white-space: nowrap; }
   .p-rdy b { font-size: var(--fs-val); line-height: var(--lh-val); font-weight: 600; color: var(--t1); }
 

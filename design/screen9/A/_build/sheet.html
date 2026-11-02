@@ -1,8 +1,8 @@
   <!-- Military panel (screen 9, variant A), opened from the dock's «الجيش». The approved panel look with the section
        identity (الجيش: olive) and the white touches. Tabs: نظرة عامة (&tab=overview, default), القوات (&tab=forces),
        المعدات (&tab=equipment), الحروب (&tab=wars). Egypt, 1 January 2011; values are illustrative and agree with each
-       other and with the approved panels: the armies' formations add up to the 72 of the headline, within the quota of
-       94 (§5.4: 40 + population / 1.5 million); the defence budget is the economy panel's 4.0; conscription is the state
+       other and with the approved panels: the armies' formations add up to the 36 of the headline (about 340,000 in the
+       army over formations of about 10,000), within the quota of 93 (§5.4: 40 + population / 1.5 million, rounded down); the defence budget is the economy panel's 4.0; conscription is the state
        panel's law (shown, changed there); the Republican Guard's readiness is the province panel's 95%. Equipment is shown
        as estimates with ranges (§5.4). Armies are moved on the map, not from here. -->
   <section class="sheet glass" aria-label="الجيش: مصر">
@@ -28,10 +28,10 @@
       <div class="r-body" data-tab="overview">
         <div class="r-kpis">
           <div class="r-kpi">
-            <span class="r-kl"><svg class="i"><use href="#i-people"/></svg>العاملون</span>
+            <span class="r-kl"><svg class="i"><use href="#i-people"/></svg>القوات العاملة</span>
             <span class="r-kv"><b class="ltr">469</b><span>ألف</span></span>
             <span class="r-kr">دون تغير</span>
-            <button class="r-why tap" aria-label="لماذا؟ العاملون">لماذا؟</button>
+            <button class="r-why tap" aria-label="لماذا؟ القوات العاملة">لماذا؟</button>
           </div>
           <div class="r-kpi">
             <span class="r-kl"><svg class="i"><use href="#i-layers"/></svg>الاحتياط</span>
@@ -41,7 +41,7 @@
           </div>
           <div class="r-kpi">
             <span class="r-kl"><svg class="i"><use href="#i-army"/></svg>التشكيلات</span>
-            <span class="r-kv"><b class="ltr">72</b><span>من <span class="ltr">94</span></span></span>
+            <span class="r-kv"><b class="ltr">36</b><span>من <span class="ltr">93</span></span></span>
             <span class="r-kr">الحد حسب السكان</span>
             <button class="r-why tap" aria-label="لماذا؟ التشكيلات">لماذا؟</button>
           </div>
@@ -54,39 +54,40 @@
           <div class="r-sc"><dt>الحروب</dt><dd>لا توجد</dd></div>
         </dl>
 
-        <div class="r-acts">
-          <button class="r-act tap r-first" aria-label="تعبئة جزئية: 40 ألفًا من الاحتياط، 150 مليون دولار شهريًا. ترفع التشكيلات 4، والنمو ينخفض">
+        <div class="r-acts m-acts">
+          <button class="r-act tap r-first" aria-label="تعبئة جزئية: من الاحتياط، 150 مليون دولار شهريًا. ترفع القوام 40 ألفًا في التشكيلات القائمة، أفضل؛ ينخفض النمو 0.2 نقطة خلال سنة، أسوأ">
             <span class="r-tile"><svg class="i"><use href="#i-people"/></svg></span>
-            <span class="r-at"><b>تعبئة جزئية <span class="r-amber p-cost"><svg class="r-arr" aria-hidden="true"><use href="#t-down"/></svg>النمو</span></b><span><span class="ltr">40</span> ألفًا · <span class="ltr">150</span> مليون $ شهريًا</span></span>
-            <span class="r-chip"><svg class="r-arr" aria-hidden="true"><use href="#t-up"/></svg>التشكيلات <span class="ltr">+4</span></span>
+            <span class="r-at"><b>تعبئة جزئية <span class="r-amber p-cost"><svg class="r-arr" aria-hidden="true"><use href="#t-down"/></svg>النمو <span class="ltr">−0.2</span></span></b><span>من الاحتياط · <span class="ltr">150</span> مليون $ شهريًا</span></span>
+            <span class="r-chip"><svg class="r-arr" aria-hidden="true"><use href="#t-up"/></svg>القوام <span class="ltr">+40</span> ألفًا</span>
           </button>
         </div>
       </div>
 
-      <!-- القوات: the armies (generic regions, D-13) with their formations and readiness, then air, navy and air defence -->
+      <!-- القوات: the armies (regional commands), each a 44 pt row that shows it on the map, with its formations and
+           organization (§5.4); the general command's unassigned formations, from which a new army is made; air, navy -->
       <div class="r-body" data-tab="forces">
         <section class="r-sec">
-          <h3>الجيوش · <span class="ltr">72</span> تشكيلًا</h3>
-          <div class="m-army" role="img" aria-label="الجيش الثاني الميداني: القناة وشمال سيناء، 14 تشكيلًا، التنظيم 80%"><span class="r-at"><b>الجيش الثاني الميداني</b><span>القناة وشمال سيناء · <span class="ltr">14</span> تشكيلًا</span></span><span class="p-rdy">التنظيم <b class="ltr">80%</b></span></div>
-          <div class="m-army" role="img" aria-label="الجيش الثالث الميداني: السويس وجنوب سيناء، 12 تشكيلًا، التنظيم 78%"><span class="r-at"><b>الجيش الثالث الميداني</b><span>السويس وجنوب سيناء · <span class="ltr">12</span> تشكيلًا</span></span><span class="p-rdy">التنظيم <b class="ltr">78%</b></span></div>
-          <div class="m-army" role="img" aria-label="المنطقة المركزية: القاهرة والدلتا، 10 تشكيلات، التنظيم 82%"><span class="r-at"><b>المنطقة المركزية</b><span>القاهرة والدلتا · <span class="ltr">10</span> تشكيلات</span></span><span class="p-rdy">التنظيم <b class="ltr">82%</b></span></div>
-          <div class="m-army" role="img" aria-label="المنطقة الشمالية: الإسكندرية والساحل، 8 تشكيلات، التنظيم 75%"><span class="r-at"><b>المنطقة الشمالية</b><span>الإسكندرية والساحل · <span class="ltr">8</span> تشكيلات</span></span><span class="p-rdy">التنظيم <b class="ltr">75%</b></span></div>
-          <div class="m-army" role="img" aria-label="المنطقة الغربية: مطروح وحدود ليبيا، 7 تشكيلات، التنظيم 76%"><span class="r-at"><b>المنطقة الغربية</b><span>مطروح وحدود ليبيا · <span class="ltr">7</span> تشكيلات</span></span><span class="p-rdy">التنظيم <b class="ltr">76%</b></span></div>
-          <div class="m-army" role="img" aria-label="المنطقة الجنوبية: الصعيد، 6 تشكيلات، التنظيم 72%"><span class="r-at"><b>المنطقة الجنوبية</b><span>الصعيد · <span class="ltr">6</span> تشكيلات</span></span><span class="p-rdy">التنظيم <b class="ltr">72%</b></span></div>
-          <div class="m-army" role="img" aria-label="الحرس الجمهوري: القاهرة، 4 تشكيلات، التنظيم 95%"><span class="r-at"><b>الحرس الجمهوري</b><span>القاهرة · <span class="ltr">4</span> تشكيلات</span></span><span class="p-rdy">التنظيم <b class="ltr">95%</b></span></div>
-          <div class="m-army" role="img" aria-label="الاحتياط العام: غير مخصص، 11 تشكيلًا، التنظيم 60%"><span class="r-at"><b>الاحتياط العام</b><span>غير مخصص · <span class="ltr">11</span> تشكيلًا</span></span><span class="p-rdy">التنظيم <b class="ltr">60%</b></span></div>
-          <p class="s-note">تُدار الجيوش من الخريطة: اضغط الجيش ثم وجهته، وأمره تقدّم أو هجوم أو توقف.</p>
+          <h3>الجيوش · <span class="ltr">36</span> تشكيلًا</h3>
+          <div class="m-army tap" role="button" tabindex="0" aria-label="الجيش الثاني الميداني: القناة وشمال سيناء، 7 تشكيلات، التنظيم 80%. يعرضه على الخريطة"><span class="r-at"><b>الجيش الثاني الميداني</b><span>القناة وشمال سيناء · <span class="ltr">7</span> تشكيلات</span></span><span class="p-rdy">التنظيم <b class="ltr">80%</b></span><svg class="i r-chev"><use href="#i-chev"/></svg></div>
+          <div class="m-army tap" role="button" tabindex="0" aria-label="الجيش الثالث الميداني: السويس وجنوب سيناء، 6 تشكيلات، التنظيم 78%. يعرضه على الخريطة"><span class="r-at"><b>الجيش الثالث الميداني</b><span>السويس وجنوب سيناء · <span class="ltr">6</span> تشكيلات</span></span><span class="p-rdy">التنظيم <b class="ltr">78%</b></span><svg class="i r-chev"><use href="#i-chev"/></svg></div>
+          <div class="m-army tap" role="button" tabindex="0" aria-label="المنطقة المركزية: القاهرة والدلتا، 5 تشكيلات، التنظيم 82%. يعرضه على الخريطة"><span class="r-at"><b>المنطقة المركزية</b><span>القاهرة والدلتا · <span class="ltr">5</span> تشكيلات</span></span><span class="p-rdy">التنظيم <b class="ltr">82%</b></span><svg class="i r-chev"><use href="#i-chev"/></svg></div>
+          <div class="m-army tap" role="button" tabindex="0" aria-label="المنطقة الشمالية: الإسكندرية والساحل، 4 تشكيلات، التنظيم 75%. يعرضه على الخريطة"><span class="r-at"><b>المنطقة الشمالية</b><span>الإسكندرية والساحل · <span class="ltr">4</span> تشكيلات</span></span><span class="p-rdy">التنظيم <b class="ltr">75%</b></span><svg class="i r-chev"><use href="#i-chev"/></svg></div>
+          <div class="m-army tap" role="button" tabindex="0" aria-label="المنطقة الغربية: مطروح وحدود ليبيا، 4 تشكيلات، التنظيم 76%. يعرضه على الخريطة"><span class="r-at"><b>المنطقة الغربية</b><span>مطروح وحدود ليبيا · <span class="ltr">4</span> تشكيلات</span></span><span class="p-rdy">التنظيم <b class="ltr">76%</b></span><svg class="i r-chev"><use href="#i-chev"/></svg></div>
+          <div class="m-army tap" role="button" tabindex="0" aria-label="المنطقة الجنوبية: الصعيد، 3 تشكيلات، التنظيم 72%. يعرضه على الخريطة"><span class="r-at"><b>المنطقة الجنوبية</b><span>الصعيد · <span class="ltr">3</span> تشكيلات</span></span><span class="p-rdy">التنظيم <b class="ltr">72%</b></span><svg class="i r-chev"><use href="#i-chev"/></svg></div>
+          <div class="m-army tap" role="button" tabindex="0" aria-label="الحرس الجمهوري: القاهرة، 1 تشكيل، التنظيم 95%. يعرضه على الخريطة"><span class="r-at"><b>الحرس الجمهوري</b><span>القاهرة · <span class="ltr">1</span> تشكيل</span></span><span class="p-rdy">التنظيم <b class="ltr">95%</b></span><svg class="i r-chev"><use href="#i-chev"/></svg></div>
+          <div class="m-army tap" role="button" tabindex="0" aria-label="احتياط القيادة العامة: غير مخصص، 6 تشكيلات، التنظيم 60%. يفتح إنشاء جيش منه"><span class="r-at"><b>احتياط القيادة العامة</b><span>غير مخصص · <span class="ltr">6</span> تشكيلات</span></span><span class="p-rdy">التنظيم <b class="ltr">60%</b></span><svg class="i r-chev"><use href="#i-chev"/></svg></div>
+          <p class="s-note">تُدار الجيوش من الخريطة: اضغط الجيش ثم وجهته، واختر أمره: تقدّم أو هجوم أو توقّف، مع نقاط عبور.</p>
         </section>
         <dl class="r-st">
           <div class="r-sc"><dt>الجوية</dt><dd><span class="ltr">14</span> مجموعة</dd></div>
           <div class="r-sc"><dt>البحرية</dt><dd>أسطولان</dd></div>
           <div class="r-sc"><dt>الدفاع الجوي</dt><dd><span class="ltr">5</span> فرق</dd></div>
-          <div class="r-sc"><dt>السيطرة الجوية</dt><dd>مصر</dd></div>
+          <div class="r-sc"><dt>السيطرة الجوية</dt><dd>كاملة فوق مصر</dd></div>
         </dl>
       </div>
 
-      <!-- المعدات: the equipment stock per category (estimates with a range, §5.4), its modern share, procurement, and a
-           real 2010 order (F-16 Block 52) as an action -->
+      <!-- المعدات: the equipment stock per category (estimates with a range, §5.4), its modern share, the money for it, the
+           2010 order of 20 fourth-generation fighters (signed, being delivered: a row, not a button) and a new order -->
       <div class="r-body" data-tab="equipment">
         <section class="r-sec">
           <h3>المخزون · <span class="ltr">32</span> مليار $ تقريبًا</h3>
@@ -94,21 +95,25 @@
           <div class="m-eq" role="img" aria-label="الجوية: 9 مليارات دولار تقريبًا، الحديث 55%"><span>الجوية</span><b><span class="ltr">9</span> مليارات $</b><i class="i-bar" style="--v: 55%"></i><em>حديث <span class="ltr">55%</span></em></div>
           <div class="m-eq" role="img" aria-label="الدفاع الجوي: 5 مليارات دولار تقريبًا، الحديث 30%"><span>الدفاع الجوي</span><b><span class="ltr">5</span> مليارات $</b><i class="i-bar" style="--v: 30%"></i><em>حديث <span class="ltr">30%</span></em></div>
           <div class="m-eq" role="img" aria-label="البحرية: 3 مليارات دولار تقريبًا، الحديث 20%"><span>البحرية</span><b><span class="ltr">3</span> مليارات $</b><i class="i-bar" style="--v: 20%"></i><em>حديث <span class="ltr">20%</span></em></div>
-          <div class="m-eq" role="img" aria-label="الصواريخ: مليار دولار تقريبًا، الحديث 10%"><span>الصواريخ</span><b><span class="ltr">1</span> مليار $</b><i class="i-bar" style="--v: 10%"></i><em>حديث <span class="ltr">10%</span></em></div>
+          <div class="m-eq" role="img" aria-label="الصواريخ: 1 مليار دولار تقريبًا، الحديث 10%"><span>الصواريخ</span><b><span class="ltr">1</span> مليار $</b><i class="i-bar" style="--v: 10%"></i><em>حديث <span class="ltr">10%</span></em></div>
           <p class="s-note">تقديرات بهامش ±<span class="ltr">20%</span>. «حديث»: من الجيلين الأحدث المتاحين.</p>
         </section>
-        <dl class="r-st">
-          <div class="r-sc"><dt>المشتريات</dt><dd><span class="ltr">1.1</span> مليار $ سنويًا</dd></div>
-          <div class="r-sc"><dt>من المعونة</dt><dd><span class="ltr">1.3</span> مليار $</dd></div>
-          <div class="r-sc"><dt>إنتاج محلي</dt><dd>الهيئة العربية</dd></div>
-          <div class="r-sc"><dt>التجميع</dt><dd>دبابات قتال رئيسية</dd></div>
-        </dl>
-        <button class="r-act tap r-first" aria-label="20 مقاتلة من الجيل الرابع: 2.5 مليار دولار من المعونة، التسليم في 2013. ترفع الحديث في الجوية 10 نقاط، أفضل">
+        <section class="r-sec">
+          <h3>التسليح سنويًا</h3>
+          <dl class="r-st">
+            <div class="r-sc"><dt>من الميزانية</dt><dd><span class="ltr">1.1</span> مليار $</dd></div>
+            <div class="r-sc"><dt>المعونة</dt><dd><span class="ltr">1.3</span> مليار $</dd></div>
+            <div class="r-sc"><dt>إنتاج محلي</dt><dd>مصانع حربية</dd></div>
+            <div class="r-sc"><dt>التجميع</dt><dd>دبابات قتال</dd></div>
+          </dl>
+        </section>
+        <div class="f-tr" role="img" aria-label="قيد التسليم: 20 مقاتلة من الجيل الرابع من المعونة، من 2013"><span class="r-at"><b>قيد التسليم: <span class="ltr">20</span> مقاتلة من الجيل الرابع</b><span>من المعونة · من <span class="ltr">2013</span></span></span></div>
+        <button class="r-act tap r-first" aria-label="طلب منظومات دفاع جوي: 1.2 مليار دولار، التسليم 2014. ترفع حديث الدفاع الجوي 8 نقاط، أفضل">
           <span class="r-tile"><svg class="i"><use href="#i-plane"/></svg></span>
-          <span class="r-at"><b><span class="ltr">20</span> مقاتلة من الجيل الرابع</b><span><span class="ltr">2.5</span> مليار $ · تسليم <span class="ltr">2013</span></span></span>
-          <span class="r-chip"><svg class="r-arr" aria-hidden="true"><use href="#t-up"/></svg>الحديث <span class="ltr">+10</span></span>
+          <span class="r-at"><b>طلب منظومات دفاع جوي</b><span><span class="ltr">1.2</span> مليار $ · تسليم <span class="ltr">2014</span></span></span>
+          <span class="r-chip"><svg class="r-arr" aria-hidden="true"><use href="#t-up"/></svg>الدفاع الجوي <span class="ltr">+8</span></span>
         </button>
-        <div class="r-link tap" role="button" tabindex="0" aria-label="التجنيد: إلزامي. يُغيَّر من الدولة › السياسات">
+        <div class="r-link tap" role="button" tabindex="0" aria-label="التجنيد: إلزامي. يُغيَّر من الدولة › السياسات، يفتحها">
           <span class="r-tile"><svg class="i"><use href="#i-doc"/></svg></span>
           <span class="r-at"><b>التجنيد: إلزامي</b><span>يُغيَّر من الدولة › السياسات</span></span>
           <svg class="i r-chev"><use href="#i-chev"/></svg>

@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-02T20:52:36.866Z",
+ "ranAt": "2026-11-02T21:30:47.541Z",
  "inputs": {
   "files": [
    "index.html",
@@ -24,7 +24,7 @@
    "header_cairo.jpg",
    "map_overlay_cairo.svg"
   ],
-  "sha1": "ac82489cb93d114d28411219bcdc6d2a7a598ba6"
+  "sha1": "8da2646e3e7c580c18c7f8dd177149d0d6ad1bf8"
  },
  "cleanIssues": {
   "i16promax": [],
@@ -35,7 +35,9 @@
   "i16promax_parties_end": [],
   "i16promax_groups": [],
   "i16promax_groups_end": [],
-  "i16promax_groups_at149": [],
+  "i16promax_unrest_at137": [],
+  "i16promax_unrest_at274": [],
+  "i16promax_groups_at137": [],
   "i16promax coverage": [],
   "se": [],
   "se_overview_end": [],
@@ -46,6 +48,8 @@
   "se_groups": [],
   "se_groups_end": [],
   "se_unrest_at98": [],
+  "se_unrest_at196": [],
+  "se_unrest_at294": [],
   "se_parties_at98": [],
   "se_groups_at98": [],
   "se_groups_at196": [],
@@ -106,8 +110,8 @@
    "ok": true,
    "sample": [
     "panel not opaque: الداخلية والسياسة: مصر rgba(9, 17, 25, 0.66)",
-    "contrast 3.82 for \"نظرة عامة\"",
-    "contrast 4.07 for \"الأحزاب\""
+    "contrast 3.05 for \"نظرة عامة\"",
+    "contrast 4.08 for \"الاضطرابات\""
    ]
   },
   {
@@ -132,6 +136,7 @@
    "name": "sheet width",
    "ok": true,
    "sample": [
+    "text outside the sheet's 12 pt padding: \"60\"",
     "sheet width 330 (want round(clamp(43% of 832, 340, 380)), or the room the dock leaves if 330..: 358)"
    ]
   },
@@ -155,9 +160,9 @@
    "name": "dock shown on the SE",
    "ok": true,
    "sample": [
-    "icon over text: i / \"61\"",
-    "hit overlap الدولة / فتح حوار وطني: 20 من رأس ا",
-    "hit overlap الاقتصاد / فتح حوار وطني: 20 من رأس ا"
+    "icon over text: i / \"· مرة في السنة\"",
+    "icon over text: i / \"الاضطرابات\"",
+    "hit overlap الدولة / فتح حوار وطني: 20 من رأس ا"
    ]
   },
   {
@@ -173,16 +178,16 @@
    "name": "fit not the loosest",
    "ok": true,
    "sample": [
-    "fit level 6 is not the loosest that fits: [[0,50],[1,38],[2,26],[3,8],[4,4],[5,0]]"
+    "fit level 6 is not the loosest that fits: [[0,0]]"
    ]
   },
   {
    "name": "two tab bodies",
    "ok": true,
    "sample": [
-    "clipped text (bottom): \"التظاهر\" 848.94..881 y 243..260",
-    "clipped text (bottom): \"محظور\" 723..757.67 y 242..261",
-    "clipped text (bottom): \"الأحزاب\" 674.58..707 y 243..260"
+    "clipped text (bottom): \"لماذا؟\" 854.31..881 y 220..237",
+    "clipped text (bottom): \"لماذا؟\" 734.66..761.34 y 220..237",
+    "clipped text (bottom): \"لماذا؟\" 623.98..650.67 y 220..237"
    ]
   },
   {
@@ -212,9 +217,9 @@
    "name": "fades wrong",
    "ok": true,
    "sample": [
-    "clipped text (bottom): \"مناطق الطوارئ\" 814.02..881 y 406..423",
-    "fades 0/0 do not match the scroll state (top 0, over 106.0)",
-    "contrast 2.81 for \"مناطق الطوارئ\""
+    "control cut by its scroll area (bottom): الجيزة: 55 من 100، ترتفع ن",
+    "hit box shaved by its clip: الجيزة: 55 من 100، ترتفع ن",
+    "fades 0/0 do not match the scroll state (top 0, over 332.0)"
    ]
   },
   {
@@ -295,36 +300,36 @@
    "name": "money unit",
    "ok": true,
    "sample": [
-    "clipped text (top): \"0.4\" 866.09..881 y 141..156",
-    "clipped text (top): \"مليار $\" 838.42..866.09 y 141..156",
-    "clipped text (bottom): \"الكلفة:\" 801.73..834 y 409..426"
+    "clipped text (top): \"0.4\" 866.09..881 y 153..168",
+    "clipped text (top): \"مليار $\" 838.42..866.09 y 153..168",
+    "control cut by its scroll area (bottom): فتح حوار وطني: 20 من رأس ا"
    ]
   },
   {
    "name": "sign outside its number",
    "ok": true,
    "sample": [
-    "clipped text (top): \"تغير +\" 859.06..881 y 141..156",
-    "clipped text (top): \"3\" 853.06..859.06 y 141..156",
-    "clipped text (bottom): \"الكلفة:\" 801.73..834 y 409..426"
+    "clipped text (top): \"تغير +\" 859.06..881 y 153..168",
+    "clipped text (top): \"3\" 853.06..859.06 y 153..168",
+    "control cut by its scroll area (bottom): فتح حوار وطني: 20 من رأس ا"
    ]
   },
   {
    "name": "colour alone",
    "ok": true,
    "sample": [
-    "clipped text (top): \"تراجع\" 860.27..881 y 141..156",
-    "clipped text (bottom): \"الكلفة:\" 801.73..834 y 409..426",
-    "clipped text (bottom): \"20\" 787.92..801.73 y 409..426"
+    "clipped text (top): \"تراجع\" 860.27..881 y 153..168",
+    "control cut by its scroll area (bottom): فتح حوار وطني: 20 من رأس ا",
+    "hit box shaved by its clip: فتح حوار وطني: 20 من رأس ا"
    ]
   },
   {
    "name": "an image in the sheet",
    "ok": true,
    "sample": [
-    "clipped text (bottom): \"الكلفة:\" 801.73..834 y 412..429",
-    "clipped text (bottom): \"20\" 787.92..801.73 y 412..429",
-    "clipped text (bottom): \"· مرة في السنة\" 712.75..775.92 y 412..429"
+    "clipped text (bottom): \"الكلفة:\" 801.73..834 y 401..418",
+    "clipped text (bottom): \"20\" 787.92..801.73 y 401..418",
+    "clipped text (bottom): \"· مرة في السنة\" 712.75..775.92 y 401..418"
    ]
   },
   {
@@ -335,43 +340,220 @@
    ]
   },
   {
+   "name": "label without a role",
+   "ok": true,
+   "sample": [
+    "clipped text (top): \"اختبار\" 860.25..881 y 153..168",
+    "control cut by its scroll area (bottom): فتح حوار وطني: 20 من رأس ا",
+    "hit box shaved by its clip: فتح حوار وطني: 20 من رأس ا"
+   ]
+  },
+  {
    "name": "brief text hidden",
+   "ok": true,
+   "sample": [
+    "the headline numbers are not 45 and 3",
+    "brief text not fully visible: 79.7"
+   ]
+  },
+  {
+   "name": "overview scrolls",
+   "ok": true,
+   "sample": [
+    "overview needs scrolling: 398.0 pt over",
+    "fades 0/0 do not match the scroll state (top 0, over 398.0)",
+    "brief text not fully visible: فتح حوار وطني"
+   ]
+  },
+  {
+   "name": "18 pt misuse",
+   "ok": false,
+   "sample": []
+  },
+  {
+   "name": "control height",
+   "ok": true,
+   "sample": [
+    "control height 40.00 for .r-tab (want 44): نظرة عامة",
+    "control height 40.00 for .r-tab (want 44): الاضطرابات",
+    "control height 40.00 for .r-tab (want 44): الأحزاب"
+   ]
+  },
+  {
+   "name": "gap",
+   "ok": true,
+   "sample": [
+    "gap 6 on السكان 79.7مليون +180 ألف ",
+    "gap 6 on السكان 79.7مليون +180 ألف ",
+    "gap 6 on الاضطرابات 45/ 100 +1 شهري"
+   ]
+  },
+  {
+   "name": "icon size",
+   "ok": true,
+   "sample": [
+    "icon size 19x19 (want 17): i",
+    "icon size 19x19 (want 17): i",
+    "icon size 19x19 (want 17): i"
+   ]
+  },
+  {
+   "name": "text overlap",
+   "ok": false,
+   "sample": []
+  },
+  {
+   "name": "clipped text",
+   "ok": true,
+   "sample": [
+    "clipped text (sides): \"السكان\" 871.17..903 y 161..178",
+    "text outside the sheet's 12 pt padding: \"السكان\"",
+    "clipped text (sides): \"79.7\" 883.02..921 y 179..206"
+   ]
+  },
+  {
+   "name": "dock underline missing",
+   "ok": true,
+   "sample": [
+    "dock underline missing or off: none 16pxx2px rgb(160, 140, 255) (want 16 x 2 in the section colour)"
+   ]
+  },
+  {
+   "name": "closed dock item coloured",
+   "ok": true,
+   "sample": [
+    "dock item 1 (closed) not neutral as on B3: rgb(160, 140, 255) / rgb(234, 242, 247)",
+    "dock item 2 (closed) not neutral as on B3: rgb(160, 140, 255) / rgb(234, 242, 247)",
+    "dock item 4 (closed) not neutral as on B3: rgb(160, 140, 255) / rgb(234, 242, 247)"
+   ]
+  },
+  {
+   "name": "identity line colour",
+   "ok": true,
+   "sample": [
+    "panel top line \"\" rgb(63, 224, 208) 2px (want the section colour, 2 pt, at the top)"
+   ]
+  },
+  {
+   "name": "closed tabs like the open one",
+   "ok": true,
+   "sample": [
+    "open tab not in the section colour",
+    "closed tab not in the secondary grey: الاضطرابات rgb(234, 242, 247)",
+    "closed tab not in the secondary grey: الأحزاب rgb(234, 242, 247)"
+   ]
+  },
+  {
+   "name": "emblem size",
+   "ok": true,
+   "sample": [
+    "size 28.0x32.0 for .s-emb (want 32 x 32)"
+   ]
+  },
+  {
+   "name": "chip not white",
+   "ok": true,
+   "sample": [
+    "white touch off: .r-chip borderTopColor rgb(63, 224, 208) (want rgba(234, 242, 247, 0.5))",
+    "white touch off: .r-chip color rgb(63, 224, 208) (want rgb(234, 242, 247))"
+   ]
+  },
+  {
+   "name": "tile icons cyan",
+   "ok": true,
+   "sample": [
+    "white touch off: .r-tile color rgb(127, 233, 255) (want rgb(234, 242, 247))"
+   ]
+  },
+  {
+   "name": "faint text",
+   "ok": false,
+   "sample": []
+  },
+  {
+   "name": "why without its subject",
+   "ok": true,
+   "sample": [
+    "a11y: «لماذا؟» does not name its subject «الاضطرابات»"
+   ]
+  },
+  {
+   "name": "amber value without its icon",
+   "ok": true,
+   "sample": [
+    "colour alone: «79.7» (its label's icon is not in its colour)",
+    "amber on a headline that is not a worsening"
+   ]
+  },
+  {
+   "name": "chip arrow against its sign",
+   "ok": true,
+   "sample": [
+    "«فتح حوار وطني»: the chip's arrow does not agree with its sign",
+    "a11y: «فتح حوار وطني» does not say the chip's direction in words"
+   ]
+  },
+  {
+   "name": "% before its number",
    "ok": false,
    "sample": [
-    "brief text cannot be scrolled clear of the fades: الأكثر اضطرابًا"
+    "brief text missing: القادمة"
    ]
   },
   {
    "name": "bar off its value",
-   "ok": false,
-   "sample": []
+   "ok": true,
+   "sample": [
+    "row «القاهرة»: the bar is not drawn at 64 / 100"
+   ]
   },
   {
    "name": "row silent",
-   "ok": false,
-   "sample": []
+   "ok": true,
+   "sample": [
+    "a11y: row «السويس» does not read its value",
+    "row «السويس»: the arrow does not show the trend «»",
+    "row «السويس»: amber must mark a worsening, and only that"
+   ]
   },
   {
    "name": "arrow against the trend",
-   "ok": false,
+   "ok": true,
    "sample": [
-    "row «القاهرة»: the arrow does not show the trend «up»"
+    "row «الغربية»: the arrow does not show the trend «up»"
    ]
   },
   {
    "name": "amber on a calm row",
-   "ok": false,
-   "sample": []
+   "ok": true,
+   "sample": [
+    "row «الإسماعيلية»: amber must mark a worsening, and only that"
+   ]
+  },
+  {
+   "name": "province not a button",
+   "ok": true,
+   "sample": [
+    "a11y: a label VoiceOver may skip (no role): «القاهرة: 64 من 100، ترتفع نقطت»",
+    "province «القاهرة» does not open its card (a 44 pt button with its chevron)"
+   ]
   },
   {
    "name": "not worst first",
-   "ok": false,
-   "sample": []
+   "ok": true,
+   "sample": [
+    "the provinces are not worst first",
+    "Cairo is not the province card's 64"
+   ]
   },
   {
    "name": "Cairo off the card",
-   "ok": false,
-   "sample": []
+   "ok": true,
+   "sample": [
+    "row «القاهرة»: the bar is not drawn at 66 / 100",
+    "a11y: row «القاهرة» does not read its value",
+    "Cairo is not the province card's 64"
+   ]
   },
   {
    "name": "29 provinces",
@@ -379,7 +561,7 @@
    "sample": [
     "the provinces listed and summed up are 30, not 29",
     "the average over 29 provinces is not the headline 45",
-    "brief text missing: 21 محافظة أخرى بين 32 و48. اضغط محافظة لفتح بطاقتها."
+    "brief text missing: 21 محافظة أخرى بين 32 و48."
    ]
   },
   {
@@ -387,17 +569,26 @@
    "ok": true,
    "sample": [
     "the average over 29 provinces is not the headline 45",
-    "brief text missing: 21 محافظة أخرى بين 32 و48. اضغط محافظة لفتح بطاقتها.",
-    "brief text missing: 21 محافظة أخرى بين 32 و48. اضغط محافظة لفتح بطاقتها."
+    "brief text missing: 21 محافظة أخرى بين 32 و48.",
+    "brief text missing: 21 محافظة أخرى بين 32 و48."
    ]
   },
   {
    "name": "count above 60 off",
-   "ok": false,
+   "ok": true,
    "sample": [
-    "row «القاهرة»: the bar is not drawn at 60.5 / 100",
-    "a11y: row «القاهرة» does not read its value",
-    "the provinces are not worst first"
+    "row «الغربية»: the bar is not drawn at 60.5 / 100",
+    "a11y: row «الغربية» does not read its value",
+    "the provinces above 60 are not the headline 3"
+   ]
+  },
+  {
+   "name": "emergency off the state",
+   "ok": true,
+   "sample": [
+    "the emergency law shown is not the state panel's «محدودة»",
+    "brief text missing: حالة الطوارئ: محدودة منذ 2010",
+    "brief text missing: حالة الطوارئ: محدودة منذ 2010"
    ]
   },
   {
@@ -419,11 +610,19 @@
    ]
   },
   {
-   "name": "law off the state panel",
+   "name": "unrest headline not amber",
    "ok": true,
    "sample": [
-    "the laws shown are not the state panel's settings",
-    "brief text missing: محظور"
+    "the unrest headline is not amber with its flame and rising arrow"
+   ]
+  },
+  {
+   "name": "amber on population",
+   "ok": true,
+   "sample": [
+    "colour alone: «+180 ألف شهريًا» has no arrow or icon",
+    "colour alone: «+180» has no arrow or icon",
+    "amber on a headline that is not a worsening"
    ]
   },
   {
@@ -431,26 +630,34 @@
    "ok": true,
    "sample": [
     "the seats do not add up to 518 with the NDP's 420",
-    "brief text missing: 69",
-    "brief text missing: 69"
+    "share bar 1: part 1 not drawn at its row's 420",
+    "share bar 1: part 2 not drawn at its row's 70"
    ]
   },
   {
    "name": "opposition off",
    "ok": true,
    "sample": [
-    "the opposition parties do not add up to their 19",
-    "brief text missing: المعارضة: الوفد 6 · التجمع 5 · أخرى 8",
-    "brief text missing: المعارضة: الوفد 6 · التجمع 5 · أخرى 8"
+    "the opposition parties do not add up to their 15",
+    "brief text missing: المعارضة: الوفد 6 · التجمع 5 · أخرى 4",
+    "brief text missing: المعارضة: الوفد 6 · التجمع 5 · أخرى 4"
    ]
   },
   {
-   "name": "seat bar off",
+   "name": "stale seat bar",
    "ok": true,
    "sample": [
-    "share bar 1: part 1 not drawn at 420",
-    "share bar 1: part 2 not drawn at 69",
-    "share bar 1: part 3 not drawn at 19"
+    "share bar 1: part 1 not drawn at its row's 420",
+    "share bar 1: part 2 not drawn at its row's 73",
+    "share bar 1: VoiceOver does not read its rows' numbers"
+   ]
+  },
+  {
+   "name": "stale support bar",
+   "ok": true,
+   "sample": [
+    "share bar 2: part 1 not drawn at its row's 58",
+    "share bar 2: part 2 not drawn at its row's 20"
    ]
   },
   {
@@ -461,10 +668,41 @@
    ]
   },
   {
+   "name": "party row reversed",
+   "ok": true,
+   "sample": [
+    "party row 1: order must be span, b (right to left)",
+    "party row 2: order must be span, b (right to left)",
+    "party row 3: order must be span, b (right to left)"
+   ]
+  },
+  {
    "name": "movement silent",
    "ok": true,
    "sample": [
-    "a11y: movement «كفاية» does not read its status and strength"
+    "a11y: movement «كفاية» is not read as shown"
+   ]
+  },
+  {
+   "name": "movement status off",
+   "ok": true,
+   "sample": [
+    "a11y: movement «الجمعية الوطنية للتغيير» is not read as shown"
+   ]
+  },
+  {
+   "name": "movement rise unsaid",
+   "ok": true,
+   "sample": [
+    "movement «حركة 6 أبريل»: a rise is amber, its up arrow and «في صعود» together"
+   ]
+  },
+  {
+   "name": "steady movement in amber",
+   "ok": true,
+   "sample": [
+    "colour alone: «منخفضة» has no arrow or icon",
+    "movement «كفاية»: a rise is amber, its up arrow and «في صعود» together"
    ]
   },
   {
@@ -477,19 +715,34 @@
    ]
   },
   {
+   "name": "movements out of order",
+   "ok": true,
+   "sample": [
+    "the movements are not in the brief's order"
+   ]
+  },
+  {
+   "name": "groups out of order",
+   "ok": true,
+   "sample": [
+    "the interest groups are not in the brief's order"
+   ]
+  },
+  {
    "name": "action silent",
    "ok": true,
    "sample": [
-    "a11y: «فتح حوار وطني» does not read its numbers"
+    "a11y: «فتح حوار وطني» does not read its numbers",
+    "a11y: «فتح حوار وطني» does not say the chip's direction in words"
    ]
   },
   {
    "name": "coverage without the middle views",
    "ok": true,
    "sample": [
-    "unrest: never shown clear of the fades in any view: بورسعيد",
-    "unrest: never shown clear of the fades in any view: 52",
-    "groups: never shown clear of the fades in any view: صفحة على الإنترنت"
+    "unrest: never shown clear of the fades in any view: الغربية",
+    "unrest: never shown clear of the fades in any view: 58",
+    "unrest: never shown clear of the fades in any view: الجيزة"
    ]
   }
  ]

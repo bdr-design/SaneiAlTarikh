@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-02T21:25:35.567Z",
+ "ranAt": "2026-11-02T21:42:43.196Z",
  "inputs": {
   "files": [
    "index.html",
@@ -19,7 +19,7 @@
    "header_cairo.jpg",
    "map_overlay_cairo.svg"
   ],
-  "sha1": "e3e020d1220a7b29f0c9592f6a5bf2a0f12e1225"
+  "sha1": "e90b19311041c6497b7028e09163120182a840b0"
  },
  "cleanIssues": {
   "i16promax": [],
@@ -704,7 +704,7 @@
   },
   {
    "name": "share bar off",
-   "ok": false,
+   "ok": true,
    "sample": [
     "share bar 2: part 1 not drawn at 52%",
     "share bar 2: part 2 not drawn at 30%",
@@ -762,8 +762,12 @@
   },
   {
    "name": "tab string hidden",
-   "ok": false,
-   "sample": []
+   "ok": true,
+   "sample": [
+    "meter «الكهرباء»: its value is not shown",
+    "brief text not fully visible: الكهرباء 7 / 10",
+    "brief text cannot be scrolled clear of the fades: الكهرباء 7 / 10"
+   ]
   },
   {
    "name": "coverage without the end view",

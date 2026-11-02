@@ -733,14 +733,14 @@ async function selftest(b) {
     ['share part amber', se, '&tab=policy', '.p-split i:nth-child(2), .p-key.p-k2 { background: #F2B14C !important; }', /share bar \d: part 2 is not the one-hue step/],
     ['open tab cyan', d, '&tab=forces', '.r-tab.on { color: #7FE9FF !important; box-shadow: inset 0 -2px 0 #7FE9FF !important; }', /the open tab is not teal/],
     ['meter amber and thick', se, '&tab=build', '.p-meter { height: 8px !important; } .p-meter::after { background: #F2B14C !important; }', /meter «الكهرباء» is not a 4 pt teal bar/],
-    ['share bar off', d, '&tab=policy', '', /share bar 2: part 1 not drawn at 62%/, () => { document.querySelectorAll('.p-split')[1].children[0].style.setProperty('--w', '40%'); }],
+    ['share bar off', d, '&tab=policy', '', /share bar 2: part 1 not drawn at 52%/, () => { document.querySelectorAll('.p-split')[1].children[0].style.setProperty('--w', '40%'); }],
     ['share parts not 100', d, '&tab=policy', '', /share bar 1: its parts do not sum to 100/, () => { document.querySelector('.p-split').setAttribute('aria-label', 'مسلمون سنة 90%، مسيحيون أقباط 20%'); }],
     ['share key wrong', d, '&tab=policy', '', /share bar 1: the keys do not match its parts/, () => { document.querySelectorAll('.p-key')[1].classList.remove('p-k2'); }],
     ['share bar left to right', d, '&tab=policy', '.p-split { flex-direction: row-reverse !important; }', /share bar 1: parts not right to left/],
     ['cause arrow wrong', d, '&tab=policy', '', /cause «\+12»: a rise must be amber with an up arrow/, () => { document.querySelector('.p-why b use').setAttribute('href', '#t-down'); }],
     ['sign outside its number', d, '&tab=policy', '', /a sign outside its number/, () => { const s = document.querySelector('.p-why b .ltr'); s.textContent = '12'; s.before(document.createTextNode('+')); }],
     ['money unit (shown text)', d, '&tab=build', '', /money unit: «0\.8 مليار»/, () => { const s = document.querySelector('.r-gv[data-dtab="build"] .r-act .r-at > span'); s.innerHTML = '<span class="ltr">0.8</span> مليار $ · <span class="ltr">24</span> شهرًا'; }],
-    ['tab string hidden', d, '&tab=build', '', /brief text not fully visible: الكهرباء/, () => { document.querySelector('.p-lvl span').style.opacity = '0'; }],
+    ['tab string hidden', d, '&tab=build', '', /brief text not fully visible: الكهرباء 7 \/ 10/, () => { document.querySelector('.p-lvl').style.opacity = '0'; }],
   ];
   const results = [];
   for (const [name, x, extra, css, re, js] of cases) {

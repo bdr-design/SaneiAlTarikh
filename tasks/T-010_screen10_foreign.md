@@ -19,3 +19,9 @@ See `design/shared/SCREEN10_BRIEF.md`: the Council's 2011 members (UN), Egypt's 
 
 ## Still assumptions
 - The relation values, the counts of good and strained relations, and the action costs are illustrative.
+
+## Review: two independent reviewers (2026-11-02)
+- **Reviewer A (the checker and consistency), 8 findings; reviewer B (renders, realism, Arabic, UX), 10.** All fixed:
+  - **Relations open:** each is a 44 pt button with a chevron; steady relations carry no arrow (the flat bar read as a second minus); labels read the whole row.
+  - **Realism:** Algeria (the 2009 football crisis) and Syria added, so three relations sit below −40 as the overview says; the Organisation of the Islamic Conference by its 2011 name; the Union for the Mediterranean co-presidency and COMESA; the QIZ's Israeli content; technical aid to Africa; aid split (1.3 of the 1.6 military); «أقرب عضوية: 2016–2017»; the UN action named, with its outcome on its chip and its partners read.
+  - **The checker:** every label paired with its value (swaps fail); relations against the brief (names, standings, values); «سالب» both ways; influence's rise blue with its arrow; the lobbying partners read; the shared rule that every row reads all it shows.

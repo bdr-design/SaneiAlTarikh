@@ -390,8 +390,9 @@ module.exports = function makeChecker(cfg) {
       if (tb && (getComputedStyle(tb).color !== TOK.sec || !getComputedStyle(tb).boxShadow.includes(TOK.sec))) issues.push('open tab not in the section colour');
       if (tb && /rgba\(0, 0, 0, 0\)|transparent/.test(getComputedStyle(tb).backgroundColor)) issues.push('open tab without its fill');
       qa('.r-tab:not(.on)').forEach((e) => { if (getComputedStyle(e).color !== TOK.t2) issues.push(`closed tab not in the secondary grey: ${e.textContent.trim()} ${getComputedStyle(e).color}`); }); }
-    texts.filter((x) => x.sheet && !x.chrome && x.color === TOK.sec).forEach((x) => issues.push(`section colour on data text: "${x.t}"`));
-    qa('.sheet *').filter((e) => !e.closest('.r-tab.on, .s-emb, .frost')).forEach((e) => { const cs = getComputedStyle(e);
+    // (المزيد's identity is the text grey itself, so for that section the rule cannot tell chrome from data and is skipped)
+    if (TOK.sec !== TOK.t2) texts.filter((x) => x.sheet && !x.chrome && x.color === TOK.sec).forEach((x) => issues.push(`section colour on data text: "${x.t}"`));
+    if (TOK.sec !== TOK.t2) qa('.sheet *').filter((e) => !e.closest('.r-tab.on, .s-emb, .frost')).forEach((e) => { const cs = getComputedStyle(e);
       const borders = ['Top', 'Right', 'Bottom', 'Left'].filter((s) => parseFloat(cs['border' + s + 'Width']) > 0).map((s) => cs['border' + s + 'Color']);
       if (borders.concat([cs.backgroundColor, parseFloat(cs.outlineWidth) > 0 ? cs.outlineColor : '']).includes(TOK.sec) || cs.boxShadow.includes(TOK.sec) || (e.closest('svg') && [cs.color, cs.stroke, cs.fill].includes(TOK.sec))) issues.push(`section colour on data chrome: ${label(e)}`); });
     // the brief's sizes
@@ -443,6 +444,14 @@ module.exports = function makeChecker(cfg) {
       if (use && /#t-(up|down)/.test(use.getAttribute('href'))) { const up = use.getAttribute('href') === '#t-up', sg = nums(chip.innerText).slice(-1)[0];
         if (sg !== undefined && sg !== 0 && (sg > 0) !== up) issues.push(`«${T(at.querySelector('b'))}»: the chip's arrow does not agree with its sign`);
         if (!(up ? /ترفع|ترتفع|تزيد|يرفع|يزيد|يرتفع/ : /تخفض|تنخفض|تقل|يخفض|ينخفض|يقل/).test(al)) issues.push(`a11y: «${T(at.querySelector('b'))}» does not say the chip's direction in words`); } });
+    // a row read as one element (role img, or a row button) reads everything it shows: every number and every word
+    // of its visible text is in its label (the separator «·» aside)
+    qa('.sheet [role="img"], .sheet .tap[role="button"]').filter((e) => e.innerText.trim() && !e.matches('.r-tab')).forEach((e) => { const al = (e.getAttribute('aria-label') || '').replace(/[،.:؛]/g, ' '), shown = e.innerText.replace(/[·،.:؛]/g, ' ');
+      const words = shown.split(/\s+/).filter((w) => w.length > 1 && !/^[\d.%+−-]+$/.test(w)), missW = words.filter((w) => !al.includes(w.replace(/[«»]/g, '')));
+      const missN = nums(shown).filter((x) => !nums(al).map(Math.abs).includes(Math.abs(x)));
+      if (missW.length || missN.length) issues.push(`a11y: «${(e.getAttribute('aria-label') || '').slice(0, 24)}» does not read all it shows: ${missW.concat(missN).slice(0, 4).join(' ')}`); });
+    // a trend line's arrow agrees with its sign
+    qa('.sheet .r-kr').forEach((k) => { const u = k.querySelector('use'), n = nums(k.innerText)[0]; if (u && n !== undefined && n !== 0 && /#t-(up|down)/.test(u.getAttribute('href')) && (u.getAttribute('href') === '#t-up') !== (n > 0)) issues.push(`the arrow of «${T(k)}» does not agree with its sign`); });
     // a VoiceOver label only on an element that can carry a name (a role, a control, a landmark): VoiceOver skips the
     // label of a plain element and reads its pieces instead
     qa('.sheet [aria-label]').filter((e) => !e.getAttribute('role') && !['BUTTON', 'SECTION', 'NAV', 'DL', 'A', 'IMG'].includes(e.tagName) && !e.classList.contains('tap'))
@@ -624,11 +633,11 @@ module.exports = function makeChecker(cfg) {
       ['label without a role', d, '', '', /a11y: a label VoiceOver may skip/, () => { const b = [...document.querySelectorAll('.r-body')].find((e) => e.getClientRects().length); const s = document.createElement('div'); s.className = 's-note'; s.setAttribute('aria-label', 'اختبار'); s.textContent = 'اختبار'; b.prepend(s); }],
       ['brief text hidden', d, '', '', /brief text not fully visible/, () => { document.querySelector('.r-kv b').style.opacity = '0'; }],
       ['overview scrolls', se, '', '.r-body > .r-acts, .r-body > .r-act { margin-top: 400px !important; }', new RegExp(TABS[0] + ' needs scrolling')],
-      ['18 pt misuse', d, '', '.r-sc dd { font-size: 18px !important; font-weight: 700 !important; }', /18 pt is for/],
+      ['18 pt misuse', d, '', '.r-kr { font-size: 18px !important; font-weight: 700 !important; }', /18 pt is for/],
       ['control height', d, '', '.r-tab { height: 40px !important; }', /control height 40.00 for \.r-tab/],
       ['gap', d, '', '.r-kpi { display: flex !important; gap: 6px !important; }', /gap 6 on/],
       ['icon size', d, '', '.r-tab svg.i { width: 19px !important; height: 19px !important; }', /icon size 19x19/],
-      ['text overlap', d, '', '.r-sc dd { margin-inline-end: -60px !important; }', /text overlap/],
+      ['text overlap', d, '', '.r-kl { margin-inline-end: -70px !important; }', /text overlap|icon over text/],
       ['clipped text', d, '', '.r-kpis { margin-inline-start: -40px !important; }', /clipped text \(sides\)/],
       ['dock underline missing', d, '', '.dock-item.on::after { content: none !important; }', /dock underline missing/],
       ['closed dock item coloured', d, '', '.dock-item:not(.on) span { color: var(--sec) !important; }', /dock item \d \(closed\) not neutral/],
@@ -637,13 +646,16 @@ module.exports = function makeChecker(cfg) {
       ['emblem size', d, '', '.s-emb { width: 28px !important; }', /size 28.0x32.0 for \.s-emb/],
       ['chip not white', d, '', '.r-chip { border-color: var(--teal) !important; color: var(--teal) !important; }', /white touch off: \.r-chip/],
       ['tile icons cyan', d, '', '[data-sec] .r-tile { color: rgb(127, 233, 255) !important; }', /white touch off: \.r-tile/],
-      ['faint text', d, '', '.r-sc dt { opacity: .35 !important; }', /^contrast [0-3](\.\d+)? for/],
+      ['faint text', d, '', '.r-kr { opacity: .35 !important; }', /^contrast [0-3](\.\d+)? for/],
       ['why without its subject', d, '', '', /a11y: «لماذا؟» does not name its subject/, () => { document.querySelectorAll('.r-why')[1].removeAttribute('aria-label'); }],
       ['amber value without its icon', d, '', '', /colour alone: .* \(its label's icon is not in its colour\)/, () => { const b = document.querySelector('.r-kv b'); b.classList.add('r-amber'); }],
       ['chip arrow against its sign', d, '', '', /the chip's arrow does not agree with its sign|does not say the chip's direction/, () => { const u = document.querySelector('.r-act .r-chip use'); if (u) u.setAttribute('href', u.getAttribute('href') === '#t-up' ? '#t-down' : '#t-up'); }],
-      ['% before its number', d, '', '', /% shown before its number/, () => { document.querySelector('.r-sc dt').textContent = 'نسبة 20%'; }],
+      ['row read in part', d, '', '', /does not read all it shows/, () => { const r = document.querySelector('.sheet [role="img"]') || document.querySelector('.sheet .tap[role="button"]:not(.r-tab)'); r.setAttribute('aria-label', 'جزء'); }],
+      ['% before its number', d, '', '', /% shown before its number/, () => { document.querySelector('.r-kr').textContent = 'نسبة 20%'; }],
     ];
-    const cases = generic.concat(cfg.cases ? cfg.cases(d, se) : []);
+    // a panel whose first tab has no headline numbers or status table (المزيد) leaves out the plants aimed at them and
+    // brings its own
+    const cases = generic.filter((c) => !(cfg.skipGeneric || []).includes(c[0])).concat(cfg.cases ? cfg.cases(d, se) : []);
     const results = [];
     for (const [name, x, extra, css, re, js] of cases) {
       const p = await open(ctxs[x.id], PAGE + qs(x) + extra);

@@ -3279,7 +3279,7 @@
  },
  "i16promax": {
   "device": "956x440 side 62 bottom 21 island",
-  "renderedAt": "2026-11-02T21:25:36.956Z",
+  "renderedAt": "2026-11-02T21:35:32.081Z",
   "inputs": {
    "files": [
     "index.html",
@@ -3302,9 +3302,12 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "40e695b211bd3b50009cecc393fab8a715151f4c"
+   "sha1": "bd7500ffc19473c999d0bc7baeb3e1902d21593c"
   },
-  "issues": [],
+  "issues": [
+   "domains: a11y: «تغيير التركيز: الطاقة ال» does not read all it shows: واحد في كل مرة",
+   "domains_end: a11y: «تغيير التركيز: الطاقة ال» does not read all it shows: واحد في كل مرة"
+  ],
   "views": {
    "overview": {
     "issueCount": 0,
@@ -4609,7 +4612,7 @@
     ]
    },
    "domains": {
-    "issueCount": 0,
+    "issueCount": 1,
     "png": true,
     "fit": {
      "top": {
@@ -5167,7 +5170,7 @@
     ]
    },
    "domains_end": {
-    "issueCount": 0,
+    "issueCount": 1,
     "png": true,
     "fit": {
      "top": {
@@ -6885,6 +6888,6 @@
   "env": {
    "chromium": "141.0.7390.37"
   },
-  "issueCount": 0
+  "issueCount": 2
  }
 }

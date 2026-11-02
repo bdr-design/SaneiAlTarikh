@@ -54,8 +54,11 @@ def build(R, S, D, *, title, sec, dock_label, dock_icon, tabs, fit_tab, css, sym
         "    r.dataset.states = q.get('states') === '1' ? '1' : '0';\n"
         "    window.__scroll = q.get('scroll') === 'end' ? 'end' : (isFinite(parseFloat(q.get('scroll'))) ? parseFloat(q.get('scroll')) : 0);\n" + init_js)
     # the dock shows the panel's section as open
-    sub('<button class="dock-item tap"><svg class="i"><use href="#' + dock_icon + '"/></svg><span>' + dock_label + '</span></button>',
-        '<button class="dock-item tap on" aria-current="page"><svg class="i"><use href="#' + dock_icon + '"/></svg><span>' + dock_label + '</span></button>')
+    # (the end items carry extra classes, so the item is found by its icon and label)
+    import re
+    pat = re.compile(r'<button class="dock-item tap([^"]*)"><svg class="i"><use href="#' + re.escape(dock_icon) + r'"/></svg><span>' + re.escape(dock_label) + r'</span></button>')
+    assert len(pat.findall(t)) == 1, ('dock item', dock_label)
+    t = pat.sub(lambda m: '<button class="dock-item tap' + m.group(1) + ' on" aria-current="page"><svg class="i"><use href="#' + dock_icon + '"/></svg><span>' + dock_label + '</span></button>', t)
     # no province is selected: drop Cairo's selection layer (the map keeps the player's country outline and Cairo's label)
     s0 = t.index('  <!-- the tapped province: Cairo Governorate')
     s1 = t.index('  </svg>', s0) + len('  </svg>\n')

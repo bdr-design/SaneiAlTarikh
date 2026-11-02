@@ -1,0 +1,5 @@
+  /* ================= Screen 13, variant A: the «المزيد» panel (saves, settings, log, about) =================
+     Built with the shared builder on the approved panels. One tab body at a time (&tab=saves|settings|log|about). Settings
+     are screen 5's 3-segment rows, the chosen one white. */
+  [data-tab="saves"] .r-body[data-tab="saves"], [data-tab="settings"] .r-body[data-tab="settings"], [data-tab="log"] .r-body[data-tab="log"], [data-tab="about"] .r-body[data-tab="about"] { display: flex; }
+  .r-body[data-tab] { padding-top: var(--s2); padding-bottom: var(--s3); gap: var(--s2); }
