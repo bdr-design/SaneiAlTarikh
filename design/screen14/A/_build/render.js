@@ -319,16 +319,6 @@ async function measure(p, d, b3, view) {
         if (T(tip) !== 'لا حرب: يُفتح الهجوم عند إعلان الحرب' || !near((tr.left + tr.right) / 2, (xr.left + xr.right) / 2, 0.75) || !near(tr.bottom, br.top - 8, 0.75)) issues.push('the attack note is not «لا حرب: يُفتح الهجوم عند إعلان الحرب» 8 pt above the bar over the attack button'); }
     }
     if (qa('.u-tok[aria-pressed="true"]').length !== (sel ? 1 : 0)) issues.push(`tokens selected: ${qa('.u-tok[aria-pressed="true"]').length} (want ${sel ? 1 : 0})`);
-    // every other unit's bar, drawn in memory (the page's own state, restored after): its line, and for the stack its two
-    // armies and no order until one is chosen
-    if (window.ST && window.render) { const keep = window.ST.sel;
-      Object.keys(DATA.POS).filter((id) => id !== 'west').forEach((id) => { window.ST.sel = id; window.render();
-        const nm = T(q('.o-name')), sub = T(q('.o-sub'));
-        const want = id === 'cairo' ? [`${DATA.NAMES.cairo}: جيشان`, `المنطقة المركزية ${fm(DATA.PARTS.central)} · الحرس الجمهوري ${fm(DATA.PARTS.guard)}`] : [DATA.NAMES[id], `${what(id)} · ${DATA.PLACE[id]}` + (DATA.ORG[id] ? ` · التنظيم ${DATA.ORG[id]}%` : '')];
-        if (nm !== want[0] || sub !== want[1]) issues.push(`the bar for «${DATA.NAMES[id]}» reads «${nm} · ${sub}» (want «${want.join(' · ')}»)`);
-        if (id === 'cairo' && ['move', 'halt', 'waypoint'].some((o) => q(`.o-btn[data-o="${o}"]`).getAttribute('aria-disabled') !== 'true')) issues.push('the stack takes orders before one of its armies is chosen');
-        if (id !== 'cairo' && q('.o-btn.on')) issues.push(`an order shows in force for «${DATA.NAMES[id]}», which has none`); });
-      window.ST.sel = keep; window.render(); }
     // RTL order of the bar: army, separator, move, attack, halt, waypoint, separator, close
     if (sel) { const seq = ['.o-unit', '.o-btn[data-o="move"]', '.o-btn[data-o="attack"]', '.o-btn[data-o="halt"]', '.o-btn[data-o="waypoint"]', '.o-x'].map((s) => q(s).getBoundingClientRect());
       for (let k = 1; k < seq.length; k++) if (!(seq[k].right <= seq[k - 1].left + 0.5)) { issues.push('the order bar is not army, move, attack, halt, waypoint, close (right to left)'); break; } }
@@ -349,6 +339,16 @@ async function measure(p, d, b3, view) {
       if (!under && prs.some((o) => inter(b, o.r))) issues.push(`map ${what} cut by a panel edge`);
       if (r.left - sw < Math.max(S, 0) || r.right + sw > W - Math.max(S, 0) || r.top - sw < 0 || r.bottom + sw > H) issues.push(`map ${what} sliced by the screen edge or the side inset`);
     });
+    // last, as it redraws the page: every other unit's bar, drawn in memory (the page's own state, restored after): its line, and for the stack its two
+    // armies and no order until one is chosen
+    if (window.ST && window.render) { const keep = window.ST.sel;
+      Object.keys(DATA.POS).filter((id) => id !== 'west').forEach((id) => { window.ST.sel = id; window.render();
+        const nm = T(q('.o-name')), sub = T(q('.o-sub'));
+        const want = id === 'cairo' ? [`${DATA.NAMES.cairo}: جيشان`, `المنطقة المركزية ${fm(DATA.PARTS.central)} · الحرس الجمهوري ${fm(DATA.PARTS.guard)}`] : [DATA.NAMES[id], `${what(id)} · ${DATA.PLACE[id]}` + (DATA.ORG[id] ? ` · التنظيم ${DATA.ORG[id]}%` : '')];
+        if (nm !== want[0] || sub !== want[1]) issues.push(`the bar for «${DATA.NAMES[id]}» reads «${nm} · ${sub}» (want «${want.join(' · ')}»)`);
+        if (id === 'cairo' && ['move', 'halt', 'waypoint'].some((o) => q(`.o-btn[data-o="${o}"]`).getAttribute('aria-disabled') !== 'true')) issues.push('the stack takes orders before one of its armies is chosen');
+        if (id !== 'cairo' && q('.o-btn.on')) issues.push(`an order shows in force for «${DATA.NAMES[id]}», which has none`); });
+      window.ST.sel = keep; window.render(); }
     return { issues, texts, typeSeen, map: window.__map, units: window.__units, hits: taps.map((t) => ({ l: t.label, x0: +t.hit.x0.toFixed(1), x1: +t.hit.x1.toFixed(1), y0: +t.hit.y0.toFixed(1), y1: +t.hit.y1.toFixed(1) })) };
   }, { d, b3, view, DATA, HUDSEL });
 }

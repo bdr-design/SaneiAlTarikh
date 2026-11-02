@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-02T22:22:34.500Z",
+ "ranAt": "2026-11-02T22:38:55.035Z",
  "inputs": {
   "files": [
    "index.html",
@@ -21,16 +21,20 @@
    "../../shared/map_mena_d1_overlay.svg",
    "map_overlay_cairo.svg"
   ],
-  "sha1": "96351edb4c05b220380f5472a410af07622637bb"
+  "sha1": "ac22b8ad2056e6dbcd4d92502295bfa22c2917d2"
  },
  "cleanIssues": {
   "i16promax": [],
   "i16promax_moving": [],
+  "i16promax_halted": [],
   "i16promax_arrived": [],
+  "i16promax_tip": [],
   "i16promax_idle": [],
   "se": [],
   "se_moving": [],
+  "se_halted": [],
   "se_arrived": [],
+  "se_tip": [],
   "se_idle": [],
   "i16promax lightness": []
  },
@@ -71,9 +75,9 @@
    "name": "order button height",
    "ok": true,
    "sample": [
-    "order button height 40.00 (want 36): تحرّك",
-    "order button height 40.00 (want 36): هجوم: غير متاح، لا حرب",
-    "order button height 40.00 (want 36): توقف"
+    "order button height 40.00 (want 36): تقدّم",
+    "order button height 40.00 (want 36): هجوم: غير متاح، لا حرب. يُ",
+    "order button height 40.00 (want 36): توقّف"
    ]
   },
   {
@@ -98,14 +102,14 @@
    "name": "token off its place",
    "ok": true,
    "sample": [
-    "token «المنطقة الشمالية» not at its map position: 546.7,158.3 (want 540.6,158.4)"
+    "token «المنطقة الشمالية» not at its map position: 541.7,152.3 (want 535.5,152.3)"
    ]
   },
   {
    "name": "moving token off the route share",
    "ok": true,
    "sample": [
-    "token «المنطقة الغربية» not at its map position: 313.5,219.8 (want 313.3,214.8)"
+    "token «المنطقة الغربية» not at its map position: 317.8,218.5 (want 317.7,213.5)"
    ]
   },
   {
@@ -114,7 +118,7 @@
    "sample": [
     "text in side inset: 6",
     "tap in side inset: الجيش الثالث الميداني، مصر",
-    "token «الجيش الثالث الميداني» not at its map position: 935.7,231.4 (want 701.8,231.5)"
+    "token «الجيش الثالث الميداني» not at its map position: 935.7,236.3 (want 697.2,236.3)"
    ]
   },
   {
@@ -123,7 +127,7 @@
    "sample": [
     "text overlap \"10\" / \"الشرعية\"",
     "icon over text: i / \"10\"",
-    "hit overlap الأسطول الشمالي، مصر: 10 س / الاستقرار 58%"
+    "hit overlap أسطول المتوسط، مصر: 10 سفن / الاستقرار 58%"
    ]
   },
   {
@@ -131,29 +135,29 @@
    "ok": true,
    "sample": [
     "hit overlap الجيش الثاني الميداني، مصر / الجيش الثالث الميداني، مصر",
-    "token «الجيش الثالث الميداني» not at its map position: 689.1,184.8 (want 701.8,231.5)"
+    "token «الجيش الثالث الميداني» not at its map position: 684.8,191.2 (want 697.2,236.3)",
+    "contrast 2.59 for \"6\""
    ]
   },
   {
    "name": "strength not the panel's",
    "ok": true,
    "sample": [
-    "token «المنطقة الشمالية» shows 5 (the military panel's strength is 4)",
-    "a11y: token «المنطقة الشمالية» does not read its name and strength"
+    "token «المنطقة الشمالية» shows 5 (the strength is 4)"
    ]
   },
   {
    "name": "wrong image",
    "ok": true,
    "sample": [
-    "token «الأسطول الشمالي» has the wrong image"
+    "token «أسطول المتوسط» has the wrong image"
    ]
   },
   {
    "name": "tag off its image",
    "ok": true,
    "sample": [
-    "token «المنطقة الشمالية» not at its map position: 553.5,158.3 (want 540.6,158.4)",
+    "token «المنطقة الشمالية» not at its map position: 548.4,152.3 (want 535.5,152.3)",
     "token «المنطقة الشمالية»: the tag is not centred above the image"
    ]
   },
@@ -161,7 +165,42 @@
    "name": "token silent",
    "ok": true,
    "sample": [
-    "a11y: token «الجيش الثاني الميداني» does not read its name and strength"
+    "a11y: token «الجيش الثاني الميداني» reads «جيش» (want «الجيش الثاني الميداني، مصر: 7 تشكيلات، القناة»)"
+   ]
+  },
+  {
+   "name": "token ETA heard wrong",
+   "ok": true,
+   "sample": [
+    "a11y: token «المنطقة الغربية» reads «المنطقة الغربية، مصر: 4 تشكيلات، في الطريق إلى سيوة، الوصول بعد 8 أيام» (want «المنطقة الغربية، مصر: 4 تشكيلات، في الطريق إلى سيوة، الوصول بعد 7 أيام»)"
+   ]
+  },
+  {
+   "name": "stack parts heard wrong",
+   "ok": true,
+   "sample": [
+    "a11y: token «القاهرة» reads «القاهرة: جيشان، 6 تشكيلات، المنطقة المركزية 4 تشكيلات والحرس الجمهوري تشكيل واحد. يعرض الجيشين» (want «القاهرة: جيشان، 6 تشكيلات، المنطقة المركزية 5 تشكيلات والحرس الجمهوري تشكيل واحد. يعرض الجيشين»)"
+   ]
+  },
+  {
+   "name": "place heard wrong",
+   "ok": true,
+   "sample": [
+    "a11y: token «المنطقة الشمالية» reads «المنطقة الشمالية، مصر: 4 تشكيلات، مطروح» (want «المنطقة الشمالية، مصر: 4 تشكيلات، الإسكندرية»)"
+   ]
+  },
+  {
+   "name": "another bar wrong",
+   "ok": true,
+   "sample": [
+    "the bar for «المنطقة الشمالية» reads «المنطقة الشمالية · 4 تشكيلات · الإسكندرية · التنظيم 57%» (want «المنطقة الشمالية · 4 تشكيلات · الإسكندرية · التنظيم 75%»)"
+   ]
+  },
+  {
+   "name": "stack takes orders",
+   "ok": true,
+   "sample": [
+    "the stack takes orders before one of its armies is chosen"
    ]
   },
   {
@@ -184,7 +223,8 @@
    "name": "route off",
    "ok": true,
    "sample": [
-    "the route is not token → waypoint ahead → destination: [[364,143],[300,200],[255,281]]"
+    "the route is not unit → waypoint ahead → the arrowhead's base: [[368,138],[300,200],[266,278]]",
+    "the route's halo is not under its line"
    ]
   },
   {
@@ -205,7 +245,30 @@
    "name": "arrowhead off",
    "ok": true,
    "sample": [
-    "the arrowhead is not at the destination"
+    "the arrowhead does not point along the last leg to the destination"
+   ]
+  },
+  {
+   "name": "arrowhead reversed",
+   "ok": true,
+   "sample": [
+    "the arrowhead does not point along the last leg to the destination"
+   ]
+  },
+  {
+   "name": "halo off the line",
+   "ok": true,
+   "sample": [
+    "the route's halo is not under its line"
+   ]
+  },
+  {
+   "name": "name over the route",
+   "ok": true,
+   "sample": [
+    "the destination's name is not «سيوة» 8 pt below the tip",
+    "the destination's name covers the route",
+    "contrast 2.54 for \"سيوة\""
    ]
   },
   {
@@ -213,14 +276,15 @@
    "ok": true,
    "sample": [
     "the waypoint mark is shown after it was passed",
-    "contrast 1.46 for \"1\""
+    "contrast 2.01 for \"1\""
    ]
   },
   {
    "name": "destination mark off",
    "ok": true,
    "sample": [
-    "the destination mark is not «سيوة» above the destination"
+    "the destination's name is not «سيوة» 8 pt below the tip",
+    "contrast 2.72 for \"سيوة\""
    ]
   },
   {
@@ -241,7 +305,7 @@
    "name": "ETA wrong",
    "ok": true,
    "sample": [
-    "the bar's line is «4 تشكيلات · إلى سيوة · يصل بعد 6 أيام» (want «4 تشكيلات · إلى سيوة · يصل بعد 7 أيام»)",
+    "the bar's line is «4 تشكيلات · إلى سيوة · الوصول بعد 8 أيام» (want «4 تشكيلات · إلى سيوة · الوصول بعد 7 أيام»)",
     "a11y: the bar's army does not read all it shows"
    ]
   },
@@ -249,7 +313,7 @@
    "name": "ETA agreement",
    "ok": true,
    "sample": [
-    "the bar's line is «4 تشكيلات · إلى سيوة · يصل بعد 4 يوم» (want «4 تشكيلات · إلى سيوة · يصل بعد 4 أيام»)",
+    "the bar's line is «4 تشكيلات · إلى سيوة · الوصول بعد 4 يوم» (want «4 تشكيلات · إلى سيوة · الوصول بعد 4 أيام»)",
     "a11y: the bar's army does not read all it shows"
    ]
   },
@@ -262,17 +326,74 @@
    ]
   },
   {
+   "name": "halted shown moving",
+   "ok": true,
+   "sample": [
+    "the order in force is move (want halt)",
+    "contrast 1.02 for \"تقدّم\"",
+    "contrast 1.73 for \"توقّف\""
+   ]
+  },
+  {
+   "name": "order words not the panel's",
+   "ok": true,
+   "sample": [
+    "the orders are «تحرّك|هجوم|توقّف|نقطة عبور|إغلاق» (want the military panel's تقدّم|هجوم|توقّف|نقطة عبور, then إغلاق)"
+   ]
+  },
+  {
+   "name": "attack note missing",
+   "ok": true,
+   "sample": [
+    "the attack note is missing"
+   ]
+  },
+  {
+   "name": "attack note off",
+   "ok": true,
+   "sample": [
+    "the attack note is not «لا حرب: يُفتح الهجوم عند إعلان الحرب» 8 pt above the bar over the attack button"
+   ]
+  },
+  {
+   "name": "city name hidden",
+   "ok": true,
+   "sample": [
+    "the city name «القاهرة» is not shown"
+   ]
+  },
+  {
+   "name": "a CSS animation",
+   "ok": true,
+   "sample": [
+    "1 CSS animations running on the map"
+   ]
+  },
+  {
+   "name": "steps that glide",
+   "ok": true,
+   "sample": [
+    "token «المنطقة الغربية» animates its moves with a transition (steps must be steps)",
+    "token «المنطقة الشمالية» animates its moves with a transition (steps must be steps)",
+    "token «القاهرة» animates its moves with a transition (steps must be steps)"
+   ]
+  },
+  {
    "name": "order not in force",
    "ok": true,
    "sample": [
-    "the order in force is halt (want move)"
+    "the order in force is halt (want move)",
+    "contrast 1.73 for \"تقدّم\"",
+    "contrast 1.02 for \"توقّف\""
    ]
   },
   {
    "name": "arrived still moving",
    "ok": true,
    "sample": [
-    "the order in force is move (want halt)"
+    "the order in force is move (want halt)",
+    "contrast 1.02 for \"تقدّم\"",
+    "contrast 1.73 for \"توقّف\""
    ]
   },
   {
@@ -293,7 +414,7 @@
    "name": "bar off the dock line",
    "ok": true,
    "sample": [
-    "the order bar is not on the dock's line, centred: x 243.6..712.4 y 368.0"
+    "the order bar is not on the dock's line, centred: x 238.1..717.9 y 368.0"
    ]
   },
   {
@@ -312,35 +433,35 @@
   },
   {
    "name": "a weapon name",
-   "ok": true,
+   "ok": false,
    "sample": [
-    "a real weapon name on the map"
+    "a11y: token «مجموعة جوية» reads «مجموعة جوية، مصر: 24 طائرة F-16، بني سويف» (want «مجموعة جوية، مصر: 24 طائرة، بني سويف»)"
    ]
   },
   {
    "name": "label under a token",
    "ok": true,
    "sample": [
-    "map label مصر cut by a panel edge",
     "map label مصر sliced by the screen edge or the side inset",
-    "map label الأردن sliced by the screen edge or the side inset"
+    "map city dot 0 under a unit or a route mark",
+    "map city dot 1 under a unit or a route mark"
    ]
   },
   {
    "name": "faint text",
    "ok": true,
    "sample": [
-    "contrast 1.93 for \"4 تشكيلات · إلى سيوة · ي\"",
-    "contrast 1.93 for \"4 تشكيلات · إلى سيوة · ي\"",
-    "contrast 1.93 for \"4 تشكيلات · إلى سيوة · ي\""
+    "contrast 1.93 for \"4 تشكيلات · إلى سيوة · ا\"",
+    "contrast 1.93 for \"4 تشكيلات · إلى سيوة · ا\"",
+    "contrast 1.93 for \"4 تشكيلات · إلى سيوة · ا\""
    ]
   },
   {
    "name": "text overlap",
    "ok": true,
    "sample": [
-    "text overlap \"المنطقة الغربية\" / \"4 تشكيلات · إلى سيوة · يصل بعد 7 أيام\"",
-    "text overlap \"المنطقة الغربية\" / \"4 تشكيلات · إلى سيوة · يصل بعد 7 أيام\""
+    "text overlap \"المنطقة الغربية\" / \"4 تشكيلات · إلى سيوة · الوصول بعد 7 أيام\"",
+    "text overlap \"المنطقة الغربية\" / \"4 تشكيلات · إلى سيوة · الوصول بعد 7 أيام\""
    ]
   },
   {
@@ -360,21 +481,36 @@
    ]
   },
   {
-   "name": "frames with nothing moving",
+   "name": "an endless animation loop",
    "ok": true,
    "sample": [
-    "gliding at ×1 draws 90 frames a second (want 8..30)",
-    "×10 draws 35 frames in half a second (want one a game day: 2..5)",
-    "Reduce Motion draws 128 frames in 2.1 s (want one a game day: 2)"
+    "gliding at ×1 draws 15 map frames and 45 animation frames in half a second (want 4..15, ≤30 a second)",
+    "gliding at ×2 draws 15 map frames and 45 animation frames in half a second (want 4..15, ≤30 a second)",
+    "gliding at ×5 draws 15 map frames and 45 animation frames in half a second (want 4..15, ≤30 a second)"
+   ]
+  },
+  {
+   "name": "an interval left running",
+   "ok": true,
+   "sample": [
+    "with nothing moving: 0 map frames, 0 animation frames, 63 interval calls, 4 timer calls, 0 animations in a second (want 0, 0, 0, ≤4, 0)",
+    "while paused: 0 map frames, 0 animation frames, 50 interval calls, 0 timer calls (want none)"
    ]
   },
   {
    "name": "no frame cap",
    "ok": true,
    "sample": [
-    "gliding at ×1 draws 87 frames a second (want 8..30)",
-    "×10 draws 35 frames in half a second (want one a game day: 2..5)",
-    "Reduce Motion draws 128 frames in 2.1 s (want one a game day: 2)"
+    "gliding at ×1 draws 45 map frames and 45 animation frames in half a second (want 4..15, ≤30 a second)",
+    "gliding at ×2 draws 45 map frames and 45 animation frames in half a second (want 4..15, ≤30 a second)",
+    "gliding at ×5 draws 42 map frames and 42 animation frames in half a second (want 4..15, ≤30 a second)"
+   ]
+  },
+  {
+   "name": "halt stops the clock",
+   "ok": true,
+   "sample": [
+    "halting the army: 0 map frames, 0 animation frames, the date 1 يناير 2011 → 1 يناير 2011, order move, «4 تشكيلات · إلى سيوة · الوصول بعد 7 أيام» (want 0, 0, the clock running, halt in force)"
    ]
   }
  ]
