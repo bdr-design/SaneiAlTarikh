@@ -945,8 +945,8 @@
 
   /* The fit level: the loosest at which the chosen tab's body fits (the header stays the same for every tab). */
   function fitSheet() {
-    var root = document.documentElement, tab = root.dataset.tab, b = $('.r-body[data-tab="saves"]'), tried = [], lv;
-    root.dataset.tab = 'saves';
+    var root = document.documentElement, tab = root.dataset.tab, b = $('.r-body[data-tab="log"]'), tried = [], lv;
+    root.dataset.tab = 'log';
     for (lv = 0; lv <= 6; lv++) {
       root.dataset.rfit = String(lv);
       var over = b.scrollHeight - b.clientHeight;

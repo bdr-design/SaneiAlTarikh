@@ -1,0 +1,379 @@
+{
+ "ranAt": "2026-11-02T22:18:12.671Z",
+ "inputs": {
+  "files": [
+   "index.html",
+   "_build/render.js",
+   "_build/assemble.py",
+   "_build/units.css",
+   "_build/units.html",
+   "_build/orders.html",
+   "_build/units.js",
+   "units/tank.png",
+   "units/destroyer.png",
+   "units/fighter.png",
+   "../../screen4/A/index.html",
+   "../../screen1/B3/index.html",
+   "../../screen9/A/_build/sheet.html",
+   "../../shared/devices.json",
+   "../../shared/flag_eg.svg",
+   "../../shared/map_mena_d1.jpg",
+   "../../shared/map_mena_d1_overlay.svg",
+   "map_overlay_cairo.svg"
+  ],
+  "sha1": "a40ca5986ca8bd4de86703fe4c47b9754299798e"
+ },
+ "cleanIssues": {
+  "i16promax": [],
+  "i16promax_moving": [],
+  "i16promax_arrived": [],
+  "i16promax_idle": [],
+  "se": [],
+  "se_moving": [],
+  "se_arrived": [],
+  "se_idle": [],
+  "i16promax lightness": []
+ },
+ "results": [
+  {
+   "name": "panel not opaque",
+   "ok": true,
+   "sample": [
+    "panel not opaque: أوامر الجيش rgba(9, 17, 25, 0.66)"
+   ]
+  },
+  {
+   "name": "type size",
+   "ok": true,
+   "sample": [
+    "font size 12 for \"المنطقة الغربية\""
+   ]
+  },
+  {
+   "name": "13 pt not tabular",
+   "ok": true,
+   "sample": [
+    "13 pt not tabular: \"4\"",
+    "13 pt not tabular: \"4\"",
+    "13 pt not tabular: \"6\""
+   ]
+  },
+  {
+   "name": "token height",
+   "ok": true,
+   "sample": [
+    "token height 54.00 (want the 20 pt tag over the 28 pt image: 48): المنطقة الغربية، مصر: 4 تش",
+    "token height 54.00 (want the 20 pt tag over the 28 pt image: 48): المنطقة الشمالية، مصر: 4 ت",
+    "token height 54.00 (want the 20 pt tag over the 28 pt image: 48): القاهرة: جيشان، 6 تشكيلات،"
+   ]
+  },
+  {
+   "name": "order button height",
+   "ok": true,
+   "sample": [
+    "order button height 40.00 (want 36): تحرّك",
+    "order button height 40.00 (want 36): هجوم: غير متاح، لا حرب",
+    "order button height 40.00 (want 36): توقف"
+   ]
+  },
+  {
+   "name": "icon size",
+   "ok": true,
+   "sample": [
+    "icon size 18.0x18.0 (want 16): i",
+    "icon size 18.0x18.0 (want 16): i",
+    "icon size 18.0x18.0 (want 16): i"
+   ]
+  },
+  {
+   "name": "gap",
+   "ok": true,
+   "sample": [
+    "gap 6 on 4",
+    "gap 6 on 4",
+    "gap 6 on 4"
+   ]
+  },
+  {
+   "name": "token off its place",
+   "ok": true,
+   "sample": [
+    "token «المنطقة الشمالية» not at its map position: 546.7,158.3 (want 540.6,158.4)"
+   ]
+  },
+  {
+   "name": "moving token off the route share",
+   "ok": true,
+   "sample": [
+    "token «المنطقة الغربية» not at its map position: 313.5,219.8 (want 313.3,214.8)"
+   ]
+  },
+  {
+   "name": "token in the side inset",
+   "ok": true,
+   "sample": [
+    "text in side inset: 6",
+    "tap in side inset: الجيش الثالث الميداني، مصر",
+    "token «الجيش الثالث الميداني» not at its map position: 935.7,231.4 (want 701.8,231.5)"
+   ]
+  },
+  {
+   "name": "token under a panel",
+   "ok": true,
+   "sample": [
+    "text overlap \"10\" / \"الشرعية\"",
+    "icon over text: i / \"10\"",
+    "hit overlap الأسطول الشمالي، مصر: 10 س / الاستقرار 58%"
+   ]
+  },
+  {
+   "name": "tokens touching",
+   "ok": true,
+   "sample": [
+    "hit overlap الجيش الثاني الميداني، مصر / الجيش الثالث الميداني، مصر",
+    "token «الجيش الثالث الميداني» not at its map position: 689.1,184.8 (want 701.8,231.5)"
+   ]
+  },
+  {
+   "name": "strength not the panel's",
+   "ok": true,
+   "sample": [
+    "token «المنطقة الشمالية» shows 5 (the military panel's strength is 4)",
+    "a11y: token «المنطقة الشمالية» does not read its name and strength"
+   ]
+  },
+  {
+   "name": "wrong image",
+   "ok": true,
+   "sample": [
+    "token «الأسطول الشمالي» has the wrong image"
+   ]
+  },
+  {
+   "name": "tag off its image",
+   "ok": true,
+   "sample": [
+    "token «المنطقة الشمالية» not at its map position: 553.5,158.3 (want 540.6,158.4)",
+    "token «المنطقة الشمالية»: the tag is not centred above the image"
+   ]
+  },
+  {
+   "name": "token silent",
+   "ok": true,
+   "sample": [
+    "a11y: token «الجيش الثاني الميداني» does not read its name and strength"
+   ]
+  },
+  {
+   "name": "two selected",
+   "ok": true,
+   "sample": [
+    "token «مجموعة جوية» selection state wrong (aria-pressed true)",
+    "token «مجموعة جوية»: the teal ring on an unselected token",
+    "tokens selected: 2 (want 1)"
+   ]
+  },
+  {
+   "name": "ring missing",
+   "ok": true,
+   "sample": [
+    "token «المنطقة الغربية»: the teal ring missing on the selected one"
+   ]
+  },
+  {
+   "name": "route off",
+   "ok": true,
+   "sample": [
+    "the route is not token → waypoint ahead → destination: [[364,143],[300,200],[255,281]]"
+   ]
+  },
+  {
+   "name": "route shown idle",
+   "ok": true,
+   "sample": [
+    "the route is shown with no army under way"
+   ]
+  },
+  {
+   "name": "route plain",
+   "ok": true,
+   "sample": [
+    "the route is not a dashed teal line"
+   ]
+  },
+  {
+   "name": "arrowhead off",
+   "ok": true,
+   "sample": [
+    "the arrowhead is not at the destination"
+   ]
+  },
+  {
+   "name": "waypoint shown after passing",
+   "ok": true,
+   "sample": [
+    "the waypoint mark is shown after it was passed",
+    "contrast 1.46 for \"1\""
+   ]
+  },
+  {
+   "name": "destination mark off",
+   "ok": true,
+   "sample": [
+    "the destination mark is not «سيوة» above the destination"
+   ]
+  },
+  {
+   "name": "date not the march",
+   "ok": false,
+   "sample": []
+  },
+  {
+   "name": "weekday wrong",
+   "ok": true,
+   "sample": [
+    "the date is not السبت 1 يناير 2011: «الأحد 1 يناير 2011»"
+   ]
+  },
+  {
+   "name": "ETA wrong",
+   "ok": true,
+   "sample": [
+    "the bar's line is «4 تشكيلات · إلى سيوة · يصل بعد 6 أيام» (want «4 تشكيلات · إلى سيوة · يصل بعد 7 أيام»)",
+    "a11y: the bar's army does not read all it shows"
+   ]
+  },
+  {
+   "name": "ETA agreement",
+   "ok": true,
+   "sample": [
+    "the bar's line is «4 تشكيلات · إلى سيوة · يصل بعد 4 يوم» (want «4 تشكيلات · إلى سيوة · يصل بعد 4 أيام»)",
+    "a11y: the bar's army does not read all it shows"
+   ]
+  },
+  {
+   "name": "bar names another army",
+   "ok": true,
+   "sample": [
+    "the bar names «الجيش الثاني الميداني», not the selected army",
+    "a11y: the bar's army does not read all it shows"
+   ]
+  },
+  {
+   "name": "order not in force",
+   "ok": true,
+   "sample": [
+    "the order in force is halt (want move)"
+   ]
+  },
+  {
+   "name": "arrived still moving",
+   "ok": true,
+   "sample": [
+    "the order in force is move (want halt)"
+   ]
+  },
+  {
+   "name": "attack open",
+   "ok": true,
+   "sample": [
+    "attack is not locked (no war)"
+   ]
+  },
+  {
+   "name": "dock beside the bar",
+   "ok": true,
+   "sample": [
+    "the dock shows beside the order bar"
+   ]
+  },
+  {
+   "name": "bar off the dock line",
+   "ok": true,
+   "sample": [
+    "the order bar is not on the dock's line, centred: x 243.6..712.4 y 368.0"
+   ]
+  },
+  {
+   "name": "bar read in part",
+   "ok": true,
+   "sample": [
+    "a11y: the bar's army does not read all it shows"
+   ]
+  },
+  {
+   "name": "bar order reversed",
+   "ok": true,
+   "sample": [
+    "the order bar is not army, move, attack, halt, waypoint, close (right to left)"
+   ]
+  },
+  {
+   "name": "a weapon name",
+   "ok": true,
+   "sample": [
+    "a real weapon name on the map"
+   ]
+  },
+  {
+   "name": "label under a token",
+   "ok": true,
+   "sample": [
+    "map label مصر cut by a panel edge",
+    "map label مصر sliced by the screen edge or the side inset",
+    "map label الأردن sliced by the screen edge or the side inset"
+   ]
+  },
+  {
+   "name": "faint text",
+   "ok": true,
+   "sample": [
+    "contrast 1.93 for \"4 تشكيلات · إلى سيوة · ي\"",
+    "contrast 1.93 for \"4 تشكيلات · إلى سيوة · ي\"",
+    "contrast 1.93 for \"4 تشكيلات · إلى سيوة · ي\""
+   ]
+  },
+  {
+   "name": "text overlap",
+   "ok": true,
+   "sample": [
+    "text overlap \"المنطقة الغربية\" / \"4 تشكيلات · إلى سيوة · يصل بعد 7 أيام\"",
+    "text overlap \"المنطقة الغربية\" / \"4 تشكيلات · إلى سيوة · يصل بعد 7 أيام\""
+   ]
+  },
+  {
+   "name": "HUD moved",
+   "ok": true,
+   "sample": [
+    "HUD element moved from its B3 position: .toast",
+    "HUD element moved from its B3 position: .btn.mode",
+    "HUD element moved from its B3 position: .btn.home"
+   ]
+  },
+  {
+   "name": "dock gone idle",
+   "ok": true,
+   "sample": [
+    "the dock is not at its B3 place"
+   ]
+  },
+  {
+   "name": "frames with nothing moving",
+   "ok": true,
+   "sample": [
+    "gliding at ×1 draws 90 frames a second (want 8..30)",
+    "×10 draws 35 frames in half a second (want one a game day: 2..5)",
+    "Reduce Motion draws 128 frames in 2.1 s (want one a game day: 2)"
+   ]
+  },
+  {
+   "name": "no frame cap",
+   "ok": true,
+   "sample": [
+    "gliding at ×1 draws 90 frames a second (want 8..30)",
+    "×10 draws 35 frames in half a second (want one a game day: 2..5)",
+    "Reduce Motion draws 128 frames in 2.1 s (want one a game day: 2)"
+   ]
+  }
+ ]
+}
