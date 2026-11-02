@@ -1,0 +1,134 @@
+  <!-- Foreign panel (screen 10, variant A), opened from the dock's «الخارجية». The approved panel look with the section
+       identity (الخارجية: royal blue) and the white touches. Tabs: نظرة عامة (&tab=overview, default), العلاقات
+       (&tab=relations), المعاهدات (&tab=treaties), مجلس الأمن (&tab=un). Egypt, 1 January 2011; values are illustrative.
+       Influence is the HUD's 62; relations run from −100 to 100, each shown with its sign and a word (colour never alone);
+       state and government recognition are shown separately (§6.5); the Security Council is its 2011 membership (§5.5). -->
+  <section class="sheet glass" aria-label="الخارجية: مصر">
+    <div class="r-in">
+      <header class="r-hd">
+        <span class="r-flag"><img src="../../shared/flags/eg.svg" alt="علم مصر"></span>
+        <div class="r-tt">
+          <div class="r-row"><h2 class="r-name">الخارجية</h2><span class="r-cap"><svg class="i"><use href="#i-check"/></svg>معترف بها</span></div>
+          <div class="r-sub">مصر<span class="r-dot"> · </span>عضو في الأمم المتحدة</div>
+        </div>
+        <span class="s-emb" aria-hidden="true"><svg class="i"><use href="#i-globe"/></svg></span>
+        <button class="r-x tap" aria-label="إغلاق"><svg class="i"><use href="#i-close"/></svg></button>
+      </header>
+
+      <nav class="r-tabs" role="tablist" aria-label="أقسام الخارجية">
+        <button class="r-tab tap" role="tab" data-for="overview"><svg class="i"><use href="#i-grid"/></svg><span>نظرة عامة</span></button>
+        <button class="r-tab tap" role="tab" data-for="relations"><svg class="i"><use href="#i-hands"/></svg><span>العلاقات</span></button>
+        <button class="r-tab tap" role="tab" data-for="treaties"><svg class="i"><use href="#i-doc"/></svg><span>المعاهدات</span></button>
+        <button class="r-tab tap" role="tab" data-for="un"><svg class="i"><use href="#i-seal"/></svg><span>مجلس الأمن</span></button>
+      </nav>
+
+      <!-- نظرة عامة: influence (the HUD's), partners and rivals, the status table, one action -->
+      <div class="r-body" data-tab="overview">
+        <div class="r-kpis">
+          <div class="r-kpi">
+            <span class="r-kl"><svg class="i"><use href="#i-signal"/></svg>النفوذ</span>
+            <span class="r-kv"><b class="ltr">62</b><span>/ <span class="ltr">100</span></span></span>
+            <span class="r-kr r-blue"><svg class="r-arr" aria-hidden="true"><use href="#t-up"/></svg><span class="ltr">+1</span> شهريًا</span>
+            <button class="r-why tap" aria-label="لماذا؟ النفوذ">لماذا؟</button>
+          </div>
+          <div class="r-kpi">
+            <span class="r-kl"><svg class="i"><use href="#i-hands"/></svg>علاقات جيدة</span>
+            <span class="r-kv"><b class="ltr">41</b><span>دولة</span></span>
+            <span class="r-kr">فوق <span class="ltr">+40</span></span>
+            <button class="r-why tap" aria-label="لماذا؟ العلاقات الجيدة">لماذا؟</button>
+          </div>
+          <div class="r-kpi">
+            <span class="r-kl"><svg class="i"><use href="#i-warn"/></svg>متوترة</span>
+            <span class="r-kv"><b class="ltr">3</b><span>دول</span></span>
+            <span class="r-kr">تحت <span class="ltr">−40</span></span>
+            <button class="r-why tap" aria-label="لماذا؟ العلاقات المتوترة">لماذا؟</button>
+          </div>
+        </div>
+
+        <dl class="r-st">
+          <div class="r-sc"><dt>الدولة</dt><dd>معترف بها</dd></div>
+          <div class="r-sc"><dt>الحكومة</dt><dd>معترف بها</dd></div>
+          <div class="r-sc"><dt>العقوبات</dt><dd>لا توجد</dd></div>
+          <div class="r-sc"><dt>عدم الانحياز</dt><dd>الرئاسة</dd></div>
+        </dl>
+
+        <div class="r-acts">
+          <button class="r-act tap r-first" aria-label="وساطة بين الفصائل الفلسطينية: 10 من النفوذ، 6 أشهر. ترفع النفوذ 4 بعد نجاحها، أفضل">
+            <span class="r-tile"><svg class="i"><use href="#i-hands"/></svg></span>
+            <span class="r-at"><b>وساطة بين الفصائل الفلسطينية</b><span>الكلفة: <span class="ltr">10</span> من النفوذ · <span class="ltr">6</span> أشهر</span></span>
+            <span class="r-chip"><svg class="r-arr" aria-hidden="true"><use href="#t-up"/></svg>النفوذ <span class="ltr">+4</span></span>
+          </button>
+        </div>
+      </div>
+
+      <!-- العلاقات: the main relations, best first, each with its value (−100..100, sign and a word) and its trend -->
+      <div class="r-body" data-tab="relations">
+        <section class="r-sec">
+          <h3>العلاقات، الأفضل أولًا</h3>
+          <div class="f-rel" role="img" aria-label="الولايات المتحدة: 62، حليف، معونة عسكرية، دون تغير"><span class="r-at"><b>الولايات المتحدة</b><span>حليف · معونة عسكرية</span></span><b class="f-v"><svg class="r-arr" aria-hidden="true"><use href="#t-flat"/></svg><span class="ltr">+62</span></b></div>
+          <div class="f-rel" role="img" aria-label="السعودية: 58، شريك، دون تغير"><span class="r-at"><b>السعودية</b><span>شريك · عمالة واستثمار</span></span><b class="f-v"><svg class="r-arr" aria-hidden="true"><use href="#t-flat"/></svg><span class="ltr">+58</span></b></div>
+          <div class="f-rel" role="img" aria-label="الاتحاد الأوروبي: 44، شراكة، دون تغير"><span class="r-at"><b>الاتحاد الأوروبي</b><span>اتفاقية شراكة</span></span><b class="f-v"><svg class="r-arr" aria-hidden="true"><use href="#t-flat"/></svg><span class="ltr">+44</span></b></div>
+          <div class="f-rel" role="img" aria-label="الصين: 30، تجارة، تزيد 1 شهريًا"><span class="r-at"><b>الصين</b><span>تجارة واستثمار</span></span><b class="f-v r-blue"><svg class="r-arr" aria-hidden="true"><use href="#t-up"/></svg><span class="ltr">+30</span></b></div>
+          <div class="f-rel" role="img" aria-label="إسرائيل: 12، سلام بارد، دون تغير"><span class="r-at"><b>إسرائيل</b><span>سلام بارد · معاهدة <span class="ltr">1979</span></span></span><b class="f-v"><svg class="r-arr" aria-hidden="true"><use href="#t-flat"/></svg><span class="ltr">+12</span></b></div>
+          <div class="f-rel" role="img" aria-label="إثيوبيا: سالب 22، خلاف مياه النيل، تنخفض 2 شهريًا"><span class="r-at"><b>إثيوبيا</b><span>خلاف مياه النيل</span></span><b class="f-v r-amber"><svg class="r-arr" aria-hidden="true"><use href="#t-down"/></svg><span class="ltr">−22</span></b></div>
+          <div class="f-rel" role="img" aria-label="قطر: سالب 30، توتر إعلامي، دون تغير"><span class="r-at"><b>قطر</b><span>توتر إعلامي</span></span><b class="f-v"><svg class="r-arr" aria-hidden="true"><use href="#t-flat"/></svg><span class="ltr">−30</span></b></div>
+          <div class="f-rel" role="img" aria-label="إيران: سالب 48، بلا سفارات، دون تغير"><span class="r-at"><b>إيران</b><span>بلا سفارات منذ <span class="ltr">1980</span></span></span><b class="f-v"><svg class="r-arr" aria-hidden="true"><use href="#t-flat"/></svg><span class="ltr">−48</span></b></div>
+          <p class="s-note">من <span class="ltr">−100</span> إلى <span class="ltr">+100</span>. اضغط دولة لفتح علاقتها: الاتفاقيات والمساعدات والسلاح والعقوبات.</p>
+        </section>
+      </div>
+
+      <!-- المعاهدات: blocs Egypt belongs to, the treaties that bind it, aid in and out -->
+      <div class="r-body" data-tab="treaties">
+        <section class="r-sec">
+          <h3>التكتلات</h3>
+          <dl class="r-st">
+            <div class="r-sc"><dt>الجامعة العربية</dt><dd>دولة المقر</dd></div>
+            <div class="r-sc"><dt>الاتحاد الأفريقي</dt><dd>عضو</dd></div>
+            <div class="r-sc"><dt>عدم الانحياز</dt><dd>الرئاسة</dd></div>
+            <div class="r-sc"><dt>التعاون الإسلامي</dt><dd>عضو</dd></div>
+          </dl>
+        </section>
+        <section class="r-sec">
+          <h3>معاهدات واتفاقيات</h3>
+          <div class="f-tr" role="img" aria-label="معاهدة السلام مع إسرائيل، 1979: قيود على القوات في سيناء"><span class="r-at"><b>السلام مع إسرائيل</b><span><span class="ltr">1979</span> · قيود على القوات في سيناء</span></span></div>
+          <div class="f-tr" role="img" aria-label="الشراكة مع الاتحاد الأوروبي، 2004: تجارة حرة صناعية"><span class="r-at"><b>الشراكة مع الاتحاد الأوروبي</b><span><span class="ltr">2004</span> · تجارة حرة صناعية</span></span></div>
+          <div class="f-tr" role="img" aria-label="المناطق الصناعية المؤهلة، 2004: دخول السوق الأمريكية دون جمارك"><span class="r-at"><b>المناطق الصناعية المؤهلة</b><span><span class="ltr">2004</span> · السوق الأمريكية دون جمارك</span></span></div>
+          <div class="f-tr" role="img" aria-label="مياه النيل مع السودان، 1959: حصة مصر 55.5 مليار متر مكعب"><span class="r-at"><b>مياه النيل مع السودان</b><span><span class="ltr">1959</span> · حصة مصر <span class="ltr">55.5</span> مليار م³</span></span></div>
+        </section>
+        <dl class="r-st">
+          <div class="r-sc"><dt>معونة واردة</dt><dd><span class="ltr">1.6</span> مليار $ سنويًا</dd></div>
+          <div class="r-sc"><dt>سلاح وارد</dt><dd>الولايات المتحدة</dd></div>
+          <div class="r-sc"><dt>معونة صادرة</dt><dd>لا توجد</dd></div>
+          <div class="r-sc"><dt>سلاح صادر</dt><dd>لا يوجد</dd></div>
+        </dl>
+      </div>
+
+      <!-- مجلس الأمن: the 2011 Council (the five permanent members and the ten elected), Egypt's standing, the items on the
+           agenda that touch Egypt, and the one thing a non-member can do: lobby -->
+      <div class="r-body" data-tab="un">
+        <section class="r-sec">
+          <h3>مجلس الأمن <span class="ltr">2011</span></h3>
+          <div class="f-un"><span class="f-l">دائمون بحق النقض</span><span>الولايات المتحدة · روسيا · الصين · بريطانيا · فرنسا</span></div>
+          <div class="f-un"><span class="f-l">منتخبون حتى <span class="ltr">2011</span></span><span>البوسنة · البرازيل · الغابون · لبنان · نيجيريا</span></div>
+          <div class="f-un"><span class="f-l">منتخبون حتى <span class="ltr">2012</span></span><span>ألمانيا · الهند · البرتغال · جنوب أفريقيا · كولومبيا</span></div>
+        </section>
+        <dl class="r-st">
+          <div class="r-sc"><dt>مصر</dt><dd>ليست عضوًا</dd></div>
+          <div class="r-sc"><dt>آخر عضوية</dt><dd><span class="ltr">1996–1997</span></dd></div>
+          <div class="r-sc"><dt>المقعد العربي</dt><dd>لبنان</dd></div>
+          <div class="r-sc"><dt>الترشح القادم</dt><dd><span class="ltr">2016</span></dd></div>
+        </dl>
+        <section class="r-sec">
+          <h3>على جدول الأعمال</h3>
+          <div class="f-tr" role="img" aria-label="السودان: استفتاء جنوب السودان في 9 يناير 2011"><span class="r-at"><b>السودان</b><span>استفتاء الجنوب في <span class="ltr">9</span> يناير</span></span></div>
+          <div class="f-tr" role="img" aria-label="إيران: العقوبات، القرار 1929"><span class="r-at"><b>إيران</b><span>العقوبات · القرار <span class="ltr">1929</span></span></span></div>
+        </section>
+        <button class="r-act tap r-first" aria-label="حشد التأييد لمشروع قرار: 15 من النفوذ. يجمع أصوات المنتخبين العرب والأفارقة">
+          <span class="r-tile"><svg class="i"><use href="#i-seal"/></svg></span>
+          <span class="r-at"><b>حشد التأييد لمشروع قرار</b><span>الكلفة: <span class="ltr">15</span> من النفوذ</span></span>
+          <span class="r-chip">مع لبنان والغابون</span>
+        </button>
+      </div>
+      <span class="r-hint" aria-hidden="true"><svg class="i"><use href="#i-chev"/></svg></span>
+    </div>
+  </section>

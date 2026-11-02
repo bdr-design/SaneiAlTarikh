@@ -425,6 +425,10 @@ module.exports = function makeChecker(cfg) {
     qa('.sheet .r-act, .sheet .r-link').forEach((a) => { const al = a.getAttribute('aria-label') || '', at = a.querySelector('.r-at'), want = nums(T(at));
       if (!al || want.some((x) => !nums(al).map(Math.abs).includes(Math.abs(x)))) issues.push(`a11y: «${T(at && at.querySelector('b'))}» does not read its numbers`);
       if (al.includes('$')) issues.push(`a11y: «${T(at && at.querySelector('b'))}» reads «$» (say «دولار»)`); });
+    // a VoiceOver label only on an element that can carry a name (a role, a control, a landmark): VoiceOver skips the
+    // label of a plain element and reads its pieces instead
+    qa('.sheet [aria-label]').filter((e) => !e.getAttribute('role') && !['BUTTON', 'SECTION', 'NAV', 'DL', 'A', 'IMG'].includes(e.tagName) && !e.classList.contains('tap'))
+      .forEach((e) => issues.push(`a11y: a label VoiceOver may skip (no role): «${(e.getAttribute('aria-label') || '').slice(0, 30)}»`));
     // no image in the sheet but the flag and the header strip
     [...q('.sheet').querySelectorAll('*')].forEach((e) => {
       if (e.closest('.frost')) return;
@@ -599,6 +603,7 @@ module.exports = function makeChecker(cfg) {
       ['colour alone', d, '', '', /colour alone: «تراجع»/, () => { const b = [...document.querySelectorAll('.r-body')].find((e) => e.getClientRects().length); const s = document.createElement('p'); s.className = 's-note r-amber'; s.textContent = 'تراجع'; b.prepend(s); }],
       ['an image in the sheet', d, '', '', /an image in the sheet/, () => { const i = document.createElement('img'); i.src = '../../shared/flags/eg.svg'; i.style.cssText = 'width:17px;height:17px'; [...document.querySelectorAll('.r-body')].find((e) => e.getClientRects().length).prepend(i); }],
       ['close not round', d, '', '.r-x { width: 40px !important; }', /close button is not round/],
+      ['label without a role', d, '', '', /a11y: a label VoiceOver may skip/, () => { const b = [...document.querySelectorAll('.r-body')].find((e) => e.getClientRects().length); const s = document.createElement('div'); s.className = 's-note'; s.setAttribute('aria-label', 'اختبار'); s.textContent = 'اختبار'; b.prepend(s); }],
       ['brief text hidden', d, '', '', /brief text not fully visible/, () => { const b = [...document.querySelectorAll('.r-body')].find((e) => e.getClientRects().length).querySelector('h3'); if (b) b.style.opacity = '0'; }],
     ];
     const cases = generic.concat(cfg.cases ? cfg.cases(d, se) : []);

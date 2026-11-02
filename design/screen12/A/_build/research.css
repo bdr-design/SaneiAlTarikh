@@ -1,0 +1,20 @@
+  /* ================= Screen 12, variant A: the research panel («البحث») =================
+     Built with the shared builder on the approved panels. Three tabs (&tab=overview|domains|coop), so the tab row has three
+     columns. Bars are teal (data). */
+  .r-tabs { grid-template-columns: repeat(3, 1fr); }
+  [data-tab="domains"] .r-body[data-tab="domains"], [data-tab="coop"] .r-body[data-tab="coop"] { display: flex; }
+  .r-body[data-tab="domains"], .r-body[data-tab="coop"] { padding-top: var(--s2); padding-bottom: var(--s3); gap: var(--s2); }
+
+  /* the project under way: its domain and level, when it ends, a teal progress bar, the share done */
+  .b-now { display: flex; align-items: center; gap: var(--s2); height: 36px; }
+  .n-pr { flex: none; position: relative; width: 56px; height: 4px; border-radius: 2px; background: rgba(169, 188, 203, .22); }
+  .n-pr i { position: absolute; top: 0; bottom: 0; right: 0; width: var(--v); border-radius: 2px; background: var(--teal); }
+  .n-v { flex: none; font-size: var(--fs-val); line-height: var(--lh-val); font-weight: 600; white-space: nowrap; }
+  /* a domain: its name, a teal bar of its level out of 15, the level (and «التركيز» for the focus) */
+  .b-dom { display: grid; grid-template-columns: 120px 1fr 72px; align-items: center; column-gap: var(--s2); height: 22px; }
+  .b-dom > span { font-size: var(--fs-sec); line-height: var(--lh-sec); font-weight: 500; color: var(--t1); white-space: nowrap; }
+  .b-dom > b { display: inline-flex; align-items: baseline; justify-content: flex-end; gap: var(--s1); font-size: var(--fs-val); line-height: var(--lh-val); font-weight: 600; white-space: nowrap; }
+  .b-dom em { font-style: normal; font-size: var(--fs-label); line-height: var(--lh-label); font-weight: 500; color: var(--t2); }
+  .i-bar { position: relative; height: 4px; border-radius: 2px; background: rgba(169, 188, 203, .22); }
+  .i-bar::after { content: ""; position: absolute; top: 0; bottom: 0; right: 0; width: var(--v); border-radius: 2px; background: var(--teal); }
+  .f-tr { display: flex; align-items: center; height: 36px; }
