@@ -1,0 +1,41 @@
+  /* ================= Screen 8, variant A: the internal and politics panel («الداخلية والسياسة») =================
+     Built on the approved panels (screen 4 R's look and levels, the shared section identity and white touches, screen
+     5 A's notes, costs and states), all read by the shared builder (design/shared/check/panel_page.py). One tab body at
+     a time (&tab=overview|unrest|parties|groups). Data keeps its colours: the bars are teal (data), amber marks a rise in
+     unrest or a fall in satisfaction and always comes with its arrow. */
+  [data-tab="unrest"] .r-body[data-tab="unrest"], [data-tab="parties"] .r-body[data-tab="parties"], [data-tab="groups"] .r-body[data-tab="groups"] { display: flex; }
+  .r-body[data-tab="unrest"], .r-body[data-tab="parties"], .r-body[data-tab="groups"] { padding-top: var(--s2); padding-bottom: var(--s3); gap: var(--s2); }
+  /* the header's title is longer than the other panels': the shade over the satellite strip reaches further left, so
+     the name keeps its contrast over the brighter land */
+  .r-hd { background: linear-gradient(to left, rgba(12, 20, 28, .66) 0%, rgba(12, 20, 28, .5) 60%, rgba(12, 20, 28, .25) 100%),
+                linear-gradient(180deg, rgba(12, 20, 28, .15) 0%, rgba(12, 20, 28, .75) 100%),
+                url("header_cairo.jpg") center / cover no-repeat; }
+
+  /* a province or group row: name, a 4 pt teal bar out of 100, the value led by its trend arrow */
+  .i-row { display: grid; grid-template-columns: 104px 1fr 48px; align-items: center; column-gap: var(--s2); height: 22px; }
+  .i-row > span { font-size: var(--fs-sec); line-height: var(--lh-sec); font-weight: 500; color: var(--t1); white-space: nowrap; }
+  .i-bar { position: relative; height: 4px; border-radius: 2px; background: rgba(169, 188, 203, .22); }
+  .i-bar::after { content: ""; position: absolute; top: 0; bottom: 0; right: 0; width: var(--v); border-radius: 2px; background: var(--teal); }
+  .i-row > b { display: inline-flex; align-items: center; justify-content: flex-end; gap: 2px; font-size: var(--fs-val); line-height: var(--lh-val); font-weight: 600; white-space: nowrap; }
+
+  /* a province in the unrest list: a 44 pt row that opens its card (name, bar, value with its arrow, chevron) */
+  .i-prov { display: grid; grid-template-columns: 104px 1fr 48px 16px; align-items: center; column-gap: var(--s2); height: 44px; }
+  .i-prov > span { font-size: var(--fs-sec); line-height: var(--lh-sec); font-weight: 500; color: var(--t1); white-space: nowrap; }
+  .i-prov > b { display: inline-flex; align-items: center; justify-content: flex-end; gap: 2px; font-size: var(--fs-val); line-height: var(--lh-val); font-weight: 600; white-space: nowrap; }
+  .p-cost { display: inline-flex; align-items: center; gap: 2px; margin-inline-start: var(--s1); font-size: var(--fs-sec); font-weight: 600; }
+  /* a movement: its name and status, then its strength in words (with an arrow when it is rising) */
+  .i-grp { display: flex; align-items: center; gap: var(--s2); height: 36px; }
+  .i-str { flex: none; display: inline-flex; align-items: center; gap: 2px; font-size: var(--fs-sec); line-height: var(--lh-sec); font-weight: 600; white-space: nowrap; }
+
+  /* share bars (the province panel's, screen 4 R): one data hue in steps, so no part reads as better or worse */
+  .p-split { display: flex; height: 6px; border-radius: 3px; overflow: hidden; gap: 2px; }
+  .p-split i { width: var(--w); background: var(--teal); }
+  .p-grp { display: flex; align-items: center; justify-content: space-between; gap: var(--s2); height: 22px; font-size: var(--fs-sec); line-height: var(--lh-sec); font-weight: 500; color: var(--t1); white-space: nowrap; }
+  .p-grp > span { display: inline-flex; align-items: center; gap: var(--s1); }
+  .p-grp > b { font-size: var(--fs-val); line-height: var(--lh-val); font-weight: 600; }
+  .p-key { flex: none; width: 8px; height: 8px; border-radius: 2px; background: var(--teal); }
+  .p-split i:nth-child(2), .p-key.p-k2 { background: rgba(63, 224, 208, .5); }
+  .p-split i:nth-child(3), .p-key.p-k3 { background: var(--t2); }
+  .p-split i:nth-child(4), .p-key.p-k4 { background: rgba(169, 188, 203, .45); }
+  .r-kr .r-arr { margin-inline-end: 2px; vertical-align: -1px; }
+  .r-kl .ltr { margin-inline-start: 3px; }
