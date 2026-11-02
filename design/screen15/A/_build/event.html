@@ -1,0 +1,30 @@
+<!-- Screen 15: the scrim and the decision modal (&state=event). The game is paused for it (§6.7: an urgent decision, the
+     category's auto-pause on). The text is neutral (§6.8, ≤90 words); every option shows its cost and its effects. -->
+<div class="scrim" aria-hidden="true"></div>
+<section class="ev" role="dialog" aria-modal="true" aria-labelledby="ev-t" aria-describedby="ev-p">
+  <div class="ev-in">
+    <span class="ev-k">قرار · تونس · <span class="ltr">1</span> يناير <span class="ltr">2011</span></span>
+    <h2 class="ev-t" id="ev-t">احتجاجات واسعة في تونس</h2>
+    <p class="ev-p" id="ev-p">تتسع الاحتجاجات في تونس منذ <span class="ltr">17</span> ديسمبر بعد أن أحرق شاب نفسه في سيدي بوزيد. يطالب المحتجون بفرص عمل وبخفض الأسعار، وتنقل القنوات العربية ما يجري كل يوم. يرى مستشاروك أن البطالة وارتفاع الأسعار في مصر قد يجعلان الشارع يتأثر بما يحدث.</p>
+    <div class="ev-ops" role="group" aria-label="الخيارات">
+      <button class="ev-op tap" data-op="subsidy" aria-label="توسيع دعم الخبز والتموين: 500 مليون دولار سنويًا. تنخفض الاضطرابات 3، أفضل؛ يرتفع العجز 0.5 مليار دولار، أسوأ">
+        <b>توسيع دعم الخبز والتموين</b><span class="ev-c"><span class="ltr">500</span> مليون $ سنويًا</span>
+        <span class="ev-fx"><span><svg class="r-arr" aria-hidden="true"><use href="#t-down"/></svg>الاضطرابات <span class="ltr">−3</span></span><span class="r-amber"><svg class="r-arr" aria-hidden="true"><use href="#t-up"/></svg>العجز <span class="ltr">+0.5</span> مليار $</span></span>
+      </button>
+      <button class="ev-op tap" data-op="security" aria-label="تشديد الانتشار الأمني في المدن: من بند الأمن الداخلي. تنخفض الاضطرابات 2، أفضل؛ تنخفض الشرعية 2، أسوأ">
+        <b>تشديد الانتشار الأمني في المدن</b><span class="ev-c">من بند الأمن الداخلي</span>
+        <span class="ev-fx"><span><svg class="r-arr" aria-hidden="true"><use href="#t-down"/></svg>الاضطرابات <span class="ltr">−2</span></span><span class="r-amber"><svg class="r-arr" aria-hidden="true"><use href="#t-down"/></svg>الشرعية <span class="ltr">−2</span></span></span>
+      </button>
+      <button class="ev-op tap" data-op="dialogue" aria-label="حوار مع النقابات والأحزاب: الكلفة 10 من رأس المال السياسي. ترتفع الشرعية 2، أفضل">
+        <b>حوار مع النقابات والأحزاب</b><span class="ev-c">الكلفة: <span class="ltr">10</span> من رأس المال السياسي</span>
+        <span class="ev-fx"><span><svg class="r-arr" aria-hidden="true"><use href="#t-up"/></svg>الشرعية <span class="ltr">+2</span></span></span>
+      </button>
+      <button class="ev-op tap" data-op="watch" data-default="1" aria-label="المتابعة دون إجراء، الخيار الافتراضي: لا كلفة. يرتفع خطر الاضطرابات، أسوأ">
+        <b>المتابعة دون إجراء <span class="ev-def">الافتراضي</span></b><span class="ev-c">لا كلفة</span>
+        <span class="ev-fx"><span class="r-amber"><svg class="r-arr" aria-hidden="true"><use href="#t-up"/></svg>خطر الاضطرابات</span></span>
+      </button>
+    </div>
+    <p class="ev-foot">إن لم تختر، يُختار الافتراضي بعد <span class="ltr">7</span> أيام.</p>
+  </div>
+  <figure class="ev-pic"><img src="event_protests.jpg" alt=""><figcaption class="ev-cat"><svg class="i" aria-hidden="true"><use href="#i-flame"/></svg>احتجاجات وثورات</figcaption></figure>
+</section>

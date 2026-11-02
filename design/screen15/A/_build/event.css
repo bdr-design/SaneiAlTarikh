@@ -1,0 +1,56 @@
+  /* ================= Screen 15, variant A: the event and decision modal, the notification centre =================
+     The approved play screen (B3, opaque panels), paused. &state=event: an urgent decision as a modal over a scrim (the
+     HUD under it inert); &state=center: the notification centre under the bell, the map-mode and my-country buttons
+     yielding to it. */
+  .scrim { position: absolute; inset: 0; background: rgba(4, 8, 12, .55); z-index: 3; display: none; }
+  [data-state="event"] .scrim { display: block; }
+  /* the modal: text and options on the right, the category image in a column on the left */
+  .ev { position: absolute; z-index: 4; display: none; grid-template-columns: 1fr var(--ev-img); width: var(--ev-w); border-radius: 12px;
+    background: rgb(12, 20, 28); border: 1px solid var(--stroke); box-shadow: 0 10px 30px rgba(0, 0, 0, .45); overflow: hidden; }
+  [data-state="event"] .ev { display: grid; }
+  .ev-in { display: flex; flex-direction: column; gap: var(--s2); padding: var(--s3); min-width: 0; }
+  .ev-pic { position: relative; margin: 0; }
+  .ev-pic img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+  .ev-cat { position: absolute; right: var(--s2); bottom: var(--s2); height: 20px; display: flex; align-items: center; gap: var(--s1); padding-inline: 6px 7px;
+    border-radius: 6px; background: rgb(12, 20, 28); font-size: var(--fs-label); line-height: var(--lh-label); font-weight: 700; color: var(--t1); white-space: nowrap; }
+  .ev-cat svg.i { width: var(--glyph); height: var(--glyph); color: var(--t1); }
+  .ev-k { font-size: var(--fs-label); line-height: var(--lh-label); font-weight: 500; color: var(--t2); }
+  .ev-t { margin: 0; font-size: var(--fs-name); line-height: var(--lh-name); font-weight: 700; color: var(--t1); }
+  .ev-p { margin: 0; font-size: var(--fs-sec); line-height: var(--lh-sec); font-weight: 500; color: var(--t1); }
+  .ev-ops { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s2); }
+  /* an option: its title, its cost, its effects (arrow, sign and words; costs amber with their arrow) */
+  .ev-op { min-height: 60px; display: flex; flex-direction: column; align-items: stretch; justify-content: center; gap: 2px; padding: 6px var(--s2);
+    border-radius: 10px; background: rgba(234, 242, 247, .06); border: 1px solid var(--stroke); text-align: right; color: var(--t1); min-width: 0; }
+  .ev-op b { font-size: var(--fs-sec); line-height: var(--lh-sec); font-weight: 600; color: var(--t1); white-space: nowrap; }
+  .ev-op .ev-c { font-size: var(--fs-label); line-height: var(--lh-label); font-weight: 500; color: var(--t2); white-space: nowrap; }
+  .ev-fx { display: flex; flex-wrap: wrap; align-items: center; gap: 0 var(--s2); font-size: var(--fs-label); line-height: var(--lh-label); font-weight: 700; color: var(--t1); white-space: nowrap; }
+  .ev-fx > span { display: inline-flex; align-items: center; gap: 2px; }
+  .ev-fx .r-amber { color: var(--amber); }
+  .ev-fx svg.r-arr { width: var(--glyph); height: var(--glyph); fill: none; stroke: currentColor; stroke-width: 1.75; stroke-linecap: round; stroke-linejoin: round; }
+  .ev-def { font-size: var(--fs-label); line-height: var(--lh-label); font-weight: 700; color: rgb(11, 18, 24); background: var(--t1); border-radius: 4px; padding-inline: 4px; margin-inline-start: var(--s1); }
+  .ev-foot { margin: 0; font-size: var(--fs-label); line-height: var(--lh-label); font-weight: 500; color: var(--t2); }
+  /* the notification centre: under the toast, down to 8 pt above the dock; the left stack's two buttons yield to it */
+  .nc { position: absolute; z-index: 2; display: none; flex-direction: column; width: var(--nc-w); border-radius: 12px; }
+  [data-state="center"] .nc { display: flex; }
+  [data-state="center"] .btn.mode, [data-state="center"] .btn.home { visibility: hidden; }
+  .nc-h { display: flex; align-items: center; justify-content: space-between; height: 44px; padding-inline: var(--s3) var(--s2); flex: none; }
+  .nc-h h2 { margin: 0; font-size: var(--fs-name); line-height: var(--lh-name); font-weight: 700; color: var(--t1); }
+  .nc-b { overflow-y: auto; padding: 0 var(--s3) var(--s3); display: flex; flex-direction: column; gap: var(--s2); min-height: 0; }
+  .nc-b h3 { margin: var(--s1) 0 0; font-size: var(--fs-label); line-height: var(--lh-label); font-weight: 700; color: var(--t2); }
+  .nc-r { height: 44px; display: flex; align-items: center; gap: var(--s2); padding-inline: var(--s2); border-radius: 10px; background: rgba(234, 242, 247, .06); color: var(--t1); text-align: right; flex: none; }
+  .nc-r .nc-ic { flex: none; width: 28px; height: 28px; border-radius: 6px; display: flex; align-items: center; justify-content: center; background: rgba(234, 242, 247, .08); }
+  .nc-r .nc-ic svg.i { width: var(--ico); height: var(--ico); color: var(--t1); }
+  .nc-r .nc-ic.r-amber svg.i { color: var(--amber); }
+  .nc-r .nc-at { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+  .nc-r .nc-at b { font-size: var(--fs-sec); line-height: var(--lh-sec); font-weight: 600; color: var(--t1); white-space: nowrap; }
+  .nc-r .nc-at > span { font-size: var(--fs-label); line-height: var(--lh-label); font-weight: 500; color: var(--t2); white-space: nowrap; }
+  .nc-r .nc-chev { flex: none; width: var(--ico); height: var(--ico); color: var(--t2); }
+  .nc-x { flex: none; height: 32px; padding-inline: var(--pad-ctl); border-radius: 8px; border: 1px solid var(--t1); font-size: var(--fs-sec); line-height: var(--lh-sec); font-weight: 600; color: var(--t1); background: none; }
+  .nc-close { flex: none; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: rgba(234, 242, 247, .08); color: var(--t1); }
+  .nc-close svg.i { width: var(--ico); height: var(--ico); }
+  /* the list scrolls inside the centre; a 24 pt fade marks an edge that hides content (the panels' rule) */
+  .nc[data-ftop="1"] .nc-b { -webkit-mask-image: linear-gradient(to bottom, transparent, #000 24px); mask-image: linear-gradient(to bottom, transparent, #000 24px); }
+  .nc[data-fbot="1"] .nc-b { -webkit-mask-image: linear-gradient(to top, transparent, #000 24px); mask-image: linear-gradient(to top, transparent, #000 24px); }
+  .nc[data-ftop="1"][data-fbot="1"] .nc-b { -webkit-mask-image: linear-gradient(to bottom, transparent, #000 24px, #000 calc(100% - 24px), transparent); mask-image: linear-gradient(to bottom, transparent, #000 24px, #000 calc(100% - 24px), transparent); }
+  /* buttons with a 1 pt border: the hit box covers the border too */
+  .ev-op.tap::before, .nc-x.tap::before { width: max(100% + 2px, 44px); height: max(100% + 2px, 44px); }

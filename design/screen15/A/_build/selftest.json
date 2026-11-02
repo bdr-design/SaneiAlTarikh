@@ -1,0 +1,364 @@
+{
+ "ranAt": "2026-11-02T23:39:49.661Z",
+ "inputs": {
+  "files": [
+   "index.html",
+   "_build/render.js",
+   "_build/assemble.py",
+   "_build/event.css",
+   "_build/event.html",
+   "_build/center.html",
+   "_build/event.js",
+   "event_protests.jpg",
+   "../../screen4/A/index.html",
+   "../../screen1/B3/index.html",
+   "../../screen5/A/_build/sheet.html",
+   "../../screen6/A/_build/sheet.html",
+   "../../screen8/A/_build/sheet.html",
+   "../../shared/devices.json",
+   "../../shared/flag_eg.svg",
+   "../../shared/map_mena_d1.jpg",
+   "../../shared/map_mena_d1_overlay.svg",
+   "map_overlay_cairo.svg"
+  ],
+  "sha1": "00ff564a6e16472a509c007f9eea24cf11a3c1e3"
+ },
+ "cleanIssues": {
+  "i16promax": [],
+  "i16promax_center": [],
+  "i16promax_center_mid": [],
+  "i16promax_center_end": [],
+  "i16promax coverage": [],
+  "se": [],
+  "se_center": [],
+  "se_center_mid": [],
+  "se_center_end": [],
+  "se coverage": []
+ },
+ "results": [
+  {
+   "name": "modal not opaque",
+   "ok": true,
+   "sample": [
+    "panel not opaque: قرار · تونس · 1 يناير 2011 rgba(9, 17, 25, 0.66)",
+    "the modal is not the opaque 12 pt panel"
+   ]
+  },
+  {
+   "name": "type size",
+   "ok": true,
+   "sample": [
+    "font size 17 for \"احتجاجات واسعة في تونس\""
+   ]
+  },
+  {
+   "name": "font weight",
+   "ok": true,
+   "sample": [
+    "font weight 11.5/700 for \"توسيع دعم الخبز والتموين\"",
+    "font weight 11.5/700 for \"تشديد الانتشار الأمني في المدن\"",
+    "font weight 11.5/700 for \"حوار مع النقابات والأحزاب\""
+   ]
+  },
+  {
+   "name": "modal off centre",
+   "ok": true,
+   "sample": [
+    "the modal is not centred across the screen"
+   ]
+  },
+  {
+   "name": "modal too wide",
+   "ok": true,
+   "sample": [
+    "panel in an inset: قرار · تونس · 1 يناير 2011",
+    "text in side inset: قرار · تونس ·",
+    "text in side inset: احتجاجات واسعة في تونس"
+   ]
+  },
+  {
+   "name": "scrim missing",
+   "ok": true,
+   "sample": [
+    "the scrim does not cover the screen"
+   ]
+  },
+  {
+   "name": "HUD live under the modal",
+   "ok": true,
+   "sample": [
+    ".hud is not inert under the modal"
+   ]
+  },
+  {
+   "name": "not a dialog",
+   "ok": true,
+   "sample": [
+    "a11y: the modal is not a labelled modal dialog"
+   ]
+  },
+  {
+   "name": "image on the right",
+   "ok": true,
+   "sample": [
+    "the image column is not on the left, full height, a third of the modal (≤220)",
+    "the options are not a 2 × 2 grid, right to left then down"
+   ]
+  },
+  {
+   "name": "image swapped",
+   "ok": true,
+   "sample": [
+    "the category image is not the owner's protest image, covering its column"
+   ]
+  },
+  {
+   "name": "category unnamed",
+   "ok": true,
+   "sample": [
+    "the category is not named in words on its image"
+   ]
+  },
+  {
+   "name": "title too long",
+   "ok": true,
+   "sample": [
+    "the modal is not centred in the height above the home indicator",
+    "the title is 80 characters (≤60)"
+   ]
+  },
+  {
+   "name": "text too long",
+   "ok": true,
+   "sample": [
+    "panel in an inset: قرار · تونس · 1 يناير 2011",
+    "the modal is not centred in the height above the home indicator",
+    "the modal leaves the safe screen"
+   ]
+  },
+  {
+   "name": "options reordered",
+   "ok": true,
+   "sample": [
+    "option 1 is «تشديد الانتشار الأمني في المدن · من بند الأمن الداخلي» (want «توسيع دعم الخبز والتموين · 500 مليون $ سنويًا»)",
+    "option 1 effect 1 is «down الاضطرابات −2» (want «down الاضطرابات -3»)",
+    "option 1 effect 2 is «down الشرعية −2» amber (want «up العجز 0.5» amber)"
+   ]
+  },
+  {
+   "name": "options in one column",
+   "ok": true,
+   "sample": [
+    "panel in an inset: قرار · تونس · 1 يناير 2011",
+    "text in bottom inset: لا كلفة",
+    "text in bottom inset: خطر الاضطرابات"
+   ]
+  },
+  {
+   "name": "an effect without its arrow",
+   "ok": true,
+   "sample": [
+    "option 1 effect 1 is «none الاضطرابات −3» (want «down الاضطرابات -3»)"
+   ]
+  },
+  {
+   "name": "arrow against its sign",
+   "ok": true,
+   "sample": [
+    "option 3 effect 1 is «down الشرعية +2» (want «up الشرعية 2»)",
+    "option 3: an arrow against its sign"
+   ]
+  },
+  {
+   "name": "cost not amber",
+   "ok": true,
+   "sample": [
+    "option 1 effect 2 is «up العجز +0.5 مليار $» (want «up العجز 0.5» amber)"
+   ]
+  },
+  {
+   "name": "option read in part",
+   "ok": true,
+   "sample": [
+    "a11y: option 2 does not read all it shows: في المدن بند الداخلي",
+    "a11y: option 2 does not say «الاضطرابات»'s direction and whether it is better or worse",
+    "a11y: option 2 does not say «الشرعية»'s direction and whether it is better or worse"
+   ]
+  },
+  {
+   "name": "option silent on better or worse",
+   "ok": true,
+   "sample": [
+    "a11y: option 3 does not say «الشرعية»'s direction and whether it is better or worse"
+   ]
+  },
+  {
+   "name": "option says $",
+   "ok": true,
+   "sample": [
+    "a11y: option 1 does not say «دولار»"
+   ]
+  },
+  {
+   "name": "two defaults",
+   "ok": true,
+   "sample": [
+    "the default is not exactly one option, named on screen and in VoiceOver"
+   ]
+  },
+  {
+   "name": "default unnamed",
+   "ok": true,
+   "sample": []
+  },
+  {
+   "name": "no expiry",
+   "ok": true,
+   "sample": [
+    "the expiry and its default answer are not stated"
+   ]
+  },
+  {
+   "name": "deficit off the subsidy",
+   "ok": true,
+   "sample": [
+    "option 1 is «توسيع دعم الخبز والتموين · 600 مليون $ سنويًا» (want «توسيع دعم الخبز والتموين · 500 مليون $ سنويًا»)",
+    "a11y: option 1 does not read all it shows: 600",
+    "the deficit's rise (0.5 مليار) is not the subsidy's 0.6 مليار"
+   ]
+  },
+  {
+   "name": "game running",
+   "ok": true,
+   "sample": [
+    "the game is not shown paused (play glyph and words)"
+   ]
+  },
+  {
+   "name": "faint text",
+   "ok": true,
+   "sample": [
+    "contrast 2.51 for \"تتسع الاحتجاجات في تونس \"",
+    "contrast 2.51 for \"17\"",
+    "contrast 2.51 for \"ديسمبر بعد أن أحرق شاب ن\""
+   ]
+  },
+  {
+   "name": "text overlap",
+   "ok": true,
+   "sample": [
+    "text overlap \"قرار · تونس ·\" / \"احتجاجات واسعة في تونس\"",
+    "text overlap \"1\" / \"احتجاجات واسعة في تونس\"",
+    "text overlap \"يناير\" / \"احتجاجات واسعة في تونس\""
+   ]
+  },
+  {
+   "name": "option too short",
+   "ok": true,
+   "sample": [
+    "option height 40.00 (want at least 60): توسيع دعم الخبز والتموين: ",
+    "option height 40.00 (want at least 60): تشديد الانتشار الأمني في ا",
+    "option height 40.00 (want at least 60): حوار مع النقابات والأحزاب:"
+   ]
+  },
+  {
+   "name": "centre misplaced",
+   "ok": true,
+   "sample": [
+    "panel overlap الأقسام / الإشعارات",
+    "the centre is not under the toast down to 8 pt above the dock: x 62.0 y 108.0..378.0 w 340.0"
+   ]
+  },
+  {
+   "name": "buttons under the centre",
+   "ok": true,
+   "sample": [
+    "panel overlap الخريطة: سياسية / الإشعارات",
+    "icon over text: i / \"سياسية\"",
+    "hit overlap الخريطة: سياسية / إغلاق الإشعارات"
+   ]
+  },
+  {
+   "name": "sections reordered",
+   "ok": true,
+   "sample": [
+    "the sections are «قرارات تنتظرك، أوامر معلقة، للعلم، مهم»"
+   ]
+  },
+  {
+   "name": "badge off",
+   "ok": true,
+   "sample": [
+    "the badge says 4, the unread notifications are 3"
+   ]
+  },
+  {
+   "name": "order not cancellable",
+   "ok": true,
+   "sample": [
+    "the pending order is not a group with its own cancel button"
+   ]
+  },
+  {
+   "name": "row read in part",
+   "ok": true,
+   "sample": [
+    "a11y: «السودان: استفتاء الجنوب بعد 8 أيام» does not read all it shows: استفتاء الجنوب بعد أيام"
+   ]
+  },
+  {
+   "name": "row silent on where it leads",
+   "ok": true,
+   "sample": [
+    "a11y: «احتجاجات واسعة في تونس» does not say where it leads"
+   ]
+  },
+  {
+   "name": "fades wrong",
+   "ok": true,
+   "sample": [
+    "the centre's fades do not match its scroll"
+   ]
+  },
+  {
+   "name": "list cut without a fade",
+   "ok": false,
+   "sample": [
+    "the centre's fades do not match its scroll"
+   ]
+  },
+  {
+   "name": "close not round",
+   "ok": true,
+   "sample": [
+    "the close button is not a 32 pt circle"
+   ]
+  },
+  {
+   "name": "HUD moved",
+   "ok": true,
+   "sample": [
+    "HUD element moved from its B3 position: .toast",
+    "the centre is not under the toast down to 8 pt above the dock: x 62.0 y 96.0..366.0 w 340.0"
+   ]
+  },
+  {
+   "name": "map label cut",
+   "ok": true,
+   "sample": [
+    "map label سوريا cut by a panel edge",
+    "map label تونس cut by a panel edge",
+    "map label تونس sliced by the screen edge or the side inset"
+   ]
+  },
+  {
+   "name": "hit overlap",
+   "ok": false,
+   "sample": []
+  },
+  {
+   "name": "coverage reports a string no view shows",
+   "ok": true
+  }
+ ]
+}
