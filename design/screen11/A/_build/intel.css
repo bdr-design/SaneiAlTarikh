@@ -1,0 +1,21 @@
+  /* ================= Screen 11, variant A: the intelligence panel («الاستخبارات») =================
+     Built with the shared builder on the approved panels. One tab body at a time (&tab=overview|networks|ops|counter).
+     Network and progress bars are teal (data); a high exposure or a case still open is amber with the warning icon. */
+  [data-tab="networks"] .r-body[data-tab="networks"], [data-tab="ops"] .r-body[data-tab="ops"], [data-tab="counter"] .r-body[data-tab="counter"] { display: flex; }
+  .r-body[data-tab="networks"], .r-body[data-tab="ops"], .r-body[data-tab="counter"] { padding-top: var(--s2); padding-bottom: var(--s3); gap: var(--s2); }
+
+  /* a network: the country, how fresh the picture is and the exposure; a teal bar of its level out of 10; the level */
+  .n-row { display: grid; grid-template-columns: 1fr 56px 24px; align-items: center; column-gap: var(--s2); height: 36px; }
+  .i-bar { position: relative; height: 4px; border-radius: 2px; background: rgba(169, 188, 203, .22); }
+  .i-bar::after { content: ""; position: absolute; top: 0; bottom: 0; right: 0; width: var(--v); border-radius: 2px; background: var(--teal); }
+  .n-v { font-size: var(--fs-val); line-height: var(--lh-val); font-weight: 600; white-space: nowrap; text-align: left; }
+  .n-heat, .n-st { display: inline-flex; align-items: center; gap: 2px; }
+  .n-wi { width: var(--glyph) !important; height: var(--glyph) !important; }
+  /* an operation: its type and target, when it ends and its risk; its progress; or its outcome in words */
+  .n-op { display: flex; align-items: center; gap: var(--s2); height: 36px; }
+  .n-pr { flex: none; position: relative; width: 56px; height: 4px; border-radius: 2px; background: rgba(169, 188, 203, .22); }
+  .n-pr i { position: absolute; top: 0; bottom: 0; right: 0; width: var(--v); border-radius: 2px; background: var(--teal); }
+  .n-st { flex: none; font-size: var(--fs-sec); line-height: var(--lh-sec); font-weight: 600; white-space: nowrap; }
+  .n-types { font-size: var(--fs-sec); line-height: 18px; font-weight: 500; color: var(--t1); }
+  .m-empty { display: flex; align-items: center; gap: var(--s2); min-height: 32px; font-size: var(--fs-sec); line-height: var(--lh-sec); font-weight: 500; color: var(--t1); }
+  .m-empty svg.i { flex: none; color: var(--t2); }
