@@ -1,7 +1,7 @@
   <!-- More panel (screen 13, variant A), opened from the dock's «المزيد». The approved panel look with the section identity
        (المزيد: grey) and the white touches. Tabs: الحفظ (&tab=saves, default), الإعدادات (&tab=settings), السجل (&tab=log),
-       حول (&tab=about). §6.5: saves, settings, statistics, event log, sources and rights, help, diagnostics export, the
-       save mirror, «قيم تصميمية». Lightness (L9): one governor sets the frame cap, the speed cap and the quality; the
+       حول (&tab=about). §6.5: saves, settings, statistics, event log, sources and rights (with «قيم تصميمية»), help,
+       diagnostics export, the save mirror (D-28), import and export. Lightness (L9): one governor sets the frame cap, the speed cap and the quality; the
        player picks its preference here. No music in v1 (decision 2), so no music setting. -->
   <section class="sheet glass" aria-label="المزيد">
     <div class="r-in">
@@ -22,29 +22,37 @@
         <button class="r-tab tap" role="tab" data-for="about"><svg class="i"><use href="#i-info"/></svg><span>حول</span></button>
       </nav>
 
-      <!-- الحفظ: save now, the autosave, the saves of this campaign, the mirror copy -->
+      <!-- الحفظ: save now, this campaign's saves (the autosave), the mirror copy in a folder the player picks once (D-28), import
+           and export through Files (decision «saves») -->
       <div class="r-body" data-tab="saves">
         <button class="r-act tap r-first" aria-label="حفظ الآن: حفظ جديد باسم مصر، 1 يناير 2011">
           <span class="r-tile"><svg class="i"><use href="#i-save"/></svg></span>
           <span class="r-at"><b>حفظ الآن</b><span>حفظ جديد · مصر · <span class="ltr">1</span> يناير <span class="ltr">2011</span></span></span>
-          <span class="r-chip">جديد</span>
         </button>
         <section class="r-sec">
-          <h3>حفظ هذه الحملة</h3>
-          <div class="r-link tap" role="button" tabindex="0" aria-label="حفظ تلقائي: 1 يناير 2011، مصر، 2 ميغابايت. يفتح خيارات التحميل والحذف">
+          <h3>ملفات الحفظ في هذه الحملة</h3>
+          <div class="r-link tap" role="button" tabindex="0" aria-label="حفظ تلقائي: 1 يناير 2011، مصر، 2 ميغابايت. يفتح التحميل والتصدير والحذف">
             <span class="r-tile"><svg class="i"><use href="#i-save"/></svg></span>
             <span class="r-at"><b>حفظ تلقائي</b><span><span class="ltr">1</span> يناير <span class="ltr">2011</span> · مصر · <span class="ltr">2</span> ميغابايت</span></span>
             <svg class="i r-chev"><use href="#i-chev"/></svg>
           </div>
           <p class="s-note">يُحفظ تلقائيًا أول كل شهر وعند الخروج من اللعبة.</p>
         </section>
-        <div class="s-pol">
-          <span class="r-at"><b>نسخة احتياطية</b><span>في ملفات الجهاز · كل أسبوع</span></span>
-          <span class="s-seg" role="radiogroup" aria-label="نسخة احتياطية"><button class="s-sg tap on" role="radio" aria-checked="true">أسبوعية</button><button class="s-sg tap" role="radio" aria-checked="false">يومية</button><button class="s-sg tap" role="radio" aria-checked="false">متوقفة</button></span>
+        <div class="r-link tap" role="button" tabindex="0" aria-label="نسخة في مجلد آخر: لم يُختر مجلد، تحمي الحفظ إذا حُذفت اللعبة. يفتح اختيار المجلد">
+          <span class="r-tile"><svg class="i"><use href="#i-folder"/></svg></span>
+          <span class="r-at"><b>نسخة في مجلد آخر</b><span>لم يُختر مجلد · تحمي الحفظ إذا حُذفت اللعبة</span></span>
+          <svg class="i r-chev"><use href="#i-chev"/></svg>
+        </div>
+        <div class="r-link tap" role="button" tabindex="0" aria-label="استيراد حفظ أو تصديره عبر تطبيق الملفات. يفتح الملفات">
+          <span class="r-tile"><svg class="i"><use href="#i-share"/></svg></span>
+          <span class="r-at"><b>استيراد حفظ أو تصديره</b><span>عبر تطبيق الملفات</span></span>
+          <svg class="i r-chev"><use href="#i-chev"/></svg>
         </div>
       </div>
 
-      <!-- الإعدادات: the governor's preference (lightness first), haptics, motion, the maximum speed; digits are Western always -->
+      <!-- الإعدادات: the governor's preference (lightness first) and a speed cap (the HUD's «أقصى» stays reachable, D-16); sound,
+           haptics, motion (following the system's Reduce Motion); digits are Western always. Auto-pause per category belongs to
+           the notification centre (§6.7). -->
       <div class="r-body" data-tab="settings">
         <section class="r-sec">
           <h3>الأداء</h3>
@@ -53,25 +61,29 @@
             <span class="s-seg" role="radiogroup" aria-label="الجودة"><button class="s-sg tap" role="radio" aria-checked="false">توفير</button><button class="s-sg tap on" role="radio" aria-checked="true">متوازن</button><button class="s-sg tap" role="radio" aria-checked="false">أعلى</button></span>
           </div>
           <div class="s-pol">
-            <span class="r-at"><b>أقصى سرعة</b><span>تقل إذا سخن الجهاز</span></span>
-            <span class="s-seg" role="radiogroup" aria-label="أقصى سرعة"><button class="s-sg tap" role="radio" aria-checked="false">×<span class="ltr">2</span></button><button class="s-sg tap" role="radio" aria-checked="false">×<span class="ltr">5</span></button><button class="s-sg tap on" role="radio" aria-checked="true">×<span class="ltr">10</span></button></span>
+            <span class="r-at"><b>حد السرعة</b><span>تقل تلقائيًا إذا سخن الجهاز</span></span>
+            <span class="s-seg" role="radiogroup" aria-label="حد السرعة"><button class="s-sg tap" role="radio" aria-checked="false">×<span class="ltr">5</span></button><button class="s-sg tap" role="radio" aria-checked="false">×<span class="ltr">10</span></button><button class="s-sg tap on" role="radio" aria-checked="true">أقصى</button></span>
           </div>
         </section>
         <section class="r-sec">
-          <h3>الإحساس</h3>
+          <h3>الصوت واللمس والحركة</h3>
           <div class="s-pol">
-            <span class="r-at"><b>الاهتزاز</b><span>عند الأحداث والأوامر</span></span>
-            <span class="s-seg" role="radiogroup" aria-label="الاهتزاز"><button class="s-sg tap on" role="radio" aria-checked="true">مفعّل</button><button class="s-sg tap" role="radio" aria-checked="false">خفيف</button><button class="s-sg tap" role="radio" aria-checked="false">متوقف</button></span>
+            <span class="r-at"><b>الأصوات</b><span>أصوات الأزرار والتنبيهات</span></span>
+            <span class="s-seg" role="radiogroup" aria-label="الأصوات"><button class="s-sg tap on" role="radio" aria-checked="true">كاملة</button><button class="s-sg tap" role="radio" aria-checked="false">خفيفة</button><button class="s-sg tap" role="radio" aria-checked="false">متوقفة</button></span>
           </div>
           <div class="s-pol">
-            <span class="r-at"><b>الحركة</b><span>حسب إعداد الجهاز</span></span>
-            <span class="s-seg" role="radiogroup" aria-label="الحركة"><button class="s-sg tap on" role="radio" aria-checked="true">النظام</button><button class="s-sg tap" role="radio" aria-checked="false">كاملة</button><button class="s-sg tap" role="radio" aria-checked="false">قليلة</button></span>
+            <span class="r-at"><b>الاهتزاز</b><span>عند الأحداث والأوامر</span></span>
+            <span class="s-seg" role="radiogroup" aria-label="الاهتزاز"><button class="s-sg tap on" role="radio" aria-checked="true">كامل</button><button class="s-sg tap" role="radio" aria-checked="false">خفيف</button><button class="s-sg tap" role="radio" aria-checked="false">متوقف</button></span>
+          </div>
+          <div class="s-pol">
+            <span class="r-at"><b>الحركة</b><span>تتبع خيار تقليل الحركة</span></span>
+            <span class="s-seg" role="radiogroup" aria-label="الحركة"><button class="s-sg tap on" role="radio" aria-checked="true">حسب الجهاز</button><button class="s-sg tap" role="radio" aria-checked="false">كاملة</button><button class="s-sg tap" role="radio" aria-checked="false">مخففة</button></span>
           </div>
         </section>
         <p class="s-note">الأرقام غربية دائمًا، والمبالغ بالدولار الأمريكي.</p>
       </div>
 
-      <!-- السجل: the events of the campaign, newest first, each opening its «لماذا؟»; the statistics as a link -->
+      <!-- السجل: the events of the campaign, newest first, each dated and opening its «لماذا؟»; the statistics as a link -->
       <div class="r-body" data-tab="log">
         <section class="r-sec">
           <h3>الأحداث، الأحدث أولًا</h3>
@@ -80,9 +92,9 @@
             <span class="r-at"><b>احتجاجات واسعة في تونس</b><span><span class="ltr">1</span> يناير <span class="ltr">2011</span> · الجوار</span></span>
             <svg class="i r-chev"><use href="#i-chev"/></svg>
           </div>
-          <div class="r-link tap" role="button" tabindex="0" aria-label="بدأت الحملة، 1 يناير 2011، مصر، واقعي. يفتح لماذا">
+          <div class="r-link tap" role="button" tabindex="0" aria-label="بدأت الحملة، 1 يناير 2011، مصر، الوضع واقعي. يفتح لماذا">
             <span class="r-tile"><svg class="i"><use href="#i-flag"/></svg></span>
-            <span class="r-at"><b>بدأت الحملة</b><span><span class="ltr">1</span> يناير <span class="ltr">2011</span> · مصر · واقعي</span></span>
+            <span class="r-at"><b>بدأت الحملة</b><span><span class="ltr">1</span> يناير <span class="ltr">2011</span> · مصر · الوضع واقعي</span></span>
             <svg class="i r-chev"><use href="#i-chev"/></svg>
           </div>
         </section>
@@ -93,16 +105,11 @@
         </div>
       </div>
 
-      <!-- حول: sources and rights, the design values, help, the diagnostics export -->
+      <!-- حول: sources and rights (with «قيم تصميمية» on that screen, §6.5), help, privacy, the diagnostics export, the version -->
       <div class="r-body" data-tab="about">
-        <div class="r-link tap" role="button" tabindex="0" aria-label="المصادر والحقوق: البيانات والخرائط والصور ورخصها. يفتح القائمة">
+        <div class="r-link tap" role="button" tabindex="0" aria-label="المصادر والحقوق: البيانات والخرائط ورخصها، وقيم تصميمية. يفتح القائمة">
           <span class="r-tile"><svg class="i"><use href="#i-doc"/></svg></span>
-          <span class="r-at"><b>المصادر والحقوق</b><span>البيانات والخرائط والصور ورخصها</span></span>
-          <svg class="i r-chev"><use href="#i-chev"/></svg>
-        </div>
-        <div class="r-link tap" role="button" tabindex="0" aria-label="قيم تصميمية: الأرقام المقدّرة وسبب كل منها. يفتح القائمة">
-          <span class="r-tile"><svg class="i"><use href="#i-chart"/></svg></span>
-          <span class="r-at"><b>قيم تصميمية</b><span>الأرقام المقدّرة وسبب كل منها</span></span>
+          <span class="r-at"><b>المصادر والحقوق</b><span>البيانات والخرائط ورخصها · قيم تصميمية</span></span>
           <svg class="i r-chev"><use href="#i-chev"/></svg>
         </div>
         <div class="r-link tap" role="button" tabindex="0" aria-label="المساعدة: كيف تلعب، الخريطة والأقسام والأوامر. يفتح المساعدة">
@@ -110,12 +117,17 @@
           <span class="r-at"><b>المساعدة</b><span>كيف تلعب · الخريطة والأقسام والأوامر</span></span>
           <svg class="i r-chev"><use href="#i-chev"/></svg>
         </div>
-        <div class="r-link tap" role="button" tabindex="0" aria-label="تصدير التشخيص: ملف يُرسل عند مشكلة، بلا بيانات شخصية. يفتح المشاركة">
-          <span class="r-tile"><svg class="i"><use href="#i-share"/></svg></span>
-          <span class="r-at"><b>تصدير التشخيص</b><span>ملف يُرسل عند مشكلة · بلا بيانات شخصية</span></span>
+        <div class="r-link tap" role="button" tabindex="0" aria-label="الخصوصية: لا نجمع أي بيانات، لا حساب ولا تتبع. يفتح سياسة الخصوصية">
+          <span class="r-tile"><svg class="i"><use href="#i-lock"/></svg></span>
+          <span class="r-at"><b>الخصوصية</b><span>لا نجمع أي بيانات · لا حساب ولا تتبع</span></span>
           <svg class="i r-chev"><use href="#i-chev"/></svg>
         </div>
-        <p class="s-note">صانع التاريخ · لا إعلانات ولا اتصال بالإنترنت.</p>
+        <div class="r-link tap" role="button" tabindex="0" aria-label="تصدير التشخيص: ملف تشاركه عند مشكلة، بلا بيانات شخصية. يفتح المشاركة">
+          <span class="r-tile"><svg class="i"><use href="#i-share"/></svg></span>
+          <span class="r-at"><b>تصدير التشخيص</b><span>ملف تشاركه عند مشكلة · بلا بيانات شخصية</span></span>
+          <svg class="i r-chev"><use href="#i-chev"/></svg>
+        </div>
+        <p class="s-note">صانع التاريخ · الإصدار <span class="ltr">1.0</span> · لا إعلانات · يعمل دون إنترنت.</p>
       </div>
       <span class="r-hint" aria-hidden="true"><svg class="i"><use href="#i-chev"/></svg></span>
     </div>
