@@ -1,7 +1,7 @@
 {
  "se": {
   "device": "667x375 side 0 bottom 0 none",
-  "renderedAt": "2026-11-02T22:39:13.788Z",
+  "renderedAt": "2026-11-02T22:45:01.771Z",
   "inputs": {
    "files": [
     "index.html",
@@ -23,7 +23,7 @@
     "../../shared/map_mena_d1_overlay.svg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "fbcaff3c0373d35ecc06e9512e45d2cdef20187b"
+   "sha1": "d637d0460cd998fde02fba58741fa7839462d78d"
   },
   "issues": [],
   "views": {
@@ -2666,9 +2666,9 @@
     "issueCount": 0,
     "frames": {
      "glide1": {
-      "frames": 15,
-      "raf": 15,
-      "to": 16,
+      "frames": 11,
+      "raf": 11,
+      "to": 10,
       "iv": 0,
       "anim": 0,
       "date": "1 يناير 2011",
@@ -2677,9 +2677,9 @@
       "play": "#i-pause"
      },
      "glide2": {
-      "frames": 15,
-      "raf": 15,
-      "to": 15,
+      "frames": 11,
+      "raf": 11,
+      "to": 10,
       "iv": 0,
       "anim": 0,
       "date": "2 يناير 2011",
@@ -2688,9 +2688,9 @@
       "play": "#i-pause"
      },
      "glide5": {
-      "frames": 15,
-      "raf": 15,
-      "to": 16,
+      "frames": 11,
+      "raf": 11,
+      "to": 12,
       "iv": 0,
       "anim": 0,
       "date": "4 يناير 2011",
@@ -2710,9 +2710,9 @@
       "play": "#i-pause"
      },
      "stepsMax": {
-      "frames": 3,
+      "frames": 2,
       "raf": 0,
-      "to": 3,
+      "to": 2,
       "iv": 0,
       "anim": 0,
       "date": "10 يناير 2011",
@@ -2803,7 +2803,7 @@
  },
  "mini": {
   "device": "812x375 side 50 bottom 21 notch",
-  "renderedAt": "2026-11-02T22:39:37.894Z",
+  "renderedAt": "2026-11-02T22:45:27.228Z",
   "inputs": {
    "files": [
     "index.html",
@@ -2825,7 +2825,7 @@
     "../../shared/map_mena_d1_overlay.svg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "fbcaff3c0373d35ecc06e9512e45d2cdef20187b"
+   "sha1": "d637d0460cd998fde02fba58741fa7839462d78d"
   },
   "issues": [],
   "views": {
@@ -5534,9 +5534,9 @@
     "issueCount": 0,
     "frames": {
      "glide1": {
-      "frames": 15,
-      "raf": 15,
-      "to": 16,
+      "frames": 11,
+      "raf": 11,
+      "to": 11,
       "iv": 0,
       "anim": 0,
       "date": "1 يناير 2011",
@@ -5545,9 +5545,9 @@
       "play": "#i-pause"
      },
      "glide2": {
-      "frames": 15,
-      "raf": 15,
-      "to": 16,
+      "frames": 12,
+      "raf": 12,
+      "to": 12,
       "iv": 0,
       "anim": 0,
       "date": "2 يناير 2011",
@@ -5556,9 +5556,9 @@
       "play": "#i-pause"
      },
      "glide5": {
-      "frames": 16,
-      "raf": 16,
-      "to": 16,
+      "frames": 12,
+      "raf": 12,
+      "to": 12,
       "iv": 0,
       "anim": 0,
       "date": "4 يناير 2011",
@@ -5671,7 +5671,7 @@
  },
  "i14": {
   "device": "844x390 side 47 bottom 21 notch",
-  "renderedAt": "2026-11-02T22:40:02.576Z",
+  "renderedAt": "2026-11-02T22:45:53.954Z",
   "inputs": {
    "files": [
     "index.html",
@@ -5693,7 +5693,7 @@
     "../../shared/map_mena_d1_overlay.svg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "fbcaff3c0373d35ecc06e9512e45d2cdef20187b"
+   "sha1": "d637d0460cd998fde02fba58741fa7839462d78d"
   },
   "issues": [],
   "views": {
@@ -8402,9 +8402,9 @@
     "issueCount": 0,
     "frames": {
      "glide1": {
-      "frames": 15,
-      "raf": 15,
-      "to": 15,
+      "frames": 12,
+      "raf": 12,
+      "to": 12,
       "iv": 0,
       "anim": 0,
       "date": "1 يناير 2011",
@@ -8413,9 +8413,9 @@
       "play": "#i-pause"
      },
      "glide2": {
-      "frames": 15,
-      "raf": 15,
-      "to": 15,
+      "frames": 12,
+      "raf": 12,
+      "to": 12,
       "iv": 0,
       "anim": 0,
       "date": "2 يناير 2011",
@@ -8424,9 +8424,9 @@
       "play": "#i-pause"
      },
      "glide5": {
-      "frames": 15,
-      "raf": 15,
-      "to": 16,
+      "frames": 12,
+      "raf": 12,
+      "to": 12,
       "iv": 0,
       "anim": 0,
       "date": "4 يناير 2011",
@@ -8446,9 +8446,9 @@
       "play": "#i-pause"
      },
      "stepsMax": {
-      "frames": 3,
+      "frames": 2,
       "raf": 0,
-      "to": 3,
+      "to": 2,
       "iv": 0,
       "anim": 0,
       "date": "10 يناير 2011",
@@ -8539,7 +8539,7 @@
  },
  "i16": {
   "device": "852x393 side 59 bottom 21 island",
-  "renderedAt": "2026-11-02T22:40:27.530Z",
+  "renderedAt": "2026-11-02T22:46:20.050Z",
   "inputs": {
    "files": [
     "index.html",
@@ -8561,11 +8561,9 @@
     "../../shared/map_mena_d1_overlay.svg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "fbcaff3c0373d35ecc06e9512e45d2cdef20187b"
+   "sha1": "d637d0460cd998fde02fba58741fa7839462d78d"
   },
-  "issues": [
-   "lightness: gliding at ×2 draws 17 map frames and 17 animation frames in half a second (want 4..15, ≤30 a second)"
-  ],
+  "issues": [],
   "views": {
    "order": {
     "issueCount": 0,
@@ -11269,12 +11267,12 @@
     ]
    },
    "lightness": {
-    "issueCount": 1,
+    "issueCount": 0,
     "frames": {
      "glide1": {
-      "frames": 15,
-      "raf": 15,
-      "to": 15,
+      "frames": 10,
+      "raf": 10,
+      "to": 10,
       "iv": 0,
       "anim": 0,
       "date": "1 يناير 2011",
@@ -11283,9 +11281,9 @@
       "play": "#i-pause"
      },
      "glide2": {
-      "frames": 17,
-      "raf": 17,
-      "to": 17,
+      "frames": 11,
+      "raf": 11,
+      "to": 11,
       "iv": 0,
       "anim": 0,
       "date": "2 يناير 2011",
@@ -11294,9 +11292,9 @@
       "play": "#i-pause"
      },
      "glide5": {
-      "frames": 15,
-      "raf": 15,
-      "to": 16,
+      "frames": 11,
+      "raf": 11,
+      "to": 11,
       "iv": 0,
       "anim": 0,
       "date": "4 يناير 2011",
@@ -11405,11 +11403,11 @@
   "env": {
    "chromium": "141.0.7390.37"
   },
-  "issueCount": 1
+  "issueCount": 0
  },
  "i16pro": {
   "device": "874x402 side 62 bottom 21 island",
-  "renderedAt": "2026-11-02T22:40:52.806Z",
+  "renderedAt": "2026-11-02T22:46:46.062Z",
   "inputs": {
    "files": [
     "index.html",
@@ -11431,7 +11429,7 @@
     "../../shared/map_mena_d1_overlay.svg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "fbcaff3c0373d35ecc06e9512e45d2cdef20187b"
+   "sha1": "d637d0460cd998fde02fba58741fa7839462d78d"
   },
   "issues": [],
   "views": {
@@ -14140,9 +14138,9 @@
     "issueCount": 0,
     "frames": {
      "glide1": {
-      "frames": 15,
-      "raf": 15,
-      "to": 16,
+      "frames": 10,
+      "raf": 10,
+      "to": 11,
       "iv": 0,
       "anim": 0,
       "date": "1 يناير 2011",
@@ -14151,9 +14149,9 @@
       "play": "#i-pause"
      },
      "glide2": {
-      "frames": 16,
-      "raf": 16,
-      "to": 15,
+      "frames": 10,
+      "raf": 10,
+      "to": 10,
       "iv": 0,
       "anim": 0,
       "date": "2 يناير 2011",
@@ -14162,9 +14160,9 @@
       "play": "#i-pause"
      },
      "glide5": {
-      "frames": 16,
-      "raf": 16,
-      "to": 16,
+      "frames": 11,
+      "raf": 11,
+      "to": 11,
       "iv": 0,
       "anim": 0,
       "date": "4 يناير 2011",
@@ -14277,7 +14275,7 @@
  },
  "i11": {
   "device": "896x414 side 48 bottom 21 notch",
-  "renderedAt": "2026-11-02T22:41:18.449Z",
+  "renderedAt": "2026-11-02T22:47:12.286Z",
   "inputs": {
    "files": [
     "index.html",
@@ -14299,7 +14297,7 @@
     "../../shared/map_mena_d1_overlay.svg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "fbcaff3c0373d35ecc06e9512e45d2cdef20187b"
+   "sha1": "d637d0460cd998fde02fba58741fa7839462d78d"
   },
   "issues": [],
   "views": {
@@ -17002,9 +17000,9 @@
     "issueCount": 0,
     "frames": {
      "glide1": {
-      "frames": 16,
-      "raf": 16,
-      "to": 16,
+      "frames": 10,
+      "raf": 10,
+      "to": 10,
       "iv": 0,
       "anim": 0,
       "date": "1 يناير 2011",
@@ -17013,9 +17011,9 @@
       "play": "#i-pause"
      },
      "glide2": {
-      "frames": 16,
-      "raf": 16,
-      "to": 15,
+      "frames": 11,
+      "raf": 11,
+      "to": 11,
       "iv": 0,
       "anim": 0,
       "date": "2 يناير 2011",
@@ -17024,9 +17022,9 @@
       "play": "#i-pause"
      },
      "glide5": {
-      "frames": 16,
-      "raf": 16,
-      "to": 16,
+      "frames": 12,
+      "raf": 12,
+      "to": 12,
       "iv": 0,
       "anim": 0,
       "date": "4 يناير 2011",
@@ -17040,9 +17038,9 @@
       "to": 5,
       "iv": 0,
       "anim": 0,
-      "date": "6 يناير 2011",
+      "date": "7 يناير 2011",
       "on": "move",
-      "sub": "4 تشكيلات · إلى سيوة · الوصول بعد يومين",
+      "sub": "4 تشكيلات · إلى سيوة · الوصول بعد يوم",
       "play": "#i-pause"
      },
      "stepsMax": {
@@ -17139,7 +17137,7 @@
  },
  "i16promax": {
   "device": "956x440 side 62 bottom 21 island",
-  "renderedAt": "2026-11-02T22:41:44.342Z",
+  "renderedAt": "2026-11-02T22:47:38.838Z",
   "inputs": {
    "files": [
     "index.html",
@@ -17161,7 +17159,7 @@
     "../../shared/map_mena_d1_overlay.svg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "fbcaff3c0373d35ecc06e9512e45d2cdef20187b"
+   "sha1": "d637d0460cd998fde02fba58741fa7839462d78d"
   },
   "issues": [],
   "views": {
@@ -19864,9 +19862,9 @@
     "issueCount": 0,
     "frames": {
      "glide1": {
-      "frames": 15,
-      "raf": 15,
-      "to": 15,
+      "frames": 11,
+      "raf": 11,
+      "to": 10,
       "iv": 0,
       "anim": 0,
       "date": "1 يناير 2011",
@@ -19875,9 +19873,9 @@
       "play": "#i-pause"
      },
      "glide2": {
-      "frames": 15,
-      "raf": 15,
-      "to": 15,
+      "frames": 12,
+      "raf": 12,
+      "to": 13,
       "iv": 0,
       "anim": 0,
       "date": "2 يناير 2011",
@@ -19886,9 +19884,9 @@
       "play": "#i-pause"
      },
      "glide5": {
-      "frames": 15,
-      "raf": 15,
-      "to": 16,
+      "frames": 11,
+      "raf": 11,
+      "to": 10,
       "iv": 0,
       "anim": 0,
       "date": "4 يناير 2011",
@@ -19902,15 +19900,15 @@
       "to": 5,
       "iv": 0,
       "anim": 0,
-      "date": "6 يناير 2011",
+      "date": "7 يناير 2011",
       "on": "move",
-      "sub": "4 تشكيلات · إلى سيوة · الوصول بعد يومين",
+      "sub": "4 تشكيلات · إلى سيوة · الوصول بعد يوم",
       "play": "#i-pause"
      },
      "stepsMax": {
-      "frames": 2,
+      "frames": 3,
       "raf": 0,
-      "to": 2,
+      "to": 3,
       "iv": 0,
       "anim": 0,
       "date": "10 يناير 2011",
