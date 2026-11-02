@@ -5,3 +5,5 @@ wf/ne/*.geojson
 satellite/
 terrain/
 .DS_Store
+__pycache__/
+*.pyc
