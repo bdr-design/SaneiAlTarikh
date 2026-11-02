@@ -6,13 +6,17 @@
     var q = new URLSearchParams(location.search), st = q.get('state') === 'center' ? 'center' : 'event', root = document.documentElement, d = window.__dev;
     root.dataset.state = st;
     var play = $('.play'); play.setAttribute('aria-label', 'تشغيل (اللعبة متوقفة)'); play.querySelector('use').setAttribute('href', '#i-play');
+    /* the bell reads its count, and whether the centre is open */
+    var bell = $('.bell'), n = document.querySelectorAll('.nc-b [data-unread="1"]').length;
+    $('.badge').textContent = String(n); bell.setAttribute('aria-label', 'الإشعارات، ' + n + ' غير مقروءة'); bell.setAttribute('aria-expanded', String(st === 'center'));
     if (st === 'event') {
       Array.prototype.forEach.call(document.querySelectorAll('.hud, .map'), function (e) { e.setAttribute('inert', ''); e.setAttribute('aria-hidden', 'true'); });
-      /* the modal: as wide as the safe width allows up to 640 pt, the image column a third of it; centred in the safe screen */
-      var safeW = d.W - 2 * Math.max(d.SIDE, 8), w = Math.min(640, safeW - 16), img = Math.round(Math.min(220, w * 0.32));
+      /* the modal: the safe width, from 8 pt under the top row (the left stack wholly under it, the dock out of the way),
+         the image column a third of it at most 220 pt; centred in the height left above the home indicator */
+      var g = Math.max(d.SIDE, 8), w = d.W - 2 * g, img = Math.round(Math.min(220, w * 0.32)), top = $('.top').getBoundingClientRect();
       root.style.setProperty('--ev-w', w + 'px'); root.style.setProperty('--ev-img', img + 'px');
-      var ev = $('.ev'), h = ev.offsetHeight, top0 = Math.max(8, (d.H - d.BOTTOM - h) / 2);
-      ev.style.left = Math.round((d.W - w) / 2) + 'px'; ev.style.top = Math.round(top0) + 'px';
+      var ev = $('.ev'), h = ev.offsetHeight, room = d.H - d.BOTTOM - 8 - (top.bottom + 8);
+      ev.style.left = g + 'px'; ev.style.top = Math.round(top.bottom + 8 + Math.max(0, (room - h) / 2)) + 'px';
       window.__ev = { w: w, img: img, h: h, words: $('.ev-p').textContent.trim().split(/\s+/).length };
     } else {
       /* the centre: the toast's width or 340 pt (the wider), under the toast, down to 8 pt above the dock line */
@@ -32,7 +36,7 @@
   function placeMap15() {
     /* the approved play screen's own placement (B3): the CSS defaults for --map-cx and --map-cy, the scale from the height */
     var d = window.__dev, W = d.W, H = d.H, SIDE = Math.max(d.SIDE, 0), s = 0.63 * H / 390;
-    var obs = Array.prototype.filter.call(document.querySelectorAll('.hud .glass'), function (e) { return e.getClientRects().length && getComputedStyle(e).visibility !== 'hidden' && !e.classList.contains('menu'); })
+    var obs = Array.prototype.filter.call(document.querySelectorAll('.hud .glass, .ev'), function (e) { return e.getClientRects().length && getComputedStyle(e).visibility !== 'hidden' && !e.classList.contains('menu'); })
       .map(function (e) { return e.getBoundingClientRect(); }), hidden = [];
     Array.prototype.forEach.call(document.querySelectorAll('.labels text'), function (t) {
       var k = t.getAttribute('data-city'), u = k === null ? [t] : [t, document.querySelector('.labels circle[data-city="' + k + '"]')];

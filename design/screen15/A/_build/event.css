@@ -54,3 +54,11 @@
   .nc[data-ftop="1"][data-fbot="1"] .nc-b { -webkit-mask-image: linear-gradient(to bottom, transparent, #000 24px, #000 calc(100% - 24px), transparent); mask-image: linear-gradient(to bottom, transparent, #000 24px, #000 calc(100% - 24px), transparent); }
   /* buttons with a 1 pt border: the hit box covers the border too */
   .ev-op.tap::before, .nc-x.tap::before { width: max(100% + 2px, 44px); height: max(100% + 2px, 44px); }
+  /* the modal's end: the expiry and «لاحقًا» (a 32 pt outlined button) side by side */
+  .ev-end { display: flex; align-items: center; justify-content: space-between; gap: var(--s2); }
+  .ev-later { flex: none; height: 32px; padding-inline: var(--pad-ctl); border-radius: 8px; border: 1px solid var(--t1); background: none; font-size: var(--fs-sec); line-height: var(--lh-sec); font-weight: 600; color: var(--t1); }
+  .ev-later.tap::before { width: max(100% + 2px, 44px); height: max(100% + 2px, 44px); }
+  /* with the modal open the dock is out of the way (the modal spans the safe width under the top row) */
+  [data-state="event"] .dock, [data-state="event"] .lstack { visibility: hidden; }
+  /* an unread row: a 6 pt teal dot before the chevron (the words are in VoiceOver) */
+  .nc-dot { flex: none; width: 6px; height: 6px; border-radius: 50%; background: var(--teal); }

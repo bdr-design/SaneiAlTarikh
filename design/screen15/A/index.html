@@ -446,6 +446,14 @@
   .nc[data-ftop="1"][data-fbot="1"] .nc-b { -webkit-mask-image: linear-gradient(to bottom, transparent, #000 24px, #000 calc(100% - 24px), transparent); mask-image: linear-gradient(to bottom, transparent, #000 24px, #000 calc(100% - 24px), transparent); }
   /* buttons with a 1 pt border: the hit box covers the border too */
   .ev-op.tap::before, .nc-x.tap::before { width: max(100% + 2px, 44px); height: max(100% + 2px, 44px); }
+  /* the modal's end: the expiry and «لاحقًا» (a 32 pt outlined button) side by side */
+  .ev-end { display: flex; align-items: center; justify-content: space-between; gap: var(--s2); }
+  .ev-later { flex: none; height: 32px; padding-inline: var(--pad-ctl); border-radius: 8px; border: 1px solid var(--t1); background: none; font-size: var(--fs-sec); line-height: var(--lh-sec); font-weight: 600; color: var(--t1); }
+  .ev-later.tap::before { width: max(100% + 2px, 44px); height: max(100% + 2px, 44px); }
+  /* with the modal open the dock is out of the way (the modal spans the safe width under the top row) */
+  [data-state="event"] .dock, [data-state="event"] .lstack { visibility: hidden; }
+  /* an unread row: a 6 pt teal dot before the chevron (the words are in VoiceOver) */
+  .nc-dot { flex: none; width: 6px; height: 6px; border-radius: 50%; background: var(--teal); }
 </style>
 </head>
 <body>
@@ -616,6 +624,39 @@
     </div>
   </div>
 
+  <!-- Screen 15: the notification centre (&state=center), opened from the bell: sections in words; the badge counts the
+       unread notifications (the decision and the two news items); a pending order is not a notification and can be
+       cancelled before time resumes (§6.7). Unread rows carry a dot and say «غير مقروء»; the bell reads its count. -->
+  <section class="nc glass bar" aria-label="الإشعارات">
+    <div class="nc-h"><h2>الإشعارات</h2><button class="nc-close tap" aria-label="إغلاق الإشعارات"><svg class="i"><use href="#i-close"/></svg></button></div>
+    <div class="nc-b">
+      <h3>قرارات تنتظرك</h3>
+      <button class="nc-r tap" data-unread="1" aria-label="غير مقروء، قرار: احتجاجات واسعة في تونس، يُختار الافتراضي بعد 7 أيام. يفتح القرار">
+        <span class="nc-ic r-amber"><svg class="i"><use href="#i-warn"/></svg></span>
+        <span class="nc-at"><b>احتجاجات واسعة في تونس</b><span>قرار · يُختار الافتراضي بعد <span class="ltr">7</span> أيام</span></span>
+        <i class="nc-dot" aria-hidden="true"></i><svg class="i nc-chev"><use href="#i-chev"/></svg>
+      </button>
+      <h3>أوامر معلقة</h3>
+      <div class="nc-r" role="group" aria-label="أمر معلق: المنطقة الغربية إلى سيوة، يُنفَّذ عند استئناف الوقت">
+        <span class="nc-ic" aria-hidden="true"><svg class="i"><use href="#i-army"/></svg></span>
+        <span class="nc-at" aria-hidden="true"><b>المنطقة الغربية إلى سيوة</b><span>يُنفَّذ عند استئناف الوقت</span></span>
+        <button class="nc-x tap" aria-label="إلغاء أمر المنطقة الغربية إلى سيوة">إلغاء</button>
+      </div>
+      <h3>مهم</h3>
+      <button class="nc-r tap" data-unread="1" aria-label="غير مقروء، السودان: استفتاء الجنوب بعد 8 أيام، 9 يناير 2011، الجوار. يفتح الخبر">
+        <span class="nc-ic"><svg class="i"><use href="#i-globe"/></svg></span>
+        <span class="nc-at"><b>السودان: استفتاء الجنوب بعد <span class="ltr">8</span> أيام</b><span><span class="ltr">9</span> يناير <span class="ltr">2011</span> · الجوار</span></span>
+        <i class="nc-dot" aria-hidden="true"></i><svg class="i nc-chev"><use href="#i-chev"/></svg>
+      </button>
+      <h3>للعلم</h3>
+      <button class="nc-r tap" data-unread="1" aria-label="غير مقروء، أسعار القمح العالمية عند أعلى مستوى منذ 2008، السلع، ديسمبر 2010. يفتح الخبر">
+        <span class="nc-ic"><svg class="i"><use href="#i-coins"/></svg></span>
+        <span class="nc-at"><b>أسعار القمح العالمية عند أعلى مستوى منذ <span class="ltr">2008</span></b><span>السلع · ديسمبر <span class="ltr">2010</span></span></span>
+        <i class="nc-dot" aria-hidden="true"></i><svg class="i nc-chev"><use href="#i-chev"/></svg>
+      </button>
+    </div>
+  </section>
+
   <!-- Section dock -->
   <nav class="dock glass bar" aria-label="الأقسام">
     <button class="dock-item tap end end-r"><svg class="i"><use href="#i-state"/></svg><span>الدولة</span></button>
@@ -628,67 +669,37 @@
     <button class="dock-item tap end end-l"><svg class="i"><use href="#i-more"/></svg><span>المزيد</span></button>
   </nav>
 
-  <!-- Screen 15: the notification centre (&state=center), opened from the bell: sections in words; the badge counts the
-       unread notifications (the decision and the two news items); a pending order is not a notification and can be
-       cancelled before time resumes (§6.7). -->
-  <section class="nc glass bar" aria-label="الإشعارات">
-    <div class="nc-h"><h2>الإشعارات</h2><button class="nc-close tap" aria-label="إغلاق الإشعارات"><svg class="i"><use href="#i-close"/></svg></button></div>
-    <div class="nc-b">
-      <h3>قرارات تنتظرك</h3>
-      <button class="nc-r tap" data-unread="1" aria-label="قرار: احتجاجات واسعة في تونس، يُختار الافتراضي بعد 7 أيام. يفتح القرار">
-        <span class="nc-ic r-amber"><svg class="i"><use href="#i-warn"/></svg></span>
-        <span class="nc-at"><b>احتجاجات واسعة في تونس</b><span>قرار · يُختار الافتراضي بعد <span class="ltr">7</span> أيام</span></span>
-        <svg class="i nc-chev"><use href="#i-chev"/></svg>
-      </button>
-      <h3>أوامر معلقة</h3>
-      <div class="nc-r" role="group" aria-label="أمر معلق: المنطقة الغربية إلى سيوة، يُنفَّذ عند استئناف الوقت">
-        <span class="nc-ic"><svg class="i"><use href="#i-army"/></svg></span>
-        <span class="nc-at"><b>المنطقة الغربية إلى سيوة</b><span>يُنفَّذ عند استئناف الوقت</span></span>
-        <button class="nc-x tap" aria-label="إلغاء أمر المنطقة الغربية إلى سيوة">إلغاء</button>
-      </div>
-      <h3>مهم</h3>
-      <button class="nc-r tap" data-unread="1" aria-label="السودان: استفتاء الجنوب بعد 8 أيام، 9 يناير 2011، الجوار. يفتح الخبر">
-        <span class="nc-ic"><svg class="i"><use href="#i-globe"/></svg></span>
-        <span class="nc-at"><b>السودان: استفتاء الجنوب بعد <span class="ltr">8</span> أيام</b><span><span class="ltr">9</span> يناير <span class="ltr">2011</span> · الجوار</span></span>
-        <svg class="i nc-chev"><use href="#i-chev"/></svg>
-      </button>
-      <h3>للعلم</h3>
-      <button class="nc-r tap" data-unread="1" aria-label="أسعار القمح العالمية عند أعلى مستوى منذ 2008، السلع، ديسمبر 2010. يفتح الخبر">
-        <span class="nc-ic"><svg class="i"><use href="#i-coins"/></svg></span>
-        <span class="nc-at"><b>أسعار القمح العالمية عند أعلى مستوى منذ <span class="ltr">2008</span></b><span>السلع · ديسمبر <span class="ltr">2010</span></span></span>
-        <svg class="i nc-chev"><use href="#i-chev"/></svg>
-      </button>
-    </div>
-  </section>
 </div>
 
 <!-- Screen 15: the scrim and the decision modal (&state=event). The game is paused for it (§6.7: an urgent decision, the
-     category's auto-pause on). The text is neutral (§6.8, ≤90 words); every option shows its cost and its effects. -->
+     category's auto-pause on), and the head says so. The text is neutral (§6.8, ≤90 words); every option shows its cost and
+     its effects; «لاحقًا» puts it off to the centre and lets time run, so the default can come. The category image is the
+     owner's generic one (design/generated/event_protests.png: no Egyptian landmark). -->
 <div class="scrim" aria-hidden="true"></div>
 <section class="ev" role="dialog" aria-modal="true" aria-labelledby="ev-t" aria-describedby="ev-p">
   <div class="ev-in">
-    <span class="ev-k">قرار · تونس · <span class="ltr">1</span> يناير <span class="ltr">2011</span></span>
+    <span class="ev-k">قرار · تونس · <span class="ltr">1</span> يناير <span class="ltr">2011</span> · الوقت متوقف</span>
     <h2 class="ev-t" id="ev-t">احتجاجات واسعة في تونس</h2>
     <p class="ev-p" id="ev-p">تتسع الاحتجاجات في تونس منذ <span class="ltr">17</span> ديسمبر بعد أن أحرق شاب نفسه في سيدي بوزيد. يطالب المحتجون بفرص عمل وبخفض الأسعار، وتنقل القنوات العربية ما يجري كل يوم. يرى مستشاروك أن البطالة وارتفاع الأسعار في مصر قد يجعلان الشارع يتأثر بما يحدث.</p>
     <div class="ev-ops" role="group" aria-label="الخيارات">
-      <button class="ev-op tap" data-op="subsidy" aria-label="توسيع دعم الخبز والتموين: 500 مليون دولار سنويًا. تنخفض الاضطرابات 3، أفضل؛ يرتفع العجز 0.5 مليار دولار، أسوأ">
+      <button class="ev-op tap" data-op="subsidy" aria-label="توسيع دعم الخبز والتموين: 500 مليون دولار سنويًا. تنخفض الاضطرابات 3 نقاط، أفضل؛ يرتفع العجز 0.5 مليار دولار، أسوأ">
         <b>توسيع دعم الخبز والتموين</b><span class="ev-c"><span class="ltr">500</span> مليون $ سنويًا</span>
         <span class="ev-fx"><span><svg class="r-arr" aria-hidden="true"><use href="#t-down"/></svg>الاضطرابات <span class="ltr">−3</span></span><span class="r-amber"><svg class="r-arr" aria-hidden="true"><use href="#t-up"/></svg>العجز <span class="ltr">+0.5</span> مليار $</span></span>
       </button>
-      <button class="ev-op tap" data-op="security" aria-label="تشديد الانتشار الأمني في المدن: من بند الأمن الداخلي. تنخفض الاضطرابات 2، أفضل؛ تنخفض الشرعية 2، أسوأ">
-        <b>تشديد الانتشار الأمني في المدن</b><span class="ev-c">من بند الأمن الداخلي</span>
+      <button class="ev-op tap" data-op="security" aria-label="تشديد الانتشار الأمني في المدن: لا كلفة إضافية، من بند الأمن الداخلي. تنخفض الاضطرابات نقطتين، أفضل؛ تنخفض الشرعية 2، أسوأ">
+        <b>تشديد الانتشار الأمني في المدن</b><span class="ev-c">لا كلفة إضافية · من بند الأمن الداخلي</span>
         <span class="ev-fx"><span><svg class="r-arr" aria-hidden="true"><use href="#t-down"/></svg>الاضطرابات <span class="ltr">−2</span></span><span class="r-amber"><svg class="r-arr" aria-hidden="true"><use href="#t-down"/></svg>الشرعية <span class="ltr">−2</span></span></span>
       </button>
-      <button class="ev-op tap" data-op="dialogue" aria-label="حوار مع النقابات والأحزاب: الكلفة 10 من رأس المال السياسي. ترتفع الشرعية 2، أفضل">
+      <button class="ev-op tap" data-op="dialogue" aria-label="حوار مع النقابات والأحزاب: الكلفة 10 من رأس المال السياسي. تنخفض الاضطرابات نقطة واحدة، أفضل؛ ترتفع الشرعية 1، أفضل">
         <b>حوار مع النقابات والأحزاب</b><span class="ev-c">الكلفة: <span class="ltr">10</span> من رأس المال السياسي</span>
-        <span class="ev-fx"><span><svg class="r-arr" aria-hidden="true"><use href="#t-up"/></svg>الشرعية <span class="ltr">+2</span></span></span>
+        <span class="ev-fx"><span><svg class="r-arr" aria-hidden="true"><use href="#t-down"/></svg>الاضطرابات <span class="ltr">−1</span></span><span><svg class="r-arr" aria-hidden="true"><use href="#t-up"/></svg>الشرعية <span class="ltr">+1</span></span></span>
       </button>
       <button class="ev-op tap" data-op="watch" data-default="1" aria-label="المتابعة دون إجراء، الخيار الافتراضي: لا كلفة. يرتفع خطر الاضطرابات، أسوأ">
         <b>المتابعة دون إجراء <span class="ev-def">الافتراضي</span></b><span class="ev-c">لا كلفة</span>
         <span class="ev-fx"><span class="r-amber"><svg class="r-arr" aria-hidden="true"><use href="#t-up"/></svg>خطر الاضطرابات</span></span>
       </button>
     </div>
-    <p class="ev-foot">إن لم تختر، يُختار الافتراضي بعد <span class="ltr">7</span> أيام.</p>
+    <div class="ev-end"><p class="ev-foot">إن لم تختر، يُختار الافتراضي بعد <span class="ltr">7</span> أيام.</p><button class="ev-later tap" aria-label="لاحقًا: تأجيل القرار إلى الإشعارات ومتابعة الوقت، يُختار الافتراضي بعد 7 أيام">لاحقًا</button></div>
   </div>
   <figure class="ev-pic"><img src="event_protests.jpg" alt=""><figcaption class="ev-cat"><svg class="i" aria-hidden="true"><use href="#i-flame"/></svg>احتجاجات وثورات</figcaption></figure>
 </section>
@@ -724,13 +735,17 @@
     var q = new URLSearchParams(location.search), st = q.get('state') === 'center' ? 'center' : 'event', root = document.documentElement, d = window.__dev;
     root.dataset.state = st;
     var play = $('.play'); play.setAttribute('aria-label', 'تشغيل (اللعبة متوقفة)'); play.querySelector('use').setAttribute('href', '#i-play');
+    /* the bell reads its count, and whether the centre is open */
+    var bell = $('.bell'), n = document.querySelectorAll('.nc-b [data-unread="1"]').length;
+    $('.badge').textContent = String(n); bell.setAttribute('aria-label', 'الإشعارات، ' + n + ' غير مقروءة'); bell.setAttribute('aria-expanded', String(st === 'center'));
     if (st === 'event') {
       Array.prototype.forEach.call(document.querySelectorAll('.hud, .map'), function (e) { e.setAttribute('inert', ''); e.setAttribute('aria-hidden', 'true'); });
-      /* the modal: as wide as the safe width allows up to 640 pt, the image column a third of it; centred in the safe screen */
-      var safeW = d.W - 2 * Math.max(d.SIDE, 8), w = Math.min(640, safeW - 16), img = Math.round(Math.min(220, w * 0.32));
+      /* the modal: the safe width, from 8 pt under the top row (the left stack wholly under it, the dock out of the way),
+         the image column a third of it at most 220 pt; centred in the height left above the home indicator */
+      var g = Math.max(d.SIDE, 8), w = d.W - 2 * g, img = Math.round(Math.min(220, w * 0.32)), top = $('.top').getBoundingClientRect();
       root.style.setProperty('--ev-w', w + 'px'); root.style.setProperty('--ev-img', img + 'px');
-      var ev = $('.ev'), h = ev.offsetHeight, top0 = Math.max(8, (d.H - d.BOTTOM - h) / 2);
-      ev.style.left = Math.round((d.W - w) / 2) + 'px'; ev.style.top = Math.round(top0) + 'px';
+      var ev = $('.ev'), h = ev.offsetHeight, room = d.H - d.BOTTOM - 8 - (top.bottom + 8);
+      ev.style.left = g + 'px'; ev.style.top = Math.round(top.bottom + 8 + Math.max(0, (room - h) / 2)) + 'px';
       window.__ev = { w: w, img: img, h: h, words: $('.ev-p').textContent.trim().split(/\s+/).length };
     } else {
       /* the centre: the toast's width or 340 pt (the wider), under the toast, down to 8 pt above the dock line */
@@ -750,7 +765,7 @@
   function placeMap15() {
     /* the approved play screen's own placement (B3): the CSS defaults for --map-cx and --map-cy, the scale from the height */
     var d = window.__dev, W = d.W, H = d.H, SIDE = Math.max(d.SIDE, 0), s = 0.63 * H / 390;
-    var obs = Array.prototype.filter.call(document.querySelectorAll('.hud .glass'), function (e) { return e.getClientRects().length && getComputedStyle(e).visibility !== 'hidden' && !e.classList.contains('menu'); })
+    var obs = Array.prototype.filter.call(document.querySelectorAll('.hud .glass, .ev'), function (e) { return e.getClientRects().length && getComputedStyle(e).visibility !== 'hidden' && !e.classList.contains('menu'); })
       .map(function (e) { return e.getBoundingClientRect(); }), hidden = [];
     Array.prototype.forEach.call(document.querySelectorAll('.labels text'), function (t) {
       var k = t.getAttribute('data-city'), u = k === null ? [t] : [t, document.querySelector('.labels circle[data-city="' + k + '"]')];

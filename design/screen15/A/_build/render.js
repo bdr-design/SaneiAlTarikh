@@ -32,7 +32,7 @@ const VIEWS = [['', '', 'event'], ['_center', '&state=center', 'center'], ['_cen
 
 // the brief's strings (each must be an element's whole text somewhere in its views) and the numbers the options repeat
 const BRIEF = {
-  event: ['قرار · تونس · 1 يناير 2011', 'احتجاجات واسعة في تونس', 'احتجاجات وثورات', 'توسيع دعم الخبز والتموين', '500 مليون $ سنويًا', 'تشديد الانتشار الأمني في المدن', 'من بند الأمن الداخلي',
+  event: ['قرار · تونس · 1 يناير 2011 · الوقت متوقف', 'احتجاجات واسعة في تونس', 'احتجاجات وثورات', 'توسيع دعم الخبز والتموين', '500 مليون $ سنويًا', 'تشديد الانتشار الأمني في المدن', 'لا كلفة إضافية · من بند الأمن الداخلي', 'لاحقًا',
     'حوار مع النقابات والأحزاب', 'الكلفة: 10 من رأس المال السياسي', 'المتابعة دون إجراء الافتراضي', 'الافتراضي', 'لا كلفة', 'إن لم تختر، يُختار الافتراضي بعد 7 أيام.'],
   center: ['الإشعارات', 'قرارات تنتظرك', 'أوامر معلقة', 'مهم', 'للعلم', 'احتجاجات واسعة في تونس', 'قرار · يُختار الافتراضي بعد 7 أيام', 'المنطقة الغربية إلى سيوة', 'يُنفَّذ عند استئناف الوقت', 'إلغاء',
     'السودان: استفتاء الجنوب بعد 8 أيام', '9 يناير 2011 · الجوار', 'أسعار القمح العالمية عند أعلى مستوى منذ 2008', 'السلع · ديسمبر 2010'],
@@ -41,17 +41,17 @@ const TEXT = 'تتسع الاحتجاجات في تونس منذ 17 ديسمبر
 // the options in order: title, cost line, effects as [arrow, words, number or null, amber]
 const OPS = [
   ['توسيع دعم الخبز والتموين', '500 مليون $ سنويًا', [['down', 'الاضطرابات', -3, false], ['up', 'العجز', 0.5, true]]],
-  ['تشديد الانتشار الأمني في المدن', 'من بند الأمن الداخلي', [['down', 'الاضطرابات', -2, false], ['down', 'الشرعية', -2, true]]],
-  ['حوار مع النقابات والأحزاب', 'الكلفة: 10 من رأس المال السياسي', [['up', 'الشرعية', 2, false]]],
+  ['تشديد الانتشار الأمني في المدن', 'لا كلفة إضافية · من بند الأمن الداخلي', [['down', 'الاضطرابات', -2, false], ['down', 'الشرعية', -2, true]]],
+  ['حوار مع النقابات والأحزاب', 'الكلفة: 10 من رأس المال السياسي', [['down', 'الاضطرابات', -1, false], ['up', 'الشرعية', 1, false]]],
   ['المتابعة دون إجراء', 'لا كلفة', [['up', 'خطر الاضطرابات', null, true]]],
 ];
 // the approved panels' words and lines these options rest on, read from their sheets
 function approved() {
   const flat = (f) => fs.readFileSync(path.join(OUT, f), 'utf8').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ');
   const s5 = flat('../../screen5/A/_build/sheet.html'), s6 = flat('../../screen6/A/_build/sheet.html'), s8 = flat('../../screen8/A/_build/sheet.html');
-  const bread = s6.match(/دعم الخبز والتموين [^$]*?([\d.]+) مليار \$/), sec = /الأمن الداخلي/.test(s6), pc = /رأس المال السياسي/.test(s5), unrest = /الاضطرابات/.test(s8);
-  if (!bread || !sec || !pc || !unrest) throw new Error('cannot read the approved panels\' lines');
-  return { bread: +bread[1] };
+  const bread = s6.match(/دعم الخبز والتموين [^$]*?([\d.]+) مليار \$/), sec = /الأمن الداخلي/.test(s6), pc = s5.match(/رأس المال السياسي (\d+)/), unrest = s8.match(/لماذا؟ الاضطرابات (\d+)/), deficit = s6.match(/العجز[^0-9]{0,20}([\d.]+) مليار/);
+  if (!bread || !sec || !pc || !unrest || !deficit) throw new Error('cannot read the approved panels\' lines');
+  return { bread: +bread[1], capital: +pc[1], unrest: +unrest[1], deficit: +deficit[1] };
 }
 const A = approved();
 const DATA = { BRIEF, TEXT, OPS, A };
@@ -201,10 +201,14 @@ async function measure(p, d, b3, view) {
     for (let i = 0; i < taps.length; i++) for (let j = i + 1; j < taps.length; j++) { const a = taps[i], b = taps[j];
       if (a.e.contains(b.e) || b.e.contains(a.e)) continue; if (inter(a.hit, b.hit)) issues.push(`hit overlap ${a.label} / ${b.label}`); }
     // ---------- 7. the HUD at its B3 place ----------
-    ['.top > .nation', '.top > .stats', '.top > .date', '.toast'].concat(ev ? ['.btn.mode', '.btn.home'] : []).forEach((s) => { const e = q(s), ref = b3[s][0], rr = e.getBoundingClientRect();
+    // with the modal, only the top row shows above it (the left stack and the dock are out of the way)
+    if (ev && ['.lstack', '.dock'].some((s) => getComputedStyle(q(s)).visibility !== 'hidden')) issues.push('the left stack or the dock shows around the modal');
+    ['.top > .nation', '.top > .stats', '.top > .date'].concat(ev ? [] : ['.toast']).forEach((s) => { const e = q(s), ref = b3[s][0], rr = e.getBoundingClientRect();
       if (!e.getClientRects().length) { issues.push(`HUD element hidden: ${s}`); return; }
       if (Math.max(Math.abs(rr.left - ref.x0), Math.abs(rr.top - ref.y0), Math.abs(rr.right - ref.x1), Math.abs(rr.bottom - ref.y1)) > 0.5) issues.push(`HUD element moved from its B3 position: ${s}`); });
-    { const dk = q('.dock'), r = dk.getBoundingClientRect(), ref = b3['.dock'][0]; if (!dk.getClientRects().length || Math.max(Math.abs(r.left - ref.x0), Math.abs(r.top - ref.y0), Math.abs(r.right - ref.x1)) > 0.5) issues.push('the dock is not at its B3 place'); }
+    if (!ev) { const dk = q('.dock'), r = dk.getBoundingClientRect(), ref = b3['.dock'][0]; if (!dk.getClientRects().length || Math.max(Math.abs(r.left - ref.x0), Math.abs(r.top - ref.y0), Math.abs(r.right - ref.x1)) > 0.5) issues.push('the dock is not at its B3 place'); }
+    // the bell reads its count (the badge), and whether the centre is open
+    { const bl = q('.bell'), n = nums(T(q('.badge')))[0]; if (!new RegExp('^الإشعارات، ' + n + ' غير مقروءة$').test(bl.getAttribute('aria-label') || '') || bl.getAttribute('aria-expanded') !== String(!ev)) issues.push('a11y: the bell does not read its count and state'); }
     // the game is paused: the play button shows play and says the game is stopped
     { const pl = q('.play'); if (pl.querySelector('use').getAttribute('href') !== '#i-play' || !/متوقفة/.test(pl.getAttribute('aria-label') || '')) issues.push('the game is not shown paused (play glyph and words)'); }
     const clearNow = [];
@@ -216,10 +220,13 @@ async function measure(p, d, b3, view) {
       if (!visible(sc) || Math.abs(sc.getBoundingClientRect().width - W) > 0.5 || Math.abs(sc.getBoundingClientRect().height - H) > 0.5) issues.push('the scrim does not cover the screen');
       ['.hud', '.map'].forEach((s) => { const e = q(s); if (!e.hasAttribute('inert') || e.getAttribute('aria-hidden') !== 'true') issues.push(`${s} is not inert under the modal`); });
       if (m.getAttribute('role') !== 'dialog' || m.getAttribute('aria-modal') !== 'true' || q('#' + m.getAttribute('aria-labelledby')) !== q('.ev-t') || q('#' + m.getAttribute('aria-describedby')) !== q('.ev-p')) issues.push('a11y: the modal is not a labelled modal dialog');
-      const safeW = W - 2 * Math.max(S, 8), wantW = Math.min(640, safeW - 16);
-      if (!near(mr.width, wantW, 0.6)) issues.push(`modal width ${mr.width.toFixed(1)} (want min(640, safe width − 16) = ${wantW})`);
-      if (Math.abs((mr.left + mr.right) / 2 - W / 2) > 0.75) issues.push('the modal is not centred across the screen');
-      if (Math.abs(mr.top - Math.max(8, (H - B - mr.height) / 2)) > 0.75) issues.push('the modal is not centred in the height above the home indicator');
+      const g = Math.max(S, 8), wantW = W - 2 * g, tb = q('.top').getBoundingClientRect(), room = H - B - 8 - (tb.bottom + 8);
+      if (!near(mr.width, wantW, 0.6)) issues.push(`modal width ${mr.width.toFixed(1)} (want the safe width ${wantW})`);
+      if (Math.abs(mr.left - g) > 0.75) issues.push('the modal is not centred across the screen');
+      if (Math.abs(mr.top - Math.round(tb.bottom + 8 + Math.max(0, (room - mr.height) / 2))) > 0.75) issues.push('the modal is not centred in the height between the top row and the home indicator');
+      if (parseFloat((getComputedStyle(sc).backgroundColor.match(/[\d.]+\)$/) || ['1)'])[0]) < 0.4) issues.push('the scrim does not dim the game (alpha below 0.4)');
+      if (!/الوقت متوقف/.test(W2(q('.ev-k').innerText))) issues.push('the modal does not say the time is stopped');
+      { const lt = q('.ev-later'); if (!lt || W2(lt.innerText) !== 'لاحقًا' || !/تأجيل/.test(lt.getAttribute('aria-label') || '') || !/7 أيام/.test(lt.getAttribute('aria-label') || '') || !near(lt.getBoundingClientRect().height, 32)) issues.push('no «لاحقًا» that puts the decision off to the centre'); }
       if (mr.left < Math.max(S, 8) - eps || mr.right > W - Math.max(S, 8) + eps || mr.top < 8 - eps || mr.bottom > H - B - 8 + eps) issues.push('the modal leaves the safe screen');
       if (getComputedStyle(m).backgroundColor !== TOK.panel || parseFloat(getComputedStyle(m).borderTopLeftRadius) !== 12) issues.push('the modal is not the opaque 12 pt panel');
       // the image column: on the left (RTL), full height, the owner's image, a third of the width at most 220; the category on it
@@ -244,13 +251,21 @@ async function measure(p, d, b3, view) {
           const n = nums(T(f))[0], amber = f.classList.contains('r-amber');
           if (dir !== e[0] || !T(f).includes(e[1]) || (e[2] === null ? n !== undefined : Math.abs(n - e[2]) > 1e-9) || amber !== e[3]) issues.push(`option ${i + 1} effect ${k + 1} is «${dir} ${T(f)}»${amber ? ' amber' : ''} (want «${e[0]} ${e[1]} ${e[2] === null ? '' : e[2]}»${e[3] ? ' amber' : ''})`);
           if (n !== undefined && n !== 0 && (n > 0) !== (dir === 'up')) issues.push(`option ${i + 1}: an arrow against its sign`);
-          if (amber && getComputedStyle(f).color !== TOK.amber) issues.push(`option ${i + 1}: a cost not amber`); });
+          // the colour as drawn: amber exactly on the costs, white on the benefits, the arrow in its words' colour
+          const col = getComputedStyle(f).color, ac = u ? getComputedStyle(u.closest('svg')).color : col;
+          if (col !== (e[3] ? TOK.amber : TOK.t1) || ac !== col) issues.push(`option ${i + 1} effect ${k + 1}: drawn ${col} with its arrow ${ac} (want ${e[3] ? 'amber' : 'white'}, the arrow alike)`); });
+        if (o.tagName !== 'BUTTON' || (o.getAttribute('role') && o.getAttribute('role') !== 'button')) issues.push(`a11y: option ${i + 1} is not a button`);
         // VoiceOver: every word and number shown, and each effect's direction in words with better or worse
         const shown = T(o).replace(/[·،:؛]|\.(?!\d)/g, ' '), al2 = al.replace(/[،:؛]|\.(?!\d)/g, ' ');
-        const missW = shown.split(/\s+/).filter((x) => x.length > 1 && !/^[\d.%+−-]+$/.test(x) && x !== '$').filter((x) => !al2.includes(x)), missN = nums(shown).map(Math.abs).filter((x) => !nums(al).map(Math.abs).includes(x));
+        // a point count may be said in words (نقطة واحدة, نقطتين), as the approved panels do
+        const heard = nums(al).map(Math.abs).concat(/نقطة واحدة/.test(al) ? [1] : [], /نقطتين/.test(al) ? [2] : []);
+        const missW = shown.split(/\s+/).filter((x) => x.length > 1 && !/^[\d.%+−-]+$/.test(x) && x !== '$').filter((x) => !al2.includes(x)), missN = nums(shown).map(Math.abs).filter((x) => !heard.includes(x));
         if (missW.length || missN.length) issues.push(`a11y: option ${i + 1} does not read all it shows: ${missW.concat(missN).slice(0, 4).join(' ')}`);
         if (/\$/.test(T(o)) && !/دولار/.test(al)) issues.push(`a11y: option ${i + 1} does not say «دولار»`);
-        w[2].forEach((e) => { if (!(e[0] === 'up' ? /ترتفع|يرتفع/ : /تنخفض|ينخفض/).test(al) || !(e[3] ? /أسوأ/ : /أفضل/).test(al)) issues.push(`a11y: option ${i + 1} does not say «${e[1]}»'s direction and whether it is better or worse`); }); });
+        // each effect's own clause says its direction and whether it is better or worse
+        const clauses = (al.split('. ').slice(1).join('. ') || '').split('؛');
+        w[2].forEach((e) => { const cl = clauses.find((c) => c.includes(e[1].replace('خطر ', ''))) || '';
+          if (!(e[0] === 'up' ? /ترتفع|يرتفع/ : /تنخفض|ينخفض/).test(cl) || !(e[3] ? /أسوأ/ : /أفضل/).test(cl) || (e[3] ? /أفضل/ : /أسوأ/).test(cl)) issues.push(`a11y: option ${i + 1} does not say «${e[1]}»'s direction and whether it is better or worse`); }); });
       // exactly one default, named on screen and in VoiceOver, and the expiry that picks it
       const defs = ops.filter((o) => o.dataset.default === '1');
       if (defs.length !== 1 || !defs[0].querySelector('.ev-def') || W2(defs[0].querySelector('.ev-def').innerText) !== 'الافتراضي' || !/الافتراضي/.test(defs[0].getAttribute('aria-label') || '') || ops.filter((o) => o.querySelector('.ev-def')).length !== 1) issues.push('the default is not exactly one option, named on screen and in VoiceOver');
@@ -258,8 +273,14 @@ async function measure(p, d, b3, view) {
       // the numbers: the extra subsidy is a part of the economy panel's bread line; the deficit grows by the same amount
       { const add = nums(W2(ops[0].querySelector('.ev-c').innerText))[0] / 1000, def = DATA.OPS[0][2][1][2];
         if (Math.abs(add - def) > 1e-9) issues.push(`the deficit's rise (${def} مليار) is not the subsidy's ${add} مليار`);
-        if (!(add > 0 && add < DATA.A.bread)) issues.push(`the extra bread subsidy is not a part of the economy panel's ${DATA.A.bread} مليار line`); }
-      allClear('.ev-k, .ev-t, .ev-cat, .ev-op b, .ev-op .ev-c, .ev-def, .ev-foot');
+        if (!(add > 0 && add < DATA.A.bread)) issues.push(`the extra bread subsidy is not a part of the economy panel's ${DATA.A.bread} مليار line`);
+        // political capital within the state panel's; unrest and legitimacy (0..100) stay in range after each effect
+        const cap = nums(W2(ops[2].querySelector('.ev-c').innerText))[0];
+        if (!(cap > 0 && cap <= DATA.A.capital)) issues.push(`the dialogue's ${cap} political capital is more than the state panel's ${DATA.A.capital}`);
+        const legit = nums(T([...document.querySelectorAll('.top .stat')].find((s) => /الشرعية/.test(s.textContent)).querySelector('.num')))[0];
+        DATA.OPS.forEach((o, i) => o[2].forEach((e) => { const base = e[1] === 'الاضطرابات' ? DATA.A.unrest : e[1] === 'الشرعية' ? legit : null;
+          if (base !== null && e[2] !== null && !(base + e[2] >= 0 && base + e[2] <= 100 && Math.abs(e[2]) <= 10)) issues.push(`option ${i + 1}: «${e[1]}» ${base} ${e[2]} leaves 0..100 or moves more than 10`); })); }
+      allClear('.ev-k, .ev-t, .ev-cat, .ev-op b, .ev-op .ev-c, .ev-def, .ev-foot, .ev-later');
       // the modal's own text and controls only: nothing of the HUD's above it
       if ([...document.querySelectorAll('.hud .tap')].some((e) => { const r = e.getBoundingClientRect(); return r.width && inter(box(r), box(mr)) && document.elementFromPoint((Math.max(r.left, mr.left) + Math.min(r.right, mr.right)) / 2, (Math.max(r.top, mr.top) + Math.min(r.bottom, mr.bottom)) / 2) === e; })) issues.push('a HUD control shows through the modal');
     } else {
@@ -269,8 +290,18 @@ async function measure(p, d, b3, view) {
       ['.btn.mode', '.btn.home'].forEach((s) => { if (visible(q(s))) issues.push(`${s} shows under the centre`); });
       const hs = qa('.nc-b h3').map((h) => W2(h.innerText));
       if (hs.join('|') !== 'قرارات تنتظرك|أوامر معلقة|مهم|للعلم') issues.push(`the sections are «${hs.join('، ')}»`);
-      const unread = document.querySelectorAll('.nc-b [data-unread="1"]').length, badge = nums(T(q('.badge')))[0];
-      if (badge !== unread) issues.push(`the badge says ${badge}, the unread notifications are ${unread}`);
+      const unread = [...document.querySelectorAll('.nc-b [data-unread="1"]')], badge = nums(T(q('.badge')))[0];
+      if (badge !== unread.length || badge !== 3) issues.push(`the badge says ${badge}, the unread notifications are ${unread.length} (the brief's 3)`);
+      // each row under its own section (§6.7's tiers); unread rows are notification buttons, never the pending order
+      const tierOf = (e) => { let h = e.previousElementSibling; while (h && h.tagName !== 'H3') h = h.previousElementSibling; return h ? W2(h.innerText) : ''; };
+      const want = [['احتجاجات واسعة في تونس', 'قرارات تنتظرك'], ['المنطقة الغربية إلى سيوة', 'أوامر معلقة'], ['السودان: استفتاء الجنوب بعد 8 أيام', 'مهم'], ['أسعار القمح العالمية عند أعلى مستوى منذ 2008', 'للعلم']];
+      const rows = [...document.querySelectorAll('.nc-b .nc-r')];
+      want.forEach(([nm, sec]) => { const r = rows.find((x) => W2(x.querySelector('b').innerText) === nm); if (!r || tierOf(r) !== sec) issues.push(`«${nm}» is not under «${sec}»`); });
+      unread.forEach((e) => { if (!e.matches('button.nc-r') || tierOf(e) === 'أوامر معلقة') issues.push('an unread mark on something that is not a notification'); });
+      rows.forEach((e) => { const u = e.dataset.unread === '1', nm = W2(e.querySelector('b').innerText);
+        if (!e.querySelector('.nc-ic svg')) issues.push(`«${nm}» has no icon`);
+        if (e.matches('button') && !e.querySelector('.nc-chev')) issues.push(`«${nm}» has no chevron`);
+        if (u !== !!e.querySelector('.nc-dot') || u !== /^غير مقروء/.test(e.getAttribute('aria-label') || '')) issues.push(`«${nm}»: the unread dot and words do not match its state`); });
       const po = [...document.querySelectorAll('.nc-b .nc-r')].find((e) => !e.matches('button'));
       if (!po || po.getAttribute('role') !== 'group' || po.matches('.tap') || !po.querySelector('button.nc-x') || W2(po.querySelector('.nc-x').innerText) !== 'إلغاء' || !/إلغاء أمر/.test(po.querySelector('.nc-x').getAttribute('aria-label') || '')) issues.push('the pending order is not a group with its own cancel button');
       [...document.querySelectorAll('.nc-b .nc-r')].forEach((e) => { const al = (e.getAttribute('aria-label') || '').replace(/[،.:؛]/g, ' '), shown = W2(e.querySelector('.nc-at').innerText).replace(/[·،.:؛]/g, ' ');
@@ -284,7 +315,7 @@ async function measure(p, d, b3, view) {
     }
     // map labels: never cut by a panel edge, never sliced by the screen edge or the side inset
     document.querySelectorAll('.labels text, .labels circle').forEach((t) => {
-      if (!t.getClientRects().length || ev) return;
+      if (!t.getClientRects().length) return;
       const mk = q('.map').getBoundingClientRect().width / 1688, r = t.getBoundingClientRect(), sw = parseFloat(t.getAttribute('stroke-width') || 0) / 2 * mk, b = { x0: r.left - sw - 2, y0: r.top - sw - 2, x1: r.right + sw + 2, y1: r.bottom + sw + 2 };
       if (r.right + sw <= 0 || r.left - sw >= W || r.bottom + sw <= 0 || r.top - sw >= H) return;
       const what = t.tagName === 'text' ? `label ${t.textContent}` : `city dot ${t.getAttribute('data-city')}`;
@@ -353,16 +384,28 @@ async function selftest(b) {
     ['options reordered', d, '', '', /option 1 is «تشديد/, () => { const g = document.querySelector('.ev-ops'), o = g.querySelectorAll('.ev-op'); g.insertBefore(o[1], o[0]); }],
     ['options in one column', d, '', '.ev-ops { grid-template-columns: 1fr !important; }', /the options are not a 2 × 2 grid/],
     ['an effect without its arrow', d, '', '', /option 1 effect 1 is «none/, () => { document.querySelector('.ev-op .ev-fx > span svg').remove(); }],
-    ['arrow against its sign', d, '', '', /an arrow against its sign|option 3 effect 1 is «down/, () => { document.querySelectorAll('.ev-op')[2].querySelector('.ev-fx use').setAttribute('href', '#t-down'); }],
+    ['arrow against its sign', d, '', '', /an arrow against its sign|option 3 effect 1 is «up/, () => { document.querySelectorAll('.ev-op')[2].querySelector('.ev-fx use').setAttribute('href', '#t-down'); }],
     ['cost not amber', d, '', '', /option 1 effect 2 is .*\(want .* amber\)/, () => { document.querySelectorAll('.ev-op')[0].querySelectorAll('.ev-fx > span')[1].classList.remove('r-amber'); }],
     ['option read in part', d, '', '', /a11y: option 2 does not read all it shows/, () => { document.querySelectorAll('.ev-op')[1].setAttribute('aria-label', 'تشديد الانتشار الأمني'); }],
-    ['option silent on better or worse', d, '', '', /a11y: option 3 does not say «الشرعية»'s direction/, () => { const o = document.querySelectorAll('.ev-op')[2]; o.setAttribute('aria-label', o.getAttribute('aria-label').replace('، أفضل', '')); }],
+    ['option silent on better or worse', d, '', '', /a11y: option 3 does not say «(الشرعية|الاضطرابات)»'s direction/, () => { const o = document.querySelectorAll('.ev-op')[2]; o.setAttribute('aria-label', o.getAttribute('aria-label').replace('، أفضل', '')); }],
     ['option says $', d, '', '', /a11y: option 1 does not say «دولار»/, () => { const o = document.querySelectorAll('.ev-op')[0]; o.setAttribute('aria-label', o.getAttribute('aria-label').replace(/دولار/g, '$')); }],
     ['two defaults', d, '', '', /the default is not exactly one option/, () => { const o = document.querySelectorAll('.ev-op')[0]; o.dataset.default = '1'; }],
     ['default unnamed', d, '', '.ev-def { display: none !important; }', /the default is not exactly one option|never shown clear: الافتراضي/],
     ['no expiry', d, '', '', /the expiry and its default answer are not stated/, () => { document.querySelector('.ev-foot').textContent = 'اختر خيارًا.'; }],
     ['deficit off the subsidy', d, '', '', /the deficit's rise .* is not the subsidy's 0\.6/, () => { document.querySelector('.ev-op .ev-c .ltr').textContent = '600'; }],
     ['game running', d, '', '', /the game is not shown paused/, () => { document.querySelector('.play use').setAttribute('href', '#i-pause'); }],
+    ['effects heard backwards', d, '', '', /a11y: option 1 does not say/, () => { document.querySelectorAll('.ev-op')[0].setAttribute('aria-label', 'توسيع دعم الخبز والتموين: 500 مليون دولار سنويًا. ترتفع الاضطرابات 3 نقاط، أسوأ؛ ينخفض العجز 0.5 مليار دولار، أفضل'); }],
+    ['better and worse swapped', d, '', '', /a11y: option 2 does not say/, () => { document.querySelectorAll('.ev-op')[1].setAttribute('aria-label', 'تشديد الانتشار الأمني في المدن: لا كلفة إضافية، من بند الأمن الداخلي. تنخفض الاضطرابات نقطتين، أسوأ؛ تنخفض الشرعية 2، أفضل'); }],
+    ['a benefit drawn amber', d, '', '.ev-op[data-op="dialogue"] .ev-fx > span { color: rgb(242, 177, 76) !important; }', /option 3 effect \d: drawn rgb\(242, 177, 76\)/],
+    ['a cost arrow not amber', d, '', '.ev-fx .r-amber svg { color: rgb(234, 242, 247) !important; }', /option 1 effect 2: drawn .* with its arrow rgb\(234, 242, 247\)/],
+    ['an option not a button', d, '', '', /a11y: option 1 is not a button/, () => { document.querySelectorAll('.ev-op')[0].setAttribute('role', 'presentation'); }],
+    ['scrim clear', d, '', '.scrim { background: rgba(4, 8, 12, .1) !important; }', /the scrim does not dim the game/],
+    ['pause unsaid', d, '', '', /the modal does not say the time is stopped/, () => { const k = document.querySelector('.ev-k'); k.lastChild.textContent = ''; }],
+    ['no later', d, '', '', /no «لاحقًا»/, () => { document.querySelector('.ev-later').remove(); }],
+    ['left stack showing', d, '', '[data-state="event"] .lstack { visibility: visible !important; }', /the left stack or the dock shows around the modal/],
+    ['capital beyond the panel', d, '', '', /the dialogue's 100 political capital is more than/, () => { document.querySelectorAll('.ev-op')[2].querySelector('.ev-c .ltr').textContent = '100'; }],
+    ['bell silent', d, '', '', /a11y: the bell does not read its count/, () => { document.querySelector('.bell').setAttribute('aria-label', 'الإشعارات'); }],
+    ['label cut by the modal', d, '', '.labels .cut { display: inline !important; }', /map (label|city dot) .* (cut by a panel edge|sliced)/],
     ['faint text', d, '', '.ev-p { opacity: .3 !important; }', /^contrast [0-3](\.\d+)? for/],
     ['text overlap', d, '', '.ev-t { margin-top: -18px !important; }', /text overlap/],
     ['option too short', d, '', '.ev-op { min-height: 40px !important; height: 40px !important; }', /option height 40/],
@@ -379,6 +422,12 @@ async function selftest(b) {
     ['HUD moved', d, C, '.lstack { margin-left: 8px; }', /HUD element moved from its B3 position/],
     ['map label cut', d, C, '.labels .cut { display: inline !important; }', /map (label|city dot) .* (cut by a panel edge|sliced)/],
     ['hit overlap', d, C, '.nc-x.tap::before { height: 120px !important; }', /hit overlap/],
+    ['badge and unread changed together', d, C, '', /the badge says 2, the unread notifications are 2 \(the brief's 3\)/, () => { document.querySelector('.badge').textContent = '2'; document.querySelectorAll('.nc-b [data-unread="1"]')[1].removeAttribute('data-unread'); document.querySelector('.bell').setAttribute('aria-label', 'الإشعارات، 2 غير مقروءة'); }],
+    ['the order counted unread', d, C, '', /an unread mark on something that is not a notification/, () => { document.querySelector('.nc-b div.nc-r').dataset.unread = '1'; }],
+    ['tiers swapped', d, C, '', /is not under «مهم»|is not under «للعلم»/, () => { const r = document.querySelectorAll('.nc-b button.nc-r'), a = r[1], b = r[2], x = a.nextSibling; b.after(a); x ? x.before(b) : null; const p = a.parentNode, ra = a, rb = b, na = document.createElement('i'); p.replaceChild(na, ra); p.replaceChild(ra, rb); p.replaceChild(rb, na); }],
+    ['chevrons gone', d, C, '', /has no chevron/, () => { document.querySelectorAll('.nc-chev').forEach((c) => c.remove()); }],
+    ['icons gone', d, C, '', /has no icon/, () => { document.querySelectorAll('.nc-ic').forEach((c) => c.remove()); }],
+    ['unread dot missing', d, C, '', /the unread dot and words do not match/, () => { document.querySelector('.nc-dot').remove(); }],
   ];
   const results = [];
   for (const [name, x, extra, css, re, js] of cases) {

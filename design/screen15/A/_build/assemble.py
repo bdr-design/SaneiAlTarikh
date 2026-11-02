@@ -34,7 +34,9 @@ SYMBOLS = """    <!-- screen 15: play (the paused clock), the protests category 
 """
 sub('  </defs>', SYMBOLS + '  </defs>')
 cut('  <!-- the tapped province: Cairo Governorate', '</div>\n\n<div class="hud">', '', keep_end=True)
-cut('  <!-- Province panel: tabbed side sheet from the right -->', '  </section>\n', (S / 'center.html').read_text(encoding='utf-8'), keep_end=False)
+cut('  <!-- Province panel: tabbed side sheet from the right -->', '  </section>\n', '', keep_end=False)
+# the centre right after the left stack, so VoiceOver reaches it before the dock
+sub('  <!-- Section dock -->', (S / 'center.html').read_text(encoding='utf-8') + '\n  <!-- Section dock -->')
 sub('<!-- Device silhouette drawn on top', (S / 'event.html').read_text(encoding='utf-8') + '\n<!-- Device silhouette drawn on top')
 cut('  /* ---------- Province sheet ---------- */', '  /* Frosted glass for the mockup render.', (S / 'event.js').read_text(encoding='utf-8') + '\n')
 sub('.then(fitTop).then(sizeSheet).then(placeSheet).then(fitSheet).then(placeMap).then(frost)', '.then(fitTop).then(startEvents).then(placeMap15).then(frost)')
