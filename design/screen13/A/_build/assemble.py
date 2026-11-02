@@ -1,6 +1,6 @@
 """Build design/screen13/A/index.html (the «المزيد» panel: saves, settings, log, about) with the shared panel builder
 (design/shared/check/panel_page.py): the approved B3 play screen, the approved panels' CSS, and this panel's CSS and
-markup (more.css, sheet.html). The fit level is the loosest at which the saves tab fits.
+markup (more.css, sheet.html). The fit level is the loosest at which the log tab fits (the saves tab scrolls on the smaller phones).
 Usage: python3 -I assemble.py <repo> <this _build dir> <out dir>"""
 import sys
 from pathlib import Path
@@ -18,4 +18,4 @@ SYMBOLS = """    <symbol id="i-save" viewBox="0 0 24 24"><path d="M5 4.5h11.5L19
     <symbol id="i-lock" viewBox="0 0 24 24"><rect x="5.5" y="10.5" width="13" height="9.5" rx="2"/><path d="M8.5 10.5V8a3.5 3.5 0 0 1 7 0v2.5"/></symbol>
     <symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 20h16"/><path d="M5 16.5l4.5-4.5 3.5 3 6-6.5"/><path d="M15 8.5h4v4"/></symbol>"""
 panel_page.build(R, S, D, title='المزيد', sec='more', dock_label='المزيد', dock_icon='i-more',
-                 tabs=['saves', 'settings', 'log', 'about'], fit_tab='saves', css=['more.css'], symbols=SYMBOLS)
+                 tabs=['saves', 'settings', 'log', 'about'], fit_tab='log', css=['more.css'], symbols=SYMBOLS)

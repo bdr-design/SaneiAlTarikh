@@ -380,7 +380,7 @@ async function selftest(b) {
     ['arrowhead off', d, '&t=0', '', /the arrowhead is not at the destination/, () => { document.querySelector('.route .head').setAttribute('d', 'M10,10L20,20L10,20Z'); }],
     ['waypoint shown after passing', d, '&t=0.5', '', /the waypoint mark is shown after it was passed/, () => { document.querySelector('.u-wp').style.display = 'flex'; }],
     ['destination mark off', d, '&t=0', '', /the destination mark is not «سيوة» above the destination/, () => { const s = document.querySelector('.u-dest'); s.style.top = (parseFloat(s.style.top) + 30) + 'px'; }],
-    ['date not the march', d, '&t=0.5', '', /the date is not الإثنين 3 يناير 2011/, () => { document.querySelector('.date .dmy').textContent = '4 يناير 2011'; }],
+    ['date not the march', d, '&t=0.5', '', /the date is not الثلاثاء 4 يناير 2011/, () => { document.querySelector('.date .dmy').textContent = '5 يناير 2011'; }],
     ['weekday wrong', d, '&t=0', '', /the date is not السبت 1 يناير 2011/, () => { document.querySelector('.date .dow').textContent = 'الأحد'; }],
     ['ETA wrong', d, '&t=0', '', /the bar's line is/, () => { const s = document.querySelector('.o-sub'); s.textContent = s.textContent.replace('7 أيام', '6 أيام'); }],
     ['ETA agreement', d, '&t=0.5', '', /the bar's line is/, () => { const s = document.querySelector('.o-sub'); s.textContent = s.textContent.replace('4 أيام', '4 يوم'); }],

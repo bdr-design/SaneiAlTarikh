@@ -542,7 +542,7 @@ Per-province arrays (sovereign, administrator, controller, flags, mode colour) a
 | `Settling` | 0.5 s after the last input |
 | `DataChanged` | 1 frame |
 | `TileArrival` | At most 10 Hz |
-| `Tween` | ≤300 ms (D-15) |
+| `Tween` | While an on-screen unit moves: ≤30 fps at ×1–×5; one step per game day at ×10 and above, when hot, or with Reduce Motion; 0 frames when nothing moves (D-15, screen 14) |
 
 The view uses `CAMetalDisplayLink` (iOS 17+).
 
@@ -2141,7 +2141,7 @@ These answers override the defaults below. They are logged in `decisions/decisio
 | D-5 Maximum zoom | End of M0b | <ul><li>**Default: 1.0 km/pt.**</li><li>2 km/pt: sharper imagery, but small areas such as Lebanon and the West Bank become hard to tap.</li><li>0.6 km/pt: needs z8 imagery (+50–90 MB).</li></ul> |
 | D-6 Money display | M1a | <ul><li>**Default: nominal current USD**, now backed by the nominal ledger, so devaluations and inflation show as in the news. «لماذا؟» also shows constant 2011 USD.</li><li>Constant 2011 USD: easier to compare across decades, but values drift from real headlines.</li></ul> |
 | D-7 Month names | M1c | <ul><li>**Default: يناير… with a setting.** One extra string set.</li><li>Levantine names only.</li><li>Both side by side: needs more width in the HUD.</li></ul> |
-| D-15 Unit movement | M4 | <ul><li>**Default: discrete jumps.** 0 extra frames.</li><li>Tween: a few extra frames on arrival days at ×2 or slower.</li></ul> |
+| D-15 Unit movement | M4 | <ul><li>**Decided by the owner (2026-10-20): smooth glide** along the route, light: only on-screen moving units, ≤30 fps at ×1–×5, a step per game day at ×10 and above, when hot, or with Reduce Motion; 0 frames when nothing moves. Prototype: screen 14.</li><li>(Earlier default, replaced: discrete jumps.)</li></ul> |
 | D-16 Maximum speed | M1a | <ul><li>**Default: 30 days/s.** 2011 → 2100 in 18 min, 6% CPU.</li><li>20 days/s: 27 min, cooler.</li><li>60 days/s: 9 min, about 12% CPU and more heat.</li></ul> |
 | D-21 Test devices | M0b | <ul><li>**Default: borrow an iPhone XR (A12, 3 GB)** for M0b, M4 and M8, and an SE (2nd or 3rd generation) for one layout check. A few hours each time.</li><li>Pro Max and counters only: no effort, but older-phone problems found late.</li></ul> |
 | D-23 Imagery for historical packs | Before the 1990 pack | <ul><li>**Default: reuse the 2004 mosaic.** No cost; coastlines and the Aral Sea show their 2004 state.</li><li>Per-era imagery: no comparable licensable mosaic found; large work.</li></ul> |

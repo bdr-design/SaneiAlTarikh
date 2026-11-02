@@ -241,7 +241,8 @@ module.exports = function makeChecker(cfg) {
     }
     // text running into a chip, a «لماذا؟» button, a segment group or the close button it is not part of
     const ctls = [...document.querySelectorAll('.sheet .r-chip, .sheet .r-why, .sheet .s-seg, .sheet .r-x')].filter((c) => c.getClientRects().length);
-    st.forEach((x) => ctls.forEach((c) => { if (c.contains(elOf.get(x))) return; const r = c.getBoundingClientRect(), a = x.line;
+    st.forEach((x) => ctls.forEach((c) => { if (c.contains(elOf.get(x))) return; const cb = c.getBoundingClientRect(), cc = clipOf(c).c, a = x.line;   // the part of the control its scroll area shows
+      const r = { left: Math.max(cb.left, cc.x0), right: Math.min(cb.right, cc.x1), top: Math.max(cb.top, cc.y0), bottom: Math.min(cb.bottom, cc.y1) }; if (r.right - r.left <= 0.5 || r.bottom - r.top <= 0.5) return;
       if (Math.min(a.x1, r.right) - Math.max(a.x0, r.left) > 0.5 && Math.min(a.y1, r.bottom) - Math.max(a.y0, r.top) > 0.5) issues.push(`text over a control: "${x.t}" runs into «${(c.textContent || c.getAttribute('aria-label') || '').trim().slice(0, 20)}»`); }));
     const icons = [...document.querySelectorAll('.hud svg')].filter((s) => s.getClientRects().length && !s.closest('.frost') && !s.closest('.r-hint') && getComputedStyle(s).visibility !== 'hidden')   // the scroll hint sits in the fade by design
       .map((s) => { const r = box(s.getBoundingClientRect()), c = clipOf(s).c; return { s, r: { x0: Math.max(r.x0, c.x0), x1: Math.min(r.x1, c.x1), y0: Math.max(r.y0, c.y0), y1: Math.min(r.y1, c.y1) } }; })
@@ -604,7 +605,7 @@ module.exports = function makeChecker(cfg) {
     const generic = [
       ['type size', d, '', '.r-name { font-size: 17px !important; }', /font size 17 for/],
       ['font weight', d, '', '.r-tab span { font-weight: 700 !important; }', /font weight 11\.5\/700/],
-      ['off-token colour', d, '', '.r-sec h3 { color: #8899aa !important; }', /text colour off-token/],
+      ['off-token colour', d, '', '.r-name { color: #8899aa !important; }', /text colour off-token/],
       ['radius', d, '', '.sheet { border-radius: 6px !important; }', /radius 6 for \.sheet|panel radius/],
       ['tap in the side inset', d, '', '.sheet { right: -30px !important; }', /tap in side inset/],
       ['panel in the side inset', d, '', '.sheet { right: -30px !important; }', /panel in side inset/],
@@ -630,7 +631,7 @@ module.exports = function makeChecker(cfg) {
       ['identity line missing', d, '', '[data-sec] .r-in::before { content: none !important; }', /panel top line none/],
       ['emblem drawn grey', d, '', '.s-emb svg { color: var(--t2) !important; }', /section emblem missing or not in the section colour/],
       ['open tab neutral', d, '', '[data-sec] .r-tab.on { color: var(--t1) !important; }', /open tab not in the section colour/],
-      ['section colour on data', d, '', '.r-sec h3 { color: var(--sec) !important; }', /section colour on data text/],
+      ['section colour on data', d, '', '.r-sub { color: var(--sec) !important; }', /section colour on data text/],
       ['section colour on a rule', d, '', '.r-tabs { border-bottom-color: var(--sec) !important; }', /section colour on data chrome/],
       ['money unit', d, '', '', /money unit: «0\.4 مليار»/, () => { const b = [...document.querySelectorAll('.r-body')].find((e) => e.getClientRects().length); const s = document.createElement('p'); s.innerHTML = '<span class="ltr">0.4</span> مليار $'; s.className = 's-note'; b.prepend(s); }],
       ['sign outside its number', d, '', '', /a sign outside its number/, () => { const b = [...document.querySelectorAll('.r-body')].find((e) => e.getClientRects().length); const s = document.createElement('p'); s.className = 's-note'; s.innerHTML = 'تغير +<span class="ltr">3</span>'; b.prepend(s); }],
@@ -639,13 +640,13 @@ module.exports = function makeChecker(cfg) {
       ['close not round', d, '', '.r-x { width: 40px !important; }', /close button is not round/],
       ['label without a role', d, '', '', /a11y: a label VoiceOver may skip/, () => { const b = [...document.querySelectorAll('.r-body')].find((e) => e.getClientRects().length); const s = document.createElement('div'); s.className = 's-note'; s.setAttribute('aria-label', 'اختبار'); s.textContent = 'اختبار'; b.prepend(s); }],
       ['brief text hidden', d, '', '', /brief text not fully visible/, () => { document.querySelector('.r-kv b').style.opacity = '0'; }],
-      ['overview scrolls', se, '', '.r-body > .r-acts, .r-body > .r-act { margin-top: 400px !important; }', new RegExp(TABS[0] + ' needs scrolling')],
+      ['overview scrolls', se, tabQ(cfg.fitTab || TABS[0]), '.r-body > :first-child { margin-top: 400px !important; }', new RegExp((cfg.fitTab || TABS[0]) + ' needs scrolling')],
       ['18 pt misuse', d, '', '.r-kr { font-size: 18px !important; font-weight: 700 !important; }', /18 pt is for/],
       ['control height', d, '', '.r-tab { height: 40px !important; }', /control height 40.00 for \.r-tab/],
       ['gap', d, '', '.r-kpi { display: flex !important; gap: 6px !important; }', /gap 6 on/],
       ['icon size', d, '', '.r-tab svg.i { width: 19px !important; height: 19px !important; }', /icon size 19x19/],
       ['text overlap', d, '', '.r-sub { transform: translateY(-14px) !important; }', /text overlap|icon over text/],
-      ['text into a control', d, '', '.r-body .r-act .r-chip { margin-right: -120px !important; }', /text over a control|text overlap/],
+      ['text into a control', d, '', '.r-body .r-act .r-chip { transform: translateX(100px) !important; }', /text over a control|text overlap/],
       ['clipped text', d, '', '.r-kpis { margin-inline-start: -40px !important; }', /clipped text \(sides\)/],
       ['dock underline missing', d, '', '.dock-item.on::after { content: none !important; }', /dock underline missing/],
       ['closed dock item coloured', d, '', '.dock-item:not(.on) span { color: var(--sec) !important; }', /dock item \d \(closed\) not neutral/],
@@ -658,7 +659,7 @@ module.exports = function makeChecker(cfg) {
       ['why without its subject', d, '', '', /a11y: «لماذا؟» does not name its subject/, () => { document.querySelectorAll('.r-why')[1].removeAttribute('aria-label'); }],
       ['amber value without its icon', d, '', '', /colour alone: .* \(its label's icon is not in its colour\)/, () => { const b = document.querySelector('.r-kv b'); b.classList.add('r-amber'); }],
       ['chip arrow against its sign', d, '', '', /the chip's arrow does not agree with its sign|does not say the chip's direction/, () => { const u = document.querySelector('.r-act .r-chip use'); if (u) u.setAttribute('href', u.getAttribute('href') === '#t-up' ? '#t-down' : '#t-up'); }],
-      ['row read in part', d, '', '', /does not read all it shows/, () => { const r = document.querySelector('.sheet [role="img"]') || document.querySelector('.sheet .tap[role="button"]:not(.r-tab)'); r.setAttribute('aria-label', 'جزء'); }],
+      ['row read in part', d, '', '', /does not read all it shows/, () => { const r = [...document.querySelectorAll('.sheet [role="img"], .sheet .tap[role="button"]:not(.r-tab), .sheet .r-act[aria-label]')].find((e) => e.getClientRects().length && e.innerText.trim()); r.setAttribute('aria-label', 'جزء'); }],
       ['% before its number', d, '', '', /% shown before its number/, () => { document.querySelector('.r-kr').textContent = 'نسبة 20%'; }],
     ];
     // a panel whose first tab has no headline numbers or status table (المزيد) leaves out the plants aimed at them and
@@ -691,8 +692,10 @@ module.exports = function makeChecker(cfg) {
       clean[x.id + ' coverage'] = coverage(clearBy);
       console.log(`clean coverage ${x.id}: ${clean[x.id + ' coverage'].length} issues ${clean[x.id + ' coverage'].slice(0, 3).join(' || ')}`);
       if (x === se) {
-        const miss = coverage(skipMid), ok = miss.length > 0;
-        results.push({ name: 'coverage without the middle views', ok, sample: miss.slice(0, 3) });
+        // the probe only means something where a tab has middle views (a body taller than its top and end views)
+        const hasMid = Object.keys(clean).some((k) => k.startsWith(x.id + '_') && /_at\d+$/.test(k));
+        const miss = coverage(skipMid), ok = !hasMid || miss.length > 0;
+        results.push({ name: 'coverage without the middle views', ok, sample: hasMid ? miss.slice(0, 3) : ['no middle views on this panel'] });
         console.log(`${ok ? 'caught ' : 'MISSED '} coverage without the middle views`);
       }
     }

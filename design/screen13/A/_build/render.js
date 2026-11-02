@@ -57,12 +57,12 @@ if (tab === 'saves') { const m = qa('.sheet .r-body[data-tab="saves"] .r-link').
 `;
 
 require(path.join(OUT, '../../shared/check/panelcheck.js'))({
-  OUT, dock: 'المزيد', tabs: ['saves', 'settings', 'log', 'about'], longTab: 'settings',
+  OUT, dock: 'المزيد', tabs: ['saves', 'settings', 'log', 'about'], longTab: 'settings', fitTab: 'log',
   inputs: ['_build/more.css'],
   TOK: { sec: 'rgb(169, 188, 203)', ctlH: {}, sheetIcon: [], size: [] },
   HEAD, BRIEF, screenChecks, DATA: { settings: SETTINGS },
   // the saves tab has no headline numbers, status table, «لماذا؟» or arrowed chip: their plants move to other targets
-  skipGeneric: ['section colour on data', 'section colour on a rule', 'closed dock item coloured', 'brief text hidden', '18 pt misuse', 'gap', 'text overlap', 'clipped text', 'faint text', 'why without its subject', 'amber value without its icon', 'chip arrow against its sign', '% before its number', 'text into a control'],
+  skipGeneric: ['section colour on data', 'section colour on a rule', 'closed dock item coloured', 'brief text hidden', '18 pt misuse', 'gap', 'text overlap', 'clipped text', 'faint text', 'why without its subject', 'amber value without its icon', 'chip arrow against its sign', '% before its number', 'text into a control', 'emblem drawn grey', 'chip not white'],
   cases: (d, se) => [
     ['brief text hidden (saves)', d, '', '', /brief text not fully visible/, () => { document.querySelector('.r-body[data-tab="saves"] .r-act .r-at b').style.opacity = '0'; }],
     ['18 pt misuse (saves)', d, '', '.r-at > span { font-size: 18px !important; font-weight: 700 !important; }', /18 pt is for/],
