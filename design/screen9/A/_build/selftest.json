@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-02T22:34:54.590Z",
+ "ranAt": "2026-11-02T23:09:41.680Z",
  "inputs": {
   "files": [
    "index.html",
@@ -26,7 +26,7 @@
    "header_cairo.jpg",
    "map_overlay_cairo.svg"
   ],
-  "sha1": "3bf56ed4688b0c92576232585259a291e7eaa488"
+  "sha1": "3d0a751b17157f36b068263548eb98a19a54097d"
  },
  "cleanIssues": {
   "i16promax": [],
@@ -676,9 +676,12 @@
    ]
   },
   {
-   "name": "coverage without the middle views",
+   "name": "coverage reports a string no view shows",
    "ok": true,
    "sample": [
+    "overview: never shown clear of the fades in any view: نص غير معروض للاختبار"
+   ],
+   "midViewsAdd": [
     "forces: never shown clear of the fades in any view: المنطقة الشمالية",
     "forces: never shown clear of the fades in any view: الإسكندرية والساحل · 4 تشكيلات",
     "forces: never shown clear of the fades in any view: التنظيم 75%"
