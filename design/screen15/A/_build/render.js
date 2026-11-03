@@ -5,7 +5,7 @@
 // short; the four options in the brief's order, each with its cost line, its effects (arrow, sign or words; costs amber
 // with their arrow; the main effect a white chip), exactly one default named on screen and in VoiceOver, each effect's
 // own clause in VoiceOver with its direction and better or worse; the numbers against the approved panels (the bread
-// line, the deficit, political capital, unrest, legitimacy); «لاحقًا» and the close button put it off, with the expiry.
+// line, political capital, unrest, legitimacy); every cost line and chip shown clear; the owner's category image as the header strip; «لاحقًا» and the close button put it off and resume time, with the expiry.
 // Usage: NODE_PATH=.../node_modules node render.js [ids...]   (default: all 7)   |   node render.js --selftest
 const path = require('path');
 const fs = require('fs');
@@ -14,9 +14,9 @@ const OUT = path.resolve(__dirname, '..');
 function approved() {
   const flat = (f) => fs.readFileSync(path.join(OUT, f), 'utf8').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ');
   const s5 = flat('../../screen5/A/_build/sheet.html'), s6 = flat('../../screen6/A/_build/sheet.html'), s8 = flat('../../screen8/A/_build/sheet.html');
-  const bread = s6.match(/دعم الخبز والتموين [^$]*?([\d.]+) مليار \$/), pc = s5.match(/رأس المال السياسي (\d+)/), unrest = s8.match(/لماذا؟ الاضطرابات (\d+)/), deficit = s6.match(/العجز[^0-9]{0,20}([\d.]+) مليار/);
-  if (!bread || !pc || !unrest || !deficit || !/الأمن الداخلي/.test(s6)) throw new Error('cannot read the approved panels\' lines');
-  return { bread: +bread[1], capital: +pc[1], unrest: +unrest[1], deficit: +deficit[1] };
+  const bread = s6.match(/دعم الخبز والتموين [^$]*?([\d.]+) مليار \$/), pc = s5.match(/رأس المال السياسي (\d+)/), unrest = s8.match(/لماذا؟ الاضطرابات (\d+)/);
+  if (!bread || !pc || !unrest) throw new Error('cannot read the approved panels\' lines');
+  return { bread: +bread[1], capital: +pc[1], unrest: +unrest[1] };
 }
 const A = approved();
 const HEAD = ['احتجاجات في تونس', 'الوقت متوقف · الافتراضي بعد 7 أيام'];
@@ -30,7 +30,9 @@ const OPS = [
 ];
 const BRIEF = {
   event: HEAD.concat([TEXT, 'خياراتك', 'دعم أكبر للخبز']),
-  reach_event: [TEXT, 'خياراتك'].concat(OPS.map((o) => o[0]), ['العجز +500 مليون $ سنويًا', 'لاحقًا', 'يبقى في الإشعارات · يستأنف الوقت']),
+  // every option's whole cost line and chip must show clear in some view
+  reach_event: [TEXT, 'خياراتك'].concat(OPS.map((o) => o[0]), ['العجز +500 مليون $ سنويًا', 'لا كلفة إضافية · الشرعية −2', '10 من رأس المال السياسي', 'الافتراضي · لا كلفة · الاضطرابات +1',
+    'الاضطرابات −3', 'الاضطرابات −2', 'الاضطرابات −1', 'لاحقًا', 'يبقى في الإشعارات · يستأنف الوقت']),
 };
 
 const screenChecks = `
@@ -69,7 +71,7 @@ if (defs.length !== 1 || !/^الافتراضي/.test(W(T(defs[0].querySelector('
 // the numbers: the extra bread subsidy a part of the economy panel's line, the deficit's rise the same amount; political
 // capital within the state panel's; unrest and legitimacy stay within 0..100
 if (ops.length === 4) {
-  // the extra subsidy is the deficit's rise, in مليار $ a year, shown once
+  // the extra subsidy is the deficit's rise, in مليون $ a year, shown once
   const add = nums(W(T(ops[0].querySelector('.r-at > span .p-cost'))))[0], cap = nums(W(T(ops[2].querySelector('.r-at > span'))))[0];
   if (!/مليون \\$ سنويًا$/.test(W(T(ops[0].querySelector('.r-at > span .p-cost'))))) issues.push('the deficit\\'s rise is not shown with its unit and period (مليون $ سنويًا)');
   if (!(add > 0 && add / 1000 < DATA.A.bread)) issues.push('the extra bread subsidy is not a part of the economy panel\\'s ' + DATA.A.bread + ' مليار line');
@@ -85,6 +87,8 @@ if (ops.length === 4) {
   if (!/الافتراضي بعد \\d+ (أيام|يومًا|يومين|يوم)/.test(W(T(q('.r-sub'))))) issues.push('the header does not show the expiry and its default');
   // the four options are equal: no accent marks one of them as the main choice
   if (ops.some((o) => o.classList.contains('r-first'))) issues.push('an option is marked as the main choice');
+  // the owner's category image is the header strip
+  if (!/event_header\.jpg/.test(getComputedStyle(q('.r-hd')).backgroundImage)) issues.push('the header strip is not the owner\\'s category image');
   { const bl = q('.bell'); if ((bl.getAttribute('aria-label') || '') !== 'الإشعارات، ' + nums(T(q('.badge')))[0] + ' غير مقروءة' || bl.getAttribute('aria-expanded') !== 'false') issues.push('a11y: the bell does not read its count'); } }
 `;
 
@@ -116,6 +120,9 @@ require(path.join(OUT, '../../shared/check/panelcheck.js'))({
     ['the subsidy beyond the bread line', d, '', '', /the extra bread subsidy is not a part of/, () => { document.querySelector('.r-act .p-cost .ltr').textContent = '+3500'; }],
     ['expiry off the header', d, '', '', /the header does not show the expiry/, () => { const s = document.querySelector('.r-sub'); s.innerHTML = 'الوقت متوقف'; }],
     ['an option marked main', d, '', '', /an option is marked as the main choice/, () => { document.querySelector('.r-act').classList.add('r-first'); }],
+    ['header without its image', d, '', '.r-hd { background-image: none !important; }', /the header strip is not the owner's category image/],
+    ['a cost line hidden', d, '', '.r-act:nth-of-type(3) .r-at > span { visibility: hidden !important; }', /brief text not fully visible|never shown clear/],
+    ['a chip hidden', d, '', '.r-act:nth-of-type(2) .r-chip { opacity: 0 !important; }', /brief text not fully visible|never shown clear|contrast/],
     ['bell silent', d, '', '', /a11y: the bell does not read its count/, () => { document.querySelector('.bell').setAttribute('aria-label', 'الإشعارات'); }],
     ['capital beyond the panel', d, '', '', /the dialogue's 100 political capital is more than/, () => { document.querySelectorAll('.r-act')[2].querySelector('.r-at > span .ltr').textContent = '100'; }],
     ['later silent on time', d, '', '', /no «لاحقًا» that keeps the decision/, () => { const l = document.querySelector('.r-link'); l.setAttribute('aria-label', l.getAttribute('aria-label').replace(' ويستأنف الوقت', '')); }],

@@ -517,6 +517,13 @@ module.exports = function makeChecker(cfg) {
     cover(live(583, 424, 945, 732), 'Egypt');
     const me = q('.map').getBoundingClientRect();
     if (me.left > 0.5 || me.top > 0.5 || me.right < W - 0.5 || me.bottom < H - 0.5) issues.push('map not full-bleed');
+    // the map stays central and undimmed (the owner's rule mapCentral): no fade or filter on it, and nothing drawn over
+    // Egypt but the map itself, its labels and the device frame
+    { const mp = q('.map'), cs = getComputedStyle(mp); if (effOp(mp) < 0.999 || cs.filter !== 'none') issues.push(`the map is dimmed (opacity ${effOp(mp).toFixed(2)}, filter ${cs.filter})`);
+      const eg = live(583, 424, 945, 732);
+      [...document.body.querySelectorAll('*')].filter((e) => !e.closest('.map, .hud, .dev, .frost') && e.getClientRects().length).forEach((e) => { const cs2 = getComputedStyle(e), bg = cs2.backgroundColor;
+        const filled = (bg && bg !== 'rgba(0, 0, 0, 0)' && bg !== 'transparent') || cs2.backgroundImage !== 'none' || cs2.backdropFilter !== 'none';
+        if (filled && inter(box(e.getBoundingClientRect()), eg)) issues.push(`something drawn over the map: ${label(e)} (${bg})`); }); }
     // map labels and city dots never cut by a panel edge (2 pt margin, halo included), squeezed against a panel, or
     // sliced by the screen edge or the side inset (the notch, the Dynamic Island)
     const hiddenLabels = [];
@@ -618,6 +625,9 @@ module.exports = function makeChecker(cfg) {
       ['panel not opaque', d, '', '.sheet > .frost::after { background: rgba(9, 17, 25, 0.66) !important; }', /panel not opaque/],
       ['see-through panel', d, '', '.sheet { opacity: .6 !important; }', /panel not opaque \(opacity 0\.60\)/],
       ['Egypt covered', d, '', ':root { --map-cx: 760px !important; }', /Egypt covered by panel/],
+      ['map dimmed', d, '', '.map { filter: brightness(.35) !important; }', /the map is dimmed/],
+      ['map faded', d, '', '.map { opacity: .3 !important; }', /the map is dimmed/],
+      ['scrim over the map', d, '', '', /something drawn over the map/, () => { const s = document.createElement('div'); s.style.cssText = 'position:absolute;inset:0;background:rgba(0,0,0,.55);z-index:3;pointer-events:none'; document.body.appendChild(s); }],
       ['sheet width', d, '', ':root { --sheet-w: 330px !important; }', /sheet width 330/],
       ['sheet top', d, '', '.sheet { top: 30px !important; }', /sheet top [\d.]+ \(want 8 pt under the top row/],
       ['dock hidden although it fits', d, '', '[data-dock="left"] .dock { display: none !important; }', /dock hidden although it fits/],
@@ -680,6 +690,8 @@ module.exports = function makeChecker(cfg) {
       ['control height (no tabs)', d, '', '.r-x { height: 40px !important; }', /control height 40.00 for \.r-x/],
       ['icon size (no tabs)', d, '', '.r-x svg.i { width: 19px !important; height: 19px !important; }', /icon size 19x19/],
       ['fades wrong (no tabs)', se, '', '', /fades .* do not match the scroll state/, () => { document.documentElement.dataset.fbot = document.documentElement.dataset.fbot === '1' ? '0' : '1'; }],
+      ['hint chevron missing (no tabs)', se, '', '.r-hint { display: none !important; }', /scroll hint chevron missing with content below/],
+      ['hint over the content (no tabs)', se, '', '.r-hint { bottom: 150px !important; }', /scroll hint not centred in the clear strip/],
     ] : [], cfg.dock ? [] : [
       ['a dock item marked open', d, '', '', /a dock item is marked open under a sheet of no section/, () => { const e = document.querySelectorAll('.dock-item')[1]; e.classList.add('on'); }],
     ]);

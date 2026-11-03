@@ -5,7 +5,7 @@
 
 ## Acceptance criteria
 1. The approved panel sheet from the right (shared builder and checker), the map central and undimmed with Egypt clear, no dock item open; the game paused (the play button shows play and says so).
-2. The sheet: the owner's category image as the header strip, the category in words, a short title, neutral text ≤90 words, 2–4 options each with its cost and its effects (arrow, sign and word; costs amber with their arrow), the default marked in words, «لاحقًا» with the expiry and its default answer.
+2. The sheet: the owner's category image as the header strip (the category shown by its image and emblem; no category word that would read the outcome), «قرار» in VoiceOver, a short title, neutral text ≤90 words, 2–4 options each with its cost and its effects (arrow, sign and word; costs amber with their arrow), the default marked in words, «لاحقًا» with the expiry and its default answer.
 3. Numbers agree with the approved panels (bread subsidy, deficit, unrest, legitimacy, political capital).
 4. Gate: 0 issues on 7 phones, the self-test catches every plant, `check_screen.py` PASS; three independent read-only reviews (checker and consistency; what the player sees; dimensions and the formatting of text and boxes) with every confirmed finding fixed.
 

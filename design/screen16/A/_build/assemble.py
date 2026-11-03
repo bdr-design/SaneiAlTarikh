@@ -12,5 +12,5 @@ import panel_page  # noqa: E402
 SYMBOLS = """    <symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5.5v13l10.5-6.5z"/></symbol>"""
 SUBS = [('<button class="play tap" aria-label="إيقاف مؤقت (اللعبة تعمل)"><svg class="i"><use href="#i-pause"/></svg></button>',
          '<button class="play tap" aria-label="تشغيل (اللعبة متوقفة)"><svg class="i"><use href="#i-play"/></svg></button>'),
-        ('<button class="bell tap" aria-label="الإشعارات"><svg class="i"><use href="#i-bell"/></svg><span class="badge">3</span></button>', '<button class="bell tap" aria-label="الإشعارات، 2 غير مقروءة" aria-expanded="true"><svg class="i"><use href="#i-bell"/></svg><span class="badge">2</span></button>')]
+        ('<button class="bell tap" aria-label="الإشعارات"><svg class="i"><use href="#i-bell"/></svg><span class="badge">3</span></button>', '<button class="bell tap" aria-label="الإشعارات، غير المقروءة 2" aria-expanded="true"><svg class="i"><use href="#i-bell"/></svg><span class="badge">2</span></button>')]
 panel_page.build(R, S, D, title='الإشعارات', sec='more', tabs=['center'], fit_tab=None, css=['center.css'], symbols=SYMBOLS, extra_subs=SUBS)

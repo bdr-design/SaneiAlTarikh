@@ -8,7 +8,7 @@
 const path = require('path');
 const OUT = path.resolve(__dirname, '..');
 
-const HEAD = ['الإشعارات', '2 غير مقروءة · 1 يناير 2011'];
+const HEAD = ['الإشعارات', 'غير المقروءة: 2 · 1 يناير 2011'];
 const ROWS = [['احتجاجات في تونس', 'قرار · الافتراضي بعد 7 أيام', 'قرارات تنتظرك', false], ['المنطقة الغربية إلى سيوة', 'يُنفَّذ عند استئناف الوقت', 'أوامر معلقة', false],
   ['السودان: استفتاء الجنوب بعد 8 أيام', '9 يناير 2011 · الجوار', 'مهم', true], ['القمح عالميًا في أعلى مستوى منذ 2008', 'السلع · ديسمبر 2010', 'للعلم', true]];
 const SECTIONS = ['قرارات تنتظرك', 'أوامر معلقة', 'مهم', 'للعلم'];
@@ -35,11 +35,18 @@ DATA.rows.forEach(([nm, line, sec, unread], i) => { const r = rows.find((x) => W
 // unread: dot and words exactly on the unread rows, never on the pending order; the counts all agree with the brief's 3
 const unread = rows.filter((r) => r.dataset.unread === '1'), badge = nums(T(q('.badge')))[0], head = nums(W(T(q('.r-sub'))))[0];
 if (badge !== unread.length || head !== unread.length || unread.length !== 2) issues.push('the badge says ' + badge + ', the header ' + head + ', the unread rows are ' + unread.length + ' (the brief\\'s 2)');
-{ const bl = q('.bell'); if ((bl.getAttribute('aria-label') || '') !== 'الإشعارات، ' + badge + ' غير مقروءة' || bl.getAttribute('aria-expanded') !== 'true') issues.push('a11y: the bell does not read its count and show the centre open'); }
+{ const bl = q('.bell'); if ((bl.getAttribute('aria-label') || '') !== 'الإشعارات، غير المقروءة ' + badge || bl.getAttribute('aria-expanded') !== 'true') issues.push('a11y: the bell does not read its count and show the centre open'); }
 rows.forEach((r) => { const u = r.dataset.unread === '1', nm = W(T(r.querySelector('.r-at b')));
   if (u !== !!r.querySelector('.n-dot') || u !== /^غير مقروء، /.test(r.getAttribute('aria-label') || '')) issues.push('«' + nm + '»: the unread dot and words do not match its state');
   if (secOf(r) === 'قرارات تنتظرك' && !/^قرار ينتظرك: /.test(r.getAttribute('aria-label') || '')) issues.push('«' + nm + '» does not say it waits for a decision');
-  if (r.matches('.r-link') && !r.querySelector('.r-chev')) issues.push('«' + nm + '» has no chevron'); });
+  if (r.matches('.r-link') && !r.querySelector('.r-chev')) issues.push('«' + nm + '» has no chevron');
+  // the unread dot: visible, 6 pt, teal, between the text and the chevron (right to left: tile, text, dot, chevron)
+  const dot = r.querySelector('.n-dot');
+  if (dot) { const dr = dot.getBoundingClientRect(), cs = getComputedStyle(dot), at = r.querySelector('.r-at').getBoundingClientRect(), ch = r.querySelector('.r-chev').getBoundingClientRect();
+    if (cs.visibility === 'hidden' || parseFloat(cs.opacity) < 0.99 || Math.abs(dr.width - 6) > 0.05 || Math.abs(dr.height - 6) > 0.05 || cs.backgroundColor !== 'rgb(63, 224, 208)') issues.push('«' + nm + '»: the unread dot is not a visible 6 pt teal dot');
+    if (!(dr.right <= at.left + 0.5 && ch.right <= dr.left + 0.5)) issues.push('«' + nm + '»: the unread dot is not between the text and the chevron'); }
+  // a row that opens something says what in VoiceOver
+  if (r.matches('.r-link') && !/\. يفتح (القرار|الخبر)$/.test(r.getAttribute('aria-label') || '')) issues.push('a11y: «' + nm + '» does not say where it leads'); });
 // the pending order: a group (not a button, not a notification) with its own «إلغاء»
 { const o = q('.sheet .n-ord'), b = o && o.querySelector('button.r-btn');
   if (!o || o.getAttribute('role') !== 'group' || o.matches('.tap, [tabindex]') || o.dataset.unread === '1' || !b || W(T(b)) !== 'إلغاء' || !/^إلغاء أمر /.test(b.getAttribute('aria-label') || '')) issues.push('the pending order is not a group with its own «إلغاء»');
@@ -63,12 +70,16 @@ require(path.join(OUT, '../../shared/check/panelcheck.js'))({
     ['sections reordered', d, '', '', /the sections are/, () => { const h = document.querySelectorAll('.r-sec h3'); h[2].textContent = 'للعلم'; h[3].textContent = 'مهم'; }],
     ['rows swapped between tiers', d, '', '', /is not under «مهم»|is not under «للعلم»/, () => { const s = document.querySelectorAll('.r-sec'), a = s[2].querySelector('.r-link'), b = s[3].querySelector('.r-link'); s[2].appendChild(b); s[3].appendChild(a); }],
     ['badge off', d, '', '', /the badge says 4/, () => { document.querySelector('.badge').textContent = '4'; }],
-    ['counts changed together', d, '', '', /the unread rows are 1 \(the brief's 2\)/, () => { document.querySelector('.badge').textContent = '1'; document.querySelector('.r-sub .ltr').textContent = '1'; document.querySelectorAll('[data-unread="1"]')[1].removeAttribute('data-unread'); }],
+    ['counts changed together', d, '', '', /the unread rows are 1 \(the brief's 2\)/, () => { document.querySelector('.badge').textContent = '1'; document.querySelector('.r-sub .ltr').textContent = '1'; document.querySelector('.bell').setAttribute('aria-label', 'الإشعارات، غير المقروءة 1'); document.querySelectorAll('[data-unread="1"]')[1].removeAttribute('data-unread'); }],
     ['the decision not said waiting', d, '', '', /does not say it waits for a decision/, () => { const r = document.querySelector('.r-sec .r-link'); r.setAttribute('aria-label', r.getAttribute('aria-label').replace('قرار ينتظرك: ', 'قرار: ')); }],
     ['bell silent', d, '', '', /a11y: the bell does not read its count/, () => { document.querySelector('.bell').setAttribute('aria-label', 'الإشعارات'); }],
     ['order counted unread', d, '', '', /marked unread|unread dot and words/, () => { document.querySelector('.n-ord').dataset.unread = '1'; }],
     ['order not cancellable', d, '', '', /the pending order is not a group with its own «إلغاء»/, () => { document.querySelector('.n-ord .r-btn').remove(); }],
     ['order read in part', d, '', '', /a11y: the pending order does not read whole/, () => { document.querySelector('.n-ord').setAttribute('aria-label', 'أمر معلق'); }],
+    ['dot recoloured and grown', d, '', '.n-dot { background: rgb(242, 112, 90) !important; width: 12px !important; height: 12px !important; }', /the unread dot is not a visible 6 pt teal dot/],
+    ['dot hidden', d, '', '.n-dot { visibility: hidden !important; }', /the unread dot is not a visible 6 pt teal dot/],
+    ['dot past the chevron', d, '', '.n-dot { order: 9 !important; }', /the unread dot is not between the text and the chevron/],
+    ['row silent on where it leads', d, '', '', /a11y: «احتجاجات في تونس» does not say where it leads/, () => { const r = document.querySelector('.r-sec .r-link'); r.setAttribute('aria-label', r.getAttribute('aria-label').replace('. يفتح القرار', '')); }],
     ['unread dot missing', d, '', '', /the unread dot and words do not match/, () => { document.querySelector('.n-dot').remove(); }],
     ['chevron missing', d, '', '', /has no chevron/, () => { document.querySelector('.r-link .r-chev').remove(); }],
     ['icon missing', d, '', '', /has no icon/, () => { document.querySelector('.r-link .r-tile svg').remove(); }],
