@@ -23,14 +23,14 @@ const HEAD = ['احتجاجات في تونس', 'قرار · احتجاجات و
 const TEXT = 'تتسع الاحتجاجات في تونس منذ 17 ديسمبر بعد أن أحرق شاب نفسه في سيدي بوزيد. يطالب المحتجون بفرص عمل وبخفض الأسعار، وتنقل القنوات العربية ما يجري كل يوم. يرى مستشاروك أن البطالة وارتفاع الأسعار في مصر قد يجعلان الشارع يتأثر بما يحدث.';
 // the options in order: title, cost line (without its amber effect), the chip [arrow, word, number], the amber costs
 const OPS = [
-  ['توسيع دعم الخبز', '500 مليون $ سنويًا', ['down', 'الاضطرابات', -3], [['up', 'العجز', 0.5]]],
+  ['دعم أكبر للخبز', '500 مليون $ سنويًا', ['down', 'الاضطرابات', -3], [['up', 'العجز', 0.5]]],
   ['تشديد الانتشار الأمني', 'لا كلفة إضافية', ['down', 'الاضطرابات', -2], [['down', 'الشرعية', -2]]],
-  ['حوار مع النقابات والأحزاب', 'الكلفة: 10 من رأس المال السياسي', ['down', 'الاضطرابات', -1], []],
+  ['حوار مع النقابات والأحزاب', '10 من رأس المال السياسي', ['down', 'الاضطرابات', -1], []],
   ['المتابعة دون إجراء', 'الافتراضي · لا كلفة', null, [['up', 'خطر الاضطرابات', null]]],
 ];
 const BRIEF = {
-  event: HEAD.concat([TEXT, 'خياراتك', 'توسيع دعم الخبز العجز +0.5']),
-  reach_event: [TEXT, 'خياراتك', 'توسيع دعم الخبز العجز +0.5'].concat(OPS.slice(1).map((o) => o[0]), ['لاحقًا', 'يبقى في الإشعارات · الافتراضي بعد 7 أيام']),
+  event: HEAD.concat([TEXT, 'خياراتك', 'دعم أكبر للخبز العجز +0.5']),
+  reach_event: [TEXT, 'خياراتك', 'دعم أكبر للخبز العجز +0.5'].concat(OPS.slice(1).map((o) => o[0]), ['لاحقًا', 'يبقى في الإشعارات · الافتراضي بعد 7 أيام']),
 };
 
 const screenChecks = `
@@ -103,7 +103,7 @@ require(path.join(OUT, '../../shared/check/panelcheck.js'))({
     ['chip arrow against its sign', d, '', '', /an arrow against its sign|the chip is «up/, () => { document.querySelector('.r-act .r-chip use').setAttribute('href', '#t-up'); }],
     ['a cost not amber', d, '', '.r-act .p-cost { color: var(--t1) !important; }', /a cost not amber with its arrow/],
     ['a cost arrow not amber', d, '', '.r-act .p-cost svg { color: var(--t1) !important; }', /a cost not amber with its arrow/],
-    ['effects heard backwards', d, '', '', /a11y: option 1 does not say/, () => { document.querySelector('.r-act').setAttribute('aria-label', 'توسيع دعم الخبز والتموين: 500 مليون دولار سنويًا. ترتفع الاضطرابات 3 نقاط، أسوأ؛ ينخفض العجز 0.5 مليار دولار، أفضل'); }],
+    ['effects heard backwards', d, '', '', /a11y: option 1 does not say/, () => { document.querySelector('.r-act').setAttribute('aria-label', 'دعم أكبر للخبز والتموين: 500 مليون دولار سنويًا. ترتفع الاضطرابات 3 نقاط، أسوأ؛ ينخفض العجز 0.5 مليار دولار، أفضل'); }],
     ['better and worse swapped', d, '', '', /a11y: option 2 does not say/, () => { document.querySelectorAll('.r-act')[1].setAttribute('aria-label', 'تشديد الانتشار الأمني: لا كلفة إضافية. تنخفض الاضطرابات بمقدار 2، أسوأ؛ تنخفض الشرعية 2، أفضل'); }],
     ['two defaults', d, '', '', /the default is not exactly one option/, () => { document.querySelector('.r-act').dataset.default = '1'; }],
     ['deficit off the subsidy', d, '', '', /the deficit's rise .* is not the subsidy's 0\.6/, () => { document.querySelector('.r-act .r-at > span .ltr').textContent = '600'; }],
