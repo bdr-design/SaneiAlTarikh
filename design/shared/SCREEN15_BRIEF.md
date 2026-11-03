@@ -9,15 +9,15 @@ The Tunisian protests (since 17 December 2010) are the HUD's toast. The game ope
 The approved panel sheet from the right, built with the shared builder and checked with the shared checker: same width (clamp(43% of the safe width, 340, 380)), from 8 pt under the top row to the dock line, the dock beside it or hidden on the 375 pt phones. The map stays central and undimmed, Egypt and the delta clear of the sheet (the map placement of the panels). One body, no tab row; it belongs to no section, so no dock item is open and the identity is the neutral grey (as «المزيد»). The game is paused: the clock's button shows play and says «اللعبة متوقفة للقرار».
 
 ## Content
-- **Header:** the category image as the strip (the owner's generic `design/generated/event_protests.png`, no Egyptian landmark), Egypt's flag (the decision is Egypt's), «احتجاجات في تونس», the line «قرار · احتجاجات وثورات · الوقت متوقف», the grey emblem (flame), and the close button that puts the decision off («لاحقًا: تأجيل القرار إلى الإشعارات…»).
+- **Header:** the category image as the strip (the owner's generic `design/generated/event_protests.png`, no Egyptian landmark), Egypt's flag (the decision is Egypt's), «احتجاجات في تونس», the line «الوقت متوقف · الافتراضي بعد 7 أيام» (the expiry visible at first view; no category word that would read the outcome, such as «ثورات»), the grey emblem (flame), and the close button that puts the decision off and resumes time («لاحقًا: تأجيل القرار إلى الإشعارات ويستأنف الوقت…»). The bell reads «الإشعارات، 3 غير مقروءة».
 - **Text (neutral, ≤90 words):** the protests since 17 December after a young man set himself on fire in Sidi Bouzid; demands for jobs and lower prices; your advisers think unemployment and prices in Egypt make the street sensitive to it.
-- **«خياراتك»:** four 44 pt rows (the panels' action rows), each with its cost and effects; the main effect a white chip, costs amber with their arrow:
-  1. «دعم أكبر للخبز» with «↑ العجز +0.5» in the title (as screen 9's costs) · «500 مليون $ سنويًا» (a part of the economy panel's 2.9 مليار $ bread line) · chip «↓ الاضطرابات −3».
+- **«خياراتك»:** four equal 44 pt rows (the panels' action rows, no accent marking one as the main choice), each with its cost and effects; the main effect a white chip, costs amber with their arrow (top-aligned so every row keeps 16/14 pt lines):
+  1. «دعم أكبر للخبز» · «↑ العجز +500 مليون $ سنويًا» (the deficit's rise shown once with its unit; a part of the economy panel's 2.9 مليار $ bread line) · chip «↓ الاضطرابات −3».
   2. «تشديد الانتشار الأمني» · «لا كلفة إضافية · ↓ الشرعية −2» · chip «↓ الاضطرابات −2».
   3. «حوار مع النقابات والأحزاب» · «10 من رأس المال السياسي» (of the state panel's 86) · chip «↓ الاضطرابات −1» (a narrower talk than the internal panel's «فتح حوار وطني»: 20, once a year, −3).
-  4. «المتابعة دون إجراء» · «الافتراضي · لا كلفة · ↑ خطر الاضطرابات».
-- **«لاحقًا»:** a link row: «يبقى في الإشعارات · الافتراضي بعد 7 أيام»; it lets time run, so the default can come.
-- **VoiceOver:** each option reads all it shows, each effect in its own clause with its direction and «أفضل» or «أسوأ», «دولار» for $. Unrest (45, the internal panel's) and legitimacy (44, the HUD's) stay within 0–100 after any option.
+  4. «المتابعة دون إجراء» · «الافتراضي · لا كلفة · ↑ الاضطرابات +1» (sized like the others).
+- **«لاحقًا»:** a link row: «يبقى في الإشعارات · يستأنف الوقت»; it lets time run, so the default can come.
+- **VoiceOver:** each option reads all it shows, each effect in its own clause with its direction and «أفضل» or «أسوأ», counts as the panels say them («3 نقاط», «نقطتين», «نقطة واحدة»), «دولار» for $. Unrest (45, the internal panel's) and legitimacy (44, the HUD's) stay within 0–100 after any option.
 
 The notification centre is screen 16.
 

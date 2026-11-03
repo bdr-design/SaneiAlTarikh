@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-03T13:07:28.919Z",
+ "ranAt": "2026-11-03T13:09:49.991Z",
  "inputs": {
   "files": [
    "index.html",
@@ -25,7 +25,7 @@
    "../../shared/map_mena_d1_overlay.svg",
    "map_overlay_cairo.svg"
   ],
-  "sha1": "5f63d7d4048e71ad4941bdcf9c469688aefd2439"
+  "sha1": "f9c18242492906eafc949a529af99b6d4e329b11"
  },
  "cleanIssues": {
   "i16promax": [],
@@ -98,15 +98,13 @@
    "sample": [
     "Nile delta covered by panel قرار: احتجاجات واسعة في تو",
     "Egypt covered by panel قرار: احتجاجات واسعة في تو",
-    "Egypt under the hit box of توسيع دعم الخبز والتموين: "
+    "Egypt under the hit box of دعم أكبر للخبز والتموين: 5"
    ]
   },
   {
    "name": "sheet width",
    "ok": true,
    "sample": [
-    "text over a control: \"+0.5\" runs into «الاضطرابات −3»",
-    "text over a control: \"من رأس المال السياسي\" runs into «الاضطرابات −1»",
     "sheet width 330 (want round(clamp(43% of 832, 340, 380)), or the room the dock leaves if 330..: 358)"
    ]
   },
@@ -226,7 +224,7 @@
    "sample": [
     "text overlap \"العجز\" / \"الاضطرابات\"",
     "text overlap \"+0.5\" / \"الاضطرابات\"",
-    "text overlap \"+0.5\" / \"−3\""
+    "text overlap \"تشديد الانتشار الأمني\" / \"الاضطرابات\""
    ]
   },
   {
@@ -265,7 +263,7 @@
    "name": "chip arrow against its sign",
    "ok": true,
    "sample": [
-    "«توسيع دعم الخبز العجز +0.5»: the chip's arrow does not agree with its sign",
+    "«دعم أكبر للخبز العجز +0.5»: the chip's arrow does not agree with its sign",
     "option 1: the chip is «up الاضطرابات −3» (want «down الاضطرابات -3»)",
     "option 1: an arrow against its sign"
    ]
@@ -274,9 +272,9 @@
    "name": "row read in part",
    "ok": true,
    "sample": [
-    "a11y: «توسيع دعم الخبز العجز +0.5» does not read its numbers",
-    "a11y: «توسيع دعم الخبز العجز +0.5» does not say «دولار»",
-    "a11y: «توسيع دعم الخبز العجز +0.5» does not say the chip's direction in words"
+    "a11y: «دعم أكبر للخبز العجز +0.5» does not read its numbers",
+    "a11y: «دعم أكبر للخبز العجز +0.5» does not say «دولار»",
+    "a11y: «دعم أكبر للخبز العجز +0.5» does not say the chip's direction in words"
    ]
   },
   {
@@ -407,7 +405,7 @@
    "name": "options reordered",
    "ok": true,
    "sample": [
-    "option 1 is «تشديد الانتشار الأمني · لا كلفة إضافية» (want «توسيع دعم الخبز · 500 مليون $ سنويًا»)",
+    "option 1 is «تشديد الانتشار الأمني · لا كلفة إضافية» (want «دعم أكبر للخبز · 500 مليون $ سنويًا»)",
     "option 1: the chip is «down الاضطرابات −2» (want «down الاضطرابات -3»)",
     "option 1: the cost is «down الشرعية −2» (want «up العجز 0.5»)"
    ]
@@ -416,7 +414,7 @@
    "name": "chip arrow against its sign",
    "ok": true,
    "sample": [
-    "«توسيع دعم الخبز العجز +0.5»: the chip's arrow does not agree with its sign",
+    "«دعم أكبر للخبز العجز +0.5»: the chip's arrow does not agree with its sign",
     "option 1: the chip is «up الاضطرابات −3» (want «down الاضطرابات -3»)",
     "option 1: an arrow against its sign"
    ]
@@ -466,9 +464,9 @@
    "name": "deficit off the subsidy",
    "ok": true,
    "sample": [
-    "a11y: «توسيع دعم الخبز العجز +0.5» does not read its numbers",
-    "a11y: «توسيع دعم الخبز والتموين» does not read all it shows: 600",
-    "option 1 is «توسيع دعم الخبز · 600 مليون $ سنويًا» (want «توسيع دعم الخبز · 500 مليون $ سنويًا»)"
+    "a11y: «دعم أكبر للخبز العجز +0.5» does not read its numbers",
+    "a11y: «دعم أكبر للخبز والتموين:» does not read all it shows: 600",
+    "option 1 is «دعم أكبر للخبز · 600 مليون $ سنويًا» (want «دعم أكبر للخبز · 500 مليون $ سنويًا»)"
    ]
   },
   {
@@ -477,7 +475,7 @@
    "sample": [
     "a11y: «حوار مع النقابات والأحزاب» does not read its numbers",
     "a11y: «حوار مع النقابات والأحزا» does not read all it shows: 100",
-    "option 3 is «حوار مع النقابات والأحزاب · الكلفة: 100 من رأس المال السياسي» (want «حوار مع النقابات والأحزاب · الكلفة: 10 من رأس المال السياسي»)"
+    "option 3 is «حوار مع النقابات والأحزاب · 100 من رأس المال السياسي» (want «حوار مع النقابات والأحزاب · 10 من رأس المال السياسي»)"
    ]
   },
   {

@@ -1,7 +1,7 @@
   <!-- The notification centre (screen 16, variant A), opened from the bell: a side sheet in the approved panel frame, the
        map central and visible (mapCentral). The player put the decision off («لاحقًا»), paused the game and gave the
        western army its order; the centre shows the tiers of §6.7 in words. The badge counts the unread notifications
-       (the decision and the two news items: 3); a pending order is not a notification and can be cancelled before time
+       (the two news items: 2; the decision was read on screen 15 and waits under «قرارات تنتظرك»); a pending order is not a notification and can be cancelled before time
        resumes. The sheet belongs to no section: the neutral grey identity, no dock item open. -->
   <section class="sheet glass" aria-label="الإشعارات">
     <div class="r-in">
@@ -9,7 +9,7 @@
         <span class="r-flag"><img src="../../shared/flags/eg.svg" alt="علم مصر"></span>
         <div class="r-tt">
           <div class="r-row"><h2 class="r-name">الإشعارات</h2></div>
-          <div class="r-sub"><span class="ltr">3</span> غير مقروءة<span class="r-dot"> · </span><span class="ltr">1</span> يناير <span class="ltr">2011</span></div>
+          <div class="r-sub"><span class="ltr">2</span> غير مقروءة<span class="r-dot"> · </span><span class="ltr">1</span> يناير <span class="ltr">2011</span></div>
         </div>
         <span class="s-emb" aria-hidden="true"><svg class="i"><use href="#i-bell"/></svg></span>
         <button class="r-x tap" aria-label="إغلاق الإشعارات"><svg class="i"><use href="#i-close"/></svg></button>
@@ -18,10 +18,10 @@
       <div class="r-body" data-tab="center">
         <section class="r-sec">
           <h3>قرارات تنتظرك</h3>
-          <div class="r-link tap r-first" role="button" tabindex="0" data-unread="1" aria-label="غير مقروء، قرار: احتجاجات في تونس، الافتراضي بعد 7 أيام. يفتح القرار">
+          <div class="r-link tap" role="button" tabindex="0" aria-label="قرار ينتظرك: احتجاجات في تونس، الافتراضي بعد 7 أيام. يفتح القرار">
             <span class="r-tile"><svg class="i"><use href="#i-warn"/></svg></span>
             <span class="r-at"><b>احتجاجات في تونس</b><span>قرار · الافتراضي بعد <span class="ltr">7</span> أيام</span></span>
-            <i class="n-dot" aria-hidden="true"></i><svg class="i r-chev"><use href="#i-chev"/></svg>
+            <svg class="i r-chev"><use href="#i-chev"/></svg>
           </div>
         </section>
         <section class="r-sec">

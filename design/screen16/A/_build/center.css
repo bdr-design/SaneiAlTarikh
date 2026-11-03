@@ -6,5 +6,7 @@
   /* an unread row: a 6 pt teal dot before the chevron (the words are in VoiceOver) */
   .n-dot { flex: none; width: 6px; height: 6px; border-radius: 50%; background: var(--teal); }
   /* a pending order: the row's look, not a button; its own «إلغاء» */
-  .n-ord { display: flex; align-items: center; gap: var(--s2); height: 44px; padding-inline: var(--s2); border-radius: 10px; background: rgba(234, 242, 247, .04); box-shadow: inset 0 0 0 1px var(--hair); }
+  .n-ord { display: flex; align-items: center; gap: var(--s2); height: 44px; padding-inline: 5px var(--s2); border-radius: var(--r-ctl); background: var(--card); box-shadow: inset 0 0 0 1px var(--stroke); }   /* the link rows' box */
+  .n-ord .r-tile { width: 34px; height: 34px; }
+  .n-ord .r-at > span { font-size: var(--fs-label); line-height: var(--lh-label); }
   .n-ord .r-at { flex: 1; min-width: 0; }

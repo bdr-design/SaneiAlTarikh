@@ -17,4 +17,6 @@ SYMBOLS = """    <symbol id="i-flame" viewBox="0 0 24 24"><path d="M12 21c-3.9 0
 # the game is paused for the decision: the clock's button shows play and says so
 PAUSED = ('<button class="play tap" aria-label="إيقاف مؤقت (اللعبة تعمل)"><svg class="i"><use href="#i-pause"/></svg></button>',
           '<button class="play tap" aria-label="تشغيل (اللعبة متوقفة للقرار)"><svg class="i"><use href="#i-play"/></svg></button>')
-panel_page.build(R, S, D, title='قرار', sec='more', tabs=['event'], fit_tab=None, css=['decision.css'], symbols=SYMBOLS, extra_subs=[PAUSED])
+# the bell reads its count; the centre is closed
+BELL = ('<button class="bell tap" aria-label="الإشعارات">', '<button class="bell tap" aria-label="الإشعارات، 3 غير مقروءة" aria-expanded="false">')
+panel_page.build(R, S, D, title='قرار', sec='more', tabs=['event'], fit_tab=None, css=['decision.css'], symbols=SYMBOLS, extra_subs=[PAUSED, BELL])

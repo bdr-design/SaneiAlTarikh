@@ -19,18 +19,18 @@ function approved() {
   return { bread: +bread[1], capital: +pc[1], unrest: +unrest[1], deficit: +deficit[1] };
 }
 const A = approved();
-const HEAD = ['احتجاجات في تونس', 'قرار · احتجاجات وثورات · الوقت متوقف'];
+const HEAD = ['احتجاجات في تونس', 'الوقت متوقف · الافتراضي بعد 7 أيام'];
 const TEXT = 'تتسع الاحتجاجات في تونس منذ 17 ديسمبر بعد أن أحرق شاب نفسه في سيدي بوزيد. يطالب المحتجون بفرص عمل وبخفض الأسعار، وتنقل القنوات العربية ما يجري كل يوم. يرى مستشاروك أن البطالة وارتفاع الأسعار في مصر قد يجعلان الشارع يتأثر بما يحدث.';
 // the options in order: title, cost line (without its amber effect), the chip [arrow, word, number], the amber costs
 const OPS = [
-  ['دعم أكبر للخبز', '500 مليون $ سنويًا', ['down', 'الاضطرابات', -3], [['up', 'العجز', 0.5]]],
+  ['دعم أكبر للخبز', '', ['down', 'الاضطرابات', -3], [['up', 'العجز', 500]]],
   ['تشديد الانتشار الأمني', 'لا كلفة إضافية', ['down', 'الاضطرابات', -2], [['down', 'الشرعية', -2]]],
   ['حوار مع النقابات والأحزاب', '10 من رأس المال السياسي', ['down', 'الاضطرابات', -1], []],
-  ['المتابعة دون إجراء', 'الافتراضي · لا كلفة', null, [['up', 'خطر الاضطرابات', null]]],
+  ['المتابعة دون إجراء', 'الافتراضي · لا كلفة', null, [['up', 'الاضطرابات', 1]]],
 ];
 const BRIEF = {
-  event: HEAD.concat([TEXT, 'خياراتك', 'دعم أكبر للخبز العجز +0.5']),
-  reach_event: [TEXT, 'خياراتك', 'دعم أكبر للخبز العجز +0.5'].concat(OPS.slice(1).map((o) => o[0]), ['لاحقًا', 'يبقى في الإشعارات · الافتراضي بعد 7 أيام']),
+  event: HEAD.concat([TEXT, 'خياراتك', 'دعم أكبر للخبز']),
+  reach_event: [TEXT, 'خياراتك'].concat(OPS.map((o) => o[0]), ['العجز +500 مليون $ سنويًا', 'لاحقًا', 'يبقى في الإشعارات · يستأنف الوقت']),
 };
 
 const screenChecks = `
@@ -69,17 +69,23 @@ if (defs.length !== 1 || !/^الافتراضي/.test(W(T(defs[0].querySelector('
 // the numbers: the extra bread subsidy a part of the economy panel's line, the deficit's rise the same amount; political
 // capital within the state panel's; unrest and legitimacy stay within 0..100
 if (ops.length === 4) {
-  const add = nums(W(T(ops[0].querySelector('.r-at > span'))))[0] / 1000, def = DATA.ops[0][3][0][2], cap = nums(W(T(ops[2].querySelector('.r-at > span'))))[0];
-  if (Math.abs(add - def) > 1e-9) issues.push('the deficit\\'s rise (' + def + ' مليار) is not the subsidy\\'s ' + add + ' مليار');
-  if (!(add > 0 && add < DATA.A.bread)) issues.push('the extra bread subsidy is not a part of the economy panel\\'s ' + DATA.A.bread + ' مليار line');
+  // the extra subsidy is the deficit's rise, in مليار $ a year, shown once
+  const add = nums(W(T(ops[0].querySelector('.r-at > span .p-cost'))))[0], cap = nums(W(T(ops[2].querySelector('.r-at > span'))))[0];
+  if (!/مليون \\$ سنويًا$/.test(W(T(ops[0].querySelector('.r-at > span .p-cost'))))) issues.push('the deficit\\'s rise is not shown with its unit and period (مليون $ سنويًا)');
+  if (!(add > 0 && add / 1000 < DATA.A.bread)) issues.push('the extra bread subsidy is not a part of the economy panel\\'s ' + DATA.A.bread + ' مليار line');
   if (!(cap > 0 && cap <= DATA.A.capital)) issues.push('the dialogue\\'s ' + cap + ' political capital is more than the state panel\\'s ' + DATA.A.capital);
   const legit = nums(T([...document.querySelectorAll('.top .stat')].find((s) => /الشرعية/.test(s.textContent)).querySelector('.num')))[0];
   DATA.ops.forEach((o, i) => [o[2]].concat(o[3]).filter(Boolean).forEach((e) => { const base = e[1] === 'الاضطرابات' ? DATA.A.unrest : e[1] === 'الشرعية' ? legit : null;
     if (base !== null && e[2] !== null && !(base + e[2] >= 0 && base + e[2] <= 100 && Math.abs(e[2]) <= 10)) issues.push('option ' + (i + 1) + ': «' + e[1] + '» ' + base + ' ' + e[2] + ' leaves 0..100 or moves more than 10'); })); }
 // «لاحقًا» (a row) and the close button put the decision off, with the expiry
 { const later = [...document.querySelectorAll('.sheet .r-link')].find((l) => W(T(l.querySelector('.r-at b'))) === 'لاحقًا'), x = q('.r-x');
-  if (!later || !/الإشعارات/.test(later.getAttribute('aria-label') || '') || !/7 أيام/.test(later.getAttribute('aria-label') || '') || !/الافتراضي/.test(T(later))) issues.push('no «لاحقًا» that keeps the decision in the notifications with its expiry');
-  if (!/^لاحقًا: تأجيل القرار/.test(x.getAttribute('aria-label') || '') || !/7 أيام/.test(x.getAttribute('aria-label') || '')) issues.push('a11y: the close button does not say it puts the decision off'); }
+  if (!later || !/الإشعارات/.test(later.getAttribute('aria-label') || '') || !/7 أيام/.test(later.getAttribute('aria-label') || '') || !/يستأنف الوقت/.test(later.getAttribute('aria-label') || '') || !/يستأنف الوقت/.test(T(later))) issues.push('no «لاحقًا» that keeps the decision in the notifications, resumes time and says the expiry');
+  if (!/^لاحقًا: تأجيل القرار/.test(x.getAttribute('aria-label') || '') || !/7 أيام/.test(x.getAttribute('aria-label') || '') || !/يستأنف الوقت/.test(x.getAttribute('aria-label') || '')) issues.push('a11y: the close button does not say it puts the decision off and resumes time');
+  // the expiry and its default are on screen from the first view, in the header's line
+  if (!/الافتراضي بعد \\d+ (أيام|يومًا|يومين|يوم)/.test(W(T(q('.r-sub'))))) issues.push('the header does not show the expiry and its default');
+  // the four options are equal: no accent marks one of them as the main choice
+  if (ops.some((o) => o.classList.contains('r-first'))) issues.push('an option is marked as the main choice');
+  { const bl = q('.bell'); if ((bl.getAttribute('aria-label') || '') !== 'الإشعارات، ' + nums(T(q('.badge')))[0] + ' غير مقروءة' || bl.getAttribute('aria-expanded') !== 'false') issues.push('a11y: the bell does not read its count'); } }
 `;
 
 require(path.join(OUT, '../../shared/check/panelcheck.js'))({
@@ -103,11 +109,16 @@ require(path.join(OUT, '../../shared/check/panelcheck.js'))({
     ['chip arrow against its sign', d, '', '', /an arrow against its sign|the chip is «up/, () => { document.querySelector('.r-act .r-chip use').setAttribute('href', '#t-up'); }],
     ['a cost not amber', d, '', '.r-act .p-cost { color: var(--t1) !important; }', /a cost not amber with its arrow/],
     ['a cost arrow not amber', d, '', '.r-act .p-cost svg { color: var(--t1) !important; }', /a cost not amber with its arrow/],
-    ['effects heard backwards', d, '', '', /a11y: option 1 does not say/, () => { document.querySelector('.r-act').setAttribute('aria-label', 'دعم أكبر للخبز والتموين: 500 مليون دولار سنويًا. ترتفع الاضطرابات 3 نقاط، أسوأ؛ ينخفض العجز 0.5 مليار دولار، أفضل'); }],
-    ['better and worse swapped', d, '', '', /a11y: option 2 does not say/, () => { document.querySelectorAll('.r-act')[1].setAttribute('aria-label', 'تشديد الانتشار الأمني: لا كلفة إضافية. تنخفض الاضطرابات بمقدار 2، أسوأ؛ تنخفض الشرعية 2، أفضل'); }],
+    ['effects heard backwards', d, '', '', /a11y: option 1 does not say/, () => { document.querySelector('.r-act').setAttribute('aria-label', 'دعم أكبر للخبز والتموين: 500 مليون دولار سنويًا. ينخفض العجز 500 مليون دولار سنويًا، أفضل؛ ترتفع الاضطرابات 3 نقاط، أسوأ'); }],
+    ['better and worse swapped', d, '', '', /a11y: option 2 does not say/, () => { document.querySelectorAll('.r-act')[1].setAttribute('aria-label', 'تشديد الانتشار الأمني: لا كلفة إضافية. تنخفض الاضطرابات نقطتين، أسوأ؛ تنخفض الشرعية نقطتين، أفضل'); }],
     ['two defaults', d, '', '', /the default is not exactly one option/, () => { document.querySelector('.r-act').dataset.default = '1'; }],
-    ['deficit off the subsidy', d, '', '', /the deficit's rise .* is not the subsidy's 0\.6/, () => { document.querySelector('.r-act .r-at > span .ltr').textContent = '600'; }],
+    ['deficit without its unit', d, '', '', /the deficit's rise is not shown with its unit/, () => { const c = document.querySelector('.r-act .p-cost'); c.lastChild.textContent = ''; }],
+    ['the subsidy beyond the bread line', d, '', '', /the extra bread subsidy is not a part of/, () => { document.querySelector('.r-act .p-cost .ltr').textContent = '+3500'; }],
+    ['expiry off the header', d, '', '', /the header does not show the expiry/, () => { const s = document.querySelector('.r-sub'); s.innerHTML = 'الوقت متوقف'; }],
+    ['an option marked main', d, '', '', /an option is marked as the main choice/, () => { document.querySelector('.r-act').classList.add('r-first'); }],
+    ['bell silent', d, '', '', /a11y: the bell does not read its count/, () => { document.querySelector('.bell').setAttribute('aria-label', 'الإشعارات'); }],
     ['capital beyond the panel', d, '', '', /the dialogue's 100 political capital is more than/, () => { document.querySelectorAll('.r-act')[2].querySelector('.r-at > span .ltr').textContent = '100'; }],
+    ['later silent on time', d, '', '', /no «لاحقًا» that keeps the decision/, () => { const l = document.querySelector('.r-link'); l.setAttribute('aria-label', l.getAttribute('aria-label').replace(' ويستأنف الوقت', '')); }],
     ['no later', d, '', '', /no «لاحقًا»/, () => { document.querySelector('.r-link').remove(); }],
     ['close silent on putting off', d, '', '', /a11y: the close button does not say it puts the decision off/, () => { document.querySelector('.r-x').setAttribute('aria-label', 'إغلاق'); }],
   ],

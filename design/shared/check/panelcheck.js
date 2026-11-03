@@ -446,8 +446,10 @@ module.exports = function makeChecker(cfg) {
       if (a.backgroundColor !== TOK.teal || a.right !== '0px') issues.push(`a bar not teal from the right: ${a.backgroundColor} right ${a.right}`); });
     qa('.sheet .n-pr i, .sheet .s-prog i').forEach((b) => { const cs = getComputedStyle(b); if (cs.backgroundColor !== TOK.teal || Math.abs(b.getBoundingClientRect().right - b.parentElement.getBoundingClientRect().right) > 0.6) issues.push('a progress bar not teal from the right'); });
     // VoiceOver: every action and link row reads whole, with the numbers it shows and «دولار», never «$»
+    // (a count may be said in words, as Arabic does for one and two: «نقطة واحدة», «نقطتين»)
+    const said = (al) => nums(al).map(Math.abs).concat(/(نقطة|تشكيل|سفينة|طائرة) واحدة?|واحدة\b/.test(al) ? [1] : [], /نقطتين|تشكيلين|اثنتين|اثنين/.test(al) ? [2] : []);
     qa('.sheet .r-act, .sheet .r-link').forEach((a) => { const al = a.getAttribute('aria-label') || '', at = a.querySelector('.r-at'), want = nums(at.innerText).concat(a.querySelector('.r-chip') ? nums(a.querySelector('.r-chip').innerText) : []);
-      if (!al || want.some((x) => !nums(al).map(Math.abs).includes(Math.abs(x)))) issues.push(`a11y: «${T(at && at.querySelector('b'))}» does not read its numbers`);
+      if (!al || want.some((x) => !said(al).includes(Math.abs(x)))) issues.push(`a11y: «${T(at && at.querySelector('b'))}» does not read its numbers`);
       if (al.includes('$')) issues.push(`a11y: «${T(at && at.querySelector('b'))}» reads «$» (say «دولار»)`);
       if (at && at.innerText.includes('$') && !al.includes('دولار')) issues.push(`a11y: «${T(at.querySelector('b'))}» does not say «دولار»`);
       const chip = a.querySelector('.r-chip'), use = chip && chip.querySelector('use');
@@ -458,7 +460,7 @@ module.exports = function makeChecker(cfg) {
     // of its visible text is in its label (the separator «·» aside)
     qa('.sheet [role="img"], .sheet .tap[role="button"], .sheet .r-act[aria-label]').filter((e) => e.innerText.trim() && !e.matches('.r-tab')).forEach((e) => { const al = (e.getAttribute('aria-label') || '').replace(/[،.:؛]/g, ' '), shown = e.innerText.replace(/[·،.:؛]/g, ' ');
       const words = shown.split(/\s+/).filter((w) => w.length > 1 && !/^[\d.%+−-]+$/.test(w)), missW = words.filter((w) => !al.includes(w.replace(/[«»]/g, '')));
-      const missN = nums(shown).filter((x) => !nums(al).map(Math.abs).includes(Math.abs(x)));
+      const missN = nums(shown).filter((x) => !said(al).includes(Math.abs(x)));
       if (missW.length || missN.length) issues.push(`a11y: «${(e.getAttribute('aria-label') || '').slice(0, 24)}» does not read all it shows: ${missW.concat(missN).slice(0, 4).join(' ')}`); });
     // a trend line's arrow agrees with its sign
     qa('.sheet .r-kr').forEach((k) => { const u = k.querySelector('use'), n = nums(k.innerText)[0]; if (u && n !== undefined && n !== 0 && /#t-(up|down)/.test(u.getAttribute('href')) && (u.getAttribute('href') === '#t-up') !== (n > 0)) issues.push(`the arrow of «${T(k)}» does not agree with its sign`); });

@@ -2,14 +2,14 @@
 // (design/shared/check/panelcheck.js: every generic rule of the approved panels, for a sheet with one body and no
 // section). This file adds the centre's own rules: the game shown paused; the sections of §6.7 in words and in order,
 // each row under its own section; the badge, the header's count and the bell's VoiceOver label = the unread rows (the
-// brief's 3), the bell shown open; unread rows with their dot and «غير مقروء», no other row; the pending order a group,
+// brief's 2: the decision was read and waits), the bell shown open; unread rows with their dot and «غير مقروء», no other row; the pending order a group,
 // not a notification, with its own «إلغاء»; every row with its icon, and its chevron where it opens something.
 // Usage: NODE_PATH=.../node_modules node render.js [ids...]   (default: all 7)   |   node render.js --selftest
 const path = require('path');
 const OUT = path.resolve(__dirname, '..');
 
-const HEAD = ['الإشعارات', '3 غير مقروءة · 1 يناير 2011'];
-const ROWS = [['احتجاجات في تونس', 'قرار · الافتراضي بعد 7 أيام', 'قرارات تنتظرك', true], ['المنطقة الغربية إلى سيوة', 'يُنفَّذ عند استئناف الوقت', 'أوامر معلقة', false],
+const HEAD = ['الإشعارات', '2 غير مقروءة · 1 يناير 2011'];
+const ROWS = [['احتجاجات في تونس', 'قرار · الافتراضي بعد 7 أيام', 'قرارات تنتظرك', false], ['المنطقة الغربية إلى سيوة', 'يُنفَّذ عند استئناف الوقت', 'أوامر معلقة', false],
   ['السودان: استفتاء الجنوب بعد 8 أيام', '9 يناير 2011 · الجوار', 'مهم', true], ['القمح عالميًا في أعلى مستوى منذ 2008', 'السلع · ديسمبر 2010', 'للعلم', true]];
 const SECTIONS = ['قرارات تنتظرك', 'أوامر معلقة', 'مهم', 'للعلم'];
 const BRIEF = {
@@ -34,10 +34,11 @@ DATA.rows.forEach(([nm, line, sec, unread], i) => { const r = rows.find((x) => W
   if (!r.querySelector('.r-tile svg')) issues.push('«' + nm + '» has no icon'); });
 // unread: dot and words exactly on the unread rows, never on the pending order; the counts all agree with the brief's 3
 const unread = rows.filter((r) => r.dataset.unread === '1'), badge = nums(T(q('.badge')))[0], head = nums(W(T(q('.r-sub'))))[0];
-if (badge !== unread.length || head !== unread.length || unread.length !== 3) issues.push('the badge says ' + badge + ', the header ' + head + ', the unread rows are ' + unread.length + ' (the brief\\'s 3)');
+if (badge !== unread.length || head !== unread.length || unread.length !== 2) issues.push('the badge says ' + badge + ', the header ' + head + ', the unread rows are ' + unread.length + ' (the brief\\'s 2)');
 { const bl = q('.bell'); if ((bl.getAttribute('aria-label') || '') !== 'الإشعارات، ' + badge + ' غير مقروءة' || bl.getAttribute('aria-expanded') !== 'true') issues.push('a11y: the bell does not read its count and show the centre open'); }
 rows.forEach((r) => { const u = r.dataset.unread === '1', nm = W(T(r.querySelector('.r-at b')));
   if (u !== !!r.querySelector('.n-dot') || u !== /^غير مقروء، /.test(r.getAttribute('aria-label') || '')) issues.push('«' + nm + '»: the unread dot and words do not match its state');
+  if (secOf(r) === 'قرارات تنتظرك' && !/^قرار ينتظرك: /.test(r.getAttribute('aria-label') || '')) issues.push('«' + nm + '» does not say it waits for a decision');
   if (r.matches('.r-link') && !r.querySelector('.r-chev')) issues.push('«' + nm + '» has no chevron'); });
 // the pending order: a group (not a button, not a notification) with its own «إلغاء»
 { const o = q('.sheet .n-ord'), b = o && o.querySelector('button.r-btn');
@@ -62,7 +63,8 @@ require(path.join(OUT, '../../shared/check/panelcheck.js'))({
     ['sections reordered', d, '', '', /the sections are/, () => { const h = document.querySelectorAll('.r-sec h3'); h[2].textContent = 'للعلم'; h[3].textContent = 'مهم'; }],
     ['rows swapped between tiers', d, '', '', /is not under «مهم»|is not under «للعلم»/, () => { const s = document.querySelectorAll('.r-sec'), a = s[2].querySelector('.r-link'), b = s[3].querySelector('.r-link'); s[2].appendChild(b); s[3].appendChild(a); }],
     ['badge off', d, '', '', /the badge says 4/, () => { document.querySelector('.badge').textContent = '4'; }],
-    ['counts changed together', d, '', '', /the unread rows are 2 \(the brief's 3\)/, () => { document.querySelector('.badge').textContent = '2'; document.querySelector('.r-sub .ltr').textContent = '2'; document.querySelectorAll('[data-unread="1"]')[1].removeAttribute('data-unread'); }],
+    ['counts changed together', d, '', '', /the unread rows are 1 \(the brief's 2\)/, () => { document.querySelector('.badge').textContent = '1'; document.querySelector('.r-sub .ltr').textContent = '1'; document.querySelectorAll('[data-unread="1"]')[1].removeAttribute('data-unread'); }],
+    ['the decision not said waiting', d, '', '', /does not say it waits for a decision/, () => { const r = document.querySelector('.r-sec .r-link'); r.setAttribute('aria-label', r.getAttribute('aria-label').replace('قرار ينتظرك: ', 'قرار: ')); }],
     ['bell silent', d, '', '', /a11y: the bell does not read its count/, () => { document.querySelector('.bell').setAttribute('aria-label', 'الإشعارات'); }],
     ['order counted unread', d, '', '', /marked unread|unread dot and words/, () => { document.querySelector('.n-ord').dataset.unread = '1'; }],
     ['order not cancellable', d, '', '', /the pending order is not a group with its own «إلغاء»/, () => { document.querySelector('.n-ord .r-btn').remove(); }],
