@@ -19,6 +19,8 @@ const DRAMA = ['كارثة', 'دمار شامل', 'فناء', 'مأساة', 'ر�
 const screenChecks = `
 const { issues, qa, q, T, nums, DATA } = X;
 const W = (s) => (s || '').replace(/\\s+/g, ' ').trim();
+// the stopped clock and the speed chip are disabled, and look it
+{ const pl = q('.play'), sp = q('.spd'); if (sp.getAttribute('aria-disabled') !== 'true' || sp.hasAttribute('aria-haspopup') || getComputedStyle(pl.querySelector('svg')).color !== X.TOK.t2 || getComputedStyle(sp.querySelector('span')).color !== X.TOK.t2) issues.push('the clock and the speed chip do not look and read disabled'); }
 { const pl = q('.play'); if (pl.querySelector('use').getAttribute('href') !== '#i-play' || !/الحملة منتهية/.test(pl.getAttribute('aria-label') || '') || pl.getAttribute('aria-disabled') !== 'true') issues.push('the clock is not shown stopped for good (play glyph, «الحملة منتهية», disabled)');
   if (W(q('.top .dmy').dataset.full || T(q('.top .dmy'))) !== '15 مارس 2034') issues.push('the HUD date is not the end date 15 March 2034'); }
 // sober: the text is the brief's; no score, no headline numbers, no image strip, no country, no drama words
@@ -39,7 +41,7 @@ DATA.drama.forEach((w) => { if (bt.includes(w)) issues.push('a drama or score wo
 // the HUD: no real person after 2011; the toast says the campaign ended
 { const n = q('.nation'), l = T(q('.nation .ldr')); if (/مبارك/.test(l + (n.getAttribute('aria-label') || ''))) issues.push('the nation card names a real person in 2034');
   if (!/انتهت الحملة/.test(T(q('.alert-prev .txt')))) issues.push('the toast does not say the campaign ended'); }
-if ((q('.r-x').getAttribute('aria-label') || '') !== 'العودة إلى القائمة الرئيسية') issues.push('a11y: the close button does not say where it leads');
+if ((q('.r-x').getAttribute('aria-label') || '') !== 'العودة إلى الخريطة') issues.push('a11y: the close button does not say where it leads');
 `;
 
 require(path.join(OUT, '../../shared/check/panelcheck.js'))({
@@ -49,6 +51,8 @@ require(path.join(OUT, '../../shared/check/panelcheck.js'))({
   HEAD, BRIEF, screenChecks, DATA: { text: TEXT, countries: COUNTRIES, drama: DRAMA },
   skipGeneric: ['section colour on data', 'section colour on a rule', 'emblem drawn grey', 'why without its subject', 'amber value without its icon', '% before its number', 'brief text hidden', '18 pt misuse', 'clipped text', 'gap', 'faint text', 'text into a control', 'chip arrow against its sign', 'chip not white', 'row read in part'],
   cases: (d, se) => [
+    ['clock looks live', d, '', '.play[aria-disabled="true"] svg { color: rgb(234, 242, 247) !important; }', /the clock and the speed chip do not look and read disabled/],
+    ['speed menu still offered', d, '', '', /the clock and the speed chip do not look and read disabled/, () => { const s = document.querySelector('.spd'); s.removeAttribute('aria-disabled'); s.setAttribute('aria-haspopup', 'menu'); }],
     ['brief text hidden (nuclear)', d, '', '', /brief text not fully visible/, () => { document.querySelector('.r-name').style.opacity = '0'; }],
     ['18 pt misuse (nuclear)', d, '', '.d-text { font-size: 18px !important; font-weight: 700 !important; }', /18 pt is for/],
     ['clipped text (nuclear)', d, '', '.d-text { margin-inline-start: -40px !important; }', /clipped text \(sides\)|text outside the sheet's 12 pt padding/],

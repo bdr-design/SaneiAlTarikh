@@ -577,6 +577,13 @@
   .alert-prev .txt { width: 127.59px; text-align: start; }
   /* the end sheets are plain: no photo strip in the header */
   .sheet .r-hd { background-image: none; }
+  /* the stopped clock and the speed chip look disabled, not like the live controls of the other screens */
+  .play[aria-disabled="true"] svg, .spd[aria-disabled="true"] span { color: var(--t2); }
+  .spd[aria-disabled="true"] { background: transparent; }
+  /* the nation card keeps B3's widths whatever the leader line says (B3: «حسني مبارك» 53.64 pt, «· جمهورية رئاسية» 73.23 pt),
+     so the indicator strip stays in place */
+  .ntext .ldr { width: 53.64px; }
+  .ntext .rg { width: 73.23px; }
 </style>
 </head>
 <body>
@@ -677,12 +684,12 @@
 <div class="hud">
   <!-- Top row: identity (right), indicators (centre), date + speed (left); all 36 pt, all at y = 8 -->
   <header class="top">
-    <button class="nation glass bar tap" aria-label="الدولة: مصر، المجلس الانتقالي، جمهورية رئاسية">
+    <button class="nation glass bar tap" aria-label="الدولة: مصر، المجلس الانتقالي، حكم انتقالي">
       <span class="flag"><img src="../../shared/flag_eg.svg" alt="علم مصر"></span>
       <span class="ntext">
         <b class="nm">مصر</b>
-        <span class="ldr">المجلس الانتقالي</span>
-        <span class="rg">جمهورية رئاسية</span>
+        <span class="ldr">المجلس</span>
+        <span class="rg">حكم انتقالي</span>
       </span>
     </button>
 
@@ -693,11 +700,11 @@
       </span></button>
       <button class="stat tap"><span class="stat-in">
         <span class="lblrow"><span class="lbl">الاستقرار</span><svg class="trend down"><use href="#t-down"/></svg></span>
-        <span class="valrow"><svg class="i"><use href="#i-anchor"/></svg><span class="num ltr">58%</span></span>
+        <span class="valrow"><svg class="i"><use href="#i-anchor"/></svg><span class="num ltr">31%</span></span>
       </span></button>
       <button class="stat tap"><span class="stat-in">
         <span class="lblrow"><span class="lbl">الشرعية</span><svg class="trend down"><use href="#t-down"/></svg></span>
-        <span class="valrow"><svg class="i"><use href="#i-seal"/></svg><span class="num">44</span></span>
+        <span class="valrow"><svg class="i"><use href="#i-seal"/></svg><span class="num">35</span></span>
       </span></button>
       <button class="stat tap"><span class="stat-in">
         <span class="lblrow"><span class="lbl">القوة البشرية</span><svg class="trend flat"><use href="#t-flat"/></svg></span>
@@ -719,7 +726,7 @@
            Long-press on the speed button = pause (same as choosing إيقاف), so one finger can stop time fast. -->
       <span class="cap" role="group" aria-label="سرعة اللعب">
         <button class="play tap" aria-label="الوقت متوقف حتى تختار" aria-disabled="true"><svg class="i"><use href="#i-play"/></svg></button>
-        <button class="spd tap" aria-label="السرعة 1×" aria-haspopup="menu" aria-controls="speedmenu"><span class="ltr">1×</span></button>
+        <button class="spd tap" aria-label="السرعة 1× (غير متاحة)" aria-disabled="true"><span class="ltr">1×</span></button>
       </span>
     </div>
   </header>
@@ -785,6 +792,7 @@
             <span class="r-tile"><svg class="i"><use href="#i-star"/></svg></span>
             <span class="r-at"><b>إنهاء الحملة</b><span>يعرض تقرير الأمة</span></span>
           </button>
+          <p class="s-note">يمكنك الاختيار لاحقًا من الإشعارات، والوقت متوقف حتى تختار.</p>
         </section>
       </div>
       <span class="r-hint" aria-hidden="true"><svg class="i"><use href="#i-chev"/></svg></span>
@@ -812,6 +820,10 @@
       compact = document.documentElement.dataset.fit === '5';
     dow.dataset.dow = dw; dm.dataset.full = d;
     dm.textContent = compact ? m[1] : d; dow.textContent = compact ? dw + ' · ' + m[2] : dw;
+    /* VoiceOver reads the date whole and in order («السبت 1 يناير 2011»), whichever line holds the year (role "text":
+       WebKit reads it as one phrase; the native HUD combines the two lines the same way) */
+    var tx = dow.parentNode; tx.setAttribute('role', 'text'); tx.setAttribute('aria-label', dw + ' ' + d);
+    dow.setAttribute('aria-hidden', 'true'); dm.setAttribute('aria-hidden', 'true');
   };
   function widestDate(compact) {
     var tx = document.querySelector('.date .dtext'), w = 0;

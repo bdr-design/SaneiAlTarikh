@@ -8,3 +8,10 @@
   .alert-prev .txt { width: 127.59px; text-align: start; }
   /* the end sheets are plain: no photo strip in the header */
   .sheet .r-hd { background-image: none; }
+  /* the stopped clock and the speed chip look disabled, not like the live controls of the other screens */
+  .play[aria-disabled="true"] svg, .spd[aria-disabled="true"] span { color: var(--t2); }
+  .spd[aria-disabled="true"] { background: transparent; }
+  /* the nation card keeps B3's widths whatever the leader line says (B3: «حسني مبارك» 53.64 pt, «· جمهورية رئاسية» 73.23 pt),
+     so the indicator strip stays in place */
+  .ntext .ldr { width: 53.64px; }
+  .ntext .rg { width: 73.23px; }

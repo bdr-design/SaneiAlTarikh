@@ -577,6 +577,13 @@
   .alert-prev .txt { width: 127.59px; text-align: start; }
   /* sober: no photo strip in the header (the brief: no image) */
   .sheet .r-hd { background-image: none; }
+  /* the stopped clock and the speed chip look disabled, not like the live controls of the other screens */
+  .play[aria-disabled="true"] svg, .spd[aria-disabled="true"] span { color: var(--t2); }
+  .spd[aria-disabled="true"] { background: transparent; }
+  /* the nation card keeps B3's widths whatever the leader line says (B3: «حسني مبارك» 53.64 pt, «· جمهورية رئاسية» 73.23 pt),
+     so the indicator strip stays in place */
+  .ntext .ldr { width: 53.64px; }
+  .ntext .rg { width: 73.23px; }
 </style>
 </head>
 <body>
@@ -677,11 +684,11 @@
 <div class="hud">
   <!-- Top row: identity (right), indicators (centre), date + speed (left); all 36 pt, all at y = 8 -->
   <header class="top">
-    <button class="nation glass bar tap" aria-label="الدولة: مصر، رئيس الجمهورية، جمهورية رئاسية">
+    <button class="nation glass bar tap" aria-label="الدولة: مصر، رئيس الدولة، جمهورية رئاسية">
       <span class="flag"><img src="../../shared/flag_eg.svg" alt="علم مصر"></span>
       <span class="ntext">
         <b class="nm">مصر</b>
-        <span class="ldr">رئيس الجمهورية</span>
+        <span class="ldr">رئيس الدولة</span>
         <span class="rg">جمهورية رئاسية</span>
       </span>
     </button>
@@ -719,7 +726,7 @@
            Long-press on the speed button = pause (same as choosing إيقاف), so one finger can stop time fast. -->
       <span class="cap" role="group" aria-label="سرعة اللعب">
         <button class="play tap" aria-label="الحملة منتهية (الوقت متوقف)" aria-disabled="true"><svg class="i"><use href="#i-play"/></svg></button>
-        <button class="spd tap" aria-label="السرعة 1×" aria-haspopup="menu" aria-controls="speedmenu"><span class="ltr">1×</span></button>
+        <button class="spd tap" aria-label="السرعة 1× (غير متاحة)" aria-disabled="true"><span class="ltr">1×</span></button>
       </span>
     </div>
   </header>
@@ -770,7 +777,7 @@
           <div class="r-sub"><span class="ltr">15</span> مارس <span class="ltr">2034</span></div>
         </div>
         <span class="s-emb" aria-hidden="true"><svg class="i"><use href="#i-warn"/></svg></span>
-        <button class="r-x tap" aria-label="العودة إلى القائمة الرئيسية"><svg class="i"><use href="#i-close"/></svg></button>
+        <button class="r-x tap" aria-label="العودة إلى الخريطة"><svg class="i"><use href="#i-close"/></svg></button>
       </header>
 
       <div class="r-body" data-tab="nuclear">
@@ -813,6 +820,10 @@
       compact = document.documentElement.dataset.fit === '5';
     dow.dataset.dow = dw; dm.dataset.full = d;
     dm.textContent = compact ? m[1] : d; dow.textContent = compact ? dw + ' · ' + m[2] : dw;
+    /* VoiceOver reads the date whole and in order («السبت 1 يناير 2011»), whichever line holds the year (role "text":
+       WebKit reads it as one phrase; the native HUD combines the two lines the same way) */
+    var tx = dow.parentNode; tx.setAttribute('role', 'text'); tx.setAttribute('aria-label', dw + ' ' + d);
+    dow.setAttribute('aria-hidden', 'true'); dm.setAttribute('aria-hidden', 'true');
   };
   function widestDate(compact) {
     var tx = document.querySelector('.date .dtext'), w = 0;

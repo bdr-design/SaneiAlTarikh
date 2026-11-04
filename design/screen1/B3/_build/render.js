@@ -68,6 +68,8 @@ async function measure(p, d, menu) {
       { const dt = q('.date .dtext').getBoundingClientRect(); if (dt.width + 0.5 < window.__fit.dateRoom) issues.push(`the date's room ${dt.width.toFixed(1)} is less than the widest date's ${window.__fit.dateRoom}`); }
       { const dw = q('.date .dow'), dm = q('.date .dmy'), yr = (dm.dataset.full || '').slice(-4), c = window.__fit.level === 5;
         if (c ? !(dw.textContent.endsWith(' · ' + yr) && !dm.textContent.includes(yr)) : dm.textContent !== dm.dataset.full) issues.push(`the date is not shown as fit ${window.__fit.level} wants: «${dw.textContent} | ${dm.textContent}»`); }
+      { const tx = q('.date .dtext'), dw = q('.date .dow'), dm = q('.date .dmy');
+        if (tx.getAttribute('aria-label') !== dw.dataset.dow + ' ' + dm.dataset.full || dw.getAttribute('aria-hidden') !== 'true' || dm.getAttribute('aria-hidden') !== 'true') issues.push('a11y: the date is not read whole and in order'); }
       for (let i = 1; i < stats.length; i++) {
         const g = stats[i - 1].left - stats[i].right; // touching boxes
         if (g > 0.05) off('indicator spacing', '.stat', g.toFixed(2), 0);
@@ -312,11 +314,11 @@ async function selftest(b) {
   const p2 = await open(ctx, PAGE + `?w=${d.w}&h=${d.h}&side=${d.side}&bottom=${d.bottom}&cutout=${d.cutout}&speedmenu=1`);
   await p2.addStyleTag({ content: `.dock-item.end { min-width: 44px !important; --hx: 0px !important; } .ntext .rg { display: none !important; }
     .mrow.stop::after { content: none !important; } .btn.mode::before { width: max(100%, 44px) !important; } .date .dtext { min-width: 0 !important; }` });
-  await p2.evaluate(() => { document.querySelector('.date .dmy').textContent = '1 يناير'; });   // the year lost outside fit 5
+  await p2.evaluate(() => { document.querySelector('.date .dmy').textContent = '1 يناير'; document.querySelector('.date .dtext').setAttribute('aria-label', '1 يناير'); });   // the year lost outside fit 5; the date read in part
   const m2 = await measure(p2, d, true);
-  const expect2 = [/dock end padding/, /nation card fit 0: .rg not shown/, /separator under إيقاف/, /hit box does not cover the control: الخريطة/, /the date's room .* is less than the widest date's/, /the date is not shown as fit 0 wants/];
+  const expect2 = [/dock end padding/, /nation card fit 0: .rg not shown/, /separator under إيقاف/, /hit box does not cover the control: الخريطة/, /the date's room .* is less than the widest date's/, /the date is not shown as fit 0 wants/, /a11y: the date is not read whole and in order/];
   const missed2 = expect2.filter((re) => !m2.issues.some((i) => re.test(i)));
-  console.log(missed2.length ? 'SELFTEST FAILED, not caught: ' + missed2.join(', ') : 'selftest OK: all 6 planted QA defects were caught');
+  console.log(missed2.length ? 'SELFTEST FAILED, not caught: ' + missed2.join(', ') : 'selftest OK: all 7 planted QA defects were caught');
   await ctx.close();
 }
 

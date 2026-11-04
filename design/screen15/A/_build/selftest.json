@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-04T11:39:21.581Z",
+ "ranAt": "2026-11-04T12:13:57.320Z",
  "inputs": {
   "files": [
    "index.html",
@@ -25,7 +25,7 @@
    "../../shared/map_mena_d1_overlay.svg",
    "map_overlay_cairo.svg"
   ],
-  "sha1": "4b1c82f4edef350d05a0fd60355efadc8dc73b6e"
+  "sha1": "00cd46743da0bef7133b895509ce20a6b9cedc4e"
  },
  "cleanIssues": {
   "i16promax": [],
@@ -128,16 +128,16 @@
    "ok": true,
    "sample": [
     "text over a control: \"مليون $ سنويًا\" runs into «الاضطرابات −3»",
-    "text over a control: \"−2\" runs into «الاضطرابات −2»",
-    "text over a control: \"حوار مع النقابات والأحزاب\" runs into «الاضطرابات −1»"
+    "text over a control: \"حوار مع النقابات والأحزاب\" runs into «الاضطرابات −1»",
+    "sheet width 330 (want round(clamp(43% of 832, 340, 380)), or the room the dock leaves if 330..: 358)"
    ]
   },
   {
    "name": "sheet top",
    "ok": true,
    "sample": [
-    "hit overlap الخزينة 36.0 مليار $ / لاحقًا: تأجيل القرار إلى ا",
     "hit overlap الاستقرار 58% / لاحقًا: تأجيل القرار إلى ا",
+    "hit overlap الشرعية 44 / لاحقًا: تأجيل القرار إلى ا",
     "panel overlap الدولة: مصر، حسني مبارك، ج / قرار: احتجاجات في تونس"
    ]
   },
@@ -302,6 +302,24 @@
    ]
   },
   {
+   "name": "a long headline label",
+   "ok": true,
+   "sample": [
+    "text outside the sheet's 12 pt padding: \"عنوان طويل جدًا لا يتسع لخانته أبدًا\"",
+    "horizontal overflow in عنوان طويل جدًا لا يتسع لخ",
+    "a cell runs out of its row: «عنوان طويل جدًا لا يتسع »"
+   ]
+  },
+  {
+   "name": "a long status cell",
+   "ok": true,
+   "sample": [
+    "clipped text (sides): \"قيمة طويلة جدًا لا تتسع لنصف الجدول\" 407.84..608.44 y 122.5..138.5",
+    "text outside the sheet's 12 pt padding: \"قيمة طويلة جدًا لا تتسع لنصف الجدول\"",
+    "horizontal overflow in خانةقيمة طويلة جدًا لا تتس"
+   ]
+  },
+  {
    "name": "font weight (no tabs)",
    "ok": true,
    "sample": [
@@ -423,9 +441,9 @@
   },
   {
    "name": "pause unsaid",
-   "ok": false,
+   "ok": true,
    "sample": [
-    "the header does not show the expiry and its default",
+    "the sheet does not say the time is stopped",
     "brief text missing: الوقت متوقف · الافتراضي بعد 7 أيام",
     "brief text missing: الوقت متوقف · الافتراضي بعد 7 أيام"
    ]
@@ -443,7 +461,7 @@
    "name": "options reordered",
    "ok": true,
    "sample": [
-    "option 1 is «تشديد الانتشار الأمني · لا كلفة إضافية» (want «دعم أكبر للخبز · »)",
+    "option 1 is «تشديد الانتشار الأمني · لا كلفة» (want «دعم أكبر للخبز · »)",
     "option 1: the chip is «down الاضطرابات −2» (want «down الاضطرابات -3»)",
     "option 1: the cost is «down الشرعية −2» (want «up العجز 500»)"
    ]
@@ -541,14 +559,14 @@
   },
   {
    "name": "a cost line hidden",
-   "ok": false,
+   "ok": true,
    "sample": [
     "brief text missing: 10 من رأس المال السياسي"
    ]
   },
   {
    "name": "a chip hidden",
-   "ok": false,
+   "ok": true,
    "sample": [
     "brief text cannot be scrolled clear of the fades: الاضطرابات −2"
    ]

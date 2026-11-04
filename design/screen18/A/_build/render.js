@@ -14,13 +14,15 @@ const PILLARS = [['الاقتصاد', 'دخل الفرد من 2,640 إلى 9,800
   ['السيادة والأمن', 'كل الأراضي · بلا حرب خاسرة', 75, 70], ['الاستقرار', 'من 58% إلى 71%', 66, 54], ['المكانة الدولية', 'النفوذ من 62 إلى 70', 57, 42]];
 const NOTE = 'بدولارات 2011 الثابتة · تُلغى النتيجة إن استُخدمت خيارات غير واقعية';
 const BRIEF = {
-  report: HEAD.concat(['النتيجة', '68', 'الأعلى', '75', 'السيادة والأمن', 'الأدنى', '57', 'المكانة الدولية']),
-  reach_report: ['المحاور الخمسة'].concat(PILLARS.map((p) => p[0]), PILLARS.map((p) => p[1]), [NOTE, 'لعبة جديدة', 'من القائمة الرئيسية', 'تصفح الخريطة في 2100', 'بلا وقت']),
+  report: HEAD.concat(['النتيجة', '68', 'في 2011', '54', 'بداية الحملة', 'الأعلى', '75', 'السيادة والأمن']),
+  reach_report: ['المحاور الخمسة'].concat(PILLARS.map((p) => p[0]), PILLARS.map((p) => p[1]), [NOTE, 'لعبة جديدة', 'من القائمة الرئيسية', 'تصفح الخريطة في 2100', 'الوقت متوقف']),
 };
 
 const screenChecks = `
 const { issues, qa, q, T, nums, DATA } = X;
 const W = (s) => (s || '').replace(/\\s+/g, ' ').trim();
+// the stopped clock and the speed chip are disabled, and look it
+{ const pl = q('.play'), sp = q('.spd'); if (sp.getAttribute('aria-disabled') !== 'true' || sp.hasAttribute('aria-haspopup') || getComputedStyle(pl.querySelector('svg')).color !== X.TOK.t2 || getComputedStyle(sp.querySelector('span')).color !== X.TOK.t2) issues.push('the clock and the speed chip do not look and read disabled'); }
 // the clock stopped for good, at the end date
 { const pl = q('.play'); if (pl.querySelector('use').getAttribute('href') !== '#i-play' || !/الحملة منتهية/.test(pl.getAttribute('aria-label') || '') || pl.getAttribute('aria-disabled') !== 'true') issues.push('the clock is not shown stopped for good (play glyph, «الحملة منتهية», disabled)');
   if (W(q('.top .dmy').dataset.full || T(q('.top .dmy'))) !== '31 ديسمبر 2100') issues.push('the date is not 31 December 2100'); }
@@ -42,8 +44,8 @@ DATA.pillars.forEach(([nm, line, s, s0]) => { const r = rows.find((x) => W(T(x.q
   if (kv(0) !== mean) issues.push('the result ' + kv(0) + ' is not the mean of the pillars (' + mean + ')');
   if (nums(kr(0))[0] !== mean - base) issues.push('the result\\'s change ' + nums(kr(0))[0] + ' is not the result − the 2011 mean (' + (mean - base) + ')');
   const nm = (i) => W(T(rows[i].querySelector('.w-n b'))), hi = sc.indexOf(Math.max(...sc)), lo = sc.indexOf(Math.min(...sc));
-  if (kv(1) !== sc[hi] || kr(1) !== nm(hi)) issues.push('the highest is not «' + nm(hi) + '» ' + sc[hi]);
-  if (kv(2) !== sc[lo] || kr(2) !== nm(lo)) issues.push('the lowest is not «' + nm(lo) + '» ' + sc[lo]); }
+  if (kv(1) !== base || W(T(k[1].querySelector('.r-kl'))) !== 'في 2011') issues.push('the 2011 cell is not the mean of the 2011 scores (' + base + ')');
+  if (kv(2) !== sc[hi] || kr(2) !== nm(hi)) issues.push('the highest is not «' + nm(hi) + '» ' + sc[hi]); }
 // the HUD shows the report's 2100 values (stability, influence)
 { const st = [...document.querySelectorAll('.top .stat')], hv = (l) => { const s = st.find((e) => W(T(e.querySelector('.lbl'))) === l); return s && nums(T(s.querySelector('.num')))[0]; };
   const pv = (nm) => { const r = rows.find((x) => W(T(x.querySelector('.w-n b'))) === nm); return r ? nums(T(r.querySelector('.w-n > span'))).slice(-1)[0] : null; };
@@ -65,6 +67,8 @@ require(path.join(OUT, '../../shared/check/panelcheck.js'))({
   HEAD, BRIEF, screenChecks, DATA: { pillars: PILLARS, note: NOTE },
   skipGeneric: ['section colour on data', 'section colour on a rule', 'emblem drawn grey', 'why without its subject', 'amber value without its icon', 'chip arrow against its sign', 'chip not white', 'tap in the side inset', 'text into a control'],
   cases: (d, se) => [
+    ['clock looks live', d, '', '.play[aria-disabled="true"] svg { color: rgb(234, 242, 247) !important; }', /the clock and the speed chip do not look and read disabled/],
+    ['speed menu still offered', d, '', '', /the clock and the speed chip do not look and read disabled/, () => { const s = document.querySelector('.spd'); s.removeAttribute('aria-disabled'); s.setAttribute('aria-haspopup', 'menu'); }],
     ['tap in the side inset (report)', d, '&tab=report&scroll=end', '.sheet { right: -30px !important; }', /tap in side inset/],
     ['amber value without its icon (report)', d, '', '', /colour alone: .* \(its label's icon is not in its colour\)/, () => { document.querySelector('.r-kv b').classList.add('r-amber'); }],
     ['text into a control (report)', d, '&tab=report&scroll=end', '.r-link .r-at { transform: translateX(-215px) !important; }', /text over a control|text overlap|icon over text/],
@@ -81,8 +85,8 @@ require(path.join(OUT, '../../shared/check/panelcheck.js'))({
     ['change unsaid', d, '', '', /a11y: «الاقتصاد» does not say its score and change/, () => { const r = document.querySelector('.e-p'); r.setAttribute('aria-label', r.getAttribute('aria-label').replace('ارتفع 20 نقطة', 'ارتفع')); }],
     ['result not the mean', d, '', '', /the result 70 is not the mean/, () => { document.querySelector('.r-kv b').textContent = '70'; }],
     ['result change off', d, '', '', /the result's change 16 is not/, () => { document.querySelector('.r-kpi .r-kr .ltr').textContent = '+16'; }],
-    ['highest wrong', d, '', '', /the highest is not «السيادة والأمن» 75/, () => { document.querySelectorAll('.r-kpi .r-kr')[1].textContent = 'الاقتصاد'; }],
-    ['lowest wrong', d, '', '', /the lowest is not «المكانة الدولية» 57/, () => { document.querySelectorAll('.r-kpi .r-kv b')[2].textContent = '60'; }],
+    ['highest wrong', d, '', '', /the highest is not «السيادة والأمن» 75/, () => { document.querySelectorAll('.r-kpi .r-kr')[2].textContent = 'الاقتصاد'; }],
+    ['baseline off', d, '', '', /the 2011 cell is not the mean of the 2011 scores \(54\)/, () => { document.querySelectorAll('.r-kpi .r-kv b')[1].textContent = '50'; }],
     ['HUD stability off', d, '', '', /the HUD stability 58 is not the report's 71/, () => { [...document.querySelectorAll('.top .stat')].find((e) => e.textContent.includes('الاستقرار')).querySelector('.num').textContent = '58%'; }],
     ['HUD influence off', d, '', '', /the HUD influence 62 is not the report's 70/, () => { [...document.querySelectorAll('.top .stat')].find((e) => e.textContent.includes('النفوذ')).querySelector('.num').textContent = '62'; }],
     ['note without the cheat rule', d, '', '', /the money and cheat note is not/, () => { document.querySelector('.s-note').textContent = 'بدولارات 2011 الثابتة'; }],
