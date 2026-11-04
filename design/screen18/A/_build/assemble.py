@@ -15,6 +15,9 @@ SYMBOLS = """    <symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5.5v13l10.5
 SUBS = [('<button class="play tap" aria-label="إيقاف مؤقت (اللعبة تعمل)"><svg class="i"><use href="#i-pause"/></svg></button>',
          '<button class="play tap" aria-label="الحملة منتهية (الوقت متوقف)" aria-disabled="true"><svg class="i"><use href="#i-play"/></svg></button>'),
         ('<span class="dow">السبت</span><span class="dmy">1 يناير 2011</span>', '<span class="dow">الجمعة</span><span class="dmy">31 ديسمبر 2100</span>'),
+        ('aria-label="الدولة: مصر، حسني مبارك، جمهورية رئاسية"', 'aria-label="الدولة: مصر، رئيس الجمهورية، جمهورية رئاسية"'),
+        ('<span class="ldr">حسني مبارك</span>', '<span class="ldr">رئيس الجمهورية</span>'),
+        ('<span class="txt">احتجاجات واسعة في تونس</span>', '<span class="txt">انتهت الحملة في 2100</span>'),
         ('<span class="num ltr">58%</span>', '<span class="num ltr">71%</span>'),
         ('<svg class="i"><use href="#i-signal"/></svg><span class="num">62</span>', '<svg class="i"><use href="#i-signal"/></svg><span class="num">70</span>')]
 panel_page.build(R, S, D, title='تقرير الأمة', sec='more', tabs=['report'], fit_tab=None, css=['end.css'], symbols=SYMBOLS, extra_subs=SUBS)

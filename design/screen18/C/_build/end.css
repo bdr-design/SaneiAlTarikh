@@ -1,0 +1,10 @@
+  /* ================= Screen 18, variant C: the government dissolved =================
+     Built with the shared builder on the approved panels; one body, no tab row. */
+  .r-tabs { display: none; }
+  [data-tab="fallen"] .r-body[data-tab="fallen"] { display: flex; }
+  .r-body[data-tab="fallen"] { padding-top: var(--s2); padding-bottom: var(--s3); gap: var(--s2); }
+  .d-text { text-wrap: pretty; margin: 0; font-size: var(--fs-sec); line-height: 18px; font-weight: 500; color: var(--t1); }   /* as screen 15's decision text */
+  /* the toast shows this moment's notification in the B3 toast's width (127.59 pt on every phone), so the HUD stays in place */
+  .alert-prev .txt { width: 127.59px; text-align: start; }
+  /* the end sheets are plain: no photo strip in the header */
+  .sheet .r-hd { background-image: none; }

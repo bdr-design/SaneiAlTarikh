@@ -7,7 +7,11 @@ side sheet in the panels' frame, the map central and visible.
 
 ## Frame (all three)
 The approved panel sheet from the right (shared builder and checker), one body, no tab row, no section (neutral grey,
-no dock item open). The clock is stopped (play glyph, «الحملة منتهية» or «متوقفة» in VoiceOver).
+no dock item open). The end sheets are plain: no photo strip in the header. The clock is stopped and disabled (play glyph;
+VoiceOver «الحملة منتهية» on A and B, «الوقت متوقف حتى تختار» on C). The HUD date is the moment's; the nation card names
+no real person after 2011 (A and B «رئيس الجمهورية», C «المجلس الانتقالي»); the toast shows the moment's notification in
+the B3 toast's width (A «انتهت الحملة في 2100», B «انتهت الحملة: تصعيد نووي», C «ثورة: سقطت الحكومة»). On A the HUD's
+stability and influence show the report's 2100 values (71%, 70).
 
 ## A: «تقرير الأمة» (31 December 2100)
 Header: flag, «تقرير الأمة», «مصر · 2011–2100», the star emblem, close («العودة إلى الخريطة»).
@@ -22,12 +26,12 @@ Headline numbers: النتيجة 68 / 100 · في 2011: 54 / 100 · التغير
 Rows: «لعبة جديدة» (to the menu) and «تصفح الخريطة في 2100» (the map without time).
 
 ## B: the nuclear end
-Header: flag, «نهاية الحملة», «15 مارس 2034», the warning emblem, no close (the end is final; the rows are the way out).
+Header: flag, «نهاية الحملة», «15 مارس 2034», the warning emblem, close («العودة إلى القائمة الرئيسية»).
 Text (neutral, sober, no country named): «بلغ التصعيد النووي أعلى درجاته واستُخدم السلاح النووي. تتوقف الحملة هنا: لا تستطيع
 اللعبة أن تمثّل ما يلي ذلك بأمانة.» No score, no image. Rows: «العودة إلى آخر حفظ» («1 مارس 2034 · قبل التصعيد»), «لعبة جديدة».
 
 ## C: the government dissolved (12 August 2031)
-Header: flag, «سقطت حكومتك», «12 أغسطس 2031 · الوقت متوقف», the warning emblem, no close (a choice is needed).
+Header: flag, «سقطت حكومتك», «12 أغسطس 2031 · الوقت متوقف», the warning emblem, close («لاحقًا»: the choice waits in the notifications, time stays stopped).
 Text: «أطاحت ثورة واسعة بالحكومة وتولّى مجلس انتقالي إدارة البلاد. يمكنك متابعة الحملة بالحكومة الجديدة أو إنهاؤها.»
 Choices (r-act rows, no default): «المتابعة بالمجلس الانتقالي» («حكومة مصر الجديدة · تبدأ بشرعية 35») and
 «إنهاء الحملة» («يعرض تقرير الأمة»).

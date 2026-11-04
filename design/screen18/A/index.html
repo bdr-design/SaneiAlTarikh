@@ -580,6 +580,10 @@
   .e-v { flex: none; display: flex; flex-direction: column; align-items: flex-end; }
   .e-v .e-s { font-size: var(--fs-val); line-height: var(--lh-val); font-weight: 600; }
   .e-v .e-c { display: inline-flex; align-items: center; gap: 2px; font-size: var(--fs-label); line-height: var(--lh-label); font-weight: 700; }
+  /* the toast shows this moment's notification in the B3 toast's width (127.59 pt on every phone), so the HUD stays in place */
+  .alert-prev .txt { width: 127.59px; text-align: start; }
+  /* the end sheets are plain: no photo strip in the header */
+  .sheet .r-hd { background-image: none; }
 </style>
 </head>
 <body>
@@ -680,11 +684,11 @@
 <div class="hud">
   <!-- Top row: identity (right), indicators (centre), date + speed (left); all 36 pt, all at y = 8 -->
   <header class="top">
-    <button class="nation glass bar tap" aria-label="الدولة: مصر، حسني مبارك، جمهورية رئاسية">
+    <button class="nation glass bar tap" aria-label="الدولة: مصر، رئيس الجمهورية، جمهورية رئاسية">
       <span class="flag"><img src="../../shared/flag_eg.svg" alt="علم مصر"></span>
       <span class="ntext">
         <b class="nm">مصر</b>
-        <span class="ldr">حسني مبارك</span>
+        <span class="ldr">رئيس الجمهورية</span>
         <span class="rg">جمهورية رئاسية</span>
       </span>
     </button>
@@ -741,7 +745,7 @@
     <!-- Left stack: notifications, map mode, my country (32 pt each, 8 pt apart) -->
     <div class="lstack">
       <div class="toast glass ctl">
-        <button class="alert-prev tap"><svg class="i"><use href="#i-warn"/></svg><span class="txt">احتجاجات واسعة في تونس</span></button>
+        <button class="alert-prev tap"><svg class="i"><use href="#i-warn"/></svg><span class="txt">انتهت الحملة في 2100</span></button>
         <button class="bell tap" aria-label="الإشعارات"><svg class="i"><use href="#i-bell"/></svg><span class="badge">3</span></button>
       </div>
       <button class="btn glass ctl tap mode"><svg class="i"><use href="#i-layers"/></svg><span><span class="k">الخريطة:</span> سياسية</span></button>

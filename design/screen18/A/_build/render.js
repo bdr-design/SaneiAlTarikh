@@ -53,6 +53,8 @@ DATA.pillars.forEach(([nm, line, s, s0]) => { const r = rows.find((x) => W(T(x.q
 if (W(T(q('.sheet .s-note'))) !== DATA.note) issues.push('the money and cheat note is not «' + DATA.note + '»');
 // the way on: each link says where it leads
 qa('.sheet .r-link').forEach((r) => { if (!/\\. يفتح /.test(r.getAttribute('aria-label') || '') || !r.querySelector('.r-chev')) issues.push('a11y: a link row does not say where it leads'); });
+{ const n = q('.nation'), l = T(q('.nation .ldr')); if (/مبارك/.test(l + (n.getAttribute('aria-label') || ''))) issues.push('the nation card names a real person in 2100');
+  if (!/انتهت الحملة/.test(T(q('.alert-prev .txt')))) issues.push('the toast does not say the campaign ended'); }
 if ((q('.r-x').getAttribute('aria-label') || '') !== 'العودة إلى الخريطة') issues.push('a11y: the close button does not say it returns to the map');
 `;
 
@@ -61,10 +63,13 @@ require(path.join(OUT, '../../shared/check/panelcheck.js'))({
   inputs: ['_build/end.css'],
   TOK: { sec: 'rgb(169, 188, 203)', ctlH: {}, sheetIcon: [], size: [['.e-p', null, 32]] },
   HEAD, BRIEF, screenChecks, DATA: { pillars: PILLARS, note: NOTE },
-  skipGeneric: ['section colour on data', 'section colour on a rule', 'emblem drawn grey', 'why without its subject', 'amber value without its icon', 'chip arrow against its sign', 'chip not white', 'tap in the side inset'],
+  skipGeneric: ['section colour on data', 'section colour on a rule', 'emblem drawn grey', 'why without its subject', 'amber value without its icon', 'chip arrow against its sign', 'chip not white', 'tap in the side inset', 'text into a control'],
   cases: (d, se) => [
     ['tap in the side inset (report)', d, '&tab=report&scroll=end', '.sheet { right: -30px !important; }', /tap in side inset/],
     ['amber value without its icon (report)', d, '', '', /colour alone: .* \(its label's icon is not in its colour\)/, () => { document.querySelector('.r-kv b').classList.add('r-amber'); }],
+    ['text into a control (report)', d, '&tab=report&scroll=end', '.r-link .r-at { transform: translateX(-215px) !important; }', /text over a control|text overlap|icon over text/],
+    ['Mubarak in 2100', d, '', '', /the nation card names a real person/, () => { document.querySelector('.nation .ldr').textContent = 'حسني مبارك'; }],
+    ['old toast', d, '', '', /the toast does not say the campaign ended/, () => { document.querySelector('.alert-prev .txt').textContent = 'احتجاجات واسعة في تونس'; }],
     ['clock running', d, '', '', /the clock is not shown stopped for good/, () => { document.querySelector('.play use').setAttribute('href', '#i-pause'); }],
     ['clock not disabled', d, '', '', /the clock is not shown stopped for good/, () => { document.querySelector('.play').removeAttribute('aria-disabled'); }],
     ['date off', d, '', '', /the date is not 31 December 2100/, () => { window.__setDate('الجمعة', '1 يناير 2100'); }],

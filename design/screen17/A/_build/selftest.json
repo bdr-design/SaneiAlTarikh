@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-04T11:59:25.458Z",
+ "ranAt": "2026-11-04T12:10:52.732Z",
  "inputs": {
   "files": [
    "index.html",
@@ -22,7 +22,7 @@
    "header_cairo.jpg",
    "map_overlay_cairo.svg"
   ],
-  "sha1": "f8ccd87254fac368538c17e6accfd20b07672cfe"
+  "sha1": "ac1ed65ffab39242d485e5178dd298369a41a98f"
  },
  "cleanIssues": {
   "i16promax": [],
@@ -128,8 +128,8 @@
    "name": "sheet top",
    "ok": true,
    "sample": [
-    "hit overlap الخزينة 36.0 مليار $ / إغلاق لماذا؟ الاستقرار",
     "hit overlap الاستقرار 58%، ينخفض. لماذ / إغلاق لماذا؟ الاستقرار",
+    "hit overlap الشرعية 44 / إغلاق لماذا؟ الاستقرار",
     "panel overlap الدولة: مصر، حسني مبارك، ج / لماذا؟ الاستقرار"
    ]
   },

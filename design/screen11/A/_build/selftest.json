@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-02T22:58:13.640Z",
+ "ranAt": "2026-11-04T12:10:27.575Z",
  "inputs": {
   "files": [
    "index.html",
@@ -22,7 +22,7 @@
    "header_cairo.jpg",
    "map_overlay_cairo.svg"
   ],
-  "sha1": "3aee643bdf3dce671713ec6563842f09d02f26da"
+  "sha1": "70a83f0229cc1e66247f42091ad1b597df00d183"
  },
  "cleanIssues": {
   "i16promax": [],
@@ -67,7 +67,7 @@
    "ok": true,
    "sample": [
     "text colour off-token rgb(136, 153, 170): \"الاستخبارات\"",
-    "contrast 2.26 for \"الاستخبارات\""
+    "contrast 2.21 for \"الاستخبارات\""
    ]
   },
   {
@@ -82,18 +82,18 @@
    "name": "tap in the side inset",
    "ok": true,
    "sample": [
+    "text in side inset: نظرة عامة",
     "text in side inset: 7",
-    "text in side inset: /",
-    "text in side inset: دون تغير"
+    "text in side inset: /"
    ]
   },
   {
    "name": "panel in the side inset",
    "ok": true,
    "sample": [
+    "text in side inset: نظرة عامة",
     "text in side inset: 7",
-    "text in side inset: /",
-    "text in side inset: دون تغير"
+    "text in side inset: /"
    ]
   },
   {
@@ -124,6 +124,28 @@
    ]
   },
   {
+   "name": "map dimmed",
+   "ok": true,
+   "sample": [
+    "the map is dimmed (opacity 1.00, filter brightness(0.35))"
+   ]
+  },
+  {
+   "name": "map faded",
+   "ok": true,
+   "sample": [
+    "the map is dimmed (opacity 0.30, filter none)"
+   ]
+  },
+  {
+   "name": "scrim over the map",
+   "ok": true,
+   "sample": [
+    "something drawn over the map: DIV (rgba(0, 0, 0, 0.55))",
+    "contrast 1.92 for \"3\""
+   ]
+  },
+  {
    "name": "sheet width",
    "ok": true,
    "sample": [
@@ -134,8 +156,8 @@
    "name": "sheet top",
    "ok": true,
    "sample": [
-    "hit overlap الخزينة 36.0 مليار $ / إغلاق",
     "hit overlap الاستقرار 58% / إغلاق",
+    "hit overlap الشرعية 44 / إغلاق",
     "panel overlap الدولة: مصر، حسني مبارك، ج / الاستخبارات: مصر"
    ]
   },
@@ -151,7 +173,7 @@
    "ok": true,
    "sample": [
     "icon over text: i / \"تمويل القدرات السيبرانية\"",
-    "icon over text: i / \"مليون $ سنويًا · خلال سنة\"",
+    "icon over text: i / \"تمويل القدرات السيبرانية\"",
     "icon over text: i / \"مليون $ سنويًا · خلال سنة\""
    ]
   },
@@ -159,9 +181,9 @@
    "name": "left stack moved",
    "ok": true,
    "sample": [
-    "HUD element moved from its B3 position: .toast x 70.0..275.6 y 56.0..88.0",
-    "HUD element moved from its B3 position: .btn.mode x 70.0..191.6 y 96.0..128.0",
-    "HUD element moved from its B3 position: .btn.home x 70.0..141.5 y 136.0..168.0"
+    "HUD element moved from its B3 position: .toast x 70.0..287.6 y 56.0..88.0",
+    "HUD element moved from its B3 position: .btn.mode x 70.0..197.3 y 96.0..128.0",
+    "HUD element moved from its B3 position: .btn.home x 70.0..143.2 y 136.0..168.0"
    ]
   },
   {
@@ -175,9 +197,9 @@
    "name": "two tab bodies",
    "ok": true,
    "sample": [
-    "clipped text (bottom): \"السيبراني\" 843.72..881 y 253.5..270.5",
-    "clipped text (bottom): \"4\" 750.44..758.25 y 252.5..271.5",
-    "clipped text (bottom): \"/\" 738.61..750.44 y 252.5..271.5"
+    "clipped text (bottom): \"4\" 751.75..760.17 y 254.5..270.5",
+    "clipped text (bottom): \"/\" 739.83..751.75 y 254.5..270.5",
+    "clipped text (bottom): \"10\" 723..739.83 y 254.5..270.5"
    ]
   },
   {
@@ -207,7 +229,7 @@
    "name": "fades wrong",
    "ok": true,
    "sample": [
-    "clipped text (bottom): \"الانكشاف مرتفع\" 801..869 y 402..419",
+    "clipped text (bottom): \"الانكشاف مرتفع\" 793.27..869 y 404.5..418.5",
     "fades 0/0 do not match the scroll state (top 0, over 53.0)"
    ]
   },
@@ -277,7 +299,7 @@
    "sample": [
     "section colour on data text: \"مصر\"",
     "section colour on data text: \"جهاز الاستخبارات\"",
-    "contrast 4.39 for \"مصر\""
+    "section colour on data chrome: مصر · جهاز الاستخبارات"
    ]
   },
   {
@@ -291,8 +313,6 @@
    "name": "money unit",
    "ok": true,
    "sample": [
-    "clipped text (top): \"0.4\" 866.09..881 y 153..168",
-    "clipped text (top): \"مليار $\" 838.42..866.09 y 153..168",
     "money unit: «0.4 مليار» (under 1 billion is written in millions)"
    ]
   },
@@ -300,8 +320,6 @@
    "name": "sign outside its number",
    "ok": true,
    "sample": [
-    "clipped text (top): \"تغير +\" 859.06..881 y 153..168",
-    "clipped text (top): \"3\" 853.06..859.06 y 153..168",
     "a sign outside its number: «تغير +3»"
    ]
   },
@@ -309,7 +327,6 @@
    "name": "colour alone",
    "ok": true,
    "sample": [
-    "clipped text (top): \"تراجع\" 860.27..881 y 153..168",
     "colour alone: «تراجع» has no arrow or icon"
    ]
   },
@@ -331,7 +348,6 @@
    "name": "label without a role",
    "ok": true,
    "sample": [
-    "clipped text (top): \"اختبار\" 860.25..881 y 153..168",
     "a11y: a label VoiceOver may skip (no role): «اختبار»"
    ]
   },
@@ -409,9 +425,9 @@
    "name": "clipped text",
    "ok": true,
    "sample": [
-    "clipped text (sides): \"الجهاز\" 877.45..903 y 161..178",
+    "clipped text (sides): \"الجهاز\" 874.52..903 y 163..177",
     "text outside the sheet's 12 pt padding: \"الجهاز\"",
-    "clipped text (sides): \"10\" 884.86..898.67 y 187..204"
+    "clipped text (sides): \"10\" 883.11..898.02 y 188..202"
    ]
   },
   {
@@ -506,6 +522,24 @@
     "a11y: «تمويل القدرات السيبرانية» does not read its numbers",
     "a11y: «تمويل القدرات السيبرانية» does not say «دولار»",
     "a11y: «تمويل القدرات السيبرانية» does not say the chip's direction in words"
+   ]
+  },
+  {
+   "name": "a long headline label",
+   "ok": true,
+   "sample": [
+    "text outside the sheet's 12 pt padding: \"عنوان طويل جدًا لا يتسع لخانته أبدًا\"",
+    "horizontal overflow in عنوان طويل جدًا لا يتسع لخ",
+    "control cut by its scroll area (bottom): تمويل القدرات السيبرانية: "
+   ]
+  },
+  {
+   "name": "a long status cell",
+   "ok": true,
+   "sample": [
+    "clipped text (sides): \"قيمة طويلة جدًا لا تتسع لنصف الجدول\" 407.84..608.44 y 159.5..175.5",
+    "text outside the sheet's 12 pt padding: \"قيمة طويلة جدًا لا تتسع لنصف الجدول\"",
+    "horizontal overflow in خانةقيمة طويلة جدًا لا تتس"
    ]
   },
   {
