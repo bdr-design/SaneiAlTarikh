@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-04T12:30:49.846Z",
+ "ranAt": "2026-11-04T13:00:33.094Z",
  "inputs": {
   "files": [
    "index.html",
@@ -22,7 +22,7 @@
    "header_cairo.jpg",
    "map_overlay_cairo.svg"
   ],
-  "sha1": "cfcc5c04e135ded1e960e428efeea05ce0d81322"
+  "sha1": "d2bb560b088a9d8838b43977caa06f52ce3471de"
  },
  "cleanIssues": {
   "i16promax": [],
@@ -45,7 +45,7 @@
    "ok": true,
    "sample": [
     "text colour off-token rgb(136, 153, 170): \"الإشعارات\"",
-    "contrast 2.36 for \"الإشعارات\""
+    "contrast 2.33 for \"الإشعارات\""
    ]
   },
   {
@@ -133,8 +133,8 @@
    "ok": true,
    "sample": [
     "hit overlap الاستقرار 58% / إغلاق الإشعارات",
-    "hit overlap الشرعية 44 / إغلاق الإشعارات",
-    "panel overlap الدولة: مصر، حسني مبارك، ج / الإشعارات"
+    "panel overlap الدولة: مصر، حسني مبارك، ج / الإشعارات",
+    "panel overlap الخزينة 36.0 مليار $ الاست / الإشعارات"
    ]
   },
   {
@@ -157,9 +157,9 @@
    "name": "left stack moved",
    "ok": true,
    "sample": [
-    "HUD element moved from its B3 position: .toast x 70.0..287.6 y 56.0..88.0",
-    "HUD element moved from its B3 position: .btn.mode x 70.0..197.3 y 96.0..128.0",
-    "HUD element moved from its B3 position: .btn.home x 70.0..143.2 y 136.0..168.0"
+    "HUD element moved from its B3 position: .toast x 70.0..275.6 y 56.0..88.0",
+    "HUD element moved from its B3 position: .btn.mode x 70.0..191.6 y 96.0..128.0",
+    "HUD element moved from its B3 position: .btn.home x 70.0..141.5 y 136.0..168.0"
    ]
   },
   {
@@ -234,7 +234,8 @@
    "ok": true,
    "sample": [
     "text overlap \"الإشعارات\" / \"غير المقروءة:\"",
-    "text overlap \"الإشعارات\" / \"2\""
+    "text overlap \"الإشعارات\" / \"2\"",
+    "text overlap \"الإشعارات\" / \"·\""
    ]
   },
   {
@@ -273,16 +274,23 @@
    "name": "a long headline label",
    "ok": true,
    "sample": [
+    "clipped text (sides): \"عنوان طويل جدًا لا يتسع لخانته أبدًا\" 385.38..539.25 y 124..141",
     "text outside the sheet's 12 pt padding: \"عنوان طويل جدًا لا يتسع لخانته أبدًا\"",
-    "horizontal overflow in عنوان طويل جدًا لا يتسع لخ",
-    "a cell runs out of its row: «عنوان طويل جدًا لا يتسع »"
+    "clipped text (sides): \"1\" 528.44..539.25 y 142..169"
+   ]
+  },
+  {
+   "name": "text wider than its box",
+   "ok": true,
+   "sample": [
+    "text wider than its box: «قرارات تنتظرك» (63 in 20)"
    ]
   },
   {
    "name": "a long status cell",
    "ok": true,
    "sample": [
-    "clipped text (sides): \"قيمة طويلة جدًا لا تتسع لنصف الجدول\" 407.84..608.44 y 122.5..138.5",
+    "clipped text (sides): \"قيمة طويلة جدًا لا تتسع لنصف الجدول\" 416.53..613.3 y 120.5..139.5",
     "text outside the sheet's 12 pt padding: \"قيمة طويلة جدًا لا تتسع لنصف الجدول\"",
     "horizontal overflow in خانةقيمة طويلة جدًا لا تتس"
    ]
@@ -368,9 +376,9 @@
    "name": "clipped text (centre)",
    "ok": true,
    "sample": [
-    "clipped text (sides): \"قرارات تنتظرك\" 847.89..921 y 117..131",
+    "clipped text (sides): \"قرارات تنتظرك\" 858.34..921 y 115..132",
     "text outside the sheet's 12 pt padding: \"قرارات تنتظرك\"",
-    "clipped text (sides): \"أوامر معلقة\" 865.95..921 y 197..211"
+    "clipped text (sides): \"أوامر معلقة\" 870.92..921 y 195..212"
    ]
   },
   {

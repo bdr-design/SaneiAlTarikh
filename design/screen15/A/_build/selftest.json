@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-04T12:28:25.665Z",
+ "ranAt": "2026-11-04T12:58:00.482Z",
  "inputs": {
   "files": [
    "index.html",
@@ -25,7 +25,7 @@
    "../../shared/map_mena_d1_overlay.svg",
    "map_overlay_cairo.svg"
   ],
-  "sha1": "9e6f8555bdd25264c8260bb4cc62d43a219af1c1"
+  "sha1": "17f817780b153913a7073ab318df523529fa2ee1"
  },
  "cleanIssues": {
   "i16promax": [],
@@ -127,8 +127,6 @@
    "name": "sheet width",
    "ok": true,
    "sample": [
-    "text over a control: \"مليون $ سنويًا\" runs into «الاضطرابات −3»",
-    "text over a control: \"حوار مع النقابات والأحزاب\" runs into «الاضطرابات −1»",
     "sheet width 330 (want round(clamp(43% of 832, 340, 380)), or the room the dock leaves if 330..: 358)"
    ]
   },
@@ -137,8 +135,8 @@
    "ok": true,
    "sample": [
     "hit overlap الاستقرار 58% / لاحقًا: تأجيل القرار إلى ا",
-    "hit overlap الشرعية 44 / لاحقًا: تأجيل القرار إلى ا",
-    "panel overlap الدولة: مصر، حسني مبارك، ج / قرار: احتجاجات في تونس"
+    "panel overlap الدولة: مصر، حسني مبارك، ج / قرار: احتجاجات في تونس",
+    "panel overlap الخزينة 36.0 مليار $ الاست / قرار: احتجاجات في تونس"
    ]
   },
   {
@@ -152,18 +150,18 @@
    "name": "dock shown on the SE",
    "ok": true,
    "sample": [
-    "icon over text: r-arr / \"الداخلية والسياسة\"",
     "icon over text: i / \"حوار مع النقابات والأحزاب\"",
-    "icon over text: i / \"حوار مع النقابات والأحزاب\""
+    "icon over text: i / \"حوار مع النقابات والأحزاب\"",
+    "icon over text: i / \"من رأس المال السياسي\""
    ]
   },
   {
    "name": "left stack moved",
    "ok": true,
    "sample": [
-    "HUD element moved from its B3 position: .toast x 70.0..287.6 y 56.0..88.0",
-    "HUD element moved from its B3 position: .btn.mode x 70.0..197.3 y 96.0..128.0",
-    "HUD element moved from its B3 position: .btn.home x 70.0..143.2 y 136.0..168.0"
+    "HUD element moved from its B3 position: .toast x 70.0..275.6 y 56.0..88.0",
+    "HUD element moved from its B3 position: .btn.mode x 70.0..191.6 y 96.0..128.0",
+    "HUD element moved from its B3 position: .btn.home x 70.0..141.5 y 136.0..168.0"
    ]
   },
   {
@@ -248,7 +246,7 @@
    "sample": [
     "text overlap \"مليون $ سنويًا\" / \"الاضطرابات\"",
     "text overlap \"تشديد الانتشار الأمني\" / \"الاضطرابات\"",
-    "text overlap \"الشرعية\" / \"الاضطرابات\""
+    "text overlap \"−2\" / \"الاضطرابات\""
    ]
   },
   {
@@ -305,16 +303,23 @@
    "name": "a long headline label",
    "ok": true,
    "sample": [
+    "clipped text (sides): \"عنوان طويل جدًا لا يتسع لخانته أبدًا\" 385.38..539.25 y 124..141",
     "text outside the sheet's 12 pt padding: \"عنوان طويل جدًا لا يتسع لخانته أبدًا\"",
-    "horizontal overflow in عنوان طويل جدًا لا يتسع لخ",
-    "a cell runs out of its row: «عنوان طويل جدًا لا يتسع »"
+    "clipped text (sides): \"1\" 528.44..539.25 y 142..169"
+   ]
+  },
+  {
+   "name": "text wider than its box",
+   "ok": true,
+   "sample": [
+    "text wider than its box: «خياراتك» (35 in 20)"
    ]
   },
   {
    "name": "a long status cell",
    "ok": true,
    "sample": [
-    "clipped text (sides): \"قيمة طويلة جدًا لا تتسع لنصف الجدول\" 407.84..608.44 y 122.5..138.5",
+    "clipped text (sides): \"قيمة طويلة جدًا لا تتسع لنصف الجدول\" 416.53..613.3 y 120.5..139.5",
     "text outside the sheet's 12 pt padding: \"قيمة طويلة جدًا لا تتسع لنصف الجدول\"",
     "horizontal overflow in خانةقيمة طويلة جدًا لا تتس"
    ]
@@ -354,9 +359,9 @@
    "name": "fades wrong (no tabs)",
    "ok": true,
    "sample": [
-    "clipped text (bottom): \"10\" 584.09..599 y 353..367",
-    "clipped text (bottom): \"من رأس المال السياسي\" 465.67..584.09 y 353..367",
-    "control cut by its scroll area (bottom): حوار مع النقابات والأحزاب:"
+    "clipped text (bottom): \"المتابعة دون إجراء\" 507.63..599 y 363..382",
+    "control cut by its scroll area (bottom): المتابعة دون إجراء، الخيار",
+    "hit box shaved by its clip: المتابعة دون إجراء، الخيار"
    ]
   },
   {
@@ -400,9 +405,9 @@
    "name": "clipped text (decision)",
    "ok": true,
    "sample": [
-    "clipped text (sides): \"تتسع الاحتجاجات في تونس منذ\" 772.05..921 y 119..133",
+    "clipped text (sides): \"تتسع الاحتجاجات في تونس منذ\" 782.97..921 y 117..134",
     "text outside the sheet's 12 pt padding: \"تتسع الاحتجاجات في تونس منذ\"",
-    "clipped text (sides): \"ديسمبر بعد أن أحرق شاب نفسه في سيدي بوزيد. يطالب المحتجون بفرص عمل وبخفض الأسعار، وتنقل القنوات العربية ما يجري كل يوم. يرى مستشاروك أن البطالة وارتفاع الأسعار في مصر قد يجعلان الشارع يتأثر بما يحدث.\" 554.91..921 y 137..151"
+    "clipped text (sides): \"ديسمبر بعد أن أحرق شاب نفسه في سيدي بوزيد. يطالب المحتجون بفرص عمل وبخفض الأسعار، وتنقل القنوات العربية ما يجري كل يوم. يرى مستشاروك أن البطالة وارتفاع الأسعار في مصر قد يجعلان الشارع يتأثر بما يحدث.\" 549.66..921 y 135..152"
    ]
   },
   {

@@ -2,8 +2,9 @@
 // (design/shared/check/panelcheck.js), in the economy section. This file adds the panel's own rules: the three tabs; the
 // goods: a world price that rises is amber when Egypt imports the good and blue when it exports it, its arrow agreeing
 // with its sign, said in words with «أسوأ لنا» or «أفضل لنا»; the wheat headline amber with its icon; the industries
-// sorted by capacity used, each bar drawn at its share, a weak margin below 70% amber with its arrow; the chokepoints'
-// shares; the Suez fees and the trade lines the same as the economy panel's (read from its source).
+// sorted by capacity used, each bar drawn at its share, a share below 70% said «تشغيل منخفض», the margin falling with
+// capacity used; the chokepoints' shares and disruption; the Suez fees the economy panel's and wheat its first import
+// (read from its source).
 // Usage: NODE_PATH=.../node_modules node render.js [ids...]   (default: all 7)   |   node render.js --selftest
 const path = require('path');
 const fs = require('fs');
@@ -15,10 +16,10 @@ const S6 = (() => { const s = fs.readFileSync(path.join(OUT, '../../screen6/A/_b
 const GOODS = [['حبوب', 'القمح أساسًا · نستورد 60%', 71], ['نفط خام', 'نصدّر 25% من الإنتاج', 22], ['مشتقات نفطية', 'وقود مكرر · نستورد 30%', 18],
   ['غاز طبيعي', 'نصدّر 30% من الإنتاج', 5], ['كيماويات وأسمدة', 'نصدّر 40% من الإنتاج', 15], ['آلات ومعدات', 'نستورد 70%', 3]];
 const INDS = [['النفط', 92, 'جيد'], ['الغاز', 90, 'جيد'], ['التكرير', 85, 'متوسط'], ['الكيماويات', 81, 'متوسط'], ['الأغذية المصنعة', 79, 'متوسط'], ['المنسوجات', 64, 'ضعيف']];
-const CPS = [['قناة السويس', 45], ['باب المندب', 30], ['مضيق هرمز', 5]];
+const CPS = [['قناة السويس', 45, 'لا اضطراب'], ['باب المندب', 30, 'لا اضطراب'], ['مضيق هرمز', 5, 'لا اضطراب']];
 const HEAD = ['الأسواق', 'مصر · السلع والصناعات والممرات'];
 const BRIEF = {
-  goods: HEAD.concat(['القمح عالميًا', '330', 'تضخم الغذاء', '17.2%', 'النقص', '0']),
+  goods: HEAD.concat(['القمح عالميًا', '330', '$ للطن', 'تضخم الغذاء', '17.2%', '+0.4 نقطة شهريًا', 'النقص', '0', 'لا نقص']),
   reach_goods: ['أهم سلعنا · تغيّر السعر العالمي في سنة'].concat(GOODS.map((g) => g[0]), GOODS.map((g) => g[1]), ['كل السلع', '20 سلعة متداولة']),
   industry: HEAD.concat(['أكبر صناعاتنا · تشغيل الطاقة الإنتاجية']),
   reach_industry: INDS.map((i) => i[0]).concat(['يتبع التشغيل هامش الربح: الهامش الضعيف يخفضه.', 'كل الصناعات', '25 صناعة']),
@@ -39,11 +40,12 @@ if (tab === 'goods') {
     const u = r.querySelector('.w-v use'), col = getComputedStyle(r.querySelector('.w-v')).color;
     if (!u || u.getAttribute('href') !== (v > 0 ? '#t-up' : '#t-down')) issues.push('«' + g[0] + '»: the arrow does not agree with its sign');
     if (col !== (bad ? X.TOK.amber : X.TOK.blue)) issues.push('«' + g[0] + '»: ' + (bad ? 'a rise in an import not amber' : 'a rise in an export not blue'));
+    if (!(r.getAttribute('aria-label') || '').includes(v > 0 ? 'يرتفع' : 'ينخفض')) issues.push('a11y: «' + g[0] + '» does not say which way the price moves');
     if (!(r.getAttribute('aria-label') || '').endsWith(bad ? 'أسوأ لنا' : 'أفضل لنا')) issues.push('a11y: «' + g[0] + '» does not say whether it helps or hurts');
     if (W(T(r.querySelector('.g-v > span'))) !== (bad ? 'أسوأ لنا' : 'أفضل لنا')) issues.push('«' + g[0] + '» does not show in words whether it helps or hurts'); });
   // the wheat headline: a worsening, amber with its icon; grain the first good, its rise the same
   { const k = vis('.sheet .r-kpi')[0], v = nums(T(k.querySelector('.r-kr')))[0];
-    if (getComputedStyle(k.querySelector('.r-kv b')).color !== X.TOK.amber || v !== DATA.goods[0][2]) issues.push('the wheat headline is not amber with the grain row\\'s rise (' + DATA.goods[0][2] + '%)'); }
+    if (getComputedStyle(k.querySelector('.r-kv b')).color !== X.TOK.amber || getComputedStyle(k.querySelector('.r-kr')).color !== X.TOK.amber || v !== DATA.goods[0][2]) issues.push('the wheat headline is not amber with the grain row\\'s rise (' + DATA.goods[0][2] + '%)'); }
   if (!/^قمح/.test(DATA.imports)) issues.push('the economy panel does not import wheat first');
 }
 if (tab === 'industry') {
@@ -60,7 +62,7 @@ if (tab === 'industry') {
 }
 if (tab === 'routes') {
   const rows = vis('.sheet .g-row');
-  if (rows.map((r) => W(T(r.querySelector('.w-n b'))) + ' ' + nums(T(r.querySelector('.g-cp b')))[0]).join('|') !== DATA.cps.map((c) => c[0] + ' ' + c[1]).join('|')) issues.push('the chokepoints are not the brief\\'s');
+  if (rows.map((r) => W(T(r.querySelector('.w-n b'))) + ' ' + nums(T(r.querySelector('.g-cp b')))[0] + ' ' + W(T(r.querySelector('.g-cp span')))).join('|') !== DATA.cps.map((c) => c.join(' ')).join('|')) issues.push('the chokepoints are not the brief\\'s');
   const sz = rows[0] && nums(W(T(rows[0].querySelector('.w-n > span'))))[0]; if (sz !== DATA.suez) issues.push('the Suez fees ' + sz + ' are not the economy panel\\'s ' + DATA.suez);
 }
 qa('.sheet .r-link').forEach((r) => { if (!/\\. يفتح /.test(r.getAttribute('aria-label') || '') || !r.querySelector('.r-chev')) issues.push('a11y: a link row does not say where it leads'); });
@@ -70,8 +72,12 @@ require(path.join(OUT, '../../shared/check/panelcheck.js'))({
   OUT, dock: 'الاقتصاد', tabs: ['goods', 'industry', 'routes'], fitTab: false, longTab: 'goods',
   inputs: ['_build/markets.css', '../../screen6/A/_build/sheet.html'],
   TOK: { sec: 'rgb(67, 192, 138)', ctlH: {}, sheetIcon: [], size: [['.g-row', null, 32], ['.g-ind', null, 32]] },
+  skipGeneric: ['text into a control', 'chip not white', 'chip arrow against its sign', 'amber value without its icon'],
   HEAD, BRIEF, screenChecks, DATA: { goods: GOODS, inds: INDS, cps: CPS, suez: S6.suez, imports: S6.imports },
   cases: (d, se) => [
+    ['wheat icon not amber', d, '', '', /colour alone: «330»/, () => { document.querySelector('.r-kpi .r-kl svg').classList.remove('r-amber'); }],
+    ['a disruption changed', d, '&tab=routes', '', /the chokepoints are not the brief's/, () => { document.querySelector('.r-body[data-tab="routes"] .g-cp span').textContent = 'اضطراب شديد'; }],
+    ['price direction unsaid', d, '', '', /a11y: «حبوب» does not say which way the price moves/, () => { const r = document.querySelector('.g-row'); r.setAttribute('aria-label', r.getAttribute('aria-label').replace('يرتفع', 'يتغير')); }],
     ['import rise in blue', d, '', '', /«حبوب»: a rise in an import not amber/, () => { document.querySelector('.g-row .w-v').classList.replace('r-amber', 'r-blue'); }],
     ['export rise in amber', d, '', '', /«نفط خام»: a rise in an export not blue/, () => { document.querySelectorAll('.g-row .w-v')[1].classList.replace('r-blue', 'r-amber'); }],
     ['good arrow against its sign', d, '', '', /«غاز طبيعي»: the arrow does not agree/, () => { document.querySelectorAll('.g-row .w-v use')[3].setAttribute('href', '#t-down'); }],

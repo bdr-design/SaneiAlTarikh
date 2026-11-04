@@ -12,7 +12,7 @@
   .g-cp b { font-size: var(--fs-val); line-height: var(--lh-val); font-weight: 600; }
   .g-cp span { font-size: var(--fs-label); line-height: var(--lh-label); font-weight: 500; color: var(--t2); }
   /* an industry: name and margin, a 4 pt teal bar of capacity used, the share */
-  .g-ind { display: grid; grid-template-columns: 104px 1fr 48px; align-items: center; column-gap: var(--s2); height: 32px; }
+  .g-ind { display: grid; grid-template-columns: 136px 1fr 48px; align-items: center; column-gap: var(--s2); height: 32px; }
   .i-bar { position: relative; height: 4px; border-radius: 2px; background: rgba(169, 188, 203, .22); }
   .i-bar::after { content: ""; position: absolute; top: 0; bottom: 0; right: 0; width: var(--v); border-radius: 2px; background: var(--teal); }
   .g-u { display: inline-flex; align-items: center; justify-content: flex-end; gap: 2px; font-size: var(--fs-val); line-height: var(--lh-val); font-weight: 600; }

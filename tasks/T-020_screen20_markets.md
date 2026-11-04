@@ -16,7 +16,8 @@ A full panel in the economy section (its identity, its dock item open), opened f
 ## Acceptance criteria
 1. السلع: the wheat shock (amber with its icon), food inflation, the shortage index; Egypt's six key goods with the world
    price over a year: a rise is amber for an import and blue for an export, its arrow agreeing, said in words.
-2. الصناعات: the six largest by capacity used, sorted, each bar at its share, a weak share (<70%) amber with its arrow.
+2. الصناعات: the six largest single industries of §5.1 by capacity used, sorted, each bar at its share, a share below
+   70% said «تشغيل منخفض» in words, the margin falling with capacity used; a link to all 25.
 3. الممرات: Suez, Bab el-Mandeb, Hormuz with the share of Egypt's trade and the disruption; Suez fees = screen 6's.
 4. Gate: 0 issues on 7 phones, self-test, `check_screen.py` PASS; three independent read-only reviews, every confirmed
    finding fixed.
