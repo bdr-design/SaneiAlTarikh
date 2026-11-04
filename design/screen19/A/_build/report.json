@@ -1,7 +1,7 @@
 {
  "se": {
   "device": "667x375 side 0 bottom 0 none",
-  "renderedAt": "2026-11-04T12:21:08.145Z",
+  "renderedAt": "2026-11-04T12:28:27.202Z",
   "inputs": {
    "files": [
     "index.html",
@@ -18,15 +18,15 @@
     "../../shared/devices.json",
     "_build/modes.css",
     "map_mode_security.svg",
+    "map_overlay_mode.svg",
     "../../../tools/mapmode.py",
     "../../shared/flag_eg.svg",
     "../../shared/flags/eg.svg",
     "../../shared/map_mena_d1.jpg",
     "../../shared/map_mena_d1_overlay.svg",
-    "header_cairo.jpg",
-    "map_overlay_cairo.svg"
+    "header_cairo.jpg"
    ],
-   "sha1": "6008dd252e6c55b6551ee6f363aaf46f009b157c"
+   "sha1": "bf4147c664a90d4f44b4bc05de3f0d2e848c1b50"
   },
   "issues": [],
   "views": {
@@ -76,7 +76,7 @@
      "بنغازي"
     ],
     "typeSeen": {
-     "10/500": 22,
+     "10/500": 23,
      "13/600": 8,
      "11.5/500": 5,
      "10/700": 1,
@@ -225,7 +225,7 @@
       "y1": 341
      },
      {
-      "l": "السياسة",
+      "l": "الأحزاب",
       "x0": 493,
       "x1": 646,
       "y0": 341,
@@ -422,12 +422,17 @@
       "worst": 9.49
      },
      {
+      "t": "من",
+      "fs": 10,
+      "worst": 9.49
+     },
+     {
       "t": "40",
       "fs": 10,
       "worst": 9.49
      },
      {
-      "t": "احتجاجات ·",
+      "t": ": احتجاجات · من",
       "fs": 10,
       "worst": 9.49
      },
@@ -437,7 +442,7 @@
       "worst": 9.49
      },
      {
-      "t": "احتجاجات واسعة ·",
+      "t": ": احتجاجات واسعة · من",
       "fs": 10,
       "worst": 9.49
      },
@@ -447,7 +452,7 @@
       "worst": 9.49
      },
      {
-      "t": "تمرد",
+      "t": ": تمرد",
       "fs": 10,
       "worst": 9.49
      },
@@ -904,7 +909,7 @@
       "worst": 16.37
      },
      {
-      "t": "كثافة الأسماء على الخريط",
+      "t": "كم اسمًا يظهر",
       "fs": 11.5,
       "worst": 9.49
      },
@@ -1120,7 +1125,7 @@
       "y1": 210
      },
      {
-      "l": "السياسة",
+      "l": "الأحزاب",
       "x0": 493,
       "x1": 646,
       "y0": 210,
@@ -1337,7 +1342,7 @@
       "worst": 16.65
      },
      {
-      "t": "السياسة",
+      "t": "الأحزاب",
       "fs": 11.5,
       "worst": 15.37
      },
@@ -1511,7 +1516,7 @@
       "y1": 103
      },
      {
-      "l": "السياسة",
+      "l": "الأحزاب",
       "x0": 493,
       "x1": 646,
       "y0": 109,
@@ -1799,9 +1804,9 @@
    "_build/se_modes_end.png"
   ],
   "pngSha1": {
-   "se.png": "722d700724dfd1a6ad1306e78403e1ec5d60fa16",
-   "_build/se_hit.png": "dc13cfe28de5a7e279938d44aaaf1d8c04f98e92",
-   "_build/se_modes_end.png": "a9b2a1056872ce88e6d285471469df9df6dbb9c1"
+   "se.png": "7f39ee5ac7d886abcd56fd9366c6a80fc33a0f9f",
+   "_build/se_hit.png": "5c09b8867398dbf409d100923978444b6527d053",
+   "_build/se_modes_end.png": "77e2b666b6d960b97c3204770f59cde367c33169"
   },
   "env": {
    "chromium": "153.0.8010.12"
@@ -1810,7 +1815,7 @@
  },
  "i16": {
   "device": "852x393 side 59 bottom 21 island",
-  "renderedAt": "2026-11-04T12:20:59.379Z",
+  "renderedAt": "2026-11-04T12:28:15.509Z",
   "inputs": {
    "files": [
     "index.html",
@@ -1827,15 +1832,15 @@
     "../../shared/devices.json",
     "_build/modes.css",
     "map_mode_security.svg",
+    "map_overlay_mode.svg",
     "../../../tools/mapmode.py",
     "../../shared/flag_eg.svg",
     "../../shared/flags/eg.svg",
     "../../shared/map_mena_d1.jpg",
     "../../shared/map_mena_d1_overlay.svg",
-    "header_cairo.jpg",
-    "map_overlay_cairo.svg"
+    "header_cairo.jpg"
    ],
-   "sha1": "6008dd252e6c55b6551ee6f363aaf46f009b157c"
+   "sha1": "bf4147c664a90d4f44b4bc05de3f0d2e848c1b50"
   },
   "issues": [],
   "views": {
@@ -1889,7 +1894,7 @@
     ],
     "typeSeen": {
      "14/700": 1,
-     "10/500": 22,
+     "10/500": 23,
      "13/600": 8,
      "11.5/500": 5,
      "10/700": 1,
@@ -2038,7 +2043,7 @@
       "y1": 341
      },
      {
-      "l": "السياسة",
+      "l": "الأحزاب",
       "x0": 627,
       "x1": 780,
       "y0": 341,
@@ -2240,12 +2245,17 @@
       "worst": 9.49
      },
      {
+      "t": "من",
+      "fs": 10,
+      "worst": 9.49
+     },
+     {
       "t": "40",
       "fs": 10,
       "worst": 9.49
      },
      {
-      "t": "احتجاجات ·",
+      "t": ": احتجاجات · من",
       "fs": 10,
       "worst": 9.49
      },
@@ -2255,7 +2265,7 @@
       "worst": 9.49
      },
      {
-      "t": "احتجاجات واسعة ·",
+      "t": ": احتجاجات واسعة · من",
       "fs": 10,
       "worst": 9.49
      },
@@ -2265,7 +2275,7 @@
       "worst": 9.49
      },
      {
-      "t": "تمرد",
+      "t": ": تمرد",
       "fs": 10,
       "worst": 9.49
      },
@@ -2731,7 +2741,7 @@
       "worst": 16.37
      },
      {
-      "t": "كثافة الأسماء على الخريط",
+      "t": "كم اسمًا يظهر",
       "fs": 11.5,
       "worst": 9.49
      },
@@ -2951,7 +2961,7 @@
       "y1": 206
      },
      {
-      "l": "السياسة",
+      "l": "الأحزاب",
       "x0": 627,
       "x1": 780,
       "y0": 206,
@@ -3173,7 +3183,7 @@
       "worst": 16.65
      },
      {
-      "t": "السياسة",
+      "t": "الأحزاب",
       "fs": 11.5,
       "worst": 15.37
      },
@@ -3361,7 +3371,7 @@
       "y1": 103
      },
      {
-      "l": "السياسة",
+      "l": "الأحزاب",
       "x0": 627,
       "x1": 780,
       "y0": 109,
@@ -3665,9 +3675,9 @@
    "_build/i16_modes_end.png"
   ],
   "pngSha1": {
-   "i16.png": "717edc0df70f3fe92604644cedb2b7884cd318a4",
-   "_build/i16_hit.png": "a9d2026d6f01c59c01c494c45872f567d56fec20",
-   "_build/i16_modes_end.png": "462a4368850d6c538fa23d9aac9df1216cfdfcec"
+   "i16.png": "6ab945eec2af02c0098b686d4b1153ad2dddb2c8",
+   "_build/i16_hit.png": "6c20e45e455fe955ec52bdd8d8c24db6faf50e40",
+   "_build/i16_modes_end.png": "9cf92c6bae7043eb13a4bf6e9c906e2abaa2619d"
   },
   "env": {
    "chromium": "153.0.8010.12"

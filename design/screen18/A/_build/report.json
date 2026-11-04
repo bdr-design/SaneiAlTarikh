@@ -1,7 +1,7 @@
 {
  "se": {
   "device": "667x375 side 0 bottom 0 none",
-  "renderedAt": "2026-11-04T12:17:30.305Z",
+  "renderedAt": "2026-11-04T12:29:58.689Z",
   "inputs": {
    "files": [
     "index.html",
@@ -23,7 +23,7 @@
     "../../shared/map_mena_d1_overlay.svg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "14468e398ef010024087af958b20f27a889c54e9"
+   "sha1": "16f16c4835e3b8b93c874322b2d72d98abc59e9d"
   },
   "issues": [],
   "views": {

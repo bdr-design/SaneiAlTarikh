@@ -1,7 +1,7 @@
 {
  "se": {
   "device": "667x375 side 0 bottom 0 none",
-  "renderedAt": "2026-11-04T12:17:58.157Z",
+  "renderedAt": "2026-11-04T12:30:07.543Z",
   "inputs": {
    "files": [
     "index.html",
@@ -23,7 +23,7 @@
     "../../shared/map_mena_d1_overlay.svg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "13b158899e500a731d500a62f39413acb01b110f"
+   "sha1": "c4b365f6486304367e35a26ebcedc7f3f43bf0a2"
   },
   "issues": [],
   "views": {
@@ -772,7 +772,7 @@
    "coverage": {
     "issueCount": 0,
     "sequences": {
-     "fallen": 5
+     "fallen": 6
     }
    }
   },

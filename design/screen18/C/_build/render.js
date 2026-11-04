@@ -12,12 +12,16 @@ const TEXT = 'أطاحت ثورة واسعة بالحكومة وتولّى مج�
 const OPS = [['المتابعة بالمجلس الانتقالي', 'حكومة مصر الجديدة · تبدأ بشرعية 35'], ['إنهاء الحملة', 'يعرض تقرير الأمة']];
 const BRIEF = {
   fallen: HEAD.concat([TEXT, 'خياراتك'], OPS.flat()),
-  reach_fallen: ['خياراتك'].concat(OPS.flat()),
+  reach_fallen: ['خياراتك'].concat(OPS.flat(), ['يمكنك الاختيار لاحقًا من الإشعارات، والوقت متوقف حتى تختار.']),
 };
 
 const screenChecks = `
 const { issues, qa, q, T, nums, DATA } = X;
 const W = (s) => (s || '').replace(/\\s+/g, ' ').trim();
+// the HUD date read whole with its weekday
+if ((q('.top .date .dtext').getAttribute('aria-label') || '') !== 'الثلاثاء 12 أغسطس 2031') issues.push('the HUD date is not «الثلاثاء 12 أغسطس 2031»: «' + q('.top .date .dtext').getAttribute('aria-label') + '»');
+// the toast is this moment's
+if (T(q('.alert-prev .txt')) !== 'ثورة: سقطت الحكومة') issues.push('the toast is not «ثورة: سقطت الحكومة»');
 // the stopped clock and the speed chip are disabled, and look it
 { const pl = q('.play'), sp = q('.spd'); if (sp.getAttribute('aria-disabled') !== 'true' || sp.hasAttribute('aria-haspopup') || getComputedStyle(pl.querySelector('svg')).color !== X.TOK.t2 || getComputedStyle(sp.querySelector('span')).color !== X.TOK.t2) issues.push('the clock and the speed chip do not look and read disabled'); }
 { const pl = q('.play'); if (pl.querySelector('use').getAttribute('href') !== '#i-play' || !/متوقف حتى تختار/.test(pl.getAttribute('aria-label') || '') || pl.getAttribute('aria-disabled') !== 'true') issues.push('the clock does not wait for the choice (play glyph, «متوقف حتى تختار», disabled)');
@@ -38,7 +42,8 @@ if (W(T(q('.sheet .d-text'))) !== DATA.text) issues.push('the text is not the br
   const leg = [...document.querySelectorAll('.top .stat')].find((e) => T(e.querySelector('.lbl')) === 'الشرعية'), lv = leg && nums(T(leg.querySelector('.num')))[0], opL = nums(T(document.querySelector('.sheet .r-act .r-at > span')))[0];
   if (lv !== opL || T(q('.nation .rg')) !== 'حكم انتقالي') issues.push('the HUD (legitimacy ' + lv + ', «' + T(q('.nation .rg')) + '») does not agree with the council (' + opL + ', «حكم انتقالي»)'); }
 // deferring is said on screen, not only in VoiceOver
-if (!/الاختيار لاحقًا من الإشعارات/.test(T(q('.sheet .s-note')))) issues.push('the sheet does not say the choice can wait');
+if (W(T(q('.sheet .s-note'))) !== 'يمكنك الاختيار لاحقًا من الإشعارات، والوقت متوقف حتى تختار.') issues.push('the sheet does not say the choice can wait');
+{ const st = [...document.querySelectorAll('.top .stat')].find((e) => T(e.querySelector('.lbl')) === 'الاستقرار'); if (!st || nums(T(st.querySelector('.num')))[0] !== 31) issues.push('the HUD stability is not the council\\'s 31%'); }
 if (!/^لاحقًا: /.test(q('.r-x').getAttribute('aria-label') || '')) issues.push('a11y: the close button does not say the choice waits');
 `;
 
@@ -49,6 +54,8 @@ require(path.join(OUT, '../../shared/check/panelcheck.js'))({
   HEAD, BRIEF, screenChecks, DATA: { text: TEXT, ops: OPS },
   skipGeneric: ['section colour on data', 'section colour on a rule', 'emblem drawn grey', 'why without its subject', 'amber value without its icon', '% before its number', 'brief text hidden', '18 pt misuse', 'clipped text', 'gap', 'faint text', 'text into a control', 'chip arrow against its sign', 'chip not white'],
   cases: (d, se) => [
+    ['weekday wrong', d, '', '', /the HUD date is not «الثلاثاء 12 أغسطس 2031»/, () => { window.__setDate('السبت', '12 أغسطس 2031'); }],
+    ['another moment toast', d, '', '', /the toast is not «ثورة: سقطت الحكومة»/, () => { document.querySelector('.alert-prev .txt').textContent = 'انتهت الحملة: تصعيد نووي'; }],
     ['clock looks live', d, '', '.play[aria-disabled="true"] svg { color: rgb(234, 242, 247) !important; }', /the clock and the speed chip do not look and read disabled/],
     ['speed menu still offered', d, '', '', /the clock and the speed chip do not look and read disabled/, () => { const s = document.querySelector('.spd'); s.removeAttribute('aria-disabled'); s.setAttribute('aria-haspopup', 'menu'); }],
     ['brief text hidden (fallen)', d, '', '', /brief text not fully visible/, () => { document.querySelector('.r-name').style.opacity = '0'; }],
@@ -67,6 +74,8 @@ require(path.join(OUT, '../../shared/check/panelcheck.js'))({
     ['Mubarak in 2031', d, '', '', /the nation card names a real person/, () => { document.querySelector('.nation .ldr').textContent = 'حسني مبارك'; }],
     ['old toast', d, '', '', /the toast does not say what happened/, () => { document.querySelector('.alert-prev .txt').textContent = 'احتجاجات واسعة في تونس'; }],
     ['HUD legitimacy off', d, '', '', /the HUD \(legitimacy 44/, () => { [...document.querySelectorAll('.top .stat')].find((e) => e.textContent.includes('الشرعية')).querySelector('.num').textContent = '44'; }],
+    ['HUD stability of 2011', d, '', '', /the HUD stability is not the council's 31%/, () => { [...document.querySelectorAll('.top .stat')].find((e) => e.textContent.includes('الاستقرار')).querySelector('.num').textContent = '58%'; }],
+    ['later said in part', d, '', '', /the sheet does not say the choice can wait/, () => { document.querySelector('.s-note').textContent = 'يمكنك الاختيار لاحقًا من الإشعارات.'; }],
     ['later unsaid', d, '', '', /the sheet does not say the choice can wait/, () => { document.querySelector('.s-note').remove(); }],
     ['close says nothing', d, '', '', /a11y: the close button does not say the choice waits/, () => { document.querySelector('.r-x').setAttribute('aria-label', 'إغلاق'); }],
   ],

@@ -7,7 +7,11 @@
   .m-key { display: flex; flex-direction: column; gap: var(--s1); }
   .m-bar { display: grid; grid-template-columns: repeat(5, 1fr); height: 8px; border-radius: 4px; overflow: hidden; }   /* right to left, as every bar: 0 at the right */
   .m-bar i { background: var(--c); }
-  .m-ticks { display: flex; justify-content: space-between; font-size: var(--fs-label); line-height: var(--lh-label); font-weight: 500; color: var(--t2); }
+  /* each edge sits on its band edge (the bands are equal fifths, right to left), centred on it; 0 and 100 flush with the ends */
+  .m-ticks { position: relative; height: var(--lh-label); font-size: var(--fs-label); line-height: var(--lh-label); font-weight: 500; color: var(--t2); }
+  .m-ticks span { position: absolute; top: 0; right: calc(var(--i) * 20%); transform: translateX(50%); }   /* physical: the numbers are left-to-right spans */
+  .m-ticks span:first-child { transform: none; }
+  .m-ticks span:last-child { right: auto; left: 0; transform: none; }
   /* the 13 modes: two columns of 36 pt tiles; the chosen one filled white (the white touches) */
   .m-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s2); }
   .m-tile { display: flex; align-items: center; gap: var(--s2); height: 36px; padding-inline: var(--s2); border-radius: var(--r-ctl); background: var(--card); box-shadow: inset 0 0 0 1px var(--stroke);

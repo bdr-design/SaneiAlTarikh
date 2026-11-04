@@ -11,13 +11,14 @@ province at once, and the chooser stays open beside it.
 The approved panel sheet from the right (shared builder and checker), one body, no tab row, no section. The HUD's mode
 button reads «الخريطة: الأمن» (aria-expanded) in B3's label width. The map: satellite base, the mode layer
 (`map_mode_security.svg` from `tools/mapmode.py`, Natural Earth admin-1, fill-opacity 0.55, five bands of the inferno
-palette, lightness only rising), then the borders and labels as approved.
+palette, lightness only rising), then the borders and labels as approved but without the player's teal fill
+(`map_overlay_mode.svg`; the glow stays), so Egypt's bands read as the legend.
 
 ## Content
 Header: flag, «الخريطة», «أوضاع الخريطة · المعروض: الأمن», the layers emblem, close («إغلاق أوضاع الخريطة، يبقى وضع الأمن»).
 - «الأمن: الاضطرابات في كل محافظة»: the legend bar (five bands, right to left), the edges 0 25 40 60 75 100, and
-  «40 احتجاجات · 60 احتجاجات واسعة · 75 تمرد».
-- «الوضع»: 13 tiles in two columns (36 pt, icon and name): سياسية، العلاقات، التكتلات، الاقتصاد، الأسواق، الأمن، السياسة،
+  «من 40: احتجاجات · من 60: احتجاجات واسعة · من 75: تمرد».
+- «الوضع»: 13 tiles in two columns (36 pt, icon and name): سياسية، العلاقات، التكتلات، الاقتصاد، الأسواق، الأمن، الأحزاب (§6.6 «السياسة», renamed so it is not confused with «سياسية»)،
   عسكرية، الاستخبارات، البنية التحتية، الموارد، السكان، مخاطر المناخ; «الأمن» chosen (white).
 - «العرض»: الحدود (فعلية | قانونية), حدود المحافظات (تظهر | تختفي), الأسماء (قليلة | متوسطة | كثيرة).
 

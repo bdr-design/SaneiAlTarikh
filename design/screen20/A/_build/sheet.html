@@ -1,0 +1,143 @@
+  <!-- The markets panel (screen 20, variant A), opened from the economy panel (الاقتصاد): §5.1's goods, industries and
+       chokepoints for Egypt, 1 January 2011. The economy section's identity, its dock item open. Values illustrative and
+       agreeing with the approved panels (screen 6: imports «قمح · آلات · وقود مكرر · سيارات», exports «نفط وغاز ·
+       كيماويات · منسوجات · غذاء», Suez fees 4.8 billion $; screen 16: wheat at its highest since 2008). A world price that
+       rises is blue when it helps Egypt (an export) and amber when it hurts (an import); colour never alone. -->
+  <section class="sheet glass" aria-label="الأسواق: مصر">
+    <div class="r-in">
+      <header class="r-hd">
+        <span class="r-flag"><img src="../../shared/flags/eg.svg" alt="علم مصر"></span>
+        <div class="r-tt">
+          <div class="r-row"><h2 class="r-name">الأسواق</h2></div>
+          <div class="r-sub">مصر<span class="r-dot"> · </span>السلع والصناعات والممرات</div>
+        </div>
+        <span class="s-emb" aria-hidden="true"><svg class="i"><use href="#i-econ"/></svg></span>
+        <button class="r-x tap" aria-label="إغلاق الأسواق، العودة إلى الاقتصاد"><svg class="i"><use href="#i-close"/></svg></button>
+      </header>
+
+      <nav class="r-tabs" role="tablist" aria-label="أقسام الأسواق">
+        <button class="r-tab tap" role="tab" data-for="goods"><svg class="i"><use href="#i-price"/></svg><span>السلع</span></button>
+        <button class="r-tab tap" role="tab" data-for="industry"><svg class="i"><use href="#i-build"/></svg><span>الصناعات</span></button>
+        <button class="r-tab tap" role="tab" data-for="routes"><svg class="i"><use href="#i-ship"/></svg><span>الممرات</span></button>
+      </nav>
+
+      <!-- السلع: the wheat shock first; Egypt's six key goods, the world price over a year -->
+      <div class="r-body" data-tab="goods">
+        <div class="r-kpis">
+          <div class="r-kpi">
+            <span class="r-kl"><svg class="i r-amber"><use href="#i-wheat"/></svg>القمح عالميًا</span>
+            <span class="r-kv"><b class="ltr r-amber">330</b><span>$ للطن</span></span>
+            <span class="r-kr r-amber"><svg class="r-arr" aria-hidden="true"><use href="#t-up"/></svg><span class="ltr">+71%</span> سنويًا</span>
+            <button class="r-why tap" aria-label="لماذا؟ القمح عالميًا">لماذا؟</button>
+          </div>
+          <div class="r-kpi">
+            <span class="r-kl"><svg class="i r-amber"><use href="#i-price"/></svg>تضخم الغذاء</span>
+            <span class="r-kv"><b class="ltr r-amber">17.2%</b></span>
+            <span class="r-kr"><span class="ltr">+0.4</span> نقطة شهريًا</span>
+            <button class="r-why tap" aria-label="لماذا؟ تضخم الغذاء">لماذا؟</button>
+          </div>
+          <div class="r-kpi">
+            <span class="r-kl"><svg class="i"><use href="#i-warn"/></svg>النقص</span>
+            <span class="r-kv"><b class="ltr">0</b><span>/ <span class="ltr">100</span></span></span>
+            <span class="r-kr">لا نقص</span>
+            <button class="r-why tap" aria-label="لماذا؟ النقص">لماذا؟</button>
+          </div>
+        </div>
+        <section class="r-sec">
+          <h3>أهم سلعنا · السعر العالمي سنويًا</h3>
+          <div class="g-row" role="img" aria-label="حبوب، نستورد 60%، الخبز مدعوم: السعر العالمي يرتفع 71% سنويًا، أسوأ لنا">
+            <span class="w-n"><b>حبوب</b><span>نستورد <span class="ltr">60%</span> · الخبز مدعوم</span></span>
+            <b class="w-v r-amber"><svg class="r-arr" aria-hidden="true"><use href="#t-up"/></svg><span class="ltr">+71%</span></b>
+          </div>
+          <div class="g-row" role="img" aria-label="نفط خام، نصدّر 25% من الإنتاج: السعر العالمي يرتفع 22% سنويًا، أفضل لنا">
+            <span class="w-n"><b>نفط خام</b><span>نصدّر <span class="ltr">25%</span> من الإنتاج</span></span>
+            <b class="w-v r-blue"><svg class="r-arr" aria-hidden="true"><use href="#t-up"/></svg><span class="ltr">+22%</span></b>
+          </div>
+          <div class="g-row" role="img" aria-label="مشتقات نفطية، نستورد 30%، الوقود مدعوم: السعر العالمي يرتفع 18% سنويًا، أسوأ لنا">
+            <span class="w-n"><b>مشتقات نفطية</b><span>نستورد <span class="ltr">30%</span> · الوقود مدعوم</span></span>
+            <b class="w-v r-amber"><svg class="r-arr" aria-hidden="true"><use href="#t-up"/></svg><span class="ltr">+18%</span></b>
+          </div>
+          <div class="g-row" role="img" aria-label="غاز طبيعي، نصدّر 30% من الإنتاج: السعر العالمي يرتفع 5% سنويًا، أفضل لنا">
+            <span class="w-n"><b>غاز طبيعي</b><span>نصدّر <span class="ltr">30%</span> من الإنتاج</span></span>
+            <b class="w-v r-blue"><svg class="r-arr" aria-hidden="true"><use href="#t-up"/></svg><span class="ltr">+5%</span></b>
+          </div>
+          <div class="g-row" role="img" aria-label="كيماويات وأسمدة، نصدّر 40% من الإنتاج: السعر العالمي يرتفع 15% سنويًا، أفضل لنا">
+            <span class="w-n"><b>كيماويات وأسمدة</b><span>نصدّر <span class="ltr">40%</span> من الإنتاج</span></span>
+            <b class="w-v r-blue"><svg class="r-arr" aria-hidden="true"><use href="#t-up"/></svg><span class="ltr">+15%</span></b>
+          </div>
+          <div class="g-row" role="img" aria-label="آلات ومعدات، نستورد 70%: السعر العالمي يرتفع 3% سنويًا، أسوأ لنا">
+            <span class="w-n"><b>آلات ومعدات</b><span>نستورد <span class="ltr">70%</span></span></span>
+            <b class="w-v r-amber"><svg class="r-arr" aria-hidden="true"><use href="#t-up"/></svg><span class="ltr">+3%</span></b>
+          </div>
+        </section>
+        <div class="r-link tap" role="button" tabindex="0" aria-label="كل السلع: 20 سلعة متداولة. يفتح القائمة">
+          <span class="r-tile"><svg class="i"><use href="#i-grid"/></svg></span>
+          <span class="r-at"><b>كل السلع</b><span><span class="ltr">20</span> سلعة متداولة</span></span>
+          <svg class="i r-chev"><use href="#i-chev"/></svg>
+        </div>
+      </div>
+
+      <!-- الصناعات: the largest, by capacity used -->
+      <div class="r-body" data-tab="industry">
+        <section class="r-sec">
+          <h3>تشغيل الطاقة الإنتاجية</h3>
+          <div class="g-ind" role="img" aria-label="النفط والغاز، هامش جيد: التشغيل 92%">
+            <span class="w-n"><b>النفط والغاز</b><span>هامش جيد</span></span>
+            <span class="i-bar" style="--v: 92%"></span>
+            <b class="g-u ltr">92%</b>
+          </div>
+          <div class="g-ind" role="img" aria-label="الزراعة والصيد، هامش متوسط: التشغيل 88%">
+            <span class="w-n"><b>الزراعة والصيد</b><span>هامش متوسط</span></span>
+            <span class="i-bar" style="--v: 88%"></span>
+            <b class="g-u ltr">88%</b>
+          </div>
+          <div class="g-ind" role="img" aria-label="التكرير، هامش ضعيف: التشغيل 85%">
+            <span class="w-n"><b>التكرير</b><span>هامش ضعيف</span></span>
+            <span class="i-bar" style="--v: 85%"></span>
+            <b class="g-u ltr">85%</b>
+          </div>
+          <div class="g-ind" role="img" aria-label="الكيماويات والأسمدة، هامش جيد: التشغيل 81%">
+            <span class="w-n"><b>الكيماويات والأسمدة</b><span>هامش جيد</span></span>
+            <span class="i-bar" style="--v: 81%"></span>
+            <b class="g-u ltr">81%</b>
+          </div>
+          <div class="g-ind" role="img" aria-label="الأغذية المصنعة، هامش متوسط: التشغيل 79%">
+            <span class="w-n"><b>الأغذية المصنعة</b><span>هامش متوسط</span></span>
+            <span class="i-bar" style="--v: 79%"></span>
+            <b class="g-u ltr">79%</b>
+          </div>
+          <div class="g-ind" role="img" aria-label="المنسوجات والملابس، هامش ضعيف: التشغيل 64%">
+            <span class="w-n"><b>المنسوجات والملابس</b><span>هامش ضعيف</span></span>
+            <span class="i-bar" style="--v: 64%"></span>
+            <b class="g-u ltr r-amber"><svg class="r-arr" aria-hidden="true"><use href="#t-down"/></svg>64%</b>
+          </div>
+        </section>
+        <p class="s-note">يتبع التشغيل هامش الربح: الهامش الضعيف يخفضه.</p>
+      </div>
+
+      <!-- الممرات: the share of Egypt's trade through each chokepoint and its disruption -->
+      <div class="r-body" data-tab="routes">
+        <section class="r-sec">
+          <h3>حصة تجارتنا عبر كل ممر</h3>
+          <div class="g-row" role="img" aria-label="قناة السويس، نملكها، الرسوم 4.8 مليار دولار سنويًا: 45% من تجارتنا، لا اضطراب">
+            <span class="w-n"><b>قناة السويس</b><span>نملكها · الرسوم <span class="ltr">4.8</span> مليار $ سنويًا</span></span>
+            <span class="g-cp"><b class="ltr">45%</b><span>لا اضطراب</span></span>
+          </div>
+          <div class="g-row" role="img" aria-label="باب المندب، البديل: رأس الرجاء الصالح: 30% من تجارتنا، لا اضطراب">
+            <span class="w-n"><b>باب المندب</b><span>البديل: رأس الرجاء الصالح</span></span>
+            <span class="g-cp"><b class="ltr">30%</b><span>لا اضطراب</span></span>
+          </div>
+          <div class="g-row" role="img" aria-label="مضيق هرمز، لا بديل لمصدّري الخليج: 5% من تجارتنا، لا اضطراب">
+            <span class="w-n"><b>مضيق هرمز</b><span>لا بديل لمصدّري الخليج</span></span>
+            <span class="g-cp"><b class="ltr">5%</b><span>لا اضطراب</span></span>
+          </div>
+        </section>
+        <div class="r-link tap" role="button" tabindex="0" aria-label="الأسواق على الخريطة: الأسعار والنقص والممرات. يفتح وضع الخريطة">
+          <span class="r-tile"><svg class="i"><use href="#i-layers"/></svg></span>
+          <span class="r-at"><b>الأسواق على الخريطة</b><span>الأسعار والنقص والممرات</span></span>
+          <svg class="i r-chev"><use href="#i-chev"/></svg>
+        </div>
+      </div>
+      <span class="r-hint" aria-hidden="true"><svg class="i"><use href="#i-chev"/></svg></span>
+    </div>
+  </section>

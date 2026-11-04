@@ -21,6 +21,10 @@ const BRIEF = {
 const screenChecks = `
 const { issues, qa, q, T, nums, DATA } = X;
 const W = (s) => (s || '').replace(/\\s+/g, ' ').trim();
+// the HUD date read whole with its weekday
+if ((q('.top .date .dtext').getAttribute('aria-label') || '') !== 'الجمعة 31 ديسمبر 2100') issues.push('the HUD date is not «الجمعة 31 ديسمبر 2100»: «' + q('.top .date .dtext').getAttribute('aria-label') + '»');
+// the toast is this moment's
+if (T(q('.alert-prev .txt')) !== 'انتهت الحملة في 2100') issues.push('the toast is not «انتهت الحملة في 2100»');
 // the stopped clock and the speed chip are disabled, and look it
 { const pl = q('.play'), sp = q('.spd'); if (sp.getAttribute('aria-disabled') !== 'true' || sp.hasAttribute('aria-haspopup') || getComputedStyle(pl.querySelector('svg')).color !== X.TOK.t2 || getComputedStyle(sp.querySelector('span')).color !== X.TOK.t2) issues.push('the clock and the speed chip do not look and read disabled'); }
 // the clock stopped for good, at the end date
@@ -42,6 +46,8 @@ DATA.pillars.forEach(([nm, line, s, s0]) => { const r = rows.find((x) => W(T(x.q
 { const sc = rows.map((r) => nums(T(r.querySelector('.e-v .e-s')))[0]), mean = Math.round(sc.reduce((a, b) => a + b, 0) / sc.length), base = Math.round(DATA.pillars.reduce((a, p) => a + p[3], 0) / DATA.pillars.length);
   const k = [...document.querySelectorAll('.sheet .r-kpi')], kv = (i) => nums(T(k[i].querySelector('.r-kv b')))[0], kr = (i) => W(T(k[i].querySelector('.r-kr')));
   if (kv(0) !== mean) issues.push('the result ' + kv(0) + ' is not the mean of the pillars (' + mean + ')');
+  { const kr0 = k[0].querySelector('.r-kr'), u0 = kr0.querySelector('use'), up = mean - base > 0;
+    if (getComputedStyle(kr0).color !== (up ? X.TOK.blue : X.TOK.amber) || !u0 || u0.getAttribute('href') !== (up ? '#t-up' : '#t-down')) issues.push('the result\\'s change is not ' + (up ? 'blue with an up arrow' : 'amber with a down arrow')); }
   if (nums(kr(0))[0] !== mean - base) issues.push('the result\\'s change ' + nums(kr(0))[0] + ' is not the result − the 2011 mean (' + (mean - base) + ')');
   const nm = (i) => W(T(rows[i].querySelector('.w-n b'))), hi = sc.indexOf(Math.max(...sc)), lo = sc.indexOf(Math.min(...sc));
   if (kv(1) !== base || W(T(k[1].querySelector('.r-kl'))) !== 'في 2011') issues.push('the 2011 cell is not the mean of the 2011 scores (' + base + ')');
@@ -55,7 +61,7 @@ DATA.pillars.forEach(([nm, line, s, s0]) => { const r = rows.find((x) => W(T(x.q
 if (W(T(q('.sheet .s-note'))) !== DATA.note) issues.push('the money and cheat note is not «' + DATA.note + '»');
 // the way on: each link says where it leads
 qa('.sheet .r-link').forEach((r) => { if (!/\\. يفتح /.test(r.getAttribute('aria-label') || '') || !r.querySelector('.r-chev')) issues.push('a11y: a link row does not say where it leads'); });
-{ const n = q('.nation'), l = T(q('.nation .ldr')); if (/مبارك/.test(l + (n.getAttribute('aria-label') || ''))) issues.push('the nation card names a real person in 2100');
+{ const n = q('.nation'), l = T(q('.nation .ldr')); if (l !== 'رئيس الدولة' || !(n.getAttribute('aria-label') || '').includes('رئيس الدولة')) issues.push('the nation card names a real person in 2100 (it must say «رئيس الدولة»)');
   if (!/انتهت الحملة/.test(T(q('.alert-prev .txt')))) issues.push('the toast does not say the campaign ended'); }
 if ((q('.r-x').getAttribute('aria-label') || '') !== 'العودة إلى الخريطة') issues.push('a11y: the close button does not say it returns to the map');
 `;
@@ -67,6 +73,8 @@ require(path.join(OUT, '../../shared/check/panelcheck.js'))({
   HEAD, BRIEF, screenChecks, DATA: { pillars: PILLARS, note: NOTE },
   skipGeneric: ['section colour on data', 'section colour on a rule', 'emblem drawn grey', 'why without its subject', 'amber value without its icon', 'chip arrow against its sign', 'chip not white', 'tap in the side inset', 'text into a control'],
   cases: (d, se) => [
+    ['weekday wrong', d, '', '', /the HUD date is not «الجمعة 31 ديسمبر 2100»/, () => { window.__setDate('السبت', '31 ديسمبر 2100'); }],
+    ['another moment toast', d, '', '', /the toast is not «انتهت الحملة في 2100»/, () => { document.querySelector('.alert-prev .txt').textContent = 'انتهت الحملة: تصعيد نووي'; }],
     ['clock looks live', d, '', '.play[aria-disabled="true"] svg { color: rgb(234, 242, 247) !important; }', /the clock and the speed chip do not look and read disabled/],
     ['speed menu still offered', d, '', '', /the clock and the speed chip do not look and read disabled/, () => { const s = document.querySelector('.spd'); s.removeAttribute('aria-disabled'); s.setAttribute('aria-haspopup', 'menu'); }],
     ['tap in the side inset (report)', d, '&tab=report&scroll=end', '.sheet { right: -30px !important; }', /tap in side inset/],
@@ -74,6 +82,8 @@ require(path.join(OUT, '../../shared/check/panelcheck.js'))({
     ['text into a control (report)', d, '&tab=report&scroll=end', '.r-link .r-at { transform: translateX(-215px) !important; }', /text over a control|text overlap|icon over text/],
     ['Mubarak in 2100', d, '', '', /the nation card names a real person/, () => { document.querySelector('.nation .ldr').textContent = 'حسني مبارك'; }],
     ['old toast', d, '', '', /the toast does not say the campaign ended/, () => { document.querySelector('.alert-prev .txt').textContent = 'احتجاجات واسعة في تونس'; }],
+    ['result change in amber', d, '', '', /the result's change is not blue with an up arrow/, () => { document.querySelector('.r-kpi .r-kr').classList.replace('r-blue', 'r-amber'); }],
+    ['a real leader in 2100', d, '', '', /the nation card names a real person/, () => { document.querySelector('.nation .ldr').textContent = 'اسم حقيقي'; }],
     ['clock running', d, '', '', /the clock is not shown stopped for good/, () => { document.querySelector('.play use').setAttribute('href', '#i-pause'); }],
     ['clock not disabled', d, '', '', /the clock is not shown stopped for good/, () => { document.querySelector('.play').removeAttribute('aria-disabled'); }],
     ['date off', d, '', '', /the date is not 31 December 2100/, () => { window.__setDate('الجمعة', '1 يناير 2100'); }],
