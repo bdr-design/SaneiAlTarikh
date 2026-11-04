@@ -53,8 +53,7 @@
 
   function drawDate() {
     var day = 1 + Math.max(0, Math.floor(ST.clock + 1e-9));
-    $('.date .dow').textContent = DOW[(day - 1) % 7];
-    $('.date .dmy').textContent = day + ' ' + MONTH + ' 2011';
+    window.__setDate(DOW[(day - 1) % 7], day + ' ' + MONTH + ' 2011');   /* the HUD's date setter (fit 5 moves the year up) */
   }
   /* one map frame: the units, the route ahead, the bar (counted in window.__frames) */
   function render() {

@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-04T11:45:31.559Z",
+ "ranAt": "2026-11-04T11:59:25.458Z",
  "inputs": {
   "files": [
    "index.html",
@@ -22,7 +22,7 @@
    "header_cairo.jpg",
    "map_overlay_cairo.svg"
   ],
-  "sha1": "be535c762579edc81df38cbe1be9307902adb3c8"
+  "sha1": "f8ccd87254fac368538c17e6accfd20b07672cfe"
  },
  "cleanIssues": {
   "i16promax": [],
@@ -57,15 +57,6 @@
    "sample": [
     "panel radius لماذا؟ الاستقرار: 6 (want 12)",
     "radius 6 for .sheet (want 12)"
-   ]
-  },
-  {
-   "name": "tap in the side inset",
-   "ok": false,
-   "sample": [
-    "text in side inset: الآن",
-    "text in side inset: التغير",
-    "text in side inset: الأساس"
    ]
   },
   {
@@ -272,6 +263,24 @@
    ]
   },
   {
+   "name": "a long headline label",
+   "ok": true,
+   "sample": [
+    "text outside the sheet's 12 pt padding: \"عنوان طويل جدًا لا يتسع لخانته أبدًا\"",
+    "horizontal overflow in عنوان طويل جدًا لا يتسع لخ",
+    "a cell runs out of its row: «عنوان طويل جدًا لا يتسع »"
+   ]
+  },
+  {
+   "name": "a long status cell",
+   "ok": true,
+   "sample": [
+    "clipped text (sides): \"قيمة طويلة جدًا لا تتسع لنصف الجدول\" 407.84..608.44 y 112.5..128.5",
+    "text outside the sheet's 12 pt padding: \"قيمة طويلة جدًا لا تتسع لنصف الجدول\"",
+    "horizontal overflow in خانةقيمة طويلة جدًا لا تتس"
+   ]
+  },
+  {
    "name": "font weight (no tabs)",
    "ok": true,
    "sample": [
@@ -330,6 +339,15 @@
    "ok": true,
    "sample": [
     "a dock item is marked open under a sheet of no section"
+   ]
+  },
+  {
+   "name": "tap in the side inset (why)",
+   "ok": true,
+   "sample": [
+    "text in side inset: ما يخفضه",
+    "text in side inset: الشرعية",
+    "text in side inset: 44"
    ]
   },
   {
@@ -395,7 +413,8 @@
    "name": "chip not shown open",
    "ok": true,
    "sample": [
-    "the HUD chip «الاستقرار» is not the one shown open"
+    "the HUD chip «الاستقرار» is not the one shown open",
+    "the HUD chip does not point the way the value moves"
    ]
   },
   {
@@ -429,7 +448,7 @@
    "sample": [
     "term «التضخم» missing",
     "the terms add up to 58, the sum row says 56, the header 56, the cell 56",
-    "brief text missing: التضخم"
+    "a11y: the sum row does not say the start, the rises and the falls as shown"
    ]
   },
   {
@@ -460,7 +479,8 @@
    "name": "change the wrong way",
    "ok": true,
    "sample": [
-    "the monthly change does not head toward the target"
+    "the monthly change does not head toward the target",
+    "the change cell is not -1 a month (the state panel says −1)"
    ]
   },
   {
@@ -515,12 +535,57 @@
    ]
   },
   {
+   "name": "shares swapped, sum kept",
+   "ok": true,
+   "sample": [
+    "a11y: «الأمن والشرطة، الإنفاق ا» does not read all it shows: 5",
+    "a11y: «دعم الخبز والوقود، من ال» does not read all it shows: 8",
+    "«الأمن والشرطة»'s share is 5, the brief 8"
+   ]
+  },
+  {
+   "name": "change cell off",
+   "ok": true,
+   "sample": [
+    "the change cell is not -1 a month (the state panel says −1)"
+   ]
+  },
+  {
+   "name": "time cell off",
+   "ok": true,
+   "sample": [
+    "the time to the target is not 3 months"
+   ]
+  },
+  {
+   "name": "chip points up",
+   "ok": true,
+   "sample": [
+    "the HUD chip does not point the way the value moves"
+   ]
+  },
+  {
+   "name": "chip says it rises",
+   "ok": true,
+   "sample": [
+    "the HUD chip does not point the way the value moves"
+   ]
+  },
+  {
+   "name": "sum totals unsaid",
+   "ok": true,
+   "sample": [
+    "a11y: «المجموع: يتجه إلى 56%، م» does not read all it shows: 16",
+    "a11y: the sum row does not say the start, the rises and the falls as shown"
+   ]
+  },
+  {
    "name": "a source value off",
    "ok": true,
    "sample": [
     "a11y: «البطالة، 8.9%: يخفض 3 نق» does not read all it shows: 1",
     "«البطالة»'s line is not «8.9%»",
-    "«البطالة» says «9.1%», the other screens «8.9%»"
+    "«البطالة» says «9.1%», the approved panels 8.9"
    ]
   },
   {
@@ -531,10 +596,21 @@
    ]
   },
   {
+   "name": "sum shown wrong",
+   "ok": true,
+   "sample": [
+    "a11y: «المجموع: يتجه إلى 56%، م» does not read all it shows: 17",
+    "the sum shown «55 + 17 − 15» is not start + rises − falls",
+    "brief text missing: 55 + 16 − 15"
+   ]
+  },
+  {
    "name": "sum unsaid",
    "ok": true,
    "sample": [
-    "a11y: the sum row does not read as the sum"
+    "a11y: «يتجه إلى 56%» does not read all it shows: 55 16 15",
+    "a11y: the sum row does not read as the sum",
+    "a11y: the sum row does not say the start, the rises and the falls as shown"
    ]
   },
   {

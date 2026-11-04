@@ -1,0 +1,13 @@
+  /* ================= Screen 18, variant A: «تقرير الأمة» =================
+     Built with the shared builder on the approved panels; one body, no tab row. */
+  .r-tabs { display: none; }
+  [data-tab="report"] .r-body[data-tab="report"] { display: flex; }
+  .r-body[data-tab="report"] { padding-top: 0; padding-bottom: var(--s3); gap: var(--s2); }
+  /* a pillar: its name and its measure (right), its score and its change since 2011 (left) */
+  .e-p { display: flex; align-items: center; justify-content: space-between; gap: var(--s2); height: 32px; }
+  .w-n { display: flex; flex-direction: column; min-width: 0; }
+  .w-n b { font-size: var(--fs-sec); line-height: var(--lh-sec); font-weight: 600; color: var(--t1); white-space: nowrap; }
+  .w-n > span { font-size: var(--fs-label); line-height: var(--lh-label); font-weight: 500; color: var(--t2); white-space: nowrap; }
+  .e-v { flex: none; display: flex; flex-direction: column; align-items: flex-end; }
+  .e-v .e-s { font-size: var(--fs-val); line-height: var(--lh-val); font-weight: 600; }
+  .e-v .e-c { display: inline-flex; align-items: center; gap: 2px; font-size: var(--fs-label); line-height: var(--lh-label); font-weight: 700; }
