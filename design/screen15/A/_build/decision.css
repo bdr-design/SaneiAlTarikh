@@ -1,0 +1,10 @@
+  /* ================= Screen 15, variant A: the decision sheet =================
+     Built with the shared builder on the approved panels; one body, no tab row; the header strip is the category image. */
+  .r-tabs { display: none; }
+  .r-hd { background: linear-gradient(to left, rgba(12, 20, 28, .62) 0%, rgba(12, 20, 28, .2) 55%, rgba(12, 20, 28, 0) 75%),
+    linear-gradient(180deg, rgba(12, 20, 28, .15) 0%, rgba(12, 20, 28, .75) 100%), url("event_header.jpg") center / cover no-repeat; }
+  [data-tab="event"] .r-body[data-tab="event"] { display: flex; }
+  .r-body[data-tab="event"] { padding-top: var(--s2); padding-bottom: var(--s3); gap: var(--s2); }
+  .d-text { text-wrap: pretty; margin: 0; font-size: var(--fs-sec); line-height: 18px; font-weight: 500; color: var(--t1); }
+  /* a cost in an option's line: amber, its arrow beside it */
+  .p-cost { display: inline-flex; align-items: center; gap: 2px; font-size: var(--fs-sec); font-weight: 600; vertical-align: top; }   /* as screen 9; top-aligned, so the row's lines keep 16 / 14 pt */
