@@ -11,14 +11,14 @@
   .e-v { flex: none; display: flex; flex-direction: column; align-items: flex-end; }
   .e-v .e-s { font-size: var(--fs-val); line-height: var(--lh-val); font-weight: 600; }
   .e-v .e-c { display: inline-flex; align-items: center; gap: 2px; font-size: var(--fs-sec); line-height: var(--lh-sec); font-weight: 500; }   /* as the headline cell's change */
-  /* the toast shows this moment's notification in the B3 toast's width (127.59 pt on every phone), so the HUD stays in place */
-  .alert-prev .txt { width: 127.59px; text-align: start; }
+  /* the toast shows this moment's notification in the B3 toast's width (115.56 pt on every phone, in IBM Plex Sans Arabic), so the HUD stays in place */
+  .alert-prev .txt { width: 115.56px; text-align: start; }
   /* the end sheets are plain: no photo strip in the header */
   .sheet .r-hd { background-image: none; }
   /* the stopped clock and the speed chip look disabled, not like the live controls of the other screens */
   .play[aria-disabled="true"] svg, .spd[aria-disabled="true"] span { color: var(--t2); }
   .spd[aria-disabled="true"] { background: transparent; }
-  /* the nation card keeps B3's widths whatever the leader line says (B3: «حسني مبارك» 53.64 pt, «· جمهورية رئاسية» 73.23 pt),
+  /* the nation card keeps B3's widths whatever the leader line says (B3 in IBM Plex Sans Arabic: «حسني مبارك» 47.98 pt, «· جمهورية رئاسية» 67.73 pt),
      so the indicator strip stays in place */
-  .ntext .ldr { width: 53.64px; }
-  .ntext .rg { width: 73.23px; }
+  .ntext .ldr { width: 47.98px; }
+  .ntext .rg { width: 67.73px; }

@@ -52,10 +52,12 @@ require(path.join(OUT, '../../shared/check/panelcheck.js'))({
   inputs: ['_build/end.css'],
   TOK: { sec: 'rgb(169, 188, 203)', ctlH: {}, sheetIcon: [], size: [] },
   HEAD, BRIEF, screenChecks, DATA: { text: TEXT, ops: OPS },
-  skipGeneric: ['section colour on data', 'section colour on a rule', 'emblem drawn grey', 'why without its subject', 'amber value without its icon', '% before its number', 'brief text hidden', '18 pt misuse', 'clipped text', 'gap', 'faint text', 'text into a control', 'chip arrow against its sign', 'chip not white'],
+  skipGeneric: ['hint chevron missing (no tabs)', 'hint over the content (no tabs)', 'section colour on data', 'section colour on a rule', 'emblem drawn grey', 'why without its subject', 'amber value without its icon', '% before its number', 'brief text hidden', '18 pt misuse', 'clipped text', 'gap', 'faint text', 'text into a control', 'chip arrow against its sign', 'chip not white'],
   cases: (d, se) => [
+    // the body never scrolls on the SE: the hint must stay hidden (the opposite of the shared plant)
+    ['hint shown without content below', se, '', '.r-hint { display: flex !important; visibility: visible !important; opacity: 1 !important; }', /scroll hint chevron shown without content below/],
     ['weekday wrong', d, '', '', /the HUD date is not «الثلاثاء 12 أغسطس 2031»/, () => { window.__setDate('السبت', '12 أغسطس 2031'); }],
-    ['another moment toast', d, '', '', /the toast is not «ثورة: سقطت الحكومة»/, () => { document.querySelector('.alert-prev .txt').textContent = 'انتهت الحملة: تصعيد نووي'; }],
+    ['another moment toast', d, '', '', /the toast is not «ثورة: سقطت الحكومة»/, () => { document.querySelector('.alert-prev .txt').textContent = 'انتهت الحملة'; }],
     ['clock looks live', d, '', '.play[aria-disabled="true"] svg { color: rgb(234, 242, 247) !important; }', /the clock and the speed chip do not look and read disabled/],
     ['speed menu still offered', d, '', '', /the clock and the speed chip do not look and read disabled/, () => { const s = document.querySelector('.spd'); s.removeAttribute('aria-disabled'); s.setAttribute('aria-haspopup', 'menu'); }],
     ['brief text hidden (fallen)', d, '', '', /brief text not fully visible/, () => { document.querySelector('.r-name').style.opacity = '0'; }],

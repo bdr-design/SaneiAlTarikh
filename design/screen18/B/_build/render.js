@@ -22,7 +22,7 @@ const W = (s) => (s || '').replace(/\\s+/g, ' ').trim();
 // the HUD date read whole with its weekday
 if ((q('.top .date .dtext').getAttribute('aria-label') || '') !== 'الأربعاء 15 مارس 2034') issues.push('the HUD date is not «الأربعاء 15 مارس 2034»: «' + q('.top .date .dtext').getAttribute('aria-label') + '»');
 // the toast is this moment's
-if (T(q('.alert-prev .txt')) !== 'انتهت الحملة: تصعيد نووي') issues.push('the toast is not «انتهت الحملة: تصعيد نووي»');
+if (T(q('.alert-prev .txt')) !== 'انتهت الحملة') issues.push('the toast is not «انتهت الحملة»');
 // the stopped clock and the speed chip are disabled, and look it
 { const pl = q('.play'), sp = q('.spd'); if (sp.getAttribute('aria-disabled') !== 'true' || sp.hasAttribute('aria-haspopup') || getComputedStyle(pl.querySelector('svg')).color !== X.TOK.t2 || getComputedStyle(sp.querySelector('span')).color !== X.TOK.t2) issues.push('the clock and the speed chip do not look and read disabled'); }
 { const pl = q('.play'); if (pl.querySelector('use').getAttribute('href') !== '#i-play' || !/الحملة منتهية/.test(pl.getAttribute('aria-label') || '') || pl.getAttribute('aria-disabled') !== 'true') issues.push('the clock is not shown stopped for good (play glyph, «الحملة منتهية», disabled)');
@@ -53,10 +53,12 @@ require(path.join(OUT, '../../shared/check/panelcheck.js'))({
   inputs: ['_build/end.css'],
   TOK: { sec: 'rgb(169, 188, 203)', ctlH: {}, sheetIcon: [], size: [] },
   HEAD, BRIEF, screenChecks, DATA: { text: TEXT, countries: COUNTRIES, drama: DRAMA },
-  skipGeneric: ['section colour on data', 'section colour on a rule', 'emblem drawn grey', 'why without its subject', 'amber value without its icon', '% before its number', 'brief text hidden', '18 pt misuse', 'clipped text', 'gap', 'faint text', 'text into a control', 'chip arrow against its sign', 'chip not white', 'row read in part'],
+  skipGeneric: ['hint chevron missing (no tabs)', 'hint over the content (no tabs)', 'section colour on data', 'section colour on a rule', 'emblem drawn grey', 'why without its subject', 'amber value without its icon', '% before its number', 'brief text hidden', '18 pt misuse', 'clipped text', 'gap', 'faint text', 'text into a control', 'chip arrow against its sign', 'chip not white', 'row read in part'],
   cases: (d, se) => [
+    // the body never scrolls on the SE: the hint must stay hidden (the opposite of the shared plant)
+    ['hint shown without content below', se, '', '.r-hint { display: flex !important; visibility: visible !important; opacity: 1 !important; }', /scroll hint chevron shown without content below/],
     ['weekday wrong', d, '', '', /the HUD date is not «الأربعاء 15 مارس 2034»/, () => { window.__setDate('السبت', '15 مارس 2034'); }],
-    ['another moment toast', d, '', '', /the toast is not «انتهت الحملة: تصعيد نووي»/, () => { document.querySelector('.alert-prev .txt').textContent = 'انتهت الحملة في 2100'; }],
+    ['another moment toast', d, '', '', /the toast is not «انتهت الحملة»/, () => { document.querySelector('.alert-prev .txt').textContent = 'انتهت الحملة في 2100'; }],
     ['clock looks live', d, '', '.play[aria-disabled="true"] svg { color: rgb(234, 242, 247) !important; }', /the clock and the speed chip do not look and read disabled/],
     ['speed menu still offered', d, '', '', /the clock and the speed chip do not look and read disabled/, () => { const s = document.querySelector('.spd'); s.removeAttribute('aria-disabled'); s.setAttribute('aria-haspopup', 'menu'); }],
     ['brief text hidden (nuclear)', d, '', '', /brief text not fully visible/, () => { document.querySelector('.r-name').style.opacity = '0'; }],

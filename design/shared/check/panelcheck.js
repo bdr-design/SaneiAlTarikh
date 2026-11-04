@@ -448,6 +448,10 @@ module.exports = function makeChecker(cfg) {
       qa('.sheet .r-kpis, .sheet .r-st').forEach((g) => { const gc = inner(g), bd = g.closest('.r-body'), bc = bd ? inner(bd) : gc;
         [...g.children].filter(visible).forEach((c) => { if (out(c, gc) || out(c, bc)) issues.push(`a cell runs out of its row: «${T(c).slice(0, 24)}»`);
           if (c.matches('.r-kpi')) { const cc = inner(c); [...c.children].filter(visible).forEach((e) => { if (out(e, cc)) issues.push(`a headline cell's text runs out of its cell: «${T(e).slice(0, 24)}»`); }); } }); }); }
+    // text wider than its own box (one line that does not wrap runs past its box into the next one, even when nothing
+    // clips it: 2026-11-04, a row's subtitle ran 3 pt into the gap before its segments)
+    qa('.sheet .r-body *').filter((e) => e.clientWidth > 0 && getComputedStyle(e).whiteSpace === 'nowrap' && getComputedStyle(e).overflowX === 'visible' && [...e.childNodes].some((n) => n.nodeType === 3 && n.textContent.trim()) && e.scrollWidth > e.clientWidth + 1)
+      .forEach((e) => issues.push(`text wider than its box: «${T(e).slice(0, 24)}» (${e.scrollWidth} in ${e.clientWidth})`));
     // bars are data: teal, filling from the right (RTL)
     qa('.sheet .i-bar, .sheet .p-meter').forEach((b) => { const a = getComputedStyle(b, '::after');
       if (a.backgroundColor !== TOK.teal || a.right !== '0px') issues.push(`a bar not teal from the right: ${a.backgroundColor} right ${a.right}`); });
@@ -684,6 +688,7 @@ module.exports = function makeChecker(cfg) {
       ['chip arrow against its sign', d, '', '', /the chip's arrow does not agree with its sign|does not say the chip's direction/, () => { const u = document.querySelector('.r-act .r-chip use'); if (u) u.setAttribute('href', u.getAttribute('href') === '#t-up' ? '#t-down' : '#t-up'); }],
       ['row read in part', d, '', '', /does not read all it shows/, () => { const r = [...document.querySelectorAll('.sheet [role="img"], .sheet .tap[role="button"]:not(.r-tab), .sheet .r-act[aria-label]')].find((e) => e.getClientRects().length && e.innerText.trim()); r.setAttribute('aria-label', 'جزء'); }],
       ['a long headline label', d, '', '', /a cell runs out of its row|a headline cell's text runs out of its cell/, () => { const b = [...document.querySelectorAll('.r-body')].find((e) => e.getClientRects().length); const s = document.createElement('div'); s.className = 'r-kpis'; s.innerHTML = '<div class="r-kpi"><span class="r-kl">عنوان طويل جدًا لا يتسع لخانته أبدًا</span><span class="r-kv"><b class="ltr">1</b></span></div>'.repeat(3); b.prepend(s); }],
+      ['text wider than its box', d, '', '', /text wider than its box/, () => { const e = [...document.querySelectorAll('.r-body .r-at > span, .r-body .r-sec h3')].find((x) => x.getClientRects().length); e.style.cssText = 'display: block; width: 20px; white-space: nowrap; overflow: visible'; }],
       ['a long status cell', d, '', '', /a cell runs out of its row/, () => { const b = [...document.querySelectorAll('.r-body')].find((e) => e.getClientRects().length); const s = document.createElement('dl'); s.className = 'r-st'; s.innerHTML = '<div class="r-sc"><dt>خانة</dt><dd>قيمة طويلة جدًا لا تتسع لنصف الجدول</dd></div>'.repeat(2); b.prepend(s); }],
       ['% before its number', d, '', '', /% shown before its number/, () => { document.querySelector('.r-kr').textContent = 'نسبة 20%'; }],
     ];
@@ -704,7 +709,8 @@ module.exports = function makeChecker(cfg) {
     ] : [], cfg.dock ? [] : [
       ['a dock item marked open', d, '', '', /a dock item is marked open under a sheet of no section/, () => { const e = document.querySelectorAll('.dock-item')[1]; e.classList.add('on'); }],
     ]);
-    const cases = generic.filter((c) => !(cfg.skipGeneric || []).concat(noTab, noDock).includes(c[0])).concat(alt, cfg.cases ? cfg.cases(d, se) : []);
+    // (a screen's skip list covers the extra plants too: a one-body sheet that never scrolls cannot hide a hint it never shows)
+    const cases = generic.filter((c) => !(cfg.skipGeneric || []).concat(noTab, noDock).includes(c[0])).concat(alt.filter((c) => !(cfg.skipGeneric || []).includes(c[0])), cfg.cases ? cfg.cases(d, se) : []);
     const results = [];
     for (const [name, x, extra, css, re, js] of cases) {
       const p = await open(ctxs[x.id], PAGE + qs(x) + extra);

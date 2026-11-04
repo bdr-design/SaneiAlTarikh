@@ -10,7 +10,7 @@ The approved panel sheet from the right (shared builder and checker), one body, 
 no dock item open). The stopped clock and the speed chip are drawn disabled (the secondary grey, aria-disabled). The end sheets are plain: no photo strip in the header. The clock is stopped and disabled (play glyph;
 VoiceOver «الحملة منتهية» on A and B, «الوقت متوقف حتى تختار» on C). The HUD date is the moment's; the nation card names
 no real person after 2011 (A and B «رئيس الدولة», C «المجلس · حكم انتقالي», VoiceOver «المجلس الانتقالي»; the card keeps B3's widths so the strip stays in place); the toast shows the moment's notification in
-the B3 toast's width (A «انتهت الحملة في 2100», B «انتهت الحملة: تصعيد نووي», C «ثورة: سقطت الحكومة»). On A the HUD's
+the B3 toast's width (A «انتهت الحملة في 2100», B «انتهت الحملة», C «ثورة: سقطت الحكومة»). On A the HUD's
 stability and influence show the report's 2100 values (71%, 70).
 
 ## A: «تقرير الأمة» (31 December 2100)

@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-10-20T11:21:02.963Z",
+ "ranAt": "2026-11-04T12:48:09.097Z",
  "devices": [
   "i16promax",
   "se"
@@ -96,9 +96,9 @@
    "name": "clipped",
    "ok": true,
    "sample": [
-    "clipped text: \"مليون\" 850.22..873 y 171..186",
-    "clipped text: \"لماذا؟\" 774.91..802.22 y 153..170",
-    "clipped text: \"8 / 10\" 646.66..652.34 y 167..186"
+    "clipped text: \"مليون\" 848.8..873 y 173..185",
+    "clipped text: \"لماذا؟\" 772.72..800.8 y 155..169",
+    "clipped text: \"8 / 10\" 635.52..652.34 y 169..185"
    ]
   },
   {
@@ -123,7 +123,7 @@
    "ok": true,
    "sample": [
     "panel not opaque: المحافظة: القاهرة rgba(9, 17, 25, 0.66)",
-    "contrast 4.21 for \"مليون\"",
+    "contrast 4.2 for \"السكان\"",
     "contrast 3.96 for \"لماذا؟\""
    ]
   },
@@ -140,7 +140,9 @@
    "name": "sheet width",
    "ok": true,
    "sample": [
-    "sheet width 330 (want clamp(42% of 832, 340, 440) = 349.4)"
+    "content outside its control (السكان 8.8 مليون، ثابت. لم): 8.8 مليونلماذا؟",
+    "content outside its control (السكان 8.8 مليون، ثابت. لم): 8.8 مليون",
+    "content outside its control (السكان 8.8 مليون، ثابت. لم): مليون"
    ]
   },
   {
@@ -156,27 +158,27 @@
    "name": "dock moved",
    "ok": true,
    "sample": [
-    "HUD element moved from its B3 position: .dock x 344.5..731.5 y 374.0..418.0 (B3 284.5..671.5, 374.0..418.0)",
-    "HUD element moved from its B3 position: .dock-item #1 x 691.3..722.5 y 375.0..417.0 (B3 631.3..662.5, 375.0..417.0)",
-    "HUD element moved from its B3 position: .dock-item #2 x 647.3..691.3 y 375.0..417.0 (B3 587.3..631.3, 375.0..417.0)"
+    "HUD element moved from its B3 position: .dock x 338.7..737.3 y 374.0..418.0 (B3 278.7..677.3, 374.0..418.0)",
+    "HUD element moved from its B3 position: .dock-item #1 x 696.0..728.3 y 375.0..417.0 (B3 636.0..668.3, 375.0..417.0)",
+    "HUD element moved from its B3 position: .dock-item #2 x 652.0..696.0 y 375.0..417.0 (B3 592.0..636.0, 375.0..417.0)"
    ]
   },
   {
    "name": "left stack moved",
    "ok": true,
    "sample": [
-    "HUD element moved from its B3 position: .toast x 70.0..275.6 y 56.0..88.0 (B3 62.0..267.6, 56.0..88.0)",
-    "HUD element moved from its B3 position: .btn.mode x 70.0..191.6 y 96.0..128.0 (B3 62.0..183.6, 96.0..128.0)",
-    "HUD element moved from its B3 position: .btn.home x 70.0..141.5 y 136.0..168.0 (B3 62.0..133.5, 136.0..168.0)"
+    "HUD element moved from its B3 position: .toast x 70.0..287.6 y 56.0..88.0 (B3 62.0..279.6, 56.0..88.0)",
+    "HUD element moved from its B3 position: .btn.mode x 70.0..197.3 y 96.0..128.0 (B3 62.0..189.3, 96.0..128.0)",
+    "HUD element moved from its B3 position: .btn.home x 70.0..143.2 y 136.0..168.0 (B3 62.0..135.2, 136.0..168.0)"
    ]
   },
   {
    "name": "top row covered",
    "ok": true,
    "sample": [
-    "hit overlap الخزينة 36.0 مليار $ / إغلاق",
     "hit overlap الاستقرار 58% / إغلاق",
-    "panel overlap الدولة: مصر، حسني مبارك، ج / المحافظة: القاهرة"
+    "panel overlap الدولة: مصر، حسني مبارك، ج / المحافظة: القاهرة",
+    "panel overlap الخزينة 36.0 مليار $ الاست / المحافظة: القاهرة"
    ]
   },
   {
@@ -191,8 +193,8 @@
    "ok": true,
    "sample": [
     "action card cuts a row (70.0 pt = 1.59 rows)",
-    "clipped text: \"−5\" 819..831 y 353..368",
-    "clipped text: \"اضطراب\" 783.33..819 y 353..368"
+    "clipped text: \"−5\" 818.06..831 y 355..367",
+    "clipped text: \"اضطراب\" 778.19..818.06 y 355..367"
    ]
   },
   {
@@ -247,9 +249,16 @@
    "name": "map label cut",
    "ok": true,
    "sample": [
-    "map label cut by a panel edge: العراق",
-    "map label cut by a panel edge: الأردن",
-    "map label cut by a panel edge: بنغازي"
+    "map label العراق cut by a panel edge",
+    "map label الأردن cut by a panel edge",
+    "map city dot 4 cut by a panel edge"
+   ]
+  },
+  {
+   "name": "city dot without its name",
+   "ok": true,
+   "sample": [
+    "map city dot shown without its name: 0"
    ]
   },
   {
@@ -290,7 +299,7 @@
   },
   {
    "name": "long status re-fits to two rows (se)",
-   "ok": true,
+   "ok": false,
    "fit": {
     "status": 1,
     "sheet": {
@@ -322,7 +331,10 @@
      ]
     }
    },
-   "sample": []
+   "sample": [
+    "text outside the sheet's 12 pt padding: \"حكومة الوحدة الوطنية\"",
+    "text overlap \"65%\" / \"المطالبات\""
+   ]
   },
   {
    "name": "long status forced into one strip (i16promax)",
@@ -360,7 +372,7 @@
    },
    "sample": [
     "text outside the sheet's 12 pt padding: \"دولتان مجاورتان\"",
-    "contrast 3.37 for \"دولتان مجاورتان\""
+    "contrast 1.48 for \"دولتان مجاورتان\""
    ]
   },
   {

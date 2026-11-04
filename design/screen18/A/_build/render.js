@@ -74,7 +74,7 @@ require(path.join(OUT, '../../shared/check/panelcheck.js'))({
   skipGeneric: ['section colour on data', 'section colour on a rule', 'emblem drawn grey', 'why without its subject', 'amber value without its icon', 'chip arrow against its sign', 'chip not white', 'tap in the side inset', 'text into a control'],
   cases: (d, se) => [
     ['weekday wrong', d, '', '', /the HUD date is not «الجمعة 31 ديسمبر 2100»/, () => { window.__setDate('السبت', '31 ديسمبر 2100'); }],
-    ['another moment toast', d, '', '', /the toast is not «انتهت الحملة في 2100»/, () => { document.querySelector('.alert-prev .txt').textContent = 'انتهت الحملة: تصعيد نووي'; }],
+    ['another moment toast', d, '', '', /the toast is not «انتهت الحملة في 2100»/, () => { document.querySelector('.alert-prev .txt').textContent = 'انتهت الحملة'; }],
     ['clock looks live', d, '', '.play[aria-disabled="true"] svg { color: rgb(234, 242, 247) !important; }', /the clock and the speed chip do not look and read disabled/],
     ['speed menu still offered', d, '', '', /the clock and the speed chip do not look and read disabled/, () => { const s = document.querySelector('.spd'); s.removeAttribute('aria-disabled'); s.setAttribute('aria-haspopup', 'menu'); }],
     ['tap in the side inset (report)', d, '&tab=report&scroll=end', '.sheet { right: -30px !important; }', /tap in side inset/],
