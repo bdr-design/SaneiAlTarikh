@@ -9,4 +9,4 @@
   .w-n > span { font-size: var(--fs-label); line-height: var(--lh-label); font-weight: 500; color: var(--t2); white-space: nowrap; }
   .w-v { flex: none; display: inline-flex; align-items: center; gap: 2px; font-size: var(--fs-val); line-height: var(--lh-val); font-weight: 600; }
   .w-sum { display: flex; align-items: center; justify-content: space-between; height: 24px; font-size: var(--fs-sec); line-height: var(--lh-sec); font-weight: 600; color: var(--t1); }
-  .w-sum b { font-size: var(--fs-val); line-height: var(--lh-val); font-weight: 600; }
+  .w-sum b { display: inline-flex; align-items: center; gap: 2px; font-size: var(--fs-val); line-height: var(--lh-val); font-weight: 600; }
