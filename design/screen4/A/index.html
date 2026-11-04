@@ -254,7 +254,11 @@
   [data-fit="1"] .ntext .rg::before { content: none; }
   [data-fit="2"] .ntext { grid-template-columns: auto; grid-template-areas: "nm"; }
   [data-fit="2"] .ntext .ldr, [data-fit="2"] .ntext .rg { display: none; }
-  [data-fit="3"] .ntext { display: none; }
+  [data-fit="3"] .ntext, [data-fit="4"] .ntext, [data-fit="5"] .ntext { display: none; }
+  /* fit 4 and 5 (only where the widest date would not fit otherwise): the indicators 4 pt apart and 6 pt from the strip
+     ends; fit 5 also moves the year up to the weekday line («السبت · 2011», window.__setDate) (2026-11-04) */
+  [data-fit="4"] .stat, [data-fit="5"] .stat { padding-inline: 2px; }
+  [data-fit="4"] .stats, [data-fit="5"] .stats { padding-inline: var(--s1); }
 
   /* ---------- Device overlay (on top of the render, for the fit check) ---------- */
   .dev { position: absolute; inset: 0; pointer-events: none; z-index: 50; }
@@ -681,16 +685,43 @@
 <script>
   /* Condense the nation card step by step until the top row fits the safe width
      (nation + 8 + indicators + 8 + date/speed pill). */
+  /* The date keeps the room of the widest date, so the top row never moves as the days pass (2026-11-04: a long date
+     such as «28 أغسطس 2088» ran off the SE). At fit 5 the year moves up to the weekday line. */
+  var MONTHS = ['يناير', 'فبراير', 'مارس', 'أبريل', 'مايو', 'يونيو', 'يوليو', 'أغسطس', 'سبتمبر', 'أكتوبر', 'نوفمبر', 'ديسمبر'],
+    DAYS = ['السبت', 'الأحد', 'الإثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة'];
+  window.__setDate = function (dw, d) {
+    var dow = document.querySelector('.date .dow'), dm = document.querySelector('.date .dmy'), m = d.match(/^(.*) (\d{4})$/),
+      compact = document.documentElement.dataset.fit === '5';
+    dow.dataset.dow = dw; dm.dataset.full = d;
+    dm.textContent = compact ? m[1] : d; dow.textContent = compact ? dw + ' · ' + m[2] : dw;
+    /* VoiceOver reads the date whole and in order («السبت 1 يناير 2011»), whichever line holds the year (role "text":
+       WebKit reads it as one phrase; the native HUD combines the two lines the same way) */
+    var tx = dow.parentNode; tx.setAttribute('role', 'text'); tx.setAttribute('aria-label', dw + ' ' + d);
+    dow.setAttribute('aria-hidden', 'true'); dm.setAttribute('aria-hidden', 'true');
+  };
+  function widestDate(compact) {
+    var tx = document.querySelector('.date .dtext'), w = 0;
+    [['dmy', MONTHS.map(function (m) { return '28 ' + m + (compact ? '' : ' 2088'); }).concat(MONTHS.map(function (m) { return '30 ' + m + (compact ? '' : ' 2100'); }))],
+     ['dow', DAYS.map(function (d) { return d + (compact ? ' · 2088' : ''); })]].forEach(function (k) {
+      var p = document.createElement('span'); p.className = k[0]; p.style.cssText = 'position: absolute; visibility: hidden; white-space: nowrap;';
+      tx.appendChild(p); k[1].forEach(function (s) { p.textContent = s; w = Math.max(w, p.getBoundingClientRect().width); }); p.remove();
+    });
+    return Math.ceil(w);
+  }
   function fitTop() {
-    var root = document.documentElement, top = document.querySelector('.top');
+    var root = document.documentElement, top = document.querySelector('.top'), tx = document.querySelector('.date .dtext');
+    var dow = document.querySelector('.date .dow'), dm = document.querySelector('.date .dmy');
+    var dw = dow.dataset.dow || dow.textContent, d = dm.dataset.full || dm.textContent, room = [widestDate(false), widestDate(true)];
     var kids = [document.querySelector('.nation'), document.querySelector('.stats'), document.querySelector('.date')];
     var gap = parseFloat(getComputedStyle(top).columnGap) || 0;
-    for (var lv = 0; lv <= 3; lv++) {
+    for (var lv = 0; lv <= 5; lv++) {
       root.dataset.fit = String(lv);
+      tx.style.minWidth = room[lv === 5 ? 1 : 0] + 'px';
+      window.__setDate(dw, d);
       var need = kids.reduce(function (a, e) { return a + e.getBoundingClientRect().width; }, 0) + gap * (kids.length - 1);
       if (need <= top.clientWidth + 0.01) break;
     }
-    window.__fit = { level: +root.dataset.fit, need: need, avail: top.clientWidth };
+    window.__fit = { level: +root.dataset.fit, need: need, avail: top.clientWidth, dateRoom: parseFloat(tx.style.minWidth) };
   }
 
   /* ---------- Province sheet ---------- */

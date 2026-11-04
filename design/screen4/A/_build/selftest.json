@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-10-20T11:21:02.963Z",
+ "ranAt": "2026-11-04T13:24:50.638Z",
  "devices": [
   "i16promax",
   "se"
@@ -98,7 +98,7 @@
    "sample": [
     "clipped text: \"مليون\" 850.22..873 y 171..186",
     "clipped text: \"لماذا؟\" 774.91..802.22 y 153..170",
-    "clipped text: \"8 / 10\" 646.66..652.34 y 167..186"
+    "clipped text: \"8 / 10\" 646.64..652.33 y 167..186"
    ]
   },
   {
@@ -174,9 +174,9 @@
    "name": "top row covered",
    "ok": true,
    "sample": [
-    "hit overlap الخزينة 36.0 مليار $ / إغلاق",
     "hit overlap الاستقرار 58% / إغلاق",
-    "panel overlap الدولة: مصر، حسني مبارك، ج / المحافظة: القاهرة"
+    "panel overlap الدولة: مصر، حسني مبارك، ج / المحافظة: القاهرة",
+    "panel overlap الخزينة 36.0 مليار $ الاست / المحافظة: القاهرة"
    ]
   },
   {
@@ -247,9 +247,16 @@
    "name": "map label cut",
    "ok": true,
    "sample": [
-    "map label cut by a panel edge: العراق",
-    "map label cut by a panel edge: الأردن",
-    "map label cut by a panel edge: بنغازي"
+    "map label العراق cut by a panel edge",
+    "map label الأردن cut by a panel edge",
+    "map city dot 4 cut by a panel edge"
+   ]
+  },
+  {
+   "name": "city dot without its name",
+   "ok": true,
+   "sample": [
+    "map city dot shown without its name: 0"
    ]
   },
   {

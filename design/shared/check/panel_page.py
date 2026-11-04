@@ -17,7 +17,7 @@ Usage, from a screen's assemble.py:
 from pathlib import Path
 
 
-def build(R, S, D, *, title, sec, dock_label, dock_icon, tabs, fit_tab, css, symbols='', sheet='sheet.html', url_doc='', init_js='', extra_subs=()):
+def build(R, S, D, *, title, sec, dock_label=None, dock_icon=None, tabs, fit_tab, css, symbols='', sheet='sheet.html', url_doc='', init_js='', extra_subs=()):
     """R: repo root, S: the screen's _build dir, D: the output dir. tabs: the tab ids in order (the first is the
     default); fit_tab: the tab whose body chooses the fit level (None: level 0). css: the screen's own CSS files (in S).
     sec: the section id in section_identity.css (data-sec). init_js: extra lines for the URL parser (JS, 4-space
@@ -56,9 +56,11 @@ def build(R, S, D, *, title, sec, dock_label, dock_icon, tabs, fit_tab, css, sym
     # the dock shows the panel's section as open
     # (the end items carry extra classes, so the item is found by its icon and label)
     import re
-    pat = re.compile(r'<button class="dock-item tap([^"]*)"><svg class="i"><use href="#' + re.escape(dock_icon) + r'"/></svg><span>' + re.escape(dock_label) + r'</span></button>')
-    assert len(pat.findall(t)) == 1, ('dock item', dock_label)
-    t = pat.sub(lambda m: '<button class="dock-item tap' + m.group(1) + ' on" aria-current="page"><svg class="i"><use href="#' + dock_icon + '"/></svg><span>' + dock_label + '</span></button>', t)
+    # (a sheet of no section, such as a decision or a dialog: dock_label None, no item marked)
+    if dock_label:
+        pat = re.compile(r'<button class="dock-item tap([^"]*)"><svg class="i"><use href="#' + re.escape(dock_icon) + r'"/></svg><span>' + re.escape(dock_label) + r'</span></button>')
+        assert len(pat.findall(t)) == 1, ('dock item', dock_label)
+        t = pat.sub(lambda m: '<button class="dock-item tap' + m.group(1) + ' on" aria-current="page"><svg class="i"><use href="#' + dock_icon + '"/></svg><span>' + dock_label + '</span></button>', t)
     # no province is selected: drop Cairo's selection layer (the map keeps the player's country outline and Cairo's label)
     s0 = t.index('  <!-- the tapped province: Cairo Governorate')
     s1 = t.index('  </svg>', s0) + len('  </svg>\n')

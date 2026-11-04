@@ -368,14 +368,18 @@ module.exports = function makeChecker(cfg) {
         texts.filter((x) => x.sheet && !x.faded).forEach((x) => { if (inter(x.line, box(hb))) issues.push(`scroll hint over text: "${x.t}"`); });
       } }
     // the tabs: a tab list right to left in the brief's order, exactly the open one selected
-    { const tl = q('.r-tabs'), tabs = qa('.r-tab');
+    // (a sheet with one body and no tab row, such as a decision or a dialog: SCREEN.noTabs; it has no tab list at all)
+    if (SCREEN.noTabs) { if (q('.r-tabs') || document.querySelectorAll('.r-tab').length) issues.push('a tab row on a sheet that has one body'); }
+    else { const tl = q('.r-tabs'), tabs = qa('.r-tab');
       if (!tl || tl.getAttribute('role') !== 'tablist' || [...document.querySelectorAll('.r-tab')].some((e) => e.getAttribute('role') !== 'tab')) issues.push('a11y: the tabs are not a tab list');
       if (tabs.map((e) => e.dataset.for).join(',') !== SCREEN.tabs.join(',')) issues.push(`tabs must be ${SCREEN.tabs.join(', ')} in that order`);
       for (let k = 1; k < tabs.length; k++) if (!(tabs[k].getBoundingClientRect().right <= tabs[k - 1].getBoundingClientRect().left + 0.5)) issues.push(`tab ${k + 1} is not left of tab ${k}`);
       const ons = qa('.r-tab.on'); if (ons.length !== 1 || ons[0].dataset.for !== tab || ons[0].getAttribute('aria-selected') !== 'true' || qa('.r-tab[aria-selected="true"]').length !== 1) issues.push('exactly the open tab must be selected'); }
     // ---------- 8c. section identity: the open dock item, the top line, the emblem and the open tab, never data ----------
     { const on = qa('.dock-item.on'), drawn = (cs) => cs.content !== 'none' && cs.content !== 'normal' && cs.display !== 'none';
-      if (visible(q('.dock'))) {
+      // a sheet that belongs to no section (a decision, a dialog: DOCK null) marks no dock item
+      if (visible(q('.dock')) && !DOCK) { if (on.length) issues.push('a dock item is marked open under a sheet of no section'); }
+      else if (visible(q('.dock'))) {
         if (on.length !== 1 || on[0].textContent.trim() !== DOCK || on[0].getAttribute('aria-current') !== 'page') issues.push(`the open section «${DOCK}» is not marked in the dock`);
         else {
           const ul = getComputedStyle(on[0], '::after');
@@ -437,13 +441,26 @@ module.exports = function makeChecker(cfg) {
     // «لماذا؟» names its subject: the headline it explains
     qa('.sheet .r-kpi').forEach((k) => { const w = k.querySelector('.r-why'), kl = T(k.querySelector('.r-kl'));
       if (w && !((w.getAttribute('aria-label') || '').startsWith('لماذا؟ ') && (w.getAttribute('aria-label') || '').includes(kl))) issues.push(`a11y: «لماذا؟» does not name its subject «${kl}»`); });
+    // a headline cell or a status cell keeps its text inside it, and the cells inside their row (2026-11-04: a long
+    // label ran into the next cell on screens 5 and 11, a status table ran past the padding on screens 5 and 6)
+    { const inner = (e) => { const r = e.getBoundingClientRect(), cs = getComputedStyle(e); return { x0: r.left + parseFloat(cs.paddingLeft) - 0.5, x1: r.right - parseFloat(cs.paddingRight) + 0.5 }; };
+      const out = (e, c) => { const r = e.getBoundingClientRect(); return r.width > 0 && (r.left < c.x0 || r.right > c.x1); };
+      qa('.sheet .r-kpis, .sheet .r-st').forEach((g) => { const gc = inner(g), bd = g.closest('.r-body'), bc = bd ? inner(bd) : gc;
+        [...g.children].filter(visible).forEach((c) => { if (out(c, gc) || out(c, bc)) issues.push(`a cell runs out of its row: «${T(c).slice(0, 24)}»`);
+          if (c.matches('.r-kpi')) { const cc = inner(c); [...c.children].filter(visible).forEach((e) => { if (out(e, cc)) issues.push(`a headline cell's text runs out of its cell: «${T(e).slice(0, 24)}»`); }); } }); }); }
+    // text wider than its own box (one line that does not wrap runs past its box into the next one, even when nothing
+    // clips it: 2026-11-04, a row's subtitle ran 3 pt into the gap before its segments)
+    qa('.sheet .r-body *').filter((e) => e.clientWidth > 0 && getComputedStyle(e).whiteSpace === 'nowrap' && getComputedStyle(e).overflowX === 'visible' && [...e.childNodes].some((n) => n.nodeType === 3 && n.textContent.trim()) && e.scrollWidth > e.clientWidth + 1)
+      .forEach((e) => issues.push(`text wider than its box: «${T(e).slice(0, 24)}» (${e.scrollWidth} in ${e.clientWidth})`));
     // bars are data: teal, filling from the right (RTL)
     qa('.sheet .i-bar, .sheet .p-meter').forEach((b) => { const a = getComputedStyle(b, '::after');
       if (a.backgroundColor !== TOK.teal || a.right !== '0px') issues.push(`a bar not teal from the right: ${a.backgroundColor} right ${a.right}`); });
     qa('.sheet .n-pr i, .sheet .s-prog i').forEach((b) => { const cs = getComputedStyle(b); if (cs.backgroundColor !== TOK.teal || Math.abs(b.getBoundingClientRect().right - b.parentElement.getBoundingClientRect().right) > 0.6) issues.push('a progress bar not teal from the right'); });
     // VoiceOver: every action and link row reads whole, with the numbers it shows and «دولار», never «$»
+    // (a count may be said in words, as Arabic does for one and two: «نقطة واحدة», «نقطتين»)
+    const said = (al) => nums(al).map(Math.abs).concat(/(نقطة|تشكيل|سفينة|طائرة) واحدة?|واحدة\b/.test(al) ? [1] : [], /نقطتين|تشكيلين|اثنتين|اثنين/.test(al) ? [2] : []);
     qa('.sheet .r-act, .sheet .r-link').forEach((a) => { const al = a.getAttribute('aria-label') || '', at = a.querySelector('.r-at'), want = nums(at.innerText).concat(a.querySelector('.r-chip') ? nums(a.querySelector('.r-chip').innerText) : []);
-      if (!al || want.some((x) => !nums(al).map(Math.abs).includes(Math.abs(x)))) issues.push(`a11y: «${T(at && at.querySelector('b'))}» does not read its numbers`);
+      if (!al || want.some((x) => !said(al).includes(Math.abs(x)))) issues.push(`a11y: «${T(at && at.querySelector('b'))}» does not read its numbers`);
       if (al.includes('$')) issues.push(`a11y: «${T(at && at.querySelector('b'))}» reads «$» (say «دولار»)`);
       if (at && at.innerText.includes('$') && !al.includes('دولار')) issues.push(`a11y: «${T(at.querySelector('b'))}» does not say «دولار»`);
       const chip = a.querySelector('.r-chip'), use = chip && chip.querySelector('use');
@@ -454,7 +471,7 @@ module.exports = function makeChecker(cfg) {
     // of its visible text is in its label (the separator «·» aside)
     qa('.sheet [role="img"], .sheet .tap[role="button"], .sheet .r-act[aria-label]').filter((e) => e.innerText.trim() && !e.matches('.r-tab')).forEach((e) => { const al = (e.getAttribute('aria-label') || '').replace(/[،.:؛]/g, ' '), shown = e.innerText.replace(/[·،.:؛]/g, ' ');
       const words = shown.split(/\s+/).filter((w) => w.length > 1 && !/^[\d.%+−-]+$/.test(w)), missW = words.filter((w) => !al.includes(w.replace(/[«»]/g, '')));
-      const missN = nums(shown).filter((x) => !nums(al).map(Math.abs).includes(Math.abs(x)));
+      const missN = nums(shown).filter((x) => !said(al).includes(Math.abs(x)));
       if (missW.length || missN.length) issues.push(`a11y: «${(e.getAttribute('aria-label') || '').slice(0, 24)}» does not read all it shows: ${missW.concat(missN).slice(0, 4).join(' ')}`); });
     // a trend line's arrow agrees with its sign
     qa('.sheet .r-kr').forEach((k) => { const u = k.querySelector('use'), n = nums(k.innerText)[0]; if (u && n !== undefined && n !== 0 && /#t-(up|down)/.test(u.getAttribute('href')) && (u.getAttribute('href') === '#t-up') !== (n > 0)) issues.push(`the arrow of «${T(k)}» does not agree with its sign`); });
@@ -511,6 +528,13 @@ module.exports = function makeChecker(cfg) {
     cover(live(583, 424, 945, 732), 'Egypt');
     const me = q('.map').getBoundingClientRect();
     if (me.left > 0.5 || me.top > 0.5 || me.right < W - 0.5 || me.bottom < H - 0.5) issues.push('map not full-bleed');
+    // the map stays central and undimmed (the owner's rule mapCentral): no fade or filter on it, and nothing drawn over
+    // Egypt but the map itself, its labels and the device frame
+    { const mp = q('.map'), cs = getComputedStyle(mp); if (effOp(mp) < 0.999 || cs.filter !== 'none') issues.push(`the map is dimmed (opacity ${effOp(mp).toFixed(2)}, filter ${cs.filter})`);
+      const eg = live(583, 424, 945, 732);
+      [...document.body.querySelectorAll('*')].filter((e) => !e.closest('.map, .hud, .dev, .frost') && e.getClientRects().length).forEach((e) => { const cs2 = getComputedStyle(e), bg = cs2.backgroundColor;
+        const filled = (bg && bg !== 'rgba(0, 0, 0, 0)' && bg !== 'transparent') || cs2.backgroundImage !== 'none' || cs2.backdropFilter !== 'none';
+        if (filled && inter(box(e.getBoundingClientRect()), eg)) issues.push(`something drawn over the map: ${label(e)} (${bg})`); }); }
     // map labels and city dots never cut by a panel edge (2 pt margin, halo included), squeezed against a panel, or
     // sliced by the screen edge or the side inset (the notch, the Dynamic Island)
     const hiddenLabels = [];
@@ -531,7 +555,7 @@ module.exports = function makeChecker(cfg) {
 
       return { issues, typeSeen, texts, clearNow, fit: { top: window.__fit, sheet: fit, sheetPos: window.__sheetpos, body }, map: m, hiddenLabels,
         sheet: R(sr), hits: taps.map((t) => ({ l: t.label, x0: +t.hit.x0.toFixed(1), x1: +t.hit.x1.toFixed(1), y0: +t.hit.y0.toFixed(1), y1: +t.hit.y1.toFixed(1) })) };
-    }, { d, TOK, BRIEF, HEAD, b3, view, HUDSEL_REST, DATA: cfg.DATA || {}, SCREEN: { src: cfg.screenChecks || '', tabs: TABS, fitTab: cfg.fitTab || TABS[0] }, DOCK: cfg.dock });
+    }, { d, TOK, BRIEF, HEAD, b3, view, HUDSEL_REST, DATA: cfg.DATA || {}, SCREEN: { src: cfg.screenChecks || '', tabs: TABS, fitTab: cfg.fitTab === false ? null : (cfg.fitTab || TABS[0]), noTabs: !!cfg.noTabs }, DOCK: cfg.dock || null });
   }
 
   async function contrast(p, texts) {
@@ -612,6 +636,9 @@ module.exports = function makeChecker(cfg) {
       ['panel not opaque', d, '', '.sheet > .frost::after { background: rgba(9, 17, 25, 0.66) !important; }', /panel not opaque/],
       ['see-through panel', d, '', '.sheet { opacity: .6 !important; }', /panel not opaque \(opacity 0\.60\)/],
       ['Egypt covered', d, '', ':root { --map-cx: 760px !important; }', /Egypt covered by panel/],
+      ['map dimmed', d, '', '.map { filter: brightness(.35) !important; }', /the map is dimmed/],
+      ['map faded', d, '', '.map { opacity: .3 !important; }', /the map is dimmed/],
+      ['scrim over the map', d, '', '', /something drawn over the map/, () => { const s = document.createElement('div'); s.style.cssText = 'position:absolute;inset:0;background:rgba(0,0,0,.55);z-index:3;pointer-events:none'; document.body.appendChild(s); }],
       ['sheet width', d, '', ':root { --sheet-w: 330px !important; }', /sheet width 330/],
       ['sheet top', d, '', '.sheet { top: 30px !important; }', /sheet top [\d.]+ \(want 8 pt under the top row/],
       ['dock hidden although it fits', d, '', '[data-dock="left"] .dock { display: none !important; }', /dock hidden although it fits/],
@@ -660,11 +687,30 @@ module.exports = function makeChecker(cfg) {
       ['amber value without its icon', d, '', '', /colour alone: .* \(its label's icon is not in its colour\)/, () => { const b = document.querySelector('.r-kv b'); b.classList.add('r-amber'); }],
       ['chip arrow against its sign', d, '', '', /the chip's arrow does not agree with its sign|does not say the chip's direction/, () => { const u = document.querySelector('.r-act .r-chip use'); if (u) u.setAttribute('href', u.getAttribute('href') === '#t-up' ? '#t-down' : '#t-up'); }],
       ['row read in part', d, '', '', /does not read all it shows/, () => { const r = [...document.querySelectorAll('.sheet [role="img"], .sheet .tap[role="button"]:not(.r-tab), .sheet .r-act[aria-label]')].find((e) => e.getClientRects().length && e.innerText.trim()); r.setAttribute('aria-label', 'جزء'); }],
+      ['a long headline label', d, '', '', /a cell runs out of its row|a headline cell's text runs out of its cell/, () => { const b = [...document.querySelectorAll('.r-body')].find((e) => e.getClientRects().length); const s = document.createElement('div'); s.className = 'r-kpis'; s.innerHTML = '<div class="r-kpi"><span class="r-kl">عنوان طويل جدًا لا يتسع لخانته أبدًا</span><span class="r-kv"><b class="ltr">1</b></span></div>'.repeat(3); b.prepend(s); }],
+      ['text wider than its box', d, '', '', /text wider than its box/, () => { const e = [...document.querySelectorAll('.r-body .r-at > span, .r-body .r-sec h3')].find((x) => x.getClientRects().length); e.style.cssText = 'display: block; width: 20px; white-space: nowrap; overflow: visible'; }],
+      ['a long status cell', d, '', '', /a cell runs out of its row/, () => { const b = [...document.querySelectorAll('.r-body')].find((e) => e.getClientRects().length); const s = document.createElement('dl'); s.className = 'r-st'; s.innerHTML = '<div class="r-sc"><dt>خانة</dt><dd>قيمة طويلة جدًا لا تتسع لنصف الجدول</dd></div>'.repeat(2); b.prepend(s); }],
       ['% before its number', d, '', '', /% shown before its number/, () => { document.querySelector('.r-kr').textContent = 'نسبة 20%'; }],
     ];
     // a panel whose first tab has no headline numbers or status table (المزيد) leaves out the plants aimed at them and
     // brings its own
-    const cases = generic.filter((c) => !(cfg.skipGeneric || []).includes(c[0])).concat(cfg.cases ? cfg.cases(d, se) : []);
+    // a sheet with no tab row and no section (a decision, a dialog) leaves out the plants aimed at them and gets the same
+    // defects planted on its own elements
+    const noTab = cfg.noTabs ? ['font weight', 'two tab bodies', 'two tabs selected', 'tabs not a tab list', 'tabs reversed', 'fades wrong', 'hint chevron missing', 'hint over the content', 'control height', 'icon size', 'open tab neutral', 'closed tabs like the open one', 'section colour on a rule'] : [];
+    const noDock = (cfg.dock ? [] : ['dock item not marked', 'dock underline missing', 'closed dock item coloured']).concat(cfg.fitTab === false ? ['overview scrolls', 'fit not the loosest'] : []);   // (fitTab false: no body must fit whole)
+    const alt = [].concat(cfg.noTabs ? [
+      ['font weight (no tabs)', d, '', '.r-sub { font-weight: 700 !important; }', /font weight 11\.5\/700/],
+      ['a tab row on a one-body sheet', d, '', '', /a tab row on a sheet that has one body/, () => { const n = document.createElement('nav'); n.className = 'r-tabs'; n.setAttribute('role', 'tablist'); document.querySelector('.r-in').insertBefore(n, document.querySelector('.r-body')); }],
+      ['control height (no tabs)', d, '', '.r-x { height: 40px !important; }', /control height 40.00 for \.r-x/],
+      ['icon size (no tabs)', d, '', '.r-x svg.i { width: 19px !important; height: 19px !important; }', /icon size 19x19/],
+      ['fades wrong (no tabs)', se, '', '', /fades .* do not match the scroll state/, () => { document.documentElement.dataset.fbot = document.documentElement.dataset.fbot === '1' ? '0' : '1'; }],
+      ['hint chevron missing (no tabs)', se, '', '.r-hint { display: none !important; }', /scroll hint chevron missing with content below/],
+      ['hint over the content (no tabs)', se, '', '.r-hint { bottom: 150px !important; }', /scroll hint not centred in the clear strip/],
+    ] : [], cfg.dock ? [] : [
+      ['a dock item marked open', d, '', '', /a dock item is marked open under a sheet of no section/, () => { const e = document.querySelectorAll('.dock-item')[1]; e.classList.add('on'); }],
+    ]);
+    // (a screen's skip list covers the extra plants too: a one-body sheet that never scrolls cannot hide a hint it never shows)
+    const cases = generic.filter((c) => !(cfg.skipGeneric || []).concat(noTab, noDock).includes(c[0])).concat(alt.filter((c) => !(cfg.skipGeneric || []).includes(c[0])), cfg.cases ? cfg.cases(d, se) : []);
     const results = [];
     for (const [name, x, extra, css, re, js] of cases) {
       const p = await open(ctxs[x.id], PAGE + qs(x) + extra);

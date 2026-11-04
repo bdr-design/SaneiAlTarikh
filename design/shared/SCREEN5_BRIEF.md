@@ -56,7 +56,7 @@ The player taps «الدولة», the first item of the section dock. The panel 
 - **Tabs:** نظرة عامة / القيادة / السياسات / المشاريع (icons: grid, people, document, crane). No crown: Egypt is a republic.
   1. **نظرة عامة:**
      - The 3 headline numbers, each with a monthly rate and «لماذا؟»: رأس المال السياسي 86, الاستقرار 58%, الشرعية 44 / 100 (amber).
-     - The status table: نظام الحكم, الدستور «1971 · عُدّل في 2007», الحزب الحاكم, الطوارئ («سارية منذ 1981», amber).
+     - The status table: نظام الحكم, «دستور 1971» «عُدّل 2007» (shortened 2026-11-04: the cell overflowed on every phone), الحزب الحاكم, الطوارئ («سارية منذ 1981», amber).
      - Two decisions with their cost, written «الكلفة: 60» plus the political-capital glyph:
        - «رفع حالة الطوارئ» is a shortcut to the emergency law's change: the same command, cost and cooldown.
        - «تعديل وزاري» is allowed once a year. In its wait (`?states=1`) its line reads «متاح في يناير 2012», and its tile and chip step back to grey.

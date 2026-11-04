@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-02T21:42:43.196Z",
+ "ranAt": "2026-11-04T13:01:55.341Z",
  "inputs": {
   "files": [
    "index.html",
@@ -19,7 +19,7 @@
    "header_cairo.jpg",
    "map_overlay_cairo.svg"
   ],
-  "sha1": "e90b19311041c6497b7028e09163120182a840b0"
+  "sha1": "f9721d190c1b78ce1997514f8e8385c383cdde81"
  },
  "cleanIssues": {
   "i16promax": [],
@@ -226,8 +226,8 @@
    "ok": true,
    "sample": [
     "hit overlap الخزينة 36.0 مليار $ / إغلاق",
-    "panel overlap الدولة: مصر، حسني مبارك، ج / المحافظة: القاهرة",
-    "panel overlap الخزينة 36.0 مليار $ الاست / المحافظة: القاهرة"
+    "hit overlap الاستقرار 58% / إغلاق",
+    "panel overlap الدولة: مصر، حسني مبارك، ج / المحافظة: القاهرة"
    ]
   },
   {
@@ -337,9 +337,9 @@
    "name": "brief text scrolled away",
    "ok": true,
    "sample": [
-    "clipped text (top): \"مخفض\" 823.48..857 y 140..157",
-    "clipped text (top): \"متوازن\" 717.38..746.34 y 140..157",
-    "clipped text (top): \"مرتفع\" 610.94..635.67 y 140..157"
+    "fades 0/1 do not match the scroll state (top 181, over 181.0)",
+    "brief text not fully visible: إدارة المحافظة",
+    "brief text not fully visible: المحافظ"
    ]
   },
   {
@@ -587,6 +587,21 @@
    "ok": true,
    "sample": [
     "a11y: unit row 2 does not read its name, command and organization as one element"
+   ]
+  },
+  {
+   "name": "decision buttons out of the card",
+   "ok": true,
+   "sample": [
+    "horizontal overflow in إدارة المحافظة المحافظد. ع",
+    "decision: the buttons run out of the card"
+   ]
+  },
+  {
+   "name": "decision footer in one row",
+   "ok": true,
+   "sample": [
+    "decision: the positions line must be above the buttons"
    ]
   },
   {

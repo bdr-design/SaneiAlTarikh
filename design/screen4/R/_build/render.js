@@ -448,7 +448,8 @@ async function measure(p, d, b3, view) {
     qa('.r-dbody').forEach((d0) => { const ic = d0.querySelector('.r-dic').getBoundingClientRect(), tx = d0.querySelector('.r-dtx').getBoundingClientRect();
       if (!(ic.left >= tx.right - 0.5)) issues.push('decision: icon must be right of its text'); });
     qa('.r-dfoot').forEach((f) => { const sp = f.querySelector('span').getBoundingClientRect(), bt = f.querySelector('.r-dbtn').getBoundingClientRect(), bs = [...f.querySelectorAll('.r-btn')].map((e) => e.getBoundingClientRect());
-      if (!(sp.left >= bt.right - 0.5)) issues.push('decision: the positions line must be right of the buttons');
+      if (!(sp.bottom <= bt.top + 0.5)) issues.push('decision: the positions line must be above the buttons');
+      if (!(bt.left >= f.getBoundingClientRect().left - 0.5 && bt.right <= f.getBoundingClientRect().right + 0.5)) issues.push('decision: the buttons run out of the card');
       if (!(bs[0].left >= bs[1].right - 0.5)) issues.push('decision: «اعتماد البرنامج» must be right of «تأجيل»'); });
     { const f = q('.r-flag').getBoundingClientRect(); if (!near(f.width / f.height, 4 / 3, 0.01)) issues.push('flag is not 4:3'); }
     // ---------- 8b. the details' other three tabs (T-007) ----------
@@ -718,6 +719,8 @@ async function selftest(b) {
     ['action reads $', d, '&tab=policy', '', /reads «\$»/, () => { document.querySelector('.r-gv[data-dtab="policy"] .r-act').setAttribute('aria-label', 'دعم الخدمات الأساسية: 300 مليون $ مرة واحدة. تخفض الاضطرابات 4 خلال 3 أشهر'); }],
     ['unit row reversed', d, '&tab=forces', '.p-unit { flex-direction: row-reverse !important; }', /unit row 1: order must be tile, name, readiness/],
     ['unit silent', d, '&tab=forces', '', /a11y: unit row 2 does not read/, () => { document.querySelectorAll('.p-unit')[1].removeAttribute('aria-label'); }],
+    ['decision buttons out of the card', d, '&view=govern', '.r-dbtn { transform: translateX(-260px) !important; }', /decision: the buttons run out of the card/],
+    ['decision footer in one row', d, '&view=govern', '.r-dfoot { flex-direction: row !important; }', /decision: the positions line must be above the buttons/],
     ['unit movable here', d, '&tab=forces', '', /unit row 1 has a control/, () => { const b = document.createElement('button'); b.className = 'r-btn tap'; b.textContent = 'تحريك'; document.querySelector('.p-unit').appendChild(b); }],
     ['amber alone', d, '&tab=policy', '', /colour alone: «مرتفع»/, () => { document.querySelector('.p-grp b.r-amber svg').remove(); }],
     ['red alone', d, '&tab=policy', '', /colour alone: «متوسط»/, () => { document.querySelector('.p-grp b').classList.add('r-red'); document.querySelector('.p-grp b').style.color = 'rgb(242, 112, 90)'; }],
