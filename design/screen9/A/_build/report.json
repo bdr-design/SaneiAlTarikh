@@ -1,7 +1,7 @@
 {
  "se": {
   "device": "667x375 side 0 bottom 0 none",
-  "renderedAt": "2026-11-04T12:51:26.771Z",
+  "renderedAt": "2026-11-04T13:09:50.807Z",
   "inputs": {
    "files": [
     "index.html",
@@ -28,7 +28,7 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "ef984318b7b37fbe7e0b838fe128bf5694db8d1b"
+   "sha1": "296add904ce1263179478f776deedfcef616882d"
   },
   "issues": [],
   "views": {
@@ -6284,7 +6284,7 @@
  },
  "mini": {
   "device": "812x375 side 50 bottom 21 notch",
-  "renderedAt": "2026-11-04T12:51:49.467Z",
+  "renderedAt": "2026-11-04T13:10:14.707Z",
   "inputs": {
    "files": [
     "index.html",
@@ -6311,7 +6311,7 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "ef984318b7b37fbe7e0b838fe128bf5694db8d1b"
+   "sha1": "296add904ce1263179478f776deedfcef616882d"
   },
   "issues": [],
   "views": {
@@ -13550,7 +13550,7 @@
  },
  "i14": {
   "device": "844x390 side 47 bottom 21 notch",
-  "renderedAt": "2026-11-04T12:52:17.287Z",
+  "renderedAt": "2026-11-04T13:10:44.063Z",
   "inputs": {
    "files": [
     "index.html",
@@ -13577,7 +13577,7 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "ef984318b7b37fbe7e0b838fe128bf5694db8d1b"
+   "sha1": "296add904ce1263179478f776deedfcef616882d"
   },
   "issues": [],
   "views": {
@@ -21344,7 +21344,7 @@
  },
  "i16": {
   "device": "852x393 side 59 bottom 21 island",
-  "renderedAt": "2026-11-04T12:52:43.150Z",
+  "renderedAt": "2026-11-04T13:11:10.876Z",
   "inputs": {
    "files": [
     "index.html",
@@ -29028,7 +29028,7 @@
  },
  "i16pro": {
   "device": "874x402 side 62 bottom 21 island",
-  "renderedAt": "2026-11-04T12:53:09.870Z",
+  "renderedAt": "2026-11-04T13:11:36.952Z",
   "inputs": {
    "files": [
     "index.html",
@@ -36921,7 +36921,7 @@
  },
  "i11": {
   "device": "896x414 side 48 bottom 21 notch",
-  "renderedAt": "2026-11-04T12:53:36.307Z",
+  "renderedAt": "2026-11-04T13:12:04.027Z",
   "inputs": {
    "files": [
     "index.html",
@@ -43692,7 +43692,7 @@
  },
  "i16promax": {
   "device": "956x440 side 62 bottom 21 island",
-  "renderedAt": "2026-11-04T12:54:00.575Z",
+  "renderedAt": "2026-11-04T13:12:29.908Z",
   "inputs": {
    "files": [
     "index.html",

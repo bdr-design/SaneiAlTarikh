@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-02T21:13:34.960Z",
+ "ranAt": "2026-11-04T13:20:23.679Z",
  "inputs": {
   "files": [
    "index.html",
@@ -20,7 +20,7 @@
    "header_cairo.jpg",
    "map_overlay_cairo.svg"
   ],
-  "sha1": "5ea48950da7711719152f2e0197ae53ed15d40fe"
+  "sha1": "9f5415575c0e92662fb07acc96e392285e3d4934"
  },
  "cleanIssues": {
   "i16promax": [],
@@ -83,7 +83,7 @@
    "sample": [
     "text colour off-token rgb(136, 153, 170): \"عجز الموازنة\"",
     "text colour off-token rgb(136, 153, 170): \"الدين العام\"",
-    "text colour off-token rgb(136, 153, 170): \"سعر الصرف\""
+    "text colour off-token rgb(136, 153, 170): \"الدولار\""
    ]
   },
   {
@@ -140,27 +140,27 @@
    "name": "tap in the side inset",
    "ok": true,
    "sample": [
-    "text in side inset: نظرة عامة",
     "text in side inset: 219",
-    "text in side inset: +5.1%"
+    "text in side inset: +5.1%",
+    "text in side inset: لماذا؟"
    ]
   },
   {
    "name": "text in the side inset",
    "ok": true,
    "sample": [
-    "text in side inset: نظرة عامة",
     "text in side inset: 219",
-    "text in side inset: +5.1%"
+    "text in side inset: +5.1%",
+    "text in side inset: لماذا؟"
    ]
   },
   {
    "name": "panel in the side inset",
    "ok": true,
    "sample": [
-    "text in side inset: نظرة عامة",
     "text in side inset: 219",
-    "text in side inset: +5.1%"
+    "text in side inset: +5.1%",
+    "text in side inset: لماذا؟"
    ]
   },
   {
@@ -214,7 +214,7 @@
    "sample": [
     "panel not opaque: الاقتصاد: مصر rgba(9, 17, 25, 0.66)",
     "contrast 3.56 for \"نظرة عامة\"",
-    "contrast 3.15 for \"الميزانية\""
+    "contrast 4.08 for \"الميزانية\""
    ]
   },
   {
@@ -255,18 +255,18 @@
    "name": "sheet top",
    "ok": true,
    "sample": [
-    "hit overlap الخزينة 36.0 مليار $ / إغلاق",
     "hit overlap الاستقرار 58% / إغلاق",
-    "panel overlap الدولة: مصر، حسني مبارك، ج / الاقتصاد: مصر"
+    "panel overlap الدولة: مصر، حسني مبارك، ج / الاقتصاد: مصر",
+    "panel overlap الخزينة 36.0 مليار $ الاست / الاقتصاد: مصر"
    ]
   },
   {
    "name": "panel overlap",
    "ok": true,
    "sample": [
-    "hit overlap الخزينة 36.0 مليار $ / إغلاق",
     "hit overlap الاستقرار 58% / إغلاق",
-    "panel overlap الدولة: مصر، حسني مبارك، ج / الاقتصاد: مصر"
+    "panel overlap الدولة: مصر، حسني مبارك، ج / الاقتصاد: مصر",
+    "panel overlap الخزينة 36.0 مليار $ الاست / الاقتصاد: مصر"
    ]
   },
   {
@@ -412,7 +412,7 @@
    "sample": [
     "% shown before its number: \"من الناتج 8.1%\"",
     "amber check: «8.1% من الناتج» not found",
-    "brief rows differ: status: [[\"عجز الموازنة\",\"من الناتج 8.1%\"],[\"الدين العام\",\"73% من الناتج\"],[\"سعر الصرف\",\"5.80 جنيه للدولار\"],[\"التصنيف\",\"BB+ مستقر\"],[\"نظام الصرف\",\"تعويم مُدار\"],[\"قابل"
+    "brief rows differ: status: [[\"عجز الموازنة\",\"من الناتج 8.1%\"],[\"الدين العام\",\"73% من الناتج\"],[\"الدولار\",\"5.80 جنيه\"],[\"التصنيف\",\"BB+ مستقر\"],[\"نظام الصرف\",\"تعويم مُدار\"],[\"قابلية التحويل"
    ]
   },
   {
@@ -466,7 +466,7 @@
    "sample": [
     "brief text not fully visible: عجز الموازنة",
     "brief text not fully visible: الدين العام",
-    "brief text not fully visible: سعر الصرف"
+    "brief text not fully visible: الدولار"
    ]
   },
   {

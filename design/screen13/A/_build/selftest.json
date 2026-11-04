@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-04T12:31:48.697Z",
+ "ranAt": "2026-11-04T13:09:28.868Z",
  "inputs": {
   "files": [
    "index.html",
@@ -22,7 +22,7 @@
    "header_cairo.jpg",
    "map_overlay_cairo.svg"
   ],
-  "sha1": "cb1ed0f747254421ca1648d6da9b63b1b94b0afa"
+  "sha1": "97c743731b456c43850fa33f6e22cfe173030722"
  },
  "cleanIssues": {
   "i16promax": [],
@@ -101,7 +101,7 @@
    "ok": true,
    "sample": [
     "panel not opaque: المزيد rgba(9, 17, 25, 0.66)",
-    "contrast 4.09 for \"الحفظ\"",
+    "contrast 4.22 for \"الحفظ\"",
     "contrast 4.08 for \"الإعدادات\""
    ]
   },
@@ -157,8 +157,8 @@
    "ok": true,
    "sample": [
     "hit overlap الاستقرار 58% / إغلاق",
-    "hit overlap الشرعية 44 / إغلاق",
-    "panel overlap الدولة: مصر، حسني مبارك، ج / المزيد"
+    "panel overlap الدولة: مصر، حسني مبارك، ج / المزيد",
+    "panel overlap الخزينة 36.0 مليار $ الاست / المزيد"
    ]
   },
   {
@@ -181,9 +181,9 @@
    "name": "left stack moved",
    "ok": true,
    "sample": [
-    "HUD element moved from its B3 position: .toast x 70.0..287.6 y 56.0..88.0",
-    "HUD element moved from its B3 position: .btn.mode x 70.0..197.3 y 96.0..128.0",
-    "HUD element moved from its B3 position: .btn.home x 70.0..143.2 y 136.0..168.0"
+    "HUD element moved from its B3 position: .toast x 70.0..275.6 y 56.0..88.0",
+    "HUD element moved from its B3 position: .btn.mode x 70.0..191.6 y 96.0..128.0",
+    "HUD element moved from its B3 position: .btn.home x 70.0..141.5 y 136.0..168.0"
    ]
   },
   {
@@ -197,9 +197,9 @@
    "name": "two tab bodies",
    "ok": true,
    "sample": [
+    "clipped text (bottom): \"الصوت واللمس والحركة\" 774.48..881 y 400.64..417.64",
     "control cut by its scroll area (bottom): حفظ تلقائي: 1 يناير 2011، ",
-    "hit box shaved by its clip: حفظ تلقائي: 1 يناير 2011، ",
-    "tab bodies shown: saves, settings (want only saves)"
+    "hit box shaved by its clip: حفظ تلقائي: 1 يناير 2011، "
    ]
   },
   {
@@ -229,7 +229,7 @@
    "name": "fades wrong",
    "ok": true,
    "sample": [
-    "clipped text (bottom): \"تتبع خيار تقليل الحركة\" 778.72..881 y 410..424",
+    "clipped text (bottom): \"تتبع خيار تقليل الحركة\" 787.03..881 y 408..425",
     "control cut by its scroll area (bottom): تلقائي",
     "hit box shaved by its clip: تلقائي"
    ]
@@ -291,7 +291,7 @@
    "name": "money unit",
    "ok": true,
    "sample": [
-    "clipped text (bottom): \"عبر تطبيق الملفات\" 756.33..834 y 406..418",
+    "clipped text (bottom): \"عبر تطبيق الملفات\" 764.8..834 y 404..419",
     "control cut by its scroll area (bottom): استيراد حفظ أو تصديره عبر ",
     "hit box shaved by its clip: استيراد حفظ أو تصديره عبر "
    ]
@@ -300,7 +300,7 @@
    "name": "sign outside its number",
    "ok": true,
    "sample": [
-    "clipped text (bottom): \"عبر تطبيق الملفات\" 756.33..834 y 406..418",
+    "clipped text (bottom): \"عبر تطبيق الملفات\" 764.8..834 y 404..419",
     "control cut by its scroll area (bottom): استيراد حفظ أو تصديره عبر ",
     "hit box shaved by its clip: استيراد حفظ أو تصديره عبر "
    ]
@@ -309,7 +309,7 @@
    "name": "colour alone",
    "ok": true,
    "sample": [
-    "clipped text (bottom): \"عبر تطبيق الملفات\" 756.33..834 y 406..418",
+    "clipped text (bottom): \"عبر تطبيق الملفات\" 764.8..834 y 404..419",
     "control cut by its scroll area (bottom): استيراد حفظ أو تصديره عبر ",
     "hit box shaved by its clip: استيراد حفظ أو تصديره عبر "
    ]
@@ -318,7 +318,7 @@
    "name": "an image in the sheet",
    "ok": true,
    "sample": [
-    "clipped text (bottom): \"عبر تطبيق الملفات\" 756.33..834 y 409..421",
+    "clipped text (bottom): \"عبر تطبيق الملفات\" 764.8..834 y 407..422",
     "control cut by its scroll area (bottom): استيراد حفظ أو تصديره عبر ",
     "hit box shaved by its clip: استيراد حفظ أو تصديره عبر "
    ]
@@ -334,7 +334,7 @@
    "name": "label without a role",
    "ok": true,
    "sample": [
-    "clipped text (bottom): \"عبر تطبيق الملفات\" 756.33..834 y 406..418",
+    "clipped text (bottom): \"عبر تطبيق الملفات\" 764.8..834 y 404..419",
     "control cut by its scroll area (bottom): استيراد حفظ أو تصديره عبر ",
     "hit box shaved by its clip: استيراد حفظ أو تصديره عبر "
    ]
@@ -417,18 +417,25 @@
    "name": "a long headline label",
    "ok": true,
    "sample": [
+    "clipped text (sides): \"عنوان طويل جدًا لا يتسع لخانته أبدًا\" 385.38..539.25 y 169..186",
     "text outside the sheet's 12 pt padding: \"عنوان طويل جدًا لا يتسع لخانته أبدًا\"",
-    "horizontal overflow in عنوان طويل جدًا لا يتسع لخ",
-    "fades 0/0 do not match the scroll state (top 0, over 61.0)"
+    "clipped text (sides): \"1\" 528.44..539.25 y 187..214"
+   ]
+  },
+  {
+   "name": "text wider than its box",
+   "ok": true,
+   "sample": [
+    "text wider than its box: «حفظ جديد · مصر · 1 يناير» (143 in 20)"
    ]
   },
   {
    "name": "a long status cell",
    "ok": true,
    "sample": [
-    "clipped text (sides): \"قيمة طويلة جدًا لا تتسع لنصف الجدول\" 407.84..608.44 y 167.5..183.5",
+    "clipped text (sides): \"قيمة طويلة جدًا لا تتسع لنصف الجدول\" 416.53..613.3 y 165.5..184.5",
     "text outside the sheet's 12 pt padding: \"قيمة طويلة جدًا لا تتسع لنصف الجدول\"",
-    "clipped text (bottom): \"استيراد حفظ أو تصديره\" 708.44..834 y 403..419"
+    "clipped text (bottom): \"استيراد حفظ أو تصديره\" 718.88..834 y 401..420"
    ]
   },
   {
@@ -459,9 +466,9 @@
    "name": "clipped text (saves)",
    "ok": true,
    "sample": [
-    "clipped text (sides): \"ملفات الحفظ في هذه الحملة\" 783.72..921 y 214..228",
+    "clipped text (sides): \"ملفات الحفظ في هذه الحملة\" 795.41..921 y 212..229",
     "text outside the sheet's 12 pt padding: \"ملفات الحفظ في هذه الحملة\"",
-    "clipped text (sides): \"يُحفظ تلقائيًا أول كل شهر وعند الخروج من اللعبة.\" 720.83..921 y 281..293"
+    "clipped text (sides): \"يُحفظ تلقائيًا أول كل شهر وعند الخروج من اللعبة.\" 737.08..921 y 279..294"
    ]
   },
   {

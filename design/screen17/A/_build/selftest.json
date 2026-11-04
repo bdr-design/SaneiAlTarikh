@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-04T12:25:40.932Z",
+ "ranAt": "2026-11-04T13:03:35.195Z",
  "inputs": {
   "files": [
    "index.html",
@@ -22,7 +22,7 @@
    "header_cairo.jpg",
    "map_overlay_cairo.svg"
   ],
-  "sha1": "a4c1204fb7d5f601d3688fe5335bf6ed7388a039"
+  "sha1": "baa4d367fe5dcbd8f90d513071956ce60a17bec8"
  },
  "cleanIssues": {
   "i16promax": [],
@@ -48,7 +48,7 @@
    "ok": true,
    "sample": [
     "text colour off-token rgb(136, 153, 170): \"الاستقرار\"",
-    "contrast 2.36 for \"الاستقرار\""
+    "contrast 2.4 for \"الاستقرار\""
    ]
   },
   {
@@ -129,8 +129,8 @@
    "ok": true,
    "sample": [
     "hit overlap الاستقرار 58%، ينخفض. لماذ / إغلاق لماذا؟ الاستقرار",
-    "hit overlap الشرعية 44 / إغلاق لماذا؟ الاستقرار",
-    "panel overlap الدولة: مصر، حسني مبارك، ج / لماذا؟ الاستقرار"
+    "panel overlap الدولة: مصر، حسني مبارك، ج / لماذا؟ الاستقرار",
+    "panel overlap الخزينة 36.0 مليار $ الاست / لماذا؟ الاستقرار"
    ]
   },
   {
@@ -153,9 +153,9 @@
    "name": "left stack moved",
    "ok": true,
    "sample": [
-    "HUD element moved from its B3 position: .toast x 70.0..287.6 y 56.0..88.0",
-    "HUD element moved from its B3 position: .btn.mode x 70.0..197.3 y 96.0..128.0",
-    "HUD element moved from its B3 position: .btn.home x 70.0..143.2 y 136.0..168.0"
+    "HUD element moved from its B3 position: .toast x 70.0..275.6 y 56.0..88.0",
+    "HUD element moved from its B3 position: .btn.mode x 70.0..191.6 y 96.0..128.0",
+    "HUD element moved from its B3 position: .btn.home x 70.0..141.5 y 136.0..168.0"
    ]
   },
   {
@@ -187,6 +187,8 @@
    "name": "money unit",
    "ok": true,
    "sample": [
+    "clipped text (top): \"0.4\" 866.09..881 y 108..123",
+    "clipped text (top): \"مليار $\" 838.42..866.09 y 108..123",
     "money unit: «0.4 مليار» (under 1 billion is written in millions)"
    ]
   },
@@ -194,6 +196,8 @@
    "name": "sign outside its number",
    "ok": true,
    "sample": [
+    "clipped text (top): \"تغير +\" 859.06..881 y 108..123",
+    "clipped text (top): \"3\" 853.06..859.06 y 108..123",
     "a sign outside its number: «تغير +3»"
    ]
   },
@@ -201,6 +205,7 @@
    "name": "colour alone",
    "ok": true,
    "sample": [
+    "clipped text (top): \"تراجع\" 860.27..881 y 108..123",
     "colour alone: «تراجع» has no arrow or icon"
    ]
   },
@@ -222,6 +227,7 @@
    "name": "label without a role",
    "ok": true,
    "sample": [
+    "clipped text (top): \"اختبار\" 860.25..881 y 108..123",
     "a11y: a label VoiceOver may skip (no role): «اختبار»"
    ]
   },
@@ -266,16 +272,23 @@
    "name": "a long headline label",
    "ok": true,
    "sample": [
+    "clipped text (sides): \"عنوان طويل جدًا لا يتسع لخانته أبدًا\" 385.38..539.25 y 116..133",
     "text outside the sheet's 12 pt padding: \"عنوان طويل جدًا لا يتسع لخانته أبدًا\"",
-    "horizontal overflow in عنوان طويل جدًا لا يتسع لخ",
-    "a cell runs out of its row: «عنوان طويل جدًا لا يتسع »"
+    "clipped text (sides): \"1\" 528.44..539.25 y 134..161"
+   ]
+  },
+  {
+   "name": "text wider than its box",
+   "ok": true,
+   "sample": [
+    "text wider than its box: «الأساس» (34 in 20)"
    ]
   },
   {
    "name": "a long status cell",
    "ok": true,
    "sample": [
-    "clipped text (sides): \"قيمة طويلة جدًا لا تتسع لنصف الجدول\" 407.84..608.44 y 112.5..128.5",
+    "clipped text (sides): \"قيمة طويلة جدًا لا تتسع لنصف الجدول\" 416.53..613.3 y 110.5..129.5",
     "text outside the sheet's 12 pt padding: \"قيمة طويلة جدًا لا تتسع لنصف الجدول\"",
     "horizontal overflow in خانةقيمة طويلة جدًا لا تتس"
    ]
@@ -315,7 +328,7 @@
    "name": "fades wrong (no tabs)",
    "ok": true,
    "sample": [
-    "clipped text (bottom): \"ما يخفضه\" 600.66..646 y 364..378",
+    "clipped text (bottom): \"ما يخفضه\" 601.58..646 y 362..379",
     "fades 0/0 do not match the scroll state (top 0, over 293.0)",
     "contrast 1.49 for \"ما يخفضه\""
    ]
@@ -370,9 +383,9 @@
    "name": "clipped text (why)",
    "ok": true,
    "sample": [
-    "clipped text (sides): \"الأساس\" 884.06..921 y 166..180",
+    "clipped text (sides): \"الأساس\" 887.28..921 y 164..181",
     "text outside the sheet's 12 pt padding: \"الأساس\"",
-    "clipped text (sides): \"مستوى البداية\" 854.31..921 y 187..201"
+    "clipped text (sides): \"مستوى البداية\" 856.47..921 y 185..202"
    ]
   },
   {
