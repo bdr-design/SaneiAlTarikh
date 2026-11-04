@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-03T13:28:39.595Z",
+ "ranAt": "2026-11-04T11:41:33.984Z",
  "inputs": {
   "files": [
    "index.html",
@@ -45,7 +45,7 @@
    "ok": true,
    "sample": [
     "text colour off-token rgb(136, 153, 170): \"الإشعارات\"",
-    "contrast 2.33 for \"الإشعارات\""
+    "contrast 2.36 for \"الإشعارات\""
    ]
   },
   {
@@ -157,9 +157,9 @@
    "name": "left stack moved",
    "ok": true,
    "sample": [
-    "HUD element moved from its B3 position: .toast x 70.0..275.6 y 56.0..88.0",
-    "HUD element moved from its B3 position: .btn.mode x 70.0..191.6 y 96.0..128.0",
-    "HUD element moved from its B3 position: .btn.home x 70.0..141.5 y 136.0..168.0"
+    "HUD element moved from its B3 position: .toast x 70.0..287.6 y 56.0..88.0",
+    "HUD element moved from its B3 position: .btn.mode x 70.0..197.3 y 96.0..128.0",
+    "HUD element moved from its B3 position: .btn.home x 70.0..143.2 y 136.0..168.0"
    ]
   },
   {
@@ -234,8 +234,7 @@
    "ok": true,
    "sample": [
     "text overlap \"الإشعارات\" / \"غير المقروءة:\"",
-    "text overlap \"الإشعارات\" / \"2\"",
-    "text overlap \"الإشعارات\" / \"·\""
+    "text overlap \"الإشعارات\" / \"2\""
    ]
   },
   {
@@ -351,9 +350,9 @@
    "name": "clipped text (centre)",
    "ok": true,
    "sample": [
-    "clipped text (sides): \"قرارات تنتظرك\" 858.34..921 y 115..132",
+    "clipped text (sides): \"قرارات تنتظرك\" 847.89..921 y 117..131",
     "text outside the sheet's 12 pt padding: \"قرارات تنتظرك\"",
-    "clipped text (sides): \"أوامر معلقة\" 870.92..921 y 195..212"
+    "clipped text (sides): \"أوامر معلقة\" 865.95..921 y 197..211"
    ]
   },
   {

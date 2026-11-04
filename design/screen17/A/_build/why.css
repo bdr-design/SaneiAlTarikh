@@ -1,0 +1,16 @@
+  /* ================= Screen 17, variant A: the «لماذا؟» sheet =================
+     Built with the shared builder on the approved panels; one body, no tab row. */
+  .r-tabs { display: none; }
+  [data-tab="why"] .r-body[data-tab="why"] { display: flex; }
+  .r-body[data-tab="why"] { padding-top: 0; padding-bottom: var(--s3); gap: var(--s2); }
+  .r-body[data-tab="why"] .r-st { --rst: 24px; }
+  .r-sc dd.r-amber { display: inline-flex; align-items: center; gap: 2px; }
+  /* a term: its name and the value it comes from (right), its signed share (left) */
+  .w-t { display: flex; align-items: center; justify-content: space-between; gap: var(--s2); height: 32px; }
+  .w-n { display: flex; flex-direction: column; min-width: 0; }
+  .w-n b { font-size: var(--fs-sec); line-height: var(--lh-sec); font-weight: 600; color: var(--t1); white-space: nowrap; }
+  .w-n > span { font-size: var(--fs-label); line-height: var(--lh-label); font-weight: 500; color: var(--t2); white-space: nowrap; }
+  .w-v { flex: none; display: inline-flex; align-items: center; gap: 2px; font-size: var(--fs-val); line-height: var(--lh-val); font-weight: 600; }
+  /* the sum: the target the terms add up to */
+  .w-sum { display: flex; align-items: center; justify-content: space-between; height: 24px; font-size: var(--fs-sec); line-height: var(--lh-sec); font-weight: 600; color: var(--t1); }
+  .w-sum b { font-size: var(--fs-val); line-height: var(--lh-val); font-weight: 600; }
