@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-04T11:41:33.984Z",
+ "ranAt": "2026-11-04T12:30:49.846Z",
  "inputs": {
   "files": [
    "index.html",
@@ -22,7 +22,7 @@
    "header_cairo.jpg",
    "map_overlay_cairo.svg"
   ],
-  "sha1": "4abb49490b7b8f6bb11a2ab464300cab4de0d169"
+  "sha1": "cfcc5c04e135ded1e960e428efeea05ce0d81322"
  },
  "cleanIssues": {
   "i16promax": [],
@@ -132,8 +132,8 @@
    "name": "sheet top",
    "ok": true,
    "sample": [
-    "hit overlap الخزينة 36.0 مليار $ / إغلاق الإشعارات",
     "hit overlap الاستقرار 58% / إغلاق الإشعارات",
+    "hit overlap الشرعية 44 / إغلاق الإشعارات",
     "panel overlap الدولة: مصر، حسني مبارك، ج / الإشعارات"
    ]
   },
@@ -267,6 +267,24 @@
     "a11y: «احتجاجات في تونس» does not read its numbers",
     "a11y: «جزء» does not read all it shows: احتجاجات في تونس قرار",
     "«احتجاجات في تونس» does not say it waits for a decision"
+   ]
+  },
+  {
+   "name": "a long headline label",
+   "ok": true,
+   "sample": [
+    "text outside the sheet's 12 pt padding: \"عنوان طويل جدًا لا يتسع لخانته أبدًا\"",
+    "horizontal overflow in عنوان طويل جدًا لا يتسع لخ",
+    "a cell runs out of its row: «عنوان طويل جدًا لا يتسع »"
+   ]
+  },
+  {
+   "name": "a long status cell",
+   "ok": true,
+   "sample": [
+    "clipped text (sides): \"قيمة طويلة جدًا لا تتسع لنصف الجدول\" 407.84..608.44 y 122.5..138.5",
+    "text outside the sheet's 12 pt padding: \"قيمة طويلة جدًا لا تتسع لنصف الجدول\"",
+    "horizontal overflow in خانةقيمة طويلة جدًا لا تتس"
    ]
   },
   {

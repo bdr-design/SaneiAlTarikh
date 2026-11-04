@@ -4,6 +4,8 @@ satellite base (fill-opacity 0.55, the doc's upper bound 0.35-0.55), in the proj
 in lightness, dark purple to yellow (inferno). Values are illustrative (1 January 2011); Egypt's governorates follow screen 8.
 Mode «security» (الأمن): unrest 0-100 with §5.2's thresholds as band edges (25, 40 protests, 60 mass protests, 75
 insurgency).
+Writes <out>.json beside the SVG: each drawn province (country, name, value, colour) in drawing order, so the gate can
+check the layer against screen 8.
 Usage: python3 -I tools/mapmode.py <Natural Earth GeoJSON dir> <out.svg>   (needs shapely; NE is public domain)"""
 import hashlib
 import json
@@ -64,7 +66,7 @@ def band(v):
 
 feats = json.load(open(NE / 'ne_10m_admin_1_states_provinces.geojson'))['features']
 frame = box(0, 0, WIDTH, H).buffer(4)
-out = []
+out, rows = [], []
 for f in feats:
     p = f['properties']
     v = value(p)
@@ -77,5 +79,7 @@ for f in feats:
     d = ''.join('M' + 'L'.join(f'{x:.0f},{y:.0f}' for x, y in poly.exterior.coords) + 'Z' for poly in polys if poly.area > 1)
     if d:
         out.append(f'<path d="{d}" fill="{band(v)}"/>')
+        rows.append([p['adm0_a3'], p.get('name') or '', v, band(v)])
 OUT.write_text(f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {WIDTH} {H}" width="{WIDTH}" height="{H}"><g fill-opacity="0.55">' + ''.join(out) + '</g></svg>', encoding='utf-8')
+OUT.with_suffix('.json').write_text(json.dumps({'bands': BANDS, 'provinces': rows}, ensure_ascii=False, indent=0), encoding='utf-8')
 print(OUT, len(out), 'provinces,', H, 'px high')
