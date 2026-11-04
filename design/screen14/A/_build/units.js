@@ -19,7 +19,7 @@
     var a = ROUTE.pts[i - 1], b = ROUTE.pts[i], km = Math.hypot((b[0] - a[0]) * KM.x, (b[1] - a[1]) * KM.y);
     legs.push({ a: a, b: b, km: km, from: TOTAL }); TOTAL += km;
   }
-  var DAYS = TOTAL / KMDAY;                                  /* the whole march in days */
+  var MARCH_DAYS = TOTAL / KMDAY;                                  /* the whole march in days */
   function along(k) {                                        /* the point at a distance along the route (map space) */
     k = Math.max(0, Math.min(TOTAL, k));
     for (var i = 0; i < legs.length; i++) { var L = legs[i]; if (k <= L.from + L.km + 1e-9) { var f = (k - L.from) / L.km; return [L.a[0] + (L.b[0] - L.a[0]) * f, L.a[1] + (L.b[1] - L.a[1]) * f]; } }
@@ -37,9 +37,9 @@
   /* The state: the selected unit; the game clock (days since 1 January 2011) and the days the western army has marched
      (null: not ordered); halted: the army holds where it is while the clock runs. */
   var ST = { sel: null, clock: 0, e: null, halted: false };
-  function moving() { return ST.e !== null && ST.e < DAYS - 1e-9; }
+  function moving() { return ST.e !== null && ST.e < MARCH_DAYS - 1e-9; }
   /* the arrival: the day the march ends, counted on the HUD's dates (so «بعد N» and the date on arrival agree) */
-  function arrivalIn() { return Math.floor(ST.clock + (DAYS - ST.e) + 1e-9) - Math.floor(ST.clock + 1e-9); }
+  function arrivalIn() { return Math.floor(ST.clock + (MARCH_DAYS - ST.e) + 1e-9) - Math.floor(ST.clock + 1e-9); }
   function arrivalText() { var n = arrivalIn(); return n === 0 ? 'الوصول اليوم' : 'الوصول بعد ' + ar(n, 'يوم', 'يومين', 'أيام', 'يومًا'); }
 
   /* VoiceOver: each unit reads its name, strength and where it is or goes */
@@ -71,7 +71,7 @@
     drawDate();
     if (ST.sel) drawBar();
     window.__frames = (window.__frames || 0) + 1;
-    window.__units = { sel: ST.sel, e: ST.e, clock: ST.clock, halted: ST.halted, days: DAYS, km: TOTAL, moving: mv, s: S.s };
+    window.__units = { sel: ST.sel, e: ST.e, clock: ST.clock, halted: ST.halted, days: MARCH_DAYS, km: TOTAL, moving: mv, s: S.s };
   }
   /* the route still ahead: from the unit through the waypoints not yet passed to the destination; the line stops at the
      arrowhead's base, so neither it nor its halo pokes past the tip */
@@ -227,7 +227,7 @@
   function advance(dd) {                                       /* the clock moves dd days; the army marches with it */
     var was = Math.floor(ST.clock + 1e-9), mv = moving() && !ST.halted;
     ST.clock += dd;
-    if (mv) { ST.e = Math.min(DAYS, ST.e + dd); return 'map'; }
+    if (mv) { ST.e = Math.min(MARCH_DAYS, ST.e + dd); return 'map'; }
     return Math.floor(ST.clock + 1e-9) !== was ? 'date' : '';
   }
   function arrived() { if (LIVE.loop) { clearTimeout(LIVE.timer); LIVE.timer = setTimeout(function () { ST.clock = 0; ST.e = 0; ST.halted = false; render(); go(); }, 2500); } }
@@ -272,7 +272,7 @@
     var q = new URLSearchParams(location.search), st = q.get('state') || 'order', t = parseFloat(q.get('t'));
     window.__motion = q.get('motion') === 'reduce' ? 'reduce' : '';
     ST.sel = st === 'idle' ? null : ROUTE.unit;
-    ST.e = st === 'idle' ? null : (isFinite(t) ? Math.max(0, Math.min(1, t)) * DAYS : 0);
+    ST.e = st === 'idle' ? null : (isFinite(t) ? Math.max(0, Math.min(1, t)) * MARCH_DAYS : 0);
     ST.clock = ST.e || 0;                                      /* the frozen views: the march began on 1 January */
     ST.halted = q.get('halt') === '1' && moving();
     render(); placeUnits(); render(); placeLabels();

@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-04T11:47:27.387Z",
+ "ranAt": "2026-11-04T12:37:44.840Z",
  "inputs": {
   "files": [
    "index.html",
@@ -24,7 +24,7 @@
    "header_cairo.jpg",
    "map_overlay_cairo.svg"
   ],
-  "sha1": "9512338e63f536c2e6c426c0372ef39e3a5a6d00"
+  "sha1": "a71f127f37418fefc3aee8abc9b6bcd29fe29d54"
  },
  "cleanIssues": {
   "i16promax": [],
@@ -42,10 +42,7 @@
   "se": [],
   "se_overview_end": [],
   "se_unrest": [],
-  "se_unrest_end": [
-   "text over a control: \"−2\" runs into «الاضطرابات −6»",
-   "contrast 1.82 for \"−2\""
-  ],
+  "se_unrest_end": [],
   "se_parties": [],
   "se_parties_end": [],
   "se_groups": [],
@@ -53,9 +50,7 @@
   "se_unrest_at86": [],
   "se_unrest_at172": [],
   "se_unrest_at258": [],
-  "se_unrest_at344": [
-   "text over a control: \"−2\" runs into «الاضطرابات −6»"
-  ],
+  "se_unrest_at344": [],
   "se_parties_at86": [],
   "se_parties_at172": [],
   "se_groups_at86": [],
@@ -173,8 +168,8 @@
    "name": "sheet top",
    "ok": true,
    "sample": [
-    "hit overlap الخزينة 36.0 مليار $ / إغلاق",
     "hit overlap الاستقرار 58% / إغلاق",
+    "hit overlap الشرعية 44 / إغلاق",
     "panel overlap الدولة: مصر، حسني مبارك، ج / الداخلية والسياسة: مصر"
    ]
   },
@@ -542,6 +537,24 @@
     "a11y: «جزء» does not read all it shows: القاهرة 64",
     "a11y: row «القاهرة» does not read its value",
     "row «القاهرة»: the arrow does not show the trend «»"
+   ]
+  },
+  {
+   "name": "a long headline label",
+   "ok": true,
+   "sample": [
+    "text outside the sheet's 12 pt padding: \"عنوان طويل جدًا لا يتسع لخانته أبدًا\"",
+    "clipped text (bottom): \"الكلفة:\" 798.97..834 y 415..429",
+    "clipped text (bottom): \"20\" 784.06..798.97 y 415..429"
+   ]
+  },
+  {
+   "name": "a long status cell",
+   "ok": true,
+   "sample": [
+    "clipped text (sides): \"قيمة طويلة جدًا لا تتسع لنصف الجدول\" 407.84..608.44 y 159.5..175.5",
+    "text outside the sheet's 12 pt padding: \"قيمة طويلة جدًا لا تتسع لنصف الجدول\"",
+    "horizontal overflow in خانةقيمة طويلة جدًا لا تتس"
    ]
   },
   {
