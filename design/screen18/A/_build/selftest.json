@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-04T12:08:08.995Z",
+ "ranAt": "2026-11-04T13:23:52.396Z",
  "inputs": {
   "files": [
    "index.html",
@@ -19,10 +19,9 @@
    "../../shared/flags/eg.svg",
    "../../shared/map_mena_d1.jpg",
    "../../shared/map_mena_d1_overlay.svg",
-   "header_cairo.jpg",
    "map_overlay_cairo.svg"
   ],
-  "sha1": "c579eccff02a14a89673f88dc17783cdd049987f"
+  "sha1": "ce96a85921486565838961bfacfe3b8dd297307c"
  },
  "cleanIssues": {
   "i16promax": [],
@@ -45,8 +44,7 @@
    "name": "off-token colour",
    "ok": true,
    "sample": [
-    "text colour off-token rgb(136, 153, 170): \"تقرير الأمة\"",
-    "contrast 2.36 for \"تقرير الأمة\""
+    "text colour off-token rgb(136, 153, 170): \"تقرير الأمة\""
    ]
   },
   {
@@ -72,7 +70,7 @@
    "sample": [
     "panel not opaque: تقرير الأمة rgba(9, 17, 25, 0.66)",
     "contrast 4.36 for \"+14\"",
-    "contrast 3.15 for \"متوسط العمر من\""
+    "contrast 4.43 for \"منذ\""
    ]
   },
   {
@@ -127,8 +125,8 @@
    "ok": true,
    "sample": [
     "hit overlap الاستقرار 71% / العودة إلى الخريطة",
-    "hit overlap الشرعية 44 / العودة إلى الخريطة",
-    "panel overlap الدولة: مصر، حسني مبارك، ج / تقرير الأمة"
+    "panel overlap الدولة: مصر، رئيس الدولة،  / تقرير الأمة",
+    "panel overlap الخزينة 36.0 مليار $ الاست / تقرير الأمة"
    ]
   },
   {
@@ -151,9 +149,9 @@
    "name": "left stack moved",
    "ok": true,
    "sample": [
-    "HUD element moved from its B3 position: .toast x 70.0..287.6 y 56.0..88.0",
-    "HUD element moved from its B3 position: .btn.mode x 70.0..197.3 y 96.0..128.0",
-    "HUD element moved from its B3 position: .btn.home x 70.0..143.2 y 136.0..168.0"
+    "HUD element moved from its B3 position: .toast x 70.0..275.5 y 56.0..88.0",
+    "HUD element moved from its B3 position: .btn.mode x 70.0..191.6 y 96.0..128.0",
+    "HUD element moved from its B3 position: .btn.home x 70.0..141.5 y 136.0..168.0"
    ]
   },
   {
@@ -185,22 +183,25 @@
    "name": "money unit",
    "ok": true,
    "sample": [
-    "money unit: «0.4 مليار» (under 1 billion is written in millions)",
-    "the money and cheat note is not «بدولارات 2011 الثابتة · تُلغى النتيجة إن استُخدمت خيارات غير واقعية»"
+    "clipped text (top): \"0.4\" 866.09..881 y 108..123",
+    "clipped text (top): \"مليار $\" 838.42..866.09 y 108..123",
+    "money unit: «0.4 مليار» (under 1 billion is written in millions)"
    ]
   },
   {
    "name": "sign outside its number",
    "ok": true,
    "sample": [
-    "a sign outside its number: «تغير +3»",
-    "the money and cheat note is not «بدولارات 2011 الثابتة · تُلغى النتيجة إن استُخدمت خيارات غير واقعية»"
+    "clipped text (top): \"تغير +\" 859.06..881 y 108..123",
+    "clipped text (top): \"3\" 853.06..859.06 y 108..123",
+    "a sign outside its number: «تغير +3»"
    ]
   },
   {
    "name": "colour alone",
    "ok": true,
    "sample": [
+    "clipped text (top): \"تراجع\" 860.27..881 y 108..123",
     "colour alone: «تراجع» has no arrow or icon",
     "the money and cheat note is not «بدولارات 2011 الثابتة · تُلغى النتيجة إن استُخدمت خيارات غير واقعية»"
    ]
@@ -223,6 +224,7 @@
    "name": "label without a role",
    "ok": true,
    "sample": [
+    "clipped text (top): \"اختبار\" 860.25..881 y 108..123",
     "a11y: a label VoiceOver may skip (no role): «اختبار»",
     "the money and cheat note is not «بدولارات 2011 الثابتة · تُلغى النتيجة إن استُخدمت خيارات غير واقعية»"
    ]
@@ -249,7 +251,7 @@
    "sample": [
     "gap 6 on النتيجة 68/ 100 +14 منذ 20",
     "gap 6 on النتيجة 68/ 100 +14 منذ 20",
-    "gap 6 on الأعلى 75 السيادة والأمن"
+    "gap 6 on في 2011 54/ 100 بداية الحم"
    ]
   },
   {
@@ -262,17 +264,12 @@
    ]
   },
   {
-   "name": "text into a control",
-   "ok": false,
-   "sample": []
-  },
-  {
    "name": "clipped text",
    "ok": true,
    "sample": [
-    "clipped text (sides): \"النتيجة\" 872.3..903 y 118..132",
+    "clipped text (sides): \"النتيجة\" 872.73..903 y 116..133",
     "text outside the sheet's 12 pt padding: \"النتيجة\"",
-    "clipped text (sides): \"/\" 886.38..893.72 y 143..157"
+    "clipped text (sides): \"/\" 887.88..895.39 y 142..159"
    ]
   },
   {
@@ -301,9 +298,9 @@
    "name": "faint text",
    "ok": true,
    "sample": [
+    "brief text not fully visible: بداية الحملة",
     "contrast 2.11 for \"+14\"",
-    "contrast 2.11 for \"منذ\"",
-    "contrast 2.11 for \"2011\""
+    "contrast 2.11 for \"منذ\""
    ]
   },
   {
@@ -318,16 +315,23 @@
    "name": "a long headline label",
    "ok": true,
    "sample": [
+    "clipped text (sides): \"عنوان طويل جدًا لا يتسع لخانته أبدًا\" 385.38..539.25 y 116..133",
     "text outside the sheet's 12 pt padding: \"عنوان طويل جدًا لا يتسع لخانته أبدًا\"",
-    "horizontal overflow in عنوان طويل جدًا لا يتسع لخ",
-    "a cell runs out of its row: «عنوان طويل جدًا لا يتسع »"
+    "clipped text (sides): \"1\" 528.44..539.25 y 134..161"
+   ]
+  },
+  {
+   "name": "text wider than its box",
+   "ok": true,
+   "sample": [
+    "text wider than its box: «المحاور الخمسة» (71 in 20)"
    ]
   },
   {
    "name": "a long status cell",
    "ok": true,
    "sample": [
-    "clipped text (sides): \"قيمة طويلة جدًا لا تتسع لنصف الجدول\" 407.84..608.44 y 114.5..130.5",
+    "clipped text (sides): \"قيمة طويلة جدًا لا تتسع لنصف الجدول\" 416.53..613.3 y 112.5..131.5",
     "text outside the sheet's 12 pt padding: \"قيمة طويلة جدًا لا تتسع لنصف الجدول\"",
     "horizontal overflow in خانةقيمة طويلة جدًا لا تتس"
    ]
@@ -338,7 +342,7 @@
    "sample": [
     "% shown before its number: \"نسبة 20%\"",
     "colour alone: «نسبة 20%» has no arrow or icon",
-    "the result's change 20 is not the result − the 2011 mean (14)"
+    "the result's change is not blue with an up arrow"
    ]
   },
   {
@@ -376,9 +380,9 @@
    "name": "fades wrong (no tabs)",
    "ok": true,
    "sample": [
-    "clipped text (bottom): \"المكانة الدولية\" 578.91..646 y 353..367",
-    "clipped text (bottom): \"57\" 332..348.83 y 352..368",
-    "fades 0/0 do not match the scroll state (top 0, over 151.0)"
+    "clipped text (bottom): \"المكانة الدولية\" 581.63..646 y 351..368",
+    "clipped text (bottom): \"النفوذ من\" 606.63..646 y 365..380",
+    "clipped text (bottom): \"62\" 594.63..606.63 y 365..380"
    ]
   },
   {
@@ -403,6 +407,34 @@
    ]
   },
   {
+   "name": "weekday wrong",
+   "ok": true,
+   "sample": [
+    "the HUD date is not «الجمعة 31 ديسمبر 2100»: «السبت 31 ديسمبر 2100»"
+   ]
+  },
+  {
+   "name": "another moment toast",
+   "ok": true,
+   "sample": [
+    "the toast is not «انتهت الحملة في 2100»"
+   ]
+  },
+  {
+   "name": "clock looks live",
+   "ok": true,
+   "sample": [
+    "the clock and the speed chip do not look and read disabled"
+   ]
+  },
+  {
+   "name": "speed menu still offered",
+   "ok": true,
+   "sample": [
+    "the clock and the speed chip do not look and read disabled"
+   ]
+  },
+  {
    "name": "tap in the side inset (report)",
    "ok": true,
    "sample": [
@@ -419,6 +451,44 @@
    ]
   },
   {
+   "name": "text into a control (report)",
+   "ok": true,
+   "sample": [
+    "text outside the sheet's 12 pt padding: \"من القائمة الرئيسية\"",
+    "clipped text (sides): \"تصفح الخريطة في\" 528.92..619 y 366..385",
+    "text outside the sheet's 12 pt padding: \"تصفح الخريطة في\""
+   ]
+  },
+  {
+   "name": "Mubarak in 2100",
+   "ok": true,
+   "sample": [
+    "the nation card names a real person in 2100 (it must say «رئيس الدولة»)"
+   ]
+  },
+  {
+   "name": "old toast",
+   "ok": true,
+   "sample": [
+    "the toast is not «انتهت الحملة في 2100»",
+    "the toast does not say the campaign ended"
+   ]
+  },
+  {
+   "name": "result change in amber",
+   "ok": true,
+   "sample": [
+    "the result's change is not blue with an up arrow"
+   ]
+  },
+  {
+   "name": "a real leader in 2100",
+   "ok": true,
+   "sample": [
+    "the nation card names a real person in 2100 (it must say «رئيس الدولة»)"
+   ]
+  },
+  {
    "name": "clock running",
    "ok": true,
    "sample": [
@@ -429,6 +499,7 @@
    "name": "clock not disabled",
    "ok": true,
    "sample": [
+    "the clock and the speed chip do not look and read disabled",
     "the clock is not shown stopped for good (play glyph, «الحملة منتهية», disabled)"
    ]
   },
@@ -436,6 +507,7 @@
    "name": "date off",
    "ok": true,
    "sample": [
+    "the HUD date is not «الجمعة 31 ديسمبر 2100»: «الجمعة 1 يناير 2100»",
     "the date is not 31 December 2100"
    ]
   },
@@ -512,10 +584,12 @@
    ]
   },
   {
-   "name": "lowest wrong",
+   "name": "baseline off",
    "ok": true,
    "sample": [
-    "the lowest is not «المكانة الدولية» 57"
+    "the 2011 cell is not the mean of the 2011 scores (54)",
+    "brief text missing: 54",
+    "brief text missing: 54"
    ]
   },
   {

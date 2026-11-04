@@ -1,7 +1,7 @@
 {
  "se": {
   "device": "667x375 side 0 bottom 0 none",
-  "renderedAt": "2026-11-04T13:09:34.811Z",
+  "renderedAt": "2026-11-04T13:20:30.111Z",
   "inputs": {
    "files": [
     "index.html",
@@ -2632,7 +2632,7 @@
      "glide1": {
       "frames": 12,
       "raf": 12,
-      "to": 11,
+      "to": 12,
       "iv": 0,
       "anim": 0,
       "date": "1 يناير 2011",
@@ -2641,9 +2641,9 @@
       "play": "#i-pause"
      },
      "glide2": {
-      "frames": 10,
-      "raf": 10,
-      "to": 11,
+      "frames": 12,
+      "raf": 12,
+      "to": 12,
       "iv": 0,
       "anim": 0,
       "date": "2 يناير 2011",
@@ -2754,10 +2754,10 @@
   "pngSha1": {
    "se.png": "9f6bc65ebba230bde4e150a4d60be440a4aa4f77",
    "_build/se_hit.png": "8de87ed52547e7ac7e999bd3c9c747bf0cf823e1",
-   "_build/se_moving.png": "ea643acaecc0cb4e7085819f165e31e018d72cda",
+   "_build/se_moving.png": "71299ecf9905ed262795b8c64532a9f26bcb9eec",
    "_build/se_halted.png": "d14eac8f0c18393c91f0e179b61644c58128e3a4",
    "_build/se_arrived.png": "c521a0cf274b99221d5c45332e1a3739a43c3a82",
-   "_build/se_tip.png": "4c3d12813a2f4081b102374b2a26af71f30afa7d",
+   "_build/se_tip.png": "05189f6f3bd4d4b05173dd024f87964f5ee9b606",
    "_build/se_idle.png": "5ddd911d9284110de60307bdfa5b464a18c1b0f6"
   },
   "env": {
@@ -2767,7 +2767,7 @@
  },
  "mini": {
   "device": "812x375 side 50 bottom 21 notch",
-  "renderedAt": "2026-11-04T13:10:02.942Z",
+  "renderedAt": "2026-11-04T13:20:57.488Z",
   "inputs": {
    "files": [
     "index.html",
@@ -5451,7 +5451,7 @@
      "glide2": {
       "frames": 12,
       "raf": 12,
-      "to": 11,
+      "to": 13,
       "iv": 0,
       "anim": 0,
       "date": "2 يناير 2011",
@@ -5460,9 +5460,9 @@
       "play": "#i-pause"
      },
      "glide5": {
-      "frames": 11,
-      "raf": 11,
-      "to": 10,
+      "frames": 12,
+      "raf": 12,
+      "to": 11,
       "iv": 0,
       "anim": 0,
       "date": "4 يناير 2011",
@@ -5542,11 +5542,11 @@
       "to": 2,
       "iv": 0,
       "anim": 0,
-      "date": "3 يناير 2011",
+      "date": "4 يناير 2011",
       "on": "halt",
       "sub": "4 تشكيلات · على طريق سيوة · الأمر: توقّف",
       "play": "#i-pause",
-      "date0": "1 يناير 2011"
+      "date0": "2 يناير 2011"
      }
     }
    }
@@ -5575,7 +5575,7 @@
  },
  "i14": {
   "device": "844x390 side 47 bottom 21 notch",
-  "renderedAt": "2026-11-04T13:10:31.701Z",
+  "renderedAt": "2026-11-04T13:21:25.940Z",
   "inputs": {
    "files": [
     "index.html",
@@ -8308,7 +8308,7 @@
      "glide1": {
       "frames": 10,
       "raf": 10,
-      "to": 11,
+      "to": 10,
       "iv": 0,
       "anim": 0,
       "date": "1 يناير 2011",
@@ -8317,9 +8317,9 @@
       "play": "#i-pause"
      },
      "glide2": {
-      "frames": 11,
-      "raf": 11,
-      "to": 11,
+      "frames": 12,
+      "raf": 12,
+      "to": 13,
       "iv": 0,
       "anim": 0,
       "date": "2 يناير 2011",
@@ -8328,9 +8328,9 @@
       "play": "#i-pause"
      },
      "glide5": {
-      "frames": 12,
-      "raf": 12,
-      "to": 12,
+      "frames": 11,
+      "raf": 11,
+      "to": 11,
       "iv": 0,
       "anim": 0,
       "date": "4 يناير 2011",
@@ -8431,10 +8431,10 @@
    "i14.png": "dd4e33ecebce4744d61fc85332bbf5a724d69369",
    "_build/i14_hit.png": "e238419539eff266bac41ab3fe8b3458912d2f7d",
    "_build/i14_moving.png": "3ab1a3b2a05fe23059fb907b38bc5e3e9fd03c56",
-   "_build/i14_halted.png": "95cfdd81a44414dfb4f26633b3ecb50982ed78cb",
-   "_build/i14_arrived.png": "bc7887d05b4d236d6db171b26b7e7540ad5ebf01",
+   "_build/i14_halted.png": "182acea65347a2e33136787278b4fd6c0d66bca8",
+   "_build/i14_arrived.png": "fa04dbef156ca83a36a1763391971ece0cbb1ced",
    "_build/i14_tip.png": "d6c3aeb6768a0626f1f08e4c5d7ee787606bb4ab",
-   "_build/i14_idle.png": "6262e5432319c6703ba8e0b2a040a820542b7b5f"
+   "_build/i14_idle.png": "39c9ec51030e11f0ebb66498c266ff9e590870e0"
   },
   "env": {
    "chromium": "153.0.8010.12"
@@ -8443,7 +8443,7 @@
  },
  "i16": {
   "device": "852x393 side 59 bottom 21 island",
-  "renderedAt": "2026-11-04T13:11:01.428Z",
+  "renderedAt": "2026-11-04T13:21:55.149Z",
   "inputs": {
    "files": [
     "index.html",
@@ -11114,9 +11114,9 @@
     "issueCount": 0,
     "frames": {
      "glide1": {
-      "frames": 11,
-      "raf": 11,
-      "to": 10,
+      "frames": 13,
+      "raf": 13,
+      "to": 13,
       "iv": 0,
       "anim": 0,
       "date": "1 يناير 2011",
@@ -11125,9 +11125,9 @@
       "play": "#i-pause"
      },
      "glide2": {
-      "frames": 11,
-      "raf": 11,
-      "to": 11,
+      "frames": 12,
+      "raf": 12,
+      "to": 12,
       "iv": 0,
       "anim": 0,
       "date": "2 يناير 2011",
@@ -11136,9 +11136,9 @@
       "play": "#i-pause"
      },
      "glide5": {
-      "frames": 12,
-      "raf": 12,
-      "to": 12,
+      "frames": 11,
+      "raf": 11,
+      "to": 10,
       "iv": 0,
       "anim": 0,
       "date": "4 يناير 2011",
@@ -11251,7 +11251,7 @@
  },
  "i16pro": {
   "device": "874x402 side 62 bottom 21 island",
-  "renderedAt": "2026-11-04T13:11:31.099Z",
+  "renderedAt": "2026-11-04T13:22:25.008Z",
   "inputs": {
    "files": [
     "index.html",
@@ -13982,9 +13982,9 @@
     "issueCount": 0,
     "frames": {
      "glide1": {
-      "frames": 11,
-      "raf": 11,
-      "to": 11,
+      "frames": 12,
+      "raf": 12,
+      "to": 13,
       "iv": 0,
       "anim": 0,
       "date": "1 يناير 2011",
@@ -13993,9 +13993,9 @@
       "play": "#i-pause"
      },
      "glide2": {
-      "frames": 10,
-      "raf": 10,
-      "to": 10,
+      "frames": 12,
+      "raf": 12,
+      "to": 12,
       "iv": 0,
       "anim": 0,
       "date": "2 يناير 2011",
@@ -14026,9 +14026,9 @@
       "play": "#i-pause"
      },
      "stepsMax": {
-      "frames": 1,
+      "frames": 2,
       "raf": 0,
-      "to": 2,
+      "to": 3,
       "iv": 0,
       "anim": 0,
       "date": "17 يناير 2011",
@@ -14106,10 +14106,10 @@
   "pngSha1": {
    "i16pro.png": "b357b0e2c81ef992bb6d61d48c8cecc667cce175",
    "_build/i16pro_hit.png": "e0ed051a5a585a275893a8ca7c463f032898d4af",
-   "_build/i16pro_moving.png": "ec9ebfcffabc974dc539c9f7e8faa8c7c7ed22a4",
-   "_build/i16pro_halted.png": "7d7f254ccc0331ef56237bacfce66128ee9a38b2",
-   "_build/i16pro_arrived.png": "19da38f6a7260ea87baf0078d39485cc7d0453fb",
-   "_build/i16pro_tip.png": "6c76c6fe1f9e2e424025e191c988b1bd1147472d",
+   "_build/i16pro_moving.png": "614c104d8eb1abe4d652f7d39a9beed277d4a1d5",
+   "_build/i16pro_halted.png": "ec6cec8d9da893de9b9fefb6f1432b0f9d00df67",
+   "_build/i16pro_arrived.png": "2941dc5c6bd37f75687c04c40ae5b0f67aa16607",
+   "_build/i16pro_tip.png": "066814dbe9ba8c9ffa608757e61b777a28b77652",
    "_build/i16pro_idle.png": "e7e4eb823adbbbb9646bef8c14b907e8be81191f"
   },
   "env": {
@@ -14119,7 +14119,7 @@
  },
  "i11": {
   "device": "896x414 side 48 bottom 21 notch",
-  "renderedAt": "2026-11-04T13:12:00.140Z",
+  "renderedAt": "2026-11-04T13:22:56.006Z",
   "inputs": {
    "files": [
     "index.html",
@@ -16844,8 +16844,8 @@
     "issueCount": 0,
     "frames": {
      "glide1": {
-      "frames": 11,
-      "raf": 11,
+      "frames": 10,
+      "raf": 10,
       "to": 11,
       "iv": 0,
       "anim": 0,
@@ -16855,9 +16855,9 @@
       "play": "#i-pause"
      },
      "glide2": {
-      "frames": 13,
-      "raf": 13,
-      "to": 12,
+      "frames": 12,
+      "raf": 12,
+      "to": 13,
       "iv": 0,
       "anim": 0,
       "date": "2 يناير 2011",
@@ -16866,9 +16866,9 @@
       "play": "#i-pause"
      },
      "glide5": {
-      "frames": 11,
-      "raf": 11,
-      "to": 11,
+      "frames": 12,
+      "raf": 12,
+      "to": 13,
       "iv": 0,
       "anim": 0,
       "date": "4 يناير 2011",
@@ -16966,10 +16966,10 @@
    "_build/i11_idle.png"
   ],
   "pngSha1": {
-   "i11.png": "fef888c483cd7d41547ed19a33958e14e336a79d",
+   "i11.png": "ee645e7726cd82807afe871d98ddfa9f9ee2d4f9",
    "_build/i11_hit.png": "16d50a8be43603fd8fcb0a1d00afe03936ac09e0",
    "_build/i11_moving.png": "d11638c675f33e0cd7a68a426d59061e78ed2f39",
-   "_build/i11_halted.png": "699cc09cb818ad943d926104b07a9046ea227f27",
+   "_build/i11_halted.png": "1f04f84bd089f333f08ab6291e354c14aac3415e",
    "_build/i11_arrived.png": "a00e6c65ef674658b2511ad74250d315437b0797",
    "_build/i11_tip.png": "c230e7ed39b830b427b73f56fc6fb5568ec1c043",
    "_build/i11_idle.png": "7bd0dce1c6f7b6d8a8df2f20d4291635df0502c4"
@@ -16981,7 +16981,7 @@
  },
  "i16promax": {
   "device": "956x440 side 62 bottom 21 island",
-  "renderedAt": "2026-11-04T13:12:30.511Z",
+  "renderedAt": "2026-11-04T13:23:25.771Z",
   "inputs": {
    "files": [
     "index.html",
@@ -19706,9 +19706,9 @@
     "issueCount": 0,
     "frames": {
      "glide1": {
-      "frames": 11,
-      "raf": 11,
-      "to": 10,
+      "frames": 13,
+      "raf": 13,
+      "to": 13,
       "iv": 0,
       "anim": 0,
       "date": "1 يناير 2011",
@@ -19717,9 +19717,9 @@
       "play": "#i-pause"
      },
      "glide2": {
-      "frames": 12,
-      "raf": 12,
-      "to": 12,
+      "frames": 11,
+      "raf": 11,
+      "to": 10,
       "iv": 0,
       "anim": 0,
       "date": "2 يناير 2011",
@@ -19728,9 +19728,9 @@
       "play": "#i-pause"
      },
      "glide5": {
-      "frames": 12,
-      "raf": 12,
-      "to": 12,
+      "frames": 10,
+      "raf": 10,
+      "to": 11,
       "iv": 0,
       "anim": 0,
       "date": "4 يناير 2011",
