@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-03T13:11:41.217Z",
+ "ranAt": "2026-11-03T13:28:39.595Z",
  "inputs": {
   "files": [
    "index.html",
@@ -22,7 +22,7 @@
    "header_cairo.jpg",
    "map_overlay_cairo.svg"
   ],
-  "sha1": "694c9c6be860b7bb901fb97ed6c3b31e0883839e"
+  "sha1": "4abb49490b7b8f6bb11a2ab464300cab4de0d169"
  },
  "cleanIssues": {
   "i16promax": [],
@@ -87,7 +87,7 @@
    "sample": [
     "panel not opaque (opacity 0.60): الإشعارات",
     "brief text not fully visible: الإشعارات",
-    "brief text not fully visible: 3 غير مقروءة · 1 يناير 2011"
+    "brief text not fully visible: غير المقروءة: 2 · 1 يناير 2011"
    ]
   },
   {
@@ -95,8 +95,30 @@
    "ok": true,
    "sample": [
     "Nile delta covered by panel الإشعارات",
-    "Nile delta under the hit box of غير مقروء، قرار: احتجاجات ",
+    "Nile delta under the hit box of قرار ينتظرك: احتجاجات في ت",
     "Egypt covered by panel الإشعارات"
+   ]
+  },
+  {
+   "name": "map dimmed",
+   "ok": true,
+   "sample": [
+    "the map is dimmed (opacity 1.00, filter brightness(0.35))"
+   ]
+  },
+  {
+   "name": "map faded",
+   "ok": true,
+   "sample": [
+    "the map is dimmed (opacity 0.30, filter none)"
+   ]
+  },
+  {
+   "name": "scrim over the map",
+   "ok": true,
+   "sample": [
+    "something drawn over the map: DIV (rgba(0, 0, 0, 0.55))",
+    "contrast 1.92 for \"2\""
    ]
   },
   {
@@ -155,7 +177,7 @@
    "sample": [
     "contrast 1 for \"قرارات تنتظرك\"",
     "contrast 1 for \"أوامر معلقة\"",
-    "contrast 1.01 for \"المنطقة الغربية إلى سيوة\""
+    "contrast 1 for \"مهم\""
    ]
   },
   {
@@ -211,8 +233,8 @@
    "name": "text overlap",
    "ok": true,
    "sample": [
-    "text overlap \"الإشعارات\" / \"3\"",
-    "text overlap \"الإشعارات\" / \"غير مقروءة\"",
+    "text overlap \"الإشعارات\" / \"غير المقروءة:\"",
+    "text overlap \"الإشعارات\" / \"2\"",
     "text overlap \"الإشعارات\" / \"·\""
    ]
   },
@@ -245,15 +267,15 @@
    "sample": [
     "a11y: «احتجاجات في تونس» does not read its numbers",
     "a11y: «جزء» does not read all it shows: احتجاجات في تونس قرار",
-    "«احتجاجات في تونس»: the unread dot and words do not match its state"
+    "«احتجاجات في تونس» does not say it waits for a decision"
    ]
   },
   {
    "name": "font weight (no tabs)",
    "ok": true,
    "sample": [
-    "font weight 11.5/700 for \"3\"",
-    "font weight 11.5/700 for \"غير مقروءة\"",
+    "font weight 11.5/700 for \"غير المقروءة:\"",
+    "font weight 11.5/700 for \"2\"",
     "font weight 11.5/700 for \"·\""
    ]
   },
@@ -286,6 +308,20 @@
     "control cut by its scroll area (bottom): غير مقروء، القمح عالميًا ف",
     "hit box shaved by its clip: غير مقروء، القمح عالميًا ف",
     "fades 0/0 do not match the scroll state (top 0, over 60.0)"
+   ]
+  },
+  {
+   "name": "hint chevron missing (no tabs)",
+   "ok": true,
+   "sample": [
+    "scroll hint chevron missing with content below"
+   ]
+  },
+  {
+   "name": "hint over the content (no tabs)",
+   "ok": true,
+   "sample": [
+    "scroll hint not centred in the clear strip under the fade: y 198.0..216.0 (strip 344.0..366.0)"
    ]
   },
   {
@@ -374,7 +410,7 @@
    "name": "badge off",
    "ok": true,
    "sample": [
-    "the badge says 4, the header 3, the unread rows are 3 (the brief's 3)",
+    "the badge says 4, the header 2, the unread rows are 2 (the brief's 2)",
     "a11y: the bell does not read its count and show the centre open"
    ]
   },
@@ -382,9 +418,16 @@
    "name": "counts changed together",
    "ok": true,
    "sample": [
-    "«السودان: استفتاء الجنوب بعد 8 أيام» is not marked unread",
-    "the badge says 2, the header 2, the unread rows are 2 (the brief's 3)",
-    "a11y: the bell does not read its count and show the centre open"
+    "«القمح عالميًا في أعلى مستوى منذ 2008» is not marked unread",
+    "the badge says 1, the header 1, the unread rows are 1 (the brief's 2)",
+    "«القمح عالميًا في أعلى مستوى منذ 2008»: the unread dot and words do not match its state"
+   ]
+  },
+  {
+   "name": "the decision not said waiting",
+   "ok": true,
+   "sample": [
+    "«احتجاجات في تونس» does not say it waits for a decision"
    ]
   },
   {
@@ -399,7 +442,7 @@
    "ok": true,
    "sample": [
     "«المنطقة الغربية إلى سيوة» is marked unread",
-    "the badge says 3, the header 3, the unread rows are 4 (the brief's 3)",
+    "the badge says 2, the header 2, the unread rows are 3 (the brief's 2)",
     "«المنطقة الغربية إلى سيوة»: the unread dot and words do not match its state"
    ]
   },
@@ -420,10 +463,41 @@
    ]
   },
   {
+   "name": "dot recoloured and grown",
+   "ok": true,
+   "sample": [
+    "«السودان: استفتاء الجنوب بعد 8 أيام»: the unread dot is not a visible 6 pt teal dot",
+    "«القمح عالميًا في أعلى مستوى منذ 2008»: the unread dot is not a visible 6 pt teal dot"
+   ]
+  },
+  {
+   "name": "dot hidden",
+   "ok": true,
+   "sample": [
+    "«السودان: استفتاء الجنوب بعد 8 أيام»: the unread dot is not a visible 6 pt teal dot",
+    "«القمح عالميًا في أعلى مستوى منذ 2008»: the unread dot is not a visible 6 pt teal dot"
+   ]
+  },
+  {
+   "name": "dot past the chevron",
+   "ok": true,
+   "sample": [
+    "«السودان: استفتاء الجنوب بعد 8 أيام»: the unread dot is not between the text and the chevron",
+    "«القمح عالميًا في أعلى مستوى منذ 2008»: the unread dot is not between the text and the chevron"
+   ]
+  },
+  {
+   "name": "row silent on where it leads",
+   "ok": true,
+   "sample": [
+    "a11y: «احتجاجات في تونس» does not say where it leads"
+   ]
+  },
+  {
    "name": "unread dot missing",
    "ok": true,
    "sample": [
-    "«احتجاجات في تونس»: the unread dot and words do not match its state"
+    "«السودان: استفتاء الجنوب بعد 8 أيام»: the unread dot and words do not match its state"
    ]
   },
   {

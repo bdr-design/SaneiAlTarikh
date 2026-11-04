@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-03T13:09:49.991Z",
+ "ranAt": "2026-11-03T13:26:37.709Z",
  "inputs": {
   "files": [
    "index.html",
@@ -25,7 +25,7 @@
    "../../shared/map_mena_d1_overlay.svg",
    "map_overlay_cairo.svg"
   ],
-  "sha1": "f9c18242492906eafc949a529af99b6d4e329b11"
+  "sha1": "4b1c82f4edef350d05a0fd60355efadc8dc73b6e"
  },
  "cleanIssues": {
   "i16promax": [],
@@ -54,7 +54,7 @@
    "name": "radius",
    "ok": true,
    "sample": [
-    "panel radius قرار: احتجاجات واسعة في تو: 6 (want 12)",
+    "panel radius قرار: احتجاجات في تونس: 6 (want 12)",
     "radius 6 for .sheet (want 12)"
    ]
   },
@@ -63,8 +63,8 @@
    "ok": true,
    "sample": [
     "text in side inset: تتسع الاحتجاجات في تونس منذ",
-    "text in side inset: ديسمبر بعد أن أحرق شاب نفسه في سيدي بوزيد. يطالب المحتجون بفرص عمل وبخفض الأسعار، وتنقل القنوات العربية ما يجري كل يوم. يرى مستشاروك أن البطالة وارتفاع الأسعار في مصر قد يجعلان الشارع يتأثر بما يحدث.",
-    "text in side inset: ديسمبر بعد أن أحرق شاب نفسه في سيدي بوزيد. يطالب المحتجون بفرص عمل وبخفض الأسعار، وتنقل القنوات العربية ما يجري كل يوم. يرى مستشاروك أن البطالة وارتفاع الأسعار في مصر قد يجعلان الشارع يتأثر بما يحدث."
+    "text in side inset: ديسمبر بعد أن أحرق شاب نفسه في سيدي بوزيد. يطالب المحتجون بفرص عمل وبخفض الأسعار، وتنقل القنوات العربية ما يجري كل يوم. يرى مستشاروك أن البطالة وارتفاع الأسعار في مصر قد يجعلان الشارع يتأثر بما يحدث.",
+    "text in side inset: ديسمبر بعد أن أحرق شاب نفسه في سيدي بوزيد. يطالب المحتجون بفرص عمل وبخفض الأسعار، وتنقل القنوات العربية ما يجري كل يوم. يرى مستشاروك أن البطالة وارتفاع الأسعار في مصر قد يجعلان الشارع يتأثر بما يحدث."
    ]
   },
   {
@@ -72,33 +72,55 @@
    "ok": true,
    "sample": [
     "text in side inset: تتسع الاحتجاجات في تونس منذ",
-    "text in side inset: ديسمبر بعد أن أحرق شاب نفسه في سيدي بوزيد. يطالب المحتجون بفرص عمل وبخفض الأسعار، وتنقل القنوات العربية ما يجري كل يوم. يرى مستشاروك أن البطالة وارتفاع الأسعار في مصر قد يجعلان الشارع يتأثر بما يحدث.",
-    "text in side inset: ديسمبر بعد أن أحرق شاب نفسه في سيدي بوزيد. يطالب المحتجون بفرص عمل وبخفض الأسعار، وتنقل القنوات العربية ما يجري كل يوم. يرى مستشاروك أن البطالة وارتفاع الأسعار في مصر قد يجعلان الشارع يتأثر بما يحدث."
+    "text in side inset: ديسمبر بعد أن أحرق شاب نفسه في سيدي بوزيد. يطالب المحتجون بفرص عمل وبخفض الأسعار، وتنقل القنوات العربية ما يجري كل يوم. يرى مستشاروك أن البطالة وارتفاع الأسعار في مصر قد يجعلان الشارع يتأثر بما يحدث.",
+    "text in side inset: ديسمبر بعد أن أحرق شاب نفسه في سيدي بوزيد. يطالب المحتجون بفرص عمل وبخفض الأسعار، وتنقل القنوات العربية ما يجري كل يوم. يرى مستشاروك أن البطالة وارتفاع الأسعار في مصر قد يجعلان الشارع يتأثر بما يحدث."
    ]
   },
   {
    "name": "panel not opaque",
    "ok": true,
    "sample": [
-    "panel not opaque: قرار: احتجاجات واسعة في تو rgba(9, 17, 25, 0.66)"
+    "panel not opaque: قرار: احتجاجات في تونس rgba(9, 17, 25, 0.66)"
    ]
   },
   {
    "name": "see-through panel",
    "ok": true,
    "sample": [
-    "panel not opaque (opacity 0.60): قرار: احتجاجات واسعة في تو",
+    "panel not opaque (opacity 0.60): قرار: احتجاجات في تونس",
     "brief text not fully visible: احتجاجات في تونس",
-    "brief text not fully visible: قرار · احتجاجات وثورات · الوقت متوقف"
+    "brief text not fully visible: الوقت متوقف · الافتراضي بعد 7 أيام"
    ]
   },
   {
    "name": "Egypt covered",
    "ok": true,
    "sample": [
-    "Nile delta covered by panel قرار: احتجاجات واسعة في تو",
-    "Egypt covered by panel قرار: احتجاجات واسعة في تو",
+    "Nile delta covered by panel قرار: احتجاجات في تونس",
+    "Egypt covered by panel قرار: احتجاجات في تونس",
     "Egypt under the hit box of دعم أكبر للخبز والتموين: 5"
+   ]
+  },
+  {
+   "name": "map dimmed",
+   "ok": true,
+   "sample": [
+    "the map is dimmed (opacity 1.00, filter brightness(0.35))"
+   ]
+  },
+  {
+   "name": "map faded",
+   "ok": true,
+   "sample": [
+    "the map is dimmed (opacity 0.30, filter none)"
+   ]
+  },
+  {
+   "name": "scrim over the map",
+   "ok": true,
+   "sample": [
+    "something drawn over the map: DIV (rgba(0, 0, 0, 0.55))",
+    "contrast 1.92 for \"3\""
    ]
   },
   {
@@ -114,7 +136,7 @@
    "sample": [
     "hit overlap الخزينة 36.0 مليار $ / لاحقًا: تأجيل القرار إلى ا",
     "hit overlap الاستقرار 58% / لاحقًا: تأجيل القرار إلى ا",
-    "panel overlap الدولة: مصر، حسني مبارك، ج / قرار: احتجاجات واسعة في تو"
+    "panel overlap الدولة: مصر، حسني مبارك، ج / قرار: احتجاجات في تونس"
    ]
   },
   {
@@ -213,18 +235,18 @@
    "name": "text overlap",
    "ok": true,
    "sample": [
-    "text overlap \"احتجاجات في تونس\" / \"قرار\"",
+    "text overlap \"احتجاجات في تونس\" / \"الوقت متوقف\"",
     "text overlap \"احتجاجات في تونس\" / \"·\"",
-    "text overlap \"احتجاجات في تونس\" / \"احتجاجات وثورات\""
+    "text overlap \"احتجاجات في تونس\" / \"الافتراضي بعد\""
    ]
   },
   {
    "name": "text into a control",
    "ok": true,
    "sample": [
-    "text overlap \"العجز\" / \"الاضطرابات\"",
-    "text overlap \"+0.5\" / \"الاضطرابات\"",
-    "text overlap \"تشديد الانتشار الأمني\" / \"الاضطرابات\""
+    "text overlap \"مليون $ سنويًا\" / \"الاضطرابات\"",
+    "text overlap \"تشديد الانتشار الأمني\" / \"الاضطرابات\"",
+    "text overlap \"الشرعية\" / \"الاضطرابات\""
    ]
   },
   {
@@ -263,7 +285,7 @@
    "name": "chip arrow against its sign",
    "ok": true,
    "sample": [
-    "«دعم أكبر للخبز العجز +0.5»: the chip's arrow does not agree with its sign",
+    "«دعم أكبر للخبز»: the chip's arrow does not agree with its sign",
     "option 1: the chip is «up الاضطرابات −3» (want «down الاضطرابات -3»)",
     "option 1: an arrow against its sign"
    ]
@@ -272,18 +294,18 @@
    "name": "row read in part",
    "ok": true,
    "sample": [
-    "a11y: «دعم أكبر للخبز العجز +0.5» does not read its numbers",
-    "a11y: «دعم أكبر للخبز العجز +0.5» does not say «دولار»",
-    "a11y: «دعم أكبر للخبز العجز +0.5» does not say the chip's direction in words"
+    "a11y: «دعم أكبر للخبز» does not read its numbers",
+    "a11y: «دعم أكبر للخبز» does not say «دولار»",
+    "a11y: «دعم أكبر للخبز» does not say the chip's direction in words"
    ]
   },
   {
    "name": "font weight (no tabs)",
    "ok": true,
    "sample": [
-    "font weight 11.5/700 for \"قرار\"",
+    "font weight 11.5/700 for \"الوقت متوقف\"",
     "font weight 11.5/700 for \"·\"",
-    "font weight 11.5/700 for \"احتجاجات وثورات\""
+    "font weight 11.5/700 for \"الافتراضي بعد\""
    ]
   },
   {
@@ -312,9 +334,23 @@
    "name": "fades wrong (no tabs)",
    "ok": true,
    "sample": [
-    "clipped text (bottom): \"المتابعة دون إجراء\" 507.63..599 y 362..381",
+    "clipped text (bottom): \"المتابعة دون إجراء\" 507.63..599 y 363..382",
     "control cut by its scroll area (bottom): المتابعة دون إجراء، الخيار",
     "hit box shaved by its clip: المتابعة دون إجراء، الخيار"
+   ]
+  },
+  {
+   "name": "hint chevron missing (no tabs)",
+   "ok": true,
+   "sample": [
+    "scroll hint chevron missing with content below"
+   ]
+  },
+  {
+   "name": "hint over the content (no tabs)",
+   "ok": true,
+   "sample": [
+    "scroll hint not centred in the clear strip under the fade: y 198.0..216.0 (strip 344.0..366.0)"
    ]
   },
   {
@@ -337,7 +373,7 @@
    "sample": [
     "18 pt is for the panel's name and the adjusted values only: \"تتسع الاحتجاجات في تونس منذ\"",
     "18 pt is for the panel's name and the adjusted values only: \"17\"",
-    "18 pt is for the panel's name and the adjusted values only: \"ديسمبر بعد أن أحرق شاب نفسه في سيدي بوزيد. يطالب المحتجون بفرص عمل وبخفض الأسعار، وتنقل القنوات العربية ما يجري كل يوم. يرى مستشاروك أن البطالة وارتفاع الأسعار في مصر قد يجعلان الشارع يتأثر بما يحدث.\""
+    "18 pt is for the panel's name and the adjusted values only: \"ديسمبر بعد أن أحرق شاب نفسه في سيدي بوزيد. يطالب المحتجون بفرص عمل وبخفض الأسعار، وتنقل القنوات العربية ما يجري كل يوم. يرى مستشاروك أن البطالة وارتفاع الأسعار في مصر قد يجعلان الشارع يتأثر بما يحدث.\""
    ]
   },
   {
@@ -346,15 +382,15 @@
    "sample": [
     "clipped text (sides): \"تتسع الاحتجاجات في تونس منذ\" 782.97..921 y 117..134",
     "text outside the sheet's 12 pt padding: \"تتسع الاحتجاجات في تونس منذ\"",
-    "clipped text (sides): \"ديسمبر بعد أن أحرق شاب نفسه في سيدي بوزيد. يطالب المحتجون بفرص عمل وبخفض الأسعار، وتنقل القنوات العربية ما يجري كل يوم. يرى مستشاروك أن البطالة وارتفاع الأسعار في مصر قد يجعلان الشارع يتأثر بما يحدث.\" 549.66..921 y 135..152"
+    "clipped text (sides): \"ديسمبر بعد أن أحرق شاب نفسه في سيدي بوزيد. يطالب المحتجون بفرص عمل وبخفض الأسعار، وتنقل القنوات العربية ما يجري كل يوم. يرى مستشاروك أن البطالة وارتفاع الأسعار في مصر قد يجعلان الشارع يتأثر بما يحدث.\" 549.66..921 y 135..152"
    ]
   },
   {
    "name": "gap (decision)",
    "ok": true,
    "sample": [
-    "gap 6 on العجز +0.5",
-    "gap 6 on العجز +0.5",
+    "gap 6 on العجز +500 مليون $ سنويًا",
+    "gap 6 on العجز +500 مليون $ سنويًا",
     "gap 6 on الشرعية −2"
    ]
   },
@@ -385,11 +421,11 @@
   },
   {
    "name": "pause unsaid",
-   "ok": true,
+   "ok": false,
    "sample": [
-    "the sheet does not say the time is stopped",
-    "brief text missing: قرار · احتجاجات وثورات · الوقت متوقف",
-    "brief text missing: قرار · احتجاجات وثورات · الوقت متوقف"
+    "the header does not show the expiry and its default",
+    "brief text missing: الوقت متوقف · الافتراضي بعد 7 أيام",
+    "brief text missing: الوقت متوقف · الافتراضي بعد 7 أيام"
    ]
   },
   {
@@ -405,16 +441,16 @@
    "name": "options reordered",
    "ok": true,
    "sample": [
-    "option 1 is «تشديد الانتشار الأمني · لا كلفة إضافية» (want «دعم أكبر للخبز · 500 مليون $ سنويًا»)",
+    "option 1 is «تشديد الانتشار الأمني · لا كلفة إضافية» (want «دعم أكبر للخبز · »)",
     "option 1: the chip is «down الاضطرابات −2» (want «down الاضطرابات -3»)",
-    "option 1: the cost is «down الشرعية −2» (want «up العجز 0.5»)"
+    "option 1: the cost is «down الشرعية −2» (want «up العجز 500»)"
    ]
   },
   {
    "name": "chip arrow against its sign",
    "ok": true,
    "sample": [
-    "«دعم أكبر للخبز العجز +0.5»: the chip's arrow does not agree with its sign",
+    "«دعم أكبر للخبز»: the chip's arrow does not agree with its sign",
     "option 1: the chip is «up الاضطرابات −3» (want «down الاضطرابات -3»)",
     "option 1: an arrow against its sign"
    ]
@@ -461,12 +497,65 @@
    ]
   },
   {
-   "name": "deficit off the subsidy",
+   "name": "deficit without its unit",
    "ok": true,
    "sample": [
-    "a11y: «دعم أكبر للخبز العجز +0.5» does not read its numbers",
-    "a11y: «دعم أكبر للخبز والتموين:» does not read all it shows: 600",
-    "option 1 is «دعم أكبر للخبز · 600 مليون $ سنويًا» (want «دعم أكبر للخبز · 500 مليون $ سنويًا»)"
+    "the deficit's rise is not shown with its unit and period (مليون $ سنويًا)",
+    "brief text missing: العجز +500 مليون $ سنويًا",
+    "brief text missing: العجز +500 مليون $ سنويًا"
+   ]
+  },
+  {
+   "name": "the subsidy beyond the bread line",
+   "ok": true,
+   "sample": [
+    "money unit: «3500 مليون $» (1000 millions and more are billions)",
+    "a11y: «دعم أكبر للخبز» does not read its numbers",
+    "a11y: «دعم أكبر للخبز والتموين:» does not read all it shows: 3500"
+   ]
+  },
+  {
+   "name": "expiry off the header",
+   "ok": true,
+   "sample": [
+    "the header does not show the expiry and its default",
+    "brief text missing: الوقت متوقف · الافتراضي بعد 7 أيام",
+    "brief text missing: الوقت متوقف · الافتراضي بعد 7 أيام"
+   ]
+  },
+  {
+   "name": "an option marked main",
+   "ok": true,
+   "sample": [
+    "an option is marked as the main choice"
+   ]
+  },
+  {
+   "name": "header without its image",
+   "ok": true,
+   "sample": [
+    "the header strip is not the owner's category image"
+   ]
+  },
+  {
+   "name": "a cost line hidden",
+   "ok": false,
+   "sample": [
+    "brief text missing: 10 من رأس المال السياسي"
+   ]
+  },
+  {
+   "name": "a chip hidden",
+   "ok": false,
+   "sample": [
+    "brief text cannot be scrolled clear of the fades: الاضطرابات −2"
+   ]
+  },
+  {
+   "name": "bell silent",
+   "ok": true,
+   "sample": [
+    "a11y: the bell does not read its count"
    ]
   },
   {
@@ -479,19 +568,27 @@
    ]
   },
   {
+   "name": "later silent on time",
+   "ok": true,
+   "sample": [
+    "a11y: «لاحقًا: يبقى القرار في ا» does not read all it shows: يستأنف الوقت",
+    "no «لاحقًا» that keeps the decision in the notifications, resumes time and says the expiry"
+   ]
+  },
+  {
    "name": "no later",
    "ok": true,
    "sample": [
-    "no «لاحقًا» that keeps the decision in the notifications with its expiry",
+    "no «لاحقًا» that keeps the decision in the notifications, resumes time and says the expiry",
     "brief text missing: لاحقًا",
-    "brief text missing: يبقى في الإشعارات · الافتراضي بعد 7 أيام"
+    "brief text missing: يبقى في الإشعارات · يستأنف الوقت"
    ]
   },
   {
    "name": "close silent on putting off",
    "ok": true,
    "sample": [
-    "a11y: the close button does not say it puts the decision off"
+    "a11y: the close button does not say it puts the decision off and resumes time"
    ]
   },
   {
