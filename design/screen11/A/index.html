@@ -908,6 +908,10 @@
       compact = document.documentElement.dataset.fit === '5';
     dow.dataset.dow = dw; dm.dataset.full = d;
     dm.textContent = compact ? m[1] : d; dow.textContent = compact ? dw + ' · ' + m[2] : dw;
+    /* VoiceOver reads the date whole and in order («السبت 1 يناير 2011»), whichever line holds the year (role "text":
+       WebKit reads it as one phrase; the native HUD combines the two lines the same way) */
+    var tx = dow.parentNode; tx.setAttribute('role', 'text'); tx.setAttribute('aria-label', dw + ' ' + d);
+    dow.setAttribute('aria-hidden', 'true'); dm.setAttribute('aria-hidden', 'true');
   };
   function widestDate(compact) {
     var tx = document.querySelector('.date .dtext'), w = 0;
