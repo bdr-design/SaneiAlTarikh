@@ -366,7 +366,7 @@
     mask-image: linear-gradient(180deg, transparent, #000 24px, #000 calc(100% - 46px), transparent calc(100% - 22px)); }
 
   /* overview: three headline numbers */
-  .r-kpis { display: grid; grid-template-columns: repeat(3, 1fr); padding-block: var(--rkt) var(--rkb); border-bottom: 1px solid var(--hair); }
+  .r-kpis { display: grid; grid-template-columns: repeat(3, minmax(min-content, 1fr));   /* equal, unless a label needs more (2026-11-04) */ padding-block: var(--rkt) var(--rkb); border-bottom: 1px solid var(--hair); }
   .r-kpi { display: flex; flex-direction: column; align-items: flex-start; padding-inline: var(--s2); min-width: 0; }
   .r-kpi:first-child { padding-inline-start: 0; }
   .r-kpi:last-child { padding-inline-end: 0; }
@@ -420,7 +420,7 @@
   .r-sec h3, .r-dec h3 { font-size: var(--fs-sec); line-height: var(--lh-sec); font-weight: 600; }
   .r-gov { display: flex; align-items: center; gap: var(--s2); height: 26px; }
   .r-gl { font-size: var(--fs-sec); line-height: var(--lh-sec); font-weight: 500; color: var(--t2); }
-  .r-gn { flex: 1; text-align: center; font-size: var(--fs-sec); line-height: var(--lh-sec); font-weight: 600; }
+  .r-gn { flex: 1; text-align: start; font-size: var(--fs-sec); line-height: var(--lh-sec); font-weight: 600; }
   .r-btn.tap::before { width: max(100% + 2px, 44px); height: max(100% + 2px, 44px); }   /* cover the 1 pt border too */
   /* actions: a blue outline with cyan text (teal stays for selected states: the open tab, the chosen radio), as in the image */
   .r-btn { flex: none; height: 24px; padding-inline: var(--s3); border-radius: 6px; border: 1px solid rgba(111, 182, 255, .6); background: rgba(111, 182, 255, .06);
@@ -445,7 +445,7 @@
   .r-dtx b { font-size: var(--fs-val); line-height: var(--lh-val); font-weight: 600; }
   .r-dtx span { font-size: var(--fs-label); line-height: 14px; font-weight: 500; color: var(--t2); white-space: nowrap; }
   .r-dtx em { font-style: normal; color: var(--t1); }
-  .r-dfoot { display: flex; align-items: center; justify-content: space-between; gap: var(--s2); }
+  .r-dfoot { display: flex; flex-direction: column; align-items: flex-start; gap: var(--s1); }   /* the positions line above the buttons: the row was at its limit (2026-11-04) */
   .r-dbtn { display: flex; gap: var(--s1); }
   .r-dbtn .r-btn { padding-inline: var(--s2); }
 
@@ -548,7 +548,7 @@
   .s-prog i { position: absolute; inset: 0 0 0 auto; border-radius: 2px; background: var(--teal); }
   .s-pa { flex: none; display: flex; flex-direction: column; align-items: flex-end; gap: 2px; }   /* «إلغاء» and «بدء» share their left edge */
   .s-ref { font-size: var(--fs-label); line-height: var(--lh-label); font-weight: 500; color: var(--t2); white-space: nowrap; }
-  .s-note { font-size: var(--fs-label); line-height: 14px; font-weight: 500; color: var(--t2); }
+  .s-note { font-size: var(--fs-label); line-height: 14px; font-weight: 500; color: var(--t2); text-wrap: pretty; }   /* no one-word last line (2026-11-04) */
 
   /* السياسات: one row per law: name and the cost of a change, then its setting as 3 segments (the chosen one white) */
   .s-pol { display: flex; align-items: center; gap: var(--s2); height: 40px; }
@@ -578,6 +578,7 @@
   .w-v { flex: none; display: inline-flex; align-items: center; gap: 2px; font-size: var(--fs-val); line-height: var(--lh-val); font-weight: 600; }
   /* the sum: the target the terms add up to */
   .w-sum { display: flex; align-items: center; justify-content: space-between; height: 24px; font-size: var(--fs-sec); line-height: var(--lh-sec); font-weight: 600; color: var(--t1); }
+  .w-sum .w-calc { margin-inline-start: auto; margin-inline-end: var(--s2); font-size: var(--fs-label); line-height: var(--lh-label); font-weight: 500; color: var(--t2); }   /* the sum shown: start + rises − falls */
   .w-sum b { font-size: var(--fs-val); line-height: var(--lh-val); font-weight: 600; }
 </style>
 </head>
@@ -769,8 +770,8 @@
       <header class="r-hd">
         <span class="r-flag"><img src="../../shared/flags/eg.svg" alt="علم مصر"></span>
         <div class="r-tt">
-          <div class="r-row"><h2 class="r-name">لماذا؟ الاستقرار</h2></div>
-          <div class="r-sub">الآن <span class="ltr">58%</span><span class="r-dot"> · </span>يتجه إلى <span class="ltr">56%</span></div>
+          <div class="r-row"><h2 class="r-name">الاستقرار</h2></div>
+          <div class="r-sub">لماذا؟<span class="r-dot"> · </span>الآن <span class="ltr">58%</span><span class="r-dot"> · </span>يتجه إلى <span class="ltr">56%</span></div>
         </div>
         <span class="s-emb" aria-hidden="true"><svg class="i"><use href="#i-anchor"/></svg></span>
         <button class="r-x tap" aria-label="إغلاق لماذا؟ الاستقرار"><svg class="i"><use href="#i-close"/></svg></button>
@@ -808,11 +809,11 @@
         <section class="r-sec">
           <h3>ما يخفضه</h3>
           <div class="w-t" role="img" aria-label="الشرعية، 44 من 100: يخفض 5 نقاط">
-            <span class="w-n"><b>الشرعية</b><span><span class="ltr">44</span> من <span class="ltr">100</span></span></span>
+            <span class="w-n"><b>الشرعية</b><span><span class="ltr">44</span> / <span class="ltr">100</span></span></span>
             <b class="w-v r-amber"><svg class="r-arr" aria-hidden="true"><use href="#t-down"/></svg><span class="ltr">−5</span></b>
           </div>
           <div class="w-t" role="img" aria-label="الاضطرابات، 45 من 100: يخفض 4 نقاط">
-            <span class="w-n"><b>الاضطرابات</b><span><span class="ltr">45</span> من <span class="ltr">100</span></span></span>
+            <span class="w-n"><b>الاضطرابات</b><span><span class="ltr">45</span> / <span class="ltr">100</span></span></span>
             <b class="w-v r-amber"><svg class="r-arr" aria-hidden="true"><use href="#t-down"/></svg><span class="ltr">−4</span></b>
           </div>
           <div class="w-t" role="img" aria-label="البطالة، 8.9%: يخفض 3 نقاط">
@@ -828,8 +829,8 @@
             <b class="w-v r-amber"><svg class="r-arr" aria-hidden="true"><use href="#t-down"/></svg><span class="ltr">−1</span></b>
           </div>
         </section>
-        <div class="w-sum" role="img" aria-label="المجموع: يتجه إلى 56%، من 55 مع 16 تزيده و15 تنقصه">
-          <span>يتجه إلى</span><b class="ltr">56%</b>
+        <div class="w-sum" role="img" aria-label="المجموع: يتجه إلى 56%، من 55 نقطة، ترفعه 16 نقطة وتخفضه 15 نقطة">
+          <span>يتجه إلى</span><span class="w-calc ltr">55 + 16 − 15</span><b class="ltr">56%</b>
         </div>
         <div class="r-link tap" role="button" tabindex="0" aria-label="لوحة الدولة: الاستقرار والشرعية. يفتح لوحة الدولة">
           <span class="r-tile"><svg class="i"><use href="#i-state"/></svg></span>

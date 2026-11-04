@@ -366,7 +366,7 @@
     mask-image: linear-gradient(180deg, transparent, #000 24px, #000 calc(100% - 46px), transparent calc(100% - 22px)); }
 
   /* overview: three headline numbers */
-  .r-kpis { display: grid; grid-template-columns: repeat(3, 1fr); padding-block: var(--rkt) var(--rkb); border-bottom: 1px solid var(--hair); }
+  .r-kpis { display: grid; grid-template-columns: repeat(3, minmax(min-content, 1fr));   /* equal, unless a label needs more (2026-11-04) */ padding-block: var(--rkt) var(--rkb); border-bottom: 1px solid var(--hair); }
   .r-kpi { display: flex; flex-direction: column; align-items: flex-start; padding-inline: var(--s2); min-width: 0; }
   .r-kpi:first-child { padding-inline-start: 0; }
   .r-kpi:last-child { padding-inline-end: 0; }
@@ -420,7 +420,7 @@
   .r-sec h3, .r-dec h3 { font-size: var(--fs-sec); line-height: var(--lh-sec); font-weight: 600; }
   .r-gov { display: flex; align-items: center; gap: var(--s2); height: 26px; }
   .r-gl { font-size: var(--fs-sec); line-height: var(--lh-sec); font-weight: 500; color: var(--t2); }
-  .r-gn { flex: 1; text-align: center; font-size: var(--fs-sec); line-height: var(--lh-sec); font-weight: 600; }
+  .r-gn { flex: 1; text-align: start; font-size: var(--fs-sec); line-height: var(--lh-sec); font-weight: 600; }
   .r-btn.tap::before { width: max(100% + 2px, 44px); height: max(100% + 2px, 44px); }   /* cover the 1 pt border too */
   /* actions: a blue outline with cyan text (teal stays for selected states: the open tab, the chosen radio), as in the image */
   .r-btn { flex: none; height: 24px; padding-inline: var(--s3); border-radius: 6px; border: 1px solid rgba(111, 182, 255, .6); background: rgba(111, 182, 255, .06);
@@ -445,7 +445,7 @@
   .r-dtx b { font-size: var(--fs-val); line-height: var(--lh-val); font-weight: 600; }
   .r-dtx span { font-size: var(--fs-label); line-height: 14px; font-weight: 500; color: var(--t2); white-space: nowrap; }
   .r-dtx em { font-style: normal; color: var(--t1); }
-  .r-dfoot { display: flex; align-items: center; justify-content: space-between; gap: var(--s2); }
+  .r-dfoot { display: flex; flex-direction: column; align-items: flex-start; gap: var(--s1); }   /* the positions line above the buttons: the row was at its limit (2026-11-04) */
   .r-dbtn { display: flex; gap: var(--s1); }
   .r-dbtn .r-btn { padding-inline: var(--s2); }
 
@@ -548,7 +548,7 @@
   .s-prog i { position: absolute; inset: 0 0 0 auto; border-radius: 2px; background: var(--teal); }
   .s-pa { flex: none; display: flex; flex-direction: column; align-items: flex-end; gap: 2px; }   /* «إلغاء» and «بدء» share their left edge */
   .s-ref { font-size: var(--fs-label); line-height: var(--lh-label); font-weight: 500; color: var(--t2); white-space: nowrap; }
-  .s-note { font-size: var(--fs-label); line-height: 14px; font-weight: 500; color: var(--t2); }
+  .s-note { font-size: var(--fs-label); line-height: 14px; font-weight: 500; color: var(--t2); text-wrap: pretty; }   /* no one-word last line (2026-11-04) */
 
   /* السياسات: one row per law: name and the cost of a change, then its setting as 3 segments (the chosen one white) */
   .s-pol { display: flex; align-items: center; gap: var(--s2); height: 40px; }
@@ -807,7 +807,7 @@
 
         <dl class="r-st">
           <div class="r-sc"><dt>نظام الحكم</dt><dd>جمهورية رئاسية</dd></div>
-          <div class="r-sc"><dt>الدستور</dt><dd><span class="ltr">1971</span> · عُدّل في <span class="ltr">2007</span></dd></div>
+          <div class="r-sc"><dt>دستور <span class="ltr">1971</span></dt><dd>عُدّل <span class="ltr">2007</span></dd></div>
           <div class="r-sc"><dt>الحزب الحاكم</dt><dd>الحزب الوطني</dd></div>
           <div class="r-sc"><dt>الطوارئ</dt><dd class="r-amber">سارية منذ <span class="ltr">1981</span></dd></div>
         </dl>

@@ -149,7 +149,7 @@ function screen6() {
     incomeYield: n(/ضريبة الدخل الشريحة العليا · ([\d.]+) مليار \$ سنويًا [\d.]+%/, 'the income tax yield'), incomeRate: n(/ضريبة الدخل الشريحة العليا · [\d.]+ مليار \$ سنويًا ([\d.]+)%/, 'the income tax rate'),
     rate: n(/فائدة المركزي ([\d.]+)%/, 'the policy rate'),
     interest: n(/الفوائد ([\d.]+) مليار \$/, 'the interest line'),
-    fx: n(/سعر الصرف ([\d.]+) جنيه للدولار/, 'the exchange rate'),
+    fx: n(/الدولار ([\d.]+) جنيه/, 'the exchange rate'),
     regime: pick(/نظام الصرف (تعويم مُدار|ثابت|حر)/, 'the regime')[0], conv: pick(/قابلية التحويل (\S+)/, 'convertibility')[0], controls: pick(/ضوابط رأس المال (\S+)/, 'capital controls')[0],
   };
 }

@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-02T22:42:12.699Z",
+ "ranAt": "2026-11-04T11:47:27.387Z",
  "inputs": {
   "files": [
    "index.html",
@@ -24,7 +24,7 @@
    "header_cairo.jpg",
    "map_overlay_cairo.svg"
   ],
-  "sha1": "8cbc105b6fe1c1fc0e77c9da96090567a09f7e44"
+  "sha1": "9512338e63f536c2e6c426c0372ef39e3a5a6d00"
  },
  "cleanIssues": {
   "i16promax": [],
@@ -42,7 +42,10 @@
   "se": [],
   "se_overview_end": [],
   "se_unrest": [],
-  "se_unrest_end": [],
+  "se_unrest_end": [
+   "text over a control: \"−2\" runs into «الاضطرابات −6»",
+   "contrast 1.82 for \"−2\""
+  ],
   "se_parties": [],
   "se_parties_end": [],
   "se_groups": [],
@@ -50,7 +53,9 @@
   "se_unrest_at86": [],
   "se_unrest_at172": [],
   "se_unrest_at258": [],
-  "se_unrest_at344": [],
+  "se_unrest_at344": [
+   "text over a control: \"−2\" runs into «الاضطرابات −6»"
+  ],
   "se_parties_at86": [],
   "se_parties_at172": [],
   "se_groups_at86": [],
@@ -79,7 +84,7 @@
    "ok": true,
    "sample": [
     "text colour off-token rgb(136, 153, 170): \"الداخلية والسياسة\"",
-    "contrast 2.87 for \"الداخلية والسياسة\""
+    "contrast 2.96 for \"الداخلية والسياسة\""
    ]
   },
   {
@@ -94,18 +99,18 @@
    "name": "tap in the side inset",
    "ok": true,
    "sample": [
+    "text in side inset: نظرة عامة",
     "text in side inset: 79.7",
-    "text in side inset: +180",
-    "text in side inset: لماذا؟"
+    "text in side inset: +180"
    ]
   },
   {
    "name": "panel in the side inset",
    "ok": true,
    "sample": [
+    "text in side inset: نظرة عامة",
     "text in side inset: 79.7",
-    "text in side inset: +180",
-    "text in side inset: لماذا؟"
+    "text in side inset: +180"
    ]
   },
   {
@@ -136,6 +141,28 @@
    ]
   },
   {
+   "name": "map dimmed",
+   "ok": true,
+   "sample": [
+    "the map is dimmed (opacity 1.00, filter brightness(0.35))"
+   ]
+  },
+  {
+   "name": "map faded",
+   "ok": true,
+   "sample": [
+    "the map is dimmed (opacity 0.30, filter none)"
+   ]
+  },
+  {
+   "name": "scrim over the map",
+   "ok": true,
+   "sample": [
+    "something drawn over the map: DIV (rgba(0, 0, 0, 0.55))",
+    "contrast 1.92 for \"3\""
+   ]
+  },
+  {
    "name": "sheet width",
    "ok": true,
    "sample": [
@@ -163,17 +190,17 @@
    "ok": true,
    "sample": [
     "icon over text: i / \"· مرة في السنة\"",
-    "icon over text: i / \"الاضطرابات\"",
-    "hit overlap الدولة / فتح حوار وطني: الكلفة 20 م"
+    "icon over text: i / \"· مرة في السنة\"",
+    "icon over text: i / \"الاضطرابات\""
    ]
   },
   {
    "name": "left stack moved",
    "ok": true,
    "sample": [
-    "HUD element moved from its B3 position: .toast x 70.0..275.6 y 56.0..88.0",
-    "HUD element moved from its B3 position: .btn.mode x 70.0..191.6 y 96.0..128.0",
-    "HUD element moved from its B3 position: .btn.home x 70.0..141.5 y 136.0..168.0"
+    "HUD element moved from its B3 position: .toast x 70.0..287.6 y 56.0..88.0",
+    "HUD element moved from its B3 position: .btn.mode x 70.0..197.3 y 96.0..128.0",
+    "HUD element moved from its B3 position: .btn.home x 70.0..143.2 y 136.0..168.0"
    ]
   },
   {
@@ -187,9 +214,9 @@
    "name": "two tab bodies",
    "ok": true,
    "sample": [
-    "clipped text (bottom): \"لماذا؟\" 854.31..881 y 220..237",
-    "clipped text (bottom): \"لماذا؟\" 734.66..761.34 y 220..237",
-    "clipped text (bottom): \"لماذا؟\" 623.98..650.67 y 220..237"
+    "clipped text (bottom): \"لماذا؟\" 852.92..881 y 222..236",
+    "clipped text (bottom): \"لماذا؟\" 733.27..761.34 y 222..236",
+    "clipped text (bottom): \"لماذا؟\" 622.59..650.67 y 222..236"
    ]
   },
   {
@@ -304,8 +331,6 @@
    "name": "money unit",
    "ok": true,
    "sample": [
-    "clipped text (top): \"0.4\" 866.09..881 y 153..168",
-    "clipped text (top): \"مليار $\" 838.42..866.09 y 153..168",
     "money unit: «0.4 مليار» (under 1 billion is written in millions)"
    ]
   },
@@ -313,8 +338,6 @@
    "name": "sign outside its number",
    "ok": true,
    "sample": [
-    "clipped text (top): \"تغير +\" 859.06..881 y 153..168",
-    "clipped text (top): \"3\" 853.06..859.06 y 153..168",
     "a sign outside its number: «تغير +3»"
    ]
   },
@@ -322,7 +345,6 @@
    "name": "colour alone",
    "ok": true,
    "sample": [
-    "clipped text (top): \"تراجع\" 860.27..881 y 153..168",
     "colour alone: «تراجع» has no arrow or icon"
    ]
   },
@@ -344,7 +366,6 @@
    "name": "label without a role",
    "ok": true,
    "sample": [
-    "clipped text (top): \"اختبار\" 860.25..881 y 153..168",
     "a11y: a label VoiceOver may skip (no role): «اختبار»"
    ]
   },
@@ -423,9 +444,9 @@
    "name": "clipped text",
    "ok": true,
    "sample": [
-    "clipped text (sides): \"السكان\" 871.17..903 y 161..178",
+    "clipped text (sides): \"السكان\" 867.73..903 y 163..177",
     "text outside the sheet's 12 pt padding: \"السكان\"",
-    "clipped text (sides): \"79.7\" 883.02..921 y 179..206"
+    "clipped text (sides): \"79.7\" 881.25..921 y 182..203"
    ]
   },
   {

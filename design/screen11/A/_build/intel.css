@@ -17,5 +17,5 @@
   .n-pr i { position: absolute; top: 0; bottom: 0; right: 0; width: var(--v); border-radius: 2px; background: var(--teal); }
   .n-st { flex: none; font-size: var(--fs-sec); line-height: var(--lh-sec); font-weight: 600; white-space: nowrap; }
   .n-types { font-size: var(--fs-sec); line-height: 18px; font-weight: 500; color: var(--t1); }
-  .m-empty { display: flex; align-items: center; gap: var(--s2); min-height: 32px; font-size: var(--fs-sec); line-height: var(--lh-sec); font-weight: 500; color: var(--t1); }
+  .m-empty { text-wrap: pretty; display: flex; align-items: center; gap: var(--s2); min-height: 32px; font-size: var(--fs-sec); line-height: var(--lh-sec); font-weight: 500; color: var(--t1); }
   .m-empty svg.i { flex: none; color: var(--t2); }

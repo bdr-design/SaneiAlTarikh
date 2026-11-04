@@ -13,6 +13,9 @@
 
   /* a province or group row: name, a 4 pt teal bar out of 100, the value led by its trend arrow */
   .i-row { display: grid; grid-template-columns: 104px 1fr 48px; align-items: center; column-gap: var(--s2); height: 22px; }
+  /* the overview's province rows line up with the unrest tab's (same bar and value column; the chevron's 16 pt kept empty) (2026-11-04) */
+  .r-body[data-tab="overview"] .i-row { grid-template-columns: 104px 1fr 48px 16px; }
+  .r-body[data-tab="overview"] .i-row::after { content: ""; }
   .i-row > span { font-size: var(--fs-sec); line-height: var(--lh-sec); font-weight: 500; color: var(--t1); white-space: nowrap; }
   .i-bar { position: relative; height: 4px; border-radius: 2px; background: rgba(169, 188, 203, .22); }
   .i-bar::after { content: ""; position: absolute; top: 0; bottom: 0; right: 0; width: var(--v); border-radius: 2px; background: var(--teal); }

@@ -21,6 +21,6 @@
   .i-bar::after { content: ""; position: absolute; top: 0; bottom: 0; right: 0; width: var(--v); border-radius: 2px; background: var(--teal); }
 
   /* the empty state: no war, no front */
-  .m-empty { display: flex; align-items: center; gap: var(--s2); min-height: 32px; font-size: var(--fs-sec); line-height: var(--lh-sec); font-weight: 500; color: var(--t1); }
+  .m-empty { text-wrap: pretty; display: flex; align-items: center; gap: var(--s2); min-height: 32px; font-size: var(--fs-sec); line-height: var(--lh-sec); font-weight: 500; color: var(--t1); }
   .m-empty svg.i { flex: none; color: var(--t2); }
   .p-cost { display: inline-flex; align-items: center; gap: 2px; margin-inline-start: var(--s1); font-size: var(--fs-sec); font-weight: 600; }

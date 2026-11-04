@@ -441,6 +441,13 @@ module.exports = function makeChecker(cfg) {
     // «لماذا؟» names its subject: the headline it explains
     qa('.sheet .r-kpi').forEach((k) => { const w = k.querySelector('.r-why'), kl = T(k.querySelector('.r-kl'));
       if (w && !((w.getAttribute('aria-label') || '').startsWith('لماذا؟ ') && (w.getAttribute('aria-label') || '').includes(kl))) issues.push(`a11y: «لماذا؟» does not name its subject «${kl}»`); });
+    // a headline cell or a status cell keeps its text inside it, and the cells inside their row (2026-11-04: a long
+    // label ran into the next cell on screens 5 and 11, a status table ran past the padding on screens 5 and 6)
+    { const inner = (e) => { const r = e.getBoundingClientRect(), cs = getComputedStyle(e); return { x0: r.left + parseFloat(cs.paddingLeft) - 0.5, x1: r.right - parseFloat(cs.paddingRight) + 0.5 }; };
+      const out = (e, c) => { const r = e.getBoundingClientRect(); return r.width > 0 && (r.left < c.x0 || r.right > c.x1); };
+      qa('.sheet .r-kpis, .sheet .r-st').forEach((g) => { const gc = inner(g), bd = g.closest('.r-body'), bc = bd ? inner(bd) : gc;
+        [...g.children].filter(visible).forEach((c) => { if (out(c, gc) || out(c, bc)) issues.push(`a cell runs out of its row: «${T(c).slice(0, 24)}»`);
+          if (c.matches('.r-kpi')) { const cc = inner(c); [...c.children].filter(visible).forEach((e) => { if (out(e, cc)) issues.push(`a headline cell's text runs out of its cell: «${T(e).slice(0, 24)}»`); }); } }); }); }
     // bars are data: teal, filling from the right (RTL)
     qa('.sheet .i-bar, .sheet .p-meter').forEach((b) => { const a = getComputedStyle(b, '::after');
       if (a.backgroundColor !== TOK.teal || a.right !== '0px') issues.push(`a bar not teal from the right: ${a.backgroundColor} right ${a.right}`); });
@@ -676,6 +683,8 @@ module.exports = function makeChecker(cfg) {
       ['amber value without its icon', d, '', '', /colour alone: .* \(its label's icon is not in its colour\)/, () => { const b = document.querySelector('.r-kv b'); b.classList.add('r-amber'); }],
       ['chip arrow against its sign', d, '', '', /the chip's arrow does not agree with its sign|does not say the chip's direction/, () => { const u = document.querySelector('.r-act .r-chip use'); if (u) u.setAttribute('href', u.getAttribute('href') === '#t-up' ? '#t-down' : '#t-up'); }],
       ['row read in part', d, '', '', /does not read all it shows/, () => { const r = [...document.querySelectorAll('.sheet [role="img"], .sheet .tap[role="button"]:not(.r-tab), .sheet .r-act[aria-label]')].find((e) => e.getClientRects().length && e.innerText.trim()); r.setAttribute('aria-label', 'جزء'); }],
+      ['a long headline label', d, '', '', /a cell runs out of its row|a headline cell's text runs out of its cell/, () => { const b = [...document.querySelectorAll('.r-body')].find((e) => e.getClientRects().length); const s = document.createElement('div'); s.className = 'r-kpis'; s.innerHTML = '<div class="r-kpi"><span class="r-kl">عنوان طويل جدًا لا يتسع لخانته أبدًا</span><span class="r-kv"><b class="ltr">1</b></span></div>'.repeat(3); b.prepend(s); }],
+      ['a long status cell', d, '', '', /a cell runs out of its row/, () => { const b = [...document.querySelectorAll('.r-body')].find((e) => e.getClientRects().length); const s = document.createElement('dl'); s.className = 'r-st'; s.innerHTML = '<div class="r-sc"><dt>خانة</dt><dd>قيمة طويلة جدًا لا تتسع لنصف الجدول</dd></div>'.repeat(2); b.prepend(s); }],
       ['% before its number', d, '', '', /% shown before its number/, () => { document.querySelector('.r-kr').textContent = 'نسبة 20%'; }],
     ];
     // a panel whose first tab has no headline numbers or status table (المزيد) leaves out the plants aimed at them and

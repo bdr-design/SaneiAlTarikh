@@ -42,7 +42,7 @@
   .s-prog i { position: absolute; inset: 0 0 0 auto; border-radius: 2px; background: var(--teal); }
   .s-pa { flex: none; display: flex; flex-direction: column; align-items: flex-end; gap: 2px; }   /* «إلغاء» and «بدء» share their left edge */
   .s-ref { font-size: var(--fs-label); line-height: var(--lh-label); font-weight: 500; color: var(--t2); white-space: nowrap; }
-  .s-note { font-size: var(--fs-label); line-height: 14px; font-weight: 500; color: var(--t2); }
+  .s-note { font-size: var(--fs-label); line-height: 14px; font-weight: 500; color: var(--t2); text-wrap: pretty; }   /* no one-word last line (2026-11-04) */
 
   /* السياسات: one row per law: name and the cost of a change, then its setting as 3 segments (the chosen one white) */
   .s-pol { display: flex; align-items: center; gap: var(--s2); height: 40px; }

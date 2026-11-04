@@ -13,4 +13,5 @@
   .w-v { flex: none; display: inline-flex; align-items: center; gap: 2px; font-size: var(--fs-val); line-height: var(--lh-val); font-weight: 600; }
   /* the sum: the target the terms add up to */
   .w-sum { display: flex; align-items: center; justify-content: space-between; height: 24px; font-size: var(--fs-sec); line-height: var(--lh-sec); font-weight: 600; color: var(--t1); }
+  .w-sum .w-calc { margin-inline-start: auto; margin-inline-end: var(--s2); font-size: var(--fs-label); line-height: var(--lh-label); font-weight: 500; color: var(--t2); }   /* the sum shown: start + rises − falls */
   .w-sum b { font-size: var(--fs-val); line-height: var(--lh-val); font-weight: 600; }

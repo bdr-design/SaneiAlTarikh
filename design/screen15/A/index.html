@@ -366,7 +366,7 @@
     mask-image: linear-gradient(180deg, transparent, #000 24px, #000 calc(100% - 46px), transparent calc(100% - 22px)); }
 
   /* overview: three headline numbers */
-  .r-kpis { display: grid; grid-template-columns: repeat(3, 1fr); padding-block: var(--rkt) var(--rkb); border-bottom: 1px solid var(--hair); }
+  .r-kpis { display: grid; grid-template-columns: repeat(3, minmax(min-content, 1fr));   /* equal, unless a label needs more (2026-11-04) */ padding-block: var(--rkt) var(--rkb); border-bottom: 1px solid var(--hair); }
   .r-kpi { display: flex; flex-direction: column; align-items: flex-start; padding-inline: var(--s2); min-width: 0; }
   .r-kpi:first-child { padding-inline-start: 0; }
   .r-kpi:last-child { padding-inline-end: 0; }
@@ -420,7 +420,7 @@
   .r-sec h3, .r-dec h3 { font-size: var(--fs-sec); line-height: var(--lh-sec); font-weight: 600; }
   .r-gov { display: flex; align-items: center; gap: var(--s2); height: 26px; }
   .r-gl { font-size: var(--fs-sec); line-height: var(--lh-sec); font-weight: 500; color: var(--t2); }
-  .r-gn { flex: 1; text-align: center; font-size: var(--fs-sec); line-height: var(--lh-sec); font-weight: 600; }
+  .r-gn { flex: 1; text-align: start; font-size: var(--fs-sec); line-height: var(--lh-sec); font-weight: 600; }
   .r-btn.tap::before { width: max(100% + 2px, 44px); height: max(100% + 2px, 44px); }   /* cover the 1 pt border too */
   /* actions: a blue outline with cyan text (teal stays for selected states: the open tab, the chosen radio), as in the image */
   .r-btn { flex: none; height: 24px; padding-inline: var(--s3); border-radius: 6px; border: 1px solid rgba(111, 182, 255, .6); background: rgba(111, 182, 255, .06);
@@ -445,7 +445,7 @@
   .r-dtx b { font-size: var(--fs-val); line-height: var(--lh-val); font-weight: 600; }
   .r-dtx span { font-size: var(--fs-label); line-height: 14px; font-weight: 500; color: var(--t2); white-space: nowrap; }
   .r-dtx em { font-style: normal; color: var(--t1); }
-  .r-dfoot { display: flex; align-items: center; justify-content: space-between; gap: var(--s2); }
+  .r-dfoot { display: flex; flex-direction: column; align-items: flex-start; gap: var(--s1); }   /* the positions line above the buttons: the row was at its limit (2026-11-04) */
   .r-dbtn { display: flex; gap: var(--s1); }
   .r-dbtn .r-btn { padding-inline: var(--s2); }
 
@@ -548,7 +548,7 @@
   .s-prog i { position: absolute; inset: 0 0 0 auto; border-radius: 2px; background: var(--teal); }
   .s-pa { flex: none; display: flex; flex-direction: column; align-items: flex-end; gap: 2px; }   /* «إلغاء» and «بدء» share their left edge */
   .s-ref { font-size: var(--fs-label); line-height: var(--lh-label); font-weight: 500; color: var(--t2); white-space: nowrap; }
-  .s-note { font-size: var(--fs-label); line-height: 14px; font-weight: 500; color: var(--t2); }
+  .s-note { font-size: var(--fs-label); line-height: 14px; font-weight: 500; color: var(--t2); text-wrap: pretty; }   /* no one-word last line (2026-11-04) */
 
   /* السياسات: one row per law: name and the cost of a change, then its setting as 3 segments (the chosen one white) */
   .s-pol { display: flex; align-items: center; gap: var(--s2); height: 40px; }
@@ -570,7 +570,7 @@
     linear-gradient(180deg, rgba(12, 20, 28, .15) 0%, rgba(12, 20, 28, .75) 100%), url("event_header.jpg") center / cover no-repeat; }
   [data-tab="event"] .r-body[data-tab="event"] { display: flex; }
   .r-body[data-tab="event"] { padding-top: var(--s2); padding-bottom: var(--s3); gap: var(--s2); }
-  .d-text { margin: 0; font-size: var(--fs-sec); line-height: 18px; font-weight: 500; color: var(--t1); }
+  .d-text { text-wrap: pretty; margin: 0; font-size: var(--fs-sec); line-height: 18px; font-weight: 500; color: var(--t1); }
   /* a cost in an option's line: amber, its arrow beside it */
   .p-cost { display: inline-flex; align-items: center; gap: 2px; font-size: var(--fs-sec); font-weight: 600; vertical-align: top; }   /* as screen 9; top-aligned, so the row's lines keep 16 / 14 pt */
 </style>
@@ -785,7 +785,7 @@
           </button>
           <button class="r-act tap" data-op="security" aria-label="تشديد الانتشار الأمني: لا كلفة إضافية. تنخفض الاضطرابات نقطتين، أفضل؛ تنخفض الشرعية نقطتين، أسوأ">
             <span class="r-tile"><svg class="i"><use href="#i-shield"/></svg></span>
-            <span class="r-at"><b>تشديد الانتشار الأمني</b><span>لا كلفة إضافية · <span class="r-amber p-cost"><svg class="r-arr" aria-hidden="true"><use href="#t-down"/></svg>الشرعية <span class="ltr">−2</span></span></span></span>
+            <span class="r-at"><b>تشديد الانتشار الأمني</b><span>لا كلفة · <span class="r-amber p-cost"><svg class="r-arr" aria-hidden="true"><use href="#t-down"/></svg>الشرعية <span class="ltr">−2</span></span></span></span>
             <span class="r-chip"><svg class="r-arr" aria-hidden="true"><use href="#t-down"/></svg>الاضطرابات <span class="ltr">−2</span></span>
           </button>
           <button class="r-act tap" data-op="dialogue" aria-label="حوار مع النقابات والأحزاب: الكلفة 10 من رأس المال السياسي. تنخفض الاضطرابات نقطة واحدة، أفضل">

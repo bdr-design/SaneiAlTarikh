@@ -206,14 +206,15 @@
      packed together); the spare width sits in the middle of the row, split by a hairline that joins the
      row hairlines above and below, so the row reads as two cells:
      [بحث فوري + switch, at the card's left end, in the switch column] | [بناء فوري + switch, at the right]. */
-  [data-pair="1"] .unreal .list { display: grid; grid-template-columns: auto auto; column-gap: var(--s3); row-gap: var(--s3); }
+  [data-pair="1"] .unreal .list { display: grid; grid-template-columns: auto auto; column-gap: var(--s1); row-gap: var(--s3); }   /* 4 pt and no side padding: the pair fits the SE's card (2026-11-04) */
+  [data-pair="1"] .unreal .tg.half { padding-inline: 0; }
   [data-pair="1"] .unreal .tg { grid-column: 1 / -1; }
   [data-pair="1"] .unreal .tg.half { grid-column: auto; }
   [data-pair="1"] .unreal .tg.half .sw { margin-inline-start: 0; }
   [data-pair="1"] .unreal .tg.half + .tg.half { justify-content: flex-end; }                   /* RTL end = the card's left edge */
-  [data-pair="1"] .unreal .tg.half + .tg.half::after { right: calc(-1 * var(--s3)); }          /* close the row hairline over the gap */
-  /* cell divider in the middle of the 12 pt column gap, from the hairline above the row to the one below it */
-  [data-pair="1"] .unreal .tg.half:not(.half + .half) .lb::before { content: ""; position: absolute; left: -6.5px; top: -5.5px; width: 1px; height: 43px; background: rgba(169, 188, 203, 0.14); }
+  [data-pair="1"] .unreal .tg.half + .tg.half::after { right: calc(-1 * var(--s1)); }          /* close the row hairline over the gap */
+  /* cell divider in the middle of the 4 pt column gap, from the hairline above the row to the one below it */
+  [data-pair="1"] .unreal .tg.half:not(.half + .half) .lb::before { content: ""; position: absolute; left: -2.5px; top: -5.5px; width: 1px; height: 43px; background: rgba(169, 188, 203, 0.14); }
 
   /* the note at the foot of each card: aligned across the three cards */
   .note { margin-top: auto; flex: none; display: flex; align-items: flex-start; gap: var(--s1);
@@ -399,7 +400,10 @@
   /* No card content wider than its card (the paired switch row needs about 200 pt). */
   function noSideOverflow(cards) {
     return cards.every(function (c) {
-      return Array.prototype.every.call(c.querySelectorAll('.oh, .list, .note'), function (e) { return e.scrollWidth <= e.clientWidth + 0.5; });
+      /* (right to left, an overflow to the left does not show in scrollWidth: compare every switch row's box too) */
+      var lr = c.querySelector('.list').getBoundingClientRect();
+      return Array.prototype.every.call(c.querySelectorAll('.oh, .list, .note'), function (e) { return e.scrollWidth <= e.clientWidth + 0.5; }) &&
+        Array.prototype.every.call(c.querySelectorAll('.list .tg'), function (e) { var r = e.getBoundingClientRect(); return r.left >= lr.left - 0.5 && r.right <= lr.right + 0.5; });
     });
   }
   /* Fit the cards to the safe area, measured (no device names), in this order of preference:

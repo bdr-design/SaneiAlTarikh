@@ -13,7 +13,7 @@ The approved panel sheet from the right, built with the shared builder and check
 - **Text (neutral, ≤90 words):** the protests since 17 December after a young man set himself on fire in Sidi Bouzid; demands for jobs and lower prices; your advisers think unemployment and prices in Egypt make the street sensitive to it.
 - **«خياراتك»:** four equal 44 pt rows (the panels' action rows, no accent marking one as the main choice), each with its cost and effects; the main effect a white chip, costs amber with their arrow (top-aligned so every row keeps 16/14 pt lines):
   1. «دعم أكبر للخبز» · «↑ العجز +500 مليون $ سنويًا» (the deficit's rise shown once with its unit; a part of the economy panel's 2.9 مليار $ bread line) · chip «↓ الاضطرابات −3».
-  2. «تشديد الانتشار الأمني» · «لا كلفة إضافية · ↓ الشرعية −2» · chip «↓ الاضطرابات −2».
+  2. «تشديد الانتشار الأمني» · «لا كلفة · ↓ الشرعية −2» (shortened 2026-11-04: it ran into the chip) · chip «↓ الاضطرابات −2».
   3. «حوار مع النقابات والأحزاب» · «10 من رأس المال السياسي» (of the state panel's 86) · chip «↓ الاضطرابات −1» (a narrower talk than the internal panel's «فتح حوار وطني»: 20, once a year, −3).
   4. «المتابعة دون إجراء» · «الافتراضي · لا كلفة · ↑ الاضطرابات +1» (sized like the others).
 - **«لاحقًا»:** a link row: «يبقى في الإشعارات · يستأنف الوقت»; it lets time run, so the default can come.

@@ -36,7 +36,7 @@ The numbers agree with each other. The sources are in T-005: Egypt's FY2009/10 b
        - البطالة 8.9%, دون تغير.
 
        The flame stays the unrest icon, as on the province panel.
-     - **Status table:** عجز الموازنة 8.1% من الناتج (amber), الدين العام 73%, سعر الصرف 5.80 جنيه للدولار, التصنيف BB+ مستقر.
+     - **Status table:** عجز الموازنة 8.1% من الناتج (amber), الدين العام 73%, الدولار 5.80 جنيه (shortened 2026-11-04 from «سعر الصرف 5.80 جنيه للدولار»: the cells overflowed), التصنيف BB+ مستقر.
      - **Two decisions:**
        - «طرح سندات دولية»: 1 مليار $ · فائدة 6.2% · 10 سنوات, chip «تمويل العجز».
        - «خفض دعم الوقود 10%» (fuel-pump icon): saves 1.2 مليار $ a year, which is 10% of the 11.7 fuel row. It has the amber chip «الشرعية ↓». It is a shortcut to the fuel row's command: one command, one effect.
