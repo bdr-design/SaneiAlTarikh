@@ -1,0 +1,17 @@
+  /* ================= Screen 18, variant C: the government dissolved =================
+     Built with the shared builder on the approved panels; one body, no tab row. */
+  .r-tabs { display: none; }
+  [data-tab="fallen"] .r-body[data-tab="fallen"] { display: flex; }
+  .r-body[data-tab="fallen"] { padding-top: var(--s2); padding-bottom: var(--s3); gap: var(--s2); }
+  .d-text { text-wrap: pretty; margin: 0; font-size: var(--fs-sec); line-height: 18px; font-weight: 500; color: var(--t1); }   /* as screen 15's decision text */
+  /* the toast shows this moment's notification in the B3 toast's width (115.56 pt on every phone, in IBM Plex Sans Arabic), so the HUD stays in place */
+  .alert-prev .txt { width: 115.56px; text-align: start; }
+  /* the end sheets are plain: no photo strip in the header */
+  .sheet .r-hd { background-image: none; }
+  /* the stopped clock and the speed chip look disabled, not like the live controls of the other screens */
+  .play[aria-disabled="true"] svg, .spd[aria-disabled="true"] span { color: var(--t2); }
+  .spd[aria-disabled="true"] { background: transparent; }
+  /* the nation card keeps B3's widths whatever the leader line says (B3 in IBM Plex Sans Arabic: «حسني مبارك» 47.98 pt, «· جمهورية رئاسية» 67.73 pt),
+     so the indicator strip stays in place */
+  .ntext .ldr { width: 47.98px; }
+  .ntext .rg { width: 67.73px; }

@@ -1,0 +1,642 @@
+{
+ "ranAt": "2026-11-04T13:23:52.396Z",
+ "inputs": {
+  "files": [
+   "index.html",
+   "_build/render.js",
+   "_build/sheet.html",
+   "_build/assemble.py",
+   "../../shared/check/panelcheck.js",
+   "../../shared/check/panel_page.py",
+   "../../screen4/R/_build/panel.css",
+   "../../shared/section_identity.css",
+   "../../screen5/A/_build/state.css",
+   "../../screen4/A/index.html",
+   "../../screen1/B3/index.html",
+   "../../shared/devices.json",
+   "_build/end.css",
+   "../../shared/flag_eg.svg",
+   "../../shared/flags/eg.svg",
+   "../../shared/map_mena_d1.jpg",
+   "../../shared/map_mena_d1_overlay.svg",
+   "map_overlay_cairo.svg"
+  ],
+  "sha1": "ce96a85921486565838961bfacfe3b8dd297307c"
+ },
+ "cleanIssues": {
+  "i16promax": [],
+  "i16promax_report_end": [],
+  "i16promax coverage": [],
+  "se": [],
+  "se_report_end": [],
+  "se_report_at131": [],
+  "se coverage": []
+ },
+ "results": [
+  {
+   "name": "type size",
+   "ok": true,
+   "sample": [
+    "font size 17 for \"تقرير الأمة\""
+   ]
+  },
+  {
+   "name": "off-token colour",
+   "ok": true,
+   "sample": [
+    "text colour off-token rgb(136, 153, 170): \"تقرير الأمة\""
+   ]
+  },
+  {
+   "name": "radius",
+   "ok": true,
+   "sample": [
+    "panel radius تقرير الأمة: 6 (want 12)",
+    "radius 6 for .sheet (want 12)"
+   ]
+  },
+  {
+   "name": "panel in the side inset",
+   "ok": true,
+   "sample": [
+    "text in side inset: 68",
+    "text in side inset: +14",
+    "text in side inset: المحاور الخمسة"
+   ]
+  },
+  {
+   "name": "panel not opaque",
+   "ok": true,
+   "sample": [
+    "panel not opaque: تقرير الأمة rgba(9, 17, 25, 0.66)",
+    "contrast 4.36 for \"+14\"",
+    "contrast 4.43 for \"منذ\""
+   ]
+  },
+  {
+   "name": "see-through panel",
+   "ok": true,
+   "sample": [
+    "panel not opaque (opacity 0.60): تقرير الأمة",
+    "brief text not fully visible: تقرير الأمة",
+    "brief text not fully visible: مصر · 2011–2100"
+   ]
+  },
+  {
+   "name": "Egypt covered",
+   "ok": true,
+   "sample": [
+    "Nile delta covered by panel تقرير الأمة",
+    "Egypt covered by panel تقرير الأمة",
+    "Egypt outside the safe screen"
+   ]
+  },
+  {
+   "name": "map dimmed",
+   "ok": true,
+   "sample": [
+    "the map is dimmed (opacity 1.00, filter brightness(0.35))"
+   ]
+  },
+  {
+   "name": "map faded",
+   "ok": true,
+   "sample": [
+    "the map is dimmed (opacity 0.30, filter none)"
+   ]
+  },
+  {
+   "name": "scrim over the map",
+   "ok": true,
+   "sample": [
+    "something drawn over the map: DIV (rgba(0, 0, 0, 0.55))",
+    "contrast 1.92 for \"3\""
+   ]
+  },
+  {
+   "name": "sheet width",
+   "ok": true,
+   "sample": [
+    "sheet width 330 (want round(clamp(43% of 832, 340, 380)), or the room the dock leaves if 330..: 358)"
+   ]
+  },
+  {
+   "name": "sheet top",
+   "ok": true,
+   "sample": [
+    "hit overlap الاستقرار 71% / العودة إلى الخريطة",
+    "panel overlap الدولة: مصر، رئيس الدولة،  / تقرير الأمة",
+    "panel overlap الخزينة 36.0 مليار $ الاست / تقرير الأمة"
+   ]
+  },
+  {
+   "name": "dock hidden although it fits",
+   "ok": true,
+   "sample": [
+    "dock hidden although it fits left of the sheet"
+   ]
+  },
+  {
+   "name": "dock shown on the SE",
+   "ok": true,
+   "sample": [
+    "icon over text: i / \"66\"",
+    "icon over text: i / \"+12\"",
+    "panel overlap الأقسام / تقرير الأمة"
+   ]
+  },
+  {
+   "name": "left stack moved",
+   "ok": true,
+   "sample": [
+    "HUD element moved from its B3 position: .toast x 70.0..275.5 y 56.0..88.0",
+    "HUD element moved from its B3 position: .btn.mode x 70.0..191.6 y 96.0..128.0",
+    "HUD element moved from its B3 position: .btn.home x 70.0..141.5 y 136.0..168.0"
+   ]
+  },
+  {
+   "name": "map label cut",
+   "ok": true,
+   "sample": [
+    "map label ليبيا sliced by the screen edge or the side inset",
+    "map label إيران sliced by the screen edge or the side inset",
+    "map label إيران squeezed between a panel and the screen edge"
+   ]
+  },
+  {
+   "name": "contrast",
+   "ok": true,
+   "sample": [
+    "contrast 1 for \"النتيجة\"",
+    "contrast 1 for \"68\"",
+    "contrast 1.73 for \"/\""
+   ]
+  },
+  {
+   "name": "identity line missing",
+   "ok": true,
+   "sample": [
+    "panel top line none rgb(169, 188, 203) 2px (want the section colour, 2 pt, at the top)"
+   ]
+  },
+  {
+   "name": "money unit",
+   "ok": true,
+   "sample": [
+    "clipped text (top): \"0.4\" 866.09..881 y 108..123",
+    "clipped text (top): \"مليار $\" 838.42..866.09 y 108..123",
+    "money unit: «0.4 مليار» (under 1 billion is written in millions)"
+   ]
+  },
+  {
+   "name": "sign outside its number",
+   "ok": true,
+   "sample": [
+    "clipped text (top): \"تغير +\" 859.06..881 y 108..123",
+    "clipped text (top): \"3\" 853.06..859.06 y 108..123",
+    "a sign outside its number: «تغير +3»"
+   ]
+  },
+  {
+   "name": "colour alone",
+   "ok": true,
+   "sample": [
+    "clipped text (top): \"تراجع\" 860.27..881 y 108..123",
+    "colour alone: «تراجع» has no arrow or icon",
+    "the money and cheat note is not «بدولارات 2011 الثابتة · تُلغى النتيجة إن استُخدمت خيارات غير واقعية»"
+   ]
+  },
+  {
+   "name": "an image in the sheet",
+   "ok": true,
+   "sample": [
+    "an image in the sheet"
+   ]
+  },
+  {
+   "name": "close not round",
+   "ok": true,
+   "sample": [
+    "close button is not round"
+   ]
+  },
+  {
+   "name": "label without a role",
+   "ok": true,
+   "sample": [
+    "clipped text (top): \"اختبار\" 860.25..881 y 108..123",
+    "a11y: a label VoiceOver may skip (no role): «اختبار»",
+    "the money and cheat note is not «بدولارات 2011 الثابتة · تُلغى النتيجة إن استُخدمت خيارات غير واقعية»"
+   ]
+  },
+  {
+   "name": "brief text hidden",
+   "ok": true,
+   "sample": [
+    "brief text not fully visible: 68"
+   ]
+  },
+  {
+   "name": "18 pt misuse",
+   "ok": true,
+   "sample": [
+    "18 pt is for the panel's name and the adjusted values only: \"+14\"",
+    "18 pt is for the panel's name and the adjusted values only: \"منذ\"",
+    "18 pt is for the panel's name and the adjusted values only: \"2011\""
+   ]
+  },
+  {
+   "name": "gap",
+   "ok": true,
+   "sample": [
+    "gap 6 on النتيجة 68/ 100 +14 منذ 20",
+    "gap 6 on النتيجة 68/ 100 +14 منذ 20",
+    "gap 6 on في 2011 54/ 100 بداية الحم"
+   ]
+  },
+  {
+   "name": "text overlap",
+   "ok": true,
+   "sample": [
+    "text overlap \"تقرير الأمة\" / \"مصر\"",
+    "text overlap \"تقرير الأمة\" / \"·\"",
+    "text overlap \"تقرير الأمة\" / \"2011–2100\""
+   ]
+  },
+  {
+   "name": "clipped text",
+   "ok": true,
+   "sample": [
+    "clipped text (sides): \"النتيجة\" 872.73..903 y 116..133",
+    "text outside the sheet's 12 pt padding: \"النتيجة\"",
+    "clipped text (sides): \"/\" 887.88..895.39 y 142..159"
+   ]
+  },
+  {
+   "name": "identity line colour",
+   "ok": true,
+   "sample": [
+    "panel top line \"\" rgb(63, 224, 208) 2px (want the section colour, 2 pt, at the top)"
+   ]
+  },
+  {
+   "name": "emblem size",
+   "ok": true,
+   "sample": [
+    "size 28.0x32.0 for .s-emb (want 32 x 32)"
+   ]
+  },
+  {
+   "name": "tile icons cyan",
+   "ok": true,
+   "sample": [
+    "white touch off: .r-tile color rgb(127, 233, 255) (want rgb(234, 242, 247))",
+    "white touch off: .r-tile color rgb(127, 233, 255) (want rgb(234, 242, 247))"
+   ]
+  },
+  {
+   "name": "faint text",
+   "ok": true,
+   "sample": [
+    "brief text not fully visible: بداية الحملة",
+    "contrast 2.11 for \"+14\"",
+    "contrast 2.11 for \"منذ\""
+   ]
+  },
+  {
+   "name": "row read in part",
+   "ok": true,
+   "sample": [
+    "a11y: «جزء» does not read all it shows: الاقتصاد دخل الفرد من",
+    "a11y: «الاقتصاد» does not say its score and change in words"
+   ]
+  },
+  {
+   "name": "a long headline label",
+   "ok": true,
+   "sample": [
+    "clipped text (sides): \"عنوان طويل جدًا لا يتسع لخانته أبدًا\" 385.38..539.25 y 116..133",
+    "text outside the sheet's 12 pt padding: \"عنوان طويل جدًا لا يتسع لخانته أبدًا\"",
+    "clipped text (sides): \"1\" 528.44..539.25 y 134..161"
+   ]
+  },
+  {
+   "name": "text wider than its box",
+   "ok": true,
+   "sample": [
+    "text wider than its box: «المحاور الخمسة» (71 in 20)"
+   ]
+  },
+  {
+   "name": "a long status cell",
+   "ok": true,
+   "sample": [
+    "clipped text (sides): \"قيمة طويلة جدًا لا تتسع لنصف الجدول\" 416.53..613.3 y 112.5..131.5",
+    "text outside the sheet's 12 pt padding: \"قيمة طويلة جدًا لا تتسع لنصف الجدول\"",
+    "horizontal overflow in خانةقيمة طويلة جدًا لا تتس"
+   ]
+  },
+  {
+   "name": "% before its number",
+   "ok": true,
+   "sample": [
+    "% shown before its number: \"نسبة 20%\"",
+    "colour alone: «نسبة 20%» has no arrow or icon",
+    "the result's change is not blue with an up arrow"
+   ]
+  },
+  {
+   "name": "font weight (no tabs)",
+   "ok": true,
+   "sample": [
+    "font weight 11.5/700 for \"مصر\"",
+    "font weight 11.5/700 for \"·\"",
+    "font weight 11.5/700 for \"2011–2100\""
+   ]
+  },
+  {
+   "name": "a tab row on a one-body sheet",
+   "ok": true,
+   "sample": [
+    "a tab row on a sheet that has one body"
+   ]
+  },
+  {
+   "name": "control height (no tabs)",
+   "ok": true,
+   "sample": [
+    "control height 40.00 for .r-x (want 32): العودة إلى الخريطة",
+    "close button is not round"
+   ]
+  },
+  {
+   "name": "icon size (no tabs)",
+   "ok": true,
+   "sample": [
+    "icon size 19x19 (want 16): i"
+   ]
+  },
+  {
+   "name": "fades wrong (no tabs)",
+   "ok": true,
+   "sample": [
+    "clipped text (bottom): \"المكانة الدولية\" 581.63..646 y 351..368",
+    "clipped text (bottom): \"النفوذ من\" 606.63..646 y 365..380",
+    "clipped text (bottom): \"62\" 594.63..606.63 y 365..380"
+   ]
+  },
+  {
+   "name": "hint chevron missing (no tabs)",
+   "ok": true,
+   "sample": [
+    "scroll hint chevron missing with content below"
+   ]
+  },
+  {
+   "name": "hint over the content (no tabs)",
+   "ok": true,
+   "sample": [
+    "scroll hint not centred in the clear strip under the fade: y 198.0..216.0 (strip 344.0..366.0)"
+   ]
+  },
+  {
+   "name": "a dock item marked open",
+   "ok": true,
+   "sample": [
+    "a dock item is marked open under a sheet of no section"
+   ]
+  },
+  {
+   "name": "weekday wrong",
+   "ok": true,
+   "sample": [
+    "the HUD date is not «الجمعة 31 ديسمبر 2100»: «السبت 31 ديسمبر 2100»"
+   ]
+  },
+  {
+   "name": "another moment toast",
+   "ok": true,
+   "sample": [
+    "the toast is not «انتهت الحملة في 2100»"
+   ]
+  },
+  {
+   "name": "clock looks live",
+   "ok": true,
+   "sample": [
+    "the clock and the speed chip do not look and read disabled"
+   ]
+  },
+  {
+   "name": "speed menu still offered",
+   "ok": true,
+   "sample": [
+    "the clock and the speed chip do not look and read disabled"
+   ]
+  },
+  {
+   "name": "tap in the side inset (report)",
+   "ok": true,
+   "sample": [
+    "text in side inset: الاقتصاد",
+    "text in side inset: دخل الفرد من",
+    "text in side inset: المعيشة"
+   ]
+  },
+  {
+   "name": "amber value without its icon (report)",
+   "ok": true,
+   "sample": [
+    "colour alone: «68» (its label's icon is not in its colour)"
+   ]
+  },
+  {
+   "name": "text into a control (report)",
+   "ok": true,
+   "sample": [
+    "text outside the sheet's 12 pt padding: \"من القائمة الرئيسية\"",
+    "clipped text (sides): \"تصفح الخريطة في\" 528.92..619 y 366..385",
+    "text outside the sheet's 12 pt padding: \"تصفح الخريطة في\""
+   ]
+  },
+  {
+   "name": "Mubarak in 2100",
+   "ok": true,
+   "sample": [
+    "the nation card names a real person in 2100 (it must say «رئيس الدولة»)"
+   ]
+  },
+  {
+   "name": "old toast",
+   "ok": true,
+   "sample": [
+    "the toast is not «انتهت الحملة في 2100»",
+    "the toast does not say the campaign ended"
+   ]
+  },
+  {
+   "name": "result change in amber",
+   "ok": true,
+   "sample": [
+    "the result's change is not blue with an up arrow"
+   ]
+  },
+  {
+   "name": "a real leader in 2100",
+   "ok": true,
+   "sample": [
+    "the nation card names a real person in 2100 (it must say «رئيس الدولة»)"
+   ]
+  },
+  {
+   "name": "clock running",
+   "ok": true,
+   "sample": [
+    "the clock is not shown stopped for good (play glyph, «الحملة منتهية», disabled)"
+   ]
+  },
+  {
+   "name": "clock not disabled",
+   "ok": true,
+   "sample": [
+    "the clock and the speed chip do not look and read disabled",
+    "the clock is not shown stopped for good (play glyph, «الحملة منتهية», disabled)"
+   ]
+  },
+  {
+   "name": "date off",
+   "ok": true,
+   "sample": [
+    "the HUD date is not «الجمعة 31 ديسمبر 2100»: «الجمعة 1 يناير 2100»",
+    "the date is not 31 December 2100"
+   ]
+  },
+  {
+   "name": "pillars reordered",
+   "ok": true,
+   "sample": [
+    "the pillars are not the five in order"
+   ]
+  },
+  {
+   "name": "a pillar lost",
+   "ok": true,
+   "sample": [
+    "the pillars are not the five in order",
+    "pillar «المعيشة» missing",
+    "brief text missing: المعيشة"
+   ]
+  },
+  {
+   "name": "score off",
+   "ok": true,
+   "sample": [
+    "a11y: «الاقتصاد، دخل الفرد من 2» does not read all it shows: 74",
+    "«الاقتصاد»'s score is 74, the brief 72",
+    "«الاقتصاد»'s change 20 is not its score − its 2011 score (22)"
+   ]
+  },
+  {
+   "name": "change off",
+   "ok": true,
+   "sample": [
+    "a11y: «المعيشة، متوسط العمر من » does not read all it shows: 18",
+    "«المعيشة»'s change 18 is not its score − its 2011 score (16)",
+    "a11y: «المعيشة» does not say its score and change in words"
+   ]
+  },
+  {
+   "name": "change in amber",
+   "ok": true,
+   "sample": [
+    "«السيادة والأمن»: the change is not blue with an up arrow"
+   ]
+  },
+  {
+   "name": "change unsaid",
+   "ok": true,
+   "sample": [
+    "a11y: «الاقتصاد، دخل الفرد من 2» does not read all it shows: 20",
+    "a11y: «الاقتصاد» does not say its score and change in words"
+   ]
+  },
+  {
+   "name": "result not the mean",
+   "ok": true,
+   "sample": [
+    "the result 70 is not the mean of the pillars (68)",
+    "brief text missing: 68",
+    "brief text missing: 68"
+   ]
+  },
+  {
+   "name": "result change off",
+   "ok": true,
+   "sample": [
+    "the result's change 16 is not the result − the 2011 mean (14)"
+   ]
+  },
+  {
+   "name": "highest wrong",
+   "ok": true,
+   "sample": [
+    "the highest is not «السيادة والأمن» 75"
+   ]
+  },
+  {
+   "name": "baseline off",
+   "ok": true,
+   "sample": [
+    "the 2011 cell is not the mean of the 2011 scores (54)",
+    "brief text missing: 54",
+    "brief text missing: 54"
+   ]
+  },
+  {
+   "name": "HUD stability off",
+   "ok": true,
+   "sample": [
+    "the HUD stability 58 is not the report's 71"
+   ]
+  },
+  {
+   "name": "HUD influence off",
+   "ok": true,
+   "sample": [
+    "the HUD influence 62 is not the report's 70"
+   ]
+  },
+  {
+   "name": "note without the cheat rule",
+   "ok": true,
+   "sample": [
+    "the money and cheat note is not «بدولارات 2011 الثابتة · تُلغى النتيجة إن استُخدمت خيارات غير واقعية»",
+    "brief text missing: بدولارات 2011 الثابتة · تُلغى النتيجة إن استُخدمت خيارات غير واقعية",
+    "brief text missing: بدولارات 2011 الثابتة · تُلغى النتيجة إن استُخدمت خيارات غير واقعية"
+   ]
+  },
+  {
+   "name": "link silent",
+   "ok": true,
+   "sample": [
+    "a11y: «لعبة جديدة» does not read all it shows: من القائمة الرئيسية",
+    "a11y: a link row does not say where it leads"
+   ]
+  },
+  {
+   "name": "close silent",
+   "ok": true,
+   "sample": [
+    "a11y: the close button does not say it returns to the map"
+   ]
+  },
+  {
+   "name": "coverage reports a string no view shows",
+   "ok": true,
+   "sample": [
+    "report: never shown clear of the fades in any view: نص غير معروض للاختبار"
+   ],
+   "midViewsAdd": []
+  }
+ ]
+}
