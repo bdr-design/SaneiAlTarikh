@@ -1,0 +1,25 @@
+  /* ================= Screen 19, variant A: the map-mode chooser =================
+     Built with the shared builder on the approved panels; one body, no tab row. */
+  .r-tabs { display: none; }
+  [data-tab="modes"] .r-body[data-tab="modes"] { display: flex; }
+  .r-body[data-tab="modes"] { padding-top: var(--s2); padding-bottom: var(--s3); gap: var(--s2); }
+  /* the legend: the five bands of the overlay (opaque here) and their edges */
+  .m-key { display: flex; flex-direction: column; gap: var(--s1); }
+  .m-bar { display: grid; grid-template-columns: repeat(5, 1fr); height: 8px; border-radius: 4px; overflow: hidden; }   /* right to left, as every bar: 0 at the right */
+  .m-bar i { background: var(--c); }
+  /* each edge sits on its band edge (the bands are equal fifths, right to left), centred on it; 0 and 100 flush with the ends */
+  .m-ticks { position: relative; height: var(--lh-label); font-size: var(--fs-label); line-height: var(--lh-label); font-weight: 500; color: var(--t2); }
+  .m-ticks span { position: absolute; top: 0; right: calc(var(--i) * 20%); transform: translateX(50%); }   /* physical: the numbers are left-to-right spans */
+  .m-ticks span:first-child { transform: none; }
+  .m-ticks span:last-child { right: auto; left: 0; transform: none; }
+  /* the 13 modes: two columns of 36 pt tiles; the chosen one filled white (the white touches) */
+  .m-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s2); }
+  .m-tile { display: flex; align-items: center; gap: var(--s2); height: 36px; padding-inline: var(--s2); border-radius: var(--r-ctl); background: var(--card); box-shadow: inset 0 0 0 1px var(--stroke);
+    font-size: var(--fs-sec); line-height: var(--lh-sec); font-weight: 600; color: var(--t1); white-space: nowrap; text-align: start; }
+  .m-tile svg.i { flex: none; width: 16px; height: 16px; color: var(--t2); }
+  .m-tile.on { background: var(--t1); box-shadow: none; color: #0B1218; }
+  .m-tile.on svg.i { color: #0B1218; }
+  .m-tile.tap::before { width: 100%; height: max(100% + 8px, 44px); }
+  .s-seg.m-two { grid-template-columns: repeat(2, 60px); }
+  /* the HUD mode button reads the chosen mode in B3's label width (75.63 pt in IBM Plex Sans Arabic), so the left column stays in place */
+  .btn.mode .m-lbl { display: inline-block; width: 75.63px; text-align: start; }

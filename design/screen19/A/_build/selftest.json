@@ -1,0 +1,559 @@
+{
+ "ranAt": "2026-11-04T13:20:48.013Z",
+ "inputs": {
+  "files": [
+   "index.html",
+   "_build/render.js",
+   "_build/sheet.html",
+   "_build/assemble.py",
+   "../../shared/check/panelcheck.js",
+   "../../shared/check/panel_page.py",
+   "../../screen4/R/_build/panel.css",
+   "../../shared/section_identity.css",
+   "../../screen5/A/_build/state.css",
+   "../../screen4/A/index.html",
+   "../../screen1/B3/index.html",
+   "../../shared/devices.json",
+   "_build/modes.css",
+   "map_mode_security.svg",
+   "map_mode_security.json",
+   "map_overlay_mode.svg",
+   "../../../tools/mapmode.py",
+   "../../screen8/A/_build/render.js",
+   "../../shared/flag_eg.svg",
+   "../../shared/flags/eg.svg",
+   "../../shared/map_mena_d1.jpg",
+   "../../shared/map_mena_d1_overlay.svg",
+   "header_cairo.jpg"
+  ],
+  "sha1": "127348aafc6dd043ba7716f55f96ea2113213ed1"
+ },
+ "cleanIssues": {
+  "i16promax": [],
+  "i16promax_modes_end": [],
+  "i16promax_modes_at182": [],
+  "i16promax coverage": [],
+  "se": [],
+  "se_modes_end": [],
+  "se_modes_at131": [],
+  "se_modes_at262": [],
+  "se coverage": []
+ },
+ "results": [
+  {
+   "name": "type size",
+   "ok": true,
+   "sample": [
+    "font size 17 for \"الخريطة\""
+   ]
+  },
+  {
+   "name": "off-token colour",
+   "ok": true,
+   "sample": [
+    "text colour off-token rgb(136, 153, 170): \"الخريطة\"",
+    "contrast 2.4 for \"الخريطة\""
+   ]
+  },
+  {
+   "name": "radius",
+   "ok": true,
+   "sample": [
+    "panel radius أوضاع الخريطة: 6 (want 12)",
+    "radius 6 for .sheet (want 12)"
+   ]
+  },
+  {
+   "name": "tap in the side inset",
+   "ok": true,
+   "sample": [
+    "text in side inset: الأمن: الاضطرابات في كل محافظة",
+    "text in side inset: 0",
+    "text in side inset: من"
+   ]
+  },
+  {
+   "name": "panel in the side inset",
+   "ok": true,
+   "sample": [
+    "text in side inset: الأمن: الاضطرابات في كل محافظة",
+    "text in side inset: 0",
+    "text in side inset: من"
+   ]
+  },
+  {
+   "name": "panel not opaque",
+   "ok": true,
+   "sample": [
+    "panel not opaque: أوضاع الخريطة rgba(9, 17, 25, 0.66)",
+    "contrast 3.15 for \"40\"",
+    "contrast 4.13 for \"60\""
+   ]
+  },
+  {
+   "name": "see-through panel",
+   "ok": true,
+   "sample": [
+    "panel not opaque (opacity 0.60): أوضاع الخريطة",
+    "brief text not fully visible: الخريطة",
+    "brief text not fully visible: أوضاع الخريطة · المعروض: الأمن"
+   ]
+  },
+  {
+   "name": "Egypt covered",
+   "ok": true,
+   "sample": [
+    "Nile delta covered by panel أوضاع الخريطة",
+    "Egypt covered by panel أوضاع الخريطة",
+    "Egypt under the hit box of سياسية"
+   ]
+  },
+  {
+   "name": "map dimmed",
+   "ok": true,
+   "sample": [
+    "the map is dimmed (opacity 1.00, filter brightness(0.35))"
+   ]
+  },
+  {
+   "name": "map faded",
+   "ok": true,
+   "sample": [
+    "the map is dimmed (opacity 0.30, filter none)"
+   ]
+  },
+  {
+   "name": "scrim over the map",
+   "ok": true,
+   "sample": [
+    "something drawn over the map: DIV (rgba(0, 0, 0, 0.55))",
+    "contrast 1.92 for \"3\"",
+    "contrast 3.62 for \"الأمن\""
+   ]
+  },
+  {
+   "name": "sheet width",
+   "ok": true,
+   "sample": [
+    "sheet width 330 (want round(clamp(43% of 832, 340, 380)), or the room the dock leaves if 330..: 358)"
+   ]
+  },
+  {
+   "name": "sheet top",
+   "ok": true,
+   "sample": [
+    "hit overlap الاستقرار 58% / إغلاق أوضاع الخريطة، يبقى ",
+    "panel overlap الدولة: مصر، حسني مبارك، ج / أوضاع الخريطة",
+    "panel overlap الخزينة 36.0 مليار $ الاست / أوضاع الخريطة"
+   ]
+  },
+  {
+   "name": "dock hidden although it fits",
+   "ok": true,
+   "sample": [
+    "dock hidden although it fits left of the sheet"
+   ]
+  },
+  {
+   "name": "dock shown on the SE",
+   "ok": true,
+   "sample": [
+    "icon over text: i / \"الاقتصاد\"",
+    "hit overlap الدولة / الأسواق",
+    "hit overlap الدولة / الأحزاب"
+   ]
+  },
+  {
+   "name": "left stack moved",
+   "ok": true,
+   "sample": [
+    "HUD element moved from its B3 position: .toast x 70.0..275.6 y 56.0..88.0",
+    "HUD element moved from its B3 position: .btn.mode x 70.0..191.6 y 96.0..128.0",
+    "HUD element moved from its B3 position: .btn.home x 70.0..141.5 y 136.0..168.0"
+   ]
+  },
+  {
+   "name": "map label cut",
+   "ok": true,
+   "sample": [
+    "map label ليبيا sliced by the screen edge or the side inset",
+    "map label إيران sliced by the screen edge or the side inset",
+    "map label إيران squeezed between a panel and the screen edge"
+   ]
+  },
+  {
+   "name": "contrast",
+   "ok": true,
+   "sample": [
+    "contrast 1 for \"الأمن: الاضطرابات في كل \"",
+    "contrast 1.73 for \"0\"",
+    "contrast 1.73 for \"25\""
+   ]
+  },
+  {
+   "name": "identity line missing",
+   "ok": true,
+   "sample": [
+    "panel top line none rgb(169, 188, 203) 2px (want the section colour, 2 pt, at the top)"
+   ]
+  },
+  {
+   "name": "money unit",
+   "ok": true,
+   "sample": [
+    "money unit: «0.4 مليار» (under 1 billion is written in millions)"
+   ]
+  },
+  {
+   "name": "sign outside its number",
+   "ok": true,
+   "sample": [
+    "a sign outside its number: «تغير +3»"
+   ]
+  },
+  {
+   "name": "colour alone",
+   "ok": true,
+   "sample": [
+    "colour alone: «تراجع» has no arrow or icon"
+   ]
+  },
+  {
+   "name": "an image in the sheet",
+   "ok": true,
+   "sample": [
+    "an image in the sheet"
+   ]
+  },
+  {
+   "name": "close not round",
+   "ok": true,
+   "sample": [
+    "close button is not round"
+   ]
+  },
+  {
+   "name": "label without a role",
+   "ok": true,
+   "sample": [
+    "a11y: a label VoiceOver may skip (no role): «اختبار»"
+   ]
+  },
+  {
+   "name": "text overlap",
+   "ok": true,
+   "sample": [
+    "text overlap \"الخريطة\" / \"أوضاع الخريطة\""
+   ]
+  },
+  {
+   "name": "identity line colour",
+   "ok": true,
+   "sample": [
+    "panel top line \"\" rgb(63, 224, 208) 2px (want the section colour, 2 pt, at the top)"
+   ]
+  },
+  {
+   "name": "emblem size",
+   "ok": true,
+   "sample": [
+    "size 28.0x32.0 for .s-emb (want 32 x 32)"
+   ]
+  },
+  {
+   "name": "row read in part",
+   "ok": true,
+   "sample": [
+    "a11y: «جزء» does not read all it shows: 0 25 40 60",
+    "a11y: the legend is not read whole"
+   ]
+  },
+  {
+   "name": "a long headline label",
+   "ok": true,
+   "sample": [
+    "clipped text (sides): \"عنوان طويل جدًا لا يتسع لخانته أبدًا\" 385.38..539.25 y 124..141",
+    "text outside the sheet's 12 pt padding: \"عنوان طويل جدًا لا يتسع لخانته أبدًا\"",
+    "clipped text (sides): \"1\" 528.44..539.25 y 142..169"
+   ]
+  },
+  {
+   "name": "text wider than its box",
+   "ok": true,
+   "sample": [
+    "text wider than its box: «الأمن: الاضطرابات في كل » (145 in 20)"
+   ]
+  },
+  {
+   "name": "a long status cell",
+   "ok": true,
+   "sample": [
+    "clipped text (sides): \"قيمة طويلة جدًا لا تتسع لنصف الجدول\" 416.53..613.3 y 120.5..139.5",
+    "text outside the sheet's 12 pt padding: \"قيمة طويلة جدًا لا تتسع لنصف الجدول\"",
+    "horizontal overflow in خانةقيمة طويلة جدًا لا تتس"
+   ]
+  },
+  {
+   "name": "font weight (no tabs)",
+   "ok": true,
+   "sample": [
+    "font weight 11.5/700 for \"أوضاع الخريطة\"",
+    "font weight 11.5/700 for \"·\"",
+    "font weight 11.5/700 for \"المعروض: الأمن\""
+   ]
+  },
+  {
+   "name": "a tab row on a one-body sheet",
+   "ok": true,
+   "sample": [
+    "a tab row on a sheet that has one body"
+   ]
+  },
+  {
+   "name": "control height (no tabs)",
+   "ok": true,
+   "sample": [
+    "control height 40.00 for .r-x (want 32): إغلاق أوضاع الخريطة، يبقى ",
+    "close button is not round"
+   ]
+  },
+  {
+   "name": "icon size (no tabs)",
+   "ok": true,
+   "sample": [
+    "icon size 19x19 (want 16): i"
+   ]
+  },
+  {
+   "name": "fades wrong (no tabs)",
+   "ok": true,
+   "sample": [
+    "clipped text (bottom): \"الأحزاب\" 581.14..614 y 354..371",
+    "clipped text (bottom): \"عسكرية\" 417.19..453 y 354..371",
+    "control cut by its scroll area (bottom): الأحزاب"
+   ]
+  },
+  {
+   "name": "hint chevron missing (no tabs)",
+   "ok": true,
+   "sample": [
+    "scroll hint chevron missing with content below"
+   ]
+  },
+  {
+   "name": "hint over the content (no tabs)",
+   "ok": true,
+   "sample": [
+    "scroll hint not centred in the clear strip under the fade: y 198.0..216.0 (strip 344.0..366.0)"
+   ]
+  },
+  {
+   "name": "a dock item marked open",
+   "ok": true,
+   "sample": [
+    "a dock item is marked open under a sheet of no section"
+   ]
+  },
+  {
+   "name": "brief text hidden (modes)",
+   "ok": true,
+   "sample": [
+    "brief text not fully visible: الخريطة"
+   ]
+  },
+  {
+   "name": "18 pt misuse (modes)",
+   "ok": true,
+   "sample": [
+    "18 pt is for the panel's name and the adjusted values only: \"الأمن: الاضطرابات في كل محافظة\"",
+    "18 pt is for the panel's name and the adjusted values only: \"الوضع\""
+   ]
+  },
+  {
+   "name": "clipped text (modes)",
+   "ok": true,
+   "sample": [
+    "clipped text (sides): \"الأمن: الاضطرابات في كل محافظة\" 775.72..921 y 115..132",
+    "text outside the sheet's 12 pt padding: \"الأمن: الاضطرابات في كل محافظة\"",
+    "clipped text (sides): \": احتجاجات · من\" 826.83..894.41 y 167..182"
+   ]
+  },
+  {
+   "name": "gap (modes)",
+   "ok": true,
+   "sample": [
+    "gap 6 on وضع الخريطة",
+    "gap 6 on وضع الخريطة",
+    "hit overlap سياسية / التكتلات"
+   ]
+  },
+  {
+   "name": "faint text (modes)",
+   "ok": true,
+   "sample": [
+    "contrast 2.2 for \"0\"",
+    "contrast 2.2 for \"25\"",
+    "contrast 2.2 for \"40\""
+   ]
+  },
+  {
+   "name": "% before its number (modes)",
+   "ok": true,
+   "sample": [
+    "% shown before its number: \"نسبة 20%\"",
+    "brief text missing: الأمن: الاضطرابات في كل محافظة",
+    "brief text missing: الأمن: الاضطرابات في كل محافظة"
+   ]
+  },
+  {
+   "name": "text into a control (modes)",
+   "ok": true,
+   "sample": [
+    "setting 1: order must be .r-at, .s-seg (right to left)",
+    "setting 2: order must be .r-at, .s-seg (right to left)",
+    "setting 3: order must be .r-at, .s-seg (right to left)"
+   ]
+  },
+  {
+   "name": "tile icons cyan (modes)",
+   "ok": true,
+   "sample": [
+    "a mode tile's icon is not grey: «سياسية»",
+    "a mode tile's icon is not grey: «العلاقات»",
+    "a mode tile's icon is not grey: «التكتلات»"
+   ]
+  },
+  {
+   "name": "an option renamed",
+   "ok": true,
+   "sample": [
+    "display option «حدود المحافظات» is not «تظهر | تختفي» with «تظهر» chosen",
+    "brief text missing: تختفي",
+    "brief text missing: تختفي"
+   ]
+  },
+  {
+   "name": "two modes chosen",
+   "ok": true,
+   "sample": [
+    "not exactly one mode chosen («الأمن»), marked and drawn"
+   ]
+  },
+  {
+   "name": "chosen not white",
+   "ok": true,
+   "sample": [
+    "the chosen mode is not filled white",
+    "contrast 1.08 for \"الأمن\""
+   ]
+  },
+  {
+   "name": "a mode lost",
+   "ok": true,
+   "sample": [
+    "the modes are not the 13 of §6.6 in order",
+    "brief text missing: مخاطر المناخ",
+    "brief text missing: مخاطر المناخ"
+   ]
+  },
+  {
+   "name": "modes not radios",
+   "ok": true,
+   "sample": [
+    "a11y: a label VoiceOver may skip (no role): «وضع الخريطة»",
+    "a11y: the modes are not a radio group"
+   ]
+  },
+  {
+   "name": "header off",
+   "ok": true,
+   "sample": [
+    "the header does not name the mode shown",
+    "brief text missing: أوضاع الخريطة · المعروض: الأمن",
+    "brief text missing: أوضاع الخريطة · المعروض: الأمن"
+   ]
+  },
+  {
+   "name": "HUD button stale",
+   "ok": true,
+   "sample": [
+    "the HUD mode button does not read the mode and show the chooser open"
+   ]
+  },
+  {
+   "name": "layer over the borders",
+   "ok": true,
+   "sample": [
+    "the mode layer is not between the base and the borders: ../../shared/map_mena_d1.jpg, map_overlay_mode.svg, map_mode_security.svg"
+   ]
+  },
+  {
+   "name": "layer hidden",
+   "ok": true,
+   "sample": [
+    "the mode layer is not drawn"
+   ]
+  },
+  {
+   "name": "legend recoloured",
+   "ok": true,
+   "sample": [
+    "the legend's colours are not the layer's bands: #320A5E,#781C6D,#3FE0D0,#ED6925,#FBB61A"
+   ]
+  },
+  {
+   "name": "legend left to right",
+   "ok": true,
+   "sample": [
+    "the legend does not run right to left",
+    "the legend edge «0» is not on its band edge",
+    "the legend edge «25» is not on its band edge"
+   ]
+  },
+  {
+   "name": "edges spaced evenly",
+   "ok": true,
+   "sample": [
+    "the legend edge «25» is not on its band edge",
+    "the legend edge «40» is not on its band edge",
+    "the legend edge «60» is not on its band edge"
+   ]
+  },
+  {
+   "name": "an edge off",
+   "ok": true,
+   "sample": [
+    "a11y: «المفتاح، من الأدنى إلى ا» does not read all it shows: 45",
+    "the legend's edges are not 0 25 40 60 75 100 right to left"
+   ]
+  },
+  {
+   "name": "legend unsaid",
+   "ok": true,
+   "sample": [
+    "a11y: «المفتاح» does not read all it shows: 0 25 40 60",
+    "a11y: the legend is not read whole"
+   ]
+  },
+  {
+   "name": "an option with two choices",
+   "ok": true,
+   "sample": [
+    "setting 1: 2 chosen segments (2 aria-checked), not one",
+    "display option «الحدود» has not exactly one choice"
+   ]
+  },
+  {
+   "name": "coverage reports a string no view shows",
+   "ok": true,
+   "sample": [
+    "modes: never shown clear of the fades in any view: نص غير معروض للاختبار"
+   ],
+   "midViewsAdd": [
+    "modes: never shown clear of the fades in any view: الأسواق",
+    "modes: never shown clear of the fades in any view: الأمن",
+    "modes: never shown clear of the fades in any view: الأحزاب"
+   ]
+  }
+ ]
+}

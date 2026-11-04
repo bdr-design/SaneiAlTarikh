@@ -1,0 +1,63 @@
+  <!-- The map-mode chooser (screen 19, variant A), opened from the HUD's «الخريطة: …» button: a side sheet in the
+       approved panel frame, never a popover over the map (mapCentral). Choosing a mode applies it at once and the sheet
+       stays open, so the player sees the map change beside it: here «الأمن» (§6.6: unrest by province, translucent over
+       the satellite base, a colour-blind-safe palette whose lightness only rises). The legend first, then the 13 modes,
+       then the display options of §6.6 (de facto or de jure borders, province borders, label density). No section. -->
+  <section class="sheet glass" aria-label="أوضاع الخريطة">
+    <div class="r-in">
+      <header class="r-hd">
+        <span class="r-flag"><img src="../../shared/flags/eg.svg" alt="علم مصر"></span>
+        <div class="r-tt">
+          <div class="r-row"><h2 class="r-name">الخريطة</h2></div>
+          <div class="r-sub">أوضاع الخريطة<span class="r-dot"> · </span>المعروض: الأمن</div>
+        </div>
+        <span class="s-emb" aria-hidden="true"><svg class="i"><use href="#i-layers"/></svg></span>
+        <button class="r-x tap" aria-label="إغلاق أوضاع الخريطة، يبقى وضع الأمن"><svg class="i"><use href="#i-close"/></svg></button>
+      </header>
+
+      <div class="r-body" data-tab="modes">
+        <section class="r-sec">
+          <h3>الأمن: الاضطرابات في كل محافظة</h3>
+          <div class="m-key" role="img" aria-label="المفتاح، من الأدنى إلى الأعلى: من 0 إلى 25، من 25 إلى 40، من 40 إلى 60 احتجاجات، من 60 إلى 75 احتجاجات واسعة، من 75 إلى 100 تمرد">
+            <span class="m-bar"><i style="--c: #320A5E"></i><i style="--c: #781C6D"></i><i style="--c: #BC3754"></i><i style="--c: #ED6925"></i><i style="--c: #FBB61A"></i></span>
+            <span class="m-ticks"><span class="ltr" style="--i: 0">0</span><span class="ltr" style="--i: 1">25</span><span class="ltr" style="--i: 2">40</span><span class="ltr" style="--i: 3">60</span><span class="ltr" style="--i: 4">75</span><span class="ltr" style="--i: 5">100</span></span>
+          </div>
+          <p class="s-note">من <span class="ltr">40</span>: احتجاجات · من <span class="ltr">60</span>: احتجاجات واسعة · من <span class="ltr">75</span>: تمرد</p>
+        </section>
+        <section class="r-sec">
+          <h3>الوضع</h3>
+          <div class="m-grid" role="radiogroup" aria-label="وضع الخريطة">
+            <button class="m-tile tap" role="radio" aria-checked="false" data-mode="political"><svg class="i"><use href="#i-flag"/></svg><span>سياسية</span></button>
+            <button class="m-tile tap" role="radio" aria-checked="false" data-mode="relations"><svg class="i"><use href="#i-hands"/></svg><span>العلاقات</span></button>
+            <button class="m-tile tap" role="radio" aria-checked="false" data-mode="blocs"><svg class="i"><use href="#i-grid"/></svg><span>التكتلات</span></button>
+            <button class="m-tile tap" role="radio" aria-checked="false" data-mode="economy"><svg class="i"><use href="#i-chart"/></svg><span>الاقتصاد</span></button>
+            <button class="m-tile tap" role="radio" aria-checked="false" data-mode="markets"><svg class="i"><use href="#i-price"/></svg><span>الأسواق</span></button>
+            <button class="m-tile tap on" role="radio" aria-checked="true" data-mode="security"><svg class="i"><use href="#i-flame"/></svg><span>الأمن</span></button>
+            <button class="m-tile tap" role="radio" aria-checked="false" data-mode="politics"><svg class="i"><use href="#i-podium"/></svg><span>الأحزاب</span></button>
+            <button class="m-tile tap" role="radio" aria-checked="false" data-mode="military"><svg class="i"><use href="#i-shield"/></svg><span>عسكرية</span></button>
+            <button class="m-tile tap" role="radio" aria-checked="false" data-mode="intel"><svg class="i"><use href="#i-eye"/></svg><span>الاستخبارات</span></button>
+            <button class="m-tile tap" role="radio" aria-checked="false" data-mode="infra"><svg class="i"><use href="#i-build"/></svg><span>البنية التحتية</span></button>
+            <button class="m-tile tap" role="radio" aria-checked="false" data-mode="resources"><svg class="i"><use href="#i-drop"/></svg><span>الموارد</span></button>
+            <button class="m-tile tap" role="radio" aria-checked="false" data-mode="population"><svg class="i"><use href="#i-people"/></svg><span>السكان</span></button>
+            <button class="m-tile tap" role="radio" aria-checked="false" data-mode="climate"><svg class="i"><use href="#i-globe"/></svg><span>مخاطر المناخ</span></button>
+          </div>
+        </section>
+        <section class="r-sec">
+          <h3>العرض</h3>
+          <div class="s-pol">
+            <span class="r-at"><b>الحدود</b><span>الواقع على الأرض أو المعترف به</span></span>
+            <span class="s-seg m-two" role="radiogroup" aria-label="الحدود"><button class="s-sg tap on" role="radio" aria-checked="true">فعلية</button><button class="s-sg tap" role="radio" aria-checked="false">قانونية</button></span>
+          </div>
+          <div class="s-pol">
+            <span class="r-at"><b>حدود المحافظات</b><span>داخل كل دولة</span></span>
+            <span class="s-seg m-two" role="radiogroup" aria-label="حدود المحافظات"><button class="s-sg tap on" role="radio" aria-checked="true">تظهر</button><button class="s-sg tap" role="radio" aria-checked="false">تختفي</button></span>
+          </div>
+          <div class="s-pol">
+            <span class="r-at"><b>الأسماء</b><span>كم اسمًا يظهر</span></span>
+            <span class="s-seg" role="radiogroup" aria-label="الأسماء"><button class="s-sg tap" role="radio" aria-checked="false">قليلة</button><button class="s-sg tap on" role="radio" aria-checked="true">متوسطة</button><button class="s-sg tap" role="radio" aria-checked="false">كثيرة</button></span>
+          </div>
+        </section>
+      </div>
+      <span class="r-hint" aria-hidden="true"><svg class="i"><use href="#i-chev"/></svg></span>
+    </div>
+  </section>
