@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-04T12:44:14.805Z",
+ "ranAt": "2026-11-04T13:03:00.427Z",
  "inputs": {
   "files": [
    "index.html",
@@ -22,7 +22,7 @@
    "header_cairo.jpg",
    "map_overlay_cairo.svg"
   ],
-  "sha1": "f1c854ec8a9529dc76a6e92bf1d454b563ad5c1f"
+  "sha1": "b30cb388b0ca73ac8b56c677f6efee714fc9088b"
  },
  "cleanIssues": {
   "i16promax": [],
@@ -90,18 +90,18 @@
    "name": "tap in the side inset",
    "ok": true,
    "sample": [
-    "text in side inset: نظرة عامة",
     "text in side inset: 62",
-    "text in side inset: +1"
+    "text in side inset: +1",
+    "text in side inset: لماذا؟"
    ]
   },
   {
    "name": "panel in the side inset",
    "ok": true,
    "sample": [
-    "text in side inset: نظرة عامة",
     "text in side inset: 62",
-    "text in side inset: +1"
+    "text in side inset: +1",
+    "text in side inset: لماذا؟"
    ]
   },
   {
@@ -157,9 +157,7 @@
    "name": "sheet width",
    "ok": true,
    "sample": [
-    "text over a control: \"وساطة بين الفصائل الفلسطينية\" runs into «النفوذ +4»",
-    "sheet width 330 (want round(clamp(43% of 832, 340, 380)), or the room the dock leaves if 330..: 358)",
-    "contrast 3.02 for \"وساطة بين الفصائل الفلسط\""
+    "sheet width 330 (want round(clamp(43% of 832, 340, 380)), or the room the dock leaves if 330..: 358)"
    ]
   },
   {
@@ -167,8 +165,8 @@
    "ok": true,
    "sample": [
     "hit overlap الاستقرار 58% / إغلاق",
-    "hit overlap الشرعية 44 / إغلاق",
-    "panel overlap الدولة: مصر، حسني مبارك، ج / الخارجية: مصر"
+    "panel overlap الدولة: مصر، حسني مبارك، ج / الخارجية: مصر",
+    "panel overlap الخزينة 36.0 مليار $ الاست / الخارجية: مصر"
    ]
   },
   {
@@ -191,9 +189,9 @@
    "name": "left stack moved",
    "ok": true,
    "sample": [
-    "HUD element moved from its B3 position: .toast x 70.0..287.6 y 56.0..88.0",
-    "HUD element moved from its B3 position: .btn.mode x 70.0..197.3 y 96.0..128.0",
-    "HUD element moved from its B3 position: .btn.home x 70.0..143.2 y 136.0..168.0"
+    "HUD element moved from its B3 position: .toast x 70.0..275.6 y 56.0..88.0",
+    "HUD element moved from its B3 position: .btn.mode x 70.0..191.6 y 96.0..128.0",
+    "HUD element moved from its B3 position: .btn.home x 70.0..141.5 y 136.0..168.0"
    ]
   },
   {
@@ -207,9 +205,9 @@
    "name": "two tab bodies",
    "ok": true,
    "sample": [
-    "clipped text (bottom): \"لماذا؟\" 852.92..881 y 222..236",
-    "clipped text (bottom): \"لماذا؟\" 733.27..761.34 y 222..236",
-    "clipped text (bottom): \"لماذا؟\" 622.59..650.67 y 222..236"
+    "clipped text (bottom): \"لماذا؟\" 854.31..881 y 220..237",
+    "clipped text (bottom): \"لماذا؟\" 734.66..761.34 y 220..237",
+    "clipped text (bottom): \"لماذا؟\" 623.98..650.67 y 220..237"
    ]
   },
   {
@@ -324,6 +322,8 @@
    "name": "money unit",
    "ok": true,
    "sample": [
+    "clipped text (top): \"0.4\" 866.09..881 y 153..168",
+    "clipped text (top): \"مليار $\" 838.42..866.09 y 153..168",
     "money unit: «0.4 مليار» (under 1 billion is written in millions)"
    ]
   },
@@ -331,6 +331,8 @@
    "name": "sign outside its number",
    "ok": true,
    "sample": [
+    "clipped text (top): \"تغير +\" 859.06..881 y 153..168",
+    "clipped text (top): \"3\" 853.06..859.06 y 153..168",
     "a sign outside its number: «تغير +3»"
    ]
   },
@@ -338,6 +340,7 @@
    "name": "colour alone",
    "ok": true,
    "sample": [
+    "clipped text (top): \"تراجع\" 860.27..881 y 153..168",
     "colour alone: «تراجع» has no arrow or icon"
    ]
   },
@@ -359,6 +362,7 @@
    "name": "label without a role",
    "ok": true,
    "sample": [
+    "clipped text (top): \"اختبار\" 860.25..881 y 153..168",
     "a11y: a label VoiceOver may skip (no role): «اختبار»"
    ]
   },
@@ -437,9 +441,9 @@
    "name": "clipped text",
    "ok": true,
    "sample": [
-    "clipped text (sides): \"النفوذ\" 875.94..903 y 163..177",
+    "clipped text (sides): \"النفوذ\" 877.2..903 y 161..178",
     "text outside the sheet's 12 pt padding: \"النفوذ\"",
-    "clipped text (sides): \"/\" 886.38..893.72 y 188..202"
+    "clipped text (sides): \"/\" 887.88..895.39 y 187..204"
    ]
   },
   {
@@ -540,16 +544,23 @@
    "name": "a long headline label",
    "ok": true,
    "sample": [
+    "clipped text (sides): \"عنوان طويل جدًا لا يتسع لخانته أبدًا\" 385.38..539.25 y 161..178",
     "text outside the sheet's 12 pt padding: \"عنوان طويل جدًا لا يتسع لخانته أبدًا\"",
-    "horizontal overflow in عنوان طويل جدًا لا يتسع لخ",
-    "control cut by its scroll area (bottom): وساطة بين الفصائل الفلسطين"
+    "clipped text (sides): \"1\" 528.44..539.25 y 179..206"
+   ]
+  },
+  {
+   "name": "text wider than its box",
+   "ok": true,
+   "sample": [
+    "text wider than its box: «الكلفة: 10 من النفوذ · 6» (131 in 20)"
    ]
   },
   {
    "name": "a long status cell",
    "ok": true,
    "sample": [
-    "clipped text (sides): \"قيمة طويلة جدًا لا تتسع لنصف الجدول\" 407.84..608.44 y 159.5..175.5",
+    "clipped text (sides): \"قيمة طويلة جدًا لا تتسع لنصف الجدول\" 416.53..613.3 y 157.5..176.5",
     "text outside the sheet's 12 pt padding: \"قيمة طويلة جدًا لا تتسع لنصف الجدول\"",
     "horizontal overflow in خانةقيمة طويلة جدًا لا تتس"
    ]
