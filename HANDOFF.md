@@ -34,6 +34,11 @@ Arabic with Western digits, and never claim "tested on iPhone" for browser mocku
 - Playwright: `require('playwright')` works globally in the cloud container (1.48.x); the browser is
   `/opt/pw-browsers/chromium_headless_shell-*/chrome-linux/headless_shell` (set `CHROMIUM_PATH` to it). Do not run
   `playwright install`. Elsewhere: `cd tools && npm install`.
+- **The font first:** run `tools/install_fonts.sh` in a new container. Every mockup uses IBM Plex Sans Arabic; without it
+  Chromium falls back to other fonts and every render, measurement and review is wrong (2026-11-04: a new container had
+  no Plex and a whole session rendered in DejaVu). `gate_all.sh` refuses to run without it.
+- **Disk:** reviewers copy `design/` to `/tmp/review_tmp/<name>`; delete finished reviewers' folders (one run filled
+  the disk and crashed the renders).
 - **Gate a screen:** `tools/gate_all.sh screen15/A screen16/A ...` (assemble → render 7 phones → self-test →
   `check_screen.py`; ends with `ALLDONE`). About 10–20 minutes a screen; run it in the background. While it runs it
   rewrites PNGs and reports, so the stop hook keeps asking for commits: commit "renders in progress" and commit again
