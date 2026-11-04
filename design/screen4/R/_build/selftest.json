@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-02T21:42:43.196Z",
+ "ranAt": "2026-11-04T12:39:59.557Z",
  "inputs": {
   "files": [
    "index.html",
@@ -19,7 +19,7 @@
    "header_cairo.jpg",
    "map_overlay_cairo.svg"
   ],
-  "sha1": "e90b19311041c6497b7028e09163120182a840b0"
+  "sha1": "f9721d190c1b78ce1997514f8e8385c383cdde81"
  },
  "cleanIssues": {
   "i16promax": [],
@@ -57,8 +57,8 @@
    "name": "fade without the hint strip",
    "ok": true,
    "sample": [
-    "clipped text (bottom): \"الكهرباء · النقل · المرافق العامة\" 481.03..599 y 361..376",
-    "clipped text (bottom): \"تخطيط التوسعة\" 377..447.28 y 351..368",
+    "clipped text (bottom): \"الكهرباء · النقل · المرافق العامة\" 468.58..599 y 363..375",
+    "clipped text (bottom): \"تخطيط التوسعة\" 377..452 y 353..367",
     "control cut by its scroll area (bottom): الإنشاءات والمرافق"
    ]
   },
@@ -155,9 +155,9 @@
    "name": "hit overlap",
    "ok": true,
    "sample": [
-    "clipped text (bottom): \"السيطرة\" 844.7..881 y 237..254",
-    "clipped text (bottom): \"الحكومة ·\" 777.89..829.86 y 236..255",
-    "clipped text (bottom): \"100%\" 742..777.89 y 236..255"
+    "clipped text (bottom): \"الحكومة ·\" 775.84..830.77 y 238..254",
+    "clipped text (bottom): \"100%\" 737.55..775.84 y 238..254",
+    "clipped text (bottom): \"لا توجد\" 587..623.11 y 238..254"
    ]
   },
   {
@@ -173,9 +173,9 @@
    "name": "clipped text",
    "ok": true,
    "sample": [
-    "clipped text (sides): \"حكومة مصر\" 547..606.2 y 207.5..226.5",
+    "clipped text (sides): \"حكومة مصر\" 547..611.77 y 209.5..225.5",
     "text outside the sheet's 12 pt padding: \"حكومة مصر\"",
-    "clipped text (sides): \"لا توجد\" 547..582.91 y 236..255"
+    "clipped text (sides): \"لا توجد\" 547..583.11 y 238..254"
    ]
   },
   {
@@ -184,7 +184,7 @@
    "sample": [
     "text overlap \"القاهرة\" / \"العاصمة\"",
     "icon over text: i / \"القاهرة\"",
-    "contrast 1.45 for \"القاهرة\""
+    "contrast 1.52 for \"القاهرة\""
    ]
   },
   {
@@ -201,8 +201,8 @@
    "ok": true,
    "sample": [
     "panel not opaque: المحافظة: القاهرة rgba(9, 17, 25, 0.66)",
-    "contrast 4.36 for \"ألف شهريًا\"",
-    "contrast 3.28 for \"64\""
+    "contrast 4.36 for \"+14\"",
+    "contrast 4.37 for \"ألف شهريًا\""
    ]
   },
   {
@@ -226,8 +226,8 @@
    "ok": true,
    "sample": [
     "hit overlap الخزينة 36.0 مليار $ / إغلاق",
-    "panel overlap الدولة: مصر، حسني مبارك، ج / المحافظة: القاهرة",
-    "panel overlap الخزينة 36.0 مليار $ الاست / المحافظة: القاهرة"
+    "hit overlap الاستقرار 58% / إغلاق",
+    "panel overlap الدولة: مصر، حسني مبارك، ج / المحافظة: القاهرة"
    ]
   },
   {
@@ -251,7 +251,7 @@
    "ok": true,
    "sample": [
     "tap in side inset: المزيد",
-    "dock not 4 pt in from the left end of its B3 line: x 62.0 w 387.0 y 374.0 (want x 66 w 387.0 y 374.0)"
+    "dock not 4 pt in from the left end of its B3 line: x 62.0 w 398.7 y 374.0 (want x 66 w 398.7 y 374.0)"
    ]
   },
   {
@@ -268,24 +268,24 @@
    "ok": true,
    "sample": [
     "icon over text: i r-chev / \"الجيش\"",
-    "icon over text: i / \"الإنشاءات والمرافق\"",
-    "hit overlap الدولة / متوازن"
+    "hit overlap الدولة / متوازن",
+    "hit overlap الدولة / الإنشاءات والمرافق"
    ]
   },
   {
    "name": "left stack moved",
    "ok": true,
    "sample": [
-    "HUD element moved from its B3 position: .toast x 70.0..275.6 y 56.0..88.0",
-    "HUD element moved from its B3 position: .btn.mode x 70.0..191.6 y 96.0..128.0",
-    "HUD element moved from its B3 position: .btn.home x 70.0..141.5 y 136.0..168.0"
+    "HUD element moved from its B3 position: .toast x 70.0..287.6 y 56.0..88.0",
+    "HUD element moved from its B3 position: .btn.mode x 70.0..197.3 y 96.0..128.0",
+    "HUD element moved from its B3 position: .btn.home x 70.0..143.2 y 136.0..168.0"
    ]
   },
   {
    "name": "fades wrong",
    "ok": true,
    "sample": [
-    "clipped text (bottom): \"الحامية · التمركز · إسناد المهام\" 718.56..834 y 409..424",
+    "clipped text (bottom): \"الحامية · التمركز · إسناد المهام\" 707.89..834 y 411..423",
     "control cut by its scroll area (bottom): إدارة القوات",
     "hit box shaved by its clip: إدارة القوات"
    ]
@@ -294,8 +294,8 @@
    "name": "cut at a hard edge",
    "ok": true,
    "sample": [
-    "clipped text (bottom): \"الكهرباء · النقل · المرافق العامة\" 481.03..599 y 361..376",
-    "clipped text (bottom): \"تخطيط التوسعة\" 377..447.28 y 351..368",
+    "clipped text (bottom): \"الكهرباء · النقل · المرافق العامة\" 468.58..599 y 363..375",
+    "clipped text (bottom): \"تخطيط التوسعة\" 377..452 y 353..367",
     "control cut by its scroll area (bottom): الإنشاءات والمرافق"
    ]
   },
@@ -337,17 +337,17 @@
    "name": "brief text scrolled away",
    "ok": true,
    "sample": [
-    "clipped text (top): \"مخفض\" 823.48..857 y 140..157",
-    "clipped text (top): \"متوازن\" 717.38..746.34 y 140..157",
-    "clipped text (top): \"مرتفع\" 610.94..635.67 y 140..157"
+    "fades 0/1 do not match the scroll state (top 181, over 181.0)",
+    "brief text not fully visible: إدارة المحافظة",
+    "brief text not fully visible: المحافظ"
    ]
   },
   {
    "name": "fade flag without a mask",
    "ok": true,
    "sample": [
-    "clipped text (bottom): \"الكهرباء · النقل · المرافق العامة\" 481.03..599 y 361..376",
-    "clipped text (bottom): \"تخطيط التوسعة\" 377..447.28 y 351..368",
+    "clipped text (bottom): \"الكهرباء · النقل · المرافق العامة\" 468.58..599 y 363..375",
+    "clipped text (bottom): \"تخطيط التوسعة\" 377..452 y 353..367",
     "control cut by its scroll area (bottom): الإنشاءات والمرافق"
    ]
   },
@@ -452,7 +452,7 @@
    "ok": true,
    "sample": [
     "tap in side inset: المزيد",
-    "HUD element moved from its B3 position: .dock x 62.0..449.0",
+    "HUD element moved from its B3 position: .dock x 62.0..460.7",
     "dock item 1 changed"
    ]
   },
@@ -509,9 +509,9 @@
    "name": "meter drawn wrong",
    "ok": true,
    "sample": [
-    "meter «الكهرباء» not drawn at 7 / 10: 92.4 of 184.8",
-    "meter «النقل» not drawn at 8 / 10: 92.4 of 184.8",
-    "meter «المياه والصرف» not drawn at 8 / 10: 92.4 of 184.8"
+    "meter «الكهرباء» not drawn at 7 / 10: 91.4 of 182.8",
+    "meter «النقل» not drawn at 8 / 10: 91.4 of 182.8",
+    "meter «المياه والصرف» not drawn at 8 / 10: 91.4 of 182.8"
    ]
   },
   {
@@ -587,6 +587,21 @@
    "ok": true,
    "sample": [
     "a11y: unit row 2 does not read its name, command and organization as one element"
+   ]
+  },
+  {
+   "name": "decision buttons out of the card",
+   "ok": true,
+   "sample": [
+    "horizontal overflow in إدارة المحافظة المحافظد. ع",
+    "decision: the buttons run out of the card"
+   ]
+  },
+  {
+   "name": "decision footer in one row",
+   "ok": true,
+   "sample": [
+    "decision: the positions line must be above the buttons"
    ]
   },
   {
