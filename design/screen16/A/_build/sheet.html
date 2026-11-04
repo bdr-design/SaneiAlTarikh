@@ -1,0 +1,54 @@
+  <!-- The notification centre (screen 16, variant A), opened from the bell: a side sheet in the approved panel frame, the
+       map central and visible (mapCentral). The player put the decision off («لاحقًا»), paused the game and gave the
+       western army its order; the centre shows the tiers of §6.7 in words. The badge counts the unread notifications
+       (the two news items: 2; the decision was read on screen 15 and waits under «قرارات تنتظرك»); a pending order is not a notification and can be cancelled before time
+       resumes. The sheet belongs to no section: the neutral grey identity, no dock item open. -->
+  <section class="sheet glass" aria-label="الإشعارات">
+    <div class="r-in">
+      <header class="r-hd">
+        <span class="r-flag"><img src="../../shared/flags/eg.svg" alt="علم مصر"></span>
+        <div class="r-tt">
+          <div class="r-row"><h2 class="r-name">الإشعارات</h2></div>
+          <div class="r-sub">غير المقروءة: <span class="ltr">2</span><span class="r-dot"> · </span><span class="ltr">1</span> يناير <span class="ltr">2011</span></div>
+        </div>
+        <span class="s-emb" aria-hidden="true"><svg class="i"><use href="#i-bell"/></svg></span>
+        <button class="r-x tap" aria-label="إغلاق الإشعارات"><svg class="i"><use href="#i-close"/></svg></button>
+      </header>
+
+      <div class="r-body" data-tab="center">
+        <section class="r-sec">
+          <h3>قرارات تنتظرك</h3>
+          <div class="r-link tap" role="button" tabindex="0" aria-label="قرار ينتظرك: احتجاجات في تونس، الافتراضي بعد 7 أيام. يفتح القرار">
+            <span class="r-tile"><svg class="i"><use href="#i-warn"/></svg></span>
+            <span class="r-at"><b>احتجاجات في تونس</b><span>قرار · الافتراضي بعد <span class="ltr">7</span> أيام</span></span>
+            <svg class="i r-chev"><use href="#i-chev"/></svg>
+          </div>
+        </section>
+        <section class="r-sec">
+          <h3>أوامر معلقة</h3>
+          <div class="n-ord" role="group" aria-label="أمر معلق: المنطقة الغربية إلى سيوة، يُنفَّذ عند استئناف الوقت">
+            <span class="r-tile" aria-hidden="true"><svg class="i"><use href="#i-army"/></svg></span>
+            <span class="r-at" aria-hidden="true"><b>المنطقة الغربية إلى سيوة</b><span>يُنفَّذ عند استئناف الوقت</span></span>
+            <button class="r-btn tap" aria-label="إلغاء أمر المنطقة الغربية إلى سيوة">إلغاء</button>
+          </div>
+        </section>
+        <section class="r-sec">
+          <h3>مهم</h3>
+          <div class="r-link tap" role="button" tabindex="0" data-unread="1" aria-label="غير مقروء، السودان: استفتاء الجنوب بعد 8 أيام، 9 يناير 2011، الجوار. يفتح الخبر">
+            <span class="r-tile"><svg class="i"><use href="#i-globe"/></svg></span>
+            <span class="r-at"><b>السودان: استفتاء الجنوب بعد <span class="ltr">8</span> أيام</b><span><span class="ltr">9</span> يناير <span class="ltr">2011</span> · الجوار</span></span>
+            <i class="n-dot" aria-hidden="true"></i><svg class="i r-chev"><use href="#i-chev"/></svg>
+          </div>
+        </section>
+        <section class="r-sec">
+          <h3>للعلم</h3>
+          <div class="r-link tap" role="button" tabindex="0" data-unread="1" aria-label="غير مقروء، القمح عالميًا في أعلى مستوى منذ 2008، السلع، ديسمبر 2010. يفتح الخبر">
+            <span class="r-tile"><svg class="i"><use href="#i-coins"/></svg></span>
+            <span class="r-at"><b>القمح عالميًا في أعلى مستوى منذ <span class="ltr">2008</span></b><span>السلع · ديسمبر <span class="ltr">2010</span></span></span>
+            <i class="n-dot" aria-hidden="true"></i><svg class="i r-chev"><use href="#i-chev"/></svg>
+          </div>
+        </section>
+      </div>
+      <span class="r-hint" aria-hidden="true"><svg class="i"><use href="#i-chev"/></svg></span>
+    </div>
+  </section>

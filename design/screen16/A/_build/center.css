@@ -1,0 +1,12 @@
+  /* ================= Screen 16, variant A: the notification centre =================
+     Built with the shared builder on the approved panels; one body, no tab row. */
+  .r-tabs { display: none; }
+  [data-tab="center"] .r-body[data-tab="center"] { display: flex; }
+  .r-body[data-tab="center"] { padding-top: var(--s2); padding-bottom: var(--s3); gap: var(--s2); }
+  /* an unread row: a 6 pt teal dot before the chevron (the words are in VoiceOver) */
+  .n-dot { flex: none; width: 6px; height: 6px; border-radius: 50%; background: var(--teal); }
+  /* a pending order: the row's look, not a button; its own «إلغاء» */
+  .n-ord { display: flex; align-items: center; gap: var(--s2); height: 44px; padding-inline: 5px var(--s2); border-radius: var(--r-ctl); background: var(--card); box-shadow: inset 0 0 0 1px var(--stroke); }   /* the link rows' box */
+  .n-ord .r-tile { width: 34px; height: 34px; }
+  .n-ord .r-at > span { font-size: var(--fs-label); line-height: var(--lh-label); }
+  .n-ord .r-at { flex: 1; min-width: 0; }
