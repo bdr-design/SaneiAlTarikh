@@ -268,7 +268,14 @@
     $('.o-btn[data-o="move"]').addEventListener('click', function () { if (ST.sel === ROUTE.unit) { if (ST.e === null || !moving()) ST.e = 0; ST.halted = false; render(); go(); } });
     $('.o-btn[data-o="attack"]').addEventListener('click', function () { showTip(true); clearTimeout(LIVE.tip); LIVE.tip = setTimeout(function () { showTip(false); }, 2500); });
   }
+  /* the units are placed by their measured size, so their images must be loaded first (2026-11-04: placed at 44 pt
+     before a 50 pt image loaded, the token stood 3 pt off its place) */
   function startUnits() {
+    return Promise.all(Array.prototype.map.call(document.querySelectorAll('.u-img'), function (i) {
+      return i.complete && i.naturalWidth ? 0 : new Promise(function (r) { i.addEventListener('load', r); i.addEventListener('error', r); });
+    })).then(startUnitsNow);
+  }
+  function startUnitsNow() {
     var q = new URLSearchParams(location.search), st = q.get('state') || 'order', t = parseFloat(q.get('t'));
     window.__motion = q.get('motion') === 'reduce' ? 'reduce' : '';
     ST.sel = st === 'idle' ? null : ROUTE.unit;
