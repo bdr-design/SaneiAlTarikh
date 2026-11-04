@@ -1,0 +1,12 @@
+  /* ================= Screen 21, variant A: the relation sheet ================= */
+  .r-tabs { display: none; }
+  [data-tab="relation"] .r-body[data-tab="relation"] { display: flex; }
+  .r-body[data-tab="relation"] { padding-top: 0; padding-bottom: var(--s3); gap: var(--s2); }
+  /* a cause: its name and what it is (right), its signed share (left); as screen 17's terms */
+  .w-t { display: flex; align-items: center; justify-content: space-between; gap: var(--s2); height: 32px; }
+  .w-n { display: flex; flex-direction: column; min-width: 0; }
+  .w-n b { font-size: var(--fs-sec); line-height: var(--lh-sec); font-weight: 600; color: var(--t1); white-space: nowrap; }
+  .w-n > span { font-size: var(--fs-label); line-height: var(--lh-label); font-weight: 500; color: var(--t2); white-space: nowrap; }
+  .w-v { flex: none; display: inline-flex; align-items: center; gap: 2px; font-size: var(--fs-val); line-height: var(--lh-val); font-weight: 600; }
+  .w-sum { display: flex; align-items: center; justify-content: space-between; height: 24px; font-size: var(--fs-sec); line-height: var(--lh-sec); font-weight: 600; color: var(--t1); }
+  .w-sum b { font-size: var(--fs-val); line-height: var(--lh-val); font-weight: 600; }
