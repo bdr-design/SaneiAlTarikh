@@ -7,7 +7,7 @@
   .r-body[data-tab="budget"], .r-body[data-tab="taxes"], .r-body[data-tab="trade"] { padding-top: var(--s2); padding-bottom: var(--s3); gap: var(--s2); }
   /* the tab labels here are long («الضرائب والدعم», «التجارة والعملة»): the columns follow their labels and share the
      spare width, so every label keeps the same room on each side */
-  .r-tabs { grid-template-columns: repeat(4, auto); }
+  .r-tabs { grid-template-columns: repeat(4, minmax(min-content, 1fr)); }   /* as equal as the labels allow (2026-11-04: was content width) */
   /* a hairline under the first section heading of every tab, as the province panel's sections */
   .r-body > section.r-sec:first-of-type h3 { padding-bottom: var(--s1); border-bottom: 1px solid var(--hair); }
   /* notes wrap into even lines, never one orphan word */

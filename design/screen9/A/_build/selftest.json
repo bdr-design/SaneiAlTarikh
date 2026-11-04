@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-02T23:09:41.680Z",
+ "ranAt": "2026-11-04T13:15:16.110Z",
  "inputs": {
   "files": [
    "index.html",
@@ -26,7 +26,7 @@
    "header_cairo.jpg",
    "map_overlay_cairo.svg"
   ],
-  "sha1": "3d0a751b17157f36b068263548eb98a19a54097d"
+  "sha1": "296add904ce1263179478f776deedfcef616882d"
  },
  "cleanIssues": {
   "i16promax": [],
@@ -134,6 +134,28 @@
    ]
   },
   {
+   "name": "map dimmed",
+   "ok": true,
+   "sample": [
+    "the map is dimmed (opacity 1.00, filter brightness(0.35))"
+   ]
+  },
+  {
+   "name": "map faded",
+   "ok": true,
+   "sample": [
+    "the map is dimmed (opacity 0.30, filter none)"
+   ]
+  },
+  {
+   "name": "scrim over the map",
+   "ok": true,
+   "sample": [
+    "something drawn over the map: DIV (rgba(0, 0, 0, 0.55))",
+    "contrast 1.92 for \"3\""
+   ]
+  },
+  {
    "name": "sheet width",
    "ok": true,
    "sample": [
@@ -144,9 +166,9 @@
    "name": "sheet top",
    "ok": true,
    "sample": [
-    "hit overlap الخزينة 36.0 مليار $ / إغلاق",
     "hit overlap الاستقرار 58% / إغلاق",
-    "panel overlap الدولة: مصر، حسني مبارك، ج / الجيش: مصر"
+    "panel overlap الدولة: مصر، حسني مبارك، ج / الجيش: مصر",
+    "panel overlap الخزينة 36.0 مليار $ الاست / الجيش: مصر"
    ]
   },
   {
@@ -289,7 +311,7 @@
    "sample": [
     "section colour on data text: \"مصر\"",
     "section colour on data text: \"القوات المسلحة\"",
-    "contrast 4.27 for \"القوات المسلحة\""
+    "section colour on data chrome: مصر · القوات المسلحة"
    ]
   },
   {
@@ -520,6 +542,31 @@
    ]
   },
   {
+   "name": "a long headline label",
+   "ok": true,
+   "sample": [
+    "clipped text (sides): \"عنوان طويل جدًا لا يتسع لخانته أبدًا\" 385.38..539.25 y 161..178",
+    "text outside the sheet's 12 pt padding: \"عنوان طويل جدًا لا يتسع لخانته أبدًا\"",
+    "clipped text (sides): \"1\" 528.44..539.25 y 179..206"
+   ]
+  },
+  {
+   "name": "text wider than its box",
+   "ok": true,
+   "sample": [
+    "text wider than its box: «150 مليون $ شهريًا» (87 in 20)"
+   ]
+  },
+  {
+   "name": "a long status cell",
+   "ok": true,
+   "sample": [
+    "clipped text (sides): \"قيمة طويلة جدًا لا تتسع لنصف الجدول\" 416.53..613.3 y 157.5..176.5",
+    "text outside the sheet's 12 pt padding: \"قيمة طويلة جدًا لا تتسع لنصف الجدول\"",
+    "horizontal overflow in خانةقيمة طويلة جدًا لا تتس"
+   ]
+  },
+  {
    "name": "% before its number",
    "ok": true,
    "sample": [
@@ -661,9 +708,9 @@
    "name": "a real weapon name (Latin)",
    "ok": true,
    "sample": [
+    "text wider than its box: «طلب منظومات دفاع جوي F-1» (164 in 156)",
     "a11y: «طلب منظومات دفاع جوي F-16» does not read its numbers",
-    "a11y: «طلب منظومات دفاع جوي: 1.» does not read all it shows: F-16 -16",
-    "a real weapon name or model code in the panel: F-16"
+    "a11y: «طلب منظومات دفاع جوي: 1.» does not read all it shows: F-16 -16"
    ]
   },
   {

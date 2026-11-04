@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-02T22:50:32.130Z",
+ "ranAt": "2026-11-04T13:26:50.688Z",
  "inputs": {
   "files": [
    "index.html",
@@ -21,7 +21,7 @@
    "../../shared/map_mena_d1_overlay.svg",
    "map_overlay_cairo.svg"
   ],
-  "sha1": "d637d0460cd998fde02fba58741fa7839462d78d"
+  "sha1": "21aaf681f51647420b29faaaa902c6dffcd05fe3"
  },
  "cleanIssues": {
   "i16promax": [],
@@ -126,8 +126,8 @@
    "ok": true,
    "sample": [
     "text overlap \"10\" / \"الشرعية\"",
-    "icon over text: i / \"10\"",
-    "hit overlap أسطول المتوسط، مصر: 10 سفن / الاستقرار 58%"
+    "text overlap \"10\" / \"44\"",
+    "icon over text: i / \"10\""
    ]
   },
   {
@@ -485,7 +485,7 @@
    "name": "an endless animation loop",
    "ok": true,
    "sample": [
-    "gliding at ×1 draws 12 map frames and 42 animation frames in half a second (want 4..15, ≤30 a second)",
+    "gliding at ×1 draws 12 map frames and 40 animation frames in half a second (want 4..15, ≤30 a second)",
     "gliding at ×2 draws 13 map frames and 43 animation frames in half a second (want 4..15, ≤30 a second)",
     "gliding at ×5 draws 13 map frames and 43 animation frames in half a second (want 4..15, ≤30 a second)"
    ]
@@ -495,15 +495,15 @@
    "ok": true,
    "sample": [
     "with nothing moving: 0 map frames, 0 animation frames, 63 interval calls, 4 timer calls, 0 animations in a second (want 0, 0, 0, ≤4, 0)",
-    "while paused: 0 map frames, 0 animation frames, 50 interval calls, 0 timer calls (want none)"
+    "while paused: 0 map frames, 0 animation frames, 51 interval calls, 0 timer calls (want none)"
    ]
   },
   {
    "name": "no frame cap",
    "ok": true,
    "sample": [
-    "gliding at ×1 draws 43 map frames and 43 animation frames in half a second (want 4..15, ≤30 a second)",
-    "gliding at ×2 draws 43 map frames and 43 animation frames in half a second (want 4..15, ≤30 a second)",
+    "gliding at ×1 draws 44 map frames and 44 animation frames in half a second (want 4..15, ≤30 a second)",
+    "gliding at ×2 draws 41 map frames and 41 animation frames in half a second (want 4..15, ≤30 a second)",
     "gliding at ×5 draws 42 map frames and 42 animation frames in half a second (want 4..15, ≤30 a second)"
    ]
   },

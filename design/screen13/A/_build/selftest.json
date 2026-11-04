@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-02T23:05:12.900Z",
+ "ranAt": "2026-11-04T13:09:28.868Z",
  "inputs": {
   "files": [
    "index.html",
@@ -22,7 +22,7 @@
    "header_cairo.jpg",
    "map_overlay_cairo.svg"
   ],
-  "sha1": "d06ec86a6c8ca7174a5992d54c2cdaf073712f2e"
+  "sha1": "97c743731b456c43850fa33f6e22cfe173030722"
  },
  "cleanIssues": {
   "i16promax": [],
@@ -124,6 +124,28 @@
    ]
   },
   {
+   "name": "map dimmed",
+   "ok": true,
+   "sample": [
+    "the map is dimmed (opacity 1.00, filter brightness(0.35))"
+   ]
+  },
+  {
+   "name": "map faded",
+   "ok": true,
+   "sample": [
+    "the map is dimmed (opacity 0.30, filter none)"
+   ]
+  },
+  {
+   "name": "scrim over the map",
+   "ok": true,
+   "sample": [
+    "something drawn over the map: DIV (rgba(0, 0, 0, 0.55))",
+    "contrast 1.92 for \"3\""
+   ]
+  },
+  {
    "name": "sheet width",
    "ok": true,
    "sample": [
@@ -134,9 +156,9 @@
    "name": "sheet top",
    "ok": true,
    "sample": [
-    "hit overlap الخزينة 36.0 مليار $ / إغلاق",
     "hit overlap الاستقرار 58% / إغلاق",
-    "panel overlap الدولة: مصر، حسني مبارك، ج / المزيد"
+    "panel overlap الدولة: مصر، حسني مبارك، ج / المزيد",
+    "panel overlap الخزينة 36.0 مليار $ الاست / المزيد"
    ]
   },
   {
@@ -208,8 +230,8 @@
    "ok": true,
    "sample": [
     "clipped text (bottom): \"تتبع خيار تقليل الحركة\" 787.03..881 y 408..425",
-    "control cut by its scroll area (bottom): حسب الجهاز",
-    "hit box shaved by its clip: حسب الجهاز"
+    "control cut by its scroll area (bottom): تلقائي",
+    "hit box shaved by its clip: تلقائي"
    ]
   },
   {
@@ -392,6 +414,31 @@
    ]
   },
   {
+   "name": "a long headline label",
+   "ok": true,
+   "sample": [
+    "clipped text (sides): \"عنوان طويل جدًا لا يتسع لخانته أبدًا\" 385.38..539.25 y 169..186",
+    "text outside the sheet's 12 pt padding: \"عنوان طويل جدًا لا يتسع لخانته أبدًا\"",
+    "clipped text (sides): \"1\" 528.44..539.25 y 187..214"
+   ]
+  },
+  {
+   "name": "text wider than its box",
+   "ok": true,
+   "sample": [
+    "text wider than its box: «حفظ جديد · مصر · 1 يناير» (143 in 20)"
+   ]
+  },
+  {
+   "name": "a long status cell",
+   "ok": true,
+   "sample": [
+    "clipped text (sides): \"قيمة طويلة جدًا لا تتسع لنصف الجدول\" 416.53..613.3 y 165.5..184.5",
+    "text outside the sheet's 12 pt padding: \"قيمة طويلة جدًا لا تتسع لنصف الجدول\"",
+    "clipped text (bottom): \"استيراد حفظ أو تصديره\" 718.88..834 y 401..420"
+   ]
+  },
+  {
    "name": "brief text hidden (saves)",
    "ok": true,
    "sample": [
@@ -510,7 +557,7 @@
    "name": "a digit setting",
    "ok": true,
    "sample": [
-    "setting 5 is not «الحركة · تتبع خيار تقليل الحركة · حسب الجهاز/كاملة/مخففة · حسب الجهاز»: «الأرقام · تتبع خيار تقليل الحركة · حسب الجهاز/كاملة/مخففة · حسب الجهاز»",
+    "setting 5 is not «الحركة · تتبع خيار تقليل الحركة · تلقائي/كاملة/مخففة · تلقائي»: «الأرقام · تتبع خيار تقليل الحركة · تلقائي/كاملة/مخففة · تلقائي»",
     "setting «الأرقام» is not a named group of three choices",
     "a digit setting (Western digits always)"
    ]

@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-02T22:46:54.568Z",
+ "ranAt": "2026-11-04T13:21:03.253Z",
  "inputs": {
   "files": [
    "index.html",
@@ -22,7 +22,7 @@
    "header_cairo.jpg",
    "map_overlay_cairo.svg"
   ],
-  "sha1": "1b11851537fb758cf253261be01fb1a12580e176"
+  "sha1": "b30cb388b0ca73ac8b56c677f6efee714fc9088b"
  },
  "cleanIssues": {
   "i16promax": [],
@@ -132,6 +132,28 @@
    ]
   },
   {
+   "name": "map dimmed",
+   "ok": true,
+   "sample": [
+    "the map is dimmed (opacity 1.00, filter brightness(0.35))"
+   ]
+  },
+  {
+   "name": "map faded",
+   "ok": true,
+   "sample": [
+    "the map is dimmed (opacity 0.30, filter none)"
+   ]
+  },
+  {
+   "name": "scrim over the map",
+   "ok": true,
+   "sample": [
+    "something drawn over the map: DIV (rgba(0, 0, 0, 0.55))",
+    "contrast 1.92 for \"3\""
+   ]
+  },
+  {
    "name": "sheet width",
    "ok": true,
    "sample": [
@@ -142,9 +164,9 @@
    "name": "sheet top",
    "ok": true,
    "sample": [
-    "hit overlap الخزينة 36.0 مليار $ / إغلاق",
     "hit overlap الاستقرار 58% / إغلاق",
-    "panel overlap الدولة: مصر، حسني مبارك، ج / الخارجية: مصر"
+    "panel overlap الدولة: مصر، حسني مبارك، ج / الخارجية: مصر",
+    "panel overlap الخزينة 36.0 مليار $ الاست / الخارجية: مصر"
    ]
   },
   {
@@ -286,7 +308,7 @@
    "sample": [
     "section colour on data text: \"مصر\"",
     "section colour on data text: \"عضو في الأمم المتحدة\"",
-    "contrast 3.91 for \"مصر\""
+    "section colour on data chrome: مصر · عضو في الأمم المتحدة"
    ]
   },
   {
@@ -516,6 +538,31 @@
     "a11y: «وساطة بين الفصائل الفلسطينية» does not read its numbers",
     "a11y: «وساطة بين الفصائل الفلسطينية» does not say the chip's direction in words",
     "a11y: «جزء» does not read all it shows: وساطة بين الفصائل الفلسطينية"
+   ]
+  },
+  {
+   "name": "a long headline label",
+   "ok": true,
+   "sample": [
+    "clipped text (sides): \"عنوان طويل جدًا لا يتسع لخانته أبدًا\" 385.38..539.25 y 161..178",
+    "text outside the sheet's 12 pt padding: \"عنوان طويل جدًا لا يتسع لخانته أبدًا\"",
+    "clipped text (sides): \"1\" 528.44..539.25 y 179..206"
+   ]
+  },
+  {
+   "name": "text wider than its box",
+   "ok": true,
+   "sample": [
+    "text wider than its box: «الكلفة: 10 من النفوذ · 6» (131 in 20)"
+   ]
+  },
+  {
+   "name": "a long status cell",
+   "ok": true,
+   "sample": [
+    "clipped text (sides): \"قيمة طويلة جدًا لا تتسع لنصف الجدول\" 416.53..613.3 y 157.5..176.5",
+    "text outside the sheet's 12 pt padding: \"قيمة طويلة جدًا لا تتسع لنصف الجدول\"",
+    "horizontal overflow in خانةقيمة طويلة جدًا لا تتس"
    ]
   },
   {

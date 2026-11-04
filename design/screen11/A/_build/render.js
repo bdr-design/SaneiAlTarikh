@@ -60,7 +60,7 @@ if (tab === 'networks') { const rows = qa('.sheet .n-row'), vals = rows.map((r) 
     if (Math.abs(parseFloat(getComputedStyle(bar, '::after').width) - bar.getBoundingClientRect().width * vals[i] / 10) > 0.6) issues.push('network «' + nm + '»: the bar is not at ' + vals[i] + ' / 10');
     if (al !== nm + ': الشبكة ' + vals[i] + ' من 10، الانكشاف ' + heat || r.getAttribute('role') !== 'img') issues.push('a11y: network «' + nm + '» is not read whole'); });
   const M = ['يناير', 'فبراير', 'مارس', 'أبريل', 'مايو', 'يونيو', 'يوليو', 'أغسطس', 'سبتمبر', 'أكتوبر', 'نوفمبر', 'ديسمبر'];
-  const g = W(T(q('.top .date .dmy'))).match(/(\\d+) (\\S+) (\\d{4})/), n = W(T(q('.r-body[data-tab="networks"] .s-note'))).match(/آخر تحديث: (\\S+) (\\d{4})/);
+  const g = W(q('.top .date .dmy').dataset.full || T(q('.top .date .dmy'))).match(/(\\d+) (\\S+) (\\d{4})/), n = W(T(q('.r-body[data-tab="networks"] .s-note'))).match(/آخر تحديث: (\\S+) (\\d{4})/);
   const want = g ? (M.indexOf(g[2]) === 0 ? ['ديسمبر', +g[3] - 1] : [M[M.indexOf(g[2]) - 1], +g[3]]) : [];
   if (!n || n[1] !== want[0] || +n[2] !== want[1]) issues.push('the last refresh is not the month before the game date (' + want.join(' ') + ')'); }
 // operations: the brief's, as many as the headline and within the capacity; each bar at its progress; the 9 types, no killing

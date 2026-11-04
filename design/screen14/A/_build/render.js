@@ -294,7 +294,7 @@ async function measure(p, d, b3, view) {
     }
     // the date: 1 January 2011 plus the whole days marched, with its weekday
     { const day = 1 + (e === null ? 0 : Math.floor(e + 1e-9)), DOW = ['السبت', 'الأحد', 'الإثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة'];
-      const shown = T(q('.date .dmy')), dow = T(q('.date .dow'));
+      const shown = q('.date .dmy').dataset.full || T(q('.date .dmy')), dow = q('.date .dow').dataset.dow || T(q('.date .dow'));
       if (shown !== day + ' يناير 2011' || dow !== DOW[(day - 1) % 7]) issues.push(`the date is not ${DOW[(day - 1) % 7]} ${day} يناير 2011: «${dow} ${shown}»`); }
     // the order bar: the military panel's words; the army, its line and the order in force
     if (sel) {
@@ -465,8 +465,8 @@ async function selftest(b) {
     ['name over the route', d, '&t=0', '', /the destination's name is not «سيوة»|covers the route/, () => { const s = document.querySelector('.u-dest'); s.style.top = (parseFloat(s.style.top) - 40) + 'px'; s.style.left = (parseFloat(s.style.left) + 20) + 'px'; }],
     ['waypoint shown after passing', d, '&t=0.5', '', /the waypoint mark is shown after it was passed/, () => { document.querySelector('.u-wp').style.display = 'flex'; }],
     ['destination mark off', d, '&t=0', '', /the destination's name is not «سيوة» 8 pt below the tip/, () => { const s = document.querySelector('.u-dest'); s.style.top = (parseFloat(s.style.top) + 30) + 'px'; }],
-    ['date not the march', d, '&t=0.5', '', /the date is not الثلاثاء 4 يناير 2011/, () => { document.querySelector('.date .dmy').textContent = '5 يناير 2011'; }],
-    ['weekday wrong', d, '&t=0', '', /the date is not السبت 1 يناير 2011/, () => { document.querySelector('.date .dow').textContent = 'الأحد'; }],
+    ['date not the march', d, '&t=0.5', '', /the date is not الثلاثاء 4 يناير 2011/, () => { window.__setDate(document.querySelector('.date .dow').dataset.dow, '5 يناير 2011'); }],
+    ['weekday wrong', d, '&t=0', '', /the date is not السبت 1 يناير 2011/, () => { window.__setDate('الأحد', document.querySelector('.date .dmy').dataset.full); }],
     ['ETA wrong', d, '&t=0', '', /the bar's line is/, () => { const s = document.querySelector('.o-sub'); s.textContent = s.textContent.replace('7 أيام', '8 أيام'); }],
     ['ETA agreement', d, '&t=0.5', '', /the bar's line is/, () => { const s = document.querySelector('.o-sub'); s.textContent = s.textContent.replace('4 أيام', '4 يوم'); }],
     ['bar names another army', d, '&t=0', '', /the bar names «الجيش الثاني الميداني»/, () => { document.querySelector('.o-name').textContent = 'الجيش الثاني الميداني'; }],

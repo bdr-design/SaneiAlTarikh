@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-02T21:08:01.786Z",
+ "ranAt": "2026-11-04T13:13:57.303Z",
  "inputs": {
   "files": [
    "index.html",
@@ -19,7 +19,7 @@
    "header_cairo.jpg",
    "map_overlay_cairo.svg"
   ],
-  "sha1": "c39d9913b1b3384680b6f2a150b8c6eab4bc389f"
+  "sha1": "e502f9e62ee1b733ed5dd7664d79f15fd5889b95"
  },
  "cleanIssues": {
   "i16promax": [],
@@ -83,8 +83,8 @@
    "ok": true,
    "sample": [
     "text colour off-token rgb(136, 153, 170): \"نظام الحكم\"",
-    "text colour off-token rgb(136, 153, 170): \"الدستور\"",
-    "text colour off-token rgb(136, 153, 170): \"الحزب الحاكم\""
+    "text colour off-token rgb(136, 153, 170): \"دستور\"",
+    "text colour off-token rgb(136, 153, 170): \"1971\""
    ]
   },
   {
@@ -171,7 +171,7 @@
    "name": "clipped text",
    "ok": true,
    "sample": [
-    "text outside the sheet's 12 pt padding: \"· عُدّل في\"",
+    "text outside the sheet's 12 pt padding: \"عُدّل\"",
     "clipped text (sides): \"2007\" 509..540.2 y 252.5..271.5",
     "text outside the sheet's 12 pt padding: \"2007\""
    ]
@@ -180,7 +180,7 @@
    "name": "text outside the padding",
    "ok": true,
    "sample": [
-    "text outside the sheet's 12 pt padding: \"· عُدّل في\"",
+    "text outside the sheet's 12 pt padding: \"عُدّل\"",
     "clipped text (sides): \"2007\" 509..540.2 y 252.5..271.5",
     "text outside the sheet's 12 pt padding: \"2007\""
    ]
@@ -189,7 +189,7 @@
    "name": "horizontal overflow",
    "ok": true,
    "sample": [
-    "text outside the sheet's 12 pt padding: \"· عُدّل في\"",
+    "text outside the sheet's 12 pt padding: \"عُدّل\"",
     "clipped text (sides): \"2007\" 509..540.2 y 252.5..271.5",
     "text outside the sheet's 12 pt padding: \"2007\""
    ]
@@ -252,8 +252,6 @@
    "name": "sheet width",
    "ok": true,
    "sample": [
-    "text outside the sheet's 12 pt padding: \"2007\"",
-    "text outside the sheet's 12 pt padding: \"1981\"",
     "sheet width 330 (want round(clamp(43% of 832, 340, 380)), or the room the dock leaves if 330..: 358)"
    ]
   },
@@ -261,18 +259,18 @@
    "name": "sheet top",
    "ok": true,
    "sample": [
-    "hit overlap الخزينة 36.0 مليار $ / إغلاق",
     "hit overlap الاستقرار 58% / إغلاق",
-    "panel overlap الدولة: مصر، حسني مبارك، ج / الدولة: مصر"
+    "panel overlap الدولة: مصر، حسني مبارك، ج / الدولة: مصر",
+    "panel overlap الخزينة 36.0 مليار $ الاست / الدولة: مصر"
    ]
   },
   {
    "name": "panel overlap",
    "ok": true,
    "sample": [
-    "hit overlap الخزينة 36.0 مليار $ / إغلاق",
     "hit overlap الاستقرار 58% / إغلاق",
-    "panel overlap الدولة: مصر، حسني مبارك، ج / الدولة: مصر"
+    "panel overlap الدولة: مصر، حسني مبارك، ج / الدولة: مصر",
+    "panel overlap الخزينة 36.0 مليار $ الاست / الدولة: مصر"
    ]
   },
   {
@@ -461,7 +459,7 @@
    "sample": [
     "contrast 1.73 for \"نظام الحكم\"",
     "contrast 1 for \"جمهورية رئاسية\"",
-    "contrast 1.73 for \"الدستور\""
+    "contrast 1.73 for \"دستور\""
    ]
   },
   {
@@ -469,7 +467,7 @@
    "ok": true,
    "sample": [
     "brief text not fully visible: نظام الحكم",
-    "brief text not fully visible: الدستور",
+    "brief text not fully visible: دستور 1971",
     "brief text not fully visible: الحزب الحاكم"
    ]
   },
@@ -585,8 +583,8 @@
    "ok": true,
    "sample": [
     "section colour on data text: \"جمهورية رئاسية\"",
-    "section colour on data text: \"1971\"",
-    "section colour on data text: \"· عُدّل في\""
+    "section colour on data text: \"عُدّل\"",
+    "section colour on data text: \"2007\""
    ]
   },
   {
