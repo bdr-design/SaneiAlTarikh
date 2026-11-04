@@ -1,0 +1,661 @@
+{
+ "ranAt": "2026-11-04T13:25:16.952Z",
+ "inputs": {
+  "files": [
+   "index.html",
+   "_build/render.js",
+   "_build/sheet.html",
+   "_build/assemble.py",
+   "../../shared/check/panelcheck.js",
+   "../../shared/check/panel_page.py",
+   "../../screen4/R/_build/panel.css",
+   "../../shared/section_identity.css",
+   "../../screen5/A/_build/state.css",
+   "../../screen4/A/index.html",
+   "../../screen1/B3/index.html",
+   "../../shared/devices.json",
+   "_build/markets.css",
+   "../../screen6/A/_build/sheet.html",
+   "../../shared/flag_eg.svg",
+   "../../shared/flags/eg.svg",
+   "../../shared/map_mena_d1.jpg",
+   "../../shared/map_mena_d1_overlay.svg",
+   "header_cairo.jpg",
+   "map_overlay_cairo.svg"
+  ],
+  "sha1": "3b3b607471447f556445d7359409c75f91c9013e"
+ },
+ "cleanIssues": {
+  "i16promax": [],
+  "i16promax_goods_end": [],
+  "i16promax_industry": [],
+  "i16promax_industry_end": [],
+  "i16promax_routes": [],
+  "i16promax_routes_end": [],
+  "i16promax coverage": [],
+  "se": [],
+  "se_goods_end": [],
+  "se_industry": [],
+  "se_industry_end": [],
+  "se_routes": [],
+  "se_routes_end": [],
+  "se_goods_at86": [],
+  "se_goods_at172": [],
+  "se_industry_at86": [],
+  "se coverage": []
+ },
+ "results": [
+  {
+   "name": "type size",
+   "ok": true,
+   "sample": [
+    "font size 17 for \"الأسواق\""
+   ]
+  },
+  {
+   "name": "font weight",
+   "ok": true,
+   "sample": [
+    "font weight 11.5/700 for \"السلع\"",
+    "font weight 11.5/700 for \"الصناعات\"",
+    "font weight 11.5/700 for \"الممرات\""
+   ]
+  },
+  {
+   "name": "off-token colour",
+   "ok": true,
+   "sample": [
+    "text colour off-token rgb(136, 153, 170): \"الأسواق\"",
+    "contrast 2.4 for \"الأسواق\""
+   ]
+  },
+  {
+   "name": "radius",
+   "ok": true,
+   "sample": [
+    "panel radius الأسواق: مصر: 6 (want 12)",
+    "radius 6 for .sheet (want 12)"
+   ]
+  },
+  {
+   "name": "tap in the side inset",
+   "ok": true,
+   "sample": [
+    "text in side inset: 330",
+    "text in side inset: +71%",
+    "text in side inset: لماذا؟"
+   ]
+  },
+  {
+   "name": "panel in the side inset",
+   "ok": true,
+   "sample": [
+    "text in side inset: 330",
+    "text in side inset: +71%",
+    "text in side inset: لماذا؟"
+   ]
+  },
+  {
+   "name": "panel not opaque",
+   "ok": true,
+   "sample": [
+    "panel not opaque: الأسواق: مصر rgba(9, 17, 25, 0.66)",
+    "contrast 3.56 for \"السلع\"",
+    "contrast 4.07 for \"القمح أساسًا · نستورد\""
+   ]
+  },
+  {
+   "name": "see-through panel",
+   "ok": true,
+   "sample": [
+    "panel not opaque (opacity 0.60): الأسواق: مصر",
+    "brief text not fully visible: الأسواق",
+    "brief text not fully visible: مصر · السلع والصناعات والممرات"
+   ]
+  },
+  {
+   "name": "Egypt covered",
+   "ok": true,
+   "sample": [
+    "Nile delta covered by panel الأسواق: مصر",
+    "Nile delta under the hit box of السلع",
+    "Nile delta under the hit box of الصناعات"
+   ]
+  },
+  {
+   "name": "map dimmed",
+   "ok": true,
+   "sample": [
+    "the map is dimmed (opacity 1.00, filter brightness(0.35))"
+   ]
+  },
+  {
+   "name": "map faded",
+   "ok": true,
+   "sample": [
+    "the map is dimmed (opacity 0.30, filter none)"
+   ]
+  },
+  {
+   "name": "scrim over the map",
+   "ok": true,
+   "sample": [
+    "something drawn over the map: DIV (rgba(0, 0, 0, 0.55))",
+    "contrast 1.92 for \"3\""
+   ]
+  },
+  {
+   "name": "sheet width",
+   "ok": true,
+   "sample": [
+    "sheet width 330 (want round(clamp(43% of 832, 340, 380)), or the room the dock leaves if 330..: 358)"
+   ]
+  },
+  {
+   "name": "sheet top",
+   "ok": true,
+   "sample": [
+    "hit overlap الاستقرار 58% / إغلاق الأسواق، العودة إلى ",
+    "panel overlap الدولة: مصر، حسني مبارك، ج / الأسواق: مصر",
+    "panel overlap الخزينة 36.0 مليار $ الاست / الأسواق: مصر"
+   ]
+  },
+  {
+   "name": "dock hidden although it fits",
+   "ok": true,
+   "sample": [
+    "dock hidden although it fits left of the sheet"
+   ]
+  },
+  {
+   "name": "dock shown on the SE",
+   "ok": true,
+   "sample": [
+    "icon over text: r-arr / \"الداخلية والسياسة\"",
+    "icon over text: i / \"أفضل لنا\"",
+    "icon over text: i / \"+18%\""
+   ]
+  },
+  {
+   "name": "left stack moved",
+   "ok": true,
+   "sample": [
+    "HUD element moved from its B3 position: .toast x 70.0..275.6 y 56.0..88.0",
+    "HUD element moved from its B3 position: .btn.mode x 70.0..191.6 y 96.0..128.0",
+    "HUD element moved from its B3 position: .btn.home x 70.0..141.5 y 136.0..168.0"
+   ]
+  },
+  {
+   "name": "two tab bodies",
+   "ok": true,
+   "sample": [
+    "tab bodies shown: goods, industry (want only goods)",
+    "scroll hint not centred in the clear strip under the fade: y 395.0..413.0 (strip 270.8..292.8)"
+   ]
+  },
+  {
+   "name": "two tabs selected",
+   "ok": true,
+   "sample": [
+    "exactly the open tab must be selected"
+   ]
+  },
+  {
+   "name": "tabs not a tab list",
+   "ok": true,
+   "sample": [
+    "a11y: the tabs are not a tab list"
+   ]
+  },
+  {
+   "name": "tabs reversed",
+   "ok": true,
+   "sample": [
+    "tab 2 is not left of tab 1",
+    "tab 3 is not left of tab 2"
+   ]
+  },
+  {
+   "name": "fades wrong",
+   "ok": true,
+   "sample": [
+    "clipped text (bottom): \"كيماويات وأسمدة\" 802.41..881 y 412..429",
+    "clipped text (bottom): \"+15%\" 549..584.89 y 411..430",
+    "fades 0/0 do not match the scroll state (top 0, over 131.0)"
+   ]
+  },
+  {
+   "name": "hint chevron missing",
+   "ok": true,
+   "sample": [
+    "scroll hint chevron missing with content below"
+   ]
+  },
+  {
+   "name": "hint over the content",
+   "ok": true,
+   "sample": [
+    "scroll hint not centred in the clear strip under the fade: y 249.0..267.0 (strip 395.0..417.0)",
+    "scroll hint over text: \"أهم سلعنا · تغيّر السعر العالمي في سنة\""
+   ]
+  },
+  {
+   "name": "map label cut",
+   "ok": true,
+   "sample": [
+    "map label ليبيا sliced by the screen edge or the side inset",
+    "map label إيران sliced by the screen edge or the side inset",
+    "map label إيران squeezed between a panel and the screen edge"
+   ]
+  },
+  {
+   "name": "contrast",
+   "ok": true,
+   "sample": [
+    "contrast 1 for \"القمح عالميًا\"",
+    "contrast 1.66 for \"330\"",
+    "contrast 1.73 for \"$ للطن\""
+   ]
+  },
+  {
+   "name": "dock item not marked",
+   "ok": true,
+   "sample": [
+    "the open section «الاقتصاد» is not marked in the dock"
+   ]
+  },
+  {
+   "name": "identity line missing",
+   "ok": true,
+   "sample": [
+    "panel top line none rgb(67, 192, 138) 2px (want the section colour, 2 pt, at the top)"
+   ]
+  },
+  {
+   "name": "emblem drawn grey",
+   "ok": true,
+   "sample": [
+    "section emblem missing or not in the section colour"
+   ]
+  },
+  {
+   "name": "open tab neutral",
+   "ok": true,
+   "sample": [
+    "open tab not in the section colour"
+   ]
+  },
+  {
+   "name": "section colour on data",
+   "ok": true,
+   "sample": [
+    "section colour on data text: \"مصر\"",
+    "section colour on data text: \"السلع والصناعات والممرات\"",
+    "section colour on data chrome: مصر · السلع والصناعات والم"
+   ]
+  },
+  {
+   "name": "section colour on a rule",
+   "ok": true,
+   "sample": [
+    "section colour on data chrome: أقسام الأسواق"
+   ]
+  },
+  {
+   "name": "money unit",
+   "ok": true,
+   "sample": [
+    "clipped text (top): \"0.4\" 866.09..881 y 153..168",
+    "clipped text (top): \"مليار $\" 838.42..866.09 y 153..168",
+    "money unit: «0.4 مليار» (under 1 billion is written in millions)"
+   ]
+  },
+  {
+   "name": "sign outside its number",
+   "ok": true,
+   "sample": [
+    "clipped text (top): \"تغير +\" 859.06..881 y 153..168",
+    "clipped text (top): \"3\" 853.06..859.06 y 153..168",
+    "a sign outside its number: «تغير +3»"
+   ]
+  },
+  {
+   "name": "colour alone",
+   "ok": true,
+   "sample": [
+    "clipped text (top): \"تراجع\" 860.27..881 y 153..168",
+    "colour alone: «تراجع» has no arrow or icon"
+   ]
+  },
+  {
+   "name": "an image in the sheet",
+   "ok": true,
+   "sample": [
+    "an image in the sheet"
+   ]
+  },
+  {
+   "name": "close not round",
+   "ok": true,
+   "sample": [
+    "close button is not round"
+   ]
+  },
+  {
+   "name": "label without a role",
+   "ok": true,
+   "sample": [
+    "clipped text (top): \"اختبار\" 860.25..881 y 153..168",
+    "a11y: a label VoiceOver may skip (no role): «اختبار»"
+   ]
+  },
+  {
+   "name": "brief text hidden",
+   "ok": true,
+   "sample": [
+    "brief text not fully visible: 330"
+   ]
+  },
+  {
+   "name": "18 pt misuse",
+   "ok": true,
+   "sample": [
+    "18 pt is for the panel's name and the adjusted values only: \"+71%\"",
+    "18 pt is for the panel's name and the adjusted values only: \"سنويًا\"",
+    "18 pt is for the panel's name and the adjusted values only: \"+0.4\""
+   ]
+  },
+  {
+   "name": "control height",
+   "ok": true,
+   "sample": [
+    "control height 40.00 for .r-tab (want 44): السلع",
+    "control height 40.00 for .r-tab (want 44): الصناعات",
+    "control height 40.00 for .r-tab (want 44): الممرات"
+   ]
+  },
+  {
+   "name": "gap",
+   "ok": true,
+   "sample": [
+    "gap 6 on القمح عالميًا 330$ للطن +7",
+    "gap 6 on القمح عالميًا 330$ للطن +7",
+    "gap 6 on تضخم الغذاء 17.2% +0.4 نقط"
+   ]
+  },
+  {
+   "name": "icon size",
+   "ok": true,
+   "sample": [
+    "icon size 19x19 (want 17): i",
+    "icon size 19x19 (want 17): i",
+    "icon size 19x19 (want 17): i"
+   ]
+  },
+  {
+   "name": "text overlap",
+   "ok": true,
+   "sample": [
+    "text overlap \"الأسواق\" / \"مصر\"",
+    "text overlap \"الأسواق\" / \"·\"",
+    "text overlap \"الأسواق\" / \"السلع والصناعات والممرات\""
+   ]
+  },
+  {
+   "name": "clipped text",
+   "ok": true,
+   "sample": [
+    "clipped text (sides): \"القمح عالميًا\" 849.59..903 y 161..178",
+    "text outside the sheet's 12 pt padding: \"القمح عالميًا\"",
+    "clipped text (sides): \"330\" 888.59..921 y 179..206"
+   ]
+  },
+  {
+   "name": "dock underline missing",
+   "ok": true,
+   "sample": [
+    "dock underline missing or off: none 16pxx2px rgb(67, 192, 138) (want 16 x 2 in the section colour)"
+   ]
+  },
+  {
+   "name": "closed dock item coloured",
+   "ok": true,
+   "sample": [
+    "dock item 1 (closed) not neutral as on B3: rgb(67, 192, 138) / rgb(234, 242, 247)",
+    "dock item 3 (closed) not neutral as on B3: rgb(67, 192, 138) / rgb(234, 242, 247)",
+    "dock item 4 (closed) not neutral as on B3: rgb(67, 192, 138) / rgb(234, 242, 247)"
+   ]
+  },
+  {
+   "name": "identity line colour",
+   "ok": true,
+   "sample": [
+    "panel top line \"\" rgb(63, 224, 208) 2px (want the section colour, 2 pt, at the top)"
+   ]
+  },
+  {
+   "name": "closed tabs like the open one",
+   "ok": true,
+   "sample": [
+    "open tab not in the section colour",
+    "closed tab not in the secondary grey: الصناعات rgb(234, 242, 247)",
+    "closed tab not in the secondary grey: الممرات rgb(234, 242, 247)"
+   ]
+  },
+  {
+   "name": "emblem size",
+   "ok": true,
+   "sample": [
+    "size 28.0x32.0 for .s-emb (want 32 x 32)"
+   ]
+  },
+  {
+   "name": "tile icons cyan",
+   "ok": true,
+   "sample": [
+    "white touch off: .r-tile color rgb(127, 233, 255) (want rgb(234, 242, 247))"
+   ]
+  },
+  {
+   "name": "faint text",
+   "ok": true,
+   "sample": [
+    "brief text not fully visible: +0.4 نقطة شهريًا",
+    "brief text not fully visible: لا نقص",
+    "contrast 2.21 for \"+71%\""
+   ]
+  },
+  {
+   "name": "why without its subject",
+   "ok": true,
+   "sample": [
+    "a11y: «لماذا؟» does not name its subject «تضخم الغذاء»"
+   ]
+  },
+  {
+   "name": "row read in part",
+   "ok": true,
+   "sample": [
+    "a11y: «جزء» does not read all it shows: حبوب القمح أساسًا نستورد",
+    "a11y: «حبوب» does not say which way the price moves",
+    "a11y: «حبوب» does not say whether it helps or hurts"
+   ]
+  },
+  {
+   "name": "a long headline label",
+   "ok": true,
+   "sample": [
+    "clipped text (sides): \"عنوان طويل جدًا لا يتسع لخانته أبدًا\" 385.38..539.25 y 161..178",
+    "text outside the sheet's 12 pt padding: \"عنوان طويل جدًا لا يتسع لخانته أبدًا\"",
+    "clipped text (sides): \"1\" 528.44..539.25 y 179..206"
+   ]
+  },
+  {
+   "name": "text wider than its box",
+   "ok": true,
+   "sample": [
+    "text wider than its box: «أهم سلعنا · تغيّر السعر » (168 in 20)"
+   ]
+  },
+  {
+   "name": "a long status cell",
+   "ok": true,
+   "sample": [
+    "clipped text (sides): \"قيمة طويلة جدًا لا تتسع لنصف الجدول\" 416.53..613.3 y 157.5..176.5",
+    "text outside the sheet's 12 pt padding: \"قيمة طويلة جدًا لا تتسع لنصف الجدول\"",
+    "horizontal overflow in خانةقيمة طويلة جدًا لا تتس"
+   ]
+  },
+  {
+   "name": "% before its number",
+   "ok": true,
+   "sample": [
+    "% shown before its number: \"نسبة 20%\"",
+    "colour alone: «نسبة 20%» has no arrow or icon",
+    "the wheat headline is not amber with the grain row's rise (71%)"
+   ]
+  },
+  {
+   "name": "wheat icon not amber",
+   "ok": true,
+   "sample": [
+    "colour alone: «330» (its label's icon is not in its colour)"
+   ]
+  },
+  {
+   "name": "a disruption changed",
+   "ok": true,
+   "sample": [
+    "a11y: «قناة السويس، نملكها، الر» does not read all it shows: شديد",
+    "the chokepoints are not the brief's"
+   ]
+  },
+  {
+   "name": "price direction unsaid",
+   "ok": true,
+   "sample": [
+    "a11y: «حبوب» does not say which way the price moves"
+   ]
+  },
+  {
+   "name": "import rise in blue",
+   "ok": true,
+   "sample": [
+    "«حبوب»: a rise in an import not amber"
+   ]
+  },
+  {
+   "name": "export rise in amber",
+   "ok": true,
+   "sample": [
+    "«نفط خام»: a rise in an export not blue"
+   ]
+  },
+  {
+   "name": "good arrow against its sign",
+   "ok": true,
+   "sample": [
+    "«غاز طبيعي»: the arrow does not agree with its sign"
+   ]
+  },
+  {
+   "name": "good silent on its effect",
+   "ok": true,
+   "sample": [
+    "a11y: «آلات ومعدات، نستورد 70%:» does not read all it shows: أسوأ لنا",
+    "a11y: «آلات ومعدات» does not say whether it helps or hurts"
+   ]
+  },
+  {
+   "name": "wheat off the grain row",
+   "ok": true,
+   "sample": [
+    "the wheat headline is not amber with the grain row's rise (71%)"
+   ]
+  },
+  {
+   "name": "a good changed",
+   "ok": true,
+   "sample": [
+    "% shown before its number: \"نستورد 40% · الخبز مدعوم\"",
+    "a11y: «حبوب، القمح أساسًا، نستو» does not read all it shows: الخبز مدعوم 40",
+    "«حبوب» shows «نستورد 40% · الخبز مدعوم» 71, the brief «القمح أساسًا · نستورد 60%» 71"
+   ]
+  },
+  {
+   "name": "industries unsorted",
+   "ok": true,
+   "sample": [
+    "the industries are not the brief's",
+    "the industries are not sorted by capacity used",
+    "«التكرير»: the margin is not «جيد»"
+   ]
+  },
+  {
+   "name": "bar off its share",
+   "ok": true,
+   "sample": [
+    "«النفط»: the bar shows 50%, the row 92%"
+   ]
+  },
+  {
+   "name": "weak margin unsaid",
+   "ok": true,
+   "sample": [
+    "«المنسوجات»: a share under 70% must say «تشغيل منخفض», and only then"
+   ]
+  },
+  {
+   "name": "margins against the order",
+   "ok": true,
+   "sample": [
+    "a11y: «التكرير، هامش متوسط: الت» does not read all it shows: ضعيف",
+    "«التكرير»: the margin is not «متوسط»",
+    "the margins do not follow capacity used (a better margin runs lower)"
+   ]
+  },
+  {
+   "name": "verdict hidden",
+   "ok": true,
+   "sample": [
+    "«حبوب» does not show in words whether it helps or hurts"
+   ]
+  },
+  {
+   "name": "Suez fees off",
+   "ok": true,
+   "sample": [
+    "a11y: «قناة السويس، نملكها، الر» does not read all it shows: 5 2",
+    "the Suez fees 5.2 are not the economy panel's 4.8"
+   ]
+  },
+  {
+   "name": "a chokepoint lost",
+   "ok": true,
+   "sample": [
+    "the chokepoints are not the brief's",
+    "brief text missing: مضيق هرمز",
+    "brief text missing: مضيق هرمز"
+   ]
+  },
+  {
+   "name": "link silent",
+   "ok": true,
+   "sample": [
+    "a11y: a link row does not say where it leads"
+   ]
+  },
+  {
+   "name": "coverage reports a string no view shows",
+   "ok": true,
+   "sample": [
+    "goods: never shown clear of the fades in any view: نص غير معروض للاختبار"
+   ],
+   "midViewsAdd": [
+    "goods: never shown clear of the fades in any view: مشتقات نفطية",
+    "goods: never shown clear of the fades in any view: نصدّر 25% من الإنتاج",
+    "goods: never shown clear of the fades in any view: وقود مكرر · نستورد 30%"
+   ]
+  }
+ ]
+}
