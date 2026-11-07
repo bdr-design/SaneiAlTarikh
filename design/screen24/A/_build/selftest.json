@@ -1,0 +1,227 @@
+{
+ "inputs": {
+  "files": [
+   "index.html",
+   "_build/render.js",
+   "_build/assemble.py",
+   "_build/card.html",
+   "_build/chooser.css",
+   "_build/place.js",
+   "_build/civ_path.json",
+   "world_d1_overlay_civ.svg",
+   "../../screen3/p2B/index.html",
+   "../../screen3/p2B/world_d1_overlay_declutter.svg",
+   "../../shared/world_d1.jpg",
+   "../../shared/devices.json",
+   "../../shared/flags/ci.svg",
+   "../../shared/flags/cn.svg",
+   "../../shared/flags/eg.svg",
+   "../../shared/flags/iq.svg",
+   "../../shared/flags/ir.svg",
+   "../../shared/flags/jo.svg",
+   "../../shared/flags/ly_2011.svg",
+   "../../shared/flags/ru.svg",
+   "../../shared/flags/sa.svg",
+   "../../shared/flags/sd.svg",
+   "../../shared/flags/sy.svg",
+   "../../shared/flags/tn.svg",
+   "../../shared/flags/tr.svg",
+   "../../shared/flags/us.svg",
+   "../../shared/flags/ye.svg"
+  ],
+  "sha1": "5b2103571c34a7815dd61c064f4e6d65795b0521"
+ },
+ "results": [
+  {
+   "name": "() => { const r = document.querySelectorAll('.g-row')[1]; r.",
+   "ok": true
+  },
+  {
+   "name": "() => { const r = document.querySelectorAll('.g-row'); r[0].",
+   "ok": true
+  },
+  {
+   "name": "() => { document.querySelector('.gov').removeAttribute('role",
+   "ok": true
+  },
+  {
+   "name": "() => { document.querySelectorAll('.g-row')[1].removeAttribu",
+   "ok": true
+  },
+  {
+   "name": "() => { document.querySelectorAll('.g-row .g-tx span')[1].te",
+   "ok": true
+  },
+  {
+   "name": "() => { const r = document.querySelectorAll('.g-row')[1]; r.",
+   "ok": true
+  },
+  {
+   "name": "() => { const r = document.querySelectorAll('.g-row')[1]; r.",
+   "ok": true
+  },
+  {
+   "name": "() => { const r = document.querySelectorAll('.g-row')[1]; r.",
+   "ok": true
+  },
+  {
+   "name": ".gov .gk { display: none !important; }",
+   "ok": true
+  },
+  {
+   "name": "() => { document.getElementById('govAsk').lastChild.textCont",
+   "ok": true
+  },
+  {
+   "name": ".g-row.on .g-ck { display: none !important; }",
+   "ok": true
+  },
+  {
+   "name": "() => { document.querySelector('.g-row.on .g-ck').remove(); ",
+   "ok": true
+  },
+  {
+   "name": ".g-row.on { background: rgba(234, 242, 247, 0.04) !important; box-shadow: inset 0 0 0 1px rgba(127, 233, 255, 0.10) !important; }",
+   "ok": true
+  },
+  {
+   "name": "() => { document.querySelector('.sel .fact').remove(); }",
+   "ok": true
+  },
+  {
+   "name": ".fact .v.d4 { color: var(--amber) !important; }",
+   "ok": true
+  },
+  {
+   "name": "() => { document.querySelector('.sel .flag img').setAttribut",
+   "ok": true
+  },
+  {
+   "name": "() => { const a = document.querySelector('.chip.on'); a.pare",
+   "ok": true
+  },
+  {
+   "name": "() => { document.querySelector('.search .cnt').textContent =",
+   "ok": true
+  },
+  {
+   "name": ".search { right: calc(var(--gutter) + var(--card-w) + 20px) !important; }",
+   "ok": true
+  },
+  {
+   "name": ".card.sel { top: 60px !important; }",
+   "ok": true
+  },
+  {
+   "name": ".card.sel { top: 81px !important; }",
+   "ok": true
+  },
+  {
+   "name": "() => { const r = document.querySelector('.g-row').getBoundi",
+   "ok": true
+  },
+  {
+   "name": "() => { const s = document.querySelector('.search').getBound",
+   "ok": true
+  },
+  {
+   "name": "() => { const l = document.getElementById('leadLine'), x = +",
+   "ok": true
+  },
+  {
+   "name": "() => { window.__EG = Object.assign({}, window.__EG, { x0: w",
+   "ok": true
+  },
+  {
+   "name": "() => { document.getElementById('leadDot').setAttribute('cy'",
+   "ok": true
+  },
+  {
+   "name": ".map img.ov { -webkit-mask-image: none !important; mask-image: none !important; }",
+   "ok": true
+  },
+  {
+   "name": "i16promax: .map img.ov { -webkit-mask-image: none !important; mask-image: none !important; }",
+   "ok": true
+  },
+  {
+   "name": "i16pro: .map img.ov { -webkit-mask-image: none !important; mask-image: none !important; }",
+   "ok": true
+  },
+  {
+   "name": ".frost::after { background: rgba(9, 17, 25, 0.66) !important; }",
+   "ok": true
+  },
+  {
+   "name": ".card.sel { -webkit-backdrop-filter: blur(10px) !important; backdrop-filter: blur(10px) !important; }",
+   "ok": true
+  },
+  {
+   "name": "() => { document.querySelectorAll('.g-row')[1].setAttribute(",
+   "ok": true
+  },
+  {
+   "name": ".g-row { min-height: 30px !important; }",
+   "ok": true
+  },
+  {
+   "name": "() => { document.querySelectorAll('.g-row .g-ck use')[1].set",
+   "ok": true
+  },
+  {
+   "name": ".g-row .g-ck { color: var(--cyan) !important; }",
+   "ok": true
+  },
+  {
+   "name": ".g-row .g-ck { order: 9; }",
+   "ok": true
+  },
+  {
+   "name": "() => { document.querySelector('.sel').setAttribute('role', ",
+   "ok": true
+  },
+  {
+   "name": "() => { document.querySelector('.chip.on .nm').textContent =",
+   "ok": true
+  },
+  {
+   "name": ".card.sel { right: 300px !important; }",
+   "ok": true
+  },
+  {
+   "name": ".search { width: 150px !important; }",
+   "ok": true
+  },
+  {
+   "name": ".chip:nth-child(n+5) { display: none !important; }",
+   "ok": true
+  },
+  {
+   "name": ".bottom { bottom: 2px !important; }",
+   "ok": true
+  },
+  {
+   "name": ".top { left: 4px !important; }",
+   "ok": true
+  },
+  {
+   "name": ".ctx { transform: translateX(200px); }",
+   "ok": true
+  },
+  {
+   "name": ".fact .v { font-size: 12px !important; } .sel .nm { text-overflow: ellipsis; overflow: hidden; }",
+   "ok": true
+  },
+  {
+   "name": ".strip { -webkit-mask-image: linear-gradient(to right, rgba(0,0,0,0) 0, #000 120px) !important; mask-image: linear-gradient(to right, rgba(0,0,0,0) 0, #000 120px) !important; }",
+   "ok": true
+  },
+  {
+   "name": "() => { const m = window.__map, c = document.querySelector('",
+   "ok": true
+  }
+ ],
+ "cleanIssues": {
+  "i14": []
+ }
+}

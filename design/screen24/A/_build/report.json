@@ -1,0 +1,1012 @@
+{
+ "se": {
+  "device": "667x375 side 0 bottom 0 none",
+  "inputs": {
+   "files": [
+    "index.html",
+    "_build/render.js",
+    "_build/assemble.py",
+    "_build/card.html",
+    "_build/chooser.css",
+    "_build/place.js",
+    "_build/civ_path.json",
+    "world_d1_overlay_civ.svg",
+    "../../screen3/p2B/index.html",
+    "../../screen3/p2B/world_d1_overlay_declutter.svg",
+    "../../shared/world_d1.jpg",
+    "../../shared/devices.json",
+    "../../shared/flags/ci.svg",
+    "../../shared/flags/cn.svg",
+    "../../shared/flags/eg.svg",
+    "../../shared/flags/iq.svg",
+    "../../shared/flags/ir.svg",
+    "../../shared/flags/jo.svg",
+    "../../shared/flags/ly_2011.svg",
+    "../../shared/flags/ru.svg",
+    "../../shared/flags/sa.svg",
+    "../../shared/flags/sd.svg",
+    "../../shared/flags/sy.svg",
+    "../../shared/flags/tn.svg",
+    "../../shared/flags/tr.svg",
+    "../../shared/flags/us.svg",
+    "../../shared/flags/ye.svg"
+   ],
+   "sha1": "5b2103571c34a7815dd61c064f4e6d65795b0521"
+  },
+  "views": {
+   "main": {
+    "issueCount": 0,
+    "png": true
+   }
+  },
+  "pngs": [
+   "se.png"
+  ],
+  "pngSha1": {
+   "se.png": "a29d4c7e828fc0253060141a878cdc5e927f33ea"
+  },
+  "issues": [],
+  "lowContrast": [],
+  "audit": {
+   "stripEnd": [
+    "ليبيا hint 0.95..1.00"
+   ],
+   "mapNamesHidden": [
+    "السودان",
+    "جنوب أفريقيا",
+    "نيجيريا",
+    "النيجر",
+    "مالي",
+    "مدغشقر",
+    "غينيا",
+    "غانا",
+    "بوركينا فاسو"
+   ],
+   "layout": {
+    ".top": {
+     "x0": 8,
+     "y0": 8,
+     "x1": 659,
+     "y1": 44,
+     "w": 651,
+     "h": 36
+    },
+    ".search": {
+     "x0": 119,
+     "y0": 52,
+     "x1": 383,
+     "y1": 84,
+     "w": 264,
+     "h": 32
+    },
+    ".sel": {
+     "x0": 395,
+     "y0": 52,
+     "x1": 659,
+     "y1": 292,
+     "w": 264,
+     "h": 240
+    },
+    ".bottom": {
+     "x0": 8,
+     "y0": 323,
+     "x1": 659,
+     "y1": 367,
+     "w": 651,
+     "h": 44
+    }
+   },
+   "map": {
+    "s": 0.8522727272727273,
+    "L": -649.4943181818181,
+    "T": -498.45454545454544,
+    "country": {
+     "x0": 324.22727272727275,
+     "x1": 359,
+     "y0": 91.99999999999994,
+     "y1": 128.4772727272728
+    }
+   },
+   "card": {
+    "y0": 52,
+    "y1": 311,
+    "h": 240,
+    "top": 52,
+    "fits": true,
+    "fit": 0
+   },
+   "fit": {
+    "level": 0
+   },
+   "chipsShown": 3,
+   "fadedContrast": [
+    {
+     "t": "ليبيا",
+     "fs": 13,
+     "faded": true,
+     "p95": 16.37,
+     "tail12": 16.37
+    },
+    {
+     "t": "صعبة جدًا",
+     "fs": 10,
+     "faded": true,
+     "p95": 6.39,
+     "tail12": 6.02
+    }
+   ]
+  },
+  "typeSeen": {
+   "13/600": 24,
+   "11.5/600": 7,
+   "11.5/500": 3,
+   "10/500": 21,
+   "14/700": 2
+  }
+ },
+ "mini": {
+  "device": "812x375 side 50 bottom 21 notch",
+  "inputs": {
+   "files": [
+    "index.html",
+    "_build/render.js",
+    "_build/assemble.py",
+    "_build/card.html",
+    "_build/chooser.css",
+    "_build/place.js",
+    "_build/civ_path.json",
+    "world_d1_overlay_civ.svg",
+    "../../screen3/p2B/index.html",
+    "../../screen3/p2B/world_d1_overlay_declutter.svg",
+    "../../shared/world_d1.jpg",
+    "../../shared/devices.json",
+    "../../shared/flags/ci.svg",
+    "../../shared/flags/cn.svg",
+    "../../shared/flags/eg.svg",
+    "../../shared/flags/iq.svg",
+    "../../shared/flags/ir.svg",
+    "../../shared/flags/jo.svg",
+    "../../shared/flags/ly_2011.svg",
+    "../../shared/flags/ru.svg",
+    "../../shared/flags/sa.svg",
+    "../../shared/flags/sd.svg",
+    "../../shared/flags/sy.svg",
+    "../../shared/flags/tn.svg",
+    "../../shared/flags/tr.svg",
+    "../../shared/flags/us.svg",
+    "../../shared/flags/ye.svg"
+   ],
+   "sha1": "5b2103571c34a7815dd61c064f4e6d65795b0521"
+  },
+  "views": {
+   "main": {
+    "issueCount": 0,
+    "png": true
+   }
+  },
+  "pngs": [
+   "mini.png"
+  ],
+  "pngSha1": {
+   "mini.png": "1d18196fd41b2a1a303d2dd2d76768c592a9664c"
+  },
+  "issues": [],
+  "lowContrast": [],
+  "audit": {
+   "stripEnd": [
+    "تونس hint 0.96..1.00"
+   ],
+   "mapNamesHidden": [
+    "السودان",
+    "جنوب أفريقيا",
+    "نيجيريا",
+    "النيجر",
+    "مالي",
+    "مدغشقر",
+    "غينيا",
+    "غانا",
+    "بوركينا فاسو"
+   ],
+   "layout": {
+    ".top": {
+     "x0": 50,
+     "y0": 8,
+     "x1": 762,
+     "y1": 44,
+     "w": 712,
+     "h": 36
+    },
+    ".search": {
+     "x0": 222,
+     "y0": 52,
+     "x1": 486,
+     "y1": 84,
+     "w": 264,
+     "h": 32
+    },
+    ".sel": {
+     "x0": 498,
+     "y0": 52,
+     "x1": 762,
+     "y1": 292,
+     "w": 264,
+     "h": 240
+    },
+    ".bottom": {
+     "x0": 50,
+     "y0": 306,
+     "x1": 762,
+     "y1": 350,
+     "w": 712,
+     "h": 44
+    }
+   },
+   "map": {
+    "s": 0.8522727272727273,
+    "L": -546.4943181818181,
+    "T": -498.45454545454544,
+    "country": {
+     "x0": 427.22727272727275,
+     "x1": 462,
+     "y0": 91.99999999999994,
+     "y1": 128.4772727272728
+    }
+   },
+   "card": {
+    "y0": 52,
+    "y1": 294,
+    "h": 240,
+    "top": 52,
+    "fits": true,
+    "fit": 0
+   },
+   "fit": {
+    "level": 0
+   },
+   "chipsShown": 4,
+   "fadedContrast": [
+    {
+     "t": "تونس",
+     "fs": 13,
+     "faded": true,
+     "p95": 16.37,
+     "tail12": 16.37
+    },
+    {
+     "t": "صعبة جدًا",
+     "fs": 10,
+     "faded": true,
+     "p95": 6.39,
+     "tail12": 6.01
+    }
+   ]
+  },
+  "typeSeen": {
+   "13/600": 24,
+   "11.5/600": 7,
+   "11.5/500": 3,
+   "10/500": 21,
+   "14/700": 2
+  }
+ },
+ "i14": {
+  "device": "844x390 side 47 bottom 21 notch",
+  "inputs": {
+   "files": [
+    "index.html",
+    "_build/render.js",
+    "_build/assemble.py",
+    "_build/card.html",
+    "_build/chooser.css",
+    "_build/place.js",
+    "_build/civ_path.json",
+    "world_d1_overlay_civ.svg",
+    "../../screen3/p2B/index.html",
+    "../../screen3/p2B/world_d1_overlay_declutter.svg",
+    "../../shared/world_d1.jpg",
+    "../../shared/devices.json",
+    "../../shared/flags/ci.svg",
+    "../../shared/flags/cn.svg",
+    "../../shared/flags/eg.svg",
+    "../../shared/flags/iq.svg",
+    "../../shared/flags/ir.svg",
+    "../../shared/flags/jo.svg",
+    "../../shared/flags/ly_2011.svg",
+    "../../shared/flags/ru.svg",
+    "../../shared/flags/sa.svg",
+    "../../shared/flags/sd.svg",
+    "../../shared/flags/sy.svg",
+    "../../shared/flags/tn.svg",
+    "../../shared/flags/tr.svg",
+    "../../shared/flags/us.svg",
+    "../../shared/flags/ye.svg"
+   ],
+   "sha1": "5b2103571c34a7815dd61c064f4e6d65795b0521"
+  },
+  "views": {
+   "main": {
+    "issueCount": 0,
+    "png": true
+   }
+  },
+  "pngs": [
+   "i14.png"
+  ],
+  "pngSha1": {
+   "i14.png": "cec34ab72777dab87ef371fb8fca07b940917e7e"
+  },
+  "issues": [],
+  "lowContrast": [],
+  "audit": {
+   "stripEnd": [
+    "تونس hint 0.96..1.00"
+   ],
+   "mapNamesHidden": [
+    "اليمن",
+    "السودان",
+    "جنوب أفريقيا",
+    "نيجيريا",
+    "النيجر",
+    "مالي",
+    "مدغشقر",
+    "غينيا",
+    "غانا",
+    "بوركينا فاسو"
+   ],
+   "layout": {
+    ".top": {
+     "x0": 47,
+     "y0": 8,
+     "x1": 797,
+     "y1": 44,
+     "w": 750,
+     "h": 36
+    },
+    ".search": {
+     "x0": 257,
+     "y0": 52,
+     "x1": 521,
+     "y1": 84,
+     "w": 264,
+     "h": 32
+    },
+    ".sel": {
+     "x0": 533,
+     "y0": 52,
+     "x1": 797,
+     "y1": 292,
+     "w": 264,
+     "h": 240
+    },
+    ".bottom": {
+     "x0": 47,
+     "y0": 321,
+     "x1": 797,
+     "y1": 365,
+     "w": 750,
+     "h": 44
+    }
+   },
+   "map": {
+    "s": 0.8863636363636364,
+    "L": -551.834090909091,
+    "T": -522.0727272727272,
+    "country": {
+     "x0": 460.83636363636356,
+     "x1": 497,
+     "y0": 92,
+     "y1": 129.9363636363637
+    }
+   },
+   "card": {
+    "y0": 52,
+    "y1": 309,
+    "h": 240,
+    "top": 52,
+    "fits": true,
+    "fit": 0
+   },
+   "fit": {
+    "level": 0
+   },
+   "chipsShown": 4,
+   "fadedContrast": [
+    {
+     "t": "تونس",
+     "fs": 13,
+     "faded": true,
+     "p95": 16.37,
+     "tail12": 16.37
+    },
+    {
+     "t": "صعبة جدًا",
+     "fs": 10,
+     "faded": true,
+     "p95": 6.39,
+     "tail12": 6.02
+    }
+   ]
+  },
+  "typeSeen": {
+   "13/600": 24,
+   "11.5/600": 7,
+   "11.5/500": 3,
+   "10/500": 21,
+   "14/700": 2
+  }
+ },
+ "i16": {
+  "device": "852x393 side 59 bottom 21 island",
+  "inputs": {
+   "files": [
+    "index.html",
+    "_build/render.js",
+    "_build/assemble.py",
+    "_build/card.html",
+    "_build/chooser.css",
+    "_build/place.js",
+    "_build/civ_path.json",
+    "world_d1_overlay_civ.svg",
+    "../../screen3/p2B/index.html",
+    "../../screen3/p2B/world_d1_overlay_declutter.svg",
+    "../../shared/world_d1.jpg",
+    "../../shared/devices.json",
+    "../../shared/flags/ci.svg",
+    "../../shared/flags/cn.svg",
+    "../../shared/flags/eg.svg",
+    "../../shared/flags/iq.svg",
+    "../../shared/flags/ir.svg",
+    "../../shared/flags/jo.svg",
+    "../../shared/flags/ly_2011.svg",
+    "../../shared/flags/ru.svg",
+    "../../shared/flags/sa.svg",
+    "../../shared/flags/sd.svg",
+    "../../shared/flags/sy.svg",
+    "../../shared/flags/tn.svg",
+    "../../shared/flags/tr.svg",
+    "../../shared/flags/us.svg",
+    "../../shared/flags/ye.svg"
+   ],
+   "sha1": "5b2103571c34a7815dd61c064f4e6d65795b0521"
+  },
+  "views": {
+   "main": {
+    "issueCount": 0,
+    "png": true
+   }
+  },
+  "pngs": [
+   "i16.png"
+  ],
+  "pngSha1": {
+   "i16.png": "c093c60e4be83397c60f4839b0861e45e69017b5"
+  },
+  "issues": [],
+  "lowContrast": [],
+  "audit": {
+   "stripEnd": [
+    "تونس hint 0.96..1.00"
+   ],
+   "mapNamesHidden": [
+    "اليمن",
+    "السودان",
+    "جنوب أفريقيا",
+    "النيجر",
+    "مدغشقر",
+    "غينيا",
+    "غانا",
+    "بوركينا فاسو"
+   ],
+   "layout": {
+    ".top": {
+     "x0": 59,
+     "y0": 8,
+     "x1": 793,
+     "y1": 44,
+     "w": 734,
+     "h": 36
+    },
+    ".search": {
+     "x0": 253,
+     "y0": 52,
+     "x1": 517,
+     "y1": 84,
+     "w": 264,
+     "h": 32
+    },
+    ".sel": {
+     "x0": 529,
+     "y0": 52,
+     "x1": 793,
+     "y1": 292,
+     "w": 264,
+     "h": 240
+    },
+    ".bottom": {
+     "x0": 59,
+     "y0": 324,
+     "x1": 793,
+     "y1": 368,
+     "w": 734,
+     "h": 44
+    }
+   },
+   "map": {
+    "s": 0.8931818181818182,
+    "L": -563.9020454545455,
+    "T": -526.7963636363636,
+    "country": {
+     "x0": 456.55818181818177,
+     "x1": 493,
+     "y0": 92,
+     "y1": 130.22818181818184
+    }
+   },
+   "card": {
+    "y0": 52,
+    "y1": 312,
+    "h": 240,
+    "top": 52,
+    "fits": true,
+    "fit": 0
+   },
+   "fit": {
+    "level": 0
+   },
+   "chipsShown": 4,
+   "fadedContrast": [
+    {
+     "t": "تونس",
+     "fs": 13,
+     "faded": true,
+     "p95": 16.37,
+     "tail12": 16.37
+    },
+    {
+     "t": "صعبة جدًا",
+     "fs": 10,
+     "faded": true,
+     "p95": 6.39,
+     "tail12": 6.02
+    }
+   ]
+  },
+  "typeSeen": {
+   "13/600": 24,
+   "11.5/600": 7,
+   "11.5/500": 3,
+   "10/500": 21,
+   "14/700": 2
+  }
+ },
+ "i16pro": {
+  "device": "874x402 side 62 bottom 21 island",
+  "inputs": {
+   "files": [
+    "index.html",
+    "_build/render.js",
+    "_build/assemble.py",
+    "_build/card.html",
+    "_build/chooser.css",
+    "_build/place.js",
+    "_build/civ_path.json",
+    "world_d1_overlay_civ.svg",
+    "../../screen3/p2B/index.html",
+    "../../screen3/p2B/world_d1_overlay_declutter.svg",
+    "../../shared/world_d1.jpg",
+    "../../shared/devices.json",
+    "../../shared/flags/ci.svg",
+    "../../shared/flags/cn.svg",
+    "../../shared/flags/eg.svg",
+    "../../shared/flags/iq.svg",
+    "../../shared/flags/ir.svg",
+    "../../shared/flags/jo.svg",
+    "../../shared/flags/ly_2011.svg",
+    "../../shared/flags/ru.svg",
+    "../../shared/flags/sa.svg",
+    "../../shared/flags/sd.svg",
+    "../../shared/flags/sy.svg",
+    "../../shared/flags/tn.svg",
+    "../../shared/flags/tr.svg",
+    "../../shared/flags/us.svg",
+    "../../shared/flags/ye.svg"
+   ],
+   "sha1": "5b2103571c34a7815dd61c064f4e6d65795b0521"
+  },
+  "views": {
+   "main": {
+    "issueCount": 0,
+    "png": true
+   }
+  },
+  "pngs": [
+   "i16pro.png"
+  ],
+  "pngSha1": {
+   "i16pro.png": "86c144fcee11afad4b21af64b0e0e0bc9f37d72d"
+  },
+  "issues": [],
+  "lowContrast": [],
+  "audit": {
+   "stripEnd": [
+    "تونس hint 0.96..1.00"
+   ],
+   "mapNamesHidden": [
+    "اليمن",
+    "السودان",
+    "جنوب أفريقيا",
+    "النيجر",
+    "مدغشقر",
+    "غينيا",
+    "غانا",
+    "بوركينا فاسو"
+   ],
+   "layout": {
+    ".top": {
+     "x0": 62,
+     "y0": 8,
+     "x1": 812,
+     "y1": 44,
+     "w": 750,
+     "h": 36
+    },
+    ".search": {
+     "x0": 272,
+     "y0": 52,
+     "x1": 536,
+     "y1": 84,
+     "w": 264,
+     "h": 32
+    },
+    ".sel": {
+     "x0": 548,
+     "y0": 52,
+     "x1": 812,
+     "y1": 292,
+     "w": 264,
+     "h": 240
+    },
+    ".bottom": {
+     "x0": 62,
+     "y0": 333,
+     "x1": 812,
+     "y1": 377,
+     "w": 750,
+     "h": 44
+    }
+   },
+   "map": {
+    "s": 0.9136363636363637,
+    "L": -569.1059090909091,
+    "T": -540.9672727272726,
+    "country": {
+     "x0": 474.7236363636364,
+     "x1": 512,
+     "y0": 92.00000000000011,
+     "y1": 131.1036363636365
+    }
+   },
+   "card": {
+    "y0": 52,
+    "y1": 321,
+    "h": 240,
+    "top": 52,
+    "fits": true,
+    "fit": 0
+   },
+   "fit": {
+    "level": 0
+   },
+   "chipsShown": 4,
+   "fadedContrast": [
+    {
+     "t": "تونس",
+     "fs": 13,
+     "faded": true,
+     "p95": 16.37,
+     "tail12": 16.37
+    },
+    {
+     "t": "صعبة جدًا",
+     "fs": 10,
+     "faded": true,
+     "p95": 6.39,
+     "tail12": 6.02
+    }
+   ]
+  },
+  "typeSeen": {
+   "13/600": 24,
+   "11.5/600": 7,
+   "11.5/500": 3,
+   "10/500": 21,
+   "14/700": 2
+  }
+ },
+ "i11": {
+  "device": "896x414 side 48 bottom 21 notch",
+  "inputs": {
+   "files": [
+    "index.html",
+    "_build/render.js",
+    "_build/assemble.py",
+    "_build/card.html",
+    "_build/chooser.css",
+    "_build/place.js",
+    "_build/civ_path.json",
+    "world_d1_overlay_civ.svg",
+    "../../screen3/p2B/index.html",
+    "../../screen3/p2B/world_d1_overlay_declutter.svg",
+    "../../shared/world_d1.jpg",
+    "../../shared/devices.json",
+    "../../shared/flags/ci.svg",
+    "../../shared/flags/cn.svg",
+    "../../shared/flags/eg.svg",
+    "../../shared/flags/iq.svg",
+    "../../shared/flags/ir.svg",
+    "../../shared/flags/jo.svg",
+    "../../shared/flags/ly_2011.svg",
+    "../../shared/flags/ru.svg",
+    "../../shared/flags/sa.svg",
+    "../../shared/flags/sd.svg",
+    "../../shared/flags/sy.svg",
+    "../../shared/flags/tn.svg",
+    "../../shared/flags/tr.svg",
+    "../../shared/flags/us.svg",
+    "../../shared/flags/ye.svg"
+   ],
+   "sha1": "5b2103571c34a7815dd61c064f4e6d65795b0521"
+  },
+  "views": {
+   "main": {
+    "issueCount": 0,
+    "png": true
+   }
+  },
+  "pngs": [
+   "i11.png"
+  ],
+  "pngSha1": {
+   "i11.png": "97123e5d0060c8bab033315677604d89fe526b31"
+  },
+  "issues": [],
+  "lowContrast": [],
+  "audit": {
+   "stripEnd": [
+    "سوريا hint 0.97..1.00"
+   ],
+   "mapNamesHidden": [
+    "جنوب أفريقيا",
+    "نيجيريا",
+    "مالي",
+    "مدغشقر",
+    "غانا",
+    "بوركينا فاسو",
+    "الأرجنتين"
+   ],
+   "layout": {
+    ".top": {
+     "x0": 48,
+     "y0": 8,
+     "x1": 848,
+     "y1": 44,
+     "w": 800,
+     "h": 36
+    },
+    ".search": {
+     "x0": 308,
+     "y0": 52,
+     "x1": 572,
+     "y1": 84,
+     "w": 264,
+     "h": 32
+    },
+    ".sel": {
+     "x0": 584,
+     "y0": 93,
+     "x1": 848,
+     "y1": 333,
+     "w": 264,
+     "h": 240
+    },
+    ".bottom": {
+     "x0": 48,
+     "y0": 345,
+     "x1": 848,
+     "y1": 389,
+     "w": 800,
+     "h": 44
+    }
+   },
+   "map": {
+    "s": 0.9409090909090909,
+    "L": -565.3777272727273,
+    "T": -553.4327272727273,
+    "country": {
+     "x0": 509.610909090909,
+     "x1": 548,
+     "y0": 98.42909090909086,
+     "y1": 138.69999999999993
+    }
+   },
+   "card": {
+    "y0": 52,
+    "y1": 333,
+    "h": 240,
+    "top": 93,
+    "fits": true,
+    "fit": 0
+   },
+   "fit": {
+    "level": 0
+   },
+   "chipsShown": 5,
+   "fadedContrast": [
+    {
+     "t": "سوريا",
+     "fs": 13,
+     "faded": true,
+     "p95": 16.37,
+     "tail12": 15.14
+    },
+    {
+     "t": "صعبة",
+     "fs": 10,
+     "faded": true,
+     "p95": 9.86,
+     "tail12": 9.86
+    }
+   ]
+  },
+  "typeSeen": {
+   "13/600": 24,
+   "11.5/600": 7,
+   "11.5/500": 3,
+   "10/500": 21,
+   "14/700": 2
+  }
+ },
+ "i16promax": {
+  "device": "956x440 side 62 bottom 21 island",
+  "inputs": {
+   "files": [
+    "index.html",
+    "_build/render.js",
+    "_build/assemble.py",
+    "_build/card.html",
+    "_build/chooser.css",
+    "_build/place.js",
+    "_build/civ_path.json",
+    "world_d1_overlay_civ.svg",
+    "../../screen3/p2B/index.html",
+    "../../screen3/p2B/world_d1_overlay_declutter.svg",
+    "../../shared/world_d1.jpg",
+    "../../shared/devices.json",
+    "../../shared/flags/ci.svg",
+    "../../shared/flags/cn.svg",
+    "../../shared/flags/eg.svg",
+    "../../shared/flags/iq.svg",
+    "../../shared/flags/ir.svg",
+    "../../shared/flags/jo.svg",
+    "../../shared/flags/ly_2011.svg",
+    "../../shared/flags/ru.svg",
+    "../../shared/flags/sa.svg",
+    "../../shared/flags/sd.svg",
+    "../../shared/flags/sy.svg",
+    "../../shared/flags/tn.svg",
+    "../../shared/flags/tr.svg",
+    "../../shared/flags/us.svg",
+    "../../shared/flags/ye.svg"
+   ],
+   "sha1": "5b2103571c34a7815dd61c064f4e6d65795b0521"
+  },
+  "views": {
+   "main": {
+    "issueCount": 0,
+    "png": true
+   }
+  },
+  "pngs": [
+   "i16promax.png"
+  ],
+  "pngSha1": {
+   "i16promax.png": "623634961ac56b64486348e609e6cc1cd80b1edf"
+  },
+  "issues": [],
+  "lowContrast": [],
+  "audit": {
+   "stripEnd": [
+    "سوريا hint 0.97..1.00"
+   ],
+   "mapNamesHidden": [
+    "جنوب أفريقيا",
+    "السنغال",
+    "نيجيريا",
+    "موريتانيا",
+    "مدغشقر",
+    "غانا",
+    "الأرجنتين"
+   ],
+   "layout": {
+    ".top": {
+     "x0": 62,
+     "y0": 8,
+     "x1": 894,
+     "y1": 44,
+     "w": 832,
+     "h": 36
+    },
+    ".search": {
+     "x0": 354,
+     "y0": 52,
+     "x1": 618,
+     "y1": 84,
+     "w": 264,
+     "h": 32
+    },
+    ".sel": {
+     "x0": 630,
+     "y0": 116.19,
+     "x1": 894,
+     "y1": 356.19,
+     "w": 264,
+     "h": 240
+    },
+    ".bottom": {
+     "x0": 62,
+     "y0": 371,
+     "x1": 894,
+     "y1": 415,
+     "w": 832,
+     "h": 44
+    }
+   },
+   "map": {
+    "s": 1,
+    "L": -589.3,
+    "T": -572.4125,
+    "country": {
+     "x0": 553.2,
+     "x1": 594,
+     "y0": 120.38749999999993,
+     "y1": 163.1875
+    }
+   },
+   "card": {
+    "y0": 52,
+    "y1": 359,
+    "h": 240,
+    "top": 116.19999999999999,
+    "fits": true,
+    "fit": 0
+   },
+   "fit": {
+    "level": 0
+   },
+   "chipsShown": 5,
+   "fadedContrast": [
+    {
+     "t": "سوريا",
+     "fs": 13,
+     "faded": true,
+     "p95": 16.37,
+     "tail12": 15.24
+    },
+    {
+     "t": "صعبة",
+     "fs": 10,
+     "faded": true,
+     "p95": 9.86,
+     "tail12": 9.86
+    }
+   ]
+  },
+  "typeSeen": {
+   "13/600": 24,
+   "11.5/600": 7,
+   "11.5/500": 3,
+   "10/500": 21,
+   "14/700": 2
+  }
+ }
+}
