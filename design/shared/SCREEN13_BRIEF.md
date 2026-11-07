@@ -17,3 +17,6 @@ The dock's «المزيد» (§6.5: saves, settings, statistics, event log, sour
 
 ## Gate
 `screen13/A/_build/render.js` uses the shared checker (with the plants aimed at headline numbers moved to this panel's own elements) and adds: every setting as [name, line, its three choices in order, the chosen one] (a swap cannot pass) and a group named exactly as its row; the speed cap reaching «أقصى»; no music or digit setting; the log newest first and dated; every link row says where it leads (a word after «يفتح»); the mirror a folder the player picks. The shared rules now also hold exactly one chosen segment per group and the action rows read whole. `--selftest` and `check_screen.py` must pass.
+
+## Cost (the heaviness review, 2026-11-07; design doc §3.9)
+The campaign log is a fixed ring of 512 entries, each with its stored «لماذا؟» terms; older entries keep title and date only. A lazy list.

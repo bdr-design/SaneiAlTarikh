@@ -25,7 +25,10 @@ The player taps «الاقتصاد», the second item of the section dock. The p
 - **White touches:** white tile icons, white-outlined chips and header chip. A chip that warns of a cost in legitimacy is amber, with its down arrow.
 
 ## Content (Egypt, 1 January 2011; values are illustrative, in US dollars, D-6)
-The numbers agree with each other. The sources are in T-005: Egypt's FY2009/10 budget outturn, CBE, CAPMAS, World Bank and S&P.
+The numbers agree with each other. The sources are in T-005: Egypt's FY2009/10 budget outturn, CBE, CAPMAS, World Bank and S&P. The budget figures are annual
+rates carried into the current fiscal year 2010/11 from the FY2009/10 outturn, the latest actual year on 1 January 2011 (the
+header names the current year; «سنويًا» is a rate). The treasury pays the deficit («تمويل العجز: من الخزينة», so it falls
+1.5 a month); bonds are the lever that would finance it otherwise.
 
 - **Header:** flag, «الاقتصاد», the chip «الجنيه المصري», and «مصر · السنة المالية 2010/11». The emblem and the close button.
 - **Tabs:** نظرة عامة / الميزانية / الضرائب والدعم / التجارة والعملة (icons: grid, pie, percent, ship). The columns follow their labels, because the last two labels are long.

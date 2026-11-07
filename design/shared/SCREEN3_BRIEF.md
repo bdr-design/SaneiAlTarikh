@@ -36,3 +36,6 @@ Scenarios with their images in `../shared/scenarios/` (3:2):
 ## Output
 - Work only in your own folder. Render with Playwright (NODE_PATH=tools/node_modules; browser from the CHROMIUM_PATH environment variable when set, args ['--no-sandbox']) at deviceScaleFactor 3 for `i16promax` (the user's iPhone 17 Pro Max) and `se`. Files: `i16promax.png`, `se.png`.
 - Inspect every PNG with the Read tool; fix clipping, overlaps, RTL mistakes, safe-area violations and unreadable text; repeat at least twice.
+
+## Cost (the heaviness review, 2026-11-07; design doc §3.9)
+Pages 1 and 3 show one pre-darkened, pre-blurred backdrop (one HEIC of about 150 KB); the map engine starts on page 2. The scenario cards decode with ImageIO downsampling to their drawn size, the locked dim baked into small thumbnails. The country strip on page 2 is a lazy horizontal list filtered by the search field, flags from the shared atlas, one opaque container (D-3). The leader line from the country to its card is drawn by the map engine.

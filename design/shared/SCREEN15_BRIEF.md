@@ -23,3 +23,6 @@ The notification centre is screen 16.
 
 ## Gate
 `screen15/A/_build/render.js` uses the shared checker (every generic rule of the approved panels, for a sheet with one body and no section) and adds: the game shown paused; the title short and the text the brief's (≤90 words); the options in order with their cost lines, chips, amber costs with their arrows, arrows agreeing with their signs, one default named on screen and in VoiceOver, each effect's own VoiceOver clause; the numbers against the economy, state and internal panels; «لاحقًا» and the close button putting the decision off with its expiry. `--selftest` and `check_screen.py` must pass. Reviewed by three independent read-only reviewers (checker and consistency; what the player sees; dimensions and the formatting of text and boxes).
+
+## Cost (the heaviness review, 2026-11-07; design doc §3.9)
+The event's category image ships as a header strip at the sheet's largest size (1140×168 px, HEIC, about 20–40 KB), never decoded at full size (§3.3).

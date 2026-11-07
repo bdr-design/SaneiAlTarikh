@@ -90,7 +90,7 @@
     - GDP is checked against SSP2 or OECD long-term bands.
     - Coastal exposure comes from DeltaDTM (CC BY 4.0).
     - Technology is real up to about 2025, follows published projections to 2050, and uses labelled projections to 2100.
-12. **UI.** The approved slim glass HUD (sizes 36/32/44 pt; type sizes 10/11.5/13/14; dark glass with system blur; cyan accents; an 8-section dock; labels that hide under HUD panels).
+12. **UI.** The approved slim glass HUD (sizes 36/32/44 pt; type sizes 10/11.5/13/14; opaque dark panels rgb(12,20,28) with no blur (D-3, confirmed); cyan accents; an 8-section dock; labels that hide under HUD panels).
     - The layout class is chosen from the **safe-area width**, and a fit test per device checks the longest Arabic names and values.
     - Every other screen, and every small-phone variant, gets a visual design approved by the user before it is built.
 13. **Saves.**
@@ -233,12 +233,12 @@ A rule that nothing enforces is not a rule here. Rule IDs are referenced in the 
 | L3 | **The world is bounded.** Hard limits: <ul><li>land provinces ≤3,000; sea zones ≤300; total ≤3,300</li><li>polities ≤384 and governments ≤384 (registry ≤320 plus 64 runtime)</li><li>political actors ≤2,048</li><li>formations ≤8,192 worldwide, plus a quota per government (§5.4); armies ≤1,024; fronts ≤256 (sectors ≤1,024)</li><li>fleets ≤512; air groups ≤1,024</li><li>active spy operations ≤512</li><li>notification ring of 512; history in fixed windows</li></ul> | The invariant checker. A weekly all-AI run from 2011 to 2100 checks the maximum counts and that state stays ≤8 MB. The wartime benchmark measures the formation cap. |
 | L4 | **Daily work grows only with provinces and active entities.** Monthly work runs on each government's stored slot day. Yearly work runs in its January slot. Strategic AI has its own stagger. Supply, routes, labels, anchors and colour tables are recomputed only when their inputs change. | The work-counter gate (§8). |
 | L5 | **The simulation uses integers only**, with binary fixed-point and table-based math. | `banned_api.sh` and the golden values. |
-| L6 | **Redraw only on change.** Redraws caused by the simulation happen at most 10 times a second, and nothing animates continuously. | Frame-counter tests, including one with a front on screen at ×1. |
+| L6 | **Redraw only on change.** Redraws caused by the simulation happen at most 10 times a second, and nothing animates continuously. The one bounded exception is the unit glide (D-15, §3.9): at most 30 map frames a second, only for on-screen units that are selected or recently ordered (cap 8), redrawing only the unit layer from cached buffers; above the cap or over the GPU budget it falls back to day steps at ≤10 Hz. | Frame-counter tests, including one with a front on screen at ×1. |
 | L7 | **Imagery loads only for the visible area.** Decoding happens off the main thread and the parent tile shows meanwhile. **Visible tiles are pinned.** Prefetch uses only free slots. The cache is sized from the drawable. | Renderer counters (decodes per second, evictions of visible tiles, which must be 0). A Linux test of tile selection and the eviction policy. |
 | L8 | **Memory:** ≤160 MB on an A12 phone and ≤210 MB on a Pro Max, with a 250 MB ceiling. Caches can always be dropped; game state never is. Loading a save peaks at most 16 MB above the in-game footprint. | The overlay (`phys_footprint`), a memory-warning test, a peak-memory test for loading a 90-year save, MetricKit. |
 | L9 | **One governor** controls the frame-rate cap, maximum speed, MSAA, render scale, the blur fallback, the tween and prefetch. | A pure policy function with unit tests. Thermal recordings at each milestone. |
 | L10 | **No third-party runtime code**, no network, no analytics or ads, no WebKit. | `Package.resolved` has no remote packages; the IPA gate requires an empty `Frameworks/`; banned imports. |
-| L11 | **SwiftUI discipline.** <ul><li>Views read only models built from snapshots.</li><li>The HUD updates at most 4 times a second.</li><li>At most 6 regions are blurred.</li><li>Long lists are lazy.</li><li>Panels ask for their data only while open.</li></ul> | `Displayed<T>` tests; SwiftLint custom rules. |
+| L11 | **SwiftUI discipline.** <ul><li>Views read only models built from snapshots.</li><li>The HUD updates at most 4 times a second.</li><li>No region is blurred (D-3: opaque HUD and panels).</li><li>Long lists are lazy.</li><li>Panels ask for their data only while open, and an open panel's model rebuilds at most 4 times a second and only when its inputs' version changes; monthly values and sort orders refresh on the government's monthly slot, never per snapshot (§3.9).</li></ul> | `Displayed<T>` tests; SwiftLint custom rules. |
 | L12 | **Every feature has a cost line** in `docs/perf.md`. | PR template; a CI warning when `Systems/` or `content/` change without a `perf.md` change. |
 | L13 | **Every asset class has a size budget** (§3.6), including each scenario file. | The IPA gate's size manifest. |
 | L14 | **The load is spread across engines, never piled in one place** (the owner, 2026-11-02: «توزيع الثقل على محركات عشان مايتجمع بمكان واحد»). Each engine has its own thread or core and its own budget: <ul><li>**the main thread** only takes touches and hands finished models to the views (≤1.0 ms per frame); it never simulates, decodes, shapes text or builds buffers;</li><li>**the simulation engine** (`GameHost`) runs on its own task, and its per-government monthly work runs in parallel across the cores (below, §2.4);</li><li>**the AI engine** (`SaneiAI`) thinks on its own task over a snapshot and only sends Commands (§2.4);</li><li>**the map engine** draws on the GPU; imagery decoding, label shaping and map-buffer building each run as background work with their own in-flight limits;</li><li>**the platform engine** writes saves and logs off the main thread.</li></ul> No system takes more than its line in the per-day sub-budget (§3.2), and work that comes in bulk (monthly, yearly, route searches, strategic AI) is staggered over the days so no single day spikes. | Per-engine counters in the overlay and the recorder; the work-counter gate checks each system against its sub-budget line and fails a day over 16 ms; a parallel-vs-serial test proves the same state hash. |
@@ -389,7 +389,7 @@ Dependencies run one way: Core ← Content ← Engine ← AI; Core ← Map; Pres
 | Government pairs, dense | 384² × 8 B | Opinion, treaty bits, **recognises-state** bit, **recognises-government** bit, sanction bits, escalation rung, claim bit | 1.18 MB |
 | Pair extension (sparse) | ~6,000 | Spy network, intelligence level, exposure heat, **intel epoch**, partner share | 0.10 MB |
 | Handle tables | Capped (L3) | Formations (with equipment allocations), armies, fronts and sectors, wars, fleets, air groups, operations, projects, treaties. Each row carries its `Serial`. | ≤0.9 MB |
-| Queues and history | — | Event queue, decisions, a 512-entry notification ring. History: 12 series × existing governments × (60 monthly + 125 yearly) plus a campaign-start baseline row. | ≤2.6 MB |
+| Queues and history | — | Event queue, decisions, a 512-entry notification ring, a 512-entry campaign log ring (each entry its title, date and stored `TermBuffer12`, about 90 B; §3.9). History: 12 series × existing governments × (60 monthly + 125 yearly) plus a campaign-start baseline row. | ≤2.6 MB |
 | World | 1 | 22 world prices and stocks, world interest rate, **USD deflator**, chokepoint disruption (~10), CO₂, temperature, sea level, entity counters | <2 KB |
 | **Total** | | | **≈7.3 MB** (≤8 MB) |
 
@@ -526,7 +526,7 @@ The shader takes one texture sample per pixel. There is no relief shading or gra
 | 1 | Imagery (instanced), plus a second copy of the world at the 180° line | 1–2 |
 | 2 | **Map-mode overlay**, RGBA per province with alpha 0–0.55. Political mode: light cyan fill on the player; occupation drawn as stripes. | ≤20 |
 | 3 | **Borders and glow.** Instanced. Each style class is drawn with a **stencil-once** test (a pixel is written once per class), so translucent quads never double-blend at joints. Dashes are computed from arc length × scale, so the pattern runs **continuously along the polyline**. Styles: <ul><li>country border: cyan, about 1 pt, 60%</li><li>province line: faint cyan, 0.5 pt, about 18%, hidden at L0</li><li>disputed edge: dashed</li><li>front line: amber, dashed</li><li>player edge: soft cyan glow</li></ul> | ≤22 |
-| 4 | Fronts, army markers (NATO-style symbols drawn in code), arrows | 3 |
+| 4 | Fronts, unit markers (the owner's unit images and their flags from one atlas, instanced, D-15), routes and arrows | 3 |
 | 5 | **Labels: a single-channel distance-field glyph atlas.** Pass 1 draws all halos, pass 2 all fills (§2.5 Labels). | 2 |
 | 6 | Selection and hover via uniforms | 0 |
 | | **Total** | **≤50** |
@@ -634,7 +634,7 @@ It must not touch `Sources/**`, `App/Sources/**` or `content/packs/base/**`. Map
 | Metric | Budget | Enforced by |
 |---|---|---|
 | Idle | **0 fps** | `FrameScheduler` tests; simulator frame counter |
-| Redraws caused by the simulation | ≤10 Hz, typically ≤1 Hz at ×1 | Frame-counter tests, including one with a front on screen |
+| Redraws caused by the simulation | ≤10 Hz, typically ≤1 Hz at ×1; the unit glide ≤30 Hz under its cap (L6, §3.9) | Frame-counter tests, including one with a front on screen; the wartime glide test (§3.9) |
 | Gestures | 60 fps; 120 on ProMotion only while touching | Governor tests; the recorder |
 | Main-thread time per frame | ≤1.0 ms | Recorder (display-link timestamps) |
 | App GPU time per frame | ≤4 ms at 60 Hz on A12; ≤3 ms at 120 Hz on A19 | Recorder (command-buffer timestamps; this **excludes** system blur, see §3.7) |
@@ -702,12 +702,12 @@ It must not touch `Sources/**`, `App/Sources/**` or `content/packs/base/**`. Map
 | Vector map pack (memory-mapped) | ≤22 | ≤22 |
 | Imagery: base 2.1 + tile cache (64 or 96 slices RGBA8) | 18 | 26 |
 | Screen buffers (3 × screen × 4 B) | 18 | 45 |
-| Atlases: glyph distance field 1, flags 1.5, unit symbols 1, one event image 3 | 6.5 | 6.5 |
+| Atlases: glyph distance field 1, flags 1.3 (one 22 pt atlas, ASTC 4×4; the 1–2 larger flags rendered on demand, 0.1), unit images with their flags 0.4 (one atlas), one event header strip 0.8 (1140×168 px) | 3.6 | 3.6 |
 | `ContentDB` (static rules; the scenario file is released after start) | ≤6 | ≤6 |
 | State, one snapshot, history | ≤15 | ≤15 |
 | Audio | ≤1 | ≤1 |
 | Panels while open | 15 | 20 |
-| **Total** | **≈156 MB (target ≤160)** | **≈201 MB (target ≤210)** |
+| **Total** | **≈153 MB (target ≤160)** | **≈198 MB (target ≤210)** |
 
 - **Load spike:** the old state is released before decoding. Peak ≤ in-game footprint + 16 MB (raw payload ≤8 MB plus typed buffers ≤8 MB), checked by `simcli peak-load` on a 90-year save and by the device recorder.
 - **ASTC option (D-2):** the tile cache drops by about 15 MB (A12) or 23 MB (Pro Max).
@@ -757,7 +757,7 @@ Measured by the in-app recorder (launch markers written to the ring log) and by 
 | CPU seconds per minute | ≤0.3 paused; ≤1 at ×1 with no touch; ≤6 at maximum speed with no touch |
 | 30 min at maximum speed, no touch | Stays at `fair` or cooler |
 | 30 min of active play at ×1 | Stays `nominal` (target) |
-| Blur | At most 6 blurred regions. System blur is composited by the system's render server, outside the app's command buffers (likely; to verify), so **its cost is measured end to end** (below). |
+| Blur | None in the build (D-3: opaque HUD and panels); the rule below applies only if the owner reopens D-3. At most 6 blurred regions. System blur is composited by the system's render server, outside the app's command buffers (likely; to verify), so **its cost is measured end to end** (below). |
 
 **Blur measurement in M0b, deciding D-3.**
 - The in-app **auto-pan benchmark** drives the camera along a fixed path for 10 minutes. It runs twice from the same starting thermal state and battery level (≥50%, unplugged): once with the approved blur and once with opaque glass.
@@ -784,6 +784,54 @@ Measured by the in-app recorder (launch markers written to the ring log) and by 
 - The user shares the CSV and log files into the PR conversation, and `simcli perf-import` adds them to `perf.md`.
 
 ---
+
+### 3.9 Screen costs (the heaviness reviews, 2026-11-07)
+
+The owner's rules `heavinessReviewer` and `loadSpread` gave every designed screen a heaviness review. What it found is
+bound here; each item is a line in `docs/perf.md` (L12) and a test where one is named.
+
+- **The unit glide (D-15, screen 14).** Only units on screen that are selected or ordered in the last 10 game days glide,
+  at most 8, at ≤30 map frames a second at ×1–×5; above the cap, at ×10 and «أقصى», or when the frame's GPU time goes over
+  the budget, units step by day at ≤10 Hz. Glide frames redraw only the unit layer from cached buffers (no label, anchor or
+  imagery work). The order bar and the units' VoiceOver labels follow the snapshot's day (≤4 updates a second), never the
+  glide frames. Unit tokens are label occluders only at rest and at day steps: during a glide labels stay where they are;
+  placement runs as background work applied at most once per 250 ms. Test: a front on screen at ×1 for 30 minutes stays
+  nominal and within the glide's frame bound.
+- **Units and flags on the map.** The unit images and their flags share one atlas, so a unit's image, tag and flag draw in
+  one instanced pass; strength numerals and destination names go in the label passes; the route's halo and line are one
+  instanced dashed pass. Layer 4 keeps its 3 draws.
+- **Flags.** One atlas at the chip size (22 pt, ASTC 4×4); the 32 and 40 pt header flags (1–2 on screen) are rendered on
+  demand from the vector source, cached apart and droppable (§3.3).
+- **Event images.** Baked as header strips at the sheet's largest size (1140×168 px, HEIC, about 20–40 KB each), or decoded
+  with an ImageIO thumbnail at that size; never decoded at 1600×800 (§3.3, §6.12).
+- **Scenario and menu art.** The new-game cards decode with ImageIO downsampling to their drawn size; the locked cards' dim
+  is baked into small thumbnails. Pages 1 and 3 of the new game show one pre-darkened, pre-blurred backdrop (one HEIC of
+  about 150 KB); the map engine starts on page 2. The country strip on page 2 is a lazy horizontal list filtered by the
+  search field, flags from the shared atlas, one opaque container.
+- **Open panels.** A panel's model is built from the published `ViewSnapshot` on a background task (not on `GameHost`), at
+  most 4 times a second and only when its inputs' version changes; monthly values (population, unrest, relations, budget
+  lines) and sort orders refresh on the government's monthly slot. Heavier queries (the markets' top industries, the
+  «لماذا؟» and relation terms) are cached per panel and recomputed on that refresh. A «panel queries» line joins §3.2's
+  per-day sub-budget with a work counter in the gate.
+- **The adjuster preview (screen 7).** Linear sensitivities per lever, computed once when the adjuster opens (one TermSink
+  pass on the simulation engine's task over the snapshot); each snapped step then costs a few multiply-adds on the main
+  thread, recomputed only when the snapped value changes. The preview never runs the simulation forward.
+- **The campaign log (screen 13).** A fixed ring of 512 entries, each with its stored `TermBuffer12` (its «لماذا؟» as it was);
+  older entries keep their title and date only, or move to the yearly history. Read as a lazy list. (§2.4's state table,
+  L3, L15.)
+- **Map-anchored marks.** The province name pill (screen 4) and the new-game leader line (screen 3) are drawn by the map
+  engine in its own layers, not as views moved each frame.
+- **Tiles under opaque sheets.** The renderer culls tile draws, and unpins tiles, under opaque occluders (the open sheet).
+  The sheet's header strip is a one-time copy at open from the resident z4 base, redrawn only when the province or panel
+  changes.
+- **Shadows.** Every shadowed HUD box and sheet uses a fixed rounded-rect `shadowPath` (or a pre-baked 9-slice image); the
+  governor drops shadows at `serious`.
+- **Relative times.** «قبل 3 دقائق» and the like are formatted once when shown (and on scene activation), from the save's
+  file date; never a self-updating relative text (L1).
+- **Saves (screen 23).** The sheet takes the row model the saves tab already read; export shares the file's URL as is; load
+  checks the header, META and trailer hash before releasing the old state (a failed check keeps the game), then releases,
+  decodes on the platform engine, and shows a static «جارٍ التحميل» until the first frame (≤1.0 s on A12, §3.4; peak per
+  §3.3).
 
 ## 4. Data and realism pipeline
 
@@ -1486,12 +1534,12 @@ Unchanged:
 | Type sizes | 10 / 11.5 / 13 / 14, plus a display title size |
 | Spacing | 4 / 8 / 12 |
 | Radii | 10 / 12 |
-| Glass | `rgba(9,17,25,0.66)`, system blur, 1 px cyan-tinted border |
+| Glass | Superseded by D-3: every HUD box and panel is opaque `rgb(12,20,28)` with the 1 px cyan-tinted border and no blur. The approved mockups of screens 1–3 still draw `rgba(9,17,25,0.66)` with blur; the build drops it (shown to the owner first). |
 | Accents | Cyan and teal; calm, low-glare palette; not pure black; no harsh neon |
 | Map grade | Brightness ≈0.72, saturation ≈0.78, cool tint; cyan borders at about 60%; faint cyan province lines; cyan glow and light fill on the player's country |
 
 **Panels (2026-10-20/21, owner decisions D-3, `whiteTouches` and `sectionIdentity`).**
-- **Panels are opaque** `rgb(12,20,28)` with no blur (D-3: «غامق دايمًا»). This replaces the glass row above for panels.
+- **Panels and the HUD are opaque** `rgb(12,20,28)` with no blur (D-3: «غامق دايمًا»). This replaces the glass row above everywhere. Their shadows use a fixed rounded-rect `shadowPath` (or a pre-baked 9-slice), never an offscreen shadow, and the governor drops them at `serious` (§3.9).
 - **White touches** on the dark panels, confirmed by the owner («حلو الاسود ممزوج مع المربعات البيضه»):
   - white tile icons;
   - filled white primary buttons and chosen segments with dark text;
@@ -1656,7 +1704,7 @@ As before:
 ### 6.12 Visual style, sound, haptics and images
 
 As before:
-- **Style:** the approved operations-room look; system Arabic font; NATO-style symbols drawn in code; flag atlas; SF Symbols; logo in a licensed font (D-17).
+- **Style:** the approved operations-room look; system Arabic font; unit images and flags in one atlas (D-15, §3.9); flag atlas at the chip size; SF Symbols; logo in a licensed font (D-17).
 - **Sound:** about 15 UI cues (≤1 MB, AAC), ambient audio session, stops in the background.
 - **Haptics:** selection, confirm, warning and war-declared patterns.
 - **User images:**
@@ -1665,7 +1713,7 @@ As before:
 |---|---|---|
 | Menu background | 2868×1320 px | HEIC ≤600 KB |
 | Scenario cards | 1200×800 | ≤200 KB each |
-| Event category images (16) | 1600×800 | ≤250 KB each |
+| Event category images (16) | header strips 1140×168 px, HEIC (§3.9) | ≤40 KB each |
 | App icon | 1024×1024 | — |
 
 ---
@@ -1881,7 +1929,7 @@ As before:
 | D-1 | Repository and CI budget | New private repo; `ios.yml` on manual runs, tags and at most one changed-main build a day; a $25/month spending cap |
 | D-2 | Imagery depth and codec | z7 HEIC (cache 64 or 96 slices), confirmed in M0b; ASTC if decode heat is measurable |
 | D-2b | Label rendering | Glyph distance-field atlas, two passes; string atlas if small Arabic looks soft |
-| D-3 | Glass blur fallback | Approved blur at rest; opaque while panning only if the end-to-end measures trip the rule |
+| D-3 | Glass blur fallback | Superseded: opaque always, no blur (the owner's confirmed D-3, §10) |
 | D-4 | Autosave cadence | Monthly, at most once per 2 real minutes |
 | D-5 | Maximum zoom | 1.0 km/pt |
 | D-6 | Money shown as | Nominal current USD (from the nominal ledger); «لماذا؟» also shows constant 2011 USD |
@@ -2136,7 +2184,7 @@ These answers override the defaults below. They are logged in `decisions/decisio
 | D-1 Repository and CI budget | M0 | <ul><li>**Superseded: the owner chose a public repo (13.0).** Previous default: new private repo. `ios.yml` runs only when the user asks, on tags, and at most once a day when `main` changed. Linux CI on PRs and merges. Estimated about $5–25 a month above the free 2,000 minutes, assuming 8–15 iOS builds of about 25 min (macOS counts 10× against included minutes; about $0.062/min after that, unverified) and about 1,000–1,500 Linux minutes. A spending cap of $25 a month stops runaway costs.</li><li>GitHub Pro ($4 a month, 3,000 included minutes): about $4–15 a month in total.</li><li>Public repo: standard runners are free, but the code is visible (bad for a paid app).</li><li>A $0 cap: CI stops producing IPAs once the free minutes run out each month.</li></ul> |
 | D-2 Imagery codec | End of M0b | <ul><li>**Default: z7 HEIC.** About 20–36 MB of IPA; CPU decoding while panning; tile cache 16 MB (XR) or 24 MB (Pro Max).</li><li>ASTC: about 66 MB of IPA, no decoding, cache about 1 MB (lightest at runtime, heaviest download).</li><li>z6 only: about 8–12 MB, but soft imagery beyond about 2.5 km/pt.</li><li>z8: +50–90 MB for sharper close zoom.</li></ul> |
 | D-2b Label rendering | End of M0b | <ul><li>**Default: glyph distance-field atlas.** 1 MB, no re-rasterising while panning, clean Arabic joins.</li><li>String atlas of visible labels: sharpest small text, but CPU work while panning and more memory. Chosen only if the default looks soft on the device.</li></ul> |
-| D-3 Blur | End of M0b | <ul><li>**Default: approved blur at rest; opaque while panning only if the measured rule trips** (thermal state +1, battery drain +10%, or hitches >1%). Look identical at rest.</li><li>Blur always: possible extra heat while panning.</li><li>Opaque always: lightest, but departs from the approved design.</li><li>Metal-rendered blur under the HUD only: measurable and controllable; about 1–2 weeks of renderer work, with a slightly different look to approve.</li></ul> |
+| D-3 Blur | Decided | **Opaque always, no blur** (the owner confirmed D-3 after the visual comparison, 2026-10-20). The measurement and the Metal-blur alternative below are kept only in case the owner reopens it. |
 | D-4 Autosave | M1a | <ul><li>**Default: monthly, at most once per 2 real minutes.** Negligible CPU.</li><li>Strictly monthly: about 1 save per second at maximum speed, 10–20% extra CPU.</li><li>Every 5 minutes: lightest, but more progress can be lost.</li></ul> |
 | D-5 Maximum zoom | End of M0b | <ul><li>**Default: 1.0 km/pt.**</li><li>2 km/pt: sharper imagery, but small areas such as Lebanon and the West Bank become hard to tap.</li><li>0.6 km/pt: needs z8 imagery (+50–90 MB).</li></ul> |
 | D-6 Money display | M1a | <ul><li>**Default: nominal current USD**, now backed by the nominal ledger, so devaluations and inflation show as in the news. «لماذا؟» also shows constant 2011 USD.</li><li>Constant 2011 USD: easier to compare across decades, but values drift from real headlines.</li></ul> |

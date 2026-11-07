@@ -47,3 +47,6 @@ This is a visual mockup for the user to approve before anything is built. It is 
 - `index.html` (self-contained apart from the shared files) and `screen.png` rendered with:
   `node tools/render_screen.js index.html screen.png 844 390 3` (run it from your variant folder; NODE_PATH is not needed because the script lives next to its node_modules; if `require('playwright')` fails, run it with `NODE_PATH=tools/node_modules`).
 - Look at your own `screen.png` with the Read tool and fix clipping, overlaps, wrong RTL order, unreadable text and safe-area violations. Repeat render -> look -> fix at least twice.
+
+## Cost (the heaviness review, 2026-11-07; design doc §3.9)
+The HUD is opaque in the build (D-3: no blur; this mockup still draws the approved glass). Its boxes' shadows use a fixed shadowPath. The bell reads its unread count and each indicator its trend in words; the HUD updates at most 4 times a second (L11).

@@ -59,7 +59,7 @@ The section identity (الاقتصاد, emerald) stays on chrome only: the top l
 |---|---|---|
 | tax: ضريبة الدخل (الشريحة العليا) | 20% → 25% (+5 نقاط), range 10% to 35% | الإيرادات +300 مليون $ سنويًا; العجز 17.4 مليار $ بدل 17.7; اضطرابات المحافظات الحضرية +1 خلال 3 أشهر; النمو −0.1 نقطة خلال سنة |
 | line: التعليم (11% من الإنفاق) | 7.3 → 8.0 مليار $ (+10%), range 3.7 to 11.0 | العجز 18.4 مليار $ بدل 17.7; الدين إلى الناتج +0.3 نقطة سنويًا; العمالة الماهرة +0.3 نقطة بعد 5 سنوات; الشرعية +1 خلال 3 أشهر |
-| subsidy: دعم الوقود, from the overview | 11.7 → 10.5 مليار $ (−10%), range 0 to 17.6 (±50%, as the line view) | العجز 16.5 مليار $ بدل 17.7; التضخم +0.6 نقطة خلال سنة; اضطرابات المحافظات الأفقر +4 خلال 3 أشهر; الشرعية −3 خلال 3 أشهر |
+| subsidy: دعم الوقود, from the overview | 11.7 → 10.5 مليار $ (−10%), range 0 to 17.6 (−100% to +50%: a subsidy can be abolished whole; the cap +50% as the line view) | العجز 16.5 مليار $ بدل 17.7; التضخم +0.6 نقطة خلال سنة; اضطرابات المحافظات الأفقر +4 خلال 3 أشهر; الشرعية −3 خلال 3 أشهر |
 | money: السياسة النقدية والعملة (فائدة المركزي) | 8.25% → 9.25% (+1 نقطة), range 2% to 20% | التضخم −0.4 نقطة خلال سنة; سعر الدولار بعد 3 أشهر 5.75 جنيه بدل 5.80 (the price of the dollar, so a fall is the pound getting stronger); الفوائد 13.9 مليار $ بدل 13.3; النمو −0.2 نقطة خلال سنة |
 
 **Why these numbers:**
@@ -99,3 +99,6 @@ The section identity (الاقتصاد, emerald) stays on chrome only: the top l
   - the white touches; the brief's strings per view.
 - **Its `--selftest`** plants defects and must catch every one.
 - **`python3 -I tools/check_screen.py design/screen7/A`** must PASS.
+
+## Cost (the heaviness review, 2026-11-07; design doc §3.9)
+The effects preview uses linear sensitivities per lever, computed once when the adjuster opens (one TermSink pass on the simulation engine's task); each snapped step costs a few multiply-adds and is recomputed only when the snapped value changes. The preview never runs the simulation forward.
