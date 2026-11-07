@@ -120,3 +120,6 @@ As in `SCREEN4_BRIEF.md`:
   - `devices.json`;
   - every file the pages load.
 - **`python3 -I tools/check_screen.py design/screen5/A`** must PASS. It recomputes the hash, matches each phone with `devices.json`, and requires the self-test.
+
+## VoiceOver (T-025)
+Each «لماذا؟» is named «لماذا؟ <its subject>»; the close «إغلاق، العودة إلى الخريطة»; every action row reads whole (its numbers, «رأس المال السياسي», its chip's way in words; in the states view «يلزم 60 من رأس المال السياسي ولديك 45، لا يكفي»); every row button names its row («إلغاء الخط الثالث لمترو القاهرة: يُسترد 90 مليون دولار»); progress bars are hidden from VoiceOver.

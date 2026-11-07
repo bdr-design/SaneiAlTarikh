@@ -480,6 +480,21 @@ async function measure(p, d, b3, view) {
     // bars fill from the right (RTL)
     qa('.s-bar i, .s-prog i').forEach((e) => { const pb = e.parentElement.getBoundingClientRect(), rr = e.getBoundingClientRect(); if (!near(rr.right, pb.right, 0.6)) issues.push('a bar does not fill from the right'); });
     { const f = q('.r-flag').getBoundingClientRect(); if (!near(f.width / f.height, 4 / 3, 0.01)) issues.push('flag is not 4:3'); }
+    // VoiceOver (T-025, as screens 6 to 23): the tabs are a tab list; the close says where it returns; each «لماذا؟» names
+    // its subject; every action row reads whole (its numbers, «رأس المال السياسي» for the capital icon, the chip's way in
+    // words); every row button names its row; progress bars are drawing only
+    { const tl = q('.r-tabs'); if (!tl || tl.getAttribute('role') !== 'tablist' || qa('.r-tab').some((e) => e.getAttribute('role') !== 'tab')) issues.push('a11y: the tabs are not a tab list');
+      if (!/^إغلاق، العودة إلى /.test(q('.r-x').getAttribute('aria-label') || '')) issues.push('a11y: the close does not say where it returns');
+      qa('.r-kpi').forEach((k) => { const kl = k.querySelector('.r-kl').textContent.trim(), w = k.querySelector('.r-why'); if (w && (w.getAttribute('aria-label') || '') !== 'لماذا؟ ' + kl) issues.push(`a11y: «لماذا؟» does not name its subject «${kl}»`); });
+      const nm = (t) => (String(t).replace(/−/g, '-').match(/\d+(\.\d+)?/g) || []).map(Number);
+      qa('.r-act').filter(visible).forEach((a) => { const al = a.getAttribute('aria-label') || '', b = a.querySelector('.r-at b').textContent.trim(), shown = a.querySelector('.r-at').innerText;
+        if (!al.startsWith(b + ': ')) issues.push(`a11y: the action «${b}» has no label of its own`);
+        if (nm(shown).some((x) => !nm(al).includes(x))) issues.push(`a11y: the action «${b}» does not read its numbers`);
+        if (a.querySelector('.s-cost use[href="#i-capital"]') && !/رأس المال السياسي/.test(al)) issues.push(`a11y: the action «${b}» does not name the capital its cost is in`);
+        const u = a.querySelector('.r-chip use'); if (u && !(u.getAttribute('href') === '#t-up' ? /ترفع|تزيد/ : /تخفض|تقلل/).test(al)) issues.push(`a11y: the action «${b}» does not say its chip's way`); });
+      qa('.s-off .r-btn, .s-proj .r-btn').forEach((e) => { const row = e.closest('.s-off, .s-proj'), rn = row.querySelector('.r-at b').textContent.trim().replace(/:/g, '،');
+        if (!(e.getAttribute('aria-label') || '').includes(rn)) issues.push(`a11y: «${e.textContent.trim()}» does not name its row «${rn}»`); });
+      qa('.s-prog').forEach((e, i) => { if (e.getAttribute('aria-hidden') !== 'true') issues.push(`a11y: progress bar ${i + 1} is read out`); }); }
     // ---------- 9. the brief's content: fully visible in this render ----------
     const leafs = (s) => { const cands = [...q('.sheet').querySelectorAll('*')].filter((e) => e.getClientRects().length && e.innerText && e.innerText.replace(/\s+/g, ' ').includes(s));
       return cands.filter((e) => !cands.some((o) => o !== e && e.contains(o))); };
@@ -616,6 +631,16 @@ async function selftest(b) {
   for (const x of [d, se]) ctxs[x.id] = await b.newContext({ viewport: { width: x.w, height: x.h }, deviceScaleFactor: 1 });
   // [name, device, extra url, css, expected issue, optional page script]. Each regex names the one check under test.
   const cases = [
+    ['why unnamed', d, '', '', /a11y: «لماذا؟» does not name its subject «الاستقرار»/, () => { document.querySelectorAll('.r-why')[1].setAttribute('aria-label', 'لماذا؟'); }],
+    ['close silent', d, '', '', /a11y: the close does not say where it returns/, () => { document.querySelector('.r-x').setAttribute('aria-label', 'إغلاق'); }],
+    ['action unlabelled', d, '', '', /a11y: the action «رفع حالة الطوارئ» has no label of its own/, () => { document.querySelector('.r-act').removeAttribute('aria-label'); }],
+    ['action number unread', d, '', '', /a11y: the action «رفع حالة الطوارئ» does not read its numbers/, () => { document.querySelector('.r-act').setAttribute('aria-label', 'رفع حالة الطوارئ: الكلفة من رأس المال السياسي. ترفع الشرعية، أفضل'); }],
+    ['capital unnamed', d, '', '', /does not name the capital its cost is in/, () => { document.querySelector('.r-act').setAttribute('aria-label', 'رفع حالة الطوارئ: الكلفة 60. ترفع الشرعية، أفضل'); }],
+    ['chip way unsaid', d, '', '', /does not say its chip's way/, () => { document.querySelector('.r-act').setAttribute('aria-label', 'رفع حالة الطوارئ: الكلفة 60 من رأس المال السياسي. الشرعية'); }],
+    ['states label unswapped', d, '&states=1', '', /a11y: the action «رفع حالة الطوارئ» does not read its numbers/, () => { const a = document.querySelector('.r-act'); a.setAttribute('aria-label', 'رفع حالة الطوارئ: الكلفة 60 من رأس المال السياسي. ترفع الشرعية، أفضل'); }],
+    ['project button unnamed', d, '&tab=projects', '', /a11y: «إلغاء» does not name its row «الخط الثالث لمترو القاهرة»/, () => { document.querySelector('.s-proj .r-btn').setAttribute('aria-label', 'إلغاء'); }],
+    ['progress read out', d, '&tab=projects', '', /a11y: progress bar 1 is read out/, () => { document.querySelector('.s-prog').removeAttribute('aria-hidden'); }],
+    ['tabs plain buttons', d, '', '', /a11y: the tabs are not a tab list/, () => { document.querySelector('.r-tabs').removeAttribute('role'); }],
     ['type size', d, '', '.r-name { font-size: 17px !important; }', /font size 17 for "مصر"/],
     ['18 pt misuse', d, '', '.r-sub { font-size: 18px !important; font-weight: 700 !important; }', /18 pt is for the country name/],
     ['font weight', d, '&tab=leader', '.s-off .r-at b { font-weight: 700 !important; }', /font weight 13\/700/],
@@ -751,7 +776,7 @@ async function selftest(b) {
     const ctx = await b.newContext({ viewport: { width: d.w, height: d.h }, deviceScaleFactor: 3 });
     const ctx1 = await b.newContext({ viewport: { width: d.w, height: d.h }, deviceScaleFactor: 1 });
     const entry = { device: `${d.w}x${d.h} side ${d.side} bottom ${d.bottom} ${d.cutout}`, renderedAt: new Date().toISOString(), inputs: { files: INPUTS, sha1: inputsHash() },
-      issues: [], views: {}, pngs: [] };
+      issues: [], views: {}, pngs: [], pngSha1: {}, env: { chromium: b.version() } };
     const clearBy = {};
     for (const { suffix, extra, png: save } of await viewsFor(ctx1, d)) {
       const view = viewOf(extra), p = await open(ctx, PAGE + qs(d) + extra);
@@ -759,8 +784,10 @@ async function selftest(b) {
         const png = suffix ? path.join(__dirname, d.id + suffix + '.png') : path.join(OUT, d.id + '.png');
         await p.screenshot({ path: png });
         entry.pngs.push(path.relative(OUT, png));
+        entry.pngSha1[path.relative(OUT, png)] = crypto.createHash('sha1').update(fs.readFileSync(png)).digest('hex');
       }
-      if (!suffix) { const ph = await open(ctx, PAGE + qs(d) + '&hit=1'); await ph.screenshot({ path: path.join(__dirname, d.id + '_hit.png') }); await ph.close(); }
+      if (!suffix) { const hp = path.join(__dirname, d.id + '_hit.png'), ph = await open(ctx, PAGE + qs(d) + '&hit=1'); await ph.screenshot({ path: hp }); await ph.close();
+        entry.pngSha1[path.relative(OUT, hp)] = crypto.createHash('sha1').update(fs.readFileSync(hp)).digest('hex'); }
       const { m, c } = await check(p, d, b3, view);
       addClear(clearBy, view, m.clearNow);
       m.issues.forEach((i) => entry.issues.push(`${view}: ${i}`));

@@ -12,7 +12,7 @@
           <div class="r-row"><h2 class="r-name">القاهرة</h2><span class="r-cap"><svg class="i"><use href="#i-star"/></svg>العاصمة</span></div>
           <div class="r-sub">مصر<span class="r-dot"> · </span>محافظة</div>
         </div>
-        <button class="r-x tap" aria-label="إغلاق"><svg class="i"><use href="#i-close"/></svg></button>
+        <button class="r-x tap" aria-label="إغلاق، العودة إلى الخريطة"><svg class="i"><use href="#i-close"/></svg></button>
       </header>
 
       <!-- step 1: the card -->
@@ -22,19 +22,19 @@
             <span class="r-kl"><svg class="i"><use href="#i-people"/></svg>السكان</span>
             <span class="r-kv"><b class="ltr">6.8</b><span>مليون</span></span>
             <span class="r-kr r-blue"><span class="ltr">+11</span> ألف شهريًا</span>
-            <button class="r-why tap">لماذا؟</button>
+            <button class="r-why tap" aria-label="لماذا؟ السكان">لماذا؟</button>
           </div>
           <div class="r-kpi">
             <span class="r-kl"><svg class="i r-amber"><use href="#i-flame"/></svg>الاضطرابات</span>
             <span class="r-kv"><b class="ltr r-amber">64</b><span>/ <span class="ltr">100</span></span></span>
             <span class="r-kr"><span class="ltr">+2</span> شهريًا</span>
-            <button class="r-why tap">لماذا؟</button>
+            <button class="r-why tap" aria-label="لماذا؟ الاضطرابات">لماذا؟</button>
           </div>
           <div class="r-kpi">
             <span class="r-kl"><svg class="i"><use href="#i-build"/></svg>البنية التحتية</span>
             <span class="r-kv"><b class="ltr">8</b><span>/ <span class="ltr">10</span></span></span>
             <span class="r-kr">دون تغير</span>
-            <button class="r-why tap">لماذا؟</button>
+            <button class="r-why tap" aria-label="لماذا؟ البنية التحتية">لماذا؟</button>
           </div>
         </div>
 
@@ -58,7 +58,7 @@
       <div class="r-body r-gv" data-dtab="govern" role="tabpanel" aria-labelledby="rt-govern">
         <section class="r-sec">
           <h3>إدارة المحافظة</h3>
-          <div class="r-gov"><span class="r-gl">المحافظ</span><span class="r-gn">عبد العظيم وزير</span><button class="r-btn tap">تغيير</button></div>
+          <div class="r-gov"><span class="r-gl">المحافظ</span><span class="r-gn">عبد العظيم وزير</span><button class="r-btn tap" aria-label="تغيير المحافظ: عبد العظيم وزير">تغيير</button></div>
         </section>
         <section class="r-sec">
           <h3>الأولوية التنموية</h3>
@@ -81,7 +81,7 @@
           <div class="r-link tap" role="button" tabindex="0" aria-label="الإنشاءات والمرافق">
             <span class="r-tile"><svg class="i"><use href="#i-build"/></svg></span>
             <span class="r-at"><b>الإنشاءات والمرافق</b><span>الكهرباء · النقل · المرافق العامة</span></span>
-            <button class="r-btn tap">تخطيط التوسعة</button>
+            <button class="r-btn tap" aria-label="تخطيط التوسعة: الإنشاءات والمرافق">تخطيط التوسعة</button>
             <svg class="i r-chev"><use href="#i-chev"/></svg>
           </div>
           <div class="r-link tap" role="button" tabindex="0" aria-label="إدارة القوات">
@@ -103,8 +103,8 @@
               <div class="r-dfoot">
                 <span>المحافظ: <em>مؤيد</em> · المالية: <em>تحفظ</em></span>
                 <div class="r-dbtn">
-                  <button class="r-btn tap">اعتماد البرنامج</button>
-                  <button class="r-btn r-grey tap">تأجيل</button>
+                  <button class="r-btn tap" aria-label="اعتماد البرنامج: تخفيض تعرفة الحافلات لمدة سنة، 10 ملايين دولار شهريًا">اعتماد البرنامج</button>
+                  <button class="r-btn r-grey tap" aria-label="تأجيل البرنامج: تخفيض تعرفة الحافلات لمدة سنة">تأجيل</button>
                 </div>
               </div>
             </div>
@@ -191,11 +191,11 @@
         </section>
         <section class="r-sec">
           <h3>أكبر أسباب الاضطرابات</h3>
-          <div class="p-why"><span>القمع ونقص الحريات</span><b class="r-amber"><svg class="r-arr" aria-hidden="true"><use href="#t-up"/></svg><span class="ltr">+12</span></b></div>
-          <div class="p-why"><span>تراجع مستوى المعيشة</span><b class="r-amber"><svg class="r-arr" aria-hidden="true"><use href="#t-up"/></svg><span class="ltr">+10</span></b></div>
-          <div class="p-why"><span>بطالة الشباب</span><b class="r-amber"><svg class="r-arr" aria-hidden="true"><use href="#t-up"/></svg><span class="ltr">+9</span></b></div>
-          <div class="p-why"><span>الشرطة</span><b class="r-blue"><svg class="r-arr" aria-hidden="true"><use href="#t-down"/></svg><span class="ltr">−8</span></b></div>
-          <button class="r-why p-all tap">لماذا؟ · كل الأسباب</button>
+          <div class="p-why" role="img" aria-label="القمع ونقص الحريات: يرفع الاضطرابات +12 نقطة"><span>القمع ونقص الحريات</span><b class="r-amber"><svg class="r-arr" aria-hidden="true"><use href="#t-up"/></svg><span class="ltr">+12</span></b></div>
+          <div class="p-why" role="img" aria-label="تراجع مستوى المعيشة: يرفع الاضطرابات +10 نقطة"><span>تراجع مستوى المعيشة</span><b class="r-amber"><svg class="r-arr" aria-hidden="true"><use href="#t-up"/></svg><span class="ltr">+10</span></b></div>
+          <div class="p-why" role="img" aria-label="بطالة الشباب: يرفع الاضطرابات +9 نقطة"><span>بطالة الشباب</span><b class="r-amber"><svg class="r-arr" aria-hidden="true"><use href="#t-up"/></svg><span class="ltr">+9</span></b></div>
+          <div class="p-why" role="img" aria-label="الشرطة: يخفض الاضطرابات 8 نقطة"><span>الشرطة</span><b class="r-blue"><svg class="r-arr" aria-hidden="true"><use href="#t-down"/></svg><span class="ltr">−8</span></b></div>
+          <button class="r-why p-all tap" aria-label="لماذا؟ كل أسباب الاضطرابات">لماذا؟ · كل الأسباب</button>
         </section>
         <section class="r-sec">
           <h3>تأييد الأحزاب هنا</h3>
