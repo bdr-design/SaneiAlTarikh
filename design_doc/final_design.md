@@ -455,7 +455,7 @@ Dependencies run one way: Core ← Content ← Engine ← AI; Core ← Map; Pres
 **Spreading the work across cores (L14).** Determinism stays exact, because each parallel job writes only its own rows and the results are merged in serial order:
 - **Monthly slot in parallel.** The governments due today run `Economy`, `Population`, `Internal`, `Politics`, `Intelligence`, `Research` and `DiplomacyDrift` in a `TaskGroup`, one task per government. Each reads yesterday's shared state and writes only that government's rows. Anything that crosses to another government (trade, aid, migration, ledger postings) goes into the task's own outbox. After the group, the outboxes are applied in (government serial, sequence) order. `ConditionalEvents` then run serially.
 - **AI on its own task.** Strategic and diplomatic AI read an immutable snapshot on a separate task and return Commands. The host applies them at a fixed latency (the next day boundary after the snapshot's day plus 1), in (day, issuerRank, sequence) order, so the result does not depend on how fast the AI task ran. Operational AI stays inside the day, within its 0.25 ms line.
-- **Bounded per day.** The monthly slots spread about 7–8 governments over each day; strategic AI runs at most 15 a day; route searches at most 12 a day; front execution every 3 days, staggered.
+- **Bounded per day.** The owner set **320 playable governments at the start** («حطها 320 وانتبه من الثقل»). Every government keeps its monthly slot; a **quiet** government (no war, no unrest above 60, not bordering the player or a war, an economy outside the largest 160) runs its full slot and its strategic AI every second month, with a light drift (prices, population trend) in the month between, and becomes active again the day any of those conditions changes. So about 8 governments run a full slot each day; the governor may widen the quiet set under thermal pressure (never the player, never a government at war). The monthly slots spread about 8 governments over each day; strategic AI runs at most 15 a day; route searches at most 12 a day; front execution every 3 days, staggered.
 - **One core is enough.** On a phone under thermal pressure the governor can run the group serially; the state hash is the same either way (tested on Linux in CI).
 
 **Lifecycle.**
@@ -667,12 +667,12 @@ It must not touch `Sources/**`, `App/Sources/**` or `content/packs/base/**`. Map
 | Air regions, naval zones, chokepoint disruption | 0.05 |
 | Espionage operations | 0.05 |
 | Construction and ledger | 0.07 |
-| Monthly slot (7–8 governments): markets and industries 0.25, population 0.03, internal 0.03, politics 0.05, intelligence 0.02, research 0.01, drift 0.02, conditional events 0.03 | 0.44 |
-| Strategic AI stagger (≈7 a day at normal; ≤15 at expert) | 0.15 (0.30 at expert) |
+| Monthly slot (about 8 governments a day: 320 at the start, the quiet ones every second month, below): markets and industries 0.27, population 0.03, internal 0.03, politics 0.05, intelligence 0.02, research 0.01, drift 0.03, conditional events 0.03 | 0.47 |
+| Strategic AI stagger (≈8 a day at normal; ≤15 at expert) | 0.16 (0.30 at expert) |
 | World market and transport payout (day 1 only, amortized) | 0.01 |
 | Operational AI | 0.25 |
 | History and notifications | 0.03 |
-| **Total** | **≈1.95 (≈2.10 at expert)** |
+| **Total** | **≈1.99 (≈2.12 at expert)** |
 
 | Speed (السرعة) | Days/s | Wake-ups/s | Days per wake | Simulation CPU | Snapshot rate | HUD rate | 2011 → 2100 |
 |---|---|---|---|---|---|---|---|
