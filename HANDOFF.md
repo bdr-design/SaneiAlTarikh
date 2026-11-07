@@ -14,10 +14,15 @@ Arabic with Western digits, and never claim "tested on iPhone" for browser mocku
 - `ownerDelegation`: Claude makes the design calls, approves each finished screen itself (reviewed, fixed, gated), logs
   it, moves it to `main`, shows it to the owner, and goes on without asking. The owner can change anything.
 - `finishEverything`: carry on without stopping through every remaining item, then build the game until it is ready.
-- Reviewers: subagents are **read-only reviewers only** (Claude does all the work). Every item gets **three**
+- Reviewers: subagents are **read-only reviewers only** (Claude does all the work). Every item gets **six**
   independent reviewers, each its own lens: (1) the checker and consistency, (2) what the player sees and does,
-  (3) dimensions and the formatting of text and boxes (`layoutReviewer`). Every confirmed finding is fixed before
-  approval. The whole game also gets the layout review across all screens.
+  (3) dimensions and the formatting of text and boxes (`layoutReviewer`), (4) boxes and type alone (`boxFontReviewer`),
+  (5) heaviness: the cost on the phone against the doc's budgets and `loadSpread` (`heavinessReviewer`), (6) errors
+  alone (`errorsReviewer`). Every confirmed finding is fixed before approval. The whole game also gets these reviews
+  across all screens.
+- `sheetIdentity` (2026-11-07): every screen and sheet has its own identity colour and emblem on its chrome (no neutral
+  grey); sheets opened from a section keep that section's identity.
+- Talk to the owner in Arabic always.
 - `mapCentral` (2026-11-02): the game map stays central and visible; options, decisions and dialogs never cover or dim
   it; they open as side sheets in the panels' frame. The shared checker now enforces this (map undimmed, nothing drawn
   over Egypt).
@@ -88,6 +93,15 @@ page `design/screen14/A/index.html` without `&t`).
    in §7), fix every confirmed finding, re-gate what changed.
 3. Then approve screens 15 and 16 under the delegation, move them and the re-gated 8–13 (and the shared checker) to
    `main`, and tell the owner in Gulf Arabic with a board of renders.
+
+## 4b. State on 2026-11-07
+- Screens 1–23 designed and approved under the delegation; on `main` through screen 23. Every screen gated in IBM Plex
+  Sans Arabic (27 screens: 0 issues on 7 phones, self-tests, `check_screen.py` PASS).
+- The whole-game heaviness and errors reviews are fixed; their native-build rules are in the design doc §3.9.
+- T-024 (the second-country test, `tools/stress_names.js`, design doc §3.10) is in review; then items 7 and 8 below.
+- Owed to the owner before the build: D-3 says screens 1–3 are shown to him opaque (no blur) before they switch.
+- **Never edit a file a running gate reads** (the shared checker, base pages, decisions.json for screen 23): its
+  reports go stale and the gate must run again.
 
 ## 5. Remaining work after that (in order)
 1. The «لماذا؟» (why) sheet.
