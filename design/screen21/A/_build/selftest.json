@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-07T16:15:41.515Z",
+ "ranAt": "2026-11-07T17:38:49.243Z",
  "inputs": {
   "files": [
    "index.html",
@@ -23,17 +23,52 @@
    "header_cairo.jpg",
    "map_overlay_cairo.svg"
   ],
-  "sha1": "19d985f8c2a16956ae4e1d823bf8f9219005a8b9"
+  "sha1": "a891edcdb09bb044d2b2db5fc0370483955431d6"
  },
  "cleanIssues": {
-  "i16promax": [],
-  "i16promax_relation_end": [],
-  "i16promax_relation_at182": [],
+  "i16promax": [
+   "ellipsis on \"إثيوبيا\"",
+   "ellipsis on \"علاقتنا\"",
+   "clipped text (top): \"·\" 794.75..804.28 y 84..101",
+   "ellipsis on \"خلاف مياه النيل\""
+  ],
+  "i16promax_relation_end": [
+   "ellipsis on \"إثيوبيا\"",
+   "ellipsis on \"علاقتنا\"",
+   "clipped text (top): \"·\" 794.75..804.28 y 84..101",
+   "ellipsis on \"خلاف مياه النيل\""
+  ],
+  "i16promax_relation_at182": [
+   "ellipsis on \"إثيوبيا\"",
+   "ellipsis on \"علاقتنا\"",
+   "clipped text (top): \"·\" 794.75..804.28 y 84..101",
+   "ellipsis on \"خلاف مياه النيل\""
+  ],
   "i16promax coverage": [],
-  "se": [],
-  "se_relation_end": [],
-  "se_relation_at131": [],
-  "se_relation_at262": [],
+  "se": [
+   "ellipsis on \"إثيوبيا\"",
+   "ellipsis on \"علاقتنا\"",
+   "clipped text (top): \"·\" 559.75..569.28 y 84..101",
+   "ellipsis on \"خلاف مياه النيل\""
+  ],
+  "se_relation_end": [
+   "ellipsis on \"إثيوبيا\"",
+   "ellipsis on \"علاقتنا\"",
+   "clipped text (top): \"·\" 559.75..569.28 y 84..101",
+   "ellipsis on \"خلاف مياه النيل\""
+  ],
+  "se_relation_at131": [
+   "ellipsis on \"إثيوبيا\"",
+   "ellipsis on \"علاقتنا\"",
+   "clipped text (top): \"·\" 559.75..569.28 y 84..101",
+   "ellipsis on \"خلاف مياه النيل\""
+  ],
+  "se_relation_at262": [
+   "ellipsis on \"إثيوبيا\"",
+   "ellipsis on \"علاقتنا\"",
+   "clipped text (top): \"·\" 559.75..569.28 y 84..101",
+   "ellipsis on \"خلاف مياه النيل\""
+  ],
   "se coverage": []
  },
  "results": [
@@ -41,7 +76,9 @@
    "name": "type size",
    "ok": true,
    "sample": [
-    "font size 17 for \"إثيوبيا\""
+    "font size 17 for \"إثيوبيا\"",
+    "ellipsis on \"إثيوبيا\"",
+    "ellipsis on \"علاقتنا\""
    ]
   },
   {
@@ -49,7 +86,8 @@
    "ok": true,
    "sample": [
     "text colour off-token rgb(136, 153, 170): \"إثيوبيا\"",
-    "contrast 2.4 for \"إثيوبيا\""
+    "ellipsis on \"إثيوبيا\"",
+    "ellipsis on \"علاقتنا\""
    ]
   },
   {
@@ -57,16 +95,17 @@
    "ok": true,
    "sample": [
     "panel radius العلاقة مع إثيوبيا: 6 (want 12)",
-    "radius 6 for .sheet (want 12)"
+    "radius 6 for .sheet (want 12)",
+    "ellipsis on \"إثيوبيا\""
    ]
   },
   {
    "name": "panel in the side inset",
    "ok": true,
    "sample": [
-    "text in side inset: −22",
-    "text in side inset: −1",
-    "text in side inset: الدولة"
+    "ellipsis on \"إثيوبيا\"",
+    "ellipsis on \"علاقتنا\"",
+    "clipped text (top): \"·\" 824.75..834.28 y 84..101"
    ]
   },
   {
@@ -74,7 +113,8 @@
    "ok": true,
    "sample": [
     "panel not opaque: العلاقة مع إثيوبيا rgba(9, 17, 25, 0.66)",
-    "contrast 4.07 for \"وقّعتها إثيوبيا في\""
+    "ellipsis on \"إثيوبيا\"",
+    "ellipsis on \"علاقتنا\""
    ]
   },
   {
@@ -82,289 +122,323 @@
    "ok": true,
    "sample": [
     "panel not opaque (opacity 0.60): العلاقة مع إثيوبيا",
-    "brief text not fully visible: إثيوبيا",
-    "brief text not fully visible: علاقتنا · خلاف مياه النيل"
+    "ellipsis on \"إثيوبيا\"",
+    "ellipsis on \"علاقتنا\""
    ]
   },
   {
    "name": "Egypt covered",
    "ok": true,
    "sample": [
-    "Nile delta covered by panel العلاقة مع إثيوبيا",
-    "Egypt covered by panel العلاقة مع إثيوبيا",
-    "Egypt outside the safe screen"
+    "ellipsis on \"إثيوبيا\"",
+    "ellipsis on \"علاقتنا\"",
+    "clipped text (top): \"·\" 794.75..804.28 y 84..101"
    ]
   },
   {
    "name": "map dimmed",
    "ok": true,
    "sample": [
-    "the map is dimmed (opacity 1.00, filter brightness(0.35))"
+    "ellipsis on \"إثيوبيا\"",
+    "ellipsis on \"علاقتنا\"",
+    "clipped text (top): \"·\" 794.75..804.28 y 84..101"
    ]
   },
   {
    "name": "map faded",
    "ok": true,
    "sample": [
-    "the map is dimmed (opacity 0.30, filter none)"
+    "ellipsis on \"إثيوبيا\"",
+    "ellipsis on \"علاقتنا\"",
+    "clipped text (top): \"·\" 794.75..804.28 y 84..101"
    ]
   },
   {
    "name": "scrim over the map",
    "ok": true,
    "sample": [
-    "something drawn over the map: DIV (rgba(0, 0, 0, 0.55))",
-    "contrast 1.92 for \"3\""
+    "ellipsis on \"إثيوبيا\"",
+    "ellipsis on \"علاقتنا\"",
+    "clipped text (top): \"·\" 794.75..804.28 y 84..101"
    ]
   },
   {
    "name": "sheet width",
    "ok": true,
    "sample": [
-    "sheet width 330 (want round(clamp(43% of 832, 340, 380)), or the room the dock leaves if 330..: 358)"
+    "ellipsis on \"إثيوبيا\"",
+    "ellipsis on \"علاقتنا\"",
+    "clipped text (top): \"·\" 794.75..804.28 y 84..101"
    ]
   },
   {
    "name": "sheet top",
    "ok": true,
    "sample": [
-    "hit overlap الاستقرار 58% / إغلاق، العودة إلى العلاقات",
-    "panel overlap الدولة: مصر، حسني مبارك، ج / العلاقة مع إثيوبيا",
-    "panel overlap الخزينة 36.0 مليار $ الاست / العلاقة مع إثيوبيا"
+    "ellipsis on \"إثيوبيا\"",
+    "ellipsis on \"علاقتنا\"",
+    "clipped text (top): \"·\" 794.75..804.28 y 70..87"
    ]
   },
   {
    "name": "dock hidden although it fits",
    "ok": true,
    "sample": [
-    "dock hidden although it fits left of the sheet"
+    "ellipsis on \"إثيوبيا\"",
+    "ellipsis on \"علاقتنا\"",
+    "clipped text (top): \"·\" 794.75..804.28 y 84..101"
    ]
   },
   {
    "name": "dock shown on the SE",
    "ok": true,
    "sample": [
-    "icon over text: r-arr / \"الجيش\"",
-    "icon over text: i / \"−10\"",
-    "panel overlap الأقسام / العلاقة مع إثيوبيا"
+    "ellipsis on \"إثيوبيا\"",
+    "ellipsis on \"علاقتنا\"",
+    "clipped text (top): \"·\" 559.75..569.28 y 84..101"
    ]
   },
   {
    "name": "left stack moved",
    "ok": true,
    "sample": [
-    "HUD element moved from its B3 position: .toast x 70.0..275.6 y 56.0..88.0",
-    "HUD element moved from its B3 position: .btn.mode x 70.0..191.6 y 96.0..128.0",
-    "HUD element moved from its B3 position: .btn.home x 70.0..141.5 y 136.0..168.0"
+    "ellipsis on \"إثيوبيا\"",
+    "ellipsis on \"علاقتنا\"",
+    "clipped text (top): \"·\" 794.75..804.28 y 84..101"
    ]
   },
   {
    "name": "map label cut",
    "ok": true,
    "sample": [
-    "map label ليبيا sliced by the screen edge or the side inset",
-    "map label إيران sliced by the screen edge or the side inset",
-    "map label إيران squeezed between a panel and the screen edge"
+    "ellipsis on \"إثيوبيا\"",
+    "ellipsis on \"علاقتنا\"",
+    "clipped text (top): \"·\" 794.75..804.28 y 84..101"
    ]
   },
   {
    "name": "contrast",
    "ok": true,
    "sample": [
-    "contrast 1 for \"العلاقة\"",
-    "contrast 1.66 for \"−22\"",
-    "contrast 1.66 for \"−1\""
+    "ellipsis on \"إثيوبيا\"",
+    "ellipsis on \"علاقتنا\"",
+    "clipped text (top): \"·\" 794.75..804.28 y 84..101"
    ]
   },
   {
    "name": "dock item not marked",
    "ok": true,
    "sample": [
-    "the open section «الخارجية» is not marked in the dock"
+    "ellipsis on \"إثيوبيا\"",
+    "ellipsis on \"علاقتنا\"",
+    "clipped text (top): \"·\" 794.75..804.28 y 84..101"
    ]
   },
   {
    "name": "identity line missing",
    "ok": true,
    "sample": [
-    "panel top line none rgb(91, 134, 242) 2px (want the section colour, 2 pt, at the top)"
+    "ellipsis on \"إثيوبيا\"",
+    "ellipsis on \"علاقتنا\"",
+    "clipped text (top): \"·\" 794.75..804.28 y 84..101"
    ]
   },
   {
    "name": "emblem drawn grey",
    "ok": true,
    "sample": [
-    "section emblem missing or not in the section colour"
+    "ellipsis on \"إثيوبيا\"",
+    "ellipsis on \"علاقتنا\"",
+    "clipped text (top): \"·\" 794.75..804.28 y 84..101"
    ]
   },
   {
    "name": "section colour on data",
    "ok": true,
    "sample": [
-    "section colour on data text: \"علاقتنا\"",
-    "section colour on data text: \"خلاف مياه النيل\"",
-    "section colour on data chrome: علاقتنا · خلاف مياه النيل"
+    "ellipsis on \"إثيوبيا\"",
+    "ellipsis on \"علاقتنا\"",
+    "clipped text (top): \"·\" 794.75..804.28 y 84..101"
    ]
   },
   {
    "name": "money unit",
    "ok": true,
    "sample": [
-    "clipped text (top): \"0.4\" 866.09..881 y 108..123",
-    "clipped text (top): \"مليار $\" 838.42..866.09 y 108..123",
-    "money unit: «0.4 مليار» (under 1 billion is written in millions)"
+    "ellipsis on \"إثيوبيا\"",
+    "ellipsis on \"علاقتنا\"",
+    "clipped text (top): \"·\" 794.75..804.28 y 84..101"
    ]
   },
   {
    "name": "sign outside its number",
    "ok": true,
    "sample": [
-    "clipped text (top): \"تغير +\" 859.06..881 y 108..123",
-    "clipped text (top): \"3\" 853.06..859.06 y 108..123",
-    "a sign outside its number: «تغير +3»"
+    "ellipsis on \"إثيوبيا\"",
+    "ellipsis on \"علاقتنا\"",
+    "clipped text (top): \"·\" 794.75..804.28 y 84..101"
    ]
   },
   {
    "name": "colour alone",
    "ok": true,
    "sample": [
-    "clipped text (top): \"تراجع\" 860.27..881 y 108..123",
-    "colour alone: «تراجع» has no arrow or icon"
+    "ellipsis on \"إثيوبيا\"",
+    "ellipsis on \"علاقتنا\"",
+    "clipped text (top): \"·\" 794.75..804.28 y 84..101"
    ]
   },
   {
    "name": "an image in the sheet",
    "ok": true,
    "sample": [
-    "an image in the sheet"
+    "ellipsis on \"إثيوبيا\"",
+    "ellipsis on \"علاقتنا\"",
+    "clipped text (top): \"·\" 794.75..804.28 y 84..101"
    ]
   },
   {
    "name": "close not round",
    "ok": true,
    "sample": [
-    "close button is not round"
+    "close button is not round",
+    "ellipsis on \"إثيوبيا\"",
+    "ellipsis on \"علاقتنا\""
    ]
   },
   {
    "name": "label without a role",
    "ok": true,
    "sample": [
-    "clipped text (top): \"اختبار\" 860.25..881 y 108..123",
-    "a11y: a label VoiceOver may skip (no role): «اختبار»"
+    "ellipsis on \"إثيوبيا\"",
+    "ellipsis on \"علاقتنا\"",
+    "clipped text (top): \"·\" 794.75..804.28 y 84..101"
    ]
   },
   {
    "name": "text overlap",
    "ok": true,
    "sample": [
-    "text overlap \"إثيوبيا\" / \"علاقتنا\"",
-    "text overlap \"إثيوبيا\" / \"·\"",
-    "text overlap \"إثيوبيا\" / \"خلاف مياه النيل\""
+    "ellipsis on \"إثيوبيا\"",
+    "ellipsis on \"علاقتنا\"",
+    "clipped text (top): \"·\" 794.75..804.28 y 70..87"
    ]
   },
   {
    "name": "dock underline missing",
    "ok": true,
    "sample": [
-    "dock underline missing or off: none 16pxx2px rgb(91, 134, 242) (want 16 x 2 in the section colour)"
+    "ellipsis on \"إثيوبيا\"",
+    "ellipsis on \"علاقتنا\"",
+    "clipped text (top): \"·\" 794.75..804.28 y 84..101"
    ]
   },
   {
    "name": "closed dock item coloured",
    "ok": true,
    "sample": [
-    "dock item 1 (closed) not neutral as on B3: rgb(91, 134, 242) / rgb(234, 242, 247)",
-    "dock item 2 (closed) not neutral as on B3: rgb(91, 134, 242) / rgb(234, 242, 247)",
-    "dock item 3 (closed) not neutral as on B3: rgb(91, 134, 242) / rgb(234, 242, 247)"
+    "ellipsis on \"إثيوبيا\"",
+    "ellipsis on \"علاقتنا\"",
+    "clipped text (top): \"·\" 794.75..804.28 y 84..101"
    ]
   },
   {
    "name": "identity line colour",
    "ok": true,
    "sample": [
-    "panel top line \"\" rgb(63, 224, 208) 2px (want the section colour, 2 pt, at the top)"
+    "ellipsis on \"إثيوبيا\"",
+    "ellipsis on \"علاقتنا\"",
+    "clipped text (top): \"·\" 794.75..804.28 y 84..101"
    ]
   },
   {
    "name": "emblem size",
    "ok": true,
    "sample": [
-    "size 28.0x32.0 for .s-emb (want 32 x 32)"
+    "ellipsis on \"إثيوبيا\"",
+    "ellipsis on \"علاقتنا\"",
+    "clipped text (top): \"·\" 794.75..804.28 y 84..101"
    ]
   },
   {
    "name": "chip not white",
    "ok": true,
    "sample": [
-    "white touch off: .r-chip borderTopColor rgb(63, 224, 208) (want rgba(234, 242, 247, 0.5))",
-    "white touch off: .r-chip color rgb(63, 224, 208) (want rgb(234, 242, 247))",
-    "white touch off: .r-chip borderTopColor rgb(63, 224, 208) (want rgba(234, 242, 247, 0.5))"
+    "ellipsis on \"إثيوبيا\"",
+    "ellipsis on \"علاقتنا\"",
+    "clipped text (top): \"·\" 794.75..804.28 y 84..101"
    ]
   },
   {
    "name": "tile icons cyan",
    "ok": true,
    "sample": [
-    "white touch off: .r-tile color rgb(127, 233, 255) (want rgb(234, 242, 247))",
-    "white touch off: .r-tile color rgb(127, 233, 255) (want rgb(234, 242, 247))",
-    "white touch off: .r-tile color rgb(127, 233, 255) (want rgb(234, 242, 247))"
+    "ellipsis on \"إثيوبيا\"",
+    "ellipsis on \"علاقتنا\"",
+    "clipped text (top): \"·\" 794.75..804.28 y 84..101"
    ]
   },
   {
    "name": "chip arrow against its sign",
    "ok": true,
    "sample": [
-    "«زيارة رسمية»: the chip's arrow does not agree with its sign",
-    "a11y: «زيارة رسمية» does not say the chip's direction in words"
+    "ellipsis on \"إثيوبيا\"",
+    "ellipsis on \"علاقتنا\"",
+    "clipped text (top): \"·\" 794.75..804.28 y 84..101"
    ]
   },
   {
    "name": "row read in part",
    "ok": true,
    "sample": [
-    "a11y: «جزء» does not read all it shows: العلاقة شهريًا -22 -1"
+    "ellipsis on \"إثيوبيا\"",
+    "ellipsis on \"علاقتنا\"",
+    "clipped text (top): \"·\" 794.75..804.28 y 84..101"
    ]
   },
   {
    "name": "a long headline label",
    "ok": true,
    "sample": [
-    "clipped text (sides): \"عنوان طويل جدًا لا يتسع لخانته أبدًا\" 385.38..539.25 y 116..133",
-    "text outside the sheet's 12 pt padding: \"عنوان طويل جدًا لا يتسع لخانته أبدًا\"",
-    "clipped text (sides): \"1\" 528.44..539.25 y 134..161"
+    "ellipsis on \"إثيوبيا\"",
+    "ellipsis on \"علاقتنا\"",
+    "clipped text (top): \"·\" 794.75..804.28 y 84..101"
    ]
   },
   {
    "name": "text wider than its box",
    "ok": true,
    "sample": [
-    "text wider than its box: «ما يحرك العلاقة» (68 in 20)"
+    "ellipsis on \"إثيوبيا\"",
+    "ellipsis on \"علاقتنا\"",
+    "clipped text (top): \"·\" 794.75..804.28 y 84..101"
    ]
   },
   {
    "name": "a long status cell",
    "ok": true,
    "sample": [
-    "clipped text (sides): \"قيمة طويلة جدًا لا تتسع لنصف الجدول\" 416.53..613.3 y 112.5..131.5",
-    "text outside the sheet's 12 pt padding: \"قيمة طويلة جدًا لا تتسع لنصف الجدول\"",
-    "horizontal overflow in خانةقيمة طويلة جدًا لا تتس"
+    "ellipsis on \"إثيوبيا\"",
+    "ellipsis on \"علاقتنا\"",
+    "clipped text (top): \"·\" 794.75..804.28 y 84..101"
    ]
   },
   {
    "name": "font weight (no tabs)",
    "ok": true,
    "sample": [
+    "ellipsis on \"إثيوبيا\"",
     "font weight 11.5/700 for \"علاقتنا\"",
-    "font weight 11.5/700 for \"·\"",
-    "font weight 11.5/700 for \"خلاف مياه النيل\""
+    "ellipsis on \"علاقتنا\""
    ]
   },
   {
    "name": "a tab row on a one-body sheet",
    "ok": true,
    "sample": [
-    "a tab row on a sheet that has one body"
+    "ellipsis on \"إثيوبيا\"",
+    "ellipsis on \"علاقتنا\"",
+    "clipped text (top): \"·\" 794.75..804.28 y 84..101"
    ]
   },
   {
@@ -372,87 +446,98 @@
    "ok": true,
    "sample": [
     "control height 40.00 for .r-x (want 32): إغلاق، العودة إلى العلاقات",
-    "close button is not round"
+    "close button is not round",
+    "ellipsis on \"إثيوبيا\""
    ]
   },
   {
    "name": "icon size (no tabs)",
    "ok": true,
    "sample": [
-    "icon size 19x19 (want 16): i"
+    "icon size 19x19 (want 16): i",
+    "ellipsis on \"إثيوبيا\"",
+    "ellipsis on \"علاقتنا\""
    ]
   },
   {
    "name": "fades wrong (no tabs)",
    "ok": true,
    "sample": [
-    "clipped text (bottom): \"في الشهر الأخير\" 592.19..646 y 358..373",
-    "clipped text (bottom): \"−3\" 332..347.61 y 349..368",
-    "fades 0/0 do not match the scroll state (top 0, over 308.0)"
+    "ellipsis on \"إثيوبيا\"",
+    "ellipsis on \"علاقتنا\"",
+    "clipped text (top): \"·\" 559.75..569.28 y 84..101"
    ]
   },
   {
    "name": "hint chevron missing (no tabs)",
    "ok": true,
    "sample": [
-    "scroll hint chevron missing with content below"
+    "ellipsis on \"إثيوبيا\"",
+    "ellipsis on \"علاقتنا\"",
+    "clipped text (top): \"·\" 559.75..569.28 y 84..101"
    ]
   },
   {
    "name": "hint over the content (no tabs)",
    "ok": true,
    "sample": [
-    "scroll hint not centred in the clear strip under the fade: y 198.0..216.0 (strip 344.0..366.0)",
-    "scroll hint over text: \"نعترف بها\"",
-    "scroll hint over text: \"الحكومة\""
+    "ellipsis on \"إثيوبيا\"",
+    "ellipsis on \"علاقتنا\"",
+    "clipped text (top): \"·\" 559.75..569.28 y 84..101"
    ]
   },
   {
    "name": "tap in the side inset (relation)",
    "ok": true,
    "sample": [
-    "text in side inset: في الشهر الأخير",
-    "text in side inset: التجارة",
-    "text in side inset: 400"
+    "ellipsis on \"إثيوبيا\"",
+    "ellipsis on \"علاقتنا\"",
+    "clipped text (top): \"·\" 824.75..834.28 y 84..101"
    ]
   },
   {
    "name": "text into a control (relation)",
    "ok": true,
    "sample": [
-    "text overlap \"لجنة مشتركة لمياه النيل\" / \"العلاقة\"",
-    "text overlap \"من النفوذ · مدتها سنة\" / \"العلاقة\"",
-    "text overlap \"من النفوذ · مدتها سنة\" / \"+12\""
+    "ellipsis on \"إثيوبيا\"",
+    "ellipsis on \"علاقتنا\"",
+    "clipped text (top): \"·\" 794.75..804.28 y 84..101"
    ]
   },
   {
    "name": "amber value without its icon (relation)",
    "ok": true,
    "sample": [
-    "colour alone: «400» (its label's icon is not in its colour)"
+    "ellipsis on \"إثيوبيا\"",
+    "ellipsis on \"علاقتنا\"",
+    "clipped text (top): \"·\" 794.75..804.28 y 84..101"
    ]
   },
   {
    "name": "brief text hidden (relation)",
    "ok": true,
    "sample": [
-    "brief text not fully visible: إثيوبيا"
+    "ellipsis on \"علاقتنا\"",
+    "clipped text (top): \"·\" 794.75..804.28 y 84..101",
+    "ellipsis on \"خلاف مياه النيل\""
    ]
   },
   {
    "name": "18 pt misuse (relation)",
    "ok": true,
    "sample": [
-    "18 pt is for the panel's name and the adjusted values only: \"ما يحرك العلاقة\""
+    "ellipsis on \"إثيوبيا\"",
+    "ellipsis on \"علاقتنا\"",
+    "clipped text (top): \"·\" 794.75..804.28 y 84..101"
    ]
   },
   {
    "name": "clipped text (relation)",
    "ok": true,
    "sample": [
-    "clipped text (sides): \"ما يحرك العلاقة\" 852.53..921 y 251..268",
-    "text outside the sheet's 12 pt padding: \"ما يحرك العلاقة\"",
-    "clipped text (sides): \"اتفاقية عنتيبي لمياه النيل\" 810.8..921 y 272..289"
+    "ellipsis on \"إثيوبيا\"",
+    "ellipsis on \"علاقتنا\"",
+    "clipped text (top): \"·\" 794.75..804.28 y 84..101"
    ]
   },
   {
@@ -468,154 +553,171 @@
    "name": "faint text (relation)",
    "ok": true,
    "sample": [
-    "brief text cannot be scrolled clear of the fades: وقّعتها إثيوبيا في 2010",
-    "brief text cannot be scrolled clear of the fades: اتفاقية 1959 مع السودان",
-    "brief text cannot be scrolled clear of the fades: في الشهر الأخير"
+    "ellipsis on \"إثيوبيا\"",
+    "ellipsis on \"علاقتنا\"",
+    "clipped text (top): \"·\" 794.75..804.28 y 84..101"
    ]
   },
   {
    "name": "% before its number (relation)",
    "ok": true,
    "sample": [
-    "% shown before its number: \"نسبة 20%\"",
-    "brief text missing: ما يحرك العلاقة",
-    "brief text missing: ما يحرك العلاقة"
+    "ellipsis on \"إثيوبيا\"",
+    "ellipsis on \"علاقتنا\"",
+    "clipped text (top): \"·\" 794.75..804.28 y 84..101"
    ]
   },
   {
    "name": "our flag",
    "ok": true,
    "sample": [
-    "the header is not Ethiopia's flag and name"
+    "ellipsis on \"إثيوبيا\"",
+    "ellipsis on \"علاقتنا\"",
+    "clipped text (top): \"·\" 794.75..804.28 y 84..101"
    ]
   },
   {
    "name": "relation off screen 10",
    "ok": true,
    "sample": [
-    "a11y: «العلاقة: سالب 22، تنخفض » does not read all it shows: -20",
-    "the relation -20 is not screen 10's -22",
-    "the causes add up to -22, the sum row says -22, the headline -20"
+    "ellipsis on \"إثيوبيا\"",
+    "ellipsis on \"علاقتنا\"",
+    "clipped text (top): \"·\" 794.75..804.28 y 84..101"
    ]
   },
   {
    "name": "trend up",
    "ok": true,
    "sample": [
-    "the arrow of «−1 شهريًا» does not agree with its sign",
-    "the trend does not agree with screen 10 («تنخفض»)"
+    "ellipsis on \"إثيوبيا\"",
+    "ellipsis on \"علاقتنا\"",
+    "clipped text (top): \"·\" 794.75..804.28 y 84..101"
    ]
   },
   {
    "name": "influence off",
    "ok": true,
    "sample": [
-    "a11y: «نفوذنا: 62 من 100، للإنف» does not read all it shows: 60",
-    "our influence is not screen 10's 62",
-    "brief text missing: 62"
+    "ellipsis on \"إثيوبيا\"",
+    "ellipsis on \"علاقتنا\"",
+    "clipped text (top): \"·\" 794.75..804.28 y 84..101"
    ]
   },
   {
    "name": "a cause changed",
    "ok": true,
    "sample": [
-    "a11y: «اتفاقية عنتيبي لمياه الن» does not read all it shows: -12",
-    "the causes are not the brief's",
-    "a11y: «اتفاقية عنتيبي لمياه النيل» does not say its share in words"
+    "ellipsis on \"إثيوبيا\"",
+    "ellipsis on \"علاقتنا\"",
+    "clipped text (top): \"·\" 794.75..804.28 y 84..101"
    ]
   },
   {
    "name": "causes unsorted",
    "ok": true,
    "sample": [
-    "the causes are not the brief's",
-    "the causes are not sorted by size within their sign"
+    "ellipsis on \"إثيوبيا\"",
+    "ellipsis on \"علاقتنا\"",
+    "clipped text (top): \"·\" 794.75..804.28 y 84..101"
    ]
   },
   {
    "name": "a rise in amber",
    "ok": true,
    "sample": [
-    "«التجارة»: sign, arrow and colour disagree"
+    "ellipsis on \"إثيوبيا\"",
+    "ellipsis on \"علاقتنا\"",
+    "clipped text (top): \"·\" 794.75..804.28 y 84..101"
    ]
   },
   {
    "name": "share unsaid",
    "ok": true,
    "sample": [
-    "a11y: «الاتحاد الأفريقي» does not say its share in words"
+    "ellipsis on \"إثيوبيا\"",
+    "ellipsis on \"علاقتنا\"",
+    "clipped text (top): \"·\" 794.75..804.28 y 84..101"
    ]
   },
   {
    "name": "sum off",
    "ok": true,
    "sample": [
-    "a sign not in a left-to-right number: «−20»",
-    "a sign drawn right of its number: «−20»",
-    "colour alone: «−20» has no arrow or icon"
+    "ellipsis on \"إثيوبيا\"",
+    "ellipsis on \"علاقتنا\"",
+    "clipped text (top): \"·\" 794.75..804.28 y 84..101"
    ]
   },
   {
    "name": "sanctions on",
    "ok": true,
    "sample": [
-    "the status cells are not the brief's: الدولة:نعترف بها، الحكومة:نعترف بها، المعاهدات:لا توجد، العقوبات:سارية"
+    "ellipsis on \"إثيوبيا\"",
+    "ellipsis on \"علاقتنا\"",
+    "clipped text (top): \"·\" 794.75..804.28 y 84..101"
    ]
   },
   {
    "name": "a visit too dear",
    "ok": true,
    "sample": [
-    "a11y: «زيارة رسمية» does not read its numbers",
-    "a11y: «زيارة رسمية: الكلفة 5 من» does not read all it shows: 70",
-    "action 1 is «زيارة رسمية · الكلفة: 70 من النفوذ · 6», the brief «زيارة رسمية · الكلفة: 5 من النفوذ · 6»"
+    "ellipsis on \"إثيوبيا\"",
+    "ellipsis on \"علاقتنا\"",
+    "clipped text (top): \"·\" 794.75..804.28 y 84..101"
    ]
   },
   {
    "name": "cause lines swapped",
    "ok": true,
    "sample": [
-    "a11y: «اتفاقية عنتيبي لمياه الن» does not read all it shows: مع السودان 1959",
-    "a11y: «حصص مياه النيل، اتفاقية » does not read all it shows: وقّعتها إثيوبيا في 2010",
-    "the causes are not the brief's"
+    "ellipsis on \"إثيوبيا\"",
+    "ellipsis on \"علاقتنا\"",
+    "clipped text (top): \"·\" 794.75..804.28 y 84..101"
    ]
   },
   {
    "name": "trend off",
    "ok": true,
    "sample": [
-    "a11y: «العلاقة: سالب 22، تنخفض » does not read all it shows: -3",
-    "the monthly trend is not the brief's −1"
+    "ellipsis on \"إثيوبيا\"",
+    "ellipsis on \"علاقتنا\"",
+    "clipped text (top): \"·\" 794.75..804.28 y 84..101"
    ]
   },
   {
    "name": "sum inside the section",
    "ok": true,
    "sample": [
-    "the sum is not after the causes and their rule"
+    "ellipsis on \"إثيوبيا\"",
+    "ellipsis on \"علاقتنا\"",
+    "clipped text (top): \"·\" 794.75..804.28 y 84..101"
    ]
   },
   {
    "name": "sum drawn white",
    "ok": true,
    "sample": [
-    "the sum and the headline draw the relation differently"
+    "ellipsis on \"إثيوبيا\"",
+    "ellipsis on \"علاقتنا\"",
+    "clipped text (top): \"·\" 794.75..804.28 y 84..101"
    ]
   },
   {
    "name": "headline read in pieces",
    "ok": true,
    "sample": [
-    "a11y: a label VoiceOver may skip (no role): «العلاقة: سالب 22، تنخفض نقطة و»",
-    "a11y: a headline is not read as one"
+    "ellipsis on \"إثيوبيا\"",
+    "ellipsis on \"علاقتنا\"",
+    "clipped text (top): \"·\" 794.75..804.28 y 84..101"
    ]
   },
   {
    "name": "sum unsaid",
    "ok": true,
    "sample": [
-    "a11y: «المجموع» does not read all it shows: العلاقة -22",
-    "a11y: the sum row does not read the relation"
+    "ellipsis on \"إثيوبيا\"",
+    "ellipsis on \"علاقتنا\"",
+    "clipped text (top): \"·\" 794.75..804.28 y 84..101"
    ]
   },
   {

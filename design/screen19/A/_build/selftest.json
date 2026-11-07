@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-07T16:55:57.295Z",
+ "ranAt": "2026-11-07T17:32:33.399Z",
  "inputs": {
   "files": [
    "index.html",
@@ -26,41 +26,48 @@
    "../../shared/map_mena_d1_overlay.svg",
    "header_cairo.jpg"
   ],
-  "sha1": "fc9ac87401407fdd4b1d43232c3a88c0fcb21fc1"
+  "sha1": "4174875a4cc00523803de97fb9bee1b005027c79"
  },
  "cleanIssues": {
   "i16promax": [
+   "ellipsis on \"الخريطة\"",
    "ellipsis on \"أوضاع الخريطة\"",
    "clipped text (top): \"·\" 756.84..766.38 y 84..101",
    "ellipsis on \"المعروض: الأمن\""
   ],
   "i16promax_modes_end": [
+   "ellipsis on \"الخريطة\"",
    "ellipsis on \"أوضاع الخريطة\"",
    "clipped text (top): \"·\" 756.84..766.38 y 84..101",
    "ellipsis on \"المعروض: الأمن\""
   ],
   "i16promax_modes_at182": [
+   "ellipsis on \"الخريطة\"",
    "ellipsis on \"أوضاع الخريطة\"",
    "clipped text (top): \"·\" 756.84..766.38 y 84..101",
    "ellipsis on \"المعروض: الأمن\""
   ],
   "i16promax coverage": [],
   "se": [
+   "ellipsis on \"الخريطة\"",
    "ellipsis on \"أوضاع الخريطة\"",
    "clipped text (top): \"·\" 521.84..531.38 y 84..101",
    "ellipsis on \"المعروض: الأمن\""
   ],
   "se_modes_end": [
+   "ellipsis on \"الخريطة\"",
    "ellipsis on \"أوضاع الخريطة\"",
    "clipped text (top): \"·\" 521.84..531.38 y 84..101",
    "ellipsis on \"المعروض: الأمن\""
   ],
   "se_modes_at131": [
+   "ellipsis on \"الخريطة\"",
    "ellipsis on \"أوضاع الخريطة\"",
    "clipped text (top): \"·\" 521.84..531.38 y 84..101",
    "ellipsis on \"المعروض: الأمن\""
   ],
   "se_modes_at262": [
+   "ellipsis on \"الخريطة\"",
    "ellipsis on \"أوضاع الخريطة\"",
    "clipped text (top): \"·\" 521.84..531.38 y 84..101",
    "ellipsis on \"المعروض: الأمن\""
@@ -73,8 +80,8 @@
    "ok": true,
    "sample": [
     "font size 17 for \"الخريطة\"",
-    "ellipsis on \"أوضاع الخريطة\"",
-    "clipped text (top): \"·\" 756.84..766.38 y 84..101"
+    "ellipsis on \"الخريطة\"",
+    "ellipsis on \"أوضاع الخريطة\""
    ]
   },
   {
@@ -82,8 +89,8 @@
    "ok": true,
    "sample": [
     "text colour off-token rgb(136, 153, 170): \"الخريطة\"",
-    "ellipsis on \"أوضاع الخريطة\"",
-    "clipped text (top): \"·\" 756.84..766.38 y 84..101"
+    "ellipsis on \"الخريطة\"",
+    "ellipsis on \"أوضاع الخريطة\""
    ]
   },
   {
@@ -92,25 +99,25 @@
    "sample": [
     "panel radius أوضاع الخريطة: 6 (want 12)",
     "radius 6 for .sheet (want 12)",
-    "ellipsis on \"أوضاع الخريطة\""
+    "ellipsis on \"الخريطة\""
    ]
   },
   {
    "name": "tap in the side inset",
    "ok": true,
    "sample": [
+    "ellipsis on \"الخريطة\"",
     "ellipsis on \"أوضاع الخريطة\"",
-    "clipped text (top): \"·\" 786.84..796.38 y 84..101",
-    "ellipsis on \"المعروض: الأمن\""
+    "clipped text (top): \"·\" 786.84..796.38 y 84..101"
    ]
   },
   {
    "name": "panel in the side inset",
    "ok": true,
    "sample": [
+    "ellipsis on \"الخريطة\"",
     "ellipsis on \"أوضاع الخريطة\"",
-    "clipped text (top): \"·\" 786.84..796.38 y 84..101",
-    "ellipsis on \"المعروض: الأمن\""
+    "clipped text (top): \"·\" 786.84..796.38 y 84..101"
    ]
   },
   {
@@ -118,8 +125,8 @@
    "ok": true,
    "sample": [
     "panel not opaque: أوضاع الخريطة rgba(9, 17, 25, 0.66)",
-    "ellipsis on \"أوضاع الخريطة\"",
-    "clipped text (top): \"·\" 756.84..766.38 y 84..101"
+    "ellipsis on \"الخريطة\"",
+    "ellipsis on \"أوضاع الخريطة\""
    ]
   },
   {
@@ -127,170 +134,170 @@
    "ok": true,
    "sample": [
     "panel not opaque (opacity 0.60): أوضاع الخريطة",
-    "ellipsis on \"أوضاع الخريطة\"",
-    "clipped text (top): \"·\" 756.84..766.38 y 84..101"
+    "ellipsis on \"الخريطة\"",
+    "ellipsis on \"أوضاع الخريطة\""
    ]
   },
   {
    "name": "Egypt covered",
    "ok": true,
    "sample": [
+    "ellipsis on \"الخريطة\"",
     "ellipsis on \"أوضاع الخريطة\"",
-    "clipped text (top): \"·\" 756.84..766.38 y 84..101",
-    "ellipsis on \"المعروض: الأمن\""
+    "clipped text (top): \"·\" 756.84..766.38 y 84..101"
    ]
   },
   {
    "name": "map dimmed",
    "ok": true,
    "sample": [
+    "ellipsis on \"الخريطة\"",
     "ellipsis on \"أوضاع الخريطة\"",
-    "clipped text (top): \"·\" 756.84..766.38 y 84..101",
-    "ellipsis on \"المعروض: الأمن\""
+    "clipped text (top): \"·\" 756.84..766.38 y 84..101"
    ]
   },
   {
    "name": "map faded",
    "ok": true,
    "sample": [
+    "ellipsis on \"الخريطة\"",
     "ellipsis on \"أوضاع الخريطة\"",
-    "clipped text (top): \"·\" 756.84..766.38 y 84..101",
-    "ellipsis on \"المعروض: الأمن\""
+    "clipped text (top): \"·\" 756.84..766.38 y 84..101"
    ]
   },
   {
    "name": "scrim over the map",
    "ok": true,
    "sample": [
+    "ellipsis on \"الخريطة\"",
     "ellipsis on \"أوضاع الخريطة\"",
-    "clipped text (top): \"·\" 756.84..766.38 y 84..101",
-    "ellipsis on \"المعروض: الأمن\""
+    "clipped text (top): \"·\" 756.84..766.38 y 84..101"
    ]
   },
   {
    "name": "sheet width",
    "ok": true,
    "sample": [
+    "ellipsis on \"الخريطة\"",
     "ellipsis on \"أوضاع الخريطة\"",
-    "clipped text (top): \"·\" 756.84..766.38 y 84..101",
-    "ellipsis on \"المعروض: الأمن\""
+    "clipped text (top): \"·\" 756.84..766.38 y 84..101"
    ]
   },
   {
    "name": "sheet top",
    "ok": true,
    "sample": [
+    "ellipsis on \"الخريطة\"",
     "ellipsis on \"أوضاع الخريطة\"",
-    "clipped text (top): \"·\" 756.84..766.38 y 70..87",
-    "ellipsis on \"المعروض: الأمن\""
+    "clipped text (top): \"·\" 756.84..766.38 y 70..87"
    ]
   },
   {
    "name": "dock hidden although it fits",
    "ok": true,
    "sample": [
+    "ellipsis on \"الخريطة\"",
     "ellipsis on \"أوضاع الخريطة\"",
-    "clipped text (top): \"·\" 756.84..766.38 y 84..101",
-    "ellipsis on \"المعروض: الأمن\""
+    "clipped text (top): \"·\" 756.84..766.38 y 84..101"
    ]
   },
   {
    "name": "dock shown on the SE",
    "ok": true,
    "sample": [
+    "ellipsis on \"الخريطة\"",
     "ellipsis on \"أوضاع الخريطة\"",
-    "clipped text (top): \"·\" 521.84..531.38 y 84..101",
-    "ellipsis on \"المعروض: الأمن\""
+    "clipped text (top): \"·\" 521.84..531.38 y 84..101"
    ]
   },
   {
    "name": "left stack moved",
    "ok": true,
    "sample": [
+    "ellipsis on \"الخريطة\"",
     "ellipsis on \"أوضاع الخريطة\"",
-    "clipped text (top): \"·\" 756.84..766.38 y 84..101",
-    "ellipsis on \"المعروض: الأمن\""
+    "clipped text (top): \"·\" 756.84..766.38 y 84..101"
    ]
   },
   {
    "name": "map label cut",
    "ok": true,
    "sample": [
+    "ellipsis on \"الخريطة\"",
     "ellipsis on \"أوضاع الخريطة\"",
-    "clipped text (top): \"·\" 756.84..766.38 y 84..101",
-    "ellipsis on \"المعروض: الأمن\""
+    "clipped text (top): \"·\" 756.84..766.38 y 84..101"
    ]
   },
   {
    "name": "contrast",
    "ok": true,
    "sample": [
+    "ellipsis on \"الخريطة\"",
     "ellipsis on \"أوضاع الخريطة\"",
-    "clipped text (top): \"·\" 756.84..766.38 y 84..101",
-    "ellipsis on \"المعروض: الأمن\""
+    "clipped text (top): \"·\" 756.84..766.38 y 84..101"
    ]
   },
   {
    "name": "identity line missing",
    "ok": true,
    "sample": [
+    "ellipsis on \"الخريطة\"",
     "ellipsis on \"أوضاع الخريطة\"",
-    "clipped text (top): \"·\" 756.84..766.38 y 84..101",
-    "ellipsis on \"المعروض: الأمن\""
+    "clipped text (top): \"·\" 756.84..766.38 y 84..101"
    ]
   },
   {
    "name": "emblem drawn grey",
    "ok": true,
    "sample": [
+    "ellipsis on \"الخريطة\"",
     "ellipsis on \"أوضاع الخريطة\"",
-    "clipped text (top): \"·\" 756.84..766.38 y 84..101",
-    "ellipsis on \"المعروض: الأمن\""
+    "clipped text (top): \"·\" 756.84..766.38 y 84..101"
    ]
   },
   {
    "name": "section colour on data",
    "ok": true,
    "sample": [
+    "ellipsis on \"الخريطة\"",
     "ellipsis on \"أوضاع الخريطة\"",
-    "clipped text (top): \"·\" 756.84..766.38 y 84..101",
-    "ellipsis on \"المعروض: الأمن\""
+    "clipped text (top): \"·\" 756.84..766.38 y 84..101"
    ]
   },
   {
    "name": "money unit",
    "ok": true,
    "sample": [
+    "ellipsis on \"الخريطة\"",
     "ellipsis on \"أوضاع الخريطة\"",
-    "clipped text (top): \"·\" 756.84..766.38 y 84..101",
-    "ellipsis on \"المعروض: الأمن\""
+    "clipped text (top): \"·\" 756.84..766.38 y 84..101"
    ]
   },
   {
    "name": "sign outside its number",
    "ok": true,
    "sample": [
+    "ellipsis on \"الخريطة\"",
     "ellipsis on \"أوضاع الخريطة\"",
-    "clipped text (top): \"·\" 756.84..766.38 y 84..101",
-    "ellipsis on \"المعروض: الأمن\""
+    "clipped text (top): \"·\" 756.84..766.38 y 84..101"
    ]
   },
   {
    "name": "colour alone",
    "ok": true,
    "sample": [
+    "ellipsis on \"الخريطة\"",
     "ellipsis on \"أوضاع الخريطة\"",
-    "clipped text (top): \"·\" 756.84..766.38 y 84..101",
-    "ellipsis on \"المعروض: الأمن\""
+    "clipped text (top): \"·\" 756.84..766.38 y 84..101"
    ]
   },
   {
    "name": "an image in the sheet",
    "ok": true,
    "sample": [
+    "ellipsis on \"الخريطة\"",
     "ellipsis on \"أوضاع الخريطة\"",
-    "clipped text (top): \"·\" 756.84..766.38 y 84..101",
-    "ellipsis on \"المعروض: الأمن\""
+    "clipped text (top): \"·\" 756.84..766.38 y 84..101"
    ]
   },
   {
@@ -298,98 +305,98 @@
    "ok": true,
    "sample": [
     "close button is not round",
-    "ellipsis on \"أوضاع الخريطة\"",
-    "clipped text (top): \"·\" 756.84..766.38 y 84..101"
+    "ellipsis on \"الخريطة\"",
+    "ellipsis on \"أوضاع الخريطة\""
    ]
   },
   {
    "name": "label without a role",
    "ok": true,
    "sample": [
+    "ellipsis on \"الخريطة\"",
     "ellipsis on \"أوضاع الخريطة\"",
-    "clipped text (top): \"·\" 756.84..766.38 y 84..101",
-    "ellipsis on \"المعروض: الأمن\""
+    "clipped text (top): \"·\" 756.84..766.38 y 84..101"
    ]
   },
   {
    "name": "text overlap",
    "ok": true,
    "sample": [
+    "ellipsis on \"الخريطة\"",
     "ellipsis on \"أوضاع الخريطة\"",
-    "clipped text (top): \"·\" 756.84..766.38 y 70..87",
-    "ellipsis on \"المعروض: الأمن\""
+    "clipped text (top): \"·\" 756.84..766.38 y 70..87"
    ]
   },
   {
    "name": "identity line colour",
    "ok": true,
    "sample": [
+    "ellipsis on \"الخريطة\"",
     "ellipsis on \"أوضاع الخريطة\"",
-    "clipped text (top): \"·\" 756.84..766.38 y 84..101",
-    "ellipsis on \"المعروض: الأمن\""
+    "clipped text (top): \"·\" 756.84..766.38 y 84..101"
    ]
   },
   {
    "name": "emblem size",
    "ok": true,
    "sample": [
+    "ellipsis on \"الخريطة\"",
     "ellipsis on \"أوضاع الخريطة\"",
-    "clipped text (top): \"·\" 756.84..766.38 y 84..101",
-    "ellipsis on \"المعروض: الأمن\""
+    "clipped text (top): \"·\" 756.84..766.38 y 84..101"
    ]
   },
   {
    "name": "row read in part",
    "ok": true,
    "sample": [
+    "ellipsis on \"الخريطة\"",
     "ellipsis on \"أوضاع الخريطة\"",
-    "clipped text (top): \"·\" 756.84..766.38 y 84..101",
-    "ellipsis on \"المعروض: الأمن\""
+    "clipped text (top): \"·\" 756.84..766.38 y 84..101"
    ]
   },
   {
    "name": "a long headline label",
    "ok": true,
    "sample": [
+    "ellipsis on \"الخريطة\"",
     "ellipsis on \"أوضاع الخريطة\"",
-    "clipped text (top): \"·\" 756.84..766.38 y 84..101",
-    "ellipsis on \"المعروض: الأمن\""
+    "clipped text (top): \"·\" 756.84..766.38 y 84..101"
    ]
   },
   {
    "name": "text wider than its box",
    "ok": true,
    "sample": [
+    "ellipsis on \"الخريطة\"",
     "ellipsis on \"أوضاع الخريطة\"",
-    "clipped text (top): \"·\" 756.84..766.38 y 84..101",
-    "ellipsis on \"المعروض: الأمن\""
+    "clipped text (top): \"·\" 756.84..766.38 y 84..101"
    ]
   },
   {
    "name": "a long status cell",
    "ok": true,
    "sample": [
+    "ellipsis on \"الخريطة\"",
     "ellipsis on \"أوضاع الخريطة\"",
-    "clipped text (top): \"·\" 756.84..766.38 y 84..101",
-    "ellipsis on \"المعروض: الأمن\""
+    "clipped text (top): \"·\" 756.84..766.38 y 84..101"
    ]
   },
   {
    "name": "font weight (no tabs)",
    "ok": true,
    "sample": [
+    "ellipsis on \"الخريطة\"",
     "font weight 11.5/700 for \"أوضاع الخريطة\"",
-    "ellipsis on \"أوضاع الخريطة\"",
-    "font weight 11.5/700 for \"·\""
+    "ellipsis on \"أوضاع الخريطة\""
    ]
   },
   {
    "name": "a tab row on a one-body sheet",
    "ok": true,
    "sample": [
+    "ellipsis on \"الخريطة\"",
     "ellipsis on \"أوضاع الخريطة\"",
-    "clipped text (top): \"·\" 756.84..766.38 y 84..101",
-    "ellipsis on \"المعروض: الأمن\""
+    "clipped text (top): \"·\" 756.84..766.38 y 84..101"
    ]
   },
   {
@@ -398,7 +405,7 @@
    "sample": [
     "control height 40.00 for .r-x (want 32): إغلاق أوضاع الخريطة، يبقى ",
     "close button is not round",
-    "ellipsis on \"أوضاع الخريطة\""
+    "ellipsis on \"الخريطة\""
    ]
   },
   {
@@ -406,44 +413,44 @@
    "ok": true,
    "sample": [
     "icon size 19x19 (want 16): i",
-    "ellipsis on \"أوضاع الخريطة\"",
-    "clipped text (top): \"·\" 756.84..766.38 y 84..101"
+    "ellipsis on \"الخريطة\"",
+    "ellipsis on \"أوضاع الخريطة\""
    ]
   },
   {
    "name": "fades wrong (no tabs)",
    "ok": true,
    "sample": [
+    "ellipsis on \"الخريطة\"",
     "ellipsis on \"أوضاع الخريطة\"",
-    "clipped text (top): \"·\" 521.84..531.38 y 84..101",
-    "ellipsis on \"المعروض: الأمن\""
+    "clipped text (top): \"·\" 521.84..531.38 y 84..101"
    ]
   },
   {
    "name": "hint chevron missing (no tabs)",
    "ok": true,
    "sample": [
+    "ellipsis on \"الخريطة\"",
     "ellipsis on \"أوضاع الخريطة\"",
-    "clipped text (top): \"·\" 521.84..531.38 y 84..101",
-    "ellipsis on \"المعروض: الأمن\""
+    "clipped text (top): \"·\" 521.84..531.38 y 84..101"
    ]
   },
   {
    "name": "hint over the content (no tabs)",
    "ok": true,
    "sample": [
+    "ellipsis on \"الخريطة\"",
     "ellipsis on \"أوضاع الخريطة\"",
-    "clipped text (top): \"·\" 521.84..531.38 y 84..101",
-    "ellipsis on \"المعروض: الأمن\""
+    "clipped text (top): \"·\" 521.84..531.38 y 84..101"
    ]
   },
   {
    "name": "a dock item marked open",
    "ok": true,
    "sample": [
+    "ellipsis on \"الخريطة\"",
     "ellipsis on \"أوضاع الخريطة\"",
-    "clipped text (top): \"·\" 756.84..766.38 y 84..101",
-    "ellipsis on \"المعروض: الأمن\""
+    "clipped text (top): \"·\" 756.84..766.38 y 84..101"
    ]
   },
   {
@@ -459,18 +466,18 @@
    "name": "18 pt misuse (modes)",
    "ok": true,
    "sample": [
+    "ellipsis on \"الخريطة\"",
     "ellipsis on \"أوضاع الخريطة\"",
-    "clipped text (top): \"·\" 756.84..766.38 y 84..101",
-    "ellipsis on \"المعروض: الأمن\""
+    "clipped text (top): \"·\" 756.84..766.38 y 84..101"
    ]
   },
   {
    "name": "clipped text (modes)",
    "ok": true,
    "sample": [
+    "ellipsis on \"الخريطة\"",
     "ellipsis on \"أوضاع الخريطة\"",
-    "clipped text (top): \"·\" 756.84..766.38 y 84..101",
-    "ellipsis on \"المعروض: الأمن\""
+    "clipped text (top): \"·\" 756.84..766.38 y 84..101"
    ]
   },
   {
@@ -479,178 +486,178 @@
    "sample": [
     "gap 6 on وضع الخريطة",
     "gap 6 on وضع الخريطة",
-    "ellipsis on \"أوضاع الخريطة\""
+    "ellipsis on \"الخريطة\""
    ]
   },
   {
    "name": "faint text (modes)",
    "ok": true,
    "sample": [
+    "ellipsis on \"الخريطة\"",
     "ellipsis on \"أوضاع الخريطة\"",
-    "clipped text (top): \"·\" 756.84..766.38 y 84..101",
-    "ellipsis on \"المعروض: الأمن\""
+    "clipped text (top): \"·\" 756.84..766.38 y 84..101"
    ]
   },
   {
    "name": "% before its number (modes)",
    "ok": true,
    "sample": [
+    "ellipsis on \"الخريطة\"",
     "ellipsis on \"أوضاع الخريطة\"",
-    "clipped text (top): \"·\" 756.84..766.38 y 84..101",
-    "ellipsis on \"المعروض: الأمن\""
+    "clipped text (top): \"·\" 756.84..766.38 y 84..101"
    ]
   },
   {
    "name": "text into a control (modes)",
    "ok": true,
    "sample": [
+    "ellipsis on \"الخريطة\"",
     "ellipsis on \"أوضاع الخريطة\"",
-    "clipped text (top): \"·\" 756.84..766.38 y 84..101",
-    "ellipsis on \"المعروض: الأمن\""
+    "clipped text (top): \"·\" 756.84..766.38 y 84..101"
    ]
   },
   {
    "name": "tile icons cyan (modes)",
    "ok": true,
    "sample": [
+    "ellipsis on \"الخريطة\"",
     "ellipsis on \"أوضاع الخريطة\"",
-    "clipped text (top): \"·\" 756.84..766.38 y 84..101",
-    "ellipsis on \"المعروض: الأمن\""
+    "clipped text (top): \"·\" 756.84..766.38 y 84..101"
    ]
   },
   {
    "name": "an option renamed",
    "ok": true,
    "sample": [
+    "ellipsis on \"الخريطة\"",
     "ellipsis on \"أوضاع الخريطة\"",
-    "clipped text (top): \"·\" 756.84..766.38 y 84..101",
-    "ellipsis on \"المعروض: الأمن\""
+    "clipped text (top): \"·\" 756.84..766.38 y 84..101"
    ]
   },
   {
    "name": "two modes chosen",
    "ok": true,
    "sample": [
+    "ellipsis on \"الخريطة\"",
     "ellipsis on \"أوضاع الخريطة\"",
-    "clipped text (top): \"·\" 756.84..766.38 y 84..101",
-    "ellipsis on \"المعروض: الأمن\""
+    "clipped text (top): \"·\" 756.84..766.38 y 84..101"
    ]
   },
   {
    "name": "chosen not white",
    "ok": true,
    "sample": [
+    "ellipsis on \"الخريطة\"",
     "ellipsis on \"أوضاع الخريطة\"",
-    "clipped text (top): \"·\" 756.84..766.38 y 84..101",
-    "ellipsis on \"المعروض: الأمن\""
+    "clipped text (top): \"·\" 756.84..766.38 y 84..101"
    ]
   },
   {
    "name": "a mode lost",
    "ok": true,
    "sample": [
+    "ellipsis on \"الخريطة\"",
     "ellipsis on \"أوضاع الخريطة\"",
-    "clipped text (top): \"·\" 756.84..766.38 y 84..101",
-    "ellipsis on \"المعروض: الأمن\""
+    "clipped text (top): \"·\" 756.84..766.38 y 84..101"
    ]
   },
   {
    "name": "modes not radios",
    "ok": true,
    "sample": [
+    "ellipsis on \"الخريطة\"",
     "ellipsis on \"أوضاع الخريطة\"",
-    "clipped text (top): \"·\" 756.84..766.38 y 84..101",
-    "ellipsis on \"المعروض: الأمن\""
+    "clipped text (top): \"·\" 756.84..766.38 y 84..101"
    ]
   },
   {
    "name": "header off",
    "ok": true,
    "sample": [
+    "ellipsis on \"الخريطة\"",
     "ellipsis on \"أوضاع الخريطة\"",
-    "clipped text (top): \"·\" 756.84..766.38 y 84..101",
-    "ellipsis on \"المعروض: سياسية\""
+    "clipped text (top): \"·\" 756.84..766.38 y 84..101"
    ]
   },
   {
    "name": "HUD button stale",
    "ok": true,
    "sample": [
+    "ellipsis on \"الخريطة\"",
     "ellipsis on \"أوضاع الخريطة\"",
-    "clipped text (top): \"·\" 756.84..766.38 y 84..101",
-    "ellipsis on \"المعروض: الأمن\""
+    "clipped text (top): \"·\" 756.84..766.38 y 84..101"
    ]
   },
   {
    "name": "layer over the borders",
    "ok": true,
    "sample": [
+    "ellipsis on \"الخريطة\"",
     "ellipsis on \"أوضاع الخريطة\"",
-    "clipped text (top): \"·\" 756.84..766.38 y 84..101",
-    "ellipsis on \"المعروض: الأمن\""
+    "clipped text (top): \"·\" 756.84..766.38 y 84..101"
    ]
   },
   {
    "name": "layer hidden",
    "ok": true,
    "sample": [
+    "ellipsis on \"الخريطة\"",
     "ellipsis on \"أوضاع الخريطة\"",
-    "clipped text (top): \"·\" 756.84..766.38 y 84..101",
-    "ellipsis on \"المعروض: الأمن\""
+    "clipped text (top): \"·\" 756.84..766.38 y 84..101"
    ]
   },
   {
    "name": "legend recoloured",
    "ok": true,
    "sample": [
+    "ellipsis on \"الخريطة\"",
     "ellipsis on \"أوضاع الخريطة\"",
-    "clipped text (top): \"·\" 756.84..766.38 y 84..101",
-    "ellipsis on \"المعروض: الأمن\""
+    "clipped text (top): \"·\" 756.84..766.38 y 84..101"
    ]
   },
   {
    "name": "legend left to right",
    "ok": true,
    "sample": [
+    "ellipsis on \"الخريطة\"",
     "ellipsis on \"أوضاع الخريطة\"",
-    "clipped text (top): \"·\" 756.84..766.38 y 84..101",
-    "ellipsis on \"المعروض: الأمن\""
+    "clipped text (top): \"·\" 756.84..766.38 y 84..101"
    ]
   },
   {
    "name": "edges spaced evenly",
    "ok": true,
    "sample": [
+    "ellipsis on \"الخريطة\"",
     "ellipsis on \"أوضاع الخريطة\"",
-    "clipped text (top): \"·\" 756.84..766.38 y 84..101",
-    "ellipsis on \"المعروض: الأمن\""
+    "clipped text (top): \"·\" 756.84..766.38 y 84..101"
    ]
   },
   {
    "name": "an edge off",
    "ok": true,
    "sample": [
+    "ellipsis on \"الخريطة\"",
     "ellipsis on \"أوضاع الخريطة\"",
-    "clipped text (top): \"·\" 756.84..766.38 y 84..101",
-    "ellipsis on \"المعروض: الأمن\""
+    "clipped text (top): \"·\" 756.84..766.38 y 84..101"
    ]
   },
   {
    "name": "legend unsaid",
    "ok": true,
    "sample": [
+    "ellipsis on \"الخريطة\"",
     "ellipsis on \"أوضاع الخريطة\"",
-    "clipped text (top): \"·\" 756.84..766.38 y 84..101",
-    "ellipsis on \"المعروض: الأمن\""
+    "clipped text (top): \"·\" 756.84..766.38 y 84..101"
    ]
   },
   {
    "name": "an option with two choices",
    "ok": true,
    "sample": [
+    "ellipsis on \"الخريطة\"",
     "ellipsis on \"أوضاع الخريطة\"",
-    "clipped text (top): \"·\" 756.84..766.38 y 84..101",
-    "ellipsis on \"المعروض: الأمن\""
+    "clipped text (top): \"·\" 756.84..766.38 y 84..101"
    ]
   },
   {

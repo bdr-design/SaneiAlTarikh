@@ -1,7 +1,7 @@
 {
  "se": {
   "device": "667x375 side 0 bottom 0 none",
-  "renderedAt": "2026-11-07T16:51:43.940Z",
+  "renderedAt": "2026-11-07T17:29:18.896Z",
   "inputs": {
    "files": [
     "index.html",
@@ -21,65 +21,80 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "f305dee9f2991904b348774e61384fc11bca38bd"
+   "sha1": "a47173f0504791e66b698491e78d686b6502fb22"
   },
   "issues": [
+   "overview: ellipsis on \"مصر\"",
    "overview: ellipsis on \"الرئيس محمد حسني مبارك\"",
    "overview: clipped text (top): \"·\" 471.08..480.61 y 78..95",
    "overview: ellipsis on \"منذ\"",
    "overview: clipped text (top): \"1981\" 424.88..452.48 y 78..95",
+   "leader: ellipsis on \"مصر\"",
    "leader: ellipsis on \"الرئيس محمد حسني مبارك\"",
    "leader: clipped text (top): \"·\" 471.08..480.61 y 78..95",
    "leader: ellipsis on \"منذ\"",
    "leader: clipped text (top): \"1981\" 424.88..452.48 y 78..95",
+   "leader_end: ellipsis on \"مصر\"",
    "leader_end: ellipsis on \"الرئيس محمد حسني مبارك\"",
    "leader_end: clipped text (top): \"·\" 471.08..480.61 y 78..95",
    "leader_end: ellipsis on \"منذ\"",
    "leader_end: clipped text (top): \"1981\" 424.88..452.48 y 78..95",
+   "policies: ellipsis on \"مصر\"",
    "policies: ellipsis on \"الرئيس محمد حسني مبارك\"",
    "policies: clipped text (top): \"·\" 471.08..480.61 y 78..95",
    "policies: ellipsis on \"منذ\"",
    "policies: clipped text (top): \"1981\" 424.88..452.48 y 78..95",
+   "policies_end: ellipsis on \"مصر\"",
    "policies_end: ellipsis on \"الرئيس محمد حسني مبارك\"",
    "policies_end: clipped text (top): \"·\" 471.08..480.61 y 78..95",
    "policies_end: ellipsis on \"منذ\"",
    "policies_end: clipped text (top): \"1981\" 424.88..452.48 y 78..95",
+   "projects: ellipsis on \"مصر\"",
    "projects: ellipsis on \"الرئيس محمد حسني مبارك\"",
    "projects: clipped text (top): \"·\" 471.08..480.61 y 78..95",
    "projects: ellipsis on \"منذ\"",
    "projects: clipped text (top): \"1981\" 424.88..452.48 y 78..95",
+   "projects_end: ellipsis on \"مصر\"",
    "projects_end: ellipsis on \"الرئيس محمد حسني مبارك\"",
    "projects_end: clipped text (top): \"·\" 471.08..480.61 y 78..95",
    "projects_end: ellipsis on \"منذ\"",
    "projects_end: clipped text (top): \"1981\" 424.88..452.48 y 78..95",
+   "overview_states: ellipsis on \"مصر\"",
    "overview_states: ellipsis on \"الرئيس محمد حسني مبارك\"",
    "overview_states: clipped text (top): \"·\" 471.08..480.61 y 78..95",
    "overview_states: ellipsis on \"منذ\"",
    "overview_states: clipped text (top): \"1981\" 424.88..452.48 y 78..95",
+   "policies_states: ellipsis on \"مصر\"",
    "policies_states: ellipsis on \"الرئيس محمد حسني مبارك\"",
    "policies_states: clipped text (top): \"·\" 471.08..480.61 y 78..95",
    "policies_states: ellipsis on \"منذ\"",
    "policies_states: clipped text (top): \"1981\" 424.88..452.48 y 78..95",
+   "policies_at98: ellipsis on \"مصر\"",
    "policies_at98: ellipsis on \"الرئيس محمد حسني مبارك\"",
    "policies_at98: clipped text (top): \"·\" 471.08..480.61 y 78..95",
    "policies_at98: ellipsis on \"منذ\"",
    "policies_at98: clipped text (top): \"1981\" 424.88..452.48 y 78..95",
+   "policies_at196: ellipsis on \"مصر\"",
    "policies_at196: ellipsis on \"الرئيس محمد حسني مبارك\"",
    "policies_at196: clipped text (top): \"·\" 471.08..480.61 y 78..95",
    "policies_at196: ellipsis on \"منذ\"",
    "policies_at196: clipped text (top): \"1981\" 424.88..452.48 y 78..95",
+   "projects_at98: ellipsis on \"مصر\"",
    "projects_at98: ellipsis on \"الرئيس محمد حسني مبارك\"",
    "projects_at98: clipped text (top): \"·\" 471.08..480.61 y 78..95",
    "projects_at98: ellipsis on \"منذ\"",
    "projects_at98: clipped text (top): \"1981\" 424.88..452.48 y 78..95",
+   "policies_states_end: ellipsis on \"مصر\"",
    "policies_states_end: ellipsis on \"الرئيس محمد حسني مبارك\"",
    "policies_states_end: clipped text (top): \"·\" 471.08..480.61 y 78..95",
    "policies_states_end: ellipsis on \"منذ\"",
    "policies_states_end: clipped text (top): \"1981\" 424.88..452.48 y 78..95",
+   "policies_states_at98: ellipsis on \"مصر\"",
    "policies_states_at98: ellipsis on \"الرئيس محمد حسني مبارك\"",
    "policies_states_at98: clipped text (top): \"·\" 471.08..480.61 y 78..95",
    "policies_states_at98: ellipsis on \"منذ\"",
    "policies_states_at98: clipped text (top): \"1981\" 424.88..452.48 y 78..95",
+   "policies_states_at196: ellipsis on \"مصر\"",
    "policies_states_at196: ellipsis on \"الرئيس محمد حسني مبارك\"",
    "policies_states_at196: clipped text (top): \"·\" 471.08..480.61 y 78..95",
    "policies_states_at196: ellipsis on \"منذ\"",
@@ -87,7 +102,7 @@
   ],
   "views": {
    "overview": {
-    "issueCount": 4,
+    "issueCount": 5,
     "png": true,
     "fit": {
      "top": {
@@ -692,7 +707,7 @@
     ]
    },
    "leader": {
-    "issueCount": 4,
+    "issueCount": 5,
     "png": true,
     "fit": {
      "top": {
@@ -1144,7 +1159,7 @@
     ]
    },
    "leader_end": {
-    "issueCount": 4,
+    "issueCount": 5,
     "png": true,
     "fit": {
      "top": {
@@ -1616,7 +1631,7 @@
     ]
    },
    "policies": {
-    "issueCount": 4,
+    "issueCount": 5,
     "png": true,
     "fit": {
      "top": {
@@ -2180,7 +2195,7 @@
     ]
    },
    "policies_end": {
-    "issueCount": 4,
+    "issueCount": 5,
     "png": true,
     "fit": {
      "top": {
@@ -2759,7 +2774,7 @@
     ]
    },
    "projects": {
-    "issueCount": 4,
+    "issueCount": 5,
     "png": true,
     "fit": {
      "top": {
@@ -3245,7 +3260,7 @@
     ]
    },
    "projects_end": {
-    "issueCount": 4,
+    "issueCount": 5,
     "png": true,
     "fit": {
      "top": {
@@ -3731,7 +3746,7 @@
     ]
    },
    "overview_states": {
-    "issueCount": 4,
+    "issueCount": 5,
     "png": true,
     "fit": {
      "top": {
@@ -3801,10 +3816,10 @@
      "بنغازي"
     ],
     "typeSeen": {
-     "10/500": 10,
+     "10/500": 12,
      "13/600": 16,
      "11.5/500": 31,
-     "10/700": 3,
+     "10/700": 1,
      "11.5/600": 8,
      "18/700": 4
     },
@@ -4106,12 +4121,12 @@
      {
       "t": "God",
       "fs": 10,
-      "worst": 7.61
+      "worst": 7.32
      },
      {
       "t": "· خيارات غير واقعية",
       "fs": 10,
-      "worst": 7.1
+      "worst": 6.83
      },
      {
       "t": "الرئيس محمد حسني مبارك",
@@ -4346,7 +4361,7 @@
     ]
    },
    "policies_states": {
-    "issueCount": 4,
+    "issueCount": 5,
     "png": true,
     "fit": {
      "top": {
@@ -4416,10 +4431,10 @@
      "بنغازي"
     ],
     "typeSeen": {
-     "10/500": 10,
+     "10/500": 12,
      "13/600": 12,
      "11.5/500": 25,
-     "10/700": 3,
+     "10/700": 1,
      "11.5/600": 12,
      "18/700": 1
     },
@@ -4770,12 +4785,12 @@
      {
       "t": "God",
       "fs": 10,
-      "worst": 7.61
+      "worst": 7.32
      },
      {
       "t": "· خيارات غير واقعية",
       "fs": 10,
-      "worst": 7.1
+      "worst": 6.83
      },
      {
       "t": "الرئيس محمد حسني مبارك",
@@ -4925,7 +4940,7 @@
     ]
    },
    "policies_at98": {
-    "issueCount": 4,
+    "issueCount": 5,
     "png": false,
     "fit": {
      "top": {
@@ -5505,7 +5520,7 @@
     ]
    },
    "policies_at196": {
-    "issueCount": 4,
+    "issueCount": 5,
     "png": false,
     "fit": {
      "top": {
@@ -6065,7 +6080,7 @@
     ]
    },
    "projects_at98": {
-    "issueCount": 4,
+    "issueCount": 5,
     "png": false,
     "fit": {
      "top": {
@@ -6531,7 +6546,7 @@
     ]
    },
    "policies_states_end": {
-    "issueCount": 4,
+    "issueCount": 5,
     "png": false,
     "fit": {
      "top": {
@@ -6601,10 +6616,10 @@
      "بنغازي"
     ],
     "typeSeen": {
-     "10/500": 13,
+     "10/500": 15,
      "13/600": 12,
      "11.5/500": 22,
-     "10/700": 3,
+     "10/700": 1,
      "11.5/600": 11,
      "18/700": 1
     },
@@ -6955,12 +6970,12 @@
      {
       "t": "God",
       "fs": 10,
-      "worst": 7.61
+      "worst": 7.32
      },
      {
       "t": "· خيارات غير واقعية",
       "fs": 10,
-      "worst": 7.1
+      "worst": 6.83
      },
      {
       "t": "الرئيس محمد حسني مبارك",
@@ -7115,7 +7130,7 @@
     ]
    },
    "policies_states_at98": {
-    "issueCount": 4,
+    "issueCount": 5,
     "png": false,
     "fit": {
      "top": {
@@ -7185,10 +7200,10 @@
      "بنغازي"
     ],
     "typeSeen": {
-     "10/500": 10,
+     "10/500": 12,
      "13/600": 12,
      "11.5/500": 27,
-     "10/700": 3,
+     "10/700": 1,
      "11.5/600": 12,
      "18/700": 1
     },
@@ -7560,12 +7575,12 @@
      {
       "t": "God",
       "fs": 10,
-      "worst": 7.61
+      "worst": 7.32
      },
      {
       "t": "· خيارات غير واقعية",
       "fs": 10,
-      "worst": 7.1
+      "worst": 6.83
      },
      {
       "t": "الرئيس محمد حسني مبارك",
@@ -7705,7 +7720,7 @@
     ]
    },
    "policies_states_at196": {
-    "issueCount": 4,
+    "issueCount": 5,
     "png": false,
     "fit": {
      "top": {
@@ -7775,10 +7790,10 @@
      "بنغازي"
     ],
     "typeSeen": {
-     "10/500": 10,
+     "10/500": 12,
      "13/600": 13,
      "11.5/500": 27,
-     "10/700": 3,
+     "10/700": 1,
      "11.5/600": 12,
      "18/700": 1
     },
@@ -8150,12 +8165,12 @@
      {
       "t": "God",
       "fs": 10,
-      "worst": 7.61
+      "worst": 7.32
      },
      {
       "t": "· خيارات غير واقعية",
       "fs": 10,
-      "worst": 7.1
+      "worst": 6.83
      },
      {
       "t": "الرئيس محمد حسني مبارك",
@@ -8290,11 +8305,11 @@
    "_build/se_states.png",
    "_build/se_policies_states.png"
   ],
-  "issueCount": 60
+  "issueCount": 75
  },
  "mini": {
   "device": "812x375 side 50 bottom 21 notch",
-  "renderedAt": "2026-11-07T16:52:18.681Z",
+  "renderedAt": "2026-11-07T17:29:43.232Z",
   "inputs": {
    "files": [
     "index.html",
@@ -8314,73 +8329,90 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "f305dee9f2991904b348774e61384fc11bca38bd"
+   "sha1": "a47173f0504791e66b698491e78d686b6502fb22"
   },
   "issues": [
+   "overview: ellipsis on \"مصر\"",
    "overview: ellipsis on \"الرئيس محمد حسني مبارك\"",
    "overview: clipped text (top): \"·\" 574.08..583.61 y 78..95",
    "overview: ellipsis on \"منذ\"",
    "overview: clipped text (top): \"1981\" 527.88..555.48 y 78..95",
+   "leader: ellipsis on \"مصر\"",
    "leader: ellipsis on \"الرئيس محمد حسني مبارك\"",
    "leader: clipped text (top): \"·\" 574.08..583.61 y 78..95",
    "leader: ellipsis on \"منذ\"",
    "leader: clipped text (top): \"1981\" 527.88..555.48 y 78..95",
+   "leader_end: ellipsis on \"مصر\"",
    "leader_end: ellipsis on \"الرئيس محمد حسني مبارك\"",
    "leader_end: clipped text (top): \"·\" 574.08..583.61 y 78..95",
    "leader_end: ellipsis on \"منذ\"",
    "leader_end: clipped text (top): \"1981\" 527.88..555.48 y 78..95",
+   "policies: ellipsis on \"مصر\"",
    "policies: ellipsis on \"الرئيس محمد حسني مبارك\"",
    "policies: clipped text (top): \"·\" 574.08..583.61 y 78..95",
    "policies: ellipsis on \"منذ\"",
    "policies: clipped text (top): \"1981\" 527.88..555.48 y 78..95",
+   "policies_end: ellipsis on \"مصر\"",
    "policies_end: ellipsis on \"الرئيس محمد حسني مبارك\"",
    "policies_end: clipped text (top): \"·\" 574.08..583.61 y 78..95",
    "policies_end: ellipsis on \"منذ\"",
    "policies_end: clipped text (top): \"1981\" 527.88..555.48 y 78..95",
+   "projects: ellipsis on \"مصر\"",
    "projects: ellipsis on \"الرئيس محمد حسني مبارك\"",
    "projects: clipped text (top): \"·\" 574.08..583.61 y 78..95",
    "projects: ellipsis on \"منذ\"",
    "projects: clipped text (top): \"1981\" 527.88..555.48 y 78..95",
+   "projects_end: ellipsis on \"مصر\"",
    "projects_end: ellipsis on \"الرئيس محمد حسني مبارك\"",
    "projects_end: clipped text (top): \"·\" 574.08..583.61 y 78..95",
    "projects_end: ellipsis on \"منذ\"",
    "projects_end: clipped text (top): \"1981\" 527.88..555.48 y 78..95",
+   "overview_states: ellipsis on \"مصر\"",
    "overview_states: ellipsis on \"الرئيس محمد حسني مبارك\"",
    "overview_states: clipped text (top): \"·\" 574.08..583.61 y 78..95",
    "overview_states: ellipsis on \"منذ\"",
    "overview_states: clipped text (top): \"1981\" 527.88..555.48 y 78..95",
+   "policies_states: ellipsis on \"مصر\"",
    "policies_states: ellipsis on \"الرئيس محمد حسني مبارك\"",
    "policies_states: clipped text (top): \"·\" 574.08..583.61 y 78..95",
    "policies_states: ellipsis on \"منذ\"",
    "policies_states: clipped text (top): \"1981\" 527.88..555.48 y 78..95",
+   "policies_at84: ellipsis on \"مصر\"",
    "policies_at84: ellipsis on \"الرئيس محمد حسني مبارك\"",
    "policies_at84: clipped text (top): \"·\" 574.08..583.61 y 78..95",
    "policies_at84: ellipsis on \"منذ\"",
    "policies_at84: clipped text (top): \"1981\" 527.88..555.48 y 78..95",
+   "policies_at168: ellipsis on \"مصر\"",
    "policies_at168: ellipsis on \"الرئيس محمد حسني مبارك\"",
    "policies_at168: clipped text (top): \"·\" 574.08..583.61 y 78..95",
    "policies_at168: ellipsis on \"منذ\"",
    "policies_at168: clipped text (top): \"1981\" 527.88..555.48 y 78..95",
+   "policies_at252: ellipsis on \"مصر\"",
    "policies_at252: ellipsis on \"الرئيس محمد حسني مبارك\"",
    "policies_at252: clipped text (top): \"·\" 574.08..583.61 y 78..95",
    "policies_at252: ellipsis on \"منذ\"",
    "policies_at252: clipped text (top): \"1981\" 527.88..555.48 y 78..95",
+   "projects_at84: ellipsis on \"مصر\"",
    "projects_at84: ellipsis on \"الرئيس محمد حسني مبارك\"",
    "projects_at84: clipped text (top): \"·\" 574.08..583.61 y 78..95",
    "projects_at84: ellipsis on \"منذ\"",
    "projects_at84: clipped text (top): \"1981\" 527.88..555.48 y 78..95",
+   "policies_states_end: ellipsis on \"مصر\"",
    "policies_states_end: ellipsis on \"الرئيس محمد حسني مبارك\"",
    "policies_states_end: clipped text (top): \"·\" 574.08..583.61 y 78..95",
    "policies_states_end: ellipsis on \"منذ\"",
    "policies_states_end: clipped text (top): \"1981\" 527.88..555.48 y 78..95",
+   "policies_states_at84: ellipsis on \"مصر\"",
    "policies_states_at84: ellipsis on \"الرئيس محمد حسني مبارك\"",
    "policies_states_at84: clipped text (top): \"·\" 574.08..583.61 y 78..95",
    "policies_states_at84: ellipsis on \"منذ\"",
    "policies_states_at84: clipped text (top): \"1981\" 527.88..555.48 y 78..95",
+   "policies_states_at168: ellipsis on \"مصر\"",
    "policies_states_at168: ellipsis on \"الرئيس محمد حسني مبارك\"",
    "policies_states_at168: clipped text (top): \"·\" 574.08..583.61 y 78..95",
    "policies_states_at168: ellipsis on \"منذ\"",
    "policies_states_at168: clipped text (top): \"1981\" 527.88..555.48 y 78..95",
+   "policies_states_at252: ellipsis on \"مصر\"",
    "policies_states_at252: ellipsis on \"الرئيس محمد حسني مبارك\"",
    "policies_states_at252: clipped text (top): \"·\" 574.08..583.61 y 78..95",
    "policies_states_at252: ellipsis on \"منذ\"",
@@ -8388,7 +8420,7 @@
   ],
   "views": {
    "overview": {
-    "issueCount": 4,
+    "issueCount": 5,
     "png": true,
     "fit": {
      "top": {
@@ -9004,7 +9036,7 @@
     ]
    },
    "leader": {
-    "issueCount": 4,
+    "issueCount": 5,
     "png": true,
     "fit": {
      "top": {
@@ -9467,7 +9499,7 @@
     ]
    },
    "leader_end": {
-    "issueCount": 4,
+    "issueCount": 5,
     "png": true,
     "fit": {
      "top": {
@@ -9943,7 +9975,7 @@
     ]
    },
    "policies": {
-    "issueCount": 4,
+    "issueCount": 5,
     "png": true,
     "fit": {
      "top": {
@@ -10518,7 +10550,7 @@
     ]
    },
    "policies_end": {
-    "issueCount": 4,
+    "issueCount": 5,
     "png": true,
     "fit": {
      "top": {
@@ -11103,7 +11135,7 @@
     ]
    },
    "projects": {
-    "issueCount": 4,
+    "issueCount": 5,
     "png": true,
     "fit": {
      "top": {
@@ -11595,7 +11627,7 @@
     ]
    },
    "projects_end": {
-    "issueCount": 4,
+    "issueCount": 5,
     "png": true,
     "fit": {
      "top": {
@@ -12092,7 +12124,7 @@
     ]
    },
    "overview_states": {
-    "issueCount": 4,
+    "issueCount": 5,
     "png": true,
     "fit": {
      "top": {
@@ -12168,10 +12200,10 @@
     ],
     "typeSeen": {
      "14/700": 1,
-     "10/500": 10,
+     "10/500": 12,
      "13/600": 16,
      "11.5/500": 31,
-     "10/700": 3,
+     "10/700": 1,
      "11.5/600": 8,
      "18/700": 4
     },
@@ -12478,12 +12510,12 @@
      {
       "t": "God",
       "fs": 10,
-      "worst": 7.61
+      "worst": 7.32
      },
      {
       "t": "· خيارات غير واقعية",
       "fs": 10,
-      "worst": 7.1
+      "worst": 6.83
      },
      {
       "t": "الرئيس محمد حسني مبارك",
@@ -12718,7 +12750,7 @@
     ]
    },
    "policies_states": {
-    "issueCount": 4,
+    "issueCount": 5,
     "png": true,
     "fit": {
      "top": {
@@ -12794,10 +12826,10 @@
     ],
     "typeSeen": {
      "14/700": 1,
-     "10/500": 10,
+     "10/500": 12,
      "13/600": 12,
      "11.5/500": 22,
-     "10/700": 3,
+     "10/700": 1,
      "11.5/600": 12,
      "18/700": 1
     },
@@ -13153,12 +13185,12 @@
      {
       "t": "God",
       "fs": 10,
-      "worst": 7.61
+      "worst": 7.32
      },
      {
       "t": "· خيارات غير واقعية",
       "fs": 10,
-      "worst": 7.1
+      "worst": 6.83
      },
      {
       "t": "الرئيس محمد حسني مبارك",
@@ -13308,7 +13340,7 @@
     ]
    },
    "policies_at84": {
-    "issueCount": 4,
+    "issueCount": 5,
     "png": false,
     "fit": {
      "top": {
@@ -13874,7 +13906,7 @@
     ]
    },
    "policies_at168": {
-    "issueCount": 4,
+    "issueCount": 5,
     "png": false,
     "fit": {
      "top": {
@@ -14444,7 +14476,7 @@
     ]
    },
    "policies_at252": {
-    "issueCount": 4,
+    "issueCount": 5,
     "png": false,
     "fit": {
      "top": {
@@ -14994,7 +15026,7 @@
     ]
    },
    "projects_at84": {
-    "issueCount": 4,
+    "issueCount": 5,
     "png": false,
     "fit": {
      "top": {
@@ -15471,7 +15503,7 @@
     ]
    },
    "policies_states_end": {
-    "issueCount": 4,
+    "issueCount": 5,
     "png": false,
     "fit": {
      "top": {
@@ -15547,10 +15579,10 @@
     ],
     "typeSeen": {
      "14/700": 1,
-     "10/500": 13,
+     "10/500": 15,
      "13/600": 11,
      "11.5/500": 20,
-     "10/700": 3,
+     "10/700": 1,
      "11.5/600": 10,
      "18/700": 1
     },
@@ -15906,12 +15938,12 @@
      {
       "t": "God",
       "fs": 10,
-      "worst": 7.61
+      "worst": 7.32
      },
      {
       "t": "· خيارات غير واقعية",
       "fs": 10,
-      "worst": 7.1
+      "worst": 6.83
      },
      {
       "t": "الرئيس محمد حسني مبارك",
@@ -16061,7 +16093,7 @@
     ]
    },
    "policies_states_at84": {
-    "issueCount": 4,
+    "issueCount": 5,
     "png": false,
     "fit": {
      "top": {
@@ -16137,10 +16169,10 @@
     ],
     "typeSeen": {
      "14/700": 1,
-     "10/500": 10,
+     "10/500": 12,
      "13/600": 13,
      "11.5/500": 25,
-     "10/700": 3,
+     "10/700": 1,
      "11.5/600": 12,
      "18/700": 1
     },
@@ -16517,12 +16549,12 @@
      {
       "t": "God",
       "fs": 10,
-      "worst": 7.61
+      "worst": 7.32
      },
      {
       "t": "· خيارات غير واقعية",
       "fs": 10,
-      "worst": 7.1
+      "worst": 6.83
      },
      {
       "t": "الرئيس محمد حسني مبارك",
@@ -16637,7 +16669,7 @@
     ]
    },
    "policies_states_at168": {
-    "issueCount": 4,
+    "issueCount": 5,
     "png": false,
     "fit": {
      "top": {
@@ -16713,10 +16745,10 @@
     ],
     "typeSeen": {
      "14/700": 1,
-     "10/500": 10,
+     "10/500": 12,
      "13/600": 12,
      "11.5/500": 23,
-     "10/700": 3,
+     "10/700": 1,
      "11.5/600": 12,
      "18/700": 1
     },
@@ -17072,12 +17104,12 @@
      {
       "t": "God",
       "fs": 10,
-      "worst": 7.61
+      "worst": 7.32
      },
      {
       "t": "· خيارات غير واقعية",
       "fs": 10,
-      "worst": 7.1
+      "worst": 6.83
      },
      {
       "t": "الرئيس محمد حسني مبارك",
@@ -17217,7 +17249,7 @@
     ]
    },
    "policies_states_at252": {
-    "issueCount": 4,
+    "issueCount": 5,
     "png": false,
     "fit": {
      "top": {
@@ -17293,10 +17325,10 @@
     ],
     "typeSeen": {
      "14/700": 1,
-     "10/500": 13,
+     "10/500": 15,
      "13/600": 12,
      "11.5/500": 22,
-     "10/700": 3,
+     "10/700": 1,
      "11.5/600": 11,
      "18/700": 1
     },
@@ -17652,12 +17684,12 @@
      {
       "t": "God",
       "fs": 10,
-      "worst": 7.61
+      "worst": 7.32
      },
      {
       "t": "· خيارات غير واقعية",
       "fs": 10,
-      "worst": 7.1
+      "worst": 6.83
      },
      {
       "t": "الرئيس محمد حسني مبارك",
@@ -17792,11 +17824,11 @@
    "_build/mini_states.png",
    "_build/mini_policies_states.png"
   ],
-  "issueCount": 68
+  "issueCount": 85
  },
  "i14": {
   "device": "844x390 side 47 bottom 21 notch",
-  "renderedAt": "2026-11-07T16:53:00.440Z",
+  "renderedAt": "2026-11-07T17:30:10.355Z",
   "inputs": {
    "files": [
     "index.html",
@@ -17816,65 +17848,80 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "f305dee9f2991904b348774e61384fc11bca38bd"
+   "sha1": "a47173f0504791e66b698491e78d686b6502fb22"
   },
   "issues": [
+   "overview: ellipsis on \"مصر\"",
    "overview: ellipsis on \"الرئيس محمد حسني مبارك\"",
    "overview: clipped text (top): \"·\" 609.08..618.61 y 78..95",
    "overview: ellipsis on \"منذ\"",
    "overview: clipped text (top): \"1981\" 562.88..590.48 y 78..95",
+   "leader: ellipsis on \"مصر\"",
    "leader: ellipsis on \"الرئيس محمد حسني مبارك\"",
    "leader: clipped text (top): \"·\" 609.08..618.61 y 78..95",
    "leader: ellipsis on \"منذ\"",
    "leader: clipped text (top): \"1981\" 562.88..590.48 y 78..95",
+   "leader_end: ellipsis on \"مصر\"",
    "leader_end: ellipsis on \"الرئيس محمد حسني مبارك\"",
    "leader_end: clipped text (top): \"·\" 609.08..618.61 y 78..95",
    "leader_end: ellipsis on \"منذ\"",
    "leader_end: clipped text (top): \"1981\" 562.88..590.48 y 78..95",
+   "policies: ellipsis on \"مصر\"",
    "policies: ellipsis on \"الرئيس محمد حسني مبارك\"",
    "policies: clipped text (top): \"·\" 609.08..618.61 y 78..95",
    "policies: ellipsis on \"منذ\"",
    "policies: clipped text (top): \"1981\" 562.88..590.48 y 78..95",
+   "policies_end: ellipsis on \"مصر\"",
    "policies_end: ellipsis on \"الرئيس محمد حسني مبارك\"",
    "policies_end: clipped text (top): \"·\" 609.08..618.61 y 78..95",
    "policies_end: ellipsis on \"منذ\"",
    "policies_end: clipped text (top): \"1981\" 562.88..590.48 y 78..95",
+   "projects: ellipsis on \"مصر\"",
    "projects: ellipsis on \"الرئيس محمد حسني مبارك\"",
    "projects: clipped text (top): \"·\" 609.08..618.61 y 78..95",
    "projects: ellipsis on \"منذ\"",
    "projects: clipped text (top): \"1981\" 562.88..590.48 y 78..95",
+   "projects_end: ellipsis on \"مصر\"",
    "projects_end: ellipsis on \"الرئيس محمد حسني مبارك\"",
    "projects_end: clipped text (top): \"·\" 609.08..618.61 y 78..95",
    "projects_end: ellipsis on \"منذ\"",
    "projects_end: clipped text (top): \"1981\" 562.88..590.48 y 78..95",
+   "overview_states: ellipsis on \"مصر\"",
    "overview_states: ellipsis on \"الرئيس محمد حسني مبارك\"",
    "overview_states: clipped text (top): \"·\" 609.08..618.61 y 78..95",
    "overview_states: ellipsis on \"منذ\"",
    "overview_states: clipped text (top): \"1981\" 562.88..590.48 y 78..95",
+   "policies_states: ellipsis on \"مصر\"",
    "policies_states: ellipsis on \"الرئيس محمد حسني مبارك\"",
    "policies_states: clipped text (top): \"·\" 609.08..618.61 y 78..95",
    "policies_states: ellipsis on \"منذ\"",
    "policies_states: clipped text (top): \"1981\" 562.88..590.48 y 78..95",
+   "policies_at99: ellipsis on \"مصر\"",
    "policies_at99: ellipsis on \"الرئيس محمد حسني مبارك\"",
    "policies_at99: clipped text (top): \"·\" 609.08..618.61 y 78..95",
    "policies_at99: ellipsis on \"منذ\"",
    "policies_at99: clipped text (top): \"1981\" 562.88..590.48 y 78..95",
+   "policies_at198: ellipsis on \"مصر\"",
    "policies_at198: ellipsis on \"الرئيس محمد حسني مبارك\"",
    "policies_at198: clipped text (top): \"·\" 609.08..618.61 y 78..95",
    "policies_at198: ellipsis on \"منذ\"",
    "policies_at198: clipped text (top): \"1981\" 562.88..590.48 y 78..95",
+   "projects_at99: ellipsis on \"مصر\"",
    "projects_at99: ellipsis on \"الرئيس محمد حسني مبارك\"",
    "projects_at99: clipped text (top): \"·\" 609.08..618.61 y 78..95",
    "projects_at99: ellipsis on \"منذ\"",
    "projects_at99: clipped text (top): \"1981\" 562.88..590.48 y 78..95",
+   "policies_states_end: ellipsis on \"مصر\"",
    "policies_states_end: ellipsis on \"الرئيس محمد حسني مبارك\"",
    "policies_states_end: clipped text (top): \"·\" 609.08..618.61 y 78..95",
    "policies_states_end: ellipsis on \"منذ\"",
    "policies_states_end: clipped text (top): \"1981\" 562.88..590.48 y 78..95",
+   "policies_states_at99: ellipsis on \"مصر\"",
    "policies_states_at99: ellipsis on \"الرئيس محمد حسني مبارك\"",
    "policies_states_at99: clipped text (top): \"·\" 609.08..618.61 y 78..95",
    "policies_states_at99: ellipsis on \"منذ\"",
    "policies_states_at99: clipped text (top): \"1981\" 562.88..590.48 y 78..95",
+   "policies_states_at198: ellipsis on \"مصر\"",
    "policies_states_at198: ellipsis on \"الرئيس محمد حسني مبارك\"",
    "policies_states_at198: clipped text (top): \"·\" 609.08..618.61 y 78..95",
    "policies_states_at198: ellipsis on \"منذ\"",
@@ -17882,7 +17929,7 @@
   ],
   "views": {
    "overview": {
-    "issueCount": 4,
+    "issueCount": 5,
     "png": true,
     "fit": {
      "top": {
@@ -18604,7 +18651,7 @@
     ]
    },
    "leader": {
-    "issueCount": 4,
+    "issueCount": 5,
     "png": true,
     "fit": {
      "top": {
@@ -19173,7 +19220,7 @@
     ]
    },
    "leader_end": {
-    "issueCount": 4,
+    "issueCount": 5,
     "png": true,
     "fit": {
      "top": {
@@ -19762,7 +19809,7 @@
     ]
    },
    "policies": {
-    "issueCount": 4,
+    "issueCount": 5,
     "png": true,
     "fit": {
      "top": {
@@ -20443,7 +20490,7 @@
     ]
    },
    "policies_end": {
-    "issueCount": 4,
+    "issueCount": 5,
     "png": true,
     "fit": {
      "top": {
@@ -21139,7 +21186,7 @@
     ]
    },
    "projects": {
-    "issueCount": 4,
+    "issueCount": 5,
     "png": true,
     "fit": {
      "top": {
@@ -21742,7 +21789,7 @@
     ]
    },
    "projects_end": {
-    "issueCount": 4,
+    "issueCount": 5,
     "png": true,
     "fit": {
      "top": {
@@ -22345,7 +22392,7 @@
     ]
    },
    "overview_states": {
-    "issueCount": 4,
+    "issueCount": 5,
     "png": true,
     "fit": {
      "top": {
@@ -22421,10 +22468,10 @@
     ],
     "typeSeen": {
      "14/700": 1,
-     "10/500": 20,
+     "10/500": 22,
      "13/600": 16,
      "11.5/500": 31,
-     "10/700": 3,
+     "10/700": 1,
      "11.5/600": 8,
      "18/700": 4
     },
@@ -22837,12 +22884,12 @@
      {
       "t": "God",
       "fs": 10,
-      "worst": 7.61
+      "worst": 7.32
      },
      {
       "t": "· خيارات غير واقعية",
       "fs": 10,
-      "worst": 7.1
+      "worst": 6.83
      },
      {
       "t": "الرئيس محمد حسني مبارك",
@@ -23077,7 +23124,7 @@
     ]
    },
    "policies_states": {
-    "issueCount": 4,
+    "issueCount": 5,
     "png": true,
     "fit": {
      "top": {
@@ -23153,10 +23200,10 @@
     ],
     "typeSeen": {
      "14/700": 1,
-     "10/500": 20,
+     "10/500": 22,
      "13/600": 12,
      "11.5/500": 25,
-     "10/700": 3,
+     "10/700": 1,
      "11.5/600": 12,
      "18/700": 1
     },
@@ -23618,12 +23665,12 @@
      {
       "t": "God",
       "fs": 10,
-      "worst": 7.61
+      "worst": 7.32
      },
      {
       "t": "· خيارات غير واقعية",
       "fs": 10,
-      "worst": 7.1
+      "worst": 6.83
      },
      {
       "t": "الرئيس محمد حسني مبارك",
@@ -23773,7 +23820,7 @@
     ]
    },
    "policies_at99": {
-    "issueCount": 4,
+    "issueCount": 5,
     "png": false,
     "fit": {
      "top": {
@@ -24470,7 +24517,7 @@
     ]
    },
    "policies_at198": {
-    "issueCount": 4,
+    "issueCount": 5,
     "png": false,
     "fit": {
      "top": {
@@ -25162,7 +25209,7 @@
     ]
    },
    "projects_at99": {
-    "issueCount": 4,
+    "issueCount": 5,
     "png": false,
     "fit": {
      "top": {
@@ -25750,7 +25797,7 @@
     ]
    },
    "policies_states_end": {
-    "issueCount": 4,
+    "issueCount": 5,
     "png": false,
     "fit": {
      "top": {
@@ -25826,10 +25873,10 @@
     ],
     "typeSeen": {
      "14/700": 1,
-     "10/500": 23,
+     "10/500": 25,
      "13/600": 12,
      "11.5/500": 22,
-     "10/700": 3,
+     "10/700": 1,
      "11.5/600": 11,
      "18/700": 1
     },
@@ -26291,12 +26338,12 @@
      {
       "t": "God",
       "fs": 10,
-      "worst": 7.61
+      "worst": 7.32
      },
      {
       "t": "· خيارات غير واقعية",
       "fs": 10,
-      "worst": 7.1
+      "worst": 6.83
      },
      {
       "t": "الرئيس محمد حسني مبارك",
@@ -26451,7 +26498,7 @@
     ]
    },
    "policies_states_at99": {
-    "issueCount": 4,
+    "issueCount": 5,
     "png": false,
     "fit": {
      "top": {
@@ -26527,10 +26574,10 @@
     ],
     "typeSeen": {
      "14/700": 1,
-     "10/500": 20,
+     "10/500": 22,
      "13/600": 12,
      "11.5/500": 27,
-     "10/700": 3,
+     "10/700": 1,
      "11.5/600": 12,
      "18/700": 1
     },
@@ -27013,12 +27060,12 @@
      {
       "t": "God",
       "fs": 10,
-      "worst": 7.61
+      "worst": 7.32
      },
      {
       "t": "· خيارات غير واقعية",
       "fs": 10,
-      "worst": 7.1
+      "worst": 6.83
      },
      {
       "t": "الرئيس محمد حسني مبارك",
@@ -27158,7 +27205,7 @@
     ]
    },
    "policies_states_at198": {
-    "issueCount": 4,
+    "issueCount": 5,
     "png": false,
     "fit": {
      "top": {
@@ -27234,10 +27281,10 @@
     ],
     "typeSeen": {
      "14/700": 1,
-     "10/500": 20,
+     "10/500": 22,
      "13/600": 13,
      "11.5/500": 27,
-     "10/700": 3,
+     "10/700": 1,
      "11.5/600": 12,
      "18/700": 1
     },
@@ -27720,12 +27767,12 @@
      {
       "t": "God",
       "fs": 10,
-      "worst": 7.61
+      "worst": 7.32
      },
      {
       "t": "· خيارات غير واقعية",
       "fs": 10,
-      "worst": 7.1
+      "worst": 6.83
      },
      {
       "t": "الرئيس محمد حسني مبارك",
@@ -27875,11 +27922,11 @@
    "_build/i14_states.png",
    "_build/i14_policies_states.png"
   ],
-  "issueCount": 60
+  "issueCount": 75
  },
  "i16": {
   "device": "852x393 side 59 bottom 21 island",
-  "renderedAt": "2026-11-07T16:53:34.886Z",
+  "renderedAt": "2026-11-07T17:30:36.273Z",
   "inputs": {
    "files": [
     "index.html",
@@ -27899,65 +27946,80 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "f305dee9f2991904b348774e61384fc11bca38bd"
+   "sha1": "a47173f0504791e66b698491e78d686b6502fb22"
   },
   "issues": [
+   "overview: ellipsis on \"مصر\"",
    "overview: ellipsis on \"الرئيس محمد حسني مبارك\"",
    "overview: clipped text (top): \"·\" 605.08..614.61 y 80..97",
    "overview: ellipsis on \"منذ\"",
    "overview: clipped text (top): \"1981\" 558.88..586.48 y 80..97",
+   "leader: ellipsis on \"مصر\"",
    "leader: ellipsis on \"الرئيس محمد حسني مبارك\"",
    "leader: clipped text (top): \"·\" 605.08..614.61 y 80..97",
    "leader: ellipsis on \"منذ\"",
    "leader: clipped text (top): \"1981\" 558.88..586.48 y 80..97",
+   "leader_end: ellipsis on \"مصر\"",
    "leader_end: ellipsis on \"الرئيس محمد حسني مبارك\"",
    "leader_end: clipped text (top): \"·\" 605.08..614.61 y 80..97",
    "leader_end: ellipsis on \"منذ\"",
    "leader_end: clipped text (top): \"1981\" 558.88..586.48 y 80..97",
+   "policies: ellipsis on \"مصر\"",
    "policies: ellipsis on \"الرئيس محمد حسني مبارك\"",
    "policies: clipped text (top): \"·\" 605.08..614.61 y 80..97",
    "policies: ellipsis on \"منذ\"",
    "policies: clipped text (top): \"1981\" 558.88..586.48 y 80..97",
+   "policies_end: ellipsis on \"مصر\"",
    "policies_end: ellipsis on \"الرئيس محمد حسني مبارك\"",
    "policies_end: clipped text (top): \"·\" 605.08..614.61 y 80..97",
    "policies_end: ellipsis on \"منذ\"",
    "policies_end: clipped text (top): \"1981\" 558.88..586.48 y 80..97",
+   "projects: ellipsis on \"مصر\"",
    "projects: ellipsis on \"الرئيس محمد حسني مبارك\"",
    "projects: clipped text (top): \"·\" 605.08..614.61 y 80..97",
    "projects: ellipsis on \"منذ\"",
    "projects: clipped text (top): \"1981\" 558.88..586.48 y 80..97",
+   "projects_end: ellipsis on \"مصر\"",
    "projects_end: ellipsis on \"الرئيس محمد حسني مبارك\"",
    "projects_end: clipped text (top): \"·\" 605.08..614.61 y 80..97",
    "projects_end: ellipsis on \"منذ\"",
    "projects_end: clipped text (top): \"1981\" 558.88..586.48 y 80..97",
+   "overview_states: ellipsis on \"مصر\"",
    "overview_states: ellipsis on \"الرئيس محمد حسني مبارك\"",
    "overview_states: clipped text (top): \"·\" 605.08..614.61 y 80..97",
    "overview_states: ellipsis on \"منذ\"",
    "overview_states: clipped text (top): \"1981\" 558.88..586.48 y 80..97",
+   "policies_states: ellipsis on \"مصر\"",
    "policies_states: ellipsis on \"الرئيس محمد حسني مبارك\"",
    "policies_states: clipped text (top): \"·\" 605.08..614.61 y 80..97",
    "policies_states: ellipsis on \"منذ\"",
    "policies_states: clipped text (top): \"1981\" 558.88..586.48 y 80..97",
+   "policies_at98: ellipsis on \"مصر\"",
    "policies_at98: ellipsis on \"الرئيس محمد حسني مبارك\"",
    "policies_at98: clipped text (top): \"·\" 605.08..614.61 y 80..97",
    "policies_at98: ellipsis on \"منذ\"",
    "policies_at98: clipped text (top): \"1981\" 558.88..586.48 y 80..97",
+   "policies_at196: ellipsis on \"مصر\"",
    "policies_at196: ellipsis on \"الرئيس محمد حسني مبارك\"",
    "policies_at196: clipped text (top): \"·\" 605.08..614.61 y 80..97",
    "policies_at196: ellipsis on \"منذ\"",
    "policies_at196: clipped text (top): \"1981\" 558.88..586.48 y 80..97",
+   "projects_at98: ellipsis on \"مصر\"",
    "projects_at98: ellipsis on \"الرئيس محمد حسني مبارك\"",
    "projects_at98: clipped text (top): \"·\" 605.08..614.61 y 80..97",
    "projects_at98: ellipsis on \"منذ\"",
    "projects_at98: clipped text (top): \"1981\" 558.88..586.48 y 80..97",
+   "policies_states_end: ellipsis on \"مصر\"",
    "policies_states_end: ellipsis on \"الرئيس محمد حسني مبارك\"",
    "policies_states_end: clipped text (top): \"·\" 605.08..614.61 y 80..97",
    "policies_states_end: ellipsis on \"منذ\"",
    "policies_states_end: clipped text (top): \"1981\" 558.88..586.48 y 80..97",
+   "policies_states_at98: ellipsis on \"مصر\"",
    "policies_states_at98: ellipsis on \"الرئيس محمد حسني مبارك\"",
    "policies_states_at98: clipped text (top): \"·\" 605.08..614.61 y 80..97",
    "policies_states_at98: ellipsis on \"منذ\"",
    "policies_states_at98: clipped text (top): \"1981\" 558.88..586.48 y 80..97",
+   "policies_states_at196: ellipsis on \"مصر\"",
    "policies_states_at196: ellipsis on \"الرئيس محمد حسني مبارك\"",
    "policies_states_at196: clipped text (top): \"·\" 605.08..614.61 y 80..97",
    "policies_states_at196: ellipsis on \"منذ\"",
@@ -27965,7 +28027,7 @@
   ],
   "views": {
    "overview": {
-    "issueCount": 4,
+    "issueCount": 5,
     "png": true,
     "fit": {
      "top": {
@@ -28672,7 +28734,7 @@
     ]
    },
    "leader": {
-    "issueCount": 4,
+    "issueCount": 5,
     "png": true,
     "fit": {
      "top": {
@@ -29226,7 +29288,7 @@
     ]
    },
    "leader_end": {
-    "issueCount": 4,
+    "issueCount": 5,
     "png": true,
     "fit": {
      "top": {
@@ -29800,7 +29862,7 @@
     ]
    },
    "policies": {
-    "issueCount": 4,
+    "issueCount": 5,
     "png": true,
     "fit": {
      "top": {
@@ -30466,7 +30528,7 @@
     ]
    },
    "policies_end": {
-    "issueCount": 4,
+    "issueCount": 5,
     "png": true,
     "fit": {
      "top": {
@@ -31147,7 +31209,7 @@
     ]
    },
    "projects": {
-    "issueCount": 4,
+    "issueCount": 5,
     "png": true,
     "fit": {
      "top": {
@@ -31735,7 +31797,7 @@
     ]
    },
    "projects_end": {
-    "issueCount": 4,
+    "issueCount": 5,
     "png": true,
     "fit": {
      "top": {
@@ -32323,7 +32385,7 @@
     ]
    },
    "overview_states": {
-    "issueCount": 4,
+    "issueCount": 5,
     "png": true,
     "fit": {
      "top": {
@@ -32394,10 +32456,10 @@
     ],
     "typeSeen": {
      "14/700": 1,
-     "10/500": 18,
+     "10/500": 20,
      "13/600": 16,
      "11.5/500": 31,
-     "10/700": 3,
+     "10/700": 1,
      "11.5/600": 8,
      "18/700": 4
     },
@@ -32800,12 +32862,12 @@
      {
       "t": "God",
       "fs": 10,
-      "worst": 7.71
+      "worst": 7.41
      },
      {
       "t": "· خيارات غير واقعية",
       "fs": 10,
-      "worst": 7.19
+      "worst": 6.93
      },
      {
       "t": "الرئيس محمد حسني مبارك",
@@ -33040,7 +33102,7 @@
     ]
    },
    "policies_states": {
-    "issueCount": 4,
+    "issueCount": 5,
     "png": true,
     "fit": {
      "top": {
@@ -33111,10 +33173,10 @@
     ],
     "typeSeen": {
      "14/700": 1,
-     "10/500": 18,
+     "10/500": 20,
      "13/600": 12,
      "11.5/500": 25,
-     "10/700": 3,
+     "10/700": 1,
      "11.5/600": 12,
      "18/700": 1
     },
@@ -33566,12 +33628,12 @@
      {
       "t": "God",
       "fs": 10,
-      "worst": 7.71
+      "worst": 7.41
      },
      {
       "t": "· خيارات غير واقعية",
       "fs": 10,
-      "worst": 7.19
+      "worst": 6.93
      },
      {
       "t": "الرئيس محمد حسني مبارك",
@@ -33721,7 +33783,7 @@
     ]
    },
    "policies_at98": {
-    "issueCount": 4,
+    "issueCount": 5,
     "png": false,
     "fit": {
      "top": {
@@ -34403,7 +34465,7 @@
     ]
    },
    "policies_at196": {
-    "issueCount": 4,
+    "issueCount": 5,
     "png": false,
     "fit": {
      "top": {
@@ -35065,7 +35127,7 @@
     ]
    },
    "projects_at98": {
-    "issueCount": 4,
+    "issueCount": 5,
     "png": false,
     "fit": {
      "top": {
@@ -35633,7 +35695,7 @@
     ]
    },
    "policies_states_end": {
-    "issueCount": 4,
+    "issueCount": 5,
     "png": false,
     "fit": {
      "top": {
@@ -35704,10 +35766,10 @@
     ],
     "typeSeen": {
      "14/700": 1,
-     "10/500": 21,
+     "10/500": 23,
      "13/600": 12,
      "11.5/500": 22,
-     "10/700": 3,
+     "10/700": 1,
      "11.5/600": 11,
      "18/700": 1
     },
@@ -36159,12 +36221,12 @@
      {
       "t": "God",
       "fs": 10,
-      "worst": 7.71
+      "worst": 7.41
      },
      {
       "t": "· خيارات غير واقعية",
       "fs": 10,
-      "worst": 7.19
+      "worst": 6.93
      },
      {
       "t": "الرئيس محمد حسني مبارك",
@@ -36319,7 +36381,7 @@
     ]
    },
    "policies_states_at98": {
-    "issueCount": 4,
+    "issueCount": 5,
     "png": false,
     "fit": {
      "top": {
@@ -36390,10 +36452,10 @@
     ],
     "typeSeen": {
      "14/700": 1,
-     "10/500": 18,
+     "10/500": 20,
      "13/600": 12,
      "11.5/500": 27,
-     "10/700": 3,
+     "10/700": 1,
      "11.5/600": 12,
      "18/700": 1
     },
@@ -36866,12 +36928,12 @@
      {
       "t": "God",
       "fs": 10,
-      "worst": 7.71
+      "worst": 7.41
      },
      {
       "t": "· خيارات غير واقعية",
       "fs": 10,
-      "worst": 7.19
+      "worst": 6.93
      },
      {
       "t": "الرئيس محمد حسني مبارك",
@@ -37011,7 +37073,7 @@
     ]
    },
    "policies_states_at196": {
-    "issueCount": 4,
+    "issueCount": 5,
     "png": false,
     "fit": {
      "top": {
@@ -37082,10 +37144,10 @@
     ],
     "typeSeen": {
      "14/700": 1,
-     "10/500": 18,
+     "10/500": 20,
      "13/600": 13,
      "11.5/500": 27,
-     "10/700": 3,
+     "10/700": 1,
      "11.5/600": 12,
      "18/700": 1
     },
@@ -37558,12 +37620,12 @@
      {
       "t": "God",
       "fs": 10,
-      "worst": 7.71
+      "worst": 7.41
      },
      {
       "t": "· خيارات غير واقعية",
       "fs": 10,
-      "worst": 7.19
+      "worst": 6.93
      },
      {
       "t": "الرئيس محمد حسني مبارك",
@@ -37698,11 +37760,11 @@
    "_build/i16_states.png",
    "_build/i16_policies_states.png"
   ],
-  "issueCount": 60
+  "issueCount": 75
  },
  "i16pro": {
   "device": "874x402 side 62 bottom 21 island",
-  "renderedAt": "2026-11-07T16:54:08.782Z",
+  "renderedAt": "2026-11-07T17:31:01.741Z",
   "inputs": {
    "files": [
     "index.html",
@@ -37722,61 +37784,75 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "f305dee9f2991904b348774e61384fc11bca38bd"
+   "sha1": "a47173f0504791e66b698491e78d686b6502fb22"
   },
   "issues": [
+   "overview: ellipsis on \"مصر\"",
    "overview: ellipsis on \"الرئيس محمد حسني مبارك\"",
    "overview: clipped text (top): \"·\" 624.08..633.61 y 80..97",
    "overview: ellipsis on \"منذ\"",
    "overview: clipped text (top): \"1981\" 577.88..605.48 y 80..97",
+   "leader: ellipsis on \"مصر\"",
    "leader: ellipsis on \"الرئيس محمد حسني مبارك\"",
    "leader: clipped text (top): \"·\" 624.08..633.61 y 80..97",
    "leader: ellipsis on \"منذ\"",
    "leader: clipped text (top): \"1981\" 577.88..605.48 y 80..97",
+   "leader_end: ellipsis on \"مصر\"",
    "leader_end: ellipsis on \"الرئيس محمد حسني مبارك\"",
    "leader_end: clipped text (top): \"·\" 624.08..633.61 y 80..97",
    "leader_end: ellipsis on \"منذ\"",
    "leader_end: clipped text (top): \"1981\" 577.88..605.48 y 80..97",
+   "policies: ellipsis on \"مصر\"",
    "policies: ellipsis on \"الرئيس محمد حسني مبارك\"",
    "policies: clipped text (top): \"·\" 624.08..633.61 y 80..97",
    "policies: ellipsis on \"منذ\"",
    "policies: clipped text (top): \"1981\" 577.88..605.48 y 80..97",
+   "policies_end: ellipsis on \"مصر\"",
    "policies_end: ellipsis on \"الرئيس محمد حسني مبارك\"",
    "policies_end: clipped text (top): \"·\" 624.08..633.61 y 80..97",
    "policies_end: ellipsis on \"منذ\"",
    "policies_end: clipped text (top): \"1981\" 577.88..605.48 y 80..97",
+   "projects: ellipsis on \"مصر\"",
    "projects: ellipsis on \"الرئيس محمد حسني مبارك\"",
    "projects: clipped text (top): \"·\" 624.08..633.61 y 80..97",
    "projects: ellipsis on \"منذ\"",
    "projects: clipped text (top): \"1981\" 577.88..605.48 y 80..97",
+   "projects_end: ellipsis on \"مصر\"",
    "projects_end: ellipsis on \"الرئيس محمد حسني مبارك\"",
    "projects_end: clipped text (top): \"·\" 624.08..633.61 y 80..97",
    "projects_end: ellipsis on \"منذ\"",
    "projects_end: clipped text (top): \"1981\" 577.88..605.48 y 80..97",
+   "overview_states: ellipsis on \"مصر\"",
    "overview_states: ellipsis on \"الرئيس محمد حسني مبارك\"",
    "overview_states: clipped text (top): \"·\" 624.08..633.61 y 80..97",
    "overview_states: ellipsis on \"منذ\"",
    "overview_states: clipped text (top): \"1981\" 577.88..605.48 y 80..97",
+   "policies_states: ellipsis on \"مصر\"",
    "policies_states: ellipsis on \"الرئيس محمد حسني مبارك\"",
    "policies_states: clipped text (top): \"·\" 624.08..633.61 y 80..97",
    "policies_states: ellipsis on \"منذ\"",
    "policies_states: clipped text (top): \"1981\" 577.88..605.48 y 80..97",
+   "policies_at107: ellipsis on \"مصر\"",
    "policies_at107: ellipsis on \"الرئيس محمد حسني مبارك\"",
    "policies_at107: clipped text (top): \"·\" 624.08..633.61 y 80..97",
    "policies_at107: ellipsis on \"منذ\"",
    "policies_at107: clipped text (top): \"1981\" 577.88..605.48 y 80..97",
+   "policies_at214: ellipsis on \"مصر\"",
    "policies_at214: ellipsis on \"الرئيس محمد حسني مبارك\"",
    "policies_at214: clipped text (top): \"·\" 624.08..633.61 y 80..97",
    "policies_at214: ellipsis on \"منذ\"",
    "policies_at214: clipped text (top): \"1981\" 577.88..605.48 y 80..97",
+   "policies_states_end: ellipsis on \"مصر\"",
    "policies_states_end: ellipsis on \"الرئيس محمد حسني مبارك\"",
    "policies_states_end: clipped text (top): \"·\" 624.08..633.61 y 80..97",
    "policies_states_end: ellipsis on \"منذ\"",
    "policies_states_end: clipped text (top): \"1981\" 577.88..605.48 y 80..97",
+   "policies_states_at107: ellipsis on \"مصر\"",
    "policies_states_at107: ellipsis on \"الرئيس محمد حسني مبارك\"",
    "policies_states_at107: clipped text (top): \"·\" 624.08..633.61 y 80..97",
    "policies_states_at107: ellipsis on \"منذ\"",
    "policies_states_at107: clipped text (top): \"1981\" 577.88..605.48 y 80..97",
+   "policies_states_at214: ellipsis on \"مصر\"",
    "policies_states_at214: ellipsis on \"الرئيس محمد حسني مبارك\"",
    "policies_states_at214: clipped text (top): \"·\" 624.08..633.61 y 80..97",
    "policies_states_at214: ellipsis on \"منذ\"",
@@ -37784,7 +37860,7 @@
   ],
   "views": {
    "overview": {
-    "issueCount": 4,
+    "issueCount": 5,
     "png": true,
     "fit": {
      "top": {
@@ -38498,7 +38574,7 @@
     ]
    },
    "leader": {
-    "issueCount": 4,
+    "issueCount": 5,
     "png": true,
     "fit": {
      "top": {
@@ -39064,7 +39140,7 @@
     ]
    },
    "leader_end": {
-    "issueCount": 4,
+    "issueCount": 5,
     "png": true,
     "fit": {
      "top": {
@@ -39645,7 +39721,7 @@
     ]
    },
    "policies": {
-    "issueCount": 4,
+    "issueCount": 5,
     "png": true,
     "fit": {
      "top": {
@@ -40323,7 +40399,7 @@
     ]
    },
    "policies_end": {
-    "issueCount": 4,
+    "issueCount": 5,
     "png": true,
     "fit": {
      "top": {
@@ -41011,7 +41087,7 @@
     ]
    },
    "projects": {
-    "issueCount": 4,
+    "issueCount": 5,
     "png": true,
     "fit": {
      "top": {
@@ -41606,7 +41682,7 @@
     ]
    },
    "projects_end": {
-    "issueCount": 4,
+    "issueCount": 5,
     "png": true,
     "fit": {
      "top": {
@@ -42216,7 +42292,7 @@
     ]
    },
    "overview_states": {
-    "issueCount": 4,
+    "issueCount": 5,
     "png": true,
     "fit": {
      "top": {
@@ -42284,10 +42360,10 @@
     ],
     "typeSeen": {
      "14/700": 1,
-     "10/500": 20,
+     "10/500": 22,
      "13/600": 16,
      "11.5/500": 31,
-     "10/700": 3,
+     "10/700": 1,
      "11.5/600": 8,
      "18/700": 4
     },
@@ -42700,12 +42776,12 @@
      {
       "t": "God",
       "fs": 10,
-      "worst": 7.69
+      "worst": 7.4
      },
      {
       "t": "· خيارات غير واقعية",
       "fs": 10,
-      "worst": 7.2
+      "worst": 6.93
      },
      {
       "t": "الرئيس محمد حسني مبارك",
@@ -42940,7 +43016,7 @@
     ]
    },
    "policies_states": {
-    "issueCount": 4,
+    "issueCount": 5,
     "png": true,
     "fit": {
      "top": {
@@ -43008,10 +43084,10 @@
     ],
     "typeSeen": {
      "14/700": 1,
-     "10/500": 20,
+     "10/500": 22,
      "13/600": 12,
      "11.5/500": 25,
-     "10/700": 3,
+     "10/700": 1,
      "11.5/600": 12,
      "18/700": 1
     },
@@ -43473,12 +43549,12 @@
      {
       "t": "God",
       "fs": 10,
-      "worst": 7.69
+      "worst": 7.4
      },
      {
       "t": "· خيارات غير واقعية",
       "fs": 10,
-      "worst": 7.2
+      "worst": 6.93
      },
      {
       "t": "الرئيس محمد حسني مبارك",
@@ -43633,7 +43709,7 @@
     ]
    },
    "policies_at107": {
-    "issueCount": 4,
+    "issueCount": 5,
     "png": false,
     "fit": {
      "top": {
@@ -44307,7 +44383,7 @@
     ]
    },
    "policies_at214": {
-    "issueCount": 4,
+    "issueCount": 5,
     "png": false,
     "fit": {
      "top": {
@@ -44996,7 +45072,7 @@
     ]
    },
    "policies_states_end": {
-    "issueCount": 4,
+    "issueCount": 5,
     "png": false,
     "fit": {
      "top": {
@@ -45064,10 +45140,10 @@
     ],
     "typeSeen": {
      "14/700": 1,
-     "10/500": 23,
+     "10/500": 25,
      "13/600": 12,
      "11.5/500": 22,
-     "10/700": 3,
+     "10/700": 1,
      "11.5/600": 11,
      "18/700": 1
     },
@@ -45529,12 +45605,12 @@
      {
       "t": "God",
       "fs": 10,
-      "worst": 7.69
+      "worst": 7.4
      },
      {
       "t": "· خيارات غير واقعية",
       "fs": 10,
-      "worst": 7.2
+      "worst": 6.93
      },
      {
       "t": "الرئيس محمد حسني مبارك",
@@ -45689,7 +45765,7 @@
     ]
    },
    "policies_states_at107": {
-    "issueCount": 4,
+    "issueCount": 5,
     "png": false,
     "fit": {
      "top": {
@@ -45757,10 +45833,10 @@
     ],
     "typeSeen": {
      "14/700": 1,
-     "10/500": 20,
+     "10/500": 22,
      "13/600": 12,
      "11.5/500": 25,
-     "10/700": 3,
+     "10/700": 1,
      "11.5/600": 12,
      "18/700": 1
     },
@@ -46243,12 +46319,12 @@
      {
       "t": "God",
       "fs": 10,
-      "worst": 7.69
+      "worst": 7.4
      },
      {
       "t": "· خيارات غير واقعية",
       "fs": 10,
-      "worst": 7.2
+      "worst": 6.93
      },
      {
       "t": "الرئيس محمد حسني مبارك",
@@ -46373,7 +46449,7 @@
     ]
    },
    "policies_states_at214": {
-    "issueCount": 4,
+    "issueCount": 5,
     "png": false,
     "fit": {
      "top": {
@@ -46441,10 +46517,10 @@
     ],
     "typeSeen": {
      "14/700": 1,
-     "10/500": 23,
+     "10/500": 25,
      "13/600": 12,
      "11.5/500": 27,
-     "10/700": 3,
+     "10/700": 1,
      "11.5/600": 12,
      "18/700": 1
     },
@@ -46927,12 +47003,12 @@
      {
       "t": "God",
       "fs": 10,
-      "worst": 7.69
+      "worst": 7.4
      },
      {
       "t": "· خيارات غير واقعية",
       "fs": 10,
-      "worst": 7.2
+      "worst": 6.93
      },
      {
       "t": "الرئيس محمد حسني مبارك",
@@ -47087,11 +47163,11 @@
    "_build/i16pro_states.png",
    "_build/i16pro_policies_states.png"
   ],
-  "issueCount": 56
+  "issueCount": 70
  },
  "i11": {
   "device": "896x414 side 48 bottom 21 notch",
-  "renderedAt": "2026-11-07T16:54:40.217Z",
+  "renderedAt": "2026-11-07T17:31:26.900Z",
   "inputs": {
    "files": [
     "index.html",
@@ -47111,61 +47187,75 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "f305dee9f2991904b348774e61384fc11bca38bd"
+   "sha1": "a47173f0504791e66b698491e78d686b6502fb22"
   },
   "issues": [
+   "overview: ellipsis on \"مصر\"",
    "overview: ellipsis on \"الرئيس محمد حسني مبارك\"",
    "overview: clipped text (top): \"·\" 660.08..669.61 y 84..101",
    "overview: ellipsis on \"منذ\"",
    "overview: clipped text (top): \"1981\" 613.88..641.48 y 84..101",
+   "leader: ellipsis on \"مصر\"",
    "leader: ellipsis on \"الرئيس محمد حسني مبارك\"",
    "leader: clipped text (top): \"·\" 660.08..669.61 y 84..101",
    "leader: ellipsis on \"منذ\"",
    "leader: clipped text (top): \"1981\" 613.88..641.48 y 84..101",
+   "leader_end: ellipsis on \"مصر\"",
    "leader_end: ellipsis on \"الرئيس محمد حسني مبارك\"",
    "leader_end: clipped text (top): \"·\" 660.08..669.61 y 84..101",
    "leader_end: ellipsis on \"منذ\"",
    "leader_end: clipped text (top): \"1981\" 613.88..641.48 y 84..101",
+   "policies: ellipsis on \"مصر\"",
    "policies: ellipsis on \"الرئيس محمد حسني مبارك\"",
    "policies: clipped text (top): \"·\" 660.08..669.61 y 84..101",
    "policies: ellipsis on \"منذ\"",
    "policies: clipped text (top): \"1981\" 613.88..641.48 y 84..101",
+   "policies_end: ellipsis on \"مصر\"",
    "policies_end: ellipsis on \"الرئيس محمد حسني مبارك\"",
    "policies_end: clipped text (top): \"·\" 660.08..669.61 y 84..101",
    "policies_end: ellipsis on \"منذ\"",
    "policies_end: clipped text (top): \"1981\" 613.88..641.48 y 84..101",
+   "projects: ellipsis on \"مصر\"",
    "projects: ellipsis on \"الرئيس محمد حسني مبارك\"",
    "projects: clipped text (top): \"·\" 660.08..669.61 y 84..101",
    "projects: ellipsis on \"منذ\"",
    "projects: clipped text (top): \"1981\" 613.88..641.48 y 84..101",
+   "projects_end: ellipsis on \"مصر\"",
    "projects_end: ellipsis on \"الرئيس محمد حسني مبارك\"",
    "projects_end: clipped text (top): \"·\" 660.08..669.61 y 84..101",
    "projects_end: ellipsis on \"منذ\"",
    "projects_end: clipped text (top): \"1981\" 613.88..641.48 y 84..101",
+   "overview_states: ellipsis on \"مصر\"",
    "overview_states: ellipsis on \"الرئيس محمد حسني مبارك\"",
    "overview_states: clipped text (top): \"·\" 660.08..669.61 y 84..101",
    "overview_states: ellipsis on \"منذ\"",
    "overview_states: clipped text (top): \"1981\" 613.88..641.48 y 84..101",
+   "policies_states: ellipsis on \"مصر\"",
    "policies_states: ellipsis on \"الرئيس محمد حسني مبارك\"",
    "policies_states: clipped text (top): \"·\" 660.08..669.61 y 84..101",
    "policies_states: ellipsis on \"منذ\"",
    "policies_states: clipped text (top): \"1981\" 613.88..641.48 y 84..101",
+   "policies_at111: ellipsis on \"مصر\"",
    "policies_at111: ellipsis on \"الرئيس محمد حسني مبارك\"",
    "policies_at111: clipped text (top): \"·\" 660.08..669.61 y 84..101",
    "policies_at111: ellipsis on \"منذ\"",
    "policies_at111: clipped text (top): \"1981\" 613.88..641.48 y 84..101",
+   "policies_at222: ellipsis on \"مصر\"",
    "policies_at222: ellipsis on \"الرئيس محمد حسني مبارك\"",
    "policies_at222: clipped text (top): \"·\" 660.08..669.61 y 84..101",
    "policies_at222: ellipsis on \"منذ\"",
    "policies_at222: clipped text (top): \"1981\" 613.88..641.48 y 84..101",
+   "policies_states_end: ellipsis on \"مصر\"",
    "policies_states_end: ellipsis on \"الرئيس محمد حسني مبارك\"",
    "policies_states_end: clipped text (top): \"·\" 660.08..669.61 y 84..101",
    "policies_states_end: ellipsis on \"منذ\"",
    "policies_states_end: clipped text (top): \"1981\" 613.88..641.48 y 84..101",
+   "policies_states_at111: ellipsis on \"مصر\"",
    "policies_states_at111: ellipsis on \"الرئيس محمد حسني مبارك\"",
    "policies_states_at111: clipped text (top): \"·\" 660.08..669.61 y 84..101",
    "policies_states_at111: ellipsis on \"منذ\"",
    "policies_states_at111: clipped text (top): \"1981\" 613.88..641.48 y 84..101",
+   "policies_states_at222: ellipsis on \"مصر\"",
    "policies_states_at222: ellipsis on \"الرئيس محمد حسني مبارك\"",
    "policies_states_at222: clipped text (top): \"·\" 660.08..669.61 y 84..101",
    "policies_states_at222: ellipsis on \"منذ\"",
@@ -47173,7 +47263,7 @@
   ],
   "views": {
    "overview": {
-    "issueCount": 4,
+    "issueCount": 5,
     "png": true,
     "fit": {
      "top": {
@@ -47882,7 +47972,7 @@
     ]
    },
    "leader": {
-    "issueCount": 4,
+    "issueCount": 5,
     "png": true,
     "fit": {
      "top": {
@@ -48443,7 +48533,7 @@
     ]
    },
    "leader_end": {
-    "issueCount": 4,
+    "issueCount": 5,
     "png": true,
     "fit": {
      "top": {
@@ -49024,7 +49114,7 @@
     ]
    },
    "policies": {
-    "issueCount": 4,
+    "issueCount": 5,
     "png": true,
     "fit": {
      "top": {
@@ -49697,7 +49787,7 @@
     ]
    },
    "policies_end": {
-    "issueCount": 4,
+    "issueCount": 5,
     "png": true,
     "fit": {
      "top": {
@@ -50380,7 +50470,7 @@
     ]
    },
    "projects": {
-    "issueCount": 4,
+    "issueCount": 5,
     "png": true,
     "fit": {
      "top": {
@@ -50970,7 +51060,7 @@
     ]
    },
    "projects_end": {
-    "issueCount": 4,
+    "issueCount": 5,
     "png": true,
     "fit": {
      "top": {
@@ -51585,7 +51675,7 @@
     ]
    },
    "overview_states": {
-    "issueCount": 4,
+    "issueCount": 5,
     "png": true,
     "fit": {
      "top": {
@@ -51648,10 +51738,10 @@
     ],
     "typeSeen": {
      "14/700": 1,
-     "10/500": 20,
+     "10/500": 22,
      "13/600": 16,
      "11.5/500": 31,
-     "10/700": 3,
+     "10/700": 1,
      "11.5/600": 8,
      "18/700": 4
     },
@@ -52064,12 +52154,12 @@
      {
       "t": "God",
       "fs": 10,
-      "worst": 7.79
+      "worst": 7.5
      },
      {
       "t": "· خيارات غير واقعية",
       "fs": 10,
-      "worst": 7.2
+      "worst": 6.93
      },
      {
       "t": "الرئيس محمد حسني مبارك",
@@ -52304,7 +52394,7 @@
     ]
    },
    "policies_states": {
-    "issueCount": 4,
+    "issueCount": 5,
     "png": true,
     "fit": {
      "top": {
@@ -52367,10 +52457,10 @@
     ],
     "typeSeen": {
      "14/700": 1,
-     "10/500": 20,
+     "10/500": 22,
      "13/600": 13,
      "11.5/500": 25,
-     "10/700": 3,
+     "10/700": 1,
      "11.5/600": 12,
      "18/700": 1
     },
@@ -52832,12 +52922,12 @@
      {
       "t": "God",
       "fs": 10,
-      "worst": 7.79
+      "worst": 7.5
      },
      {
       "t": "· خيارات غير واقعية",
       "fs": 10,
-      "worst": 7.2
+      "worst": 6.93
      },
      {
       "t": "الرئيس محمد حسني مبارك",
@@ -52992,7 +53082,7 @@
     ]
    },
    "policies_at111": {
-    "issueCount": 4,
+    "issueCount": 5,
     "png": false,
     "fit": {
      "top": {
@@ -53645,7 +53735,7 @@
     ]
    },
    "policies_at222": {
-    "issueCount": 4,
+    "issueCount": 5,
     "png": false,
     "fit": {
      "top": {
@@ -54314,7 +54404,7 @@
     ]
    },
    "policies_states_end": {
-    "issueCount": 4,
+    "issueCount": 5,
     "png": false,
     "fit": {
      "top": {
@@ -54377,10 +54467,10 @@
     ],
     "typeSeen": {
      "14/700": 1,
-     "10/500": 23,
+     "10/500": 25,
      "13/600": 12,
      "11.5/500": 22,
-     "10/700": 3,
+     "10/700": 1,
      "11.5/600": 11,
      "18/700": 1
     },
@@ -54842,12 +54932,12 @@
      {
       "t": "God",
       "fs": 10,
-      "worst": 7.79
+      "worst": 7.5
      },
      {
       "t": "· خيارات غير واقعية",
       "fs": 10,
-      "worst": 7.2
+      "worst": 6.93
      },
      {
       "t": "الرئيس محمد حسني مبارك",
@@ -55002,7 +55092,7 @@
     ]
    },
    "policies_states_at111": {
-    "issueCount": 4,
+    "issueCount": 5,
     "png": false,
     "fit": {
      "top": {
@@ -55065,10 +55155,10 @@
     ],
     "typeSeen": {
      "14/700": 1,
-     "10/500": 20,
+     "10/500": 22,
      "13/600": 12,
      "11.5/500": 25,
-     "10/700": 3,
+     "10/700": 1,
      "11.5/600": 12,
      "18/700": 1
     },
@@ -55530,12 +55620,12 @@
      {
       "t": "God",
       "fs": 10,
-      "worst": 7.79
+      "worst": 7.5
      },
      {
       "t": "· خيارات غير واقعية",
       "fs": 10,
-      "worst": 7.2
+      "worst": 6.93
      },
      {
       "t": "الرئيس محمد حسني مبارك",
@@ -55665,7 +55755,7 @@
     ]
    },
    "policies_states_at222": {
-    "issueCount": 4,
+    "issueCount": 5,
     "png": false,
     "fit": {
      "top": {
@@ -55728,10 +55818,10 @@
     ],
     "typeSeen": {
      "14/700": 1,
-     "10/500": 23,
+     "10/500": 25,
      "13/600": 12,
      "11.5/500": 25,
-     "10/700": 3,
+     "10/700": 1,
      "11.5/600": 11,
      "18/700": 1
     },
@@ -56214,12 +56304,12 @@
      {
       "t": "God",
       "fs": 10,
-      "worst": 7.79
+      "worst": 7.5
      },
      {
       "t": "· خيارات غير واقعية",
       "fs": 10,
-      "worst": 7.2
+      "worst": 6.93
      },
      {
       "t": "الرئيس محمد حسني مبارك",
@@ -56359,11 +56449,11 @@
    "_build/i11_states.png",
    "_build/i11_policies_states.png"
   ],
-  "issueCount": 56
+  "issueCount": 70
  },
  "i16promax": {
   "device": "956x440 side 62 bottom 21 island",
-  "renderedAt": "2026-11-07T16:55:13.179Z",
+  "renderedAt": "2026-11-07T17:31:52.145Z",
   "inputs": {
    "files": [
     "index.html",
@@ -56383,53 +56473,65 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "f305dee9f2991904b348774e61384fc11bca38bd"
+   "sha1": "a47173f0504791e66b698491e78d686b6502fb22"
   },
   "issues": [
+   "overview: ellipsis on \"مصر\"",
    "overview: ellipsis on \"الرئيس محمد حسني مبارك\"",
    "overview: clipped text (top): \"·\" 706.08..715.61 y 84..101",
    "overview: ellipsis on \"منذ\"",
    "overview: clipped text (top): \"1981\" 659.88..687.48 y 84..101",
+   "leader: ellipsis on \"مصر\"",
    "leader: ellipsis on \"الرئيس محمد حسني مبارك\"",
    "leader: clipped text (top): \"·\" 706.08..715.61 y 84..101",
    "leader: ellipsis on \"منذ\"",
    "leader: clipped text (top): \"1981\" 659.88..687.48 y 84..101",
+   "leader_end: ellipsis on \"مصر\"",
    "leader_end: ellipsis on \"الرئيس محمد حسني مبارك\"",
    "leader_end: clipped text (top): \"·\" 706.08..715.61 y 84..101",
    "leader_end: ellipsis on \"منذ\"",
    "leader_end: clipped text (top): \"1981\" 659.88..687.48 y 84..101",
+   "policies: ellipsis on \"مصر\"",
    "policies: ellipsis on \"الرئيس محمد حسني مبارك\"",
    "policies: clipped text (top): \"·\" 706.08..715.61 y 84..101",
    "policies: ellipsis on \"منذ\"",
    "policies: clipped text (top): \"1981\" 659.88..687.48 y 84..101",
+   "policies_end: ellipsis on \"مصر\"",
    "policies_end: ellipsis on \"الرئيس محمد حسني مبارك\"",
    "policies_end: clipped text (top): \"·\" 706.08..715.61 y 84..101",
    "policies_end: ellipsis on \"منذ\"",
    "policies_end: clipped text (top): \"1981\" 659.88..687.48 y 84..101",
+   "projects: ellipsis on \"مصر\"",
    "projects: ellipsis on \"الرئيس محمد حسني مبارك\"",
    "projects: clipped text (top): \"·\" 706.08..715.61 y 84..101",
    "projects: ellipsis on \"منذ\"",
    "projects: clipped text (top): \"1981\" 659.88..687.48 y 84..101",
+   "projects_end: ellipsis on \"مصر\"",
    "projects_end: ellipsis on \"الرئيس محمد حسني مبارك\"",
    "projects_end: clipped text (top): \"·\" 706.08..715.61 y 84..101",
    "projects_end: ellipsis on \"منذ\"",
    "projects_end: clipped text (top): \"1981\" 659.88..687.48 y 84..101",
+   "overview_states: ellipsis on \"مصر\"",
    "overview_states: ellipsis on \"الرئيس محمد حسني مبارك\"",
    "overview_states: clipped text (top): \"·\" 706.08..715.61 y 84..101",
    "overview_states: ellipsis on \"منذ\"",
    "overview_states: clipped text (top): \"1981\" 659.88..687.48 y 84..101",
+   "policies_states: ellipsis on \"مصر\"",
    "policies_states: ellipsis on \"الرئيس محمد حسني مبارك\"",
    "policies_states: clipped text (top): \"·\" 706.08..715.61 y 84..101",
    "policies_states: ellipsis on \"منذ\"",
    "policies_states: clipped text (top): \"1981\" 659.88..687.48 y 84..101",
+   "policies_at137: ellipsis on \"مصر\"",
    "policies_at137: ellipsis on \"الرئيس محمد حسني مبارك\"",
    "policies_at137: clipped text (top): \"·\" 706.08..715.61 y 84..101",
    "policies_at137: ellipsis on \"منذ\"",
    "policies_at137: clipped text (top): \"1981\" 659.88..687.48 y 84..101",
+   "policies_states_end: ellipsis on \"مصر\"",
    "policies_states_end: ellipsis on \"الرئيس محمد حسني مبارك\"",
    "policies_states_end: clipped text (top): \"·\" 706.08..715.61 y 84..101",
    "policies_states_end: ellipsis on \"منذ\"",
    "policies_states_end: clipped text (top): \"1981\" 659.88..687.48 y 84..101",
+   "policies_states_at137: ellipsis on \"مصر\"",
    "policies_states_at137: ellipsis on \"الرئيس محمد حسني مبارك\"",
    "policies_states_at137: clipped text (top): \"·\" 706.08..715.61 y 84..101",
    "policies_states_at137: ellipsis on \"منذ\"",
@@ -56437,7 +56539,7 @@
   ],
   "views": {
    "overview": {
-    "issueCount": 4,
+    "issueCount": 5,
     "png": true,
     "fit": {
      "top": {
@@ -57138,7 +57240,7 @@
     ]
    },
    "leader": {
-    "issueCount": 4,
+    "issueCount": 5,
     "png": true,
     "fit": {
      "top": {
@@ -57721,7 +57823,7 @@
     ]
    },
    "leader_end": {
-    "issueCount": 4,
+    "issueCount": 5,
     "png": true,
     "fit": {
      "top": {
@@ -58294,7 +58396,7 @@
     ]
    },
    "policies": {
-    "issueCount": 4,
+    "issueCount": 5,
     "png": true,
     "fit": {
      "top": {
@@ -58985,7 +59087,7 @@
     ]
    },
    "policies_end": {
-    "issueCount": 4,
+    "issueCount": 5,
     "png": true,
     "fit": {
      "top": {
@@ -59711,7 +59813,7 @@
     ]
    },
    "projects": {
-    "issueCount": 4,
+    "issueCount": 5,
     "png": true,
     "fit": {
      "top": {
@@ -60330,7 +60432,7 @@
     ]
    },
    "projects_end": {
-    "issueCount": 4,
+    "issueCount": 5,
     "png": true,
     "fit": {
      "top": {
@@ -60947,7 +61049,7 @@
     ]
    },
    "overview_states": {
-    "issueCount": 4,
+    "issueCount": 5,
     "png": true,
     "fit": {
      "top": {
@@ -61002,10 +61104,10 @@
     ],
     "typeSeen": {
      "14/700": 1,
-     "10/500": 20,
+     "10/500": 22,
      "13/600": 16,
      "11.5/500": 31,
-     "10/700": 3,
+     "10/700": 1,
      "11.5/600": 8,
      "18/700": 4
     },
@@ -61418,12 +61520,12 @@
      {
       "t": "God",
       "fs": 10,
-      "worst": 7.93
+      "worst": 7.63
      },
      {
       "t": "· خيارات غير واقعية",
       "fs": 10,
-      "worst": 7.2
+      "worst": 6.93
      },
      {
       "t": "الرئيس محمد حسني مبارك",
@@ -61658,7 +61760,7 @@
     ]
    },
    "policies_states": {
-    "issueCount": 4,
+    "issueCount": 5,
     "png": true,
     "fit": {
      "top": {
@@ -61713,10 +61815,10 @@
     ],
     "typeSeen": {
      "14/700": 1,
-     "10/500": 20,
+     "10/500": 22,
      "13/600": 13,
      "11.5/500": 29,
-     "10/700": 3,
+     "10/700": 1,
      "11.5/600": 13,
      "18/700": 1
     },
@@ -62199,12 +62301,12 @@
      {
       "t": "God",
       "fs": 10,
-      "worst": 7.93
+      "worst": 7.63
      },
      {
       "t": "· خيارات غير واقعية",
       "fs": 10,
-      "worst": 7.2
+      "worst": 6.93
      },
      {
       "t": "الرئيس محمد حسني مبارك",
@@ -62364,7 +62466,7 @@
     ]
    },
    "policies_at137": {
-    "issueCount": 4,
+    "issueCount": 5,
     "png": false,
     "fit": {
      "top": {
@@ -63050,7 +63152,7 @@
     ]
    },
    "policies_states_end": {
-    "issueCount": 4,
+    "issueCount": 5,
     "png": false,
     "fit": {
      "top": {
@@ -63105,10 +63207,10 @@
     ],
     "typeSeen": {
      "14/700": 1,
-     "10/500": 23,
+     "10/500": 25,
      "13/600": 13,
      "11.5/500": 27,
-     "10/700": 3,
+     "10/700": 1,
      "11.5/600": 12,
      "18/700": 1
     },
@@ -63591,12 +63693,12 @@
      {
       "t": "God",
       "fs": 10,
-      "worst": 7.93
+      "worst": 7.63
      },
      {
       "t": "· خيارات غير واقعية",
       "fs": 10,
-      "worst": 7.2
+      "worst": 6.93
      },
      {
       "t": "الرئيس محمد حسني مبارك",
@@ -63781,7 +63883,7 @@
     ]
    },
    "policies_states_at137": {
-    "issueCount": 4,
+    "issueCount": 5,
     "png": false,
     "fit": {
      "top": {
@@ -63836,10 +63938,10 @@
     ],
     "typeSeen": {
      "14/700": 1,
-     "10/500": 20,
+     "10/500": 22,
      "13/600": 14,
      "11.5/500": 27,
-     "10/700": 3,
+     "10/700": 1,
      "11.5/600": 13,
      "18/700": 1
     },
@@ -64322,12 +64424,12 @@
      {
       "t": "God",
       "fs": 10,
-      "worst": 7.93
+      "worst": 7.63
      },
      {
       "t": "· خيارات غير واقعية",
       "fs": 10,
-      "worst": 7.2
+      "worst": 6.93
      },
      {
       "t": "الرئيس محمد حسني مبارك",
@@ -64497,6 +64599,6 @@
    "_build/i16promax_states.png",
    "_build/i16promax_policies_states.png"
   ],
-  "issueCount": 48
+  "issueCount": 60
  }
 }

@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-07T16:50:06.745Z",
+ "ranAt": "2026-11-07T17:28:11.999Z",
  "inputs": {
   "files": [
    "index.html",
@@ -22,26 +22,30 @@
    "../../shared/map_mena_d1_overlay.svg",
    "map_overlay_cairo.svg"
   ],
-  "sha1": "3f8d1318ab11c299ce5b92495f4c1b234578fc78"
+  "sha1": "90274b19d93d0311b0748bbc8fe4ca9f4dcb9965"
  },
  "cleanIssues": {
   "i16promax": [
+   "ellipsis on \"نهاية الحملة\"",
    "clipped text (top): \"15\" 819.19..833 y 84..101",
    "ellipsis on \"مارس\"",
    "clipped text (top): \"2034\" 760.92..788.53 y 84..101"
   ],
   "i16promax_nuclear_end": [
+   "ellipsis on \"نهاية الحملة\"",
    "clipped text (top): \"15\" 819.19..833 y 84..101",
    "ellipsis on \"مارس\"",
    "clipped text (top): \"2034\" 760.92..788.53 y 84..101"
   ],
   "i16promax coverage": [],
   "se": [
+   "ellipsis on \"نهاية الحملة\"",
    "clipped text (top): \"15\" 584.19..598 y 84..101",
    "ellipsis on \"مارس\"",
    "clipped text (top): \"2034\" 525.92..553.53 y 84..101"
   ],
   "se_nuclear_end": [
+   "ellipsis on \"نهاية الحملة\"",
    "clipped text (top): \"15\" 584.19..598 y 84..101",
    "ellipsis on \"مارس\"",
    "clipped text (top): \"2034\" 525.92..553.53 y 84..101"
@@ -54,8 +58,8 @@
    "ok": true,
    "sample": [
     "font size 17 for \"نهاية الحملة\"",
-    "clipped text (top): \"15\" 819.19..833 y 84..101",
-    "ellipsis on \"مارس\""
+    "ellipsis on \"نهاية الحملة\"",
+    "clipped text (top): \"15\" 819.19..833 y 84..101"
    ]
   },
   {
@@ -63,8 +67,8 @@
    "ok": true,
    "sample": [
     "text colour off-token rgb(136, 153, 170): \"نهاية الحملة\"",
-    "clipped text (top): \"15\" 819.19..833 y 84..101",
-    "ellipsis on \"مارس\""
+    "ellipsis on \"نهاية الحملة\"",
+    "clipped text (top): \"15\" 819.19..833 y 84..101"
    ]
   },
   {
@@ -73,25 +77,25 @@
    "sample": [
     "panel radius نهاية الحملة: 6 (want 12)",
     "radius 6 for .sheet (want 12)",
-    "clipped text (top): \"15\" 819.19..833 y 84..101"
+    "ellipsis on \"نهاية الحملة\""
    ]
   },
   {
    "name": "tap in the side inset",
    "ok": true,
    "sample": [
+    "ellipsis on \"نهاية الحملة\"",
     "clipped text (top): \"15\" 849.19..863 y 84..101",
-    "ellipsis on \"مارس\"",
-    "clipped text (top): \"2034\" 790.92..818.53 y 84..101"
+    "ellipsis on \"مارس\""
    ]
   },
   {
    "name": "panel in the side inset",
    "ok": true,
    "sample": [
+    "ellipsis on \"نهاية الحملة\"",
     "clipped text (top): \"15\" 849.19..863 y 84..101",
-    "ellipsis on \"مارس\"",
-    "clipped text (top): \"2034\" 790.92..818.53 y 84..101"
+    "ellipsis on \"مارس\""
    ]
   },
   {
@@ -99,8 +103,8 @@
    "ok": true,
    "sample": [
     "panel not opaque: نهاية الحملة rgba(9, 17, 25, 0.66)",
-    "clipped text (top): \"15\" 819.19..833 y 84..101",
-    "ellipsis on \"مارس\""
+    "ellipsis on \"نهاية الحملة\"",
+    "clipped text (top): \"15\" 819.19..833 y 84..101"
    ]
   },
   {
@@ -108,170 +112,170 @@
    "ok": true,
    "sample": [
     "panel not opaque (opacity 0.60): نهاية الحملة",
-    "clipped text (top): \"15\" 819.19..833 y 84..101",
-    "ellipsis on \"مارس\""
+    "ellipsis on \"نهاية الحملة\"",
+    "clipped text (top): \"15\" 819.19..833 y 84..101"
    ]
   },
   {
    "name": "Egypt covered",
    "ok": true,
    "sample": [
+    "ellipsis on \"نهاية الحملة\"",
     "clipped text (top): \"15\" 819.19..833 y 84..101",
-    "ellipsis on \"مارس\"",
-    "clipped text (top): \"2034\" 760.92..788.53 y 84..101"
+    "ellipsis on \"مارس\""
    ]
   },
   {
    "name": "map dimmed",
    "ok": true,
    "sample": [
+    "ellipsis on \"نهاية الحملة\"",
     "clipped text (top): \"15\" 819.19..833 y 84..101",
-    "ellipsis on \"مارس\"",
-    "clipped text (top): \"2034\" 760.92..788.53 y 84..101"
+    "ellipsis on \"مارس\""
    ]
   },
   {
    "name": "map faded",
    "ok": true,
    "sample": [
+    "ellipsis on \"نهاية الحملة\"",
     "clipped text (top): \"15\" 819.19..833 y 84..101",
-    "ellipsis on \"مارس\"",
-    "clipped text (top): \"2034\" 760.92..788.53 y 84..101"
+    "ellipsis on \"مارس\""
    ]
   },
   {
    "name": "scrim over the map",
    "ok": true,
    "sample": [
+    "ellipsis on \"نهاية الحملة\"",
     "clipped text (top): \"15\" 819.19..833 y 84..101",
-    "ellipsis on \"مارس\"",
-    "clipped text (top): \"2034\" 760.92..788.53 y 84..101"
+    "ellipsis on \"مارس\""
    ]
   },
   {
    "name": "sheet width",
    "ok": true,
    "sample": [
+    "ellipsis on \"نهاية الحملة\"",
     "clipped text (top): \"15\" 819.19..833 y 84..101",
-    "ellipsis on \"مارس\"",
-    "clipped text (top): \"2034\" 760.92..788.53 y 84..101"
+    "ellipsis on \"مارس\""
    ]
   },
   {
    "name": "sheet top",
    "ok": true,
    "sample": [
+    "ellipsis on \"نهاية الحملة\"",
     "clipped text (top): \"15\" 819.19..833 y 70..87",
-    "ellipsis on \"مارس\"",
-    "clipped text (top): \"2034\" 760.92..788.53 y 70..87"
+    "ellipsis on \"مارس\""
    ]
   },
   {
    "name": "dock hidden although it fits",
    "ok": true,
    "sample": [
+    "ellipsis on \"نهاية الحملة\"",
     "clipped text (top): \"15\" 819.19..833 y 84..101",
-    "ellipsis on \"مارس\"",
-    "clipped text (top): \"2034\" 760.92..788.53 y 84..101"
+    "ellipsis on \"مارس\""
    ]
   },
   {
    "name": "dock shown on the SE",
    "ok": true,
    "sample": [
+    "ellipsis on \"نهاية الحملة\"",
     "clipped text (top): \"15\" 584.19..598 y 84..101",
-    "ellipsis on \"مارس\"",
-    "clipped text (top): \"2034\" 525.92..553.53 y 84..101"
+    "ellipsis on \"مارس\""
    ]
   },
   {
    "name": "left stack moved",
    "ok": true,
    "sample": [
+    "ellipsis on \"نهاية الحملة\"",
     "clipped text (top): \"15\" 819.19..833 y 84..101",
-    "ellipsis on \"مارس\"",
-    "clipped text (top): \"2034\" 760.92..788.53 y 84..101"
+    "ellipsis on \"مارس\""
    ]
   },
   {
    "name": "map label cut",
    "ok": true,
    "sample": [
+    "ellipsis on \"نهاية الحملة\"",
     "clipped text (top): \"15\" 819.19..833 y 84..101",
-    "ellipsis on \"مارس\"",
-    "clipped text (top): \"2034\" 760.92..788.53 y 84..101"
+    "ellipsis on \"مارس\""
    ]
   },
   {
    "name": "contrast",
    "ok": true,
    "sample": [
+    "ellipsis on \"نهاية الحملة\"",
     "clipped text (top): \"15\" 819.19..833 y 84..101",
-    "ellipsis on \"مارس\"",
-    "clipped text (top): \"2034\" 760.92..788.53 y 84..101"
+    "ellipsis on \"مارس\""
    ]
   },
   {
    "name": "identity line missing",
    "ok": true,
    "sample": [
+    "ellipsis on \"نهاية الحملة\"",
     "clipped text (top): \"15\" 819.19..833 y 84..101",
-    "ellipsis on \"مارس\"",
-    "clipped text (top): \"2034\" 760.92..788.53 y 84..101"
+    "ellipsis on \"مارس\""
    ]
   },
   {
    "name": "emblem drawn grey",
    "ok": true,
    "sample": [
+    "ellipsis on \"نهاية الحملة\"",
     "clipped text (top): \"15\" 819.19..833 y 84..101",
-    "ellipsis on \"مارس\"",
-    "clipped text (top): \"2034\" 760.92..788.53 y 84..101"
+    "ellipsis on \"مارس\""
    ]
   },
   {
    "name": "section colour on data",
    "ok": true,
    "sample": [
+    "ellipsis on \"نهاية الحملة\"",
     "clipped text (top): \"15\" 819.19..833 y 84..101",
-    "ellipsis on \"مارس\"",
-    "clipped text (top): \"2034\" 760.92..788.53 y 84..101"
+    "ellipsis on \"مارس\""
    ]
   },
   {
    "name": "money unit",
    "ok": true,
    "sample": [
+    "ellipsis on \"نهاية الحملة\"",
     "clipped text (top): \"15\" 819.19..833 y 84..101",
-    "ellipsis on \"مارس\"",
-    "clipped text (top): \"2034\" 760.92..788.53 y 84..101"
+    "ellipsis on \"مارس\""
    ]
   },
   {
    "name": "sign outside its number",
    "ok": true,
    "sample": [
+    "ellipsis on \"نهاية الحملة\"",
     "clipped text (top): \"15\" 819.19..833 y 84..101",
-    "ellipsis on \"مارس\"",
-    "clipped text (top): \"2034\" 760.92..788.53 y 84..101"
+    "ellipsis on \"مارس\""
    ]
   },
   {
    "name": "colour alone",
    "ok": true,
    "sample": [
+    "ellipsis on \"نهاية الحملة\"",
     "clipped text (top): \"15\" 819.19..833 y 84..101",
-    "ellipsis on \"مارس\"",
-    "clipped text (top): \"2034\" 760.92..788.53 y 84..101"
+    "ellipsis on \"مارس\""
    ]
   },
   {
    "name": "an image in the sheet",
    "ok": true,
    "sample": [
+    "ellipsis on \"نهاية الحملة\"",
     "clipped text (top): \"15\" 819.19..833 y 84..101",
-    "ellipsis on \"مارس\"",
-    "clipped text (top): \"2034\" 760.92..788.53 y 84..101"
+    "ellipsis on \"مارس\""
    ]
   },
   {
@@ -279,98 +283,98 @@
    "ok": true,
    "sample": [
     "close button is not round",
-    "clipped text (top): \"15\" 819.19..833 y 84..101",
-    "ellipsis on \"مارس\""
+    "ellipsis on \"نهاية الحملة\"",
+    "clipped text (top): \"15\" 819.19..833 y 84..101"
    ]
   },
   {
    "name": "label without a role",
    "ok": true,
    "sample": [
+    "ellipsis on \"نهاية الحملة\"",
     "clipped text (top): \"15\" 819.19..833 y 84..101",
-    "ellipsis on \"مارس\"",
-    "clipped text (top): \"2034\" 760.92..788.53 y 84..101"
+    "ellipsis on \"مارس\""
    ]
   },
   {
    "name": "text overlap",
    "ok": true,
    "sample": [
+    "ellipsis on \"نهاية الحملة\"",
     "clipped text (top): \"15\" 819.19..833 y 70..87",
-    "ellipsis on \"مارس\"",
-    "clipped text (top): \"2034\" 760.92..788.53 y 70..87"
+    "ellipsis on \"مارس\""
    ]
   },
   {
    "name": "identity line colour",
    "ok": true,
    "sample": [
+    "ellipsis on \"نهاية الحملة\"",
     "clipped text (top): \"15\" 819.19..833 y 84..101",
-    "ellipsis on \"مارس\"",
-    "clipped text (top): \"2034\" 760.92..788.53 y 84..101"
+    "ellipsis on \"مارس\""
    ]
   },
   {
    "name": "emblem size",
    "ok": true,
    "sample": [
+    "ellipsis on \"نهاية الحملة\"",
     "clipped text (top): \"15\" 819.19..833 y 84..101",
-    "ellipsis on \"مارس\"",
-    "clipped text (top): \"2034\" 760.92..788.53 y 84..101"
+    "ellipsis on \"مارس\""
    ]
   },
   {
    "name": "tile icons cyan",
    "ok": true,
    "sample": [
+    "ellipsis on \"نهاية الحملة\"",
     "clipped text (top): \"15\" 819.19..833 y 84..101",
-    "ellipsis on \"مارس\"",
-    "clipped text (top): \"2034\" 760.92..788.53 y 84..101"
+    "ellipsis on \"مارس\""
    ]
   },
   {
    "name": "a long headline label",
    "ok": true,
    "sample": [
+    "ellipsis on \"نهاية الحملة\"",
     "clipped text (top): \"15\" 819.19..833 y 84..101",
-    "ellipsis on \"مارس\"",
-    "clipped text (top): \"2034\" 760.92..788.53 y 84..101"
+    "ellipsis on \"مارس\""
    ]
   },
   {
    "name": "text wider than its box",
    "ok": true,
    "sample": [
+    "ellipsis on \"نهاية الحملة\"",
     "clipped text (top): \"15\" 819.19..833 y 84..101",
-    "ellipsis on \"مارس\"",
-    "clipped text (top): \"2034\" 760.92..788.53 y 84..101"
+    "ellipsis on \"مارس\""
    ]
   },
   {
    "name": "a long status cell",
    "ok": true,
    "sample": [
+    "ellipsis on \"نهاية الحملة\"",
     "clipped text (top): \"15\" 819.19..833 y 84..101",
-    "ellipsis on \"مارس\"",
-    "clipped text (top): \"2034\" 760.92..788.53 y 84..101"
+    "ellipsis on \"مارس\""
    ]
   },
   {
    "name": "font weight (no tabs)",
    "ok": true,
    "sample": [
+    "ellipsis on \"نهاية الحملة\"",
     "font weight 11.5/700 for \"15\"",
-    "clipped text (top): \"15\" 819.19..833 y 84..101",
-    "font weight 11.5/700 for \"مارس\""
+    "clipped text (top): \"15\" 819.19..833 y 84..101"
    ]
   },
   {
    "name": "a tab row on a one-body sheet",
    "ok": true,
    "sample": [
+    "ellipsis on \"نهاية الحملة\"",
     "clipped text (top): \"15\" 819.19..833 y 84..101",
-    "ellipsis on \"مارس\"",
-    "clipped text (top): \"2034\" 760.92..788.53 y 84..101"
+    "ellipsis on \"مارس\""
    ]
   },
   {
@@ -379,7 +383,7 @@
    "sample": [
     "control height 40.00 for .r-x (want 32): العودة إلى الخريطة",
     "close button is not round",
-    "clipped text (top): \"15\" 819.19..833 y 84..101"
+    "ellipsis on \"نهاية الحملة\""
    ]
   },
   {
@@ -387,71 +391,71 @@
    "ok": true,
    "sample": [
     "icon size 19x19 (want 16): i",
-    "clipped text (top): \"15\" 819.19..833 y 84..101",
-    "ellipsis on \"مارس\""
+    "ellipsis on \"نهاية الحملة\"",
+    "clipped text (top): \"15\" 819.19..833 y 84..101"
    ]
   },
   {
    "name": "fades wrong (no tabs)",
    "ok": true,
    "sample": [
+    "ellipsis on \"نهاية الحملة\"",
     "clipped text (top): \"15\" 584.19..598 y 84..101",
-    "ellipsis on \"مارس\"",
-    "clipped text (top): \"2034\" 525.92..553.53 y 84..101"
+    "ellipsis on \"مارس\""
    ]
   },
   {
    "name": "a dock item marked open",
    "ok": true,
    "sample": [
+    "ellipsis on \"نهاية الحملة\"",
     "clipped text (top): \"15\" 819.19..833 y 84..101",
-    "ellipsis on \"مارس\"",
-    "clipped text (top): \"2034\" 760.92..788.53 y 84..101"
+    "ellipsis on \"مارس\""
    ]
   },
   {
    "name": "hint shown without content below",
    "ok": true,
    "sample": [
+    "ellipsis on \"نهاية الحملة\"",
     "clipped text (top): \"15\" 584.19..598 y 84..101",
-    "ellipsis on \"مارس\"",
-    "clipped text (top): \"2034\" 525.92..553.53 y 84..101"
+    "ellipsis on \"مارس\""
    ]
   },
   {
    "name": "weekday wrong",
    "ok": true,
    "sample": [
+    "ellipsis on \"نهاية الحملة\"",
     "clipped text (top): \"15\" 819.19..833 y 84..101",
-    "ellipsis on \"مارس\"",
-    "clipped text (top): \"2034\" 760.92..788.53 y 84..101"
+    "ellipsis on \"مارس\""
    ]
   },
   {
    "name": "another moment toast",
    "ok": true,
    "sample": [
+    "ellipsis on \"نهاية الحملة\"",
     "clipped text (top): \"15\" 819.19..833 y 84..101",
-    "ellipsis on \"مارس\"",
-    "clipped text (top): \"2034\" 760.92..788.53 y 84..101"
+    "ellipsis on \"مارس\""
    ]
   },
   {
    "name": "clock looks live",
    "ok": true,
    "sample": [
+    "ellipsis on \"نهاية الحملة\"",
     "clipped text (top): \"15\" 819.19..833 y 84..101",
-    "ellipsis on \"مارس\"",
-    "clipped text (top): \"2034\" 760.92..788.53 y 84..101"
+    "ellipsis on \"مارس\""
    ]
   },
   {
    "name": "speed menu still offered",
    "ok": true,
    "sample": [
+    "ellipsis on \"نهاية الحملة\"",
     "clipped text (top): \"15\" 819.19..833 y 84..101",
-    "ellipsis on \"مارس\"",
-    "clipped text (top): \"2034\" 760.92..788.53 y 84..101"
+    "ellipsis on \"مارس\""
    ]
   },
   {
@@ -467,18 +471,18 @@
    "name": "18 pt misuse (nuclear)",
    "ok": true,
    "sample": [
+    "ellipsis on \"نهاية الحملة\"",
     "clipped text (top): \"15\" 819.19..833 y 84..101",
-    "ellipsis on \"مارس\"",
-    "clipped text (top): \"2034\" 760.92..788.53 y 84..101"
+    "ellipsis on \"مارس\""
    ]
   },
   {
    "name": "clipped text (nuclear)",
    "ok": true,
    "sample": [
+    "ellipsis on \"نهاية الحملة\"",
     "clipped text (top): \"15\" 819.19..833 y 84..101",
-    "ellipsis on \"مارس\"",
-    "clipped text (top): \"2034\" 760.92..788.53 y 84..101"
+    "ellipsis on \"مارس\""
    ]
   },
   {
@@ -487,178 +491,178 @@
    "sample": [
     "gap 6 on العودة إلى آخر حفظ1 مارس 2",
     "gap 6 on العودة إلى آخر حفظ1 مارس 2",
-    "clipped text (top): \"15\" 819.19..833 y 84..101"
+    "ellipsis on \"نهاية الحملة\""
    ]
   },
   {
    "name": "faint text (nuclear)",
    "ok": true,
    "sample": [
+    "ellipsis on \"نهاية الحملة\"",
     "clipped text (top): \"15\" 819.19..833 y 84..101",
-    "ellipsis on \"مارس\"",
-    "clipped text (top): \"2034\" 760.92..788.53 y 84..101"
+    "ellipsis on \"مارس\""
    ]
   },
   {
    "name": "% before its number (nuclear)",
    "ok": true,
    "sample": [
+    "ellipsis on \"نهاية الحملة\"",
     "clipped text (top): \"15\" 819.19..833 y 84..101",
-    "ellipsis on \"مارس\"",
-    "clipped text (top): \"2034\" 760.92..788.53 y 84..101"
+    "ellipsis on \"مارس\""
    ]
   },
   {
    "name": "row read in part (nuclear)",
    "ok": true,
    "sample": [
+    "ellipsis on \"نهاية الحملة\"",
     "clipped text (top): \"15\" 819.19..833 y 84..101",
-    "ellipsis on \"مارس\"",
-    "clipped text (top): \"2034\" 760.92..788.53 y 84..101"
+    "ellipsis on \"مارس\""
    ]
   },
   {
    "name": "clock running",
    "ok": true,
    "sample": [
+    "ellipsis on \"نهاية الحملة\"",
     "clipped text (top): \"15\" 819.19..833 y 84..101",
-    "ellipsis on \"مارس\"",
-    "clipped text (top): \"2034\" 760.92..788.53 y 84..101"
+    "ellipsis on \"مارس\""
    ]
   },
   {
    "name": "date off",
    "ok": true,
    "sample": [
+    "ellipsis on \"نهاية الحملة\"",
     "clipped text (top): \"15\" 819.19..833 y 84..101",
-    "ellipsis on \"مارس\"",
-    "clipped text (top): \"2034\" 760.92..788.53 y 84..101"
+    "ellipsis on \"مارس\""
    ]
   },
   {
    "name": "text changed",
    "ok": true,
    "sample": [
+    "ellipsis on \"نهاية الحملة\"",
     "clipped text (top): \"15\" 819.19..833 y 84..101",
-    "ellipsis on \"مارس\"",
-    "clipped text (top): \"2034\" 760.92..788.53 y 84..101"
+    "ellipsis on \"مارس\""
    ]
   },
   {
    "name": "a score shown",
    "ok": true,
    "sample": [
+    "ellipsis on \"نهاية الحملة\"",
     "clipped text (top): \"15\" 819.19..833 y 84..101",
-    "ellipsis on \"مارس\"",
-    "clipped text (top): \"2034\" 760.92..788.53 y 84..101"
+    "ellipsis on \"مارس\""
    ]
   },
   {
    "name": "an image strip",
    "ok": true,
    "sample": [
+    "ellipsis on \"نهاية الحملة\"",
     "clipped text (top): \"15\" 819.19..833 y 84..101",
-    "ellipsis on \"مارس\"",
-    "clipped text (top): \"2034\" 760.92..788.53 y 84..101"
+    "ellipsis on \"مارس\""
    ]
   },
   {
    "name": "a country named",
    "ok": true,
    "sample": [
+    "ellipsis on \"نهاية الحملة\"",
     "clipped text (top): \"15\" 819.19..833 y 84..101",
-    "ellipsis on \"مارس\"",
-    "clipped text (top): \"2034\" 760.92..788.53 y 84..101"
+    "ellipsis on \"مارس\""
    ]
   },
   {
    "name": "a country in a note",
    "ok": true,
    "sample": [
+    "ellipsis on \"نهاية الحملة\"",
     "clipped text (top): \"15\" 819.19..833 y 84..101",
-    "ellipsis on \"مارس\"",
-    "clipped text (top): \"2034\" 760.92..788.53 y 84..101"
+    "ellipsis on \"مارس\""
    ]
   },
   {
    "name": "a drama word",
    "ok": true,
    "sample": [
+    "ellipsis on \"نهاية الحملة\"",
     "clipped text (top): \"15\" 819.19..833 y 84..101",
-    "ellipsis on \"مارس\"",
-    "clipped text (top): \"2034\" 760.92..788.53 y 84..101"
+    "ellipsis on \"مارس\""
    ]
   },
   {
    "name": "save after the end",
    "ok": true,
    "sample": [
+    "ellipsis on \"نهاية الحملة\"",
     "clipped text (top): \"15\" 819.19..833 y 84..101",
-    "ellipsis on \"مارس\"",
-    "clipped text (top): \"2034\" 760.92..788.53 y 84..101"
+    "ellipsis on \"مارس\""
    ]
   },
   {
    "name": "a way out lost",
    "ok": true,
    "sample": [
+    "ellipsis on \"نهاية الحملة\"",
     "clipped text (top): \"15\" 819.19..833 y 84..101",
-    "ellipsis on \"مارس\"",
-    "clipped text (top): \"2034\" 760.92..788.53 y 84..101"
+    "ellipsis on \"مارس\""
    ]
   },
   {
    "name": "link silent",
    "ok": true,
    "sample": [
+    "ellipsis on \"نهاية الحملة\"",
     "clipped text (top): \"15\" 819.19..833 y 84..101",
-    "ellipsis on \"مارس\"",
-    "clipped text (top): \"2034\" 760.92..788.53 y 84..101"
+    "ellipsis on \"مارس\""
    ]
   },
   {
    "name": "Mubarak in 2034",
    "ok": true,
    "sample": [
+    "ellipsis on \"نهاية الحملة\"",
     "clipped text (top): \"15\" 819.19..833 y 84..101",
-    "ellipsis on \"مارس\"",
-    "clipped text (top): \"2034\" 760.92..788.53 y 84..101"
+    "ellipsis on \"مارس\""
    ]
   },
   {
    "name": "old toast",
    "ok": true,
    "sample": [
+    "ellipsis on \"نهاية الحملة\"",
     "clipped text (top): \"15\" 819.19..833 y 84..101",
-    "ellipsis on \"مارس\"",
-    "clipped text (top): \"2034\" 760.92..788.53 y 84..101"
+    "ellipsis on \"مارس\""
    ]
   },
   {
    "name": "close silent",
    "ok": true,
    "sample": [
+    "ellipsis on \"نهاية الحملة\"",
     "clipped text (top): \"15\" 819.19..833 y 84..101",
-    "ellipsis on \"مارس\"",
-    "clipped text (top): \"2034\" 760.92..788.53 y 84..101"
+    "ellipsis on \"مارس\""
    ]
   },
   {
    "name": "HUD trend moving",
    "ok": true,
    "sample": [
+    "ellipsis on \"نهاية الحملة\"",
     "clipped text (top): \"15\" 819.19..833 y 84..101",
-    "ellipsis on \"مارس\"",
-    "clipped text (top): \"2034\" 760.92..788.53 y 84..101"
+    "ellipsis on \"مارس\""
    ]
   },
   {
    "name": "HUD 2011 value",
    "ok": true,
    "sample": [
+    "ellipsis on \"نهاية الحملة\"",
     "clipped text (top): \"15\" 819.19..833 y 84..101",
-    "ellipsis on \"مارس\"",
-    "clipped text (top): \"2034\" 760.92..788.53 y 84..101"
+    "ellipsis on \"مارس\""
    ]
   },
   {

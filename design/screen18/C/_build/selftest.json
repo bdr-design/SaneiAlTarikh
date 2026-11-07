@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-07T16:53:03.420Z",
+ "ranAt": "2026-11-07T17:30:13.235Z",
  "inputs": {
   "files": [
    "index.html",
@@ -22,10 +22,11 @@
    "../../shared/map_mena_d1_overlay.svg",
    "map_overlay_cairo.svg"
   ],
-  "sha1": "422c87464be7c8f566262621d6e5eb8eb624ad2e"
+  "sha1": "496d0b1e6172fe6c44061501d8d3d5d6fa1ef795"
  },
  "cleanIssues": {
   "i16promax": [
+   "ellipsis on \"سقطت حكومتك\"",
    "clipped text (top): \"12\" 819.19..833 y 84..101",
    "ellipsis on \"أغسطس\"",
    "clipped text (top): \"2031\" 745.63..773.23 y 84..101",
@@ -33,6 +34,7 @@
    "ellipsis on \"الوقت متوقف\""
   ],
   "i16promax_fallen_end": [
+   "ellipsis on \"سقطت حكومتك\"",
    "clipped text (top): \"12\" 819.19..833 y 84..101",
    "ellipsis on \"أغسطس\"",
    "clipped text (top): \"2031\" 745.63..773.23 y 84..101",
@@ -41,6 +43,7 @@
   ],
   "i16promax coverage": [],
   "se": [
+   "ellipsis on \"سقطت حكومتك\"",
    "clipped text (top): \"12\" 584.19..598 y 84..101",
    "ellipsis on \"أغسطس\"",
    "clipped text (top): \"2031\" 510.63..538.23 y 84..101",
@@ -48,6 +51,7 @@
    "ellipsis on \"الوقت متوقف\""
   ],
   "se_fallen_end": [
+   "ellipsis on \"سقطت حكومتك\"",
    "clipped text (top): \"12\" 584.19..598 y 84..101",
    "ellipsis on \"أغسطس\"",
    "clipped text (top): \"2031\" 510.63..538.23 y 84..101",
@@ -62,8 +66,8 @@
    "ok": true,
    "sample": [
     "font size 17 for \"سقطت حكومتك\"",
-    "clipped text (top): \"12\" 819.19..833 y 84..101",
-    "ellipsis on \"أغسطس\""
+    "ellipsis on \"سقطت حكومتك\"",
+    "clipped text (top): \"12\" 819.19..833 y 84..101"
    ]
   },
   {
@@ -71,8 +75,8 @@
    "ok": true,
    "sample": [
     "text colour off-token rgb(136, 153, 170): \"سقطت حكومتك\"",
-    "clipped text (top): \"12\" 819.19..833 y 84..101",
-    "ellipsis on \"أغسطس\""
+    "ellipsis on \"سقطت حكومتك\"",
+    "clipped text (top): \"12\" 819.19..833 y 84..101"
    ]
   },
   {
@@ -81,25 +85,25 @@
    "sample": [
     "panel radius سقطت حكومتك: 6 (want 12)",
     "radius 6 for .sheet (want 12)",
-    "clipped text (top): \"12\" 819.19..833 y 84..101"
+    "ellipsis on \"سقطت حكومتك\""
    ]
   },
   {
    "name": "tap in the side inset",
    "ok": true,
    "sample": [
+    "ellipsis on \"سقطت حكومتك\"",
     "clipped text (top): \"12\" 849.19..863 y 84..101",
-    "ellipsis on \"أغسطس\"",
-    "clipped text (top): \"2031\" 775.63..803.23 y 84..101"
+    "ellipsis on \"أغسطس\""
    ]
   },
   {
    "name": "panel in the side inset",
    "ok": true,
    "sample": [
+    "ellipsis on \"سقطت حكومتك\"",
     "clipped text (top): \"12\" 849.19..863 y 84..101",
-    "ellipsis on \"أغسطس\"",
-    "clipped text (top): \"2031\" 775.63..803.23 y 84..101"
+    "ellipsis on \"أغسطس\""
    ]
   },
   {
@@ -107,8 +111,8 @@
    "ok": true,
    "sample": [
     "panel not opaque: سقطت حكومتك rgba(9, 17, 25, 0.66)",
-    "clipped text (top): \"12\" 819.19..833 y 84..101",
-    "ellipsis on \"أغسطس\""
+    "ellipsis on \"سقطت حكومتك\"",
+    "clipped text (top): \"12\" 819.19..833 y 84..101"
    ]
   },
   {
@@ -116,170 +120,170 @@
    "ok": true,
    "sample": [
     "panel not opaque (opacity 0.60): سقطت حكومتك",
-    "clipped text (top): \"12\" 819.19..833 y 84..101",
-    "ellipsis on \"أغسطس\""
+    "ellipsis on \"سقطت حكومتك\"",
+    "clipped text (top): \"12\" 819.19..833 y 84..101"
    ]
   },
   {
    "name": "Egypt covered",
    "ok": true,
    "sample": [
+    "ellipsis on \"سقطت حكومتك\"",
     "clipped text (top): \"12\" 819.19..833 y 84..101",
-    "ellipsis on \"أغسطس\"",
-    "clipped text (top): \"2031\" 745.63..773.23 y 84..101"
+    "ellipsis on \"أغسطس\""
    ]
   },
   {
    "name": "map dimmed",
    "ok": true,
    "sample": [
+    "ellipsis on \"سقطت حكومتك\"",
     "clipped text (top): \"12\" 819.19..833 y 84..101",
-    "ellipsis on \"أغسطس\"",
-    "clipped text (top): \"2031\" 745.63..773.23 y 84..101"
+    "ellipsis on \"أغسطس\""
    ]
   },
   {
    "name": "map faded",
    "ok": true,
    "sample": [
+    "ellipsis on \"سقطت حكومتك\"",
     "clipped text (top): \"12\" 819.19..833 y 84..101",
-    "ellipsis on \"أغسطس\"",
-    "clipped text (top): \"2031\" 745.63..773.23 y 84..101"
+    "ellipsis on \"أغسطس\""
    ]
   },
   {
    "name": "scrim over the map",
    "ok": true,
    "sample": [
+    "ellipsis on \"سقطت حكومتك\"",
     "clipped text (top): \"12\" 819.19..833 y 84..101",
-    "ellipsis on \"أغسطس\"",
-    "clipped text (top): \"2031\" 745.63..773.23 y 84..101"
+    "ellipsis on \"أغسطس\""
    ]
   },
   {
    "name": "sheet width",
    "ok": true,
    "sample": [
+    "ellipsis on \"سقطت حكومتك\"",
     "clipped text (top): \"12\" 819.19..833 y 84..101",
-    "ellipsis on \"أغسطس\"",
-    "clipped text (top): \"2031\" 745.63..773.23 y 84..101"
+    "ellipsis on \"أغسطس\""
    ]
   },
   {
    "name": "sheet top",
    "ok": true,
    "sample": [
+    "ellipsis on \"سقطت حكومتك\"",
     "clipped text (top): \"12\" 819.19..833 y 70..87",
-    "ellipsis on \"أغسطس\"",
-    "clipped text (top): \"2031\" 745.63..773.23 y 70..87"
+    "ellipsis on \"أغسطس\""
    ]
   },
   {
    "name": "dock hidden although it fits",
    "ok": true,
    "sample": [
+    "ellipsis on \"سقطت حكومتك\"",
     "clipped text (top): \"12\" 819.19..833 y 84..101",
-    "ellipsis on \"أغسطس\"",
-    "clipped text (top): \"2031\" 745.63..773.23 y 84..101"
+    "ellipsis on \"أغسطس\""
    ]
   },
   {
    "name": "dock shown on the SE",
    "ok": true,
    "sample": [
+    "ellipsis on \"سقطت حكومتك\"",
     "clipped text (top): \"12\" 584.19..598 y 84..101",
-    "ellipsis on \"أغسطس\"",
-    "clipped text (top): \"2031\" 510.63..538.23 y 84..101"
+    "ellipsis on \"أغسطس\""
    ]
   },
   {
    "name": "left stack moved",
    "ok": true,
    "sample": [
+    "ellipsis on \"سقطت حكومتك\"",
     "clipped text (top): \"12\" 819.19..833 y 84..101",
-    "ellipsis on \"أغسطس\"",
-    "clipped text (top): \"2031\" 745.63..773.23 y 84..101"
+    "ellipsis on \"أغسطس\""
    ]
   },
   {
    "name": "map label cut",
    "ok": true,
    "sample": [
+    "ellipsis on \"سقطت حكومتك\"",
     "clipped text (top): \"12\" 819.19..833 y 84..101",
-    "ellipsis on \"أغسطس\"",
-    "clipped text (top): \"2031\" 745.63..773.23 y 84..101"
+    "ellipsis on \"أغسطس\""
    ]
   },
   {
    "name": "contrast",
    "ok": true,
    "sample": [
+    "ellipsis on \"سقطت حكومتك\"",
     "clipped text (top): \"12\" 819.19..833 y 84..101",
-    "ellipsis on \"أغسطس\"",
-    "clipped text (top): \"2031\" 745.63..773.23 y 84..101"
+    "ellipsis on \"أغسطس\""
    ]
   },
   {
    "name": "identity line missing",
    "ok": true,
    "sample": [
+    "ellipsis on \"سقطت حكومتك\"",
     "clipped text (top): \"12\" 819.19..833 y 84..101",
-    "ellipsis on \"أغسطس\"",
-    "clipped text (top): \"2031\" 745.63..773.23 y 84..101"
+    "ellipsis on \"أغسطس\""
    ]
   },
   {
    "name": "emblem drawn grey",
    "ok": true,
    "sample": [
+    "ellipsis on \"سقطت حكومتك\"",
     "clipped text (top): \"12\" 819.19..833 y 84..101",
-    "ellipsis on \"أغسطس\"",
-    "clipped text (top): \"2031\" 745.63..773.23 y 84..101"
+    "ellipsis on \"أغسطس\""
    ]
   },
   {
    "name": "section colour on data",
    "ok": true,
    "sample": [
+    "ellipsis on \"سقطت حكومتك\"",
     "clipped text (top): \"12\" 819.19..833 y 84..101",
-    "ellipsis on \"أغسطس\"",
-    "clipped text (top): \"2031\" 745.63..773.23 y 84..101"
+    "ellipsis on \"أغسطس\""
    ]
   },
   {
    "name": "money unit",
    "ok": true,
    "sample": [
+    "ellipsis on \"سقطت حكومتك\"",
     "clipped text (top): \"12\" 819.19..833 y 84..101",
-    "ellipsis on \"أغسطس\"",
-    "clipped text (top): \"2031\" 745.63..773.23 y 84..101"
+    "ellipsis on \"أغسطس\""
    ]
   },
   {
    "name": "sign outside its number",
    "ok": true,
    "sample": [
+    "ellipsis on \"سقطت حكومتك\"",
     "clipped text (top): \"12\" 819.19..833 y 84..101",
-    "ellipsis on \"أغسطس\"",
-    "clipped text (top): \"2031\" 745.63..773.23 y 84..101"
+    "ellipsis on \"أغسطس\""
    ]
   },
   {
    "name": "colour alone",
    "ok": true,
    "sample": [
+    "ellipsis on \"سقطت حكومتك\"",
     "clipped text (top): \"12\" 819.19..833 y 84..101",
-    "ellipsis on \"أغسطس\"",
-    "clipped text (top): \"2031\" 745.63..773.23 y 84..101"
+    "ellipsis on \"أغسطس\""
    ]
   },
   {
    "name": "an image in the sheet",
    "ok": true,
    "sample": [
+    "ellipsis on \"سقطت حكومتك\"",
     "clipped text (top): \"12\" 819.19..833 y 84..101",
-    "ellipsis on \"أغسطس\"",
-    "clipped text (top): \"2031\" 745.63..773.23 y 84..101"
+    "ellipsis on \"أغسطس\""
    ]
   },
   {
@@ -287,107 +291,107 @@
    "ok": true,
    "sample": [
     "close button is not round",
-    "clipped text (top): \"12\" 819.19..833 y 84..101",
-    "ellipsis on \"أغسطس\""
+    "ellipsis on \"سقطت حكومتك\"",
+    "clipped text (top): \"12\" 819.19..833 y 84..101"
    ]
   },
   {
    "name": "label without a role",
    "ok": true,
    "sample": [
+    "ellipsis on \"سقطت حكومتك\"",
     "clipped text (top): \"12\" 819.19..833 y 84..101",
-    "ellipsis on \"أغسطس\"",
-    "clipped text (top): \"2031\" 745.63..773.23 y 84..101"
+    "ellipsis on \"أغسطس\""
    ]
   },
   {
    "name": "text overlap",
    "ok": true,
    "sample": [
+    "ellipsis on \"سقطت حكومتك\"",
     "clipped text (top): \"12\" 819.19..833 y 70..87",
-    "ellipsis on \"أغسطس\"",
-    "clipped text (top): \"2031\" 745.63..773.23 y 70..87"
+    "ellipsis on \"أغسطس\""
    ]
   },
   {
    "name": "identity line colour",
    "ok": true,
    "sample": [
+    "ellipsis on \"سقطت حكومتك\"",
     "clipped text (top): \"12\" 819.19..833 y 84..101",
-    "ellipsis on \"أغسطس\"",
-    "clipped text (top): \"2031\" 745.63..773.23 y 84..101"
+    "ellipsis on \"أغسطس\""
    ]
   },
   {
    "name": "emblem size",
    "ok": true,
    "sample": [
+    "ellipsis on \"سقطت حكومتك\"",
     "clipped text (top): \"12\" 819.19..833 y 84..101",
-    "ellipsis on \"أغسطس\"",
-    "clipped text (top): \"2031\" 745.63..773.23 y 84..101"
+    "ellipsis on \"أغسطس\""
    ]
   },
   {
    "name": "tile icons cyan",
    "ok": true,
    "sample": [
+    "ellipsis on \"سقطت حكومتك\"",
     "clipped text (top): \"12\" 819.19..833 y 84..101",
-    "ellipsis on \"أغسطس\"",
-    "clipped text (top): \"2031\" 745.63..773.23 y 84..101"
+    "ellipsis on \"أغسطس\""
    ]
   },
   {
    "name": "row read in part",
    "ok": true,
    "sample": [
+    "ellipsis on \"سقطت حكومتك\"",
     "clipped text (top): \"12\" 819.19..833 y 84..101",
-    "ellipsis on \"أغسطس\"",
-    "clipped text (top): \"2031\" 745.63..773.23 y 84..101"
+    "ellipsis on \"أغسطس\""
    ]
   },
   {
    "name": "a long headline label",
    "ok": true,
    "sample": [
+    "ellipsis on \"سقطت حكومتك\"",
     "clipped text (top): \"12\" 819.19..833 y 84..101",
-    "ellipsis on \"أغسطس\"",
-    "clipped text (top): \"2031\" 745.63..773.23 y 84..101"
+    "ellipsis on \"أغسطس\""
    ]
   },
   {
    "name": "text wider than its box",
    "ok": true,
    "sample": [
+    "ellipsis on \"سقطت حكومتك\"",
     "clipped text (top): \"12\" 819.19..833 y 84..101",
-    "ellipsis on \"أغسطس\"",
-    "clipped text (top): \"2031\" 745.63..773.23 y 84..101"
+    "ellipsis on \"أغسطس\""
    ]
   },
   {
    "name": "a long status cell",
    "ok": true,
    "sample": [
+    "ellipsis on \"سقطت حكومتك\"",
     "clipped text (top): \"12\" 819.19..833 y 84..101",
-    "ellipsis on \"أغسطس\"",
-    "clipped text (top): \"2031\" 745.63..773.23 y 84..101"
+    "ellipsis on \"أغسطس\""
    ]
   },
   {
    "name": "font weight (no tabs)",
    "ok": true,
    "sample": [
+    "ellipsis on \"سقطت حكومتك\"",
     "font weight 11.5/700 for \"12\"",
-    "clipped text (top): \"12\" 819.19..833 y 84..101",
-    "font weight 11.5/700 for \"أغسطس\""
+    "clipped text (top): \"12\" 819.19..833 y 84..101"
    ]
   },
   {
    "name": "a tab row on a one-body sheet",
    "ok": true,
    "sample": [
+    "ellipsis on \"سقطت حكومتك\"",
     "clipped text (top): \"12\" 819.19..833 y 84..101",
-    "ellipsis on \"أغسطس\"",
-    "clipped text (top): \"2031\" 745.63..773.23 y 84..101"
+    "ellipsis on \"أغسطس\""
    ]
   },
   {
@@ -396,7 +400,7 @@
    "sample": [
     "control height 40.00 for .r-x (want 32): لاحقًا: يبقى الخيار في الإ",
     "close button is not round",
-    "clipped text (top): \"12\" 819.19..833 y 84..101"
+    "ellipsis on \"سقطت حكومتك\""
    ]
   },
   {
@@ -404,71 +408,71 @@
    "ok": true,
    "sample": [
     "icon size 19x19 (want 16): i",
-    "clipped text (top): \"12\" 819.19..833 y 84..101",
-    "ellipsis on \"أغسطس\""
+    "ellipsis on \"سقطت حكومتك\"",
+    "clipped text (top): \"12\" 819.19..833 y 84..101"
    ]
   },
   {
    "name": "fades wrong (no tabs)",
    "ok": true,
    "sample": [
+    "ellipsis on \"سقطت حكومتك\"",
     "clipped text (top): \"12\" 584.19..598 y 84..101",
-    "ellipsis on \"أغسطس\"",
-    "clipped text (top): \"2031\" 510.63..538.23 y 84..101"
+    "ellipsis on \"أغسطس\""
    ]
   },
   {
    "name": "a dock item marked open",
    "ok": true,
    "sample": [
+    "ellipsis on \"سقطت حكومتك\"",
     "clipped text (top): \"12\" 819.19..833 y 84..101",
-    "ellipsis on \"أغسطس\"",
-    "clipped text (top): \"2031\" 745.63..773.23 y 84..101"
+    "ellipsis on \"أغسطس\""
    ]
   },
   {
    "name": "hint shown without content below",
    "ok": true,
    "sample": [
+    "ellipsis on \"سقطت حكومتك\"",
     "clipped text (top): \"12\" 584.19..598 y 84..101",
-    "ellipsis on \"أغسطس\"",
-    "clipped text (top): \"2031\" 510.63..538.23 y 84..101"
+    "ellipsis on \"أغسطس\""
    ]
   },
   {
    "name": "weekday wrong",
    "ok": true,
    "sample": [
+    "ellipsis on \"سقطت حكومتك\"",
     "clipped text (top): \"12\" 819.19..833 y 84..101",
-    "ellipsis on \"أغسطس\"",
-    "clipped text (top): \"2031\" 745.63..773.23 y 84..101"
+    "ellipsis on \"أغسطس\""
    ]
   },
   {
    "name": "another moment toast",
    "ok": true,
    "sample": [
+    "ellipsis on \"سقطت حكومتك\"",
     "clipped text (top): \"12\" 819.19..833 y 84..101",
-    "ellipsis on \"أغسطس\"",
-    "clipped text (top): \"2031\" 745.63..773.23 y 84..101"
+    "ellipsis on \"أغسطس\""
    ]
   },
   {
    "name": "clock looks live",
    "ok": true,
    "sample": [
+    "ellipsis on \"سقطت حكومتك\"",
     "clipped text (top): \"12\" 819.19..833 y 84..101",
-    "ellipsis on \"أغسطس\"",
-    "clipped text (top): \"2031\" 745.63..773.23 y 84..101"
+    "ellipsis on \"أغسطس\""
    ]
   },
   {
    "name": "speed menu still offered",
    "ok": true,
    "sample": [
+    "ellipsis on \"سقطت حكومتك\"",
     "clipped text (top): \"12\" 819.19..833 y 84..101",
-    "ellipsis on \"أغسطس\"",
-    "clipped text (top): \"2031\" 745.63..773.23 y 84..101"
+    "ellipsis on \"أغسطس\""
    ]
   },
   {
@@ -484,18 +488,18 @@
    "name": "18 pt misuse (fallen)",
    "ok": true,
    "sample": [
+    "ellipsis on \"سقطت حكومتك\"",
     "clipped text (top): \"12\" 819.19..833 y 84..101",
-    "ellipsis on \"أغسطس\"",
-    "clipped text (top): \"2031\" 745.63..773.23 y 84..101"
+    "ellipsis on \"أغسطس\""
    ]
   },
   {
    "name": "clipped text (fallen)",
    "ok": true,
    "sample": [
+    "ellipsis on \"سقطت حكومتك\"",
     "clipped text (top): \"12\" 819.19..833 y 84..101",
-    "ellipsis on \"أغسطس\"",
-    "clipped text (top): \"2031\" 745.63..773.23 y 84..101"
+    "ellipsis on \"أغسطس\""
    ]
   },
   {
@@ -511,162 +515,162 @@
    "name": "faint text (fallen)",
    "ok": true,
    "sample": [
+    "ellipsis on \"سقطت حكومتك\"",
     "clipped text (top): \"12\" 819.19..833 y 84..101",
-    "ellipsis on \"أغسطس\"",
-    "clipped text (top): \"2031\" 745.63..773.23 y 84..101"
+    "ellipsis on \"أغسطس\""
    ]
   },
   {
    "name": "% before its number (fallen)",
    "ok": true,
    "sample": [
+    "ellipsis on \"سقطت حكومتك\"",
     "clipped text (top): \"12\" 819.19..833 y 84..101",
-    "ellipsis on \"أغسطس\"",
-    "clipped text (top): \"2031\" 745.63..773.23 y 84..101"
+    "ellipsis on \"أغسطس\""
    ]
   },
   {
    "name": "clock resumable",
    "ok": true,
    "sample": [
+    "ellipsis on \"سقطت حكومتك\"",
     "clipped text (top): \"12\" 819.19..833 y 84..101",
-    "ellipsis on \"أغسطس\"",
-    "clipped text (top): \"2031\" 745.63..773.23 y 84..101"
+    "ellipsis on \"أغسطس\""
    ]
   },
   {
    "name": "date off",
    "ok": true,
    "sample": [
+    "ellipsis on \"سقطت حكومتك\"",
     "clipped text (top): \"12\" 819.19..833 y 84..101",
-    "ellipsis on \"أغسطس\"",
-    "clipped text (top): \"2031\" 745.63..773.23 y 84..101"
+    "ellipsis on \"أغسطس\""
    ]
   },
   {
    "name": "text changed",
    "ok": true,
    "sample": [
+    "ellipsis on \"سقطت حكومتك\"",
     "clipped text (top): \"12\" 819.19..833 y 84..101",
-    "ellipsis on \"أغسطس\"",
-    "clipped text (top): \"2031\" 745.63..773.23 y 84..101"
+    "ellipsis on \"أغسطس\""
    ]
   },
   {
    "name": "choices swapped",
    "ok": true,
    "sample": [
+    "ellipsis on \"سقطت حكومتك\"",
     "clipped text (top): \"12\" 819.19..833 y 84..101",
-    "ellipsis on \"أغسطس\"",
-    "clipped text (top): \"2031\" 745.63..773.23 y 84..101"
+    "ellipsis on \"أغسطس\""
    ]
   },
   {
    "name": "a default marked",
    "ok": true,
    "sample": [
+    "ellipsis on \"سقطت حكومتك\"",
     "clipped text (top): \"12\" 819.19..833 y 84..101",
-    "ellipsis on \"أغسطس\"",
-    "clipped text (top): \"2031\" 745.63..773.23 y 84..101"
+    "ellipsis on \"أغسطس\""
    ]
   },
   {
    "name": "legitimacy unsaid",
    "ok": true,
    "sample": [
+    "ellipsis on \"سقطت حكومتك\"",
     "clipped text (top): \"12\" 819.19..833 y 84..101",
-    "ellipsis on \"أغسطس\"",
-    "clipped text (top): \"2031\" 745.63..773.23 y 84..101"
+    "ellipsis on \"أغسطس\""
    ]
   },
   {
    "name": "line off",
    "ok": true,
    "sample": [
+    "ellipsis on \"سقطت حكومتك\"",
     "clipped text (top): \"12\" 819.19..833 y 84..101",
-    "ellipsis on \"أغسطس\"",
-    "clipped text (top): \"2031\" 745.63..773.23 y 84..101"
+    "ellipsis on \"أغسطس\""
    ]
   },
   {
    "name": "Mubarak in 2031",
    "ok": true,
    "sample": [
+    "ellipsis on \"سقطت حكومتك\"",
     "clipped text (top): \"12\" 819.19..833 y 84..101",
-    "ellipsis on \"أغسطس\"",
-    "clipped text (top): \"2031\" 745.63..773.23 y 84..101"
+    "ellipsis on \"أغسطس\""
    ]
   },
   {
    "name": "old toast",
    "ok": true,
    "sample": [
+    "ellipsis on \"سقطت حكومتك\"",
     "clipped text (top): \"12\" 819.19..833 y 84..101",
-    "ellipsis on \"أغسطس\"",
-    "clipped text (top): \"2031\" 745.63..773.23 y 84..101"
+    "ellipsis on \"أغسطس\""
    ]
   },
   {
    "name": "HUD legitimacy off",
    "ok": true,
    "sample": [
+    "ellipsis on \"سقطت حكومتك\"",
     "clipped text (top): \"12\" 819.19..833 y 84..101",
-    "ellipsis on \"أغسطس\"",
-    "clipped text (top): \"2031\" 745.63..773.23 y 84..101"
+    "ellipsis on \"أغسطس\""
    ]
   },
   {
    "name": "HUD stability of 2011",
    "ok": true,
    "sample": [
+    "ellipsis on \"سقطت حكومتك\"",
     "clipped text (top): \"12\" 819.19..833 y 84..101",
-    "ellipsis on \"أغسطس\"",
-    "clipped text (top): \"2031\" 745.63..773.23 y 84..101"
+    "ellipsis on \"أغسطس\""
    ]
   },
   {
    "name": "later said in part",
    "ok": true,
    "sample": [
+    "ellipsis on \"سقطت حكومتك\"",
     "clipped text (top): \"12\" 819.19..833 y 84..101",
-    "ellipsis on \"أغسطس\"",
-    "clipped text (top): \"2031\" 745.63..773.23 y 84..101"
+    "ellipsis on \"أغسطس\""
    ]
   },
   {
    "name": "later unsaid",
    "ok": true,
    "sample": [
+    "ellipsis on \"سقطت حكومتك\"",
     "clipped text (top): \"12\" 819.19..833 y 84..101",
-    "ellipsis on \"أغسطس\"",
-    "clipped text (top): \"2031\" 745.63..773.23 y 84..101"
+    "ellipsis on \"أغسطس\""
    ]
   },
   {
    "name": "close says nothing",
    "ok": true,
    "sample": [
+    "ellipsis on \"سقطت حكومتك\"",
     "clipped text (top): \"12\" 819.19..833 y 84..101",
-    "ellipsis on \"أغسطس\"",
-    "clipped text (top): \"2031\" 745.63..773.23 y 84..101"
+    "ellipsis on \"أغسطس\""
    ]
   },
   {
    "name": "HUD trend moving",
    "ok": true,
    "sample": [
+    "ellipsis on \"سقطت حكومتك\"",
     "clipped text (top): \"12\" 819.19..833 y 84..101",
-    "ellipsis on \"أغسطس\"",
-    "clipped text (top): \"2031\" 745.63..773.23 y 84..101"
+    "ellipsis on \"أغسطس\""
    ]
   },
   {
    "name": "HUD 2011 value",
    "ok": true,
    "sample": [
+    "ellipsis on \"سقطت حكومتك\"",
     "clipped text (top): \"12\" 819.19..833 y 84..101",
-    "ellipsis on \"أغسطس\"",
-    "clipped text (top): \"2031\" 745.63..773.23 y 84..101"
+    "ellipsis on \"أغسطس\""
    ]
   },
   {

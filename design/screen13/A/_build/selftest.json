@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-07T15:51:41.622Z",
+ "ranAt": "2026-11-07T17:48:01.224Z",
  "inputs": {
   "files": [
    "index.html",
@@ -22,27 +22,146 @@
    "header_cairo.jpg",
    "map_overlay_cairo.svg"
   ],
-  "sha1": "239c3a7f1cfaa7536464a31670c86251c52d94f7"
+  "sha1": "9cbe9bcb587b02bdcda4bca2c271c1fad016ff75"
  },
  "cleanIssues": {
-  "i16promax": [],
-  "i16promax_saves_end": [],
-  "i16promax_settings": [],
-  "i16promax_settings_end": [],
-  "i16promax_log": [],
-  "i16promax_log_end": [],
-  "i16promax_about": [],
-  "i16promax_about_end": [],
+  "i16promax": [
+   "ellipsis on \"المزيد\"",
+   "ellipsis on \"حملة مصر\"",
+   "clipped text (top): \"·\" 778.63..788.16 y 84..101",
+   "clipped text (top): \"1\" 771.72..778.63 y 84..101",
+   "ellipsis on \"يناير\"",
+   "clipped text (top): \"2011\" 721.81..749.42 y 84..101"
+  ],
+  "i16promax_saves_end": [
+   "ellipsis on \"المزيد\"",
+   "ellipsis on \"حملة مصر\"",
+   "clipped text (top): \"·\" 778.63..788.16 y 84..101",
+   "clipped text (top): \"1\" 771.72..778.63 y 84..101",
+   "ellipsis on \"يناير\"",
+   "clipped text (top): \"2011\" 721.81..749.42 y 84..101"
+  ],
+  "i16promax_settings": [
+   "ellipsis on \"المزيد\"",
+   "ellipsis on \"حملة مصر\"",
+   "clipped text (top): \"·\" 778.63..788.16 y 84..101",
+   "clipped text (top): \"1\" 771.72..778.63 y 84..101",
+   "ellipsis on \"يناير\"",
+   "clipped text (top): \"2011\" 721.81..749.42 y 84..101"
+  ],
+  "i16promax_settings_end": [
+   "ellipsis on \"المزيد\"",
+   "ellipsis on \"حملة مصر\"",
+   "clipped text (top): \"·\" 778.63..788.16 y 84..101",
+   "clipped text (top): \"1\" 771.72..778.63 y 84..101",
+   "ellipsis on \"يناير\"",
+   "clipped text (top): \"2011\" 721.81..749.42 y 84..101"
+  ],
+  "i16promax_log": [
+   "ellipsis on \"المزيد\"",
+   "ellipsis on \"حملة مصر\"",
+   "clipped text (top): \"·\" 778.63..788.16 y 84..101",
+   "clipped text (top): \"1\" 771.72..778.63 y 84..101",
+   "ellipsis on \"يناير\"",
+   "clipped text (top): \"2011\" 721.81..749.42 y 84..101"
+  ],
+  "i16promax_log_end": [
+   "ellipsis on \"المزيد\"",
+   "ellipsis on \"حملة مصر\"",
+   "clipped text (top): \"·\" 778.63..788.16 y 84..101",
+   "clipped text (top): \"1\" 771.72..778.63 y 84..101",
+   "ellipsis on \"يناير\"",
+   "clipped text (top): \"2011\" 721.81..749.42 y 84..101"
+  ],
+  "i16promax_about": [
+   "ellipsis on \"المزيد\"",
+   "ellipsis on \"حملة مصر\"",
+   "clipped text (top): \"·\" 778.63..788.16 y 84..101",
+   "clipped text (top): \"1\" 771.72..778.63 y 84..101",
+   "ellipsis on \"يناير\"",
+   "clipped text (top): \"2011\" 721.81..749.42 y 84..101"
+  ],
+  "i16promax_about_end": [
+   "ellipsis on \"المزيد\"",
+   "ellipsis on \"حملة مصر\"",
+   "clipped text (top): \"·\" 778.63..788.16 y 84..101",
+   "clipped text (top): \"1\" 771.72..778.63 y 84..101",
+   "ellipsis on \"يناير\"",
+   "clipped text (top): \"2011\" 721.81..749.42 y 84..101"
+  ],
   "i16promax coverage": [],
-  "se": [],
-  "se_saves_end": [],
-  "se_settings": [],
-  "se_settings_end": [],
-  "se_log": [],
-  "se_log_end": [],
-  "se_about": [],
-  "se_about_end": [],
-  "se_settings_at86": [],
+  "se": [
+   "ellipsis on \"المزيد\"",
+   "ellipsis on \"حملة مصر\"",
+   "clipped text (top): \"·\" 543.63..553.16 y 84..101",
+   "clipped text (top): \"1\" 536.72..543.63 y 84..101",
+   "ellipsis on \"يناير\"",
+   "clipped text (top): \"2011\" 486.81..514.42 y 84..101"
+  ],
+  "se_saves_end": [
+   "ellipsis on \"المزيد\"",
+   "ellipsis on \"حملة مصر\"",
+   "clipped text (top): \"·\" 543.63..553.16 y 84..101",
+   "clipped text (top): \"1\" 536.72..543.63 y 84..101",
+   "ellipsis on \"يناير\"",
+   "clipped text (top): \"2011\" 486.81..514.42 y 84..101"
+  ],
+  "se_settings": [
+   "ellipsis on \"المزيد\"",
+   "ellipsis on \"حملة مصر\"",
+   "clipped text (top): \"·\" 543.63..553.16 y 84..101",
+   "clipped text (top): \"1\" 536.72..543.63 y 84..101",
+   "ellipsis on \"يناير\"",
+   "clipped text (top): \"2011\" 486.81..514.42 y 84..101"
+  ],
+  "se_settings_end": [
+   "ellipsis on \"المزيد\"",
+   "ellipsis on \"حملة مصر\"",
+   "clipped text (top): \"·\" 543.63..553.16 y 84..101",
+   "clipped text (top): \"1\" 536.72..543.63 y 84..101",
+   "ellipsis on \"يناير\"",
+   "clipped text (top): \"2011\" 486.81..514.42 y 84..101"
+  ],
+  "se_log": [
+   "ellipsis on \"المزيد\"",
+   "ellipsis on \"حملة مصر\"",
+   "clipped text (top): \"·\" 543.63..553.16 y 84..101",
+   "clipped text (top): \"1\" 536.72..543.63 y 84..101",
+   "ellipsis on \"يناير\"",
+   "clipped text (top): \"2011\" 486.81..514.42 y 84..101"
+  ],
+  "se_log_end": [
+   "ellipsis on \"المزيد\"",
+   "ellipsis on \"حملة مصر\"",
+   "clipped text (top): \"·\" 543.63..553.16 y 84..101",
+   "clipped text (top): \"1\" 536.72..543.63 y 84..101",
+   "ellipsis on \"يناير\"",
+   "clipped text (top): \"2011\" 486.81..514.42 y 84..101"
+  ],
+  "se_about": [
+   "ellipsis on \"المزيد\"",
+   "ellipsis on \"حملة مصر\"",
+   "clipped text (top): \"·\" 543.63..553.16 y 84..101",
+   "clipped text (top): \"1\" 536.72..543.63 y 84..101",
+   "ellipsis on \"يناير\"",
+   "clipped text (top): \"2011\" 486.81..514.42 y 84..101"
+  ],
+  "se_about_end": [
+   "ellipsis on \"المزيد\"",
+   "ellipsis on \"حملة مصر\"",
+   "clipped text (top): \"·\" 543.63..553.16 y 84..101",
+   "clipped text (top): \"1\" 536.72..543.63 y 84..101",
+   "ellipsis on \"يناير\"",
+   "clipped text (top): \"2011\" 486.81..514.42 y 84..101"
+  ],
+  "se_settings_at86": [
+   "ellipsis on \"المزيد\"",
+   "ellipsis on \"حملة مصر\"",
+   "clipped text (top): \"·\" 543.63..553.16 y 84..101",
+   "clipped text (top): \"1\" 536.72..543.63 y 84..101",
+   "ellipsis on \"يناير\"",
+   "clipped text (top): \"2011\" 486.81..514.42 y 84..101"
+  ],
   "se coverage": []
  },
  "results": [
@@ -50,16 +169,18 @@
    "name": "type size",
    "ok": true,
    "sample": [
-    "font size 17 for \"المزيد\""
+    "font size 17 for \"المزيد\"",
+    "ellipsis on \"المزيد\"",
+    "ellipsis on \"حملة مصر\""
    ]
   },
   {
    "name": "font weight",
    "ok": true,
    "sample": [
-    "font weight 11.5/700 for \"الحفظ\"",
-    "font weight 11.5/700 for \"الإعدادات\"",
-    "font weight 11.5/700 for \"السجل\""
+    "ellipsis on \"المزيد\"",
+    "ellipsis on \"حملة مصر\"",
+    "clipped text (top): \"·\" 778.63..788.16 y 84..101"
    ]
   },
   {
@@ -67,7 +188,8 @@
    "ok": true,
    "sample": [
     "text colour off-token rgb(136, 153, 170): \"المزيد\"",
-    "contrast 2.4 for \"المزيد\""
+    "ellipsis on \"المزيد\"",
+    "ellipsis on \"حملة مصر\""
    ]
   },
   {
@@ -75,25 +197,26 @@
    "ok": true,
    "sample": [
     "panel radius المزيد: 6 (want 12)",
-    "radius 6 for .sheet (want 12)"
+    "radius 6 for .sheet (want 12)",
+    "ellipsis on \"المزيد\""
    ]
   },
   {
    "name": "tap in the side inset",
    "ok": true,
    "sample": [
-    "text in side inset: ملفات الحفظ في هذه الحملة",
-    "text in side inset: يُحفظ تلقائيًا أول كل شهر وعند الخروج من اللعبة.",
-    "tap in side inset: الحفظ"
+    "ellipsis on \"المزيد\"",
+    "ellipsis on \"حملة مصر\"",
+    "clipped text (top): \"·\" 808.63..818.16 y 84..101"
    ]
   },
   {
    "name": "panel in the side inset",
    "ok": true,
    "sample": [
-    "text in side inset: ملفات الحفظ في هذه الحملة",
-    "text in side inset: يُحفظ تلقائيًا أول كل شهر وعند الخروج من اللعبة.",
-    "tap in side inset: الحفظ"
+    "ellipsis on \"المزيد\"",
+    "ellipsis on \"حملة مصر\"",
+    "clipped text (top): \"·\" 808.63..818.16 y 84..101"
    ]
   },
   {
@@ -101,8 +224,8 @@
    "ok": true,
    "sample": [
     "panel not opaque: المزيد rgba(9, 17, 25, 0.66)",
-    "contrast 4.22 for \"الحفظ\"",
-    "contrast 4.08 for \"الإعدادات\""
+    "ellipsis on \"المزيد\"",
+    "ellipsis on \"حملة مصر\""
    ]
   },
   {
@@ -110,242 +233,269 @@
    "ok": true,
    "sample": [
     "panel not opaque (opacity 0.60): المزيد",
-    "brief text not fully visible: المزيد",
-    "brief text not fully visible: حملة مصر · 1 يناير 2011"
+    "ellipsis on \"المزيد\"",
+    "ellipsis on \"حملة مصر\""
    ]
   },
   {
    "name": "Egypt covered",
    "ok": true,
    "sample": [
-    "Nile delta covered by panel المزيد",
-    "Nile delta under the hit box of الحفظ",
-    "Nile delta under the hit box of الإعدادات"
+    "ellipsis on \"المزيد\"",
+    "ellipsis on \"حملة مصر\"",
+    "clipped text (top): \"·\" 778.63..788.16 y 84..101"
    ]
   },
   {
    "name": "map dimmed",
    "ok": true,
    "sample": [
-    "the map is dimmed (opacity 1.00, filter brightness(0.35))"
+    "ellipsis on \"المزيد\"",
+    "ellipsis on \"حملة مصر\"",
+    "clipped text (top): \"·\" 778.63..788.16 y 84..101"
    ]
   },
   {
    "name": "map faded",
    "ok": true,
    "sample": [
-    "the map is dimmed (opacity 0.30, filter none)"
+    "ellipsis on \"المزيد\"",
+    "ellipsis on \"حملة مصر\"",
+    "clipped text (top): \"·\" 778.63..788.16 y 84..101"
    ]
   },
   {
    "name": "scrim over the map",
    "ok": true,
    "sample": [
-    "something drawn over the map: DIV (rgba(0, 0, 0, 0.55))",
-    "contrast 1.92 for \"3\""
+    "ellipsis on \"المزيد\"",
+    "ellipsis on \"حملة مصر\"",
+    "clipped text (top): \"·\" 778.63..788.16 y 84..101"
    ]
   },
   {
    "name": "sheet width",
    "ok": true,
    "sample": [
-    "sheet width 330 (want round(clamp(43% of 832, 340, 380)), or the room the dock leaves if 330..: 358)"
+    "ellipsis on \"المزيد\"",
+    "ellipsis on \"حملة مصر\"",
+    "clipped text (top): \"·\" 778.63..788.16 y 84..101"
    ]
   },
   {
    "name": "sheet top",
    "ok": true,
    "sample": [
-    "hit overlap الاستقرار 58% / إغلاق",
-    "panel overlap الدولة: مصر، حسني مبارك، ج / المزيد",
-    "panel overlap الخزينة 36.0 مليار $ الاست / المزيد"
+    "ellipsis on \"المزيد\"",
+    "ellipsis on \"حملة مصر\"",
+    "clipped text (top): \"·\" 778.63..788.16 y 70..87"
    ]
   },
   {
    "name": "dock hidden although it fits",
    "ok": true,
    "sample": [
-    "dock hidden although it fits left of the sheet"
+    "ellipsis on \"المزيد\"",
+    "ellipsis on \"حملة مصر\"",
+    "clipped text (top): \"·\" 778.63..788.16 y 84..101"
    ]
   },
   {
    "name": "dock shown on the SE",
    "ok": true,
    "sample": [
-    "icon over text: i / \"نسخة في مجلد آخر\"",
-    "icon over text: i / \"لم يُختر مجلد · تحمي الحفظ إذا حُذفت اللعبة\"",
-    "icon over text: i / \"لم يُختر مجلد · تحمي الحفظ إذا حُذفت اللعبة\""
+    "ellipsis on \"المزيد\"",
+    "ellipsis on \"حملة مصر\"",
+    "clipped text (top): \"·\" 543.63..553.16 y 84..101"
    ]
   },
   {
    "name": "left stack moved",
    "ok": true,
    "sample": [
-    "HUD element moved from its B3 position: .toast x 70.0..275.6 y 56.0..88.0",
-    "HUD element moved from its B3 position: .btn.mode x 70.0..191.6 y 96.0..128.0",
-    "HUD element moved from its B3 position: .btn.home x 70.0..141.5 y 136.0..168.0"
+    "ellipsis on \"المزيد\"",
+    "ellipsis on \"حملة مصر\"",
+    "clipped text (top): \"·\" 778.63..788.16 y 84..101"
    ]
   },
   {
    "name": "fit not the loosest",
    "ok": true,
    "sample": [
-    "fit level 6 is not the loosest that fits: [[0,0]]"
+    "ellipsis on \"المزيد\"",
+    "ellipsis on \"حملة مصر\"",
+    "clipped text (top): \"·\" 778.63..788.16 y 78..95"
    ]
   },
   {
    "name": "two tab bodies",
    "ok": true,
    "sample": [
-    "clipped text (bottom): \"الصوت واللمس والحركة\" 774.48..881 y 400.64..417.64",
-    "control cut by its scroll area (bottom): حفظ تلقائي: 1 يناير 2011، ",
-    "hit box shaved by its clip: حفظ تلقائي: 1 يناير 2011، "
+    "ellipsis on \"المزيد\"",
+    "ellipsis on \"حملة مصر\"",
+    "clipped text (top): \"·\" 778.63..788.16 y 84..101"
    ]
   },
   {
    "name": "two tabs selected",
    "ok": true,
    "sample": [
-    "exactly the open tab must be selected"
+    "ellipsis on \"المزيد\"",
+    "ellipsis on \"حملة مصر\"",
+    "clipped text (top): \"·\" 778.63..788.16 y 84..101"
    ]
   },
   {
    "name": "tabs not a tab list",
    "ok": true,
    "sample": [
-    "a11y: the tabs are not a tab list"
+    "ellipsis on \"المزيد\"",
+    "ellipsis on \"حملة مصر\"",
+    "clipped text (top): \"·\" 778.63..788.16 y 84..101"
    ]
   },
   {
    "name": "tabs reversed",
    "ok": true,
    "sample": [
-    "tab 2 is not left of tab 1",
-    "tab 3 is not left of tab 2",
-    "tab 4 is not left of tab 3"
+    "ellipsis on \"المزيد\"",
+    "ellipsis on \"حملة مصر\"",
+    "clipped text (top): \"·\" 778.63..788.16 y 84..101"
    ]
   },
   {
    "name": "fades wrong",
    "ok": true,
    "sample": [
-    "clipped text (bottom): \"تتبع خيار تقليل الحركة\" 787.03..881 y 408..425",
-    "control cut by its scroll area (bottom): تلقائي",
-    "hit box shaved by its clip: تلقائي"
+    "ellipsis on \"المزيد\"",
+    "ellipsis on \"حملة مصر\"",
+    "clipped text (top): \"·\" 778.63..788.16 y 84..101"
    ]
   },
   {
    "name": "hint chevron missing",
    "ok": true,
    "sample": [
-    "scroll hint chevron missing with content below"
+    "ellipsis on \"المزيد\"",
+    "ellipsis on \"حملة مصر\"",
+    "clipped text (top): \"·\" 778.63..788.16 y 84..101"
    ]
   },
   {
    "name": "hint over the content",
    "ok": true,
    "sample": [
-    "scroll hint not centred in the clear strip under the fade: y 249.0..267.0 (strip 395.0..417.0)",
-    "scroll hint over text: \"×\""
+    "ellipsis on \"المزيد\"",
+    "ellipsis on \"حملة مصر\"",
+    "clipped text (top): \"·\" 778.63..788.16 y 84..101"
    ]
   },
   {
    "name": "map label cut",
    "ok": true,
    "sample": [
-    "map label ليبيا sliced by the screen edge or the side inset",
-    "map label إيران sliced by the screen edge or the side inset",
-    "map label إيران squeezed between a panel and the screen edge"
+    "ellipsis on \"المزيد\"",
+    "ellipsis on \"حملة مصر\"",
+    "clipped text (top): \"·\" 778.63..788.16 y 84..101"
    ]
   },
   {
    "name": "contrast",
    "ok": true,
    "sample": [
-    "contrast 1 for \"ملفات الحفظ في هذه الحمل\"",
-    "contrast 1.73 for \"يُحفظ تلقائيًا أول كل شه\""
+    "ellipsis on \"المزيد\"",
+    "ellipsis on \"حملة مصر\"",
+    "clipped text (top): \"·\" 778.63..788.16 y 84..101"
    ]
   },
   {
    "name": "dock item not marked",
    "ok": true,
    "sample": [
-    "the open section «المزيد» is not marked in the dock"
+    "ellipsis on \"المزيد\"",
+    "ellipsis on \"حملة مصر\"",
+    "clipped text (top): \"·\" 778.63..788.16 y 84..101"
    ]
   },
   {
    "name": "identity line missing",
    "ok": true,
    "sample": [
-    "panel top line none rgb(169, 188, 203) 2px (want the section colour, 2 pt, at the top)"
+    "ellipsis on \"المزيد\"",
+    "ellipsis on \"حملة مصر\"",
+    "clipped text (top): \"·\" 778.63..788.16 y 84..101"
    ]
   },
   {
    "name": "open tab neutral",
    "ok": true,
    "sample": [
-    "open tab not in the section colour"
+    "ellipsis on \"المزيد\"",
+    "ellipsis on \"حملة مصر\"",
+    "clipped text (top): \"·\" 778.63..788.16 y 84..101"
    ]
   },
   {
    "name": "money unit",
    "ok": true,
    "sample": [
-    "clipped text (bottom): \"عبر تطبيق الملفات\" 764.8..834 y 404..419",
-    "control cut by its scroll area (bottom): استيراد حفظ أو تصديره عبر ",
-    "hit box shaved by its clip: استيراد حفظ أو تصديره عبر "
+    "ellipsis on \"المزيد\"",
+    "ellipsis on \"حملة مصر\"",
+    "clipped text (top): \"·\" 778.63..788.16 y 84..101"
    ]
   },
   {
    "name": "sign outside its number",
    "ok": true,
    "sample": [
-    "clipped text (bottom): \"عبر تطبيق الملفات\" 764.8..834 y 404..419",
-    "control cut by its scroll area (bottom): استيراد حفظ أو تصديره عبر ",
-    "hit box shaved by its clip: استيراد حفظ أو تصديره عبر "
+    "ellipsis on \"المزيد\"",
+    "ellipsis on \"حملة مصر\"",
+    "clipped text (top): \"·\" 778.63..788.16 y 84..101"
    ]
   },
   {
    "name": "colour alone",
    "ok": true,
    "sample": [
-    "clipped text (bottom): \"عبر تطبيق الملفات\" 764.8..834 y 404..419",
-    "control cut by its scroll area (bottom): استيراد حفظ أو تصديره عبر ",
-    "hit box shaved by its clip: استيراد حفظ أو تصديره عبر "
+    "ellipsis on \"المزيد\"",
+    "ellipsis on \"حملة مصر\"",
+    "clipped text (top): \"·\" 778.63..788.16 y 84..101"
    ]
   },
   {
    "name": "an image in the sheet",
    "ok": true,
    "sample": [
-    "clipped text (bottom): \"عبر تطبيق الملفات\" 764.8..834 y 407..422",
-    "control cut by its scroll area (bottom): استيراد حفظ أو تصديره عبر ",
-    "hit box shaved by its clip: استيراد حفظ أو تصديره عبر "
+    "ellipsis on \"المزيد\"",
+    "ellipsis on \"حملة مصر\"",
+    "clipped text (top): \"·\" 778.63..788.16 y 84..101"
    ]
   },
   {
    "name": "close not round",
    "ok": true,
    "sample": [
-    "close button is not round"
+    "close button is not round",
+    "ellipsis on \"المزيد\"",
+    "ellipsis on \"حملة مصر\""
    ]
   },
   {
    "name": "label without a role",
    "ok": true,
    "sample": [
-    "clipped text (bottom): \"عبر تطبيق الملفات\" 764.8..834 y 404..419",
-    "control cut by its scroll area (bottom): استيراد حفظ أو تصديره عبر ",
-    "hit box shaved by its clip: استيراد حفظ أو تصديره عبر "
+    "ellipsis on \"المزيد\"",
+    "ellipsis on \"حملة مصر\"",
+    "clipped text (top): \"·\" 778.63..788.16 y 84..101"
    ]
   },
   {
    "name": "overview scrolls",
    "ok": true,
    "sample": [
-    "log needs scrolling: 380.0 pt over",
-    "fades 0/0 do not match the scroll state (top 0, over 380.0)",
-    "brief text not fully visible: الأحداث، الأحدث أولًا"
+    "ellipsis on \"المزيد\"",
+    "ellipsis on \"حملة مصر\"",
+    "clipped text (top): \"·\" 543.63..553.16 y 84..101"
    ]
   },
   {
@@ -370,237 +520,261 @@
    "name": "dock underline missing",
    "ok": true,
    "sample": [
-    "dock underline missing or off: none 16pxx2px rgb(169, 188, 203) (want 16 x 2 in the section colour)"
+    "ellipsis on \"المزيد\"",
+    "ellipsis on \"حملة مصر\"",
+    "clipped text (top): \"·\" 778.63..788.16 y 84..101"
    ]
   },
   {
    "name": "identity line colour",
    "ok": true,
    "sample": [
-    "panel top line \"\" rgb(63, 224, 208) 2px (want the section colour, 2 pt, at the top)"
+    "ellipsis on \"المزيد\"",
+    "ellipsis on \"حملة مصر\"",
+    "clipped text (top): \"·\" 778.63..788.16 y 84..101"
    ]
   },
   {
    "name": "closed tabs like the open one",
    "ok": true,
    "sample": [
-    "open tab not in the section colour",
-    "closed tab not in the secondary grey: الإعدادات rgb(234, 242, 247)",
-    "closed tab not in the secondary grey: السجل rgb(234, 242, 247)"
+    "ellipsis on \"المزيد\"",
+    "ellipsis on \"حملة مصر\"",
+    "clipped text (top): \"·\" 778.63..788.16 y 84..101"
    ]
   },
   {
    "name": "emblem size",
    "ok": true,
    "sample": [
-    "size 28.0x32.0 for .s-emb (want 32 x 32)"
+    "ellipsis on \"المزيد\"",
+    "ellipsis on \"حملة مصر\"",
+    "clipped text (top): \"·\" 778.63..788.16 y 84..101"
    ]
   },
   {
    "name": "tile icons cyan",
    "ok": true,
    "sample": [
-    "white touch off: .r-tile color rgb(127, 233, 255) (want rgb(234, 242, 247))",
-    "white touch off: .r-tile color rgb(127, 233, 255) (want rgb(234, 242, 247))",
-    "white touch off: .r-tile color rgb(127, 233, 255) (want rgb(234, 242, 247))"
+    "ellipsis on \"المزيد\"",
+    "ellipsis on \"حملة مصر\"",
+    "clipped text (top): \"·\" 778.63..788.16 y 84..101"
    ]
   },
   {
    "name": "row read in part",
    "ok": true,
    "sample": [
-    "a11y: «حفظ الآن» does not read its numbers",
-    "a11y: «جزء» does not read all it shows: حفظ الآن حفظ جديد"
+    "ellipsis on \"المزيد\"",
+    "ellipsis on \"حملة مصر\"",
+    "clipped text (top): \"·\" 778.63..788.16 y 84..101"
    ]
   },
   {
    "name": "a long headline label",
    "ok": true,
    "sample": [
-    "clipped text (sides): \"عنوان طويل جدًا لا يتسع لخانته أبدًا\" 385.38..539.25 y 169..186",
-    "text outside the sheet's 12 pt padding: \"عنوان طويل جدًا لا يتسع لخانته أبدًا\"",
-    "clipped text (sides): \"1\" 528.44..539.25 y 187..214"
+    "ellipsis on \"المزيد\"",
+    "ellipsis on \"حملة مصر\"",
+    "clipped text (top): \"·\" 778.63..788.16 y 84..101"
    ]
   },
   {
    "name": "text wider than its box",
    "ok": true,
    "sample": [
-    "text wider than its box: «حفظ جديد · مصر · 1 يناير» (143 in 20)"
+    "ellipsis on \"المزيد\"",
+    "ellipsis on \"حملة مصر\"",
+    "clipped text (top): \"·\" 778.63..788.16 y 84..101"
    ]
   },
   {
    "name": "a long status cell",
    "ok": true,
    "sample": [
-    "clipped text (sides): \"قيمة طويلة جدًا لا تتسع لنصف الجدول\" 416.53..613.3 y 165.5..184.5",
-    "text outside the sheet's 12 pt padding: \"قيمة طويلة جدًا لا تتسع لنصف الجدول\"",
-    "clipped text (bottom): \"استيراد حفظ أو تصديره\" 718.88..834 y 401..420"
+    "ellipsis on \"المزيد\"",
+    "ellipsis on \"حملة مصر\"",
+    "clipped text (top): \"·\" 778.63..788.16 y 84..101"
    ]
   },
   {
    "name": "brief text hidden (saves)",
    "ok": true,
    "sample": [
-    "brief text not fully visible: حفظ الآن",
-    "brief text cannot be scrolled clear of the fades: حفظ الآن"
+    "ellipsis on \"المزيد\"",
+    "ellipsis on \"حملة مصر\"",
+    "clipped text (top): \"·\" 778.63..788.16 y 84..101"
    ]
   },
   {
    "name": "18 pt misuse (saves)",
    "ok": true,
    "sample": [
-    "18 pt is for the panel's name and the adjusted values only: \"حفظ جديد · مصر ·\"",
-    "18 pt is for the panel's name and the adjusted values only: \"1\"",
-    "18 pt is for the panel's name and the adjusted values only: \"يناير\""
+    "ellipsis on \"المزيد\"",
+    "ellipsis on \"حملة مصر\"",
+    "clipped text (top): \"·\" 778.63..788.16 y 84..101"
    ]
   },
   {
    "name": "text overlap (saves)",
    "ok": true,
    "sample": [
-    "text overlap \"حفظ الآن\" / \"حفظ جديد · مصر ·\""
+    "ellipsis on \"المزيد\"",
+    "ellipsis on \"حملة مصر\"",
+    "clipped text (top): \"·\" 778.63..788.16 y 84..101"
    ]
   },
   {
    "name": "clipped text (saves)",
    "ok": true,
    "sample": [
-    "clipped text (sides): \"ملفات الحفظ في هذه الحملة\" 795.41..921 y 212..229",
-    "text outside the sheet's 12 pt padding: \"ملفات الحفظ في هذه الحملة\"",
-    "clipped text (sides): \"يُحفظ تلقائيًا أول كل شهر وعند الخروج من اللعبة.\" 737.08..921 y 279..294"
+    "ellipsis on \"المزيد\"",
+    "ellipsis on \"حملة مصر\"",
+    "clipped text (top): \"·\" 778.63..788.16 y 84..101"
    ]
   },
   {
    "name": "faint text (saves)",
    "ok": true,
    "sample": [
-    "brief text not fully visible: حفظ جديد · مصر · 1 يناير 2011",
-    "brief text cannot be scrolled clear of the fades: حفظ جديد · مصر · 1 يناير 2011",
-    "brief text cannot be scrolled clear of the fades: 1 يناير 2011 · مصر · 2 ميغابايت"
+    "ellipsis on \"المزيد\"",
+    "ellipsis on \"حملة مصر\"",
+    "clipped text (top): \"·\" 778.63..788.16 y 84..101"
    ]
   },
   {
    "name": "% before its number (saves)",
    "ok": true,
    "sample": [
-    "% shown before its number: \"نسبة 20%\"",
-    "brief text missing: يُحفظ تلقائيًا أول كل شهر وعند الخروج من اللعبة.",
-    "brief text missing: يُحفظ تلقائيًا أول كل شهر وعند الخروج من اللعبة."
+    "ellipsis on \"المزيد\"",
+    "ellipsis on \"حملة مصر\"",
+    "clipped text (top): \"·\" 778.63..788.16 y 84..101"
    ]
   },
   {
    "name": "setting without its group",
    "ok": true,
    "sample": [
-    "a11y: a label VoiceOver may skip (no role): «الجودة»",
-    "setting «الجودة» is not a named group of three choices"
+    "ellipsis on \"المزيد\"",
+    "ellipsis on \"حملة مصر\"",
+    "clipped text (top): \"·\" 778.63..788.16 y 84..101"
    ]
   },
   {
    "name": "group named wrong",
    "ok": true,
    "sample": [
-    "setting «حد السرعة» is not a named group of three choices"
+    "ellipsis on \"المزيد\"",
+    "ellipsis on \"حملة مصر\"",
+    "clipped text (top): \"·\" 778.63..788.16 y 84..101"
    ]
   },
   {
    "name": "two chosen",
    "ok": true,
    "sample": [
-    "setting 1: 2 chosen segments (2 aria-checked), not one"
+    "ellipsis on \"المزيد\"",
+    "ellipsis on \"حملة مصر\"",
+    "clipped text (top): \"·\" 778.63..788.16 y 84..101"
    ]
   },
   {
    "name": "none chosen",
    "ok": true,
    "sample": [
-    "setting 1: 0 chosen segments (0 aria-checked), not one",
-    "setting 1 is not «الجودة · التوفير أخف على البطارية · توفير/متوازن/أعلى · متوازن»: «الجودة · التوفير أخف على البطارية · توفير/متوازن/أعلى · »"
+    "ellipsis on \"المزيد\"",
+    "ellipsis on \"حملة مصر\"",
+    "clipped text (top): \"·\" 778.63..788.16 y 84..101"
    ]
   },
   {
    "name": "settings choices swapped",
    "ok": true,
    "sample": [
-    "setting 1 is not «الجودة · التوفير أخف على البطارية · توفير/متوازن/أعلى · متوازن»: «الجودة · التوفير أخف على البطارية · ×5/×10/أقصى · أقصى»",
-    "setting 2 is not «حد السرعة · تقل تلقائيًا إذا سخن الجهاز · ×5/×10/أقصى · أقصى»: «حد السرعة · تقل تلقائيًا إذا سخن الجهاز · توفير/متوازن/أعلى · متوازن»",
-    "the speed cap cannot reach the HUD's «أقصى» (D-16)"
+    "ellipsis on \"المزيد\"",
+    "ellipsis on \"حملة مصر\"",
+    "clipped text (top): \"·\" 778.63..788.16 y 84..101"
    ]
   },
   {
    "name": "settings lines swapped",
    "ok": true,
    "sample": [
-    "setting 1 is not «الجودة · التوفير أخف على البطارية · توفير/متوازن/أعلى · متوازن»: «الجودة · تقل تلقائيًا إذا سخن الجهاز · توفير/متوازن/أعلى · متوازن»",
-    "setting 2 is not «حد السرعة · تقل تلقائيًا إذا سخن الجهاز · ×5/×10/أقصى · أقصى»: «حد السرعة · التوفير أخف على البطارية · ×5/×10/أقصى · أقصى»"
+    "ellipsis on \"المزيد\"",
+    "ellipsis on \"حملة مصر\"",
+    "clipped text (top): \"·\" 778.63..788.16 y 84..101"
    ]
   },
   {
    "name": "speed capped at ×10",
    "ok": true,
    "sample": [
-    "setting 2 is not «حد السرعة · تقل تلقائيًا إذا سخن الجهاز · ×5/×10/أقصى · أقصى»: «حد السرعة · تقل تلقائيًا إذا سخن الجهاز · ×5/×10/×20 · ×20»",
-    "the speed cap cannot reach the HUD's «أقصى» (D-16)"
+    "ellipsis on \"المزيد\"",
+    "ellipsis on \"حملة مصر\"",
+    "clipped text (top): \"·\" 778.63..788.16 y 84..101"
    ]
   },
   {
    "name": "a music setting",
    "ok": true,
    "sample": [
-    "a music setting (no music in v1)",
-    "brief text missing: الأرقام غربية دائمًا، والمبالغ بالدولار الأمريكي.",
-    "brief text missing: الأرقام غربية دائمًا، والمبالغ بالدولار الأمريكي."
+    "ellipsis on \"المزيد\"",
+    "ellipsis on \"حملة مصر\"",
+    "clipped text (top): \"·\" 778.63..788.16 y 84..101"
    ]
   },
   {
    "name": "a digit setting",
    "ok": true,
    "sample": [
-    "setting 5 is not «الحركة · تتبع خيار تقليل الحركة · تلقائي/كاملة/مخففة · تلقائي»: «الأرقام · تتبع خيار تقليل الحركة · تلقائي/كاملة/مخففة · تلقائي»",
-    "setting «الأرقام» is not a named group of three choices",
-    "a digit setting (Western digits always)"
+    "ellipsis on \"المزيد\"",
+    "ellipsis on \"حملة مصر\"",
+    "clipped text (top): \"·\" 778.63..788.16 y 84..101"
    ]
   },
   {
    "name": "log not newest first",
    "ok": true,
    "sample": [
-    "the log is not newest first",
-    "brief text missing: 1 يناير 2011 · الجوار",
-    "brief text missing: 1 يناير 2011 · الجوار"
+    "ellipsis on \"المزيد\"",
+    "ellipsis on \"حملة مصر\"",
+    "clipped text (top): \"·\" 778.63..788.16 y 84..101"
    ]
   },
   {
    "name": "an event undated",
    "ok": true,
    "sample": [
-    "event «بدأت الحملة» is not dated",
-    "brief text missing: 1 يناير 2011 · مصر · الوضع واقعي",
-    "brief text missing: 1 يناير 2011 · مصر · الوضع واقعي"
+    "ellipsis on \"المزيد\"",
+    "ellipsis on \"حملة مصر\"",
+    "clipped text (top): \"·\" 778.63..788.16 y 84..101"
    ]
   },
   {
    "name": "link silent on where it leads",
    "ok": true,
    "sample": [
-    "a11y: «المساعدة» does not say where it leads"
+    "ellipsis on \"المزيد\"",
+    "ellipsis on \"حملة مصر\"",
+    "clipped text (top): \"·\" 778.63..788.16 y 84..101"
    ]
   },
   {
    "name": "action row read in part",
    "ok": true,
    "sample": [
-    "a11y: «حفظ الآن: 1 يناير 2011» does not read all it shows: جديد مصر"
+    "ellipsis on \"المزيد\"",
+    "ellipsis on \"حملة مصر\"",
+    "clipped text (top): \"·\" 778.63..788.16 y 84..101"
    ]
   },
   {
    "name": "mirror on the device",
    "ok": true,
    "sample": [
-    "the mirror copy is not a folder the player picks (D-28)",
-    "brief text missing: لم يُختر مجلد · تحمي الحفظ إذا حُذفت اللعبة",
-    "brief text missing: لم يُختر مجلد · تحمي الحفظ إذا حُذفت اللعبة"
+    "ellipsis on \"المزيد\"",
+    "ellipsis on \"حملة مصر\"",
+    "clipped text (top): \"·\" 778.63..788.16 y 84..101"
    ]
   },
   {

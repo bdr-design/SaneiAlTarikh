@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-07T16:51:39.206Z",
+ "ranAt": "2026-11-07T17:29:16.136Z",
  "inputs": {
   "files": [
    "index.html",
@@ -19,141 +19,168 @@
    "header_cairo.jpg",
    "map_overlay_cairo.svg"
   ],
-  "sha1": "3ac93368a1a3185abc391d6cbec3b8a7949cc6b6"
+  "sha1": "4a37b186f19e16a16d9636a6032d2591f925ec7f"
  },
  "cleanIssues": {
   "i16promax": [
+   "ellipsis on \"القاهرة\"",
    "ellipsis on \"مصر\"",
    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
    "ellipsis on \"محافظة\""
   ],
   "i16promax_govern": [
+   "ellipsis on \"القاهرة\"",
    "ellipsis on \"مصر\"",
    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
    "ellipsis on \"محافظة\""
   ],
   "i16promax_govern_end": [
+   "ellipsis on \"القاهرة\"",
    "ellipsis on \"مصر\"",
    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
    "ellipsis on \"محافظة\""
   ],
   "i16promax_build": [
+   "ellipsis on \"القاهرة\"",
    "ellipsis on \"مصر\"",
    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
    "ellipsis on \"محافظة\""
   ],
   "i16promax_build_end": [
+   "ellipsis on \"القاهرة\"",
    "ellipsis on \"مصر\"",
    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
    "ellipsis on \"محافظة\""
   ],
   "i16promax_forces": [
+   "ellipsis on \"القاهرة\"",
    "ellipsis on \"مصر\"",
    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
    "ellipsis on \"محافظة\""
   ],
   "i16promax_forces_end": [
+   "ellipsis on \"القاهرة\"",
    "ellipsis on \"مصر\"",
    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
    "ellipsis on \"محافظة\""
   ],
   "i16promax_policy": [
+   "ellipsis on \"القاهرة\"",
    "ellipsis on \"مصر\"",
    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
    "ellipsis on \"محافظة\""
   ],
   "i16promax_policy_end": [
+   "ellipsis on \"القاهرة\"",
    "ellipsis on \"مصر\"",
    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
    "ellipsis on \"محافظة\""
   ],
   "i16promax_govern_at137": [
+   "ellipsis on \"القاهرة\"",
    "ellipsis on \"مصر\"",
    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
    "ellipsis on \"محافظة\""
   ],
   "i16promax_policy_at137": [
+   "ellipsis on \"القاهرة\"",
    "ellipsis on \"مصر\"",
    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
    "ellipsis on \"محافظة\""
   ],
   "i16promax coverage": [],
   "se": [
+   "ellipsis on \"القاهرة\"",
    "ellipsis on \"مصر\"",
    "clipped text (top): \"·\" 569.64..579.17 y 84..101",
    "ellipsis on \"محافظة\""
   ],
   "se_govern": [
+   "ellipsis on \"القاهرة\"",
    "ellipsis on \"مصر\"",
    "clipped text (top): \"·\" 569.64..579.17 y 84..101",
    "ellipsis on \"محافظة\""
   ],
   "se_govern_end": [
+   "ellipsis on \"القاهرة\"",
    "ellipsis on \"مصر\"",
    "clipped text (top): \"·\" 569.64..579.17 y 84..101",
    "ellipsis on \"محافظة\""
   ],
   "se_build": [
+   "ellipsis on \"القاهرة\"",
    "ellipsis on \"مصر\"",
    "clipped text (top): \"·\" 569.64..579.17 y 84..101",
    "ellipsis on \"محافظة\""
   ],
   "se_build_end": [
+   "ellipsis on \"القاهرة\"",
    "ellipsis on \"مصر\"",
    "clipped text (top): \"·\" 569.64..579.17 y 84..101",
    "ellipsis on \"محافظة\""
   ],
   "se_forces": [
+   "ellipsis on \"القاهرة\"",
    "ellipsis on \"مصر\"",
    "clipped text (top): \"·\" 569.64..579.17 y 84..101",
    "ellipsis on \"محافظة\""
   ],
   "se_forces_end": [
+   "ellipsis on \"القاهرة\"",
    "ellipsis on \"مصر\"",
    "clipped text (top): \"·\" 569.64..579.17 y 84..101",
    "ellipsis on \"محافظة\""
   ],
   "se_policy": [
+   "ellipsis on \"القاهرة\"",
    "ellipsis on \"مصر\"",
    "clipped text (top): \"·\" 569.64..579.17 y 84..101",
    "ellipsis on \"محافظة\""
   ],
   "se_policy_end": [
+   "ellipsis on \"القاهرة\"",
    "ellipsis on \"مصر\"",
    "clipped text (top): \"·\" 569.64..579.17 y 84..101",
    "ellipsis on \"محافظة\""
   ],
   "se_govern_at86": [
+   "ellipsis on \"القاهرة\"",
    "ellipsis on \"مصر\"",
    "clipped text (top): \"·\" 569.64..579.17 y 84..101",
    "ellipsis on \"محافظة\""
   ],
   "se_govern_at172": [
+   "ellipsis on \"القاهرة\"",
    "ellipsis on \"مصر\"",
    "clipped text (top): \"·\" 569.64..579.17 y 84..101",
    "ellipsis on \"محافظة\""
   ],
   "se_build_at86": [
+   "ellipsis on \"القاهرة\"",
    "ellipsis on \"مصر\"",
    "clipped text (top): \"·\" 569.64..579.17 y 84..101",
    "ellipsis on \"محافظة\""
   ],
   "se_forces_at86": [
+   "ellipsis on \"القاهرة\"",
    "ellipsis on \"مصر\"",
    "clipped text (top): \"·\" 569.64..579.17 y 84..101",
    "ellipsis on \"محافظة\""
   ],
   "se_policy_at86": [
+   "ellipsis on \"القاهرة\"",
    "ellipsis on \"مصر\"",
    "clipped text (top): \"·\" 569.64..579.17 y 84..101",
    "ellipsis on \"محافظة\""
   ],
   "se_policy_at172": [
+   "ellipsis on \"القاهرة\"",
    "ellipsis on \"مصر\"",
    "clipped text (top): \"·\" 569.64..579.17 y 84..101",
    "ellipsis on \"محافظة\""
   ],
   "se_policy_at258": [
+   "ellipsis on \"القاهرة\"",
    "ellipsis on \"مصر\"",
    "clipped text (top): \"·\" 569.64..579.17 y 84..101",
    "ellipsis on \"محافظة\""
@@ -165,36 +192,36 @@
    "name": "fade without the hint strip",
    "ok": true,
    "sample": [
+    "ellipsis on \"القاهرة\"",
     "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 569.64..579.17 y 84..101",
-    "ellipsis on \"محافظة\""
+    "clipped text (top): \"·\" 569.64..579.17 y 84..101"
    ]
   },
   {
    "name": "hint over the content",
    "ok": true,
    "sample": [
+    "ellipsis on \"القاهرة\"",
     "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-    "ellipsis on \"محافظة\""
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
    ]
   },
   {
    "name": "hint over legible text",
    "ok": true,
    "sample": [
+    "ellipsis on \"القاهرة\"",
     "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-    "ellipsis on \"محافظة\""
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
    ]
   },
   {
    "name": "map label at the screen edge",
    "ok": true,
    "sample": [
+    "ellipsis on \"القاهرة\"",
     "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-    "ellipsis on \"محافظة\""
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
    ]
   },
   {
@@ -202,35 +229,35 @@
    "ok": true,
    "sample": [
     "font size 17 for \"القاهرة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "ellipsis on \"القاهرة\"",
+    "ellipsis on \"مصر\""
    ]
   },
   {
    "name": "18 pt misuse",
    "ok": true,
    "sample": [
+    "ellipsis on \"القاهرة\"",
     "18 pt is for the province name and the headline numbers only: \"مصر\"",
-    "ellipsis on \"مصر\"",
-    "18 pt is for the province name and the headline numbers only: \"·\""
+    "ellipsis on \"مصر\""
    ]
   },
   {
    "name": "font weight",
    "ok": true,
    "sample": [
+    "ellipsis on \"القاهرة\"",
     "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-    "ellipsis on \"محافظة\""
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
    ]
   },
   {
    "name": "off-token colour",
    "ok": true,
    "sample": [
+    "ellipsis on \"القاهرة\"",
     "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-    "ellipsis on \"محافظة\""
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
    ]
   },
   {
@@ -238,8 +265,8 @@
    "ok": true,
    "sample": [
     "control height 40.00 for .r-more (want 36): تفاصيل المحافظة",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "ellipsis on \"القاهرة\"",
+    "ellipsis on \"مصر\""
    ]
   },
   {
@@ -247,8 +274,8 @@
    "ok": true,
    "sample": [
     "radius 8 for .r-more (want 10)",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "ellipsis on \"القاهرة\"",
+    "ellipsis on \"مصر\""
    ]
   },
   {
@@ -266,52 +293,52 @@
    "sample": [
     "icon size 19x19 (want 17): i",
     "icon size 19x19 (want 17): i",
-    "ellipsis on \"مصر\""
+    "ellipsis on \"القاهرة\""
    ]
   },
   {
    "name": "hit overlap",
    "ok": true,
    "sample": [
+    "ellipsis on \"القاهرة\"",
     "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-    "ellipsis on \"محافظة\""
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
    ]
   },
   {
    "name": "side inset",
    "ok": true,
    "sample": [
+    "ellipsis on \"القاهرة\"",
     "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 834.64..844.17 y 84..101",
-    "ellipsis on \"محافظة\""
+    "clipped text (top): \"·\" 834.64..844.17 y 84..101"
    ]
   },
   {
    "name": "clipped text",
    "ok": true,
    "sample": [
+    "ellipsis on \"القاهرة\"",
     "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-    "ellipsis on \"محافظة\""
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
    ]
   },
   {
    "name": "text overlap",
    "ok": true,
    "sample": [
+    "ellipsis on \"القاهرة\"",
     "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-    "ellipsis on \"محافظة\""
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
    ]
   },
   {
    "name": "icon over text",
    "ok": true,
    "sample": [
+    "ellipsis on \"القاهرة\"",
     "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-    "ellipsis on \"محافظة\""
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
    ]
   },
   {
@@ -319,161 +346,161 @@
    "ok": true,
    "sample": [
     "panel not opaque: المحافظة: القاهرة rgba(9, 17, 25, 0.66)",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "ellipsis on \"القاهرة\"",
+    "ellipsis on \"مصر\""
    ]
   },
   {
    "name": "Cairo covered",
    "ok": true,
    "sample": [
+    "ellipsis on \"القاهرة\"",
     "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-    "ellipsis on \"محافظة\""
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
    ]
   },
   {
    "name": "sheet width",
    "ok": true,
    "sample": [
+    "ellipsis on \"القاهرة\"",
     "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-    "ellipsis on \"محافظة\""
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
    ]
   },
   {
    "name": "top row covered",
    "ok": true,
    "sample": [
+    "ellipsis on \"القاهرة\"",
     "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 70..87",
-    "ellipsis on \"محافظة\""
+    "clipped text (top): \"·\" 804.64..814.17 y 70..87"
    ]
   },
   {
    "name": "dock hidden although it fits",
    "ok": true,
    "sample": [
+    "ellipsis on \"القاهرة\"",
     "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-    "ellipsis on \"محافظة\""
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
    ]
   },
   {
    "name": "dock not moved left",
    "ok": true,
    "sample": [
+    "ellipsis on \"القاهرة\"",
     "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-    "ellipsis on \"محافظة\""
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
    ]
   },
   {
    "name": "dock hit box in the side inset",
    "ok": true,
    "sample": [
+    "ellipsis on \"القاهرة\"",
     "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-    "ellipsis on \"محافظة\""
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
    ]
   },
   {
    "name": "radio hit boxes touch the links",
    "ok": true,
    "sample": [
+    "ellipsis on \"القاهرة\"",
     "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-    "ellipsis on \"محافظة\""
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
    ]
   },
   {
    "name": "dock shown on the SE",
    "ok": true,
    "sample": [
+    "ellipsis on \"القاهرة\"",
     "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 569.64..579.17 y 84..101",
-    "ellipsis on \"محافظة\""
+    "clipped text (top): \"·\" 569.64..579.17 y 84..101"
    ]
   },
   {
    "name": "left stack moved",
    "ok": true,
    "sample": [
+    "ellipsis on \"القاهرة\"",
     "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-    "ellipsis on \"محافظة\""
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
    ]
   },
   {
    "name": "fades wrong",
    "ok": true,
    "sample": [
+    "ellipsis on \"القاهرة\"",
     "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-    "ellipsis on \"محافظة\""
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
    ]
   },
   {
    "name": "cut at a hard edge",
    "ok": true,
    "sample": [
+    "ellipsis on \"القاهرة\"",
     "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 569.64..579.17 y 84..101",
-    "ellipsis on \"محافظة\""
+    "clipped text (top): \"·\" 569.64..579.17 y 84..101"
    ]
   },
   {
    "name": "% before its number",
    "ok": true,
    "sample": [
+    "ellipsis on \"القاهرة\"",
     "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-    "ellipsis on \"محافظة\""
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
    ]
   },
   {
    "name": "brief text",
    "ok": true,
    "sample": [
+    "ellipsis on \"القاهرة\"",
     "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-    "ellipsis on \"محافظة\""
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
    ]
   },
   {
    "name": "map label cut",
    "ok": true,
    "sample": [
+    "ellipsis on \"القاهرة\"",
     "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-    "ellipsis on \"محافظة\""
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
    ]
   },
   {
    "name": "contrast",
    "ok": true,
    "sample": [
+    "ellipsis on \"القاهرة\"",
     "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-    "ellipsis on \"محافظة\""
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
    ]
   },
   {
    "name": "brief text scrolled away",
    "ok": true,
    "sample": [
+    "ellipsis on \"القاهرة\"",
     "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-    "ellipsis on \"محافظة\""
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
    ]
   },
   {
    "name": "fade flag without a mask",
    "ok": true,
    "sample": [
+    "ellipsis on \"القاهرة\"",
     "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 569.64..579.17 y 84..101",
-    "ellipsis on \"محافظة\""
+    "clipped text (top): \"·\" 569.64..579.17 y 84..101"
    ]
   },
   {
@@ -481,71 +508,71 @@
    "ok": true,
    "sample": [
     "panel not opaque (opacity 0.60): المحافظة: القاهرة",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "ellipsis on \"القاهرة\"",
+    "ellipsis on \"مصر\""
    ]
   },
   {
    "name": "faint text",
    "ok": true,
    "sample": [
+    "ellipsis on \"القاهرة\"",
     "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-    "ellipsis on \"محافظة\""
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
    ]
   },
   {
    "name": "radio order",
    "ok": true,
    "sample": [
+    "ellipsis on \"القاهرة\"",
     "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-    "ellipsis on \"محافظة\""
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
    ]
   },
   {
    "name": "decision buttons swapped",
    "ok": true,
    "sample": [
+    "ellipsis on \"القاهرة\"",
     "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-    "ellipsis on \"محافظة\""
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
    ]
   },
   {
    "name": "fit level not the loosest",
    "ok": true,
    "sample": [
+    "ellipsis on \"القاهرة\"",
     "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 80..97",
-    "ellipsis on \"محافظة\""
+    "clipped text (top): \"·\" 804.64..814.17 y 80..97"
    ]
   },
   {
    "name": "details not at level 0",
    "ok": true,
    "sample": [
+    "ellipsis on \"القاهرة\"",
     "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-    "ellipsis on \"محافظة\""
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
    ]
   },
   {
    "name": "no scroll hint",
    "ok": true,
    "sample": [
+    "ellipsis on \"القاهرة\"",
     "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-    "ellipsis on \"محافظة\""
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
    ]
   },
   {
    "name": "hint chevron missing",
    "ok": true,
    "sample": [
+    "ellipsis on \"القاهرة\"",
     "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-    "ellipsis on \"محافظة\""
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
    ]
   },
   {
@@ -553,413 +580,413 @@
    "ok": true,
    "sample": [
     "close button is not round",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "ellipsis on \"القاهرة\"",
+    "ellipsis on \"مصر\""
    ]
   },
   {
    "name": "RTL order",
    "ok": true,
    "sample": [
+    "ellipsis on \"القاهرة\"",
     "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-    "ellipsis on \"محافظة\""
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
    ]
   },
   {
    "name": "two tabs selected",
    "ok": true,
    "sample": [
+    "ellipsis on \"القاهرة\"",
     "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-    "ellipsis on \"محافظة\""
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
    ]
   },
   {
    "name": "card reaches the dock",
    "ok": true,
    "sample": [
+    "ellipsis on \"القاهرة\"",
     "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 569.64..579.17 y 84..101",
-    "ellipsis on \"محافظة\""
+    "clipped text (top): \"·\" 569.64..579.17 y 84..101"
    ]
   },
   {
    "name": "card moves the dock",
    "ok": true,
    "sample": [
+    "ellipsis on \"القاهرة\"",
     "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-    "ellipsis on \"محافظة\""
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
    ]
   },
   {
    "name": "card hides the dock",
    "ok": true,
    "sample": [
+    "ellipsis on \"القاهرة\"",
     "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-    "ellipsis on \"محافظة\""
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
    ]
   },
   {
    "name": "card shows the details",
    "ok": true,
    "sample": [
+    "ellipsis on \"القاهرة\"",
     "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-    "ellipsis on \"محافظة\""
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
    ]
   },
   {
    "name": "card width",
    "ok": true,
    "sample": [
+    "ellipsis on \"القاهرة\"",
     "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-    "ellipsis on \"محافظة\""
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
    ]
   },
   {
    "name": "two tab bodies shown",
    "ok": true,
    "sample": [
+    "ellipsis on \"القاهرة\"",
     "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-    "ellipsis on \"محافظة\""
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
    ]
   },
   {
    "name": "open tab not marked",
    "ok": true,
    "sample": [
+    "ellipsis on \"القاهرة\"",
     "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-    "ellipsis on \"محافظة\""
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
    ]
   },
   {
    "name": "tabs not a tab list",
    "ok": true,
    "sample": [
+    "ellipsis on \"القاهرة\"",
     "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-    "ellipsis on \"محافظة\""
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
    ]
   },
   {
    "name": "meter drawn wrong",
    "ok": true,
    "sample": [
+    "ellipsis on \"القاهرة\"",
     "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-    "ellipsis on \"محافظة\""
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
    ]
   },
   {
    "name": "meter silent",
    "ok": true,
    "sample": [
+    "ellipsis on \"القاهرة\"",
     "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-    "ellipsis on \"محافظة\""
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
    ]
   },
   {
    "name": "sectors off the card",
    "ok": true,
    "sample": [
+    "ellipsis on \"القاهرة\"",
     "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-    "ellipsis on \"محافظة\""
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
    ]
   },
   {
    "name": "warning without its icon",
    "ok": true,
    "sample": [
+    "ellipsis on \"القاهرة\"",
     "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-    "ellipsis on \"محافظة\""
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
    ]
   },
   {
    "name": "metro off the state panel",
    "ok": true,
    "sample": [
+    "ellipsis on \"القاهرة\"",
     "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-    "ellipsis on \"محافظة\""
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
    ]
   },
   {
    "name": "grid chip wrong",
    "ok": true,
    "sample": [
+    "ellipsis on \"القاهرة\"",
     "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-    "ellipsis on \"محافظة\""
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
    ]
   },
   {
    "name": "action silent",
    "ok": true,
    "sample": [
+    "ellipsis on \"القاهرة\"",
     "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-    "ellipsis on \"محافظة\""
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
    ]
   },
   {
    "name": "action reads $",
    "ok": true,
    "sample": [
+    "ellipsis on \"القاهرة\"",
     "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-    "ellipsis on \"محافظة\""
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
    ]
   },
   {
    "name": "unit row reversed",
    "ok": true,
    "sample": [
+    "ellipsis on \"القاهرة\"",
     "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-    "ellipsis on \"محافظة\""
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
    ]
   },
   {
    "name": "unit silent",
    "ok": true,
    "sample": [
+    "ellipsis on \"القاهرة\"",
     "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-    "ellipsis on \"محافظة\""
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
    ]
   },
   {
    "name": "decision buttons out of the card",
    "ok": true,
    "sample": [
+    "ellipsis on \"القاهرة\"",
     "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-    "ellipsis on \"محافظة\""
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
    ]
   },
   {
    "name": "decision footer in one row",
    "ok": true,
    "sample": [
+    "ellipsis on \"القاهرة\"",
     "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-    "ellipsis on \"محافظة\""
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
    ]
   },
   {
    "name": "unit movable here",
    "ok": true,
    "sample": [
+    "ellipsis on \"القاهرة\"",
     "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-    "ellipsis on \"محافظة\""
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
    ]
   },
   {
    "name": "amber alone",
    "ok": true,
    "sample": [
+    "ellipsis on \"القاهرة\"",
     "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-    "ellipsis on \"محافظة\""
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
    ]
   },
   {
    "name": "red alone",
    "ok": true,
    "sample": [
+    "ellipsis on \"القاهرة\"",
     "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-    "ellipsis on \"محافظة\""
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
    ]
   },
   {
    "name": "grievance with a trend arrow",
    "ok": true,
    "sample": [
+    "ellipsis on \"القاهرة\"",
     "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-    "ellipsis on \"محافظة\""
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
    ]
   },
   {
    "name": "label says the opposite",
    "ok": true,
    "sample": [
+    "ellipsis on \"القاهرة\"",
     "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-    "ellipsis on \"محافظة\""
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
    ]
   },
   {
    "name": "label without the chip number",
    "ok": true,
    "sample": [
+    "ellipsis on \"القاهرة\"",
     "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-    "ellipsis on \"محافظة\""
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
    ]
   },
   {
    "name": "label without «دولار»",
    "ok": true,
    "sample": [
+    "ellipsis on \"القاهرة\"",
     "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-    "ellipsis on \"محافظة\""
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
    ]
   },
   {
    "name": "chip arrow against its sign",
    "ok": true,
    "sample": [
+    "ellipsis on \"القاهرة\"",
     "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-    "ellipsis on \"محافظة\""
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
    ]
   },
   {
    "name": "unit as a button",
    "ok": true,
    "sample": [
+    "ellipsis on \"القاهرة\"",
     "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-    "ellipsis on \"محافظة\""
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
    ]
   },
   {
    "name": "unit label with the wrong command",
    "ok": true,
    "sample": [
+    "ellipsis on \"القاهرة\"",
     "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-    "ellipsis on \"محافظة\""
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
    ]
   },
   {
    "name": "hidden duplicate value",
    "ok": true,
    "sample": [
+    "ellipsis on \"القاهرة\"",
     "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-    "ellipsis on \"محافظة\""
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
    ]
   },
   {
    "name": "share parts one colour",
    "ok": true,
    "sample": [
+    "ellipsis on \"القاهرة\"",
     "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 569.64..579.17 y 84..101",
-    "ellipsis on \"محافظة\""
+    "clipped text (top): \"·\" 569.64..579.17 y 84..101"
    ]
   },
   {
    "name": "share part amber",
    "ok": true,
    "sample": [
+    "ellipsis on \"القاهرة\"",
     "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 569.64..579.17 y 84..101",
-    "ellipsis on \"محافظة\""
+    "clipped text (top): \"·\" 569.64..579.17 y 84..101"
    ]
   },
   {
    "name": "open tab cyan",
    "ok": true,
    "sample": [
+    "ellipsis on \"القاهرة\"",
     "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-    "ellipsis on \"محافظة\""
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
    ]
   },
   {
    "name": "meter amber and thick",
    "ok": true,
    "sample": [
+    "ellipsis on \"القاهرة\"",
     "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 569.64..579.17 y 84..101",
-    "ellipsis on \"محافظة\""
+    "clipped text (top): \"·\" 569.64..579.17 y 84..101"
    ]
   },
   {
    "name": "share bar off",
    "ok": true,
    "sample": [
+    "ellipsis on \"القاهرة\"",
     "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-    "ellipsis on \"محافظة\""
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
    ]
   },
   {
    "name": "share parts not 100",
    "ok": true,
    "sample": [
+    "ellipsis on \"القاهرة\"",
     "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-    "ellipsis on \"محافظة\""
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
    ]
   },
   {
    "name": "share key wrong",
    "ok": true,
    "sample": [
+    "ellipsis on \"القاهرة\"",
     "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-    "ellipsis on \"محافظة\""
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
    ]
   },
   {
    "name": "share bar left to right",
    "ok": true,
    "sample": [
+    "ellipsis on \"القاهرة\"",
     "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-    "ellipsis on \"محافظة\""
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
    ]
   },
   {
    "name": "cause arrow wrong",
    "ok": true,
    "sample": [
+    "ellipsis on \"القاهرة\"",
     "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-    "ellipsis on \"محافظة\""
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
    ]
   },
   {
    "name": "sign outside its number",
    "ok": true,
    "sample": [
+    "ellipsis on \"القاهرة\"",
     "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-    "ellipsis on \"محافظة\""
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
    ]
   },
   {
    "name": "money unit (shown text)",
    "ok": true,
    "sample": [
+    "ellipsis on \"القاهرة\"",
     "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-    "ellipsis on \"محافظة\""
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
    ]
   },
   {
    "name": "tab string hidden",
    "ok": true,
    "sample": [
+    "ellipsis on \"القاهرة\"",
     "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-    "ellipsis on \"محافظة\""
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
    ]
   },
   {

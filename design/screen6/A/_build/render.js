@@ -178,7 +178,8 @@ async function measure(p, d, b3, view) {
         const cs = getComputedStyle(a);
         if (cs.overflowX !== 'visible' || cs.overflowY !== 'visible') {
           const r = a.getBoundingClientRect();
-          c = { x0: Math.max(c.x0, r.left), y0: Math.max(c.y0, r.top), x1: Math.min(c.x1, r.right), y1: Math.min(c.y1, r.bottom) };
+          const cx = cs.overflowX !== 'visible', cy = cs.overflowY !== 'visible';   // (only the axes that clip, T-024)
+          c = { x0: cx ? Math.max(c.x0, r.left) : c.x0, y0: cy ? Math.max(c.y0, r.top) : c.y0, x1: cx ? Math.min(c.x1, r.right) : c.x1, y1: cy ? Math.min(c.y1, r.bottom) : c.y1 };
           if (/auto|scroll/.test(cs.overflowY) && !scroller) scroller = a;
         }
       }
@@ -273,7 +274,7 @@ async function measure(p, d, b3, view) {
       if (fs === 18 && !TOK.title18.some((c) => el.closest(c))) issues.push(`18 pt is for the panel's name and the headline numbers only: "${t}"`);
       if (fs === 13 && !/tabular-nums/.test(cs.fontVariantNumeric)) issues.push(`13 pt not tabular: "${t}"`);
       if (inSheet && !TOK.colors.includes(cs.color)) issues.push(`text colour off-token ${cs.color}: "${t}"`);
-      if (cs.textOverflow === 'ellipsis') issues.push(`ellipsis on "${t}"`);
+      if (cs.textOverflow === 'ellipsis' && el.scrollWidth > el.clientWidth + 0.5) issues.push(`ellipsis on "${t}"`);   // (an ellipsis drawn: a name or line cut)
       const cl = clipOf(el).c;
       rr.forEach((r) => {
         const b = box(r), lh = parseFloat(cs.lineHeight), mid = (b.y0 + b.y1) / 2;

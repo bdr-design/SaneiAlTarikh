@@ -1,7 +1,7 @@
 {
  "se": {
   "device": "667x375 side 0 bottom 0 none",
-  "renderedAt": "2026-11-07T16:50:10.630Z",
+  "renderedAt": "2026-11-07T17:28:14.743Z",
   "inputs": {
    "files": [
     "index.html",
@@ -24,14 +24,16 @@
     "../../shared/map_mena_d1_overlay.svg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "422c87464be7c8f566262621d6e5eb8eb624ad2e"
+   "sha1": "496d0b1e6172fe6c44061501d8d3d5d6fa1ef795"
   },
   "issues": [
+   "fallen: ellipsis on \"سقطت حكومتك\"",
    "fallen: clipped text (top): \"12\" 584.19..598 y 84..101",
    "fallen: ellipsis on \"أغسطس\"",
    "fallen: clipped text (top): \"2031\" 510.63..538.23 y 84..101",
    "fallen: clipped text (top): \"·\" 501.09..510.63 y 84..101",
    "fallen: ellipsis on \"الوقت متوقف\"",
+   "fallen_end: ellipsis on \"سقطت حكومتك\"",
    "fallen_end: clipped text (top): \"12\" 584.19..598 y 84..101",
    "fallen_end: ellipsis on \"أغسطس\"",
    "fallen_end: clipped text (top): \"2031\" 510.63..538.23 y 84..101",
@@ -40,7 +42,7 @@
   ],
   "views": {
    "fallen": {
-    "issueCount": 5,
+    "issueCount": 6,
     "png": true,
     "fit": {
      "top": {
@@ -411,7 +413,7 @@
     ]
    },
    "fallen_end": {
-    "issueCount": 5,
+    "issueCount": 6,
     "png": true,
     "fit": {
      "top": {
@@ -793,18 +795,18 @@
    "_build/se_fallen_end.png"
   ],
   "pngSha1": {
-   "se.png": "555c6e7b0d79799d446e28b6f8913fc5a602bf84",
-   "_build/se_hit.png": "935ef249a87c9c3aaf372b4c0bcc8e22d13d5db3",
-   "_build/se_fallen_end.png": "555c6e7b0d79799d446e28b6f8913fc5a602bf84"
+   "se.png": "83de391d75c2f00dfbd19a98c6ec16211eda2005",
+   "_build/se_hit.png": "3f37a98937ef2da6be5dff4123d104aa990a35bf",
+   "_build/se_fallen_end.png": "83de391d75c2f00dfbd19a98c6ec16211eda2005"
   },
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 10
+  "issueCount": 12
  },
  "mini": {
   "device": "812x375 side 50 bottom 21 notch",
-  "renderedAt": "2026-11-07T16:50:18.378Z",
+  "renderedAt": "2026-11-07T17:28:19.844Z",
   "inputs": {
    "files": [
     "index.html",
@@ -827,14 +829,16 @@
     "../../shared/map_mena_d1_overlay.svg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "422c87464be7c8f566262621d6e5eb8eb624ad2e"
+   "sha1": "496d0b1e6172fe6c44061501d8d3d5d6fa1ef795"
   },
   "issues": [
+   "fallen: ellipsis on \"سقطت حكومتك\"",
    "fallen: clipped text (top): \"12\" 687.19..701 y 84..101",
    "fallen: ellipsis on \"أغسطس\"",
    "fallen: clipped text (top): \"2031\" 613.63..641.23 y 84..101",
    "fallen: clipped text (top): \"·\" 604.09..613.63 y 84..101",
    "fallen: ellipsis on \"الوقت متوقف\"",
+   "fallen_end: ellipsis on \"سقطت حكومتك\"",
    "fallen_end: clipped text (top): \"12\" 687.19..701 y 84..101",
    "fallen_end: ellipsis on \"أغسطس\"",
    "fallen_end: clipped text (top): \"2031\" 613.63..641.23 y 84..101",
@@ -843,7 +847,7 @@
   ],
   "views": {
    "fallen": {
-    "issueCount": 5,
+    "issueCount": 6,
     "png": true,
     "fit": {
      "top": {
@@ -1221,7 +1225,7 @@
     ]
    },
    "fallen_end": {
-    "issueCount": 5,
+    "issueCount": 6,
     "png": true,
     "fit": {
      "top": {
@@ -1610,18 +1614,18 @@
    "_build/mini_fallen_end.png"
   ],
   "pngSha1": {
-   "mini.png": "b613389392aa6d36211520d60381f9ffc1651806",
-   "_build/mini_hit.png": "2cae37a929892face5ac803877d608928be8433f",
-   "_build/mini_fallen_end.png": "b613389392aa6d36211520d60381f9ffc1651806"
+   "mini.png": "7391fd979d185da04e32d8b670002ea2303a224f",
+   "_build/mini_hit.png": "9b8e1c5e26c214c147618dd25e2ef224952c6836",
+   "_build/mini_fallen_end.png": "7391fd979d185da04e32d8b670002ea2303a224f"
   },
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 10
+  "issueCount": 12
  },
  "i14": {
   "device": "844x390 side 47 bottom 21 notch",
-  "renderedAt": "2026-11-07T16:50:26.765Z",
+  "renderedAt": "2026-11-07T17:28:25.121Z",
   "inputs": {
    "files": [
     "index.html",
@@ -1644,14 +1648,16 @@
     "../../shared/map_mena_d1_overlay.svg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "422c87464be7c8f566262621d6e5eb8eb624ad2e"
+   "sha1": "496d0b1e6172fe6c44061501d8d3d5d6fa1ef795"
   },
   "issues": [
+   "fallen: ellipsis on \"سقطت حكومتك\"",
    "fallen: clipped text (top): \"12\" 722.19..736 y 84..101",
    "fallen: ellipsis on \"أغسطس\"",
    "fallen: clipped text (top): \"2031\" 648.63..676.23 y 84..101",
    "fallen: clipped text (top): \"·\" 639.09..648.63 y 84..101",
    "fallen: ellipsis on \"الوقت متوقف\"",
+   "fallen_end: ellipsis on \"سقطت حكومتك\"",
    "fallen_end: clipped text (top): \"12\" 722.19..736 y 84..101",
    "fallen_end: ellipsis on \"أغسطس\"",
    "fallen_end: clipped text (top): \"2031\" 648.63..676.23 y 84..101",
@@ -1660,7 +1666,7 @@
   ],
   "views": {
    "fallen": {
-    "issueCount": 5,
+    "issueCount": 6,
     "png": true,
     "fit": {
      "top": {
@@ -2148,7 +2154,7 @@
     ]
    },
    "fallen_end": {
-    "issueCount": 5,
+    "issueCount": 6,
     "png": true,
     "fit": {
      "top": {
@@ -2647,18 +2653,18 @@
    "_build/i14_fallen_end.png"
   ],
   "pngSha1": {
-   "i14.png": "9447be3d25ab3c5e54bcb58643090c8eeba2f690",
-   "_build/i14_hit.png": "f69a5fd94571443e93f18c6f8c153b8bb861c83c",
-   "_build/i14_fallen_end.png": "9447be3d25ab3c5e54bcb58643090c8eeba2f690"
+   "i14.png": "89e88adbc77cb6b41f608e8a1e4c1f6f3ae280e1",
+   "_build/i14_hit.png": "10528cf0f297a3660e447c9d33b8079784ae104a",
+   "_build/i14_fallen_end.png": "89e88adbc77cb6b41f608e8a1e4c1f6f3ae280e1"
   },
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 10
+  "issueCount": 12
  },
  "i16": {
   "device": "852x393 side 59 bottom 21 island",
-  "renderedAt": "2026-11-07T16:50:36.006Z",
+  "renderedAt": "2026-11-07T17:28:30.523Z",
   "inputs": {
    "files": [
     "index.html",
@@ -2681,14 +2687,16 @@
     "../../shared/map_mena_d1_overlay.svg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "422c87464be7c8f566262621d6e5eb8eb624ad2e"
+   "sha1": "496d0b1e6172fe6c44061501d8d3d5d6fa1ef795"
   },
   "issues": [
+   "fallen: ellipsis on \"سقطت حكومتك\"",
    "fallen: clipped text (top): \"12\" 718.19..732 y 84..101",
    "fallen: ellipsis on \"أغسطس\"",
    "fallen: clipped text (top): \"2031\" 644.63..672.23 y 84..101",
    "fallen: clipped text (top): \"·\" 635.09..644.63 y 84..101",
    "fallen: ellipsis on \"الوقت متوقف\"",
+   "fallen_end: ellipsis on \"سقطت حكومتك\"",
    "fallen_end: clipped text (top): \"12\" 718.19..732 y 84..101",
    "fallen_end: ellipsis on \"أغسطس\"",
    "fallen_end: clipped text (top): \"2031\" 644.63..672.23 y 84..101",
@@ -2697,7 +2705,7 @@
   ],
   "views": {
    "fallen": {
-    "issueCount": 5,
+    "issueCount": 6,
     "png": true,
     "fit": {
      "top": {
@@ -3174,7 +3182,7 @@
     ]
    },
    "fallen_end": {
-    "issueCount": 5,
+    "issueCount": 6,
     "png": true,
     "fit": {
      "top": {
@@ -3662,18 +3670,18 @@
    "_build/i16_fallen_end.png"
   ],
   "pngSha1": {
-   "i16.png": "0974087ab2c778533ce15ed961aba459b801d88c",
-   "_build/i16_hit.png": "b7d23281da8bcce2b8b6b129e73c1a44cabacd44",
-   "_build/i16_fallen_end.png": "0974087ab2c778533ce15ed961aba459b801d88c"
+   "i16.png": "d89eda8fb73560a8893b0e3c476df4d20973c326",
+   "_build/i16_hit.png": "e91ab2dfbca2abc2b4ce4f57d803c69019e43bb6",
+   "_build/i16_fallen_end.png": "d89eda8fb73560a8893b0e3c476df4d20973c326"
   },
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 10
+  "issueCount": 12
  },
  "i16pro": {
   "device": "874x402 side 62 bottom 21 island",
-  "renderedAt": "2026-11-07T16:50:44.177Z",
+  "renderedAt": "2026-11-07T17:28:36.146Z",
   "inputs": {
    "files": [
     "index.html",
@@ -3696,14 +3704,16 @@
     "../../shared/map_mena_d1_overlay.svg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "422c87464be7c8f566262621d6e5eb8eb624ad2e"
+   "sha1": "496d0b1e6172fe6c44061501d8d3d5d6fa1ef795"
   },
   "issues": [
+   "fallen: ellipsis on \"سقطت حكومتك\"",
    "fallen: clipped text (top): \"12\" 737.19..751 y 84..101",
    "fallen: ellipsis on \"أغسطس\"",
    "fallen: clipped text (top): \"2031\" 663.63..691.23 y 84..101",
    "fallen: clipped text (top): \"·\" 654.09..663.63 y 84..101",
    "fallen: ellipsis on \"الوقت متوقف\"",
+   "fallen_end: ellipsis on \"سقطت حكومتك\"",
    "fallen_end: clipped text (top): \"12\" 737.19..751 y 84..101",
    "fallen_end: ellipsis on \"أغسطس\"",
    "fallen_end: clipped text (top): \"2031\" 663.63..691.23 y 84..101",
@@ -3712,7 +3722,7 @@
   ],
   "views": {
    "fallen": {
-    "issueCount": 5,
+    "issueCount": 6,
     "png": true,
     "fit": {
      "top": {
@@ -4200,7 +4210,7 @@
     ]
    },
    "fallen_end": {
-    "issueCount": 5,
+    "issueCount": 6,
     "png": true,
     "fit": {
      "top": {
@@ -4699,18 +4709,18 @@
    "_build/i16pro_fallen_end.png"
   ],
   "pngSha1": {
-   "i16pro.png": "09fb475cf0942195332b6f24f60b5710ffb649b6",
-   "_build/i16pro_hit.png": "9bd15808a0902aca56f43d37dea28047d5183dd6",
-   "_build/i16pro_fallen_end.png": "09fb475cf0942195332b6f24f60b5710ffb649b6"
+   "i16pro.png": "46491ed1cbd9e4cc97d2d051d70a8a34a3a09619",
+   "_build/i16pro_hit.png": "ef2473a8c6970f854b433dca0b4c3632aa25f229",
+   "_build/i16pro_fallen_end.png": "46491ed1cbd9e4cc97d2d051d70a8a34a3a09619"
   },
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 10
+  "issueCount": 12
  },
  "i11": {
   "device": "896x414 side 48 bottom 21 notch",
-  "renderedAt": "2026-11-07T16:50:52.366Z",
+  "renderedAt": "2026-11-07T17:28:41.710Z",
   "inputs": {
    "files": [
     "index.html",
@@ -4733,14 +4743,16 @@
     "../../shared/map_mena_d1_overlay.svg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "422c87464be7c8f566262621d6e5eb8eb624ad2e"
+   "sha1": "496d0b1e6172fe6c44061501d8d3d5d6fa1ef795"
   },
   "issues": [
+   "fallen: ellipsis on \"سقطت حكومتك\"",
    "fallen: clipped text (top): \"12\" 773.19..787 y 84..101",
    "fallen: ellipsis on \"أغسطس\"",
    "fallen: clipped text (top): \"2031\" 699.63..727.23 y 84..101",
    "fallen: clipped text (top): \"·\" 690.09..699.63 y 84..101",
    "fallen: ellipsis on \"الوقت متوقف\"",
+   "fallen_end: ellipsis on \"سقطت حكومتك\"",
    "fallen_end: clipped text (top): \"12\" 773.19..787 y 84..101",
    "fallen_end: ellipsis on \"أغسطس\"",
    "fallen_end: clipped text (top): \"2031\" 699.63..727.23 y 84..101",
@@ -4749,7 +4761,7 @@
   ],
   "views": {
    "fallen": {
-    "issueCount": 5,
+    "issueCount": 6,
     "png": true,
     "fit": {
      "top": {
@@ -5236,7 +5248,7 @@
     ]
    },
    "fallen_end": {
-    "issueCount": 5,
+    "issueCount": 6,
     "png": true,
     "fit": {
      "top": {
@@ -5734,18 +5746,18 @@
    "_build/i11_fallen_end.png"
   ],
   "pngSha1": {
-   "i11.png": "fa503ab338f761175187359913fe1ab9fc05a8af",
-   "_build/i11_hit.png": "3f5c25c8f88a2db84fc9976c0bfff212be835033",
-   "_build/i11_fallen_end.png": "fa503ab338f761175187359913fe1ab9fc05a8af"
+   "i11.png": "0f212ec4f31b85e8b0d6a69ec65ebf32af9e6994",
+   "_build/i11_hit.png": "8c22c323724dd2787c33ae19ef9a5b492a666f70",
+   "_build/i11_fallen_end.png": "0f212ec4f31b85e8b0d6a69ec65ebf32af9e6994"
   },
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 10
+  "issueCount": 12
  },
  "i16promax": {
   "device": "956x440 side 62 bottom 21 island",
-  "renderedAt": "2026-11-07T16:51:01.665Z",
+  "renderedAt": "2026-11-07T17:28:47.450Z",
   "inputs": {
    "files": [
     "index.html",
@@ -5768,14 +5780,16 @@
     "../../shared/map_mena_d1_overlay.svg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "422c87464be7c8f566262621d6e5eb8eb624ad2e"
+   "sha1": "496d0b1e6172fe6c44061501d8d3d5d6fa1ef795"
   },
   "issues": [
+   "fallen: ellipsis on \"سقطت حكومتك\"",
    "fallen: clipped text (top): \"12\" 819.19..833 y 84..101",
    "fallen: ellipsis on \"أغسطس\"",
    "fallen: clipped text (top): \"2031\" 745.63..773.23 y 84..101",
    "fallen: clipped text (top): \"·\" 736.09..745.63 y 84..101",
    "fallen: ellipsis on \"الوقت متوقف\"",
+   "fallen_end: ellipsis on \"سقطت حكومتك\"",
    "fallen_end: clipped text (top): \"12\" 819.19..833 y 84..101",
    "fallen_end: ellipsis on \"أغسطس\"",
    "fallen_end: clipped text (top): \"2031\" 745.63..773.23 y 84..101",
@@ -5784,7 +5798,7 @@
   ],
   "views": {
    "fallen": {
-    "issueCount": 5,
+    "issueCount": 6,
     "png": true,
     "fit": {
      "top": {
@@ -6271,7 +6285,7 @@
     ]
    },
    "fallen_end": {
-    "issueCount": 5,
+    "issueCount": 6,
     "png": true,
     "fit": {
      "top": {
@@ -6769,13 +6783,13 @@
    "_build/i16promax_fallen_end.png"
   ],
   "pngSha1": {
-   "i16promax.png": "33814c2cf4c919b82be19486b9a6ba4a71e5c925",
-   "_build/i16promax_hit.png": "0cc4cdfddc8d5854e813399118c265340365a863",
-   "_build/i16promax_fallen_end.png": "33814c2cf4c919b82be19486b9a6ba4a71e5c925"
+   "i16promax.png": "a99c54a57bc43271283f23cf9dc0252377d891cf",
+   "_build/i16promax_hit.png": "c57744260bc7b982d9e8ba6f1b9395e53be939be",
+   "_build/i16promax_fallen_end.png": "a99c54a57bc43271283f23cf9dc0252377d891cf"
   },
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 10
+  "issueCount": 12
  }
 }

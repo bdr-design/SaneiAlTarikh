@@ -1,7 +1,7 @@
 {
  "se": {
   "device": "667x375 side 0 bottom 0 none",
-  "renderedAt": "2026-11-07T16:47:35.878Z",
+  "renderedAt": "2026-11-07T17:26:13.080Z",
   "inputs": {
    "files": [
     "index.html",
@@ -24,19 +24,21 @@
     "../../shared/map_mena_d1_overlay.svg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "3f8d1318ab11c299ce5b92495f4c1b234578fc78"
+   "sha1": "90274b19d93d0311b0748bbc8fe4ca9f4dcb9965"
   },
   "issues": [
+   "nuclear: ellipsis on \"نهاية الحملة\"",
    "nuclear: clipped text (top): \"15\" 584.19..598 y 84..101",
    "nuclear: ellipsis on \"مارس\"",
    "nuclear: clipped text (top): \"2034\" 525.92..553.53 y 84..101",
+   "nuclear_end: ellipsis on \"نهاية الحملة\"",
    "nuclear_end: clipped text (top): \"15\" 584.19..598 y 84..101",
    "nuclear_end: ellipsis on \"مارس\"",
    "nuclear_end: clipped text (top): \"2034\" 525.92..553.53 y 84..101"
   ],
   "views": {
    "nuclear": {
-    "issueCount": 3,
+    "issueCount": 4,
     "png": true,
     "fit": {
      "top": {
@@ -397,7 +399,7 @@
     ]
    },
    "nuclear_end": {
-    "issueCount": 3,
+    "issueCount": 4,
     "png": true,
     "fit": {
      "top": {
@@ -769,18 +771,18 @@
    "_build/se_nuclear_end.png"
   ],
   "pngSha1": {
-   "se.png": "377a08dd2f845aead88ff6f191c71b873ebc8131",
-   "_build/se_hit.png": "435fd2a4ca7dc1e1abf51e3aa864c4ba49f01e18",
-   "_build/se_nuclear_end.png": "377a08dd2f845aead88ff6f191c71b873ebc8131"
+   "se.png": "889949fe2c8e643ea3c1827e04342c8472e02b12",
+   "_build/se_hit.png": "e00a117ddbc7ea219b221661b2a7ef72b67221ed",
+   "_build/se_nuclear_end.png": "889949fe2c8e643ea3c1827e04342c8472e02b12"
   },
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 6
+  "issueCount": 8
  },
  "mini": {
   "device": "812x375 side 50 bottom 21 notch",
-  "renderedAt": "2026-11-07T16:47:42.076Z",
+  "renderedAt": "2026-11-07T17:26:18.145Z",
   "inputs": {
    "files": [
     "index.html",
@@ -803,19 +805,21 @@
     "../../shared/map_mena_d1_overlay.svg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "3f8d1318ab11c299ce5b92495f4c1b234578fc78"
+   "sha1": "90274b19d93d0311b0748bbc8fe4ca9f4dcb9965"
   },
   "issues": [
+   "nuclear: ellipsis on \"نهاية الحملة\"",
    "nuclear: clipped text (top): \"15\" 687.19..701 y 84..101",
    "nuclear: ellipsis on \"مارس\"",
    "nuclear: clipped text (top): \"2034\" 628.92..656.53 y 84..101",
+   "nuclear_end: ellipsis on \"نهاية الحملة\"",
    "nuclear_end: clipped text (top): \"15\" 687.19..701 y 84..101",
    "nuclear_end: ellipsis on \"مارس\"",
    "nuclear_end: clipped text (top): \"2034\" 628.92..656.53 y 84..101"
   ],
   "views": {
    "nuclear": {
-    "issueCount": 3,
+    "issueCount": 4,
     "png": true,
     "fit": {
      "top": {
@@ -1183,7 +1187,7 @@
     ]
    },
    "nuclear_end": {
-    "issueCount": 3,
+    "issueCount": 4,
     "png": true,
     "fit": {
      "top": {
@@ -1562,18 +1566,18 @@
    "_build/mini_nuclear_end.png"
   ],
   "pngSha1": {
-   "mini.png": "547699b63d7336cd6af73aad3fc15deffa924592",
-   "_build/mini_hit.png": "372469a7abcbf0c302b490214d73765eb3137737",
-   "_build/mini_nuclear_end.png": "547699b63d7336cd6af73aad3fc15deffa924592"
+   "mini.png": "23016da559dd65518dbc43e934d046a9e6a11c55",
+   "_build/mini_hit.png": "0bc7931b69e44a44453d6cf2727981750827a8d6",
+   "_build/mini_nuclear_end.png": "23016da559dd65518dbc43e934d046a9e6a11c55"
   },
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 6
+  "issueCount": 8
  },
  "i14": {
   "device": "844x390 side 47 bottom 21 notch",
-  "renderedAt": "2026-11-07T16:47:48.549Z",
+  "renderedAt": "2026-11-07T17:26:23.477Z",
   "inputs": {
    "files": [
     "index.html",
@@ -1596,19 +1600,21 @@
     "../../shared/map_mena_d1_overlay.svg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "3f8d1318ab11c299ce5b92495f4c1b234578fc78"
+   "sha1": "90274b19d93d0311b0748bbc8fe4ca9f4dcb9965"
   },
   "issues": [
+   "nuclear: ellipsis on \"نهاية الحملة\"",
    "nuclear: clipped text (top): \"15\" 722.19..736 y 84..101",
    "nuclear: ellipsis on \"مارس\"",
    "nuclear: clipped text (top): \"2034\" 663.92..691.53 y 84..101",
+   "nuclear_end: ellipsis on \"نهاية الحملة\"",
    "nuclear_end: clipped text (top): \"15\" 722.19..736 y 84..101",
    "nuclear_end: ellipsis on \"مارس\"",
    "nuclear_end: clipped text (top): \"2034\" 663.92..691.53 y 84..101"
   ],
   "views": {
    "nuclear": {
-    "issueCount": 3,
+    "issueCount": 4,
     "png": true,
     "fit": {
      "top": {
@@ -2086,7 +2092,7 @@
     ]
    },
    "nuclear_end": {
-    "issueCount": 3,
+    "issueCount": 4,
     "png": true,
     "fit": {
      "top": {
@@ -2575,18 +2581,18 @@
    "_build/i14_nuclear_end.png"
   ],
   "pngSha1": {
-   "i14.png": "8505bf56c36103ff9894680a99eab27839c6aae2",
-   "_build/i14_hit.png": "36fac6fa5532c3a11b0000baf87b8a67ab4b84bf",
-   "_build/i14_nuclear_end.png": "8505bf56c36103ff9894680a99eab27839c6aae2"
+   "i14.png": "b48c8fc9346df586896ba9414bb937712574f5cd",
+   "_build/i14_hit.png": "e1f4a2089fd5af8e33d2833b2ad1c46f47fe4b65",
+   "_build/i14_nuclear_end.png": "b48c8fc9346df586896ba9414bb937712574f5cd"
   },
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 6
+  "issueCount": 8
  },
  "i16": {
   "device": "852x393 side 59 bottom 21 island",
-  "renderedAt": "2026-11-07T16:47:54.760Z",
+  "renderedAt": "2026-11-07T17:26:28.926Z",
   "inputs": {
    "files": [
     "index.html",
@@ -2609,19 +2615,21 @@
     "../../shared/map_mena_d1_overlay.svg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "3f8d1318ab11c299ce5b92495f4c1b234578fc78"
+   "sha1": "90274b19d93d0311b0748bbc8fe4ca9f4dcb9965"
   },
   "issues": [
+   "nuclear: ellipsis on \"نهاية الحملة\"",
    "nuclear: clipped text (top): \"15\" 718.19..732 y 84..101",
    "nuclear: ellipsis on \"مارس\"",
    "nuclear: clipped text (top): \"2034\" 659.92..687.53 y 84..101",
+   "nuclear_end: ellipsis on \"نهاية الحملة\"",
    "nuclear_end: clipped text (top): \"15\" 718.19..732 y 84..101",
    "nuclear_end: ellipsis on \"مارس\"",
    "nuclear_end: clipped text (top): \"2034\" 659.92..687.53 y 84..101"
   ],
   "views": {
    "nuclear": {
-    "issueCount": 3,
+    "issueCount": 4,
     "png": true,
     "fit": {
      "top": {
@@ -3088,7 +3096,7 @@
     ]
    },
    "nuclear_end": {
-    "issueCount": 3,
+    "issueCount": 4,
     "png": true,
     "fit": {
      "top": {
@@ -3566,18 +3574,18 @@
    "_build/i16_nuclear_end.png"
   ],
   "pngSha1": {
-   "i16.png": "f8112f81422a92ed1279ca4699f5c3987273fa07",
-   "_build/i16_hit.png": "7a5a8c45e72828a4fc4bd9f900f59e678cbf8aff",
-   "_build/i16_nuclear_end.png": "f8112f81422a92ed1279ca4699f5c3987273fa07"
+   "i16.png": "bc84658ba2a1689fee9aa451ba8f9ee56be51cb1",
+   "_build/i16_hit.png": "b37f117b29db4173372b7b95bd74c64ec35d01e0",
+   "_build/i16_nuclear_end.png": "bc84658ba2a1689fee9aa451ba8f9ee56be51cb1"
   },
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 6
+  "issueCount": 8
  },
  "i16pro": {
   "device": "874x402 side 62 bottom 21 island",
-  "renderedAt": "2026-11-07T16:48:01.262Z",
+  "renderedAt": "2026-11-07T17:26:34.360Z",
   "inputs": {
    "files": [
     "index.html",
@@ -3600,19 +3608,21 @@
     "../../shared/map_mena_d1_overlay.svg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "3f8d1318ab11c299ce5b92495f4c1b234578fc78"
+   "sha1": "90274b19d93d0311b0748bbc8fe4ca9f4dcb9965"
   },
   "issues": [
+   "nuclear: ellipsis on \"نهاية الحملة\"",
    "nuclear: clipped text (top): \"15\" 737.19..751 y 84..101",
    "nuclear: ellipsis on \"مارس\"",
    "nuclear: clipped text (top): \"2034\" 678.92..706.53 y 84..101",
+   "nuclear_end: ellipsis on \"نهاية الحملة\"",
    "nuclear_end: clipped text (top): \"15\" 737.19..751 y 84..101",
    "nuclear_end: ellipsis on \"مارس\"",
    "nuclear_end: clipped text (top): \"2034\" 678.92..706.53 y 84..101"
   ],
   "views": {
    "nuclear": {
-    "issueCount": 3,
+    "issueCount": 4,
     "png": true,
     "fit": {
      "top": {
@@ -4090,7 +4100,7 @@
     ]
    },
    "nuclear_end": {
-    "issueCount": 3,
+    "issueCount": 4,
     "png": true,
     "fit": {
      "top": {
@@ -4579,18 +4589,18 @@
    "_build/i16pro_nuclear_end.png"
   ],
   "pngSha1": {
-   "i16pro.png": "4ac41bad1ee59ac255b0997c313e57051a4d8f41",
-   "_build/i16pro_hit.png": "6aa49440af5e539cde23d38a410319aa7b5402c5",
-   "_build/i16pro_nuclear_end.png": "4ac41bad1ee59ac255b0997c313e57051a4d8f41"
+   "i16pro.png": "f2d922d86b26ffa2ec7bc9405c00cc19096a8ec2",
+   "_build/i16pro_hit.png": "6278ea3d66d971313e596d950fa45473b7129a16",
+   "_build/i16pro_nuclear_end.png": "f2d922d86b26ffa2ec7bc9405c00cc19096a8ec2"
   },
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 6
+  "issueCount": 8
  },
  "i11": {
   "device": "896x414 side 48 bottom 21 notch",
-  "renderedAt": "2026-11-07T16:48:08.150Z",
+  "renderedAt": "2026-11-07T17:26:39.912Z",
   "inputs": {
    "files": [
     "index.html",
@@ -4613,19 +4623,21 @@
     "../../shared/map_mena_d1_overlay.svg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "3f8d1318ab11c299ce5b92495f4c1b234578fc78"
+   "sha1": "90274b19d93d0311b0748bbc8fe4ca9f4dcb9965"
   },
   "issues": [
+   "nuclear: ellipsis on \"نهاية الحملة\"",
    "nuclear: clipped text (top): \"15\" 773.19..787 y 84..101",
    "nuclear: ellipsis on \"مارس\"",
    "nuclear: clipped text (top): \"2034\" 714.92..742.53 y 84..101",
+   "nuclear_end: ellipsis on \"نهاية الحملة\"",
    "nuclear_end: clipped text (top): \"15\" 773.19..787 y 84..101",
    "nuclear_end: ellipsis on \"مارس\"",
    "nuclear_end: clipped text (top): \"2034\" 714.92..742.53 y 84..101"
   ],
   "views": {
    "nuclear": {
-    "issueCount": 3,
+    "issueCount": 4,
     "png": true,
     "fit": {
      "top": {
@@ -5102,7 +5114,7 @@
     ]
    },
    "nuclear_end": {
-    "issueCount": 3,
+    "issueCount": 4,
     "png": true,
     "fit": {
      "top": {
@@ -5590,18 +5602,18 @@
    "_build/i11_nuclear_end.png"
   ],
   "pngSha1": {
-   "i11.png": "dcf10b21ffbcb3fec6855fa9b19972eaad67b687",
-   "_build/i11_hit.png": "d8d18ffa90949c63f8c5097331124dc2e33b21bf",
-   "_build/i11_nuclear_end.png": "dcf10b21ffbcb3fec6855fa9b19972eaad67b687"
+   "i11.png": "622b525f195038304ee993784ecf59d0deab65eb",
+   "_build/i11_hit.png": "7971a612526439d2f8ddc9cb3147d0c5ab3ebb32",
+   "_build/i11_nuclear_end.png": "622b525f195038304ee993784ecf59d0deab65eb"
   },
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 6
+  "issueCount": 8
  },
  "i16promax": {
   "device": "956x440 side 62 bottom 21 island",
-  "renderedAt": "2026-11-07T16:48:15.073Z",
+  "renderedAt": "2026-11-07T17:26:45.781Z",
   "inputs": {
    "files": [
     "index.html",
@@ -5624,19 +5636,21 @@
     "../../shared/map_mena_d1_overlay.svg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "3f8d1318ab11c299ce5b92495f4c1b234578fc78"
+   "sha1": "90274b19d93d0311b0748bbc8fe4ca9f4dcb9965"
   },
   "issues": [
+   "nuclear: ellipsis on \"نهاية الحملة\"",
    "nuclear: clipped text (top): \"15\" 819.19..833 y 84..101",
    "nuclear: ellipsis on \"مارس\"",
    "nuclear: clipped text (top): \"2034\" 760.92..788.53 y 84..101",
+   "nuclear_end: ellipsis on \"نهاية الحملة\"",
    "nuclear_end: clipped text (top): \"15\" 819.19..833 y 84..101",
    "nuclear_end: ellipsis on \"مارس\"",
    "nuclear_end: clipped text (top): \"2034\" 760.92..788.53 y 84..101"
   ],
   "views": {
    "nuclear": {
-    "issueCount": 3,
+    "issueCount": 4,
     "png": true,
     "fit": {
      "top": {
@@ -6113,7 +6127,7 @@
     ]
    },
    "nuclear_end": {
-    "issueCount": 3,
+    "issueCount": 4,
     "png": true,
     "fit": {
      "top": {
@@ -6601,13 +6615,13 @@
    "_build/i16promax_nuclear_end.png"
   ],
   "pngSha1": {
-   "i16promax.png": "96ba560758a40c730402cf75a5bb9bcdece138b4",
-   "_build/i16promax_hit.png": "d0807074a74a39e095a5cf2f0317131b0203bd60",
-   "_build/i16promax_nuclear_end.png": "96ba560758a40c730402cf75a5bb9bcdece138b4"
+   "i16promax.png": "8efea8dd88bab26fdfe7afc8cb63052353a40d9f",
+   "_build/i16promax_hit.png": "2714506c2b118529bcaeb04bc2db4ec724c6f703",
+   "_build/i16promax_nuclear_end.png": "8efea8dd88bab26fdfe7afc8cb63052353a40d9f"
   },
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 6
+  "issueCount": 8
  }
 }

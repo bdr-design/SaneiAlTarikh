@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-07T16:07:27.098Z",
+ "ranAt": "2026-11-07T17:55:38.850Z",
  "inputs": {
   "files": [
    "index.html",
@@ -25,14 +25,42 @@
    "../../shared/map_mena_d1_overlay.svg",
    "map_overlay_cairo.svg"
   ],
-  "sha1": "425b4299830bf39f0342179b1082699bcb78dc2d"
+  "sha1": "f618b96971fc3e48409eeec9bd5199808e564c5c"
  },
  "cleanIssues": {
-  "i16promax": [],
-  "i16promax_event_end": [],
+  "i16promax": [
+   "ellipsis on \"احتجاجات في تونس\"",
+   "ellipsis on \"الوقت متوقف\"",
+   "clipped text (top): \"·\" 761.77..771.3 y 84..101",
+   "ellipsis on \"الافتراضي بعد\"",
+   "clipped text (top): \"7\" 693.97..700.88 y 84..101",
+   "ellipsis on \"أيام\""
+  ],
+  "i16promax_event_end": [
+   "ellipsis on \"احتجاجات في تونس\"",
+   "ellipsis on \"الوقت متوقف\"",
+   "clipped text (top): \"·\" 761.77..771.3 y 84..101",
+   "ellipsis on \"الافتراضي بعد\"",
+   "clipped text (top): \"7\" 693.97..700.88 y 84..101",
+   "ellipsis on \"أيام\""
+  ],
   "i16promax coverage": [],
-  "se": [],
-  "se_event_end": [],
+  "se": [
+   "ellipsis on \"احتجاجات في تونس\"",
+   "ellipsis on \"الوقت متوقف\"",
+   "clipped text (top): \"·\" 526.77..536.3 y 84..101",
+   "ellipsis on \"الافتراضي بعد\"",
+   "clipped text (top): \"7\" 458.97..465.88 y 84..101",
+   "ellipsis on \"أيام\""
+  ],
+  "se_event_end": [
+   "ellipsis on \"احتجاجات في تونس\"",
+   "ellipsis on \"الوقت متوقف\"",
+   "clipped text (top): \"·\" 526.77..536.3 y 84..101",
+   "ellipsis on \"الافتراضي بعد\"",
+   "clipped text (top): \"7\" 458.97..465.88 y 84..101",
+   "ellipsis on \"أيام\""
+  ],
   "se coverage": []
  },
  "results": [
@@ -40,14 +68,18 @@
    "name": "type size",
    "ok": true,
    "sample": [
-    "font size 17 for \"احتجاجات في تونس\""
+    "font size 17 for \"احتجاجات في تونس\"",
+    "ellipsis on \"احتجاجات في تونس\"",
+    "ellipsis on \"الوقت متوقف\""
    ]
   },
   {
    "name": "off-token colour",
    "ok": true,
    "sample": [
-    "text colour off-token rgb(136, 153, 170): \"احتجاجات في تونس\""
+    "text colour off-token rgb(136, 153, 170): \"احتجاجات في تونس\"",
+    "ellipsis on \"احتجاجات في تونس\"",
+    "ellipsis on \"الوقت متوقف\""
    ]
   },
   {
@@ -55,32 +87,35 @@
    "ok": true,
    "sample": [
     "panel radius قرار: احتجاجات في تونس: 6 (want 12)",
-    "radius 6 for .sheet (want 12)"
+    "radius 6 for .sheet (want 12)",
+    "ellipsis on \"احتجاجات في تونس\""
    ]
   },
   {
    "name": "tap in the side inset",
    "ok": true,
    "sample": [
-    "text in side inset: تتسع الاحتجاجات في تونس منذ",
-    "text in side inset: ديسمبر بعد أن أحرق شاب نفسه في سيدي بوزيد. يطالب المحتجون بفرص عمل وبخفض الأسعار، وتنقل القنوات العربية ما يجري كل يوم. يرى مستشاروك أن البطالة وارتفاع الأسعار في مصر قد يجعلان الشارع يتأثر بما يحدث.",
-    "text in side inset: ديسمبر بعد أن أحرق شاب نفسه في سيدي بوزيد. يطالب المحتجون بفرص عمل وبخفض الأسعار، وتنقل القنوات العربية ما يجري كل يوم. يرى مستشاروك أن البطالة وارتفاع الأسعار في مصر قد يجعلان الشارع يتأثر بما يحدث."
+    "ellipsis on \"احتجاجات في تونس\"",
+    "ellipsis on \"الوقت متوقف\"",
+    "clipped text (top): \"·\" 791.77..801.3 y 84..101"
    ]
   },
   {
    "name": "panel in the side inset",
    "ok": true,
    "sample": [
-    "text in side inset: تتسع الاحتجاجات في تونس منذ",
-    "text in side inset: ديسمبر بعد أن أحرق شاب نفسه في سيدي بوزيد. يطالب المحتجون بفرص عمل وبخفض الأسعار، وتنقل القنوات العربية ما يجري كل يوم. يرى مستشاروك أن البطالة وارتفاع الأسعار في مصر قد يجعلان الشارع يتأثر بما يحدث.",
-    "text in side inset: ديسمبر بعد أن أحرق شاب نفسه في سيدي بوزيد. يطالب المحتجون بفرص عمل وبخفض الأسعار، وتنقل القنوات العربية ما يجري كل يوم. يرى مستشاروك أن البطالة وارتفاع الأسعار في مصر قد يجعلان الشارع يتأثر بما يحدث."
+    "ellipsis on \"احتجاجات في تونس\"",
+    "ellipsis on \"الوقت متوقف\"",
+    "clipped text (top): \"·\" 791.77..801.3 y 84..101"
    ]
   },
   {
    "name": "panel not opaque",
    "ok": true,
    "sample": [
-    "panel not opaque: قرار: احتجاجات في تونس rgba(9, 17, 25, 0.66)"
+    "panel not opaque: قرار: احتجاجات في تونس rgba(9, 17, 25, 0.66)",
+    "ellipsis on \"احتجاجات في تونس\"",
+    "ellipsis on \"الوقت متوقف\""
    ]
   },
   {
@@ -88,272 +123,305 @@
    "ok": true,
    "sample": [
     "panel not opaque (opacity 0.60): قرار: احتجاجات في تونس",
-    "brief text not fully visible: احتجاجات في تونس",
-    "brief text not fully visible: الوقت متوقف · الافتراضي بعد 7 أيام"
+    "ellipsis on \"احتجاجات في تونس\"",
+    "ellipsis on \"الوقت متوقف\""
    ]
   },
   {
    "name": "Egypt covered",
    "ok": true,
    "sample": [
-    "Nile delta covered by panel قرار: احتجاجات في تونس",
-    "Egypt covered by panel قرار: احتجاجات في تونس",
-    "Egypt under the hit box of دعم أكبر للخبز والتموين: 5"
+    "ellipsis on \"احتجاجات في تونس\"",
+    "ellipsis on \"الوقت متوقف\"",
+    "clipped text (top): \"·\" 761.77..771.3 y 84..101"
    ]
   },
   {
    "name": "map dimmed",
    "ok": true,
    "sample": [
-    "the map is dimmed (opacity 1.00, filter brightness(0.35))"
+    "ellipsis on \"احتجاجات في تونس\"",
+    "ellipsis on \"الوقت متوقف\"",
+    "clipped text (top): \"·\" 761.77..771.3 y 84..101"
    ]
   },
   {
    "name": "map faded",
    "ok": true,
    "sample": [
-    "the map is dimmed (opacity 0.30, filter none)"
+    "ellipsis on \"احتجاجات في تونس\"",
+    "ellipsis on \"الوقت متوقف\"",
+    "clipped text (top): \"·\" 761.77..771.3 y 84..101"
    ]
   },
   {
    "name": "scrim over the map",
    "ok": true,
    "sample": [
-    "something drawn over the map: DIV (rgba(0, 0, 0, 0.55))",
-    "contrast 1.92 for \"3\""
+    "ellipsis on \"احتجاجات في تونس\"",
+    "ellipsis on \"الوقت متوقف\"",
+    "clipped text (top): \"·\" 761.77..771.3 y 84..101"
    ]
   },
   {
    "name": "sheet width",
    "ok": true,
    "sample": [
-    "sheet width 330 (want round(clamp(43% of 832, 340, 380)), or the room the dock leaves if 330..: 358)"
+    "ellipsis on \"احتجاجات في تونس\"",
+    "ellipsis on \"الوقت متوقف\"",
+    "clipped text (top): \"·\" 761.77..771.3 y 84..101"
    ]
   },
   {
    "name": "sheet top",
    "ok": true,
    "sample": [
-    "hit overlap الاستقرار 58% / لاحقًا: تأجيل القرار إلى ا",
-    "panel overlap الدولة: مصر، حسني مبارك، ج / قرار: احتجاجات في تونس",
-    "panel overlap الخزينة 36.0 مليار $ الاست / قرار: احتجاجات في تونس"
+    "ellipsis on \"احتجاجات في تونس\"",
+    "ellipsis on \"الوقت متوقف\"",
+    "clipped text (top): \"·\" 761.77..771.3 y 70..87"
    ]
   },
   {
    "name": "dock hidden although it fits",
    "ok": true,
    "sample": [
-    "dock hidden although it fits left of the sheet"
+    "ellipsis on \"احتجاجات في تونس\"",
+    "ellipsis on \"الوقت متوقف\"",
+    "clipped text (top): \"·\" 761.77..771.3 y 84..101"
    ]
   },
   {
    "name": "dock shown on the SE",
    "ok": true,
    "sample": [
-    "icon over text: i / \"حوار مع النقابات والأحزاب\"",
-    "icon over text: i / \"حوار مع النقابات والأحزاب\"",
-    "icon over text: i / \"من رأس المال السياسي\""
+    "ellipsis on \"احتجاجات في تونس\"",
+    "ellipsis on \"الوقت متوقف\"",
+    "clipped text (top): \"·\" 526.77..536.3 y 84..101"
    ]
   },
   {
    "name": "left stack moved",
    "ok": true,
    "sample": [
-    "HUD element moved from its B3 position: .toast x 70.0..275.6 y 56.0..88.0",
-    "HUD element moved from its B3 position: .btn.mode x 70.0..191.6 y 96.0..128.0",
-    "HUD element moved from its B3 position: .btn.home x 70.0..141.5 y 136.0..168.0"
+    "ellipsis on \"احتجاجات في تونس\"",
+    "ellipsis on \"الوقت متوقف\"",
+    "clipped text (top): \"·\" 761.77..771.3 y 84..101"
    ]
   },
   {
    "name": "map label cut",
    "ok": true,
    "sample": [
-    "map label ليبيا sliced by the screen edge or the side inset",
-    "map label إيران sliced by the screen edge or the side inset",
-    "map label إيران squeezed between a panel and the screen edge"
+    "ellipsis on \"احتجاجات في تونس\"",
+    "ellipsis on \"الوقت متوقف\"",
+    "clipped text (top): \"·\" 761.77..771.3 y 84..101"
    ]
   },
   {
    "name": "contrast",
    "ok": true,
    "sample": [
-    "contrast 1 for \"تتسع الاحتجاجات في تونس \"",
-    "contrast 1 for \"17\"",
-    "contrast 1 for \"ديسمبر بعد أن أحرق شاب ن\""
+    "ellipsis on \"احتجاجات في تونس\"",
+    "ellipsis on \"الوقت متوقف\"",
+    "clipped text (top): \"·\" 761.77..771.3 y 84..101"
    ]
   },
   {
    "name": "identity line missing",
    "ok": true,
    "sample": [
-    "panel top line none rgb(237, 94, 142) 2px (want the section colour, 2 pt, at the top)"
+    "ellipsis on \"احتجاجات في تونس\"",
+    "ellipsis on \"الوقت متوقف\"",
+    "clipped text (top): \"·\" 761.77..771.3 y 84..101"
    ]
   },
   {
    "name": "emblem drawn grey",
    "ok": true,
    "sample": [
-    "section emblem missing or not in the section colour"
+    "ellipsis on \"احتجاجات في تونس\"",
+    "ellipsis on \"الوقت متوقف\"",
+    "clipped text (top): \"·\" 761.77..771.3 y 84..101"
    ]
   },
   {
    "name": "section colour on data",
    "ok": true,
    "sample": [
-    "section colour on data text: \"الوقت متوقف\"",
-    "section colour on data text: \"الافتراضي بعد\"",
-    "section colour on data text: \"7\""
+    "ellipsis on \"احتجاجات في تونس\"",
+    "ellipsis on \"الوقت متوقف\"",
+    "clipped text (top): \"·\" 761.77..771.3 y 84..101"
    ]
   },
   {
    "name": "money unit",
    "ok": true,
    "sample": [
-    "money unit: «0.4 مليار» (under 1 billion is written in millions)"
+    "ellipsis on \"احتجاجات في تونس\"",
+    "ellipsis on \"الوقت متوقف\"",
+    "clipped text (top): \"·\" 761.77..771.3 y 84..101"
    ]
   },
   {
    "name": "sign outside its number",
    "ok": true,
    "sample": [
-    "a sign outside its number: «تغير +3»"
+    "ellipsis on \"احتجاجات في تونس\"",
+    "ellipsis on \"الوقت متوقف\"",
+    "clipped text (top): \"·\" 761.77..771.3 y 84..101"
    ]
   },
   {
    "name": "colour alone",
    "ok": true,
    "sample": [
-    "colour alone: «تراجع» has no arrow or icon"
+    "ellipsis on \"احتجاجات في تونس\"",
+    "ellipsis on \"الوقت متوقف\"",
+    "clipped text (top): \"·\" 761.77..771.3 y 84..101"
    ]
   },
   {
    "name": "an image in the sheet",
    "ok": true,
    "sample": [
-    "an image in the sheet"
+    "ellipsis on \"احتجاجات في تونس\"",
+    "ellipsis on \"الوقت متوقف\"",
+    "clipped text (top): \"·\" 761.77..771.3 y 84..101"
    ]
   },
   {
    "name": "close not round",
    "ok": true,
    "sample": [
-    "close button is not round"
+    "close button is not round",
+    "ellipsis on \"احتجاجات في تونس\"",
+    "ellipsis on \"الوقت متوقف\""
    ]
   },
   {
    "name": "label without a role",
    "ok": true,
    "sample": [
-    "a11y: a label VoiceOver may skip (no role): «اختبار»"
+    "ellipsis on \"احتجاجات في تونس\"",
+    "ellipsis on \"الوقت متوقف\"",
+    "clipped text (top): \"·\" 761.77..771.3 y 84..101"
    ]
   },
   {
    "name": "text overlap",
    "ok": true,
    "sample": [
-    "text overlap \"احتجاجات في تونس\" / \"الوقت متوقف\"",
-    "text overlap \"احتجاجات في تونس\" / \"·\"",
-    "text overlap \"احتجاجات في تونس\" / \"الافتراضي بعد\""
+    "ellipsis on \"احتجاجات في تونس\"",
+    "ellipsis on \"الوقت متوقف\"",
+    "clipped text (top): \"·\" 761.77..771.3 y 70..87"
    ]
   },
   {
    "name": "text into a control",
    "ok": true,
    "sample": [
-    "text overlap \"مليون $ سنويًا\" / \"الاضطرابات\"",
-    "text overlap \"تشديد الانتشار الأمني\" / \"الاضطرابات\"",
-    "text overlap \"−2\" / \"الاضطرابات\""
+    "ellipsis on \"احتجاجات في تونس\"",
+    "ellipsis on \"الوقت متوقف\"",
+    "clipped text (top): \"·\" 761.77..771.3 y 84..101"
    ]
   },
   {
    "name": "identity line colour",
    "ok": true,
    "sample": [
-    "panel top line \"\" rgb(63, 224, 208) 2px (want the section colour, 2 pt, at the top)"
+    "ellipsis on \"احتجاجات في تونس\"",
+    "ellipsis on \"الوقت متوقف\"",
+    "clipped text (top): \"·\" 761.77..771.3 y 84..101"
    ]
   },
   {
    "name": "emblem size",
    "ok": true,
    "sample": [
-    "size 28.0x32.0 for .s-emb (want 32 x 32)"
+    "ellipsis on \"احتجاجات في تونس\"",
+    "ellipsis on \"الوقت متوقف\"",
+    "clipped text (top): \"·\" 761.77..771.3 y 84..101"
    ]
   },
   {
    "name": "chip not white",
    "ok": true,
    "sample": [
-    "white touch off: .r-chip borderTopColor rgb(63, 224, 208) (want rgba(234, 242, 247, 0.5))",
-    "white touch off: .r-chip color rgb(63, 224, 208) (want rgb(234, 242, 247))",
-    "white touch off: .r-chip borderTopColor rgb(63, 224, 208) (want rgba(234, 242, 247, 0.5))"
+    "ellipsis on \"احتجاجات في تونس\"",
+    "ellipsis on \"الوقت متوقف\"",
+    "clipped text (top): \"·\" 761.77..771.3 y 84..101"
    ]
   },
   {
    "name": "tile icons cyan",
    "ok": true,
    "sample": [
-    "white touch off: .r-tile color rgb(127, 233, 255) (want rgb(234, 242, 247))",
-    "white touch off: .r-tile color rgb(127, 233, 255) (want rgb(234, 242, 247))",
-    "white touch off: .r-tile color rgb(127, 233, 255) (want rgb(234, 242, 247))"
+    "ellipsis on \"احتجاجات في تونس\"",
+    "ellipsis on \"الوقت متوقف\"",
+    "clipped text (top): \"·\" 761.77..771.3 y 84..101"
    ]
   },
   {
    "name": "chip arrow against its sign",
    "ok": true,
    "sample": [
-    "«دعم أكبر للخبز»: the chip's arrow does not agree with its sign",
-    "option 1: the chip is «up الاضطرابات −3» (want «down الاضطرابات -3»)",
-    "option 1: an arrow against its sign"
+    "ellipsis on \"احتجاجات في تونس\"",
+    "ellipsis on \"الوقت متوقف\"",
+    "clipped text (top): \"·\" 761.77..771.3 y 84..101"
    ]
   },
   {
    "name": "row read in part",
    "ok": true,
    "sample": [
-    "a11y: «دعم أكبر للخبز» does not read its numbers",
-    "a11y: «دعم أكبر للخبز» does not say «دولار»",
-    "a11y: «دعم أكبر للخبز» does not say the chip's direction in words"
+    "ellipsis on \"احتجاجات في تونس\"",
+    "ellipsis on \"الوقت متوقف\"",
+    "clipped text (top): \"·\" 761.77..771.3 y 84..101"
    ]
   },
   {
    "name": "a long headline label",
    "ok": true,
    "sample": [
-    "clipped text (sides): \"عنوان طويل جدًا لا يتسع لخانته أبدًا\" 385.38..539.25 y 124..141",
-    "text outside the sheet's 12 pt padding: \"عنوان طويل جدًا لا يتسع لخانته أبدًا\"",
-    "clipped text (sides): \"1\" 528.44..539.25 y 142..169"
+    "ellipsis on \"احتجاجات في تونس\"",
+    "ellipsis on \"الوقت متوقف\"",
+    "clipped text (top): \"·\" 761.77..771.3 y 84..101"
    ]
   },
   {
    "name": "text wider than its box",
    "ok": true,
    "sample": [
-    "text wider than its box: «خياراتك» (35 in 20)"
+    "ellipsis on \"احتجاجات في تونس\"",
+    "ellipsis on \"الوقت متوقف\"",
+    "clipped text (top): \"·\" 761.77..771.3 y 84..101"
    ]
   },
   {
    "name": "a long status cell",
    "ok": true,
    "sample": [
-    "clipped text (sides): \"قيمة طويلة جدًا لا تتسع لنصف الجدول\" 416.53..613.3 y 120.5..139.5",
-    "text outside the sheet's 12 pt padding: \"قيمة طويلة جدًا لا تتسع لنصف الجدول\"",
-    "horizontal overflow in خانةقيمة طويلة جدًا لا تتس"
+    "ellipsis on \"احتجاجات في تونس\"",
+    "ellipsis on \"الوقت متوقف\"",
+    "clipped text (top): \"·\" 761.77..771.3 y 84..101"
    ]
   },
   {
    "name": "font weight (no tabs)",
    "ok": true,
    "sample": [
+    "ellipsis on \"احتجاجات في تونس\"",
     "font weight 11.5/700 for \"الوقت متوقف\"",
-    "font weight 11.5/700 for \"·\"",
-    "font weight 11.5/700 for \"الافتراضي بعد\""
+    "ellipsis on \"الوقت متوقف\""
    ]
   },
   {
    "name": "a tab row on a one-body sheet",
    "ok": true,
    "sample": [
-    "a tab row on a sheet that has one body"
+    "ellipsis on \"احتجاجات في تونس\"",
+    "ellipsis on \"الوقت متوقف\"",
+    "clipped text (top): \"·\" 761.77..771.3 y 84..101"
    ]
   },
   {
@@ -361,69 +429,80 @@
    "ok": true,
    "sample": [
     "control height 40.00 for .r-x (want 32): لاحقًا: تأجيل القرار إلى ا",
-    "close button is not round"
+    "close button is not round",
+    "ellipsis on \"احتجاجات في تونس\""
    ]
   },
   {
    "name": "icon size (no tabs)",
    "ok": true,
    "sample": [
-    "icon size 19x19 (want 16): i"
+    "icon size 19x19 (want 16): i",
+    "ellipsis on \"احتجاجات في تونس\"",
+    "ellipsis on \"الوقت متوقف\""
    ]
   },
   {
    "name": "fades wrong (no tabs)",
    "ok": true,
    "sample": [
-    "clipped text (bottom): \"المتابعة دون إجراء\" 507.63..599 y 363..382",
-    "control cut by its scroll area (bottom): المتابعة دون إجراء، الخيار",
-    "hit box shaved by its clip: المتابعة دون إجراء، الخيار"
+    "ellipsis on \"احتجاجات في تونس\"",
+    "ellipsis on \"الوقت متوقف\"",
+    "clipped text (top): \"·\" 526.77..536.3 y 84..101"
    ]
   },
   {
    "name": "hint chevron missing (no tabs)",
    "ok": true,
    "sample": [
-    "scroll hint chevron missing with content below"
+    "ellipsis on \"احتجاجات في تونس\"",
+    "ellipsis on \"الوقت متوقف\"",
+    "clipped text (top): \"·\" 526.77..536.3 y 84..101"
    ]
   },
   {
    "name": "hint over the content (no tabs)",
    "ok": true,
    "sample": [
-    "scroll hint not centred in the clear strip under the fade: y 198.0..216.0 (strip 344.0..366.0)"
+    "ellipsis on \"احتجاجات في تونس\"",
+    "ellipsis on \"الوقت متوقف\"",
+    "clipped text (top): \"·\" 526.77..536.3 y 84..101"
    ]
   },
   {
    "name": "a dock item marked open",
    "ok": true,
    "sample": [
-    "a dock item is marked open under a sheet of no section"
+    "ellipsis on \"احتجاجات في تونس\"",
+    "ellipsis on \"الوقت متوقف\"",
+    "clipped text (top): \"·\" 761.77..771.3 y 84..101"
    ]
   },
   {
    "name": "brief text hidden (decision)",
    "ok": true,
    "sample": [
-    "brief text not fully visible: احتجاجات في تونس"
+    "ellipsis on \"الوقت متوقف\"",
+    "clipped text (top): \"·\" 761.77..771.3 y 84..101",
+    "ellipsis on \"الافتراضي بعد\""
    ]
   },
   {
    "name": "18 pt misuse (decision)",
    "ok": true,
    "sample": [
-    "18 pt is for the panel's name and the adjusted values only: \"تتسع الاحتجاجات في تونس منذ\"",
-    "18 pt is for the panel's name and the adjusted values only: \"17\"",
-    "18 pt is for the panel's name and the adjusted values only: \"ديسمبر بعد أن أحرق شاب نفسه في سيدي بوزيد. يطالب المحتجون بفرص عمل وبخفض الأسعار، وتنقل القنوات العربية ما يجري كل يوم. يرى مستشاروك أن البطالة وارتفاع الأسعار في مصر قد يجعلان الشارع يتأثر بما يحدث.\""
+    "ellipsis on \"احتجاجات في تونس\"",
+    "ellipsis on \"الوقت متوقف\"",
+    "clipped text (top): \"·\" 761.77..771.3 y 84..101"
    ]
   },
   {
    "name": "clipped text (decision)",
    "ok": true,
    "sample": [
-    "clipped text (sides): \"تتسع الاحتجاجات في تونس منذ\" 782.97..921 y 117..134",
-    "text outside the sheet's 12 pt padding: \"تتسع الاحتجاجات في تونس منذ\"",
-    "clipped text (sides): \"ديسمبر بعد أن أحرق شاب نفسه في سيدي بوزيد. يطالب المحتجون بفرص عمل وبخفض الأسعار، وتنقل القنوات العربية ما يجري كل يوم. يرى مستشاروك أن البطالة وارتفاع الأسعار في مصر قد يجعلان الشارع يتأثر بما يحدث.\" 549.66..921 y 135..152"
+    "ellipsis on \"احتجاجات في تونس\"",
+    "ellipsis on \"الوقت متوقف\"",
+    "clipped text (top): \"·\" 761.77..771.3 y 84..101"
    ]
   },
   {
@@ -439,197 +518,216 @@
    "name": "faint text (decision)",
    "ok": true,
    "sample": [
-    "brief text not fully visible: تتسع الاحتجاجات في تونس منذ 17 ديسمبر بعد أن أحرق شاب نفسه في سيدي بوزيد. يطالب المحتجون بفرص عمل وبخفض الأسعار، وتنقل القنوات العربية ما يجري كل يوم. يرى مستشاروك أن البطالة وارتفاع الأسعار في مصر قد يجعلان الشارع يتأثر بما يحدث.",
-    "brief text cannot be scrolled clear of the fades: تتسع الاحتجاجات في تونس منذ 17 ديسمبر بعد أن أحرق شاب نفسه في سيدي بوزيد. يطالب المحتجون بفرص عمل وبخفض الأسعار، وتنقل القنوات العربية ما يجري كل يوم. يرى مستشاروك أن البطالة وارتفاع الأسعار في مصر قد يجعلان الشارع يتأثر بما يحدث.",
-    "contrast 2.98 for \"تتسع الاحتجاجات في تونس \""
+    "ellipsis on \"احتجاجات في تونس\"",
+    "ellipsis on \"الوقت متوقف\"",
+    "clipped text (top): \"·\" 761.77..771.3 y 84..101"
    ]
   },
   {
    "name": "% before its number (decision)",
    "ok": true,
    "sample": [
-    "% shown before its number: \"نسبة 20%\"",
-    "the text is not the brief's",
-    "brief text missing: تتسع الاحتجاجات في تونس منذ 17 ديسمبر بعد أن أحرق شاب نفسه في سيدي بوزيد. يطالب المحتجون بفرص عمل وبخفض الأسعار، وتنقل القنوات العربية ما يجري كل يوم. يرى مستشاروك أن البطالة وارتفاع الأسعار في مصر قد يجعلان الشارع يتأثر بما يحدث."
+    "ellipsis on \"احتجاجات في تونس\"",
+    "ellipsis on \"الوقت متوقف\"",
+    "clipped text (top): \"·\" 761.77..771.3 y 84..101"
    ]
   },
   {
    "name": "game running",
    "ok": true,
    "sample": [
-    "the game is not shown paused (play glyph and words)"
+    "ellipsis on \"احتجاجات في تونس\"",
+    "ellipsis on \"الوقت متوقف\"",
+    "clipped text (top): \"·\" 761.77..771.3 y 84..101"
    ]
   },
   {
    "name": "pause unsaid",
    "ok": true,
    "sample": [
-    "the sheet does not say the time is stopped",
-    "brief text missing: الوقت متوقف · الافتراضي بعد 7 أيام",
-    "brief text missing: الوقت متوقف · الافتراضي بعد 7 أيام"
+    "ellipsis on \"احتجاجات في تونس\"",
+    "ellipsis on \"الآن\"",
+    "clipped text (top): \"·\" 807.08..816.61 y 84..101"
    ]
   },
   {
    "name": "text not the brief",
    "ok": true,
    "sample": [
-    "the text is not the brief's",
-    "brief text missing: تتسع الاحتجاجات في تونس منذ 17 ديسمبر بعد أن أحرق شاب نفسه في سيدي بوزيد. يطالب المحتجون بفرص عمل وبخفض الأسعار، وتنقل القنوات العربية ما يجري كل يوم. يرى مستشاروك أن البطالة وارتفاع الأسعار في مصر قد يجعلان الشارع يتأثر بما يحدث.",
-    "brief text missing: تتسع الاحتجاجات في تونس منذ 17 ديسمبر بعد أن أحرق شاب نفسه في سيدي بوزيد. يطالب المحتجون بفرص عمل وبخفض الأسعار، وتنقل القنوات العربية ما يجري كل يوم. يرى مستشاروك أن البطالة وارتفاع الأسعار في مصر قد يجعلان الشارع يتأثر بما يحدث."
+    "ellipsis on \"احتجاجات في تونس\"",
+    "ellipsis on \"الوقت متوقف\"",
+    "clipped text (top): \"·\" 761.77..771.3 y 84..101"
    ]
   },
   {
    "name": "options reordered",
    "ok": true,
    "sample": [
-    "option 1 is «تشديد الانتشار الأمني · لا كلفة» (want «دعم أكبر للخبز · »)",
-    "option 1: the chip is «down الاضطرابات −2» (want «down الاضطرابات -3»)",
-    "option 1: the cost is «down الشرعية −2» (want «up العجز 500»)"
+    "ellipsis on \"احتجاجات في تونس\"",
+    "ellipsis on \"الوقت متوقف\"",
+    "clipped text (top): \"·\" 761.77..771.3 y 84..101"
    ]
   },
   {
    "name": "chip arrow against its sign",
    "ok": true,
    "sample": [
-    "«دعم أكبر للخبز»: the chip's arrow does not agree with its sign",
-    "option 1: the chip is «up الاضطرابات −3» (want «down الاضطرابات -3»)",
-    "option 1: an arrow against its sign"
+    "ellipsis on \"احتجاجات في تونس\"",
+    "ellipsis on \"الوقت متوقف\"",
+    "clipped text (top): \"·\" 761.77..771.3 y 84..101"
    ]
   },
   {
    "name": "a cost not amber",
    "ok": true,
    "sample": [
-    "option 1: a cost not amber with its arrow",
-    "option 2: a cost not amber with its arrow",
-    "option 4: a cost not amber with its arrow"
+    "ellipsis on \"احتجاجات في تونس\"",
+    "ellipsis on \"الوقت متوقف\"",
+    "clipped text (top): \"·\" 761.77..771.3 y 84..101"
    ]
   },
   {
    "name": "a cost arrow not amber",
    "ok": true,
    "sample": [
-    "option 1: a cost not amber with its arrow",
-    "option 2: a cost not amber with its arrow",
-    "option 4: a cost not amber with its arrow"
+    "ellipsis on \"احتجاجات في تونس\"",
+    "ellipsis on \"الوقت متوقف\"",
+    "clipped text (top): \"·\" 761.77..771.3 y 84..101"
    ]
   },
   {
    "name": "effects heard backwards",
    "ok": true,
    "sample": [
-    "a11y: option 1 does not say «الاضطرابات»'s direction and whether it is better or worse",
-    "a11y: option 1 does not say «العجز»'s direction and whether it is better or worse"
+    "ellipsis on \"احتجاجات في تونس\"",
+    "ellipsis on \"الوقت متوقف\"",
+    "clipped text (top): \"·\" 761.77..771.3 y 84..101"
    ]
   },
   {
    "name": "better and worse swapped",
    "ok": true,
    "sample": [
-    "a11y: option 2 does not say «الاضطرابات»'s direction and whether it is better or worse",
-    "a11y: option 2 does not say «الشرعية»'s direction and whether it is better or worse"
+    "ellipsis on \"احتجاجات في تونس\"",
+    "ellipsis on \"الوقت متوقف\"",
+    "clipped text (top): \"·\" 761.77..771.3 y 84..101"
    ]
   },
   {
    "name": "two defaults",
    "ok": true,
    "sample": [
-    "the default is not exactly one option, named on screen and in VoiceOver"
+    "ellipsis on \"احتجاجات في تونس\"",
+    "ellipsis on \"الوقت متوقف\"",
+    "clipped text (top): \"·\" 761.77..771.3 y 84..101"
    ]
   },
   {
    "name": "deficit without its unit",
    "ok": true,
    "sample": [
-    "the deficit's rise is not shown with its unit and period (مليون $ سنويًا)",
-    "brief text missing: العجز +500 مليون $ سنويًا",
-    "brief text missing: العجز +500 مليون $ سنويًا"
+    "ellipsis on \"احتجاجات في تونس\"",
+    "ellipsis on \"الوقت متوقف\"",
+    "clipped text (top): \"·\" 761.77..771.3 y 84..101"
    ]
   },
   {
    "name": "the subsidy beyond the bread line",
    "ok": true,
    "sample": [
-    "money unit: «3500 مليون $» (1000 millions and more are billions)",
-    "a11y: «دعم أكبر للخبز» does not read its numbers",
-    "a11y: «دعم أكبر للخبز والتموين:» does not read all it shows: 3500"
+    "ellipsis on \"احتجاجات في تونس\"",
+    "ellipsis on \"الوقت متوقف\"",
+    "clipped text (top): \"·\" 761.77..771.3 y 84..101"
    ]
   },
   {
    "name": "expiry off the header",
    "ok": true,
    "sample": [
-    "the header does not show the expiry and its default",
-    "brief text missing: الوقت متوقف · الافتراضي بعد 7 أيام",
-    "brief text missing: الوقت متوقف · الافتراضي بعد 7 أيام"
+    "ellipsis on \"احتجاجات في تونس\"",
+    "ellipsis on \"الوقت متوقف\"",
+    "the header does not show the expiry and its default"
    ]
   },
   {
    "name": "an option marked main",
    "ok": true,
    "sample": [
-    "an option is marked as the main choice"
+    "ellipsis on \"احتجاجات في تونس\"",
+    "ellipsis on \"الوقت متوقف\"",
+    "clipped text (top): \"·\" 761.77..771.3 y 84..101"
    ]
   },
   {
    "name": "header without its image",
    "ok": true,
    "sample": [
-    "the header strip is not the owner's category image"
+    "ellipsis on \"احتجاجات في تونس\"",
+    "ellipsis on \"الوقت متوقف\"",
+    "clipped text (top): \"·\" 761.77..771.3 y 84..101"
    ]
   },
   {
    "name": "a cost line hidden",
    "ok": true,
    "sample": [
-    "brief text missing: 10 من رأس المال السياسي"
+    "ellipsis on \"احتجاجات في تونس\"",
+    "ellipsis on \"الوقت متوقف\"",
+    "clipped text (top): \"·\" 761.77..771.3 y 84..101"
    ]
   },
   {
    "name": "a chip hidden",
    "ok": true,
    "sample": [
-    "brief text cannot be scrolled clear of the fades: الاضطرابات −2"
+    "ellipsis on \"احتجاجات في تونس\"",
+    "ellipsis on \"الوقت متوقف\"",
+    "clipped text (top): \"·\" 761.77..771.3 y 84..101"
    ]
   },
   {
    "name": "bell silent",
    "ok": true,
    "sample": [
-    "a11y: the bell does not read its count"
+    "ellipsis on \"احتجاجات في تونس\"",
+    "ellipsis on \"الوقت متوقف\"",
+    "clipped text (top): \"·\" 761.77..771.3 y 84..101"
    ]
   },
   {
    "name": "capital beyond the panel",
    "ok": true,
    "sample": [
-    "a11y: «حوار مع النقابات والأحزاب» does not read its numbers",
-    "a11y: «حوار مع النقابات والأحزا» does not read all it shows: 100",
-    "option 3 is «حوار مع النقابات والأحزاب · 100 من رأس المال السياسي» (want «حوار مع النقابات والأحزاب · 10 من رأس المال السياسي»)"
+    "ellipsis on \"احتجاجات في تونس\"",
+    "ellipsis on \"الوقت متوقف\"",
+    "clipped text (top): \"·\" 761.77..771.3 y 84..101"
    ]
   },
   {
    "name": "later silent on time",
    "ok": true,
    "sample": [
-    "a11y: «لاحقًا: يبقى القرار في ا» does not read all it shows: يستأنف الوقت",
-    "no «لاحقًا» that keeps the decision in the notifications, resumes time and says the expiry"
+    "ellipsis on \"احتجاجات في تونس\"",
+    "ellipsis on \"الوقت متوقف\"",
+    "clipped text (top): \"·\" 761.77..771.3 y 84..101"
    ]
   },
   {
    "name": "no later",
    "ok": true,
    "sample": [
-    "no «لاحقًا» that keeps the decision in the notifications, resumes time and says the expiry",
-    "brief text missing: لاحقًا",
-    "brief text missing: يبقى في الإشعارات · يستأنف الوقت"
+    "ellipsis on \"احتجاجات في تونس\"",
+    "ellipsis on \"الوقت متوقف\"",
+    "clipped text (top): \"·\" 761.77..771.3 y 84..101"
    ]
   },
   {
    "name": "close silent on putting off",
    "ok": true,
    "sample": [
-    "a11y: the close button does not say it puts the decision off and resumes time"
+    "ellipsis on \"احتجاجات في تونس\"",
+    "ellipsis on \"الوقت متوقف\"",
+    "clipped text (top): \"·\" 761.77..771.3 y 84..101"
    ]
   },
   {

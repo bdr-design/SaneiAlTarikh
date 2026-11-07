@@ -1,7 +1,7 @@
 {
  "se": {
   "device": "667x375 side 0 bottom 0 none",
-  "renderedAt": "2026-11-07T15:42:35.395Z",
+  "renderedAt": "2026-11-07T17:38:51.936Z",
   "inputs": {
    "files": [
     "index.html",
@@ -25,12 +25,45 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "37f591fa4b65cb1d2b0ec0ea80266bc40086b398"
+   "sha1": "32cf4d3bb4e8c30dddaaf4ec019369d8e2b979af"
   },
-  "issues": [],
+  "issues": [
+   "newop: ellipsis on \"عملية جديدة\"",
+   "newop: ellipsis on \"السودان\"",
+   "newop: clipped text (top): \"·\" 551.63..561.16 y 84..101",
+   "newop: ellipsis on \"العمليات\"",
+   "newop: clipped text (top): \"2\" 503.64..510.55 y 84..101",
+   "newop: ellipsis on \"من\"",
+   "newop: clipped text (top): \"4\" 477.25..484.16 y 84..101",
+   "newop: ellipsis on \"قيد التنفيذ\"",
+   "newop_end: ellipsis on \"عملية جديدة\"",
+   "newop_end: ellipsis on \"السودان\"",
+   "newop_end: clipped text (top): \"·\" 551.63..561.16 y 84..101",
+   "newop_end: ellipsis on \"العمليات\"",
+   "newop_end: clipped text (top): \"2\" 503.64..510.55 y 84..101",
+   "newop_end: ellipsis on \"من\"",
+   "newop_end: clipped text (top): \"4\" 477.25..484.16 y 84..101",
+   "newop_end: ellipsis on \"قيد التنفيذ\"",
+   "newop_at131: ellipsis on \"عملية جديدة\"",
+   "newop_at131: ellipsis on \"السودان\"",
+   "newop_at131: clipped text (top): \"·\" 551.63..561.16 y 84..101",
+   "newop_at131: ellipsis on \"العمليات\"",
+   "newop_at131: clipped text (top): \"2\" 503.64..510.55 y 84..101",
+   "newop_at131: ellipsis on \"من\"",
+   "newop_at131: clipped text (top): \"4\" 477.25..484.16 y 84..101",
+   "newop_at131: ellipsis on \"قيد التنفيذ\"",
+   "newop_at262: ellipsis on \"عملية جديدة\"",
+   "newop_at262: ellipsis on \"السودان\"",
+   "newop_at262: clipped text (top): \"·\" 551.63..561.16 y 84..101",
+   "newop_at262: ellipsis on \"العمليات\"",
+   "newop_at262: clipped text (top): \"2\" 503.64..510.55 y 84..101",
+   "newop_at262: ellipsis on \"من\"",
+   "newop_at262: clipped text (top): \"4\" 477.25..484.16 y 84..101",
+   "newop_at262: ellipsis on \"قيد التنفيذ\""
+  ],
   "views": {
    "newop": {
-    "issueCount": 0,
+    "issueCount": 8,
     "png": true,
     "fit": {
      "top": {
@@ -460,7 +493,7 @@
     ]
    },
    "newop_end": {
-    "issueCount": 0,
+    "issueCount": 8,
     "png": true,
     "fit": {
      "top": {
@@ -947,7 +980,7 @@
     ]
    },
    "newop_at131": {
-    "issueCount": 0,
+    "issueCount": 8,
     "png": false,
     "fit": {
      "top": {
@@ -1387,7 +1420,7 @@
     ]
    },
    "newop_at262": {
-    "issueCount": 0,
+    "issueCount": 8,
     "png": false,
     "fit": {
      "top": {
@@ -1875,18 +1908,18 @@
    "_build/se_newop_end.png"
   ],
   "pngSha1": {
-   "se.png": "468d3e4548a118dbba5e5edfa751cfc56baf1c20",
-   "_build/se_hit.png": "8c9b525b07505406fc137b72fa8d26ba438f4aa6",
-   "_build/se_newop_end.png": "be79de22d1c4356f03bf515cfb8ec051354d131f"
+   "se.png": "52773b45c4a9357ca736639b996f5bb8c1ed4125",
+   "_build/se_hit.png": "67813935a7ed7fd7c0c3fb2ffe7173fa8844767b",
+   "_build/se_newop_end.png": "54c62060b740eb8a8f6e46d1cc83d2b960b42495"
   },
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 0
+  "issueCount": 32
  },
  "mini": {
   "device": "812x375 side 50 bottom 21 notch",
-  "renderedAt": "2026-11-07T15:42:43.040Z",
+  "renderedAt": "2026-11-07T17:38:59.608Z",
   "inputs": {
    "files": [
     "index.html",
@@ -1910,12 +1943,45 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "37f591fa4b65cb1d2b0ec0ea80266bc40086b398"
+   "sha1": "32cf4d3bb4e8c30dddaaf4ec019369d8e2b979af"
   },
-  "issues": [],
+  "issues": [
+   "newop: ellipsis on \"عملية جديدة\"",
+   "newop: ellipsis on \"السودان\"",
+   "newop: clipped text (top): \"·\" 654.63..664.16 y 84..101",
+   "newop: ellipsis on \"العمليات\"",
+   "newop: clipped text (top): \"2\" 606.64..613.55 y 84..101",
+   "newop: ellipsis on \"من\"",
+   "newop: clipped text (top): \"4\" 580.25..587.16 y 84..101",
+   "newop: ellipsis on \"قيد التنفيذ\"",
+   "newop_end: ellipsis on \"عملية جديدة\"",
+   "newop_end: ellipsis on \"السودان\"",
+   "newop_end: clipped text (top): \"·\" 654.63..664.16 y 84..101",
+   "newop_end: ellipsis on \"العمليات\"",
+   "newop_end: clipped text (top): \"2\" 606.64..613.55 y 84..101",
+   "newop_end: ellipsis on \"من\"",
+   "newop_end: clipped text (top): \"4\" 580.25..587.16 y 84..101",
+   "newop_end: ellipsis on \"قيد التنفيذ\"",
+   "newop_at117: ellipsis on \"عملية جديدة\"",
+   "newop_at117: ellipsis on \"السودان\"",
+   "newop_at117: clipped text (top): \"·\" 654.63..664.16 y 84..101",
+   "newop_at117: ellipsis on \"العمليات\"",
+   "newop_at117: clipped text (top): \"2\" 606.64..613.55 y 84..101",
+   "newop_at117: ellipsis on \"من\"",
+   "newop_at117: clipped text (top): \"4\" 580.25..587.16 y 84..101",
+   "newop_at117: ellipsis on \"قيد التنفيذ\"",
+   "newop_at234: ellipsis on \"عملية جديدة\"",
+   "newop_at234: ellipsis on \"السودان\"",
+   "newop_at234: clipped text (top): \"·\" 654.63..664.16 y 84..101",
+   "newop_at234: ellipsis on \"العمليات\"",
+   "newop_at234: clipped text (top): \"2\" 606.64..613.55 y 84..101",
+   "newop_at234: ellipsis on \"من\"",
+   "newop_at234: clipped text (top): \"4\" 580.25..587.16 y 84..101",
+   "newop_at234: ellipsis on \"قيد التنفيذ\""
+  ],
   "views": {
    "newop": {
-    "issueCount": 0,
+    "issueCount": 8,
     "png": true,
     "fit": {
      "top": {
@@ -2352,7 +2418,7 @@
     ]
    },
    "newop_end": {
-    "issueCount": 0,
+    "issueCount": 8,
     "png": true,
     "fit": {
      "top": {
@@ -2846,7 +2912,7 @@
     ]
    },
    "newop_at117": {
-    "issueCount": 0,
+    "issueCount": 8,
     "png": false,
     "fit": {
      "top": {
@@ -3263,7 +3329,7 @@
     ]
    },
    "newop_at234": {
-    "issueCount": 0,
+    "issueCount": 8,
     "png": false,
     "fit": {
      "top": {
@@ -3713,18 +3779,18 @@
    "_build/mini_newop_end.png"
   ],
   "pngSha1": {
-   "mini.png": "adcd2bfae8c62cc6147f65281b77f52f9b1acba1",
-   "_build/mini_hit.png": "0de0b91fe37facb6dccd80b4b0dd31c8369ef352",
-   "_build/mini_newop_end.png": "b16ffbe2b90c29c1a3f2de42ee7ecb6d88c6dc6a"
+   "mini.png": "cdc3abdcbcf57ba8c016288f9dd137fdc95d7c74",
+   "_build/mini_hit.png": "378828dc23dd28c4da953bd32aeb22f5b591b425",
+   "_build/mini_newop_end.png": "fd5597f68b73787e75c462bb5090d307e70bbaaa"
   },
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 0
+  "issueCount": 32
  },
  "i14": {
   "device": "844x390 side 47 bottom 21 notch",
-  "renderedAt": "2026-11-07T15:42:50.666Z",
+  "renderedAt": "2026-11-07T17:39:07.631Z",
   "inputs": {
    "files": [
     "index.html",
@@ -3748,12 +3814,45 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "37f591fa4b65cb1d2b0ec0ea80266bc40086b398"
+   "sha1": "32cf4d3bb4e8c30dddaaf4ec019369d8e2b979af"
   },
-  "issues": [],
+  "issues": [
+   "newop: ellipsis on \"عملية جديدة\"",
+   "newop: ellipsis on \"السودان\"",
+   "newop: clipped text (top): \"·\" 689.63..699.16 y 84..101",
+   "newop: ellipsis on \"العمليات\"",
+   "newop: clipped text (top): \"2\" 641.64..648.55 y 84..101",
+   "newop: ellipsis on \"من\"",
+   "newop: clipped text (top): \"4\" 615.25..622.16 y 84..101",
+   "newop: ellipsis on \"قيد التنفيذ\"",
+   "newop_end: ellipsis on \"عملية جديدة\"",
+   "newop_end: ellipsis on \"السودان\"",
+   "newop_end: clipped text (top): \"·\" 689.63..699.16 y 84..101",
+   "newop_end: ellipsis on \"العمليات\"",
+   "newop_end: clipped text (top): \"2\" 641.64..648.55 y 84..101",
+   "newop_end: ellipsis on \"من\"",
+   "newop_end: clipped text (top): \"4\" 615.25..622.16 y 84..101",
+   "newop_end: ellipsis on \"قيد التنفيذ\"",
+   "newop_at132: ellipsis on \"عملية جديدة\"",
+   "newop_at132: ellipsis on \"السودان\"",
+   "newop_at132: clipped text (top): \"·\" 689.63..699.16 y 84..101",
+   "newop_at132: ellipsis on \"العمليات\"",
+   "newop_at132: clipped text (top): \"2\" 641.64..648.55 y 84..101",
+   "newop_at132: ellipsis on \"من\"",
+   "newop_at132: clipped text (top): \"4\" 615.25..622.16 y 84..101",
+   "newop_at132: ellipsis on \"قيد التنفيذ\"",
+   "newop_at264: ellipsis on \"عملية جديدة\"",
+   "newop_at264: ellipsis on \"السودان\"",
+   "newop_at264: clipped text (top): \"·\" 689.63..699.16 y 84..101",
+   "newop_at264: ellipsis on \"العمليات\"",
+   "newop_at264: clipped text (top): \"2\" 641.64..648.55 y 84..101",
+   "newop_at264: ellipsis on \"من\"",
+   "newop_at264: clipped text (top): \"4\" 615.25..622.16 y 84..101",
+   "newop_at264: ellipsis on \"قيد التنفيذ\""
+  ],
   "views": {
    "newop": {
-    "issueCount": 0,
+    "issueCount": 8,
     "png": true,
     "fit": {
      "top": {
@@ -4300,7 +4399,7 @@
     ]
    },
    "newop_end": {
-    "issueCount": 0,
+    "issueCount": 8,
     "png": true,
     "fit": {
      "top": {
@@ -4904,7 +5003,7 @@
     ]
    },
    "newop_at132": {
-    "issueCount": 0,
+    "issueCount": 8,
     "png": false,
     "fit": {
      "top": {
@@ -5461,7 +5560,7 @@
     ]
    },
    "newop_at264": {
-    "issueCount": 0,
+    "issueCount": 8,
     "png": false,
     "fit": {
      "top": {
@@ -6066,18 +6165,18 @@
    "_build/i14_newop_end.png"
   ],
   "pngSha1": {
-   "i14.png": "827da05f1de4abeb556d5ef032450b6d9ad26724",
-   "_build/i14_hit.png": "fcdbeaf8bd84a4239cd7fb947376479f79487cd3",
-   "_build/i14_newop_end.png": "3e5759f3ab23f022cd3978a1eca26b561cf7ff70"
+   "i14.png": "f742e6479a48303e0ade9d54c67f687ae598a701",
+   "_build/i14_hit.png": "89341c5161a450a7d8e92e672cee2b47b00adbbf",
+   "_build/i14_newop_end.png": "3cfb497a351b3cffb107c4316b40097f62272784"
   },
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 0
+  "issueCount": 32
  },
  "i16": {
   "device": "852x393 side 59 bottom 21 island",
-  "renderedAt": "2026-11-07T15:42:58.604Z",
+  "renderedAt": "2026-11-07T17:39:15.623Z",
   "inputs": {
    "files": [
     "index.html",
@@ -6101,12 +6200,45 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "37f591fa4b65cb1d2b0ec0ea80266bc40086b398"
+   "sha1": "32cf4d3bb4e8c30dddaaf4ec019369d8e2b979af"
   },
-  "issues": [],
+  "issues": [
+   "newop: ellipsis on \"عملية جديدة\"",
+   "newop: ellipsis on \"السودان\"",
+   "newop: clipped text (top): \"·\" 685.63..695.16 y 84..101",
+   "newop: ellipsis on \"العمليات\"",
+   "newop: clipped text (top): \"2\" 637.64..644.55 y 84..101",
+   "newop: ellipsis on \"من\"",
+   "newop: clipped text (top): \"4\" 611.25..618.16 y 84..101",
+   "newop: ellipsis on \"قيد التنفيذ\"",
+   "newop_end: ellipsis on \"عملية جديدة\"",
+   "newop_end: ellipsis on \"السودان\"",
+   "newop_end: clipped text (top): \"·\" 685.63..695.16 y 84..101",
+   "newop_end: ellipsis on \"العمليات\"",
+   "newop_end: clipped text (top): \"2\" 637.64..644.55 y 84..101",
+   "newop_end: ellipsis on \"من\"",
+   "newop_end: clipped text (top): \"4\" 611.25..618.16 y 84..101",
+   "newop_end: ellipsis on \"قيد التنفيذ\"",
+   "newop_at135: ellipsis on \"عملية جديدة\"",
+   "newop_at135: ellipsis on \"السودان\"",
+   "newop_at135: clipped text (top): \"·\" 685.63..695.16 y 84..101",
+   "newop_at135: ellipsis on \"العمليات\"",
+   "newop_at135: clipped text (top): \"2\" 637.64..644.55 y 84..101",
+   "newop_at135: ellipsis on \"من\"",
+   "newop_at135: clipped text (top): \"4\" 611.25..618.16 y 84..101",
+   "newop_at135: ellipsis on \"قيد التنفيذ\"",
+   "newop_at270: ellipsis on \"عملية جديدة\"",
+   "newop_at270: ellipsis on \"السودان\"",
+   "newop_at270: clipped text (top): \"·\" 685.63..695.16 y 84..101",
+   "newop_at270: ellipsis on \"العمليات\"",
+   "newop_at270: clipped text (top): \"2\" 637.64..644.55 y 84..101",
+   "newop_at270: ellipsis on \"من\"",
+   "newop_at270: clipped text (top): \"4\" 611.25..618.16 y 84..101",
+   "newop_at270: ellipsis on \"قيد التنفيذ\""
+  ],
   "views": {
    "newop": {
-    "issueCount": 0,
+    "issueCount": 8,
     "png": true,
     "fit": {
      "top": {
@@ -6642,7 +6774,7 @@
     ]
    },
    "newop_end": {
-    "issueCount": 0,
+    "issueCount": 8,
     "png": true,
     "fit": {
      "top": {
@@ -7235,7 +7367,7 @@
     ]
    },
    "newop_at135": {
-    "issueCount": 0,
+    "issueCount": 8,
     "png": false,
     "fit": {
      "top": {
@@ -7781,7 +7913,7 @@
     ]
    },
    "newop_at270": {
-    "issueCount": 0,
+    "issueCount": 8,
     "png": false,
     "fit": {
      "top": {
@@ -8375,18 +8507,18 @@
    "_build/i16_newop_end.png"
   ],
   "pngSha1": {
-   "i16.png": "21540259638efd415b2337ad7a43b3eb3fd11607",
-   "_build/i16_hit.png": "93abe6a09869a90b5a01e048b94a4c905c2dbd38",
-   "_build/i16_newop_end.png": "ba2020d212c87bea493e31049afa809575490b13"
+   "i16.png": "0322c1bdd7ccbc4507f19fbef832991d603d3af1",
+   "_build/i16_hit.png": "6c6c7fd299bb2b7907d4d4f65c5977363f4257ee",
+   "_build/i16_newop_end.png": "e1d02ffbe9b9eff06888839fbec5c546549ae651"
   },
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 0
+  "issueCount": 32
  },
  "i16pro": {
   "device": "874x402 side 62 bottom 21 island",
-  "renderedAt": "2026-11-07T15:43:06.722Z",
+  "renderedAt": "2026-11-07T17:39:23.789Z",
   "inputs": {
    "files": [
     "index.html",
@@ -8410,12 +8542,37 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "37f591fa4b65cb1d2b0ec0ea80266bc40086b398"
+   "sha1": "32cf4d3bb4e8c30dddaaf4ec019369d8e2b979af"
   },
-  "issues": [],
+  "issues": [
+   "newop: ellipsis on \"عملية جديدة\"",
+   "newop: ellipsis on \"السودان\"",
+   "newop: clipped text (top): \"·\" 704.63..714.16 y 84..101",
+   "newop: ellipsis on \"العمليات\"",
+   "newop: clipped text (top): \"2\" 656.64..663.55 y 84..101",
+   "newop: ellipsis on \"من\"",
+   "newop: clipped text (top): \"4\" 630.25..637.16 y 84..101",
+   "newop: ellipsis on \"قيد التنفيذ\"",
+   "newop_end: ellipsis on \"عملية جديدة\"",
+   "newop_end: ellipsis on \"السودان\"",
+   "newop_end: clipped text (top): \"·\" 704.63..714.16 y 84..101",
+   "newop_end: ellipsis on \"العمليات\"",
+   "newop_end: clipped text (top): \"2\" 656.64..663.55 y 84..101",
+   "newop_end: ellipsis on \"من\"",
+   "newop_end: clipped text (top): \"4\" 630.25..637.16 y 84..101",
+   "newop_end: ellipsis on \"قيد التنفيذ\"",
+   "newop_at144: ellipsis on \"عملية جديدة\"",
+   "newop_at144: ellipsis on \"السودان\"",
+   "newop_at144: clipped text (top): \"·\" 704.63..714.16 y 84..101",
+   "newop_at144: ellipsis on \"العمليات\"",
+   "newop_at144: clipped text (top): \"2\" 656.64..663.55 y 84..101",
+   "newop_at144: ellipsis on \"من\"",
+   "newop_at144: clipped text (top): \"4\" 630.25..637.16 y 84..101",
+   "newop_at144: ellipsis on \"قيد التنفيذ\""
+  ],
   "views": {
    "newop": {
-    "issueCount": 0,
+    "issueCount": 8,
     "png": true,
     "fit": {
      "top": {
@@ -8962,7 +9119,7 @@
     ]
    },
    "newop_end": {
-    "issueCount": 0,
+    "issueCount": 8,
     "png": true,
     "fit": {
      "top": {
@@ -9591,7 +9748,7 @@
     ]
    },
    "newop_at144": {
-    "issueCount": 0,
+    "issueCount": 8,
     "png": false,
     "fit": {
      "top": {
@@ -10189,18 +10346,18 @@
    "_build/i16pro_newop_end.png"
   ],
   "pngSha1": {
-   "i16pro.png": "5251a0194c5665c5b2ce02abe97e79fa228791cf",
-   "_build/i16pro_hit.png": "c74acea889ef439aa58ff34958ffacb3e7a1edd6",
-   "_build/i16pro_newop_end.png": "cc285af07955d27785f1d757cc7c5c7ac901dd6c"
+   "i16pro.png": "9433198afa52d93eee6248d6499a61346214d206",
+   "_build/i16pro_hit.png": "226c0c76b357c3bb7b6563d43348dca99637a7f8",
+   "_build/i16pro_newop_end.png": "48044fae1ef330dd19ab48a937384735d8ecacee"
   },
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 0
+  "issueCount": 24
  },
  "i11": {
   "device": "896x414 side 48 bottom 21 notch",
-  "renderedAt": "2026-11-07T15:43:13.818Z",
+  "renderedAt": "2026-11-07T17:39:30.773Z",
   "inputs": {
    "files": [
     "index.html",
@@ -10224,12 +10381,37 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "37f591fa4b65cb1d2b0ec0ea80266bc40086b398"
+   "sha1": "32cf4d3bb4e8c30dddaaf4ec019369d8e2b979af"
   },
-  "issues": [],
+  "issues": [
+   "newop: ellipsis on \"عملية جديدة\"",
+   "newop: ellipsis on \"السودان\"",
+   "newop: clipped text (top): \"·\" 740.63..750.16 y 84..101",
+   "newop: ellipsis on \"العمليات\"",
+   "newop: clipped text (top): \"2\" 692.64..699.55 y 84..101",
+   "newop: ellipsis on \"من\"",
+   "newop: clipped text (top): \"4\" 666.25..673.16 y 84..101",
+   "newop: ellipsis on \"قيد التنفيذ\"",
+   "newop_end: ellipsis on \"عملية جديدة\"",
+   "newop_end: ellipsis on \"السودان\"",
+   "newop_end: clipped text (top): \"·\" 740.63..750.16 y 84..101",
+   "newop_end: ellipsis on \"العمليات\"",
+   "newop_end: clipped text (top): \"2\" 692.64..699.55 y 84..101",
+   "newop_end: ellipsis on \"من\"",
+   "newop_end: clipped text (top): \"4\" 666.25..673.16 y 84..101",
+   "newop_end: ellipsis on \"قيد التنفيذ\"",
+   "newop_at156: ellipsis on \"عملية جديدة\"",
+   "newop_at156: ellipsis on \"السودان\"",
+   "newop_at156: clipped text (top): \"·\" 740.63..750.16 y 84..101",
+   "newop_at156: ellipsis on \"العمليات\"",
+   "newop_at156: clipped text (top): \"2\" 692.64..699.55 y 84..101",
+   "newop_at156: ellipsis on \"من\"",
+   "newop_at156: clipped text (top): \"4\" 666.25..673.16 y 84..101",
+   "newop_at156: ellipsis on \"قيد التنفيذ\""
+  ],
   "views": {
    "newop": {
-    "issueCount": 0,
+    "issueCount": 8,
     "png": true,
     "fit": {
      "top": {
@@ -10780,7 +10962,7 @@
     ]
    },
    "newop_end": {
-    "issueCount": 0,
+    "issueCount": 8,
     "png": true,
     "fit": {
      "top": {
@@ -11413,7 +11595,7 @@
     ]
    },
    "newop_at156": {
-    "issueCount": 0,
+    "issueCount": 8,
     "png": false,
     "fit": {
      "top": {
@@ -11991,18 +12173,18 @@
    "_build/i11_newop_end.png"
   ],
   "pngSha1": {
-   "i11.png": "68dc8d5b3e97f624041b81963bbc92a47215186b",
-   "_build/i11_hit.png": "557d166427ddea378b279e0bcfb75221b5dfc061",
-   "_build/i11_newop_end.png": "a0235db58a8aa6949d3534cbd326393c4b4839f2"
+   "i11.png": "2a93c662f9e0912d3e920220764b45c719c36849",
+   "_build/i11_hit.png": "f0a5d409d6e99c89dbf7c5a1a7d3417c83b1eb59",
+   "_build/i11_newop_end.png": "e7b90f7cfc5b78fda83aedf30676df3120954766"
   },
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 0
+  "issueCount": 24
  },
  "i16promax": {
   "device": "956x440 side 62 bottom 21 island",
-  "renderedAt": "2026-11-07T15:43:20.908Z",
+  "renderedAt": "2026-11-07T17:39:38.094Z",
   "inputs": {
    "files": [
     "index.html",
@@ -12026,12 +12208,37 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "37f591fa4b65cb1d2b0ec0ea80266bc40086b398"
+   "sha1": "32cf4d3bb4e8c30dddaaf4ec019369d8e2b979af"
   },
-  "issues": [],
+  "issues": [
+   "newop: ellipsis on \"عملية جديدة\"",
+   "newop: ellipsis on \"السودان\"",
+   "newop: clipped text (top): \"·\" 786.63..796.16 y 84..101",
+   "newop: ellipsis on \"العمليات\"",
+   "newop: clipped text (top): \"2\" 738.64..745.55 y 84..101",
+   "newop: ellipsis on \"من\"",
+   "newop: clipped text (top): \"4\" 712.25..719.16 y 84..101",
+   "newop: ellipsis on \"قيد التنفيذ\"",
+   "newop_end: ellipsis on \"عملية جديدة\"",
+   "newop_end: ellipsis on \"السودان\"",
+   "newop_end: clipped text (top): \"·\" 786.63..796.16 y 84..101",
+   "newop_end: ellipsis on \"العمليات\"",
+   "newop_end: clipped text (top): \"2\" 738.64..745.55 y 84..101",
+   "newop_end: ellipsis on \"من\"",
+   "newop_end: clipped text (top): \"4\" 712.25..719.16 y 84..101",
+   "newop_end: ellipsis on \"قيد التنفيذ\"",
+   "newop_at182: ellipsis on \"عملية جديدة\"",
+   "newop_at182: ellipsis on \"السودان\"",
+   "newop_at182: clipped text (top): \"·\" 786.63..796.16 y 84..101",
+   "newop_at182: ellipsis on \"العمليات\"",
+   "newop_at182: clipped text (top): \"2\" 738.64..745.55 y 84..101",
+   "newop_at182: ellipsis on \"من\"",
+   "newop_at182: clipped text (top): \"4\" 712.25..719.16 y 84..101",
+   "newop_at182: ellipsis on \"قيد التنفيذ\""
+  ],
   "views": {
    "newop": {
-    "issueCount": 0,
+    "issueCount": 8,
     "png": true,
     "fit": {
      "top": {
@@ -12594,7 +12801,7 @@
     ]
    },
    "newop_end": {
-    "issueCount": 0,
+    "issueCount": 8,
     "png": true,
     "fit": {
      "top": {
@@ -13232,7 +13439,7 @@
     ]
    },
    "newop_at182": {
-    "issueCount": 0,
+    "issueCount": 8,
     "png": false,
     "fit": {
      "top": {
@@ -13840,13 +14047,13 @@
    "_build/i16promax_newop_end.png"
   ],
   "pngSha1": {
-   "i16promax.png": "2b052950367d02b87c436efa8e896a9b9ce14f4b",
-   "_build/i16promax_hit.png": "c1781c2c285faef6a5d193fe027dedbea5f1db0a",
-   "_build/i16promax_newop_end.png": "683b7e59a565b9f05c4671ff683783d27a2a2bbd"
+   "i16promax.png": "25e3bba34827e6d896bd2b2b4c485f59ed0c2a92",
+   "_build/i16promax_hit.png": "dbbae8121f1f8e3ac72e731951d7ca9e3eeb45ce",
+   "_build/i16promax_newop_end.png": "f221a4671e9fe2de101d28dd418ba750c4a68901"
   },
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 0
+  "issueCount": 24
  }
 }

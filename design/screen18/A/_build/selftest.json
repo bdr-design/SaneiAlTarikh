@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-07T16:47:32.091Z",
+ "ranAt": "2026-11-07T17:26:10.407Z",
  "inputs": {
   "files": [
    "index.html",
@@ -22,31 +22,36 @@
    "../../shared/map_mena_d1_overlay.svg",
    "map_overlay_cairo.svg"
   ],
-  "sha1": "09edd35ba65baef40a1c75afdc36cb31182e5804"
+  "sha1": "17d57ede7b8e35f2e65b5cd8225cbe4ec8c95b7e"
  },
  "cleanIssues": {
   "i16promax": [
+   "ellipsis on \"تقرير الأمة\"",
    "ellipsis on \"مصر\"",
    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
    "clipped text (top): \"2011–2100\" 742.67..804.64 y 84..101"
   ],
   "i16promax_report_end": [
+   "ellipsis on \"تقرير الأمة\"",
    "ellipsis on \"مصر\"",
    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
    "clipped text (top): \"2011–2100\" 742.67..804.64 y 84..101"
   ],
   "i16promax coverage": [],
   "se": [
+   "ellipsis on \"تقرير الأمة\"",
    "ellipsis on \"مصر\"",
    "clipped text (top): \"·\" 569.64..579.17 y 84..101",
    "clipped text (top): \"2011–2100\" 507.67..569.64 y 84..101"
   ],
   "se_report_end": [
+   "ellipsis on \"تقرير الأمة\"",
    "ellipsis on \"مصر\"",
    "clipped text (top): \"·\" 569.64..579.17 y 84..101",
    "clipped text (top): \"2011–2100\" 507.67..569.64 y 84..101"
   ],
   "se_report_at131": [
+   "ellipsis on \"تقرير الأمة\"",
    "ellipsis on \"مصر\"",
    "clipped text (top): \"·\" 569.64..579.17 y 84..101",
    "clipped text (top): \"2011–2100\" 507.67..569.64 y 84..101"
@@ -59,8 +64,8 @@
    "ok": true,
    "sample": [
     "font size 17 for \"تقرير الأمة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "ellipsis on \"تقرير الأمة\"",
+    "ellipsis on \"مصر\""
    ]
   },
   {
@@ -68,8 +73,8 @@
    "ok": true,
    "sample": [
     "text colour off-token rgb(136, 153, 170): \"تقرير الأمة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "ellipsis on \"تقرير الأمة\"",
+    "ellipsis on \"مصر\""
    ]
   },
   {
@@ -78,16 +83,16 @@
    "sample": [
     "panel radius تقرير الأمة: 6 (want 12)",
     "radius 6 for .sheet (want 12)",
-    "ellipsis on \"مصر\""
+    "ellipsis on \"تقرير الأمة\""
    ]
   },
   {
    "name": "panel in the side inset",
    "ok": true,
    "sample": [
+    "ellipsis on \"تقرير الأمة\"",
     "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 834.64..844.17 y 84..101",
-    "clipped text (top): \"2011–2100\" 772.67..834.64 y 84..101"
+    "clipped text (top): \"·\" 834.64..844.17 y 84..101"
    ]
   },
   {
@@ -95,8 +100,8 @@
    "ok": true,
    "sample": [
     "panel not opaque: تقرير الأمة rgba(9, 17, 25, 0.66)",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "ellipsis on \"تقرير الأمة\"",
+    "ellipsis on \"مصر\""
    ]
   },
   {
@@ -104,170 +109,170 @@
    "ok": true,
    "sample": [
     "panel not opaque (opacity 0.60): تقرير الأمة",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "ellipsis on \"تقرير الأمة\"",
+    "ellipsis on \"مصر\""
    ]
   },
   {
    "name": "Egypt covered",
    "ok": true,
    "sample": [
+    "ellipsis on \"تقرير الأمة\"",
     "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-    "clipped text (top): \"2011–2100\" 742.67..804.64 y 84..101"
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
    ]
   },
   {
    "name": "map dimmed",
    "ok": true,
    "sample": [
+    "ellipsis on \"تقرير الأمة\"",
     "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-    "clipped text (top): \"2011–2100\" 742.67..804.64 y 84..101"
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
    ]
   },
   {
    "name": "map faded",
    "ok": true,
    "sample": [
+    "ellipsis on \"تقرير الأمة\"",
     "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-    "clipped text (top): \"2011–2100\" 742.67..804.64 y 84..101"
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
    ]
   },
   {
    "name": "scrim over the map",
    "ok": true,
    "sample": [
+    "ellipsis on \"تقرير الأمة\"",
     "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-    "clipped text (top): \"2011–2100\" 742.67..804.64 y 84..101"
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
    ]
   },
   {
    "name": "sheet width",
    "ok": true,
    "sample": [
+    "ellipsis on \"تقرير الأمة\"",
     "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-    "clipped text (top): \"2011–2100\" 742.67..804.64 y 84..101"
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
    ]
   },
   {
    "name": "sheet top",
    "ok": true,
    "sample": [
+    "ellipsis on \"تقرير الأمة\"",
     "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 70..87",
-    "clipped text (top): \"2011–2100\" 742.67..804.64 y 70..87"
+    "clipped text (top): \"·\" 804.64..814.17 y 70..87"
    ]
   },
   {
    "name": "dock hidden although it fits",
    "ok": true,
    "sample": [
+    "ellipsis on \"تقرير الأمة\"",
     "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-    "clipped text (top): \"2011–2100\" 742.67..804.64 y 84..101"
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
    ]
   },
   {
    "name": "dock shown on the SE",
    "ok": true,
    "sample": [
+    "ellipsis on \"تقرير الأمة\"",
     "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 569.64..579.17 y 84..101",
-    "clipped text (top): \"2011–2100\" 507.67..569.64 y 84..101"
+    "clipped text (top): \"·\" 569.64..579.17 y 84..101"
    ]
   },
   {
    "name": "left stack moved",
    "ok": true,
    "sample": [
+    "ellipsis on \"تقرير الأمة\"",
     "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-    "clipped text (top): \"2011–2100\" 742.67..804.64 y 84..101"
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
    ]
   },
   {
    "name": "map label cut",
    "ok": true,
    "sample": [
+    "ellipsis on \"تقرير الأمة\"",
     "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-    "clipped text (top): \"2011–2100\" 742.67..804.64 y 84..101"
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
    ]
   },
   {
    "name": "contrast",
    "ok": true,
    "sample": [
+    "ellipsis on \"تقرير الأمة\"",
     "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-    "clipped text (top): \"2011–2100\" 742.67..804.64 y 84..101"
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
    ]
   },
   {
    "name": "identity line missing",
    "ok": true,
    "sample": [
+    "ellipsis on \"تقرير الأمة\"",
     "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-    "clipped text (top): \"2011–2100\" 742.67..804.64 y 84..101"
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
    ]
   },
   {
    "name": "emblem drawn grey",
    "ok": true,
    "sample": [
+    "ellipsis on \"تقرير الأمة\"",
     "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-    "clipped text (top): \"2011–2100\" 742.67..804.64 y 84..101"
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
    ]
   },
   {
    "name": "section colour on data",
    "ok": true,
    "sample": [
+    "ellipsis on \"تقرير الأمة\"",
     "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-    "clipped text (top): \"2011–2100\" 742.67..804.64 y 84..101"
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
    ]
   },
   {
    "name": "money unit",
    "ok": true,
    "sample": [
+    "ellipsis on \"تقرير الأمة\"",
     "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-    "clipped text (top): \"2011–2100\" 742.67..804.64 y 84..101"
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
    ]
   },
   {
    "name": "sign outside its number",
    "ok": true,
    "sample": [
+    "ellipsis on \"تقرير الأمة\"",
     "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-    "clipped text (top): \"2011–2100\" 742.67..804.64 y 84..101"
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
    ]
   },
   {
    "name": "colour alone",
    "ok": true,
    "sample": [
+    "ellipsis on \"تقرير الأمة\"",
     "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-    "clipped text (top): \"2011–2100\" 742.67..804.64 y 84..101"
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
    ]
   },
   {
    "name": "an image in the sheet",
    "ok": true,
    "sample": [
+    "ellipsis on \"تقرير الأمة\"",
     "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-    "clipped text (top): \"2011–2100\" 742.67..804.64 y 84..101"
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
    ]
   },
   {
@@ -275,35 +280,35 @@
    "ok": true,
    "sample": [
     "close button is not round",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "ellipsis on \"تقرير الأمة\"",
+    "ellipsis on \"مصر\""
    ]
   },
   {
    "name": "label without a role",
    "ok": true,
    "sample": [
+    "ellipsis on \"تقرير الأمة\"",
     "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-    "clipped text (top): \"2011–2100\" 742.67..804.64 y 84..101"
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
    ]
   },
   {
    "name": "brief text hidden",
    "ok": true,
    "sample": [
+    "ellipsis on \"تقرير الأمة\"",
     "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-    "clipped text (top): \"2011–2100\" 742.67..804.64 y 84..101"
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
    ]
   },
   {
    "name": "18 pt misuse",
    "ok": true,
    "sample": [
+    "ellipsis on \"تقرير الأمة\"",
     "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-    "clipped text (top): \"2011–2100\" 742.67..804.64 y 84..101"
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
    ]
   },
   {
@@ -319,117 +324,117 @@
    "name": "text overlap",
    "ok": true,
    "sample": [
+    "ellipsis on \"تقرير الأمة\"",
     "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 70..87",
-    "clipped text (top): \"2011–2100\" 742.67..804.64 y 70..87"
+    "clipped text (top): \"·\" 804.64..814.17 y 70..87"
    ]
   },
   {
    "name": "clipped text",
    "ok": true,
    "sample": [
+    "ellipsis on \"تقرير الأمة\"",
     "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-    "clipped text (top): \"2011–2100\" 742.67..804.64 y 84..101"
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
    ]
   },
   {
    "name": "identity line colour",
    "ok": true,
    "sample": [
+    "ellipsis on \"تقرير الأمة\"",
     "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-    "clipped text (top): \"2011–2100\" 742.67..804.64 y 84..101"
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
    ]
   },
   {
    "name": "emblem size",
    "ok": true,
    "sample": [
+    "ellipsis on \"تقرير الأمة\"",
     "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-    "clipped text (top): \"2011–2100\" 742.67..804.64 y 84..101"
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
    ]
   },
   {
    "name": "tile icons cyan",
    "ok": true,
    "sample": [
+    "ellipsis on \"تقرير الأمة\"",
     "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-    "clipped text (top): \"2011–2100\" 742.67..804.64 y 84..101"
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
    ]
   },
   {
    "name": "faint text",
    "ok": true,
    "sample": [
+    "ellipsis on \"تقرير الأمة\"",
     "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-    "clipped text (top): \"2011–2100\" 742.67..804.64 y 84..101"
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
    ]
   },
   {
    "name": "row read in part",
    "ok": true,
    "sample": [
+    "ellipsis on \"تقرير الأمة\"",
     "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-    "clipped text (top): \"2011–2100\" 742.67..804.64 y 84..101"
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
    ]
   },
   {
    "name": "a long headline label",
    "ok": true,
    "sample": [
+    "ellipsis on \"تقرير الأمة\"",
     "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-    "clipped text (top): \"2011–2100\" 742.67..804.64 y 84..101"
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
    ]
   },
   {
    "name": "text wider than its box",
    "ok": true,
    "sample": [
+    "ellipsis on \"تقرير الأمة\"",
     "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-    "clipped text (top): \"2011–2100\" 742.67..804.64 y 84..101"
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
    ]
   },
   {
    "name": "a long status cell",
    "ok": true,
    "sample": [
+    "ellipsis on \"تقرير الأمة\"",
     "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-    "clipped text (top): \"2011–2100\" 742.67..804.64 y 84..101"
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
    ]
   },
   {
    "name": "% before its number",
    "ok": true,
    "sample": [
+    "ellipsis on \"تقرير الأمة\"",
     "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-    "clipped text (top): \"2011–2100\" 742.67..804.64 y 84..101"
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
    ]
   },
   {
    "name": "font weight (no tabs)",
    "ok": true,
    "sample": [
+    "ellipsis on \"تقرير الأمة\"",
     "font weight 11.5/700 for \"مصر\"",
-    "ellipsis on \"مصر\"",
-    "font weight 11.5/700 for \"·\""
+    "ellipsis on \"مصر\""
    ]
   },
   {
    "name": "a tab row on a one-body sheet",
    "ok": true,
    "sample": [
+    "ellipsis on \"تقرير الأمة\"",
     "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-    "clipped text (top): \"2011–2100\" 742.67..804.64 y 84..101"
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
    ]
   },
   {
@@ -438,7 +443,7 @@
    "sample": [
     "control height 40.00 for .r-x (want 32): العودة إلى الخريطة",
     "close button is not round",
-    "ellipsis on \"مصر\""
+    "ellipsis on \"تقرير الأمة\""
    ]
   },
   {
@@ -446,323 +451,323 @@
    "ok": true,
    "sample": [
     "icon size 19x19 (want 16): i",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "ellipsis on \"تقرير الأمة\"",
+    "ellipsis on \"مصر\""
    ]
   },
   {
    "name": "fades wrong (no tabs)",
    "ok": true,
    "sample": [
+    "ellipsis on \"تقرير الأمة\"",
     "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 569.64..579.17 y 84..101",
-    "clipped text (top): \"2011–2100\" 507.67..569.64 y 84..101"
+    "clipped text (top): \"·\" 569.64..579.17 y 84..101"
    ]
   },
   {
    "name": "hint chevron missing (no tabs)",
    "ok": true,
    "sample": [
+    "ellipsis on \"تقرير الأمة\"",
     "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 569.64..579.17 y 84..101",
-    "clipped text (top): \"2011–2100\" 507.67..569.64 y 84..101"
+    "clipped text (top): \"·\" 569.64..579.17 y 84..101"
    ]
   },
   {
    "name": "hint over the content (no tabs)",
    "ok": true,
    "sample": [
+    "ellipsis on \"تقرير الأمة\"",
     "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 569.64..579.17 y 84..101",
-    "clipped text (top): \"2011–2100\" 507.67..569.64 y 84..101"
+    "clipped text (top): \"·\" 569.64..579.17 y 84..101"
    ]
   },
   {
    "name": "a dock item marked open",
    "ok": true,
    "sample": [
+    "ellipsis on \"تقرير الأمة\"",
     "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-    "clipped text (top): \"2011–2100\" 742.67..804.64 y 84..101"
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
    ]
   },
   {
    "name": "weekday wrong",
    "ok": true,
    "sample": [
+    "ellipsis on \"تقرير الأمة\"",
     "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-    "clipped text (top): \"2011–2100\" 742.67..804.64 y 84..101"
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
    ]
   },
   {
    "name": "another moment toast",
    "ok": true,
    "sample": [
+    "ellipsis on \"تقرير الأمة\"",
     "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-    "clipped text (top): \"2011–2100\" 742.67..804.64 y 84..101"
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
    ]
   },
   {
    "name": "clock looks live",
    "ok": true,
    "sample": [
+    "ellipsis on \"تقرير الأمة\"",
     "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-    "clipped text (top): \"2011–2100\" 742.67..804.64 y 84..101"
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
    ]
   },
   {
    "name": "speed menu still offered",
    "ok": true,
    "sample": [
+    "ellipsis on \"تقرير الأمة\"",
     "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-    "clipped text (top): \"2011–2100\" 742.67..804.64 y 84..101"
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
    ]
   },
   {
    "name": "tap in the side inset (report)",
    "ok": true,
    "sample": [
+    "ellipsis on \"تقرير الأمة\"",
     "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 834.64..844.17 y 84..101",
-    "clipped text (top): \"2011–2100\" 772.67..834.64 y 84..101"
+    "clipped text (top): \"·\" 834.64..844.17 y 84..101"
    ]
   },
   {
    "name": "amber value without its icon (report)",
    "ok": true,
    "sample": [
+    "ellipsis on \"تقرير الأمة\"",
     "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-    "clipped text (top): \"2011–2100\" 742.67..804.64 y 84..101"
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
    ]
   },
   {
    "name": "text into a control (report)",
    "ok": true,
    "sample": [
+    "ellipsis on \"تقرير الأمة\"",
     "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-    "clipped text (top): \"2011–2100\" 742.67..804.64 y 84..101"
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
    ]
   },
   {
    "name": "Mubarak in 2100",
    "ok": true,
    "sample": [
+    "ellipsis on \"تقرير الأمة\"",
     "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-    "clipped text (top): \"2011–2100\" 742.67..804.64 y 84..101"
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
    ]
   },
   {
    "name": "old toast",
    "ok": true,
    "sample": [
+    "ellipsis on \"تقرير الأمة\"",
     "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-    "clipped text (top): \"2011–2100\" 742.67..804.64 y 84..101"
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
    ]
   },
   {
    "name": "result change in amber",
    "ok": true,
    "sample": [
+    "ellipsis on \"تقرير الأمة\"",
     "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-    "clipped text (top): \"2011–2100\" 742.67..804.64 y 84..101"
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
    ]
   },
   {
    "name": "a real leader in 2100",
    "ok": true,
    "sample": [
+    "ellipsis on \"تقرير الأمة\"",
     "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-    "clipped text (top): \"2011–2100\" 742.67..804.64 y 84..101"
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
    ]
   },
   {
    "name": "clock running",
    "ok": true,
    "sample": [
+    "ellipsis on \"تقرير الأمة\"",
     "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-    "clipped text (top): \"2011–2100\" 742.67..804.64 y 84..101"
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
    ]
   },
   {
    "name": "clock not disabled",
    "ok": true,
    "sample": [
+    "ellipsis on \"تقرير الأمة\"",
     "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-    "clipped text (top): \"2011–2100\" 742.67..804.64 y 84..101"
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
    ]
   },
   {
    "name": "date off",
    "ok": true,
    "sample": [
+    "ellipsis on \"تقرير الأمة\"",
     "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-    "clipped text (top): \"2011–2100\" 742.67..804.64 y 84..101"
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
    ]
   },
   {
    "name": "pillars reordered",
    "ok": true,
    "sample": [
+    "ellipsis on \"تقرير الأمة\"",
     "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-    "clipped text (top): \"2011–2100\" 742.67..804.64 y 84..101"
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
    ]
   },
   {
    "name": "a pillar lost",
    "ok": true,
    "sample": [
+    "ellipsis on \"تقرير الأمة\"",
     "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-    "clipped text (top): \"2011–2100\" 742.67..804.64 y 84..101"
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
    ]
   },
   {
    "name": "score off",
    "ok": true,
    "sample": [
+    "ellipsis on \"تقرير الأمة\"",
     "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-    "clipped text (top): \"2011–2100\" 742.67..804.64 y 84..101"
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
    ]
   },
   {
    "name": "change off",
    "ok": true,
    "sample": [
+    "ellipsis on \"تقرير الأمة\"",
     "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-    "clipped text (top): \"2011–2100\" 742.67..804.64 y 84..101"
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
    ]
   },
   {
    "name": "change in amber",
    "ok": true,
    "sample": [
+    "ellipsis on \"تقرير الأمة\"",
     "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-    "clipped text (top): \"2011–2100\" 742.67..804.64 y 84..101"
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
    ]
   },
   {
    "name": "change unsaid",
    "ok": true,
    "sample": [
+    "ellipsis on \"تقرير الأمة\"",
     "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-    "clipped text (top): \"2011–2100\" 742.67..804.64 y 84..101"
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
    ]
   },
   {
    "name": "result not the mean",
    "ok": true,
    "sample": [
+    "ellipsis on \"تقرير الأمة\"",
     "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-    "clipped text (top): \"2011–2100\" 742.67..804.64 y 84..101"
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
    ]
   },
   {
    "name": "result change off",
    "ok": true,
    "sample": [
+    "ellipsis on \"تقرير الأمة\"",
     "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-    "clipped text (top): \"2011–2100\" 742.67..804.64 y 84..101"
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
    ]
   },
   {
    "name": "highest wrong",
    "ok": true,
    "sample": [
+    "ellipsis on \"تقرير الأمة\"",
     "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-    "clipped text (top): \"2011–2100\" 742.67..804.64 y 84..101"
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
    ]
   },
   {
    "name": "baseline off",
    "ok": true,
    "sample": [
+    "ellipsis on \"تقرير الأمة\"",
     "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-    "clipped text (top): \"2011–2100\" 742.67..804.64 y 84..101"
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
    ]
   },
   {
    "name": "HUD stability off",
    "ok": true,
    "sample": [
+    "ellipsis on \"تقرير الأمة\"",
     "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-    "clipped text (top): \"2011–2100\" 742.67..804.64 y 84..101"
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
    ]
   },
   {
    "name": "HUD influence off",
    "ok": true,
    "sample": [
+    "ellipsis on \"تقرير الأمة\"",
     "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-    "clipped text (top): \"2011–2100\" 742.67..804.64 y 84..101"
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
    ]
   },
   {
    "name": "note without the cheat rule",
    "ok": true,
    "sample": [
+    "ellipsis on \"تقرير الأمة\"",
     "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-    "clipped text (top): \"2011–2100\" 742.67..804.64 y 84..101"
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
    ]
   },
   {
    "name": "link silent",
    "ok": true,
    "sample": [
+    "ellipsis on \"تقرير الأمة\"",
     "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-    "clipped text (top): \"2011–2100\" 742.67..804.64 y 84..101"
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
    ]
   },
   {
    "name": "close silent",
    "ok": true,
    "sample": [
+    "ellipsis on \"تقرير الأمة\"",
     "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-    "clipped text (top): \"2011–2100\" 742.67..804.64 y 84..101"
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
    ]
   },
   {
    "name": "HUD trend moving",
    "ok": true,
    "sample": [
+    "ellipsis on \"تقرير الأمة\"",
     "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-    "clipped text (top): \"2011–2100\" 742.67..804.64 y 84..101"
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
    ]
   },
   {
    "name": "HUD 2011 value",
    "ok": true,
    "sample": [
+    "ellipsis on \"تقرير الأمة\"",
     "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-    "clipped text (top): \"2011–2100\" 742.67..804.64 y 84..101"
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
    ]
   },
   {

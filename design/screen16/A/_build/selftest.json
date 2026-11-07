@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-07T16:01:22.269Z",
+ "ranAt": "2026-11-07T17:57:35.877Z",
  "inputs": {
   "files": [
    "index.html",
@@ -22,14 +22,46 @@
    "header_cairo.jpg",
    "map_overlay_cairo.svg"
   ],
-  "sha1": "c678752ba88c79d594e640c1cbdd05b40b370bcc"
+  "sha1": "a9435fb3811dcfdef48ecbfc0e3dea608218aa40"
  },
  "cleanIssues": {
-  "i16promax": [],
-  "i16promax_center_end": [],
+  "i16promax": [
+   "ellipsis on \"الإشعارات\"",
+   "ellipsis on \"غير المقروءة:\"",
+   "clipped text (top): \"2\" 767.28..774.19 y 84..101",
+   "clipped text (top): \"·\" 757.75..767.28 y 84..101",
+   "clipped text (top): \"1\" 750.84..757.75 y 84..101",
+   "ellipsis on \"يناير\"",
+   "clipped text (top): \"2011\" 700.94..728.55 y 84..101"
+  ],
+  "i16promax_center_end": [
+   "ellipsis on \"الإشعارات\"",
+   "ellipsis on \"غير المقروءة:\"",
+   "clipped text (top): \"2\" 767.28..774.19 y 84..101",
+   "clipped text (top): \"·\" 757.75..767.28 y 84..101",
+   "clipped text (top): \"1\" 750.84..757.75 y 84..101",
+   "ellipsis on \"يناير\"",
+   "clipped text (top): \"2011\" 700.94..728.55 y 84..101"
+  ],
   "i16promax coverage": [],
-  "se": [],
-  "se_center_end": [],
+  "se": [
+   "ellipsis on \"الإشعارات\"",
+   "ellipsis on \"غير المقروءة:\"",
+   "clipped text (top): \"2\" 532.28..539.19 y 84..101",
+   "clipped text (top): \"·\" 522.75..532.28 y 84..101",
+   "clipped text (top): \"1\" 515.84..522.75 y 84..101",
+   "ellipsis on \"يناير\"",
+   "clipped text (top): \"2011\" 465.94..493.55 y 84..101"
+  ],
+  "se_center_end": [
+   "ellipsis on \"الإشعارات\"",
+   "ellipsis on \"غير المقروءة:\"",
+   "clipped text (top): \"2\" 532.28..539.19 y 84..101",
+   "clipped text (top): \"·\" 522.75..532.28 y 84..101",
+   "clipped text (top): \"1\" 515.84..522.75 y 84..101",
+   "ellipsis on \"يناير\"",
+   "clipped text (top): \"2011\" 465.94..493.55 y 84..101"
+  ],
   "se coverage": []
  },
  "results": [
@@ -37,7 +69,9 @@
    "name": "type size",
    "ok": true,
    "sample": [
-    "font size 17 for \"الإشعارات\""
+    "font size 17 for \"الإشعارات\"",
+    "ellipsis on \"الإشعارات\"",
+    "ellipsis on \"غير المقروءة:\""
    ]
   },
   {
@@ -45,7 +79,8 @@
    "ok": true,
    "sample": [
     "text colour off-token rgb(136, 153, 170): \"الإشعارات\"",
-    "contrast 2.33 for \"الإشعارات\""
+    "ellipsis on \"الإشعارات\"",
+    "ellipsis on \"غير المقروءة:\""
    ]
   },
   {
@@ -53,32 +88,35 @@
    "ok": true,
    "sample": [
     "panel radius الإشعارات: 6 (want 12)",
-    "radius 6 for .sheet (want 12)"
+    "radius 6 for .sheet (want 12)",
+    "ellipsis on \"الإشعارات\""
    ]
   },
   {
    "name": "tap in the side inset",
    "ok": true,
    "sample": [
-    "text in side inset: قرارات تنتظرك",
-    "text in side inset: أوامر معلقة",
-    "text in side inset: مهم"
+    "ellipsis on \"الإشعارات\"",
+    "ellipsis on \"غير المقروءة:\"",
+    "clipped text (top): \"2\" 797.28..804.19 y 84..101"
    ]
   },
   {
    "name": "panel in the side inset",
    "ok": true,
    "sample": [
-    "text in side inset: قرارات تنتظرك",
-    "text in side inset: أوامر معلقة",
-    "text in side inset: مهم"
+    "ellipsis on \"الإشعارات\"",
+    "ellipsis on \"غير المقروءة:\"",
+    "clipped text (top): \"2\" 797.28..804.19 y 84..101"
    ]
   },
   {
    "name": "panel not opaque",
    "ok": true,
    "sample": [
-    "panel not opaque: الإشعارات rgba(9, 17, 25, 0.66)"
+    "panel not opaque: الإشعارات rgba(9, 17, 25, 0.66)",
+    "ellipsis on \"الإشعارات\"",
+    "ellipsis on \"غير المقروءة:\""
    ]
   },
   {
@@ -86,245 +124,278 @@
    "ok": true,
    "sample": [
     "panel not opaque (opacity 0.60): الإشعارات",
-    "brief text not fully visible: الإشعارات",
-    "brief text not fully visible: غير المقروءة: 2 · 1 يناير 2011"
+    "ellipsis on \"الإشعارات\"",
+    "ellipsis on \"غير المقروءة:\""
    ]
   },
   {
    "name": "Egypt covered",
    "ok": true,
    "sample": [
-    "Nile delta covered by panel الإشعارات",
-    "Nile delta under the hit box of قرار ينتظرك: احتجاجات في ت",
-    "Egypt covered by panel الإشعارات"
+    "ellipsis on \"الإشعارات\"",
+    "ellipsis on \"غير المقروءة:\"",
+    "clipped text (top): \"2\" 767.28..774.19 y 84..101"
    ]
   },
   {
    "name": "map dimmed",
    "ok": true,
    "sample": [
-    "the map is dimmed (opacity 1.00, filter brightness(0.35))"
+    "ellipsis on \"الإشعارات\"",
+    "ellipsis on \"غير المقروءة:\"",
+    "clipped text (top): \"2\" 767.28..774.19 y 84..101"
    ]
   },
   {
    "name": "map faded",
    "ok": true,
    "sample": [
-    "the map is dimmed (opacity 0.30, filter none)"
+    "ellipsis on \"الإشعارات\"",
+    "ellipsis on \"غير المقروءة:\"",
+    "clipped text (top): \"2\" 767.28..774.19 y 84..101"
    ]
   },
   {
    "name": "scrim over the map",
    "ok": true,
    "sample": [
-    "something drawn over the map: DIV (rgba(0, 0, 0, 0.55))",
-    "contrast 1.92 for \"2\""
+    "ellipsis on \"الإشعارات\"",
+    "ellipsis on \"غير المقروءة:\"",
+    "clipped text (top): \"2\" 767.28..774.19 y 84..101"
    ]
   },
   {
    "name": "sheet width",
    "ok": true,
    "sample": [
-    "sheet width 330 (want round(clamp(43% of 832, 340, 380)), or the room the dock leaves if 330..: 358)"
+    "ellipsis on \"الإشعارات\"",
+    "ellipsis on \"غير المقروءة:\"",
+    "clipped text (top): \"2\" 767.28..774.19 y 84..101"
    ]
   },
   {
    "name": "sheet top",
    "ok": true,
    "sample": [
-    "hit overlap الاستقرار 58% / إغلاق الإشعارات",
-    "panel overlap الدولة: مصر، حسني مبارك، ج / الإشعارات",
-    "panel overlap الخزينة 36.0 مليار $ الاست / الإشعارات"
+    "ellipsis on \"الإشعارات\"",
+    "ellipsis on \"غير المقروءة:\"",
+    "clipped text (top): \"2\" 767.28..774.19 y 70..87"
    ]
   },
   {
    "name": "dock hidden although it fits",
    "ok": true,
    "sample": [
-    "dock hidden although it fits left of the sheet"
+    "ellipsis on \"الإشعارات\"",
+    "ellipsis on \"غير المقروءة:\"",
+    "clipped text (top): \"2\" 767.28..774.19 y 84..101"
    ]
   },
   {
    "name": "dock shown on the SE",
    "ok": true,
    "sample": [
-    "hit overlap الدولة / غير مقروء، السودان: استفتا",
-    "hit overlap الدولة / غير مقروء، القمح عالميًا ف",
-    "hit overlap الاقتصاد / غير مقروء، السودان: استفتا"
+    "ellipsis on \"الإشعارات\"",
+    "ellipsis on \"غير المقروءة:\"",
+    "clipped text (top): \"2\" 532.28..539.19 y 84..101"
    ]
   },
   {
    "name": "left stack moved",
    "ok": true,
    "sample": [
-    "HUD element moved from its B3 position: .toast x 70.0..275.6 y 56.0..88.0",
-    "HUD element moved from its B3 position: .btn.mode x 70.0..191.6 y 96.0..128.0",
-    "HUD element moved from its B3 position: .btn.home x 70.0..141.5 y 136.0..168.0"
+    "ellipsis on \"الإشعارات\"",
+    "ellipsis on \"غير المقروءة:\"",
+    "clipped text (top): \"2\" 767.28..774.19 y 84..101"
    ]
   },
   {
    "name": "map label cut",
    "ok": true,
    "sample": [
-    "map label ليبيا sliced by the screen edge or the side inset",
-    "map label إيران sliced by the screen edge or the side inset",
-    "map label إيران squeezed between a panel and the screen edge"
+    "ellipsis on \"الإشعارات\"",
+    "ellipsis on \"غير المقروءة:\"",
+    "clipped text (top): \"2\" 767.28..774.19 y 84..101"
    ]
   },
   {
    "name": "contrast",
    "ok": true,
    "sample": [
-    "contrast 1 for \"قرارات تنتظرك\"",
-    "contrast 1 for \"أوامر معلقة\"",
-    "contrast 1 for \"مهم\""
+    "ellipsis on \"الإشعارات\"",
+    "ellipsis on \"غير المقروءة:\"",
+    "clipped text (top): \"2\" 767.28..774.19 y 84..101"
    ]
   },
   {
    "name": "identity line missing",
    "ok": true,
    "sample": [
-    "panel top line none rgb(198, 186, 232) 2px (want the section colour, 2 pt, at the top)"
+    "ellipsis on \"الإشعارات\"",
+    "ellipsis on \"غير المقروءة:\"",
+    "clipped text (top): \"2\" 767.28..774.19 y 84..101"
    ]
   },
   {
    "name": "emblem drawn grey",
    "ok": true,
    "sample": [
-    "section emblem missing or not in the section colour"
+    "ellipsis on \"الإشعارات\"",
+    "ellipsis on \"غير المقروءة:\"",
+    "clipped text (top): \"2\" 767.28..774.19 y 84..101"
    ]
   },
   {
    "name": "section colour on data",
    "ok": true,
    "sample": [
-    "section colour on data text: \"غير المقروءة:\"",
-    "section colour on data text: \"2\"",
-    "section colour on data text: \"1\""
+    "ellipsis on \"الإشعارات\"",
+    "ellipsis on \"غير المقروءة:\"",
+    "clipped text (top): \"2\" 767.28..774.19 y 84..101"
    ]
   },
   {
    "name": "money unit",
    "ok": true,
    "sample": [
-    "money unit: «0.4 مليار» (under 1 billion is written in millions)"
+    "ellipsis on \"الإشعارات\"",
+    "ellipsis on \"غير المقروءة:\"",
+    "clipped text (top): \"2\" 767.28..774.19 y 84..101"
    ]
   },
   {
    "name": "sign outside its number",
    "ok": true,
    "sample": [
-    "a sign outside its number: «تغير +3»"
+    "ellipsis on \"الإشعارات\"",
+    "ellipsis on \"غير المقروءة:\"",
+    "clipped text (top): \"2\" 767.28..774.19 y 84..101"
    ]
   },
   {
    "name": "colour alone",
    "ok": true,
    "sample": [
-    "colour alone: «تراجع» has no arrow or icon"
+    "ellipsis on \"الإشعارات\"",
+    "ellipsis on \"غير المقروءة:\"",
+    "clipped text (top): \"2\" 767.28..774.19 y 84..101"
    ]
   },
   {
    "name": "an image in the sheet",
    "ok": true,
    "sample": [
-    "an image in the sheet"
+    "ellipsis on \"الإشعارات\"",
+    "ellipsis on \"غير المقروءة:\"",
+    "clipped text (top): \"2\" 767.28..774.19 y 84..101"
    ]
   },
   {
    "name": "close not round",
    "ok": true,
    "sample": [
-    "close button is not round"
+    "close button is not round",
+    "ellipsis on \"الإشعارات\"",
+    "ellipsis on \"غير المقروءة:\""
    ]
   },
   {
    "name": "label without a role",
    "ok": true,
    "sample": [
-    "a11y: a label VoiceOver may skip (no role): «اختبار»"
+    "ellipsis on \"الإشعارات\"",
+    "ellipsis on \"غير المقروءة:\"",
+    "clipped text (top): \"2\" 767.28..774.19 y 84..101"
    ]
   },
   {
    "name": "text overlap",
    "ok": true,
    "sample": [
-    "text overlap \"الإشعارات\" / \"غير المقروءة:\"",
-    "text overlap \"الإشعارات\" / \"2\"",
-    "text overlap \"الإشعارات\" / \"·\""
+    "ellipsis on \"الإشعارات\"",
+    "ellipsis on \"غير المقروءة:\"",
+    "clipped text (top): \"2\" 767.28..774.19 y 70..87"
    ]
   },
   {
    "name": "identity line colour",
    "ok": true,
    "sample": [
-    "panel top line \"\" rgb(63, 224, 208) 2px (want the section colour, 2 pt, at the top)"
+    "ellipsis on \"الإشعارات\"",
+    "ellipsis on \"غير المقروءة:\"",
+    "clipped text (top): \"2\" 767.28..774.19 y 84..101"
    ]
   },
   {
    "name": "emblem size",
    "ok": true,
    "sample": [
-    "size 28.0x32.0 for .s-emb (want 32 x 32)"
+    "ellipsis on \"الإشعارات\"",
+    "ellipsis on \"غير المقروءة:\"",
+    "clipped text (top): \"2\" 767.28..774.19 y 84..101"
    ]
   },
   {
    "name": "tile icons cyan",
    "ok": true,
    "sample": [
-    "white touch off: .r-tile color rgb(127, 233, 255) (want rgb(234, 242, 247))",
-    "white touch off: .r-tile color rgb(127, 233, 255) (want rgb(234, 242, 247))",
-    "white touch off: .r-tile color rgb(127, 233, 255) (want rgb(234, 242, 247))"
+    "ellipsis on \"الإشعارات\"",
+    "ellipsis on \"غير المقروءة:\"",
+    "clipped text (top): \"2\" 767.28..774.19 y 84..101"
    ]
   },
   {
    "name": "row read in part",
    "ok": true,
    "sample": [
-    "a11y: «احتجاجات في تونس» does not read its numbers",
-    "a11y: «جزء» does not read all it shows: احتجاجات في تونس قرار",
-    "«احتجاجات في تونس» does not say it waits for a decision"
+    "ellipsis on \"الإشعارات\"",
+    "ellipsis on \"غير المقروءة:\"",
+    "clipped text (top): \"2\" 767.28..774.19 y 84..101"
    ]
   },
   {
    "name": "a long headline label",
    "ok": true,
    "sample": [
-    "clipped text (sides): \"عنوان طويل جدًا لا يتسع لخانته أبدًا\" 385.38..539.25 y 124..141",
-    "text outside the sheet's 12 pt padding: \"عنوان طويل جدًا لا يتسع لخانته أبدًا\"",
-    "clipped text (sides): \"1\" 528.44..539.25 y 142..169"
+    "ellipsis on \"الإشعارات\"",
+    "ellipsis on \"غير المقروءة:\"",
+    "clipped text (top): \"2\" 767.28..774.19 y 84..101"
    ]
   },
   {
    "name": "text wider than its box",
    "ok": true,
    "sample": [
-    "text wider than its box: «قرارات تنتظرك» (63 in 20)"
+    "ellipsis on \"الإشعارات\"",
+    "ellipsis on \"غير المقروءة:\"",
+    "clipped text (top): \"2\" 767.28..774.19 y 84..101"
    ]
   },
   {
    "name": "a long status cell",
    "ok": true,
    "sample": [
-    "clipped text (sides): \"قيمة طويلة جدًا لا تتسع لنصف الجدول\" 416.53..613.3 y 120.5..139.5",
-    "text outside the sheet's 12 pt padding: \"قيمة طويلة جدًا لا تتسع لنصف الجدول\"",
-    "horizontal overflow in خانةقيمة طويلة جدًا لا تتس"
+    "ellipsis on \"الإشعارات\"",
+    "ellipsis on \"غير المقروءة:\"",
+    "clipped text (top): \"2\" 767.28..774.19 y 84..101"
    ]
   },
   {
    "name": "font weight (no tabs)",
    "ok": true,
    "sample": [
+    "ellipsis on \"الإشعارات\"",
     "font weight 11.5/700 for \"غير المقروءة:\"",
-    "font weight 11.5/700 for \"2\"",
-    "font weight 11.5/700 for \"·\""
+    "ellipsis on \"غير المقروءة:\""
    ]
   },
   {
    "name": "a tab row on a one-body sheet",
    "ok": true,
    "sample": [
-    "a tab row on a sheet that has one body"
+    "ellipsis on \"الإشعارات\"",
+    "ellipsis on \"غير المقروءة:\"",
+    "clipped text (top): \"2\" 767.28..774.19 y 84..101"
    ]
   },
   {
@@ -332,69 +403,80 @@
    "ok": true,
    "sample": [
     "control height 40.00 for .r-x (want 32): إغلاق الإشعارات",
-    "close button is not round"
+    "close button is not round",
+    "ellipsis on \"الإشعارات\""
    ]
   },
   {
    "name": "icon size (no tabs)",
    "ok": true,
    "sample": [
-    "icon size 19x19 (want 16): i"
+    "icon size 19x19 (want 16): i",
+    "ellipsis on \"الإشعارات\"",
+    "ellipsis on \"غير المقروءة:\""
    ]
   },
   {
    "name": "fades wrong (no tabs)",
    "ok": true,
    "sample": [
-    "control cut by its scroll area (bottom): غير مقروء، القمح عالميًا ف",
-    "hit box shaved by its clip: غير مقروء، القمح عالميًا ف",
-    "fades 0/0 do not match the scroll state (top 0, over 60.0)"
+    "ellipsis on \"الإشعارات\"",
+    "ellipsis on \"غير المقروءة:\"",
+    "clipped text (top): \"2\" 532.28..539.19 y 84..101"
    ]
   },
   {
    "name": "hint chevron missing (no tabs)",
    "ok": true,
    "sample": [
-    "scroll hint chevron missing with content below"
+    "ellipsis on \"الإشعارات\"",
+    "ellipsis on \"غير المقروءة:\"",
+    "clipped text (top): \"2\" 532.28..539.19 y 84..101"
    ]
   },
   {
    "name": "hint over the content (no tabs)",
    "ok": true,
    "sample": [
-    "scroll hint not centred in the clear strip under the fade: y 198.0..216.0 (strip 344.0..366.0)"
+    "ellipsis on \"الإشعارات\"",
+    "ellipsis on \"غير المقروءة:\"",
+    "clipped text (top): \"2\" 532.28..539.19 y 84..101"
    ]
   },
   {
    "name": "a dock item marked open",
    "ok": true,
    "sample": [
-    "a dock item is marked open under a sheet of no section"
+    "ellipsis on \"الإشعارات\"",
+    "ellipsis on \"غير المقروءة:\"",
+    "clipped text (top): \"2\" 767.28..774.19 y 84..101"
    ]
   },
   {
    "name": "brief text hidden (centre)",
    "ok": true,
    "sample": [
-    "brief text not fully visible: الإشعارات"
+    "ellipsis on \"غير المقروءة:\"",
+    "clipped text (top): \"2\" 767.28..774.19 y 84..101",
+    "clipped text (top): \"·\" 757.75..767.28 y 84..101"
    ]
   },
   {
    "name": "18 pt misuse (centre)",
    "ok": true,
    "sample": [
-    "18 pt is for the panel's name and the adjusted values only: \"قرارات تنتظرك\"",
-    "18 pt is for the panel's name and the adjusted values only: \"أوامر معلقة\"",
-    "18 pt is for the panel's name and the adjusted values only: \"مهم\""
+    "ellipsis on \"الإشعارات\"",
+    "ellipsis on \"غير المقروءة:\"",
+    "clipped text (top): \"2\" 767.28..774.19 y 84..101"
    ]
   },
   {
    "name": "clipped text (centre)",
    "ok": true,
    "sample": [
-    "clipped text (sides): \"قرارات تنتظرك\" 858.34..921 y 115..132",
-    "text outside the sheet's 12 pt padding: \"قرارات تنتظرك\"",
-    "clipped text (sides): \"أوامر معلقة\" 870.92..921 y 195..212"
+    "ellipsis on \"الإشعارات\"",
+    "ellipsis on \"غير المقروءة:\"",
+    "clipped text (top): \"2\" 767.28..774.19 y 84..101"
    ]
   },
   {
@@ -402,166 +484,188 @@
    "ok": true,
    "sample": [
     "gap 6 on أمر معلق: المنطقة الغربية ",
-    "gap 6 on أمر معلق: المنطقة الغربية "
+    "gap 6 on أمر معلق: المنطقة الغربية ",
+    "ellipsis on \"الإشعارات\""
    ]
   },
   {
    "name": "faint text (centre)",
    "ok": true,
    "sample": [
-    "brief text not fully visible: قرارات تنتظرك",
-    "brief text cannot be scrolled clear of the fades: قرارات تنتظرك",
-    "brief text cannot be scrolled clear of the fades: أوامر معلقة"
+    "ellipsis on \"الإشعارات\"",
+    "ellipsis on \"غير المقروءة:\"",
+    "clipped text (top): \"2\" 767.28..774.19 y 84..101"
    ]
   },
   {
    "name": "% before its number (centre)",
    "ok": true,
    "sample": [
-    "% shown before its number: \"نسبة 20%\"",
-    "the sections are «نسبة 20%، أوامر معلقة، مهم، للعلم»",
-    "«احتجاجات في تونس» is not under «قرارات تنتظرك»"
+    "ellipsis on \"الإشعارات\"",
+    "ellipsis on \"غير المقروءة:\"",
+    "clipped text (top): \"2\" 767.28..774.19 y 84..101"
    ]
   },
   {
    "name": "game running",
    "ok": true,
    "sample": [
-    "the game is not shown paused (play glyph and words)"
+    "ellipsis on \"الإشعارات\"",
+    "ellipsis on \"غير المقروءة:\"",
+    "clipped text (top): \"2\" 767.28..774.19 y 84..101"
    ]
   },
   {
    "name": "sections reordered",
    "ok": true,
    "sample": [
-    "the sections are «قرارات تنتظرك، أوامر معلقة، للعلم، مهم»",
-    "«السودان: استفتاء الجنوب بعد 8 أيام» is not under «مهم»",
-    "«القمح عالميًا في أعلى مستوى منذ 2008» is not under «للعلم»"
+    "ellipsis on \"الإشعارات\"",
+    "ellipsis on \"غير المقروءة:\"",
+    "clipped text (top): \"2\" 767.28..774.19 y 84..101"
    ]
   },
   {
    "name": "rows swapped between tiers",
    "ok": true,
    "sample": [
-    "«السودان: استفتاء الجنوب بعد 8 أيام» is not under «مهم»",
-    "«القمح عالميًا في أعلى مستوى منذ 2008» is not under «للعلم»"
+    "ellipsis on \"الإشعارات\"",
+    "ellipsis on \"غير المقروءة:\"",
+    "clipped text (top): \"2\" 767.28..774.19 y 84..101"
    ]
   },
   {
    "name": "badge off",
    "ok": true,
    "sample": [
-    "the badge says 4, the header 2, the unread rows are 2 (the brief's 2)",
-    "a11y: the bell does not read its count and show the centre open"
+    "ellipsis on \"الإشعارات\"",
+    "ellipsis on \"غير المقروءة:\"",
+    "clipped text (top): \"2\" 767.28..774.19 y 84..101"
    ]
   },
   {
    "name": "counts changed together",
    "ok": true,
    "sample": [
-    "«القمح عالميًا في أعلى مستوى منذ 2008» is not marked unread",
-    "the badge says 1, the header 1, the unread rows are 1 (the brief's 2)",
-    "«القمح عالميًا في أعلى مستوى منذ 2008»: the unread dot and words do not match its state"
+    "ellipsis on \"الإشعارات\"",
+    "ellipsis on \"غير المقروءة:\"",
+    "clipped text (top): \"1\" 767.28..774.19 y 84..101"
    ]
   },
   {
    "name": "the decision not said waiting",
    "ok": true,
    "sample": [
-    "«احتجاجات في تونس» does not say it waits for a decision"
+    "ellipsis on \"الإشعارات\"",
+    "ellipsis on \"غير المقروءة:\"",
+    "clipped text (top): \"2\" 767.28..774.19 y 84..101"
    ]
   },
   {
    "name": "bell silent",
    "ok": true,
    "sample": [
-    "a11y: the bell does not read its count and show the centre open"
+    "ellipsis on \"الإشعارات\"",
+    "ellipsis on \"غير المقروءة:\"",
+    "clipped text (top): \"2\" 767.28..774.19 y 84..101"
    ]
   },
   {
    "name": "order counted unread",
    "ok": true,
    "sample": [
-    "«المنطقة الغربية إلى سيوة» is marked unread",
-    "the badge says 2, the header 2, the unread rows are 3 (the brief's 2)",
-    "«المنطقة الغربية إلى سيوة»: the unread dot and words do not match its state"
+    "ellipsis on \"الإشعارات\"",
+    "ellipsis on \"غير المقروءة:\"",
+    "clipped text (top): \"2\" 767.28..774.19 y 84..101"
    ]
   },
   {
    "name": "order not cancellable",
    "ok": true,
    "sample": [
-    "the pending order is not a group with its own «إلغاء»",
-    "brief text missing: إلغاء",
-    "brief text missing: إلغاء"
+    "ellipsis on \"الإشعارات\"",
+    "ellipsis on \"غير المقروءة:\"",
+    "clipped text (top): \"2\" 767.28..774.19 y 84..101"
    ]
   },
   {
    "name": "order read in part",
    "ok": true,
    "sample": [
-    "a11y: the pending order does not read whole"
+    "ellipsis on \"الإشعارات\"",
+    "ellipsis on \"غير المقروءة:\"",
+    "clipped text (top): \"2\" 767.28..774.19 y 84..101"
    ]
   },
   {
    "name": "dot recoloured and grown",
    "ok": true,
    "sample": [
-    "«السودان: استفتاء الجنوب بعد 8 أيام»: the unread dot is not a visible 6 pt teal dot",
-    "«القمح عالميًا في أعلى مستوى منذ 2008»: the unread dot is not a visible 6 pt teal dot"
+    "ellipsis on \"الإشعارات\"",
+    "ellipsis on \"غير المقروءة:\"",
+    "clipped text (top): \"2\" 767.28..774.19 y 84..101"
    ]
   },
   {
    "name": "dot hidden",
    "ok": true,
    "sample": [
-    "«السودان: استفتاء الجنوب بعد 8 أيام»: the unread dot is not a visible 6 pt teal dot",
-    "«القمح عالميًا في أعلى مستوى منذ 2008»: the unread dot is not a visible 6 pt teal dot"
+    "ellipsis on \"الإشعارات\"",
+    "ellipsis on \"غير المقروءة:\"",
+    "clipped text (top): \"2\" 767.28..774.19 y 84..101"
    ]
   },
   {
    "name": "dot past the chevron",
    "ok": true,
    "sample": [
-    "«السودان: استفتاء الجنوب بعد 8 أيام»: the unread dot is not between the text and the chevron",
-    "«القمح عالميًا في أعلى مستوى منذ 2008»: the unread dot is not between the text and the chevron"
+    "ellipsis on \"الإشعارات\"",
+    "ellipsis on \"غير المقروءة:\"",
+    "clipped text (top): \"2\" 767.28..774.19 y 84..101"
    ]
   },
   {
    "name": "row silent on where it leads",
    "ok": true,
    "sample": [
-    "a11y: «احتجاجات في تونس» does not say where it leads"
+    "ellipsis on \"الإشعارات\"",
+    "ellipsis on \"غير المقروءة:\"",
+    "clipped text (top): \"2\" 767.28..774.19 y 84..101"
    ]
   },
   {
    "name": "unread dot missing",
    "ok": true,
    "sample": [
-    "«السودان: استفتاء الجنوب بعد 8 أيام»: the unread dot and words do not match its state"
+    "ellipsis on \"الإشعارات\"",
+    "ellipsis on \"غير المقروءة:\"",
+    "clipped text (top): \"2\" 767.28..774.19 y 84..101"
    ]
   },
   {
    "name": "chevron missing",
    "ok": true,
    "sample": [
-    "«احتجاجات في تونس» has no chevron"
+    "ellipsis on \"الإشعارات\"",
+    "ellipsis on \"غير المقروءة:\"",
+    "clipped text (top): \"2\" 767.28..774.19 y 84..101"
    ]
   },
   {
    "name": "icon missing",
    "ok": true,
    "sample": [
-    "«احتجاجات في تونس» has no icon"
+    "ellipsis on \"الإشعارات\"",
+    "ellipsis on \"غير المقروءة:\"",
+    "clipped text (top): \"2\" 767.28..774.19 y 84..101"
    ]
   },
   {
    "name": "a line wrong",
    "ok": true,
    "sample": [
-    "a11y: «السودان: استفتاء الجنوب بعد 8 أيام» does not read its numbers",
-    "a11y: «غير مقروء، السودان: استف» does not read all it shows: 10",
-    "«السودان: استفتاء الجنوب بعد 8 أيام»'s line is not «9 يناير 2011 · الجوار»"
+    "ellipsis on \"الإشعارات\"",
+    "ellipsis on \"غير المقروءة:\"",
+    "clipped text (top): \"2\" 767.28..774.19 y 84..101"
    ]
   },
   {
