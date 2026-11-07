@@ -1,9 +1,13 @@
+// Screen 24 A (T-026): the government chooser (D-29) on screen 3 page 2's frame, Côte d'Ivoire on 1 January 2011. Built
+// from page 2's checker, plus the chooser's own checks (a radio group, the default first and chosen, each row its seat
+// and area, VoiceOver), the report's inputs and PNG hashes, and a self-test with plants.
 // Render screen 3 / page 2 variant B (country picker) and run the checks:
 // tokens, 44 pt hit boxes, safe areas, overlaps, clipping, text contrast over the real backdrop.
 // Usage: NODE_PATH=.../tools/node_modules node render.js [ids...]   (default: all 7 devices in shared/devices.json)
 //        NODE_PATH=.../tools/node_modules node render.js --selftest  (plants known defects and checks that they are caught)
 // Writes <id>.png (device scale factor 3) to the page folder, <id>_hit.png and report.json to _build.
 const { chromium } = require('playwright');
+const crypto = require('crypto');
 const path = require('path');
 const fs = require('fs');
 
@@ -11,6 +15,10 @@ const OUT = path.resolve(__dirname, '..');
 const PAGE = 'file://' + path.join(OUT, 'index.html');
 const ALL = JSON.parse(fs.readFileSync(path.resolve(OUT, '../../shared/devices.json'), 'utf8'));
 
+// the report's inputs: a change to any of them makes the report and the self-test stale (check_screen.py)
+const INPUTS = ['index.html', '_build/render.js', '_build/assemble.py', '_build/card.html', '_build/chooser.css', '_build/civ_path.json', 'world_d1_overlay_civ.svg',
+  '../../screen3/p2B/index.html', '../../screen3/p2B/world_d1_overlay_declutter.svg', '../../shared/devices.json'];
+const inputsHash = () => crypto.createHash('sha1').update(Buffer.concat(INPUTS.map((f) => fs.readFileSync(path.join(OUT, f))))).digest('hex');
 const TOK = {
   type: { 10: [500, 700], 11.5: [500, 600], 13: [600], 14: [700], 18: [700] },
   border: 'rgba(127, 233, 255, 0.14)', glass: 'rgba(9, 17, 25, 0.66)',
@@ -233,6 +241,20 @@ async function measure(p, d) {
     audit.layout = Object.fromEntries(blocks.map((b) => [b.s, R(b.r)]));
     audit.map = window.__map; audit.card = window.__card; audit.fit = window.__fit;
     audit.chipsShown = qa('.chip').filter((c) => nameState(c).s === 'shown').length;
+    // ---------- the government chooser (D-29) ----------
+    { const g = q('.sel .gov'), rows = qa('.sel .g-row'), on = rows.filter((r) => r.getAttribute('aria-checked') === 'true');
+      const W2 = (e) => (e ? e.textContent.replace(/\s+/g, ' ').trim() : '');
+      if (!g || g.getAttribute('role') !== 'radiogroup' || g.getAttribute('aria-label') !== 'اختر الحكومة') issues.push('chooser: not a radio group named «اختر الحكومة»');
+      if (rows.length !== 2 || rows.some((r) => r.getAttribute('role') !== 'radio')) issues.push('chooser: not two radio rows');
+      if (on.length !== 1 || rows.some((r) => r.classList.contains('on') !== (r === on[0]))) issues.push('chooser: not exactly one government chosen, marked and drawn');
+      else if (rows[0] !== on[0] || !/تعترف بها الأمم المتحدة/.test(W2(rows[0])) || !/الافتراضية/.test(rows[0].getAttribute('aria-label') || '')) issues.push('chooser: the default (the one the UN recognises) is not first and chosen');
+      rows.forEach((r) => { const b = W2(r.querySelector('b')), sub = W2(r.querySelector('.g-tx span')), al = r.getAttribute('aria-label') || '';
+        if (!/^حكومة \S+/.test(b) || !/تدير /.test(sub)) issues.push(`chooser: «${b}» does not name its leader and the part it administers`);
+        if (!al.startsWith(b + ': ') || sub.split(' · ').some((x) => !al.includes(x.trim()))) issues.push(`a11y: «${b}» does not read all it shows`);
+        const rr = r.getBoundingClientRect(); if (rr.height < 40 - 0.5) issues.push(`chooser: row «${b}» under 40 pt`);
+        const ck = r.querySelector('.g-ck'); if (ck && (getComputedStyle(ck).visibility === 'visible') !== r.classList.contains('on')) issues.push(`chooser: the check mark on «${b}» does not follow the choice`); });
+      if (q('[role="dialog"], [role="alertdialog"], dialog')) issues.push('chooser: a dialog over the map (mapCentral)');
+      if (!/ساحل العاج/.test(W2(q('.sel .nm'))) || !q('.chip.on') || !/ساحل العاج/.test(W2(q('.chip.on')))) issues.push('the card and the chosen chip are not the same country'); }
     return { issues, audit, typeSeen, texts };
   }, { d, TOK });
 }
@@ -288,6 +310,16 @@ async function selftest(b) {
   const qs = `?w=${d.w}&h=${d.h}&side=${d.side}&bottom=${d.bottom}&cutout=${d.cutout}`;
   const ctx = await b.newContext({ viewport: { width: d.w, height: d.h }, deviceScaleFactor: 1 });
   const cases = [
+    ['', [/chooser: not exactly one government chosen/], () => { const r = document.querySelectorAll('.g-row')[1]; r.classList.add('on'); r.setAttribute('aria-checked', 'true'); }],
+    ['', [/chooser: the default \(the one the UN recognises\) is not first and chosen/], () => { const r = document.querySelectorAll('.g-row'); r[0].classList.remove('on'); r[0].setAttribute('aria-checked', 'false'); r[1].classList.add('on'); r[1].setAttribute('aria-checked', 'true'); }],
+    ['', [/chooser: not a radio group/], () => { document.querySelector('.gov').removeAttribute('role'); }],
+    ['', [/chooser: not two radio rows/], () => { document.querySelectorAll('.g-row')[1].removeAttribute('role'); }],
+    ['', [/does not name its leader and the part it administers/], () => { document.querySelectorAll('.g-row .g-tx span')[1].textContent = 'أبيدجان'; }],
+    ['', [/a11y: «حكومة لوران غباغبو» does not read all it shows/], () => { document.querySelectorAll('.g-row')[1].setAttribute('aria-label', 'حكومة لوران غباغبو'); }],
+    ['.g-row { min-height: 30px !important; }', [/under 40 pt/]],
+    ['.g-row .g-ck { visibility: visible !important; }', [/the check mark on «حكومة لوران غباغبو» does not follow the choice/]],
+    ['', [/a dialog over the map/], () => { document.querySelector('.sel').setAttribute('role', 'dialog'); }],
+    ['', [/the card and the chosen chip are not the same country/], () => { document.querySelector('.chip.on .nm').textContent = 'مصر'; }],
     ['.card.sel { right: 300px !important; }', [/selected country under card sel/, /selected country too close to the card/, /lead line does not reach the card/]],
     ['.search { width: 150px !important; }', [/search field too narrow/]],
     ['.chip:nth-child(n+5) { display: none !important; }', [/strip: every chip fits/, /no chip runs into the fade/]],
@@ -296,20 +328,25 @@ async function selftest(b) {
     ['.ctx { transform: translateX(200px); }', [/header: context too close to the steps/, /text overlap/]],
     ['.fact .v { font-size: 12px !important; } .sel .nm { text-overflow: ellipsis; overflow: hidden; }', [/font size off/, /ellipsis: nm/]],
     // the fade lands across a chip's name (as it did on iPhone 11 / 13 mini)
-    ['.strip { -webkit-mask-image: linear-gradient(to right, rgba(0,0,0,0) 0, #000 120px) !important; mask-image: linear-gradient(to right, rgba(0,0,0,0) 0, #000 120px) !important; }', [/the fade cuts across a name: العراق/]],
+    ['.strip { -webkit-mask-image: linear-gradient(to right, rgba(0,0,0,0) 0, #000 120px) !important; mask-image: linear-gradient(to right, rgba(0,0,0,0) 0, #000 120px) !important; }', [/the fade cuts across a name/]],
     // the colliding map names are drawn again (no overlay mask)
-    ['.map img.ov { -webkit-mask-image: none !important; mask-image: none !important; }', [/map name cut by the bottom row: نيجيريا/]],
+    ['', [/map name cut by the bottom row: اختبار/], () => { const m = window.__map, c = document.querySelector('.next').getBoundingClientRect(); window.LABELS.push([(c.left + c.width / 2 - m.L) / m.s, (c.top - m.T) / m.s + 6, 18, 'اختبار']); }],   /* a map name planted across the «التالي» button's top edge (this page's placement leaves no real name there) */
   ];
   let failed = 0;
-  for (const [css, want] of cases) {
+  const results = [];
+  for (const [css, want, js] of cases) {
     const p = await open(ctx, PAGE + qs);
-    await p.addStyleTag({ content: css });
+    if (css) await p.addStyleTag({ content: css });
+    if (js) await p.evaluate(js);
     await p.waitForTimeout(100);
     const m = await measure(p, d);
     const missed = want.filter((re) => !m.issues.some((i) => re.test(i)));
+    results.push({ name: css || String(js).slice(0, 60), ok: !missed.length });
     if (missed.length) { failed++; console.log('NOT CAUGHT', css, missed.map(String), '\n  got:', m.issues.slice(0, 8)); }
     await p.close();
   }
+  const pc = await open(ctx, PAGE + qs), clean = (await measure(pc, d)).issues; await pc.close();
+  fs.writeFileSync(path.join(__dirname, 'selftest.json'), JSON.stringify({ inputs: { files: INPUTS, sha1: inputsHash() }, results, cleanIssues: { i14: clean } }, null, 1));
   await ctx.close();
   console.log(failed ? `selftest FAILED (${failed} of ${cases.length})` : `selftest OK: all ${cases.length} planted defects were caught`);
 }
@@ -337,7 +374,9 @@ async function selftest(b) {
     // approved iPhone 17 Pro Max (اليمن / صعبة جدًا there: 4.26 over the name, 2.75 in its last 12 pt, measured this way)
     const low = cr.filter((c) => (c.faded ? c.p95 < 4.0 || c.tail12 < 2.5 : c.p95 < 4.5));
     low.forEach((c) => m.issues.push(c.faded ? `low contrast at the faded end ${c.p95} (last 12 pt ${c.tail12}): ${c.t}` : `low contrast ${c.p95}: ${c.t}`));
-    report[id] = { issues: m.issues, lowContrast: low, audit: m.audit, typeSeen: m.typeSeen };
+    const pngs = [id + '.png'], pngSha1 = {}; pngs.forEach((r) => { pngSha1[r] = crypto.createHash('sha1').update(fs.readFileSync(path.join(OUT, r))).digest('hex'); });
+    report[id] = { device: `${d.w}x${d.h} side ${d.side} bottom ${d.bottom} ${d.cutout}`, inputs: { files: INPUTS, sha1: inputsHash() }, views: { main: { issueCount: m.issues.length, png: true } }, pngs, pngSha1,
+      issues: m.issues, lowContrast: low, audit: m.audit, typeSeen: m.typeSeen };
     console.log(`\n== ${id} ==`);
     console.log('issues:', m.issues.length ? m.issues : 'none');
     console.log('low contrast (p95 < 4.5):', low.length ? low : 'none');

@@ -1,0 +1,98 @@
+{
+ "inputs": {
+  "files": [
+   "index.html",
+   "_build/render.js",
+   "_build/assemble.py",
+   "_build/card.html",
+   "_build/chooser.css",
+   "_build/civ_path.json",
+   "world_d1_overlay_civ.svg",
+   "../../screen3/p2B/index.html",
+   "../../screen3/p2B/world_d1_overlay_declutter.svg",
+   "../../shared/devices.json"
+  ],
+  "sha1": "96ad547ccf765601ca715362692613ea63f2374d"
+ },
+ "results": [
+  {
+   "name": "() => { const r = document.querySelectorAll('.g-row')[1]; r.",
+   "ok": true
+  },
+  {
+   "name": "() => { const r = document.querySelectorAll('.g-row'); r[0].",
+   "ok": true
+  },
+  {
+   "name": "() => { document.querySelector('.gov').removeAttribute('role",
+   "ok": true
+  },
+  {
+   "name": "() => { document.querySelectorAll('.g-row')[1].removeAttribu",
+   "ok": true
+  },
+  {
+   "name": "() => { document.querySelectorAll('.g-row .g-tx span')[1].te",
+   "ok": true
+  },
+  {
+   "name": "() => { document.querySelectorAll('.g-row')[1].setAttribute(",
+   "ok": true
+  },
+  {
+   "name": ".g-row { min-height: 30px !important; }",
+   "ok": true
+  },
+  {
+   "name": ".g-row .g-ck { visibility: visible !important; }",
+   "ok": true
+  },
+  {
+   "name": "() => { document.querySelector('.sel').setAttribute('role', ",
+   "ok": true
+  },
+  {
+   "name": "() => { document.querySelector('.chip.on .nm').textContent =",
+   "ok": true
+  },
+  {
+   "name": ".card.sel { right: 300px !important; }",
+   "ok": true
+  },
+  {
+   "name": ".search { width: 150px !important; }",
+   "ok": true
+  },
+  {
+   "name": ".chip:nth-child(n+5) { display: none !important; }",
+   "ok": true
+  },
+  {
+   "name": ".bottom { bottom: 2px !important; }",
+   "ok": true
+  },
+  {
+   "name": ".top { left: 4px !important; }",
+   "ok": true
+  },
+  {
+   "name": ".ctx { transform: translateX(200px); }",
+   "ok": true
+  },
+  {
+   "name": ".fact .v { font-size: 12px !important; } .sel .nm { text-overflow: ellipsis; overflow: hidden; }",
+   "ok": true
+  },
+  {
+   "name": ".strip { -webkit-mask-image: linear-gradient(to right, rgba(0,0,0,0) 0, #000 120px) !important; mask-image: linear-gradient(to right, rgba(0,0,0,0) 0, #000 120px) !important; }",
+   "ok": true
+  },
+  {
+   "name": "() => { const m = window.__map, c = document.querySelector('",
+   "ok": true
+  }
+ ],
+ "cleanIssues": {
+  "i14": []
+ }
+}

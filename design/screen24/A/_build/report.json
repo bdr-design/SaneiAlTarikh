@@ -1,5 +1,33 @@
 {
  "se": {
+  "device": "667x375 side 0 bottom 0 none",
+  "inputs": {
+   "files": [
+    "index.html",
+    "_build/render.js",
+    "_build/assemble.py",
+    "_build/card.html",
+    "_build/chooser.css",
+    "_build/civ_path.json",
+    "world_d1_overlay_civ.svg",
+    "../../screen3/p2B/index.html",
+    "../../screen3/p2B/world_d1_overlay_declutter.svg",
+    "../../shared/devices.json"
+   ],
+   "sha1": "96ad547ccf765601ca715362692613ea63f2374d"
+  },
+  "views": {
+   "main": {
+    "issueCount": 0,
+    "png": true
+   }
+  },
+  "pngs": [
+   "se.png"
+  ],
+  "pngSha1": {
+   "se.png": "c6143c198616d4574295294f242818108eae9964"
+  },
   "issues": [],
   "lowContrast": [],
   "audit": {
@@ -93,6 +121,34 @@
   }
  },
  "mini": {
+  "device": "812x375 side 50 bottom 21 notch",
+  "inputs": {
+   "files": [
+    "index.html",
+    "_build/render.js",
+    "_build/assemble.py",
+    "_build/card.html",
+    "_build/chooser.css",
+    "_build/civ_path.json",
+    "world_d1_overlay_civ.svg",
+    "../../screen3/p2B/index.html",
+    "../../screen3/p2B/world_d1_overlay_declutter.svg",
+    "../../shared/devices.json"
+   ],
+   "sha1": "96ad547ccf765601ca715362692613ea63f2374d"
+  },
+  "views": {
+   "main": {
+    "issueCount": 0,
+    "png": true
+   }
+  },
+  "pngs": [
+   "mini.png"
+  ],
+  "pngSha1": {
+   "mini.png": "c6b241fa58b5518e7c8ff729d93a2a5a40d6849a"
+  },
   "issues": [],
   "lowContrast": [],
   "audit": {
@@ -185,6 +241,34 @@
   }
  },
  "i14": {
+  "device": "844x390 side 47 bottom 21 notch",
+  "inputs": {
+   "files": [
+    "index.html",
+    "_build/render.js",
+    "_build/assemble.py",
+    "_build/card.html",
+    "_build/chooser.css",
+    "_build/civ_path.json",
+    "world_d1_overlay_civ.svg",
+    "../../screen3/p2B/index.html",
+    "../../screen3/p2B/world_d1_overlay_declutter.svg",
+    "../../shared/devices.json"
+   ],
+   "sha1": "96ad547ccf765601ca715362692613ea63f2374d"
+  },
+  "views": {
+   "main": {
+    "issueCount": 0,
+    "png": true
+   }
+  },
+  "pngs": [
+   "i14.png"
+  ],
+  "pngSha1": {
+   "i14.png": "cabd57a0965de73813ed15cf411438d5221cf764"
+  },
   "issues": [],
   "lowContrast": [],
   "audit": {
@@ -275,6 +359,34 @@
   }
  },
  "i16": {
+  "device": "852x393 side 59 bottom 21 island",
+  "inputs": {
+   "files": [
+    "index.html",
+    "_build/render.js",
+    "_build/assemble.py",
+    "_build/card.html",
+    "_build/chooser.css",
+    "_build/civ_path.json",
+    "world_d1_overlay_civ.svg",
+    "../../screen3/p2B/index.html",
+    "../../screen3/p2B/world_d1_overlay_declutter.svg",
+    "../../shared/devices.json"
+   ],
+   "sha1": "96ad547ccf765601ca715362692613ea63f2374d"
+  },
+  "views": {
+   "main": {
+    "issueCount": 0,
+    "png": true
+   }
+  },
+  "pngs": [
+   "i16.png"
+  ],
+  "pngSha1": {
+   "i16.png": "a147f86ec8cda88fdb2393f2fb0331cb74b10585"
+  },
   "issues": [],
   "lowContrast": [],
   "audit": {
@@ -365,6 +477,34 @@
   }
  },
  "i16pro": {
+  "device": "874x402 side 62 bottom 21 island",
+  "inputs": {
+   "files": [
+    "index.html",
+    "_build/render.js",
+    "_build/assemble.py",
+    "_build/card.html",
+    "_build/chooser.css",
+    "_build/civ_path.json",
+    "world_d1_overlay_civ.svg",
+    "../../screen3/p2B/index.html",
+    "../../screen3/p2B/world_d1_overlay_declutter.svg",
+    "../../shared/devices.json"
+   ],
+   "sha1": "96ad547ccf765601ca715362692613ea63f2374d"
+  },
+  "views": {
+   "main": {
+    "issueCount": 0,
+    "png": true
+   }
+  },
+  "pngs": [
+   "i16pro.png"
+  ],
+  "pngSha1": {
+   "i16pro.png": "140cb0d65e07cad50b4ed675498d8d11caa4c360"
+  },
   "issues": [],
   "lowContrast": [],
   "audit": {
@@ -455,6 +595,34 @@
   }
  },
  "i11": {
+  "device": "896x414 side 48 bottom 21 notch",
+  "inputs": {
+   "files": [
+    "index.html",
+    "_build/render.js",
+    "_build/assemble.py",
+    "_build/card.html",
+    "_build/chooser.css",
+    "_build/civ_path.json",
+    "world_d1_overlay_civ.svg",
+    "../../screen3/p2B/index.html",
+    "../../screen3/p2B/world_d1_overlay_declutter.svg",
+    "../../shared/devices.json"
+   ],
+   "sha1": "96ad547ccf765601ca715362692613ea63f2374d"
+  },
+  "views": {
+   "main": {
+    "issueCount": 0,
+    "png": true
+   }
+  },
+  "pngs": [
+   "i11.png"
+  ],
+  "pngSha1": {
+   "i11.png": "b3d33688515cb5c2acab9bc9aa52cc9402388e05"
+  },
   "issues": [],
   "lowContrast": [],
   "audit": {
@@ -548,6 +716,34 @@
   }
  },
  "i16promax": {
+  "device": "956x440 side 62 bottom 21 island",
+  "inputs": {
+   "files": [
+    "index.html",
+    "_build/render.js",
+    "_build/assemble.py",
+    "_build/card.html",
+    "_build/chooser.css",
+    "_build/civ_path.json",
+    "world_d1_overlay_civ.svg",
+    "../../screen3/p2B/index.html",
+    "../../screen3/p2B/world_d1_overlay_declutter.svg",
+    "../../shared/devices.json"
+   ],
+   "sha1": "96ad547ccf765601ca715362692613ea63f2374d"
+  },
+  "views": {
+   "main": {
+    "issueCount": 0,
+    "png": true
+   }
+  },
+  "pngs": [
+   "i16promax.png"
+  ],
+  "pngSha1": {
+   "i16promax.png": "a18f88d45b2fc27b2dbdb27c8af6f8d302d7f817"
+  },
   "issues": [],
   "lowContrast": [],
   "audit": {
