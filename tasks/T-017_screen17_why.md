@@ -23,7 +23,7 @@ per-province «لماذا؟» (screen 4 R keeps its own list).
 
 ## Acceptance criteria
 1. Header: flag, «الاستقرار», the line «لماذا؟ · الآن 58% · يتجه إلى 56%», the stability emblem, close.
-2. The status cells: الآن 58%, الهدف 56%, التغير −1 شهريًا, يصل خلال نحو 3 أشهر; the same values as the HUD and the state panel.
+2. The status cells: الآن 58%, الهدف 56%, التغير −1 شهريًا, يصل خلال نحو شهرين (from the cells); the same values as the HUD and the state panel.
 3. Terms in two sections in words, «ما يرفعه» and «ما يخفضه», each row: its name, the value it comes from, its signed
    share (blue with an up arrow for a rise, amber with a down arrow for a fall), sorted by size; the starting level first.
 4. The sum row: the starting level plus every term = the target, exactly, shown as «55 + 16 − 15»; at most 12 rows, the starting level included (TermBuffer12), beyond that the 12th is «أخرى».

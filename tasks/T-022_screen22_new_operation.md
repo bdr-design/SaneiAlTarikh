@@ -18,5 +18,6 @@ A side sheet in the intelligence section (identity, dock item open), the map cen
 2. The target and its network and exposure as screen 11's row; the duration one choice (3 months).
 3. The estimate: cost, effect, success, exposure; cost and risk as screen 11's suggestion; its error said.
 4. Starting takes the next slot (3 of 4) at that cost, and says its effect.
-5. Gate: 0 issues on 7 phones, self-test, `check_screen.py` PASS; three independent read-only reviews, every confirmed
+5. Gate: 0 issues on 7 phones, self-test, `check_screen.py` PASS; six independent read-only reviews (checker, player,
+   layout here; boxes and type, heaviness and errors in the whole-game reviews), every confirmed
    finding fixed.

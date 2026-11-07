@@ -14,7 +14,7 @@ row, no section (neutral grey identity, no dock item open). The HUD chip «ال�
 
 ## Content
 Header: Egypt's flag, «الاستقرار», «لماذا؟ · الآن 58% · يتجه إلى 56%» (a short title: the header strip is lighter further left), the anchor emblem (the chip's icon), close.
-Status cells: الآن 58% · الهدف 56% · التغير −1 شهريًا (amber, arrow down) · يصل خلال نحو 3 أشهر.
+Status cells: الآن 58% · الهدف 56% · التغير −1 شهريًا (amber, arrow down) · يصل خلال نحو شهرين (58 إلى 56 بـ −1 شهريًا).
 - **الأساس:** «مستوى البداية» · «مصر في 2011 · يتلاشى ببطء» · 55.
 - **ما يرفعه:** الأمن والشرطة «الإنفاق الأمني» +8 · دعم الخبز والوقود «من الموازنة» +5 · النمو الاقتصادي «5.1% سنويًا» +3.
 - **ما يخفضه:** الشرعية «44 / 100» −5 · الاضطرابات «45 / 100» −4 · البطالة «8.9%» −3 · التضخم «10.3%» −2 ·

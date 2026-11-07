@@ -412,7 +412,7 @@ module.exports = function makeChecker(cfg) {
     { const wt = (sel, want, skip) => qa('.sheet ' + sel).filter((e) => !(skip && e.matches(skip))).forEach((e) => { const cs = getComputedStyle(e);
         Object.entries(want).forEach(([k, v]) => { if (cs[k] !== v) issues.push(`white touch off: ${sel} ${k} ${cs[k]} (want ${v})`); }); });
       wt('.r-chip', { borderTopColor: TOK.wLine, color: TOK.t1 }, '.e-bad, .p-bad');
-      wt('.r-tile', { color: TOK.t1 });
+      wt('.r-tile', { color: TOK.t1 }, '.s-del .r-tile');   // (a delete row's bin is red: the danger sign, screen 23)
       wt('.s-sg.on', { backgroundColor: TOK.t1, color: TOK.dark }, '[data-states="1"] .s-wait-1 *');
       wt('.r-cap', { borderTopColor: TOK.wLine, color: TOK.t1 }); }
     // ---------- 8d. words and numbers ----------
