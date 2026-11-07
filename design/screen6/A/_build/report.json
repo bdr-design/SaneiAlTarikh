@@ -1,7 +1,7 @@
 {
  "se": {
   "device": "667x375 side 0 bottom 0 none",
-  "renderedAt": "2026-11-07T15:39:08.917Z",
+  "renderedAt": "2026-11-07T18:13:01.401Z",
   "inputs": {
    "files": [
     "index.html",
@@ -22,7 +22,7 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "66f382fa2302e2d4c83d632cb790992a81747912"
+   "sha1": "776fabff130330c9f45094da08ba60ea40ffca1a"
   },
   "issues": [],
   "views": {
@@ -6838,14 +6838,14 @@
    "_build/se_trade_end.png"
   ],
   "pngSha1": {
-   "se.png": "1219ec69d27c7d2a8f1ff85e5562892aebe44369",
-   "_build/se_hit.png": "2d1015691c24f2b83ed5f4e380eb4dd78e08786c",
-   "_build/se_budget.png": "e6cc3da70c99c35950f58b31041ec805753bc6ea",
-   "_build/se_budget_end.png": "50185f307cff1212c341b33eb9b7f91823b5a14e",
-   "_build/se_taxes.png": "02c73e0a13b955b50fdf8a5197081282d2410ade",
-   "_build/se_taxes_end.png": "64ed1e64e027af18f9d21809d756ec86ae602bfc",
-   "_build/se_trade.png": "2aee5e7c6b2b1449a3c547bc80ff0ac5c04cfe24",
-   "_build/se_trade_end.png": "b64b1f00727a3cb9089dbd0276b067dd7aec689f"
+   "se.png": "2df79b98e19a124ecee8fe6a0d5ffdf6380ff0fb",
+   "_build/se_hit.png": "8ce0687656dd32708d204e12a4a915c4a851569b",
+   "_build/se_budget.png": "b23db33e761dacdb17fc5f16258a31c798e702d2",
+   "_build/se_budget_end.png": "0a1465645d8d7a70ab6513c5cdb8da8a10e38a4e",
+   "_build/se_taxes.png": "31ec2592937547107ad495ce776f0e2f527362e1",
+   "_build/se_taxes_end.png": "cccc2ae09a33e48c2bc6cfc43204026e61a8fe0a",
+   "_build/se_trade.png": "33382792910c17813e4bcf636f2e34c156606d6c",
+   "_build/se_trade_end.png": "63905df4d39b734b6dba157e81070fc07b1fe24f"
   },
   "env": {
    "chromium": "153.0.8010.12"
@@ -6854,7 +6854,7 @@
  },
  "mini": {
   "device": "812x375 side 50 bottom 21 notch",
-  "renderedAt": "2026-11-07T15:39:29.799Z",
+  "renderedAt": "2026-11-07T18:13:23.191Z",
   "inputs": {
    "files": [
     "index.html",
@@ -6875,7 +6875,7 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "66f382fa2302e2d4c83d632cb790992a81747912"
+   "sha1": "776fabff130330c9f45094da08ba60ea40ffca1a"
   },
   "issues": [],
   "views": {
@@ -14661,14 +14661,14 @@
    "_build/mini_trade_end.png"
   ],
   "pngSha1": {
-   "mini.png": "72f0a7cea7453f74e83a6522c78c971f904eaad1",
-   "_build/mini_hit.png": "fc65124cb16eb0e5a77adafcbae8375c12faa111",
-   "_build/mini_budget.png": "8f0c63bc25e77ece6932f60e1c057057f28358ae",
-   "_build/mini_budget_end.png": "96b06fc3114f73fd3e3b0b58be19090b5f43c835",
-   "_build/mini_taxes.png": "6d7219d628a7bd4a4a0f3324bb192be8f87b898d",
-   "_build/mini_taxes_end.png": "4f181ad0cebf58148f881963d6ecc225465376b3",
-   "_build/mini_trade.png": "22adca072fb1776741b0d72e6a8081a1db6f0915",
-   "_build/mini_trade_end.png": "21150f3ae885a2f6ca9c0f2d1d5d17b14e8f12e4"
+   "mini.png": "ea7bfc2dcbc52db273b7a0ee8feb5f5b17d77118",
+   "_build/mini_hit.png": "14b8b95c9ea23d2824fac83801c12b71062ef5b8",
+   "_build/mini_budget.png": "ae3ca65248174f9514f87b4bd8af980218a2a96f",
+   "_build/mini_budget_end.png": "239bdec180afb88bce93fcb72c7841d7ceda3c10",
+   "_build/mini_taxes.png": "bef7569dd2f212bbe5e65dc371261e15c2174173",
+   "_build/mini_taxes_end.png": "d7047701ab9649e094c4a83b387250e4bf4d35a2",
+   "_build/mini_trade.png": "ab4c5142410c5dacf0a65634d227b28f09b04ce6",
+   "_build/mini_trade_end.png": "c89bf77fd4d69ce6a3a4e20e2be8ea31cc210bce"
   },
   "env": {
    "chromium": "153.0.8010.12"
@@ -14677,7 +14677,7 @@
  },
  "i14": {
   "device": "844x390 side 47 bottom 21 notch",
-  "renderedAt": "2026-11-07T15:39:53.895Z",
+  "renderedAt": "2026-11-07T18:13:48.442Z",
   "inputs": {
    "files": [
     "index.html",
@@ -14698,7 +14698,7 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "66f382fa2302e2d4c83d632cb790992a81747912"
+   "sha1": "776fabff130330c9f45094da08ba60ea40ffca1a"
   },
   "issues": [],
   "views": {
@@ -23172,14 +23172,14 @@
    "_build/i14_trade_end.png"
   ],
   "pngSha1": {
-   "i14.png": "dc686cd279018c04d073a6d9d2225ed976ea01bb",
-   "_build/i14_hit.png": "cb27931472e4aff91638e9ecf20e2ce0935d97c9",
-   "_build/i14_budget.png": "067d2c07c54e8c5587e85d77253bc20b121a77dd",
-   "_build/i14_budget_end.png": "8cfe053dd56f4f3eed31ba3c827a74d461b52a19",
-   "_build/i14_taxes.png": "bcfebd8652f96999f334e15d0915b7c6b4820b7e",
-   "_build/i14_taxes_end.png": "2dd61768f1ed95c5a6dd35f5b92c7347e049b103",
-   "_build/i14_trade.png": "190cf9914d1c20b3194d74bfa8d3ab1459e9f86b",
-   "_build/i14_trade_end.png": "71a00728f0ae32dcf239c096f5b4e6344ea12938"
+   "i14.png": "11509fe4bdb44c61504352a0eb27d4e67face6e7",
+   "_build/i14_hit.png": "4dc79790dd037ee165407bc8db8310b215a45cff",
+   "_build/i14_budget.png": "24de78700d3ce963692e12eb8cf2ef9fdbd05ad6",
+   "_build/i14_budget_end.png": "1f6458a11aaf090575c7a6cf0f35f3a6651d06b8",
+   "_build/i14_taxes.png": "14a305d1818ee199266ef7e404d1d55e7524fb39",
+   "_build/i14_taxes_end.png": "461264bbeab09d76fb88fdc9c22ee8d9a6df4ea9",
+   "_build/i14_trade.png": "bb1ca7ef3418e9aceaa3e7dd0c657d4006394599",
+   "_build/i14_trade_end.png": "d6b9212df30c7cdb5fa018bcb9afcb18f001cb47"
   },
   "env": {
    "chromium": "153.0.8010.12"
@@ -23188,7 +23188,7 @@
  },
  "i16": {
   "device": "852x393 side 59 bottom 21 island",
-  "renderedAt": "2026-11-07T15:40:16.886Z",
+  "renderedAt": "2026-11-07T18:14:12.034Z",
   "inputs": {
    "files": [
     "index.html",
@@ -23209,7 +23209,7 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "66f382fa2302e2d4c83d632cb790992a81747912"
+   "sha1": "776fabff130330c9f45094da08ba60ea40ffca1a"
   },
   "issues": [],
   "views": {
@@ -31453,14 +31453,14 @@
    "_build/i16_trade_end.png"
   ],
   "pngSha1": {
-   "i16.png": "5a5aecd4a666e613072b3d79870ba3696450ec5b",
-   "_build/i16_hit.png": "e7a35a49b779df8755388bba3f8d87c3eaf9d0ed",
-   "_build/i16_budget.png": "d34dbb22827563c7576aedf83a4f04ff482f4516",
-   "_build/i16_budget_end.png": "0a2c3acf626598c89ba6a03f5801b135b1488dcd",
-   "_build/i16_taxes.png": "49c068910fc51835c74ca9259b1704a5053dadb8",
-   "_build/i16_taxes_end.png": "bfa2f7c34e3a3b55244b4e6cc6cc5408e44e142e",
-   "_build/i16_trade.png": "25868404957ab8552ac3adda121183bb7589960b",
-   "_build/i16_trade_end.png": "269ae2d02cbf6aae429c2c4ed84ed420cd04e3d6"
+   "i16.png": "576b36b5b3fcd13d3e60c5e8db58453991edb8fe",
+   "_build/i16_hit.png": "34c1b59b62ad62c020d609c5d70508eafe14868d",
+   "_build/i16_budget.png": "2b81d13815ba9d8e5a4efd52c69de4a0b650a465",
+   "_build/i16_budget_end.png": "6751bc82acc56d901f93e2cc96f8d1d917fe82d2",
+   "_build/i16_taxes.png": "22a636ab6572e81e1de4f1ea644bafb238a90615",
+   "_build/i16_taxes_end.png": "308edbcf48c3cecfeee3b67ece04ba606adf1e16",
+   "_build/i16_trade.png": "6c330f9cf7ec74b48199766642fe8942e7ac275c",
+   "_build/i16_trade_end.png": "c90e80a3b96962de949221949cc2c6235ed202da"
   },
   "env": {
    "chromium": "153.0.8010.12"
@@ -31469,7 +31469,7 @@
  },
  "i16pro": {
   "device": "874x402 side 62 bottom 21 island",
-  "renderedAt": "2026-11-07T15:40:40.147Z",
+  "renderedAt": "2026-11-07T18:14:35.381Z",
   "inputs": {
    "files": [
     "index.html",
@@ -31490,7 +31490,7 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "66f382fa2302e2d4c83d632cb790992a81747912"
+   "sha1": "776fabff130330c9f45094da08ba60ea40ffca1a"
   },
   "issues": [],
   "views": {
@@ -39314,14 +39314,14 @@
    "_build/i16pro_trade_end.png"
   ],
   "pngSha1": {
-   "i16pro.png": "ec32e93e9fc89607fabe2d50749bc70bb91ce5f1",
-   "_build/i16pro_hit.png": "50d6ea358225386c459c465a3da3b3cbc2e9cb3e",
-   "_build/i16pro_budget.png": "0783c84a3c926a7f24b9e66c6467da4f46a8961f",
-   "_build/i16pro_budget_end.png": "3218d297e3fc4c1ed9fa863a623944ece192ccb8",
-   "_build/i16pro_taxes.png": "1e1ec9868f44f1135b9ffd05efb94d014b6baaed",
-   "_build/i16pro_taxes_end.png": "f502d4ca8d8bd25c933d90752fc16e5cbd6c6a84",
-   "_build/i16pro_trade.png": "e1263aabbb45c1546d8048070e63f37ced069bab",
-   "_build/i16pro_trade_end.png": "92596d17b7182fe3f46761a0b8ed15318ce1b064"
+   "i16pro.png": "6a89eeb930983a173c58fdc9c96303adab32be08",
+   "_build/i16pro_hit.png": "15718def97f1b9df762e6fd6879ace2357ed0a55",
+   "_build/i16pro_budget.png": "e4449feb8be3441bcef72ce49331640b2b9ba4d0",
+   "_build/i16pro_budget_end.png": "346a29d3e0d6537a61fd1704cc149d1b69da4a5e",
+   "_build/i16pro_taxes.png": "707803ce935ad519cebc42fe150022897281f770",
+   "_build/i16pro_taxes_end.png": "0c0cfab7633cdbeb494d64b94da2abbb387db669",
+   "_build/i16pro_trade.png": "4579b6d06ad8ab600537663285ca60bda50573ad",
+   "_build/i16pro_trade_end.png": "fbc85d46c9abaa9da577920b9e9a141d3445c07d"
   },
   "env": {
    "chromium": "153.0.8010.12"
@@ -39330,7 +39330,7 @@
  },
  "i11": {
   "device": "896x414 side 48 bottom 21 notch",
-  "renderedAt": "2026-11-07T15:41:02.606Z",
+  "renderedAt": "2026-11-07T18:14:58.315Z",
   "inputs": {
    "files": [
     "index.html",
@@ -39351,7 +39351,7 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "66f382fa2302e2d4c83d632cb790992a81747912"
+   "sha1": "776fabff130330c9f45094da08ba60ea40ffca1a"
   },
   "issues": [],
   "views": {
@@ -47117,14 +47117,14 @@
    "_build/i11_trade_end.png"
   ],
   "pngSha1": {
-   "i11.png": "ddf87b91662df1d99e66911165774b80777a6613",
-   "_build/i11_hit.png": "fff82139108da2ccd6e7c93670c8ffa85a557a66",
-   "_build/i11_budget.png": "a529c79d8d00543c196ac73b588d68d5af83e2a9",
-   "_build/i11_budget_end.png": "89e92d329fd2d5eff516f74344ceb13702e15650",
-   "_build/i11_taxes.png": "88b982783d6ab8fd121222b417b3036ca3468ddb",
-   "_build/i11_taxes_end.png": "acf0a34246515aa308b23400205c6da2f98cbe68",
-   "_build/i11_trade.png": "a2ac10a3594c9db784f2a16d21751b28bb170be3",
-   "_build/i11_trade_end.png": "7545c18e2082bd123599162f6f05ece00a462e1c"
+   "i11.png": "1f8cd7b80fd81742a360869fda559569f9141ac8",
+   "_build/i11_hit.png": "23d75e53dd066060a8eff08ebe522f60da539f03",
+   "_build/i11_budget.png": "f1bb2e4e3545ce45ffd95f0e75ff60a08e307f79",
+   "_build/i11_budget_end.png": "12304c97c853c1c6c8584659adbbc9164c77a793",
+   "_build/i11_taxes.png": "365367aed32d4e4d458e0b31a5c31cf63fb99261",
+   "_build/i11_taxes_end.png": "bb37a0dea67ea1fb1a39659f65883fed7e36b236",
+   "_build/i11_trade.png": "ff2324a4ac94a61e45853d59055d01765def18b8",
+   "_build/i11_trade_end.png": "d57b1e7961f41a48fdfb947ab9f869383144802d"
   },
   "env": {
    "chromium": "153.0.8010.12"
@@ -47133,7 +47133,7 @@
  },
  "i16promax": {
   "device": "956x440 side 62 bottom 21 island",
-  "renderedAt": "2026-11-07T15:41:25.885Z",
+  "renderedAt": "2026-11-07T18:15:22.093Z",
   "inputs": {
    "files": [
     "index.html",
@@ -47154,7 +47154,7 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "66f382fa2302e2d4c83d632cb790992a81747912"
+   "sha1": "776fabff130330c9f45094da08ba60ea40ffca1a"
   },
   "issues": [],
   "views": {
@@ -53840,14 +53840,14 @@
    "_build/i16promax_trade_end.png"
   ],
   "pngSha1": {
-   "i16promax.png": "1556b97cb6c6f12c8290415f6197d7dbe4e5297e",
-   "_build/i16promax_hit.png": "18736271df255da17f87b58f7759cec6d5771175",
-   "_build/i16promax_budget.png": "c54916edaf1773c97cff252c4f7d23c818137aa7",
-   "_build/i16promax_budget_end.png": "4b38897329e530d08220727a632629c054772e5b",
-   "_build/i16promax_taxes.png": "4c6662b403229c43fbf46f5155d5654fce11ea2e",
-   "_build/i16promax_taxes_end.png": "1989578a7862f9caf6d2b4b74bad2e704b54a66a",
-   "_build/i16promax_trade.png": "86db5731aeae73c3b884445cb0a2d326ddcfd726",
-   "_build/i16promax_trade_end.png": "2c8fad01394bbf0fedd386275c6fa4029b16becd"
+   "i16promax.png": "de4fb5d86561f80d22261fd7d3ae1295c38dfd42",
+   "_build/i16promax_hit.png": "b335c7765600f3dc9d34364dd9b5460e5ef9fc18",
+   "_build/i16promax_budget.png": "490bbcf8e95b1df0ef8b5689f558607c1acde5f0",
+   "_build/i16promax_budget_end.png": "cec84e8c5668b8d178b7ab28990bf362657b7c92",
+   "_build/i16promax_taxes.png": "ee29ecd0217bdb17d1664639a7b9ca9569ad96f1",
+   "_build/i16promax_taxes_end.png": "bc04b5b7f2e57395e40173085b9b053701d50afa",
+   "_build/i16promax_trade.png": "5e873509839c93c23d0417415dbd675c2b31c4e4",
+   "_build/i16promax_trade_end.png": "28acbe48bf5be631c12f5626864d164bfd7374fe"
   },
   "env": {
    "chromium": "153.0.8010.12"

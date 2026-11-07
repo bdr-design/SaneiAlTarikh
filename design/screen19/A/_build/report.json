@@ -1,7 +1,7 @@
 {
  "se": {
   "device": "667x375 side 0 bottom 0 none",
-  "renderedAt": "2026-11-07T16:07:16.657Z",
+  "renderedAt": "2026-11-07T18:08:46.158Z",
   "inputs": {
    "files": [
     "index.html",
@@ -28,7 +28,7 @@
     "../../shared/map_mena_d1_overlay.svg",
     "header_cairo.jpg"
    ],
-   "sha1": "287f0a7625506d467576836355a7954543f0b7d9"
+   "sha1": "d7109d945e253cd4093c2c80c6a8c78689d36741"
   },
   "issues": [],
   "views": {
@@ -1806,9 +1806,9 @@
    "_build/se_modes_end.png"
   ],
   "pngSha1": {
-   "se.png": "f2a5705df58edb02966f143ede16802809dfeffc",
-   "_build/se_hit.png": "401a870e73453592831df84da663b6969ea3e925",
-   "_build/se_modes_end.png": "e502ecea021443c084c57c7d264cd2d9d293cd04"
+   "se.png": "09e929c5ebbefd360b7805f7e2afa98378e1d3d2",
+   "_build/se_hit.png": "12f32d78f698cdfdfd435eb7cd8c750c3463d0b5",
+   "_build/se_modes_end.png": "952a9dca13eb73b780cdcdc08e458c52ab9a5007"
   },
   "env": {
    "chromium": "153.0.8010.12"
@@ -1817,7 +1817,7 @@
  },
  "mini": {
   "device": "812x375 side 50 bottom 21 notch",
-  "renderedAt": "2026-11-07T16:07:23.960Z",
+  "renderedAt": "2026-11-07T18:08:54.188Z",
   "inputs": {
    "files": [
     "index.html",
@@ -1844,7 +1844,7 @@
     "../../shared/map_mena_d1_overlay.svg",
     "header_cairo.jpg"
    ],
-   "sha1": "287f0a7625506d467576836355a7954543f0b7d9"
+   "sha1": "d7109d945e253cd4093c2c80c6a8c78689d36741"
   },
   "issues": [],
   "views": {
@@ -3604,9 +3604,9 @@
    "_build/mini_modes_end.png"
   ],
   "pngSha1": {
-   "mini.png": "0e2521207431660902022b1734fdb84aa79237e7",
-   "_build/mini_hit.png": "29e7f7d272a67722d13feebe6be48f746d6347d9",
-   "_build/mini_modes_end.png": "c5bf492eb07dad087aa85345880fd9edc49c1b58"
+   "mini.png": "3508bdd36367647efa9d84b03ac306316b24c6f2",
+   "_build/mini_hit.png": "58dadab5a9bfa92fde63d9bcf2a90cc6174d5675",
+   "_build/mini_modes_end.png": "703fc27b3d7d4b12e2026e2eab87c8e3565aff83"
   },
   "env": {
    "chromium": "153.0.8010.12"
@@ -3615,7 +3615,7 @@
  },
  "i14": {
   "device": "844x390 side 47 bottom 21 notch",
-  "renderedAt": "2026-11-07T16:07:31.747Z",
+  "renderedAt": "2026-11-07T18:09:02.242Z",
   "inputs": {
    "files": [
     "index.html",
@@ -3642,7 +3642,7 @@
     "../../shared/map_mena_d1_overlay.svg",
     "header_cairo.jpg"
    ],
-   "sha1": "287f0a7625506d467576836355a7954543f0b7d9"
+   "sha1": "d7109d945e253cd4093c2c80c6a8c78689d36741"
   },
   "issues": [],
   "views": {
@@ -5888,9 +5888,9 @@
    "_build/i14_modes_end.png"
   ],
   "pngSha1": {
-   "i14.png": "cc9c41a7fb54c39c54e4c72d7980b0ab50ad25ae",
-   "_build/i14_hit.png": "4c0d5ab1c432d5779ce374a759164374abbda996",
-   "_build/i14_modes_end.png": "62918e69167c4bc2e01227ca26cbcbe67f40e350"
+   "i14.png": "c3e2b564eba997e9dd4f9d6dd252eb208a5db6e9",
+   "_build/i14_hit.png": "c1e64f0f7b96ddb7eaa615f0987171f64ddad035",
+   "_build/i14_modes_end.png": "7200b43252ee35e30499f02d33605f75a9bbd24c"
   },
   "env": {
    "chromium": "153.0.8010.12"
@@ -5899,7 +5899,7 @@
  },
  "i16": {
   "device": "852x393 side 59 bottom 21 island",
-  "renderedAt": "2026-11-07T16:07:39.535Z",
+  "renderedAt": "2026-11-07T18:09:10.407Z",
   "inputs": {
    "files": [
     "index.html",
@@ -5926,7 +5926,7 @@
     "../../shared/map_mena_d1_overlay.svg",
     "header_cairo.jpg"
    ],
-   "sha1": "287f0a7625506d467576836355a7954543f0b7d9"
+   "sha1": "d7109d945e253cd4093c2c80c6a8c78689d36741"
   },
   "issues": [],
   "views": {
@@ -8139,9 +8139,9 @@
    "_build/i16_modes_end.png"
   ],
   "pngSha1": {
-   "i16.png": "63617f5b333a7a29b6db11efd55e020ea6c68a05",
-   "_build/i16_hit.png": "5933e57aa4e9879c93f0833ab3d83e82eabe4378",
-   "_build/i16_modes_end.png": "c837787049e801a7f811819963a856217d104743"
+   "i16.png": "41c39a00cf432084a53c44b43f0b81dea2f52d20",
+   "_build/i16_hit.png": "1477b59e1a35eb0c556fcfcd2c0412aeb6734756",
+   "_build/i16_modes_end.png": "cfc32c0a598371909d0a55875f726ae2e431c61d"
   },
   "env": {
    "chromium": "153.0.8010.12"
@@ -8150,7 +8150,7 @@
  },
  "i16pro": {
   "device": "874x402 side 62 bottom 21 island",
-  "renderedAt": "2026-11-07T16:07:47.701Z",
+  "renderedAt": "2026-11-07T18:09:18.927Z",
   "inputs": {
    "files": [
     "index.html",
@@ -8177,7 +8177,7 @@
     "../../shared/map_mena_d1_overlay.svg",
     "header_cairo.jpg"
    ],
-   "sha1": "287f0a7625506d467576836355a7954543f0b7d9"
+   "sha1": "d7109d945e253cd4093c2c80c6a8c78689d36741"
   },
   "issues": [],
   "views": {
@@ -10445,9 +10445,9 @@
    "_build/i16pro_modes_end.png"
   ],
   "pngSha1": {
-   "i16pro.png": "9d89c273348c4c6f6d97807d76b3cf9f1c1082cd",
-   "_build/i16pro_hit.png": "f683dd9183d28916cd6414f1dcb8fc672ba04f6a",
-   "_build/i16pro_modes_end.png": "cb3fdedd553419ccb30c3f8e2eedaf84a7b2b9ac"
+   "i16pro.png": "3d53ce2cb403065c3ddd6415dca1df453af2c9e1",
+   "_build/i16pro_hit.png": "d7499b03720b9c793f3d948f4538ae5f034f2dfb",
+   "_build/i16pro_modes_end.png": "a1072dfdb4c9908ab3f337471eb12f492345c778"
   },
   "env": {
    "chromium": "153.0.8010.12"
@@ -10456,7 +10456,7 @@
  },
  "i11": {
   "device": "896x414 side 48 bottom 21 notch",
-  "renderedAt": "2026-11-07T16:07:55.797Z",
+  "renderedAt": "2026-11-07T18:09:27.370Z",
   "inputs": {
    "files": [
     "index.html",
@@ -10483,7 +10483,7 @@
     "../../shared/map_mena_d1_overlay.svg",
     "header_cairo.jpg"
    ],
-   "sha1": "287f0a7625506d467576836355a7954543f0b7d9"
+   "sha1": "d7109d945e253cd4093c2c80c6a8c78689d36741"
   },
   "issues": [],
   "views": {
@@ -12214,9 +12214,9 @@
    "_build/i11_modes_end.png"
   ],
   "pngSha1": {
-   "i11.png": "a24b926a27c51027dc76cda630a555d6588f1161",
-   "_build/i11_hit.png": "1798992339172ae03e60c53043bf9f3e495a55af",
-   "_build/i11_modes_end.png": "8b4fab2eca4377d09bb1827ebc66b349df49d307"
+   "i11.png": "08347fc9dfc902950a1783a70c1ba114dcd0aca4",
+   "_build/i11_hit.png": "2496714c4f5fb29c9f99097e39371be0393ffc35",
+   "_build/i11_modes_end.png": "b885f8b5325684e1c7f9855cbb9cb8cc32b06105"
   },
   "env": {
    "chromium": "153.0.8010.12"
@@ -12225,7 +12225,7 @@
  },
  "i16promax": {
   "device": "956x440 side 62 bottom 21 island",
-  "renderedAt": "2026-11-07T16:08:03.265Z",
+  "renderedAt": "2026-11-07T18:09:34.676Z",
   "inputs": {
    "files": [
     "index.html",
@@ -12252,7 +12252,7 @@
     "../../shared/map_mena_d1_overlay.svg",
     "header_cairo.jpg"
    ],
-   "sha1": "287f0a7625506d467576836355a7954543f0b7d9"
+   "sha1": "d7109d945e253cd4093c2c80c6a8c78689d36741"
   },
   "issues": [],
   "views": {
@@ -14021,9 +14021,9 @@
    "_build/i16promax_modes_end.png"
   ],
   "pngSha1": {
-   "i16promax.png": "0c17f29e473e1e0d34744deebea6101515257e7c",
-   "_build/i16promax_hit.png": "dc938d14c8c48fbade9388ccb20ab1af30c4171d",
-   "_build/i16promax_modes_end.png": "fe7a65d56843877a37e1f20259ac8e846603d2f6"
+   "i16promax.png": "61f9d78b69347d942e9f590e65956744e0fa0bc5",
+   "_build/i16promax_hit.png": "16177e35b02d1663b01afd210de5b9a9f77788e3",
+   "_build/i16promax_modes_end.png": "96684b4b667ee8b265ab617b9a9054b8dff7a49b"
   },
   "env": {
    "chromium": "153.0.8010.12"

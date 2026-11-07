@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-07T15:44:39.717Z",
+ "ranAt": "2026-11-07T18:18:38.983Z",
  "inputs": {
   "files": [
    "index.html",
@@ -20,7 +20,7 @@
    "header_cairo.jpg",
    "map_overlay_cairo.svg"
   ],
-  "sha1": "66f382fa2302e2d4c83d632cb790992a81747912"
+  "sha1": "776fabff130330c9f45094da08ba60ea40ffca1a"
  },
  "cleanIssues": {
   "i16promax": [],
@@ -63,8 +63,8 @@
    "name": "18 pt misuse",
    "ok": true,
    "sample": [
-    "close button is not round",
     "18 pt is for the panel's name and the headline numbers only: \"مصر\"",
+    "ellipsis on \"مصر\"",
     "18 pt is for the panel's name and the headline numbers only: \"·\""
    ]
   },

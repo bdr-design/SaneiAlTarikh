@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-07T15:39:06.441Z",
+ "ranAt": "2026-11-07T18:12:58.831Z",
  "inputs": {
   "files": [
    "index.html",
@@ -19,7 +19,7 @@
    "header_cairo.jpg",
    "map_overlay_cairo.svg"
   ],
-  "sha1": "15b859740c41f9dcfbbd95723b293dcbc64f59d3"
+  "sha1": "7c8ea5a8a12ee24df17f27e1957906b1cce11f14"
  },
  "cleanIssues": {
   "i16promax": [],
@@ -64,8 +64,8 @@
    "name": "18 pt misuse",
    "ok": true,
    "sample": [
-    "close button is not round",
     "18 pt is for the country name and the headline numbers only: \"الرئيس محمد حسني مبارك\"",
+    "ellipsis on \"الرئيس محمد حسني مبارك\"",
     "18 pt is for the country name and the headline numbers only: \"·\""
    ]
   },

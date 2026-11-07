@@ -61,13 +61,17 @@
   .r-flag img { width: 100%; height: 100%; object-fit: cover; display: block; }
   .r-tt { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
   .r-row { display: flex; align-items: center; gap: var(--s2); }
-  .r-name { font-size: var(--title); line-height: var(--lh-title); font-weight: 700; text-shadow: 0 1px 3px rgba(0, 0, 0, .6); }
+  .r-name { font-size: var(--title); line-height: var(--lh-title); font-weight: 700; text-shadow: 0 1px 3px rgba(0, 0, 0, .6);
+    white-space: nowrap; min-width: 0; overflow-x: clip; overflow-y: visible; text-overflow: ellipsis;
+    padding-inline: 2px; margin-inline: -2px; }   /* a long name stays one line (T-024); the 2 pt keep the glyphs' overhang inside the clip */
   .r-cap { display: inline-flex; align-items: center; gap: var(--s1); height: 20px; padding-inline: var(--s2); border-radius: 10px; border: 1px solid var(--teal);
-    font-size: var(--fs-label); line-height: var(--lh-label); font-weight: 700; color: var(--teal); background: rgba(12, 20, 28, .7); }
+    font-size: var(--fs-label); line-height: var(--lh-label); font-weight: 700; color: var(--teal); background: rgba(12, 20, 28, .7); white-space: nowrap; flex: none; }
   .r-cap svg.i { width: var(--glyph); height: var(--glyph); }
-  .r-sub { font-size: var(--fs-sec); line-height: var(--lh-sec); font-weight: 500; color: var(--t1); text-shadow: 0 1px 3px rgba(0, 0, 0, .8); white-space: nowrap; }
+  .r-sub { font-size: var(--fs-sec); line-height: var(--lh-sec); font-weight: 500; color: var(--t1); text-shadow: 0 1px 3px rgba(0, 0, 0, .8); white-space: nowrap;
+    overflow-x: clip; overflow-y: visible; text-overflow: ellipsis; padding-inline: 2px; margin-inline: -2px; }   /* a long country name (T-024): the line's end gives way, VoiceOver reads it whole; 2 pt for the glyphs' overhang */
+  .r-sub .ltr { display: inline-block; }   /* a number is hidden whole by the ellipsis, never cut to its last digits (T-024) */
   .r-sub .r-dot { color: var(--t1); }
-  .r-x { margin-inline-start: auto; width: var(--ctl); height: var(--ctl); border-radius: 50%; display: grid; place-items: center; color: var(--t1);
+  .r-x { flex: none; margin-inline-start: auto; width: var(--ctl); height: var(--ctl); border-radius: 50%; display: grid; place-items: center; color: var(--t1);
     background: rgba(6, 11, 16, .85); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .18), 0 2px 6px rgba(0, 0, 0, .4); }
 
   /* scrolling body + edge fades */

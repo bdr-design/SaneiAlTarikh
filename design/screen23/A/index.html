@@ -159,7 +159,7 @@
   /* Name over "leader · regime" (fit 0). A grid, so the narrower fit 1 can re-flow the same three
      items into "name  leader" over "regime" without hiding any of them. */
   .ntext { display: grid; grid-template-columns: auto auto; grid-template-areas: "nm nm" "ldr rg"; justify-content: start; align-items: baseline; }
-  .ntext .nm { grid-area: nm; font-size: var(--fs-name); font-weight: 700; line-height: var(--lh-name); color: var(--t1); }
+  .ntext .nm { grid-area: nm; font-size: var(--fs-name); font-weight: 700; line-height: var(--lh-name); color: var(--t1); white-space: nowrap; }
   .ntext .ldr, .ntext .rg { font-size: var(--fs-label); font-weight: 500; line-height: var(--lh-label); color: var(--t2); white-space: nowrap; }
   .ntext .ldr { grid-area: ldr; }
   .ntext .rg { grid-area: rg; }
@@ -252,17 +252,19 @@
   /* ---------- Fit levels (set by fitTop() from the measured top row, not from the device name) ----------
      Only the nation card condenses; every other element keeps the same tokens on every device.
      0: flag, name over "leader · regime"
-     1: flag, "name  leader" over "regime": same content, same type, about 36 pt narrower
-     2: flag and name                   3: flag only (the map already labels Egypt) */
+     1: flag, "name  leader" over "regime": same content, same type, narrower when the leader is the longest of the three
+     2: flag and name                   3: flag and name, the indicators tightened (as fit 4)
+     4: flag only (the map already labels the country), the indicators tightened
+     (3 comes before flag only so a longer name than Egypt's keeps its place where tightening is enough, T-024) */
   [data-fit="1"] .ntext { grid-template-areas: "nm ldr" "rg rg"; column-gap: var(--s2); }
   [data-fit="1"] .ntext .rg::before { content: none; }
-  [data-fit="2"] .ntext { grid-template-columns: auto; grid-template-areas: "nm"; }
-  [data-fit="2"] .ntext .ldr, [data-fit="2"] .ntext .rg { display: none; }
-  [data-fit="3"] .ntext, [data-fit="4"] .ntext, [data-fit="5"] .ntext { display: none; }
-  /* fit 4 and 5 (only where the widest date would not fit otherwise): the indicators 4 pt apart and 6 pt from the strip
+  [data-fit="2"] .ntext, [data-fit="3"] .ntext { grid-template-columns: auto; grid-template-areas: "nm"; }
+  [data-fit="2"] .ntext .ldr, [data-fit="2"] .ntext .rg, [data-fit="3"] .ntext .ldr, [data-fit="3"] .ntext .rg { display: none; }
+  [data-fit="4"] .ntext, [data-fit="5"] .ntext { display: none; }
+  /* fit 3 to 5 (only where the row would not fit otherwise): the indicators 4 pt apart and 6 pt from the strip
      ends; fit 5 also moves the year up to the weekday line («السبت · 2011», window.__setDate) (2026-11-04) */
-  [data-fit="4"] .stat, [data-fit="5"] .stat { padding-inline: 2px; }
-  [data-fit="4"] .stats, [data-fit="5"] .stats { padding-inline: var(--s1); }
+  [data-fit="3"] .stat, [data-fit="4"] .stat, [data-fit="5"] .stat { padding-inline: 2px; }
+  [data-fit="3"] .stats, [data-fit="4"] .stats, [data-fit="5"] .stats { padding-inline: var(--s1); }
 
   /* ---------- Device overlay (on top of the render, for the fit check) ---------- */
   .dev { position: absolute; inset: 0; pointer-events: none; z-index: 50; }
@@ -343,13 +345,17 @@
   .r-flag img { width: 100%; height: 100%; object-fit: cover; display: block; }
   .r-tt { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
   .r-row { display: flex; align-items: center; gap: var(--s2); }
-  .r-name { font-size: var(--title); line-height: var(--lh-title); font-weight: 700; text-shadow: 0 1px 3px rgba(0, 0, 0, .6); }
+  .r-name { font-size: var(--title); line-height: var(--lh-title); font-weight: 700; text-shadow: 0 1px 3px rgba(0, 0, 0, .6);
+    white-space: nowrap; min-width: 0; overflow-x: clip; overflow-y: visible; text-overflow: ellipsis;
+    padding-inline: 2px; margin-inline: -2px; }   /* a long name stays one line (T-024); the 2 pt keep the glyphs' overhang inside the clip */
   .r-cap { display: inline-flex; align-items: center; gap: var(--s1); height: 20px; padding-inline: var(--s2); border-radius: 10px; border: 1px solid var(--teal);
-    font-size: var(--fs-label); line-height: var(--lh-label); font-weight: 700; color: var(--teal); background: rgba(12, 20, 28, .7); }
+    font-size: var(--fs-label); line-height: var(--lh-label); font-weight: 700; color: var(--teal); background: rgba(12, 20, 28, .7); white-space: nowrap; flex: none; }
   .r-cap svg.i { width: var(--glyph); height: var(--glyph); }
-  .r-sub { font-size: var(--fs-sec); line-height: var(--lh-sec); font-weight: 500; color: var(--t1); text-shadow: 0 1px 3px rgba(0, 0, 0, .8); white-space: nowrap; }
+  .r-sub { font-size: var(--fs-sec); line-height: var(--lh-sec); font-weight: 500; color: var(--t1); text-shadow: 0 1px 3px rgba(0, 0, 0, .8); white-space: nowrap;
+    overflow-x: clip; overflow-y: visible; text-overflow: ellipsis; padding-inline: 2px; margin-inline: -2px; }   /* a long country name (T-024): the line's end gives way, VoiceOver reads it whole; 2 pt for the glyphs' overhang */
+  .r-sub .ltr { display: inline-block; }   /* a number is hidden whole by the ellipsis, never cut to its last digits (T-024) */
   .r-sub .r-dot { color: var(--t1); }
-  .r-x { margin-inline-start: auto; width: var(--ctl); height: var(--ctl); border-radius: 50%; display: grid; place-items: center; color: var(--t1);
+  .r-x { flex: none; margin-inline-start: auto; width: var(--ctl); height: var(--ctl); border-radius: 50%; display: grid; place-items: center; color: var(--t1);
     background: rgba(6, 11, 16, .85); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .18), 0 2px 6px rgba(0, 0, 0, .4); }
 
   /* scrolling body + edge fades */
@@ -575,6 +581,10 @@
   [data-states="1"] .s-wait-1 .s-sg { color: var(--t2); }
   [data-states="1"] .s-wait-1 .s-sg.on { background: var(--w-line-dim); color: var(--t1); }
   [data-states="1"] .s-short-1 .s-cost { color: var(--amber); }
+  /* the mode chip as its icon alone where the header row needs the room for a long country name (T-024, capFit); its
+     words stay for VoiceOver */
+  .cap-icon .r-cap { padding-inline: 5px; }
+  .cap-icon .r-cap .r-capt, .cap-icon .r-cap .lbl { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
   /* ================= Screen 23, variant A: the save-file sheet ================= */
   .r-tabs { display: none; }
   [data-tab="file"] .r-body[data-tab="file"], [data-tab="confirm"] .r-body[data-tab="confirm"], [data-tab="load"] .r-body[data-tab="load"] { display: flex; }
@@ -888,7 +898,9 @@
       tx.style.minWidth = room[lv === 5 ? 1 : 0] + 'px';
       window.__setDate(dw, d);
       var need = kids.reduce(function (a, e) { return a + e.getBoundingClientRect().width; }, 0) + gap * (kids.length - 1);
-      if (need <= top.clientWidth + 0.01) break;
+      /* a long country, leader or regime name that runs out of its box also takes the next level (T-024) */
+      var over = Array.prototype.some.call(document.querySelectorAll('.ntext > *'), function (e) { return getComputedStyle(e).display !== 'none' && (e.scrollWidth > e.clientWidth + 0.5 || e.getBoundingClientRect().height > parseFloat(getComputedStyle(e).lineHeight) * 1.5); });
+      if (need <= top.clientWidth + 0.01 && !over) break;
     }
     window.__fit = { level: +root.dataset.fit, need: need, avail: top.clientWidth, dateRoom: parseFloat(tx.style.minWidth) };
   }

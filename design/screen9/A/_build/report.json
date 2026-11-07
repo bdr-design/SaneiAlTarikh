@@ -1,7 +1,7 @@
 {
  "se": {
   "device": "667x375 side 0 bottom 0 none",
-  "renderedAt": "2026-11-07T16:10:59.018Z",
+  "renderedAt": "2026-11-07T18:04:58.229Z",
   "inputs": {
    "files": [
     "index.html",
@@ -28,7 +28,7 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "1159bf31e5700545e0118bf439b5711ba9680bc0"
+   "sha1": "acb26b47aeff6b3f8e11211dc0b65410f4178923"
   },
   "issues": [],
   "views": {
@@ -6267,15 +6267,15 @@
    "_build/se_wars_end.png"
   ],
   "pngSha1": {
-   "se.png": "40eea52719397e7d70654c8748481c2991a1df8f",
-   "_build/se_hit.png": "0938660194f51626c36a2d191b9e4c371a197c74",
-   "_build/se_overview_end.png": "40eea52719397e7d70654c8748481c2991a1df8f",
-   "_build/se_forces.png": "81cc04143ecf1e730aa2bcebced480ba3ee3bdec",
-   "_build/se_forces_end.png": "95329dbb8e82c510bc7d35982cd5d8426ff4874e",
-   "_build/se_equipment.png": "a67af6720f69923d896ab4f2c0cd83ba5a51da72",
-   "_build/se_equipment_end.png": "af81d1352641a787a94f0fc269ae9cdb7db27baf",
-   "_build/se_wars.png": "44ee14217f4d287bed60920b82ebd5edc398f0ca",
-   "_build/se_wars_end.png": "a2894a5b97ec7935761d2a19c870db1b1e09d0d5"
+   "se.png": "69b669e6e13d64b35b1026d781d4ada8aa10399c",
+   "_build/se_hit.png": "984625adfb849cb0f99b220d7521f242ea6c8db3",
+   "_build/se_overview_end.png": "69b669e6e13d64b35b1026d781d4ada8aa10399c",
+   "_build/se_forces.png": "c9c88269f139220aef1106347587cf9f6b278b2b",
+   "_build/se_forces_end.png": "b13aff7ad93add82d4eee18687e045f05b851e55",
+   "_build/se_equipment.png": "7c504e7714106417957386003167d4b1b4bee8fe",
+   "_build/se_equipment_end.png": "8141d9d51a5654ed1e846ae3e4f33fc175e42d6d",
+   "_build/se_wars.png": "566bd5c3ed7bac16d96492301c2c313cfe3daca4",
+   "_build/se_wars_end.png": "0795d9b47f90801fca542f2771330c14a595fbda"
   },
   "env": {
    "chromium": "153.0.8010.12"
@@ -6284,7 +6284,7 @@
  },
  "mini": {
   "device": "812x375 side 50 bottom 21 notch",
-  "renderedAt": "2026-11-07T16:11:20.600Z",
+  "renderedAt": "2026-11-07T18:05:19.122Z",
   "inputs": {
    "files": [
     "index.html",
@@ -6311,7 +6311,7 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "1159bf31e5700545e0118bf439b5711ba9680bc0"
+   "sha1": "acb26b47aeff6b3f8e11211dc0b65410f4178923"
   },
   "issues": [],
   "views": {
@@ -13533,15 +13533,15 @@
    "_build/mini_wars_end.png"
   ],
   "pngSha1": {
-   "mini.png": "757e875974ff67e6ea84fc5b1ae337c897030957",
-   "_build/mini_hit.png": "b950ecbb95425efd928ecb9a4ea6f330a131d743",
-   "_build/mini_overview_end.png": "757e875974ff67e6ea84fc5b1ae337c897030957",
-   "_build/mini_forces.png": "676c27c5f4b2e69bcaee784a3bb85d40d681cfd5",
-   "_build/mini_forces_end.png": "d61210d079494ad921436d2b8566d9e3b6217d2b",
-   "_build/mini_equipment.png": "14e987dfd7cb9d60637428e98b1095268faf1233",
-   "_build/mini_equipment_end.png": "38cbaf57dd80d8f20566b7c9083f62e9a29c1d5a",
-   "_build/mini_wars.png": "0ab0f0b0abd20ca27d9b86ee2afeb7ab66dbf5aa",
-   "_build/mini_wars_end.png": "bf05fe8f6ba8a2df3d4e4a4a4a68d103e46c80ea"
+   "mini.png": "d43ac18de08b43f293b94ea151a5dacea34314b8",
+   "_build/mini_hit.png": "aa35217a54bf1a7dc1a48fe9c5ca7ec8f9ba111d",
+   "_build/mini_overview_end.png": "d43ac18de08b43f293b94ea151a5dacea34314b8",
+   "_build/mini_forces.png": "54f191306a3eccdb0ea115bbb5a9401112e0da27",
+   "_build/mini_forces_end.png": "91965519752106e893acb55fb3964edebdabb424",
+   "_build/mini_equipment.png": "88430f2281498b34b31544b1b96130da3956fa79",
+   "_build/mini_equipment_end.png": "772a13effc9109b2b09a8a07bf65a84b9d14a267",
+   "_build/mini_wars.png": "568bab4445bb63cdb5177b0e208c6bb9fdb3c117",
+   "_build/mini_wars_end.png": "8a0963a41a9db55b5005e75d01a2933454ea0817"
   },
   "env": {
    "chromium": "153.0.8010.12"
@@ -13550,7 +13550,7 @@
  },
  "i14": {
   "device": "844x390 side 47 bottom 21 notch",
-  "renderedAt": "2026-11-07T16:11:44.269Z",
+  "renderedAt": "2026-11-07T18:05:43.478Z",
   "inputs": {
    "files": [
     "index.html",
@@ -13577,7 +13577,7 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "1159bf31e5700545e0118bf439b5711ba9680bc0"
+   "sha1": "acb26b47aeff6b3f8e11211dc0b65410f4178923"
   },
   "issues": [],
   "views": {
@@ -21327,15 +21327,15 @@
    "_build/i14_wars_end.png"
   ],
   "pngSha1": {
-   "i14.png": "8fa95e3fbc40f2d642600ec42b987cf70a16678f",
-   "_build/i14_hit.png": "b55909a789681032ae17cbfbcda7e683feaf8383",
-   "_build/i14_overview_end.png": "8fa95e3fbc40f2d642600ec42b987cf70a16678f",
-   "_build/i14_forces.png": "f17f87136b698de333c6221f4f1dc9129974e1b4",
-   "_build/i14_forces_end.png": "fa2db9906e243df6018fe971a85c83f18e034cfd",
-   "_build/i14_equipment.png": "b792da846ad916241f4e3c0fe7f7565f5f358ad2",
-   "_build/i14_equipment_end.png": "719fa9154a1674f340c9b8228a0e2767b7e907c0",
-   "_build/i14_wars.png": "168ee317cebad312263435196b3ea0564ef736ad",
-   "_build/i14_wars_end.png": "b0c968a66572da827b763149ea4763762870bb3d"
+   "i14.png": "4259ddbbbc56bc2c064dd70662f59688da8ed406",
+   "_build/i14_hit.png": "ec5ed8011f5c9c1fee266963dfc68833a8c6360b",
+   "_build/i14_overview_end.png": "4259ddbbbc56bc2c064dd70662f59688da8ed406",
+   "_build/i14_forces.png": "ba1f23eeda790f148211f87f4e8e84e5734e9296",
+   "_build/i14_forces_end.png": "0ad82746bbc164b3b6016924f5f1ce918e0dbb39",
+   "_build/i14_equipment.png": "1dfe6dae93b410ba83b3a9e8eec4abdb02c326a3",
+   "_build/i14_equipment_end.png": "0eb2c87af9f783a53a6948172b24af00e66a9213",
+   "_build/i14_wars.png": "b857cdabe626acab0f4ef45d1a9bc62b9eb9eb8d",
+   "_build/i14_wars_end.png": "07505a286e57cfea3a40054fcc9c38732f58d5c0"
   },
   "env": {
    "chromium": "153.0.8010.12"
@@ -21344,7 +21344,7 @@
  },
  "i16": {
   "device": "852x393 side 59 bottom 21 island",
-  "renderedAt": "2026-11-07T16:12:06.432Z",
+  "renderedAt": "2026-11-07T18:06:06.151Z",
   "inputs": {
    "files": [
     "index.html",
@@ -21371,7 +21371,7 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "1159bf31e5700545e0118bf439b5711ba9680bc0"
+   "sha1": "acb26b47aeff6b3f8e11211dc0b65410f4178923"
   },
   "issues": [],
   "views": {
@@ -29011,15 +29011,15 @@
    "_build/i16_wars_end.png"
   ],
   "pngSha1": {
-   "i16.png": "723846713b8ea5aba643fe01337c2f00d4ac0968",
-   "_build/i16_hit.png": "08148e1a0d6b8ee7f475a792023592fee273e7e9",
-   "_build/i16_overview_end.png": "723846713b8ea5aba643fe01337c2f00d4ac0968",
-   "_build/i16_forces.png": "f4589e8050852547886524610b1228667eead29e",
-   "_build/i16_forces_end.png": "8568c5df9aa07d6adea9857269f96ef8a3122770",
-   "_build/i16_equipment.png": "797d70bf1914ea02635de5d482a03a54ac00fd83",
-   "_build/i16_equipment_end.png": "8c3db9b8d22b11562e608a9b38341fc65572e246",
-   "_build/i16_wars.png": "980e86b59fec30ec3ae8ad86e499166969c3c8b6",
-   "_build/i16_wars_end.png": "deb895acef7717b9a0e10cb745e57a11ba334948"
+   "i16.png": "4caaed30490a5701649aae66288b526b1fd7e2db",
+   "_build/i16_hit.png": "ca213527cc76de47f5e7440096137f7cb8c76419",
+   "_build/i16_overview_end.png": "4caaed30490a5701649aae66288b526b1fd7e2db",
+   "_build/i16_forces.png": "5fc4a802d786c7b877f701d5824a97cc35cf27db",
+   "_build/i16_forces_end.png": "67a9f6343e8b1682311db4bfe8fa252b8bef95f8",
+   "_build/i16_equipment.png": "6bfb69194e408e2dce658d1f46bcfbe0fbb39e05",
+   "_build/i16_equipment_end.png": "89e930b9b0610560883fa9177eff2d1adb9af3f2",
+   "_build/i16_wars.png": "8180873841b5dc6e361c8b620f4d58ccc1366884",
+   "_build/i16_wars_end.png": "425d0ef3b034caa8bcf02e9eb9c675167a92eed7"
   },
   "env": {
    "chromium": "153.0.8010.12"
@@ -29028,7 +29028,7 @@
  },
  "i16pro": {
   "device": "874x402 side 62 bottom 21 island",
-  "renderedAt": "2026-11-07T16:12:29.168Z",
+  "renderedAt": "2026-11-07T18:06:29.641Z",
   "inputs": {
    "files": [
     "index.html",
@@ -29055,7 +29055,7 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "1159bf31e5700545e0118bf439b5711ba9680bc0"
+   "sha1": "acb26b47aeff6b3f8e11211dc0b65410f4178923"
   },
   "issues": [],
   "views": {
@@ -36904,15 +36904,15 @@
    "_build/i16pro_wars_end.png"
   ],
   "pngSha1": {
-   "i16pro.png": "cf1253bf1d9788aabf7de6f7686e03a5e0f8038d",
-   "_build/i16pro_hit.png": "6b1ad334a59f6129de8d3355535661ed302a9973",
-   "_build/i16pro_overview_end.png": "cf1253bf1d9788aabf7de6f7686e03a5e0f8038d",
-   "_build/i16pro_forces.png": "3098a1dc3ec6dcbb76375582cc426e131d818724",
-   "_build/i16pro_forces_end.png": "c2f2a5a463342d534e9585c89426469060874ab7",
-   "_build/i16pro_equipment.png": "031f0b48696e3528768612abfdfe1b4a4e4147ea",
-   "_build/i16pro_equipment_end.png": "5b96b7628704ee7ff6f9e183eb8a8c85414ccbe7",
-   "_build/i16pro_wars.png": "63eccd96f1bd08227fe0e5783ca85fb2c280e9e6",
-   "_build/i16pro_wars_end.png": "ff9e84100a9d92df296ba9a03a02afdd3a86da64"
+   "i16pro.png": "cb0d91fb89f78a2282dae3fd76d02f5969d3e5e7",
+   "_build/i16pro_hit.png": "e456615d07b53d20c5948aef12de5bd55267b9e1",
+   "_build/i16pro_overview_end.png": "cb0d91fb89f78a2282dae3fd76d02f5969d3e5e7",
+   "_build/i16pro_forces.png": "28de6616b35ae85c518c2d202979ec8920b482b3",
+   "_build/i16pro_forces_end.png": "fbf5069967872c6ce39d6db77ef2ba36a01ca9d4",
+   "_build/i16pro_equipment.png": "ca13bfe469b9dc176be63fa3187cca5214fc515e",
+   "_build/i16pro_equipment_end.png": "e3041aa8b7ffef174cc9af8581b8358294486d26",
+   "_build/i16pro_wars.png": "34e1a17a5a767cbfacc333c2185bb83f34834d51",
+   "_build/i16pro_wars_end.png": "3aa8714c583cca96ea390ad6dbcb7116cd7068f8"
   },
   "env": {
    "chromium": "153.0.8010.12"
@@ -36921,7 +36921,7 @@
  },
  "i11": {
   "device": "896x414 side 48 bottom 21 notch",
-  "renderedAt": "2026-11-07T16:12:51.783Z",
+  "renderedAt": "2026-11-07T18:06:52.833Z",
   "inputs": {
    "files": [
     "index.html",
@@ -36948,7 +36948,7 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "1159bf31e5700545e0118bf439b5711ba9680bc0"
+   "sha1": "acb26b47aeff6b3f8e11211dc0b65410f4178923"
   },
   "issues": [],
   "views": {
@@ -43675,15 +43675,15 @@
    "_build/i11_wars_end.png"
   ],
   "pngSha1": {
-   "i11.png": "58962cb697e6ea1851aa64e5e65eae00dc08f118",
-   "_build/i11_hit.png": "7a5438076bf89e49136c6fab60c9b5bea5aea84f",
-   "_build/i11_overview_end.png": "58962cb697e6ea1851aa64e5e65eae00dc08f118",
-   "_build/i11_forces.png": "a32cb194fc759f8c358c04c60f3ebab20b72a25d",
-   "_build/i11_forces_end.png": "7156631f0aa317b23bbdcdbfbfe85d3f500e946b",
-   "_build/i11_equipment.png": "96e296ab59988ff4eebff4407cf9d71946f64020",
-   "_build/i11_equipment_end.png": "228804e4c0ed97d0aea63b6585fae07960c629a5",
-   "_build/i11_wars.png": "44596f4a7ce6dca2198c3f752ece2e6ab6dd2e2a",
-   "_build/i11_wars_end.png": "c00ce5056919d1c1396908219ded72cc643692a9"
+   "i11.png": "80a7b98d5e88b2e741f7d33234603bc2d76cd907",
+   "_build/i11_hit.png": "c65bb45652eff3dba73d6948324caf5e3e29ee12",
+   "_build/i11_overview_end.png": "80a7b98d5e88b2e741f7d33234603bc2d76cd907",
+   "_build/i11_forces.png": "9b85a3d6e3ec1554e6b046565fa2ec5406431468",
+   "_build/i11_forces_end.png": "0de11eea7be5766a7eff77a9d3c256b52f6bb62e",
+   "_build/i11_equipment.png": "ff93e281019b91778ef514a2b82293e20b1efaf6",
+   "_build/i11_equipment_end.png": "a14ae87e635ef0834ff2b00fbe6881055553e569",
+   "_build/i11_wars.png": "dfdcd8620110668872a56da857226de95d5d5983",
+   "_build/i11_wars_end.png": "a6b14a08336d7185f34f1d8c519cd8ac1c2b42c7"
   },
   "env": {
    "chromium": "153.0.8010.12"
@@ -43692,7 +43692,7 @@
  },
  "i16promax": {
   "device": "956x440 side 62 bottom 21 island",
-  "renderedAt": "2026-11-07T16:13:13.240Z",
+  "renderedAt": "2026-11-07T18:07:14.656Z",
   "inputs": {
    "files": [
     "index.html",
@@ -43719,7 +43719,7 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "1159bf31e5700545e0118bf439b5711ba9680bc0"
+   "sha1": "acb26b47aeff6b3f8e11211dc0b65410f4178923"
   },
   "issues": [],
   "views": {
@@ -49956,15 +49956,15 @@
    "_build/i16promax_wars_end.png"
   ],
   "pngSha1": {
-   "i16promax.png": "2b6a9ff69798cb5f3f8c5bfd6240fc791c07948b",
-   "_build/i16promax_hit.png": "0699ba3d1bca485173767d6c8ad4c7d3ee3e27a2",
-   "_build/i16promax_overview_end.png": "2b6a9ff69798cb5f3f8c5bfd6240fc791c07948b",
-   "_build/i16promax_forces.png": "d2a0351393bc143d0abb74ce5ebd7bffdc04294e",
-   "_build/i16promax_forces_end.png": "0c84c6dacc946664e91aef977d4b65bd698e605e",
-   "_build/i16promax_equipment.png": "7e52a03afc42d9ee38640c01ac4c5fa4fc2e4097",
-   "_build/i16promax_equipment_end.png": "b8bdfb9ac5f8bbfba4ad8304c105c64784508010",
-   "_build/i16promax_wars.png": "f4f7bf12a7117a7e846c9bbc8849b253881ae5b5",
-   "_build/i16promax_wars_end.png": "f4f7bf12a7117a7e846c9bbc8849b253881ae5b5"
+   "i16promax.png": "d96e0bb08f7442c57aa90113a00b18e53d66774e",
+   "_build/i16promax_hit.png": "cbe171f0d8256ebb138e15673289f64042005edf",
+   "_build/i16promax_overview_end.png": "d96e0bb08f7442c57aa90113a00b18e53d66774e",
+   "_build/i16promax_forces.png": "75e4e80b57ad5abfe35a326a8ed3ca9164bd1f49",
+   "_build/i16promax_forces_end.png": "beb4bd69ff49da140e69cfa039a4b8dc6da9d346",
+   "_build/i16promax_equipment.png": "17ecf890dd1b75e0a0f035835e2edec8d379c9c2",
+   "_build/i16promax_equipment_end.png": "8ee42b4cd606c0a1ec51c8a52bce8bd81996ef47",
+   "_build/i16promax_wars.png": "fa72a5d65f87d32f173034ea165ef2245e72f68f",
+   "_build/i16promax_wars_end.png": "fa72a5d65f87d32f173034ea165ef2245e72f68f"
   },
   "env": {
    "chromium": "153.0.8010.12"

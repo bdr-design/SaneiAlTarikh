@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-07T16:13:14.545Z",
+ "ranAt": "2026-11-07T18:14:48.524Z",
  "inputs": {
   "files": [
    "index.html",
@@ -23,7 +23,7 @@
    "header_cairo.jpg",
    "map_overlay_cairo.svg"
   ],
-  "sha1": "a12ffb23f37f68cef17517f62d7bf53bc8f80acf"
+  "sha1": "5b49cb515bb1b3875ca67ba5954bbc925a661f95"
  },
  "cleanIssues": {
   "i16promax": [],
@@ -110,7 +110,7 @@
    "sample": [
     "panel not opaque (opacity 0.60): الأسواق: مصر",
     "brief text not fully visible: الأسواق",
-    "brief text not fully visible: مصر · السلع والصناعات والممرات"
+    "brief text not fully visible: مصر · التجارة والصناعة"
    ]
   },
   {
@@ -290,8 +290,8 @@
    "ok": true,
    "sample": [
     "section colour on data text: \"مصر\"",
-    "section colour on data text: \"السلع والصناعات والممرات\"",
-    "section colour on data chrome: مصر · السلع والصناعات والم"
+    "section colour on data text: \"التجارة والصناعة\"",
+    "section colour on data chrome: مصر · التجارة والصناعة"
    ]
   },
   {
@@ -398,7 +398,7 @@
    "sample": [
     "text overlap \"الأسواق\" / \"مصر\"",
     "text overlap \"الأسواق\" / \"·\"",
-    "text overlap \"الأسواق\" / \"السلع والصناعات والممرات\""
+    "text overlap \"الأسواق\" / \"التجارة والصناعة\""
    ]
   },
   {

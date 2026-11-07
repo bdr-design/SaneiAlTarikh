@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-07T15:33:50.839Z",
+ "ranAt": "2026-11-07T18:07:44.026Z",
  "inputs": {
   "files": [
    "index.html",
@@ -19,7 +19,7 @@
    "header_cairo.jpg",
    "map_overlay_cairo.svg"
   ],
-  "sha1": "8ed3ef91f8b2792523d8a7ea4fa03e791073121b"
+  "sha1": "bcec19e62be374957f88673e8a1fbefc965b7132"
  },
  "cleanIssues": {
   "i16promax": [],
@@ -173,8 +173,8 @@
    "name": "clipped text",
    "ok": true,
    "sample": [
-    "clipped text (sides): \"حكومة مصر\" 547..606.2 y 207.5..226.5",
-    "text outside the sheet's 12 pt padding: \"حكومة مصر\"",
+    "clipped text (sides): \"حكومتنا\" 547..586.8 y 207.5..226.5",
+    "text outside the sheet's 12 pt padding: \"حكومتنا\"",
     "clipped text (sides): \"لا توجد\" 547..582.91 y 236..255"
    ]
   },
