@@ -571,7 +571,7 @@ The view uses `CAMetalDisplayLink` (iOS 17+).
 - **Right-to-left.** `CFBundleDevelopmentRegion = ar`, and `ar.lproj` is the only localization. `.environment(\.layoutDirection, .rightToLeft)` is forced at the root. Layout uses leading and trailing edges only.
 - **Tokens.** `DesignTokens.swift` is generated from `design/tokens.json`. `GlassStyle` is the only place a material may be used.
 - **Custom chrome only** on the play screen: no system TabView, NavigationBar or `.sheet`.
-- **Layout fit engine.** The width class comes from the **safe-area width minus margins** (§6.3). Variants are chosen once per campaign and again on an inset change, never per tick. Chip widths are reserved from the longest formatted value class, not the current value.
+- **Layout fit engine.** The width class comes from the **safe-area width minus margins** (§6.3). Variants are chosen once per campaign, again on an inset change, and again when the player's name, leader or regime text changes (succession, a coup, RenameLeader, renamePolity, a regime change: a few times a campaign, once per such event, §3.10); never per tick or per HUD value update, which use the reserved widths only. Chip widths are reserved from the longest formatted value class, not the current value.
 - **`DialogPresenter`** is one queue for every dialog. Every request has a default or an expiry.
 
 ### 2.7 Saves
@@ -832,6 +832,25 @@ bound here; each item is a line in `docs/perf.md` (L12) and a test where one is 
   checks the header, META and trailer hash before releasing the old state (a failed check keeps the game), then releases,
   decodes on the platform engine, and shows a static «جارٍ التحميل» until the first frame (≤1.0 s on A12, §3.4; peak per
   §3.3).
+
+### 3.10 Names of any country (the second-country test, T-024)
+
+- Every polity has a **short name**, the one shown on screen everywhere: the HUD's nation card, every panel's title and
+  sub-line, the bodies, the new-game card («السعودية», «الولايات المتحدة», «أفريقيا الوسطى», «سانت فينسنت»). Its bound
+  is measured, not counted: in the panel title's type (18 pt bold) it is at most as wide as «الكونغو الديمقراطية»
+  (the widest the stress test proves); `ids_lock.py` measures it with the bundled font. The full official name
+  («المملكة العربية السعودية», «جمهورية الكونغو الديمقراطية») is read by VoiceOver with the state panel's title.
+- Leaders have a short form for their lines («الملك عبدالله بن عبدالعزيز · منذ 2005»), so a reign's year stays shown.
+- The HUD's nation card condenses by its fit levels: the leader and regime go first, then the indicators tighten with the
+  name still shown, and only then the card keeps its flag alone. The fit runs when that text changes (the fit engine's
+  triggers), never per HUD update.
+- A panel title never wraps and never shrinks its controls (the close button, the emblem, the flag keep their sizes). In
+  the state panel the mode chip gives way first: it keeps its icon and its words stay for VoiceOver.
+- A header sub-line that is still too long gives way at its end with an ellipsis; a number in it is hidden whole, never
+  cut to its last digits; VoiceOver reads the line whole. The widest names do this on a few panels (§T-024's list).
+- `tools/stress_names.js` renders the pages that name the player's country with Egypt (the baseline), Saudi Arabia, the
+  United States, the Central African Republic and the widest short name on the 7 phones; it runs with the full gate
+  (`STRESS=1 tools/gate_all.sh …`) and must report 0 issues.
 
 ## 4. Data and realism pipeline
 
@@ -1589,7 +1608,7 @@ Unchanged:
 5. nation card → flag only (name moves to the State panel header)
 6. date → short form «12/3/2011»
 
-Measurements use the **player's name** (fixed per campaign) and **reserved widths for each chip's longest value class**, for example «−999.9 مليار» for the treasury, in Western digits.
+Measurements use the **player's current name, leader and regime** (measured again only when one of them changes, §2.5's fit engine) and **reserved widths for each chip's longest value class**, for example «−999.9 مليار» for the treasury, in Western digits.
 
 **Snapshot fit tests** run in CI for the SE (667), 12/13 mini (812), XR/11 (896), 14/15 (844/852), 16 Pro (874), Plus/Pro Max (926/932) and 17 Pro Max (956). They use the longest Arabic country names («جمهورية الكونغو الديمقراطية», «سانت فينسنت وجزر غرينادين») and the widest values. Nothing may clip.
 
