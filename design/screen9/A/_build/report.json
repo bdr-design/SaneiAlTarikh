@@ -1,7 +1,7 @@
 {
  "se": {
   "device": "667x375 side 0 bottom 0 none",
-  "renderedAt": "2026-11-04T13:09:50.807Z",
+  "renderedAt": "2026-11-07T15:30:01.554Z",
   "inputs": {
    "files": [
     "index.html",
@@ -28,9 +28,18 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "296add904ce1263179478f776deedfcef616882d"
+   "sha1": "4269196183bbae656f11f93618c4dccaffa3309e"
   },
-  "issues": [],
+  "issues": [
+   "equipment: a11y: «طلب منظومات دفاع جوي» does not read its numbers",
+   "equipment: a11y: «طلب منظومات دفاع جوي: 1.» does not read all it shows: 14",
+   "equipment_end: a11y: «طلب منظومات دفاع جوي» does not read its numbers",
+   "equipment_end: a11y: «طلب منظومات دفاع جوي: 1.» does not read all it shows: 14",
+   "equipment_at86: a11y: «طلب منظومات دفاع جوي» does not read its numbers",
+   "equipment_at86: a11y: «طلب منظومات دفاع جوي: 1.» does not read all it shows: 14",
+   "equipment_at172: a11y: «طلب منظومات دفاع جوي» does not read its numbers",
+   "equipment_at172: a11y: «طلب منظومات دفاع جوي: 1.» does not read all it shows: 14"
+  ],
   "views": {
    "overview": {
     "issueCount": 0,
@@ -162,7 +171,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 9,
       "x1": 53,
       "y0": 48,
@@ -725,7 +734,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 9,
       "x1": 53,
       "y0": 48,
@@ -1288,7 +1297,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 9,
       "x1": 53,
       "y0": 48,
@@ -1781,7 +1790,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 9,
       "x1": 53,
       "y0": 48,
@@ -2138,7 +2147,7 @@
     ]
    },
    "equipment": {
-    "issueCount": 0,
+    "issueCount": 2,
     "png": true,
     "fit": {
      "top": {
@@ -2267,7 +2276,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 9,
       "x1": 53,
       "y0": 48,
@@ -2638,7 +2647,7 @@
     ]
    },
    "equipment_end": {
-    "issueCount": 0,
+    "issueCount": 2,
     "png": true,
     "fit": {
      "top": {
@@ -2767,7 +2776,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 9,
       "x1": 53,
       "y0": 48,
@@ -3055,12 +3064,12 @@
       "worst": 8.9
      },
      {
-      "t": "الدفاع الجوي",
+      "t": "الحديث",
       "fs": 11.5,
       "worst": 13.35
      },
      {
-      "t": "+8",
+      "t": "+14",
       "fs": 11.5,
       "worst": 13.35
      },
@@ -3206,7 +3215,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 9,
       "x1": 53,
       "y0": 48,
@@ -3633,7 +3642,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 9,
       "x1": 53,
       "y0": 48,
@@ -4065,7 +4074,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 9,
       "x1": 53,
       "y0": 48,
@@ -4525,7 +4534,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 9,
       "x1": 53,
       "y0": 48,
@@ -4995,7 +5004,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 9,
       "x1": 53,
       "y0": 48,
@@ -5339,7 +5348,7 @@
     ]
    },
    "equipment_at86": {
-    "issueCount": 0,
+    "issueCount": 2,
     "png": false,
     "fit": {
      "top": {
@@ -5468,7 +5477,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 9,
       "x1": 53,
       "y0": 48,
@@ -5799,7 +5808,7 @@
     ]
    },
    "equipment_at172": {
-    "issueCount": 0,
+    "issueCount": 2,
     "png": false,
     "fit": {
      "top": {
@@ -5928,7 +5937,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 9,
       "x1": 53,
       "y0": 48,
@@ -6267,24 +6276,24 @@
    "_build/se_wars_end.png"
   ],
   "pngSha1": {
-   "se.png": "81cd26edeb9947041548acb1e488576100c8074f",
-   "_build/se_hit.png": "d5b81d5fca4b91ae37ca8e64f64fd515f26c0d41",
-   "_build/se_overview_end.png": "81cd26edeb9947041548acb1e488576100c8074f",
-   "_build/se_forces.png": "d1c3a0c337457372f244fe22aa7bc728a27680f8",
-   "_build/se_forces_end.png": "63db440b1d71712cafbd6c12ac763f6a7eb66ce2",
-   "_build/se_equipment.png": "53ec49127899256c295a9acdc82e0dc30b354013",
-   "_build/se_equipment_end.png": "70c8de538320ee0be8e3576f5db012045e3349ec",
-   "_build/se_wars.png": "e9edf5c2eed185edc876f6470bbc8eed6465d370",
-   "_build/se_wars_end.png": "fdda4cdb3137dac789f23dcdd935af60d2114a0f"
+   "se.png": "40eea52719397e7d70654c8748481c2991a1df8f",
+   "_build/se_hit.png": "0938660194f51626c36a2d191b9e4c371a197c74",
+   "_build/se_overview_end.png": "40eea52719397e7d70654c8748481c2991a1df8f",
+   "_build/se_forces.png": "81cc04143ecf1e730aa2bcebced480ba3ee3bdec",
+   "_build/se_forces_end.png": "95329dbb8e82c510bc7d35982cd5d8426ff4874e",
+   "_build/se_equipment.png": "a67af6720f69923d896ab4f2c0cd83ba5a51da72",
+   "_build/se_equipment_end.png": "af81d1352641a787a94f0fc269ae9cdb7db27baf",
+   "_build/se_wars.png": "44ee14217f4d287bed60920b82ebd5edc398f0ca",
+   "_build/se_wars_end.png": "a2894a5b97ec7935761d2a19c870db1b1e09d0d5"
   },
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 0
+  "issueCount": 8
  },
  "mini": {
   "device": "812x375 side 50 bottom 21 notch",
-  "renderedAt": "2026-11-04T13:10:14.707Z",
+  "renderedAt": "2026-11-07T15:30:24.574Z",
   "inputs": {
    "files": [
     "index.html",
@@ -6311,9 +6320,20 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "296add904ce1263179478f776deedfcef616882d"
+   "sha1": "4269196183bbae656f11f93618c4dccaffa3309e"
   },
-  "issues": [],
+  "issues": [
+   "equipment: a11y: «طلب منظومات دفاع جوي» does not read its numbers",
+   "equipment: a11y: «طلب منظومات دفاع جوي: 1.» does not read all it shows: 14",
+   "equipment_end: a11y: «طلب منظومات دفاع جوي» does not read its numbers",
+   "equipment_end: a11y: «طلب منظومات دفاع جوي: 1.» does not read all it shows: 14",
+   "equipment_at72: a11y: «طلب منظومات دفاع جوي» does not read its numbers",
+   "equipment_at72: a11y: «طلب منظومات دفاع جوي: 1.» does not read all it shows: 14",
+   "equipment_at144: a11y: «طلب منظومات دفاع جوي» does not read its numbers",
+   "equipment_at144: a11y: «طلب منظومات دفاع جوي: 1.» does not read all it shows: 14",
+   "equipment_at216: a11y: «طلب منظومات دفاع جوي» does not read its numbers",
+   "equipment_at216: a11y: «طلب منظومات دفاع جوي: 1.» does not read all it shows: 14"
+  ],
   "views": {
    "overview": {
     "issueCount": 0,
@@ -6455,7 +6475,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 51,
       "x1": 95,
       "y0": 48,
@@ -7033,7 +7053,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 51,
       "x1": 95,
       "y0": 48,
@@ -7611,7 +7631,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 51,
       "x1": 95,
       "y0": 48,
@@ -8094,7 +8114,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 51,
       "x1": 95,
       "y0": 48,
@@ -8434,7 +8454,7 @@
     ]
    },
    "equipment": {
-    "issueCount": 0,
+    "issueCount": 2,
     "png": true,
     "fit": {
      "top": {
@@ -8573,7 +8593,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 51,
       "x1": 95,
       "y0": 48,
@@ -8924,7 +8944,7 @@
     ]
    },
    "equipment_end": {
-    "issueCount": 0,
+    "issueCount": 2,
     "png": true,
     "fit": {
      "top": {
@@ -9063,7 +9083,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 51,
       "x1": 95,
       "y0": 48,
@@ -9356,12 +9376,12 @@
       "worst": 8.9
      },
      {
-      "t": "الدفاع الجوي",
+      "t": "الحديث",
       "fs": 11.5,
       "worst": 13.35
      },
      {
-      "t": "+8",
+      "t": "+14",
       "fs": 11.5,
       "worst": 13.35
      },
@@ -9517,7 +9537,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 51,
       "x1": 95,
       "y0": 48,
@@ -9959,7 +9979,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 51,
       "x1": 95,
       "y0": 48,
@@ -10406,7 +10426,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 51,
       "x1": 95,
       "y0": 48,
@@ -10891,7 +10911,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 51,
       "x1": 95,
       "y0": 48,
@@ -11366,7 +11386,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 51,
       "x1": 95,
       "y0": 48,
@@ -11851,7 +11871,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 51,
       "x1": 95,
       "y0": 48,
@@ -12173,7 +12193,7 @@
     ]
    },
    "equipment_at72": {
-    "issueCount": 0,
+    "issueCount": 2,
     "png": false,
     "fit": {
      "top": {
@@ -12312,7 +12332,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 51,
       "x1": 95,
       "y0": 48,
@@ -12618,7 +12638,7 @@
     ]
    },
    "equipment_at144": {
-    "issueCount": 0,
+    "issueCount": 2,
     "png": false,
     "fit": {
      "top": {
@@ -12757,7 +12777,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 51,
       "x1": 95,
       "y0": 48,
@@ -13070,7 +13090,7 @@
     ]
    },
    "equipment_at216": {
-    "issueCount": 0,
+    "issueCount": 2,
     "png": false,
     "fit": {
      "top": {
@@ -13209,7 +13229,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 51,
       "x1": 95,
       "y0": 48,
@@ -13502,12 +13522,12 @@
       "worst": 8.9
      },
      {
-      "t": "الدفاع الجوي",
+      "t": "الحديث",
       "fs": 11.5,
       "worst": 13.35
      },
      {
-      "t": "+8",
+      "t": "+14",
       "fs": 11.5,
       "worst": 13.35
      }
@@ -13533,24 +13553,24 @@
    "_build/mini_wars_end.png"
   ],
   "pngSha1": {
-   "mini.png": "e607b421d5325da6041cb7249c107b7139ba2838",
-   "_build/mini_hit.png": "79367adf3441eca2bc8e844afee1bf22ab1a4fdc",
-   "_build/mini_overview_end.png": "e607b421d5325da6041cb7249c107b7139ba2838",
-   "_build/mini_forces.png": "12d33b0bef74b076bef2ed2b9281ed6624f91634",
-   "_build/mini_forces_end.png": "90335ba5bfbc2647ec54da741f8c76f6275d10c7",
-   "_build/mini_equipment.png": "622bf6d91b02bfc5ca707fc62f9b4988e76b0636",
-   "_build/mini_equipment_end.png": "808b12308499c0e3a4a308f0b239a5ffc5c745d4",
-   "_build/mini_wars.png": "39524ceec193ef2d6449555d397dc787561adf2e",
-   "_build/mini_wars_end.png": "e5bb57f9dba311b6dfcbc0fe5f89c5648c90d5a6"
+   "mini.png": "757e875974ff67e6ea84fc5b1ae337c897030957",
+   "_build/mini_hit.png": "b950ecbb95425efd928ecb9a4ea6f330a131d743",
+   "_build/mini_overview_end.png": "757e875974ff67e6ea84fc5b1ae337c897030957",
+   "_build/mini_forces.png": "676c27c5f4b2e69bcaee784a3bb85d40d681cfd5",
+   "_build/mini_forces_end.png": "d61210d079494ad921436d2b8566d9e3b6217d2b",
+   "_build/mini_equipment.png": "14e987dfd7cb9d60637428e98b1095268faf1233",
+   "_build/mini_equipment_end.png": "38cbaf57dd80d8f20566b7c9083f62e9a29c1d5a",
+   "_build/mini_wars.png": "0ab0f0b0abd20ca27d9b86ee2afeb7ab66dbf5aa",
+   "_build/mini_wars_end.png": "bf05fe8f6ba8a2df3d4e4a4a4a68d103e46c80ea"
   },
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 0
+  "issueCount": 10
  },
  "i14": {
   "device": "844x390 side 47 bottom 21 notch",
-  "renderedAt": "2026-11-04T13:10:44.063Z",
+  "renderedAt": "2026-11-07T15:30:54.230Z",
   "inputs": {
    "files": [
     "index.html",
@@ -13577,9 +13597,18 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "296add904ce1263179478f776deedfcef616882d"
+   "sha1": "4269196183bbae656f11f93618c4dccaffa3309e"
   },
-  "issues": [],
+  "issues": [
+   "equipment: a11y: «طلب منظومات دفاع جوي» does not read its numbers",
+   "equipment: a11y: «طلب منظومات دفاع جوي: 1.» does not read all it shows: 14",
+   "equipment_end: a11y: «طلب منظومات دفاع جوي» does not read its numbers",
+   "equipment_end: a11y: «طلب منظومات دفاع جوي: 1.» does not read all it shows: 14",
+   "equipment_at87: a11y: «طلب منظومات دفاع جوي» does not read its numbers",
+   "equipment_at87: a11y: «طلب منظومات دفاع جوي: 1.» does not read all it shows: 14",
+   "equipment_at174: a11y: «طلب منظومات دفاع جوي» does not read its numbers",
+   "equipment_at174: a11y: «طلب منظومات دفاع جوي: 1.» does not read all it shows: 14"
+  ],
   "views": {
    "overview": {
     "issueCount": 0,
@@ -13717,7 +13746,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 48,
       "x1": 92,
       "y0": 48,
@@ -14397,7 +14426,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 48,
       "x1": 92,
       "y0": 48,
@@ -15077,7 +15106,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 48,
       "x1": 92,
       "y0": 48,
@@ -15687,7 +15716,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 48,
       "x1": 92,
       "y0": 48,
@@ -16155,7 +16184,7 @@
     ]
    },
    "equipment": {
-    "issueCount": 0,
+    "issueCount": 2,
     "png": true,
     "fit": {
      "top": {
@@ -16290,7 +16319,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 48,
       "x1": 92,
       "y0": 48,
@@ -16772,7 +16801,7 @@
     ]
    },
    "equipment_end": {
-    "issueCount": 0,
+    "issueCount": 2,
     "png": true,
     "fit": {
      "top": {
@@ -16907,7 +16936,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 48,
       "x1": 92,
       "y0": 48,
@@ -17316,12 +17345,12 @@
       "worst": 8.9
      },
      {
-      "t": "الدفاع الجوي",
+      "t": "الحديث",
       "fs": 11.5,
       "worst": 13.35
      },
      {
-      "t": "+8",
+      "t": "+14",
       "fs": 11.5,
       "worst": 13.35
      },
@@ -17473,7 +17502,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 48,
       "x1": 92,
       "y0": 48,
@@ -18017,7 +18046,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 48,
       "x1": 92,
       "y0": 48,
@@ -18566,7 +18595,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 48,
       "x1": 92,
       "y0": 48,
@@ -19153,7 +19182,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 48,
       "x1": 92,
       "y0": 48,
@@ -19725,7 +19754,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 48,
       "x1": 92,
       "y0": 48,
@@ -20175,7 +20204,7 @@
     ]
    },
    "equipment_at87": {
-    "issueCount": 0,
+    "issueCount": 2,
     "png": false,
     "fit": {
      "top": {
@@ -20310,7 +20339,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 48,
       "x1": 92,
       "y0": 48,
@@ -20742,7 +20771,7 @@
     ]
    },
    "equipment_at174": {
-    "issueCount": 0,
+    "issueCount": 2,
     "png": false,
     "fit": {
      "top": {
@@ -20877,7 +20906,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 48,
       "x1": 92,
       "y0": 48,
@@ -21327,24 +21356,24 @@
    "_build/i14_wars_end.png"
   ],
   "pngSha1": {
-   "i14.png": "54b86d607f4bcc7f28c0c6f9efc93fc540924f31",
-   "_build/i14_hit.png": "1d1e81f6deed6f52342f4172f66f1e6af6463351",
-   "_build/i14_overview_end.png": "54b86d607f4bcc7f28c0c6f9efc93fc540924f31",
-   "_build/i14_forces.png": "8eb0ebac93ea1a7b71ff44dfae8b1badbf7872bc",
-   "_build/i14_forces_end.png": "67bd23c715bd03d59ede49d2f038560335cb9e9c",
-   "_build/i14_equipment.png": "37f1fcc3f9f0b6497e62172a37f8069f9fb2bc14",
-   "_build/i14_equipment_end.png": "9680dd0a12bd970b041980ca94aa7b4f47be763b",
-   "_build/i14_wars.png": "998fc87e507db14e6a296e54b8220ad658079204",
-   "_build/i14_wars_end.png": "8d300ab2a364001efcd60eeb6aadfe566158004b"
+   "i14.png": "8fa95e3fbc40f2d642600ec42b987cf70a16678f",
+   "_build/i14_hit.png": "b55909a789681032ae17cbfbcda7e683feaf8383",
+   "_build/i14_overview_end.png": "8fa95e3fbc40f2d642600ec42b987cf70a16678f",
+   "_build/i14_forces.png": "f17f87136b698de333c6221f4f1dc9129974e1b4",
+   "_build/i14_forces_end.png": "fa2db9906e243df6018fe971a85c83f18e034cfd",
+   "_build/i14_equipment.png": "b792da846ad916241f4e3c0fe7f7565f5f358ad2",
+   "_build/i14_equipment_end.png": "719fa9154a1674f340c9b8228a0e2767b7e907c0",
+   "_build/i14_wars.png": "168ee317cebad312263435196b3ea0564ef736ad",
+   "_build/i14_wars_end.png": "b0c968a66572da827b763149ea4763762870bb3d"
   },
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 0
+  "issueCount": 8
  },
  "i16": {
   "device": "852x393 side 59 bottom 21 island",
-  "renderedAt": "2026-11-04T13:11:10.876Z",
+  "renderedAt": "2026-11-07T15:31:17.537Z",
   "inputs": {
    "files": [
     "index.html",
@@ -21371,9 +21400,18 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "296add904ce1263179478f776deedfcef616882d"
+   "sha1": "4269196183bbae656f11f93618c4dccaffa3309e"
   },
-  "issues": [],
+  "issues": [
+   "equipment: a11y: «طلب منظومات دفاع جوي» does not read its numbers",
+   "equipment: a11y: «طلب منظومات دفاع جوي: 1.» does not read all it shows: 14",
+   "equipment_end: a11y: «طلب منظومات دفاع جوي» does not read its numbers",
+   "equipment_end: a11y: «طلب منظومات دفاع جوي: 1.» does not read all it shows: 14",
+   "equipment_at90: a11y: «طلب منظومات دفاع جوي» does not read its numbers",
+   "equipment_at90: a11y: «طلب منظومات دفاع جوي: 1.» does not read all it shows: 14",
+   "equipment_at180: a11y: «طلب منظومات دفاع جوي» does not read its numbers",
+   "equipment_at180: a11y: «طلب منظومات دفاع جوي: 1.» does not read all it shows: 14"
+  ],
   "views": {
    "overview": {
     "issueCount": 0,
@@ -21510,7 +21548,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 60,
       "x1": 104,
       "y0": 48,
@@ -22179,7 +22217,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 60,
       "x1": 104,
       "y0": 48,
@@ -22848,7 +22886,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 60,
       "x1": 104,
       "y0": 48,
@@ -23447,7 +23485,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 60,
       "x1": 104,
       "y0": 48,
@@ -23910,7 +23948,7 @@
     ]
    },
    "equipment": {
-    "issueCount": 0,
+    "issueCount": 2,
     "png": true,
     "fit": {
      "top": {
@@ -24044,7 +24082,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 60,
       "x1": 104,
       "y0": 48,
@@ -24516,7 +24554,7 @@
     ]
    },
    "equipment_end": {
-    "issueCount": 0,
+    "issueCount": 2,
     "png": true,
     "fit": {
      "top": {
@@ -24650,7 +24688,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 60,
       "x1": 104,
       "y0": 48,
@@ -25059,12 +25097,12 @@
       "worst": 8.9
      },
      {
-      "t": "الدفاع الجوي",
+      "t": "الحديث",
       "fs": 11.5,
       "worst": 13.35
      },
      {
-      "t": "+8",
+      "t": "+14",
       "fs": 11.5,
       "worst": 13.35
      },
@@ -25215,7 +25253,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 60,
       "x1": 104,
       "y0": 48,
@@ -25753,7 +25791,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 60,
       "x1": 104,
       "y0": 48,
@@ -26291,7 +26329,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 60,
       "x1": 104,
       "y0": 48,
@@ -26867,7 +26905,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 60,
       "x1": 104,
       "y0": 48,
@@ -27443,7 +27481,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 60,
       "x1": 104,
       "y0": 48,
@@ -27861,7 +27899,7 @@
     ]
    },
    "equipment_at90": {
-    "issueCount": 0,
+    "issueCount": 2,
     "png": false,
     "fit": {
      "top": {
@@ -27995,7 +28033,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 60,
       "x1": 104,
       "y0": 48,
@@ -28422,7 +28460,7 @@
     ]
    },
    "equipment_at180": {
-    "issueCount": 0,
+    "issueCount": 2,
     "png": false,
     "fit": {
      "top": {
@@ -28556,7 +28594,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 60,
       "x1": 104,
       "y0": 48,
@@ -28980,12 +29018,12 @@
       "worst": 15.37
      },
      {
-      "t": "الدفاع الجوي",
+      "t": "الحديث",
       "fs": 11.5,
       "worst": 13.35
      },
      {
-      "t": "+8",
+      "t": "+14",
       "fs": 11.5,
       "worst": 13.35
      }
@@ -29011,24 +29049,24 @@
    "_build/i16_wars_end.png"
   ],
   "pngSha1": {
-   "i16.png": "ae246d23134c60b371e152a990ef514c3e645ef7",
-   "_build/i16_hit.png": "83e46db94c95e071af4f63432f55a596957b026d",
-   "_build/i16_overview_end.png": "ae246d23134c60b371e152a990ef514c3e645ef7",
-   "_build/i16_forces.png": "3e008b75d0de99a00a8175cfc722504cf4f47ca3",
-   "_build/i16_forces_end.png": "3a70c1e4801b0b59deb3926972ee08bd1abff3cf",
-   "_build/i16_equipment.png": "d2da675ee5c03e70a1f437c8f7f8217906a67858",
-   "_build/i16_equipment_end.png": "66a4f3f3a68ef2a6d27ce097bf9e646f175b9323",
-   "_build/i16_wars.png": "53dd25e135993cb4c19215c769124741da7d05cc",
-   "_build/i16_wars_end.png": "a8dc7633ca306363e0456aff9a472ed4ce260d3f"
+   "i16.png": "723846713b8ea5aba643fe01337c2f00d4ac0968",
+   "_build/i16_hit.png": "08148e1a0d6b8ee7f475a792023592fee273e7e9",
+   "_build/i16_overview_end.png": "723846713b8ea5aba643fe01337c2f00d4ac0968",
+   "_build/i16_forces.png": "f4589e8050852547886524610b1228667eead29e",
+   "_build/i16_forces_end.png": "8568c5df9aa07d6adea9857269f96ef8a3122770",
+   "_build/i16_equipment.png": "797d70bf1914ea02635de5d482a03a54ac00fd83",
+   "_build/i16_equipment_end.png": "8c3db9b8d22b11562e608a9b38341fc65572e246",
+   "_build/i16_wars.png": "980e86b59fec30ec3ae8ad86e499166969c3c8b6",
+   "_build/i16_wars_end.png": "deb895acef7717b9a0e10cb745e57a11ba334948"
   },
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 0
+  "issueCount": 8
  },
  "i16pro": {
   "device": "874x402 side 62 bottom 21 island",
-  "renderedAt": "2026-11-04T13:11:36.952Z",
+  "renderedAt": "2026-11-07T15:31:41.644Z",
   "inputs": {
    "files": [
     "index.html",
@@ -29055,9 +29093,18 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "296add904ce1263179478f776deedfcef616882d"
+   "sha1": "4269196183bbae656f11f93618c4dccaffa3309e"
   },
-  "issues": [],
+  "issues": [
+   "equipment: a11y: «طلب منظومات دفاع جوي» does not read its numbers",
+   "equipment: a11y: «طلب منظومات دفاع جوي: 1.» does not read all it shows: 14",
+   "equipment_end: a11y: «طلب منظومات دفاع جوي» does not read its numbers",
+   "equipment_end: a11y: «طلب منظومات دفاع جوي: 1.» does not read all it shows: 14",
+   "equipment_at99: a11y: «طلب منظومات دفاع جوي» does not read its numbers",
+   "equipment_at99: a11y: «طلب منظومات دفاع جوي: 1.» does not read all it shows: 14",
+   "equipment_at198: a11y: «طلب منظومات دفاع جوي» does not read its numbers",
+   "equipment_at198: a11y: «طلب منظومات دفاع جوي: 1.» does not read all it shows: 14"
+  ],
   "views": {
    "overview": {
     "issueCount": 0,
@@ -29195,7 +29242,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 63,
       "x1": 107,
       "y0": 48,
@@ -29875,7 +29922,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 63,
       "x1": 107,
       "y0": 48,
@@ -30555,7 +30602,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 63,
       "x1": 107,
       "y0": 48,
@@ -31172,7 +31219,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 63,
       "x1": 107,
       "y0": 48,
@@ -31650,7 +31697,7 @@
     ]
    },
    "equipment": {
-    "issueCount": 0,
+    "issueCount": 2,
     "png": true,
     "fit": {
      "top": {
@@ -31785,7 +31832,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 63,
       "x1": 107,
       "y0": 48,
@@ -32282,7 +32329,7 @@
     ]
    },
    "equipment_end": {
-    "issueCount": 0,
+    "issueCount": 2,
     "png": true,
     "fit": {
      "top": {
@@ -32417,7 +32464,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 63,
       "x1": 107,
       "y0": 48,
@@ -32836,12 +32883,12 @@
       "worst": 8.9
      },
      {
-      "t": "الدفاع الجوي",
+      "t": "الحديث",
       "fs": 11.5,
       "worst": 13.35
      },
      {
-      "t": "+8",
+      "t": "+14",
       "fs": 11.5,
       "worst": 13.35
      },
@@ -32993,7 +33040,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 63,
       "x1": 107,
       "y0": 48,
@@ -33542,7 +33589,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 63,
       "x1": 107,
       "y0": 48,
@@ -34096,7 +34143,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 63,
       "x1": 107,
       "y0": 48,
@@ -34705,7 +34752,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 63,
       "x1": 107,
       "y0": 48,
@@ -35307,7 +35354,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 63,
       "x1": 107,
       "y0": 48,
@@ -35740,7 +35787,7 @@
     ]
    },
    "equipment_at99": {
-    "issueCount": 0,
+    "issueCount": 2,
     "png": false,
     "fit": {
      "top": {
@@ -35875,7 +35922,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 63,
       "x1": 107,
       "y0": 48,
@@ -36319,7 +36366,7 @@
     ]
    },
    "equipment_at198": {
-    "issueCount": 0,
+    "issueCount": 2,
     "png": false,
     "fit": {
      "top": {
@@ -36454,7 +36501,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 63,
       "x1": 107,
       "y0": 48,
@@ -36873,12 +36920,12 @@
       "worst": 8.9
      },
      {
-      "t": "الدفاع الجوي",
+      "t": "الحديث",
       "fs": 11.5,
       "worst": 13.35
      },
      {
-      "t": "+8",
+      "t": "+14",
       "fs": 11.5,
       "worst": 13.35
      }
@@ -36904,24 +36951,24 @@
    "_build/i16pro_wars_end.png"
   ],
   "pngSha1": {
-   "i16pro.png": "25ac16bcd8898e809664458b1376d0e172bc2214",
-   "_build/i16pro_hit.png": "15c313fed0f2ac6442bfdd01c4bf5f341515d8d6",
-   "_build/i16pro_overview_end.png": "25ac16bcd8898e809664458b1376d0e172bc2214",
-   "_build/i16pro_forces.png": "b3af2a5db6df657503be58cd3e4aecf8339119f7",
-   "_build/i16pro_forces_end.png": "aa4aae78907a79a866e600058e4c1c0893765f40",
-   "_build/i16pro_equipment.png": "c703629fffc62990e2e911a5ecc90a9bf64deda5",
-   "_build/i16pro_equipment_end.png": "23c32e10bbb19ce1cc1e3cb1d80a2b1eed140824",
-   "_build/i16pro_wars.png": "55a643a6afe32895d4807cd8b2f314fd79ee03ba",
-   "_build/i16pro_wars_end.png": "b4b8bba593bb658071157a7e8571f81afb2ef461"
+   "i16pro.png": "cf1253bf1d9788aabf7de6f7686e03a5e0f8038d",
+   "_build/i16pro_hit.png": "6b1ad334a59f6129de8d3355535661ed302a9973",
+   "_build/i16pro_overview_end.png": "cf1253bf1d9788aabf7de6f7686e03a5e0f8038d",
+   "_build/i16pro_forces.png": "3098a1dc3ec6dcbb76375582cc426e131d818724",
+   "_build/i16pro_forces_end.png": "c2f2a5a463342d534e9585c89426469060874ab7",
+   "_build/i16pro_equipment.png": "031f0b48696e3528768612abfdfe1b4a4e4147ea",
+   "_build/i16pro_equipment_end.png": "5b96b7628704ee7ff6f9e183eb8a8c85414ccbe7",
+   "_build/i16pro_wars.png": "63eccd96f1bd08227fe0e5783ca85fb2c280e9e6",
+   "_build/i16pro_wars_end.png": "ff9e84100a9d92df296ba9a03a02afdd3a86da64"
   },
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 0
+  "issueCount": 8
  },
  "i11": {
   "device": "896x414 side 48 bottom 21 notch",
-  "renderedAt": "2026-11-04T13:12:04.027Z",
+  "renderedAt": "2026-11-07T15:32:06.077Z",
   "inputs": {
    "files": [
     "index.html",
@@ -36948,9 +36995,16 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "296add904ce1263179478f776deedfcef616882d"
+   "sha1": "4269196183bbae656f11f93618c4dccaffa3309e"
   },
-  "issues": [],
+  "issues": [
+   "equipment: a11y: «طلب منظومات دفاع جوي» does not read its numbers",
+   "equipment: a11y: «طلب منظومات دفاع جوي: 1.» does not read all it shows: 14",
+   "equipment_end: a11y: «طلب منظومات دفاع جوي» does not read its numbers",
+   "equipment_end: a11y: «طلب منظومات دفاع جوي: 1.» does not read all it shows: 14",
+   "equipment_at111: a11y: «طلب منظومات دفاع جوي» does not read its numbers",
+   "equipment_at111: a11y: «طلب منظومات دفاع جوي: 1.» does not read all it shows: 14"
+  ],
   "views": {
    "overview": {
     "issueCount": 0,
@@ -37087,7 +37141,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 49,
       "x1": 93,
       "y0": 48,
@@ -37766,7 +37820,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 49,
       "x1": 93,
       "y0": 48,
@@ -38445,7 +38499,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 49,
       "x1": 93,
       "y0": 48,
@@ -39061,7 +39115,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 49,
       "x1": 93,
       "y0": 48,
@@ -39544,7 +39598,7 @@
     ]
    },
    "equipment": {
-    "issueCount": 0,
+    "issueCount": 2,
     "png": true,
     "fit": {
      "top": {
@@ -39678,7 +39732,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 49,
       "x1": 93,
       "y0": 48,
@@ -40175,7 +40229,7 @@
     ]
    },
    "equipment_end": {
-    "issueCount": 0,
+    "issueCount": 2,
     "png": true,
     "fit": {
      "top": {
@@ -40309,7 +40363,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 49,
       "x1": 93,
       "y0": 48,
@@ -40728,12 +40782,12 @@
       "worst": 8.9
      },
      {
-      "t": "الدفاع الجوي",
+      "t": "الحديث",
       "fs": 11.5,
       "worst": 13.35
      },
      {
-      "t": "+8",
+      "t": "+14",
       "fs": 11.5,
       "worst": 13.35
      },
@@ -40884,7 +40938,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 49,
       "x1": 93,
       "y0": 48,
@@ -41432,7 +41486,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 49,
       "x1": 93,
       "y0": 48,
@@ -41985,7 +42039,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 49,
       "x1": 93,
       "y0": 48,
@@ -42603,7 +42657,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 49,
       "x1": 93,
       "y0": 48,
@@ -43063,7 +43117,7 @@
     ]
    },
    "equipment_at111": {
-    "issueCount": 0,
+    "issueCount": 2,
     "png": false,
     "fit": {
      "top": {
@@ -43197,7 +43251,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 49,
       "x1": 93,
       "y0": 48,
@@ -43675,24 +43729,24 @@
    "_build/i11_wars_end.png"
   ],
   "pngSha1": {
-   "i11.png": "228af785bb4ea6c4ab55da4c56000b920cf14b05",
-   "_build/i11_hit.png": "4555adcd0af471590f04762f9f7362e0d5bc4119",
-   "_build/i11_overview_end.png": "228af785bb4ea6c4ab55da4c56000b920cf14b05",
-   "_build/i11_forces.png": "d6068f28d0d1e7d1eb1f6afac8e390f15a0f05a5",
-   "_build/i11_forces_end.png": "382e48648bbd61637f23814a3238e348f4206b7f",
-   "_build/i11_equipment.png": "1c1797383fc94c799371128af85d6789cb8e1d77",
-   "_build/i11_equipment_end.png": "6983f0724ce02b0ae0cb9ce0c562d7cd3c8b521a",
-   "_build/i11_wars.png": "9e132f2a7161b1aa867bd311b1eb809baf5d1aa4",
-   "_build/i11_wars_end.png": "8c857b6fc94d29ef375379c99f25011722ff20ea"
+   "i11.png": "58962cb697e6ea1851aa64e5e65eae00dc08f118",
+   "_build/i11_hit.png": "7a5438076bf89e49136c6fab60c9b5bea5aea84f",
+   "_build/i11_overview_end.png": "58962cb697e6ea1851aa64e5e65eae00dc08f118",
+   "_build/i11_forces.png": "a32cb194fc759f8c358c04c60f3ebab20b72a25d",
+   "_build/i11_forces_end.png": "7156631f0aa317b23bbdcdbfbfe85d3f500e946b",
+   "_build/i11_equipment.png": "96e296ab59988ff4eebff4407cf9d71946f64020",
+   "_build/i11_equipment_end.png": "228804e4c0ed97d0aea63b6585fae07960c629a5",
+   "_build/i11_wars.png": "44596f4a7ce6dca2198c3f752ece2e6ab6dd2e2a",
+   "_build/i11_wars_end.png": "c00ce5056919d1c1396908219ded72cc643692a9"
   },
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 0
+  "issueCount": 6
  },
  "i16promax": {
   "device": "956x440 side 62 bottom 21 island",
-  "renderedAt": "2026-11-04T13:12:29.908Z",
+  "renderedAt": "2026-11-07T15:32:28.278Z",
   "inputs": {
    "files": [
     "index.html",
@@ -43719,9 +43773,16 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "296add904ce1263179478f776deedfcef616882d"
+   "sha1": "4269196183bbae656f11f93618c4dccaffa3309e"
   },
-  "issues": [],
+  "issues": [
+   "equipment: a11y: «طلب منظومات دفاع جوي» does not read its numbers",
+   "equipment: a11y: «طلب منظومات دفاع جوي: 1.» does not read all it shows: 14",
+   "equipment_end: a11y: «طلب منظومات دفاع جوي» does not read its numbers",
+   "equipment_end: a11y: «طلب منظومات دفاع جوي: 1.» does not read all it shows: 14",
+   "equipment_at137: a11y: «طلب منظومات دفاع جوي» does not read its numbers",
+   "equipment_at137: a11y: «طلب منظومات دفاع جوي: 1.» does not read all it shows: 14"
+  ],
   "views": {
    "overview": {
     "issueCount": 0,
@@ -43858,7 +43919,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 63,
       "x1": 107,
       "y0": 48,
@@ -44537,7 +44598,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 63,
       "x1": 107,
       "y0": 48,
@@ -45216,7 +45277,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 63,
       "x1": 107,
       "y0": 48,
@@ -45862,7 +45923,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 63,
       "x1": 107,
       "y0": 48,
@@ -46372,7 +46433,7 @@
     ]
    },
    "equipment": {
-    "issueCount": 0,
+    "issueCount": 2,
     "png": true,
     "fit": {
      "top": {
@@ -46506,7 +46567,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 63,
       "x1": 107,
       "y0": 48,
@@ -47008,7 +47069,7 @@
     ]
    },
    "equipment_end": {
-    "issueCount": 0,
+    "issueCount": 2,
     "png": true,
     "fit": {
      "top": {
@@ -47142,7 +47203,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 63,
       "x1": 107,
       "y0": 48,
@@ -47591,12 +47652,12 @@
       "worst": 8.9
      },
      {
-      "t": "الدفاع الجوي",
+      "t": "الحديث",
       "fs": 11.5,
       "worst": 13.35
      },
      {
-      "t": "+8",
+      "t": "+14",
       "fs": 11.5,
       "worst": 13.35
      },
@@ -47747,7 +47808,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 63,
       "x1": 107,
       "y0": 48,
@@ -48305,7 +48366,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 63,
       "x1": 107,
       "y0": 48,
@@ -48863,7 +48924,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 63,
       "x1": 107,
       "y0": 48,
@@ -49352,7 +49413,7 @@
     ]
    },
    "equipment_at137": {
-    "issueCount": 0,
+    "issueCount": 2,
     "png": false,
     "fit": {
      "top": {
@@ -49486,7 +49547,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 63,
       "x1": 107,
       "y0": 48,
@@ -49925,12 +49986,12 @@
       "worst": 15.37
      },
      {
-      "t": "الدفاع الجوي",
+      "t": "الحديث",
       "fs": 11.5,
       "worst": 13.35
      },
      {
-      "t": "+8",
+      "t": "+14",
       "fs": 11.5,
       "worst": 13.35
      }
@@ -49956,19 +50017,19 @@
    "_build/i16promax_wars_end.png"
   ],
   "pngSha1": {
-   "i16promax.png": "99fad48c731f9267e94776a91292e19d0fce3f0a",
-   "_build/i16promax_hit.png": "c0c71a683887b00d36b5b94b481ec1ffc1f7332f",
-   "_build/i16promax_overview_end.png": "99fad48c731f9267e94776a91292e19d0fce3f0a",
-   "_build/i16promax_forces.png": "e4f54c3f96d66a6637b2ee2e76f996d2fa5a26a8",
-   "_build/i16promax_forces_end.png": "6080b3af742f493deee427268ec12640b6550f85",
-   "_build/i16promax_equipment.png": "1aa99e990ad4fd9749a85236c24a0b49aad2d673",
-   "_build/i16promax_equipment_end.png": "fd5b951becf410b12dbdc98d8755563c77e1dbbe",
-   "_build/i16promax_wars.png": "b090d3fa726b86d738b410a41a33caacf0ed517d",
-   "_build/i16promax_wars_end.png": "b090d3fa726b86d738b410a41a33caacf0ed517d"
+   "i16promax.png": "2b6a9ff69798cb5f3f8c5bfd6240fc791c07948b",
+   "_build/i16promax_hit.png": "0699ba3d1bca485173767d6c8ad4c7d3ee3e27a2",
+   "_build/i16promax_overview_end.png": "2b6a9ff69798cb5f3f8c5bfd6240fc791c07948b",
+   "_build/i16promax_forces.png": "d2a0351393bc143d0abb74ce5ebd7bffdc04294e",
+   "_build/i16promax_forces_end.png": "0c84c6dacc946664e91aef977d4b65bd698e605e",
+   "_build/i16promax_equipment.png": "7e52a03afc42d9ee38640c01ac4c5fa4fc2e4097",
+   "_build/i16promax_equipment_end.png": "b8bdfb9ac5f8bbfba4ad8304c105c64784508010",
+   "_build/i16promax_wars.png": "f4f7bf12a7117a7e846c9bbc8849b253881ae5b5",
+   "_build/i16promax_wars_end.png": "f4f7bf12a7117a7e846c9bbc8849b253881ae5b5"
   },
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 0
+  "issueCount": 6
  }
 }

@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-04T13:03:35.195Z",
+ "ranAt": "2026-11-07T15:27:07.806Z",
  "inputs": {
   "files": [
    "index.html",
@@ -22,7 +22,7 @@
    "header_cairo.jpg",
    "map_overlay_cairo.svg"
   ],
-  "sha1": "baa4d367fe5dcbd8f90d513071956ce60a17bec8"
+  "sha1": "4d887feeb376766eff9de163dc2a2a6a04ba02db"
  },
  "cleanIssues": {
   "i16promax": [],
@@ -73,8 +73,8 @@
    "ok": true,
    "sample": [
     "panel not opaque: لماذا؟ الاستقرار rgba(9, 17, 25, 0.66)",
-    "contrast 4.24 for \"−1\"",
-    "contrast 4.08 for \"يصل خلال\""
+    "contrast 3.28 for \"−1\"",
+    "contrast 3.28 for \"شهريًا\""
    ]
   },
   {
@@ -180,7 +180,23 @@
    "name": "identity line missing",
    "ok": true,
    "sample": [
-    "panel top line none rgb(169, 188, 203) 2px (want the section colour, 2 pt, at the top)"
+    "panel top line none rgb(199, 225, 193) 2px (want the section colour, 2 pt, at the top)"
+   ]
+  },
+  {
+   "name": "emblem drawn grey",
+   "ok": true,
+   "sample": [
+    "section emblem missing or not in the section colour"
+   ]
+  },
+  {
+   "name": "section colour on data",
+   "ok": true,
+   "sample": [
+    "section colour on data text: \"لماذا؟\"",
+    "section colour on data text: \"الآن\"",
+    "section colour on data text: \"58%\""
    ]
   },
   {
@@ -288,7 +304,7 @@
    "name": "a long status cell",
    "ok": true,
    "sample": [
-    "clipped text (sides): \"قيمة طويلة جدًا لا تتسع لنصف الجدول\" 416.53..613.3 y 110.5..129.5",
+    "clipped text (sides): \"قيمة طويلة جدًا لا تتسع لنصف الجدول\" 416.53..613.3 y 112.5..131.5",
     "text outside the sheet's 12 pt padding: \"قيمة طويلة جدًا لا تتسع لنصف الجدول\"",
     "horizontal overflow in خانةقيمة طويلة جدًا لا تتس"
    ]
@@ -328,9 +344,7 @@
    "name": "fades wrong (no tabs)",
    "ok": true,
    "sample": [
-    "clipped text (bottom): \"ما يخفضه\" 601.58..646 y 362..379",
-    "fades 0/0 do not match the scroll state (top 0, over 293.0)",
-    "contrast 1.49 for \"ما يخفضه\""
+    "fades 0/0 do not match the scroll state (top 0, over 301.0)"
    ]
   },
   {
@@ -383,9 +397,9 @@
    "name": "clipped text (why)",
    "ok": true,
    "sample": [
-    "clipped text (sides): \"الأساس\" 887.28..921 y 164..181",
+    "clipped text (sides): \"الأساس\" 887.28..921 y 172..189",
     "text outside the sheet's 12 pt padding: \"الأساس\"",
-    "clipped text (sides): \"مستوى البداية\" 856.47..921 y 185..202"
+    "clipped text (sides): \"مستوى البداية\" 856.47..921 y 193..210"
    ]
   },
   {
@@ -485,7 +499,8 @@
    "name": "now off",
    "ok": true,
    "sample": [
-    "the value now is not 58% in the header and the cell"
+    "the value now is not 58% in the header and the cell",
+    "the time to the target is not 2 months («نحو 4 أشهر», from the now, the target and the change)"
    ]
   },
   {
@@ -560,14 +575,23 @@
    "name": "change cell off",
    "ok": true,
    "sample": [
-    "the change cell is not -1 a month (the state panel says −1)"
+    "the change cell is not -1 a month (the state panel says −1)",
+    "the time to the target is not 2 months («نحو شهر», from the now, the target and the change)"
    ]
   },
   {
    "name": "time cell off",
    "ok": true,
    "sample": [
-    "the time to the target is not 3 months"
+    "the time to the target is not 2 months («نحو شهرين», from the now, the target and the change)"
+   ]
+  },
+  {
+   "name": "target off its time",
+   "ok": true,
+   "sample": [
+    "the terms add up to 56, the sum row says 56, the header 56, the cell 55",
+    "the time to the target is not 2 months («نحو 3 أشهر», from the now, the target and the change)"
    ]
   },
   {

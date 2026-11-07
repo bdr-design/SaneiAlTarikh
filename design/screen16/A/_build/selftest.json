@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-04T13:00:33.094Z",
+ "ranAt": "2026-11-07T16:01:22.269Z",
  "inputs": {
   "files": [
    "index.html",
@@ -22,7 +22,7 @@
    "header_cairo.jpg",
    "map_overlay_cairo.svg"
   ],
-  "sha1": "d2bb560b088a9d8838b43977caa06f52ce3471de"
+  "sha1": "c678752ba88c79d594e640c1cbdd05b40b370bcc"
  },
  "cleanIssues": {
   "i16promax": [],
@@ -184,7 +184,23 @@
    "name": "identity line missing",
    "ok": true,
    "sample": [
-    "panel top line none rgb(169, 188, 203) 2px (want the section colour, 2 pt, at the top)"
+    "panel top line none rgb(198, 186, 232) 2px (want the section colour, 2 pt, at the top)"
+   ]
+  },
+  {
+   "name": "emblem drawn grey",
+   "ok": true,
+   "sample": [
+    "section emblem missing or not in the section colour"
+   ]
+  },
+  {
+   "name": "section colour on data",
+   "ok": true,
+   "sample": [
+    "section colour on data text: \"غير المقروءة:\"",
+    "section colour on data text: \"2\"",
+    "section colour on data text: \"1\""
    ]
   },
   {

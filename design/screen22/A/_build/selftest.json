@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-07T14:08:00.328Z",
+ "ranAt": "2026-11-07T15:45:03.915Z",
  "inputs": {
   "files": [
    "index.html",
@@ -23,7 +23,7 @@
    "header_cairo.jpg",
    "map_overlay_cairo.svg"
   ],
-  "sha1": "1f33841c8890d9ef6ba61d2203b1b032a8157dbb"
+  "sha1": "37f591fa4b65cb1d2b0ec0ea80266bc40086b398"
  },
  "cleanIssues": {
   "i16promax": [],
@@ -82,7 +82,7 @@
    "sample": [
     "panel not opaque (opacity 0.60): عملية جديدة",
     "brief text not fully visible: عملية جديدة",
-    "brief text not fully visible: الاستخبارات · 2 من 4 قيد التنفيذ"
+    "brief text not fully visible: السودان · العمليات 2 من 4 قيد التنفيذ"
    ]
   },
   {
@@ -190,6 +190,22 @@
    ]
   },
   {
+   "name": "emblem drawn grey",
+   "ok": true,
+   "sample": [
+    "section emblem missing or not in the section colour"
+   ]
+  },
+  {
+   "name": "section colour on data",
+   "ok": true,
+   "sample": [
+    "section colour on data text: \"السودان\"",
+    "section colour on data text: \"العمليات\"",
+    "section colour on data text: \"2\""
+   ]
+  },
+  {
    "name": "money unit",
    "ok": true,
    "sample": [
@@ -235,9 +251,9 @@
    "name": "text overlap",
    "ok": true,
    "sample": [
-    "text overlap \"عملية جديدة\" / \"الاستخبارات\"",
+    "text overlap \"عملية جديدة\" / \"السودان\"",
     "text overlap \"عملية جديدة\" / \"·\"",
-    "text overlap \"عملية جديدة\" / \"2\""
+    "text overlap \"عملية جديدة\" / \"العمليات\""
    ]
   },
   {
@@ -279,6 +295,22 @@
    ]
   },
   {
+   "name": "tile icons cyan",
+   "ok": true,
+   "sample": [
+    "white touch off: .r-tile color rgb(127, 233, 255) (want rgb(234, 242, 247))",
+    "white touch off: .r-tile color rgb(127, 233, 255) (want rgb(234, 242, 247))"
+   ]
+  },
+  {
+   "name": "chip arrow against its sign",
+   "ok": true,
+   "sample": [
+    "a11y: «بدء العملية» does not say the chip's direction in words",
+    "the start does not show its effect (the chip «↑ الدقة»)"
+   ]
+  },
+  {
    "name": "row read in part",
    "ok": true,
    "sample": [
@@ -316,9 +348,9 @@
    "name": "font weight (no tabs)",
    "ok": true,
    "sample": [
-    "font weight 11.5/700 for \"الاستخبارات\"",
+    "font weight 11.5/700 for \"السودان\"",
     "font weight 11.5/700 for \"·\"",
-    "font weight 11.5/700 for \"2\""
+    "font weight 11.5/700 for \"العمليات\""
    ]
   },
   {
@@ -440,7 +472,7 @@
    "sample": [
     "text overlap \"من\" / \"الدقة\"",
     "text overlap \"4\" / \"الدقة\"",
-    "text over a control: \"مليون $ · تشغل\" runs into «الدقة»"
+    "text over a control: \"مليون $ · تصبح العمليات\" runs into «الدقة»"
    ]
   },
   {
@@ -505,7 +537,7 @@
    "name": "cost off",
    "ok": true,
    "sample": [
-    "the estimate is not the brief's: الكلفة:80 مليون $، الأثر:دقة أعلى، النجاح:نحو 85%، الانكشاف:منخفض",
+    "the estimate is not the brief's: الكلفة:80 مليون $، الأثر:تقدير أدق، النجاح:نحو 85%، خطر الانكشاف:منخفض",
     "the cost or the risk is not the panel's suggestion (60, منخفض)",
     "brief text missing: 60 مليون $"
    ]
@@ -515,8 +547,8 @@
    "ok": true,
    "sample": [
     "starting does not take the next slot at the panel's cost",
-    "brief text missing: الكلفة: 60 مليون $ · تشغل 3 من 4",
-    "brief text missing: الكلفة: 60 مليون $ · تشغل 3 من 4"
+    "brief text missing: 60 مليون $ · تصبح العمليات 3 من 4",
+    "brief text missing: 60 مليون $ · تصبح العمليات 3 من 4"
    ]
   },
   {
@@ -524,8 +556,89 @@
    "ok": true,
    "sample": [
     "a11y: «بدء العملية» does not say the chip's direction in words",
-    "a11y: «بدء العملية: الكلفة 60 م» does not read all it shows: الدقة",
+    "a11y: «بدء العملية: الكلفة 60 م» does not read all it shows: تصبح العمليات الدقة",
     "a11y: the start does not say its effect"
+   ]
+  },
+  {
+   "name": "an assassination to VoiceOver",
+   "ok": true,
+   "sample": [
+    "an assassination among the types (D-14)"
+   ]
+  },
+  {
+   "name": "one column",
+   "ok": true,
+   "sample": [
+    "the types are not in two columns"
+   ]
+  },
+  {
+   "name": "types not radios",
+   "ok": true,
+   "sample": [
+    "a11y: a label VoiceOver may skip (no role): «نوع العملية»",
+    "a11y: the types are not a radio group"
+   ]
+  },
+  {
+   "name": "header slots off",
+   "ok": true,
+   "sample": [
+    "the header's slots are not the panel's 2 of 4",
+    "brief text missing: السودان · العمليات 2 من 4 قيد التنفيذ",
+    "brief text missing: السودان · العمليات 2 من 4 قيد التنفيذ"
+   ]
+  },
+  {
+   "name": "header without the target",
+   "ok": true,
+   "sample": [
+    "the header does not name the target (السودان)",
+    "brief text missing: السودان · العمليات 2 من 4 قيد التنفيذ",
+    "brief text missing: السودان · العمليات 2 من 4 قيد التنفيذ"
+   ]
+  },
+  {
+   "name": "target row unsaid",
+   "ok": true,
+   "sample": [
+    "a11y: «السودان» does not read its numbers",
+    "a11y: «الهدف: السودان» does not read all it shows: الشبكة من الانكشاف منخفض",
+    "a11y: the target row does not say where it leads"
+   ]
+  },
+  {
+   "name": "chip removed",
+   "ok": true,
+   "sample": [
+    "the start does not show its effect (the chip «↑ الدقة»)",
+    "brief text missing: الدقة",
+    "brief text missing: الدقة"
+   ]
+  },
+  {
+   "name": "chip says another thing",
+   "ok": true,
+   "sample": [
+    "the start does not show its effect (the chip «↑ الدقة»)",
+    "brief text missing: الدقة",
+    "brief text missing: الدقة"
+   ]
+  },
+  {
+   "name": "close mislabelled",
+   "ok": true,
+   "sample": [
+    "a11y: the close is not «إلغاء، العودة إلى العمليات»"
+   ]
+  },
+  {
+   "name": "emblem not the target",
+   "ok": true,
+   "sample": [
+    "the emblem is not the target"
    ]
   },
   {

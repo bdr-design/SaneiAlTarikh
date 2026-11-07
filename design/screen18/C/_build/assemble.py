@@ -23,5 +23,5 @@ SUBS = [('<button class="spd tap" aria-label="السرعة 1×" aria-haspopup="m
         ('<span class="num ltr">58%</span>', '<span class="num ltr">31%</span>'),
         ('<svg class="i"><use href="#i-seal"/></svg><span class="num">44</span>', '<svg class="i"><use href="#i-seal"/></svg><span class="num">35</span>')]
 # the HUD at the end moment: its values, and no trend while the clock is stopped (shared/check/end_hud.py)
-SUBS += end_hud.end_subs({'الخزينة': '<span class="num">18.4<span class="unit"> مليار $</span></span>', 'القوة البشرية': '<span class="num">2.7<span class="unit"> مليون</span></span>', 'النفوذ': '<span class="num">51</span>', 'البحث': '<span class="num"><span class="ltr">+9</span><span class="unit"> / شهر</span></span>'})
+SUBS += end_hud.end_subs({'الخزينة': '<span class="num">18.4<span class="unit"> مليار $</span></span>', 'القوة البشرية': '<span class="num">2.7<span class="unit"> مليون</span></span>', 'النفوذ': '<span class="num">51</span>', 'البحث': '<span class="num"><span class="ltr">+12</span><span class="unit"> / شهر</span></span>'})
 panel_page.build(R, S, D, title='سقطت حكومتك', sec='end', tabs=['fallen'], fit_tab=None, css=['end.css'], symbols=SYMBOLS, extra_subs=SUBS)

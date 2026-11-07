@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-04T13:13:57.303Z",
+ "ranAt": "2026-11-07T15:39:06.441Z",
  "inputs": {
   "files": [
    "index.html",
@@ -19,7 +19,7 @@
    "header_cairo.jpg",
    "map_overlay_cairo.svg"
   ],
-  "sha1": "e502f9e62ee1b733ed5dd7664d79f15fd5889b95"
+  "sha1": "15b859740c41f9dcfbbd95723b293dcbc64f59d3"
  },
  "cleanIssues": {
   "i16promax": [],
@@ -715,7 +715,14 @@
    "name": "unaffordable not amber",
    "ok": true,
    "sample": [
-    "«كلفة التغيير: 60» not in amber: rgb(169, 188, 203)"
+    "«يلزم 60 · لديك 45» not in amber: rgb(169, 188, 203)"
+   ]
+  },
+  {
+   "name": "unaffordable within the capital",
+   "ok": true,
+   "sample": [
+    "a change shown unaffordable costs 60 against the capital 86, or does not say the balance"
    ]
   },
   {

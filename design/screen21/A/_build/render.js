@@ -67,7 +67,7 @@ require(path.join(OUT, '../../shared/check/panelcheck.js'))({
   inputs: ['_build/relation.css', '../../screen10/A/_build/sheet.html', '../../shared/flags/et.svg'],
   TOK: { sec: 'rgb(91, 134, 242)', ctlH: {}, sheetIcon: [], size: [['.w-t', null, 32], ['.w-sum', null, 24]] },
   HEAD, BRIEF, screenChecks, DATA: { terms: TERMS, s10: S10, status: STATUS, acts: ACTS },
-  skipGeneric: ['tap in the side inset', 'text into a control', 'amber value without its icon', 'section colour on data', 'section colour on a rule', 'emblem drawn grey', 'why without its subject', '% before its number', 'brief text hidden', '18 pt misuse', 'clipped text', 'gap', 'faint text'],
+  skipGeneric: ['tap in the side inset', 'text into a control', 'amber value without its icon', 'section colour on a rule', 'why without its subject', '% before its number', 'brief text hidden', '18 pt misuse', 'clipped text', 'gap', 'faint text'],
   cases: (d, se) => [
     // the actions sit at the end of the scroll; the headline relation is amber already: the shared plants placed where they apply
     ['tap in the side inset (relation)', d, '&scroll=end', '.sheet { right: -30px !important; }', /tap in side inset/],

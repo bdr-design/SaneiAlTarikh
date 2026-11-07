@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-04T13:15:16.110Z",
+ "ranAt": "2026-11-07T15:34:58.269Z",
  "inputs": {
   "files": [
    "index.html",
@@ -26,33 +26,54 @@
    "header_cairo.jpg",
    "map_overlay_cairo.svg"
   ],
-  "sha1": "296add904ce1263179478f776deedfcef616882d"
+  "sha1": "4269196183bbae656f11f93618c4dccaffa3309e"
  },
  "cleanIssues": {
   "i16promax": [],
   "i16promax_overview_end": [],
   "i16promax_forces": [],
   "i16promax_forces_end": [],
-  "i16promax_equipment": [],
-  "i16promax_equipment_end": [],
+  "i16promax_equipment": [
+   "a11y: «طلب منظومات دفاع جوي» does not read its numbers",
+   "a11y: «طلب منظومات دفاع جوي: 1.» does not read all it shows: 14"
+  ],
+  "i16promax_equipment_end": [
+   "a11y: «طلب منظومات دفاع جوي» does not read its numbers",
+   "a11y: «طلب منظومات دفاع جوي: 1.» does not read all it shows: 14"
+  ],
   "i16promax_wars": [],
   "i16promax_wars_end": [],
   "i16promax_forces_at137": [],
-  "i16promax_equipment_at137": [],
+  "i16promax_equipment_at137": [
+   "a11y: «طلب منظومات دفاع جوي» does not read its numbers",
+   "a11y: «طلب منظومات دفاع جوي: 1.» does not read all it shows: 14"
+  ],
   "i16promax coverage": [],
   "se": [],
   "se_overview_end": [],
   "se_forces": [],
   "se_forces_end": [],
-  "se_equipment": [],
-  "se_equipment_end": [],
+  "se_equipment": [
+   "a11y: «طلب منظومات دفاع جوي» does not read its numbers",
+   "a11y: «طلب منظومات دفاع جوي: 1.» does not read all it shows: 14"
+  ],
+  "se_equipment_end": [
+   "a11y: «طلب منظومات دفاع جوي» does not read its numbers",
+   "a11y: «طلب منظومات دفاع جوي: 1.» does not read all it shows: 14"
+  ],
   "se_wars": [],
   "se_wars_end": [],
   "se_forces_at86": [],
   "se_forces_at172": [],
   "se_forces_at258": [],
-  "se_equipment_at86": [],
-  "se_equipment_at172": [],
+  "se_equipment_at86": [
+   "a11y: «طلب منظومات دفاع جوي» does not read its numbers",
+   "a11y: «طلب منظومات دفاع جوي: 1.» does not read all it shows: 14"
+  ],
+  "se_equipment_at172": [
+   "a11y: «طلب منظومات دفاع جوي» does not read its numbers",
+   "a11y: «طلب منظومات دفاع جوي: 1.» does not read all it shows: 14"
+  ],
   "se coverage": []
  },
  "results": [
@@ -662,15 +683,17 @@
    "name": "stock off",
    "ok": true,
    "sample": [
+    "a11y: «طلب منظومات دفاع جوي» does not read its numbers",
     "a11y: «البرية: 14 مليار دولار ت» does not read all it shows: 16",
-    "the equipment categories do not add up to the stock 32",
-    "a11y: equipment «البرية» is not read whole"
+    "a11y: «طلب منظومات دفاع جوي: 1.» does not read all it shows: 14"
    ]
   },
   {
    "name": "equipment bar off",
    "ok": true,
    "sample": [
+    "a11y: «طلب منظومات دفاع جوي» does not read its numbers",
+    "a11y: «طلب منظومات دفاع جوي: 1.» does not read all it shows: 14",
     "equipment «الجوية»: the bar is not at its modern share"
    ]
   },
@@ -678,14 +701,17 @@
    "name": "equipment label off",
    "ok": true,
    "sample": [
+    "a11y: «طلب منظومات دفاع جوي» does not read its numbers",
     "a11y: «البرية: 9 مليار دولار تق» does not read all it shows: 14",
-    "a11y: equipment «البرية» is not read whole"
+    "a11y: «طلب منظومات دفاع جوي: 1.» does not read all it shows: 14"
    ]
   },
   {
    "name": "equipment as a control",
    "ok": true,
    "sample": [
+    "a11y: «طلب منظومات دفاع جوي» does not read its numbers",
+    "a11y: «طلب منظومات دفاع جوي: 1.» does not read all it shows: 14",
     "equipment «البرية» is a control"
    ]
   },
@@ -693,6 +719,8 @@
    "name": "delivery as a button",
    "ok": true,
    "sample": [
+    "a11y: «طلب منظومات دفاع جوي» does not read its numbers",
+    "a11y: «طلب منظومات دفاع جوي: 1.» does not read all it shows: 14",
     "the order being delivered must be a row, not a button"
    ]
   },
@@ -700,26 +728,27 @@
    "name": "conscription link stale",
    "ok": true,
    "sample": [
-    "a11y: «التجنيد: تطوعي. يُغيَّر » does not read all it shows: إلزامي",
-    "the conscription link is not the state panel's «إلزامي»"
+    "a11y: «طلب منظومات دفاع جوي» does not read its numbers",
+    "a11y: «طلب منظومات دفاع جوي: 1.» does not read all it shows: 14",
+    "a11y: «التجنيد: تطوعي. يُغيَّر » does not read all it shows: إلزامي"
    ]
   },
   {
    "name": "a real weapon name (Latin)",
    "ok": true,
    "sample": [
-    "text wider than its box: «طلب منظومات دفاع جوي F-1» (164 in 156)",
     "a11y: «طلب منظومات دفاع جوي F-16» does not read its numbers",
-    "a11y: «طلب منظومات دفاع جوي: 1.» does not read all it shows: F-16 -16"
+    "a11y: «طلب منظومات دفاع جوي: 1.» does not read all it shows: F-16 -16 14",
+    "a real weapon name or model code in the panel: F-16"
    ]
   },
   {
    "name": "a real weapon name (Arabic)",
    "ok": true,
    "sample": [
-    "a real weapon name or model code in the panel: أبرامز",
-    "brief text missing: دبابات قتال",
-    "brief text missing: دبابات قتال"
+    "a11y: «طلب منظومات دفاع جوي» does not read its numbers",
+    "a11y: «طلب منظومات دفاع جوي: 1.» does not read all it shows: 14",
+    "a real weapon name or model code in the panel: أبرامز"
    ]
   },
   {

@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-04T12:58:00.482Z",
+ "ranAt": "2026-11-07T15:59:23.057Z",
  "inputs": {
   "files": [
    "index.html",
@@ -25,14 +25,22 @@
    "../../shared/map_mena_d1_overlay.svg",
    "map_overlay_cairo.svg"
   ],
-  "sha1": "17f817780b153913a7073ab318df523529fa2ee1"
+  "sha1": "ec2a229311b9d2e558509d9b78177b7c253173d8"
  },
  "cleanIssues": {
-  "i16promax": [],
-  "i16promax_event_end": [],
+  "i16promax": [
+   "a11y: the bell does not read its count"
+  ],
+  "i16promax_event_end": [
+   "a11y: the bell does not read its count"
+  ],
   "i16promax coverage": [],
-  "se": [],
-  "se_event_end": [],
+  "se": [
+   "a11y: the bell does not read its count"
+  ],
+  "se_event_end": [
+   "a11y: the bell does not read its count"
+  ],
   "se coverage": []
  },
  "results": [
@@ -40,14 +48,16 @@
    "name": "type size",
    "ok": true,
    "sample": [
-    "font size 17 for \"احتجاجات في تونس\""
+    "font size 17 for \"احتجاجات في تونس\"",
+    "a11y: the bell does not read its count"
    ]
   },
   {
    "name": "off-token colour",
    "ok": true,
    "sample": [
-    "text colour off-token rgb(136, 153, 170): \"احتجاجات في تونس\""
+    "text colour off-token rgb(136, 153, 170): \"احتجاجات في تونس\"",
+    "a11y: the bell does not read its count"
    ]
   },
   {
@@ -55,7 +65,8 @@
    "ok": true,
    "sample": [
     "panel radius قرار: احتجاجات في تونس: 6 (want 12)",
-    "radius 6 for .sheet (want 12)"
+    "radius 6 for .sheet (want 12)",
+    "a11y: the bell does not read its count"
    ]
   },
   {
@@ -80,7 +91,8 @@
    "name": "panel not opaque",
    "ok": true,
    "sample": [
-    "panel not opaque: قرار: احتجاجات في تونس rgba(9, 17, 25, 0.66)"
+    "panel not opaque: قرار: احتجاجات في تونس rgba(9, 17, 25, 0.66)",
+    "a11y: the bell does not read its count"
    ]
   },
   {
@@ -88,23 +100,24 @@
    "ok": true,
    "sample": [
     "panel not opaque (opacity 0.60): قرار: احتجاجات في تونس",
-    "brief text not fully visible: احتجاجات في تونس",
-    "brief text not fully visible: الوقت متوقف · الافتراضي بعد 7 أيام"
+    "a11y: the bell does not read its count",
+    "brief text not fully visible: احتجاجات في تونس"
    ]
   },
   {
    "name": "Egypt covered",
    "ok": true,
    "sample": [
+    "a11y: the bell does not read its count",
     "Nile delta covered by panel قرار: احتجاجات في تونس",
-    "Egypt covered by panel قرار: احتجاجات في تونس",
-    "Egypt under the hit box of دعم أكبر للخبز والتموين: 5"
+    "Egypt covered by panel قرار: احتجاجات في تونس"
    ]
   },
   {
    "name": "map dimmed",
    "ok": true,
    "sample": [
+    "a11y: the bell does not read its count",
     "the map is dimmed (opacity 1.00, filter brightness(0.35))"
    ]
   },
@@ -112,6 +125,7 @@
    "name": "map faded",
    "ok": true,
    "sample": [
+    "a11y: the bell does not read its count",
     "the map is dimmed (opacity 0.30, filter none)"
    ]
   },
@@ -119,6 +133,7 @@
    "name": "scrim over the map",
    "ok": true,
    "sample": [
+    "a11y: the bell does not read its count",
     "something drawn over the map: DIV (rgba(0, 0, 0, 0.55))",
     "contrast 1.92 for \"3\""
    ]
@@ -127,7 +142,8 @@
    "name": "sheet width",
    "ok": true,
    "sample": [
-    "sheet width 330 (want round(clamp(43% of 832, 340, 380)), or the room the dock leaves if 330..: 358)"
+    "sheet width 330 (want round(clamp(43% of 832, 340, 380)), or the room the dock leaves if 330..: 358)",
+    "a11y: the bell does not read its count"
    ]
   },
   {
@@ -143,7 +159,8 @@
    "name": "dock hidden although it fits",
    "ok": true,
    "sample": [
-    "dock hidden although it fits left of the sheet"
+    "dock hidden although it fits left of the sheet",
+    "a11y: the bell does not read its count"
    ]
   },
   {
@@ -168,67 +185,91 @@
    "name": "map label cut",
    "ok": true,
    "sample": [
+    "a11y: the bell does not read its count",
     "map label ليبيا sliced by the screen edge or the side inset",
-    "map label إيران sliced by the screen edge or the side inset",
-    "map label إيران squeezed between a panel and the screen edge"
+    "map label إيران sliced by the screen edge or the side inset"
    ]
   },
   {
    "name": "contrast",
    "ok": true,
    "sample": [
+    "a11y: the bell does not read its count",
     "contrast 1 for \"تتسع الاحتجاجات في تونس \"",
-    "contrast 1 for \"17\"",
-    "contrast 1 for \"ديسمبر بعد أن أحرق شاب ن\""
+    "contrast 1 for \"17\""
    ]
   },
   {
    "name": "identity line missing",
    "ok": true,
    "sample": [
-    "panel top line none rgb(169, 188, 203) 2px (want the section colour, 2 pt, at the top)"
+    "panel top line none rgb(237, 94, 142) 2px (want the section colour, 2 pt, at the top)",
+    "a11y: the bell does not read its count"
+   ]
+  },
+  {
+   "name": "emblem drawn grey",
+   "ok": true,
+   "sample": [
+    "section emblem missing or not in the section colour",
+    "a11y: the bell does not read its count"
+   ]
+  },
+  {
+   "name": "section colour on data",
+   "ok": true,
+   "sample": [
+    "section colour on data text: \"الوقت متوقف\"",
+    "section colour on data text: \"الافتراضي بعد\"",
+    "section colour on data text: \"7\""
    ]
   },
   {
    "name": "money unit",
    "ok": true,
    "sample": [
-    "money unit: «0.4 مليار» (under 1 billion is written in millions)"
+    "money unit: «0.4 مليار» (under 1 billion is written in millions)",
+    "a11y: the bell does not read its count"
    ]
   },
   {
    "name": "sign outside its number",
    "ok": true,
    "sample": [
-    "a sign outside its number: «تغير +3»"
+    "a sign outside its number: «تغير +3»",
+    "a11y: the bell does not read its count"
    ]
   },
   {
    "name": "colour alone",
    "ok": true,
    "sample": [
-    "colour alone: «تراجع» has no arrow or icon"
+    "colour alone: «تراجع» has no arrow or icon",
+    "a11y: the bell does not read its count"
    ]
   },
   {
    "name": "an image in the sheet",
    "ok": true,
    "sample": [
-    "an image in the sheet"
+    "an image in the sheet",
+    "a11y: the bell does not read its count"
    ]
   },
   {
    "name": "close not round",
    "ok": true,
    "sample": [
-    "close button is not round"
+    "close button is not round",
+    "a11y: the bell does not read its count"
    ]
   },
   {
    "name": "label without a role",
    "ok": true,
    "sample": [
-    "a11y: a label VoiceOver may skip (no role): «اختبار»"
+    "a11y: a label VoiceOver may skip (no role): «اختبار»",
+    "a11y: the bell does not read its count"
    ]
   },
   {
@@ -253,14 +294,16 @@
    "name": "identity line colour",
    "ok": true,
    "sample": [
-    "panel top line \"\" rgb(63, 224, 208) 2px (want the section colour, 2 pt, at the top)"
+    "panel top line \"\" rgb(63, 224, 208) 2px (want the section colour, 2 pt, at the top)",
+    "a11y: the bell does not read its count"
    ]
   },
   {
    "name": "emblem size",
    "ok": true,
    "sample": [
-    "size 28.0x32.0 for .s-emb (want 32 x 32)"
+    "size 28.0x32.0 for .s-emb (want 32 x 32)",
+    "a11y: the bell does not read its count"
    ]
   },
   {
@@ -312,7 +355,8 @@
    "name": "text wider than its box",
    "ok": true,
    "sample": [
-    "text wider than its box: «خياراتك» (35 in 20)"
+    "text wider than its box: «خياراتك» (35 in 20)",
+    "a11y: the bell does not read its count"
    ]
   },
   {
@@ -337,7 +381,8 @@
    "name": "a tab row on a one-body sheet",
    "ok": true,
    "sample": [
-    "a tab row on a sheet that has one body"
+    "a tab row on a sheet that has one body",
+    "a11y: the bell does not read its count"
    ]
   },
   {
@@ -345,14 +390,16 @@
    "ok": true,
    "sample": [
     "control height 40.00 for .r-x (want 32): لاحقًا: تأجيل القرار إلى ا",
-    "close button is not round"
+    "close button is not round",
+    "a11y: the bell does not read its count"
    ]
   },
   {
    "name": "icon size (no tabs)",
    "ok": true,
    "sample": [
-    "icon size 19x19 (want 16): i"
+    "icon size 19x19 (want 16): i",
+    "a11y: the bell does not read its count"
    ]
   },
   {
@@ -368,27 +415,31 @@
    "name": "hint chevron missing (no tabs)",
    "ok": true,
    "sample": [
-    "scroll hint chevron missing with content below"
+    "scroll hint chevron missing with content below",
+    "a11y: the bell does not read its count"
    ]
   },
   {
    "name": "hint over the content (no tabs)",
    "ok": true,
    "sample": [
-    "scroll hint not centred in the clear strip under the fade: y 198.0..216.0 (strip 344.0..366.0)"
+    "scroll hint not centred in the clear strip under the fade: y 198.0..216.0 (strip 344.0..366.0)",
+    "a11y: the bell does not read its count"
    ]
   },
   {
    "name": "a dock item marked open",
    "ok": true,
    "sample": [
-    "a dock item is marked open under a sheet of no section"
+    "a dock item is marked open under a sheet of no section",
+    "a11y: the bell does not read its count"
    ]
   },
   {
    "name": "brief text hidden (decision)",
    "ok": true,
    "sample": [
+    "a11y: the bell does not read its count",
     "brief text not fully visible: احتجاجات في تونس"
    ]
   },
@@ -423,9 +474,9 @@
    "name": "faint text (decision)",
    "ok": true,
    "sample": [
+    "a11y: the bell does not read its count",
     "brief text not fully visible: تتسع الاحتجاجات في تونس منذ 17 ديسمبر بعد أن أحرق شاب نفسه في سيدي بوزيد. يطالب المحتجون بفرص عمل وبخفض الأسعار، وتنقل القنوات العربية ما يجري كل يوم. يرى مستشاروك أن البطالة وارتفاع الأسعار في مصر قد يجعلان الشارع يتأثر بما يحدث.",
-    "brief text cannot be scrolled clear of the fades: تتسع الاحتجاجات في تونس منذ 17 ديسمبر بعد أن أحرق شاب نفسه في سيدي بوزيد. يطالب المحتجون بفرص عمل وبخفض الأسعار، وتنقل القنوات العربية ما يجري كل يوم. يرى مستشاروك أن البطالة وارتفاع الأسعار في مصر قد يجعلان الشارع يتأثر بما يحدث.",
-    "contrast 2.98 for \"تتسع الاحتجاجات في تونس \""
+    "brief text cannot be scrolled clear of the fades: تتسع الاحتجاجات في تونس منذ 17 ديسمبر بعد أن أحرق شاب نفسه في سيدي بوزيد. يطالب المحتجون بفرص عمل وبخفض الأسعار، وتنقل القنوات العربية ما يجري كل يوم. يرى مستشاروك أن البطالة وارتفاع الأسعار في مصر قد يجعلان الشارع يتأثر بما يحدث."
    ]
   },
   {
@@ -434,14 +485,15 @@
    "sample": [
     "% shown before its number: \"نسبة 20%\"",
     "the text is not the brief's",
-    "brief text missing: تتسع الاحتجاجات في تونس منذ 17 ديسمبر بعد أن أحرق شاب نفسه في سيدي بوزيد. يطالب المحتجون بفرص عمل وبخفض الأسعار، وتنقل القنوات العربية ما يجري كل يوم. يرى مستشاروك أن البطالة وارتفاع الأسعار في مصر قد يجعلان الشارع يتأثر بما يحدث."
+    "a11y: the bell does not read its count"
    ]
   },
   {
    "name": "game running",
    "ok": true,
    "sample": [
-    "the game is not shown paused (play glyph and words)"
+    "the game is not shown paused (play glyph and words)",
+    "a11y: the bell does not read its count"
    ]
   },
   {
@@ -449,7 +501,7 @@
    "ok": true,
    "sample": [
     "the sheet does not say the time is stopped",
-    "brief text missing: الوقت متوقف · الافتراضي بعد 7 أيام",
+    "a11y: the bell does not read its count",
     "brief text missing: الوقت متوقف · الافتراضي بعد 7 أيام"
    ]
   },
@@ -458,7 +510,7 @@
    "ok": true,
    "sample": [
     "the text is not the brief's",
-    "brief text missing: تتسع الاحتجاجات في تونس منذ 17 ديسمبر بعد أن أحرق شاب نفسه في سيدي بوزيد. يطالب المحتجون بفرص عمل وبخفض الأسعار، وتنقل القنوات العربية ما يجري كل يوم. يرى مستشاروك أن البطالة وارتفاع الأسعار في مصر قد يجعلان الشارع يتأثر بما يحدث.",
+    "a11y: the bell does not read its count",
     "brief text missing: تتسع الاحتجاجات في تونس منذ 17 ديسمبر بعد أن أحرق شاب نفسه في سيدي بوزيد. يطالب المحتجون بفرص عمل وبخفض الأسعار، وتنقل القنوات العربية ما يجري كل يوم. يرى مستشاروك أن البطالة وارتفاع الأسعار في مصر قد يجعلان الشارع يتأثر بما يحدث."
    ]
   },
@@ -503,7 +555,8 @@
    "ok": true,
    "sample": [
     "a11y: option 1 does not say «الاضطرابات»'s direction and whether it is better or worse",
-    "a11y: option 1 does not say «العجز»'s direction and whether it is better or worse"
+    "a11y: option 1 does not say «العجز»'s direction and whether it is better or worse",
+    "a11y: the bell does not read its count"
    ]
   },
   {
@@ -511,14 +564,16 @@
    "ok": true,
    "sample": [
     "a11y: option 2 does not say «الاضطرابات»'s direction and whether it is better or worse",
-    "a11y: option 2 does not say «الشرعية»'s direction and whether it is better or worse"
+    "a11y: option 2 does not say «الشرعية»'s direction and whether it is better or worse",
+    "a11y: the bell does not read its count"
    ]
   },
   {
    "name": "two defaults",
    "ok": true,
    "sample": [
-    "the default is not exactly one option, named on screen and in VoiceOver"
+    "the default is not exactly one option, named on screen and in VoiceOver",
+    "a11y: the bell does not read its count"
    ]
   },
   {
@@ -526,7 +581,7 @@
    "ok": true,
    "sample": [
     "the deficit's rise is not shown with its unit and period (مليون $ سنويًا)",
-    "brief text missing: العجز +500 مليون $ سنويًا",
+    "a11y: the bell does not read its count",
     "brief text missing: العجز +500 مليون $ سنويًا"
    ]
   },
@@ -544,7 +599,7 @@
    "ok": true,
    "sample": [
     "the header does not show the expiry and its default",
-    "brief text missing: الوقت متوقف · الافتراضي بعد 7 أيام",
+    "a11y: the bell does not read its count",
     "brief text missing: الوقت متوقف · الافتراضي بعد 7 أيام"
    ]
   },
@@ -552,20 +607,23 @@
    "name": "an option marked main",
    "ok": true,
    "sample": [
-    "an option is marked as the main choice"
+    "an option is marked as the main choice",
+    "a11y: the bell does not read its count"
    ]
   },
   {
    "name": "header without its image",
    "ok": true,
    "sample": [
-    "the header strip is not the owner's category image"
+    "the header strip is not the owner's category image",
+    "a11y: the bell does not read its count"
    ]
   },
   {
    "name": "a cost line hidden",
    "ok": true,
    "sample": [
+    "a11y: the bell does not read its count",
     "brief text missing: 10 من رأس المال السياسي"
    ]
   },
@@ -573,6 +631,7 @@
    "name": "a chip hidden",
    "ok": true,
    "sample": [
+    "a11y: the bell does not read its count",
     "brief text cannot be scrolled clear of the fades: الاضطرابات −2"
    ]
   },
@@ -597,7 +656,8 @@
    "ok": true,
    "sample": [
     "a11y: «لاحقًا: يبقى القرار في ا» does not read all it shows: يستأنف الوقت",
-    "no «لاحقًا» that keeps the decision in the notifications, resumes time and says the expiry"
+    "no «لاحقًا» that keeps the decision in the notifications, resumes time and says the expiry",
+    "a11y: the bell does not read its count"
    ]
   },
   {
@@ -605,15 +665,16 @@
    "ok": true,
    "sample": [
     "no «لاحقًا» that keeps the decision in the notifications, resumes time and says the expiry",
-    "brief text missing: لاحقًا",
-    "brief text missing: يبقى في الإشعارات · يستأنف الوقت"
+    "a11y: the bell does not read its count",
+    "brief text missing: لاحقًا"
    ]
   },
   {
    "name": "close silent on putting off",
    "ok": true,
    "sample": [
-    "a11y: the close button does not say it puts the decision off and resumes time"
+    "a11y: the close button does not say it puts the decision off and resumes time",
+    "a11y: the bell does not read its count"
    ]
   },
   {

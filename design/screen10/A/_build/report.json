@@ -1,7 +1,7 @@
 {
  "se": {
   "device": "667x375 side 0 bottom 0 none",
-  "renderedAt": "2026-11-04T13:15:21.413Z",
+  "renderedAt": "2026-11-07T15:35:03.251Z",
   "inputs": {
    "files": [
     "index.html",
@@ -24,9 +24,14 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "b30cb388b0ca73ac8b56c677f6efee714fc9088b"
+   "sha1": "97f61cbe3ac8c835fa0e60c44de12458ad22bb13"
   },
-  "issues": [],
+  "issues": [
+   "treaties: a11y: «مياه النيل مع السودان، 1» does not read all it shows: م³",
+   "treaties_end: a11y: «مياه النيل مع السودان، 1» does not read all it shows: م³",
+   "treaties_at86: a11y: «مياه النيل مع السودان، 1» does not read all it shows: م³",
+   "treaties_at172: a11y: «مياه النيل مع السودان، 1» does not read all it shows: م³"
+  ],
   "views": {
    "overview": {
     "issueCount": 0,
@@ -158,7 +163,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 9,
       "x1": 53,
       "y0": 48,
@@ -721,7 +726,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 9,
       "x1": 53,
       "y0": 48,
@@ -1284,7 +1289,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 9,
       "x1": 53,
       "y0": 48,
@@ -1722,7 +1727,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 9,
       "x1": 53,
       "y0": 48,
@@ -2066,7 +2071,7 @@
     ]
    },
    "treaties": {
-    "issueCount": 0,
+    "issueCount": 1,
     "png": true,
     "fit": {
      "top": {
@@ -2195,7 +2200,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 9,
       "x1": 53,
       "y0": 48,
@@ -2501,7 +2506,7 @@
     ]
    },
    "treaties_end": {
-    "issueCount": 0,
+    "issueCount": 1,
     "png": true,
     "fit": {
      "top": {
@@ -2630,7 +2635,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 9,
       "x1": 53,
       "y0": 48,
@@ -3095,7 +3100,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 9,
       "x1": 53,
       "y0": 48,
@@ -3525,7 +3530,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 9,
       "x1": 53,
       "y0": 48,
@@ -3957,7 +3962,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 9,
       "x1": 53,
       "y0": 48,
@@ -4387,7 +4392,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 9,
       "x1": 53,
       "y0": 48,
@@ -4822,7 +4827,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 9,
       "x1": 53,
       "y0": 48,
@@ -5140,7 +5145,7 @@
     ]
    },
    "treaties_at86": {
-    "issueCount": 0,
+    "issueCount": 1,
     "png": false,
     "fit": {
      "top": {
@@ -5269,7 +5274,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 9,
       "x1": 53,
       "y0": 48,
@@ -5540,7 +5545,7 @@
     ]
    },
    "treaties_at172": {
-    "issueCount": 0,
+    "issueCount": 1,
     "png": false,
     "fit": {
      "top": {
@@ -5669,7 +5674,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 9,
       "x1": 53,
       "y0": 48,
@@ -6094,7 +6099,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 9,
       "x1": 53,
       "y0": 48,
@@ -6395,24 +6400,24 @@
    "_build/se_un_end.png"
   ],
   "pngSha1": {
-   "se.png": "bdd8ac8346ad89292be43bdec2275f2cb8781591",
-   "_build/se_hit.png": "37ea06578c663e3c987aa324cab35636193d6b24",
-   "_build/se_overview_end.png": "bdd8ac8346ad89292be43bdec2275f2cb8781591",
-   "_build/se_relations.png": "fd3dd0b479b98f9338083b5cabceaed3566cddd3",
-   "_build/se_relations_end.png": "d28fab4386f976a1d43a95cb78026c94c5a497a9",
-   "_build/se_treaties.png": "7766de48f164ffea52c96fae19a28ff04204bbdc",
-   "_build/se_treaties_end.png": "3c141119434dd975c9f8a48b5c3884f40f139205",
-   "_build/se_un.png": "67018d19f9bf4fbe8119607d4fb7ac83553d38e7",
-   "_build/se_un_end.png": "5d90b5e9a02c0a1923eba715c55759ff17d5ae34"
+   "se.png": "bf250d24f63c787c6b8d2b9a3ffd82aaf616bd7b",
+   "_build/se_hit.png": "62903f3df8a5ebc7fa000b0e6de18016feae02d1",
+   "_build/se_overview_end.png": "bf250d24f63c787c6b8d2b9a3ffd82aaf616bd7b",
+   "_build/se_relations.png": "fbb60c960e8dfb35e4dbe36d5f8ac10d7c935d49",
+   "_build/se_relations_end.png": "64be16a6f65206617d137ff574d8592b63b10be1",
+   "_build/se_treaties.png": "284280da2270fe9f03edbb01e9fad8cea58fd8c5",
+   "_build/se_treaties_end.png": "9cea7d671668c87b977960f0efdb8ea6ded03dc6",
+   "_build/se_un.png": "92d8806606b1a16baa976bbb0c7736b34b1b445b",
+   "_build/se_un_end.png": "69b23df0d2c874d6559227cf586dabb472879f51"
   },
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 0
+  "issueCount": 4
  },
  "mini": {
   "device": "812x375 side 50 bottom 21 notch",
-  "renderedAt": "2026-11-04T13:15:47.115Z",
+  "renderedAt": "2026-11-07T15:35:25.819Z",
   "inputs": {
    "files": [
     "index.html",
@@ -6435,9 +6440,14 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "b30cb388b0ca73ac8b56c677f6efee714fc9088b"
+   "sha1": "97f61cbe3ac8c835fa0e60c44de12458ad22bb13"
   },
-  "issues": [],
+  "issues": [
+   "treaties: a11y: «مياه النيل مع السودان، 1» does not read all it shows: م³",
+   "treaties_end: a11y: «مياه النيل مع السودان، 1» does not read all it shows: م³",
+   "treaties_at72: a11y: «مياه النيل مع السودان، 1» does not read all it shows: م³",
+   "treaties_at144: a11y: «مياه النيل مع السودان، 1» does not read all it shows: م³"
+  ],
   "views": {
    "overview": {
     "issueCount": 0,
@@ -6579,7 +6589,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 51,
       "x1": 95,
       "y0": 48,
@@ -7157,7 +7167,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 51,
       "x1": 95,
       "y0": 48,
@@ -7735,7 +7745,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 51,
       "x1": 95,
       "y0": 48,
@@ -8178,7 +8188,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 51,
       "x1": 95,
       "y0": 48,
@@ -8527,7 +8537,7 @@
     ]
    },
    "treaties": {
-    "issueCount": 0,
+    "issueCount": 1,
     "png": true,
     "fit": {
      "top": {
@@ -8666,7 +8676,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 51,
       "x1": 95,
       "y0": 48,
@@ -8972,7 +8982,7 @@
     ]
    },
    "treaties_end": {
-    "issueCount": 0,
+    "issueCount": 1,
     "png": true,
     "fit": {
      "top": {
@@ -9111,7 +9121,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 51,
       "x1": 95,
       "y0": 48,
@@ -9591,7 +9601,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 51,
       "x1": 95,
       "y0": 48,
@@ -10016,7 +10026,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 51,
       "x1": 95,
       "y0": 48,
@@ -10463,7 +10473,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 51,
       "x1": 95,
       "y0": 48,
@@ -10908,7 +10918,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 51,
       "x1": 95,
       "y0": 48,
@@ -11358,7 +11368,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 51,
       "x1": 95,
       "y0": 48,
@@ -11808,7 +11818,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 51,
       "x1": 95,
       "y0": 48,
@@ -12119,7 +12129,7 @@
     ]
    },
    "treaties_at72": {
-    "issueCount": 0,
+    "issueCount": 1,
     "png": false,
     "fit": {
      "top": {
@@ -12258,7 +12268,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 51,
       "x1": 95,
       "y0": 48,
@@ -12529,7 +12539,7 @@
     ]
    },
    "treaties_at144": {
-    "issueCount": 0,
+    "issueCount": 1,
     "png": false,
     "fit": {
      "top": {
@@ -12668,7 +12678,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 51,
       "x1": 95,
       "y0": 48,
@@ -13103,7 +13113,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 51,
       "x1": 95,
       "y0": 48,
@@ -13528,7 +13538,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 51,
       "x1": 95,
       "y0": 48,
@@ -13831,24 +13841,24 @@
    "_build/mini_un_end.png"
   ],
   "pngSha1": {
-   "mini.png": "e2b4ac83e87e6056f1a2ad45e8184c39cbbd0b91",
-   "_build/mini_hit.png": "d330df3f089483664452ffc25927f1c911038cbe",
-   "_build/mini_overview_end.png": "e2b4ac83e87e6056f1a2ad45e8184c39cbbd0b91",
-   "_build/mini_relations.png": "fb372d7397e797c6f7de01579ea0f0acd965b4f9",
-   "_build/mini_relations_end.png": "15d63a79a3c9ed5bce8eda4d8f26d9d76cadea26",
-   "_build/mini_treaties.png": "17bbe2b146714d72b07406f47e307d0c68a09784",
-   "_build/mini_treaties_end.png": "5d27ffcf78fd37c5eeeea0890cd7f96fd0d2c220",
-   "_build/mini_un.png": "bf2e8eac92e161f2b08b8023b6302ba15ccc5a9f",
-   "_build/mini_un_end.png": "3c9fa2b25cd845eb06fce9589a7ccee9cbd758d7"
+   "mini.png": "d0b5eb296ca09a7b5f415915fa682f207520de00",
+   "_build/mini_hit.png": "d75fbbefdf92404303f3fb57101bfa972e38ac49",
+   "_build/mini_overview_end.png": "d0b5eb296ca09a7b5f415915fa682f207520de00",
+   "_build/mini_relations.png": "3b9dd8c2479d75eed235d52249fe9dc671578d4c",
+   "_build/mini_relations_end.png": "2ad0b3ff4fac5f87577235612def127d9ada16b0",
+   "_build/mini_treaties.png": "a090156770f76bce270016743def58347d38087c",
+   "_build/mini_treaties_end.png": "27148501270305521f9438483385ced686ecc938",
+   "_build/mini_un.png": "de28b47596425ec0acfe3f2e83d6edfaf0bd014b",
+   "_build/mini_un_end.png": "35c8d65bc08ab5df9ae2dac18d72014e3ac26992"
   },
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 0
+  "issueCount": 4
  },
  "i14": {
   "device": "844x390 side 47 bottom 21 notch",
-  "renderedAt": "2026-11-04T13:16:17.793Z",
+  "renderedAt": "2026-11-07T15:35:52.510Z",
   "inputs": {
    "files": [
     "index.html",
@@ -13871,9 +13881,14 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "b30cb388b0ca73ac8b56c677f6efee714fc9088b"
+   "sha1": "97f61cbe3ac8c835fa0e60c44de12458ad22bb13"
   },
-  "issues": [],
+  "issues": [
+   "treaties: a11y: «مياه النيل مع السودان، 1» does not read all it shows: م³",
+   "treaties_end: a11y: «مياه النيل مع السودان، 1» does not read all it shows: م³",
+   "treaties_at87: a11y: «مياه النيل مع السودان، 1» does not read all it shows: م³",
+   "treaties_at174: a11y: «مياه النيل مع السودان، 1» does not read all it shows: م³"
+  ],
   "views": {
    "overview": {
     "issueCount": 0,
@@ -14011,7 +14026,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 48,
       "x1": 92,
       "y0": 48,
@@ -14691,7 +14706,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 48,
       "x1": 92,
       "y0": 48,
@@ -15371,7 +15386,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 48,
       "x1": 92,
       "y0": 48,
@@ -15926,7 +15941,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 48,
       "x1": 92,
       "y0": 48,
@@ -16381,7 +16396,7 @@
     ]
    },
    "treaties": {
-    "issueCount": 0,
+    "issueCount": 1,
     "png": true,
     "fit": {
      "top": {
@@ -16516,7 +16531,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 48,
       "x1": 92,
       "y0": 48,
@@ -16933,7 +16948,7 @@
     ]
    },
    "treaties_end": {
-    "issueCount": 0,
+    "issueCount": 1,
     "png": true,
     "fit": {
      "top": {
@@ -17068,7 +17083,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 48,
       "x1": 92,
       "y0": 48,
@@ -17650,7 +17665,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 48,
       "x1": 92,
       "y0": 48,
@@ -18197,7 +18212,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 48,
       "x1": 92,
       "y0": 48,
@@ -18746,7 +18761,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 48,
       "x1": 92,
       "y0": 48,
@@ -19298,7 +19313,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 48,
       "x1": 92,
       "y0": 48,
@@ -19845,7 +19860,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 48,
       "x1": 92,
       "y0": 48,
@@ -20269,7 +20284,7 @@
     ]
    },
    "treaties_at87": {
-    "issueCount": 0,
+    "issueCount": 1,
     "png": false,
     "fit": {
      "top": {
@@ -20404,7 +20419,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 48,
       "x1": 92,
       "y0": 48,
@@ -20786,7 +20801,7 @@
     ]
    },
    "treaties_at174": {
-    "issueCount": 0,
+    "issueCount": 1,
     "png": false,
     "fit": {
      "top": {
@@ -20921,7 +20936,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 48,
       "x1": 92,
       "y0": 48,
@@ -21478,7 +21493,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 48,
       "x1": 92,
       "y0": 48,
@@ -21905,24 +21920,24 @@
    "_build/i14_un_end.png"
   ],
   "pngSha1": {
-   "i14.png": "a82416eb717822c05a53450ad6517ba71a0cea63",
-   "_build/i14_hit.png": "3238ca47ab2a10f85cd8f8a6be22ce5743061558",
-   "_build/i14_overview_end.png": "a82416eb717822c05a53450ad6517ba71a0cea63",
-   "_build/i14_relations.png": "22272a0b0a2a46f0fb0f2d957e82257b8d365605",
-   "_build/i14_relations_end.png": "384d490f8d575d7e49ef8cbf6592ec4222133c6f",
-   "_build/i14_treaties.png": "3f1db37726516a99a02da5af27c89f15082c8111",
-   "_build/i14_treaties_end.png": "1250ab9cf77af1d8d019863352d9e638a4cb840b",
-   "_build/i14_un.png": "4101602a4f787faaf76a8c3478fb3a4cb961d036",
-   "_build/i14_un_end.png": "ff4b2aece0dbaabee248f184c7ea0c992fb6776a"
+   "i14.png": "2b72e3c6af892fad691c8c62235007c33b5eaabf",
+   "_build/i14_hit.png": "ec3157fe0d05c9754bbc39ebaffa4451110c8590",
+   "_build/i14_overview_end.png": "2b72e3c6af892fad691c8c62235007c33b5eaabf",
+   "_build/i14_relations.png": "fe171fc9dfbca308a64ee006eb57ad24a2f5b83a",
+   "_build/i14_relations_end.png": "e99e10e79e0187b595e0a942483ff0fd24bdf68d",
+   "_build/i14_treaties.png": "fec66d9bf41c00926a4458b1f92eb5044196c4ef",
+   "_build/i14_treaties_end.png": "a764cef776cc4ddb9b0d9053d2763d4485161f73",
+   "_build/i14_un.png": "f92d4448a82aadf8a2d168a29ad36a9e9cbf3aa5",
+   "_build/i14_un_end.png": "4a8422ce86e0fb09b1980856c4a5d7bac851ae35"
   },
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 0
+  "issueCount": 4
  },
  "i16": {
   "device": "852x393 side 59 bottom 21 island",
-  "renderedAt": "2026-11-04T13:16:45.908Z",
+  "renderedAt": "2026-11-07T15:36:16.890Z",
   "inputs": {
    "files": [
     "index.html",
@@ -21945,9 +21960,14 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "b30cb388b0ca73ac8b56c677f6efee714fc9088b"
+   "sha1": "97f61cbe3ac8c835fa0e60c44de12458ad22bb13"
   },
-  "issues": [],
+  "issues": [
+   "treaties: a11y: «مياه النيل مع السودان، 1» does not read all it shows: م³",
+   "treaties_end: a11y: «مياه النيل مع السودان، 1» does not read all it shows: م³",
+   "treaties_at90: a11y: «مياه النيل مع السودان، 1» does not read all it shows: م³",
+   "treaties_at180: a11y: «مياه النيل مع السودان، 1» does not read all it shows: م³"
+  ],
   "views": {
    "overview": {
     "issueCount": 0,
@@ -22084,7 +22104,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 60,
       "x1": 104,
       "y0": 48,
@@ -22753,7 +22773,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 60,
       "x1": 104,
       "y0": 48,
@@ -23422,7 +23442,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 60,
       "x1": 104,
       "y0": 48,
@@ -23966,7 +23986,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 60,
       "x1": 104,
       "y0": 48,
@@ -24411,7 +24431,7 @@
     ]
    },
    "treaties": {
-    "issueCount": 0,
+    "issueCount": 1,
     "png": true,
     "fit": {
      "top": {
@@ -24545,7 +24565,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 60,
       "x1": 104,
       "y0": 48,
@@ -24952,7 +24972,7 @@
     ]
    },
    "treaties_end": {
-    "issueCount": 0,
+    "issueCount": 1,
     "png": true,
     "fit": {
      "top": {
@@ -25086,7 +25106,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 60,
       "x1": 104,
       "y0": 48,
@@ -25657,7 +25677,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 60,
       "x1": 104,
       "y0": 48,
@@ -26193,7 +26213,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 60,
       "x1": 104,
       "y0": 48,
@@ -26731,7 +26751,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 60,
       "x1": 104,
       "y0": 48,
@@ -27272,7 +27292,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 60,
       "x1": 104,
       "y0": 48,
@@ -27818,7 +27838,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 60,
       "x1": 104,
       "y0": 48,
@@ -28225,7 +28245,7 @@
     ]
    },
    "treaties_at90": {
-    "issueCount": 0,
+    "issueCount": 1,
     "png": false,
     "fit": {
      "top": {
@@ -28359,7 +28379,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 60,
       "x1": 104,
       "y0": 48,
@@ -28731,7 +28751,7 @@
     ]
    },
    "treaties_at180": {
-    "issueCount": 0,
+    "issueCount": 1,
     "png": false,
     "fit": {
      "top": {
@@ -28865,7 +28885,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 60,
       "x1": 104,
       "y0": 48,
@@ -29411,7 +29431,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 60,
       "x1": 104,
       "y0": 48,
@@ -29828,24 +29848,24 @@
    "_build/i16_un_end.png"
   ],
   "pngSha1": {
-   "i16.png": "bdae27cb05440a429ae78988608fa5d71fb5ccca",
-   "_build/i16_hit.png": "8dbd93666c315db74a08e6c73a052311e7e659ad",
-   "_build/i16_overview_end.png": "bdae27cb05440a429ae78988608fa5d71fb5ccca",
-   "_build/i16_relations.png": "a7515e72bd99aa2c021fd2c09b886304c8e2c328",
-   "_build/i16_relations_end.png": "53c782e3a6b493acc1b71c46571aeccb6b2759ff",
-   "_build/i16_treaties.png": "941feab328cf7370963d2994ccb15291550362b8",
-   "_build/i16_treaties_end.png": "451def1ab78de060014be30244b7912096d0fa20",
-   "_build/i16_un.png": "0cad270173e5f5786d5537b11570410545306df1",
-   "_build/i16_un_end.png": "4e90d94a51a3283ce12a58fb26c416bbdf12783a"
+   "i16.png": "fc4fee09e95e55b207470e46e3e355e242313971",
+   "_build/i16_hit.png": "60e4646fb0b32065b32586a6ba449dbdfe2d3b66",
+   "_build/i16_overview_end.png": "fc4fee09e95e55b207470e46e3e355e242313971",
+   "_build/i16_relations.png": "1d7ffadc25227b7ab54b4ab836075064bc41d5d4",
+   "_build/i16_relations_end.png": "fdeed53637a7ab8de7dc746372fd23b6d6b10d28",
+   "_build/i16_treaties.png": "6584822be3206e46d71b76187bae67b1e1902009",
+   "_build/i16_treaties_end.png": "5e846f0ad899557adf7bbdfc6b63f2c75b768d68",
+   "_build/i16_un.png": "b195da52e3ddea5d166fc3e2e4f0db66411b96e7",
+   "_build/i16_un_end.png": "409302ae1a84604e7aa46ad437b575a549672d02"
   },
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 0
+  "issueCount": 4
  },
  "i16pro": {
   "device": "874x402 side 62 bottom 21 island",
-  "renderedAt": "2026-11-04T13:17:13.743Z",
+  "renderedAt": "2026-11-07T15:36:41.100Z",
   "inputs": {
    "files": [
     "index.html",
@@ -29868,9 +29888,13 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "b30cb388b0ca73ac8b56c677f6efee714fc9088b"
+   "sha1": "97f61cbe3ac8c835fa0e60c44de12458ad22bb13"
   },
-  "issues": [],
+  "issues": [
+   "treaties: a11y: «مياه النيل مع السودان، 1» does not read all it shows: م³",
+   "treaties_end: a11y: «مياه النيل مع السودان، 1» does not read all it shows: م³",
+   "treaties_at99: a11y: «مياه النيل مع السودان، 1» does not read all it shows: م³"
+  ],
   "views": {
    "overview": {
     "issueCount": 0,
@@ -30008,7 +30032,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 63,
       "x1": 107,
       "y0": 48,
@@ -30688,7 +30712,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 63,
       "x1": 107,
       "y0": 48,
@@ -31368,7 +31392,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 63,
       "x1": 107,
       "y0": 48,
@@ -31930,7 +31954,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 63,
       "x1": 107,
       "y0": 48,
@@ -32390,7 +32414,7 @@
     ]
    },
    "treaties": {
-    "issueCount": 0,
+    "issueCount": 1,
     "png": true,
     "fit": {
      "top": {
@@ -32525,7 +32549,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 63,
       "x1": 107,
       "y0": 48,
@@ -32942,7 +32966,7 @@
     ]
    },
    "treaties_end": {
-    "issueCount": 0,
+    "issueCount": 1,
     "png": true,
     "fit": {
      "top": {
@@ -33077,7 +33101,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 63,
       "x1": 107,
       "y0": 48,
@@ -33659,7 +33683,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 63,
       "x1": 107,
       "y0": 48,
@@ -34206,7 +34230,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 63,
       "x1": 107,
       "y0": 48,
@@ -34775,7 +34799,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 63,
       "x1": 107,
       "y0": 48,
@@ -35344,7 +35368,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 63,
       "x1": 107,
       "y0": 48,
@@ -35913,7 +35937,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 63,
       "x1": 107,
       "y0": 48,
@@ -36345,7 +36369,7 @@
     ]
    },
    "treaties_at99": {
-    "issueCount": 0,
+    "issueCount": 1,
     "png": false,
     "fit": {
      "top": {
@@ -36480,7 +36504,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 63,
       "x1": 107,
       "y0": 48,
@@ -37007,7 +37031,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 63,
       "x1": 107,
       "y0": 48,
@@ -37446,24 +37470,24 @@
    "_build/i16pro_un_end.png"
   ],
   "pngSha1": {
-   "i16pro.png": "e8e6b0ded14e547e299a446cc06b1a9f5a3e33d2",
-   "_build/i16pro_hit.png": "417ee494e67827e782588608d7a844fb3a33d142",
-   "_build/i16pro_overview_end.png": "e8e6b0ded14e547e299a446cc06b1a9f5a3e33d2",
-   "_build/i16pro_relations.png": "42b13315454d21267c47dc3f6171cf3e94b943bd",
-   "_build/i16pro_relations_end.png": "2d13eb2fb355d151c2cafb4c17a5ae57bbb84d21",
-   "_build/i16pro_treaties.png": "bcda14067d111f18a3891ceb475b5331db1e0224",
-   "_build/i16pro_treaties_end.png": "ad0147c1e8f261c22e6a302be6bdef2da3075614",
-   "_build/i16pro_un.png": "4282368883bfb975bfd36a2affdcc774470a02ff",
-   "_build/i16pro_un_end.png": "7ed045a191e0d025891388311aad5ad2581c9a6c"
+   "i16pro.png": "7e9da770eae2082d345a3e40791d6ac7885d1a9f",
+   "_build/i16pro_hit.png": "717aefaad242056249100eba87b229a185194d35",
+   "_build/i16pro_overview_end.png": "7e9da770eae2082d345a3e40791d6ac7885d1a9f",
+   "_build/i16pro_relations.png": "ff8c62de95b5f15599438348b9ea6b7c08792bcb",
+   "_build/i16pro_relations_end.png": "fb4ed8bb42af4ab2c7c76e2125b6f33143c66af0",
+   "_build/i16pro_treaties.png": "3d6af80e648b02e9bf5a376f3f541df6d5c4e6c5",
+   "_build/i16pro_treaties_end.png": "1fa48296c10fa89a6adad0215fe1d873855ae43d",
+   "_build/i16pro_un.png": "d877113dbbb49bf8f2c7bf131cfb46e83fd3cf56",
+   "_build/i16pro_un_end.png": "f6eff5cc12e5309e9f22365832e01caccbeaf318"
   },
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 0
+  "issueCount": 3
  },
  "i11": {
   "device": "896x414 side 48 bottom 21 notch",
-  "renderedAt": "2026-11-04T13:17:40.900Z",
+  "renderedAt": "2026-11-07T15:37:04.277Z",
   "inputs": {
    "files": [
     "index.html",
@@ -37486,9 +37510,13 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "b30cb388b0ca73ac8b56c677f6efee714fc9088b"
+   "sha1": "97f61cbe3ac8c835fa0e60c44de12458ad22bb13"
   },
-  "issues": [],
+  "issues": [
+   "treaties: a11y: «مياه النيل مع السودان، 1» does not read all it shows: م³",
+   "treaties_end: a11y: «مياه النيل مع السودان، 1» does not read all it shows: م³",
+   "treaties_at111: a11y: «مياه النيل مع السودان، 1» does not read all it shows: م³"
+  ],
   "views": {
    "overview": {
     "issueCount": 0,
@@ -37625,7 +37653,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 49,
       "x1": 93,
       "y0": 48,
@@ -38304,7 +38332,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 49,
       "x1": 93,
       "y0": 48,
@@ -38983,7 +39011,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 49,
       "x1": 93,
       "y0": 48,
@@ -39544,7 +39572,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 49,
       "x1": 93,
       "y0": 48,
@@ -40016,7 +40044,7 @@
     ]
    },
    "treaties": {
-    "issueCount": 0,
+    "issueCount": 1,
     "png": true,
     "fit": {
      "top": {
@@ -40150,7 +40178,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 49,
       "x1": 93,
       "y0": 48,
@@ -40577,7 +40605,7 @@
     ]
    },
    "treaties_end": {
-    "issueCount": 0,
+    "issueCount": 1,
     "png": true,
     "fit": {
      "top": {
@@ -40711,7 +40739,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 49,
       "x1": 93,
       "y0": 48,
@@ -41302,7 +41330,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 49,
       "x1": 93,
       "y0": 48,
@@ -41868,7 +41896,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 49,
       "x1": 93,
       "y0": 48,
@@ -42436,7 +42464,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 49,
       "x1": 93,
       "y0": 48,
@@ -43009,7 +43037,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 49,
       "x1": 93,
       "y0": 48,
@@ -43436,7 +43464,7 @@
     ]
    },
    "treaties_at111": {
-    "issueCount": 0,
+    "issueCount": 1,
     "png": false,
     "fit": {
      "top": {
@@ -43570,7 +43598,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 49,
       "x1": 93,
       "y0": 48,
@@ -44121,7 +44149,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 49,
       "x1": 93,
       "y0": 48,
@@ -44570,24 +44598,24 @@
    "_build/i11_un_end.png"
   ],
   "pngSha1": {
-   "i11.png": "7311d61604fa2005a9c703f085a6a9f271a2bb33",
-   "_build/i11_hit.png": "81046c95c4cb568f5564a62f9087bddb449b9011",
-   "_build/i11_overview_end.png": "7311d61604fa2005a9c703f085a6a9f271a2bb33",
-   "_build/i11_relations.png": "e31608b140e57fa97dccaf83b9463527ea4e9149",
-   "_build/i11_relations_end.png": "686f6f6b7f0d67f6baf886a9d1d3c64b95f454aa",
-   "_build/i11_treaties.png": "47c69864895f786d74317a08a04b730f7f4071f3",
-   "_build/i11_treaties_end.png": "34d43966a7578019098e0fc604e27c33bbc032ac",
-   "_build/i11_un.png": "1a5c73d7126be949f53c1139e36ddfc9408e71ed",
-   "_build/i11_un_end.png": "d073864428fa60d4c69e537df6df69721585dc07"
+   "i11.png": "c186baa695ebd596ed8b743b7ff2e383455a46f6",
+   "_build/i11_hit.png": "a4d0d33b8c8d490e01d8126f0617f88aed26d236",
+   "_build/i11_overview_end.png": "c186baa695ebd596ed8b743b7ff2e383455a46f6",
+   "_build/i11_relations.png": "55131aa50aa2c06252ead7aa1a8295ea936e8cfe",
+   "_build/i11_relations_end.png": "ba4e8f8dbac7becdb92ceab22156e9f2f7efc2ac",
+   "_build/i11_treaties.png": "193a31ca94c186d05fe6f728da6deac4001e139f",
+   "_build/i11_treaties_end.png": "82c9299dedc3a55aa2d33754aef76e3e2942590d",
+   "_build/i11_un.png": "39d31aa6333800926557a130e6872ed24e034782",
+   "_build/i11_un_end.png": "f2d081f539defb351e735f98c472151453f8a7ac"
   },
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 0
+  "issueCount": 3
  },
  "i16promax": {
   "device": "956x440 side 62 bottom 21 island",
-  "renderedAt": "2026-11-04T13:18:09.368Z",
+  "renderedAt": "2026-11-07T15:37:26.555Z",
   "inputs": {
    "files": [
     "index.html",
@@ -44610,9 +44638,13 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "b30cb388b0ca73ac8b56c677f6efee714fc9088b"
+   "sha1": "97f61cbe3ac8c835fa0e60c44de12458ad22bb13"
   },
-  "issues": [],
+  "issues": [
+   "treaties: a11y: «مياه النيل مع السودان، 1» does not read all it shows: م³",
+   "treaties_end: a11y: «مياه النيل مع السودان، 1» does not read all it shows: م³",
+   "treaties_at137: a11y: «مياه النيل مع السودان، 1» does not read all it shows: م³"
+  ],
   "views": {
    "overview": {
     "issueCount": 0,
@@ -44749,7 +44781,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 63,
       "x1": 107,
       "y0": 48,
@@ -45428,7 +45460,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 63,
       "x1": 107,
       "y0": 48,
@@ -46107,7 +46139,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 63,
       "x1": 107,
       "y0": 48,
@@ -46683,7 +46715,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 63,
       "x1": 107,
       "y0": 48,
@@ -47160,7 +47192,7 @@
     ]
    },
    "treaties": {
-    "issueCount": 0,
+    "issueCount": 1,
     "png": true,
     "fit": {
      "top": {
@@ -47294,7 +47326,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 63,
       "x1": 107,
       "y0": 48,
@@ -47726,7 +47758,7 @@
     ]
    },
    "treaties_end": {
-    "issueCount": 0,
+    "issueCount": 1,
     "png": true,
     "fit": {
      "top": {
@@ -47860,7 +47892,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 63,
       "x1": 107,
       "y0": 48,
@@ -48456,7 +48488,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 63,
       "x1": 107,
       "y0": 48,
@@ -49027,7 +49059,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 63,
       "x1": 107,
       "y0": 48,
@@ -49615,7 +49647,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 63,
       "x1": 107,
       "y0": 48,
@@ -50193,7 +50225,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 63,
       "x1": 107,
       "y0": 48,
@@ -50630,7 +50662,7 @@
     ]
    },
    "treaties_at137": {
-    "issueCount": 0,
+    "issueCount": 1,
     "png": false,
     "fit": {
      "top": {
@@ -50764,7 +50796,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 63,
       "x1": 107,
       "y0": 48,
@@ -51221,19 +51253,19 @@
    "_build/i16promax_un_end.png"
   ],
   "pngSha1": {
-   "i16promax.png": "ed6df25885cef1b78b2a6cbc4571abc23e8151e4",
-   "_build/i16promax_hit.png": "25ffad10c1a50148cd8ea4cf463781dbbc031d78",
-   "_build/i16promax_overview_end.png": "ed6df25885cef1b78b2a6cbc4571abc23e8151e4",
-   "_build/i16promax_relations.png": "9c3cd9b1137bf4a8c9a02064c16c607f341e1a0d",
-   "_build/i16promax_relations_end.png": "28ac995972a22e6e195b4484ae8cf961b4e8c5b4",
-   "_build/i16promax_treaties.png": "19a393d4771123b5a94f5c65501b0d4820ac9264",
-   "_build/i16promax_treaties_end.png": "e443400b06bb8a7fec006ac92e63041bb80fbc76",
-   "_build/i16promax_un.png": "74283b77224f432d1208024bc57f513ec2d0b339",
-   "_build/i16promax_un_end.png": "1e19793125052afe2e93934b878829ab3e3c56d9"
+   "i16promax.png": "374be651a17258fdd8e21ef2b7dbe7b48dea7c37",
+   "_build/i16promax_hit.png": "280b298ee31d1d2e1e9ccbbd65687fa440b05cf1",
+   "_build/i16promax_overview_end.png": "374be651a17258fdd8e21ef2b7dbe7b48dea7c37",
+   "_build/i16promax_relations.png": "644a68765af1240a80802c499d6b198a743ec7ad",
+   "_build/i16promax_relations_end.png": "141fbfc89e2c1cc73538586b3209648f25de9615",
+   "_build/i16promax_treaties.png": "ae624cfff398ebe307f794180f0cf8dab003e298",
+   "_build/i16promax_treaties_end.png": "00894145449a50698a49159a96a12d9460b2b97b",
+   "_build/i16promax_un.png": "579c442ae341c76911605312d7ca80565820a02a",
+   "_build/i16promax_un_end.png": "17483860a35ffdb21eeee336148347595cb183c9"
   },
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 0
+  "issueCount": 3
  }
 }

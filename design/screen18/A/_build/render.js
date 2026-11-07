@@ -78,7 +78,7 @@ require(path.join(OUT, '../../shared/check/panelcheck.js'))({
   inputs: ['_build/end.css', '../../shared/check/end_hud.py'],
   TOK: { sec: 'rgb(214, 187, 169)', ctlH: {}, sheetIcon: [], size: [['.e-p', null, 32]] },
   HEAD, BRIEF, screenChecks, DATA: { pillars: PILLARS, note: NOTE },
-  skipGeneric: ['section colour on data', 'section colour on a rule', 'emblem drawn grey', 'why without its subject', 'amber value without its icon', 'chip arrow against its sign', 'chip not white', 'tap in the side inset', 'text into a control'],
+  skipGeneric: ['section colour on a rule', 'why without its subject', 'amber value without its icon', 'chip arrow against its sign', 'chip not white', 'tap in the side inset', 'text into a control'],
   cases: (d, se) => [
     ['weekday wrong', d, '', '', /the HUD date is not «الجمعة 31 ديسمبر 2100»/, () => { window.__setDate('السبت', '31 ديسمبر 2100'); }],
     ['another moment toast', d, '', '', /the toast is not «انتهت الحملة في 2100»/, () => { document.querySelector('.alert-prev .txt').textContent = 'انتهت الحملة'; }],

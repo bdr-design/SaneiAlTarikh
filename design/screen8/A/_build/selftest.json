@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-04T13:09:45.554Z",
+ "ranAt": "2026-11-07T15:29:56.666Z",
  "inputs": {
   "files": [
    "index.html",
@@ -24,7 +24,7 @@
    "header_cairo.jpg",
    "map_overlay_cairo.svg"
   ],
-  "sha1": "0d323346764ae43a2a5c9b7d863f864461e2ad69"
+  "sha1": "0435f6730fc553853b76ee8bced837bff6af16e1"
  },
  "cleanIssues": {
   "i16promax": [],
@@ -47,14 +47,12 @@
   "se_parties_end": [],
   "se_groups": [],
   "se_groups_end": [],
-  "se_unrest_at86": [],
-  "se_unrest_at172": [],
-  "se_unrest_at258": [],
-  "se_unrest_at344": [],
-  "se_parties_at86": [],
-  "se_parties_at172": [],
-  "se_groups_at86": [],
-  "se_groups_at172": [],
+  "se_unrest_at98": [],
+  "se_unrest_at196": [],
+  "se_unrest_at294": [],
+  "se_parties_at98": [],
+  "se_groups_at98": [],
+  "se_groups_at196": [],
   "se coverage": []
  },
  "results": [
@@ -328,7 +326,7 @@
    "sample": [
     "clipped text (top): \"0.4\" 866.09..881 y 153..168",
     "clipped text (top): \"مليار $\" 838.42..866.09 y 153..168",
-    "money unit: «0.4 مليار» (under 1 billion is written in millions)"
+    "control cut by its scroll area (bottom): فتح حوار وطني: الكلفة 20 م"
    ]
   },
   {
@@ -337,7 +335,7 @@
    "sample": [
     "clipped text (top): \"تغير +\" 859.06..881 y 153..168",
     "clipped text (top): \"3\" 853.06..859.06 y 153..168",
-    "a sign outside its number: «تغير +3»"
+    "control cut by its scroll area (bottom): فتح حوار وطني: الكلفة 20 م"
    ]
   },
   {
@@ -345,14 +343,17 @@
    "ok": true,
    "sample": [
     "clipped text (top): \"تراجع\" 860.27..881 y 153..168",
-    "colour alone: «تراجع» has no arrow or icon"
+    "control cut by its scroll area (bottom): فتح حوار وطني: الكلفة 20 م",
+    "hit box shaved by its clip: فتح حوار وطني: الكلفة 20 م"
    ]
   },
   {
    "name": "an image in the sheet",
    "ok": true,
    "sample": [
-    "an image in the sheet"
+    "clipped text (bottom): \"الكلفة:\" 801.73..834 y 401..418",
+    "clipped text (bottom): \"20\" 787.92..801.73 y 401..418",
+    "clipped text (bottom): \"· مرة في السنة\" 712.75..775.92 y 401..418"
    ]
   },
   {
@@ -367,7 +368,8 @@
    "ok": true,
    "sample": [
     "clipped text (top): \"اختبار\" 860.25..881 y 153..168",
-    "a11y: a label VoiceOver may skip (no role): «اختبار»"
+    "control cut by its scroll area (bottom): فتح حوار وطني: الكلفة 20 م",
+    "hit box shaved by its clip: فتح حوار وطني: الكلفة 20 م"
    ]
   },
   {
@@ -382,8 +384,8 @@
    "name": "overview scrolls",
    "ok": true,
    "sample": [
-    "overview needs scrolling: 398.0 pt over",
-    "fades 0/0 do not match the scroll state (top 0, over 398.0)",
+    "overview needs scrolling: 386.0 pt over",
+    "fades 0/0 do not match the scroll state (top 0, over 386.0)",
     "brief text not fully visible: السكان"
    ]
   },
@@ -567,7 +569,7 @@
    "sample": [
     "clipped text (sides): \"قيمة طويلة جدًا لا تتسع لنصف الجدول\" 416.53..613.3 y 157.5..176.5",
     "text outside the sheet's 12 pt padding: \"قيمة طويلة جدًا لا تتسع لنصف الجدول\"",
-    "horizontal overflow in خانةقيمة طويلة جدًا لا تتس"
+    "clipped text (bottom): \"الكلفة:\" 801.73..834 y 413..430"
    ]
   },
   {
@@ -685,7 +687,15 @@
    "sample": [
     "a11y: «القاهرة: 64 من 100، ترتف» does not read all it shows: الجيزة",
     "a11y: row «القاهرة» does not read its value",
-    "the overview's worst provinces are not the unrest tab's first: القاهرةundefined,السويس63"
+    "the overview's worst provinces are not the unrest tab's first: القاهرةundefined,السويس63,الإسكندرية61"
+   ]
+  },
+  {
+   "name": "overview list short",
+   "ok": true,
+   "sample": [
+    "the overview's worst provinces are not the unrest tab's first: القاهرة64,السويس63",
+    "the overview lists 2 provinces, not the headline's 3 above 60"
    ]
   },
   {

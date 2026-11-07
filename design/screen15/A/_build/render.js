@@ -89,7 +89,7 @@ if (ops.length === 4) {
   if (ops.some((o) => o.classList.contains('r-first'))) issues.push('an option is marked as the main choice');
   // the owner's category image is the header strip
   if (!/event_header\.jpg/.test(getComputedStyle(q('.r-hd')).backgroundImage)) issues.push('the header strip is not the owner\\'s category image');
-  { const bl = q('.bell'); if ((bl.getAttribute('aria-label') || '') !== 'الإشعارات، ' + nums(T(q('.badge')))[0] + ' غير مقروءة' || bl.getAttribute('aria-expanded') !== 'false') issues.push('a11y: the bell does not read its count'); } }
+  { const bl = q('.bell'); if ((bl.getAttribute('aria-label') || '') !== 'الإشعارات، غير المقروءة ' + nums(T(q('.badge')))[0] || bl.getAttribute('aria-expanded') !== 'false') issues.push('a11y: the bell does not read its count'); } }
 `;
 
 require(path.join(OUT, '../../shared/check/panelcheck.js'))({
@@ -99,7 +99,7 @@ require(path.join(OUT, '../../shared/check/panelcheck.js'))({
   HEAD, BRIEF, screenChecks, DATA: { text: TEXT, ops: OPS, A },
   // (the identity-on-data plants were skipped when this sheet had the neutral grey, the text grey; kept skipped, the
   //  sheet's own identity rules are checked by the shared rules on every render)
-  skipGeneric: ['section colour on data', 'section colour on a rule', 'emblem drawn grey', 'why without its subject', 'amber value without its icon', '% before its number', 'brief text hidden', '18 pt misuse', 'clipped text', 'gap', 'faint text'],
+  skipGeneric: ['section colour on a rule', 'why without its subject', 'amber value without its icon', '% before its number', 'brief text hidden', '18 pt misuse', 'clipped text', 'gap', 'faint text'],
   cases: (d, se) => [
     ['brief text hidden (decision)', d, '', '', /brief text not fully visible/, () => { document.querySelector('.r-name').style.opacity = '0'; }],
     ['18 pt misuse (decision)', d, '', '.d-text { font-size: 18px !important; font-weight: 700 !important; }', /18 pt is for/],

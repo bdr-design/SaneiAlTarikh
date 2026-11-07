@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-04T13:20:48.013Z",
+ "ranAt": "2026-11-07T15:36:21.861Z",
  "inputs": {
   "files": [
    "index.html",
@@ -26,7 +26,7 @@
    "../../shared/map_mena_d1_overlay.svg",
    "header_cairo.jpg"
   ],
-  "sha1": "127348aafc6dd043ba7716f55f96ea2113213ed1"
+  "sha1": "8d538660206b32b0dd7a2dac4c37dd71910c05a4"
  },
  "cleanIssues": {
   "i16promax": [],
@@ -194,7 +194,23 @@
    "name": "identity line missing",
    "ok": true,
    "sample": [
-    "panel top line none rgb(169, 188, 203) 2px (want the section colour, 2 pt, at the top)"
+    "panel top line none rgb(239, 179, 195) 2px (want the section colour, 2 pt, at the top)"
+   ]
+  },
+  {
+   "name": "emblem drawn grey",
+   "ok": true,
+   "sample": [
+    "section emblem missing or not in the section colour"
+   ]
+  },
+  {
+   "name": "section colour on data",
+   "ok": true,
+   "sample": [
+    "section colour on data text: \"أوضاع الخريطة\"",
+    "section colour on data text: \"المعروض: الأمن\"",
+    "section colour on data chrome: أوضاع الخريطة · المعروض: ا"
    ]
   },
   {

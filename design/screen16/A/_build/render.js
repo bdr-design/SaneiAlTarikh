@@ -58,7 +58,7 @@ require(path.join(OUT, '../../shared/check/panelcheck.js'))({
   inputs: ['_build/center.css'],
   TOK: { sec: 'rgb(198, 186, 232)', ctlH: {}, sheetIcon: [], size: [['.n-ord', null, 44]], radius: { '.n-ord': 10 } },
   HEAD, BRIEF, screenChecks, DATA: { rows: ROWS, sections: SECTIONS },
-  skipGeneric: ['section colour on data', 'section colour on a rule', 'emblem drawn grey', 'why without its subject', 'amber value without its icon', '% before its number', 'brief text hidden', '18 pt misuse', 'clipped text', 'gap', 'faint text', 'text into a control', 'chip arrow against its sign', 'chip not white'],
+  skipGeneric: ['section colour on a rule', 'why without its subject', 'amber value without its icon', '% before its number', 'brief text hidden', '18 pt misuse', 'clipped text', 'gap', 'faint text', 'text into a control', 'chip arrow against its sign', 'chip not white'],
   cases: (d, se) => [
     ['brief text hidden (centre)', d, '', '', /brief text not fully visible/, () => { document.querySelector('.r-name').style.opacity = '0'; }],
     ['18 pt misuse (centre)', d, '', '.r-sec h3 { font-size: 18px !important; font-weight: 700 !important; }', /18 pt is for/],

@@ -1,7 +1,7 @@
 {
  "se": {
   "device": "667x375 side 0 bottom 0 none",
-  "renderedAt": "2026-11-04T13:05:01.758Z",
+  "renderedAt": "2026-11-07T15:47:55.126Z",
   "inputs": {
    "files": [
     "index.html",
@@ -24,7 +24,7 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "97c743731b456c43850fa33f6e22cfe173030722"
+   "sha1": "239c3a7f1cfaa7536464a31670c86251c52d94f7"
   },
   "issues": [],
   "views": {
@@ -158,7 +158,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 9,
       "x1": 53,
       "y0": 48,
@@ -621,7 +621,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 9,
       "x1": 53,
       "y0": 48,
@@ -1074,7 +1074,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 9,
       "x1": 53,
       "y0": 48,
@@ -1593,7 +1593,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 9,
       "x1": 53,
       "y0": 48,
@@ -2127,7 +2127,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 9,
       "x1": 53,
       "y0": 48,
@@ -2578,7 +2578,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 9,
       "x1": 53,
       "y0": 48,
@@ -3029,7 +3029,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 9,
       "x1": 53,
       "y0": 48,
@@ -3452,7 +3452,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 9,
       "x1": 53,
       "y0": 48,
@@ -3890,7 +3890,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 9,
       "x1": 53,
       "y0": 48,
@@ -4285,15 +4285,15 @@
    "_build/se_about_end.png"
   ],
   "pngSha1": {
-   "se.png": "27fe3a0d7126007cab383b87a23b9a9778840634",
-   "_build/se_hit.png": "1d952dc4582df3f976ff0bc5b73630ee763aa338",
-   "_build/se_saves_end.png": "c423a457674b598a8091af9a27da2fab94bca50c",
-   "_build/se_settings.png": "55fccd5ae9c07c16b118da6d0e0bf891b8d6ddd0",
-   "_build/se_settings_end.png": "9f5dd2b53fcfcf4847249a3c1f77a44d775b214f",
-   "_build/se_log.png": "3cad212cbe128752d5180156ffde337223a7ae10",
-   "_build/se_log_end.png": "3cad212cbe128752d5180156ffde337223a7ae10",
-   "_build/se_about.png": "a4375476adb4d91ef95bd87b8c2d59f1f1c6844a",
-   "_build/se_about_end.png": "897965e4490e21981be041165e7a369766dc2744"
+   "se.png": "c7ceb6c09902c980a8cc8274ae7e8f7c767b886b",
+   "_build/se_hit.png": "af840e9874b040e7f280eb7997834c72a4bff41c",
+   "_build/se_saves_end.png": "e5059175ed5db771d183b1ff8c714030d4cd5f53",
+   "_build/se_settings.png": "598f744c126d3cf203992e54b8d121b6878a7574",
+   "_build/se_settings_end.png": "1a53d707afdff9ce2152882a1e106e3921ca7367",
+   "_build/se_log.png": "be290d56836bec1fe0afbdf0cbc4ed99ddb8c136",
+   "_build/se_log_end.png": "be290d56836bec1fe0afbdf0cbc4ed99ddb8c136",
+   "_build/se_about.png": "f925f83ed09d49179c348cd2d7542a06a283e86d",
+   "_build/se_about_end.png": "d96caaacf05ae9d0f27d0f6896f8988fef0f4a5e"
   },
   "env": {
    "chromium": "153.0.8010.12"
@@ -4302,7 +4302,7 @@
  },
  "mini": {
   "device": "812x375 side 50 bottom 21 notch",
-  "renderedAt": "2026-11-04T13:05:21.341Z",
+  "renderedAt": "2026-11-07T15:48:11.769Z",
   "inputs": {
    "files": [
     "index.html",
@@ -4325,7 +4325,7 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "97c743731b456c43850fa33f6e22cfe173030722"
+   "sha1": "239c3a7f1cfaa7536464a31670c86251c52d94f7"
   },
   "issues": [],
   "views": {
@@ -4461,7 +4461,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 51,
       "x1": 95,
       "y0": 48,
@@ -4924,7 +4924,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 51,
       "x1": 95,
       "y0": 48,
@@ -5372,7 +5372,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 51,
       "x1": 95,
       "y0": 48,
@@ -5898,7 +5898,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 51,
       "x1": 95,
       "y0": 48,
@@ -6413,7 +6413,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 51,
       "x1": 95,
       "y0": 48,
@@ -6871,7 +6871,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 51,
       "x1": 95,
       "y0": 48,
@@ -7329,7 +7329,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 51,
       "x1": 95,
       "y0": 48,
@@ -7759,7 +7759,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 51,
       "x1": 95,
       "y0": 48,
@@ -8199,7 +8199,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 51,
       "x1": 95,
       "y0": 48,
@@ -8594,15 +8594,15 @@
    "_build/mini_about_end.png"
   ],
   "pngSha1": {
-   "mini.png": "c70a6fd75719438047a02053ceb1732962edd5f6",
-   "_build/mini_hit.png": "03e041fe0e153013b3aefd23a1f058230ad602f3",
-   "_build/mini_saves_end.png": "44c010d600bf57e448d7ea6743e86030466de9da",
-   "_build/mini_settings.png": "c3f05d164cf5be41c5ddb44abe98a7868a92dd57",
-   "_build/mini_settings_end.png": "2a0bb6624f2bba28ca0efbb9e774567273556e8e",
-   "_build/mini_log.png": "1279cb4a449617340a4c9b86cc925436e34bb014",
-   "_build/mini_log_end.png": "1279cb4a449617340a4c9b86cc925436e34bb014",
-   "_build/mini_about.png": "90d7382d4120e7d3e108668264c9271a540fef0a",
-   "_build/mini_about_end.png": "1be58423e816d0d5540129a330b1368535211812"
+   "mini.png": "ae4a66ce9088a927e0bc151b067cfdf2b8da5850",
+   "_build/mini_hit.png": "9290cc02f3755ccdce072106059b40bfc465898b",
+   "_build/mini_saves_end.png": "bce14f3b5e94f53cec626333f8a013e365c41093",
+   "_build/mini_settings.png": "a8ec9c0304c643197b4a0baf87cd06182ab39760",
+   "_build/mini_settings_end.png": "76650844fd95176859641132ab22cdf1c9d412d8",
+   "_build/mini_log.png": "71ac03d415a0819a39e392988cdaac34aa85a027",
+   "_build/mini_log_end.png": "71ac03d415a0819a39e392988cdaac34aa85a027",
+   "_build/mini_about.png": "ee3eed37dbdf2692af29fc9644d676258e4f15ce",
+   "_build/mini_about_end.png": "9f9b1778ec1d5546cc6302843b7efa74abd63269"
   },
   "env": {
    "chromium": "153.0.8010.12"
@@ -8611,7 +8611,7 @@
  },
  "i14": {
   "device": "844x390 side 47 bottom 21 notch",
-  "renderedAt": "2026-11-04T13:05:42.569Z",
+  "renderedAt": "2026-11-07T15:48:29.719Z",
   "inputs": {
    "files": [
     "index.html",
@@ -8634,7 +8634,7 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "97c743731b456c43850fa33f6e22cfe173030722"
+   "sha1": "239c3a7f1cfaa7536464a31670c86251c52d94f7"
   },
   "issues": [],
   "views": {
@@ -8774,7 +8774,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 48,
       "x1": 92,
       "y0": 48,
@@ -9354,7 +9354,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 48,
       "x1": 92,
       "y0": 48,
@@ -9924,7 +9924,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 48,
       "x1": 92,
       "y0": 48,
@@ -10565,7 +10565,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 48,
       "x1": 92,
       "y0": 48,
@@ -11216,7 +11216,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 48,
       "x1": 92,
       "y0": 48,
@@ -11784,7 +11784,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 48,
       "x1": 92,
       "y0": 48,
@@ -12352,7 +12352,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 48,
       "x1": 92,
       "y0": 48,
@@ -12892,7 +12892,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 48,
       "x1": 92,
       "y0": 48,
@@ -13447,7 +13447,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 48,
       "x1": 92,
       "y0": 48,
@@ -13953,15 +13953,15 @@
    "_build/i14_about_end.png"
   ],
   "pngSha1": {
-   "i14.png": "6debff7ca291ac7562e141bacc7a31d987eb3c46",
-   "_build/i14_hit.png": "9d9a73e347aff674234f36355cac766e1ed068bb",
-   "_build/i14_saves_end.png": "0b400f5f81a27770589a1c7c87281d2a25111c19",
-   "_build/i14_settings.png": "22b8619d85ffa8b14589d7e033a969eebfb2e53c",
-   "_build/i14_settings_end.png": "1c2bd41f508dea2d9e39cbf0d8842db277df02e4",
-   "_build/i14_log.png": "af99d5d5b04d01b61bb2cee3a090bd2ed9381870",
-   "_build/i14_log_end.png": "af99d5d5b04d01b61bb2cee3a090bd2ed9381870",
-   "_build/i14_about.png": "be72ff8119e59cb7abbf30f29a51e9d2136e57ae",
-   "_build/i14_about_end.png": "c232e03a8ce3676530c8372534ec257807d4178b"
+   "i14.png": "79810259167ed4845c56c723dd0b42ef3d577d10",
+   "_build/i14_hit.png": "5b457a97cd80e59d61d4b5a98edbd668becc6169",
+   "_build/i14_saves_end.png": "66194f8dbda03bb821c71ddef835c0fb61de6407",
+   "_build/i14_settings.png": "9a840a31b15c3ab35487ffdfaee974216d5f90a5",
+   "_build/i14_settings_end.png": "6206474ae478523d41cc4b5922bc93f8658658e6",
+   "_build/i14_log.png": "60432ecc231174b75973b224de90d59ab14115d4",
+   "_build/i14_log_end.png": "60432ecc231174b75973b224de90d59ab14115d4",
+   "_build/i14_about.png": "ff15e7b3a25025f9db627e150fd750a46b26a752",
+   "_build/i14_about_end.png": "06489888f307bb259f6dbd0c5125fcae68913a2a"
   },
   "env": {
    "chromium": "153.0.8010.12"
@@ -13970,7 +13970,7 @@
  },
  "i16": {
   "device": "852x393 side 59 bottom 21 island",
-  "renderedAt": "2026-11-04T13:06:04.017Z",
+  "renderedAt": "2026-11-07T15:48:47.204Z",
   "inputs": {
    "files": [
     "index.html",
@@ -13993,7 +13993,7 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "97c743731b456c43850fa33f6e22cfe173030722"
+   "sha1": "239c3a7f1cfaa7536464a31670c86251c52d94f7"
   },
   "issues": [],
   "views": {
@@ -14132,7 +14132,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 60,
       "x1": 104,
       "y0": 48,
@@ -14701,7 +14701,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 60,
       "x1": 104,
       "y0": 48,
@@ -15260,7 +15260,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 60,
       "x1": 104,
       "y0": 48,
@@ -15890,7 +15890,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 60,
       "x1": 104,
       "y0": 48,
@@ -16530,7 +16530,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 60,
       "x1": 104,
       "y0": 48,
@@ -17087,7 +17087,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 60,
       "x1": 104,
       "y0": 48,
@@ -17644,7 +17644,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 60,
       "x1": 104,
       "y0": 48,
@@ -18173,7 +18173,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 60,
       "x1": 104,
       "y0": 48,
@@ -18717,7 +18717,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 60,
       "x1": 104,
       "y0": 48,
@@ -19218,15 +19218,15 @@
    "_build/i16_about_end.png"
   ],
   "pngSha1": {
-   "i16.png": "0c4e97c438d6c27d5f737a4326ee59ef805b754b",
-   "_build/i16_hit.png": "700a8d5e8e4800ad7a08f3f0115d56bcdc3c96d3",
-   "_build/i16_saves_end.png": "860a354efe3e5974e0bef8dc24859ccdab88cba1",
-   "_build/i16_settings.png": "a20493f407e8af37a85c9b062cdc10172116c6f0",
-   "_build/i16_settings_end.png": "dfc5c1efeaa5e83e02751246d34f2a2ad2357836",
-   "_build/i16_log.png": "aee7d36abad7314eb03ae5667f87de02950a025a",
-   "_build/i16_log_end.png": "aee7d36abad7314eb03ae5667f87de02950a025a",
-   "_build/i16_about.png": "a3176a2012f3df30b971db3c5fefc64457eca31a",
-   "_build/i16_about_end.png": "20faf56f99a00b672bd8aef99e5a65e85642b26f"
+   "i16.png": "9f09cc5fb58f81376d654e156dd46322df72fd3d",
+   "_build/i16_hit.png": "04621b8f767638d6dfec968d021676937922ffc6",
+   "_build/i16_saves_end.png": "bf319f88572f1cdd24510c4242abfcdca5a5126d",
+   "_build/i16_settings.png": "4d35b85bd36841a3f5dab4a3a9f963ee9197dc88",
+   "_build/i16_settings_end.png": "6cbd0a66b577026bdc97adfd238c0ed9cd7c0efe",
+   "_build/i16_log.png": "aabdf062d17b8cc954c61dd28d40e09b58f23015",
+   "_build/i16_log_end.png": "aabdf062d17b8cc954c61dd28d40e09b58f23015",
+   "_build/i16_about.png": "47cc0cf853d3a523fd885309de803ed3122dbbb3",
+   "_build/i16_about_end.png": "f06f2d4287d1ecec8d346804df6117cdbc7a37c8"
   },
   "env": {
    "chromium": "153.0.8010.12"
@@ -19235,7 +19235,7 @@
  },
  "i16pro": {
   "device": "874x402 side 62 bottom 21 island",
-  "renderedAt": "2026-11-04T13:06:25.867Z",
+  "renderedAt": "2026-11-07T15:49:05.131Z",
   "inputs": {
    "files": [
     "index.html",
@@ -19258,7 +19258,7 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "97c743731b456c43850fa33f6e22cfe173030722"
+   "sha1": "239c3a7f1cfaa7536464a31670c86251c52d94f7"
   },
   "issues": [],
   "views": {
@@ -19398,7 +19398,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 63,
       "x1": 107,
       "y0": 48,
@@ -19983,7 +19983,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 63,
       "x1": 107,
       "y0": 48,
@@ -20553,7 +20553,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 63,
       "x1": 107,
       "y0": 48,
@@ -21209,7 +21209,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 63,
       "x1": 107,
       "y0": 48,
@@ -21860,7 +21860,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 63,
       "x1": 107,
       "y0": 48,
@@ -22428,7 +22428,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 63,
       "x1": 107,
       "y0": 48,
@@ -22996,7 +22996,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 63,
       "x1": 107,
       "y0": 48,
@@ -23536,7 +23536,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 63,
       "x1": 107,
       "y0": 48,
@@ -23976,15 +23976,15 @@
    "_build/i16pro_about_end.png"
   ],
   "pngSha1": {
-   "i16pro.png": "86345b2d76de8088bd9db1c4dd87b57de00060d2",
-   "_build/i16pro_hit.png": "340670faed390ae394b2722224fbff7cc801e811",
-   "_build/i16pro_saves_end.png": "02304f594b6cb100c6ca99130a39468ae0068cbb",
-   "_build/i16pro_settings.png": "558f5de693a91f8af756db9d4c4db7e416cf33fd",
-   "_build/i16pro_settings_end.png": "63ee4a7bc9991eff0523872b76c3034e2bc2d78d",
-   "_build/i16pro_log.png": "e1452cc12e23a15360d7f8cb3aaad58ed461440d",
-   "_build/i16pro_log_end.png": "e1452cc12e23a15360d7f8cb3aaad58ed461440d",
-   "_build/i16pro_about.png": "fc81f9173ef61f9711a508f686afcd159ece0565",
-   "_build/i16pro_about_end.png": "852757676e5578a99945dd06d522bad9e6b2228a"
+   "i16pro.png": "aaac43d1935251baeba81e47218e9292675d8011",
+   "_build/i16pro_hit.png": "0e1f86a381e64bf5a5d0535af25991ef627451f8",
+   "_build/i16pro_saves_end.png": "6926a0ba07f9dad7c011e0d1c79362007ef6fa24",
+   "_build/i16pro_settings.png": "65ee69ea27c559ff8e302c7f3dc37d70abf776d5",
+   "_build/i16pro_settings_end.png": "8f6e3f7840739cac36c3a04ffa6b7b7f1723c93f",
+   "_build/i16pro_log.png": "d1eefba674899d313eae870aac073ea1648c9ede",
+   "_build/i16pro_log_end.png": "d1eefba674899d313eae870aac073ea1648c9ede",
+   "_build/i16pro_about.png": "872ed40d295839c4980d4427d17b59be5890a859",
+   "_build/i16pro_about_end.png": "361907bce5dc187b4f4abd385b17602ab8fc81a6"
   },
   "env": {
    "chromium": "153.0.8010.12"
@@ -23993,7 +23993,7 @@
  },
  "i11": {
   "device": "896x414 side 48 bottom 21 notch",
-  "renderedAt": "2026-11-04T13:06:47.171Z",
+  "renderedAt": "2026-11-07T15:49:23.204Z",
   "inputs": {
    "files": [
     "index.html",
@@ -24016,7 +24016,7 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "97c743731b456c43850fa33f6e22cfe173030722"
+   "sha1": "239c3a7f1cfaa7536464a31670c86251c52d94f7"
   },
   "issues": [],
   "views": {
@@ -24155,7 +24155,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 49,
       "x1": 93,
       "y0": 48,
@@ -24744,7 +24744,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 49,
       "x1": 93,
       "y0": 48,
@@ -25318,7 +25318,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 49,
       "x1": 93,
       "y0": 48,
@@ -25978,7 +25978,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 49,
       "x1": 93,
       "y0": 48,
@@ -26628,7 +26628,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 49,
       "x1": 93,
       "y0": 48,
@@ -27195,7 +27195,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 49,
       "x1": 93,
       "y0": 48,
@@ -27762,7 +27762,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 49,
       "x1": 93,
       "y0": 48,
@@ -28306,7 +28306,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 49,
       "x1": 93,
       "y0": 48,
@@ -28751,15 +28751,15 @@
    "_build/i11_about_end.png"
   ],
   "pngSha1": {
-   "i11.png": "3186753f1af4adb55c587f28811321ac2c4d8913",
-   "_build/i11_hit.png": "ba9992eff5c600f11c20c48cef2f201450480ec4",
-   "_build/i11_saves_end.png": "c9536ba5f8499847b6f166e7a2b95bba7b665111",
-   "_build/i11_settings.png": "3b8884fe52c57900a2aa7a6030e37462cef7bc29",
-   "_build/i11_settings_end.png": "3af81515a66ea17be90a3f64486516c00516929d",
-   "_build/i11_log.png": "4f456522626ba1d2dd00c8fd3c4c6afb0459326a",
-   "_build/i11_log_end.png": "4f456522626ba1d2dd00c8fd3c4c6afb0459326a",
-   "_build/i11_about.png": "64fe133f66c45a10a78f14e8da20d1c7cbd5de5a",
-   "_build/i11_about_end.png": "6b4a51fb8484b1d2049521b191e25d940bfabdb6"
+   "i11.png": "fd97d56300db09b702afc632258aabed2824299b",
+   "_build/i11_hit.png": "c3c893c11e23f6dd2abe1a7e2626e1ea8a432810",
+   "_build/i11_saves_end.png": "fd06bf45739aabda36e2e8d013b34dc6f39ad211",
+   "_build/i11_settings.png": "eca628c8e5ac9e9bb11c4bae4a6f87d3ebeb8655",
+   "_build/i11_settings_end.png": "57786f24bb97d9ad3d897227dfdcbf1895037af5",
+   "_build/i11_log.png": "4518f23afd1dccca02cebfca0b8169d1c9fb866d",
+   "_build/i11_log_end.png": "4518f23afd1dccca02cebfca0b8169d1c9fb866d",
+   "_build/i11_about.png": "b8da5090087d9111dcec5c2fff9eac13026de7ba",
+   "_build/i11_about_end.png": "b1b497648ca19ae769afd4e24d89c28b62a99b20"
   },
   "env": {
    "chromium": "153.0.8010.12"
@@ -28768,7 +28768,7 @@
  },
  "i16promax": {
   "device": "956x440 side 62 bottom 21 island",
-  "renderedAt": "2026-11-04T13:07:09.858Z",
+  "renderedAt": "2026-11-07T15:49:41.666Z",
   "inputs": {
    "files": [
     "index.html",
@@ -28791,7 +28791,7 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "97c743731b456c43850fa33f6e22cfe173030722"
+   "sha1": "239c3a7f1cfaa7536464a31670c86251c52d94f7"
   },
   "issues": [],
   "views": {
@@ -28930,7 +28930,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 63,
       "x1": 107,
       "y0": 48,
@@ -29529,7 +29529,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 63,
       "x1": 107,
       "y0": 48,
@@ -30128,7 +30128,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 63,
       "x1": 107,
       "y0": 48,
@@ -30814,7 +30814,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 63,
       "x1": 107,
       "y0": 48,
@@ -31520,7 +31520,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 63,
       "x1": 107,
       "y0": 48,
@@ -32087,7 +32087,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 63,
       "x1": 107,
       "y0": 48,
@@ -32654,7 +32654,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 63,
       "x1": 107,
       "y0": 48,
@@ -33218,7 +33218,7 @@
       "y1": 92
      },
      {
-      "l": "الإشعارات",
+      "l": "الإشعارات، غير المقروءة 3",
       "x0": 63,
       "x1": 107,
       "y0": 48,
@@ -33668,15 +33668,15 @@
    "_build/i16promax_about_end.png"
   ],
   "pngSha1": {
-   "i16promax.png": "01eb63fe2f65f849351e647d0010ec846a3e6044",
-   "_build/i16promax_hit.png": "a14b6598e6659742118003e835f5daf9074bc68b",
-   "_build/i16promax_saves_end.png": "01eb63fe2f65f849351e647d0010ec846a3e6044",
-   "_build/i16promax_settings.png": "c1397261bde5f139cb97652bd1ea6b4f54730792",
-   "_build/i16promax_settings_end.png": "2b9bb2eedb2d571dc969e40ae6837011db602f49",
-   "_build/i16promax_log.png": "885b8214b9a7065ecad282103b1d9d2ec9cdf6d9",
-   "_build/i16promax_log_end.png": "885b8214b9a7065ecad282103b1d9d2ec9cdf6d9",
-   "_build/i16promax_about.png": "fc42227da9a7bb4002ae70242de8d70b824114cd",
-   "_build/i16promax_about_end.png": "fc42227da9a7bb4002ae70242de8d70b824114cd"
+   "i16promax.png": "f42132f37fc061b7c24cfa6d0bf017b60d5ff70d",
+   "_build/i16promax_hit.png": "d114ac67e60a9da409a45fb0ce3e9819a3f4e599",
+   "_build/i16promax_saves_end.png": "f42132f37fc061b7c24cfa6d0bf017b60d5ff70d",
+   "_build/i16promax_settings.png": "65470784ba21dd049aece1c84a8090c0a804a489",
+   "_build/i16promax_settings_end.png": "d25417689ed2baee8fd28dfb145f50e0481c4b70",
+   "_build/i16promax_log.png": "dcd2edf22d793d35685c395ee1ef2a60f0931791",
+   "_build/i16promax_log_end.png": "dcd2edf22d793d35685c395ee1ef2a60f0931791",
+   "_build/i16promax_about.png": "a470153b63def9c1e2bafd6e11f34a95e49f78f8",
+   "_build/i16promax_about_end.png": "a470153b63def9c1e2bafd6e11f34a95e49f78f8"
   },
   "env": {
    "chromium": "153.0.8010.12"

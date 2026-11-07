@@ -116,7 +116,7 @@ async function measure(p, d) {
       ['paddingTop', 'paddingBottom', 'paddingLeft', 'paddingRight'].forEach((k) => {
         const v = parseFloat(cs[k]);
         if (e.matches('.step .n') && k === 'paddingTop' && near(v, 1)) return;
-        if (![0, 4, 8, 10, 12].some((x) => near(x, v))) issues.push(`padding off scale ${e.className} ${k} ${v}`);
+        if (![0, 2, 4, 8, 10, 12].some((x) => near(x, v))) issues.push(`padding off scale ${e.className} ${k} ${v}`);   // (2: the header's inset, as pages 2 and 3)
       });
       if (cs.textOverflow === 'ellipsis') issues.push(`ellipsis on ${e.className}`);
     });

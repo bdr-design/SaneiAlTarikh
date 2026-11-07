@@ -95,7 +95,7 @@ require(path.join(OUT, '../../shared/check/panelcheck.js'))({
   inputs: ['_build/why.css'],
   TOK: { sec: 'rgb(199, 225, 193)', ctlH: {}, sheetIcon: [], size: [['.w-t', null, 32], ['.w-sum', null, 24]] },
   HEAD, BRIEF, screenChecks, DATA: { terms: TERMS, sections: SECTIONS, now: A.now, stChange: A.stChange, elsewhere: A, cells: CELLS },
-  skipGeneric: ['section colour on data', 'section colour on a rule', 'emblem drawn grey', 'why without its subject', 'amber value without its icon', '% before its number', 'brief text hidden', '18 pt misuse', 'clipped text', 'gap', 'faint text', 'text into a control', 'chip arrow against its sign', 'chip not white', 'tap in the side inset'],
+  skipGeneric: ['section colour on a rule', 'why without its subject', 'amber value without its icon', '% before its number', 'brief text hidden', '18 pt misuse', 'clipped text', 'gap', 'faint text', 'text into a control', 'chip arrow against its sign', 'chip not white', 'tap in the side inset'],
   cases: (d, se) => [
     // the first view has no tap at the sheet's right edge (the close button is at its left): plant it at the end view, where the link row is
     ['tap in the side inset (why)', d, '&tab=why&scroll=end', '.sheet { right: -30px !important; }', /tap in side inset/],
