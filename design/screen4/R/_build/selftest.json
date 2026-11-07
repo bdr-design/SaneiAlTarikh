@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-07T18:07:44.026Z",
+ "ranAt": "2026-11-07T19:24:57.379Z",
  "inputs": {
   "files": [
    "index.html",
@@ -19,7 +19,7 @@
    "header_cairo.jpg",
    "map_overlay_cairo.svg"
   ],
-  "sha1": "bcec19e62be374957f88673e8a1fbefc965b7132"
+  "sha1": "cca00ca4fa29d85bf51a36019c5388cdac507fe9"
  },
  "cleanIssues": {
   "i16promax": [],
@@ -53,6 +53,41 @@
   "se coverage": []
  },
  "results": [
+  {
+   "name": "why unnamed",
+   "ok": true,
+   "sample": [
+    "a11y: «لماذا؟» does not name its subject «الاضطرابات»"
+   ]
+  },
+  {
+   "name": "close silent",
+   "ok": true,
+   "sample": [
+    "a11y: the close does not say where it returns"
+   ]
+  },
+  {
+   "name": "governor button unnamed",
+   "ok": true,
+   "sample": [
+    "a11y: «تغيير» does not name its row «عبد العظيم وزير»"
+   ]
+  },
+  {
+   "name": "cause silent",
+   "ok": true,
+   "sample": [
+    "a11y: the cause «القمع ونقص الحريات» does not read its way and points"
+   ]
+  },
+  {
+   "name": "cause way wrong",
+   "ok": true,
+   "sample": [
+    "a11y: the cause «الشرطة» does not read its way and points"
+   ]
+  },
   {
    "name": "fade without the hint strip",
    "ok": true,
@@ -225,8 +260,8 @@
    "name": "top row covered",
    "ok": true,
    "sample": [
-    "hit overlap الخزينة 36.0 مليار $ / إغلاق",
-    "hit overlap الاستقرار 58% / إغلاق",
+    "hit overlap الخزينة 36.0 مليار $ / إغلاق، العودة إلى الخريطة",
+    "hit overlap الاستقرار 58% / إغلاق، العودة إلى الخريطة",
     "panel overlap الدولة: مصر، حسني مبارك، ج / المحافظة: القاهرة"
    ]
   },
@@ -243,7 +278,7 @@
    "sample": [
     "icon over text: i r-chev / \"الداخلية والسياسة\"",
     "hit overlap الدولة / الإنشاءات والمرافق",
-    "hit overlap الدولة / تخطيط التوسعة"
+    "hit overlap الدولة / تخطيط التوسعة: الإنشاءات و"
    ]
   },
   {
@@ -260,7 +295,7 @@
    "sample": [
     "hit overlap مخفض / الإنشاءات والمرافق",
     "hit overlap متوازن / الإنشاءات والمرافق",
-    "hit overlap متوازن / تخطيط التوسعة"
+    "hit overlap متوازن / تخطيط التوسعة: الإنشاءات و"
    ]
   },
   {
@@ -755,6 +790,7 @@
    "name": "cause arrow wrong",
    "ok": true,
    "sample": [
+    "a11y: the cause «القمع ونقص الحريات» does not read its way and points",
     "cause «+12»: a rise must be amber with an up arrow, a fall blue with a down arrow"
    ]
   },
