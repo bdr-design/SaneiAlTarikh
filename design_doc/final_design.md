@@ -455,7 +455,7 @@ Dependencies run one way: Core ← Content ← Engine ← AI; Core ← Map; Pres
 **Spreading the work across cores (L14).** Determinism stays exact, because each parallel job writes only its own rows and the results are merged in serial order:
 - **Monthly slot in parallel.** The governments due today run `Economy`, `Population`, `Internal`, `Politics`, `Intelligence`, `Research` and `DiplomacyDrift` in a `TaskGroup`, one task per government. Each reads yesterday's shared state and writes only that government's rows. Anything that crosses to another government (trade, aid, migration, ledger postings) goes into the task's own outbox. After the group, the outboxes are applied in (government serial, sequence) order. `ConditionalEvents` then run serially.
 - **AI on its own task.** Strategic and diplomatic AI read an immutable snapshot on a separate task and return Commands. The host applies them at a fixed latency (the next day boundary after the snapshot's day plus 1), in (day, issuerRank, sequence) order, so the result does not depend on how fast the AI task ran. Operational AI stays inside the day, within its 0.25 ms line.
-- **Bounded per day.** The monthly slots spread about 7–8 governments over each day; strategic AI runs at most 15 a day; route searches at most 12 a day; front execution every 3 days, staggered.
+- **Bounded per day.** The owner set **225 playable governments at the start** («خلها 225», 2026-11-07); every government keeps its monthly slot. The monthly slots spread about 7–8 governments over each day; strategic AI runs at most 15 a day; route searches at most 12 a day; front execution every 3 days, staggered.
 - **One core is enough.** On a phone under thermal pressure the governor can run the group serially; the state hash is the same either way (tested on Linux in CI).
 
 **Lifecycle.**
@@ -667,7 +667,7 @@ It must not touch `Sources/**`, `App/Sources/**` or `content/packs/base/**`. Map
 | Air regions, naval zones, chokepoint disruption | 0.05 |
 | Espionage operations | 0.05 |
 | Construction and ledger | 0.07 |
-| Monthly slot (7–8 governments): markets and industries 0.25, population 0.03, internal 0.03, politics 0.05, intelligence 0.02, research 0.01, drift 0.02, conditional events 0.03 | 0.44 |
+| Monthly slot (7–8 governments a day: 225 at the start, the owner's count): markets and industries 0.25, population 0.03, internal 0.03, politics 0.05, intelligence 0.02, research 0.01, drift 0.02, conditional events 0.03 | 0.44 |
 | Strategic AI stagger (≈7 a day at normal; ≤15 at expert) | 0.15 (0.30 at expert) |
 | World market and transport payout (day 1 only, amortized) | 0.01 |
 | Operational AI | 0.25 |
