@@ -303,6 +303,7 @@ async function measure(p, d, b3, view) {
     document.querySelectorAll('.hud .glass, .hud .glass *').forEach((e) => {
       if (e.closest('.frost') || !visible(e)) return;
       const cs = getComputedStyle(e);
+      if (/inset\(50%\)/.test(cs.clipPath)) return;   // (words for VoiceOver only, hidden from sight: T-025)
       if (cs.overflowX !== 'visible' && e.scrollWidth > e.clientWidth + 1) issues.push(`horizontal overflow in ${label(e)}`);
       if (cs.overflowY !== 'visible' && e.scrollHeight > e.clientHeight + 1 && !/auto|scroll/.test(cs.overflowY)) issues.push(`vertical overflow in ${label(e)}`);
     });
@@ -424,7 +425,7 @@ async function measure(p, d, b3, view) {
       qa('.r-tab:not(.on)').forEach((e) => { if (getComputedStyle(e).color !== TOK.t2) issues.push(`closed tab not in the secondary grey: ${e.textContent.trim()} ${getComputedStyle(e).color}`); }); }
     // the section colour is for chrome only: no data text takes it; amber where the brief says
     texts.filter((x) => x.sheet && !x.chrome && x.color === TOK.sec).forEach((x) => issues.push(`section colour on data text: "${x.t}"`));
-    { const amberOf = (sel, txt) => { const e = [...document.querySelectorAll(sel)].find((n) => visible(n) && n.textContent.replace(/\s+/g, ' ').trim() === txt);
+    { const amberOf = (sel, txt) => { const shownText = (n) => [...n.childNodes].filter((c) => !(c.classList && c.classList.contains('s-vh'))).map((c) => c.textContent).join(''), e = [...document.querySelectorAll(sel)].find((n) => visible(n) && shownText(n).replace(/\s+/g, ' ').trim() === txt);
         if (!e) issues.push(`amber check: «${txt}» not found`); else if (getComputedStyle(e).color !== TOK.amber) issues.push(`«${txt}» not in amber: ${getComputedStyle(e).color}`); };
       if (tab === 'overview') { amberOf('.r-kv b', '44'); amberOf('.r-sc dd', 'محدودة منذ 2010'); }
       if (states && tab === 'policies') amberOf('.s-short-1 .s-cost', 'يلزم 60 · لديك 45');
@@ -494,7 +495,17 @@ async function measure(p, d, b3, view) {
         const u = a.querySelector('.r-chip use'); if (u && !(u.getAttribute('href') === '#t-up' ? /ترفع|تزيد/ : /تخفض|تقلل/).test(al)) issues.push(`a11y: the action «${b}» does not say its chip's way`); });
       qa('.s-off .r-btn, .s-proj .r-btn').forEach((e) => { const row = e.closest('.s-off, .s-proj'), rn = row.querySelector('.r-at b').textContent.trim().replace(/:/g, '،');
         if (!(e.getAttribute('aria-label') || '').includes(rn)) issues.push(`a11y: «${e.textContent.trim()}» does not name its row «${rn}»`); });
-      qa('.s-prog').forEach((e, i) => { if (e.getAttribute('aria-hidden') !== 'true') issues.push(`a11y: progress bar ${i + 1} is read out`); }); }
+      qa('.s-prog').forEach((e, i) => { if (e.getAttribute('aria-hidden') !== 'true') issues.push(`a11y: progress bar ${i + 1} is read out`);
+        // the bar is drawing only, so its value is read in words in its row's label
+        const pc = Math.round(parseFloat(e.querySelector('i').style.width)), at = e.closest('.r-at');
+        if (!at || at.getAttribute('role') !== 'img' || !(at.getAttribute('aria-label') || '').includes(pc + '%')) issues.push(`a11y: project ${i + 1} does not read its progress ${pc}%`); });
+      // the states view: an unaffordable change says so in words (what it needs, what there is, that it is not enough)
+      if (states) qa('.r-act.s-short-1').filter(visible).forEach((a) => { const al = a.getAttribute('aria-label') || '';
+        if (!/يلزم/.test(al) || !/ولديك/.test(al) || !/لا يكفي/.test(al)) issues.push('a11y: the unaffordable change does not say it in words (يلزم، لديك، لا يكفي)'); });
+      // every cost names the capital; a label only where VoiceOver keeps it
+      qa('.s-cost svg').forEach((e) => { if (e.closest('.r-act[aria-label]')) return; if (e.getAttribute('role') !== 'img' || e.getAttribute('aria-label') !== 'من رأس المال السياسي') issues.push('a11y: a cost does not name the capital it is in'); });
+      qa('.sheet [aria-label]').filter((e) => !e.getAttribute('role') && !['BUTTON', 'SECTION', 'NAV', 'DL', 'A', 'IMG'].includes(e.tagName) && !e.classList.contains('tap'))
+        .forEach((e) => issues.push(`a11y: a label VoiceOver may skip (no role): «${(e.getAttribute('aria-label') || '').slice(0, 30)}»`)); }
     // ---------- 9. the brief's content: fully visible in this render ----------
     const leafs = (s) => { const cands = [...q('.sheet').querySelectorAll('*')].filter((e) => e.getClientRects().length && e.innerText && e.innerText.replace(/\s+/g, ' ').includes(s));
       return cands.filter((e) => !cands.some((o) => o !== e && e.contains(o))); };
@@ -631,6 +642,10 @@ async function selftest(b) {
   for (const x of [d, se]) ctxs[x.id] = await b.newContext({ viewport: { width: x.w, height: x.h }, deviceScaleFactor: 1 });
   // [name, device, extra url, css, expected issue, optional page script]. Each regex names the one check under test.
   const cases = [
+    ['progress unread', d, '&tab=projects', '', /a11y: project 1 does not read its progress 85%/, () => { document.querySelector('.s-proj .r-at').setAttribute('aria-label', 'الخط الثالث لمترو القاهرة، المرحلة الأولى: تكتمل في 2012'); }],
+    ['states wording dropped', d, '&states=1', '', /a11y: the unaffordable change does not say it in words/, () => { document.querySelector('.r-act').setAttribute('aria-label', 'رفع حالة الطوارئ: الكلفة 60 من رأس المال السياسي، 45. ترفع الشرعية، أفضل'); }],
+    ['cost without the capital', d, '&tab=policies', '', /a11y: a cost does not name the capital it is in/, () => { document.querySelectorAll('.s-pol .s-cost svg')[1].removeAttribute('aria-label'); }],
+    ['label on a plain element', d, '', '', /a11y: a label VoiceOver may skip/, () => { document.querySelector('.r-acts').removeAttribute('role'); }],
     ['why unnamed', d, '', '', /a11y: «لماذا؟» does not name its subject «الاستقرار»/, () => { document.querySelectorAll('.r-why')[1].setAttribute('aria-label', 'لماذا؟'); }],
     ['close silent', d, '', '', /a11y: the close does not say where it returns/, () => { document.querySelector('.r-x').setAttribute('aria-label', 'إغلاق'); }],
     ['action unlabelled', d, '', '', /a11y: the action «رفع حالة الطوارئ» has no label of its own/, () => { document.querySelector('.r-act').removeAttribute('aria-label'); }],

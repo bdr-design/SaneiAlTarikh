@@ -46,6 +46,8 @@ inputs = next((e["inputs"] for e in report.values() if isinstance(e, dict) and "
 # a screen whose renderer writes its inputs is held to that, even if a report was stripped of them
 rjs = screen / "_build/render.js"
 strict = rjs.exists() and "inputs:" in rjs.read_text(encoding="utf-8")
+# a renderer that writes PNG hashes (itself, or through the shared checker) is held to them for every PNG (T-025)
+binds = rjs.exists() and ("pngSha1" in rjs.read_text(encoding="utf-8") or "panelcheck.js" in rjs.read_text(encoding="utf-8"))
 check(bool(inputs) or not strict, "the report names its inputs (its render.js writes them)")
 if inputs:
     import hashlib
@@ -66,6 +68,10 @@ if inputs:
         for view, v in views.items():
             check(v.get("issueCount") == 0, f"{d['id']}: view {view} has 0 issues")
         # newer reports bind every PNG (and the hit render) to the report by its content
+        # (T-025) a renderer that binds PNGs binds every one it saved: a report stripped of a hash cannot pass
+        if binds:
+            for rel in pngs:
+                check(rel in (entry.get("pngSha1") or {}), f"{d['id']}: {rel} is bound by its hash")
         for rel, sha in (entry.get("pngSha1") or {}).items():
             png = screen / rel
             if rel.endswith("_hit.png") and not png.exists():

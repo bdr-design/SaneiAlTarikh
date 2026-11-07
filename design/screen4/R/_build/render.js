@@ -429,11 +429,23 @@ async function measure(p, d, b3, view) {
     { const T = (e) => (e ? e.textContent.replace(/\s+/g, ' ').trim() : ''), nums = (s) => [...String(s).replace(/−/g, '-').matchAll(/-?\d+(?:\.\d+)?/g)].map((m) => parseFloat(m[0]));
       if (!/^إغلاق، العودة إلى /.test(q('.r-x').getAttribute('aria-label') || '')) issues.push('a11y: the close does not say where it returns');
       qa('.r-kpi').forEach((k) => { const kl = T(k.querySelector('.r-kl')), w = k.querySelector('.r-why'); if (w && (w.getAttribute('aria-label') || '') !== 'لماذا؟ ' + kl) issues.push(`a11y: «لماذا؟» does not name its subject «${kl}»`); });
-      qa('.r-why.p-all').forEach((w) => { if (!/^لماذا؟ \S/.test(w.getAttribute('aria-label') || '')) issues.push('a11y: «كل الأسباب» does not name its subject'); });
+      qa('.r-why.p-all').forEach((w) => { if ((w.getAttribute('aria-label') || '') !== 'لماذا؟ كل أسباب الاضطرابات') issues.push('a11y: «كل الأسباب» does not name its subject'); });
       [['.r-gov .r-btn', '.r-gov', '.r-gn'], ['.r-link .r-btn', '.r-link', '.r-at b'], ['.r-dbtn .r-btn', '.r-dec', '.r-dtx > span']].forEach(([b, row, nmSel]) => qa(b).forEach((e) => {
         const r = e.closest(row), rn = r && r.querySelector(nmSel) ? T(r.querySelector(nmSel)) : ''; if (!rn || !(e.getAttribute('aria-label') || '').includes(rn)) issues.push(`a11y: «${T(e)}» does not name its row «${rn}»`); }));
       qa('.p-why').forEach((r) => { const al = r.getAttribute('aria-label') || '', nm0 = T(r.querySelector('span')), up = r.querySelector('use').getAttribute('href') === '#t-up', n = Math.abs(nums(T(r.querySelector('b')))[0]);
         if (r.getAttribute('role') !== 'img' || !al.startsWith(nm0 + ': ') || !(up ? /يرفع/ : /يخفض/).test(al) || !nums(al).map(Math.abs).includes(n)) issues.push(`a11y: the cause «${nm0}» does not read its way and points`); }); }
+    // (T-025, as panelcheck.js) a row read as one element reads everything it shows; a label only where VoiceOver keeps it;
+    // no control inside another control
+    { const T2 = (e) => (e ? e.textContent.replace(/\s+/g, ' ').trim() : ''), n2 = (x) => [...String(x).replace(/−/g, '-').matchAll(/-?\d+(?:\.\d+)?/g)].map((m) => Math.abs(parseFloat(m[0])));
+      const sd = (al) => n2(al).concat(/(نقطة|درجة) واحدة/.test(al) ? [1] : [], /نقطتين|درجتين/.test(al) ? [2] : []);
+      qa('.sheet [role="img"], .sheet [role="button"], .sheet .r-act[aria-label]').filter((e) => e.innerText.trim() && !e.matches('.r-tab') && (e.getClientRects().length || getComputedStyle(e).display === 'contents')).forEach((e) => {
+        if (!e.closest('.r-body') || getComputedStyle(e.closest('.r-body')).display === 'none') return;
+        const al = (e.getAttribute('aria-label') || '').replace(/[،.:؛]/g, ' '), shown = e.innerText.replace(/[·،.:؛›]/g, ' ');
+        const missW = shown.split(/\s+/).filter((w) => w.length > 1 && !/^[\d.%+−-]+$/.test(w) && !al.includes(w)), missN = n2(shown).filter((x) => !sd(al).includes(x));
+        if (missW.length || missN.length) issues.push(`a11y: «${(e.getAttribute('aria-label') || '').slice(0, 24)}» does not read all it shows: ${missW.concat(missN).slice(0, 4).join(' ')}`); });
+      qa('.sheet [aria-label]').filter((e) => !e.getAttribute('role') && !['BUTTON', 'SECTION', 'NAV', 'DL', 'A', 'IMG'].includes(e.tagName) && !e.classList.contains('tap'))
+        .forEach((e) => issues.push(`a11y: a label VoiceOver may skip (no role): «${(e.getAttribute('aria-label') || '').slice(0, 30)}»`));
+      qa('.sheet button, .sheet [role="button"]').forEach((e) => { if (e.parentElement && e.parentElement.closest('button, [role="button"]')) issues.push(`a11y: a control inside another control: «${T2(e).slice(0, 24)}»`); }); }
     // RTL order: flag | name ... close (left end); action rows: tile | text | chip; link rows: tile | text | (button) | chevron; first tab «الحكم» at the right
     { const fl = q('.r-flag').getBoundingClientRect(), nm = q('.r-name').getBoundingClientRect(), xb = q('.r-x').getBoundingClientRect();
       if (!(fl.left >= nm.right - 0.5 && xb.right <= nm.left)) issues.push('header order must be flag, name, ..., close (right to left)'); }
@@ -506,9 +518,11 @@ async function measure(p, d, b3, view) {
         here('.p-why b').forEach((b) => { const up = b.querySelector('use') && b.querySelector('use').getAttribute('href') === '#t-up', v = T(b);
           if (up !== /^\+/.test(v) || getComputedStyle(b).color !== (up ? TOK.colors[4] : TOK.colors[6])) issues.push(`cause «${v}»: a rise must be amber with an up arrow, a fall blue with a down arrow`); }); }
       // every action and link row reads whole to VoiceOver, with the numbers it shows
-      here('.r-act, .r-link').forEach((a) => { const al = a.getAttribute('aria-label') || '', chip = a.querySelector('.r-chip'), want = nums(a.querySelector('.r-at').innerText).concat(chip ? nums(chip.innerText) : []);   // as shown (textContent would glue adjacent numbers)
+      const said = (al) => nums(al).map(Math.abs).concat(/(نقطة|درجة) واحدة/.test(al) ? [1] : [], /نقطتين|درجتين/.test(al) ? [2] : []);
+      const lab = (a) => a.getAttribute('aria-label') || (a.querySelector('[role="button"]') ? a.querySelector('[role="button"]').getAttribute('aria-label') || '' : '');
+      here('.r-act, .r-link').forEach((a) => { const al = lab(a), chip = a.querySelector('.r-chip'), want = nums(a.querySelector('.r-at').innerText).concat(chip ? nums(chip.innerText) : []);   // as shown (textContent would glue adjacent numbers)
         const nm = T(a.querySelector('.r-at b'));
-        if (!al || want.some((x) => !nums(al).map(Math.abs).includes(Math.abs(x)))) issues.push(`a11y: «${nm}» does not read its numbers`);
+        if (!al || want.some((x) => !said(al).includes(Math.abs(x)))) issues.push(`a11y: «${nm}» does not read its numbers`);
         if (al.includes('$')) issues.push(`a11y: «${nm}» reads «$» (say «دولار»)`);
         if (T(a.querySelector('.r-at')).includes('$') && !al.includes('دولار')) issues.push(`a11y: «${nm}» does not say «دولار»`);
         const use = chip && chip.querySelector('use');
@@ -665,6 +679,12 @@ async function selftest(b) {
   for (const x of [d, se]) ctxs[x.id] = await b.newContext({ viewport: { width: x.w, height: x.h }, deviceScaleFactor: 1 });
   // [name, device, extra url, css, expected issue, optional page script]
   const cases = [
+    ['all causes unnamed', d, '&tab=policy', '', /a11y: «كل الأسباب» does not name its subject/, () => { document.querySelector('.r-why.p-all').setAttribute('aria-label', 'لماذا؟ · كل الأسباب'); }],
+    ['cause points wrong', d, '&tab=policy', '', /a11y: the cause «القمع ونقص الحريات» does not read its way and points/, () => { document.querySelector('.p-why').setAttribute('aria-label', 'القمع ونقص الحريات: يرفع الاضطرابات 21 نقطة'); }],
+    ['cause without its role', d, '&tab=policy', '', /a11y: the cause «القمع ونقص الحريات» does not read its way and points/, () => { document.querySelector('.p-why').removeAttribute('role'); }],
+    ['link row read in part', d, '&view=govern', '', /a11y: «إدارة القوات» does not read all it shows/, () => { const l = [...document.querySelectorAll('.r-gv[data-dtab="govern"] .r-link')].find((x) => /إدارة القوات/.test(x.textContent)); l.setAttribute('aria-label', 'إدارة القوات'); }],
+    ['a control in a control', d, '&view=govern', '', /a11y: a control inside another control/, () => { document.querySelector('.r-gv[data-dtab="govern"] .r-link').setAttribute('role', 'button'); }],
+    ['label on a plain element', d, '&view=govern', '', /a11y: a label VoiceOver may skip/, () => { document.querySelector('.r-gov').setAttribute('aria-label', 'إدارة المحافظة'); }],
     ['why unnamed', d, '', '', /a11y: «لماذا؟» does not name its subject «الاضطرابات»/, () => { document.querySelectorAll('.r-kpi .r-why')[1].setAttribute('aria-label', 'لماذا؟'); }],
     ['close silent', d, '', '', /a11y: the close does not say where it returns/, () => { document.querySelector('.r-x').setAttribute('aria-label', 'إغلاق'); }],
     ['governor button unnamed', d, '&view=govern', '', /a11y: «تغيير» does not name its row «عبد العظيم وزير»/, () => { document.querySelector('.r-gov .r-btn').setAttribute('aria-label', 'تغيير'); }],
