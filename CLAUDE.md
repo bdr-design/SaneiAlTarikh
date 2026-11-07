@@ -11,3 +11,4 @@
 - Mockups use the approved tokens (see `design/shared/SCREEN3_BRIEF.md`) and must pass `python3 -I tools/check_screen.py <screen_dir>` on all 7 devices in `design/shared/devices.json`.
 - Talk to the owner in simple Gulf Arabic, with Western digits. Never claim "tested on iPhone" for browser mockups.
 - Files and code must not contain AI model identifiers (the standard commit attribution trailer is the only exception).
+- Owner's rules (2026-11-07, «كل خيار يجب ان يحتوي على هوية بصرية ووكيل خاص لتنسيق المربعات والخطوط»): every screen and sheet has its own visual identity (colour and emblem on its chrome), no neutral-grey sheets (`sheetIdentity`); every item also gets a fourth independent read-only reviewer for boxes and type alone (`boxFontReviewer`).
