@@ -347,7 +347,8 @@
   .r-cap { display: inline-flex; align-items: center; gap: var(--s1); height: 20px; padding-inline: var(--s2); border-radius: 10px; border: 1px solid var(--teal);
     font-size: var(--fs-label); line-height: var(--lh-label); font-weight: 700; color: var(--teal); background: rgba(12, 20, 28, .7); }
   .r-cap svg.i { width: var(--glyph); height: var(--glyph); }
-  .r-sub { font-size: var(--fs-sec); line-height: var(--lh-sec); font-weight: 500; color: var(--t1); text-shadow: 0 1px 3px rgba(0, 0, 0, .8); white-space: nowrap; }
+  .r-sub { font-size: var(--fs-sec); line-height: var(--lh-sec); font-weight: 500; color: var(--t1); text-shadow: 0 1px 3px rgba(0, 0, 0, .8); white-space: nowrap;
+    overflow: hidden; text-overflow: ellipsis; }   /* a long country name (T-024): the line's end gives way, VoiceOver reads it whole */
   .r-sub .r-dot { color: var(--t1); }
   .r-x { margin-inline-start: auto; width: var(--ctl); height: var(--ctl); border-radius: 50%; display: grid; place-items: center; color: var(--t1);
     background: rgba(6, 11, 16, .85); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .18), 0 2px 6px rgba(0, 0, 0, .4); }
@@ -958,7 +959,9 @@
       tx.style.minWidth = room[lv === 5 ? 1 : 0] + 'px';
       window.__setDate(dw, d);
       var need = kids.reduce(function (a, e) { return a + e.getBoundingClientRect().width; }, 0) + gap * (kids.length - 1);
-      if (need <= top.clientWidth + 0.01) break;
+      /* a long country, leader or regime name that runs out of its box also takes the next level (T-024) */
+      var over = Array.prototype.some.call(document.querySelectorAll('.ntext > *'), function (e) { return getComputedStyle(e).display !== 'none' && e.scrollWidth > e.clientWidth + 0.5; });
+      if (need <= top.clientWidth + 0.01 && !over) break;
     }
     window.__fit = { level: +root.dataset.fit, need: need, avail: top.clientWidth, dateRoom: parseFloat(tx.style.minWidth) };
   }

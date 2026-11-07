@@ -719,7 +719,9 @@
       tx.style.minWidth = room[lv === 5 ? 1 : 0] + 'px';
       window.__setDate(dw, d);
       var need = kids.reduce(function (a, e) { return a + e.getBoundingClientRect().width; }, 0) + gap * (kids.length - 1);
-      if (need <= top.clientWidth + 0.01) break;
+      /* a long country, leader or regime name that runs out of its box also takes the next level (T-024) */
+      var over = Array.prototype.some.call(document.querySelectorAll('.ntext > *'), function (e) { return getComputedStyle(e).display !== 'none' && e.scrollWidth > e.clientWidth + 0.5; });
+      if (need <= top.clientWidth + 0.01 && !over) break;
     }
     window.__fit = { level: +root.dataset.fit, need: need, avail: top.clientWidth, dateRoom: parseFloat(tx.style.minWidth) };
   }

@@ -1,0 +1,2802 @@
+[
+ {
+  "pg": "screen1/B3",
+  "set": "sa",
+  "dev": "se",
+  "iss": [],
+  "fit": 4,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen1/B3",
+  "set": "sa",
+  "dev": "mini",
+  "iss": [],
+  "fit": 3,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen1/B3",
+  "set": "sa",
+  "dev": "i14",
+  "iss": [],
+  "fit": 2,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen1/B3",
+  "set": "sa",
+  "dev": "i16",
+  "iss": [],
+  "fit": 2,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen1/B3",
+  "set": "sa",
+  "dev": "i16pro",
+  "iss": [],
+  "fit": 2,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen1/B3",
+  "set": "sa",
+  "dev": "i11",
+  "iss": [],
+  "fit": 0,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen1/B3",
+  "set": "sa",
+  "dev": "i16promax",
+  "iss": [],
+  "fit": 0,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen1/B3",
+  "set": "long",
+  "dev": "se",
+  "iss": [],
+  "fit": 4,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen1/B3",
+  "set": "long",
+  "dev": "mini",
+  "iss": [],
+  "fit": 3,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen1/B3",
+  "set": "long",
+  "dev": "i14",
+  "iss": [],
+  "fit": 2,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen1/B3",
+  "set": "long",
+  "dev": "i16",
+  "iss": [],
+  "fit": 3,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen1/B3",
+  "set": "long",
+  "dev": "i16pro",
+  "iss": [],
+  "fit": 2,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen1/B3",
+  "set": "long",
+  "dev": "i11",
+  "iss": [],
+  "fit": 0,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen1/B3",
+  "set": "long",
+  "dev": "i16promax",
+  "iss": [],
+  "fit": 0,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen1/B3",
+  "set": "longest",
+  "dev": "se",
+  "iss": [],
+  "fit": 4,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen1/B3",
+  "set": "longest",
+  "dev": "mini",
+  "iss": [],
+  "fit": 3,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen1/B3",
+  "set": "longest",
+  "dev": "i14",
+  "iss": [],
+  "fit": 3,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen1/B3",
+  "set": "longest",
+  "dev": "i16",
+  "iss": [],
+  "fit": 3,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen1/B3",
+  "set": "longest",
+  "dev": "i16pro",
+  "iss": [],
+  "fit": 3,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen1/B3",
+  "set": "longest",
+  "dev": "i11",
+  "iss": [],
+  "fit": 3,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen1/B3",
+  "set": "longest",
+  "dev": "i16promax",
+  "iss": [],
+  "fit": 0,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen4/R",
+  "set": "sa",
+  "dev": "se",
+  "iss": [],
+  "fit": 4,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen4/R",
+  "set": "sa",
+  "dev": "mini",
+  "iss": [],
+  "fit": 3,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen4/R",
+  "set": "sa",
+  "dev": "i14",
+  "iss": [],
+  "fit": 2,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen4/R",
+  "set": "sa",
+  "dev": "i16",
+  "iss": [],
+  "fit": 2,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen4/R",
+  "set": "sa",
+  "dev": "i16pro",
+  "iss": [],
+  "fit": 2,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen4/R",
+  "set": "sa",
+  "dev": "i11",
+  "iss": [],
+  "fit": 0,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen4/R",
+  "set": "sa",
+  "dev": "i16promax",
+  "iss": [],
+  "fit": 0,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen4/R",
+  "set": "long",
+  "dev": "se",
+  "iss": [],
+  "fit": 4,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen4/R",
+  "set": "long",
+  "dev": "mini",
+  "iss": [],
+  "fit": 3,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen4/R",
+  "set": "long",
+  "dev": "i14",
+  "iss": [],
+  "fit": 2,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen4/R",
+  "set": "long",
+  "dev": "i16",
+  "iss": [],
+  "fit": 3,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen4/R",
+  "set": "long",
+  "dev": "i16pro",
+  "iss": [],
+  "fit": 2,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen4/R",
+  "set": "long",
+  "dev": "i11",
+  "iss": [],
+  "fit": 0,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen4/R",
+  "set": "long",
+  "dev": "i16promax",
+  "iss": [],
+  "fit": 0,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen4/R",
+  "set": "longest",
+  "dev": "se",
+  "iss": [],
+  "fit": 4,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen4/R",
+  "set": "longest",
+  "dev": "mini",
+  "iss": [],
+  "fit": 3,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen4/R",
+  "set": "longest",
+  "dev": "i14",
+  "iss": [],
+  "fit": 3,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen4/R",
+  "set": "longest",
+  "dev": "i16",
+  "iss": [],
+  "fit": 3,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen4/R",
+  "set": "longest",
+  "dev": "i16pro",
+  "iss": [],
+  "fit": 3,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen4/R",
+  "set": "longest",
+  "dev": "i11",
+  "iss": [],
+  "fit": 3,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen4/R",
+  "set": "longest",
+  "dev": "i16promax",
+  "iss": [],
+  "fit": 0,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen5/A",
+  "set": "sa",
+  "dev": "se",
+  "iss": [],
+  "fit": 4,
+  "shown": "flag only",
+  "ell": [
+   "خادم الحرمين الشريفين الملك عبدالله · منذ 2005"
+  ]
+ },
+ {
+  "pg": "screen5/A",
+  "set": "sa",
+  "dev": "mini",
+  "iss": [],
+  "fit": 3,
+  "shown": "flag only",
+  "ell": [
+   "خادم الحرمين الشريفين الملك عبدالله · منذ 2005"
+  ]
+ },
+ {
+  "pg": "screen5/A",
+  "set": "sa",
+  "dev": "i14",
+  "iss": [],
+  "fit": 2,
+  "shown": "name",
+  "ell": [
+   "خادم الحرمين الشريفين الملك عبدالله · منذ 2005"
+  ]
+ },
+ {
+  "pg": "screen5/A",
+  "set": "sa",
+  "dev": "i16",
+  "iss": [],
+  "fit": 2,
+  "shown": "name",
+  "ell": [
+   "خادم الحرمين الشريفين الملك عبدالله · منذ 2005"
+  ]
+ },
+ {
+  "pg": "screen5/A",
+  "set": "sa",
+  "dev": "i16pro",
+  "iss": [],
+  "fit": 2,
+  "shown": "name",
+  "ell": [
+   "خادم الحرمين الشريفين الملك عبدالله · منذ 2005"
+  ]
+ },
+ {
+  "pg": "screen5/A",
+  "set": "sa",
+  "dev": "i11",
+  "iss": [],
+  "fit": 0,
+  "shown": "name",
+  "ell": [
+   "خادم الحرمين الشريفين الملك عبدالله · منذ 2005"
+  ]
+ },
+ {
+  "pg": "screen5/A",
+  "set": "sa",
+  "dev": "i16promax",
+  "iss": [],
+  "fit": 0,
+  "shown": "name",
+  "ell": [
+   "خادم الحرمين الشريفين الملك عبدالله · منذ 2005"
+  ]
+ },
+ {
+  "pg": "screen5/A",
+  "set": "long",
+  "dev": "se",
+  "iss": [],
+  "fit": 4,
+  "shown": "flag only",
+  "ell": [
+   "الرئيس فرانسوا بوزيزي يانغوفوندا · منذ 2003"
+  ]
+ },
+ {
+  "pg": "screen5/A",
+  "set": "long",
+  "dev": "mini",
+  "iss": [],
+  "fit": 3,
+  "shown": "flag only",
+  "ell": [
+   "الرئيس فرانسوا بوزيزي يانغوفوندا · منذ 2003"
+  ]
+ },
+ {
+  "pg": "screen5/A",
+  "set": "long",
+  "dev": "i14",
+  "iss": [],
+  "fit": 2,
+  "shown": "name",
+  "ell": [
+   "الرئيس فرانسوا بوزيزي يانغوفوندا · منذ 2003"
+  ]
+ },
+ {
+  "pg": "screen5/A",
+  "set": "long",
+  "dev": "i16",
+  "iss": [],
+  "fit": 3,
+  "shown": "flag only",
+  "ell": [
+   "الرئيس فرانسوا بوزيزي يانغوفوندا · منذ 2003"
+  ]
+ },
+ {
+  "pg": "screen5/A",
+  "set": "long",
+  "dev": "i16pro",
+  "iss": [],
+  "fit": 2,
+  "shown": "name",
+  "ell": [
+   "الرئيس فرانسوا بوزيزي يانغوفوندا · منذ 2003"
+  ]
+ },
+ {
+  "pg": "screen5/A",
+  "set": "long",
+  "dev": "i11",
+  "iss": [],
+  "fit": 0,
+  "shown": "name",
+  "ell": [
+   "الرئيس فرانسوا بوزيزي يانغوفوندا · منذ 2003"
+  ]
+ },
+ {
+  "pg": "screen5/A",
+  "set": "long",
+  "dev": "i16promax",
+  "iss": [],
+  "fit": 0,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen5/A",
+  "set": "longest",
+  "dev": "se",
+  "iss": [],
+  "fit": 4,
+  "shown": "flag only",
+  "ell": [
+   "رئيس الوزراء رالف إيفرارد غونزالفس · منذ 2001"
+  ]
+ },
+ {
+  "pg": "screen5/A",
+  "set": "longest",
+  "dev": "mini",
+  "iss": [],
+  "fit": 3,
+  "shown": "flag only",
+  "ell": [
+   "رئيس الوزراء رالف إيفرارد غونزالفس · منذ 2001"
+  ]
+ },
+ {
+  "pg": "screen5/A",
+  "set": "longest",
+  "dev": "i14",
+  "iss": [],
+  "fit": 3,
+  "shown": "flag only",
+  "ell": [
+   "رئيس الوزراء رالف إيفرارد غونزالفس · منذ 2001"
+  ]
+ },
+ {
+  "pg": "screen5/A",
+  "set": "longest",
+  "dev": "i16",
+  "iss": [],
+  "fit": 3,
+  "shown": "flag only",
+  "ell": [
+   "رئيس الوزراء رالف إيفرارد غونزالفس · منذ 2001"
+  ]
+ },
+ {
+  "pg": "screen5/A",
+  "set": "longest",
+  "dev": "i16pro",
+  "iss": [],
+  "fit": 3,
+  "shown": "flag only",
+  "ell": [
+   "رئيس الوزراء رالف إيفرارد غونزالفس · منذ 2001"
+  ]
+ },
+ {
+  "pg": "screen5/A",
+  "set": "longest",
+  "dev": "i11",
+  "iss": [],
+  "fit": 3,
+  "shown": "flag only",
+  "ell": [
+   "رئيس الوزراء رالف إيفرارد غونزالفس · منذ 2001"
+  ]
+ },
+ {
+  "pg": "screen5/A",
+  "set": "longest",
+  "dev": "i16promax",
+  "iss": [],
+  "fit": 0,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen6/A",
+  "set": "sa",
+  "dev": "se",
+  "iss": [],
+  "fit": 4,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen6/A",
+  "set": "sa",
+  "dev": "mini",
+  "iss": [],
+  "fit": 3,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen6/A",
+  "set": "sa",
+  "dev": "i14",
+  "iss": [],
+  "fit": 2,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen6/A",
+  "set": "sa",
+  "dev": "i16",
+  "iss": [],
+  "fit": 2,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen6/A",
+  "set": "sa",
+  "dev": "i16pro",
+  "iss": [],
+  "fit": 2,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen6/A",
+  "set": "sa",
+  "dev": "i11",
+  "iss": [],
+  "fit": 0,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen6/A",
+  "set": "sa",
+  "dev": "i16promax",
+  "iss": [],
+  "fit": 0,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen6/A",
+  "set": "long",
+  "dev": "se",
+  "iss": [],
+  "fit": 4,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen6/A",
+  "set": "long",
+  "dev": "mini",
+  "iss": [],
+  "fit": 3,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen6/A",
+  "set": "long",
+  "dev": "i14",
+  "iss": [],
+  "fit": 2,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen6/A",
+  "set": "long",
+  "dev": "i16",
+  "iss": [],
+  "fit": 3,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen6/A",
+  "set": "long",
+  "dev": "i16pro",
+  "iss": [],
+  "fit": 2,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen6/A",
+  "set": "long",
+  "dev": "i11",
+  "iss": [],
+  "fit": 0,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen6/A",
+  "set": "long",
+  "dev": "i16promax",
+  "iss": [],
+  "fit": 0,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen6/A",
+  "set": "longest",
+  "dev": "se",
+  "iss": [],
+  "fit": 4,
+  "shown": "flag only",
+  "ell": [
+   "سانت فينسنت والغرينادين · السنة المالية 2010/11"
+  ]
+ },
+ {
+  "pg": "screen6/A",
+  "set": "longest",
+  "dev": "mini",
+  "iss": [],
+  "fit": 3,
+  "shown": "flag only",
+  "ell": [
+   "سانت فينسنت والغرينادين · السنة المالية 2010/11"
+  ]
+ },
+ {
+  "pg": "screen6/A",
+  "set": "longest",
+  "dev": "i14",
+  "iss": [],
+  "fit": 3,
+  "shown": "flag only",
+  "ell": [
+   "سانت فينسنت والغرينادين · السنة المالية 2010/11"
+  ]
+ },
+ {
+  "pg": "screen6/A",
+  "set": "longest",
+  "dev": "i16",
+  "iss": [],
+  "fit": 3,
+  "shown": "flag only",
+  "ell": [
+   "سانت فينسنت والغرينادين · السنة المالية 2010/11"
+  ]
+ },
+ {
+  "pg": "screen6/A",
+  "set": "longest",
+  "dev": "i16pro",
+  "iss": [],
+  "fit": 3,
+  "shown": "flag only",
+  "ell": [
+   "سانت فينسنت والغرينادين · السنة المالية 2010/11"
+  ]
+ },
+ {
+  "pg": "screen6/A",
+  "set": "longest",
+  "dev": "i11",
+  "iss": [],
+  "fit": 3,
+  "shown": "flag only",
+  "ell": [
+   "سانت فينسنت والغرينادين · السنة المالية 2010/11"
+  ]
+ },
+ {
+  "pg": "screen6/A",
+  "set": "longest",
+  "dev": "i16promax",
+  "iss": [],
+  "fit": 0,
+  "shown": "name",
+  "ell": [
+   "سانت فينسنت والغرينادين · السنة المالية 2010/11"
+  ]
+ },
+ {
+  "pg": "screen8/A",
+  "set": "sa",
+  "dev": "se",
+  "iss": [],
+  "fit": 4,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen8/A",
+  "set": "sa",
+  "dev": "mini",
+  "iss": [],
+  "fit": 3,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen8/A",
+  "set": "sa",
+  "dev": "i14",
+  "iss": [],
+  "fit": 2,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen8/A",
+  "set": "sa",
+  "dev": "i16",
+  "iss": [],
+  "fit": 2,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen8/A",
+  "set": "sa",
+  "dev": "i16pro",
+  "iss": [],
+  "fit": 2,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen8/A",
+  "set": "sa",
+  "dev": "i11",
+  "iss": [],
+  "fit": 0,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen8/A",
+  "set": "sa",
+  "dev": "i16promax",
+  "iss": [],
+  "fit": 0,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen8/A",
+  "set": "long",
+  "dev": "se",
+  "iss": [],
+  "fit": 4,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen8/A",
+  "set": "long",
+  "dev": "mini",
+  "iss": [],
+  "fit": 3,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen8/A",
+  "set": "long",
+  "dev": "i14",
+  "iss": [],
+  "fit": 2,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen8/A",
+  "set": "long",
+  "dev": "i16",
+  "iss": [],
+  "fit": 3,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen8/A",
+  "set": "long",
+  "dev": "i16pro",
+  "iss": [],
+  "fit": 2,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen8/A",
+  "set": "long",
+  "dev": "i11",
+  "iss": [],
+  "fit": 0,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen8/A",
+  "set": "long",
+  "dev": "i16promax",
+  "iss": [],
+  "fit": 0,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen8/A",
+  "set": "longest",
+  "dev": "se",
+  "iss": [],
+  "fit": 4,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen8/A",
+  "set": "longest",
+  "dev": "mini",
+  "iss": [],
+  "fit": 3,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen8/A",
+  "set": "longest",
+  "dev": "i14",
+  "iss": [],
+  "fit": 3,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen8/A",
+  "set": "longest",
+  "dev": "i16",
+  "iss": [],
+  "fit": 3,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen8/A",
+  "set": "longest",
+  "dev": "i16pro",
+  "iss": [],
+  "fit": 3,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen8/A",
+  "set": "longest",
+  "dev": "i11",
+  "iss": [],
+  "fit": 3,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen8/A",
+  "set": "longest",
+  "dev": "i16promax",
+  "iss": [],
+  "fit": 0,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen9/A",
+  "set": "sa",
+  "dev": "se",
+  "iss": [],
+  "fit": 4,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen9/A",
+  "set": "sa",
+  "dev": "mini",
+  "iss": [],
+  "fit": 3,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen9/A",
+  "set": "sa",
+  "dev": "i14",
+  "iss": [],
+  "fit": 2,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen9/A",
+  "set": "sa",
+  "dev": "i16",
+  "iss": [],
+  "fit": 2,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen9/A",
+  "set": "sa",
+  "dev": "i16pro",
+  "iss": [],
+  "fit": 2,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen9/A",
+  "set": "sa",
+  "dev": "i11",
+  "iss": [],
+  "fit": 0,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen9/A",
+  "set": "sa",
+  "dev": "i16promax",
+  "iss": [],
+  "fit": 0,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen9/A",
+  "set": "long",
+  "dev": "se",
+  "iss": [],
+  "fit": 4,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen9/A",
+  "set": "long",
+  "dev": "mini",
+  "iss": [],
+  "fit": 3,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen9/A",
+  "set": "long",
+  "dev": "i14",
+  "iss": [],
+  "fit": 2,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen9/A",
+  "set": "long",
+  "dev": "i16",
+  "iss": [],
+  "fit": 3,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen9/A",
+  "set": "long",
+  "dev": "i16pro",
+  "iss": [],
+  "fit": 2,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen9/A",
+  "set": "long",
+  "dev": "i11",
+  "iss": [],
+  "fit": 0,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen9/A",
+  "set": "long",
+  "dev": "i16promax",
+  "iss": [],
+  "fit": 0,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen9/A",
+  "set": "longest",
+  "dev": "se",
+  "iss": [],
+  "fit": 4,
+  "shown": "flag only",
+  "ell": [
+   "سانت فينسنت والغرينادين · القوات المسلحة"
+  ]
+ },
+ {
+  "pg": "screen9/A",
+  "set": "longest",
+  "dev": "mini",
+  "iss": [],
+  "fit": 3,
+  "shown": "flag only",
+  "ell": [
+   "سانت فينسنت والغرينادين · القوات المسلحة"
+  ]
+ },
+ {
+  "pg": "screen9/A",
+  "set": "longest",
+  "dev": "i14",
+  "iss": [],
+  "fit": 3,
+  "shown": "flag only",
+  "ell": [
+   "سانت فينسنت والغرينادين · القوات المسلحة"
+  ]
+ },
+ {
+  "pg": "screen9/A",
+  "set": "longest",
+  "dev": "i16",
+  "iss": [],
+  "fit": 3,
+  "shown": "flag only",
+  "ell": [
+   "سانت فينسنت والغرينادين · القوات المسلحة"
+  ]
+ },
+ {
+  "pg": "screen9/A",
+  "set": "longest",
+  "dev": "i16pro",
+  "iss": [],
+  "fit": 3,
+  "shown": "flag only",
+  "ell": [
+   "سانت فينسنت والغرينادين · القوات المسلحة"
+  ]
+ },
+ {
+  "pg": "screen9/A",
+  "set": "longest",
+  "dev": "i11",
+  "iss": [],
+  "fit": 3,
+  "shown": "flag only",
+  "ell": [
+   "سانت فينسنت والغرينادين · القوات المسلحة"
+  ]
+ },
+ {
+  "pg": "screen9/A",
+  "set": "longest",
+  "dev": "i16promax",
+  "iss": [],
+  "fit": 0,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen10/A",
+  "set": "sa",
+  "dev": "se",
+  "iss": [],
+  "fit": 4,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen10/A",
+  "set": "sa",
+  "dev": "mini",
+  "iss": [],
+  "fit": 3,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen10/A",
+  "set": "sa",
+  "dev": "i14",
+  "iss": [],
+  "fit": 2,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen10/A",
+  "set": "sa",
+  "dev": "i16",
+  "iss": [],
+  "fit": 2,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen10/A",
+  "set": "sa",
+  "dev": "i16pro",
+  "iss": [],
+  "fit": 2,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen10/A",
+  "set": "sa",
+  "dev": "i11",
+  "iss": [],
+  "fit": 0,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen10/A",
+  "set": "sa",
+  "dev": "i16promax",
+  "iss": [],
+  "fit": 0,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen10/A",
+  "set": "long",
+  "dev": "se",
+  "iss": [],
+  "fit": 4,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen10/A",
+  "set": "long",
+  "dev": "mini",
+  "iss": [],
+  "fit": 3,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen10/A",
+  "set": "long",
+  "dev": "i14",
+  "iss": [],
+  "fit": 2,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen10/A",
+  "set": "long",
+  "dev": "i16",
+  "iss": [],
+  "fit": 3,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen10/A",
+  "set": "long",
+  "dev": "i16pro",
+  "iss": [],
+  "fit": 2,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen10/A",
+  "set": "long",
+  "dev": "i11",
+  "iss": [],
+  "fit": 0,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen10/A",
+  "set": "long",
+  "dev": "i16promax",
+  "iss": [],
+  "fit": 0,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen10/A",
+  "set": "longest",
+  "dev": "se",
+  "iss": [],
+  "fit": 4,
+  "shown": "flag only",
+  "ell": [
+   "سانت فينسنت والغرينادين · عضو في الأمم المتحدة"
+  ]
+ },
+ {
+  "pg": "screen10/A",
+  "set": "longest",
+  "dev": "mini",
+  "iss": [],
+  "fit": 3,
+  "shown": "flag only",
+  "ell": [
+   "سانت فينسنت والغرينادين · عضو في الأمم المتحدة"
+  ]
+ },
+ {
+  "pg": "screen10/A",
+  "set": "longest",
+  "dev": "i14",
+  "iss": [],
+  "fit": 3,
+  "shown": "flag only",
+  "ell": [
+   "سانت فينسنت والغرينادين · عضو في الأمم المتحدة"
+  ]
+ },
+ {
+  "pg": "screen10/A",
+  "set": "longest",
+  "dev": "i16",
+  "iss": [],
+  "fit": 3,
+  "shown": "flag only",
+  "ell": [
+   "سانت فينسنت والغرينادين · عضو في الأمم المتحدة"
+  ]
+ },
+ {
+  "pg": "screen10/A",
+  "set": "longest",
+  "dev": "i16pro",
+  "iss": [],
+  "fit": 3,
+  "shown": "flag only",
+  "ell": [
+   "سانت فينسنت والغرينادين · عضو في الأمم المتحدة"
+  ]
+ },
+ {
+  "pg": "screen10/A",
+  "set": "longest",
+  "dev": "i11",
+  "iss": [],
+  "fit": 3,
+  "shown": "flag only",
+  "ell": [
+   "سانت فينسنت والغرينادين · عضو في الأمم المتحدة"
+  ]
+ },
+ {
+  "pg": "screen10/A",
+  "set": "longest",
+  "dev": "i16promax",
+  "iss": [],
+  "fit": 0,
+  "shown": "name",
+  "ell": [
+   "سانت فينسنت والغرينادين · عضو في الأمم المتحدة"
+  ]
+ },
+ {
+  "pg": "screen11/A",
+  "set": "sa",
+  "dev": "se",
+  "iss": [],
+  "fit": 4,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen11/A",
+  "set": "sa",
+  "dev": "mini",
+  "iss": [],
+  "fit": 3,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen11/A",
+  "set": "sa",
+  "dev": "i14",
+  "iss": [],
+  "fit": 2,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen11/A",
+  "set": "sa",
+  "dev": "i16",
+  "iss": [],
+  "fit": 2,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen11/A",
+  "set": "sa",
+  "dev": "i16pro",
+  "iss": [],
+  "fit": 2,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen11/A",
+  "set": "sa",
+  "dev": "i11",
+  "iss": [],
+  "fit": 0,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen11/A",
+  "set": "sa",
+  "dev": "i16promax",
+  "iss": [],
+  "fit": 0,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen11/A",
+  "set": "long",
+  "dev": "se",
+  "iss": [],
+  "fit": 4,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen11/A",
+  "set": "long",
+  "dev": "mini",
+  "iss": [],
+  "fit": 3,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen11/A",
+  "set": "long",
+  "dev": "i14",
+  "iss": [],
+  "fit": 2,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen11/A",
+  "set": "long",
+  "dev": "i16",
+  "iss": [],
+  "fit": 3,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen11/A",
+  "set": "long",
+  "dev": "i16pro",
+  "iss": [],
+  "fit": 2,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen11/A",
+  "set": "long",
+  "dev": "i11",
+  "iss": [],
+  "fit": 0,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen11/A",
+  "set": "long",
+  "dev": "i16promax",
+  "iss": [],
+  "fit": 0,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen11/A",
+  "set": "longest",
+  "dev": "se",
+  "iss": [],
+  "fit": 4,
+  "shown": "flag only",
+  "ell": [
+   "سانت فينسنت والغرينادين · جهاز الاستخبارات"
+  ]
+ },
+ {
+  "pg": "screen11/A",
+  "set": "longest",
+  "dev": "mini",
+  "iss": [],
+  "fit": 3,
+  "shown": "flag only",
+  "ell": [
+   "سانت فينسنت والغرينادين · جهاز الاستخبارات"
+  ]
+ },
+ {
+  "pg": "screen11/A",
+  "set": "longest",
+  "dev": "i14",
+  "iss": [],
+  "fit": 3,
+  "shown": "flag only",
+  "ell": [
+   "سانت فينسنت والغرينادين · جهاز الاستخبارات"
+  ]
+ },
+ {
+  "pg": "screen11/A",
+  "set": "longest",
+  "dev": "i16",
+  "iss": [],
+  "fit": 3,
+  "shown": "flag only",
+  "ell": [
+   "سانت فينسنت والغرينادين · جهاز الاستخبارات"
+  ]
+ },
+ {
+  "pg": "screen11/A",
+  "set": "longest",
+  "dev": "i16pro",
+  "iss": [],
+  "fit": 3,
+  "shown": "flag only",
+  "ell": [
+   "سانت فينسنت والغرينادين · جهاز الاستخبارات"
+  ]
+ },
+ {
+  "pg": "screen11/A",
+  "set": "longest",
+  "dev": "i11",
+  "iss": [],
+  "fit": 3,
+  "shown": "flag only",
+  "ell": [
+   "سانت فينسنت والغرينادين · جهاز الاستخبارات"
+  ]
+ },
+ {
+  "pg": "screen11/A",
+  "set": "longest",
+  "dev": "i16promax",
+  "iss": [],
+  "fit": 0,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen12/A",
+  "set": "sa",
+  "dev": "se",
+  "iss": [],
+  "fit": 4,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen12/A",
+  "set": "sa",
+  "dev": "mini",
+  "iss": [],
+  "fit": 3,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen12/A",
+  "set": "sa",
+  "dev": "i14",
+  "iss": [],
+  "fit": 2,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen12/A",
+  "set": "sa",
+  "dev": "i16",
+  "iss": [],
+  "fit": 2,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen12/A",
+  "set": "sa",
+  "dev": "i16pro",
+  "iss": [],
+  "fit": 2,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen12/A",
+  "set": "sa",
+  "dev": "i11",
+  "iss": [],
+  "fit": 0,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen12/A",
+  "set": "sa",
+  "dev": "i16promax",
+  "iss": [],
+  "fit": 0,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen12/A",
+  "set": "long",
+  "dev": "se",
+  "iss": [],
+  "fit": 4,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen12/A",
+  "set": "long",
+  "dev": "mini",
+  "iss": [],
+  "fit": 3,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen12/A",
+  "set": "long",
+  "dev": "i14",
+  "iss": [],
+  "fit": 2,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen12/A",
+  "set": "long",
+  "dev": "i16",
+  "iss": [],
+  "fit": 3,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen12/A",
+  "set": "long",
+  "dev": "i16pro",
+  "iss": [],
+  "fit": 2,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen12/A",
+  "set": "long",
+  "dev": "i11",
+  "iss": [],
+  "fit": 0,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen12/A",
+  "set": "long",
+  "dev": "i16promax",
+  "iss": [],
+  "fit": 0,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen12/A",
+  "set": "longest",
+  "dev": "se",
+  "iss": [],
+  "fit": 4,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen12/A",
+  "set": "longest",
+  "dev": "mini",
+  "iss": [],
+  "fit": 3,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen12/A",
+  "set": "longest",
+  "dev": "i14",
+  "iss": [],
+  "fit": 3,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen12/A",
+  "set": "longest",
+  "dev": "i16",
+  "iss": [],
+  "fit": 3,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen12/A",
+  "set": "longest",
+  "dev": "i16pro",
+  "iss": [],
+  "fit": 3,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen12/A",
+  "set": "longest",
+  "dev": "i11",
+  "iss": [],
+  "fit": 3,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen12/A",
+  "set": "longest",
+  "dev": "i16promax",
+  "iss": [],
+  "fit": 0,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen13/A",
+  "set": "sa",
+  "dev": "se",
+  "iss": [],
+  "fit": 4,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen13/A",
+  "set": "sa",
+  "dev": "mini",
+  "iss": [],
+  "fit": 3,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen13/A",
+  "set": "sa",
+  "dev": "i14",
+  "iss": [],
+  "fit": 2,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen13/A",
+  "set": "sa",
+  "dev": "i16",
+  "iss": [],
+  "fit": 2,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen13/A",
+  "set": "sa",
+  "dev": "i16pro",
+  "iss": [],
+  "fit": 2,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen13/A",
+  "set": "sa",
+  "dev": "i11",
+  "iss": [],
+  "fit": 0,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen13/A",
+  "set": "sa",
+  "dev": "i16promax",
+  "iss": [],
+  "fit": 0,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen13/A",
+  "set": "long",
+  "dev": "se",
+  "iss": [],
+  "fit": 4,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen13/A",
+  "set": "long",
+  "dev": "mini",
+  "iss": [],
+  "fit": 3,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen13/A",
+  "set": "long",
+  "dev": "i14",
+  "iss": [],
+  "fit": 2,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen13/A",
+  "set": "long",
+  "dev": "i16",
+  "iss": [],
+  "fit": 3,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen13/A",
+  "set": "long",
+  "dev": "i16pro",
+  "iss": [],
+  "fit": 2,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen13/A",
+  "set": "long",
+  "dev": "i11",
+  "iss": [],
+  "fit": 0,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen13/A",
+  "set": "long",
+  "dev": "i16promax",
+  "iss": [],
+  "fit": 0,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen13/A",
+  "set": "longest",
+  "dev": "se",
+  "iss": [],
+  "fit": 4,
+  "shown": "flag only",
+  "ell": [
+   "حملة سانت فينسنت والغرينادين · 1 يناير 2011"
+  ]
+ },
+ {
+  "pg": "screen13/A",
+  "set": "longest",
+  "dev": "mini",
+  "iss": [],
+  "fit": 3,
+  "shown": "flag only",
+  "ell": [
+   "حملة سانت فينسنت والغرينادين · 1 يناير 2011"
+  ]
+ },
+ {
+  "pg": "screen13/A",
+  "set": "longest",
+  "dev": "i14",
+  "iss": [],
+  "fit": 3,
+  "shown": "flag only",
+  "ell": [
+   "حملة سانت فينسنت والغرينادين · 1 يناير 2011"
+  ]
+ },
+ {
+  "pg": "screen13/A",
+  "set": "longest",
+  "dev": "i16",
+  "iss": [],
+  "fit": 3,
+  "shown": "flag only",
+  "ell": [
+   "حملة سانت فينسنت والغرينادين · 1 يناير 2011"
+  ]
+ },
+ {
+  "pg": "screen13/A",
+  "set": "longest",
+  "dev": "i16pro",
+  "iss": [],
+  "fit": 3,
+  "shown": "flag only",
+  "ell": [
+   "حملة سانت فينسنت والغرينادين · 1 يناير 2011"
+  ]
+ },
+ {
+  "pg": "screen13/A",
+  "set": "longest",
+  "dev": "i11",
+  "iss": [],
+  "fit": 3,
+  "shown": "flag only",
+  "ell": [
+   "حملة سانت فينسنت والغرينادين · 1 يناير 2011"
+  ]
+ },
+ {
+  "pg": "screen13/A",
+  "set": "longest",
+  "dev": "i16promax",
+  "iss": [],
+  "fit": 0,
+  "shown": "name",
+  "ell": [
+   "حملة سانت فينسنت والغرينادين · 1 يناير 2011"
+  ]
+ },
+ {
+  "pg": "screen14/A",
+  "set": "sa",
+  "dev": "se",
+  "iss": [],
+  "fit": 4,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen14/A",
+  "set": "sa",
+  "dev": "mini",
+  "iss": [],
+  "fit": 3,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen14/A",
+  "set": "sa",
+  "dev": "i14",
+  "iss": [],
+  "fit": 2,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen14/A",
+  "set": "sa",
+  "dev": "i16",
+  "iss": [],
+  "fit": 2,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen14/A",
+  "set": "sa",
+  "dev": "i16pro",
+  "iss": [],
+  "fit": 2,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen14/A",
+  "set": "sa",
+  "dev": "i11",
+  "iss": [],
+  "fit": 0,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen14/A",
+  "set": "sa",
+  "dev": "i16promax",
+  "iss": [],
+  "fit": 0,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen14/A",
+  "set": "long",
+  "dev": "se",
+  "iss": [],
+  "fit": 4,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen14/A",
+  "set": "long",
+  "dev": "mini",
+  "iss": [],
+  "fit": 3,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen14/A",
+  "set": "long",
+  "dev": "i14",
+  "iss": [],
+  "fit": 2,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen14/A",
+  "set": "long",
+  "dev": "i16",
+  "iss": [],
+  "fit": 3,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen14/A",
+  "set": "long",
+  "dev": "i16pro",
+  "iss": [],
+  "fit": 2,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen14/A",
+  "set": "long",
+  "dev": "i11",
+  "iss": [],
+  "fit": 0,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen14/A",
+  "set": "long",
+  "dev": "i16promax",
+  "iss": [],
+  "fit": 0,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen14/A",
+  "set": "longest",
+  "dev": "se",
+  "iss": [],
+  "fit": 4,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen14/A",
+  "set": "longest",
+  "dev": "mini",
+  "iss": [],
+  "fit": 3,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen14/A",
+  "set": "longest",
+  "dev": "i14",
+  "iss": [],
+  "fit": 3,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen14/A",
+  "set": "longest",
+  "dev": "i16",
+  "iss": [],
+  "fit": 3,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen14/A",
+  "set": "longest",
+  "dev": "i16pro",
+  "iss": [],
+  "fit": 3,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen14/A",
+  "set": "longest",
+  "dev": "i11",
+  "iss": [],
+  "fit": 3,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen14/A",
+  "set": "longest",
+  "dev": "i16promax",
+  "iss": [],
+  "fit": 0,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen18/A",
+  "set": "sa",
+  "dev": "se",
+  "iss": [],
+  "fit": 4,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen18/A",
+  "set": "sa",
+  "dev": "mini",
+  "iss": [],
+  "fit": 3,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen18/A",
+  "set": "sa",
+  "dev": "i14",
+  "iss": [],
+  "fit": 2,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen18/A",
+  "set": "sa",
+  "dev": "i16",
+  "iss": [],
+  "fit": 2,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen18/A",
+  "set": "sa",
+  "dev": "i16pro",
+  "iss": [],
+  "fit": 2,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen18/A",
+  "set": "sa",
+  "dev": "i11",
+  "iss": [],
+  "fit": 0,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen18/A",
+  "set": "sa",
+  "dev": "i16promax",
+  "iss": [],
+  "fit": 0,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen18/A",
+  "set": "long",
+  "dev": "se",
+  "iss": [],
+  "fit": 4,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen18/A",
+  "set": "long",
+  "dev": "mini",
+  "iss": [],
+  "fit": 3,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen18/A",
+  "set": "long",
+  "dev": "i14",
+  "iss": [],
+  "fit": 2,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen18/A",
+  "set": "long",
+  "dev": "i16",
+  "iss": [],
+  "fit": 3,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen18/A",
+  "set": "long",
+  "dev": "i16pro",
+  "iss": [],
+  "fit": 2,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen18/A",
+  "set": "long",
+  "dev": "i11",
+  "iss": [],
+  "fit": 0,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen18/A",
+  "set": "long",
+  "dev": "i16promax",
+  "iss": [],
+  "fit": 0,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen18/A",
+  "set": "longest",
+  "dev": "se",
+  "iss": [],
+  "fit": 4,
+  "shown": "flag only",
+  "ell": [
+   "سانت فينسنت والغرينادين · 2011–2100"
+  ]
+ },
+ {
+  "pg": "screen18/A",
+  "set": "longest",
+  "dev": "mini",
+  "iss": [],
+  "fit": 3,
+  "shown": "flag only",
+  "ell": [
+   "سانت فينسنت والغرينادين · 2011–2100"
+  ]
+ },
+ {
+  "pg": "screen18/A",
+  "set": "longest",
+  "dev": "i14",
+  "iss": [],
+  "fit": 3,
+  "shown": "flag only",
+  "ell": [
+   "سانت فينسنت والغرينادين · 2011–2100"
+  ]
+ },
+ {
+  "pg": "screen18/A",
+  "set": "longest",
+  "dev": "i16",
+  "iss": [],
+  "fit": 3,
+  "shown": "flag only",
+  "ell": [
+   "سانت فينسنت والغرينادين · 2011–2100"
+  ]
+ },
+ {
+  "pg": "screen18/A",
+  "set": "longest",
+  "dev": "i16pro",
+  "iss": [],
+  "fit": 3,
+  "shown": "flag only",
+  "ell": [
+   "سانت فينسنت والغرينادين · 2011–2100"
+  ]
+ },
+ {
+  "pg": "screen18/A",
+  "set": "longest",
+  "dev": "i11",
+  "iss": [],
+  "fit": 3,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen18/A",
+  "set": "longest",
+  "dev": "i16promax",
+  "iss": [],
+  "fit": 2,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen20/A",
+  "set": "sa",
+  "dev": "se",
+  "iss": [],
+  "fit": 4,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen20/A",
+  "set": "sa",
+  "dev": "mini",
+  "iss": [],
+  "fit": 3,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen20/A",
+  "set": "sa",
+  "dev": "i14",
+  "iss": [],
+  "fit": 2,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen20/A",
+  "set": "sa",
+  "dev": "i16",
+  "iss": [],
+  "fit": 2,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen20/A",
+  "set": "sa",
+  "dev": "i16pro",
+  "iss": [],
+  "fit": 2,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen20/A",
+  "set": "sa",
+  "dev": "i11",
+  "iss": [],
+  "fit": 0,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen20/A",
+  "set": "sa",
+  "dev": "i16promax",
+  "iss": [],
+  "fit": 0,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen20/A",
+  "set": "long",
+  "dev": "se",
+  "iss": [],
+  "fit": 4,
+  "shown": "flag only",
+  "ell": [
+   "أفريقيا الوسطى · السلع والصناعات والممرات"
+  ]
+ },
+ {
+  "pg": "screen20/A",
+  "set": "long",
+  "dev": "mini",
+  "iss": [],
+  "fit": 3,
+  "shown": "flag only",
+  "ell": [
+   "أفريقيا الوسطى · السلع والصناعات والممرات"
+  ]
+ },
+ {
+  "pg": "screen20/A",
+  "set": "long",
+  "dev": "i14",
+  "iss": [],
+  "fit": 2,
+  "shown": "name",
+  "ell": [
+   "أفريقيا الوسطى · السلع والصناعات والممرات"
+  ]
+ },
+ {
+  "pg": "screen20/A",
+  "set": "long",
+  "dev": "i16",
+  "iss": [],
+  "fit": 3,
+  "shown": "flag only",
+  "ell": [
+   "أفريقيا الوسطى · السلع والصناعات والممرات"
+  ]
+ },
+ {
+  "pg": "screen20/A",
+  "set": "long",
+  "dev": "i16pro",
+  "iss": [],
+  "fit": 2,
+  "shown": "name",
+  "ell": [
+   "أفريقيا الوسطى · السلع والصناعات والممرات"
+  ]
+ },
+ {
+  "pg": "screen20/A",
+  "set": "long",
+  "dev": "i11",
+  "iss": [],
+  "fit": 0,
+  "shown": "name",
+  "ell": [
+   "أفريقيا الوسطى · السلع والصناعات والممرات"
+  ]
+ },
+ {
+  "pg": "screen20/A",
+  "set": "long",
+  "dev": "i16promax",
+  "iss": [],
+  "fit": 0,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen20/A",
+  "set": "longest",
+  "dev": "se",
+  "iss": [],
+  "fit": 4,
+  "shown": "flag only",
+  "ell": [
+   "سانت فينسنت والغرينادين · السلع والصناعات والممرات"
+  ]
+ },
+ {
+  "pg": "screen20/A",
+  "set": "longest",
+  "dev": "mini",
+  "iss": [],
+  "fit": 3,
+  "shown": "flag only",
+  "ell": [
+   "سانت فينسنت والغرينادين · السلع والصناعات والممرات"
+  ]
+ },
+ {
+  "pg": "screen20/A",
+  "set": "longest",
+  "dev": "i14",
+  "iss": [],
+  "fit": 3,
+  "shown": "flag only",
+  "ell": [
+   "سانت فينسنت والغرينادين · السلع والصناعات والممرات"
+  ]
+ },
+ {
+  "pg": "screen20/A",
+  "set": "longest",
+  "dev": "i16",
+  "iss": [],
+  "fit": 3,
+  "shown": "flag only",
+  "ell": [
+   "سانت فينسنت والغرينادين · السلع والصناعات والممرات"
+  ]
+ },
+ {
+  "pg": "screen20/A",
+  "set": "longest",
+  "dev": "i16pro",
+  "iss": [],
+  "fit": 3,
+  "shown": "flag only",
+  "ell": [
+   "سانت فينسنت والغرينادين · السلع والصناعات والممرات"
+  ]
+ },
+ {
+  "pg": "screen20/A",
+  "set": "longest",
+  "dev": "i11",
+  "iss": [],
+  "fit": 3,
+  "shown": "flag only",
+  "ell": [
+   "سانت فينسنت والغرينادين · السلع والصناعات والممرات"
+  ]
+ },
+ {
+  "pg": "screen20/A",
+  "set": "longest",
+  "dev": "i16promax",
+  "iss": [],
+  "fit": 0,
+  "shown": "name",
+  "ell": [
+   "سانت فينسنت والغرينادين · السلع والصناعات والممرات"
+  ]
+ },
+ {
+  "pg": "screen23/A",
+  "set": "sa",
+  "dev": "se",
+  "iss": [],
+  "fit": 4,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen23/A",
+  "set": "sa",
+  "dev": "mini",
+  "iss": [],
+  "fit": 3,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen23/A",
+  "set": "sa",
+  "dev": "i14",
+  "iss": [],
+  "fit": 2,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen23/A",
+  "set": "sa",
+  "dev": "i16",
+  "iss": [],
+  "fit": 2,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen23/A",
+  "set": "sa",
+  "dev": "i16pro",
+  "iss": [],
+  "fit": 2,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen23/A",
+  "set": "sa",
+  "dev": "i11",
+  "iss": [],
+  "fit": 0,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen23/A",
+  "set": "sa",
+  "dev": "i16promax",
+  "iss": [],
+  "fit": 0,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen23/A",
+  "set": "long",
+  "dev": "se",
+  "iss": [],
+  "fit": 4,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen23/A",
+  "set": "long",
+  "dev": "mini",
+  "iss": [],
+  "fit": 3,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen23/A",
+  "set": "long",
+  "dev": "i14",
+  "iss": [],
+  "fit": 2,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen23/A",
+  "set": "long",
+  "dev": "i16",
+  "iss": [],
+  "fit": 3,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen23/A",
+  "set": "long",
+  "dev": "i16pro",
+  "iss": [],
+  "fit": 2,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen23/A",
+  "set": "long",
+  "dev": "i11",
+  "iss": [],
+  "fit": 0,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen23/A",
+  "set": "long",
+  "dev": "i16promax",
+  "iss": [],
+  "fit": 0,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen23/A",
+  "set": "longest",
+  "dev": "se",
+  "iss": [],
+  "fit": 4,
+  "shown": "flag only",
+  "ell": [
+   "حملة سانت فينسنت والغرينادين · حُفظ قبل دقيقة"
+  ]
+ },
+ {
+  "pg": "screen23/A",
+  "set": "longest",
+  "dev": "mini",
+  "iss": [],
+  "fit": 3,
+  "shown": "flag only",
+  "ell": [
+   "حملة سانت فينسنت والغرينادين · حُفظ قبل دقيقة"
+  ]
+ },
+ {
+  "pg": "screen23/A",
+  "set": "longest",
+  "dev": "i14",
+  "iss": [],
+  "fit": 3,
+  "shown": "flag only",
+  "ell": [
+   "حملة سانت فينسنت والغرينادين · حُفظ قبل دقيقة"
+  ]
+ },
+ {
+  "pg": "screen23/A",
+  "set": "longest",
+  "dev": "i16",
+  "iss": [],
+  "fit": 3,
+  "shown": "flag only",
+  "ell": [
+   "حملة سانت فينسنت والغرينادين · حُفظ قبل دقيقة"
+  ]
+ },
+ {
+  "pg": "screen23/A",
+  "set": "longest",
+  "dev": "i16pro",
+  "iss": [],
+  "fit": 3,
+  "shown": "flag only",
+  "ell": [
+   "حملة سانت فينسنت والغرينادين · حُفظ قبل دقيقة"
+  ]
+ },
+ {
+  "pg": "screen23/A",
+  "set": "longest",
+  "dev": "i11",
+  "iss": [],
+  "fit": 3,
+  "shown": "flag only",
+  "ell": [
+   "حملة سانت فينسنت والغرينادين · حُفظ قبل دقيقة"
+  ]
+ },
+ {
+  "pg": "screen23/A",
+  "set": "longest",
+  "dev": "i16promax",
+  "iss": [],
+  "fit": 0,
+  "shown": "name",
+  "ell": [
+   "حملة سانت فينسنت والغرينادين · حُفظ قبل دقيقة"
+  ]
+ }
+]
