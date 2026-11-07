@@ -787,11 +787,11 @@
         <button class="r-x tap" aria-label="إغلاق"><svg class="i"><use href="#i-close"/></svg></button>
       </header>
 
-      <nav class="r-tabs" aria-label="أقسام الدولة">
-        <button class="r-tab tap" data-for="overview"><svg class="i"><use href="#i-grid"/></svg><span>نظرة عامة</span></button>
-        <button class="r-tab tap" data-for="leader"><svg class="i"><use href="#i-people"/></svg><span>القيادة</span></button>
-        <button class="r-tab tap" data-for="policies"><svg class="i"><use href="#i-doc"/></svg><span>السياسات</span></button>
-        <button class="r-tab tap" data-for="projects"><svg class="i"><use href="#i-build"/></svg><span>المشاريع</span></button>
+      <nav class="r-tabs" role="tablist" aria-label="أقسام الدولة">
+        <button class="r-tab tap" role="tab" data-for="overview"><svg class="i"><use href="#i-grid"/></svg><span>نظرة عامة</span></button>
+        <button class="r-tab tap" role="tab" data-for="leader"><svg class="i"><use href="#i-people"/></svg><span>القيادة</span></button>
+        <button class="r-tab tap" role="tab" data-for="policies"><svg class="i"><use href="#i-doc"/></svg><span>السياسات</span></button>
+        <button class="r-tab tap" role="tab" data-for="projects"><svg class="i"><use href="#i-build"/></svg><span>المشاريع</span></button>
       </nav>
 
       <!-- نظرة عامة -->
@@ -799,7 +799,7 @@
         <div class="r-kpis">
           <div class="r-kpi">
             <span class="r-kl"><svg class="i"><use href="#i-capital"/></svg>رأس المال السياسي</span>
-            <span class="r-kv"><b class="ltr">86</b></span>
+            <span class="r-kv"><b class="ltr"><span class="s-def">86</span><span class="s-alt">45</span></b></span>
             <span class="r-kr r-blue"><span class="ltr">+4</span> شهريًا</span>
             <button class="r-why tap">لماذا؟</button>
           </div>
@@ -821,13 +821,13 @@
           <div class="r-sc"><dt>نظام الحكم</dt><dd>جمهورية رئاسية</dd></div>
           <div class="r-sc"><dt>دستور <span class="ltr">1971</span></dt><dd>عُدّل <span class="ltr">2007</span></dd></div>
           <div class="r-sc"><dt>الحزب الحاكم</dt><dd>الحزب الوطني</dd></div>
-          <div class="r-sc"><dt>الطوارئ</dt><dd class="r-amber">سارية منذ <span class="ltr">1981</span></dd></div>
+          <div class="r-sc"><dt>الطوارئ</dt><dd class="r-amber">محدودة منذ <span class="ltr">2010</span></dd></div>
         </dl>
 
         <div class="r-acts" aria-label="قرارات">
-          <button class="r-act tap r-first">
+          <button class="r-act tap r-first s-short-1">
             <span class="r-tile"><svg class="i"><use href="#i-unlock"/></svg></span>
-            <span class="r-at"><b>رفع حالة الطوارئ</b><span class="s-cost">الكلفة: <span class="ltr">60</span><svg class="i"><use href="#i-capital"/></svg></span></span>
+            <span class="r-at"><b>رفع حالة الطوارئ</b><span class="s-cost s-def">الكلفة: <span class="ltr">60</span><svg class="i"><use href="#i-capital"/></svg></span><span class="s-cost s-alt">يلزم <span class="ltr">60</span><svg class="i"><use href="#i-capital"/></svg> · لديك <span class="ltr">45</span></span></span>
             <span class="r-chip"><svg class="r-arr"><use href="#t-up"/></svg>الشرعية</span>
           </button>
           <button class="r-act tap s-def">
@@ -873,7 +873,7 @@
         <section class="r-sec">
           <h3>الأمن والنظام</h3>
           <div class="s-pol s-short-1">
-            <span class="r-at"><b>حالة الطوارئ</b><span class="s-cost">كلفة التغيير: <span class="ltr">60</span><svg class="i"><use href="#i-capital"/></svg></span></span>
+            <span class="r-at"><b>حالة الطوارئ</b><span class="s-cost s-def">كلفة التغيير: <span class="ltr">60</span><svg class="i"><use href="#i-capital"/></svg></span><span class="s-cost s-alt">يلزم <span class="ltr">60</span><svg class="i"><use href="#i-capital"/></svg> · لديك <span class="ltr">45</span></span></span>
             <span class="s-seg" role="radiogroup" aria-label="حالة الطوارئ"><button class="s-sg tap" role="radio" aria-checked="false">ملغاة</button><button class="s-sg tap on" role="radio" aria-checked="true">محدودة</button><button class="s-sg tap" role="radio" aria-checked="false">شاملة</button></span>
           </div>
           <div class="s-pol">

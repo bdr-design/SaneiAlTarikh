@@ -23,7 +23,8 @@ Header: flag, «الخريطة», «أوضاع الخريطة · المعروض:
 - «العرض»: الحدود (فعلية | قانونية), حدود المحافظات (تظهر | تختفي), الأسماء (قليلة | متوسطة | كثيرة).
 
 Natural Earth has 27 Egyptian governorates (Helwan and 6 October merged back), screen 8 counts the 2011 29: the layer draws
-the 27; screen 8's eight named governorates carry its values, the other 19 fall in its «32 و48».
+the 27; screen 8's eight named governorates carry its values, the other 19 fall in its «32 و48». Tunisia is set by hand for 1 January 2011 (the uprising centred on Sidi
+Bouzid, Kasserine and Gafsa, the three highest); Libya stays under the protests edge (40: its protests began in February).
 
 ## Gate
 `screen19/A/_build/render.js`: the shared checker plus the modes, the choice, the layer and its file, the legend, the

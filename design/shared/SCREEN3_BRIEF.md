@@ -25,7 +25,7 @@ Scenarios with their images in `../shared/scenarios/` (3:2):
 ## Page 2: اختيار الدولة (step 2)
 - The world map is the main surface; Egypt is selected (highlighted). A search field "ابحث عن دولة" (32 pt).
 - A list of countries with flags (`../shared/flags/<iso2>.svg`, keep 4:3; for Libya use `ly_2011.svg`, the 2011 flag): مصر (eg), السعودية (sa), ليبيا (ly_2011), تونس (tn), سوريا (sy), العراق (iq), اليمن (ye), الأردن (jo), السودان (sd), تركيا (tr), إيران (ir), الولايات المتحدة (us), روسيا (ru), الصين (cn). Show each country's difficulty as a small label: سهلة / متوسطة / صعبة / صعبة جدًا (illustrative: مصر صعبة, ليبيا صعبة جدًا, تونس صعبة جدًا, اليمن صعبة جدًا, سوريا صعبة, السعودية متوسطة, الإمارات not listed, تركيا متوسطة, الولايات المتحدة سهلة, الصين سهلة, روسيا متوسطة, إيران صعبة, العراق صعبة جدًا, الأردن متوسطة, السودان صعبة جدًا).
-- A selected-country card: flag, "مصر", القائد "حسني مبارك", نظام الحكم "جمهورية رئاسية", السكان "83 مليون", الناتج "219 مليار $", الاستقرار "58%", الصعوبة "صعبة" (amber), and one line "تحذير: بطالة الشباب مرتفعة واحتجاجات محتملة". Values are illustrative.
+- A selected-country card: flag, "مصر", القائد "حسني مبارك", نظام الحكم "جمهورية رئاسية", السكان "79.7 مليون" (screen 8's figure), الناتج "219 مليار $", الاستقرار "58%", الصعوبة "صعبة" (amber), and one line "تحذير: بطالة الشباب مرتفعة واحتجاجات محتملة". Values are illustrative.
 
 ## Page 3: إعدادات الحملة (step 3)
 - الوضع (segmented, 4 options): واقعي (selected, default, with a small note "الوضع الموصى به"), قوي، قوة عظمى، God.

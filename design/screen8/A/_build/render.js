@@ -69,10 +69,13 @@ qa('.sheet .i-row, .sheet .i-prov').forEach((r) => { const name = T(r.querySelec
     if (vals.filter((v) => v > 60).length !== DATA.above) issues.push('the provinces above 60 are not the headline ' + DATA.above);
     const em = T(q(B('unrest') + '.r-link .r-at b'));
     if (!em.includes(DATA.emergency)) issues.push('the emergency law shown is not the state panel\\'s «' + DATA.emergency + '»'); }
+  // the overview's read-only rows: 22 pt, or the status rows' 18 pt at the tightest fit (level 6)
+  qa(B('overview') + '.i-row').forEach((r) => { const h = r.getBoundingClientRect().height, want = document.documentElement.dataset.rfit === '6' ? 18 : 22; if (Math.abs(h - want) > 0.5) issues.push('an overview row is ' + h.toFixed(1) + ' pt high (want ' + want + ')'); });
   if (tab === 'overview') { const top = qa(B('overview') + '.i-row').map((r) => T(r.querySelector('span')) + nums(T(r.querySelector('b')))[0]);
     const kv = qa('.sheet .r-kv b').map((b) => nums(T(b))[0]);
     if (kv[1] !== DATA.avg || kv[2] !== DATA.above) issues.push('the headline numbers are not ' + DATA.avg + ' and ' + DATA.above);
     if (top.join(',') !== DATA.top) issues.push('the overview\\'s worst provinces are not the unrest tab\\'s first: ' + top.join(','));
+    if (top.length !== DATA.above) issues.push('the overview lists ' + top.length + ' provinces, not the headline\\'s ' + DATA.above + ' above 60');
     // the unrest headline is amber (a worsening, its flame and its rising arrow); the other two are not
     const k = qa('.sheet .r-kpi'), amb = (e) => e && getComputedStyle(e).color === TOK.amber;
     if (!amb(k[1].querySelector('.r-kv b')) || !amb(k[1].querySelector('.r-kl svg')) || !amb(k[1].querySelector('.r-kr')) || (k[1].querySelector('.r-kr use') || {}).getAttribute?.('href') !== '#t-up') issues.push('the unrest headline is not amber with its flame and rising arrow');
@@ -107,9 +110,9 @@ qa('.sheet .i-row, .sheet .i-prov').forEach((r, i) => order(r, ['span', '.i-bar'
 require(path.join(OUT, '../../shared/check/panelcheck.js'))({
   OUT, dock: 'الداخلية والسياسة', tabs: ['overview', 'unrest', 'parties', 'groups'], longTab: 'unrest',
   inputs: ['_build/internal.css', '../../screen4/R/_build/sheet.html', '../../screen5/A/_build/sheet.html'],
-  TOK: { sec: 'rgb(160, 140, 255)', ctlH: { '.i-prov': 44 }, sheetIcon: [['.s-cost svg', 10]], size: [['.i-row', null, 22], ['.i-prov', null, 44], ['.i-grp', null, 36], ['.p-split', null, 6]] },
+  TOK: { sec: 'rgb(160, 140, 255)', ctlH: { '.i-prov': 44 }, sheetIcon: [['.s-cost svg', 10]], size: [['.r-body:not([data-tab="overview"]) .i-row', null, 22], ['.i-prov', null, 44], ['.i-grp', null, 36], ['.p-split', null, 6]] },
   HEAD, BRIEF, screenChecks,
-  DATA: Object.assign({}, A, { avg: 45, above: 3, top: 'القاهرة64,السويس63', moves: MOVES.join('|'), groups: GROUPS.join('|') }),
+  DATA: Object.assign({}, A, { avg: 45, above: 3, top: 'القاهرة64,السويس63,الإسكندرية61', moves: MOVES.join('|'), groups: GROUPS.join('|') }),
   cases: (d, se) => {
     const U = '.r-body[data-tab="unrest"] ', P = '.r-body[data-tab="parties"] ', G = '.r-body[data-tab="groups"] ';
     return [
@@ -126,6 +129,7 @@ require(path.join(OUT, '../../shared/check/panelcheck.js'))({
       ['emergency off the state', d, '&tab=unrest', '', /the emergency law shown is not the state panel's/, new Function("document.querySelector('" + U + ".r-link .r-at b').firstChild.textContent = 'حالة الطوارئ: شاملة منذ ';")],
       ['headline off', d, '', '', /the headline numbers are not 45 and 3/, () => { document.querySelectorAll('.r-kv b')[1].textContent = '52'; }],
       ['overview top three off', d, '', '', /the overview's worst provinces are not/, () => { document.querySelectorAll('.r-body[data-tab="overview"] .i-row span')[1].textContent = 'الجيزة'; }],
+      ['overview list short', d, '', '', /the overview lists 2 provinces, not the headline's 3/, () => { const r = document.querySelectorAll('.r-body[data-tab="overview"] .i-row'); r[2].remove(); }],
       ['unrest headline not amber', d, '', '.r-kpi:nth-child(2) .r-kv b, .r-kpi:nth-child(2) .r-kr, .r-kpi:nth-child(2) .r-kl svg { color: var(--t1) !important; }', /the unrest headline is not amber/],
       ['amber on population', d, '', '.r-kpi:first-child .r-kr { color: var(--amber) !important; }', /amber on a headline that is not a worsening|colour alone/],
       ['seats off', d, '&tab=parties', '', /the seats do not add up to 518/, new Function("document.querySelectorAll('" + P + ".p-grp > b')[1].textContent = '70';")],

@@ -593,6 +593,9 @@
   /* the overview's province rows line up with the unrest tab's (same bar and value column; the chevron's 16 pt kept empty) (2026-11-04) */
   .r-body[data-tab="overview"] .i-row { grid-template-columns: 104px 1fr 48px 16px; }
   .r-body[data-tab="overview"] .i-row::after { content: ""; }
+  /* the overview's read-only rows follow the status rows at the tightest fit (18 pt at level 6, as --rst), so the three worst
+     provinces and the action fit whole on the smallest phone */
+  .r-body[data-tab="overview"] .i-row { height: min(22px, var(--rst)); }
   .i-row > span { font-size: var(--fs-sec); line-height: var(--lh-sec); font-weight: 500; color: var(--t1); white-space: nowrap; }
   .i-bar { position: relative; height: 4px; border-radius: 2px; background: rgba(169, 188, 203, .22); }
   .i-bar::after { content: ""; position: absolute; top: 0; bottom: 0; right: 0; width: var(--v); border-radius: 2px; background: var(--teal); }
@@ -856,6 +859,7 @@
           <h3>الأكثر اضطرابًا</h3>
           <div class="i-row" role="img" aria-label="القاهرة: 64 من 100، ترتفع نقطتين شهريًا"><span>القاهرة</span><i class="i-bar" style="--v: 64%"></i><b class="r-amber"><svg class="r-arr" aria-hidden="true"><use href="#t-up"/></svg><span class="ltr">64</span></b></div>
           <div class="i-row" role="img" aria-label="السويس: 63 من 100، ترتفع 3 نقاط شهريًا"><span>السويس</span><i class="i-bar" style="--v: 63%"></i><b class="r-amber"><svg class="r-arr" aria-hidden="true"><use href="#t-up"/></svg><span class="ltr">63</span></b></div>
+          <div class="i-row" role="img" aria-label="الإسكندرية: 61 من 100، ترتفع نقطتين شهريًا"><span>الإسكندرية</span><i class="i-bar" style="--v: 61%"></i><b class="r-amber"><svg class="r-arr" aria-hidden="true"><use href="#t-up"/></svg><span class="ltr">61</span></b></div>
         </section>
 
         <div class="r-acts">

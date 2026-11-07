@@ -32,6 +32,16 @@ EGYPT = {'Al Qahirah': 64, 'As Suways': 63, 'Al Iskandariyah': 61, 'Al Gharbiyah
          'Al Isma`iliyah': 50, "Shamal Sina'": 49}
 
 
+# Tunisia on 1 January 2011 by hand (the errors review, 2026-11-07): the uprising began in Sidi Bouzid on 17 December 2010
+# and centred on the interior (Sidi Bouzid, Kasserine, Gafsa), not the northern coast
+TUNISIA = {'Sidi Bou Zid': 92, 'Kassérine': 88, 'Gafsa': 84, 'Kairouan': 79, 'Le Kef': 77, 'Siliana': 76, 'Tunis': 76,
+           'Jendouba': 74, 'Sfax': 74, 'Ben Arous (Tunis Sud)': 73, 'Gabès': 72, 'Médenine': 72, 'Manubah': 71, 'Kebili': 70,
+           'Tozeur': 70, 'Tataouine': 69, 'Béja': 68, 'Mahdia': 66, 'Zaghouan': 66, 'Sousse': 64, 'Bizerte': 64, 'Monastir': 62,
+           'Nabeul': 62}
+# Libya had no protests on 1 January 2011 (they began in February): every province stays under the protests edge (40)
+CAP = {'LBY': 39}
+
+
 def miller(lon, lat):
     lat = max(min(lat, 84.0), -58.0)
     return math.radians(lon), 1.25 * math.log(math.tan(math.pi / 4 + 0.4 * math.radians(lat)))
@@ -56,8 +66,10 @@ def value(p):
     a3, nm = p['adm0_a3'], p.get('name') or ''
     if a3 == 'EGY':
         return EGYPT.get(nm, 32 + round(rnd(nm) * 16))
+    if a3 == 'TUN' and nm in TUNISIA:
+        return TUNISIA[nm]
     base = NATION.get(a3)
-    return None if base is None else max(0, min(100, round(base + (rnd(p['adm1_code']) - 0.5) * 20)))
+    return None if base is None else max(0, min(CAP.get(a3, 100), round(base + (rnd(p['adm1_code']) - 0.5) * 20)))
 
 
 def band(v):
