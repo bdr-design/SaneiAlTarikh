@@ -785,16 +785,6 @@ Measured by the in-app recorder (launch markers written to the ring log) and by 
 
 ---
 
-### 3.10 Names of any country (the second-country test, T-024)
-
-- Every polity has a **short name of at most 14 characters** (for example «السعودية», «أفريقيا الوسطى», «سانت فينسنت»)
-  used in the HUD's nation card and in the panels' header sub-lines; the full name («المملكة العربية السعودية», «سانت
-  فينسنت والغرينادين») is shown in the state panel and the country card. `ids_lock.py` checks the length.
-- The HUD's nation card condenses by its fit levels when a name, leader or regime would run out of its box: the leader and
-  regime go first, then the name (the flag stays).
-- A header sub-line that is still too long gives way at its end with an ellipsis; VoiceOver reads it whole.
-- `tools/stress_names.js` renders the pages with Saudi Arabia and the longest names on the 7 phones; it is part of the gate.
-
 ### 3.9 Screen costs (the heaviness reviews, 2026-11-07)
 
 The owner's rules `heavinessReviewer` and `loadSpread` gave every designed screen a heaviness review. What it found is
@@ -842,6 +832,16 @@ bound here; each item is a line in `docs/perf.md` (L12) and a test where one is 
   checks the header, META and trailer hash before releasing the old state (a failed check keeps the game), then releases,
   decodes on the platform engine, and shows a static «جارٍ التحميل» until the first frame (≤1.0 s on A12, §3.4; peak per
   §3.3).
+
+### 3.10 Names of any country (the second-country test, T-024)
+
+- Every polity has a **short name of at most 14 characters** (for example «السعودية», «أفريقيا الوسطى», «سانت فينسنت»)
+  used in the HUD's nation card and in the panels' header sub-lines; the full name («المملكة العربية السعودية», «سانت
+  فينسنت والغرينادين») is shown in the state panel and the country card. `ids_lock.py` checks the length.
+- The HUD's nation card condenses by its fit levels when a name, leader or regime would run out of its box: the leader and
+  regime go first, then the name (the flag stays).
+- A header sub-line that is still too long gives way at its end with an ellipsis; VoiceOver reads it whole.
+- `tools/stress_names.js` renders the pages with Saudi Arabia and the longest names on the 7 phones; it is part of the gate.
 
 ## 4. Data and realism pipeline
 
