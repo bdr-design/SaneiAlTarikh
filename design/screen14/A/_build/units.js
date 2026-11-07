@@ -107,7 +107,7 @@
       else if (ST.halted) { sub = what(u) + ' · على طريق ' + ROUTE.to + ' · الأمر: توقّف'; on = 'halt'; }
       else { sub = what(u) + ' · إلى ' + ROUTE.to + ' · ' + arrivalText(); on = 'move'; }
     } else sub = what(u) + ' · ' + u.place + (u.org ? ' · التنظيم ' + u.org + '%' : '');
-    $('.o-name').textContent = name; $('.o-sub').textContent = sub;
+    $('.o-name').textContent = name; $('.o-sub').innerHTML = sub.replace(/(\d+)/g, '<span class="ltr">$1</span>');   /* numbers in left-to-right spans */
     $('.o-unit').setAttribute('aria-label', name + '، ' + sub.split(' · ').join('، '));
     Array.prototype.forEach.call(document.querySelectorAll('.o-btn[data-o]'), function (b) {
       var o = b.dataset.o, isOn = o === on; b.classList.toggle('on', isOn);

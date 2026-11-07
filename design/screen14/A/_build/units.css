@@ -7,7 +7,7 @@
   .units .tap { pointer-events: auto; }
   /* a unit: the owner's generic image (28 pt tall) under its 20 pt tag (flag and strength); the image's centre is the unit's place */
   .u-tok { position: absolute; display: flex; flex-direction: column; align-items: center; gap: 0; padding: 0; background: none; border: 0; color: var(--t1); }
-  .u-tag { height: 20px; display: flex; align-items: center; gap: var(--s1); padding-inline: 4px 5px; border-radius: 4px;
+  .u-tag { height: 20px; display: flex; align-items: center; gap: var(--s1); padding-inline: 4px 5px; border-radius: 6px;
     background: rgb(12, 20, 28); border: 1px solid var(--stroke); box-shadow: 0 1px 4px rgba(0, 0, 0, .45); }
   .u-tag .u-flag { flex: none; width: 12px; height: 9px; border-radius: 1.5px; overflow: hidden; box-shadow: 0 0 0 1px rgba(255, 255, 255, .22); }
   .u-tag .u-flag img { width: 100%; height: 100%; display: block; }
@@ -40,7 +40,7 @@
   .o-tt b { font-size: var(--fs-val); line-height: var(--lh-val); font-weight: 600; font-variant-numeric: tabular-nums; color: var(--t1); white-space: nowrap; }
   .o-tt span { font-size: var(--fs-label); line-height: var(--lh-label); font-weight: 500; color: var(--t2); white-space: nowrap; }
   .o-btn { min-width: 44px; height: 36px; padding-inline: var(--s2); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px;
-    border-radius: 8px; color: var(--t2); }
+    border-radius: var(--r-ctl); color: var(--t2); }
   .o-btn svg.i { width: var(--ico); height: var(--ico); color: var(--t1); }
   .o-btn span { font-size: var(--fs-label); line-height: var(--lh-label); font-weight: 500; white-space: nowrap; }
   /* the order in force: a white touch (filled white, dark ink) */

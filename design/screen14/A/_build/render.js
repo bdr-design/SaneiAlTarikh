@@ -137,7 +137,7 @@ async function measure(p, d, b3, view) {
       if (!TOK.heights.some((x) => near(h, x)) && !fills) issues.push(`control height ${h.toFixed(2)}: ${label(e)}`);
     });
     [['.cap', 32], ['.toast', 32], ['.dock', 44], ['.orders', 44]].forEach(([s, v]) => qa(s).forEach((e) => { if (!near(e.getBoundingClientRect().height, v)) issues.push(`control height ${e.getBoundingClientRect().height.toFixed(2)} for ${s} (want ${v})`); }));
-    [['.u-tag', 4], ['.o-btn', 8], ['.u-dest', 6]].forEach(([s, v]) => qa(s).forEach((e) => { const r = parseFloat(getComputedStyle(e).borderTopLeftRadius); if (!near(r, v)) issues.push(`radius ${r} for ${s} (want ${v})`); }));
+    [['.u-tag', 6], ['.o-btn', 10], ['.u-dest', 6]].forEach(([s, v]) => qa(s).forEach((e) => { const r = parseFloat(getComputedStyle(e).borderTopLeftRadius); if (!near(r, v)) issues.push(`radius ${r} for ${s} (want ${v})`); }));
     qa('.u-wp').forEach((e) => { const r = e.getBoundingClientRect(); if (!near(r.width, 20) || !near(r.height, 20) || getComputedStyle(e).borderTopLeftRadius !== '50%') issues.push('the waypoint mark is not a 20 pt circle'); });
     // ---------- 3. gaps ----------
     document.querySelectorAll('.hud *, .units *').forEach((e) => {

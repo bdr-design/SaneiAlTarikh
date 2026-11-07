@@ -3,7 +3,6 @@
   .r-tabs { display: none; }
   [data-tab="why"] .r-body[data-tab="why"] { display: flex; }
   .r-body[data-tab="why"] { padding-top: 0; padding-bottom: var(--s3); gap: var(--s2); }
-  .r-body[data-tab="why"] .r-st { --rst: 24px; }
   .r-sc dd.r-amber { display: inline-flex; align-items: center; gap: 2px; }
   /* a term: its name and the value it comes from (right), its signed share (left) */
   .w-t { display: flex; align-items: center; justify-content: space-between; gap: var(--s2); height: 32px; }
