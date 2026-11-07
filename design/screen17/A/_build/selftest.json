@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-07T19:29:27.383Z",
+ "ranAt": "2026-11-07T19:38:57.758Z",
  "inputs": {
   "files": [
    "index.html",
@@ -15,6 +15,9 @@
    "../../screen1/B3/index.html",
    "../../shared/devices.json",
    "_build/why.css",
+   "../../screen5/A/_build/sheet.html",
+   "../../screen6/A/_build/sheet.html",
+   "../../screen8/A/_build/sheet.html",
    "../../shared/flag_eg.svg",
    "../../shared/flags/eg.svg",
    "../../shared/map_mena_d1.jpg",
@@ -22,7 +25,7 @@
    "header_cairo.jpg",
    "map_overlay_cairo.svg"
   ],
-  "sha1": "124c4ed6d13ee86a67c628bcb320e333976c1df9"
+  "sha1": "e9bad9e43dce5b7c7f244f678a75849233e06879"
  },
  "cleanIssues": {
   "i16promax": [],
@@ -275,6 +278,13 @@
    "ok": true,
    "sample": [
     "white touch off: .r-tile color rgb(127, 233, 255) (want rgb(234, 242, 247))"
+   ]
+  },
+  {
+   "name": "close says only إغلاق",
+   "ok": true,
+   "sample": [
+    "a11y: the close says only «إغلاق»"
    ]
   },
   {

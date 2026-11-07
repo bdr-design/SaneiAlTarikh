@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-07T18:04:53.624Z",
+ "ranAt": "2026-11-07T19:41:40.665Z",
  "inputs": {
   "files": [
    "index.html",
@@ -24,7 +24,7 @@
    "header_cairo.jpg",
    "map_overlay_cairo.svg"
   ],
-  "sha1": "71932b4be947d1b8b347eb002dafcde9aea70b51"
+  "sha1": "2a297cc837423f0110b342e7c211ba2a5a01f808"
  },
  "cleanIssues": {
   "i16promax": [],
@@ -166,7 +166,7 @@
    "name": "sheet top",
    "ok": true,
    "sample": [
-    "hit overlap الاستقرار 58% / إغلاق",
+    "hit overlap الاستقرار 58% / إغلاق، العودة إلى الخريطة",
     "panel overlap الدولة: مصر، حسني مبارك، ج / الداخلية والسياسة: مصر",
     "panel overlap الخزينة 36.0 مليار $ الاست / الداخلية والسياسة: مصر"
    ]
@@ -536,6 +536,13 @@
    "sample": [
     "«فتح حوار وطني»: the chip's arrow does not agree with its sign",
     "a11y: «فتح حوار وطني» does not say the chip's direction in words"
+   ]
+  },
+  {
+   "name": "close says only إغلاق",
+   "ok": true,
+   "sample": [
+    "a11y: the close says only «إغلاق»"
    ]
   },
   {

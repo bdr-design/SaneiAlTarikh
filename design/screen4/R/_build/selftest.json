@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-07T19:24:57.379Z",
+ "ranAt": "2026-11-07T19:44:45.278Z",
  "inputs": {
   "files": [
    "index.html",
@@ -19,7 +19,7 @@
    "header_cairo.jpg",
    "map_overlay_cairo.svg"
   ],
-  "sha1": "cca00ca4fa29d85bf51a36019c5388cdac507fe9"
+  "sha1": "ae04866dffebb674d8b4d29ac7be0401a192e210"
  },
  "cleanIssues": {
   "i16promax": [],
@@ -54,6 +54,51 @@
  },
  "results": [
   {
+   "name": "all causes unnamed",
+   "ok": true,
+   "sample": [
+    "a11y: «كل الأسباب» does not name its subject"
+   ]
+  },
+  {
+   "name": "cause points wrong",
+   "ok": true,
+   "sample": [
+    "a11y: the cause «القمع ونقص الحريات» does not read its way and points",
+    "a11y: «القمع ونقص الحريات: يرفع» does not read all it shows: 12"
+   ]
+  },
+  {
+   "name": "cause without its role",
+   "ok": true,
+   "sample": [
+    "a11y: the cause «القمع ونقص الحريات» does not read its way and points",
+    "a11y: a label VoiceOver may skip (no role): «القمع ونقص الحريات: يرفع الاضط»"
+   ]
+  },
+  {
+   "name": "link row read in part",
+   "ok": true,
+   "sample": [
+    "a11y: «إدارة القوات» does not read all it shows: الحامية التمركز إسناد المهام"
+   ]
+  },
+  {
+   "name": "a control in a control",
+   "ok": true,
+   "sample": [
+    "a11y: «» does not read all it shows: الإنشاءات والمرافق الكهرباء النقل",
+    "a11y: a control inside another control: «تخطيط التوسعة»"
+   ]
+  },
+  {
+   "name": "label on a plain element",
+   "ok": true,
+   "sample": [
+    "a11y: a label VoiceOver may skip (no role): «إدارة المحافظة»"
+   ]
+  },
+  {
    "name": "why unnamed",
    "ok": true,
    "sample": [
@@ -78,7 +123,8 @@
    "name": "cause silent",
    "ok": true,
    "sample": [
-    "a11y: the cause «القمع ونقص الحريات» does not read its way and points"
+    "a11y: the cause «القمع ونقص الحريات» does not read its way and points",
+    "a11y: «» does not read all it shows: القمع ونقص الحريات 12"
    ]
   },
   {
@@ -94,7 +140,7 @@
    "sample": [
     "clipped text (bottom): \"الكهرباء · النقل · المرافق العامة\" 481.03..599 y 361..376",
     "clipped text (bottom): \"تخطيط التوسعة\" 377..447.28 y 351..368",
-    "control cut by its scroll area (bottom): الإنشاءات والمرافق"
+    "control cut by its scroll area (bottom): الإنشاءات والمرافقالكهرباء"
    ]
   },
   {
@@ -277,7 +323,7 @@
    "ok": true,
    "sample": [
     "icon over text: i r-chev / \"الداخلية والسياسة\"",
-    "hit overlap الدولة / الإنشاءات والمرافق",
+    "hit overlap الدولة / الإنشاءات والمرافقالكهرباء",
     "hit overlap الدولة / تخطيط التوسعة: الإنشاءات و"
    ]
   },
@@ -293,8 +339,8 @@
    "name": "radio hit boxes touch the links",
    "ok": true,
    "sample": [
-    "hit overlap مخفض / الإنشاءات والمرافق",
-    "hit overlap متوازن / الإنشاءات والمرافق",
+    "hit overlap مخفض / الإنشاءات والمرافقالكهرباء",
+    "hit overlap متوازن / الإنشاءات والمرافقالكهرباء",
     "hit overlap متوازن / تخطيط التوسعة: الإنشاءات و"
    ]
   },
@@ -321,8 +367,8 @@
    "ok": true,
    "sample": [
     "clipped text (bottom): \"الحامية · التمركز · إسناد المهام\" 718.56..834 y 409..424",
-    "control cut by its scroll area (bottom): إدارة القوات",
-    "hit box shaved by its clip: إدارة القوات"
+    "control cut by its scroll area (bottom): إدارة القوات: الحامية والت",
+    "hit box shaved by its clip: إدارة القوات: الحامية والت"
    ]
   },
   {
@@ -331,7 +377,7 @@
    "sample": [
     "clipped text (bottom): \"الكهرباء · النقل · المرافق العامة\" 481.03..599 y 361..376",
     "clipped text (bottom): \"تخطيط التوسعة\" 377..447.28 y 351..368",
-    "control cut by its scroll area (bottom): الإنشاءات والمرافق"
+    "control cut by its scroll area (bottom): الإنشاءات والمرافقالكهرباء"
    ]
   },
   {
@@ -383,7 +429,7 @@
    "sample": [
     "clipped text (bottom): \"الكهرباء · النقل · المرافق العامة\" 481.03..599 y 361..376",
     "clipped text (bottom): \"تخطيط التوسعة\" 377..447.28 y 351..368",
-    "control cut by its scroll area (bottom): الإنشاءات والمرافق"
+    "control cut by its scroll area (bottom): الإنشاءات والمرافقالكهرباء"
    ]
   },
   {
@@ -553,6 +599,7 @@
    "name": "meter silent",
    "ok": true,
    "sample": [
+    "a11y: «» does not read all it shows: النقل 8 10",
     "a11y: meter «النقل» does not read its value"
    ]
   },
@@ -586,9 +633,9 @@
    "name": "grid chip wrong",
    "ok": true,
    "sample": [
+    "a11y: «توسعة شبكة الكهرباء: 800» does not read all it shows: 2",
     "the grid expansion must show its change (+1) on the chip and the level after it (8) in its cost line",
-    "a11y: «توسعة شبكة الكهرباء» does not read its numbers",
-    "brief text missing: الكهرباء +1"
+    "a11y: «توسعة شبكة الكهرباء» does not read its numbers"
    ]
   },
   {
@@ -621,6 +668,7 @@
    "name": "unit silent",
    "ok": true,
    "sample": [
+    "a11y: «» does not read all it shows: فرقة مشاة آلية المنطقة",
     "a11y: unit row 2 does not read its name, command and organization as one element"
    ]
   },
@@ -643,6 +691,7 @@
    "name": "unit movable here",
    "ok": true,
    "sample": [
+    "a11y: «فرقة مدرعة: المنطقة المر» does not read all it shows: تحريك",
     "unit row 1 has a control (units move on the map)"
    ]
   },
@@ -679,6 +728,7 @@
    "name": "label without the chip number",
    "ok": true,
    "sample": [
+    "a11y: «توسعة شبكة الكهرباء: 800» does not read all it shows: 1",
     "a11y: «توسعة شبكة الكهرباء» does not read its numbers"
    ]
   },
@@ -709,6 +759,7 @@
    "name": "unit label with the wrong command",
    "ok": true,
    "sample": [
+    "a11y: «فرقة مدرعة: الداخلية، ال» does not read all it shows: المنطقة المركزية",
     "a11y: unit row 1 does not read its name, command and organization as one element"
    ]
   },
@@ -806,9 +857,9 @@
    "name": "money unit (shown text)",
    "ok": true,
    "sample": [
+    "a11y: «توسعة شبكة الكهرباء: 800» does not read all it shows: مليار 0",
     "the grid expansion must show its change (+1) on the chip and the level after it (8) in its cost line",
-    "a11y: «توسعة شبكة الكهرباء» does not read its numbers",
-    "money unit: «0.8 مليار» (under 1 billion is written in millions)"
+    "a11y: «توسعة شبكة الكهرباء» does not read its numbers"
    ]
   },
   {

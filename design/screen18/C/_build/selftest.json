@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-07T18:08:43.603Z",
+ "ranAt": "2026-11-07T19:45:35.423Z",
  "inputs": {
   "files": [
    "index.html",
@@ -22,7 +22,7 @@
    "../../shared/map_mena_d1_overlay.svg",
    "map_overlay_cairo.svg"
   ],
-  "sha1": "4d3011277c00345ededc72c983ad7f1a4f13f013"
+  "sha1": "ce067c4fece35035b0a9c3f177d16e72385f82c0"
  },
  "cleanIssues": {
   "i16promax": [],
@@ -278,6 +278,14 @@
    "sample": [
     "white touch off: .r-tile color rgb(127, 233, 255) (want rgb(234, 242, 247))",
     "white touch off: .r-tile color rgb(127, 233, 255) (want rgb(234, 242, 247))"
+   ]
+  },
+  {
+   "name": "close says only إغلاق",
+   "ok": true,
+   "sample": [
+    "a11y: the close says only «إغلاق»",
+    "a11y: the close button does not say the choice waits"
    ]
   },
   {
@@ -558,6 +566,7 @@
    "name": "close says nothing",
    "ok": true,
    "sample": [
+    "a11y: the close says only «إغلاق»",
     "a11y: the close button does not say the choice waits"
    ]
   },

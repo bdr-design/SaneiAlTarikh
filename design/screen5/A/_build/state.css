@@ -59,7 +59,7 @@
   [data-states="1"] .s-short-1 .s-cost { color: var(--amber); }
   /* the mode chip as its icon alone where the header row needs the room for a long country name (T-024, capFit); its
      words stay for VoiceOver */
-  .cap-icon .r-cap { padding-inline: 5px; }
+  .cap-icon .r-cap { padding-inline: var(--s1); }   /* a 20 pt circle, the icon 5 pt from every edge */
   .cap-icon .r-cap .r-capt, .cap-icon .r-cap .lbl { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
   /* words for VoiceOver only (T-025): hidden from sight, read in place */
   .s-vh { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
