@@ -107,7 +107,17 @@ cut('  /* ---------- Province sheet ---------- */', '  /* Place the map so Cairo
 
 ''')
 sub('.then(fitTop).then(sizeSheet).then(placeSheet).then(fitSheet).then(placeMap)',
-    '.then(fitTop).then(sizeSheet).then(placeSheet).then(fitSheet).then(fitBody).then(placeMap)')
+    '.then(fitTop).then(sizeSheet).then(placeSheet).then(fitSheet).then(capFit).then(fitBody).then(placeMap)')
+# the mode chip gives way to the country's name (T-024): where the header row cannot hold the whole name and the chip,
+# the chip keeps its icon and its words leave the screen (still read by VoiceOver); Egypt's name never needs it
+sub('  function fitBody() {', '''  function capFit() {
+    var row = $('.r-hd .r-row'), nm = row && row.querySelector('.r-name');
+    if (!nm) return;
+    row.classList.remove('cap-icon');
+    if (nm.scrollWidth > nm.clientWidth + 0.5) row.classList.add('cap-icon');
+  }
+
+  function fitBody() {''')
 sub('  </defs>', '''    <symbol id="i-grid" viewBox="0 0 24 24"><rect x="3.5" y="4.5" width="17" height="15" rx="2"/><path d="M3.5 9.5h17"/><path d="M9.5 9.5v10"/></symbol>
     <symbol id="i-podium" viewBox="0 0 24 24"><path d="M4.5 10h15"/><path d="M6.5 10 8 20.5h8L17.5 10"/><path d="M12 10V6"/><circle cx="12" cy="4.5" r="1.5"/><path d="M10 14h4"/></symbol>
     <symbol id="i-briefcase" viewBox="0 0 24 24"><rect x="3.5" y="7.5" width="17" height="12" rx="2"/><path d="M9 7.5V5.75a1.25 1.25 0 0 1 1.25-1.25h3.5A1.25 1.25 0 0 1 15 5.75V7.5"/><path d="M3.5 12.5h17"/><path d="M12 11.5v2"/></symbol>

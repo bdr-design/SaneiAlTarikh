@@ -5,7 +5,7 @@ approved by Claude under the owner's delegation.
 
 ## Frame
 The approved panel from the right in the economy section (emerald identity, the dock's «الاقتصاد» open), three tabs
-(&tab=goods|industry|routes). Header: flag, «الأسواق», «مصر · السلع والصناعات والممرات», the economy emblem, close
+(&tab=goods|industry|routes). Header: flag, «الأسواق», «مصر · التجارة والصناعة», the economy emblem, close
 («إغلاق الأسواق، العودة إلى الاقتصاد»).
 
 ## السلع (goods)

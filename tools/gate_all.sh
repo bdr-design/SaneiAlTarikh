@@ -15,4 +15,6 @@ for s in "$@"; do
   (cd design/$s/_build && timeout 3000 node render.js 2>&1 | grep "issues per device"; if grep -q selftest render.js; then timeout 3000 node render.js --selftest 2>&1 | grep -E "MISSED|selftest OK|SELFTEST FAILED"; fi)
   echo "$s: $(python3 -I tools/check_screen.py design/$s 2>&1 | tail -1)"
 done
+# the second-country test (T-024): STRESS=1 runs it after the screens
+if [ "${STRESS:-0}" = "1" ]; then node tools/stress_names.js 2>&1 | grep -E "renders|^ISSUE" | tail -20; fi
 echo ALLDONE

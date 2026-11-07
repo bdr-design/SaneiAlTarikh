@@ -1,7 +1,7 @@
 {
  "se": {
   "device": "667x375 side 0 bottom 0 none",
-  "renderedAt": "2026-11-07T16:10:59.018Z",
+  "renderedAt": "2026-11-07T16:47:55.212Z",
   "inputs": {
    "files": [
     "index.html",
@@ -28,12 +28,52 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "1159bf31e5700545e0118bf439b5711ba9680bc0"
+   "sha1": "de0ac270abf276f309b479a76021d2aeff674245"
   },
-  "issues": [],
+  "issues": [
+   "overview: ellipsis on \"مصر\"",
+   "overview: clipped text (top): \"·\" 569.64..579.17 y 84..101",
+   "overview: ellipsis on \"القوات المسلحة\"",
+   "overview_end: ellipsis on \"مصر\"",
+   "overview_end: clipped text (top): \"·\" 569.64..579.17 y 84..101",
+   "overview_end: ellipsis on \"القوات المسلحة\"",
+   "forces: ellipsis on \"مصر\"",
+   "forces: clipped text (top): \"·\" 569.64..579.17 y 84..101",
+   "forces: ellipsis on \"القوات المسلحة\"",
+   "forces_end: ellipsis on \"مصر\"",
+   "forces_end: clipped text (top): \"·\" 569.64..579.17 y 84..101",
+   "forces_end: ellipsis on \"القوات المسلحة\"",
+   "equipment: ellipsis on \"مصر\"",
+   "equipment: clipped text (top): \"·\" 569.64..579.17 y 84..101",
+   "equipment: ellipsis on \"القوات المسلحة\"",
+   "equipment_end: ellipsis on \"مصر\"",
+   "equipment_end: clipped text (top): \"·\" 569.64..579.17 y 84..101",
+   "equipment_end: ellipsis on \"القوات المسلحة\"",
+   "wars: ellipsis on \"مصر\"",
+   "wars: clipped text (top): \"·\" 569.64..579.17 y 84..101",
+   "wars: ellipsis on \"القوات المسلحة\"",
+   "wars_end: ellipsis on \"مصر\"",
+   "wars_end: clipped text (top): \"·\" 569.64..579.17 y 84..101",
+   "wars_end: ellipsis on \"القوات المسلحة\"",
+   "forces_at86: ellipsis on \"مصر\"",
+   "forces_at86: clipped text (top): \"·\" 569.64..579.17 y 84..101",
+   "forces_at86: ellipsis on \"القوات المسلحة\"",
+   "forces_at172: ellipsis on \"مصر\"",
+   "forces_at172: clipped text (top): \"·\" 569.64..579.17 y 84..101",
+   "forces_at172: ellipsis on \"القوات المسلحة\"",
+   "forces_at258: ellipsis on \"مصر\"",
+   "forces_at258: clipped text (top): \"·\" 569.64..579.17 y 84..101",
+   "forces_at258: ellipsis on \"القوات المسلحة\"",
+   "equipment_at86: ellipsis on \"مصر\"",
+   "equipment_at86: clipped text (top): \"·\" 569.64..579.17 y 84..101",
+   "equipment_at86: ellipsis on \"القوات المسلحة\"",
+   "equipment_at172: ellipsis on \"مصر\"",
+   "equipment_at172: clipped text (top): \"·\" 569.64..579.17 y 84..101",
+   "equipment_at172: ellipsis on \"القوات المسلحة\""
+  ],
   "views": {
    "overview": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": true,
     "fit": {
      "top": {
@@ -596,7 +636,7 @@
     ]
    },
    "overview_end": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": true,
     "fit": {
      "top": {
@@ -1159,7 +1199,7 @@
     ]
    },
    "forces": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": true,
     "fit": {
      "top": {
@@ -1652,7 +1692,7 @@
     ]
    },
    "forces_end": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": true,
     "fit": {
      "top": {
@@ -2138,7 +2178,7 @@
     ]
    },
    "equipment": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": true,
     "fit": {
      "top": {
@@ -2638,7 +2678,7 @@
     ]
    },
    "equipment_end": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": true,
     "fit": {
      "top": {
@@ -3077,7 +3117,7 @@
     ]
    },
    "wars": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": true,
     "fit": {
      "top": {
@@ -3504,7 +3544,7 @@
     ]
    },
    "wars_end": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": true,
     "fit": {
      "top": {
@@ -3936,7 +3976,7 @@
     ]
    },
    "forces_at86": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": false,
     "fit": {
      "top": {
@@ -4396,7 +4436,7 @@
     ]
    },
    "forces_at172": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": false,
     "fit": {
      "top": {
@@ -4866,7 +4906,7 @@
     ]
    },
    "forces_at258": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": false,
     "fit": {
      "top": {
@@ -5339,7 +5379,7 @@
     ]
    },
    "equipment_at86": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": false,
     "fit": {
      "top": {
@@ -5799,7 +5839,7 @@
     ]
    },
    "equipment_at172": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": false,
     "fit": {
      "top": {
@@ -6267,24 +6307,24 @@
    "_build/se_wars_end.png"
   ],
   "pngSha1": {
-   "se.png": "40eea52719397e7d70654c8748481c2991a1df8f",
-   "_build/se_hit.png": "0938660194f51626c36a2d191b9e4c371a197c74",
-   "_build/se_overview_end.png": "40eea52719397e7d70654c8748481c2991a1df8f",
-   "_build/se_forces.png": "81cc04143ecf1e730aa2bcebced480ba3ee3bdec",
-   "_build/se_forces_end.png": "95329dbb8e82c510bc7d35982cd5d8426ff4874e",
-   "_build/se_equipment.png": "a67af6720f69923d896ab4f2c0cd83ba5a51da72",
-   "_build/se_equipment_end.png": "af81d1352641a787a94f0fc269ae9cdb7db27baf",
-   "_build/se_wars.png": "44ee14217f4d287bed60920b82ebd5edc398f0ca",
-   "_build/se_wars_end.png": "a2894a5b97ec7935761d2a19c870db1b1e09d0d5"
+   "se.png": "01c71e3477bdc59bdd12c5b9ab62d2871e41f567",
+   "_build/se_hit.png": "e6c9a53e07bc65e23c0eabfad4c1bdc753d6c136",
+   "_build/se_overview_end.png": "01c71e3477bdc59bdd12c5b9ab62d2871e41f567",
+   "_build/se_forces.png": "d9262391e60bc865832d43d0817750a0410f02bf",
+   "_build/se_forces_end.png": "29ac6728fcae44c2f397dc0d18570676fd394aa6",
+   "_build/se_equipment.png": "94f4a1c21745ebc791a3d614a85f06ea0b40bbbc",
+   "_build/se_equipment_end.png": "6273a126091f3473dad121b289a6511ccdcdecd3",
+   "_build/se_wars.png": "7ce4c0894d50930948d2829f8047f973f19fd71b",
+   "_build/se_wars_end.png": "161abc24d631b7e38520ebb2d78df6f4b689e78b"
   },
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 0
+  "issueCount": 39
  },
  "mini": {
   "device": "812x375 side 50 bottom 21 notch",
-  "renderedAt": "2026-11-07T16:11:20.600Z",
+  "renderedAt": "2026-11-07T16:48:21.450Z",
   "inputs": {
    "files": [
     "index.html",
@@ -6311,12 +6351,58 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "1159bf31e5700545e0118bf439b5711ba9680bc0"
+   "sha1": "de0ac270abf276f309b479a76021d2aeff674245"
   },
-  "issues": [],
+  "issues": [
+   "overview: ellipsis on \"مصر\"",
+   "overview: clipped text (top): \"·\" 672.64..682.17 y 84..101",
+   "overview: ellipsis on \"القوات المسلحة\"",
+   "overview_end: ellipsis on \"مصر\"",
+   "overview_end: clipped text (top): \"·\" 672.64..682.17 y 84..101",
+   "overview_end: ellipsis on \"القوات المسلحة\"",
+   "forces: ellipsis on \"مصر\"",
+   "forces: clipped text (top): \"·\" 672.64..682.17 y 84..101",
+   "forces: ellipsis on \"القوات المسلحة\"",
+   "forces_end: ellipsis on \"مصر\"",
+   "forces_end: clipped text (top): \"·\" 672.64..682.17 y 84..101",
+   "forces_end: ellipsis on \"القوات المسلحة\"",
+   "equipment: ellipsis on \"مصر\"",
+   "equipment: clipped text (top): \"·\" 672.64..682.17 y 84..101",
+   "equipment: ellipsis on \"القوات المسلحة\"",
+   "equipment_end: ellipsis on \"مصر\"",
+   "equipment_end: clipped text (top): \"·\" 672.64..682.17 y 84..101",
+   "equipment_end: ellipsis on \"القوات المسلحة\"",
+   "wars: ellipsis on \"مصر\"",
+   "wars: clipped text (top): \"·\" 672.64..682.17 y 84..101",
+   "wars: ellipsis on \"القوات المسلحة\"",
+   "wars_end: ellipsis on \"مصر\"",
+   "wars_end: clipped text (top): \"·\" 672.64..682.17 y 84..101",
+   "wars_end: ellipsis on \"القوات المسلحة\"",
+   "forces_at72: ellipsis on \"مصر\"",
+   "forces_at72: clipped text (top): \"·\" 672.64..682.17 y 84..101",
+   "forces_at72: ellipsis on \"القوات المسلحة\"",
+   "forces_at144: ellipsis on \"مصر\"",
+   "forces_at144: clipped text (top): \"·\" 672.64..682.17 y 84..101",
+   "forces_at144: ellipsis on \"القوات المسلحة\"",
+   "forces_at216: ellipsis on \"مصر\"",
+   "forces_at216: clipped text (top): \"·\" 672.64..682.17 y 84..101",
+   "forces_at216: ellipsis on \"القوات المسلحة\"",
+   "forces_at288: ellipsis on \"مصر\"",
+   "forces_at288: clipped text (top): \"·\" 672.64..682.17 y 84..101",
+   "forces_at288: ellipsis on \"القوات المسلحة\"",
+   "equipment_at72: ellipsis on \"مصر\"",
+   "equipment_at72: clipped text (top): \"·\" 672.64..682.17 y 84..101",
+   "equipment_at72: ellipsis on \"القوات المسلحة\"",
+   "equipment_at144: ellipsis on \"مصر\"",
+   "equipment_at144: clipped text (top): \"·\" 672.64..682.17 y 84..101",
+   "equipment_at144: ellipsis on \"القوات المسلحة\"",
+   "equipment_at216: ellipsis on \"مصر\"",
+   "equipment_at216: clipped text (top): \"·\" 672.64..682.17 y 84..101",
+   "equipment_at216: ellipsis on \"القوات المسلحة\""
+  ],
   "views": {
    "overview": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": true,
     "fit": {
      "top": {
@@ -6894,7 +6980,7 @@
     ]
    },
    "overview_end": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": true,
     "fit": {
      "top": {
@@ -7472,7 +7558,7 @@
     ]
    },
    "forces": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": true,
     "fit": {
      "top": {
@@ -7955,7 +8041,7 @@
     ]
    },
    "forces_end": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": true,
     "fit": {
      "top": {
@@ -8434,7 +8520,7 @@
     ]
    },
    "equipment": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": true,
     "fit": {
      "top": {
@@ -8924,7 +9010,7 @@
     ]
    },
    "equipment_end": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": true,
     "fit": {
      "top": {
@@ -9378,7 +9464,7 @@
     ]
    },
    "wars": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": true,
     "fit": {
      "top": {
@@ -9820,7 +9906,7 @@
     ]
    },
    "wars_end": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": true,
     "fit": {
      "top": {
@@ -10267,7 +10353,7 @@
     ]
    },
    "forces_at72": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": false,
     "fit": {
      "top": {
@@ -10752,7 +10838,7 @@
     ]
    },
    "forces_at144": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": false,
     "fit": {
      "top": {
@@ -11227,7 +11313,7 @@
     ]
    },
    "forces_at216": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": false,
     "fit": {
      "top": {
@@ -11712,7 +11798,7 @@
     ]
    },
    "forces_at288": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": false,
     "fit": {
      "top": {
@@ -12173,7 +12259,7 @@
     ]
    },
    "equipment_at72": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": false,
     "fit": {
      "top": {
@@ -12618,7 +12704,7 @@
     ]
    },
    "equipment_at144": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": false,
     "fit": {
      "top": {
@@ -13070,7 +13156,7 @@
     ]
    },
    "equipment_at216": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": false,
     "fit": {
      "top": {
@@ -13533,24 +13619,24 @@
    "_build/mini_wars_end.png"
   ],
   "pngSha1": {
-   "mini.png": "757e875974ff67e6ea84fc5b1ae337c897030957",
-   "_build/mini_hit.png": "b950ecbb95425efd928ecb9a4ea6f330a131d743",
-   "_build/mini_overview_end.png": "757e875974ff67e6ea84fc5b1ae337c897030957",
-   "_build/mini_forces.png": "676c27c5f4b2e69bcaee784a3bb85d40d681cfd5",
-   "_build/mini_forces_end.png": "d61210d079494ad921436d2b8566d9e3b6217d2b",
-   "_build/mini_equipment.png": "14e987dfd7cb9d60637428e98b1095268faf1233",
-   "_build/mini_equipment_end.png": "38cbaf57dd80d8f20566b7c9083f62e9a29c1d5a",
-   "_build/mini_wars.png": "0ab0f0b0abd20ca27d9b86ee2afeb7ab66dbf5aa",
-   "_build/mini_wars_end.png": "bf05fe8f6ba8a2df3d4e4a4a4a68d103e46c80ea"
+   "mini.png": "d402e37b0ddf6ba792447fe286fc32737c236fc5",
+   "_build/mini_hit.png": "d8f4120db911251e4b69b7aae843e1863567aa44",
+   "_build/mini_overview_end.png": "d402e37b0ddf6ba792447fe286fc32737c236fc5",
+   "_build/mini_forces.png": "44862cb79e239ad5732d9e62ff4f3f3419583702",
+   "_build/mini_forces_end.png": "8f5920c185b2dc26792be4d4d76ad85711a7304d",
+   "_build/mini_equipment.png": "0a5f422504e1393c97c61aff7bab759d8119259e",
+   "_build/mini_equipment_end.png": "fa0ec4dd5e2f48674760d27c6365808a371aa679",
+   "_build/mini_wars.png": "8d582f70281b9d68406a1da20871558b6d27fe89",
+   "_build/mini_wars_end.png": "febd69c8873f26ee1c4b5df196864d1b007986e8"
   },
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 0
+  "issueCount": 45
  },
  "i14": {
   "device": "844x390 side 47 bottom 21 notch",
-  "renderedAt": "2026-11-07T16:11:44.269Z",
+  "renderedAt": "2026-11-07T16:48:56.684Z",
   "inputs": {
    "files": [
     "index.html",
@@ -13577,12 +13663,52 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "1159bf31e5700545e0118bf439b5711ba9680bc0"
+   "sha1": "de0ac270abf276f309b479a76021d2aeff674245"
   },
-  "issues": [],
+  "issues": [
+   "overview: ellipsis on \"مصر\"",
+   "overview: clipped text (top): \"·\" 707.64..717.17 y 84..101",
+   "overview: ellipsis on \"القوات المسلحة\"",
+   "overview_end: ellipsis on \"مصر\"",
+   "overview_end: clipped text (top): \"·\" 707.64..717.17 y 84..101",
+   "overview_end: ellipsis on \"القوات المسلحة\"",
+   "forces: ellipsis on \"مصر\"",
+   "forces: clipped text (top): \"·\" 707.64..717.17 y 84..101",
+   "forces: ellipsis on \"القوات المسلحة\"",
+   "forces_end: ellipsis on \"مصر\"",
+   "forces_end: clipped text (top): \"·\" 707.64..717.17 y 84..101",
+   "forces_end: ellipsis on \"القوات المسلحة\"",
+   "equipment: ellipsis on \"مصر\"",
+   "equipment: clipped text (top): \"·\" 707.64..717.17 y 84..101",
+   "equipment: ellipsis on \"القوات المسلحة\"",
+   "equipment_end: ellipsis on \"مصر\"",
+   "equipment_end: clipped text (top): \"·\" 707.64..717.17 y 84..101",
+   "equipment_end: ellipsis on \"القوات المسلحة\"",
+   "wars: ellipsis on \"مصر\"",
+   "wars: clipped text (top): \"·\" 707.64..717.17 y 84..101",
+   "wars: ellipsis on \"القوات المسلحة\"",
+   "wars_end: ellipsis on \"مصر\"",
+   "wars_end: clipped text (top): \"·\" 707.64..717.17 y 84..101",
+   "wars_end: ellipsis on \"القوات المسلحة\"",
+   "forces_at87: ellipsis on \"مصر\"",
+   "forces_at87: clipped text (top): \"·\" 707.64..717.17 y 84..101",
+   "forces_at87: ellipsis on \"القوات المسلحة\"",
+   "forces_at174: ellipsis on \"مصر\"",
+   "forces_at174: clipped text (top): \"·\" 707.64..717.17 y 84..101",
+   "forces_at174: ellipsis on \"القوات المسلحة\"",
+   "forces_at261: ellipsis on \"مصر\"",
+   "forces_at261: clipped text (top): \"·\" 707.64..717.17 y 84..101",
+   "forces_at261: ellipsis on \"القوات المسلحة\"",
+   "equipment_at87: ellipsis on \"مصر\"",
+   "equipment_at87: clipped text (top): \"·\" 707.64..717.17 y 84..101",
+   "equipment_at87: ellipsis on \"القوات المسلحة\"",
+   "equipment_at174: ellipsis on \"مصر\"",
+   "equipment_at174: clipped text (top): \"·\" 707.64..717.17 y 84..101",
+   "equipment_at174: ellipsis on \"القوات المسلحة\""
+  ],
   "views": {
    "overview": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": true,
     "fit": {
      "top": {
@@ -14262,7 +14388,7 @@
     ]
    },
    "overview_end": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": true,
     "fit": {
      "top": {
@@ -14942,7 +15068,7 @@
     ]
    },
    "forces": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": true,
     "fit": {
      "top": {
@@ -15552,7 +15678,7 @@
     ]
    },
    "forces_end": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": true,
     "fit": {
      "top": {
@@ -16155,7 +16281,7 @@
     ]
    },
    "equipment": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": true,
     "fit": {
      "top": {
@@ -16772,7 +16898,7 @@
     ]
    },
    "equipment_end": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": true,
     "fit": {
      "top": {
@@ -17338,7 +17464,7 @@
     ]
    },
    "wars": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": true,
     "fit": {
      "top": {
@@ -17882,7 +18008,7 @@
     ]
    },
    "wars_end": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": true,
     "fit": {
      "top": {
@@ -18431,7 +18557,7 @@
     ]
    },
    "forces_at87": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": false,
     "fit": {
      "top": {
@@ -19018,7 +19144,7 @@
     ]
    },
    "forces_at174": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": false,
     "fit": {
      "top": {
@@ -19590,7 +19716,7 @@
     ]
    },
    "forces_at261": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": false,
     "fit": {
      "top": {
@@ -20175,7 +20301,7 @@
     ]
    },
    "equipment_at87": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": false,
     "fit": {
      "top": {
@@ -20742,7 +20868,7 @@
     ]
    },
    "equipment_at174": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": false,
     "fit": {
      "top": {
@@ -21327,24 +21453,24 @@
    "_build/i14_wars_end.png"
   ],
   "pngSha1": {
-   "i14.png": "8fa95e3fbc40f2d642600ec42b987cf70a16678f",
-   "_build/i14_hit.png": "b55909a789681032ae17cbfbcda7e683feaf8383",
-   "_build/i14_overview_end.png": "8fa95e3fbc40f2d642600ec42b987cf70a16678f",
-   "_build/i14_forces.png": "f17f87136b698de333c6221f4f1dc9129974e1b4",
-   "_build/i14_forces_end.png": "fa2db9906e243df6018fe971a85c83f18e034cfd",
-   "_build/i14_equipment.png": "b792da846ad916241f4e3c0fe7f7565f5f358ad2",
-   "_build/i14_equipment_end.png": "719fa9154a1674f340c9b8228a0e2767b7e907c0",
-   "_build/i14_wars.png": "168ee317cebad312263435196b3ea0564ef736ad",
-   "_build/i14_wars_end.png": "b0c968a66572da827b763149ea4763762870bb3d"
+   "i14.png": "8286a14b6f18531193ee316b3299c3fc0ca106b1",
+   "_build/i14_hit.png": "ed8b4698a94b62798b81dd6a56f180a81f3f9fee",
+   "_build/i14_overview_end.png": "8286a14b6f18531193ee316b3299c3fc0ca106b1",
+   "_build/i14_forces.png": "9c63f9709b1ec89a86116dc618765b5339180d08",
+   "_build/i14_forces_end.png": "42486cb5b9ba69c549f021f1e177f2608b7aa68e",
+   "_build/i14_equipment.png": "f0eb5bde7621fe68ceffd16ec36c1cc5a6d1405c",
+   "_build/i14_equipment_end.png": "49bc38a2918df69cc835d80128f04bdb4c1fc0e3",
+   "_build/i14_wars.png": "ed763dc0d3055b0c6c6663ac7248c8d1f5f6ba27",
+   "_build/i14_wars_end.png": "ad5d25e553edda89ccd7df839ad8fe2e76dc216b"
   },
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 0
+  "issueCount": 39
  },
  "i16": {
   "device": "852x393 side 59 bottom 21 island",
-  "renderedAt": "2026-11-07T16:12:06.432Z",
+  "renderedAt": "2026-11-07T16:49:27.059Z",
   "inputs": {
    "files": [
     "index.html",
@@ -21371,12 +21497,52 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "1159bf31e5700545e0118bf439b5711ba9680bc0"
+   "sha1": "de0ac270abf276f309b479a76021d2aeff674245"
   },
-  "issues": [],
+  "issues": [
+   "overview: ellipsis on \"مصر\"",
+   "overview: clipped text (top): \"·\" 703.64..713.17 y 84..101",
+   "overview: ellipsis on \"القوات المسلحة\"",
+   "overview_end: ellipsis on \"مصر\"",
+   "overview_end: clipped text (top): \"·\" 703.64..713.17 y 84..101",
+   "overview_end: ellipsis on \"القوات المسلحة\"",
+   "forces: ellipsis on \"مصر\"",
+   "forces: clipped text (top): \"·\" 703.64..713.17 y 84..101",
+   "forces: ellipsis on \"القوات المسلحة\"",
+   "forces_end: ellipsis on \"مصر\"",
+   "forces_end: clipped text (top): \"·\" 703.64..713.17 y 84..101",
+   "forces_end: ellipsis on \"القوات المسلحة\"",
+   "equipment: ellipsis on \"مصر\"",
+   "equipment: clipped text (top): \"·\" 703.64..713.17 y 84..101",
+   "equipment: ellipsis on \"القوات المسلحة\"",
+   "equipment_end: ellipsis on \"مصر\"",
+   "equipment_end: clipped text (top): \"·\" 703.64..713.17 y 84..101",
+   "equipment_end: ellipsis on \"القوات المسلحة\"",
+   "wars: ellipsis on \"مصر\"",
+   "wars: clipped text (top): \"·\" 703.64..713.17 y 84..101",
+   "wars: ellipsis on \"القوات المسلحة\"",
+   "wars_end: ellipsis on \"مصر\"",
+   "wars_end: clipped text (top): \"·\" 703.64..713.17 y 84..101",
+   "wars_end: ellipsis on \"القوات المسلحة\"",
+   "forces_at90: ellipsis on \"مصر\"",
+   "forces_at90: clipped text (top): \"·\" 703.64..713.17 y 84..101",
+   "forces_at90: ellipsis on \"القوات المسلحة\"",
+   "forces_at180: ellipsis on \"مصر\"",
+   "forces_at180: clipped text (top): \"·\" 703.64..713.17 y 84..101",
+   "forces_at180: ellipsis on \"القوات المسلحة\"",
+   "forces_at270: ellipsis on \"مصر\"",
+   "forces_at270: clipped text (top): \"·\" 703.64..713.17 y 84..101",
+   "forces_at270: ellipsis on \"القوات المسلحة\"",
+   "equipment_at90: ellipsis on \"مصر\"",
+   "equipment_at90: clipped text (top): \"·\" 703.64..713.17 y 84..101",
+   "equipment_at90: ellipsis on \"القوات المسلحة\"",
+   "equipment_at180: ellipsis on \"مصر\"",
+   "equipment_at180: clipped text (top): \"·\" 703.64..713.17 y 84..101",
+   "equipment_at180: ellipsis on \"القوات المسلحة\""
+  ],
   "views": {
    "overview": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": true,
     "fit": {
      "top": {
@@ -22045,7 +22211,7 @@
     ]
    },
    "overview_end": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": true,
     "fit": {
      "top": {
@@ -22714,7 +22880,7 @@
     ]
    },
    "forces": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": true,
     "fit": {
      "top": {
@@ -23313,7 +23479,7 @@
     ]
    },
    "forces_end": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": true,
     "fit": {
      "top": {
@@ -23910,7 +24076,7 @@
     ]
    },
    "equipment": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": true,
     "fit": {
      "top": {
@@ -24516,7 +24682,7 @@
     ]
    },
    "equipment_end": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": true,
     "fit": {
      "top": {
@@ -25081,7 +25247,7 @@
     ]
    },
    "wars": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": true,
     "fit": {
      "top": {
@@ -25619,7 +25785,7 @@
     ]
    },
    "wars_end": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": true,
     "fit": {
      "top": {
@@ -26157,7 +26323,7 @@
     ]
    },
    "forces_at90": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": false,
     "fit": {
      "top": {
@@ -26733,7 +26899,7 @@
     ]
    },
    "forces_at180": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": false,
     "fit": {
      "top": {
@@ -27309,7 +27475,7 @@
     ]
    },
    "forces_at270": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": false,
     "fit": {
      "top": {
@@ -27861,7 +28027,7 @@
     ]
    },
    "equipment_at90": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": false,
     "fit": {
      "top": {
@@ -28422,7 +28588,7 @@
     ]
    },
    "equipment_at180": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": false,
     "fit": {
      "top": {
@@ -29011,24 +29177,24 @@
    "_build/i16_wars_end.png"
   ],
   "pngSha1": {
-   "i16.png": "723846713b8ea5aba643fe01337c2f00d4ac0968",
-   "_build/i16_hit.png": "08148e1a0d6b8ee7f475a792023592fee273e7e9",
-   "_build/i16_overview_end.png": "723846713b8ea5aba643fe01337c2f00d4ac0968",
-   "_build/i16_forces.png": "f4589e8050852547886524610b1228667eead29e",
-   "_build/i16_forces_end.png": "8568c5df9aa07d6adea9857269f96ef8a3122770",
-   "_build/i16_equipment.png": "797d70bf1914ea02635de5d482a03a54ac00fd83",
-   "_build/i16_equipment_end.png": "8c3db9b8d22b11562e608a9b38341fc65572e246",
-   "_build/i16_wars.png": "980e86b59fec30ec3ae8ad86e499166969c3c8b6",
-   "_build/i16_wars_end.png": "deb895acef7717b9a0e10cb745e57a11ba334948"
+   "i16.png": "278894e40802c44bca25a80f73f6fddb5282817e",
+   "_build/i16_hit.png": "8f14219b39c916d7b3b327aa93df0d3e84dc9f87",
+   "_build/i16_overview_end.png": "278894e40802c44bca25a80f73f6fddb5282817e",
+   "_build/i16_forces.png": "80e700576d336a71a4ca525e6081d7d6d3faf43a",
+   "_build/i16_forces_end.png": "1628597df53ff24676451053836c347f39d9f572",
+   "_build/i16_equipment.png": "04a069c77d736b8585a4d23e35ac510babcdbb04",
+   "_build/i16_equipment_end.png": "ee4e68e6ab4eab98d9f4ea5e94c84eb68be207d1",
+   "_build/i16_wars.png": "c705f4acb86f7ffc202561469ca8dfe17d8c9841",
+   "_build/i16_wars_end.png": "0919b1f1fbe1f93a9e81526c2166796c1bfb3152"
   },
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 0
+  "issueCount": 39
  },
  "i16pro": {
   "device": "874x402 side 62 bottom 21 island",
-  "renderedAt": "2026-11-07T16:12:29.168Z",
+  "renderedAt": "2026-11-07T16:49:58.006Z",
   "inputs": {
    "files": [
     "index.html",
@@ -29055,12 +29221,52 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "1159bf31e5700545e0118bf439b5711ba9680bc0"
+   "sha1": "de0ac270abf276f309b479a76021d2aeff674245"
   },
-  "issues": [],
+  "issues": [
+   "overview: ellipsis on \"مصر\"",
+   "overview: clipped text (top): \"·\" 722.64..732.17 y 84..101",
+   "overview: ellipsis on \"القوات المسلحة\"",
+   "overview_end: ellipsis on \"مصر\"",
+   "overview_end: clipped text (top): \"·\" 722.64..732.17 y 84..101",
+   "overview_end: ellipsis on \"القوات المسلحة\"",
+   "forces: ellipsis on \"مصر\"",
+   "forces: clipped text (top): \"·\" 722.64..732.17 y 84..101",
+   "forces: ellipsis on \"القوات المسلحة\"",
+   "forces_end: ellipsis on \"مصر\"",
+   "forces_end: clipped text (top): \"·\" 722.64..732.17 y 84..101",
+   "forces_end: ellipsis on \"القوات المسلحة\"",
+   "equipment: ellipsis on \"مصر\"",
+   "equipment: clipped text (top): \"·\" 722.64..732.17 y 84..101",
+   "equipment: ellipsis on \"القوات المسلحة\"",
+   "equipment_end: ellipsis on \"مصر\"",
+   "equipment_end: clipped text (top): \"·\" 722.64..732.17 y 84..101",
+   "equipment_end: ellipsis on \"القوات المسلحة\"",
+   "wars: ellipsis on \"مصر\"",
+   "wars: clipped text (top): \"·\" 722.64..732.17 y 84..101",
+   "wars: ellipsis on \"القوات المسلحة\"",
+   "wars_end: ellipsis on \"مصر\"",
+   "wars_end: clipped text (top): \"·\" 722.64..732.17 y 84..101",
+   "wars_end: ellipsis on \"القوات المسلحة\"",
+   "forces_at99: ellipsis on \"مصر\"",
+   "forces_at99: clipped text (top): \"·\" 722.64..732.17 y 84..101",
+   "forces_at99: ellipsis on \"القوات المسلحة\"",
+   "forces_at198: ellipsis on \"مصر\"",
+   "forces_at198: clipped text (top): \"·\" 722.64..732.17 y 84..101",
+   "forces_at198: ellipsis on \"القوات المسلحة\"",
+   "forces_at297: ellipsis on \"مصر\"",
+   "forces_at297: clipped text (top): \"·\" 722.64..732.17 y 84..101",
+   "forces_at297: ellipsis on \"القوات المسلحة\"",
+   "equipment_at99: ellipsis on \"مصر\"",
+   "equipment_at99: clipped text (top): \"·\" 722.64..732.17 y 84..101",
+   "equipment_at99: ellipsis on \"القوات المسلحة\"",
+   "equipment_at198: ellipsis on \"مصر\"",
+   "equipment_at198: clipped text (top): \"·\" 722.64..732.17 y 84..101",
+   "equipment_at198: ellipsis on \"القوات المسلحة\""
+  ],
   "views": {
    "overview": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": true,
     "fit": {
      "top": {
@@ -29740,7 +29946,7 @@
     ]
    },
    "overview_end": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": true,
     "fit": {
      "top": {
@@ -30420,7 +30626,7 @@
     ]
    },
    "forces": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": true,
     "fit": {
      "top": {
@@ -31037,7 +31243,7 @@
     ]
    },
    "forces_end": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": true,
     "fit": {
      "top": {
@@ -31650,7 +31856,7 @@
     ]
    },
    "equipment": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": true,
     "fit": {
      "top": {
@@ -32282,7 +32488,7 @@
     ]
    },
    "equipment_end": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": true,
     "fit": {
      "top": {
@@ -32858,7 +33064,7 @@
     ]
    },
    "wars": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": true,
     "fit": {
      "top": {
@@ -33407,7 +33613,7 @@
     ]
    },
    "wars_end": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": true,
     "fit": {
      "top": {
@@ -33961,7 +34167,7 @@
     ]
    },
    "forces_at99": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": false,
     "fit": {
      "top": {
@@ -34570,7 +34776,7 @@
     ]
    },
    "forces_at198": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": false,
     "fit": {
      "top": {
@@ -35172,7 +35378,7 @@
     ]
    },
    "forces_at297": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": false,
     "fit": {
      "top": {
@@ -35740,7 +35946,7 @@
     ]
    },
    "equipment_at99": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": false,
     "fit": {
      "top": {
@@ -36319,7 +36525,7 @@
     ]
    },
    "equipment_at198": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": false,
     "fit": {
      "top": {
@@ -36904,24 +37110,24 @@
    "_build/i16pro_wars_end.png"
   ],
   "pngSha1": {
-   "i16pro.png": "cf1253bf1d9788aabf7de6f7686e03a5e0f8038d",
-   "_build/i16pro_hit.png": "6b1ad334a59f6129de8d3355535661ed302a9973",
-   "_build/i16pro_overview_end.png": "cf1253bf1d9788aabf7de6f7686e03a5e0f8038d",
-   "_build/i16pro_forces.png": "3098a1dc3ec6dcbb76375582cc426e131d818724",
-   "_build/i16pro_forces_end.png": "c2f2a5a463342d534e9585c89426469060874ab7",
-   "_build/i16pro_equipment.png": "031f0b48696e3528768612abfdfe1b4a4e4147ea",
-   "_build/i16pro_equipment_end.png": "5b96b7628704ee7ff6f9e183eb8a8c85414ccbe7",
-   "_build/i16pro_wars.png": "63eccd96f1bd08227fe0e5783ca85fb2c280e9e6",
-   "_build/i16pro_wars_end.png": "ff9e84100a9d92df296ba9a03a02afdd3a86da64"
+   "i16pro.png": "8d3a6626b489a5df065e12db7a47baa72c6f1cce",
+   "_build/i16pro_hit.png": "a562280c759131bf8b5b873d57f8324f7d384d83",
+   "_build/i16pro_overview_end.png": "8d3a6626b489a5df065e12db7a47baa72c6f1cce",
+   "_build/i16pro_forces.png": "aa6b184387fcc87267ce89c14088f8546dfcc869",
+   "_build/i16pro_forces_end.png": "47b20e8c1fda6df8f0741b3ea901b49c08345f74",
+   "_build/i16pro_equipment.png": "ae119c1bc5aaa0a96753364e0ad32f75d9691ae2",
+   "_build/i16pro_equipment_end.png": "f579f30b7616c518b0cea227813202a2c291334f",
+   "_build/i16pro_wars.png": "7d2e722cc206e68157d6cad38303574a3b284d0a",
+   "_build/i16pro_wars_end.png": "53fc26b5e63573eb39f6103614b4cebbff71b653"
   },
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 0
+  "issueCount": 39
  },
  "i11": {
   "device": "896x414 side 48 bottom 21 notch",
-  "renderedAt": "2026-11-07T16:12:51.783Z",
+  "renderedAt": "2026-11-07T16:50:34.020Z",
   "inputs": {
    "files": [
     "index.html",
@@ -36948,12 +37154,46 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "1159bf31e5700545e0118bf439b5711ba9680bc0"
+   "sha1": "de0ac270abf276f309b479a76021d2aeff674245"
   },
-  "issues": [],
+  "issues": [
+   "overview: ellipsis on \"مصر\"",
+   "overview: clipped text (top): \"·\" 758.64..768.17 y 84..101",
+   "overview: ellipsis on \"القوات المسلحة\"",
+   "overview_end: ellipsis on \"مصر\"",
+   "overview_end: clipped text (top): \"·\" 758.64..768.17 y 84..101",
+   "overview_end: ellipsis on \"القوات المسلحة\"",
+   "forces: ellipsis on \"مصر\"",
+   "forces: clipped text (top): \"·\" 758.64..768.17 y 84..101",
+   "forces: ellipsis on \"القوات المسلحة\"",
+   "forces_end: ellipsis on \"مصر\"",
+   "forces_end: clipped text (top): \"·\" 758.64..768.17 y 84..101",
+   "forces_end: ellipsis on \"القوات المسلحة\"",
+   "equipment: ellipsis on \"مصر\"",
+   "equipment: clipped text (top): \"·\" 758.64..768.17 y 84..101",
+   "equipment: ellipsis on \"القوات المسلحة\"",
+   "equipment_end: ellipsis on \"مصر\"",
+   "equipment_end: clipped text (top): \"·\" 758.64..768.17 y 84..101",
+   "equipment_end: ellipsis on \"القوات المسلحة\"",
+   "wars: ellipsis on \"مصر\"",
+   "wars: clipped text (top): \"·\" 758.64..768.17 y 84..101",
+   "wars: ellipsis on \"القوات المسلحة\"",
+   "wars_end: ellipsis on \"مصر\"",
+   "wars_end: clipped text (top): \"·\" 758.64..768.17 y 84..101",
+   "wars_end: ellipsis on \"القوات المسلحة\"",
+   "forces_at111: ellipsis on \"مصر\"",
+   "forces_at111: clipped text (top): \"·\" 758.64..768.17 y 84..101",
+   "forces_at111: ellipsis on \"القوات المسلحة\"",
+   "forces_at222: ellipsis on \"مصر\"",
+   "forces_at222: clipped text (top): \"·\" 758.64..768.17 y 84..101",
+   "forces_at222: ellipsis on \"القوات المسلحة\"",
+   "equipment_at111: ellipsis on \"مصر\"",
+   "equipment_at111: clipped text (top): \"·\" 758.64..768.17 y 84..101",
+   "equipment_at111: ellipsis on \"القوات المسلحة\""
+  ],
   "views": {
    "overview": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": true,
     "fit": {
      "top": {
@@ -37632,7 +37872,7 @@
     ]
    },
    "overview_end": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": true,
     "fit": {
      "top": {
@@ -38311,7 +38551,7 @@
     ]
    },
    "forces": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": true,
     "fit": {
      "top": {
@@ -38927,7 +39167,7 @@
     ]
    },
    "forces_end": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": true,
     "fit": {
      "top": {
@@ -39544,7 +39784,7 @@
     ]
    },
    "equipment": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": true,
     "fit": {
      "top": {
@@ -40175,7 +40415,7 @@
     ]
    },
    "equipment_end": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": true,
     "fit": {
      "top": {
@@ -40750,7 +40990,7 @@
     ]
    },
    "wars": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": true,
     "fit": {
      "top": {
@@ -41298,7 +41538,7 @@
     ]
    },
    "wars_end": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": true,
     "fit": {
      "top": {
@@ -41851,7 +42091,7 @@
     ]
    },
    "forces_at111": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": false,
     "fit": {
      "top": {
@@ -42469,7 +42709,7 @@
     ]
    },
    "forces_at222": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": false,
     "fit": {
      "top": {
@@ -43063,7 +43303,7 @@
     ]
    },
    "equipment_at111": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": false,
     "fit": {
      "top": {
@@ -43675,24 +43915,24 @@
    "_build/i11_wars_end.png"
   ],
   "pngSha1": {
-   "i11.png": "58962cb697e6ea1851aa64e5e65eae00dc08f118",
-   "_build/i11_hit.png": "7a5438076bf89e49136c6fab60c9b5bea5aea84f",
-   "_build/i11_overview_end.png": "58962cb697e6ea1851aa64e5e65eae00dc08f118",
-   "_build/i11_forces.png": "a32cb194fc759f8c358c04c60f3ebab20b72a25d",
-   "_build/i11_forces_end.png": "7156631f0aa317b23bbdcdbfbfe85d3f500e946b",
-   "_build/i11_equipment.png": "96e296ab59988ff4eebff4407cf9d71946f64020",
-   "_build/i11_equipment_end.png": "228804e4c0ed97d0aea63b6585fae07960c629a5",
-   "_build/i11_wars.png": "44596f4a7ce6dca2198c3f752ece2e6ab6dd2e2a",
-   "_build/i11_wars_end.png": "c00ce5056919d1c1396908219ded72cc643692a9"
+   "i11.png": "0d76f1e96797f77a4fb02cc9dac8377a51c96e05",
+   "_build/i11_hit.png": "02b404a687c7b66d6ab5e76d985b332ed28053c1",
+   "_build/i11_overview_end.png": "0d76f1e96797f77a4fb02cc9dac8377a51c96e05",
+   "_build/i11_forces.png": "c8222dac245abeee361c3ac7e5d34b6de09f5e35",
+   "_build/i11_forces_end.png": "1a61897477f36dc9317703afaca1b72528795de6",
+   "_build/i11_equipment.png": "eede60c26e29da399e568b37acb526a7fce07710",
+   "_build/i11_equipment_end.png": "fe5a36fe16c4480b453b6e32bcd58c33f0812b05",
+   "_build/i11_wars.png": "b1cba173a8720036f9083f67bfca52a32dc48258",
+   "_build/i11_wars_end.png": "8f2dc37e07e676380a7b5ebee20165b6c693f8b5"
   },
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 0
+  "issueCount": 33
  },
  "i16promax": {
   "device": "956x440 side 62 bottom 21 island",
-  "renderedAt": "2026-11-07T16:13:13.240Z",
+  "renderedAt": "2026-11-07T16:51:07.554Z",
   "inputs": {
    "files": [
     "index.html",
@@ -43719,12 +43959,43 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "1159bf31e5700545e0118bf439b5711ba9680bc0"
+   "sha1": "de0ac270abf276f309b479a76021d2aeff674245"
   },
-  "issues": [],
+  "issues": [
+   "overview: ellipsis on \"مصر\"",
+   "overview: clipped text (top): \"·\" 804.64..814.17 y 84..101",
+   "overview: ellipsis on \"القوات المسلحة\"",
+   "overview_end: ellipsis on \"مصر\"",
+   "overview_end: clipped text (top): \"·\" 804.64..814.17 y 84..101",
+   "overview_end: ellipsis on \"القوات المسلحة\"",
+   "forces: ellipsis on \"مصر\"",
+   "forces: clipped text (top): \"·\" 804.64..814.17 y 84..101",
+   "forces: ellipsis on \"القوات المسلحة\"",
+   "forces_end: ellipsis on \"مصر\"",
+   "forces_end: clipped text (top): \"·\" 804.64..814.17 y 84..101",
+   "forces_end: ellipsis on \"القوات المسلحة\"",
+   "equipment: ellipsis on \"مصر\"",
+   "equipment: clipped text (top): \"·\" 804.64..814.17 y 84..101",
+   "equipment: ellipsis on \"القوات المسلحة\"",
+   "equipment_end: ellipsis on \"مصر\"",
+   "equipment_end: clipped text (top): \"·\" 804.64..814.17 y 84..101",
+   "equipment_end: ellipsis on \"القوات المسلحة\"",
+   "wars: ellipsis on \"مصر\"",
+   "wars: clipped text (top): \"·\" 804.64..814.17 y 84..101",
+   "wars: ellipsis on \"القوات المسلحة\"",
+   "wars_end: ellipsis on \"مصر\"",
+   "wars_end: clipped text (top): \"·\" 804.64..814.17 y 84..101",
+   "wars_end: ellipsis on \"القوات المسلحة\"",
+   "forces_at137: ellipsis on \"مصر\"",
+   "forces_at137: clipped text (top): \"·\" 804.64..814.17 y 84..101",
+   "forces_at137: ellipsis on \"القوات المسلحة\"",
+   "equipment_at137: ellipsis on \"مصر\"",
+   "equipment_at137: clipped text (top): \"·\" 804.64..814.17 y 84..101",
+   "equipment_at137: ellipsis on \"القوات المسلحة\""
+  ],
   "views": {
    "overview": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": true,
     "fit": {
      "top": {
@@ -44403,7 +44674,7 @@
     ]
    },
    "overview_end": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": true,
     "fit": {
      "top": {
@@ -45082,7 +45353,7 @@
     ]
    },
    "forces": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": true,
     "fit": {
      "top": {
@@ -45728,7 +45999,7 @@
     ]
    },
    "forces_end": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": true,
     "fit": {
      "top": {
@@ -46372,7 +46643,7 @@
     ]
    },
    "equipment": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": true,
     "fit": {
      "top": {
@@ -47008,7 +47279,7 @@
     ]
    },
    "equipment_end": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": true,
     "fit": {
      "top": {
@@ -47613,7 +47884,7 @@
     ]
    },
    "wars": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": true,
     "fit": {
      "top": {
@@ -48171,7 +48442,7 @@
     ]
    },
    "wars_end": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": true,
     "fit": {
      "top": {
@@ -48729,7 +49000,7 @@
     ]
    },
    "forces_at137": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": false,
     "fit": {
      "top": {
@@ -49352,7 +49623,7 @@
     ]
    },
    "equipment_at137": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": false,
     "fit": {
      "top": {
@@ -49956,19 +50227,19 @@
    "_build/i16promax_wars_end.png"
   ],
   "pngSha1": {
-   "i16promax.png": "2b6a9ff69798cb5f3f8c5bfd6240fc791c07948b",
-   "_build/i16promax_hit.png": "0699ba3d1bca485173767d6c8ad4c7d3ee3e27a2",
-   "_build/i16promax_overview_end.png": "2b6a9ff69798cb5f3f8c5bfd6240fc791c07948b",
-   "_build/i16promax_forces.png": "d2a0351393bc143d0abb74ce5ebd7bffdc04294e",
-   "_build/i16promax_forces_end.png": "0c84c6dacc946664e91aef977d4b65bd698e605e",
-   "_build/i16promax_equipment.png": "7e52a03afc42d9ee38640c01ac4c5fa4fc2e4097",
-   "_build/i16promax_equipment_end.png": "b8bdfb9ac5f8bbfba4ad8304c105c64784508010",
-   "_build/i16promax_wars.png": "f4f7bf12a7117a7e846c9bbc8849b253881ae5b5",
-   "_build/i16promax_wars_end.png": "f4f7bf12a7117a7e846c9bbc8849b253881ae5b5"
+   "i16promax.png": "1cd84ad7d6272667f8cd398e3698eec77ef28865",
+   "_build/i16promax_hit.png": "7414816b0ed0ca6a09c96a9c236836af5571370d",
+   "_build/i16promax_overview_end.png": "1cd84ad7d6272667f8cd398e3698eec77ef28865",
+   "_build/i16promax_forces.png": "4b4eb1f8803445c16666c3aea4ba9493ddba69b9",
+   "_build/i16promax_forces_end.png": "41fb5f281e16d18165785f26cb03f639580c0446",
+   "_build/i16promax_equipment.png": "e60ec7cd1ebde4d4402450531aaff648b82dc119",
+   "_build/i16promax_equipment_end.png": "fa45e3f7544a4c49067183eb8bb6353b6c1b8116",
+   "_build/i16promax_wars.png": "2cef568f3bbd08443d7c919b37bfdb6c3b996a3c",
+   "_build/i16promax_wars_end.png": "2cef568f3bbd08443d7c919b37bfdb6c3b996a3c"
   },
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 0
+  "issueCount": 30
  }
 }

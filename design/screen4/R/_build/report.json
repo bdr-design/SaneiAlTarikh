@@ -1,7 +1,7 @@
 {
  "se": {
   "device": "667x375 side 0 bottom 0 none",
-  "renderedAt": "2026-11-07T15:28:14.630Z",
+  "renderedAt": "2026-11-07T16:44:46.764Z",
   "inputs": {
    "files": [
     "index.html",
@@ -21,12 +21,61 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "8ed3ef91f8b2792523d8a7ea4fa03e791073121b"
+   "sha1": "3ac93368a1a3185abc391d6cbec3b8a7949cc6b6"
   },
-  "issues": [],
+  "issues": [
+   "card: ellipsis on \"مصر\"",
+   "card: clipped text (top): \"·\" 569.64..579.17 y 84..101",
+   "card: ellipsis on \"محافظة\"",
+   "govern: ellipsis on \"مصر\"",
+   "govern: clipped text (top): \"·\" 569.64..579.17 y 84..101",
+   "govern: ellipsis on \"محافظة\"",
+   "govern_end: ellipsis on \"مصر\"",
+   "govern_end: clipped text (top): \"·\" 569.64..579.17 y 84..101",
+   "govern_end: ellipsis on \"محافظة\"",
+   "build: ellipsis on \"مصر\"",
+   "build: clipped text (top): \"·\" 569.64..579.17 y 84..101",
+   "build: ellipsis on \"محافظة\"",
+   "build_end: ellipsis on \"مصر\"",
+   "build_end: clipped text (top): \"·\" 569.64..579.17 y 84..101",
+   "build_end: ellipsis on \"محافظة\"",
+   "forces: ellipsis on \"مصر\"",
+   "forces: clipped text (top): \"·\" 569.64..579.17 y 84..101",
+   "forces: ellipsis on \"محافظة\"",
+   "forces_end: ellipsis on \"مصر\"",
+   "forces_end: clipped text (top): \"·\" 569.64..579.17 y 84..101",
+   "forces_end: ellipsis on \"محافظة\"",
+   "policy: ellipsis on \"مصر\"",
+   "policy: clipped text (top): \"·\" 569.64..579.17 y 84..101",
+   "policy: ellipsis on \"محافظة\"",
+   "policy_end: ellipsis on \"مصر\"",
+   "policy_end: clipped text (top): \"·\" 569.64..579.17 y 84..101",
+   "policy_end: ellipsis on \"محافظة\"",
+   "govern_at86: ellipsis on \"مصر\"",
+   "govern_at86: clipped text (top): \"·\" 569.64..579.17 y 84..101",
+   "govern_at86: ellipsis on \"محافظة\"",
+   "govern_at172: ellipsis on \"مصر\"",
+   "govern_at172: clipped text (top): \"·\" 569.64..579.17 y 84..101",
+   "govern_at172: ellipsis on \"محافظة\"",
+   "build_at86: ellipsis on \"مصر\"",
+   "build_at86: clipped text (top): \"·\" 569.64..579.17 y 84..101",
+   "build_at86: ellipsis on \"محافظة\"",
+   "forces_at86: ellipsis on \"مصر\"",
+   "forces_at86: clipped text (top): \"·\" 569.64..579.17 y 84..101",
+   "forces_at86: ellipsis on \"محافظة\"",
+   "policy_at86: ellipsis on \"مصر\"",
+   "policy_at86: clipped text (top): \"·\" 569.64..579.17 y 84..101",
+   "policy_at86: ellipsis on \"محافظة\"",
+   "policy_at172: ellipsis on \"مصر\"",
+   "policy_at172: clipped text (top): \"·\" 569.64..579.17 y 84..101",
+   "policy_at172: ellipsis on \"محافظة\"",
+   "policy_at258: ellipsis on \"مصر\"",
+   "policy_at258: clipped text (top): \"·\" 569.64..579.17 y 84..101",
+   "policy_at258: ellipsis on \"محافظة\""
+  ],
   "views": {
    "card": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": true,
     "fit": {
      "top": {
@@ -625,7 +674,7 @@
     ]
    },
    "govern": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": true,
     "fit": {
      "top": {
@@ -1122,7 +1171,7 @@
     ]
    },
    "govern_end": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": true,
     "fit": {
      "top": {
@@ -1587,7 +1636,7 @@
     ]
    },
    "build": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": true,
     "fit": {
      "top": {
@@ -2051,7 +2100,7 @@
     ]
    },
    "build_end": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": true,
     "fit": {
      "top": {
@@ -2529,7 +2578,7 @@
     ]
    },
    "forces": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": true,
     "fit": {
      "top": {
@@ -2998,7 +3047,7 @@
     ]
    },
    "forces_end": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": true,
     "fit": {
      "top": {
@@ -3436,7 +3485,7 @@
     ]
    },
    "policy": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": true,
     "fit": {
      "top": {
@@ -3880,7 +3929,7 @@
     ]
    },
    "policy_end": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": true,
     "fit": {
      "top": {
@@ -4345,7 +4394,7 @@
     ]
    },
    "govern_at86": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": false,
     "fit": {
      "top": {
@@ -4817,7 +4866,7 @@
     ]
    },
    "govern_at172": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": false,
     "fit": {
      "top": {
@@ -5242,7 +5291,7 @@
     ]
    },
    "build_at86": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": false,
     "fit": {
      "top": {
@@ -5693,7 +5742,7 @@
     ]
    },
    "forces_at86": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": false,
     "fit": {
      "top": {
@@ -6126,7 +6175,7 @@
     ]
    },
    "policy_at86": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": false,
     "fit": {
      "top": {
@@ -6552,7 +6601,7 @@
     ]
    },
    "policy_at172": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": false,
     "fit": {
      "top": {
@@ -6997,7 +7046,7 @@
     ]
    },
    "policy_at258": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": false,
     "fit": {
      "top": {
@@ -7503,25 +7552,25 @@
    "_build/se_policy_end.png"
   ],
   "pngSha1": {
-   "se.png": "d84ac0513350635480cb9de1c8187de7eaeef459",
-   "_build/se_hit.png": "5423b2529420ce85dc97e1de8488fee4dc1b500e",
-   "_build/se_govern.png": "d58cd2ba791099bdcc70a799f7b3ec6cc1c96948",
-   "_build/se_govern_end.png": "0566579459ad982e19c4c99c2212861e31c2d05d",
-   "_build/se_build.png": "522cb3d5fe9316fae6124abe0b015f015d66f238",
-   "_build/se_build_end.png": "4c73a775f1ad84cf3010aaf91702ad5fcffe415b",
-   "_build/se_forces.png": "b13f80b34096641c8d1d403d12876f86ea15cf95",
-   "_build/se_forces_end.png": "81109f36148ce388fd387e354e7d76dbdeb05b99",
-   "_build/se_policy.png": "acd284fd0fd9165b4fb09c05cd27a51a52423616",
-   "_build/se_policy_end.png": "98d09d05ba202c164a5b300fd6abdb0e51014ca2"
+   "se.png": "e13a514142f3604c725dfb94b0a00e7d9f065a4c",
+   "_build/se_hit.png": "3f0d3424554199844de979737cdefa8d79e0b67a",
+   "_build/se_govern.png": "37f8aebd08eb96d86d87898a458548d67ce4fb30",
+   "_build/se_govern_end.png": "3b8680239e7a6c034767c2ed6747a8b36ed6f06d",
+   "_build/se_build.png": "892de9645eff7ef49a9220edf92f315a3c735161",
+   "_build/se_build_end.png": "4697c126eed088f2c01d1bc5eafed15b7de3388f",
+   "_build/se_forces.png": "ce1f78046ebd99fa3eba0c10fca2a4ac0bc8c293",
+   "_build/se_forces_end.png": "417ac6ef57722a4cc34376a209a6e8db25cfdf9b",
+   "_build/se_policy.png": "27fffbad25579cc19a09fbae6db3201005660233",
+   "_build/se_policy_end.png": "cfe330dffae2725bb1effee6f50beb2970aba680"
   },
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 0
+  "issueCount": 48
  },
  "mini": {
   "device": "812x375 side 50 bottom 21 notch",
-  "renderedAt": "2026-11-07T15:28:41.023Z",
+  "renderedAt": "2026-11-07T16:45:24.197Z",
   "inputs": {
    "files": [
     "index.html",
@@ -7541,12 +7590,70 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "8ed3ef91f8b2792523d8a7ea4fa03e791073121b"
+   "sha1": "3ac93368a1a3185abc391d6cbec3b8a7949cc6b6"
   },
-  "issues": [],
+  "issues": [
+   "card: ellipsis on \"مصر\"",
+   "card: clipped text (top): \"·\" 672.64..682.17 y 84..101",
+   "card: ellipsis on \"محافظة\"",
+   "govern: ellipsis on \"مصر\"",
+   "govern: clipped text (top): \"·\" 672.64..682.17 y 84..101",
+   "govern: ellipsis on \"محافظة\"",
+   "govern_end: ellipsis on \"مصر\"",
+   "govern_end: clipped text (top): \"·\" 672.64..682.17 y 84..101",
+   "govern_end: ellipsis on \"محافظة\"",
+   "build: ellipsis on \"مصر\"",
+   "build: clipped text (top): \"·\" 672.64..682.17 y 84..101",
+   "build: ellipsis on \"محافظة\"",
+   "build_end: ellipsis on \"مصر\"",
+   "build_end: clipped text (top): \"·\" 672.64..682.17 y 84..101",
+   "build_end: ellipsis on \"محافظة\"",
+   "forces: ellipsis on \"مصر\"",
+   "forces: clipped text (top): \"·\" 672.64..682.17 y 84..101",
+   "forces: ellipsis on \"محافظة\"",
+   "forces_end: ellipsis on \"مصر\"",
+   "forces_end: clipped text (top): \"·\" 672.64..682.17 y 84..101",
+   "forces_end: ellipsis on \"محافظة\"",
+   "policy: ellipsis on \"مصر\"",
+   "policy: clipped text (top): \"·\" 672.64..682.17 y 84..101",
+   "policy: ellipsis on \"محافظة\"",
+   "policy_end: ellipsis on \"مصر\"",
+   "policy_end: clipped text (top): \"·\" 672.64..682.17 y 84..101",
+   "policy_end: ellipsis on \"محافظة\"",
+   "govern_at72: ellipsis on \"مصر\"",
+   "govern_at72: clipped text (top): \"·\" 672.64..682.17 y 84..101",
+   "govern_at72: ellipsis on \"محافظة\"",
+   "govern_at144: ellipsis on \"مصر\"",
+   "govern_at144: clipped text (top): \"·\" 672.64..682.17 y 84..101",
+   "govern_at144: ellipsis on \"محافظة\"",
+   "govern_at216: ellipsis on \"مصر\"",
+   "govern_at216: clipped text (top): \"·\" 672.64..682.17 y 84..101",
+   "govern_at216: ellipsis on \"محافظة\"",
+   "build_at72: ellipsis on \"مصر\"",
+   "build_at72: clipped text (top): \"·\" 672.64..682.17 y 84..101",
+   "build_at72: ellipsis on \"محافظة\"",
+   "build_at144: ellipsis on \"مصر\"",
+   "build_at144: clipped text (top): \"·\" 672.64..682.17 y 84..101",
+   "build_at144: ellipsis on \"محافظة\"",
+   "forces_at72: ellipsis on \"مصر\"",
+   "forces_at72: clipped text (top): \"·\" 672.64..682.17 y 84..101",
+   "forces_at72: ellipsis on \"محافظة\"",
+   "forces_at144: ellipsis on \"مصر\"",
+   "forces_at144: clipped text (top): \"·\" 672.64..682.17 y 84..101",
+   "forces_at144: ellipsis on \"محافظة\"",
+   "policy_at72: ellipsis on \"مصر\"",
+   "policy_at72: clipped text (top): \"·\" 672.64..682.17 y 84..101",
+   "policy_at72: ellipsis on \"محافظة\"",
+   "policy_at144: ellipsis on \"مصر\"",
+   "policy_at144: clipped text (top): \"·\" 672.64..682.17 y 84..101",
+   "policy_at144: ellipsis on \"محافظة\"",
+   "policy_at216: ellipsis on \"مصر\"",
+   "policy_at216: clipped text (top): \"·\" 672.64..682.17 y 84..101",
+   "policy_at216: ellipsis on \"محافظة\""
+  ],
   "views": {
    "card": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": true,
     "fit": {
      "top": {
@@ -8161,7 +8268,7 @@
     ]
    },
    "govern": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": true,
     "fit": {
      "top": {
@@ -8650,7 +8757,7 @@
     ]
    },
    "govern_end": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": true,
     "fit": {
      "top": {
@@ -9122,7 +9229,7 @@
     ]
    },
    "build": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": true,
     "fit": {
      "top": {
@@ -9593,7 +9700,7 @@
     ]
    },
    "build_end": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": true,
     "fit": {
      "top": {
@@ -10078,7 +10185,7 @@
     ]
    },
    "forces": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": true,
     "fit": {
      "top": {
@@ -10539,7 +10646,7 @@
     ]
    },
    "forces_end": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": true,
     "fit": {
      "top": {
@@ -10969,7 +11076,7 @@
     ]
    },
    "policy": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": true,
     "fit": {
      "top": {
@@ -11410,7 +11517,7 @@
     ]
    },
    "policy_end": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": true,
     "fit": {
      "top": {
@@ -11882,7 +11989,7 @@
     ]
    },
    "govern_at72": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": false,
     "fit": {
      "top": {
@@ -12361,7 +12468,7 @@
     ]
    },
    "govern_at144": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": false,
     "fit": {
      "top": {
@@ -12809,7 +12916,7 @@
     ]
    },
    "govern_at216": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": false,
     "fit": {
      "top": {
@@ -13265,7 +13372,7 @@
     ]
    },
    "build_at72": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": false,
     "fit": {
      "top": {
@@ -13703,7 +13810,7 @@
     ]
    },
    "build_at144": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": false,
     "fit": {
      "top": {
@@ -14148,7 +14255,7 @@
     ]
    },
    "forces_at72": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": false,
     "fit": {
      "top": {
@@ -14591,7 +14698,7 @@
     ]
    },
    "forces_at144": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": false,
     "fit": {
      "top": {
@@ -15021,7 +15128,7 @@
     ]
    },
    "policy_at72": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": false,
     "fit": {
      "top": {
@@ -15454,7 +15561,7 @@
     ]
    },
    "policy_at144": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": false,
     "fit": {
      "top": {
@@ -15879,7 +15986,7 @@
     ]
    },
    "policy_at216": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": false,
     "fit": {
      "top": {
@@ -16362,25 +16469,25 @@
    "_build/mini_policy_end.png"
   ],
   "pngSha1": {
-   "mini.png": "be699bf2cfaf48b905cfbc41902852691f78f288",
-   "_build/mini_hit.png": "cee56789f1a9bfbc6ebf7409aedc5334c86f6be6",
-   "_build/mini_govern.png": "ce94a47c71b017b4164faef0291ea19b62d0f1b1",
-   "_build/mini_govern_end.png": "900af62903a878c4d3eedab0a830719b71923657",
-   "_build/mini_build.png": "60fa954c2c8438e905fa971591217be010a4cab9",
-   "_build/mini_build_end.png": "ab3de94b9c4de44b678641e44c3eb0b618eadfc7",
-   "_build/mini_forces.png": "370b7ddec22d8cf711f03f843a08f0a7918a335e",
-   "_build/mini_forces_end.png": "969f0b4c095afbc0954633fa2d16d41498db5d43",
-   "_build/mini_policy.png": "2d60cb71b665be49f3e6db81cda1b281b42c55be",
-   "_build/mini_policy_end.png": "f21c5259be4cb41b9a8661d243159fab4c47c889"
+   "mini.png": "dd9694aeab5b52a18c9b865b45a1e02714eac81a",
+   "_build/mini_hit.png": "60fcb9f2b2aa8443c6434e4c82b5cf69fc7a08dd",
+   "_build/mini_govern.png": "0058f4f5b913c8844ed8d271d41c6e85204c5441",
+   "_build/mini_govern_end.png": "eec2e57a3af605e67b1082beb9f74c3c66c1a8ad",
+   "_build/mini_build.png": "cb158fd763f45c03b5b09d3e9f5c29f8b261f856",
+   "_build/mini_build_end.png": "a04316136defad34228458e8482040b8d362bc0b",
+   "_build/mini_forces.png": "ae1a1781ee976d0b7fb2787d6058cf5c354b1679",
+   "_build/mini_forces_end.png": "f344afb8041daf5e3d89d6cf099c2c2e5477d052",
+   "_build/mini_policy.png": "55b75df3429320da0fe6919dbf282f9a6c262607",
+   "_build/mini_policy_end.png": "baa2f15b3066c22b197cf37ea157083d8898a3e7"
   },
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 0
+  "issueCount": 57
  },
  "i14": {
   "device": "844x390 side 47 bottom 21 notch",
-  "renderedAt": "2026-11-07T15:29:11.805Z",
+  "renderedAt": "2026-11-07T16:46:03.244Z",
   "inputs": {
    "files": [
     "index.html",
@@ -16400,12 +16507,61 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "8ed3ef91f8b2792523d8a7ea4fa03e791073121b"
+   "sha1": "3ac93368a1a3185abc391d6cbec3b8a7949cc6b6"
   },
-  "issues": [],
+  "issues": [
+   "card: ellipsis on \"مصر\"",
+   "card: clipped text (top): \"·\" 707.64..717.17 y 84..101",
+   "card: ellipsis on \"محافظة\"",
+   "govern: ellipsis on \"مصر\"",
+   "govern: clipped text (top): \"·\" 707.64..717.17 y 84..101",
+   "govern: ellipsis on \"محافظة\"",
+   "govern_end: ellipsis on \"مصر\"",
+   "govern_end: clipped text (top): \"·\" 707.64..717.17 y 84..101",
+   "govern_end: ellipsis on \"محافظة\"",
+   "build: ellipsis on \"مصر\"",
+   "build: clipped text (top): \"·\" 707.64..717.17 y 84..101",
+   "build: ellipsis on \"محافظة\"",
+   "build_end: ellipsis on \"مصر\"",
+   "build_end: clipped text (top): \"·\" 707.64..717.17 y 84..101",
+   "build_end: ellipsis on \"محافظة\"",
+   "forces: ellipsis on \"مصر\"",
+   "forces: clipped text (top): \"·\" 707.64..717.17 y 84..101",
+   "forces: ellipsis on \"محافظة\"",
+   "forces_end: ellipsis on \"مصر\"",
+   "forces_end: clipped text (top): \"·\" 707.64..717.17 y 84..101",
+   "forces_end: ellipsis on \"محافظة\"",
+   "policy: ellipsis on \"مصر\"",
+   "policy: clipped text (top): \"·\" 707.64..717.17 y 84..101",
+   "policy: ellipsis on \"محافظة\"",
+   "policy_end: ellipsis on \"مصر\"",
+   "policy_end: clipped text (top): \"·\" 707.64..717.17 y 84..101",
+   "policy_end: ellipsis on \"محافظة\"",
+   "govern_at87: ellipsis on \"مصر\"",
+   "govern_at87: clipped text (top): \"·\" 707.64..717.17 y 84..101",
+   "govern_at87: ellipsis on \"محافظة\"",
+   "govern_at174: ellipsis on \"مصر\"",
+   "govern_at174: clipped text (top): \"·\" 707.64..717.17 y 84..101",
+   "govern_at174: ellipsis on \"محافظة\"",
+   "build_at87: ellipsis on \"مصر\"",
+   "build_at87: clipped text (top): \"·\" 707.64..717.17 y 84..101",
+   "build_at87: ellipsis on \"محافظة\"",
+   "forces_at87: ellipsis on \"مصر\"",
+   "forces_at87: clipped text (top): \"·\" 707.64..717.17 y 84..101",
+   "forces_at87: ellipsis on \"محافظة\"",
+   "policy_at87: ellipsis on \"مصر\"",
+   "policy_at87: clipped text (top): \"·\" 707.64..717.17 y 84..101",
+   "policy_at87: ellipsis on \"محافظة\"",
+   "policy_at174: ellipsis on \"مصر\"",
+   "policy_at174: clipped text (top): \"·\" 707.64..717.17 y 84..101",
+   "policy_at174: ellipsis on \"محافظة\"",
+   "policy_at261: ellipsis on \"مصر\"",
+   "policy_at261: clipped text (top): \"·\" 707.64..717.17 y 84..101",
+   "policy_at261: ellipsis on \"محافظة\""
+  ],
   "views": {
    "card": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": true,
     "fit": {
      "top": {
@@ -17022,7 +17178,7 @@
     ]
    },
    "govern": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": true,
     "fit": {
      "top": {
@@ -17636,7 +17792,7 @@
     ]
    },
    "govern_end": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": true,
     "fit": {
      "top": {
@@ -18223,7 +18379,7 @@
     ]
    },
    "build": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": true,
     "fit": {
      "top": {
@@ -18804,7 +18960,7 @@
     ]
    },
    "build_end": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": true,
     "fit": {
      "top": {
@@ -19399,7 +19555,7 @@
     ]
    },
    "forces": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": true,
     "fit": {
      "top": {
@@ -19985,7 +20141,7 @@
     ]
    },
    "forces_end": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": true,
     "fit": {
      "top": {
@@ -20540,7 +20696,7 @@
     ]
    },
    "policy": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": true,
     "fit": {
      "top": {
@@ -21101,7 +21257,7 @@
     ]
    },
    "policy_end": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": true,
     "fit": {
      "top": {
@@ -21683,7 +21839,7 @@
     ]
    },
    "govern_at87": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": false,
     "fit": {
      "top": {
@@ -22272,7 +22428,7 @@
     ]
    },
    "govern_at174": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": false,
     "fit": {
      "top": {
@@ -22809,7 +22965,7 @@
     ]
    },
    "build_at87": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": false,
     "fit": {
      "top": {
@@ -23362,7 +23518,7 @@
     ]
    },
    "forces_at87": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": false,
     "fit": {
      "top": {
@@ -23912,7 +24068,7 @@
     ]
    },
    "policy_at87": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": false,
     "fit": {
      "top": {
@@ -24455,7 +24611,7 @@
     ]
    },
    "policy_at174": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": false,
     "fit": {
      "top": {
@@ -25017,7 +25173,7 @@
     ]
    },
    "policy_at261": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": false,
     "fit": {
      "top": {
@@ -25640,25 +25796,25 @@
    "_build/i14_policy_end.png"
   ],
   "pngSha1": {
-   "i14.png": "0f0e5a24e405b0c90f624b26f32b6887a97be621",
-   "_build/i14_hit.png": "d4a0d0d1645fefa8147e985ab1d6933fb432e082",
-   "_build/i14_govern.png": "9564ad27bc470b7ed2a78a28ab7d6f9591076469",
-   "_build/i14_govern_end.png": "6ab7ed1410888342936dae59f2e75a865c083a6f",
-   "_build/i14_build.png": "f9bbcbb9899285476995d47c9e5575daf3533ab1",
-   "_build/i14_build_end.png": "e6457d18d31481a1d1d089fbdaacff84215dc09e",
-   "_build/i14_forces.png": "c496367d7c708502dfb424eaafc2664368974e7b",
-   "_build/i14_forces_end.png": "7813cca6bc8a9f3d7368846ace0d8331ca2abfbd",
-   "_build/i14_policy.png": "a332ff2526553536250e02f2099a37d474c76a5f",
-   "_build/i14_policy_end.png": "929dfeed11134c992852d6d11e969ccf165b410a"
+   "i14.png": "11d5bf69985ea27698054577c6cbcd96f5d06764",
+   "_build/i14_hit.png": "bb396667ee480b5345d805e9598a424841bc3264",
+   "_build/i14_govern.png": "0764b71eab51bc16a5c9abb69d96103e77363d81",
+   "_build/i14_govern_end.png": "542762d676a94dd5f7d47ad7a8385abda5ba6648",
+   "_build/i14_build.png": "862c05e81bc5092b1586ad62923bd3d3c485f024",
+   "_build/i14_build_end.png": "8f920513bccb9b360b513db2600bafd48f99f361",
+   "_build/i14_forces.png": "98d6e61e3778dca74b8c2d2e89b2af4f092515fd",
+   "_build/i14_forces_end.png": "cb05780499c90f6c6b02e9a834aa8cbab24ebf8a",
+   "_build/i14_policy.png": "a8097e3e9559b5afcc0fd00dbd418fd07ad944c8",
+   "_build/i14_policy_end.png": "fc5ff474b05838cd321878bb32b7e6a3cf5ff2f3"
   },
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 0
+  "issueCount": 48
  },
  "i16": {
   "device": "852x393 side 59 bottom 21 island",
-  "renderedAt": "2026-11-07T15:29:39.875Z",
+  "renderedAt": "2026-11-07T16:46:31.407Z",
   "inputs": {
    "files": [
     "index.html",
@@ -25678,12 +25834,58 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "8ed3ef91f8b2792523d8a7ea4fa03e791073121b"
+   "sha1": "3ac93368a1a3185abc391d6cbec3b8a7949cc6b6"
   },
-  "issues": [],
+  "issues": [
+   "card: ellipsis on \"مصر\"",
+   "card: clipped text (top): \"·\" 703.64..713.17 y 84..101",
+   "card: ellipsis on \"محافظة\"",
+   "govern: ellipsis on \"مصر\"",
+   "govern: clipped text (top): \"·\" 703.64..713.17 y 84..101",
+   "govern: ellipsis on \"محافظة\"",
+   "govern_end: ellipsis on \"مصر\"",
+   "govern_end: clipped text (top): \"·\" 703.64..713.17 y 84..101",
+   "govern_end: ellipsis on \"محافظة\"",
+   "build: ellipsis on \"مصر\"",
+   "build: clipped text (top): \"·\" 703.64..713.17 y 84..101",
+   "build: ellipsis on \"محافظة\"",
+   "build_end: ellipsis on \"مصر\"",
+   "build_end: clipped text (top): \"·\" 703.64..713.17 y 84..101",
+   "build_end: ellipsis on \"محافظة\"",
+   "forces: ellipsis on \"مصر\"",
+   "forces: clipped text (top): \"·\" 703.64..713.17 y 84..101",
+   "forces: ellipsis on \"محافظة\"",
+   "forces_end: ellipsis on \"مصر\"",
+   "forces_end: clipped text (top): \"·\" 703.64..713.17 y 84..101",
+   "forces_end: ellipsis on \"محافظة\"",
+   "policy: ellipsis on \"مصر\"",
+   "policy: clipped text (top): \"·\" 703.64..713.17 y 84..101",
+   "policy: ellipsis on \"محافظة\"",
+   "policy_end: ellipsis on \"مصر\"",
+   "policy_end: clipped text (top): \"·\" 703.64..713.17 y 84..101",
+   "policy_end: ellipsis on \"محافظة\"",
+   "govern_at90: ellipsis on \"مصر\"",
+   "govern_at90: clipped text (top): \"·\" 703.64..713.17 y 84..101",
+   "govern_at90: ellipsis on \"محافظة\"",
+   "govern_at180: ellipsis on \"مصر\"",
+   "govern_at180: clipped text (top): \"·\" 703.64..713.17 y 84..101",
+   "govern_at180: ellipsis on \"محافظة\"",
+   "build_at90: ellipsis on \"مصر\"",
+   "build_at90: clipped text (top): \"·\" 703.64..713.17 y 84..101",
+   "build_at90: ellipsis on \"محافظة\"",
+   "forces_at90: ellipsis on \"مصر\"",
+   "forces_at90: clipped text (top): \"·\" 703.64..713.17 y 84..101",
+   "forces_at90: ellipsis on \"محافظة\"",
+   "policy_at90: ellipsis on \"مصر\"",
+   "policy_at90: clipped text (top): \"·\" 703.64..713.17 y 84..101",
+   "policy_at90: ellipsis on \"محافظة\"",
+   "policy_at180: ellipsis on \"مصر\"",
+   "policy_at180: clipped text (top): \"·\" 703.64..713.17 y 84..101",
+   "policy_at180: ellipsis on \"محافظة\""
+  ],
   "views": {
    "card": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": true,
     "fit": {
      "top": {
@@ -26291,7 +26493,7 @@
     ]
    },
    "govern": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": true,
     "fit": {
      "top": {
@@ -26894,7 +27096,7 @@
     ]
    },
    "govern_end": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": true,
     "fit": {
      "top": {
@@ -27470,7 +27672,7 @@
     ]
    },
    "build": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": true,
     "fit": {
      "top": {
@@ -28040,7 +28242,7 @@
     ]
    },
    "build_end": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": true,
     "fit": {
      "top": {
@@ -28624,7 +28826,7 @@
     ]
    },
    "forces": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": true,
     "fit": {
      "top": {
@@ -29199,7 +29401,7 @@
     ]
    },
    "forces_end": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": true,
     "fit": {
      "top": {
@@ -29743,7 +29945,7 @@
     ]
    },
    "policy": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": true,
     "fit": {
      "top": {
@@ -30293,7 +30495,7 @@
     ]
    },
    "policy_end": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": true,
     "fit": {
      "top": {
@@ -30864,7 +31066,7 @@
     ]
    },
    "govern_at90": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": false,
     "fit": {
      "top": {
@@ -31447,7 +31649,7 @@
     ]
    },
    "govern_at180": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": false,
     "fit": {
      "top": {
@@ -31978,7 +32180,7 @@
     ]
    },
    "build_at90": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": false,
     "fit": {
      "top": {
@@ -32515,7 +32717,7 @@
     ]
    },
    "forces_at90": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": false,
     "fit": {
      "top": {
@@ -33059,7 +33261,7 @@
     ]
    },
    "policy_at90": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": false,
     "fit": {
      "top": {
@@ -33591,7 +33793,7 @@
     ]
    },
    "policy_at180": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": false,
     "fit": {
      "top": {
@@ -34158,25 +34360,25 @@
    "_build/i16_policy_end.png"
   ],
   "pngSha1": {
-   "i16.png": "39f0eb395d9a53624347382a5ed397a1824f67d6",
-   "_build/i16_hit.png": "f423adc28b5bd069d58d795efd01bf7e08027ede",
-   "_build/i16_govern.png": "f6c09798d7a36aa256a92cea266f40b01b5de441",
-   "_build/i16_govern_end.png": "a4b7842d86649de0a8debbd37eca75f39edc4809",
-   "_build/i16_build.png": "9332e6865267f80f084dc20eb41575aafd880603",
-   "_build/i16_build_end.png": "e8a35172197c3bcd4afa4ed0a7f6b26b0a2d5877",
-   "_build/i16_forces.png": "ea95d41502647f52e60ec4527eeba8bd16b28403",
-   "_build/i16_forces_end.png": "558617108d768609ea451afbcaa7f15347bfe9b5",
-   "_build/i16_policy.png": "4a8d38128cb9d5eb7d98ec233dd31a275d561f6b",
-   "_build/i16_policy_end.png": "90d747adbbd991b898b0cecc59ec61d2e65af209"
+   "i16.png": "cfaa203f67745ec926422fe9630b25ec62a71b64",
+   "_build/i16_hit.png": "d174807d2a4411a39977f95e0f740b951b8afd16",
+   "_build/i16_govern.png": "e057d19476e1e7f2b49ed9cd1536ce3a44357217",
+   "_build/i16_govern_end.png": "c548ea06f7d0d597d5aae49252837f89245369a8",
+   "_build/i16_build.png": "811237e10b16e6d88fe07768fb91c252bf02a23f",
+   "_build/i16_build_end.png": "012e5dbf14cd2b241ca9e241778c11c26a7af1dc",
+   "_build/i16_forces.png": "f84587d769d04a45a6dac54db6c8ab171be87ae5",
+   "_build/i16_forces_end.png": "180a628552aeb27dd3fd36383cc01fcfa8540701",
+   "_build/i16_policy.png": "601f1616f85afb0b78427908b901f7af73c09e4e",
+   "_build/i16_policy_end.png": "012a5a16d2ba622f671092263fbe16a0eccb7a9a"
   },
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 0
+  "issueCount": 45
  },
  "i16pro": {
   "device": "874x402 side 62 bottom 21 island",
-  "renderedAt": "2026-11-07T15:30:08.060Z",
+  "renderedAt": "2026-11-07T16:46:59.826Z",
   "inputs": {
    "files": [
     "index.html",
@@ -34196,12 +34398,58 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "8ed3ef91f8b2792523d8a7ea4fa03e791073121b"
+   "sha1": "3ac93368a1a3185abc391d6cbec3b8a7949cc6b6"
   },
-  "issues": [],
+  "issues": [
+   "card: ellipsis on \"مصر\"",
+   "card: clipped text (top): \"·\" 722.64..732.17 y 84..101",
+   "card: ellipsis on \"محافظة\"",
+   "govern: ellipsis on \"مصر\"",
+   "govern: clipped text (top): \"·\" 722.64..732.17 y 84..101",
+   "govern: ellipsis on \"محافظة\"",
+   "govern_end: ellipsis on \"مصر\"",
+   "govern_end: clipped text (top): \"·\" 722.64..732.17 y 84..101",
+   "govern_end: ellipsis on \"محافظة\"",
+   "build: ellipsis on \"مصر\"",
+   "build: clipped text (top): \"·\" 722.64..732.17 y 84..101",
+   "build: ellipsis on \"محافظة\"",
+   "build_end: ellipsis on \"مصر\"",
+   "build_end: clipped text (top): \"·\" 722.64..732.17 y 84..101",
+   "build_end: ellipsis on \"محافظة\"",
+   "forces: ellipsis on \"مصر\"",
+   "forces: clipped text (top): \"·\" 722.64..732.17 y 84..101",
+   "forces: ellipsis on \"محافظة\"",
+   "forces_end: ellipsis on \"مصر\"",
+   "forces_end: clipped text (top): \"·\" 722.64..732.17 y 84..101",
+   "forces_end: ellipsis on \"محافظة\"",
+   "policy: ellipsis on \"مصر\"",
+   "policy: clipped text (top): \"·\" 722.64..732.17 y 84..101",
+   "policy: ellipsis on \"محافظة\"",
+   "policy_end: ellipsis on \"مصر\"",
+   "policy_end: clipped text (top): \"·\" 722.64..732.17 y 84..101",
+   "policy_end: ellipsis on \"محافظة\"",
+   "govern_at99: ellipsis on \"مصر\"",
+   "govern_at99: clipped text (top): \"·\" 722.64..732.17 y 84..101",
+   "govern_at99: ellipsis on \"محافظة\"",
+   "govern_at198: ellipsis on \"مصر\"",
+   "govern_at198: clipped text (top): \"·\" 722.64..732.17 y 84..101",
+   "govern_at198: ellipsis on \"محافظة\"",
+   "build_at99: ellipsis on \"مصر\"",
+   "build_at99: clipped text (top): \"·\" 722.64..732.17 y 84..101",
+   "build_at99: ellipsis on \"محافظة\"",
+   "forces_at99: ellipsis on \"مصر\"",
+   "forces_at99: clipped text (top): \"·\" 722.64..732.17 y 84..101",
+   "forces_at99: ellipsis on \"محافظة\"",
+   "policy_at99: ellipsis on \"مصر\"",
+   "policy_at99: clipped text (top): \"·\" 722.64..732.17 y 84..101",
+   "policy_at99: ellipsis on \"محافظة\"",
+   "policy_at198: ellipsis on \"مصر\"",
+   "policy_at198: clipped text (top): \"·\" 722.64..732.17 y 84..101",
+   "policy_at198: ellipsis on \"محافظة\""
+  ],
   "views": {
    "card": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": true,
     "fit": {
      "top": {
@@ -34820,7 +35068,7 @@
     ]
    },
    "govern": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": true,
     "fit": {
      "top": {
@@ -35434,7 +35682,7 @@
     ]
    },
    "govern_end": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": true,
     "fit": {
      "top": {
@@ -36028,7 +36276,7 @@
     ]
    },
    "build": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": true,
     "fit": {
      "top": {
@@ -36614,7 +36862,7 @@
     ]
    },
    "build_end": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": true,
     "fit": {
      "top": {
@@ -37229,7 +37477,7 @@
     ]
    },
    "forces": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": true,
     "fit": {
      "top": {
@@ -37820,7 +38068,7 @@
     ]
    },
    "forces_end": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": true,
     "fit": {
      "top": {
@@ -38380,7 +38628,7 @@
     ]
    },
    "policy": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": true,
     "fit": {
      "top": {
@@ -38948,7 +39196,7 @@
     ]
    },
    "policy_end": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": true,
     "fit": {
      "top": {
@@ -39560,7 +39808,7 @@
     ]
    },
    "govern_at99": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": false,
     "fit": {
      "top": {
@@ -40159,7 +40407,7 @@
     ]
    },
    "govern_at198": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": false,
     "fit": {
      "top": {
@@ -40730,7 +40978,7 @@
     ]
    },
    "build_at99": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": false,
     "fit": {
      "top": {
@@ -41283,7 +41531,7 @@
     ]
    },
    "forces_at99": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": false,
     "fit": {
      "top": {
@@ -41843,7 +42091,7 @@
     ]
    },
    "policy_at99": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": false,
     "fit": {
      "top": {
@@ -42388,7 +42636,7 @@
     ]
    },
    "policy_at198": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": false,
     "fit": {
      "top": {
@@ -42986,25 +43234,25 @@
    "_build/i16pro_policy_end.png"
   ],
   "pngSha1": {
-   "i16pro.png": "bbcc89ecc3d25ecb7d08f7309ceca5a9db775fca",
-   "_build/i16pro_hit.png": "f6295815f5925a601df51631fef2a868216825a3",
-   "_build/i16pro_govern.png": "fb6670f26ee2797011afb4fe03510a222d0ae7ae",
-   "_build/i16pro_govern_end.png": "9f691d4567d7d29e00f8ac01b14b3f8e4250e12a",
-   "_build/i16pro_build.png": "994f779ca809f5e9e83bc07333cd9bbf87a32490",
-   "_build/i16pro_build_end.png": "65dff777ee12220b1541b9bba237cb5bcdef35d3",
-   "_build/i16pro_forces.png": "f00a9dfa1d52afcdf4ce10493e91fdb197a97f72",
-   "_build/i16pro_forces_end.png": "bc6b8e84adcd732aca219f1b7c6475a043ec9ac8",
-   "_build/i16pro_policy.png": "dd665b373163cedf548c918a0bd3c134c5c352fd",
-   "_build/i16pro_policy_end.png": "f39f3345036b92ccf9f9098b9ee1b4a2f0d17052"
+   "i16pro.png": "a27a4159b758ba3fbd8fd339d1bc3805f27b9475",
+   "_build/i16pro_hit.png": "2bd845211f160838687e6af312d3b10d587b7529",
+   "_build/i16pro_govern.png": "da0b286434e7dc028e739607ec5699951d28751a",
+   "_build/i16pro_govern_end.png": "011b0296529f687cc381fdaa0bd686619543a470",
+   "_build/i16pro_build.png": "a0ee0f11b25f6d5cc7dcc732e62789c516922966",
+   "_build/i16pro_build_end.png": "fa9b0cb36e99abe984fe8c0c3717dbf81de16d76",
+   "_build/i16pro_forces.png": "6c7ce651c3838fbe0f01a33dfcee9259494f4868",
+   "_build/i16pro_forces_end.png": "164d64d05bde15e31b79da24c5fdf74a186531ed",
+   "_build/i16pro_policy.png": "078a1935bbb5fbd9cc0bda8d0a3d94f96bc39cb1",
+   "_build/i16pro_policy_end.png": "39b32764f45aa54750b905276a6db29640679227"
   },
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 0
+  "issueCount": 45
  },
  "i11": {
   "device": "896x414 side 48 bottom 21 notch",
-  "renderedAt": "2026-11-07T15:30:38.548Z",
+  "renderedAt": "2026-11-07T16:47:28.389Z",
   "inputs": {
    "files": [
     "index.html",
@@ -43024,12 +43272,55 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "8ed3ef91f8b2792523d8a7ea4fa03e791073121b"
+   "sha1": "3ac93368a1a3185abc391d6cbec3b8a7949cc6b6"
   },
-  "issues": [],
+  "issues": [
+   "card: ellipsis on \"مصر\"",
+   "card: clipped text (top): \"·\" 758.64..768.17 y 84..101",
+   "card: ellipsis on \"محافظة\"",
+   "govern: ellipsis on \"مصر\"",
+   "govern: clipped text (top): \"·\" 758.64..768.17 y 84..101",
+   "govern: ellipsis on \"محافظة\"",
+   "govern_end: ellipsis on \"مصر\"",
+   "govern_end: clipped text (top): \"·\" 758.64..768.17 y 84..101",
+   "govern_end: ellipsis on \"محافظة\"",
+   "build: ellipsis on \"مصر\"",
+   "build: clipped text (top): \"·\" 758.64..768.17 y 84..101",
+   "build: ellipsis on \"محافظة\"",
+   "build_end: ellipsis on \"مصر\"",
+   "build_end: clipped text (top): \"·\" 758.64..768.17 y 84..101",
+   "build_end: ellipsis on \"محافظة\"",
+   "forces: ellipsis on \"مصر\"",
+   "forces: clipped text (top): \"·\" 758.64..768.17 y 84..101",
+   "forces: ellipsis on \"محافظة\"",
+   "forces_end: ellipsis on \"مصر\"",
+   "forces_end: clipped text (top): \"·\" 758.64..768.17 y 84..101",
+   "forces_end: ellipsis on \"محافظة\"",
+   "policy: ellipsis on \"مصر\"",
+   "policy: clipped text (top): \"·\" 758.64..768.17 y 84..101",
+   "policy: ellipsis on \"محافظة\"",
+   "policy_end: ellipsis on \"مصر\"",
+   "policy_end: clipped text (top): \"·\" 758.64..768.17 y 84..101",
+   "policy_end: ellipsis on \"محافظة\"",
+   "govern_at111: ellipsis on \"مصر\"",
+   "govern_at111: clipped text (top): \"·\" 758.64..768.17 y 84..101",
+   "govern_at111: ellipsis on \"محافظة\"",
+   "build_at111: ellipsis on \"مصر\"",
+   "build_at111: clipped text (top): \"·\" 758.64..768.17 y 84..101",
+   "build_at111: ellipsis on \"محافظة\"",
+   "forces_at111: ellipsis on \"مصر\"",
+   "forces_at111: clipped text (top): \"·\" 758.64..768.17 y 84..101",
+   "forces_at111: ellipsis on \"محافظة\"",
+   "policy_at111: ellipsis on \"مصر\"",
+   "policy_at111: clipped text (top): \"·\" 758.64..768.17 y 84..101",
+   "policy_at111: ellipsis on \"محافظة\"",
+   "policy_at222: ellipsis on \"مصر\"",
+   "policy_at222: clipped text (top): \"·\" 758.64..768.17 y 84..101",
+   "policy_at222: ellipsis on \"محافظة\""
+  ],
   "views": {
    "card": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": true,
     "fit": {
      "top": {
@@ -43647,7 +43938,7 @@
     ]
    },
    "govern": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": true,
     "fit": {
      "top": {
@@ -44267,7 +44558,7 @@
     ]
    },
    "govern_end": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": true,
     "fit": {
      "top": {
@@ -44872,7 +45163,7 @@
     ]
    },
    "build": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": true,
     "fit": {
      "top": {
@@ -45457,7 +45748,7 @@
     ]
    },
    "build_end": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": true,
     "fit": {
      "top": {
@@ -46071,7 +46362,7 @@
     ]
    },
    "forces": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": true,
     "fit": {
      "top": {
@@ -46668,7 +46959,7 @@
     ]
    },
    "forces_end": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": true,
     "fit": {
      "top": {
@@ -47227,7 +47518,7 @@
     ]
    },
    "policy": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": true,
     "fit": {
      "top": {
@@ -47799,7 +48090,7 @@
     ]
    },
    "policy_end": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": true,
     "fit": {
      "top": {
@@ -48417,7 +48708,7 @@
     ]
    },
    "govern_at111": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": false,
     "fit": {
      "top": {
@@ -49010,7 +49301,7 @@
     ]
    },
    "build_at111": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": false,
     "fit": {
      "top": {
@@ -49569,7 +49860,7 @@
     ]
    },
    "forces_at111": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": false,
     "fit": {
      "top": {
@@ -50128,7 +50419,7 @@
     ]
    },
    "policy_at111": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": false,
     "fit": {
      "top": {
@@ -50672,7 +50963,7 @@
     ]
    },
    "policy_at222": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": false,
     "fit": {
      "top": {
@@ -51296,25 +51587,25 @@
    "_build/i11_policy_end.png"
   ],
   "pngSha1": {
-   "i11.png": "cb4ca27da49ee762b0ee3efaeac78e9f8da225c5",
-   "_build/i11_hit.png": "3e801f3457a47e084fc8600dca7a883ae00df92a",
-   "_build/i11_govern.png": "524bde0c9af7ad6b9ec92e522301832dfe1de398",
-   "_build/i11_govern_end.png": "1c6b4b54cc1d8bc10181a63a1289fb3d1beec666",
-   "_build/i11_build.png": "a5885f541c93ca391f89ba101aab74a381f8f676",
-   "_build/i11_build_end.png": "0322da94e835f61b132f0744bd047077a0c82076",
-   "_build/i11_forces.png": "a278f17fd894a771d311fbb7ad2423fe9d3cee0a",
-   "_build/i11_forces_end.png": "0f9d03b8f9bedfd515ecb0aaec9279973d9dc413",
-   "_build/i11_policy.png": "3acfaf84b3faf473f65559d94e16ce947d1aa5ae",
-   "_build/i11_policy_end.png": "106ea99b8f5c154fd5a79f23d208130918b170bf"
+   "i11.png": "8e1b751670a4f158a7a8c458d017a9eff6a50211",
+   "_build/i11_hit.png": "669bf803503f49b1500dc74c9a62f9e0e5d40749",
+   "_build/i11_govern.png": "e73a6e265b687cafaf085707691b9dc254157167",
+   "_build/i11_govern_end.png": "540a0abc4e6102b71a0ed087b37fb7600c017b31",
+   "_build/i11_build.png": "8ee571eac1526a4ff4829d3c59a557b7216324be",
+   "_build/i11_build_end.png": "565932dfff329c885d057d496b13c8957f127aa7",
+   "_build/i11_forces.png": "fa3db5ed1cd96d4e15dcc873cc879fbce2131556",
+   "_build/i11_forces_end.png": "18ed0977929c1dab02f73227a96a924d3027d6db",
+   "_build/i11_policy.png": "6e4c3a8e255560a182f7d8fb77bd10b09a91d826",
+   "_build/i11_policy_end.png": "1350fe8976fbf0490ed575f4deb632b3d9f14cb6"
   },
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 0
+  "issueCount": 42
  },
  "i16promax": {
   "device": "956x440 side 62 bottom 21 island",
-  "renderedAt": "2026-11-07T15:31:05.133Z",
+  "renderedAt": "2026-11-07T16:47:59.284Z",
   "inputs": {
    "files": [
     "index.html",
@@ -51334,12 +51625,46 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "8ed3ef91f8b2792523d8a7ea4fa03e791073121b"
+   "sha1": "3ac93368a1a3185abc391d6cbec3b8a7949cc6b6"
   },
-  "issues": [],
+  "issues": [
+   "card: ellipsis on \"مصر\"",
+   "card: clipped text (top): \"·\" 804.64..814.17 y 84..101",
+   "card: ellipsis on \"محافظة\"",
+   "govern: ellipsis on \"مصر\"",
+   "govern: clipped text (top): \"·\" 804.64..814.17 y 84..101",
+   "govern: ellipsis on \"محافظة\"",
+   "govern_end: ellipsis on \"مصر\"",
+   "govern_end: clipped text (top): \"·\" 804.64..814.17 y 84..101",
+   "govern_end: ellipsis on \"محافظة\"",
+   "build: ellipsis on \"مصر\"",
+   "build: clipped text (top): \"·\" 804.64..814.17 y 84..101",
+   "build: ellipsis on \"محافظة\"",
+   "build_end: ellipsis on \"مصر\"",
+   "build_end: clipped text (top): \"·\" 804.64..814.17 y 84..101",
+   "build_end: ellipsis on \"محافظة\"",
+   "forces: ellipsis on \"مصر\"",
+   "forces: clipped text (top): \"·\" 804.64..814.17 y 84..101",
+   "forces: ellipsis on \"محافظة\"",
+   "forces_end: ellipsis on \"مصر\"",
+   "forces_end: clipped text (top): \"·\" 804.64..814.17 y 84..101",
+   "forces_end: ellipsis on \"محافظة\"",
+   "policy: ellipsis on \"مصر\"",
+   "policy: clipped text (top): \"·\" 804.64..814.17 y 84..101",
+   "policy: ellipsis on \"محافظة\"",
+   "policy_end: ellipsis on \"مصر\"",
+   "policy_end: clipped text (top): \"·\" 804.64..814.17 y 84..101",
+   "policy_end: ellipsis on \"محافظة\"",
+   "govern_at137: ellipsis on \"مصر\"",
+   "govern_at137: clipped text (top): \"·\" 804.64..814.17 y 84..101",
+   "govern_at137: ellipsis on \"محافظة\"",
+   "policy_at137: ellipsis on \"مصر\"",
+   "policy_at137: clipped text (top): \"·\" 804.64..814.17 y 84..101",
+   "policy_at137: ellipsis on \"محافظة\""
+  ],
   "views": {
    "card": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": true,
     "fit": {
      "top": {
@@ -51956,7 +52281,7 @@
     ]
    },
    "govern": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": true,
     "fit": {
      "top": {
@@ -52586,7 +52911,7 @@
     ]
    },
    "govern_end": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": true,
     "fit": {
      "top": {
@@ -53196,7 +53521,7 @@
     ]
    },
    "build": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": true,
     "fit": {
      "top": {
@@ -53801,7 +54126,7 @@
     ]
    },
    "build_end": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": true,
     "fit": {
      "top": {
@@ -54420,7 +54745,7 @@
     ]
    },
    "forces": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": true,
     "fit": {
      "top": {
@@ -55037,7 +55362,7 @@
     ]
    },
    "forces_end": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": true,
     "fit": {
      "top": {
@@ -55616,7 +55941,7 @@
     ]
    },
    "policy": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": true,
     "fit": {
      "top": {
@@ -56198,7 +56523,7 @@
     ]
    },
    "policy_end": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": true,
     "fit": {
      "top": {
@@ -56821,7 +57146,7 @@
     ]
    },
    "govern_at137": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": false,
     "fit": {
      "top": {
@@ -57393,7 +57718,7 @@
     ]
    },
    "policy_at137": {
-    "issueCount": 0,
+    "issueCount": 3,
     "png": false,
     "fit": {
      "top": {
@@ -58000,20 +58325,20 @@
    "_build/i16promax_policy_end.png"
   ],
   "pngSha1": {
-   "i16promax.png": "47f13441a4c81f4963ae93a7b7c7abd2ff81faa3",
-   "_build/i16promax_hit.png": "edf049e8ad2a75fb8dd2c53a08799151ea655816",
-   "_build/i16promax_govern.png": "1aef3c54f7f0f41ad94b4eba619472b0eba8ed33",
-   "_build/i16promax_govern_end.png": "19682f8efb5b259ffbb47f81c3091fb977bade18",
-   "_build/i16promax_build.png": "e8e258ab1d22f2f7f505e3ae91dadca2676a6292",
-   "_build/i16promax_build_end.png": "960061556b67f7d6cd59ea6f405baef030dac04d",
-   "_build/i16promax_forces.png": "4f29897ba133a9ecfe7cc86a4da7be93343ba11e",
-   "_build/i16promax_forces_end.png": "15dd730efa13ae898591cb8c65f152ff21db1892",
-   "_build/i16promax_policy.png": "497201a3ca140a98d359a274006c0a0ce5cde3ce",
-   "_build/i16promax_policy_end.png": "617dc4e1853003705b983f701a619a666335c658"
+   "i16promax.png": "58f9aa5cc43ef5ef84705ffa534a6ff26c49733c",
+   "_build/i16promax_hit.png": "337db5c04c04d5487a6b788092ae9c5d00370851",
+   "_build/i16promax_govern.png": "270c9b4dc1de9cfd9607670ecd0b7e8db6a88da1",
+   "_build/i16promax_govern_end.png": "845b2f8f5a722555f39e2b5b0d70c137335fb21a",
+   "_build/i16promax_build.png": "58d0795ebc544fc89ccb07ccd66c911418199e78",
+   "_build/i16promax_build_end.png": "c3a6c3788c087a0bce59aab384e7998806285201",
+   "_build/i16promax_forces.png": "252e3ae87dac688586eaace31d4b17dde344b40d",
+   "_build/i16promax_forces_end.png": "25bf316ba26968ae2f6e6f9bcaf982033729c448",
+   "_build/i16promax_policy.png": "9787b11eaf9f13e9c33bca4eeefd2c8653c5d503",
+   "_build/i16promax_policy_end.png": "53f6278c7796db77224d076c8f2ac2bbde8e9ea7"
   },
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 0
+  "issueCount": 33
  }
 }

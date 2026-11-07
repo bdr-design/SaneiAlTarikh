@@ -115,7 +115,7 @@ The province is **القاهرة** (Cairo Governorate), Egypt, on Saturday 1 Jan
    | Field | Value |
    |---|---|
    | السيادة (sovereign) | مصر |
-   | الإدارة (administrator) | حكومة مصر |
+   | الإدارة (administrator) | حكومتنا (no country name: it holds for any country, T-024) |
    | السيطرة (controller) | الحكومة · 100% |
    | المطالبات (claims) | لا توجد |
 3. **Headline numbers**, at most 3. Each has a trend arrow and a «لماذا؟» link to the why-sheet.

@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-07T16:09:34.263Z",
+ "ranAt": "2026-11-07T16:55:57.295Z",
  "inputs": {
   "files": [
    "index.html",
@@ -26,17 +26,45 @@
    "../../shared/map_mena_d1_overlay.svg",
    "header_cairo.jpg"
   ],
-  "sha1": "287f0a7625506d467576836355a7954543f0b7d9"
+  "sha1": "fc9ac87401407fdd4b1d43232c3a88c0fcb21fc1"
  },
  "cleanIssues": {
-  "i16promax": [],
-  "i16promax_modes_end": [],
-  "i16promax_modes_at182": [],
+  "i16promax": [
+   "ellipsis on \"أوضاع الخريطة\"",
+   "clipped text (top): \"·\" 756.84..766.38 y 84..101",
+   "ellipsis on \"المعروض: الأمن\""
+  ],
+  "i16promax_modes_end": [
+   "ellipsis on \"أوضاع الخريطة\"",
+   "clipped text (top): \"·\" 756.84..766.38 y 84..101",
+   "ellipsis on \"المعروض: الأمن\""
+  ],
+  "i16promax_modes_at182": [
+   "ellipsis on \"أوضاع الخريطة\"",
+   "clipped text (top): \"·\" 756.84..766.38 y 84..101",
+   "ellipsis on \"المعروض: الأمن\""
+  ],
   "i16promax coverage": [],
-  "se": [],
-  "se_modes_end": [],
-  "se_modes_at131": [],
-  "se_modes_at262": [],
+  "se": [
+   "ellipsis on \"أوضاع الخريطة\"",
+   "clipped text (top): \"·\" 521.84..531.38 y 84..101",
+   "ellipsis on \"المعروض: الأمن\""
+  ],
+  "se_modes_end": [
+   "ellipsis on \"أوضاع الخريطة\"",
+   "clipped text (top): \"·\" 521.84..531.38 y 84..101",
+   "ellipsis on \"المعروض: الأمن\""
+  ],
+  "se_modes_at131": [
+   "ellipsis on \"أوضاع الخريطة\"",
+   "clipped text (top): \"·\" 521.84..531.38 y 84..101",
+   "ellipsis on \"المعروض: الأمن\""
+  ],
+  "se_modes_at262": [
+   "ellipsis on \"أوضاع الخريطة\"",
+   "clipped text (top): \"·\" 521.84..531.38 y 84..101",
+   "ellipsis on \"المعروض: الأمن\""
+  ],
   "se coverage": []
  },
  "results": [
@@ -44,7 +72,9 @@
    "name": "type size",
    "ok": true,
    "sample": [
-    "font size 17 for \"الخريطة\""
+    "font size 17 for \"الخريطة\"",
+    "ellipsis on \"أوضاع الخريطة\"",
+    "clipped text (top): \"·\" 756.84..766.38 y 84..101"
    ]
   },
   {
@@ -52,7 +82,8 @@
    "ok": true,
    "sample": [
     "text colour off-token rgb(136, 153, 170): \"الخريطة\"",
-    "contrast 2.4 for \"الخريطة\""
+    "ellipsis on \"أوضاع الخريطة\"",
+    "clipped text (top): \"·\" 756.84..766.38 y 84..101"
    ]
   },
   {
@@ -60,25 +91,26 @@
    "ok": true,
    "sample": [
     "panel radius أوضاع الخريطة: 6 (want 12)",
-    "radius 6 for .sheet (want 12)"
+    "radius 6 for .sheet (want 12)",
+    "ellipsis on \"أوضاع الخريطة\""
    ]
   },
   {
    "name": "tap in the side inset",
    "ok": true,
    "sample": [
-    "text in side inset: الأمن: الاضطرابات في كل محافظة",
-    "text in side inset: 0",
-    "text in side inset: من"
+    "ellipsis on \"أوضاع الخريطة\"",
+    "clipped text (top): \"·\" 786.84..796.38 y 84..101",
+    "ellipsis on \"المعروض: الأمن\""
    ]
   },
   {
    "name": "panel in the side inset",
    "ok": true,
    "sample": [
-    "text in side inset: الأمن: الاضطرابات في كل محافظة",
-    "text in side inset: 0",
-    "text in side inset: من"
+    "ellipsis on \"أوضاع الخريطة\"",
+    "clipped text (top): \"·\" 786.84..796.38 y 84..101",
+    "ellipsis on \"المعروض: الأمن\""
    ]
   },
   {
@@ -86,8 +118,8 @@
    "ok": true,
    "sample": [
     "panel not opaque: أوضاع الخريطة rgba(9, 17, 25, 0.66)",
-    "contrast 3.15 for \"40\"",
-    "contrast 4.13 for \"60\""
+    "ellipsis on \"أوضاع الخريطة\"",
+    "clipped text (top): \"·\" 756.84..766.38 y 84..101"
    ]
   },
   {
@@ -95,218 +127,251 @@
    "ok": true,
    "sample": [
     "panel not opaque (opacity 0.60): أوضاع الخريطة",
-    "brief text not fully visible: الخريطة",
-    "brief text not fully visible: أوضاع الخريطة · المعروض: الأمن"
+    "ellipsis on \"أوضاع الخريطة\"",
+    "clipped text (top): \"·\" 756.84..766.38 y 84..101"
    ]
   },
   {
    "name": "Egypt covered",
    "ok": true,
    "sample": [
-    "Nile delta covered by panel أوضاع الخريطة",
-    "Egypt covered by panel أوضاع الخريطة",
-    "Egypt under the hit box of سياسية"
+    "ellipsis on \"أوضاع الخريطة\"",
+    "clipped text (top): \"·\" 756.84..766.38 y 84..101",
+    "ellipsis on \"المعروض: الأمن\""
    ]
   },
   {
    "name": "map dimmed",
    "ok": true,
    "sample": [
-    "the map is dimmed (opacity 1.00, filter brightness(0.35))"
+    "ellipsis on \"أوضاع الخريطة\"",
+    "clipped text (top): \"·\" 756.84..766.38 y 84..101",
+    "ellipsis on \"المعروض: الأمن\""
    ]
   },
   {
    "name": "map faded",
    "ok": true,
    "sample": [
-    "the map is dimmed (opacity 0.30, filter none)"
+    "ellipsis on \"أوضاع الخريطة\"",
+    "clipped text (top): \"·\" 756.84..766.38 y 84..101",
+    "ellipsis on \"المعروض: الأمن\""
    ]
   },
   {
    "name": "scrim over the map",
    "ok": true,
    "sample": [
-    "something drawn over the map: DIV (rgba(0, 0, 0, 0.55))",
-    "contrast 1.92 for \"3\"",
-    "contrast 3.62 for \"الأمن\""
+    "ellipsis on \"أوضاع الخريطة\"",
+    "clipped text (top): \"·\" 756.84..766.38 y 84..101",
+    "ellipsis on \"المعروض: الأمن\""
    ]
   },
   {
    "name": "sheet width",
    "ok": true,
    "sample": [
-    "sheet width 330 (want round(clamp(43% of 832, 340, 380)), or the room the dock leaves if 330..: 358)"
+    "ellipsis on \"أوضاع الخريطة\"",
+    "clipped text (top): \"·\" 756.84..766.38 y 84..101",
+    "ellipsis on \"المعروض: الأمن\""
    ]
   },
   {
    "name": "sheet top",
    "ok": true,
    "sample": [
-    "hit overlap الاستقرار 58% / إغلاق أوضاع الخريطة، يبقى ",
-    "panel overlap الدولة: مصر، حسني مبارك، ج / أوضاع الخريطة",
-    "panel overlap الخزينة 36.0 مليار $ الاست / أوضاع الخريطة"
+    "ellipsis on \"أوضاع الخريطة\"",
+    "clipped text (top): \"·\" 756.84..766.38 y 70..87",
+    "ellipsis on \"المعروض: الأمن\""
    ]
   },
   {
    "name": "dock hidden although it fits",
    "ok": true,
    "sample": [
-    "dock hidden although it fits left of the sheet"
+    "ellipsis on \"أوضاع الخريطة\"",
+    "clipped text (top): \"·\" 756.84..766.38 y 84..101",
+    "ellipsis on \"المعروض: الأمن\""
    ]
   },
   {
    "name": "dock shown on the SE",
    "ok": true,
    "sample": [
-    "icon over text: i / \"الاقتصاد\"",
-    "hit overlap الدولة / الأسواق",
-    "hit overlap الدولة / الأحزاب"
+    "ellipsis on \"أوضاع الخريطة\"",
+    "clipped text (top): \"·\" 521.84..531.38 y 84..101",
+    "ellipsis on \"المعروض: الأمن\""
    ]
   },
   {
    "name": "left stack moved",
    "ok": true,
    "sample": [
-    "HUD element moved from its B3 position: .toast x 70.0..275.6 y 56.0..88.0",
-    "HUD element moved from its B3 position: .btn.mode x 70.0..191.6 y 96.0..128.0",
-    "HUD element moved from its B3 position: .btn.home x 70.0..141.5 y 136.0..168.0"
+    "ellipsis on \"أوضاع الخريطة\"",
+    "clipped text (top): \"·\" 756.84..766.38 y 84..101",
+    "ellipsis on \"المعروض: الأمن\""
    ]
   },
   {
    "name": "map label cut",
    "ok": true,
    "sample": [
-    "map label ليبيا sliced by the screen edge or the side inset",
-    "map label إيران sliced by the screen edge or the side inset",
-    "map label إيران squeezed between a panel and the screen edge"
+    "ellipsis on \"أوضاع الخريطة\"",
+    "clipped text (top): \"·\" 756.84..766.38 y 84..101",
+    "ellipsis on \"المعروض: الأمن\""
    ]
   },
   {
    "name": "contrast",
    "ok": true,
    "sample": [
-    "contrast 1 for \"الأمن: الاضطرابات في كل \"",
-    "contrast 1.73 for \"0\"",
-    "contrast 1.73 for \"25\""
+    "ellipsis on \"أوضاع الخريطة\"",
+    "clipped text (top): \"·\" 756.84..766.38 y 84..101",
+    "ellipsis on \"المعروض: الأمن\""
    ]
   },
   {
    "name": "identity line missing",
    "ok": true,
    "sample": [
-    "panel top line none rgb(239, 179, 195) 2px (want the section colour, 2 pt, at the top)"
+    "ellipsis on \"أوضاع الخريطة\"",
+    "clipped text (top): \"·\" 756.84..766.38 y 84..101",
+    "ellipsis on \"المعروض: الأمن\""
    ]
   },
   {
    "name": "emblem drawn grey",
    "ok": true,
    "sample": [
-    "section emblem missing or not in the section colour"
+    "ellipsis on \"أوضاع الخريطة\"",
+    "clipped text (top): \"·\" 756.84..766.38 y 84..101",
+    "ellipsis on \"المعروض: الأمن\""
    ]
   },
   {
    "name": "section colour on data",
    "ok": true,
    "sample": [
-    "section colour on data text: \"أوضاع الخريطة\"",
-    "section colour on data text: \"المعروض: الأمن\"",
-    "section colour on data chrome: أوضاع الخريطة · المعروض: ا"
+    "ellipsis on \"أوضاع الخريطة\"",
+    "clipped text (top): \"·\" 756.84..766.38 y 84..101",
+    "ellipsis on \"المعروض: الأمن\""
    ]
   },
   {
    "name": "money unit",
    "ok": true,
    "sample": [
-    "money unit: «0.4 مليار» (under 1 billion is written in millions)"
+    "ellipsis on \"أوضاع الخريطة\"",
+    "clipped text (top): \"·\" 756.84..766.38 y 84..101",
+    "ellipsis on \"المعروض: الأمن\""
    ]
   },
   {
    "name": "sign outside its number",
    "ok": true,
    "sample": [
-    "a sign outside its number: «تغير +3»"
+    "ellipsis on \"أوضاع الخريطة\"",
+    "clipped text (top): \"·\" 756.84..766.38 y 84..101",
+    "ellipsis on \"المعروض: الأمن\""
    ]
   },
   {
    "name": "colour alone",
    "ok": true,
    "sample": [
-    "colour alone: «تراجع» has no arrow or icon"
+    "ellipsis on \"أوضاع الخريطة\"",
+    "clipped text (top): \"·\" 756.84..766.38 y 84..101",
+    "ellipsis on \"المعروض: الأمن\""
    ]
   },
   {
    "name": "an image in the sheet",
    "ok": true,
    "sample": [
-    "an image in the sheet"
+    "ellipsis on \"أوضاع الخريطة\"",
+    "clipped text (top): \"·\" 756.84..766.38 y 84..101",
+    "ellipsis on \"المعروض: الأمن\""
    ]
   },
   {
    "name": "close not round",
    "ok": true,
    "sample": [
-    "close button is not round"
+    "close button is not round",
+    "ellipsis on \"أوضاع الخريطة\"",
+    "clipped text (top): \"·\" 756.84..766.38 y 84..101"
    ]
   },
   {
    "name": "label without a role",
    "ok": true,
    "sample": [
-    "a11y: a label VoiceOver may skip (no role): «اختبار»"
+    "ellipsis on \"أوضاع الخريطة\"",
+    "clipped text (top): \"·\" 756.84..766.38 y 84..101",
+    "ellipsis on \"المعروض: الأمن\""
    ]
   },
   {
    "name": "text overlap",
    "ok": true,
    "sample": [
-    "text overlap \"الخريطة\" / \"أوضاع الخريطة\""
+    "ellipsis on \"أوضاع الخريطة\"",
+    "clipped text (top): \"·\" 756.84..766.38 y 70..87",
+    "ellipsis on \"المعروض: الأمن\""
    ]
   },
   {
    "name": "identity line colour",
    "ok": true,
    "sample": [
-    "panel top line \"\" rgb(63, 224, 208) 2px (want the section colour, 2 pt, at the top)"
+    "ellipsis on \"أوضاع الخريطة\"",
+    "clipped text (top): \"·\" 756.84..766.38 y 84..101",
+    "ellipsis on \"المعروض: الأمن\""
    ]
   },
   {
    "name": "emblem size",
    "ok": true,
    "sample": [
-    "size 28.0x32.0 for .s-emb (want 32 x 32)"
+    "ellipsis on \"أوضاع الخريطة\"",
+    "clipped text (top): \"·\" 756.84..766.38 y 84..101",
+    "ellipsis on \"المعروض: الأمن\""
    ]
   },
   {
    "name": "row read in part",
    "ok": true,
    "sample": [
-    "a11y: «جزء» does not read all it shows: 0 25 40 60",
-    "a11y: the legend is not read whole"
+    "ellipsis on \"أوضاع الخريطة\"",
+    "clipped text (top): \"·\" 756.84..766.38 y 84..101",
+    "ellipsis on \"المعروض: الأمن\""
    ]
   },
   {
    "name": "a long headline label",
    "ok": true,
    "sample": [
-    "clipped text (sides): \"عنوان طويل جدًا لا يتسع لخانته أبدًا\" 385.38..539.25 y 124..141",
-    "text outside the sheet's 12 pt padding: \"عنوان طويل جدًا لا يتسع لخانته أبدًا\"",
-    "clipped text (sides): \"1\" 528.44..539.25 y 142..169"
+    "ellipsis on \"أوضاع الخريطة\"",
+    "clipped text (top): \"·\" 756.84..766.38 y 84..101",
+    "ellipsis on \"المعروض: الأمن\""
    ]
   },
   {
    "name": "text wider than its box",
    "ok": true,
    "sample": [
-    "text wider than its box: «الأمن: الاضطرابات في كل » (145 in 20)"
+    "ellipsis on \"أوضاع الخريطة\"",
+    "clipped text (top): \"·\" 756.84..766.38 y 84..101",
+    "ellipsis on \"المعروض: الأمن\""
    ]
   },
   {
    "name": "a long status cell",
    "ok": true,
    "sample": [
-    "clipped text (sides): \"قيمة طويلة جدًا لا تتسع لنصف الجدول\" 416.53..613.3 y 120.5..139.5",
-    "text outside the sheet's 12 pt padding: \"قيمة طويلة جدًا لا تتسع لنصف الجدول\"",
-    "horizontal overflow in خانةقيمة طويلة جدًا لا تتس"
+    "ellipsis on \"أوضاع الخريطة\"",
+    "clipped text (top): \"·\" 756.84..766.38 y 84..101",
+    "ellipsis on \"المعروض: الأمن\""
    ]
   },
   {
@@ -314,15 +379,17 @@
    "ok": true,
    "sample": [
     "font weight 11.5/700 for \"أوضاع الخريطة\"",
-    "font weight 11.5/700 for \"·\"",
-    "font weight 11.5/700 for \"المعروض: الأمن\""
+    "ellipsis on \"أوضاع الخريطة\"",
+    "font weight 11.5/700 for \"·\""
    ]
   },
   {
    "name": "a tab row on a one-body sheet",
    "ok": true,
    "sample": [
-    "a tab row on a sheet that has one body"
+    "ellipsis on \"أوضاع الخريطة\"",
+    "clipped text (top): \"·\" 756.84..766.38 y 84..101",
+    "ellipsis on \"المعروض: الأمن\""
    ]
   },
   {
@@ -330,68 +397,80 @@
    "ok": true,
    "sample": [
     "control height 40.00 for .r-x (want 32): إغلاق أوضاع الخريطة، يبقى ",
-    "close button is not round"
+    "close button is not round",
+    "ellipsis on \"أوضاع الخريطة\""
    ]
   },
   {
    "name": "icon size (no tabs)",
    "ok": true,
    "sample": [
-    "icon size 19x19 (want 16): i"
+    "icon size 19x19 (want 16): i",
+    "ellipsis on \"أوضاع الخريطة\"",
+    "clipped text (top): \"·\" 756.84..766.38 y 84..101"
    ]
   },
   {
    "name": "fades wrong (no tabs)",
    "ok": true,
    "sample": [
-    "clipped text (bottom): \"الأحزاب\" 581.14..614 y 354..371",
-    "clipped text (bottom): \"عسكرية\" 417.19..453 y 354..371",
-    "control cut by its scroll area (bottom): الأحزاب"
+    "ellipsis on \"أوضاع الخريطة\"",
+    "clipped text (top): \"·\" 521.84..531.38 y 84..101",
+    "ellipsis on \"المعروض: الأمن\""
    ]
   },
   {
    "name": "hint chevron missing (no tabs)",
    "ok": true,
    "sample": [
-    "scroll hint chevron missing with content below"
+    "ellipsis on \"أوضاع الخريطة\"",
+    "clipped text (top): \"·\" 521.84..531.38 y 84..101",
+    "ellipsis on \"المعروض: الأمن\""
    ]
   },
   {
    "name": "hint over the content (no tabs)",
    "ok": true,
    "sample": [
-    "scroll hint not centred in the clear strip under the fade: y 198.0..216.0 (strip 344.0..366.0)"
+    "ellipsis on \"أوضاع الخريطة\"",
+    "clipped text (top): \"·\" 521.84..531.38 y 84..101",
+    "ellipsis on \"المعروض: الأمن\""
    ]
   },
   {
    "name": "a dock item marked open",
    "ok": true,
    "sample": [
-    "a dock item is marked open under a sheet of no section"
+    "ellipsis on \"أوضاع الخريطة\"",
+    "clipped text (top): \"·\" 756.84..766.38 y 84..101",
+    "ellipsis on \"المعروض: الأمن\""
    ]
   },
   {
    "name": "brief text hidden (modes)",
    "ok": true,
    "sample": [
-    "brief text not fully visible: الخريطة"
+    "ellipsis on \"أوضاع الخريطة\"",
+    "clipped text (top): \"·\" 756.84..766.38 y 84..101",
+    "ellipsis on \"المعروض: الأمن\""
    ]
   },
   {
    "name": "18 pt misuse (modes)",
    "ok": true,
    "sample": [
-    "18 pt is for the panel's name and the adjusted values only: \"الأمن: الاضطرابات في كل محافظة\"",
-    "18 pt is for the panel's name and the adjusted values only: \"الوضع\""
+    "ellipsis on \"أوضاع الخريطة\"",
+    "clipped text (top): \"·\" 756.84..766.38 y 84..101",
+    "ellipsis on \"المعروض: الأمن\""
    ]
   },
   {
    "name": "clipped text (modes)",
    "ok": true,
    "sample": [
-    "clipped text (sides): \"الأمن: الاضطرابات في كل محافظة\" 775.72..921 y 115..132",
-    "text outside the sheet's 12 pt padding: \"الأمن: الاضطرابات في كل محافظة\"",
-    "clipped text (sides): \": احتجاجات · من\" 826.83..894.41 y 167..182"
+    "ellipsis on \"أوضاع الخريطة\"",
+    "clipped text (top): \"·\" 756.84..766.38 y 84..101",
+    "ellipsis on \"المعروض: الأمن\""
    ]
   },
   {
@@ -400,163 +479,178 @@
    "sample": [
     "gap 6 on وضع الخريطة",
     "gap 6 on وضع الخريطة",
-    "hit overlap سياسية / التكتلات"
+    "ellipsis on \"أوضاع الخريطة\""
    ]
   },
   {
    "name": "faint text (modes)",
    "ok": true,
    "sample": [
-    "contrast 2.2 for \"0\"",
-    "contrast 2.2 for \"25\"",
-    "contrast 2.2 for \"40\""
+    "ellipsis on \"أوضاع الخريطة\"",
+    "clipped text (top): \"·\" 756.84..766.38 y 84..101",
+    "ellipsis on \"المعروض: الأمن\""
    ]
   },
   {
    "name": "% before its number (modes)",
    "ok": true,
    "sample": [
-    "% shown before its number: \"نسبة 20%\"",
-    "brief text missing: الأمن: الاضطرابات في كل محافظة",
-    "brief text missing: الأمن: الاضطرابات في كل محافظة"
+    "ellipsis on \"أوضاع الخريطة\"",
+    "clipped text (top): \"·\" 756.84..766.38 y 84..101",
+    "ellipsis on \"المعروض: الأمن\""
    ]
   },
   {
    "name": "text into a control (modes)",
    "ok": true,
    "sample": [
-    "setting 1: order must be .r-at, .s-seg (right to left)",
-    "setting 2: order must be .r-at, .s-seg (right to left)",
-    "setting 3: order must be .r-at, .s-seg (right to left)"
+    "ellipsis on \"أوضاع الخريطة\"",
+    "clipped text (top): \"·\" 756.84..766.38 y 84..101",
+    "ellipsis on \"المعروض: الأمن\""
    ]
   },
   {
    "name": "tile icons cyan (modes)",
    "ok": true,
    "sample": [
-    "a mode tile's icon is not grey: «سياسية»",
-    "a mode tile's icon is not grey: «العلاقات»",
-    "a mode tile's icon is not grey: «التكتلات»"
+    "ellipsis on \"أوضاع الخريطة\"",
+    "clipped text (top): \"·\" 756.84..766.38 y 84..101",
+    "ellipsis on \"المعروض: الأمن\""
    ]
   },
   {
    "name": "an option renamed",
    "ok": true,
    "sample": [
-    "display option «حدود المحافظات» is not «تظهر | تختفي» with «تظهر» chosen",
-    "brief text missing: تختفي",
-    "brief text missing: تختفي"
+    "ellipsis on \"أوضاع الخريطة\"",
+    "clipped text (top): \"·\" 756.84..766.38 y 84..101",
+    "ellipsis on \"المعروض: الأمن\""
    ]
   },
   {
    "name": "two modes chosen",
    "ok": true,
    "sample": [
-    "not exactly one mode chosen («الأمن»), marked and drawn"
+    "ellipsis on \"أوضاع الخريطة\"",
+    "clipped text (top): \"·\" 756.84..766.38 y 84..101",
+    "ellipsis on \"المعروض: الأمن\""
    ]
   },
   {
    "name": "chosen not white",
    "ok": true,
    "sample": [
-    "the chosen mode is not filled white",
-    "contrast 1.08 for \"الأمن\""
+    "ellipsis on \"أوضاع الخريطة\"",
+    "clipped text (top): \"·\" 756.84..766.38 y 84..101",
+    "ellipsis on \"المعروض: الأمن\""
    ]
   },
   {
    "name": "a mode lost",
    "ok": true,
    "sample": [
-    "the modes are not the 13 of §6.6 in order",
-    "brief text missing: مخاطر المناخ",
-    "brief text missing: مخاطر المناخ"
+    "ellipsis on \"أوضاع الخريطة\"",
+    "clipped text (top): \"·\" 756.84..766.38 y 84..101",
+    "ellipsis on \"المعروض: الأمن\""
    ]
   },
   {
    "name": "modes not radios",
    "ok": true,
    "sample": [
-    "a11y: a label VoiceOver may skip (no role): «وضع الخريطة»",
-    "a11y: the modes are not a radio group"
+    "ellipsis on \"أوضاع الخريطة\"",
+    "clipped text (top): \"·\" 756.84..766.38 y 84..101",
+    "ellipsis on \"المعروض: الأمن\""
    ]
   },
   {
    "name": "header off",
    "ok": true,
    "sample": [
-    "the header does not name the mode shown",
-    "brief text missing: أوضاع الخريطة · المعروض: الأمن",
-    "brief text missing: أوضاع الخريطة · المعروض: الأمن"
+    "ellipsis on \"أوضاع الخريطة\"",
+    "clipped text (top): \"·\" 756.84..766.38 y 84..101",
+    "ellipsis on \"المعروض: سياسية\""
    ]
   },
   {
    "name": "HUD button stale",
    "ok": true,
    "sample": [
-    "the HUD mode button does not read the mode and show the chooser open"
+    "ellipsis on \"أوضاع الخريطة\"",
+    "clipped text (top): \"·\" 756.84..766.38 y 84..101",
+    "ellipsis on \"المعروض: الأمن\""
    ]
   },
   {
    "name": "layer over the borders",
    "ok": true,
    "sample": [
-    "the mode layer is not between the base and the borders: ../../shared/map_mena_d1.jpg, map_overlay_mode.svg, map_mode_security.svg"
+    "ellipsis on \"أوضاع الخريطة\"",
+    "clipped text (top): \"·\" 756.84..766.38 y 84..101",
+    "ellipsis on \"المعروض: الأمن\""
    ]
   },
   {
    "name": "layer hidden",
    "ok": true,
    "sample": [
-    "the mode layer is not drawn"
+    "ellipsis on \"أوضاع الخريطة\"",
+    "clipped text (top): \"·\" 756.84..766.38 y 84..101",
+    "ellipsis on \"المعروض: الأمن\""
    ]
   },
   {
    "name": "legend recoloured",
    "ok": true,
    "sample": [
-    "the legend's colours are not the layer's bands: #320A5E,#781C6D,#3FE0D0,#ED6925,#FBB61A"
+    "ellipsis on \"أوضاع الخريطة\"",
+    "clipped text (top): \"·\" 756.84..766.38 y 84..101",
+    "ellipsis on \"المعروض: الأمن\""
    ]
   },
   {
    "name": "legend left to right",
    "ok": true,
    "sample": [
-    "the legend does not run right to left",
-    "the legend edge «0» is not on its band edge",
-    "the legend edge «25» is not on its band edge"
+    "ellipsis on \"أوضاع الخريطة\"",
+    "clipped text (top): \"·\" 756.84..766.38 y 84..101",
+    "ellipsis on \"المعروض: الأمن\""
    ]
   },
   {
    "name": "edges spaced evenly",
    "ok": true,
    "sample": [
-    "the legend edge «25» is not on its band edge",
-    "the legend edge «40» is not on its band edge",
-    "the legend edge «60» is not on its band edge"
+    "ellipsis on \"أوضاع الخريطة\"",
+    "clipped text (top): \"·\" 756.84..766.38 y 84..101",
+    "ellipsis on \"المعروض: الأمن\""
    ]
   },
   {
    "name": "an edge off",
    "ok": true,
    "sample": [
-    "a11y: «المفتاح، من الأدنى إلى ا» does not read all it shows: 45",
-    "the legend's edges are not 0 25 40 60 75 100 right to left"
+    "ellipsis on \"أوضاع الخريطة\"",
+    "clipped text (top): \"·\" 756.84..766.38 y 84..101",
+    "ellipsis on \"المعروض: الأمن\""
    ]
   },
   {
    "name": "legend unsaid",
    "ok": true,
    "sample": [
-    "a11y: «المفتاح» does not read all it shows: 0 25 40 60",
-    "a11y: the legend is not read whole"
+    "ellipsis on \"أوضاع الخريطة\"",
+    "clipped text (top): \"·\" 756.84..766.38 y 84..101",
+    "ellipsis on \"المعروض: الأمن\""
    ]
   },
   {
    "name": "an option with two choices",
    "ok": true,
    "sample": [
-    "setting 1: 2 chosen segments (2 aria-checked), not one",
-    "display option «الحدود» has not exactly one choice"
+    "ellipsis on \"أوضاع الخريطة\"",
+    "clipped text (top): \"·\" 756.84..766.38 y 84..101",
+    "ellipsis on \"المعروض: الأمن\""
    ]
   },
   {

@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-07T16:07:13.970Z",
+ "ranAt": "2026-11-07T16:53:03.420Z",
  "inputs": {
   "files": [
    "index.html",
@@ -22,14 +22,38 @@
    "../../shared/map_mena_d1_overlay.svg",
    "map_overlay_cairo.svg"
   ],
-  "sha1": "d209308be7122b8e0e1130a9cd5ddc695f8c3bee"
+  "sha1": "422c87464be7c8f566262621d6e5eb8eb624ad2e"
  },
  "cleanIssues": {
-  "i16promax": [],
-  "i16promax_fallen_end": [],
+  "i16promax": [
+   "clipped text (top): \"12\" 819.19..833 y 84..101",
+   "ellipsis on \"أغسطس\"",
+   "clipped text (top): \"2031\" 745.63..773.23 y 84..101",
+   "clipped text (top): \"·\" 736.09..745.63 y 84..101",
+   "ellipsis on \"الوقت متوقف\""
+  ],
+  "i16promax_fallen_end": [
+   "clipped text (top): \"12\" 819.19..833 y 84..101",
+   "ellipsis on \"أغسطس\"",
+   "clipped text (top): \"2031\" 745.63..773.23 y 84..101",
+   "clipped text (top): \"·\" 736.09..745.63 y 84..101",
+   "ellipsis on \"الوقت متوقف\""
+  ],
   "i16promax coverage": [],
-  "se": [],
-  "se_fallen_end": [],
+  "se": [
+   "clipped text (top): \"12\" 584.19..598 y 84..101",
+   "ellipsis on \"أغسطس\"",
+   "clipped text (top): \"2031\" 510.63..538.23 y 84..101",
+   "clipped text (top): \"·\" 501.09..510.63 y 84..101",
+   "ellipsis on \"الوقت متوقف\""
+  ],
+  "se_fallen_end": [
+   "clipped text (top): \"12\" 584.19..598 y 84..101",
+   "ellipsis on \"أغسطس\"",
+   "clipped text (top): \"2031\" 510.63..538.23 y 84..101",
+   "clipped text (top): \"·\" 501.09..510.63 y 84..101",
+   "ellipsis on \"الوقت متوقف\""
+  ],
   "se coverage": []
  },
  "results": [
@@ -37,14 +61,18 @@
    "name": "type size",
    "ok": true,
    "sample": [
-    "font size 17 for \"سقطت حكومتك\""
+    "font size 17 for \"سقطت حكومتك\"",
+    "clipped text (top): \"12\" 819.19..833 y 84..101",
+    "ellipsis on \"أغسطس\""
    ]
   },
   {
    "name": "off-token colour",
    "ok": true,
    "sample": [
-    "text colour off-token rgb(136, 153, 170): \"سقطت حكومتك\""
+    "text colour off-token rgb(136, 153, 170): \"سقطت حكومتك\"",
+    "clipped text (top): \"12\" 819.19..833 y 84..101",
+    "ellipsis on \"أغسطس\""
    ]
   },
   {
@@ -52,25 +80,26 @@
    "ok": true,
    "sample": [
     "panel radius سقطت حكومتك: 6 (want 12)",
-    "radius 6 for .sheet (want 12)"
+    "radius 6 for .sheet (want 12)",
+    "clipped text (top): \"12\" 819.19..833 y 84..101"
    ]
   },
   {
    "name": "tap in the side inset",
    "ok": true,
    "sample": [
-    "text in side inset: أطاحت ثورة واسعة بالحكومة وتولّى مجلس انتقالي إدارة البلاد. يمكنك متابعة الحملة بالحكومة الجديدة أو إنهاؤها.",
-    "text in side inset: أطاحت ثورة واسعة بالحكومة وتولّى مجلس انتقالي إدارة البلاد. يمكنك متابعة الحملة بالحكومة الجديدة أو إنهاؤها.",
-    "text in side inset: خياراتك"
+    "clipped text (top): \"12\" 849.19..863 y 84..101",
+    "ellipsis on \"أغسطس\"",
+    "clipped text (top): \"2031\" 775.63..803.23 y 84..101"
    ]
   },
   {
    "name": "panel in the side inset",
    "ok": true,
    "sample": [
-    "text in side inset: أطاحت ثورة واسعة بالحكومة وتولّى مجلس انتقالي إدارة البلاد. يمكنك متابعة الحملة بالحكومة الجديدة أو إنهاؤها.",
-    "text in side inset: أطاحت ثورة واسعة بالحكومة وتولّى مجلس انتقالي إدارة البلاد. يمكنك متابعة الحملة بالحكومة الجديدة أو إنهاؤها.",
-    "text in side inset: خياراتك"
+    "clipped text (top): \"12\" 849.19..863 y 84..101",
+    "ellipsis on \"أغسطس\"",
+    "clipped text (top): \"2031\" 775.63..803.23 y 84..101"
    ]
   },
   {
@@ -78,7 +107,8 @@
    "ok": true,
    "sample": [
     "panel not opaque: سقطت حكومتك rgba(9, 17, 25, 0.66)",
-    "contrast 3.15 for \"يمكنك الاختيار لاحقًا من\""
+    "clipped text (top): \"12\" 819.19..833 y 84..101",
+    "ellipsis on \"أغسطس\""
    ]
   },
   {
@@ -86,232 +116,260 @@
    "ok": true,
    "sample": [
     "panel not opaque (opacity 0.60): سقطت حكومتك",
-    "brief text not fully visible: سقطت حكومتك",
-    "brief text not fully visible: 12 أغسطس 2031 · الوقت متوقف"
+    "clipped text (top): \"12\" 819.19..833 y 84..101",
+    "ellipsis on \"أغسطس\""
    ]
   },
   {
    "name": "Egypt covered",
    "ok": true,
    "sample": [
-    "Nile delta covered by panel سقطت حكومتك",
-    "Egypt covered by panel سقطت حكومتك",
-    "Egypt under the hit box of المتابعة بالمجلس الانتقالي"
+    "clipped text (top): \"12\" 819.19..833 y 84..101",
+    "ellipsis on \"أغسطس\"",
+    "clipped text (top): \"2031\" 745.63..773.23 y 84..101"
    ]
   },
   {
    "name": "map dimmed",
    "ok": true,
    "sample": [
-    "the map is dimmed (opacity 1.00, filter brightness(0.35))"
+    "clipped text (top): \"12\" 819.19..833 y 84..101",
+    "ellipsis on \"أغسطس\"",
+    "clipped text (top): \"2031\" 745.63..773.23 y 84..101"
    ]
   },
   {
    "name": "map faded",
    "ok": true,
    "sample": [
-    "the map is dimmed (opacity 0.30, filter none)"
+    "clipped text (top): \"12\" 819.19..833 y 84..101",
+    "ellipsis on \"أغسطس\"",
+    "clipped text (top): \"2031\" 745.63..773.23 y 84..101"
    ]
   },
   {
    "name": "scrim over the map",
    "ok": true,
    "sample": [
-    "something drawn over the map: DIV (rgba(0, 0, 0, 0.55))",
-    "contrast 1.92 for \"3\""
+    "clipped text (top): \"12\" 819.19..833 y 84..101",
+    "ellipsis on \"أغسطس\"",
+    "clipped text (top): \"2031\" 745.63..773.23 y 84..101"
    ]
   },
   {
    "name": "sheet width",
    "ok": true,
    "sample": [
-    "sheet width 330 (want round(clamp(43% of 832, 340, 380)), or the room the dock leaves if 330..: 358)"
+    "clipped text (top): \"12\" 819.19..833 y 84..101",
+    "ellipsis on \"أغسطس\"",
+    "clipped text (top): \"2031\" 745.63..773.23 y 84..101"
    ]
   },
   {
    "name": "sheet top",
    "ok": true,
    "sample": [
-    "hit overlap الاستقرار 31% / لاحقًا: يبقى الخيار في الإ",
-    "panel overlap الدولة: مصر، المجلس الانتق / سقطت حكومتك",
-    "panel overlap الخزينة 18.4 مليار $ الاست / سقطت حكومتك"
+    "clipped text (top): \"12\" 819.19..833 y 70..87",
+    "ellipsis on \"أغسطس\"",
+    "clipped text (top): \"2031\" 745.63..773.23 y 70..87"
    ]
   },
   {
    "name": "dock hidden although it fits",
    "ok": true,
    "sample": [
-    "dock hidden although it fits left of the sheet"
+    "clipped text (top): \"12\" 819.19..833 y 84..101",
+    "ellipsis on \"أغسطس\"",
+    "clipped text (top): \"2031\" 745.63..773.23 y 84..101"
    ]
   },
   {
    "name": "dock shown on the SE",
    "ok": true,
    "sample": [
-    "panel overlap الأقسام / سقطت حكومتك",
-    "dock shown although it does not fit left of the sheet",
-    "dock not 4 pt in from the left end of its B3 line: x 140.0 w 387.0 y 323.0 (want x 12 w 387.0 y 323.0)"
+    "clipped text (top): \"12\" 584.19..598 y 84..101",
+    "ellipsis on \"أغسطس\"",
+    "clipped text (top): \"2031\" 510.63..538.23 y 84..101"
    ]
   },
   {
    "name": "left stack moved",
    "ok": true,
    "sample": [
-    "HUD element moved from its B3 position: .toast x 70.0..275.5 y 56.0..88.0",
-    "HUD element moved from its B3 position: .btn.mode x 70.0..191.6 y 96.0..128.0",
-    "HUD element moved from its B3 position: .btn.home x 70.0..141.5 y 136.0..168.0"
+    "clipped text (top): \"12\" 819.19..833 y 84..101",
+    "ellipsis on \"أغسطس\"",
+    "clipped text (top): \"2031\" 745.63..773.23 y 84..101"
    ]
   },
   {
    "name": "map label cut",
    "ok": true,
    "sample": [
-    "map label ليبيا sliced by the screen edge or the side inset",
-    "map label إيران sliced by the screen edge or the side inset",
-    "map label إيران squeezed between a panel and the screen edge"
+    "clipped text (top): \"12\" 819.19..833 y 84..101",
+    "ellipsis on \"أغسطس\"",
+    "clipped text (top): \"2031\" 745.63..773.23 y 84..101"
    ]
   },
   {
    "name": "contrast",
    "ok": true,
    "sample": [
-    "contrast 1 for \"أطاحت ثورة واسعة بالحكوم\"",
-    "contrast 1 for \"أطاحت ثورة واسعة بالحكوم\"",
-    "contrast 1 for \"خياراتك\""
+    "clipped text (top): \"12\" 819.19..833 y 84..101",
+    "ellipsis on \"أغسطس\"",
+    "clipped text (top): \"2031\" 745.63..773.23 y 84..101"
    ]
   },
   {
    "name": "identity line missing",
    "ok": true,
    "sample": [
-    "panel top line none rgb(214, 187, 169) 2px (want the section colour, 2 pt, at the top)"
+    "clipped text (top): \"12\" 819.19..833 y 84..101",
+    "ellipsis on \"أغسطس\"",
+    "clipped text (top): \"2031\" 745.63..773.23 y 84..101"
    ]
   },
   {
    "name": "emblem drawn grey",
    "ok": true,
    "sample": [
-    "section emblem missing or not in the section colour"
+    "clipped text (top): \"12\" 819.19..833 y 84..101",
+    "ellipsis on \"أغسطس\"",
+    "clipped text (top): \"2031\" 745.63..773.23 y 84..101"
    ]
   },
   {
    "name": "section colour on data",
    "ok": true,
    "sample": [
-    "section colour on data text: \"12\"",
-    "section colour on data text: \"أغسطس\"",
-    "section colour on data text: \"2031\""
+    "clipped text (top): \"12\" 819.19..833 y 84..101",
+    "ellipsis on \"أغسطس\"",
+    "clipped text (top): \"2031\" 745.63..773.23 y 84..101"
    ]
   },
   {
    "name": "money unit",
    "ok": true,
    "sample": [
-    "money unit: «0.4 مليار» (under 1 billion is written in millions)",
-    "the sheet does not say the choice can wait"
+    "clipped text (top): \"12\" 819.19..833 y 84..101",
+    "ellipsis on \"أغسطس\"",
+    "clipped text (top): \"2031\" 745.63..773.23 y 84..101"
    ]
   },
   {
    "name": "sign outside its number",
    "ok": true,
    "sample": [
-    "a sign outside its number: «تغير +3»",
-    "the sheet does not say the choice can wait"
+    "clipped text (top): \"12\" 819.19..833 y 84..101",
+    "ellipsis on \"أغسطس\"",
+    "clipped text (top): \"2031\" 745.63..773.23 y 84..101"
    ]
   },
   {
    "name": "colour alone",
    "ok": true,
    "sample": [
-    "colour alone: «تراجع» has no arrow or icon",
-    "the sheet does not say the choice can wait"
+    "clipped text (top): \"12\" 819.19..833 y 84..101",
+    "ellipsis on \"أغسطس\"",
+    "clipped text (top): \"2031\" 745.63..773.23 y 84..101"
    ]
   },
   {
    "name": "an image in the sheet",
    "ok": true,
    "sample": [
-    "an image in the sheet"
+    "clipped text (top): \"12\" 819.19..833 y 84..101",
+    "ellipsis on \"أغسطس\"",
+    "clipped text (top): \"2031\" 745.63..773.23 y 84..101"
    ]
   },
   {
    "name": "close not round",
    "ok": true,
    "sample": [
-    "close button is not round"
+    "close button is not round",
+    "clipped text (top): \"12\" 819.19..833 y 84..101",
+    "ellipsis on \"أغسطس\""
    ]
   },
   {
    "name": "label without a role",
    "ok": true,
    "sample": [
-    "a11y: a label VoiceOver may skip (no role): «اختبار»",
-    "the sheet does not say the choice can wait"
+    "clipped text (top): \"12\" 819.19..833 y 84..101",
+    "ellipsis on \"أغسطس\"",
+    "clipped text (top): \"2031\" 745.63..773.23 y 84..101"
    ]
   },
   {
    "name": "text overlap",
    "ok": true,
    "sample": [
-    "text overlap \"سقطت حكومتك\" / \"12\"",
-    "text overlap \"سقطت حكومتك\" / \"أغسطس\"",
-    "text overlap \"سقطت حكومتك\" / \"2031\""
+    "clipped text (top): \"12\" 819.19..833 y 70..87",
+    "ellipsis on \"أغسطس\"",
+    "clipped text (top): \"2031\" 745.63..773.23 y 70..87"
    ]
   },
   {
    "name": "identity line colour",
    "ok": true,
    "sample": [
-    "panel top line \"\" rgb(63, 224, 208) 2px (want the section colour, 2 pt, at the top)"
+    "clipped text (top): \"12\" 819.19..833 y 84..101",
+    "ellipsis on \"أغسطس\"",
+    "clipped text (top): \"2031\" 745.63..773.23 y 84..101"
    ]
   },
   {
    "name": "emblem size",
    "ok": true,
    "sample": [
-    "size 28.0x32.0 for .s-emb (want 32 x 32)"
+    "clipped text (top): \"12\" 819.19..833 y 84..101",
+    "ellipsis on \"أغسطس\"",
+    "clipped text (top): \"2031\" 745.63..773.23 y 84..101"
    ]
   },
   {
    "name": "tile icons cyan",
    "ok": true,
    "sample": [
-    "white touch off: .r-tile color rgb(127, 233, 255) (want rgb(234, 242, 247))",
-    "white touch off: .r-tile color rgb(127, 233, 255) (want rgb(234, 242, 247))"
+    "clipped text (top): \"12\" 819.19..833 y 84..101",
+    "ellipsis on \"أغسطس\"",
+    "clipped text (top): \"2031\" 745.63..773.23 y 84..101"
    ]
   },
   {
    "name": "row read in part",
    "ok": true,
    "sample": [
-    "a11y: «المتابعة بالمجلس الانتقالي» does not read its numbers",
-    "a11y: «جزء» does not read all it shows: المتابعة بالمجلس الانتقالي حكومة",
-    "a11y: «المتابعة بالمجلس الانتقالي» does not read whole"
+    "clipped text (top): \"12\" 819.19..833 y 84..101",
+    "ellipsis on \"أغسطس\"",
+    "clipped text (top): \"2031\" 745.63..773.23 y 84..101"
    ]
   },
   {
    "name": "a long headline label",
    "ok": true,
    "sample": [
-    "clipped text (sides): \"عنوان طويل جدًا لا يتسع لخانته أبدًا\" 385.38..539.25 y 124..141",
-    "text outside the sheet's 12 pt padding: \"عنوان طويل جدًا لا يتسع لخانته أبدًا\"",
-    "clipped text (sides): \"1\" 528.44..539.25 y 142..169"
+    "clipped text (top): \"12\" 819.19..833 y 84..101",
+    "ellipsis on \"أغسطس\"",
+    "clipped text (top): \"2031\" 745.63..773.23 y 84..101"
    ]
   },
   {
    "name": "text wider than its box",
    "ok": true,
    "sample": [
-    "text wider than its box: «خياراتك» (35 in 20)"
+    "clipped text (top): \"12\" 819.19..833 y 84..101",
+    "ellipsis on \"أغسطس\"",
+    "clipped text (top): \"2031\" 745.63..773.23 y 84..101"
    ]
   },
   {
    "name": "a long status cell",
    "ok": true,
    "sample": [
-    "clipped text (sides): \"قيمة طويلة جدًا لا تتسع لنصف الجدول\" 416.53..613.3 y 120.5..139.5",
-    "text outside the sheet's 12 pt padding: \"قيمة طويلة جدًا لا تتسع لنصف الجدول\"",
-    "horizontal overflow in خانةقيمة طويلة جدًا لا تتس"
+    "clipped text (top): \"12\" 819.19..833 y 84..101",
+    "ellipsis on \"أغسطس\"",
+    "clipped text (top): \"2031\" 745.63..773.23 y 84..101"
    ]
   },
   {
@@ -319,15 +377,17 @@
    "ok": true,
    "sample": [
     "font weight 11.5/700 for \"12\"",
-    "font weight 11.5/700 for \"أغسطس\"",
-    "font weight 11.5/700 for \"2031\""
+    "clipped text (top): \"12\" 819.19..833 y 84..101",
+    "font weight 11.5/700 for \"أغسطس\""
    ]
   },
   {
    "name": "a tab row on a one-body sheet",
    "ok": true,
    "sample": [
-    "a tab row on a sheet that has one body"
+    "clipped text (top): \"12\" 819.19..833 y 84..101",
+    "ellipsis on \"أغسطس\"",
+    "clipped text (top): \"2031\" 745.63..773.23 y 84..101"
    ]
   },
   {
@@ -335,87 +395,107 @@
    "ok": true,
    "sample": [
     "control height 40.00 for .r-x (want 32): لاحقًا: يبقى الخيار في الإ",
-    "close button is not round"
+    "close button is not round",
+    "clipped text (top): \"12\" 819.19..833 y 84..101"
    ]
   },
   {
    "name": "icon size (no tabs)",
    "ok": true,
    "sample": [
-    "icon size 19x19 (want 16): i"
+    "icon size 19x19 (want 16): i",
+    "clipped text (top): \"12\" 819.19..833 y 84..101",
+    "ellipsis on \"أغسطس\""
    ]
   },
   {
    "name": "fades wrong (no tabs)",
    "ok": true,
    "sample": [
-    "fades 0/1 do not match the scroll state (top 0, over 0.0)"
+    "clipped text (top): \"12\" 584.19..598 y 84..101",
+    "ellipsis on \"أغسطس\"",
+    "clipped text (top): \"2031\" 510.63..538.23 y 84..101"
    ]
   },
   {
    "name": "a dock item marked open",
    "ok": true,
    "sample": [
-    "a dock item is marked open under a sheet of no section"
+    "clipped text (top): \"12\" 819.19..833 y 84..101",
+    "ellipsis on \"أغسطس\"",
+    "clipped text (top): \"2031\" 745.63..773.23 y 84..101"
    ]
   },
   {
    "name": "hint shown without content below",
    "ok": true,
    "sample": [
-    "scroll hint chevron shown without content below"
+    "clipped text (top): \"12\" 584.19..598 y 84..101",
+    "ellipsis on \"أغسطس\"",
+    "clipped text (top): \"2031\" 510.63..538.23 y 84..101"
    ]
   },
   {
    "name": "weekday wrong",
    "ok": true,
    "sample": [
-    "the HUD date is not «الثلاثاء 12 أغسطس 2031»: «السبت 12 أغسطس 2031»"
+    "clipped text (top): \"12\" 819.19..833 y 84..101",
+    "ellipsis on \"أغسطس\"",
+    "clipped text (top): \"2031\" 745.63..773.23 y 84..101"
    ]
   },
   {
    "name": "another moment toast",
    "ok": true,
    "sample": [
-    "the toast is not «ثورة: سقطت الحكومة»",
-    "the toast does not say what happened"
+    "clipped text (top): \"12\" 819.19..833 y 84..101",
+    "ellipsis on \"أغسطس\"",
+    "clipped text (top): \"2031\" 745.63..773.23 y 84..101"
    ]
   },
   {
    "name": "clock looks live",
    "ok": true,
    "sample": [
-    "the clock and the speed chip do not look and read disabled"
+    "clipped text (top): \"12\" 819.19..833 y 84..101",
+    "ellipsis on \"أغسطس\"",
+    "clipped text (top): \"2031\" 745.63..773.23 y 84..101"
    ]
   },
   {
    "name": "speed menu still offered",
    "ok": true,
    "sample": [
-    "the clock and the speed chip do not look and read disabled"
+    "clipped text (top): \"12\" 819.19..833 y 84..101",
+    "ellipsis on \"أغسطس\"",
+    "clipped text (top): \"2031\" 745.63..773.23 y 84..101"
    ]
   },
   {
    "name": "brief text hidden (fallen)",
    "ok": true,
    "sample": [
-    "brief text not fully visible: سقطت حكومتك"
+    "clipped text (top): \"12\" 819.19..833 y 84..101",
+    "ellipsis on \"أغسطس\"",
+    "clipped text (top): \"2031\" 745.63..773.23 y 84..101"
    ]
   },
   {
    "name": "18 pt misuse (fallen)",
    "ok": true,
    "sample": [
-    "18 pt is for the panel's name and the adjusted values only: \"أطاحت ثورة واسعة بالحكومة وتولّى مجلس انتقالي إدارة البلاد. يمكنك متابعة الحملة بالحكومة الجديدة أو إنهاؤها.\""
+    "clipped text (top): \"12\" 819.19..833 y 84..101",
+    "ellipsis on \"أغسطس\"",
+    "clipped text (top): \"2031\" 745.63..773.23 y 84..101"
    ]
   },
   {
    "name": "clipped text (fallen)",
    "ok": true,
    "sample": [
-    "clipped text (sides): \"أطاحت ثورة واسعة بالحكومة وتولّى مجلس انتقالي إدارة البلاد. يمكنك متابعة الحملة بالحكومة الجديدة أو إنهاؤها.\" 564.06..921 y 117..134",
-    "text outside the sheet's 12 pt padding: \"أطاحت ثورة واسعة بالحكومة وتولّى مجلس انتقالي إدارة البلاد. يمكنك متابعة الحملة بالحكومة الجديدة أو إنهاؤها.\"",
-    "clipped text (sides): \"أطاحت ثورة واسعة بالحكومة وتولّى مجلس انتقالي إدارة البلاد. يمكنك متابعة الحملة بالحكومة الجديدة أو إنهاؤها.\" 796.64..921 y 135..152"
+    "clipped text (top): \"12\" 819.19..833 y 84..101",
+    "ellipsis on \"أغسطس\"",
+    "clipped text (top): \"2031\" 745.63..773.23 y 84..101"
    ]
   },
   {
@@ -431,148 +511,162 @@
    "name": "faint text (fallen)",
    "ok": true,
    "sample": [
-    "brief text not fully visible: أطاحت ثورة واسعة بالحكومة وتولّى مجلس انتقالي إدارة البلاد. يمكنك متابعة الحملة بالحكومة الجديدة أو إنهاؤها.",
-    "contrast 2.98 for \"أطاحت ثورة واسعة بالحكوم\"",
-    "contrast 2.98 for \"أطاحت ثورة واسعة بالحكوم\""
+    "clipped text (top): \"12\" 819.19..833 y 84..101",
+    "ellipsis on \"أغسطس\"",
+    "clipped text (top): \"2031\" 745.63..773.23 y 84..101"
    ]
   },
   {
    "name": "% before its number (fallen)",
    "ok": true,
    "sample": [
-    "% shown before its number: \"نسبة 20%\"",
-    "the text is not the brief's",
-    "brief text missing: أطاحت ثورة واسعة بالحكومة وتولّى مجلس انتقالي إدارة البلاد. يمكنك متابعة الحملة بالحكومة الجديدة أو إنهاؤها."
+    "clipped text (top): \"12\" 819.19..833 y 84..101",
+    "ellipsis on \"أغسطس\"",
+    "clipped text (top): \"2031\" 745.63..773.23 y 84..101"
    ]
   },
   {
    "name": "clock resumable",
    "ok": true,
    "sample": [
-    "the clock and the speed chip do not look and read disabled",
-    "the clock does not wait for the choice (play glyph, «متوقف حتى تختار», disabled)"
+    "clipped text (top): \"12\" 819.19..833 y 84..101",
+    "ellipsis on \"أغسطس\"",
+    "clipped text (top): \"2031\" 745.63..773.23 y 84..101"
    ]
   },
   {
    "name": "date off",
    "ok": true,
    "sample": [
-    "the HUD date is not «الثلاثاء 12 أغسطس 2031»: «السبت 1 يناير 2011»",
-    "the HUD date is not 12 August 2031"
+    "clipped text (top): \"12\" 819.19..833 y 84..101",
+    "ellipsis on \"أغسطس\"",
+    "clipped text (top): \"2031\" 745.63..773.23 y 84..101"
    ]
   },
   {
    "name": "text changed",
    "ok": true,
    "sample": [
-    "the text is not the brief's",
-    "brief text missing: أطاحت ثورة واسعة بالحكومة وتولّى مجلس انتقالي إدارة البلاد. يمكنك متابعة الحملة بالحكومة الجديدة أو إنهاؤها.",
-    "brief text missing: أطاحت ثورة واسعة بالحكومة وتولّى مجلس انتقالي إدارة البلاد. يمكنك متابعة الحملة بالحكومة الجديدة أو إنهاؤها."
+    "clipped text (top): \"12\" 819.19..833 y 84..101",
+    "ellipsis on \"أغسطس\"",
+    "clipped text (top): \"2031\" 745.63..773.23 y 84..101"
    ]
   },
   {
    "name": "choices swapped",
    "ok": true,
    "sample": [
-    "the choices are «إنهاء الحملة، المتابعة بالمجلس الانتقالي»",
-    "«المتابعة بالمجلس الانتقالي»'s line is not «حكومة مصر الجديدة · تبدأ بشرعية 35»",
-    "a11y: «المتابعة بالمجلس الانتقالي» does not read whole"
+    "clipped text (top): \"12\" 819.19..833 y 84..101",
+    "ellipsis on \"أغسطس\"",
+    "clipped text (top): \"2031\" 745.63..773.23 y 84..101"
    ]
   },
   {
    "name": "a default marked",
    "ok": true,
    "sample": [
-    "a choice is marked default: «المتابعة بالمجلس الانتقالي»"
+    "clipped text (top): \"12\" 819.19..833 y 84..101",
+    "ellipsis on \"أغسطس\"",
+    "clipped text (top): \"2031\" 745.63..773.23 y 84..101"
    ]
   },
   {
    "name": "legitimacy unsaid",
    "ok": true,
    "sample": [
-    "a11y: «المتابعة بالمجلس الانتقالي» does not read its numbers",
-    "a11y: «المتابعة بالمجلس الانتقا» does not read all it shows: تبدأ بشرعية 35",
-    "a11y: «المتابعة بالمجلس الانتقالي» does not read whole"
+    "clipped text (top): \"12\" 819.19..833 y 84..101",
+    "ellipsis on \"أغسطس\"",
+    "clipped text (top): \"2031\" 745.63..773.23 y 84..101"
    ]
   },
   {
    "name": "line off",
    "ok": true,
    "sample": [
-    "a11y: «إنهاء الحملة: يعرض تقرير» does not read all it shows: يعود إلى القائمة",
-    "«إنهاء الحملة»'s line is not «يعرض تقرير الأمة»",
-    "brief text missing: يعرض تقرير الأمة"
+    "clipped text (top): \"12\" 819.19..833 y 84..101",
+    "ellipsis on \"أغسطس\"",
+    "clipped text (top): \"2031\" 745.63..773.23 y 84..101"
    ]
   },
   {
    "name": "Mubarak in 2031",
    "ok": true,
    "sample": [
-    "the nation card names a real person in 2031",
-    "the nation card does not show the council running the country"
+    "clipped text (top): \"12\" 819.19..833 y 84..101",
+    "ellipsis on \"أغسطس\"",
+    "clipped text (top): \"2031\" 745.63..773.23 y 84..101"
    ]
   },
   {
    "name": "old toast",
    "ok": true,
    "sample": [
-    "the toast is not «ثورة: سقطت الحكومة»",
-    "the toast does not say what happened"
+    "clipped text (top): \"12\" 819.19..833 y 84..101",
+    "ellipsis on \"أغسطس\"",
+    "clipped text (top): \"2031\" 745.63..773.23 y 84..101"
    ]
   },
   {
    "name": "HUD legitimacy off",
    "ok": true,
    "sample": [
-    "the HUD keeps the 2011 values: الشرعية",
-    "the HUD (legitimacy 44, «حكم انتقالي») does not agree with the council (35, «حكم انتقالي»)"
+    "clipped text (top): \"12\" 819.19..833 y 84..101",
+    "ellipsis on \"أغسطس\"",
+    "clipped text (top): \"2031\" 745.63..773.23 y 84..101"
    ]
   },
   {
    "name": "HUD stability of 2011",
    "ok": true,
    "sample": [
-    "the HUD keeps the 2011 values: الاستقرار",
-    "the HUD stability is not the council's 31%"
+    "clipped text (top): \"12\" 819.19..833 y 84..101",
+    "ellipsis on \"أغسطس\"",
+    "clipped text (top): \"2031\" 745.63..773.23 y 84..101"
    ]
   },
   {
    "name": "later said in part",
    "ok": true,
    "sample": [
-    "the sheet does not say the choice can wait",
-    "brief text missing: يمكنك الاختيار لاحقًا من الإشعارات، والوقت متوقف حتى تختار.",
-    "brief text missing: يمكنك الاختيار لاحقًا من الإشعارات، والوقت متوقف حتى تختار."
+    "clipped text (top): \"12\" 819.19..833 y 84..101",
+    "ellipsis on \"أغسطس\"",
+    "clipped text (top): \"2031\" 745.63..773.23 y 84..101"
    ]
   },
   {
    "name": "later unsaid",
    "ok": true,
    "sample": [
-    "the sheet does not say the choice can wait",
-    "brief text missing: يمكنك الاختيار لاحقًا من الإشعارات، والوقت متوقف حتى تختار.",
-    "brief text missing: يمكنك الاختيار لاحقًا من الإشعارات، والوقت متوقف حتى تختار."
+    "clipped text (top): \"12\" 819.19..833 y 84..101",
+    "ellipsis on \"أغسطس\"",
+    "clipped text (top): \"2031\" 745.63..773.23 y 84..101"
    ]
   },
   {
    "name": "close says nothing",
    "ok": true,
    "sample": [
-    "a11y: the close button does not say the choice waits"
+    "clipped text (top): \"12\" 819.19..833 y 84..101",
+    "ellipsis on \"أغسطس\"",
+    "clipped text (top): \"2031\" 745.63..773.23 y 84..101"
    ]
   },
   {
    "name": "HUD trend moving",
    "ok": true,
    "sample": [
-    "the HUD «الخزينة» moves while the clock is stopped"
+    "clipped text (top): \"12\" 819.19..833 y 84..101",
+    "ellipsis on \"أغسطس\"",
+    "clipped text (top): \"2031\" 745.63..773.23 y 84..101"
    ]
   },
   {
    "name": "HUD 2011 value",
    "ok": true,
    "sample": [
-    "the HUD keeps the 2011 values: الخزينة"
+    "clipped text (top): \"12\" 819.19..833 y 84..101",
+    "ellipsis on \"أغسطس\"",
+    "clipped text (top): \"2031\" 745.63..773.23 y 84..101"
    ]
   },
   {

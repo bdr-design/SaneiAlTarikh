@@ -1,7 +1,7 @@
 {
  "se": {
   "device": "667x375 side 0 bottom 0 none",
-  "renderedAt": "2026-11-07T16:05:17.390Z",
+  "renderedAt": "2026-11-07T16:50:10.630Z",
   "inputs": {
    "files": [
     "index.html",
@@ -24,12 +24,23 @@
     "../../shared/map_mena_d1_overlay.svg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "d209308be7122b8e0e1130a9cd5ddc695f8c3bee"
+   "sha1": "422c87464be7c8f566262621d6e5eb8eb624ad2e"
   },
-  "issues": [],
+  "issues": [
+   "fallen: clipped text (top): \"12\" 584.19..598 y 84..101",
+   "fallen: ellipsis on \"أغسطس\"",
+   "fallen: clipped text (top): \"2031\" 510.63..538.23 y 84..101",
+   "fallen: clipped text (top): \"·\" 501.09..510.63 y 84..101",
+   "fallen: ellipsis on \"الوقت متوقف\"",
+   "fallen_end: clipped text (top): \"12\" 584.19..598 y 84..101",
+   "fallen_end: ellipsis on \"أغسطس\"",
+   "fallen_end: clipped text (top): \"2031\" 510.63..538.23 y 84..101",
+   "fallen_end: clipped text (top): \"·\" 501.09..510.63 y 84..101",
+   "fallen_end: ellipsis on \"الوقت متوقف\""
+  ],
   "views": {
    "fallen": {
-    "issueCount": 0,
+    "issueCount": 5,
     "png": true,
     "fit": {
      "top": {
@@ -400,7 +411,7 @@
     ]
    },
    "fallen_end": {
-    "issueCount": 0,
+    "issueCount": 5,
     "png": true,
     "fit": {
      "top": {
@@ -782,18 +793,18 @@
    "_build/se_fallen_end.png"
   ],
   "pngSha1": {
-   "se.png": "bfe9734bc43c257a270eb521f778807f189ae137",
-   "_build/se_hit.png": "6898ac86570fc28a03901773b162f54f37a6085a",
-   "_build/se_fallen_end.png": "bfe9734bc43c257a270eb521f778807f189ae137"
+   "se.png": "555c6e7b0d79799d446e28b6f8913fc5a602bf84",
+   "_build/se_hit.png": "935ef249a87c9c3aaf372b4c0bcc8e22d13d5db3",
+   "_build/se_fallen_end.png": "555c6e7b0d79799d446e28b6f8913fc5a602bf84"
   },
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 0
+  "issueCount": 10
  },
  "mini": {
   "device": "812x375 side 50 bottom 21 notch",
-  "renderedAt": "2026-11-07T16:05:22.299Z",
+  "renderedAt": "2026-11-07T16:50:18.378Z",
   "inputs": {
    "files": [
     "index.html",
@@ -816,12 +827,23 @@
     "../../shared/map_mena_d1_overlay.svg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "d209308be7122b8e0e1130a9cd5ddc695f8c3bee"
+   "sha1": "422c87464be7c8f566262621d6e5eb8eb624ad2e"
   },
-  "issues": [],
+  "issues": [
+   "fallen: clipped text (top): \"12\" 687.19..701 y 84..101",
+   "fallen: ellipsis on \"أغسطس\"",
+   "fallen: clipped text (top): \"2031\" 613.63..641.23 y 84..101",
+   "fallen: clipped text (top): \"·\" 604.09..613.63 y 84..101",
+   "fallen: ellipsis on \"الوقت متوقف\"",
+   "fallen_end: clipped text (top): \"12\" 687.19..701 y 84..101",
+   "fallen_end: ellipsis on \"أغسطس\"",
+   "fallen_end: clipped text (top): \"2031\" 613.63..641.23 y 84..101",
+   "fallen_end: clipped text (top): \"·\" 604.09..613.63 y 84..101",
+   "fallen_end: ellipsis on \"الوقت متوقف\""
+  ],
   "views": {
    "fallen": {
-    "issueCount": 0,
+    "issueCount": 5,
     "png": true,
     "fit": {
      "top": {
@@ -1199,7 +1221,7 @@
     ]
    },
    "fallen_end": {
-    "issueCount": 0,
+    "issueCount": 5,
     "png": true,
     "fit": {
      "top": {
@@ -1588,18 +1610,18 @@
    "_build/mini_fallen_end.png"
   ],
   "pngSha1": {
-   "mini.png": "8162aa74f78cfb41aff2795b1f1b6d4c07701f0c",
-   "_build/mini_hit.png": "d8fbb2b43ca6e49e621e8d5748dcedad3d57c3f6",
-   "_build/mini_fallen_end.png": "8162aa74f78cfb41aff2795b1f1b6d4c07701f0c"
+   "mini.png": "b613389392aa6d36211520d60381f9ffc1651806",
+   "_build/mini_hit.png": "2cae37a929892face5ac803877d608928be8433f",
+   "_build/mini_fallen_end.png": "b613389392aa6d36211520d60381f9ffc1651806"
   },
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 0
+  "issueCount": 10
  },
  "i14": {
   "device": "844x390 side 47 bottom 21 notch",
-  "renderedAt": "2026-11-07T16:05:27.592Z",
+  "renderedAt": "2026-11-07T16:50:26.765Z",
   "inputs": {
    "files": [
     "index.html",
@@ -1622,12 +1644,23 @@
     "../../shared/map_mena_d1_overlay.svg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "d209308be7122b8e0e1130a9cd5ddc695f8c3bee"
+   "sha1": "422c87464be7c8f566262621d6e5eb8eb624ad2e"
   },
-  "issues": [],
+  "issues": [
+   "fallen: clipped text (top): \"12\" 722.19..736 y 84..101",
+   "fallen: ellipsis on \"أغسطس\"",
+   "fallen: clipped text (top): \"2031\" 648.63..676.23 y 84..101",
+   "fallen: clipped text (top): \"·\" 639.09..648.63 y 84..101",
+   "fallen: ellipsis on \"الوقت متوقف\"",
+   "fallen_end: clipped text (top): \"12\" 722.19..736 y 84..101",
+   "fallen_end: ellipsis on \"أغسطس\"",
+   "fallen_end: clipped text (top): \"2031\" 648.63..676.23 y 84..101",
+   "fallen_end: clipped text (top): \"·\" 639.09..648.63 y 84..101",
+   "fallen_end: ellipsis on \"الوقت متوقف\""
+  ],
   "views": {
    "fallen": {
-    "issueCount": 0,
+    "issueCount": 5,
     "png": true,
     "fit": {
      "top": {
@@ -2115,7 +2148,7 @@
     ]
    },
    "fallen_end": {
-    "issueCount": 0,
+    "issueCount": 5,
     "png": true,
     "fit": {
      "top": {
@@ -2614,18 +2647,18 @@
    "_build/i14_fallen_end.png"
   ],
   "pngSha1": {
-   "i14.png": "f34a9448f7fefdbf36babcca97d7fb4576721a1e",
-   "_build/i14_hit.png": "e9677125d6a3b951f1db2dae7940c5e13c91fc72",
-   "_build/i14_fallen_end.png": "f34a9448f7fefdbf36babcca97d7fb4576721a1e"
+   "i14.png": "9447be3d25ab3c5e54bcb58643090c8eeba2f690",
+   "_build/i14_hit.png": "f69a5fd94571443e93f18c6f8c153b8bb861c83c",
+   "_build/i14_fallen_end.png": "9447be3d25ab3c5e54bcb58643090c8eeba2f690"
   },
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 0
+  "issueCount": 10
  },
  "i16": {
   "device": "852x393 side 59 bottom 21 island",
-  "renderedAt": "2026-11-07T16:05:33.069Z",
+  "renderedAt": "2026-11-07T16:50:36.006Z",
   "inputs": {
    "files": [
     "index.html",
@@ -2648,12 +2681,23 @@
     "../../shared/map_mena_d1_overlay.svg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "d209308be7122b8e0e1130a9cd5ddc695f8c3bee"
+   "sha1": "422c87464be7c8f566262621d6e5eb8eb624ad2e"
   },
-  "issues": [],
+  "issues": [
+   "fallen: clipped text (top): \"12\" 718.19..732 y 84..101",
+   "fallen: ellipsis on \"أغسطس\"",
+   "fallen: clipped text (top): \"2031\" 644.63..672.23 y 84..101",
+   "fallen: clipped text (top): \"·\" 635.09..644.63 y 84..101",
+   "fallen: ellipsis on \"الوقت متوقف\"",
+   "fallen_end: clipped text (top): \"12\" 718.19..732 y 84..101",
+   "fallen_end: ellipsis on \"أغسطس\"",
+   "fallen_end: clipped text (top): \"2031\" 644.63..672.23 y 84..101",
+   "fallen_end: clipped text (top): \"·\" 635.09..644.63 y 84..101",
+   "fallen_end: ellipsis on \"الوقت متوقف\""
+  ],
   "views": {
    "fallen": {
-    "issueCount": 0,
+    "issueCount": 5,
     "png": true,
     "fit": {
      "top": {
@@ -3130,7 +3174,7 @@
     ]
    },
    "fallen_end": {
-    "issueCount": 0,
+    "issueCount": 5,
     "png": true,
     "fit": {
      "top": {
@@ -3618,18 +3662,18 @@
    "_build/i16_fallen_end.png"
   ],
   "pngSha1": {
-   "i16.png": "1ebc64b0d2ce84e9d0827072a00a34bf1283517d",
-   "_build/i16_hit.png": "6cee1ee4d9e2e78ba6105a95e2e61d211e369d06",
-   "_build/i16_fallen_end.png": "1ebc64b0d2ce84e9d0827072a00a34bf1283517d"
+   "i16.png": "0974087ab2c778533ce15ed961aba459b801d88c",
+   "_build/i16_hit.png": "b7d23281da8bcce2b8b6b129e73c1a44cabacd44",
+   "_build/i16_fallen_end.png": "0974087ab2c778533ce15ed961aba459b801d88c"
   },
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 0
+  "issueCount": 10
  },
  "i16pro": {
   "device": "874x402 side 62 bottom 21 island",
-  "renderedAt": "2026-11-07T16:05:38.507Z",
+  "renderedAt": "2026-11-07T16:50:44.177Z",
   "inputs": {
    "files": [
     "index.html",
@@ -3652,12 +3696,23 @@
     "../../shared/map_mena_d1_overlay.svg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "d209308be7122b8e0e1130a9cd5ddc695f8c3bee"
+   "sha1": "422c87464be7c8f566262621d6e5eb8eb624ad2e"
   },
-  "issues": [],
+  "issues": [
+   "fallen: clipped text (top): \"12\" 737.19..751 y 84..101",
+   "fallen: ellipsis on \"أغسطس\"",
+   "fallen: clipped text (top): \"2031\" 663.63..691.23 y 84..101",
+   "fallen: clipped text (top): \"·\" 654.09..663.63 y 84..101",
+   "fallen: ellipsis on \"الوقت متوقف\"",
+   "fallen_end: clipped text (top): \"12\" 737.19..751 y 84..101",
+   "fallen_end: ellipsis on \"أغسطس\"",
+   "fallen_end: clipped text (top): \"2031\" 663.63..691.23 y 84..101",
+   "fallen_end: clipped text (top): \"·\" 654.09..663.63 y 84..101",
+   "fallen_end: ellipsis on \"الوقت متوقف\""
+  ],
   "views": {
    "fallen": {
-    "issueCount": 0,
+    "issueCount": 5,
     "png": true,
     "fit": {
      "top": {
@@ -4145,7 +4200,7 @@
     ]
    },
    "fallen_end": {
-    "issueCount": 0,
+    "issueCount": 5,
     "png": true,
     "fit": {
      "top": {
@@ -4644,18 +4699,18 @@
    "_build/i16pro_fallen_end.png"
   ],
   "pngSha1": {
-   "i16pro.png": "0d9a8c7bff28b3a25eaf7de872b635c552250bf2",
-   "_build/i16pro_hit.png": "60bdaeea89de8f50375539b1891ae82d117aa1f3",
-   "_build/i16pro_fallen_end.png": "0d9a8c7bff28b3a25eaf7de872b635c552250bf2"
+   "i16pro.png": "09fb475cf0942195332b6f24f60b5710ffb649b6",
+   "_build/i16pro_hit.png": "9bd15808a0902aca56f43d37dea28047d5183dd6",
+   "_build/i16pro_fallen_end.png": "09fb475cf0942195332b6f24f60b5710ffb649b6"
   },
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 0
+  "issueCount": 10
  },
  "i11": {
   "device": "896x414 side 48 bottom 21 notch",
-  "renderedAt": "2026-11-07T16:05:44.067Z",
+  "renderedAt": "2026-11-07T16:50:52.366Z",
   "inputs": {
    "files": [
     "index.html",
@@ -4678,12 +4733,23 @@
     "../../shared/map_mena_d1_overlay.svg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "d209308be7122b8e0e1130a9cd5ddc695f8c3bee"
+   "sha1": "422c87464be7c8f566262621d6e5eb8eb624ad2e"
   },
-  "issues": [],
+  "issues": [
+   "fallen: clipped text (top): \"12\" 773.19..787 y 84..101",
+   "fallen: ellipsis on \"أغسطس\"",
+   "fallen: clipped text (top): \"2031\" 699.63..727.23 y 84..101",
+   "fallen: clipped text (top): \"·\" 690.09..699.63 y 84..101",
+   "fallen: ellipsis on \"الوقت متوقف\"",
+   "fallen_end: clipped text (top): \"12\" 773.19..787 y 84..101",
+   "fallen_end: ellipsis on \"أغسطس\"",
+   "fallen_end: clipped text (top): \"2031\" 699.63..727.23 y 84..101",
+   "fallen_end: clipped text (top): \"·\" 690.09..699.63 y 84..101",
+   "fallen_end: ellipsis on \"الوقت متوقف\""
+  ],
   "views": {
    "fallen": {
-    "issueCount": 0,
+    "issueCount": 5,
     "png": true,
     "fit": {
      "top": {
@@ -5170,7 +5236,7 @@
     ]
    },
    "fallen_end": {
-    "issueCount": 0,
+    "issueCount": 5,
     "png": true,
     "fit": {
      "top": {
@@ -5668,18 +5734,18 @@
    "_build/i11_fallen_end.png"
   ],
   "pngSha1": {
-   "i11.png": "1b76262c19c08bb00cccd9b2413c1f96a5b2da2c",
-   "_build/i11_hit.png": "dd3d14a7ac0c4c729b3490538735c1fd529d9c3c",
-   "_build/i11_fallen_end.png": "1b76262c19c08bb00cccd9b2413c1f96a5b2da2c"
+   "i11.png": "fa503ab338f761175187359913fe1ab9fc05a8af",
+   "_build/i11_hit.png": "3f5c25c8f88a2db84fc9976c0bfff212be835033",
+   "_build/i11_fallen_end.png": "fa503ab338f761175187359913fe1ab9fc05a8af"
   },
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 0
+  "issueCount": 10
  },
  "i16promax": {
   "device": "956x440 side 62 bottom 21 island",
-  "renderedAt": "2026-11-07T16:05:49.395Z",
+  "renderedAt": "2026-11-07T16:51:01.665Z",
   "inputs": {
    "files": [
     "index.html",
@@ -5702,12 +5768,23 @@
     "../../shared/map_mena_d1_overlay.svg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "d209308be7122b8e0e1130a9cd5ddc695f8c3bee"
+   "sha1": "422c87464be7c8f566262621d6e5eb8eb624ad2e"
   },
-  "issues": [],
+  "issues": [
+   "fallen: clipped text (top): \"12\" 819.19..833 y 84..101",
+   "fallen: ellipsis on \"أغسطس\"",
+   "fallen: clipped text (top): \"2031\" 745.63..773.23 y 84..101",
+   "fallen: clipped text (top): \"·\" 736.09..745.63 y 84..101",
+   "fallen: ellipsis on \"الوقت متوقف\"",
+   "fallen_end: clipped text (top): \"12\" 819.19..833 y 84..101",
+   "fallen_end: ellipsis on \"أغسطس\"",
+   "fallen_end: clipped text (top): \"2031\" 745.63..773.23 y 84..101",
+   "fallen_end: clipped text (top): \"·\" 736.09..745.63 y 84..101",
+   "fallen_end: ellipsis on \"الوقت متوقف\""
+  ],
   "views": {
    "fallen": {
-    "issueCount": 0,
+    "issueCount": 5,
     "png": true,
     "fit": {
      "top": {
@@ -6194,7 +6271,7 @@
     ]
    },
    "fallen_end": {
-    "issueCount": 0,
+    "issueCount": 5,
     "png": true,
     "fit": {
      "top": {
@@ -6692,13 +6769,13 @@
    "_build/i16promax_fallen_end.png"
   ],
   "pngSha1": {
-   "i16promax.png": "157828586128e5c78ed2595726146c821c75ce13",
-   "_build/i16promax_hit.png": "3c5e2efc87f1e133ee11c7ad382b493e0ada88a9",
-   "_build/i16promax_fallen_end.png": "157828586128e5c78ed2595726146c821c75ce13"
+   "i16promax.png": "33814c2cf4c919b82be19486b9a6ba4a71e5c925",
+   "_build/i16promax_hit.png": "0cc4cdfddc8d5854e813399118c265340365a863",
+   "_build/i16promax_fallen_end.png": "33814c2cf4c919b82be19486b9a6ba4a71e5c925"
   },
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 0
+  "issueCount": 10
  }
 }

@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-07T16:15:38.257Z",
+ "ranAt": "2026-11-07T16:54:31.073Z",
  "inputs": {
   "files": [
    "index.html",
@@ -26,33 +26,125 @@
    "header_cairo.jpg",
    "map_overlay_cairo.svg"
   ],
-  "sha1": "1159bf31e5700545e0118bf439b5711ba9680bc0"
+  "sha1": "de0ac270abf276f309b479a76021d2aeff674245"
  },
  "cleanIssues": {
-  "i16promax": [],
-  "i16promax_overview_end": [],
-  "i16promax_forces": [],
-  "i16promax_forces_end": [],
-  "i16promax_equipment": [],
-  "i16promax_equipment_end": [],
-  "i16promax_wars": [],
-  "i16promax_wars_end": [],
-  "i16promax_forces_at137": [],
-  "i16promax_equipment_at137": [],
+  "i16promax": [
+   "ellipsis on \"مصر\"",
+   "clipped text (top): \"·\" 804.64..814.17 y 84..101",
+   "ellipsis on \"القوات المسلحة\""
+  ],
+  "i16promax_overview_end": [
+   "ellipsis on \"مصر\"",
+   "clipped text (top): \"·\" 804.64..814.17 y 84..101",
+   "ellipsis on \"القوات المسلحة\""
+  ],
+  "i16promax_forces": [
+   "ellipsis on \"مصر\"",
+   "clipped text (top): \"·\" 804.64..814.17 y 84..101",
+   "ellipsis on \"القوات المسلحة\""
+  ],
+  "i16promax_forces_end": [
+   "ellipsis on \"مصر\"",
+   "clipped text (top): \"·\" 804.64..814.17 y 84..101",
+   "ellipsis on \"القوات المسلحة\""
+  ],
+  "i16promax_equipment": [
+   "ellipsis on \"مصر\"",
+   "clipped text (top): \"·\" 804.64..814.17 y 84..101",
+   "ellipsis on \"القوات المسلحة\""
+  ],
+  "i16promax_equipment_end": [
+   "ellipsis on \"مصر\"",
+   "clipped text (top): \"·\" 804.64..814.17 y 84..101",
+   "ellipsis on \"القوات المسلحة\""
+  ],
+  "i16promax_wars": [
+   "ellipsis on \"مصر\"",
+   "clipped text (top): \"·\" 804.64..814.17 y 84..101",
+   "ellipsis on \"القوات المسلحة\""
+  ],
+  "i16promax_wars_end": [
+   "ellipsis on \"مصر\"",
+   "clipped text (top): \"·\" 804.64..814.17 y 84..101",
+   "ellipsis on \"القوات المسلحة\""
+  ],
+  "i16promax_forces_at137": [
+   "ellipsis on \"مصر\"",
+   "clipped text (top): \"·\" 804.64..814.17 y 84..101",
+   "ellipsis on \"القوات المسلحة\""
+  ],
+  "i16promax_equipment_at137": [
+   "ellipsis on \"مصر\"",
+   "clipped text (top): \"·\" 804.64..814.17 y 84..101",
+   "ellipsis on \"القوات المسلحة\""
+  ],
   "i16promax coverage": [],
-  "se": [],
-  "se_overview_end": [],
-  "se_forces": [],
-  "se_forces_end": [],
-  "se_equipment": [],
-  "se_equipment_end": [],
-  "se_wars": [],
-  "se_wars_end": [],
-  "se_forces_at86": [],
-  "se_forces_at172": [],
-  "se_forces_at258": [],
-  "se_equipment_at86": [],
-  "se_equipment_at172": [],
+  "se": [
+   "ellipsis on \"مصر\"",
+   "clipped text (top): \"·\" 569.64..579.17 y 84..101",
+   "ellipsis on \"القوات المسلحة\""
+  ],
+  "se_overview_end": [
+   "ellipsis on \"مصر\"",
+   "clipped text (top): \"·\" 569.64..579.17 y 84..101",
+   "ellipsis on \"القوات المسلحة\""
+  ],
+  "se_forces": [
+   "ellipsis on \"مصر\"",
+   "clipped text (top): \"·\" 569.64..579.17 y 84..101",
+   "ellipsis on \"القوات المسلحة\""
+  ],
+  "se_forces_end": [
+   "ellipsis on \"مصر\"",
+   "clipped text (top): \"·\" 569.64..579.17 y 84..101",
+   "ellipsis on \"القوات المسلحة\""
+  ],
+  "se_equipment": [
+   "ellipsis on \"مصر\"",
+   "clipped text (top): \"·\" 569.64..579.17 y 84..101",
+   "ellipsis on \"القوات المسلحة\""
+  ],
+  "se_equipment_end": [
+   "ellipsis on \"مصر\"",
+   "clipped text (top): \"·\" 569.64..579.17 y 84..101",
+   "ellipsis on \"القوات المسلحة\""
+  ],
+  "se_wars": [
+   "ellipsis on \"مصر\"",
+   "clipped text (top): \"·\" 569.64..579.17 y 84..101",
+   "ellipsis on \"القوات المسلحة\""
+  ],
+  "se_wars_end": [
+   "ellipsis on \"مصر\"",
+   "clipped text (top): \"·\" 569.64..579.17 y 84..101",
+   "ellipsis on \"القوات المسلحة\""
+  ],
+  "se_forces_at86": [
+   "ellipsis on \"مصر\"",
+   "clipped text (top): \"·\" 569.64..579.17 y 84..101",
+   "ellipsis on \"القوات المسلحة\""
+  ],
+  "se_forces_at172": [
+   "ellipsis on \"مصر\"",
+   "clipped text (top): \"·\" 569.64..579.17 y 84..101",
+   "ellipsis on \"القوات المسلحة\""
+  ],
+  "se_forces_at258": [
+   "ellipsis on \"مصر\"",
+   "clipped text (top): \"·\" 569.64..579.17 y 84..101",
+   "ellipsis on \"القوات المسلحة\""
+  ],
+  "se_equipment_at86": [
+   "ellipsis on \"مصر\"",
+   "clipped text (top): \"·\" 569.64..579.17 y 84..101",
+   "ellipsis on \"القوات المسلحة\""
+  ],
+  "se_equipment_at172": [
+   "ellipsis on \"مصر\"",
+   "clipped text (top): \"·\" 569.64..579.17 y 84..101",
+   "ellipsis on \"القوات المسلحة\""
+  ],
   "se coverage": []
  },
  "results": [
@@ -60,16 +152,18 @@
    "name": "type size",
    "ok": true,
    "sample": [
-    "font size 17 for \"الجيش\""
+    "font size 17 for \"الجيش\"",
+    "ellipsis on \"مصر\"",
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
    ]
   },
   {
    "name": "font weight",
    "ok": true,
    "sample": [
-    "font weight 11.5/700 for \"نظرة عامة\"",
-    "font weight 11.5/700 for \"القوات\"",
-    "font weight 11.5/700 for \"المعدات\""
+    "ellipsis on \"مصر\"",
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
+    "ellipsis on \"القوات المسلحة\""
    ]
   },
   {
@@ -77,7 +171,8 @@
    "ok": true,
    "sample": [
     "text colour off-token rgb(136, 153, 170): \"الجيش\"",
-    "contrast 2.4 for \"الجيش\""
+    "ellipsis on \"مصر\"",
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
    ]
   },
   {
@@ -85,25 +180,26 @@
    "ok": true,
    "sample": [
     "panel radius الجيش: مصر: 6 (want 12)",
-    "radius 6 for .sheet (want 12)"
+    "radius 6 for .sheet (want 12)",
+    "ellipsis on \"مصر\""
    ]
   },
   {
    "name": "tap in the side inset",
    "ok": true,
    "sample": [
-    "text in side inset: 469",
-    "text in side inset: دون تغير",
-    "text in side inset: لماذا؟"
+    "ellipsis on \"مصر\"",
+    "clipped text (top): \"·\" 834.64..844.17 y 84..101",
+    "ellipsis on \"القوات المسلحة\""
    ]
   },
   {
    "name": "panel in the side inset",
    "ok": true,
    "sample": [
-    "text in side inset: 469",
-    "text in side inset: دون تغير",
-    "text in side inset: لماذا؟"
+    "ellipsis on \"مصر\"",
+    "clipped text (top): \"·\" 834.64..844.17 y 84..101",
+    "ellipsis on \"القوات المسلحة\""
    ]
   },
   {
@@ -111,8 +207,8 @@
    "ok": true,
    "sample": [
     "panel not opaque: الجيش: مصر rgba(9, 17, 25, 0.66)",
-    "contrast 3.84 for \"نظرة عامة\"",
-    "contrast 4.08 for \"القوات\""
+    "ellipsis on \"مصر\"",
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
    ]
   },
   {
@@ -120,278 +216,314 @@
    "ok": true,
    "sample": [
     "panel not opaque (opacity 0.60): الجيش: مصر",
-    "brief text not fully visible: الجيش",
-    "brief text not fully visible: لا حروب"
+    "ellipsis on \"مصر\"",
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
    ]
   },
   {
    "name": "Egypt covered",
    "ok": true,
    "sample": [
-    "Nile delta covered by panel الجيش: مصر",
-    "Nile delta under the hit box of نظرة عامة",
-    "Nile delta under the hit box of القوات"
+    "ellipsis on \"مصر\"",
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
+    "ellipsis on \"القوات المسلحة\""
    ]
   },
   {
    "name": "map dimmed",
    "ok": true,
    "sample": [
-    "the map is dimmed (opacity 1.00, filter brightness(0.35))"
+    "ellipsis on \"مصر\"",
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
+    "ellipsis on \"القوات المسلحة\""
    ]
   },
   {
    "name": "map faded",
    "ok": true,
    "sample": [
-    "the map is dimmed (opacity 0.30, filter none)"
+    "ellipsis on \"مصر\"",
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
+    "ellipsis on \"القوات المسلحة\""
    ]
   },
   {
    "name": "scrim over the map",
    "ok": true,
    "sample": [
-    "something drawn over the map: DIV (rgba(0, 0, 0, 0.55))",
-    "contrast 1.92 for \"3\""
+    "ellipsis on \"مصر\"",
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
+    "ellipsis on \"القوات المسلحة\""
    ]
   },
   {
    "name": "sheet width",
    "ok": true,
    "sample": [
-    "sheet width 330 (want round(clamp(43% of 832, 340, 380)), or the room the dock leaves if 330..: 358)"
+    "ellipsis on \"مصر\"",
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
+    "ellipsis on \"القوات المسلحة\""
    ]
   },
   {
    "name": "sheet top",
    "ok": true,
    "sample": [
-    "hit overlap الاستقرار 58% / إغلاق",
-    "panel overlap الدولة: مصر، حسني مبارك، ج / الجيش: مصر",
-    "panel overlap الخزينة 36.0 مليار $ الاست / الجيش: مصر"
+    "ellipsis on \"مصر\"",
+    "clipped text (top): \"·\" 804.64..814.17 y 70..87",
+    "ellipsis on \"القوات المسلحة\""
    ]
   },
   {
    "name": "dock hidden although it fits",
    "ok": true,
    "sample": [
-    "dock hidden although it fits left of the sheet"
+    "ellipsis on \"مصر\"",
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
+    "ellipsis on \"القوات المسلحة\""
    ]
   },
   {
    "name": "dock shown on the SE",
    "ok": true,
    "sample": [
-    "icon over text: i / \"النمو\"",
-    "icon over text: i / \"−0.2\"",
-    "icon over text: i / \"القوام\""
+    "ellipsis on \"مصر\"",
+    "clipped text (top): \"·\" 569.64..579.17 y 84..101",
+    "ellipsis on \"القوات المسلحة\""
    ]
   },
   {
    "name": "left stack moved",
    "ok": true,
    "sample": [
-    "HUD element moved from its B3 position: .toast x 70.0..275.6 y 56.0..88.0",
-    "HUD element moved from its B3 position: .btn.mode x 70.0..191.6 y 96.0..128.0",
-    "HUD element moved from its B3 position: .btn.home x 70.0..141.5 y 136.0..168.0"
+    "ellipsis on \"مصر\"",
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
+    "ellipsis on \"القوات المسلحة\""
    ]
   },
   {
    "name": "fit not the loosest",
    "ok": true,
    "sample": [
-    "fit level 6 is not the loosest that fits: [[0,0]]"
+    "ellipsis on \"مصر\"",
+    "clipped text (top): \"·\" 804.64..814.17 y 78..95",
+    "ellipsis on \"القوات المسلحة\""
    ]
   },
   {
    "name": "two tab bodies",
    "ok": true,
    "sample": [
-    "clipped text (bottom): \"لماذا؟\" 854.31..881 y 220..237",
-    "clipped text (bottom): \"لماذا؟\" 734.66..761.34 y 220..237",
-    "clipped text (bottom): \"لماذا؟\" 623.98..650.67 y 220..237"
+    "ellipsis on \"مصر\"",
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
+    "ellipsis on \"القوات المسلحة\""
    ]
   },
   {
    "name": "two tabs selected",
    "ok": true,
    "sample": [
-    "exactly the open tab must be selected"
+    "ellipsis on \"مصر\"",
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
+    "ellipsis on \"القوات المسلحة\""
    ]
   },
   {
    "name": "tabs not a tab list",
    "ok": true,
    "sample": [
-    "a11y: the tabs are not a tab list"
+    "ellipsis on \"مصر\"",
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
+    "ellipsis on \"القوات المسلحة\""
    ]
   },
   {
    "name": "tabs reversed",
    "ok": true,
    "sample": [
-    "tab 2 is not left of tab 1",
-    "tab 3 is not left of tab 2",
-    "tab 4 is not left of tab 3"
+    "ellipsis on \"مصر\"",
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
+    "ellipsis on \"القوات المسلحة\""
    ]
   },
   {
    "name": "fades wrong",
    "ok": true,
    "sample": [
-    "control cut by its scroll area (bottom): المنطقة الغربية: مطروح وحد",
-    "hit box shaved by its clip: المنطقة الغربية: مطروح وحد",
-    "fades 0/0 do not match the scroll state (top 0, over 262.0)"
+    "ellipsis on \"مصر\"",
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
+    "ellipsis on \"القوات المسلحة\""
    ]
   },
   {
    "name": "hint chevron missing",
    "ok": true,
    "sample": [
-    "scroll hint chevron missing with content below"
+    "ellipsis on \"مصر\"",
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
+    "ellipsis on \"القوات المسلحة\""
    ]
   },
   {
    "name": "hint over the content",
    "ok": true,
    "sample": [
-    "scroll hint not centred in the clear strip under the fade: y 249.0..267.0 (strip 395.0..417.0)",
-    "scroll hint over text: \"تشكيلات\""
+    "ellipsis on \"مصر\"",
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
+    "ellipsis on \"القوات المسلحة\""
    ]
   },
   {
    "name": "map label cut",
    "ok": true,
    "sample": [
-    "map label ليبيا sliced by the screen edge or the side inset",
-    "map label إيران sliced by the screen edge or the side inset",
-    "map label إيران squeezed between a panel and the screen edge"
+    "ellipsis on \"مصر\"",
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
+    "ellipsis on \"القوات المسلحة\""
    ]
   },
   {
    "name": "contrast",
    "ok": true,
    "sample": [
-    "contrast 1 for \"القوات العاملة\"",
-    "contrast 1 for \"469\"",
-    "contrast 1.73 for \"ألف\""
+    "ellipsis on \"مصر\"",
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
+    "ellipsis on \"القوات المسلحة\""
    ]
   },
   {
    "name": "dock item not marked",
    "ok": true,
    "sample": [
-    "the open section «الجيش» is not marked in the dock"
+    "ellipsis on \"مصر\"",
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
+    "ellipsis on \"القوات المسلحة\""
    ]
   },
   {
    "name": "identity line missing",
    "ok": true,
    "sample": [
-    "panel top line none rgb(189, 180, 106) 2px (want the section colour, 2 pt, at the top)"
+    "ellipsis on \"مصر\"",
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
+    "ellipsis on \"القوات المسلحة\""
    ]
   },
   {
    "name": "emblem drawn grey",
    "ok": true,
    "sample": [
-    "section emblem missing or not in the section colour"
+    "ellipsis on \"مصر\"",
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
+    "ellipsis on \"القوات المسلحة\""
    ]
   },
   {
    "name": "open tab neutral",
    "ok": true,
    "sample": [
-    "open tab not in the section colour"
+    "ellipsis on \"مصر\"",
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
+    "ellipsis on \"القوات المسلحة\""
    ]
   },
   {
    "name": "section colour on data",
    "ok": true,
    "sample": [
-    "section colour on data text: \"مصر\"",
-    "section colour on data text: \"القوات المسلحة\"",
-    "section colour on data chrome: مصر · القوات المسلحة"
+    "ellipsis on \"مصر\"",
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
+    "ellipsis on \"القوات المسلحة\""
    ]
   },
   {
    "name": "section colour on a rule",
    "ok": true,
    "sample": [
-    "section colour on data chrome: أقسام الجيش"
+    "ellipsis on \"مصر\"",
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
+    "ellipsis on \"القوات المسلحة\""
    ]
   },
   {
    "name": "money unit",
    "ok": true,
    "sample": [
-    "clipped text (top): \"0.4\" 866.09..881 y 153..168",
-    "clipped text (top): \"مليار $\" 838.42..866.09 y 153..168",
-    "money unit: «0.4 مليار» (under 1 billion is written in millions)"
+    "ellipsis on \"مصر\"",
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
+    "ellipsis on \"القوات المسلحة\""
    ]
   },
   {
    "name": "sign outside its number",
    "ok": true,
    "sample": [
-    "clipped text (top): \"تغير +\" 859.06..881 y 153..168",
-    "clipped text (top): \"3\" 853.06..859.06 y 153..168",
-    "a sign outside its number: «تغير +3»"
+    "ellipsis on \"مصر\"",
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
+    "ellipsis on \"القوات المسلحة\""
    ]
   },
   {
    "name": "colour alone",
    "ok": true,
    "sample": [
-    "clipped text (top): \"تراجع\" 860.27..881 y 153..168",
-    "colour alone: «تراجع» has no arrow or icon"
+    "ellipsis on \"مصر\"",
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
+    "ellipsis on \"القوات المسلحة\""
    ]
   },
   {
    "name": "an image in the sheet",
    "ok": true,
    "sample": [
-    "an image in the sheet"
+    "ellipsis on \"مصر\"",
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
+    "ellipsis on \"القوات المسلحة\""
    ]
   },
   {
    "name": "close not round",
    "ok": true,
    "sample": [
-    "close button is not round"
+    "close button is not round",
+    "ellipsis on \"مصر\"",
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
    ]
   },
   {
    "name": "label without a role",
    "ok": true,
    "sample": [
-    "clipped text (top): \"اختبار\" 860.25..881 y 153..168",
-    "a11y: a label VoiceOver may skip (no role): «اختبار»"
+    "ellipsis on \"مصر\"",
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
+    "ellipsis on \"القوات المسلحة\""
    ]
   },
   {
    "name": "brief text hidden",
    "ok": true,
    "sample": [
-    "brief text not fully visible: 469"
+    "ellipsis on \"مصر\"",
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
+    "ellipsis on \"القوات المسلحة\""
    ]
   },
   {
    "name": "overview scrolls",
    "ok": true,
    "sample": [
-    "overview needs scrolling: 396.0 pt over",
-    "fades 0/0 do not match the scroll state (top 0, over 396.0)",
-    "brief text not fully visible: القوات العاملة"
+    "ellipsis on \"مصر\"",
+    "clipped text (top): \"·\" 569.64..579.17 y 84..101",
+    "ellipsis on \"القوات المسلحة\""
    ]
   },
   {
    "name": "18 pt misuse",
    "ok": true,
    "sample": [
-    "18 pt is for the panel's name and the adjusted values only: \"دون تغير\"",
-    "18 pt is for the panel's name and the adjusted values only: \"+2\"",
-    "18 pt is for the panel's name and the adjusted values only: \"ألف شهريًا\""
+    "ellipsis on \"مصر\"",
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
+    "ellipsis on \"القوات المسلحة\""
    ]
   },
   {
@@ -425,301 +557,333 @@
    "name": "text overlap",
    "ok": true,
    "sample": [
-    "text overlap \"الجيش\" / \"مصر\"",
-    "text overlap \"الجيش\" / \"·\"",
-    "text overlap \"الجيش\" / \"القوات المسلحة\""
+    "ellipsis on \"مصر\"",
+    "clipped text (top): \"·\" 804.64..814.17 y 70..87",
+    "ellipsis on \"القوات المسلحة\""
    ]
   },
   {
    "name": "text into a control",
    "ok": true,
    "sample": [
-    "text overlap \"النمو\" / \"القوام\"",
-    "text overlap \"−0.2\" / \"القوام\"",
-    "text over a control: \"النمو\" runs into «القوام +40 ألفًا»"
+    "ellipsis on \"مصر\"",
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
+    "ellipsis on \"القوات المسلحة\""
    ]
   },
   {
    "name": "clipped text",
    "ok": true,
    "sample": [
-    "clipped text (sides): \"القوات العاملة\" 841.41..903 y 161..178",
-    "text outside the sheet's 12 pt padding: \"القوات العاملة\"",
-    "clipped text (sides): \"469\" 888.59..921 y 179..206"
+    "ellipsis on \"مصر\"",
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
+    "ellipsis on \"القوات المسلحة\""
    ]
   },
   {
    "name": "dock underline missing",
    "ok": true,
    "sample": [
-    "dock underline missing or off: none 16pxx2px rgb(189, 180, 106) (want 16 x 2 in the section colour)"
+    "ellipsis on \"مصر\"",
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
+    "ellipsis on \"القوات المسلحة\""
    ]
   },
   {
    "name": "closed dock item coloured",
    "ok": true,
    "sample": [
-    "dock item 1 (closed) not neutral as on B3: rgb(189, 180, 106) / rgb(234, 242, 247)",
-    "dock item 2 (closed) not neutral as on B3: rgb(189, 180, 106) / rgb(234, 242, 247)",
-    "dock item 3 (closed) not neutral as on B3: rgb(189, 180, 106) / rgb(234, 242, 247)"
+    "ellipsis on \"مصر\"",
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
+    "ellipsis on \"القوات المسلحة\""
    ]
   },
   {
    "name": "identity line colour",
    "ok": true,
    "sample": [
-    "panel top line \"\" rgb(63, 224, 208) 2px (want the section colour, 2 pt, at the top)"
+    "ellipsis on \"مصر\"",
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
+    "ellipsis on \"القوات المسلحة\""
    ]
   },
   {
    "name": "closed tabs like the open one",
    "ok": true,
    "sample": [
-    "open tab not in the section colour",
-    "closed tab not in the secondary grey: القوات rgb(234, 242, 247)",
-    "closed tab not in the secondary grey: المعدات rgb(234, 242, 247)"
+    "ellipsis on \"مصر\"",
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
+    "ellipsis on \"القوات المسلحة\""
    ]
   },
   {
    "name": "emblem size",
    "ok": true,
    "sample": [
-    "size 28.0x32.0 for .s-emb (want 32 x 32)"
+    "ellipsis on \"مصر\"",
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
+    "ellipsis on \"القوات المسلحة\""
    ]
   },
   {
    "name": "chip not white",
    "ok": true,
    "sample": [
-    "white touch off: .r-chip borderTopColor rgb(63, 224, 208) (want rgba(234, 242, 247, 0.5))",
-    "white touch off: .r-chip color rgb(63, 224, 208) (want rgb(234, 242, 247))"
+    "ellipsis on \"مصر\"",
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
+    "ellipsis on \"القوات المسلحة\""
    ]
   },
   {
    "name": "tile icons cyan",
    "ok": true,
    "sample": [
-    "white touch off: .r-tile color rgb(127, 233, 255) (want rgb(234, 242, 247))"
+    "ellipsis on \"مصر\"",
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
+    "ellipsis on \"القوات المسلحة\""
    ]
   },
   {
    "name": "faint text",
    "ok": true,
    "sample": [
-    "brief text not fully visible: دون تغير",
-    "brief text not fully visible: +2 ألف شهريًا",
-    "brief text not fully visible: الحد حسب السكان"
+    "ellipsis on \"مصر\"",
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
+    "ellipsis on \"القوات المسلحة\""
    ]
   },
   {
    "name": "why without its subject",
    "ok": true,
    "sample": [
-    "a11y: «لماذا؟» does not name its subject «الاحتياط»"
+    "ellipsis on \"مصر\"",
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
+    "ellipsis on \"القوات المسلحة\""
    ]
   },
   {
    "name": "amber value without its icon",
    "ok": true,
    "sample": [
-    "colour alone: «469» (its label's icon is not in its colour)"
+    "ellipsis on \"مصر\"",
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
+    "ellipsis on \"القوات المسلحة\""
    ]
   },
   {
    "name": "chip arrow against its sign",
    "ok": true,
    "sample": [
-    "«تعبئة جزئية النمو −0.2»: the chip's arrow does not agree with its sign"
+    "ellipsis on \"مصر\"",
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
+    "ellipsis on \"القوات المسلحة\""
    ]
   },
   {
    "name": "row read in part",
    "ok": true,
    "sample": [
-    "a11y: «تعبئة جزئية النمو −0.2» does not read its numbers",
-    "a11y: «تعبئة جزئية النمو −0.2» does not say «دولار»",
-    "a11y: «تعبئة جزئية النمو −0.2» does not say the chip's direction in words"
+    "ellipsis on \"مصر\"",
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
+    "ellipsis on \"القوات المسلحة\""
    ]
   },
   {
    "name": "a long headline label",
    "ok": true,
    "sample": [
-    "clipped text (sides): \"عنوان طويل جدًا لا يتسع لخانته أبدًا\" 385.38..539.25 y 161..178",
-    "text outside the sheet's 12 pt padding: \"عنوان طويل جدًا لا يتسع لخانته أبدًا\"",
-    "clipped text (sides): \"1\" 528.44..539.25 y 179..206"
+    "ellipsis on \"مصر\"",
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
+    "ellipsis on \"القوات المسلحة\""
    ]
   },
   {
    "name": "text wider than its box",
    "ok": true,
    "sample": [
-    "text wider than its box: «150 مليون $ شهريًا» (87 in 20)"
+    "ellipsis on \"مصر\"",
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
+    "ellipsis on \"القوات المسلحة\""
    ]
   },
   {
    "name": "a long status cell",
    "ok": true,
    "sample": [
-    "clipped text (sides): \"قيمة طويلة جدًا لا تتسع لنصف الجدول\" 416.53..613.3 y 157.5..176.5",
-    "text outside the sheet's 12 pt padding: \"قيمة طويلة جدًا لا تتسع لنصف الجدول\"",
-    "horizontal overflow in خانةقيمة طويلة جدًا لا تتس"
+    "ellipsis on \"مصر\"",
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
+    "ellipsis on \"القوات المسلحة\""
    ]
   },
   {
    "name": "% before its number",
    "ok": true,
    "sample": [
-    "% shown before its number: \"نسبة 20%\"",
-    "brief text missing: دون تغير",
-    "brief text missing: دون تغير"
+    "ellipsis on \"مصر\"",
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
+    "ellipsis on \"القوات المسلحة\""
    ]
   },
   {
    "name": "armies off the headline",
    "ok": true,
    "sample": [
-    "a11y: «الجيش الثاني الميداني: ا» does not read all it shows: 8",
-    "the armies' formations (37) are not the headline 36",
-    "brief text missing: القناة وشمال سيناء · 7 تشكيلات"
+    "ellipsis on \"مصر\"",
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
+    "ellipsis on \"القوات المسلحة\""
    ]
   },
   {
    "name": "army not to the map",
    "ok": true,
    "sample": [
-    "a11y: a label VoiceOver may skip (no role): «الجيش الثالث الميداني: السويس »",
-    "army «الجيش الثالث الميداني» does not lead to the map (a 44 pt button with its chevron)"
+    "ellipsis on \"مصر\"",
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
+    "ellipsis on \"القوات المسلحة\""
    ]
   },
   {
    "name": "army read in part",
    "ok": true,
    "sample": [
-    "a11y: «الجيش الثاني الميداني: ا» does not read all it shows: القناة وشمال سيناء"
+    "ellipsis on \"مصر\"",
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
+    "ellipsis on \"القوات المسلحة\""
    ]
   },
   {
    "name": "guard off the province",
    "ok": true,
    "sample": [
-    "a11y: «الحرس الجمهوري: القاهرة،» does not read all it shows: 4",
-    "the armies' formations (39) are not the headline 36",
-    "the Republican Guard is not the province panel's (1 formation, 95%)"
+    "ellipsis on \"مصر\"",
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
+    "ellipsis on \"القوات المسلحة\""
    ]
   },
   {
    "name": "army reversed",
    "ok": true,
    "sample": [
-    "army 1: order must be .r-at, .p-rdy, .r-chev (right to left)",
-    "army 2: order must be .r-at, .p-rdy, .r-chev (right to left)",
-    "army 3: order must be .r-at, .p-rdy, .r-chev (right to left)"
+    "ellipsis on \"مصر\"",
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
+    "ellipsis on \"القوات المسلحة\""
    ]
   },
   {
    "name": "quota off",
    "ok": true,
    "sample": [
-    "the formations are not 36 of the quota 93",
-    "brief text missing: 36"
+    "ellipsis on \"مصر\"",
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
+    "ellipsis on \"القوات المسلحة\""
    ]
   },
   {
    "name": "budget off the economy",
    "ok": true,
    "sample": [
-    "the defence budget is not the economy panel's 4",
-    "brief text missing: 4.0 مليار $",
-    "brief text missing: 4.0 مليار $"
+    "ellipsis on \"مصر\"",
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
+    "ellipsis on \"القوات المسلحة\""
    ]
   },
   {
    "name": "conscription off the state",
    "ok": true,
    "sample": [
-    "conscription is not the state panel's «إلزامي»",
-    "brief text missing: إلزامي"
+    "ellipsis on \"مصر\"",
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
+    "ellipsis on \"القوات المسلحة\""
    ]
   },
   {
    "name": "mobilization makes formations",
    "ok": true,
    "sample": [
-    "a11y: «تعبئة جزئية النمو −0.2» does not read its numbers",
-    "a11y: «تعبئة جزئية من الاحتياط:» does not read all it shows: 4",
-    "mobilization must fill the existing formations (§5.4): its chip is the strength added"
+    "ellipsis on \"مصر\"",
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
+    "ellipsis on \"القوات المسلحة\""
    ]
   },
   {
    "name": "mobilization cost unmarked",
    "ok": true,
    "sample": [
-    "mobilization's growth cost is not amber with its down arrow and said"
+    "ellipsis on \"مصر\"",
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
+    "ellipsis on \"القوات المسلحة\""
    ]
   },
   {
    "name": "stock off",
    "ok": true,
    "sample": [
-    "a11y: «البرية: 14 مليار دولار ت» does not read all it shows: 16",
-    "the equipment categories do not add up to the stock 32",
-    "a11y: equipment «البرية» is not read whole"
+    "ellipsis on \"مصر\"",
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
+    "ellipsis on \"القوات المسلحة\""
    ]
   },
   {
    "name": "equipment bar off",
    "ok": true,
    "sample": [
-    "equipment «الجوية»: the bar is not at its modern share"
+    "ellipsis on \"مصر\"",
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
+    "ellipsis on \"القوات المسلحة\""
    ]
   },
   {
    "name": "equipment label off",
    "ok": true,
    "sample": [
-    "a11y: «البرية: 9 مليار دولار تق» does not read all it shows: 14",
-    "a11y: equipment «البرية» is not read whole"
+    "ellipsis on \"مصر\"",
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
+    "ellipsis on \"القوات المسلحة\""
    ]
   },
   {
    "name": "equipment as a control",
    "ok": true,
    "sample": [
-    "equipment «البرية» is a control"
+    "ellipsis on \"مصر\"",
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
+    "ellipsis on \"القوات المسلحة\""
    ]
   },
   {
    "name": "delivery as a button",
    "ok": true,
    "sample": [
-    "the order being delivered must be a row, not a button"
+    "ellipsis on \"مصر\"",
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
+    "ellipsis on \"القوات المسلحة\""
    ]
   },
   {
    "name": "conscription link stale",
    "ok": true,
    "sample": [
-    "a11y: «التجنيد: تطوعي. يُغيَّر » does not read all it shows: إلزامي",
-    "the conscription link is not the state panel's «إلزامي»"
+    "ellipsis on \"مصر\"",
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
+    "ellipsis on \"القوات المسلحة\""
    ]
   },
   {
    "name": "a real weapon name (Latin)",
    "ok": true,
    "sample": [
-    "a11y: «طلب منظومات دفاع جوي F-16» does not read its numbers",
-    "a11y: «طلب منظومات دفاع جوي: 1.» does not read all it shows: F-16 -16",
-    "a real weapon name or model code in the panel: F-16"
+    "ellipsis on \"مصر\"",
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
+    "ellipsis on \"القوات المسلحة\""
    ]
   },
   {
    "name": "a real weapon name (Arabic)",
    "ok": true,
    "sample": [
-    "a real weapon name or model code in the panel: أبرامز",
-    "brief text missing: دبابات قتال",
-    "brief text missing: دبابات قتال"
+    "ellipsis on \"مصر\"",
+    "clipped text (top): \"·\" 804.64..814.17 y 84..101",
+    "ellipsis on \"القوات المسلحة\""
    ]
   },
   {

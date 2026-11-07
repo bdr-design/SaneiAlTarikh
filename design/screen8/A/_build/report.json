@@ -1,7 +1,7 @@
 {
  "se": {
   "device": "667x375 side 0 bottom 0 none",
-  "renderedAt": "2026-11-07T16:05:50.635Z",
+  "renderedAt": "2026-11-07T16:41:14.996Z",
   "inputs": {
    "files": [
     "index.html",
@@ -26,12 +26,69 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "85c49ddeebd7bd22c8c3894a6bb037cb660da927"
+   "sha1": "066a75b90cbb7ee6d0ce4c6b6c153f650c04ff72"
   },
-  "issues": [],
+  "issues": [
+   "overview: ellipsis on \"مصر\"",
+   "overview: clipped text (top): \"·\" 569.64..579.17 y 78..95",
+   "overview: clipped text (top): \"29\" 555.83..569.64 y 78..95",
+   "overview: ellipsis on \"محافظة\"",
+   "overview_end: ellipsis on \"مصر\"",
+   "overview_end: clipped text (top): \"·\" 569.64..579.17 y 78..95",
+   "overview_end: clipped text (top): \"29\" 555.83..569.64 y 78..95",
+   "overview_end: ellipsis on \"محافظة\"",
+   "unrest: ellipsis on \"مصر\"",
+   "unrest: clipped text (top): \"·\" 569.64..579.17 y 78..95",
+   "unrest: clipped text (top): \"29\" 555.83..569.64 y 78..95",
+   "unrest: ellipsis on \"محافظة\"",
+   "unrest_end: ellipsis on \"مصر\"",
+   "unrest_end: clipped text (top): \"·\" 569.64..579.17 y 78..95",
+   "unrest_end: clipped text (top): \"29\" 555.83..569.64 y 78..95",
+   "unrest_end: ellipsis on \"محافظة\"",
+   "parties: ellipsis on \"مصر\"",
+   "parties: clipped text (top): \"·\" 569.64..579.17 y 78..95",
+   "parties: clipped text (top): \"29\" 555.83..569.64 y 78..95",
+   "parties: ellipsis on \"محافظة\"",
+   "parties_end: ellipsis on \"مصر\"",
+   "parties_end: clipped text (top): \"·\" 569.64..579.17 y 78..95",
+   "parties_end: clipped text (top): \"29\" 555.83..569.64 y 78..95",
+   "parties_end: ellipsis on \"محافظة\"",
+   "groups: ellipsis on \"مصر\"",
+   "groups: clipped text (top): \"·\" 569.64..579.17 y 78..95",
+   "groups: clipped text (top): \"29\" 555.83..569.64 y 78..95",
+   "groups: ellipsis on \"محافظة\"",
+   "groups_end: ellipsis on \"مصر\"",
+   "groups_end: clipped text (top): \"·\" 569.64..579.17 y 78..95",
+   "groups_end: clipped text (top): \"29\" 555.83..569.64 y 78..95",
+   "groups_end: ellipsis on \"محافظة\"",
+   "unrest_at98: ellipsis on \"مصر\"",
+   "unrest_at98: clipped text (top): \"·\" 569.64..579.17 y 78..95",
+   "unrest_at98: clipped text (top): \"29\" 555.83..569.64 y 78..95",
+   "unrest_at98: ellipsis on \"محافظة\"",
+   "unrest_at196: ellipsis on \"مصر\"",
+   "unrest_at196: clipped text (top): \"·\" 569.64..579.17 y 78..95",
+   "unrest_at196: clipped text (top): \"29\" 555.83..569.64 y 78..95",
+   "unrest_at196: ellipsis on \"محافظة\"",
+   "unrest_at294: ellipsis on \"مصر\"",
+   "unrest_at294: clipped text (top): \"·\" 569.64..579.17 y 78..95",
+   "unrest_at294: clipped text (top): \"29\" 555.83..569.64 y 78..95",
+   "unrest_at294: ellipsis on \"محافظة\"",
+   "parties_at98: ellipsis on \"مصر\"",
+   "parties_at98: clipped text (top): \"·\" 569.64..579.17 y 78..95",
+   "parties_at98: clipped text (top): \"29\" 555.83..569.64 y 78..95",
+   "parties_at98: ellipsis on \"محافظة\"",
+   "groups_at98: ellipsis on \"مصر\"",
+   "groups_at98: clipped text (top): \"·\" 569.64..579.17 y 78..95",
+   "groups_at98: clipped text (top): \"29\" 555.83..569.64 y 78..95",
+   "groups_at98: ellipsis on \"محافظة\"",
+   "groups_at196: ellipsis on \"مصر\"",
+   "groups_at196: clipped text (top): \"·\" 569.64..579.17 y 78..95",
+   "groups_at196: clipped text (top): \"29\" 555.83..569.64 y 78..95",
+   "groups_at196: ellipsis on \"محافظة\""
+  ],
   "views": {
    "overview": {
-    "issueCount": 0,
+    "issueCount": 4,
     "png": true,
     "fit": {
      "top": {
@@ -608,7 +665,7 @@
     ]
    },
    "overview_end": {
-    "issueCount": 0,
+    "issueCount": 4,
     "png": true,
     "fit": {
      "top": {
@@ -1185,7 +1242,7 @@
     ]
    },
    "unrest": {
-    "issueCount": 0,
+    "issueCount": 4,
     "png": true,
     "fit": {
      "top": {
@@ -1639,7 +1696,7 @@
     ]
    },
    "unrest_end": {
-    "issueCount": 0,
+    "issueCount": 4,
     "png": true,
     "fit": {
      "top": {
@@ -2134,7 +2191,7 @@
     ]
    },
    "parties": {
-    "issueCount": 0,
+    "issueCount": 4,
     "png": true,
     "fit": {
      "top": {
@@ -2603,7 +2660,7 @@
     ]
    },
    "parties_end": {
-    "issueCount": 0,
+    "issueCount": 4,
     "png": true,
     "fit": {
      "top": {
@@ -3109,7 +3166,7 @@
     ]
    },
    "groups": {
-    "issueCount": 0,
+    "issueCount": 4,
     "png": true,
     "fit": {
      "top": {
@@ -3563,7 +3620,7 @@
     ]
    },
    "groups_end": {
-    "issueCount": 0,
+    "issueCount": 4,
     "png": true,
     "fit": {
      "top": {
@@ -4012,7 +4069,7 @@
     ]
    },
    "unrest_at98": {
-    "issueCount": 0,
+    "issueCount": 4,
     "png": false,
     "fit": {
      "top": {
@@ -4468,7 +4525,7 @@
     ]
    },
    "unrest_at196": {
-    "issueCount": 0,
+    "issueCount": 4,
     "png": false,
     "fit": {
      "top": {
@@ -4917,7 +4974,7 @@
     ]
    },
    "unrest_at294": {
-    "issueCount": 0,
+    "issueCount": 4,
     "png": false,
     "fit": {
      "top": {
@@ -5384,7 +5441,7 @@
     ]
    },
    "parties_at98": {
-    "issueCount": 0,
+    "issueCount": 4,
     "png": false,
     "fit": {
      "top": {
@@ -5845,7 +5902,7 @@
     ]
    },
    "groups_at98": {
-    "issueCount": 0,
+    "issueCount": 4,
     "png": false,
     "fit": {
      "top": {
@@ -6284,7 +6341,7 @@
     ]
    },
    "groups_at196": {
-    "issueCount": 0,
+    "issueCount": 4,
     "png": false,
     "fit": {
      "top": {
@@ -6747,24 +6804,24 @@
    "_build/se_groups_end.png"
   ],
   "pngSha1": {
-   "se.png": "bce3292b72f406fb29f797f7460480ff6cc66fa3",
-   "_build/se_hit.png": "eb4bf447428c19f598a141ec7dc4b515365e39d2",
-   "_build/se_overview_end.png": "bce3292b72f406fb29f797f7460480ff6cc66fa3",
-   "_build/se_unrest.png": "461e963bd1150b51a76c277922666db93279a1b8",
-   "_build/se_unrest_end.png": "ee047650ecf1f048a33ded2cfe19255e0603e6d7",
-   "_build/se_parties.png": "209a89b173fe5a47894d2f65d3f4775aba42b9f3",
-   "_build/se_parties_end.png": "677e864f93dbb2d342c724e86f80aed0fee34fb3",
-   "_build/se_groups.png": "f9f01d7076334a388b2dd72ec797155abc3483f8",
-   "_build/se_groups_end.png": "4231e5a4b808ac67401eaba93f4e946211ef8778"
+   "se.png": "f4d66dd8fc76bf3997e7cdf04152607f7d7e08a7",
+   "_build/se_hit.png": "d270dab2b8f6a1ff43d529a91666f040966459f1",
+   "_build/se_overview_end.png": "f4d66dd8fc76bf3997e7cdf04152607f7d7e08a7",
+   "_build/se_unrest.png": "4789394909047a8660f9acb909a6784087afc20f",
+   "_build/se_unrest_end.png": "5f1ffdedc469d92b274cb79a32d2fd8f630d6a24",
+   "_build/se_parties.png": "e46ffcf0906122e3dd279e07cb042862bb778004",
+   "_build/se_parties_end.png": "f1c5d350b642decbe28a12ba77720b918100f46f",
+   "_build/se_groups.png": "60fd5c063c05f6caffb7e957d1962567bebafc3d",
+   "_build/se_groups_end.png": "948002ed778addc82a29f46668cb78b40243db08"
   },
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 0
+  "issueCount": 56
  },
  "mini": {
   "device": "812x375 side 50 bottom 21 notch",
-  "renderedAt": "2026-11-07T16:06:12.316Z",
+  "renderedAt": "2026-11-07T16:41:36.837Z",
   "inputs": {
    "files": [
     "index.html",
@@ -6789,12 +6846,73 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "85c49ddeebd7bd22c8c3894a6bb037cb660da927"
+   "sha1": "066a75b90cbb7ee6d0ce4c6b6c153f650c04ff72"
   },
-  "issues": [],
+  "issues": [
+   "overview: ellipsis on \"مصر\"",
+   "overview: clipped text (top): \"·\" 672.64..682.17 y 78..95",
+   "overview: clipped text (top): \"29\" 658.83..672.64 y 78..95",
+   "overview: ellipsis on \"محافظة\"",
+   "overview_end: ellipsis on \"مصر\"",
+   "overview_end: clipped text (top): \"·\" 672.64..682.17 y 78..95",
+   "overview_end: clipped text (top): \"29\" 658.83..672.64 y 78..95",
+   "overview_end: ellipsis on \"محافظة\"",
+   "unrest: ellipsis on \"مصر\"",
+   "unrest: clipped text (top): \"·\" 672.64..682.17 y 78..95",
+   "unrest: clipped text (top): \"29\" 658.83..672.64 y 78..95",
+   "unrest: ellipsis on \"محافظة\"",
+   "unrest_end: ellipsis on \"مصر\"",
+   "unrest_end: clipped text (top): \"·\" 672.64..682.17 y 78..95",
+   "unrest_end: clipped text (top): \"29\" 658.83..672.64 y 78..95",
+   "unrest_end: ellipsis on \"محافظة\"",
+   "parties: ellipsis on \"مصر\"",
+   "parties: clipped text (top): \"·\" 672.64..682.17 y 78..95",
+   "parties: clipped text (top): \"29\" 658.83..672.64 y 78..95",
+   "parties: ellipsis on \"محافظة\"",
+   "parties_end: ellipsis on \"مصر\"",
+   "parties_end: clipped text (top): \"·\" 672.64..682.17 y 78..95",
+   "parties_end: clipped text (top): \"29\" 658.83..672.64 y 78..95",
+   "parties_end: ellipsis on \"محافظة\"",
+   "groups: ellipsis on \"مصر\"",
+   "groups: clipped text (top): \"·\" 672.64..682.17 y 78..95",
+   "groups: clipped text (top): \"29\" 658.83..672.64 y 78..95",
+   "groups: ellipsis on \"محافظة\"",
+   "groups_end: ellipsis on \"مصر\"",
+   "groups_end: clipped text (top): \"·\" 672.64..682.17 y 78..95",
+   "groups_end: clipped text (top): \"29\" 658.83..672.64 y 78..95",
+   "groups_end: ellipsis on \"محافظة\"",
+   "unrest_at84: ellipsis on \"مصر\"",
+   "unrest_at84: clipped text (top): \"·\" 672.64..682.17 y 78..95",
+   "unrest_at84: clipped text (top): \"29\" 658.83..672.64 y 78..95",
+   "unrest_at84: ellipsis on \"محافظة\"",
+   "unrest_at168: ellipsis on \"مصر\"",
+   "unrest_at168: clipped text (top): \"·\" 672.64..682.17 y 78..95",
+   "unrest_at168: clipped text (top): \"29\" 658.83..672.64 y 78..95",
+   "unrest_at168: ellipsis on \"محافظة\"",
+   "unrest_at252: ellipsis on \"مصر\"",
+   "unrest_at252: clipped text (top): \"·\" 672.64..682.17 y 78..95",
+   "unrest_at252: clipped text (top): \"29\" 658.83..672.64 y 78..95",
+   "unrest_at252: ellipsis on \"محافظة\"",
+   "unrest_at336: ellipsis on \"مصر\"",
+   "unrest_at336: clipped text (top): \"·\" 672.64..682.17 y 78..95",
+   "unrest_at336: clipped text (top): \"29\" 658.83..672.64 y 78..95",
+   "unrest_at336: ellipsis on \"محافظة\"",
+   "parties_at84: ellipsis on \"مصر\"",
+   "parties_at84: clipped text (top): \"·\" 672.64..682.17 y 78..95",
+   "parties_at84: clipped text (top): \"29\" 658.83..672.64 y 78..95",
+   "parties_at84: ellipsis on \"محافظة\"",
+   "groups_at84: ellipsis on \"مصر\"",
+   "groups_at84: clipped text (top): \"·\" 672.64..682.17 y 78..95",
+   "groups_at84: clipped text (top): \"29\" 658.83..672.64 y 78..95",
+   "groups_at84: ellipsis on \"محافظة\"",
+   "groups_at168: ellipsis on \"مصر\"",
+   "groups_at168: clipped text (top): \"·\" 672.64..682.17 y 78..95",
+   "groups_at168: clipped text (top): \"29\" 658.83..672.64 y 78..95",
+   "groups_at168: ellipsis on \"محافظة\""
+  ],
   "views": {
    "overview": {
-    "issueCount": 0,
+    "issueCount": 4,
     "png": true,
     "fit": {
      "top": {
@@ -7378,7 +7496,7 @@
     ]
    },
    "overview_end": {
-    "issueCount": 0,
+    "issueCount": 4,
     "png": true,
     "fit": {
      "top": {
@@ -7962,7 +8080,7 @@
     ]
    },
    "unrest": {
-    "issueCount": 0,
+    "issueCount": 4,
     "png": true,
     "fit": {
      "top": {
@@ -8416,7 +8534,7 @@
     ]
    },
    "unrest_end": {
-    "issueCount": 0,
+    "issueCount": 4,
     "png": true,
     "fit": {
      "top": {
@@ -8918,7 +9036,7 @@
     ]
    },
    "parties": {
-    "issueCount": 0,
+    "issueCount": 4,
     "png": true,
     "fit": {
      "top": {
@@ -9389,7 +9507,7 @@
     ]
    },
    "parties_end": {
-    "issueCount": 0,
+    "issueCount": 4,
     "png": true,
     "fit": {
      "top": {
@@ -9872,7 +9990,7 @@
     ]
    },
    "groups": {
-    "issueCount": 0,
+    "issueCount": 4,
     "png": true,
     "fit": {
      "top": {
@@ -10323,7 +10441,7 @@
     ]
    },
    "groups_end": {
-    "issueCount": 0,
+    "issueCount": 4,
     "png": true,
     "fit": {
      "top": {
@@ -10774,7 +10892,7 @@
     ]
    },
    "unrest_at84": {
-    "issueCount": 0,
+    "issueCount": 4,
     "png": false,
     "fit": {
      "top": {
@@ -11220,7 +11338,7 @@
     ]
    },
    "unrest_at168": {
-    "issueCount": 0,
+    "issueCount": 4,
     "png": false,
     "fit": {
      "top": {
@@ -11673,7 +11791,7 @@
     ]
    },
    "unrest_at252": {
-    "issueCount": 0,
+    "issueCount": 4,
     "png": false,
     "fit": {
      "top": {
@@ -12122,7 +12240,7 @@
     ]
    },
    "unrest_at336": {
-    "issueCount": 0,
+    "issueCount": 4,
     "png": false,
     "fit": {
      "top": {
@@ -12591,7 +12709,7 @@
     ]
    },
    "parties_at84": {
-    "issueCount": 0,
+    "issueCount": 4,
     "png": false,
     "fit": {
      "top": {
@@ -13032,7 +13150,7 @@
     ]
    },
    "groups_at84": {
-    "issueCount": 0,
+    "issueCount": 4,
     "png": false,
     "fit": {
      "top": {
@@ -13493,7 +13611,7 @@
     ]
    },
    "groups_at168": {
-    "issueCount": 0,
+    "issueCount": 4,
     "png": false,
     "fit": {
      "top": {
@@ -13953,24 +14071,24 @@
    "_build/mini_groups_end.png"
   ],
   "pngSha1": {
-   "mini.png": "06d65e3d647e5ec518c48c94e9cdf1f7d85c7632",
-   "_build/mini_hit.png": "3f627622f71ee41d72b9ee7e0a11cc3c4e94b829",
-   "_build/mini_overview_end.png": "06d65e3d647e5ec518c48c94e9cdf1f7d85c7632",
-   "_build/mini_unrest.png": "4e25013d699f92ffd343cc4c91dc3a24b6c93ae2",
-   "_build/mini_unrest_end.png": "2c716c20286732da107312e81ad56b206f7759aa",
-   "_build/mini_parties.png": "41c61f70dc83cc94152ca654321659a743934bdd",
-   "_build/mini_parties_end.png": "35eb13c230d3dafa9b9e4136789c8e717a23100b",
-   "_build/mini_groups.png": "fd93aa0a2ad5bd62c799b7e05664165223fa3e5b",
-   "_build/mini_groups_end.png": "c08269c409eef640287ddab876c01ffbdbcc9807"
+   "mini.png": "4a43e9cd69b0d23e628fa699a5196199f0f5c7bf",
+   "_build/mini_hit.png": "0f33fb561465a0e3d4f4484ed0408918deceed64",
+   "_build/mini_overview_end.png": "4a43e9cd69b0d23e628fa699a5196199f0f5c7bf",
+   "_build/mini_unrest.png": "aae9ca33942bc728d5aead269958a5680ebd7ea5",
+   "_build/mini_unrest_end.png": "b09cc413c6ac431a52f6543ee10db11b252244ec",
+   "_build/mini_parties.png": "02eb9575689665ca1eed199d6b1432c7d6fd10c8",
+   "_build/mini_parties_end.png": "54c84abbcca694c04b64465231f7af04e1a1533d",
+   "_build/mini_groups.png": "1170260f9b124636279c4d3b6f714fcba1326241",
+   "_build/mini_groups_end.png": "c90ff1ed42610c22535a02d1ba9d72fcecc478e9"
   },
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 0
+  "issueCount": 60
  },
  "i14": {
   "device": "844x390 side 47 bottom 21 notch",
-  "renderedAt": "2026-11-07T16:06:36.406Z",
+  "renderedAt": "2026-11-07T16:42:06.643Z",
   "inputs": {
    "files": [
     "index.html",
@@ -13995,12 +14113,69 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "85c49ddeebd7bd22c8c3894a6bb037cb660da927"
+   "sha1": "066a75b90cbb7ee6d0ce4c6b6c153f650c04ff72"
   },
-  "issues": [],
+  "issues": [
+   "overview: ellipsis on \"مصر\"",
+   "overview: clipped text (top): \"·\" 707.64..717.17 y 78..95",
+   "overview: clipped text (top): \"29\" 693.83..707.64 y 78..95",
+   "overview: ellipsis on \"محافظة\"",
+   "overview_end: ellipsis on \"مصر\"",
+   "overview_end: clipped text (top): \"·\" 707.64..717.17 y 78..95",
+   "overview_end: clipped text (top): \"29\" 693.83..707.64 y 78..95",
+   "overview_end: ellipsis on \"محافظة\"",
+   "unrest: ellipsis on \"مصر\"",
+   "unrest: clipped text (top): \"·\" 707.64..717.17 y 78..95",
+   "unrest: clipped text (top): \"29\" 693.83..707.64 y 78..95",
+   "unrest: ellipsis on \"محافظة\"",
+   "unrest_end: ellipsis on \"مصر\"",
+   "unrest_end: clipped text (top): \"·\" 707.64..717.17 y 78..95",
+   "unrest_end: clipped text (top): \"29\" 693.83..707.64 y 78..95",
+   "unrest_end: ellipsis on \"محافظة\"",
+   "parties: ellipsis on \"مصر\"",
+   "parties: clipped text (top): \"·\" 707.64..717.17 y 78..95",
+   "parties: clipped text (top): \"29\" 693.83..707.64 y 78..95",
+   "parties: ellipsis on \"محافظة\"",
+   "parties_end: ellipsis on \"مصر\"",
+   "parties_end: clipped text (top): \"·\" 707.64..717.17 y 78..95",
+   "parties_end: clipped text (top): \"29\" 693.83..707.64 y 78..95",
+   "parties_end: ellipsis on \"محافظة\"",
+   "groups: ellipsis on \"مصر\"",
+   "groups: clipped text (top): \"·\" 707.64..717.17 y 78..95",
+   "groups: clipped text (top): \"29\" 693.83..707.64 y 78..95",
+   "groups: ellipsis on \"محافظة\"",
+   "groups_end: ellipsis on \"مصر\"",
+   "groups_end: clipped text (top): \"·\" 707.64..717.17 y 78..95",
+   "groups_end: clipped text (top): \"29\" 693.83..707.64 y 78..95",
+   "groups_end: ellipsis on \"محافظة\"",
+   "unrest_at99: ellipsis on \"مصر\"",
+   "unrest_at99: clipped text (top): \"·\" 707.64..717.17 y 78..95",
+   "unrest_at99: clipped text (top): \"29\" 693.83..707.64 y 78..95",
+   "unrest_at99: ellipsis on \"محافظة\"",
+   "unrest_at198: ellipsis on \"مصر\"",
+   "unrest_at198: clipped text (top): \"·\" 707.64..717.17 y 78..95",
+   "unrest_at198: clipped text (top): \"29\" 693.83..707.64 y 78..95",
+   "unrest_at198: ellipsis on \"محافظة\"",
+   "unrest_at297: ellipsis on \"مصر\"",
+   "unrest_at297: clipped text (top): \"·\" 707.64..717.17 y 78..95",
+   "unrest_at297: clipped text (top): \"29\" 693.83..707.64 y 78..95",
+   "unrest_at297: ellipsis on \"محافظة\"",
+   "parties_at99: ellipsis on \"مصر\"",
+   "parties_at99: clipped text (top): \"·\" 707.64..717.17 y 78..95",
+   "parties_at99: clipped text (top): \"29\" 693.83..707.64 y 78..95",
+   "parties_at99: ellipsis on \"محافظة\"",
+   "groups_at99: ellipsis on \"مصر\"",
+   "groups_at99: clipped text (top): \"·\" 707.64..717.17 y 78..95",
+   "groups_at99: clipped text (top): \"29\" 693.83..707.64 y 78..95",
+   "groups_at99: ellipsis on \"محافظة\"",
+   "groups_at198: ellipsis on \"مصر\"",
+   "groups_at198: clipped text (top): \"·\" 707.64..717.17 y 78..95",
+   "groups_at198: clipped text (top): \"29\" 693.83..707.64 y 78..95",
+   "groups_at198: ellipsis on \"محافظة\""
+  ],
   "views": {
    "overview": {
-    "issueCount": 0,
+    "issueCount": 4,
     "png": true,
     "fit": {
      "top": {
@@ -14694,7 +14869,7 @@
     ]
    },
    "overview_end": {
-    "issueCount": 0,
+    "issueCount": 4,
     "png": true,
     "fit": {
      "top": {
@@ -15388,7 +15563,7 @@
     ]
    },
    "unrest": {
-    "issueCount": 0,
+    "issueCount": 4,
     "png": true,
     "fit": {
      "top": {
@@ -15959,7 +16134,7 @@
     ]
    },
    "unrest_end": {
-    "issueCount": 0,
+    "issueCount": 4,
     "png": true,
     "fit": {
      "top": {
@@ -16571,7 +16746,7 @@
     ]
    },
    "parties": {
-    "issueCount": 0,
+    "issueCount": 4,
     "png": true,
     "fit": {
      "top": {
@@ -17157,7 +17332,7 @@
     ]
    },
    "parties_end": {
-    "issueCount": 0,
+    "issueCount": 4,
     "png": true,
     "fit": {
      "top": {
@@ -17780,7 +17955,7 @@
     ]
    },
    "groups": {
-    "issueCount": 0,
+    "issueCount": 4,
     "png": true,
     "fit": {
      "top": {
@@ -18351,7 +18526,7 @@
     ]
    },
    "groups_end": {
-    "issueCount": 0,
+    "issueCount": 4,
     "png": true,
     "fit": {
      "top": {
@@ -18917,7 +19092,7 @@
     ]
    },
    "unrest_at99": {
-    "issueCount": 0,
+    "issueCount": 4,
     "png": false,
     "fit": {
      "top": {
@@ -19490,7 +19665,7 @@
     ]
    },
    "unrest_at198": {
-    "issueCount": 0,
+    "issueCount": 4,
     "png": false,
     "fit": {
      "top": {
@@ -20056,7 +20231,7 @@
     ]
    },
    "unrest_at297": {
-    "issueCount": 0,
+    "issueCount": 4,
     "png": false,
     "fit": {
      "top": {
@@ -20645,7 +20820,7 @@
     ]
    },
    "parties_at99": {
-    "issueCount": 0,
+    "issueCount": 4,
     "png": false,
     "fit": {
      "top": {
@@ -21223,7 +21398,7 @@
     ]
    },
    "groups_at99": {
-    "issueCount": 0,
+    "issueCount": 4,
     "png": false,
     "fit": {
      "top": {
@@ -21779,7 +21954,7 @@
     ]
    },
    "groups_at198": {
-    "issueCount": 0,
+    "issueCount": 4,
     "png": false,
     "fit": {
      "top": {
@@ -22359,24 +22534,24 @@
    "_build/i14_groups_end.png"
   ],
   "pngSha1": {
-   "i14.png": "5e6861711af711b4a596eddbc3922261542089a0",
-   "_build/i14_hit.png": "57aa82d8bb4accd19a3d46edca75b73b4ee6bb1e",
-   "_build/i14_overview_end.png": "5e6861711af711b4a596eddbc3922261542089a0",
-   "_build/i14_unrest.png": "05c7087c4332132d6b7d4a7f3498d3f2a2f1cca5",
-   "_build/i14_unrest_end.png": "f1a208370a8b1871a761dc92769f2fc7753cfaff",
-   "_build/i14_parties.png": "883d6b1adf46ae7fcc96e249bbedbfea277ac86d",
-   "_build/i14_parties_end.png": "43e1f582abb9b7c63295f5175d97cbd651a4b5cc",
-   "_build/i14_groups.png": "3ad165d3e6356ce5a5ffbd8e5e7cc7b81f908fa8",
-   "_build/i14_groups_end.png": "80de3d779f021fb87e9c77325b31783b30a52459"
+   "i14.png": "a462f5fc9a3649ad14c1e09814d0e0a7290efbdc",
+   "_build/i14_hit.png": "8c0f1fb00bf9ae4f869a49b11dc96bc30d6faab8",
+   "_build/i14_overview_end.png": "a462f5fc9a3649ad14c1e09814d0e0a7290efbdc",
+   "_build/i14_unrest.png": "4e0e4c16f5b83804d11688e2d47373b95057752e",
+   "_build/i14_unrest_end.png": "e1e4ea511d6aabfba52c5181d8846914779ab08d",
+   "_build/i14_parties.png": "df094a1f19ae83eb04f98be3abd2a5c7ec36ae33",
+   "_build/i14_parties_end.png": "ecf1b2ee12c296f5c86ab6bea989670c14d9b5d8",
+   "_build/i14_groups.png": "f09a32d4f7a5b68f13e3d9354debecf01062725e",
+   "_build/i14_groups_end.png": "1a504a00ab501fa07dfad0432c7f0cc784cd0457"
   },
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 0
+  "issueCount": 56
  },
  "i16": {
   "device": "852x393 side 59 bottom 21 island",
-  "renderedAt": "2026-11-07T16:07:00.128Z",
+  "renderedAt": "2026-11-07T16:42:42.409Z",
   "inputs": {
    "files": [
     "index.html",
@@ -22401,12 +22576,69 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "85c49ddeebd7bd22c8c3894a6bb037cb660da927"
+   "sha1": "066a75b90cbb7ee6d0ce4c6b6c153f650c04ff72"
   },
-  "issues": [],
+  "issues": [
+   "overview: ellipsis on \"مصر\"",
+   "overview: clipped text (top): \"·\" 703.64..713.17 y 78..95",
+   "overview: clipped text (top): \"29\" 689.83..703.64 y 78..95",
+   "overview: ellipsis on \"محافظة\"",
+   "overview_end: ellipsis on \"مصر\"",
+   "overview_end: clipped text (top): \"·\" 703.64..713.17 y 78..95",
+   "overview_end: clipped text (top): \"29\" 689.83..703.64 y 78..95",
+   "overview_end: ellipsis on \"محافظة\"",
+   "unrest: ellipsis on \"مصر\"",
+   "unrest: clipped text (top): \"·\" 703.64..713.17 y 78..95",
+   "unrest: clipped text (top): \"29\" 689.83..703.64 y 78..95",
+   "unrest: ellipsis on \"محافظة\"",
+   "unrest_end: ellipsis on \"مصر\"",
+   "unrest_end: clipped text (top): \"·\" 703.64..713.17 y 78..95",
+   "unrest_end: clipped text (top): \"29\" 689.83..703.64 y 78..95",
+   "unrest_end: ellipsis on \"محافظة\"",
+   "parties: ellipsis on \"مصر\"",
+   "parties: clipped text (top): \"·\" 703.64..713.17 y 78..95",
+   "parties: clipped text (top): \"29\" 689.83..703.64 y 78..95",
+   "parties: ellipsis on \"محافظة\"",
+   "parties_end: ellipsis on \"مصر\"",
+   "parties_end: clipped text (top): \"·\" 703.64..713.17 y 78..95",
+   "parties_end: clipped text (top): \"29\" 689.83..703.64 y 78..95",
+   "parties_end: ellipsis on \"محافظة\"",
+   "groups: ellipsis on \"مصر\"",
+   "groups: clipped text (top): \"·\" 703.64..713.17 y 78..95",
+   "groups: clipped text (top): \"29\" 689.83..703.64 y 78..95",
+   "groups: ellipsis on \"محافظة\"",
+   "groups_end: ellipsis on \"مصر\"",
+   "groups_end: clipped text (top): \"·\" 703.64..713.17 y 78..95",
+   "groups_end: clipped text (top): \"29\" 689.83..703.64 y 78..95",
+   "groups_end: ellipsis on \"محافظة\"",
+   "unrest_at102: ellipsis on \"مصر\"",
+   "unrest_at102: clipped text (top): \"·\" 703.64..713.17 y 78..95",
+   "unrest_at102: clipped text (top): \"29\" 689.83..703.64 y 78..95",
+   "unrest_at102: ellipsis on \"محافظة\"",
+   "unrest_at204: ellipsis on \"مصر\"",
+   "unrest_at204: clipped text (top): \"·\" 703.64..713.17 y 78..95",
+   "unrest_at204: clipped text (top): \"29\" 689.83..703.64 y 78..95",
+   "unrest_at204: ellipsis on \"محافظة\"",
+   "unrest_at306: ellipsis on \"مصر\"",
+   "unrest_at306: clipped text (top): \"·\" 703.64..713.17 y 78..95",
+   "unrest_at306: clipped text (top): \"29\" 689.83..703.64 y 78..95",
+   "unrest_at306: ellipsis on \"محافظة\"",
+   "parties_at102: ellipsis on \"مصر\"",
+   "parties_at102: clipped text (top): \"·\" 703.64..713.17 y 78..95",
+   "parties_at102: clipped text (top): \"29\" 689.83..703.64 y 78..95",
+   "parties_at102: ellipsis on \"محافظة\"",
+   "groups_at102: ellipsis on \"مصر\"",
+   "groups_at102: clipped text (top): \"·\" 703.64..713.17 y 78..95",
+   "groups_at102: clipped text (top): \"29\" 689.83..703.64 y 78..95",
+   "groups_at102: ellipsis on \"محافظة\"",
+   "groups_at204: ellipsis on \"مصر\"",
+   "groups_at204: clipped text (top): \"·\" 703.64..713.17 y 78..95",
+   "groups_at204: clipped text (top): \"29\" 689.83..703.64 y 78..95",
+   "groups_at204: ellipsis on \"محافظة\""
+  ],
   "views": {
    "overview": {
-    "issueCount": 0,
+    "issueCount": 4,
     "png": true,
     "fit": {
      "top": {
@@ -23085,7 +23317,7 @@
     ]
    },
    "overview_end": {
-    "issueCount": 0,
+    "issueCount": 4,
     "png": true,
     "fit": {
      "top": {
@@ -23764,7 +23996,7 @@
     ]
    },
    "unrest": {
-    "issueCount": 0,
+    "issueCount": 4,
     "png": true,
     "fit": {
      "top": {
@@ -24320,7 +24552,7 @@
     ]
    },
    "unrest_end": {
-    "issueCount": 0,
+    "issueCount": 4,
     "png": true,
     "fit": {
      "top": {
@@ -24917,7 +25149,7 @@
     ]
    },
    "parties": {
-    "issueCount": 0,
+    "issueCount": 4,
     "png": true,
     "fit": {
      "top": {
@@ -25488,7 +25720,7 @@
     ]
    },
    "parties_end": {
-    "issueCount": 0,
+    "issueCount": 4,
     "png": true,
     "fit": {
      "top": {
@@ -26096,7 +26328,7 @@
     ]
    },
    "groups": {
-    "issueCount": 0,
+    "issueCount": 4,
     "png": true,
     "fit": {
      "top": {
@@ -26652,7 +26884,7 @@
     ]
    },
    "groups_end": {
-    "issueCount": 0,
+    "issueCount": 4,
     "png": true,
     "fit": {
      "top": {
@@ -27203,7 +27435,7 @@
     ]
    },
    "unrest_at102": {
-    "issueCount": 0,
+    "issueCount": 4,
     "png": false,
     "fit": {
      "top": {
@@ -27761,7 +27993,7 @@
     ]
    },
    "unrest_at204": {
-    "issueCount": 0,
+    "issueCount": 4,
     "png": false,
     "fit": {
      "top": {
@@ -28312,7 +28544,7 @@
     ]
    },
    "unrest_at306": {
-    "issueCount": 0,
+    "issueCount": 4,
     "png": false,
     "fit": {
      "top": {
@@ -28886,7 +29118,7 @@
     ]
    },
    "parties_at102": {
-    "issueCount": 0,
+    "issueCount": 4,
     "png": false,
     "fit": {
      "top": {
@@ -29449,7 +29681,7 @@
     ]
    },
    "groups_at102": {
-    "issueCount": 0,
+    "issueCount": 4,
     "png": false,
     "fit": {
      "top": {
@@ -29990,7 +30222,7 @@
     ]
    },
    "groups_at204": {
-    "issueCount": 0,
+    "issueCount": 4,
     "png": false,
     "fit": {
      "top": {
@@ -30555,24 +30787,24 @@
    "_build/i16_groups_end.png"
   ],
   "pngSha1": {
-   "i16.png": "57ac7b45e9ce234b83b3df36b9ce487d64eaa90d",
-   "_build/i16_hit.png": "2071c4aa75020be08be73ec6bbcf866e1913d0bc",
-   "_build/i16_overview_end.png": "57ac7b45e9ce234b83b3df36b9ce487d64eaa90d",
-   "_build/i16_unrest.png": "1efe6a5a483650658023a2c334981730955a3431",
-   "_build/i16_unrest_end.png": "58d2fc84742684e1adbf90a5925bb7766735bc95",
-   "_build/i16_parties.png": "efd8264804b482bf8c611ffddae43025fecd6bc6",
-   "_build/i16_parties_end.png": "8fd5a8fd4f5fc7b62b0965a6b2fd1e8ab255e753",
-   "_build/i16_groups.png": "80c5d983ae8896b187b671e4b24712c77aafe3b2",
-   "_build/i16_groups_end.png": "fadb1d6ee50f998666cc5222e62041a462e06e51"
+   "i16.png": "06d65e4fa21899778f51b16adfe4bda3e6102e57",
+   "_build/i16_hit.png": "fa282e187b9c3155de24adf2466252017180da04",
+   "_build/i16_overview_end.png": "06d65e4fa21899778f51b16adfe4bda3e6102e57",
+   "_build/i16_unrest.png": "819daf19916e0a7d39771b2343d1cbcf87bdf043",
+   "_build/i16_unrest_end.png": "31d8d923866aed4c80357777d5ce7041cde66bbb",
+   "_build/i16_parties.png": "6d60d506ecbb4f35ed9864be19a04c52fb731981",
+   "_build/i16_parties_end.png": "63a9a69b9f6ac76786bdf8a0efe1b24cba8c79a0",
+   "_build/i16_groups.png": "9434a0b9d21e737ef03f1775c2cea45aaa6bc212",
+   "_build/i16_groups_end.png": "520852cfe36735ee2ec43dd970b9b24a7da5152d"
   },
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 0
+  "issueCount": 56
  },
  "i16pro": {
   "device": "874x402 side 62 bottom 21 island",
-  "renderedAt": "2026-11-07T16:07:23.489Z",
+  "renderedAt": "2026-11-07T16:43:18.253Z",
   "inputs": {
    "files": [
     "index.html",
@@ -30597,12 +30829,65 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "85c49ddeebd7bd22c8c3894a6bb037cb660da927"
+   "sha1": "066a75b90cbb7ee6d0ce4c6b6c153f650c04ff72"
   },
-  "issues": [],
+  "issues": [
+   "overview: ellipsis on \"مصر\"",
+   "overview: clipped text (top): \"·\" 722.64..732.17 y 80..97",
+   "overview: clipped text (top): \"29\" 708.83..722.64 y 80..97",
+   "overview: ellipsis on \"محافظة\"",
+   "overview_end: ellipsis on \"مصر\"",
+   "overview_end: clipped text (top): \"·\" 722.64..732.17 y 80..97",
+   "overview_end: clipped text (top): \"29\" 708.83..722.64 y 80..97",
+   "overview_end: ellipsis on \"محافظة\"",
+   "unrest: ellipsis on \"مصر\"",
+   "unrest: clipped text (top): \"·\" 722.64..732.17 y 80..97",
+   "unrest: clipped text (top): \"29\" 708.83..722.64 y 80..97",
+   "unrest: ellipsis on \"محافظة\"",
+   "unrest_end: ellipsis on \"مصر\"",
+   "unrest_end: clipped text (top): \"·\" 722.64..732.17 y 80..97",
+   "unrest_end: clipped text (top): \"29\" 708.83..722.64 y 80..97",
+   "unrest_end: ellipsis on \"محافظة\"",
+   "parties: ellipsis on \"مصر\"",
+   "parties: clipped text (top): \"·\" 722.64..732.17 y 80..97",
+   "parties: clipped text (top): \"29\" 708.83..722.64 y 80..97",
+   "parties: ellipsis on \"محافظة\"",
+   "parties_end: ellipsis on \"مصر\"",
+   "parties_end: clipped text (top): \"·\" 722.64..732.17 y 80..97",
+   "parties_end: clipped text (top): \"29\" 708.83..722.64 y 80..97",
+   "parties_end: ellipsis on \"محافظة\"",
+   "groups: ellipsis on \"مصر\"",
+   "groups: clipped text (top): \"·\" 722.64..732.17 y 80..97",
+   "groups: clipped text (top): \"29\" 708.83..722.64 y 80..97",
+   "groups: ellipsis on \"محافظة\"",
+   "groups_end: ellipsis on \"مصر\"",
+   "groups_end: clipped text (top): \"·\" 722.64..732.17 y 80..97",
+   "groups_end: clipped text (top): \"29\" 708.83..722.64 y 80..97",
+   "groups_end: ellipsis on \"محافظة\"",
+   "unrest_at107: ellipsis on \"مصر\"",
+   "unrest_at107: clipped text (top): \"·\" 722.64..732.17 y 80..97",
+   "unrest_at107: clipped text (top): \"29\" 708.83..722.64 y 80..97",
+   "unrest_at107: ellipsis on \"محافظة\"",
+   "unrest_at214: ellipsis on \"مصر\"",
+   "unrest_at214: clipped text (top): \"·\" 722.64..732.17 y 80..97",
+   "unrest_at214: clipped text (top): \"29\" 708.83..722.64 y 80..97",
+   "unrest_at214: ellipsis on \"محافظة\"",
+   "unrest_at321: ellipsis on \"مصر\"",
+   "unrest_at321: clipped text (top): \"·\" 722.64..732.17 y 80..97",
+   "unrest_at321: clipped text (top): \"29\" 708.83..722.64 y 80..97",
+   "unrest_at321: ellipsis on \"محافظة\"",
+   "parties_at107: ellipsis on \"مصر\"",
+   "parties_at107: clipped text (top): \"·\" 722.64..732.17 y 80..97",
+   "parties_at107: clipped text (top): \"29\" 708.83..722.64 y 80..97",
+   "parties_at107: ellipsis on \"محافظة\"",
+   "groups_at107: ellipsis on \"مصر\"",
+   "groups_at107: clipped text (top): \"·\" 722.64..732.17 y 80..97",
+   "groups_at107: clipped text (top): \"29\" 708.83..722.64 y 80..97",
+   "groups_at107: ellipsis on \"محافظة\""
+  ],
   "views": {
    "overview": {
-    "issueCount": 0,
+    "issueCount": 4,
     "png": true,
     "fit": {
      "top": {
@@ -31284,7 +31569,7 @@
     ]
    },
    "overview_end": {
-    "issueCount": 0,
+    "issueCount": 4,
     "png": true,
     "fit": {
      "top": {
@@ -31966,7 +32251,7 @@
     ]
    },
    "unrest": {
-    "issueCount": 0,
+    "issueCount": 4,
     "png": true,
     "fit": {
      "top": {
@@ -32525,7 +32810,7 @@
     ]
    },
    "unrest_end": {
-    "issueCount": 0,
+    "issueCount": 4,
     "png": true,
     "fit": {
      "top": {
@@ -33132,7 +33417,7 @@
     ]
    },
    "parties": {
-    "issueCount": 0,
+    "issueCount": 4,
     "png": true,
     "fit": {
      "top": {
@@ -33706,7 +33991,7 @@
     ]
    },
    "parties_end": {
-    "issueCount": 0,
+    "issueCount": 4,
     "png": true,
     "fit": {
      "top": {
@@ -34317,7 +34602,7 @@
     ]
    },
    "groups": {
-    "issueCount": 0,
+    "issueCount": 4,
     "png": true,
     "fit": {
      "top": {
@@ -34881,7 +35166,7 @@
     ]
    },
    "groups_end": {
-    "issueCount": 0,
+    "issueCount": 4,
     "png": true,
     "fit": {
      "top": {
@@ -35435,7 +35720,7 @@
     ]
    },
    "unrest_at107": {
-    "issueCount": 0,
+    "issueCount": 4,
     "png": false,
     "fit": {
      "top": {
@@ -35996,7 +36281,7 @@
     ]
    },
    "unrest_at214": {
-    "issueCount": 0,
+    "issueCount": 4,
     "png": false,
     "fit": {
      "top": {
@@ -36550,7 +36835,7 @@
     ]
    },
    "unrest_at321": {
-    "issueCount": 0,
+    "issueCount": 4,
     "png": false,
     "fit": {
      "top": {
@@ -37117,7 +37402,7 @@
     ]
    },
    "parties_at107": {
-    "issueCount": 0,
+    "issueCount": 4,
     "png": false,
     "fit": {
      "top": {
@@ -37683,7 +37968,7 @@
     ]
    },
    "groups_at107": {
-    "issueCount": 0,
+    "issueCount": 4,
     "png": false,
     "fit": {
      "top": {
@@ -38241,24 +38526,24 @@
    "_build/i16pro_groups_end.png"
   ],
   "pngSha1": {
-   "i16pro.png": "59292b551cb45a9b062f028c0b86e05c6db354d4",
-   "_build/i16pro_hit.png": "248a5ebdcca0cad485c080e8b7e8a3f749bdeb2d",
-   "_build/i16pro_overview_end.png": "59292b551cb45a9b062f028c0b86e05c6db354d4",
-   "_build/i16pro_unrest.png": "b1ec86cb55bb61d21b3219c37b20a880950e90be",
-   "_build/i16pro_unrest_end.png": "3af5de05e0ba08a6f64ecb66eb70e5538d68ebb2",
-   "_build/i16pro_parties.png": "3ff9f119dd19536bb136cecf8a95f9d9bf350d8a",
-   "_build/i16pro_parties_end.png": "9a5f084667e4007e31593b8880997a88f2f89f17",
-   "_build/i16pro_groups.png": "bf56728b6e9ce6dd3e6aab4480d42d1220291b04",
-   "_build/i16pro_groups_end.png": "c5a95cc15e3c4b9577b9275ccb1bc245ae8658c2"
+   "i16pro.png": "0f3200eb0aa8f957cab594670791318b721afee4",
+   "_build/i16pro_hit.png": "c7501a34e6618d94965fd4d3f0b8d372cebeea2f",
+   "_build/i16pro_overview_end.png": "0f3200eb0aa8f957cab594670791318b721afee4",
+   "_build/i16pro_unrest.png": "5cc29be5188247f5940317b79d03085a863cbc78",
+   "_build/i16pro_unrest_end.png": "e245eeac1d957569623797321ca966dd50f01a1a",
+   "_build/i16pro_parties.png": "403ac9f80baade0f9bd7d84f9de5ff7b9305714d",
+   "_build/i16pro_parties_end.png": "350e5679fca54e5fff3fbcf503cbbeb7bbeb74fb",
+   "_build/i16pro_groups.png": "1bdfcfeedb127898c8f364bc17cf97c1a896bef9",
+   "_build/i16pro_groups_end.png": "524e00580bcb8ef872d2008d7284d4e26567cec5"
   },
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 0
+  "issueCount": 52
  },
  "i11": {
   "device": "896x414 side 48 bottom 21 notch",
-  "renderedAt": "2026-11-07T16:07:46.688Z",
+  "renderedAt": "2026-11-07T16:43:52.640Z",
   "inputs": {
    "files": [
     "index.html",
@@ -38283,12 +38568,65 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "85c49ddeebd7bd22c8c3894a6bb037cb660da927"
+   "sha1": "066a75b90cbb7ee6d0ce4c6b6c153f650c04ff72"
   },
-  "issues": [],
+  "issues": [
+   "overview: ellipsis on \"مصر\"",
+   "overview: clipped text (top): \"·\" 758.64..768.17 y 84..101",
+   "overview: clipped text (top): \"29\" 744.83..758.64 y 84..101",
+   "overview: ellipsis on \"محافظة\"",
+   "overview_end: ellipsis on \"مصر\"",
+   "overview_end: clipped text (top): \"·\" 758.64..768.17 y 84..101",
+   "overview_end: clipped text (top): \"29\" 744.83..758.64 y 84..101",
+   "overview_end: ellipsis on \"محافظة\"",
+   "unrest: ellipsis on \"مصر\"",
+   "unrest: clipped text (top): \"·\" 758.64..768.17 y 84..101",
+   "unrest: clipped text (top): \"29\" 744.83..758.64 y 84..101",
+   "unrest: ellipsis on \"محافظة\"",
+   "unrest_end: ellipsis on \"مصر\"",
+   "unrest_end: clipped text (top): \"·\" 758.64..768.17 y 84..101",
+   "unrest_end: clipped text (top): \"29\" 744.83..758.64 y 84..101",
+   "unrest_end: ellipsis on \"محافظة\"",
+   "parties: ellipsis on \"مصر\"",
+   "parties: clipped text (top): \"·\" 758.64..768.17 y 84..101",
+   "parties: clipped text (top): \"29\" 744.83..758.64 y 84..101",
+   "parties: ellipsis on \"محافظة\"",
+   "parties_end: ellipsis on \"مصر\"",
+   "parties_end: clipped text (top): \"·\" 758.64..768.17 y 84..101",
+   "parties_end: clipped text (top): \"29\" 744.83..758.64 y 84..101",
+   "parties_end: ellipsis on \"محافظة\"",
+   "groups: ellipsis on \"مصر\"",
+   "groups: clipped text (top): \"·\" 758.64..768.17 y 84..101",
+   "groups: clipped text (top): \"29\" 744.83..758.64 y 84..101",
+   "groups: ellipsis on \"محافظة\"",
+   "groups_end: ellipsis on \"مصر\"",
+   "groups_end: clipped text (top): \"·\" 758.64..768.17 y 84..101",
+   "groups_end: clipped text (top): \"29\" 744.83..758.64 y 84..101",
+   "groups_end: ellipsis on \"محافظة\"",
+   "unrest_at111: ellipsis on \"مصر\"",
+   "unrest_at111: clipped text (top): \"·\" 758.64..768.17 y 84..101",
+   "unrest_at111: clipped text (top): \"29\" 744.83..758.64 y 84..101",
+   "unrest_at111: ellipsis on \"محافظة\"",
+   "unrest_at222: ellipsis on \"مصر\"",
+   "unrest_at222: clipped text (top): \"·\" 758.64..768.17 y 84..101",
+   "unrest_at222: clipped text (top): \"29\" 744.83..758.64 y 84..101",
+   "unrest_at222: ellipsis on \"محافظة\"",
+   "unrest_at333: ellipsis on \"مصر\"",
+   "unrest_at333: clipped text (top): \"·\" 758.64..768.17 y 84..101",
+   "unrest_at333: clipped text (top): \"29\" 744.83..758.64 y 84..101",
+   "unrest_at333: ellipsis on \"محافظة\"",
+   "parties_at111: ellipsis on \"مصر\"",
+   "parties_at111: clipped text (top): \"·\" 758.64..768.17 y 84..101",
+   "parties_at111: clipped text (top): \"29\" 744.83..758.64 y 84..101",
+   "parties_at111: ellipsis on \"محافظة\"",
+   "groups_at111: ellipsis on \"مصر\"",
+   "groups_at111: clipped text (top): \"·\" 758.64..768.17 y 84..101",
+   "groups_at111: clipped text (top): \"29\" 744.83..758.64 y 84..101",
+   "groups_at111: ellipsis on \"محافظة\""
+  ],
   "views": {
    "overview": {
-    "issueCount": 0,
+    "issueCount": 4,
     "png": true,
     "fit": {
      "top": {
@@ -38965,7 +39303,7 @@
     ]
    },
    "overview_end": {
-    "issueCount": 0,
+    "issueCount": 4,
     "png": true,
     "fit": {
      "top": {
@@ -39642,7 +39980,7 @@
     ]
    },
    "unrest": {
-    "issueCount": 0,
+    "issueCount": 4,
     "png": true,
     "fit": {
      "top": {
@@ -40196,7 +40534,7 @@
     ]
    },
    "unrest_end": {
-    "issueCount": 0,
+    "issueCount": 4,
     "png": true,
     "fit": {
      "top": {
@@ -40798,7 +41136,7 @@
     ]
    },
    "parties": {
-    "issueCount": 0,
+    "issueCount": 4,
     "png": true,
     "fit": {
      "top": {
@@ -41367,7 +41705,7 @@
     ]
    },
    "parties_end": {
-    "issueCount": 0,
+    "issueCount": 4,
     "png": true,
     "fit": {
      "top": {
@@ -41973,7 +42311,7 @@
     ]
    },
    "groups": {
-    "issueCount": 0,
+    "issueCount": 4,
     "png": true,
     "fit": {
      "top": {
@@ -42532,7 +42870,7 @@
     ]
    },
    "groups_end": {
-    "issueCount": 0,
+    "issueCount": 4,
     "png": true,
     "fit": {
      "top": {
@@ -43081,7 +43419,7 @@
     ]
    },
    "unrest_at111": {
-    "issueCount": 0,
+    "issueCount": 4,
     "png": false,
     "fit": {
      "top": {
@@ -43647,7 +43985,7 @@
     ]
    },
    "unrest_at222": {
-    "issueCount": 0,
+    "issueCount": 4,
     "png": false,
     "fit": {
      "top": {
@@ -44189,7 +44527,7 @@
     ]
    },
    "unrest_at333": {
-    "issueCount": 0,
+    "issueCount": 4,
     "png": false,
     "fit": {
      "top": {
@@ -44766,7 +45104,7 @@
     ]
    },
    "parties_at111": {
-    "issueCount": 0,
+    "issueCount": 4,
     "png": false,
     "fit": {
      "top": {
@@ -45352,7 +45690,7 @@
     ]
    },
    "groups_at111": {
-    "issueCount": 0,
+    "issueCount": 4,
     "png": false,
     "fit": {
      "top": {
@@ -45915,24 +46253,24 @@
    "_build/i11_groups_end.png"
   ],
   "pngSha1": {
-   "i11.png": "ebc6c845fa20c8bcfca0e75eae4fe97374a40f29",
-   "_build/i11_hit.png": "0f10b2669ce61d0ccc376ad55b271f591626a494",
-   "_build/i11_overview_end.png": "ebc6c845fa20c8bcfca0e75eae4fe97374a40f29",
-   "_build/i11_unrest.png": "79e8c991e8524162629b7c5dda540c1a4849c8b4",
-   "_build/i11_unrest_end.png": "c5132f29405860790c657fd28a94268385d16c2a",
-   "_build/i11_parties.png": "4d02ff70af9b1e36cd4f30b95ca1a86c17ba9c87",
-   "_build/i11_parties_end.png": "62039a89868270a88802c20639b5dd7556f25b62",
-   "_build/i11_groups.png": "223c9ad37032b126043acdba2cb11bb8ab8003db",
-   "_build/i11_groups_end.png": "28257f3b8a283f3ce8331d84a704b5f0dd357002"
+   "i11.png": "8478e1a635f502ba781131b3b05524326497fc03",
+   "_build/i11_hit.png": "4b448d18ff9644d3a8df42b3625e8cf84555e259",
+   "_build/i11_overview_end.png": "8478e1a635f502ba781131b3b05524326497fc03",
+   "_build/i11_unrest.png": "7f1b163b78f272f993ee9651e8287920f8a42f7f",
+   "_build/i11_unrest_end.png": "fac45f8f22955f52ebcc40245088b93e78aaadcc",
+   "_build/i11_parties.png": "b20403d5bd0da67a835048ef7501334d98fc404d",
+   "_build/i11_parties_end.png": "5ec141f1c0256c677482abf2ed71c0b26ac66e1a",
+   "_build/i11_groups.png": "ac61f6f0faa468d50fffdaf9064c5c783537f31a",
+   "_build/i11_groups_end.png": "f5ef4bd2f7d43c4e0b36d83aba5f021a5e1c6a80"
   },
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 0
+  "issueCount": 52
  },
  "i16promax": {
   "device": "956x440 side 62 bottom 21 island",
-  "renderedAt": "2026-11-07T16:08:10.663Z",
+  "renderedAt": "2026-11-07T16:44:25.414Z",
   "inputs": {
    "files": [
     "index.html",
@@ -45957,12 +46295,57 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "85c49ddeebd7bd22c8c3894a6bb037cb660da927"
+   "sha1": "066a75b90cbb7ee6d0ce4c6b6c153f650c04ff72"
   },
-  "issues": [],
+  "issues": [
+   "overview: ellipsis on \"مصر\"",
+   "overview: clipped text (top): \"·\" 804.64..814.17 y 84..101",
+   "overview: clipped text (top): \"29\" 790.83..804.64 y 84..101",
+   "overview: ellipsis on \"محافظة\"",
+   "overview_end: ellipsis on \"مصر\"",
+   "overview_end: clipped text (top): \"·\" 804.64..814.17 y 84..101",
+   "overview_end: clipped text (top): \"29\" 790.83..804.64 y 84..101",
+   "overview_end: ellipsis on \"محافظة\"",
+   "unrest: ellipsis on \"مصر\"",
+   "unrest: clipped text (top): \"·\" 804.64..814.17 y 84..101",
+   "unrest: clipped text (top): \"29\" 790.83..804.64 y 84..101",
+   "unrest: ellipsis on \"محافظة\"",
+   "unrest_end: ellipsis on \"مصر\"",
+   "unrest_end: clipped text (top): \"·\" 804.64..814.17 y 84..101",
+   "unrest_end: clipped text (top): \"29\" 790.83..804.64 y 84..101",
+   "unrest_end: ellipsis on \"محافظة\"",
+   "parties: ellipsis on \"مصر\"",
+   "parties: clipped text (top): \"·\" 804.64..814.17 y 84..101",
+   "parties: clipped text (top): \"29\" 790.83..804.64 y 84..101",
+   "parties: ellipsis on \"محافظة\"",
+   "parties_end: ellipsis on \"مصر\"",
+   "parties_end: clipped text (top): \"·\" 804.64..814.17 y 84..101",
+   "parties_end: clipped text (top): \"29\" 790.83..804.64 y 84..101",
+   "parties_end: ellipsis on \"محافظة\"",
+   "groups: ellipsis on \"مصر\"",
+   "groups: clipped text (top): \"·\" 804.64..814.17 y 84..101",
+   "groups: clipped text (top): \"29\" 790.83..804.64 y 84..101",
+   "groups: ellipsis on \"محافظة\"",
+   "groups_end: ellipsis on \"مصر\"",
+   "groups_end: clipped text (top): \"·\" 804.64..814.17 y 84..101",
+   "groups_end: clipped text (top): \"29\" 790.83..804.64 y 84..101",
+   "groups_end: ellipsis on \"محافظة\"",
+   "unrest_at137: ellipsis on \"مصر\"",
+   "unrest_at137: clipped text (top): \"·\" 804.64..814.17 y 84..101",
+   "unrest_at137: clipped text (top): \"29\" 790.83..804.64 y 84..101",
+   "unrest_at137: ellipsis on \"محافظة\"",
+   "unrest_at274: ellipsis on \"مصر\"",
+   "unrest_at274: clipped text (top): \"·\" 804.64..814.17 y 84..101",
+   "unrest_at274: clipped text (top): \"29\" 790.83..804.64 y 84..101",
+   "unrest_at274: ellipsis on \"محافظة\"",
+   "groups_at137: ellipsis on \"مصر\"",
+   "groups_at137: clipped text (top): \"·\" 804.64..814.17 y 84..101",
+   "groups_at137: clipped text (top): \"29\" 790.83..804.64 y 84..101",
+   "groups_at137: ellipsis on \"محافظة\""
+  ],
   "views": {
    "overview": {
-    "issueCount": 0,
+    "issueCount": 4,
     "png": true,
     "fit": {
      "top": {
@@ -46631,7 +47014,7 @@
     ]
    },
    "overview_end": {
-    "issueCount": 0,
+    "issueCount": 4,
     "png": true,
     "fit": {
      "top": {
@@ -47300,7 +47683,7 @@
     ]
    },
    "unrest": {
-    "issueCount": 0,
+    "issueCount": 4,
     "png": true,
     "fit": {
      "top": {
@@ -47856,7 +48239,7 @@
     ]
    },
    "unrest_end": {
-    "issueCount": 0,
+    "issueCount": 4,
     "png": true,
     "fit": {
      "top": {
@@ -48460,7 +48843,7 @@
     ]
    },
    "parties": {
-    "issueCount": 0,
+    "issueCount": 4,
     "png": true,
     "fit": {
      "top": {
@@ -49051,7 +49434,7 @@
     ]
    },
    "parties_end": {
-    "issueCount": 0,
+    "issueCount": 4,
     "png": true,
     "fit": {
      "top": {
@@ -49649,7 +50032,7 @@
     ]
    },
    "groups": {
-    "issueCount": 0,
+    "issueCount": 4,
     "png": true,
     "fit": {
      "top": {
@@ -50210,7 +50593,7 @@
     ]
    },
    "groups_end": {
-    "issueCount": 0,
+    "issueCount": 4,
     "png": true,
     "fit": {
      "top": {
@@ -50771,7 +51154,7 @@
     ]
    },
    "unrest_at137": {
-    "issueCount": 0,
+    "issueCount": 4,
     "png": false,
     "fit": {
      "top": {
@@ -51329,7 +51712,7 @@
     ]
    },
    "unrest_at274": {
-    "issueCount": 0,
+    "issueCount": 4,
     "png": false,
     "fit": {
      "top": {
@@ -51893,7 +52276,7 @@
     ]
    },
    "groups_at137": {
-    "issueCount": 0,
+    "issueCount": 4,
     "png": false,
     "fit": {
      "top": {
@@ -52458,19 +52841,19 @@
    "_build/i16promax_groups_end.png"
   ],
   "pngSha1": {
-   "i16promax.png": "d4bb7c08ad421354b9f21b986402d3b6c86c828a",
-   "_build/i16promax_hit.png": "1bf23f7f462371aaf7cd586e61b53cc7db26e9f5",
-   "_build/i16promax_overview_end.png": "d4bb7c08ad421354b9f21b986402d3b6c86c828a",
-   "_build/i16promax_unrest.png": "b9ec395aecc80119fc8b3395521bb0c288d2e2cd",
-   "_build/i16promax_unrest_end.png": "04edd4583abee8e58122b6f11659fb8ba67bc049",
-   "_build/i16promax_parties.png": "4ed9e0d0bdf27ee48b1b01f3860a73c490713ab3",
-   "_build/i16promax_parties_end.png": "6e05dd8f274fb1524e9df155826a449bbec38d87",
-   "_build/i16promax_groups.png": "80aaf8e2a40ce6047a485a955d547bceeaee2262",
-   "_build/i16promax_groups_end.png": "6c81e839e6afeb6efeb0c6618affc5e183b06fbc"
+   "i16promax.png": "f62c9d5bab543a68ea8285a121a957233c3dfef3",
+   "_build/i16promax_hit.png": "23797a5ea9bd87d95a58922b87a8ff59048c6d11",
+   "_build/i16promax_overview_end.png": "f62c9d5bab543a68ea8285a121a957233c3dfef3",
+   "_build/i16promax_unrest.png": "5844528424886a23275a843f96c0b8e887f59ae8",
+   "_build/i16promax_unrest_end.png": "58f41331162ae493896f83c680fe2ebd3c99cf7d",
+   "_build/i16promax_parties.png": "4d46df467a8dde8f3d19acc2792e63ae412fa5c0",
+   "_build/i16promax_parties_end.png": "03f34f7515c6ece35eb30257b9aacfd5f8cb5965",
+   "_build/i16promax_groups.png": "a1a136c1127b4481265e6549d5c751dbe9e9460c",
+   "_build/i16promax_groups_end.png": "7f888b4ef30ebe109976bc5840c93fe55993fd92"
   },
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 0
+  "issueCount": 44
  }
 }

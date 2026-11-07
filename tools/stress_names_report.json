@@ -1,6 +1,69 @@
 [
  {
   "pg": "screen1/B3",
+  "set": "eg",
+  "dev": "se",
+  "iss": [],
+  "fit": 4,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen1/B3",
+  "set": "eg",
+  "dev": "mini",
+  "iss": [],
+  "fit": 2,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen1/B3",
+  "set": "eg",
+  "dev": "i14",
+  "iss": [],
+  "fit": 1,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen1/B3",
+  "set": "eg",
+  "dev": "i16",
+  "iss": [],
+  "fit": 2,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen1/B3",
+  "set": "eg",
+  "dev": "i16pro",
+  "iss": [],
+  "fit": 1,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen1/B3",
+  "set": "eg",
+  "dev": "i11",
+  "iss": [],
+  "fit": 0,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen1/B3",
+  "set": "eg",
+  "dev": "i16promax",
+  "iss": [],
+  "fit": 0,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen1/B3",
   "set": "sa",
   "dev": "se",
   "iss": [],
@@ -14,22 +77,13 @@
   "dev": "mini",
   "iss": [],
   "fit": 3,
-  "shown": "flag only",
-  "ell": []
- },
- {
-  "pg": "screen1/B3",
-  "set": "sa",
-  "dev": "i14",
-  "iss": [],
-  "fit": 2,
   "shown": "name",
   "ell": []
  },
  {
   "pg": "screen1/B3",
   "set": "sa",
-  "dev": "i16",
+  "dev": "i14",
   "iss": [],
   "fit": 2,
   "shown": "name",
@@ -38,6 +92,15 @@
  {
   "pg": "screen1/B3",
   "set": "sa",
+  "dev": "i16",
+  "iss": [],
+  "fit": 2,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen1/B3",
+  "set": "sa",
   "dev": "i16pro",
   "iss": [],
   "fit": 2,
@@ -64,6 +127,69 @@
  },
  {
   "pg": "screen1/B3",
+  "set": "us",
+  "dev": "se",
+  "iss": [],
+  "fit": 4,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen1/B3",
+  "set": "us",
+  "dev": "mini",
+  "iss": [],
+  "fit": 4,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen1/B3",
+  "set": "us",
+  "dev": "i14",
+  "iss": [],
+  "fit": 3,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen1/B3",
+  "set": "us",
+  "dev": "i16",
+  "iss": [],
+  "fit": 3,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen1/B3",
+  "set": "us",
+  "dev": "i16pro",
+  "iss": [],
+  "fit": 3,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen1/B3",
+  "set": "us",
+  "dev": "i11",
+  "iss": [],
+  "fit": 0,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen1/B3",
+  "set": "us",
+  "dev": "i16promax",
+  "iss": [],
+  "fit": 0,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen1/B3",
   "set": "long",
   "dev": "se",
   "iss": [],
@@ -76,7 +202,7 @@
   "set": "long",
   "dev": "mini",
   "iss": [],
-  "fit": 3,
+  "fit": 4,
   "shown": "flag only",
   "ell": []
  },
@@ -84,24 +210,6 @@
   "pg": "screen1/B3",
   "set": "long",
   "dev": "i14",
-  "iss": [],
-  "fit": 2,
-  "shown": "name",
-  "ell": []
- },
- {
-  "pg": "screen1/B3",
-  "set": "long",
-  "dev": "i16",
-  "iss": [],
-  "fit": 3,
-  "shown": "flag only",
-  "ell": []
- },
- {
-  "pg": "screen1/B3",
-  "set": "long",
-  "dev": "i16pro",
   "iss": [],
   "fit": 2,
   "shown": "name",
@@ -110,6 +218,24 @@
  {
   "pg": "screen1/B3",
   "set": "long",
+  "dev": "i16",
+  "iss": [],
+  "fit": 3,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen1/B3",
+  "set": "long",
+  "dev": "i16pro",
+  "iss": [],
+  "fit": 2,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen1/B3",
+  "set": "long",
   "dev": "i11",
   "iss": [],
   "fit": 0,
@@ -139,7 +265,7 @@
   "set": "longest",
   "dev": "mini",
   "iss": [],
-  "fit": 3,
+  "fit": 4,
   "shown": "flag only",
   "ell": []
  },
@@ -149,7 +275,7 @@
   "dev": "i14",
   "iss": [],
   "fit": 3,
-  "shown": "flag only",
+  "shown": "name",
   "ell": []
  },
  {
@@ -157,7 +283,7 @@
   "set": "longest",
   "dev": "i16",
   "iss": [],
-  "fit": 3,
+  "fit": 4,
   "shown": "flag only",
   "ell": []
  },
@@ -167,7 +293,7 @@
   "dev": "i16pro",
   "iss": [],
   "fit": 3,
-  "shown": "flag only",
+  "shown": "name",
   "ell": []
  },
  {
@@ -175,8 +301,8 @@
   "set": "longest",
   "dev": "i11",
   "iss": [],
-  "fit": 3,
-  "shown": "flag only",
+  "fit": 0,
+  "shown": "name",
   "ell": []
  },
  {
@@ -189,6 +315,384 @@
   "ell": []
  },
  {
+  "pg": "screen3/p2B",
+  "set": "eg",
+  "dev": "se",
+  "iss": [],
+  "fit": 0,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen3/p2B",
+  "set": "eg",
+  "dev": "mini",
+  "iss": [],
+  "fit": 0,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen3/p2B",
+  "set": "eg",
+  "dev": "i14",
+  "iss": [],
+  "fit": 0,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen3/p2B",
+  "set": "eg",
+  "dev": "i16",
+  "iss": [],
+  "fit": 0,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen3/p2B",
+  "set": "eg",
+  "dev": "i16pro",
+  "iss": [],
+  "fit": 0,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen3/p2B",
+  "set": "eg",
+  "dev": "i11",
+  "iss": [],
+  "fit": 0,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen3/p2B",
+  "set": "eg",
+  "dev": "i16promax",
+  "iss": [],
+  "fit": 0,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen3/p2B",
+  "set": "sa",
+  "dev": "se",
+  "iss": [],
+  "fit": 0,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen3/p2B",
+  "set": "sa",
+  "dev": "mini",
+  "iss": [],
+  "fit": 0,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen3/p2B",
+  "set": "sa",
+  "dev": "i14",
+  "iss": [],
+  "fit": 0,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen3/p2B",
+  "set": "sa",
+  "dev": "i16",
+  "iss": [],
+  "fit": 0,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen3/p2B",
+  "set": "sa",
+  "dev": "i16pro",
+  "iss": [],
+  "fit": 0,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen3/p2B",
+  "set": "sa",
+  "dev": "i11",
+  "iss": [],
+  "fit": 0,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen3/p2B",
+  "set": "sa",
+  "dev": "i16promax",
+  "iss": [],
+  "fit": 0,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen3/p2B",
+  "set": "us",
+  "dev": "se",
+  "iss": [],
+  "fit": 0,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen3/p2B",
+  "set": "us",
+  "dev": "mini",
+  "iss": [],
+  "fit": 0,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen3/p2B",
+  "set": "us",
+  "dev": "i14",
+  "iss": [],
+  "fit": 0,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen3/p2B",
+  "set": "us",
+  "dev": "i16",
+  "iss": [],
+  "fit": 0,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen3/p2B",
+  "set": "us",
+  "dev": "i16pro",
+  "iss": [],
+  "fit": 0,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen3/p2B",
+  "set": "us",
+  "dev": "i11",
+  "iss": [],
+  "fit": 0,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen3/p2B",
+  "set": "us",
+  "dev": "i16promax",
+  "iss": [],
+  "fit": 0,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen3/p2B",
+  "set": "long",
+  "dev": "se",
+  "iss": [],
+  "fit": 0,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen3/p2B",
+  "set": "long",
+  "dev": "mini",
+  "iss": [],
+  "fit": 0,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen3/p2B",
+  "set": "long",
+  "dev": "i14",
+  "iss": [],
+  "fit": 0,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen3/p2B",
+  "set": "long",
+  "dev": "i16",
+  "iss": [],
+  "fit": 0,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen3/p2B",
+  "set": "long",
+  "dev": "i16pro",
+  "iss": [],
+  "fit": 0,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen3/p2B",
+  "set": "long",
+  "dev": "i11",
+  "iss": [],
+  "fit": 0,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen3/p2B",
+  "set": "long",
+  "dev": "i16promax",
+  "iss": [],
+  "fit": 0,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen3/p2B",
+  "set": "longest",
+  "dev": "se",
+  "iss": [],
+  "fit": 0,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen3/p2B",
+  "set": "longest",
+  "dev": "mini",
+  "iss": [],
+  "fit": 0,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen3/p2B",
+  "set": "longest",
+  "dev": "i14",
+  "iss": [],
+  "fit": 0,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen3/p2B",
+  "set": "longest",
+  "dev": "i16",
+  "iss": [],
+  "fit": 0,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen3/p2B",
+  "set": "longest",
+  "dev": "i16pro",
+  "iss": [],
+  "fit": 0,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen3/p2B",
+  "set": "longest",
+  "dev": "i11",
+  "iss": [],
+  "fit": 0,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen3/p2B",
+  "set": "longest",
+  "dev": "i16promax",
+  "iss": [],
+  "fit": 0,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen4/R",
+  "set": "eg",
+  "dev": "se",
+  "iss": [],
+  "fit": 4,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen4/R",
+  "set": "eg",
+  "dev": "mini",
+  "iss": [],
+  "fit": 2,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen4/R",
+  "set": "eg",
+  "dev": "i14",
+  "iss": [],
+  "fit": 1,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen4/R",
+  "set": "eg",
+  "dev": "i16",
+  "iss": [],
+  "fit": 2,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen4/R",
+  "set": "eg",
+  "dev": "i16pro",
+  "iss": [],
+  "fit": 1,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen4/R",
+  "set": "eg",
+  "dev": "i11",
+  "iss": [],
+  "fit": 0,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen4/R",
+  "set": "eg",
+  "dev": "i16promax",
+  "iss": [],
+  "fit": 0,
+  "shown": "name",
+  "ell": []
+ },
+ {
   "pg": "screen4/R",
   "set": "sa",
   "dev": "se",
@@ -203,7 +707,7 @@
   "dev": "mini",
   "iss": [],
   "fit": 3,
-  "shown": "flag only",
+  "shown": "name",
   "ell": []
  },
  {
@@ -253,6 +757,69 @@
  },
  {
   "pg": "screen4/R",
+  "set": "us",
+  "dev": "se",
+  "iss": [],
+  "fit": 4,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen4/R",
+  "set": "us",
+  "dev": "mini",
+  "iss": [],
+  "fit": 4,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen4/R",
+  "set": "us",
+  "dev": "i14",
+  "iss": [],
+  "fit": 3,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen4/R",
+  "set": "us",
+  "dev": "i16",
+  "iss": [],
+  "fit": 3,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen4/R",
+  "set": "us",
+  "dev": "i16pro",
+  "iss": [],
+  "fit": 3,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen4/R",
+  "set": "us",
+  "dev": "i11",
+  "iss": [],
+  "fit": 0,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen4/R",
+  "set": "us",
+  "dev": "i16promax",
+  "iss": [],
+  "fit": 0,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen4/R",
   "set": "long",
   "dev": "se",
   "iss": [],
@@ -265,7 +832,7 @@
   "set": "long",
   "dev": "mini",
   "iss": [],
-  "fit": 3,
+  "fit": 4,
   "shown": "flag only",
   "ell": []
  },
@@ -284,7 +851,7 @@
   "dev": "i16",
   "iss": [],
   "fit": 3,
-  "shown": "flag only",
+  "shown": "name",
   "ell": []
  },
  {
@@ -328,7 +895,7 @@
   "set": "longest",
   "dev": "mini",
   "iss": [],
-  "fit": 3,
+  "fit": 4,
   "shown": "flag only",
   "ell": []
  },
@@ -338,7 +905,7 @@
   "dev": "i14",
   "iss": [],
   "fit": 3,
-  "shown": "flag only",
+  "shown": "name",
   "ell": []
  },
  {
@@ -346,7 +913,7 @@
   "set": "longest",
   "dev": "i16",
   "iss": [],
-  "fit": 3,
+  "fit": 4,
   "shown": "flag only",
   "ell": []
  },
@@ -356,7 +923,7 @@
   "dev": "i16pro",
   "iss": [],
   "fit": 3,
-  "shown": "flag only",
+  "shown": "name",
   "ell": []
  },
  {
@@ -364,8 +931,8 @@
   "set": "longest",
   "dev": "i11",
   "iss": [],
-  "fit": 3,
-  "shown": "flag only",
+  "fit": 0,
+  "shown": "name",
   "ell": []
  },
  {
@@ -379,14 +946,75 @@
  },
  {
   "pg": "screen5/A",
+  "set": "eg",
+  "dev": "se",
+  "iss": [],
+  "fit": 4,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen5/A",
+  "set": "eg",
+  "dev": "mini",
+  "iss": [],
+  "fit": 2,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen5/A",
+  "set": "eg",
+  "dev": "i14",
+  "iss": [],
+  "fit": 1,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen5/A",
+  "set": "eg",
+  "dev": "i16",
+  "iss": [],
+  "fit": 2,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen5/A",
+  "set": "eg",
+  "dev": "i16pro",
+  "iss": [],
+  "fit": 1,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen5/A",
+  "set": "eg",
+  "dev": "i11",
+  "iss": [],
+  "fit": 0,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen5/A",
+  "set": "eg",
+  "dev": "i16promax",
+  "iss": [],
+  "fit": 0,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen5/A",
   "set": "sa",
   "dev": "se",
   "iss": [],
   "fit": 4,
   "shown": "flag only",
-  "ell": [
-   "خادم الحرمين الشريفين الملك عبدالله · منذ 2005"
-  ]
+  "ell": []
  },
  {
   "pg": "screen5/A",
@@ -394,10 +1022,8 @@
   "dev": "mini",
   "iss": [],
   "fit": 3,
-  "shown": "flag only",
-  "ell": [
-   "خادم الحرمين الشريفين الملك عبدالله · منذ 2005"
-  ]
+  "shown": "name",
+  "ell": []
  },
  {
   "pg": "screen5/A",
@@ -406,9 +1032,7 @@
   "iss": [],
   "fit": 2,
   "shown": "name",
-  "ell": [
-   "خادم الحرمين الشريفين الملك عبدالله · منذ 2005"
-  ]
+  "ell": []
  },
  {
   "pg": "screen5/A",
@@ -417,9 +1041,7 @@
   "iss": [],
   "fit": 2,
   "shown": "name",
-  "ell": [
-   "خادم الحرمين الشريفين الملك عبدالله · منذ 2005"
-  ]
+  "ell": []
  },
  {
   "pg": "screen5/A",
@@ -428,9 +1050,7 @@
   "iss": [],
   "fit": 2,
   "shown": "name",
-  "ell": [
-   "خادم الحرمين الشريفين الملك عبدالله · منذ 2005"
-  ]
+  "ell": []
  },
  {
   "pg": "screen5/A",
@@ -439,9 +1059,7 @@
   "iss": [],
   "fit": 0,
   "shown": "name",
-  "ell": [
-   "خادم الحرمين الشريفين الملك عبدالله · منذ 2005"
-  ]
+  "ell": []
  },
  {
   "pg": "screen5/A",
@@ -450,9 +1068,70 @@
   "iss": [],
   "fit": 0,
   "shown": "name",
-  "ell": [
-   "خادم الحرمين الشريفين الملك عبدالله · منذ 2005"
-  ]
+  "ell": []
+ },
+ {
+  "pg": "screen5/A",
+  "set": "us",
+  "dev": "se",
+  "iss": [],
+  "fit": 4,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen5/A",
+  "set": "us",
+  "dev": "mini",
+  "iss": [],
+  "fit": 4,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen5/A",
+  "set": "us",
+  "dev": "i14",
+  "iss": [],
+  "fit": 3,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen5/A",
+  "set": "us",
+  "dev": "i16",
+  "iss": [],
+  "fit": 3,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen5/A",
+  "set": "us",
+  "dev": "i16pro",
+  "iss": [],
+  "fit": 3,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen5/A",
+  "set": "us",
+  "dev": "i11",
+  "iss": [],
+  "fit": 0,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen5/A",
+  "set": "us",
+  "dev": "i16promax",
+  "iss": [],
+  "fit": 0,
+  "shown": "name",
+  "ell": []
  },
  {
   "pg": "screen5/A",
@@ -461,20 +1140,16 @@
   "iss": [],
   "fit": 4,
   "shown": "flag only",
-  "ell": [
-   "الرئيس فرانسوا بوزيزي يانغوفوندا · منذ 2003"
-  ]
+  "ell": []
  },
  {
   "pg": "screen5/A",
   "set": "long",
   "dev": "mini",
   "iss": [],
-  "fit": 3,
+  "fit": 4,
   "shown": "flag only",
-  "ell": [
-   "الرئيس فرانسوا بوزيزي يانغوفوندا · منذ 2003"
-  ]
+  "ell": []
  },
  {
   "pg": "screen5/A",
@@ -483,9 +1158,7 @@
   "iss": [],
   "fit": 2,
   "shown": "name",
-  "ell": [
-   "الرئيس فرانسوا بوزيزي يانغوفوندا · منذ 2003"
-  ]
+  "ell": []
  },
  {
   "pg": "screen5/A",
@@ -493,10 +1166,8 @@
   "dev": "i16",
   "iss": [],
   "fit": 3,
-  "shown": "flag only",
-  "ell": [
-   "الرئيس فرانسوا بوزيزي يانغوفوندا · منذ 2003"
-  ]
+  "shown": "name",
+  "ell": []
  },
  {
   "pg": "screen5/A",
@@ -505,9 +1176,7 @@
   "iss": [],
   "fit": 2,
   "shown": "name",
-  "ell": [
-   "الرئيس فرانسوا بوزيزي يانغوفوندا · منذ 2003"
-  ]
+  "ell": []
  },
  {
   "pg": "screen5/A",
@@ -516,9 +1185,7 @@
   "iss": [],
   "fit": 0,
   "shown": "name",
-  "ell": [
-   "الرئيس فرانسوا بوزيزي يانغوفوندا · منذ 2003"
-  ]
+  "ell": []
  },
  {
   "pg": "screen5/A",
@@ -536,20 +1203,16 @@
   "iss": [],
   "fit": 4,
   "shown": "flag only",
-  "ell": [
-   "رئيس الوزراء رالف إيفرارد غونزالفس · منذ 2001"
-  ]
+  "ell": []
  },
  {
   "pg": "screen5/A",
   "set": "longest",
   "dev": "mini",
   "iss": [],
-  "fit": 3,
+  "fit": 4,
   "shown": "flag only",
-  "ell": [
-   "رئيس الوزراء رالف إيفرارد غونزالفس · منذ 2001"
-  ]
+  "ell": []
  },
  {
   "pg": "screen5/A",
@@ -557,21 +1220,17 @@
   "dev": "i14",
   "iss": [],
   "fit": 3,
-  "shown": "flag only",
-  "ell": [
-   "رئيس الوزراء رالف إيفرارد غونزالفس · منذ 2001"
-  ]
+  "shown": "name",
+  "ell": []
  },
  {
   "pg": "screen5/A",
   "set": "longest",
   "dev": "i16",
   "iss": [],
-  "fit": 3,
+  "fit": 4,
   "shown": "flag only",
-  "ell": [
-   "رئيس الوزراء رالف إيفرارد غونزالفس · منذ 2001"
-  ]
+  "ell": []
  },
  {
   "pg": "screen5/A",
@@ -579,25 +1238,84 @@
   "dev": "i16pro",
   "iss": [],
   "fit": 3,
-  "shown": "flag only",
-  "ell": [
-   "رئيس الوزراء رالف إيفرارد غونزالفس · منذ 2001"
-  ]
+  "shown": "name",
+  "ell": []
  },
  {
   "pg": "screen5/A",
   "set": "longest",
   "dev": "i11",
   "iss": [],
-  "fit": 3,
-  "shown": "flag only",
-  "ell": [
-   "رئيس الوزراء رالف إيفرارد غونزالفس · منذ 2001"
-  ]
+  "fit": 0,
+  "shown": "name",
+  "ell": []
  },
  {
   "pg": "screen5/A",
   "set": "longest",
+  "dev": "i16promax",
+  "iss": [],
+  "fit": 0,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen6/A",
+  "set": "eg",
+  "dev": "se",
+  "iss": [],
+  "fit": 4,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen6/A",
+  "set": "eg",
+  "dev": "mini",
+  "iss": [],
+  "fit": 2,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen6/A",
+  "set": "eg",
+  "dev": "i14",
+  "iss": [],
+  "fit": 1,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen6/A",
+  "set": "eg",
+  "dev": "i16",
+  "iss": [],
+  "fit": 2,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen6/A",
+  "set": "eg",
+  "dev": "i16pro",
+  "iss": [],
+  "fit": 1,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen6/A",
+  "set": "eg",
+  "dev": "i11",
+  "iss": [],
+  "fit": 0,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen6/A",
+  "set": "eg",
   "dev": "i16promax",
   "iss": [],
   "fit": 0,
@@ -619,22 +1337,13 @@
   "dev": "mini",
   "iss": [],
   "fit": 3,
-  "shown": "flag only",
-  "ell": []
- },
- {
-  "pg": "screen6/A",
-  "set": "sa",
-  "dev": "i14",
-  "iss": [],
-  "fit": 2,
   "shown": "name",
   "ell": []
  },
  {
   "pg": "screen6/A",
   "set": "sa",
-  "dev": "i16",
+  "dev": "i14",
   "iss": [],
   "fit": 2,
   "shown": "name",
@@ -643,6 +1352,15 @@
  {
   "pg": "screen6/A",
   "set": "sa",
+  "dev": "i16",
+  "iss": [],
+  "fit": 2,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen6/A",
+  "set": "sa",
   "dev": "i16pro",
   "iss": [],
   "fit": 2,
@@ -669,6 +1387,71 @@
  },
  {
   "pg": "screen6/A",
+  "set": "us",
+  "dev": "se",
+  "iss": [],
+  "fit": 4,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen6/A",
+  "set": "us",
+  "dev": "mini",
+  "iss": [],
+  "fit": 4,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen6/A",
+  "set": "us",
+  "dev": "i14",
+  "iss": [],
+  "fit": 3,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen6/A",
+  "set": "us",
+  "dev": "i16",
+  "iss": [],
+  "fit": 3,
+  "shown": "name",
+  "ell": [
+   "الولايات المتحدة · السنة المالية 2010/11"
+  ]
+ },
+ {
+  "pg": "screen6/A",
+  "set": "us",
+  "dev": "i16pro",
+  "iss": [],
+  "fit": 3,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen6/A",
+  "set": "us",
+  "dev": "i11",
+  "iss": [],
+  "fit": 0,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen6/A",
+  "set": "us",
+  "dev": "i16promax",
+  "iss": [],
+  "fit": 0,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen6/A",
   "set": "long",
   "dev": "se",
   "iss": [],
@@ -681,7 +1464,7 @@
   "set": "long",
   "dev": "mini",
   "iss": [],
-  "fit": 3,
+  "fit": 4,
   "shown": "flag only",
   "ell": []
  },
@@ -700,7 +1483,7 @@
   "dev": "i16",
   "iss": [],
   "fit": 3,
-  "shown": "flag only",
+  "shown": "name",
   "ell": []
  },
  {
@@ -716,15 +1499,6 @@
   "pg": "screen6/A",
   "set": "long",
   "dev": "i11",
-  "iss": [],
-  "fit": 0,
-  "shown": "name",
-  "ell": []
- },
- {
-  "pg": "screen6/A",
-  "set": "long",
-  "dev": "i16promax",
   "iss": [],
   "fit": 0,
   "shown": "name",
@@ -732,13 +1506,22 @@
  },
  {
   "pg": "screen6/A",
+  "set": "long",
+  "dev": "i16promax",
+  "iss": [],
+  "fit": 0,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen6/A",
   "set": "longest",
   "dev": "se",
   "iss": [],
   "fit": 4,
   "shown": "flag only",
   "ell": [
-   "سانت فينسنت والغرينادين · السنة المالية 2010/11"
+   "الكونغو الديمقراطية · السنة المالية 2010/11"
   ]
  },
  {
@@ -746,10 +1529,10 @@
   "set": "longest",
   "dev": "mini",
   "iss": [],
-  "fit": 3,
+  "fit": 4,
   "shown": "flag only",
   "ell": [
-   "سانت فينسنت والغرينادين · السنة المالية 2010/11"
+   "الكونغو الديمقراطية · السنة المالية 2010/11"
   ]
  },
  {
@@ -758,9 +1541,9 @@
   "dev": "i14",
   "iss": [],
   "fit": 3,
-  "shown": "flag only",
+  "shown": "name",
   "ell": [
-   "سانت فينسنت والغرينادين · السنة المالية 2010/11"
+   "الكونغو الديمقراطية · السنة المالية 2010/11"
   ]
  },
  {
@@ -768,10 +1551,10 @@
   "set": "longest",
   "dev": "i16",
   "iss": [],
-  "fit": 3,
+  "fit": 4,
   "shown": "flag only",
   "ell": [
-   "سانت فينسنت والغرينادين · السنة المالية 2010/11"
+   "الكونغو الديمقراطية · السنة المالية 2010/11"
   ]
  },
  {
@@ -780,9 +1563,9 @@
   "dev": "i16pro",
   "iss": [],
   "fit": 3,
-  "shown": "flag only",
+  "shown": "name",
   "ell": [
-   "سانت فينسنت والغرينادين · السنة المالية 2010/11"
+   "الكونغو الديمقراطية · السنة المالية 2010/11"
   ]
  },
  {
@@ -790,10 +1573,10 @@
   "set": "longest",
   "dev": "i11",
   "iss": [],
-  "fit": 3,
-  "shown": "flag only",
+  "fit": 0,
+  "shown": "name",
   "ell": [
-   "سانت فينسنت والغرينادين · السنة المالية 2010/11"
+   "الكونغو الديمقراطية · السنة المالية 2010/11"
   ]
  },
  {
@@ -803,11 +1586,401 @@
   "iss": [],
   "fit": 0,
   "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen7/A",
+  "set": "eg",
+  "dev": "se",
+  "iss": [],
+  "fit": 4,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen7/A",
+  "set": "eg",
+  "dev": "mini",
+  "iss": [],
+  "fit": 2,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen7/A",
+  "set": "eg",
+  "dev": "i14",
+  "iss": [],
+  "fit": 1,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen7/A",
+  "set": "eg",
+  "dev": "i16",
+  "iss": [],
+  "fit": 2,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen7/A",
+  "set": "eg",
+  "dev": "i16pro",
+  "iss": [],
+  "fit": 1,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen7/A",
+  "set": "eg",
+  "dev": "i11",
+  "iss": [],
+  "fit": 0,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen7/A",
+  "set": "eg",
+  "dev": "i16promax",
+  "iss": [],
+  "fit": 0,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen7/A",
+  "set": "sa",
+  "dev": "se",
+  "iss": [],
+  "fit": 4,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen7/A",
+  "set": "sa",
+  "dev": "mini",
+  "iss": [],
+  "fit": 3,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen7/A",
+  "set": "sa",
+  "dev": "i14",
+  "iss": [],
+  "fit": 2,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen7/A",
+  "set": "sa",
+  "dev": "i16",
+  "iss": [],
+  "fit": 2,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen7/A",
+  "set": "sa",
+  "dev": "i16pro",
+  "iss": [],
+  "fit": 2,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen7/A",
+  "set": "sa",
+  "dev": "i11",
+  "iss": [],
+  "fit": 0,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen7/A",
+  "set": "sa",
+  "dev": "i16promax",
+  "iss": [],
+  "fit": 0,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen7/A",
+  "set": "us",
+  "dev": "se",
+  "iss": [],
+  "fit": 4,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen7/A",
+  "set": "us",
+  "dev": "mini",
+  "iss": [],
+  "fit": 4,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen7/A",
+  "set": "us",
+  "dev": "i14",
+  "iss": [],
+  "fit": 3,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen7/A",
+  "set": "us",
+  "dev": "i16",
+  "iss": [],
+  "fit": 3,
+  "shown": "name",
   "ell": [
-   "سانت فينسنت والغرينادين · السنة المالية 2010/11"
+   "الولايات المتحدة · السنة المالية 2010/11"
   ]
  },
  {
+  "pg": "screen7/A",
+  "set": "us",
+  "dev": "i16pro",
+  "iss": [],
+  "fit": 3,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen7/A",
+  "set": "us",
+  "dev": "i11",
+  "iss": [],
+  "fit": 0,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen7/A",
+  "set": "us",
+  "dev": "i16promax",
+  "iss": [],
+  "fit": 0,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen7/A",
+  "set": "long",
+  "dev": "se",
+  "iss": [],
+  "fit": 4,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen7/A",
+  "set": "long",
+  "dev": "mini",
+  "iss": [],
+  "fit": 4,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen7/A",
+  "set": "long",
+  "dev": "i14",
+  "iss": [],
+  "fit": 2,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen7/A",
+  "set": "long",
+  "dev": "i16",
+  "iss": [],
+  "fit": 3,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen7/A",
+  "set": "long",
+  "dev": "i16pro",
+  "iss": [],
+  "fit": 2,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen7/A",
+  "set": "long",
+  "dev": "i11",
+  "iss": [],
+  "fit": 0,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen7/A",
+  "set": "long",
+  "dev": "i16promax",
+  "iss": [],
+  "fit": 0,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen7/A",
+  "set": "longest",
+  "dev": "se",
+  "iss": [],
+  "fit": 4,
+  "shown": "flag only",
+  "ell": [
+   "الكونغو الديمقراطية · السنة المالية 2010/11"
+  ]
+ },
+ {
+  "pg": "screen7/A",
+  "set": "longest",
+  "dev": "mini",
+  "iss": [],
+  "fit": 4,
+  "shown": "flag only",
+  "ell": [
+   "الكونغو الديمقراطية · السنة المالية 2010/11"
+  ]
+ },
+ {
+  "pg": "screen7/A",
+  "set": "longest",
+  "dev": "i14",
+  "iss": [],
+  "fit": 3,
+  "shown": "name",
+  "ell": [
+   "الكونغو الديمقراطية · السنة المالية 2010/11"
+  ]
+ },
+ {
+  "pg": "screen7/A",
+  "set": "longest",
+  "dev": "i16",
+  "iss": [],
+  "fit": 4,
+  "shown": "flag only",
+  "ell": [
+   "الكونغو الديمقراطية · السنة المالية 2010/11"
+  ]
+ },
+ {
+  "pg": "screen7/A",
+  "set": "longest",
+  "dev": "i16pro",
+  "iss": [],
+  "fit": 3,
+  "shown": "name",
+  "ell": [
+   "الكونغو الديمقراطية · السنة المالية 2010/11"
+  ]
+ },
+ {
+  "pg": "screen7/A",
+  "set": "longest",
+  "dev": "i11",
+  "iss": [],
+  "fit": 0,
+  "shown": "name",
+  "ell": [
+   "الكونغو الديمقراطية · السنة المالية 2010/11"
+  ]
+ },
+ {
+  "pg": "screen7/A",
+  "set": "longest",
+  "dev": "i16promax",
+  "iss": [],
+  "fit": 0,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen8/A",
+  "set": "eg",
+  "dev": "se",
+  "iss": [],
+  "fit": 4,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen8/A",
+  "set": "eg",
+  "dev": "mini",
+  "iss": [],
+  "fit": 2,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen8/A",
+  "set": "eg",
+  "dev": "i14",
+  "iss": [],
+  "fit": 1,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen8/A",
+  "set": "eg",
+  "dev": "i16",
+  "iss": [],
+  "fit": 2,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen8/A",
+  "set": "eg",
+  "dev": "i16pro",
+  "iss": [],
+  "fit": 1,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen8/A",
+  "set": "eg",
+  "dev": "i11",
+  "iss": [],
+  "fit": 0,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen8/A",
+  "set": "eg",
+  "dev": "i16promax",
+  "iss": [],
+  "fit": 0,
+  "shown": "name",
+  "ell": []
+ },
+ {
   "pg": "screen8/A",
   "set": "sa",
   "dev": "se",
@@ -822,7 +1995,7 @@
   "dev": "mini",
   "iss": [],
   "fit": 3,
-  "shown": "flag only",
+  "shown": "name",
   "ell": []
  },
  {
@@ -872,6 +2045,69 @@
  },
  {
   "pg": "screen8/A",
+  "set": "us",
+  "dev": "se",
+  "iss": [],
+  "fit": 4,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen8/A",
+  "set": "us",
+  "dev": "mini",
+  "iss": [],
+  "fit": 4,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen8/A",
+  "set": "us",
+  "dev": "i14",
+  "iss": [],
+  "fit": 3,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen8/A",
+  "set": "us",
+  "dev": "i16",
+  "iss": [],
+  "fit": 3,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen8/A",
+  "set": "us",
+  "dev": "i16pro",
+  "iss": [],
+  "fit": 3,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen8/A",
+  "set": "us",
+  "dev": "i11",
+  "iss": [],
+  "fit": 0,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen8/A",
+  "set": "us",
+  "dev": "i16promax",
+  "iss": [],
+  "fit": 0,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen8/A",
   "set": "long",
   "dev": "se",
   "iss": [],
@@ -884,7 +2120,7 @@
   "set": "long",
   "dev": "mini",
   "iss": [],
-  "fit": 3,
+  "fit": 4,
   "shown": "flag only",
   "ell": []
  },
@@ -903,7 +2139,7 @@
   "dev": "i16",
   "iss": [],
   "fit": 3,
-  "shown": "flag only",
+  "shown": "name",
   "ell": []
  },
  {
@@ -947,7 +2183,7 @@
   "set": "longest",
   "dev": "mini",
   "iss": [],
-  "fit": 3,
+  "fit": 4,
   "shown": "flag only",
   "ell": []
  },
@@ -957,7 +2193,7 @@
   "dev": "i14",
   "iss": [],
   "fit": 3,
-  "shown": "flag only",
+  "shown": "name",
   "ell": []
  },
  {
@@ -965,7 +2201,7 @@
   "set": "longest",
   "dev": "i16",
   "iss": [],
-  "fit": 3,
+  "fit": 4,
   "shown": "flag only",
   "ell": []
  },
@@ -975,7 +2211,7 @@
   "dev": "i16pro",
   "iss": [],
   "fit": 3,
-  "shown": "flag only",
+  "shown": "name",
   "ell": []
  },
  {
@@ -983,13 +2219,76 @@
   "set": "longest",
   "dev": "i11",
   "iss": [],
-  "fit": 3,
-  "shown": "flag only",
+  "fit": 0,
+  "shown": "name",
   "ell": []
  },
  {
   "pg": "screen8/A",
   "set": "longest",
+  "dev": "i16promax",
+  "iss": [],
+  "fit": 0,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen9/A",
+  "set": "eg",
+  "dev": "se",
+  "iss": [],
+  "fit": 4,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen9/A",
+  "set": "eg",
+  "dev": "mini",
+  "iss": [],
+  "fit": 2,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen9/A",
+  "set": "eg",
+  "dev": "i14",
+  "iss": [],
+  "fit": 1,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen9/A",
+  "set": "eg",
+  "dev": "i16",
+  "iss": [],
+  "fit": 2,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen9/A",
+  "set": "eg",
+  "dev": "i16pro",
+  "iss": [],
+  "fit": 1,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen9/A",
+  "set": "eg",
+  "dev": "i11",
+  "iss": [],
+  "fit": 0,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen9/A",
+  "set": "eg",
   "dev": "i16promax",
   "iss": [],
   "fit": 0,
@@ -1011,22 +2310,13 @@
   "dev": "mini",
   "iss": [],
   "fit": 3,
-  "shown": "flag only",
-  "ell": []
- },
- {
-  "pg": "screen9/A",
-  "set": "sa",
-  "dev": "i14",
-  "iss": [],
-  "fit": 2,
   "shown": "name",
   "ell": []
  },
  {
   "pg": "screen9/A",
   "set": "sa",
-  "dev": "i16",
+  "dev": "i14",
   "iss": [],
   "fit": 2,
   "shown": "name",
@@ -1035,6 +2325,15 @@
  {
   "pg": "screen9/A",
   "set": "sa",
+  "dev": "i16",
+  "iss": [],
+  "fit": 2,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen9/A",
+  "set": "sa",
   "dev": "i16pro",
   "iss": [],
   "fit": 2,
@@ -1061,6 +2360,69 @@
  },
  {
   "pg": "screen9/A",
+  "set": "us",
+  "dev": "se",
+  "iss": [],
+  "fit": 4,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen9/A",
+  "set": "us",
+  "dev": "mini",
+  "iss": [],
+  "fit": 4,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen9/A",
+  "set": "us",
+  "dev": "i14",
+  "iss": [],
+  "fit": 3,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen9/A",
+  "set": "us",
+  "dev": "i16",
+  "iss": [],
+  "fit": 3,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen9/A",
+  "set": "us",
+  "dev": "i16pro",
+  "iss": [],
+  "fit": 3,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen9/A",
+  "set": "us",
+  "dev": "i11",
+  "iss": [],
+  "fit": 0,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen9/A",
+  "set": "us",
+  "dev": "i16promax",
+  "iss": [],
+  "fit": 0,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen9/A",
   "set": "long",
   "dev": "se",
   "iss": [],
@@ -1073,7 +2435,7 @@
   "set": "long",
   "dev": "mini",
   "iss": [],
-  "fit": 3,
+  "fit": 4,
   "shown": "flag only",
   "ell": []
  },
@@ -1092,7 +2454,7 @@
   "dev": "i16",
   "iss": [],
   "fit": 3,
-  "shown": "flag only",
+  "shown": "name",
   "ell": []
  },
  {
@@ -1129,20 +2491,16 @@
   "iss": [],
   "fit": 4,
   "shown": "flag only",
-  "ell": [
-   "سانت فينسنت والغرينادين · القوات المسلحة"
-  ]
+  "ell": []
  },
  {
   "pg": "screen9/A",
   "set": "longest",
   "dev": "mini",
   "iss": [],
-  "fit": 3,
+  "fit": 4,
   "shown": "flag only",
-  "ell": [
-   "سانت فينسنت والغرينادين · القوات المسلحة"
-  ]
+  "ell": []
  },
  {
   "pg": "screen9/A",
@@ -1150,21 +2508,17 @@
   "dev": "i14",
   "iss": [],
   "fit": 3,
-  "shown": "flag only",
-  "ell": [
-   "سانت فينسنت والغرينادين · القوات المسلحة"
-  ]
+  "shown": "name",
+  "ell": []
  },
  {
   "pg": "screen9/A",
   "set": "longest",
   "dev": "i16",
   "iss": [],
-  "fit": 3,
+  "fit": 4,
   "shown": "flag only",
-  "ell": [
-   "سانت فينسنت والغرينادين · القوات المسلحة"
-  ]
+  "ell": []
  },
  {
   "pg": "screen9/A",
@@ -1172,21 +2526,17 @@
   "dev": "i16pro",
   "iss": [],
   "fit": 3,
-  "shown": "flag only",
-  "ell": [
-   "سانت فينسنت والغرينادين · القوات المسلحة"
-  ]
+  "shown": "name",
+  "ell": []
  },
  {
   "pg": "screen9/A",
   "set": "longest",
   "dev": "i11",
   "iss": [],
-  "fit": 3,
-  "shown": "flag only",
-  "ell": [
-   "سانت فينسنت والغرينادين · القوات المسلحة"
-  ]
+  "fit": 0,
+  "shown": "name",
+  "ell": []
  },
  {
   "pg": "screen9/A",
@@ -1199,6 +2549,69 @@
  },
  {
   "pg": "screen10/A",
+  "set": "eg",
+  "dev": "se",
+  "iss": [],
+  "fit": 4,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen10/A",
+  "set": "eg",
+  "dev": "mini",
+  "iss": [],
+  "fit": 2,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen10/A",
+  "set": "eg",
+  "dev": "i14",
+  "iss": [],
+  "fit": 1,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen10/A",
+  "set": "eg",
+  "dev": "i16",
+  "iss": [],
+  "fit": 2,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen10/A",
+  "set": "eg",
+  "dev": "i16pro",
+  "iss": [],
+  "fit": 1,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen10/A",
+  "set": "eg",
+  "dev": "i11",
+  "iss": [],
+  "fit": 0,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen10/A",
+  "set": "eg",
+  "dev": "i16promax",
+  "iss": [],
+  "fit": 0,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen10/A",
   "set": "sa",
   "dev": "se",
   "iss": [],
@@ -1212,22 +2625,13 @@
   "dev": "mini",
   "iss": [],
   "fit": 3,
-  "shown": "flag only",
-  "ell": []
- },
- {
-  "pg": "screen10/A",
-  "set": "sa",
-  "dev": "i14",
-  "iss": [],
-  "fit": 2,
   "shown": "name",
   "ell": []
  },
  {
   "pg": "screen10/A",
   "set": "sa",
-  "dev": "i16",
+  "dev": "i14",
   "iss": [],
   "fit": 2,
   "shown": "name",
@@ -1236,6 +2640,15 @@
  {
   "pg": "screen10/A",
   "set": "sa",
+  "dev": "i16",
+  "iss": [],
+  "fit": 2,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen10/A",
+  "set": "sa",
   "dev": "i16pro",
   "iss": [],
   "fit": 2,
@@ -1262,6 +2675,69 @@
  },
  {
   "pg": "screen10/A",
+  "set": "us",
+  "dev": "se",
+  "iss": [],
+  "fit": 4,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen10/A",
+  "set": "us",
+  "dev": "mini",
+  "iss": [],
+  "fit": 4,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen10/A",
+  "set": "us",
+  "dev": "i14",
+  "iss": [],
+  "fit": 3,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen10/A",
+  "set": "us",
+  "dev": "i16",
+  "iss": [],
+  "fit": 3,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen10/A",
+  "set": "us",
+  "dev": "i16pro",
+  "iss": [],
+  "fit": 3,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen10/A",
+  "set": "us",
+  "dev": "i11",
+  "iss": [],
+  "fit": 0,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen10/A",
+  "set": "us",
+  "dev": "i16promax",
+  "iss": [],
+  "fit": 0,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen10/A",
   "set": "long",
   "dev": "se",
   "iss": [],
@@ -1274,7 +2750,7 @@
   "set": "long",
   "dev": "mini",
   "iss": [],
-  "fit": 3,
+  "fit": 4,
   "shown": "flag only",
   "ell": []
  },
@@ -1293,7 +2769,7 @@
   "dev": "i16",
   "iss": [],
   "fit": 3,
-  "shown": "flag only",
+  "shown": "name",
   "ell": []
  },
  {
@@ -1331,7 +2807,7 @@
   "fit": 4,
   "shown": "flag only",
   "ell": [
-   "سانت فينسنت والغرينادين · عضو في الأمم المتحدة"
+   "الكونغو الديمقراطية · عضو في الأمم المتحدة"
   ]
  },
  {
@@ -1339,10 +2815,10 @@
   "set": "longest",
   "dev": "mini",
   "iss": [],
-  "fit": 3,
+  "fit": 4,
   "shown": "flag only",
   "ell": [
-   "سانت فينسنت والغرينادين · عضو في الأمم المتحدة"
+   "الكونغو الديمقراطية · عضو في الأمم المتحدة"
   ]
  },
  {
@@ -1351,9 +2827,9 @@
   "dev": "i14",
   "iss": [],
   "fit": 3,
-  "shown": "flag only",
+  "shown": "name",
   "ell": [
-   "سانت فينسنت والغرينادين · عضو في الأمم المتحدة"
+   "الكونغو الديمقراطية · عضو في الأمم المتحدة"
   ]
  },
  {
@@ -1361,10 +2837,10 @@
   "set": "longest",
   "dev": "i16",
   "iss": [],
-  "fit": 3,
+  "fit": 4,
   "shown": "flag only",
   "ell": [
-   "سانت فينسنت والغرينادين · عضو في الأمم المتحدة"
+   "الكونغو الديمقراطية · عضو في الأمم المتحدة"
   ]
  },
  {
@@ -1373,9 +2849,9 @@
   "dev": "i16pro",
   "iss": [],
   "fit": 3,
-  "shown": "flag only",
+  "shown": "name",
   "ell": [
-   "سانت فينسنت والغرينادين · عضو في الأمم المتحدة"
+   "الكونغو الديمقراطية · عضو في الأمم المتحدة"
   ]
  },
  {
@@ -1383,11 +2859,9 @@
   "set": "longest",
   "dev": "i11",
   "iss": [],
-  "fit": 3,
-  "shown": "flag only",
-  "ell": [
-   "سانت فينسنت والغرينادين · عضو في الأمم المتحدة"
-  ]
+  "fit": 0,
+  "shown": "name",
+  "ell": []
  },
  {
   "pg": "screen10/A",
@@ -1396,9 +2870,70 @@
   "iss": [],
   "fit": 0,
   "shown": "name",
-  "ell": [
-   "سانت فينسنت والغرينادين · عضو في الأمم المتحدة"
-  ]
+  "ell": []
+ },
+ {
+  "pg": "screen11/A",
+  "set": "eg",
+  "dev": "se",
+  "iss": [],
+  "fit": 4,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen11/A",
+  "set": "eg",
+  "dev": "mini",
+  "iss": [],
+  "fit": 2,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen11/A",
+  "set": "eg",
+  "dev": "i14",
+  "iss": [],
+  "fit": 1,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen11/A",
+  "set": "eg",
+  "dev": "i16",
+  "iss": [],
+  "fit": 2,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen11/A",
+  "set": "eg",
+  "dev": "i16pro",
+  "iss": [],
+  "fit": 1,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen11/A",
+  "set": "eg",
+  "dev": "i11",
+  "iss": [],
+  "fit": 0,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen11/A",
+  "set": "eg",
+  "dev": "i16promax",
+  "iss": [],
+  "fit": 0,
+  "shown": "name",
+  "ell": []
  },
  {
   "pg": "screen11/A",
@@ -1415,7 +2950,7 @@
   "dev": "mini",
   "iss": [],
   "fit": 3,
-  "shown": "flag only",
+  "shown": "name",
   "ell": []
  },
  {
@@ -1465,6 +3000,69 @@
  },
  {
   "pg": "screen11/A",
+  "set": "us",
+  "dev": "se",
+  "iss": [],
+  "fit": 4,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen11/A",
+  "set": "us",
+  "dev": "mini",
+  "iss": [],
+  "fit": 4,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen11/A",
+  "set": "us",
+  "dev": "i14",
+  "iss": [],
+  "fit": 3,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen11/A",
+  "set": "us",
+  "dev": "i16",
+  "iss": [],
+  "fit": 3,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen11/A",
+  "set": "us",
+  "dev": "i16pro",
+  "iss": [],
+  "fit": 3,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen11/A",
+  "set": "us",
+  "dev": "i11",
+  "iss": [],
+  "fit": 0,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen11/A",
+  "set": "us",
+  "dev": "i16promax",
+  "iss": [],
+  "fit": 0,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen11/A",
   "set": "long",
   "dev": "se",
   "iss": [],
@@ -1477,7 +3075,7 @@
   "set": "long",
   "dev": "mini",
   "iss": [],
-  "fit": 3,
+  "fit": 4,
   "shown": "flag only",
   "ell": []
  },
@@ -1496,7 +3094,7 @@
   "dev": "i16",
   "iss": [],
   "fit": 3,
-  "shown": "flag only",
+  "shown": "name",
   "ell": []
  },
  {
@@ -1533,20 +3131,16 @@
   "iss": [],
   "fit": 4,
   "shown": "flag only",
-  "ell": [
-   "سانت فينسنت والغرينادين · جهاز الاستخبارات"
-  ]
+  "ell": []
  },
  {
   "pg": "screen11/A",
   "set": "longest",
   "dev": "mini",
   "iss": [],
-  "fit": 3,
+  "fit": 4,
   "shown": "flag only",
-  "ell": [
-   "سانت فينسنت والغرينادين · جهاز الاستخبارات"
-  ]
+  "ell": []
  },
  {
   "pg": "screen11/A",
@@ -1554,21 +3148,17 @@
   "dev": "i14",
   "iss": [],
   "fit": 3,
-  "shown": "flag only",
-  "ell": [
-   "سانت فينسنت والغرينادين · جهاز الاستخبارات"
-  ]
+  "shown": "name",
+  "ell": []
  },
  {
   "pg": "screen11/A",
   "set": "longest",
   "dev": "i16",
   "iss": [],
-  "fit": 3,
+  "fit": 4,
   "shown": "flag only",
-  "ell": [
-   "سانت فينسنت والغرينادين · جهاز الاستخبارات"
-  ]
+  "ell": []
  },
  {
   "pg": "screen11/A",
@@ -1576,21 +3166,17 @@
   "dev": "i16pro",
   "iss": [],
   "fit": 3,
-  "shown": "flag only",
-  "ell": [
-   "سانت فينسنت والغرينادين · جهاز الاستخبارات"
-  ]
+  "shown": "name",
+  "ell": []
  },
  {
   "pg": "screen11/A",
   "set": "longest",
   "dev": "i11",
   "iss": [],
-  "fit": 3,
-  "shown": "flag only",
-  "ell": [
-   "سانت فينسنت والغرينادين · جهاز الاستخبارات"
-  ]
+  "fit": 0,
+  "shown": "name",
+  "ell": []
  },
  {
   "pg": "screen11/A",
@@ -1603,6 +3189,69 @@
  },
  {
   "pg": "screen12/A",
+  "set": "eg",
+  "dev": "se",
+  "iss": [],
+  "fit": 4,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen12/A",
+  "set": "eg",
+  "dev": "mini",
+  "iss": [],
+  "fit": 2,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen12/A",
+  "set": "eg",
+  "dev": "i14",
+  "iss": [],
+  "fit": 1,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen12/A",
+  "set": "eg",
+  "dev": "i16",
+  "iss": [],
+  "fit": 2,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen12/A",
+  "set": "eg",
+  "dev": "i16pro",
+  "iss": [],
+  "fit": 1,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen12/A",
+  "set": "eg",
+  "dev": "i11",
+  "iss": [],
+  "fit": 0,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen12/A",
+  "set": "eg",
+  "dev": "i16promax",
+  "iss": [],
+  "fit": 0,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen12/A",
   "set": "sa",
   "dev": "se",
   "iss": [],
@@ -1616,7 +3265,7 @@
   "dev": "mini",
   "iss": [],
   "fit": 3,
-  "shown": "flag only",
+  "shown": "name",
   "ell": []
  },
  {
@@ -1666,6 +3315,69 @@
  },
  {
   "pg": "screen12/A",
+  "set": "us",
+  "dev": "se",
+  "iss": [],
+  "fit": 4,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen12/A",
+  "set": "us",
+  "dev": "mini",
+  "iss": [],
+  "fit": 4,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen12/A",
+  "set": "us",
+  "dev": "i14",
+  "iss": [],
+  "fit": 3,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen12/A",
+  "set": "us",
+  "dev": "i16",
+  "iss": [],
+  "fit": 3,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen12/A",
+  "set": "us",
+  "dev": "i16pro",
+  "iss": [],
+  "fit": 3,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen12/A",
+  "set": "us",
+  "dev": "i11",
+  "iss": [],
+  "fit": 0,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen12/A",
+  "set": "us",
+  "dev": "i16promax",
+  "iss": [],
+  "fit": 0,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen12/A",
   "set": "long",
   "dev": "se",
   "iss": [],
@@ -1678,7 +3390,7 @@
   "set": "long",
   "dev": "mini",
   "iss": [],
-  "fit": 3,
+  "fit": 4,
   "shown": "flag only",
   "ell": []
  },
@@ -1686,24 +3398,6 @@
   "pg": "screen12/A",
   "set": "long",
   "dev": "i14",
-  "iss": [],
-  "fit": 2,
-  "shown": "name",
-  "ell": []
- },
- {
-  "pg": "screen12/A",
-  "set": "long",
-  "dev": "i16",
-  "iss": [],
-  "fit": 3,
-  "shown": "flag only",
-  "ell": []
- },
- {
-  "pg": "screen12/A",
-  "set": "long",
-  "dev": "i16pro",
   "iss": [],
   "fit": 2,
   "shown": "name",
@@ -1712,6 +3406,24 @@
  {
   "pg": "screen12/A",
   "set": "long",
+  "dev": "i16",
+  "iss": [],
+  "fit": 3,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen12/A",
+  "set": "long",
+  "dev": "i16pro",
+  "iss": [],
+  "fit": 2,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen12/A",
+  "set": "long",
   "dev": "i11",
   "iss": [],
   "fit": 0,
@@ -1741,7 +3453,7 @@
   "set": "longest",
   "dev": "mini",
   "iss": [],
-  "fit": 3,
+  "fit": 4,
   "shown": "flag only",
   "ell": []
  },
@@ -1751,7 +3463,7 @@
   "dev": "i14",
   "iss": [],
   "fit": 3,
-  "shown": "flag only",
+  "shown": "name",
   "ell": []
  },
  {
@@ -1759,7 +3471,7 @@
   "set": "longest",
   "dev": "i16",
   "iss": [],
-  "fit": 3,
+  "fit": 4,
   "shown": "flag only",
   "ell": []
  },
@@ -1769,7 +3481,7 @@
   "dev": "i16pro",
   "iss": [],
   "fit": 3,
-  "shown": "flag only",
+  "shown": "name",
   "ell": []
  },
  {
@@ -1777,8 +3489,8 @@
   "set": "longest",
   "dev": "i11",
   "iss": [],
-  "fit": 3,
-  "shown": "flag only",
+  "fit": 0,
+  "shown": "name",
   "ell": []
  },
  {
@@ -1792,6 +3504,69 @@
  },
  {
   "pg": "screen13/A",
+  "set": "eg",
+  "dev": "se",
+  "iss": [],
+  "fit": 4,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen13/A",
+  "set": "eg",
+  "dev": "mini",
+  "iss": [],
+  "fit": 2,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen13/A",
+  "set": "eg",
+  "dev": "i14",
+  "iss": [],
+  "fit": 1,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen13/A",
+  "set": "eg",
+  "dev": "i16",
+  "iss": [],
+  "fit": 2,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen13/A",
+  "set": "eg",
+  "dev": "i16pro",
+  "iss": [],
+  "fit": 1,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen13/A",
+  "set": "eg",
+  "dev": "i11",
+  "iss": [],
+  "fit": 0,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen13/A",
+  "set": "eg",
+  "dev": "i16promax",
+  "iss": [],
+  "fit": 0,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen13/A",
   "set": "sa",
   "dev": "se",
   "iss": [],
@@ -1805,7 +3580,7 @@
   "dev": "mini",
   "iss": [],
   "fit": 3,
-  "shown": "flag only",
+  "shown": "name",
   "ell": []
  },
  {
@@ -1855,6 +3630,69 @@
  },
  {
   "pg": "screen13/A",
+  "set": "us",
+  "dev": "se",
+  "iss": [],
+  "fit": 4,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen13/A",
+  "set": "us",
+  "dev": "mini",
+  "iss": [],
+  "fit": 4,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen13/A",
+  "set": "us",
+  "dev": "i14",
+  "iss": [],
+  "fit": 3,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen13/A",
+  "set": "us",
+  "dev": "i16",
+  "iss": [],
+  "fit": 3,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen13/A",
+  "set": "us",
+  "dev": "i16pro",
+  "iss": [],
+  "fit": 3,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen13/A",
+  "set": "us",
+  "dev": "i11",
+  "iss": [],
+  "fit": 0,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen13/A",
+  "set": "us",
+  "dev": "i16promax",
+  "iss": [],
+  "fit": 0,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen13/A",
   "set": "long",
   "dev": "se",
   "iss": [],
@@ -1867,7 +3705,7 @@
   "set": "long",
   "dev": "mini",
   "iss": [],
-  "fit": 3,
+  "fit": 4,
   "shown": "flag only",
   "ell": []
  },
@@ -1886,7 +3724,7 @@
   "dev": "i16",
   "iss": [],
   "fit": 3,
-  "shown": "flag only",
+  "shown": "name",
   "ell": []
  },
  {
@@ -1923,20 +3761,16 @@
   "iss": [],
   "fit": 4,
   "shown": "flag only",
-  "ell": [
-   "حملة سانت فينسنت والغرينادين · 1 يناير 2011"
-  ]
+  "ell": []
  },
  {
   "pg": "screen13/A",
   "set": "longest",
   "dev": "mini",
   "iss": [],
-  "fit": 3,
+  "fit": 4,
   "shown": "flag only",
-  "ell": [
-   "حملة سانت فينسنت والغرينادين · 1 يناير 2011"
-  ]
+  "ell": []
  },
  {
   "pg": "screen13/A",
@@ -1944,21 +3778,17 @@
   "dev": "i14",
   "iss": [],
   "fit": 3,
-  "shown": "flag only",
-  "ell": [
-   "حملة سانت فينسنت والغرينادين · 1 يناير 2011"
-  ]
+  "shown": "name",
+  "ell": []
  },
  {
   "pg": "screen13/A",
   "set": "longest",
   "dev": "i16",
   "iss": [],
-  "fit": 3,
+  "fit": 4,
   "shown": "flag only",
-  "ell": [
-   "حملة سانت فينسنت والغرينادين · 1 يناير 2011"
-  ]
+  "ell": []
  },
  {
   "pg": "screen13/A",
@@ -1966,21 +3796,17 @@
   "dev": "i16pro",
   "iss": [],
   "fit": 3,
-  "shown": "flag only",
-  "ell": [
-   "حملة سانت فينسنت والغرينادين · 1 يناير 2011"
-  ]
+  "shown": "name",
+  "ell": []
  },
  {
   "pg": "screen13/A",
   "set": "longest",
   "dev": "i11",
   "iss": [],
-  "fit": 3,
-  "shown": "flag only",
-  "ell": [
-   "حملة سانت فينسنت والغرينادين · 1 يناير 2011"
-  ]
+  "fit": 0,
+  "shown": "name",
+  "ell": []
  },
  {
   "pg": "screen13/A",
@@ -1989,9 +3815,70 @@
   "iss": [],
   "fit": 0,
   "shown": "name",
-  "ell": [
-   "حملة سانت فينسنت والغرينادين · 1 يناير 2011"
-  ]
+  "ell": []
+ },
+ {
+  "pg": "screen14/A",
+  "set": "eg",
+  "dev": "se",
+  "iss": [],
+  "fit": 4,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen14/A",
+  "set": "eg",
+  "dev": "mini",
+  "iss": [],
+  "fit": 2,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen14/A",
+  "set": "eg",
+  "dev": "i14",
+  "iss": [],
+  "fit": 1,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen14/A",
+  "set": "eg",
+  "dev": "i16",
+  "iss": [],
+  "fit": 2,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen14/A",
+  "set": "eg",
+  "dev": "i16pro",
+  "iss": [],
+  "fit": 1,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen14/A",
+  "set": "eg",
+  "dev": "i11",
+  "iss": [],
+  "fit": 0,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen14/A",
+  "set": "eg",
+  "dev": "i16promax",
+  "iss": [],
+  "fit": 0,
+  "shown": "name",
+  "ell": []
  },
  {
   "pg": "screen14/A",
@@ -2008,7 +3895,7 @@
   "dev": "mini",
   "iss": [],
   "fit": 3,
-  "shown": "flag only",
+  "shown": "name",
   "ell": []
  },
  {
@@ -2058,6 +3945,69 @@
  },
  {
   "pg": "screen14/A",
+  "set": "us",
+  "dev": "se",
+  "iss": [],
+  "fit": 4,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen14/A",
+  "set": "us",
+  "dev": "mini",
+  "iss": [],
+  "fit": 4,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen14/A",
+  "set": "us",
+  "dev": "i14",
+  "iss": [],
+  "fit": 3,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen14/A",
+  "set": "us",
+  "dev": "i16",
+  "iss": [],
+  "fit": 3,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen14/A",
+  "set": "us",
+  "dev": "i16pro",
+  "iss": [],
+  "fit": 3,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen14/A",
+  "set": "us",
+  "dev": "i11",
+  "iss": [],
+  "fit": 0,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen14/A",
+  "set": "us",
+  "dev": "i16promax",
+  "iss": [],
+  "fit": 0,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen14/A",
   "set": "long",
   "dev": "se",
   "iss": [],
@@ -2070,7 +4020,7 @@
   "set": "long",
   "dev": "mini",
   "iss": [],
-  "fit": 3,
+  "fit": 4,
   "shown": "flag only",
   "ell": []
  },
@@ -2089,7 +4039,7 @@
   "dev": "i16",
   "iss": [],
   "fit": 3,
-  "shown": "flag only",
+  "shown": "name",
   "ell": []
  },
  {
@@ -2133,7 +4083,7 @@
   "set": "longest",
   "dev": "mini",
   "iss": [],
-  "fit": 3,
+  "fit": 4,
   "shown": "flag only",
   "ell": []
  },
@@ -2143,7 +4093,7 @@
   "dev": "i14",
   "iss": [],
   "fit": 3,
-  "shown": "flag only",
+  "shown": "name",
   "ell": []
  },
  {
@@ -2151,7 +4101,7 @@
   "set": "longest",
   "dev": "i16",
   "iss": [],
-  "fit": 3,
+  "fit": 4,
   "shown": "flag only",
   "ell": []
  },
@@ -2161,7 +4111,7 @@
   "dev": "i16pro",
   "iss": [],
   "fit": 3,
-  "shown": "flag only",
+  "shown": "name",
   "ell": []
  },
  {
@@ -2169,8 +4119,8 @@
   "set": "longest",
   "dev": "i11",
   "iss": [],
-  "fit": 3,
-  "shown": "flag only",
+  "fit": 0,
+  "shown": "name",
   "ell": []
  },
  {
@@ -2184,6 +4134,69 @@
  },
  {
   "pg": "screen18/A",
+  "set": "eg",
+  "dev": "se",
+  "iss": [],
+  "fit": 4,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen18/A",
+  "set": "eg",
+  "dev": "mini",
+  "iss": [],
+  "fit": 2,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen18/A",
+  "set": "eg",
+  "dev": "i14",
+  "iss": [],
+  "fit": 1,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen18/A",
+  "set": "eg",
+  "dev": "i16",
+  "iss": [],
+  "fit": 2,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen18/A",
+  "set": "eg",
+  "dev": "i16pro",
+  "iss": [],
+  "fit": 1,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen18/A",
+  "set": "eg",
+  "dev": "i11",
+  "iss": [],
+  "fit": 0,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen18/A",
+  "set": "eg",
+  "dev": "i16promax",
+  "iss": [],
+  "fit": 0,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen18/A",
   "set": "sa",
   "dev": "se",
   "iss": [],
@@ -2197,7 +4210,7 @@
   "dev": "mini",
   "iss": [],
   "fit": 3,
-  "shown": "flag only",
+  "shown": "name",
   "ell": []
  },
  {
@@ -2232,7 +4245,7 @@
   "set": "sa",
   "dev": "i11",
   "iss": [],
-  "fit": 0,
+  "fit": 2,
   "shown": "name",
   "ell": []
  },
@@ -2241,7 +4254,70 @@
   "set": "sa",
   "dev": "i16promax",
   "iss": [],
-  "fit": 0,
+  "fit": 2,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen18/A",
+  "set": "us",
+  "dev": "se",
+  "iss": [],
+  "fit": 4,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen18/A",
+  "set": "us",
+  "dev": "mini",
+  "iss": [],
+  "fit": 4,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen18/A",
+  "set": "us",
+  "dev": "i14",
+  "iss": [],
+  "fit": 3,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen18/A",
+  "set": "us",
+  "dev": "i16",
+  "iss": [],
+  "fit": 3,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen18/A",
+  "set": "us",
+  "dev": "i16pro",
+  "iss": [],
+  "fit": 3,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen18/A",
+  "set": "us",
+  "dev": "i11",
+  "iss": [],
+  "fit": 2,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen18/A",
+  "set": "us",
+  "dev": "i16promax",
+  "iss": [],
+  "fit": 2,
   "shown": "name",
   "ell": []
  },
@@ -2259,7 +4335,7 @@
   "set": "long",
   "dev": "mini",
   "iss": [],
-  "fit": 3,
+  "fit": 4,
   "shown": "flag only",
   "ell": []
  },
@@ -2278,7 +4354,7 @@
   "dev": "i16",
   "iss": [],
   "fit": 3,
-  "shown": "flag only",
+  "shown": "name",
   "ell": []
  },
  {
@@ -2295,7 +4371,7 @@
   "set": "long",
   "dev": "i11",
   "iss": [],
-  "fit": 0,
+  "fit": 2,
   "shown": "name",
   "ell": []
  },
@@ -2304,7 +4380,7 @@
   "set": "long",
   "dev": "i16promax",
   "iss": [],
-  "fit": 0,
+  "fit": 2,
   "shown": "name",
   "ell": []
  },
@@ -2315,20 +4391,16 @@
   "iss": [],
   "fit": 4,
   "shown": "flag only",
-  "ell": [
-   "سانت فينسنت والغرينادين · 2011–2100"
-  ]
+  "ell": []
  },
  {
   "pg": "screen18/A",
   "set": "longest",
   "dev": "mini",
   "iss": [],
-  "fit": 3,
+  "fit": 4,
   "shown": "flag only",
-  "ell": [
-   "سانت فينسنت والغرينادين · 2011–2100"
-  ]
+  "ell": []
  },
  {
   "pg": "screen18/A",
@@ -2336,21 +4408,17 @@
   "dev": "i14",
   "iss": [],
   "fit": 3,
-  "shown": "flag only",
-  "ell": [
-   "سانت فينسنت والغرينادين · 2011–2100"
-  ]
+  "shown": "name",
+  "ell": []
  },
  {
   "pg": "screen18/A",
   "set": "longest",
   "dev": "i16",
   "iss": [],
-  "fit": 3,
+  "fit": 4,
   "shown": "flag only",
-  "ell": [
-   "سانت فينسنت والغرينادين · 2011–2100"
-  ]
+  "ell": []
  },
  {
   "pg": "screen18/A",
@@ -2358,18 +4426,16 @@
   "dev": "i16pro",
   "iss": [],
   "fit": 3,
-  "shown": "flag only",
-  "ell": [
-   "سانت فينسنت والغرينادين · 2011–2100"
-  ]
+  "shown": "name",
+  "ell": []
  },
  {
   "pg": "screen18/A",
   "set": "longest",
   "dev": "i11",
   "iss": [],
-  "fit": 3,
-  "shown": "flag only",
+  "fit": 2,
+  "shown": "name",
   "ell": []
  },
  {
@@ -2378,6 +4444,69 @@
   "dev": "i16promax",
   "iss": [],
   "fit": 2,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen20/A",
+  "set": "eg",
+  "dev": "se",
+  "iss": [],
+  "fit": 4,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen20/A",
+  "set": "eg",
+  "dev": "mini",
+  "iss": [],
+  "fit": 2,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen20/A",
+  "set": "eg",
+  "dev": "i14",
+  "iss": [],
+  "fit": 1,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen20/A",
+  "set": "eg",
+  "dev": "i16",
+  "iss": [],
+  "fit": 2,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen20/A",
+  "set": "eg",
+  "dev": "i16pro",
+  "iss": [],
+  "fit": 1,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen20/A",
+  "set": "eg",
+  "dev": "i11",
+  "iss": [],
+  "fit": 0,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen20/A",
+  "set": "eg",
+  "dev": "i16promax",
+  "iss": [],
+  "fit": 0,
   "shown": "name",
   "ell": []
  },
@@ -2396,7 +4525,7 @@
   "dev": "mini",
   "iss": [],
   "fit": 3,
-  "shown": "flag only",
+  "shown": "name",
   "ell": []
  },
  {
@@ -2438,6 +4567,69 @@
  {
   "pg": "screen20/A",
   "set": "sa",
+  "dev": "i16promax",
+  "iss": [],
+  "fit": 0,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen20/A",
+  "set": "us",
+  "dev": "se",
+  "iss": [],
+  "fit": 4,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen20/A",
+  "set": "us",
+  "dev": "mini",
+  "iss": [],
+  "fit": 4,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen20/A",
+  "set": "us",
+  "dev": "i14",
+  "iss": [],
+  "fit": 3,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen20/A",
+  "set": "us",
+  "dev": "i16",
+  "iss": [],
+  "fit": 3,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen20/A",
+  "set": "us",
+  "dev": "i16pro",
+  "iss": [],
+  "fit": 3,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen20/A",
+  "set": "us",
+  "dev": "i11",
+  "iss": [],
+  "fit": 0,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen20/A",
+  "set": "us",
   "dev": "i16promax",
   "iss": [],
   "fit": 0,
@@ -2451,20 +4643,16 @@
   "iss": [],
   "fit": 4,
   "shown": "flag only",
-  "ell": [
-   "أفريقيا الوسطى · السلع والصناعات والممرات"
-  ]
+  "ell": []
  },
  {
   "pg": "screen20/A",
   "set": "long",
   "dev": "mini",
   "iss": [],
-  "fit": 3,
+  "fit": 4,
   "shown": "flag only",
-  "ell": [
-   "أفريقيا الوسطى · السلع والصناعات والممرات"
-  ]
+  "ell": []
  },
  {
   "pg": "screen20/A",
@@ -2473,9 +4661,7 @@
   "iss": [],
   "fit": 2,
   "shown": "name",
-  "ell": [
-   "أفريقيا الوسطى · السلع والصناعات والممرات"
-  ]
+  "ell": []
  },
  {
   "pg": "screen20/A",
@@ -2483,10 +4669,8 @@
   "dev": "i16",
   "iss": [],
   "fit": 3,
-  "shown": "flag only",
-  "ell": [
-   "أفريقيا الوسطى · السلع والصناعات والممرات"
-  ]
+  "shown": "name",
+  "ell": []
  },
  {
   "pg": "screen20/A",
@@ -2495,9 +4679,7 @@
   "iss": [],
   "fit": 2,
   "shown": "name",
-  "ell": [
-   "أفريقيا الوسطى · السلع والصناعات والممرات"
-  ]
+  "ell": []
  },
  {
   "pg": "screen20/A",
@@ -2506,9 +4688,7 @@
   "iss": [],
   "fit": 0,
   "shown": "name",
-  "ell": [
-   "أفريقيا الوسطى · السلع والصناعات والممرات"
-  ]
+  "ell": []
  },
  {
   "pg": "screen20/A",
@@ -2526,20 +4706,16 @@
   "iss": [],
   "fit": 4,
   "shown": "flag only",
-  "ell": [
-   "سانت فينسنت والغرينادين · السلع والصناعات والممرات"
-  ]
+  "ell": []
  },
  {
   "pg": "screen20/A",
   "set": "longest",
   "dev": "mini",
   "iss": [],
-  "fit": 3,
+  "fit": 4,
   "shown": "flag only",
-  "ell": [
-   "سانت فينسنت والغرينادين · السلع والصناعات والممرات"
-  ]
+  "ell": []
  },
  {
   "pg": "screen20/A",
@@ -2547,21 +4723,17 @@
   "dev": "i14",
   "iss": [],
   "fit": 3,
-  "shown": "flag only",
-  "ell": [
-   "سانت فينسنت والغرينادين · السلع والصناعات والممرات"
-  ]
+  "shown": "name",
+  "ell": []
  },
  {
   "pg": "screen20/A",
   "set": "longest",
   "dev": "i16",
   "iss": [],
-  "fit": 3,
+  "fit": 4,
   "shown": "flag only",
-  "ell": [
-   "سانت فينسنت والغرينادين · السلع والصناعات والممرات"
-  ]
+  "ell": []
  },
  {
   "pg": "screen20/A",
@@ -2569,21 +4741,17 @@
   "dev": "i16pro",
   "iss": [],
   "fit": 3,
-  "shown": "flag only",
-  "ell": [
-   "سانت فينسنت والغرينادين · السلع والصناعات والممرات"
-  ]
+  "shown": "name",
+  "ell": []
  },
  {
   "pg": "screen20/A",
   "set": "longest",
   "dev": "i11",
   "iss": [],
-  "fit": 3,
-  "shown": "flag only",
-  "ell": [
-   "سانت فينسنت والغرينادين · السلع والصناعات والممرات"
-  ]
+  "fit": 0,
+  "shown": "name",
+  "ell": []
  },
  {
   "pg": "screen20/A",
@@ -2592,9 +4760,70 @@
   "iss": [],
   "fit": 0,
   "shown": "name",
-  "ell": [
-   "سانت فينسنت والغرينادين · السلع والصناعات والممرات"
-  ]
+  "ell": []
+ },
+ {
+  "pg": "screen23/A",
+  "set": "eg",
+  "dev": "se",
+  "iss": [],
+  "fit": 4,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen23/A",
+  "set": "eg",
+  "dev": "mini",
+  "iss": [],
+  "fit": 2,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen23/A",
+  "set": "eg",
+  "dev": "i14",
+  "iss": [],
+  "fit": 1,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen23/A",
+  "set": "eg",
+  "dev": "i16",
+  "iss": [],
+  "fit": 2,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen23/A",
+  "set": "eg",
+  "dev": "i16pro",
+  "iss": [],
+  "fit": 1,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen23/A",
+  "set": "eg",
+  "dev": "i11",
+  "iss": [],
+  "fit": 0,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen23/A",
+  "set": "eg",
+  "dev": "i16promax",
+  "iss": [],
+  "fit": 0,
+  "shown": "name",
+  "ell": []
  },
  {
   "pg": "screen23/A",
@@ -2611,7 +4840,7 @@
   "dev": "mini",
   "iss": [],
   "fit": 3,
-  "shown": "flag only",
+  "shown": "name",
   "ell": []
  },
  {
@@ -2653,6 +4882,69 @@
  {
   "pg": "screen23/A",
   "set": "sa",
+  "dev": "i16promax",
+  "iss": [],
+  "fit": 0,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen23/A",
+  "set": "us",
+  "dev": "se",
+  "iss": [],
+  "fit": 4,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen23/A",
+  "set": "us",
+  "dev": "mini",
+  "iss": [],
+  "fit": 4,
+  "shown": "flag only",
+  "ell": []
+ },
+ {
+  "pg": "screen23/A",
+  "set": "us",
+  "dev": "i14",
+  "iss": [],
+  "fit": 3,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen23/A",
+  "set": "us",
+  "dev": "i16",
+  "iss": [],
+  "fit": 3,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen23/A",
+  "set": "us",
+  "dev": "i16pro",
+  "iss": [],
+  "fit": 3,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen23/A",
+  "set": "us",
+  "dev": "i11",
+  "iss": [],
+  "fit": 0,
+  "shown": "name",
+  "ell": []
+ },
+ {
+  "pg": "screen23/A",
+  "set": "us",
   "dev": "i16promax",
   "iss": [],
   "fit": 0,
@@ -2673,7 +4965,7 @@
   "set": "long",
   "dev": "mini",
   "iss": [],
-  "fit": 3,
+  "fit": 4,
   "shown": "flag only",
   "ell": []
  },
@@ -2692,7 +4984,7 @@
   "dev": "i16",
   "iss": [],
   "fit": 3,
-  "shown": "flag only",
+  "shown": "name",
   "ell": []
  },
  {
@@ -2730,7 +5022,7 @@
   "fit": 4,
   "shown": "flag only",
   "ell": [
-   "حملة سانت فينسنت والغرينادين · حُفظ قبل دقيقة"
+   "حملة الكونغو الديمقراطية · حُفظ قبل دقيقة"
   ]
  },
  {
@@ -2738,10 +5030,10 @@
   "set": "longest",
   "dev": "mini",
   "iss": [],
-  "fit": 3,
+  "fit": 4,
   "shown": "flag only",
   "ell": [
-   "حملة سانت فينسنت والغرينادين · حُفظ قبل دقيقة"
+   "حملة الكونغو الديمقراطية · حُفظ قبل دقيقة"
   ]
  },
  {
@@ -2750,9 +5042,9 @@
   "dev": "i14",
   "iss": [],
   "fit": 3,
-  "shown": "flag only",
+  "shown": "name",
   "ell": [
-   "حملة سانت فينسنت والغرينادين · حُفظ قبل دقيقة"
+   "حملة الكونغو الديمقراطية · حُفظ قبل دقيقة"
   ]
  },
  {
@@ -2760,10 +5052,10 @@
   "set": "longest",
   "dev": "i16",
   "iss": [],
-  "fit": 3,
+  "fit": 4,
   "shown": "flag only",
   "ell": [
-   "حملة سانت فينسنت والغرينادين · حُفظ قبل دقيقة"
+   "حملة الكونغو الديمقراطية · حُفظ قبل دقيقة"
   ]
  },
  {
@@ -2772,9 +5064,9 @@
   "dev": "i16pro",
   "iss": [],
   "fit": 3,
-  "shown": "flag only",
+  "shown": "name",
   "ell": [
-   "حملة سانت فينسنت والغرينادين · حُفظ قبل دقيقة"
+   "حملة الكونغو الديمقراطية · حُفظ قبل دقيقة"
   ]
  },
  {
@@ -2782,11 +5074,9 @@
   "set": "longest",
   "dev": "i11",
   "iss": [],
-  "fit": 3,
-  "shown": "flag only",
-  "ell": [
-   "حملة سانت فينسنت والغرينادين · حُفظ قبل دقيقة"
-  ]
+  "fit": 0,
+  "shown": "name",
+  "ell": []
  },
  {
   "pg": "screen23/A",
@@ -2795,8 +5085,6 @@
   "iss": [],
   "fit": 0,
   "shown": "name",
-  "ell": [
-   "حملة سانت فينسنت والغرينادين · حُفظ قبل دقيقة"
-  ]
+  "ell": []
  }
 ]

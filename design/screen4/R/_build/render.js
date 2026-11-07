@@ -84,7 +84,7 @@ const TOK = {
 // The brief's strings (as the page writes them). "now": fully visible in that render; "dom": in the sheet (by scroll).
 const BRIEF = {
   card: ['القاهرة', 'العاصمة', 'مصر · محافظة', 'السكان', '6.8', 'مليون', '+11 ألف شهريًا', 'الاضطرابات', '64', '/ 100', '+2 شهريًا',
-    'البنية التحتية', '/ 10', 'دون تغير', 'لماذا؟', 'السيادة', 'الإدارة', 'حكومة مصر', 'السيطرة', 'الحكومة · 100%', 'المطالبات', 'لا توجد', 'تفاصيل المحافظة'],
+    'البنية التحتية', '/ 10', 'دون تغير', 'لماذا؟', 'السيادة', 'الإدارة', 'حكومتنا', 'السيطرة', 'الحكومة · 100%', 'المطالبات', 'لا توجد', 'تفاصيل المحافظة'],
   // (the tax burden's three choices sit under the bottom fade on the SE since the scroll hint got its clear strip; the
   // coverage check across the details' views shows them clear there)
   govern: ['القاهرة', 'العاصمة', 'الحكم', 'الإنشاءات', 'القوات', 'السياسات', 'إدارة المحافظة', 'المحافظ', 'عبد العظيم وزير', 'تغيير',

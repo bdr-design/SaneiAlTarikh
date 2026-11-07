@@ -57,3 +57,7 @@
   [data-states="1"] .s-wait-1 .s-sg { color: var(--t2); }
   [data-states="1"] .s-wait-1 .s-sg.on { background: var(--w-line-dim); color: var(--t1); }
   [data-states="1"] .s-short-1 .s-cost { color: var(--amber); }
+  /* the mode chip as its icon alone where the header row needs the room for a long country name (T-024, capFit); its
+     words stay for VoiceOver */
+  .cap-icon .r-cap { padding-inline: 5px; }
+  .cap-icon .r-cap .r-capt, .cap-icon .r-cap .lbl { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
