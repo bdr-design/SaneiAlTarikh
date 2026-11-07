@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-07T18:11:07.601Z",
+ "ranAt": "2026-11-07T19:58:36.651Z",
  "inputs": {
   "files": [
    "index.html",
@@ -26,7 +26,7 @@
    "../../shared/map_mena_d1_overlay.svg",
    "header_cairo.jpg"
   ],
-  "sha1": "d7109d945e253cd4093c2c80c6a8c78689d36741"
+  "sha1": "6c39402dce409112044b40be228668463f5b2843"
  },
  "cleanIssues": {
   "i16promax": [],
@@ -274,6 +274,13 @@
    "ok": true,
    "sample": [
     "size 28.0x32.0 for .s-emb (want 32 x 32)"
+   ]
+  },
+  {
+   "name": "close says only إغلاق",
+   "ok": true,
+   "sample": [
+    "a11y: the close says only «إغلاق»"
    ]
   },
   {

@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-07T18:17:22.576Z",
+ "ranAt": "2026-11-07T20:04:59.605Z",
  "inputs": {
   "files": [
    "index.html",
@@ -23,7 +23,7 @@
    "header_cairo.jpg",
    "map_overlay_cairo.svg"
   ],
-  "sha1": "8536275c1ed7bb448ee503731a4b9bd7c6cec023"
+  "sha1": "98c8acdb6cfb8e257c481120475a3c5e64498312"
  },
  "cleanIssues": {
   "i16promax": [],
@@ -317,6 +317,13 @@
    "sample": [
     "«زيارة رسمية»: the chip's arrow does not agree with its sign",
     "a11y: «زيارة رسمية» does not say the chip's direction in words"
+   ]
+  },
+  {
+   "name": "close says only إغلاق",
+   "ok": true,
+   "sample": [
+    "a11y: the close says only «إغلاق»"
    ]
   },
   {

@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-07T19:26:40.845Z",
+ "ranAt": "2026-11-07T20:21:43.812Z",
  "inputs": {
   "files": [
    "index.html",
@@ -25,7 +25,7 @@
    "../../shared/map_mena_d1_overlay.svg",
    "map_overlay_cairo.svg"
   ],
-  "sha1": "85917b23a8c06cf4d6b2793a13a284021496a4a0"
+  "sha1": "295890ff530986d26017c6a878362ef01e0819bf"
  },
  "cleanIssues": {
   "i16promax": [],
@@ -304,6 +304,14 @@
     "«دعم أكبر للخبز»: the chip's arrow does not agree with its sign",
     "option 1: the chip is «up الاضطرابات −3» (want «down الاضطرابات -3»)",
     "option 1: an arrow against its sign"
+   ]
+  },
+  {
+   "name": "close says only إغلاق",
+   "ok": true,
+   "sample": [
+    "a11y: the close says only «إغلاق»",
+    "a11y: the close button does not say it puts the decision off and resumes time"
    ]
   },
   {
@@ -629,6 +637,7 @@
    "name": "close silent on putting off",
    "ok": true,
    "sample": [
+    "a11y: the close says only «إغلاق»",
     "a11y: the close button does not say it puts the decision off and resumes time"
    ]
   },

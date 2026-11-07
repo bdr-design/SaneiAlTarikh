@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-07T19:30:49.226Z",
+ "ranAt": "2026-11-07T20:39:36.031Z",
  "inputs": {
   "files": [
    "index.html",
@@ -19,7 +19,7 @@
    "header_cairo.jpg",
    "map_overlay_cairo.svg"
   ],
-  "sha1": "3f2668eb6989a04b90a1882ea4912f058fe45194"
+  "sha1": "0fe1a346acd6793865b6f06a091c994ebcf260ca"
  },
  "cleanIssues": {
   "i16promax": [],
@@ -53,6 +53,34 @@
   "se coverage": []
  },
  "results": [
+  {
+   "name": "progress unread",
+   "ok": true,
+   "sample": [
+    "a11y: project 1 does not read its progress 85%"
+   ]
+  },
+  {
+   "name": "states wording dropped",
+   "ok": true,
+   "sample": [
+    "a11y: the unaffordable change does not say it in words (يلزم، لديك، لا يكفي)"
+   ]
+  },
+  {
+   "name": "cost without the capital",
+   "ok": true,
+   "sample": [
+    "a11y: a cost does not name the capital it is in"
+   ]
+  },
+  {
+   "name": "label on a plain element",
+   "ok": true,
+   "sample": [
+    "a11y: a label VoiceOver may skip (no role): «قرارات»"
+   ]
+  },
   {
    "name": "why unnamed",
    "ok": true,
@@ -101,7 +129,8 @@
    "name": "states label unswapped",
    "ok": true,
    "sample": [
-    "a11y: the action «رفع حالة الطوارئ» does not read its numbers"
+    "a11y: the action «رفع حالة الطوارئ» does not read its numbers",
+    "a11y: the unaffordable change does not say it in words (يلزم، لديك، لا يكفي)"
    ]
   },
   {
@@ -198,9 +227,9 @@
    "name": "cost glyph size",
    "ok": true,
    "sample": [
-    "icon size 14x14 (want 10): i",
-    "icon size 14x14 (want 10): i",
-    "icon size 14x14 (want 10): i"
+    "icon size 14x14 (want 10): من رأس المال السياسي",
+    "icon size 14x14 (want 10): من رأس المال السياسي",
+    "icon size 14x14 (want 10): من رأس المال السياسي"
    ]
   },
   {
@@ -280,7 +309,7 @@
    "ok": true,
    "sample": [
     "text outside the sheet's 12 pt padding: \"رأس المال السياسي\"",
-    "icon over text: i / \"رأس المال السياسي\"",
+    "icon over text: من رأس المال السياسي / \"رأس المال السياسي\"",
     "icon over text: i / \"الاستقرار\""
    ]
   },

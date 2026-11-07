@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-07T18:18:38.983Z",
+ "ranAt": "2026-11-07T20:06:35.646Z",
  "inputs": {
   "files": [
    "index.html",
@@ -20,7 +20,7 @@
    "header_cairo.jpg",
    "map_overlay_cairo.svg"
   ],
-  "sha1": "776fabff130330c9f45094da08ba60ea40ffca1a"
+  "sha1": "72b4f5e008e4722ab93c0da1f096c8cc6aa082d3"
  },
  "cleanIssues": {
   "i16promax": [],
@@ -255,7 +255,7 @@
    "name": "sheet top",
    "ok": true,
    "sample": [
-    "hit overlap الاستقرار 58% / إغلاق",
+    "hit overlap الاستقرار 58% / إغلاق، العودة إلى الخريطة",
     "panel overlap الدولة: مصر، حسني مبارك، ج / الاقتصاد: مصر",
     "panel overlap الخزينة 36.0 مليار $ الاست / الاقتصاد: مصر"
    ]
@@ -264,7 +264,7 @@
    "name": "panel overlap",
    "ok": true,
    "sample": [
-    "hit overlap الاستقرار 58% / إغلاق",
+    "hit overlap الاستقرار 58% / إغلاق، العودة إلى الخريطة",
     "panel overlap الدولة: مصر، حسني مبارك، ج / الاقتصاد: مصر",
     "panel overlap الخزينة 36.0 مليار $ الاست / الاقتصاد: مصر"
    ]

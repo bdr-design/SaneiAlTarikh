@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-07T18:22:46.750Z",
+ "ranAt": "2026-11-07T20:10:16.563Z",
  "inputs": {
   "files": [
    "index.html",
@@ -22,7 +22,7 @@
    "header_cairo.jpg",
    "map_overlay_cairo.svg"
   ],
-  "sha1": "d7abdbc0b048a4c7c9ae1ed265d1e39a894446a5"
+  "sha1": "34cdb22b2a2c4594b76313166a77f0716ed4758b"
  },
  "cleanIssues": {
   "i16promax": [],
@@ -152,7 +152,7 @@
    "name": "sheet top",
    "ok": true,
    "sample": [
-    "hit overlap الاستقرار 58% / إغلاق",
+    "hit overlap الاستقرار 58% / إغلاق، العودة إلى الخريطة",
     "panel overlap الدولة: مصر، حسني مبارك، ج / البحث: مصر",
     "panel overlap الخزينة 36.0 مليار $ الاست / البحث: مصر"
    ]
@@ -514,6 +514,13 @@
    "sample": [
     "«رفع الإنفاق على البحث»: the chip's arrow does not agree with its sign",
     "a11y: «رفع الإنفاق على البحث» does not say the chip's direction in words"
+   ]
+  },
+  {
+   "name": "close says only إغلاق",
+   "ok": true,
+   "sample": [
+    "a11y: the close says only «إغلاق»"
    ]
   },
   {

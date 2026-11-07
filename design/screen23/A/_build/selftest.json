@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-07T18:44:10.214Z",
+ "ranAt": "2026-11-07T20:43:05.591Z",
  "inputs": {
   "files": [
    "index.html",
@@ -24,7 +24,7 @@
    "header_cairo.jpg",
    "map_overlay_cairo.svg"
   ],
-  "sha1": "b86bdd0ebd3d2bb3ae674b8795176ba24630c8dc"
+  "sha1": "3bdbcbcb17fc6f59880f016b101dc4a2531b0b90"
  },
  "cleanIssues": {
   "i16promax": [],
@@ -292,6 +292,14 @@
     "white touch off: .r-tile color rgb(127, 233, 255) (want rgb(234, 242, 247))",
     "white touch off: .r-tile color rgb(127, 233, 255) (want rgb(234, 242, 247))",
     "a delete row's bin is not red"
+   ]
+  },
+  {
+   "name": "close says only إغلاق",
+   "ok": true,
+   "sample": [
+    "a11y: the close says only «إغلاق»",
+    "a11y: the close is not «إغلاق، العودة إلى الحفظ»"
    ]
   },
   {

@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-07T18:19:57.561Z",
+ "ranAt": "2026-11-07T20:07:33.007Z",
  "inputs": {
   "files": [
    "index.html",
@@ -23,7 +23,7 @@
    "header_cairo.jpg",
    "map_overlay_cairo.svg"
   ],
-  "sha1": "99dd0645f846613888969a2d1cfd71f99af579d8"
+  "sha1": "7b6feb833f1c2d584d3920292699d1a32d0d07bd"
  },
  "cleanIssues": {
   "i16promax": [],
@@ -308,6 +308,14 @@
    "sample": [
     "a11y: «بدء العملية» does not say the chip's direction in words",
     "the start does not show its effect (the chip «↑ الدقة»)"
+   ]
+  },
+  {
+   "name": "close says only إغلاق",
+   "ok": true,
+   "sample": [
+    "a11y: the close says only «إغلاق»",
+    "a11y: the close is not «إلغاء، العودة إلى العمليات»"
    ]
   },
   {
@@ -631,6 +639,7 @@
    "name": "close mislabelled",
    "ok": true,
    "sample": [
+    "a11y: the close says only «إغلاق»",
     "a11y: the close is not «إلغاء، العودة إلى العمليات»"
    ]
   },

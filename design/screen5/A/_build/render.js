@@ -244,6 +244,7 @@ async function measure(p, d, b3, view) {
       const fs = parseFloat(cs.fontSize), fw = +cs.fontWeight, t = tn.textContent.trim();
       const inSheet = !!el.closest('.sheet');
       if (rr.every((r) => hiddenByScroll(box(r), el))) continue;
+      if (el.closest('.s-vh')) continue;   // words for VoiceOver only, hidden from sight (T-025)
       typeSeen[`${fs}/${fw}`] = (typeSeen[`${fs}/${fw}`] || 0) + 1;
       if (!(fs in TOK.type)) issues.push(`font size ${fs} for "${t}"`);
       else if (!TOK.type[fs].includes(fw)) issues.push(`font weight ${fs}/${fw} for "${t}"`);
@@ -644,7 +645,7 @@ async function selftest(b) {
   const cases = [
     ['progress unread', d, '&tab=projects', '', /a11y: project 1 does not read its progress 85%/, () => { document.querySelector('.s-proj .r-at').setAttribute('aria-label', 'الخط الثالث لمترو القاهرة، المرحلة الأولى: تكتمل في 2012'); }],
     ['states wording dropped', d, '&states=1', '', /a11y: the unaffordable change does not say it in words/, () => { document.querySelector('.r-act').setAttribute('aria-label', 'رفع حالة الطوارئ: الكلفة 60 من رأس المال السياسي، 45. ترفع الشرعية، أفضل'); }],
-    ['cost without the capital', d, '&tab=policies', '', /a11y: a cost does not name the capital it is in/, () => { document.querySelectorAll('.s-pol .s-cost svg')[1].removeAttribute('aria-label'); }],
+    ['cost without the capital', d, '&tab=policies', '', /a11y: a cost does not name the capital it is in/, () => { document.querySelectorAll('.s-pol .s-cost svg')[2].removeAttribute('aria-label'); /* the conscription row's: [1] is the emergency row's states-only copy, hidden here */ }],
     ['label on a plain element', d, '', '', /a11y: a label VoiceOver may skip/, () => { document.querySelector('.r-acts').removeAttribute('role'); }],
     ['why unnamed', d, '', '', /a11y: «لماذا؟» does not name its subject «الاستقرار»/, () => { document.querySelectorAll('.r-why')[1].setAttribute('aria-label', 'لماذا؟'); }],
     ['close silent', d, '', '', /a11y: the close does not say where it returns/, () => { document.querySelector('.r-x').setAttribute('aria-label', 'إغلاق'); }],
