@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-07T17:41:21.458Z",
+ "ranAt": "2026-11-07T18:19:57.561Z",
  "inputs": {
   "files": [
    "index.html",
@@ -23,80 +23,17 @@
    "header_cairo.jpg",
    "map_overlay_cairo.svg"
   ],
-  "sha1": "32cf4d3bb4e8c30dddaaf4ec019369d8e2b979af"
+  "sha1": "99dd0645f846613888969a2d1cfd71f99af579d8"
  },
  "cleanIssues": {
-  "i16promax": [
-   "ellipsis on \"عملية جديدة\"",
-   "ellipsis on \"السودان\"",
-   "clipped text (top): \"·\" 786.63..796.16 y 84..101",
-   "ellipsis on \"العمليات\"",
-   "clipped text (top): \"2\" 738.64..745.55 y 84..101",
-   "ellipsis on \"من\"",
-   "clipped text (top): \"4\" 712.25..719.16 y 84..101",
-   "ellipsis on \"قيد التنفيذ\""
-  ],
-  "i16promax_newop_end": [
-   "ellipsis on \"عملية جديدة\"",
-   "ellipsis on \"السودان\"",
-   "clipped text (top): \"·\" 786.63..796.16 y 84..101",
-   "ellipsis on \"العمليات\"",
-   "clipped text (top): \"2\" 738.64..745.55 y 84..101",
-   "ellipsis on \"من\"",
-   "clipped text (top): \"4\" 712.25..719.16 y 84..101",
-   "ellipsis on \"قيد التنفيذ\""
-  ],
-  "i16promax_newop_at182": [
-   "ellipsis on \"عملية جديدة\"",
-   "ellipsis on \"السودان\"",
-   "clipped text (top): \"·\" 786.63..796.16 y 84..101",
-   "ellipsis on \"العمليات\"",
-   "clipped text (top): \"2\" 738.64..745.55 y 84..101",
-   "ellipsis on \"من\"",
-   "clipped text (top): \"4\" 712.25..719.16 y 84..101",
-   "ellipsis on \"قيد التنفيذ\""
-  ],
+  "i16promax": [],
+  "i16promax_newop_end": [],
+  "i16promax_newop_at182": [],
   "i16promax coverage": [],
-  "se": [
-   "ellipsis on \"عملية جديدة\"",
-   "ellipsis on \"السودان\"",
-   "clipped text (top): \"·\" 551.63..561.16 y 84..101",
-   "ellipsis on \"العمليات\"",
-   "clipped text (top): \"2\" 503.64..510.55 y 84..101",
-   "ellipsis on \"من\"",
-   "clipped text (top): \"4\" 477.25..484.16 y 84..101",
-   "ellipsis on \"قيد التنفيذ\""
-  ],
-  "se_newop_end": [
-   "ellipsis on \"عملية جديدة\"",
-   "ellipsis on \"السودان\"",
-   "clipped text (top): \"·\" 551.63..561.16 y 84..101",
-   "ellipsis on \"العمليات\"",
-   "clipped text (top): \"2\" 503.64..510.55 y 84..101",
-   "ellipsis on \"من\"",
-   "clipped text (top): \"4\" 477.25..484.16 y 84..101",
-   "ellipsis on \"قيد التنفيذ\""
-  ],
-  "se_newop_at131": [
-   "ellipsis on \"عملية جديدة\"",
-   "ellipsis on \"السودان\"",
-   "clipped text (top): \"·\" 551.63..561.16 y 84..101",
-   "ellipsis on \"العمليات\"",
-   "clipped text (top): \"2\" 503.64..510.55 y 84..101",
-   "ellipsis on \"من\"",
-   "clipped text (top): \"4\" 477.25..484.16 y 84..101",
-   "ellipsis on \"قيد التنفيذ\""
-  ],
-  "se_newop_at262": [
-   "ellipsis on \"عملية جديدة\"",
-   "ellipsis on \"السودان\"",
-   "clipped text (top): \"·\" 551.63..561.16 y 84..101",
-   "ellipsis on \"العمليات\"",
-   "clipped text (top): \"2\" 503.64..510.55 y 84..101",
-   "ellipsis on \"من\"",
-   "clipped text (top): \"4\" 477.25..484.16 y 84..101",
-   "ellipsis on \"قيد التنفيذ\""
-  ],
+  "se": [],
+  "se_newop_end": [],
+  "se_newop_at131": [],
+  "se_newop_at262": [],
   "se coverage": []
  },
  "results": [
@@ -104,9 +41,7 @@
    "name": "type size",
    "ok": true,
    "sample": [
-    "font size 17 for \"عملية جديدة\"",
-    "ellipsis on \"عملية جديدة\"",
-    "ellipsis on \"السودان\""
+    "font size 17 for \"عملية جديدة\""
    ]
   },
   {
@@ -114,8 +49,7 @@
    "ok": true,
    "sample": [
     "text colour off-token rgb(136, 153, 170): \"عملية جديدة\"",
-    "ellipsis on \"عملية جديدة\"",
-    "ellipsis on \"السودان\""
+    "contrast 1.97 for \"عملية جديدة\""
    ]
   },
   {
@@ -123,26 +57,23 @@
    "ok": true,
    "sample": [
     "panel radius عملية جديدة: 6 (want 12)",
-    "radius 6 for .sheet (want 12)",
-    "ellipsis on \"عملية جديدة\""
+    "radius 6 for .sheet (want 12)"
    ]
   },
   {
    "name": "panel in the side inset",
    "ok": true,
    "sample": [
-    "ellipsis on \"عملية جديدة\"",
-    "ellipsis on \"السودان\"",
-    "clipped text (top): \"·\" 816.63..826.16 y 84..101"
+    "text in side inset: النوع",
+    "text in side inset: لا توجد عمليات اغتيال في اللعبة.",
+    "text in side inset: الهدف والمدة"
    ]
   },
   {
    "name": "panel not opaque",
    "ok": true,
    "sample": [
-    "panel not opaque: عملية جديدة rgba(9, 17, 25, 0.66)",
-    "ellipsis on \"عملية جديدة\"",
-    "ellipsis on \"السودان\""
+    "panel not opaque: عملية جديدة rgba(9, 17, 25, 0.66)"
    ]
   },
   {
@@ -150,323 +81,283 @@
    "ok": true,
    "sample": [
     "panel not opaque (opacity 0.60): عملية جديدة",
-    "ellipsis on \"عملية جديدة\"",
-    "ellipsis on \"السودان\""
+    "brief text not fully visible: عملية جديدة",
+    "brief text not fully visible: السودان · العمليات 2 من 4 قيد التنفيذ"
    ]
   },
   {
    "name": "Egypt covered",
    "ok": true,
    "sample": [
-    "ellipsis on \"عملية جديدة\"",
-    "ellipsis on \"السودان\"",
-    "clipped text (top): \"·\" 786.63..796.16 y 84..101"
+    "Nile delta covered by panel عملية جديدة",
+    "Nile delta under the hit box of جمع معلومات",
+    "Egypt covered by panel عملية جديدة"
    ]
   },
   {
    "name": "map dimmed",
    "ok": true,
    "sample": [
-    "ellipsis on \"عملية جديدة\"",
-    "ellipsis on \"السودان\"",
-    "clipped text (top): \"·\" 786.63..796.16 y 84..101"
+    "the map is dimmed (opacity 1.00, filter brightness(0.35))"
    ]
   },
   {
    "name": "map faded",
    "ok": true,
    "sample": [
-    "ellipsis on \"عملية جديدة\"",
-    "ellipsis on \"السودان\"",
-    "clipped text (top): \"·\" 786.63..796.16 y 84..101"
+    "the map is dimmed (opacity 0.30, filter none)"
    ]
   },
   {
    "name": "scrim over the map",
    "ok": true,
    "sample": [
-    "ellipsis on \"عملية جديدة\"",
-    "ellipsis on \"السودان\"",
-    "clipped text (top): \"·\" 786.63..796.16 y 84..101"
+    "something drawn over the map: DIV (rgba(0, 0, 0, 0.55))",
+    "contrast 1.92 for \"3\"",
+    "contrast 3.62 for \"جمع معلومات\""
    ]
   },
   {
    "name": "sheet width",
    "ok": true,
    "sample": [
-    "ellipsis on \"عملية جديدة\"",
-    "ellipsis on \"السودان\"",
-    "clipped text (top): \"·\" 786.63..796.16 y 84..101"
+    "sheet width 330 (want round(clamp(43% of 832, 340, 380)), or the room the dock leaves if 330..: 358)"
    ]
   },
   {
    "name": "sheet top",
    "ok": true,
    "sample": [
-    "ellipsis on \"عملية جديدة\"",
-    "ellipsis on \"السودان\"",
-    "clipped text (top): \"·\" 786.63..796.16 y 70..87"
+    "hit overlap الاستقرار 58% / إلغاء، العودة إلى العمليات",
+    "panel overlap الدولة: مصر، حسني مبارك، ج / عملية جديدة",
+    "panel overlap الخزينة 36.0 مليار $ الاست / عملية جديدة"
    ]
   },
   {
    "name": "dock hidden although it fits",
    "ok": true,
    "sample": [
-    "ellipsis on \"عملية جديدة\"",
-    "ellipsis on \"السودان\"",
-    "clipped text (top): \"·\" 786.63..796.16 y 84..101"
+    "dock hidden although it fits left of the sheet"
    ]
   },
   {
    "name": "dock shown on the SE",
    "ok": true,
    "sample": [
-    "ellipsis on \"عملية جديدة\"",
-    "ellipsis on \"السودان\"",
-    "clipped text (top): \"·\" 551.63..561.16 y 84..101"
+    "hit overlap الدولة / سرقة التقنية",
+    "panel overlap الأقسام / عملية جديدة",
+    "dock shown although it does not fit left of the sheet"
    ]
   },
   {
    "name": "left stack moved",
    "ok": true,
    "sample": [
-    "ellipsis on \"عملية جديدة\"",
-    "ellipsis on \"السودان\"",
-    "clipped text (top): \"·\" 786.63..796.16 y 84..101"
+    "HUD element moved from its B3 position: .toast x 70.0..275.6 y 56.0..88.0",
+    "HUD element moved from its B3 position: .btn.mode x 70.0..191.6 y 96.0..128.0",
+    "HUD element moved from its B3 position: .btn.home x 70.0..141.5 y 136.0..168.0"
    ]
   },
   {
    "name": "map label cut",
    "ok": true,
    "sample": [
-    "ellipsis on \"عملية جديدة\"",
-    "ellipsis on \"السودان\"",
-    "clipped text (top): \"·\" 786.63..796.16 y 84..101"
+    "map label ليبيا sliced by the screen edge or the side inset",
+    "map label إيران sliced by the screen edge or the side inset",
+    "map label إيران squeezed between a panel and the screen edge"
    ]
   },
   {
    "name": "contrast",
    "ok": true,
    "sample": [
-    "ellipsis on \"عملية جديدة\"",
-    "ellipsis on \"السودان\"",
-    "clipped text (top): \"·\" 786.63..796.16 y 84..101"
+    "contrast 1 for \"النوع\"",
+    "contrast 1.73 for \"لا توجد عمليات اغتيال في\""
    ]
   },
   {
    "name": "dock item not marked",
    "ok": true,
    "sample": [
-    "ellipsis on \"عملية جديدة\"",
-    "ellipsis on \"السودان\"",
-    "clipped text (top): \"·\" 786.63..796.16 y 84..101"
+    "the open section «الاستخبارات» is not marked in the dock"
    ]
   },
   {
    "name": "identity line missing",
    "ok": true,
    "sample": [
-    "ellipsis on \"عملية جديدة\"",
-    "ellipsis on \"السودان\"",
-    "clipped text (top): \"·\" 786.63..796.16 y 84..101"
+    "panel top line none rgb(200, 115, 214) 2px (want the section colour, 2 pt, at the top)"
    ]
   },
   {
    "name": "emblem drawn grey",
    "ok": true,
    "sample": [
-    "ellipsis on \"عملية جديدة\"",
-    "ellipsis on \"السودان\"",
-    "clipped text (top): \"·\" 786.63..796.16 y 84..101"
+    "section emblem missing or not in the section colour"
    ]
   },
   {
    "name": "section colour on data",
    "ok": true,
    "sample": [
-    "ellipsis on \"عملية جديدة\"",
-    "ellipsis on \"السودان\"",
-    "clipped text (top): \"·\" 786.63..796.16 y 84..101"
+    "section colour on data text: \"السودان\"",
+    "section colour on data text: \"العمليات\"",
+    "section colour on data text: \"2\""
    ]
   },
   {
    "name": "money unit",
    "ok": true,
    "sample": [
-    "ellipsis on \"عملية جديدة\"",
-    "ellipsis on \"السودان\"",
-    "clipped text (top): \"·\" 786.63..796.16 y 84..101"
+    "money unit: «0.4 مليار» (under 1 billion is written in millions)"
    ]
   },
   {
    "name": "sign outside its number",
    "ok": true,
    "sample": [
-    "ellipsis on \"عملية جديدة\"",
-    "ellipsis on \"السودان\"",
-    "clipped text (top): \"·\" 786.63..796.16 y 84..101"
+    "a sign outside its number: «تغير +3»"
    ]
   },
   {
    "name": "colour alone",
    "ok": true,
    "sample": [
-    "ellipsis on \"عملية جديدة\"",
-    "ellipsis on \"السودان\"",
-    "clipped text (top): \"·\" 786.63..796.16 y 84..101"
+    "colour alone: «تراجع» has no arrow or icon"
    ]
   },
   {
    "name": "an image in the sheet",
    "ok": true,
    "sample": [
-    "ellipsis on \"عملية جديدة\"",
-    "ellipsis on \"السودان\"",
-    "clipped text (top): \"·\" 786.63..796.16 y 84..101"
+    "an image in the sheet"
    ]
   },
   {
    "name": "close not round",
    "ok": true,
    "sample": [
-    "close button is not round",
-    "ellipsis on \"عملية جديدة\"",
-    "ellipsis on \"السودان\""
+    "close button is not round"
    ]
   },
   {
    "name": "label without a role",
    "ok": true,
    "sample": [
-    "ellipsis on \"عملية جديدة\"",
-    "ellipsis on \"السودان\"",
-    "clipped text (top): \"·\" 786.63..796.16 y 84..101"
+    "a11y: a label VoiceOver may skip (no role): «اختبار»"
    ]
   },
   {
    "name": "text overlap",
    "ok": true,
    "sample": [
-    "ellipsis on \"عملية جديدة\"",
-    "ellipsis on \"السودان\"",
-    "clipped text (top): \"·\" 786.63..796.16 y 70..87"
+    "text overlap \"عملية جديدة\" / \"السودان\"",
+    "text overlap \"عملية جديدة\" / \"·\"",
+    "text overlap \"عملية جديدة\" / \"العمليات\""
    ]
   },
   {
    "name": "dock underline missing",
    "ok": true,
    "sample": [
-    "ellipsis on \"عملية جديدة\"",
-    "ellipsis on \"السودان\"",
-    "clipped text (top): \"·\" 786.63..796.16 y 84..101"
+    "dock underline missing or off: none 16pxx2px rgb(200, 115, 214) (want 16 x 2 in the section colour)"
    ]
   },
   {
    "name": "closed dock item coloured",
    "ok": true,
    "sample": [
-    "ellipsis on \"عملية جديدة\"",
-    "ellipsis on \"السودان\"",
-    "clipped text (top): \"·\" 786.63..796.16 y 84..101"
+    "dock item 1 (closed) not neutral as on B3: rgb(200, 115, 214) / rgb(234, 242, 247)",
+    "dock item 2 (closed) not neutral as on B3: rgb(200, 115, 214) / rgb(234, 242, 247)",
+    "dock item 3 (closed) not neutral as on B3: rgb(200, 115, 214) / rgb(234, 242, 247)"
    ]
   },
   {
    "name": "identity line colour",
    "ok": true,
    "sample": [
-    "ellipsis on \"عملية جديدة\"",
-    "ellipsis on \"السودان\"",
-    "clipped text (top): \"·\" 786.63..796.16 y 84..101"
+    "panel top line \"\" rgb(63, 224, 208) 2px (want the section colour, 2 pt, at the top)"
    ]
   },
   {
    "name": "emblem size",
    "ok": true,
    "sample": [
-    "ellipsis on \"عملية جديدة\"",
-    "ellipsis on \"السودان\"",
-    "clipped text (top): \"·\" 786.63..796.16 y 84..101"
+    "size 28.0x32.0 for .s-emb (want 32 x 32)"
    ]
   },
   {
    "name": "chip not white",
    "ok": true,
    "sample": [
-    "ellipsis on \"عملية جديدة\"",
-    "ellipsis on \"السودان\"",
-    "clipped text (top): \"·\" 786.63..796.16 y 84..101"
+    "white touch off: .r-chip borderTopColor rgb(63, 224, 208) (want rgba(234, 242, 247, 0.5))",
+    "white touch off: .r-chip color rgb(63, 224, 208) (want rgb(234, 242, 247))"
    ]
   },
   {
    "name": "tile icons cyan",
    "ok": true,
    "sample": [
-    "ellipsis on \"عملية جديدة\"",
-    "ellipsis on \"السودان\"",
-    "clipped text (top): \"·\" 786.63..796.16 y 84..101"
+    "white touch off: .r-tile color rgb(127, 233, 255) (want rgb(234, 242, 247))",
+    "white touch off: .r-tile color rgb(127, 233, 255) (want rgb(234, 242, 247))"
    ]
   },
   {
    "name": "chip arrow against its sign",
    "ok": true,
    "sample": [
-    "ellipsis on \"عملية جديدة\"",
-    "ellipsis on \"السودان\"",
-    "clipped text (top): \"·\" 786.63..796.16 y 84..101"
+    "a11y: «بدء العملية» does not say the chip's direction in words",
+    "the start does not show its effect (the chip «↑ الدقة»)"
    ]
   },
   {
    "name": "row read in part",
    "ok": true,
    "sample": [
-    "ellipsis on \"عملية جديدة\"",
-    "ellipsis on \"السودان\"",
-    "clipped text (top): \"·\" 786.63..796.16 y 84..101"
+    "a11y: «السودان» does not read its numbers",
+    "a11y: «جزء» does not read all it shows: السودان الشبكة من الانكشاف",
+    "a11y: the target row does not say where it leads"
    ]
   },
   {
    "name": "a long headline label",
    "ok": true,
    "sample": [
-    "ellipsis on \"عملية جديدة\"",
-    "ellipsis on \"السودان\"",
-    "clipped text (top): \"·\" 786.63..796.16 y 84..101"
+    "clipped text (sides): \"عنوان طويل جدًا لا يتسع لخانته أبدًا\" 385.38..539.25 y 124..141",
+    "text outside the sheet's 12 pt padding: \"عنوان طويل جدًا لا يتسع لخانته أبدًا\"",
+    "clipped text (sides): \"1\" 528.44..539.25 y 142..169"
    ]
   },
   {
    "name": "text wider than its box",
    "ok": true,
    "sample": [
-    "ellipsis on \"عملية جديدة\"",
-    "ellipsis on \"السودان\"",
-    "clipped text (top): \"·\" 786.63..796.16 y 84..101"
+    "text wider than its box: «النوع» (23 in 20)"
    ]
   },
   {
    "name": "a long status cell",
    "ok": true,
    "sample": [
-    "ellipsis on \"عملية جديدة\"",
-    "ellipsis on \"السودان\"",
-    "clipped text (top): \"·\" 786.63..796.16 y 84..101"
+    "clipped text (sides): \"قيمة طويلة جدًا لا تتسع لنصف الجدول\" 416.53..613.3 y 120.5..139.5",
+    "text outside the sheet's 12 pt padding: \"قيمة طويلة جدًا لا تتسع لنصف الجدول\"",
+    "horizontal overflow in خانةقيمة طويلة جدًا لا تتس"
    ]
   },
   {
    "name": "font weight (no tabs)",
    "ok": true,
    "sample": [
-    "ellipsis on \"عملية جديدة\"",
     "font weight 11.5/700 for \"السودان\"",
-    "ellipsis on \"السودان\""
+    "font weight 11.5/700 for \"·\"",
+    "font weight 11.5/700 for \"العمليات\""
    ]
   },
   {
    "name": "a tab row on a one-body sheet",
    "ok": true,
    "sample": [
-    "ellipsis on \"عملية جديدة\"",
-    "ellipsis on \"السودان\"",
-    "clipped text (top): \"·\" 786.63..796.16 y 84..101"
+    "a tab row on a sheet that has one body"
    ]
   },
   {
@@ -474,71 +365,61 @@
    "ok": true,
    "sample": [
     "control height 40.00 for .r-x (want 32): إلغاء، العودة إلى العمليات",
-    "close button is not round",
-    "ellipsis on \"عملية جديدة\""
+    "close button is not round"
    ]
   },
   {
    "name": "icon size (no tabs)",
    "ok": true,
    "sample": [
-    "icon size 19x19 (want 16): i",
-    "ellipsis on \"عملية جديدة\"",
-    "ellipsis on \"السودان\""
+    "icon size 19x19 (want 16): i"
    ]
   },
   {
    "name": "fades wrong (no tabs)",
    "ok": true,
    "sample": [
-    "ellipsis on \"عملية جديدة\"",
-    "ellipsis on \"السودان\"",
-    "clipped text (top): \"·\" 551.63..561.16 y 84..101"
+    "clipped text (bottom): \"لا توجد عمليات اغتيال في اللعبة.\" 525.88..646 y 355..370",
+    "fades 0/0 do not match the scroll state (top 0, over 298.0)",
+    "contrast 1.02 for \"لا توجد عمليات اغتيال في\""
    ]
   },
   {
    "name": "hint chevron missing (no tabs)",
    "ok": true,
    "sample": [
-    "ellipsis on \"عملية جديدة\"",
-    "ellipsis on \"السودان\"",
-    "clipped text (top): \"·\" 551.63..561.16 y 84..101"
+    "scroll hint chevron missing with content below"
    ]
   },
   {
    "name": "hint over the content (no tabs)",
    "ok": true,
    "sample": [
-    "ellipsis on \"عملية جديدة\"",
-    "ellipsis on \"السودان\"",
-    "clipped text (top): \"·\" 551.63..561.16 y 84..101"
+    "scroll hint not centred in the clear strip under the fade: y 198.0..216.0 (strip 344.0..366.0)"
    ]
   },
   {
    "name": "brief text hidden (newop)",
    "ok": true,
    "sample": [
-    "ellipsis on \"السودان\"",
-    "clipped text (top): \"·\" 786.63..796.16 y 84..101",
-    "ellipsis on \"العمليات\""
+    "brief text not fully visible: عملية جديدة"
    ]
   },
   {
    "name": "18 pt misuse (newop)",
    "ok": true,
    "sample": [
-    "ellipsis on \"عملية جديدة\"",
-    "ellipsis on \"السودان\"",
-    "clipped text (top): \"·\" 786.63..796.16 y 84..101"
+    "18 pt is for the panel's name and the adjusted values only: \"النوع\"",
+    "18 pt is for the panel's name and the adjusted values only: \"الهدف والمدة\""
    ]
   },
   {
    "name": "clipped text (newop)",
    "ok": true,
    "sample": [
-    "ellipsis on \"عملية جديدة\"",
-    "ellipsis on \"السودان\"",
-    "clipped text (top): \"·\" 786.63..796.16 y 84..101"
+    "text outside the sheet's 12 pt padding: \"جمع معلومات\"",
+    "text outside the sheet's 12 pt padding: \"هجوم إلكتروني\"",
+    "text outside the sheet's 12 pt padding: \"دعم متمردين\""
    ]
   },
   {
@@ -547,232 +428,217 @@
    "sample": [
     "gap 6 on نوع العملية",
     "gap 6 on نوع العملية",
-    "ellipsis on \"عملية جديدة\""
+    "hit overlap جمع معلومات / هجوم إلكتروني"
    ]
   },
   {
    "name": "faint text (newop)",
    "ok": true,
    "sample": [
-    "ellipsis on \"عملية جديدة\"",
-    "ellipsis on \"السودان\"",
-    "clipped text (top): \"·\" 786.63..796.16 y 84..101"
+    "brief text not fully visible: النوع",
+    "brief text cannot be scrolled clear of the fades: الهدف والمدة",
+    "brief text cannot be scrolled clear of the fades: التقدير"
    ]
   },
   {
    "name": "% before its number (newop)",
    "ok": true,
    "sample": [
-    "ellipsis on \"عملية جديدة\"",
-    "ellipsis on \"السودان\"",
-    "clipped text (top): \"·\" 786.63..796.16 y 84..101"
+    "% shown before its number: \"نسبة 20%\"",
+    "brief text missing: النوع",
+    "brief text missing: النوع"
    ]
   },
   {
    "name": "amber value without its icon (newop)",
    "ok": true,
    "sample": [
-    "ellipsis on \"عملية جديدة\"",
-    "ellipsis on \"السودان\"",
-    "clipped text (top): \"·\" 786.63..796.16 y 84..101"
+    "colour alone: «60 مليون $» has no arrow or icon",
+    "colour alone: «60» has no arrow or icon"
    ]
   },
   {
    "name": "tap in the side inset (newop)",
    "ok": true,
    "sample": [
-    "ellipsis on \"عملية جديدة\"",
-    "ellipsis on \"السودان\"",
-    "clipped text (top): \"·\" 816.63..826.16 y 84..101"
+    "text in side inset: لا توجد عمليات اغتيال في اللعبة.",
+    "text in side inset: الهدف والمدة",
+    "text in side inset: المدة"
    ]
   },
   {
    "name": "text into a control (newop)",
    "ok": true,
    "sample": [
-    "ellipsis on \"عملية جديدة\"",
-    "ellipsis on \"السودان\"",
-    "clipped text (top): \"·\" 786.63..796.16 y 84..101"
+    "text overlap \"من\" / \"الدقة\"",
+    "text overlap \"4\" / \"الدقة\"",
+    "text over a control: \"مليون $ · تصبح العمليات\" runs into «الدقة»"
    ]
   },
   {
    "name": "tile icons cyan (newop)",
    "ok": true,
    "sample": [
-    "ellipsis on \"عملية جديدة\"",
-    "ellipsis on \"السودان\"",
-    "clipped text (top): \"·\" 786.63..796.16 y 84..101"
+    "a type tile's icon is not dark",
+    "a type tile's icon is not grey",
+    "a type tile's icon is not grey"
    ]
   },
   {
    "name": "an assassination type",
    "ok": true,
    "sample": [
-    "ellipsis on \"عملية جديدة\"",
-    "ellipsis on \"السودان\"",
-    "clipped text (top): \"·\" 786.63..796.16 y 84..101"
+    "the types are not the intelligence panel's nine in order",
+    "an assassination among the types (D-14)",
+    "brief text missing: سرقة التقنية"
    ]
   },
   {
    "name": "a type lost",
    "ok": true,
    "sample": [
-    "ellipsis on \"عملية جديدة\"",
-    "ellipsis on \"السودان\"",
-    "clipped text (top): \"·\" 786.63..796.16 y 84..101"
+    "the types are not the intelligence panel's nine in order",
+    "brief text missing: سرقة التقنية",
+    "brief text missing: سرقة التقنية"
    ]
   },
   {
    "name": "two types chosen",
    "ok": true,
    "sample": [
-    "ellipsis on \"عملية جديدة\"",
-    "ellipsis on \"السودان\"",
-    "clipped text (top): \"·\" 786.63..796.16 y 84..101"
+    "not exactly one type chosen («جمع معلومات»), marked and drawn"
    ]
   },
   {
    "name": "chosen not white",
    "ok": true,
    "sample": [
-    "ellipsis on \"عملية جديدة\"",
-    "ellipsis on \"السودان\"",
-    "clipped text (top): \"·\" 786.63..796.16 y 84..101"
+    "the chosen type is not filled white",
+    "contrast 1.08 for \"جمع معلومات\""
    ]
   },
   {
    "name": "target network off",
    "ok": true,
    "sample": [
-    "ellipsis on \"عملية جديدة\"",
-    "ellipsis on \"السودان\"",
-    "clipped text (top): \"·\" 786.63..796.16 y 84..101"
+    "a11y: «السودان» does not read its numbers",
+    "a11y: «الهدف: السودان، الشبكة 7» does not read all it shows: 9",
+    "the target is not the panel's Sudan (network 7, exposure منخفض)"
    ]
   },
   {
    "name": "duration off",
    "ok": true,
    "sample": [
-    "ellipsis on \"عملية جديدة\"",
-    "ellipsis on \"السودان\"",
-    "clipped text (top): \"·\" 786.63..796.16 y 84..101"
+    "the duration is not one choice of 3 months"
    ]
   },
   {
    "name": "cost off",
    "ok": true,
    "sample": [
-    "ellipsis on \"عملية جديدة\"",
-    "ellipsis on \"السودان\"",
-    "clipped text (top): \"·\" 786.63..796.16 y 84..101"
+    "the estimate is not the brief's: الكلفة:80 مليون $، الأثر:تقدير أدق، النجاح:نحو 85%، خطر الانكشاف:منخفض",
+    "the cost or the risk is not the panel's suggestion (60, منخفض)",
+    "brief text missing: 60 مليون $"
    ]
   },
   {
    "name": "slot off",
    "ok": true,
    "sample": [
-    "ellipsis on \"عملية جديدة\"",
-    "ellipsis on \"السودان\"",
-    "clipped text (top): \"·\" 786.63..796.16 y 84..101"
+    "starting does not take the next slot at the panel's cost",
+    "brief text missing: 60 مليون $ · تصبح العمليات 3 من 4",
+    "brief text missing: 60 مليون $ · تصبح العمليات 3 من 4"
    ]
   },
   {
    "name": "effect unsaid",
    "ok": true,
    "sample": [
-    "ellipsis on \"عملية جديدة\"",
-    "ellipsis on \"السودان\"",
-    "clipped text (top): \"·\" 786.63..796.16 y 84..101"
+    "a11y: «بدء العملية» does not say the chip's direction in words",
+    "a11y: «بدء العملية: الكلفة 60 م» does not read all it shows: تصبح العمليات الدقة",
+    "a11y: the start does not say its effect"
    ]
   },
   {
    "name": "an assassination to VoiceOver",
    "ok": true,
    "sample": [
-    "ellipsis on \"عملية جديدة\"",
-    "ellipsis on \"السودان\"",
-    "clipped text (top): \"·\" 786.63..796.16 y 84..101"
+    "an assassination among the types (D-14)"
    ]
   },
   {
    "name": "one column",
    "ok": true,
    "sample": [
-    "ellipsis on \"عملية جديدة\"",
-    "ellipsis on \"السودان\"",
-    "clipped text (top): \"·\" 786.63..796.16 y 84..101"
+    "the types are not in two columns"
    ]
   },
   {
    "name": "types not radios",
    "ok": true,
    "sample": [
-    "ellipsis on \"عملية جديدة\"",
-    "ellipsis on \"السودان\"",
-    "clipped text (top): \"·\" 786.63..796.16 y 84..101"
+    "a11y: a label VoiceOver may skip (no role): «نوع العملية»",
+    "a11y: the types are not a radio group"
    ]
   },
   {
    "name": "header slots off",
    "ok": true,
    "sample": [
-    "ellipsis on \"عملية جديدة\"",
-    "ellipsis on \"السودان\"",
-    "clipped text (top): \"·\" 786.63..796.16 y 84..101"
+    "the header's slots are not the panel's 2 of 4",
+    "brief text missing: السودان · العمليات 2 من 4 قيد التنفيذ",
+    "brief text missing: السودان · العمليات 2 من 4 قيد التنفيذ"
    ]
   },
   {
    "name": "header without the target",
    "ok": true,
    "sample": [
-    "ellipsis on \"عملية جديدة\"",
-    "ellipsis on \"الاستخبارات\"",
-    "clipped text (top): \"·\" 772.23..781.77 y 84..101"
+    "the header does not name the target (السودان)",
+    "brief text missing: السودان · العمليات 2 من 4 قيد التنفيذ",
+    "brief text missing: السودان · العمليات 2 من 4 قيد التنفيذ"
    ]
   },
   {
    "name": "target row unsaid",
    "ok": true,
    "sample": [
-    "ellipsis on \"عملية جديدة\"",
-    "ellipsis on \"السودان\"",
-    "clipped text (top): \"·\" 786.63..796.16 y 84..101"
+    "a11y: «السودان» does not read its numbers",
+    "a11y: «الهدف: السودان» does not read all it shows: الشبكة من الانكشاف منخفض",
+    "a11y: the target row does not say where it leads"
    ]
   },
   {
    "name": "chip removed",
    "ok": true,
    "sample": [
-    "ellipsis on \"عملية جديدة\"",
-    "ellipsis on \"السودان\"",
-    "clipped text (top): \"·\" 786.63..796.16 y 84..101"
+    "the start does not show its effect (the chip «↑ الدقة»)",
+    "brief text missing: الدقة",
+    "brief text missing: الدقة"
    ]
   },
   {
    "name": "chip says another thing",
    "ok": true,
    "sample": [
-    "ellipsis on \"عملية جديدة\"",
-    "ellipsis on \"السودان\"",
-    "clipped text (top): \"·\" 786.63..796.16 y 84..101"
+    "the start does not show its effect (the chip «↑ الدقة»)",
+    "brief text missing: الدقة",
+    "brief text missing: الدقة"
    ]
   },
   {
    "name": "close mislabelled",
    "ok": true,
    "sample": [
-    "ellipsis on \"عملية جديدة\"",
-    "ellipsis on \"السودان\"",
-    "clipped text (top): \"·\" 786.63..796.16 y 84..101"
+    "a11y: the close is not «إلغاء، العودة إلى العمليات»"
    ]
   },
   {
    "name": "emblem not the target",
    "ok": true,
    "sample": [
-    "ellipsis on \"عملية جديدة\"",
-    "ellipsis on \"السودان\"",
-    "clipped text (top): \"·\" 786.63..796.16 y 84..101"
+    "the emblem is not the target"
    ]
   },
   {

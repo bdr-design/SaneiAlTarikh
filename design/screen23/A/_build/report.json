@@ -1,7 +1,7 @@
 {
  "se": {
   "device": "667x375 side 0 bottom 0 none",
-  "renderedAt": "2026-11-07T17:41:25.683Z",
+  "renderedAt": "2026-11-07T18:20:01.690Z",
   "inputs": {
    "files": [
     "index.html",
@@ -26,37 +26,12 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "5b5819fe65183a215f13d9d6c07de7ea5ee8a510"
+   "sha1": "ab6be071ecdeea775a5f9e731dc6ab4dd9e42563"
   },
-  "issues": [
-   "file: ellipsis on \"حفظ تلقائي\"",
-   "file: ellipsis on \"حملة مصر\"",
-   "file: clipped text (top): \"·\" 543.63..553.16 y 84..101",
-   "file: ellipsis on \"حُفظ قبل دقيقة\"",
-   "file_end: ellipsis on \"حفظ تلقائي\"",
-   "file_end: ellipsis on \"حملة مصر\"",
-   "file_end: clipped text (top): \"·\" 543.63..553.16 y 84..101",
-   "file_end: ellipsis on \"حُفظ قبل دقيقة\"",
-   "confirm: ellipsis on \"حفظ تلقائي\"",
-   "confirm: ellipsis on \"حملة مصر\"",
-   "confirm: clipped text (top): \"·\" 543.63..553.16 y 84..101",
-   "confirm: ellipsis on \"حُفظ قبل دقيقة\"",
-   "confirm_end: ellipsis on \"حفظ تلقائي\"",
-   "confirm_end: ellipsis on \"حملة مصر\"",
-   "confirm_end: clipped text (top): \"·\" 543.63..553.16 y 84..101",
-   "confirm_end: ellipsis on \"حُفظ قبل دقيقة\"",
-   "load: ellipsis on \"حفظ تلقائي\"",
-   "load: ellipsis on \"حملة مصر\"",
-   "load: clipped text (top): \"·\" 543.63..553.16 y 84..101",
-   "load: ellipsis on \"حُفظ قبل دقيقة\"",
-   "load_end: ellipsis on \"حفظ تلقائي\"",
-   "load_end: ellipsis on \"حملة مصر\"",
-   "load_end: clipped text (top): \"·\" 543.63..553.16 y 84..101",
-   "load_end: ellipsis on \"حُفظ قبل دقيقة\""
-  ],
+  "issues": [],
   "views": {
    "file": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -489,7 +464,7 @@
     ]
    },
    "file_end": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -922,7 +897,7 @@
     ]
    },
    "confirm": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -1308,7 +1283,7 @@
     ]
    },
    "confirm_end": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -1694,7 +1669,7 @@
     ]
    },
    "load": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -2065,7 +2040,7 @@
     ]
    },
    "load_end": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -2464,11 +2439,11 @@
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 24
+  "issueCount": 0
  },
  "mini": {
   "device": "812x375 side 50 bottom 21 notch",
-  "renderedAt": "2026-11-07T17:41:38.372Z",
+  "renderedAt": "2026-11-07T18:20:14.158Z",
   "inputs": {
    "files": [
     "index.html",
@@ -2493,37 +2468,12 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "5b5819fe65183a215f13d9d6c07de7ea5ee8a510"
+   "sha1": "ab6be071ecdeea775a5f9e731dc6ab4dd9e42563"
   },
-  "issues": [
-   "file: ellipsis on \"حفظ تلقائي\"",
-   "file: ellipsis on \"حملة مصر\"",
-   "file: clipped text (top): \"·\" 646.63..656.16 y 80..97",
-   "file: ellipsis on \"حُفظ قبل دقيقة\"",
-   "file_end: ellipsis on \"حفظ تلقائي\"",
-   "file_end: ellipsis on \"حملة مصر\"",
-   "file_end: clipped text (top): \"·\" 646.63..656.16 y 80..97",
-   "file_end: ellipsis on \"حُفظ قبل دقيقة\"",
-   "confirm: ellipsis on \"حفظ تلقائي\"",
-   "confirm: ellipsis on \"حملة مصر\"",
-   "confirm: clipped text (top): \"·\" 646.63..656.16 y 80..97",
-   "confirm: ellipsis on \"حُفظ قبل دقيقة\"",
-   "confirm_end: ellipsis on \"حفظ تلقائي\"",
-   "confirm_end: ellipsis on \"حملة مصر\"",
-   "confirm_end: clipped text (top): \"·\" 646.63..656.16 y 80..97",
-   "confirm_end: ellipsis on \"حُفظ قبل دقيقة\"",
-   "load: ellipsis on \"حفظ تلقائي\"",
-   "load: ellipsis on \"حملة مصر\"",
-   "load: clipped text (top): \"·\" 646.63..656.16 y 80..97",
-   "load: ellipsis on \"حُفظ قبل دقيقة\"",
-   "load_end: ellipsis on \"حفظ تلقائي\"",
-   "load_end: ellipsis on \"حملة مصر\"",
-   "load_end: clipped text (top): \"·\" 646.63..656.16 y 80..97",
-   "load_end: ellipsis on \"حُفظ قبل دقيقة\""
-  ],
+  "issues": [],
   "views": {
    "file": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -2975,7 +2925,7 @@
     ]
    },
    "file_end": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -3427,7 +3377,7 @@
     ]
    },
    "confirm": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -3832,7 +3782,7 @@
     ]
    },
    "confirm_end": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -4237,7 +4187,7 @@
     ]
    },
    "load": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -4627,7 +4577,7 @@
     ]
    },
    "load_end": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -5045,11 +4995,11 @@
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 24
+  "issueCount": 0
  },
  "i14": {
   "device": "844x390 side 47 bottom 21 notch",
-  "renderedAt": "2026-11-07T17:41:51.256Z",
+  "renderedAt": "2026-11-07T18:20:27.554Z",
   "inputs": {
    "files": [
     "index.html",
@@ -5074,37 +5024,12 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "5b5819fe65183a215f13d9d6c07de7ea5ee8a510"
+   "sha1": "ab6be071ecdeea775a5f9e731dc6ab4dd9e42563"
   },
-  "issues": [
-   "file: ellipsis on \"حفظ تلقائي\"",
-   "file: ellipsis on \"حملة مصر\"",
-   "file: clipped text (top): \"·\" 681.63..691.16 y 84..101",
-   "file: ellipsis on \"حُفظ قبل دقيقة\"",
-   "file_end: ellipsis on \"حفظ تلقائي\"",
-   "file_end: ellipsis on \"حملة مصر\"",
-   "file_end: clipped text (top): \"·\" 681.63..691.16 y 84..101",
-   "file_end: ellipsis on \"حُفظ قبل دقيقة\"",
-   "confirm: ellipsis on \"حفظ تلقائي\"",
-   "confirm: ellipsis on \"حملة مصر\"",
-   "confirm: clipped text (top): \"·\" 681.63..691.16 y 84..101",
-   "confirm: ellipsis on \"حُفظ قبل دقيقة\"",
-   "confirm_end: ellipsis on \"حفظ تلقائي\"",
-   "confirm_end: ellipsis on \"حملة مصر\"",
-   "confirm_end: clipped text (top): \"·\" 681.63..691.16 y 84..101",
-   "confirm_end: ellipsis on \"حُفظ قبل دقيقة\"",
-   "load: ellipsis on \"حفظ تلقائي\"",
-   "load: ellipsis on \"حملة مصر\"",
-   "load: clipped text (top): \"·\" 681.63..691.16 y 84..101",
-   "load: ellipsis on \"حُفظ قبل دقيقة\"",
-   "load_end: ellipsis on \"حفظ تلقائي\"",
-   "load_end: ellipsis on \"حملة مصر\"",
-   "load_end: clipped text (top): \"·\" 681.63..691.16 y 84..101",
-   "load_end: ellipsis on \"حُفظ قبل دقيقة\""
-  ],
+  "issues": [],
   "views": {
    "file": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -5654,7 +5579,7 @@
     ]
    },
    "file_end": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -6204,7 +6129,7 @@
     ]
    },
    "confirm": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -6707,7 +6632,7 @@
     ]
    },
    "confirm_end": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -7210,7 +7135,7 @@
     ]
    },
    "load": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -7698,7 +7623,7 @@
     ]
    },
    "load_end": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -8214,11 +8139,11 @@
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 24
+  "issueCount": 0
  },
  "i16": {
   "device": "852x393 side 59 bottom 21 island",
-  "renderedAt": "2026-11-07T17:42:04.886Z",
+  "renderedAt": "2026-11-07T18:20:41.071Z",
   "inputs": {
    "files": [
     "index.html",
@@ -8243,37 +8168,12 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "5b5819fe65183a215f13d9d6c07de7ea5ee8a510"
+   "sha1": "ab6be071ecdeea775a5f9e731dc6ab4dd9e42563"
   },
-  "issues": [
-   "file: ellipsis on \"حفظ تلقائي\"",
-   "file: ellipsis on \"حملة مصر\"",
-   "file: clipped text (top): \"·\" 677.63..687.16 y 84..101",
-   "file: ellipsis on \"حُفظ قبل دقيقة\"",
-   "file_end: ellipsis on \"حفظ تلقائي\"",
-   "file_end: ellipsis on \"حملة مصر\"",
-   "file_end: clipped text (top): \"·\" 677.63..687.16 y 84..101",
-   "file_end: ellipsis on \"حُفظ قبل دقيقة\"",
-   "confirm: ellipsis on \"حفظ تلقائي\"",
-   "confirm: ellipsis on \"حملة مصر\"",
-   "confirm: clipped text (top): \"·\" 677.63..687.16 y 84..101",
-   "confirm: ellipsis on \"حُفظ قبل دقيقة\"",
-   "confirm_end: ellipsis on \"حفظ تلقائي\"",
-   "confirm_end: ellipsis on \"حملة مصر\"",
-   "confirm_end: clipped text (top): \"·\" 677.63..687.16 y 84..101",
-   "confirm_end: ellipsis on \"حُفظ قبل دقيقة\"",
-   "load: ellipsis on \"حفظ تلقائي\"",
-   "load: ellipsis on \"حملة مصر\"",
-   "load: clipped text (top): \"·\" 677.63..687.16 y 84..101",
-   "load: ellipsis on \"حُفظ قبل دقيقة\"",
-   "load_end: ellipsis on \"حفظ تلقائي\"",
-   "load_end: ellipsis on \"حملة مصر\"",
-   "load_end: clipped text (top): \"·\" 677.63..687.16 y 84..101",
-   "load_end: ellipsis on \"حُفظ قبل دقيقة\""
-  ],
+  "issues": [],
   "views": {
    "file": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -8812,7 +8712,7 @@
     ]
    },
    "file_end": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -9351,7 +9251,7 @@
     ]
    },
    "confirm": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -9843,7 +9743,7 @@
     ]
    },
    "confirm_end": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -10335,7 +10235,7 @@
     ]
    },
    "load": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -10812,7 +10712,7 @@
     ]
    },
    "load_end": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -11317,11 +11217,11 @@
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 24
+  "issueCount": 0
  },
  "i16pro": {
   "device": "874x402 side 62 bottom 21 island",
-  "renderedAt": "2026-11-07T17:42:18.696Z",
+  "renderedAt": "2026-11-07T18:20:54.803Z",
   "inputs": {
    "files": [
     "index.html",
@@ -11346,37 +11246,12 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "5b5819fe65183a215f13d9d6c07de7ea5ee8a510"
+   "sha1": "ab6be071ecdeea775a5f9e731dc6ab4dd9e42563"
   },
-  "issues": [
-   "file: ellipsis on \"حفظ تلقائي\"",
-   "file: ellipsis on \"حملة مصر\"",
-   "file: clipped text (top): \"·\" 696.63..706.16 y 84..101",
-   "file: ellipsis on \"حُفظ قبل دقيقة\"",
-   "file_end: ellipsis on \"حفظ تلقائي\"",
-   "file_end: ellipsis on \"حملة مصر\"",
-   "file_end: clipped text (top): \"·\" 696.63..706.16 y 84..101",
-   "file_end: ellipsis on \"حُفظ قبل دقيقة\"",
-   "confirm: ellipsis on \"حفظ تلقائي\"",
-   "confirm: ellipsis on \"حملة مصر\"",
-   "confirm: clipped text (top): \"·\" 696.63..706.16 y 84..101",
-   "confirm: ellipsis on \"حُفظ قبل دقيقة\"",
-   "confirm_end: ellipsis on \"حفظ تلقائي\"",
-   "confirm_end: ellipsis on \"حملة مصر\"",
-   "confirm_end: clipped text (top): \"·\" 696.63..706.16 y 84..101",
-   "confirm_end: ellipsis on \"حُفظ قبل دقيقة\"",
-   "load: ellipsis on \"حفظ تلقائي\"",
-   "load: ellipsis on \"حملة مصر\"",
-   "load: clipped text (top): \"·\" 696.63..706.16 y 84..101",
-   "load: ellipsis on \"حُفظ قبل دقيقة\"",
-   "load_end: ellipsis on \"حفظ تلقائي\"",
-   "load_end: ellipsis on \"حملة مصر\"",
-   "load_end: clipped text (top): \"·\" 696.63..706.16 y 84..101",
-   "load_end: ellipsis on \"حُفظ قبل دقيقة\""
-  ],
+  "issues": [],
   "views": {
    "file": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -11926,7 +11801,7 @@
     ]
    },
    "file_end": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -12476,7 +12351,7 @@
     ]
    },
    "confirm": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -12979,7 +12854,7 @@
     ]
    },
    "confirm_end": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -13482,7 +13357,7 @@
     ]
    },
    "load": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -13970,7 +13845,7 @@
     ]
    },
    "load_end": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -14486,11 +14361,11 @@
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 24
+  "issueCount": 0
  },
  "i11": {
   "device": "896x414 side 48 bottom 21 notch",
-  "renderedAt": "2026-11-07T17:42:32.132Z",
+  "renderedAt": "2026-11-07T18:21:08.338Z",
   "inputs": {
    "files": [
     "index.html",
@@ -14515,37 +14390,12 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "5b5819fe65183a215f13d9d6c07de7ea5ee8a510"
+   "sha1": "ab6be071ecdeea775a5f9e731dc6ab4dd9e42563"
   },
-  "issues": [
-   "file: ellipsis on \"حفظ تلقائي\"",
-   "file: ellipsis on \"حملة مصر\"",
-   "file: clipped text (top): \"·\" 732.63..742.16 y 84..101",
-   "file: ellipsis on \"حُفظ قبل دقيقة\"",
-   "file_end: ellipsis on \"حفظ تلقائي\"",
-   "file_end: ellipsis on \"حملة مصر\"",
-   "file_end: clipped text (top): \"·\" 732.63..742.16 y 84..101",
-   "file_end: ellipsis on \"حُفظ قبل دقيقة\"",
-   "confirm: ellipsis on \"حفظ تلقائي\"",
-   "confirm: ellipsis on \"حملة مصر\"",
-   "confirm: clipped text (top): \"·\" 732.63..742.16 y 84..101",
-   "confirm: ellipsis on \"حُفظ قبل دقيقة\"",
-   "confirm_end: ellipsis on \"حفظ تلقائي\"",
-   "confirm_end: ellipsis on \"حملة مصر\"",
-   "confirm_end: clipped text (top): \"·\" 732.63..742.16 y 84..101",
-   "confirm_end: ellipsis on \"حُفظ قبل دقيقة\"",
-   "load: ellipsis on \"حفظ تلقائي\"",
-   "load: ellipsis on \"حملة مصر\"",
-   "load: clipped text (top): \"·\" 732.63..742.16 y 84..101",
-   "load: ellipsis on \"حُفظ قبل دقيقة\"",
-   "load_end: ellipsis on \"حفظ تلقائي\"",
-   "load_end: ellipsis on \"حملة مصر\"",
-   "load_end: clipped text (top): \"·\" 732.63..742.16 y 84..101",
-   "load_end: ellipsis on \"حُفظ قبل دقيقة\""
-  ],
+  "issues": [],
   "views": {
    "file": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -15094,7 +14944,7 @@
     ]
    },
    "file_end": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -15643,7 +15493,7 @@
     ]
    },
    "confirm": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -16145,7 +15995,7 @@
     ]
    },
    "confirm_end": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -16647,7 +16497,7 @@
     ]
    },
    "load": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -17134,7 +16984,7 @@
     ]
    },
    "load_end": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -17649,11 +17499,11 @@
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 24
+  "issueCount": 0
  },
  "i16promax": {
   "device": "956x440 side 62 bottom 21 island",
-  "renderedAt": "2026-11-07T17:42:46.078Z",
+  "renderedAt": "2026-11-07T18:21:22.248Z",
   "inputs": {
    "files": [
     "index.html",
@@ -17678,37 +17528,12 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "5b5819fe65183a215f13d9d6c07de7ea5ee8a510"
+   "sha1": "ab6be071ecdeea775a5f9e731dc6ab4dd9e42563"
   },
-  "issues": [
-   "file: ellipsis on \"حفظ تلقائي\"",
-   "file: ellipsis on \"حملة مصر\"",
-   "file: clipped text (top): \"·\" 778.63..788.16 y 84..101",
-   "file: ellipsis on \"حُفظ قبل دقيقة\"",
-   "file_end: ellipsis on \"حفظ تلقائي\"",
-   "file_end: ellipsis on \"حملة مصر\"",
-   "file_end: clipped text (top): \"·\" 778.63..788.16 y 84..101",
-   "file_end: ellipsis on \"حُفظ قبل دقيقة\"",
-   "confirm: ellipsis on \"حفظ تلقائي\"",
-   "confirm: ellipsis on \"حملة مصر\"",
-   "confirm: clipped text (top): \"·\" 778.63..788.16 y 84..101",
-   "confirm: ellipsis on \"حُفظ قبل دقيقة\"",
-   "confirm_end: ellipsis on \"حفظ تلقائي\"",
-   "confirm_end: ellipsis on \"حملة مصر\"",
-   "confirm_end: clipped text (top): \"·\" 778.63..788.16 y 84..101",
-   "confirm_end: ellipsis on \"حُفظ قبل دقيقة\"",
-   "load: ellipsis on \"حفظ تلقائي\"",
-   "load: ellipsis on \"حملة مصر\"",
-   "load: clipped text (top): \"·\" 778.63..788.16 y 84..101",
-   "load: ellipsis on \"حُفظ قبل دقيقة\"",
-   "load_end: ellipsis on \"حفظ تلقائي\"",
-   "load_end: ellipsis on \"حملة مصر\"",
-   "load_end: clipped text (top): \"·\" 778.63..788.16 y 84..101",
-   "load_end: ellipsis on \"حُفظ قبل دقيقة\""
-  ],
+  "issues": [],
   "views": {
    "file": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -18257,7 +18082,7 @@
     ]
    },
    "file_end": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -18806,7 +18631,7 @@
     ]
    },
    "confirm": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -19308,7 +19133,7 @@
     ]
    },
    "confirm_end": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -19810,7 +19635,7 @@
     ]
    },
    "load": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -20297,7 +20122,7 @@
     ]
    },
    "load_end": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -20812,6 +20637,6 @@
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 24
+  "issueCount": 0
  }
 }

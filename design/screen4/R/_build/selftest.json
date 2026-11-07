@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-07T17:29:16.136Z",
+ "ranAt": "2026-11-07T18:07:44.026Z",
  "inputs": {
   "files": [
    "index.html",
@@ -19,172 +19,37 @@
    "header_cairo.jpg",
    "map_overlay_cairo.svg"
   ],
-  "sha1": "4a37b186f19e16a16d9636a6032d2591f925ec7f"
+  "sha1": "bcec19e62be374957f88673e8a1fbefc965b7132"
  },
  "cleanIssues": {
-  "i16promax": [
-   "ellipsis on \"القاهرة\"",
-   "ellipsis on \"مصر\"",
-   "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-   "ellipsis on \"محافظة\""
-  ],
-  "i16promax_govern": [
-   "ellipsis on \"القاهرة\"",
-   "ellipsis on \"مصر\"",
-   "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-   "ellipsis on \"محافظة\""
-  ],
-  "i16promax_govern_end": [
-   "ellipsis on \"القاهرة\"",
-   "ellipsis on \"مصر\"",
-   "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-   "ellipsis on \"محافظة\""
-  ],
-  "i16promax_build": [
-   "ellipsis on \"القاهرة\"",
-   "ellipsis on \"مصر\"",
-   "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-   "ellipsis on \"محافظة\""
-  ],
-  "i16promax_build_end": [
-   "ellipsis on \"القاهرة\"",
-   "ellipsis on \"مصر\"",
-   "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-   "ellipsis on \"محافظة\""
-  ],
-  "i16promax_forces": [
-   "ellipsis on \"القاهرة\"",
-   "ellipsis on \"مصر\"",
-   "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-   "ellipsis on \"محافظة\""
-  ],
-  "i16promax_forces_end": [
-   "ellipsis on \"القاهرة\"",
-   "ellipsis on \"مصر\"",
-   "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-   "ellipsis on \"محافظة\""
-  ],
-  "i16promax_policy": [
-   "ellipsis on \"القاهرة\"",
-   "ellipsis on \"مصر\"",
-   "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-   "ellipsis on \"محافظة\""
-  ],
-  "i16promax_policy_end": [
-   "ellipsis on \"القاهرة\"",
-   "ellipsis on \"مصر\"",
-   "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-   "ellipsis on \"محافظة\""
-  ],
-  "i16promax_govern_at137": [
-   "ellipsis on \"القاهرة\"",
-   "ellipsis on \"مصر\"",
-   "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-   "ellipsis on \"محافظة\""
-  ],
-  "i16promax_policy_at137": [
-   "ellipsis on \"القاهرة\"",
-   "ellipsis on \"مصر\"",
-   "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-   "ellipsis on \"محافظة\""
-  ],
+  "i16promax": [],
+  "i16promax_govern": [],
+  "i16promax_govern_end": [],
+  "i16promax_build": [],
+  "i16promax_build_end": [],
+  "i16promax_forces": [],
+  "i16promax_forces_end": [],
+  "i16promax_policy": [],
+  "i16promax_policy_end": [],
+  "i16promax_govern_at137": [],
+  "i16promax_policy_at137": [],
   "i16promax coverage": [],
-  "se": [
-   "ellipsis on \"القاهرة\"",
-   "ellipsis on \"مصر\"",
-   "clipped text (top): \"·\" 569.64..579.17 y 84..101",
-   "ellipsis on \"محافظة\""
-  ],
-  "se_govern": [
-   "ellipsis on \"القاهرة\"",
-   "ellipsis on \"مصر\"",
-   "clipped text (top): \"·\" 569.64..579.17 y 84..101",
-   "ellipsis on \"محافظة\""
-  ],
-  "se_govern_end": [
-   "ellipsis on \"القاهرة\"",
-   "ellipsis on \"مصر\"",
-   "clipped text (top): \"·\" 569.64..579.17 y 84..101",
-   "ellipsis on \"محافظة\""
-  ],
-  "se_build": [
-   "ellipsis on \"القاهرة\"",
-   "ellipsis on \"مصر\"",
-   "clipped text (top): \"·\" 569.64..579.17 y 84..101",
-   "ellipsis on \"محافظة\""
-  ],
-  "se_build_end": [
-   "ellipsis on \"القاهرة\"",
-   "ellipsis on \"مصر\"",
-   "clipped text (top): \"·\" 569.64..579.17 y 84..101",
-   "ellipsis on \"محافظة\""
-  ],
-  "se_forces": [
-   "ellipsis on \"القاهرة\"",
-   "ellipsis on \"مصر\"",
-   "clipped text (top): \"·\" 569.64..579.17 y 84..101",
-   "ellipsis on \"محافظة\""
-  ],
-  "se_forces_end": [
-   "ellipsis on \"القاهرة\"",
-   "ellipsis on \"مصر\"",
-   "clipped text (top): \"·\" 569.64..579.17 y 84..101",
-   "ellipsis on \"محافظة\""
-  ],
-  "se_policy": [
-   "ellipsis on \"القاهرة\"",
-   "ellipsis on \"مصر\"",
-   "clipped text (top): \"·\" 569.64..579.17 y 84..101",
-   "ellipsis on \"محافظة\""
-  ],
-  "se_policy_end": [
-   "ellipsis on \"القاهرة\"",
-   "ellipsis on \"مصر\"",
-   "clipped text (top): \"·\" 569.64..579.17 y 84..101",
-   "ellipsis on \"محافظة\""
-  ],
-  "se_govern_at86": [
-   "ellipsis on \"القاهرة\"",
-   "ellipsis on \"مصر\"",
-   "clipped text (top): \"·\" 569.64..579.17 y 84..101",
-   "ellipsis on \"محافظة\""
-  ],
-  "se_govern_at172": [
-   "ellipsis on \"القاهرة\"",
-   "ellipsis on \"مصر\"",
-   "clipped text (top): \"·\" 569.64..579.17 y 84..101",
-   "ellipsis on \"محافظة\""
-  ],
-  "se_build_at86": [
-   "ellipsis on \"القاهرة\"",
-   "ellipsis on \"مصر\"",
-   "clipped text (top): \"·\" 569.64..579.17 y 84..101",
-   "ellipsis on \"محافظة\""
-  ],
-  "se_forces_at86": [
-   "ellipsis on \"القاهرة\"",
-   "ellipsis on \"مصر\"",
-   "clipped text (top): \"·\" 569.64..579.17 y 84..101",
-   "ellipsis on \"محافظة\""
-  ],
-  "se_policy_at86": [
-   "ellipsis on \"القاهرة\"",
-   "ellipsis on \"مصر\"",
-   "clipped text (top): \"·\" 569.64..579.17 y 84..101",
-   "ellipsis on \"محافظة\""
-  ],
-  "se_policy_at172": [
-   "ellipsis on \"القاهرة\"",
-   "ellipsis on \"مصر\"",
-   "clipped text (top): \"·\" 569.64..579.17 y 84..101",
-   "ellipsis on \"محافظة\""
-  ],
-  "se_policy_at258": [
-   "ellipsis on \"القاهرة\"",
-   "ellipsis on \"مصر\"",
-   "clipped text (top): \"·\" 569.64..579.17 y 84..101",
-   "ellipsis on \"محافظة\""
-  ],
+  "se": [],
+  "se_govern": [],
+  "se_govern_end": [],
+  "se_build": [],
+  "se_build_end": [],
+  "se_forces": [],
+  "se_forces_end": [],
+  "se_policy": [],
+  "se_policy_end": [],
+  "se_govern_at86": [],
+  "se_govern_at172": [],
+  "se_build_at86": [],
+  "se_forces_at86": [],
+  "se_policy_at86": [],
+  "se_policy_at172": [],
+  "se_policy_at258": [],
   "se coverage": []
  },
  "results": [
@@ -192,90 +57,81 @@
    "name": "fade without the hint strip",
    "ok": true,
    "sample": [
-    "ellipsis on \"القاهرة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 569.64..579.17 y 84..101"
+    "clipped text (bottom): \"الكهرباء · النقل · المرافق العامة\" 481.03..599 y 361..376",
+    "clipped text (bottom): \"تخطيط التوسعة\" 377..447.28 y 351..368",
+    "control cut by its scroll area (bottom): الإنشاءات والمرافق"
    ]
   },
   {
    "name": "hint over the content",
    "ok": true,
    "sample": [
-    "ellipsis on \"القاهرة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "scroll hint not centred in the clear strip under the fade: y 249.0..267.0 (strip 395.0..417.0)",
+    "scroll hint over text: \"الخدمات\""
    ]
   },
   {
    "name": "hint over legible text",
    "ok": true,
    "sample": [
-    "ellipsis on \"القاهرة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "scroll hint not centred in the clear strip under the fade: y 249.0..267.0 (strip 395.0..417.0)",
+    "scroll hint over text: \"الخدمات\""
    ]
   },
   {
    "name": "map label at the screen edge",
    "ok": true,
    "sample": [
-    "ellipsis on \"القاهرة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "map label ليبيا sliced by the screen edge or the side inset",
+    "map label إيران sliced by the screen edge or the side inset",
+    "map label إيران squeezed between a panel and the screen edge"
    ]
   },
   {
    "name": "type size",
    "ok": true,
    "sample": [
-    "font size 17 for \"القاهرة\"",
-    "ellipsis on \"القاهرة\"",
-    "ellipsis on \"مصر\""
+    "font size 17 for \"القاهرة\""
    ]
   },
   {
    "name": "18 pt misuse",
    "ok": true,
    "sample": [
-    "ellipsis on \"القاهرة\"",
     "18 pt is for the province name and the headline numbers only: \"مصر\"",
-    "ellipsis on \"مصر\""
+    "18 pt is for the province name and the headline numbers only: \"·\"",
+    "18 pt is for the province name and the headline numbers only: \"محافظة\""
    ]
   },
   {
    "name": "font weight",
    "ok": true,
    "sample": [
-    "ellipsis on \"القاهرة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "font weight 13/700 for \"الإنشاءات والمرافق\"",
+    "font weight 13/700 for \"إدارة القوات\""
    ]
   },
   {
    "name": "off-token colour",
    "ok": true,
    "sample": [
-    "ellipsis on \"القاهرة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "text colour off-token rgb(136, 153, 170): \"السيادة\"",
+    "text colour off-token rgb(136, 153, 170): \"الإدارة\"",
+    "text colour off-token rgb(136, 153, 170): \"السيطرة\""
    ]
   },
   {
    "name": "control height",
    "ok": true,
    "sample": [
-    "control height 40.00 for .r-more (want 36): تفاصيل المحافظة",
-    "ellipsis on \"القاهرة\"",
-    "ellipsis on \"مصر\""
+    "control height 40.00 for .r-more (want 36): تفاصيل المحافظة"
    ]
   },
   {
    "name": "radius",
    "ok": true,
    "sample": [
-    "radius 8 for .r-more (want 10)",
-    "ellipsis on \"القاهرة\"",
-    "ellipsis on \"مصر\""
+    "radius 8 for .r-more (want 10)"
    ]
   },
   {
@@ -292,53 +148,52 @@
    "ok": true,
    "sample": [
     "icon size 19x19 (want 17): i",
-    "icon size 19x19 (want 17): i",
-    "ellipsis on \"القاهرة\""
+    "icon size 19x19 (want 17): i"
    ]
   },
   {
    "name": "hit overlap",
    "ok": true,
    "sample": [
-    "ellipsis on \"القاهرة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "clipped text (bottom): \"السيطرة\" 844.7..881 y 237..254",
+    "clipped text (bottom): \"الحكومة ·\" 777.89..829.86 y 236..255",
+    "clipped text (bottom): \"100%\" 742..777.89 y 236..255"
    ]
   },
   {
    "name": "side inset",
    "ok": true,
    "sample": [
-    "ellipsis on \"القاهرة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 834.64..844.17 y 84..101"
+    "text in side inset: 6.8",
+    "text in side inset: +11",
+    "text in side inset: لماذا؟"
    ]
   },
   {
    "name": "clipped text",
    "ok": true,
    "sample": [
-    "ellipsis on \"القاهرة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "clipped text (sides): \"حكومتنا\" 547..586.8 y 207.5..226.5",
+    "text outside the sheet's 12 pt padding: \"حكومتنا\"",
+    "clipped text (sides): \"لا توجد\" 547..582.91 y 236..255"
    ]
   },
   {
    "name": "text overlap",
    "ok": true,
    "sample": [
-    "ellipsis on \"القاهرة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "text overlap \"القاهرة\" / \"العاصمة\"",
+    "icon over text: i / \"القاهرة\"",
+    "contrast 1.45 for \"القاهرة\""
    ]
   },
   {
    "name": "icon over text",
    "ok": true,
    "sample": [
-    "ellipsis on \"القاهرة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "text outside the sheet's 12 pt padding: \"السكان\"",
+    "icon over text: i / \"السكان\"",
+    "icon over text: i r-amber / \"الاضطرابات\""
    ]
   },
   {
@@ -346,161 +201,154 @@
    "ok": true,
    "sample": [
     "panel not opaque: المحافظة: القاهرة rgba(9, 17, 25, 0.66)",
-    "ellipsis on \"القاهرة\"",
-    "ellipsis on \"مصر\""
+    "contrast 4.36 for \"ألف شهريًا\"",
+    "contrast 3.28 for \"64\""
    ]
   },
   {
    "name": "Cairo covered",
    "ok": true,
    "sample": [
-    "ellipsis on \"القاهرة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "Cairo highlight covered by panel المحافظة: القاهرة",
+    "selection ring covered by panel المحافظة: القاهرة",
+    "name pill covered by panel المحافظة: القاهرة"
    ]
   },
   {
    "name": "sheet width",
    "ok": true,
    "sample": [
-    "ellipsis on \"القاهرة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "sheet width 330 (the card is 320 pt)"
    ]
   },
   {
    "name": "top row covered",
    "ok": true,
    "sample": [
-    "ellipsis on \"القاهرة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 70..87"
+    "hit overlap الخزينة 36.0 مليار $ / إغلاق",
+    "hit overlap الاستقرار 58% / إغلاق",
+    "panel overlap الدولة: مصر، حسني مبارك، ج / المحافظة: القاهرة"
    ]
   },
   {
    "name": "dock hidden although it fits",
    "ok": true,
    "sample": [
-    "ellipsis on \"القاهرة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "dock hidden although it fits left of the sheet"
    ]
   },
   {
    "name": "dock not moved left",
    "ok": true,
    "sample": [
-    "ellipsis on \"القاهرة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "icon over text: i r-chev / \"الداخلية والسياسة\"",
+    "hit overlap الدولة / الإنشاءات والمرافق",
+    "hit overlap الدولة / تخطيط التوسعة"
    ]
   },
   {
    "name": "dock hit box in the side inset",
    "ok": true,
    "sample": [
-    "ellipsis on \"القاهرة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "tap in side inset: المزيد",
+    "dock not 4 pt in from the left end of its B3 line: x 62.0 w 387.0 y 374.0 (want x 66 w 387.0 y 374.0)"
    ]
   },
   {
    "name": "radio hit boxes touch the links",
    "ok": true,
    "sample": [
-    "ellipsis on \"القاهرة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "hit overlap مخفض / الإنشاءات والمرافق",
+    "hit overlap متوازن / الإنشاءات والمرافق",
+    "hit overlap متوازن / تخطيط التوسعة"
    ]
   },
   {
    "name": "dock shown on the SE",
    "ok": true,
    "sample": [
-    "ellipsis on \"القاهرة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 569.64..579.17 y 84..101"
+    "icon over text: i r-chev / \"الجيش\"",
+    "icon over text: i / \"الإنشاءات والمرافق\"",
+    "hit overlap الدولة / متوازن"
    ]
   },
   {
    "name": "left stack moved",
    "ok": true,
    "sample": [
-    "ellipsis on \"القاهرة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "HUD element moved from its B3 position: .toast x 70.0..275.6 y 56.0..88.0",
+    "HUD element moved from its B3 position: .btn.mode x 70.0..191.6 y 96.0..128.0",
+    "HUD element moved from its B3 position: .btn.home x 70.0..141.5 y 136.0..168.0"
    ]
   },
   {
    "name": "fades wrong",
    "ok": true,
    "sample": [
-    "ellipsis on \"القاهرة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "clipped text (bottom): \"الحامية · التمركز · إسناد المهام\" 718.56..834 y 409..424",
+    "control cut by its scroll area (bottom): إدارة القوات",
+    "hit box shaved by its clip: إدارة القوات"
    ]
   },
   {
    "name": "cut at a hard edge",
    "ok": true,
    "sample": [
-    "ellipsis on \"القاهرة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 569.64..579.17 y 84..101"
+    "clipped text (bottom): \"الكهرباء · النقل · المرافق العامة\" 481.03..599 y 361..376",
+    "clipped text (bottom): \"تخطيط التوسعة\" 377..447.28 y 351..368",
+    "control cut by its scroll area (bottom): الإنشاءات والمرافق"
    ]
   },
   {
    "name": "% before its number",
    "ok": true,
    "sample": [
-    "ellipsis on \"القاهرة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "% shown before its number: \"الحكومة · 100%\""
    ]
   },
   {
    "name": "brief text",
    "ok": true,
    "sample": [
-    "ellipsis on \"القاهرة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "brief text missing: لماذا؟",
+    "brief text missing: لماذا؟",
+    "brief text missing: لماذا؟ · كل الأسباب"
    ]
   },
   {
    "name": "map label cut",
    "ok": true,
    "sample": [
-    "ellipsis on \"القاهرة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "map label ليبيا sliced by the screen edge or the side inset",
+    "map label إيران sliced by the screen edge or the side inset",
+    "map label إيران squeezed between a panel and the screen edge"
    ]
   },
   {
    "name": "contrast",
    "ok": true,
    "sample": [
-    "ellipsis on \"القاهرة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "contrast 1.73 for \"السيادة\"",
+    "contrast 1 for \"مصر\"",
+    "contrast 1.73 for \"الإدارة\""
    ]
   },
   {
    "name": "brief text scrolled away",
    "ok": true,
    "sample": [
-    "ellipsis on \"القاهرة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "fades 0/1 do not match the scroll state (top 181, over 181.0)",
+    "brief text not fully visible: إدارة المحافظة",
+    "brief text not fully visible: المحافظ"
    ]
   },
   {
    "name": "fade flag without a mask",
    "ok": true,
    "sample": [
-    "ellipsis on \"القاهرة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 569.64..579.17 y 84..101"
+    "clipped text (bottom): \"الكهرباء · النقل · المرافق العامة\" 481.03..599 y 361..376",
+    "clipped text (bottom): \"تخطيط التوسعة\" 377..447.28 y 351..368",
+    "control cut by its scroll area (bottom): الإنشاءات والمرافق"
    ]
   },
   {
@@ -508,485 +356,432 @@
    "ok": true,
    "sample": [
     "panel not opaque (opacity 0.60): المحافظة: القاهرة",
-    "ellipsis on \"القاهرة\"",
-    "ellipsis on \"مصر\""
+    "brief text not fully visible: القاهرة",
+    "brief text not fully visible: العاصمة"
    ]
   },
   {
    "name": "faint text",
    "ok": true,
    "sample": [
-    "ellipsis on \"القاهرة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "brief text not fully visible: السيادة",
+    "brief text not fully visible: الإدارة",
+    "brief text not fully visible: السيطرة"
    ]
   },
   {
    "name": "radio order",
    "ok": true,
    "sample": [
-    "ellipsis on \"القاهرة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "radio group 1: choices not right to left",
+    "radio group 1: choices not right to left",
+    "radio group 1: circle not right of «الصناعة»"
    ]
   },
   {
    "name": "decision buttons swapped",
    "ok": true,
    "sample": [
-    "ellipsis on \"القاهرة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "decision: «اعتماد البرنامج» must be right of «تأجيل»"
    ]
   },
   {
    "name": "fit level not the loosest",
    "ok": true,
    "sample": [
-    "ellipsis on \"القاهرة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 80..97"
+    "card at fit level 3: its header would drop below the details' 56 pt",
+    "fit level 3 is not the loosest that fits (level 0 fits)",
+    "fit level 3 is not the loosest that fits (level 1 fits)"
    ]
   },
   {
    "name": "details not at level 0",
    "ok": true,
    "sample": [
-    "ellipsis on \"القاهرة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "details at fit level 2 (want 0: the header keeps the card's 56 pt)"
    ]
   },
   {
    "name": "no scroll hint",
    "ok": true,
    "sample": [
-    "ellipsis on \"القاهرة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "scroll hint chevron missing with content below"
    ]
   },
   {
    "name": "hint chevron missing",
    "ok": true,
    "sample": [
-    "ellipsis on \"القاهرة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "scroll hint chevron missing with content below"
    ]
   },
   {
    "name": "close not round",
    "ok": true,
    "sample": [
-    "close button is not round",
-    "ellipsis on \"القاهرة\"",
-    "ellipsis on \"مصر\""
+    "close button is not round"
    ]
   },
   {
    "name": "RTL order",
    "ok": true,
    "sample": [
-    "ellipsis on \"القاهرة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "link row 1: order must be tile, text, ..., chevron 8 pt from the left edge",
+    "link row 2: order must be tile, text, ..., chevron 8 pt from the left edge"
    ]
   },
   {
    "name": "two tabs selected",
    "ok": true,
    "sample": [
-    "ellipsis on \"القاهرة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "the open tab is not marked: govern, build",
+    "exactly one tab must be selected"
    ]
   },
   {
    "name": "card reaches the dock",
    "ok": true,
    "sample": [
-    "ellipsis on \"القاهرة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 569.64..579.17 y 84..101"
+    "icon over text: i r-chev / \"الداخلية والسياسة\"",
+    "hit overlap الدولة / تفاصيل المحافظة",
+    "hit overlap الاقتصاد / تفاصيل المحافظة"
    ]
   },
   {
    "name": "card moves the dock",
    "ok": true,
    "sample": [
-    "ellipsis on \"القاهرة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "tap in side inset: المزيد",
+    "HUD element moved from its B3 position: .dock x 62.0..449.0",
+    "dock item 1 changed"
    ]
   },
   {
    "name": "card hides the dock",
    "ok": true,
    "sample": [
-    "ellipsis on \"القاهرة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "card bottom 314.0 (want at least 8 pt above the dock)",
+    "dock hidden under the card",
+    "the card does not end 8 pt above the dock: [[0,60]]"
    ]
   },
   {
    "name": "card shows the details",
    "ok": true,
    "sample": [
-    "ellipsis on \"القاهرة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "text in bottom inset: الأولوية التنموية",
+    "text in bottom inset: الصناعة",
+    "text in bottom inset: الخدمات"
    ]
   },
   {
    "name": "card width",
    "ok": true,
    "sample": [
-    "ellipsis on \"القاهرة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "sheet width 358 (the card is 320 pt)",
+    "map label الأردن cut by a panel edge",
+    "map label الأردن squeezed between a panel and the screen edge"
    ]
   },
   {
    "name": "two tab bodies shown",
    "ok": true,
    "sample": [
-    "ellipsis on \"القاهرة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "scroll hint not centred in the clear strip under the fade: y 395.0..413.0 (strip 264.3..286.3)",
+    "tab bodies shown: build, forces (want only build)"
    ]
   },
   {
    "name": "open tab not marked",
    "ok": true,
    "sample": [
-    "ellipsis on \"القاهرة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "the open tab is not marked: govern"
    ]
   },
   {
    "name": "tabs not a tab list",
    "ok": true,
    "sample": [
-    "ellipsis on \"القاهرة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "a11y: the tabs are not a tab list"
    ]
   },
   {
    "name": "meter drawn wrong",
    "ok": true,
    "sample": [
-    "ellipsis on \"القاهرة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "meter «الكهرباء» not drawn at 7 / 10: 92.4 of 184.8",
+    "meter «النقل» not drawn at 8 / 10: 92.4 of 184.8",
+    "meter «المياه والصرف» not drawn at 8 / 10: 92.4 of 184.8"
    ]
   },
   {
    "name": "meter silent",
    "ok": true,
    "sample": [
-    "ellipsis on \"القاهرة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "a11y: meter «النقل» does not read its value"
    ]
   },
   {
    "name": "sectors off the card",
    "ok": true,
    "sample": [
-    "ellipsis on \"القاهرة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "the sectors' mean 6.75 is not the card's infrastructure 8 / 10",
+    "brief text missing: الاتصالات 9 / 10",
+    "brief text missing: الاتصالات 9 / 10"
    ]
   },
   {
    "name": "warning without its icon",
    "ok": true,
    "sample": [
-    "ellipsis on \"القاهرة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "colour alone: «الكهرباء: الطلب قريب من القدرة، وانقطاعات في الصيف.» has no arrow or icon",
+    "the warning needs its icon, in amber"
    ]
   },
   {
    "name": "metro off the state panel",
    "ok": true,
    "sample": [
-    "ellipsis on \"القاهرة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "the metro project does not match the state panel's 85% and 2012",
+    "brief text missing: المرحلة الأولى · 85% · تكتمل في 2012",
+    "brief text missing: المرحلة الأولى · 85% · تكتمل في 2012"
    ]
   },
   {
    "name": "grid chip wrong",
    "ok": true,
    "sample": [
-    "ellipsis on \"القاهرة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "the grid expansion must show its change (+1) on the chip and the level after it (8) in its cost line",
+    "a11y: «توسعة شبكة الكهرباء» does not read its numbers",
+    "brief text missing: الكهرباء +1"
    ]
   },
   {
    "name": "action silent",
    "ok": true,
    "sample": [
-    "ellipsis on \"القاهرة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "a11y: «توسعة شبكة الكهرباء» does not read its numbers",
+    "a11y: «توسعة شبكة الكهرباء» does not say «دولار»",
+    "a11y: «توسعة شبكة الكهرباء» does not say the chip's direction in words"
    ]
   },
   {
    "name": "action reads $",
    "ok": true,
    "sample": [
-    "ellipsis on \"القاهرة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "a11y: «دعم الخدمات الأساسية» reads «$» (say «دولار»)",
+    "a11y: «دعم الخدمات الأساسية» does not say «دولار»"
    ]
   },
   {
    "name": "unit row reversed",
    "ok": true,
    "sample": [
-    "ellipsis on \"القاهرة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "unit row 1: order must be tile, name, readiness (right to left)",
+    "unit row 2: order must be tile, name, readiness (right to left)",
+    "unit row 3: order must be tile, name, readiness (right to left)"
    ]
   },
   {
    "name": "unit silent",
    "ok": true,
    "sample": [
-    "ellipsis on \"القاهرة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "a11y: unit row 2 does not read its name, command and organization as one element"
    ]
   },
   {
    "name": "decision buttons out of the card",
    "ok": true,
    "sample": [
-    "ellipsis on \"القاهرة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "horizontal overflow in إدارة المحافظة المحافظعبد ",
+    "decision: the buttons run out of the card"
    ]
   },
   {
    "name": "decision footer in one row",
    "ok": true,
    "sample": [
-    "ellipsis on \"القاهرة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "decision: the positions line must be above the buttons"
    ]
   },
   {
    "name": "unit movable here",
    "ok": true,
    "sample": [
-    "ellipsis on \"القاهرة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "unit row 1 has a control (units move on the map)"
    ]
   },
   {
    "name": "amber alone",
    "ok": true,
    "sample": [
-    "ellipsis on \"القاهرة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "colour alone: «مرتفع» has no arrow or icon",
+    "grievance «مرتفع»: a level carries the warning icon, not a trend arrow"
    ]
   },
   {
    "name": "red alone",
    "ok": true,
    "sample": [
-    "ellipsis on \"القاهرة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "colour alone: «متوسط» has no arrow or icon"
    ]
   },
   {
    "name": "grievance with a trend arrow",
    "ok": true,
    "sample": [
-    "ellipsis on \"القاهرة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "grievance «مرتفع»: a level carries the warning icon, not a trend arrow"
    ]
   },
   {
    "name": "label says the opposite",
    "ok": true,
    "sample": [
-    "ellipsis on \"القاهرة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "a11y: «دعم الخدمات الأساسية» does not say the chip's direction in words"
    ]
   },
   {
    "name": "label without the chip number",
    "ok": true,
    "sample": [
-    "ellipsis on \"القاهرة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "a11y: «توسعة شبكة الكهرباء» does not read its numbers"
    ]
   },
   {
    "name": "label without «دولار»",
    "ok": true,
    "sample": [
-    "ellipsis on \"القاهرة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "a11y: «دعم الخدمات الأساسية» does not say «دولار»"
    ]
   },
   {
    "name": "chip arrow against its sign",
    "ok": true,
    "sample": [
-    "ellipsis on \"القاهرة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "«دعم الخدمات الأساسية»: the chip's arrow does not agree with its sign",
+    "a11y: «دعم الخدمات الأساسية» does not say the chip's direction in words"
    ]
   },
   {
    "name": "unit as a button",
    "ok": true,
    "sample": [
-    "ellipsis on \"القاهرة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "a11y: unit row 1 does not read its name, command and organization as one element",
+    "unit row 1 has a control (units move on the map)"
    ]
   },
   {
    "name": "unit label with the wrong command",
    "ok": true,
    "sample": [
-    "ellipsis on \"القاهرة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "a11y: unit row 1 does not read its name, command and organization as one element"
    ]
   },
   {
    "name": "hidden duplicate value",
    "ok": true,
    "sample": [
-    "ellipsis on \"القاهرة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "meter «المياه والصرف»: its value is not shown",
+    "brief text missing: المياه والصرف 8 / 10"
    ]
   },
   {
    "name": "share parts one colour",
    "ok": true,
    "sample": [
-    "ellipsis on \"القاهرة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 569.64..579.17 y 84..101"
+    "share bar 1: part 2 is not the one-hue step rgba(63, 224, 208, 0.5)",
+    "share bar 2: part 2 is not the one-hue step rgba(63, 224, 208, 0.5)"
    ]
   },
   {
    "name": "share part amber",
    "ok": true,
    "sample": [
-    "ellipsis on \"القاهرة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 569.64..579.17 y 84..101"
+    "share bar 1: part 2 is not the one-hue step rgba(63, 224, 208, 0.5)",
+    "share bar 2: part 2 is not the one-hue step rgba(63, 224, 208, 0.5)"
    ]
   },
   {
    "name": "open tab cyan",
    "ok": true,
    "sample": [
-    "ellipsis on \"القاهرة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "the open tab is not teal"
    ]
   },
   {
    "name": "meter amber and thick",
    "ok": true,
    "sample": [
-    "ellipsis on \"القاهرة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 569.64..579.17 y 84..101"
+    "meter «الكهرباء» is not a 4 pt teal bar",
+    "meter «النقل» is not a 4 pt teal bar",
+    "meter «المياه والصرف» is not a 4 pt teal bar"
    ]
   },
   {
    "name": "share bar off",
    "ok": true,
    "sample": [
-    "ellipsis on \"القاهرة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "share bar 2: part 1 not drawn at 52%",
+    "share bar 2: part 2 not drawn at 30%",
+    "share bar 2: part 3 not drawn at 18%"
    ]
   },
   {
    "name": "share parts not 100",
    "ok": true,
    "sample": [
-    "ellipsis on \"القاهرة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "share bar 1: its parts do not sum to 100",
+    "share bar 1: part 2 not drawn at 20%",
+    "share bar 1: «مسيحيون أقباط 10%» is not part 2 (20%)"
    ]
   },
   {
    "name": "share key wrong",
    "ok": true,
    "sample": [
-    "ellipsis on \"القاهرة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "share bar 1: the keys do not match its parts"
    ]
   },
   {
    "name": "share bar left to right",
    "ok": true,
    "sample": [
-    "ellipsis on \"القاهرة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "share bar 1: parts not right to left",
+    "share bar 2: parts not right to left",
+    "share bar 2: parts not right to left"
    ]
   },
   {
    "name": "cause arrow wrong",
    "ok": true,
    "sample": [
-    "ellipsis on \"القاهرة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "cause «+12»: a rise must be amber with an up arrow, a fall blue with a down arrow"
    ]
   },
   {
    "name": "sign outside its number",
    "ok": true,
    "sample": [
-    "ellipsis on \"القاهرة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "a sign outside its number: «+12»",
+    "brief text missing: +12"
    ]
   },
   {
    "name": "money unit (shown text)",
    "ok": true,
    "sample": [
-    "ellipsis on \"القاهرة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "the grid expansion must show its change (+1) on the chip and the level after it (8) in its cost line",
+    "a11y: «توسعة شبكة الكهرباء» does not read its numbers",
+    "money unit: «0.8 مليار» (under 1 billion is written in millions)"
    ]
   },
   {
    "name": "tab string hidden",
    "ok": true,
    "sample": [
-    "ellipsis on \"القاهرة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "meter «الكهرباء»: its value is not shown",
+    "brief text not fully visible: الكهرباء 7 / 10",
+    "brief text cannot be scrolled clear of the fades: الكهرباء 7 / 10"
    ]
   },
   {

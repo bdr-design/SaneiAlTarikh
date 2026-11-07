@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-07T17:26:24.510Z",
+ "ranAt": "2026-11-07T18:04:53.624Z",
  "inputs": {
   "files": [
    "index.html",
@@ -24,185 +24,35 @@
    "header_cairo.jpg",
    "map_overlay_cairo.svg"
   ],
-  "sha1": "b61a8b5602c0b8913f0b234004720c773618a0ad"
+  "sha1": "71932b4be947d1b8b347eb002dafcde9aea70b51"
  },
  "cleanIssues": {
-  "i16promax": [
-   "ellipsis on \"الداخلية والسياسة\"",
-   "ellipsis on \"مصر\"",
-   "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-   "clipped text (top): \"29\" 790.83..804.64 y 84..101",
-   "ellipsis on \"محافظة\""
-  ],
-  "i16promax_overview_end": [
-   "ellipsis on \"الداخلية والسياسة\"",
-   "ellipsis on \"مصر\"",
-   "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-   "clipped text (top): \"29\" 790.83..804.64 y 84..101",
-   "ellipsis on \"محافظة\""
-  ],
-  "i16promax_unrest": [
-   "ellipsis on \"الداخلية والسياسة\"",
-   "ellipsis on \"مصر\"",
-   "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-   "clipped text (top): \"29\" 790.83..804.64 y 84..101",
-   "ellipsis on \"محافظة\""
-  ],
-  "i16promax_unrest_end": [
-   "ellipsis on \"الداخلية والسياسة\"",
-   "ellipsis on \"مصر\"",
-   "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-   "clipped text (top): \"29\" 790.83..804.64 y 84..101",
-   "ellipsis on \"محافظة\""
-  ],
-  "i16promax_parties": [
-   "ellipsis on \"الداخلية والسياسة\"",
-   "ellipsis on \"مصر\"",
-   "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-   "clipped text (top): \"29\" 790.83..804.64 y 84..101",
-   "ellipsis on \"محافظة\""
-  ],
-  "i16promax_parties_end": [
-   "ellipsis on \"الداخلية والسياسة\"",
-   "ellipsis on \"مصر\"",
-   "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-   "clipped text (top): \"29\" 790.83..804.64 y 84..101",
-   "ellipsis on \"محافظة\""
-  ],
-  "i16promax_groups": [
-   "ellipsis on \"الداخلية والسياسة\"",
-   "ellipsis on \"مصر\"",
-   "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-   "clipped text (top): \"29\" 790.83..804.64 y 84..101",
-   "ellipsis on \"محافظة\""
-  ],
-  "i16promax_groups_end": [
-   "ellipsis on \"الداخلية والسياسة\"",
-   "ellipsis on \"مصر\"",
-   "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-   "clipped text (top): \"29\" 790.83..804.64 y 84..101",
-   "ellipsis on \"محافظة\""
-  ],
-  "i16promax_unrest_at137": [
-   "ellipsis on \"الداخلية والسياسة\"",
-   "ellipsis on \"مصر\"",
-   "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-   "clipped text (top): \"29\" 790.83..804.64 y 84..101",
-   "ellipsis on \"محافظة\""
-  ],
-  "i16promax_unrest_at274": [
-   "ellipsis on \"الداخلية والسياسة\"",
-   "ellipsis on \"مصر\"",
-   "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-   "clipped text (top): \"29\" 790.83..804.64 y 84..101",
-   "ellipsis on \"محافظة\""
-  ],
-  "i16promax_groups_at137": [
-   "ellipsis on \"الداخلية والسياسة\"",
-   "ellipsis on \"مصر\"",
-   "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-   "clipped text (top): \"29\" 790.83..804.64 y 84..101",
-   "ellipsis on \"محافظة\""
-  ],
+  "i16promax": [],
+  "i16promax_overview_end": [],
+  "i16promax_unrest": [],
+  "i16promax_unrest_end": [],
+  "i16promax_parties": [],
+  "i16promax_parties_end": [],
+  "i16promax_groups": [],
+  "i16promax_groups_end": [],
+  "i16promax_unrest_at137": [],
+  "i16promax_unrest_at274": [],
+  "i16promax_groups_at137": [],
   "i16promax coverage": [],
-  "se": [
-   "ellipsis on \"الداخلية والسياسة\"",
-   "ellipsis on \"مصر\"",
-   "clipped text (top): \"·\" 569.64..579.17 y 78..95",
-   "clipped text (top): \"29\" 555.83..569.64 y 78..95",
-   "ellipsis on \"محافظة\""
-  ],
-  "se_overview_end": [
-   "ellipsis on \"الداخلية والسياسة\"",
-   "ellipsis on \"مصر\"",
-   "clipped text (top): \"·\" 569.64..579.17 y 78..95",
-   "clipped text (top): \"29\" 555.83..569.64 y 78..95",
-   "ellipsis on \"محافظة\""
-  ],
-  "se_unrest": [
-   "ellipsis on \"الداخلية والسياسة\"",
-   "ellipsis on \"مصر\"",
-   "clipped text (top): \"·\" 569.64..579.17 y 78..95",
-   "clipped text (top): \"29\" 555.83..569.64 y 78..95",
-   "ellipsis on \"محافظة\""
-  ],
-  "se_unrest_end": [
-   "ellipsis on \"الداخلية والسياسة\"",
-   "ellipsis on \"مصر\"",
-   "clipped text (top): \"·\" 569.64..579.17 y 78..95",
-   "clipped text (top): \"29\" 555.83..569.64 y 78..95",
-   "ellipsis on \"محافظة\""
-  ],
-  "se_parties": [
-   "ellipsis on \"الداخلية والسياسة\"",
-   "ellipsis on \"مصر\"",
-   "clipped text (top): \"·\" 569.64..579.17 y 78..95",
-   "clipped text (top): \"29\" 555.83..569.64 y 78..95",
-   "ellipsis on \"محافظة\""
-  ],
-  "se_parties_end": [
-   "ellipsis on \"الداخلية والسياسة\"",
-   "ellipsis on \"مصر\"",
-   "clipped text (top): \"·\" 569.64..579.17 y 78..95",
-   "clipped text (top): \"29\" 555.83..569.64 y 78..95",
-   "ellipsis on \"محافظة\""
-  ],
-  "se_groups": [
-   "ellipsis on \"الداخلية والسياسة\"",
-   "ellipsis on \"مصر\"",
-   "clipped text (top): \"·\" 569.64..579.17 y 78..95",
-   "clipped text (top): \"29\" 555.83..569.64 y 78..95",
-   "ellipsis on \"محافظة\""
-  ],
-  "se_groups_end": [
-   "ellipsis on \"الداخلية والسياسة\"",
-   "ellipsis on \"مصر\"",
-   "clipped text (top): \"·\" 569.64..579.17 y 78..95",
-   "clipped text (top): \"29\" 555.83..569.64 y 78..95",
-   "ellipsis on \"محافظة\""
-  ],
-  "se_unrest_at98": [
-   "ellipsis on \"الداخلية والسياسة\"",
-   "ellipsis on \"مصر\"",
-   "clipped text (top): \"·\" 569.64..579.17 y 78..95",
-   "clipped text (top): \"29\" 555.83..569.64 y 78..95",
-   "ellipsis on \"محافظة\""
-  ],
-  "se_unrest_at196": [
-   "ellipsis on \"الداخلية والسياسة\"",
-   "ellipsis on \"مصر\"",
-   "clipped text (top): \"·\" 569.64..579.17 y 78..95",
-   "clipped text (top): \"29\" 555.83..569.64 y 78..95",
-   "ellipsis on \"محافظة\""
-  ],
-  "se_unrest_at294": [
-   "ellipsis on \"الداخلية والسياسة\"",
-   "ellipsis on \"مصر\"",
-   "clipped text (top): \"·\" 569.64..579.17 y 78..95",
-   "clipped text (top): \"29\" 555.83..569.64 y 78..95",
-   "ellipsis on \"محافظة\""
-  ],
-  "se_parties_at98": [
-   "ellipsis on \"الداخلية والسياسة\"",
-   "ellipsis on \"مصر\"",
-   "clipped text (top): \"·\" 569.64..579.17 y 78..95",
-   "clipped text (top): \"29\" 555.83..569.64 y 78..95",
-   "ellipsis on \"محافظة\""
-  ],
-  "se_groups_at98": [
-   "ellipsis on \"الداخلية والسياسة\"",
-   "ellipsis on \"مصر\"",
-   "clipped text (top): \"·\" 569.64..579.17 y 78..95",
-   "clipped text (top): \"29\" 555.83..569.64 y 78..95",
-   "ellipsis on \"محافظة\""
-  ],
-  "se_groups_at196": [
-   "ellipsis on \"الداخلية والسياسة\"",
-   "ellipsis on \"مصر\"",
-   "clipped text (top): \"·\" 569.64..579.17 y 78..95",
-   "clipped text (top): \"29\" 555.83..569.64 y 78..95",
-   "ellipsis on \"محافظة\""
-  ],
+  "se": [],
+  "se_overview_end": [],
+  "se_unrest": [],
+  "se_unrest_end": [],
+  "se_parties": [],
+  "se_parties_end": [],
+  "se_groups": [],
+  "se_groups_end": [],
+  "se_unrest_at98": [],
+  "se_unrest_at196": [],
+  "se_unrest_at294": [],
+  "se_parties_at98": [],
+  "se_groups_at98": [],
+  "se_groups_at196": [],
   "se coverage": []
  },
  "results": [
@@ -210,18 +60,16 @@
    "name": "type size",
    "ok": true,
    "sample": [
-    "font size 17 for \"الداخلية والسياسة\"",
-    "ellipsis on \"الداخلية والسياسة\"",
-    "ellipsis on \"مصر\""
+    "font size 17 for \"الداخلية والسياسة\""
    ]
   },
   {
    "name": "font weight",
    "ok": true,
    "sample": [
-    "ellipsis on \"الداخلية والسياسة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "font weight 11.5/700 for \"نظرة عامة\"",
+    "font weight 11.5/700 for \"الاضطرابات\"",
+    "font weight 11.5/700 for \"الأحزاب\""
    ]
   },
   {
@@ -229,8 +77,7 @@
    "ok": true,
    "sample": [
     "text colour off-token rgb(136, 153, 170): \"الداخلية والسياسة\"",
-    "ellipsis on \"الداخلية والسياسة\"",
-    "ellipsis on \"مصر\""
+    "contrast 2.87 for \"الداخلية والسياسة\""
    ]
   },
   {
@@ -238,26 +85,25 @@
    "ok": true,
    "sample": [
     "panel radius الداخلية والسياسة: مصر: 6 (want 12)",
-    "radius 6 for .sheet (want 12)",
-    "ellipsis on \"الداخلية والسياسة\""
+    "radius 6 for .sheet (want 12)"
    ]
   },
   {
    "name": "tap in the side inset",
    "ok": true,
    "sample": [
-    "ellipsis on \"الداخلية والسياسة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 834.64..844.17 y 84..101"
+    "text in side inset: 79.7",
+    "text in side inset: +180",
+    "text in side inset: لماذا؟"
    ]
   },
   {
    "name": "panel in the side inset",
    "ok": true,
    "sample": [
-    "ellipsis on \"الداخلية والسياسة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 834.64..844.17 y 84..101"
+    "text in side inset: 79.7",
+    "text in side inset: +180",
+    "text in side inset: لماذا؟"
    ]
   },
   {
@@ -265,8 +111,8 @@
    "ok": true,
    "sample": [
     "panel not opaque: الداخلية والسياسة: مصر rgba(9, 17, 25, 0.66)",
-    "ellipsis on \"الداخلية والسياسة\"",
-    "ellipsis on \"مصر\""
+    "contrast 3.05 for \"نظرة عامة\"",
+    "contrast 4.08 for \"الاضطرابات\""
    ]
   },
   {
@@ -274,314 +120,282 @@
    "ok": true,
    "sample": [
     "panel not opaque (opacity 0.60): الداخلية والسياسة: مصر",
-    "ellipsis on \"الداخلية والسياسة\"",
-    "ellipsis on \"مصر\""
+    "brief text not fully visible: الداخلية والسياسة",
+    "brief text not fully visible: مصر · 29 محافظة"
    ]
   },
   {
    "name": "Egypt covered",
    "ok": true,
    "sample": [
-    "ellipsis on \"الداخلية والسياسة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "Nile delta covered by panel الداخلية والسياسة: مصر",
+    "Nile delta under the hit box of نظرة عامة",
+    "Nile delta under the hit box of الاضطرابات"
    ]
   },
   {
    "name": "map dimmed",
    "ok": true,
    "sample": [
-    "ellipsis on \"الداخلية والسياسة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "the map is dimmed (opacity 1.00, filter brightness(0.35))"
    ]
   },
   {
    "name": "map faded",
    "ok": true,
    "sample": [
-    "ellipsis on \"الداخلية والسياسة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "the map is dimmed (opacity 0.30, filter none)"
    ]
   },
   {
    "name": "scrim over the map",
    "ok": true,
    "sample": [
-    "ellipsis on \"الداخلية والسياسة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "something drawn over the map: DIV (rgba(0, 0, 0, 0.55))",
+    "contrast 1.92 for \"3\""
    ]
   },
   {
    "name": "sheet width",
    "ok": true,
    "sample": [
-    "ellipsis on \"الداخلية والسياسة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "sheet width 330 (want round(clamp(43% of 832, 340, 380)), or the room the dock leaves if 330..: 358)"
    ]
   },
   {
    "name": "sheet top",
    "ok": true,
    "sample": [
-    "ellipsis on \"الداخلية والسياسة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 70..87"
+    "hit overlap الاستقرار 58% / إغلاق",
+    "panel overlap الدولة: مصر، حسني مبارك، ج / الداخلية والسياسة: مصر",
+    "panel overlap الخزينة 36.0 مليار $ الاست / الداخلية والسياسة: مصر"
    ]
   },
   {
    "name": "dock hidden although it fits",
    "ok": true,
    "sample": [
-    "ellipsis on \"الداخلية والسياسة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "dock hidden although it fits left of the sheet"
    ]
   },
   {
    "name": "dock shown on the SE",
    "ok": true,
    "sample": [
-    "ellipsis on \"الداخلية والسياسة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 569.64..579.17 y 78..95"
+    "icon over text: i / \"· مرة في السنة\"",
+    "icon over text: i / \"الاضطرابات\"",
+    "hit overlap الدولة / فتح حوار وطني: الكلفة 20 م"
    ]
   },
   {
    "name": "left stack moved",
    "ok": true,
    "sample": [
-    "ellipsis on \"الداخلية والسياسة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "HUD element moved from its B3 position: .toast x 70.0..275.6 y 56.0..88.0",
+    "HUD element moved from its B3 position: .btn.mode x 70.0..191.6 y 96.0..128.0",
+    "HUD element moved from its B3 position: .btn.home x 70.0..141.5 y 136.0..168.0"
    ]
   },
   {
    "name": "fit not the loosest",
    "ok": true,
    "sample": [
-    "ellipsis on \"الداخلية والسياسة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 78..95"
+    "fit level 6 is not the loosest that fits: [[0,0]]"
    ]
   },
   {
    "name": "two tab bodies",
    "ok": true,
    "sample": [
-    "ellipsis on \"الداخلية والسياسة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "clipped text (bottom): \"لماذا؟\" 854.31..881 y 220..237",
+    "clipped text (bottom): \"لماذا؟\" 734.66..761.34 y 220..237",
+    "clipped text (bottom): \"لماذا؟\" 623.98..650.67 y 220..237"
    ]
   },
   {
    "name": "two tabs selected",
    "ok": true,
    "sample": [
-    "ellipsis on \"الداخلية والسياسة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "exactly the open tab must be selected"
    ]
   },
   {
    "name": "tabs not a tab list",
    "ok": true,
    "sample": [
-    "ellipsis on \"الداخلية والسياسة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "a11y: the tabs are not a tab list"
    ]
   },
   {
    "name": "tabs reversed",
    "ok": true,
    "sample": [
-    "ellipsis on \"الداخلية والسياسة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "tab 2 is not left of tab 1",
+    "tab 3 is not left of tab 2",
+    "tab 4 is not left of tab 3"
    ]
   },
   {
    "name": "fades wrong",
    "ok": true,
    "sample": [
-    "ellipsis on \"الداخلية والسياسة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "control cut by its scroll area (bottom): الجيزة: 55 من 100، ترتفع ن",
+    "hit box shaved by its clip: الجيزة: 55 من 100، ترتفع ن",
+    "fades 0/0 do not match the scroll state (top 0, over 332.0)"
    ]
   },
   {
    "name": "hint chevron missing",
    "ok": true,
    "sample": [
-    "ellipsis on \"الداخلية والسياسة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "scroll hint chevron missing with content below"
    ]
   },
   {
    "name": "hint over the content",
    "ok": true,
    "sample": [
-    "ellipsis on \"الداخلية والسياسة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "scroll hint not centred in the clear strip under the fade: y 249.0..267.0 (strip 395.0..417.0)"
    ]
   },
   {
    "name": "map label cut",
    "ok": true,
    "sample": [
-    "ellipsis on \"الداخلية والسياسة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "map label ليبيا sliced by the screen edge or the side inset",
+    "map label إيران sliced by the screen edge or the side inset",
+    "map label إيران squeezed between a panel and the screen edge"
    ]
   },
   {
    "name": "contrast",
    "ok": true,
    "sample": [
-    "ellipsis on \"الداخلية والسياسة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "contrast 1 for \"السكان\"",
+    "contrast 1 for \"79.7\"",
+    "contrast 1.73 for \"مليون\""
    ]
   },
   {
    "name": "dock item not marked",
    "ok": true,
    "sample": [
-    "ellipsis on \"الداخلية والسياسة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "the open section «الداخلية والسياسة» is not marked in the dock"
    ]
   },
   {
    "name": "identity line missing",
    "ok": true,
    "sample": [
-    "ellipsis on \"الداخلية والسياسة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "panel top line none rgb(160, 140, 255) 2px (want the section colour, 2 pt, at the top)"
    ]
   },
   {
    "name": "emblem drawn grey",
    "ok": true,
    "sample": [
-    "ellipsis on \"الداخلية والسياسة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "section emblem missing or not in the section colour"
    ]
   },
   {
    "name": "open tab neutral",
    "ok": true,
    "sample": [
-    "ellipsis on \"الداخلية والسياسة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "open tab not in the section colour"
    ]
   },
   {
    "name": "section colour on data",
    "ok": true,
    "sample": [
-    "ellipsis on \"الداخلية والسياسة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "section colour on data text: \"مصر\"",
+    "section colour on data text: \"29\"",
+    "section colour on data text: \"محافظة\""
    ]
   },
   {
    "name": "section colour on a rule",
    "ok": true,
    "sample": [
-    "ellipsis on \"الداخلية والسياسة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "section colour on data chrome: أقسام الداخلية والسياسة"
    ]
   },
   {
    "name": "money unit",
    "ok": true,
    "sample": [
-    "ellipsis on \"الداخلية والسياسة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "clipped text (top): \"0.4\" 866.09..881 y 153..168",
+    "clipped text (top): \"مليار $\" 838.42..866.09 y 153..168",
+    "control cut by its scroll area (bottom): فتح حوار وطني: الكلفة 20 م"
    ]
   },
   {
    "name": "sign outside its number",
    "ok": true,
    "sample": [
-    "ellipsis on \"الداخلية والسياسة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "clipped text (top): \"تغير +\" 859.06..881 y 153..168",
+    "clipped text (top): \"3\" 853.06..859.06 y 153..168",
+    "control cut by its scroll area (bottom): فتح حوار وطني: الكلفة 20 م"
    ]
   },
   {
    "name": "colour alone",
    "ok": true,
    "sample": [
-    "ellipsis on \"الداخلية والسياسة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "clipped text (top): \"تراجع\" 860.27..881 y 153..168",
+    "control cut by its scroll area (bottom): فتح حوار وطني: الكلفة 20 م",
+    "hit box shaved by its clip: فتح حوار وطني: الكلفة 20 م"
    ]
   },
   {
    "name": "an image in the sheet",
    "ok": true,
    "sample": [
-    "ellipsis on \"الداخلية والسياسة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "clipped text (bottom): \"الكلفة:\" 801.73..834 y 401..418",
+    "clipped text (bottom): \"20\" 787.92..801.73 y 401..418",
+    "clipped text (bottom): \"· مرة في السنة\" 712.75..775.92 y 401..418"
    ]
   },
   {
    "name": "close not round",
    "ok": true,
    "sample": [
-    "close button is not round",
-    "ellipsis on \"الداخلية والسياسة\"",
-    "ellipsis on \"مصر\""
+    "close button is not round"
    ]
   },
   {
    "name": "label without a role",
    "ok": true,
    "sample": [
-    "ellipsis on \"الداخلية والسياسة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "clipped text (top): \"اختبار\" 860.25..881 y 153..168",
+    "control cut by its scroll area (bottom): فتح حوار وطني: الكلفة 20 م",
+    "hit box shaved by its clip: فتح حوار وطني: الكلفة 20 م"
    ]
   },
   {
    "name": "brief text hidden",
    "ok": true,
    "sample": [
-    "ellipsis on \"الداخلية والسياسة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "the headline numbers are not 45 and 3",
+    "brief text not fully visible: 79.7"
    ]
   },
   {
    "name": "overview scrolls",
    "ok": true,
    "sample": [
-    "ellipsis on \"الداخلية والسياسة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 569.64..579.17 y 78..95"
+    "overview needs scrolling: 386.0 pt over",
+    "fades 0/0 do not match the scroll state (top 0, over 386.0)",
+    "brief text not fully visible: السكان"
    ]
   },
   {
    "name": "18 pt misuse",
    "ok": true,
    "sample": [
-    "ellipsis on \"الداخلية والسياسة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "18 pt is for the panel's name and the adjusted values only: \"+180\"",
+    "18 pt is for the panel's name and the adjusted values only: \"ألف شهريًا\"",
+    "18 pt is for the panel's name and the adjusted values only: \"+1\""
    ]
   },
   {
@@ -615,441 +429,402 @@
    "name": "text overlap",
    "ok": true,
    "sample": [
-    "ellipsis on \"الداخلية والسياسة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 70..87"
+    "text overlap \"الداخلية والسياسة\" / \"مصر\"",
+    "text overlap \"الداخلية والسياسة\" / \"·\"",
+    "text overlap \"الداخلية والسياسة\" / \"29\""
    ]
   },
   {
    "name": "text into a control",
    "ok": true,
    "sample": [
-    "ellipsis on \"الداخلية والسياسة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "text overlap \"· مرة في السنة\" / \"الاضطرابات\"",
+    "text over a control: \"فتح حوار وطني\" runs into «الاضطرابات −3»",
+    "text over a control: \"· مرة في السنة\" runs into «الاضطرابات −3»"
    ]
   },
   {
    "name": "clipped text",
    "ok": true,
    "sample": [
-    "ellipsis on \"الداخلية والسياسة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "clipped text (sides): \"السكان\" 871.17..903 y 161..178",
+    "text outside the sheet's 12 pt padding: \"السكان\"",
+    "clipped text (sides): \"79.7\" 883.02..921 y 179..206"
    ]
   },
   {
    "name": "dock underline missing",
    "ok": true,
    "sample": [
-    "ellipsis on \"الداخلية والسياسة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "dock underline missing or off: none 16pxx2px rgb(160, 140, 255) (want 16 x 2 in the section colour)"
    ]
   },
   {
    "name": "closed dock item coloured",
    "ok": true,
    "sample": [
-    "ellipsis on \"الداخلية والسياسة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "dock item 1 (closed) not neutral as on B3: rgb(160, 140, 255) / rgb(234, 242, 247)",
+    "dock item 2 (closed) not neutral as on B3: rgb(160, 140, 255) / rgb(234, 242, 247)",
+    "dock item 4 (closed) not neutral as on B3: rgb(160, 140, 255) / rgb(234, 242, 247)"
    ]
   },
   {
    "name": "identity line colour",
    "ok": true,
    "sample": [
-    "ellipsis on \"الداخلية والسياسة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "panel top line \"\" rgb(63, 224, 208) 2px (want the section colour, 2 pt, at the top)"
    ]
   },
   {
    "name": "closed tabs like the open one",
    "ok": true,
    "sample": [
-    "ellipsis on \"الداخلية والسياسة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "open tab not in the section colour",
+    "closed tab not in the secondary grey: الاضطرابات rgb(234, 242, 247)",
+    "closed tab not in the secondary grey: الأحزاب rgb(234, 242, 247)"
    ]
   },
   {
    "name": "emblem size",
    "ok": true,
    "sample": [
-    "ellipsis on \"الداخلية والسياسة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "size 28.0x32.0 for .s-emb (want 32 x 32)"
    ]
   },
   {
    "name": "chip not white",
    "ok": true,
    "sample": [
-    "ellipsis on \"الداخلية والسياسة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "white touch off: .r-chip borderTopColor rgb(63, 224, 208) (want rgba(234, 242, 247, 0.5))",
+    "white touch off: .r-chip color rgb(63, 224, 208) (want rgb(234, 242, 247))"
    ]
   },
   {
    "name": "tile icons cyan",
    "ok": true,
    "sample": [
-    "ellipsis on \"الداخلية والسياسة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "white touch off: .r-tile color rgb(127, 233, 255) (want rgb(234, 242, 247))"
    ]
   },
   {
    "name": "faint text",
    "ok": true,
    "sample": [
-    "ellipsis on \"الداخلية والسياسة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "brief text not fully visible: +180 ألف شهريًا",
+    "brief text not fully visible: +1 شهريًا",
+    "brief text not fully visible: اضطراب فوق 60"
    ]
   },
   {
    "name": "why without its subject",
    "ok": true,
    "sample": [
-    "ellipsis on \"الداخلية والسياسة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "a11y: «لماذا؟» does not name its subject «الاضطرابات»"
    ]
   },
   {
    "name": "amber value without its icon",
    "ok": true,
    "sample": [
-    "ellipsis on \"الداخلية والسياسة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "colour alone: «79.7» (its label's icon is not in its colour)",
+    "amber on a headline that is not a worsening"
    ]
   },
   {
    "name": "chip arrow against its sign",
    "ok": true,
    "sample": [
-    "ellipsis on \"الداخلية والسياسة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "«فتح حوار وطني»: the chip's arrow does not agree with its sign",
+    "a11y: «فتح حوار وطني» does not say the chip's direction in words"
    ]
   },
   {
    "name": "row read in part",
    "ok": true,
    "sample": [
-    "ellipsis on \"الداخلية والسياسة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "a11y: «جزء» does not read all it shows: القاهرة 64",
+    "a11y: row «القاهرة» does not read its value",
+    "row «القاهرة»: the arrow does not show the trend «»"
    ]
   },
   {
    "name": "a long headline label",
    "ok": true,
    "sample": [
-    "ellipsis on \"الداخلية والسياسة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "clipped text (sides): \"عنوان طويل جدًا لا يتسع لخانته أبدًا\" 385.38..539.25 y 161..178",
+    "text outside the sheet's 12 pt padding: \"عنوان طويل جدًا لا يتسع لخانته أبدًا\"",
+    "clipped text (sides): \"1\" 528.44..539.25 y 179..206"
    ]
   },
   {
    "name": "text wider than its box",
    "ok": true,
    "sample": [
-    "ellipsis on \"الداخلية والسياسة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "text wider than its box: «الأكثر اضطرابًا» (58 in 20)"
    ]
   },
   {
    "name": "a long status cell",
    "ok": true,
    "sample": [
-    "ellipsis on \"الداخلية والسياسة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "clipped text (sides): \"قيمة طويلة جدًا لا تتسع لنصف الجدول\" 416.53..613.3 y 157.5..176.5",
+    "text outside the sheet's 12 pt padding: \"قيمة طويلة جدًا لا تتسع لنصف الجدول\"",
+    "clipped text (bottom): \"الكلفة:\" 801.73..834 y 413..430"
    ]
   },
   {
    "name": "% before its number",
    "ok": true,
    "sample": [
-    "ellipsis on \"الداخلية والسياسة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "% shown before its number: \"نسبة 20%\"",
+    "brief text missing: +180 ألف شهريًا",
+    "brief text missing: +180 ألف شهريًا"
    ]
   },
   {
    "name": "bar off its value",
    "ok": true,
    "sample": [
-    "ellipsis on \"الداخلية والسياسة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "row «القاهرة»: the bar is not drawn at 64 / 100"
    ]
   },
   {
    "name": "row silent",
    "ok": true,
    "sample": [
-    "ellipsis on \"الداخلية والسياسة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "a11y: «السويس» does not read all it shows: 63",
+    "a11y: row «السويس» does not read its value",
+    "row «السويس»: the arrow does not show the trend «»"
    ]
   },
   {
    "name": "arrow against the trend",
    "ok": true,
    "sample": [
-    "ellipsis on \"الداخلية والسياسة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "row «الغربية»: the arrow does not show the trend «up»"
    ]
   },
   {
    "name": "amber on a calm row",
    "ok": true,
    "sample": [
-    "ellipsis on \"الداخلية والسياسة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "row «الإسماعيلية»: amber must mark a worsening, and only that"
    ]
   },
   {
    "name": "province not a button",
    "ok": true,
    "sample": [
-    "ellipsis on \"الداخلية والسياسة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "a11y: a label VoiceOver may skip (no role): «القاهرة: 64 من 100، ترتفع نقطت»",
+    "province «القاهرة» does not open its card (a 44 pt button with its chevron)"
    ]
   },
   {
    "name": "not worst first",
    "ok": true,
    "sample": [
-    "ellipsis on \"الداخلية والسياسة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "the provinces are not worst first",
+    "Cairo is not the province card's 64"
    ]
   },
   {
    "name": "Cairo off the card",
    "ok": true,
    "sample": [
-    "ellipsis on \"الداخلية والسياسة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "a11y: «القاهرة: 64 من 100، ترتف» does not read all it shows: 66",
+    "row «القاهرة»: the bar is not drawn at 66 / 100",
+    "a11y: row «القاهرة» does not read its value"
    ]
   },
   {
    "name": "29 provinces",
    "ok": true,
    "sample": [
-    "ellipsis on \"الداخلية والسياسة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "the provinces listed and summed up are 30, not 29",
+    "the average over 29 provinces is not the headline 45",
+    "brief text missing: 21 محافظة أخرى بين 32 و48."
    ]
   },
   {
    "name": "average off",
    "ok": true,
    "sample": [
-    "ellipsis on \"الداخلية والسياسة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "the average over 29 provinces is not the headline 45",
+    "brief text missing: 21 محافظة أخرى بين 32 و48.",
+    "brief text missing: 21 محافظة أخرى بين 32 و48."
    ]
   },
   {
    "name": "count above 60 off",
    "ok": true,
    "sample": [
-    "ellipsis on \"الداخلية والسياسة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "a11y: «الغربية: 58 من 100، ترتف» does not read all it shows: 60 5",
+    "row «الغربية»: the bar is not drawn at 60.5 / 100",
+    "a11y: row «الغربية» does not read its value"
    ]
   },
   {
    "name": "emergency off the state",
    "ok": true,
    "sample": [
-    "ellipsis on \"الداخلية والسياسة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "a11y: «حالة الطوارئ: محدودة منذ» does not read all it shows: شاملة",
+    "the emergency law shown is not the state panel's «محدودة»",
+    "brief text missing: حالة الطوارئ: محدودة منذ 2010"
    ]
   },
   {
    "name": "headline off",
    "ok": true,
    "sample": [
-    "ellipsis on \"الداخلية والسياسة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "the headline numbers are not 45 and 3",
+    "brief text missing: 45",
+    "brief text missing: 45"
    ]
   },
   {
    "name": "overview top three off",
    "ok": true,
    "sample": [
-    "ellipsis on \"الداخلية والسياسة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "a11y: «القاهرة: 64 من 100، ترتف» does not read all it shows: الجيزة",
+    "a11y: row «القاهرة» does not read its value",
+    "the overview's worst provinces are not the unrest tab's first: القاهرةundefined,السويس63,الإسكندرية61"
    ]
   },
   {
    "name": "overview list short",
    "ok": true,
    "sample": [
-    "ellipsis on \"الداخلية والسياسة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "the overview's worst provinces are not the unrest tab's first: القاهرة64,السويس63",
+    "the overview lists 2 provinces, not the headline's 3 above 60"
    ]
   },
   {
    "name": "unrest headline not amber",
    "ok": true,
    "sample": [
-    "ellipsis on \"الداخلية والسياسة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "the unrest headline is not amber with its flame and rising arrow"
    ]
   },
   {
    "name": "amber on population",
    "ok": true,
    "sample": [
-    "ellipsis on \"الداخلية والسياسة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "colour alone: «+180 ألف شهريًا» has no arrow or icon",
+    "colour alone: «+180» has no arrow or icon",
+    "amber on a headline that is not a worsening"
    ]
   },
   {
    "name": "seats off",
    "ok": true,
    "sample": [
-    "ellipsis on \"الداخلية والسياسة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "the seats do not add up to 518 with the NDP's 420",
+    "share bar 1: part 1 not drawn at its row's 420",
+    "share bar 1: part 2 not drawn at its row's 70"
    ]
   },
   {
    "name": "opposition off",
    "ok": true,
    "sample": [
-    "ellipsis on \"الداخلية والسياسة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "the opposition parties do not add up to their 15",
+    "brief text missing: المعارضة: الوفد 6 · التجمع 5 · أخرى 4",
+    "brief text missing: المعارضة: الوفد 6 · التجمع 5 · أخرى 4"
    ]
   },
   {
    "name": "stale seat bar",
    "ok": true,
    "sample": [
-    "ellipsis on \"الداخلية والسياسة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "share bar 1: part 1 not drawn at its row's 420",
+    "share bar 1: part 2 not drawn at its row's 73",
+    "share bar 1: VoiceOver does not read its rows' numbers"
    ]
   },
   {
    "name": "stale support bar",
    "ok": true,
    "sample": [
-    "ellipsis on \"الداخلية والسياسة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "share bar 2: part 1 not drawn at its row's 58",
+    "share bar 2: part 2 not drawn at its row's 20"
    ]
   },
   {
    "name": "seat keys off",
    "ok": true,
    "sample": [
-    "ellipsis on \"الداخلية والسياسة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "share bar 1: the keys do not match its parts"
    ]
   },
   {
    "name": "party row reversed",
    "ok": true,
    "sample": [
-    "ellipsis on \"الداخلية والسياسة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "party row 1: order must be span, b (right to left)",
+    "party row 2: order must be span, b (right to left)",
+    "party row 3: order must be span, b (right to left)"
    ]
   },
   {
    "name": "movement silent",
    "ok": true,
    "sample": [
-    "ellipsis on \"الداخلية والسياسة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "a11y: «» does not read all it shows: كفاية غير مرخصة منخفضة",
+    "a11y: movement «كفاية» is not read as shown"
    ]
   },
   {
    "name": "movement status off",
    "ok": true,
    "sample": [
-    "ellipsis on \"الداخلية والسياسة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "a11y: «الجمعية الوطنية للتغيير:» does not read all it shows: غير مرخصة حول البرادعي",
+    "a11y: movement «الجمعية الوطنية للتغيير» is not read as shown"
    ]
   },
   {
    "name": "movement rise unsaid",
    "ok": true,
    "sample": [
-    "ellipsis on \"الداخلية والسياسة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "movement «حركة 6 أبريل»: a rise is amber, its up arrow and «في صعود» together"
    ]
   },
   {
    "name": "steady movement in amber",
    "ok": true,
    "sample": [
-    "ellipsis on \"الداخلية والسياسة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "colour alone: «منخفضة» has no arrow or icon",
+    "movement «كفاية»: a rise is amber, its up arrow and «في صعود» together"
    ]
   },
   {
    "name": "movement reversed",
    "ok": true,
    "sample": [
-    "ellipsis on \"الداخلية والسياسة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "movement 1: order must be .r-at, .i-str (right to left)",
+    "movement 2: order must be .r-at, .i-str (right to left)",
+    "movement 3: order must be .r-at, .i-str (right to left)"
    ]
   },
   {
    "name": "movements out of order",
    "ok": true,
    "sample": [
-    "ellipsis on \"الداخلية والسياسة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "the movements are not in the brief's order"
    ]
   },
   {
    "name": "groups out of order",
    "ok": true,
    "sample": [
-    "ellipsis on \"الداخلية والسياسة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "the interest groups are not in the brief's order"
    ]
   },
   {
    "name": "action silent",
    "ok": true,
    "sample": [
-    "ellipsis on \"الداخلية والسياسة\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "a11y: «فتح حوار وطني» does not read its numbers",
+    "a11y: «فتح حوار وطني» does not say the chip's direction in words"
    ]
   },
   {

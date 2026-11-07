@@ -1,7 +1,7 @@
 {
  "se": {
   "device": "667x375 side 0 bottom 0 none",
-  "renderedAt": "2026-11-07T17:23:46.488Z",
+  "renderedAt": "2026-11-07T18:02:20.903Z",
   "inputs": {
    "files": [
     "index.html",
@@ -24,25 +24,12 @@
     "../../shared/map_mena_d1_overlay.svg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "17d57ede7b8e35f2e65b5cd8225cbe4ec8c95b7e"
+   "sha1": "68195cafbc3ad328bd4bcf9ec265d29b0e6fcb2e"
   },
-  "issues": [
-   "report: ellipsis on \"تقرير الأمة\"",
-   "report: ellipsis on \"مصر\"",
-   "report: clipped text (top): \"·\" 569.64..579.17 y 84..101",
-   "report: clipped text (top): \"2011–2100\" 507.67..569.64 y 84..101",
-   "report_end: ellipsis on \"تقرير الأمة\"",
-   "report_end: ellipsis on \"مصر\"",
-   "report_end: clipped text (top): \"·\" 569.64..579.17 y 84..101",
-   "report_end: clipped text (top): \"2011–2100\" 507.67..569.64 y 84..101",
-   "report_at131: ellipsis on \"تقرير الأمة\"",
-   "report_at131: ellipsis on \"مصر\"",
-   "report_at131: clipped text (top): \"·\" 569.64..579.17 y 84..101",
-   "report_at131: clipped text (top): \"2011–2100\" 507.67..569.64 y 84..101"
-  ],
+  "issues": [],
   "views": {
    "report": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -534,7 +521,7 @@
     ]
    },
    "report_end": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -975,7 +962,7 @@
     ]
    },
    "report_at131": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -1429,11 +1416,11 @@
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 12
+  "issueCount": 0
  },
  "mini": {
   "device": "812x375 side 50 bottom 21 notch",
-  "renderedAt": "2026-11-07T17:23:52.723Z",
+  "renderedAt": "2026-11-07T18:02:27.299Z",
   "inputs": {
    "files": [
     "index.html",
@@ -1456,25 +1443,12 @@
     "../../shared/map_mena_d1_overlay.svg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "17d57ede7b8e35f2e65b5cd8225cbe4ec8c95b7e"
+   "sha1": "68195cafbc3ad328bd4bcf9ec265d29b0e6fcb2e"
   },
-  "issues": [
-   "report: ellipsis on \"تقرير الأمة\"",
-   "report: ellipsis on \"مصر\"",
-   "report: clipped text (top): \"·\" 672.64..682.17 y 84..101",
-   "report: clipped text (top): \"2011–2100\" 610.67..672.64 y 84..101",
-   "report_end: ellipsis on \"تقرير الأمة\"",
-   "report_end: ellipsis on \"مصر\"",
-   "report_end: clipped text (top): \"·\" 672.64..682.17 y 84..101",
-   "report_end: clipped text (top): \"2011–2100\" 610.67..672.64 y 84..101",
-   "report_at117: ellipsis on \"تقرير الأمة\"",
-   "report_at117: ellipsis on \"مصر\"",
-   "report_at117: clipped text (top): \"·\" 672.64..682.17 y 84..101",
-   "report_at117: clipped text (top): \"2011–2100\" 610.67..672.64 y 84..101"
-  ],
+  "issues": [],
   "views": {
    "report": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -1963,7 +1937,7 @@
     ]
    },
    "report_end": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -2401,7 +2375,7 @@
     ]
    },
    "report_at117": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -2882,11 +2856,11 @@
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 12
+  "issueCount": 0
  },
  "i14": {
   "device": "844x390 side 47 bottom 21 notch",
-  "renderedAt": "2026-11-07T17:23:59.331Z",
+  "renderedAt": "2026-11-07T18:02:33.874Z",
   "inputs": {
    "files": [
     "index.html",
@@ -2909,25 +2883,12 @@
     "../../shared/map_mena_d1_overlay.svg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "17d57ede7b8e35f2e65b5cd8225cbe4ec8c95b7e"
+   "sha1": "68195cafbc3ad328bd4bcf9ec265d29b0e6fcb2e"
   },
-  "issues": [
-   "report: ellipsis on \"تقرير الأمة\"",
-   "report: ellipsis on \"مصر\"",
-   "report: clipped text (top): \"·\" 707.64..717.17 y 84..101",
-   "report: clipped text (top): \"2011–2100\" 645.67..707.64 y 84..101",
-   "report_end: ellipsis on \"تقرير الأمة\"",
-   "report_end: ellipsis on \"مصر\"",
-   "report_end: clipped text (top): \"·\" 707.64..717.17 y 84..101",
-   "report_end: clipped text (top): \"2011–2100\" 645.67..707.64 y 84..101",
-   "report_at132: ellipsis on \"تقرير الأمة\"",
-   "report_at132: ellipsis on \"مصر\"",
-   "report_at132: clipped text (top): \"·\" 707.64..717.17 y 84..101",
-   "report_at132: clipped text (top): \"2011–2100\" 645.67..707.64 y 84..101"
-  ],
+  "issues": [],
   "views": {
    "report": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -3536,7 +3497,7 @@
     ]
    },
    "report_end": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -4094,7 +4055,7 @@
     ]
    },
    "report_at132": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -4665,11 +4626,11 @@
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 12
+  "issueCount": 0
  },
  "i16": {
   "device": "852x393 side 59 bottom 21 island",
-  "renderedAt": "2026-11-07T17:24:06.166Z",
+  "renderedAt": "2026-11-07T18:02:40.479Z",
   "inputs": {
    "files": [
     "index.html",
@@ -4692,25 +4653,12 @@
     "../../shared/map_mena_d1_overlay.svg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "17d57ede7b8e35f2e65b5cd8225cbe4ec8c95b7e"
+   "sha1": "68195cafbc3ad328bd4bcf9ec265d29b0e6fcb2e"
   },
-  "issues": [
-   "report: ellipsis on \"تقرير الأمة\"",
-   "report: ellipsis on \"مصر\"",
-   "report: clipped text (top): \"·\" 703.64..713.17 y 84..101",
-   "report: clipped text (top): \"2011–2100\" 641.67..703.64 y 84..101",
-   "report_end: ellipsis on \"تقرير الأمة\"",
-   "report_end: ellipsis on \"مصر\"",
-   "report_end: clipped text (top): \"·\" 703.64..713.17 y 84..101",
-   "report_end: clipped text (top): \"2011–2100\" 641.67..703.64 y 84..101",
-   "report_at135: ellipsis on \"تقرير الأمة\"",
-   "report_at135: ellipsis on \"مصر\"",
-   "report_at135: clipped text (top): \"·\" 703.64..713.17 y 84..101",
-   "report_at135: clipped text (top): \"2011–2100\" 641.67..703.64 y 84..101"
-  ],
+  "issues": [],
   "views": {
    "report": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -5308,7 +5256,7 @@
     ]
    },
    "report_end": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -5855,7 +5803,7 @@
     ]
    },
    "report_at135": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -6415,11 +6363,11 @@
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 12
+  "issueCount": 0
  },
  "i16pro": {
   "device": "874x402 side 62 bottom 21 island",
-  "renderedAt": "2026-11-07T17:24:12.993Z",
+  "renderedAt": "2026-11-07T18:02:47.035Z",
   "inputs": {
    "files": [
     "index.html",
@@ -6442,21 +6390,12 @@
     "../../shared/map_mena_d1_overlay.svg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "17d57ede7b8e35f2e65b5cd8225cbe4ec8c95b7e"
+   "sha1": "68195cafbc3ad328bd4bcf9ec265d29b0e6fcb2e"
   },
-  "issues": [
-   "report: ellipsis on \"تقرير الأمة\"",
-   "report: ellipsis on \"مصر\"",
-   "report: clipped text (top): \"·\" 722.64..732.17 y 84..101",
-   "report: clipped text (top): \"2011–2100\" 660.67..722.64 y 84..101",
-   "report_end: ellipsis on \"تقرير الأمة\"",
-   "report_end: ellipsis on \"مصر\"",
-   "report_end: clipped text (top): \"·\" 722.64..732.17 y 84..101",
-   "report_end: clipped text (top): \"2011–2100\" 660.67..722.64 y 84..101"
-  ],
+  "issues": [],
   "views": {
    "report": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -7075,7 +7014,7 @@
     ]
    },
    "report_end": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -7661,11 +7600,11 @@
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 8
+  "issueCount": 0
  },
  "i11": {
   "device": "896x414 side 48 bottom 21 notch",
-  "renderedAt": "2026-11-07T17:24:18.810Z",
+  "renderedAt": "2026-11-07T18:02:52.859Z",
   "inputs": {
    "files": [
     "index.html",
@@ -7688,21 +7627,12 @@
     "../../shared/map_mena_d1_overlay.svg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "17d57ede7b8e35f2e65b5cd8225cbe4ec8c95b7e"
+   "sha1": "68195cafbc3ad328bd4bcf9ec265d29b0e6fcb2e"
   },
-  "issues": [
-   "report: ellipsis on \"تقرير الأمة\"",
-   "report: ellipsis on \"مصر\"",
-   "report: clipped text (top): \"·\" 758.64..768.17 y 84..101",
-   "report: clipped text (top): \"2011–2100\" 696.67..758.64 y 84..101",
-   "report_end: ellipsis on \"تقرير الأمة\"",
-   "report_end: ellipsis on \"مصر\"",
-   "report_end: clipped text (top): \"·\" 758.64..768.17 y 84..101",
-   "report_end: clipped text (top): \"2011–2100\" 696.67..758.64 y 84..101"
-  ],
+  "issues": [],
   "views": {
    "report": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -8340,7 +8270,7 @@
     ]
    },
    "report_end": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -8925,11 +8855,11 @@
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 8
+  "issueCount": 0
  },
  "i16promax": {
   "device": "956x440 side 62 bottom 21 island",
-  "renderedAt": "2026-11-07T17:24:24.801Z",
+  "renderedAt": "2026-11-07T18:02:58.903Z",
   "inputs": {
    "files": [
     "index.html",
@@ -8952,21 +8882,12 @@
     "../../shared/map_mena_d1_overlay.svg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "17d57ede7b8e35f2e65b5cd8225cbe4ec8c95b7e"
+   "sha1": "68195cafbc3ad328bd4bcf9ec265d29b0e6fcb2e"
   },
-  "issues": [
-   "report: ellipsis on \"تقرير الأمة\"",
-   "report: ellipsis on \"مصر\"",
-   "report: clipped text (top): \"·\" 804.64..814.17 y 84..101",
-   "report: clipped text (top): \"2011–2100\" 742.67..804.64 y 84..101",
-   "report_end: ellipsis on \"تقرير الأمة\"",
-   "report_end: ellipsis on \"مصر\"",
-   "report_end: clipped text (top): \"·\" 804.64..814.17 y 84..101",
-   "report_end: clipped text (top): \"2011–2100\" 742.67..804.64 y 84..101"
-  ],
+  "issues": [],
   "views": {
    "report": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -9626,7 +9547,7 @@
     ]
    },
    "report_end": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -10251,6 +10172,6 @@
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 8
+  "issueCount": 0
  }
 }

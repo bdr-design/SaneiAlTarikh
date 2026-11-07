@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-07T17:28:11.999Z",
+ "ranAt": "2026-11-07T18:06:42.533Z",
  "inputs": {
   "files": [
    "index.html",
@@ -22,34 +22,14 @@
    "../../shared/map_mena_d1_overlay.svg",
    "map_overlay_cairo.svg"
   ],
-  "sha1": "90274b19d93d0311b0748bbc8fe4ca9f4dcb9965"
+  "sha1": "e04dcf18078d36711f55e4cba3ac8a1220e97ee6"
  },
  "cleanIssues": {
-  "i16promax": [
-   "ellipsis on \"نهاية الحملة\"",
-   "clipped text (top): \"15\" 819.19..833 y 84..101",
-   "ellipsis on \"مارس\"",
-   "clipped text (top): \"2034\" 760.92..788.53 y 84..101"
-  ],
-  "i16promax_nuclear_end": [
-   "ellipsis on \"نهاية الحملة\"",
-   "clipped text (top): \"15\" 819.19..833 y 84..101",
-   "ellipsis on \"مارس\"",
-   "clipped text (top): \"2034\" 760.92..788.53 y 84..101"
-  ],
+  "i16promax": [],
+  "i16promax_nuclear_end": [],
   "i16promax coverage": [],
-  "se": [
-   "ellipsis on \"نهاية الحملة\"",
-   "clipped text (top): \"15\" 584.19..598 y 84..101",
-   "ellipsis on \"مارس\"",
-   "clipped text (top): \"2034\" 525.92..553.53 y 84..101"
-  ],
-  "se_nuclear_end": [
-   "ellipsis on \"نهاية الحملة\"",
-   "clipped text (top): \"15\" 584.19..598 y 84..101",
-   "ellipsis on \"مارس\"",
-   "clipped text (top): \"2034\" 525.92..553.53 y 84..101"
-  ],
+  "se": [],
+  "se_nuclear_end": [],
   "se coverage": []
  },
  "results": [
@@ -57,18 +37,14 @@
    "name": "type size",
    "ok": true,
    "sample": [
-    "font size 17 for \"نهاية الحملة\"",
-    "ellipsis on \"نهاية الحملة\"",
-    "clipped text (top): \"15\" 819.19..833 y 84..101"
+    "font size 17 for \"نهاية الحملة\""
    ]
   },
   {
    "name": "off-token colour",
    "ok": true,
    "sample": [
-    "text colour off-token rgb(136, 153, 170): \"نهاية الحملة\"",
-    "ellipsis on \"نهاية الحملة\"",
-    "clipped text (top): \"15\" 819.19..833 y 84..101"
+    "text colour off-token rgb(136, 153, 170): \"نهاية الحملة\""
    ]
   },
   {
@@ -76,35 +52,32 @@
    "ok": true,
    "sample": [
     "panel radius نهاية الحملة: 6 (want 12)",
-    "radius 6 for .sheet (want 12)",
-    "ellipsis on \"نهاية الحملة\""
+    "radius 6 for .sheet (want 12)"
    ]
   },
   {
    "name": "tap in the side inset",
    "ok": true,
    "sample": [
-    "ellipsis on \"نهاية الحملة\"",
-    "clipped text (top): \"15\" 849.19..863 y 84..101",
-    "ellipsis on \"مارس\""
+    "text in side inset: بلغ التصعيد النووي أعلى درجاته واستُخدم السلاح النووي. تتوقف الحملة هنا: لا تستطيع اللعبة أن تمثّل ما يلي ذلك بأمانة.",
+    "text in side inset: بلغ التصعيد النووي أعلى درجاته واستُخدم السلاح النووي. تتوقف الحملة هنا: لا تستطيع اللعبة أن تمثّل ما يلي ذلك بأمانة.",
+    "tap in side inset: العودة إلى آخر حفظ: 1 مارس"
    ]
   },
   {
    "name": "panel in the side inset",
    "ok": true,
    "sample": [
-    "ellipsis on \"نهاية الحملة\"",
-    "clipped text (top): \"15\" 849.19..863 y 84..101",
-    "ellipsis on \"مارس\""
+    "text in side inset: بلغ التصعيد النووي أعلى درجاته واستُخدم السلاح النووي. تتوقف الحملة هنا: لا تستطيع اللعبة أن تمثّل ما يلي ذلك بأمانة.",
+    "text in side inset: بلغ التصعيد النووي أعلى درجاته واستُخدم السلاح النووي. تتوقف الحملة هنا: لا تستطيع اللعبة أن تمثّل ما يلي ذلك بأمانة.",
+    "tap in side inset: العودة إلى آخر حفظ: 1 مارس"
    ]
   },
   {
    "name": "panel not opaque",
    "ok": true,
    "sample": [
-    "panel not opaque: نهاية الحملة rgba(9, 17, 25, 0.66)",
-    "ellipsis on \"نهاية الحملة\"",
-    "clipped text (top): \"15\" 819.19..833 y 84..101"
+    "panel not opaque: نهاية الحملة rgba(9, 17, 25, 0.66)"
    ]
   },
   {
@@ -112,269 +85,236 @@
    "ok": true,
    "sample": [
     "panel not opaque (opacity 0.60): نهاية الحملة",
-    "ellipsis on \"نهاية الحملة\"",
-    "clipped text (top): \"15\" 819.19..833 y 84..101"
+    "brief text not fully visible: نهاية الحملة",
+    "brief text not fully visible: 15 مارس 2034"
    ]
   },
   {
    "name": "Egypt covered",
    "ok": true,
    "sample": [
-    "ellipsis on \"نهاية الحملة\"",
-    "clipped text (top): \"15\" 819.19..833 y 84..101",
-    "ellipsis on \"مارس\""
+    "Nile delta covered by panel نهاية الحملة",
+    "Egypt covered by panel نهاية الحملة",
+    "Egypt under the hit box of العودة إلى آخر حفظ: 1 مارس"
    ]
   },
   {
    "name": "map dimmed",
    "ok": true,
    "sample": [
-    "ellipsis on \"نهاية الحملة\"",
-    "clipped text (top): \"15\" 819.19..833 y 84..101",
-    "ellipsis on \"مارس\""
+    "the map is dimmed (opacity 1.00, filter brightness(0.35))"
    ]
   },
   {
    "name": "map faded",
    "ok": true,
    "sample": [
-    "ellipsis on \"نهاية الحملة\"",
-    "clipped text (top): \"15\" 819.19..833 y 84..101",
-    "ellipsis on \"مارس\""
+    "the map is dimmed (opacity 0.30, filter none)"
    ]
   },
   {
    "name": "scrim over the map",
    "ok": true,
    "sample": [
-    "ellipsis on \"نهاية الحملة\"",
-    "clipped text (top): \"15\" 819.19..833 y 84..101",
-    "ellipsis on \"مارس\""
+    "something drawn over the map: DIV (rgba(0, 0, 0, 0.55))",
+    "contrast 1.92 for \"3\""
    ]
   },
   {
    "name": "sheet width",
    "ok": true,
    "sample": [
-    "ellipsis on \"نهاية الحملة\"",
-    "clipped text (top): \"15\" 819.19..833 y 84..101",
-    "ellipsis on \"مارس\""
+    "sheet width 330 (want round(clamp(43% of 832, 340, 380)), or the room the dock leaves if 330..: 358)"
    ]
   },
   {
    "name": "sheet top",
    "ok": true,
    "sample": [
-    "ellipsis on \"نهاية الحملة\"",
-    "clipped text (top): \"15\" 819.19..833 y 70..87",
-    "ellipsis on \"مارس\""
+    "hit overlap الاستقرار 22% / العودة إلى الخريطة",
+    "panel overlap الدولة: مصر، رئيس الدولة،  / نهاية الحملة",
+    "panel overlap الخزينة 41.2 مليار $ الاست / نهاية الحملة"
    ]
   },
   {
    "name": "dock hidden although it fits",
    "ok": true,
    "sample": [
-    "ellipsis on \"نهاية الحملة\"",
-    "clipped text (top): \"15\" 819.19..833 y 84..101",
-    "ellipsis on \"مارس\""
+    "dock hidden although it fits left of the sheet"
    ]
   },
   {
    "name": "dock shown on the SE",
    "ok": true,
    "sample": [
-    "ellipsis on \"نهاية الحملة\"",
-    "clipped text (top): \"15\" 584.19..598 y 84..101",
-    "ellipsis on \"مارس\""
+    "panel overlap الأقسام / نهاية الحملة",
+    "dock shown although it does not fit left of the sheet",
+    "dock not 4 pt in from the left end of its B3 line: x 140.0 w 387.0 y 323.0 (want x 12 w 387.0 y 323.0)"
    ]
   },
   {
    "name": "left stack moved",
    "ok": true,
    "sample": [
-    "ellipsis on \"نهاية الحملة\"",
-    "clipped text (top): \"15\" 819.19..833 y 84..101",
-    "ellipsis on \"مارس\""
+    "HUD element moved from its B3 position: .toast x 70.0..275.5 y 56.0..88.0",
+    "HUD element moved from its B3 position: .btn.mode x 70.0..191.6 y 96.0..128.0",
+    "HUD element moved from its B3 position: .btn.home x 70.0..141.5 y 136.0..168.0"
    ]
   },
   {
    "name": "map label cut",
    "ok": true,
    "sample": [
-    "ellipsis on \"نهاية الحملة\"",
-    "clipped text (top): \"15\" 819.19..833 y 84..101",
-    "ellipsis on \"مارس\""
+    "map label ليبيا sliced by the screen edge or the side inset",
+    "map label إيران sliced by the screen edge or the side inset",
+    "map label إيران squeezed between a panel and the screen edge"
    ]
   },
   {
    "name": "contrast",
    "ok": true,
    "sample": [
-    "ellipsis on \"نهاية الحملة\"",
-    "clipped text (top): \"15\" 819.19..833 y 84..101",
-    "ellipsis on \"مارس\""
+    "contrast 1 for \"بلغ التصعيد النووي أعلى \"",
+    "contrast 1 for \"بلغ التصعيد النووي أعلى \""
    ]
   },
   {
    "name": "identity line missing",
    "ok": true,
    "sample": [
-    "ellipsis on \"نهاية الحملة\"",
-    "clipped text (top): \"15\" 819.19..833 y 84..101",
-    "ellipsis on \"مارس\""
+    "panel top line none rgb(214, 187, 169) 2px (want the section colour, 2 pt, at the top)"
    ]
   },
   {
    "name": "emblem drawn grey",
    "ok": true,
    "sample": [
-    "ellipsis on \"نهاية الحملة\"",
-    "clipped text (top): \"15\" 819.19..833 y 84..101",
-    "ellipsis on \"مارس\""
+    "section emblem missing or not in the section colour"
    ]
   },
   {
    "name": "section colour on data",
    "ok": true,
    "sample": [
-    "ellipsis on \"نهاية الحملة\"",
-    "clipped text (top): \"15\" 819.19..833 y 84..101",
-    "ellipsis on \"مارس\""
+    "section colour on data text: \"15\"",
+    "section colour on data text: \"مارس\"",
+    "section colour on data text: \"2034\""
    ]
   },
   {
    "name": "money unit",
    "ok": true,
    "sample": [
-    "ellipsis on \"نهاية الحملة\"",
-    "clipped text (top): \"15\" 819.19..833 y 84..101",
-    "ellipsis on \"مارس\""
+    "money unit: «0.4 مليار» (under 1 billion is written in millions)",
+    "a number that is not a date: 0.4"
    ]
   },
   {
    "name": "sign outside its number",
    "ok": true,
    "sample": [
-    "ellipsis on \"نهاية الحملة\"",
-    "clipped text (top): \"15\" 819.19..833 y 84..101",
-    "ellipsis on \"مارس\""
+    "a sign outside its number: «تغير +3»",
+    "a number that is not a date: 3"
    ]
   },
   {
    "name": "colour alone",
    "ok": true,
    "sample": [
-    "ellipsis on \"نهاية الحملة\"",
-    "clipped text (top): \"15\" 819.19..833 y 84..101",
-    "ellipsis on \"مارس\""
+    "colour alone: «تراجع» has no arrow or icon"
    ]
   },
   {
    "name": "an image in the sheet",
    "ok": true,
    "sample": [
-    "ellipsis on \"نهاية الحملة\"",
-    "clipped text (top): \"15\" 819.19..833 y 84..101",
-    "ellipsis on \"مارس\""
+    "an image in the sheet"
    ]
   },
   {
    "name": "close not round",
    "ok": true,
    "sample": [
-    "close button is not round",
-    "ellipsis on \"نهاية الحملة\"",
-    "clipped text (top): \"15\" 819.19..833 y 84..101"
+    "close button is not round"
    ]
   },
   {
    "name": "label without a role",
    "ok": true,
    "sample": [
-    "ellipsis on \"نهاية الحملة\"",
-    "clipped text (top): \"15\" 819.19..833 y 84..101",
-    "ellipsis on \"مارس\""
+    "a11y: a label VoiceOver may skip (no role): «اختبار»"
    ]
   },
   {
    "name": "text overlap",
    "ok": true,
    "sample": [
-    "ellipsis on \"نهاية الحملة\"",
-    "clipped text (top): \"15\" 819.19..833 y 70..87",
-    "ellipsis on \"مارس\""
+    "text overlap \"نهاية الحملة\" / \"15\"",
+    "text overlap \"نهاية الحملة\" / \"مارس\"",
+    "text overlap \"نهاية الحملة\" / \"2034\""
    ]
   },
   {
    "name": "identity line colour",
    "ok": true,
    "sample": [
-    "ellipsis on \"نهاية الحملة\"",
-    "clipped text (top): \"15\" 819.19..833 y 84..101",
-    "ellipsis on \"مارس\""
+    "panel top line \"\" rgb(63, 224, 208) 2px (want the section colour, 2 pt, at the top)"
    ]
   },
   {
    "name": "emblem size",
    "ok": true,
    "sample": [
-    "ellipsis on \"نهاية الحملة\"",
-    "clipped text (top): \"15\" 819.19..833 y 84..101",
-    "ellipsis on \"مارس\""
+    "size 28.0x32.0 for .s-emb (want 32 x 32)"
    ]
   },
   {
    "name": "tile icons cyan",
    "ok": true,
    "sample": [
-    "ellipsis on \"نهاية الحملة\"",
-    "clipped text (top): \"15\" 819.19..833 y 84..101",
-    "ellipsis on \"مارس\""
+    "white touch off: .r-tile color rgb(127, 233, 255) (want rgb(234, 242, 247))",
+    "white touch off: .r-tile color rgb(127, 233, 255) (want rgb(234, 242, 247))"
    ]
   },
   {
    "name": "a long headline label",
    "ok": true,
    "sample": [
-    "ellipsis on \"نهاية الحملة\"",
-    "clipped text (top): \"15\" 819.19..833 y 84..101",
-    "ellipsis on \"مارس\""
+    "clipped text (sides): \"عنوان طويل جدًا لا يتسع لخانته أبدًا\" 385.38..539.25 y 124..141",
+    "text outside the sheet's 12 pt padding: \"عنوان طويل جدًا لا يتسع لخانته أبدًا\"",
+    "clipped text (sides): \"1\" 528.44..539.25 y 142..169"
    ]
   },
   {
    "name": "text wider than its box",
    "ok": true,
    "sample": [
-    "ellipsis on \"نهاية الحملة\"",
-    "clipped text (top): \"15\" 819.19..833 y 84..101",
-    "ellipsis on \"مارس\""
+    "text wider than its box: «1 مارس 2034 · قبل التصعي» (113 in 20)"
    ]
   },
   {
    "name": "a long status cell",
    "ok": true,
    "sample": [
-    "ellipsis on \"نهاية الحملة\"",
-    "clipped text (top): \"15\" 819.19..833 y 84..101",
-    "ellipsis on \"مارس\""
+    "clipped text (sides): \"قيمة طويلة جدًا لا تتسع لنصف الجدول\" 416.53..613.3 y 120.5..139.5",
+    "text outside the sheet's 12 pt padding: \"قيمة طويلة جدًا لا تتسع لنصف الجدول\"",
+    "horizontal overflow in خانةقيمة طويلة جدًا لا تتس"
    ]
   },
   {
    "name": "font weight (no tabs)",
    "ok": true,
    "sample": [
-    "ellipsis on \"نهاية الحملة\"",
     "font weight 11.5/700 for \"15\"",
-    "clipped text (top): \"15\" 819.19..833 y 84..101"
+    "font weight 11.5/700 for \"مارس\"",
+    "font weight 11.5/700 for \"2034\""
    ]
   },
   {
    "name": "a tab row on a one-body sheet",
    "ok": true,
    "sample": [
-    "ellipsis on \"نهاية الحملة\"",
-    "clipped text (top): \"15\" 819.19..833 y 84..101",
-    "ellipsis on \"مارس\""
+    "a tab row on a sheet that has one body"
    ]
   },
   {
@@ -382,107 +322,86 @@
    "ok": true,
    "sample": [
     "control height 40.00 for .r-x (want 32): العودة إلى الخريطة",
-    "close button is not round",
-    "ellipsis on \"نهاية الحملة\""
+    "close button is not round"
    ]
   },
   {
    "name": "icon size (no tabs)",
    "ok": true,
    "sample": [
-    "icon size 19x19 (want 16): i",
-    "ellipsis on \"نهاية الحملة\"",
-    "clipped text (top): \"15\" 819.19..833 y 84..101"
+    "icon size 19x19 (want 16): i"
    ]
   },
   {
    "name": "fades wrong (no tabs)",
    "ok": true,
    "sample": [
-    "ellipsis on \"نهاية الحملة\"",
-    "clipped text (top): \"15\" 584.19..598 y 84..101",
-    "ellipsis on \"مارس\""
+    "fades 0/1 do not match the scroll state (top 0, over 0.0)"
    ]
   },
   {
    "name": "a dock item marked open",
    "ok": true,
    "sample": [
-    "ellipsis on \"نهاية الحملة\"",
-    "clipped text (top): \"15\" 819.19..833 y 84..101",
-    "ellipsis on \"مارس\""
+    "a dock item is marked open under a sheet of no section"
    ]
   },
   {
    "name": "hint shown without content below",
    "ok": true,
    "sample": [
-    "ellipsis on \"نهاية الحملة\"",
-    "clipped text (top): \"15\" 584.19..598 y 84..101",
-    "ellipsis on \"مارس\""
+    "scroll hint chevron shown without content below"
    ]
   },
   {
    "name": "weekday wrong",
    "ok": true,
    "sample": [
-    "ellipsis on \"نهاية الحملة\"",
-    "clipped text (top): \"15\" 819.19..833 y 84..101",
-    "ellipsis on \"مارس\""
+    "the HUD date is not «الأربعاء 15 مارس 2034»: «السبت 15 مارس 2034»"
    ]
   },
   {
    "name": "another moment toast",
    "ok": true,
    "sample": [
-    "ellipsis on \"نهاية الحملة\"",
-    "clipped text (top): \"15\" 819.19..833 y 84..101",
-    "ellipsis on \"مارس\""
+    "the toast is not «انتهت الحملة»"
    ]
   },
   {
    "name": "clock looks live",
    "ok": true,
    "sample": [
-    "ellipsis on \"نهاية الحملة\"",
-    "clipped text (top): \"15\" 819.19..833 y 84..101",
-    "ellipsis on \"مارس\""
+    "the clock and the speed chip do not look and read disabled"
    ]
   },
   {
    "name": "speed menu still offered",
    "ok": true,
    "sample": [
-    "ellipsis on \"نهاية الحملة\"",
-    "clipped text (top): \"15\" 819.19..833 y 84..101",
-    "ellipsis on \"مارس\""
+    "the clock and the speed chip do not look and read disabled"
    ]
   },
   {
    "name": "brief text hidden (nuclear)",
    "ok": true,
    "sample": [
-    "clipped text (top): \"15\" 819.19..833 y 84..101",
-    "ellipsis on \"مارس\"",
-    "clipped text (top): \"2034\" 760.92..788.53 y 84..101"
+    "brief text not fully visible: نهاية الحملة"
    ]
   },
   {
    "name": "18 pt misuse (nuclear)",
    "ok": true,
    "sample": [
-    "ellipsis on \"نهاية الحملة\"",
-    "clipped text (top): \"15\" 819.19..833 y 84..101",
-    "ellipsis on \"مارس\""
+    "18 pt is for the panel's name and the adjusted values only: \"بلغ التصعيد النووي أعلى درجاته واستُخدم السلاح النووي. تتوقف الحملة هنا: لا تستطيع اللعبة أن تمثّل ما يلي ذلك بأمانة.\""
    ]
   },
   {
    "name": "clipped text (nuclear)",
    "ok": true,
    "sample": [
-    "ellipsis on \"نهاية الحملة\"",
-    "clipped text (top): \"15\" 819.19..833 y 84..101",
-    "ellipsis on \"مارس\""
+    "clipped text (sides): \"بلغ التصعيد النووي أعلى درجاته واستُخدم السلاح النووي. تتوقف الحملة هنا: لا تستطيع اللعبة أن تمثّل ما يلي ذلك بأمانة.\" 579.84..921 y 117..134",
+    "text outside the sheet's 12 pt padding: \"بلغ التصعيد النووي أعلى درجاته واستُخدم السلاح النووي. تتوقف الحملة هنا: لا تستطيع اللعبة أن تمثّل ما يلي ذلك بأمانة.\"",
+    "clipped text (sides): \"بلغ التصعيد النووي أعلى درجاته واستُخدم السلاح النووي. تتوقف الحملة هنا: لا تستطيع اللعبة أن تمثّل ما يلي ذلك بأمانة.\" 739.88..921 y 135..152"
    ]
   },
   {
@@ -490,179 +409,158 @@
    "ok": true,
    "sample": [
     "gap 6 on العودة إلى آخر حفظ1 مارس 2",
-    "gap 6 on العودة إلى آخر حفظ1 مارس 2",
-    "ellipsis on \"نهاية الحملة\""
+    "gap 6 on العودة إلى آخر حفظ1 مارس 2"
    ]
   },
   {
    "name": "faint text (nuclear)",
    "ok": true,
    "sample": [
-    "ellipsis on \"نهاية الحملة\"",
-    "clipped text (top): \"15\" 819.19..833 y 84..101",
-    "ellipsis on \"مارس\""
+    "brief text not fully visible: بلغ التصعيد النووي أعلى درجاته واستُخدم السلاح النووي. تتوقف الحملة هنا: لا تستطيع اللعبة أن تمثّل ما يلي ذلك بأمانة.",
+    "contrast 2.98 for \"بلغ التصعيد النووي أعلى \"",
+    "contrast 2.98 for \"بلغ التصعيد النووي أعلى \""
    ]
   },
   {
    "name": "% before its number (nuclear)",
    "ok": true,
    "sample": [
-    "ellipsis on \"نهاية الحملة\"",
-    "clipped text (top): \"15\" 819.19..833 y 84..101",
-    "ellipsis on \"مارس\""
+    "% shown before its number: \"نسبة 20%\"",
+    "the text is not the brief's",
+    "a number that is not a date: 20"
    ]
   },
   {
    "name": "row read in part (nuclear)",
    "ok": true,
    "sample": [
-    "ellipsis on \"نهاية الحملة\"",
-    "clipped text (top): \"15\" 819.19..833 y 84..101",
-    "ellipsis on \"مارس\""
+    "a11y: «العودة إلى آخر حفظ» does not read its numbers",
+    "a11y: «العودة إلى آخر حفظ. يفتح» does not read all it shows: مارس قبل التصعيد 1"
    ]
   },
   {
    "name": "clock running",
    "ok": true,
    "sample": [
-    "ellipsis on \"نهاية الحملة\"",
-    "clipped text (top): \"15\" 819.19..833 y 84..101",
-    "ellipsis on \"مارس\""
+    "the clock is not shown stopped for good (play glyph, «الحملة منتهية», disabled)"
    ]
   },
   {
    "name": "date off",
    "ok": true,
    "sample": [
-    "ellipsis on \"نهاية الحملة\"",
-    "clipped text (top): \"15\" 819.19..833 y 84..101",
-    "ellipsis on \"مارس\""
+    "the HUD date is not «الأربعاء 15 مارس 2034»: «الأحد 1 يناير 2011»",
+    "the HUD date is not the end date 15 March 2034"
    ]
   },
   {
    "name": "text changed",
    "ok": true,
    "sample": [
-    "ellipsis on \"نهاية الحملة\"",
-    "clipped text (top): \"15\" 819.19..833 y 84..101",
-    "ellipsis on \"مارس\""
+    "the text is not the brief's",
+    "brief text missing: بلغ التصعيد النووي أعلى درجاته واستُخدم السلاح النووي. تتوقف الحملة هنا: لا تستطيع اللعبة أن تمثّل ما يلي ذلك بأمانة."
    ]
   },
   {
    "name": "a score shown",
    "ok": true,
    "sample": [
-    "ellipsis on \"نهاية الحملة\"",
-    "clipped text (top): \"15\" 819.19..833 y 84..101",
-    "ellipsis on \"مارس\""
+    "a number that is not a date: 41",
+    "a drama or score word: نتيجة"
    ]
   },
   {
    "name": "an image strip",
    "ok": true,
    "sample": [
-    "ellipsis on \"نهاية الحملة\"",
-    "clipped text (top): \"15\" 819.19..833 y 84..101",
-    "ellipsis on \"مارس\""
+    "an image in the nuclear end's header",
+    "contrast 3.1 for \"نهاية الحملة\"",
+    "contrast 2.64 for \"15\""
    ]
   },
   {
    "name": "a country named",
    "ok": true,
    "sample": [
-    "ellipsis on \"نهاية الحملة\"",
-    "clipped text (top): \"15\" 819.19..833 y 84..101",
-    "ellipsis on \"مارس\""
+    "the text is not the brief's",
+    "a country named in the text: إيران",
+    "brief text missing: بلغ التصعيد النووي أعلى درجاته واستُخدم السلاح النووي. تتوقف الحملة هنا: لا تستطيع اللعبة أن تمثّل ما يلي ذلك بأمانة."
    ]
   },
   {
    "name": "a country in a note",
    "ok": true,
    "sample": [
-    "ellipsis on \"نهاية الحملة\"",
-    "clipped text (top): \"15\" 819.19..833 y 84..101",
-    "ellipsis on \"مارس\""
+    "a country named in the text: إيران"
    ]
   },
   {
    "name": "a drama word",
    "ok": true,
    "sample": [
-    "ellipsis on \"نهاية الحملة\"",
-    "clipped text (top): \"15\" 819.19..833 y 84..101",
-    "ellipsis on \"مارس\""
+    "a drama or score word: كارثة",
+    "brief text missing: 15 مارس 2034"
    ]
   },
   {
    "name": "save after the end",
    "ok": true,
    "sample": [
-    "ellipsis on \"نهاية الحملة\"",
-    "clipped text (top): \"15\" 819.19..833 y 84..101",
-    "ellipsis on \"مارس\""
+    "a11y: «العودة إلى آخر حفظ» does not read its numbers",
+    "a11y: «العودة إلى آخر حفظ: 1 ما» does not read all it shows: 20",
+    "the last save is not before the end"
    ]
   },
   {
    "name": "a way out lost",
    "ok": true,
    "sample": [
-    "ellipsis on \"نهاية الحملة\"",
-    "clipped text (top): \"15\" 819.19..833 y 84..101",
-    "ellipsis on \"مارس\""
+    "the ways out are «العودة إلى آخر حفظ»",
+    "brief text missing: لعبة جديدة",
+    "brief text missing: من القائمة الرئيسية"
    ]
   },
   {
    "name": "link silent",
    "ok": true,
    "sample": [
-    "ellipsis on \"نهاية الحملة\"",
-    "clipped text (top): \"15\" 819.19..833 y 84..101",
-    "ellipsis on \"مارس\""
+    "a11y: a link row does not say where it leads"
    ]
   },
   {
    "name": "Mubarak in 2034",
    "ok": true,
    "sample": [
-    "ellipsis on \"نهاية الحملة\"",
-    "clipped text (top): \"15\" 819.19..833 y 84..101",
-    "ellipsis on \"مارس\""
+    "the nation card names a real person in 2034 (it must say «رئيس الدولة»)"
    ]
   },
   {
    "name": "old toast",
    "ok": true,
    "sample": [
-    "ellipsis on \"نهاية الحملة\"",
-    "clipped text (top): \"15\" 819.19..833 y 84..101",
-    "ellipsis on \"مارس\""
+    "the toast is not «انتهت الحملة»",
+    "the toast does not say the campaign ended"
    ]
   },
   {
    "name": "close silent",
    "ok": true,
    "sample": [
-    "ellipsis on \"نهاية الحملة\"",
-    "clipped text (top): \"15\" 819.19..833 y 84..101",
-    "ellipsis on \"مارس\""
+    "a11y: the close button does not say where it leads"
    ]
   },
   {
    "name": "HUD trend moving",
    "ok": true,
    "sample": [
-    "ellipsis on \"نهاية الحملة\"",
-    "clipped text (top): \"15\" 819.19..833 y 84..101",
-    "ellipsis on \"مارس\""
+    "the HUD «الخزينة» moves while the clock is stopped"
    ]
   },
   {
    "name": "HUD 2011 value",
    "ok": true,
    "sample": [
-    "ellipsis on \"نهاية الحملة\"",
-    "clipped text (top): \"15\" 819.19..833 y 84..101",
-    "ellipsis on \"مارس\""
+    "the HUD keeps the 2011 values: الخزينة"
    ]
   },
   {

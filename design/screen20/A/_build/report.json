@@ -1,7 +1,7 @@
 {
  "se": {
   "device": "667x375 side 0 bottom 0 none",
-  "renderedAt": "2026-11-07T17:32:37.421Z",
+  "renderedAt": "2026-11-07T18:11:11.413Z",
   "inputs": {
    "files": [
     "index.html",
@@ -25,49 +25,12 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "ba7417046822130749df83e8cb9e0ace0aefaa6c"
+   "sha1": "5b49cb515bb1b3875ca67ba5954bbc925a661f95"
   },
-  "issues": [
-   "goods: ellipsis on \"الأسواق\"",
-   "goods: ellipsis on \"مصر\"",
-   "goods: clipped text (top): \"·\" 569.64..579.17 y 84..101",
-   "goods: ellipsis on \"التجارة والصناعة\"",
-   "goods_end: ellipsis on \"الأسواق\"",
-   "goods_end: ellipsis on \"مصر\"",
-   "goods_end: clipped text (top): \"·\" 569.64..579.17 y 84..101",
-   "goods_end: ellipsis on \"التجارة والصناعة\"",
-   "industry: ellipsis on \"الأسواق\"",
-   "industry: ellipsis on \"مصر\"",
-   "industry: clipped text (top): \"·\" 569.64..579.17 y 84..101",
-   "industry: ellipsis on \"التجارة والصناعة\"",
-   "industry_end: ellipsis on \"الأسواق\"",
-   "industry_end: ellipsis on \"مصر\"",
-   "industry_end: clipped text (top): \"·\" 569.64..579.17 y 84..101",
-   "industry_end: ellipsis on \"التجارة والصناعة\"",
-   "routes: ellipsis on \"الأسواق\"",
-   "routes: ellipsis on \"مصر\"",
-   "routes: clipped text (top): \"·\" 569.64..579.17 y 84..101",
-   "routes: ellipsis on \"التجارة والصناعة\"",
-   "routes_end: ellipsis on \"الأسواق\"",
-   "routes_end: ellipsis on \"مصر\"",
-   "routes_end: clipped text (top): \"·\" 569.64..579.17 y 84..101",
-   "routes_end: ellipsis on \"التجارة والصناعة\"",
-   "goods_at86: ellipsis on \"الأسواق\"",
-   "goods_at86: ellipsis on \"مصر\"",
-   "goods_at86: clipped text (top): \"·\" 569.64..579.17 y 84..101",
-   "goods_at86: ellipsis on \"التجارة والصناعة\"",
-   "goods_at172: ellipsis on \"الأسواق\"",
-   "goods_at172: ellipsis on \"مصر\"",
-   "goods_at172: clipped text (top): \"·\" 569.64..579.17 y 84..101",
-   "goods_at172: ellipsis on \"التجارة والصناعة\"",
-   "industry_at86: ellipsis on \"الأسواق\"",
-   "industry_at86: ellipsis on \"مصر\"",
-   "industry_at86: clipped text (top): \"·\" 569.64..579.17 y 84..101",
-   "industry_at86: ellipsis on \"التجارة والصناعة\""
-  ],
+  "issues": [],
   "views": {
    "goods": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -541,7 +504,7 @@
     ]
    },
    "goods_end": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -986,7 +949,7 @@
     ]
    },
    "industry": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -1384,7 +1347,7 @@
     ]
    },
    "industry_end": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -1784,7 +1747,7 @@
     ]
    },
    "routes": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -2214,7 +2177,7 @@
     ]
    },
    "routes_end": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -2644,7 +2607,7 @@
     ]
    },
    "goods_at86": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -3092,7 +3055,7 @@
     ]
    },
    "goods_at172": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -3537,7 +3500,7 @@
     ]
    },
    "industry_at86": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -3960,11 +3923,11 @@
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 36
+  "issueCount": 0
  },
  "mini": {
   "device": "812x375 side 50 bottom 21 notch",
-  "renderedAt": "2026-11-07T17:32:53.082Z",
+  "renderedAt": "2026-11-07T18:11:26.539Z",
   "inputs": {
    "files": [
     "index.html",
@@ -3988,49 +3951,12 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "ba7417046822130749df83e8cb9e0ace0aefaa6c"
+   "sha1": "5b49cb515bb1b3875ca67ba5954bbc925a661f95"
   },
-  "issues": [
-   "goods: ellipsis on \"الأسواق\"",
-   "goods: ellipsis on \"مصر\"",
-   "goods: clipped text (top): \"·\" 672.64..682.17 y 84..101",
-   "goods: ellipsis on \"التجارة والصناعة\"",
-   "goods_end: ellipsis on \"الأسواق\"",
-   "goods_end: ellipsis on \"مصر\"",
-   "goods_end: clipped text (top): \"·\" 672.64..682.17 y 84..101",
-   "goods_end: ellipsis on \"التجارة والصناعة\"",
-   "industry: ellipsis on \"الأسواق\"",
-   "industry: ellipsis on \"مصر\"",
-   "industry: clipped text (top): \"·\" 672.64..682.17 y 84..101",
-   "industry: ellipsis on \"التجارة والصناعة\"",
-   "industry_end: ellipsis on \"الأسواق\"",
-   "industry_end: ellipsis on \"مصر\"",
-   "industry_end: clipped text (top): \"·\" 672.64..682.17 y 84..101",
-   "industry_end: ellipsis on \"التجارة والصناعة\"",
-   "routes: ellipsis on \"الأسواق\"",
-   "routes: ellipsis on \"مصر\"",
-   "routes: clipped text (top): \"·\" 672.64..682.17 y 84..101",
-   "routes: ellipsis on \"التجارة والصناعة\"",
-   "routes_end: ellipsis on \"الأسواق\"",
-   "routes_end: ellipsis on \"مصر\"",
-   "routes_end: clipped text (top): \"·\" 672.64..682.17 y 84..101",
-   "routes_end: ellipsis on \"التجارة والصناعة\"",
-   "goods_at72: ellipsis on \"الأسواق\"",
-   "goods_at72: ellipsis on \"مصر\"",
-   "goods_at72: clipped text (top): \"·\" 672.64..682.17 y 84..101",
-   "goods_at72: ellipsis on \"التجارة والصناعة\"",
-   "goods_at144: ellipsis on \"الأسواق\"",
-   "goods_at144: ellipsis on \"مصر\"",
-   "goods_at144: clipped text (top): \"·\" 672.64..682.17 y 84..101",
-   "goods_at144: ellipsis on \"التجارة والصناعة\"",
-   "industry_at72: ellipsis on \"الأسواق\"",
-   "industry_at72: ellipsis on \"مصر\"",
-   "industry_at72: clipped text (top): \"·\" 672.64..682.17 y 84..101",
-   "industry_at72: ellipsis on \"التجارة والصناعة\""
-  ],
+  "issues": [],
   "views": {
    "goods": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -4511,7 +4437,7 @@
     ]
    },
    "goods_end": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -4963,7 +4889,7 @@
     ]
    },
    "industry": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -5358,7 +5284,7 @@
     ]
    },
    "industry_end": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -5760,7 +5686,7 @@
     ]
    },
    "routes": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -6187,7 +6113,7 @@
     ]
    },
    "routes_end": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -6619,7 +6545,7 @@
     ]
    },
    "goods_at72": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -7065,7 +6991,7 @@
     ]
    },
    "goods_at144": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -7502,7 +7428,7 @@
     ]
    },
    "industry_at72": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -7920,11 +7846,11 @@
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 36
+  "issueCount": 0
  },
  "i14": {
   "device": "844x390 side 47 bottom 21 notch",
-  "renderedAt": "2026-11-07T17:33:09.583Z",
+  "renderedAt": "2026-11-07T18:11:43.225Z",
   "inputs": {
    "files": [
     "index.html",
@@ -7948,49 +7874,12 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "ba7417046822130749df83e8cb9e0ace0aefaa6c"
+   "sha1": "5b49cb515bb1b3875ca67ba5954bbc925a661f95"
   },
-  "issues": [
-   "goods: ellipsis on \"الأسواق\"",
-   "goods: ellipsis on \"مصر\"",
-   "goods: clipped text (top): \"·\" 707.64..717.17 y 84..101",
-   "goods: ellipsis on \"التجارة والصناعة\"",
-   "goods_end: ellipsis on \"الأسواق\"",
-   "goods_end: ellipsis on \"مصر\"",
-   "goods_end: clipped text (top): \"·\" 707.64..717.17 y 84..101",
-   "goods_end: ellipsis on \"التجارة والصناعة\"",
-   "industry: ellipsis on \"الأسواق\"",
-   "industry: ellipsis on \"مصر\"",
-   "industry: clipped text (top): \"·\" 707.64..717.17 y 84..101",
-   "industry: ellipsis on \"التجارة والصناعة\"",
-   "industry_end: ellipsis on \"الأسواق\"",
-   "industry_end: ellipsis on \"مصر\"",
-   "industry_end: clipped text (top): \"·\" 707.64..717.17 y 84..101",
-   "industry_end: ellipsis on \"التجارة والصناعة\"",
-   "routes: ellipsis on \"الأسواق\"",
-   "routes: ellipsis on \"مصر\"",
-   "routes: clipped text (top): \"·\" 707.64..717.17 y 84..101",
-   "routes: ellipsis on \"التجارة والصناعة\"",
-   "routes_end: ellipsis on \"الأسواق\"",
-   "routes_end: ellipsis on \"مصر\"",
-   "routes_end: clipped text (top): \"·\" 707.64..717.17 y 84..101",
-   "routes_end: ellipsis on \"التجارة والصناعة\"",
-   "goods_at87: ellipsis on \"الأسواق\"",
-   "goods_at87: ellipsis on \"مصر\"",
-   "goods_at87: clipped text (top): \"·\" 707.64..717.17 y 84..101",
-   "goods_at87: ellipsis on \"التجارة والصناعة\"",
-   "goods_at174: ellipsis on \"الأسواق\"",
-   "goods_at174: ellipsis on \"مصر\"",
-   "goods_at174: clipped text (top): \"·\" 707.64..717.17 y 84..101",
-   "goods_at174: ellipsis on \"التجارة والصناعة\"",
-   "industry_at87: ellipsis on \"الأسواق\"",
-   "industry_at87: ellipsis on \"مصر\"",
-   "industry_at87: clipped text (top): \"·\" 707.64..717.17 y 84..101",
-   "industry_at87: ellipsis on \"التجارة والصناعة\""
-  ],
+  "issues": [],
   "views": {
    "goods": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -8586,7 +8475,7 @@
     ]
    },
    "goods_end": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -9148,7 +9037,7 @@
     ]
    },
    "industry": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -9663,7 +9552,7 @@
     ]
    },
    "industry_end": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -10185,7 +10074,7 @@
     ]
    },
    "routes": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -10732,7 +10621,7 @@
     ]
    },
    "routes_end": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -11279,7 +11168,7 @@
     ]
    },
    "goods_at87": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -11844,7 +11733,7 @@
     ]
    },
    "goods_at174": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -12406,7 +12295,7 @@
     ]
    },
    "industry_at87": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -12946,11 +12835,11 @@
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 36
+  "issueCount": 0
  },
  "i16": {
   "device": "852x393 side 59 bottom 21 island",
-  "renderedAt": "2026-11-07T17:33:26.478Z",
+  "renderedAt": "2026-11-07T18:11:59.537Z",
   "inputs": {
    "files": [
     "index.html",
@@ -12974,45 +12863,12 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "ba7417046822130749df83e8cb9e0ace0aefaa6c"
+   "sha1": "5b49cb515bb1b3875ca67ba5954bbc925a661f95"
   },
-  "issues": [
-   "goods: ellipsis on \"الأسواق\"",
-   "goods: ellipsis on \"مصر\"",
-   "goods: clipped text (top): \"·\" 703.64..713.17 y 84..101",
-   "goods: ellipsis on \"التجارة والصناعة\"",
-   "goods_end: ellipsis on \"الأسواق\"",
-   "goods_end: ellipsis on \"مصر\"",
-   "goods_end: clipped text (top): \"·\" 703.64..713.17 y 84..101",
-   "goods_end: ellipsis on \"التجارة والصناعة\"",
-   "industry: ellipsis on \"الأسواق\"",
-   "industry: ellipsis on \"مصر\"",
-   "industry: clipped text (top): \"·\" 703.64..713.17 y 84..101",
-   "industry: ellipsis on \"التجارة والصناعة\"",
-   "industry_end: ellipsis on \"الأسواق\"",
-   "industry_end: ellipsis on \"مصر\"",
-   "industry_end: clipped text (top): \"·\" 703.64..713.17 y 84..101",
-   "industry_end: ellipsis on \"التجارة والصناعة\"",
-   "routes: ellipsis on \"الأسواق\"",
-   "routes: ellipsis on \"مصر\"",
-   "routes: clipped text (top): \"·\" 703.64..713.17 y 84..101",
-   "routes: ellipsis on \"التجارة والصناعة\"",
-   "routes_end: ellipsis on \"الأسواق\"",
-   "routes_end: ellipsis on \"مصر\"",
-   "routes_end: clipped text (top): \"·\" 703.64..713.17 y 84..101",
-   "routes_end: ellipsis on \"التجارة والصناعة\"",
-   "goods_at90: ellipsis on \"الأسواق\"",
-   "goods_at90: ellipsis on \"مصر\"",
-   "goods_at90: clipped text (top): \"·\" 703.64..713.17 y 84..101",
-   "goods_at90: ellipsis on \"التجارة والصناعة\"",
-   "industry_at90: ellipsis on \"الأسواق\"",
-   "industry_at90: ellipsis on \"مصر\"",
-   "industry_at90: clipped text (top): \"·\" 703.64..713.17 y 84..101",
-   "industry_at90: ellipsis on \"التجارة والصناعة\""
-  ],
+  "issues": [],
   "views": {
    "goods": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -13602,7 +13458,7 @@
     ]
    },
    "goods_end": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -14153,7 +14009,7 @@
     ]
    },
    "industry": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -14662,7 +14518,7 @@
     ]
    },
    "industry_end": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -15173,7 +15029,7 @@
     ]
    },
    "routes": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -15709,7 +15565,7 @@
     ]
    },
    "routes_end": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -16245,7 +16101,7 @@
     ]
    },
    "goods_at90": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -16794,7 +16650,7 @@
     ]
    },
    "industry_at90": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -17323,11 +17179,11 @@
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 32
+  "issueCount": 0
  },
  "i16pro": {
   "device": "874x402 side 62 bottom 21 island",
-  "renderedAt": "2026-11-07T17:33:42.315Z",
+  "renderedAt": "2026-11-07T18:12:15.060Z",
   "inputs": {
    "files": [
     "index.html",
@@ -17351,45 +17207,12 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "ba7417046822130749df83e8cb9e0ace0aefaa6c"
+   "sha1": "5b49cb515bb1b3875ca67ba5954bbc925a661f95"
   },
-  "issues": [
-   "goods: ellipsis on \"الأسواق\"",
-   "goods: ellipsis on \"مصر\"",
-   "goods: clipped text (top): \"·\" 722.64..732.17 y 84..101",
-   "goods: ellipsis on \"التجارة والصناعة\"",
-   "goods_end: ellipsis on \"الأسواق\"",
-   "goods_end: ellipsis on \"مصر\"",
-   "goods_end: clipped text (top): \"·\" 722.64..732.17 y 84..101",
-   "goods_end: ellipsis on \"التجارة والصناعة\"",
-   "industry: ellipsis on \"الأسواق\"",
-   "industry: ellipsis on \"مصر\"",
-   "industry: clipped text (top): \"·\" 722.64..732.17 y 84..101",
-   "industry: ellipsis on \"التجارة والصناعة\"",
-   "industry_end: ellipsis on \"الأسواق\"",
-   "industry_end: ellipsis on \"مصر\"",
-   "industry_end: clipped text (top): \"·\" 722.64..732.17 y 84..101",
-   "industry_end: ellipsis on \"التجارة والصناعة\"",
-   "routes: ellipsis on \"الأسواق\"",
-   "routes: ellipsis on \"مصر\"",
-   "routes: clipped text (top): \"·\" 722.64..732.17 y 84..101",
-   "routes: ellipsis on \"التجارة والصناعة\"",
-   "routes_end: ellipsis on \"الأسواق\"",
-   "routes_end: ellipsis on \"مصر\"",
-   "routes_end: clipped text (top): \"·\" 722.64..732.17 y 84..101",
-   "routes_end: ellipsis on \"التجارة والصناعة\"",
-   "goods_at99: ellipsis on \"الأسواق\"",
-   "goods_at99: ellipsis on \"مصر\"",
-   "goods_at99: clipped text (top): \"·\" 722.64..732.17 y 84..101",
-   "goods_at99: ellipsis on \"التجارة والصناعة\"",
-   "industry_at99: ellipsis on \"الأسواق\"",
-   "industry_at99: ellipsis on \"مصر\"",
-   "industry_at99: clipped text (top): \"·\" 722.64..732.17 y 84..101",
-   "industry_at99: ellipsis on \"التجارة والصناعة\""
-  ],
+  "issues": [],
   "views": {
    "goods": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -18005,7 +17828,7 @@
     ]
    },
    "goods_end": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -18582,7 +18405,7 @@
     ]
    },
    "industry": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -19102,7 +18925,7 @@
     ]
    },
    "industry_end": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -19629,7 +19452,7 @@
     ]
    },
    "routes": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -20176,7 +19999,7 @@
     ]
    },
    "routes_end": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -20723,7 +20546,7 @@
     ]
    },
    "goods_at99": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -21288,7 +21111,7 @@
     ]
    },
    "industry_at99": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -21828,11 +21651,11 @@
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 32
+  "issueCount": 0
  },
  "i11": {
   "device": "896x414 side 48 bottom 21 notch",
-  "renderedAt": "2026-11-07T17:33:58.217Z",
+  "renderedAt": "2026-11-07T18:12:30.315Z",
   "inputs": {
    "files": [
     "index.html",
@@ -21856,41 +21679,12 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "ba7417046822130749df83e8cb9e0ace0aefaa6c"
+   "sha1": "5b49cb515bb1b3875ca67ba5954bbc925a661f95"
   },
-  "issues": [
-   "goods: ellipsis on \"الأسواق\"",
-   "goods: ellipsis on \"مصر\"",
-   "goods: clipped text (top): \"·\" 758.64..768.17 y 84..101",
-   "goods: ellipsis on \"التجارة والصناعة\"",
-   "goods_end: ellipsis on \"الأسواق\"",
-   "goods_end: ellipsis on \"مصر\"",
-   "goods_end: clipped text (top): \"·\" 758.64..768.17 y 84..101",
-   "goods_end: ellipsis on \"التجارة والصناعة\"",
-   "industry: ellipsis on \"الأسواق\"",
-   "industry: ellipsis on \"مصر\"",
-   "industry: clipped text (top): \"·\" 758.64..768.17 y 84..101",
-   "industry: ellipsis on \"التجارة والصناعة\"",
-   "industry_end: ellipsis on \"الأسواق\"",
-   "industry_end: ellipsis on \"مصر\"",
-   "industry_end: clipped text (top): \"·\" 758.64..768.17 y 84..101",
-   "industry_end: ellipsis on \"التجارة والصناعة\"",
-   "routes: ellipsis on \"الأسواق\"",
-   "routes: ellipsis on \"مصر\"",
-   "routes: clipped text (top): \"·\" 758.64..768.17 y 84..101",
-   "routes: ellipsis on \"التجارة والصناعة\"",
-   "routes_end: ellipsis on \"الأسواق\"",
-   "routes_end: ellipsis on \"مصر\"",
-   "routes_end: clipped text (top): \"·\" 758.64..768.17 y 84..101",
-   "routes_end: ellipsis on \"التجارة والصناعة\"",
-   "goods_at111: ellipsis on \"الأسواق\"",
-   "goods_at111: ellipsis on \"مصر\"",
-   "goods_at111: clipped text (top): \"·\" 758.64..768.17 y 84..101",
-   "goods_at111: ellipsis on \"التجارة والصناعة\""
-  ],
+  "issues": [],
   "views": {
    "goods": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -22510,7 +22304,7 @@
     ]
    },
    "goods_end": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -23096,7 +22890,7 @@
     ]
    },
    "industry": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -23615,7 +23409,7 @@
     ]
    },
    "industry_end": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -24141,7 +23935,7 @@
     ]
    },
    "routes": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -24687,7 +24481,7 @@
     ]
    },
    "routes_end": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -25233,7 +25027,7 @@
     ]
    },
    "goods_at111": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -25837,11 +25631,11 @@
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 28
+  "issueCount": 0
  },
  "i16promax": {
   "device": "956x440 side 62 bottom 21 island",
-  "renderedAt": "2026-11-07T17:34:13.237Z",
+  "renderedAt": "2026-11-07T18:12:45.376Z",
   "inputs": {
    "files": [
     "index.html",
@@ -25865,37 +25659,12 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "ba7417046822130749df83e8cb9e0ace0aefaa6c"
+   "sha1": "5b49cb515bb1b3875ca67ba5954bbc925a661f95"
   },
-  "issues": [
-   "goods: ellipsis on \"الأسواق\"",
-   "goods: ellipsis on \"مصر\"",
-   "goods: clipped text (top): \"·\" 804.64..814.17 y 84..101",
-   "goods: ellipsis on \"التجارة والصناعة\"",
-   "goods_end: ellipsis on \"الأسواق\"",
-   "goods_end: ellipsis on \"مصر\"",
-   "goods_end: clipped text (top): \"·\" 804.64..814.17 y 84..101",
-   "goods_end: ellipsis on \"التجارة والصناعة\"",
-   "industry: ellipsis on \"الأسواق\"",
-   "industry: ellipsis on \"مصر\"",
-   "industry: clipped text (top): \"·\" 804.64..814.17 y 84..101",
-   "industry: ellipsis on \"التجارة والصناعة\"",
-   "industry_end: ellipsis on \"الأسواق\"",
-   "industry_end: ellipsis on \"مصر\"",
-   "industry_end: clipped text (top): \"·\" 804.64..814.17 y 84..101",
-   "industry_end: ellipsis on \"التجارة والصناعة\"",
-   "routes: ellipsis on \"الأسواق\"",
-   "routes: ellipsis on \"مصر\"",
-   "routes: clipped text (top): \"·\" 804.64..814.17 y 84..101",
-   "routes: ellipsis on \"التجارة والصناعة\"",
-   "routes_end: ellipsis on \"الأسواق\"",
-   "routes_end: ellipsis on \"مصر\"",
-   "routes_end: clipped text (top): \"·\" 804.64..814.17 y 84..101",
-   "routes_end: ellipsis on \"التجارة والصناعة\""
-  ],
+  "issues": [],
   "views": {
    "goods": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -26540,7 +26309,7 @@
     ]
    },
    "goods_end": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -27146,7 +26915,7 @@
     ]
    },
    "industry": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -27680,7 +27449,7 @@
     ]
    },
    "industry_end": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -28221,7 +27990,7 @@
     ]
    },
    "routes": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -28767,7 +28536,7 @@
     ]
    },
    "routes_end": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -29341,6 +29110,6 @@
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 24
+  "issueCount": 0
  }
 }

@@ -1,7 +1,7 @@
 {
  "se": {
   "device": "667x375 side 0 bottom 0 none",
-  "renderedAt": "2026-11-07T17:30:15.999Z",
+  "renderedAt": "2026-11-07T18:08:46.158Z",
   "inputs": {
    "files": [
     "index.html",
@@ -28,29 +28,12 @@
     "../../shared/map_mena_d1_overlay.svg",
     "header_cairo.jpg"
    ],
-   "sha1": "4174875a4cc00523803de97fb9bee1b005027c79"
+   "sha1": "d7109d945e253cd4093c2c80c6a8c78689d36741"
   },
-  "issues": [
-   "modes: ellipsis on \"الخريطة\"",
-   "modes: ellipsis on \"أوضاع الخريطة\"",
-   "modes: clipped text (top): \"·\" 521.84..531.38 y 84..101",
-   "modes: ellipsis on \"المعروض: الأمن\"",
-   "modes_end: ellipsis on \"الخريطة\"",
-   "modes_end: ellipsis on \"أوضاع الخريطة\"",
-   "modes_end: clipped text (top): \"·\" 521.84..531.38 y 84..101",
-   "modes_end: ellipsis on \"المعروض: الأمن\"",
-   "modes_at131: ellipsis on \"الخريطة\"",
-   "modes_at131: ellipsis on \"أوضاع الخريطة\"",
-   "modes_at131: clipped text (top): \"·\" 521.84..531.38 y 84..101",
-   "modes_at131: ellipsis on \"المعروض: الأمن\"",
-   "modes_at262: ellipsis on \"الخريطة\"",
-   "modes_at262: ellipsis on \"أوضاع الخريطة\"",
-   "modes_at262: clipped text (top): \"·\" 521.84..531.38 y 84..101",
-   "modes_at262: ellipsis on \"المعروض: الأمن\""
-  ],
+  "issues": [],
   "views": {
    "modes": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -503,7 +486,7 @@
     ]
    },
    "modes_end": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -950,7 +933,7 @@
     ]
    },
    "modes_at131": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -1383,7 +1366,7 @@
     ]
    },
    "modes_at262": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -1830,11 +1813,11 @@
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 16
+  "issueCount": 0
  },
  "mini": {
   "device": "812x375 side 50 bottom 21 notch",
-  "renderedAt": "2026-11-07T17:30:23.603Z",
+  "renderedAt": "2026-11-07T18:08:54.188Z",
   "inputs": {
    "files": [
     "index.html",
@@ -1861,29 +1844,12 @@
     "../../shared/map_mena_d1_overlay.svg",
     "header_cairo.jpg"
    ],
-   "sha1": "4174875a4cc00523803de97fb9bee1b005027c79"
+   "sha1": "d7109d945e253cd4093c2c80c6a8c78689d36741"
   },
-  "issues": [
-   "modes: ellipsis on \"الخريطة\"",
-   "modes: ellipsis on \"أوضاع الخريطة\"",
-   "modes: clipped text (top): \"·\" 624.84..634.38 y 84..101",
-   "modes: ellipsis on \"المعروض: الأمن\"",
-   "modes_end: ellipsis on \"الخريطة\"",
-   "modes_end: ellipsis on \"أوضاع الخريطة\"",
-   "modes_end: clipped text (top): \"·\" 624.84..634.38 y 84..101",
-   "modes_end: ellipsis on \"المعروض: الأمن\"",
-   "modes_at117: ellipsis on \"الخريطة\"",
-   "modes_at117: ellipsis on \"أوضاع الخريطة\"",
-   "modes_at117: clipped text (top): \"·\" 624.84..634.38 y 84..101",
-   "modes_at117: ellipsis on \"المعروض: الأمن\"",
-   "modes_at234: ellipsis on \"الخريطة\"",
-   "modes_at234: ellipsis on \"أوضاع الخريطة\"",
-   "modes_at234: clipped text (top): \"·\" 624.84..634.38 y 84..101",
-   "modes_at234: ellipsis on \"المعروض: الأمن\""
-  ],
+  "issues": [],
   "views": {
    "modes": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -2343,7 +2309,7 @@
     ]
    },
    "modes_end": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -2797,7 +2763,7 @@
     ]
    },
    "modes_at117": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -3230,7 +3196,7 @@
     ]
    },
    "modes_at234": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -3645,11 +3611,11 @@
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 16
+  "issueCount": 0
  },
  "i14": {
   "device": "844x390 side 47 bottom 21 notch",
-  "renderedAt": "2026-11-07T17:30:31.250Z",
+  "renderedAt": "2026-11-07T18:09:02.242Z",
   "inputs": {
    "files": [
     "index.html",
@@ -3676,29 +3642,12 @@
     "../../shared/map_mena_d1_overlay.svg",
     "header_cairo.jpg"
    ],
-   "sha1": "4174875a4cc00523803de97fb9bee1b005027c79"
+   "sha1": "d7109d945e253cd4093c2c80c6a8c78689d36741"
   },
-  "issues": [
-   "modes: ellipsis on \"الخريطة\"",
-   "modes: ellipsis on \"أوضاع الخريطة\"",
-   "modes: clipped text (top): \"·\" 659.84..669.38 y 84..101",
-   "modes: ellipsis on \"المعروض: الأمن\"",
-   "modes_end: ellipsis on \"الخريطة\"",
-   "modes_end: ellipsis on \"أوضاع الخريطة\"",
-   "modes_end: clipped text (top): \"·\" 659.84..669.38 y 84..101",
-   "modes_end: ellipsis on \"المعروض: الأمن\"",
-   "modes_at132: ellipsis on \"الخريطة\"",
-   "modes_at132: ellipsis on \"أوضاع الخريطة\"",
-   "modes_at132: clipped text (top): \"·\" 659.84..669.38 y 84..101",
-   "modes_at132: ellipsis on \"المعروض: الأمن\"",
-   "modes_at264: ellipsis on \"الخريطة\"",
-   "modes_at264: ellipsis on \"أوضاع الخريطة\"",
-   "modes_at264: clipped text (top): \"·\" 659.84..669.38 y 84..101",
-   "modes_at264: ellipsis on \"المعروض: الأمن\""
-  ],
+  "issues": [],
   "views": {
    "modes": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -4268,7 +4217,7 @@
     ]
    },
    "modes_end": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -4832,7 +4781,7 @@
     ]
    },
    "modes_at132": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -5382,7 +5331,7 @@
     ]
    },
    "modes_at264": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -5940,17 +5889,17 @@
   ],
   "pngSha1": {
    "i14.png": "c3e2b564eba997e9dd4f9d6dd252eb208a5db6e9",
-   "_build/i14_hit.png": "9f8978602ea0d180569b3df6766134d9b0742da2",
+   "_build/i14_hit.png": "c1e64f0f7b96ddb7eaa615f0987171f64ddad035",
    "_build/i14_modes_end.png": "7200b43252ee35e30499f02d33605f75a9bbd24c"
   },
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 16
+  "issueCount": 0
  },
  "i16": {
   "device": "852x393 side 59 bottom 21 island",
-  "renderedAt": "2026-11-07T17:30:39.212Z",
+  "renderedAt": "2026-11-07T18:09:10.407Z",
   "inputs": {
    "files": [
     "index.html",
@@ -5977,29 +5926,12 @@
     "../../shared/map_mena_d1_overlay.svg",
     "header_cairo.jpg"
    ],
-   "sha1": "4174875a4cc00523803de97fb9bee1b005027c79"
+   "sha1": "d7109d945e253cd4093c2c80c6a8c78689d36741"
   },
-  "issues": [
-   "modes: ellipsis on \"الخريطة\"",
-   "modes: ellipsis on \"أوضاع الخريطة\"",
-   "modes: clipped text (top): \"·\" 655.84..665.38 y 84..101",
-   "modes: ellipsis on \"المعروض: الأمن\"",
-   "modes_end: ellipsis on \"الخريطة\"",
-   "modes_end: ellipsis on \"أوضاع الخريطة\"",
-   "modes_end: clipped text (top): \"·\" 655.84..665.38 y 84..101",
-   "modes_end: ellipsis on \"المعروض: الأمن\"",
-   "modes_at135: ellipsis on \"الخريطة\"",
-   "modes_at135: ellipsis on \"أوضاع الخريطة\"",
-   "modes_at135: clipped text (top): \"·\" 655.84..665.38 y 84..101",
-   "modes_at135: ellipsis on \"المعروض: الأمن\"",
-   "modes_at270: ellipsis on \"الخريطة\"",
-   "modes_at270: ellipsis on \"أوضاع الخريطة\"",
-   "modes_at270: clipped text (top): \"·\" 655.84..665.38 y 84..101",
-   "modes_at270: ellipsis on \"المعروض: الأمن\""
-  ],
+  "issues": [],
   "views": {
    "modes": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -6558,7 +6490,7 @@
     ]
    },
    "modes_end": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -7111,7 +7043,7 @@
     ]
    },
    "modes_at135": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -7650,7 +7582,7 @@
     ]
    },
    "modes_at270": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -8214,11 +8146,11 @@
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 16
+  "issueCount": 0
  },
  "i16pro": {
   "device": "874x402 side 62 bottom 21 island",
-  "renderedAt": "2026-11-07T17:30:47.138Z",
+  "renderedAt": "2026-11-07T18:09:18.927Z",
   "inputs": {
    "files": [
     "index.html",
@@ -8245,29 +8177,12 @@
     "../../shared/map_mena_d1_overlay.svg",
     "header_cairo.jpg"
    ],
-   "sha1": "4174875a4cc00523803de97fb9bee1b005027c79"
+   "sha1": "d7109d945e253cd4093c2c80c6a8c78689d36741"
   },
-  "issues": [
-   "modes: ellipsis on \"الخريطة\"",
-   "modes: ellipsis on \"أوضاع الخريطة\"",
-   "modes: clipped text (top): \"·\" 674.84..684.38 y 84..101",
-   "modes: ellipsis on \"المعروض: الأمن\"",
-   "modes_end: ellipsis on \"الخريطة\"",
-   "modes_end: ellipsis on \"أوضاع الخريطة\"",
-   "modes_end: clipped text (top): \"·\" 674.84..684.38 y 84..101",
-   "modes_end: ellipsis on \"المعروض: الأمن\"",
-   "modes_at144: ellipsis on \"الخريطة\"",
-   "modes_at144: ellipsis on \"أوضاع الخريطة\"",
-   "modes_at144: clipped text (top): \"·\" 674.84..684.38 y 84..101",
-   "modes_at144: ellipsis on \"المعروض: الأمن\"",
-   "modes_at288: ellipsis on \"الخريطة\"",
-   "modes_at288: ellipsis on \"أوضاع الخريطة\"",
-   "modes_at288: clipped text (top): \"·\" 674.84..684.38 y 84..101",
-   "modes_at288: ellipsis on \"المعروض: الأمن\""
-  ],
+  "issues": [],
   "views": {
    "modes": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -8847,7 +8762,7 @@
     ]
    },
    "modes_end": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -9425,7 +9340,7 @@
     ]
    },
    "modes_at144": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -9961,7 +9876,7 @@
     ]
    },
    "modes_at288": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -10537,11 +10452,11 @@
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 16
+  "issueCount": 0
  },
  "i11": {
   "device": "896x414 side 48 bottom 21 notch",
-  "renderedAt": "2026-11-07T17:30:55.116Z",
+  "renderedAt": "2026-11-07T18:09:27.370Z",
   "inputs": {
    "files": [
     "index.html",
@@ -10568,25 +10483,12 @@
     "../../shared/map_mena_d1_overlay.svg",
     "header_cairo.jpg"
    ],
-   "sha1": "4174875a4cc00523803de97fb9bee1b005027c79"
+   "sha1": "d7109d945e253cd4093c2c80c6a8c78689d36741"
   },
-  "issues": [
-   "modes: ellipsis on \"الخريطة\"",
-   "modes: ellipsis on \"أوضاع الخريطة\"",
-   "modes: clipped text (top): \"·\" 710.84..720.38 y 84..101",
-   "modes: ellipsis on \"المعروض: الأمن\"",
-   "modes_end: ellipsis on \"الخريطة\"",
-   "modes_end: ellipsis on \"أوضاع الخريطة\"",
-   "modes_end: clipped text (top): \"·\" 710.84..720.38 y 84..101",
-   "modes_end: ellipsis on \"المعروض: الأمن\"",
-   "modes_at156: ellipsis on \"الخريطة\"",
-   "modes_at156: ellipsis on \"أوضاع الخريطة\"",
-   "modes_at156: clipped text (top): \"·\" 710.84..720.38 y 84..101",
-   "modes_at156: ellipsis on \"المعروض: الأمن\""
-  ],
+  "issues": [],
   "views": {
    "modes": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -11179,7 +11081,7 @@
     ]
    },
    "modes_end": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -11766,7 +11668,7 @@
     ]
    },
    "modes_at156": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -12319,11 +12221,11 @@
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 12
+  "issueCount": 0
  },
  "i16promax": {
   "device": "956x440 side 62 bottom 21 island",
-  "renderedAt": "2026-11-07T17:31:01.972Z",
+  "renderedAt": "2026-11-07T18:09:34.676Z",
   "inputs": {
    "files": [
     "index.html",
@@ -12350,25 +12252,12 @@
     "../../shared/map_mena_d1_overlay.svg",
     "header_cairo.jpg"
    ],
-   "sha1": "4174875a4cc00523803de97fb9bee1b005027c79"
+   "sha1": "d7109d945e253cd4093c2c80c6a8c78689d36741"
   },
-  "issues": [
-   "modes: ellipsis on \"الخريطة\"",
-   "modes: ellipsis on \"أوضاع الخريطة\"",
-   "modes: clipped text (top): \"·\" 756.84..766.38 y 84..101",
-   "modes: ellipsis on \"المعروض: الأمن\"",
-   "modes_end: ellipsis on \"الخريطة\"",
-   "modes_end: ellipsis on \"أوضاع الخريطة\"",
-   "modes_end: clipped text (top): \"·\" 756.84..766.38 y 84..101",
-   "modes_end: ellipsis on \"المعروض: الأمن\"",
-   "modes_at182: ellipsis on \"الخريطة\"",
-   "modes_at182: ellipsis on \"أوضاع الخريطة\"",
-   "modes_at182: clipped text (top): \"·\" 756.84..766.38 y 84..101",
-   "modes_at182: ellipsis on \"المعروض: الأمن\""
-  ],
+  "issues": [],
   "views": {
    "modes": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -12971,7 +12860,7 @@
     ]
    },
    "modes_end": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -13558,7 +13447,7 @@
     ]
    },
    "modes_at182": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -14139,6 +14028,6 @@
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 12
+  "issueCount": 0
  }
 }

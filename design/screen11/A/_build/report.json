@@ -1,7 +1,7 @@
 {
  "se": {
   "device": "667x375 side 0 bottom 0 none",
-  "renderedAt": "2026-11-07T17:36:12.832Z",
+  "renderedAt": "2026-11-07T18:14:43.122Z",
   "inputs": {
    "files": [
     "index.html",
@@ -24,49 +24,12 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "3ae79336bbcc047e15da0a997affe5809f072e14"
+   "sha1": "21a824a4289f034c7a7ef41c0edef0a2d1ee6815"
   },
-  "issues": [
-   "overview: ellipsis on \"الاستخبارات\"",
-   "overview: ellipsis on \"مصر\"",
-   "overview: clipped text (top): \"·\" 569.64..579.17 y 84..101",
-   "overview: ellipsis on \"جهاز الاستخبارات\"",
-   "overview_end: ellipsis on \"الاستخبارات\"",
-   "overview_end: ellipsis on \"مصر\"",
-   "overview_end: clipped text (top): \"·\" 569.64..579.17 y 84..101",
-   "overview_end: ellipsis on \"جهاز الاستخبارات\"",
-   "networks: ellipsis on \"الاستخبارات\"",
-   "networks: ellipsis on \"مصر\"",
-   "networks: clipped text (top): \"·\" 569.64..579.17 y 84..101",
-   "networks: ellipsis on \"جهاز الاستخبارات\"",
-   "networks_end: ellipsis on \"الاستخبارات\"",
-   "networks_end: ellipsis on \"مصر\"",
-   "networks_end: clipped text (top): \"·\" 569.64..579.17 y 84..101",
-   "networks_end: ellipsis on \"جهاز الاستخبارات\"",
-   "ops: ellipsis on \"الاستخبارات\"",
-   "ops: ellipsis on \"مصر\"",
-   "ops: clipped text (top): \"·\" 569.64..579.17 y 84..101",
-   "ops: ellipsis on \"جهاز الاستخبارات\"",
-   "ops_end: ellipsis on \"الاستخبارات\"",
-   "ops_end: ellipsis on \"مصر\"",
-   "ops_end: clipped text (top): \"·\" 569.64..579.17 y 84..101",
-   "ops_end: ellipsis on \"جهاز الاستخبارات\"",
-   "counter: ellipsis on \"الاستخبارات\"",
-   "counter: ellipsis on \"مصر\"",
-   "counter: clipped text (top): \"·\" 569.64..579.17 y 84..101",
-   "counter: ellipsis on \"جهاز الاستخبارات\"",
-   "counter_end: ellipsis on \"الاستخبارات\"",
-   "counter_end: ellipsis on \"مصر\"",
-   "counter_end: clipped text (top): \"·\" 569.64..579.17 y 84..101",
-   "counter_end: ellipsis on \"جهاز الاستخبارات\"",
-   "networks_at86: ellipsis on \"الاستخبارات\"",
-   "networks_at86: ellipsis on \"مصر\"",
-   "networks_at86: clipped text (top): \"·\" 569.64..579.17 y 84..101",
-   "networks_at86: ellipsis on \"جهاز الاستخبارات\""
-  ],
+  "issues": [],
   "views": {
    "overview": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -629,7 +592,7 @@
     ]
    },
    "overview_end": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -1192,7 +1155,7 @@
     ]
    },
    "networks": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -1602,7 +1565,7 @@
     ]
    },
    "networks_end": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -2032,7 +1995,7 @@
     ]
    },
    "ops": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -2489,7 +2452,7 @@
     ]
    },
    "ops_end": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -2936,7 +2899,7 @@
     ]
    },
    "counter": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -3361,7 +3324,7 @@
     ]
    },
    "counter_end": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -3786,7 +3749,7 @@
     ]
    },
    "networks_at86": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -4229,11 +4192,11 @@
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 36
+  "issueCount": 0
  },
  "mini": {
   "device": "812x375 side 50 bottom 21 notch",
-  "renderedAt": "2026-11-07T17:36:30.606Z",
+  "renderedAt": "2026-11-07T18:15:00.302Z",
   "inputs": {
    "files": [
     "index.html",
@@ -4256,49 +4219,12 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "3ae79336bbcc047e15da0a997affe5809f072e14"
+   "sha1": "21a824a4289f034c7a7ef41c0edef0a2d1ee6815"
   },
-  "issues": [
-   "overview: ellipsis on \"الاستخبارات\"",
-   "overview: ellipsis on \"مصر\"",
-   "overview: clipped text (top): \"·\" 672.64..682.17 y 84..101",
-   "overview: ellipsis on \"جهاز الاستخبارات\"",
-   "overview_end: ellipsis on \"الاستخبارات\"",
-   "overview_end: ellipsis on \"مصر\"",
-   "overview_end: clipped text (top): \"·\" 672.64..682.17 y 84..101",
-   "overview_end: ellipsis on \"جهاز الاستخبارات\"",
-   "networks: ellipsis on \"الاستخبارات\"",
-   "networks: ellipsis on \"مصر\"",
-   "networks: clipped text (top): \"·\" 672.64..682.17 y 84..101",
-   "networks: ellipsis on \"جهاز الاستخبارات\"",
-   "networks_end: ellipsis on \"الاستخبارات\"",
-   "networks_end: ellipsis on \"مصر\"",
-   "networks_end: clipped text (top): \"·\" 672.64..682.17 y 84..101",
-   "networks_end: ellipsis on \"جهاز الاستخبارات\"",
-   "ops: ellipsis on \"الاستخبارات\"",
-   "ops: ellipsis on \"مصر\"",
-   "ops: clipped text (top): \"·\" 672.64..682.17 y 84..101",
-   "ops: ellipsis on \"جهاز الاستخبارات\"",
-   "ops_end: ellipsis on \"الاستخبارات\"",
-   "ops_end: ellipsis on \"مصر\"",
-   "ops_end: clipped text (top): \"·\" 672.64..682.17 y 84..101",
-   "ops_end: ellipsis on \"جهاز الاستخبارات\"",
-   "counter: ellipsis on \"الاستخبارات\"",
-   "counter: ellipsis on \"مصر\"",
-   "counter: clipped text (top): \"·\" 672.64..682.17 y 84..101",
-   "counter: ellipsis on \"جهاز الاستخبارات\"",
-   "counter_end: ellipsis on \"الاستخبارات\"",
-   "counter_end: ellipsis on \"مصر\"",
-   "counter_end: clipped text (top): \"·\" 672.64..682.17 y 84..101",
-   "counter_end: ellipsis on \"جهاز الاستخبارات\"",
-   "networks_at72: ellipsis on \"الاستخبارات\"",
-   "networks_at72: ellipsis on \"مصر\"",
-   "networks_at72: clipped text (top): \"·\" 672.64..682.17 y 84..101",
-   "networks_at72: ellipsis on \"جهاز الاستخبارات\""
-  ],
+  "issues": [],
   "views": {
    "overview": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -4876,7 +4802,7 @@
     ]
    },
    "overview_end": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -5454,7 +5380,7 @@
     ]
    },
    "networks": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -5879,7 +5805,7 @@
     ]
    },
    "networks_end": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -6319,7 +6245,7 @@
     ]
    },
    "ops": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -6786,7 +6712,7 @@
     ]
    },
    "ops_end": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -7243,7 +7169,7 @@
     ]
    },
    "counter": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -7683,7 +7609,7 @@
     ]
    },
    "counter_end": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -8118,7 +8044,7 @@
     ]
    },
    "networks_at72": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -8566,11 +8492,11 @@
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 36
+  "issueCount": 0
  },
  "i14": {
   "device": "844x390 side 47 bottom 21 notch",
-  "renderedAt": "2026-11-07T17:36:49.958Z",
+  "renderedAt": "2026-11-07T18:15:19.777Z",
   "inputs": {
    "files": [
     "index.html",
@@ -8593,49 +8519,12 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "3ae79336bbcc047e15da0a997affe5809f072e14"
+   "sha1": "21a824a4289f034c7a7ef41c0edef0a2d1ee6815"
   },
-  "issues": [
-   "overview: ellipsis on \"الاستخبارات\"",
-   "overview: ellipsis on \"مصر\"",
-   "overview: clipped text (top): \"·\" 707.64..717.17 y 84..101",
-   "overview: ellipsis on \"جهاز الاستخبارات\"",
-   "overview_end: ellipsis on \"الاستخبارات\"",
-   "overview_end: ellipsis on \"مصر\"",
-   "overview_end: clipped text (top): \"·\" 707.64..717.17 y 84..101",
-   "overview_end: ellipsis on \"جهاز الاستخبارات\"",
-   "networks: ellipsis on \"الاستخبارات\"",
-   "networks: ellipsis on \"مصر\"",
-   "networks: clipped text (top): \"·\" 707.64..717.17 y 84..101",
-   "networks: ellipsis on \"جهاز الاستخبارات\"",
-   "networks_end: ellipsis on \"الاستخبارات\"",
-   "networks_end: ellipsis on \"مصر\"",
-   "networks_end: clipped text (top): \"·\" 707.64..717.17 y 84..101",
-   "networks_end: ellipsis on \"جهاز الاستخبارات\"",
-   "ops: ellipsis on \"الاستخبارات\"",
-   "ops: ellipsis on \"مصر\"",
-   "ops: clipped text (top): \"·\" 707.64..717.17 y 84..101",
-   "ops: ellipsis on \"جهاز الاستخبارات\"",
-   "ops_end: ellipsis on \"الاستخبارات\"",
-   "ops_end: ellipsis on \"مصر\"",
-   "ops_end: clipped text (top): \"·\" 707.64..717.17 y 84..101",
-   "ops_end: ellipsis on \"جهاز الاستخبارات\"",
-   "counter: ellipsis on \"الاستخبارات\"",
-   "counter: ellipsis on \"مصر\"",
-   "counter: clipped text (top): \"·\" 707.64..717.17 y 84..101",
-   "counter: ellipsis on \"جهاز الاستخبارات\"",
-   "counter_end: ellipsis on \"الاستخبارات\"",
-   "counter_end: ellipsis on \"مصر\"",
-   "counter_end: clipped text (top): \"·\" 707.64..717.17 y 84..101",
-   "counter_end: ellipsis on \"جهاز الاستخبارات\"",
-   "networks_at87: ellipsis on \"الاستخبارات\"",
-   "networks_at87: ellipsis on \"مصر\"",
-   "networks_at87: clipped text (top): \"·\" 707.64..717.17 y 84..101",
-   "networks_at87: ellipsis on \"جهاز الاستخبارات\""
-  ],
+  "issues": [],
   "views": {
    "overview": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -9315,7 +9204,7 @@
     ]
    },
    "overview_end": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -9995,7 +9884,7 @@
     ]
    },
    "networks": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -10522,7 +10411,7 @@
     ]
    },
    "networks_end": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -11069,7 +10958,7 @@
     ]
    },
    "ops": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -11648,7 +11537,7 @@
     ]
    },
    "ops_end": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -12212,7 +12101,7 @@
     ]
    },
    "counter": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -12754,7 +12643,7 @@
     ]
    },
    "counter_end": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -13296,7 +13185,7 @@
     ]
    },
    "networks_at87": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -13856,11 +13745,11 @@
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 36
+  "issueCount": 0
  },
  "i16": {
   "device": "852x393 side 59 bottom 21 island",
-  "renderedAt": "2026-11-07T17:37:09.297Z",
+  "renderedAt": "2026-11-07T18:15:39.273Z",
   "inputs": {
    "files": [
     "index.html",
@@ -13883,49 +13772,12 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "3ae79336bbcc047e15da0a997affe5809f072e14"
+   "sha1": "21a824a4289f034c7a7ef41c0edef0a2d1ee6815"
   },
-  "issues": [
-   "overview: ellipsis on \"الاستخبارات\"",
-   "overview: ellipsis on \"مصر\"",
-   "overview: clipped text (top): \"·\" 703.64..713.17 y 84..101",
-   "overview: ellipsis on \"جهاز الاستخبارات\"",
-   "overview_end: ellipsis on \"الاستخبارات\"",
-   "overview_end: ellipsis on \"مصر\"",
-   "overview_end: clipped text (top): \"·\" 703.64..713.17 y 84..101",
-   "overview_end: ellipsis on \"جهاز الاستخبارات\"",
-   "networks: ellipsis on \"الاستخبارات\"",
-   "networks: ellipsis on \"مصر\"",
-   "networks: clipped text (top): \"·\" 703.64..713.17 y 84..101",
-   "networks: ellipsis on \"جهاز الاستخبارات\"",
-   "networks_end: ellipsis on \"الاستخبارات\"",
-   "networks_end: ellipsis on \"مصر\"",
-   "networks_end: clipped text (top): \"·\" 703.64..713.17 y 84..101",
-   "networks_end: ellipsis on \"جهاز الاستخبارات\"",
-   "ops: ellipsis on \"الاستخبارات\"",
-   "ops: ellipsis on \"مصر\"",
-   "ops: clipped text (top): \"·\" 703.64..713.17 y 84..101",
-   "ops: ellipsis on \"جهاز الاستخبارات\"",
-   "ops_end: ellipsis on \"الاستخبارات\"",
-   "ops_end: ellipsis on \"مصر\"",
-   "ops_end: clipped text (top): \"·\" 703.64..713.17 y 84..101",
-   "ops_end: ellipsis on \"جهاز الاستخبارات\"",
-   "counter: ellipsis on \"الاستخبارات\"",
-   "counter: ellipsis on \"مصر\"",
-   "counter: clipped text (top): \"·\" 703.64..713.17 y 84..101",
-   "counter: ellipsis on \"جهاز الاستخبارات\"",
-   "counter_end: ellipsis on \"الاستخبارات\"",
-   "counter_end: ellipsis on \"مصر\"",
-   "counter_end: clipped text (top): \"·\" 703.64..713.17 y 84..101",
-   "counter_end: ellipsis on \"جهاز الاستخبارات\"",
-   "networks_at90: ellipsis on \"الاستخبارات\"",
-   "networks_at90: ellipsis on \"مصر\"",
-   "networks_at90: clipped text (top): \"·\" 703.64..713.17 y 84..101",
-   "networks_at90: ellipsis on \"جهاز الاستخبارات\""
-  ],
+  "issues": [],
   "views": {
    "overview": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -14594,7 +14446,7 @@
     ]
    },
    "overview_end": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -15263,7 +15115,7 @@
     ]
    },
    "networks": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -15784,7 +15636,7 @@
     ]
    },
    "networks_end": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -16320,7 +16172,7 @@
     ]
    },
    "ops": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -16888,7 +16740,7 @@
     ]
    },
    "ops_end": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -17441,7 +17293,7 @@
     ]
    },
    "counter": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -17972,7 +17824,7 @@
     ]
    },
    "counter_end": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -18503,7 +18355,7 @@
     ]
    },
    "networks_at90": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -19052,11 +18904,11 @@
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 36
+  "issueCount": 0
  },
  "i16pro": {
   "device": "874x402 side 62 bottom 21 island",
-  "renderedAt": "2026-11-07T17:37:28.885Z",
+  "renderedAt": "2026-11-07T18:15:59.094Z",
   "inputs": {
    "files": [
     "index.html",
@@ -19079,45 +18931,12 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "3ae79336bbcc047e15da0a997affe5809f072e14"
+   "sha1": "21a824a4289f034c7a7ef41c0edef0a2d1ee6815"
   },
-  "issues": [
-   "overview: ellipsis on \"الاستخبارات\"",
-   "overview: ellipsis on \"مصر\"",
-   "overview: clipped text (top): \"·\" 722.64..732.17 y 84..101",
-   "overview: ellipsis on \"جهاز الاستخبارات\"",
-   "overview_end: ellipsis on \"الاستخبارات\"",
-   "overview_end: ellipsis on \"مصر\"",
-   "overview_end: clipped text (top): \"·\" 722.64..732.17 y 84..101",
-   "overview_end: ellipsis on \"جهاز الاستخبارات\"",
-   "networks: ellipsis on \"الاستخبارات\"",
-   "networks: ellipsis on \"مصر\"",
-   "networks: clipped text (top): \"·\" 722.64..732.17 y 84..101",
-   "networks: ellipsis on \"جهاز الاستخبارات\"",
-   "networks_end: ellipsis on \"الاستخبارات\"",
-   "networks_end: ellipsis on \"مصر\"",
-   "networks_end: clipped text (top): \"·\" 722.64..732.17 y 84..101",
-   "networks_end: ellipsis on \"جهاز الاستخبارات\"",
-   "ops: ellipsis on \"الاستخبارات\"",
-   "ops: ellipsis on \"مصر\"",
-   "ops: clipped text (top): \"·\" 722.64..732.17 y 84..101",
-   "ops: ellipsis on \"جهاز الاستخبارات\"",
-   "ops_end: ellipsis on \"الاستخبارات\"",
-   "ops_end: ellipsis on \"مصر\"",
-   "ops_end: clipped text (top): \"·\" 722.64..732.17 y 84..101",
-   "ops_end: ellipsis on \"جهاز الاستخبارات\"",
-   "counter: ellipsis on \"الاستخبارات\"",
-   "counter: ellipsis on \"مصر\"",
-   "counter: clipped text (top): \"·\" 722.64..732.17 y 84..101",
-   "counter: ellipsis on \"جهاز الاستخبارات\"",
-   "counter_end: ellipsis on \"الاستخبارات\"",
-   "counter_end: ellipsis on \"مصر\"",
-   "counter_end: clipped text (top): \"·\" 722.64..732.17 y 84..101",
-   "counter_end: ellipsis on \"جهاز الاستخبارات\""
-  ],
+  "issues": [],
   "views": {
    "overview": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -19797,7 +19616,7 @@
     ]
    },
    "overview_end": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -20477,7 +20296,7 @@
     ]
    },
    "networks": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -21014,7 +20833,7 @@
     ]
    },
    "networks_end": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -21566,7 +21385,7 @@
     ]
    },
    "ops": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -22145,7 +21964,7 @@
     ]
    },
    "ops_end": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -22709,7 +22528,7 @@
     ]
    },
    "counter": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -23256,7 +23075,7 @@
     ]
    },
    "counter_end": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -23836,11 +23655,11 @@
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 32
+  "issueCount": 0
  },
  "i11": {
   "device": "896x414 side 48 bottom 21 notch",
-  "renderedAt": "2026-11-07T17:37:47.895Z",
+  "renderedAt": "2026-11-07T18:16:18.312Z",
   "inputs": {
    "files": [
     "index.html",
@@ -23863,45 +23682,12 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "3ae79336bbcc047e15da0a997affe5809f072e14"
+   "sha1": "21a824a4289f034c7a7ef41c0edef0a2d1ee6815"
   },
-  "issues": [
-   "overview: ellipsis on \"الاستخبارات\"",
-   "overview: ellipsis on \"مصر\"",
-   "overview: clipped text (top): \"·\" 758.64..768.17 y 84..101",
-   "overview: ellipsis on \"جهاز الاستخبارات\"",
-   "overview_end: ellipsis on \"الاستخبارات\"",
-   "overview_end: ellipsis on \"مصر\"",
-   "overview_end: clipped text (top): \"·\" 758.64..768.17 y 84..101",
-   "overview_end: ellipsis on \"جهاز الاستخبارات\"",
-   "networks: ellipsis on \"الاستخبارات\"",
-   "networks: ellipsis on \"مصر\"",
-   "networks: clipped text (top): \"·\" 758.64..768.17 y 84..101",
-   "networks: ellipsis on \"جهاز الاستخبارات\"",
-   "networks_end: ellipsis on \"الاستخبارات\"",
-   "networks_end: ellipsis on \"مصر\"",
-   "networks_end: clipped text (top): \"·\" 758.64..768.17 y 84..101",
-   "networks_end: ellipsis on \"جهاز الاستخبارات\"",
-   "ops: ellipsis on \"الاستخبارات\"",
-   "ops: ellipsis on \"مصر\"",
-   "ops: clipped text (top): \"·\" 758.64..768.17 y 84..101",
-   "ops: ellipsis on \"جهاز الاستخبارات\"",
-   "ops_end: ellipsis on \"الاستخبارات\"",
-   "ops_end: ellipsis on \"مصر\"",
-   "ops_end: clipped text (top): \"·\" 758.64..768.17 y 84..101",
-   "ops_end: ellipsis on \"جهاز الاستخبارات\"",
-   "counter: ellipsis on \"الاستخبارات\"",
-   "counter: ellipsis on \"مصر\"",
-   "counter: clipped text (top): \"·\" 758.64..768.17 y 84..101",
-   "counter: ellipsis on \"جهاز الاستخبارات\"",
-   "counter_end: ellipsis on \"الاستخبارات\"",
-   "counter_end: ellipsis on \"مصر\"",
-   "counter_end: clipped text (top): \"·\" 758.64..768.17 y 84..101",
-   "counter_end: ellipsis on \"جهاز الاستخبارات\""
-  ],
+  "issues": [],
   "views": {
    "overview": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -24580,7 +24366,7 @@
     ]
    },
    "overview_end": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -25259,7 +25045,7 @@
     ]
    },
    "networks": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -25800,7 +25586,7 @@
     ]
    },
    "networks_end": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -26356,7 +26142,7 @@
     ]
    },
    "ops": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -26939,7 +26725,7 @@
     ]
    },
    "ops_end": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -27517,7 +27303,7 @@
     ]
    },
    "counter": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -28063,7 +27849,7 @@
     ]
    },
    "counter_end": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -28642,11 +28428,11 @@
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 32
+  "issueCount": 0
  },
  "i16promax": {
   "device": "956x440 side 62 bottom 21 island",
-  "renderedAt": "2026-11-07T17:38:06.988Z",
+  "renderedAt": "2026-11-07T18:16:37.088Z",
   "inputs": {
    "files": [
     "index.html",
@@ -28669,45 +28455,12 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "3ae79336bbcc047e15da0a997affe5809f072e14"
+   "sha1": "21a824a4289f034c7a7ef41c0edef0a2d1ee6815"
   },
-  "issues": [
-   "overview: ellipsis on \"الاستخبارات\"",
-   "overview: ellipsis on \"مصر\"",
-   "overview: clipped text (top): \"·\" 804.64..814.17 y 84..101",
-   "overview: ellipsis on \"جهاز الاستخبارات\"",
-   "overview_end: ellipsis on \"الاستخبارات\"",
-   "overview_end: ellipsis on \"مصر\"",
-   "overview_end: clipped text (top): \"·\" 804.64..814.17 y 84..101",
-   "overview_end: ellipsis on \"جهاز الاستخبارات\"",
-   "networks: ellipsis on \"الاستخبارات\"",
-   "networks: ellipsis on \"مصر\"",
-   "networks: clipped text (top): \"·\" 804.64..814.17 y 84..101",
-   "networks: ellipsis on \"جهاز الاستخبارات\"",
-   "networks_end: ellipsis on \"الاستخبارات\"",
-   "networks_end: ellipsis on \"مصر\"",
-   "networks_end: clipped text (top): \"·\" 804.64..814.17 y 84..101",
-   "networks_end: ellipsis on \"جهاز الاستخبارات\"",
-   "ops: ellipsis on \"الاستخبارات\"",
-   "ops: ellipsis on \"مصر\"",
-   "ops: clipped text (top): \"·\" 804.64..814.17 y 84..101",
-   "ops: ellipsis on \"جهاز الاستخبارات\"",
-   "ops_end: ellipsis on \"الاستخبارات\"",
-   "ops_end: ellipsis on \"مصر\"",
-   "ops_end: clipped text (top): \"·\" 804.64..814.17 y 84..101",
-   "ops_end: ellipsis on \"جهاز الاستخبارات\"",
-   "counter: ellipsis on \"الاستخبارات\"",
-   "counter: ellipsis on \"مصر\"",
-   "counter: clipped text (top): \"·\" 804.64..814.17 y 84..101",
-   "counter: ellipsis on \"جهاز الاستخبارات\"",
-   "counter_end: ellipsis on \"الاستخبارات\"",
-   "counter_end: ellipsis on \"مصر\"",
-   "counter_end: clipped text (top): \"·\" 804.64..814.17 y 84..101",
-   "counter_end: ellipsis on \"جهاز الاستخبارات\""
-  ],
+  "issues": [],
   "views": {
    "overview": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -29386,7 +29139,7 @@
     ]
    },
    "overview_end": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -30065,7 +29818,7 @@
     ]
    },
    "networks": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -30611,7 +30364,7 @@
     ]
    },
    "networks_end": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -31177,7 +30930,7 @@
     ]
    },
    "ops": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -31790,7 +31543,7 @@
     ]
    },
    "ops_end": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -32403,7 +32156,7 @@
     ]
    },
    "counter": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -32954,7 +32707,7 @@
     ]
    },
    "counter_end": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -33553,6 +33306,6 @@
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 32
+  "issueCount": 0
  }
 }

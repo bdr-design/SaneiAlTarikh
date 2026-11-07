@@ -1,7 +1,7 @@
 {
  "se": {
   "device": "667x375 side 0 bottom 0 none",
-  "renderedAt": "2026-11-07T17:36:18.778Z",
+  "renderedAt": "2026-11-07T18:14:51.284Z",
   "inputs": {
    "files": [
     "index.html",
@@ -25,29 +25,12 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "a891edcdb09bb044d2b2db5fc0370483955431d6"
+   "sha1": "8536275c1ed7bb448ee503731a4b9bd7c6cec023"
   },
-  "issues": [
-   "relation: ellipsis on \"إثيوبيا\"",
-   "relation: ellipsis on \"علاقتنا\"",
-   "relation: clipped text (top): \"·\" 559.75..569.28 y 84..101",
-   "relation: ellipsis on \"خلاف مياه النيل\"",
-   "relation_end: ellipsis on \"إثيوبيا\"",
-   "relation_end: ellipsis on \"علاقتنا\"",
-   "relation_end: clipped text (top): \"·\" 559.75..569.28 y 84..101",
-   "relation_end: ellipsis on \"خلاف مياه النيل\"",
-   "relation_at131: ellipsis on \"إثيوبيا\"",
-   "relation_at131: ellipsis on \"علاقتنا\"",
-   "relation_at131: clipped text (top): \"·\" 559.75..569.28 y 84..101",
-   "relation_at131: ellipsis on \"خلاف مياه النيل\"",
-   "relation_at262: ellipsis on \"إثيوبيا\"",
-   "relation_at262: ellipsis on \"علاقتنا\"",
-   "relation_at262: clipped text (top): \"·\" 559.75..569.28 y 84..101",
-   "relation_at262: ellipsis on \"خلاف مياه النيل\""
-  ],
+  "issues": [],
   "views": {
    "relation": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -479,7 +462,7 @@
     ]
    },
    "relation_end": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -897,7 +880,7 @@
     ]
    },
    "relation_at131": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -1294,7 +1277,7 @@
     ]
    },
    "relation_at262": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -1695,11 +1678,11 @@
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 16
+  "issueCount": 0
  },
  "mini": {
   "device": "812x375 side 50 bottom 21 notch",
-  "renderedAt": "2026-11-07T17:36:26.375Z",
+  "renderedAt": "2026-11-07T18:14:58.671Z",
   "inputs": {
    "files": [
     "index.html",
@@ -1723,29 +1706,12 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "a891edcdb09bb044d2b2db5fc0370483955431d6"
+   "sha1": "8536275c1ed7bb448ee503731a4b9bd7c6cec023"
   },
-  "issues": [
-   "relation: ellipsis on \"إثيوبيا\"",
-   "relation: ellipsis on \"علاقتنا\"",
-   "relation: clipped text (top): \"·\" 662.75..672.28 y 84..101",
-   "relation: ellipsis on \"خلاف مياه النيل\"",
-   "relation_end: ellipsis on \"إثيوبيا\"",
-   "relation_end: ellipsis on \"علاقتنا\"",
-   "relation_end: clipped text (top): \"·\" 662.75..672.28 y 84..101",
-   "relation_end: ellipsis on \"خلاف مياه النيل\"",
-   "relation_at117: ellipsis on \"إثيوبيا\"",
-   "relation_at117: ellipsis on \"علاقتنا\"",
-   "relation_at117: clipped text (top): \"·\" 662.75..672.28 y 84..101",
-   "relation_at117: ellipsis on \"خلاف مياه النيل\"",
-   "relation_at234: ellipsis on \"إثيوبيا\"",
-   "relation_at234: ellipsis on \"علاقتنا\"",
-   "relation_at234: clipped text (top): \"·\" 662.75..672.28 y 84..101",
-   "relation_at234: ellipsis on \"خلاف مياه النيل\""
-  ],
+  "issues": [],
   "views": {
    "relation": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -2184,7 +2150,7 @@
     ]
    },
    "relation_end": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -2609,7 +2575,7 @@
     ]
    },
    "relation_at117": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -3003,7 +2969,7 @@
     ]
    },
    "relation_at234": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -3399,11 +3365,11 @@
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 16
+  "issueCount": 0
  },
  "i14": {
   "device": "844x390 side 47 bottom 21 notch",
-  "renderedAt": "2026-11-07T17:36:34.427Z",
+  "renderedAt": "2026-11-07T18:15:06.940Z",
   "inputs": {
    "files": [
     "index.html",
@@ -3427,29 +3393,12 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "a891edcdb09bb044d2b2db5fc0370483955431d6"
+   "sha1": "8536275c1ed7bb448ee503731a4b9bd7c6cec023"
   },
-  "issues": [
-   "relation: ellipsis on \"إثيوبيا\"",
-   "relation: ellipsis on \"علاقتنا\"",
-   "relation: clipped text (top): \"·\" 697.75..707.28 y 84..101",
-   "relation: ellipsis on \"خلاف مياه النيل\"",
-   "relation_end: ellipsis on \"إثيوبيا\"",
-   "relation_end: ellipsis on \"علاقتنا\"",
-   "relation_end: clipped text (top): \"·\" 697.75..707.28 y 84..101",
-   "relation_end: ellipsis on \"خلاف مياه النيل\"",
-   "relation_at132: ellipsis on \"إثيوبيا\"",
-   "relation_at132: ellipsis on \"علاقتنا\"",
-   "relation_at132: clipped text (top): \"·\" 697.75..707.28 y 84..101",
-   "relation_at132: ellipsis on \"خلاف مياه النيل\"",
-   "relation_at264: ellipsis on \"إثيوبيا\"",
-   "relation_at264: ellipsis on \"علاقتنا\"",
-   "relation_at264: clipped text (top): \"·\" 697.75..707.28 y 84..101",
-   "relation_at264: ellipsis on \"خلاف مياه النيل\""
-  ],
+  "issues": [],
   "views": {
    "relation": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -3998,7 +3947,7 @@
     ]
    },
    "relation_end": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -4533,7 +4482,7 @@
     ]
    },
    "relation_at132": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -5047,7 +4996,7 @@
     ]
    },
    "relation_at264": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -5565,11 +5514,11 @@
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 16
+  "issueCount": 0
  },
  "i16": {
   "device": "852x393 side 59 bottom 21 island",
-  "renderedAt": "2026-11-07T17:36:42.659Z",
+  "renderedAt": "2026-11-07T18:15:15.290Z",
   "inputs": {
    "files": [
     "index.html",
@@ -5593,29 +5542,12 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "a891edcdb09bb044d2b2db5fc0370483955431d6"
+   "sha1": "8536275c1ed7bb448ee503731a4b9bd7c6cec023"
   },
-  "issues": [
-   "relation: ellipsis on \"إثيوبيا\"",
-   "relation: ellipsis on \"علاقتنا\"",
-   "relation: clipped text (top): \"·\" 693.75..703.28 y 84..101",
-   "relation: ellipsis on \"خلاف مياه النيل\"",
-   "relation_end: ellipsis on \"إثيوبيا\"",
-   "relation_end: ellipsis on \"علاقتنا\"",
-   "relation_end: clipped text (top): \"·\" 693.75..703.28 y 84..101",
-   "relation_end: ellipsis on \"خلاف مياه النيل\"",
-   "relation_at135: ellipsis on \"إثيوبيا\"",
-   "relation_at135: ellipsis on \"علاقتنا\"",
-   "relation_at135: clipped text (top): \"·\" 693.75..703.28 y 84..101",
-   "relation_at135: ellipsis on \"خلاف مياه النيل\"",
-   "relation_at270: ellipsis on \"إثيوبيا\"",
-   "relation_at270: ellipsis on \"علاقتنا\"",
-   "relation_at270: clipped text (top): \"·\" 693.75..703.28 y 84..101",
-   "relation_at270: ellipsis on \"خلاف مياه النيل\""
-  ],
+  "issues": [],
   "views": {
    "relation": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -6153,7 +6085,7 @@
     ]
    },
    "relation_end": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -6677,7 +6609,7 @@
     ]
    },
    "relation_at135": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -7180,7 +7112,7 @@
     ]
    },
    "relation_at270": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -7692,11 +7624,11 @@
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 16
+  "issueCount": 0
  },
  "i16pro": {
   "device": "874x402 side 62 bottom 21 island",
-  "renderedAt": "2026-11-07T17:36:50.923Z",
+  "renderedAt": "2026-11-07T18:15:23.337Z",
   "inputs": {
    "files": [
     "index.html",
@@ -7720,29 +7652,12 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "a891edcdb09bb044d2b2db5fc0370483955431d6"
+   "sha1": "8536275c1ed7bb448ee503731a4b9bd7c6cec023"
   },
-  "issues": [
-   "relation: ellipsis on \"إثيوبيا\"",
-   "relation: ellipsis on \"علاقتنا\"",
-   "relation: clipped text (top): \"·\" 712.75..722.28 y 84..101",
-   "relation: ellipsis on \"خلاف مياه النيل\"",
-   "relation_end: ellipsis on \"إثيوبيا\"",
-   "relation_end: ellipsis on \"علاقتنا\"",
-   "relation_end: clipped text (top): \"·\" 712.75..722.28 y 84..101",
-   "relation_end: ellipsis on \"خلاف مياه النيل\"",
-   "relation_at144: ellipsis on \"إثيوبيا\"",
-   "relation_at144: ellipsis on \"علاقتنا\"",
-   "relation_at144: clipped text (top): \"·\" 712.75..722.28 y 84..101",
-   "relation_at144: ellipsis on \"خلاف مياه النيل\"",
-   "relation_at288: ellipsis on \"إثيوبيا\"",
-   "relation_at288: ellipsis on \"علاقتنا\"",
-   "relation_at288: clipped text (top): \"·\" 712.75..722.28 y 84..101",
-   "relation_at288: ellipsis on \"خلاف مياه النيل\""
-  ],
+  "issues": [],
   "views": {
    "relation": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -8301,7 +8216,7 @@
     ]
    },
    "relation_end": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -8841,7 +8756,7 @@
     ]
    },
    "relation_at144": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -9357,7 +9272,7 @@
     ]
    },
    "relation_at288": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -9900,11 +9815,11 @@
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 16
+  "issueCount": 0
  },
  "i11": {
   "device": "896x414 side 48 bottom 21 notch",
-  "renderedAt": "2026-11-07T17:36:59.232Z",
+  "renderedAt": "2026-11-07T18:15:31.882Z",
   "inputs": {
    "files": [
     "index.html",
@@ -9928,25 +9843,12 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "a891edcdb09bb044d2b2db5fc0370483955431d6"
+   "sha1": "8536275c1ed7bb448ee503731a4b9bd7c6cec023"
   },
-  "issues": [
-   "relation: ellipsis on \"إثيوبيا\"",
-   "relation: ellipsis on \"علاقتنا\"",
-   "relation: clipped text (top): \"·\" 748.75..758.28 y 84..101",
-   "relation: ellipsis on \"خلاف مياه النيل\"",
-   "relation_end: ellipsis on \"إثيوبيا\"",
-   "relation_end: ellipsis on \"علاقتنا\"",
-   "relation_end: clipped text (top): \"·\" 748.75..758.28 y 84..101",
-   "relation_end: ellipsis on \"خلاف مياه النيل\"",
-   "relation_at156: ellipsis on \"إثيوبيا\"",
-   "relation_at156: ellipsis on \"علاقتنا\"",
-   "relation_at156: clipped text (top): \"·\" 748.75..758.28 y 84..101",
-   "relation_at156: ellipsis on \"خلاف مياه النيل\""
-  ],
+  "issues": [],
   "views": {
    "relation": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -10519,7 +10421,7 @@
     ]
    },
    "relation_end": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -11068,7 +10970,7 @@
     ]
    },
    "relation_at156": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -11596,11 +11498,11 @@
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 12
+  "issueCount": 0
  },
  "i16promax": {
   "device": "956x440 side 62 bottom 21 island",
-  "renderedAt": "2026-11-07T17:37:06.523Z",
+  "renderedAt": "2026-11-07T18:15:39.568Z",
   "inputs": {
    "files": [
     "index.html",
@@ -11624,25 +11526,12 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "a891edcdb09bb044d2b2db5fc0370483955431d6"
+   "sha1": "8536275c1ed7bb448ee503731a4b9bd7c6cec023"
   },
-  "issues": [
-   "relation: ellipsis on \"إثيوبيا\"",
-   "relation: ellipsis on \"علاقتنا\"",
-   "relation: clipped text (top): \"·\" 794.75..804.28 y 84..101",
-   "relation: ellipsis on \"خلاف مياه النيل\"",
-   "relation_end: ellipsis on \"إثيوبيا\"",
-   "relation_end: ellipsis on \"علاقتنا\"",
-   "relation_end: clipped text (top): \"·\" 794.75..804.28 y 84..101",
-   "relation_end: ellipsis on \"خلاف مياه النيل\"",
-   "relation_at182: ellipsis on \"إثيوبيا\"",
-   "relation_at182: ellipsis on \"علاقتنا\"",
-   "relation_at182: clipped text (top): \"·\" 794.75..804.28 y 84..101",
-   "relation_at182: ellipsis on \"خلاف مياه النيل\""
-  ],
+  "issues": [],
   "views": {
    "relation": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -12225,7 +12114,7 @@
     ]
    },
    "relation_end": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -12784,7 +12673,7 @@
     ]
    },
    "relation_at182": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -13344,6 +13233,6 @@
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 12
+  "issueCount": 0
  }
 }

@@ -1,7 +1,7 @@
 {
  "se": {
   "device": "667x375 side 0 bottom 0 none",
-  "renderedAt": "2026-11-07T17:21:14.382Z",
+  "renderedAt": "2026-11-07T17:59:35.433Z",
   "inputs": {
    "files": [
     "index.html",
@@ -24,45 +24,12 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "65bf5bd5eaeb4f879ef591218cd8c5fa3c990e0b"
+   "sha1": "124c4ed6d13ee86a67c628bcb320e333976c1df9"
   },
-  "issues": [
-   "why: ellipsis on \"الاستقرار\"",
-   "why: ellipsis on \"لماذا؟\"",
-   "why: clipped text (top): \"·\" 561.78..571.31 y 84..101",
-   "why: ellipsis on \"الآن\"",
-   "why: clipped text (top): \"58%\" 517.98..542.69 y 84..101",
-   "why: clipped text (top): \"·\" 508.45..517.98 y 84..101",
-   "why: ellipsis on \"يتجه إلى\"",
-   "why: clipped text (top): \"56%\" 446.89..471.59 y 84..101",
-   "why_end: ellipsis on \"الاستقرار\"",
-   "why_end: ellipsis on \"لماذا؟\"",
-   "why_end: clipped text (top): \"·\" 561.78..571.31 y 84..101",
-   "why_end: ellipsis on \"الآن\"",
-   "why_end: clipped text (top): \"58%\" 517.98..542.69 y 84..101",
-   "why_end: clipped text (top): \"·\" 508.45..517.98 y 84..101",
-   "why_end: ellipsis on \"يتجه إلى\"",
-   "why_end: clipped text (top): \"56%\" 446.89..471.59 y 84..101",
-   "why_at131: ellipsis on \"الاستقرار\"",
-   "why_at131: ellipsis on \"لماذا؟\"",
-   "why_at131: clipped text (top): \"·\" 561.78..571.31 y 84..101",
-   "why_at131: ellipsis on \"الآن\"",
-   "why_at131: clipped text (top): \"58%\" 517.98..542.69 y 84..101",
-   "why_at131: clipped text (top): \"·\" 508.45..517.98 y 84..101",
-   "why_at131: ellipsis on \"يتجه إلى\"",
-   "why_at131: clipped text (top): \"56%\" 446.89..471.59 y 84..101",
-   "why_at262: ellipsis on \"الاستقرار\"",
-   "why_at262: ellipsis on \"لماذا؟\"",
-   "why_at262: clipped text (top): \"·\" 561.78..571.31 y 84..101",
-   "why_at262: ellipsis on \"الآن\"",
-   "why_at262: clipped text (top): \"58%\" 517.98..542.69 y 84..101",
-   "why_at262: clipped text (top): \"·\" 508.45..517.98 y 84..101",
-   "why_at262: ellipsis on \"يتجه إلى\"",
-   "why_at262: clipped text (top): \"56%\" 446.89..471.59 y 84..101"
-  ],
+  "issues": [],
   "views": {
    "why": {
-    "issueCount": 8,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -489,7 +456,7 @@
     ]
    },
    "why_end": {
-    "issueCount": 8,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -903,7 +870,7 @@
     ]
    },
    "why_at131": {
-    "issueCount": 8,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -1305,7 +1272,7 @@
     ]
    },
    "why_at262": {
-    "issueCount": 8,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -1742,11 +1709,11 @@
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 32
+  "issueCount": 0
  },
  "mini": {
   "device": "812x375 side 50 bottom 21 notch",
-  "renderedAt": "2026-11-07T17:21:21.688Z",
+  "renderedAt": "2026-11-07T17:59:42.886Z",
   "inputs": {
    "files": [
     "index.html",
@@ -1769,45 +1736,12 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "65bf5bd5eaeb4f879ef591218cd8c5fa3c990e0b"
+   "sha1": "124c4ed6d13ee86a67c628bcb320e333976c1df9"
   },
-  "issues": [
-   "why: ellipsis on \"الاستقرار\"",
-   "why: ellipsis on \"لماذا؟\"",
-   "why: clipped text (top): \"·\" 664.78..674.31 y 84..101",
-   "why: ellipsis on \"الآن\"",
-   "why: clipped text (top): \"58%\" 620.98..645.69 y 84..101",
-   "why: clipped text (top): \"·\" 611.45..620.98 y 84..101",
-   "why: ellipsis on \"يتجه إلى\"",
-   "why: clipped text (top): \"56%\" 549.89..574.59 y 84..101",
-   "why_end: ellipsis on \"الاستقرار\"",
-   "why_end: ellipsis on \"لماذا؟\"",
-   "why_end: clipped text (top): \"·\" 664.78..674.31 y 84..101",
-   "why_end: ellipsis on \"الآن\"",
-   "why_end: clipped text (top): \"58%\" 620.98..645.69 y 84..101",
-   "why_end: clipped text (top): \"·\" 611.45..620.98 y 84..101",
-   "why_end: ellipsis on \"يتجه إلى\"",
-   "why_end: clipped text (top): \"56%\" 549.89..574.59 y 84..101",
-   "why_at117: ellipsis on \"الاستقرار\"",
-   "why_at117: ellipsis on \"لماذا؟\"",
-   "why_at117: clipped text (top): \"·\" 664.78..674.31 y 84..101",
-   "why_at117: ellipsis on \"الآن\"",
-   "why_at117: clipped text (top): \"58%\" 620.98..645.69 y 84..101",
-   "why_at117: clipped text (top): \"·\" 611.45..620.98 y 84..101",
-   "why_at117: ellipsis on \"يتجه إلى\"",
-   "why_at117: clipped text (top): \"56%\" 549.89..574.59 y 84..101",
-   "why_at234: ellipsis on \"الاستقرار\"",
-   "why_at234: ellipsis on \"لماذا؟\"",
-   "why_at234: clipped text (top): \"·\" 664.78..674.31 y 84..101",
-   "why_at234: ellipsis on \"الآن\"",
-   "why_at234: clipped text (top): \"58%\" 620.98..645.69 y 84..101",
-   "why_at234: clipped text (top): \"·\" 611.45..620.98 y 84..101",
-   "why_at234: ellipsis on \"يتجه إلى\"",
-   "why_at234: clipped text (top): \"56%\" 549.89..574.59 y 84..101"
-  ],
+  "issues": [],
   "views": {
    "why": {
-    "issueCount": 8,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -2231,7 +2165,7 @@
     ]
    },
    "why_end": {
-    "issueCount": 8,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -2637,7 +2571,7 @@
     ]
    },
    "why_at117": {
-    "issueCount": 8,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -3046,7 +2980,7 @@
     ]
    },
    "why_at234": {
-    "issueCount": 8,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -3478,11 +3412,11 @@
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 32
+  "issueCount": 0
  },
  "i14": {
   "device": "844x390 side 47 bottom 21 notch",
-  "renderedAt": "2026-11-07T17:21:29.235Z",
+  "renderedAt": "2026-11-07T17:59:51.072Z",
   "inputs": {
    "files": [
     "index.html",
@@ -3505,45 +3439,12 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "65bf5bd5eaeb4f879ef591218cd8c5fa3c990e0b"
+   "sha1": "124c4ed6d13ee86a67c628bcb320e333976c1df9"
   },
-  "issues": [
-   "why: ellipsis on \"الاستقرار\"",
-   "why: ellipsis on \"لماذا؟\"",
-   "why: clipped text (top): \"·\" 699.78..709.31 y 84..101",
-   "why: ellipsis on \"الآن\"",
-   "why: clipped text (top): \"58%\" 655.98..680.69 y 84..101",
-   "why: clipped text (top): \"·\" 646.45..655.98 y 84..101",
-   "why: ellipsis on \"يتجه إلى\"",
-   "why: clipped text (top): \"56%\" 584.89..609.59 y 84..101",
-   "why_end: ellipsis on \"الاستقرار\"",
-   "why_end: ellipsis on \"لماذا؟\"",
-   "why_end: clipped text (top): \"·\" 699.78..709.31 y 84..101",
-   "why_end: ellipsis on \"الآن\"",
-   "why_end: clipped text (top): \"58%\" 655.98..680.69 y 84..101",
-   "why_end: clipped text (top): \"·\" 646.45..655.98 y 84..101",
-   "why_end: ellipsis on \"يتجه إلى\"",
-   "why_end: clipped text (top): \"56%\" 584.89..609.59 y 84..101",
-   "why_at132: ellipsis on \"الاستقرار\"",
-   "why_at132: ellipsis on \"لماذا؟\"",
-   "why_at132: clipped text (top): \"·\" 699.78..709.31 y 84..101",
-   "why_at132: ellipsis on \"الآن\"",
-   "why_at132: clipped text (top): \"58%\" 655.98..680.69 y 84..101",
-   "why_at132: clipped text (top): \"·\" 646.45..655.98 y 84..101",
-   "why_at132: ellipsis on \"يتجه إلى\"",
-   "why_at132: clipped text (top): \"56%\" 584.89..609.59 y 84..101",
-   "why_at264: ellipsis on \"الاستقرار\"",
-   "why_at264: ellipsis on \"لماذا؟\"",
-   "why_at264: clipped text (top): \"·\" 699.78..709.31 y 84..101",
-   "why_at264: ellipsis on \"الآن\"",
-   "why_at264: clipped text (top): \"58%\" 655.98..680.69 y 84..101",
-   "why_at264: clipped text (top): \"·\" 646.45..655.98 y 84..101",
-   "why_at264: ellipsis on \"يتجه إلى\"",
-   "why_at264: clipped text (top): \"56%\" 584.89..609.59 y 84..101"
-  ],
+  "issues": [],
   "views": {
    "why": {
-    "issueCount": 8,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -4092,7 +3993,7 @@
     ]
    },
    "why_end": {
-    "issueCount": 8,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -4623,7 +4524,7 @@
     ]
    },
    "why_at132": {
-    "issueCount": 8,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -5142,7 +5043,7 @@
     ]
    },
    "why_at264": {
-    "issueCount": 8,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -5691,11 +5592,11 @@
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 32
+  "issueCount": 0
  },
  "i16": {
   "device": "852x393 side 59 bottom 21 island",
-  "renderedAt": "2026-11-07T17:21:36.973Z",
+  "renderedAt": "2026-11-07T18:00:00.116Z",
   "inputs": {
    "files": [
     "index.html",
@@ -5718,45 +5619,12 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "65bf5bd5eaeb4f879ef591218cd8c5fa3c990e0b"
+   "sha1": "124c4ed6d13ee86a67c628bcb320e333976c1df9"
   },
-  "issues": [
-   "why: ellipsis on \"الاستقرار\"",
-   "why: ellipsis on \"لماذا؟\"",
-   "why: clipped text (top): \"·\" 695.78..705.31 y 84..101",
-   "why: ellipsis on \"الآن\"",
-   "why: clipped text (top): \"58%\" 651.98..676.69 y 84..101",
-   "why: clipped text (top): \"·\" 642.45..651.98 y 84..101",
-   "why: ellipsis on \"يتجه إلى\"",
-   "why: clipped text (top): \"56%\" 580.89..605.59 y 84..101",
-   "why_end: ellipsis on \"الاستقرار\"",
-   "why_end: ellipsis on \"لماذا؟\"",
-   "why_end: clipped text (top): \"·\" 695.78..705.31 y 84..101",
-   "why_end: ellipsis on \"الآن\"",
-   "why_end: clipped text (top): \"58%\" 651.98..676.69 y 84..101",
-   "why_end: clipped text (top): \"·\" 642.45..651.98 y 84..101",
-   "why_end: ellipsis on \"يتجه إلى\"",
-   "why_end: clipped text (top): \"56%\" 580.89..605.59 y 84..101",
-   "why_at135: ellipsis on \"الاستقرار\"",
-   "why_at135: ellipsis on \"لماذا؟\"",
-   "why_at135: clipped text (top): \"·\" 695.78..705.31 y 84..101",
-   "why_at135: ellipsis on \"الآن\"",
-   "why_at135: clipped text (top): \"58%\" 651.98..676.69 y 84..101",
-   "why_at135: clipped text (top): \"·\" 642.45..651.98 y 84..101",
-   "why_at135: ellipsis on \"يتجه إلى\"",
-   "why_at135: clipped text (top): \"56%\" 580.89..605.59 y 84..101",
-   "why_at270: ellipsis on \"الاستقرار\"",
-   "why_at270: ellipsis on \"لماذا؟\"",
-   "why_at270: clipped text (top): \"·\" 695.78..705.31 y 84..101",
-   "why_at270: ellipsis on \"الآن\"",
-   "why_at270: clipped text (top): \"58%\" 651.98..676.69 y 84..101",
-   "why_at270: clipped text (top): \"·\" 642.45..651.98 y 84..101",
-   "why_at270: ellipsis on \"يتجه إلى\"",
-   "why_at270: clipped text (top): \"56%\" 580.89..605.59 y 84..101"
-  ],
+  "issues": [],
   "views": {
    "why": {
-    "issueCount": 8,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -6294,7 +6162,7 @@
     ]
    },
    "why_end": {
-    "issueCount": 8,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -6819,7 +6687,7 @@
     ]
    },
    "why_at135": {
-    "issueCount": 8,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -7342,7 +7210,7 @@
     ]
    },
    "why_at270": {
-    "issueCount": 8,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -7880,11 +7748,11 @@
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 32
+  "issueCount": 0
  },
  "i16pro": {
   "device": "874x402 side 62 bottom 21 island",
-  "renderedAt": "2026-11-07T17:21:44.869Z",
+  "renderedAt": "2026-11-07T18:00:09.270Z",
   "inputs": {
    "files": [
     "index.html",
@@ -7907,37 +7775,12 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "65bf5bd5eaeb4f879ef591218cd8c5fa3c990e0b"
+   "sha1": "124c4ed6d13ee86a67c628bcb320e333976c1df9"
   },
-  "issues": [
-   "why: ellipsis on \"الاستقرار\"",
-   "why: ellipsis on \"لماذا؟\"",
-   "why: clipped text (top): \"·\" 714.78..724.31 y 84..101",
-   "why: ellipsis on \"الآن\"",
-   "why: clipped text (top): \"58%\" 670.98..695.69 y 84..101",
-   "why: clipped text (top): \"·\" 661.45..670.98 y 84..101",
-   "why: ellipsis on \"يتجه إلى\"",
-   "why: clipped text (top): \"56%\" 599.89..624.59 y 84..101",
-   "why_end: ellipsis on \"الاستقرار\"",
-   "why_end: ellipsis on \"لماذا؟\"",
-   "why_end: clipped text (top): \"·\" 714.78..724.31 y 84..101",
-   "why_end: ellipsis on \"الآن\"",
-   "why_end: clipped text (top): \"58%\" 670.98..695.69 y 84..101",
-   "why_end: clipped text (top): \"·\" 661.45..670.98 y 84..101",
-   "why_end: ellipsis on \"يتجه إلى\"",
-   "why_end: clipped text (top): \"56%\" 599.89..624.59 y 84..101",
-   "why_at144: ellipsis on \"الاستقرار\"",
-   "why_at144: ellipsis on \"لماذا؟\"",
-   "why_at144: clipped text (top): \"·\" 714.78..724.31 y 84..101",
-   "why_at144: ellipsis on \"الآن\"",
-   "why_at144: clipped text (top): \"58%\" 670.98..695.69 y 84..101",
-   "why_at144: clipped text (top): \"·\" 661.45..670.98 y 84..101",
-   "why_at144: ellipsis on \"يتجه إلى\"",
-   "why_at144: clipped text (top): \"56%\" 599.89..624.59 y 84..101"
-  ],
+  "issues": [],
   "views": {
    "why": {
-    "issueCount": 8,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -8486,7 +8329,7 @@
     ]
    },
    "why_end": {
-    "issueCount": 8,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -9027,7 +8870,7 @@
     ]
    },
    "why_at144": {
-    "issueCount": 8,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -9574,11 +9417,11 @@
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 24
+  "issueCount": 0
  },
  "i11": {
   "device": "896x414 side 48 bottom 21 notch",
-  "renderedAt": "2026-11-07T17:21:51.835Z",
+  "renderedAt": "2026-11-07T18:00:17.024Z",
   "inputs": {
    "files": [
     "index.html",
@@ -9601,37 +9444,12 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "65bf5bd5eaeb4f879ef591218cd8c5fa3c990e0b"
+   "sha1": "124c4ed6d13ee86a67c628bcb320e333976c1df9"
   },
-  "issues": [
-   "why: ellipsis on \"الاستقرار\"",
-   "why: ellipsis on \"لماذا؟\"",
-   "why: clipped text (top): \"·\" 750.78..760.31 y 84..101",
-   "why: ellipsis on \"الآن\"",
-   "why: clipped text (top): \"58%\" 706.98..731.69 y 84..101",
-   "why: clipped text (top): \"·\" 697.45..706.98 y 84..101",
-   "why: ellipsis on \"يتجه إلى\"",
-   "why: clipped text (top): \"56%\" 635.89..660.59 y 84..101",
-   "why_end: ellipsis on \"الاستقرار\"",
-   "why_end: ellipsis on \"لماذا؟\"",
-   "why_end: clipped text (top): \"·\" 750.78..760.31 y 84..101",
-   "why_end: ellipsis on \"الآن\"",
-   "why_end: clipped text (top): \"58%\" 706.98..731.69 y 84..101",
-   "why_end: clipped text (top): \"·\" 697.45..706.98 y 84..101",
-   "why_end: ellipsis on \"يتجه إلى\"",
-   "why_end: clipped text (top): \"56%\" 635.89..660.59 y 84..101",
-   "why_at156: ellipsis on \"الاستقرار\"",
-   "why_at156: ellipsis on \"لماذا؟\"",
-   "why_at156: clipped text (top): \"·\" 750.78..760.31 y 84..101",
-   "why_at156: ellipsis on \"الآن\"",
-   "why_at156: clipped text (top): \"58%\" 706.98..731.69 y 84..101",
-   "why_at156: clipped text (top): \"·\" 697.45..706.98 y 84..101",
-   "why_at156: ellipsis on \"يتجه إلى\"",
-   "why_at156: clipped text (top): \"56%\" 635.89..660.59 y 84..101"
-  ],
+  "issues": [],
   "views": {
    "why": {
-    "issueCount": 8,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -10184,7 +10002,7 @@
     ]
    },
    "why_end": {
-    "issueCount": 8,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -10724,7 +10542,7 @@
     ]
    },
    "why_at156": {
-    "issueCount": 8,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -11285,11 +11103,11 @@
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 24
+  "issueCount": 0
  },
  "i16promax": {
   "device": "956x440 side 62 bottom 21 island",
-  "renderedAt": "2026-11-07T17:21:59.121Z",
+  "renderedAt": "2026-11-07T18:00:25.013Z",
   "inputs": {
    "files": [
     "index.html",
@@ -11312,37 +11130,12 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "65bf5bd5eaeb4f879ef591218cd8c5fa3c990e0b"
+   "sha1": "124c4ed6d13ee86a67c628bcb320e333976c1df9"
   },
-  "issues": [
-   "why: ellipsis on \"الاستقرار\"",
-   "why: ellipsis on \"لماذا؟\"",
-   "why: clipped text (top): \"·\" 796.78..806.31 y 84..101",
-   "why: ellipsis on \"الآن\"",
-   "why: clipped text (top): \"58%\" 752.98..777.69 y 84..101",
-   "why: clipped text (top): \"·\" 743.45..752.98 y 84..101",
-   "why: ellipsis on \"يتجه إلى\"",
-   "why: clipped text (top): \"56%\" 681.89..706.59 y 84..101",
-   "why_end: ellipsis on \"الاستقرار\"",
-   "why_end: ellipsis on \"لماذا؟\"",
-   "why_end: clipped text (top): \"·\" 796.78..806.31 y 84..101",
-   "why_end: ellipsis on \"الآن\"",
-   "why_end: clipped text (top): \"58%\" 752.98..777.69 y 84..101",
-   "why_end: clipped text (top): \"·\" 743.45..752.98 y 84..101",
-   "why_end: ellipsis on \"يتجه إلى\"",
-   "why_end: clipped text (top): \"56%\" 681.89..706.59 y 84..101",
-   "why_at182: ellipsis on \"الاستقرار\"",
-   "why_at182: ellipsis on \"لماذا؟\"",
-   "why_at182: clipped text (top): \"·\" 796.78..806.31 y 84..101",
-   "why_at182: ellipsis on \"الآن\"",
-   "why_at182: clipped text (top): \"58%\" 752.98..777.69 y 84..101",
-   "why_at182: clipped text (top): \"·\" 743.45..752.98 y 84..101",
-   "why_at182: ellipsis on \"يتجه إلى\"",
-   "why_at182: clipped text (top): \"56%\" 681.89..706.59 y 84..101"
-  ],
+  "issues": [],
   "views": {
    "why": {
-    "issueCount": 8,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -11910,7 +11703,7 @@
     ]
    },
    "why_end": {
-    "issueCount": 8,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -12475,7 +12268,7 @@
     ]
    },
    "why_at182": {
-    "issueCount": 8,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -13041,6 +12834,6 @@
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 24
+  "issueCount": 0
  }
 }

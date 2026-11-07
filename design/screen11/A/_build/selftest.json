@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-07T17:40:32.477Z",
+ "ranAt": "2026-11-07T18:19:03.070Z",
  "inputs": {
   "files": [
    "index.html",
@@ -22,112 +22,27 @@
    "header_cairo.jpg",
    "map_overlay_cairo.svg"
   ],
-  "sha1": "3ae79336bbcc047e15da0a997affe5809f072e14"
+  "sha1": "21a824a4289f034c7a7ef41c0edef0a2d1ee6815"
  },
  "cleanIssues": {
-  "i16promax": [
-   "ellipsis on \"الاستخبارات\"",
-   "ellipsis on \"مصر\"",
-   "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-   "ellipsis on \"جهاز الاستخبارات\""
-  ],
-  "i16promax_overview_end": [
-   "ellipsis on \"الاستخبارات\"",
-   "ellipsis on \"مصر\"",
-   "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-   "ellipsis on \"جهاز الاستخبارات\""
-  ],
-  "i16promax_networks": [
-   "ellipsis on \"الاستخبارات\"",
-   "ellipsis on \"مصر\"",
-   "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-   "ellipsis on \"جهاز الاستخبارات\""
-  ],
-  "i16promax_networks_end": [
-   "ellipsis on \"الاستخبارات\"",
-   "ellipsis on \"مصر\"",
-   "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-   "ellipsis on \"جهاز الاستخبارات\""
-  ],
-  "i16promax_ops": [
-   "ellipsis on \"الاستخبارات\"",
-   "ellipsis on \"مصر\"",
-   "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-   "ellipsis on \"جهاز الاستخبارات\""
-  ],
-  "i16promax_ops_end": [
-   "ellipsis on \"الاستخبارات\"",
-   "ellipsis on \"مصر\"",
-   "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-   "ellipsis on \"جهاز الاستخبارات\""
-  ],
-  "i16promax_counter": [
-   "ellipsis on \"الاستخبارات\"",
-   "ellipsis on \"مصر\"",
-   "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-   "ellipsis on \"جهاز الاستخبارات\""
-  ],
-  "i16promax_counter_end": [
-   "ellipsis on \"الاستخبارات\"",
-   "ellipsis on \"مصر\"",
-   "clipped text (top): \"·\" 804.64..814.17 y 84..101",
-   "ellipsis on \"جهاز الاستخبارات\""
-  ],
+  "i16promax": [],
+  "i16promax_overview_end": [],
+  "i16promax_networks": [],
+  "i16promax_networks_end": [],
+  "i16promax_ops": [],
+  "i16promax_ops_end": [],
+  "i16promax_counter": [],
+  "i16promax_counter_end": [],
   "i16promax coverage": [],
-  "se": [
-   "ellipsis on \"الاستخبارات\"",
-   "ellipsis on \"مصر\"",
-   "clipped text (top): \"·\" 569.64..579.17 y 84..101",
-   "ellipsis on \"جهاز الاستخبارات\""
-  ],
-  "se_overview_end": [
-   "ellipsis on \"الاستخبارات\"",
-   "ellipsis on \"مصر\"",
-   "clipped text (top): \"·\" 569.64..579.17 y 84..101",
-   "ellipsis on \"جهاز الاستخبارات\""
-  ],
-  "se_networks": [
-   "ellipsis on \"الاستخبارات\"",
-   "ellipsis on \"مصر\"",
-   "clipped text (top): \"·\" 569.64..579.17 y 84..101",
-   "ellipsis on \"جهاز الاستخبارات\""
-  ],
-  "se_networks_end": [
-   "ellipsis on \"الاستخبارات\"",
-   "ellipsis on \"مصر\"",
-   "clipped text (top): \"·\" 569.64..579.17 y 84..101",
-   "ellipsis on \"جهاز الاستخبارات\""
-  ],
-  "se_ops": [
-   "ellipsis on \"الاستخبارات\"",
-   "ellipsis on \"مصر\"",
-   "clipped text (top): \"·\" 569.64..579.17 y 84..101",
-   "ellipsis on \"جهاز الاستخبارات\""
-  ],
-  "se_ops_end": [
-   "ellipsis on \"الاستخبارات\"",
-   "ellipsis on \"مصر\"",
-   "clipped text (top): \"·\" 569.64..579.17 y 84..101",
-   "ellipsis on \"جهاز الاستخبارات\""
-  ],
-  "se_counter": [
-   "ellipsis on \"الاستخبارات\"",
-   "ellipsis on \"مصر\"",
-   "clipped text (top): \"·\" 569.64..579.17 y 84..101",
-   "ellipsis on \"جهاز الاستخبارات\""
-  ],
-  "se_counter_end": [
-   "ellipsis on \"الاستخبارات\"",
-   "ellipsis on \"مصر\"",
-   "clipped text (top): \"·\" 569.64..579.17 y 84..101",
-   "ellipsis on \"جهاز الاستخبارات\""
-  ],
-  "se_networks_at86": [
-   "ellipsis on \"الاستخبارات\"",
-   "ellipsis on \"مصر\"",
-   "clipped text (top): \"·\" 569.64..579.17 y 84..101",
-   "ellipsis on \"جهاز الاستخبارات\""
-  ],
+  "se": [],
+  "se_overview_end": [],
+  "se_networks": [],
+  "se_networks_end": [],
+  "se_ops": [],
+  "se_ops_end": [],
+  "se_counter": [],
+  "se_counter_end": [],
+  "se_networks_at86": [],
   "se coverage": []
  },
  "results": [
@@ -135,18 +50,16 @@
    "name": "type size",
    "ok": true,
    "sample": [
-    "font size 17 for \"الاستخبارات\"",
-    "ellipsis on \"الاستخبارات\"",
-    "ellipsis on \"مصر\""
+    "font size 17 for \"الاستخبارات\""
    ]
   },
   {
    "name": "font weight",
    "ok": true,
    "sample": [
-    "ellipsis on \"الاستخبارات\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "font weight 11.5/700 for \"نظرة عامة\"",
+    "font weight 11.5/700 for \"الشبكات\"",
+    "font weight 11.5/700 for \"العمليات\""
    ]
   },
   {
@@ -154,8 +67,7 @@
    "ok": true,
    "sample": [
     "text colour off-token rgb(136, 153, 170): \"الاستخبارات\"",
-    "ellipsis on \"الاستخبارات\"",
-    "ellipsis on \"مصر\""
+    "contrast 2.26 for \"الاستخبارات\""
    ]
   },
   {
@@ -163,26 +75,25 @@
    "ok": true,
    "sample": [
     "panel radius الاستخبارات: مصر: 6 (want 12)",
-    "radius 6 for .sheet (want 12)",
-    "ellipsis on \"الاستخبارات\""
+    "radius 6 for .sheet (want 12)"
    ]
   },
   {
    "name": "tap in the side inset",
    "ok": true,
    "sample": [
-    "ellipsis on \"الاستخبارات\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 834.64..844.17 y 84..101"
+    "text in side inset: 7",
+    "text in side inset: /",
+    "text in side inset: دون تغير"
    ]
   },
   {
    "name": "panel in the side inset",
    "ok": true,
    "sample": [
-    "ellipsis on \"الاستخبارات\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 834.64..844.17 y 84..101"
+    "text in side inset: 7",
+    "text in side inset: /",
+    "text in side inset: دون تغير"
    ]
   },
   {
@@ -190,8 +101,8 @@
    "ok": true,
    "sample": [
     "panel not opaque: الاستخبارات: مصر rgba(9, 17, 25, 0.66)",
-    "ellipsis on \"الاستخبارات\"",
-    "ellipsis on \"مصر\""
+    "contrast 2.79 for \"نظرة عامة\"",
+    "contrast 4.08 for \"الشبكات\""
    ]
   },
   {
@@ -199,314 +110,276 @@
    "ok": true,
    "sample": [
     "panel not opaque (opacity 0.60): الاستخبارات: مصر",
-    "ellipsis on \"الاستخبارات\"",
-    "ellipsis on \"مصر\""
+    "brief text not fully visible: الاستخبارات",
+    "brief text not fully visible: سري"
    ]
   },
   {
    "name": "Egypt covered",
    "ok": true,
    "sample": [
-    "ellipsis on \"الاستخبارات\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "Nile delta covered by panel الاستخبارات: مصر",
+    "Nile delta under the hit box of نظرة عامة",
+    "Nile delta under the hit box of الشبكات"
    ]
   },
   {
    "name": "map dimmed",
    "ok": true,
    "sample": [
-    "ellipsis on \"الاستخبارات\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "the map is dimmed (opacity 1.00, filter brightness(0.35))"
    ]
   },
   {
    "name": "map faded",
    "ok": true,
    "sample": [
-    "ellipsis on \"الاستخبارات\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "the map is dimmed (opacity 0.30, filter none)"
    ]
   },
   {
    "name": "scrim over the map",
    "ok": true,
    "sample": [
-    "ellipsis on \"الاستخبارات\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "something drawn over the map: DIV (rgba(0, 0, 0, 0.55))",
+    "contrast 1.92 for \"3\""
    ]
   },
   {
    "name": "sheet width",
    "ok": true,
    "sample": [
-    "ellipsis on \"الاستخبارات\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "sheet width 330 (want round(clamp(43% of 832, 340, 380)), or the room the dock leaves if 330..: 358)"
    ]
   },
   {
    "name": "sheet top",
    "ok": true,
    "sample": [
-    "ellipsis on \"الاستخبارات\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 70..87"
+    "hit overlap الاستقرار 58% / إغلاق",
+    "panel overlap الدولة: مصر، حسني مبارك، ج / الاستخبارات: مصر",
+    "panel overlap الخزينة 36.0 مليار $ الاست / الاستخبارات: مصر"
    ]
   },
   {
    "name": "dock hidden although it fits",
    "ok": true,
    "sample": [
-    "ellipsis on \"الاستخبارات\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "dock hidden although it fits left of the sheet"
    ]
   },
   {
    "name": "dock shown on the SE",
    "ok": true,
    "sample": [
-    "ellipsis on \"الاستخبارات\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 569.64..579.17 y 84..101"
+    "icon over text: i / \"تمويل القدرات السيبرانية\"",
+    "icon over text: i / \"مليون $ سنويًا · خلال سنة\"",
+    "icon over text: i / \"مليون $ سنويًا · خلال سنة\""
    ]
   },
   {
    "name": "left stack moved",
    "ok": true,
    "sample": [
-    "ellipsis on \"الاستخبارات\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "HUD element moved from its B3 position: .toast x 70.0..275.6 y 56.0..88.0",
+    "HUD element moved from its B3 position: .btn.mode x 70.0..191.6 y 96.0..128.0",
+    "HUD element moved from its B3 position: .btn.home x 70.0..141.5 y 136.0..168.0"
    ]
   },
   {
    "name": "fit not the loosest",
    "ok": true,
    "sample": [
-    "ellipsis on \"الاستخبارات\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 78..95"
+    "fit level 6 is not the loosest that fits: [[0,0]]"
    ]
   },
   {
    "name": "two tab bodies",
    "ok": true,
    "sample": [
-    "ellipsis on \"الاستخبارات\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "clipped text (bottom): \"السيبراني\" 843.72..881 y 253.5..270.5",
+    "clipped text (bottom): \"4\" 750.44..758.25 y 252.5..271.5",
+    "clipped text (bottom): \"/\" 738.61..750.44 y 252.5..271.5"
    ]
   },
   {
    "name": "two tabs selected",
    "ok": true,
    "sample": [
-    "ellipsis on \"الاستخبارات\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "exactly the open tab must be selected"
    ]
   },
   {
    "name": "tabs not a tab list",
    "ok": true,
    "sample": [
-    "ellipsis on \"الاستخبارات\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "a11y: the tabs are not a tab list"
    ]
   },
   {
    "name": "tabs reversed",
    "ok": true,
    "sample": [
-    "ellipsis on \"الاستخبارات\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "tab 2 is not left of tab 1",
+    "tab 3 is not left of tab 2",
+    "tab 4 is not left of tab 3"
    ]
   },
   {
    "name": "fades wrong",
    "ok": true,
    "sample": [
-    "ellipsis on \"الاستخبارات\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "clipped text (bottom): \"الانكشاف مرتفع\" 801..869 y 402..419",
+    "fades 0/0 do not match the scroll state (top 0, over 53.0)"
    ]
   },
   {
    "name": "hint chevron missing",
    "ok": true,
    "sample": [
-    "ellipsis on \"الاستخبارات\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "scroll hint chevron missing with content below"
    ]
   },
   {
    "name": "hint over the content",
    "ok": true,
    "sample": [
-    "ellipsis on \"الاستخبارات\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "scroll hint not centred in the clear strip under the fade: y 249.0..267.0 (strip 395.0..417.0)"
    ]
   },
   {
    "name": "map label cut",
    "ok": true,
    "sample": [
-    "ellipsis on \"الاستخبارات\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "map label ليبيا sliced by the screen edge or the side inset",
+    "map label إيران sliced by the screen edge or the side inset",
+    "map label إيران squeezed between a panel and the screen edge"
    ]
   },
   {
    "name": "contrast",
    "ok": true,
    "sample": [
-    "ellipsis on \"الاستخبارات\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "contrast 1 for \"الجهاز\"",
+    "contrast 1 for \"7\"",
+    "contrast 1.73 for \"/\""
    ]
   },
   {
    "name": "dock item not marked",
    "ok": true,
    "sample": [
-    "ellipsis on \"الاستخبارات\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "the open section «الاستخبارات» is not marked in the dock"
    ]
   },
   {
    "name": "identity line missing",
    "ok": true,
    "sample": [
-    "ellipsis on \"الاستخبارات\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "panel top line none rgb(200, 115, 214) 2px (want the section colour, 2 pt, at the top)"
    ]
   },
   {
    "name": "emblem drawn grey",
    "ok": true,
    "sample": [
-    "ellipsis on \"الاستخبارات\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "section emblem missing or not in the section colour"
    ]
   },
   {
    "name": "open tab neutral",
    "ok": true,
    "sample": [
-    "ellipsis on \"الاستخبارات\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "open tab not in the section colour"
    ]
   },
   {
    "name": "section colour on data",
    "ok": true,
    "sample": [
-    "ellipsis on \"الاستخبارات\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "section colour on data text: \"مصر\"",
+    "section colour on data text: \"جهاز الاستخبارات\"",
+    "section colour on data chrome: مصر · جهاز الاستخبارات"
    ]
   },
   {
    "name": "section colour on a rule",
    "ok": true,
    "sample": [
-    "ellipsis on \"الاستخبارات\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "section colour on data chrome: أقسام الاستخبارات"
    ]
   },
   {
    "name": "money unit",
    "ok": true,
    "sample": [
-    "ellipsis on \"الاستخبارات\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "clipped text (top): \"0.4\" 866.09..881 y 153..168",
+    "clipped text (top): \"مليار $\" 838.42..866.09 y 153..168",
+    "money unit: «0.4 مليار» (under 1 billion is written in millions)"
    ]
   },
   {
    "name": "sign outside its number",
    "ok": true,
    "sample": [
-    "ellipsis on \"الاستخبارات\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "clipped text (top): \"تغير +\" 859.06..881 y 153..168",
+    "clipped text (top): \"3\" 853.06..859.06 y 153..168",
+    "a sign outside its number: «تغير +3»"
    ]
   },
   {
    "name": "colour alone",
    "ok": true,
    "sample": [
-    "ellipsis on \"الاستخبارات\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "clipped text (top): \"تراجع\" 860.27..881 y 153..168",
+    "colour alone: «تراجع» has no arrow or icon"
    ]
   },
   {
    "name": "an image in the sheet",
    "ok": true,
    "sample": [
-    "ellipsis on \"الاستخبارات\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "an image in the sheet"
    ]
   },
   {
    "name": "close not round",
    "ok": true,
    "sample": [
-    "close button is not round",
-    "ellipsis on \"الاستخبارات\"",
-    "ellipsis on \"مصر\""
+    "close button is not round"
    ]
   },
   {
    "name": "label without a role",
    "ok": true,
    "sample": [
-    "ellipsis on \"الاستخبارات\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "clipped text (top): \"اختبار\" 860.25..881 y 153..168",
+    "a11y: a label VoiceOver may skip (no role): «اختبار»"
    ]
   },
   {
    "name": "brief text hidden",
    "ok": true,
    "sample": [
-    "ellipsis on \"الاستخبارات\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "brief text not fully visible: 7"
    ]
   },
   {
    "name": "overview scrolls",
    "ok": true,
    "sample": [
-    "ellipsis on \"الاستخبارات\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 569.64..579.17 y 84..101"
+    "overview needs scrolling: 396.0 pt over",
+    "fades 0/0 do not match the scroll state (top 0, over 396.0)",
+    "brief text not fully visible: الجهاز"
    ]
   },
   {
    "name": "18 pt misuse",
    "ok": true,
    "sample": [
-    "ellipsis on \"الاستخبارات\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "18 pt is for the panel's name and the adjusted values only: \"دون تغير\"",
+    "18 pt is for the panel's name and the adjusted values only: \"دون تغير\"",
+    "18 pt is for the panel's name and the adjusted values only: \"قيد التنفيذ\""
    ]
   },
   {
@@ -540,378 +413,339 @@
    "name": "text overlap",
    "ok": true,
    "sample": [
-    "ellipsis on \"الاستخبارات\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 70..87"
+    "text overlap \"الاستخبارات\" / \"مصر\"",
+    "text overlap \"الاستخبارات\" / \"·\"",
+    "text overlap \"الاستخبارات\" / \"جهاز الاستخبارات\""
    ]
   },
   {
    "name": "text into a control",
    "ok": true,
    "sample": [
-    "ellipsis on \"الاستخبارات\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "text overlap \"تمويل القدرات السيبرانية\" / \"السيبراني\"",
+    "text overlap \"مليون $ سنويًا · خلال سنة\" / \"السيبراني\"",
+    "text over a control: \"تمويل القدرات السيبرانية\" runs into «السيبراني +1»"
    ]
   },
   {
    "name": "clipped text",
    "ok": true,
    "sample": [
-    "ellipsis on \"الاستخبارات\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "clipped text (sides): \"الجهاز\" 877.45..903 y 161..178",
+    "text outside the sheet's 12 pt padding: \"الجهاز\"",
+    "clipped text (sides): \"10\" 884.86..898.67 y 187..204"
    ]
   },
   {
    "name": "dock underline missing",
    "ok": true,
    "sample": [
-    "ellipsis on \"الاستخبارات\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "dock underline missing or off: none 16pxx2px rgb(200, 115, 214) (want 16 x 2 in the section colour)"
    ]
   },
   {
    "name": "closed dock item coloured",
    "ok": true,
    "sample": [
-    "ellipsis on \"الاستخبارات\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "dock item 1 (closed) not neutral as on B3: rgb(200, 115, 214) / rgb(234, 242, 247)",
+    "dock item 2 (closed) not neutral as on B3: rgb(200, 115, 214) / rgb(234, 242, 247)",
+    "dock item 3 (closed) not neutral as on B3: rgb(200, 115, 214) / rgb(234, 242, 247)"
    ]
   },
   {
    "name": "identity line colour",
    "ok": true,
    "sample": [
-    "ellipsis on \"الاستخبارات\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "panel top line \"\" rgb(63, 224, 208) 2px (want the section colour, 2 pt, at the top)"
    ]
   },
   {
    "name": "closed tabs like the open one",
    "ok": true,
    "sample": [
-    "ellipsis on \"الاستخبارات\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "open tab not in the section colour",
+    "closed tab not in the secondary grey: الشبكات rgb(234, 242, 247)",
+    "closed tab not in the secondary grey: العمليات rgb(234, 242, 247)"
    ]
   },
   {
    "name": "emblem size",
    "ok": true,
    "sample": [
-    "ellipsis on \"الاستخبارات\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "size 28.0x32.0 for .s-emb (want 32 x 32)"
    ]
   },
   {
    "name": "chip not white",
    "ok": true,
    "sample": [
-    "ellipsis on \"الاستخبارات\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "white touch off: .r-chip borderTopColor rgb(63, 224, 208) (want rgba(234, 242, 247, 0.5))",
+    "white touch off: .r-chip color rgb(63, 224, 208) (want rgb(234, 242, 247))"
    ]
   },
   {
    "name": "tile icons cyan",
    "ok": true,
    "sample": [
-    "ellipsis on \"الاستخبارات\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "white touch off: .r-tile color rgb(127, 233, 255) (want rgb(234, 242, 247))"
    ]
   },
   {
    "name": "faint text",
    "ok": true,
    "sample": [
-    "ellipsis on \"الاستخبارات\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "brief text not fully visible: دون تغير",
+    "brief text not fully visible: قيد التنفيذ",
+    "contrast 2.98 for \"دون تغير\""
    ]
   },
   {
    "name": "why without its subject",
    "ok": true,
    "sample": [
-    "ellipsis on \"الاستخبارات\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "a11y: «لماذا؟» does not name its subject «مكافحة التجسس»"
    ]
   },
   {
    "name": "amber value without its icon",
    "ok": true,
    "sample": [
-    "ellipsis on \"الاستخبارات\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "colour alone: «7» (its label's icon is not in its colour)"
    ]
   },
   {
    "name": "chip arrow against its sign",
    "ok": true,
    "sample": [
-    "ellipsis on \"الاستخبارات\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "«تمويل القدرات السيبرانية»: the chip's arrow does not agree with its sign",
+    "a11y: «تمويل القدرات السيبرانية» does not say the chip's direction in words"
    ]
   },
   {
    "name": "row read in part",
    "ok": true,
    "sample": [
-    "ellipsis on \"الاستخبارات\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "a11y: «تمويل القدرات السيبرانية» does not read its numbers",
+    "a11y: «تمويل القدرات السيبرانية» does not say «دولار»",
+    "a11y: «تمويل القدرات السيبرانية» does not say the chip's direction in words"
    ]
   },
   {
    "name": "a long headline label",
    "ok": true,
    "sample": [
-    "ellipsis on \"الاستخبارات\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "clipped text (sides): \"عنوان طويل جدًا لا يتسع لخانته أبدًا\" 385.38..539.25 y 161..178",
+    "text outside the sheet's 12 pt padding: \"عنوان طويل جدًا لا يتسع لخانته أبدًا\"",
+    "clipped text (sides): \"1\" 528.44..539.25 y 179..206"
    ]
   },
   {
    "name": "text wider than its box",
    "ok": true,
    "sample": [
-    "ellipsis on \"الاستخبارات\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "text wider than its box: «100 مليون $ سنويًا · خلا» (138 in 20)"
    ]
   },
   {
    "name": "a long status cell",
    "ok": true,
    "sample": [
-    "ellipsis on \"الاستخبارات\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "clipped text (sides): \"قيمة طويلة جدًا لا تتسع لنصف الجدول\" 416.53..613.3 y 157.5..176.5",
+    "text outside the sheet's 12 pt padding: \"قيمة طويلة جدًا لا تتسع لنصف الجدول\"",
+    "horizontal overflow in خانةقيمة طويلة جدًا لا تتس"
    ]
   },
   {
    "name": "% before its number",
    "ok": true,
    "sample": [
-    "ellipsis on \"الاستخبارات\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "% shown before its number: \"نسبة 20%\"",
+    "headline 1 is not «الجهاز 7 / 10 دون تغير»: «الجهاز 7 / 10 نسبة 20%»"
    ]
   },
   {
    "name": "a real agency name",
    "ok": true,
    "sample": [
-    "ellipsis on \"الاستخبارات\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "a real agency name in the panel",
+    "brief text missing: مصر · جهاز الاستخبارات",
+    "brief text missing: مصر · جهاز الاستخبارات"
    ]
   },
   {
    "name": "an agency name heard only",
    "ok": true,
    "sample": [
-    "ellipsis on \"الاستخبارات\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "a11y: «رفع ميزانية المخابرات ال» does not read all it shows: تمويل القدرات السيبرانية",
+    "a real agency name in the panel"
    ]
   },
   {
    "name": "a Latin agency name",
    "ok": true,
    "sample": [
-    "ellipsis on \"الاستخبارات\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "a real agency name in the panel"
    ]
   },
   {
    "name": "headline values swapped",
    "ok": true,
    "sample": [
-    "ellipsis on \"الاستخبارات\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "headline 1 is not «الجهاز 7 / 10 دون تغير»: «الجهاز 8 / 10 دون تغير»",
+    "headline 2 is not «مكافحة التجسس 8 / 10 دون تغير»: «مكافحة التجسس 7 / 10 دون تغير»"
    ]
   },
   {
    "name": "status values swapped",
    "ok": true,
    "sample": [
-    "ellipsis on \"الاستخبارات\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "status 3 is not «الشبكات 6 دول»: «الشبكات منخفض»",
+    "status 4 is not «الانكشاف منخفض»: «الانكشاف 6 دول»"
    ]
   },
   {
    "name": "networks not strongest first",
    "ok": true,
    "sample": [
-    "ellipsis on \"الاستخبارات\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "the networks are not strongest first",
+    "network 1 is not «غزة والضفة 8 منخفض»: «ليبيا 6 منخفض»",
+    "network 2 is not «السودان 7 منخفض»: «غزة والضفة 8 منخفض»"
    ]
   },
   {
    "name": "network names swapped",
    "ok": true,
    "sample": [
-    "ellipsis on \"الاستخبارات\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "a11y: «غزة والضفة: الشبكة 8 من » does not read all it shows: السودان",
+    "a11y: «السودان: الشبكة 7 من 10،» does not read all it shows: غزة والضفة",
+    "network 1 is not «غزة والضفة 8 منخفض»: «السودان 8 منخفض»"
    ]
   },
   {
    "name": "network bar off",
    "ok": true,
    "sample": [
-    "ellipsis on \"الاستخبارات\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "network «السودان»: the bar is not at 7 / 10"
    ]
   },
   {
    "name": "network read in part",
    "ok": true,
    "sample": [
-    "ellipsis on \"الاستخبارات\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "a11y: «ليبيا: الشبكة 6 من 10» does not read all it shows: الانكشاف منخفض",
+    "a11y: network «ليبيا» is not read whole"
    ]
   },
   {
    "name": "refresh month stale",
    "ok": true,
    "sample": [
-    "ellipsis on \"الاستخبارات\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "the last refresh is not the month before the game date (ديسمبر 2010)",
+    "brief text missing: صورة كل دولة تقدير له هامش خطأ، وتُحدَّث أول كل شهر أو عند نجاح عملية جمع معلومات. آخر تحديث: ديسمبر 2010.",
+    "brief text missing: صورة كل دولة تقدير له هامش خطأ، وتُحدَّث أول كل شهر أو عند نجاح عملية جمع معلومات. آخر تحديث: ديسمبر 2010."
    ]
   },
   {
    "name": "high exposure drawn calm",
    "ok": true,
    "sample": [
-    "ellipsis on \"الاستخبارات\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "«الانكشاف مرتفع»: a warning not amber with its icon"
    ]
   },
   {
    "name": "calm exposure in amber",
    "ok": true,
    "sample": [
-    "ellipsis on \"الاستخبارات\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "«الانكشاف منخفض»: amber or a warning icon on a calm value"
    ]
   },
   {
    "name": "a network row focusable",
    "ok": true,
    "sample": [
-    "ellipsis on \"الاستخبارات\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "row «غزة والضفة» is a control"
    ]
   },
   {
    "name": "operations over the capacity",
    "ok": true,
    "sample": [
-    "ellipsis on \"الاستخبارات\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "the running operations are not the headline 3 within the capacity 4",
+    "brief text missing: عمليات جارية · 2 من 4",
+    "brief text missing: عمليات جارية · 2 من 4"
    ]
   },
   {
    "name": "operation progress swapped",
    "ok": true,
    "sample": [
-    "ellipsis on \"الاستخبارات\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "a11y: «جمع معلومات في ليبيا: أُ» does not read all it shows: 35",
+    "a11y: «جمع معلومات في إثيوبيا: » does not read all it shows: 60",
+    "operation 1 is not «جمع معلومات · ليبيا 60 تكتمل في فبراير 2011 · خطر منخفض»: «جمع معلومات · ليبيا 35 تكتمل في فبراير 2011 · خطر منخفض»"
    ]
   },
   {
    "name": "operation % unnamed",
    "ok": true,
    "sample": [
-    "ellipsis on \"الاستخبارات\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "operation «جمع معلومات · ليبيا»: its % does not say it is the progress"
    ]
   },
   {
    "name": "operation bar off",
    "ok": true,
    "sample": [
-    "ellipsis on \"الاستخبارات\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "operation «جمع معلومات · ليبيا»: the bar is not at 60%"
    ]
   },
   {
    "name": "a killing operation type",
    "ok": true,
    "sample": [
-    "ellipsis on \"الاستخبارات\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "the operation types are not the 9 of §5.6: 10",
+    "an operation type that kills a person (§5.6, D-14)",
+    "brief text missing: جمع معلومات، تخريب، هجوم إلكتروني، دعم معارضة، دعم متمردين، تأثير في انتخابات، دعم انقلاب، دعاية، سرقة التقنية."
    ]
   },
   {
    "name": "a running op not a type",
    "ok": true,
    "sample": [
-    "ellipsis on \"الاستخبارات\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "a11y: «جمع معلومات في إثيوبيا: » does not read all it shows: تفكيك شبكة القاهرة",
+    "operation 2 is not «جمع معلومات · إثيوبيا 35 تكتمل في مارس 2011 · خطر منخفض»: «تفكيك شبكة · القاهرة 35 تكتمل في مارس 2011 · خطر منخفض»",
+    "a running operation is not one of the 9 types"
    ]
   },
   {
    "name": "case statuses swapped",
    "ok": true,
    "sample": [
-    "ellipsis on \"الاستخبارات\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "a11y: «شبكة تجسس في سيناء، الجه» does not read all it shows: قيد المتابعة",
+    "a11y: «تمويل جماعة مسلحة، غزة، » does not read all it shows: فُككت",
+    "case 1 is not «شبكة تجسس · سيناء الجهة الراعية غير مؤكدة · نوفمبر 2010 فُككت»: «شبكة تجسس · سيناء الجهة الراعية غير مؤكدة · نوفمبر 2010 قيد المتابعة»"
    ]
   },
   {
    "name": "open case drawn calm",
    "ok": true,
    "sample": [
-    "ellipsis on \"الاستخبارات\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "«قيد المتابعة»: a warning not amber with its icon"
    ]
   },
   {
    "name": "threats swapped",
    "ok": true,
    "sample": [
-    "ellipsis on \"الاستخبارات\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "status 1 is not «تهديد داخلي مرتفع»: «تهديد داخلي منخفض»",
+    "status 2 is not «تهديد سيبراني منخفض»: «تهديد سيبراني مرتفع»"
    ]
   },
   {
    "name": "case as a button",
    "ok": true,
    "sample": [
-    "ellipsis on \"الاستخبارات\"",
-    "ellipsis on \"مصر\"",
-    "clipped text (top): \"·\" 804.64..814.17 y 84..101"
+    "a11y: row «شبكة تجسس · سيناء» is not read whole",
+    "row «شبكة تجسس · سيناء» is a control"
    ]
   },
   {

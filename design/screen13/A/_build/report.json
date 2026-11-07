@@ -1,7 +1,7 @@
 {
  "se": {
   "device": "667x375 side 0 bottom 0 none",
-  "renderedAt": "2026-11-07T17:44:16.776Z",
+  "renderedAt": "2026-11-07T18:22:51.381Z",
   "inputs": {
    "files": [
     "index.html",
@@ -24,67 +24,12 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "9cbe9bcb587b02bdcda4bca2c271c1fad016ff75"
+   "sha1": "a1563f05953b93a71cd47afe7f9f76bd0f01f264"
   },
-  "issues": [
-   "saves: ellipsis on \"المزيد\"",
-   "saves: ellipsis on \"حملة مصر\"",
-   "saves: clipped text (top): \"·\" 543.63..553.16 y 84..101",
-   "saves: clipped text (top): \"1\" 536.72..543.63 y 84..101",
-   "saves: ellipsis on \"يناير\"",
-   "saves: clipped text (top): \"2011\" 486.81..514.42 y 84..101",
-   "saves_end: ellipsis on \"المزيد\"",
-   "saves_end: ellipsis on \"حملة مصر\"",
-   "saves_end: clipped text (top): \"·\" 543.63..553.16 y 84..101",
-   "saves_end: clipped text (top): \"1\" 536.72..543.63 y 84..101",
-   "saves_end: ellipsis on \"يناير\"",
-   "saves_end: clipped text (top): \"2011\" 486.81..514.42 y 84..101",
-   "settings: ellipsis on \"المزيد\"",
-   "settings: ellipsis on \"حملة مصر\"",
-   "settings: clipped text (top): \"·\" 543.63..553.16 y 84..101",
-   "settings: clipped text (top): \"1\" 536.72..543.63 y 84..101",
-   "settings: ellipsis on \"يناير\"",
-   "settings: clipped text (top): \"2011\" 486.81..514.42 y 84..101",
-   "settings_end: ellipsis on \"المزيد\"",
-   "settings_end: ellipsis on \"حملة مصر\"",
-   "settings_end: clipped text (top): \"·\" 543.63..553.16 y 84..101",
-   "settings_end: clipped text (top): \"1\" 536.72..543.63 y 84..101",
-   "settings_end: ellipsis on \"يناير\"",
-   "settings_end: clipped text (top): \"2011\" 486.81..514.42 y 84..101",
-   "log: ellipsis on \"المزيد\"",
-   "log: ellipsis on \"حملة مصر\"",
-   "log: clipped text (top): \"·\" 543.63..553.16 y 84..101",
-   "log: clipped text (top): \"1\" 536.72..543.63 y 84..101",
-   "log: ellipsis on \"يناير\"",
-   "log: clipped text (top): \"2011\" 486.81..514.42 y 84..101",
-   "log_end: ellipsis on \"المزيد\"",
-   "log_end: ellipsis on \"حملة مصر\"",
-   "log_end: clipped text (top): \"·\" 543.63..553.16 y 84..101",
-   "log_end: clipped text (top): \"1\" 536.72..543.63 y 84..101",
-   "log_end: ellipsis on \"يناير\"",
-   "log_end: clipped text (top): \"2011\" 486.81..514.42 y 84..101",
-   "about: ellipsis on \"المزيد\"",
-   "about: ellipsis on \"حملة مصر\"",
-   "about: clipped text (top): \"·\" 543.63..553.16 y 84..101",
-   "about: clipped text (top): \"1\" 536.72..543.63 y 84..101",
-   "about: ellipsis on \"يناير\"",
-   "about: clipped text (top): \"2011\" 486.81..514.42 y 84..101",
-   "about_end: ellipsis on \"المزيد\"",
-   "about_end: ellipsis on \"حملة مصر\"",
-   "about_end: clipped text (top): \"·\" 543.63..553.16 y 84..101",
-   "about_end: clipped text (top): \"1\" 536.72..543.63 y 84..101",
-   "about_end: ellipsis on \"يناير\"",
-   "about_end: clipped text (top): \"2011\" 486.81..514.42 y 84..101",
-   "settings_at86: ellipsis on \"المزيد\"",
-   "settings_at86: ellipsis on \"حملة مصر\"",
-   "settings_at86: clipped text (top): \"·\" 543.63..553.16 y 84..101",
-   "settings_at86: clipped text (top): \"1\" 536.72..543.63 y 84..101",
-   "settings_at86: ellipsis on \"يناير\"",
-   "settings_at86: clipped text (top): \"2011\" 486.81..514.42 y 84..101"
-  ],
+  "issues": [],
   "views": {
    "saves": {
-    "issueCount": 6,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -547,7 +492,7 @@
     ]
    },
    "saves_end": {
-    "issueCount": 6,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -1000,7 +945,7 @@
     ]
    },
    "settings": {
-    "issueCount": 6,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -1519,7 +1464,7 @@
     ]
    },
    "settings_end": {
-    "issueCount": 6,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -2053,7 +1998,7 @@
     ]
    },
    "log": {
-    "issueCount": 6,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -2504,7 +2449,7 @@
     ]
    },
    "log_end": {
-    "issueCount": 6,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -2955,7 +2900,7 @@
     ]
    },
    "about": {
-    "issueCount": 6,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -3378,7 +3323,7 @@
     ]
    },
    "about_end": {
-    "issueCount": 6,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -3816,7 +3761,7 @@
     ]
    },
    "settings_at86": {
-    "issueCount": 6,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -4353,11 +4298,11 @@
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 54
+  "issueCount": 0
  },
  "mini": {
   "device": "812x375 side 50 bottom 21 notch",
-  "renderedAt": "2026-11-07T17:44:34.108Z",
+  "renderedAt": "2026-11-07T18:23:08.325Z",
   "inputs": {
    "files": [
     "index.html",
@@ -4380,67 +4325,12 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "9cbe9bcb587b02bdcda4bca2c271c1fad016ff75"
+   "sha1": "a1563f05953b93a71cd47afe7f9f76bd0f01f264"
   },
-  "issues": [
-   "saves: ellipsis on \"المزيد\"",
-   "saves: ellipsis on \"حملة مصر\"",
-   "saves: clipped text (top): \"·\" 646.63..656.16 y 84..101",
-   "saves: clipped text (top): \"1\" 639.72..646.63 y 84..101",
-   "saves: ellipsis on \"يناير\"",
-   "saves: clipped text (top): \"2011\" 589.81..617.42 y 84..101",
-   "saves_end: ellipsis on \"المزيد\"",
-   "saves_end: ellipsis on \"حملة مصر\"",
-   "saves_end: clipped text (top): \"·\" 646.63..656.16 y 84..101",
-   "saves_end: clipped text (top): \"1\" 639.72..646.63 y 84..101",
-   "saves_end: ellipsis on \"يناير\"",
-   "saves_end: clipped text (top): \"2011\" 589.81..617.42 y 84..101",
-   "settings: ellipsis on \"المزيد\"",
-   "settings: ellipsis on \"حملة مصر\"",
-   "settings: clipped text (top): \"·\" 646.63..656.16 y 84..101",
-   "settings: clipped text (top): \"1\" 639.72..646.63 y 84..101",
-   "settings: ellipsis on \"يناير\"",
-   "settings: clipped text (top): \"2011\" 589.81..617.42 y 84..101",
-   "settings_end: ellipsis on \"المزيد\"",
-   "settings_end: ellipsis on \"حملة مصر\"",
-   "settings_end: clipped text (top): \"·\" 646.63..656.16 y 84..101",
-   "settings_end: clipped text (top): \"1\" 639.72..646.63 y 84..101",
-   "settings_end: ellipsis on \"يناير\"",
-   "settings_end: clipped text (top): \"2011\" 589.81..617.42 y 84..101",
-   "log: ellipsis on \"المزيد\"",
-   "log: ellipsis on \"حملة مصر\"",
-   "log: clipped text (top): \"·\" 646.63..656.16 y 84..101",
-   "log: clipped text (top): \"1\" 639.72..646.63 y 84..101",
-   "log: ellipsis on \"يناير\"",
-   "log: clipped text (top): \"2011\" 589.81..617.42 y 84..101",
-   "log_end: ellipsis on \"المزيد\"",
-   "log_end: ellipsis on \"حملة مصر\"",
-   "log_end: clipped text (top): \"·\" 646.63..656.16 y 84..101",
-   "log_end: clipped text (top): \"1\" 639.72..646.63 y 84..101",
-   "log_end: ellipsis on \"يناير\"",
-   "log_end: clipped text (top): \"2011\" 589.81..617.42 y 84..101",
-   "about: ellipsis on \"المزيد\"",
-   "about: ellipsis on \"حملة مصر\"",
-   "about: clipped text (top): \"·\" 646.63..656.16 y 84..101",
-   "about: clipped text (top): \"1\" 639.72..646.63 y 84..101",
-   "about: ellipsis on \"يناير\"",
-   "about: clipped text (top): \"2011\" 589.81..617.42 y 84..101",
-   "about_end: ellipsis on \"المزيد\"",
-   "about_end: ellipsis on \"حملة مصر\"",
-   "about_end: clipped text (top): \"·\" 646.63..656.16 y 84..101",
-   "about_end: clipped text (top): \"1\" 639.72..646.63 y 84..101",
-   "about_end: ellipsis on \"يناير\"",
-   "about_end: clipped text (top): \"2011\" 589.81..617.42 y 84..101",
-   "settings_at72: ellipsis on \"المزيد\"",
-   "settings_at72: ellipsis on \"حملة مصر\"",
-   "settings_at72: clipped text (top): \"·\" 646.63..656.16 y 84..101",
-   "settings_at72: clipped text (top): \"1\" 639.72..646.63 y 84..101",
-   "settings_at72: ellipsis on \"يناير\"",
-   "settings_at72: clipped text (top): \"2011\" 589.81..617.42 y 84..101"
-  ],
+  "issues": [],
   "views": {
    "saves": {
-    "issueCount": 6,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -4903,7 +4793,7 @@
     ]
    },
    "saves_end": {
-    "issueCount": 6,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -5351,7 +5241,7 @@
     ]
    },
    "settings": {
-    "issueCount": 6,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -5877,7 +5767,7 @@
     ]
    },
    "settings_end": {
-    "issueCount": 6,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -6392,7 +6282,7 @@
     ]
    },
    "log": {
-    "issueCount": 6,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -6850,7 +6740,7 @@
     ]
    },
    "log_end": {
-    "issueCount": 6,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -7308,7 +7198,7 @@
     ]
    },
    "about": {
-    "issueCount": 6,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -7738,7 +7628,7 @@
     ]
    },
    "about_end": {
-    "issueCount": 6,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -8178,7 +8068,7 @@
     ]
    },
    "settings_at72": {
-    "issueCount": 6,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -8717,11 +8607,11 @@
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 54
+  "issueCount": 0
  },
  "i14": {
   "device": "844x390 side 47 bottom 21 notch",
-  "renderedAt": "2026-11-07T17:44:52.202Z",
+  "renderedAt": "2026-11-07T18:23:27.169Z",
   "inputs": {
    "files": [
     "index.html",
@@ -8744,67 +8634,12 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "9cbe9bcb587b02bdcda4bca2c271c1fad016ff75"
+   "sha1": "a1563f05953b93a71cd47afe7f9f76bd0f01f264"
   },
-  "issues": [
-   "saves: ellipsis on \"المزيد\"",
-   "saves: ellipsis on \"حملة مصر\"",
-   "saves: clipped text (top): \"·\" 681.63..691.16 y 84..101",
-   "saves: clipped text (top): \"1\" 674.72..681.63 y 84..101",
-   "saves: ellipsis on \"يناير\"",
-   "saves: clipped text (top): \"2011\" 624.81..652.42 y 84..101",
-   "saves_end: ellipsis on \"المزيد\"",
-   "saves_end: ellipsis on \"حملة مصر\"",
-   "saves_end: clipped text (top): \"·\" 681.63..691.16 y 84..101",
-   "saves_end: clipped text (top): \"1\" 674.72..681.63 y 84..101",
-   "saves_end: ellipsis on \"يناير\"",
-   "saves_end: clipped text (top): \"2011\" 624.81..652.42 y 84..101",
-   "settings: ellipsis on \"المزيد\"",
-   "settings: ellipsis on \"حملة مصر\"",
-   "settings: clipped text (top): \"·\" 681.63..691.16 y 84..101",
-   "settings: clipped text (top): \"1\" 674.72..681.63 y 84..101",
-   "settings: ellipsis on \"يناير\"",
-   "settings: clipped text (top): \"2011\" 624.81..652.42 y 84..101",
-   "settings_end: ellipsis on \"المزيد\"",
-   "settings_end: ellipsis on \"حملة مصر\"",
-   "settings_end: clipped text (top): \"·\" 681.63..691.16 y 84..101",
-   "settings_end: clipped text (top): \"1\" 674.72..681.63 y 84..101",
-   "settings_end: ellipsis on \"يناير\"",
-   "settings_end: clipped text (top): \"2011\" 624.81..652.42 y 84..101",
-   "log: ellipsis on \"المزيد\"",
-   "log: ellipsis on \"حملة مصر\"",
-   "log: clipped text (top): \"·\" 681.63..691.16 y 84..101",
-   "log: clipped text (top): \"1\" 674.72..681.63 y 84..101",
-   "log: ellipsis on \"يناير\"",
-   "log: clipped text (top): \"2011\" 624.81..652.42 y 84..101",
-   "log_end: ellipsis on \"المزيد\"",
-   "log_end: ellipsis on \"حملة مصر\"",
-   "log_end: clipped text (top): \"·\" 681.63..691.16 y 84..101",
-   "log_end: clipped text (top): \"1\" 674.72..681.63 y 84..101",
-   "log_end: ellipsis on \"يناير\"",
-   "log_end: clipped text (top): \"2011\" 624.81..652.42 y 84..101",
-   "about: ellipsis on \"المزيد\"",
-   "about: ellipsis on \"حملة مصر\"",
-   "about: clipped text (top): \"·\" 681.63..691.16 y 84..101",
-   "about: clipped text (top): \"1\" 674.72..681.63 y 84..101",
-   "about: ellipsis on \"يناير\"",
-   "about: clipped text (top): \"2011\" 624.81..652.42 y 84..101",
-   "about_end: ellipsis on \"المزيد\"",
-   "about_end: ellipsis on \"حملة مصر\"",
-   "about_end: clipped text (top): \"·\" 681.63..691.16 y 84..101",
-   "about_end: clipped text (top): \"1\" 674.72..681.63 y 84..101",
-   "about_end: ellipsis on \"يناير\"",
-   "about_end: clipped text (top): \"2011\" 624.81..652.42 y 84..101",
-   "settings_at87: ellipsis on \"المزيد\"",
-   "settings_at87: ellipsis on \"حملة مصر\"",
-   "settings_at87: clipped text (top): \"·\" 681.63..691.16 y 84..101",
-   "settings_at87: clipped text (top): \"1\" 674.72..681.63 y 84..101",
-   "settings_at87: ellipsis on \"يناير\"",
-   "settings_at87: clipped text (top): \"2011\" 624.81..652.42 y 84..101"
-  ],
+  "issues": [],
   "views": {
    "saves": {
-    "issueCount": 6,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -9384,7 +9219,7 @@
     ]
    },
    "saves_end": {
-    "issueCount": 6,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -9954,7 +9789,7 @@
     ]
    },
    "settings": {
-    "issueCount": 6,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -10595,7 +10430,7 @@
     ]
    },
    "settings_end": {
-    "issueCount": 6,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -11246,7 +11081,7 @@
     ]
    },
    "log": {
-    "issueCount": 6,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -11814,7 +11649,7 @@
     ]
    },
    "log_end": {
-    "issueCount": 6,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -12382,7 +12217,7 @@
     ]
    },
    "about": {
-    "issueCount": 6,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -12922,7 +12757,7 @@
     ]
    },
    "about_end": {
-    "issueCount": 6,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -13477,7 +13312,7 @@
     ]
    },
    "settings_at87": {
-    "issueCount": 6,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -14131,11 +13966,11 @@
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 54
+  "issueCount": 0
  },
  "i16": {
   "device": "852x393 side 59 bottom 21 island",
-  "renderedAt": "2026-11-07T17:45:11.170Z",
+  "renderedAt": "2026-11-07T18:23:45.589Z",
   "inputs": {
    "files": [
     "index.html",
@@ -14158,67 +13993,12 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "9cbe9bcb587b02bdcda4bca2c271c1fad016ff75"
+   "sha1": "a1563f05953b93a71cd47afe7f9f76bd0f01f264"
   },
-  "issues": [
-   "saves: ellipsis on \"المزيد\"",
-   "saves: ellipsis on \"حملة مصر\"",
-   "saves: clipped text (top): \"·\" 677.63..687.16 y 84..101",
-   "saves: clipped text (top): \"1\" 670.72..677.63 y 84..101",
-   "saves: ellipsis on \"يناير\"",
-   "saves: clipped text (top): \"2011\" 620.81..648.42 y 84..101",
-   "saves_end: ellipsis on \"المزيد\"",
-   "saves_end: ellipsis on \"حملة مصر\"",
-   "saves_end: clipped text (top): \"·\" 677.63..687.16 y 84..101",
-   "saves_end: clipped text (top): \"1\" 670.72..677.63 y 84..101",
-   "saves_end: ellipsis on \"يناير\"",
-   "saves_end: clipped text (top): \"2011\" 620.81..648.42 y 84..101",
-   "settings: ellipsis on \"المزيد\"",
-   "settings: ellipsis on \"حملة مصر\"",
-   "settings: clipped text (top): \"·\" 677.63..687.16 y 84..101",
-   "settings: clipped text (top): \"1\" 670.72..677.63 y 84..101",
-   "settings: ellipsis on \"يناير\"",
-   "settings: clipped text (top): \"2011\" 620.81..648.42 y 84..101",
-   "settings_end: ellipsis on \"المزيد\"",
-   "settings_end: ellipsis on \"حملة مصر\"",
-   "settings_end: clipped text (top): \"·\" 677.63..687.16 y 84..101",
-   "settings_end: clipped text (top): \"1\" 670.72..677.63 y 84..101",
-   "settings_end: ellipsis on \"يناير\"",
-   "settings_end: clipped text (top): \"2011\" 620.81..648.42 y 84..101",
-   "log: ellipsis on \"المزيد\"",
-   "log: ellipsis on \"حملة مصر\"",
-   "log: clipped text (top): \"·\" 677.63..687.16 y 84..101",
-   "log: clipped text (top): \"1\" 670.72..677.63 y 84..101",
-   "log: ellipsis on \"يناير\"",
-   "log: clipped text (top): \"2011\" 620.81..648.42 y 84..101",
-   "log_end: ellipsis on \"المزيد\"",
-   "log_end: ellipsis on \"حملة مصر\"",
-   "log_end: clipped text (top): \"·\" 677.63..687.16 y 84..101",
-   "log_end: clipped text (top): \"1\" 670.72..677.63 y 84..101",
-   "log_end: ellipsis on \"يناير\"",
-   "log_end: clipped text (top): \"2011\" 620.81..648.42 y 84..101",
-   "about: ellipsis on \"المزيد\"",
-   "about: ellipsis on \"حملة مصر\"",
-   "about: clipped text (top): \"·\" 677.63..687.16 y 84..101",
-   "about: clipped text (top): \"1\" 670.72..677.63 y 84..101",
-   "about: ellipsis on \"يناير\"",
-   "about: clipped text (top): \"2011\" 620.81..648.42 y 84..101",
-   "about_end: ellipsis on \"المزيد\"",
-   "about_end: ellipsis on \"حملة مصر\"",
-   "about_end: clipped text (top): \"·\" 677.63..687.16 y 84..101",
-   "about_end: clipped text (top): \"1\" 670.72..677.63 y 84..101",
-   "about_end: ellipsis on \"يناير\"",
-   "about_end: clipped text (top): \"2011\" 620.81..648.42 y 84..101",
-   "settings_at90: ellipsis on \"المزيد\"",
-   "settings_at90: ellipsis on \"حملة مصر\"",
-   "settings_at90: clipped text (top): \"·\" 677.63..687.16 y 84..101",
-   "settings_at90: clipped text (top): \"1\" 670.72..677.63 y 84..101",
-   "settings_at90: ellipsis on \"يناير\"",
-   "settings_at90: clipped text (top): \"2011\" 620.81..648.42 y 84..101"
-  ],
+  "issues": [],
   "views": {
    "saves": {
-    "issueCount": 6,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -14787,7 +14567,7 @@
     ]
    },
    "saves_end": {
-    "issueCount": 6,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -15346,7 +15126,7 @@
     ]
    },
    "settings": {
-    "issueCount": 6,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -15976,7 +15756,7 @@
     ]
    },
    "settings_end": {
-    "issueCount": 6,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -16616,7 +16396,7 @@
     ]
    },
    "log": {
-    "issueCount": 6,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -17173,7 +16953,7 @@
     ]
    },
    "log_end": {
-    "issueCount": 6,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -17730,7 +17510,7 @@
     ]
    },
    "about": {
-    "issueCount": 6,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -18259,7 +18039,7 @@
     ]
    },
    "about_end": {
-    "issueCount": 6,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -18803,7 +18583,7 @@
     ]
    },
    "settings_at90": {
-    "issueCount": 6,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -19451,11 +19231,11 @@
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 54
+  "issueCount": 0
  },
  "i16pro": {
   "device": "874x402 side 62 bottom 21 island",
-  "renderedAt": "2026-11-07T17:45:30.028Z",
+  "renderedAt": "2026-11-07T18:24:04.309Z",
   "inputs": {
    "files": [
     "index.html",
@@ -19478,61 +19258,12 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "9cbe9bcb587b02bdcda4bca2c271c1fad016ff75"
+   "sha1": "a1563f05953b93a71cd47afe7f9f76bd0f01f264"
   },
-  "issues": [
-   "saves: ellipsis on \"المزيد\"",
-   "saves: ellipsis on \"حملة مصر\"",
-   "saves: clipped text (top): \"·\" 696.63..706.16 y 84..101",
-   "saves: clipped text (top): \"1\" 689.72..696.63 y 84..101",
-   "saves: ellipsis on \"يناير\"",
-   "saves: clipped text (top): \"2011\" 639.81..667.42 y 84..101",
-   "saves_end: ellipsis on \"المزيد\"",
-   "saves_end: ellipsis on \"حملة مصر\"",
-   "saves_end: clipped text (top): \"·\" 696.63..706.16 y 84..101",
-   "saves_end: clipped text (top): \"1\" 689.72..696.63 y 84..101",
-   "saves_end: ellipsis on \"يناير\"",
-   "saves_end: clipped text (top): \"2011\" 639.81..667.42 y 84..101",
-   "settings: ellipsis on \"المزيد\"",
-   "settings: ellipsis on \"حملة مصر\"",
-   "settings: clipped text (top): \"·\" 696.63..706.16 y 84..101",
-   "settings: clipped text (top): \"1\" 689.72..696.63 y 84..101",
-   "settings: ellipsis on \"يناير\"",
-   "settings: clipped text (top): \"2011\" 639.81..667.42 y 84..101",
-   "settings_end: ellipsis on \"المزيد\"",
-   "settings_end: ellipsis on \"حملة مصر\"",
-   "settings_end: clipped text (top): \"·\" 696.63..706.16 y 84..101",
-   "settings_end: clipped text (top): \"1\" 689.72..696.63 y 84..101",
-   "settings_end: ellipsis on \"يناير\"",
-   "settings_end: clipped text (top): \"2011\" 639.81..667.42 y 84..101",
-   "log: ellipsis on \"المزيد\"",
-   "log: ellipsis on \"حملة مصر\"",
-   "log: clipped text (top): \"·\" 696.63..706.16 y 84..101",
-   "log: clipped text (top): \"1\" 689.72..696.63 y 84..101",
-   "log: ellipsis on \"يناير\"",
-   "log: clipped text (top): \"2011\" 639.81..667.42 y 84..101",
-   "log_end: ellipsis on \"المزيد\"",
-   "log_end: ellipsis on \"حملة مصر\"",
-   "log_end: clipped text (top): \"·\" 696.63..706.16 y 84..101",
-   "log_end: clipped text (top): \"1\" 689.72..696.63 y 84..101",
-   "log_end: ellipsis on \"يناير\"",
-   "log_end: clipped text (top): \"2011\" 639.81..667.42 y 84..101",
-   "about: ellipsis on \"المزيد\"",
-   "about: ellipsis on \"حملة مصر\"",
-   "about: clipped text (top): \"·\" 696.63..706.16 y 84..101",
-   "about: clipped text (top): \"1\" 689.72..696.63 y 84..101",
-   "about: ellipsis on \"يناير\"",
-   "about: clipped text (top): \"2011\" 639.81..667.42 y 84..101",
-   "about_end: ellipsis on \"المزيد\"",
-   "about_end: ellipsis on \"حملة مصر\"",
-   "about_end: clipped text (top): \"·\" 696.63..706.16 y 84..101",
-   "about_end: clipped text (top): \"1\" 689.72..696.63 y 84..101",
-   "about_end: ellipsis on \"يناير\"",
-   "about_end: clipped text (top): \"2011\" 639.81..667.42 y 84..101"
-  ],
+  "issues": [],
   "views": {
    "saves": {
-    "issueCount": 6,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -20117,7 +19848,7 @@
     ]
    },
    "saves_end": {
-    "issueCount": 6,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -20687,7 +20418,7 @@
     ]
    },
    "settings": {
-    "issueCount": 6,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -21343,7 +21074,7 @@
     ]
    },
    "settings_end": {
-    "issueCount": 6,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -21994,7 +21725,7 @@
     ]
    },
    "log": {
-    "issueCount": 6,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -22562,7 +22293,7 @@
     ]
    },
    "log_end": {
-    "issueCount": 6,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -23130,7 +22861,7 @@
     ]
    },
    "about": {
-    "issueCount": 6,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -23670,7 +23401,7 @@
     ]
    },
    "about_end": {
-    "issueCount": 6,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -24258,11 +23989,11 @@
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 48
+  "issueCount": 0
  },
  "i11": {
   "device": "896x414 side 48 bottom 21 notch",
-  "renderedAt": "2026-11-07T17:45:47.366Z",
+  "renderedAt": "2026-11-07T18:24:21.427Z",
   "inputs": {
    "files": [
     "index.html",
@@ -24285,61 +24016,12 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "9cbe9bcb587b02bdcda4bca2c271c1fad016ff75"
+   "sha1": "a1563f05953b93a71cd47afe7f9f76bd0f01f264"
   },
-  "issues": [
-   "saves: ellipsis on \"المزيد\"",
-   "saves: ellipsis on \"حملة مصر\"",
-   "saves: clipped text (top): \"·\" 732.63..742.16 y 84..101",
-   "saves: clipped text (top): \"1\" 725.72..732.63 y 84..101",
-   "saves: ellipsis on \"يناير\"",
-   "saves: clipped text (top): \"2011\" 675.81..703.42 y 84..101",
-   "saves_end: ellipsis on \"المزيد\"",
-   "saves_end: ellipsis on \"حملة مصر\"",
-   "saves_end: clipped text (top): \"·\" 732.63..742.16 y 84..101",
-   "saves_end: clipped text (top): \"1\" 725.72..732.63 y 84..101",
-   "saves_end: ellipsis on \"يناير\"",
-   "saves_end: clipped text (top): \"2011\" 675.81..703.42 y 84..101",
-   "settings: ellipsis on \"المزيد\"",
-   "settings: ellipsis on \"حملة مصر\"",
-   "settings: clipped text (top): \"·\" 732.63..742.16 y 84..101",
-   "settings: clipped text (top): \"1\" 725.72..732.63 y 84..101",
-   "settings: ellipsis on \"يناير\"",
-   "settings: clipped text (top): \"2011\" 675.81..703.42 y 84..101",
-   "settings_end: ellipsis on \"المزيد\"",
-   "settings_end: ellipsis on \"حملة مصر\"",
-   "settings_end: clipped text (top): \"·\" 732.63..742.16 y 84..101",
-   "settings_end: clipped text (top): \"1\" 725.72..732.63 y 84..101",
-   "settings_end: ellipsis on \"يناير\"",
-   "settings_end: clipped text (top): \"2011\" 675.81..703.42 y 84..101",
-   "log: ellipsis on \"المزيد\"",
-   "log: ellipsis on \"حملة مصر\"",
-   "log: clipped text (top): \"·\" 732.63..742.16 y 84..101",
-   "log: clipped text (top): \"1\" 725.72..732.63 y 84..101",
-   "log: ellipsis on \"يناير\"",
-   "log: clipped text (top): \"2011\" 675.81..703.42 y 84..101",
-   "log_end: ellipsis on \"المزيد\"",
-   "log_end: ellipsis on \"حملة مصر\"",
-   "log_end: clipped text (top): \"·\" 732.63..742.16 y 84..101",
-   "log_end: clipped text (top): \"1\" 725.72..732.63 y 84..101",
-   "log_end: ellipsis on \"يناير\"",
-   "log_end: clipped text (top): \"2011\" 675.81..703.42 y 84..101",
-   "about: ellipsis on \"المزيد\"",
-   "about: ellipsis on \"حملة مصر\"",
-   "about: clipped text (top): \"·\" 732.63..742.16 y 84..101",
-   "about: clipped text (top): \"1\" 725.72..732.63 y 84..101",
-   "about: ellipsis on \"يناير\"",
-   "about: clipped text (top): \"2011\" 675.81..703.42 y 84..101",
-   "about_end: ellipsis on \"المزيد\"",
-   "about_end: ellipsis on \"حملة مصر\"",
-   "about_end: clipped text (top): \"·\" 732.63..742.16 y 84..101",
-   "about_end: clipped text (top): \"1\" 725.72..732.63 y 84..101",
-   "about_end: ellipsis on \"يناير\"",
-   "about_end: clipped text (top): \"2011\" 675.81..703.42 y 84..101"
-  ],
+  "issues": [],
   "views": {
    "saves": {
-    "issueCount": 6,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -24928,7 +24610,7 @@
     ]
    },
    "saves_end": {
-    "issueCount": 6,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -25502,7 +25184,7 @@
     ]
    },
    "settings": {
-    "issueCount": 6,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -26162,7 +25844,7 @@
     ]
    },
    "settings_end": {
-    "issueCount": 6,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -26812,7 +26494,7 @@
     ]
    },
    "log": {
-    "issueCount": 6,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -27379,7 +27061,7 @@
     ]
    },
    "log_end": {
-    "issueCount": 6,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -27946,7 +27628,7 @@
     ]
    },
    "about": {
-    "issueCount": 6,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -28490,7 +28172,7 @@
     ]
    },
    "about_end": {
-    "issueCount": 6,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -29082,11 +28764,11 @@
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 48
+  "issueCount": 0
  },
  "i16promax": {
   "device": "956x440 side 62 bottom 21 island",
-  "renderedAt": "2026-11-07T17:46:05.003Z",
+  "renderedAt": "2026-11-07T18:24:39.419Z",
   "inputs": {
    "files": [
     "index.html",
@@ -29109,61 +28791,12 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "9cbe9bcb587b02bdcda4bca2c271c1fad016ff75"
+   "sha1": "a1563f05953b93a71cd47afe7f9f76bd0f01f264"
   },
-  "issues": [
-   "saves: ellipsis on \"المزيد\"",
-   "saves: ellipsis on \"حملة مصر\"",
-   "saves: clipped text (top): \"·\" 778.63..788.16 y 84..101",
-   "saves: clipped text (top): \"1\" 771.72..778.63 y 84..101",
-   "saves: ellipsis on \"يناير\"",
-   "saves: clipped text (top): \"2011\" 721.81..749.42 y 84..101",
-   "saves_end: ellipsis on \"المزيد\"",
-   "saves_end: ellipsis on \"حملة مصر\"",
-   "saves_end: clipped text (top): \"·\" 778.63..788.16 y 84..101",
-   "saves_end: clipped text (top): \"1\" 771.72..778.63 y 84..101",
-   "saves_end: ellipsis on \"يناير\"",
-   "saves_end: clipped text (top): \"2011\" 721.81..749.42 y 84..101",
-   "settings: ellipsis on \"المزيد\"",
-   "settings: ellipsis on \"حملة مصر\"",
-   "settings: clipped text (top): \"·\" 778.63..788.16 y 84..101",
-   "settings: clipped text (top): \"1\" 771.72..778.63 y 84..101",
-   "settings: ellipsis on \"يناير\"",
-   "settings: clipped text (top): \"2011\" 721.81..749.42 y 84..101",
-   "settings_end: ellipsis on \"المزيد\"",
-   "settings_end: ellipsis on \"حملة مصر\"",
-   "settings_end: clipped text (top): \"·\" 778.63..788.16 y 84..101",
-   "settings_end: clipped text (top): \"1\" 771.72..778.63 y 84..101",
-   "settings_end: ellipsis on \"يناير\"",
-   "settings_end: clipped text (top): \"2011\" 721.81..749.42 y 84..101",
-   "log: ellipsis on \"المزيد\"",
-   "log: ellipsis on \"حملة مصر\"",
-   "log: clipped text (top): \"·\" 778.63..788.16 y 84..101",
-   "log: clipped text (top): \"1\" 771.72..778.63 y 84..101",
-   "log: ellipsis on \"يناير\"",
-   "log: clipped text (top): \"2011\" 721.81..749.42 y 84..101",
-   "log_end: ellipsis on \"المزيد\"",
-   "log_end: ellipsis on \"حملة مصر\"",
-   "log_end: clipped text (top): \"·\" 778.63..788.16 y 84..101",
-   "log_end: clipped text (top): \"1\" 771.72..778.63 y 84..101",
-   "log_end: ellipsis on \"يناير\"",
-   "log_end: clipped text (top): \"2011\" 721.81..749.42 y 84..101",
-   "about: ellipsis on \"المزيد\"",
-   "about: ellipsis on \"حملة مصر\"",
-   "about: clipped text (top): \"·\" 778.63..788.16 y 84..101",
-   "about: clipped text (top): \"1\" 771.72..778.63 y 84..101",
-   "about: ellipsis on \"يناير\"",
-   "about: clipped text (top): \"2011\" 721.81..749.42 y 84..101",
-   "about_end: ellipsis on \"المزيد\"",
-   "about_end: ellipsis on \"حملة مصر\"",
-   "about_end: clipped text (top): \"·\" 778.63..788.16 y 84..101",
-   "about_end: clipped text (top): \"1\" 771.72..778.63 y 84..101",
-   "about_end: ellipsis on \"يناير\"",
-   "about_end: clipped text (top): \"2011\" 721.81..749.42 y 84..101"
-  ],
+  "issues": [],
   "views": {
    "saves": {
-    "issueCount": 6,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -29762,7 +29395,7 @@
     ]
    },
    "saves_end": {
-    "issueCount": 6,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -30361,7 +29994,7 @@
     ]
    },
    "settings": {
-    "issueCount": 6,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -31047,7 +30680,7 @@
     ]
    },
    "settings_end": {
-    "issueCount": 6,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -31753,7 +31386,7 @@
     ]
    },
    "log": {
-    "issueCount": 6,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -32320,7 +31953,7 @@
     ]
    },
    "log_end": {
-    "issueCount": 6,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -32887,7 +32520,7 @@
     ]
    },
    "about": {
-    "issueCount": 6,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -33451,7 +33084,7 @@
     ]
    },
    "about_end": {
-    "issueCount": 6,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -34048,6 +33681,6 @@
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 48
+  "issueCount": 0
  }
 }

@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-07T17:23:43.749Z",
+ "ranAt": "2026-11-07T18:02:18.127Z",
  "inputs": {
   "files": [
    "index.html",
@@ -22,80 +22,17 @@
    "header_cairo.jpg",
    "map_overlay_cairo.svg"
   ],
-  "sha1": "65bf5bd5eaeb4f879ef591218cd8c5fa3c990e0b"
+  "sha1": "124c4ed6d13ee86a67c628bcb320e333976c1df9"
  },
  "cleanIssues": {
-  "i16promax": [
-   "ellipsis on \"الاستقرار\"",
-   "ellipsis on \"لماذا؟\"",
-   "clipped text (top): \"·\" 796.78..806.31 y 84..101",
-   "ellipsis on \"الآن\"",
-   "clipped text (top): \"58%\" 752.98..777.69 y 84..101",
-   "clipped text (top): \"·\" 743.45..752.98 y 84..101",
-   "ellipsis on \"يتجه إلى\"",
-   "clipped text (top): \"56%\" 681.89..706.59 y 84..101"
-  ],
-  "i16promax_why_end": [
-   "ellipsis on \"الاستقرار\"",
-   "ellipsis on \"لماذا؟\"",
-   "clipped text (top): \"·\" 796.78..806.31 y 84..101",
-   "ellipsis on \"الآن\"",
-   "clipped text (top): \"58%\" 752.98..777.69 y 84..101",
-   "clipped text (top): \"·\" 743.45..752.98 y 84..101",
-   "ellipsis on \"يتجه إلى\"",
-   "clipped text (top): \"56%\" 681.89..706.59 y 84..101"
-  ],
-  "i16promax_why_at182": [
-   "ellipsis on \"الاستقرار\"",
-   "ellipsis on \"لماذا؟\"",
-   "clipped text (top): \"·\" 796.78..806.31 y 84..101",
-   "ellipsis on \"الآن\"",
-   "clipped text (top): \"58%\" 752.98..777.69 y 84..101",
-   "clipped text (top): \"·\" 743.45..752.98 y 84..101",
-   "ellipsis on \"يتجه إلى\"",
-   "clipped text (top): \"56%\" 681.89..706.59 y 84..101"
-  ],
+  "i16promax": [],
+  "i16promax_why_end": [],
+  "i16promax_why_at182": [],
   "i16promax coverage": [],
-  "se": [
-   "ellipsis on \"الاستقرار\"",
-   "ellipsis on \"لماذا؟\"",
-   "clipped text (top): \"·\" 561.78..571.31 y 84..101",
-   "ellipsis on \"الآن\"",
-   "clipped text (top): \"58%\" 517.98..542.69 y 84..101",
-   "clipped text (top): \"·\" 508.45..517.98 y 84..101",
-   "ellipsis on \"يتجه إلى\"",
-   "clipped text (top): \"56%\" 446.89..471.59 y 84..101"
-  ],
-  "se_why_end": [
-   "ellipsis on \"الاستقرار\"",
-   "ellipsis on \"لماذا؟\"",
-   "clipped text (top): \"·\" 561.78..571.31 y 84..101",
-   "ellipsis on \"الآن\"",
-   "clipped text (top): \"58%\" 517.98..542.69 y 84..101",
-   "clipped text (top): \"·\" 508.45..517.98 y 84..101",
-   "ellipsis on \"يتجه إلى\"",
-   "clipped text (top): \"56%\" 446.89..471.59 y 84..101"
-  ],
-  "se_why_at131": [
-   "ellipsis on \"الاستقرار\"",
-   "ellipsis on \"لماذا؟\"",
-   "clipped text (top): \"·\" 561.78..571.31 y 84..101",
-   "ellipsis on \"الآن\"",
-   "clipped text (top): \"58%\" 517.98..542.69 y 84..101",
-   "clipped text (top): \"·\" 508.45..517.98 y 84..101",
-   "ellipsis on \"يتجه إلى\"",
-   "clipped text (top): \"56%\" 446.89..471.59 y 84..101"
-  ],
-  "se_why_at262": [
-   "ellipsis on \"الاستقرار\"",
-   "ellipsis on \"لماذا؟\"",
-   "clipped text (top): \"·\" 561.78..571.31 y 84..101",
-   "ellipsis on \"الآن\"",
-   "clipped text (top): \"58%\" 517.98..542.69 y 84..101",
-   "clipped text (top): \"·\" 508.45..517.98 y 84..101",
-   "ellipsis on \"يتجه إلى\"",
-   "clipped text (top): \"56%\" 446.89..471.59 y 84..101"
-  ],
+  "se": [],
+  "se_why_end": [],
+  "se_why_at131": [],
+  "se_why_at262": [],
   "se coverage": []
  },
  "results": [
@@ -103,9 +40,7 @@
    "name": "type size",
    "ok": true,
    "sample": [
-    "font size 17 for \"الاستقرار\"",
-    "ellipsis on \"الاستقرار\"",
-    "ellipsis on \"لماذا؟\""
+    "font size 17 for \"الاستقرار\""
    ]
   },
   {
@@ -113,8 +48,7 @@
    "ok": true,
    "sample": [
     "text colour off-token rgb(136, 153, 170): \"الاستقرار\"",
-    "ellipsis on \"الاستقرار\"",
-    "ellipsis on \"لماذا؟\""
+    "contrast 2.4 for \"الاستقرار\""
    ]
   },
   {
@@ -122,17 +56,16 @@
    "ok": true,
    "sample": [
     "panel radius لماذا؟ الاستقرار: 6 (want 12)",
-    "radius 6 for .sheet (want 12)",
-    "ellipsis on \"الاستقرار\""
+    "radius 6 for .sheet (want 12)"
    ]
   },
   {
    "name": "panel in the side inset",
    "ok": true,
    "sample": [
-    "ellipsis on \"الاستقرار\"",
-    "ellipsis on \"لماذا؟\"",
-    "clipped text (top): \"·\" 826.78..836.31 y 84..101"
+    "text in side inset: الآن",
+    "text in side inset: التغير",
+    "text in side inset: الأساس"
    ]
   },
   {
@@ -140,8 +73,8 @@
    "ok": true,
    "sample": [
     "panel not opaque: لماذا؟ الاستقرار rgba(9, 17, 25, 0.66)",
-    "ellipsis on \"الاستقرار\"",
-    "ellipsis on \"لماذا؟\""
+    "contrast 3.28 for \"−1\"",
+    "contrast 3.28 for \"شهريًا\""
    ]
   },
   {
@@ -149,278 +82,247 @@
    "ok": true,
    "sample": [
     "panel not opaque (opacity 0.60): لماذا؟ الاستقرار",
-    "ellipsis on \"الاستقرار\"",
-    "ellipsis on \"لماذا؟\""
+    "brief text not fully visible: الاستقرار",
+    "brief text not fully visible: لماذا؟ · الآن 58% · يتجه إلى 56%"
    ]
   },
   {
    "name": "Egypt covered",
    "ok": true,
    "sample": [
-    "ellipsis on \"الاستقرار\"",
-    "ellipsis on \"لماذا؟\"",
-    "clipped text (top): \"·\" 796.78..806.31 y 84..101"
+    "Nile delta covered by panel لماذا؟ الاستقرار",
+    "Egypt covered by panel لماذا؟ الاستقرار",
+    "Egypt outside the safe screen"
    ]
   },
   {
    "name": "map dimmed",
    "ok": true,
    "sample": [
-    "ellipsis on \"الاستقرار\"",
-    "ellipsis on \"لماذا؟\"",
-    "clipped text (top): \"·\" 796.78..806.31 y 84..101"
+    "the map is dimmed (opacity 1.00, filter brightness(0.35))"
    ]
   },
   {
    "name": "map faded",
    "ok": true,
    "sample": [
-    "ellipsis on \"الاستقرار\"",
-    "ellipsis on \"لماذا؟\"",
-    "clipped text (top): \"·\" 796.78..806.31 y 84..101"
+    "the map is dimmed (opacity 0.30, filter none)"
    ]
   },
   {
    "name": "scrim over the map",
    "ok": true,
    "sample": [
-    "ellipsis on \"الاستقرار\"",
-    "ellipsis on \"لماذا؟\"",
-    "clipped text (top): \"·\" 796.78..806.31 y 84..101"
+    "something drawn over the map: DIV (rgba(0, 0, 0, 0.55))",
+    "contrast 1.92 for \"2\""
    ]
   },
   {
    "name": "sheet width",
    "ok": true,
    "sample": [
-    "ellipsis on \"الاستقرار\"",
-    "ellipsis on \"لماذا؟\"",
-    "clipped text (top): \"·\" 796.78..806.31 y 84..101"
+    "sheet width 330 (want round(clamp(43% of 832, 340, 380)), or the room the dock leaves if 330..: 358)"
    ]
   },
   {
    "name": "sheet top",
    "ok": true,
    "sample": [
-    "ellipsis on \"الاستقرار\"",
-    "ellipsis on \"لماذا؟\"",
-    "clipped text (top): \"·\" 796.78..806.31 y 70..87"
+    "hit overlap الاستقرار 58%، ينخفض. لماذ / إغلاق لماذا؟ الاستقرار",
+    "panel overlap الدولة: مصر، حسني مبارك، ج / لماذا؟ الاستقرار",
+    "panel overlap الخزينة 36.0 مليار $ الاست / لماذا؟ الاستقرار"
    ]
   },
   {
    "name": "dock hidden although it fits",
    "ok": true,
    "sample": [
-    "ellipsis on \"الاستقرار\"",
-    "ellipsis on \"لماذا؟\"",
-    "clipped text (top): \"·\" 796.78..806.31 y 84..101"
+    "dock hidden although it fits left of the sheet"
    ]
   },
   {
    "name": "dock shown on the SE",
    "ok": true,
    "sample": [
-    "ellipsis on \"الاستقرار\"",
-    "ellipsis on \"لماذا؟\"",
-    "clipped text (top): \"·\" 561.78..571.31 y 84..101"
+    "icon over text: i / \"+3\"",
+    "panel overlap الأقسام / لماذا؟ الاستقرار",
+    "dock shown although it does not fit left of the sheet"
    ]
   },
   {
    "name": "left stack moved",
    "ok": true,
    "sample": [
-    "ellipsis on \"الاستقرار\"",
-    "ellipsis on \"لماذا؟\"",
-    "clipped text (top): \"·\" 796.78..806.31 y 84..101"
+    "HUD element moved from its B3 position: .toast x 70.0..275.6 y 56.0..88.0",
+    "HUD element moved from its B3 position: .btn.mode x 70.0..191.6 y 96.0..128.0",
+    "HUD element moved from its B3 position: .btn.home x 70.0..141.5 y 136.0..168.0"
    ]
   },
   {
    "name": "map label cut",
    "ok": true,
    "sample": [
-    "ellipsis on \"الاستقرار\"",
-    "ellipsis on \"لماذا؟\"",
-    "clipped text (top): \"·\" 796.78..806.31 y 84..101"
+    "map label ليبيا sliced by the screen edge or the side inset",
+    "map label إيران sliced by the screen edge or the side inset",
+    "map label إيران squeezed between a panel and the screen edge"
    ]
   },
   {
    "name": "contrast",
    "ok": true,
    "sample": [
-    "ellipsis on \"الاستقرار\"",
-    "ellipsis on \"لماذا؟\"",
-    "clipped text (top): \"·\" 796.78..806.31 y 84..101"
+    "contrast 1.73 for \"الآن\"",
+    "contrast 1 for \"58%\"",
+    "contrast 1.73 for \"الهدف\""
    ]
   },
   {
    "name": "identity line missing",
    "ok": true,
    "sample": [
-    "ellipsis on \"الاستقرار\"",
-    "ellipsis on \"لماذا؟\"",
-    "clipped text (top): \"·\" 796.78..806.31 y 84..101"
+    "panel top line none rgb(199, 225, 193) 2px (want the section colour, 2 pt, at the top)"
    ]
   },
   {
    "name": "emblem drawn grey",
    "ok": true,
    "sample": [
-    "ellipsis on \"الاستقرار\"",
-    "ellipsis on \"لماذا؟\"",
-    "clipped text (top): \"·\" 796.78..806.31 y 84..101"
+    "section emblem missing or not in the section colour"
    ]
   },
   {
    "name": "section colour on data",
    "ok": true,
    "sample": [
-    "ellipsis on \"الاستقرار\"",
-    "ellipsis on \"لماذا؟\"",
-    "clipped text (top): \"·\" 796.78..806.31 y 84..101"
+    "section colour on data text: \"لماذا؟\"",
+    "section colour on data text: \"الآن\"",
+    "section colour on data text: \"58%\""
    ]
   },
   {
    "name": "money unit",
    "ok": true,
    "sample": [
-    "ellipsis on \"الاستقرار\"",
-    "ellipsis on \"لماذا؟\"",
-    "clipped text (top): \"·\" 796.78..806.31 y 84..101"
+    "clipped text (top): \"0.4\" 866.09..881 y 108..123",
+    "clipped text (top): \"مليار $\" 838.42..866.09 y 108..123",
+    "money unit: «0.4 مليار» (under 1 billion is written in millions)"
    ]
   },
   {
    "name": "sign outside its number",
    "ok": true,
    "sample": [
-    "ellipsis on \"الاستقرار\"",
-    "ellipsis on \"لماذا؟\"",
-    "clipped text (top): \"·\" 796.78..806.31 y 84..101"
+    "clipped text (top): \"تغير +\" 859.06..881 y 108..123",
+    "clipped text (top): \"3\" 853.06..859.06 y 108..123",
+    "a sign outside its number: «تغير +3»"
    ]
   },
   {
    "name": "colour alone",
    "ok": true,
    "sample": [
-    "ellipsis on \"الاستقرار\"",
-    "ellipsis on \"لماذا؟\"",
-    "clipped text (top): \"·\" 796.78..806.31 y 84..101"
+    "clipped text (top): \"تراجع\" 860.27..881 y 108..123",
+    "colour alone: «تراجع» has no arrow or icon"
    ]
   },
   {
    "name": "an image in the sheet",
    "ok": true,
    "sample": [
-    "ellipsis on \"الاستقرار\"",
-    "ellipsis on \"لماذا؟\"",
-    "clipped text (top): \"·\" 796.78..806.31 y 84..101"
+    "an image in the sheet"
    ]
   },
   {
    "name": "close not round",
    "ok": true,
    "sample": [
-    "close button is not round",
-    "ellipsis on \"الاستقرار\"",
-    "ellipsis on \"لماذا؟\""
+    "close button is not round"
    ]
   },
   {
    "name": "label without a role",
    "ok": true,
    "sample": [
-    "ellipsis on \"الاستقرار\"",
-    "ellipsis on \"لماذا؟\"",
-    "clipped text (top): \"·\" 796.78..806.31 y 84..101"
+    "clipped text (top): \"اختبار\" 860.25..881 y 108..123",
+    "a11y: a label VoiceOver may skip (no role): «اختبار»"
    ]
   },
   {
    "name": "text overlap",
    "ok": true,
    "sample": [
-    "ellipsis on \"الاستقرار\"",
-    "ellipsis on \"لماذا؟\"",
-    "clipped text (top): \"·\" 796.78..806.31 y 70..87"
+    "text overlap \"الاستقرار\" / \"لماذا؟\"",
+    "text overlap \"الاستقرار\" / \"·\"",
+    "text overlap \"الاستقرار\" / \"الآن\""
    ]
   },
   {
    "name": "identity line colour",
    "ok": true,
    "sample": [
-    "ellipsis on \"الاستقرار\"",
-    "ellipsis on \"لماذا؟\"",
-    "clipped text (top): \"·\" 796.78..806.31 y 84..101"
+    "panel top line \"\" rgb(63, 224, 208) 2px (want the section colour, 2 pt, at the top)"
    ]
   },
   {
    "name": "emblem size",
    "ok": true,
    "sample": [
-    "ellipsis on \"الاستقرار\"",
-    "ellipsis on \"لماذا؟\"",
-    "clipped text (top): \"·\" 796.78..806.31 y 84..101"
+    "size 28.0x32.0 for .s-emb (want 32 x 32)"
    ]
   },
   {
    "name": "tile icons cyan",
    "ok": true,
    "sample": [
-    "ellipsis on \"الاستقرار\"",
-    "ellipsis on \"لماذا؟\"",
-    "clipped text (top): \"·\" 796.78..806.31 y 84..101"
+    "white touch off: .r-tile color rgb(127, 233, 255) (want rgb(234, 242, 247))"
    ]
   },
   {
    "name": "row read in part",
    "ok": true,
    "sample": [
-    "ellipsis on \"الاستقرار\"",
-    "ellipsis on \"لماذا؟\"",
-    "clipped text (top): \"·\" 796.78..806.31 y 84..101"
+    "a11y: «جزء» does not read all it shows: مستوى البداية مصر في"
    ]
   },
   {
    "name": "a long headline label",
    "ok": true,
    "sample": [
-    "ellipsis on \"الاستقرار\"",
-    "ellipsis on \"لماذا؟\"",
-    "clipped text (top): \"·\" 796.78..806.31 y 84..101"
+    "clipped text (sides): \"عنوان طويل جدًا لا يتسع لخانته أبدًا\" 385.38..539.25 y 116..133",
+    "text outside the sheet's 12 pt padding: \"عنوان طويل جدًا لا يتسع لخانته أبدًا\"",
+    "clipped text (sides): \"1\" 528.44..539.25 y 134..161"
    ]
   },
   {
    "name": "text wider than its box",
    "ok": true,
    "sample": [
-    "ellipsis on \"الاستقرار\"",
-    "ellipsis on \"لماذا؟\"",
-    "clipped text (top): \"·\" 796.78..806.31 y 84..101"
+    "text wider than its box: «الأساس» (34 in 20)"
    ]
   },
   {
    "name": "a long status cell",
    "ok": true,
    "sample": [
-    "ellipsis on \"الاستقرار\"",
-    "ellipsis on \"لماذا؟\"",
-    "clipped text (top): \"·\" 796.78..806.31 y 84..101"
+    "clipped text (sides): \"قيمة طويلة جدًا لا تتسع لنصف الجدول\" 416.53..613.3 y 112.5..131.5",
+    "text outside the sheet's 12 pt padding: \"قيمة طويلة جدًا لا تتسع لنصف الجدول\"",
+    "horizontal overflow in خانةقيمة طويلة جدًا لا تتس"
    ]
   },
   {
    "name": "font weight (no tabs)",
    "ok": true,
    "sample": [
-    "ellipsis on \"الاستقرار\"",
     "font weight 11.5/700 for \"لماذا؟\"",
-    "ellipsis on \"لماذا؟\""
+    "font weight 11.5/700 for \"·\"",
+    "font weight 11.5/700 for \"الآن\""
    ]
   },
   {
    "name": "a tab row on a one-body sheet",
    "ok": true,
    "sample": [
-    "ellipsis on \"الاستقرار\"",
-    "ellipsis on \"لماذا؟\"",
-    "clipped text (top): \"·\" 796.78..806.31 y 84..101"
+    "a tab row on a sheet that has one body"
    ]
   },
   {
@@ -428,89 +330,76 @@
    "ok": true,
    "sample": [
     "control height 40.00 for .r-x (want 32): إغلاق لماذا؟ الاستقرار",
-    "close button is not round",
-    "ellipsis on \"الاستقرار\""
+    "close button is not round"
    ]
   },
   {
    "name": "icon size (no tabs)",
    "ok": true,
    "sample": [
-    "icon size 19x19 (want 16): i",
-    "ellipsis on \"الاستقرار\"",
-    "ellipsis on \"لماذا؟\""
+    "icon size 19x19 (want 16): i"
    ]
   },
   {
    "name": "fades wrong (no tabs)",
    "ok": true,
    "sample": [
-    "ellipsis on \"الاستقرار\"",
-    "ellipsis on \"لماذا؟\"",
-    "clipped text (top): \"·\" 561.78..571.31 y 84..101"
+    "fades 0/0 do not match the scroll state (top 0, over 301.0)"
    ]
   },
   {
    "name": "hint chevron missing (no tabs)",
    "ok": true,
    "sample": [
-    "ellipsis on \"الاستقرار\"",
-    "ellipsis on \"لماذا؟\"",
-    "clipped text (top): \"·\" 561.78..571.31 y 84..101"
+    "scroll hint chevron missing with content below"
    ]
   },
   {
    "name": "hint over the content (no tabs)",
    "ok": true,
    "sample": [
-    "ellipsis on \"الاستقرار\"",
-    "ellipsis on \"لماذا؟\"",
-    "clipped text (top): \"·\" 561.78..571.31 y 84..101"
+    "scroll hint not centred in the clear strip under the fade: y 198.0..216.0 (strip 344.0..366.0)"
    ]
   },
   {
    "name": "a dock item marked open",
    "ok": true,
    "sample": [
-    "ellipsis on \"الاستقرار\"",
-    "ellipsis on \"لماذا؟\"",
-    "clipped text (top): \"·\" 796.78..806.31 y 84..101"
+    "a dock item is marked open under a sheet of no section"
    ]
   },
   {
    "name": "tap in the side inset (why)",
    "ok": true,
    "sample": [
-    "ellipsis on \"الاستقرار\"",
-    "ellipsis on \"لماذا؟\"",
-    "clipped text (top): \"·\" 826.78..836.31 y 84..101"
+    "text in side inset: ما يخفضه",
+    "text in side inset: الشرعية",
+    "text in side inset: 44"
    ]
   },
   {
    "name": "brief text hidden (why)",
    "ok": true,
    "sample": [
-    "ellipsis on \"لماذا؟\"",
-    "clipped text (top): \"·\" 796.78..806.31 y 84..101",
-    "ellipsis on \"الآن\""
+    "brief text not fully visible: الاستقرار"
    ]
   },
   {
    "name": "18 pt misuse (why)",
    "ok": true,
    "sample": [
-    "ellipsis on \"الاستقرار\"",
-    "ellipsis on \"لماذا؟\"",
-    "clipped text (top): \"·\" 796.78..806.31 y 84..101"
+    "18 pt is for the panel's name and the adjusted values only: \"الأساس\"",
+    "18 pt is for the panel's name and the adjusted values only: \"ما يرفعه\"",
+    "18 pt is for the panel's name and the adjusted values only: \"ما يخفضه\""
    ]
   },
   {
    "name": "clipped text (why)",
    "ok": true,
    "sample": [
-    "ellipsis on \"الاستقرار\"",
-    "ellipsis on \"لماذا؟\"",
-    "clipped text (top): \"·\" 796.78..806.31 y 84..101"
+    "clipped text (sides): \"الأساس\" 887.28..921 y 172..189",
+    "text outside the sheet's 12 pt padding: \"الأساس\"",
+    "clipped text (sides): \"مستوى البداية\" 856.47..921 y 193..210"
    ]
   },
   {
@@ -526,270 +415,239 @@
    "name": "faint text (why)",
    "ok": true,
    "sample": [
-    "ellipsis on \"الاستقرار\"",
-    "ellipsis on \"لماذا؟\"",
-    "clipped text (top): \"·\" 796.78..806.31 y 84..101"
+    "brief text cannot be scrolled clear of the fades: مصر في 2011 · يتلاشى ببطء",
+    "brief text cannot be scrolled clear of the fades: الإنفاق الأمني",
+    "brief text cannot be scrolled clear of the fades: من الموازنة"
    ]
   },
   {
    "name": "% before its number (why)",
    "ok": true,
    "sample": [
-    "ellipsis on \"الاستقرار\"",
-    "ellipsis on \"لماذا؟\"",
-    "clipped text (top): \"·\" 796.78..806.31 y 84..101"
+    "% shown before its number: \"نسبة 20%\"",
+    "the sections are «نسبة 20%، ما يرفعه، ما يخفضه»",
+    "«مستوى البداية» is not under «الأساس»"
    ]
   },
   {
    "name": "game running",
    "ok": true,
    "sample": [
-    "ellipsis on \"الاستقرار\"",
-    "ellipsis on \"لماذا؟\"",
-    "clipped text (top): \"·\" 796.78..806.31 y 84..101"
+    "the game is not shown paused (play glyph and words)"
    ]
   },
   {
    "name": "chip not shown open",
    "ok": true,
    "sample": [
-    "ellipsis on \"الاستقرار\"",
-    "ellipsis on \"لماذا؟\"",
-    "clipped text (top): \"·\" 796.78..806.31 y 84..101"
+    "the HUD chip «الاستقرار» is not the one shown open",
+    "the HUD chip does not point the way the value moves"
    ]
   },
   {
    "name": "chip value off",
    "ok": true,
    "sample": [
-    "ellipsis on \"الاستقرار\"",
-    "ellipsis on \"لماذا؟\"",
-    "clipped text (top): \"·\" 796.78..806.31 y 84..101"
+    "the HUD chip does not show and say 58%"
    ]
   },
   {
    "name": "sections reordered",
    "ok": true,
    "sample": [
-    "ellipsis on \"الاستقرار\"",
-    "ellipsis on \"لماذا؟\"",
-    "clipped text (top): \"·\" 796.78..806.31 y 84..101"
+    "the sections are «الأساس، ما يخفضه، ما يرفعه»",
+    "«الأمن والشرطة» is not under «ما يرفعه»",
+    "«دعم الخبز والوقود» is not under «ما يرفعه»"
    ]
   },
   {
    "name": "a term moved",
    "ok": true,
    "sample": [
-    "ellipsis on \"الاستقرار\"",
-    "ellipsis on \"لماذا؟\"",
-    "clipped text (top): \"·\" 796.78..806.31 y 84..101"
+    "«الشرعية» is not under «ما يخفضه»",
+    "«الشرعية»'s share -5 has the wrong sign for «ما يرفعه»",
+    "«ما يرفعه» is not sorted by size: 8, 5, 3, 5"
    ]
   },
   {
    "name": "a term lost",
    "ok": true,
    "sample": [
-    "ellipsis on \"الاستقرار\"",
-    "ellipsis on \"لماذا؟\"",
-    "clipped text (top): \"·\" 796.78..806.31 y 84..101"
+    "term «التضخم» missing",
+    "the terms add up to 58, the sum row says 56, the header 56, the cell 56",
+    "a11y: the sum row does not say the start, the rises and the falls as shown"
    ]
   },
   {
    "name": "sum off",
    "ok": true,
    "sample": [
-    "ellipsis on \"الاستقرار\"",
-    "ellipsis on \"لماذا؟\"",
-    "clipped text (top): \"·\" 796.78..806.31 y 84..101"
+    "a11y: «المجموع: يتجه إلى 56%، م» does not read all it shows: 57",
+    "the terms add up to 56, the sum row says 57, the header 56, the cell 56"
    ]
   },
   {
    "name": "header target off",
    "ok": true,
    "sample": [
-    "ellipsis on \"الاستقرار\"",
-    "ellipsis on \"لماذا؟\"",
-    "clipped text (top): \"·\" 796.78..806.31 y 84..101"
+    "the terms add up to 56, the sum row says 56, the header 55, the cell 56",
+    "brief text missing: لماذا؟ · الآن 58% · يتجه إلى 56%",
+    "brief text missing: لماذا؟ · الآن 58% · يتجه إلى 56%"
    ]
   },
   {
    "name": "now off",
    "ok": true,
    "sample": [
-    "ellipsis on \"الاستقرار\"",
-    "ellipsis on \"لماذا؟\"",
-    "clipped text (top): \"·\" 796.78..806.31 y 84..101"
+    "the value now is not 58% in the header and the cell",
+    "the time to the target is not 2 months («نحو 4 أشهر», from the now, the target and the change)"
    ]
   },
   {
    "name": "change the wrong way",
    "ok": true,
    "sample": [
-    "ellipsis on \"الاستقرار\"",
-    "ellipsis on \"لماذا؟\"",
-    "clipped text (top): \"·\" 796.78..806.31 y 84..101"
+    "the monthly change does not head toward the target",
+    "the change cell is not -1 a month (the state panel says −1)"
    ]
   },
   {
    "name": "arrow against the sign",
    "ok": true,
    "sample": [
-    "ellipsis on \"الاستقرار\"",
-    "ellipsis on \"لماذا؟\"",
-    "clipped text (top): \"·\" 796.78..806.31 y 84..101"
+    "«الأمن والشرطة»: the arrow does not agree with its sign"
    ]
   },
   {
    "name": "a rise in amber",
    "ok": true,
    "sample": [
-    "ellipsis on \"الاستقرار\"",
-    "ellipsis on \"لماذا؟\"",
-    "clipped text (top): \"·\" 796.78..806.31 y 84..101"
+    "«الأمن والشرطة»: a rise not blue"
    ]
   },
   {
    "name": "a fall in blue",
    "ok": true,
    "sample": [
-    "ellipsis on \"الاستقرار\"",
-    "ellipsis on \"لماذا؟\"",
-    "clipped text (top): \"·\" 796.78..806.31 y 84..101"
+    "«الشرعية»: a fall not amber"
    ]
   },
   {
    "name": "unsorted",
    "ok": true,
    "sample": [
-    "ellipsis on \"الاستقرار\"",
-    "ellipsis on \"لماذا؟\"",
-    "clipped text (top): \"·\" 796.78..806.31 y 84..101"
+    "«ما يخفضه» is not sorted by size: 4, 3, 2, 1, 5"
    ]
   },
   {
    "name": "starting level with an arrow",
    "ok": true,
    "sample": [
-    "ellipsis on \"الاستقرار\"",
-    "ellipsis on \"لماذا؟\"",
-    "clipped text (top): \"·\" 796.78..806.31 y 84..101"
+    "the starting level «مستوى البداية» is not a plain number"
    ]
   },
   {
    "name": "share unsaid",
    "ok": true,
    "sample": [
-    "ellipsis on \"الاستقرار\"",
-    "ellipsis on \"لماذا؟\"",
-    "clipped text (top): \"·\" 796.78..806.31 y 84..101"
+    "a11y: «التضخم» does not say its share in words"
    ]
   },
   {
    "name": "thirteen terms",
    "ok": true,
    "sample": [
-    "ellipsis on \"الاستقرار\"",
-    "ellipsis on \"لماذا؟\"",
-    "clipped text (top): \"·\" 796.78..806.31 y 84..101"
+    "a11y: «احتجاجات تونس، في الجوار» does not read all it shows: سبب 0 0",
+    "a11y: «احتجاجات تونس، في الجوار» does not read all it shows: سبب 0",
+    "a11y: «احتجاجات تونس، في الجوار» does not read all it shows: سبب 2 0"
    ]
   },
   {
    "name": "shares swapped, sum kept",
    "ok": true,
    "sample": [
-    "ellipsis on \"الاستقرار\"",
-    "ellipsis on \"لماذا؟\"",
-    "clipped text (top): \"·\" 796.78..806.31 y 84..101"
+    "a11y: «الأمن والشرطة، الإنفاق ا» does not read all it shows: 5",
+    "a11y: «دعم الخبز والوقود، من ال» does not read all it shows: 8",
+    "«الأمن والشرطة»'s share is 5, the brief 8"
    ]
   },
   {
    "name": "change cell off",
    "ok": true,
    "sample": [
-    "ellipsis on \"الاستقرار\"",
-    "ellipsis on \"لماذا؟\"",
-    "clipped text (top): \"·\" 796.78..806.31 y 84..101"
+    "the change cell is not -1 a month (the state panel says −1)",
+    "the time to the target is not 2 months («نحو شهر», from the now, the target and the change)"
    ]
   },
   {
    "name": "time cell off",
    "ok": true,
    "sample": [
-    "ellipsis on \"الاستقرار\"",
-    "ellipsis on \"لماذا؟\"",
-    "clipped text (top): \"·\" 796.78..806.31 y 84..101"
+    "the time to the target is not 2 months («نحو شهرين», from the now, the target and the change)"
    ]
   },
   {
    "name": "target off its time",
    "ok": true,
    "sample": [
-    "ellipsis on \"الاستقرار\"",
-    "ellipsis on \"لماذا؟\"",
-    "clipped text (top): \"·\" 796.78..806.31 y 84..101"
+    "the terms add up to 56, the sum row says 56, the header 56, the cell 55",
+    "the time to the target is not 2 months («نحو 3 أشهر», from the now, the target and the change)"
    ]
   },
   {
    "name": "chip points up",
    "ok": true,
    "sample": [
-    "ellipsis on \"الاستقرار\"",
-    "ellipsis on \"لماذا؟\"",
-    "clipped text (top): \"·\" 796.78..806.31 y 84..101"
+    "the HUD chip does not point the way the value moves"
    ]
   },
   {
    "name": "chip says it rises",
    "ok": true,
    "sample": [
-    "ellipsis on \"الاستقرار\"",
-    "ellipsis on \"لماذا؟\"",
-    "clipped text (top): \"·\" 796.78..806.31 y 84..101"
+    "the HUD chip does not point the way the value moves"
    ]
   },
   {
    "name": "sum totals unsaid",
    "ok": true,
    "sample": [
-    "ellipsis on \"الاستقرار\"",
-    "ellipsis on \"لماذا؟\"",
-    "clipped text (top): \"·\" 796.78..806.31 y 84..101"
+    "a11y: «المجموع: يتجه إلى 56%، م» does not read all it shows: 16",
+    "a11y: the sum row does not say the start, the rises and the falls as shown"
    ]
   },
   {
    "name": "a source value off",
    "ok": true,
    "sample": [
-    "ellipsis on \"الاستقرار\"",
-    "ellipsis on \"لماذا؟\"",
-    "clipped text (top): \"·\" 796.78..806.31 y 84..101"
+    "a11y: «البطالة، 8.9%: يخفض 3 نق» does not read all it shows: 1",
+    "«البطالة»'s line is not «8.9%»",
+    "«البطالة» says «9.1%», the approved panels 8.9"
    ]
   },
   {
    "name": "link silent",
    "ok": true,
    "sample": [
-    "ellipsis on \"الاستقرار\"",
-    "ellipsis on \"لماذا؟\"",
-    "clipped text (top): \"·\" 796.78..806.31 y 84..101"
+    "a11y: a link row does not say where it leads"
    ]
   },
   {
    "name": "sum shown wrong",
    "ok": true,
    "sample": [
-    "ellipsis on \"الاستقرار\"",
-    "ellipsis on \"لماذا؟\"",
-    "clipped text (top): \"·\" 796.78..806.31 y 84..101"
+    "a11y: «المجموع: يتجه إلى 56%، م» does not read all it shows: 17",
+    "the sum shown «55 + 17 − 15» is not start + rises − falls",
+    "brief text missing: 55 + 16 − 15"
    ]
   },
   {
    "name": "sum unsaid",
    "ok": true,
    "sample": [
-    "ellipsis on \"الاستقرار\"",
-    "ellipsis on \"لماذا؟\"",
-    "clipped text (top): \"·\" 796.78..806.31 y 84..101"
+    "a11y: «يتجه إلى 56%» does not read all it shows: 55 16 15",
+    "a11y: the sum row does not read as the sum",
+    "a11y: the sum row does not say the start, the rises and the falls as shown"
    ]
   },
   {

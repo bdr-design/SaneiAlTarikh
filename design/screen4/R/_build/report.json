@@ -1,7 +1,7 @@
 {
  "se": {
   "device": "667x375 side 0 bottom 0 none",
-  "renderedAt": "2026-11-07T17:58:31.003Z",
+  "renderedAt": "2026-11-07T18:02:27.546Z",
   "inputs": {
    "files": [
     "index.html",
@@ -7521,7 +7521,7 @@
  },
  "mini": {
   "device": "812x375 side 50 bottom 21 notch",
-  "renderedAt": "2026-11-07T17:24:20.778Z",
+  "renderedAt": "2026-11-07T18:02:51.751Z",
   "inputs": {
    "files": [
     "index.html",
@@ -7541,89 +7541,12 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "4a37b186f19e16a16d9636a6032d2591f925ec7f"
+   "sha1": "bcec19e62be374957f88673e8a1fbefc965b7132"
   },
-  "issues": [
-   "card: ellipsis on \"القاهرة\"",
-   "card: ellipsis on \"مصر\"",
-   "card: clipped text (top): \"·\" 672.64..682.17 y 84..101",
-   "card: ellipsis on \"محافظة\"",
-   "govern: ellipsis on \"القاهرة\"",
-   "govern: ellipsis on \"مصر\"",
-   "govern: clipped text (top): \"·\" 672.64..682.17 y 84..101",
-   "govern: ellipsis on \"محافظة\"",
-   "govern_end: ellipsis on \"القاهرة\"",
-   "govern_end: ellipsis on \"مصر\"",
-   "govern_end: clipped text (top): \"·\" 672.64..682.17 y 84..101",
-   "govern_end: ellipsis on \"محافظة\"",
-   "build: ellipsis on \"القاهرة\"",
-   "build: ellipsis on \"مصر\"",
-   "build: clipped text (top): \"·\" 672.64..682.17 y 84..101",
-   "build: ellipsis on \"محافظة\"",
-   "build_end: ellipsis on \"القاهرة\"",
-   "build_end: ellipsis on \"مصر\"",
-   "build_end: clipped text (top): \"·\" 672.64..682.17 y 84..101",
-   "build_end: ellipsis on \"محافظة\"",
-   "forces: ellipsis on \"القاهرة\"",
-   "forces: ellipsis on \"مصر\"",
-   "forces: clipped text (top): \"·\" 672.64..682.17 y 84..101",
-   "forces: ellipsis on \"محافظة\"",
-   "forces_end: ellipsis on \"القاهرة\"",
-   "forces_end: ellipsis on \"مصر\"",
-   "forces_end: clipped text (top): \"·\" 672.64..682.17 y 84..101",
-   "forces_end: ellipsis on \"محافظة\"",
-   "policy: ellipsis on \"القاهرة\"",
-   "policy: ellipsis on \"مصر\"",
-   "policy: clipped text (top): \"·\" 672.64..682.17 y 84..101",
-   "policy: ellipsis on \"محافظة\"",
-   "policy_end: ellipsis on \"القاهرة\"",
-   "policy_end: ellipsis on \"مصر\"",
-   "policy_end: clipped text (top): \"·\" 672.64..682.17 y 84..101",
-   "policy_end: ellipsis on \"محافظة\"",
-   "govern_at72: ellipsis on \"القاهرة\"",
-   "govern_at72: ellipsis on \"مصر\"",
-   "govern_at72: clipped text (top): \"·\" 672.64..682.17 y 84..101",
-   "govern_at72: ellipsis on \"محافظة\"",
-   "govern_at144: ellipsis on \"القاهرة\"",
-   "govern_at144: ellipsis on \"مصر\"",
-   "govern_at144: clipped text (top): \"·\" 672.64..682.17 y 84..101",
-   "govern_at144: ellipsis on \"محافظة\"",
-   "govern_at216: ellipsis on \"القاهرة\"",
-   "govern_at216: ellipsis on \"مصر\"",
-   "govern_at216: clipped text (top): \"·\" 672.64..682.17 y 84..101",
-   "govern_at216: ellipsis on \"محافظة\"",
-   "build_at72: ellipsis on \"القاهرة\"",
-   "build_at72: ellipsis on \"مصر\"",
-   "build_at72: clipped text (top): \"·\" 672.64..682.17 y 84..101",
-   "build_at72: ellipsis on \"محافظة\"",
-   "build_at144: ellipsis on \"القاهرة\"",
-   "build_at144: ellipsis on \"مصر\"",
-   "build_at144: clipped text (top): \"·\" 672.64..682.17 y 84..101",
-   "build_at144: ellipsis on \"محافظة\"",
-   "forces_at72: ellipsis on \"القاهرة\"",
-   "forces_at72: ellipsis on \"مصر\"",
-   "forces_at72: clipped text (top): \"·\" 672.64..682.17 y 84..101",
-   "forces_at72: ellipsis on \"محافظة\"",
-   "forces_at144: ellipsis on \"القاهرة\"",
-   "forces_at144: ellipsis on \"مصر\"",
-   "forces_at144: clipped text (top): \"·\" 672.64..682.17 y 84..101",
-   "forces_at144: ellipsis on \"محافظة\"",
-   "policy_at72: ellipsis on \"القاهرة\"",
-   "policy_at72: ellipsis on \"مصر\"",
-   "policy_at72: clipped text (top): \"·\" 672.64..682.17 y 84..101",
-   "policy_at72: ellipsis on \"محافظة\"",
-   "policy_at144: ellipsis on \"القاهرة\"",
-   "policy_at144: ellipsis on \"مصر\"",
-   "policy_at144: clipped text (top): \"·\" 672.64..682.17 y 84..101",
-   "policy_at144: ellipsis on \"محافظة\"",
-   "policy_at216: ellipsis on \"القاهرة\"",
-   "policy_at216: ellipsis on \"مصر\"",
-   "policy_at216: clipped text (top): \"·\" 672.64..682.17 y 84..101",
-   "policy_at216: ellipsis on \"محافظة\""
-  ],
+  "issues": [],
   "views": {
    "card": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -8238,7 +8161,7 @@
     ]
    },
    "govern": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -8727,7 +8650,7 @@
     ]
    },
    "govern_end": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -9199,7 +9122,7 @@
     ]
    },
    "build": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -9670,7 +9593,7 @@
     ]
    },
    "build_end": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -10155,7 +10078,7 @@
     ]
    },
    "forces": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -10616,7 +10539,7 @@
     ]
    },
    "forces_end": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -11046,7 +10969,7 @@
     ]
    },
    "policy": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -11487,7 +11410,7 @@
     ]
    },
    "policy_end": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -11959,7 +11882,7 @@
     ]
    },
    "govern_at72": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -12438,7 +12361,7 @@
     ]
    },
    "govern_at144": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -12886,7 +12809,7 @@
     ]
    },
    "govern_at216": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -13342,7 +13265,7 @@
     ]
    },
    "build_at72": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -13780,7 +13703,7 @@
     ]
    },
    "build_at144": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -14225,7 +14148,7 @@
     ]
    },
    "forces_at72": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -14668,7 +14591,7 @@
     ]
    },
    "forces_at144": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -15098,7 +15021,7 @@
     ]
    },
    "policy_at72": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -15531,7 +15454,7 @@
     ]
    },
    "policy_at144": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -15956,7 +15879,7 @@
     ]
    },
    "policy_at216": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -16453,11 +16376,11 @@
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 76
+  "issueCount": 0
  },
  "i14": {
   "device": "844x390 side 47 bottom 21 notch",
-  "renderedAt": "2026-11-07T17:24:49.441Z",
+  "renderedAt": "2026-11-07T18:03:20.216Z",
   "inputs": {
    "files": [
     "index.html",
@@ -16477,77 +16400,12 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "4a37b186f19e16a16d9636a6032d2591f925ec7f"
+   "sha1": "bcec19e62be374957f88673e8a1fbefc965b7132"
   },
-  "issues": [
-   "card: ellipsis on \"القاهرة\"",
-   "card: ellipsis on \"مصر\"",
-   "card: clipped text (top): \"·\" 707.64..717.17 y 84..101",
-   "card: ellipsis on \"محافظة\"",
-   "govern: ellipsis on \"القاهرة\"",
-   "govern: ellipsis on \"مصر\"",
-   "govern: clipped text (top): \"·\" 707.64..717.17 y 84..101",
-   "govern: ellipsis on \"محافظة\"",
-   "govern_end: ellipsis on \"القاهرة\"",
-   "govern_end: ellipsis on \"مصر\"",
-   "govern_end: clipped text (top): \"·\" 707.64..717.17 y 84..101",
-   "govern_end: ellipsis on \"محافظة\"",
-   "build: ellipsis on \"القاهرة\"",
-   "build: ellipsis on \"مصر\"",
-   "build: clipped text (top): \"·\" 707.64..717.17 y 84..101",
-   "build: ellipsis on \"محافظة\"",
-   "build_end: ellipsis on \"القاهرة\"",
-   "build_end: ellipsis on \"مصر\"",
-   "build_end: clipped text (top): \"·\" 707.64..717.17 y 84..101",
-   "build_end: ellipsis on \"محافظة\"",
-   "forces: ellipsis on \"القاهرة\"",
-   "forces: ellipsis on \"مصر\"",
-   "forces: clipped text (top): \"·\" 707.64..717.17 y 84..101",
-   "forces: ellipsis on \"محافظة\"",
-   "forces_end: ellipsis on \"القاهرة\"",
-   "forces_end: ellipsis on \"مصر\"",
-   "forces_end: clipped text (top): \"·\" 707.64..717.17 y 84..101",
-   "forces_end: ellipsis on \"محافظة\"",
-   "policy: ellipsis on \"القاهرة\"",
-   "policy: ellipsis on \"مصر\"",
-   "policy: clipped text (top): \"·\" 707.64..717.17 y 84..101",
-   "policy: ellipsis on \"محافظة\"",
-   "policy_end: ellipsis on \"القاهرة\"",
-   "policy_end: ellipsis on \"مصر\"",
-   "policy_end: clipped text (top): \"·\" 707.64..717.17 y 84..101",
-   "policy_end: ellipsis on \"محافظة\"",
-   "govern_at87: ellipsis on \"القاهرة\"",
-   "govern_at87: ellipsis on \"مصر\"",
-   "govern_at87: clipped text (top): \"·\" 707.64..717.17 y 84..101",
-   "govern_at87: ellipsis on \"محافظة\"",
-   "govern_at174: ellipsis on \"القاهرة\"",
-   "govern_at174: ellipsis on \"مصر\"",
-   "govern_at174: clipped text (top): \"·\" 707.64..717.17 y 84..101",
-   "govern_at174: ellipsis on \"محافظة\"",
-   "build_at87: ellipsis on \"القاهرة\"",
-   "build_at87: ellipsis on \"مصر\"",
-   "build_at87: clipped text (top): \"·\" 707.64..717.17 y 84..101",
-   "build_at87: ellipsis on \"محافظة\"",
-   "forces_at87: ellipsis on \"القاهرة\"",
-   "forces_at87: ellipsis on \"مصر\"",
-   "forces_at87: clipped text (top): \"·\" 707.64..717.17 y 84..101",
-   "forces_at87: ellipsis on \"محافظة\"",
-   "policy_at87: ellipsis on \"القاهرة\"",
-   "policy_at87: ellipsis on \"مصر\"",
-   "policy_at87: clipped text (top): \"·\" 707.64..717.17 y 84..101",
-   "policy_at87: ellipsis on \"محافظة\"",
-   "policy_at174: ellipsis on \"القاهرة\"",
-   "policy_at174: ellipsis on \"مصر\"",
-   "policy_at174: clipped text (top): \"·\" 707.64..717.17 y 84..101",
-   "policy_at174: ellipsis on \"محافظة\"",
-   "policy_at261: ellipsis on \"القاهرة\"",
-   "policy_at261: ellipsis on \"مصر\"",
-   "policy_at261: clipped text (top): \"·\" 707.64..717.17 y 84..101",
-   "policy_at261: ellipsis on \"محافظة\""
-  ],
+  "issues": [],
   "views": {
    "card": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -17164,7 +17022,7 @@
     ]
    },
    "govern": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -17778,7 +17636,7 @@
     ]
    },
    "govern_end": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -18365,7 +18223,7 @@
     ]
    },
    "build": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -18946,7 +18804,7 @@
     ]
    },
    "build_end": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -19541,7 +19399,7 @@
     ]
    },
    "forces": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -20127,7 +19985,7 @@
     ]
    },
    "forces_end": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -20682,7 +20540,7 @@
     ]
    },
    "policy": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -21243,7 +21101,7 @@
     ]
    },
    "policy_end": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -21825,7 +21683,7 @@
     ]
    },
    "govern_at87": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -22414,7 +22272,7 @@
     ]
    },
    "govern_at174": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -22951,7 +22809,7 @@
     ]
    },
    "build_at87": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -23504,7 +23362,7 @@
     ]
    },
    "forces_at87": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -24054,7 +23912,7 @@
     ]
    },
    "policy_at87": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -24597,7 +24455,7 @@
     ]
    },
    "policy_at174": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -25159,7 +25017,7 @@
     ]
    },
    "policy_at261": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -25796,11 +25654,11 @@
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 64
+  "issueCount": 0
  },
  "i16": {
   "device": "852x393 side 59 bottom 21 island",
-  "renderedAt": "2026-11-07T17:25:15.780Z",
+  "renderedAt": "2026-11-07T18:03:46.595Z",
   "inputs": {
    "files": [
     "index.html",
@@ -25820,73 +25678,12 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "4a37b186f19e16a16d9636a6032d2591f925ec7f"
+   "sha1": "bcec19e62be374957f88673e8a1fbefc965b7132"
   },
-  "issues": [
-   "card: ellipsis on \"القاهرة\"",
-   "card: ellipsis on \"مصر\"",
-   "card: clipped text (top): \"·\" 703.64..713.17 y 84..101",
-   "card: ellipsis on \"محافظة\"",
-   "govern: ellipsis on \"القاهرة\"",
-   "govern: ellipsis on \"مصر\"",
-   "govern: clipped text (top): \"·\" 703.64..713.17 y 84..101",
-   "govern: ellipsis on \"محافظة\"",
-   "govern_end: ellipsis on \"القاهرة\"",
-   "govern_end: ellipsis on \"مصر\"",
-   "govern_end: clipped text (top): \"·\" 703.64..713.17 y 84..101",
-   "govern_end: ellipsis on \"محافظة\"",
-   "build: ellipsis on \"القاهرة\"",
-   "build: ellipsis on \"مصر\"",
-   "build: clipped text (top): \"·\" 703.64..713.17 y 84..101",
-   "build: ellipsis on \"محافظة\"",
-   "build_end: ellipsis on \"القاهرة\"",
-   "build_end: ellipsis on \"مصر\"",
-   "build_end: clipped text (top): \"·\" 703.64..713.17 y 84..101",
-   "build_end: ellipsis on \"محافظة\"",
-   "forces: ellipsis on \"القاهرة\"",
-   "forces: ellipsis on \"مصر\"",
-   "forces: clipped text (top): \"·\" 703.64..713.17 y 84..101",
-   "forces: ellipsis on \"محافظة\"",
-   "forces_end: ellipsis on \"القاهرة\"",
-   "forces_end: ellipsis on \"مصر\"",
-   "forces_end: clipped text (top): \"·\" 703.64..713.17 y 84..101",
-   "forces_end: ellipsis on \"محافظة\"",
-   "policy: ellipsis on \"القاهرة\"",
-   "policy: ellipsis on \"مصر\"",
-   "policy: clipped text (top): \"·\" 703.64..713.17 y 84..101",
-   "policy: ellipsis on \"محافظة\"",
-   "policy_end: ellipsis on \"القاهرة\"",
-   "policy_end: ellipsis on \"مصر\"",
-   "policy_end: clipped text (top): \"·\" 703.64..713.17 y 84..101",
-   "policy_end: ellipsis on \"محافظة\"",
-   "govern_at90: ellipsis on \"القاهرة\"",
-   "govern_at90: ellipsis on \"مصر\"",
-   "govern_at90: clipped text (top): \"·\" 703.64..713.17 y 84..101",
-   "govern_at90: ellipsis on \"محافظة\"",
-   "govern_at180: ellipsis on \"القاهرة\"",
-   "govern_at180: ellipsis on \"مصر\"",
-   "govern_at180: clipped text (top): \"·\" 703.64..713.17 y 84..101",
-   "govern_at180: ellipsis on \"محافظة\"",
-   "build_at90: ellipsis on \"القاهرة\"",
-   "build_at90: ellipsis on \"مصر\"",
-   "build_at90: clipped text (top): \"·\" 703.64..713.17 y 84..101",
-   "build_at90: ellipsis on \"محافظة\"",
-   "forces_at90: ellipsis on \"القاهرة\"",
-   "forces_at90: ellipsis on \"مصر\"",
-   "forces_at90: clipped text (top): \"·\" 703.64..713.17 y 84..101",
-   "forces_at90: ellipsis on \"محافظة\"",
-   "policy_at90: ellipsis on \"القاهرة\"",
-   "policy_at90: ellipsis on \"مصر\"",
-   "policy_at90: clipped text (top): \"·\" 703.64..713.17 y 84..101",
-   "policy_at90: ellipsis on \"محافظة\"",
-   "policy_at180: ellipsis on \"القاهرة\"",
-   "policy_at180: ellipsis on \"مصر\"",
-   "policy_at180: clipped text (top): \"·\" 703.64..713.17 y 84..101",
-   "policy_at180: ellipsis on \"محافظة\""
-  ],
+  "issues": [],
   "views": {
    "card": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -26494,7 +26291,7 @@
     ]
    },
    "govern": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -27097,7 +26894,7 @@
     ]
    },
    "govern_end": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -27673,7 +27470,7 @@
     ]
    },
    "build": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -28243,7 +28040,7 @@
     ]
    },
    "build_end": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -28827,7 +28624,7 @@
     ]
    },
    "forces": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -29402,7 +29199,7 @@
     ]
    },
    "forces_end": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -29946,7 +29743,7 @@
     ]
    },
    "policy": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -30496,7 +30293,7 @@
     ]
    },
    "policy_end": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -31067,7 +30864,7 @@
     ]
    },
    "govern_at90": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -31650,7 +31447,7 @@
     ]
    },
    "govern_at180": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -32181,7 +31978,7 @@
     ]
    },
    "build_at90": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -32718,7 +32515,7 @@
     ]
    },
    "forces_at90": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -33262,7 +33059,7 @@
     ]
    },
    "policy_at90": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -33794,7 +33591,7 @@
     ]
    },
    "policy_at180": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -34375,11 +34172,11 @@
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 60
+  "issueCount": 0
  },
  "i16pro": {
   "device": "874x402 side 62 bottom 21 island",
-  "renderedAt": "2026-11-07T17:25:41.944Z",
+  "renderedAt": "2026-11-07T18:04:11.922Z",
   "inputs": {
    "files": [
     "index.html",
@@ -34399,73 +34196,12 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "4a37b186f19e16a16d9636a6032d2591f925ec7f"
+   "sha1": "bcec19e62be374957f88673e8a1fbefc965b7132"
   },
-  "issues": [
-   "card: ellipsis on \"القاهرة\"",
-   "card: ellipsis on \"مصر\"",
-   "card: clipped text (top): \"·\" 722.64..732.17 y 84..101",
-   "card: ellipsis on \"محافظة\"",
-   "govern: ellipsis on \"القاهرة\"",
-   "govern: ellipsis on \"مصر\"",
-   "govern: clipped text (top): \"·\" 722.64..732.17 y 84..101",
-   "govern: ellipsis on \"محافظة\"",
-   "govern_end: ellipsis on \"القاهرة\"",
-   "govern_end: ellipsis on \"مصر\"",
-   "govern_end: clipped text (top): \"·\" 722.64..732.17 y 84..101",
-   "govern_end: ellipsis on \"محافظة\"",
-   "build: ellipsis on \"القاهرة\"",
-   "build: ellipsis on \"مصر\"",
-   "build: clipped text (top): \"·\" 722.64..732.17 y 84..101",
-   "build: ellipsis on \"محافظة\"",
-   "build_end: ellipsis on \"القاهرة\"",
-   "build_end: ellipsis on \"مصر\"",
-   "build_end: clipped text (top): \"·\" 722.64..732.17 y 84..101",
-   "build_end: ellipsis on \"محافظة\"",
-   "forces: ellipsis on \"القاهرة\"",
-   "forces: ellipsis on \"مصر\"",
-   "forces: clipped text (top): \"·\" 722.64..732.17 y 84..101",
-   "forces: ellipsis on \"محافظة\"",
-   "forces_end: ellipsis on \"القاهرة\"",
-   "forces_end: ellipsis on \"مصر\"",
-   "forces_end: clipped text (top): \"·\" 722.64..732.17 y 84..101",
-   "forces_end: ellipsis on \"محافظة\"",
-   "policy: ellipsis on \"القاهرة\"",
-   "policy: ellipsis on \"مصر\"",
-   "policy: clipped text (top): \"·\" 722.64..732.17 y 84..101",
-   "policy: ellipsis on \"محافظة\"",
-   "policy_end: ellipsis on \"القاهرة\"",
-   "policy_end: ellipsis on \"مصر\"",
-   "policy_end: clipped text (top): \"·\" 722.64..732.17 y 84..101",
-   "policy_end: ellipsis on \"محافظة\"",
-   "govern_at99: ellipsis on \"القاهرة\"",
-   "govern_at99: ellipsis on \"مصر\"",
-   "govern_at99: clipped text (top): \"·\" 722.64..732.17 y 84..101",
-   "govern_at99: ellipsis on \"محافظة\"",
-   "govern_at198: ellipsis on \"القاهرة\"",
-   "govern_at198: ellipsis on \"مصر\"",
-   "govern_at198: clipped text (top): \"·\" 722.64..732.17 y 84..101",
-   "govern_at198: ellipsis on \"محافظة\"",
-   "build_at99: ellipsis on \"القاهرة\"",
-   "build_at99: ellipsis on \"مصر\"",
-   "build_at99: clipped text (top): \"·\" 722.64..732.17 y 84..101",
-   "build_at99: ellipsis on \"محافظة\"",
-   "forces_at99: ellipsis on \"القاهرة\"",
-   "forces_at99: ellipsis on \"مصر\"",
-   "forces_at99: clipped text (top): \"·\" 722.64..732.17 y 84..101",
-   "forces_at99: ellipsis on \"محافظة\"",
-   "policy_at99: ellipsis on \"القاهرة\"",
-   "policy_at99: ellipsis on \"مصر\"",
-   "policy_at99: clipped text (top): \"·\" 722.64..732.17 y 84..101",
-   "policy_at99: ellipsis on \"محافظة\"",
-   "policy_at198: ellipsis on \"القاهرة\"",
-   "policy_at198: ellipsis on \"مصر\"",
-   "policy_at198: clipped text (top): \"·\" 722.64..732.17 y 84..101",
-   "policy_at198: ellipsis on \"محافظة\""
-  ],
+  "issues": [],
   "views": {
    "card": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -35084,7 +34820,7 @@
     ]
    },
    "govern": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -35698,7 +35434,7 @@
     ]
    },
    "govern_end": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -36292,7 +36028,7 @@
     ]
    },
    "build": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -36878,7 +36614,7 @@
     ]
    },
    "build_end": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -37493,7 +37229,7 @@
     ]
    },
    "forces": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -38084,7 +37820,7 @@
     ]
    },
    "forces_end": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -38644,7 +38380,7 @@
     ]
    },
    "policy": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -39212,7 +38948,7 @@
     ]
    },
    "policy_end": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -39824,7 +39560,7 @@
     ]
    },
    "govern_at99": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -40423,7 +40159,7 @@
     ]
    },
    "govern_at198": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -40994,7 +40730,7 @@
     ]
    },
    "build_at99": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -41547,7 +41283,7 @@
     ]
    },
    "forces_at99": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -42107,7 +41843,7 @@
     ]
    },
    "policy_at99": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -42652,7 +42388,7 @@
     ]
    },
    "policy_at198": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -43264,11 +43000,11 @@
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 60
+  "issueCount": 0
  },
  "i11": {
   "device": "896x414 side 48 bottom 21 notch",
-  "renderedAt": "2026-11-07T17:26:08.874Z",
+  "renderedAt": "2026-11-07T18:04:37.312Z",
   "inputs": {
    "files": [
     "index.html",
@@ -43288,69 +43024,12 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "4a37b186f19e16a16d9636a6032d2591f925ec7f"
+   "sha1": "bcec19e62be374957f88673e8a1fbefc965b7132"
   },
-  "issues": [
-   "card: ellipsis on \"القاهرة\"",
-   "card: ellipsis on \"مصر\"",
-   "card: clipped text (top): \"·\" 758.64..768.17 y 84..101",
-   "card: ellipsis on \"محافظة\"",
-   "govern: ellipsis on \"القاهرة\"",
-   "govern: ellipsis on \"مصر\"",
-   "govern: clipped text (top): \"·\" 758.64..768.17 y 84..101",
-   "govern: ellipsis on \"محافظة\"",
-   "govern_end: ellipsis on \"القاهرة\"",
-   "govern_end: ellipsis on \"مصر\"",
-   "govern_end: clipped text (top): \"·\" 758.64..768.17 y 84..101",
-   "govern_end: ellipsis on \"محافظة\"",
-   "build: ellipsis on \"القاهرة\"",
-   "build: ellipsis on \"مصر\"",
-   "build: clipped text (top): \"·\" 758.64..768.17 y 84..101",
-   "build: ellipsis on \"محافظة\"",
-   "build_end: ellipsis on \"القاهرة\"",
-   "build_end: ellipsis on \"مصر\"",
-   "build_end: clipped text (top): \"·\" 758.64..768.17 y 84..101",
-   "build_end: ellipsis on \"محافظة\"",
-   "forces: ellipsis on \"القاهرة\"",
-   "forces: ellipsis on \"مصر\"",
-   "forces: clipped text (top): \"·\" 758.64..768.17 y 84..101",
-   "forces: ellipsis on \"محافظة\"",
-   "forces_end: ellipsis on \"القاهرة\"",
-   "forces_end: ellipsis on \"مصر\"",
-   "forces_end: clipped text (top): \"·\" 758.64..768.17 y 84..101",
-   "forces_end: ellipsis on \"محافظة\"",
-   "policy: ellipsis on \"القاهرة\"",
-   "policy: ellipsis on \"مصر\"",
-   "policy: clipped text (top): \"·\" 758.64..768.17 y 84..101",
-   "policy: ellipsis on \"محافظة\"",
-   "policy_end: ellipsis on \"القاهرة\"",
-   "policy_end: ellipsis on \"مصر\"",
-   "policy_end: clipped text (top): \"·\" 758.64..768.17 y 84..101",
-   "policy_end: ellipsis on \"محافظة\"",
-   "govern_at111: ellipsis on \"القاهرة\"",
-   "govern_at111: ellipsis on \"مصر\"",
-   "govern_at111: clipped text (top): \"·\" 758.64..768.17 y 84..101",
-   "govern_at111: ellipsis on \"محافظة\"",
-   "build_at111: ellipsis on \"القاهرة\"",
-   "build_at111: ellipsis on \"مصر\"",
-   "build_at111: clipped text (top): \"·\" 758.64..768.17 y 84..101",
-   "build_at111: ellipsis on \"محافظة\"",
-   "forces_at111: ellipsis on \"القاهرة\"",
-   "forces_at111: ellipsis on \"مصر\"",
-   "forces_at111: clipped text (top): \"·\" 758.64..768.17 y 84..101",
-   "forces_at111: ellipsis on \"محافظة\"",
-   "policy_at111: ellipsis on \"القاهرة\"",
-   "policy_at111: ellipsis on \"مصر\"",
-   "policy_at111: clipped text (top): \"·\" 758.64..768.17 y 84..101",
-   "policy_at111: ellipsis on \"محافظة\"",
-   "policy_at222: ellipsis on \"القاهرة\"",
-   "policy_at222: ellipsis on \"مصر\"",
-   "policy_at222: clipped text (top): \"·\" 758.64..768.17 y 84..101",
-   "policy_at222: ellipsis on \"محافظة\""
-  ],
+  "issues": [],
   "views": {
    "card": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -43968,7 +43647,7 @@
     ]
    },
    "govern": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -44588,7 +44267,7 @@
     ]
    },
    "govern_end": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -45193,7 +44872,7 @@
     ]
    },
    "build": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -45778,7 +45457,7 @@
     ]
    },
    "build_end": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -46392,7 +46071,7 @@
     ]
    },
    "forces": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -46989,7 +46668,7 @@
     ]
    },
    "forces_end": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -47548,7 +47227,7 @@
     ]
    },
    "policy": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -48120,7 +47799,7 @@
     ]
    },
    "policy_end": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -48738,7 +48417,7 @@
     ]
    },
    "govern_at111": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -49331,7 +49010,7 @@
     ]
    },
    "build_at111": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -49890,7 +49569,7 @@
     ]
    },
    "forces_at111": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -50449,7 +50128,7 @@
     ]
    },
    "policy_at111": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -50993,7 +50672,7 @@
     ]
    },
    "policy_at222": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -51631,11 +51310,11 @@
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 56
+  "issueCount": 0
  },
  "i16promax": {
   "device": "956x440 side 62 bottom 21 island",
-  "renderedAt": "2026-11-07T17:26:34.626Z",
+  "renderedAt": "2026-11-07T18:05:01.974Z",
   "inputs": {
    "files": [
     "index.html",
@@ -51655,57 +51334,12 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "4a37b186f19e16a16d9636a6032d2591f925ec7f"
+   "sha1": "bcec19e62be374957f88673e8a1fbefc965b7132"
   },
-  "issues": [
-   "card: ellipsis on \"القاهرة\"",
-   "card: ellipsis on \"مصر\"",
-   "card: clipped text (top): \"·\" 804.64..814.17 y 84..101",
-   "card: ellipsis on \"محافظة\"",
-   "govern: ellipsis on \"القاهرة\"",
-   "govern: ellipsis on \"مصر\"",
-   "govern: clipped text (top): \"·\" 804.64..814.17 y 84..101",
-   "govern: ellipsis on \"محافظة\"",
-   "govern_end: ellipsis on \"القاهرة\"",
-   "govern_end: ellipsis on \"مصر\"",
-   "govern_end: clipped text (top): \"·\" 804.64..814.17 y 84..101",
-   "govern_end: ellipsis on \"محافظة\"",
-   "build: ellipsis on \"القاهرة\"",
-   "build: ellipsis on \"مصر\"",
-   "build: clipped text (top): \"·\" 804.64..814.17 y 84..101",
-   "build: ellipsis on \"محافظة\"",
-   "build_end: ellipsis on \"القاهرة\"",
-   "build_end: ellipsis on \"مصر\"",
-   "build_end: clipped text (top): \"·\" 804.64..814.17 y 84..101",
-   "build_end: ellipsis on \"محافظة\"",
-   "forces: ellipsis on \"القاهرة\"",
-   "forces: ellipsis on \"مصر\"",
-   "forces: clipped text (top): \"·\" 804.64..814.17 y 84..101",
-   "forces: ellipsis on \"محافظة\"",
-   "forces_end: ellipsis on \"القاهرة\"",
-   "forces_end: ellipsis on \"مصر\"",
-   "forces_end: clipped text (top): \"·\" 804.64..814.17 y 84..101",
-   "forces_end: ellipsis on \"محافظة\"",
-   "policy: ellipsis on \"القاهرة\"",
-   "policy: ellipsis on \"مصر\"",
-   "policy: clipped text (top): \"·\" 804.64..814.17 y 84..101",
-   "policy: ellipsis on \"محافظة\"",
-   "policy_end: ellipsis on \"القاهرة\"",
-   "policy_end: ellipsis on \"مصر\"",
-   "policy_end: clipped text (top): \"·\" 804.64..814.17 y 84..101",
-   "policy_end: ellipsis on \"محافظة\"",
-   "govern_at137: ellipsis on \"القاهرة\"",
-   "govern_at137: ellipsis on \"مصر\"",
-   "govern_at137: clipped text (top): \"·\" 804.64..814.17 y 84..101",
-   "govern_at137: ellipsis on \"محافظة\"",
-   "policy_at137: ellipsis on \"القاهرة\"",
-   "policy_at137: ellipsis on \"مصر\"",
-   "policy_at137: clipped text (top): \"·\" 804.64..814.17 y 84..101",
-   "policy_at137: ellipsis on \"محافظة\""
-  ],
+  "issues": [],
   "views": {
    "card": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -52322,7 +51956,7 @@
     ]
    },
    "govern": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -52952,7 +52586,7 @@
     ]
    },
    "govern_end": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -53562,7 +53196,7 @@
     ]
    },
    "build": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -54167,7 +53801,7 @@
     ]
    },
    "build_end": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -54786,7 +54420,7 @@
     ]
    },
    "forces": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -55403,7 +55037,7 @@
     ]
    },
    "forces_end": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -55982,7 +55616,7 @@
     ]
    },
    "policy": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -56564,7 +56198,7 @@
     ]
    },
    "policy_end": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -57187,7 +56821,7 @@
     ]
    },
    "govern_at137": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -57759,7 +57393,7 @@
     ]
    },
    "policy_at137": {
-    "issueCount": 4,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -58380,6 +58014,6 @@
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 44
+  "issueCount": 0
  }
 }

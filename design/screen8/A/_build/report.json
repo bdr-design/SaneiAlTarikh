@@ -1,7 +1,7 @@
 {
  "se": {
   "device": "667x375 side 0 bottom 0 none",
-  "renderedAt": "2026-11-07T17:21:16.340Z",
+  "renderedAt": "2026-11-07T17:59:37.243Z",
   "inputs": {
    "files": [
     "index.html",
@@ -26,83 +26,12 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "b61a8b5602c0b8913f0b234004720c773618a0ad"
+   "sha1": "71932b4be947d1b8b347eb002dafcde9aea70b51"
   },
-  "issues": [
-   "overview: ellipsis on \"الداخلية والسياسة\"",
-   "overview: ellipsis on \"مصر\"",
-   "overview: clipped text (top): \"·\" 569.64..579.17 y 78..95",
-   "overview: clipped text (top): \"29\" 555.83..569.64 y 78..95",
-   "overview: ellipsis on \"محافظة\"",
-   "overview_end: ellipsis on \"الداخلية والسياسة\"",
-   "overview_end: ellipsis on \"مصر\"",
-   "overview_end: clipped text (top): \"·\" 569.64..579.17 y 78..95",
-   "overview_end: clipped text (top): \"29\" 555.83..569.64 y 78..95",
-   "overview_end: ellipsis on \"محافظة\"",
-   "unrest: ellipsis on \"الداخلية والسياسة\"",
-   "unrest: ellipsis on \"مصر\"",
-   "unrest: clipped text (top): \"·\" 569.64..579.17 y 78..95",
-   "unrest: clipped text (top): \"29\" 555.83..569.64 y 78..95",
-   "unrest: ellipsis on \"محافظة\"",
-   "unrest_end: ellipsis on \"الداخلية والسياسة\"",
-   "unrest_end: ellipsis on \"مصر\"",
-   "unrest_end: clipped text (top): \"·\" 569.64..579.17 y 78..95",
-   "unrest_end: clipped text (top): \"29\" 555.83..569.64 y 78..95",
-   "unrest_end: ellipsis on \"محافظة\"",
-   "parties: ellipsis on \"الداخلية والسياسة\"",
-   "parties: ellipsis on \"مصر\"",
-   "parties: clipped text (top): \"·\" 569.64..579.17 y 78..95",
-   "parties: clipped text (top): \"29\" 555.83..569.64 y 78..95",
-   "parties: ellipsis on \"محافظة\"",
-   "parties_end: ellipsis on \"الداخلية والسياسة\"",
-   "parties_end: ellipsis on \"مصر\"",
-   "parties_end: clipped text (top): \"·\" 569.64..579.17 y 78..95",
-   "parties_end: clipped text (top): \"29\" 555.83..569.64 y 78..95",
-   "parties_end: ellipsis on \"محافظة\"",
-   "groups: ellipsis on \"الداخلية والسياسة\"",
-   "groups: ellipsis on \"مصر\"",
-   "groups: clipped text (top): \"·\" 569.64..579.17 y 78..95",
-   "groups: clipped text (top): \"29\" 555.83..569.64 y 78..95",
-   "groups: ellipsis on \"محافظة\"",
-   "groups_end: ellipsis on \"الداخلية والسياسة\"",
-   "groups_end: ellipsis on \"مصر\"",
-   "groups_end: clipped text (top): \"·\" 569.64..579.17 y 78..95",
-   "groups_end: clipped text (top): \"29\" 555.83..569.64 y 78..95",
-   "groups_end: ellipsis on \"محافظة\"",
-   "unrest_at98: ellipsis on \"الداخلية والسياسة\"",
-   "unrest_at98: ellipsis on \"مصر\"",
-   "unrest_at98: clipped text (top): \"·\" 569.64..579.17 y 78..95",
-   "unrest_at98: clipped text (top): \"29\" 555.83..569.64 y 78..95",
-   "unrest_at98: ellipsis on \"محافظة\"",
-   "unrest_at196: ellipsis on \"الداخلية والسياسة\"",
-   "unrest_at196: ellipsis on \"مصر\"",
-   "unrest_at196: clipped text (top): \"·\" 569.64..579.17 y 78..95",
-   "unrest_at196: clipped text (top): \"29\" 555.83..569.64 y 78..95",
-   "unrest_at196: ellipsis on \"محافظة\"",
-   "unrest_at294: ellipsis on \"الداخلية والسياسة\"",
-   "unrest_at294: ellipsis on \"مصر\"",
-   "unrest_at294: clipped text (top): \"·\" 569.64..579.17 y 78..95",
-   "unrest_at294: clipped text (top): \"29\" 555.83..569.64 y 78..95",
-   "unrest_at294: ellipsis on \"محافظة\"",
-   "parties_at98: ellipsis on \"الداخلية والسياسة\"",
-   "parties_at98: ellipsis on \"مصر\"",
-   "parties_at98: clipped text (top): \"·\" 569.64..579.17 y 78..95",
-   "parties_at98: clipped text (top): \"29\" 555.83..569.64 y 78..95",
-   "parties_at98: ellipsis on \"محافظة\"",
-   "groups_at98: ellipsis on \"الداخلية والسياسة\"",
-   "groups_at98: ellipsis on \"مصر\"",
-   "groups_at98: clipped text (top): \"·\" 569.64..579.17 y 78..95",
-   "groups_at98: clipped text (top): \"29\" 555.83..569.64 y 78..95",
-   "groups_at98: ellipsis on \"محافظة\"",
-   "groups_at196: ellipsis on \"الداخلية والسياسة\"",
-   "groups_at196: ellipsis on \"مصر\"",
-   "groups_at196: clipped text (top): \"·\" 569.64..579.17 y 78..95",
-   "groups_at196: clipped text (top): \"29\" 555.83..569.64 y 78..95",
-   "groups_at196: ellipsis on \"محافظة\""
-  ],
+  "issues": [],
   "views": {
    "overview": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -679,7 +608,7 @@
     ]
    },
    "overview_end": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -1256,7 +1185,7 @@
     ]
    },
    "unrest": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -1710,7 +1639,7 @@
     ]
    },
    "unrest_end": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -2205,7 +2134,7 @@
     ]
    },
    "parties": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -2674,7 +2603,7 @@
     ]
    },
    "parties_end": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -3180,7 +3109,7 @@
     ]
    },
    "groups": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -3634,7 +3563,7 @@
     ]
    },
    "groups_end": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -4083,7 +4012,7 @@
     ]
    },
    "unrest_at98": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -4539,7 +4468,7 @@
     ]
    },
    "unrest_at196": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -4988,7 +4917,7 @@
     ]
    },
    "unrest_at294": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -5455,7 +5384,7 @@
     ]
    },
    "parties_at98": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -5916,7 +5845,7 @@
     ]
    },
    "groups_at98": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -6355,7 +6284,7 @@
     ]
    },
    "groups_at196": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -6831,11 +6760,11 @@
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 70
+  "issueCount": 0
  },
  "mini": {
   "device": "812x375 side 50 bottom 21 notch",
-  "renderedAt": "2026-11-07T17:21:38.599Z",
+  "renderedAt": "2026-11-07T18:00:00.868Z",
   "inputs": {
    "files": [
     "index.html",
@@ -6860,88 +6789,12 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "b61a8b5602c0b8913f0b234004720c773618a0ad"
+   "sha1": "71932b4be947d1b8b347eb002dafcde9aea70b51"
   },
-  "issues": [
-   "overview: ellipsis on \"الداخلية والسياسة\"",
-   "overview: ellipsis on \"مصر\"",
-   "overview: clipped text (top): \"·\" 672.64..682.17 y 78..95",
-   "overview: clipped text (top): \"29\" 658.83..672.64 y 78..95",
-   "overview: ellipsis on \"محافظة\"",
-   "overview_end: ellipsis on \"الداخلية والسياسة\"",
-   "overview_end: ellipsis on \"مصر\"",
-   "overview_end: clipped text (top): \"·\" 672.64..682.17 y 78..95",
-   "overview_end: clipped text (top): \"29\" 658.83..672.64 y 78..95",
-   "overview_end: ellipsis on \"محافظة\"",
-   "unrest: ellipsis on \"الداخلية والسياسة\"",
-   "unrest: ellipsis on \"مصر\"",
-   "unrest: clipped text (top): \"·\" 672.64..682.17 y 78..95",
-   "unrest: clipped text (top): \"29\" 658.83..672.64 y 78..95",
-   "unrest: ellipsis on \"محافظة\"",
-   "unrest_end: ellipsis on \"الداخلية والسياسة\"",
-   "unrest_end: ellipsis on \"مصر\"",
-   "unrest_end: clipped text (top): \"·\" 672.64..682.17 y 78..95",
-   "unrest_end: clipped text (top): \"29\" 658.83..672.64 y 78..95",
-   "unrest_end: ellipsis on \"محافظة\"",
-   "parties: ellipsis on \"الداخلية والسياسة\"",
-   "parties: ellipsis on \"مصر\"",
-   "parties: clipped text (top): \"·\" 672.64..682.17 y 78..95",
-   "parties: clipped text (top): \"29\" 658.83..672.64 y 78..95",
-   "parties: ellipsis on \"محافظة\"",
-   "parties_end: ellipsis on \"الداخلية والسياسة\"",
-   "parties_end: ellipsis on \"مصر\"",
-   "parties_end: clipped text (top): \"·\" 672.64..682.17 y 78..95",
-   "parties_end: clipped text (top): \"29\" 658.83..672.64 y 78..95",
-   "parties_end: ellipsis on \"محافظة\"",
-   "groups: ellipsis on \"الداخلية والسياسة\"",
-   "groups: ellipsis on \"مصر\"",
-   "groups: clipped text (top): \"·\" 672.64..682.17 y 78..95",
-   "groups: clipped text (top): \"29\" 658.83..672.64 y 78..95",
-   "groups: ellipsis on \"محافظة\"",
-   "groups_end: ellipsis on \"الداخلية والسياسة\"",
-   "groups_end: ellipsis on \"مصر\"",
-   "groups_end: clipped text (top): \"·\" 672.64..682.17 y 78..95",
-   "groups_end: clipped text (top): \"29\" 658.83..672.64 y 78..95",
-   "groups_end: ellipsis on \"محافظة\"",
-   "unrest_at84: ellipsis on \"الداخلية والسياسة\"",
-   "unrest_at84: ellipsis on \"مصر\"",
-   "unrest_at84: clipped text (top): \"·\" 672.64..682.17 y 78..95",
-   "unrest_at84: clipped text (top): \"29\" 658.83..672.64 y 78..95",
-   "unrest_at84: ellipsis on \"محافظة\"",
-   "unrest_at168: ellipsis on \"الداخلية والسياسة\"",
-   "unrest_at168: ellipsis on \"مصر\"",
-   "unrest_at168: clipped text (top): \"·\" 672.64..682.17 y 78..95",
-   "unrest_at168: clipped text (top): \"29\" 658.83..672.64 y 78..95",
-   "unrest_at168: ellipsis on \"محافظة\"",
-   "unrest_at252: ellipsis on \"الداخلية والسياسة\"",
-   "unrest_at252: ellipsis on \"مصر\"",
-   "unrest_at252: clipped text (top): \"·\" 672.64..682.17 y 78..95",
-   "unrest_at252: clipped text (top): \"29\" 658.83..672.64 y 78..95",
-   "unrest_at252: ellipsis on \"محافظة\"",
-   "unrest_at336: ellipsis on \"الداخلية والسياسة\"",
-   "unrest_at336: ellipsis on \"مصر\"",
-   "unrest_at336: clipped text (top): \"·\" 672.64..682.17 y 78..95",
-   "unrest_at336: clipped text (top): \"29\" 658.83..672.64 y 78..95",
-   "unrest_at336: ellipsis on \"محافظة\"",
-   "parties_at84: ellipsis on \"الداخلية والسياسة\"",
-   "parties_at84: ellipsis on \"مصر\"",
-   "parties_at84: clipped text (top): \"·\" 672.64..682.17 y 78..95",
-   "parties_at84: clipped text (top): \"29\" 658.83..672.64 y 78..95",
-   "parties_at84: ellipsis on \"محافظة\"",
-   "groups_at84: ellipsis on \"الداخلية والسياسة\"",
-   "groups_at84: ellipsis on \"مصر\"",
-   "groups_at84: clipped text (top): \"·\" 672.64..682.17 y 78..95",
-   "groups_at84: clipped text (top): \"29\" 658.83..672.64 y 78..95",
-   "groups_at84: ellipsis on \"محافظة\"",
-   "groups_at168: ellipsis on \"الداخلية والسياسة\"",
-   "groups_at168: ellipsis on \"مصر\"",
-   "groups_at168: clipped text (top): \"·\" 672.64..682.17 y 78..95",
-   "groups_at168: clipped text (top): \"29\" 658.83..672.64 y 78..95",
-   "groups_at168: ellipsis on \"محافظة\""
-  ],
+  "issues": [],
   "views": {
    "overview": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -7525,7 +7378,7 @@
     ]
    },
    "overview_end": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -8109,7 +7962,7 @@
     ]
    },
    "unrest": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -8563,7 +8416,7 @@
     ]
    },
    "unrest_end": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -9065,7 +8918,7 @@
     ]
    },
    "parties": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -9536,7 +9389,7 @@
     ]
    },
    "parties_end": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -10019,7 +9872,7 @@
     ]
    },
    "groups": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -10470,7 +10323,7 @@
     ]
    },
    "groups_end": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -10921,7 +10774,7 @@
     ]
    },
    "unrest_at84": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -11367,7 +11220,7 @@
     ]
    },
    "unrest_at168": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -11820,7 +11673,7 @@
     ]
    },
    "unrest_at252": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -12269,7 +12122,7 @@
     ]
    },
    "unrest_at336": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -12738,7 +12591,7 @@
     ]
    },
    "parties_at84": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -13179,7 +13032,7 @@
     ]
    },
    "groups_at84": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -13640,7 +13493,7 @@
     ]
    },
    "groups_at168": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -14113,11 +13966,11 @@
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 75
+  "issueCount": 0
  },
  "i14": {
   "device": "844x390 side 47 bottom 21 notch",
-  "renderedAt": "2026-11-07T17:22:03.636Z",
+  "renderedAt": "2026-11-07T18:00:28.661Z",
   "inputs": {
    "files": [
     "index.html",
@@ -14142,83 +13995,12 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "b61a8b5602c0b8913f0b234004720c773618a0ad"
+   "sha1": "71932b4be947d1b8b347eb002dafcde9aea70b51"
   },
-  "issues": [
-   "overview: ellipsis on \"الداخلية والسياسة\"",
-   "overview: ellipsis on \"مصر\"",
-   "overview: clipped text (top): \"·\" 707.64..717.17 y 78..95",
-   "overview: clipped text (top): \"29\" 693.83..707.64 y 78..95",
-   "overview: ellipsis on \"محافظة\"",
-   "overview_end: ellipsis on \"الداخلية والسياسة\"",
-   "overview_end: ellipsis on \"مصر\"",
-   "overview_end: clipped text (top): \"·\" 707.64..717.17 y 78..95",
-   "overview_end: clipped text (top): \"29\" 693.83..707.64 y 78..95",
-   "overview_end: ellipsis on \"محافظة\"",
-   "unrest: ellipsis on \"الداخلية والسياسة\"",
-   "unrest: ellipsis on \"مصر\"",
-   "unrest: clipped text (top): \"·\" 707.64..717.17 y 78..95",
-   "unrest: clipped text (top): \"29\" 693.83..707.64 y 78..95",
-   "unrest: ellipsis on \"محافظة\"",
-   "unrest_end: ellipsis on \"الداخلية والسياسة\"",
-   "unrest_end: ellipsis on \"مصر\"",
-   "unrest_end: clipped text (top): \"·\" 707.64..717.17 y 78..95",
-   "unrest_end: clipped text (top): \"29\" 693.83..707.64 y 78..95",
-   "unrest_end: ellipsis on \"محافظة\"",
-   "parties: ellipsis on \"الداخلية والسياسة\"",
-   "parties: ellipsis on \"مصر\"",
-   "parties: clipped text (top): \"·\" 707.64..717.17 y 78..95",
-   "parties: clipped text (top): \"29\" 693.83..707.64 y 78..95",
-   "parties: ellipsis on \"محافظة\"",
-   "parties_end: ellipsis on \"الداخلية والسياسة\"",
-   "parties_end: ellipsis on \"مصر\"",
-   "parties_end: clipped text (top): \"·\" 707.64..717.17 y 78..95",
-   "parties_end: clipped text (top): \"29\" 693.83..707.64 y 78..95",
-   "parties_end: ellipsis on \"محافظة\"",
-   "groups: ellipsis on \"الداخلية والسياسة\"",
-   "groups: ellipsis on \"مصر\"",
-   "groups: clipped text (top): \"·\" 707.64..717.17 y 78..95",
-   "groups: clipped text (top): \"29\" 693.83..707.64 y 78..95",
-   "groups: ellipsis on \"محافظة\"",
-   "groups_end: ellipsis on \"الداخلية والسياسة\"",
-   "groups_end: ellipsis on \"مصر\"",
-   "groups_end: clipped text (top): \"·\" 707.64..717.17 y 78..95",
-   "groups_end: clipped text (top): \"29\" 693.83..707.64 y 78..95",
-   "groups_end: ellipsis on \"محافظة\"",
-   "unrest_at99: ellipsis on \"الداخلية والسياسة\"",
-   "unrest_at99: ellipsis on \"مصر\"",
-   "unrest_at99: clipped text (top): \"·\" 707.64..717.17 y 78..95",
-   "unrest_at99: clipped text (top): \"29\" 693.83..707.64 y 78..95",
-   "unrest_at99: ellipsis on \"محافظة\"",
-   "unrest_at198: ellipsis on \"الداخلية والسياسة\"",
-   "unrest_at198: ellipsis on \"مصر\"",
-   "unrest_at198: clipped text (top): \"·\" 707.64..717.17 y 78..95",
-   "unrest_at198: clipped text (top): \"29\" 693.83..707.64 y 78..95",
-   "unrest_at198: ellipsis on \"محافظة\"",
-   "unrest_at297: ellipsis on \"الداخلية والسياسة\"",
-   "unrest_at297: ellipsis on \"مصر\"",
-   "unrest_at297: clipped text (top): \"·\" 707.64..717.17 y 78..95",
-   "unrest_at297: clipped text (top): \"29\" 693.83..707.64 y 78..95",
-   "unrest_at297: ellipsis on \"محافظة\"",
-   "parties_at99: ellipsis on \"الداخلية والسياسة\"",
-   "parties_at99: ellipsis on \"مصر\"",
-   "parties_at99: clipped text (top): \"·\" 707.64..717.17 y 78..95",
-   "parties_at99: clipped text (top): \"29\" 693.83..707.64 y 78..95",
-   "parties_at99: ellipsis on \"محافظة\"",
-   "groups_at99: ellipsis on \"الداخلية والسياسة\"",
-   "groups_at99: ellipsis on \"مصر\"",
-   "groups_at99: clipped text (top): \"·\" 707.64..717.17 y 78..95",
-   "groups_at99: clipped text (top): \"29\" 693.83..707.64 y 78..95",
-   "groups_at99: ellipsis on \"محافظة\"",
-   "groups_at198: ellipsis on \"الداخلية والسياسة\"",
-   "groups_at198: ellipsis on \"مصر\"",
-   "groups_at198: clipped text (top): \"·\" 707.64..717.17 y 78..95",
-   "groups_at198: clipped text (top): \"29\" 693.83..707.64 y 78..95",
-   "groups_at198: ellipsis on \"محافظة\""
-  ],
+  "issues": [],
   "views": {
    "overview": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -14912,7 +14694,7 @@
     ]
    },
    "overview_end": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -15606,7 +15388,7 @@
     ]
    },
    "unrest": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -16177,7 +15959,7 @@
     ]
    },
    "unrest_end": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -16789,7 +16571,7 @@
     ]
    },
    "parties": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -17375,7 +17157,7 @@
     ]
    },
    "parties_end": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -17998,7 +17780,7 @@
     ]
    },
    "groups": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -18569,7 +18351,7 @@
     ]
    },
    "groups_end": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -19135,7 +18917,7 @@
     ]
    },
    "unrest_at99": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -19708,7 +19490,7 @@
     ]
    },
    "unrest_at198": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -20274,7 +20056,7 @@
     ]
    },
    "unrest_at297": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -20863,7 +20645,7 @@
     ]
    },
    "parties_at99": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -21441,7 +21223,7 @@
     ]
    },
    "groups_at99": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -21997,7 +21779,7 @@
     ]
    },
    "groups_at198": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -22590,11 +22372,11 @@
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 70
+  "issueCount": 0
  },
  "i16": {
   "device": "852x393 side 59 bottom 21 island",
-  "renderedAt": "2026-11-07T17:22:27.060Z",
+  "renderedAt": "2026-11-07T18:00:55.533Z",
   "inputs": {
    "files": [
     "index.html",
@@ -22619,83 +22401,12 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "b61a8b5602c0b8913f0b234004720c773618a0ad"
+   "sha1": "71932b4be947d1b8b347eb002dafcde9aea70b51"
   },
-  "issues": [
-   "overview: ellipsis on \"الداخلية والسياسة\"",
-   "overview: ellipsis on \"مصر\"",
-   "overview: clipped text (top): \"·\" 703.64..713.17 y 78..95",
-   "overview: clipped text (top): \"29\" 689.83..703.64 y 78..95",
-   "overview: ellipsis on \"محافظة\"",
-   "overview_end: ellipsis on \"الداخلية والسياسة\"",
-   "overview_end: ellipsis on \"مصر\"",
-   "overview_end: clipped text (top): \"·\" 703.64..713.17 y 78..95",
-   "overview_end: clipped text (top): \"29\" 689.83..703.64 y 78..95",
-   "overview_end: ellipsis on \"محافظة\"",
-   "unrest: ellipsis on \"الداخلية والسياسة\"",
-   "unrest: ellipsis on \"مصر\"",
-   "unrest: clipped text (top): \"·\" 703.64..713.17 y 78..95",
-   "unrest: clipped text (top): \"29\" 689.83..703.64 y 78..95",
-   "unrest: ellipsis on \"محافظة\"",
-   "unrest_end: ellipsis on \"الداخلية والسياسة\"",
-   "unrest_end: ellipsis on \"مصر\"",
-   "unrest_end: clipped text (top): \"·\" 703.64..713.17 y 78..95",
-   "unrest_end: clipped text (top): \"29\" 689.83..703.64 y 78..95",
-   "unrest_end: ellipsis on \"محافظة\"",
-   "parties: ellipsis on \"الداخلية والسياسة\"",
-   "parties: ellipsis on \"مصر\"",
-   "parties: clipped text (top): \"·\" 703.64..713.17 y 78..95",
-   "parties: clipped text (top): \"29\" 689.83..703.64 y 78..95",
-   "parties: ellipsis on \"محافظة\"",
-   "parties_end: ellipsis on \"الداخلية والسياسة\"",
-   "parties_end: ellipsis on \"مصر\"",
-   "parties_end: clipped text (top): \"·\" 703.64..713.17 y 78..95",
-   "parties_end: clipped text (top): \"29\" 689.83..703.64 y 78..95",
-   "parties_end: ellipsis on \"محافظة\"",
-   "groups: ellipsis on \"الداخلية والسياسة\"",
-   "groups: ellipsis on \"مصر\"",
-   "groups: clipped text (top): \"·\" 703.64..713.17 y 78..95",
-   "groups: clipped text (top): \"29\" 689.83..703.64 y 78..95",
-   "groups: ellipsis on \"محافظة\"",
-   "groups_end: ellipsis on \"الداخلية والسياسة\"",
-   "groups_end: ellipsis on \"مصر\"",
-   "groups_end: clipped text (top): \"·\" 703.64..713.17 y 78..95",
-   "groups_end: clipped text (top): \"29\" 689.83..703.64 y 78..95",
-   "groups_end: ellipsis on \"محافظة\"",
-   "unrest_at102: ellipsis on \"الداخلية والسياسة\"",
-   "unrest_at102: ellipsis on \"مصر\"",
-   "unrest_at102: clipped text (top): \"·\" 703.64..713.17 y 78..95",
-   "unrest_at102: clipped text (top): \"29\" 689.83..703.64 y 78..95",
-   "unrest_at102: ellipsis on \"محافظة\"",
-   "unrest_at204: ellipsis on \"الداخلية والسياسة\"",
-   "unrest_at204: ellipsis on \"مصر\"",
-   "unrest_at204: clipped text (top): \"·\" 703.64..713.17 y 78..95",
-   "unrest_at204: clipped text (top): \"29\" 689.83..703.64 y 78..95",
-   "unrest_at204: ellipsis on \"محافظة\"",
-   "unrest_at306: ellipsis on \"الداخلية والسياسة\"",
-   "unrest_at306: ellipsis on \"مصر\"",
-   "unrest_at306: clipped text (top): \"·\" 703.64..713.17 y 78..95",
-   "unrest_at306: clipped text (top): \"29\" 689.83..703.64 y 78..95",
-   "unrest_at306: ellipsis on \"محافظة\"",
-   "parties_at102: ellipsis on \"الداخلية والسياسة\"",
-   "parties_at102: ellipsis on \"مصر\"",
-   "parties_at102: clipped text (top): \"·\" 703.64..713.17 y 78..95",
-   "parties_at102: clipped text (top): \"29\" 689.83..703.64 y 78..95",
-   "parties_at102: ellipsis on \"محافظة\"",
-   "groups_at102: ellipsis on \"الداخلية والسياسة\"",
-   "groups_at102: ellipsis on \"مصر\"",
-   "groups_at102: clipped text (top): \"·\" 703.64..713.17 y 78..95",
-   "groups_at102: clipped text (top): \"29\" 689.83..703.64 y 78..95",
-   "groups_at102: ellipsis on \"محافظة\"",
-   "groups_at204: ellipsis on \"الداخلية والسياسة\"",
-   "groups_at204: ellipsis on \"مصر\"",
-   "groups_at204: clipped text (top): \"·\" 703.64..713.17 y 78..95",
-   "groups_at204: clipped text (top): \"29\" 689.83..703.64 y 78..95",
-   "groups_at204: ellipsis on \"محافظة\""
-  ],
+  "issues": [],
   "views": {
    "overview": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -23374,7 +23085,7 @@
     ]
    },
    "overview_end": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -24053,7 +23764,7 @@
     ]
    },
    "unrest": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -24609,7 +24320,7 @@
     ]
    },
    "unrest_end": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -25206,7 +24917,7 @@
     ]
    },
    "parties": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -25777,7 +25488,7 @@
     ]
    },
    "parties_end": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -26385,7 +26096,7 @@
     ]
    },
    "groups": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -26941,7 +26652,7 @@
     ]
    },
    "groups_end": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -27492,7 +27203,7 @@
     ]
    },
    "unrest_at102": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -28050,7 +27761,7 @@
     ]
    },
    "unrest_at204": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -28601,7 +28312,7 @@
     ]
    },
    "unrest_at306": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -29175,7 +28886,7 @@
     ]
    },
    "parties_at102": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -29738,7 +29449,7 @@
     ]
    },
    "groups_at102": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -30279,7 +29990,7 @@
     ]
    },
    "groups_at204": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -30857,11 +30568,11 @@
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 70
+  "issueCount": 0
  },
  "i16pro": {
   "device": "874x402 side 62 bottom 21 island",
-  "renderedAt": "2026-11-07T17:22:50.970Z",
+  "renderedAt": "2026-11-07T18:01:22.548Z",
   "inputs": {
    "files": [
     "index.html",
@@ -30886,78 +30597,12 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "b61a8b5602c0b8913f0b234004720c773618a0ad"
+   "sha1": "71932b4be947d1b8b347eb002dafcde9aea70b51"
   },
-  "issues": [
-   "overview: ellipsis on \"الداخلية والسياسة\"",
-   "overview: ellipsis on \"مصر\"",
-   "overview: clipped text (top): \"·\" 722.64..732.17 y 80..97",
-   "overview: clipped text (top): \"29\" 708.83..722.64 y 80..97",
-   "overview: ellipsis on \"محافظة\"",
-   "overview_end: ellipsis on \"الداخلية والسياسة\"",
-   "overview_end: ellipsis on \"مصر\"",
-   "overview_end: clipped text (top): \"·\" 722.64..732.17 y 80..97",
-   "overview_end: clipped text (top): \"29\" 708.83..722.64 y 80..97",
-   "overview_end: ellipsis on \"محافظة\"",
-   "unrest: ellipsis on \"الداخلية والسياسة\"",
-   "unrest: ellipsis on \"مصر\"",
-   "unrest: clipped text (top): \"·\" 722.64..732.17 y 80..97",
-   "unrest: clipped text (top): \"29\" 708.83..722.64 y 80..97",
-   "unrest: ellipsis on \"محافظة\"",
-   "unrest_end: ellipsis on \"الداخلية والسياسة\"",
-   "unrest_end: ellipsis on \"مصر\"",
-   "unrest_end: clipped text (top): \"·\" 722.64..732.17 y 80..97",
-   "unrest_end: clipped text (top): \"29\" 708.83..722.64 y 80..97",
-   "unrest_end: ellipsis on \"محافظة\"",
-   "parties: ellipsis on \"الداخلية والسياسة\"",
-   "parties: ellipsis on \"مصر\"",
-   "parties: clipped text (top): \"·\" 722.64..732.17 y 80..97",
-   "parties: clipped text (top): \"29\" 708.83..722.64 y 80..97",
-   "parties: ellipsis on \"محافظة\"",
-   "parties_end: ellipsis on \"الداخلية والسياسة\"",
-   "parties_end: ellipsis on \"مصر\"",
-   "parties_end: clipped text (top): \"·\" 722.64..732.17 y 80..97",
-   "parties_end: clipped text (top): \"29\" 708.83..722.64 y 80..97",
-   "parties_end: ellipsis on \"محافظة\"",
-   "groups: ellipsis on \"الداخلية والسياسة\"",
-   "groups: ellipsis on \"مصر\"",
-   "groups: clipped text (top): \"·\" 722.64..732.17 y 80..97",
-   "groups: clipped text (top): \"29\" 708.83..722.64 y 80..97",
-   "groups: ellipsis on \"محافظة\"",
-   "groups_end: ellipsis on \"الداخلية والسياسة\"",
-   "groups_end: ellipsis on \"مصر\"",
-   "groups_end: clipped text (top): \"·\" 722.64..732.17 y 80..97",
-   "groups_end: clipped text (top): \"29\" 708.83..722.64 y 80..97",
-   "groups_end: ellipsis on \"محافظة\"",
-   "unrest_at107: ellipsis on \"الداخلية والسياسة\"",
-   "unrest_at107: ellipsis on \"مصر\"",
-   "unrest_at107: clipped text (top): \"·\" 722.64..732.17 y 80..97",
-   "unrest_at107: clipped text (top): \"29\" 708.83..722.64 y 80..97",
-   "unrest_at107: ellipsis on \"محافظة\"",
-   "unrest_at214: ellipsis on \"الداخلية والسياسة\"",
-   "unrest_at214: ellipsis on \"مصر\"",
-   "unrest_at214: clipped text (top): \"·\" 722.64..732.17 y 80..97",
-   "unrest_at214: clipped text (top): \"29\" 708.83..722.64 y 80..97",
-   "unrest_at214: ellipsis on \"محافظة\"",
-   "unrest_at321: ellipsis on \"الداخلية والسياسة\"",
-   "unrest_at321: ellipsis on \"مصر\"",
-   "unrest_at321: clipped text (top): \"·\" 722.64..732.17 y 80..97",
-   "unrest_at321: clipped text (top): \"29\" 708.83..722.64 y 80..97",
-   "unrest_at321: ellipsis on \"محافظة\"",
-   "parties_at107: ellipsis on \"الداخلية والسياسة\"",
-   "parties_at107: ellipsis on \"مصر\"",
-   "parties_at107: clipped text (top): \"·\" 722.64..732.17 y 80..97",
-   "parties_at107: clipped text (top): \"29\" 708.83..722.64 y 80..97",
-   "parties_at107: ellipsis on \"محافظة\"",
-   "groups_at107: ellipsis on \"الداخلية والسياسة\"",
-   "groups_at107: ellipsis on \"مصر\"",
-   "groups_at107: clipped text (top): \"·\" 722.64..732.17 y 80..97",
-   "groups_at107: clipped text (top): \"29\" 708.83..722.64 y 80..97",
-   "groups_at107: ellipsis on \"محافظة\""
-  ],
+  "issues": [],
   "views": {
    "overview": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -31639,7 +31284,7 @@
     ]
    },
    "overview_end": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -32321,7 +31966,7 @@
     ]
    },
    "unrest": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -32880,7 +32525,7 @@
     ]
    },
    "unrest_end": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -33487,7 +33132,7 @@
     ]
    },
    "parties": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -34061,7 +33706,7 @@
     ]
    },
    "parties_end": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -34672,7 +34317,7 @@
     ]
    },
    "groups": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -35236,7 +34881,7 @@
     ]
    },
    "groups_end": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -35790,7 +35435,7 @@
     ]
    },
    "unrest_at107": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -36351,7 +35996,7 @@
     ]
    },
    "unrest_at214": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -36905,7 +36550,7 @@
     ]
    },
    "unrest_at321": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -37472,7 +37117,7 @@
     ]
    },
    "parties_at107": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -38038,7 +37683,7 @@
     ]
    },
    "groups_at107": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -38609,11 +38254,11 @@
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 65
+  "issueCount": 0
  },
  "i11": {
   "device": "896x414 side 48 bottom 21 notch",
-  "renderedAt": "2026-11-07T17:23:14.956Z",
+  "renderedAt": "2026-11-07T18:01:46.956Z",
   "inputs": {
    "files": [
     "index.html",
@@ -38638,78 +38283,12 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "b61a8b5602c0b8913f0b234004720c773618a0ad"
+   "sha1": "71932b4be947d1b8b347eb002dafcde9aea70b51"
   },
-  "issues": [
-   "overview: ellipsis on \"الداخلية والسياسة\"",
-   "overview: ellipsis on \"مصر\"",
-   "overview: clipped text (top): \"·\" 758.64..768.17 y 84..101",
-   "overview: clipped text (top): \"29\" 744.83..758.64 y 84..101",
-   "overview: ellipsis on \"محافظة\"",
-   "overview_end: ellipsis on \"الداخلية والسياسة\"",
-   "overview_end: ellipsis on \"مصر\"",
-   "overview_end: clipped text (top): \"·\" 758.64..768.17 y 84..101",
-   "overview_end: clipped text (top): \"29\" 744.83..758.64 y 84..101",
-   "overview_end: ellipsis on \"محافظة\"",
-   "unrest: ellipsis on \"الداخلية والسياسة\"",
-   "unrest: ellipsis on \"مصر\"",
-   "unrest: clipped text (top): \"·\" 758.64..768.17 y 84..101",
-   "unrest: clipped text (top): \"29\" 744.83..758.64 y 84..101",
-   "unrest: ellipsis on \"محافظة\"",
-   "unrest_end: ellipsis on \"الداخلية والسياسة\"",
-   "unrest_end: ellipsis on \"مصر\"",
-   "unrest_end: clipped text (top): \"·\" 758.64..768.17 y 84..101",
-   "unrest_end: clipped text (top): \"29\" 744.83..758.64 y 84..101",
-   "unrest_end: ellipsis on \"محافظة\"",
-   "parties: ellipsis on \"الداخلية والسياسة\"",
-   "parties: ellipsis on \"مصر\"",
-   "parties: clipped text (top): \"·\" 758.64..768.17 y 84..101",
-   "parties: clipped text (top): \"29\" 744.83..758.64 y 84..101",
-   "parties: ellipsis on \"محافظة\"",
-   "parties_end: ellipsis on \"الداخلية والسياسة\"",
-   "parties_end: ellipsis on \"مصر\"",
-   "parties_end: clipped text (top): \"·\" 758.64..768.17 y 84..101",
-   "parties_end: clipped text (top): \"29\" 744.83..758.64 y 84..101",
-   "parties_end: ellipsis on \"محافظة\"",
-   "groups: ellipsis on \"الداخلية والسياسة\"",
-   "groups: ellipsis on \"مصر\"",
-   "groups: clipped text (top): \"·\" 758.64..768.17 y 84..101",
-   "groups: clipped text (top): \"29\" 744.83..758.64 y 84..101",
-   "groups: ellipsis on \"محافظة\"",
-   "groups_end: ellipsis on \"الداخلية والسياسة\"",
-   "groups_end: ellipsis on \"مصر\"",
-   "groups_end: clipped text (top): \"·\" 758.64..768.17 y 84..101",
-   "groups_end: clipped text (top): \"29\" 744.83..758.64 y 84..101",
-   "groups_end: ellipsis on \"محافظة\"",
-   "unrest_at111: ellipsis on \"الداخلية والسياسة\"",
-   "unrest_at111: ellipsis on \"مصر\"",
-   "unrest_at111: clipped text (top): \"·\" 758.64..768.17 y 84..101",
-   "unrest_at111: clipped text (top): \"29\" 744.83..758.64 y 84..101",
-   "unrest_at111: ellipsis on \"محافظة\"",
-   "unrest_at222: ellipsis on \"الداخلية والسياسة\"",
-   "unrest_at222: ellipsis on \"مصر\"",
-   "unrest_at222: clipped text (top): \"·\" 758.64..768.17 y 84..101",
-   "unrest_at222: clipped text (top): \"29\" 744.83..758.64 y 84..101",
-   "unrest_at222: ellipsis on \"محافظة\"",
-   "unrest_at333: ellipsis on \"الداخلية والسياسة\"",
-   "unrest_at333: ellipsis on \"مصر\"",
-   "unrest_at333: clipped text (top): \"·\" 758.64..768.17 y 84..101",
-   "unrest_at333: clipped text (top): \"29\" 744.83..758.64 y 84..101",
-   "unrest_at333: ellipsis on \"محافظة\"",
-   "parties_at111: ellipsis on \"الداخلية والسياسة\"",
-   "parties_at111: ellipsis on \"مصر\"",
-   "parties_at111: clipped text (top): \"·\" 758.64..768.17 y 84..101",
-   "parties_at111: clipped text (top): \"29\" 744.83..758.64 y 84..101",
-   "parties_at111: ellipsis on \"محافظة\"",
-   "groups_at111: ellipsis on \"الداخلية والسياسة\"",
-   "groups_at111: ellipsis on \"مصر\"",
-   "groups_at111: clipped text (top): \"·\" 758.64..768.17 y 84..101",
-   "groups_at111: clipped text (top): \"29\" 744.83..758.64 y 84..101",
-   "groups_at111: ellipsis on \"محافظة\""
-  ],
+  "issues": [],
   "views": {
    "overview": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -39386,7 +38965,7 @@
     ]
    },
    "overview_end": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -40063,7 +39642,7 @@
     ]
    },
    "unrest": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -40617,7 +40196,7 @@
     ]
    },
    "unrest_end": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -41219,7 +40798,7 @@
     ]
    },
    "parties": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -41788,7 +41367,7 @@
     ]
    },
    "parties_end": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -42394,7 +41973,7 @@
     ]
    },
    "groups": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -42953,7 +42532,7 @@
     ]
    },
    "groups_end": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -43502,7 +43081,7 @@
     ]
    },
    "unrest_at111": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -44068,7 +43647,7 @@
     ]
    },
    "unrest_at222": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -44610,7 +44189,7 @@
     ]
    },
    "unrest_at333": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -45187,7 +44766,7 @@
     ]
    },
    "parties_at111": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -45773,7 +45352,7 @@
     ]
    },
    "groups_at111": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -46349,11 +45928,11 @@
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 65
+  "issueCount": 0
  },
  "i16promax": {
   "device": "956x440 side 62 bottom 21 island",
-  "renderedAt": "2026-11-07T17:23:38.777Z",
+  "renderedAt": "2026-11-07T18:02:11.020Z",
   "inputs": {
    "files": [
     "index.html",
@@ -46378,68 +45957,12 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "b61a8b5602c0b8913f0b234004720c773618a0ad"
+   "sha1": "71932b4be947d1b8b347eb002dafcde9aea70b51"
   },
-  "issues": [
-   "overview: ellipsis on \"الداخلية والسياسة\"",
-   "overview: ellipsis on \"مصر\"",
-   "overview: clipped text (top): \"·\" 804.64..814.17 y 84..101",
-   "overview: clipped text (top): \"29\" 790.83..804.64 y 84..101",
-   "overview: ellipsis on \"محافظة\"",
-   "overview_end: ellipsis on \"الداخلية والسياسة\"",
-   "overview_end: ellipsis on \"مصر\"",
-   "overview_end: clipped text (top): \"·\" 804.64..814.17 y 84..101",
-   "overview_end: clipped text (top): \"29\" 790.83..804.64 y 84..101",
-   "overview_end: ellipsis on \"محافظة\"",
-   "unrest: ellipsis on \"الداخلية والسياسة\"",
-   "unrest: ellipsis on \"مصر\"",
-   "unrest: clipped text (top): \"·\" 804.64..814.17 y 84..101",
-   "unrest: clipped text (top): \"29\" 790.83..804.64 y 84..101",
-   "unrest: ellipsis on \"محافظة\"",
-   "unrest_end: ellipsis on \"الداخلية والسياسة\"",
-   "unrest_end: ellipsis on \"مصر\"",
-   "unrest_end: clipped text (top): \"·\" 804.64..814.17 y 84..101",
-   "unrest_end: clipped text (top): \"29\" 790.83..804.64 y 84..101",
-   "unrest_end: ellipsis on \"محافظة\"",
-   "parties: ellipsis on \"الداخلية والسياسة\"",
-   "parties: ellipsis on \"مصر\"",
-   "parties: clipped text (top): \"·\" 804.64..814.17 y 84..101",
-   "parties: clipped text (top): \"29\" 790.83..804.64 y 84..101",
-   "parties: ellipsis on \"محافظة\"",
-   "parties_end: ellipsis on \"الداخلية والسياسة\"",
-   "parties_end: ellipsis on \"مصر\"",
-   "parties_end: clipped text (top): \"·\" 804.64..814.17 y 84..101",
-   "parties_end: clipped text (top): \"29\" 790.83..804.64 y 84..101",
-   "parties_end: ellipsis on \"محافظة\"",
-   "groups: ellipsis on \"الداخلية والسياسة\"",
-   "groups: ellipsis on \"مصر\"",
-   "groups: clipped text (top): \"·\" 804.64..814.17 y 84..101",
-   "groups: clipped text (top): \"29\" 790.83..804.64 y 84..101",
-   "groups: ellipsis on \"محافظة\"",
-   "groups_end: ellipsis on \"الداخلية والسياسة\"",
-   "groups_end: ellipsis on \"مصر\"",
-   "groups_end: clipped text (top): \"·\" 804.64..814.17 y 84..101",
-   "groups_end: clipped text (top): \"29\" 790.83..804.64 y 84..101",
-   "groups_end: ellipsis on \"محافظة\"",
-   "unrest_at137: ellipsis on \"الداخلية والسياسة\"",
-   "unrest_at137: ellipsis on \"مصر\"",
-   "unrest_at137: clipped text (top): \"·\" 804.64..814.17 y 84..101",
-   "unrest_at137: clipped text (top): \"29\" 790.83..804.64 y 84..101",
-   "unrest_at137: ellipsis on \"محافظة\"",
-   "unrest_at274: ellipsis on \"الداخلية والسياسة\"",
-   "unrest_at274: ellipsis on \"مصر\"",
-   "unrest_at274: clipped text (top): \"·\" 804.64..814.17 y 84..101",
-   "unrest_at274: clipped text (top): \"29\" 790.83..804.64 y 84..101",
-   "unrest_at274: ellipsis on \"محافظة\"",
-   "groups_at137: ellipsis on \"الداخلية والسياسة\"",
-   "groups_at137: ellipsis on \"مصر\"",
-   "groups_at137: clipped text (top): \"·\" 804.64..814.17 y 84..101",
-   "groups_at137: clipped text (top): \"29\" 790.83..804.64 y 84..101",
-   "groups_at137: ellipsis on \"محافظة\""
-  ],
+  "issues": [],
   "views": {
    "overview": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -47108,7 +46631,7 @@
     ]
    },
    "overview_end": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -47777,7 +47300,7 @@
     ]
    },
    "unrest": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -48333,7 +47856,7 @@
     ]
    },
    "unrest_end": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -48937,7 +48460,7 @@
     ]
    },
    "parties": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -49528,7 +49051,7 @@
     ]
    },
    "parties_end": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -50126,7 +49649,7 @@
     ]
    },
    "groups": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -50687,7 +50210,7 @@
     ]
    },
    "groups_end": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -51248,7 +50771,7 @@
     ]
    },
    "unrest_at137": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -51806,7 +51329,7 @@
     ]
    },
    "unrest_at274": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -52370,7 +51893,7 @@
     ]
    },
    "groups_at137": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -52948,6 +52471,6 @@
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 55
+  "issueCount": 0
  }
 }

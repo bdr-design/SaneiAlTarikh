@@ -1,7 +1,7 @@
 {
  "se": {
   "device": "667x375 side 0 bottom 0 none",
-  "renderedAt": "2026-11-07T17:40:09.457Z",
+  "renderedAt": "2026-11-07T18:18:41.861Z",
   "inputs": {
    "files": [
     "index.html",
@@ -24,133 +24,12 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "94e170b9267b1db6f432e71a8e1b45fc88e67c3a"
+   "sha1": "646bc47a3a099672f807a012535f395018c7a06a"
   },
-  "issues": [
-   "tax: ellipsis on \"الاقتصاد\"",
-   "tax: ellipsis on \"مصر\"",
-   "tax: clipped text (top): \"·\" 569.64..579.17 y 78..95",
-   "tax: ellipsis on \"السنة المالية\"",
-   "tax: clipped text (top): \"2010/11\" 465.06..511.27 y 78..95",
-   "line: ellipsis on \"الاقتصاد\"",
-   "line: ellipsis on \"مصر\"",
-   "line: clipped text (top): \"·\" 569.64..579.17 y 78..95",
-   "line: ellipsis on \"السنة المالية\"",
-   "line: clipped text (top): \"2010/11\" 465.06..511.27 y 78..95",
-   "subsidy: ellipsis on \"الاقتصاد\"",
-   "subsidy: ellipsis on \"مصر\"",
-   "subsidy: clipped text (top): \"·\" 569.64..579.17 y 78..95",
-   "subsidy: ellipsis on \"السنة المالية\"",
-   "subsidy: clipped text (top): \"2010/11\" 465.06..511.27 y 78..95",
-   "money: ellipsis on \"الاقتصاد\"",
-   "money: ellipsis on \"مصر\"",
-   "money: clipped text (top): \"·\" 569.64..579.17 y 78..95",
-   "money: ellipsis on \"السنة المالية\"",
-   "money: clipped text (top): \"2010/11\" 465.06..511.27 y 78..95",
-   "money_end: ellipsis on \"الاقتصاد\"",
-   "money_end: ellipsis on \"مصر\"",
-   "money_end: clipped text (top): \"·\" 569.64..579.17 y 78..95",
-   "money_end: ellipsis on \"السنة المالية\"",
-   "money_end: clipped text (top): \"2010/11\" 465.06..511.27 y 78..95",
-   "tax_wait: ellipsis on \"الاقتصاد\"",
-   "tax_wait: ellipsis on \"مصر\"",
-   "tax_wait: clipped text (top): \"·\" 569.64..579.17 y 78..95",
-   "tax_wait: ellipsis on \"السنة المالية\"",
-   "tax_wait: clipped text (top): \"2010/11\" 465.06..511.27 y 78..95",
-   "money_pending: ellipsis on \"الاقتصاد\"",
-   "money_pending: ellipsis on \"مصر\"",
-   "money_pending: clipped text (top): \"·\" 569.64..579.17 y 78..95",
-   "money_pending: ellipsis on \"السنة المالية\"",
-   "money_pending: clipped text (top): \"2010/11\" 465.06..511.27 y 78..95",
-   "money_pending_end: ellipsis on \"الاقتصاد\"",
-   "money_pending_end: ellipsis on \"مصر\"",
-   "money_pending_end: clipped text (top): \"·\" 569.64..579.17 y 78..95",
-   "money_pending_end: ellipsis on \"السنة المالية\"",
-   "money_pending_end: clipped text (top): \"2010/11\" 465.06..511.27 y 78..95",
-   "tax_min: ellipsis on \"الاقتصاد\"",
-   "tax_min: ellipsis on \"مصر\"",
-   "tax_min: clipped text (top): \"·\" 569.64..579.17 y 78..95",
-   "tax_min: ellipsis on \"السنة المالية\"",
-   "tax_min: clipped text (top): \"2010/11\" 465.06..511.27 y 78..95",
-   "tax_max: ellipsis on \"الاقتصاد\"",
-   "tax_max: ellipsis on \"مصر\"",
-   "tax_max: clipped text (top): \"·\" 569.64..579.17 y 78..95",
-   "tax_max: ellipsis on \"السنة المالية\"",
-   "tax_max: clipped text (top): \"2010/11\" 465.06..511.27 y 78..95",
-   "line_min: ellipsis on \"الاقتصاد\"",
-   "line_min: ellipsis on \"مصر\"",
-   "line_min: clipped text (top): \"·\" 569.64..579.17 y 78..95",
-   "line_min: ellipsis on \"السنة المالية\"",
-   "line_min: clipped text (top): \"2010/11\" 465.06..511.27 y 78..95",
-   "line_max: ellipsis on \"الاقتصاد\"",
-   "line_max: ellipsis on \"مصر\"",
-   "line_max: clipped text (top): \"·\" 569.64..579.17 y 78..95",
-   "line_max: ellipsis on \"السنة المالية\"",
-   "line_max: clipped text (top): \"2010/11\" 465.06..511.27 y 78..95",
-   "subsidy_min: ellipsis on \"الاقتصاد\"",
-   "subsidy_min: ellipsis on \"مصر\"",
-   "subsidy_min: clipped text (top): \"·\" 569.64..579.17 y 78..95",
-   "subsidy_min: ellipsis on \"السنة المالية\"",
-   "subsidy_min: clipped text (top): \"2010/11\" 465.06..511.27 y 78..95",
-   "subsidy_max: ellipsis on \"الاقتصاد\"",
-   "subsidy_max: ellipsis on \"مصر\"",
-   "subsidy_max: clipped text (top): \"·\" 569.64..579.17 y 78..95",
-   "subsidy_max: ellipsis on \"السنة المالية\"",
-   "subsidy_max: clipped text (top): \"2010/11\" 465.06..511.27 y 78..95",
-   "money_min: ellipsis on \"الاقتصاد\"",
-   "money_min: ellipsis on \"مصر\"",
-   "money_min: clipped text (top): \"·\" 569.64..579.17 y 78..95",
-   "money_min: ellipsis on \"السنة المالية\"",
-   "money_min: clipped text (top): \"2010/11\" 465.06..511.27 y 78..95",
-   "money_max: ellipsis on \"الاقتصاد\"",
-   "money_max: ellipsis on \"مصر\"",
-   "money_max: clipped text (top): \"·\" 569.64..579.17 y 78..95",
-   "money_max: ellipsis on \"السنة المالية\"",
-   "money_max: clipped text (top): \"2010/11\" 465.06..511.27 y 78..95",
-   "money_at38: ellipsis on \"الاقتصاد\"",
-   "money_at38: ellipsis on \"مصر\"",
-   "money_at38: clipped text (top): \"·\" 569.64..579.17 y 78..95",
-   "money_at38: ellipsis on \"السنة المالية\"",
-   "money_at38: clipped text (top): \"2010/11\" 465.06..511.27 y 78..95",
-   "money_at76: ellipsis on \"الاقتصاد\"",
-   "money_at76: ellipsis on \"مصر\"",
-   "money_at76: clipped text (top): \"·\" 569.64..579.17 y 78..95",
-   "money_at76: ellipsis on \"السنة المالية\"",
-   "money_at76: clipped text (top): \"2010/11\" 465.06..511.27 y 78..95",
-   "money_at114: ellipsis on \"الاقتصاد\"",
-   "money_at114: ellipsis on \"مصر\"",
-   "money_at114: clipped text (top): \"·\" 569.64..579.17 y 78..95",
-   "money_at114: ellipsis on \"السنة المالية\"",
-   "money_at114: clipped text (top): \"2010/11\" 465.06..511.27 y 78..95",
-   "money_at152: ellipsis on \"الاقتصاد\"",
-   "money_at152: ellipsis on \"مصر\"",
-   "money_at152: clipped text (top): \"·\" 569.64..579.17 y 78..95",
-   "money_at152: ellipsis on \"السنة المالية\"",
-   "money_at152: clipped text (top): \"2010/11\" 465.06..511.27 y 78..95",
-   "money_pending_at38: ellipsis on \"الاقتصاد\"",
-   "money_pending_at38: ellipsis on \"مصر\"",
-   "money_pending_at38: clipped text (top): \"·\" 569.64..579.17 y 78..95",
-   "money_pending_at38: ellipsis on \"السنة المالية\"",
-   "money_pending_at38: clipped text (top): \"2010/11\" 465.06..511.27 y 78..95",
-   "money_pending_at76: ellipsis on \"الاقتصاد\"",
-   "money_pending_at76: ellipsis on \"مصر\"",
-   "money_pending_at76: clipped text (top): \"·\" 569.64..579.17 y 78..95",
-   "money_pending_at76: ellipsis on \"السنة المالية\"",
-   "money_pending_at76: clipped text (top): \"2010/11\" 465.06..511.27 y 78..95",
-   "money_pending_at114: ellipsis on \"الاقتصاد\"",
-   "money_pending_at114: ellipsis on \"مصر\"",
-   "money_pending_at114: clipped text (top): \"·\" 569.64..579.17 y 78..95",
-   "money_pending_at114: ellipsis on \"السنة المالية\"",
-   "money_pending_at114: clipped text (top): \"2010/11\" 465.06..511.27 y 78..95",
-   "money_pending_at152: ellipsis on \"الاقتصاد\"",
-   "money_pending_at152: ellipsis on \"مصر\"",
-   "money_pending_at152: clipped text (top): \"·\" 569.64..579.17 y 78..95",
-   "money_pending_at152: ellipsis on \"السنة المالية\"",
-   "money_pending_at152: clipped text (top): \"2010/11\" 465.06..511.27 y 78..95"
-  ],
+  "issues": [],
   "views": {
    "tax": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -660,7 +539,7 @@
     ]
    },
    "line": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -1185,7 +1064,7 @@
     ]
    },
    "subsidy": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -1705,7 +1584,7 @@
     ]
    },
    "money": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -2185,7 +2064,7 @@
     ]
    },
    "money_end": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -2682,7 +2561,7 @@
     ]
    },
    "tax_wait": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -3182,7 +3061,7 @@
     ]
    },
    "money_pending": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -3662,7 +3541,7 @@
     ]
    },
    "money_pending_end": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -4159,7 +4038,7 @@
     ]
    },
    "tax_min": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -4669,7 +4548,7 @@
     ]
    },
    "tax_max": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -5179,7 +5058,7 @@
     ]
    },
    "line_min": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -5704,7 +5583,7 @@
     ]
    },
    "line_max": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -6229,7 +6108,7 @@
     ]
    },
    "subsidy_min": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -6749,7 +6628,7 @@
     ]
    },
    "subsidy_max": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -7269,7 +7148,7 @@
     ]
    },
    "money_min": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -7749,7 +7628,7 @@
     ]
    },
    "money_max": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -8229,7 +8108,7 @@
     ]
    },
    "money_at38": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -8704,7 +8583,7 @@
     ]
    },
    "money_at76": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -9154,7 +9033,7 @@
     ]
    },
    "money_at114": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -9595,7 +9474,7 @@
     ]
    },
    "money_at152": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -10057,7 +9936,7 @@
     ]
    },
    "money_pending_at38": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -10537,7 +10416,7 @@
     ]
    },
    "money_pending_at76": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -10992,7 +10871,7 @@
     ]
    },
    "money_pending_at114": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -11433,7 +11312,7 @@
     ]
    },
    "money_pending_at152": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -11929,11 +11808,11 @@
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 120
+  "issueCount": 0
  },
  "mini": {
   "device": "812x375 side 50 bottom 21 notch",
-  "renderedAt": "2026-11-07T17:40:41.983Z",
+  "renderedAt": "2026-11-07T18:19:15.339Z",
   "inputs": {
    "files": [
     "index.html",
@@ -11956,163 +11835,12 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "94e170b9267b1db6f432e71a8e1b45fc88e67c3a"
+   "sha1": "646bc47a3a099672f807a012535f395018c7a06a"
   },
-  "issues": [
-   "tax: ellipsis on \"الاقتصاد\"",
-   "tax: ellipsis on \"مصر\"",
-   "tax: clipped text (top): \"·\" 672.64..682.17 y 78..95",
-   "tax: ellipsis on \"السنة المالية\"",
-   "tax: clipped text (top): \"2010/11\" 568.06..614.27 y 78..95",
-   "line: ellipsis on \"الاقتصاد\"",
-   "line: ellipsis on \"مصر\"",
-   "line: clipped text (top): \"·\" 672.64..682.17 y 78..95",
-   "line: ellipsis on \"السنة المالية\"",
-   "line: clipped text (top): \"2010/11\" 568.06..614.27 y 78..95",
-   "subsidy: ellipsis on \"الاقتصاد\"",
-   "subsidy: ellipsis on \"مصر\"",
-   "subsidy: clipped text (top): \"·\" 672.64..682.17 y 78..95",
-   "subsidy: ellipsis on \"السنة المالية\"",
-   "subsidy: clipped text (top): \"2010/11\" 568.06..614.27 y 78..95",
-   "money: ellipsis on \"الاقتصاد\"",
-   "money: ellipsis on \"مصر\"",
-   "money: clipped text (top): \"·\" 672.64..682.17 y 78..95",
-   "money: ellipsis on \"السنة المالية\"",
-   "money: clipped text (top): \"2010/11\" 568.06..614.27 y 78..95",
-   "money_end: ellipsis on \"الاقتصاد\"",
-   "money_end: ellipsis on \"مصر\"",
-   "money_end: clipped text (top): \"·\" 672.64..682.17 y 78..95",
-   "money_end: ellipsis on \"السنة المالية\"",
-   "money_end: clipped text (top): \"2010/11\" 568.06..614.27 y 78..95",
-   "tax_wait: ellipsis on \"الاقتصاد\"",
-   "tax_wait: ellipsis on \"مصر\"",
-   "tax_wait: clipped text (top): \"·\" 672.64..682.17 y 78..95",
-   "tax_wait: ellipsis on \"السنة المالية\"",
-   "tax_wait: clipped text (top): \"2010/11\" 568.06..614.27 y 78..95",
-   "money_pending: ellipsis on \"الاقتصاد\"",
-   "money_pending: ellipsis on \"مصر\"",
-   "money_pending: clipped text (top): \"·\" 672.64..682.17 y 78..95",
-   "money_pending: ellipsis on \"السنة المالية\"",
-   "money_pending: clipped text (top): \"2010/11\" 568.06..614.27 y 78..95",
-   "money_pending_end: ellipsis on \"الاقتصاد\"",
-   "money_pending_end: ellipsis on \"مصر\"",
-   "money_pending_end: clipped text (top): \"·\" 672.64..682.17 y 78..95",
-   "money_pending_end: ellipsis on \"السنة المالية\"",
-   "money_pending_end: clipped text (top): \"2010/11\" 568.06..614.27 y 78..95",
-   "tax_min: ellipsis on \"الاقتصاد\"",
-   "tax_min: ellipsis on \"مصر\"",
-   "tax_min: clipped text (top): \"·\" 672.64..682.17 y 78..95",
-   "tax_min: ellipsis on \"السنة المالية\"",
-   "tax_min: clipped text (top): \"2010/11\" 568.06..614.27 y 78..95",
-   "tax_max: ellipsis on \"الاقتصاد\"",
-   "tax_max: ellipsis on \"مصر\"",
-   "tax_max: clipped text (top): \"·\" 672.64..682.17 y 78..95",
-   "tax_max: ellipsis on \"السنة المالية\"",
-   "tax_max: clipped text (top): \"2010/11\" 568.06..614.27 y 78..95",
-   "line_min: ellipsis on \"الاقتصاد\"",
-   "line_min: ellipsis on \"مصر\"",
-   "line_min: clipped text (top): \"·\" 672.64..682.17 y 78..95",
-   "line_min: ellipsis on \"السنة المالية\"",
-   "line_min: clipped text (top): \"2010/11\" 568.06..614.27 y 78..95",
-   "line_max: ellipsis on \"الاقتصاد\"",
-   "line_max: ellipsis on \"مصر\"",
-   "line_max: clipped text (top): \"·\" 672.64..682.17 y 78..95",
-   "line_max: ellipsis on \"السنة المالية\"",
-   "line_max: clipped text (top): \"2010/11\" 568.06..614.27 y 78..95",
-   "subsidy_min: ellipsis on \"الاقتصاد\"",
-   "subsidy_min: ellipsis on \"مصر\"",
-   "subsidy_min: clipped text (top): \"·\" 672.64..682.17 y 78..95",
-   "subsidy_min: ellipsis on \"السنة المالية\"",
-   "subsidy_min: clipped text (top): \"2010/11\" 568.06..614.27 y 78..95",
-   "subsidy_max: ellipsis on \"الاقتصاد\"",
-   "subsidy_max: ellipsis on \"مصر\"",
-   "subsidy_max: clipped text (top): \"·\" 672.64..682.17 y 78..95",
-   "subsidy_max: ellipsis on \"السنة المالية\"",
-   "subsidy_max: clipped text (top): \"2010/11\" 568.06..614.27 y 78..95",
-   "money_min: ellipsis on \"الاقتصاد\"",
-   "money_min: ellipsis on \"مصر\"",
-   "money_min: clipped text (top): \"·\" 672.64..682.17 y 78..95",
-   "money_min: ellipsis on \"السنة المالية\"",
-   "money_min: clipped text (top): \"2010/11\" 568.06..614.27 y 78..95",
-   "money_max: ellipsis on \"الاقتصاد\"",
-   "money_max: ellipsis on \"مصر\"",
-   "money_max: clipped text (top): \"·\" 672.64..682.17 y 78..95",
-   "money_max: ellipsis on \"السنة المالية\"",
-   "money_max: clipped text (top): \"2010/11\" 568.06..614.27 y 78..95",
-   "money_at24: ellipsis on \"الاقتصاد\"",
-   "money_at24: ellipsis on \"مصر\"",
-   "money_at24: clipped text (top): \"·\" 672.64..682.17 y 78..95",
-   "money_at24: ellipsis on \"السنة المالية\"",
-   "money_at24: clipped text (top): \"2010/11\" 568.06..614.27 y 78..95",
-   "money_at48: ellipsis on \"الاقتصاد\"",
-   "money_at48: ellipsis on \"مصر\"",
-   "money_at48: clipped text (top): \"·\" 672.64..682.17 y 78..95",
-   "money_at48: ellipsis on \"السنة المالية\"",
-   "money_at48: clipped text (top): \"2010/11\" 568.06..614.27 y 78..95",
-   "money_at72: ellipsis on \"الاقتصاد\"",
-   "money_at72: ellipsis on \"مصر\"",
-   "money_at72: clipped text (top): \"·\" 672.64..682.17 y 78..95",
-   "money_at72: ellipsis on \"السنة المالية\"",
-   "money_at72: clipped text (top): \"2010/11\" 568.06..614.27 y 78..95",
-   "money_at96: ellipsis on \"الاقتصاد\"",
-   "money_at96: ellipsis on \"مصر\"",
-   "money_at96: clipped text (top): \"·\" 672.64..682.17 y 78..95",
-   "money_at96: ellipsis on \"السنة المالية\"",
-   "money_at96: clipped text (top): \"2010/11\" 568.06..614.27 y 78..95",
-   "money_at120: ellipsis on \"الاقتصاد\"",
-   "money_at120: ellipsis on \"مصر\"",
-   "money_at120: clipped text (top): \"·\" 672.64..682.17 y 78..95",
-   "money_at120: ellipsis on \"السنة المالية\"",
-   "money_at120: clipped text (top): \"2010/11\" 568.06..614.27 y 78..95",
-   "money_at144: ellipsis on \"الاقتصاد\"",
-   "money_at144: ellipsis on \"مصر\"",
-   "money_at144: clipped text (top): \"·\" 672.64..682.17 y 78..95",
-   "money_at144: ellipsis on \"السنة المالية\"",
-   "money_at144: clipped text (top): \"2010/11\" 568.06..614.27 y 78..95",
-   "money_at168: ellipsis on \"الاقتصاد\"",
-   "money_at168: ellipsis on \"مصر\"",
-   "money_at168: clipped text (top): \"·\" 672.64..682.17 y 78..95",
-   "money_at168: ellipsis on \"السنة المالية\"",
-   "money_at168: clipped text (top): \"2010/11\" 568.06..614.27 y 78..95",
-   "money_pending_at24: ellipsis on \"الاقتصاد\"",
-   "money_pending_at24: ellipsis on \"مصر\"",
-   "money_pending_at24: clipped text (top): \"·\" 672.64..682.17 y 78..95",
-   "money_pending_at24: ellipsis on \"السنة المالية\"",
-   "money_pending_at24: clipped text (top): \"2010/11\" 568.06..614.27 y 78..95",
-   "money_pending_at48: ellipsis on \"الاقتصاد\"",
-   "money_pending_at48: ellipsis on \"مصر\"",
-   "money_pending_at48: clipped text (top): \"·\" 672.64..682.17 y 78..95",
-   "money_pending_at48: ellipsis on \"السنة المالية\"",
-   "money_pending_at48: clipped text (top): \"2010/11\" 568.06..614.27 y 78..95",
-   "money_pending_at72: ellipsis on \"الاقتصاد\"",
-   "money_pending_at72: ellipsis on \"مصر\"",
-   "money_pending_at72: clipped text (top): \"·\" 672.64..682.17 y 78..95",
-   "money_pending_at72: ellipsis on \"السنة المالية\"",
-   "money_pending_at72: clipped text (top): \"2010/11\" 568.06..614.27 y 78..95",
-   "money_pending_at96: ellipsis on \"الاقتصاد\"",
-   "money_pending_at96: ellipsis on \"مصر\"",
-   "money_pending_at96: clipped text (top): \"·\" 672.64..682.17 y 78..95",
-   "money_pending_at96: ellipsis on \"السنة المالية\"",
-   "money_pending_at96: clipped text (top): \"2010/11\" 568.06..614.27 y 78..95",
-   "money_pending_at120: ellipsis on \"الاقتصاد\"",
-   "money_pending_at120: ellipsis on \"مصر\"",
-   "money_pending_at120: clipped text (top): \"·\" 672.64..682.17 y 78..95",
-   "money_pending_at120: ellipsis on \"السنة المالية\"",
-   "money_pending_at120: clipped text (top): \"2010/11\" 568.06..614.27 y 78..95",
-   "money_pending_at144: ellipsis on \"الاقتصاد\"",
-   "money_pending_at144: ellipsis on \"مصر\"",
-   "money_pending_at144: clipped text (top): \"·\" 672.64..682.17 y 78..95",
-   "money_pending_at144: ellipsis on \"السنة المالية\"",
-   "money_pending_at144: clipped text (top): \"2010/11\" 568.06..614.27 y 78..95",
-   "money_pending_at168: ellipsis on \"الاقتصاد\"",
-   "money_pending_at168: ellipsis on \"مصر\"",
-   "money_pending_at168: clipped text (top): \"·\" 672.64..682.17 y 78..95",
-   "money_pending_at168: ellipsis on \"السنة المالية\"",
-   "money_pending_at168: clipped text (top): \"2010/11\" 568.06..614.27 y 78..95"
-  ],
+  "issues": [],
   "views": {
    "tax": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -12628,7 +12356,7 @@
     ]
    },
    "line": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -13159,7 +12887,7 @@
     ]
    },
    "subsidy": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -13685,7 +13413,7 @@
     ]
    },
    "money": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -14171,7 +13899,7 @@
     ]
    },
    "money_end": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -14674,7 +14402,7 @@
     ]
    },
    "tax_wait": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -15180,7 +14908,7 @@
     ]
    },
    "money_pending": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -15666,7 +15394,7 @@
     ]
    },
    "money_pending_end": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -16169,7 +15897,7 @@
     ]
    },
    "tax_min": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -16685,7 +16413,7 @@
     ]
    },
    "tax_max": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -17201,7 +16929,7 @@
     ]
    },
    "line_min": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -17732,7 +17460,7 @@
     ]
    },
    "line_max": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -18263,7 +17991,7 @@
     ]
    },
    "subsidy_min": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -18789,7 +18517,7 @@
     ]
    },
    "subsidy_max": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -19315,7 +19043,7 @@
     ]
    },
    "money_min": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -19801,7 +19529,7 @@
     ]
    },
    "money_max": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -20287,7 +20015,7 @@
     ]
    },
    "money_at24": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -20743,7 +20471,7 @@
     ]
    },
    "money_at48": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -21204,7 +20932,7 @@
     ]
    },
    "money_at72": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -21645,7 +21373,7 @@
     ]
    },
    "money_at96": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -22091,7 +21819,7 @@
     ]
    },
    "money_at120": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -22538,7 +22266,7 @@
     ]
    },
    "money_at144": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -23000,7 +22728,7 @@
     ]
    },
    "money_at168": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -23463,7 +23191,7 @@
     ]
    },
    "money_pending_at24": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -23919,7 +23647,7 @@
     ]
    },
    "money_pending_at48": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -24385,7 +24113,7 @@
     ]
    },
    "money_pending_at72": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -24831,7 +24559,7 @@
     ]
    },
    "money_pending_at96": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -25282,7 +25010,7 @@
     ]
    },
    "money_pending_at120": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -25729,7 +25457,7 @@
     ]
    },
    "money_pending_at144": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -26191,7 +25919,7 @@
     ]
    },
    "money_pending_at168": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -26688,11 +26416,11 @@
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 150
+  "issueCount": 0
  },
  "i14": {
   "device": "844x390 side 47 bottom 21 notch",
-  "renderedAt": "2026-11-07T17:41:22.340Z",
+  "renderedAt": "2026-11-07T18:19:57.013Z",
   "inputs": {
    "files": [
     "index.html",
@@ -26715,133 +26443,12 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "94e170b9267b1db6f432e71a8e1b45fc88e67c3a"
+   "sha1": "646bc47a3a099672f807a012535f395018c7a06a"
   },
-  "issues": [
-   "tax: ellipsis on \"الاقتصاد\"",
-   "tax: ellipsis on \"مصر\"",
-   "tax: clipped text (top): \"·\" 707.64..717.17 y 78..95",
-   "tax: ellipsis on \"السنة المالية\"",
-   "tax: clipped text (top): \"2010/11\" 603.06..649.27 y 78..95",
-   "line: ellipsis on \"الاقتصاد\"",
-   "line: ellipsis on \"مصر\"",
-   "line: clipped text (top): \"·\" 707.64..717.17 y 78..95",
-   "line: ellipsis on \"السنة المالية\"",
-   "line: clipped text (top): \"2010/11\" 603.06..649.27 y 78..95",
-   "subsidy: ellipsis on \"الاقتصاد\"",
-   "subsidy: ellipsis on \"مصر\"",
-   "subsidy: clipped text (top): \"·\" 707.64..717.17 y 78..95",
-   "subsidy: ellipsis on \"السنة المالية\"",
-   "subsidy: clipped text (top): \"2010/11\" 603.06..649.27 y 78..95",
-   "money: ellipsis on \"الاقتصاد\"",
-   "money: ellipsis on \"مصر\"",
-   "money: clipped text (top): \"·\" 707.64..717.17 y 78..95",
-   "money: ellipsis on \"السنة المالية\"",
-   "money: clipped text (top): \"2010/11\" 603.06..649.27 y 78..95",
-   "money_end: ellipsis on \"الاقتصاد\"",
-   "money_end: ellipsis on \"مصر\"",
-   "money_end: clipped text (top): \"·\" 707.64..717.17 y 78..95",
-   "money_end: ellipsis on \"السنة المالية\"",
-   "money_end: clipped text (top): \"2010/11\" 603.06..649.27 y 78..95",
-   "tax_wait: ellipsis on \"الاقتصاد\"",
-   "tax_wait: ellipsis on \"مصر\"",
-   "tax_wait: clipped text (top): \"·\" 707.64..717.17 y 78..95",
-   "tax_wait: ellipsis on \"السنة المالية\"",
-   "tax_wait: clipped text (top): \"2010/11\" 603.06..649.27 y 78..95",
-   "money_pending: ellipsis on \"الاقتصاد\"",
-   "money_pending: ellipsis on \"مصر\"",
-   "money_pending: clipped text (top): \"·\" 707.64..717.17 y 78..95",
-   "money_pending: ellipsis on \"السنة المالية\"",
-   "money_pending: clipped text (top): \"2010/11\" 603.06..649.27 y 78..95",
-   "money_pending_end: ellipsis on \"الاقتصاد\"",
-   "money_pending_end: ellipsis on \"مصر\"",
-   "money_pending_end: clipped text (top): \"·\" 707.64..717.17 y 78..95",
-   "money_pending_end: ellipsis on \"السنة المالية\"",
-   "money_pending_end: clipped text (top): \"2010/11\" 603.06..649.27 y 78..95",
-   "tax_min: ellipsis on \"الاقتصاد\"",
-   "tax_min: ellipsis on \"مصر\"",
-   "tax_min: clipped text (top): \"·\" 707.64..717.17 y 78..95",
-   "tax_min: ellipsis on \"السنة المالية\"",
-   "tax_min: clipped text (top): \"2010/11\" 603.06..649.27 y 78..95",
-   "tax_max: ellipsis on \"الاقتصاد\"",
-   "tax_max: ellipsis on \"مصر\"",
-   "tax_max: clipped text (top): \"·\" 707.64..717.17 y 78..95",
-   "tax_max: ellipsis on \"السنة المالية\"",
-   "tax_max: clipped text (top): \"2010/11\" 603.06..649.27 y 78..95",
-   "line_min: ellipsis on \"الاقتصاد\"",
-   "line_min: ellipsis on \"مصر\"",
-   "line_min: clipped text (top): \"·\" 707.64..717.17 y 78..95",
-   "line_min: ellipsis on \"السنة المالية\"",
-   "line_min: clipped text (top): \"2010/11\" 603.06..649.27 y 78..95",
-   "line_max: ellipsis on \"الاقتصاد\"",
-   "line_max: ellipsis on \"مصر\"",
-   "line_max: clipped text (top): \"·\" 707.64..717.17 y 78..95",
-   "line_max: ellipsis on \"السنة المالية\"",
-   "line_max: clipped text (top): \"2010/11\" 603.06..649.27 y 78..95",
-   "subsidy_min: ellipsis on \"الاقتصاد\"",
-   "subsidy_min: ellipsis on \"مصر\"",
-   "subsidy_min: clipped text (top): \"·\" 707.64..717.17 y 78..95",
-   "subsidy_min: ellipsis on \"السنة المالية\"",
-   "subsidy_min: clipped text (top): \"2010/11\" 603.06..649.27 y 78..95",
-   "subsidy_max: ellipsis on \"الاقتصاد\"",
-   "subsidy_max: ellipsis on \"مصر\"",
-   "subsidy_max: clipped text (top): \"·\" 707.64..717.17 y 78..95",
-   "subsidy_max: ellipsis on \"السنة المالية\"",
-   "subsidy_max: clipped text (top): \"2010/11\" 603.06..649.27 y 78..95",
-   "money_min: ellipsis on \"الاقتصاد\"",
-   "money_min: ellipsis on \"مصر\"",
-   "money_min: clipped text (top): \"·\" 707.64..717.17 y 78..95",
-   "money_min: ellipsis on \"السنة المالية\"",
-   "money_min: clipped text (top): \"2010/11\" 603.06..649.27 y 78..95",
-   "money_max: ellipsis on \"الاقتصاد\"",
-   "money_max: ellipsis on \"مصر\"",
-   "money_max: clipped text (top): \"·\" 707.64..717.17 y 78..95",
-   "money_max: ellipsis on \"السنة المالية\"",
-   "money_max: clipped text (top): \"2010/11\" 603.06..649.27 y 78..95",
-   "money_at39: ellipsis on \"الاقتصاد\"",
-   "money_at39: ellipsis on \"مصر\"",
-   "money_at39: clipped text (top): \"·\" 707.64..717.17 y 78..95",
-   "money_at39: ellipsis on \"السنة المالية\"",
-   "money_at39: clipped text (top): \"2010/11\" 603.06..649.27 y 78..95",
-   "money_at78: ellipsis on \"الاقتصاد\"",
-   "money_at78: ellipsis on \"مصر\"",
-   "money_at78: clipped text (top): \"·\" 707.64..717.17 y 78..95",
-   "money_at78: ellipsis on \"السنة المالية\"",
-   "money_at78: clipped text (top): \"2010/11\" 603.06..649.27 y 78..95",
-   "money_at117: ellipsis on \"الاقتصاد\"",
-   "money_at117: ellipsis on \"مصر\"",
-   "money_at117: clipped text (top): \"·\" 707.64..717.17 y 78..95",
-   "money_at117: ellipsis on \"السنة المالية\"",
-   "money_at117: clipped text (top): \"2010/11\" 603.06..649.27 y 78..95",
-   "money_at156: ellipsis on \"الاقتصاد\"",
-   "money_at156: ellipsis on \"مصر\"",
-   "money_at156: clipped text (top): \"·\" 707.64..717.17 y 78..95",
-   "money_at156: ellipsis on \"السنة المالية\"",
-   "money_at156: clipped text (top): \"2010/11\" 603.06..649.27 y 78..95",
-   "money_pending_at39: ellipsis on \"الاقتصاد\"",
-   "money_pending_at39: ellipsis on \"مصر\"",
-   "money_pending_at39: clipped text (top): \"·\" 707.64..717.17 y 78..95",
-   "money_pending_at39: ellipsis on \"السنة المالية\"",
-   "money_pending_at39: clipped text (top): \"2010/11\" 603.06..649.27 y 78..95",
-   "money_pending_at78: ellipsis on \"الاقتصاد\"",
-   "money_pending_at78: ellipsis on \"مصر\"",
-   "money_pending_at78: clipped text (top): \"·\" 707.64..717.17 y 78..95",
-   "money_pending_at78: ellipsis on \"السنة المالية\"",
-   "money_pending_at78: clipped text (top): \"2010/11\" 603.06..649.27 y 78..95",
-   "money_pending_at117: ellipsis on \"الاقتصاد\"",
-   "money_pending_at117: ellipsis on \"مصر\"",
-   "money_pending_at117: clipped text (top): \"·\" 707.64..717.17 y 78..95",
-   "money_pending_at117: ellipsis on \"السنة المالية\"",
-   "money_pending_at117: clipped text (top): \"2010/11\" 603.06..649.27 y 78..95",
-   "money_pending_at156: ellipsis on \"الاقتصاد\"",
-   "money_pending_at156: ellipsis on \"مصر\"",
-   "money_pending_at156: clipped text (top): \"·\" 707.64..717.17 y 78..95",
-   "money_pending_at156: ellipsis on \"السنة المالية\"",
-   "money_pending_at156: clipped text (top): \"2010/11\" 603.06..649.27 y 78..95"
-  ],
+  "issues": [],
   "views": {
    "tax": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -27467,7 +27074,7 @@
     ]
    },
    "line": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -28108,7 +27715,7 @@
     ]
    },
    "subsidy": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -28744,7 +28351,7 @@
     ]
    },
    "money": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -29340,7 +28947,7 @@
     ]
    },
    "money_end": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -29953,7 +29560,7 @@
     ]
    },
    "tax_wait": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -30569,7 +30176,7 @@
     ]
    },
    "money_pending": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -31165,7 +30772,7 @@
     ]
    },
    "money_pending_end": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -31778,7 +31385,7 @@
     ]
    },
    "tax_min": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -32404,7 +32011,7 @@
     ]
    },
    "tax_max": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -33030,7 +32637,7 @@
     ]
    },
    "line_min": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -33671,7 +33278,7 @@
     ]
    },
    "line_max": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -34312,7 +33919,7 @@
     ]
    },
    "subsidy_min": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -34948,7 +34555,7 @@
     ]
    },
    "subsidy_max": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -35584,7 +35191,7 @@
     ]
    },
    "money_min": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -36180,7 +35787,7 @@
     ]
    },
    "money_max": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -36776,7 +36383,7 @@
     ]
    },
    "money_at39": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -37367,7 +36974,7 @@
     ]
    },
    "money_at78": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -37933,7 +37540,7 @@
     ]
    },
    "money_at117": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -38510,7 +38117,7 @@
     ]
    },
    "money_at156": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -39088,7 +38695,7 @@
     ]
    },
    "money_pending_at39": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -39684,7 +39291,7 @@
     ]
    },
    "money_pending_at78": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -40255,7 +39862,7 @@
     ]
    },
    "money_pending_at117": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -40832,7 +40439,7 @@
     ]
    },
    "money_pending_at156": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -41444,11 +41051,11 @@
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 120
+  "issueCount": 0
  },
  "i16": {
   "device": "852x393 side 59 bottom 21 island",
-  "renderedAt": "2026-11-07T17:41:57.677Z",
+  "renderedAt": "2026-11-07T18:20:32.530Z",
   "inputs": {
    "files": [
     "index.html",
@@ -41471,133 +41078,12 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "94e170b9267b1db6f432e71a8e1b45fc88e67c3a"
+   "sha1": "646bc47a3a099672f807a012535f395018c7a06a"
   },
-  "issues": [
-   "tax: ellipsis on \"الاقتصاد\"",
-   "tax: ellipsis on \"مصر\"",
-   "tax: clipped text (top): \"·\" 703.64..713.17 y 78..95",
-   "tax: ellipsis on \"السنة المالية\"",
-   "tax: clipped text (top): \"2010/11\" 599.06..645.27 y 78..95",
-   "line: ellipsis on \"الاقتصاد\"",
-   "line: ellipsis on \"مصر\"",
-   "line: clipped text (top): \"·\" 703.64..713.17 y 78..95",
-   "line: ellipsis on \"السنة المالية\"",
-   "line: clipped text (top): \"2010/11\" 599.06..645.27 y 78..95",
-   "subsidy: ellipsis on \"الاقتصاد\"",
-   "subsidy: ellipsis on \"مصر\"",
-   "subsidy: clipped text (top): \"·\" 703.64..713.17 y 78..95",
-   "subsidy: ellipsis on \"السنة المالية\"",
-   "subsidy: clipped text (top): \"2010/11\" 599.06..645.27 y 78..95",
-   "money: ellipsis on \"الاقتصاد\"",
-   "money: ellipsis on \"مصر\"",
-   "money: clipped text (top): \"·\" 703.64..713.17 y 78..95",
-   "money: ellipsis on \"السنة المالية\"",
-   "money: clipped text (top): \"2010/11\" 599.06..645.27 y 78..95",
-   "money_end: ellipsis on \"الاقتصاد\"",
-   "money_end: ellipsis on \"مصر\"",
-   "money_end: clipped text (top): \"·\" 703.64..713.17 y 78..95",
-   "money_end: ellipsis on \"السنة المالية\"",
-   "money_end: clipped text (top): \"2010/11\" 599.06..645.27 y 78..95",
-   "tax_wait: ellipsis on \"الاقتصاد\"",
-   "tax_wait: ellipsis on \"مصر\"",
-   "tax_wait: clipped text (top): \"·\" 703.64..713.17 y 78..95",
-   "tax_wait: ellipsis on \"السنة المالية\"",
-   "tax_wait: clipped text (top): \"2010/11\" 599.06..645.27 y 78..95",
-   "money_pending: ellipsis on \"الاقتصاد\"",
-   "money_pending: ellipsis on \"مصر\"",
-   "money_pending: clipped text (top): \"·\" 703.64..713.17 y 78..95",
-   "money_pending: ellipsis on \"السنة المالية\"",
-   "money_pending: clipped text (top): \"2010/11\" 599.06..645.27 y 78..95",
-   "money_pending_end: ellipsis on \"الاقتصاد\"",
-   "money_pending_end: ellipsis on \"مصر\"",
-   "money_pending_end: clipped text (top): \"·\" 703.64..713.17 y 78..95",
-   "money_pending_end: ellipsis on \"السنة المالية\"",
-   "money_pending_end: clipped text (top): \"2010/11\" 599.06..645.27 y 78..95",
-   "tax_min: ellipsis on \"الاقتصاد\"",
-   "tax_min: ellipsis on \"مصر\"",
-   "tax_min: clipped text (top): \"·\" 703.64..713.17 y 78..95",
-   "tax_min: ellipsis on \"السنة المالية\"",
-   "tax_min: clipped text (top): \"2010/11\" 599.06..645.27 y 78..95",
-   "tax_max: ellipsis on \"الاقتصاد\"",
-   "tax_max: ellipsis on \"مصر\"",
-   "tax_max: clipped text (top): \"·\" 703.64..713.17 y 78..95",
-   "tax_max: ellipsis on \"السنة المالية\"",
-   "tax_max: clipped text (top): \"2010/11\" 599.06..645.27 y 78..95",
-   "line_min: ellipsis on \"الاقتصاد\"",
-   "line_min: ellipsis on \"مصر\"",
-   "line_min: clipped text (top): \"·\" 703.64..713.17 y 78..95",
-   "line_min: ellipsis on \"السنة المالية\"",
-   "line_min: clipped text (top): \"2010/11\" 599.06..645.27 y 78..95",
-   "line_max: ellipsis on \"الاقتصاد\"",
-   "line_max: ellipsis on \"مصر\"",
-   "line_max: clipped text (top): \"·\" 703.64..713.17 y 78..95",
-   "line_max: ellipsis on \"السنة المالية\"",
-   "line_max: clipped text (top): \"2010/11\" 599.06..645.27 y 78..95",
-   "subsidy_min: ellipsis on \"الاقتصاد\"",
-   "subsidy_min: ellipsis on \"مصر\"",
-   "subsidy_min: clipped text (top): \"·\" 703.64..713.17 y 78..95",
-   "subsidy_min: ellipsis on \"السنة المالية\"",
-   "subsidy_min: clipped text (top): \"2010/11\" 599.06..645.27 y 78..95",
-   "subsidy_max: ellipsis on \"الاقتصاد\"",
-   "subsidy_max: ellipsis on \"مصر\"",
-   "subsidy_max: clipped text (top): \"·\" 703.64..713.17 y 78..95",
-   "subsidy_max: ellipsis on \"السنة المالية\"",
-   "subsidy_max: clipped text (top): \"2010/11\" 599.06..645.27 y 78..95",
-   "money_min: ellipsis on \"الاقتصاد\"",
-   "money_min: ellipsis on \"مصر\"",
-   "money_min: clipped text (top): \"·\" 703.64..713.17 y 78..95",
-   "money_min: ellipsis on \"السنة المالية\"",
-   "money_min: clipped text (top): \"2010/11\" 599.06..645.27 y 78..95",
-   "money_max: ellipsis on \"الاقتصاد\"",
-   "money_max: ellipsis on \"مصر\"",
-   "money_max: clipped text (top): \"·\" 703.64..713.17 y 78..95",
-   "money_max: ellipsis on \"السنة المالية\"",
-   "money_max: clipped text (top): \"2010/11\" 599.06..645.27 y 78..95",
-   "money_at42: ellipsis on \"الاقتصاد\"",
-   "money_at42: ellipsis on \"مصر\"",
-   "money_at42: clipped text (top): \"·\" 703.64..713.17 y 78..95",
-   "money_at42: ellipsis on \"السنة المالية\"",
-   "money_at42: clipped text (top): \"2010/11\" 599.06..645.27 y 78..95",
-   "money_at84: ellipsis on \"الاقتصاد\"",
-   "money_at84: ellipsis on \"مصر\"",
-   "money_at84: clipped text (top): \"·\" 703.64..713.17 y 78..95",
-   "money_at84: ellipsis on \"السنة المالية\"",
-   "money_at84: clipped text (top): \"2010/11\" 599.06..645.27 y 78..95",
-   "money_at126: ellipsis on \"الاقتصاد\"",
-   "money_at126: ellipsis on \"مصر\"",
-   "money_at126: clipped text (top): \"·\" 703.64..713.17 y 78..95",
-   "money_at126: ellipsis on \"السنة المالية\"",
-   "money_at126: clipped text (top): \"2010/11\" 599.06..645.27 y 78..95",
-   "money_at168: ellipsis on \"الاقتصاد\"",
-   "money_at168: ellipsis on \"مصر\"",
-   "money_at168: clipped text (top): \"·\" 703.64..713.17 y 78..95",
-   "money_at168: ellipsis on \"السنة المالية\"",
-   "money_at168: clipped text (top): \"2010/11\" 599.06..645.27 y 78..95",
-   "money_pending_at42: ellipsis on \"الاقتصاد\"",
-   "money_pending_at42: ellipsis on \"مصر\"",
-   "money_pending_at42: clipped text (top): \"·\" 703.64..713.17 y 78..95",
-   "money_pending_at42: ellipsis on \"السنة المالية\"",
-   "money_pending_at42: clipped text (top): \"2010/11\" 599.06..645.27 y 78..95",
-   "money_pending_at84: ellipsis on \"الاقتصاد\"",
-   "money_pending_at84: ellipsis on \"مصر\"",
-   "money_pending_at84: clipped text (top): \"·\" 703.64..713.17 y 78..95",
-   "money_pending_at84: ellipsis on \"السنة المالية\"",
-   "money_pending_at84: clipped text (top): \"2010/11\" 599.06..645.27 y 78..95",
-   "money_pending_at126: ellipsis on \"الاقتصاد\"",
-   "money_pending_at126: ellipsis on \"مصر\"",
-   "money_pending_at126: clipped text (top): \"·\" 703.64..713.17 y 78..95",
-   "money_pending_at126: ellipsis on \"السنة المالية\"",
-   "money_pending_at126: clipped text (top): \"2010/11\" 599.06..645.27 y 78..95",
-   "money_pending_at168: ellipsis on \"الاقتصاد\"",
-   "money_pending_at168: ellipsis on \"مصر\"",
-   "money_pending_at168: clipped text (top): \"·\" 703.64..713.17 y 78..95",
-   "money_pending_at168: ellipsis on \"السنة المالية\"",
-   "money_pending_at168: clipped text (top): \"2010/11\" 599.06..645.27 y 78..95"
-  ],
+  "issues": [],
   "views": {
    "tax": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -42212,7 +41698,7 @@
     ]
    },
    "line": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -42842,7 +42328,7 @@
     ]
    },
    "subsidy": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -43467,7 +42953,7 @@
     ]
    },
    "money": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -44052,7 +43538,7 @@
     ]
    },
    "money_end": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -44654,7 +44140,7 @@
     ]
    },
    "tax_wait": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -45259,7 +44745,7 @@
     ]
    },
    "money_pending": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -45844,7 +45330,7 @@
     ]
    },
    "money_pending_end": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -46446,7 +45932,7 @@
     ]
    },
    "tax_min": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -47061,7 +46547,7 @@
     ]
    },
    "tax_max": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -47676,7 +47162,7 @@
     ]
    },
    "line_min": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -48306,7 +47792,7 @@
     ]
    },
    "line_max": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -48936,7 +48422,7 @@
     ]
    },
    "subsidy_min": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -49561,7 +49047,7 @@
     ]
    },
    "subsidy_max": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -50186,7 +49672,7 @@
     ]
    },
    "money_min": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -50771,7 +50257,7 @@
     ]
    },
    "money_max": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -51356,7 +50842,7 @@
     ]
    },
    "money_at42": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -51936,7 +51422,7 @@
     ]
    },
    "money_at84": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -52486,7 +51972,7 @@
     ]
    },
    "money_at126": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -53052,7 +52538,7 @@
     ]
    },
    "money_at168": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -53634,7 +53120,7 @@
     ]
    },
    "money_pending_at42": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -54219,7 +53705,7 @@
     ]
    },
    "money_pending_at84": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -54774,7 +54260,7 @@
     ]
    },
    "money_pending_at126": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -55340,7 +54826,7 @@
     ]
    },
    "money_pending_at168": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -55956,11 +55442,11 @@
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 120
+  "issueCount": 0
  },
  "i16pro": {
   "device": "874x402 side 62 bottom 21 island",
-  "renderedAt": "2026-11-07T17:42:33.275Z",
+  "renderedAt": "2026-11-07T18:21:07.893Z",
   "inputs": {
    "files": [
     "index.html",
@@ -55983,123 +55469,12 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "94e170b9267b1db6f432e71a8e1b45fc88e67c3a"
+   "sha1": "646bc47a3a099672f807a012535f395018c7a06a"
   },
-  "issues": [
-   "tax: ellipsis on \"الاقتصاد\"",
-   "tax: ellipsis on \"مصر\"",
-   "tax: clipped text (top): \"·\" 722.64..732.17 y 78..95",
-   "tax: ellipsis on \"السنة المالية\"",
-   "tax: clipped text (top): \"2010/11\" 618.06..664.27 y 78..95",
-   "line: ellipsis on \"الاقتصاد\"",
-   "line: ellipsis on \"مصر\"",
-   "line: clipped text (top): \"·\" 722.64..732.17 y 78..95",
-   "line: ellipsis on \"السنة المالية\"",
-   "line: clipped text (top): \"2010/11\" 618.06..664.27 y 78..95",
-   "subsidy: ellipsis on \"الاقتصاد\"",
-   "subsidy: ellipsis on \"مصر\"",
-   "subsidy: clipped text (top): \"·\" 722.64..732.17 y 78..95",
-   "subsidy: ellipsis on \"السنة المالية\"",
-   "subsidy: clipped text (top): \"2010/11\" 618.06..664.27 y 78..95",
-   "money: ellipsis on \"الاقتصاد\"",
-   "money: ellipsis on \"مصر\"",
-   "money: clipped text (top): \"·\" 722.64..732.17 y 78..95",
-   "money: ellipsis on \"السنة المالية\"",
-   "money: clipped text (top): \"2010/11\" 618.06..664.27 y 78..95",
-   "money_end: ellipsis on \"الاقتصاد\"",
-   "money_end: ellipsis on \"مصر\"",
-   "money_end: clipped text (top): \"·\" 722.64..732.17 y 78..95",
-   "money_end: ellipsis on \"السنة المالية\"",
-   "money_end: clipped text (top): \"2010/11\" 618.06..664.27 y 78..95",
-   "tax_wait: ellipsis on \"الاقتصاد\"",
-   "tax_wait: ellipsis on \"مصر\"",
-   "tax_wait: clipped text (top): \"·\" 722.64..732.17 y 78..95",
-   "tax_wait: ellipsis on \"السنة المالية\"",
-   "tax_wait: clipped text (top): \"2010/11\" 618.06..664.27 y 78..95",
-   "money_pending: ellipsis on \"الاقتصاد\"",
-   "money_pending: ellipsis on \"مصر\"",
-   "money_pending: clipped text (top): \"·\" 722.64..732.17 y 78..95",
-   "money_pending: ellipsis on \"السنة المالية\"",
-   "money_pending: clipped text (top): \"2010/11\" 618.06..664.27 y 78..95",
-   "money_pending_end: ellipsis on \"الاقتصاد\"",
-   "money_pending_end: ellipsis on \"مصر\"",
-   "money_pending_end: clipped text (top): \"·\" 722.64..732.17 y 78..95",
-   "money_pending_end: ellipsis on \"السنة المالية\"",
-   "money_pending_end: clipped text (top): \"2010/11\" 618.06..664.27 y 78..95",
-   "tax_min: ellipsis on \"الاقتصاد\"",
-   "tax_min: ellipsis on \"مصر\"",
-   "tax_min: clipped text (top): \"·\" 722.64..732.17 y 78..95",
-   "tax_min: ellipsis on \"السنة المالية\"",
-   "tax_min: clipped text (top): \"2010/11\" 618.06..664.27 y 78..95",
-   "tax_max: ellipsis on \"الاقتصاد\"",
-   "tax_max: ellipsis on \"مصر\"",
-   "tax_max: clipped text (top): \"·\" 722.64..732.17 y 78..95",
-   "tax_max: ellipsis on \"السنة المالية\"",
-   "tax_max: clipped text (top): \"2010/11\" 618.06..664.27 y 78..95",
-   "line_min: ellipsis on \"الاقتصاد\"",
-   "line_min: ellipsis on \"مصر\"",
-   "line_min: clipped text (top): \"·\" 722.64..732.17 y 78..95",
-   "line_min: ellipsis on \"السنة المالية\"",
-   "line_min: clipped text (top): \"2010/11\" 618.06..664.27 y 78..95",
-   "line_max: ellipsis on \"الاقتصاد\"",
-   "line_max: ellipsis on \"مصر\"",
-   "line_max: clipped text (top): \"·\" 722.64..732.17 y 78..95",
-   "line_max: ellipsis on \"السنة المالية\"",
-   "line_max: clipped text (top): \"2010/11\" 618.06..664.27 y 78..95",
-   "subsidy_min: ellipsis on \"الاقتصاد\"",
-   "subsidy_min: ellipsis on \"مصر\"",
-   "subsidy_min: clipped text (top): \"·\" 722.64..732.17 y 78..95",
-   "subsidy_min: ellipsis on \"السنة المالية\"",
-   "subsidy_min: clipped text (top): \"2010/11\" 618.06..664.27 y 78..95",
-   "subsidy_max: ellipsis on \"الاقتصاد\"",
-   "subsidy_max: ellipsis on \"مصر\"",
-   "subsidy_max: clipped text (top): \"·\" 722.64..732.17 y 78..95",
-   "subsidy_max: ellipsis on \"السنة المالية\"",
-   "subsidy_max: clipped text (top): \"2010/11\" 618.06..664.27 y 78..95",
-   "money_min: ellipsis on \"الاقتصاد\"",
-   "money_min: ellipsis on \"مصر\"",
-   "money_min: clipped text (top): \"·\" 722.64..732.17 y 78..95",
-   "money_min: ellipsis on \"السنة المالية\"",
-   "money_min: clipped text (top): \"2010/11\" 618.06..664.27 y 78..95",
-   "money_max: ellipsis on \"الاقتصاد\"",
-   "money_max: ellipsis on \"مصر\"",
-   "money_max: clipped text (top): \"·\" 722.64..732.17 y 78..95",
-   "money_max: ellipsis on \"السنة المالية\"",
-   "money_max: clipped text (top): \"2010/11\" 618.06..664.27 y 78..95",
-   "money_at51: ellipsis on \"الاقتصاد\"",
-   "money_at51: ellipsis on \"مصر\"",
-   "money_at51: clipped text (top): \"·\" 722.64..732.17 y 78..95",
-   "money_at51: ellipsis on \"السنة المالية\"",
-   "money_at51: clipped text (top): \"2010/11\" 618.06..664.27 y 78..95",
-   "money_at102: ellipsis on \"الاقتصاد\"",
-   "money_at102: ellipsis on \"مصر\"",
-   "money_at102: clipped text (top): \"·\" 722.64..732.17 y 78..95",
-   "money_at102: ellipsis on \"السنة المالية\"",
-   "money_at102: clipped text (top): \"2010/11\" 618.06..664.27 y 78..95",
-   "money_at153: ellipsis on \"الاقتصاد\"",
-   "money_at153: ellipsis on \"مصر\"",
-   "money_at153: clipped text (top): \"·\" 722.64..732.17 y 78..95",
-   "money_at153: ellipsis on \"السنة المالية\"",
-   "money_at153: clipped text (top): \"2010/11\" 618.06..664.27 y 78..95",
-   "money_pending_at51: ellipsis on \"الاقتصاد\"",
-   "money_pending_at51: ellipsis on \"مصر\"",
-   "money_pending_at51: clipped text (top): \"·\" 722.64..732.17 y 78..95",
-   "money_pending_at51: ellipsis on \"السنة المالية\"",
-   "money_pending_at51: clipped text (top): \"2010/11\" 618.06..664.27 y 78..95",
-   "money_pending_at102: ellipsis on \"الاقتصاد\"",
-   "money_pending_at102: ellipsis on \"مصر\"",
-   "money_pending_at102: clipped text (top): \"·\" 722.64..732.17 y 78..95",
-   "money_pending_at102: ellipsis on \"السنة المالية\"",
-   "money_pending_at102: clipped text (top): \"2010/11\" 618.06..664.27 y 78..95",
-   "money_pending_at153: ellipsis on \"الاقتصاد\"",
-   "money_pending_at153: ellipsis on \"مصر\"",
-   "money_pending_at153: clipped text (top): \"·\" 722.64..732.17 y 78..95",
-   "money_pending_at153: ellipsis on \"السنة المالية\"",
-   "money_pending_at153: clipped text (top): \"2010/11\" 618.06..664.27 y 78..95"
-  ],
+  "issues": [],
   "views": {
    "tax": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -56725,7 +56100,7 @@
     ]
    },
    "line": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -57366,7 +56741,7 @@
     ]
    },
    "subsidy": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -58002,7 +57377,7 @@
     ]
    },
    "money": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -58608,7 +57983,7 @@
     ]
    },
    "money_end": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -59226,7 +58601,7 @@
     ]
    },
    "tax_wait": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -59842,7 +59217,7 @@
     ]
    },
    "money_pending": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -60448,7 +59823,7 @@
     ]
    },
    "money_pending_end": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -61066,7 +60441,7 @@
     ]
    },
    "tax_min": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -61692,7 +61067,7 @@
     ]
    },
    "tax_max": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -62318,7 +61693,7 @@
     ]
    },
    "line_min": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -62959,7 +62334,7 @@
     ]
    },
    "line_max": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -63600,7 +62975,7 @@
     ]
    },
    "subsidy_min": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -64236,7 +63611,7 @@
     ]
    },
    "subsidy_max": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -64872,7 +64247,7 @@
     ]
    },
    "money_min": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -65478,7 +64853,7 @@
     ]
    },
    "money_max": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -66084,7 +65459,7 @@
     ]
    },
    "money_at51": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -66674,7 +66049,7 @@
     ]
    },
    "money_at102": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -67231,7 +66606,7 @@
     ]
    },
    "money_at153": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -67829,7 +67204,7 @@
     ]
    },
    "money_pending_at51": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -68424,7 +67799,7 @@
     ]
    },
    "money_pending_at102": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -68981,7 +68356,7 @@
     ]
    },
    "money_pending_at153": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -69613,11 +68988,11 @@
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 110
+  "issueCount": 0
  },
  "i11": {
   "device": "896x414 side 48 bottom 21 notch",
-  "renderedAt": "2026-11-07T17:43:06.411Z",
+  "renderedAt": "2026-11-07T18:21:41.695Z",
   "inputs": {
    "files": [
     "index.html",
@@ -69640,113 +69015,12 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "94e170b9267b1db6f432e71a8e1b45fc88e67c3a"
+   "sha1": "646bc47a3a099672f807a012535f395018c7a06a"
   },
-  "issues": [
-   "tax: ellipsis on \"الاقتصاد\"",
-   "tax: ellipsis on \"مصر\"",
-   "tax: clipped text (top): \"·\" 758.64..768.17 y 78..95",
-   "tax: ellipsis on \"السنة المالية\"",
-   "tax: clipped text (top): \"2010/11\" 654.06..700.27 y 78..95",
-   "line: ellipsis on \"الاقتصاد\"",
-   "line: ellipsis on \"مصر\"",
-   "line: clipped text (top): \"·\" 758.64..768.17 y 78..95",
-   "line: ellipsis on \"السنة المالية\"",
-   "line: clipped text (top): \"2010/11\" 654.06..700.27 y 78..95",
-   "subsidy: ellipsis on \"الاقتصاد\"",
-   "subsidy: ellipsis on \"مصر\"",
-   "subsidy: clipped text (top): \"·\" 758.64..768.17 y 78..95",
-   "subsidy: ellipsis on \"السنة المالية\"",
-   "subsidy: clipped text (top): \"2010/11\" 654.06..700.27 y 78..95",
-   "money: ellipsis on \"الاقتصاد\"",
-   "money: ellipsis on \"مصر\"",
-   "money: clipped text (top): \"·\" 758.64..768.17 y 78..95",
-   "money: ellipsis on \"السنة المالية\"",
-   "money: clipped text (top): \"2010/11\" 654.06..700.27 y 78..95",
-   "money_end: ellipsis on \"الاقتصاد\"",
-   "money_end: ellipsis on \"مصر\"",
-   "money_end: clipped text (top): \"·\" 758.64..768.17 y 78..95",
-   "money_end: ellipsis on \"السنة المالية\"",
-   "money_end: clipped text (top): \"2010/11\" 654.06..700.27 y 78..95",
-   "tax_wait: ellipsis on \"الاقتصاد\"",
-   "tax_wait: ellipsis on \"مصر\"",
-   "tax_wait: clipped text (top): \"·\" 758.64..768.17 y 78..95",
-   "tax_wait: ellipsis on \"السنة المالية\"",
-   "tax_wait: clipped text (top): \"2010/11\" 654.06..700.27 y 78..95",
-   "money_pending: ellipsis on \"الاقتصاد\"",
-   "money_pending: ellipsis on \"مصر\"",
-   "money_pending: clipped text (top): \"·\" 758.64..768.17 y 78..95",
-   "money_pending: ellipsis on \"السنة المالية\"",
-   "money_pending: clipped text (top): \"2010/11\" 654.06..700.27 y 78..95",
-   "money_pending_end: ellipsis on \"الاقتصاد\"",
-   "money_pending_end: ellipsis on \"مصر\"",
-   "money_pending_end: clipped text (top): \"·\" 758.64..768.17 y 78..95",
-   "money_pending_end: ellipsis on \"السنة المالية\"",
-   "money_pending_end: clipped text (top): \"2010/11\" 654.06..700.27 y 78..95",
-   "tax_min: ellipsis on \"الاقتصاد\"",
-   "tax_min: ellipsis on \"مصر\"",
-   "tax_min: clipped text (top): \"·\" 758.64..768.17 y 78..95",
-   "tax_min: ellipsis on \"السنة المالية\"",
-   "tax_min: clipped text (top): \"2010/11\" 654.06..700.27 y 78..95",
-   "tax_max: ellipsis on \"الاقتصاد\"",
-   "tax_max: ellipsis on \"مصر\"",
-   "tax_max: clipped text (top): \"·\" 758.64..768.17 y 78..95",
-   "tax_max: ellipsis on \"السنة المالية\"",
-   "tax_max: clipped text (top): \"2010/11\" 654.06..700.27 y 78..95",
-   "line_min: ellipsis on \"الاقتصاد\"",
-   "line_min: ellipsis on \"مصر\"",
-   "line_min: clipped text (top): \"·\" 758.64..768.17 y 78..95",
-   "line_min: ellipsis on \"السنة المالية\"",
-   "line_min: clipped text (top): \"2010/11\" 654.06..700.27 y 78..95",
-   "line_max: ellipsis on \"الاقتصاد\"",
-   "line_max: ellipsis on \"مصر\"",
-   "line_max: clipped text (top): \"·\" 758.64..768.17 y 78..95",
-   "line_max: ellipsis on \"السنة المالية\"",
-   "line_max: clipped text (top): \"2010/11\" 654.06..700.27 y 78..95",
-   "subsidy_min: ellipsis on \"الاقتصاد\"",
-   "subsidy_min: ellipsis on \"مصر\"",
-   "subsidy_min: clipped text (top): \"·\" 758.64..768.17 y 78..95",
-   "subsidy_min: ellipsis on \"السنة المالية\"",
-   "subsidy_min: clipped text (top): \"2010/11\" 654.06..700.27 y 78..95",
-   "subsidy_max: ellipsis on \"الاقتصاد\"",
-   "subsidy_max: ellipsis on \"مصر\"",
-   "subsidy_max: clipped text (top): \"·\" 758.64..768.17 y 78..95",
-   "subsidy_max: ellipsis on \"السنة المالية\"",
-   "subsidy_max: clipped text (top): \"2010/11\" 654.06..700.27 y 78..95",
-   "money_min: ellipsis on \"الاقتصاد\"",
-   "money_min: ellipsis on \"مصر\"",
-   "money_min: clipped text (top): \"·\" 758.64..768.17 y 78..95",
-   "money_min: ellipsis on \"السنة المالية\"",
-   "money_min: clipped text (top): \"2010/11\" 654.06..700.27 y 78..95",
-   "money_max: ellipsis on \"الاقتصاد\"",
-   "money_max: ellipsis on \"مصر\"",
-   "money_max: clipped text (top): \"·\" 758.64..768.17 y 78..95",
-   "money_max: ellipsis on \"السنة المالية\"",
-   "money_max: clipped text (top): \"2010/11\" 654.06..700.27 y 78..95",
-   "money_at63: ellipsis on \"الاقتصاد\"",
-   "money_at63: ellipsis on \"مصر\"",
-   "money_at63: clipped text (top): \"·\" 758.64..768.17 y 78..95",
-   "money_at63: ellipsis on \"السنة المالية\"",
-   "money_at63: clipped text (top): \"2010/11\" 654.06..700.27 y 78..95",
-   "money_at126: ellipsis on \"الاقتصاد\"",
-   "money_at126: ellipsis on \"مصر\"",
-   "money_at126: clipped text (top): \"·\" 758.64..768.17 y 78..95",
-   "money_at126: ellipsis on \"السنة المالية\"",
-   "money_at126: clipped text (top): \"2010/11\" 654.06..700.27 y 78..95",
-   "money_pending_at63: ellipsis on \"الاقتصاد\"",
-   "money_pending_at63: ellipsis on \"مصر\"",
-   "money_pending_at63: clipped text (top): \"·\" 758.64..768.17 y 78..95",
-   "money_pending_at63: ellipsis on \"السنة المالية\"",
-   "money_pending_at63: clipped text (top): \"2010/11\" 654.06..700.27 y 78..95",
-   "money_pending_at126: ellipsis on \"الاقتصاد\"",
-   "money_pending_at126: ellipsis on \"مصر\"",
-   "money_pending_at126: clipped text (top): \"·\" 758.64..768.17 y 78..95",
-   "money_pending_at126: ellipsis on \"السنة المالية\"",
-   "money_pending_at126: clipped text (top): \"2010/11\" 654.06..700.27 y 78..95"
-  ],
+  "issues": [],
   "views": {
    "tax": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -70371,7 +69645,7 @@
     ]
    },
    "line": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -71011,7 +70285,7 @@
     ]
    },
    "subsidy": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -71646,7 +70920,7 @@
     ]
    },
    "money": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -72276,7 +71550,7 @@
     ]
    },
    "money_end": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -72908,7 +72182,7 @@
     ]
    },
    "tax_wait": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -73523,7 +72797,7 @@
     ]
    },
    "money_pending": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -74158,7 +73432,7 @@
     ]
    },
    "money_pending_end": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -74790,7 +74064,7 @@
     ]
    },
    "tax_min": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -75415,7 +74689,7 @@
     ]
    },
    "tax_max": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -76040,7 +75314,7 @@
     ]
    },
    "line_min": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -76680,7 +75954,7 @@
     ]
    },
    "line_max": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -77320,7 +76594,7 @@
     ]
    },
    "subsidy_min": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -77955,7 +77229,7 @@
     ]
    },
    "subsidy_max": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -78590,7 +77864,7 @@
     ]
    },
    "money_min": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -79220,7 +78494,7 @@
     ]
    },
    "money_max": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -79850,7 +79124,7 @@
     ]
    },
    "money_at63": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -80434,7 +79708,7 @@
     ]
    },
    "money_at126": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -81031,7 +80305,7 @@
     ]
    },
    "money_pending_at63": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -81620,7 +80894,7 @@
     ]
    },
    "money_pending_at126": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -82251,11 +81525,11 @@
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 100
+  "issueCount": 0
  },
  "i16promax": {
   "device": "956x440 side 62 bottom 21 island",
-  "renderedAt": "2026-11-07T17:43:37.431Z",
+  "renderedAt": "2026-11-07T18:22:13.688Z",
   "inputs": {
    "files": [
     "index.html",
@@ -82278,103 +81552,12 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "94e170b9267b1db6f432e71a8e1b45fc88e67c3a"
+   "sha1": "646bc47a3a099672f807a012535f395018c7a06a"
   },
-  "issues": [
-   "tax: ellipsis on \"الاقتصاد\"",
-   "tax: ellipsis on \"مصر\"",
-   "tax: clipped text (top): \"·\" 804.64..814.17 y 78..95",
-   "tax: ellipsis on \"السنة المالية\"",
-   "tax: clipped text (top): \"2010/11\" 700.06..746.27 y 78..95",
-   "line: ellipsis on \"الاقتصاد\"",
-   "line: ellipsis on \"مصر\"",
-   "line: clipped text (top): \"·\" 804.64..814.17 y 78..95",
-   "line: ellipsis on \"السنة المالية\"",
-   "line: clipped text (top): \"2010/11\" 700.06..746.27 y 78..95",
-   "subsidy: ellipsis on \"الاقتصاد\"",
-   "subsidy: ellipsis on \"مصر\"",
-   "subsidy: clipped text (top): \"·\" 804.64..814.17 y 78..95",
-   "subsidy: ellipsis on \"السنة المالية\"",
-   "subsidy: clipped text (top): \"2010/11\" 700.06..746.27 y 78..95",
-   "money: ellipsis on \"الاقتصاد\"",
-   "money: ellipsis on \"مصر\"",
-   "money: clipped text (top): \"·\" 804.64..814.17 y 78..95",
-   "money: ellipsis on \"السنة المالية\"",
-   "money: clipped text (top): \"2010/11\" 700.06..746.27 y 78..95",
-   "money_end: ellipsis on \"الاقتصاد\"",
-   "money_end: ellipsis on \"مصر\"",
-   "money_end: clipped text (top): \"·\" 804.64..814.17 y 78..95",
-   "money_end: ellipsis on \"السنة المالية\"",
-   "money_end: clipped text (top): \"2010/11\" 700.06..746.27 y 78..95",
-   "tax_wait: ellipsis on \"الاقتصاد\"",
-   "tax_wait: ellipsis on \"مصر\"",
-   "tax_wait: clipped text (top): \"·\" 804.64..814.17 y 78..95",
-   "tax_wait: ellipsis on \"السنة المالية\"",
-   "tax_wait: clipped text (top): \"2010/11\" 700.06..746.27 y 78..95",
-   "money_pending: ellipsis on \"الاقتصاد\"",
-   "money_pending: ellipsis on \"مصر\"",
-   "money_pending: clipped text (top): \"·\" 804.64..814.17 y 78..95",
-   "money_pending: ellipsis on \"السنة المالية\"",
-   "money_pending: clipped text (top): \"2010/11\" 700.06..746.27 y 78..95",
-   "money_pending_end: ellipsis on \"الاقتصاد\"",
-   "money_pending_end: ellipsis on \"مصر\"",
-   "money_pending_end: clipped text (top): \"·\" 804.64..814.17 y 78..95",
-   "money_pending_end: ellipsis on \"السنة المالية\"",
-   "money_pending_end: clipped text (top): \"2010/11\" 700.06..746.27 y 78..95",
-   "tax_min: ellipsis on \"الاقتصاد\"",
-   "tax_min: ellipsis on \"مصر\"",
-   "tax_min: clipped text (top): \"·\" 804.64..814.17 y 78..95",
-   "tax_min: ellipsis on \"السنة المالية\"",
-   "tax_min: clipped text (top): \"2010/11\" 700.06..746.27 y 78..95",
-   "tax_max: ellipsis on \"الاقتصاد\"",
-   "tax_max: ellipsis on \"مصر\"",
-   "tax_max: clipped text (top): \"·\" 804.64..814.17 y 78..95",
-   "tax_max: ellipsis on \"السنة المالية\"",
-   "tax_max: clipped text (top): \"2010/11\" 700.06..746.27 y 78..95",
-   "line_min: ellipsis on \"الاقتصاد\"",
-   "line_min: ellipsis on \"مصر\"",
-   "line_min: clipped text (top): \"·\" 804.64..814.17 y 78..95",
-   "line_min: ellipsis on \"السنة المالية\"",
-   "line_min: clipped text (top): \"2010/11\" 700.06..746.27 y 78..95",
-   "line_max: ellipsis on \"الاقتصاد\"",
-   "line_max: ellipsis on \"مصر\"",
-   "line_max: clipped text (top): \"·\" 804.64..814.17 y 78..95",
-   "line_max: ellipsis on \"السنة المالية\"",
-   "line_max: clipped text (top): \"2010/11\" 700.06..746.27 y 78..95",
-   "subsidy_min: ellipsis on \"الاقتصاد\"",
-   "subsidy_min: ellipsis on \"مصر\"",
-   "subsidy_min: clipped text (top): \"·\" 804.64..814.17 y 78..95",
-   "subsidy_min: ellipsis on \"السنة المالية\"",
-   "subsidy_min: clipped text (top): \"2010/11\" 700.06..746.27 y 78..95",
-   "subsidy_max: ellipsis on \"الاقتصاد\"",
-   "subsidy_max: ellipsis on \"مصر\"",
-   "subsidy_max: clipped text (top): \"·\" 804.64..814.17 y 78..95",
-   "subsidy_max: ellipsis on \"السنة المالية\"",
-   "subsidy_max: clipped text (top): \"2010/11\" 700.06..746.27 y 78..95",
-   "money_min: ellipsis on \"الاقتصاد\"",
-   "money_min: ellipsis on \"مصر\"",
-   "money_min: clipped text (top): \"·\" 804.64..814.17 y 78..95",
-   "money_min: ellipsis on \"السنة المالية\"",
-   "money_min: clipped text (top): \"2010/11\" 700.06..746.27 y 78..95",
-   "money_max: ellipsis on \"الاقتصاد\"",
-   "money_max: ellipsis on \"مصر\"",
-   "money_max: clipped text (top): \"·\" 804.64..814.17 y 78..95",
-   "money_max: ellipsis on \"السنة المالية\"",
-   "money_max: clipped text (top): \"2010/11\" 700.06..746.27 y 78..95",
-   "money_at89: ellipsis on \"الاقتصاد\"",
-   "money_at89: ellipsis on \"مصر\"",
-   "money_at89: clipped text (top): \"·\" 804.64..814.17 y 78..95",
-   "money_at89: ellipsis on \"السنة المالية\"",
-   "money_at89: clipped text (top): \"2010/11\" 700.06..746.27 y 78..95",
-   "money_pending_at89: ellipsis on \"الاقتصاد\"",
-   "money_pending_at89: ellipsis on \"مصر\"",
-   "money_pending_at89: clipped text (top): \"·\" 804.64..814.17 y 78..95",
-   "money_pending_at89: ellipsis on \"السنة المالية\"",
-   "money_pending_at89: clipped text (top): \"2010/11\" 700.06..746.27 y 78..95"
-  ],
+  "issues": [],
   "views": {
    "tax": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -82999,7 +82182,7 @@
     ]
    },
    "line": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -83639,7 +82822,7 @@
     ]
    },
    "subsidy": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -84274,7 +83457,7 @@
     ]
    },
    "money": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -84925,7 +84108,7 @@
     ]
    },
    "money_end": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -85562,7 +84745,7 @@
     ]
    },
    "tax_wait": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -86177,7 +85360,7 @@
     ]
    },
    "money_pending": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -86833,7 +86016,7 @@
     ]
    },
    "money_pending_end": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -87470,7 +86653,7 @@
     ]
    },
    "tax_min": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -88095,7 +87278,7 @@
     ]
    },
    "tax_max": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -88720,7 +87903,7 @@
     ]
    },
    "line_min": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -89360,7 +88543,7 @@
     ]
    },
    "line_max": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -90000,7 +89183,7 @@
     ]
    },
    "subsidy_min": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -90635,7 +89818,7 @@
     ]
    },
    "subsidy_max": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -91270,7 +90453,7 @@
     ]
    },
    "money_min": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -91921,7 +91104,7 @@
     ]
    },
    "money_max": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -92572,7 +91755,7 @@
     ]
    },
    "money_at89": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -93194,7 +92377,7 @@
     ]
    },
    "money_pending_at89": {
-    "issueCount": 5,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -93855,6 +93038,6 @@
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 90
+  "issueCount": 0
  }
 }
