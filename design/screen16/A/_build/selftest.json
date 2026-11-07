@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-07T18:36:07.333Z",
+ "ranAt": "2026-11-07T20:23:44.133Z",
  "inputs": {
   "files": [
    "index.html",
@@ -22,7 +22,7 @@
    "header_cairo.jpg",
    "map_overlay_cairo.svg"
   ],
-  "sha1": "ae9a2f29586f1eb74aed26faca690d76ce1d6bcb"
+  "sha1": "f600efc5dc8fd47d1c9dee102eb1039c20073acc"
  },
  "cleanIssues": {
   "i16promax": [],
@@ -275,6 +275,13 @@
     "white touch off: .r-tile color rgb(127, 233, 255) (want rgb(234, 242, 247))",
     "white touch off: .r-tile color rgb(127, 233, 255) (want rgb(234, 242, 247))",
     "white touch off: .r-tile color rgb(127, 233, 255) (want rgb(234, 242, 247))"
+   ]
+  },
+  {
+   "name": "close says only إغلاق",
+   "ok": true,
+   "sample": [
+    "a11y: the close says only «إغلاق»"
    ]
   },
   {

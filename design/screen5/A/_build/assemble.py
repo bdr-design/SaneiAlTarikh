@@ -111,6 +111,8 @@ sub('.then(fitTop).then(sizeSheet).then(placeSheet).then(fitSheet).then(placeMap
 # the mode chip gives way to the country's name (T-024): where the header row cannot hold the whole name and the chip,
 # the chip keeps its icon and its words leave the screen (still read by VoiceOver); Egypt's name never needs it
 sub('  function fitBody() {', '''  function capFit() {
+    /* the states view's VoiceOver labels (a row whose words change there, e.g. an unaffordable change) */
+    if (document.documentElement.dataset.states === '1') Array.prototype.forEach.call(document.querySelectorAll('[data-aria-alt]'), function (e) { e.setAttribute('aria-label', e.dataset.ariaAlt); });
     var row = $('.r-hd .r-row'), nm = row && row.querySelector('.r-name');
     if (!nm) return;
     row.classList.remove('cap-icon');

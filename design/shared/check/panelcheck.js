@@ -477,6 +477,8 @@ module.exports = function makeChecker(cfg) {
       if (missW.length || missN.length) issues.push(`a11y: «${(e.getAttribute('aria-label') || '').slice(0, 24)}» does not read all it shows: ${missW.concat(missN).slice(0, 4).join(' ')}`); });
     // a trend line's arrow agrees with its sign
     qa('.sheet .r-kr').forEach((k) => { const u = k.querySelector('use'), n = nums(k.innerText)[0]; if (u && n !== undefined && n !== 0 && /#t-(up|down)/.test(u.getAttribute('href')) && (u.getAttribute('href') === '#t-up') !== (n > 0)) issues.push(`the arrow of «${T(k)}» does not agree with its sign`); });
+    // the close says more than «إغلاق»: where it returns, or what closing does (T-025)
+    { const x = q('.sheet .r-x'); if (x && (x.getAttribute('aria-label') || '').trim() === 'إغلاق') issues.push('a11y: the close says only «إغلاق»'); }
     // a VoiceOver label only on an element that can carry a name (a role, a control, a landmark): VoiceOver skips the
     // label of a plain element and reads its pieces instead
     qa('.sheet [aria-label]').filter((e) => !e.getAttribute('role') && !['BUTTON', 'SECTION', 'NAV', 'DL', 'A', 'IMG'].includes(e.tagName) && !e.classList.contains('tap'))
@@ -688,6 +690,7 @@ module.exports = function makeChecker(cfg) {
       ['why without its subject', d, '', '', /a11y: «لماذا؟» does not name its subject/, () => { document.querySelectorAll('.r-why')[1].removeAttribute('aria-label'); }],
       ['amber value without its icon', d, '', '', /colour alone: .* \(its label's icon is not in its colour\)/, () => { const b = document.querySelector('.r-kv b'); b.classList.add('r-amber'); }],
       ['chip arrow against its sign', d, '', '', /the chip's arrow does not agree with its sign|does not say the chip's direction/, () => { const u = document.querySelector('.r-act .r-chip use'); if (u) u.setAttribute('href', u.getAttribute('href') === '#t-up' ? '#t-down' : '#t-up'); }],
+      ['close says only إغلاق', d, '', '', /a11y: the close says only «إغلاق»/, () => { document.querySelector('.sheet .r-x').setAttribute('aria-label', 'إغلاق'); }],
       ['row read in part', d, '', '', /does not read all it shows/, () => { const r = [...document.querySelectorAll('.sheet [role="img"], .sheet .tap[role="button"]:not(.r-tab), .sheet .r-act[aria-label]')].find((e) => e.getClientRects().length && e.innerText.trim()); r.setAttribute('aria-label', 'جزء'); }],
       ['a long headline label', d, '', '', /a cell runs out of its row|a headline cell's text runs out of its cell/, () => { const b = [...document.querySelectorAll('.r-body')].find((e) => e.getClientRects().length); const s = document.createElement('div'); s.className = 'r-kpis'; s.innerHTML = '<div class="r-kpi"><span class="r-kl">عنوان طويل جدًا لا يتسع لخانته أبدًا</span><span class="r-kv"><b class="ltr">1</b></span></div>'.repeat(3); b.prepend(s); }],
       ['text wider than its box', d, '', '', /text wider than its box/, () => { const e = [...document.querySelectorAll('.r-body .r-at > span, .r-body .r-sec h3')].find((x) => x.getClientRects().length); e.style.cssText = 'display: block; width: 20px; white-space: nowrap; overflow: visible'; }],

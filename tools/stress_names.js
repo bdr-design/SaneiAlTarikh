@@ -81,6 +81,8 @@ const subPage = (pg, t, s) => inSheet(sub(t, s), s);
                 if (tb.width && (tb.left < bb.left - 0.5 || tb.right > bb.right + 0.5)) iss.push(`body text runs out of its panel: ${e.textContent.trim().slice(0, 40)}`); }); });
             const hd = document.querySelector('.sheet .r-hd'); if (hd) { const sb = document.querySelector('.sheet').getBoundingClientRect();
               const kids = [...hd.querySelectorAll('.r-flag, .r-name, .r-cap, .r-sub, .s-emb, .r-x')].filter(vis).map((e) => [e, e.getBoundingClientRect()]);
+              // the state panel's mode chip as its icon alone is a 20 pt circle (T-025's boxes-and-type review)
+              hd.querySelectorAll('.cap-icon .r-cap').forEach((e) => { const b = e.getBoundingClientRect(); if (vis(e) && (Math.abs(b.width - 20) > 0.5 || Math.abs(b.height - 20) > 0.5)) iss.push(`the icon chip is ${b.width.toFixed(1)}x${b.height.toFixed(1)} (want 20x20)`); });
               // the header's controls keep their sizes (the close button, the emblem, the flag)
               [['.r-x', 32, 32], ['.s-emb', 32, 32], ['.r-flag', 40, 30]].forEach(([sel, w, h]) => hd.querySelectorAll(sel).forEach((e) => { const b = e.getBoundingClientRect();
                 if (vis(e) && (Math.abs(b.width - w) > 0.5 || Math.abs(b.height - h) > 0.5)) iss.push(`header ${sel} ${b.width.toFixed(1)}x${b.height.toFixed(1)} (want ${w}x${h})`); }));

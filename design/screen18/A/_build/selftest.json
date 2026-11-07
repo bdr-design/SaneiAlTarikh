@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-07T18:04:41.774Z",
+ "ranAt": "2026-11-07T19:52:05.182Z",
  "inputs": {
   "files": [
    "index.html",
@@ -22,7 +22,7 @@
    "../../shared/map_mena_d1_overlay.svg",
    "map_overlay_cairo.svg"
   ],
-  "sha1": "68195cafbc3ad328bd4bcf9ec265d29b0e6fcb2e"
+  "sha1": "00e58cf3caf8b9d38d1e974334fddc3520153735"
  },
  "cleanIssues": {
   "i16promax": [],
@@ -318,6 +318,14 @@
     "brief text not fully visible: بداية الحملة",
     "contrast 2.11 for \"+14\"",
     "contrast 2.11 for \"منذ\""
+   ]
+  },
+  {
+   "name": "close says only إغلاق",
+   "ok": true,
+   "sample": [
+    "a11y: the close says only «إغلاق»",
+    "a11y: the close button does not say it returns to the map"
    ]
   },
   {
@@ -646,6 +654,7 @@
    "name": "close silent",
    "ok": true,
    "sample": [
+    "a11y: the close says only «إغلاق»",
     "a11y: the close button does not say it returns to the map"
    ]
   },

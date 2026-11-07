@@ -464,6 +464,9 @@
   .map svg.sel { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
   .sel path { stroke-linejoin: round; }
   .sel .pin rect { filter: drop-shadow(0 2px 4px rgba(0, 0, 0, .4)); }
+  /* a link row's own hit area when the row also holds a button (T-025): the row is no control, its title area is; it lays
+     out as if absent */
+  .r-lhit { display: contents; }
   /* ================= Section identity and white touches (owner: «كمل الباقي بدقه», 2026-10-21) =================
      One identity colour per dock section, kept out of the hues that carry meaning everywhere (teal = the player's
      country and selected states in map panels, cyan = interactive, blue = positive, amber = warning, red = danger).
@@ -583,8 +586,10 @@
   [data-states="1"] .s-short-1 .s-cost { color: var(--amber); }
   /* the mode chip as its icon alone where the header row needs the room for a long country name (T-024, capFit); its
      words stay for VoiceOver */
-  .cap-icon .r-cap { padding-inline: 5px; }
+  .cap-icon .r-cap { padding-inline: var(--s1); }   /* a 20 pt circle, the icon 5 pt from every edge */
   .cap-icon .r-cap .r-capt, .cap-icon .r-cap .lbl { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+  /* words for VoiceOver only (T-025): hidden from sight, read in place */
+  .s-vh { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 </style>
 </head>
 <body>
@@ -794,7 +799,7 @@
           <div class="r-sub">الرئيس محمد حسني مبارك<span class="r-dot"> · </span>منذ <span class="ltr">1981</span></div>
         </div>
         <span class="s-emb" aria-hidden="true"><svg class="i"><use href="#i-state"/></svg></span>
-        <button class="r-x tap" aria-label="إغلاق"><svg class="i"><use href="#i-close"/></svg></button>
+        <button class="r-x tap" aria-label="إغلاق، العودة إلى الخريطة"><svg class="i"><use href="#i-close"/></svg></button>
       </header>
 
       <nav class="r-tabs" role="tablist" aria-label="أقسام الدولة">
@@ -808,22 +813,22 @@
       <div class="r-body" data-tab="overview">
         <div class="r-kpis">
           <div class="r-kpi">
-            <span class="r-kl"><svg class="i"><use href="#i-capital"/></svg>رأس المال السياسي</span>
+            <span class="r-kl"><svg class="i" role="img" aria-label="من رأس المال السياسي"><use href="#i-capital"/></svg>رأس المال السياسي</span>
             <span class="r-kv"><b class="ltr"><span class="s-def">86</span><span class="s-alt">45</span></b></span>
             <span class="r-kr r-blue"><span class="ltr">+4</span> شهريًا</span>
-            <button class="r-why tap">لماذا؟</button>
+            <button class="r-why tap" aria-label="لماذا؟ رأس المال السياسي">لماذا؟</button>
           </div>
           <div class="r-kpi">
             <span class="r-kl"><svg class="i"><use href="#i-anchor"/></svg>الاستقرار</span>
             <span class="r-kv"><b class="ltr">58%</b></span>
             <span class="r-kr"><span class="ltr">−1</span> شهريًا</span>
-            <button class="r-why tap">لماذا؟</button>
+            <button class="r-why tap" aria-label="لماذا؟ الاستقرار">لماذا؟</button>
           </div>
           <div class="r-kpi">
             <span class="r-kl"><svg class="i r-amber"><use href="#i-seal"/></svg>الشرعية</span>
             <span class="r-kv"><b class="ltr r-amber">44</b><span>/ <span class="ltr">100</span></span></span>
             <span class="r-kr"><span class="ltr">−2</span> شهريًا</span>
-            <button class="r-why tap">لماذا؟</button>
+            <button class="r-why tap" aria-label="لماذا؟ الشرعية">لماذا؟</button>
           </div>
         </div>
 
@@ -834,18 +839,18 @@
           <div class="r-sc"><dt>الطوارئ</dt><dd class="r-amber">محدودة منذ <span class="ltr">2010</span></dd></div>
         </dl>
 
-        <div class="r-acts" aria-label="قرارات">
-          <button class="r-act tap r-first s-short-1">
+        <div class="r-acts" role="group" aria-label="قرارات">
+          <button class="r-act tap r-first s-short-1" aria-label="رفع حالة الطوارئ: الكلفة 60 من رأس المال السياسي. ترفع الشرعية، أفضل" data-aria-alt="رفع حالة الطوارئ: يلزم 60 من رأس المال السياسي ولديك 45، لا يكفي. ترفع الشرعية، أفضل">
             <span class="r-tile"><svg class="i"><use href="#i-unlock"/></svg></span>
-            <span class="r-at"><b>رفع حالة الطوارئ</b><span class="s-cost s-def">الكلفة: <span class="ltr">60</span><svg class="i"><use href="#i-capital"/></svg></span><span class="s-cost s-alt">يلزم <span class="ltr">60</span><svg class="i"><use href="#i-capital"/></svg> · لديك <span class="ltr">45</span></span></span>
+            <span class="r-at"><b>رفع حالة الطوارئ</b><span class="s-cost s-def">الكلفة: <span class="ltr">60</span><svg class="i" role="img" aria-label="من رأس المال السياسي"><use href="#i-capital"/></svg></span><span class="s-cost s-alt">يلزم <span class="ltr">60</span><svg class="i" role="img" aria-label="من رأس المال السياسي"><use href="#i-capital"/></svg> · لديك <span class="ltr">45</span><span class="s-vh">، لا يكفي</span></span></span>
             <span class="r-chip"><svg class="r-arr"><use href="#t-up"/></svg>الشرعية</span>
           </button>
-          <button class="r-act tap s-def">
+          <button class="r-act tap s-def" aria-label="تعديل وزاري: الكلفة 25 من رأس المال السياسي، مرة في السنة. تهدئة مؤقتة">
             <span class="r-tile"><svg class="i"><use href="#i-swap"/></svg></span>
-            <span class="r-at"><b>تعديل وزاري</b><span class="s-cost">الكلفة: <span class="ltr">25</span><svg class="i"><use href="#i-capital"/></svg> · مرة في السنة</span></span>
+            <span class="r-at"><b>تعديل وزاري</b><span class="s-cost">الكلفة: <span class="ltr">25</span><svg class="i" role="img" aria-label="من رأس المال السياسي"><use href="#i-capital"/></svg> · مرة في السنة</span></span>
             <span class="r-chip">تهدئة مؤقتة</span>
           </button>
-          <button class="r-act tap s-wait s-alt" aria-disabled="true">
+          <button class="r-act tap s-wait s-alt" aria-disabled="true" aria-label="تعديل وزاري: متاح في يناير 2012. تهدئة مؤقتة">
             <span class="r-tile"><svg class="i"><use href="#i-swap"/></svg></span>
             <span class="r-at"><b>تعديل وزاري</b><span>متاح في يناير <span class="ltr">2012</span></span></span>
             <span class="r-chip">تهدئة مؤقتة</span>
@@ -859,7 +864,7 @@
           <h3>المناصب</h3>
           <div class="s-off"><span class="r-tile"><svg class="i"><use href="#i-podium"/></svg></span>
             <span class="r-at"><b>محمد حسني مبارك</b><span>رئيس الجمهورية · العمر <span class="ltr">82</span> · منذ <span class="ltr">1981</span></span></span>
-            <button class="r-btn tap">تغيير الاسم</button></div>
+            <button class="r-btn tap" aria-label="تغيير الاسم: محمد حسني مبارك">تغيير الاسم</button></div>
           <div class="s-off"><span class="r-tile"><svg class="i"><use href="#i-briefcase"/></svg></span>
             <span class="r-at"><b>أحمد نظيف</b><span>رئيس الوزراء · منذ <span class="ltr">2004</span></span></span></div>
           <div class="s-off"><span class="r-tile"><svg class="i"><use href="#i-person"/></svg></span>
@@ -883,41 +888,41 @@
         <section class="r-sec">
           <h3>الأمن والنظام</h3>
           <div class="s-pol s-short-1">
-            <span class="r-at"><b>حالة الطوارئ</b><span class="s-cost s-def">كلفة التغيير: <span class="ltr">60</span><svg class="i"><use href="#i-capital"/></svg></span><span class="s-cost s-alt">يلزم <span class="ltr">60</span><svg class="i"><use href="#i-capital"/></svg> · لديك <span class="ltr">45</span></span></span>
+            <span class="r-at"><b>حالة الطوارئ</b><span class="s-cost s-def">كلفة التغيير: <span class="ltr">60</span><svg class="i" role="img" aria-label="من رأس المال السياسي"><use href="#i-capital"/></svg></span><span class="s-cost s-alt">يلزم <span class="ltr">60</span><svg class="i" role="img" aria-label="من رأس المال السياسي"><use href="#i-capital"/></svg> · لديك <span class="ltr">45</span><span class="s-vh">، لا يكفي</span></span></span>
             <span class="s-seg" role="radiogroup" aria-label="حالة الطوارئ"><button class="s-sg tap" role="radio" aria-checked="false">ملغاة</button><button class="s-sg tap on" role="radio" aria-checked="true">محدودة</button><button class="s-sg tap" role="radio" aria-checked="false">شاملة</button></span>
           </div>
           <div class="s-pol">
-            <span class="r-at"><b>التجنيد</b><span class="s-cost">كلفة التغيير: <span class="ltr">50</span><svg class="i"><use href="#i-capital"/></svg></span></span>
+            <span class="r-at"><b>التجنيد</b><span class="s-cost">كلفة التغيير: <span class="ltr">50</span><svg class="i" role="img" aria-label="من رأس المال السياسي"><use href="#i-capital"/></svg></span></span>
             <span class="s-seg" role="radiogroup" aria-label="التجنيد"><button class="s-sg tap" role="radio" aria-checked="false">تطوعي</button><button class="s-sg tap" role="radio" aria-checked="false">انتقائي</button><button class="s-sg tap on" role="radio" aria-checked="true">إلزامي</button></span>
           </div>
           <div class="s-pol">
-            <span class="r-at"><b>التظاهر</b><span class="s-cost">كلفة التغيير: <span class="ltr">40</span><svg class="i"><use href="#i-capital"/></svg></span></span>
+            <span class="r-at"><b>التظاهر</b><span class="s-cost">كلفة التغيير: <span class="ltr">40</span><svg class="i" role="img" aria-label="من رأس المال السياسي"><use href="#i-capital"/></svg></span></span>
             <span class="s-seg" role="radiogroup" aria-label="التظاهر"><button class="s-sg tap" role="radio" aria-checked="false">مسموح</button><button class="s-sg tap" role="radio" aria-checked="false">بإخطار</button><button class="s-sg tap on" role="radio" aria-checked="true">محظور</button></span>
           </div>
         </section>
         <section class="r-sec">
           <h3>الحريات</h3>
           <div class="s-pol s-wait-1">
-            <span class="r-at"><b>الإعلام</b><span class="s-cost s-def">كلفة التغيير: <span class="ltr">30</span><svg class="i"><use href="#i-capital"/></svg></span><span class="s-alt">متاح بعد <span class="ltr">4</span> أشهر</span></span>
+            <span class="r-at"><b>الإعلام</b><span class="s-cost s-def">كلفة التغيير: <span class="ltr">30</span><svg class="i" role="img" aria-label="من رأس المال السياسي"><use href="#i-capital"/></svg></span><span class="s-alt">متاح بعد <span class="ltr">4</span> أشهر</span></span>
             <span class="s-seg" role="radiogroup" aria-label="الإعلام"><button class="s-sg tap" role="radio" aria-checked="false">حر</button><button class="s-sg tap on" role="radio" aria-checked="true">مقيد</button><button class="s-sg tap" role="radio" aria-checked="false">موجَّه</button></span>
           </div>
           <div class="s-pol">
-            <span class="r-at"><b>الأحزاب</b><span class="s-cost">كلفة التغيير: <span class="ltr">40</span><svg class="i"><use href="#i-capital"/></svg></span></span>
+            <span class="r-at"><b>الأحزاب</b><span class="s-cost">كلفة التغيير: <span class="ltr">40</span><svg class="i" role="img" aria-label="من رأس المال السياسي"><use href="#i-capital"/></svg></span></span>
             <span class="s-seg" role="radiogroup" aria-label="الأحزاب"><button class="s-sg tap" role="radio" aria-checked="false">حرة</button><button class="s-sg tap on" role="radio" aria-checked="true">بترخيص</button><button class="s-sg tap" role="radio" aria-checked="false">محظورة</button></span>
           </div>
           <div class="s-pol">
-            <span class="r-at"><b>الإنترنت</b><span class="s-cost">كلفة التغيير: <span class="ltr">20</span><svg class="i"><use href="#i-capital"/></svg></span></span>
+            <span class="r-at"><b>الإنترنت</b><span class="s-cost">كلفة التغيير: <span class="ltr">20</span><svg class="i" role="img" aria-label="من رأس المال السياسي"><use href="#i-capital"/></svg></span></span>
             <span class="s-seg" role="radiogroup" aria-label="الإنترنت"><button class="s-sg tap" role="radio" aria-checked="false">مفتوح</button><button class="s-sg tap on" role="radio" aria-checked="true">مراقَب</button><button class="s-sg tap" role="radio" aria-checked="false">محجوب</button></span>
           </div>
         </section>
         <section class="r-sec">
           <h3>الخدمات العامة</h3>
           <div class="s-pol">
-            <span class="r-at"><b>التعليم الحكومي</b><span class="s-cost">كلفة التغيير: <span class="ltr">30</span><svg class="i"><use href="#i-capital"/></svg></span></span>
+            <span class="r-at"><b>التعليم الحكومي</b><span class="s-cost">كلفة التغيير: <span class="ltr">30</span><svg class="i" role="img" aria-label="من رأس المال السياسي"><use href="#i-capital"/></svg></span></span>
             <span class="s-seg" role="radiogroup" aria-label="التعليم الحكومي"><button class="s-sg tap on" role="radio" aria-checked="true">مجاني</button><button class="s-sg tap" role="radio" aria-checked="false">مدعوم</button><button class="s-sg tap" role="radio" aria-checked="false">برسوم</button></span>
           </div>
           <div class="s-pol">
-            <span class="r-at"><b>الرعاية الصحية</b><span class="s-cost">كلفة التغيير: <span class="ltr">30</span><svg class="i"><use href="#i-capital"/></svg></span></span>
+            <span class="r-at"><b>الرعاية الصحية</b><span class="s-cost">كلفة التغيير: <span class="ltr">30</span><svg class="i" role="img" aria-label="من رأس المال السياسي"><use href="#i-capital"/></svg></span></span>
             <span class="s-seg" role="radiogroup" aria-label="الرعاية الصحية"><button class="s-sg tap" role="radio" aria-checked="false">مجانية</button><button class="s-sg tap on" role="radio" aria-checked="true">مدعومة</button><button class="s-sg tap" role="radio" aria-checked="false">برسوم</button></span>
           </div>
         </section>
@@ -930,15 +935,15 @@
           <h3>مشاريع جارية</h3>
           <div class="s-proj">
             <span class="r-tile"><svg class="i"><use href="#i-train"/></svg></span>
-            <span class="r-at"><b>الخط الثالث لمترو القاهرة</b><span>المرحلة الأولى · تكتمل في <span class="ltr">2012</span></span>
-              <span class="s-prog"><i style="width: 85%"></i></span></span>
-            <span class="s-pa"><button class="r-btn r-grey tap">إلغاء</button><span class="s-ref">يُسترد <span class="ltr">90</span> مليون $</span></span>
+            <span class="r-at" role="img" aria-label="الخط الثالث لمترو القاهرة، المرحلة الأولى: أُنجز 85%، تكتمل في 2012"><b>الخط الثالث لمترو القاهرة</b><span>المرحلة الأولى · تكتمل في <span class="ltr">2012</span></span>
+              <span class="s-prog" aria-hidden="true"><i style="width: 85%"></i></span></span>
+            <span class="s-pa"><button class="r-btn r-grey tap" aria-label="إلغاء الخط الثالث لمترو القاهرة: يُسترد 90 مليون دولار">إلغاء</button><span class="s-ref" aria-hidden="true">يُسترد <span class="ltr">90</span> مليون $</span></span>
           </div>
           <div class="s-proj">
             <span class="r-tile"><svg class="i"><use href="#i-drop"/></svg></span>
-            <span class="r-at"><b>توشكى: استصلاح الأراضي</b><span>جنوب الوادي · تكتمل في <span class="ltr">2017</span></span>
-              <span class="s-prog"><i style="width: 35%"></i></span></span>
-            <span class="s-pa"><button class="r-btn r-grey tap">إلغاء</button><span class="s-ref">يُسترد <span class="ltr">410</span> ملايين $</span></span>
+            <span class="r-at" role="img" aria-label="توشكى، استصلاح الأراضي، جنوب الوادي: أُنجز 35%، تكتمل في 2017"><b>توشكى: استصلاح الأراضي</b><span>جنوب الوادي · تكتمل في <span class="ltr">2017</span></span>
+              <span class="s-prog" aria-hidden="true"><i style="width: 35%"></i></span></span>
+            <span class="s-pa"><button class="r-btn r-grey tap" aria-label="إلغاء توشكى، استصلاح الأراضي: يُسترد 410 ملايين دولار">إلغاء</button><span class="s-ref" aria-hidden="true">يُسترد <span class="ltr">410</span> ملايين $</span></span>
           </div>
         </section>
         <section class="r-sec">
@@ -946,12 +951,12 @@
           <div class="s-proj">
             <span class="r-tile"><svg class="i"><use href="#i-atom"/></svg></span>
             <span class="r-at"><b>محطة الضبعة النووية</b><span><span class="ltr">4.5</span> مليار $ · <span class="ltr">8</span> سنوات</span></span>
-            <span class="s-pa"><button class="r-btn r-primary tap">بدء</button></span>
+            <span class="s-pa"><button class="r-btn r-primary tap" aria-label="بدء محطة الضبعة النووية: 4.5 مليار دولار، 8 سنوات">بدء</button></span>
           </div>
           <div class="s-proj">
             <span class="r-tile"><svg class="i"><use href="#i-ship"/></svg></span>
             <span class="r-at"><b>توسعة ميناء شرق بورسعيد</b><span><span class="ltr">1.2</span> مليار $ · <span class="ltr">3</span> سنوات</span></span>
-            <span class="s-pa"><button class="r-btn r-primary tap">بدء</button></span>
+            <span class="s-pa"><button class="r-btn r-primary tap" aria-label="بدء توسعة ميناء شرق بورسعيد: 1.2 مليار دولار، 3 سنوات">بدء</button></span>
           </div>
         </section>
         <p class="s-note">عند إلغاء مشروع يُرجع المبلغ غير المصروف بعد خصم <span class="ltr">10%</span> منه.</p>
@@ -1063,6 +1068,8 @@
 
   /* The open tab scrolls inside the sheet when it is taller than the sheet; fades mark the edges that hide content. */
   function capFit() {
+    /* the states view's VoiceOver labels (a row whose words change there, e.g. an unaffordable change) */
+    if (document.documentElement.dataset.states === '1') Array.prototype.forEach.call(document.querySelectorAll('[data-aria-alt]'), function (e) { e.setAttribute('aria-label', e.dataset.ariaAlt); });
     var row = $('.r-hd .r-row'), nm = row && row.querySelector('.r-name');
     if (!nm) return;
     row.classList.remove('cap-icon');

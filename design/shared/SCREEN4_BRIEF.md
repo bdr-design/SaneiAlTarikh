@@ -167,3 +167,6 @@ Not everything has to be visible at once. Tabs, sections or a scroll are allowed
 
 ## Cost (the heaviness review, 2026-11-07; design doc §3.9)
 The white name pill beside the halo is drawn by the map engine in its own layer, not a view moved each frame. Tiles under the opaque sheet are culled and unpinned; the header strip is a one-time copy at open from the resident z4 base, redrawn only when the province changes. The open sheet's model rebuilds at most 4 times a second and only when its inputs change; monthly values and sort orders refresh on the monthly slot (L11). The same holds for every panel built on this sheet (screens 5 to 23).
+
+## VoiceOver (T-025)
+Each «لماذا؟» is named «لماذا؟ <its subject>», «كل الأسباب» as «لماذا؟ كل أسباب الاضطرابات»; the close «إغلاق، العودة إلى الخريطة»; every row button names its row («تغيير المحافظ: عبد العظيم وزير», «اعتماد البرنامج: تخفيض تعرفة الحافلات لمدة سنة، 10 ملايين دولار شهريًا»); each cause of unrest reads «<cause>: يرفع (or يخفض) الاضطرابات <n> نقاط/نقطة» (the noun agreeing with the count, no sign); every link row reads all it shows and where it opens; a row that also holds a button is no control itself: its title area is («الإنشاءات والمرافق»), so no control sits inside another.

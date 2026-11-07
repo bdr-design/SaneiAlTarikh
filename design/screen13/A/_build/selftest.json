@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-07T18:26:36.662Z",
+ "ranAt": "2026-11-07T20:14:06.265Z",
  "inputs": {
   "files": [
    "index.html",
@@ -22,7 +22,7 @@
    "header_cairo.jpg",
    "map_overlay_cairo.svg"
   ],
-  "sha1": "a1563f05953b93a71cd47afe7f9f76bd0f01f264"
+  "sha1": "50120de71c588b7ca738f1d4eec6b47fb63c284c"
  },
  "cleanIssues": {
   "i16promax": [],
@@ -156,7 +156,7 @@
    "name": "sheet top",
    "ok": true,
    "sample": [
-    "hit overlap الاستقرار 58% / إغلاق",
+    "hit overlap الاستقرار 58% / إغلاق، العودة إلى الخريطة",
     "panel overlap الدولة: مصر، حسني مبارك، ج / المزيد",
     "panel overlap الخزينة 36.0 مليار $ الاست / المزيد"
    ]
@@ -403,6 +403,13 @@
     "white touch off: .r-tile color rgb(127, 233, 255) (want rgb(234, 242, 247))",
     "white touch off: .r-tile color rgb(127, 233, 255) (want rgb(234, 242, 247))",
     "white touch off: .r-tile color rgb(127, 233, 255) (want rgb(234, 242, 247))"
+   ]
+  },
+  {
+   "name": "close says only إغلاق",
+   "ok": true,
+   "sample": [
+    "a11y: the close says only «إغلاق»"
    ]
   },
   {

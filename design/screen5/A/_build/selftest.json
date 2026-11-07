@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-07T18:12:58.831Z",
+ "ranAt": "2026-11-07T20:39:36.031Z",
  "inputs": {
   "files": [
    "index.html",
@@ -19,7 +19,7 @@
    "header_cairo.jpg",
    "map_overlay_cairo.svg"
   ],
-  "sha1": "7c8ea5a8a12ee24df17f27e1957906b1cce11f14"
+  "sha1": "0fe1a346acd6793865b6f06a091c994ebcf260ca"
  },
  "cleanIssues": {
   "i16promax": [],
@@ -53,6 +53,107 @@
   "se coverage": []
  },
  "results": [
+  {
+   "name": "progress unread",
+   "ok": true,
+   "sample": [
+    "a11y: project 1 does not read its progress 85%"
+   ]
+  },
+  {
+   "name": "states wording dropped",
+   "ok": true,
+   "sample": [
+    "a11y: the unaffordable change does not say it in words (يلزم، لديك، لا يكفي)"
+   ]
+  },
+  {
+   "name": "cost without the capital",
+   "ok": true,
+   "sample": [
+    "a11y: a cost does not name the capital it is in"
+   ]
+  },
+  {
+   "name": "label on a plain element",
+   "ok": true,
+   "sample": [
+    "a11y: a label VoiceOver may skip (no role): «قرارات»"
+   ]
+  },
+  {
+   "name": "why unnamed",
+   "ok": true,
+   "sample": [
+    "a11y: «لماذا؟» does not name its subject «الاستقرار»"
+   ]
+  },
+  {
+   "name": "close silent",
+   "ok": true,
+   "sample": [
+    "a11y: the close does not say where it returns"
+   ]
+  },
+  {
+   "name": "action unlabelled",
+   "ok": true,
+   "sample": [
+    "a11y: the action «رفع حالة الطوارئ» has no label of its own",
+    "a11y: the action «رفع حالة الطوارئ» does not read its numbers",
+    "a11y: the action «رفع حالة الطوارئ» does not name the capital its cost is in"
+   ]
+  },
+  {
+   "name": "action number unread",
+   "ok": true,
+   "sample": [
+    "a11y: the action «رفع حالة الطوارئ» does not read its numbers"
+   ]
+  },
+  {
+   "name": "capital unnamed",
+   "ok": true,
+   "sample": [
+    "a11y: the action «رفع حالة الطوارئ» does not name the capital its cost is in"
+   ]
+  },
+  {
+   "name": "chip way unsaid",
+   "ok": true,
+   "sample": [
+    "a11y: the action «رفع حالة الطوارئ» does not say its chip's way"
+   ]
+  },
+  {
+   "name": "states label unswapped",
+   "ok": true,
+   "sample": [
+    "a11y: the action «رفع حالة الطوارئ» does not read its numbers",
+    "a11y: the unaffordable change does not say it in words (يلزم، لديك، لا يكفي)"
+   ]
+  },
+  {
+   "name": "project button unnamed",
+   "ok": true,
+   "sample": [
+    "a11y: «إلغاء» does not name its row «الخط الثالث لمترو القاهرة»"
+   ]
+  },
+  {
+   "name": "progress read out",
+   "ok": true,
+   "sample": [
+    "a11y: progress bar 1 is read out"
+   ]
+  },
+  {
+   "name": "tabs plain buttons",
+   "ok": true,
+   "sample": [
+    "a11y: the tabs are not a tab list"
+   ]
+  },
   {
    "name": "type size",
    "ok": true,
@@ -126,9 +227,9 @@
    "name": "cost glyph size",
    "ok": true,
    "sample": [
-    "icon size 14x14 (want 10): i",
-    "icon size 14x14 (want 10): i",
-    "icon size 14x14 (want 10): i"
+    "icon size 14x14 (want 10): من رأس المال السياسي",
+    "icon size 14x14 (want 10): من رأس المال السياسي",
+    "icon size 14x14 (want 10): من رأس المال السياسي"
    ]
   },
   {
@@ -208,7 +309,7 @@
    "ok": true,
    "sample": [
     "text outside the sheet's 12 pt padding: \"رأس المال السياسي\"",
-    "icon over text: i / \"رأس المال السياسي\"",
+    "icon over text: من رأس المال السياسي / \"رأس المال السياسي\"",
     "icon over text: i / \"الاستقرار\""
    ]
   },
@@ -259,7 +360,7 @@
    "name": "sheet top",
    "ok": true,
    "sample": [
-    "hit overlap الاستقرار 58% / إغلاق",
+    "hit overlap الاستقرار 58% / إغلاق، العودة إلى الخريطة",
     "panel overlap الدولة: مصر، حسني مبارك، ج / الدولة: مصر",
     "panel overlap الخزينة 36.0 مليار $ الاست / الدولة: مصر"
    ]
@@ -268,7 +369,7 @@
    "name": "panel overlap",
    "ok": true,
    "sample": [
-    "hit overlap الاستقرار 58% / إغلاق",
+    "hit overlap الاستقرار 58% / إغلاق، العودة إلى الخريطة",
     "panel overlap الدولة: مصر، حسني مبارك، ج / الدولة: مصر",
     "panel overlap الخزينة 36.0 مليار $ الاست / الدولة: مصر"
    ]
@@ -285,8 +386,8 @@
    "ok": true,
    "sample": [
     "icon over text: i / \"تهدئة مؤقتة\"",
-    "hit overlap الدولة / تعديل وزاريالكلفة: 25 · مر",
-    "hit overlap الاقتصاد / تعديل وزاريالكلفة: 25 · مر"
+    "hit overlap الدولة / تعديل وزاري: الكلفة 25 من ",
+    "hit overlap الاقتصاد / تعديل وزاري: الكلفة 25 من "
    ]
   },
   {
@@ -294,7 +395,7 @@
    "ok": true,
    "sample": [
     "icon over text: i / \"تهدئة مؤقتة\"",
-    "hit overlap الدولة / تعديل وزاريالكلفة: 25 · مر",
+    "hit overlap الدولة / تعديل وزاري: الكلفة 25 من ",
     "panel overlap الأقسام / الدولة: مصر"
    ]
   },
@@ -312,7 +413,7 @@
    "sample": [
     "icon over text: i / \"· مرة في السنة\"",
     "icon over text: i / \"تهدئة مؤقتة\"",
-    "hit overlap الدولة / تعديل وزاريالكلفة: 25 · مر"
+    "hit overlap الدولة / تعديل وزاري: الكلفة 25 من "
    ]
   },
   {
@@ -329,8 +430,8 @@
    "ok": true,
    "sample": [
     "clipped text (bottom): \"تعديل وزاري\" 538.16..599 y 360..379",
-    "control cut by its scroll area (bottom): تعديل وزاريالكلفة: 25 · مر",
-    "hit box shaved by its clip: تعديل وزاريالكلفة: 25 · مر"
+    "control cut by its scroll area (bottom): تعديل وزاري: الكلفة 25 من ",
+    "hit box shaved by its clip: تعديل وزاري: الكلفة 25 من "
    ]
   },
   {

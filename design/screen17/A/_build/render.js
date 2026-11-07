@@ -92,7 +92,7 @@ qa('.sheet .r-link').forEach((r) => { if (!/\\. يفتح /.test(r.getAttribute('
 
 require(path.join(OUT, '../../shared/check/panelcheck.js'))({
   OUT, dock: null, tabs: ['why'], noTabs: true, fitTab: false, longTab: 'why',
-  inputs: ['_build/why.css'],
+  inputs: ['_build/why.css', '../../screen5/A/_build/sheet.html', '../../screen6/A/_build/sheet.html', '../../screen8/A/_build/sheet.html'],   // (the panels it reads, T-025)
   TOK: { sec: 'rgb(199, 225, 193)', ctlH: {}, sheetIcon: [], size: [['.w-t', null, 32], ['.w-sum', null, 24]] },
   HEAD, BRIEF, screenChecks, DATA: { terms: TERMS, sections: SECTIONS, now: A.now, stChange: A.stChange, elsewhere: A, cells: CELLS },
   skipGeneric: ['section colour on a rule', 'why without its subject', 'amber value without its icon', '% before its number', 'brief text hidden', '18 pt misuse', 'clipped text', 'gap', 'faint text', 'text into a control', 'chip arrow against its sign', 'chip not white', 'tap in the side inset'],

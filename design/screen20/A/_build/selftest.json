@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-07T18:14:48.524Z",
+ "ranAt": "2026-11-07T20:02:25.055Z",
  "inputs": {
   "files": [
    "index.html",
@@ -23,7 +23,7 @@
    "header_cairo.jpg",
    "map_overlay_cairo.svg"
   ],
-  "sha1": "5b49cb515bb1b3875ca67ba5954bbc925a661f95"
+  "sha1": "eaba7c1cefc8d0ea356c887b0cf8d98ba8cddb50"
  },
  "cleanIssues": {
   "i16promax": [],
@@ -470,6 +470,13 @@
    "ok": true,
    "sample": [
     "a11y: «لماذا؟» does not name its subject «تضخم الغذاء»"
+   ]
+  },
+  {
+   "name": "close says only إغلاق",
+   "ok": true,
+   "sample": [
+    "a11y: the close says only «إغلاق»"
    ]
   },
   {
