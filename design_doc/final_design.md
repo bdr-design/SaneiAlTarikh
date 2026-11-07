@@ -571,7 +571,7 @@ The view uses `CAMetalDisplayLink` (iOS 17+).
 - **Right-to-left.** `CFBundleDevelopmentRegion = ar`, and `ar.lproj` is the only localization. `.environment(\.layoutDirection, .rightToLeft)` is forced at the root. Layout uses leading and trailing edges only.
 - **Tokens.** `DesignTokens.swift` is generated from `design/tokens.json`. `GlassStyle` is the only place a material may be used.
 - **Custom chrome only** on the play screen: no system TabView, NavigationBar or `.sheet`.
-- **Layout fit engine.** The width class comes from the **safe-area width minus margins** (§6.3). Variants are chosen once per campaign and again on an inset change, never per tick. Chip widths are reserved from the longest formatted value class, not the current value.
+- **Layout fit engine.** The width class comes from the **safe-area width minus margins** (§6.3). Variants are chosen once per campaign, again on an inset change, and again when the player's name, leader or regime text changes (succession, a coup, RenameLeader, renamePolity, a regime change: a few times a campaign, once per such event, §3.10); never per tick or per HUD value update, which use the reserved widths only. Chip widths are reserved from the longest formatted value class, not the current value.
 - **`DialogPresenter`** is one queue for every dialog. Every request has a default or an expiry.
 
 ### 2.7 Saves
@@ -839,7 +839,8 @@ bound here; each item is a line in `docs/perf.md` (L12) and a test where one is 
   used in the HUD's nation card and in the panels' header sub-lines; the full name («المملكة العربية السعودية», «سانت
   فينسنت والغرينادين») is shown in the state panel and the country card. `ids_lock.py` checks the length.
 - The HUD's nation card condenses by its fit levels when a name, leader or regime would run out of its box: the leader and
-  regime go first, then the name (the flag stays).
+  regime go first, then the name (the flag stays). The fit runs when that text changes (the fit engine's triggers), never
+  per HUD update.
 - A header sub-line that is still too long gives way at its end with an ellipsis; VoiceOver reads it whole.
 - `tools/stress_names.js` renders the pages with Saudi Arabia and the longest names on the 7 phones; it is part of the gate.
 
@@ -1599,7 +1600,7 @@ Unchanged:
 5. nation card → flag only (name moves to the State panel header)
 6. date → short form «12/3/2011»
 
-Measurements use the **player's name** (fixed per campaign) and **reserved widths for each chip's longest value class**, for example «−999.9 مليار» for the treasury, in Western digits.
+Measurements use the **player's current name, leader and regime** (measured again only when one of them changes, §2.5's fit engine) and **reserved widths for each chip's longest value class**, for example «−999.9 مليار» for the treasury, in Western digits.
 
 **Snapshot fit tests** run in CI for the SE (667), 12/13 mini (812), XR/11 (896), 14/15 (844/852), 16 Pro (874), Plus/Pro Max (926/932) and 17 Pro Max (956). They use the longest Arabic country names («جمهورية الكونغو الديمقراطية», «سانت فينسنت وجزر غرينادين») and the widest values. Nothing may clip.
 
