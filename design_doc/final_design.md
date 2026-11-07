@@ -832,6 +832,11 @@ bound here; each item is a line in `docs/perf.md` (L12) and a test where one is 
   checks the header, META and trailer hash before releasing the old state (a failed check keeps the game), then releases,
   decodes on the platform engine, and shows a static «جارٍ التحميل» until the first frame (≤1.0 s on A12, §3.4; peak per
   §3.3).
+- **The government chooser (screen 24, D-29).** The card's fields are static text from the scenario's polity table (no
+  per-frame or per-day work); the strip keeps one chip per polity (not per government); the selected country is one
+  highlight outline drawn by the map engine as on page 2; a row tap changes the card's model only (the chosen row, its
+  difficulty), never the map, the strip or a re-layout of the page. The names the lead line crosses are taken out of the
+  label layer once, when the selection changes.
 
 ### 3.10 Names of any country (the second-country test, T-024)
 

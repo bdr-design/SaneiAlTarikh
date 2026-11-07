@@ -21,10 +21,14 @@ two rows, the default first and chosen), in the card, never a dialog over the ma
 more governments (the same rows, more of them), the options page.
 
 ## Acceptance criteria
-1. The card names the country and asks «اختر الحكومة»; the two governments as rows, each with its seat and its leader;
+1. The card names the country and asks «اختر الحكومة»; the two governments as rows, each with its leader;
    exactly one chosen (the default: the UN representation), a radio group read by VoiceOver.
 2. Each row says which part of the country that government administers; the facts under them are the country's
-   (population, output) and the chosen government's difficulty.
+   population and the chosen government's difficulty.
+
+Amended after the reviews (2026-11-07, logged in decisions_log.txt): «its seat» and «output» left this card. Both
+governments sat in Abidjan, so a seat tells nothing (the rows name the areas instead); the output row does not fit the
+iPhone SE's band with the chooser, and belongs to the country's info card.
 3. The map highlights the country, linked to the card as screen 3 does for Egypt (the areas are named in words: the
    game's province layer carries each government's provinces); Egypt's approved page unchanged.
 4. Gate: 0 issues on 7 phones, self-test, `check_screen.py` PASS; six independent read-only reviews, every confirmed

@@ -1,5 +1,6 @@
   <!-- The selected country, linked to Côte d'Ivoire on the map: two governments on 1 January 2011 (D-29), so the card asks
-       which one to play; the default first and chosen: the one the UN recognises. In the card, never over the map. -->
+       which one to play (the caption names the group); the default first and chosen: the one the UN recognises. In the
+       card, never over the map. -->
   <section class="card sel glass" aria-label="الدولة المختارة: ساحل العاج، حكومتان">
     <div class="head">
       <span class="flag"><img src="../../shared/flags/ci.svg" alt="علم ساحل العاج"></span>
@@ -7,15 +8,14 @@
       <span class="pick"><svg class="i"><use href="#i-pin"/></svg>مختارة</span>
     </div>
     <hr>
-    <div class="gov" role="radiogroup" aria-label="اختر الحكومة">
-      <button class="g-row tap on" role="radio" aria-checked="true" aria-label="حكومة الحسن واتارا: تعترف بها الأمم المتحدة، تدير الشمال. الافتراضية"><span class="g-tx"><b>حكومة الحسن واتارا</b><span>تعترف بها الأمم المتحدة · تدير الشمال</span></span><svg class="i g-ck"><use href="#i-pin"/></svg></button>
-      <button class="g-row tap" role="radio" aria-checked="false" aria-label="حكومة لوران غباغبو: تدير الجنوب وأبيدجان"><span class="g-tx"><b>حكومة لوران غباغبو</b><span>تدير الجنوب وأبيدجان</span></span><svg class="i g-ck"><use href="#i-pin"/></svg></button>
+    <div class="gov" role="radiogroup" aria-labelledby="govAsk">
+      <div class="warn gk"><svg class="i" aria-hidden="true"><use href="#i-warn"/></svg><p id="govAsk"><b>حكومتان منذ ديسمبر <span class="ltr">2010</span>:</b> اختر الحكومة</p></div>
+      <button class="g-row tap on" role="radio" aria-checked="true" data-leader="الحسن واتارا" aria-label="حكومة الحسن واتارا: تعترف بها الأمم المتحدة، تدير الشمال. الافتراضية"><svg class="i g-ck" aria-hidden="true"><use href="#i-radio-on"/></svg><span class="g-tx"><b>حكومة الحسن واتارا</b><span>تعترف بها الأمم المتحدة · تدير الشمال</span></span></button>
+      <button class="g-row tap" role="radio" aria-checked="false" data-leader="لوران غباغبو" aria-label="حكومة لوران غباغبو: أعلن المجلس الدستوري فوزه، تدير الجنوب وأبيدجان"><svg class="i g-ck" aria-hidden="true"><use href="#i-radio"/></svg><span class="g-tx"><b>حكومة لوران غباغبو</b><span>أعلن المجلس الدستوري فوزه · تدير الجنوب وأبيدجان</span></span></button>
     </div>
     <hr>
     <div class="facts">
       <div class="fact"><span class="k">السكان</span><span class="v"><span><span class="ltr">20.2</span> <span class="u">مليون</span></span></span></div>
-      <div class="fact"><span class="k">الصعوبة</span><span class="v hard"><span>صعبة جدًا</span><span class="meter" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span></span></div>
+      <div class="fact"><span class="k">الصعوبة</span><span class="v d4"><span>صعبة جدًا</span><span class="meter" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span></span></div>
     </div>
-    <hr>
-    <div class="warn"><svg class="i"><use href="#i-warn"/></svg><p><b>حكومتان:</b> نزاع على السلطة منذ نوفمبر <span class="ltr">2010</span></p></div>
   </section>

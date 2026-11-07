@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>اختيار الدولة B</title>
+<title>اختيار الحكومة</title>
 <script>
   /* Device frame from the URL (points): ?w=844&h=390&side=47&bottom=21&cutout=notch|island|none
      Optional: &hit=1 draws the 44 pt hit boxes and the safe area.
@@ -171,7 +171,7 @@
   .search .cnt { flex: none; font-size: var(--fs-label); font-weight: 500; line-height: var(--lh-label); color: var(--t2); white-space: nowrap;
     padding-inline-start: var(--s2); border-inline-start: 1px solid var(--hair); }
 
-  /* ---------- Selected-country card: floats at the right, next to Egypt ---------- */
+  /* ---------- Selected-country card: floats at the right, next to the selected country ---------- */
   .card.sel { position: absolute; right: var(--gutter); width: var(--card-w); padding: var(--pad-bar);
     display: flex; flex-direction: column; gap: var(--s3); }
   .sel .head { display: flex; align-items: center; gap: var(--s3); }
@@ -245,19 +245,27 @@
   .show-hit .safe { position: absolute; top: 0; bottom: var(--bottom); left: var(--side); right: var(--side); outline: 1px dashed rgba(255, 255, 0, 0.8); }
   /* ================= Screen 24 A: the government chooser in the country card (D-29) ================= */
   .gov { display: flex; flex-direction: column; gap: var(--s2); }
-  .gov .gk { font-size: var(--fs-label); font-weight: 500; line-height: var(--lh-label); color: var(--t2); white-space: nowrap; }
-  .g-row { position: relative; display: flex; align-items: center; gap: var(--s2); min-height: 40px; padding-inline: var(--s3) var(--s2);
-    border-radius: 10px; text-align: start; box-shadow: inset 0 0 0 1px rgba(169, 188, 203, 0.35); }
+  .gov .gk p { white-space: nowrap; }          /* the caption names the radio group (aria-labelledby): one line */
+  /* the rows: page 3's choice rows (screen 3 p3B .ch / .ch.sel: the radio at the start, empty or filled cyan), two lines each */
+  .g-row { position: relative; display: flex; align-items: center; gap: var(--s2); min-height: 40px; padding-inline: var(--pad-ctl);
+    border-radius: var(--r-ctl); text-align: start; background: rgba(234, 242, 247, 0.04); box-shadow: inset 0 0 0 1px rgba(127, 233, 255, 0.10); }
   .g-row .g-tx { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; }
   .g-row .g-tx b { font-size: var(--fs-val); font-weight: 600; line-height: var(--lh-val); color: var(--t1); white-space: nowrap; }
   .g-row .g-tx span { font-size: var(--fs-label); font-weight: 500; line-height: var(--lh-label); color: var(--t2); white-space: nowrap; }
   .g-row.tap::before { height: max(100% + 4px, 44px); }   /* the 44 pt touch around a 40 pt row */
-  .g-row .g-ck { flex: none; width: 16px; height: 16px; color: var(--teal); visibility: hidden; }
-  .g-row.on { background: rgba(63, 224, 208, 0.10); box-shadow: inset 0 0 0 1px rgba(63, 224, 208, 0.55); }
-  .g-row.on .g-ck { visibility: visible; }
+  .g-row .g-ck { flex: none; color: var(--t2); }            /* page 3's radio: empty on the other row */
+  .g-row.on { background: rgba(127, 233, 255, 0.10); box-shadow: inset 0 0 0 1px rgba(127, 233, 255, 0.55); }
+  .g-row.on .g-ck { color: var(--cyan); }                   /* filled, cyan on the chosen row */
+  /* the difficulty in the scale's own colour, as on its chip (صعبة جدًا: --d4) */
+  .fact .v.d4 { color: var(--d4); }
   /* the chooser makes the card taller: the search field moves left of the card (12 pt apart), so the card has the full
      band under the top bar (placeCard: not beside the field) */
   .search { left: auto; right: calc(var(--gutter) + var(--card-w) + 12px); }
+</style>
+<style>/* D-3 (confirmed): opaque panels, applied to the HUD exactly as ../../proposals/D3_panels/opaque.html */
+  .glass { -webkit-backdrop-filter: none !important; backdrop-filter: none !important; }
+  .frost i { display: none !important; }
+  .frost::after { background: rgb(12, 20, 28) !important; }
 </style>
 </head>
 <body>
@@ -270,11 +278,13 @@
     <symbol id="i-search" viewBox="0 0 24 24"><circle cx="10.75" cy="10.75" r="6.25"/><path d="M15.3 15.3 20 20"/></symbol>
     <symbol id="i-check" viewBox="0 0 24 24"><path d="M6 12.5l3.75 3.75L18 8"/></symbol>
     <symbol id="i-warn" viewBox="0 0 24 24"><path d="M10.4 4.6a1.85 1.85 0 0 1 3.2 0l7.1 12.6a1.85 1.85 0 0 1-1.6 2.8H4.9a1.85 1.85 0 0 1-1.6-2.8z"/><path d="M12 9.5v4"/><path d="M12 16.6v.05"/></symbol>
+    <symbol id="i-radio" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.25"/></symbol>
+    <symbol id="i-radio-on" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.25"/><circle cx="12" cy="12" r="4.25" fill="currentColor" stroke="none"/></symbol>
     <symbol id="i-pin" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.75"/><path d="M8.25 12.25l2.6 2.6 5-5.35"/></symbol>
   </defs>
 </svg>
 
-<!-- The map: approved world satellite + overlay (Egypt highlighted), placed by placeMap() -->
+<!-- The map: approved world satellite + overlay (Côte d'Ivoire highlighted), placed by placeMap() -->
 <div class="map" aria-label="خريطة العالم: اضغط على دولة لاختيارها">
   <img src="../../shared/world_d1.jpg" alt="">
   <img class="ov" src="world_d1_overlay_civ.svg" alt="">   <!-- the approved overlay with its 7 colliding labels resolved (Spain/Portugal etc.) -->
@@ -314,7 +324,8 @@
   </label>
 
   <!-- The selected country, linked to Côte d'Ivoire on the map: two governments on 1 January 2011 (D-29), so the card asks
-       which one to play; the default first and chosen: the one the UN recognises. In the card, never over the map. -->
+       which one to play (the caption names the group); the default first and chosen: the one the UN recognises. In the
+       card, never over the map. -->
   <section class="card sel glass" aria-label="الدولة المختارة: ساحل العاج، حكومتان">
     <div class="head">
       <span class="flag"><img src="../../shared/flags/ci.svg" alt="علم ساحل العاج"></span>
@@ -322,17 +333,16 @@
       <span class="pick"><svg class="i"><use href="#i-pin"/></svg>مختارة</span>
     </div>
     <hr>
-    <div class="gov" role="radiogroup" aria-label="اختر الحكومة">
-      <button class="g-row tap on" role="radio" aria-checked="true" aria-label="حكومة الحسن واتارا: تعترف بها الأمم المتحدة، تدير الشمال. الافتراضية"><span class="g-tx"><b>حكومة الحسن واتارا</b><span>تعترف بها الأمم المتحدة · تدير الشمال</span></span><svg class="i g-ck"><use href="#i-pin"/></svg></button>
-      <button class="g-row tap" role="radio" aria-checked="false" aria-label="حكومة لوران غباغبو: تدير الجنوب وأبيدجان"><span class="g-tx"><b>حكومة لوران غباغبو</b><span>تدير الجنوب وأبيدجان</span></span><svg class="i g-ck"><use href="#i-pin"/></svg></button>
+    <div class="gov" role="radiogroup" aria-labelledby="govAsk">
+      <div class="warn gk"><svg class="i" aria-hidden="true"><use href="#i-warn"/></svg><p id="govAsk"><b>حكومتان منذ ديسمبر <span class="ltr">2010</span>:</b> اختر الحكومة</p></div>
+      <button class="g-row tap on" role="radio" aria-checked="true" data-leader="الحسن واتارا" aria-label="حكومة الحسن واتارا: تعترف بها الأمم المتحدة، تدير الشمال. الافتراضية"><svg class="i g-ck" aria-hidden="true"><use href="#i-radio-on"/></svg><span class="g-tx"><b>حكومة الحسن واتارا</b><span>تعترف بها الأمم المتحدة · تدير الشمال</span></span></button>
+      <button class="g-row tap" role="radio" aria-checked="false" data-leader="لوران غباغبو" aria-label="حكومة لوران غباغبو: أعلن المجلس الدستوري فوزه، تدير الجنوب وأبيدجان"><svg class="i g-ck" aria-hidden="true"><use href="#i-radio"/></svg><span class="g-tx"><b>حكومة لوران غباغبو</b><span>أعلن المجلس الدستوري فوزه · تدير الجنوب وأبيدجان</span></span></button>
     </div>
     <hr>
     <div class="facts">
       <div class="fact"><span class="k">السكان</span><span class="v"><span><span class="ltr">20.2</span> <span class="u">مليون</span></span></span></div>
-      <div class="fact"><span class="k">الصعوبة</span><span class="v hard"><span>صعبة جدًا</span><span class="meter" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span></span></div>
+      <div class="fact"><span class="k">الصعوبة</span><span class="v d4"><span>صعبة جدًا</span><span class="meter" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span></span></div>
     </div>
-    <hr>
-    <div class="warn"><svg class="i"><use href="#i-warn"/></svg><p><b>حكومتان:</b> نزاع على السلطة منذ نوفمبر <span class="ltr">2010</span></p></div>
   </section>
 
   <!-- Bottom row: the country chips (scroll sideways) and the primary action at the RTL end -->
@@ -381,48 +391,46 @@
     window.__fit = { level: +root.dataset.fit };
   }
 
-  /* Composition. Egypt sits a little below the middle of the free band (so southern and central
-     Europe stay in view above it), just to the left of the card; the card floats at the right,
-     vertically centred on Egypt as far as the band allows. The band runs from the search field
-     (or 8 pt under it, when the card would sit beside it) to 12 pt above the bottom row. */
-  var EG = { x0: 1142.5, x1: 1183.3, y0: 692.8, y1: 735.6, cy: 713.6, ax: 1162.9, ay: 713.6 };   /* the selected country: Côte d'Ivoire */
+  /* Composition (screen 24). The card floats at the right, placed in the free band as on page 2 (the band runs from the
+     search field's top, the field sitting left of the card, to 12 pt above the bottom row); a card top that would come
+     level with the field (less than 8 pt under its bottom) aligns with the field's top. The selected country sits 36 pt
+     left of the card at the height of the card's head, or lower where the field above it leaves no room (its top 8 pt
+     under the field); the lead line runs from it to the head (placeMap). */
+  var EG = { x0: 1142.5, x1: 1183.3, y0: 692.8, y1: 735.6, cy: 713.6, ax: 1162.9, ay: 713.6 };   /* the selected country: Côte d'Ivoire */ window.__EG = EG;
   function placeCard() {
     var root = document.documentElement, card = document.querySelector('.sel');
     var s = document.querySelector('.search').getBoundingClientRect(), b = document.querySelector('.bottom').getBoundingClientRect();
-    var c = card.getBoundingClientRect();
-    var beside = c.left < s.right + 12;                       /* would the card touch the search field horizontally? */
-    var y0 = beside ? s.bottom + 8 : s.top, y1 = b.top - 12;
+    var y0 = s.top, y1 = b.top - 12;
     root.dataset.cardfit = '0';
     if (card.getBoundingClientRect().height > y1 - y0) root.dataset.cardfit = '1';
     var h = card.getBoundingClientRect().height;
-    var ey = y0 + (y1 - y0) * 0.6;                             /* Egypt's centre on screen */
-    var top = Math.min(Math.max(ey - h / 2, y0), y1 - h);
-    /* close under the search field (less than 24 pt) the two panels read as a stack: snap to a token gap (12 pt) under
-       the field rather than the raw Egypt-centred value, as long as the card still ends 12 pt above the chips (which sit
-       4 pt inside the row) */
-    if (beside && top - s.bottom < 24) top = Math.min(s.bottom + 12, b.top + 4 - 12 - h);
+    var top = Math.min(Math.max(y0 + (y1 - y0) * 0.6 - h / 2, y0), y1 - h);
+    if (top < s.bottom + 8) top = s.top;
     card.style.top = top + 'px';
-    window.__band = { y0: y0, y1: y1, ey: ey };
+    var hd = card.querySelector('.head').getBoundingClientRect(), sc = window.__dev.H / 440;
+    var ey = Math.max(hd.top + hd.height / 2, s.bottom + 8 + (EG.ay - EG.y0) * sc);
+    window.__band = { y0: y0, y1: y1, ey: ey, head: [hd.top, hd.bottom] };
     window.__card = { y0: y0, y1: y1, h: h, top: top, fits: h <= y1 - y0, fit: +root.dataset.cardfit };
   }
 
-  /* Map: zoom scales with the screen height so Europe, the Mediterranean, North and East Africa
-     and the Middle East fill the screen; Egypt's east edge sits 36 pt left of the card. */
+  /* Map: zoom scales with the screen height (page 2's); the selected country's east edge sits 36 pt left of the card,
+     its anchor at the band's height (placeCard), the map clamped to cover the screen. */
   function placeMap() {
     var d = window.__dev, W = d.W, H = d.H;
     var s = H / 440;
     var card = document.querySelector('.sel').getBoundingClientRect();
     var GAP = 36;
     var L = card.left - GAP - EG.x1 * s;
-    var T = window.__band.ey - EG.cy * s;
+    var T = window.__band.ey - EG.ay * s;
     L = Math.min(0, Math.max(W - 2400 * s, L)); T = Math.min(0, Math.max(H - 1202 * s, T));
     var m = document.querySelector('.map');
     m.style.setProperty('--map-s', s); m.style.left = L + 'px'; m.style.top = T + 'px';
-    var ax = L + EG.ax * s, ay = T + EG.ay * s;          /* in Sinai, clear of Egypt's name; the line runs north of the Saudi label */
+    var ax = L + EG.ax * s, ay = T + EG.ay * s;          /* the anchor: inside the selected country (the checker tests it) */
     var line = document.getElementById('leadLine');
-    line.setAttribute('x1', ax); line.setAttribute('y1', ay); line.setAttribute('x2', card.left); line.setAttribute('y2', ay);
+    var hb = window.__band.head, y2 = Math.min(Math.max(ay, hb[0] + 4), hb[1] - 4);   /* ends on the card's head */
+    line.setAttribute('x1', ax); line.setAttribute('y1', ay); line.setAttribute('x2', card.left); line.setAttribute('y2', y2);
     ['leadDot', 'leadHalo'].forEach(function (id) { var c = document.getElementById(id); c.setAttribute('cx', ax); c.setAttribute('cy', ay); });
-    window.__map = { s: s, L: L, T: T, egypt: { x0: L + EG.x0 * s, x1: L + EG.x1 * s, y0: T + EG.y0 * s, y1: T + EG.y1 * s } };
+    window.__map = { s: s, L: L, T: T, country: { x0: L + EG.x0 * s, x1: L + EG.x1 * s, y0: T + EG.y0 * s, y1: T + EG.y1 * s } };
   }
 
   /* The strip's faded end, from measurement. The chips are laid out from the RTL start (the selected country sits
@@ -470,6 +478,21 @@
     [1643,528,15,"أفغانستان"]
   ];
   var LABEL_FONT = "-apple-system, 'SF Arabic', 'IBM Plex Sans Arabic', 'Geeza Pro', sans-serif";
+  /* screen 24: does the lead line (sampled every point, 1.5 pt each side) or its dot's halo (7 pt) touch an ink box? */
+  function leadHits(ink, pad) {
+    var l = document.getElementById('leadLine'), x1 = +l.getAttribute('x1'), y1 = +l.getAttribute('y1'), x2 = +l.getAttribute('x2'), y2 = +l.getAttribute('y2');
+    var n = Math.max(1, Math.ceil(Math.hypot(x2 - x1, y2 - y1))), e = pad + 1.5;
+    for (var i = 0; i <= n; i++) { var x = x1 + (x2 - x1) * i / n, y = y1 + (y2 - y1) * i / n; if (x > ink.x0 - e && x < ink.x1 + e && y > ink.y0 - e && y < ink.y1 + e) return true; }
+    var cx = Math.max(ink.x0 - pad, Math.min(x1, ink.x1 + pad)), cy = Math.max(ink.y0 - pad, Math.min(y1, ink.y1 + pad));
+    return Math.hypot(cx - x1, cy - y1) < 7;
+  }
+  /* screen 24: is the ink box cut by a panel's edge (partly under it, partly out)? */
+  function edgeCut(ink, pad, sel) {
+    var o = document.querySelector(sel).getBoundingClientRect();
+    var meets = ink.x1 + pad > o.left && ink.x0 - pad < o.right && ink.y1 + pad > o.top && ink.y0 - pad < o.bottom;
+    var inside = ink.x0 >= o.left && ink.x1 <= o.right && ink.y0 >= o.top && ink.y1 <= o.bottom;
+    return meets && !inside;
+  }
   function declutter() {
     var m = window.__map, st = window.__strip, q = function (sel) { return document.querySelector(sel).getBoundingClientRect(); };
     var strip = q('.strip'), nx = q('.next'), chip = q('.strip .chip');
@@ -486,6 +509,9 @@
       if (cut(st.left + st.f0, strip.right, chip.top)) why = 'chips edge';
       else if (cut(nx.left, nx.right, nx.top)) why = 'action edge';
       else if (ink.x1 + halo > st.left && ink.x0 - halo < st.left + st.f0 + FADE && ink.y1 > chip.top + 4 && ink.y0 < chip.bottom - 4) why = 'faded end';
+      if (!why && leadHits(ink, halo)) why = 'lead line';
+      if (!why && (edgeCut(ink, halo, '.search') || edgeCut(ink, halo, '.sel'))) why = 'panel edge';
+      if (!why && ink.x1 + halo > strip.left && ink.x0 - halo < strip.right && ink.y1 + halo > chip.top && ink.y0 - halo < chip.bottom) why = 'chip row';
       if (why) hidden.push({ t: lb[3], why: why, ink: ink, lb: lb });
     });
     var root = document.documentElement;

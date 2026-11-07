@@ -1,7 +1,8 @@
 // Screen 24 A (T-026): the government chooser (D-29) on screen 3 page 2's frame, Côte d'Ivoire on 1 January 2011. Built
-// from page 2's checker, plus the chooser's own checks (a radio group, the default first and chosen, each row its seat
-// and area, VoiceOver), the report's inputs and PNG hashes, and a self-test with plants.
-// Render screen 3 / page 2 variant B (country picker) and run the checks:
+// from page 2's checker, plus the chooser's own checks (a radio group named by its visible caption, the default first and
+// chosen, each row its leader and area, VoiceOver, the facts, the lead line to the card's head, the highlight), opaque
+// panels (D-3), the report's inputs and PNG hashes, and a self-test with plants.
+// Render the page and run the checks:
 // tokens, 44 pt hit boxes, safe areas, overlaps, clipping, text contrast over the real backdrop.
 // Usage: NODE_PATH=.../tools/node_modules node render.js [ids...]   (default: all 7 devices in shared/devices.json)
 //        NODE_PATH=.../tools/node_modules node render.js --selftest  (plants known defects and checks that they are caught)
@@ -16,12 +17,14 @@ const PAGE = 'file://' + path.join(OUT, 'index.html');
 const ALL = JSON.parse(fs.readFileSync(path.resolve(OUT, '../../shared/devices.json'), 'utf8'));
 
 // the report's inputs: a change to any of them makes the report and the self-test stale (check_screen.py)
-const INPUTS = ['index.html', '_build/render.js', '_build/assemble.py', '_build/card.html', '_build/chooser.css', '_build/civ_path.json', 'world_d1_overlay_civ.svg',
-  '../../screen3/p2B/index.html', '../../screen3/p2B/world_d1_overlay_declutter.svg', '../../shared/devices.json'];
+const INPUTS = ['index.html', '_build/render.js', '_build/assemble.py', '_build/card.html', '_build/chooser.css', '_build/place.js', '_build/civ_path.json', 'world_d1_overlay_civ.svg',
+  '../../screen3/p2B/index.html', '../../screen3/p2B/world_d1_overlay_declutter.svg', '../../shared/world_d1.jpg', '../../shared/devices.json']
+  // every flag the page draws (the card's and the chips')
+  .concat([...new Set(fs.readFileSync(path.join(OUT, 'index.html'), 'utf8').match(/\.\.\/\.\.\/shared\/flags\/[\w-]+\.svg/g) || [])].sort());
 const inputsHash = () => crypto.createHash('sha1').update(Buffer.concat(INPUTS.map((f) => fs.readFileSync(path.join(OUT, f))))).digest('hex');
 const TOK = {
   type: { 10: [500, 700], 11.5: [500, 600], 13: [600], 14: [700], 18: [700] },
-  border: 'rgba(127, 233, 255, 0.14)', glass: 'rgba(9, 17, 25, 0.66)',
+  border: 'rgba(127, 233, 255, 0.14)', glass: 'rgb(12, 20, 28)',   // D-3 (confirmed): opaque panels
 };
 
 async function measure(p, d) {
@@ -65,7 +68,8 @@ async function measure(p, d) {
       const cs = getComputedStyle(g), f = g.querySelector(':scope > .frost');
       if (!g.classList.contains('on') && (cs.borderTopWidth !== '1px' || cs.borderTopColor !== TOK.border)) issues.push(`border off: ${g.className}`);
       const tint = f ? getComputedStyle(f, '::after').backgroundColor : cs.backgroundColor;
-      if (tint !== TOK.glass) issues.push(`glass off: ${g.className} ${tint}`);
+      if (tint !== TOK.glass) issues.push(`panel not opaque (D-3): ${g.className} ${tint}`);
+      if (cs.backdropFilter && cs.backdropFilter !== 'none') issues.push(`panel blurs the map (D-3): ${g.className}`);
       const rad = parseFloat(cs.borderTopLeftRadius), h = g.getBoundingClientRect().height;
       if (![10, 12].includes(rad)) issues.push(`radius off: ${g.className} ${rad}`);
       if (!g.classList.contains('sel') && ![32, 36, 44].some((x) => near(x, h))) issues.push(`height off: ${g.className} ${h}`);
@@ -145,8 +149,8 @@ async function measure(p, d) {
       if (r.width && (r.left < p.left - 0.5 || r.right > p.right + 0.5) && !e.classList.contains('frost') && (!chip || (inStrip(chip.getBoundingClientRect()) && nameShown(chip)))) issues.push(`sticks out of parent: ${e.className || e.tagName} ${e.textContent.trim().slice(0, 20)}`);
       if (getComputedStyle(e).textOverflow === 'ellipsis') issues.push(`ellipsis: ${e.className}`);
     });
-    // Egypt fully visible (inside the safe area) and not under any panel, with air around it
-    const eg = window.__map.egypt;
+    // the selected country fully visible (inside the safe area) and not under any panel, with air around it
+    const eg = window.__map.country;
     qa('.ui .glass, .next').forEach((g) => { const o = g.getBoundingClientRect(); if (!(eg.x1 <= o.left || eg.x0 >= o.right || eg.y1 <= o.top || eg.y0 >= o.bottom)) issues.push(`selected country under ${g.className}`); });
     if (eg.x0 < S || eg.x1 > W - S || eg.y0 < 0 || eg.y1 > H - B) issues.push('selected country not fully on screen');
     {
@@ -159,11 +163,24 @@ async function measure(p, d) {
       const m = window.__map;
       if (m.L > eps || m.T > eps || m.L + 2400 * m.s < W - eps || m.T + 1202 * m.s < H - eps) issues.push('map does not cover the screen');
     }
-    // the lead line from Egypt to the card crosses no other panel
+    // the lead line from the selected country to the card: from the dot, ending on the card's left edge within its head
+    // (not on a government's row), crossing no other panel (sampled along the segment)
+    const lead = (() => { const ln = document.getElementById('leadLine'); return { x1: +ln.getAttribute('x1'), y1: +ln.getAttribute('y1'), x2: +ln.getAttribute('x2'), y2: +ln.getAttribute('y2') }; })();
+    const leadPts = (() => { const n = Math.max(1, Math.ceil(Math.hypot(lead.x2 - lead.x1, lead.y2 - lead.y1))); return [...Array(n + 1).keys()].map((i) => [lead.x1 + (lead.x2 - lead.x1) * i / n, lead.y1 + (lead.y2 - lead.y1) * i / n]); })();
     {
-      const ln = document.getElementById('leadLine'), y = +ln.getAttribute('y1'), xa = Math.min(+ln.getAttribute('x1'), +ln.getAttribute('x2')), xb = Math.max(+ln.getAttribute('x1'), +ln.getAttribute('x2'));
-      ['.top', '.search', '.bottom'].forEach((s) => { const o = q(s).getBoundingClientRect(); if (y >= o.top && y <= o.bottom && xb > o.left && xa < o.right) issues.push(`lead line crosses ${s}`); });
-      if (Math.abs(xb - q('.sel').getBoundingClientRect().left) > 0.5) issues.push('lead line does not reach the card');
+      const c = q('.sel').getBoundingClientRect(), hd = q('.sel .head').getBoundingClientRect(), dot = document.getElementById('leadDot');
+      if (Math.abs(lead.x2 - c.left) > 0.5) issues.push('lead line does not reach the card');
+      if (lead.y2 < hd.top - eps || lead.y2 > hd.bottom + eps) issues.push(`lead line does not end on the card's head (${lead.y2.toFixed(1)} vs ${hd.top.toFixed(1)}..${hd.bottom.toFixed(1)})`);
+      if (Math.abs(+dot.getAttribute('cx') - lead.x1) > 0.01 || Math.abs(+dot.getAttribute('cy') - lead.y1) > 0.01) issues.push('lead line does not start at the dot');
+      [...['.top', '.search', '.bottom'].map((x) => [x, q(x)]), ...qa('.chip').map((x) => ['chip', x])].forEach(([nm, e]) => { const o = e.getBoundingClientRect();
+        if (leadPts.some(([x, y]) => x > o.left + 0.5 && x < o.right - 0.5 && y > o.top + 0.5 && y < o.bottom - 0.5)) issues.push(`lead line crosses ${nm}`); });
+    }
+    // the highlight is the selected country's (its box equals the placement box) and the dot sits inside it
+    {
+      const hp = document.querySelector('.map svg path'), bb = hp.getBBox(), E = window.__EG, m = window.__map;
+      if (!E || [bb.x - E.x0, bb.x + bb.width - E.x1, bb.y - E.y0, bb.y + bb.height - E.y1].some((v) => Math.abs(v) > 0.6)) issues.push('highlight and placement box are not the same country');
+      const pt = hp.ownerSVGElement.createSVGPoint(); pt.x = (lead.x1 - m.L) / m.s; pt.y = (lead.y1 - m.T) / m.s;
+      if (!hp.isPointInFill(pt)) issues.push('the lead line\'s dot is not inside the selected country');
     }
     // every panel stays inside the safe area, clear of the drawn camera cutout and of the rounded screen corners
     {
@@ -229,6 +246,12 @@ async function measure(p, d) {
         const cut = (a, b, edge) => x1 + h > a && x0 - h < b && y0 < edge - 1 && y1 > edge + 4;
         if (cut(fadeEnd - 64, strip.right, chip.top) || cut(nx.left, nx.right, nx.top)) issues.push(`map name cut by the bottom row: ${lb[3]}`);
         if (x1 + h > strip.left && x0 - h < fadeEnd && y1 > chip.top + 4 && y0 < chip.bottom - 4) issues.push(`map name inside the strip's faded end: ${lb[3]}`);
+        const e2 = h + 1.5, ax = Math.max(x0 - h, Math.min(lead.x1, x1 + h)), ay = Math.max(y0 - h, Math.min(lead.y1, y1 + h));
+        [['.search', 'the search field'], ['.sel', 'the card']].forEach(([sl, nm]) => { const o = q(sl).getBoundingClientRect();
+          const meets = x1 > o.left + 0.5 && x0 < o.right - 0.5 && y1 > o.top + 0.5 && y0 < o.bottom - 0.5, inside = x0 >= o.left && x1 <= o.right && y0 >= o.top && y1 <= o.bottom;
+          if (meets && !inside) issues.push(`map name cut by ${nm}: ${lb[3]}`); });
+        if (x1 > strip.left && x0 < strip.right && y1 > chip.top + 0.5 && y0 < chip.bottom - 0.5) issues.push(`map name in the chip row: ${lb[3]}`);
+        if (leadPts.some(([x, y]) => x > x0 - e2 && x < x1 + e2 && y > y0 - e2 && y < y1 + e2) || Math.hypot(ax - lead.x1, ay - lead.y1) < 7) issues.push(`map name crossed by the lead line: ${lb[3]}`);
       });
       audit.mapNamesHidden = [...hid];
     }
@@ -244,17 +267,40 @@ async function measure(p, d) {
     // ---------- the government chooser (D-29) ----------
     { const g = q('.sel .gov'), rows = qa('.sel .g-row'), on = rows.filter((r) => r.getAttribute('aria-checked') === 'true');
       const W2 = (e) => (e ? e.textContent.replace(/\s+/g, ' ').trim() : '');
-      if (!g || g.getAttribute('role') !== 'radiogroup' || g.getAttribute('aria-label') !== 'اختر الحكومة') issues.push('chooser: not a radio group named «اختر الحكومة»');
+      const LEADERS = ['الحسن واتارا', 'لوران غباغبو'];   // this scenario's two governments, the default first
+      const cap = g && document.getElementById(g.getAttribute('aria-labelledby') || '');
+      if (!g || g.getAttribute('role') !== 'radiogroup' || !cap || !visible(cap) || !g.contains(cap) || !/اختر الحكومة$/.test(W2(cap)) || !/^حكومتان /.test(W2(cap))) issues.push('chooser: not a radio group named by its visible caption «حكومتان … اختر الحكومة»');
       if (rows.length !== 2 || rows.some((r) => r.getAttribute('role') !== 'radio')) issues.push('chooser: not two radio rows');
       if (on.length !== 1 || rows.some((r) => r.classList.contains('on') !== (r === on[0]))) issues.push('chooser: not exactly one government chosen, marked and drawn');
-      else if (rows[0] !== on[0] || !/تعترف بها الأمم المتحدة/.test(W2(rows[0])) || !/الافتراضية/.test(rows[0].getAttribute('aria-label') || '')) issues.push('chooser: the default (the one the UN recognises) is not first and chosen');
-      rows.forEach((r) => { const b = W2(r.querySelector('b')), sub = W2(r.querySelector('.g-tx span')), al = r.getAttribute('aria-label') || '';
-        if (!/^حكومة \S+/.test(b) || !/تدير /.test(sub)) issues.push(`chooser: «${b}» does not name its leader and the part it administers`);
+      else if (rows[0] !== on[0]) issues.push('chooser: the default (the one the UN recognises) is not first and chosen');
+      const dflt = rows.filter((r) => /الافتراضية/.test(r.getAttribute('aria-label') || '')), un = rows.filter((r) => /تعترف بها الأمم المتحدة/.test(W2(r)));
+      if (dflt.length !== 1 || dflt[0] !== rows[0] || un.length !== 1 || un[0] !== rows[0]) issues.push('chooser: the default and the UN recognition are not the first row\'s alone');
+      // the chosen row is drawn apart (fill and outline differ from the other row's)
+      if (rows.length === 2) { const st = rows.map((r) => { const c = getComputedStyle(r); return c.backgroundColor + '|' + c.boxShadow; }); if (st[0] === st[1]) issues.push('chooser: the chosen row is not drawn apart'); }
+      rows.forEach((r, i) => { const b = W2(r.querySelector('b')), sub = W2(r.querySelector('.g-tx span')), al = r.getAttribute('aria-label') || '';
+        if (b !== 'حكومة ' + LEADERS[i] || r.dataset.leader !== LEADERS[i]) issues.push(`chooser: «${b}» does not name its leader (${LEADERS[i]})`);
+        if (!/تدير /.test(sub)) issues.push(`chooser: «${b}» does not name the part it administers`);
         if (!al.startsWith(b + ': ') || sub.split(' · ').some((x) => !al.includes(x.trim()))) issues.push(`a11y: «${b}» does not read all it shows`);
         const rr = r.getBoundingClientRect(); if (rr.height < 40 - 0.5) issues.push(`chooser: row «${b}» under 40 pt`);
-        const ck = r.querySelector('.g-ck'); if (ck && (getComputedStyle(ck).visibility === 'visible') !== r.classList.contains('on')) issues.push(`chooser: the check mark on «${b}» does not follow the choice`); });
+        // page 3's radio at the row's start, drawn on every row: filled and cyan on the chosen row, empty and grey on the other
+        const cks = r.querySelectorAll('.g-ck'), ck = cks[0], isOn = r.classList.contains('on');
+        const drawn = !!ck && ck.getClientRects().length > 0 && getComputedStyle(ck).visibility === 'visible' && ck.getBoundingClientRect().width > 0 && ck.getBoundingClientRect().height > 0;
+        const href = ck && ck.querySelector('use') ? ck.querySelector('use').getAttribute('href') : '', col = ck ? getComputedStyle(ck).color : '';
+        if (cks.length !== 1 || !drawn || href !== (isOn ? '#i-radio-on' : '#i-radio') || col !== (isOn ? 'rgb(127, 233, 255)' : getComputedStyle(r.querySelector('.g-tx span')).color)) issues.push(`chooser: the radio on «${b}» does not follow the choice`);
+        else if (ck.getBoundingClientRect().right < r.getBoundingClientRect().right - 16) issues.push(`chooser: the radio on «${b}» is not at the row's start`); });
       if (q('[role="dialog"], [role="alertdialog"], dialog')) issues.push('chooser: a dialog over the map (mapCentral)');
-      if (!/ساحل العاج/.test(W2(q('.sel .nm'))) || !q('.chip.on') || !/ساحل العاج/.test(W2(q('.chip.on')))) issues.push('the card and the chosen chip are not the same country'); }
+      // the facts: the country's population and the chosen government's difficulty, in the scale's colour (as its chip)
+      const facts = qa('.sel .fact').map((f) => [W2(f.querySelector('.k')), W2(f.querySelector('.v')), f.querySelector('.v')]);
+      if (facts.map((f) => f[0]).join('|') !== 'السكان|الصعوبة' || !/^[\d.]+ مليون$/.test(facts[0][1]) || facts[1][1] !== 'صعبة جدًا') issues.push(`card: facts are not population and difficulty: ${facts.map((f) => f[0] + ' ' + f[1]).join(' / ')}`);
+      else { const df = q('.chip.on .df'); if (!df || getComputedStyle(facts[1][2]).color !== getComputedStyle(df).color) issues.push('card: the difficulty is not in its chip\'s colour'); }
+      // the card and the chosen chip: the same country, by name and flag; the chosen chip first in the strip
+      if (!/ساحل العاج/.test(W2(q('.sel .nm'))) || !q('.chip.on') || !/ساحل العاج/.test(W2(q('.chip.on')))) issues.push('the card and the chosen chip are not the same country');
+      [q('.sel .flag img'), q('.chip.on .flag img')].forEach((im, i) => { if (!im || !im.getAttribute('src').endsWith('/flags/ci.svg')) issues.push(`${i ? 'chosen chip' : 'card'}: not Côte d'Ivoire's flag`); });
+      if (q('.strip .chip') !== q('.chip.on')) issues.push('strip: the chosen chip is not first');
+      const nChips = document.querySelectorAll('.strip .chip').length;
+      if (W2(q('.search .cnt')) !== nChips + ' دولة') issues.push(`search: the count does not match the chips (${W2(q('.search .cnt'))} vs ${nChips})`);
+      { const sr = q('.search').getBoundingClientRect(), cr = q('.sel').getBoundingClientRect(); if (Math.abs(cr.left - sr.right - 12) > 0.5) issues.push(`search: not 12 pt from the card (${(cr.left - sr.right).toFixed(1)})`);
+        if (Math.abs(cr.top - sr.top) > 0.01 && cr.top < sr.bottom + 8 - eps) issues.push(`card: ${(cr.top - sr.top).toFixed(1)} pt under the search field's top (align them, or 8 pt under the field)`); } }
     return { issues, audit, typeSeen, texts };
   }, { d, TOK });
 }
@@ -306,18 +352,58 @@ async function open(ctx, url) {
 }
 
 async function selftest(b) {
-  const d = ALL.find((x) => x.id === 'i14');
-  const qs = `?w=${d.w}&h=${d.h}&side=${d.side}&bottom=${d.bottom}&cutout=${d.cutout}`;
-  const ctx = await b.newContext({ viewport: { width: d.w, height: d.h }, deviceScaleFactor: 1 });
+  const ctxs = {}, dev = async (id) => { const d = ALL.find((x) => x.id === id); if (!ctxs[id]) ctxs[id] = await b.newContext({ viewport: { width: d.w, height: d.h }, deviceScaleFactor: 1 });
+    return { d, ctx: ctxs[id], qs: `?w=${d.w}&h=${d.h}&side=${d.side}&bottom=${d.bottom}&cutout=${d.cutout}` }; };
+  const { d, ctx, qs } = await dev('i14');
   const cases = [
     ['', [/chooser: not exactly one government chosen/], () => { const r = document.querySelectorAll('.g-row')[1]; r.classList.add('on'); r.setAttribute('aria-checked', 'true'); }],
     ['', [/chooser: the default \(the one the UN recognises\) is not first and chosen/], () => { const r = document.querySelectorAll('.g-row'); r[0].classList.remove('on'); r[0].setAttribute('aria-checked', 'false'); r[1].classList.add('on'); r[1].setAttribute('aria-checked', 'true'); }],
     ['', [/chooser: not a radio group/], () => { document.querySelector('.gov').removeAttribute('role'); }],
     ['', [/chooser: not two radio rows/], () => { document.querySelectorAll('.g-row')[1].removeAttribute('role'); }],
-    ['', [/does not name its leader and the part it administers/], () => { document.querySelectorAll('.g-row .g-tx span')[1].textContent = 'أبيدجان'; }],
+    ['', [/«حكومة لوران غباغبو» does not name the part it administers/], () => { document.querySelectorAll('.g-row .g-tx span')[1].textContent = 'أبيدجان'; }],
+    // a row that names no leader (its data and its bold line agree, but not with this scenario's leaders)
+    ['', [/«حكومة الجنوب» does not name its leader \(لوران غباغبو\)/], () => { const r = document.querySelectorAll('.g-row')[1]; r.querySelector('b').textContent = 'حكومة الجنوب'; r.dataset.leader = 'الجنوب'; r.setAttribute('aria-label', 'حكومة الجنوب: يؤيدها المجلس الدستوري، تدير الجنوب وأبيدجان'); }],
+    // a second row claims the default, or the UN recognition
+    ['', [/the default and the UN recognition are not the first row's alone/], () => { const r = document.querySelectorAll('.g-row')[1]; r.setAttribute('aria-label', r.getAttribute('aria-label') + '. الافتراضية'); }],
+    ['', [/the default and the UN recognition are not the first row's alone/], () => { const r = document.querySelectorAll('.g-row')[1]; r.querySelector('.g-tx span').textContent = 'تعترف بها الأمم المتحدة · تدير الجنوب'; r.setAttribute('aria-label', 'حكومة لوران غباغبو: تعترف بها الأمم المتحدة، تدير الجنوب'); }],
+    // the caption that names the group is hidden, or does not ask
+    ['.gov .gk { display: none !important; }', [/chooser: not a radio group named by its visible caption/]],
+    ['', [/chooser: not a radio group named by its visible caption/], () => { document.getElementById('govAsk').lastChild.textContent = ' نزاع على السلطة'; }],
+    // the check mark: hidden on the chosen row by display, or missing
+    ['.g-row.on .g-ck { display: none !important; }', [/the radio on «حكومة الحسن واتارا» does not follow the choice/]],
+    ['', [/the radio on «حكومة الحسن واتارا» does not follow the choice/], () => { document.querySelector('.g-row.on .g-ck').remove(); }],
+    // the chosen row drawn as the other
+    ['.g-row.on { background: rgba(234, 242, 247, 0.04) !important; box-shadow: inset 0 0 0 1px rgba(127, 233, 255, 0.10) !important; }', [/the chosen row is not drawn apart/]],
+    // the facts: one missing; the difficulty in another colour than its chip's
+    ['', [/card: facts are not population and difficulty/], () => { document.querySelector('.sel .fact').remove(); }],
+    ['.fact .v.d4 { color: var(--amber) !important; }', [/the difficulty is not in its chip's colour/]],
+    // flags, the strip's order, the count, the search field's gap, the card's top
+    ['', [/card: not Côte d'Ivoire's flag/], () => { document.querySelector('.sel .flag img').setAttribute('src', '../../shared/flags/eg.svg'); }],
+    ['', [/strip: the chosen chip is not first/], () => { const a = document.querySelector('.chip.on'); a.parentElement.insertBefore(a.nextElementSibling, a); }],
+    ['', [/search: the count does not match the chips/], () => { document.querySelector('.search .cnt').textContent = '14 دولة'; }],
+    ['.search { right: calc(var(--gutter) + var(--card-w) + 20px) !important; }', [/search: not 12 pt from the card/]],
+    ['.card.sel { top: 60px !important; }', [/card: 8\.0 pt under the search field's top/]],
+    ['.card.sel { top: 81px !important; }', [/card: 29\.0 pt under the search field's top/]],   /* 3 pt above the field's bottom (as iPhone 16 Pro was) */
+    // the lead line: ends on a government's row; crosses the search field; its dot outside the country; another country's box
+    ['', [/lead line does not end on the card's head/], () => { const r = document.querySelector('.g-row').getBoundingClientRect(); document.getElementById('leadLine').setAttribute('y2', r.top + r.height / 2); }],
+    ['', [/lead line crosses \.search/], () => { const s = document.querySelector('.search').getBoundingClientRect(), l = document.getElementById('leadLine'); l.setAttribute('x1', s.left + 20); l.setAttribute('y1', s.top + 10); ['leadDot', 'leadHalo'].forEach((id) => { const c = document.getElementById(id); c.setAttribute('cx', s.left + 20); c.setAttribute('cy', s.top + 10); }); }],
+    ['', [/the lead line's dot is not inside the selected country/], () => { const l = document.getElementById('leadLine'), x = +l.getAttribute('x1') - 40; l.setAttribute('x1', x); ['leadDot', 'leadHalo'].forEach((id) => document.getElementById(id).setAttribute('cx', x)); }],
+    ['', [/highlight and placement box are not the same country/], () => { window.__EG = Object.assign({}, window.__EG, { x0: window.__EG.x0 + 5 }); }],
+    ['', [/lead line does not start at the dot/], () => { document.getElementById('leadDot').setAttribute('cy', +document.getElementById('leadDot').getAttribute('cy') + 5); }],
+    // the names declutter took out drawn again (the overlay's mask removed): Ghana under the lead line; on iPhone 14 also
+    // South Africa at the bottom row; on iPhone 17 Pro Max (one name hidden) Ghana alone
+    ['.map img.ov { -webkit-mask-image: none !important; mask-image: none !important; }', [/map name crossed by the lead line: غانا/, /map name (cut by the bottom row|inside the strip's faded end): جنوب أفريقيا/]],
+    ['.map img.ov { -webkit-mask-image: none !important; mask-image: none !important; }', [/map name crossed by the lead line: غانا/], null, 'i16promax'],
+    // the names cut by the search field's and the card's edges, and in the chip row, drawn again
+    ['.map img.ov { -webkit-mask-image: none !important; mask-image: none !important; }', [/map name cut by the search field: /, /map name in the chip row: /], null, 'i16pro'],
+    // D-3: a see-through panel; a panel that blurs the map
+    ['.frost::after { background: rgba(9, 17, 25, 0.66) !important; }', [/panel not opaque \(D-3\)/]],
+    ['.card.sel { -webkit-backdrop-filter: blur(10px) !important; backdrop-filter: blur(10px) !important; }', [/panel blurs the map \(D-3\): card sel/]],
     ['', [/a11y: «حكومة لوران غباغبو» does not read all it shows/], () => { document.querySelectorAll('.g-row')[1].setAttribute('aria-label', 'حكومة لوران غباغبو'); }],
     ['.g-row { min-height: 30px !important; }', [/under 40 pt/]],
-    ['.g-row .g-ck { visibility: visible !important; }', [/the check mark on «حكومة لوران غباغبو» does not follow the choice/]],
+    ['', [/the radio on «حكومة لوران غباغبو» does not follow the choice/], () => { document.querySelectorAll('.g-row .g-ck use')[1].setAttribute('href', '#i-radio-on'); }],
+    ['.g-row .g-ck { color: var(--cyan) !important; }', [/the radio on «حكومة لوران غباغبو» does not follow the choice/]],
+    ['.g-row .g-ck { order: 9; }', [/the radio on «حكومة الحسن واتارا» is not at the row's start/]],
     ['', [/a dialog over the map/], () => { document.querySelector('.sel').setAttribute('role', 'dialog'); }],
     ['', [/the card and the chosen chip are not the same country/], () => { document.querySelector('.chip.on .nm').textContent = 'مصر'; }],
     ['.card.sel { right: 300px !important; }', [/selected country under card sel/, /selected country too close to the card/, /lead line does not reach the card/]],
@@ -334,20 +420,20 @@ async function selftest(b) {
   ];
   let failed = 0;
   const results = [];
-  for (const [css, want, js] of cases) {
-    const p = await open(ctx, PAGE + qs);
+  for (const [css, want, js, id] of cases) {
+    const D = await dev(id || 'i14'), p = await open(D.ctx, PAGE + D.qs);
     if (css) await p.addStyleTag({ content: css });
     if (js) await p.evaluate(js);
     await p.waitForTimeout(100);
-    const m = await measure(p, d);
+    const m = await measure(p, D.d);
     const missed = want.filter((re) => !m.issues.some((i) => re.test(i)));
-    results.push({ name: css || String(js).slice(0, 60), ok: !missed.length });
+    results.push({ name: (id ? id + ': ' : '') + (css || String(js).slice(0, 60)), ok: !missed.length });
     if (missed.length) { failed++; console.log('NOT CAUGHT', css, missed.map(String), '\n  got:', m.issues.slice(0, 8)); }
     await p.close();
   }
   const pc = await open(ctx, PAGE + qs), clean = (await measure(pc, d)).issues; await pc.close();
   fs.writeFileSync(path.join(__dirname, 'selftest.json'), JSON.stringify({ inputs: { files: INPUTS, sha1: inputsHash() }, results, cleanIssues: { i14: clean } }, null, 1));
-  await ctx.close();
+  for (const c of Object.values(ctxs)) await c.close();
   console.log(failed ? `selftest FAILED (${failed} of ${cases.length})` : `selftest OK: all ${cases.length} planted defects were caught`);
 }
 
