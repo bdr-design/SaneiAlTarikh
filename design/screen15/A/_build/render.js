@@ -95,7 +95,7 @@ if (ops.length === 4) {
 require(path.join(OUT, '../../shared/check/panelcheck.js'))({
   OUT, dock: null, tabs: ['event'], noTabs: true, fitTab: false, longTab: 'event',
   inputs: ['_build/decision.css', 'event_header.jpg', '../../screen5/A/_build/sheet.html', '../../screen6/A/_build/sheet.html', '../../screen8/A/_build/sheet.html'],
-  TOK: { sec: 'rgb(169, 188, 203)', ctlH: {}, sheetIcon: [], size: [] },
+  TOK: { sec: 'rgb(237, 94, 142)', ctlH: {}, sheetIcon: [], size: [] },
   HEAD, BRIEF, screenChecks, DATA: { text: TEXT, ops: OPS, A },
   // the neutral grey identity is the text grey, so the «identity on data» plants cannot tell (as screen 13)
   skipGeneric: ['section colour on data', 'section colour on a rule', 'emblem drawn grey', 'why without its subject', 'amber value without its icon', '% before its number', 'brief text hidden', '18 pt misuse', 'clipped text', 'gap', 'faint text'],

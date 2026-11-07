@@ -19,4 +19,4 @@ PAUSED = ('<button class="play tap" aria-label="إيقاف مؤقت (اللعب�
           '<button class="play tap" aria-label="تشغيل (اللعبة متوقفة للقرار)"><svg class="i"><use href="#i-play"/></svg></button>')
 # the bell reads its count; the centre is closed
 BELL = ('<button class="bell tap" aria-label="الإشعارات">', '<button class="bell tap" aria-label="الإشعارات، 3 غير مقروءة" aria-expanded="false">')
-panel_page.build(R, S, D, title='قرار', sec='more', tabs=['event'], fit_tab=None, css=['decision.css'], symbols=SYMBOLS, extra_subs=[PAUSED, BELL])
+panel_page.build(R, S, D, title='قرار', sec='decision', tabs=['event'], fit_tab=None, css=['decision.css'], symbols=SYMBOLS, extra_subs=[PAUSED, BELL])

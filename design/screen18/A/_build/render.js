@@ -69,7 +69,7 @@ if ((q('.r-x').getAttribute('aria-label') || '') !== 'العودة إلى الخ
 require(path.join(OUT, '../../shared/check/panelcheck.js'))({
   OUT, dock: null, tabs: ['report'], noTabs: true, fitTab: false, longTab: 'report',
   inputs: ['_build/end.css'],
-  TOK: { sec: 'rgb(169, 188, 203)', ctlH: {}, sheetIcon: [], size: [['.e-p', null, 32]] },
+  TOK: { sec: 'rgb(214, 187, 169)', ctlH: {}, sheetIcon: [], size: [['.e-p', null, 32]] },
   HEAD, BRIEF, screenChecks, DATA: { pillars: PILLARS, note: NOTE },
   skipGeneric: ['section colour on data', 'section colour on a rule', 'emblem drawn grey', 'why without its subject', 'amber value without its icon', 'chip arrow against its sign', 'chip not white', 'tap in the side inset', 'text into a control'],
   cases: (d, se) => [

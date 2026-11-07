@@ -56,7 +56,7 @@ rows.forEach((r) => { const u = r.dataset.unread === '1', nm = W(T(r.querySelect
 require(path.join(OUT, '../../shared/check/panelcheck.js'))({
   OUT, dock: null, tabs: ['center'], noTabs: true, fitTab: false, longTab: 'center',
   inputs: ['_build/center.css'],
-  TOK: { sec: 'rgb(169, 188, 203)', ctlH: {}, sheetIcon: [], size: [['.n-ord', null, 44]], radius: { '.n-ord': 10 } },
+  TOK: { sec: 'rgb(198, 186, 232)', ctlH: {}, sheetIcon: [], size: [['.n-ord', null, 44]], radius: { '.n-ord': 10 } },
   HEAD, BRIEF, screenChecks, DATA: { rows: ROWS, sections: SECTIONS },
   skipGeneric: ['section colour on data', 'section colour on a rule', 'emblem drawn grey', 'why without its subject', 'amber value without its icon', '% before its number', 'brief text hidden', '18 pt misuse', 'clipped text', 'gap', 'faint text', 'text into a control', 'chip arrow against its sign', 'chip not white'],
   cases: (d, se) => [

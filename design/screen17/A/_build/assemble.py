@@ -16,4 +16,4 @@ SUBS = [('<button class="play tap" aria-label="إيقاف مؤقت (اللعبة
          '<button class="bell tap" aria-label="الإشعارات، غير المقروءة 2" aria-expanded="false"><svg class="i"><use href="#i-bell"/></svg><span class="badge">2</span></button>'),
         ('<button class="stat tap"><span class="stat-in">\n        <span class="lblrow"><span class="lbl">الاستقرار</span>',
          '<button class="stat tap" aria-label="الاستقرار 58%، ينخفض. لماذا؟" aria-expanded="true"><span class="stat-in">\n        <span class="lblrow"><span class="lbl">الاستقرار</span>')]
-panel_page.build(R, S, D, title='لماذا؟ الاستقرار', sec='more', tabs=['why'], fit_tab=None, css=['why.css'], symbols=SYMBOLS, extra_subs=SUBS)
+panel_page.build(R, S, D, title='لماذا؟ الاستقرار', sec='why', tabs=['why'], fit_tab=None, css=['why.css'], symbols=SYMBOLS, extra_subs=SUBS)

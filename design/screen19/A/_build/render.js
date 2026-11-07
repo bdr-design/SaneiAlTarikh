@@ -82,7 +82,7 @@ tiles.forEach((t) => { const c = getComputedStyle(t.querySelector('svg')).color;
 require(path.join(OUT, '../../shared/check/panelcheck.js'))({
   OUT, dock: null, tabs: ['modes'], noTabs: true, fitTab: false, longTab: 'modes',
   inputs: ['_build/modes.css', 'map_mode_security.svg', 'map_mode_security.json', 'map_overlay_mode.svg', '../../../tools/mapmode.py', '../../screen8/A/_build/render.js'],
-  TOK: { sec: 'rgb(169, 188, 203)', ctlH: { '.m-tile': 36 }, sheetIcon: [['.m-tile svg', 16]], size: [['.m-bar', null, 8]], radius: { '.m-tile': 10 } },
+  TOK: { sec: 'rgb(239, 179, 195)', ctlH: { '.m-tile': 36 }, sheetIcon: [['.m-tile svg', 16]], size: [['.m-bar', null, 8]], radius: { '.m-tile': 10 } },
   HEAD, BRIEF, screenChecks, DATA: { options: [['الحدود', ['فعلية', 'قانونية'], 'فعلية'], ['حدود المحافظات', ['تظهر', 'تختفي'], 'تظهر'], ['الأسماء', ['قليلة', 'متوسطة', 'كثيرة'], 'متوسطة']], modes: MODES, chosen: CHOSEN, edges: EDGES, bands: BANDS, layerIssues: LAYER_ISSUES },
   skipGeneric: ['section colour on data', 'section colour on a rule', 'emblem drawn grey', 'why without its subject', 'amber value without its icon', '% before its number', 'brief text hidden', '18 pt misuse', 'clipped text', 'gap', 'faint text', 'text into a control', 'chip arrow against its sign', 'chip not white', 'tile icons cyan'],
   cases: (d, se) => [

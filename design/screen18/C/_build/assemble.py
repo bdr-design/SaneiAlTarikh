@@ -21,4 +21,4 @@ SUBS = [('<button class="spd tap" aria-label="السرعة 1×" aria-haspopup="m
         ('<span class="rg">جمهورية رئاسية</span>', '<span class="rg">حكم انتقالي</span>'),
         ('<span class="num ltr">58%</span>', '<span class="num ltr">31%</span>'),
         ('<svg class="i"><use href="#i-seal"/></svg><span class="num">44</span>', '<svg class="i"><use href="#i-seal"/></svg><span class="num">35</span>')]
-panel_page.build(R, S, D, title='سقطت حكومتك', sec='more', tabs=['fallen'], fit_tab=None, css=['end.css'], symbols=SYMBOLS, extra_subs=SUBS)
+panel_page.build(R, S, D, title='سقطت حكومتك', sec='end', tabs=['fallen'], fit_tab=None, css=['end.css'], symbols=SYMBOLS, extra_subs=SUBS)

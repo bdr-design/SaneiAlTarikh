@@ -18,4 +18,4 @@ SUBS = [('<button class="spd tap" aria-label="السرعة 1×" aria-haspopup="m
         ('aria-label="الدولة: مصر، حسني مبارك، جمهورية رئاسية"', 'aria-label="الدولة: مصر، رئيس الدولة، جمهورية رئاسية"'),
         ('<span class="txt">احتجاجات واسعة في تونس</span>', '<span class="txt">انتهت الحملة</span>'),
         ('<span class="ldr">حسني مبارك</span>', '<span class="ldr">رئيس الدولة</span>')]
-panel_page.build(R, S, D, title='نهاية الحملة', sec='more', tabs=['nuclear'], fit_tab=None, css=['end.css'], symbols=SYMBOLS, extra_subs=SUBS)
+panel_page.build(R, S, D, title='نهاية الحملة', sec='end', tabs=['nuclear'], fit_tab=None, css=['end.css'], symbols=SYMBOLS, extra_subs=SUBS)

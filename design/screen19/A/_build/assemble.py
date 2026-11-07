@@ -23,4 +23,4 @@ SYMBOLS = """    <symbol id="i-flag" viewBox="0 0 24 24"><path d="M5.5 21V3.5"/>
 SUBS = [('<img src="map_overlay_cairo.svg" alt="">', '<img class="mode-layer" src="map_mode_security.svg" alt="">\n  <img src="map_overlay_mode.svg" alt="">'),
         ('<button class="btn glass ctl tap mode"><svg class="i"><use href="#i-layers"/></svg><span><span class="k">الخريطة:</span> سياسية</span></button>',
          '<button class="btn glass ctl tap mode" aria-label="الخريطة: الأمن" aria-expanded="true"><svg class="i"><use href="#i-layers"/></svg><span class="m-lbl"><span class="k">الخريطة:</span> الأمن</span></button>')]
-panel_page.build(R, S, D, title='أوضاع الخريطة', sec='more', tabs=['modes'], fit_tab=None, css=['modes.css'], symbols=SYMBOLS, extra_subs=SUBS)
+panel_page.build(R, S, D, title='أوضاع الخريطة', sec='mapmode', tabs=['modes'], fit_tab=None, css=['modes.css'], symbols=SYMBOLS, extra_subs=SUBS)

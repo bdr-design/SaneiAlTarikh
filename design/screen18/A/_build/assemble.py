@@ -22,4 +22,4 @@ SUBS = [('<button class="spd tap" aria-label="السرعة 1×" aria-haspopup="m
         ('<span class="txt">احتجاجات واسعة في تونس</span>', '<span class="txt">انتهت الحملة في 2100</span>'),
         ('<span class="num ltr">58%</span>', '<span class="num ltr">71%</span>'),
         ('<svg class="i"><use href="#i-signal"/></svg><span class="num">62</span>', '<svg class="i"><use href="#i-signal"/></svg><span class="num">70</span>')]
-panel_page.build(R, S, D, title='تقرير الأمة', sec='more', tabs=['report'], fit_tab=None, css=['end.css'], symbols=SYMBOLS, extra_subs=SUBS)
+panel_page.build(R, S, D, title='تقرير الأمة', sec='end', tabs=['report'], fit_tab=None, css=['end.css'], symbols=SYMBOLS, extra_subs=SUBS)
