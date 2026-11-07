@@ -169,7 +169,6 @@
   .r-dtx em { font-style: normal; color: var(--t1); }
   .r-dfoot { display: flex; flex-direction: column; align-items: flex-start; gap: var(--s1); }   /* the positions line above the buttons: the row was at its limit (2026-11-04) */
   .r-dbtn { display: flex; gap: var(--s1); }
-  .r-dbtn .r-btn { padding-inline: var(--s2); }
 
   /* map labels and the tapped province: blue-violet glow, white ring, name pill (the owner's images) */
   .map svg.labels { position: absolute; inset: 0; width: 100%; height: 100%; direction: ltr; }

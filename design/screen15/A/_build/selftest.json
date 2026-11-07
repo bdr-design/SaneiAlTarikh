@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-04T12:58:00.482Z",
+ "ranAt": "2026-11-07T16:07:27.098Z",
  "inputs": {
   "files": [
    "index.html",
@@ -25,7 +25,7 @@
    "../../shared/map_mena_d1_overlay.svg",
    "map_overlay_cairo.svg"
   ],
-  "sha1": "17f817780b153913a7073ab318df523529fa2ee1"
+  "sha1": "425b4299830bf39f0342179b1082699bcb78dc2d"
  },
  "cleanIssues": {
   "i16promax": [],
@@ -186,7 +186,23 @@
    "name": "identity line missing",
    "ok": true,
    "sample": [
-    "panel top line none rgb(169, 188, 203) 2px (want the section colour, 2 pt, at the top)"
+    "panel top line none rgb(237, 94, 142) 2px (want the section colour, 2 pt, at the top)"
+   ]
+  },
+  {
+   "name": "emblem drawn grey",
+   "ok": true,
+   "sample": [
+    "section emblem missing or not in the section colour"
+   ]
+  },
+  {
+   "name": "section colour on data",
+   "ok": true,
+   "sample": [
+    "section colour on data text: \"الوقت متوقف\"",
+    "section colour on data text: \"الافتراضي بعد\"",
+    "section colour on data text: \"7\""
    ]
   },
   {

@@ -1,0 +1,691 @@
+{
+ "ranAt": "2026-11-07T16:28:07.362Z",
+ "inputs": {
+  "files": [
+   "index.html",
+   "_build/render.js",
+   "_build/sheet.html",
+   "_build/assemble.py",
+   "../../shared/check/panelcheck.js",
+   "../../shared/check/panel_page.py",
+   "../../screen4/R/_build/panel.css",
+   "../../shared/section_identity.css",
+   "../../screen5/A/_build/state.css",
+   "../../screen4/A/index.html",
+   "../../screen1/B3/index.html",
+   "../../shared/devices.json",
+   "_build/save.css",
+   "../../screen13/A/_build/sheet.html",
+   "../../../decisions/decisions.json",
+   "../../shared/flag_eg.svg",
+   "../../shared/flags/eg.svg",
+   "../../shared/map_mena_d1.jpg",
+   "../../shared/map_mena_d1_overlay.svg",
+   "header_cairo.jpg",
+   "map_overlay_cairo.svg"
+  ],
+  "sha1": "3e4071014c625ae2f8433b1e8ebe7940640f16c3"
+ },
+ "cleanIssues": {
+  "i16promax": [],
+  "i16promax_file_end": [],
+  "i16promax_confirm": [],
+  "i16promax_confirm_end": [],
+  "i16promax_load": [],
+  "i16promax_load_end": [],
+  "i16promax coverage": [],
+  "se": [],
+  "se_file_end": [],
+  "se_confirm": [],
+  "se_confirm_end": [],
+  "se_load": [],
+  "se_load_end": [],
+  "se coverage": []
+ },
+ "results": [
+  {
+   "name": "type size",
+   "ok": true,
+   "sample": [
+    "font size 17 for \"حفظ تلقائي\""
+   ]
+  },
+  {
+   "name": "off-token colour",
+   "ok": true,
+   "sample": [
+    "text colour off-token rgb(136, 153, 170): \"حفظ تلقائي\"",
+    "contrast 2.33 for \"حفظ تلقائي\""
+   ]
+  },
+  {
+   "name": "radius",
+   "ok": true,
+   "sample": [
+    "panel radius حفظ تلقائي: 6 (want 12)",
+    "radius 6 for .sheet (want 12)"
+   ]
+  },
+  {
+   "name": "tap in the side inset",
+   "ok": true,
+   "sample": [
+    "text in side inset: الملف",
+    "text in side inset: التاريخ",
+    "text in side inset: يتناوب الحفظ التلقائي على"
+   ]
+  },
+  {
+   "name": "panel in the side inset",
+   "ok": true,
+   "sample": [
+    "text in side inset: الملف",
+    "text in side inset: التاريخ",
+    "text in side inset: يتناوب الحفظ التلقائي على"
+   ]
+  },
+  {
+   "name": "panel not opaque",
+   "ok": true,
+   "sample": [
+    "panel not opaque: حفظ تلقائي rgba(9, 17, 25, 0.66)",
+    "contrast 4.08 for \"الحجم\"",
+    "contrast 4.25 for \"يتناوب الحفظ التلقائي عل\""
+   ]
+  },
+  {
+   "name": "see-through panel",
+   "ok": true,
+   "sample": [
+    "panel not opaque (opacity 0.60): حفظ تلقائي",
+    "brief text not fully visible: حفظ تلقائي",
+    "brief text not fully visible: حملة مصر · حُفظ قبل دقيقة"
+   ]
+  },
+  {
+   "name": "Egypt covered",
+   "ok": true,
+   "sample": [
+    "Nile delta covered by panel حفظ تلقائي",
+    "Egypt covered by panel حفظ تلقائي",
+    "Egypt under the hit box of تحميل هذا الحفظ: يعود إلى "
+   ]
+  },
+  {
+   "name": "map dimmed",
+   "ok": true,
+   "sample": [
+    "the map is dimmed (opacity 1.00, filter brightness(0.35))"
+   ]
+  },
+  {
+   "name": "map faded",
+   "ok": true,
+   "sample": [
+    "the map is dimmed (opacity 0.30, filter none)"
+   ]
+  },
+  {
+   "name": "scrim over the map",
+   "ok": true,
+   "sample": [
+    "something drawn over the map: DIV (rgba(0, 0, 0, 0.55))",
+    "contrast 1.92 for \"3\""
+   ]
+  },
+  {
+   "name": "sheet width",
+   "ok": true,
+   "sample": [
+    "sheet width 330 (want round(clamp(43% of 832, 340, 380)), or the room the dock leaves if 330..: 358)"
+   ]
+  },
+  {
+   "name": "sheet top",
+   "ok": true,
+   "sample": [
+    "hit overlap الاستقرار 58% / إغلاق، العودة إلى الحفظ",
+    "panel overlap الدولة: مصر، حسني مبارك، ج / حفظ تلقائي",
+    "panel overlap الخزينة 36.0 مليار $ الاست / حفظ تلقائي"
+   ]
+  },
+  {
+   "name": "dock hidden although it fits",
+   "ok": true,
+   "sample": [
+    "dock hidden although it fits left of the sheet"
+   ]
+  },
+  {
+   "name": "dock shown on the SE",
+   "ok": true,
+   "sample": [
+    "icon over text: i / \"لا نسخة له في مجلد آخر · لا يمكن التراجع\"",
+    "icon over text: i / \"لا نسخة له في مجلد آخر · لا يمكن التراجع\"",
+    "hit overlap الدولة / حذف هذا الحفظ: لا نسخة له "
+   ]
+  },
+  {
+   "name": "left stack moved",
+   "ok": true,
+   "sample": [
+    "HUD element moved from its B3 position: .toast x 70.0..275.6 y 56.0..88.0",
+    "HUD element moved from its B3 position: .btn.mode x 70.0..191.6 y 96.0..128.0",
+    "HUD element moved from its B3 position: .btn.home x 70.0..141.5 y 136.0..168.0"
+   ]
+  },
+  {
+   "name": "fit not the loosest",
+   "ok": true,
+   "sample": [
+    "fit level 6 is not the loosest that fits: [[0,0]]"
+   ]
+  },
+  {
+   "name": "map label cut",
+   "ok": true,
+   "sample": [
+    "map label ليبيا sliced by the screen edge or the side inset",
+    "map label إيران sliced by the screen edge or the side inset",
+    "map label إيران squeezed between a panel and the screen edge"
+   ]
+  },
+  {
+   "name": "contrast",
+   "ok": true,
+   "sample": [
+    "contrast 1 for \"الملف\"",
+    "contrast 1.73 for \"التاريخ\"",
+    "contrast 1 for \"1\""
+   ]
+  },
+  {
+   "name": "dock item not marked",
+   "ok": true,
+   "sample": [
+    "the open section «المزيد» is not marked in the dock"
+   ]
+  },
+  {
+   "name": "identity line missing",
+   "ok": true,
+   "sample": [
+    "panel top line none rgb(169, 188, 203) 2px (want the section colour, 2 pt, at the top)"
+   ]
+  },
+  {
+   "name": "money unit",
+   "ok": true,
+   "sample": [
+    "money unit: «0.4 مليار» (under 1 billion is written in millions)"
+   ]
+  },
+  {
+   "name": "sign outside its number",
+   "ok": true,
+   "sample": [
+    "a sign outside its number: «تغير +3»"
+   ]
+  },
+  {
+   "name": "colour alone",
+   "ok": true,
+   "sample": [
+    "colour alone: «تراجع» has no arrow or icon"
+   ]
+  },
+  {
+   "name": "an image in the sheet",
+   "ok": true,
+   "sample": [
+    "an image in the sheet"
+   ]
+  },
+  {
+   "name": "close not round",
+   "ok": true,
+   "sample": [
+    "close button is not round"
+   ]
+  },
+  {
+   "name": "label without a role",
+   "ok": true,
+   "sample": [
+    "a11y: a label VoiceOver may skip (no role): «اختبار»"
+   ]
+  },
+  {
+   "name": "overview scrolls",
+   "ok": true,
+   "sample": [
+    "file needs scrolling: 394.0 pt over",
+    "fades 0/0 do not match the scroll state (top 0, over 394.0)",
+    "brief text not fully visible: الملف"
+   ]
+  },
+  {
+   "name": "dock underline missing",
+   "ok": true,
+   "sample": [
+    "dock underline missing or off: none 16pxx2px rgb(169, 188, 203) (want 16 x 2 in the section colour)"
+   ]
+  },
+  {
+   "name": "identity line colour",
+   "ok": true,
+   "sample": [
+    "panel top line \"\" rgb(63, 224, 208) 2px (want the section colour, 2 pt, at the top)"
+   ]
+  },
+  {
+   "name": "emblem size",
+   "ok": true,
+   "sample": [
+    "size 28.0x32.0 for .s-emb (want 32 x 32)"
+   ]
+  },
+  {
+   "name": "tile icons cyan",
+   "ok": true,
+   "sample": [
+    "white touch off: .r-tile color rgb(127, 233, 255) (want rgb(234, 242, 247))",
+    "white touch off: .r-tile color rgb(127, 233, 255) (want rgb(234, 242, 247))",
+    "a delete row's bin is not red"
+   ]
+  },
+  {
+   "name": "row read in part",
+   "ok": true,
+   "sample": [
+    "a11y: «تحميل هذا الحفظ» does not read its numbers",
+    "a11y: «جزء» does not read all it shows: تحميل هذا الحفظ يعود",
+    "loading does not say its date (1 يناير 2011) and that it replaces the game"
+   ]
+  },
+  {
+   "name": "a long headline label",
+   "ok": true,
+   "sample": [
+    "clipped text (sides): \"عنوان طويل جدًا لا يتسع لخانته أبدًا\" 385.38..539.25 y 124..141",
+    "text outside the sheet's 12 pt padding: \"عنوان طويل جدًا لا يتسع لخانته أبدًا\"",
+    "clipped text (sides): \"1\" 528.44..539.25 y 142..169"
+   ]
+  },
+  {
+   "name": "text wider than its box",
+   "ok": true,
+   "sample": [
+    "text wider than its box: «الملف» (28 in 20)"
+   ]
+  },
+  {
+   "name": "a long status cell",
+   "ok": true,
+   "sample": [
+    "clipped text (sides): \"قيمة طويلة جدًا لا تتسع لنصف الجدول\" 416.53..613.3 y 121..140",
+    "text outside the sheet's 12 pt padding: \"قيمة طويلة جدًا لا تتسع لنصف الجدول\"",
+    "horizontal overflow in خانةقيمة طويلة جدًا لا تتس"
+   ]
+  },
+  {
+   "name": "font weight (no tabs)",
+   "ok": true,
+   "sample": [
+    "font weight 11.5/700 for \"حملة مصر\"",
+    "font weight 11.5/700 for \"·\"",
+    "font weight 11.5/700 for \"حُفظ قبل دقيقة\""
+   ]
+  },
+  {
+   "name": "a tab row on a one-body sheet",
+   "ok": true,
+   "sample": [
+    "a tab row on a sheet that has one body"
+   ]
+  },
+  {
+   "name": "control height (no tabs)",
+   "ok": true,
+   "sample": [
+    "control height 40.00 for .r-x (want 32): إغلاق، العودة إلى الحفظ",
+    "close button is not round"
+   ]
+  },
+  {
+   "name": "icon size (no tabs)",
+   "ok": true,
+   "sample": [
+    "icon size 19x19 (want 16): i"
+   ]
+  },
+  {
+   "name": "fades wrong (no tabs)",
+   "ok": true,
+   "sample": [
+    "fades 0/1 do not match the scroll state (top 0, over 0.0)"
+   ]
+  },
+  {
+   "name": "brief text hidden (file)",
+   "ok": true,
+   "sample": [
+    "brief text not fully visible: تحميل هذا الحفظ"
+   ]
+  },
+  {
+   "name": "18 pt misuse (file)",
+   "ok": true,
+   "sample": [
+    "18 pt is for the panel's name and the adjusted values only: \"يعود إلى\"",
+    "18 pt is for the panel's name and the adjusted values only: \"1\"",
+    "18 pt is for the panel's name and the adjusted values only: \"يناير\""
+   ]
+  },
+  {
+   "name": "text overlap (file)",
+   "ok": true,
+   "sample": [
+    "text overlap \"تحميل هذا الحفظ\" / \"يعود إلى\"",
+    "text overlap \"تحميل هذا الحفظ\" / \"1\"",
+    "text overlap \"تحميل هذا الحفظ\" / \"يناير\""
+   ]
+  },
+  {
+   "name": "clipped text (file)",
+   "ok": true,
+   "sample": [
+    "clipped text (sides): \"الملف\" 892.86..921 y 115..132",
+    "text outside the sheet's 12 pt padding: \"الملف\"",
+    "clipped text (sides): \"يتناوب الحفظ التلقائي على\" 820.41..921 y 172..187"
+   ]
+  },
+  {
+   "name": "faint text (file)",
+   "ok": true,
+   "sample": [
+    "brief text cannot be scrolled clear of the fades: يعود إلى 1 يناير 2011 · يحل محل اللعبة الحالية",
+    "brief text cannot be scrolled clear of the fades: ملف واحد عبر تطبيق الملفات",
+    "brief text cannot be scrolled clear of the fades: لا نسخة له في مجلد آخر · لا يمكن التراجع"
+   ]
+  },
+  {
+   "name": "gap (file)",
+   "ok": true,
+   "sample": [
+    "gap 6 on الملف التاريخ1 يناير 2011 ",
+    "gap 6 on الملف التاريخ1 يناير 2011 "
+   ]
+  },
+  {
+   "name": "% before its number (file)",
+   "ok": true,
+   "sample": [
+    "% shown before its number: \"نسبة 20%\"",
+    "the rotation is not the decision's 3 files",
+    "brief text missing: يتناوب الحفظ التلقائي على 3 ملفات، الأحدث مكان الأقدم."
+   ]
+  },
+  {
+   "name": "hint chevron missing (forced overflow)",
+   "ok": true,
+   "sample": [
+    "file needs scrolling: 194.0 pt over",
+    "scroll hint chevron missing with content below",
+    "brief text not fully visible: الملف"
+   ]
+  },
+  {
+   "name": "hint over the content (forced overflow)",
+   "ok": true,
+   "sample": [
+    "file needs scrolling: 194.0 pt over",
+    "scroll hint not centred in the clear strip under the fade: y 198.0..216.0 (strip 344.0..366.0)",
+    "brief text not fully visible: الملف"
+   ]
+  },
+  {
+   "name": "text into a control (header)",
+   "ok": true,
+   "sample": [
+    "text outside the sheet's 12 pt padding: \"حُفظ قبل دقيقة\"",
+    "text over a control: \"حُفظ قبل دقيقة\" runs into «إغلاق، العودة إلى ال»",
+    "icon over text: i / \"·\""
+   ]
+  },
+  {
+   "name": "two bodies shown",
+   "ok": true,
+   "sample": [
+    "clipped text (bottom): \"ملف واحد عبر تطبيق الملفات\" 722.83..834 y 275..290",
+    "clipped text (bottom): \"حذف نهائيًا\" 777.38..834 y 415.33..434.33",
+    "control cut by its scroll area (bottom): تصدير: ملف واحد عبر تطبيق "
+   ]
+  },
+  {
+   "name": "file not the panel's",
+   "ok": true,
+   "sample": [
+    "the file's cells are not the brief's: التاريخ:1 يناير 2011، الحجم:3 ميغابايت",
+    "the file is not the «المزيد» panel's autosave (1 يناير 2011، مصر، 2 ميغابايت)",
+    "brief text missing: 2 ميغابايت"
+   ]
+  },
+  {
+   "name": "rotation off",
+   "ok": true,
+   "sample": [
+    "the rotation is not the decision's 3 files",
+    "brief text missing: يتناوب الحفظ التلقائي على 3 ملفات، الأحدث مكان الأقدم.",
+    "brief text missing: يتناوب الحفظ التلقائي على 3 ملفات، الأحدث مكان الأقدم."
+   ]
+  },
+  {
+   "name": "actions reordered",
+   "ok": true,
+   "sample": [
+    "the actions are not load, export, delete in order: تحميل هذا الحفظ، حذف هذا الحفظ، تصدير"
+   ]
+  },
+  {
+   "name": "two primaries",
+   "ok": true,
+   "sample": [
+    "loading is not the one primary action"
+   ]
+  },
+  {
+   "name": "load date unsaid",
+   "ok": true,
+   "sample": [
+    "a11y: «تحميل هذا الحفظ» does not read its numbers",
+    "a11y: «تحميل هذا الحفظ» does not read all it shows: يعود إلى يناير يحل",
+    "loading does not say its date (1 يناير 2011) and that it replaces the game"
+   ]
+  },
+  {
+   "name": "export not through Files",
+   "ok": true,
+   "sample": [
+    "exporting does not go through Files (the decision «saves»)",
+    "brief text missing: ملف واحد عبر تطبيق الملفات",
+    "brief text missing: ملف واحد عبر تطبيق الملفات"
+   ]
+  },
+  {
+   "name": "link leads nowhere",
+   "ok": true,
+   "sample": [
+    "a11y: «تصدير» does not read all it shows: ملف واحد عبر تطبيق",
+    "a11y: the row «تصدير» does not say where it leads"
+   ]
+  },
+  {
+   "name": "mirror unsaid",
+   "ok": true,
+   "sample": [
+    "a11y: «حذف هذا الحفظ: لا نسخة ل» does not read all it shows: من الجهاز",
+    "the delete does not say, on screen and to VoiceOver, that the file has no other copy (the panel: لم يُختر مجلد)",
+    "brief text missing: لا نسخة له في مجلد آخر · لا يمكن التراجع"
+   ]
+  },
+  {
+   "name": "bin not red",
+   "ok": true,
+   "sample": [
+    "a delete row's bin is not red"
+   ]
+  },
+  {
+   "name": "red elsewhere",
+   "ok": true,
+   "sample": [
+    "white touch off: .r-tile color rgb(242, 112, 90) (want rgb(234, 242, 247))",
+    "red outside the delete rows"
+   ]
+  },
+  {
+   "name": "delete title red",
+   "ok": true,
+   "sample": [
+    "colour alone: «حذف هذا الحفظ» has no arrow or icon",
+    "a delete row's title is not white"
+   ]
+  },
+  {
+   "name": "delete without asking",
+   "ok": true,
+   "sample": [
+    "a11y: «حذف هذا الحفظ: من هذا ال» does not read all it shows: لا نسخة له في",
+    "the delete does not say, on screen and to VoiceOver, that the file has no other copy (the panel: لم يُختر مجلد)",
+    "deleting does not ask first (it should open the confirmation)"
+   ]
+  },
+  {
+   "name": "confirm in a dialog",
+   "ok": true,
+   "sample": [
+    "a dialog over the map (mapCentral)"
+   ]
+  },
+  {
+   "name": "load without asking",
+   "ok": true,
+   "sample": [
+    "loading does not ask first (it should open its confirmation)"
+   ]
+  },
+  {
+   "name": "load first",
+   "ok": true,
+   "sample": [
+    "the load confirmation is not «متابعة اللعب» (first, primary) then «تحميل»"
+   ]
+  },
+  {
+   "name": "load undated",
+   "ok": true,
+   "sample": [
+    "a11y: «تحميل» does not read all it shows: يحل محل اللعبة الحالية",
+    "a11y: the final load does not name its date (1 يناير 2011), or comes before the safe choice"
+   ]
+  },
+  {
+   "name": "loss unsaid",
+   "ok": true,
+   "sample": [
+    "the load confirmation does not say the date (1 يناير 2011) and what is lost",
+    "brief text missing: تعود الحملة إلى 1 يناير 2011، ويضيع من اللعبة الحالية ما لم يُحفظ بعد آخر حفظ.",
+    "brief text missing: تعود الحملة إلى 1 يناير 2011، ويضيع من اللعبة الحالية ما لم يُحفظ بعد آخر حفظ."
+   ]
+  },
+  {
+   "name": "delete first",
+   "ok": true,
+   "sample": [
+    "the confirmation is not «إبقاء الحفظ» (first, primary) then the delete"
+   ]
+  },
+  {
+   "name": "delete unnamed",
+   "ok": true,
+   "sample": [
+    "a11y: «حذف نهائيًا» does not read all it shows: لا يمكن التراجع",
+    "a11y: the final delete does not name the file (1 يناير 2011)"
+   ]
+  },
+  {
+   "name": "confirm note unnamed",
+   "ok": true,
+   "sample": [
+    "the confirmation does not name the file (1 يناير 2011، مصر، 2)",
+    "brief text missing: سيُحذف حفظ 1 يناير 2011 (مصر · 2 ميغابايت) من هذا الجهاز نهائيًا، ولا نسخة له في مجلد آخر.",
+    "brief text missing: سيُحذف حفظ 1 يناير 2011 (مصر · 2 ميغابايت) من هذا الجهاز نهائيًا، ولا نسخة له في مجلد آخر."
+   ]
+  },
+  {
+   "name": "wrong flag",
+   "ok": true,
+   "sample": [
+    "the header flag is not the campaign's (مصر)"
+   ]
+  },
+  {
+   "name": "emblem not the save",
+   "ok": true,
+   "sample": [
+    "the emblem is not the save"
+   ]
+  },
+  {
+   "name": "close elsewhere",
+   "ok": true,
+   "sample": [
+    "a11y: the close is not «إغلاق، العودة إلى الحفظ»"
+   ]
+  },
+  {
+   "name": "primary bar gone",
+   "ok": true,
+   "sample": [
+    "the primary «تحميل هذا الحفظ» does not draw its white bar"
+   ]
+  },
+  {
+   "name": "bar on the delete",
+   "ok": true,
+   "sample": [
+    "«حذف نهائيًا» draws the primary's bar"
+   ]
+  },
+  {
+   "name": "red outline elsewhere",
+   "ok": true,
+   "sample": [
+    "red outside the delete rows: r-act tap r-first"
+   ]
+  },
+  {
+   "name": "red fill elsewhere",
+   "ok": true,
+   "sample": [
+    "red outside the delete rows: r-tile"
+   ]
+  },
+  {
+   "name": "final delete without its outline",
+   "ok": true,
+   "sample": [
+    "the final delete has no red outline"
+   ]
+  },
+  {
+   "name": "coverage reports a string no view shows",
+   "ok": true,
+   "sample": [
+    "file: never shown clear of the fades in any view: نص غير معروض للاختبار"
+   ],
+   "midViewsAdd": []
+  }
+ ]
+}

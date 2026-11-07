@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-04T13:26:09.726Z",
+ "ranAt": "2026-11-07T16:14:23.898Z",
  "inputs": {
   "files": [
    "index.html",
@@ -15,13 +15,14 @@
    "../../screen1/B3/index.html",
    "../../shared/devices.json",
    "_build/end.css",
+   "../../shared/check/end_hud.py",
    "../../shared/flag_eg.svg",
    "../../shared/flags/eg.svg",
    "../../shared/map_mena_d1.jpg",
    "../../shared/map_mena_d1_overlay.svg",
    "map_overlay_cairo.svg"
   ],
-  "sha1": "aab8e173b10a5c63ea6c96e8b17132505f45b8ba"
+  "sha1": "de206d732423c24df4a241833cd78f828ca9bae4"
  },
  "cleanIssues": {
   "i16promax": [],
@@ -130,9 +131,9 @@
    "name": "sheet top",
    "ok": true,
    "sample": [
-    "hit overlap الاستقرار 58% / العودة إلى الخريطة",
+    "hit overlap الاستقرار 22% / العودة إلى الخريطة",
     "panel overlap الدولة: مصر، رئيس الدولة،  / نهاية الحملة",
-    "panel overlap الخزينة 36.0 مليار $ الاست / نهاية الحملة"
+    "panel overlap الخزينة 41.2 مليار $ الاست / نهاية الحملة"
    ]
   },
   {
@@ -181,7 +182,23 @@
    "name": "identity line missing",
    "ok": true,
    "sample": [
-    "panel top line none rgb(169, 188, 203) 2px (want the section colour, 2 pt, at the top)"
+    "panel top line none rgb(214, 187, 169) 2px (want the section colour, 2 pt, at the top)"
+   ]
+  },
+  {
+   "name": "emblem drawn grey",
+   "ok": true,
+   "sample": [
+    "section emblem missing or not in the section colour"
+   ]
+  },
+  {
+   "name": "section colour on data",
+   "ok": true,
+   "sample": [
+    "section colour on data text: \"15\"",
+    "section colour on data text: \"مارس\"",
+    "section colour on data text: \"2034\""
    ]
   },
   {
@@ -530,6 +547,20 @@
    "ok": true,
    "sample": [
     "a11y: the close button does not say where it leads"
+   ]
+  },
+  {
+   "name": "HUD trend moving",
+   "ok": true,
+   "sample": [
+    "the HUD «الخزينة» moves while the clock is stopped"
+   ]
+  },
+  {
+   "name": "HUD 2011 value",
+   "ok": true,
+   "sample": [
+    "the HUD keeps the 2011 values: الخزينة"
    ]
   },
   {

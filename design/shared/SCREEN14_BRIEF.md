@@ -22,3 +22,6 @@ Counted from outside the page's code (every animation-frame, timer and interval 
 
 ## Gate
 `screen14/A/_build/render.js` (its own checker, with the panels' generic rules) checks the units at their map places, whole and clear, strengths from screen 9's sheet, the images, the route and its marks, the date, the bar (name, line, order in force, attack locked, on the dock's line), VoiceOver, no weapon names, the labels, and the frame counts. `--selftest` and `check_screen.py` must pass.
+
+## Cost (the heaviness review, 2026-11-07; design doc §3.9)
+The glide is bounded (L6, §3.9): only on-screen units selected or ordered in the last 10 game days, at most 8, at ≤30 map frames a second at ×1–×5, redrawing only the unit layer; otherwise day steps at ≤10 Hz. The order bar and the tokens' VoiceOver labels follow the snapshot's day (≤4 a second). Unit tokens hide labels only at rest and at day steps; label placement runs in the background, applied at most every 250 ms. The unit images and their flags share one atlas (one instanced pass).

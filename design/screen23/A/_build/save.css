@@ -1,0 +1,8 @@
+  /* ================= Screen 23, variant A: the save-file sheet ================= */
+  .r-tabs { display: none; }
+  [data-tab="file"] .r-body[data-tab="file"], [data-tab="confirm"] .r-body[data-tab="confirm"], [data-tab="load"] .r-body[data-tab="load"] { display: flex; }
+  .r-body[data-tab="file"], .r-body[data-tab="confirm"], .r-body[data-tab="load"] { padding-top: var(--s2); padding-bottom: var(--s3); gap: var(--s2); }
+  /* deleting: the red bin is the danger sign (the word says it; the text stays white, colour never alone) */
+  .s-del .r-tile { color: var(--red) !important; }
+  .r-act.s-del { box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--red) 45%, transparent); }
+  .r-body[data-tab="file"] .r-sc { border-bottom: 0; }   /* one row of two cells: the table's own line closes it */

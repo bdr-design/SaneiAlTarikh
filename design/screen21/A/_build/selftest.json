@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-04T13:33:13.256Z",
+ "ranAt": "2026-11-07T16:15:41.515Z",
  "inputs": {
   "files": [
    "index.html",
@@ -23,7 +23,7 @@
    "header_cairo.jpg",
    "map_overlay_cairo.svg"
   ],
-  "sha1": "9d69e2f4602da45af9bc8810cd1afc509c7deb44"
+  "sha1": "19d985f8c2a16956ae4e1d823bf8f9219005a8b9"
  },
  "cleanIssues": {
   "i16promax": [],
@@ -188,6 +188,22 @@
    "ok": true,
    "sample": [
     "panel top line none rgb(91, 134, 242) 2px (want the section colour, 2 pt, at the top)"
+   ]
+  },
+  {
+   "name": "emblem drawn grey",
+   "ok": true,
+   "sample": [
+    "section emblem missing or not in the section colour"
+   ]
+  },
+  {
+   "name": "section colour on data",
+   "ok": true,
+   "sample": [
+    "section colour on data text: \"علاقتنا\"",
+    "section colour on data text: \"خلاف مياه النيل\"",
+    "section colour on data chrome: علاقتنا · خلاف مياه النيل"
    ]
   },
   {

@@ -17,6 +17,13 @@ const BRIEF = {
 
 const screenChecks = `
 const { issues, qa, q, T, nums, DATA } = X;
+// the HUD at the end moment (shared/check/end_hud.py): the clock stopped, so no indicator moves (every trend flat, read
+// «دون تغيير»), and no indicator still shows its 1 January 2011 value
+{ const st = [...document.querySelectorAll('.top .stat')];
+  st.forEach((e) => { const tr = e.querySelector('.trend'), l = (e.querySelector('.lbl') || {}).textContent;
+    if (!tr || !tr.classList.contains('flat') || tr.querySelector('use').getAttribute('href') !== '#t-flat' || tr.getAttribute('aria-label') !== 'دون تغيير') X.issues.push('the HUD «' + l + '» moves while the clock is stopped'); });
+  const b3 = {"الخزينة": "36.0", "الاستقرار": "58%", "الشرعية": "44", "القوة البشرية": "2.4", "النفوذ": "62", "البحث": "+18"}, same = st.filter((e) => { const l = e.querySelector('.lbl').textContent, n = e.querySelector('.num').textContent.replace(/\\s+/g, ' ').trim(); return b3[l] && n.startsWith(b3[l]); }).map((e) => e.querySelector('.lbl').textContent);
+  if (same.length) X.issues.push('the HUD keeps the 2011 values: ' + same.join('، ')); }
 const W = (s) => (s || '').replace(/\\s+/g, ' ').trim();
 // the HUD date read whole with its weekday
 if ((q('.top .date .dtext').getAttribute('aria-label') || '') !== 'الثلاثاء 12 أغسطس 2031') issues.push('the HUD date is not «الثلاثاء 12 أغسطس 2031»: «' + q('.top .date .dtext').getAttribute('aria-label') + '»');
@@ -49,10 +56,10 @@ if (!/^لاحقًا: /.test(q('.r-x').getAttribute('aria-label') || '')) issues.
 
 require(path.join(OUT, '../../shared/check/panelcheck.js'))({
   OUT, dock: null, tabs: ['fallen'], noTabs: true, fitTab: false, longTab: 'fallen',
-  inputs: ['_build/end.css'],
-  TOK: { sec: 'rgb(169, 188, 203)', ctlH: {}, sheetIcon: [], size: [] },
+  inputs: ['_build/end.css', '../../shared/check/end_hud.py'],
+  TOK: { sec: 'rgb(214, 187, 169)', ctlH: {}, sheetIcon: [], size: [] },
   HEAD, BRIEF, screenChecks, DATA: { text: TEXT, ops: OPS },
-  skipGeneric: ['hint chevron missing (no tabs)', 'hint over the content (no tabs)', 'section colour on data', 'section colour on a rule', 'emblem drawn grey', 'why without its subject', 'amber value without its icon', '% before its number', 'brief text hidden', '18 pt misuse', 'clipped text', 'gap', 'faint text', 'text into a control', 'chip arrow against its sign', 'chip not white'],
+  skipGeneric: ['hint chevron missing (no tabs)', 'hint over the content (no tabs)', 'section colour on a rule', 'why without its subject', 'amber value without its icon', '% before its number', 'brief text hidden', '18 pt misuse', 'clipped text', 'gap', 'faint text', 'text into a control', 'chip arrow against its sign', 'chip not white'],
   cases: (d, se) => [
     // the body never scrolls on the SE: the hint must stay hidden (the opposite of the shared plant)
     ['hint shown without content below', se, '', '.r-hint { display: flex !important; visibility: visible !important; opacity: 1 !important; }', /scroll hint chevron shown without content below/],
@@ -80,5 +87,7 @@ require(path.join(OUT, '../../shared/check/panelcheck.js'))({
     ['later said in part', d, '', '', /the sheet does not say the choice can wait/, () => { document.querySelector('.s-note').textContent = 'يمكنك الاختيار لاحقًا من الإشعارات.'; }],
     ['later unsaid', d, '', '', /the sheet does not say the choice can wait/, () => { document.querySelector('.s-note').remove(); }],
     ['close says nothing', d, '', '', /a11y: the close button does not say the choice waits/, () => { document.querySelector('.r-x').setAttribute('aria-label', 'إغلاق'); }],
+    ['HUD trend moving', d, '', '', /the HUD «الخزينة» moves while the clock is stopped/, () => { const u = document.querySelector('.top .stat .trend'); u.setAttribute('class', 'trend down'); u.querySelector('use').setAttribute('href', '#t-down'); }],
+    ['HUD 2011 value', d, '', '', /the HUD keeps the 2011 values: الخزينة/, () => { document.querySelector('.top .stat .num').firstChild.textContent = '36.0'; }],
   ],
 });

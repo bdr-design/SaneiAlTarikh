@@ -649,6 +649,9 @@ async function measure(p, d, b3, view) {
       if (nv.borderBottomWidth !== '1px' || nv.borderBottomStyle !== 'solid') issues.push('the back row has lost its hairline');
       const gl = [...av.querySelectorAll('.a-grid')].find(visible);
       if (!gl || !/^الأثر المتوقع/.test(gl.getAttribute('aria-label') || '')) issues.push('a11y: the effects are not named «الأثر المتوقع»');
+      // a name on an element with no role is dropped by the accessibility tree: the grid is a group, each effect an image
+      if (gl && gl.getAttribute('role') !== 'group') issues.push('a11y: the effects grid has a name but no role (group)');
+      [...av.querySelectorAll('.a-e')].filter(visible).forEach((e) => { if (e.getAttribute('role') !== 'img') issues.push('a11y: effect «' + T(e.querySelector('dt')) + '» has a name but no role (img)'); });
       const wn = [...av.querySelectorAll('.a-when')].find(visible), bt = av.querySelector('.a-btns');
       if (!wn || wn.getBoundingClientRect().bottom > bt.getBoundingClientRect().top + 0.5) issues.push('footer: the timing line must sit above the buttons'); }
     order(av.querySelector('.a-val'), ['.a-now', '.a-to', '.a-new', '.a-delta'], 'value block');
@@ -888,6 +891,8 @@ async function selftest(b) {
     ['knob over a limit at the other end', se, '&adjust=subsidy&at=100', '.a-track { margin-inline: 0 !important; }', /the knob comes within 1\.5 pt of the limit «17\.6»/],
     ['sign outside its number', d, '', '', /a sign outside its number/, () => { const s = document.querySelector('.a-view[data-adjust="tax"] .a-e dd .ltr'); s.textContent = '600'; s.before(document.createTextNode('+')); }],
     ['sign in an RTL run', d, '', '', /a sign not in a left-to-right number/, () => { document.querySelector('.a-view[data-adjust="tax"] .a-e dd .ltr').classList.remove('ltr'); }],
+    ['effect without its role', d, '', '', /a11y: effect «الإيرادات» has a name but no role/, () => { document.querySelector('.a-view[data-adjust="tax"] .a-e').removeAttribute('role'); }],
+    ['grid without its role', d, '', '', /a11y: the effects grid has a name but no role/, () => { document.querySelector('.a-view[data-adjust="tax"] .a-grid').removeAttribute('role'); }],
     ['effect unlabelled', d, '', '', /a11y: effect «الإيرادات» does not read/, () => { document.querySelector('.a-view[data-adjust="tax"] .a-e').removeAttribute('aria-label'); }],
     ['effect verdict wrong', d, '', '', /a11y: effect «الإيرادات» does not read/, () => { document.querySelector('.a-view[data-adjust="tax"] .a-e').setAttribute('aria-label', 'الإيرادات: تزيد 600 مليون دولار سنويًا، أسوأ'); }],
     ['effect label with $', d, '', '', /a11y: effect «العجز» does not read/, () => { document.querySelectorAll('.a-view[data-adjust="tax"] .a-e')[1].setAttribute('aria-label', 'العجز: 17.1 مليار $ بدل 17.7، أفضل'); }],

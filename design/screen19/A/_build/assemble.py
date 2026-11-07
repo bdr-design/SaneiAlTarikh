@@ -1,6 +1,6 @@
 """Build design/screen19/A/index.html (the map-mode chooser, §6.6) with the shared panel builder
 (design/shared/check/panel_page.py): the approved B3 play screen, the approved panels' CSS, and this sheet's CSS and
-markup (modes.css, sheet.html). One body, no tab row, no section: no dock item open, the neutral grey identity. The
+markup (modes.css, sheet.html). One body, no tab row, no section: no dock item open, its own identity (sheetIdentity). The
 chosen mode «الأمن» is drawn on the map at once: its layer (map_mode_security.svg, made by tools/mapmode.py from Natural
 Earth) goes between the satellite base and the borders (map_overlay_mode.svg: the approved overlay without the player's
 teal fill, so Egypt's bands read as the legend; the glow stays), and the HUD's mode button reads it and shows the sheet open
@@ -23,4 +23,4 @@ SYMBOLS = """    <symbol id="i-flag" viewBox="0 0 24 24"><path d="M5.5 21V3.5"/>
 SUBS = [('<img src="map_overlay_cairo.svg" alt="">', '<img class="mode-layer" src="map_mode_security.svg" alt="">\n  <img src="map_overlay_mode.svg" alt="">'),
         ('<button class="btn glass ctl tap mode"><svg class="i"><use href="#i-layers"/></svg><span><span class="k">الخريطة:</span> سياسية</span></button>',
          '<button class="btn glass ctl tap mode" aria-label="الخريطة: الأمن" aria-expanded="true"><svg class="i"><use href="#i-layers"/></svg><span class="m-lbl"><span class="k">الخريطة:</span> الأمن</span></button>')]
-panel_page.build(R, S, D, title='أوضاع الخريطة', sec='more', tabs=['modes'], fit_tab=None, css=['modes.css'], symbols=SYMBOLS, extra_subs=SUBS)
+panel_page.build(R, S, D, title='أوضاع الخريطة', sec='mapmode', tabs=['modes'], fit_tab=None, css=['modes.css'], symbols=SYMBOLS, extra_subs=SUBS)

@@ -28,3 +28,6 @@ This is a visual mockup for the user to approve before anything is built. It is 
 ## Output
 - Work only in your own folder. Render with Playwright (NODE_PATH=tools/node_modules, browser from the CHROMIUM_PATH environment variable when set, args ['--no-sandbox']) at deviceScaleFactor 3 for three devices from `../shared/devices.json`: `i16promax` (the user's own phone, iPhone 17 Pro Max), `i14`, and `se`. Name them `<id>.png`.
 - Look at each PNG with the Read tool and fix clipping, overlaps, RTL mistakes, safe-area violations and unreadable text. Repeat at least twice.
+
+## Cost (the heaviness review, 2026-11-07; design doc §3.9)
+The continue card's «قبل 3 دقائق» is formatted once when the menu appears (and on scene activation) from the save's file date; it never ticks (L1). Only the menu art and the latest save's binary metadata are read (§3.4).

@@ -55,8 +55,8 @@ The player taps «الدولة», the first item of the section dock. The panel 
   - The section emblem and the close button.
 - **Tabs:** نظرة عامة / القيادة / السياسات / المشاريع (icons: grid, people, document, crane). No crown: Egypt is a republic.
   1. **نظرة عامة:**
-     - The 3 headline numbers, each with a monthly rate and «لماذا؟»: رأس المال السياسي 86, الاستقرار 58%, الشرعية 44 / 100 (amber).
-     - The status table: نظام الحكم, «دستور 1971» «عُدّل 2007» (shortened 2026-11-04: the cell overflowed on every phone), الحزب الحاكم, الطوارئ («سارية منذ 1981», amber).
+     - The 3 headline numbers, each with a monthly rate and «لماذا؟»: رأس المال السياسي 86 (45 in the states view), الاستقرار 58%, الشرعية 44 / 100 (amber).
+     - The status table: نظام الحكم, «دستور 1971» «عُدّل 2007» (shortened 2026-11-04: the cell overflowed on every phone), الحزب الحاكم, الطوارئ («محدودة منذ 2010», amber; the policies tab's value, May 2010's limiting).
      - Two decisions with their cost, written «الكلفة: 60» plus the political-capital glyph:
        - «رفع حالة الطوارئ» is a shortcut to the emergency law's change: the same command, cost and cooldown.
        - «تعديل وزاري» is allowed once a year. In its wait (`?states=1`) its line reads «متاح في يناير 2012», and its tile and chip step back to grey.
@@ -71,7 +71,9 @@ The player taps «الدولة», the first item of the section dock. The panel 
      - **One owner per law** (design doc §6.5): this tab owns all 8 laws. Military shows conscription read-only with a link. Internal's emergency rule is the per-province emergency regions. Economic levers live in the Economy section.
      - **States** (`?states=1`, illustrative):
        - A law in its cooldown («الإعلام»): its cost line becomes «متاح بعد 4 أشهر», its segments step back to grey (the chosen one a dim white), and it cannot be tapped.
-       - A change the player cannot afford («حالة الطوارئ»): the cost in amber.
+       - A change the player cannot afford («حالة الطوارئ», 60 against the capital 45 shown in this view): the cost in amber
+         and said in words, «يلزم 60 · لديك 45» (in place of «كلفة التغيير: 60»); the overview's shortcut «رفع حالة الطوارئ» the same
+         («يلزم 60 · لديك 45»).
   4. **المشاريع:**
      - Running projects show their progress, «إلغاء», and the refund: «يُسترد 90 مليون $» for Cairo Metro line 3 (train icon) and «يُسترد 410 ملايين $» for Toshka.
      - Available projects show «بدء»: the El Dabaa nuclear plant and the East Port Said expansion (ship icon; the anchor stays the stability icon).

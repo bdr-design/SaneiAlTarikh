@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-04T13:23:52.396Z",
+ "ranAt": "2026-11-07T16:12:23.326Z",
  "inputs": {
   "files": [
    "index.html",
@@ -15,13 +15,14 @@
    "../../screen1/B3/index.html",
    "../../shared/devices.json",
    "_build/end.css",
+   "../../shared/check/end_hud.py",
    "../../shared/flag_eg.svg",
    "../../shared/flags/eg.svg",
    "../../shared/map_mena_d1.jpg",
    "../../shared/map_mena_d1_overlay.svg",
    "map_overlay_cairo.svg"
   ],
-  "sha1": "ce96a85921486565838961bfacfe3b8dd297307c"
+  "sha1": "f20734d7e63f46230e5de2d01685248eacdc2d8e"
  },
  "cleanIssues": {
   "i16promax": [],
@@ -126,7 +127,7 @@
    "sample": [
     "hit overlap الاستقرار 71% / العودة إلى الخريطة",
     "panel overlap الدولة: مصر، رئيس الدولة،  / تقرير الأمة",
-    "panel overlap الخزينة 36.0 مليار $ الاست / تقرير الأمة"
+    "panel overlap الخزينة 92.5 مليار $ الاست / تقرير الأمة"
    ]
   },
   {
@@ -176,7 +177,23 @@
    "name": "identity line missing",
    "ok": true,
    "sample": [
-    "panel top line none rgb(169, 188, 203) 2px (want the section colour, 2 pt, at the top)"
+    "panel top line none rgb(214, 187, 169) 2px (want the section colour, 2 pt, at the top)"
+   ]
+  },
+  {
+   "name": "emblem drawn grey",
+   "ok": true,
+   "sample": [
+    "section emblem missing or not in the section colour"
+   ]
+  },
+  {
+   "name": "section colour on data",
+   "ok": true,
+   "sample": [
+    "section colour on data text: \"مصر\"",
+    "section colour on data text: \"2011–2100\"",
+    "section colour on data chrome: مصر · 2011–2100"
    ]
   },
   {
@@ -596,6 +613,7 @@
    "name": "HUD stability off",
    "ok": true,
    "sample": [
+    "the HUD keeps the 2011 values: الاستقرار",
     "the HUD stability 58 is not the report's 71"
    ]
   },
@@ -603,6 +621,7 @@
    "name": "HUD influence off",
    "ok": true,
    "sample": [
+    "the HUD keeps the 2011 values: النفوذ",
     "the HUD influence 62 is not the report's 70"
    ]
   },
@@ -628,6 +647,20 @@
    "ok": true,
    "sample": [
     "a11y: the close button does not say it returns to the map"
+   ]
+  },
+  {
+   "name": "HUD trend moving",
+   "ok": true,
+   "sample": [
+    "the HUD «الخزينة» moves while the clock is stopped"
+   ]
+  },
+  {
+   "name": "HUD 2011 value",
+   "ok": true,
+   "sample": [
+    "the HUD keeps the 2011 values: الخزينة"
    ]
   },
   {

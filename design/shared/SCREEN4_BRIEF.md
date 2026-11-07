@@ -68,7 +68,7 @@ The details open on «الحكم»; `&tab=build|forces|policy` opens the others.
 - **الإنشاءات (build):**
   - «البنية التحتية»: four sectors, each a row of name, a 4 pt teal meter and «N / 10» (الكهرباء 7, النقل 8, المياه والصرف 8, الاتصالات 9). Their mean is the card's 8 / 10.
   - An amber warning with its icon: «الكهرباء: الطلب قريب من القدرة، وانقطاعات في الصيف.» (the 2010 summer outages).
-  - «منشآت رئيسية»: the status table's 2 × 2 layout (المترو، المطار، الصناعة «ثقيلة وخفيفة» (Helwan is inside the card's boundaries)، المستشفيات).
+  - «منشآت رئيسية»: the status table's 2 × 2 layout (المترو، المطار، الصناعة «خفيفة وخدمات» (Helwan, with its heavy industry, was its own governorate on 1 January 2011: the 29 of screen 8)، المستشفيات).
   - «مشاريع الدولة هنا»: the metro's line 3 as a link row to the state panel's projects, with the state panel's own numbers (85%, 2012).
   - The owner's action row «توسعة شبكة الكهرباء»: 800 مليون $ · 24 شهرًا · إلى 8, its chip «↑ الكهرباء +1» (the change; the level after it is in the cost line). The sectors are the province's 4 infrastructure sub-indices (design doc, decision 54).
 - **القوات (forces):**
@@ -119,7 +119,7 @@ The province is **القاهرة** (Cairo Governorate), Egypt, on Saturday 1 Jan
    | السيطرة (controller) | الحكومة · 100% |
    | المطالبات (claims) | لا توجد |
 3. **Headline numbers**, at most 3. Each has a trend arrow and a «لماذا؟» link to the why-sheet.
-   - السكان «8.8 مليون» (flat)
+   - السكان «6.8 مليون» (flat; Cairo Governorate without Helwan and 6 October, 2008-2011)
    - الاضطراب «64» (up, amber; Cairo in January 2011)
    - البنية التحتية «8 / 10» (flat)
 4. **Details**, grouped:
@@ -164,3 +164,6 @@ Not everything has to be visible at once. Tabs, sections or a scroll are allowed
   - Read the browser from the `CHROMIUM_PATH` environment variable, args `['--no-sandbox']`.
 - Keep a `_build/render.js` that runs automatic checks and writes `_build/report.json` with an `issues` list per device, like `../screen3/p3B/_build/render.js`. The checks cover: tokens, 44 pt hit boxes without overlap, safe areas, overlaps, clipped text and contrast.
 - Look at every PNG with the Read tool. Fix clipping, overlaps, RTL mistakes, safe-area violations and unreadable text. Repeat at least twice.
+
+## Cost (the heaviness review, 2026-11-07; design doc §3.9)
+The white name pill beside the halo is drawn by the map engine in its own layer, not a view moved each frame. Tiles under the opaque sheet are culled and unpinned; the header strip is a one-time copy at open from the resident z4 base, redrawn only when the province changes. The open sheet's model rebuilds at most 4 times a second and only when its inputs change; monthly values and sort orders refresh on the monthly slot (L11). The same holds for every panel built on this sheet (screens 5 to 23).

@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-04T13:01:55.341Z",
+ "ranAt": "2026-11-07T15:33:50.839Z",
  "inputs": {
   "files": [
    "index.html",
@@ -19,7 +19,7 @@
    "header_cairo.jpg",
    "map_overlay_cairo.svg"
   ],
-  "sha1": "f9721d190c1b78ce1997514f8e8385c383cdde81"
+  "sha1": "8ed3ef91f8b2792523d8a7ea4fa03e791073121b"
  },
  "cleanIssues": {
   "i16promax": [],
@@ -83,8 +83,8 @@
    "ok": true,
    "sample": [
     "map label ليبيا sliced by the screen edge or the side inset",
-    "map label السعودية cut by a panel edge",
-    "map label إيران sliced by the screen edge or the side inset"
+    "map label إيران sliced by the screen edge or the side inset",
+    "map label إيران squeezed between a panel and the screen edge"
    ]
   },
   {
@@ -164,8 +164,8 @@
    "name": "side inset",
    "ok": true,
    "sample": [
-    "text in side inset: 8.8",
-    "text in side inset: +14",
+    "text in side inset: 6.8",
+    "text in side inset: +11",
     "text in side inset: لماذا؟"
    ]
   },
@@ -320,8 +320,8 @@
    "ok": true,
    "sample": [
     "map label ليبيا sliced by the screen edge or the side inset",
-    "map label السعودية cut by a panel edge",
-    "map label إيران sliced by the screen edge or the side inset"
+    "map label إيران sliced by the screen edge or the side inset",
+    "map label إيران squeezed between a panel and the screen edge"
    ]
   },
   {
@@ -593,7 +593,7 @@
    "name": "decision buttons out of the card",
    "ok": true,
    "sample": [
-    "horizontal overflow in إدارة المحافظة المحافظد. ع",
+    "horizontal overflow in إدارة المحافظة المحافظعبد ",
     "decision: the buttons run out of the card"
    ]
   },

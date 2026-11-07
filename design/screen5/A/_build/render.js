@@ -88,14 +88,14 @@ const HEAD = ['مصر', 'الوضع: واقعي', 'الرئيس محمد حسن�
 const HEAD_ST = ['مصر', 'God · خيارات غير واقعية', 'الرئيس محمد حسني مبارك · منذ 1981', 'نظرة عامة', 'القيادة', 'السياسات', 'المشاريع'];
 const BRIEF = {
   overview: HEAD.concat(['رأس المال السياسي', '86', '+4 شهريًا', 'الاستقرار', '58%', '−1 شهريًا', 'الشرعية', '44', '/ 100', '−2 شهريًا', 'لماذا؟',
-    'نظام الحكم', 'جمهورية رئاسية', 'دستور 1971', 'عُدّل 2007', 'الحزب الحاكم', 'الحزب الوطني', 'الطوارئ', 'سارية منذ 1981',
+    'نظام الحكم', 'جمهورية رئاسية', 'دستور 1971', 'عُدّل 2007', 'الحزب الحاكم', 'الحزب الوطني', 'الطوارئ', 'محدودة منذ 2010',
     'رفع حالة الطوارئ', 'الكلفة: 60', 'تعديل وزاري', 'الكلفة: 25 · مرة في السنة', 'تهدئة مؤقتة']),
-  overview_states: HEAD_ST.concat(['رفع حالة الطوارئ', 'الكلفة: 60', 'تعديل وزاري', 'متاح في يناير 2012', 'تهدئة مؤقتة']),
+  overview_states: HEAD_ST.concat(['رأس المال السياسي', '45', 'رفع حالة الطوارئ', 'يلزم 60 · لديك 45', 'تعديل وزاري', 'متاح في يناير 2012', 'تهدئة مؤقتة']),
   leader: HEAD.concat(['المناصب', 'محمد حسني مبارك', 'رئيس الجمهورية · العمر 82 · منذ 1981', 'تغيير الاسم']),
   leader_end: HEAD.concat(['الانتخابات القادمة', 'رئاسية · سبتمبر 2011', 'عند خلوّ منصب الرئيس', 'رئيس مجلس الشعب مؤقتًا']),
   policies: HEAD.concat(['الأمن والنظام', 'حالة الطوارئ', 'كلفة التغيير: 60', 'ملغاة', 'محدودة', 'شاملة']),
   policies_end: HEAD.concat(['الرعاية الصحية', 'مجانية', 'مدعومة', 'برسوم', 'بعد تغيير أي سياسة تنتظر 6 أشهر قبل أن تغيّرها مرة أخرى.']),
-  policies_states: HEAD_ST.concat(['حالة الطوارئ', 'كلفة التغيير: 60']),
+  policies_states: HEAD_ST.concat(['حالة الطوارئ', 'يلزم 60 · لديك 45']),
   projects: HEAD.concat(['مشاريع جارية', 'الخط الثالث لمترو القاهرة', 'المرحلة الأولى · تكتمل في 2012', 'إلغاء', 'يُسترد 90 مليون $']),
   projects_end: HEAD.concat(['توسعة ميناء شرق بورسعيد', '1.2 مليار $ · 3 سنوات', 'بدء', 'عند إلغاء مشروع يُرجع المبلغ غير المصروف بعد خصم 10% منه.']),
   // every string of a scrolling tab: each must be shown whole and clear of the fades in one of the tab's views
@@ -107,7 +107,7 @@ const BRIEF = {
   reach_projects: ['مشاريع جارية', 'الخط الثالث لمترو القاهرة', 'المرحلة الأولى · تكتمل في 2012', 'يُسترد 90 مليون $', 'توشكى: استصلاح الأراضي', 'جنوب الوادي · تكتمل في 2017',
     'يُسترد 410 ملايين $', 'مشاريع متاحة', 'محطة الضبعة النووية', '4.5 مليار $ · 8 سنوات', 'توسعة ميناء شرق بورسعيد', '1.2 مليار $ · 3 سنوات', 'عند إلغاء مشروع يُرجع المبلغ غير المصروف بعد خصم 10% منه.'],
 };
-BRIEF.reach_policies_states = BRIEF.reach_policies.concat(['متاح بعد 4 أشهر']);
+BRIEF.reach_policies_states = BRIEF.reach_policies.filter((s) => s !== 'كلفة التغيير: 60').concat(['متاح بعد 4 أشهر', 'يلزم 60 · لديك 45']);   // (the emergency law cannot be afforded there)
 // a view's name: <tab>[_states][_end|_at<offset>]; its tab is the first part, its scrolling sequence all but the scroll part
 const tabOf = (view) => view.split('_')[0];
 const seqOf = (view) => view.replace(/_(end|at\d+)$/, '');
@@ -425,8 +425,12 @@ async function measure(p, d, b3, view) {
     texts.filter((x) => x.sheet && !x.chrome && x.color === TOK.sec).forEach((x) => issues.push(`section colour on data text: "${x.t}"`));
     { const amberOf = (sel, txt) => { const e = [...document.querySelectorAll(sel)].find((n) => visible(n) && n.textContent.replace(/\s+/g, ' ').trim() === txt);
         if (!e) issues.push(`amber check: «${txt}» not found`); else if (getComputedStyle(e).color !== TOK.amber) issues.push(`«${txt}» not in amber: ${getComputedStyle(e).color}`); };
-      if (tab === 'overview') { amberOf('.r-kv b', '44'); amberOf('.r-sc dd', 'سارية منذ 1981'); }
-      if (states && tab === 'policies') amberOf('.s-short-1 .s-cost', 'كلفة التغيير: 60');
+      if (tab === 'overview') { amberOf('.r-kv b', '44'); amberOf('.r-sc dd', 'محدودة منذ 2010'); }
+      if (states && tab === 'policies') amberOf('.s-short-1 .s-cost', 'يلزم 60 · لديك 45');
+      if (states && tab === 'overview') amberOf('.s-short-1 .s-cost', 'يلزم 60 · لديك 45');
+      // a change the player cannot afford: its cost above the capital shown, said in words (the balance), not by colour alone
+      if (states) { const nums = (t) => (String(t).replace(/−/g, '-').match(/-?\d+(\.\d+)?/g) || []).map(Number), kb = [...document.querySelectorAll('.r-kpi')].find((k) => /رأس المال السياسي/.test(k.textContent)).querySelector('.r-kv b'), cap = nums([...kb.querySelectorAll('span')].filter((e) => getComputedStyle(e).display !== 'none').map((e) => e.textContent).join(' '))[0];
+        [...document.querySelectorAll('.s-short-1 .s-cost')].filter(visible).forEach((c) => { const n = nums(c.innerText); if (!(n[0] > cap) || n[1] !== cap) issues.push(`a change shown unaffordable costs ${n[0]} against the capital ${cap}, or does not say the balance`); }); }
       if (states) amberOf('.r-cap.s-unreal', 'God · خيارات غير واقعية'); }
     // the panel's sizes (the brief), and 4 pt between law rows
     TOK.size.forEach(([s, w, h]) => qa('.sheet ' + s).forEach((e) => { const r = e.getBoundingClientRect(); if (hiddenByScroll(box(r), e)) return;
@@ -689,7 +693,8 @@ async function selftest(b) {
     ['a trait on an office', d, '&tab=leader', '', /D-30: a trait or picture on an office row/, () => { const c = document.createElement('span'); c.className = 'r-chip'; c.textContent = 'حازم'; document.querySelectorAll('.s-off')[1].appendChild(c); }],
     ['cooldown still tappable', d, '&tab=policies&states=1', '', /cooldown: .* can be tapped in its cooldown/, () => { document.querySelectorAll('.s-wait-1 .s-sg').forEach((e) => e.removeAttribute('aria-disabled')); }],
     ['cooldown not stepped back', d, '&tab=policies&states=1', '[data-states="1"] .s-wait-1 .s-sg { color: var(--t1) !important; }', /cooldown: .* does not step back/],
-    ['unaffordable not amber', d, '&tab=policies&states=1', '[data-states="1"] .s-short-1 .s-cost { color: var(--t2) !important; }', /«كلفة التغيير: 60» not in amber/],
+    ['unaffordable not amber', d, '&tab=policies&states=1', '[data-states="1"] .s-short-1 .s-cost { color: var(--t2) !important; }', /«يلزم 60 · لديك 45» not in amber/],
+    ['unaffordable within the capital', d, '&states=1', '', /a change shown unaffordable costs 60 against the capital 86/, () => { document.querySelector('.r-kpi .r-kv b .s-alt').textContent = '86'; }],
     ['unrealistic mode not amber', d, '&states=1', '[data-sec] .r-cap.s-unreal { color: var(--t1) !important; }', /«God · خيارات غير واقعية» not in amber/],
     ['bar fills from the left', d, '&tab=leader', '.s-bar i { inset: 0 auto 0 0 !important; }', /a bar does not fill from the right/],
     ['close not round', d, '', '.r-x { width: 40px !important; }', /close button is not round/],

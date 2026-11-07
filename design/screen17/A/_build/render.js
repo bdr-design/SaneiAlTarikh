@@ -26,7 +26,7 @@ const TERMS = [['مستوى البداية', 'مصر في 2011 · يتلاشى �
   ['الأمن والشرطة', 'الإنفاق الأمني', 8, 'ما يرفعه'], ['دعم الخبز والوقود', 'من الموازنة', 5, 'ما يرفعه'], ['النمو الاقتصادي', '5.1% سنويًا', 3, 'ما يرفعه'],
   ['الشرعية', '44 / 100', -5, 'ما يخفضه'], ['الاضطرابات', '45 / 100', -4, 'ما يخفضه'], ['البطالة', '8.9%', -3, 'ما يخفضه'], ['التضخم', '10.3%', -2, 'ما يخفضه'], ['احتجاجات تونس', 'في الجوار', -1, 'ما يخفضه']];
 // the status cells: the change a month (the state panel's −1) and the time to reach the target
-const CELLS = { change: -1, months: 3 };
+const CELLS = { change: -1, months: 2 };   // (58% to 56% at −1 a month: two months)
 const BRIEF = {
   why: HEAD.concat(['الآن', '58%', 'الهدف', '56%', 'التغير', 'يصل خلال']),
   reach_why: SECTIONS.concat(TERMS.map((t) => t[0]), TERMS.map((t) => t[1]), ['يتجه إلى', '55 + 16 − 15', 'لوحة الدولة', 'الاستقرار والشرعية']),
@@ -75,7 +75,9 @@ if (rows.length > 12) issues.push(rows.length + ' terms shown (at most 12, the s
     if (!al.includes('من ' + sec('الأساس') + ' نقطة') || !al.includes('ترفعه ' + sec('ما يرفعه') + ' نقطة') || !al.includes('تخفضه ' + -sec('ما يخفضه') + ' نقطة')) issues.push('a11y: the sum row does not say the start, the rises and the falls as shown'); }
   // the cells: the change a month and the months to the target, as the brief and the state panel
   if (!ch || ch[0] !== DATA.cells.change || ch[0] !== -DATA.stChange) issues.push('the change cell is not ' + DATA.cells.change + ' a month (the state panel says −' + DATA.stChange + ')');
-  if ((cell('يصل خلال') || [])[0] !== DATA.cells.months) issues.push('the time to the target is not ' + DATA.cells.months + ' months');
+  { const now = (cell('الآن') || [])[0], tg = (cell('الهدف') || [])[0], m = Math.round(Math.abs(now - tg) / Math.abs((ch || [1])[0])),
+      dd = [...document.querySelectorAll('.sheet .r-sc')].find((e) => W(T(e.querySelector('dt'))) === 'يصل خلال'), say = { 1: 'نحو شهر', 2: 'نحو شهرين' }[m] || ('نحو ' + m + ' أشهر');
+    if (m !== DATA.cells.months || !dd || W(T(dd.querySelector('dd'))) !== say) issues.push('the time to the target is not ' + DATA.cells.months + ' months («' + say + '», from the now, the target and the change)'); }
   // the sum shown on screen: start + the rises − the falls
   const of = (s) => rows.filter((r) => W(T(r.closest('.r-sec').querySelector('h3'))) === s).reduce((a, r) => a + valOf(r), 0), calc = nums(W(T(q('.sheet .w-calc'))));
   if (calc.join(',') !== [of('الأساس'), of('ما يرفعه'), -of('ما يخفضه')].join(',') && calc.join(',') !== [of('الأساس'), of('ما يرفعه'), of('ما يخفضه')].join(',')) issues.push('the sum shown «' + W(T(q('.sheet .w-calc'))) + '» is not start + rises − falls'); }
@@ -91,9 +93,9 @@ qa('.sheet .r-link').forEach((r) => { if (!/\\. يفتح /.test(r.getAttribute('
 require(path.join(OUT, '../../shared/check/panelcheck.js'))({
   OUT, dock: null, tabs: ['why'], noTabs: true, fitTab: false, longTab: 'why',
   inputs: ['_build/why.css'],
-  TOK: { sec: 'rgb(169, 188, 203)', ctlH: {}, sheetIcon: [], size: [['.w-t', null, 32], ['.w-sum', null, 24]] },
+  TOK: { sec: 'rgb(199, 225, 193)', ctlH: {}, sheetIcon: [], size: [['.w-t', null, 32], ['.w-sum', null, 24]] },
   HEAD, BRIEF, screenChecks, DATA: { terms: TERMS, sections: SECTIONS, now: A.now, stChange: A.stChange, elsewhere: A, cells: CELLS },
-  skipGeneric: ['section colour on data', 'section colour on a rule', 'emblem drawn grey', 'why without its subject', 'amber value without its icon', '% before its number', 'brief text hidden', '18 pt misuse', 'clipped text', 'gap', 'faint text', 'text into a control', 'chip arrow against its sign', 'chip not white', 'tap in the side inset'],
+  skipGeneric: ['section colour on a rule', 'why without its subject', 'amber value without its icon', '% before its number', 'brief text hidden', '18 pt misuse', 'clipped text', 'gap', 'faint text', 'text into a control', 'chip arrow against its sign', 'chip not white', 'tap in the side inset'],
   cases: (d, se) => [
     // the first view has no tap at the sheet's right edge (the close button is at its left): plant it at the end view, where the link row is
     ['tap in the side inset (why)', d, '&tab=why&scroll=end', '.sheet { right: -30px !important; }', /tap in side inset/],
@@ -122,7 +124,8 @@ require(path.join(OUT, '../../shared/check/panelcheck.js'))({
     ['thirteen terms', d, '', '', /13 terms shown/, () => { const s = document.querySelectorAll('.r-sec')[2], t = s.querySelector('.w-t:last-of-type'); for (let i = 0; i < 4; i++) { const c = t.cloneNode(true); c.querySelector('.w-n b').textContent = 'سبب ' + i; c.querySelector('.w-v .ltr').textContent = '−0'; s.appendChild(c); } }],
     ['shares swapped, sum kept', d, '', '', /«الأمن والشرطة»'s share is 5, the brief 8/, () => { const v = [...document.querySelectorAll('.w-t .w-v .ltr')]; v[1].textContent = '+5'; v[2].textContent = '+8'; }],
     ['change cell off', d, '', '', /the change cell is not -1 a month/, () => { document.querySelector('.r-sc dd.r-amber .ltr').textContent = '−4'; }],
-    ['time cell off', d, '', '', /the time to the target is not 3 months/, () => { const c = document.querySelectorAll('.r-sc dd')[3]; c.querySelector('.ltr').textContent = '9'; }],
+    ['time cell off', d, '', '', /the time to the target is not 2 months/, () => { document.querySelectorAll('.r-sc dd')[3].innerHTML = 'نحو <span class="ltr">3</span> أشهر'; }],
+    ['target off its time', d, '', '', /the time to the target is not 2 months/, () => { document.querySelectorAll('.r-sc dd')[1].textContent = '55%'; }],
     ['chip points up', d, '', '', /the HUD chip does not point the way the value moves/, () => { document.querySelector('.stat[aria-expanded] .trend use').setAttribute('href', '#t-up'); }],
     ['chip says it rises', d, '', '', /the HUD chip does not point the way the value moves/, () => { const s = document.querySelector('.stat[aria-expanded]'); s.setAttribute('aria-label', s.getAttribute('aria-label').replace('ينخفض', 'يرتفع')); }],
     ['sum totals unsaid', d, '', '', /a11y: the sum row does not say the start, the rises and the falls/, () => { const s = document.querySelector('.w-sum'); s.setAttribute('aria-label', s.getAttribute('aria-label').replace('ترفعه 16', 'ترفعه 20')); }],

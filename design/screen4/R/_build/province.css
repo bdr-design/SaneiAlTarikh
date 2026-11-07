@@ -18,11 +18,10 @@
 
   /* القوات: one row per unit: tile, name and its command, readiness */
   .p-unit { display: flex; align-items: center; gap: var(--s2); height: 40px; }
-  .p-unit .r-tile { width: 32px; height: 32px; }
   .p-rdy { flex: none; display: flex; align-items: baseline; gap: var(--s1); font-size: var(--fs-label); line-height: var(--lh-label); font-weight: 500; color: var(--t2); white-space: nowrap; }
   .p-rdy b { font-size: var(--fs-val); line-height: var(--lh-val); font-weight: 600; color: var(--t1); }
   .p-wi { width: var(--glyph) !important; height: var(--glyph) !important; }
-  .p-cost { display: inline-flex; align-items: center; gap: 2px; margin-inline-start: var(--s1); font-size: var(--fs-sec); font-weight: 600; }
+  .p-cost { line-height: var(--lh-sec); display: inline-flex; align-items: center; gap: 2px; margin-inline-start: var(--s1); font-size: var(--fs-sec); font-weight: 600; }
   .p-note { font-size: var(--fs-label); line-height: 14px; font-weight: 500; color: var(--t2); }
   .r-sc dd .r-arr { margin-inline-end: 2px; vertical-align: -1px; }
 

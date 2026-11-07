@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-04T13:23:06.931Z",
+ "ranAt": "2026-11-07T15:52:06.516Z",
  "inputs": {
   "files": [
    "index.html",
@@ -22,7 +22,7 @@
    "header_cairo.jpg",
    "map_overlay_cairo.svg"
   ],
-  "sha1": "cb2bb7c1005f21498dffe577571f7910b93baeae"
+  "sha1": "9ba8a6c7164d6f79595fef1f8bb3b8d7330f436b"
  },
  "cleanIssues": {
   "i16promax": [],
@@ -749,6 +749,20 @@
    "sample": [
     "a sign not in a left-to-right number: «+300»",
     "a sign drawn right of its number: «+300»"
+   ]
+  },
+  {
+   "name": "effect without its role",
+   "ok": true,
+   "sample": [
+    "a11y: effect «الإيرادات» has a name but no role (img)"
+   ]
+  },
+  {
+   "name": "grid without its role",
+   "ok": true,
+   "sample": [
+    "a11y: the effects grid has a name but no role (group)"
    ]
   },
   {

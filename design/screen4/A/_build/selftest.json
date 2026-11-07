@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-04T13:24:50.638Z",
+ "ranAt": "2026-11-07T15:28:09.150Z",
  "devices": [
   "i16promax",
   "se"
@@ -35,7 +35,7 @@
    "name": "radius",
    "ok": true,
    "sample": [
-    "control radius 8: السكان 8.8 مليون، ثابت. لم",
+    "control radius 8: السكان 6.8 مليون، ثابت. لم",
     "control radius 8: الاضطراب 64، في ارتفاع. لم",
     "control radius 8: البنية التحتية 8 من 10، ثا"
    ]
@@ -44,8 +44,8 @@
    "name": "gap",
    "ok": true,
    "sample": [
-    "gap 6 on السكان 8.8 مليونلماذا؟ الا",
-    "gap 6 on السكان 8.8 مليونلماذا؟ الا"
+    "gap 6 on السكان 6.8 مليونلماذا؟ الا",
+    "gap 6 on السكان 6.8 مليونلماذا؟ الا"
    ]
   },
   {
@@ -53,8 +53,8 @@
    "ok": true,
    "sample": [
     "sheet block gap 2.00 before .seg (want 8)",
-    "hit overlap السكان 8.8 مليون، ثابت. لم / السياسة",
-    "hit overlap السكان 8.8 مليون، ثابت. لم / المجتمع"
+    "hit overlap السكان 6.8 مليون، ثابت. لم / السياسة",
+    "hit overlap السكان 6.8 مليون، ثابت. لم / المجتمع"
    ]
   },
   {
@@ -132,7 +132,7 @@
    "ok": true,
    "sample": [
     "Cairo highlight covered by panel المحافظة: القاهرة",
-    "Cairo highlight under the hit box of السكان 8.8 مليون، ثابت. لم",
+    "Cairo highlight under the hit box of السكان 6.8 مليون، ثابت. لم",
     "Cairo highlight under the hit box of الاضطراب 64، في ارتفاع. لم"
    ]
   },
@@ -248,8 +248,8 @@
    "ok": true,
    "sample": [
     "map label العراق cut by a panel edge",
-    "map label الأردن cut by a panel edge",
-    "map city dot 4 cut by a panel edge"
+    "map city dot 4 cut by a panel edge",
+    "map label بنغازي cut by a panel edge"
    ]
   },
   {

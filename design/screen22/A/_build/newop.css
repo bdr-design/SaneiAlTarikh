@@ -1,0 +1,12 @@
+  /* ================= Screen 22, variant A: the new-operation sheet ================= */
+  .r-tabs { display: none; }
+  [data-tab="newop"] .r-body[data-tab="newop"] { display: flex; }
+  .r-body[data-tab="newop"] { padding-top: var(--s2); padding-bottom: var(--s3); gap: var(--s2); }
+  /* the nine types: two columns of 36 pt tiles, the chosen one filled white (as screen 19's modes) */
+  .m-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s2); }
+  .m-tile { display: flex; align-items: center; gap: var(--s2); height: 36px; padding-inline: var(--s2); border-radius: var(--r-ctl); background: var(--card); box-shadow: inset 0 0 0 1px var(--stroke);
+    font-size: var(--fs-sec); line-height: var(--lh-sec); font-weight: 600; color: var(--t1); white-space: nowrap; text-align: start; }
+  .m-tile svg.i { flex: none; width: 16px; height: 16px; color: var(--t2); }
+  .m-tile.on { background: var(--t1); box-shadow: none; color: #0B1218; }
+  .m-tile.on svg.i { color: #0B1218; }
+  .m-tile.tap::before { width: 100%; height: max(100% + 8px, 44px); }

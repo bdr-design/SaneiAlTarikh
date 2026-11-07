@@ -31,7 +31,12 @@ const VAL_ISSUES = [].concat(
   FILLS.join(',') !== VAL.provinces.map((p) => p[3].toUpperCase()).join(',') ? ['the layer is not the drawing of its values file (regenerate with tools/mapmode.py)'] : [],
   VAL.provinces.filter((p) => bandOf(p[2]) !== p[3]).map((p) => `${p[1]}: value ${p[2]} drawn ${p[3]}, its band ${bandOf(p[2])}`),
   Object.entries(NE_AR).filter(([ne, ar]) => { const r = VAL.provinces.find((p) => p[0] === 'EGY' && p[1] === ne); return !r || r[2] !== S8[ar]; }).map(([ne, ar]) => `${ar}: the layer's value is not screen 8's ${S8[ar]}`),
-  VAL.provinces.filter((p) => p[0] === 'EGY' && !NE_AR[p[1]] && (p[2] < 32 || p[2] > 48)).map((p) => `${p[1]}: ${p[2]} is outside screen 8's 32-48`));
+  VAL.provinces.filter((p) => p[0] === 'EGY' && !NE_AR[p[1]] && (p[2] < 32 || p[2] > 48)).map((p) => `${p[1]}: ${p[2]} is outside screen 8's 32-48`),
+  // 1 January 2011: Tunisia's uprising centred on the interior (Sidi Bouzid, Kasserine, Gafsa the highest); Libya had no
+  // protests yet (every province under the protests edge, 40)
+  (() => { const t = VAL.provinces.filter((p) => p[0] === 'TUN').sort((a, b) => b[2] - a[2]).slice(0, 3).map((p) => p[1]);
+    return t.join('|') === 'Sidi Bou Zid|Kassérine|Gafsa' ? [] : ['Tunisia\'s highest are not Sidi Bouzid, Kasserine and Gafsa: ' + t.join(', ')]; })(),
+  VAL.provinces.filter((p) => p[0] === 'LBY' && p[2] >= 40).map((p) => `${p[1]} (Libya): ${p[2]} in the protests band on 1 January 2011`));
 const LAYER_ISSUES = [].concat(VAL_ISSUES,
   /fill="#3FE0D0"/i.test(OV) ? ['the mode overlay still tints the player\'s country'] : [],
   OV0.replace(/<path [^>]*fill="#3FE0D0" fill-opacity="0.16"\/>/, '') !== OV ? ['the mode overlay is not the approved overlay less the teal fill'] : [],
@@ -82,9 +87,9 @@ tiles.forEach((t) => { const c = getComputedStyle(t.querySelector('svg')).color;
 require(path.join(OUT, '../../shared/check/panelcheck.js'))({
   OUT, dock: null, tabs: ['modes'], noTabs: true, fitTab: false, longTab: 'modes',
   inputs: ['_build/modes.css', 'map_mode_security.svg', 'map_mode_security.json', 'map_overlay_mode.svg', '../../../tools/mapmode.py', '../../screen8/A/_build/render.js'],
-  TOK: { sec: 'rgb(169, 188, 203)', ctlH: { '.m-tile': 36 }, sheetIcon: [['.m-tile svg', 16]], size: [['.m-bar', null, 8]], radius: { '.m-tile': 10 } },
+  TOK: { sec: 'rgb(239, 179, 195)', ctlH: { '.m-tile': 36 }, sheetIcon: [['.m-tile svg', 16]], size: [['.m-bar', null, 8]], radius: { '.m-tile': 10 } },
   HEAD, BRIEF, screenChecks, DATA: { options: [['الحدود', ['فعلية', 'قانونية'], 'فعلية'], ['حدود المحافظات', ['تظهر', 'تختفي'], 'تظهر'], ['الأسماء', ['قليلة', 'متوسطة', 'كثيرة'], 'متوسطة']], modes: MODES, chosen: CHOSEN, edges: EDGES, bands: BANDS, layerIssues: LAYER_ISSUES },
-  skipGeneric: ['section colour on data', 'section colour on a rule', 'emblem drawn grey', 'why without its subject', 'amber value without its icon', '% before its number', 'brief text hidden', '18 pt misuse', 'clipped text', 'gap', 'faint text', 'text into a control', 'chip arrow against its sign', 'chip not white', 'tile icons cyan'],
+  skipGeneric: ['section colour on a rule', 'why without its subject', 'amber value without its icon', '% before its number', 'brief text hidden', '18 pt misuse', 'clipped text', 'gap', 'faint text', 'text into a control', 'chip arrow against its sign', 'chip not white', 'tile icons cyan'],
   cases: (d, se) => [
     ['brief text hidden (modes)', d, '', '', /brief text not fully visible/, () => { document.querySelector('.r-name').style.opacity = '0'; }],
     ['18 pt misuse (modes)', d, '', '.r-sec h3 { font-size: 18px !important; font-weight: 700 !important; }', /18 pt is for/],

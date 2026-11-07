@@ -1,6 +1,6 @@
 """Build design/screen15/A/index.html (the decision sheet) with the shared panel builder (design/shared/check/
 panel_page.py): the approved B3 play screen, the approved panels' CSS, and this sheet's CSS and markup (decision.css,
-sheet.html). One body, no tab row, no section: no dock item is open, the identity is the neutral grey. The game is
+sheet.html). One body, no tab row, no section: no dock item is open, its own identity (sheetIdentity). The game is
 paused for the decision (the clock shows play). The map stays central and visible (the owner's rule mapCentral).
 Usage: python3 -I assemble.py <repo> <this _build dir> <out dir>"""
 import sys
@@ -18,5 +18,5 @@ SYMBOLS = """    <symbol id="i-flame" viewBox="0 0 24 24"><path d="M12 21c-3.9 0
 PAUSED = ('<button class="play tap" aria-label="إيقاف مؤقت (اللعبة تعمل)"><svg class="i"><use href="#i-pause"/></svg></button>',
           '<button class="play tap" aria-label="تشغيل (اللعبة متوقفة للقرار)"><svg class="i"><use href="#i-play"/></svg></button>')
 # the bell reads its count; the centre is closed
-BELL = ('<button class="bell tap" aria-label="الإشعارات">', '<button class="bell tap" aria-label="الإشعارات، 3 غير مقروءة" aria-expanded="false">')
-panel_page.build(R, S, D, title='قرار', sec='more', tabs=['event'], fit_tab=None, css=['decision.css'], symbols=SYMBOLS, extra_subs=[PAUSED, BELL])
+BELL = ('<button class="bell tap" aria-label="الإشعارات، غير المقروءة 3">', '<button class="bell tap" aria-label="الإشعارات، غير المقروءة 3" aria-expanded="false">')
+panel_page.build(R, S, D, title='قرار', sec='decision', tabs=['event'], fit_tab=None, css=['decision.css'], symbols=SYMBOLS, extra_subs=[PAUSED, BELL])

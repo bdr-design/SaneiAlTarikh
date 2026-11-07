@@ -412,7 +412,7 @@ module.exports = function makeChecker(cfg) {
     { const wt = (sel, want, skip) => qa('.sheet ' + sel).filter((e) => !(skip && e.matches(skip))).forEach((e) => { const cs = getComputedStyle(e);
         Object.entries(want).forEach(([k, v]) => { if (cs[k] !== v) issues.push(`white touch off: ${sel} ${k} ${cs[k]} (want ${v})`); }); });
       wt('.r-chip', { borderTopColor: TOK.wLine, color: TOK.t1 }, '.e-bad, .p-bad');
-      wt('.r-tile', { color: TOK.t1 });
+      wt('.r-tile', { color: TOK.t1 }, '.s-del .r-tile');   // (a delete row's bin is red: the danger sign, screen 23)
       wt('.s-sg.on', { backgroundColor: TOK.t1, color: TOK.dark }, '[data-states="1"] .s-wait-1 *');
       wt('.r-cap', { borderTopColor: TOK.wLine, color: TOK.t1 }); }
     // ---------- 8d. words and numbers ----------
@@ -468,9 +468,10 @@ module.exports = function makeChecker(cfg) {
         if (sg !== undefined && sg !== 0 && (sg > 0) !== up) issues.push(`«${T(at.querySelector('b'))}»: the chip's arrow does not agree with its sign`);
         if (!(up ? /ترفع|ترتفع|تزيد|يرفع|يزيد|يرتفع/ : /تخفض|تنخفض|تقل|يخفض|ينخفض|يقل/).test(al)) issues.push(`a11y: «${T(at.querySelector('b'))}» does not say the chip's direction in words`); } });
     // a row read as one element (role img, or a row button) reads everything it shows: every number and every word
-    // of its visible text is in its label (the separator «·» aside)
+    // of its visible text is in its label (the separator «·» aside); a unit sign may be read as its words (م³: متر مكعب)
+    const SAY = { 'م³': 'متر مكعب' };
     qa('.sheet [role="img"], .sheet .tap[role="button"], .sheet .r-act[aria-label]').filter((e) => e.innerText.trim() && !e.matches('.r-tab')).forEach((e) => { const al = (e.getAttribute('aria-label') || '').replace(/[،.:؛]/g, ' '), shown = e.innerText.replace(/[·،.:؛]/g, ' ');
-      const words = shown.split(/\s+/).filter((w) => w.length > 1 && !/^[\d.%+−-]+$/.test(w)), missW = words.filter((w) => !al.includes(w.replace(/[«»]/g, '')));
+      const words = shown.split(/\s+/).filter((w) => w.length > 1 && !/^[\d.%+−-]+$/.test(w)), missW = words.filter((w) => !al.includes(w.replace(/[«»]/g, '')) && !(SAY[w] && al.includes(SAY[w])));
       const missN = nums(shown).filter((x) => !said(al).includes(Math.abs(x)));
       if (missW.length || missN.length) issues.push(`a11y: «${(e.getAttribute('aria-label') || '').slice(0, 24)}» does not read all it shows: ${missW.concat(missN).slice(0, 4).join(' ')}`); });
     // a trend line's arrow agrees with its sign

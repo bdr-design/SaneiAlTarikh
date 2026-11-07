@@ -25,7 +25,7 @@ Scenarios with their images in `../shared/scenarios/` (3:2):
 ## Page 2: اختيار الدولة (step 2)
 - The world map is the main surface; Egypt is selected (highlighted). A search field "ابحث عن دولة" (32 pt).
 - A list of countries with flags (`../shared/flags/<iso2>.svg`, keep 4:3; for Libya use `ly_2011.svg`, the 2011 flag): مصر (eg), السعودية (sa), ليبيا (ly_2011), تونس (tn), سوريا (sy), العراق (iq), اليمن (ye), الأردن (jo), السودان (sd), تركيا (tr), إيران (ir), الولايات المتحدة (us), روسيا (ru), الصين (cn). Show each country's difficulty as a small label: سهلة / متوسطة / صعبة / صعبة جدًا (illustrative: مصر صعبة, ليبيا صعبة جدًا, تونس صعبة جدًا, اليمن صعبة جدًا, سوريا صعبة, السعودية متوسطة, الإمارات not listed, تركيا متوسطة, الولايات المتحدة سهلة, الصين سهلة, روسيا متوسطة, إيران صعبة, العراق صعبة جدًا, الأردن متوسطة, السودان صعبة جدًا).
-- A selected-country card: flag, "مصر", القائد "حسني مبارك", نظام الحكم "جمهورية رئاسية", السكان "83 مليون", الناتج "219 مليار $", الاستقرار "58%", الصعوبة "صعبة" (amber), and one line "تحذير: بطالة الشباب مرتفعة واحتجاجات محتملة". Values are illustrative.
+- A selected-country card: flag, "مصر", القائد "حسني مبارك", نظام الحكم "جمهورية رئاسية", السكان "79.7 مليون" (screen 8's figure), الناتج "219 مليار $", الاستقرار "58%", الصعوبة "صعبة" (amber), and one line "تحذير: بطالة الشباب مرتفعة واحتجاجات محتملة". Values are illustrative.
 
 ## Page 3: إعدادات الحملة (step 3)
 - الوضع (segmented, 4 options): واقعي (selected, default, with a small note "الوضع الموصى به"), قوي، قوة عظمى، God.
@@ -36,3 +36,6 @@ Scenarios with their images in `../shared/scenarios/` (3:2):
 ## Output
 - Work only in your own folder. Render with Playwright (NODE_PATH=tools/node_modules; browser from the CHROMIUM_PATH environment variable when set, args ['--no-sandbox']) at deviceScaleFactor 3 for `i16promax` (the user's iPhone 17 Pro Max) and `se`. Files: `i16promax.png`, `se.png`.
 - Inspect every PNG with the Read tool; fix clipping, overlaps, RTL mistakes, safe-area violations and unreadable text; repeat at least twice.
+
+## Cost (the heaviness review, 2026-11-07; design doc §3.9)
+Pages 1 and 3 show one pre-darkened, pre-blurred backdrop (one HEIC of about 150 KB); the map engine starts on page 2. The scenario cards decode with ImageIO downsampling to their drawn size, the locked dim baked into small thumbnails. The country strip on page 2 is a lazy horizontal list filtered by the search field, flags from the shared atlas, one opaque container (D-3). The leader line from the country to its card is drawn by the map engine.
