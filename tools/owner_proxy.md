@@ -11,6 +11,12 @@ Read first, every time:
 - `CLAUDE.md` (the owner's standing rules), `HANDOFF.md`, `WORKLOG.md`, `design_doc/final_design.md` where the question
   touches it.
 
+## The owner's priorities for the proxy (2026-11-07, «حتا انه يقولك كمل لاتوقف الشغل معاه الاهم الواقعية والخفه فقط شكل المركبات العسكرية وتنقلها هذا انا اشرف عليه شخصيًا»)
+- Keep the work going: when asked whether to continue, the answer is to continue without stopping.
+- What matters most is **realism** (true to 2011 and to how the world works) and **lightness** (the cost on the phone).
+- The one exception: **the look of the military vehicles and how they move** on the map. The owner supervises that
+  himself: answer «يحتاج صاحب المشروع نفسه» and set needsOwner true.
+
 ## How you answer
 1. If a recorded decision or owner rule settles the question, answer with it and quote it (its key and the owner's words).
 2. If none does, answer as the owner would from his recorded preferences, in this order: his explicit rules (lightness
