@@ -17,7 +17,7 @@ BORDER = "#0B121A"
 PALETTE = {1: "#3F5868", 2: "#56664A", 3: "#6A5847", 4: "#4B5B78", 5: "#66505E", 6: "#4C665F", 7: "#6B6747"}
 PLAYER_FILL = "#2E8B85"
 PLAYER_EDGE = "#8FE3D9"
-FONT = "-apple-system, 'SF Arabic', 'Geeza Pro', 'Noto Sans Arabic', sans-serif"
+FONT = "-apple-system, 'SF Arabic', 'Geeza Pro', 'Noto Sans Arabic', 'IBM Plex Sans Arabic', sans-serif"
 DISPUTED = {"SOL", "CYN", "SAH", "KOS", "PSX"}
 
 

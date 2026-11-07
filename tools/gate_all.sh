@@ -11,8 +11,8 @@ cd "$R"
 # the renders need the project font, or every measurement is made in a fallback font (tools/install_fonts.sh)
 fc-list | grep -q "IBM Plex Sans Arabic" || { echo "IBM Plex Sans Arabic is not installed: run tools/install_fonts.sh"; exit 1; }
 for s in "$@"; do
-  python3 -I design/$s/_build/assemble.py . design/$s/_build design/$s >/dev/null || { echo "$s ASSEMBLE FAIL"; continue; }
-  (cd design/$s/_build && timeout 3000 node render.js 2>&1 | grep "issues per device"; timeout 3000 node render.js --selftest 2>&1 | grep -E "MISSED|selftest OK|SELFTEST FAILED")
+  if [ -f design/$s/_build/assemble.py ]; then python3 -I design/$s/_build/assemble.py . design/$s/_build design/$s >/dev/null || { echo "$s ASSEMBLE FAIL"; continue; }; fi
+  (cd design/$s/_build && timeout 3000 node render.js 2>&1 | grep "issues per device"; if grep -q selftest render.js; then timeout 3000 node render.js --selftest 2>&1 | grep -E "MISSED|selftest OK|SELFTEST FAILED"; fi)
   echo "$s: $(python3 -I tools/check_screen.py design/$s 2>&1 | tail -1)"
 done
 echo ALLDONE
