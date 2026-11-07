@@ -1,7 +1,7 @@
 {
  "se": {
   "device": "667x375 side 0 bottom 0 none",
-  "renderedAt": "2026-11-07T17:53:35.325Z",
+  "renderedAt": "2026-11-07T18:32:05.327Z",
   "inputs": {
    "files": [
     "index.html",
@@ -27,25 +27,12 @@
     "../../shared/map_mena_d1_overlay.svg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "f618b96971fc3e48409eeec9bd5199808e564c5c"
+   "sha1": "ab22224793fc022e2228d21bcb423d9cae69f3d9"
   },
-  "issues": [
-   "event: ellipsis on \"احتجاجات في تونس\"",
-   "event: ellipsis on \"الوقت متوقف\"",
-   "event: clipped text (top): \"·\" 526.77..536.3 y 84..101",
-   "event: ellipsis on \"الافتراضي بعد\"",
-   "event: clipped text (top): \"7\" 458.97..465.88 y 84..101",
-   "event: ellipsis on \"أيام\"",
-   "event_end: ellipsis on \"احتجاجات في تونس\"",
-   "event_end: ellipsis on \"الوقت متوقف\"",
-   "event_end: clipped text (top): \"·\" 526.77..536.3 y 84..101",
-   "event_end: ellipsis on \"الافتراضي بعد\"",
-   "event_end: clipped text (top): \"7\" 458.97..465.88 y 84..101",
-   "event_end: ellipsis on \"أيام\""
-  ],
+  "issues": [],
   "views": {
    "event": {
-    "issueCount": 6,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -480,7 +467,7 @@
     ]
    },
    "event_end": {
-    "issueCount": 6,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -930,11 +917,11 @@
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 12
+  "issueCount": 0
  },
  "mini": {
   "device": "812x375 side 50 bottom 21 notch",
-  "renderedAt": "2026-11-07T17:53:40.253Z",
+  "renderedAt": "2026-11-07T18:32:10.239Z",
   "inputs": {
    "files": [
     "index.html",
@@ -960,31 +947,12 @@
     "../../shared/map_mena_d1_overlay.svg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "f618b96971fc3e48409eeec9bd5199808e564c5c"
+   "sha1": "ab22224793fc022e2228d21bcb423d9cae69f3d9"
   },
-  "issues": [
-   "event: ellipsis on \"احتجاجات في تونس\"",
-   "event: ellipsis on \"الوقت متوقف\"",
-   "event: clipped text (top): \"·\" 629.77..639.3 y 84..101",
-   "event: ellipsis on \"الافتراضي بعد\"",
-   "event: clipped text (top): \"7\" 561.97..568.88 y 84..101",
-   "event: ellipsis on \"أيام\"",
-   "event_end: ellipsis on \"احتجاجات في تونس\"",
-   "event_end: ellipsis on \"الوقت متوقف\"",
-   "event_end: clipped text (top): \"·\" 629.77..639.3 y 84..101",
-   "event_end: ellipsis on \"الافتراضي بعد\"",
-   "event_end: clipped text (top): \"7\" 561.97..568.88 y 84..101",
-   "event_end: ellipsis on \"أيام\"",
-   "event_at117: ellipsis on \"احتجاجات في تونس\"",
-   "event_at117: ellipsis on \"الوقت متوقف\"",
-   "event_at117: clipped text (top): \"·\" 629.77..639.3 y 84..101",
-   "event_at117: ellipsis on \"الافتراضي بعد\"",
-   "event_at117: clipped text (top): \"7\" 561.97..568.88 y 84..101",
-   "event_at117: ellipsis on \"أيام\""
-  ],
+  "issues": [],
   "views": {
    "event": {
-    "issueCount": 6,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -1419,7 +1387,7 @@
     ]
    },
    "event_end": {
-    "issueCount": 6,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -1858,7 +1826,7 @@
     ]
    },
    "event_at117": {
-    "issueCount": 6,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -2305,11 +2273,11 @@
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 18
+  "issueCount": 0
  },
  "i14": {
   "device": "844x390 side 47 bottom 21 notch",
-  "renderedAt": "2026-11-07T17:53:46.591Z",
+  "renderedAt": "2026-11-07T18:32:16.344Z",
   "inputs": {
    "files": [
     "index.html",
@@ -2335,25 +2303,12 @@
     "../../shared/map_mena_d1_overlay.svg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "f618b96971fc3e48409eeec9bd5199808e564c5c"
+   "sha1": "ab22224793fc022e2228d21bcb423d9cae69f3d9"
   },
-  "issues": [
-   "event: ellipsis on \"احتجاجات في تونس\"",
-   "event: ellipsis on \"الوقت متوقف\"",
-   "event: clipped text (top): \"·\" 664.77..674.3 y 84..101",
-   "event: ellipsis on \"الافتراضي بعد\"",
-   "event: clipped text (top): \"7\" 596.97..603.88 y 84..101",
-   "event: ellipsis on \"أيام\"",
-   "event_end: ellipsis on \"احتجاجات في تونس\"",
-   "event_end: ellipsis on \"الوقت متوقف\"",
-   "event_end: clipped text (top): \"·\" 664.77..674.3 y 84..101",
-   "event_end: ellipsis on \"الافتراضي بعد\"",
-   "event_end: clipped text (top): \"7\" 596.97..603.88 y 84..101",
-   "event_end: ellipsis on \"أيام\""
-  ],
+  "issues": [],
   "views": {
    "event": {
-    "issueCount": 6,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -2905,7 +2860,7 @@
     ]
    },
    "event_end": {
-    "issueCount": 6,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -3472,11 +3427,11 @@
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 12
+  "issueCount": 0
  },
  "i16": {
   "device": "852x393 side 59 bottom 21 island",
-  "renderedAt": "2026-11-07T17:53:52.126Z",
+  "renderedAt": "2026-11-07T18:32:21.711Z",
   "inputs": {
    "files": [
     "index.html",
@@ -3502,25 +3457,12 @@
     "../../shared/map_mena_d1_overlay.svg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "f618b96971fc3e48409eeec9bd5199808e564c5c"
+   "sha1": "ab22224793fc022e2228d21bcb423d9cae69f3d9"
   },
-  "issues": [
-   "event: ellipsis on \"احتجاجات في تونس\"",
-   "event: ellipsis on \"الوقت متوقف\"",
-   "event: clipped text (top): \"·\" 660.77..670.3 y 84..101",
-   "event: ellipsis on \"الافتراضي بعد\"",
-   "event: clipped text (top): \"7\" 592.97..599.88 y 84..101",
-   "event: ellipsis on \"أيام\"",
-   "event_end: ellipsis on \"احتجاجات في تونس\"",
-   "event_end: ellipsis on \"الوقت متوقف\"",
-   "event_end: clipped text (top): \"·\" 660.77..670.3 y 84..101",
-   "event_end: ellipsis on \"الافتراضي بعد\"",
-   "event_end: clipped text (top): \"7\" 592.97..599.88 y 84..101",
-   "event_end: ellipsis on \"أيام\""
-  ],
+  "issues": [],
   "views": {
    "event": {
-    "issueCount": 6,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -4061,7 +4003,7 @@
     ]
    },
    "event_end": {
-    "issueCount": 6,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -4632,11 +4574,11 @@
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 12
+  "issueCount": 0
  },
  "i16pro": {
   "device": "874x402 side 62 bottom 21 island",
-  "renderedAt": "2026-11-07T17:53:57.581Z",
+  "renderedAt": "2026-11-07T18:32:27.121Z",
   "inputs": {
    "files": [
     "index.html",
@@ -4662,25 +4604,12 @@
     "../../shared/map_mena_d1_overlay.svg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "f618b96971fc3e48409eeec9bd5199808e564c5c"
+   "sha1": "ab22224793fc022e2228d21bcb423d9cae69f3d9"
   },
-  "issues": [
-   "event: ellipsis on \"احتجاجات في تونس\"",
-   "event: ellipsis on \"الوقت متوقف\"",
-   "event: clipped text (top): \"·\" 679.77..689.3 y 84..101",
-   "event: ellipsis on \"الافتراضي بعد\"",
-   "event: clipped text (top): \"7\" 611.97..618.88 y 84..101",
-   "event: ellipsis on \"أيام\"",
-   "event_end: ellipsis on \"احتجاجات في تونس\"",
-   "event_end: ellipsis on \"الوقت متوقف\"",
-   "event_end: clipped text (top): \"·\" 679.77..689.3 y 84..101",
-   "event_end: ellipsis on \"الافتراضي بعد\"",
-   "event_end: clipped text (top): \"7\" 611.97..618.88 y 84..101",
-   "event_end: ellipsis on \"أيام\""
-  ],
+  "issues": [],
   "views": {
    "event": {
-    "issueCount": 6,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -5232,7 +5161,7 @@
     ]
    },
    "event_end": {
-    "issueCount": 6,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -5824,11 +5753,11 @@
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 12
+  "issueCount": 0
  },
  "i11": {
   "device": "896x414 side 48 bottom 21 notch",
-  "renderedAt": "2026-11-07T17:54:02.918Z",
+  "renderedAt": "2026-11-07T18:32:32.555Z",
   "inputs": {
    "files": [
     "index.html",
@@ -5854,25 +5783,12 @@
     "../../shared/map_mena_d1_overlay.svg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "f618b96971fc3e48409eeec9bd5199808e564c5c"
+   "sha1": "ab22224793fc022e2228d21bcb423d9cae69f3d9"
   },
-  "issues": [
-   "event: ellipsis on \"احتجاجات في تونس\"",
-   "event: ellipsis on \"الوقت متوقف\"",
-   "event: clipped text (top): \"·\" 715.77..725.3 y 84..101",
-   "event: ellipsis on \"الافتراضي بعد\"",
-   "event: clipped text (top): \"7\" 647.97..654.88 y 84..101",
-   "event: ellipsis on \"أيام\"",
-   "event_end: ellipsis on \"احتجاجات في تونس\"",
-   "event_end: ellipsis on \"الوقت متوقف\"",
-   "event_end: clipped text (top): \"·\" 715.77..725.3 y 84..101",
-   "event_end: ellipsis on \"الافتراضي بعد\"",
-   "event_end: clipped text (top): \"7\" 647.97..654.88 y 84..101",
-   "event_end: ellipsis on \"أيام\""
-  ],
+  "issues": [],
   "views": {
    "event": {
-    "issueCount": 6,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -6438,7 +6354,7 @@
     ]
    },
    "event_end": {
-    "issueCount": 6,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -7034,11 +6950,11 @@
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 12
+  "issueCount": 0
  },
  "i16promax": {
   "device": "956x440 side 62 bottom 21 island",
-  "renderedAt": "2026-11-07T17:54:08.500Z",
+  "renderedAt": "2026-11-07T18:32:38.229Z",
   "inputs": {
    "files": [
     "index.html",
@@ -7064,25 +6980,12 @@
     "../../shared/map_mena_d1_overlay.svg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "f618b96971fc3e48409eeec9bd5199808e564c5c"
+   "sha1": "ab22224793fc022e2228d21bcb423d9cae69f3d9"
   },
-  "issues": [
-   "event: ellipsis on \"احتجاجات في تونس\"",
-   "event: ellipsis on \"الوقت متوقف\"",
-   "event: clipped text (top): \"·\" 761.77..771.3 y 84..101",
-   "event: ellipsis on \"الافتراضي بعد\"",
-   "event: clipped text (top): \"7\" 693.97..700.88 y 84..101",
-   "event: ellipsis on \"أيام\"",
-   "event_end: ellipsis on \"احتجاجات في تونس\"",
-   "event_end: ellipsis on \"الوقت متوقف\"",
-   "event_end: clipped text (top): \"·\" 761.77..771.3 y 84..101",
-   "event_end: ellipsis on \"الافتراضي بعد\"",
-   "event_end: clipped text (top): \"7\" 693.97..700.88 y 84..101",
-   "event_end: ellipsis on \"أيام\""
-  ],
+  "issues": [],
   "views": {
    "event": {
-    "issueCount": 6,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -7665,7 +7568,7 @@
     ]
    },
    "event_end": {
-    "issueCount": 6,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -8266,6 +8169,6 @@
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 12
+  "issueCount": 0
  }
 }

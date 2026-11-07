@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-07T17:53:32.736Z",
+ "ranAt": "2026-11-07T18:32:02.859Z",
  "inputs": {
   "files": [
    "index.html",
@@ -485,9 +485,9 @@
    "name": "an endless animation loop",
    "ok": true,
    "sample": [
-    "gliding at ×1 draws 13 map frames and 43 animation frames in half a second (want 4..15, ≤30 a second)",
-    "gliding at ×2 draws 13 map frames and 43 animation frames in half a second (want 4..15, ≤30 a second)",
-    "gliding at ×5 draws 14 map frames and 44 animation frames in half a second (want 4..15, ≤30 a second)"
+    "gliding at ×1 draws 12 map frames and 42 animation frames in half a second (want 4..15, ≤30 a second)",
+    "gliding at ×2 draws 14 map frames and 44 animation frames in half a second (want 4..15, ≤30 a second)",
+    "gliding at ×5 draws 12 map frames and 42 animation frames in half a second (want 4..15, ≤30 a second)"
    ]
   },
   {
@@ -495,16 +495,16 @@
    "ok": true,
    "sample": [
     "with nothing moving: 0 map frames, 0 animation frames, 63 interval calls, 4 timer calls, 0 animations in a second (want 0, 0, 0, ≤4, 0)",
-    "while paused: 0 map frames, 0 animation frames, 51 interval calls, 0 timer calls (want none)"
+    "while paused: 0 map frames, 0 animation frames, 50 interval calls, 0 timer calls (want none)"
    ]
   },
   {
    "name": "no frame cap",
    "ok": true,
    "sample": [
-    "gliding at ×1 draws 43 map frames and 43 animation frames in half a second (want 4..15, ≤30 a second)",
+    "gliding at ×1 draws 41 map frames and 41 animation frames in half a second (want 4..15, ≤30 a second)",
     "gliding at ×2 draws 41 map frames and 41 animation frames in half a second (want 4..15, ≤30 a second)",
-    "gliding at ×5 draws 41 map frames and 41 animation frames in half a second (want 4..15, ≤30 a second)"
+    "gliding at ×5 draws 42 map frames and 42 animation frames in half a second (want 4..15, ≤30 a second)"
    ]
   },
   {

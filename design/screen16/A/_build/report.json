@@ -1,7 +1,7 @@
 {
  "se": {
   "device": "667x375 side 0 bottom 0 none",
-  "renderedAt": "2026-11-07T17:55:41.229Z",
+  "renderedAt": "2026-11-07T18:34:11.741Z",
   "inputs": {
    "files": [
     "index.html",
@@ -24,27 +24,12 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "a9435fb3811dcfdef48ecbfc0e3dea608218aa40"
+   "sha1": "ae9a2f29586f1eb74aed26faca690d76ce1d6bcb"
   },
-  "issues": [
-   "center: ellipsis on \"الإشعارات\"",
-   "center: ellipsis on \"غير المقروءة:\"",
-   "center: clipped text (top): \"2\" 532.28..539.19 y 84..101",
-   "center: clipped text (top): \"·\" 522.75..532.28 y 84..101",
-   "center: clipped text (top): \"1\" 515.84..522.75 y 84..101",
-   "center: ellipsis on \"يناير\"",
-   "center: clipped text (top): \"2011\" 465.94..493.55 y 84..101",
-   "center_end: ellipsis on \"الإشعارات\"",
-   "center_end: ellipsis on \"غير المقروءة:\"",
-   "center_end: clipped text (top): \"2\" 532.28..539.19 y 84..101",
-   "center_end: clipped text (top): \"·\" 522.75..532.28 y 84..101",
-   "center_end: clipped text (top): \"1\" 515.84..522.75 y 84..101",
-   "center_end: ellipsis on \"يناير\"",
-   "center_end: clipped text (top): \"2011\" 465.94..493.55 y 84..101"
-  ],
+  "issues": [],
   "views": {
    "center": {
-    "issueCount": 7,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -454,7 +439,7 @@
     ]
    },
    "center_end": {
-    "issueCount": 7,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -902,11 +887,11 @@
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 14
+  "issueCount": 0
  },
  "mini": {
   "device": "812x375 side 50 bottom 21 notch",
-  "renderedAt": "2026-11-07T17:55:46.179Z",
+  "renderedAt": "2026-11-07T18:34:16.630Z",
   "inputs": {
    "files": [
     "index.html",
@@ -929,27 +914,12 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "a9435fb3811dcfdef48ecbfc0e3dea608218aa40"
+   "sha1": "ae9a2f29586f1eb74aed26faca690d76ce1d6bcb"
   },
-  "issues": [
-   "center: ellipsis on \"الإشعارات\"",
-   "center: ellipsis on \"غير المقروءة:\"",
-   "center: clipped text (top): \"2\" 635.28..642.19 y 84..101",
-   "center: clipped text (top): \"·\" 625.75..635.28 y 84..101",
-   "center: clipped text (top): \"1\" 618.84..625.75 y 84..101",
-   "center: ellipsis on \"يناير\"",
-   "center: clipped text (top): \"2011\" 568.94..596.55 y 84..101",
-   "center_end: ellipsis on \"الإشعارات\"",
-   "center_end: ellipsis on \"غير المقروءة:\"",
-   "center_end: clipped text (top): \"2\" 635.28..642.19 y 84..101",
-   "center_end: clipped text (top): \"·\" 625.75..635.28 y 84..101",
-   "center_end: clipped text (top): \"1\" 618.84..625.75 y 84..101",
-   "center_end: ellipsis on \"يناير\"",
-   "center_end: clipped text (top): \"2011\" 568.94..596.55 y 84..101"
-  ],
+  "issues": [],
   "views": {
    "center": {
-    "issueCount": 7,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -1344,7 +1314,7 @@
     ]
    },
    "center_end": {
-    "issueCount": 7,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -1794,11 +1764,11 @@
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 14
+  "issueCount": 0
  },
  "i14": {
   "device": "844x390 side 47 bottom 21 notch",
-  "renderedAt": "2026-11-07T17:55:51.596Z",
+  "renderedAt": "2026-11-07T18:34:22.187Z",
   "inputs": {
    "files": [
     "index.html",
@@ -1821,27 +1791,12 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "a9435fb3811dcfdef48ecbfc0e3dea608218aa40"
+   "sha1": "ae9a2f29586f1eb74aed26faca690d76ce1d6bcb"
   },
-  "issues": [
-   "center: ellipsis on \"الإشعارات\"",
-   "center: ellipsis on \"غير المقروءة:\"",
-   "center: clipped text (top): \"2\" 670.28..677.19 y 84..101",
-   "center: clipped text (top): \"·\" 660.75..670.28 y 84..101",
-   "center: clipped text (top): \"1\" 653.84..660.75 y 84..101",
-   "center: ellipsis on \"يناير\"",
-   "center: clipped text (top): \"2011\" 603.94..631.55 y 84..101",
-   "center_end: ellipsis on \"الإشعارات\"",
-   "center_end: ellipsis on \"غير المقروءة:\"",
-   "center_end: clipped text (top): \"2\" 670.28..677.19 y 84..101",
-   "center_end: clipped text (top): \"·\" 660.75..670.28 y 84..101",
-   "center_end: clipped text (top): \"1\" 653.84..660.75 y 84..101",
-   "center_end: ellipsis on \"يناير\"",
-   "center_end: clipped text (top): \"2011\" 603.94..631.55 y 84..101"
-  ],
+  "issues": [],
   "views": {
    "center": {
-    "issueCount": 7,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -2368,7 +2323,7 @@
     ]
    },
    "center_end": {
-    "issueCount": 7,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -2933,11 +2888,11 @@
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 14
+  "issueCount": 0
  },
  "i16": {
   "device": "852x393 side 59 bottom 21 island",
-  "renderedAt": "2026-11-07T17:55:57.101Z",
+  "renderedAt": "2026-11-07T18:34:27.851Z",
   "inputs": {
    "files": [
     "index.html",
@@ -2960,27 +2915,12 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "a9435fb3811dcfdef48ecbfc0e3dea608218aa40"
+   "sha1": "ae9a2f29586f1eb74aed26faca690d76ce1d6bcb"
   },
-  "issues": [
-   "center: ellipsis on \"الإشعارات\"",
-   "center: ellipsis on \"غير المقروءة:\"",
-   "center: clipped text (top): \"2\" 666.28..673.19 y 84..101",
-   "center: clipped text (top): \"·\" 656.75..666.28 y 84..101",
-   "center: clipped text (top): \"1\" 649.84..656.75 y 84..101",
-   "center: ellipsis on \"يناير\"",
-   "center: clipped text (top): \"2011\" 599.94..627.55 y 84..101",
-   "center_end: ellipsis on \"الإشعارات\"",
-   "center_end: ellipsis on \"غير المقروءة:\"",
-   "center_end: clipped text (top): \"2\" 666.28..673.19 y 84..101",
-   "center_end: clipped text (top): \"·\" 656.75..666.28 y 84..101",
-   "center_end: clipped text (top): \"1\" 649.84..656.75 y 84..101",
-   "center_end: ellipsis on \"يناير\"",
-   "center_end: clipped text (top): \"2011\" 599.94..627.55 y 84..101"
-  ],
+  "issues": [],
   "views": {
    "center": {
-    "issueCount": 7,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -3496,7 +3436,7 @@
     ]
    },
    "center_end": {
-    "issueCount": 7,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -4050,11 +3990,11 @@
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 14
+  "issueCount": 0
  },
  "i16pro": {
   "device": "874x402 side 62 bottom 21 island",
-  "renderedAt": "2026-11-07T17:56:02.499Z",
+  "renderedAt": "2026-11-07T18:34:33.621Z",
   "inputs": {
    "files": [
     "index.html",
@@ -4077,27 +4017,12 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "a9435fb3811dcfdef48ecbfc0e3dea608218aa40"
+   "sha1": "ae9a2f29586f1eb74aed26faca690d76ce1d6bcb"
   },
-  "issues": [
-   "center: ellipsis on \"الإشعارات\"",
-   "center: ellipsis on \"غير المقروءة:\"",
-   "center: clipped text (top): \"2\" 685.28..692.19 y 84..101",
-   "center: clipped text (top): \"·\" 675.75..685.28 y 84..101",
-   "center: clipped text (top): \"1\" 668.84..675.75 y 84..101",
-   "center: ellipsis on \"يناير\"",
-   "center: clipped text (top): \"2011\" 618.94..646.55 y 84..101",
-   "center_end: ellipsis on \"الإشعارات\"",
-   "center_end: ellipsis on \"غير المقروءة:\"",
-   "center_end: clipped text (top): \"2\" 685.28..692.19 y 84..101",
-   "center_end: clipped text (top): \"·\" 675.75..685.28 y 84..101",
-   "center_end: clipped text (top): \"1\" 668.84..675.75 y 84..101",
-   "center_end: ellipsis on \"يناير\"",
-   "center_end: clipped text (top): \"2011\" 618.94..646.55 y 84..101"
-  ],
+  "issues": [],
   "views": {
    "center": {
-    "issueCount": 7,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -4644,7 +4569,7 @@
     ]
    },
    "center_end": {
-    "issueCount": 7,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -5209,11 +5134,11 @@
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 14
+  "issueCount": 0
  },
  "i11": {
   "device": "896x414 side 48 bottom 21 notch",
-  "renderedAt": "2026-11-07T17:56:07.908Z",
+  "renderedAt": "2026-11-07T18:34:39.354Z",
   "inputs": {
    "files": [
     "index.html",
@@ -5236,27 +5161,12 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "a9435fb3811dcfdef48ecbfc0e3dea608218aa40"
+   "sha1": "ae9a2f29586f1eb74aed26faca690d76ce1d6bcb"
   },
-  "issues": [
-   "center: ellipsis on \"الإشعارات\"",
-   "center: ellipsis on \"غير المقروءة:\"",
-   "center: clipped text (top): \"2\" 721.28..728.19 y 84..101",
-   "center: clipped text (top): \"·\" 711.75..721.28 y 84..101",
-   "center: clipped text (top): \"1\" 704.84..711.75 y 84..101",
-   "center: ellipsis on \"يناير\"",
-   "center: clipped text (top): \"2011\" 654.94..682.55 y 84..101",
-   "center_end: ellipsis on \"الإشعارات\"",
-   "center_end: ellipsis on \"غير المقروءة:\"",
-   "center_end: clipped text (top): \"2\" 721.28..728.19 y 84..101",
-   "center_end: clipped text (top): \"·\" 711.75..721.28 y 84..101",
-   "center_end: clipped text (top): \"1\" 704.84..711.75 y 84..101",
-   "center_end: ellipsis on \"يناير\"",
-   "center_end: clipped text (top): \"2011\" 654.94..682.55 y 84..101"
-  ],
+  "issues": [],
   "views": {
    "center": {
-    "issueCount": 7,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -5802,7 +5712,7 @@
     ]
    },
    "center_end": {
-    "issueCount": 7,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -6366,11 +6276,11 @@
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 14
+  "issueCount": 0
  },
  "i16promax": {
   "device": "956x440 side 62 bottom 21 island",
-  "renderedAt": "2026-11-07T17:56:13.603Z",
+  "renderedAt": "2026-11-07T18:34:45.212Z",
   "inputs": {
    "files": [
     "index.html",
@@ -6393,27 +6303,12 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "a9435fb3811dcfdef48ecbfc0e3dea608218aa40"
+   "sha1": "ae9a2f29586f1eb74aed26faca690d76ce1d6bcb"
   },
-  "issues": [
-   "center: ellipsis on \"الإشعارات\"",
-   "center: ellipsis on \"غير المقروءة:\"",
-   "center: clipped text (top): \"2\" 767.28..774.19 y 84..101",
-   "center: clipped text (top): \"·\" 757.75..767.28 y 84..101",
-   "center: clipped text (top): \"1\" 750.84..757.75 y 84..101",
-   "center: ellipsis on \"يناير\"",
-   "center: clipped text (top): \"2011\" 700.94..728.55 y 84..101",
-   "center_end: ellipsis on \"الإشعارات\"",
-   "center_end: ellipsis on \"غير المقروءة:\"",
-   "center_end: clipped text (top): \"2\" 767.28..774.19 y 84..101",
-   "center_end: clipped text (top): \"·\" 757.75..767.28 y 84..101",
-   "center_end: clipped text (top): \"1\" 750.84..757.75 y 84..101",
-   "center_end: ellipsis on \"يناير\"",
-   "center_end: clipped text (top): \"2011\" 700.94..728.55 y 84..101"
-  ],
+  "issues": [],
   "views": {
    "center": {
-    "issueCount": 7,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -6964,7 +6859,7 @@
     ]
    },
    "center_end": {
-    "issueCount": 7,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -7548,6 +7443,6 @@
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 14
+  "issueCount": 0
  }
 }
