@@ -1,0 +1,5 @@
+  /* ================= Screen 25, variant A: the save mirror prompt (D-28) ================= */
+  .r-tabs { display: none; }
+  [data-tab="ask"] .r-body[data-tab="ask"], [data-tab="done"] .r-body[data-tab="done"], [data-tab="stale"] .r-body[data-tab="stale"] { display: flex; }
+  .r-body[data-tab="ask"], .r-body[data-tab="done"], .r-body[data-tab="stale"] { padding-top: var(--s2); padding-bottom: var(--s3); gap: var(--s2); }
+  .r-body[data-tab="done"] .r-sc { border-bottom: 0; }   /* one row of two cells: the table's own line closes it */

@@ -1,0 +1,659 @@
+{
+ "ranAt": "2026-11-07T23:52:27.707Z",
+ "inputs": {
+  "files": [
+   "index.html",
+   "_build/render.js",
+   "_build/sheet.html",
+   "_build/assemble.py",
+   "../../shared/check/panelcheck.js",
+   "../../shared/check/panel_page.py",
+   "../../screen4/R/_build/panel.css",
+   "../../shared/section_identity.css",
+   "../../screen5/A/_build/state.css",
+   "../../screen4/A/index.html",
+   "../../screen1/B3/index.html",
+   "../../shared/devices.json",
+   "_build/mirror.css",
+   "../../screen13/A/_build/sheet.html",
+   "../../../design_doc/final_design.md",
+   "../../shared/flag_eg.svg",
+   "../../shared/flags/eg.svg",
+   "../../shared/map_mena_d1.jpg",
+   "../../shared/map_mena_d1_overlay.svg",
+   "header_cairo.jpg",
+   "map_overlay_cairo.svg"
+  ],
+  "sha1": "19ff1a2b7f54d5ba77dea2bfa7367550a55cdbab"
+ },
+ "cleanIssues": {
+  "i16promax": [],
+  "i16promax_ask_end": [],
+  "i16promax_done": [],
+  "i16promax_done_end": [],
+  "i16promax_stale": [],
+  "i16promax_stale_end": [],
+  "i16promax coverage": [],
+  "se": [],
+  "se_ask_end": [],
+  "se_done": [],
+  "se_done_end": [],
+  "se_stale": [],
+  "se_stale_end": [],
+  "se coverage": []
+ },
+ "results": [
+  {
+   "name": "type size",
+   "ok": true,
+   "sample": [
+    "font size 17 for \"نسخة احتياطية\""
+   ]
+  },
+  {
+   "name": "off-token colour",
+   "ok": true,
+   "sample": [
+    "text colour off-token rgb(136, 153, 170): \"نسخة احتياطية\"",
+    "contrast 1.97 for \"نسخة احتياطية\""
+   ]
+  },
+  {
+   "name": "radius",
+   "ok": true,
+   "sample": [
+    "panel radius نسخة احتياطية: 6 (want 12)",
+    "radius 6 for .sheet (want 12)"
+   ]
+  },
+  {
+   "name": "tap in the side inset",
+   "ok": true,
+   "sample": [
+    "text in side inset: احمِ حفظك",
+    "text in side inset: الحفظ في هذا الجهاز فقط، ويضيع إذا حُذفت اللعبة. اختر مجلدًا مرة واحدة، مثل",
+    "text in side inset: iCloud Drive"
+   ]
+  },
+  {
+   "name": "panel in the side inset",
+   "ok": true,
+   "sample": [
+    "text in side inset: احمِ حفظك",
+    "text in side inset: الحفظ في هذا الجهاز فقط، ويضيع إذا حُذفت اللعبة. اختر مجلدًا مرة واحدة، مثل",
+    "text in side inset: iCloud Drive"
+   ]
+  },
+  {
+   "name": "panel not opaque",
+   "ok": true,
+   "sample": [
+    "panel not opaque: نسخة احتياطية rgba(9, 17, 25, 0.66)",
+    "contrast 3.15 for \"الحفظ في هذا الجهاز فقط،\"",
+    "contrast 3.15 for \"، فتُنسخ إليه الحفظات تل\""
+   ]
+  },
+  {
+   "name": "see-through panel",
+   "ok": true,
+   "sample": [
+    "panel not opaque (opacity 0.60): نسخة احتياطية",
+    "brief text not fully visible: نسخة احتياطية",
+    "brief text not fully visible: حملة مصر · حُفظ 1 يناير 2011"
+   ]
+  },
+  {
+   "name": "Egypt covered",
+   "ok": true,
+   "sample": [
+    "Nile delta covered by panel نسخة احتياطية",
+    "Egypt covered by panel نسخة احتياطية",
+    "Egypt under the hit box of اختيار مجلد: مرة واحدة، مث"
+   ]
+  },
+  {
+   "name": "map dimmed",
+   "ok": true,
+   "sample": [
+    "the map is dimmed (opacity 1.00, filter brightness(0.35))"
+   ]
+  },
+  {
+   "name": "map faded",
+   "ok": true,
+   "sample": [
+    "the map is dimmed (opacity 0.30, filter none)"
+   ]
+  },
+  {
+   "name": "scrim over the map",
+   "ok": true,
+   "sample": [
+    "something drawn over the map: DIV (rgba(0, 0, 0, 0.55))",
+    "contrast 1.92 for \"3\""
+   ]
+  },
+  {
+   "name": "sheet width",
+   "ok": true,
+   "sample": [
+    "sheet width 330 (want round(clamp(43% of 832, 340, 380)), or the room the dock leaves if 330..: 358)",
+    "contrast 4.31 for \"نسخة احتياطية\""
+   ]
+  },
+  {
+   "name": "sheet top",
+   "ok": true,
+   "sample": [
+    "hit overlap الاستقرار 58% / إغلاق، العودة إلى الحفظ",
+    "panel overlap الدولة: مصر، حسني مبارك، ج / نسخة احتياطية",
+    "panel overlap الخزينة 36.0 مليار $ الاست / نسخة احتياطية"
+   ]
+  },
+  {
+   "name": "dock hidden although it fits",
+   "ok": true,
+   "sample": [
+    "dock hidden although it fits left of the sheet"
+   ]
+  },
+  {
+   "name": "dock shown on the SE",
+   "ok": true,
+   "sample": [
+    "panel overlap الأقسام / نسخة احتياطية",
+    "dock shown although it does not fit left of the sheet",
+    "dock not 4 pt in from the left end of its B3 line: x 140.0 w 387.0 y 323.0 (want x 12 w 387.0 y 323.0)"
+   ]
+  },
+  {
+   "name": "left stack moved",
+   "ok": true,
+   "sample": [
+    "HUD element moved from its B3 position: .toast x 70.0..275.6 y 56.0..88.0",
+    "HUD element moved from its B3 position: .btn.mode x 70.0..191.6 y 96.0..128.0",
+    "HUD element moved from its B3 position: .btn.home x 70.0..141.5 y 136.0..168.0"
+   ]
+  },
+  {
+   "name": "fit not the loosest",
+   "ok": true,
+   "sample": [
+    "fit level 6 is not the loosest that fits: [[0,0]]"
+   ]
+  },
+  {
+   "name": "map label cut",
+   "ok": true,
+   "sample": [
+    "map label ليبيا sliced by the screen edge or the side inset",
+    "map label إيران sliced by the screen edge or the side inset",
+    "map label إيران squeezed between a panel and the screen edge"
+   ]
+  },
+  {
+   "name": "contrast",
+   "ok": true,
+   "sample": [
+    "contrast 1 for \"احمِ حفظك\"",
+    "contrast 1.73 for \"الحفظ في هذا الجهاز فقط،\"",
+    "contrast 1.73 for \"iCloud Drive\""
+   ]
+  },
+  {
+   "name": "dock item not marked",
+   "ok": true,
+   "sample": [
+    "the open section «المزيد» is not marked in the dock"
+   ]
+  },
+  {
+   "name": "identity line missing",
+   "ok": true,
+   "sample": [
+    "panel top line none rgb(169, 188, 203) 2px (want the section colour, 2 pt, at the top)"
+   ]
+  },
+  {
+   "name": "money unit",
+   "ok": true,
+   "sample": [
+    "money unit: «0.4 مليار» (under 1 billion is written in millions)",
+    "the ask does not say: this device only, lost if the game is deleted, picked once (an example folder), copied automatically"
+   ]
+  },
+  {
+   "name": "sign outside its number",
+   "ok": true,
+   "sample": [
+    "a sign outside its number: «تغير +3»",
+    "the ask does not say: this device only, lost if the game is deleted, picked once (an example folder), copied automatically"
+   ]
+  },
+  {
+   "name": "colour alone",
+   "ok": true,
+   "sample": [
+    "colour alone: «تراجع» has no arrow or icon",
+    "the ask does not say: this device only, lost if the game is deleted, picked once (an example folder), copied automatically"
+   ]
+  },
+  {
+   "name": "an image in the sheet",
+   "ok": true,
+   "sample": [
+    "an image in the sheet"
+   ]
+  },
+  {
+   "name": "close not round",
+   "ok": true,
+   "sample": [
+    "close button is not round"
+   ]
+  },
+  {
+   "name": "label without a role",
+   "ok": true,
+   "sample": [
+    "a11y: a label VoiceOver may skip (no role): «اختبار»",
+    "the ask does not say: this device only, lost if the game is deleted, picked once (an example folder), copied automatically"
+   ]
+  },
+  {
+   "name": "overview scrolls",
+   "ok": true,
+   "sample": [
+    "ask needs scrolling: 323.0 pt over",
+    "fades 0/0 do not match the scroll state (top 0, over 323.0)",
+    "brief text not fully visible: احمِ حفظك"
+   ]
+  },
+  {
+   "name": "dock underline missing",
+   "ok": true,
+   "sample": [
+    "dock underline missing or off: none 16pxx2px rgb(169, 188, 203) (want 16 x 2 in the section colour)"
+   ]
+  },
+  {
+   "name": "identity line colour",
+   "ok": true,
+   "sample": [
+    "panel top line \"\" rgb(63, 224, 208) 2px (want the section colour, 2 pt, at the top)"
+   ]
+  },
+  {
+   "name": "emblem size",
+   "ok": true,
+   "sample": [
+    "size 28.0x32.0 for .s-emb (want 32 x 32)"
+   ]
+  },
+  {
+   "name": "tile icons cyan",
+   "ok": true,
+   "sample": [
+    "white touch off: .r-tile color rgb(127, 233, 255) (want rgb(234, 242, 247))",
+    "white touch off: .r-tile color rgb(127, 233, 255) (want rgb(234, 242, 247))"
+   ]
+  },
+  {
+   "name": "close says only إغلاق",
+   "ok": true,
+   "sample": [
+    "a11y: the close says only «إغلاق»",
+    "a11y: the close is not «إغلاق، العودة إلى الحفظ»"
+   ]
+  },
+  {
+   "name": "row read in part",
+   "ok": true,
+   "sample": [
+    "a11y: «جزء» does not read all it shows: اختيار مجلد مرة واحدة",
+    "a11y: «اختيار مجلد» does not say it opens the folder picker"
+   ]
+  },
+  {
+   "name": "a long headline label",
+   "ok": true,
+   "sample": [
+    "clipped text (sides): \"عنوان طويل جدًا لا يتسع لخانته أبدًا\" 385.38..539.25 y 124..141",
+    "text outside the sheet's 12 pt padding: \"عنوان طويل جدًا لا يتسع لخانته أبدًا\"",
+    "clipped text (sides): \"1\" 528.44..539.25 y 142..169"
+   ]
+  },
+  {
+   "name": "text wider than its box",
+   "ok": true,
+   "sample": [
+    "text wider than its box: «احمِ حفظك» (53 in 20)"
+   ]
+  },
+  {
+   "name": "a long status cell",
+   "ok": true,
+   "sample": [
+    "clipped text (sides): \"قيمة طويلة جدًا لا تتسع لنصف الجدول\" 416.53..613.3 y 120.5..139.5",
+    "text outside the sheet's 12 pt padding: \"قيمة طويلة جدًا لا تتسع لنصف الجدول\"",
+    "horizontal overflow in خانةقيمة طويلة جدًا لا تتس"
+   ]
+  },
+  {
+   "name": "font weight (no tabs)",
+   "ok": true,
+   "sample": [
+    "font weight 11.5/700 for \"حملة مصر\"",
+    "font weight 11.5/700 for \"·\"",
+    "font weight 11.5/700 for \"حُفظ\""
+   ]
+  },
+  {
+   "name": "a tab row on a one-body sheet",
+   "ok": true,
+   "sample": [
+    "a tab row on a sheet that has one body"
+   ]
+  },
+  {
+   "name": "control height (no tabs)",
+   "ok": true,
+   "sample": [
+    "control height 40.00 for .r-x (want 32): إغلاق، العودة إلى الحفظ",
+    "close button is not round"
+   ]
+  },
+  {
+   "name": "icon size (no tabs)",
+   "ok": true,
+   "sample": [
+    "icon size 19x19 (want 16): i"
+   ]
+  },
+  {
+   "name": "fades wrong (no tabs)",
+   "ok": true,
+   "sample": [
+    "fades 0/1 do not match the scroll state (top 0, over 0.0)"
+   ]
+  },
+  {
+   "name": "brief text hidden (ask)",
+   "ok": true,
+   "sample": [
+    "brief text not fully visible: اختيار مجلد"
+   ]
+  },
+  {
+   "name": "18 pt misuse (ask)",
+   "ok": true,
+   "sample": [
+    "18 pt is for the panel's name and the adjusted values only: \"مرة واحدة · مثل\"",
+    "18 pt is for the panel's name and the adjusted values only: \"iCloud Drive\"",
+    "18 pt is for the panel's name and the adjusted values only: \"لن نسأل مرة أخرى · تجده في الحفظ\""
+   ]
+  },
+  {
+   "name": "text overlap (ask)",
+   "ok": true,
+   "sample": [
+    "text overlap \"اختيار مجلد\" / \"مرة واحدة · مثل\"",
+    "text overlap \"ليس الآن\" / \"لن نسأل مرة أخرى · تجده في الحفظ\""
+   ]
+  },
+  {
+   "name": "clipped text (ask)",
+   "ok": true,
+   "sample": [
+    "clipped text (sides): \"احمِ حفظك\" 867.94..921 y 115..132",
+    "text outside the sheet's 12 pt padding: \"احمِ حفظك\"",
+    "clipped text (sides): \"الحفظ في هذا الجهاز فقط، ويضيع إذا حُذفت اللعبة. اختر مجلدًا مرة واحدة، مثل\" 621.89..921 y 139..154"
+   ]
+  },
+  {
+   "name": "faint text (ask)",
+   "ok": true,
+   "sample": [
+    "brief text not fully visible: مرة واحدة · مثل iCloud Drive",
+    "brief text not fully visible: لن نسأل مرة أخرى · تجده في الحفظ",
+    "contrast 2.22 for \"مرة واحدة · مثل\""
+   ]
+  },
+  {
+   "name": "gap (ask)",
+   "ok": true,
+   "sample": [
+    "gap 6 on احمِ حفظك الحفظ في هذا الج",
+    "gap 6 on احمِ حفظك الحفظ في هذا الج"
+   ]
+  },
+  {
+   "name": "% before its number (ask)",
+   "ok": true,
+   "sample": [
+    "% shown before its number: \"نسبة 20%\"",
+    "the ask does not say: this device only, lost if the game is deleted, picked once (an example folder), copied automatically",
+    "brief text missing: الحفظ في هذا الجهاز فقط، ويضيع إذا حُذفت اللعبة. اختر مجلدًا مرة واحدة، مثل iCloud Drive، فتُنسخ إليه الحفظات تلقائيًا."
+   ]
+  },
+  {
+   "name": "hint chevron missing (forced overflow)",
+   "ok": true,
+   "sample": [
+    "ask needs scrolling: 123.0 pt over",
+    "scroll hint chevron missing with content below",
+    "brief text not fully visible: احمِ حفظك"
+   ]
+  },
+  {
+   "name": "hint over the content (forced overflow)",
+   "ok": true,
+   "sample": [
+    "ask needs scrolling: 123.0 pt over",
+    "scroll hint not centred in the clear strip under the fade: y 198.0..216.0 (strip 344.0..366.0)",
+    "brief text not fully visible: احمِ حفظك"
+   ]
+  },
+  {
+   "name": "text into a control (header)",
+   "ok": true,
+   "sample": [
+    "clipped text (sides): \"2011\" 527.27..554.88 y 84..101",
+    "text outside the sheet's 12 pt padding: \"2011\"",
+    "text over a control: \"1\" runs into «إغلاق، العودة إلى ال»"
+   ]
+  },
+  {
+   "name": "two bodies shown",
+   "ok": true,
+   "sample": [
+    "clipped text (bottom): \"ليس الآن\" 788.34..834 y 237..256",
+    "clipped text (bottom): \"تغيير المجلد\" 773.8..834 y 411.47..430.47",
+    "control cut by its scroll area (bottom): ليس الآن: لن نسأل مرة أخرى"
+   ]
+  },
+  {
+   "name": "title not the row's",
+   "ok": true,
+   "sample": [
+    "the title is not «نسخة احتياطية», or the saves tab's mirror row is not «نسخة في مجلد آخر» with no folder chosen, opening the folder choice",
+    "brief text missing: نسخة احتياطية",
+    "brief text missing: نسخة احتياطية"
+   ]
+  },
+  {
+   "name": "header date off",
+   "ok": true,
+   "sample": [
+    "the header does not name the campaign and the save just made (مصر، 1 يناير 2011)",
+    "brief text missing: حملة مصر · حُفظ 1 يناير 2011",
+    "brief text missing: حملة مصر · حُفظ 1 يناير 2011"
+   ]
+  },
+  {
+   "name": "wrong flag",
+   "ok": true,
+   "sample": [
+    "the header flag is not the campaign's (مصر)"
+   ]
+  },
+  {
+   "name": "emblem not the folder",
+   "ok": true,
+   "sample": [
+    "the emblem is not the folder"
+   ]
+  },
+  {
+   "name": "close elsewhere",
+   "ok": true,
+   "sample": [
+    "a11y: the close is not «إغلاق، العودة إلى الحفظ»"
+   ]
+  },
+  {
+   "name": "primary bar gone",
+   "ok": true,
+   "sample": [
+    "the primary «اختيار مجلد» does not draw its white bar"
+   ]
+  },
+  {
+   "name": "bar on the second",
+   "ok": true,
+   "sample": [
+    "«ليس الآن» draws the primary's bar"
+   ]
+  },
+  {
+   "name": "ask in a dialog",
+   "ok": true,
+   "sample": [
+    "a dialog over the map (mapCentral)"
+   ]
+  },
+  {
+   "name": "ask reordered",
+   "ok": true,
+   "sample": [
+    "the «ask» actions are not اختيار مجلد (primary) then ليس الآن: ليس الآن، اختيار مجلد",
+    "a11y: «اختيار مجلد» does not say it opens the folder picker",
+    "«ليس الآن» does not say it asks once and where the choice stays (الحفظ)"
+   ]
+  },
+  {
+   "name": "two primaries",
+   "ok": true,
+   "sample": [
+    "the «done» actions are not تم (primary) then تغيير المجلد: تم، تغيير المجلد"
+   ]
+  },
+  {
+   "name": "stale primary lost",
+   "ok": true,
+   "sample": [
+    "the «stale» actions are not اختيار المجلد مرة أخرى (primary) then ليس الآن: اختيار المجلد مرة أخرى، ليس الآن"
+   ]
+  },
+  {
+   "name": "risk unsaid",
+   "ok": true,
+   "sample": [
+    "the ask does not say: this device only, lost if the game is deleted, picked once (an example folder), copied automatically",
+    "brief text missing: الحفظ في هذا الجهاز فقط، ويضيع إذا حُذفت اللعبة. اختر مجلدًا مرة واحدة، مثل iCloud Drive، فتُنسخ إليه الحفظات تلقائيًا.",
+    "brief text missing: الحفظ في هذا الجهاز فقط، ويضيع إذا حُذفت اللعبة. اختر مجلدًا مرة واحدة، مثل iCloud Drive، فتُنسخ إليه الحفظات تلقائيًا."
+   ]
+  },
+  {
+   "name": "picker unsaid",
+   "ok": true,
+   "sample": [
+    "a11y: «اختيار مجلد» does not say it opens the folder picker"
+   ]
+  },
+  {
+   "name": "not now unclear",
+   "ok": true,
+   "sample": [
+    "a11y: «ليس الآن: لن نسأل مرة أخ» does not read all it shows: لاحقًا",
+    "«ليس الآن» does not say it asks once and where the choice stays (الحفظ)",
+    "brief text missing: لن نسأل مرة أخرى · تجده في الحفظ"
+   ]
+  },
+  {
+   "name": "cells off",
+   "ok": true,
+   "sample": [
+    "the chosen folder's cells are not the brief's: المجلد:صانع التاريخ، المكان:هذا الجهاز",
+    "brief text missing: iCloud Drive"
+   ]
+  },
+  {
+   "name": "frequency off",
+   "ok": true,
+   "sample": [
+    "the chosen folder does not say what is copied and how often (§7: every manual save and the newest autosave, at most every 10 minutes, and on leaving)",
+    "brief text missing: يُنسخ كل حفظ يدوي وأحدث حفظ تلقائي، مرة كل 10 دقائق على الأكثر، وعند الخروج من اللعبة.",
+    "brief text missing: يُنسخ كل حفظ يدوي وأحدث حفظ تلقائي، مرة كل 10 دقائق على الأكثر، وعند الخروج من اللعبة."
+   ]
+  },
+  {
+   "name": "change unsaid",
+   "ok": true,
+   "sample": [
+    "a11y: «تغيير المجلد» does not read all it shows: يفتح منتقي المجلدات",
+    "a11y: «تغيير المجلد» does not say it opens the folder picker"
+   ]
+  },
+  {
+   "name": "stale unnamed",
+   "ok": true,
+   "sample": [
+    "the folder gone does not name the folder (صانع التاريخ، iCloud Drive) and say saving goes on without a copy",
+    "brief text missing: لا تصل اللعبة إلى مجلد صانع التاريخ في iCloud Drive؛ ربما نُقل أو حُذف. الحفظ مستمر في هذا الجهاز، لكن دون نسخة.",
+    "brief text missing: لا تصل اللعبة إلى مجلد صانع التاريخ في iCloud Drive؛ ربما نُقل أو حُذف. الحفظ مستمر في هذا الجهاز، لكن دون نسخة."
+   ]
+  },
+  {
+   "name": "repick unsaid",
+   "ok": true,
+   "sample": [
+    "a11y: «اختيار المجلد مرة أخرى» does not read all it shows: يفتح منتقي المجلدات",
+    "a11y: picking again does not say it opens the folder picker"
+   ]
+  },
+  {
+   "name": "stale later unclear",
+   "ok": true,
+   "sample": [
+    "a11y: «ليس الآن: يبقى الحفظ في » does not read all it shows: لاحقًا",
+    "«ليس الآن» on a folder gone does not say saves stay on this device only",
+    "brief text missing: يبقى الحفظ في هذا الجهاز فقط"
+   ]
+  },
+  {
+   "name": "red icon",
+   "ok": true,
+   "sample": [
+    "white touch off: .r-tile color rgb(242, 112, 90) (want rgb(234, 242, 247))",
+    "red in the mirror sheet (nothing is deleted)",
+    "red in the mirror sheet: r-tile"
+   ]
+  },
+  {
+   "name": "red outline",
+   "ok": true,
+   "sample": [
+    "red in the mirror sheet: r-act tap r-first"
+   ]
+  },
+  {
+   "name": "coverage reports a string no view shows",
+   "ok": true,
+   "sample": [
+    "ask: never shown clear of the fades in any view: نص غير معروض للاختبار"
+   ],
+   "midViewsAdd": []
+  }
+ ]
+}
