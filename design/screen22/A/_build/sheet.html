@@ -1,0 +1,64 @@
+  <!-- The new-operation sheet (screen 22, variant A), opened from the intelligence panel's operations tab: §5.6's
+       operation set up in four steps (type, target, duration, the estimate) and started. The nine types of the panel;
+       none kills a person (D-14: no assassinations). The example is the panel's own suggestion: gathering intelligence in
+       Sudan, 60 million $ over 3 months, low exposure risk, with 2 of 4 operation slots in use. A side sheet in the
+       intelligence section's frame (its identity, its dock item open), the map central (mapCentral). -->
+  <section class="sheet glass" aria-label="عملية جديدة">
+    <div class="r-in">
+      <header class="r-hd">
+        <span class="r-flag"><img src="../../shared/flags/eg.svg" alt="علم مصر"></span>
+        <div class="r-tt">
+          <div class="r-row"><h2 class="r-name">عملية جديدة</h2></div>
+          <div class="r-sub">الاستخبارات<span class="r-dot"> · </span><span class="ltr">2</span> من <span class="ltr">4</span> قيد التنفيذ</div>
+        </div>
+        <span class="s-emb" aria-hidden="true"><svg class="i"><use href="#i-target"/></svg></span>
+        <button class="r-x tap" aria-label="إلغاء، العودة إلى العمليات"><svg class="i"><use href="#i-close"/></svg></button>
+      </header>
+
+      <div class="r-body" data-tab="newop">
+        <section class="r-sec">
+          <h3>النوع</h3>
+          <div class="m-grid" role="radiogroup" aria-label="نوع العملية">
+            <button class="m-tile tap on" role="radio" aria-checked="true" data-type="gather"><svg class="i"><use href="#i-eye"/></svg><span>جمع معلومات</span></button>
+            <button class="m-tile tap" role="radio" aria-checked="false" data-type="sabotage"><svg class="i"><use href="#i-flame"/></svg><span>تخريب</span></button>
+            <button class="m-tile tap" role="radio" aria-checked="false" data-type="cyber"><svg class="i"><use href="#i-net"/></svg><span>هجوم إلكتروني</span></button>
+            <button class="m-tile tap" role="radio" aria-checked="false" data-type="opposition"><svg class="i"><use href="#i-hands"/></svg><span>دعم معارضة</span></button>
+            <button class="m-tile tap" role="radio" aria-checked="false" data-type="insurgents"><svg class="i"><use href="#i-army"/></svg><span>دعم متمردين</span></button>
+            <button class="m-tile tap" role="radio" aria-checked="false" data-type="election"><svg class="i"><use href="#i-podium"/></svg><span>تأثير في انتخابات</span></button>
+            <button class="m-tile tap" role="radio" aria-checked="false" data-type="coup"><svg class="i"><use href="#i-flag"/></svg><span>دعم انقلاب</span></button>
+            <button class="m-tile tap" role="radio" aria-checked="false" data-type="propaganda"><svg class="i"><use href="#i-signal"/></svg><span>دعاية</span></button>
+            <button class="m-tile tap" role="radio" aria-checked="false" data-type="tech"><svg class="i"><use href="#i-flask"/></svg><span>سرقة التقنية</span></button>
+          </div>
+          <p class="s-note">لا توجد عمليات اغتيال في اللعبة.</p>
+        </section>
+        <section class="r-sec">
+          <h3>الهدف والمدة</h3>
+          <div class="r-link tap" role="button" tabindex="0" aria-label="الهدف: السودان، الشبكة 7 من 10، الانكشاف منخفض. يفتح اختيار الهدف">
+            <span class="r-tile"><svg class="i"><use href="#i-globe"/></svg></span>
+            <span class="r-at"><b>السودان</b><span>الشبكة <span class="ltr">7</span> من <span class="ltr">10</span> · الانكشاف منخفض</span></span>
+            <svg class="i r-chev"><use href="#i-chev"/></svg>
+          </div>
+          <div class="s-pol">
+            <span class="r-at"><b>المدة</b><span>الأطول أدق وأغلى</span></span>
+            <span class="s-seg" role="radiogroup" aria-label="المدة"><button class="s-sg tap on" role="radio" aria-checked="true">3 أشهر</button><button class="s-sg tap" role="radio" aria-checked="false">6 أشهر</button><button class="s-sg tap" role="radio" aria-checked="false">سنة</button></span>
+          </div>
+        </section>
+        <section class="r-sec">
+          <h3>التقدير</h3>
+          <dl class="r-st">
+            <div class="r-sc"><dt>الكلفة</dt><dd><span class="ltr">60</span> مليون $</dd></div>
+            <div class="r-sc"><dt>الأثر</dt><dd>دقة أعلى</dd></div>
+            <div class="r-sc"><dt>النجاح</dt><dd>نحو <span class="ltr">85%</span></dd></div>
+            <div class="r-sc"><dt>الانكشاف</dt><dd>منخفض</dd></div>
+          </dl>
+          <p class="s-note">إن كُشفت تنخفض العلاقة مع السودان. التقدير له هامش خطأ.</p>
+        </section>
+        <button class="r-act tap r-first" aria-label="بدء العملية: الكلفة 60 مليون دولار، تشغل 3 من 4. ترفع الدقة في تقدير السودان، أفضل">
+          <span class="r-tile"><svg class="i"><use href="#i-target"/></svg></span>
+          <span class="r-at"><b>بدء العملية</b><span>الكلفة: <span class="ltr">60</span> مليون $ · تشغل <span class="ltr">3</span> من <span class="ltr">4</span></span></span>
+          <span class="r-chip"><svg class="r-arr" aria-hidden="true"><use href="#t-up"/></svg>الدقة</span>
+        </button>
+      </div>
+      <span class="r-hint" aria-hidden="true"><svg class="i"><use href="#i-chev"/></svg></span>
+    </div>
+  </section>
