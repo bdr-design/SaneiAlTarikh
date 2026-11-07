@@ -1,7 +1,7 @@
 {
  "se": {
   "device": "667x375 side 0 bottom 0 none",
-  "renderedAt": "2026-11-07T15:30:01.554Z",
+  "renderedAt": "2026-11-07T16:10:59.018Z",
   "inputs": {
    "files": [
     "index.html",
@@ -28,18 +28,9 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "4269196183bbae656f11f93618c4dccaffa3309e"
+   "sha1": "1159bf31e5700545e0118bf439b5711ba9680bc0"
   },
-  "issues": [
-   "equipment: a11y: «طلب منظومات دفاع جوي» does not read its numbers",
-   "equipment: a11y: «طلب منظومات دفاع جوي: 1.» does not read all it shows: 14",
-   "equipment_end: a11y: «طلب منظومات دفاع جوي» does not read its numbers",
-   "equipment_end: a11y: «طلب منظومات دفاع جوي: 1.» does not read all it shows: 14",
-   "equipment_at86: a11y: «طلب منظومات دفاع جوي» does not read its numbers",
-   "equipment_at86: a11y: «طلب منظومات دفاع جوي: 1.» does not read all it shows: 14",
-   "equipment_at172: a11y: «طلب منظومات دفاع جوي» does not read its numbers",
-   "equipment_at172: a11y: «طلب منظومات دفاع جوي: 1.» does not read all it shows: 14"
-  ],
+  "issues": [],
   "views": {
    "overview": {
     "issueCount": 0,
@@ -2147,7 +2138,7 @@
     ]
    },
    "equipment": {
-    "issueCount": 2,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -2647,7 +2638,7 @@
     ]
    },
    "equipment_end": {
-    "issueCount": 2,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -5348,7 +5339,7 @@
     ]
    },
    "equipment_at86": {
-    "issueCount": 2,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -5808,7 +5799,7 @@
     ]
    },
    "equipment_at172": {
-    "issueCount": 2,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -6289,11 +6280,11 @@
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 8
+  "issueCount": 0
  },
  "mini": {
   "device": "812x375 side 50 bottom 21 notch",
-  "renderedAt": "2026-11-07T15:30:24.574Z",
+  "renderedAt": "2026-11-07T16:11:20.600Z",
   "inputs": {
    "files": [
     "index.html",
@@ -6320,20 +6311,9 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "4269196183bbae656f11f93618c4dccaffa3309e"
+   "sha1": "1159bf31e5700545e0118bf439b5711ba9680bc0"
   },
-  "issues": [
-   "equipment: a11y: «طلب منظومات دفاع جوي» does not read its numbers",
-   "equipment: a11y: «طلب منظومات دفاع جوي: 1.» does not read all it shows: 14",
-   "equipment_end: a11y: «طلب منظومات دفاع جوي» does not read its numbers",
-   "equipment_end: a11y: «طلب منظومات دفاع جوي: 1.» does not read all it shows: 14",
-   "equipment_at72: a11y: «طلب منظومات دفاع جوي» does not read its numbers",
-   "equipment_at72: a11y: «طلب منظومات دفاع جوي: 1.» does not read all it shows: 14",
-   "equipment_at144: a11y: «طلب منظومات دفاع جوي» does not read its numbers",
-   "equipment_at144: a11y: «طلب منظومات دفاع جوي: 1.» does not read all it shows: 14",
-   "equipment_at216: a11y: «طلب منظومات دفاع جوي» does not read its numbers",
-   "equipment_at216: a11y: «طلب منظومات دفاع جوي: 1.» does not read all it shows: 14"
-  ],
+  "issues": [],
   "views": {
    "overview": {
     "issueCount": 0,
@@ -8454,7 +8434,7 @@
     ]
    },
    "equipment": {
-    "issueCount": 2,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -8944,7 +8924,7 @@
     ]
    },
    "equipment_end": {
-    "issueCount": 2,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -12193,7 +12173,7 @@
     ]
    },
    "equipment_at72": {
-    "issueCount": 2,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -12638,7 +12618,7 @@
     ]
    },
    "equipment_at144": {
-    "issueCount": 2,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -13090,7 +13070,7 @@
     ]
    },
    "equipment_at216": {
-    "issueCount": 2,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -13566,11 +13546,11 @@
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 10
+  "issueCount": 0
  },
  "i14": {
   "device": "844x390 side 47 bottom 21 notch",
-  "renderedAt": "2026-11-07T15:30:54.230Z",
+  "renderedAt": "2026-11-07T16:11:44.269Z",
   "inputs": {
    "files": [
     "index.html",
@@ -13597,18 +13577,9 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "4269196183bbae656f11f93618c4dccaffa3309e"
+   "sha1": "1159bf31e5700545e0118bf439b5711ba9680bc0"
   },
-  "issues": [
-   "equipment: a11y: «طلب منظومات دفاع جوي» does not read its numbers",
-   "equipment: a11y: «طلب منظومات دفاع جوي: 1.» does not read all it shows: 14",
-   "equipment_end: a11y: «طلب منظومات دفاع جوي» does not read its numbers",
-   "equipment_end: a11y: «طلب منظومات دفاع جوي: 1.» does not read all it shows: 14",
-   "equipment_at87: a11y: «طلب منظومات دفاع جوي» does not read its numbers",
-   "equipment_at87: a11y: «طلب منظومات دفاع جوي: 1.» does not read all it shows: 14",
-   "equipment_at174: a11y: «طلب منظومات دفاع جوي» does not read its numbers",
-   "equipment_at174: a11y: «طلب منظومات دفاع جوي: 1.» does not read all it shows: 14"
-  ],
+  "issues": [],
   "views": {
    "overview": {
     "issueCount": 0,
@@ -16184,7 +16155,7 @@
     ]
    },
    "equipment": {
-    "issueCount": 2,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -16801,7 +16772,7 @@
     ]
    },
    "equipment_end": {
-    "issueCount": 2,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -20204,7 +20175,7 @@
     ]
    },
    "equipment_at87": {
-    "issueCount": 2,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -20771,7 +20742,7 @@
     ]
    },
    "equipment_at174": {
-    "issueCount": 2,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -21369,11 +21340,11 @@
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 8
+  "issueCount": 0
  },
  "i16": {
   "device": "852x393 side 59 bottom 21 island",
-  "renderedAt": "2026-11-07T15:31:17.537Z",
+  "renderedAt": "2026-11-07T16:12:06.432Z",
   "inputs": {
    "files": [
     "index.html",
@@ -21400,18 +21371,9 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "4269196183bbae656f11f93618c4dccaffa3309e"
+   "sha1": "1159bf31e5700545e0118bf439b5711ba9680bc0"
   },
-  "issues": [
-   "equipment: a11y: «طلب منظومات دفاع جوي» does not read its numbers",
-   "equipment: a11y: «طلب منظومات دفاع جوي: 1.» does not read all it shows: 14",
-   "equipment_end: a11y: «طلب منظومات دفاع جوي» does not read its numbers",
-   "equipment_end: a11y: «طلب منظومات دفاع جوي: 1.» does not read all it shows: 14",
-   "equipment_at90: a11y: «طلب منظومات دفاع جوي» does not read its numbers",
-   "equipment_at90: a11y: «طلب منظومات دفاع جوي: 1.» does not read all it shows: 14",
-   "equipment_at180: a11y: «طلب منظومات دفاع جوي» does not read its numbers",
-   "equipment_at180: a11y: «طلب منظومات دفاع جوي: 1.» does not read all it shows: 14"
-  ],
+  "issues": [],
   "views": {
    "overview": {
     "issueCount": 0,
@@ -23948,7 +23910,7 @@
     ]
    },
    "equipment": {
-    "issueCount": 2,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -24554,7 +24516,7 @@
     ]
    },
    "equipment_end": {
-    "issueCount": 2,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -27899,7 +27861,7 @@
     ]
    },
    "equipment_at90": {
-    "issueCount": 2,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -28460,7 +28422,7 @@
     ]
    },
    "equipment_at180": {
-    "issueCount": 2,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -29062,11 +29024,11 @@
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 8
+  "issueCount": 0
  },
  "i16pro": {
   "device": "874x402 side 62 bottom 21 island",
-  "renderedAt": "2026-11-07T15:31:41.644Z",
+  "renderedAt": "2026-11-07T16:12:29.168Z",
   "inputs": {
    "files": [
     "index.html",
@@ -29093,18 +29055,9 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "4269196183bbae656f11f93618c4dccaffa3309e"
+   "sha1": "1159bf31e5700545e0118bf439b5711ba9680bc0"
   },
-  "issues": [
-   "equipment: a11y: «طلب منظومات دفاع جوي» does not read its numbers",
-   "equipment: a11y: «طلب منظومات دفاع جوي: 1.» does not read all it shows: 14",
-   "equipment_end: a11y: «طلب منظومات دفاع جوي» does not read its numbers",
-   "equipment_end: a11y: «طلب منظومات دفاع جوي: 1.» does not read all it shows: 14",
-   "equipment_at99: a11y: «طلب منظومات دفاع جوي» does not read its numbers",
-   "equipment_at99: a11y: «طلب منظومات دفاع جوي: 1.» does not read all it shows: 14",
-   "equipment_at198: a11y: «طلب منظومات دفاع جوي» does not read its numbers",
-   "equipment_at198: a11y: «طلب منظومات دفاع جوي: 1.» does not read all it shows: 14"
-  ],
+  "issues": [],
   "views": {
    "overview": {
     "issueCount": 0,
@@ -31697,7 +31650,7 @@
     ]
    },
    "equipment": {
-    "issueCount": 2,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -32329,7 +32282,7 @@
     ]
    },
    "equipment_end": {
-    "issueCount": 2,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -35787,7 +35740,7 @@
     ]
    },
    "equipment_at99": {
-    "issueCount": 2,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -36366,7 +36319,7 @@
     ]
    },
    "equipment_at198": {
-    "issueCount": 2,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -36964,11 +36917,11 @@
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 8
+  "issueCount": 0
  },
  "i11": {
   "device": "896x414 side 48 bottom 21 notch",
-  "renderedAt": "2026-11-07T15:32:06.077Z",
+  "renderedAt": "2026-11-07T16:12:51.783Z",
   "inputs": {
    "files": [
     "index.html",
@@ -36995,16 +36948,9 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "4269196183bbae656f11f93618c4dccaffa3309e"
+   "sha1": "1159bf31e5700545e0118bf439b5711ba9680bc0"
   },
-  "issues": [
-   "equipment: a11y: «طلب منظومات دفاع جوي» does not read its numbers",
-   "equipment: a11y: «طلب منظومات دفاع جوي: 1.» does not read all it shows: 14",
-   "equipment_end: a11y: «طلب منظومات دفاع جوي» does not read its numbers",
-   "equipment_end: a11y: «طلب منظومات دفاع جوي: 1.» does not read all it shows: 14",
-   "equipment_at111: a11y: «طلب منظومات دفاع جوي» does not read its numbers",
-   "equipment_at111: a11y: «طلب منظومات دفاع جوي: 1.» does not read all it shows: 14"
-  ],
+  "issues": [],
   "views": {
    "overview": {
     "issueCount": 0,
@@ -39598,7 +39544,7 @@
     ]
    },
    "equipment": {
-    "issueCount": 2,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -40229,7 +40175,7 @@
     ]
    },
    "equipment_end": {
-    "issueCount": 2,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -43117,7 +43063,7 @@
     ]
    },
    "equipment_at111": {
-    "issueCount": 2,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -43742,11 +43688,11 @@
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 6
+  "issueCount": 0
  },
  "i16promax": {
   "device": "956x440 side 62 bottom 21 island",
-  "renderedAt": "2026-11-07T15:32:28.278Z",
+  "renderedAt": "2026-11-07T16:13:13.240Z",
   "inputs": {
    "files": [
     "index.html",
@@ -43773,16 +43719,9 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "4269196183bbae656f11f93618c4dccaffa3309e"
+   "sha1": "1159bf31e5700545e0118bf439b5711ba9680bc0"
   },
-  "issues": [
-   "equipment: a11y: «طلب منظومات دفاع جوي» does not read its numbers",
-   "equipment: a11y: «طلب منظومات دفاع جوي: 1.» does not read all it shows: 14",
-   "equipment_end: a11y: «طلب منظومات دفاع جوي» does not read its numbers",
-   "equipment_end: a11y: «طلب منظومات دفاع جوي: 1.» does not read all it shows: 14",
-   "equipment_at137: a11y: «طلب منظومات دفاع جوي» does not read its numbers",
-   "equipment_at137: a11y: «طلب منظومات دفاع جوي: 1.» does not read all it shows: 14"
-  ],
+  "issues": [],
   "views": {
    "overview": {
     "issueCount": 0,
@@ -46433,7 +46372,7 @@
     ]
    },
    "equipment": {
-    "issueCount": 2,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -47069,7 +47008,7 @@
     ]
    },
    "equipment_end": {
-    "issueCount": 2,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -49413,7 +49352,7 @@
     ]
    },
    "equipment_at137": {
-    "issueCount": 2,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -50030,6 +49969,6 @@
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 6
+  "issueCount": 0
  }
 }

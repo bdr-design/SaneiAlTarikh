@@ -1,7 +1,7 @@
 {
  "se": {
   "device": "667x375 side 0 bottom 0 none",
-  "renderedAt": "2026-11-07T15:35:03.251Z",
+  "renderedAt": "2026-11-07T16:15:43.037Z",
   "inputs": {
    "files": [
     "index.html",
@@ -24,14 +24,9 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "97f61cbe3ac8c835fa0e60c44de12458ad22bb13"
+   "sha1": "cbc856b795f97520f726b30cf39d0e21faeb9220"
   },
-  "issues": [
-   "treaties: a11y: «مياه النيل مع السودان، 1» does not read all it shows: م³",
-   "treaties_end: a11y: «مياه النيل مع السودان، 1» does not read all it shows: م³",
-   "treaties_at86: a11y: «مياه النيل مع السودان، 1» does not read all it shows: م³",
-   "treaties_at172: a11y: «مياه النيل مع السودان، 1» does not read all it shows: م³"
-  ],
+  "issues": [],
   "views": {
    "overview": {
     "issueCount": 0,
@@ -2071,7 +2066,7 @@
     ]
    },
    "treaties": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -2506,7 +2501,7 @@
     ]
    },
    "treaties_end": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -5145,7 +5140,7 @@
     ]
    },
    "treaties_at86": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -5545,7 +5540,7 @@
     ]
    },
    "treaties_at172": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -6413,11 +6408,11 @@
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 4
+  "issueCount": 0
  },
  "mini": {
   "device": "812x375 side 50 bottom 21 notch",
-  "renderedAt": "2026-11-07T15:35:25.819Z",
+  "renderedAt": "2026-11-07T16:16:04.603Z",
   "inputs": {
    "files": [
     "index.html",
@@ -6440,14 +6435,9 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "97f61cbe3ac8c835fa0e60c44de12458ad22bb13"
+   "sha1": "cbc856b795f97520f726b30cf39d0e21faeb9220"
   },
-  "issues": [
-   "treaties: a11y: «مياه النيل مع السودان، 1» does not read all it shows: م³",
-   "treaties_end: a11y: «مياه النيل مع السودان، 1» does not read all it shows: م³",
-   "treaties_at72: a11y: «مياه النيل مع السودان، 1» does not read all it shows: م³",
-   "treaties_at144: a11y: «مياه النيل مع السودان، 1» does not read all it shows: م³"
-  ],
+  "issues": [],
   "views": {
    "overview": {
     "issueCount": 0,
@@ -8537,7 +8527,7 @@
     ]
    },
    "treaties": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -8982,7 +8972,7 @@
     ]
    },
    "treaties_end": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -12129,7 +12119,7 @@
     ]
    },
    "treaties_at72": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -12539,7 +12529,7 @@
     ]
    },
    "treaties_at144": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -13854,11 +13844,11 @@
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 4
+  "issueCount": 0
  },
  "i14": {
   "device": "844x390 side 47 bottom 21 notch",
-  "renderedAt": "2026-11-07T15:35:52.510Z",
+  "renderedAt": "2026-11-07T16:16:29.564Z",
   "inputs": {
    "files": [
     "index.html",
@@ -13881,14 +13871,9 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "97f61cbe3ac8c835fa0e60c44de12458ad22bb13"
+   "sha1": "cbc856b795f97520f726b30cf39d0e21faeb9220"
   },
-  "issues": [
-   "treaties: a11y: «مياه النيل مع السودان، 1» does not read all it shows: م³",
-   "treaties_end: a11y: «مياه النيل مع السودان، 1» does not read all it shows: م³",
-   "treaties_at87: a11y: «مياه النيل مع السودان، 1» does not read all it shows: م³",
-   "treaties_at174: a11y: «مياه النيل مع السودان، 1» does not read all it shows: م³"
-  ],
+  "issues": [],
   "views": {
    "overview": {
     "issueCount": 0,
@@ -16396,7 +16381,7 @@
     ]
    },
    "treaties": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -16948,7 +16933,7 @@
     ]
    },
    "treaties_end": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -20284,7 +20269,7 @@
     ]
    },
    "treaties_at87": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -20801,7 +20786,7 @@
     ]
    },
    "treaties_at174": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -21933,11 +21918,11 @@
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 4
+  "issueCount": 0
  },
  "i16": {
   "device": "852x393 side 59 bottom 21 island",
-  "renderedAt": "2026-11-07T15:36:16.890Z",
+  "renderedAt": "2026-11-07T16:16:52.665Z",
   "inputs": {
    "files": [
     "index.html",
@@ -21960,14 +21945,9 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "97f61cbe3ac8c835fa0e60c44de12458ad22bb13"
+   "sha1": "cbc856b795f97520f726b30cf39d0e21faeb9220"
   },
-  "issues": [
-   "treaties: a11y: «مياه النيل مع السودان، 1» does not read all it shows: م³",
-   "treaties_end: a11y: «مياه النيل مع السودان، 1» does not read all it shows: م³",
-   "treaties_at90: a11y: «مياه النيل مع السودان، 1» does not read all it shows: م³",
-   "treaties_at180: a11y: «مياه النيل مع السودان، 1» does not read all it shows: م³"
-  ],
+  "issues": [],
   "views": {
    "overview": {
     "issueCount": 0,
@@ -24431,7 +24411,7 @@
     ]
    },
    "treaties": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -24972,7 +24952,7 @@
     ]
    },
    "treaties_end": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -28245,7 +28225,7 @@
     ]
    },
    "treaties_at90": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -28751,7 +28731,7 @@
     ]
    },
    "treaties_at180": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -29861,11 +29841,11 @@
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 4
+  "issueCount": 0
  },
  "i16pro": {
   "device": "874x402 side 62 bottom 21 island",
-  "renderedAt": "2026-11-07T15:36:41.100Z",
+  "renderedAt": "2026-11-07T16:17:16.231Z",
   "inputs": {
    "files": [
     "index.html",
@@ -29888,13 +29868,9 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "97f61cbe3ac8c835fa0e60c44de12458ad22bb13"
+   "sha1": "cbc856b795f97520f726b30cf39d0e21faeb9220"
   },
-  "issues": [
-   "treaties: a11y: «مياه النيل مع السودان، 1» does not read all it shows: م³",
-   "treaties_end: a11y: «مياه النيل مع السودان، 1» does not read all it shows: م³",
-   "treaties_at99: a11y: «مياه النيل مع السودان، 1» does not read all it shows: م³"
-  ],
+  "issues": [],
   "views": {
    "overview": {
     "issueCount": 0,
@@ -32414,7 +32390,7 @@
     ]
    },
    "treaties": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -32966,7 +32942,7 @@
     ]
    },
    "treaties_end": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -36369,7 +36345,7 @@
     ]
    },
    "treaties_at99": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -37483,11 +37459,11 @@
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 3
+  "issueCount": 0
  },
  "i11": {
   "device": "896x414 side 48 bottom 21 notch",
-  "renderedAt": "2026-11-07T15:37:04.277Z",
+  "renderedAt": "2026-11-07T16:17:38.361Z",
   "inputs": {
    "files": [
     "index.html",
@@ -37510,13 +37486,9 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "97f61cbe3ac8c835fa0e60c44de12458ad22bb13"
+   "sha1": "cbc856b795f97520f726b30cf39d0e21faeb9220"
   },
-  "issues": [
-   "treaties: a11y: «مياه النيل مع السودان، 1» does not read all it shows: م³",
-   "treaties_end: a11y: «مياه النيل مع السودان، 1» does not read all it shows: م³",
-   "treaties_at111: a11y: «مياه النيل مع السودان، 1» does not read all it shows: م³"
-  ],
+  "issues": [],
   "views": {
    "overview": {
     "issueCount": 0,
@@ -40044,7 +40016,7 @@
     ]
    },
    "treaties": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -40605,7 +40577,7 @@
     ]
    },
    "treaties_end": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -43464,7 +43436,7 @@
     ]
    },
    "treaties_at111": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -44611,11 +44583,11 @@
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 3
+  "issueCount": 0
  },
  "i16promax": {
   "device": "956x440 side 62 bottom 21 island",
-  "renderedAt": "2026-11-07T15:37:26.555Z",
+  "renderedAt": "2026-11-07T16:17:59.305Z",
   "inputs": {
    "files": [
     "index.html",
@@ -44638,13 +44610,9 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "97f61cbe3ac8c835fa0e60c44de12458ad22bb13"
+   "sha1": "cbc856b795f97520f726b30cf39d0e21faeb9220"
   },
-  "issues": [
-   "treaties: a11y: «مياه النيل مع السودان، 1» does not read all it shows: م³",
-   "treaties_end: a11y: «مياه النيل مع السودان، 1» does not read all it shows: م³",
-   "treaties_at137: a11y: «مياه النيل مع السودان، 1» does not read all it shows: م³"
-  ],
+  "issues": [],
   "views": {
    "overview": {
     "issueCount": 0,
@@ -47192,7 +47160,7 @@
     ]
    },
    "treaties": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -47758,7 +47726,7 @@
     ]
    },
    "treaties_end": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -50662,7 +50630,7 @@
     ]
    },
    "treaties_at137": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -51266,6 +51234,6 @@
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 3
+  "issueCount": 0
  }
 }

@@ -1,9 +1,6 @@
 {
  "se": {
-  "issues": [
-   "padding off scale hdr glass card paddingLeft 2",
-   "padding off scale hdr glass card paddingRight 2"
-  ],
+  "issues": [],
   "typeSeen": {
    "13/600": 11,
    "11.5/600": 7,
@@ -727,10 +724,7 @@
   ]
  },
  "mini": {
-  "issues": [
-   "padding off scale hdr glass card paddingLeft 2",
-   "padding off scale hdr glass card paddingRight 2"
-  ],
+  "issues": [],
   "typeSeen": {
    "13/600": 11,
    "11.5/600": 7,
@@ -1454,10 +1448,7 @@
   ]
  },
  "i14": {
-  "issues": [
-   "padding off scale hdr glass card paddingLeft 2",
-   "padding off scale hdr glass card paddingRight 2"
-  ],
+  "issues": [],
   "typeSeen": {
    "13/600": 11,
    "11.5/600": 7,
@@ -2181,10 +2172,7 @@
   ]
  },
  "i16": {
-  "issues": [
-   "padding off scale hdr glass card paddingLeft 2",
-   "padding off scale hdr glass card paddingRight 2"
-  ],
+  "issues": [],
   "typeSeen": {
    "13/600": 11,
    "11.5/600": 7,
@@ -2908,10 +2896,7 @@
   ]
  },
  "i16pro": {
-  "issues": [
-   "padding off scale hdr glass card paddingLeft 2",
-   "padding off scale hdr glass card paddingRight 2"
-  ],
+  "issues": [],
   "typeSeen": {
    "13/600": 11,
    "11.5/600": 7,
@@ -3635,10 +3620,7 @@
   ]
  },
  "i11": {
-  "issues": [
-   "padding off scale hdr glass card paddingLeft 2",
-   "padding off scale hdr glass card paddingRight 2"
-  ],
+  "issues": [],
   "typeSeen": {
    "13/600": 11,
    "11.5/600": 7,
@@ -4362,10 +4344,7 @@
   ]
  },
  "i16promax": {
-  "issues": [
-   "padding off scale hdr glass card paddingLeft 2",
-   "padding off scale hdr glass card paddingRight 2"
-  ],
+  "issues": [],
   "typeSeen": {
    "13/600": 11,
    "11.5/600": 7,

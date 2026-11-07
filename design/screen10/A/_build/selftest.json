@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-07T15:39:53.966Z",
+ "ranAt": "2026-11-07T16:20:21.807Z",
  "inputs": {
   "files": [
    "index.html",
@@ -22,48 +22,34 @@
    "header_cairo.jpg",
    "map_overlay_cairo.svg"
   ],
-  "sha1": "97f61cbe3ac8c835fa0e60c44de12458ad22bb13"
+  "sha1": "cbc856b795f97520f726b30cf39d0e21faeb9220"
  },
  "cleanIssues": {
   "i16promax": [],
   "i16promax_overview_end": [],
   "i16promax_relations": [],
   "i16promax_relations_end": [],
-  "i16promax_treaties": [
-   "a11y: «مياه النيل مع السودان، 1» does not read all it shows: م³"
-  ],
-  "i16promax_treaties_end": [
-   "a11y: «مياه النيل مع السودان، 1» does not read all it shows: م³"
-  ],
+  "i16promax_treaties": [],
+  "i16promax_treaties_end": [],
   "i16promax_un": [],
   "i16promax_un_end": [],
   "i16promax_relations_at137": [],
   "i16promax_relations_at274": [],
-  "i16promax_treaties_at137": [
-   "a11y: «مياه النيل مع السودان، 1» does not read all it shows: م³"
-  ],
+  "i16promax_treaties_at137": [],
   "i16promax coverage": [],
   "se": [],
   "se_overview_end": [],
   "se_relations": [],
   "se_relations_end": [],
-  "se_treaties": [
-   "a11y: «مياه النيل مع السودان، 1» does not read all it shows: م³"
-  ],
-  "se_treaties_end": [
-   "a11y: «مياه النيل مع السودان، 1» does not read all it shows: م³"
-  ],
+  "se_treaties": [],
+  "se_treaties_end": [],
   "se_un": [],
   "se_un_end": [],
   "se_relations_at86": [],
   "se_relations_at172": [],
   "se_relations_at258": [],
-  "se_treaties_at86": [
-   "a11y: «مياه النيل مع السودان، 1» does not read all it shows: م³"
-  ],
-  "se_treaties_at172": [
-   "a11y: «مياه النيل مع السودان، 1» does not read all it shows: م³"
-  ],
+  "se_treaties_at86": [],
+  "se_treaties_at172": [],
   "se_un_at86": [],
   "se coverage": []
  },
@@ -685,7 +671,6 @@
    "name": "blocs swapped",
    "ok": true,
    "sample": [
-    "a11y: «مياه النيل مع السودان، 1» does not read all it shows: م³",
     "«الجامعة العربية» is not «دولة المقر»: عضو",
     "«الاتحاد الأفريقي» is not «عضو»: دولة المقر"
    ]

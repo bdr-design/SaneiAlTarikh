@@ -1,7 +1,7 @@
 {
  "se": {
   "device": "667x375 side 0 bottom 0 none",
-  "renderedAt": "2026-11-07T15:57:17.048Z",
+  "renderedAt": "2026-11-07T16:05:17.278Z",
   "inputs": {
    "files": [
     "index.html",
@@ -27,15 +27,12 @@
     "../../shared/map_mena_d1_overlay.svg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "ec2a229311b9d2e558509d9b78177b7c253173d8"
+   "sha1": "425b4299830bf39f0342179b1082699bcb78dc2d"
   },
-  "issues": [
-   "event: a11y: the bell does not read its count",
-   "event_end: a11y: the bell does not read its count"
-  ],
+  "issues": [],
   "views": {
    "event": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -470,7 +467,7 @@
     ]
    },
    "event_end": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -920,11 +917,11 @@
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 2
+  "issueCount": 0
  },
  "mini": {
   "device": "812x375 side 50 bottom 21 notch",
-  "renderedAt": "2026-11-07T15:57:22.199Z",
+  "renderedAt": "2026-11-07T16:05:22.647Z",
   "inputs": {
    "files": [
     "index.html",
@@ -950,16 +947,12 @@
     "../../shared/map_mena_d1_overlay.svg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "ec2a229311b9d2e558509d9b78177b7c253173d8"
+   "sha1": "425b4299830bf39f0342179b1082699bcb78dc2d"
   },
-  "issues": [
-   "event: a11y: the bell does not read its count",
-   "event_end: a11y: the bell does not read its count",
-   "event_at117: a11y: the bell does not read its count"
-  ],
+  "issues": [],
   "views": {
    "event": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -1394,7 +1387,7 @@
     ]
    },
    "event_end": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -1833,7 +1826,7 @@
     ]
    },
    "event_at117": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": false,
     "fit": {
      "top": {
@@ -2280,11 +2273,11 @@
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 3
+  "issueCount": 0
  },
  "i14": {
   "device": "844x390 side 47 bottom 21 notch",
-  "renderedAt": "2026-11-07T15:57:28.616Z",
+  "renderedAt": "2026-11-07T16:05:29.384Z",
   "inputs": {
    "files": [
     "index.html",
@@ -2310,15 +2303,12 @@
     "../../shared/map_mena_d1_overlay.svg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "ec2a229311b9d2e558509d9b78177b7c253173d8"
+   "sha1": "425b4299830bf39f0342179b1082699bcb78dc2d"
   },
-  "issues": [
-   "event: a11y: the bell does not read its count",
-   "event_end: a11y: the bell does not read its count"
-  ],
+  "issues": [],
   "views": {
    "event": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -2870,7 +2860,7 @@
     ]
    },
    "event_end": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -3437,11 +3427,11 @@
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 2
+  "issueCount": 0
  },
  "i16": {
   "device": "852x393 side 59 bottom 21 island",
-  "renderedAt": "2026-11-07T15:57:34.157Z",
+  "renderedAt": "2026-11-07T16:05:35.264Z",
   "inputs": {
    "files": [
     "index.html",
@@ -3467,15 +3457,12 @@
     "../../shared/map_mena_d1_overlay.svg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "ec2a229311b9d2e558509d9b78177b7c253173d8"
+   "sha1": "425b4299830bf39f0342179b1082699bcb78dc2d"
   },
-  "issues": [
-   "event: a11y: the bell does not read its count",
-   "event_end: a11y: the bell does not read its count"
-  ],
+  "issues": [],
   "views": {
    "event": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -4016,7 +4003,7 @@
     ]
    },
    "event_end": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -4587,11 +4574,11 @@
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 2
+  "issueCount": 0
  },
  "i16pro": {
   "device": "874x402 side 62 bottom 21 island",
-  "renderedAt": "2026-11-07T15:57:39.707Z",
+  "renderedAt": "2026-11-07T16:05:40.901Z",
   "inputs": {
    "files": [
     "index.html",
@@ -4617,15 +4604,12 @@
     "../../shared/map_mena_d1_overlay.svg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "ec2a229311b9d2e558509d9b78177b7c253173d8"
+   "sha1": "425b4299830bf39f0342179b1082699bcb78dc2d"
   },
-  "issues": [
-   "event: a11y: the bell does not read its count",
-   "event_end: a11y: the bell does not read its count"
-  ],
+  "issues": [],
   "views": {
    "event": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -5177,7 +5161,7 @@
     ]
    },
    "event_end": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -5769,11 +5753,11 @@
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 2
+  "issueCount": 0
  },
  "i11": {
   "device": "896x414 side 48 bottom 21 notch",
-  "renderedAt": "2026-11-07T15:57:45.376Z",
+  "renderedAt": "2026-11-07T16:05:46.555Z",
   "inputs": {
    "files": [
     "index.html",
@@ -5799,15 +5783,12 @@
     "../../shared/map_mena_d1_overlay.svg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "ec2a229311b9d2e558509d9b78177b7c253173d8"
+   "sha1": "425b4299830bf39f0342179b1082699bcb78dc2d"
   },
-  "issues": [
-   "event: a11y: the bell does not read its count",
-   "event_end: a11y: the bell does not read its count"
-  ],
+  "issues": [],
   "views": {
    "event": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -6373,7 +6354,7 @@
     ]
    },
    "event_end": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -6969,11 +6950,11 @@
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 2
+  "issueCount": 0
  },
  "i16promax": {
   "device": "956x440 side 62 bottom 21 island",
-  "renderedAt": "2026-11-07T15:57:51.276Z",
+  "renderedAt": "2026-11-07T16:05:52.382Z",
   "inputs": {
    "files": [
     "index.html",
@@ -6999,15 +6980,12 @@
     "../../shared/map_mena_d1_overlay.svg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "ec2a229311b9d2e558509d9b78177b7c253173d8"
+   "sha1": "425b4299830bf39f0342179b1082699bcb78dc2d"
   },
-  "issues": [
-   "event: a11y: the bell does not read its count",
-   "event_end: a11y: the bell does not read its count"
-  ],
+  "issues": [],
   "views": {
    "event": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -7590,7 +7568,7 @@
     ]
    },
    "event_end": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -8191,6 +8169,6 @@
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 2
+  "issueCount": 0
  }
 }

@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-07T15:33:55.999Z",
+ "ranAt": "2026-11-07T16:07:13.970Z",
  "inputs": {
   "files": [
    "index.html",
@@ -22,22 +22,14 @@
    "../../shared/map_mena_d1_overlay.svg",
    "map_overlay_cairo.svg"
   ],
-  "sha1": "3e5d1ec6c6ef3d61cb14b665787c46149db04157"
+  "sha1": "d209308be7122b8e0e1130a9cd5ddc695f8c3bee"
  },
  "cleanIssues": {
-  "i16promax": [
-   "HUD element moved from its B3 position: .top > .stats x 296.8..682.5 y 8.0..44.0"
-  ],
-  "i16promax_fallen_end": [
-   "HUD element moved from its B3 position: .top > .stats x 296.8..682.5 y 8.0..44.0"
-  ],
+  "i16promax": [],
+  "i16promax_fallen_end": [],
   "i16promax coverage": [],
-  "se": [
-   "HUD element moved from its B3 position: .top > .stats x 214.2..599.8 y 8.0..44.0"
-  ],
-  "se_fallen_end": [
-   "HUD element moved from its B3 position: .top > .stats x 214.2..599.8 y 8.0..44.0"
-  ],
+  "se": [],
+  "se_fallen_end": [],
   "se coverage": []
  },
  "results": [
@@ -45,16 +37,14 @@
    "name": "type size",
    "ok": true,
    "sample": [
-    "font size 17 for \"سقطت حكومتك\"",
-    "HUD element moved from its B3 position: .top > .stats x 296.8..682.5 y 8.0..44.0"
+    "font size 17 for \"سقطت حكومتك\""
    ]
   },
   {
    "name": "off-token colour",
    "ok": true,
    "sample": [
-    "text colour off-token rgb(136, 153, 170): \"سقطت حكومتك\"",
-    "HUD element moved from its B3 position: .top > .stats x 296.8..682.5 y 8.0..44.0"
+    "text colour off-token rgb(136, 153, 170): \"سقطت حكومتك\""
    ]
   },
   {
@@ -62,8 +52,7 @@
    "ok": true,
    "sample": [
     "panel radius سقطت حكومتك: 6 (want 12)",
-    "radius 6 for .sheet (want 12)",
-    "HUD element moved from its B3 position: .top > .stats x 296.8..682.5 y 8.0..44.0"
+    "radius 6 for .sheet (want 12)"
    ]
   },
   {
@@ -89,7 +78,6 @@
    "ok": true,
    "sample": [
     "panel not opaque: سقطت حكومتك rgba(9, 17, 25, 0.66)",
-    "HUD element moved from its B3 position: .top > .stats x 296.8..682.5 y 8.0..44.0",
     "contrast 3.15 for \"يمكنك الاختيار لاحقًا من\""
    ]
   },
@@ -98,24 +86,23 @@
    "ok": true,
    "sample": [
     "panel not opaque (opacity 0.60): سقطت حكومتك",
-    "HUD element moved from its B3 position: .top > .stats x 296.8..682.5 y 8.0..44.0",
-    "brief text not fully visible: سقطت حكومتك"
+    "brief text not fully visible: سقطت حكومتك",
+    "brief text not fully visible: 12 أغسطس 2031 · الوقت متوقف"
    ]
   },
   {
    "name": "Egypt covered",
    "ok": true,
    "sample": [
-    "HUD element moved from its B3 position: .top > .stats x 296.8..682.5 y 8.0..44.0",
     "Nile delta covered by panel سقطت حكومتك",
-    "Egypt covered by panel سقطت حكومتك"
+    "Egypt covered by panel سقطت حكومتك",
+    "Egypt under the hit box of المتابعة بالمجلس الانتقالي"
    ]
   },
   {
    "name": "map dimmed",
    "ok": true,
    "sample": [
-    "HUD element moved from its B3 position: .top > .stats x 296.8..682.5 y 8.0..44.0",
     "the map is dimmed (opacity 1.00, filter brightness(0.35))"
    ]
   },
@@ -123,7 +110,6 @@
    "name": "map faded",
    "ok": true,
    "sample": [
-    "HUD element moved from its B3 position: .top > .stats x 296.8..682.5 y 8.0..44.0",
     "the map is dimmed (opacity 0.30, filter none)"
    ]
   },
@@ -131,7 +117,6 @@
    "name": "scrim over the map",
    "ok": true,
    "sample": [
-    "HUD element moved from its B3 position: .top > .stats x 296.8..682.5 y 8.0..44.0",
     "something drawn over the map: DIV (rgba(0, 0, 0, 0.55))",
     "contrast 1.92 for \"3\""
    ]
@@ -140,8 +125,7 @@
    "name": "sheet width",
    "ok": true,
    "sample": [
-    "sheet width 330 (want round(clamp(43% of 832, 340, 380)), or the room the dock leaves if 330..: 358)",
-    "HUD element moved from its B3 position: .top > .stats x 296.8..682.5 y 8.0..44.0"
+    "sheet width 330 (want round(clamp(43% of 832, 340, 380)), or the room the dock leaves if 330..: 358)"
    ]
   },
   {
@@ -157,8 +141,7 @@
    "name": "dock hidden although it fits",
    "ok": true,
    "sample": [
-    "dock hidden although it fits left of the sheet",
-    "HUD element moved from its B3 position: .top > .stats x 296.8..682.5 y 8.0..44.0"
+    "dock hidden although it fits left of the sheet"
    ]
   },
   {
@@ -174,34 +157,33 @@
    "name": "left stack moved",
    "ok": true,
    "sample": [
-    "HUD element moved from its B3 position: .top > .stats x 296.8..682.5 y 8.0..44.0",
     "HUD element moved from its B3 position: .toast x 70.0..275.5 y 56.0..88.0",
-    "HUD element moved from its B3 position: .btn.mode x 70.0..191.6 y 96.0..128.0"
+    "HUD element moved from its B3 position: .btn.mode x 70.0..191.6 y 96.0..128.0",
+    "HUD element moved from its B3 position: .btn.home x 70.0..141.5 y 136.0..168.0"
    ]
   },
   {
    "name": "map label cut",
    "ok": true,
    "sample": [
-    "HUD element moved from its B3 position: .top > .stats x 296.8..682.5 y 8.0..44.0",
     "map label ليبيا sliced by the screen edge or the side inset",
-    "map label إيران sliced by the screen edge or the side inset"
+    "map label إيران sliced by the screen edge or the side inset",
+    "map label إيران squeezed between a panel and the screen edge"
    ]
   },
   {
    "name": "contrast",
    "ok": true,
    "sample": [
-    "HUD element moved from its B3 position: .top > .stats x 296.8..682.5 y 8.0..44.0",
     "contrast 1 for \"أطاحت ثورة واسعة بالحكوم\"",
-    "contrast 1 for \"أطاحت ثورة واسعة بالحكوم\""
+    "contrast 1 for \"أطاحت ثورة واسعة بالحكوم\"",
+    "contrast 1 for \"خياراتك\""
    ]
   },
   {
    "name": "identity line missing",
    "ok": true,
    "sample": [
-    "HUD element moved from its B3 position: .top > .stats x 296.8..682.5 y 8.0..44.0",
     "panel top line none rgb(214, 187, 169) 2px (want the section colour, 2 pt, at the top)"
    ]
   },
@@ -209,7 +191,6 @@
    "name": "emblem drawn grey",
    "ok": true,
    "sample": [
-    "HUD element moved from its B3 position: .top > .stats x 296.8..682.5 y 8.0..44.0",
     "section emblem missing or not in the section colour"
    ]
   },
@@ -217,16 +198,15 @@
    "name": "section colour on data",
    "ok": true,
    "sample": [
-    "HUD element moved from its B3 position: .top > .stats x 296.8..682.5 y 8.0..44.0",
     "section colour on data text: \"12\"",
-    "section colour on data text: \"أغسطس\""
+    "section colour on data text: \"أغسطس\"",
+    "section colour on data text: \"2031\""
    ]
   },
   {
    "name": "money unit",
    "ok": true,
    "sample": [
-    "HUD element moved from its B3 position: .top > .stats x 296.8..682.5 y 8.0..44.0",
     "money unit: «0.4 مليار» (under 1 billion is written in millions)",
     "the sheet does not say the choice can wait"
    ]
@@ -235,7 +215,6 @@
    "name": "sign outside its number",
    "ok": true,
    "sample": [
-    "HUD element moved from its B3 position: .top > .stats x 296.8..682.5 y 8.0..44.0",
     "a sign outside its number: «تغير +3»",
     "the sheet does not say the choice can wait"
    ]
@@ -244,7 +223,6 @@
    "name": "colour alone",
    "ok": true,
    "sample": [
-    "HUD element moved from its B3 position: .top > .stats x 296.8..682.5 y 8.0..44.0",
     "colour alone: «تراجع» has no arrow or icon",
     "the sheet does not say the choice can wait"
    ]
@@ -253,7 +231,6 @@
    "name": "an image in the sheet",
    "ok": true,
    "sample": [
-    "HUD element moved from its B3 position: .top > .stats x 296.8..682.5 y 8.0..44.0",
     "an image in the sheet"
    ]
   },
@@ -261,15 +238,13 @@
    "name": "close not round",
    "ok": true,
    "sample": [
-    "close button is not round",
-    "HUD element moved from its B3 position: .top > .stats x 296.8..682.5 y 8.0..44.0"
+    "close button is not round"
    ]
   },
   {
    "name": "label without a role",
    "ok": true,
    "sample": [
-    "HUD element moved from its B3 position: .top > .stats x 296.8..682.5 y 8.0..44.0",
     "a11y: a label VoiceOver may skip (no role): «اختبار»",
     "the sheet does not say the choice can wait"
    ]
@@ -287,7 +262,6 @@
    "name": "identity line colour",
    "ok": true,
    "sample": [
-    "HUD element moved from its B3 position: .top > .stats x 296.8..682.5 y 8.0..44.0",
     "panel top line \"\" rgb(63, 224, 208) 2px (want the section colour, 2 pt, at the top)"
    ]
   },
@@ -295,7 +269,6 @@
    "name": "emblem size",
    "ok": true,
    "sample": [
-    "HUD element moved from its B3 position: .top > .stats x 296.8..682.5 y 8.0..44.0",
     "size 28.0x32.0 for .s-emb (want 32 x 32)"
    ]
   },
@@ -303,7 +276,6 @@
    "name": "tile icons cyan",
    "ok": true,
    "sample": [
-    "HUD element moved from its B3 position: .top > .stats x 296.8..682.5 y 8.0..44.0",
     "white touch off: .r-tile color rgb(127, 233, 255) (want rgb(234, 242, 247))",
     "white touch off: .r-tile color rgb(127, 233, 255) (want rgb(234, 242, 247))"
    ]
@@ -312,9 +284,9 @@
    "name": "row read in part",
    "ok": true,
    "sample": [
-    "HUD element moved from its B3 position: .top > .stats x 296.8..682.5 y 8.0..44.0",
     "a11y: «المتابعة بالمجلس الانتقالي» does not read its numbers",
-    "a11y: «جزء» does not read all it shows: المتابعة بالمجلس الانتقالي حكومة"
+    "a11y: «جزء» does not read all it shows: المتابعة بالمجلس الانتقالي حكومة",
+    "a11y: «المتابعة بالمجلس الانتقالي» does not read whole"
    ]
   },
   {
@@ -330,7 +302,6 @@
    "name": "text wider than its box",
    "ok": true,
    "sample": [
-    "HUD element moved from its B3 position: .top > .stats x 296.8..682.5 y 8.0..44.0",
     "text wider than its box: «خياراتك» (35 in 20)"
    ]
   },
@@ -356,7 +327,6 @@
    "name": "a tab row on a one-body sheet",
    "ok": true,
    "sample": [
-    "HUD element moved from its B3 position: .top > .stats x 296.8..682.5 y 8.0..44.0",
     "a tab row on a sheet that has one body"
    ]
   },
@@ -365,23 +335,20 @@
    "ok": true,
    "sample": [
     "control height 40.00 for .r-x (want 32): لاحقًا: يبقى الخيار في الإ",
-    "close button is not round",
-    "HUD element moved from its B3 position: .top > .stats x 296.8..682.5 y 8.0..44.0"
+    "close button is not round"
    ]
   },
   {
    "name": "icon size (no tabs)",
    "ok": true,
    "sample": [
-    "icon size 19x19 (want 16): i",
-    "HUD element moved from its B3 position: .top > .stats x 296.8..682.5 y 8.0..44.0"
+    "icon size 19x19 (want 16): i"
    ]
   },
   {
    "name": "fades wrong (no tabs)",
    "ok": true,
    "sample": [
-    "HUD element moved from its B3 position: .top > .stats x 214.2..599.8 y 8.0..44.0",
     "fades 0/1 do not match the scroll state (top 0, over 0.0)"
    ]
   },
@@ -389,7 +356,6 @@
    "name": "a dock item marked open",
    "ok": true,
    "sample": [
-    "HUD element moved from its B3 position: .top > .stats x 296.8..682.5 y 8.0..44.0",
     "a dock item is marked open under a sheet of no section"
    ]
   },
@@ -397,7 +363,6 @@
    "name": "hint shown without content below",
    "ok": true,
    "sample": [
-    "HUD element moved from its B3 position: .top > .stats x 214.2..599.8 y 8.0..44.0",
     "scroll hint chevron shown without content below"
    ]
   },
@@ -405,7 +370,6 @@
    "name": "weekday wrong",
    "ok": true,
    "sample": [
-    "HUD element moved from its B3 position: .top > .stats x 296.8..682.5 y 8.0..44.0",
     "the HUD date is not «الثلاثاء 12 أغسطس 2031»: «السبت 12 أغسطس 2031»"
    ]
   },
@@ -413,7 +377,6 @@
    "name": "another moment toast",
    "ok": true,
    "sample": [
-    "HUD element moved from its B3 position: .top > .stats x 296.8..682.5 y 8.0..44.0",
     "the toast is not «ثورة: سقطت الحكومة»",
     "the toast does not say what happened"
    ]
@@ -422,7 +385,6 @@
    "name": "clock looks live",
    "ok": true,
    "sample": [
-    "HUD element moved from its B3 position: .top > .stats x 296.8..682.5 y 8.0..44.0",
     "the clock and the speed chip do not look and read disabled"
    ]
   },
@@ -430,7 +392,6 @@
    "name": "speed menu still offered",
    "ok": true,
    "sample": [
-    "HUD element moved from its B3 position: .top > .stats x 296.8..682.5 y 8.0..44.0",
     "the clock and the speed chip do not look and read disabled"
    ]
   },
@@ -438,7 +399,6 @@
    "name": "brief text hidden (fallen)",
    "ok": true,
    "sample": [
-    "HUD element moved from its B3 position: .top > .stats x 296.8..682.5 y 8.0..44.0",
     "brief text not fully visible: سقطت حكومتك"
    ]
   },
@@ -446,8 +406,7 @@
    "name": "18 pt misuse (fallen)",
    "ok": true,
    "sample": [
-    "18 pt is for the panel's name and the adjusted values only: \"أطاحت ثورة واسعة بالحكومة وتولّى مجلس انتقالي إدارة البلاد. يمكنك متابعة الحملة بالحكومة الجديدة أو إنهاؤها.\"",
-    "HUD element moved from its B3 position: .top > .stats x 296.8..682.5 y 8.0..44.0"
+    "18 pt is for the panel's name and the adjusted values only: \"أطاحت ثورة واسعة بالحكومة وتولّى مجلس انتقالي إدارة البلاد. يمكنك متابعة الحملة بالحكومة الجديدة أو إنهاؤها.\""
    ]
   },
   {
@@ -472,8 +431,8 @@
    "name": "faint text (fallen)",
    "ok": true,
    "sample": [
-    "HUD element moved from its B3 position: .top > .stats x 296.8..682.5 y 8.0..44.0",
     "brief text not fully visible: أطاحت ثورة واسعة بالحكومة وتولّى مجلس انتقالي إدارة البلاد. يمكنك متابعة الحملة بالحكومة الجديدة أو إنهاؤها.",
+    "contrast 2.98 for \"أطاحت ثورة واسعة بالحكوم\"",
     "contrast 2.98 for \"أطاحت ثورة واسعة بالحكوم\""
    ]
   },
@@ -482,15 +441,14 @@
    "ok": true,
    "sample": [
     "% shown before its number: \"نسبة 20%\"",
-    "HUD element moved from its B3 position: .top > .stats x 296.8..682.5 y 8.0..44.0",
-    "the text is not the brief's"
+    "the text is not the brief's",
+    "brief text missing: أطاحت ثورة واسعة بالحكومة وتولّى مجلس انتقالي إدارة البلاد. يمكنك متابعة الحملة بالحكومة الجديدة أو إنهاؤها."
    ]
   },
   {
    "name": "clock resumable",
    "ok": true,
    "sample": [
-    "HUD element moved from its B3 position: .top > .stats x 296.8..682.5 y 8.0..44.0",
     "the clock and the speed chip do not look and read disabled",
     "the clock does not wait for the choice (play glyph, «متوقف حتى تختار», disabled)"
    ]
@@ -499,7 +457,6 @@
    "name": "date off",
    "ok": true,
    "sample": [
-    "HUD element moved from its B3 position: .top > .stats x 296.8..682.5 y 8.0..44.0",
     "the HUD date is not «الثلاثاء 12 أغسطس 2031»: «السبت 1 يناير 2011»",
     "the HUD date is not 12 August 2031"
    ]
@@ -508,8 +465,8 @@
    "name": "text changed",
    "ok": true,
    "sample": [
-    "HUD element moved from its B3 position: .top > .stats x 296.8..682.5 y 8.0..44.0",
     "the text is not the brief's",
+    "brief text missing: أطاحت ثورة واسعة بالحكومة وتولّى مجلس انتقالي إدارة البلاد. يمكنك متابعة الحملة بالحكومة الجديدة أو إنهاؤها.",
     "brief text missing: أطاحت ثورة واسعة بالحكومة وتولّى مجلس انتقالي إدارة البلاد. يمكنك متابعة الحملة بالحكومة الجديدة أو إنهاؤها."
    ]
   },
@@ -517,16 +474,15 @@
    "name": "choices swapped",
    "ok": true,
    "sample": [
-    "HUD element moved from its B3 position: .top > .stats x 296.8..682.5 y 8.0..44.0",
     "the choices are «إنهاء الحملة، المتابعة بالمجلس الانتقالي»",
-    "«المتابعة بالمجلس الانتقالي»'s line is not «حكومة مصر الجديدة · تبدأ بشرعية 35»"
+    "«المتابعة بالمجلس الانتقالي»'s line is not «حكومة مصر الجديدة · تبدأ بشرعية 35»",
+    "a11y: «المتابعة بالمجلس الانتقالي» does not read whole"
    ]
   },
   {
    "name": "a default marked",
    "ok": true,
    "sample": [
-    "HUD element moved from its B3 position: .top > .stats x 296.8..682.5 y 8.0..44.0",
     "a choice is marked default: «المتابعة بالمجلس الانتقالي»"
    ]
   },
@@ -534,25 +490,24 @@
    "name": "legitimacy unsaid",
    "ok": true,
    "sample": [
-    "HUD element moved from its B3 position: .top > .stats x 296.8..682.5 y 8.0..44.0",
     "a11y: «المتابعة بالمجلس الانتقالي» does not read its numbers",
-    "a11y: «المتابعة بالمجلس الانتقا» does not read all it shows: تبدأ بشرعية 35"
+    "a11y: «المتابعة بالمجلس الانتقا» does not read all it shows: تبدأ بشرعية 35",
+    "a11y: «المتابعة بالمجلس الانتقالي» does not read whole"
    ]
   },
   {
    "name": "line off",
    "ok": true,
    "sample": [
-    "HUD element moved from its B3 position: .top > .stats x 296.8..682.5 y 8.0..44.0",
     "a11y: «إنهاء الحملة: يعرض تقرير» does not read all it shows: يعود إلى القائمة",
-    "«إنهاء الحملة»'s line is not «يعرض تقرير الأمة»"
+    "«إنهاء الحملة»'s line is not «يعرض تقرير الأمة»",
+    "brief text missing: يعرض تقرير الأمة"
    ]
   },
   {
    "name": "Mubarak in 2031",
    "ok": true,
    "sample": [
-    "HUD element moved from its B3 position: .top > .stats x 296.8..682.5 y 8.0..44.0",
     "the nation card names a real person in 2031",
     "the nation card does not show the council running the country"
    ]
@@ -561,7 +516,6 @@
    "name": "old toast",
    "ok": true,
    "sample": [
-    "HUD element moved from its B3 position: .top > .stats x 296.8..682.5 y 8.0..44.0",
     "the toast is not «ثورة: سقطت الحكومة»",
     "the toast does not say what happened"
    ]
@@ -570,7 +524,6 @@
    "name": "HUD legitimacy off",
    "ok": true,
    "sample": [
-    "HUD element moved from its B3 position: .top > .stats x 296.8..682.5 y 8.0..44.0",
     "the HUD keeps the 2011 values: الشرعية",
     "the HUD (legitimacy 44, «حكم انتقالي») does not agree with the council (35, «حكم انتقالي»)"
    ]
@@ -579,7 +532,6 @@
    "name": "HUD stability of 2011",
    "ok": true,
    "sample": [
-    "HUD element moved from its B3 position: .top > .stats x 296.8..682.5 y 8.0..44.0",
     "the HUD keeps the 2011 values: الاستقرار",
     "the HUD stability is not the council's 31%"
    ]
@@ -588,8 +540,8 @@
    "name": "later said in part",
    "ok": true,
    "sample": [
-    "HUD element moved from its B3 position: .top > .stats x 296.8..682.5 y 8.0..44.0",
     "the sheet does not say the choice can wait",
+    "brief text missing: يمكنك الاختيار لاحقًا من الإشعارات، والوقت متوقف حتى تختار.",
     "brief text missing: يمكنك الاختيار لاحقًا من الإشعارات، والوقت متوقف حتى تختار."
    ]
   },
@@ -597,8 +549,8 @@
    "name": "later unsaid",
    "ok": true,
    "sample": [
-    "HUD element moved from its B3 position: .top > .stats x 296.8..682.5 y 8.0..44.0",
     "the sheet does not say the choice can wait",
+    "brief text missing: يمكنك الاختيار لاحقًا من الإشعارات، والوقت متوقف حتى تختار.",
     "brief text missing: يمكنك الاختيار لاحقًا من الإشعارات، والوقت متوقف حتى تختار."
    ]
   },
@@ -606,7 +558,6 @@
    "name": "close says nothing",
    "ok": true,
    "sample": [
-    "HUD element moved from its B3 position: .top > .stats x 296.8..682.5 y 8.0..44.0",
     "a11y: the close button does not say the choice waits"
    ]
   },
@@ -614,7 +565,6 @@
    "name": "HUD trend moving",
    "ok": true,
    "sample": [
-    "HUD element moved from its B3 position: .top > .stats x 296.8..682.5 y 8.0..44.0",
     "the HUD «الخزينة» moves while the clock is stopped"
    ]
   },
@@ -622,7 +572,6 @@
    "name": "HUD 2011 value",
    "ok": true,
    "sample": [
-    "HUD element moved from its B3 position: .top > .stats x 296.8..682.5 y 8.0..44.0",
     "the HUD keeps the 2011 values: الخزينة"
    ]
   },
