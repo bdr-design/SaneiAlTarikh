@@ -2,8 +2,8 @@
        «يفتح التحميل والتصدير والحذف»): the file (its date in the game, country, size, when it was saved), loading it,
        exporting it through Files, deleting it. Decisions «saves» (the autosave rotates over 3 files; export and import
        through Files), D-4 (each in-game month) and D-28 (no folder chosen yet for the mirror copy, so the file has no other
-       copy). Deleting asks first in the same sheet (&tab=confirm), never in a dialog over the map; the safe choice comes
-       first. A side sheet in the «المزيد» section's frame (its identity, its dock item open), the map central (mapCentral). -->
+       copy). Deleting and loading ask first in the same sheet (&tab=confirm, &tab=load), never in a dialog over the map;
+       the safe choice comes first. A side sheet in the «المزيد» section's frame (its identity, its dock item open), the map central (mapCentral). -->
   <section class="sheet glass" aria-label="حفظ تلقائي">
     <div class="r-in">
       <header class="r-hd">
@@ -25,7 +25,7 @@
           </dl>
           <p class="s-note">يتناوب الحفظ التلقائي على <span class="ltr">3</span> ملفات، الأحدث مكان الأقدم.</p>
         </section>
-        <button class="r-act tap r-first" aria-label="تحميل هذا الحفظ: يعود إلى 1 يناير 2011، ويحل محل اللعبة الحالية">
+        <button class="r-act tap r-first" aria-label="تحميل هذا الحفظ: يعود إلى 1 يناير 2011، ويحل محل اللعبة الحالية. يفتح التأكيد">
           <span class="r-tile"><svg class="i"><use href="#i-load"/></svg></span>
           <span class="r-at"><b>تحميل هذا الحفظ</b><span>يعود إلى <span class="ltr">1</span> يناير <span class="ltr">2011</span> · يحل محل اللعبة الحالية</span></span>
         </button>
@@ -44,7 +44,7 @@
       <div class="r-body" data-tab="confirm">
         <section class="r-sec">
           <h3>حذف هذا الحفظ؟</h3>
-          <p class="s-note">سيُحذف حفظ <span class="ltr">1</span> يناير <span class="ltr">2011</span> (مصر · <span class="ltr">2</span> ميغابايت) من هذا الجهاز نهائيًا، ولا نسخة له في مجلد آخر.</p>
+          <p class="s-note">سيُحذف حفظ <span class="ltr">1</span> يناير <span class="ltr">2011</span> (مصر · <span class="ltr">2</span> ميغابايت) من هذا الجهاز نهائيًا، ولا نسخة له في&nbsp;مجلد&nbsp;آخر.</p>
         </section>
         <button class="r-act tap r-first" aria-label="إبقاء الحفظ: العودة دون حذف">
           <span class="r-tile"><svg class="i"><use href="#i-save"/></svg></span>
@@ -53,6 +53,20 @@
         <button class="r-act tap s-del" aria-label="حذف نهائيًا: حفظ 1 يناير 2011، لا يمكن التراجع">
           <span class="r-tile"><svg class="i"><use href="#i-trash"/></svg></span>
           <span class="r-at"><b>حذف نهائيًا</b><span>لا يمكن التراجع</span></span>
+        </button>
+      </div>
+      <div class="r-body" data-tab="load">
+        <section class="r-sec">
+          <h3>تحميل هذا الحفظ؟</h3>
+          <p class="s-note">تعود الحملة إلى <span class="ltr">1</span> يناير <span class="ltr">2011</span>، ويضيع من اللعبة الحالية ما لم يُحفظ بعد آخر حفظ.</p>
+        </section>
+        <button class="r-act tap r-first" aria-label="متابعة اللعب: العودة دون تحميل">
+          <span class="r-tile"><svg class="i"><use href="#i-play"/></svg></span>
+          <span class="r-at"><b>متابعة اللعب</b><span>العودة دون تحميل</span></span>
+        </button>
+        <button class="r-act tap" aria-label="تحميل: العودة إلى 1 يناير 2011، يحل محل اللعبة الحالية">
+          <span class="r-tile"><svg class="i"><use href="#i-load"/></svg></span>
+          <span class="r-at"><b>تحميل</b><span>يحل محل اللعبة الحالية</span></span>
         </button>
       </div>
       <span class="r-hint" aria-hidden="true"><svg class="i"><use href="#i-chev"/></svg></span>

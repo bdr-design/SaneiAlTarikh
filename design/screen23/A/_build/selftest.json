@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-07T14:49:05.419Z",
+ "ranAt": "2026-11-07T15:06:39.496Z",
  "inputs": {
   "files": [
    "index.html",
@@ -24,18 +24,22 @@
    "header_cairo.jpg",
    "map_overlay_cairo.svg"
   ],
-  "sha1": "5b6d3567f0c6949fa5d63f605d72a38a39419d05"
+  "sha1": "096e1e1c402c8920adaba6c8900f96fca7402f65"
  },
  "cleanIssues": {
   "i16promax": [],
   "i16promax_file_end": [],
   "i16promax_confirm": [],
   "i16promax_confirm_end": [],
+  "i16promax_load": [],
+  "i16promax_load_end": [],
   "i16promax coverage": [],
   "se": [],
   "se_file_end": [],
   "se_confirm": [],
   "se_confirm_end": [],
+  "se_load": [],
+  "se_load_end": [],
   "se coverage": []
  },
  "results": [
@@ -441,12 +445,21 @@
    ]
   },
   {
-   "name": "text into a control (confirm)",
+   "name": "text into a control (header)",
    "ok": true,
    "sample": [
-    "text overlap \"العودة دون حذف\" / \"حذف نهائيًا\"",
-    "content outside its control (حذف نهائيًا: حفظ 1 يناير 2): حذف نهائيًالا يمكن ا",
-    "content outside its control (حذف نهائيًا: حفظ 1 يناير 2): حذف نهائيًا"
+    "text outside the sheet's 12 pt padding: \"حُفظ قبل دقيقة\"",
+    "text over a control: \"حُفظ قبل دقيقة\" runs into «إغلاق، العودة إلى ال»",
+    "icon over text: i / \"·\""
+   ]
+  },
+  {
+   "name": "two bodies shown",
+   "ok": true,
+   "sample": [
+    "clipped text (bottom): \"ملف واحد عبر تطبيق الملفات\" 722.83..834 y 275..290",
+    "clipped text (bottom): \"حذف نهائيًا\" 777.38..834 y 415.33..434.33",
+    "control cut by its scroll area (bottom): تصدير: ملف واحد عبر تطبيق "
    ]
   },
   {
@@ -556,6 +569,37 @@
    ]
   },
   {
+   "name": "load without asking",
+   "ok": true,
+   "sample": [
+    "loading does not ask first (it should open its confirmation)"
+   ]
+  },
+  {
+   "name": "load first",
+   "ok": true,
+   "sample": [
+    "the load confirmation is not «متابعة اللعب» (first, primary) then «تحميل»"
+   ]
+  },
+  {
+   "name": "load undated",
+   "ok": true,
+   "sample": [
+    "a11y: «تحميل» does not read all it shows: يحل محل اللعبة الحالية",
+    "a11y: the final load does not name its date (1 يناير 2011), or comes before the safe choice"
+   ]
+  },
+  {
+   "name": "loss unsaid",
+   "ok": true,
+   "sample": [
+    "the load confirmation does not say the date (1 يناير 2011) and what is lost",
+    "brief text missing: تعود الحملة إلى 1 يناير 2011، ويضيع من اللعبة الحالية ما لم يُحفظ بعد آخر حفظ.",
+    "brief text missing: تعود الحملة إلى 1 يناير 2011، ويضيع من اللعبة الحالية ما لم يُحفظ بعد آخر حفظ."
+   ]
+  },
+  {
    "name": "delete first",
    "ok": true,
    "sample": [
@@ -577,6 +621,62 @@
     "the confirmation does not name the file (1 يناير 2011، مصر، 2)",
     "brief text missing: سيُحذف حفظ 1 يناير 2011 (مصر · 2 ميغابايت) من هذا الجهاز نهائيًا، ولا نسخة له في مجلد آخر.",
     "brief text missing: سيُحذف حفظ 1 يناير 2011 (مصر · 2 ميغابايت) من هذا الجهاز نهائيًا، ولا نسخة له في مجلد آخر."
+   ]
+  },
+  {
+   "name": "wrong flag",
+   "ok": true,
+   "sample": [
+    "the header flag is not the campaign's (مصر)"
+   ]
+  },
+  {
+   "name": "emblem not the save",
+   "ok": true,
+   "sample": [
+    "the emblem is not the save"
+   ]
+  },
+  {
+   "name": "close elsewhere",
+   "ok": true,
+   "sample": [
+    "a11y: the close is not «إغلاق، العودة إلى الحفظ»"
+   ]
+  },
+  {
+   "name": "primary bar gone",
+   "ok": true,
+   "sample": [
+    "the primary «تحميل هذا الحفظ» does not draw its white bar"
+   ]
+  },
+  {
+   "name": "bar on the delete",
+   "ok": true,
+   "sample": [
+    "«حذف نهائيًا» draws the primary's bar"
+   ]
+  },
+  {
+   "name": "red outline elsewhere",
+   "ok": true,
+   "sample": [
+    "red outside the delete rows: r-act tap r-first"
+   ]
+  },
+  {
+   "name": "red fill elsewhere",
+   "ok": true,
+   "sample": [
+    "red outside the delete rows: r-tile"
+   ]
+  },
+  {
+   "name": "final delete without its outline",
+   "ok": true,
+   "sample": [
+    "the final delete has no red outline"
    ]
   },
   {

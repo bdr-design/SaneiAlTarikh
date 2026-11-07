@@ -6,7 +6,7 @@ under the owner's delegation (`ownerDelegation`, `finishEverything`), to the own
 side sheet in the panels' frame, the map central and visible.
 
 ## Frame (all three)
-The approved panel sheet from the right (shared builder and checker), one body, no tab row, no section (neutral grey,
+The approved panel sheet from the right (shared builder and checker), one body, no tab row, no section (its own identity (sheetIdentity),
 no dock item open). The stopped clock and the speed chip are drawn disabled (the secondary grey, aria-disabled). The end sheets are plain: no photo strip in the header. The clock is stopped and disabled (play glyph;
 VoiceOver «الحملة منتهية» on A and B, «الوقت متوقف حتى تختار» on C). The HUD date is the moment's; the nation card names
 no real person after 2011 (A and B «رئيس الدولة», C «المجلس · حكم انتقالي», VoiceOver «المجلس الانتقالي»; the card keeps B3's widths so the strip stays in place); the toast shows the moment's notification in

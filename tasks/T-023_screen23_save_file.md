@@ -11,16 +11,17 @@ player picks once); screen 13's autosave row (1 يناير 2011 · مصر · 2 �
 Values illustrative.
 
 ## Scope
-A side sheet in the «المزيد» section (identity, dock item open), the map central, two bodies without a tab row: the file
-and the delete confirmation (in the sheet, never a dialog over the map). Out of scope: the Files share sheet itself (the
+A side sheet in the «المزيد» section (identity, dock item open), the map central, three bodies without a tab row: the file
+the delete confirmation and the load confirmation (in the sheet, never a dialog over the map). Out of scope: the Files share sheet itself (the
 system's), named manual saves (the same sheet, another title), the mirror folder chooser.
 
 ## Acceptance criteria
 1. The file as screen 13's autosave row: its date and size, the campaign's country in the header; when it was saved,
    formatted once when the sheet opens (no ticking label).
 2. The rotation over the decision's 3 files said; the mirror state as screen 13's: the delete says the file has no other copy.
-3. The actions in order: load (the one primary, saying the date it returns to and that it replaces the game), export
+3. The actions in order: load (the one primary, saying the date it returns to and that it replaces the game, asking first), export
    (through Files), delete (the red bin alone marks it; the text stays white; it opens the confirmation).
-4. The confirmation: the safe choice «إبقاء الحفظ» first and primary, «حذف نهائيًا» second, both naming the file.
+4. The confirmations: deleting, «إبقاء الحفظ» first and primary, then «حذف نهائيًا»; the note and the final delete
+   name the file. Loading, «متابعة اللعب» first and primary, then «تحميل»; the note says the date and what is lost.
 5. Gate: 0 issues on 7 phones, self-test, `check_screen.py` PASS; six independent read-only reviews (checker, player,
    layout, boxes and type, heaviness, errors), every confirmed finding fixed.

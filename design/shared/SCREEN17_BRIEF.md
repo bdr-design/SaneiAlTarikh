@@ -9,7 +9,7 @@ the state panel's «لماذا؟ الاستقرار».
 
 ## Frame
 The approved panel sheet from the right (shared builder and checker), the map central with Egypt clear; one body, no tab
-row, no section (neutral grey identity, no dock item open). The HUD chip «الاستقرار» is shown as the one that opened it
+row, no section (its own identity (sheetIdentity), no dock item open). The HUD chip «الاستقرار» is shown as the one that opened it
 (aria-expanded). The clock shows play (paused).
 
 ## Content

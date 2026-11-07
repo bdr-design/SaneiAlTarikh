@@ -20,6 +20,13 @@ const BRIEF = {
 
 const screenChecks = `
 const { issues, qa, q, T, nums, DATA } = X;
+// the HUD at the end moment (shared/check/end_hud.py): the clock stopped, so no indicator moves (every trend flat, read
+// «دون تغيير»), and no indicator still shows its 1 January 2011 value
+{ const st = [...document.querySelectorAll('.top .stat')];
+  st.forEach((e) => { const tr = e.querySelector('.trend'), l = (e.querySelector('.lbl') || {}).textContent;
+    if (!tr || !tr.classList.contains('flat') || tr.querySelector('use').getAttribute('href') !== '#t-flat' || tr.getAttribute('aria-label') !== 'دون تغيير') X.issues.push('the HUD «' + l + '» moves while the clock is stopped'); });
+  const b3 = {"الخزينة": "36.0", "الاستقرار": "58%", "الشرعية": "44", "القوة البشرية": "2.4", "النفوذ": "62", "البحث": "+18"}, same = st.filter((e) => { const l = e.querySelector('.lbl').textContent, n = e.querySelector('.num').textContent.replace(/\\s+/g, ' ').trim(); return b3[l] && n.startsWith(b3[l]); }).map((e) => e.querySelector('.lbl').textContent);
+  if (same.length) X.issues.push('the HUD keeps the 2011 values: ' + same.join('، ')); }
 const W = (s) => (s || '').replace(/\\s+/g, ' ').trim();
 // the HUD date read whole with its weekday
 if ((q('.top .date .dtext').getAttribute('aria-label') || '') !== 'الجمعة 31 ديسمبر 2100') issues.push('the HUD date is not «الجمعة 31 ديسمبر 2100»: «' + q('.top .date .dtext').getAttribute('aria-label') + '»');
@@ -68,7 +75,7 @@ if ((q('.r-x').getAttribute('aria-label') || '') !== 'العودة إلى الخ
 
 require(path.join(OUT, '../../shared/check/panelcheck.js'))({
   OUT, dock: null, tabs: ['report'], noTabs: true, fitTab: false, longTab: 'report',
-  inputs: ['_build/end.css'],
+  inputs: ['_build/end.css', '../../shared/check/end_hud.py'],
   TOK: { sec: 'rgb(214, 187, 169)', ctlH: {}, sheetIcon: [], size: [['.e-p', null, 32]] },
   HEAD, BRIEF, screenChecks, DATA: { pillars: PILLARS, note: NOTE },
   skipGeneric: ['section colour on data', 'section colour on a rule', 'emblem drawn grey', 'why without its subject', 'amber value without its icon', 'chip arrow against its sign', 'chip not white', 'tap in the side inset', 'text into a control'],
@@ -102,5 +109,7 @@ require(path.join(OUT, '../../shared/check/panelcheck.js'))({
     ['note without the cheat rule', d, '', '', /the money and cheat note is not/, () => { document.querySelector('.s-note').textContent = 'بدولارات 2011 الثابتة'; }],
     ['link silent', d, '', '', /a11y: a link row does not say where it leads/, () => { const r = document.querySelector('.r-link'); r.setAttribute('aria-label', 'لعبة جديدة'); }],
     ['close silent', d, '', '', /a11y: the close button does not say it returns to the map/, () => { document.querySelector('.r-x').setAttribute('aria-label', 'إغلاق'); }],
+    ['HUD trend moving', d, '', '', /the HUD «الخزينة» moves while the clock is stopped/, () => { const u = document.querySelector('.top .stat .trend'); u.setAttribute('class', 'trend down'); u.querySelector('use').setAttribute('href', '#t-down'); }],
+    ['HUD 2011 value', d, '', '', /the HUD keeps the 2011 values: الخزينة/, () => { document.querySelector('.top .stat .num').firstChild.textContent = '36.0'; }],
   ],
 });

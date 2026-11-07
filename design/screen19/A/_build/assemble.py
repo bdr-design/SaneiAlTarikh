@@ -1,6 +1,6 @@
 """Build design/screen19/A/index.html (the map-mode chooser, §6.6) with the shared panel builder
 (design/shared/check/panel_page.py): the approved B3 play screen, the approved panels' CSS, and this sheet's CSS and
-markup (modes.css, sheet.html). One body, no tab row, no section: no dock item open, the neutral grey identity. The
+markup (modes.css, sheet.html). One body, no tab row, no section: no dock item open, its own identity (sheetIdentity). The
 chosen mode «الأمن» is drawn on the map at once: its layer (map_mode_security.svg, made by tools/mapmode.py from Natural
 Earth) goes between the satellite base and the borders (map_overlay_mode.svg: the approved overlay without the player's
 teal fill, so Egypt's bands read as the legend; the glow stays), and the HUD's mode button reads it and shows the sheet open

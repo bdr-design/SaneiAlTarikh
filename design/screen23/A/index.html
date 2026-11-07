@@ -7,7 +7,7 @@
 <script>
   /* Device frame from the URL (points): ?w=844&h=390&side=47&bottom=21&cutout=notch|island|none
      Optional: &speedmenu=1 renders the speed menu open, &hit=1 draws the 44 pt hit boxes,
-     &tab=file|confirm opens that tab of the panel (default file), &scroll=end scrolls the open tab
+     &tab=file|confirm|load opens that tab of the panel (default file), &scroll=end scrolls the open tab
      to its end and &scroll=<pt> to that offset; &states=1 draws the later states.
      Everything below is laid out with flexbox from these CSS variables; nothing is tied to 844x390. */
   (function () {
@@ -27,7 +27,7 @@
     r.dataset.home = BOTTOM > 0 ? 'yes' : 'no';
     if (q.get('hit') === '1') r.classList.add('show-hit');
     if (q.get('speedmenu') === '1') r.classList.add('menu-open');
-    r.dataset.tab = ['file', 'confirm'].indexOf(q.get('tab')) >= 0 ? q.get('tab') : 'file';
+    r.dataset.tab = ['file', 'confirm', 'load'].indexOf(q.get('tab')) >= 0 ? q.get('tab') : 'file';
     r.dataset.sec = 'more';
     r.dataset.states = q.get('states') === '1' ? '1' : '0';
     window.__scroll = q.get('scroll') === 'end' ? 'end' : (isFinite(parseFloat(q.get('scroll'))) ? parseFloat(q.get('scroll')) : 0);
@@ -577,11 +577,11 @@
   [data-states="1"] .s-short-1 .s-cost { color: var(--amber); }
   /* ================= Screen 23, variant A: the save-file sheet ================= */
   .r-tabs { display: none; }
-  [data-tab="file"] .r-body[data-tab="file"], [data-tab="confirm"] .r-body[data-tab="confirm"] { display: flex; }
-  .r-body[data-tab="file"], .r-body[data-tab="confirm"] { padding-top: var(--s2); padding-bottom: var(--s3); gap: var(--s2); }
+  [data-tab="file"] .r-body[data-tab="file"], [data-tab="confirm"] .r-body[data-tab="confirm"], [data-tab="load"] .r-body[data-tab="load"] { display: flex; }
+  .r-body[data-tab="file"], .r-body[data-tab="confirm"], .r-body[data-tab="load"] { padding-top: var(--s2); padding-bottom: var(--s3); gap: var(--s2); }
   /* deleting: the red bin is the danger sign (the word says it; the text stays white, colour never alone) */
   .s-del .r-tile { color: var(--red) !important; }
-  .r-act.s-del { box-shadow: inset 0 0 0 1px rgba(242, 112, 90, .45); }
+  .r-act.s-del { box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--red) 45%, transparent); }
   .r-body[data-tab="file"] .r-sc { border-bottom: 0; }   /* one row of two cells: the table's own line closes it */
 </style>
 </head>
@@ -625,6 +625,7 @@
     <symbol id="i-save" viewBox="0 0 24 24"><path d="M5 4.5h11.5L19.5 7.5v12H5z"/><path d="M8 4.5v4.5h7V4.5"/><rect x="8" y="13" width="8" height="6.5" rx="1"/></symbol>
     <symbol id="i-share" viewBox="0 0 24 24"><path d="M12 3.5v11"/><path d="M8 7.25 12 3.5l4 3.75"/><path d="M6.5 11H5v9.5h14V11h-1.5"/></symbol>
     <symbol id="i-load" viewBox="0 0 24 24"><path d="M4.75 12a7.25 7.25 0 1 0 2.1-5.1"/><path d="M4.75 3.75v4.5h4.5"/><path d="M12 8.5V12l2.75 1.75"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5.5v13l10.5-6.5z"/></symbol>
     <symbol id="i-trash" viewBox="0 0 24 24"><path d="M4.5 6.5h15"/><path d="M9.5 6.5V4.5h5v2"/><path d="M6.5 6.5l1 13.5h9l1-13.5"/><path d="M10 10.5v6M14 10.5v6"/></symbol>
   </defs>
 </svg>
@@ -696,27 +697,27 @@
 
     <div class="stats glass bar">
       <button class="stat tap"><span class="stat-in">
-        <span class="lblrow"><span class="lbl">الخزينة</span><svg class="trend down"><use href="#t-down"/></svg></span>
+        <span class="lblrow"><span class="lbl">الخزينة</span><svg class="trend down" role="img" aria-label="في انخفاض"><use href="#t-down"/></svg></span>
         <span class="valrow"><svg class="i"><use href="#i-coins"/></svg><span class="num">36.0<span class="unit"> مليار $</span></span></span>
       </span></button>
       <button class="stat tap"><span class="stat-in">
-        <span class="lblrow"><span class="lbl">الاستقرار</span><svg class="trend down"><use href="#t-down"/></svg></span>
+        <span class="lblrow"><span class="lbl">الاستقرار</span><svg class="trend down" role="img" aria-label="في انخفاض"><use href="#t-down"/></svg></span>
         <span class="valrow"><svg class="i"><use href="#i-anchor"/></svg><span class="num ltr">58%</span></span>
       </span></button>
       <button class="stat tap"><span class="stat-in">
-        <span class="lblrow"><span class="lbl">الشرعية</span><svg class="trend down"><use href="#t-down"/></svg></span>
+        <span class="lblrow"><span class="lbl">الشرعية</span><svg class="trend down" role="img" aria-label="في انخفاض"><use href="#t-down"/></svg></span>
         <span class="valrow"><svg class="i"><use href="#i-seal"/></svg><span class="num">44</span></span>
       </span></button>
       <button class="stat tap"><span class="stat-in">
-        <span class="lblrow"><span class="lbl">القوة البشرية</span><svg class="trend flat"><use href="#t-flat"/></svg></span>
+        <span class="lblrow"><span class="lbl">القوة البشرية</span><svg class="trend flat" role="img" aria-label="دون تغيير"><use href="#t-flat"/></svg></span>
         <span class="valrow"><svg class="i"><use href="#i-people"/></svg><span class="num">2.4<span class="unit"> مليون</span></span></span>
       </span></button>
       <button class="stat tap"><span class="stat-in">
-        <span class="lblrow"><span class="lbl">النفوذ</span><svg class="trend up"><use href="#t-up"/></svg></span>
+        <span class="lblrow"><span class="lbl">النفوذ</span><svg class="trend up" role="img" aria-label="في ارتفاع"><use href="#t-up"/></svg></span>
         <span class="valrow"><svg class="i"><use href="#i-signal"/></svg><span class="num">62</span></span>
       </span></button>
       <button class="stat tap"><span class="stat-in">
-        <span class="lblrow"><span class="lbl">البحث</span><svg class="trend up"><use href="#t-up"/></svg></span>
+        <span class="lblrow"><span class="lbl">البحث</span><svg class="trend up" role="img" aria-label="في ارتفاع"><use href="#t-up"/></svg></span>
         <span class="valrow"><svg class="i"><use href="#i-flask"/></svg><span class="num"><span class="ltr">+18</span><span class="unit"> / شهر</span></span></span>
       </span></button>
     </div>
@@ -747,7 +748,7 @@
     <div class="lstack">
       <div class="toast glass ctl">
         <button class="alert-prev tap"><svg class="i"><use href="#i-warn"/></svg><span class="txt">احتجاجات واسعة في تونس</span></button>
-        <button class="bell tap" aria-label="الإشعارات"><svg class="i"><use href="#i-bell"/></svg><span class="badge">3</span></button>
+        <button class="bell tap" aria-label="الإشعارات، غير المقروءة 3"><svg class="i"><use href="#i-bell"/></svg><span class="badge">3</span></button>
       </div>
       <button class="btn glass ctl tap mode"><svg class="i"><use href="#i-layers"/></svg><span><span class="k">الخريطة:</span> سياسية</span></button>
       <button class="btn glass ctl tap home"><svg class="i"><use href="#i-locate"/></svg><span>دولتي</span></button>
@@ -770,8 +771,8 @@
        «يفتح التحميل والتصدير والحذف»): the file (its date in the game, country, size, when it was saved), loading it,
        exporting it through Files, deleting it. Decisions «saves» (the autosave rotates over 3 files; export and import
        through Files), D-4 (each in-game month) and D-28 (no folder chosen yet for the mirror copy, so the file has no other
-       copy). Deleting asks first in the same sheet (&tab=confirm), never in a dialog over the map; the safe choice comes
-       first. A side sheet in the «المزيد» section's frame (its identity, its dock item open), the map central (mapCentral). -->
+       copy). Deleting and loading ask first in the same sheet (&tab=confirm, &tab=load), never in a dialog over the map;
+       the safe choice comes first. A side sheet in the «المزيد» section's frame (its identity, its dock item open), the map central (mapCentral). -->
   <section class="sheet glass" aria-label="حفظ تلقائي">
     <div class="r-in">
       <header class="r-hd">
@@ -793,7 +794,7 @@
           </dl>
           <p class="s-note">يتناوب الحفظ التلقائي على <span class="ltr">3</span> ملفات، الأحدث مكان الأقدم.</p>
         </section>
-        <button class="r-act tap r-first" aria-label="تحميل هذا الحفظ: يعود إلى 1 يناير 2011، ويحل محل اللعبة الحالية">
+        <button class="r-act tap r-first" aria-label="تحميل هذا الحفظ: يعود إلى 1 يناير 2011، ويحل محل اللعبة الحالية. يفتح التأكيد">
           <span class="r-tile"><svg class="i"><use href="#i-load"/></svg></span>
           <span class="r-at"><b>تحميل هذا الحفظ</b><span>يعود إلى <span class="ltr">1</span> يناير <span class="ltr">2011</span> · يحل محل اللعبة الحالية</span></span>
         </button>
@@ -812,7 +813,7 @@
       <div class="r-body" data-tab="confirm">
         <section class="r-sec">
           <h3>حذف هذا الحفظ؟</h3>
-          <p class="s-note">سيُحذف حفظ <span class="ltr">1</span> يناير <span class="ltr">2011</span> (مصر · <span class="ltr">2</span> ميغابايت) من هذا الجهاز نهائيًا، ولا نسخة له في مجلد آخر.</p>
+          <p class="s-note">سيُحذف حفظ <span class="ltr">1</span> يناير <span class="ltr">2011</span> (مصر · <span class="ltr">2</span> ميغابايت) من هذا الجهاز نهائيًا، ولا نسخة له في&nbsp;مجلد&nbsp;آخر.</p>
         </section>
         <button class="r-act tap r-first" aria-label="إبقاء الحفظ: العودة دون حذف">
           <span class="r-tile"><svg class="i"><use href="#i-save"/></svg></span>
@@ -821,6 +822,20 @@
         <button class="r-act tap s-del" aria-label="حذف نهائيًا: حفظ 1 يناير 2011، لا يمكن التراجع">
           <span class="r-tile"><svg class="i"><use href="#i-trash"/></svg></span>
           <span class="r-at"><b>حذف نهائيًا</b><span>لا يمكن التراجع</span></span>
+        </button>
+      </div>
+      <div class="r-body" data-tab="load">
+        <section class="r-sec">
+          <h3>تحميل هذا الحفظ؟</h3>
+          <p class="s-note">تعود الحملة إلى <span class="ltr">1</span> يناير <span class="ltr">2011</span>، ويضيع من اللعبة الحالية ما لم يُحفظ بعد آخر حفظ.</p>
+        </section>
+        <button class="r-act tap r-first" aria-label="متابعة اللعب: العودة دون تحميل">
+          <span class="r-tile"><svg class="i"><use href="#i-play"/></svg></span>
+          <span class="r-at"><b>متابعة اللعب</b><span>العودة دون تحميل</span></span>
+        </button>
+        <button class="r-act tap" aria-label="تحميل: العودة إلى 1 يناير 2011، يحل محل اللعبة الحالية">
+          <span class="r-tile"><svg class="i"><use href="#i-load"/></svg></span>
+          <span class="r-at"><b>تحميل</b><span>يحل محل اللعبة الحالية</span></span>
         </button>
       </div>
       <span class="r-hint" aria-hidden="true"><svg class="i"><use href="#i-chev"/></svg></span>
