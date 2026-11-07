@@ -12,3 +12,4 @@
 - Talk to the owner in simple Gulf Arabic, with Western digits. Never claim "tested on iPhone" for browser mockups.
 - Files and code must not contain AI model identifiers (the standard commit attribution trailer is the only exception).
 - Owner's rules (2026-11-07, «كل خيار يجب ان يحتوي على هوية بصرية ووكيل خاص لتنسيق المربعات والخطوط»): every screen and sheet has its own visual identity (colour and emblem on its chrome), no neutral-grey sheets (`sheetIdentity`); every item also gets a fourth independent read-only reviewer for boxes and type alone (`boxFontReviewer`).
+- Owner's rules (2026-11-07, «ووكلاء الثقل والاخطاء؟», «نعم، الاثنين»): every item also gets a fifth reviewer for heaviness (its cost on the phone against the design doc's budgets and `loadSpread`) and a sixth for errors alone (`heavinessReviewer`, `errorsReviewer`): six independent read-only reviewers per item, every confirmed finding fixed before approval. Talk to the owner in Arabic always.
