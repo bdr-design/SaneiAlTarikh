@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-08T23:30:31.029Z",
+ "ranAt": "2026-11-08T23:40:08.841Z",
  "inputs": {
   "files": [
    "index.html",
@@ -23,7 +23,7 @@
    "header_cairo.jpg",
    "map_overlay_cairo.svg"
   ],
-  "sha1": "c36879760ed7ba7424b37ee95acddef48bf13dd2"
+  "sha1": "61cd1d36c9ab4cf37d1b9b0d2699aa13d724f041"
  },
  "cleanIssues": {
   "i16promax": [],
@@ -134,6 +134,7 @@
    "name": "scrim over the map",
    "ok": true,
    "sample": [
+    "a layer added over the page: DIV",
     "something drawn over the map: DIV (rgba(0, 0, 0, 0.55))",
     "contrast 1.92 for \"3\""
    ]
@@ -621,6 +622,7 @@
    "name": "ring over the map",
    "ok": true,
    "sample": [
+    "a layer added over the page: DIV",
     "a ring on the sections' step: DIV"
    ]
   },
@@ -695,6 +697,48 @@
    "ok": true,
    "sample": [
     "the ring is not on the step's element .stats alone: nation glass bar tap, stats glass bar"
+   ]
+  },
+  {
+   "name": "inset white ring",
+   "ok": true,
+   "sample": [
+    "the ring is not on the step's element .stats alone: nation glass bar tap, stats glass bar"
+   ]
+  },
+  {
+   "name": "1 pt white ring",
+   "ok": true,
+   "sample": [
+    "the ring is not on the step's element .stats alone: nation glass bar tap, stats glass bar"
+   ]
+  },
+  {
+   "name": "ring in color-mix",
+   "ok": true,
+   "sample": [
+    "the ring is not on the step's element .date alone: date glass bar, toast glass ctl"
+   ]
+  },
+  {
+   "name": "second ring on the step element",
+   "ok": true,
+   "sample": [
+    "the step's element .stats carries a second white ring besides its outline"
+   ]
+  },
+  {
+   "name": "text as a link",
+   "ok": true,
+   "sample": [
+    "the step body holds 3 controls, not 2"
+   ]
+  },
+  {
+   "name": "SVG ring layer",
+   "ok": true,
+   "sample": [
+    "a layer added over the page: svg"
    ]
   },
   {
