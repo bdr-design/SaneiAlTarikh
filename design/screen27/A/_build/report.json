@@ -1,7 +1,7 @@
 {
  "se": {
   "device": "667x375 side 0 bottom 0 none",
-  "renderedAt": "2026-11-08T02:14:05.012Z",
+  "renderedAt": "2026-11-08T02:16:42.383Z",
   "inputs": {
    "files": [
     "index.html",
@@ -27,15 +27,12 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "08bbb3a2d5f161ec9271ad864660468dd03c32f1"
+   "sha1": "195d708663ff22f437e0f34006dd51c664943d13"
   },
-  "issues": [
-   "front: screen checks failed to run: a is not defined",
-   "front_end: screen checks failed to run: a is not defined"
-  ],
+  "issues": [],
   "views": {
    "front": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -449,7 +446,7 @@
     ]
    },
    "front_end": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -906,11 +903,11 @@
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 2
+  "issueCount": 0
  },
  "mini": {
   "device": "812x375 side 50 bottom 21 notch",
-  "renderedAt": "2026-11-08T02:14:09.672Z",
+  "renderedAt": "2026-11-08T02:16:47.135Z",
   "inputs": {
    "files": [
     "index.html",
@@ -936,15 +933,12 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "08bbb3a2d5f161ec9271ad864660468dd03c32f1"
+   "sha1": "195d708663ff22f437e0f34006dd51c664943d13"
   },
-  "issues": [
-   "front: screen checks failed to run: a is not defined",
-   "front_end: screen checks failed to run: a is not defined"
-  ],
+  "issues": [],
   "views": {
    "front": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -1364,7 +1358,7 @@
     ]
    },
    "front_end": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -1812,11 +1806,11 @@
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 2
+  "issueCount": 0
  },
  "i14": {
   "device": "844x390 side 47 bottom 21 notch",
-  "renderedAt": "2026-11-08T02:14:14.686Z",
+  "renderedAt": "2026-11-08T02:16:52.397Z",
   "inputs": {
    "files": [
     "index.html",
@@ -1842,15 +1836,12 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "08bbb3a2d5f161ec9271ad864660468dd03c32f1"
+   "sha1": "195d708663ff22f437e0f34006dd51c664943d13"
   },
-  "issues": [
-   "front: screen checks failed to run: a is not defined",
-   "front_end: screen checks failed to run: a is not defined"
-  ],
+  "issues": [],
   "views": {
    "front": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -2376,7 +2367,7 @@
     ]
    },
    "front_end": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -2945,11 +2936,11 @@
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 2
+  "issueCount": 0
  },
  "i16": {
   "device": "852x393 side 59 bottom 21 island",
-  "renderedAt": "2026-11-08T02:14:19.701Z",
+  "renderedAt": "2026-11-08T02:16:57.536Z",
   "inputs": {
    "files": [
     "index.html",
@@ -2975,15 +2966,12 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "08bbb3a2d5f161ec9271ad864660468dd03c32f1"
+   "sha1": "195d708663ff22f437e0f34006dd51c664943d13"
   },
-  "issues": [
-   "front: screen checks failed to run: a is not defined",
-   "front_end: screen checks failed to run: a is not defined"
-  ],
+  "issues": [],
   "views": {
    "front": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -3499,7 +3487,7 @@
     ]
    },
    "front_end": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -4058,11 +4046,11 @@
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 2
+  "issueCount": 0
  },
  "i16pro": {
   "device": "874x402 side 62 bottom 21 island",
-  "renderedAt": "2026-11-08T02:14:24.779Z",
+  "renderedAt": "2026-11-08T02:17:02.638Z",
   "inputs": {
    "files": [
     "index.html",
@@ -4088,15 +4076,12 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "08bbb3a2d5f161ec9271ad864660468dd03c32f1"
+   "sha1": "195d708663ff22f437e0f34006dd51c664943d13"
   },
-  "issues": [
-   "front: screen checks failed to run: a is not defined",
-   "front_end: screen checks failed to run: a is not defined"
-  ],
+  "issues": [],
   "views": {
    "front": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -4627,7 +4612,7 @@
     ]
    },
    "front_end": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -5196,11 +5181,11 @@
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 2
+  "issueCount": 0
  },
  "i11": {
   "device": "896x414 side 48 bottom 21 notch",
-  "renderedAt": "2026-11-08T02:14:29.954Z",
+  "renderedAt": "2026-11-08T02:17:07.857Z",
   "inputs": {
    "files": [
     "index.html",
@@ -5226,15 +5211,12 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "08bbb3a2d5f161ec9271ad864660468dd03c32f1"
+   "sha1": "195d708663ff22f437e0f34006dd51c664943d13"
   },
-  "issues": [
-   "front: screen checks failed to run: a is not defined",
-   "front_end: screen checks failed to run: a is not defined"
-  ],
+  "issues": [],
   "views": {
    "front": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -5795,7 +5777,7 @@
     ]
    },
    "front_end": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -6374,11 +6356,11 @@
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 2
+  "issueCount": 0
  },
  "i16promax": {
   "device": "956x440 side 62 bottom 21 island",
-  "renderedAt": "2026-11-08T02:14:34.750Z",
+  "renderedAt": "2026-11-08T02:17:12.927Z",
   "inputs": {
    "files": [
     "index.html",
@@ -6404,15 +6386,12 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "08bbb3a2d5f161ec9271ad864660468dd03c32f1"
+   "sha1": "195d708663ff22f437e0f34006dd51c664943d13"
   },
-  "issues": [
-   "front: screen checks failed to run: a is not defined",
-   "front_end: screen checks failed to run: a is not defined"
-  ],
+  "issues": [],
   "views": {
    "front": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -6973,7 +6952,7 @@
     ]
    },
    "front_end": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -7552,6 +7531,6 @@
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 2
+  "issueCount": 0
  }
 }

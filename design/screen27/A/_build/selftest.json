@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-08T02:16:28.880Z",
+ "ranAt": "2026-11-08T02:19:07.171Z",
  "inputs": {
   "files": [
    "index.html",
@@ -25,22 +25,14 @@
    "header_cairo.jpg",
    "map_overlay_cairo.svg"
   ],
-  "sha1": "08bbb3a2d5f161ec9271ad864660468dd03c32f1"
+  "sha1": "195d708663ff22f437e0f34006dd51c664943d13"
  },
  "cleanIssues": {
-  "i16promax": [
-   "screen checks failed to run: a is not defined"
-  ],
-  "i16promax_front_end": [
-   "screen checks failed to run: a is not defined"
-  ],
+  "i16promax": [],
+  "i16promax_front_end": [],
   "i16promax coverage": [],
-  "se": [
-   "screen checks failed to run: a is not defined"
-  ],
-  "se_front_end": [
-   "screen checks failed to run: a is not defined"
-  ],
+  "se": [],
+  "se_front_end": [],
   "se coverage": []
  },
  "results": [
@@ -48,8 +40,7 @@
    "name": "type size",
    "ok": true,
    "sample": [
-    "font size 17 for \"جبهة شرق ليبيا\"",
-    "screen checks failed to run: a is not defined"
+    "font size 17 for \"جبهة شرق ليبيا\""
    ]
   },
   {
@@ -57,7 +48,6 @@
    "ok": true,
    "sample": [
     "text colour off-token rgb(136, 153, 170): \"جبهة شرق ليبيا\"",
-    "screen checks failed to run: a is not defined",
     "contrast 1.97 for \"جبهة شرق ليبيا\""
    ]
   },
@@ -66,8 +56,7 @@
    "ok": true,
    "sample": [
     "panel radius جبهة شرق ليبيا: 6 (want 12)",
-    "radius 6 for .sheet (want 12)",
-    "screen checks failed to run: a is not defined"
+    "radius 6 for .sheet (want 12)"
    ]
   },
   {
@@ -84,7 +73,6 @@
    "ok": true,
    "sample": [
     "panel not opaque: جبهة شرق ليبيا rgba(9, 17, 25, 0.66)",
-    "screen checks failed to run: a is not defined",
     "contrast 3.2 for \"من جنوب أجدابيا إلى جالو\""
    ]
   },
@@ -93,15 +81,14 @@
    "ok": true,
    "sample": [
     "panel not opaque (opacity 0.60): جبهة شرق ليبيا",
-    "screen checks failed to run: a is not defined",
-    "brief text not fully visible: جبهة شرق ليبيا"
+    "brief text not fully visible: جبهة شرق ليبيا",
+    "brief text not fully visible: التحالف ضد حكومة القذافي · قطاعان"
    ]
   },
   {
    "name": "map dimmed",
    "ok": true,
    "sample": [
-    "screen checks failed to run: a is not defined",
     "the map is dimmed (opacity 1.00, filter brightness(0.35))"
    ]
   },
@@ -111,16 +98,16 @@
    "sample": [
     "the player's sector is not drawn (hidden or faint: 0.18)",
     "the partner's sector is not drawn (hidden or faint: 0.14)",
-    "screen checks failed to run: a is not defined"
+    "the map is dimmed (opacity 0.30, filter none)"
    ]
   },
   {
    "name": "scrim over the map",
    "ok": true,
    "sample": [
-    "screen checks failed to run: a is not defined",
     "something drawn over the map: DIV (rgba(0, 0, 0, 0.55))",
-    "contrast 1.92 for \"3\""
+    "contrast 1.92 for \"3\"",
+    "contrast 3.62 for \"تثبيت\""
    ]
   },
   {
@@ -128,7 +115,6 @@
    "ok": true,
    "sample": [
     "sheet width 330 (want round(clamp(43% of 832, 340, 380)), or the room the dock leaves if 330..: 358)",
-    "screen checks failed to run: a is not defined",
     "contrast 4.31 for \"جبهة شرق ليبيا\""
    ]
   },
@@ -145,8 +131,7 @@
    "name": "dock hidden although it fits",
    "ok": true,
    "sample": [
-    "dock hidden although it fits left of the sheet",
-    "screen checks failed to run: a is not defined"
+    "dock hidden although it fits left of the sheet"
    ]
   },
   {
@@ -171,33 +156,30 @@
    "name": "contrast",
    "ok": true,
    "sample": [
-    "screen checks failed to run: a is not defined",
     "contrast 1 for \"قطاعك\"",
-    "contrast 1.03 for \"قطاع الصحراء\""
+    "contrast 1.03 for \"قطاع الصحراء\"",
+    "contrast 1.67 for \"من جنوب أجدابيا إلى جالو\""
    ]
   },
   {
    "name": "dock item not marked",
    "ok": true,
    "sample": [
-    "the open section «الجيش» is not marked in the dock",
-    "screen checks failed to run: a is not defined"
+    "the open section «الجيش» is not marked in the dock"
    ]
   },
   {
    "name": "identity line missing",
    "ok": true,
    "sample": [
-    "panel top line none rgb(189, 180, 106) 2px (want the section colour, 2 pt, at the top)",
-    "screen checks failed to run: a is not defined"
+    "panel top line none rgb(189, 180, 106) 2px (want the section colour, 2 pt, at the top)"
    ]
   },
   {
    "name": "emblem drawn grey",
    "ok": true,
    "sample": [
-    "section emblem missing or not in the section colour",
-    "screen checks failed to run: a is not defined"
+    "section emblem missing or not in the section colour"
    ]
   },
   {
@@ -213,64 +195,56 @@
    "name": "money unit",
    "ok": true,
    "sample": [
-    "money unit: «0.4 مليار» (under 1 billion is written in millions)",
-    "screen checks failed to run: a is not defined"
+    "money unit: «0.4 مليار» (under 1 billion is written in millions)"
    ]
   },
   {
    "name": "sign outside its number",
    "ok": true,
    "sample": [
-    "a sign outside its number: «تغير +3»",
-    "screen checks failed to run: a is not defined"
+    "a sign outside its number: «تغير +3»"
    ]
   },
   {
    "name": "colour alone",
    "ok": true,
    "sample": [
-    "colour alone: «تراجع» has no arrow or icon",
-    "screen checks failed to run: a is not defined"
+    "colour alone: «تراجع» has no arrow or icon"
    ]
   },
   {
    "name": "an image in the sheet",
    "ok": true,
    "sample": [
-    "an image in the sheet",
-    "screen checks failed to run: a is not defined"
+    "an image in the sheet"
    ]
   },
   {
    "name": "close not round",
    "ok": true,
    "sample": [
-    "close button is not round",
-    "screen checks failed to run: a is not defined"
+    "close button is not round"
    ]
   },
   {
    "name": "label without a role",
    "ok": true,
    "sample": [
-    "a11y: a label VoiceOver may skip (no role): «اختبار»",
-    "screen checks failed to run: a is not defined"
+    "a11y: a label VoiceOver may skip (no role): «اختبار»"
    ]
   },
   {
    "name": "text overlap",
    "ok": true,
    "sample": [
-    "text overlap \"جبهة شرق ليبيا\" / \"التحالف ضد حكومة القذافي\"",
-    "screen checks failed to run: a is not defined"
+    "text overlap \"جبهة شرق ليبيا\" / \"التحالف ضد حكومة القذافي\""
    ]
   },
   {
    "name": "dock underline missing",
    "ok": true,
    "sample": [
-    "dock underline missing or off: none 16pxx2px rgb(189, 180, 106) (want 16 x 2 in the section colour)",
-    "screen checks failed to run: a is not defined"
+    "dock underline missing or off: none 16pxx2px rgb(189, 180, 106) (want 16 x 2 in the section colour)"
    ]
   },
   {
@@ -286,16 +260,14 @@
    "name": "identity line colour",
    "ok": true,
    "sample": [
-    "panel top line \"\" rgb(63, 224, 208) 2px (want the section colour, 2 pt, at the top)",
-    "screen checks failed to run: a is not defined"
+    "panel top line \"\" rgb(63, 224, 208) 2px (want the section colour, 2 pt, at the top)"
    ]
   },
   {
    "name": "emblem size",
    "ok": true,
    "sample": [
-    "size 28.0x32.0 for .s-emb (want 32 x 32)",
-    "screen checks failed to run: a is not defined"
+    "size 28.0x32.0 for .s-emb (want 32 x 32)"
    ]
   },
   {
@@ -303,7 +275,7 @@
    "ok": true,
    "sample": [
     "a11y: the close says only «إغلاق»",
-    "screen checks failed to run: a is not defined"
+    "a11y: the close does not say where it returns"
    ]
   },
   {
@@ -319,8 +291,7 @@
    "name": "text wider than its box",
    "ok": true,
    "sample": [
-    "text wider than its box: «قطاعك» (34 in 20)",
-    "screen checks failed to run: a is not defined"
+    "text wider than its box: «قطاعك» (34 in 20)"
    ]
   },
   {
@@ -345,8 +316,7 @@
    "name": "a tab row on a one-body sheet",
    "ok": true,
    "sample": [
-    "a tab row on a sheet that has one body",
-    "screen checks failed to run: a is not defined"
+    "a tab row on a sheet that has one body"
    ]
   },
   {
@@ -354,16 +324,14 @@
    "ok": true,
    "sample": [
     "control height 40.00 for .r-x (want 32): إغلاق، العودة إلى الخريطة",
-    "close button is not round",
-    "screen checks failed to run: a is not defined"
+    "close button is not round"
    ]
   },
   {
    "name": "icon size (no tabs)",
    "ok": true,
    "sample": [
-    "icon size 19x19 (want 16): i",
-    "screen checks failed to run: a is not defined"
+    "icon size 19x19 (want 16): i"
    ]
   },
   {
@@ -379,7 +347,6 @@
    "name": "brief text hidden (front)",
    "ok": true,
    "sample": [
-    "screen checks failed to run: a is not defined",
     "brief text not fully visible: قطاع الصحراء"
    ]
   },
@@ -406,17 +373,16 @@
    "ok": true,
    "sample": [
     "gap 6 on قطاعك قطاع الصحراءمن جنوب ",
-    "gap 6 on قطاعك قطاع الصحراءمن جنوب ",
-    "screen checks failed to run: a is not defined"
+    "gap 6 on قطاعك قطاع الصحراءمن جنوب "
    ]
   },
   {
    "name": "faint text (front)",
    "ok": true,
    "sample": [
-    "screen checks failed to run: a is not defined",
     "brief text not fully visible: من جنوب أجدابيا إلى جالو · جيشان · 11 تشكيلًا",
-    "brief text not fully visible: المجلس الوطني الانتقالي · الوضع: هجوم"
+    "brief text not fully visible: المجلس الوطني الانتقالي · الوضع: هجوم",
+    "brief text cannot be scrolled clear of the fades: نحو 6 إلى 9 تشكيلات · تقدير"
    ]
   },
   {
@@ -424,7 +390,7 @@
    "ok": true,
    "sample": [
     "% shown before its number: \"نسبة 20%\"",
-    "screen checks failed to run: a is not defined",
+    "the posture does not say an army's own order has priority (the decision «military»)",
     "brief text missing: أمر الجيش الخاص (تقدّم، هجوم، توقّف) له الأولوية على وضع القطاع."
    ]
   },
@@ -433,7 +399,6 @@
    "ok": true,
    "sample": [
     "setting 1: order must be .r-at, .s-seg (right to left)",
-    "screen checks failed to run: a is not defined",
     "contrast 1.06 for \"للجيوش بلا أمر خاص\""
    ]
   },
@@ -441,16 +406,14 @@
    "name": "hint chevron missing",
    "ok": true,
    "sample": [
-    "scroll hint chevron missing with content below",
-    "screen checks failed to run: a is not defined"
+    "scroll hint chevron missing with content below"
    ]
   },
   {
    "name": "hint over the content",
    "ok": true,
    "sample": [
-    "scroll hint not centred in the clear strip under the fade: y 198.0..216.0 (strip 344.0..366.0)",
-    "screen checks failed to run: a is not defined"
+    "scroll hint not centred in the clear strip under the fade: y 198.0..216.0 (strip 344.0..366.0)"
    ]
   },
   {
@@ -475,8 +438,7 @@
    "name": "front name cut",
    "ok": true,
    "sample": [
-    "the map name «رأس لانوف» is cut by the screen edge",
-    "screen checks failed to run: a is not defined"
+    "the map name «رأس لانوف» is cut by the screen edge"
    ]
   },
   {
@@ -501,8 +463,7 @@
    "name": "line solid",
    "ok": true,
    "sample": [
-    "the front line is not amber and dashed",
-    "screen checks failed to run: a is not defined"
+    "the front line is not amber and dashed"
    ]
   },
   {
@@ -510,7 +471,7 @@
    "ok": true,
    "sample": [
     "the front line is not amber and dashed",
-    "screen checks failed to run: a is not defined"
+    "red in the front: f-line"
    ]
   },
   {
@@ -518,16 +479,14 @@
    "ok": true,
    "sample": [
     "the player's sector band is not the player's teal",
-    "the partner's band is not told apart from the player's",
-    "screen checks failed to run: a is not defined"
+    "the partner's band is not told apart from the player's"
    ]
   },
   {
    "name": "partner band teal",
    "ok": true,
    "sample": [
-    "the partner's band is not told apart from the player's",
-    "screen checks failed to run: a is not defined"
+    "the partner's band is not told apart from the player's"
    ]
   },
   {
@@ -535,16 +494,14 @@
    "ok": true,
    "sample": [
     "the sectors are not in their places (the partner's on the coast, the player's south of it)",
-    "the player's band does not run from south of Ajdabiya to Jalu (as the sheet says)",
-    "screen checks failed to run: a is not defined"
+    "the player's band does not run from south of Ajdabiya to Jalu (as the sheet says)"
    ]
   },
   {
    "name": "front moving",
    "ok": true,
    "sample": [
-    "the front marks or names move (they must be static, L6)",
-    "screen checks failed to run: a is not defined"
+    "the front marks or names move (they must be static, L6)"
    ]
   },
   {
@@ -552,7 +509,8 @@
    "ok": true,
    "sample": [
     "the front's name «جالو» is not shown",
-    "screen checks failed to run: a is not defined"
+    "a place dot without its name, or a name without its dot",
+    "the map name «جالو» is hidden though it fits"
    ]
   },
   {
@@ -577,85 +535,85 @@
    "name": "a name under a panel",
    "ok": true,
    "sample": [
-    "the map name «أجدابيا» is under a panel: sheet glass",
-    "screen checks failed to run: a is not defined"
+    "the map name «أجدابيا» is under a panel: sheet glass"
    ]
   },
   {
    "name": "names overlap",
-   "ok": false,
+   "ok": true,
    "sample": [
-    "screen checks failed to run: a is not defined"
+    "the map names «قطاعك» and «قطاع الحليف» overlap"
    ]
   },
   {
    "name": "dot alone",
-   "ok": false,
+   "ok": true,
    "sample": [
     "the front's name «جالو» is not shown",
-    "screen checks failed to run: a is not defined"
+    "a place dot without its name, or a name without its dot",
+    "the map name «جالو» is hidden though it fits"
    ]
   },
   {
    "name": "own name not teal",
-   "ok": false,
+   "ok": true,
    "sample": [
-    "screen checks failed to run: a is not defined"
+    "the map name «قطاعك» is not the player's teal"
    ]
   },
   {
    "name": "units drawn",
-   "ok": false,
+   "ok": true,
    "sample": [
-    "screen checks failed to run: a is not defined"
+    "unit tokens drawn (screen 14's, the owner's)"
    ]
   },
   {
    "name": "date weekday off",
-   "ok": false,
+   "ok": true,
    "sample": [
-    "screen checks failed to run: a is not defined"
+    "the HUD date is not 10 April 2011 on its weekday (الأحد): السبت 10 أبريل 2011"
    ]
   },
   {
    "name": "wrong flag",
-   "ok": false,
+   "ok": true,
    "sample": [
-    "screen checks failed to run: a is not defined"
+    "the header flag is not the player's (مصر)"
    ]
   },
   {
    "name": "emblem not the front",
-   "ok": false,
+   "ok": true,
    "sample": [
-    "screen checks failed to run: a is not defined"
+    "the emblem is not the front"
    ]
   },
   {
    "name": "close unclear",
-   "ok": false,
+   "ok": true,
    "sample": [
     "a11y: the close says only «إغلاق»",
-    "screen checks failed to run: a is not defined"
+    "a11y: the close does not say where it returns"
    ]
   },
   {
    "name": "sheet modal",
-   "ok": false,
+   "ok": true,
    "sample": [
-    "screen checks failed to run: a is not defined"
+    "a dialog over the map (mapCentral)"
    ]
   },
   {
    "name": "own not apart",
-   "ok": false,
+   "ok": true,
    "sample": [
-    "screen checks failed to run: a is not defined"
+    "the player's sector is not told apart (teal) or not read as «قطاعك»"
    ]
   },
   {
    "name": "three postures",
-   "ok": false,
+   "ok": true,
    "sample": [
     "text overlap \"انسحاب\" / \"أمر الجيش الخاص (تقدّم، هجوم، توقّف) له الأولوية على وضع القطاع.\"",
     "hit overlap تثبيت / انسحاب",
@@ -664,17 +622,17 @@
   },
   {
    "name": "posture drawn wrong",
-   "ok": false,
+   "ok": true,
    "sample": [
     "setting 1: 2 chosen segments (1 aria-checked), not one",
-    "screen checks failed to run: a is not defined"
+    "the chosen posture is not the one drawn"
    ]
   },
   {
    "name": "posture overrides",
-   "ok": false,
+   "ok": true,
    "sample": [
-    "screen checks failed to run: a is not defined",
+    "the posture does not say an army's own order has priority (the decision «military»)",
     "brief text missing: أمر الجيش الخاص (تقدّم، هجوم، توقّف) له الأولوية على وضع القطاع.",
     "brief text missing: أمر الجيش الخاص (تقدّم، هجوم، توقّف) له الأولوية على وضع القطاع."
    ]
@@ -684,8 +642,7 @@
    "ok": true,
    "sample": [
     "the partner's sector is not wholly on the coalition's (east) side of the line",
-    "the map name «البريقة» is on the sector band",
-    "screen checks failed to run: a is not defined"
+    "the map name «البريقة» is on the sector band"
    ]
   },
   {
@@ -693,40 +650,35 @@
    "ok": true,
    "sample": [
     "the player's sector is not wholly on the coalition's (east) side of the line",
-    "the player's band does not run from south of Ajdabiya to Jalu (as the sheet says)",
-    "screen checks failed to run: a is not defined"
+    "the player's band does not run from south of Ajdabiya to Jalu (as the sheet says)"
    ]
   },
   {
    "name": "own band short of Jalu",
    "ok": true,
    "sample": [
-    "the player's band does not run from south of Ajdabiya to Jalu (as the sheet says)",
-    "screen checks failed to run: a is not defined"
+    "the player's band does not run from south of Ajdabiya to Jalu (as the sheet says)"
    ]
   },
   {
    "name": "enemy town drawn ours",
    "ok": true,
    "sample": [
-    "the place «البريقة» is on the other side but its dot is not hollow",
-    "screen checks failed to run: a is not defined"
+    "the place «البريقة» is on the other side but its dot is not hollow"
    ]
   },
   {
    "name": "partner band hidden",
    "ok": true,
    "sample": [
-    "the partner's sector is not drawn (hidden or faint: 0.00)",
-    "screen checks failed to run: a is not defined"
+    "the partner's sector is not drawn (hidden or faint: 0.00)"
    ]
   },
   {
    "name": "own band invisible",
    "ok": true,
    "sample": [
-    "the player's sector is not drawn (hidden or faint: 0.60)",
-    "screen checks failed to run: a is not defined"
+    "the player's sector is not drawn (hidden or faint: 0.60)"
    ]
   },
   {
@@ -749,61 +701,60 @@
   },
   {
    "name": "posture in the partner section",
-   "ok": false,
+   "ok": true,
    "sample": [
-    "screen checks failed to run: a is not defined"
+    "the posture is not the sheet's one choice, in the player's sector",
+    "a control in the partner's sector (read-only)"
    ]
   },
   {
    "name": "attack locked",
-   "ok": false,
+   "ok": true,
    "sample": [
-    "screen checks failed to run: a is not defined"
+    "the posture is locked though this is a war"
    ]
   },
   {
    "name": "posture slot empty",
-   "ok": false,
+   "ok": true,
    "sample": [
-    "screen checks failed to run: a is not defined"
+    "the posture's track is wider than its options (an empty slot)"
    ]
   },
   {
    "name": "own reads the wrong places",
-   "ok": false,
+   "ok": true,
    "sample": [
-    "screen checks failed to run: a is not defined"
+    "a11y: «قطاع الصحراء» does not read all it shows (جنوب، أجدابيا، إلى، جالو)"
    ]
   },
   {
    "name": "enemy bound dropped",
-   "ok": false,
+   "ok": true,
    "sample": [
-    "screen checks failed to run: a is not defined"
+    "a11y: «قوات حكومة القذافي» does not read all it shows (إلى، 9)"
    ]
   },
   {
    "name": "dot under the sheet",
    "ok": true,
    "sample": [
-    "the dot of «جالو» is under a panel: sheet glass",
-    "screen checks failed to run: a is not defined"
+    "the dot of «جالو» is under a panel: sheet glass"
    ]
   },
   {
    "name": "names animated",
    "ok": true,
    "sample": [
-    "the front marks or names move (they must be static, L6)",
-    "screen checks failed to run: a is not defined"
+    "the front marks or names move (they must be static, L6)"
    ]
   },
   {
    "name": "name hidden though it fits",
-   "ok": false,
+   "ok": true,
    "sample": [
     "the front's name «جالو» is not shown",
-    "screen checks failed to run: a is not defined"
+    "the map name «جالو» is hidden though it fits"
    ]
   },
   {
@@ -811,62 +762,61 @@
    "ok": true,
    "sample": [
     "the map name «جالو» is on the front line",
-    "the map name «جالو» is on the sector band",
-    "screen checks failed to run: a is not defined"
+    "the map name «جالو» is on the sector band"
    ]
   },
   {
    "name": "alert of January",
-   "ok": false,
+   "ok": true,
    "sample": [
-    "screen checks failed to run: a is not defined"
+    "the HUD alert is not the day's («هجوم على أجدابيا»)"
    ]
   },
   {
    "name": "partner controllable",
-   "ok": false,
+   "ok": true,
    "sample": [
-    "screen checks failed to run: a is not defined"
+    "a control in the partner's sector (read-only)"
    ]
   },
   {
    "name": "partner not read-only",
-   "ok": false,
+   "ok": true,
    "sample": [
-    "screen checks failed to run: a is not defined",
+    "the partner's sector does not say it is read-only",
     "brief text missing: للعرض فقط",
     "brief text missing: للعرض فقط"
    ]
   },
   {
    "name": "partner flag",
-   "ok": false,
+   "ok": true,
    "sample": [
-    "screen checks failed to run: a is not defined"
+    "the partner's flag is not the National Transitional Council's"
    ]
   },
   {
    "name": "enemy exact",
-   "ok": false,
+   "ok": true,
    "sample": [
-    "screen checks failed to run: a is not defined",
-    "brief text missing: نحو 6 إلى 9 تشكيلات · تقدير",
+    "the enemy is not given as an estimated range (D-19)",
+    "a11y: «قوات حكومة القذافي» does not read all it shows (8)",
     "brief text missing: نحو 6 إلى 9 تشكيلات · تقدير"
    ]
   },
   {
    "name": "group unread",
-   "ok": false,
+   "ok": true,
    "sample": [
-    "screen checks failed to run: a is not defined"
+    "a11y: «قطاع الصحراء» does not read all it shows (من، جنوب، أجدابيا، إلى، جالو، جيشان، 11، تشكيلًا)"
    ]
   },
   {
    "name": "red in the sheet",
-   "ok": false,
+   "ok": true,
    "sample": [
     "text colour off-token rgb(224, 48, 42): \"للعرض فقط\"",
-    "screen checks failed to run: a is not defined",
+    "red in the front: f-ro",
     "contrast 3.83 for \"للعرض فقط\""
    ]
   },
