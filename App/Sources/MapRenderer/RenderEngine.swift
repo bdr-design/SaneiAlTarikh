@@ -9,9 +9,9 @@ struct FrameStats: Sendable {
     var frames = 0
     /// Frames encoded while idle (one per request): 0 a second when nothing changes proves the link is paused (L1).
     var idleFrames = 0
-    /// Continuous frames that missed: refreshes the display link skipped, frames dropped (never presented) and frames
-    /// presented more than half a refresh late. Booked when known: a late or dropped frame in the row of the second it
-    /// was presented in (about two refreshes after it was encoded).
+    /// Continuous refreshes that showed a stale frame, each counted once: refreshes the display link skipped (booked at
+    /// the next callback) and frames dropped, never presented (booked in the row of the second the drop is known, about
+    /// two refreshes after encoding). A late frame pushes the next target, so it shows up as a skipped refresh.
     var hitches = 0
     /// The spacing of presented continuous frames, in ms (mean and worst).
     var intervalMeanMs = 0.0
@@ -46,8 +46,8 @@ final class RenderEngine: NSObject, @unchecked Sendable {
     private var angle: Float = 0
     private var continuous = false
     private var lastTarget: CFTimeInterval = 0
-    /// The display's refresh period while continuous: the smallest spacing of consecutive targets seen (a skipped refresh
-    /// doubles a spacing, never halves it), 1/60 s until measured.
+    /// The refresh period while continuous: the smallest spacing of consecutive targets seen, never below the link's
+    /// requested 1/60 s (a ProMotion phone may deliver a 1/120 spacing once; the budget is 60 a second) nor above 1/30.
     private var refresh: CFTimeInterval = 0
     /// Set when the app goes to the background: nothing unpauses the link until `resume()`.
     private var backgrounded = false
@@ -183,7 +183,7 @@ final class RenderEngine: NSObject, @unchecked Sendable {
     private func presented(at time: CFTimeInterval, target: CFTimeInterval, refresh: CFTimeInterval) {
         lock.lock()
         defer { lock.unlock() }
-        if time == 0 || time - target > refresh / 2 { stats.hitches += 1 }
+        if time == 0 { stats.hitches += 1 }
         guard time > 0 else { return }
         if lastPresented > 0 {
             let gap = time - lastPresented
@@ -202,9 +202,9 @@ extension RenderEngine: CAMetalDisplayLinkDelegate {
             let target = update.targetPresentationTimestamp
             if continuous {
                 if lastTarget > 0 {
-                    // the refresh: the smallest target spacing seen, within the link's range (30 to 120 a second)
+                    // the refresh: the smallest target spacing seen, between the requested 60 and 30 a second
                     let spacing = target - lastTarget
-                    let seen = min(max(spacing, 1.0 / 120), 1.0 / 30)
+                    let seen = min(max(spacing, 1.0 / 60), 1.0 / 30)
                     refresh = refresh > 0 ? min(refresh, seen) : seen
                     // refreshes the link skipped since the last frame (the previous frame stayed on screen)
                     let skipped = max(0, Int((spacing / refresh).rounded()) - 1)
