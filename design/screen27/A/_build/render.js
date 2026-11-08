@@ -96,6 +96,7 @@ if (document.querySelector('[role="dialog"], [role="alertdialog"], dialog, .moda
   if (!g || g.getAttribute('role') !== 'radiogroup' || opts.map((b) => W(T(b))).join('|') !== 'تثبيت|هجوم' || opts.filter((b) => b.getAttribute('aria-checked') === 'true').length !== 1) issues.push('the posture is not one radio choice تثبيت | هجوم with one chosen');
   else { if (opts.some((b) => (b.getAttribute('aria-checked') === 'true') !== b.classList.contains('on'))) issues.push('the chosen posture is not the one drawn');
     if (Math.abs(g.getBoundingClientRect().width - opts.reduce((a, b) => a + b.getBoundingClientRect().width, 0)) > 0.5) issues.push('the posture\\'s track is wider than its options (an empty slot)');
+    if (opts.some((b) => Math.abs(b.getBoundingClientRect().width - 60) > 0.5)) issues.push('a posture segment is not 60 pt');
     if (opts.some((b) => b.disabled || b.getAttribute('aria-disabled') === 'true' || b.querySelector('use[href*="lock"]') || b.classList.contains('lock'))) issues.push('the posture is locked though this is a war'); }
   const n = W(T(o && o.closest('.r-sec').querySelector('.s-note'))); if (!/أمر الجيش الخاص/.test(n) || !/له الأولوية على وضع القطاع/.test(n)) issues.push('the posture does not say an army\\'s own order has priority (the decision «military»)'); }
 // the partner's sector: read-only, said on screen and to VoiceOver; its flag the NTC's
@@ -141,7 +142,7 @@ require(path.join(OUT, '../../shared/check/panelcheck.js'))({
     // the shared plants moved to this sheet and map: the posture's segments pushed into the side inset; the front's names
     // that the hide pass took out shown again (Egypt's play-map labels are not drawn here, and there are no tiles)
     ['tap in the side inset (posture)', d, '', '.sheet { right: -300px !important; }', /tap in side inset/],
-    ['front name cut', d, '', '', /the map name «رأس لانوف» is (under a panel|cut by the screen edge)/, () => { document.querySelectorAll('.f-labels .cut').forEach((e) => e.classList.remove('cut')); }],
+    ['front name cut', d, '', '', /the map name «أجدابيا» is cut by the screen edge/, () => { const l = [...document.querySelectorAll('.f-lbl')].find((x) => x.textContent === 'أجدابيا'), m = document.querySelector('.map').getBoundingClientRect(), k = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--map-s')); l.style.setProperty('--x', (-m.left - 20) / k); l.previousElementSibling.style.setProperty('--x', (-m.left + 300) / k); }],
     ['line under the sheet', d, '', '', /the front line runs under a panel/, () => { const m = document.querySelector('.map'); m.style.left = (parseFloat(getComputedStyle(m).left) + 380) + 'px'; }],
     ['line off screen', d, '', '', /the front line is not wholly on screen/, () => { const m = document.querySelector('.map'); m.style.left = (parseFloat(getComputedStyle(m).left) - 700) + 'px'; }],
     ['line solid', d, '', '.f-line { stroke-dasharray: none !important; }', /the front line is not amber and dashed/],
@@ -177,6 +178,7 @@ require(path.join(OUT, '../../shared/check/panelcheck.js'))({
     ['zoom past 1 km/pt', d, '', ':root { --map-s: 3.5 !important; }', /the map is zoomed past 1\.0 km\/pt/],
     ['posture in the partner section', d, '', '', /the posture is not the sheet's one choice, in the player's sector|a control in the partner's sector/, () => { const s = document.querySelector('.s-pol'), r = [...document.querySelectorAll('.f-sec')][1].closest('.r-sec'); r.appendChild(s); }],
     ['attack locked', d, '', '', /the posture is locked though this is a war/, () => { const b = document.querySelectorAll('.s-seg[aria-label="وضع القطاع"] .s-sg')[1]; b.setAttribute('aria-disabled', 'true'); }],
+    ['posture segments wide', d, '', '.s-pol .s-seg { grid-template-columns: repeat(2, 80px) !important; }', /a posture segment is not 60 pt/],
     ['posture slot empty', d, '', '.s-pol .s-seg { grid-template-columns: repeat(3, 60px) !important; }', /the posture's track is wider than its options/],
     ['own reads the wrong places', d, '', '', /a11y: «قطاع الصحراء» does not read all it shows \(.*أجدابيا/, () => { document.querySelector('.f-own').setAttribute('aria-label', 'قطاعك: قطاع الصحراء، من مصر، جيشان، 11 تشكيلًا'); }],
     ['enemy bound dropped', d, '', '', /a11y: «قوات حكومة القذافي» does not read all it shows \(.*9/, () => { [...document.querySelectorAll('.f-sec')][2].setAttribute('aria-label', 'قوات حكومة القذافي: نحو 6 تشكيلات، تقدير'); }],

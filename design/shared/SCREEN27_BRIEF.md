@@ -30,6 +30,8 @@ of Ajdabiya to Jalu, Egypt's.
   the bands; a name a panel (6 pt around it) or the screen edge would cut is hidden with its dot (رأس لانوف). Egypt's
   play-map names give way.
 - The zoom never goes past the engine's maximum 1.0 km/pt (§2.5).
+- The open front's line and bands show in any map mode (the chip here stays «الخريطة: سياسية», as on screen 9); the military
+  mode (§6.6: control, fronts, sectors) shows every front's line and sectors.
 - The HUD's date: «الأحد 10 أبريل 2011»; its alert the day's: «هجوم على أجدابيا» (the government's forces attacked
   Ajdabiya on 9-10 April 2011), the slot at B3's width; the dock's «الجيش» open.
 
