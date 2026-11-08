@@ -64,7 +64,11 @@ build (each fixed at its cause, never by turning the language mode down without 
 
 ## After the verification reviews (2026-11-08, `reviewEveryFix`)
 - The simulation's thread is utility and raises itself to user-initiated while it runs at the top speed
-  (`DedicatedThreadExecutor.setQoS`, §2.4); on Linux the call is a no-op.
+  (`DedicatedThreadExecutor.setQoS`, §2.4); on Linux the call is a no-op. On the iPhone the thread names itself after
+  its class («sanei.sim/user-initiated»), so the recorder's `sim_thread` column proves the raise.
+- The CI's import and literal checks read each file with trailing `//` comments cut and statements split at `;`; known
+  gaps (until a Swift-syntax check, M1a): an import split over two lines, a `//` inside a string literal, and
+  `Duration / Duration`, which returns a Double with no keyword or literal.
 - The ring log's file is written at launch (after the folders), at the start of a recording, at its idle/load switch,
   every 10 s while it runs, after it, after an export and on background: not a line-by-line mirror (§3.8's 1 MB file
   waits for the real log volume, M1a). A crash report itself comes from MetricKit; the dSYM is kept with each IPA.

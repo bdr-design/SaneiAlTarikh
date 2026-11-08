@@ -38,7 +38,7 @@ public final class DedicatedThreadExecutor: SerialExecutor, @unchecked Sendable 
             let qos = pendingQoS
             pendingQoS = nil
             condition.unlock()
-            if let qos { Self.apply(qos) }
+            if let qos { apply(qos) }
             for job in batch { Self.run(job, on: me) }
             batch.removeAll(keepingCapacity: true)
         }
@@ -55,8 +55,9 @@ public final class DedicatedThreadExecutor: SerialExecutor, @unchecked Sendable 
         #endif
     }
 
-    /// Changes the thread's quality of service (on Apple's platforms the thread sets its own class before its next jobs;
-    /// elsewhere it is ignored). The simulation runs at utility and at user-initiated at its top speed (§2.4).
+    /// Changes the thread's quality of service (on Apple's platforms the thread sets its own class before its next jobs and
+    /// names itself after it, «sanei.sim/user-initiated», so the recorder's thread column shows it; elsewhere it is
+    /// ignored). The simulation runs at utility and at user-initiated at its top speed (§2.4).
     public func setQoS(_ qos: QualityOfService) {
         condition.lock()
         pendingQoS = qos
@@ -64,17 +65,18 @@ public final class DedicatedThreadExecutor: SerialExecutor, @unchecked Sendable 
         condition.unlock()
     }
 
-    private static func apply(_ qos: QualityOfService) {
+    private func apply(_ qos: QualityOfService) {
         #if canImport(Darwin)
-        let cls: qos_class_t
+        let cls: qos_class_t, label: String
         switch qos {
-        case .userInteractive: cls = QOS_CLASS_USER_INTERACTIVE
-        case .userInitiated: cls = QOS_CLASS_USER_INITIATED
-        case .utility: cls = QOS_CLASS_UTILITY
-        case .background: cls = QOS_CLASS_BACKGROUND
-        default: cls = QOS_CLASS_DEFAULT
+        case .userInteractive: cls = QOS_CLASS_USER_INTERACTIVE; label = "user-interactive"
+        case .userInitiated: cls = QOS_CLASS_USER_INITIATED; label = "user-initiated"
+        case .utility: cls = QOS_CLASS_UTILITY; label = "utility"
+        case .background: cls = QOS_CLASS_BACKGROUND; label = "background"
+        default: cls = QOS_CLASS_DEFAULT; label = "default"
         }
-        pthread_set_qos_class_self_np(cls, 0)
+        let ok = pthread_set_qos_class_self_np(cls, 0) == 0
+        Thread.current.name = name + "/" + (ok ? label : "qos-failed")
         #endif
     }
 

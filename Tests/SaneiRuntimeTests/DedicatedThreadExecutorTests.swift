@@ -13,6 +13,22 @@ private actor Probe {
     func all() -> [Int] { order }
 }
 
+/// Its own executor, so a change of quality of service (and, on Apple's platforms, of the thread's name) touches no other test.
+private actor QoSProbe {
+    static let executor = DedicatedThreadExecutor(name: "test.qos", qos: .utility)
+    nonisolated var unownedExecutor: UnownedSerialExecutor { Self.executor.asUnownedSerialExecutor() }
+    private var order: [Int] = []
+    func append(_ i: Int) { order.append(i) }
+    func all() -> [Int] { order }
+}
+
+/// True for the first caller only.
+private final class OnceFlag: @unchecked Sendable {
+    private let lock = NSLock()
+    private var used = false
+    func take() -> Bool { lock.lock(); defer { lock.unlock() }; let first = !used; used = true; return first }
+}
+
 /// Counts how many pieces of work run at once (outside any actor, so it sees what the executor really does).
 private final class Overlap: @unchecked Sendable {
     private let lock = NSLock()
@@ -62,12 +78,21 @@ final class DedicatedThreadExecutorTests: XCTestCase {
     }
 
     /// A change of quality of service never stops the thread: the jobs after it still run, in order.
+    /// (The class itself is checked on the device: the thread's name carries it into the recorder's CSV.)
     func testSetQoSKeepsRunning() async {
-        let p = Probe()
-        Probe.executor.setQoS(.userInitiated)
-        await p.append(1)
-        Probe.executor.setQoS(.utility)
-        await p.append(2)
+        let p = QoSProbe()
+        let work = Task {
+            QoSProbe.executor.setQoS(.userInitiated)
+            await p.append(1)
+            QoSProbe.executor.setQoS(.utility)
+            await p.append(2)
+        }
+        let done = await withCheckedContinuation { (c: CheckedContinuation<Bool, Never>) in
+            let once = OnceFlag()
+            Task { await work.value; if once.take() { c.resume(returning: true) } }
+            Task { try? await Task.sleep(for: .seconds(5)); if once.take() { c.resume(returning: false) } }
+        }
+        XCTAssertTrue(done, "the executor stopped after a change of quality of service")
         let all = await p.all()
         XCTAssertEqual(Array(all.suffix(2)), [1, 2])
     }

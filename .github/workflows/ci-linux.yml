@@ -24,11 +24,20 @@ jobs:
           set -e
           if find . -name '*.xcodeproj' -o -name '*.xcworkspace' | grep -q .; then
             echo "No Xcode project in the tree: XcodeGen makes it from App/project.yml"; exit 1; fi
-          # imports: an allow list. SaneiCore imports nothing; SaneiEngine only SaneiCore (any attribute, access level or kind)
-          imp() { grep -nE '^\s*(@\w+(\([^)]*\))?\s+)*((public|internal|package|private|fileprivate)\s+)?import\s' "$@" || true; }
-          bad=$( (imp -r Sources/SaneiCore; imp -r Sources/SaneiEngine | grep -vE 'import\s+(\w+\s+)?SaneiCore(\.\w+)*\s*$') || true )
+          # imports: an allow list. SaneiCore imports nothing; SaneiEngine only SaneiCore (any attribute, access level or
+          # kind). Each file is read with trailing // comments cut and statements split at ';'.
+          # Known gaps: an import split over two lines; a // inside a string literal.
+          IMP='^\s*(@\w+(\([^)]*\))?\s+)*((public|internal|package|private|fileprivate)\s+)?import\s'
+          stmts() { sed -E 's://.*$::; s/;/\n/g' "$1"; }
+          bad=""
+          for f in $(find Sources/SaneiCore -name '*.swift'); do
+            o=$(stmts "$f" | grep -nE "$IMP" || true); [ -n "$o" ] && bad="$bad$f: $o"$'\n'
+          done
+          for f in $(find Sources/SaneiEngine -name '*.swift'); do
+            o=$(stmts "$f" | grep -nE "$IMP" | grep -vE 'import\s+(\w+\s+)?SaneiCore(\.\w+)*\s*$' || true); [ -n "$o" ] && bad="$bad$f: $o"$'\n'
+          done
           if [ -n "$bad" ]; then echo "$bad"; echo "SaneiCore imports nothing and SaneiEngine only SaneiCore: the standard library only (§2.2)"; exit 1; fi
-          if grep -rnE '\b(Float(16|32|64|80)?|Double|CGFloat)\b' Sources/SaneiEngine; then
+          if grep -rnE '\b(Float(16|32|64|80)?|Double|CGFloat|CFloat|CDouble|CLongDouble)\b' Sources/SaneiEngine; then
             echo "SaneiEngine never uses floating point (§2.2)"; exit 1; fi
           # floating-point literals, per file with comments left out («§2.4» is a section): 1.5, 1e9, 2.5e-3, the 2.5 of
           # 1...2.5, hex floats (0x1.8p3); grouping with _ included; member access such as a.0 excluded.
@@ -41,7 +50,7 @@ jobs:
           done
           if [ "$found" = 1 ]; then echo "SaneiEngine never uses floating-point literals (§2.2)"; exit 1; fi
           # the app's platform and render code never reach into the engine (§2.2: only App/App and App/UI hold it)
-          if grep -rnE '^\s*(@\w+\s+)*import\s+(\w+\s+)?SaneiEngine\b|\bGameHost\b' App/Sources/Platform App/Sources/MapRenderer; then
+          if grep -rnE '^\s*(@\w+(\([^)]*\))?\s+)*((public|internal|package|private|fileprivate)\s+)?import\s+(\w+\s+)?SaneiEngine\b|\bGameHost\b' App/Sources/Platform App/Sources/MapRenderer; then
             echo "App/Platform and App/MapRenderer never use the engine (§2.2)"; exit 1; fi
       - name: Build (warnings as errors)
         run: swift build -Xswiftc -warnings-as-errors

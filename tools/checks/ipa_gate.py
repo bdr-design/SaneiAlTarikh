@@ -43,7 +43,9 @@ with tempfile.TemporaryDirectory() as tmp:
     check(info.get("CADisableMinimumFrameDurationOnPhone") is True, "CADisableMinimumFrameDurationOnPhone")
     check(info.get("ITSAppUsesNonExemptEncryption") is False, "ITSAppUsesNonExemptEncryption NO")
     check(info.get("UIStatusBarHidden") is True, "UIStatusBarHidden")
-    check((info.get("UILaunchScreen") or {}).get("UIColorName") == "LaunchBackground", "the launch screen's colour (LaunchBackground)")
+    car = app / "Assets.car"
+    check((info.get("UILaunchScreen") or {}).get("UIColorName") == "LaunchBackground"
+          and car.exists() and b"LaunchBackground" in car.read_bytes(), "the launch screen's colour (LaunchBackground, in Assets.car)")
     types = info.get("UTExportedTypeDeclarations", [])
     check(any(t.get("UTTypeIdentifier") == "com.bdrdesign.SaneiAlTarikh.save"
               and "sanei" in t.get("UTTypeTagSpecification", {}).get("public.filename-extension", []) for t in types),

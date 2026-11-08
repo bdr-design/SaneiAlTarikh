@@ -78,9 +78,15 @@ final class GameHostTests: XCTestCase {
     func testSecondRunReturnsAtOnce() async {
         let host = GameHost(executor: Self.simExecutor, cells: 64)
         let first = Task { await host.run(daysPerWake: 3, period: .milliseconds(20)) }
-        try? await Task.sleep(for: .milliseconds(50))
-        let second = await Self.finishes(Task { await host.run(daysPerWake: 3, period: .milliseconds(20)) }, within: .seconds(2))
+        // wait (bounded) until the first run paces the clock, so the second really is the second
+        var waited = 0
+        while !(await host.running) && waited < 200 { try? await Task.sleep(for: .milliseconds(10)); waited += 1 }
+        let pacing = await host.running
+        XCTAssertTrue(pacing, "the first run never started")
+        let secondTask = Task { await host.run(daysPerWake: 3, period: .milliseconds(20)) }
+        let second = await Self.finishes(secondTask, within: .seconds(2))
         XCTAssertTrue(second, "a second run did not return at once")
+        secondTask.cancel()
         first.cancel()
         let stopped = await Self.finishes(first, within: .seconds(5))
         XCTAssertTrue(stopped)
