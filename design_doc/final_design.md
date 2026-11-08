@@ -527,7 +527,7 @@ The shader takes one texture sample per pixel. There is no relief shading or gra
 | 2 | **Map-mode overlay**, RGBA per province with alpha 0–0.55. Political mode: light cyan fill on the player; occupation drawn as stripes. | ≤20 |
 | 3 | **Borders and glow.** Instanced. Each style class is drawn with a **stencil-once** test (a pixel is written once per class), so translucent quads never double-blend at joints. Dashes are computed from arc length × scale, so the pattern runs **continuously along the polyline**. Styles: <ul><li>country border: cyan, about 1 pt, 60%</li><li>province line: faint cyan, 0.5 pt, about 18%, hidden at L0</li><li>disputed edge: dashed</li><li>front line: amber, dashed</li><li>player edge: soft cyan glow</li></ul> | ≤22 |
 | 4 | Fronts, unit markers (the owner's unit images and their flags from one atlas, instanced, D-15), routes and arrows | 3 |
-| 5 | **Labels: a single-channel distance-field glyph atlas.** Pass 1 draws all halos, pass 2 all fills (§2.5 Labels). | 2 |
+| 5 | **Labels: a single-channel distance-field glyph atlas.** Pass 1 draws all halos, pass 2 all fills (§2.5 Labels). City dots are a disc entry in the same atlas: ring in the halo pass, fill in the fill pass. | 2 |
 | 6 | Selection and hover via uniforms | 0 |
 | | **Total** | **≤50** |
 
@@ -562,6 +562,17 @@ The view uses `CAMetalDisplayLink` (iOS 17+).
   The baked anchors are only the cache for the start date.
 - **Labels hide under the HUD.** The UI publishes the rectangles it covers. Placement skips labels inside them and first tries a runtime alternate position, the next-best province in the component.
 - The map view is forced left-to-right internally; the text stays right-to-left.
+- **City labels (T-031).** A city is a dot and its name, one collision unit. The name sits beside the dot, never over it:
+  by default west of it, its trailing (east) end a fixed gap west of the dot (about 3 pt clear), anchored in the
+  left-to-right map space from the cached run's advance width (no extra shaping); where the west side falls on the sea,
+  across a border or on another label, east of the dot (its leading end the same gap east) or, where both sides do,
+  centred under it. The side is data per city in the map pack, chosen offline by the map tool with these tests
+  (`tools/city_labels.py` and `tools/check_overlay_labels.js` for the mockups' MENA overlay: Tripoli south, Benghazi
+  east, the rest west; two country names moved off city names). At runtime a unit that a HUD rectangle would cut, or the screen edge or the side inset
+  would slice, hides whole; one only unit tokens cover hides its dot and its name tries at most 4 spots next to the unit,
+  then hides (screen 14); all inside the background label placement (≤ once per 250 ms). The dot is a disc entry in the
+  glyph atlas: its dark ring drawn in the halo pass, its white fill in the fill pass, so layer 5 stays 2 draws and the
+  atlas does not grow.
 
 **Governor controls:** frame-rate cap, render scale (1.0 or 0.75), MSAA, blur to opaque, tween, maximum speed, prefetch.
 
@@ -1857,7 +1868,7 @@ As before:
 8. **Map, on Linux:**
    - picking; level and tile selection
    - **cache policy (no visible eviction under a pan script)**
-   - label placement with occluders; **runtime anchors** (Sudan after day 190 lands inside the new Sudan; Kuwait annexed in a stub)
+   - label placement with occluders; **runtime anchors** (Sudan after day 190 lands inside the new Sudan; Kuwait annexed in a stub); **city labels**: no city's dot inside its own name's box, no city name over another label, a cut unit hidden whole
    - **dash continuity** (pattern phase continuous across vertices)
    - `FrameScheduler`; governor
 9. **Benchmarks by work counter**, plus allocations per tick = 0 with «لماذا؟» values active.

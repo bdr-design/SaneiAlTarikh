@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-07T15:28:09.150Z",
+ "ranAt": "2026-11-08T16:28:23.320Z",
  "devices": [
   "i16promax",
   "se"
@@ -89,7 +89,7 @@
    "sample": [
     "ellipsis on \"الحزب الوطني الديمقراطي\"",
     "text outside the sheet's 12 pt padding: \"الحزب الوطني الديمقراطي\"",
-    "ellipsis on \"حاكم\""
+    "text overlap \"الحزب الوطني الديمقراطي\" / \"الحزب الوطني الديمقراطي\""
    ]
   },
   {
@@ -244,12 +244,26 @@
    ]
   },
   {
+   "name": "city dot under its name",
+   "ok": true,
+   "sample": [
+    "map city dot under its own name: 0"
+   ]
+  },
+  {
+   "name": "city name over a label",
+   "ok": true,
+   "sample": [
+    "map city name «القاهرة» over «مصر»"
+   ]
+  },
+  {
    "name": "map label cut",
    "ok": true,
    "sample": [
-    "map label العراق cut by a panel edge",
     "map city dot 4 cut by a panel edge",
-    "map label بنغازي cut by a panel edge"
+    "map label بنغازي cut by a panel edge",
+    "map city dot 7 cut by a panel edge"
    ]
   },
   {

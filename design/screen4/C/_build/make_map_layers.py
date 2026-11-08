@@ -1,10 +1,7 @@
 """Map layers for screen 4 variant C (province panel, compact card).
 
-1. ../map_overlay.svg: the approved D1 overlay with one change. The shared overlay places every city
-   label with text-anchor="start" 10 px left of its dot, meant for right-to-left text (label west of
-   the dot). Drawn through <img> the SVG runs left to right, so «القاهرة» lands on top of the Cairo
-   governorate and would hide the selection. Only that label gets direction="rtl", so it sits west of
-   its dot as the generator intended. Every other byte is unchanged.
+1. (No longer writes a copy of the overlay: the page loads the shared overlay, whose city names tools/city_labels.py
+   places beside their dots, «القاهرة» west of it. This only checks that.)
 2. Prints the Cairo governorate outline (Natural Earth admin-1, public domain) in the map image's
    pixel space (Miller, lon 5..62, lat 10..44, 1688 px wide: the same projection as tools/satellite.py),
    plus the bounding boxes of Cairo, the Nile delta governorates and Egypt. index.html embeds them.
@@ -22,15 +19,9 @@ from shapely.ops import unary_union, transform
 HERE = Path(__file__).resolve().parent
 SHARED = HERE.parents[2] / "shared"
 
-# 1. overlay copy with the Cairo label west of its dot
+# 1. the shared overlay places every city name beside its dot (tools/city_labels.py)
 svg = (SHARED / "map_mena_d1_overlay.svg").read_text(encoding="utf-8")
-old = '<text x="767" y="484"'
-assert svg.count(old) == 1, "Cairo label not found exactly once"
-start = svg.index(old)
-end = svg.index(">", start)
-assert svg[start:end].endswith('text-anchor="start"') and svg[end + 1:end + 8] == "القاهرة", "unexpected Cairo label"
-svg = svg[:end] + ' direction="rtl"' + svg[end:]
-(HERE.parent / "map_overlay.svg").write_text(svg, encoding="utf-8")
+assert svg.count('direction="rtl"') == 11, "run tools/city_labels.py first"
 
 # 2. Cairo outline + boxes in image pixels
 LON0, LON1, LAT0, LAT1, WIDTH = 5.0, 62.0, 10.0, 44.0, 1688

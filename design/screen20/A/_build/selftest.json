@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-08T02:33:10.028Z",
+ "ranAt": "2026-11-08T16:35:03.694Z",
  "inputs": {
   "files": [
    "index.html",
@@ -16,14 +16,14 @@
    "../../shared/devices.json",
    "_build/markets.css",
    "../../screen6/A/_build/sheet.html",
+   "../../screen4/A/map_overlay_cairo.svg",
    "../../shared/flag_eg.svg",
    "../../shared/flags/eg.svg",
    "../../shared/map_mena_d1.jpg",
-   "../../shared/map_mena_d1_overlay.svg",
    "header_cairo.jpg",
    "map_overlay_cairo.svg"
   ],
-  "sha1": "76c3677b78c0c5d34c56ecb76011c31c23d7c3eb"
+  "sha1": "091a4e848c1f2cf1c64a478b4ea1fa80d4bd56f1"
  },
  "cleanIssues": {
   "i16promax": [],
@@ -237,6 +237,20 @@
    "sample": [
     "scroll hint not centred in the clear strip under the fade: y 249.0..267.0 (strip 395.0..417.0)",
     "scroll hint over text: \"أهم سلعنا · تغيّر السعر العالمي في سنة\""
+   ]
+  },
+  {
+   "name": "city dot under its name",
+   "ok": true,
+   "sample": [
+    "map city dot under its own name: 0"
+   ]
+  },
+  {
+   "name": "city name over a label",
+   "ok": true,
+   "sample": [
+    "map city name «القاهرة» over «مصر»"
    ]
   },
   {

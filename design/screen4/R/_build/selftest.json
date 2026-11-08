@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-07T19:55:22.311Z",
+ "ranAt": "2026-11-08T16:34:41.665Z",
  "inputs": {
   "files": [
    "index.html",
@@ -15,11 +15,11 @@
    "../../shared/flag_eg.svg",
    "../../shared/flags/eg.svg",
    "../../shared/map_mena_d1.jpg",
-   "../../shared/map_mena_d1_overlay.svg",
+   "../A/map_overlay_cairo.svg",
    "header_cairo.jpg",
    "map_overlay_cairo.svg"
   ],
-  "sha1": "ae04866dffebb674d8b4d29ac7be0401a192e210"
+  "sha1": "2efec0b7f19f22c0f0015f64626d6d8d70bd1001"
  },
  "cleanIssues": {
   "i16promax": [],
@@ -164,8 +164,8 @@
    "ok": true,
    "sample": [
     "map label ليبيا sliced by the screen edge or the side inset",
-    "map label إيران sliced by the screen edge or the side inset",
-    "map label إيران squeezed between a panel and the screen edge"
+    "map label السعودية cut by a panel edge",
+    "map label إيران sliced by the screen edge or the side inset"
    ]
   },
   {
@@ -397,12 +397,26 @@
    ]
   },
   {
+   "name": "city dot under its name",
+   "ok": true,
+   "sample": [
+    "map city dot under its own name: 1"
+   ]
+  },
+  {
+   "name": "city name over a label",
+   "ok": true,
+   "sample": [
+    "map city name «الإسكندرية» over «مصر»"
+   ]
+  },
+  {
    "name": "map label cut",
    "ok": true,
    "sample": [
     "map label ليبيا sliced by the screen edge or the side inset",
-    "map label إيران sliced by the screen edge or the side inset",
-    "map label إيران squeezed between a panel and the screen edge"
+    "map label السعودية cut by a panel edge",
+    "map label إيران sliced by the screen edge or the side inset"
    ]
   },
   {

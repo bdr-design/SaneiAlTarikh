@@ -19,7 +19,7 @@ ends at 10° N, so the ring runs along that edge; `tools/sudan_outline.py` build
 selected province's language: a 2 pt white ring and a faint white fill. The map is placed so the country's north (to
 15° N, Khartoum and its name included) is in view and clear of every panel and hit box (the shared checker's map focus),
 the camera aiming the focus's centre at the open map's centre, the zoom 0.6 to 1.1 x the play screen's. The map names
-the country on its north («السودان», moved there from the base map's 13° N) and shows Khartoum's dot and name (its name west of the dot, as Cairo's).
+the country on its north («السودان», moved there from the base map's 13° N) and shows Khartoum's dot and name (its name west of the dot, as every city's).
 
 ## The card
 - Three headline numbers: السكان «44 مليون» (2011); الناتج «65 مليار $» (2010; the output fact screen 24 left to this

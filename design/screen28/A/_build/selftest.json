@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-08T13:14:25.581Z",
+ "ranAt": "2026-11-08T16:54:38.561Z",
  "inputs": {
   "files": [
    "index.html",
@@ -22,13 +22,13 @@
    "../../screen11/A/_build/sheet.html",
    "../../screen16/A/_build/sheet.html",
    "../../screen22/A/_build/sheet.html",
+   "../../screen4/A/map_overlay_cairo.svg",
    "../../shared/flag_eg.svg",
    "../../shared/map_mena_d1.jpg",
-   "../../shared/map_mena_d1_overlay.svg",
    "header_cairo.jpg",
    "map_overlay_cairo.svg"
   ],
-  "sha1": "f5aea6660851a8fbc0105ce98784c777df6e4981"
+  "sha1": "077a2b92dd86bd293165edf6b59b49556131f28b"
  },
  "cleanIssues": {
   "i16promax": [],
@@ -159,6 +159,20 @@
     "HUD element moved from its B3 position: .toast x 70.0..275.6 y 56.0..88.0",
     "HUD element moved from its B3 position: .btn.mode x 70.0..191.6 y 96.0..128.0",
     "HUD element moved from its B3 position: .btn.home x 70.0..141.5 y 136.0..168.0"
+   ]
+  },
+  {
+   "name": "city dot under its name",
+   "ok": true,
+   "sample": [
+    "map city dot under its own name: 2"
+   ]
+  },
+  {
+   "name": "city name over a label",
+   "ok": true,
+   "sample": [
+    "map city name «أسوان» over «السودان»"
    ]
   },
   {
@@ -715,7 +729,8 @@
    "name": "Khartoum dot buried",
    "ok": true,
    "sample": [
-    "Khartoum's dot under its name (the name goes west of the dot)"
+    "Khartoum's dot under its name (the name goes west of the dot)",
+    "map city dot under its own name: 5"
    ]
   },
   {

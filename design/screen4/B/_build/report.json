@@ -1,7 +1,7 @@
 {
  "se": {
   "device": "667x375 side 0 bottom 0 none",
-  "renderedAt": "2026-10-20T11:28:50.588Z",
+  "renderedAt": "2026-11-08T16:28:38.150Z",
   "issueCount": 0,
   "issues": [],
   "firstActionWithoutScroll": false,
@@ -188,7 +188,7 @@
      },
      {
       "l": "السكان 8.8 مليون، ثابت. لماذ",
-      "x0": 534,
+      "x0": 534.1,
       "x1": 646,
       "y0": 194,
       "y1": 238
@@ -196,7 +196,7 @@
      {
       "l": "الاضطراب 64، يرتفع. لماذا؟",
       "x0": 442.5,
-      "x1": 526,
+      "x1": 526.1,
       "y0": 194,
       "y1": 238
      },
@@ -655,7 +655,7 @@
  },
  "i16promax": {
   "device": "956x440 side 62 bottom 21 island",
-  "renderedAt": "2026-10-20T11:28:44.348Z",
+  "renderedAt": "2026-11-08T16:28:32.407Z",
   "issueCount": 0,
   "issues": [],
   "firstActionWithoutScroll": true,
@@ -1376,7 +1376,7 @@
  },
  "_selftest": {
   "device": "i16promax",
-  "ranAt": "2026-10-20T10:45:34.461Z",
+  "ranAt": "2026-11-08T16:28:57.457Z",
   "passed": true,
   "results": [
    {

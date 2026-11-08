@@ -421,12 +421,12 @@
   </defs>
 </svg>
 
-<!-- Map: approved D1 base + overlay, identical box, full-bleed. map_overlay.svg is the shared overlay with
-     only the «القاهرة» label moved west of its dot (see _build/make_map_layers.py), so it does not sit on the selection.
+<!-- Map: approved D1 base + overlay, identical box, full-bleed. The shared overlay places every city name beside its
+     dot (tools/city_labels.py), «القاهرة» west of it, so it does not sit on the selection.
      The selection layer uses the same 1688 x 1097 image space; the Cairo outline is Natural Earth admin-1. -->
 <div class="map" aria-hidden="true">
   <img src="../../shared/map_mena_d1.jpg" alt="">
-  <img src="map_overlay.svg" alt="">
+  <img src="../../shared/map_mena_d1_overlay.svg" alt="">
   <svg class="sel" viewBox="0 0 1688 1097" preserveAspectRatio="none">
     <path class="glow" vector-effect="non-scaling-stroke" d="M796.2,470.5L797.7,482.2L797.5,485.1L778.6,485.9L778.5,481.8L776.5,477.8L777.0,474.4L779.0,473.6L779.6,472.7L787.6,471.9L794.9,467.1Z"/>
     <path class="line" id="cairo" vector-effect="non-scaling-stroke" d="M796.2,470.5L797.7,482.2L797.5,485.1L778.6,485.9L778.5,481.8L776.5,477.8L777.0,474.4L779.0,473.6L779.6,472.7L787.6,471.9L794.9,467.1Z"/>

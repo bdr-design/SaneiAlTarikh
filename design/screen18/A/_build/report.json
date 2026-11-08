@@ -1,7 +1,7 @@
 {
  "se": {
   "device": "667x375 side 0 bottom 0 none",
-  "renderedAt": "2026-11-08T02:21:27.019Z",
+  "renderedAt": "2026-11-08T16:50:38.813Z",
   "inputs": {
    "files": [
     "index.html",
@@ -18,13 +18,13 @@
     "../../shared/devices.json",
     "_build/end.css",
     "../../shared/check/end_hud.py",
+    "../../screen4/A/map_overlay_cairo.svg",
     "../../shared/flag_eg.svg",
     "../../shared/flags/eg.svg",
     "../../shared/map_mena_d1.jpg",
-    "../../shared/map_mena_d1_overlay.svg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "075d13c87b2324d3e873e8e493e5a7021d92aeb9"
+   "sha1": "2573cd2714b799e5c5fadcac90e608a8c7b6be0c"
   },
   "issues": [],
   "views": {
@@ -1409,9 +1409,9 @@
    "_build/se_report_end.png"
   ],
   "pngSha1": {
-   "se.png": "a9c34b06270cd8c571f116ac8a008111f7513a59",
-   "_build/se_hit.png": "fb723d688107f6d29403eb48ad89aaa46e5b7196",
-   "_build/se_report_end.png": "fd3edb8f1ab8596d707729c3ec4a83227a3677f0"
+   "se.png": "0f6e2b1921f3b263d83d3c394fca73812aede278",
+   "_build/se_hit.png": "89030f2a51d3b2a9932e78f94ffc0e1746847eb2",
+   "_build/se_report_end.png": "5ef14c8a9772c5e6412784b390e84e751bc246ae"
   },
   "env": {
    "chromium": "153.0.8010.12"
@@ -1420,7 +1420,7 @@
  },
  "mini": {
   "device": "812x375 side 50 bottom 21 notch",
-  "renderedAt": "2026-11-08T02:21:32.851Z",
+  "renderedAt": "2026-11-08T16:50:44.392Z",
   "inputs": {
    "files": [
     "index.html",
@@ -1437,13 +1437,13 @@
     "../../shared/devices.json",
     "_build/end.css",
     "../../shared/check/end_hud.py",
+    "../../screen4/A/map_overlay_cairo.svg",
     "../../shared/flag_eg.svg",
     "../../shared/flags/eg.svg",
     "../../shared/map_mena_d1.jpg",
-    "../../shared/map_mena_d1_overlay.svg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "075d13c87b2324d3e873e8e493e5a7021d92aeb9"
+   "sha1": "2573cd2714b799e5c5fadcac90e608a8c7b6be0c"
   },
   "issues": [],
   "views": {
@@ -2849,9 +2849,9 @@
    "_build/mini_report_end.png"
   ],
   "pngSha1": {
-   "mini.png": "9fc1c6e3269f04db307d3ddde3ef8ab3eba34d6f",
-   "_build/mini_hit.png": "120cdf2b6a59a62d1e007a3aa26598499d6cfbcb",
-   "_build/mini_report_end.png": "8d0fbd16dbc16a82160685e365f297156fe46090"
+   "mini.png": "c345b8d6639bd923ec86c046b2e0020e8a484bce",
+   "_build/mini_hit.png": "3af26c03091e1ab90676ee12d86dc5f4abbec399",
+   "_build/mini_report_end.png": "17889063660b3756a2da0c0632152a12a7d3f2f6"
   },
   "env": {
    "chromium": "153.0.8010.12"
@@ -2860,7 +2860,7 @@
  },
  "i14": {
   "device": "844x390 side 47 bottom 21 notch",
-  "renderedAt": "2026-11-08T02:21:39.134Z",
+  "renderedAt": "2026-11-08T16:50:50.462Z",
   "inputs": {
    "files": [
     "index.html",
@@ -2877,13 +2877,13 @@
     "../../shared/devices.json",
     "_build/end.css",
     "../../shared/check/end_hud.py",
+    "../../screen4/A/map_overlay_cairo.svg",
     "../../shared/flag_eg.svg",
     "../../shared/flags/eg.svg",
     "../../shared/map_mena_d1.jpg",
-    "../../shared/map_mena_d1_overlay.svg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "075d13c87b2324d3e873e8e493e5a7021d92aeb9"
+   "sha1": "2573cd2714b799e5c5fadcac90e608a8c7b6be0c"
   },
   "issues": [],
   "views": {
@@ -4619,9 +4619,9 @@
    "_build/i14_report_end.png"
   ],
   "pngSha1": {
-   "i14.png": "b4a801fdc2206afc55bdc530bd18f87fbc8d2c1e",
-   "_build/i14_hit.png": "cd2740b288485e246854f54523987ae639cc5c0c",
-   "_build/i14_report_end.png": "9ae5c519d2ba97ceae66c95954658ccfd8c31418"
+   "i14.png": "edea096cbc8bf7740a6469291cd98dd69af85b19",
+   "_build/i14_hit.png": "1631da58737aaaa72a7a54e0cc3b16073f9897ea",
+   "_build/i14_report_end.png": "b7125031b06b5becc3be7f1d43e99bda313a1b0a"
   },
   "env": {
    "chromium": "153.0.8010.12"
@@ -4630,7 +4630,7 @@
  },
  "i16": {
   "device": "852x393 side 59 bottom 21 island",
-  "renderedAt": "2026-11-08T02:21:45.630Z",
+  "renderedAt": "2026-11-08T16:50:56.853Z",
   "inputs": {
    "files": [
     "index.html",
@@ -4647,13 +4647,13 @@
     "../../shared/devices.json",
     "_build/end.css",
     "../../shared/check/end_hud.py",
+    "../../screen4/A/map_overlay_cairo.svg",
     "../../shared/flag_eg.svg",
     "../../shared/flags/eg.svg",
     "../../shared/map_mena_d1.jpg",
-    "../../shared/map_mena_d1_overlay.svg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "075d13c87b2324d3e873e8e493e5a7021d92aeb9"
+   "sha1": "2573cd2714b799e5c5fadcac90e608a8c7b6be0c"
   },
   "issues": [],
   "views": {
@@ -6356,9 +6356,9 @@
    "_build/i16_report_end.png"
   ],
   "pngSha1": {
-   "i16.png": "a967b24c4a5c6b5934885cb277d8c017e8115bf3",
-   "_build/i16_hit.png": "9111a79c609e2af1dea575496ed241a455486371",
-   "_build/i16_report_end.png": "1d580763aed4084f1dea10405b8f2f15e7eee4a4"
+   "i16.png": "633564cd56c34d6b7d2d57fecbc8d56e79f0de76",
+   "_build/i16_hit.png": "c629fdfcd7fad059de7641c57fcad4a5048f85ee",
+   "_build/i16_report_end.png": "b79f06f296f18529f2d43b3fb92d5053fc0a57ef"
   },
   "env": {
    "chromium": "153.0.8010.12"
@@ -6367,7 +6367,7 @@
  },
  "i16pro": {
   "device": "874x402 side 62 bottom 21 island",
-  "renderedAt": "2026-11-08T02:21:51.928Z",
+  "renderedAt": "2026-11-08T16:51:03.360Z",
   "inputs": {
    "files": [
     "index.html",
@@ -6384,13 +6384,13 @@
     "../../shared/devices.json",
     "_build/end.css",
     "../../shared/check/end_hud.py",
+    "../../screen4/A/map_overlay_cairo.svg",
     "../../shared/flag_eg.svg",
     "../../shared/flags/eg.svg",
     "../../shared/map_mena_d1.jpg",
-    "../../shared/map_mena_d1_overlay.svg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "075d13c87b2324d3e873e8e493e5a7021d92aeb9"
+   "sha1": "2573cd2714b799e5c5fadcac90e608a8c7b6be0c"
   },
   "issues": [],
   "views": {
@@ -7593,9 +7593,9 @@
    "_build/i16pro_report_end.png"
   ],
   "pngSha1": {
-   "i16pro.png": "54aea312ada2e08168ff364321c5fc264b8bf426",
-   "_build/i16pro_hit.png": "f7669043014239ce7e8b98feb96b0b4c9bc1519a",
-   "_build/i16pro_report_end.png": "b2909047471d63308682b8b171e763fc6546b8e5"
+   "i16pro.png": "07d966007a7a8ec260848e3b792cdcbdf1d61eb9",
+   "_build/i16pro_hit.png": "d6108ecd8d4a0a834237f165717e40418cd1140b",
+   "_build/i16pro_report_end.png": "3b49ca630c353d505bc3a0b3dfa15ebb7cf25b2a"
   },
   "env": {
    "chromium": "153.0.8010.12"
@@ -7604,7 +7604,7 @@
  },
  "i11": {
   "device": "896x414 side 48 bottom 21 notch",
-  "renderedAt": "2026-11-08T02:21:57.379Z",
+  "renderedAt": "2026-11-08T16:51:08.941Z",
   "inputs": {
    "files": [
     "index.html",
@@ -7621,13 +7621,13 @@
     "../../shared/devices.json",
     "_build/end.css",
     "../../shared/check/end_hud.py",
+    "../../screen4/A/map_overlay_cairo.svg",
     "../../shared/flag_eg.svg",
     "../../shared/flags/eg.svg",
     "../../shared/map_mena_d1.jpg",
-    "../../shared/map_mena_d1_overlay.svg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "075d13c87b2324d3e873e8e493e5a7021d92aeb9"
+   "sha1": "2573cd2714b799e5c5fadcac90e608a8c7b6be0c"
   },
   "issues": [],
   "views": {
@@ -8848,9 +8848,9 @@
    "_build/i11_report_end.png"
   ],
   "pngSha1": {
-   "i11.png": "1b798bd50c8ca54659d5bd506a844b2c5b9b1029",
-   "_build/i11_hit.png": "139fa3fc497ac4a10c037bc45c6492a37b464cbb",
-   "_build/i11_report_end.png": "702713bb7388b86c228917c4b04196611f37ad84"
+   "i11.png": "73b7b0e0f7ae25191fc4af6d9c3a112a435d67a0",
+   "_build/i11_hit.png": "b88c88a292a9cd3c8eb79920c9a34e9b92975a6d",
+   "_build/i11_report_end.png": "1f55a64c399e1a4ec1886a797466f14373acfcda"
   },
   "env": {
    "chromium": "153.0.8010.12"
@@ -8859,7 +8859,7 @@
  },
  "i16promax": {
   "device": "956x440 side 62 bottom 21 island",
-  "renderedAt": "2026-11-08T02:22:03.101Z",
+  "renderedAt": "2026-11-08T16:51:14.331Z",
   "inputs": {
    "files": [
     "index.html",
@@ -8876,13 +8876,13 @@
     "../../shared/devices.json",
     "_build/end.css",
     "../../shared/check/end_hud.py",
+    "../../screen4/A/map_overlay_cairo.svg",
     "../../shared/flag_eg.svg",
     "../../shared/flags/eg.svg",
     "../../shared/map_mena_d1.jpg",
-    "../../shared/map_mena_d1_overlay.svg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "075d13c87b2324d3e873e8e493e5a7021d92aeb9"
+   "sha1": "2573cd2714b799e5c5fadcac90e608a8c7b6be0c"
   },
   "issues": [],
   "views": {
@@ -8928,7 +8928,6 @@
     "hiddenLabels": [
      "ليبيا",
      "إيران",
-     "العراق",
      "سوريا",
      "الأردن",
      "الإمارات",
@@ -9588,7 +9587,6 @@
     "hiddenLabels": [
      "ليبيا",
      "إيران",
-     "العراق",
      "سوريا",
      "الأردن",
      "الإمارات",
@@ -10165,9 +10163,9 @@
    "_build/i16promax_report_end.png"
   ],
   "pngSha1": {
-   "i16promax.png": "c1271250acc00b23e3002e2e9f44cdb1900bc840",
-   "_build/i16promax_hit.png": "ef87e8433fbefc65d5307116799a2f3b582bd2ea",
-   "_build/i16promax_report_end.png": "bc4baa959745b17ae868e34cbe47c64bdbf4080a"
+   "i16promax.png": "83565241391121192fa0ad0675b9cc90462bee36",
+   "_build/i16promax_hit.png": "9c7e52d42f0d29e02a490072383f22d749f4bd46",
+   "_build/i16promax_report_end.png": "e34b14507e06e7fa67c0e494cf7f4c3b61cc4d79"
   },
   "env": {
    "chromium": "153.0.8010.12"

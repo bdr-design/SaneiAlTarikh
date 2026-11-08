@@ -243,6 +243,27 @@ async function measure(p, d, menu) {
     taps.forEach((t) => { const r = t.hit; if (!(eg.x1 <= r.x0 || eg.x0 >= r.x1 || eg.y1 <= r.y0 || eg.y0 >= r.y1)) issues.push(`Egypt under the hit box of ${t.label}`); });
     const mapEl = q('.map').getBoundingClientRect();
     if (mapEl.left > 0.5 || mapEl.top > 0.5 || mapEl.right < W - 0.5 || mapEl.bottom < H - 0.5) issues.push('map not full-bleed');
+    // T-031: the map's names and city dots, never cut by a panel edge (2 pt margin, halo included) nor sliced by the screen
+    // edge or the side inset (cutLabels hides those); a city's name beside its dot (tools/city_labels.py), never over its
+    // own dot, another name or another city's dot
+    { const mk = mapEl.width / 1688, gl = panels.filter((p) => !p.menu).map((p) => p.r);
+      const bx = (e) => { const g = e.getBBox(), w = parseFloat(e.getAttribute('stroke-width') || 0) / 2; return [g.x - w, g.y - w, g.x + g.width + w, g.y + g.height + w]; };
+      const ov = (a, o) => Math.min(a[2], o[2]) - Math.max(a[0], o[0]) > 0.5 && Math.min(a[3], o[3]) - Math.max(a[1], o[1]) > 0.5;
+      document.querySelectorAll('.labels text, .labels circle').forEach((t) => {
+        if (!t.getClientRects().length) return;
+        const what = t.tagName === 'text' ? `label ${t.textContent}` : `city dot ${t.getAttribute('data-city')}`;
+        if (t.tagName === 'circle' && !document.querySelector(`.labels text[data-city="${t.getAttribute('data-city')}"]`).getClientRects().length) issues.push(`map city dot shown without its name: ${t.getAttribute('data-city')}`);
+        if (t.tagName === 'text' && t.hasAttribute('data-city')) { const a = bx(t);
+          document.querySelectorAll('.labels text, .labels circle').forEach((o) => { if (o === t || !o.getClientRects().length || !ov(a, bx(o))) return;
+            issues.push(o.tagName === 'circle' && o.getAttribute('data-city') === t.getAttribute('data-city') ? `map city dot under its own name: ${t.getAttribute('data-city')}`
+              : `map city name «${t.textContent}» over ${o.tagName === 'text' ? '«' + o.textContent + '»' : 'a city dot'}`); }); }
+        const r = t.getBoundingClientRect(), sw = parseFloat(t.getAttribute('stroke-width') || 0) / 2 * mk;
+        const b = { l: r.left - sw, t: r.top - sw, r: r.right + sw, b: r.bottom + sw };
+        if (b.r <= 0 || b.l >= W || b.b <= 0 || b.t >= H) return;      // off screen
+        const under = gl.some((o) => b.l >= o.left && b.r <= o.right && b.t >= o.top && b.b <= o.bottom);
+        if (!under && gl.some((o) => b.r > o.left - 2 && b.l < o.right + 2 && b.b > o.top - 2 && b.t < o.bottom + 2)) issues.push(`map ${what} cut by a panel edge`);
+        if (b.l < S - eps || b.r > W - S + eps || b.t < -eps || b.b > H + eps) issues.push(`map ${what} sliced by the screen edge or the side inset`);
+      }); }
 
     // HUD coverage (share of the screen under glass)
     const cov = (() => { const k = 2, cols = Math.ceil(W / k), rows = Math.ceil(H / k); let n = 0; const rs = panels.filter((p) => !p.menu).map((p) => p.r);
@@ -319,6 +340,29 @@ async function selftest(b) {
   const expect2 = [/dock end padding/, /nation card fit 0: .rg not shown/, /separator under إيقاف/, /hit box does not cover the control: الخريطة/, /the date's room .* is less than the widest date's/, /the date is not shown as fit 0 wants/, /a11y: the date is not read whole and in order/];
   const missed2 = expect2.filter((re) => !m2.issues.some((i) => re.test(i)));
   console.log(missed2.length ? 'SELFTEST FAILED, not caught: ' + missed2.join(', ') : 'selftest OK: all 7 planted QA defects were caught');
+  // T-031: the map's names: a cut name shown, a city's name over its dot, a city's name over another name, and the
+  // shared overlay with «السعودية» back over Riyadh's name, and «العراق» over Baghdad's dot
+  const IV = (e) => { if (!e || !e.getClientRects().length) return false; const r = e.getBoundingClientRect(); return r.left >= 0 && r.right <= innerWidth && r.top >= 0 && r.bottom <= innerHeight; };
+  const plants3 = [
+    ['cut name shown', '.labels .cut { display: inline !important; }', null, /map (label|city dot) .* (cut by a panel edge|sliced by the screen edge)/],
+    ['city dot under its name', '', `(${IV})`, /map city dot under its own name/, (iv) => { const inView = eval(iv); const t = [...document.querySelectorAll('.labels text[data-city]')].find((e) => inView(e) && inView(document.querySelector(`.labels circle[data-city="${e.getAttribute('data-city')}"]`))), c = document.querySelector(`.labels circle[data-city="${t.getAttribute('data-city')}"]`); t.removeAttribute('direction'); t.setAttribute('text-anchor', 'start'); t.setAttribute('x', +c.getAttribute('cx') - 10); t.setAttribute('y', +c.getAttribute('cy') + 7); }],
+    ['city name over a label', '', `(${IV})`, /map city name «.*» over /, (iv) => { const inView = eval(iv); const L = [...document.querySelectorAll('.labels text')].filter(inView), t = L.find((e) => e.hasAttribute('data-city')), o = L.find((e) => e !== t); t.setAttribute('x', o.getAttribute('x')); t.setAttribute('y', o.getAttribute('y')); t.setAttribute('text-anchor', o.getAttribute('text-anchor')); }],
+  ];
+  const missed3 = [];
+  for (const [name, css, iv, re, js] of plants3) {
+    const p3 = await open(ctx, PAGE + `?w=${d.w}&h=${d.h}&side=${d.side}&bottom=${d.bottom}&cutout=${d.cutout}`);
+    if (css) await p3.addStyleTag({ content: css });
+    if (js) await p3.evaluate(js, iv);
+    const m3 = await measure(p3, d, false); if (!m3.issues.some((i) => re.test(i))) missed3.push(name); await p3.close();
+  }
+  for (const [name, from, to, re] of [['overlay: «السعودية» back on Riyadh\'s name', 'x="1160" y="702"', 'x="1170" y="669"', /«الرياض» over «السعودية»/],
+    ['overlay: «العراق» on Baghdad\'s dot', 'x="1150" y="420"', 'x="1166" y="385"', /«العراق» over the dot of «بغداد»/]]) {
+    const os = require('os'), f = path.join(os.tmpdir(), 'b3_overlay_plant.svg'), svg = fs.readFileSync(path.join(OUT, '../../shared/map_mena_d1_overlay.svg'), 'utf8');
+    const bad = svg.replace(from, to);
+    if (bad === svg) { missed3.push(name + ' (plant not applied)'); continue; } fs.writeFileSync(f, bad);
+    const iss = await require(path.join(__dirname, '../../../../tools/check_overlay_labels.js')).check(b, f); fs.unlinkSync(f);
+    if (!iss.some((i) => re.test(i))) missed3.push(name); }
+  console.log(missed3.length ? 'SELFTEST FAILED, not caught: ' + missed3.join(', ') : 'selftest OK: all 5 planted map-name defects were caught');
   await ctx.close();
 }
 
@@ -329,6 +373,8 @@ async function selftest(b) {
   }
   const only = process.argv.slice(2);
   const b = await chromium.launch({ executablePath: process.env.CHROMIUM_PATH || undefined, args: ['--no-sandbox'] });
+  // T-031: the shared overlay's city names, measured once (tools/check_overlay_labels.js)
+  const ovIssues = (await require(path.join(__dirname, '../../../../tools/check_overlay_labels.js')).check(b, path.join(OUT, '../../shared/map_mena_d1_overlay.svg'))).map((i) => 'overlay: ' + i);
   const report = {};
   const jobs = [];
   DEVICES.forEach((d) => jobs.push({ d, menu: false, out: d.id }));
@@ -341,6 +387,7 @@ async function selftest(b) {
     const p = await open(ctx, PAGE + qs);
     await p.screenshot({ path: path.join(OUT, out + '.png') });
     const m = await measure(p, d, menu);
+    m.issues.push(...ovIssues);
     const ph = await open(ctx, PAGE + qs + '&hit=1');
     await ph.screenshot({ path: path.join(__dirname, out + '_hit.png') });
     await ph.close();

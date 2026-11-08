@@ -17,8 +17,6 @@ SYMBOLS = """    <symbol id="i-hands" viewBox="0 0 24 24"><path d="M2.5 11.5 6 8
 SUBS = [
     ('<img src="map_overlay_cairo.svg" alt="">', '<img src="map_overlay_cairo.svg" alt="">\n  '
      '<svg class="sel-country" viewBox="0 0 1688 1097" preserveAspectRatio="none" aria-hidden="true"><path d="%s"/></svg>' % SD['d']),
-    # Khartoum's name west of its dot, as Cairo's on the base (the base draws the other cities' names over their dots)
-    ('text-anchor="start">الخرطوم</text>', 'text-anchor="start" direction="rtl">الخرطوم</text>'),
     # the country's name on its north, in the map focus (the base map sets it at 13° N, south of the focus)
     ('<text x="740" y="992" ', '<text x="700" y="850" '),
     # the map's focus: the country's north (to 15° N, Khartoum and its name included), clear of every panel; the

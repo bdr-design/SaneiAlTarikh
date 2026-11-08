@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-08T02:16:59.157Z",
+ "ranAt": "2026-11-08T16:46:12.181Z",
  "inputs": {
   "files": [
    "index.html",
@@ -19,13 +19,13 @@
    "../../screen5/A/_build/sheet.html",
    "../../screen6/A/_build/sheet.html",
    "../../screen8/A/_build/sheet.html",
+   "../../screen4/A/map_overlay_cairo.svg",
    "../../shared/flag_eg.svg",
    "../../shared/flags/eg.svg",
    "../../shared/map_mena_d1.jpg",
-   "../../shared/map_mena_d1_overlay.svg",
    "map_overlay_cairo.svg"
   ],
-  "sha1": "4c7dd6871018de8d17eb54fa15215da8038769fb"
+  "sha1": "fde5b98abd647f8a6bacb37d48b860f1db2dbc0a"
  },
  "cleanIssues": {
   "i16promax": [],
@@ -162,6 +162,20 @@
     "HUD element moved from its B3 position: .toast x 70.0..275.6 y 56.0..88.0",
     "HUD element moved from its B3 position: .btn.mode x 70.0..191.6 y 96.0..128.0",
     "HUD element moved from its B3 position: .btn.home x 70.0..141.5 y 136.0..168.0"
+   ]
+  },
+  {
+   "name": "city dot under its name",
+   "ok": true,
+   "sample": [
+    "map city dot under its own name: 0"
+   ]
+  },
+  {
+   "name": "city name over a label",
+   "ok": true,
+   "sample": [
+    "map city name «القاهرة» over «مصر»"
    ]
   },
   {
