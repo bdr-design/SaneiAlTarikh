@@ -878,6 +878,13 @@ bound here; each item is a line in `docs/perf.md` (L12) and a test where one is 
   250 ms); the header flag on demand, once per country. The model under the open-panel rule: the estimate only at an
   intelligence refresh (D-19), the relation monthly, the network on an operation or intelligence change; nothing ticks;
   main thread the tap and the finished model only (L14).
+- **The start tour (screen 30).** A static sheet from the bundle's strings. At a new campaign it opens after the first
+  playable frame (outside §3.4's cold start) and ahead of the urgent decision waiting in the queue: the decision's sheet
+  model and category image are built and decoded only when the tour ends («ابدأ الحملة», skip or close), one sheet at a
+  time. The «المزيد» section's shared header image is copied once at open from the resident z4 base (off the main thread,
+  released on close, inside §3.3's panels line); the 40 pt flag on demand, cached apart and droppable (Flags). The ring is
+  a style on a HUD view (no layer, nothing drawn on the map); the game is paused, so no frames and no timers between taps,
+  and the held alert does not tick (L1); main thread the taps only (L14).
 
 ### 3.10 Names of any country (the second-country test, T-024)
 

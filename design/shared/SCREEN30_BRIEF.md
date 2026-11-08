@@ -4,32 +4,39 @@ Visual mockup. NOT app code. The build is `../screen30/A`. Task card: `tasks/T-0
 approved by Claude under the owner's delegation, to the owner's rules `mapCentral`, `sheetIdentity` and `ownerProxy`.
 
 ## The moment
-A new campaign has just started: Egypt, 1 January 2011 (screen 3's choice). The game opens paused with the tour; the
-player can reopen it later from «المزيد» › «المساعدة» (screen 13's row «كيف تلعب»). Onboarding is §6.1's pending item and
+A new campaign has just started: Egypt, 1 January 2011 (screen 3's choice). The game opens paused with the tour, first:
+the urgent Tunisia decision (screen 15) waits in the queue and opens when the tour ends. The player can reopen the tour
+later from «المزيد» › «حول» › «المساعدة» (screen 13's row «كيف تلعب»); reopened, it shows the current date and country,
+leaves out the first decision, and its last primary is «إنهاء الجولة» · «العودة إلى الخريطة» (time as it was). Onboarding is §6.1's pending item and
 M8's; the cut list (§12, item 5) calls its parts «onboarding cards».
 
 ## Frame
 A side sheet in the «المزيد» section's frame (help lives there: its grey identity, its dock item open), its own emblem (a
 compass), the map central and never dimmed (mapCentral): no scrim, no spotlight. A new sheet colour was measured and
 none clears ΔE2000 16 from every section, meaning and sheet colour at contrast ≥ 9, so the tour takes its section's.
-Header: the campaign's flag, «جولة البداية», «اللعبة متوقفة · 1 يناير 2011»; the close «تخطي الجولة، العودة إلى الخريطة
-واللعبة متوقفة». The game is paused: the play button shows play, read «تشغيل (اللعبة متوقفة)».
+Header: the campaign's flag, «جولة البداية», «اللعبة متوقفة · 1 يناير 2011»; the close «تخطي الجولة، تعود إليها من
+المزيد، حول، المساعدة. العودة إلى الخريطة واللعبة متوقفة». The game is paused: the play button shows play, read «تشغيل (اللعبة متوقفة)».
 
 ## The steps
 Five bodies, no tab row (&tab=s1..s5). Each: the heading «الخطوة n من 5 · title», a short text (the decision sheet's text
-style), then «التالي» (the one primary, naming the next step) and «تخطي الجولة» («تعود إليها من المزيد › المساعدة»); the
-last step's primary «ابدأ الحملة» («يستأنف الوقت بسرعة 1×») and no skip.
-1. **بلدك** (rings the nation card): the player governs Egypt from 1 January 2011; tap a province for its card, a country
-   for its state and our relation (screens 4 and 28).
+style), then «التالي» (the one primary, naming the next step) and «تخطي الجولة» («تعود إليها من المزيد › حول › المساعدة»);
+the last step's primary «ابدأ الحملة» («يفتح أول قرار: احتجاجات في تونس»: the decision sheet follows, time still
+stopped until the player chooses or puts it off) and no skip. No «السابق»: five short steps, and the whole tour stays in
+the help (lightness). The skip row keeps the link row's chevron (the shared row: it leads somewhere, here back to the map).
+1. **بلدك** (rings the nation card): the player governs Egypt from 1 January 2011, and its card at the top opens the
+   State panel; tap a province of Egypt for its card, any other country for its state and our relation (screens 4, 28).
 2. **المؤشرات** (rings the indicators row): the six indicators by their HUD labels; the arrow is the trend; a tap says why
    (screen 17).
-3. **الأقسام** (no ring: the dock hides under the sheet on the smaller phones): the seven sections' icons and names, as
-   the dock has them.
-4. **الوقت** (rings the date and speed bar): day by day, 1× to «أقصى» (the speed menu); pause any time; orders given
-   while paused run on resume (screen 26).
-5. **الأحداث** (rings the alert): news arrives here, important decisions stop time until the player chooses (screen 15);
-   the first news is the alert's «احتجاجات واسعة في تونس».
-The ring: a white 2 pt outline 3 pt outside the element; nothing is drawn over the map.
+3. **الأقسام** (no ring: the dock hides under the sheet on the smaller phones): the dock's eight icons and names, as the
+   dock has them (its label type, 10/500), two rows of four.
+4. **الوقت** (rings the date and speed bar): day by day; the 1× button picks the speed up to «أقصى» (the speed menu), the
+   play button pauses any time; orders given while the game is paused run on resume (screen 26).
+5. **الأحداث** (rings the alert): news arrives here and the bell gathers every notification; urgent decisions stop time
+   until the player chooses or puts them off (screen 15, «لاحقًا»); the first decision waiting is the alert's
+   «احتجاجات واسعة في تونس».
+The ring: a solid white 2 pt outline 3 pt outside the element (the element inside the side insets; the ring may reach
+5 pt into them); nothing is drawn over the map; the alert's badge drops its dark halo while ringed, so the ring runs
+unbroken.
 
 ## Rules
 - Western digits; no red; the Arabic counts.
@@ -37,11 +44,17 @@ The ring: a white 2 pt outline 3 pt outside the element; nothing is drawn over t
 ## Cost
 - A static sheet: five bodies from the bundle's strings; the ring is a style on a HUD element (no layer, no draw on the
   map); the game is paused, so the display link idles between taps (L1). Nothing ticks; main thread: the taps only (L14).
+- At a new campaign: after the first playable frame (outside §3.4's cold start), ahead of the queued urgent decision,
+  whose sheet model and category image are built only when the tour ends: one sheet at a time.
+- The «المزيد» section's shared header image (copied once at open from the resident z4 base, off the main thread,
+  released on close, inside §3.3's panels line) and the 40 pt flag on demand, cached and droppable (§3.9 Flags).
 
 ## Gate
 `screen30/A/_build/render.js` uses the shared checker (the «المزيد» section, five bodies and no tab row, the sections'
-step must fit) and adds: the header, emblem and close; no dialog or dimmer; the game shown paused; each step's heading,
-number and text; the one primary naming the next step (the last «ابدأ الحملة», resuming at 1×); the skip on every step
-but the last, saying the tour stays in the help; exactly the step's HUD element ringed, white 2 pt, on screen and clear
-of the sheet, none on the sections' step; the six indicators the HUD's; the seven sections the dock's (order, names,
-icons); the speeds the speed menu's; the first news the alert's. `--selftest` and `check_screen.py` must pass.
+step must fit) and adds: the header, emblem and close (saying the tour stays in the help); no dialog or dimmer; the game
+shown paused; each step's heading, number and text; each body exactly its text, one primary with its bar and (steps 1
+to 4) the skip; the primary naming the next step (the last «ابدأ الحملة», opening the first decision); the skip's path
+through «حول»; exactly the step's HUD element ringed and nothing else on the page (outline, shadow spread or white
+border, the map included), solid white 2 pt at 3 pt, inside the side insets, on screen and clear of the sheet, none on
+the sections' step; the date and country the HUD's; the six indicators the HUD's; the dock's eight sections (order,
+names, icons, two rows); the speed button and menu; the first decision the alert's and the bell named. `--selftest` and `check_screen.py` must pass.

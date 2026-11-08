@@ -6,9 +6,11 @@
   .r-body[data-tab] .r-sec:first-child h3 { padding-bottom: 0; border-bottom: 0; }
   /* the step's text: the decision sheet's (screen 15) */
   .d-text { text-wrap: pretty; margin: 0; font-size: var(--fs-sec); line-height: 18px; font-weight: 500; color: var(--t1); }
-  /* the sections: the dock's seven icons and names, three columns */
-  .t-secs { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--s1) var(--s2); margin: 0; padding: 0; list-style: none; }
-  .t-secs li { display: flex; align-items: center; gap: var(--s1); min-height: 24px; font-size: var(--fs-label); line-height: var(--lh-label); color: var(--t1); }
+  /* the sections: the dock's eight icons and names (its label type, 10/500), two rows of four */
+  .t-secs { display: grid; grid-template-columns: repeat(4, auto); justify-content: space-between; gap: var(--s1) var(--s2); margin: 0; padding: 0; list-style: none; }
+  .t-secs li { display: flex; align-items: center; gap: var(--s1); min-height: 24px; font-size: var(--fs-label); font-weight: 500; line-height: var(--lh-label); color: var(--t1); }
   .t-secs .i { width: 16px; height: 16px; flex: none; }
   /* the step's HUD element ringed: a white outline around it, nothing over the map */
   [data-tab="s1"] .hud .nation, [data-tab="s2"] .hud .stats, [data-tab="s4"] .hud .date, [data-tab="s5"] .hud .toast { outline: 2px solid var(--t1); outline-offset: 3px; }
+  /* the alert's badge keeps its disc but not its dark halo while ringed, so the ring runs unbroken */
+  [data-tab="s5"] .hud .toast .badge { box-shadow: none; }

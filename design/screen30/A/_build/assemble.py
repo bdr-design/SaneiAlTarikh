@@ -1,7 +1,7 @@
 """Build design/screen30/A/index.html (the start tour, «جولة البداية»: onboarding, §6.1's pending list and M8; its cards the
 cut list's «onboarding cards») with the shared panel builder (design/shared/check/panel_page.py): the approved B3 play
 screen, the approved panels' CSS, and this sheet's CSS and markup (tour.css, sheet.html). It opens by itself when a new
-campaign starts, the game paused, and again from «المزيد» › «المساعدة»: a side sheet in the «المزيد» section's frame (help
+campaign starts, the game paused, and again from «المزيد» › «حول» › «المساعدة»: a side sheet in the «المزيد» section's frame (help
 lives there; its own emblem), the map central and never dimmed (mapCentral). Five steps, one body each and no tab row
 (&tab=s1..s5); each step rings the HUD element it speaks about (a white outline around it, nothing over the map).
 Usage: python3 -I assemble.py <repo> <this _build dir> <out dir>"""
