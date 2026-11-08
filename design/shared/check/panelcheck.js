@@ -528,14 +528,15 @@ module.exports = function makeChecker(cfg) {
       taps.forEach((t) => { if (inter(rr, t.hit)) issues.push(`${what} under the hit box of ${t.label}`); });
       if (rr.x0 < S - eps || rr.x1 > W - S + eps || rr.y0 < 0 || rr.y1 > H - B + eps) issues.push(`${what} outside the safe screen`);
     };
-    cover(live(722, 428, 836, 492), 'Nile delta');      // the boxes placeMap keeps clear (index.html: DELTA and EG)
-    cover(live(583, 424, 945, 732), 'Egypt');
+    // the boxes placeMap keeps clear (index.html: DELTA and EG); a screen focused elsewhere names its own (cfg.mapFocus,
+    // map-space boxes: screen 27's front)
+    DATA.__focus.forEach(([x0, y0, x1, y1, n]) => cover(live(x0, y0, x1, y1), n));
     const me = q('.map').getBoundingClientRect();
     if (me.left > 0.5 || me.top > 0.5 || me.right < W - 0.5 || me.bottom < H - 0.5) issues.push('map not full-bleed');
     // the map stays central and undimmed (the owner's rule mapCentral): no fade or filter on it, and nothing drawn over
     // Egypt but the map itself, its labels and the device frame
     { const mp = q('.map'), cs = getComputedStyle(mp); if (effOp(mp) < 0.999 || cs.filter !== 'none') issues.push(`the map is dimmed (opacity ${effOp(mp).toFixed(2)}, filter ${cs.filter})`);
-      const eg = live(583, 424, 945, 732);
+      const eg = live(...DATA.__focus[DATA.__focus.length - 1].slice(0, 4));   // the focus (Egypt by default)
       [...document.body.querySelectorAll('*')].filter((e) => !e.closest('.map, .hud, .dev, .frost') && e.getClientRects().length).forEach((e) => { const cs2 = getComputedStyle(e), bg = cs2.backgroundColor;
         const filled = (bg && bg !== 'rgba(0, 0, 0, 0)' && bg !== 'transparent') || cs2.backgroundImage !== 'none' || cs2.backdropFilter !== 'none';
         if (filled && inter(box(e.getBoundingClientRect()), eg)) issues.push(`something drawn over the map: ${label(e)} (${bg})`); }); }
@@ -559,7 +560,7 @@ module.exports = function makeChecker(cfg) {
 
       return { issues, typeSeen, texts, clearNow, fit: { top: window.__fit, sheet: fit, sheetPos: window.__sheetpos, body }, map: m, hiddenLabels,
         sheet: R(sr), hits: taps.map((t) => ({ l: t.label, x0: +t.hit.x0.toFixed(1), x1: +t.hit.x1.toFixed(1), y0: +t.hit.y0.toFixed(1), y1: +t.hit.y1.toFixed(1) })) };
-    }, { d, TOK, BRIEF, HEAD, b3, view, HUDSEL_REST, DATA: cfg.DATA || {}, SCREEN: { src: cfg.screenChecks || '', tabs: TABS, fitTab: cfg.fitTab === false ? null : (cfg.fitTab || TABS[0]), noTabs: !!cfg.noTabs }, DOCK: cfg.dock || null });
+    }, { d, TOK, BRIEF, HEAD, b3, view, HUDSEL_REST, DATA: Object.assign({}, cfg.DATA || {}, { __focus: cfg.mapFocus || [[722, 428, 836, 492, 'Nile delta'], [583, 424, 945, 732, 'Egypt']] }), SCREEN: { src: cfg.screenChecks || '', tabs: TABS, fitTab: cfg.fitTab === false ? null : (cfg.fitTab || TABS[0]), noTabs: !!cfg.noTabs }, DOCK: cfg.dock || null });
   }
 
   async function contrast(p, texts) {
