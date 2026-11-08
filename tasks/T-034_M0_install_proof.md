@@ -72,10 +72,11 @@ build (each fixed at its cause, never by turning the language mode down without 
 - The ring log's file is written at launch (after the folders), at the start of a recording, at its idle/load switch,
   every 10 s while it runs, after it, after an export and on background: not a line-by-line mirror (§3.8's 1 MB file
   waits for the real log volume, M1a). A crash report itself comes from MetricKit; the dSYM is kept with each IPA.
-- Hitches count each stale refresh once, from presentation times alone: a gap of n refreshes between two presented
-  frames is n - 1 stale refreshes, whatever caused it (a skipped refresh, a late callback, a GPU-late or dropped frame),
-  booked when the later frame's presented handler runs (about two refreshes after encoding); the refresh estimate never drops below the requested 1/60 s; the last second's frames in flight are not
-  booked.
+- Hitches count each stale refresh once against the requested 60 a second, from presentation times alone: a gap of g
+  sixtieths between two presented frames counts floor(g + 0.25) - 1 (from 1.75 on, clear of a ProMotion half-step),
+  whatever caused it (a skipped refresh, a late callback, a GPU-late or dropped frame), so a run at 30 a second reads
+  30 a second; booked when the later frame's presented handler runs (about two refreshes after encoding); the last
+  second's frames in flight are not booked.
 - The CSV has no CPU time and no `phys_footprint` yet (free memory only); both join the recorder with M0b's map test.
 - ci-linux also runs on pushes to `claude/**` branches: the work is checked before a pull request exists (the owner
   reviews on GitHub's app); the concurrency group cancels superseded runs.

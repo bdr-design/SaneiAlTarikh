@@ -9,10 +9,11 @@ struct FrameStats: Sendable {
     var frames = 0
     /// Frames encoded while idle (one per request): 0 a second when nothing changes proves the link is paused (L1).
     var idleFrames = 0
-    /// Continuous refreshes that showed a stale frame, each counted once, from presentation times alone: a gap of n
-    /// refreshes between two presented frames is n - 1 stale refreshes, whatever made it (a skipped refresh, a late
-    /// callback, a frame the GPU presented late, a dropped frame). Booked in the row of the second the later frame is
-    /// presented, about two refreshes after it was encoded.
+    /// Continuous refreshes that showed a stale frame against the requested 60 a second, each counted once, from
+    /// presentation times alone: a gap of g sixtieths of a second between two presented frames counts
+    /// floor(g + 0.25) - 1 (from 1.75 sixtieths on, clear of a ProMotion half-step), whatever made it (a skipped refresh,
+    /// a late callback, a GPU-late or dropped frame). A run at 30 a second therefore reads 30 a second. Booked in the row
+    /// of the second the later frame is presented, about two refreshes after it was encoded.
     var hitches = 0
     /// The spacing of presented continuous frames, in ms (mean and worst).
     var intervalMeanMs = 0.0
@@ -46,10 +47,6 @@ final class RenderEngine: NSObject, @unchecked Sendable {
     private var pipeline: MTLRenderPipelineState?
     private var angle: Float = 0
     private var continuous = false
-    private var lastTarget: CFTimeInterval = 0
-    /// The refresh period while continuous: the smallest spacing of consecutive targets seen, never below the link's
-    /// requested 1/60 s (a ProMotion phone may deliver a 1/120 spacing once; the budget is 60 a second) nor above 1/30.
-    private var refresh: CFTimeInterval = 0
     /// Set when the app goes to the background: nothing unpauses the link until `resume()`.
     private var backgrounded = false
 
@@ -107,8 +104,6 @@ final class RenderEngine: NSObject, @unchecked Sendable {
     func setContinuous(_ on: Bool) {
         perform { [self] in
             self.continuous = on && !self.backgrounded
-            self.lastTarget = 0
-            self.refresh = 0
             self.lock.lock()
             self.lastPresented = 0
             self.lock.unlock()
@@ -181,13 +176,13 @@ final class RenderEngine: NSObject, @unchecked Sendable {
     }
 
     /// Called on Metal's thread when a continuous frame was presented (or dropped: presentedTime 0).
-    private func presented(at time: CFTimeInterval, refresh: CFTimeInterval) {
+    private func presented(at time: CFTimeInterval) {
         lock.lock()
         defer { lock.unlock() }
         guard time > 0 else { return }      // dropped: the gap to the next presented frame counts it
         if lastPresented > 0 {
             let gap = time - lastPresented
-            stats.hitches += max(0, Int((gap / refresh).rounded()) - 1)
+            stats.hitches += max(0, Int((gap * 60 + 0.25).rounded(.down)) - 1)
             intervalSum += gap
             intervalCount += 1
             stats.intervalMaxMs = max(stats.intervalMaxMs, gap * 1_000)
@@ -200,19 +195,9 @@ extension RenderEngine: CAMetalDisplayLinkDelegate {
     func metalDisplayLink(_ link: CAMetalDisplayLink, needsUpdate update: CAMetalDisplayLink.Update) {
         autoreleasepool {
             let start = DispatchTime.now().uptimeNanoseconds
-            let target = update.targetPresentationTimestamp
             if continuous {
-                if lastTarget > 0 {
-                    // the refresh: the smallest target spacing seen, between the requested 60 and 30 a second
-                    let seen = min(max(target - lastTarget, 1.0 / 60), 1.0 / 30)
-                    refresh = refresh > 0 ? min(refresh, seen) : seen
-                }
-                lastTarget = target
                 angle += 0.02
-                let r = refresh > 0 ? refresh : 1.0 / 60
-                update.drawable.addPresentedHandler { [self] d in
-                    self.presented(at: d.presentedTime, refresh: r)
-                }
+                update.drawable.addPresentedHandler { [self] d in self.presented(at: d.presentedTime) }
             }
             encode(into: update.drawable)
             EngineMeter.shared.record(.render, nanoseconds: DispatchTime.now().uptimeNanoseconds &- start)
