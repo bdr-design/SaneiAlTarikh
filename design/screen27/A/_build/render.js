@@ -98,7 +98,7 @@ require(path.join(OUT, '../../shared/check/panelcheck.js'))({
   // the map's focus is the front (front.json, map space), not Egypt: the shared checker keeps it clear of every panel and hit box
   mapFocus: [[FRONT.box.x0 + 14, FRONT.box.y0 + 8, FRONT.box.x1 - 10, FRONT.box.y1 - 2, 'the front line'], [FRONT.box.x0, FRONT.box.y0, FRONT.box.x1, FRONT.box.y1, 'the front and its names']],
   HEAD, BRIEF, screenChecks, DATA: { must: ['أجدابيا', 'البريقة', 'جالو', 'قطاعك', 'قطاع الحليف'] },
-  skipGeneric: ['Egypt covered', 'why without its subject', 'amber value without its icon', '% before its number', 'brief text hidden', '18 pt misuse', 'clipped text', 'gap', 'faint text', 'text into a control', 'chip arrow against its sign', 'chip not white', 'hint chevron missing (no tabs)', 'hint over the content (no tabs)'],
+  skipGeneric: ['Egypt covered', 'tap in the side inset', 'map label cut', 'tile icons cyan', 'why without its subject', 'amber value without its icon', '% before its number', 'brief text hidden', '18 pt misuse', 'clipped text', 'gap', 'faint text', 'text into a control', 'chip arrow against its sign', 'chip not white', 'hint chevron missing (no tabs)', 'hint over the content (no tabs)'],
   cases: (d, se) => [
     ['brief text hidden (front)', d, '', '', /brief text not fully visible/, () => { document.querySelector('.f-own .r-at b').style.opacity = '0'; }],
     ['18 pt misuse (front)', d, '', '.r-at > span { font-size: 18px !important; font-weight: 700 !important; }', /18 pt is for/],
@@ -110,6 +110,10 @@ require(path.join(OUT, '../../shared/check/panelcheck.js'))({
     ['hint chevron missing', se, '', '.r-hint { display: none !important; }', /scroll hint chevron missing with content below/],
     ['hint over the content', se, '', '.r-hint { bottom: 150px !important; }', /scroll hint not centred in the clear strip/],
     ['front covered', d, '', '', /the front and its names covered by panel/, () => { const m = document.querySelector('.map'); m.style.left = (parseFloat(getComputedStyle(m).left) + 300) + 'px'; }],
+    // the shared plants moved to this sheet and map: the posture's segments pushed into the side inset; the front's names
+    // that the hide pass took out shown again (Egypt's play-map labels are not drawn here, and there are no tiles)
+    ['tap in the side inset (posture)', d, '', '.sheet { right: -300px !important; }', /tap in side inset/],
+    ['front name cut', d, '', '', /the map name «بنغازي» is (under a panel|cut by the screen edge)/, () => { document.querySelectorAll('.f-labels .cut').forEach((e) => e.classList.remove('cut')); }],
     ['line under the sheet', d, '', '', /the front line runs under a panel/, () => { const m = document.querySelector('.map'); m.style.left = (parseFloat(getComputedStyle(m).left) + 380) + 'px'; }],
     ['line off screen', d, '', '', /the front line is not wholly on screen/, () => { const m = document.querySelector('.map'); m.style.left = (parseFloat(getComputedStyle(m).left) - 700) + 'px'; }],
     ['line solid', d, '', '.f-line { stroke-dasharray: none !important; }', /the front line is not amber and dashed/],
