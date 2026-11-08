@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-08T00:10:00.742Z",
+ "ranAt": "2026-11-08T00:13:19.893Z",
  "inputs": {
   "files": [
    "index.html",
@@ -24,7 +24,7 @@
    "header_cairo.jpg",
    "map_overlay_cairo.svg"
   ],
-  "sha1": "85327d2a3acf660524730c279bfc68bcc824ac86"
+  "sha1": "3e04edfed5007ff933ad56f22107bc74bbf9dd36"
  },
  "cleanIssues": {
   "i16promax": [],
@@ -607,7 +607,7 @@
   },
   {
    "name": "not now unclear",
-   "ok": false,
+   "ok": true,
    "sample": [
     "«ليس الآن» does not say it asks once and where the folder is picked later (الحفظ)",
     "brief text missing: لن يُعرض مرة أخرى · المجلد لاحقًا من الحفظ",
