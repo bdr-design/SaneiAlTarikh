@@ -1,0 +1,32 @@
+# The game's Linux checks (design_doc §2.8, M0 part): hygiene, build with warnings as errors, tests. The app targets are
+# left out (they need iOS); the Swift packages build and test here.
+name: ci-linux
+on:
+  push:
+    branches: [main, 'claude/**']
+    paths: ['Package.swift', 'Sources/**', 'Tests/**', 'App/**', '.github/workflows/ci-linux.yml', 'tools/checks/**']
+  pull_request:
+  workflow_dispatch:
+concurrency:
+  group: ci-linux-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  build-test:
+    runs-on: ubuntu-24.04
+    container: swift:6.0.3-noble
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - name: Hygiene
+        run: |
+          set -e
+          if find . -name '*.xcodeproj' -o -name '*.xcworkspace' | grep -q .; then
+            echo "No Xcode project in the tree: XcodeGen makes it from App/project.yml"; exit 1; fi
+          if grep -rnE '^\s*import\s+(Foundation|Dispatch)' Sources/SaneiCore Sources/SaneiEngine; then
+            echo "SaneiCore and SaneiEngine never import Foundation or Dispatch (§2.2)"; exit 1; fi
+          if grep -rnE '\b(Float|Double)\b' Sources/SaneiEngine; then
+            echo "SaneiEngine never uses Float or Double (§2.2)"; exit 1; fi
+      - name: Build (warnings as errors)
+        run: swift build -Xswiftc -warnings-as-errors
+      - name: Test
+        run: swift test -Xswiftc -warnings-as-errors

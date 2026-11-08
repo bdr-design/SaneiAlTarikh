@@ -7,3 +7,10 @@ terrain/
 .DS_Store
 __pycache__/
 *.pyc
+# the game build (XcodeGen makes the project in CI; never commit it)
+*.xcodeproj/
+*.xcworkspace/
+App/Generated/
+.build/
+/build/
+DerivedData/

@@ -443,7 +443,7 @@ Dependencies run one way: Core ← Content ← Engine ← AI; Core ← Map; Pres
 - **Invariants:** per account, Δbalance = Σ postings, in its own unit. The world account is exactly 0 after each monthly close. The day-1 closure is checked in LCU and in USD.
 
 **Threading.**
-- `GameHost` is an `actor` on the default executor. Its loop runs in a `Task` at `.utility` priority from ×1 to ×10 and at `.userInitiated` at maximum speed.
+- `GameHost` is an `actor` on **its own thread**: a dedicated-thread serial executor (the owner's rule `threadSpread`, 2026-11-08; ADR 0001), never a long loop on the shared cooperative pool, whose threads are fixed at the core count and kept for bounded parallel bursts. Its thread runs at `.utility` priority from ×1 to ×10 and at `.userInitiated` at maximum speed. The render engine has its own thread too (`CAMetalDisplayLink`, iOS 17), and so has the platform I/O engine (saves, logs, exports).
 - It sleeps with `ContinuousClock`. At maximum speed it runs 3 days per wake-up.
 - If a wake-up overruns, the effective speed drops and the HUD shows it.
 - While paused it waits on a control stream with no wake-ups.
