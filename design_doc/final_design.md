@@ -858,6 +858,14 @@ bound here; each item is a line in `docs/perf.md` (L12) and a test where one is 
   to one rebuild per snapshot publish; the allocation runs on the simulation engine inside the front-execution line (0.20
   ms), the geometry on the map engine's background buffer task; nothing on the main thread. Opening the front is one camera
   move (tiles under L7, the zoom clamped to 1.0 km/pt) and one background label placement (≤ once per 250 ms).
+- **The country info card (screen 28).** The tapped country's outline is a layer-3 border style class: the selected
+  polity's id a uniform tested against the GPU sovereign array, stencil-once, inside layer 3's ≤22 draws; its faint fill the
+  same test in layer 2 (total ≤50, §2.5); nothing built per tap. The camera moves only when the country's focus would sit
+  under the sheet or the HUD (one move, tiles under L7, those under the sheet culled; close does not move it); the latest
+  tap wins, retargeting the move and cancelling the earlier country's jobs. One background label placement (≤ once per
+  250 ms); the header flag on demand, once per country. The model under the open-panel rule: the estimate only at an
+  intelligence refresh (D-19), the relation monthly, the network on an operation or intelligence change; nothing ticks;
+  main thread the tap and the finished model only (L14).
 
 ### 3.10 Names of any country (the second-country test, T-024)
 
@@ -1549,7 +1557,7 @@ As in final-1.0, plus:
 |---|---|
 | **Approved** | Main play screen (as designed for the 17 Pro Max); UI tokens; main menu; new-game flow; **province panel** (2026-10-20: a 320 pt card first, the map stays the centre; «تفاصيل المحافظة» opens the full-height details with 4 tabs; `design/screen4/R`, brief `design/shared/SCREEN4_BRIEF.md`); **state panel** (2026-10-21, «اعتمد كل شي»: the full-height sheet with نظرة عامة / القيادة / السياسات / المشاريع, the section identity and white touches, one owner per law; `design/screen5/A`, brief `design/shared/SCREEN5_BRIEF.md`); **economy panel** (2026-10-21, approved by Claude under the owner's delegation: نظرة عامة / الميزانية / الضرائب والدعم / التجارة والعملة; `design/screen6/A`, brief `design/shared/SCREEN6_BRIEF.md`) |
 | **Pending design** (user's list) | the economy adjusters (budget line, tax, subsidy, money and currency; next); province details tabs الإنشاءات / القوات / السياسات; markets; politics and parties; internal and unrest; military fronts; forces and production; diplomacy; UN Security Council; intelligence; research; event and decision modal; war and peace; notifications; saves and settings; the "why" sheet; end screens |
-| **Pending design** (added) | Speed popover; map-mode popover; **the front and its sectors** (screen 27: own sector highlighted, partner sectors shown read-only, the posture for armies with no order of their own; the player arrows dropped under the decision «military»); pending-orders list; credits and sources; onboarding; country info card; **government chooser** (D-29); **small-phone variants of the top row** (D-31); **save mirror prompt** (D-28) |
+| **Pending design** (added) | Speed popover; map-mode popover; **the front and its sectors** (screen 27: own sector highlighted, partner sectors shown read-only, the posture for armies with no order of their own; the player arrows dropped under the decision «military»); pending-orders list; credits and sources; onboarding; **country info card** (screen 28: the tapped country outlined, its leader, population and output exact, its stability an estimate, our relation, treaty, dispute and network, links to the relation and a new operation); **government chooser** (D-29); **small-phone variants of the top row** (D-31); **save mirror prompt** (D-28) |
 
 **Economy panel, engine follow-up (from screen 6, 2026-10-21).** The economy panel shows items that §5.1 does not model yet. Until each one has a model, its values stay illustrative:
 - tourism receipts, as a traded-services flow;

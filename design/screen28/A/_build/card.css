@@ -1,0 +1,7 @@
+  /* ================= Screen 28, variant A: the country info card ================= */
+  .r-tabs { display: none; }
+  [data-tab="card"] .r-body[data-tab="card"] { display: flex; }
+  .r-body[data-tab="card"] { padding-top: 0; padding-bottom: var(--s3); gap: var(--s2); }
+  /* the tapped country on the map: a white ring (2 pt) and a faint fill, as the selected province's ring (screen 4) */
+  .map svg.sel-country { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; }
+  .sel-country path { fill: rgba(255, 255, 255, 0.08); stroke: #FFFFFF; stroke-width: 2px; stroke-linejoin: round; vector-effect: non-scaling-stroke; }

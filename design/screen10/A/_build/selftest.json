@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-08T02:03:37.289Z",
+ "ranAt": "2026-11-08T12:57:42.506Z",
  "inputs": {
   "files": [
    "index.html",
@@ -22,7 +22,7 @@
    "header_cairo.jpg",
    "map_overlay_cairo.svg"
   ],
-  "sha1": "cf2ae5ee27e628498be9ca831a8980a1efeae890"
+  "sha1": "7886135e0ef7638338b4d3612e7bda92f91385ee"
  },
  "cleanIssues": {
   "i16promax": [],
@@ -48,6 +48,7 @@
   "se_relations_at86": [],
   "se_relations_at172": [],
   "se_relations_at258": [],
+  "se_relations_at344": [],
   "se_treaties_at86": [],
   "se_treaties_at172": [],
   "se_un_at86": [],
@@ -237,9 +238,9 @@
    "name": "fades wrong",
    "ok": true,
    "sample": [
-    "control cut by its scroll area (bottom): إسرائيل: 12، سلام بارد، مع",
-    "hit box shaved by its clip: إسرائيل: 12، سلام بارد، مع",
-    "fades 0/0 do not match the scroll state (top 0, over 279.0)"
+    "control cut by its scroll area (bottom): السودان: 18، مياه النيل، ح",
+    "hit box shaved by its clip: السودان: 18، مياه النيل، ح",
+    "fades 0/0 do not match the scroll state (top 0, over 327.0)"
    ]
   },
   {
