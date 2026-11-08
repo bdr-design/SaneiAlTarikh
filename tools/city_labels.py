@@ -8,17 +8,17 @@ across a border or on another label, the name goes east of the dot instead (its 
 text-anchor="end"); and where both sides fall on the sea or a border, south of the dot (centred, its baseline 29 px
 under the dot's centre: text-anchor="middle"):
   - طرابلس (south): west of Tripoli is Tunisia (the name would cross the border), east of it the sea;
-  - بنغازي: west of Benghazi is the Gulf of Sirte (the name would sit in the sea);
-  - الرياض: west of Riyadh is the country name «السعودية».
-The country name «العراق» moves 27 px south and 19 px east (still in Iraq) so Baghdad's name, west of its dot, is clear
-of it. Every other label is unchanged.
+  - بنغازي: west of Benghazi is the Gulf of Sirte (the name would sit in the sea).
+Two country names move instead, so the city names west of their dots are clear of them (each still inside its country):
+«العراق» 27 px south and 19 px east (Baghdad), «السعودية» 33 px south and 10 px west (Riyadh: east of its dot the name
+would run off the play screen's east edge on every phone). Every other label is unchanged.
 Usage: python3 -I tools/city_labels.py   (then design/screen4/A/_build/make_overlay.py)"""
 import re
 from pathlib import Path
 
 SVG = Path(__file__).resolve().parents[1] / 'design/shared/map_mena_d1_overlay.svg'
-SIDE = {'طرابلس': 'south', 'بنغازي': 'east', 'الرياض': 'east'}   # every other city: west
-IRAQ_OLD, IRAQ_NEW = ('x="1131" y="393"', 'x="1150" y="420"')
+SIDE = {'طرابلس': 'south', 'بنغازي': 'east'}   # every other city: west
+MOVE = {'العراق': ('x="1131" y="393"', 'x="1150" y="420"'), 'السعودية': ('x="1170" y="669"', 'x="1160" y="702"')}
 s = SVG.read_text(encoding='utf-8')
 n = 0
 
@@ -39,10 +39,11 @@ def place(m):
 
 s = re.sub(r'(<circle [^>]*/>\s*)<text([^>]*)>([^<]*)</text>', place, s)
 assert n == 11, n
-if IRAQ_OLD in s:
-    i = s.index(IRAQ_OLD)
-    assert s[s.index('>', i) + 1:].startswith('العراق<'), 'unexpected label at the Iraq position'
-    s = s.replace(IRAQ_OLD, IRAQ_NEW, 1)
-assert s.count(IRAQ_NEW) == 1
+for name, (old, new) in MOVE.items():
+    if old in s:
+        i = s.index(old)
+        assert s[s.index('>', i) + 1:].startswith(name + '<'), 'unexpected label at ' + name
+        s = s.replace(old, new, 1)
+    assert s.count(new) == 1 and s[s.index('>', s.index(new)) + 1:].startswith(name + '<'), name
 SVG.write_text(s, encoding='utf-8')
 print('city names placed:', n, '(' + ', '.join(f'{k} {v}' for k, v in sorted(SIDE.items())) + '; the rest west)')

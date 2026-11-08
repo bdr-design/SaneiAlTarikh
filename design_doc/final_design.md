@@ -567,8 +567,8 @@ The view uses `CAMetalDisplayLink` (iOS 17+).
   left-to-right map space from the cached run's advance width (no extra shaping); where the west side falls on the sea,
   across a border or on another label, east of the dot (its leading end the same gap east) or, where both sides do,
   centred under it. The side is data per city in the map pack, chosen offline by the map tool with these tests
-  (`tools/city_labels.py` and `tools/check_overlay_labels.js` for the mockups' MENA overlay: Tripoli south, Benghazi and
-  Riyadh east, the rest west). At runtime a unit that a HUD rectangle would cut, or the screen edge or the side inset
+  (`tools/city_labels.py` and `tools/check_overlay_labels.js` for the mockups' MENA overlay: Tripoli south, Benghazi
+  east, the rest west; two country names moved off city names). At runtime a unit that a HUD rectangle would cut, or the screen edge or the side inset
   would slice, hides whole; one only unit tokens cover hides its dot and its name tries at most 4 spots next to the unit,
   then hides (screen 14); all inside the background label placement (≤ once per 250 ms). The dot is a disc entry in the
   glyph atlas: its dark ring drawn in the halo pass, its white fill in the fill pass, so layer 5 stays 2 draws and the

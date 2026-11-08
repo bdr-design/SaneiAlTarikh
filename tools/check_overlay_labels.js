@@ -1,7 +1,7 @@
 // Check the city names of the shared MENA overlay (design/shared/map_mena_d1_overlay.svg), measured in Chromium with the
 // project font, as the overlay is drawn (an <img> or the inline label layer, both left to right): every city name has
 // direction="rtl"; no city name is over its own dot (halo and ring included); no city name is over another label or
-// another city's dot. Usage: node tools/check_overlay_labels.js [overlay.svg]   (prints the issues; exit 1 if any)
+// another city's dot; no other name is over a city's dot. Usage: node tools/check_overlay_labels.js [overlay.svg]   (prints the issues; exit 1 if any)
 // Also: require('./check_overlay_labels.js').check(browser, file) -> Promise<string[]>
 const fs = require('fs');
 const path = require('path');
@@ -22,6 +22,10 @@ async function check(b, file) {
       if (hit(a, bb(dot))) out.push(`city name «${n}» over its own dot`);
       els.forEach((o) => { if (o === nm || o === dot) return; if (hit(a, bb(o))) out.push(`city name «${n}» over ${o.tagName === 'text' ? '«' + o.textContent + '»' : 'another city\'s dot'}`); });
     });
+    // a country (or any non-city) name over a city's dot: the dot must stay visible
+    const names = new Set(cities.map(([, nm]) => nm));
+    els.forEach((o) => { if (o.tagName !== 'text' || names.has(o)) return; const a = bb(o);
+      cities.forEach(([dot, nm]) => { if (hit(a, bb(dot))) out.push(`«${o.textContent}» over the dot of «${nm.textContent}»`); }); });
     return out;
   });
   await p.close();

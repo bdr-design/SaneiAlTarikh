@@ -15,10 +15,10 @@ west of its dot 772–782.
 
 ## Scope
 `tools/city_labels.py` places all 11 city names of the shared overlay beside their dots, right to left: west by default
-(its end 10 px west of the dot's centre), east where the west falls on the sea or another label (Benghazi: the Gulf of
-Sirte; Riyadh: «السعودية»), south where both sides do (Tripoli: Tunisia's border west, the sea east); «العراق» moves
-south off Baghdad's name. `tools/check_overlay_labels.js` measures the overlay (each name clear of its dot, of every
-other label and dot). `make_overlay.py` only checks the placement and regenerates screen 4's label layer, which every
+(its end 10 px west of the dot's centre), east where the west falls on the sea (Benghazi: the Gulf of Sirte), south where both sides do (Tripoli: Tunisia's border
+west, the sea east); «العراق» and «السعودية» move south off Baghdad's and Riyadh's names (east, Riyadh's name would run
+off the play screen's edge). `tools/check_overlay_labels.js` measures the overlay (each name clear of its dot, of every
+other label and dot; no other name over a city's dot). `make_overlay.py` only checks the placement and regenerates screen 4's label layer, which every
 map screen takes; screen 28's local fix dropped. Screen 1 (B3), which drew the overlay as one image, gets the same
 inline label layer with a cut step (`_build/labels.py`: a name a panel edge, the screen edge or the side inset would cut
 hides whole) and the label rules. Screen 4 variant C now loads the shared overlay (its stale copy removed); variants A,
@@ -27,7 +27,8 @@ label», with plants, in the panel checker and in the own checkers of screens 1 
 the city-label rules (layer 5: the dot in the glyph atlas) and the §8 test line.
 
 ## Acceptance criteria
-1. On every screen, every city name shown sits beside its dot (west unless the sea, a border or a label is there), the
+1. On every screen (the two-phone screen 4 proposals A, B and C excepted: superseded by 4R, not in the game), every city
+   name shown sits beside its dot (west unless the sea, a border or a label is there), the
    dot visible, never over another label; no name cut by a panel or the screen edge.
 2. The rules catch a name over its dot and over another label on every checker that checks the map's labels (planted),
    and the overlay check catches it in the shared overlay.

@@ -341,7 +341,7 @@ async function selftest(b) {
   const missed2 = expect2.filter((re) => !m2.issues.some((i) => re.test(i)));
   console.log(missed2.length ? 'SELFTEST FAILED, not caught: ' + missed2.join(', ') : 'selftest OK: all 7 planted QA defects were caught');
   // T-031: the map's names: a cut name shown, a city's name over its dot, a city's name over another name, and the
-  // shared overlay with Riyadh's name back west of its dot (over «السعودية»)
+  // shared overlay with «السعودية» back over Riyadh's name, and «العراق» over Baghdad's dot
   const IV = (e) => { if (!e || !e.getClientRects().length) return false; const r = e.getBoundingClientRect(); return r.left >= 0 && r.right <= innerWidth && r.top >= 0 && r.bottom <= innerHeight; };
   const plants3 = [
     ['cut name shown', '.labels .cut { display: inline !important; }', null, /map (label|city dot) .* (cut by a panel edge|sliced by the screen edge)/],
@@ -355,12 +355,14 @@ async function selftest(b) {
     if (js) await p3.evaluate(js, iv);
     const m3 = await measure(p3, d, false); if (!m3.issues.some((i) => re.test(i))) missed3.push(name); await p3.close();
   }
-  { const os = require('os'), f = path.join(os.tmpdir(), 'b3_overlay_plant.svg'), svg = fs.readFileSync(path.join(OUT, '../../shared/map_mena_d1_overlay.svg'), 'utf8');
-    const bad = svg.replace(/<text x="1245" y="655"([^>]*)text-anchor="end"/, '<text x="1225" y="655"$1text-anchor="start"');
-    if (bad === svg) missed3.push('overlay plant not applied'); fs.writeFileSync(f, bad);
+  for (const [name, from, to, re] of [['overlay: «السعودية» back on Riyadh\'s name', 'x="1160" y="702"', 'x="1170" y="669"', /«الرياض» over «السعودية»/],
+    ['overlay: «العراق» on Baghdad\'s dot', 'x="1150" y="420"', 'x="1166" y="385"', /«العراق» over the dot of «بغداد»/]]) {
+    const os = require('os'), f = path.join(os.tmpdir(), 'b3_overlay_plant.svg'), svg = fs.readFileSync(path.join(OUT, '../../shared/map_mena_d1_overlay.svg'), 'utf8');
+    const bad = svg.replace(from, to);
+    if (bad === svg) { missed3.push(name + ' (plant not applied)'); continue; } fs.writeFileSync(f, bad);
     const iss = await require(path.join(__dirname, '../../../../tools/check_overlay_labels.js')).check(b, f); fs.unlinkSync(f);
-    if (!iss.some((i) => /«الرياض» over «السعودية»/.test(i))) missed3.push('overlay: Riyadh back west'); }
-  console.log(missed3.length ? 'SELFTEST FAILED, not caught: ' + missed3.join(', ') : 'selftest OK: all 4 planted map-name defects were caught');
+    if (!iss.some((i) => re.test(i))) missed3.push(name); }
+  console.log(missed3.length ? 'SELFTEST FAILED, not caught: ' + missed3.join(', ') : 'selftest OK: all 5 planted map-name defects were caught');
   await ctx.close();
 }
 
