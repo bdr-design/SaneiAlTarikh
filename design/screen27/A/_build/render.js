@@ -70,7 +70,7 @@ if (3.24 / parseFloat(getComputedStyle(document.documentElement).getPropertyValu
     const h = hits(b, 6); if (h.length) issues.push(nm + ' is under a panel: ' + h.join(', '));
     if (!isDot) marks.forEach(([e, P, hw]) => { if (P.some(([x, y]) => x > b.left - hw - 2 && x < b.right + hw + 2 && y > b.top - hw - 2 && y < b.bottom + hw + 2)) issues.push(nm + ' is on the ' + (e === line ? 'front line' : 'sector band')); }); });
   const all = shown.concat(dots);
-  for (let i = 0; i < all.length; i++) for (let j = i + 1; j < all.length; j++) { const pair = (x, y) => x.classList.contains('f-dot') && x.nextElementSibling === y; if (pair(all[i], all[j]) || pair(all[j], all[i])) continue;   // a dot and its own name const a = all[i].getBoundingClientRect(), b = all[j].getBoundingClientRect();
+  for (let i = 0; i < all.length; i++) for (let j = i + 1; j < all.length; j++) { const pair = (x, y) => x.classList.contains('f-dot') && x.nextElementSibling === y; if (pair(all[i], all[j]) || pair(all[j], all[i])) continue;   /* a dot and its own name */ const a = all[i].getBoundingClientRect(), b = all[j].getBoundingClientRect();
     if (Math.min(a.right, b.right) - Math.max(a.left, b.left) > 0.5 && Math.min(a.bottom, b.bottom) - Math.max(a.top, b.top) > 0.5) issues.push('the map names «' + W(T(all[i])) + '» and «' + W(T(all[j])) + '» overlap'); }
   qa('.f-labels .f-dot').forEach((dt) => { const l = dt.nextElementSibling; if (!l || l.classList.contains('cut') !== dt.classList.contains('cut')) issues.push('a place dot without its name, or a name without its dot'); });
   // a hidden name must really be cut (edge or 6 pt of a panel)
