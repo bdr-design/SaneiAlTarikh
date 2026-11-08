@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-08T12:53:15.913Z",
+ "ranAt": "2026-11-08T13:01:21.539Z",
  "inputs": {
   "files": [
    "index.html",
@@ -28,7 +28,7 @@
    "header_cairo.jpg",
    "map_overlay_cairo.svg"
   ],
-  "sha1": "05b3d76c2e2d31e4732abbf4d58a565762deae40"
+  "sha1": "e42063fc61c17b94d151fed3ce770f53ec7a5a14"
  },
  "cleanIssues": {
   "i16promax": [],
@@ -700,6 +700,13 @@
     "panel not opaque: glass rgba(0, 0, 0, 0)",
     "panel radius glass: 0 (want 12)",
     "Sudan's name not shown on the map"
+   ]
+  },
+  {
+   "name": "Khartoum dot buried",
+   "ok": true,
+   "sample": [
+    "Khartoum's dot under its name (the name goes west of the dot)"
    ]
   },
   {
