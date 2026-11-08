@@ -7,3 +7,7 @@
     border-radius: var(--r-ctl); background: var(--card); box-shadow: inset 0 0 0 1px var(--stroke); }
   .c-src .r-at { flex: 1; min-width: 0; }
   .c-src .r-at > span { font-size: var(--fs-label); line-height: var(--lh-label); }
+  /* three tabs: the tab row has three columns (as screens 12 and 20) */
+  .r-tabs { grid-template-columns: repeat(3, 1fr); }
+  /* every section heading alike: no first-section rule (the data and values tabs open with a note) */
+  .r-body[data-tab] .r-sec:first-child h3 { padding-bottom: 0; border-bottom: 0; }

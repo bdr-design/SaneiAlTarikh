@@ -1326,7 +1326,7 @@ Each type has up to 4 inputs, labour per tier, capital cost and emissions. **Coe
 
 - **Combat power** P = Σ strength × firepower(type, **allocated equipment**, generation) × (0.25 + 0.75·organization) × supply × morale × combat-effectiveness value.
 - Defender and attacker multipliers and the frontage cap (plains 6, hills 4, mountains 3, urban 3, marsh 2) are as before.
-- **Losses** debit personnel (to the reserve pool as casualties) and equipment allocations. **Captured equipment** is credited to the capturer's pool at a capture rate (`design-target`).
+- **Losses** debit personnel (to the reserve pool as casualties) and equipment allocations. **Captured equipment** is credited to the capturer's pool at a capture rate: 15% of the equipment the loser loses (`design-target`: no dataset measures captures across wars; listed on the sources screen, screen 29).
 
 **Supply and routing:** as before. Sea lanes depend on naval control.
 

@@ -8,7 +8,7 @@ IGO, MIT, NASA's credit and no-endorsement terms).
 
 ## Evidence
 design_doc/final_design.md §4 (the sources table with each licence), §4.8, R5, R2 (a pending licence blocks release builds),
-§2.5 (the system Arabic font), §5.1 (the offset half-life), §5.4 (the capture rate), CREDITS.md (NASA's credit, the flags'
+§2.5 (the system Arabic font), D-26 (ETOPO not used), §5.2 (the unrest offset's half-life), §5.4 (the capture rate, recorded there for this screen: 15%), CREDITS.md (NASA's credit, the flags'
 licence and use), the approved screen 13 (the row, the version) and screen 23 (a sheet opened from «المزيد»).
 
 ## Scope
@@ -16,7 +16,7 @@ A side sheet in the «المزيد» section's frame with three tabs: the data s
 each source with what it feeds and its licence. Out of scope: the generator (stage 50), help, privacy.
 
 ## Acceptance criteria
-1. Every source shown gives what it feeds and the licence §4 gives it; NASA's credit and no-endorsement line; the flags
+1. Every source shown gives what it feeds and the licence §4 gives it; every §4 source whose licence asks for credit is shown; NASA's credit and no-endorsement line; the flags
    for identification only; the images with their registry; no source with a pending licence.
 2. The design values are said to be no data and outside the realism comparison, each with its value and section.
 3. A side sheet in «المزيد»'s frame, its own emblem, opened from screen 13's row and read as it; nothing opens the web;
