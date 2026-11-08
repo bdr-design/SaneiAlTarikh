@@ -26,10 +26,11 @@ row of three: البيانات (default), الخرائط والصور, قيم ت
   - الأرض والمناخ: DeltaDTM, Pronk 2024 (CC BY 4.0); Global Carbon Budget (CC BY 4.0); IPCC AR6 data (CC BY 4.0).
   The rule: every §4 source whose licence asks for credit (CC BY, UNdata, Unicode, MIT, NASA's terms) is shown, with the
   main public-domain and CC0 inputs; a source whose licence is still pending in §4 (OECD ICIO, SSP, land cover, Köppen and
-  the others) is never shown: it blocks a release build until resolved (R2).
+  the others) is never shown: it blocks a release build until resolved (R2). Land cover waits for the choice between
+  MODIS (pending) and ESA WorldCover (CC BY 4.0); if ESA WorldCover is chosen, it is shown here.
 - **الخرائط والصور:** الخرائط والأسماء: NASA Blue Marble (the Earth with its relief and sea depths; credit «مرصد الأرض في
-  ناسا، Reto Stöckli»), Natural Earth (public domain), geoBoundaries (the detailed provinces; CC BY 4.0 and CC BY 3.0
-  IGO), GMTED2010, USGS (terrain classes; public domain; ETOPO is not used: D-26), GeoNames (Arabic names; CC BY 4.0),
+  ناسا، Reto Stöckli»), Natural Earth (public domain), geoBoundaries (the detailed provinces; CC BY 4.0 / CC BY 3.0
+  IGO, file by file), GMTED2010, USGS (terrain classes; public domain; ETOPO is not used: D-26), GeoNames (Arabic names; CC BY 4.0),
   Unicode CLDR (Arabic names; the Unicode licence); the note «استخدام صور ناسا لا يعني أن ناسا تؤيد اللعبة.». الأعلام
   والصور: flag-icons by Panayiotis Lipiridis (MIT); the game's images «صُنعت خصيصًا لهذه اللعبة»; the note «الأعلام
   لتعريف الدول داخل اللعبة فقط.» The game draws text in the system Arabic font (§2.5): no font credit.

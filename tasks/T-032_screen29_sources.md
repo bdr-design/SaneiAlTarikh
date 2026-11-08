@@ -17,8 +17,10 @@ each source with what it feeds and its licence. Out of scope: the generator (sta
 
 ## Acceptance criteria
 1. Every source shown gives what it feeds and the licence §4 gives it; every §4 source whose licence asks for credit is shown; NASA's credit and no-endorsement line; the flags
-   for identification only; the images with their registry; no source with a pending licence.
-2. The design values are said to be no data and outside the realism comparison, each with its value and section.
+   for identification only; the images made for this game (the registry is stage 50's input); no source with a pending
+   licence.
+2. The design values are said to be no measured data and outside the game's realism, each with the design doc's value
+   and its section.
 3. A side sheet in «المزيد»'s frame, its own emblem, opened from screen 13's row and read as it; nothing opens the web;
    never a dialog over the map; Western digits.
 4. Gate: 0 issues on 7 phones, self-test, `check_screen.py` PASS; six independent read-only reviews, every confirmed

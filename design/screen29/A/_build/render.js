@@ -37,7 +37,7 @@ const SRC = [
   ['data', 'بيانات التقرير السادس · IPCC', 'IPCC AR6 WGI data', 'معايرة المناخ', 'CC BY 4.0', /CC BY 4\.0/],
   ['maps', 'NASA Blue Marble', '**NASA Blue Marble NG', 'صورة الأرض بتضاريسها وأعماقها', 'مرصد الأرض في ناسا، Reto Stöckli', /NASA imagery terms \(credit NASA Earth Observatory \/ Reto Stöckli/],
   ['maps', 'Natural Earth', 'Natural Earth 10m', 'الحدود والمدن', 'ملكية عامة', /^Public domain$/],
-  ['maps', 'geoBoundaries', 'geoBoundaries', 'حدود المحافظات التفصيلية', 'CC BY 4.0 وCC BY 3.0 IGO', /CC BY 3\.0 IGO \/ CC BY 4\.0/],
+  ['maps', 'geoBoundaries', 'geoBoundaries', 'حدود المحافظات التفصيلية', 'CC BY 4.0 / CC BY 3.0 IGO', /CC BY 3\.0 IGO \/ CC BY 4\.0/],
   ['maps', 'GMTED2010 · هيئة المساحة الأمريكية', 'GMTED2010 (USGS)', 'أنواع التضاريس', 'ملكية عامة', /^Public domain$/],
   ['maps', 'GeoNames', 'GeoNames', 'الأسماء العربية', 'CC BY 4.0', /CC BY 4\.0/],
   ['maps', 'Unicode CLDR', 'CLDR', 'الأسماء العربية', 'رخصة Unicode', /Unicode-3\.0/],
@@ -45,7 +45,7 @@ const SRC = [
 ];
 const rowOf = (key) => { const r = TABLE.filter((c) => c[1].includes(key)); if (r.length !== 1) throw new Error(`§4: ${r.length} rows for ${key}`); return r[0]; };
 SRC.forEach(([, n, k, , , re]) => { const lic = rowOf(k)[2]; if (!re.test(lic)) throw new Error(`§4 does not give ${n} that licence: ${lic}`);
-  if (PENDING.test(lic) && !/CLDR|GeoNames/.test(k)) throw new Error(`§4 says ${n}'s licence is pending: ${lic}`); });
+  if (PENDING.test(lic)) throw new Error(`§4 says ${n}'s licence is pending: ${lic}`); });
 // every §4 source whose licence asks for credit (CC BY, UNdata, Unicode, MIT, NASA's terms), not pending, is on the sheet
 const CREDIT = /CC BY|UNdata|Unicode|\bMIT\b|NASA imagery terms/;
 const UNSHOWN = TABLE.filter((r) => CREDIT.test(r[2]) && !/^(\*\*)?Pending|^Pending \//i.test(r[2]) && !SRC.some(([, , k]) => r[1].includes(k))).map((r) => r[1]);
