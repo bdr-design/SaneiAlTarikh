@@ -28,7 +28,8 @@ the help (lightness). The skip row keeps the link row's chevron (the shared row:
 2. **المؤشرات** (rings the indicators row): the six indicators by their HUD labels; the arrow is the trend; a tap says why
    (screen 17).
 3. **الأقسام** (no ring: the dock hides under the sheet on the smaller phones): the dock's eight icons and names, as the
-   dock has them (its label type, 10/500), two rows of four.
+   dock has them (its label type, 10/500), two rows of four; the icons at the sheet's 16 pt, one below the dock's 17
+   (a list inside a sheet, as every sheet icon).
 4. **الوقت** (rings the date and speed bar): day by day; the 1× button picks the speed up to «أقصى» (the speed menu), the
    play button pauses any time; orders given while the game is paused run on resume (screen 26).
 5. **الأحداث** (rings the alert): news arrives here and the bell gathers every notification; urgent decisions stop time
