@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-08T01:54:33.549Z",
+ "ranAt": "2026-11-08T02:11:01.249Z",
  "inputs": {
   "files": [
    "index.html",
@@ -25,7 +25,7 @@
    "header_cairo.jpg",
    "map_overlay_cairo.svg"
   ],
-  "sha1": "3f40370be8abdc31de09ed04a0cebb2bd3daf887"
+  "sha1": "73b6165a2d2bac261902a2eba928bdbe7a48e435"
  },
  "cleanIssues": {
   "i16promax": [],
@@ -73,7 +73,7 @@
    "ok": true,
    "sample": [
     "panel not opaque: جبهة شرق ليبيا rgba(9, 17, 25, 0.66)",
-    "contrast 3.2 for \"من أجدابيا إلى جالو · جي\""
+    "contrast 3.2 for \"من جنوب أجدابيا إلى جالو\""
    ]
   },
   {
@@ -96,6 +96,8 @@
    "name": "map faded",
    "ok": true,
    "sample": [
+    "the player's sector is not drawn (hidden or faint: 0.18)",
+    "the partner's sector is not drawn (hidden or faint: 0.14)",
     "the map is dimmed (opacity 0.30, filter none)"
    ]
   },
@@ -156,7 +158,7 @@
    "sample": [
     "contrast 1 for \"قطاعك\"",
     "contrast 1.03 for \"قطاع الصحراء\"",
-    "contrast 1.67 for \"من أجدابيا إلى جالو · جي\""
+    "contrast 1.67 for \"من جنوب أجدابيا إلى جالو\""
    ]
   },
   {
@@ -336,9 +338,9 @@
    "name": "fades wrong (no tabs)",
    "ok": true,
    "sample": [
-    "clipped text (bottom): \"نحو\" 589.58..606 y 355..370",
-    "clipped text (bottom): \"6\" 583.58..589.58 y 355..370",
-    "clipped text (bottom): \"إلى\" 569.05..583.58 y 355..370"
+    "clipped text (bottom): \"نحو\" 591.58..608 y 355..370",
+    "clipped text (bottom): \"6\" 585.58..591.58 y 355..370",
+    "clipped text (bottom): \"إلى\" 571.05..585.58 y 355..370"
    ]
   },
   {
@@ -352,7 +354,7 @@
    "name": "18 pt misuse (front)",
    "ok": true,
    "sample": [
-    "18 pt is for the panel's name and the adjusted values only: \"من أجدابيا إلى جالو · جيشان ·\"",
+    "18 pt is for the panel's name and the adjusted values only: \"من جنوب أجدابيا إلى جالو · جيشان ·\"",
     "18 pt is for the panel's name and the adjusted values only: \"11\"",
     "18 pt is for the panel's name and the adjusted values only: \"تشكيلًا\""
    ]
@@ -361,24 +363,24 @@
    "name": "clipped text (front)",
    "ok": true,
    "sample": [
-    "clipped text (sides): \"قطاع الصحراء\" 770.11..841 y 141..160",
-    "clipped text (sides): \"من أجدابيا إلى جالو · جيشان ·\" 725.63..841 y 159..174",
-    "horizontal overflow in قطاع الصحراءمن أجدابيا إلى"
+    "clipped text (sides): \"قطاع الصحراء\" 772.11..843 y 141..160",
+    "clipped text (sides): \"من جنوب أجدابيا إلى جالو · جيشان ·\" 702.33..843 y 159..174",
+    "horizontal overflow in قطاع الصحراءمن جنوب أجدابي"
    ]
   },
   {
    "name": "gap (front)",
    "ok": true,
    "sample": [
-    "gap 6 on قطاعك قطاع الصحراءمن أجداب",
-    "gap 6 on قطاعك قطاع الصحراءمن أجداب"
+    "gap 6 on قطاعك قطاع الصحراءمن جنوب ",
+    "gap 6 on قطاعك قطاع الصحراءمن جنوب "
    ]
   },
   {
    "name": "faint text (front)",
    "ok": true,
    "sample": [
-    "brief text not fully visible: من أجدابيا إلى جالو · جيشان · 11 تشكيلًا",
+    "brief text not fully visible: من جنوب أجدابيا إلى جالو · جيشان · 11 تشكيلًا",
     "brief text not fully visible: المجلس الوطني الانتقالي · الوضع: هجوم",
     "brief text cannot be scrolled clear of the fades: نحو 6 إلى 9 تشكيلات · تقدير"
    ]
@@ -388,17 +390,16 @@
    "ok": true,
    "sample": [
     "% shown before its number: \"نسبة 20%\"",
-    "the posture does not say it yields to an army's own order (the decision «military»)",
-    "brief text missing: أمر الجيش الخاص (تقدّم، هجوم، توقّف) يتقدم على وضع القطاع."
+    "the posture does not say an army's own order has priority (the decision «military»)",
+    "brief text missing: أمر الجيش الخاص (تقدّم، هجوم، توقّف) له الأولوية على وضع القطاع."
    ]
   },
   {
    "name": "text into a control (posture)",
-   "ok": true,
+   "ok": false,
    "sample": [
-    "text overlap \"وضع القطاع\" / \"تثبيت\"",
-    "text overlap \"للجيوش بلا أمر خاص\" / \"تثبيت\"",
-    "text over a control: \"وضع القطاع\" runs into «تثبيتهجوم»"
+    "setting 1: order must be .r-at, .s-seg (right to left)",
+    "contrast 1.06 for \"للجيوش بلا أمر خاص\""
    ]
   },
   {
@@ -412,9 +413,7 @@
    "name": "hint over the content",
    "ok": true,
    "sample": [
-    "scroll hint not centred in the clear strip under the fade: y 198.0..216.0 (strip 344.0..366.0)",
-    "scroll hint over text: \"تثبيت\"",
-    "contrast 1.02 for \"تثبيت\""
+    "scroll hint not centred in the clear strip under the fade: y 198.0..216.0 (strip 344.0..366.0)"
    ]
   },
   {
@@ -437,9 +436,9 @@
   },
   {
    "name": "front name cut",
-   "ok": true,
+   "ok": false,
    "sample": [
-    "the map name «بنغازي» is under a panel: toast glass ctl"
+    "the map name «رأس لانوف» is cut by the screen edge"
    ]
   },
   {
@@ -494,14 +493,15 @@
    "name": "bands swapped",
    "ok": true,
    "sample": [
-    "the sectors are not in their places (the partner's on the coast, the player's south of it)"
+    "the sectors are not in their places (the partner's on the coast, the player's south of it)",
+    "the player's band does not run from south of Ajdabiya to Jalu (as the sheet says)"
    ]
   },
   {
    "name": "front moving",
    "ok": true,
    "sample": [
-    "the front marks move (they must be static, L6)"
+    "the front marks or names move (they must be static, L6)"
    ]
   },
   {
@@ -514,11 +514,20 @@
   },
   {
    "name": "a name scaled",
+   "ok": false,
+   "sample": [
+    "the map name «أجدابيا» is 20px, not 14.93px",
+    "the map name «البريقة» is 20px, not 14.93px",
+    "the map name «جالو» is 20px, not 14.93px"
+   ]
+  },
+  {
+   "name": "a tag scaled",
    "ok": true,
    "sample": [
-    "the map name «أجدابيا» is 20px, not the constant 11.5",
-    "the map name «البريقة» is 20px, not the constant 11.5",
-    "the map name «جالو» is 20px, not the constant 11.5"
+    "the map name «قطاعك» is 14px, not 11.50px",
+    "the map name «قطاع الحليف» is 14px, not 11.50px",
+    "the map name «قوات القذافي» is 14px, not 11.50px"
    ]
   },
   {
@@ -530,9 +539,9 @@
   },
   {
    "name": "names overlap",
-   "ok": true,
+   "ok": false,
    "sample": [
-    "the map names «قطاعك» and «قطاع الحليف» overlap"
+    "the map name «قطاع الحليف» is on the sector band"
    ]
   },
   {
@@ -604,7 +613,9 @@
    "name": "three postures",
    "ok": true,
    "sample": [
-    "the posture is not one radio choice تثبيت | هجوم with one chosen"
+    "text overlap \"انسحاب\" / \"أمر الجيش الخاص (تقدّم، هجوم، توقّف) له الأولوية على وضع القطاع.\"",
+    "hit overlap تثبيت / انسحاب",
+    "setting 1: choices not right to left"
    ]
   },
   {
@@ -619,9 +630,143 @@
    "name": "posture overrides",
    "ok": true,
    "sample": [
-    "the posture does not say it yields to an army's own order (the decision «military»)",
-    "brief text missing: أمر الجيش الخاص (تقدّم، هجوم، توقّف) يتقدم على وضع القطاع.",
-    "brief text missing: أمر الجيش الخاص (تقدّم، هجوم، توقّف) يتقدم على وضع القطاع."
+    "the posture does not say an army's own order has priority (the decision «military»)",
+    "brief text missing: أمر الجيش الخاص (تقدّم، هجوم، توقّف) له الأولوية على وضع القطاع.",
+    "brief text missing: أمر الجيش الخاص (تقدّم، هجوم، توقّف) له الأولوية على وضع القطاع."
+   ]
+  },
+  {
+   "name": "partner band west",
+   "ok": true,
+   "sample": [
+    "the partner's sector is not wholly on the coalition's (east) side of the line",
+    "the map name «البريقة» is on the sector band"
+   ]
+  },
+  {
+   "name": "own band west",
+   "ok": true,
+   "sample": [
+    "the player's sector is not wholly on the coalition's (east) side of the line",
+    "the player's band does not run from south of Ajdabiya to Jalu (as the sheet says)"
+   ]
+  },
+  {
+   "name": "own band short of Jalu",
+   "ok": true,
+   "sample": [
+    "the player's band does not run from south of Ajdabiya to Jalu (as the sheet says)"
+   ]
+  },
+  {
+   "name": "enemy town drawn ours",
+   "ok": true,
+   "sample": [
+    "the place «البريقة» is on the other side but its dot is not hollow"
+   ]
+  },
+  {
+   "name": "partner band hidden",
+   "ok": true,
+   "sample": [
+    "the partner's sector is not drawn (hidden or faint: 0.00)"
+   ]
+  },
+  {
+   "name": "own band invisible",
+   "ok": true,
+   "sample": [
+    "the player's sector is not drawn (hidden or faint: 0.60)"
+   ]
+  },
+  {
+   "name": "band too wide",
+   "ok": true,
+   "sample": [
+    "the player's sector is 140px wide, not 9",
+    "the partner's sector runs under a panel: btn glass ctl tap mode",
+    "the partner's sector is 140px wide, not 9"
+   ]
+  },
+  {
+   "name": "zoom past 1 km/pt",
+   "ok": true,
+   "sample": [
+    "the front line is not wholly on screen in the safe area",
+    "the player's sector is not wholly on screen in the safe area",
+    "the partner's sector is not wholly on screen in the safe area"
+   ]
+  },
+  {
+   "name": "posture in the partner section",
+   "ok": true,
+   "sample": [
+    "the posture is not the sheet's one choice, in the player's sector",
+    "a control in the partner's sector (read-only)"
+   ]
+  },
+  {
+   "name": "attack locked",
+   "ok": true,
+   "sample": [
+    "the posture is locked though this is a war"
+   ]
+  },
+  {
+   "name": "posture slot empty",
+   "ok": true,
+   "sample": [
+    "the posture's track is wider than its options (an empty slot)"
+   ]
+  },
+  {
+   "name": "own reads the wrong places",
+   "ok": true,
+   "sample": [
+    "a11y: «قطاع الصحراء» does not read all it shows (جنوب، أجدابيا، إلى، جالو)"
+   ]
+  },
+  {
+   "name": "enemy bound dropped",
+   "ok": true,
+   "sample": [
+    "a11y: «قوات حكومة القذافي» does not read all it shows (إلى، 9)"
+   ]
+  },
+  {
+   "name": "dot under the sheet",
+   "ok": true,
+   "sample": [
+    "the dot of «جالو» is under a panel: sheet glass"
+   ]
+  },
+  {
+   "name": "names animated",
+   "ok": true,
+   "sample": [
+    "the front marks or names move (they must be static, L6)"
+   ]
+  },
+  {
+   "name": "name hidden though it fits",
+   "ok": false,
+   "sample": [
+    "the front's name «أجدابيا» is not shown"
+   ]
+  },
+  {
+   "name": "name on the band",
+   "ok": true,
+   "sample": [
+    "the map name «جالو» is on the front line",
+    "the map name «جالو» is on the sector band"
+   ]
+  },
+  {
+   "name": "alert of January",
+   "ok": true,
+   "sample": [
+    "the HUD alert is not the day's («هجوم على أجدابيا»)"
    ]
   },
   {
@@ -652,7 +797,7 @@
    "ok": true,
    "sample": [
     "the enemy is not given as an estimated range (D-19)",
-    "a11y: «قوات حكومة القذافي» does not read all it shows",
+    "a11y: «قوات حكومة القذافي» does not read all it shows (8)",
     "brief text missing: نحو 6 إلى 9 تشكيلات · تقدير"
    ]
   },
@@ -660,7 +805,7 @@
    "name": "group unread",
    "ok": true,
    "sample": [
-    "a11y: «قطاع الصحراء» does not read all it shows"
+    "a11y: «قطاع الصحراء» does not read all it shows (من، جنوب، أجدابيا، إلى، جالو، جيشان، 11، تشكيلًا)"
    ]
   },
   {
