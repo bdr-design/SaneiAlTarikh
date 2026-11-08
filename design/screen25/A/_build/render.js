@@ -17,17 +17,17 @@ const S13 = (() => { const raw = fs.readFileSync(path.join(OUT, '../../screen13/
   if (!now || !mir || !tab) throw new Error('cannot read the «المزيد» panel\'s saves tab');
   return { country: now[1], date: now[2] + ' ' + now[3] + ' ' + now[4], title: mir[1], mirror: mir[2], opens: mir[3], tab: tab[1] }; })();
 const EVERY = (() => { const doc = fs.readFileSync(path.join(OUT, '../../../design_doc/final_design.md'), 'utf8');
-  const m = doc.match(/Each manual save and the newest autosave are copied at most every (\d+) real minutes and on background/);
+  const m = doc.match(/It copies the manual saves and the newest autosave that changed since the last copy, at most once every (\d+) real minutes/);
   if (!m) throw new Error('cannot read §7 «Mirror»'); return +m[1]; })();
-const HEAD = ['نسخة احتياطية', 'حملة مصر · حُفظ 1 يناير 2011'];
+const HEAD = ['نسخة احتياطية', 'حملة مصر · حُفظ الآن'];
 const CELLS = [['المجلد', 'صانع التاريخ'], ['المكان', 'iCloud Drive']];
 const BRIEF = {
-  ask: HEAD.concat(['احمِ حفظك', 'اختيار مجلد', 'مرة واحدة · مثل iCloud Drive', 'ليس الآن', 'لن نسأل مرة أخرى · تجده في الحفظ']),
-  reach_ask: ['الحفظ في هذا الجهاز فقط، ويضيع إذا حُذفت اللعبة. اختر مجلدًا مرة واحدة، مثل iCloud Drive، فتُنسخ إليه الحفظات تلقائيًا.'],
-  done: HEAD.concat(['تُنسخ الحفظات', 'تم', 'العودة إلى الحفظ', 'تغيير المجلد', 'يفتح منتقي المجلدات']),
-  reach_done: CELLS.flat().concat(['يُنسخ كل حفظ يدوي وأحدث حفظ تلقائي، مرة كل 10 دقائق على الأكثر، وعند الخروج من اللعبة.']),
-  stale: HEAD.concat(['المجلد غير متاح', 'اختيار المجلد مرة أخرى', 'يفتح منتقي المجلدات', 'ليس الآن', 'يبقى الحفظ في هذا الجهاز فقط']),
-  reach_stale: ['لا تصل اللعبة إلى مجلد صانع التاريخ في iCloud Drive؛ ربما نُقل أو حُذف. الحفظ مستمر في هذا الجهاز، لكن دون نسخة.'],
+  ask: HEAD.concat(['احمِ حفظك', 'اختيار مجلد', 'مرة واحدة · مثل iCloud Drive', 'ليس الآن', 'لن يُعرض مرة أخرى · المجلد لاحقًا من الحفظ']),
+  reach_ask: ['الحفظ في هذا الجهاز فقط، ويضيع إذا حُذفت اللعبة. اختر مجلدًا مرة واحدة، مثل iCloud Drive، فتُنسخ إليه ملفات الحفظ تلقائيًا.'],
+  done: HEAD.concat(['تُنسخ ملفات الحفظ', 'تم', 'العودة إلى الحفظ', 'تغيير المجلد', 'يفتح منتقي المجلدات']),
+  reach_done: CELLS.flat().concat(['نُسخ هذا الحفظ الآن. بعده يُنسخ كل حفظ يدوي وأحدث حفظ تلقائي عند الحفظ أو الخروج من اللعبة، مرة كل 10 دقائق على الأكثر.']),
+  stale: HEAD.concat(['المجلد غير متاح', 'اختيار المجلد مرة أخرى', 'يفتح منتقي المجلدات', 'ليس الآن', 'يبقى الحفظ في هذا الجهاز فقط حتى يعود المجلد']),
+  reach_stale: ['لا تصل اللعبة إلى مجلد صانع التاريخ في iCloud Drive؛ ربما حُذف، أو أُوقف iCloud Drive. الحفظ مستمر في هذا الجهاز، لكن دون نسخة.'],
 };
 
 const screenChecks = `
@@ -41,7 +41,10 @@ const bt = (e) => W(T(e.querySelector('.r-at b'))), st = (e) => W(T(e.querySelec
 // (the title is short, «نسخة احتياطية»: the row's own «نسخة في مجلد آخر» runs onto the bright part of the section's header
 //  image; the body says what the copy is and where it goes)
 if (W(T(q('.sheet .r-name'))) !== DATA.title || s13.title !== 'نسخة في مجلد آخر' || s13.mirror !== 'لم يُختر مجلد' || s13.opens !== 'يفتح اختيار المجلد') issues.push('the title is not «' + DATA.title + '», or the saves tab\\'s mirror row is not «نسخة في مجلد آخر» with no folder chosen, opening the folder choice');
-if (W(T(q('.sheet .r-sub'))) !== 'حملة ' + s13.country + ' · حُفظ ' + s13.date) issues.push('the header does not name the campaign and the save just made (' + s13.country + '، ' + s13.date + ')');
+if (W(T(q('.sheet .r-sub'))) !== 'حملة ' + s13.country + ' · حُفظ الآن') issues.push('the header does not name the campaign and the save just made (حملة ' + s13.country + ' · حُفظ الآن: the real time, as screen 23)');
+// one word for the files: «ملفات الحفظ» (screen 13), never «الحفظات»; a product name never splits over two lines
+if (/الحفظات/.test(T(q('.sheet')))) issues.push('«الحفظات»: the files are «ملفات الحفظ» (screen 13)');
+qa('.sheet .s-note .ltr').forEach((e) => { const tops = new Set([...e.getClientRects()].map((r) => Math.round(r.top))); if (tops.size > 1) issues.push('«' + W(T(e)) + '» splits over two lines'); });
 { const f = q('.sheet .r-flag img'); if (!f || !(f.getAttribute('src') || '').endsWith('/eg.svg') || f.getAttribute('alt') !== 'علم ' + s13.country) issues.push('the header flag is not the campaign\\'s (' + s13.country + ')'); }
 if (!q('.sheet .s-emb use[href="#i-folder"]')) issues.push('the emblem is not the folder');
 if (q('.sheet .r-x').getAttribute('aria-label') !== 'إغلاق، العودة إلى ' + s13.tab) issues.push('a11y: the close is not «إغلاق، العودة إلى ' + s13.tab + '»');
@@ -62,24 +65,29 @@ if (document.querySelector('[role="dialog"], [role="alertdialog"], dialog, .moda
   if (!/في هذا الجهاز فقط/.test(n) || !/يضيع إذا حُذفت اللعبة/.test(n) || !/مرة واحدة/.test(n) || !/iCloud Drive/.test(n) || !/تلقائيًا/.test(n)) issues.push('the ask does not say: this device only, lost if the game is deleted, picked once (an example folder), copied automatically');
   const a = acts(ask);
   if (a[0] && !/\\. يفتح منتقي المجلدات$/.test(al(a[0]))) issues.push('a11y: «اختيار مجلد» does not say it opens the folder picker');
-  if (a[1] && (!/لن نسأل مرة أخرى/.test(st(a[1]) + al(a[1])) || !(st(a[1]).endsWith('في ' + s13.tab)) || !al(a[1]).endsWith('في ' + s13.tab))) issues.push('«ليس الآن» does not say it asks once and where the choice stays (' + s13.tab + ')'); }
+  if (a[1] && (!/لن يُعرض مرة أخرى/.test(st(a[1])) || !/لن يُعرض هذا مرة أخرى/.test(al(a[1])) || !st(a[1]).endsWith('المجلد لاحقًا من ' + s13.tab) || !al(a[1]).endsWith('المجلد لاحقًا من ' + s13.tab))) issues.push('«ليس الآن» does not say it asks once and where the folder is picked later (' + s13.tab + ')'); }
 // the chosen folder: its name and place; what is copied and how often (§7)
 { const sc = [...done.querySelectorAll('.r-sc')].map((c) => [W(T(c.querySelector('dt'))), W(T(c.querySelector('dd')))]);
   if (sc.map((x) => x.join(':')).join('|') !== DATA.cells.map((x) => x.join(':')).join('|')) issues.push('the chosen folder\\'s cells are not the brief\\'s: ' + sc.map((x) => x.join(':')).join('، '));
   const n = W(T(done.querySelector('.s-note')));
-  if (!/كل حفظ يدوي/.test(n) || !/أحدث حفظ تلقائي/.test(n) || nums(n)[0] !== DATA.every || !/على الأكثر/.test(n) || !/عند الخروج من اللعبة/.test(n)) issues.push('the chosen folder does not say what is copied and how often (§7: every manual save and the newest autosave, at most every ' + DATA.every + ' minutes, and on leaving)'); }
+  if (!/^نُسخ هذا الحفظ الآن\\./.test(n)) issues.push('the chosen folder does not say the save just made is copied now');
+  if (!/كل حفظ يدوي/.test(n) || !/أحدث حفظ تلقائي/.test(n) || nums(n)[0] !== DATA.every || !/على الأكثر/.test(n) || !/عند الحفظ أو الخروج من اللعبة/.test(n)) issues.push('the chosen folder does not say what is copied and how often (§7: every manual save and the newest autosave, on saving or leaving, at most once every ' + DATA.every + ' minutes)'); }
 // the folder gone: names the folder, says saving goes on without a copy; picking again opens the picker
 { const n = W(T(stale.querySelector('.s-note'))), f = DATA.cells[0][1], p = DATA.cells[1][1];
   if (!n.includes(f) || !n.includes(p) || !/الحفظ مستمر في هذا الجهاز/.test(n) || !/دون نسخة/.test(n)) issues.push('the folder gone does not name the folder (' + f + '، ' + p + ') and say saving goes on without a copy');
   const a = acts(stale); if (a[0] && !/يفتح منتقي المجلدات$/.test(al(a[0]))) issues.push('a11y: picking again does not say it opens the folder picker');
-  if (a[1] && !/في هذا الجهاز فقط/.test(st(a[1]))) issues.push('«ليس الآن» on a folder gone does not say saves stay on this device only'); }
+  if (a[1] && (!/في هذا الجهاز فقط حتى يعود المجلد$/.test(st(a[1])) || !/في هذا الجهاز فقط حتى يعود المجلد$/.test(al(a[1])))) issues.push('«ليس الآن» on a folder gone does not say saves stay on this device only until the folder is back'); }
 // every row that opens the picker says so, on screen or to VoiceOver; the change of folder too
 { const ch = acts(done)[1]; if (ch && !/يفتح منتقي المجلدات$/.test(al(ch))) issues.push('a11y: «تغيير المجلد» does not say it opens the folder picker'); }
-// no red here (nothing is deleted): no red icon, outline or fill
+// no red here (nothing is deleted): no red icon (colour, stroke, fill), text, fill, border, outline or shadow, on the
+// elements and their ::before / ::after
 { const redIn = (c) => /242, 112, 90|color\\(srgb 0\\.949\\d* 0\\.439\\d* 0\\.35\\d*/.test(c || '');
-  qa('.sheet svg.i').forEach((s) => { if (getComputedStyle(s).color === X.TOK.red) issues.push('red in the mirror sheet (nothing is deleted)'); });
-  qa('.sheet *').forEach((e) => { if (e.closest('svg')) return; const cs = getComputedStyle(e); if (redIn(cs.boxShadow) || redIn(cs.backgroundColor) || redIn(cs.color)) issues.push('red in the mirror sheet: ' + (e.className && e.className.baseVal === undefined ? e.className : e.tagName)); }); }
-`;
+  const props = ['color', 'backgroundColor', 'boxShadow', 'borderTopColor', 'borderRightColor', 'borderBottomColor', 'borderLeftColor', 'outlineColor'];
+  const shown = (cs, k) => k.startsWith('border') ? parseFloat(cs[k.replace('Color', 'Width')]) > 0 : k === 'outlineColor' ? cs.outlineStyle !== 'none' && parseFloat(cs.outlineWidth) > 0 : true;
+  qa('.sheet svg.i').forEach((sv) => { const cs = getComputedStyle(sv); if ([cs.color, cs.stroke, cs.fill].some(redIn)) issues.push('red in the mirror sheet (nothing is deleted): an icon'); });
+  qa('.sheet *').forEach((e) => { if (e.closest('svg')) return; [null, '::before', '::after'].forEach((pe) => { const cs = getComputedStyle(e, pe);
+    if (pe && (cs.content === 'none' || cs.content === 'normal')) return;
+    if (props.some((k) => shown(cs, k) && redIn(cs[k]))) issues.push('red in the mirror sheet: ' + (e.className && e.className.baseVal === undefined ? e.className : e.tagName) + (pe || '')); }); }); }`;
 
 require(path.join(OUT, '../../shared/check/panelcheck.js'))({
   OUT, dock: 'المزيد', tabs: ['ask', 'done', 'stale'], noTabs: true, fitTab: 'ask', longTab: 'ask',
@@ -103,7 +111,11 @@ require(path.join(OUT, '../../shared/check/panelcheck.js'))({
     ['text into a control (header)', d, '', '.r-sub { position: relative; left: -170px; }', /text over a control/],
     ['two bodies shown', d, '&tab=done', '.r-body[data-tab="ask"] { display: flex !important; }', /tab bodies shown/],
     ['title not the row\'s', d, '', '', /the title is not «نسخة احتياطية»/, () => { document.querySelector('.sheet .r-name').textContent = 'نسخة في مجلد آخر'; }],
-    ['header date off', d, '', '', /the header does not name the campaign and the save just made/, () => { document.querySelectorAll('.sheet .r-sub .ltr')[1].textContent = '2012'; }],
+    ['header date off', d, '', '', /the header does not name the campaign and the save just made/, () => { document.querySelector('.sheet .r-sub').textContent = 'حملة مصر · حُفظ 1 يناير 2011'; }],
+    ['«الحفظات»', d, '&tab=done', '', /«الحفظات»: the files are «ملفات الحفظ»/, () => { document.querySelector('.r-body[data-tab="done"] h3').textContent = 'تُنسخ الحفظات'; }],
+    ['product name split', d, '', '.s-note .ltr { white-space: normal !important; }', /splits over two lines/, () => { document.querySelector('.r-body[data-tab="ask"] .s-note .ltr').textContent = 'iCloud Drive iCloud Drive iCloud Drive iCloud Drive iCloud Drive iCloud Drive'; }],
+    ['copied now unsaid', d, '&tab=done', '', /the chosen folder does not say the save just made is copied now/, () => { const n = document.querySelector('.r-body[data-tab="done"] .s-note'); n.firstChild.textContent = n.firstChild.textContent.replace('نُسخ هذا الحفظ الآن. ', ''); }],
+    ['second above the first', d, '', '.r-body[data-tab="ask"] .r-act:not(.r-first) { order: -1; }', /the «ask» second action is not under the first/],
     ['wrong flag', d, '', '', /the header flag is not the campaign's/, () => { document.querySelector('.r-flag img').setAttribute('src', '../../shared/flags/ly.svg'); }],
     ['emblem not the folder', d, '', '', /the emblem is not the folder/, () => { document.querySelector('.s-emb use').setAttribute('href', '#i-save'); }],
     ['close elsewhere', d, '', '', /a11y: the close is not «إغلاق، العودة إلى الحفظ»/, () => { document.querySelector('.r-x').setAttribute('aria-label', 'إغلاق، العودة إلى الخريطة'); }],
@@ -115,14 +127,19 @@ require(path.join(OUT, '../../shared/check/panelcheck.js'))({
     ['stale primary lost', d, '&tab=stale', '', /the «stale» actions are not/, () => { document.querySelector('.r-body[data-tab="stale"] .r-first').classList.remove('r-first'); }],
     ['risk unsaid', d, '', '', /the ask does not say: this device only/, () => { document.querySelector('.r-body[data-tab="ask"] .s-note').textContent = 'اختر مجلدًا مرة واحدة، مثل iCloud Drive، فتُنسخ إليه الحفظات تلقائيًا.'; }],
     ['picker unsaid', d, '', '', /a11y: «اختيار مجلد» does not say it opens the folder picker/, () => { document.querySelector('.r-body[data-tab="ask"] .r-first').setAttribute('aria-label', 'اختيار مجلد: مرة واحدة، مثل iCloud Drive'); }],
-    ['not now unclear', d, '', '', /«ليس الآن» does not say it asks once and where the choice stays/, () => { document.querySelectorAll('.r-body[data-tab="ask"] .r-act')[1].querySelector('.r-at > span').textContent = 'لاحقًا'; }],
+    ['not now unclear', d, '', '', /«ليس الآن» does not say it asks once and where the folder is picked later/, () => { document.querySelectorAll('.r-body[data-tab="ask"] .r-act')[1].querySelector('.r-at > span').textContent = 'لاحقًا'; }],
     ['cells off', d, '&tab=done', '', /the chosen folder's cells are not the brief's/, () => { document.querySelectorAll('.r-body[data-tab="done"] .r-sc dd')[1].textContent = 'هذا الجهاز'; }],
     ['frequency off', d, '&tab=done', '', /the chosen folder does not say what is copied and how often/, () => { document.querySelector('.r-body[data-tab="done"] .s-note .ltr').textContent = '5'; }],
     ['change unsaid', d, '&tab=done', '', /a11y: «تغيير المجلد» does not say it opens the folder picker/, () => { document.querySelectorAll('.r-body[data-tab="done"] .r-act')[1].setAttribute('aria-label', 'تغيير المجلد'); }],
     ['stale unnamed', d, '&tab=stale', '', /the folder gone does not name the folder/, () => { document.querySelector('.r-body[data-tab="stale"] .s-note').textContent = 'لا تصل اللعبة إلى المجلد. الحفظ مستمر في هذا الجهاز، لكن دون نسخة.'; }],
     ['repick unsaid', d, '&tab=stale', '', /a11y: picking again does not say it opens the folder picker/, () => { document.querySelector('.r-body[data-tab="stale"] .r-first').setAttribute('aria-label', 'اختيار المجلد مرة أخرى'); }],
     ['stale later unclear', d, '&tab=stale', '', /«ليس الآن» on a folder gone does not say saves stay on this device only/, () => { document.querySelectorAll('.r-body[data-tab="stale"] .r-act')[1].querySelector('.r-at > span').textContent = 'لاحقًا'; }],
-    ['red icon', d, '&tab=stale', '.r-body[data-tab="stale"] .r-first .r-tile { color: var(--red) !important; }', /red in the mirror sheet/],
+    ['red icon', d, '&tab=stale', '.r-body[data-tab="stale"] .r-first .r-tile svg.i { color: var(--red) !important; }', /red in the mirror sheet \(nothing is deleted\): an icon/],
+    ['red icon stroke', d, '', '.r-first .r-tile svg.i { stroke: rgb(242, 112, 90) !important; }', /red in the mirror sheet \(nothing is deleted\): an icon/],
+    ['red tile', d, '&tab=stale', '.r-body[data-tab="stale"] .r-first .r-tile { color: var(--red) !important; }', /red in the mirror sheet/],
+    ['red outline (outline)', d, '', '.r-act.r-first { outline: 2px solid rgb(242, 112, 90) !important; outline-offset: -2px; }', /red in the mirror sheet: .*r-act/],
+    ['red divider', d, '&tab=done', '.r-sc:nth-child(odd)::after { background: rgb(242, 112, 90) !important; }', /red in the mirror sheet: r-sc::after/],
+    ['red rule', d, '&tab=done', '.r-st { border-bottom-color: rgb(242, 112, 90) !important; }', /red in the mirror sheet: r-st/],
     ['red outline', d, '', '.r-act.r-first { box-shadow: inset 0 0 0 1px rgba(242, 112, 90, .45) !important; }', /red in the mirror sheet/],
   ],
 });

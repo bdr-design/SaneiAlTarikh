@@ -20,8 +20,8 @@ resolves: pick again, or not now). The system's folder picker itself is iOS's an
 1. The ask says the saves are on this device only and lost if the game is deleted, and asks once to pick a folder (an
    example: iCloud Drive) to copy them to automatically; «اختيار مجلد» first and primary, opening the system's folder
    picker; «ليس الآن» says it will not ask again and where the choice stays (the saves tab).
-2. The folder chosen names the folder and its place, and says what is copied and how often (§7: every manual save and the
-   newest autosave, at most every 10 minutes, and on leaving the game).
+2. The folder chosen names the folder and its place, says the save just made is copied now, and what is copied and how
+   often (§7: every manual save and the newest autosave, on saving or leaving the game, at most once every 10 minutes).
 3. The folder gone names the folder, says saving goes on without a copy, and offers to pick it again (first) or not now.
 4. In the «المزيد» frame, never a dialog over the map; no red (nothing is deleted).
 5. Gate: 0 issues on 7 phones, self-test, `check_screen.py` PASS; six independent read-only reviews, every confirmed

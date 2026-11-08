@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-07T23:52:27.707Z",
+ "ranAt": "2026-11-08T00:10:00.742Z",
  "inputs": {
   "files": [
    "index.html",
@@ -24,7 +24,7 @@
    "header_cairo.jpg",
    "map_overlay_cairo.svg"
   ],
-  "sha1": "19ff1a2b7f54d5ba77dea2bfa7367550a55cdbab"
+  "sha1": "85327d2a3acf660524730c279bfc68bcc824ac86"
  },
  "cleanIssues": {
   "i16promax": [],
@@ -72,7 +72,7 @@
    "sample": [
     "text in side inset: احمِ حفظك",
     "text in side inset: الحفظ في هذا الجهاز فقط، ويضيع إذا حُذفت اللعبة. اختر مجلدًا مرة واحدة، مثل",
-    "text in side inset: iCloud Drive"
+    "text in side inset: الحفظ في هذا الجهاز فقط، ويضيع إذا حُذفت اللعبة. اختر مجلدًا مرة واحدة، مثل"
    ]
   },
   {
@@ -81,7 +81,7 @@
    "sample": [
     "text in side inset: احمِ حفظك",
     "text in side inset: الحفظ في هذا الجهاز فقط، ويضيع إذا حُذفت اللعبة. اختر مجلدًا مرة واحدة، مثل",
-    "text in side inset: iCloud Drive"
+    "text in side inset: الحفظ في هذا الجهاز فقط، ويضيع إذا حُذفت اللعبة. اختر مجلدًا مرة واحدة، مثل"
    ]
   },
   {
@@ -90,7 +90,7 @@
    "sample": [
     "panel not opaque: نسخة احتياطية rgba(9, 17, 25, 0.66)",
     "contrast 3.15 for \"الحفظ في هذا الجهاز فقط،\"",
-    "contrast 3.15 for \"، فتُنسخ إليه الحفظات تل\""
+    "contrast 3.15 for \"، فتُنسخ إليه ملفات الحف\""
    ]
   },
   {
@@ -99,7 +99,7 @@
    "sample": [
     "panel not opaque (opacity 0.60): نسخة احتياطية",
     "brief text not fully visible: نسخة احتياطية",
-    "brief text not fully visible: حملة مصر · حُفظ 1 يناير 2011"
+    "brief text not fully visible: حملة مصر · حُفظ الآن"
    ]
   },
   {
@@ -197,7 +197,7 @@
    "sample": [
     "contrast 1 for \"احمِ حفظك\"",
     "contrast 1.73 for \"الحفظ في هذا الجهاز فقط،\"",
-    "contrast 1.73 for \"iCloud Drive\""
+    "contrast 1.73 for \"الحفظ في هذا الجهاز فقط،\""
    ]
   },
   {
@@ -345,7 +345,7 @@
    "sample": [
     "font weight 11.5/700 for \"حملة مصر\"",
     "font weight 11.5/700 for \"·\"",
-    "font weight 11.5/700 for \"حُفظ\""
+    "font weight 11.5/700 for \"حُفظ الآن\""
    ]
   },
   {
@@ -390,7 +390,7 @@
    "sample": [
     "18 pt is for the panel's name and the adjusted values only: \"مرة واحدة · مثل\"",
     "18 pt is for the panel's name and the adjusted values only: \"iCloud Drive\"",
-    "18 pt is for the panel's name and the adjusted values only: \"لن نسأل مرة أخرى · تجده في الحفظ\""
+    "18 pt is for the panel's name and the adjusted values only: \"لن يُعرض مرة أخرى · المجلد لاحقًا من الحفظ\""
    ]
   },
   {
@@ -398,7 +398,7 @@
    "ok": true,
    "sample": [
     "text overlap \"اختيار مجلد\" / \"مرة واحدة · مثل\"",
-    "text overlap \"ليس الآن\" / \"لن نسأل مرة أخرى · تجده في الحفظ\""
+    "text overlap \"ليس الآن\" / \"لن يُعرض مرة أخرى · المجلد لاحقًا من الحفظ\""
    ]
   },
   {
@@ -415,7 +415,7 @@
    "ok": true,
    "sample": [
     "brief text not fully visible: مرة واحدة · مثل iCloud Drive",
-    "brief text not fully visible: لن نسأل مرة أخرى · تجده في الحفظ",
+    "brief text not fully visible: لن يُعرض مرة أخرى · المجلد لاحقًا من الحفظ",
     "contrast 2.22 for \"مرة واحدة · مثل\""
    ]
   },
@@ -433,7 +433,7 @@
    "sample": [
     "% shown before its number: \"نسبة 20%\"",
     "the ask does not say: this device only, lost if the game is deleted, picked once (an example folder), copied automatically",
-    "brief text missing: الحفظ في هذا الجهاز فقط، ويضيع إذا حُذفت اللعبة. اختر مجلدًا مرة واحدة، مثل iCloud Drive، فتُنسخ إليه الحفظات تلقائيًا."
+    "brief text missing: الحفظ في هذا الجهاز فقط، ويضيع إذا حُذفت اللعبة. اختر مجلدًا مرة واحدة، مثل iCloud Drive، فتُنسخ إليه ملفات الحفظ تلقائيًا."
    ]
   },
   {
@@ -458,9 +458,9 @@
    "name": "text into a control (header)",
    "ok": true,
    "sample": [
-    "clipped text (sides): \"2011\" 527.27..554.88 y 84..101",
-    "text outside the sheet's 12 pt padding: \"2011\"",
-    "text over a control: \"1\" runs into «إغلاق، العودة إلى ال»"
+    "text over a control: \"حُفظ الآن\" runs into «إغلاق، العودة إلى ال»",
+    "icon over text: i / \"·\"",
+    "icon over text: i / \"حُفظ الآن\""
    ]
   },
   {
@@ -469,7 +469,7 @@
    "sample": [
     "clipped text (bottom): \"ليس الآن\" 788.34..834 y 237..256",
     "clipped text (bottom): \"تغيير المجلد\" 773.8..834 y 411.47..430.47",
-    "control cut by its scroll area (bottom): ليس الآن: لن نسأل مرة أخرى"
+    "control cut by its scroll area (bottom): ليس الآن: لن يُعرض هذا مرة"
    ]
   },
   {
@@ -485,9 +485,43 @@
    "name": "header date off",
    "ok": true,
    "sample": [
-    "the header does not name the campaign and the save just made (مصر، 1 يناير 2011)",
-    "brief text missing: حملة مصر · حُفظ 1 يناير 2011",
-    "brief text missing: حملة مصر · حُفظ 1 يناير 2011"
+    "the header does not name the campaign and the save just made (حملة مصر · حُفظ الآن: the real time, as screen 23)",
+    "brief text missing: حملة مصر · حُفظ الآن",
+    "brief text missing: حملة مصر · حُفظ الآن"
+   ]
+  },
+  {
+   "name": "«الحفظات»",
+   "ok": true,
+   "sample": [
+    "«الحفظات»: the files are «ملفات الحفظ» (screen 13)",
+    "brief text missing: تُنسخ ملفات الحفظ",
+    "brief text missing: تُنسخ ملفات الحفظ"
+   ]
+  },
+  {
+   "name": "product name split",
+   "ok": true,
+   "sample": [
+    "«iCloud Drive iCloud Drive iCloud Drive iCloud Drive iCloud Drive iCloud Drive» splits over two lines",
+    "brief text missing: الحفظ في هذا الجهاز فقط، ويضيع إذا حُذفت اللعبة. اختر مجلدًا مرة واحدة، مثل iCloud Drive، فتُنسخ إليه ملفات الحفظ تلقائيًا.",
+    "brief text missing: الحفظ في هذا الجهاز فقط، ويضيع إذا حُذفت اللعبة. اختر مجلدًا مرة واحدة، مثل iCloud Drive، فتُنسخ إليه ملفات الحفظ تلقائيًا."
+   ]
+  },
+  {
+   "name": "copied now unsaid",
+   "ok": true,
+   "sample": [
+    "the chosen folder does not say the save just made is copied now",
+    "brief text missing: نُسخ هذا الحفظ الآن. بعده يُنسخ كل حفظ يدوي وأحدث حفظ تلقائي عند الحفظ أو الخروج من اللعبة، مرة كل 10 دقائق على الأكثر.",
+    "brief text missing: نُسخ هذا الحفظ الآن. بعده يُنسخ كل حفظ يدوي وأحدث حفظ تلقائي عند الحفظ أو الخروج من اللعبة، مرة كل 10 دقائق على الأكثر."
+   ]
+  },
+  {
+   "name": "second above the first",
+   "ok": true,
+   "sample": [
+    "the «ask» second action is not under the first"
    ]
   },
   {
@@ -538,7 +572,7 @@
    "sample": [
     "the «ask» actions are not اختيار مجلد (primary) then ليس الآن: ليس الآن، اختيار مجلد",
     "a11y: «اختيار مجلد» does not say it opens the folder picker",
-    "«ليس الآن» does not say it asks once and where the choice stays (الحفظ)"
+    "«ليس الآن» does not say it asks once and where the folder is picked later (الحفظ)"
    ]
   },
   {
@@ -559,9 +593,9 @@
    "name": "risk unsaid",
    "ok": true,
    "sample": [
+    "«الحفظات»: the files are «ملفات الحفظ» (screen 13)",
     "the ask does not say: this device only, lost if the game is deleted, picked once (an example folder), copied automatically",
-    "brief text missing: الحفظ في هذا الجهاز فقط، ويضيع إذا حُذفت اللعبة. اختر مجلدًا مرة واحدة، مثل iCloud Drive، فتُنسخ إليه الحفظات تلقائيًا.",
-    "brief text missing: الحفظ في هذا الجهاز فقط، ويضيع إذا حُذفت اللعبة. اختر مجلدًا مرة واحدة، مثل iCloud Drive، فتُنسخ إليه الحفظات تلقائيًا."
+    "brief text missing: الحفظ في هذا الجهاز فقط، ويضيع إذا حُذفت اللعبة. اختر مجلدًا مرة واحدة، مثل iCloud Drive، فتُنسخ إليه ملفات الحفظ تلقائيًا."
    ]
   },
   {
@@ -573,11 +607,11 @@
   },
   {
    "name": "not now unclear",
-   "ok": true,
+   "ok": false,
    "sample": [
-    "a11y: «ليس الآن: لن نسأل مرة أخ» does not read all it shows: لاحقًا",
-    "«ليس الآن» does not say it asks once and where the choice stays (الحفظ)",
-    "brief text missing: لن نسأل مرة أخرى · تجده في الحفظ"
+    "«ليس الآن» does not say it asks once and where the folder is picked later (الحفظ)",
+    "brief text missing: لن يُعرض مرة أخرى · المجلد لاحقًا من الحفظ",
+    "brief text missing: لن يُعرض مرة أخرى · المجلد لاحقًا من الحفظ"
    ]
   },
   {
@@ -592,9 +626,9 @@
    "name": "frequency off",
    "ok": true,
    "sample": [
-    "the chosen folder does not say what is copied and how often (§7: every manual save and the newest autosave, at most every 10 minutes, and on leaving)",
-    "brief text missing: يُنسخ كل حفظ يدوي وأحدث حفظ تلقائي، مرة كل 10 دقائق على الأكثر، وعند الخروج من اللعبة.",
-    "brief text missing: يُنسخ كل حفظ يدوي وأحدث حفظ تلقائي، مرة كل 10 دقائق على الأكثر، وعند الخروج من اللعبة."
+    "the chosen folder does not say what is copied and how often (§7: every manual save and the newest autosave, on saving or leaving, at most once every 10 minutes)",
+    "brief text missing: نُسخ هذا الحفظ الآن. بعده يُنسخ كل حفظ يدوي وأحدث حفظ تلقائي عند الحفظ أو الخروج من اللعبة، مرة كل 10 دقائق على الأكثر.",
+    "brief text missing: نُسخ هذا الحفظ الآن. بعده يُنسخ كل حفظ يدوي وأحدث حفظ تلقائي عند الحفظ أو الخروج من اللعبة، مرة كل 10 دقائق على الأكثر."
    ]
   },
   {
@@ -610,8 +644,8 @@
    "ok": true,
    "sample": [
     "the folder gone does not name the folder (صانع التاريخ، iCloud Drive) and say saving goes on without a copy",
-    "brief text missing: لا تصل اللعبة إلى مجلد صانع التاريخ في iCloud Drive؛ ربما نُقل أو حُذف. الحفظ مستمر في هذا الجهاز، لكن دون نسخة.",
-    "brief text missing: لا تصل اللعبة إلى مجلد صانع التاريخ في iCloud Drive؛ ربما نُقل أو حُذف. الحفظ مستمر في هذا الجهاز، لكن دون نسخة."
+    "brief text missing: لا تصل اللعبة إلى مجلد صانع التاريخ في iCloud Drive؛ ربما حُذف، أو أُوقف iCloud Drive. الحفظ مستمر في هذا الجهاز، لكن دون نسخة.",
+    "brief text missing: لا تصل اللعبة إلى مجلد صانع التاريخ في iCloud Drive؛ ربما حُذف، أو أُوقف iCloud Drive. الحفظ مستمر في هذا الجهاز، لكن دون نسخة."
    ]
   },
   {
@@ -627,17 +661,52 @@
    "ok": true,
    "sample": [
     "a11y: «ليس الآن: يبقى الحفظ في » does not read all it shows: لاحقًا",
-    "«ليس الآن» on a folder gone does not say saves stay on this device only",
-    "brief text missing: يبقى الحفظ في هذا الجهاز فقط"
+    "«ليس الآن» on a folder gone does not say saves stay on this device only until the folder is back",
+    "brief text missing: يبقى الحفظ في هذا الجهاز فقط حتى يعود المجلد"
    ]
   },
   {
    "name": "red icon",
    "ok": true,
    "sample": [
+    "red in the mirror sheet (nothing is deleted): an icon"
+   ]
+  },
+  {
+   "name": "red icon stroke",
+   "ok": true,
+   "sample": [
+    "red in the mirror sheet (nothing is deleted): an icon"
+   ]
+  },
+  {
+   "name": "red tile",
+   "ok": true,
+   "sample": [
     "white touch off: .r-tile color rgb(242, 112, 90) (want rgb(234, 242, 247))",
-    "red in the mirror sheet (nothing is deleted)",
+    "red in the mirror sheet (nothing is deleted): an icon",
     "red in the mirror sheet: r-tile"
+   ]
+  },
+  {
+   "name": "red outline (outline)",
+   "ok": true,
+   "sample": [
+    "red in the mirror sheet: r-act tap r-first"
+   ]
+  },
+  {
+   "name": "red divider",
+   "ok": true,
+   "sample": [
+    "red in the mirror sheet: r-sc::after"
+   ]
+  },
+  {
+   "name": "red rule",
+   "ok": true,
+   "sample": [
+    "red in the mirror sheet: r-st"
    ]
   },
   {
