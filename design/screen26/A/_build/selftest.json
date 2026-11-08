@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-08T01:10:50.598Z",
+ "ranAt": "2026-11-08T01:21:43.256Z",
  "inputs": {
   "files": [
    "index.html",
@@ -28,7 +28,7 @@
    "header_cairo.jpg",
    "map_overlay_cairo.svg"
   ],
-  "sha1": "199f3ba43280c7d16e078b4f4c53ac4850a6012a"
+  "sha1": "6f95280b1020bb7f183208441693b0630f7aed86"
  },
  "cleanIssues": {
   "i16promax": [],
@@ -507,7 +507,22 @@
    "name": "badge away from the date",
    "ok": true,
    "sample": [
-    "the HUD badge is not on the date's side of the glyph, clear of it"
+    "the HUD badge is not on the date's side of the glyph, clear of it",
+    "a two-digit HUD badge runs onto the glyph"
+   ]
+  },
+  {
+   "name": "badge grows onto the glyph",
+   "ok": true,
+   "sample": [
+    "a two-digit HUD badge runs onto the glyph"
+   ]
+  },
+  {
+   "name": "red outline (other border)",
+   "ok": true,
+   "sample": [
+    "red in the pending orders: o-row"
    ]
   },
   {

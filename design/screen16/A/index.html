@@ -592,12 +592,13 @@
   .s-vh { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
   /* ================= The HUD while paused with pending orders (screen 26; also screen 16) =================
      The play button carries the count of orders that will be carried out on resume: a badge in the pending orders'
-     colour, dark digits, on the button's top corner toward the date (clear of the glyph), overhanging 3 pt as the bell's
+     colour, dark digits, on the button's top corner toward the date (clear of the glyph; its left edge fixed, so
+     a two-digit count grows toward the date), overhanging 3 pt as the bell's
      badge. The toast slot holds the orders while paused (in place of the 3 s toasts, which wait), its icon the queue in
      the same colour; it keeps its width (B3's toast text box, 115.6 pt in the project font), so the left column does not
      jump when pausing; the shorter text sits at its start. */
   :root { --sec-orders: #F0E73C; }   /* الأوامر المعلّقة: أصفر (chosen by measure, see screen 26's orders.css) */
-  .play .o-badge { position: absolute; top: -5px; right: -10px; min-width: 16px; height: 16px; padding: 0 4px; border-radius: 8px;
+  .play .o-badge { position: absolute; top: -5px; left: calc(100% - 6px); min-width: 16px; height: 16px; padding: 0 4px; border-radius: 8px;
     background: var(--sec-orders); color: #0B1218; font-size: var(--fs-label); font-weight: 700; line-height: 16px; text-align: center;
     box-shadow: 0 0 0 2px rgba(9, 17, 25, 0.9); }
   .o-toast svg.i { color: var(--sec-orders); }
@@ -822,8 +823,8 @@
           </div>
         </section>
         <section class="r-sec">
-          <h3>أوامر معلقة</h3>
-          <div class="n-ord" role="group" aria-label="أمر معلق: المنطقة الغربية إلى سيوة، يُنفَّذ عند استئناف الوقت">
+          <h3>أوامر معلّقة</h3>
+          <div class="n-ord" role="group" aria-label="أمر معلّق: المنطقة الغربية إلى سيوة، يُنفَّذ عند استئناف الوقت">
             <span class="r-tile" aria-hidden="true"><svg class="i"><use href="#i-army"/></svg></span>
             <span class="r-at" aria-hidden="true"><b>المنطقة الغربية إلى سيوة</b><span>يُنفَّذ عند استئناف الوقت</span></span>
             <button class="r-btn tap" aria-label="إلغاء أمر المنطقة الغربية إلى سيوة">إلغاء</button>

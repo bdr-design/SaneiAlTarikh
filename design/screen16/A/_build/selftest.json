@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-08T01:08:45.198Z",
+ "ranAt": "2026-11-08T01:23:41.036Z",
  "inputs": {
   "files": [
    "index.html",
@@ -24,7 +24,7 @@
    "header_cairo.jpg",
    "map_overlay_cairo.svg"
   ],
-  "sha1": "f668c85981aec1bb08e4d0f4e65e11fa93d145ab"
+  "sha1": "ca8d3ab10806d749da36b64186fe2c180e543b61"
  },
  "cleanIssues": {
   "i16promax": [],
@@ -63,7 +63,7 @@
    "ok": true,
    "sample": [
     "text in side inset: قرارات تنتظرك",
-    "text in side inset: أوامر معلقة",
+    "text in side inset: أوامر معلّقة",
     "text in side inset: مهم"
    ]
   },
@@ -72,7 +72,7 @@
    "ok": true,
    "sample": [
     "text in side inset: قرارات تنتظرك",
-    "text in side inset: أوامر معلقة",
+    "text in side inset: أوامر معلّقة",
     "text in side inset: مهم"
    ]
   },
@@ -179,7 +179,7 @@
    "ok": true,
    "sample": [
     "contrast 1 for \"قرارات تنتظرك\"",
-    "contrast 1 for \"أوامر معلقة\"",
+    "contrast 1 for \"أوامر معلّقة\"",
     "contrast 1 for \"مهم\""
    ]
   },
@@ -394,7 +394,7 @@
    "ok": true,
    "sample": [
     "18 pt is for the panel's name and the adjusted values only: \"قرارات تنتظرك\"",
-    "18 pt is for the panel's name and the adjusted values only: \"أوامر معلقة\"",
+    "18 pt is for the panel's name and the adjusted values only: \"أوامر معلّقة\"",
     "18 pt is for the panel's name and the adjusted values only: \"مهم\""
    ]
   },
@@ -404,15 +404,15 @@
    "sample": [
     "clipped text (sides): \"قرارات تنتظرك\" 858.34..921 y 115..132",
     "text outside the sheet's 12 pt padding: \"قرارات تنتظرك\"",
-    "clipped text (sides): \"أوامر معلقة\" 870.92..921 y 195..212"
+    "clipped text (sides): \"أوامر معلّقة\" 870.92..921 y 195..212"
    ]
   },
   {
    "name": "gap (centre)",
    "ok": true,
    "sample": [
-    "gap 6 on أمر معلق: المنطقة الغربية ",
-    "gap 6 on أمر معلق: المنطقة الغربية "
+    "gap 6 on أمر معلّق: المنطقة الغربية",
+    "gap 6 on أمر معلّق: المنطقة الغربية"
    ]
   },
   {
@@ -421,7 +421,7 @@
    "sample": [
     "brief text not fully visible: قرارات تنتظرك",
     "brief text cannot be scrolled clear of the fades: قرارات تنتظرك",
-    "brief text cannot be scrolled clear of the fades: أوامر معلقة"
+    "brief text cannot be scrolled clear of the fades: أوامر معلّقة"
    ]
   },
   {
@@ -429,7 +429,7 @@
    "ok": true,
    "sample": [
     "% shown before its number: \"نسبة 20%\"",
-    "the sections are «نسبة 20%، أوامر معلقة، مهم، للعلم»",
+    "the sections are «نسبة 20%، أوامر معلّقة، مهم، للعلم»",
     "«احتجاجات في تونس» is not under «قرارات تنتظرك»"
    ]
   },
@@ -451,7 +451,7 @@
    "name": "sections reordered",
    "ok": true,
    "sample": [
-    "the sections are «قرارات تنتظرك، أوامر معلقة، للعلم، مهم»",
+    "the sections are «قرارات تنتظرك، أوامر معلّقة، للعلم، مهم»",
     "«السودان: استفتاء الجنوب بعد 8 أيام» is not under «مهم»",
     "«القمح عالميًا في أعلى مستوى منذ 2008» is not under «للعلم»"
    ]
