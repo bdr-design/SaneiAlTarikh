@@ -463,7 +463,7 @@ Dependencies run one way: Core ← Content ← Engine ← AI; Core ← Map; Pres
 | Event | Action |
 |---|---|
 | `.inactive` | Pause and remember the speed. |
-| `.background` | Call `beginBackgroundTask`. Then snapshot, autosave atomically, mirror if enabled and due, stop the display link and audio, and end the task. |
+| `.background` | Call `beginBackgroundTask`. Then snapshot, autosave atomically, mirror if enabled and due (§7: changed files, at most once per 10 real minutes), stop the display link and audio, and end the task. |
 | Back to `.active` | Stay paused. |
 | Memory warning | Shrink the tile cache to its minimum (48 slices) with a +1 level bias, drop the label and glyph atlas (rebuilt lazily) and the event image. Never drop game state. |
 | Launch after an unclean exit | Offer «استئناف من آخر حفظ تلقائي» (resume from the last autosave), and offer to export the diagnostics. |
@@ -732,7 +732,7 @@ Measured by the in-app recorder (launch markers written to the ring log) and by 
 | File size | ≤2 MB compressed; ≤8 MB raw |
 | Stall on the simulation thread | ≤2 ms (copy-on-write snapshot) |
 | Background encode and atomic write | ≤250 ms on A12 |
-| Mirror copy (if enabled) | Background; at most once per 10 real minutes |
+| Mirror copy (if enabled) | On save events only, at most once per 10 real minutes; only changed files; its own serial queue at utility QoS, never ahead of a save; cancelled on background expiry (stays due) |
 
 ### 3.6 Size
 
@@ -837,6 +837,13 @@ bound here; each item is a line in `docs/perf.md` (L12) and a test where one is 
   highlight outline drawn by the map engine as on page 2; a row tap changes the card's model only (the chosen row, its
   difficulty), never the map, the strip or a re-layout of the page. The names the lead line crosses are taken out of the
   label layer once, when the selection changes.
+- **The save mirror (screen 25, D-28).** The prompt is a static sheet (one flag «mirrorAsked» in the settings file, read
+  once at launch). While the system's folder picker is up, the game is paused and the display link stopped (as on
+  `.inactive`), restored when it closes; the picker runs out of process. The copy (§7 «Mirror»): only on save events, at
+  most once per 10 real minutes, only new or changed files against a local record, never listing or reading the mirror's
+  files; on its own serial queue at utility QoS after the save's atomic write, never ahead of a save; temporary name then
+  replace; a coordinated write that waits is cancelled by the background task's expiration handler and stays due. The
+  bookmark is resolved once per copy; a stale-but-resolving one is recreated silently.
 
 ### 3.10 Names of any country (the second-country test, T-024)
 
@@ -1784,9 +1791,10 @@ As before:
 - **Location (ADR-0020):** `Documents/Saves`, visible in the Files app under «على الـ iPhone» (On My iPhone) › صانع التاريخ, thanks to `UIFileSharingEnabled` and `LSSupportsOpeningDocumentsInPlace`.
 - **Mirror (D-28):**
   - An optional automatic copy to a folder the user picks once in the document picker, for example in iCloud Drive or another location that survives deleting the app.
-  - The folder is stored as a security-scoped bookmark (no entitlement needed; to verify).
-  - Each manual save and the newest autosave are copied at most every 10 real minutes and on background.
-  - The user is prompted once, after the first manual save. A stale bookmark asks the user to pick the folder again.
+  - The folder is stored as a security-scoped bookmark (no entitlement needed; to verify), in the settings file in Application Support (never in Documents). A folder inside the game's own container is refused (it is deleted with the game).
+  - The copy runs only on save events (a manual save, an autosave, going to the background), never on a timer or by polling the folder. It copies the manual saves and the newest autosave that changed since the last copy, at most once every 10 real minutes; a change not yet copied waits for the next event. Picking a folder copies the current saves at once; the prompt shows the folder as chosen only once that first copy has returned, and a failed first copy shows the folder-gone body.
+  - Only new or changed files are copied, against a local record (name, size, modification date); the mirror's files are never listed or read (no iCloud download). The newest autosave goes to one fixed mirror name. Each file is written to a temporary name and then replaced.
+  - The user is prompted once, after the first manual save (screen 25); «ليس الآن» records the answer, the close does not. A bookmark that resolves but is marked stale is recreated silently; one that no longer resolves (or whose access fails) shows the folder-gone body once and the saves tab's mirror row says so; the folder is retried at each copy event.
 - **Re-signing note** (shown in help and in the M0 install guide): keep the same bundle ID when re-signing so the app updates in place and keeps its data. If a tool forces a new team or ID, check the mirror or export the saves before deleting the app.
 - **Export and import** through the share sheet and the document picker. «نسخ احتياطي لكل الحفظ» (back up all saves) writes one `.saneipack` container.
 - **Bug report «الإبلاغ عن مشكلة»:** a `.saneibug` file with the save, `CMDJ`, seed, hashes, device, build and the **ring log**.
