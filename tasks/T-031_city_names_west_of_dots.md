@@ -1,4 +1,4 @@
-# T-031: City names west of their dots, on every screen
+# T-031: City names beside their dots, on every screen
 
 ## The need
 Found while approving screen 28 (Khartoum): the shared MENA overlay draws each city's name with text-anchor="start"
@@ -14,13 +14,22 @@ its local fix (Khartoum's dot under «الخرطوم»); getBBox: Khartoum's nam
 west of its dot 772–782.
 
 ## Scope
-`tools/city_labels_rtl.py` sets direction="rtl" on all 11 city names of the shared overlay (screen 1 and screen 4's
-variants B and C use it as an image); `make_overlay.py` now only checks it and regenerates screen 4's label layer, which
-every map screen takes; screen 28's local fix dropped. A shared rule «map city dot under its own name», with a plant, in
-the panel checker and in the own checkers of screens 4A, 5, 6, 7 and 14. Out of scope: label positions otherwise.
+`tools/city_labels.py` places all 11 city names of the shared overlay beside their dots, right to left: west by default
+(its end 10 px west of the dot's centre), east where the west falls on the sea or another label (Benghazi: the Gulf of
+Sirte; Riyadh: «السعودية»), south where both sides do (Tripoli: Tunisia's border west, the sea east); «العراق» moves
+south off Baghdad's name. `tools/check_overlay_labels.js` measures the overlay (each name clear of its dot, of every
+other label and dot). `make_overlay.py` only checks the placement and regenerates screen 4's label layer, which every
+map screen takes; screen 28's local fix dropped. Screen 1 (B3), which drew the overlay as one image, gets the same
+inline label layer with a cut step (`_build/labels.py`: a name a panel edge, the screen edge or the side inset would cut
+hides whole) and the label rules. Screen 4 variant C now loads the shared overlay (its stale copy removed); variants A,
+B and C stay two-phone proposals as before. The rules «map city dot under its own name» and «map city name over another
+label», with plants, in the panel checker and in the own checkers of screens 1 B3, 4A, 4R, 5, 6, 7 and 14. §2.5 gains
+the city-label rules (layer 5: the dot in the glyph atlas) and the §8 test line.
 
 ## Acceptance criteria
-1. On every screen, every city name shown sits west of its dot, the dot visible.
-2. The rule catches a name over its dot on every checker that checks the map's labels (planted).
+1. On every screen, every city name shown sits beside its dot (west unless the sea, a border or a label is there), the
+   dot visible, never over another label; no name cut by a panel or the screen edge.
+2. The rules catch a name over its dot and over another label on every checker that checks the map's labels (planted),
+   and the overlay check catches it in the shared overlay.
 3. Every map screen regated: 0 issues on 7 phones, self-test, `check_screen.py` PASS.
 4. Six independent read-only reviews, every confirmed finding fixed; a verification review.
