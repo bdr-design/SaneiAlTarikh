@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-08T21:56:51.815Z",
+ "ranAt": "2026-11-08T22:54:57.960Z",
  "inputs": {
   "files": [
    "index.html",
@@ -23,7 +23,7 @@
    "header_cairo.jpg",
    "map_overlay_cairo.svg"
   ],
-  "sha1": "13144bf658adad19fad16a50b0cafeb3a5e39793"
+  "sha1": "3463c0d8c35166ad795dbc876ec07551439b9427"
  },
  "cleanIssues": {
   "i16promax": [],
@@ -79,7 +79,7 @@
    "sample": [
     "text in side inset: الخطوة",
     "text in side inset: أنت تحكم مصر من",
-    "text in side inset: . اضغط أي محافظة على الخريطة لتفتح بطاقتها، وأي دولة لتعرف حالها وعلاقتك بها."
+    "text in side inset: ، وبطاقتها في الأعلى تفتح لوحة الدولة. اضغط أي محافظة في مصر لتفتح بطاقتها، وأي دولة أخرى لتعرف حالها وعلاقتك بها."
    ]
   },
   {
@@ -88,7 +88,7 @@
    "sample": [
     "text in side inset: الخطوة",
     "text in side inset: أنت تحكم مصر من",
-    "text in side inset: . اضغط أي محافظة على الخريطة لتفتح بطاقتها، وأي دولة لتعرف حالها وعلاقتك بها."
+    "text in side inset: ، وبطاقتها في الأعلى تفتح لوحة الدولة. اضغط أي محافظة في مصر لتفتح بطاقتها، وأي دولة أخرى لتعرف حالها وعلاقتك بها."
    ]
   },
   {
@@ -149,7 +149,7 @@
    "name": "sheet top",
    "ok": true,
    "sample": [
-    "hit overlap الاستقرار 58% / تخطي الجولة، العودة إلى ال",
+    "hit overlap الاستقرار 58% / تخطي الجولة، تعود إليها من",
     "panel overlap الدولة: مصر، حسني مبارك، ج / جولة البداية",
     "panel overlap الخزينة 36.0 مليار $ الاست / جولة البداية"
    ]
@@ -236,28 +236,32 @@
    "name": "money unit",
    "ok": true,
    "sample": [
-    "money unit: «0.4 مليار» (under 1 billion is written in millions)"
+    "money unit: «0.4 مليار» (under 1 billion is written in millions)",
+    "the step body is not «sec,primary,skip»: s-note,sec,primary,skip"
    ]
   },
   {
    "name": "sign outside its number",
    "ok": true,
    "sample": [
-    "a sign outside its number: «تغير +3»"
+    "a sign outside its number: «تغير +3»",
+    "the step body is not «sec,primary,skip»: s-note,sec,primary,skip"
    ]
   },
   {
    "name": "colour alone",
    "ok": true,
    "sample": [
-    "colour alone: «تراجع» has no arrow or icon"
+    "colour alone: «تراجع» has no arrow or icon",
+    "the step body is not «sec,primary,skip»: s-note r-amber,sec,primary,skip"
    ]
   },
   {
    "name": "an image in the sheet",
    "ok": true,
    "sample": [
-    "an image in the sheet"
+    "an image in the sheet",
+    "the step body is not «sec,primary,skip»: IMG,sec,primary,skip"
    ]
   },
   {
@@ -271,15 +275,16 @@
    "name": "label without a role",
    "ok": true,
    "sample": [
-    "a11y: a label VoiceOver may skip (no role): «اختبار»"
+    "a11y: a label VoiceOver may skip (no role): «اختبار»",
+    "the step body is not «sec,primary,skip»: s-note,sec,primary,skip"
    ]
   },
   {
    "name": "overview scrolls",
    "ok": true,
    "sample": [
-    "s3 needs scrolling: 392.0 pt over",
-    "fades 0/0 do not match the scroll state (top 0, over 392.0)",
+    "s3 needs scrolling: 364.0 pt over",
+    "fades 0/0 do not match the scroll state (top 0, over 364.0)",
     "brief text not fully visible: الخطوة 3 من 5 · الأقسام"
    ]
   },
@@ -317,7 +322,7 @@
    "ok": true,
    "sample": [
     "a11y: the close says only «إغلاق»",
-    "a11y: the close does not say it skips the tour and the game stays paused"
+    "a11y: the close does not say it skips the tour, stays in the help and the game stays paused"
    ]
   },
   {
@@ -373,7 +378,7 @@
    "name": "control height (no tabs)",
    "ok": true,
    "sample": [
-    "control height 40.00 for .r-x (want 32): تخطي الجولة، العودة إلى ال",
+    "control height 40.00 for .r-x (want 32): تخطي الجولة، تعود إليها من",
     "close button is not round"
    ]
   },
@@ -395,7 +400,7 @@
    "name": "brief text hidden (s1)",
    "ok": true,
    "sample": [
-    "brief text not fully visible: أنت تحكم مصر من 1 يناير 2011. اضغط أي محافظة على الخريطة لتفتح بطاقتها، وأي دولة لتعرف حالها وعلاقتك بها."
+    "brief text not fully visible: أنت تحكم مصر من 1 يناير 2011، وبطاقتها في الأعلى تفتح لوحة الدولة. اضغط أي محافظة في مصر لتفتح بطاقتها، وأي دولة أخرى لتعرف حالها وعلاقتك بها."
    ]
   },
   {
@@ -427,7 +432,7 @@
    "name": "faint text (s1)",
    "ok": true,
    "sample": [
-    "brief text not fully visible: أنت تحكم مصر من 1 يناير 2011. اضغط أي محافظة على الخريطة لتفتح بطاقتها، وأي دولة لتعرف حالها وعلاقتك بها.",
+    "brief text not fully visible: أنت تحكم مصر من 1 يناير 2011، وبطاقتها في الأعلى تفتح لوحة الدولة. اضغط أي محافظة في مصر لتفتح بطاقتها، وأي دولة أخرى لتعرف حالها وعلاقتك بها.",
     "contrast 2.98 for \"أنت تحكم مصر من\"",
     "contrast 2.98 for \"1\""
    ]
@@ -446,7 +451,7 @@
    "sample": [
     "% shown before its number: \"نسبة 20%\"",
     "the step text is not the brief's",
-    "brief text missing: أنت تحكم مصر من 1 يناير 2011. اضغط أي محافظة على الخريطة لتفتح بطاقتها، وأي دولة لتعرف حالها وعلاقتك بها."
+    "brief text missing: أنت تحكم مصر من 1 يناير 2011، وبطاقتها في الأعلى تفتح لوحة الدولة. اضغط أي محافظة في مصر لتفتح بطاقتها، وأي دولة أخرى لتعرف حالها وعلاقتك بها."
    ]
   },
   {
@@ -455,7 +460,7 @@
    "sample": [
     "scroll hint chevron missing with content below",
     "brief text not fully visible: الخطوة 1 من 5 · بلدك",
-    "brief text not fully visible: أنت تحكم مصر من 1 يناير 2011. اضغط أي محافظة على الخريطة لتفتح بطاقتها، وأي دولة لتعرف حالها وعلاقتك بها."
+    "brief text not fully visible: أنت تحكم مصر من 1 يناير 2011، وبطاقتها في الأعلى تفتح لوحة الدولة. اضغط أي محافظة في مصر لتفتح بطاقتها، وأي دولة أخرى لتعرف حالها وعلاقتك بها."
    ]
   },
   {
@@ -464,7 +469,7 @@
    "sample": [
     "scroll hint not centred in the clear strip under the fade: y 198.0..216.0 (strip 344.0..366.0)",
     "brief text not fully visible: الخطوة 1 من 5 · بلدك",
-    "brief text not fully visible: أنت تحكم مصر من 1 يناير 2011. اضغط أي محافظة على الخريطة لتفتح بطاقتها، وأي دولة لتعرف حالها وعلاقتك بها."
+    "brief text not fully visible: أنت تحكم مصر من 1 يناير 2011، وبطاقتها في الأعلى تفتح لوحة الدولة. اضغط أي محافظة في مصر لتفتح بطاقتها، وأي دولة أخرى لتعرف حالها وعلاقتك بها."
    ]
   },
   {
@@ -472,16 +477,16 @@
    "ok": true,
    "sample": [
     "text outside the sheet's 12 pt padding: \"2011\"",
-    "text over a control: \"يناير\" runs into «تخطي الجولة، العودة »",
-    "text over a control: \"2011\" runs into «تخطي الجولة، العودة »"
+    "text over a control: \"يناير\" runs into «تخطي الجولة، تعود إل»",
+    "text over a control: \"2011\" runs into «تخطي الجولة، تعود إل»"
    ]
   },
   {
    "name": "two steps shown",
    "ok": true,
    "sample": [
-    "clipped text (bottom): \"تعود إليها من المزيد › المساعدة\" 713.25..834 y 259..274",
-    "clipped text (bottom): \"تعود إليها من المزيد › المساعدة\" 713.25..834 y 413..428",
+    "clipped text (bottom): \"تخطي الجولة\" 767.88..834 y 259..278",
+    "clipped text (bottom): \"تخطي الجولة\" 767.88..834 y 402.02..421.02",
     "control cut by its scroll area (bottom): تخطي الجولة: تعود إليها من"
    ]
   },
@@ -490,7 +495,7 @@
    "ok": true,
    "sample": [
     "the header is not the start tour, paused, on 1 January 2011",
-    "brief text missing: اللعبة متوقفة · 1 يناير 2011",
+    "the header's date is not the HUD's «1 يناير 2011»",
     "brief text missing: اللعبة متوقفة · 1 يناير 2011"
    ]
   },
@@ -506,7 +511,7 @@
    "ok": true,
    "sample": [
     "a11y: the close says only «إغلاق»",
-    "a11y: the close does not say it skips the tour and the game stays paused"
+    "a11y: the close does not say it skips the tour, stays in the help and the game stays paused"
    ]
   },
   {
@@ -537,8 +542,8 @@
    "ok": true,
    "sample": [
     "the step text is not the brief's",
-    "brief text missing: أنت تحكم مصر من 1 يناير 2011. اضغط أي محافظة على الخريطة لتفتح بطاقتها، وأي دولة لتعرف حالها وعلاقتك بها.",
-    "brief text missing: أنت تحكم مصر من 1 يناير 2011. اضغط أي محافظة على الخريطة لتفتح بطاقتها، وأي دولة لتعرف حالها وعلاقتك بها."
+    "brief text missing: أنت تحكم مصر من 1 يناير 2011، وبطاقتها في الأعلى تفتح لوحة الدولة. اضغط أي محافظة في مصر لتفتح بطاقتها، وأي دولة أخرى لتعرف حالها وعلاقتك بها.",
+    "brief text missing: أنت تحكم مصر من 1 يناير 2011، وبطاقتها في الأعلى تفتح لوحة الدولة. اضغط أي محافظة في مصر لتفتح بطاقتها، وأي دولة أخرى لتعرف حالها وعلاقتك بها."
    ]
   },
   {
@@ -553,8 +558,8 @@
    "name": "last step without start",
    "ok": true,
    "sample": [
-    "a11y: «ابدأ الحملة: يستأنف الوق» does not read all it shows: التالي",
-    "the primary is not «ابدأ الحملة · يستأنف الوقت بسرعة 1×» read as «ابدأ الحملة: يستأنف الوقت بسرعة 1×»",
+    "a11y: «ابدأ الحملة: يفتح أول قر» does not read all it shows: التالي",
+    "the primary is not «ابدأ الحملة · يفتح أول قرار: احتجاجات في تونس» read as «ابدأ الحملة: يفتح أول قرار، احتجاجات في تونس»",
     "brief text missing: ابدأ الحملة"
    ]
   },
@@ -562,31 +567,150 @@
    "name": "skip gone",
    "ok": true,
    "sample": [
+    "the step body is not «sec,primary,skip»: sec,primary",
     "the skip is missing, misplaced or does not say the tour stays in the help",
-    "brief text missing: تخطي الجولة",
-    "brief text missing: تعود إليها من المزيد › المساعدة"
+    "brief text missing: تخطي الجولة"
    ]
   },
   {
    "name": "ring on the wrong element",
    "ok": true,
    "sample": [
-    "the ring is not on the step's element .stats: nation glass bar tap",
-    "the ring is not a white 2 pt outline"
+    "the ring is not on the step's element .stats alone: nation glass bar tap",
+    "the ring is not a solid white 2 pt outline 3 pt outside"
    ]
   },
   {
    "name": "ring not white",
    "ok": true,
    "sample": [
-    "the ring is not a white 2 pt outline"
+    "the ring is not a solid white 2 pt outline 3 pt outside"
+   ]
+  },
+  {
+   "name": "ring at offset 0",
+   "ok": true,
+   "sample": [
+    "the ring is not a solid white 2 pt outline 3 pt outside"
+   ]
+  },
+  {
+   "name": "ring dashed",
+   "ok": true,
+   "sample": [
+    "the ring is not a solid white 2 pt outline 3 pt outside"
+   ]
+  },
+  {
+   "name": "second ring by shadow",
+   "ok": true,
+   "sample": [
+    "the ring is not on the step's element .stats alone: nation glass bar tap, stats glass bar"
+   ]
+  },
+  {
+   "name": "second ring by border",
+   "ok": true,
+   "sample": [
+    "panel border احتجاجات واسعة في تونس 3: 2px rgb(234, 242, 247)",
+    "HUD element moved from its B3 position: .toast x 62.0..269.6 y 56.0..88.0",
+    "the ring is not on the step's element .date alone: date glass bar, toast glass ctl"
+   ]
+  },
+  {
+   "name": "ring over the map",
+   "ok": true,
+   "sample": [
+    "a ring on the sections' step: DIV"
+   ]
+  },
+  {
+   "name": "map outlined",
+   "ok": true,
+   "sample": [
+    "a ring on the sections' step: map"
+   ]
+  },
+  {
+   "name": "extra action row",
+   "ok": true,
+   "sample": [
+    "the step body is not «sec,primary,skip»: sec,primary,r-act tap,skip"
+   ]
+  },
+  {
+   "name": "primary bar hidden",
+   "ok": true,
+   "sample": [
+    "the primary's white bar is not drawn"
+   ]
+  },
+  {
+   "name": "close without the help",
+   "ok": true,
+   "sample": [
+    "a11y: the close does not say it skips the tour, stays in the help and the game stays paused"
+   ]
+  },
+  {
+   "name": "skip path without «حول»",
+   "ok": true,
+   "sample": [
+    "the skip is missing, misplaced or does not say the tour stays in the help",
+    "brief text missing: تعود إليها من المزيد › حول › المساعدة"
+   ]
+  },
+  {
+   "name": "HUD date changed",
+   "ok": true,
+   "sample": [
+    "the header's date is not the HUD's «14 يناير 2011»",
+    "step 1's country and date are not the HUD's «مصر», «14 يناير 2011»"
+   ]
+  },
+  {
+   "name": "HUD country changed",
+   "ok": true,
+   "sample": [
+    "step 1's country and date are not the HUD's «تونس», «1 يناير 2011»"
+   ]
+  },
+  {
+   "name": "HUD speed changed",
+   "ok": true,
+   "sample": [
+    "the speeds are not the speed button's and menu's, 1× to «أقصى», or the pause is not named"
+   ]
+  },
+  {
+   "name": "ringed element in the inset",
+   "ok": true,
+   "sample": [
+    "tap in side inset: الدولة: مصر، حسني مبارك، ج",
+    "panel in side inset: الدولة: مصر، حسني مبارك، ج",
+    "HUD element moved from its B3 position: .top > .nation x 752.3..924.0 y 8.0..44.0"
+   ]
+  },
+  {
+   "name": "sections in three columns",
+   "ok": true,
+   "sample": [
+    "the sections are not two rows of four: 3 rows"
+   ]
+  },
+  {
+   "name": "bell not named",
+   "ok": true,
+   "sample": [
+    "HUD element moved from its B3 position: .toast x 62.0..223.6 y 56.0..88.0",
+    "the step does not name the bell its ring holds"
    ]
   },
   {
    "name": "ring on the sections step",
    "ok": true,
    "sample": [
-    "a ring on the sections' step"
+    "a ring on the sections' step: dock glass bar"
    ]
   },
   {
@@ -607,24 +731,24 @@
   },
   {
    "name": "sections off",
-   "ok": true,
+   "ok": false,
    "sample": [
-    "the sections are not the dock's seven, in its order, with its icons"
+    "the sections are not the dock's eight, in its order, with its icons"
    ]
   },
   {
    "name": "speeds off",
-   "ok": true,
+   "ok": false,
    "sample": [
-    "the speeds are not the speed menu's, 1× to «أقصى»"
+    "the speeds are not the speed button's and menu's, 1× to «أقصى», or the pause is not named"
    ]
   },
   {
-   "name": "first news off",
+   "name": "first decision off",
    "ok": true,
    "sample": [
     "HUD element moved from its B3 position: .toast x 62.0..239.3 y 56.0..88.0",
-    "the first news is not the toast's «انتخابات في السودان»"
+    "the first decision is not the alert's «انتخابات في السودان»"
    ]
   },
   {

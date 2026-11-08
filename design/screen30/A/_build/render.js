@@ -137,8 +137,8 @@ require(path.join(OUT, '../../shared/check/panelcheck.js'))({
     ['ring on the sections step', d, '&tab=s3', '.hud .dock { outline: 2px solid #EAF2F7 !important; }', /a ring on the sections' step/],
     ['ringed under the sheet', d, '&tab=s1', '.hud .nation { position: fixed !important; top: 200px !important; right: 40px !important; }', /the ringed element \.nation is under the sheet/],
     ['indicators off', d, '&tab=s2', '', /the indicators named are not the HUD's/, () => { document.querySelector('.hud .stat .lbl').textContent = 'المال'; }],
-    ['sections off', d, '&tab=s3', '', /the sections are not the dock's seven/, () => { const l = document.querySelector('.t-secs'); l.appendChild(l.firstElementChild); }],
-    ['speeds off', d, '&tab=s4', '', /the speeds are not the speed menu's/, () => { const r = document.querySelectorAll('#speedmenu .mrow'); r[r.length - 1].querySelector('span').textContent = '20×'; }],
+    ['sections off', d, '&tab=s3', '', /the sections are not the dock's eight/, () => { const l = document.querySelector('.t-secs'); l.appendChild(l.firstElementChild); }],
+    ['speeds off', d, '&tab=s4', '', /the speeds are not the speed button's and menu's/, () => { const r = document.querySelectorAll('#speedmenu .mrow'); r[r.length - 1].querySelector('span').textContent = '20×'; }],
     ['first decision off', d, '&tab=s5', '', /the first decision is not the alert's/, () => { document.querySelector('.hud .alert-prev .txt').textContent = 'انتخابات في السودان'; }],
   ],
 });
