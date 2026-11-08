@@ -63,13 +63,14 @@ if (document.querySelector('[role="dialog"], [role="alertdialog"], dialog, .moda
 // the ring: exactly the step's HUD element, and nothing else on the page ringed (an outline, a box-shadow spread or a white
 // border, the map included); a solid white 2 pt outline 3 pt outside; the element inside the side insets, the ring on
 // screen and clear of the sheet; none on the sections' step. A ring may be drawn by the element or its ::before or ::after,
-// by an outline, a white border or any box-shadow layer with a spread (any offset, blur or alpha)
+// by an outline, a white border (alpha ≥ 0.5) or an outer box-shadow layer with a white colour (alpha ≥ 0.5) and a spread
+// of 1.5 pt or more, at any offset or blur; the HUD's own hairlines (the flags' 1 pt rim at 22%, inset glass edges) are not rings
 { const white = (c) => c === X.TOK.t1;
-  const whiteish = (col) => { const m = /rgba?\\(([\\d.]+), ([\\d.]+), ([\\d.]+)(?:, ([\\d.]+))?\\)/.exec(col || ''); return !!m && +m[1] > 200 && +m[2] > 200 && +m[3] > 200 && (m[4] === undefined || +m[4] > 0); };
+  const whiteish = (col) => { const m = /rgba?\\(([\\d.]+), ([\\d.]+), ([\\d.]+)(?:, ([\\d.]+))?\\)/.exec(col || ''); return !!m && +m[1] > 200 && +m[2] > 200 && +m[3] > 200 && (m[4] === undefined || +m[4] >= 0.5); };
   const layers = (bs) => { const out = []; let depth = 0, cur = ''; for (const ch of bs) { if (ch === '(') depth++; if (ch === ')') depth--; if (ch === ',' && !depth) { out.push(cur); cur = ''; } else cur += ch; } if (cur.trim()) out.push(cur); return out; };
   const ringStyle = (c) => { if (!c || c.display === 'none' || c.visibility === 'hidden') return false;
     if (c.outlineStyle !== 'none' && parseFloat(c.outlineWidth) > 0) return true;
-    if (c.boxShadow && c.boxShadow !== 'none' && layers(c.boxShadow).some((l) => { const col = (/rgba?\\([^)]*\\)/.exec(l) || [''])[0], px = l.replace(col, '').match(/-?[\\d.]+px/g) || []; return whiteish(col) && px.length >= 4 && parseFloat(px[3]) > 0; })) return true;
+    if (c.boxShadow && c.boxShadow !== 'none' && layers(c.boxShadow).some((l) => { const col = (/rgba?\\([^)]*\\)/.exec(l) || [''])[0], px = l.replace(col, '').match(/-?[\\d.]+px/g) || []; return !/inset/.test(l) && whiteish(col) && px.length >= 4 && parseFloat(px[3]) >= 1.5; })) return true;
     return ['Top', 'Right', 'Bottom', 'Left'].some((sd) => parseFloat(c['border' + sd + 'Width']) >= 1 && c['border' + sd + 'Style'] !== 'none' && whiteish(c['border' + sd + 'Color'])); };
   const ringed = (e) => { if (!e.getClientRects().length || getComputedStyle(e).visibility === 'hidden') return false;
     if (ringStyle(getComputedStyle(e))) return true;
