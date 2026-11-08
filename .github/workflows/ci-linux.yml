@@ -19,13 +19,14 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Hygiene
+        shell: bash
         run: |
           set -e
           if find . -name '*.xcodeproj' -o -name '*.xcworkspace' | grep -q .; then
             echo "No Xcode project in the tree: XcodeGen makes it from App/project.yml"; exit 1; fi
           # imports: an allow list. SaneiCore imports nothing; SaneiEngine only SaneiCore (any attribute, access level or kind)
           imp() { grep -nE '^\s*(@\w+(\([^)]*\))?\s+)*((public|internal|package|private|fileprivate)\s+)?import\s' "$@" || true; }
-          bad=$(imp -r Sources/SaneiCore; imp -r Sources/SaneiEngine | grep -vE 'import\s+(\w+\s+)?SaneiCore(\.\w+)*\s*$')
+          bad=$( (imp -r Sources/SaneiCore; imp -r Sources/SaneiEngine | grep -vE 'import\s+(\w+\s+)?SaneiCore(\.\w+)*\s*$') || true )
           if [ -n "$bad" ]; then echo "$bad"; echo "SaneiCore imports nothing and SaneiEngine only SaneiCore: the standard library only (§2.2)"; exit 1; fi
           if grep -rnE '\b(Float(16|32|64|80)?|Double|CGFloat)\b' Sources/SaneiEngine; then
             echo "SaneiEngine never uses floating point (§2.2)"; exit 1; fi
@@ -35,7 +36,8 @@ jobs:
           lit='(^|[^0-9A-Za-z_.])[0-9][0-9_]*(\.[0-9][0-9_]*([eE][-+]?[0-9]+)?|[eE][-+]?[0-9]+)\b|\.\.[.<]?[0-9][0-9_]*\.[0-9]|0x[0-9A-Fa-f_]*(\.[0-9A-Fa-f_]+)?[pP][-+]?[0-9]'
           found=0
           for f in $(find Sources/SaneiEngine -name '*.swift'); do
-            if sed -E 's://.*$::' "$f" | grep -nE "$lit" | sed "s|^|$f:|"; then found=1; fi
+            out=$(sed -E 's://.*$::' "$f" | grep -nE "$lit" || true)
+            if [ -n "$out" ]; then echo "$out" | sed "s|^|$f:|"; found=1; fi
           done
           if [ "$found" = 1 ]; then echo "SaneiEngine never uses floating-point literals (§2.2)"; exit 1; fi
           # the app's platform and render code never reach into the engine (§2.2: only App/App and App/UI hold it)
