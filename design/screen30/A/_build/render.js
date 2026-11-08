@@ -52,7 +52,10 @@ if (document.querySelector('[role="dialog"], [role="alertdialog"], dialog, .moda
 { const kids = [...body.children].filter((e) => getComputedStyle(e).display !== 'none').map((e) => e.matches('.r-sec') ? 'sec' : e.matches('.r-act.r-first') ? 'primary' : e.matches('.r-link') ? 'skip' : (e.className || e.tagName));
   const want = i < 4 ? 'sec,primary,skip' : 'sec,primary'; if (kids.join(',') !== want) issues.push('the step body is not «' + want + '»: ' + kids.join(','));
   // and nothing more inside: the controls are the primary and the skip; the text section holds its heading, its text and (s3) the list
-  const ctl = [...body.querySelectorAll('button, [role="button"], [role="link"], [role="tab"], [role="menuitem"], [role="switch"], [role="checkbox"], [tabindex]:not([tabindex="-1"]), a, .tap, input, select, textarea, summary, label')].filter((e) => e.getClientRects().length);
+  const tapSel = 'button, a, .tap, input, select, textarea, summary, label, [onclick], [tabindex]:not([tabindex="-1"]), [contenteditable]:not([contenteditable="false"]), '
+    + ['button', 'link', 'tab', 'menuitem', 'menuitemradio', 'menuitemcheckbox', 'switch', 'checkbox', 'radio', 'option', 'slider', 'combobox', 'textbox', 'searchbox', 'spinbutton'].map((r) => '[role="' + r + '"]').join(', ');
+  const cand = [...body.querySelectorAll('*')].filter((e) => e.getClientRects().length && (e.matches(tapSel) || getComputedStyle(e).cursor === 'pointer'));
+  const ctl = cand.filter((e) => !cand.some((o) => o !== e && o.contains(e)));   // a tappable thing counted once, at its outermost element
   if (ctl.length !== (i < 4 ? 2 : 1)) issues.push('the step body holds ' + ctl.length + ' controls, not ' + (i < 4 ? 2 : 1));
   const sec = body.querySelector('.r-sec'), inSec = sec ? [...sec.children].filter((e) => getComputedStyle(e).display !== 'none').map((e) => e.tagName === 'H3' ? 'h3' : e.matches('p.d-text') ? 'text' : e.matches('ul.t-secs') ? 'list' : (e.className || e.tagName)) : [];
   if (inSec.join(',') !== (tab === 's3' ? 'h3,text,list' : 'h3,text')) issues.push('the step text section is not its heading and text: ' + inSec.join(','));
@@ -67,25 +70,30 @@ if (document.querySelector('[role="dialog"], [role="alertdialog"], dialog, .moda
 // by any outline, or a white (alpha ≥ 0.5) border or box-shadow layer of 1 pt or more, outer or inset, at any offset or blur
 // (rgb, color(srgb) and oklch read); the HUD's own hairlines (the flags' rim at 22%, the cyan glass edge) are not white enough
 { const white = (c) => c === X.TOK.t1;
-  const whiteish = (col) => { col = col || '';
-    let m = /rgba?\\(([\\d.]+), ([\\d.]+), ([\\d.]+)(?:, ([\\d.]+))?\\)/.exec(col);
-    if (m) return +m[1] > 200 && +m[2] > 200 && +m[3] > 200 && (m[4] === undefined || +m[4] >= 0.5);
-    m = /color\\(srgb ([\\d.]+) ([\\d.]+) ([\\d.]+)(?: \\/ ([\\d.]+))?\\)/.exec(col);
-    if (m) return +m[1] > 0.78 && +m[2] > 0.78 && +m[3] > 0.78 && (m[4] === undefined || +m[4] >= 0.5);
-    m = /oklch\\(([\\d.]+)(%?) ([\\d.]+) [\\d.a-z]+(?: \\/ ([\\d.]+))?\\)/.exec(col);
-    if (m) { const L = m[2] ? +m[1] / 100 : +m[1]; return L > 0.88 && +m[3] < 0.06 && (m[4] === undefined || +m[4] >= 0.5); }
-    return false; };
+  // any CSS colour, read as sRGB and alpha by painting it on a 1×1 canvas (rgb, color(), oklch, lab, display-p3 alike)
+  const cv = document.createElement('canvas'); cv.width = cv.height = 1; const cx = cv.getContext('2d', { willReadFrequently: true }), seenCol = new Map();
+  const whiteish = (col) => { if (!col || col === 'transparent' || col === 'none') return false; if (seenCol.has(col)) return seenCol.get(col);
+    cx.clearRect(0, 0, 1, 1); cx.fillStyle = 'rgba(0, 0, 0, 0)'; cx.fillStyle = col; cx.fillRect(0, 0, 1, 1); const [r, g, b, a] = cx.getImageData(0, 0, 1, 1).data;
+    const w = a >= 128 && r > 200 && g > 200 && b > 200; seenCol.set(col, w); return w; };
   const layers = (bs) => { const out = []; let depth = 0, cur = ''; for (const ch of bs) { if (ch === '(') depth++; if (ch === ')') depth--; if (ch === ',' && !depth) { out.push(cur); cur = ''; } else cur += ch; } if (cur.trim()) out.push(cur); return out; };
   const ringStyle = (c) => { if (!c || c.display === 'none' || c.visibility === 'hidden') return false;
     if (c.outlineStyle !== 'none' && parseFloat(c.outlineWidth) > 0) return true;
-    if (c.boxShadow && c.boxShadow !== 'none' && layers(c.boxShadow).some((l) => { const col = (/(rgba?|color|oklch)\\([^)]*\\)/.exec(l) || [''])[0], px = l.replace(col, '').match(/-?[\\d.]+px/g) || []; return whiteish(col) && px.length >= 4 && parseFloat(px[3]) >= 1; })) return true;
+    if (c.boxShadow && c.boxShadow !== 'none' && layers(c.boxShadow).some((l) => { const col = (/[a-z-]+\\([^()]*(\\([^()]*\\)[^()]*)*\\)/.exec(l) || [''])[0], px = l.replace(col, '').match(/-?[\\d.]+px/g) || []; return whiteish(col) && px.length >= 3 && (parseFloat(px[3] || '0') >= 1 || parseFloat(px[2]) >= 2); })) return true;
+    // a white drop-shadow filter or any border image paints a ring too
+    if (c.filter && c.filter !== 'none' && (c.filter.match(/drop-shadow\\(([^()]*(\\([^()]*\\))?[^()]*)\\)/g) || []).some((f) => whiteish((/[a-z-]+\\([^()]*\\)/.exec(f.slice(12)) || [''])[0]))) return true;
+    if (c.borderImageSource && c.borderImageSource !== 'none') return true;
     return ['Top', 'Right', 'Bottom', 'Left'].some((sd) => parseFloat(c['border' + sd + 'Width']) >= 1 && c['border' + sd + 'Style'] !== 'none' && whiteish(c['border' + sd + 'Color'])); };
   const ringed = (e) => { if (!e.getClientRects().length || getComputedStyle(e).visibility === 'hidden') return false;
     if (ringStyle(getComputedStyle(e))) return true;
     return ['::before', '::after'].some((ps) => { const c = getComputedStyle(e, ps); return c.content !== 'none' && c.content !== 'normal' && ringStyle(c); }); };
   // no added layer: the page's top level is the icon sprite, the map, the HUD (the sheet inside it) and the device frame
-  [...document.body.children].forEach((e) => { if (/^(SCRIPT|STYLE|LINK)$/.test(e.tagName) || e.matches('.map, .hud, .dev') || (e.tagName.toLowerCase() === 'svg' && !e.getClientRects().length) || (e.tagName.toLowerCase() === 'svg' && e.getBoundingClientRect().width * e.getBoundingClientRect().height === 0)) return;
-    const r = e.getBoundingClientRect(); if (r.width > 0 && r.height > 0 && getComputedStyle(e).visibility !== 'hidden' && getComputedStyle(e).display !== 'none') issues.push('a layer added over the page: ' + (e.className && e.className.baseVal !== undefined ? e.tagName : (e.className || e.tagName))); });
+  // (the sprite is known by its content: only <symbol> and <defs>), and the device frame holds only its own parts
+  const sprite = (e) => e.tagName.toLowerCase() === 'svg' && [...e.children].every((k) => /^(symbol|defs)$/i.test(k.tagName));
+  const added = (e, ok) => !/^(SCRIPT|STYLE|LINK)$/.test(e.tagName) && !ok(e);
+  [...document.body.children].filter((e) => added(e, (x) => x.matches('.map, .hud, .dev') || sprite(x)))
+    .concat([...(document.querySelector('.dev') || document.createElement('i')).children].filter((e) => added(e, (x) => x.matches('.corners, .cutout, .homebar, .safe'))))
+    .forEach((e) => issues.push('a layer added over the page: ' + (e.className && e.className.baseVal !== undefined ? e.tagName : (e.className || e.tagName))));
+  [document.documentElement, document.body].forEach((e) => ['::before', '::after'].forEach((ps) => { const c = getComputedStyle(e, ps); if (c.content !== 'none' && c.content !== 'normal') issues.push('a layer added over the page: ' + e.tagName.toLowerCase() + ps); }));
   const rings = [...document.body.querySelectorAll('*')].filter((e) => !e.closest('.sheet') && ringed(e));
   const want = ST[i][2], tgt = want && document.querySelector('.hud ' + want);
   if (!want) { if (rings.length) issues.push('a ring on the sections\\' step: ' + rings.map((e) => e.className || e.tagName).join(', ')); }
@@ -170,6 +178,13 @@ require(path.join(OUT, '../../shared/check/panelcheck.js'))({
     ['second ring on the step element', d, '&tab=s2', '.hud .stats { box-shadow: 0 0 0 8px #EAF2F7 !important; }', /carries a second white ring besides its outline/],
     ['text as a link', d, '&tab=s1', '', /the step body holds 3 controls/, () => { const t = document.querySelector('.r-body[data-tab="s1"] .d-text'); t.innerHTML = '<span role="link" tabindex="0">' + t.innerHTML + '</span>'; }],
     ['SVG ring layer', d, '&tab=s2', '', /a layer added over the page/, () => { const n = document.querySelector('.hud .nation').getBoundingClientRect(), ns = 'http://www.w3.org/2000/svg', v = document.createElementNS(ns, 'svg'); v.setAttribute('style', 'position:fixed;left:' + (n.left - 5) + 'px;top:' + (n.top - 5) + 'px;width:' + (n.width + 10) + 'px;height:' + (n.height + 10) + 'px'); const r = document.createElementNS(ns, 'rect'); r.setAttribute('x', 1); r.setAttribute('y', 1); r.setAttribute('width', n.width + 8); r.setAttribute('height', n.height + 8); r.setAttribute('fill', 'none'); r.setAttribute('stroke', '#EAF2F7'); r.setAttribute('stroke-width', 2); v.appendChild(r); document.body.appendChild(v); }],
+    ['zero-size SVG ring', d, '&tab=s2', '', /a layer added over the page/, () => { const n = document.querySelector('.hud .nation').getBoundingClientRect(), ns = 'http://www.w3.org/2000/svg', v = document.createElementNS(ns, 'svg'); v.setAttribute('style', 'position:fixed;left:0;top:0;width:0;height:0;overflow:visible'); const r = document.createElementNS(ns, 'rect'); r.setAttribute('x', n.left - 5); r.setAttribute('y', n.top - 5); r.setAttribute('width', n.width + 10); r.setAttribute('height', n.height + 10); r.setAttribute('fill', 'none'); r.setAttribute('stroke', '#EAF2F7'); r.setAttribute('stroke-width', 2); v.appendChild(r); document.body.appendChild(v); }],
+    ['layer in the device frame', d, '&tab=s2', '', /a layer added over the page/, () => { const e = document.createElement('div'); e.style.cssText = 'position:absolute;left:100px;top:100px;width:50px;height:50px;border:2px solid #EAF2F7'; document.querySelector('.dev').appendChild(e); }],
+    ['body pseudo ring', d, '&tab=s3', 'body::after { content: ""; position: fixed; left: 300px; top: 150px; width: 80px; height: 40px; border: 2px solid #EAF2F7; }', /a layer added over the page: body::after/],
+    ['display-p3 ring', d, '&tab=s2', '.hud .nation { box-shadow: 0 0 0 2px color(display-p3 1 1 1) !important; }', /the ring is not on the step's element \.stats alone/],
+    ['drop-shadow ring', d, '&tab=s2', '.hud .nation { filter: drop-shadow(2px 0 0 #EAF2F7) drop-shadow(-2px 0 0 #EAF2F7) !important; }', /the ring is not on the step's element \.stats alone/],
+    ['white glow', d, '&tab=s2', '.hud .nation { box-shadow: 0 0 6px 0 #fff !important; }', /the ring is not on the step's element \.stats alone/],
+    ['text made clickable', d, '&tab=s1', '.r-body[data-tab="s1"] .d-text { cursor: pointer !important; }', /the step body holds 3 controls/],
     ['primary bar faded', d, '&tab=s1', '.r-first::after { opacity: 0 !important; }', /the primary's white bar is not drawn/],
     ['skip path without «حول»', d, '&tab=s2', '', /the skip is missing, misplaced or does not say the tour stays in the help/, () => { document.querySelector('.r-body[data-tab="s2"] .r-link .r-at > span').textContent = 'تعود إليها من المزيد › المساعدة'; }],
     ['HUD date changed', d, '&tab=s1', '', /the header's date is not the HUD's/, () => { document.querySelector('.hud .date .dmy').textContent = '14 يناير 2011'; }],
