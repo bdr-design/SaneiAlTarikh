@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-08T01:07:28.453Z",
+ "ranAt": "2026-11-08T01:10:50.598Z",
  "inputs": {
   "files": [
    "index.html",
@@ -28,7 +28,7 @@
    "header_cairo.jpg",
    "map_overlay_cairo.svg"
   ],
-  "sha1": "0a2f4d2135dfec7b6bc7f7e23e43b198cf236a20"
+  "sha1": "199f3ba43280c7d16e078b4f4c53ac4850a6012a"
  },
  "cleanIssues": {
   "i16promax": [],
@@ -414,9 +414,11 @@
   },
   {
    "name": "clipped text (list)",
-   "ok": false,
+   "ok": true,
    "sample": [
-    "horizontal overflow in دعم الوقود −10%"
+    "clipped text (sides): \"دعم الوقود\" 773.39..834 y 145..164",
+    "clipped text (bottom): \"الاقتصاد ·\" 793.83..834 y 163..178",
+    "horizontal overflow in دعم الوقود −10%الاقتصاد · "
    ]
   },
   {
@@ -447,7 +449,7 @@
   },
   {
    "name": "text into a control (row)",
-   "ok": false,
+   "ok": true,
    "sample": [
     "text overlap \"دعم الوقود\" / \"إلغاء\"",
     "text overlap \"الاقتصاد ·\" / \"إلغاء\"",

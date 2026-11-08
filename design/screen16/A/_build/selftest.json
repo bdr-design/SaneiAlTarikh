@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-07T20:23:44.133Z",
+ "ranAt": "2026-11-08T01:08:45.198Z",
  "inputs": {
   "files": [
    "index.html",
@@ -15,6 +15,8 @@
    "../../screen1/B3/index.html",
    "../../shared/devices.json",
    "_build/center.css",
+   "../../shared/paused_hud.css",
+   "../../shared/paused_hud.py",
    "../../shared/flag_eg.svg",
    "../../shared/flags/eg.svg",
    "../../shared/map_mena_d1.jpg",
@@ -22,7 +24,7 @@
    "header_cairo.jpg",
    "map_overlay_cairo.svg"
   ],
-  "sha1": "f600efc5dc8fd47d1c9dee102eb1039c20073acc"
+  "sha1": "f668c85981aec1bb08e4d0f4e65e11fa93d145ab"
  },
  "cleanIssues": {
   "i16promax": [],
@@ -118,6 +120,7 @@
    "ok": true,
    "sample": [
     "something drawn over the map: DIV (rgba(0, 0, 0, 0.55))",
+    "contrast 3.26 for \"1\"",
     "contrast 1.92 for \"2\""
    ]
   },
@@ -428,6 +431,13 @@
     "% shown before its number: \"نسبة 20%\"",
     "the sections are «نسبة 20%، أوامر معلقة، مهم، للعلم»",
     "«احتجاجات في تونس» is not under «قرارات تنتظرك»"
+   ]
+  },
+  {
+   "name": "paused HUD stale",
+   "ok": true,
+   "sample": [
+    "the paused HUD does not count the one pending order (screen 26: the play button, its badge, the toast slot)"
    ]
   },
   {

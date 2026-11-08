@@ -112,11 +112,13 @@ require(path.join(OUT, '../../shared/check/panelcheck.js'))({
   cases: (d, se) => [
     ['brief text hidden (list)', d, '', '', /brief text not fully visible/, () => { document.querySelector('.r-body[data-tab="list"] .o-row .r-at b').style.opacity = '0'; }],
     ['18 pt misuse (list)', d, '', '.r-at > span { font-size: 18px !important; font-weight: 700 !important; }', /18 pt is for/],
-    ['clipped text (list)', d, '', '.r-body[data-tab="list"] .o-row:first-child .r-at b { display: block; width: 40px; overflow: hidden !important; }', /clipped text \(sides\)/],
+    ['clipped text (list)', d, '', '.r-body[data-tab="list"] .o-row:first-child .r-at { flex: none !important; width: 40px; overflow: hidden !important; }', /clipped text \(sides\)/],
     ['gap (list)', d, '', '.r-body[data-tab="list"] { gap: 6px !important; }', /gap 6 on/],
     ['faint text (list)', d, '', '.o-row .r-at > span { opacity: .35 !important; }', /^contrast [0-3](\.\d+)? for/],
     ['% before its number (list)', d, '', '', /% shown before its number/, () => { document.querySelector('.r-body[data-tab="list"] .s-note').textContent = 'نسبة 20%'; }],
-    ['text into a control (row)', d, '', '.r-body[data-tab="list"] .o-row:first-child .r-btn { position: absolute; right: 60px; }', /text over a control/],
+    // (the shared «text over a control» rule covers chips, «لماذا؟», segments and the close; the cancel is a labelled
+    //  button, so its text running into the order's text is the text-overlap rule's)
+    ['text into a control (row)', d, '', '.r-body[data-tab="list"] .o-row:first-child .r-btn { position: absolute; right: 60px; }', /text overlap "دعم الوقود" \/ "إلغاء"/],
     ['hint chevron missing (forced overflow)', se, '', '.r-body[data-tab="list"] > :first-child { margin-top: 200px !important; } .r-hint { display: none !important; }', /scroll hint chevron missing with content below/, () => { document.documentElement.dataset.fbot = '1'; }],
     ['hint over the content (forced overflow)', se, '', '.r-body[data-tab="list"] > :first-child { margin-top: 200px !important; } .r-hint { bottom: 150px !important; }', /scroll hint not centred in the clear strip/, () => { document.documentElement.dataset.fbot = '1'; }],
     ['running, not paused', d, '', '', /the HUD does not show the game paused/, () => { const p = document.querySelector('.date .play'); p.setAttribute('aria-label', 'إيقاف مؤقت (اللعبة تعمل)'); p.querySelector('use').setAttribute('href', '#i-pause'); }],
