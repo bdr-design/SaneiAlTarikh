@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-08T14:13:51.750Z",
+ "ranAt": "2026-11-08T15:29:24.282Z",
  "devices": [
   "i16promax",
   "se"
@@ -251,12 +251,19 @@
    ]
   },
   {
+   "name": "city name over a label",
+   "ok": true,
+   "sample": [
+    "map city name «القاهرة» over «مصر»"
+   ]
+  },
+  {
    "name": "map label cut",
    "ok": true,
    "sample": [
-    "map label العراق cut by a panel edge",
     "map city dot 4 cut by a panel edge",
-    "map label بنغازي cut by a panel edge"
+    "map label بنغازي cut by a panel edge",
+    "map city dot 7 cut by a panel edge"
    ]
   },
   {

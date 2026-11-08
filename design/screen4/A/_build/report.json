@@ -1,7 +1,7 @@
 {
  "se": {
   "device": "667x375 side 0 bottom 0 none",
-  "renderedAt": "2026-11-08T14:13:10.359Z",
+  "renderedAt": "2026-11-08T15:28:43.911Z",
   "issueCount": 0,
   "issues": [],
   "fit": {
@@ -721,7 +721,7 @@
  },
  "i16promax": {
   "device": "956x440 side 62 bottom 21 island",
-  "renderedAt": "2026-11-08T14:13:07.444Z",
+  "renderedAt": "2026-11-08T15:28:41.060Z",
   "issueCount": 0,
   "issues": [],
   "fit": {
@@ -843,13 +843,11 @@
     "y1": 154.6486153846154
    },
    "hiddenLabels": [
-    "العراق",
     "بنغازي",
     "بغداد"
    ]
   },
   "hiddenLabels": [
-   "العراق",
    "بنغازي",
    "بغداد"
   ],

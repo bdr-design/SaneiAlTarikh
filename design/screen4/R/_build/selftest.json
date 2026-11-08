@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-08T14:18:27.293Z",
+ "ranAt": "2026-11-08T15:35:31.964Z",
  "inputs": {
   "files": [
    "index.html",
@@ -15,11 +15,11 @@
    "../../shared/flag_eg.svg",
    "../../shared/flags/eg.svg",
    "../../shared/map_mena_d1.jpg",
-   "../../shared/map_mena_d1_overlay.svg",
+   "../A/map_overlay_cairo.svg",
    "header_cairo.jpg",
    "map_overlay_cairo.svg"
   ],
-  "sha1": "dd1ca2f485c63af96ffcea22455ba2c4cbfd7272"
+  "sha1": "426c7daabb6eea64be779b3084f852c59b0bb9dd"
  },
  "cleanIssues": {
   "i16promax": [],
@@ -394,6 +394,20 @@
     "brief text missing: لماذا؟",
     "brief text missing: لماذا؟",
     "brief text missing: لماذا؟ · كل الأسباب"
+   ]
+  },
+  {
+   "name": "city dot under its name",
+   "ok": true,
+   "sample": [
+    "map city dot under its own name: 1"
+   ]
+  },
+  {
+   "name": "city name over a label",
+   "ok": true,
+   "sample": [
+    "map city name «الإسكندرية» over «مصر»"
    ]
   },
   {

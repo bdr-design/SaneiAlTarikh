@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-08T14:16:44.315Z",
+ "ranAt": "2026-11-08T15:35:54.523Z",
  "inputs": {
   "files": [
    "index.html",
@@ -16,14 +16,14 @@
    "../../shared/devices.json",
    "_build/markets.css",
    "../../screen6/A/_build/sheet.html",
+   "../../screen4/A/map_overlay_cairo.svg",
    "../../shared/flag_eg.svg",
    "../../shared/flags/eg.svg",
    "../../shared/map_mena_d1.jpg",
-   "../../shared/map_mena_d1_overlay.svg",
    "header_cairo.jpg",
    "map_overlay_cairo.svg"
   ],
-  "sha1": "7ff0b6067b0d10f41153c6809f7b2eb630a0d985"
+  "sha1": "e9c91dc1b2955931daf3ddb114bb4e9f7e8b37ad"
  },
  "cleanIssues": {
   "i16promax": [],
@@ -101,7 +101,7 @@
    "sample": [
     "panel not opaque: الأسواق: مصر rgba(9, 17, 25, 0.66)",
     "contrast 3.56 for \"السلع\"",
-    "contrast 4.07 for \"القمح أساسًا · نستورد\""
+    "contrast 3.15 for \"القمح أساسًا · نستورد\""
    ]
   },
   {
@@ -244,6 +244,13 @@
    "ok": true,
    "sample": [
     "map city dot under its own name: 0"
+   ]
+  },
+  {
+   "name": "city name over a label",
+   "ok": true,
+   "sample": [
+    "map city name «القاهرة» over «مصر»"
    ]
   },
   {

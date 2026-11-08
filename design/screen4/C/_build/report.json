@@ -1,7 +1,7 @@
 {
  "se": {
   "device": "667x375 side 0 bottom 0 none",
-  "renderedAt": "2026-11-08T13:39:28.947Z",
+  "renderedAt": "2026-11-08T15:30:08.496Z",
   "issueCount": 0,
   "issues": [],
   "state": "compact",
@@ -1442,7 +1442,7 @@
  },
  "i16promax": {
   "device": "956x440 side 62 bottom 21 island",
-  "renderedAt": "2026-11-08T13:39:21.607Z",
+  "renderedAt": "2026-11-08T15:30:01.077Z",
   "issueCount": 0,
   "issues": [],
   "state": "compact",
@@ -2919,7 +2919,7 @@
  },
  "i16promax_expanded": {
   "device": "956x440 side 62 bottom 21 island",
-  "renderedAt": "2026-11-08T13:39:23.301Z",
+  "renderedAt": "2026-11-08T15:30:02.796Z",
   "issueCount": 0,
   "issues": [],
   "state": "expanded",
@@ -4401,7 +4401,7 @@
  },
  "i16promax_expanded_2": {
   "device": "956x440 side 62 bottom 21 island",
-  "renderedAt": "2026-11-08T13:39:25.044Z",
+  "renderedAt": "2026-11-08T15:30:04.469Z",
   "issueCount": 0,
   "issues": [],
   "state": "expanded",
@@ -5880,7 +5880,7 @@
  },
  "i16promax_expanded_3": {
   "device": "956x440 side 62 bottom 21 island",
-  "renderedAt": "2026-11-08T13:39:26.664Z",
+  "renderedAt": "2026-11-08T15:30:06.225Z",
   "issueCount": 0,
   "issues": [],
   "state": "expanded",
@@ -7430,7 +7430,7 @@
   ]
  },
  "selftest": {
-  "ranAt": "2026-11-08T13:39:29.328Z",
+  "ranAt": "2026-11-08T15:30:08.969Z",
   "ok": true,
   "cleanIssues": 0,
   "planted": [

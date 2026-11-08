@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-08T14:28:39.167Z",
+ "ranAt": "2026-11-08T15:45:40.059Z",
  "inputs": {
   "files": [
    "index.html",
@@ -13,14 +13,14 @@
    "../../screen4/A/index.html",
    "../../screen1/B3/index.html",
    "../../shared/devices.json",
+   "../../screen4/A/map_overlay_cairo.svg",
    "../../shared/flag_eg.svg",
    "../../shared/flags/eg.svg",
    "../../shared/map_mena_d1.jpg",
-   "../../shared/map_mena_d1_overlay.svg",
    "header_cairo.jpg",
    "map_overlay_cairo.svg"
   ],
-  "sha1": "94a070e6582be79c6a5b0e1d48ea35e6a54efdda"
+  "sha1": "81312609cc8f8767c1bd1a4a1c7ecd2c21686ae8"
  },
  "cleanIssues": {
   "i16promax": [],
@@ -438,6 +438,13 @@
    "ok": true,
    "sample": [
     "map city dot under its own name: 0"
+   ]
+  },
+  {
+   "name": "city name over a label",
+   "ok": true,
+   "sample": [
+    "map city name «القاهرة» over «مصر»"
    ]
   },
   {

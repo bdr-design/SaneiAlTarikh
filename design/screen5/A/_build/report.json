@@ -1,7 +1,7 @@
 {
  "se": {
   "device": "667x375 side 0 bottom 0 none",
-  "renderedAt": "2026-11-08T14:18:29.919Z",
+  "renderedAt": "2026-11-08T15:35:34.369Z",
   "inputs": {
    "files": [
     "index.html",
@@ -14,14 +14,14 @@
     "../../screen4/A/index.html",
     "../../screen1/B3/index.html",
     "../../shared/devices.json",
+    "../../screen4/A/map_overlay_cairo.svg",
     "../../shared/flag_eg.svg",
     "../../shared/flags/eg.svg",
     "../../shared/map_mena_d1.jpg",
-    "../../shared/map_mena_d1_overlay.svg",
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "29c324fe312d8024b9d5b48c8d7a4007e46fbb89"
+   "sha1": "88d24fd96a329f2fb0633b672bbd7b060117db0c"
   },
   "issues": [],
   "views": {
@@ -8248,7 +8248,7 @@
  },
  "mini": {
   "device": "812x375 side 50 bottom 21 notch",
-  "renderedAt": "2026-11-08T14:18:52.367Z",
+  "renderedAt": "2026-11-08T15:35:56.558Z",
   "inputs": {
    "files": [
     "index.html",
@@ -8261,14 +8261,14 @@
     "../../screen4/A/index.html",
     "../../screen1/B3/index.html",
     "../../shared/devices.json",
+    "../../screen4/A/map_overlay_cairo.svg",
     "../../shared/flag_eg.svg",
     "../../shared/flags/eg.svg",
     "../../shared/map_mena_d1.jpg",
-    "../../shared/map_mena_d1_overlay.svg",
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "29c324fe312d8024b9d5b48c8d7a4007e46fbb89"
+   "sha1": "88d24fd96a329f2fb0633b672bbd7b060117db0c"
   },
   "issues": [],
   "views": {
@@ -17696,7 +17696,7 @@
  },
  "i14": {
   "device": "844x390 side 47 bottom 21 notch",
-  "renderedAt": "2026-11-08T14:19:18.398Z",
+  "renderedAt": "2026-11-08T15:36:22.698Z",
   "inputs": {
    "files": [
     "index.html",
@@ -17709,14 +17709,14 @@
     "../../screen4/A/index.html",
     "../../screen1/B3/index.html",
     "../../shared/devices.json",
+    "../../screen4/A/map_overlay_cairo.svg",
     "../../shared/flag_eg.svg",
     "../../shared/flags/eg.svg",
     "../../shared/map_mena_d1.jpg",
-    "../../shared/map_mena_d1_overlay.svg",
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "29c324fe312d8024b9d5b48c8d7a4007e46fbb89"
+   "sha1": "88d24fd96a329f2fb0633b672bbd7b060117db0c"
   },
   "issues": [],
   "views": {
@@ -27733,7 +27733,7 @@
  },
  "i16": {
   "device": "852x393 side 59 bottom 21 island",
-  "renderedAt": "2026-11-08T14:19:42.030Z",
+  "renderedAt": "2026-11-08T15:36:46.703Z",
   "inputs": {
    "files": [
     "index.html",
@@ -27746,14 +27746,14 @@
     "../../screen4/A/index.html",
     "../../screen1/B3/index.html",
     "../../shared/devices.json",
+    "../../screen4/A/map_overlay_cairo.svg",
     "../../shared/flag_eg.svg",
     "../../shared/flags/eg.svg",
     "../../shared/map_mena_d1.jpg",
-    "../../shared/map_mena_d1_overlay.svg",
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "29c324fe312d8024b9d5b48c8d7a4007e46fbb89"
+   "sha1": "88d24fd96a329f2fb0633b672bbd7b060117db0c"
   },
   "issues": [],
   "views": {
@@ -37510,7 +37510,7 @@
  },
  "i16pro": {
   "device": "874x402 side 62 bottom 21 island",
-  "renderedAt": "2026-11-08T14:20:05.826Z",
+  "renderedAt": "2026-11-08T15:37:10.641Z",
   "inputs": {
    "files": [
     "index.html",
@@ -37523,14 +37523,14 @@
     "../../screen4/A/index.html",
     "../../screen1/B3/index.html",
     "../../shared/devices.json",
+    "../../screen4/A/map_overlay_cairo.svg",
     "../../shared/flag_eg.svg",
     "../../shared/flags/eg.svg",
     "../../shared/map_mena_d1.jpg",
-    "../../shared/map_mena_d1_overlay.svg",
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "29c324fe312d8024b9d5b48c8d7a4007e46fbb89"
+   "sha1": "88d24fd96a329f2fb0633b672bbd7b060117db0c"
   },
   "issues": [],
   "views": {
@@ -46857,7 +46857,7 @@
  },
  "i11": {
   "device": "896x414 side 48 bottom 21 notch",
-  "renderedAt": "2026-11-08T14:20:29.292Z",
+  "renderedAt": "2026-11-08T15:37:34.392Z",
   "inputs": {
    "files": [
     "index.html",
@@ -46870,14 +46870,14 @@
     "../../screen4/A/index.html",
     "../../screen1/B3/index.html",
     "../../shared/devices.json",
+    "../../screen4/A/map_overlay_cairo.svg",
     "../../shared/flag_eg.svg",
     "../../shared/flags/eg.svg",
     "../../shared/map_mena_d1.jpg",
-    "../../shared/map_mena_d1_overlay.svg",
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "29c324fe312d8024b9d5b48c8d7a4007e46fbb89"
+   "sha1": "88d24fd96a329f2fb0633b672bbd7b060117db0c"
   },
   "issues": [],
   "views": {
@@ -56069,16 +56069,16 @@
    "_build/i11_policies_states.png"
   ],
   "pngSha1": {
-   "i11.png": "ef347767358472df3bf05dbff814dca87977505a",
-   "_build/i11_hit.png": "bc88286c3cd67900ed7c1faaab89eccfc07bffe6",
-   "_build/i11_leader.png": "600ad26f9933db5f42c5fd334c392641b14e9ee6",
-   "_build/i11_leader_end.png": "a0977ee24f03d1c6583363374f748d69b553936c",
-   "_build/i11_policies.png": "c43ae3cdd8b2a9bbcc08f255861744e3ab2349b2",
-   "_build/i11_policies_end.png": "9af021c1a013878aff4d4cee05cfaaa2796bb6c7",
-   "_build/i11_projects.png": "74e0d641e3e2a1b22ea7b8913adb6f4a2b95dbd3",
-   "_build/i11_projects_end.png": "0791431ec17d5392a3cbcd256e679dc22f036b64",
-   "_build/i11_states.png": "cb1103e9c5b9558cb89c0b019554c4a106593249",
-   "_build/i11_policies_states.png": "a5d3cbda1149bede7c261c24ffb60a63662486ff"
+   "i11.png": "40aa6ccf45e1e66102a6e8ed965fd0e8de5d7e30",
+   "_build/i11_hit.png": "094fae916b6aa14765918297213822c73c4e2dc6",
+   "_build/i11_leader.png": "6a7e8f14a2358c8326c6bf43bc37b5dd7b77c689",
+   "_build/i11_leader_end.png": "85ddc13ecd1a343f8877249cbf0c6e36e9d27efd",
+   "_build/i11_policies.png": "14e595853419078a80beeb1bd689cfe1a07d0e74",
+   "_build/i11_policies_end.png": "d585f6365d3b45a86a2e926603226c54693da2bc",
+   "_build/i11_projects.png": "d910217aab9ce995ad312065af11da687f0a6041",
+   "_build/i11_projects_end.png": "74ebe26263e6c9e454a6fd656e241814dadb34bb",
+   "_build/i11_states.png": "253ecfa196b7d4380e9b7893d56ac3b76f57896c",
+   "_build/i11_policies_states.png": "d9f66931a6e21d4a8481f493c5fa69db24f3d1ed"
   },
   "env": {
    "chromium": "153.0.8010.12"
@@ -56087,7 +56087,7 @@
  },
  "i16promax": {
   "device": "956x440 side 62 bottom 21 island",
-  "renderedAt": "2026-11-08T14:20:52.771Z",
+  "renderedAt": "2026-11-08T15:37:58.115Z",
   "inputs": {
    "files": [
     "index.html",
@@ -56100,14 +56100,14 @@
     "../../screen4/A/index.html",
     "../../screen1/B3/index.html",
     "../../shared/devices.json",
+    "../../screen4/A/map_overlay_cairo.svg",
     "../../shared/flag_eg.svg",
     "../../shared/flags/eg.svg",
     "../../shared/map_mena_d1.jpg",
-    "../../shared/map_mena_d1_overlay.svg",
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "29c324fe312d8024b9d5b48c8d7a4007e46fbb89"
+   "sha1": "88d24fd96a329f2fb0633b672bbd7b060117db0c"
   },
   "issues": [],
   "views": {
@@ -56158,7 +56158,6 @@
     "hiddenLabels": [
      "ليبيا",
      "إيران",
-     "العراق",
      "سوريا",
      "الأردن",
      "الإمارات",
@@ -56859,7 +56858,6 @@
     "hiddenLabels": [
      "ليبيا",
      "إيران",
-     "العراق",
      "سوريا",
      "الأردن",
      "الإمارات",
@@ -57442,7 +57440,6 @@
     "hiddenLabels": [
      "ليبيا",
      "إيران",
-     "العراق",
      "سوريا",
      "الأردن",
      "الإمارات",
@@ -58015,7 +58012,6 @@
     "hiddenLabels": [
      "ليبيا",
      "إيران",
-     "العراق",
      "سوريا",
      "الأردن",
      "الإمارات",
@@ -58706,7 +58702,6 @@
     "hiddenLabels": [
      "ليبيا",
      "إيران",
-     "العراق",
      "سوريا",
      "الأردن",
      "الإمارات",
@@ -59432,7 +59427,6 @@
     "hiddenLabels": [
      "ليبيا",
      "إيران",
-     "العراق",
      "سوريا",
      "الأردن",
      "الإمارات",
@@ -60051,7 +60045,6 @@
     "hiddenLabels": [
      "ليبيا",
      "إيران",
-     "العراق",
      "سوريا",
      "الأردن",
      "الإمارات",
@@ -60668,7 +60661,6 @@
     "hiddenLabels": [
      "ليبيا",
      "إيران",
-     "العراق",
      "سوريا",
      "الأردن",
      "الإمارات",
@@ -61379,7 +61371,6 @@
     "hiddenLabels": [
      "ليبيا",
      "إيران",
-     "العراق",
      "سوريا",
      "الأردن",
      "الإمارات",
@@ -62085,7 +62076,6 @@
     "hiddenLabels": [
      "ليبيا",
      "إيران",
-     "العراق",
      "سوريا",
      "الأردن",
      "الإمارات",
@@ -62771,7 +62761,6 @@
     "hiddenLabels": [
      "ليبيا",
      "إيران",
-     "العراق",
      "سوريا",
      "الأردن",
      "الإمارات",
@@ -63502,7 +63491,6 @@
     "hiddenLabels": [
      "ليبيا",
      "إيران",
-     "العراق",
      "سوريا",
      "الأردن",
      "الإمارات",

@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-08T14:33:50.250Z",
+ "ranAt": "2026-11-08T15:52:48.250Z",
  "inputs": {
   "files": [
    "index.html",
@@ -20,12 +20,12 @@
    "../../shared/flags/ly_2011.svg",
    "../../shared/flags/eg.svg",
    "../../shared/map_mena_d1.jpg",
+   "../../screen4/A/map_overlay_cairo.svg",
    "../../shared/flag_eg.svg",
-   "../../shared/map_mena_d1_overlay.svg",
    "header_cairo.jpg",
    "map_overlay_cairo.svg"
   ],
-  "sha1": "537969fb14ababbbdf7516202216ce385bb2382c"
+  "sha1": "b15a92ff8e9878aeb0e7c11e512c9eba44f0d1cd"
  },
  "cleanIssues": {
   "i16promax": [],
