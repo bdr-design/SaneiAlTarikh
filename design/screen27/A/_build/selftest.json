@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-08T02:19:07.171Z",
+ "ranAt": "2026-11-08T02:27:10.286Z",
  "inputs": {
   "files": [
    "index.html",
@@ -25,7 +25,7 @@
    "header_cairo.jpg",
    "map_overlay_cairo.svg"
   ],
-  "sha1": "195d708663ff22f437e0f34006dd51c664943d13"
+  "sha1": "351a7332a1bebd7983a56f4500738a48f4c4c8cf"
  },
  "cleanIssues": {
   "i16promax": [],
@@ -436,10 +436,8 @@
   },
   {
    "name": "front name cut",
-   "ok": true,
-   "sample": [
-    "the map name «رأس لانوف» is cut by the screen edge"
-   ]
+   "ok": false,
+   "sample": []
   },
   {
    "name": "line under the sheet",
