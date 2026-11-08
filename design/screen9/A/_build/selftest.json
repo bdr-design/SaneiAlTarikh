@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-08T01:59:01.126Z",
+ "ranAt": "2026-11-08T14:11:35.059Z",
  "inputs": {
   "files": [
    "index.html",
@@ -26,7 +26,7 @@
    "header_cairo.jpg",
    "map_overlay_cairo.svg"
   ],
-  "sha1": "355a23b37b5b818ef39b875becc06792cc7e04c3"
+  "sha1": "d3da9a720b3a084f43095da647b1eee037e43397"
  },
  "cleanIssues": {
   "i16promax": [],
@@ -257,6 +257,13 @@
    "sample": [
     "scroll hint not centred in the clear strip under the fade: y 249.0..267.0 (strip 395.0..417.0)",
     "scroll hint over text: \"تشكيلات\""
+   ]
+  },
+  {
+   "name": "city dot under its name",
+   "ok": true,
+   "sample": [
+    "map city dot under its own name: 0"
    ]
   },
   {

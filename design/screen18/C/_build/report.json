@@ -1,7 +1,7 @@
 {
  "se": {
   "device": "667x375 side 0 bottom 0 none",
-  "renderedAt": "2026-11-08T02:25:36.903Z",
+  "renderedAt": "2026-11-08T13:39:29.213Z",
   "inputs": {
    "files": [
     "index.html",
@@ -24,7 +24,7 @@
     "../../shared/map_mena_d1_overlay.svg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "24af8a975736f3491424e20ff2fd7fe1938b30c1"
+   "sha1": "742167cf32306742dd6e723539e942e843ae2565"
   },
   "issues": [],
   "views": {
@@ -782,9 +782,9 @@
    "_build/se_fallen_end.png"
   ],
   "pngSha1": {
-   "se.png": "83de391d75c2f00dfbd19a98c6ec16211eda2005",
-   "_build/se_hit.png": "3f37a98937ef2da6be5dff4123d104aa990a35bf",
-   "_build/se_fallen_end.png": "83de391d75c2f00dfbd19a98c6ec16211eda2005"
+   "se.png": "949f43fce546ca5f16c1e649eb5cdd761b8c022e",
+   "_build/se_hit.png": "b71d8eace8486786c5ed592de8c31127d0ba06f2",
+   "_build/se_fallen_end.png": "949f43fce546ca5f16c1e649eb5cdd761b8c022e"
   },
   "env": {
    "chromium": "153.0.8010.12"
@@ -793,7 +793,7 @@
  },
  "mini": {
   "device": "812x375 side 50 bottom 21 notch",
-  "renderedAt": "2026-11-08T02:25:41.597Z",
+  "renderedAt": "2026-11-08T13:39:34.033Z",
   "inputs": {
    "files": [
     "index.html",
@@ -816,7 +816,7 @@
     "../../shared/map_mena_d1_overlay.svg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "24af8a975736f3491424e20ff2fd7fe1938b30c1"
+   "sha1": "742167cf32306742dd6e723539e942e843ae2565"
   },
   "issues": [],
   "views": {
@@ -1588,9 +1588,9 @@
    "_build/mini_fallen_end.png"
   ],
   "pngSha1": {
-   "mini.png": "7391fd979d185da04e32d8b670002ea2303a224f",
-   "_build/mini_hit.png": "9b8e1c5e26c214c147618dd25e2ef224952c6836",
-   "_build/mini_fallen_end.png": "7391fd979d185da04e32d8b670002ea2303a224f"
+   "mini.png": "80d666d5f9697f434d9df5fc4bf9226c167208c6",
+   "_build/mini_hit.png": "9e36000e8f5788ce9fc280c6220ecc5eb61b441e",
+   "_build/mini_fallen_end.png": "80d666d5f9697f434d9df5fc4bf9226c167208c6"
   },
   "env": {
    "chromium": "153.0.8010.12"
@@ -1599,7 +1599,7 @@
  },
  "i14": {
   "device": "844x390 side 47 bottom 21 notch",
-  "renderedAt": "2026-11-08T02:25:46.758Z",
+  "renderedAt": "2026-11-08T13:39:39.001Z",
   "inputs": {
    "files": [
     "index.html",
@@ -1622,7 +1622,7 @@
     "../../shared/map_mena_d1_overlay.svg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "24af8a975736f3491424e20ff2fd7fe1938b30c1"
+   "sha1": "742167cf32306742dd6e723539e942e843ae2565"
   },
   "issues": [],
   "views": {
@@ -2614,9 +2614,9 @@
    "_build/i14_fallen_end.png"
   ],
   "pngSha1": {
-   "i14.png": "89e88adbc77cb6b41f608e8a1e4c1f6f3ae280e1",
-   "_build/i14_hit.png": "10528cf0f297a3660e447c9d33b8079784ae104a",
-   "_build/i14_fallen_end.png": "89e88adbc77cb6b41f608e8a1e4c1f6f3ae280e1"
+   "i14.png": "2e8b044247a72d9f17dae1fd590f5f2414758135",
+   "_build/i14_hit.png": "4f2a755fb612eaba263524897bf7bc3815ac6ca6",
+   "_build/i14_fallen_end.png": "2e8b044247a72d9f17dae1fd590f5f2414758135"
   },
   "env": {
    "chromium": "153.0.8010.12"
@@ -2625,7 +2625,7 @@
  },
  "i16": {
   "device": "852x393 side 59 bottom 21 island",
-  "renderedAt": "2026-11-08T02:25:51.810Z",
+  "renderedAt": "2026-11-08T13:39:44.253Z",
   "inputs": {
    "files": [
     "index.html",
@@ -2648,7 +2648,7 @@
     "../../shared/map_mena_d1_overlay.svg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "24af8a975736f3491424e20ff2fd7fe1938b30c1"
+   "sha1": "742167cf32306742dd6e723539e942e843ae2565"
   },
   "issues": [],
   "views": {
@@ -3618,9 +3618,9 @@
    "_build/i16_fallen_end.png"
   ],
   "pngSha1": {
-   "i16.png": "d89eda8fb73560a8893b0e3c476df4d20973c326",
-   "_build/i16_hit.png": "e91ab2dfbca2abc2b4ce4f57d803c69019e43bb6",
-   "_build/i16_fallen_end.png": "d89eda8fb73560a8893b0e3c476df4d20973c326"
+   "i16.png": "d46e810bd6d6abfd9baae225d2581c6075545f1a",
+   "_build/i16_hit.png": "48913e7e0da654901aca5446890cd67b687c8c01",
+   "_build/i16_fallen_end.png": "d46e810bd6d6abfd9baae225d2581c6075545f1a"
   },
   "env": {
    "chromium": "153.0.8010.12"
@@ -3629,7 +3629,7 @@
  },
  "i16pro": {
   "device": "874x402 side 62 bottom 21 island",
-  "renderedAt": "2026-11-08T02:25:56.971Z",
+  "renderedAt": "2026-11-08T13:39:49.448Z",
   "inputs": {
    "files": [
     "index.html",
@@ -3652,7 +3652,7 @@
     "../../shared/map_mena_d1_overlay.svg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "24af8a975736f3491424e20ff2fd7fe1938b30c1"
+   "sha1": "742167cf32306742dd6e723539e942e843ae2565"
   },
   "issues": [],
   "views": {
@@ -4644,9 +4644,9 @@
    "_build/i16pro_fallen_end.png"
   ],
   "pngSha1": {
-   "i16pro.png": "46491ed1cbd9e4cc97d2d051d70a8a34a3a09619",
-   "_build/i16pro_hit.png": "ef2473a8c6970f854b433dca0b4c3632aa25f229",
-   "_build/i16pro_fallen_end.png": "46491ed1cbd9e4cc97d2d051d70a8a34a3a09619"
+   "i16pro.png": "baeb1b8a9f5a35436a4b1d40fcfe7917f666415a",
+   "_build/i16pro_hit.png": "4a2da626a0a47add8e2bf00470051ec780ab350a",
+   "_build/i16pro_fallen_end.png": "baeb1b8a9f5a35436a4b1d40fcfe7917f666415a"
   },
   "env": {
    "chromium": "153.0.8010.12"
@@ -4655,7 +4655,7 @@
  },
  "i11": {
   "device": "896x414 side 48 bottom 21 notch",
-  "renderedAt": "2026-11-08T02:26:02.200Z",
+  "renderedAt": "2026-11-08T13:39:54.742Z",
   "inputs": {
    "files": [
     "index.html",
@@ -4678,7 +4678,7 @@
     "../../shared/map_mena_d1_overlay.svg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "24af8a975736f3491424e20ff2fd7fe1938b30c1"
+   "sha1": "742167cf32306742dd6e723539e942e843ae2565"
   },
   "issues": [],
   "views": {
@@ -5668,9 +5668,9 @@
    "_build/i11_fallen_end.png"
   ],
   "pngSha1": {
-   "i11.png": "0f212ec4f31b85e8b0d6a69ec65ebf32af9e6994",
-   "_build/i11_hit.png": "8c22c323724dd2787c33ae19ef9a5b492a666f70",
-   "_build/i11_fallen_end.png": "0f212ec4f31b85e8b0d6a69ec65ebf32af9e6994"
+   "i11.png": "23fb15fcc2b1bbcceeaf656502f8ab92a0110cf2",
+   "_build/i11_hit.png": "982ec919d985cbf9946df1d97c47b3752c2100bd",
+   "_build/i11_fallen_end.png": "23fb15fcc2b1bbcceeaf656502f8ab92a0110cf2"
   },
   "env": {
    "chromium": "153.0.8010.12"
@@ -5679,7 +5679,7 @@
  },
  "i16promax": {
   "device": "956x440 side 62 bottom 21 island",
-  "renderedAt": "2026-11-08T02:26:07.480Z",
+  "renderedAt": "2026-11-08T13:40:00.185Z",
   "inputs": {
    "files": [
     "index.html",
@@ -5702,7 +5702,7 @@
     "../../shared/map_mena_d1_overlay.svg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "24af8a975736f3491424e20ff2fd7fe1938b30c1"
+   "sha1": "742167cf32306742dd6e723539e942e843ae2565"
   },
   "issues": [],
   "views": {
@@ -6692,9 +6692,9 @@
    "_build/i16promax_fallen_end.png"
   ],
   "pngSha1": {
-   "i16promax.png": "a99c54a57bc43271283f23cf9dc0252377d891cf",
-   "_build/i16promax_hit.png": "c57744260bc7b982d9e8ba6f1b9395e53be939be",
-   "_build/i16promax_fallen_end.png": "a99c54a57bc43271283f23cf9dc0252377d891cf"
+   "i16promax.png": "ddd9b6f5634162c642d3fa3195a238141e782b9b",
+   "_build/i16promax_hit.png": "83a752a4de2a2d5fda5ffefb45666fd2a7543f2d",
+   "_build/i16promax_fallen_end.png": "ddd9b6f5634162c642d3fa3195a238141e782b9b"
   },
   "env": {
    "chromium": "153.0.8010.12"

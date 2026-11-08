@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-07T20:06:35.646Z",
+ "ranAt": "2026-11-08T13:55:08.690Z",
  "inputs": {
   "files": [
    "index.html",
@@ -20,7 +20,7 @@
    "header_cairo.jpg",
    "map_overlay_cairo.svg"
   ],
-  "sha1": "72b4f5e008e4722ab93c0da1f096c8cc6aa082d3"
+  "sha1": "f906e20a33b4b0df208fb99106b29ed0003466a3"
  },
  "cleanIssues": {
   "i16promax": [],
@@ -431,6 +431,13 @@
     "brief rows differ: headline numbers: [[\"الناتج المحلي\",\"219\",\"مليار $\",\"+5.1% سنويًا\",\"لماذا\"],[\"التضخم\",\"10.3%\",\"\",\"+0.1 نقطة شهريًا\",\"لماذا\"],[\"البطالة\",\"8.9%\",\"\",\"دون تغير\",\"لماذا\"]]",
     "brief text missing: لماذا؟",
     "brief text missing: لماذا؟"
+   ]
+  },
+  {
+   "name": "city dot under its name",
+   "ok": true,
+   "sample": [
+    "map city dot under its own name: 0"
    ]
   },
   {

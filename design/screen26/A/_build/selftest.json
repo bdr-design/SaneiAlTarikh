@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-08T02:47:53.324Z",
+ "ranAt": "2026-11-08T14:02:03.237Z",
  "inputs": {
   "files": [
    "index.html",
@@ -28,7 +28,7 @@
    "header_cairo.jpg",
    "map_overlay_cairo.svg"
   ],
-  "sha1": "bd06d134811477c155f1be7053e11efb62423575"
+  "sha1": "cd4e7c6cb6f8c390baefe424deffcd898213b632"
  },
  "cleanIssues": {
   "i16promax": [],
@@ -179,6 +179,13 @@
    "ok": true,
    "sample": [
     "fit level 6 is not the loosest that fits: [[0,0]]"
+   ]
+  },
+  {
+   "name": "city dot under its name",
+   "ok": true,
+   "sample": [
+    "map city dot under its own name: 0"
    ]
   },
   {

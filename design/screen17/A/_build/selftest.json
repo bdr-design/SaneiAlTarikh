@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-08T02:21:24.629Z",
+ "ranAt": "2026-11-08T14:05:40.941Z",
  "inputs": {
   "files": [
    "index.html",
@@ -25,7 +25,7 @@
    "header_cairo.jpg",
    "map_overlay_cairo.svg"
   ],
-  "sha1": "19f3204d8dc4b27a6ec2e4e56c33091cf3443ec6"
+  "sha1": "4992baaa9de6604a8da7d8e0ed16901776d41d4f"
  },
  "cleanIssues": {
   "i16promax": [],
@@ -159,6 +159,13 @@
     "HUD element moved from its B3 position: .toast x 70.0..275.6 y 56.0..88.0",
     "HUD element moved from its B3 position: .btn.mode x 70.0..191.6 y 96.0..128.0",
     "HUD element moved from its B3 position: .btn.home x 70.0..141.5 y 136.0..168.0"
+   ]
+  },
+  {
+   "name": "city dot under its name",
+   "ok": true,
+   "sample": [
+    "map city dot under its own name: 0"
    ]
   },
   {

@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-07T20:39:36.031Z",
+ "ranAt": "2026-11-08T13:49:52.164Z",
  "inputs": {
   "files": [
    "index.html",
@@ -19,7 +19,7 @@
    "header_cairo.jpg",
    "map_overlay_cairo.svg"
   ],
-  "sha1": "0fe1a346acd6793865b6f06a091c994ebcf260ca"
+  "sha1": "af7068c02631d6ee15a364a8fed82a241379dc0d"
  },
  "cleanIssues": {
   "i16promax": [],
@@ -534,6 +534,13 @@
    "sample": [
     "brief text missing: لماذا؟",
     "brief text missing: لماذا؟"
+   ]
+  },
+  {
+   "name": "city dot under its name",
+   "ok": true,
+   "sample": [
+    "map city dot under its own name: 0"
    ]
   },
   {

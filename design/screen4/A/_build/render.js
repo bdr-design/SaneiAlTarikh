@@ -415,7 +415,7 @@ async function selftest(b) {
     ['off-token colour', '.kv .k { color: #8899aa !important; }', /text colour off-token/],
     ['off-token #A2B6C6', '.kv .k { color: #A2B6C6 !important; }', /text colour off-token rgb\(162, 182, 198\)/],
     ['% before its number', '', /% shown before its number/, () => { document.querySelectorAll('.sf dd')[2].textContent = 'الحكومة · 100%'; }],
-    ['city dot under its name', '', /map city dot under its own name/, () => { const t = [...document.querySelectorAll('.labels text[data-city]')].find((e) => e.getClientRects().length && document.querySelector(`.labels circle[data-city="${e.getAttribute('data-city')}"]`).getClientRects().length); t.removeAttribute('direction'); }],
+    ['city dot under its name', '', /map city dot under its own name/, () => { const inView = (e) => { if (!e.getClientRects().length) return false; const r = e.getBoundingClientRect(); return r.left >= 0 && r.right <= innerWidth && r.top >= 0 && r.bottom <= innerHeight; }; const t = [...document.querySelectorAll('.labels text[data-city]')].find((e) => inView(e) && inView(document.querySelector(`.labels circle[data-city="${e.getAttribute('data-city')}"]`))); t.removeAttribute('direction'); }],
     ['map label cut', '.labels .cut { display: inline !important; }', /map (label|city dot) .* cut by a panel edge/],
     ['city dot without its name', '', /map city dot shown without its name/, () => { const t = [...document.querySelectorAll('.labels text[data-city]')].find((e) => e.getClientRects().length); t.style.display = 'none'; }],
   ];

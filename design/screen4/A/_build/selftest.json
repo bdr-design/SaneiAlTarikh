@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-07T15:28:09.150Z",
+ "ranAt": "2026-11-08T13:38:45.061Z",
  "devices": [
   "i16promax",
   "se"
@@ -89,7 +89,7 @@
    "sample": [
     "ellipsis on \"الحزب الوطني الديمقراطي\"",
     "text outside the sheet's 12 pt padding: \"الحزب الوطني الديمقراطي\"",
-    "ellipsis on \"حاكم\""
+    "text overlap \"الحزب الوطني الديمقراطي\" / \"الحزب الوطني الديمقراطي\""
    ]
   },
   {
@@ -241,6 +241,13 @@
    "ok": true,
    "sample": [
     "% shown before its number: \"الحكومة · 100%\""
+   ]
+  },
+  {
+   "name": "city dot under its name",
+   "ok": true,
+   "sample": [
+    "map city dot under its own name: 0"
    ]
   },
   {
