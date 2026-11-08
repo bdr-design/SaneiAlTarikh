@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-08T00:49:06.669Z",
+ "ranAt": "2026-11-08T00:52:02.869Z",
  "inputs": {
   "files": [
    "index.html",
@@ -25,7 +25,7 @@
    "header_cairo.jpg",
    "map_overlay_cairo.svg"
   ],
-  "sha1": "7c496fbd589b2978231909effc598c193e8fcb23"
+  "sha1": "7d9ac1788487ac9edc149c855f988200d091a54c"
  },
  "cleanIssues": {
   "i16promax": [],
@@ -386,16 +386,6 @@
    ]
   },
   {
-   "name": "hint chevron missing (no tabs)",
-   "ok": false,
-   "sample": []
-  },
-  {
-   "name": "hint over the content (no tabs)",
-   "ok": false,
-   "sample": []
-  },
-  {
    "name": "a dock item marked open",
    "ok": true,
    "sample": [
@@ -455,11 +445,29 @@
   },
   {
    "name": "text into a control (row)",
-   "ok": false,
+   "ok": true,
    "sample": [
     "horizontal overflow in تبدأ عند استئناف الوقت دعم",
     "the cancel on «دعم الوقود −10%» is not at the row's end",
     "the cancel on «جمع معلومات في السودان» is not at the row's end"
+   ]
+  },
+  {
+   "name": "hint chevron missing (forced overflow)",
+   "ok": true,
+   "sample": [
+    "list needs scrolling: 185.0 pt over",
+    "scroll hint chevron missing with content below",
+    "brief text not fully visible: تبدأ عند استئناف الوقت"
+   ]
+  },
+  {
+   "name": "hint over the content (forced overflow)",
+   "ok": true,
+   "sample": [
+    "list needs scrolling: 185.0 pt over",
+    "scroll hint not centred in the clear strip under the fade: y 198.0..216.0 (strip 344.0..366.0)",
+    "brief text not fully visible: تبدأ عند استئناف الوقت"
    ]
   },
   {
