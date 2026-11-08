@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-08T13:01:21.539Z",
+ "ranAt": "2026-11-08T13:14:25.581Z",
  "inputs": {
   "files": [
    "index.html",
@@ -28,7 +28,7 @@
    "header_cairo.jpg",
    "map_overlay_cairo.svg"
   ],
-  "sha1": "e42063fc61c17b94d151fed3ce770f53ec7a5a14"
+  "sha1": "f5aea6660851a8fbc0105ce98784c777df6e4981"
  },
  "cleanIssues": {
   "i16promax": [],
@@ -576,10 +576,19 @@
    ]
   },
   {
+   "name": "relation off",
+   "ok": true,
+   "sample": [
+    "our relation is not screen 10's (+18)",
+    "a11y: the relation link does not say its value and where it leads",
+    "brief text missing: +18"
+   ]
+  },
+  {
    "name": "relation unsigned",
    "ok": true,
    "sample": [
-    "our relation is not a signed number",
+    "our relation is not screen 10's (+18)",
     "a11y: the relation link does not say its value and where it leads",
     "brief text missing: +18"
    ]
