@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-08T02:27:10.286Z",
+ "ranAt": "2026-11-08T02:30:02.536Z",
  "inputs": {
   "files": [
    "index.html",
@@ -25,7 +25,7 @@
    "header_cairo.jpg",
    "map_overlay_cairo.svg"
   ],
-  "sha1": "351a7332a1bebd7983a56f4500738a48f4c4c8cf"
+  "sha1": "273d4becdbde66570520fb79db73fdb588bc3979"
  },
  "cleanIssues": {
   "i16promax": [],
@@ -436,8 +436,10 @@
   },
   {
    "name": "front name cut",
-   "ok": false,
-   "sample": []
+   "ok": true,
+   "sample": [
+    "the map name «أجدابيا» is cut by the screen edge"
+   ]
   },
   {
    "name": "line under the sheet",
@@ -710,6 +712,15 @@
    "ok": true,
    "sample": [
     "the posture is locked though this is a war"
+   ]
+  },
+  {
+   "name": "posture segments wide",
+   "ok": true,
+   "sample": [
+    "size 80.0x26.0 for .s-sg (want 60 x 26)",
+    "size 80.0x26.0 for .s-sg (want 60 x 26)",
+    "a posture segment is not 60 pt"
    ]
   },
   {
