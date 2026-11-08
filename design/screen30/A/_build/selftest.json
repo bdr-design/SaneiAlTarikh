@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-08T23:40:08.841Z",
+ "ranAt": "2026-11-08T23:50:38.612Z",
  "inputs": {
   "files": [
    "index.html",
@@ -23,7 +23,7 @@
    "header_cairo.jpg",
    "map_overlay_cairo.svg"
   ],
-  "sha1": "61cd1d36c9ab4cf37d1b9b0d2699aa13d724f041"
+  "sha1": "eeef69932541b30ac43c951310f469c54a95ec31"
  },
  "cleanIssues": {
   "i16promax": [],
@@ -519,7 +519,8 @@
    "name": "a dimmer",
    "ok": true,
    "sample": [
-    "a dialog or a dimmer over the map (mapCentral)"
+    "a dialog or a dimmer over the map (mapCentral)",
+    "a layer added over the page: scrim"
    ]
   },
   {
@@ -739,6 +740,56 @@
    "ok": true,
    "sample": [
     "a layer added over the page: svg"
+   ]
+  },
+  {
+   "name": "zero-size SVG ring",
+   "ok": true,
+   "sample": [
+    "a layer added over the page: svg"
+   ]
+  },
+  {
+   "name": "layer in the device frame",
+   "ok": true,
+   "sample": [
+    "a layer added over the page: DIV",
+    "the ring is not on the step's element .stats alone: stats glass bar, DIV"
+   ]
+  },
+  {
+   "name": "body pseudo ring",
+   "ok": true,
+   "sample": [
+    "a layer added over the page: body::after"
+   ]
+  },
+  {
+   "name": "display-p3 ring",
+   "ok": true,
+   "sample": [
+    "the ring is not on the step's element .stats alone: nation glass bar tap, stats glass bar"
+   ]
+  },
+  {
+   "name": "drop-shadow ring",
+   "ok": true,
+   "sample": [
+    "the ring is not on the step's element .stats alone: nation glass bar tap, stats glass bar"
+   ]
+  },
+  {
+   "name": "white glow",
+   "ok": true,
+   "sample": [
+    "the ring is not on the step's element .stats alone: nation glass bar tap, stats glass bar"
+   ]
+  },
+  {
+   "name": "text made clickable",
+   "ok": true,
+   "sample": [
+    "the step body holds 3 controls, not 2"
    ]
   },
   {
