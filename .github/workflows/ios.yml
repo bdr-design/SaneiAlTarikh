@@ -15,16 +15,14 @@ jobs:
     timeout-minutes: 45
     steps:
       - uses: actions/checkout@v4
-      - name: Xcode (the newest installed)
+      - name: Xcode 26.3 (pinned)
         run: |
-          ls -d /Applications/Xcode*.app
-          XC=$(ls -d /Applications/Xcode_*.app | grep -v -i beta | sort -V | tail -1)
-          sudo xcode-select -s "$XC"
+          sudo xcode-select -s /Applications/Xcode_26.3.app
           xcodebuild -version
-      - name: Metal toolchain (needed from Xcode 26 on)
+      - name: Metal toolchain (Xcode 26 downloads it separately)
         run: |
           for i in 1 2 3; do xcodebuild -downloadComponent MetalToolchain && exit 0; sleep 20; done
-          echo "no separate Metal toolchain download (Xcode before 26 ships it)"
+          exit 1
       - name: XcodeGen 2.46.0
         run: |
           curl -fsSL -o xcodegen.zip https://github.com/yonaskolb/XcodeGen/releases/download/2.46.0/xcodegen.zip
@@ -39,7 +37,7 @@ jobs:
             -sdk iphoneos -destination 'generic/platform=iOS' -derivedDataPath build \
             CODE_SIGNING_ALLOWED=NO CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY="" build > build.log 2>&1 || {
               grep -nE "error:|warning:" build.log | head -150; tail -60 build.log; exit 1; }
-          grep -cE "warning:" build.log || true
+          if grep -nE "warning:" build.log; then echo "the build has warnings (above): treat them as errors"; exit 1; fi
       - name: IPA
         run: |
           APP=$(find build/Build/Products/Release-iphoneos -maxdepth 1 -name '*.app' | head -1)

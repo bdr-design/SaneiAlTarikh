@@ -21,6 +21,8 @@ public final class DedicatedThreadExecutor: SerialExecutor, @unchecked Sendable 
     }
 
     private func loop() {
+        // name the thread from inside it: on Linux a name set before start never reaches the OS thread
+        Thread.current.name = name
         let me = asUnownedSerialExecutor()
         while true {
             condition.lock()

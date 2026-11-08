@@ -41,6 +41,7 @@ final class RenderEngine: NSObject, @unchecked Sendable {
     }
 
     private func threadMain() {
+        Thread.current.name = "sanei.render"
         let loop = RunLoop.current
         loop.add(NSMachPort(), forMode: .default)          // keeps the run loop alive with nothing scheduled
         lock.lock()
