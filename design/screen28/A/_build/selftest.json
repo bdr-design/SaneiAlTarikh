@@ -1,0 +1,646 @@
+{
+ "ranAt": "2026-11-08T12:32:58.431Z",
+ "inputs": {
+  "files": [
+   "index.html",
+   "_build/render.js",
+   "_build/sheet.html",
+   "_build/assemble.py",
+   "../../shared/check/panelcheck.js",
+   "../../shared/check/panel_page.py",
+   "../../screen4/R/_build/panel.css",
+   "../../shared/section_identity.css",
+   "../../screen5/A/_build/state.css",
+   "../../screen4/A/index.html",
+   "../../screen1/B3/index.html",
+   "../../shared/devices.json",
+   "_build/card.css",
+   "_build/sudan.json",
+   "../../shared/flags/sd.svg",
+   "../../screen10/A/_build/sheet.html",
+   "../../screen16/A/_build/sheet.html",
+   "../../screen22/A/_build/sheet.html",
+   "../../shared/flag_eg.svg",
+   "../../shared/map_mena_d1.jpg",
+   "../../shared/map_mena_d1_overlay.svg",
+   "header_cairo.jpg",
+   "map_overlay_cairo.svg"
+  ],
+  "sha1": "2bcc1a6c35145f43517ad7a7add49126f8cd165c"
+ },
+ "cleanIssues": {
+  "i16promax": [],
+  "i16promax_card_end": [],
+  "i16promax coverage": [],
+  "se": [],
+  "se_card_end": [],
+  "se coverage": []
+ },
+ "results": [
+  {
+   "name": "type size",
+   "ok": true,
+   "sample": [
+    "font size 17 for \"السودان\""
+   ]
+  },
+  {
+   "name": "off-token colour",
+   "ok": true,
+   "sample": [
+    "text colour off-token rgb(136, 153, 170): \"السودان\"",
+    "contrast 2.4 for \"السودان\""
+   ]
+  },
+  {
+   "name": "radius",
+   "ok": true,
+   "sample": [
+    "panel radius السودان: 6 (want 12)",
+    "radius 6 for .sheet (want 12)"
+   ]
+  },
+  {
+   "name": "tap in the side inset",
+   "ok": true,
+   "sample": [
+    "text in side inset: 44",
+    "text in side inset: 2011",
+    "text in side inset: علاقتنا"
+   ]
+  },
+  {
+   "name": "panel in the side inset",
+   "ok": true,
+   "sample": [
+    "text in side inset: 44",
+    "text in side inset: 2011",
+    "text in side inset: علاقتنا"
+   ]
+  },
+  {
+   "name": "panel not opaque",
+   "ok": true,
+   "sample": [
+    "panel not opaque: السودان rgba(9, 17, 25, 0.66)",
+    "contrast 3.15 for \"مليون\"",
+    "contrast 4.13 for \"علاقتنا\""
+   ]
+  },
+  {
+   "name": "see-through panel",
+   "ok": true,
+   "sample": [
+    "panel not opaque (opacity 0.60): السودان",
+    "brief text not fully visible: السودان",
+    "brief text not fully visible: عمر البشير · جمهورية رئاسية"
+   ]
+  },
+  {
+   "name": "map dimmed",
+   "ok": true,
+   "sample": [
+    "the map is dimmed (opacity 1.00, filter brightness(0.35))"
+   ]
+  },
+  {
+   "name": "map faded",
+   "ok": true,
+   "sample": [
+    "the map is dimmed (opacity 0.30, filter none)"
+   ]
+  },
+  {
+   "name": "scrim over the map",
+   "ok": true,
+   "sample": [
+    "something drawn over the map: DIV (rgba(0, 0, 0, 0.55))",
+    "contrast 1.92 for \"3\""
+   ]
+  },
+  {
+   "name": "sheet width",
+   "ok": true,
+   "sample": [
+    "sheet width 330 (want round(clamp(43% of 832, 340, 380)), or the room the dock leaves if 330..: 358)",
+    "map label السعودية cut by a panel edge",
+    "map label السعودية squeezed between a panel and the screen edge"
+   ]
+  },
+  {
+   "name": "sheet top",
+   "ok": true,
+   "sample": [
+    "hit overlap الاستقرار 58% / إغلاق، العودة إلى الخريطة",
+    "panel overlap الدولة: مصر، حسني مبارك، ج / السودان",
+    "panel overlap الخزينة 36.0 مليار $ الاست / السودان"
+   ]
+  },
+  {
+   "name": "dock hidden although it fits",
+   "ok": true,
+   "sample": [
+    "dock hidden although it fits left of the sheet"
+   ]
+  },
+  {
+   "name": "dock shown on the SE",
+   "ok": true,
+   "sample": [
+    "icon over text: i r-chev / \"الجيش\"",
+    "icon over text: i / \"عملية جديدة في السودان\"",
+    "hit overlap الدولة / العلاقة مع السودان: موجب 1"
+   ]
+  },
+  {
+   "name": "left stack moved",
+   "ok": true,
+   "sample": [
+    "HUD element moved from its B3 position: .toast x 70.0..275.6 y 56.0..88.0",
+    "HUD element moved from its B3 position: .btn.mode x 70.0..191.6 y 96.0..128.0",
+    "HUD element moved from its B3 position: .btn.home x 70.0..141.5 y 136.0..168.0"
+   ]
+  },
+  {
+   "name": "map label cut",
+   "ok": true,
+   "sample": [
+    "map label مصر cut by a panel edge",
+    "map label مصر squeezed between a panel and the screen edge",
+    "map label عمان cut by a panel edge"
+   ]
+  },
+  {
+   "name": "contrast",
+   "ok": true,
+   "sample": [
+    "contrast 1 for \"السكان\"",
+    "contrast 1 for \"44\"",
+    "contrast 1.73 for \"مليون\""
+   ]
+  },
+  {
+   "name": "dock item not marked",
+   "ok": true,
+   "sample": [
+    "the open section «الخارجية» is not marked in the dock"
+   ]
+  },
+  {
+   "name": "identity line missing",
+   "ok": true,
+   "sample": [
+    "panel top line none rgb(91, 134, 242) 2px (want the section colour, 2 pt, at the top)"
+   ]
+  },
+  {
+   "name": "emblem drawn grey",
+   "ok": true,
+   "sample": [
+    "section emblem missing or not in the section colour"
+   ]
+  },
+  {
+   "name": "section colour on data",
+   "ok": true,
+   "sample": [
+    "section colour on data text: \"عمر البشير\"",
+    "section colour on data text: \"جمهورية رئاسية\"",
+    "section colour on data chrome: عمر البشير · جمهورية رئاسي"
+   ]
+  },
+  {
+   "name": "money unit",
+   "ok": true,
+   "sample": [
+    "money unit: «0.4 مليار» (under 1 billion is written in millions)",
+    "the referendum note is not dated as screens 10 and 16 (9 يناير 2011)"
+   ]
+  },
+  {
+   "name": "sign outside its number",
+   "ok": true,
+   "sample": [
+    "a sign outside its number: «تغير +3»",
+    "the referendum note is not dated as screens 10 and 16 (9 يناير 2011)"
+   ]
+  },
+  {
+   "name": "colour alone",
+   "ok": true,
+   "sample": [
+    "colour alone: «تراجع» has no arrow or icon",
+    "the referendum note is not dated as screens 10 and 16 (9 يناير 2011)"
+   ]
+  },
+  {
+   "name": "an image in the sheet",
+   "ok": true,
+   "sample": [
+    "an image in the sheet"
+   ]
+  },
+  {
+   "name": "close not round",
+   "ok": true,
+   "sample": [
+    "close button is not round"
+   ]
+  },
+  {
+   "name": "label without a role",
+   "ok": true,
+   "sample": [
+    "a11y: a label VoiceOver may skip (no role): «اختبار»",
+    "the referendum note is not dated as screens 10 and 16 (9 يناير 2011)"
+   ]
+  },
+  {
+   "name": "text overlap",
+   "ok": true,
+   "sample": [
+    "text overlap \"السودان\" / \"عمر البشير\"",
+    "text overlap \"السودان\" / \"·\"",
+    "text overlap \"السودان\" / \"جمهورية رئاسية\""
+   ]
+  },
+  {
+   "name": "dock underline missing",
+   "ok": true,
+   "sample": [
+    "dock underline missing or off: none 16pxx2px rgb(91, 134, 242) (want 16 x 2 in the section colour)"
+   ]
+  },
+  {
+   "name": "closed dock item coloured",
+   "ok": true,
+   "sample": [
+    "dock item 1 (closed) not neutral as on B3: rgb(91, 134, 242) / rgb(234, 242, 247)",
+    "dock item 2 (closed) not neutral as on B3: rgb(91, 134, 242) / rgb(234, 242, 247)",
+    "dock item 3 (closed) not neutral as on B3: rgb(91, 134, 242) / rgb(234, 242, 247)"
+   ]
+  },
+  {
+   "name": "identity line colour",
+   "ok": true,
+   "sample": [
+    "panel top line \"\" rgb(63, 224, 208) 2px (want the section colour, 2 pt, at the top)"
+   ]
+  },
+  {
+   "name": "emblem size",
+   "ok": true,
+   "sample": [
+    "size 28.0x32.0 for .s-emb (want 32 x 32)"
+   ]
+  },
+  {
+   "name": "tile icons cyan",
+   "ok": true,
+   "sample": [
+    "white touch off: .r-tile color rgb(127, 233, 255) (want rgb(234, 242, 247))",
+    "white touch off: .r-tile color rgb(127, 233, 255) (want rgb(234, 242, 247))"
+   ]
+  },
+  {
+   "name": "close says only إغلاق",
+   "ok": true,
+   "sample": [
+    "a11y: the close says only «إغلاق»",
+    "a11y: the close does not say where it returns"
+   ]
+  },
+  {
+   "name": "row read in part",
+   "ok": true,
+   "sample": [
+    "a11y: «جزء» does not read all it shows: السكان مليون 44 2011",
+    "the population is not the country's, with its year, read whole"
+   ]
+  },
+  {
+   "name": "a long headline label",
+   "ok": true,
+   "sample": [
+    "clipped text (sides): \"عنوان طويل جدًا لا يتسع لخانته أبدًا\" 385.38..539.25 y 124..141",
+    "text outside the sheet's 12 pt padding: \"عنوان طويل جدًا لا يتسع لخانته أبدًا\"",
+    "clipped text (sides): \"1\" 528.44..539.25 y 142..169"
+   ]
+  },
+  {
+   "name": "text wider than its box",
+   "ok": true,
+   "sample": [
+    "text wider than its box: «ما يحركها والإجراءات» (76 in 20)"
+   ]
+  },
+  {
+   "name": "a long status cell",
+   "ok": true,
+   "sample": [
+    "clipped text (sides): \"قيمة طويلة جدًا لا تتسع لنصف الجدول\" 416.53..613.3 y 120.5..139.5",
+    "text outside the sheet's 12 pt padding: \"قيمة طويلة جدًا لا تتسع لنصف الجدول\"",
+    "horizontal overflow in خانةقيمة طويلة جدًا لا تتس"
+   ]
+  },
+  {
+   "name": "font weight (no tabs)",
+   "ok": true,
+   "sample": [
+    "font weight 11.5/700 for \"عمر البشير\"",
+    "font weight 11.5/700 for \"·\"",
+    "font weight 11.5/700 for \"جمهورية رئاسية\""
+   ]
+  },
+  {
+   "name": "a tab row on a one-body sheet",
+   "ok": true,
+   "sample": [
+    "a tab row on a sheet that has one body"
+   ]
+  },
+  {
+   "name": "control height (no tabs)",
+   "ok": true,
+   "sample": [
+    "control height 40.00 for .r-x (want 32): إغلاق، العودة إلى الخريطة",
+    "close button is not round"
+   ]
+  },
+  {
+   "name": "icon size (no tabs)",
+   "ok": true,
+   "sample": [
+    "icon size 19x19 (want 16): i"
+   ]
+  },
+  {
+   "name": "fades wrong (no tabs)",
+   "ok": true,
+   "sample": [
+    "clipped text (bottom): \"الشبكة\" 570.3..599 y 358..373",
+    "clipped text (bottom): \"7\" 564.3..570.3 y 358..373",
+    "clipped text (bottom): \"من\" 547.34..564.3 y 358..373"
+   ]
+  },
+  {
+   "name": "brief text hidden (card)",
+   "ok": true,
+   "sample": [
+    "brief text not fully visible: 44"
+   ]
+  },
+  {
+   "name": "18 pt misuse (card)",
+   "ok": true,
+   "sample": [
+    "18 pt is for the panel's name and the adjusted values only: \"+18\"",
+    "18 pt is for the panel's name and the adjusted values only: \"مياه النيل\"",
+    "18 pt is for the panel's name and the adjusted values only: \"1959\""
+   ]
+  },
+  {
+   "name": "clipped text (card)",
+   "ok": false,
+   "sample": []
+  },
+  {
+   "name": "gap (card)",
+   "ok": true,
+   "sample": [
+    "gap 6 on السكان 44مليون 2011 الناتج",
+    "gap 6 on السكان 44مليون 2011 الناتج"
+   ]
+  },
+  {
+   "name": "faint text (card)",
+   "ok": true,
+   "sample": [
+    "brief text not fully visible: +18",
+    "brief text not fully visible: مياه النيل 1959",
+    "brief text not fully visible: حلايب"
+   ]
+  },
+  {
+   "name": "% before its number (card)",
+   "ok": true,
+   "sample": [
+    "% shown before its number: \"نسبة 20%\"",
+    "the referendum note is not dated as screens 10 and 16 (9 يناير 2011)",
+    "brief text missing: استفتاء جنوب السودان في 9 يناير 2011."
+   ]
+  },
+  {
+   "name": "hint chevron missing",
+   "ok": true,
+   "sample": [
+    "scroll hint chevron missing with content below"
+   ]
+  },
+  {
+   "name": "hint over the content",
+   "ok": true,
+   "sample": [
+    "scroll hint not centred in the clear strip under the fade: y 198.0..216.0 (strip 344.0..366.0)",
+    "scroll hint over text: \"+18\"",
+    "scroll hint over text: \"المعاهدات\""
+   ]
+  },
+  {
+   "name": "country covered",
+   "ok": false,
+   "sample": [
+    "Sudan's north outside the safe screen",
+    "map not full-bleed",
+    "map label السودان sliced by the screen edge or the side inset"
+   ]
+  },
+  {
+   "name": "wrong flag",
+   "ok": true,
+   "sample": [
+    "the header flag is not Sudan's"
+   ]
+  },
+  {
+   "name": "leader missing",
+   "ok": true,
+   "sample": [
+    "the header does not name the country, its leader and regime",
+    "brief text missing: عمر البشير · جمهورية رئاسية",
+    "brief text missing: عمر البشير · جمهورية رئاسية"
+   ]
+  },
+  {
+   "name": "emblem off",
+   "ok": true,
+   "sample": [
+    "the emblem is not the foreign section's"
+   ]
+  },
+  {
+   "name": "close unclear",
+   "ok": true,
+   "sample": [
+    "a11y: the close says only «إغلاق»",
+    "a11y: the close does not say where it returns"
+   ]
+  },
+  {
+   "name": "card modal",
+   "ok": true,
+   "sample": [
+    "a dialog over the map (mapCentral)"
+   ]
+  },
+  {
+   "name": "numbers reordered",
+   "ok": true,
+   "sample": [
+    "the headline numbers are not population, output, stability: الناتج، الاستقرار، السكان"
+   ]
+  },
+  {
+   "name": "population yearless",
+   "ok": true,
+   "sample": [
+    "a11y: «السكان: 44 مليون، 2011» does not read all it shows: تقريبًا",
+    "the population is not the country's, with its year, read whole"
+   ]
+  },
+  {
+   "name": "output unread",
+   "ok": true,
+   "sample": [
+    "a11y: «الناتج» does not read all it shows: مليار 65 2010",
+    "the output is not the country's, with its year, read whole"
+   ]
+  },
+  {
+   "name": "stability exact",
+   "ok": true,
+   "sample": [
+    "a11y: «الاستقرار: من 40 إلى 50،» does not read all it shows: 45",
+    "the stability is not an estimated range (D-19)",
+    "brief text missing: 40 إلى 50"
+   ]
+  },
+  {
+   "name": "stability range off",
+   "ok": true,
+   "sample": [
+    "the stability range is 4 wide, not ±5 for a network of 7",
+    "brief text missing: 40 إلى 50",
+    "brief text missing: 40 إلى 50"
+   ]
+  },
+  {
+   "name": "stability unread",
+   "ok": true,
+   "sample": [
+    "a11y: «الاستقرار، تقدير» does not read all it shows: إلى 40 50",
+    "a11y: the stability range is not read whole"
+   ]
+  },
+  {
+   "name": "cells reordered",
+   "ok": true,
+   "sample": [
+    "the status cells are not relation, treaties, dispute, network: المعاهدات، النزاع، شبكتنا، علاقتنا",
+    "a11y: the relation link does not say its value and where it leads"
+   ]
+  },
+  {
+   "name": "relation unsigned",
+   "ok": true,
+   "sample": [
+    "our relation is not a signed number",
+    "a11y: the relation link does not say its value and where it leads",
+    "brief text missing: +18"
+   ]
+  },
+  {
+   "name": "treaty off",
+   "ok": true,
+   "sample": [
+    "the treaty is not screen 10's Nile agreement of 1959",
+    "brief text missing: مياه النيل 1959",
+    "brief text missing: مياه النيل 1959"
+   ]
+  },
+  {
+   "name": "dispute off",
+   "ok": true,
+   "sample": [
+    "the dispute is not Halaib",
+    "brief text missing: حلايب",
+    "brief text missing: حلايب"
+   ]
+  },
+  {
+   "name": "network off",
+   "ok": true,
+   "sample": [
+    "our network is not screens 11 and 22's (7 من 10)",
+    "brief text missing: 7 من 10"
+   ]
+  },
+  {
+   "name": "referendum off",
+   "ok": true,
+   "sample": [
+    "the referendum note is not dated as screens 10 and 16 (9 يناير 2011)",
+    "brief text missing: استفتاء جنوب السودان في 9 يناير 2011.",
+    "brief text missing: استفتاء جنوب السودان في 9 يناير 2011."
+   ]
+  },
+  {
+   "name": "links reordered",
+   "ok": true,
+   "sample": [
+    "the links are not the relation and a new operation"
+   ]
+  },
+  {
+   "name": "relation link silent",
+   "ok": true,
+   "sample": [
+    "a11y: «العلاقة مع السودان» does not read all it shows: ما يحركها والإجراءات",
+    "a11y: the relation link does not say its value and where it leads"
+   ]
+  },
+  {
+   "name": "operation line off",
+   "ok": true,
+   "sample": [
+    "a11y: «عملية جديدة في السودان» does not read its numbers",
+    "a11y: «عملية جديدة في السودان: » does not read all it shows: 5",
+    "the operation link is not screen 22's target line, or does not say where it leads"
+   ]
+  },
+  {
+   "name": "country not outlined",
+   "ok": true,
+   "sample": [
+    "the tapped country is not outlined on the map"
+   ]
+  },
+  {
+   "name": "red in the card",
+   "ok": true,
+   "sample": [
+    "text colour off-token rgb(224, 48, 42): \"علاقتنا\"",
+    "text colour off-token rgb(224, 48, 42): \"المعاهدات\"",
+    "text colour off-token rgb(224, 48, 42): \"النزاع\""
+   ]
+  },
+  {
+   "name": "coverage reports a string no view shows",
+   "ok": true,
+   "sample": [
+    "card: never shown clear of the fades in any view: نص غير معروض للاختبار"
+   ],
+   "midViewsAdd": []
+  }
+ ]
+}
