@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-08T12:32:58.431Z",
+ "ranAt": "2026-11-08T12:34:27.122Z",
  "inputs": {
   "files": [
    "index.html",
@@ -26,7 +26,7 @@
    "header_cairo.jpg",
    "map_overlay_cairo.svg"
   ],
-  "sha1": "2bcc1a6c35145f43517ad7a7add49126f8cd165c"
+  "sha1": "3ab3e81f151d9694dcea7719e1985b1da56bc750"
  },
  "cleanIssues": {
   "i16promax": [],
@@ -401,8 +401,12 @@
   },
   {
    "name": "clipped text (card)",
-   "ok": false,
-   "sample": []
+   "ok": true,
+   "sample": [
+    "clipped text (sides): \"العلاقة مع السودان\" 736.95..834 y 288..307",
+    "clipped text (sides): \"ما يحركها والإجراءات\" 758.33..834 y 306..321",
+    "horizontal overflow in العلاقة مع السودانما يحركه"
+   ]
   },
   {
    "name": "gap (card)",
@@ -448,11 +452,11 @@
   },
   {
    "name": "country covered",
-   "ok": false,
+   "ok": true,
    "sample": [
-    "Sudan's north outside the safe screen",
-    "map not full-bleed",
-    "map label السودان sliced by the screen edge or the side inset"
+    "Sudan's north covered by panel السودان",
+    "Sudan's north under the hit box of العلاقة مع السودان: موجب 1",
+    "Sudan's north under the hit box of عملية جديدة في السودان: ال"
    ]
   },
   {
