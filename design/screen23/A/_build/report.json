@@ -1,7 +1,7 @@
 {
  "se": {
   "device": "667x375 side 0 bottom 0 none",
-  "renderedAt": "2026-11-08T17:10:14.071Z",
+  "renderedAt": "2026-11-08T18:58:21.081Z",
   "inputs": {
    "files": [
     "index.html",
@@ -2443,7 +2443,7 @@
  },
  "mini": {
   "device": "812x375 side 50 bottom 21 notch",
-  "renderedAt": "2026-11-08T17:10:24.680Z",
+  "renderedAt": "2026-11-08T18:58:31.399Z",
   "inputs": {
    "files": [
     "index.html",
@@ -4999,7 +4999,7 @@
  },
  "i14": {
   "device": "844x390 side 47 bottom 21 notch",
-  "renderedAt": "2026-11-08T17:10:35.895Z",
+  "renderedAt": "2026-11-08T18:58:42.782Z",
   "inputs": {
    "files": [
     "index.html",
@@ -8143,7 +8143,7 @@
  },
  "i16": {
   "device": "852x393 side 59 bottom 21 island",
-  "renderedAt": "2026-11-08T17:10:47.568Z",
+  "renderedAt": "2026-11-08T18:58:54.341Z",
   "inputs": {
    "files": [
     "index.html",
@@ -11221,7 +11221,7 @@
  },
  "i16pro": {
   "device": "874x402 side 62 bottom 21 island",
-  "renderedAt": "2026-11-08T17:10:59.271Z",
+  "renderedAt": "2026-11-08T18:59:06.022Z",
   "inputs": {
    "files": [
     "index.html",
@@ -14365,7 +14365,7 @@
  },
  "i11": {
   "device": "896x414 side 48 bottom 21 notch",
-  "renderedAt": "2026-11-08T17:11:10.826Z",
+  "renderedAt": "2026-11-08T18:59:17.816Z",
   "inputs": {
    "files": [
     "index.html",
@@ -17503,7 +17503,7 @@
  },
  "i16promax": {
   "device": "956x440 side 62 bottom 21 island",
-  "renderedAt": "2026-11-08T17:11:22.673Z",
+  "renderedAt": "2026-11-08T18:59:29.696Z",
   "inputs": {
    "files": [
     "index.html",
