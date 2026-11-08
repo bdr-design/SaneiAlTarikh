@@ -50,19 +50,30 @@ if (document.querySelector('[role="dialog"], [role="alertdialog"], dialog, .moda
 // the body: exactly its text section, one primary and (steps 1 to 4) the skip, in that order; the primary's white bar drawn
 { const kids = [...body.children].filter((e) => getComputedStyle(e).display !== 'none').map((e) => e.matches('.r-sec') ? 'sec' : e.matches('.r-act.r-first') ? 'primary' : e.matches('.r-link') ? 'skip' : (e.className || e.tagName));
   const want = i < 4 ? 'sec,primary,skip' : 'sec,primary'; if (kids.join(',') !== want) issues.push('the step body is not «' + want + '»: ' + kids.join(','));
-  const pf = body.querySelector('.r-first'); if (pf) { const a = getComputedStyle(pf, '::after'); if (a.content === 'none' || a.display === 'none' || a.backgroundColor !== X.TOK.t1 || (parseFloat(a.width) || 0) <= 0 || (parseFloat(a.height) || 0) <= 0) issues.push('the primary\\'s white bar is not drawn'); } }
+  // and nothing more inside: the controls are the primary and the skip; the text section holds its heading, its text and (s3) the list
+  const ctl = [...body.querySelectorAll('button, [role="button"], a, .tap, input, select')].filter((e) => e.getClientRects().length);
+  if (ctl.length !== (i < 4 ? 2 : 1)) issues.push('the step body holds ' + ctl.length + ' controls, not ' + (i < 4 ? 2 : 1));
+  const sec = body.querySelector('.r-sec'), inSec = sec ? [...sec.children].filter((e) => getComputedStyle(e).display !== 'none').map((e) => e.tagName === 'H3' ? 'h3' : e.matches('p.d-text') ? 'text' : e.matches('ul.t-secs') ? 'list' : (e.className || e.tagName)) : [];
+  if (inSec.join(',') !== (tab === 's3' ? 'h3,text,list' : 'h3,text')) issues.push('the step text section is not its heading and text: ' + inSec.join(','));
+  const pf = body.querySelector('.r-first'); if (pf) { const a = getComputedStyle(pf, '::after'); if (a.content === 'none' || a.display === 'none' || a.visibility === 'hidden' || parseFloat(a.opacity) < 0.99 || a.backgroundColor !== X.TOK.t1 || (parseFloat(a.width) || 0) <= 0 || (parseFloat(a.height) || 0) <= 0) issues.push('the primary\\'s white bar is not drawn'); } }
 // the actions: one primary; «التالي» naming the next step, or «ابدأ الحملة» opening the first decision; the skip on every step but the last
 { const prim = [...body.querySelectorAll('.r-first')]; const want = i < 4 ? ['التالي', ST[i + 1][1], 'التالي: ' + ST[i + 1][1] + '، الخطوة ' + (i + 2) + ' من 5'] : DATA.last;
   if (prim.length !== 1 || W(T(prim[0].querySelector('.r-at b'))) !== want[0] || W(T(prim[0].querySelector('.r-at > span'))) !== want[1] || prim[0].getAttribute('aria-label') !== want[2]) issues.push('the primary is not «' + want[0] + ' · ' + want[1] + '» read as «' + want[2] + '»');
-  const sk = body.querySelector('.r-link'); if ((i < 4) !== !!sk || (sk && (W(T(sk.querySelector('.r-at b'))) !== 'تخطي الجولة' || W(T(sk.querySelector('.r-at > span'))) !== DATA.help || !/المزيد، حول، المساعدة\. ثم يفتح أول قرار، /.test(sk.getAttribute('aria-label') || '')))) issues.push('the skip is missing, misplaced or does not say the tour stays in the help and the first decision follows'); }
+  const sk = body.querySelector('.r-link'); if ((i < 4) !== !!sk || (sk && (W(T(sk.querySelector('.r-at b'))) !== 'تخطي الجولة' || W(T(sk.querySelector('.r-at > span'))) !== DATA.help || sk.getAttribute('aria-label') !== 'تخطي الجولة: تعود إليها من المزيد، حول، المساعدة. ثم يفتح أول قرار، ' + DATA.decision))) issues.push('the skip is missing, misplaced or does not say the tour stays in the help and the first decision follows'); }
 // the ring: exactly the step's HUD element, and nothing else on the page ringed (an outline, a box-shadow spread or a white
 // border, the map included); a solid white 2 pt outline 3 pt outside; the element inside the side insets, the ring on
-// screen, clear of the sheet and of the map's focus; none on the sections' step
+// screen and clear of the sheet; none on the sections' step. A ring may be drawn by the element or its ::before or ::after,
+// by an outline, a white border or any box-shadow layer with a spread (any offset, blur or alpha)
 { const white = (c) => c === X.TOK.t1;
-  const ringed = (e) => { const c = getComputedStyle(e); if (!e.getClientRects().length || c.visibility === 'hidden') return false;
+  const whiteish = (col) => { const m = /rgba?\(([\d.]+), ([\d.]+), ([\d.]+)(?:, ([\d.]+))?\)/.exec(col || ''); return !!m && +m[1] > 200 && +m[2] > 200 && +m[3] > 200 && (m[4] === undefined || +m[4] > 0); };
+  const layers = (bs) => { const out = []; let depth = 0, cur = ''; for (const ch of bs) { if (ch === '(') depth++; if (ch === ')') depth--; if (ch === ',' && !depth) { out.push(cur); cur = ''; } else cur += ch; } if (cur.trim()) out.push(cur); return out; };
+  const ringStyle = (c) => { if (!c || c.display === 'none' || c.visibility === 'hidden') return false;
     if (c.outlineStyle !== 'none' && parseFloat(c.outlineWidth) > 0) return true;
-    if (c.boxShadow !== 'none' && /rgb\\(234, 242, 247\\)[^,]*0px 0px 0px [1-9]|0px 0px 0px [1-9][0-9.]*px[^,]*rgb\\(234, 242, 247\\)/.test(c.boxShadow)) return true;
-    return ['Top', 'Right', 'Bottom', 'Left'].some((sd) => parseFloat(c['border' + sd + 'Width']) >= 1 && c['border' + sd + 'Style'] !== 'none' && white(c['border' + sd + 'Color'])); };
+    if (c.boxShadow && c.boxShadow !== 'none' && layers(c.boxShadow).some((l) => { const col = (/rgba?\([^)]*\)/.exec(l) || [''])[0], px = l.replace(col, '').match(/-?[\d.]+px/g) || []; return whiteish(col) && px.length >= 4 && parseFloat(px[3]) > 0; })) return true;
+    return ['Top', 'Right', 'Bottom', 'Left'].some((sd) => parseFloat(c['border' + sd + 'Width']) >= 1 && c['border' + sd + 'Style'] !== 'none' && whiteish(c['border' + sd + 'Color'])); };
+  const ringed = (e) => { if (!e.getClientRects().length || getComputedStyle(e).visibility === 'hidden') return false;
+    if (ringStyle(getComputedStyle(e))) return true;
+    return ['::before', '::after'].some((ps) => { const c = getComputedStyle(e, ps); return c.content !== 'none' && c.content !== 'normal' && ringStyle(c); }); };
   const rings = [...document.body.querySelectorAll('*')].filter((e) => !e.closest('.sheet') && ringed(e));
   const want = ST[i][2], tgt = want && document.querySelector('.hud ' + want);
   if (!want) { if (rings.length) issues.push('a ring on the sections\\' step: ' + rings.map((e) => e.className || e.tagName).join(', ')); }
@@ -131,6 +142,12 @@ require(path.join(OUT, '../../shared/check/panelcheck.js'))({
     ['primary bar hidden', d, '&tab=s1', '.r-first::after { content: none !important; }', /the primary's white bar is not drawn/],
     ['close without the help', d, '&tab=s1', '', /a11y: the close does not say it skips the tour, stays in the help/, () => { document.querySelector('.r-x').setAttribute('aria-label', 'تخطي الجولة، العودة إلى الخريطة واللعبة متوقفة'); }],
     ['skip without the decision', d, '&tab=s1', '', /the skip is missing, misplaced or does not say the tour stays in the help/, () => { document.querySelector('.r-body[data-tab="s1"] .r-link').setAttribute('aria-label', 'تخطي الجولة: تعود إليها من المزيد، حول، المساعدة. يغلق الجولة واللعبة متوقفة'); }],
+    ['skip naming another decision', d, '&tab=s1', '', /the skip is missing, misplaced or does not say the tour stays in the help/, () => { document.querySelector('.r-body[data-tab="s1"] .r-link').setAttribute('aria-label', 'تخطي الجولة: تعود إليها من المزيد، حول، المساعدة. ثم يفتح أول قرار، انتخابات في السودان'); }],
+    ['control inside the text', d, '&tab=s1', '', /the step body holds 3 controls|the step text section is not/, () => { const b = document.createElement('button'); b.className = 'r-act tap'; b.textContent = 'زر'; document.querySelector('.r-body[data-tab="s1"] .r-sec').appendChild(b); }],
+    ['second paragraph', d, '&tab=s1', '', /the step text section is not its heading and text/, () => { const p = document.createElement('p'); p.className = 'd-text'; p.textContent = 'نص إضافي'; document.querySelector('.r-body[data-tab="s1"] .r-sec').appendChild(p); }],
+    ['ring by a pseudo-element', d, '&tab=s3', '.hud .date { position: relative; } .hud .date::after { content: ""; position: absolute; inset: -5px; border: 2px solid #EAF2F7; }', /a ring on the sections' step/],
+    ['ring by an offset shadow', d, '&tab=s2', '.hud .nation { box-shadow: 0 1px 0 3px rgba(234, 242, 247, .9) !important; }', /the ring is not on the step's element \.stats alone/],
+    ['primary bar faded', d, '&tab=s1', '.r-first::after { opacity: 0 !important; }', /the primary's white bar is not drawn/],
     ['skip path without «حول»', d, '&tab=s2', '', /the skip is missing, misplaced or does not say the tour stays in the help/, () => { document.querySelector('.r-body[data-tab="s2"] .r-link .r-at > span').textContent = 'تعود إليها من المزيد › المساعدة'; }],
     ['HUD date changed', d, '&tab=s1', '', /the header's date is not the HUD's/, () => { document.querySelector('.hud .date .dmy').textContent = '14 يناير 2011'; }],
     ['HUD country changed', d, '&tab=s1', '', /step 1's country and date are not the HUD's/, () => { document.querySelector('.hud .nation .nm').textContent = 'تونس'; }],
