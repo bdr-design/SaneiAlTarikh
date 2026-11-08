@@ -70,11 +70,11 @@ if (3.24 / parseFloat(getComputedStyle(document.documentElement).getPropertyValu
     const h = hits(b, 6); if (h.length) issues.push(nm + ' is under a panel: ' + h.join(', '));
     if (!isDot) marks.forEach(([e, P, hw]) => { if (P.some(([x, y]) => x > b.left - hw - 2 && x < b.right + hw + 2 && y > b.top - hw - 2 && y < b.bottom + hw + 2)) issues.push(nm + ' is on the ' + (e === line ? 'front line' : 'sector band')); }); });
   const all = shown.concat(dots);
-  for (let i = 0; i < all.length; i++) for (let j = i + 1; j < all.length; j++) { if (all[i].nextElementSibling === all[j] || all[j].nextElementSibling === all[i]) continue; const a = all[i].getBoundingClientRect(), b = all[j].getBoundingClientRect();
+  for (let i = 0; i < all.length; i++) for (let j = i + 1; j < all.length; j++) { const pair = (x, y) => x.classList.contains('f-dot') && x.nextElementSibling === y; if (pair(all[i], all[j]) || pair(all[j], all[i])) continue;   // a dot and its own name const a = all[i].getBoundingClientRect(), b = all[j].getBoundingClientRect();
     if (Math.min(a.right, b.right) - Math.max(a.left, b.left) > 0.5 && Math.min(a.bottom, b.bottom) - Math.max(a.top, b.top) > 0.5) issues.push('the map names «' + W(T(all[i])) + '» and «' + W(T(all[j])) + '» overlap'); }
   qa('.f-labels .f-dot').forEach((dt) => { const l = dt.nextElementSibling; if (!l || l.classList.contains('cut') !== dt.classList.contains('cut')) issues.push('a place dot without its name, or a name without its dot'); });
   // a hidden name must really be cut (edge or 6 pt of a panel)
-  qa('.f-labels .f-lbl.cut').forEach((l) => { l.classList.remove('cut'); const b = l.getBoundingClientRect(), bad = !inSafe(b) || hits(b, 6).length; l.classList.add('cut'); if (!bad) issues.push('the map name «' + W(T(l)) + '» is hidden though it fits'); });
+  [...document.querySelectorAll('.f-labels .f-lbl.cut')].forEach((l) => { l.classList.remove('cut'); const b = l.getBoundingClientRect(), bad = !inSafe(b) || hits(b, 6).length; l.classList.add('cut'); if (!bad) issues.push('the map name «' + W(T(l)) + '» is hidden though it fits'); });
   const own = shown.find((l) => W(T(l)) === 'قطاعك'); if (own && getComputedStyle(own).color !== X.TOK.teal) issues.push('the map name «قطاعك» is not the player\\'s teal'); }
 // the HUD's alert: the day's («هجوم على أجدابيا»), not the 1 January one
 if (W(T(q('.toast .alert-prev .txt'))) !== 'هجوم على أجدابيا') issues.push('the HUD alert is not the day\\'s («هجوم على أجدابيا»)');

@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-08T02:11:01.249Z",
+ "ranAt": "2026-11-08T02:13:48.746Z",
  "inputs": {
   "files": [
    "index.html",
@@ -25,7 +25,7 @@
    "header_cairo.jpg",
    "map_overlay_cairo.svg"
   ],
-  "sha1": "73b6165a2d2bac261902a2eba928bdbe7a48e435"
+  "sha1": "628c39bca94a5e0128d436ee0c379d9670eac973"
  },
  "cleanIssues": {
   "i16promax": [],
@@ -396,7 +396,7 @@
   },
   {
    "name": "text into a control (posture)",
-   "ok": false,
+   "ok": true,
    "sample": [
     "setting 1: order must be .r-at, .s-seg (right to left)",
     "contrast 1.06 for \"للجيوش بلا أمر خاص\""
@@ -436,7 +436,7 @@
   },
   {
    "name": "front name cut",
-   "ok": false,
+   "ok": true,
    "sample": [
     "the map name «رأس لانوف» is cut by the screen edge"
    ]
@@ -514,7 +514,7 @@
   },
   {
    "name": "a name scaled",
-   "ok": false,
+   "ok": true,
    "sample": [
     "the map name «أجدابيا» is 20px, not 14.93px",
     "the map name «البريقة» is 20px, not 14.93px",
@@ -540,9 +540,7 @@
   {
    "name": "names overlap",
    "ok": false,
-   "sample": [
-    "the map name «قطاع الحليف» is on the sector band"
-   ]
+   "sample": []
   },
   {
    "name": "dot alone",
@@ -751,7 +749,7 @@
    "name": "name hidden though it fits",
    "ok": false,
    "sample": [
-    "the front's name «أجدابيا» is not shown"
+    "the front's name «جالو» is not shown"
    ]
   },
   {
