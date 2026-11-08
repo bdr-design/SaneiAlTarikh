@@ -13,7 +13,7 @@ subsidy −10%: 11.7 to 10.5 مليار $), screen 22 (جمع معلومات ف�
 Region's 4 formations to Siwa, arriving after 7 days). The owner's rules mapCentral, sheetIdentity, ownerProxy.
 
 ## Scope
-The paused HUD (the play button «استئناف» with the count; the toast slot holding the pending orders while paused) and a
+The paused HUD (the play button «تشغيل (اللعبة متوقفة)» with the count; the toast slot holding the pending orders while paused) and a
 side sheet of no dock section listing the orders given while paused, each cancellable, with «استئناف الوقت»; the list
 after one cancel. Out of scope: reordering orders; orders given while time runs (they act at once).
 

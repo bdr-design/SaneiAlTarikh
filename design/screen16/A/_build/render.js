@@ -9,9 +9,9 @@ const path = require('path');
 const OUT = path.resolve(__dirname, '..');
 
 const HEAD = ['الإشعارات', 'غير المقروءة: 2 · 1 يناير 2011'];
-const ROWS = [['احتجاجات في تونس', 'قرار · الافتراضي بعد 7 أيام', 'قرارات تنتظرك', false], ['المنطقة الغربية إلى سيوة', 'يُنفَّذ عند استئناف الوقت', 'أوامر معلقة', false],
+const ROWS = [['احتجاجات في تونس', 'قرار · الافتراضي بعد 7 أيام', 'قرارات تنتظرك', false], ['المنطقة الغربية إلى سيوة', 'يُنفَّذ عند استئناف الوقت', 'أوامر معلّقة', false],
   ['السودان: استفتاء الجنوب بعد 8 أيام', '9 يناير 2011 · الجوار', 'مهم', true], ['القمح عالميًا في أعلى مستوى منذ 2008', 'السلع · ديسمبر 2010', 'للعلم', true]];
-const SECTIONS = ['قرارات تنتظرك', 'أوامر معلقة', 'مهم', 'للعلم'];
+const SECTIONS = ['قرارات تنتظرك', 'أوامر معلّقة', 'مهم', 'للعلم'];
 const BRIEF = {
   center: HEAD.concat(SECTIONS.slice(0, 1), [ROWS[0][0]]),
   reach_center: SECTIONS.concat(ROWS.map((r) => r[0]), ROWS.map((r) => r[1]), ['إلغاء']),
@@ -54,7 +54,7 @@ rows.forEach((r) => { const u = r.dataset.unread === '1', nm = W(T(r.querySelect
 // the pending order: a group (not a button, not a notification) with its own «إلغاء»
 { const o = q('.sheet .n-ord'), b = o && o.querySelector('button.r-btn');
   if (!o || o.getAttribute('role') !== 'group' || o.matches('.tap, [tabindex]') || o.dataset.unread === '1' || !b || W(T(b)) !== 'إلغاء' || !/^إلغاء أمر /.test(b.getAttribute('aria-label') || '')) issues.push('the pending order is not a group with its own «إلغاء»');
-  if (o && (o.getAttribute('aria-label') || '') !== 'أمر معلق: المنطقة الغربية إلى سيوة، يُنفَّذ عند استئناف الوقت') issues.push('a11y: the pending order does not read whole'); }
+  if (o && (o.getAttribute('aria-label') || '') !== 'أمر معلّق: المنطقة الغربية إلى سيوة، يُنفَّذ عند استئناف الوقت') issues.push('a11y: the pending order does not read whole'); }
 `;
 
 require(path.join(OUT, '../../shared/check/panelcheck.js'))({

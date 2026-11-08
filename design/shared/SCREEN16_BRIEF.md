@@ -11,7 +11,7 @@ The approved panel sheet from the right (shared builder and checker), the map ce
 ## Content
 Header: Egypt's flag, «الإشعارات», «غير المقروءة: 2 · 1 يناير 2011», the grey bell emblem, close. Sections in words (§6.7's tiers), each row a 44 pt row with its icon:
 - **قرارات تنتظرك:** «احتجاجات في تونس» · «قرار · الافتراضي بعد 7 أيام» (opens the decision; read, so no dot; VoiceOver «قرار ينتظرك: …»).
-- **أوامر معلقة:** «المنطقة الغربية إلى سيوة» · «يُنفَّذ عند استئناف الوقت»: a group, not a notification, with its own «إلغاء» (§6.7: cancellable before time resumes).
+- **أوامر معلّقة:** «المنطقة الغربية إلى سيوة» · «يُنفَّذ عند استئناف الوقت»: a group, not a notification, with its own «إلغاء» (§6.7: cancellable before time resumes).
 - **مهم:** «السودان: استفتاء الجنوب بعد 8 أيام» · «9 يناير 2011 · الجوار».
 - **للعلم:** «القمح عالميًا في أعلى مستوى منذ 2008» · «السلع · ديسمبر 2010».
 Unread rows (the two news items) carry a 6 pt teal dot before the chevron and begin «غير مقروء» in VoiceOver; the badge, the header and the bell all count 2. The pending order's row has the link rows' box and inset.

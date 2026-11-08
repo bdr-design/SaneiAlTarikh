@@ -55,7 +55,10 @@ const open = q('.r-body[data-tab="' + tab + '"]'), n = open ? open.querySelector
   if (!bd || W(T(bd)) !== String(n) || getComputedStyle(bd).backgroundColor !== X.TOK.sec || bd.getBoundingClientRect().width < 15.5) issues.push('the HUD badge does not count the ' + n + ' orders in the sheet\\'s colour');
   else { const g = pl.querySelector('svg').getBoundingClientRect(), b = bd.getBoundingClientRect(), dt = q('.date .dtext').getBoundingClientRect();
     if (Math.sign((b.left + b.right) / 2 - (g.left + g.right) / 2) !== Math.sign((dt.left + dt.right) / 2 - (g.left + g.right) / 2) || b.left < g.right - 0.5) issues.push('the HUD badge is not on the date\\'s side of the glyph, clear of it');
-    if (b.top < q('.date').getBoundingClientRect().top - 3.5) issues.push('the HUD badge overhangs the date pill more than the bell\\'s badge (3 pt)'); }
+    if (b.top < q('.date').getBoundingClientRect().top - 3.5) issues.push('the HUD badge overhangs the date pill more than the bell\\'s badge (3 pt)');
+    // a two-digit count (up to the queue's 64) grows toward the date, still clear of the glyph
+    const keep = bd.textContent; bd.textContent = '64'; const b2 = bd.getBoundingClientRect(); bd.textContent = keep;
+    if (b2.left < g.right - 0.5) issues.push('a two-digit HUD badge runs onto the glyph'); }
   if (!to || to.tagName !== 'BUTTON' || to.getAttribute('aria-expanded') !== 'true' || to.getAttribute('aria-controls') !== 'orders' || !q('.sheet#orders')) issues.push('the toast slot does not open this list (a button, expanded, controlling the sheet)');
   else { if (W(T(to.querySelector('.txt'))) !== F.toast || to.hasAttribute('aria-label')) issues.push('the toast does not say «' + F.toast + '» as its name');
     if (!to.querySelector('use[href="#i-queue"]') || getComputedStyle(to.querySelector('svg')).color !== X.TOK.sec) issues.push('the toast\\'s icon is not the queue in the sheet\\'s colour'); }
@@ -96,17 +99,19 @@ const dockIcon = (name) => { const it = [...document.querySelectorAll('.dock .do
   if (!st || W(T(st)) !== 'أُلغي: ' + DATA.src[1].title + '. لم يُخصم شيء.') issues.push('the list after a cancel does not say, at once, what was cancelled and that nothing was spent');
   if (!u || W(T(u)) !== 'تراجع' || u.getAttribute('aria-label') !== 'تراجع عن إلغاء أمر ' + DATA.src[1].title) issues.push('the cancel has no undo «تراجع» naming the order'); }
 // no red here (any red: hue near 0, saturated); the identity only on the chrome (the top line, the emblem, the badge, the toast's icon)
-{ const isRed = (c) => { const m = (c || '').match(/rgba?\\((\\d+), (\\d+), (\\d+)/); if (!m) return false; const [r, g, b] = m.slice(1).map(Number); return r > 170 && g < 120 && b < 120 && r - g > 80; };
+{ const isRed = (c) => { const m = (c || '').match(/rgba?\\((\\d+), (\\d+), (\\d+)/); if (!m) return false; const [r, g, b] = m.slice(1).map((v) => +v / 255);
+    const mx = Math.max(r, g, b), mn = Math.min(r, g, b), sat = mx ? (mx - mn) / mx : 0; if (mx !== r || sat < 0.45 || mx < 0.25) return false;
+    const hue = 60 * ((g - b) / (mx - mn)); return Math.abs(hue) <= 15; };   // hue within 15° of red, saturated, not near black
   const reds = (c) => (c || '').match(/rgba?\\([^)]*\\)/g) || [], yel = X.TOK.sec;
   qa('.sheet *, .date .play *, .o-toast, .o-toast *').forEach((e) => { const cs = getComputedStyle(e);
-    if ([cs.color, cs.backgroundColor, cs.borderTopColor, cs.stroke, cs.fill].concat(reds(cs.boxShadow)).some(isRed)) issues.push('red in the pending orders: ' + (e.className && e.className.baseVal === undefined ? e.className : e.tagName));
+    if ([cs.color, cs.backgroundColor, cs.borderTopColor, cs.borderRightColor, cs.borderBottomColor, cs.borderLeftColor, cs.outlineColor, cs.stroke, cs.fill].concat(reds(cs.boxShadow)).some(isRed)) issues.push('red in the pending orders: ' + (e.className && e.className.baseVal === undefined ? e.className : e.tagName));
     if (!e.closest('.s-emb') && !e.matches('.o-badge') && !e.closest('.o-toast svg') && [cs.color, cs.backgroundColor, cs.boxShadow].some((c) => (c || '').includes(yel.slice(4, -1)))) issues.push('the identity colour off the chrome: ' + (e.className && e.className.baseVal === undefined ? e.className : e.tagName)); }); }
 `;
 
 require(path.join(OUT, '../../shared/check/panelcheck.js'))({
   OUT, dock: null, tabs: ['list', 'less'], noTabs: true, fitTab: 'list', longTab: 'list',
   inputs: ['_build/orders.css', '../../shared/paused_hud.css', '../../shared/paused_hud.py', '../../screen7/A/_build/sheet.html', '../../screen22/A/_build/sheet.html', '../../screen14/A/index.html', '../../shared/SCREEN14_BRIEF.md'],
-  TOK: { sec: 'rgb(240, 231, 60)', ctlH: { '.o-x': 32 }, sheetIcon: [['.o-x svg', 16]], size: [], radius: { '.o-row': 10 } },
+  TOK: { sec: 'rgb(240, 231, 60)', ctlH: {}, sheetIcon: [], size: [], radius: { '.o-row': 10 } },
   HEAD, BRIEF, screenChecks, DATA: { src: SRC, forms: FORMS.toString().replace(/WORDS\[n\]/, '(' + JSON.stringify(WORDS) + ')[n]') },
   skipGeneric: ['section colour on a rule', 'why without its subject', 'amber value without its icon', '% before its number', 'brief text hidden', '18 pt misuse', 'clipped text', 'gap', 'faint text', 'text into a control', 'chip arrow against its sign', 'chip not white', 'hint chevron missing (no tabs)', 'hint over the content (no tabs)'],
   cases: (d, se) => [
@@ -126,6 +131,8 @@ require(path.join(OUT, '../../shared/check/panelcheck.js'))({
     ['badge wrong', d, '', '', /the HUD badge does not count the 3 orders/, () => { document.querySelector('.o-badge').textContent = '2'; }],
     ['badge red', d, '', '.o-badge { background: var(--red) !important; }', /the HUD badge does not count the 3 orders in the sheet's colour|red in the pending orders/],
     ['badge away from the date', d, '', '.play .o-badge { right: auto !important; left: -10px !important; }', /the HUD badge is not on the date's side of the glyph/],
+    ['badge grows onto the glyph', d, '', '.play .o-badge { left: auto !important; right: -10px !important; }', /a two-digit HUD badge runs onto the glyph/],
+    ['red outline (other border)', d, '', '.o-row:first-child { border-left: 2px solid #8B0000 !important; }', /red in the pending orders: o-row/],
     ['badge too high', d, '', '.play .o-badge { top: -9px !important; }', /the HUD badge overhangs the date pill/],
     ['less HUD stale', d, '&tab=less', '', /the HUD badge does not count the 2 orders|the HUD does not show the game paused/, () => { document.querySelector('.o-badge').textContent = '3'; document.querySelector('.date .play').setAttribute('aria-label', 'تشغيل (اللعبة متوقفة)، تُنفَّذ 3 أوامر معلّقة'); }],
     ['less toast stale', d, '&tab=less', '', /the toast does not say «أمران ينتظران الاستئناف»/, () => { document.querySelector('.o-toast .txt').textContent = '3 أوامر تنتظر الاستئناف'; }],

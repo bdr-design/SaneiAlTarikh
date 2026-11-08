@@ -60,7 +60,7 @@ See design doc §3.9 «The pending orders (screen 26)», §2.4 (the pending-comm
 carries what was worked out when it was given (the route and ETA, the previewed values), so resuming applies them in one
 `ApplyCommands` at O(1) each, with no new route search, the units under D-15's glide cap; static rows; the HUD's badge
 and toast change only on pause, resume and a new or cancelled order (no timer while paused, L1); a cancel or an undo
-changes one entry and rebuilds the sheet's model once.
+changes one entry and rebuilds the sheet's model and the map's route layer once, in the background.
 
 ## Gate
 `screen26/A/_build/render.js` uses the shared checker (a sheet of no section) and adds: the paused HUD counting the open
