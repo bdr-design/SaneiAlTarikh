@@ -10,8 +10,9 @@ struct FrameStats: Sendable {
     /// Frames encoded while idle (one per request): 0 a second when nothing changes proves the link is paused (L1).
     var idleFrames = 0
     /// Continuous refreshes that showed a stale frame, each counted once: refreshes the display link skipped (booked at
-    /// the next callback) and frames dropped, never presented (booked in the row of the second the drop is known, about
-    /// two refreshes after encoding). A late frame pushes the next target, so it shows up as a skipped refresh.
+    /// the next callback), frames dropped (never presented) and frames the GPU presented more than half a refresh after
+    /// their target when no skip came before them (a late callback already shows as a skip); the last two are booked in
+    /// the row of the second they are known, about two refreshes after encoding.
     var hitches = 0
     /// The spacing of presented continuous frames, in ms (mean and worst).
     var intervalMeanMs = 0.0
@@ -180,10 +181,10 @@ final class RenderEngine: NSObject, @unchecked Sendable {
     }
 
     /// Called on Metal's thread when a continuous frame was presented (or dropped: presentedTime 0).
-    private func presented(at time: CFTimeInterval, target: CFTimeInterval, refresh: CFTimeInterval) {
+    private func presented(at time: CFTimeInterval, target: CFTimeInterval, refresh: CFTimeInterval, skippedBefore: Bool) {
         lock.lock()
         defer { lock.unlock() }
-        if time == 0 { stats.hitches += 1 }
+        if time == 0 || (!skippedBefore && time - target > refresh / 2) { stats.hitches += 1 }
         guard time > 0 else { return }
         if lastPresented > 0 {
             let gap = time - lastPresented
@@ -201,20 +202,21 @@ extension RenderEngine: CAMetalDisplayLinkDelegate {
             let start = DispatchTime.now().uptimeNanoseconds
             let target = update.targetPresentationTimestamp
             if continuous {
+                var skipped = 0
                 if lastTarget > 0 {
                     // the refresh: the smallest target spacing seen, between the requested 60 and 30 a second
                     let spacing = target - lastTarget
                     let seen = min(max(spacing, 1.0 / 60), 1.0 / 30)
                     refresh = refresh > 0 ? min(refresh, seen) : seen
                     // refreshes the link skipped since the last frame (the previous frame stayed on screen)
-                    let skipped = max(0, Int((spacing / refresh).rounded()) - 1)
+                    skipped = max(0, Int((spacing / refresh).rounded()) - 1)
                     if skipped > 0 { lock.lock(); stats.hitches += skipped; lock.unlock() }
                 }
                 lastTarget = target
                 angle += 0.02
-                let r = refresh > 0 ? refresh : 1.0 / 60
+                let r = refresh > 0 ? refresh : 1.0 / 60, after = skipped > 0
                 update.drawable.addPresentedHandler { [self] d in
-                    self.presented(at: d.presentedTime, target: target, refresh: r)
+                    self.presented(at: d.presentedTime, target: target, refresh: r, skippedBefore: after)
                 }
             }
             encode(into: update.drawable)

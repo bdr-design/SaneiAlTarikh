@@ -50,8 +50,11 @@ jobs:
           done
           if [ "$found" = 1 ]; then echo "SaneiEngine never uses floating-point literals (§2.2)"; exit 1; fi
           # the app's platform and render code never reach into the engine (§2.2: only App/App and App/UI hold it)
-          if grep -rnE '^\s*(@\w+(\([^)]*\))?\s+)*((public|internal|package|private|fileprivate)\s+)?import\s+(\w+\s+)?SaneiEngine\b|\bGameHost\b' App/Sources/Platform App/Sources/MapRenderer; then
-            echo "App/Platform and App/MapRenderer never use the engine (§2.2)"; exit 1; fi
+          eng=""
+          for f in $(find App/Sources/Platform App/Sources/MapRenderer -name '*.swift'); do
+            o=$( (stmts "$f" | grep -nE "$IMP" | grep -E 'import\s+(\w+\s+)?SaneiEngine\b'; grep -nE '\bGameHost\b' "$f") || true ); [ -n "$o" ] && eng="$eng$f: $o"$'\n'
+          done
+          if [ -n "$eng" ]; then echo "$eng"; echo "App/Platform and App/MapRenderer never use the engine (§2.2)"; exit 1; fi
       - name: Build (warnings as errors)
         run: swift build -Xswiftc -warnings-as-errors
       - name: Test

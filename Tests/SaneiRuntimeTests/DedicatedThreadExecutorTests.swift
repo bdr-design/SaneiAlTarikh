@@ -93,6 +93,7 @@ final class DedicatedThreadExecutorTests: XCTestCase {
             Task { try? await Task.sleep(for: .seconds(5)); if once.take() { c.resume(returning: false) } }
         }
         XCTAssertTrue(done, "the executor stopped after a change of quality of service")
+        guard done else { return }      // a stopped executor would never answer the read below
         let all = await p.all()
         XCTAssertEqual(Array(all.suffix(2)), [1, 2])
     }
