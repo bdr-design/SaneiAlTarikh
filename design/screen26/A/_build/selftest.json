@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-08T00:52:02.869Z",
+ "ranAt": "2026-11-08T01:07:28.453Z",
  "inputs": {
   "files": [
    "index.html",
@@ -15,8 +15,11 @@
    "../../screen1/B3/index.html",
    "../../shared/devices.json",
    "_build/orders.css",
+   "../../shared/paused_hud.css",
+   "../../shared/paused_hud.py",
    "../../screen7/A/_build/sheet.html",
    "../../screen22/A/_build/sheet.html",
+   "../../screen14/A/index.html",
    "../../shared/SCREEN14_BRIEF.md",
    "../../shared/flag_eg.svg",
    "../../shared/flags/eg.svg",
@@ -25,7 +28,7 @@
    "header_cairo.jpg",
    "map_overlay_cairo.svg"
   ],
-  "sha1": "7d9ac1788487ac9edc149c855f988200d091a54c"
+  "sha1": "0a2f4d2135dfec7b6bc7f7e23e43b198cf236a20"
  },
  "cleanIssues": {
   "i16promax": [],
@@ -67,18 +70,18 @@
    "name": "tap in the side inset",
    "ok": true,
    "sample": [
-    "text in side inset: تبدأ عند استئناف الوقت",
+    "text in side inset: تُنفَّذ عند استئناف الوقت",
     "text in side inset: لا يُخصم شيء ولا يتحرك شيء قبل الاستئناف. الأمر الملغى لا يكلّف شيئًا.",
-    "tap in side inset: استئناف الوقت: تبدأ الأوام"
+    "tap in side inset: استئناف الوقت: تُنفَّذ الأ"
    ]
   },
   {
    "name": "panel in the side inset",
    "ok": true,
    "sample": [
-    "text in side inset: تبدأ عند استئناف الوقت",
+    "text in side inset: تُنفَّذ عند استئناف الوقت",
     "text in side inset: لا يُخصم شيء ولا يتحرك شيء قبل الاستئناف. الأمر الملغى لا يكلّف شيئًا.",
-    "tap in side inset: استئناف الوقت: تبدأ الأوام"
+    "tap in side inset: استئناف الوقت: تُنفَّذ الأ"
    ]
   },
   {
@@ -95,7 +98,7 @@
    "sample": [
     "panel not opaque (opacity 0.60): أوامر معلّقة",
     "brief text not fully visible: أوامر معلّقة",
-    "brief text not fully visible: الوقت موقوف · 1 يناير 2011"
+    "brief text not fully visible: اللعبة متوقفة · 1 يناير 2011"
    ]
   },
   {
@@ -104,7 +107,7 @@
    "sample": [
     "Nile delta covered by panel أوامر معلّقة",
     "Egypt covered by panel أوامر معلّقة",
-    "Egypt under the hit box of استئناف الوقت: تبدأ الأوام"
+    "Egypt under the hit box of استئناف الوقت: تُنفَّذ الأ"
    ]
   },
   {
@@ -127,7 +130,7 @@
    "sample": [
     "something drawn over the map: DIV (rgba(0, 0, 0, 0.55))",
     "contrast 3.26 for \"3\"",
-    "contrast 1.92 for \"3\""
+    "contrast 1.92 for \"2\""
    ]
   },
   {
@@ -157,9 +160,9 @@
    "name": "dock shown on the SE",
    "ok": true,
    "sample": [
-    "hit overlap الدولة / استئناف الوقت: تبدأ الأوام",
-    "hit overlap الاقتصاد / استئناف الوقت: تبدأ الأوام",
-    "hit overlap الداخلية والسياسة / استئناف الوقت: تبدأ الأوام"
+    "hit overlap الدولة / استئناف الوقت: تُنفَّذ الأ",
+    "hit overlap الاقتصاد / استئناف الوقت: تُنفَّذ الأ",
+    "hit overlap الداخلية والسياسة / استئناف الوقت: تُنفَّذ الأ"
    ]
   },
   {
@@ -191,7 +194,7 @@
    "name": "contrast",
    "ok": true,
    "sample": [
-    "contrast 1 for \"تبدأ عند استئناف الوقت\"",
+    "contrast 1 for \"تُنفَّذ عند استئناف الوق\"",
     "contrast 1.73 for \"لا يُخصم شيء ولا يتحرك ش\""
    ]
   },
@@ -213,7 +216,7 @@
    "name": "section colour on data",
    "ok": true,
    "sample": [
-    "section colour on data text: \"الوقت موقوف\"",
+    "section colour on data text: \"اللعبة متوقفة\"",
     "section colour on data text: \"1\"",
     "section colour on data text: \"يناير\""
    ]
@@ -268,16 +271,16 @@
    "name": "overview scrolls",
    "ok": true,
    "sample": [
-    "list needs scrolling: 385.0 pt over",
-    "fades 0/0 do not match the scroll state (top 0, over 385.0)",
-    "brief text not fully visible: تبدأ عند استئناف الوقت"
+    "list needs scrolling: 397.0 pt over",
+    "fades 0/0 do not match the scroll state (top 0, over 397.0)",
+    "brief text not fully visible: تُنفَّذ عند استئناف الوقت"
    ]
   },
   {
    "name": "text overlap",
    "ok": true,
    "sample": [
-    "text overlap \"أوامر معلّقة\" / \"الوقت موقوف\"",
+    "text overlap \"أوامر معلّقة\" / \"اللعبة متوقفة\"",
     "text overlap \"أوامر معلّقة\" / \"·\"",
     "text overlap \"أوامر معلّقة\" / \"1\""
    ]
@@ -310,15 +313,15 @@
    "ok": true,
    "sample": [
     "a11y: the close says only «إغلاق»",
-    "a11y: the close does not say time stays paused"
+    "a11y: the close does not say the game stays paused"
    ]
   },
   {
    "name": "row read in part",
    "ok": true,
    "sample": [
-    "a11y: «جزء» does not read all it shows: استئناف الوقت تبدأ الأوامر",
-    "the «list» resume is not the one primary «استئناف الوقت · تبدأ الأوامر الثلاثة»"
+    "a11y: «جزء» does not read all it shows: استئناف الوقت تُنفَّذ الأوامر",
+    "the «list» resume is not the one primary «استئناف الوقت · تُنفَّذ الأوامر الثلاثة»"
    ]
   },
   {
@@ -334,7 +337,7 @@
    "name": "text wider than its box",
    "ok": true,
    "sample": [
-    "text wider than its box: «تبدأ عند استئناف الوقت» (106 in 20)"
+    "text wider than its box: «تُنفَّذ عند استئناف الوق» (108 in 20)"
    ]
   },
   {
@@ -350,7 +353,7 @@
    "name": "font weight (no tabs)",
    "ok": true,
    "sample": [
-    "font weight 11.5/700 for \"الوقت موقوف\"",
+    "font weight 11.5/700 for \"اللعبة متوقفة\"",
     "font weight 11.5/700 for \"·\"",
     "font weight 11.5/700 for \"1\""
    ]
@@ -382,7 +385,8 @@
    "ok": true,
    "sample": [
     "fades 0/1 do not match the scroll state (top 0, over 0.0)",
-    "brief text not fully visible: تبدأ الأوامر الثلاثة"
+    "brief text not fully visible: استئناف الوقت",
+    "brief text not fully visible: تُنفَّذ الأوامر الثلاثة"
    ]
   },
   {
@@ -410,19 +414,17 @@
   },
   {
    "name": "clipped text (list)",
-   "ok": true,
+   "ok": false,
    "sample": [
-    "clipped text (sides): \"تبدأ عند استئناف الوقت\" 815.22..921 y 115..132",
-    "text outside the sheet's 12 pt padding: \"تبدأ عند استئناف الوقت\"",
-    "clipped text (sides): \"لا يُخصم شيء ولا يتحرك شيء قبل الاستئناف. الأمر الملغى لا يكلّف شيئًا.\" 652.69..921 y 283..298"
+    "horizontal overflow in دعم الوقود −10%"
    ]
   },
   {
    "name": "gap (list)",
    "ok": true,
    "sample": [
-    "gap 6 on تبدأ عند استئناف الوقت دعم",
-    "gap 6 on تبدأ عند استئناف الوقت دعم"
+    "gap 6 on تُنفَّذ عند استئناف الوقت ",
+    "gap 6 on تُنفَّذ عند استئناف الوقت "
    ]
   },
   {
@@ -445,43 +447,43 @@
   },
   {
    "name": "text into a control (row)",
-   "ok": true,
+   "ok": false,
    "sample": [
-    "horizontal overflow in تبدأ عند استئناف الوقت دعم",
-    "the cancel on «دعم الوقود −10%» is not at the row's end",
-    "the cancel on «جمع معلومات في السودان» is not at the row's end"
+    "text overlap \"دعم الوقود\" / \"إلغاء\"",
+    "text overlap \"الاقتصاد ·\" / \"إلغاء\"",
+    "text overlap \"11.7\" / \"إلغاء\""
    ]
   },
   {
    "name": "hint chevron missing (forced overflow)",
    "ok": true,
    "sample": [
-    "list needs scrolling: 185.0 pt over",
+    "list needs scrolling: 197.0 pt over",
     "scroll hint chevron missing with content below",
-    "brief text not fully visible: تبدأ عند استئناف الوقت"
+    "brief text not fully visible: تُنفَّذ عند استئناف الوقت"
    ]
   },
   {
    "name": "hint over the content (forced overflow)",
    "ok": true,
    "sample": [
-    "list needs scrolling: 185.0 pt over",
+    "list needs scrolling: 197.0 pt over",
     "scroll hint not centred in the clear strip under the fade: y 198.0..216.0 (strip 344.0..366.0)",
-    "brief text not fully visible: تبدأ عند استئناف الوقت"
+    "brief text not fully visible: تُنفَّذ عند استئناف الوقت"
    ]
   },
   {
    "name": "running, not paused",
    "ok": true,
    "sample": [
-    "the HUD does not show the game paused (the play button «استئناف», saying the 3 orders)"
+    "the HUD does not show the game paused (the play button «تشغيل», saying «تُنفَّذ 3 أوامر معلّقة»)"
    ]
   },
   {
-   "name": "play count unsaid",
+   "name": "play count form wrong",
    "ok": true,
    "sample": [
-    "the HUD does not show the game paused (the play button «استئناف», saying the 3 orders)"
+    "the HUD does not show the game paused (the play button «تشغيل», saying «تُنفَّذ 3 أوامر معلّقة»)"
    ]
   },
   {
@@ -500,6 +502,35 @@
    ]
   },
   {
+   "name": "badge away from the date",
+   "ok": true,
+   "sample": [
+    "the HUD badge is not on the date's side of the glyph, clear of it"
+   ]
+  },
+  {
+   "name": "badge too high",
+   "ok": true,
+   "sample": [
+    "the HUD badge overhangs the date pill more than the bell's badge (3 pt)"
+   ]
+  },
+  {
+   "name": "less HUD stale",
+   "ok": true,
+   "sample": [
+    "the HUD does not show the game paused (the play button «تشغيل», saying «يُنفَّذ أمران معلّقان»)",
+    "the HUD badge does not count the 2 orders in the sheet's colour"
+   ]
+  },
+  {
+   "name": "less toast stale",
+   "ok": true,
+   "sample": [
+    "the toast does not say «أمران ينتظران الاستئناف» as its name"
+   ]
+  },
+  {
    "name": "toast not the entry",
    "ok": true,
    "sample": [
@@ -507,10 +538,10 @@
    ]
   },
   {
-   "name": "toast unsaid",
+   "name": "toast name not its text",
    "ok": true,
    "sample": [
-    "the toast does not say the 3 pending orders and when they start"
+    "the toast does not say «3 أوامر تنتظر الاستئناف» as its name"
    ]
   },
   {
@@ -521,12 +552,19 @@
    ]
   },
   {
+   "name": "bell 3",
+   "ok": true,
+   "sample": [
+    "the bell is not 2 (as screen 16 at this moment)"
+   ]
+  },
+  {
    "name": "header date off",
    "ok": true,
    "sample": [
-    "the header does not say time is paused on the HUD's date",
-    "brief text missing: الوقت موقوف · 1 يناير 2011",
-    "brief text missing: الوقت موقوف · 1 يناير 2011"
+    "the header does not say the game is paused on the HUD's date",
+    "brief text missing: اللعبة متوقفة · 1 يناير 2011",
+    "brief text missing: اللعبة متوقفة · 1 يناير 2011"
    ]
   },
   {
@@ -548,11 +586,18 @@
    "ok": true,
    "sample": [
     "a11y: the close says only «إغلاق»",
-    "a11y: the close does not say time stays paused"
+    "a11y: the close does not say the game stays paused"
    ]
   },
   {
    "name": "list in a dialog",
+   "ok": true,
+   "sample": [
+    "a dialog over the map (mapCentral)"
+   ]
+  },
+  {
+   "name": "sheet modal",
    "ok": true,
    "sample": [
     "a dialog over the map (mapCentral)"
@@ -567,6 +612,14 @@
    ]
   },
   {
+   "name": "rows reversed on screen",
+   "ok": true,
+   "sample": [
+    "the orders are not shown in the order given («جمع معلومات في السودان»)",
+    "the orders are not shown in the order given («المنطقة الغربية إلى سيوة»)"
+   ]
+  },
+  {
    "name": "tile not the section",
    "ok": true,
    "sample": [
@@ -574,19 +627,27 @@
    ]
   },
   {
-   "name": "tile cyan",
+   "name": "tile icon cyan",
    "ok": true,
    "sample": [
-    "white touch off: .r-tile color rgb(127, 233, 255) (want rgb(234, 242, 247))",
-    "white touch off: .r-tile color rgb(127, 233, 255) (want rgb(234, 242, 247))",
-    "white touch off: .r-tile color rgb(127, 233, 255) (want rgb(234, 242, 247))"
+    "the order «دعم الوقود −10%»: its tile icon is not white",
+    "the order «جمع معلومات في السودان»: its tile icon is not white",
+    "the order «المنطقة الغربية إلى سيوة»: its tile icon is not white"
    ]
   },
   {
    "name": "cancel unnamed",
    "ok": true,
    "sample": [
-    "a11y: the cancel on «جمع معلومات في السودان» does not name its order"
+    "a11y: the cancel on «جمع معلومات في السودان» is not screen 16's «إلغاء» naming its order («إلغاء أمر جمع معلومات في السودان»)"
+   ]
+  },
+  {
+   "name": "cancel as a glyph",
+   "ok": true,
+   "sample": [
+    "text wider than its box: «✕» (39 in 34)",
+    "a11y: the cancel on «المنطقة الغربية إلى سيوة» is not screen 16's «إلغاء» naming its order («إلغاء أمر المنطقة الغربية إلى سيوة»)"
    ]
   },
   {
@@ -602,9 +663,9 @@
    "name": "an order lost",
    "ok": true,
    "sample": [
-    "the HUD does not show the game paused (the play button «استئناف», saying the 2 orders)",
+    "the HUD does not show the game paused (the play button «تشغيل», saying «يُنفَّذ أمران معلّقان»)",
     "the HUD badge does not count the 2 orders in the sheet's colour",
-    "the toast does not say the 2 pending orders and when they start"
+    "the toast does not say «أمران ينتظران الاستئناف» as its name"
    ]
   },
   {
@@ -618,25 +679,16 @@
    "name": "resume count off",
    "ok": true,
    "sample": [
-    "the «list» resume is not the one primary «استئناف الوقت · تبدأ الأوامر الثلاثة»",
-    "brief text missing: تبدأ الأوامر الثلاثة",
-    "brief text missing: تبدأ الأوامر الثلاثة"
+    "a11y: «استئناف الوقت: تُنفَّذ ا» does not read all it shows: تبدأ",
+    "the «list» resume is not the one primary «استئناف الوقت · تُنفَّذ الأوامر الثلاثة»",
+    "brief text missing: تُنفَّذ الأوامر الثلاثة"
    ]
   },
   {
    "name": "resume not primary",
    "ok": true,
    "sample": [
-    "the «list» resume is not the one primary «استئناف الوقت · تبدأ الأوامر الثلاثة»"
-   ]
-  },
-  {
-   "name": "row height off",
-   "ok": true,
-   "sample": [
-    "hit overlap إلغاء الأمر: دعم الوقود −1 / إلغاء الأمر: جمع معلومات ف",
-    "hit overlap إلغاء الأمر: جمع معلومات ف / إلغاء الأمر: المنطقة الغرب",
-    "an order row is 36.0 pt (44, or 40 at a fit level)"
+    "the «list» resume is not the one primary «استئناف الوقت · تُنفَّذ الأوامر الثلاثة»"
    ]
   },
   {
@@ -644,6 +696,15 @@
    "ok": true,
    "sample": [
     "the resume is not after the list"
+   ]
+  },
+  {
+   "name": "row height off",
+   "ok": true,
+   "sample": [
+    "hit overlap إلغاء أمر دعم الوقود −10% / إلغاء أمر جمع معلومات في ا",
+    "hit overlap إلغاء أمر جمع معلومات في ا / إلغاء أمر المنطقة الغربية ",
+    "an order row is 36.0 pt (44, or 40 from fit level 2)"
    ]
   },
   {
@@ -663,19 +724,39 @@
    ]
   },
   {
-   "name": "less count off",
+   "name": "undo lost",
    "ok": true,
    "sample": [
-    "the «less» list has 3 orders, not 2"
+    "the cancel has no undo «تراجع» naming the order",
+    "brief text missing: تراجع",
+    "brief text missing: تراجع"
    ]
   },
   {
-   "name": "red cancel",
+   "name": "less count off",
    "ok": true,
    "sample": [
-    "red in the pending orders: o-x tap",
-    "red in the pending orders: svg",
-    "red in the pending orders: o-x tap"
+    "the HUD does not show the game paused (the play button «تشغيل», saying «تُنفَّذ 3 أوامر معلّقة»)",
+    "the HUD badge does not count the 3 orders in the sheet's colour",
+    "the toast does not say «3 أوامر تنتظر الاستئناف» as its name"
+   ]
+  },
+  {
+   "name": "red cancel (token)",
+   "ok": true,
+   "sample": [
+    "red in the pending orders: r-btn tap",
+    "red in the pending orders: r-btn tap",
+    "red in the pending orders: r-btn tap"
+   ]
+  },
+  {
+   "name": "red cancel (other red)",
+   "ok": true,
+   "sample": [
+    "text colour off-token rgb(255, 59, 48): \"إلغاء\"",
+    "text colour off-token rgb(255, 59, 48): \"إلغاء\"",
+    "text colour off-token rgb(255, 59, 48): \"إلغاء\""
    ]
   },
   {

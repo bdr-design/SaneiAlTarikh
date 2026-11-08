@@ -230,7 +230,7 @@ A rule that nothing enforces is not a rule here. Rule IDs are referenced in the 
 |---|---|---|
 | L1 | **Idle costs nothing.** Paused with no touch means 0 frames, 0 simulation wake-ups and no timers. | `FrameScheduler` unit tests on Linux; a simulator smoke test reads the counters over 5 s; the device overlay. |
 | L2 | **Nothing is parsed on the phone.** `content.bin`, `scenario-<id>.bin`, `world-N.mappack` and `world-N.imagery` are baked offline and memory-mapped. Save metadata is binary. JSON parsing lives only in `SaneiBake`, which only `simcli` links. | The IPA gate rejects `*.geojson`, `*.csv` and `*.json` over 64 KB. `imports.sh` forbids `JSONDecoder` and `JSONSerialization` outside `SaneiBake`. |
-| L3 | **The world is bounded.** Hard limits: <ul><li>land provinces ≤3,000; sea zones ≤300; total ≤3,300</li><li>polities ≤384 and governments ≤384 (registry ≤320 plus 64 runtime)</li><li>political actors ≤2,048</li><li>formations ≤8,192 worldwide, plus a quota per government (§5.4); armies ≤1,024; fronts ≤256 (sectors ≤1,024)</li><li>fleets ≤512; air groups ≤1,024</li><li>active spy operations ≤512</li><li>notification ring of 512; history in fixed windows</li></ul> | The invariant checker. A weekly all-AI run from 2011 to 2100 checks the maximum counts and that state stays ≤8 MB. The wartime benchmark measures the formation cap. |
+| L3 | **The world is bounded.** Hard limits: <ul><li>land provinces ≤3,000; sea zones ≤300; total ≤3,300</li><li>polities ≤384 and governments ≤384 (registry ≤320 plus 64 runtime)</li><li>political actors ≤2,048</li><li>formations ≤8,192 worldwide, plus a quota per government (§5.4); armies ≤1,024; fronts ≤256 (sectors ≤1,024)</li><li>fleets ≤512; air groups ≤1,024</li><li>active spy operations ≤512</li><li>notification ring of 512; history in fixed windows</li><li>pending commands while paused ≤64 (a new order beyond is refused with its reason)</li></ul> | The invariant checker. A weekly all-AI run from 2011 to 2100 checks the maximum counts and that state stays ≤8 MB. The wartime benchmark measures the formation cap. |
 | L4 | **Daily work grows only with provinces and active entities.** Monthly work runs on each government's stored slot day. Yearly work runs in its January slot. Strategic AI has its own stagger. Supply, routes, labels, anchors and colour tables are recomputed only when their inputs change. | The work-counter gate (§8). |
 | L5 | **The simulation uses integers only**, with binary fixed-point and table-based math. | `banned_api.sh` and the golden values. |
 | L6 | **Redraw only on change.** Redraws caused by the simulation happen at most 10 times a second, and nothing animates continuously. The one bounded exception is the unit glide (D-15, §3.9): at most 30 map frames a second, only for on-screen units that are selected or recently ordered (cap 8), redrawing only the unit layer from cached buffers; above the cap or over the GPU budget it falls back to day steps at ≤10 Hz. | Frame-counter tests, including one with a front on screen at ×1. |
@@ -389,7 +389,7 @@ Dependencies run one way: Core ← Content ← Engine ← AI; Core ← Map; Pres
 | Government pairs, dense | 384² × 8 B | Opinion, treaty bits, **recognises-state** bit, **recognises-government** bit, sanction bits, escalation rung, claim bit | 1.18 MB |
 | Pair extension (sparse) | ~6,000 | Spy network, intelligence level, exposure heat, **intel epoch**, partner share | 0.10 MB |
 | Handle tables | Capped (L3) | Formations (with equipment allocations), armies, fronts and sectors, wars, fleets, air groups, operations, projects, treaties. Each row carries its `Serial`. | ≤0.9 MB |
-| Queues and history | — | Event queue, decisions, a 512-entry notification ring, a 512-entry campaign log ring (each entry its title, date and stored `TermBuffer12`, about 90 B; §3.9). History: 12 series × existing governments × (60 monthly + 125 yearly) plus a campaign-start baseline row. | ≤2.6 MB |
+| Queues and history | — | Event queue, decisions, **the pending-command queue (≤64 entries while paused, each with what was worked out when given: the route and ETA, the previewed values; §3.9)**, a 512-entry notification ring, a 512-entry campaign log ring (each entry its title, date and stored `TermBuffer12`, about 90 B; §3.9). History: 12 series × existing governments × (60 monthly + 125 yearly) plus a campaign-start baseline row. | ≤2.6 MB |
 | World | 1 | 22 world prices and stocks, world interest rate, **USD deflator**, chokepoint disruption (~10), CO₂, temperature, sea level, entity counters | <2 KB |
 | **Total** | | | **≈7.3 MB** (≤8 MB) |
 
@@ -844,6 +844,13 @@ bound here; each item is a line in `docs/perf.md` (L12) and a test where one is 
   files; on its own serial queue at utility QoS after the save's atomic write, never ahead of a save; temporary name then
   replace; a coordinated write that waits is cancelled by the background task's expiration handler and stays due. The
   bookmark is resolved once per copy; a stale-but-resolving one is recreated silently.
+- **The pending orders (screen 26).** Orders given while paused go to the pending-command queue (§2.4, ≤64, L3); each
+  carries what was worked out when it was given (an army's route on the cluster graph and its ETA, the previewed values),
+  so applying it on resume costs O(1) with no new route search. Resuming applies the queue in one `ApplyCommands` in
+  (day, issuerRank, sequence) order, inside the commands line; the units ordered go under D-15's glide cap of 8. The
+  sheet's rows are static from the queue; the HUD's badge and toast change only on pause, resume and a new or cancelled
+  order (no timer while paused, L1); a cancel removes one entry and rebuilds the sheet's model, and the map's route layer,
+  once in the background.
 
 ### 3.10 Names of any country (the second-country test, T-024)
 

@@ -1,32 +1,22 @@
   /* ================= Screen 26, variant A: the pending orders ================= */
   /* its identity (sheetIdentity): a sheet of no dock section; chosen by measure as the others in section_identity.css
-     (ΔE2000 ≥ 16 from every section colour, every meaning hue and the other sheets; contrast 14.3 on the panel) */
-  :root { --sec-orders: #F0E73C; }   /* الأوامر المعلّقة: أصفر */
+     (ΔE2000 ≥ 16 from every section colour, every meaning hue and the other sheets; contrast 14.3 on the panel). The
+     token --sec-orders is defined with the paused HUD (design/shared/paused_hud.css), which carries the same colour. */
   [data-sec="orders"] { --sec: var(--sec-orders); }
   .r-tabs { display: none; }
   [data-tab="list"] .r-body[data-tab="list"], [data-tab="less"] .r-body[data-tab="less"] { display: flex; }
   .r-body[data-tab="list"], .r-body[data-tab="less"] { padding-top: var(--s2); padding-bottom: var(--s3); gap: var(--s2); }
-  /* the orders: one card row each (the panels' link rows: 44 pt, the tile, two lines), the cancel at the row's end */
+  /* the orders: one card row each (screen 16's pending-order row: 44 pt, the tile, two lines, «إلغاء» at the end) */
   .o-list { display: flex; flex-direction: column; gap: var(--s1); margin: 0; padding: 0; list-style: none; }
-  .o-row { position: relative; display: flex; align-items: center; gap: var(--s2); height: 44px; padding-inline: 5px 6px;
+  .o-row { position: relative; display: flex; align-items: center; gap: var(--s2); height: 44px; padding-inline: 5px var(--s2);
     border-radius: var(--r-ctl); background: var(--card); box-shadow: inset 0 0 0 1px var(--stroke); }
   .o-row .r-tile { width: 34px; height: 34px; color: var(--t1); }
-  /* fit (the shared builder's level, measured on the list): where the list and the resume do not fit whole (iPhone 13
-     mini, SE), the rows are 40 pt (the cancel's 44 pt touch still clear of the next row's, 4 pt apart) and the body's gap
-     4 pt, so «استئناف الوقت» stays above the fold */
-  [data-rfit]:not([data-rfit="0"]) .o-row { height: 40px; }
-  [data-rfit]:not([data-rfit="0"]) .r-body[data-tab="list"], [data-rfit]:not([data-rfit="0"]) .r-body[data-tab="less"] { gap: var(--s1); }
+  .o-row .r-at { flex: 1; min-width: 0; }
   .o-row .r-at > span { font-size: var(--fs-label); line-height: var(--lh-label); }
-  /* cancel: a 32 pt round grey control (the header close's look), its touch 44 pt */
-  .o-x { flex: none; width: var(--ctl); height: var(--ctl); border-radius: 50%; display: grid; place-items: center; color: var(--t1);
-    background: var(--w-fill); box-shadow: inset 0 0 0 1px var(--w-line-dim); }
-  .o-x svg.i { width: 16px; height: 16px; }
-  /* the HUD while paused: the play button carries the count (the sheet's colour, dark digits; on its top corner toward
-     the date, clear of the glyph); the toast slot holds the pending orders, its icon in the sheet's colour, the list open */
-  .play .o-badge, .o-badge { position: absolute; top: -8px; left: auto; right: -10px; min-width: 16px; height: 16px; padding: 0 4px; border-radius: 8px;
-    background: var(--sec-orders); color: #0B1218; font-size: var(--fs-label); font-weight: 700; line-height: 16px; text-align: center;
-    box-shadow: 0 0 0 2px rgba(9, 17, 25, 0.9); }
-  .o-toast svg.i { color: var(--sec-orders); }
-  /* the toast slot keeps its width when pausing turns it into the pending orders (B3's toast text box, 115.6 pt in the
-     project font), so the left column does not jump; the shorter text sits at its start */
-  .o-toast .txt { min-width: 115.6px; text-align: start; }
+  /* the cancel said, with its undo (until time resumes or the sheet closes) */
+  .o-done { display: flex; align-items: center; gap: var(--s2); min-height: 44px; }   /* the undo's 44 pt touch inside its own line */
+  .o-done .s-note { flex: 1; min-width: 0; }
+  /* fit (the shared builder's ladder, measured on the list): level 1, the body's gap 4 pt (iPhone SE: the rows stay
+     44 pt); level 2 and up, the rows 40 pt too (iPhone 13 mini), where the cancels' 44 pt touches meet without overlap */
+  [data-rfit]:not([data-rfit="0"]) .r-body[data-tab="list"], [data-rfit]:not([data-rfit="0"]) .r-body[data-tab="less"] { gap: var(--s1); }
+  [data-rfit]:not([data-rfit="0"]):not([data-rfit="1"]) .o-row { height: 40px; }

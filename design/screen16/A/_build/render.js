@@ -21,6 +21,10 @@ const screenChecks = `
 const { issues, qa, q, T, nums, DATA } = X;
 const W = (s) => (s || '').replace(/\\s+/g, ' ').trim();
 { const pl = q('.play'); if (pl.querySelector('use').getAttribute('href') !== '#i-play' || !/متوقفة/.test(pl.getAttribute('aria-label') || '')) issues.push('the game is not shown paused (play glyph and words)'); }
+// screen 26's paused HUD with the one pending order of this sheet: the play button and its badge count it, the toast slot holds it
+{ const n = document.querySelectorAll('.sheet .n-ord').length, pl = q('.play'), bd = q('.play .o-badge'), to = q('.toast .o-toast');
+  if (n !== 1 || pl.getAttribute('aria-label') !== 'تشغيل (اللعبة متوقفة)، يُنفَّذ أمر معلّق واحد' || !bd || W(T(bd)) !== '1' || !to || W(T(to.querySelector('.txt'))) !== 'أمر واحد ينتظر الاستئناف' || !to.querySelector('use[href="#i-queue"]'))
+    issues.push('the paused HUD does not count the one pending order (screen 26: the play button, its badge, the toast slot)'); }
 // the sections in order; each row under its own
 const hs = [...document.querySelectorAll('.sheet .r-sec h3')].map((h) => W(T(h)));
 if (hs.join('|') !== DATA.sections.join('|')) issues.push('the sections are «' + hs.join('، ') + '»');
@@ -55,7 +59,7 @@ rows.forEach((r) => { const u = r.dataset.unread === '1', nm = W(T(r.querySelect
 
 require(path.join(OUT, '../../shared/check/panelcheck.js'))({
   OUT, dock: null, tabs: ['center'], noTabs: true, fitTab: false, longTab: 'center',
-  inputs: ['_build/center.css'],
+  inputs: ['_build/center.css', '../../shared/paused_hud.css', '../../shared/paused_hud.py'],
   TOK: { sec: 'rgb(198, 186, 232)', ctlH: {}, sheetIcon: [], size: [['.n-ord', null, 44]], radius: { '.n-ord': 10 } },
   HEAD, BRIEF, screenChecks, DATA: { rows: ROWS, sections: SECTIONS },
   skipGeneric: ['section colour on a rule', 'why without its subject', 'amber value without its icon', '% before its number', 'brief text hidden', '18 pt misuse', 'clipped text', 'gap', 'faint text', 'text into a control', 'chip arrow against its sign', 'chip not white'],
@@ -66,6 +70,7 @@ require(path.join(OUT, '../../shared/check/panelcheck.js'))({
     ['gap (centre)', d, '', '.n-ord { gap: 6px !important; }', /gap 6 on/],
     ['faint text (centre)', d, '', '.r-sec h3 { opacity: .35 !important; }', /^contrast [0-3](\.\d+)? for/],
     ['% before its number (centre)', d, '', '', /% shown before its number/, () => { document.querySelector('.r-sec h3').textContent = 'نسبة 20%'; }],
+    ['paused HUD stale', d, '', '', /the paused HUD does not count the one pending order/, () => { document.querySelector('.play .o-badge').textContent = '3'; }],
     ['game running', d, '', '', /the game is not shown paused/, () => { document.querySelector('.play use').setAttribute('href', '#i-pause'); }],
     ['sections reordered', d, '', '', /the sections are/, () => { const h = document.querySelectorAll('.r-sec h3'); h[2].textContent = 'للعلم'; h[3].textContent = 'مهم'; }],
     ['rows swapped between tiers', d, '', '', /is not under «مهم»|is not under «للعلم»/, () => { const s = document.querySelectorAll('.r-sec'), a = s[2].querySelector('.r-link'), b = s[3].querySelector('.r-link'); s[2].appendChild(b); s[3].appendChild(a); }],

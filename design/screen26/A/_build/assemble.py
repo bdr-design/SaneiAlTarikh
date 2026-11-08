@@ -1,22 +1,30 @@
-"""Build design/screen26/A/index.html (the pending orders, §6.4 and §6.5) with the shared panel builder
-(design/shared/check/panel_page.py): the approved B3 play screen, the approved panels' CSS, and this sheet's CSS and markup
-(orders.css, sheet.html). The game is paused: the HUD's play button reads «استئناف» and carries the count of pending
-orders; the toast slot holds «3 أوامر معلّقة · تبدأ عند الاستئناف» while paused and opens this list. A side sheet of no dock section, its own identity (sheetIdentity), the map central
-(mapCentral). Two bodies and no tab row: the list (&tab=list, default) and the list after one order is cancelled (&tab=less).
+"""Build design/screen26/A/index.html (the pending orders, §6.4 and §6.7) with the shared panel builder
+(design/shared/check/panel_page.py): the approved B3 play screen, the approved panels' CSS, the paused HUD
+(design/shared/paused_hud.css and .py: the play button carries the count; the toast slot holds the orders and opens this
+list), and this sheet's CSS and markup (orders.css, sheet.html). A side sheet of no dock section, its own identity
+(sheetIdentity), the map central (mapCentral). Two bodies and no tab row: the list (&tab=list, default, 3 orders) and the
+list after one cancel (&tab=less, 2 orders: the HUD's counts follow).
 Usage: python3 -I assemble.py <repo> <this _build dir> <out dir>"""
+import json
 import sys
 from pathlib import Path
 R, S, D = map(Path, sys.argv[1:4])
 sys.path.insert(0, str(R / 'design/shared/check'))
+sys.path.insert(0, str(R / 'design/shared'))
 import panel_page  # noqa: E402
+import paused_hud  # noqa: E402
 
-SYMBOLS = """    <symbol id="i-queue" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.25"/><path d="M12 7.5V12l3 2"/><path d="M3.5 4.5l2 2M20.5 4.5l-2 2"/></symbol>
-    <symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5.5v13l10.5-6.5z"/></symbol>"""
-SUBS = [  # paused: the play button resumes and counts the orders that will start; the toast slot holds the pending orders
-        # (it stays while paused, in place of the 3 s toasts) and opens this list
-        ('<button class="play tap" aria-label="إيقاف مؤقت (اللعبة تعمل)"><svg class="i"><use href="#i-pause"/></svg></button>',
-         '<button class="play tap" aria-label="استئناف (اللعبة موقوفة)، تبدأ 3 أوامر معلّقة"><svg class="i"><use href="#i-play"/></svg><span class="o-badge" aria-hidden="true">3</span></button>'),
-        ('<button class="alert-prev tap"><svg class="i"><use href="#i-warn"/></svg><span class="txt">احتجاجات واسعة في تونس</span></button>',
-         '<button class="alert-prev tap o-toast" aria-label="3 أوامر معلّقة تنتظر الاستئناف" aria-expanded="true" aria-controls="orders"><svg class="i"><use href="#i-queue"/></svg><span class="txt">3 أوامر تنتظر الاستئناف</span></button>'),
-        ('<section class="sheet glass" aria-label="أوامر معلّقة">', '<section class="sheet glass" id="orders" aria-label="أوامر معلّقة">')]
-panel_page.build(R, S, D, title='أوامر معلّقة', sec='orders', tabs=['list', 'less'], fit_tab='list', css=['orders.css'], symbols=SYMBOLS, extra_subs=SUBS)
+SYMBOLS = '    ' + paused_hud.QUEUE + '\n    ' + paused_hud.PLAY_SYM
+SUBS = paused_hud.subs(3, controls='orders', expanded=True) + [
+    # the bell: 2 unread at this moment, as screen 16 has it (so no third «3» beside the orders' counts)
+    ('<button class="bell tap" aria-label="الإشعارات، غير المقروءة 3"><svg class="i"><use href="#i-bell"/></svg><span class="badge">3</span></button>',
+     '<button class="bell tap" aria-label="الإشعارات، غير المقروءة 2"><svg class="i"><use href="#i-bell"/></svg><span class="badge">2</span></button>'),
+    ('<section class="sheet glass" aria-label="أوامر معلّقة">', '<section class="sheet glass" id="orders" aria-label="أوامر معلّقة">')]
+# after a cancel (&tab=less) the HUD's counts follow the list: 2
+F2 = paused_hud.forms(2)
+INIT = ("    if (r.dataset.tab === 'less') document.addEventListener('DOMContentLoaded', function () {\n"
+        "      var p = document.querySelector('.date .play'), b = p.querySelector('.o-badge'), t = document.querySelector('.o-toast .txt');\n"
+        "      p.setAttribute('aria-label', %s); b.textContent = '2'; t.textContent = %s;\n"
+        "    });\n") % (json.dumps(F2['play'], ensure_ascii=False), json.dumps(F2['toast'], ensure_ascii=False))
+panel_page.build(R, S, D, title='أوامر معلّقة', sec='orders', tabs=['list', 'less'], fit_tab='list',
+                 css=['../../../shared/paused_hud.css', 'orders.css'], symbols=SYMBOLS, init_js=INIT, extra_subs=SUBS)

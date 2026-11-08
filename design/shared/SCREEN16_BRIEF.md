@@ -6,7 +6,7 @@ Visual mockup. NOT app code. The build is `../screen16/A`. Task card: `tasks/T-0
 1 January 2011: the player put the Tunisia decision off («لاحقًا», screen 15), paused the game and ordered the western army to Siwa (screen 14), then tapped the bell (badge 2: the decision was read and now waits).
 
 ## Frame
-The approved panel sheet from the right (shared builder and checker), the map central with Egypt clear; one body, no tab row, no section (its own identity (sheetIdentity), no dock item open). The clock shows play (paused). The bell reads «الإشعارات، غير المقروءة 2» and is shown open (a wording that agrees with any count).
+The approved panel sheet from the right (shared builder and checker), the map central with Egypt clear; one body, no tab row, no section (its own identity (sheetIdentity), no dock item open). The clock shows play (paused), with screen 26's paused HUD (design/shared/paused_hud): the play button reads «تشغيل (اللعبة متوقفة)، يُنفَّذ أمر معلّق واحد» and carries the count 1 (the pending order's yellow), and the toast slot holds «أمر واحد ينتظر الاستئناف» (its list closed: the notification centre is open). The bell reads «الإشعارات، غير المقروءة 2» and is shown open (a wording that agrees with any count).
 
 ## Content
 Header: Egypt's flag, «الإشعارات», «غير المقروءة: 2 · 1 يناير 2011», the grey bell emblem, close. Sections in words (§6.7's tiers), each row a 44 pt row with its icon:
