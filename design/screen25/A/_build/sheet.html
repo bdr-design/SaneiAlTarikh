@@ -1,8 +1,9 @@
   <!-- The save mirror prompt (screen 25, variant A, D-28), in the «المزيد» section: shown once, right after the first manual
        save («حفظ الآن» in the saves tab), never over play. Saves live in Documents on this device (visible in Files), lost if
        the game is deleted; the mirror copies them to a folder the player picks once in the system's folder picker (for
-       example iCloud Drive). Three bodies and no tab row: the ask (&tab=ask, default), the folder chosen (&tab=done) and the
-       folder gone (&tab=stale: its bookmark no longer resolves; shown once, at the next manual save; the saves tab's mirror
+       example iCloud Drive). Four bodies and no tab row: the ask (&tab=ask, default), the folder refused (&tab=own: the player picked a folder
+       inside the game's own container, deleted with the game; the ask again, its reason first, announced to VoiceOver), the
+       folder chosen (&tab=done: shown once the first copy has returned) and the folder gone (&tab=stale: its bookmark no longer resolves; shown once, at the next manual save; the saves tab's mirror
        row says so until the folder is back or another is picked). A side sheet in the «المزيد» section's frame (its identity, its dock item open), the map central (mapCentral). -->
   <section class="sheet glass" aria-label="نسخة احتياطية">
     <div class="r-in">
@@ -38,7 +39,7 @@
             <div class="r-sc"><dt>المجلد</dt><dd>صانع التاريخ</dd></div>
             <div class="r-sc"><dt>المكان</dt><dd><span class="ltr">iCloud Drive</span></dd></div>
           </dl>
-          <p class="s-note">نُسخ هذا الحفظ الآن. بعده يُنسخ كل حفظ يدوي وأحدث حفظ تلقائي عند الحفظ أو الخروج من اللعبة، مرة كل <span class="ltr">10</span>&nbsp;دقائق على&nbsp;الأكثر.</p>
+          <p class="s-note">نُسخ هذا الحفظ الآن. بعده يُنسخ كل حفظ يدوي وأحدث حفظ تلقائي عند الحفظ أو&nbsp;الخروج من اللعبة، مرة كل <span class="ltr">10</span>&nbsp;دقائق على&nbsp;الأكثر.</p>
         </section>
         <button class="r-act tap r-first" aria-label="تم: العودة إلى الحفظ">
           <span class="r-tile"><svg class="i"><use href="#i-check"/></svg></span>
@@ -62,6 +63,20 @@
         <button class="r-act tap" aria-label="ليس الآن: يبقى الحفظ في هذا الجهاز فقط حتى يعود المجلد">
           <span class="r-tile"><svg class="i"><use href="#i-later"/></svg></span>
           <span class="r-at"><b>ليس الآن</b><span>يبقى الحفظ في هذا الجهاز فقط حتى يعود المجلد</span></span>
+        </button>
+      </div>
+      <div class="r-body" data-tab="own">
+        <section class="r-sec">
+          <h3>اختر مجلدًا آخر</h3>
+          <p class="s-note" role="status">هذا المجلد يُحذف مع اللعبة. اختر مجلدًا خارجها، مثل&nbsp;<span class="ltr">iCloud&nbsp;Drive</span>.</p>
+        </section>
+        <button class="r-act tap r-first" aria-label="اختيار مجلد: خارج اللعبة، مثل iCloud Drive. يفتح منتقي المجلدات">
+          <span class="r-tile"><svg class="i"><use href="#i-folder"/></svg></span>
+          <span class="r-at"><b>اختيار مجلد</b><span>خارج اللعبة · مثل <span class="ltr">iCloud Drive</span></span></span>
+        </button>
+        <button class="r-act tap" aria-label="ليس الآن: لن يُعرض هذا مرة أخرى، واختر المجلد لاحقًا من الحفظ">
+          <span class="r-tile"><svg class="i"><use href="#i-later"/></svg></span>
+          <span class="r-at"><b>ليس الآن</b><span>لن يُعرض مرة أخرى · المجلد لاحقًا من الحفظ</span></span>
         </button>
       </div>
       <span class="r-hint" aria-hidden="true"><svg class="i"><use href="#i-chev"/></svg></span>

@@ -27,6 +27,8 @@ const BRIEF = {
   done: HEAD.concat(['تُنسخ ملفات الحفظ', 'تم', 'العودة إلى الحفظ', 'تغيير المجلد', 'يفتح منتقي المجلدات']),
   reach_done: CELLS.flat().concat(['نُسخ هذا الحفظ الآن. بعده يُنسخ كل حفظ يدوي وأحدث حفظ تلقائي عند الحفظ أو الخروج من اللعبة، مرة كل 10 دقائق على الأكثر.']),
   stale: HEAD.concat(['المجلد غير متاح', 'اختيار المجلد مرة أخرى', 'يفتح منتقي المجلدات', 'ليس الآن', 'يبقى الحفظ في هذا الجهاز فقط حتى يعود المجلد']),
+  own: HEAD.concat(['اختر مجلدًا آخر', 'اختيار مجلد', 'خارج اللعبة · مثل iCloud Drive', 'ليس الآن', 'لن يُعرض مرة أخرى · المجلد لاحقًا من الحفظ']),
+  reach_own: ['هذا المجلد يُحذف مع اللعبة. اختر مجلدًا خارجها، مثل iCloud Drive.'],
   reach_stale: ['لا تصل اللعبة إلى مجلد صانع التاريخ في iCloud Drive؛ ربما حُذف، أو أُوقف iCloud Drive. الحفظ مستمر في هذا الجهاز، لكن دون نسخة.'],
 };
 
@@ -34,7 +36,7 @@ const screenChecks = `
 const { issues, qa, q, T, nums, DATA } = X;
 const W = (s) => (s || '').replace(/\\s+/g, ' ').trim();
 const s13 = DATA.s13;
-const ask = q('.r-body[data-tab="ask"]'), done = q('.r-body[data-tab="done"]'), stale = q('.r-body[data-tab="stale"]');
+const ask = q('.r-body[data-tab="ask"]'), done = q('.r-body[data-tab="done"]'), stale = q('.r-body[data-tab="stale"]'), own = q('.r-body[data-tab="own"]');
 const acts = (b) => [...b.children].filter((e) => e.matches('.r-act, .r-link'));
 const bt = (e) => W(T(e.querySelector('.r-at b'))), st = (e) => W(T(e.querySelector('.r-at > span'))), al = (e) => e.getAttribute('aria-label') || '';
 // the header: the saves tab's mirror row (title), the campaign (flag, country) and the save just made (its date)
@@ -44,7 +46,7 @@ if (W(T(q('.sheet .r-name'))) !== DATA.title || s13.title !== 'نسخة في م�
 if (W(T(q('.sheet .r-sub'))) !== 'حملة ' + s13.country + ' · حُفظ الآن') issues.push('the header does not name the campaign and the save just made (حملة ' + s13.country + ' · حُفظ الآن: the real time, as screen 23)');
 // one word for the files: «ملفات الحفظ» (screen 13), never «الحفظات»; a product name never splits over two lines
 if (/الحفظات/.test(T(q('.sheet')))) issues.push('«الحفظات»: the files are «ملفات الحفظ» (screen 13)');
-qa('.sheet .s-note .ltr').forEach((e) => { const tops = new Set([...e.getClientRects()].map((r) => Math.round(r.top))); if (tops.size > 1) issues.push('«' + W(T(e)) + '» splits over two lines'); });
+qa('.sheet .ltr').forEach((e) => { const tops = new Set([...e.getClientRects()].map((r) => Math.round(r.top))); if (tops.size > 1) issues.push('«' + W(T(e)) + '» splits over two lines'); });
 { const f = q('.sheet .r-flag img'); if (!f || !(f.getAttribute('src') || '').endsWith('/eg.svg') || f.getAttribute('alt') !== 'علم ' + s13.country) issues.push('the header flag is not the campaign\\'s (' + s13.country + ')'); }
 if (!q('.sheet .s-emb use[href="#i-folder"]')) issues.push('the emblem is not the folder');
 if (q('.sheet .r-x').getAttribute('aria-label') !== 'إغلاق، العودة إلى ' + s13.tab) issues.push('a11y: the close is not «إغلاق، العودة إلى ' + s13.tab + '»');
@@ -53,10 +55,10 @@ qa('.sheet .r-act, .sheet .r-link').forEach((e) => { const a = getComputedStyle(
   if (e.classList.contains('r-first') && !(drawn && Math.abs(parseFloat(a.width) - 3) < 0.1 && a.backgroundColor === X.TOK.t1)) issues.push('the primary «' + bt(e) + '» does not draw its white bar');
   if (!e.classList.contains('r-first') && drawn && Math.abs(parseFloat(a.width) - 3) < 0.6) issues.push('«' + bt(e) + '» draws the primary\\'s bar'); });
 // three bodies, in the sheet; no dialog over the map
-if (!ask || !done || !stale || [ask, done, stale].some((b) => !b.closest('.sheet'))) issues.push('the ask, the chosen folder and the folder gone are not all bodies of the sheet');
+if (!ask || !done || !stale || !own || [ask, done, stale, own].some((b) => !b.closest('.sheet'))) issues.push('the ask, the chosen folder, the folder gone and the folder refused are not all bodies of the sheet');
 if (document.querySelector('[role="dialog"], [role="alertdialog"], dialog, .modal')) issues.push('a dialog over the map (mapCentral)');
 // each body: two actions, the first the one primary, in the brief's order
-[[ask, 'اختيار مجلد|ليس الآن'], [done, 'تم|تغيير المجلد'], [stale, 'اختيار المجلد مرة أخرى|ليس الآن']].forEach(([b, want]) => { if (!b) return; const a = acts(b);
+[[ask, 'اختيار مجلد|ليس الآن'], [done, 'تم|تغيير المجلد'], [stale, 'اختيار المجلد مرة أخرى|ليس الآن'], [own, 'اختيار مجلد|ليس الآن']].forEach(([b, want]) => { if (!b) return; const a = acts(b);
   if (a.map(bt).join('|') !== want || a.some((e, i) => e.classList.contains('r-first') !== (i === 0)) || a.some((e) => !e.matches('.r-act')))
     issues.push('the «' + b.dataset.tab + '» actions are not ' + want.replace('|', ' (primary) then ') + ': ' + a.map(bt).join('، '));
   if (a.length === 2 && a[1].getBoundingClientRect().top < a[0].getBoundingClientRect().bottom) issues.push('the «' + b.dataset.tab + '» second action is not under the first'); });
@@ -77,6 +79,12 @@ if (document.querySelector('[role="dialog"], [role="alertdialog"], dialog, .moda
   if (!n.includes(f) || !n.includes(p) || !/الحفظ مستمر في هذا الجهاز/.test(n) || !/دون نسخة/.test(n)) issues.push('the folder gone does not name the folder (' + f + '، ' + p + ') and say saving goes on without a copy');
   const a = acts(stale); if (a[0] && !/يفتح منتقي المجلدات$/.test(al(a[0]))) issues.push('a11y: picking again does not say it opens the folder picker');
   if (a[1] && (!/في هذا الجهاز فقط حتى يعود المجلد$/.test(st(a[1])) || !/في هذا الجهاز فقط حتى يعود المجلد$/.test(al(a[1])))) issues.push('«ليس الآن» on a folder gone does not say saves stay on this device only until the folder is back'); }
+// the folder refused (a folder inside the game's own container): says why, at once to VoiceOver (a status), and asks
+// again for a folder outside the game; «ليس الآن» as on the ask
+{ const n = q('.r-body[data-tab="own"] .s-note'), t = W(T(n)), a = acts(own);
+  if (!/^هذا المجلد يُحذف مع اللعبة\./.test(t) || !/خارجها/.test(t) || !/iCloud Drive/.test(t) || n.getAttribute('role') !== 'status') issues.push('the folder refused does not say, first and to VoiceOver at once, that the folder is deleted with the game and to pick one outside it');
+  if (a[0] && (!/خارج اللعبة/.test(st(a[0])) || !/\\. يفتح منتقي المجلدات$/.test(al(a[0])))) issues.push('the folder refused: picking again does not say «خارج اللعبة» and that it opens the folder picker');
+  if (a[1] && a[1].getAttribute('aria-label') !== acts(ask)[1].getAttribute('aria-label')) issues.push('the folder refused: «ليس الآن» is not the ask\\'s'); }
 // every row that opens the picker says so, on screen or to VoiceOver; the change of folder too
 { const ch = acts(done)[1]; if (ch && !/يفتح منتقي المجلدات$/.test(al(ch))) issues.push('a11y: «تغيير المجلد» does not say it opens the folder picker'); }
 // no red here (nothing is deleted): no red icon (colour, stroke, fill), text, fill, border, outline or shadow, on the
@@ -85,12 +93,13 @@ if (document.querySelector('[role="dialog"], [role="alertdialog"], dialog, .moda
   const props = ['color', 'backgroundColor', 'boxShadow', 'borderTopColor', 'borderRightColor', 'borderBottomColor', 'borderLeftColor', 'outlineColor'];
   const shown = (cs, k) => k.startsWith('border') ? parseFloat(cs[k.replace('Color', 'Width')]) > 0 : k === 'outlineColor' ? cs.outlineStyle !== 'none' && parseFloat(cs.outlineWidth) > 0 : true;
   qa('.sheet svg.i').forEach((sv) => { const cs = getComputedStyle(sv); if ([cs.color, cs.stroke, cs.fill].some(redIn)) issues.push('red in the mirror sheet (nothing is deleted): an icon'); });
+  qa('.sheet svg *').forEach((el) => { const cs = getComputedStyle(el); if ([cs.stroke, cs.fill].some(redIn)) issues.push('red in the mirror sheet (nothing is deleted): an icon\\'s ' + el.tagName); });
   qa('.sheet *').forEach((e) => { if (e.closest('svg')) return; [null, '::before', '::after'].forEach((pe) => { const cs = getComputedStyle(e, pe);
     if (pe && (cs.content === 'none' || cs.content === 'normal')) return;
     if (props.some((k) => shown(cs, k) && redIn(cs[k]))) issues.push('red in the mirror sheet: ' + (e.className && e.className.baseVal === undefined ? e.className : e.tagName) + (pe || '')); }); }); }`;
 
 require(path.join(OUT, '../../shared/check/panelcheck.js'))({
-  OUT, dock: 'المزيد', tabs: ['ask', 'done', 'stale'], noTabs: true, fitTab: 'ask', longTab: 'ask',
+  OUT, dock: 'المزيد', tabs: ['ask', 'done', 'stale', 'own'], noTabs: true, fitTab: 'ask', longTab: 'ask',
   inputs: ['_build/mirror.css', '../../screen13/A/_build/sheet.html', '../../../design_doc/final_design.md'],
   TOK: { sec: 'rgb(169, 188, 203)', ctlH: {}, sheetIcon: [], size: [], radius: {} },
   HEAD, BRIEF, screenChecks, DATA: { s13: S13, every: EVERY, cells: CELLS, title: 'نسخة احتياطية' },
@@ -115,6 +124,12 @@ require(path.join(OUT, '../../shared/check/panelcheck.js'))({
     ['«الحفظات»', d, '&tab=done', '', /«الحفظات»: the files are «ملفات الحفظ»/, () => { document.querySelector('.r-body[data-tab="done"] h3').textContent = 'تُنسخ الحفظات'; }],
     ['product name split', d, '', '.s-note .ltr { white-space: normal !important; }', /splits over two lines/, () => { document.querySelector('.r-body[data-tab="ask"] .s-note .ltr').textContent = 'iCloud Drive iCloud Drive iCloud Drive iCloud Drive iCloud Drive iCloud Drive'; }],
     ['copied now unsaid', d, '&tab=done', '', /the chosen folder does not say the save just made is copied now/, () => { const n = document.querySelector('.r-body[data-tab="done"] .s-note'); n.firstChild.textContent = n.firstChild.textContent.replace('نُسخ هذا الحفظ الآن. ', ''); }],
+    ['refused: reason unsaid', d, '&tab=own', '', /the folder refused does not say/, () => { document.querySelector('.r-body[data-tab="own"] .s-note').removeAttribute('role'); }],
+    ['refused: inside again', d, '&tab=own', '', /the folder refused: picking again does not say/, () => { document.querySelector('.r-body[data-tab="own"] .r-first .r-at > span').textContent = 'مرة واحدة'; }],
+    ['refused: later differs', d, '&tab=own', '', /the folder refused: «ليس الآن» is not the ask's/, () => { document.querySelectorAll('.r-body[data-tab="own"] .r-act')[1].setAttribute('aria-label', 'ليس الآن'); }],
+    ['refused reordered', d, '&tab=own', '', /the «own» actions are not/, () => { const b = document.querySelector('.r-body[data-tab="own"]'), a = b.querySelectorAll('.r-act'); b.insertBefore(a[1], a[0]); }],
+    ['name split in a row', d, '', '.sheet .ltr { white-space: normal !important; } .r-at > span { white-space: normal !important; }', /splits over two lines/, () => { document.querySelector('.r-body[data-tab="ask"] .r-first .r-at .ltr').textContent = 'iCloud Drive iCloud Drive iCloud Drive iCloud Drive iCloud Drive iCloud Drive'; }],
+    ['red path in an icon', d, '', '.r-first .r-tile svg.i use { stroke: rgb(242, 112, 90) !important; }', /an icon's use/],
     ['second above the first', d, '', '.r-body[data-tab="ask"] .r-act:not(.r-first) { order: -1; }', /the «ask» second action is not under the first/],
     ['wrong flag', d, '', '', /the header flag is not the campaign's/, () => { document.querySelector('.r-flag img').setAttribute('src', '../../shared/flags/ly.svg'); }],
     ['emblem not the folder', d, '', '', /the emblem is not the folder/, () => { document.querySelector('.s-emb use').setAttribute('href', '#i-save'); }],

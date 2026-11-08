@@ -15,8 +15,8 @@ is picked, and the folder is retried at each copy event. A bookmark that resolve
 recreated silently and never shows this body.
 
 ## Frame
-The approved panel sheet from the right, three bodies and no tab row (as screen 23): `&tab=ask` (default), `&tab=done`
-and `&tab=stale`. Header: Egypt's flag, «نسخة احتياطية» (short: the saves tab row's own «نسخة في مجلد آخر» runs onto the
+The approved panel sheet from the right, four bodies and no tab row (as screen 23): `&tab=ask` (default), `&tab=own`,
+`&tab=done` and `&tab=stale`. Header: Egypt's flag, «نسخة احتياطية» (short: the saves tab row's own «نسخة في مجلد آخر» runs onto the
 bright part of the section's header image), «حملة مصر · حُفظ الآن» (the save just made, in real time as screen 23's
 «حُفظ قبل دقيقة»; formatted once), the folder emblem, close
 («إغلاق، العودة إلى الحفظ»).
@@ -26,20 +26,25 @@ bright part of the section's header image), «حملة مصر · حُفظ الآ
   ملفات الحفظ تلقائيًا.» (screen 13's word for the files)
 - «اختيار مجلد» · «مرة واحدة · مثل iCloud Drive» (first, primary: opens the system's folder picker).
 - «ليس الآن» · «لن يُعرض مرة أخرى · المجلد لاحقًا من الحفظ».
-- The picker opens at iCloud Drive. A folder inside the game's own container (its Documents, as «على الـ iPhone ›
-  صانع التاريخ» in Files) is refused: it is deleted with the game; the ask stays, its first line «هذا المجلد يُحذف مع
-  اللعبة. اختر مجلدًا خارجها، مثل iCloud Drive.»
+- A folder inside the game's own container (its Documents, «على الـ iPhone › صانع التاريخ» in Files) is refused: it is
+  deleted with the game. The sheet shows the folder refused (`&tab=own`).
+
+## The folder refused (`&tab=own`)
+- «اختر مجلدًا آخر»: «هذا المجلد يُحذف مع اللعبة. اختر مجلدًا خارجها، مثل iCloud Drive.» (a status: VoiceOver reads it
+  as soon as the picker closes).
+- «اختيار مجلد» · «خارج اللعبة · مثل iCloud Drive» (first, primary: opens the picker again); «ليس الآن» as on the ask.
 
 ## The folder chosen (`&tab=done`)
 - «تُنسخ ملفات الحفظ»: المجلد صانع التاريخ · المكان iCloud Drive; «نُسخ هذا الحفظ الآن. بعده يُنسخ كل حفظ يدوي وأحدث
-  حفظ تلقائي عند الحفظ أو الخروج من اللعبة، مرة كل 10 دقائق على الأكثر.» (§7: picking copies the current saves at once).
+  حفظ تلقائي عند الحفظ أو الخروج من اللعبة، مرة كل 10 دقائق على الأكثر.» (§7: picking copies the current saves at once; this body shows only once that first copy has returned; a first
+  copy that fails, for example a folder the game cannot write to, shows the folder gone instead).
 - «تم» · «العودة إلى الحفظ» (first, primary); «تغيير المجلد» · «يفتح منتقي المجلدات».
 
 ## The folder gone (`&tab=stale`)
 - «المجلد غير متاح»: «لا تصل اللعبة إلى مجلد صانع التاريخ في iCloud Drive؛ ربما حُذف، أو أُوقف iCloud Drive. الحفظ مستمر
   في هذا الجهاز، لكن دون نسخة.»
 - «اختيار المجلد مرة أخرى» · «يفتح منتقي المجلدات» (first, primary); «ليس الآن» · «يبقى الحفظ في هذا الجهاز فقط حتى يعود المجلد».
-- Product names and closing words are bound with no-break spaces («iCloud&nbsp;Drive», «الحفظ&nbsp;مستمر», «على&nbsp;الأكثر»):
+- Product names and closing words are bound with no-break spaces («iCloud&nbsp;Drive», «الحفظ&nbsp;مستمر», «أو&nbsp;الخروج», «على&nbsp;الأكثر»); every Latin run is nowrap:
   no split name, no lone last word.
 
 ## Rules
@@ -68,6 +73,6 @@ this sheet) and adds: the title, and the saves tab's mirror row (no folder chose
 campaign and date the «حفظ الآن» row's; the flag, the folder emblem and the close; each body's two actions in order, the
 first the one primary with the white bar; the ask's risk, once, example folder and automatic copy; picking and changing
 open the folder picker; «ليس الآن» asks once and says where the choice stays; the chosen folder's cells (the brief's) and the copy
-frequency (read from §7), the copy of the save just made; the folder gone naming the folder and saying saving goes on without a copy; no red anywhere (icons' colour, stroke and fill; text, fills, borders, outlines, shadows, ::before/::after); «ملفات الحفظ»,
+frequency (read from §7), the copy of the save just made; the folder gone naming the folder and saying saving goes on without a copy; the folder refused saying why first, as a status, and asking for a folder outside the game; no red anywhere (icons' colour, stroke and fill; text, fills, borders, outlines, shadows, ::before/::after); «ملفات الحفظ»,
 never «الحفظات»; no product name split over two lines; no dialog.
 `--selftest` and `check_screen.py` must pass.
