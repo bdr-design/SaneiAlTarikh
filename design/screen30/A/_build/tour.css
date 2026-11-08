@@ -1,0 +1,14 @@
+  /* ================= Screen 30, variant A: the start tour ================= */
+  .r-tabs { display: none; }
+  [data-tab="s1"] .r-body[data-tab="s1"], [data-tab="s2"] .r-body[data-tab="s2"], [data-tab="s3"] .r-body[data-tab="s3"],
+  [data-tab="s4"] .r-body[data-tab="s4"], [data-tab="s5"] .r-body[data-tab="s5"] { display: flex; }
+  .r-body[data-tab] { padding-top: var(--s2); padding-bottom: var(--s3); gap: var(--s2); }
+  .r-body[data-tab] .r-sec:first-child h3 { padding-bottom: 0; border-bottom: 0; }
+  /* the step's text: the decision sheet's (screen 15) */
+  .d-text { text-wrap: pretty; margin: 0; font-size: var(--fs-sec); line-height: 18px; font-weight: 500; color: var(--t1); }
+  /* the sections: the dock's seven icons and names, three columns */
+  .t-secs { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--s1) var(--s2); margin: 0; padding: 0; list-style: none; }
+  .t-secs li { display: flex; align-items: center; gap: var(--s1); min-height: 24px; font-size: var(--fs-label); line-height: var(--lh-label); color: var(--t1); }
+  .t-secs .i { width: 16px; height: 16px; flex: none; }
+  /* the step's HUD element ringed: a white outline around it, nothing over the map */
+  [data-tab="s1"] .hud .nation, [data-tab="s2"] .hud .stats, [data-tab="s4"] .hud .date, [data-tab="s5"] .hud .toast { outline: 2px solid var(--t1); outline-offset: 3px; }

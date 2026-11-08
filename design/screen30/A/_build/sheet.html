@@ -1,0 +1,107 @@
+  <!-- The start tour (screen 30, variant A; onboarding, §6.1 and M8). Opens by itself when a new campaign starts, the game
+       paused (the play button shows play), and again from «المزيد» › «المساعدة». Five steps, one body each (&tab=s1..s5,
+       no tab row): the country and the map, the indicators and «لماذا؟», the sections, time and the orders while paused,
+       the news and decisions. Each step but the sections' rings the HUD element it speaks about (tour.css: a white
+       outline, nothing over the map); the sections' step shows the seven sections' icons and names, since the dock hides
+       under the sheet on the smaller phones. «التالي» is the primary; «تخطي الجولة» and the close end it (it stays in the
+       help); the last step's primary starts the campaign (time resumes at 1×). A side sheet in the «المزيد» section's
+       frame (help lives there), its own emblem, the map central and never dimmed (mapCentral). -->
+  <section class="sheet glass" aria-label="جولة البداية">
+    <div class="r-in">
+      <header class="r-hd">
+        <span class="r-flag"><img src="../../shared/flags/eg.svg" alt="علم مصر"></span>
+        <div class="r-tt">
+          <div class="r-row"><h2 class="r-name">جولة البداية</h2></div>
+          <div class="r-sub">اللعبة متوقفة<span class="r-dot"> · </span><span class="ltr">1</span> يناير <span class="ltr">2011</span></div>
+        </div>
+        <span class="s-emb" aria-hidden="true"><svg class="i"><use href="#i-tour"/></svg></span>
+        <button class="r-x tap" aria-label="تخطي الجولة، العودة إلى الخريطة واللعبة متوقفة"><svg class="i"><use href="#i-close"/></svg></button>
+      </header>
+
+
+      <div class="r-body" data-tab="s1">
+        <section class="r-sec">
+          <h3>الخطوة <span class="ltr">1</span> من <span class="ltr">5</span> · بلدك</h3>
+          <p class="d-text">أنت تحكم مصر من <span class="ltr">1</span> يناير <span class="ltr">2011</span>. اضغط أي محافظة على الخريطة لتفتح بطاقتها، وأي دولة لتعرف حالها وعلاقتك بها.</p>
+        </section>
+        <button class="r-act tap r-first" aria-label="التالي: المؤشرات، الخطوة 2 من 5">
+          <span class="r-tile"><svg class="i"><use href="#i-next"/></svg></span>
+          <span class="r-at"><b>التالي</b><span>المؤشرات</span></span>
+        </button>
+        <div class="r-link tap" role="button" tabindex="0" aria-label="تخطي الجولة: تعود إليها من المزيد، المساعدة. يغلق الجولة واللعبة متوقفة">
+          <span class="r-tile"><svg class="i"><use href="#i-skip"/></svg></span>
+          <span class="r-at"><b>تخطي الجولة</b><span>تعود إليها من المزيد › المساعدة</span></span>
+          <svg class="i r-chev"><use href="#i-chev"/></svg>
+        </div>
+      </div>
+
+      <div class="r-body" data-tab="s2">
+        <section class="r-sec">
+          <h3>الخطوة <span class="ltr">2</span> من <span class="ltr">5</span> · المؤشرات</h3>
+          <p class="d-text">في الأعلى الخزينة والاستقرار والشرعية والقوة البشرية والنفوذ والبحث. السهم يبيّن الاتجاه؛ اضغط أي مؤشر لتعرف لماذا يتغير.</p>
+        </section>
+        <button class="r-act tap r-first" aria-label="التالي: الأقسام، الخطوة 3 من 5">
+          <span class="r-tile"><svg class="i"><use href="#i-next"/></svg></span>
+          <span class="r-at"><b>التالي</b><span>الأقسام</span></span>
+        </button>
+        <div class="r-link tap" role="button" tabindex="0" aria-label="تخطي الجولة: تعود إليها من المزيد، المساعدة. يغلق الجولة واللعبة متوقفة">
+          <span class="r-tile"><svg class="i"><use href="#i-skip"/></svg></span>
+          <span class="r-at"><b>تخطي الجولة</b><span>تعود إليها من المزيد › المساعدة</span></span>
+          <svg class="i r-chev"><use href="#i-chev"/></svg>
+        </div>
+      </div>
+
+      <div class="r-body" data-tab="s3">
+        <section class="r-sec">
+          <h3>الخطوة <span class="ltr">3</span> من <span class="ltr">5</span> · الأقسام</h3>
+          <p class="d-text">تحكم من سبعة أقسام في الشريط السفلي:</p>
+          <ul class="t-secs" role="list" aria-label="الأقسام السبعة">
+            <li><svg class="i"><use href="#i-state"/></svg><span>الدولة</span></li>
+            <li><svg class="i"><use href="#i-econ"/></svg><span>الاقتصاد</span></li>
+            <li><svg class="i"><use href="#i-pol"/></svg><span>الداخلية والسياسة</span></li>
+            <li><svg class="i"><use href="#i-army"/></svg><span>الجيش</span></li>
+            <li><svg class="i"><use href="#i-globe"/></svg><span>الخارجية</span></li>
+            <li><svg class="i"><use href="#i-eye"/></svg><span>الاستخبارات</span></li>
+            <li><svg class="i"><use href="#i-flask"/></svg><span>البحث</span></li>
+          </ul>
+        </section>
+        <button class="r-act tap r-first" aria-label="التالي: الوقت، الخطوة 4 من 5">
+          <span class="r-tile"><svg class="i"><use href="#i-next"/></svg></span>
+          <span class="r-at"><b>التالي</b><span>الوقت</span></span>
+        </button>
+        <div class="r-link tap" role="button" tabindex="0" aria-label="تخطي الجولة: تعود إليها من المزيد، المساعدة. يغلق الجولة واللعبة متوقفة">
+          <span class="r-tile"><svg class="i"><use href="#i-skip"/></svg></span>
+          <span class="r-at"><b>تخطي الجولة</b><span>تعود إليها من المزيد › المساعدة</span></span>
+          <svg class="i r-chev"><use href="#i-chev"/></svg>
+        </div>
+      </div>
+
+      <div class="r-body" data-tab="s4">
+        <section class="r-sec">
+          <h3>الخطوة <span class="ltr">4</span> من <span class="ltr">5</span> · الوقت</h3>
+          <p class="d-text">يمضي الوقت يومًا بعد يوم، من <span class="ltr">1×</span> إلى «أقصى». أوقفه متى شئت؛ ما تأمر به وأنت متوقف يُنفَّذ عند الاستئناف.</p>
+        </section>
+        <button class="r-act tap r-first" aria-label="التالي: الأحداث، الخطوة 5 من 5">
+          <span class="r-tile"><svg class="i"><use href="#i-next"/></svg></span>
+          <span class="r-at"><b>التالي</b><span>الأحداث</span></span>
+        </button>
+        <div class="r-link tap" role="button" tabindex="0" aria-label="تخطي الجولة: تعود إليها من المزيد، المساعدة. يغلق الجولة واللعبة متوقفة">
+          <span class="r-tile"><svg class="i"><use href="#i-skip"/></svg></span>
+          <span class="r-at"><b>تخطي الجولة</b><span>تعود إليها من المزيد › المساعدة</span></span>
+          <svg class="i r-chev"><use href="#i-chev"/></svg>
+        </div>
+      </div>
+
+      <div class="r-body" data-tab="s5">
+        <section class="r-sec">
+          <h3>الخطوة <span class="ltr">5</span> من <span class="ltr">5</span> · الأحداث</h3>
+          <p class="d-text">أخبار العالم تصلك هنا، والقرارات المهمة توقف الوقت حتى تختار. أول خبر: احتجاجات واسعة في تونس.</p>
+        </section>
+        <button class="r-act tap r-first" aria-label="ابدأ الحملة: يستأنف الوقت بسرعة 1×">
+          <span class="r-tile"><svg class="i"><use href="#i-play2"/></svg></span>
+          <span class="r-at"><b>ابدأ الحملة</b><span>يستأنف الوقت بسرعة <span class="ltr">1×</span></span></span>
+        </button>
+      </div>
+      <span class="r-hint" aria-hidden="true"><svg class="i"><use href="#i-chev"/></svg></span>
+    </div>
+  </section>

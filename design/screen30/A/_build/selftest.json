@@ -1,0 +1,639 @@
+{
+ "ranAt": "2026-11-08T21:52:40.024Z",
+ "inputs": {
+  "files": [
+   "index.html",
+   "_build/render.js",
+   "_build/sheet.html",
+   "_build/assemble.py",
+   "../../shared/check/panelcheck.js",
+   "../../shared/check/panel_page.py",
+   "../../screen4/R/_build/panel.css",
+   "../../shared/section_identity.css",
+   "../../screen5/A/_build/state.css",
+   "../../screen4/A/index.html",
+   "../../screen1/B3/index.html",
+   "../../shared/devices.json",
+   "_build/tour.css",
+   "../../shared/paused_hud.py",
+   "../../screen4/A/map_overlay_cairo.svg",
+   "../../shared/flag_eg.svg",
+   "../../shared/flags/eg.svg",
+   "../../shared/map_mena_d1.jpg",
+   "header_cairo.jpg",
+   "map_overlay_cairo.svg"
+  ],
+  "sha1": "13144bf658adad19fad16a50b0cafeb3a5e39793"
+ },
+ "cleanIssues": {
+  "i16promax": [],
+  "i16promax_s1_end": [],
+  "i16promax_s2": [],
+  "i16promax_s2_end": [],
+  "i16promax_s3": [],
+  "i16promax_s3_end": [],
+  "i16promax_s4": [],
+  "i16promax_s4_end": [],
+  "i16promax_s5": [],
+  "i16promax_s5_end": [],
+  "i16promax coverage": [],
+  "se": [],
+  "se_s1_end": [],
+  "se_s2": [],
+  "se_s2_end": [],
+  "se_s3": [],
+  "se_s3_end": [],
+  "se_s4": [],
+  "se_s4_end": [],
+  "se_s5": [],
+  "se_s5_end": [],
+  "se coverage": []
+ },
+ "results": [
+  {
+   "name": "type size",
+   "ok": true,
+   "sample": [
+    "font size 17 for \"جولة البداية\""
+   ]
+  },
+  {
+   "name": "off-token colour",
+   "ok": true,
+   "sample": [
+    "text colour off-token rgb(136, 153, 170): \"جولة البداية\"",
+    "contrast 1.97 for \"جولة البداية\""
+   ]
+  },
+  {
+   "name": "radius",
+   "ok": true,
+   "sample": [
+    "panel radius جولة البداية: 6 (want 12)",
+    "radius 6 for .sheet (want 12)"
+   ]
+  },
+  {
+   "name": "tap in the side inset",
+   "ok": true,
+   "sample": [
+    "text in side inset: الخطوة",
+    "text in side inset: أنت تحكم مصر من",
+    "text in side inset: . اضغط أي محافظة على الخريطة لتفتح بطاقتها، وأي دولة لتعرف حالها وعلاقتك بها."
+   ]
+  },
+  {
+   "name": "panel in the side inset",
+   "ok": true,
+   "sample": [
+    "text in side inset: الخطوة",
+    "text in side inset: أنت تحكم مصر من",
+    "text in side inset: . اضغط أي محافظة على الخريطة لتفتح بطاقتها، وأي دولة لتعرف حالها وعلاقتك بها."
+   ]
+  },
+  {
+   "name": "panel not opaque",
+   "ok": true,
+   "sample": [
+    "panel not opaque: جولة البداية rgba(9, 17, 25, 0.66)"
+   ]
+  },
+  {
+   "name": "see-through panel",
+   "ok": true,
+   "sample": [
+    "panel not opaque (opacity 0.60): جولة البداية",
+    "brief text not fully visible: جولة البداية",
+    "brief text not fully visible: اللعبة متوقفة · 1 يناير 2011"
+   ]
+  },
+  {
+   "name": "Egypt covered",
+   "ok": true,
+   "sample": [
+    "Nile delta covered by panel جولة البداية",
+    "Egypt covered by panel جولة البداية",
+    "Egypt under the hit box of التالي: المؤشرات، الخطوة 2"
+   ]
+  },
+  {
+   "name": "map dimmed",
+   "ok": true,
+   "sample": [
+    "the map is dimmed (opacity 1.00, filter brightness(0.35))"
+   ]
+  },
+  {
+   "name": "map faded",
+   "ok": true,
+   "sample": [
+    "the map is dimmed (opacity 0.30, filter none)"
+   ]
+  },
+  {
+   "name": "scrim over the map",
+   "ok": true,
+   "sample": [
+    "something drawn over the map: DIV (rgba(0, 0, 0, 0.55))",
+    "contrast 1.92 for \"3\""
+   ]
+  },
+  {
+   "name": "sheet width",
+   "ok": true,
+   "sample": [
+    "sheet width 330 (want round(clamp(43% of 832, 340, 380)), or the room the dock leaves if 330..: 358)"
+   ]
+  },
+  {
+   "name": "sheet top",
+   "ok": true,
+   "sample": [
+    "hit overlap الاستقرار 58% / تخطي الجولة، العودة إلى ال",
+    "panel overlap الدولة: مصر، حسني مبارك، ج / جولة البداية",
+    "panel overlap الخزينة 36.0 مليار $ الاست / جولة البداية"
+   ]
+  },
+  {
+   "name": "dock hidden although it fits",
+   "ok": true,
+   "sample": [
+    "dock hidden although it fits left of the sheet"
+   ]
+  },
+  {
+   "name": "dock shown on the SE",
+   "ok": true,
+   "sample": [
+    "panel overlap الأقسام / جولة البداية",
+    "dock shown although it does not fit left of the sheet",
+    "dock not 4 pt in from the left end of its B3 line: x 140.0 w 387.0 y 323.0 (want x 12 w 387.0 y 323.0)"
+   ]
+  },
+  {
+   "name": "left stack moved",
+   "ok": true,
+   "sample": [
+    "HUD element moved from its B3 position: .toast x 70.0..275.6 y 56.0..88.0",
+    "HUD element moved from its B3 position: .btn.mode x 70.0..191.6 y 96.0..128.0",
+    "HUD element moved from its B3 position: .btn.home x 70.0..141.5 y 136.0..168.0"
+   ]
+  },
+  {
+   "name": "fit not the loosest",
+   "ok": true,
+   "sample": [
+    "fit level 6 is not the loosest that fits: [[0,0]]"
+   ]
+  },
+  {
+   "name": "city dot under its name",
+   "ok": true,
+   "sample": [
+    "map city dot under its own name: 0"
+   ]
+  },
+  {
+   "name": "city name over a label",
+   "ok": true,
+   "sample": [
+    "map city name «القاهرة» over «مصر»"
+   ]
+  },
+  {
+   "name": "map label cut",
+   "ok": true,
+   "sample": [
+    "map label ليبيا sliced by the screen edge or the side inset",
+    "map label إيران sliced by the screen edge or the side inset",
+    "map label إيران squeezed between a panel and the screen edge"
+   ]
+  },
+  {
+   "name": "contrast",
+   "ok": true,
+   "sample": [
+    "contrast 1 for \"الخطوة\"",
+    "contrast 1 for \"1\"",
+    "contrast 1 for \"من\""
+   ]
+  },
+  {
+   "name": "dock item not marked",
+   "ok": true,
+   "sample": [
+    "the open section «المزيد» is not marked in the dock"
+   ]
+  },
+  {
+   "name": "identity line missing",
+   "ok": true,
+   "sample": [
+    "panel top line none rgb(169, 188, 203) 2px (want the section colour, 2 pt, at the top)"
+   ]
+  },
+  {
+   "name": "money unit",
+   "ok": true,
+   "sample": [
+    "money unit: «0.4 مليار» (under 1 billion is written in millions)"
+   ]
+  },
+  {
+   "name": "sign outside its number",
+   "ok": true,
+   "sample": [
+    "a sign outside its number: «تغير +3»"
+   ]
+  },
+  {
+   "name": "colour alone",
+   "ok": true,
+   "sample": [
+    "colour alone: «تراجع» has no arrow or icon"
+   ]
+  },
+  {
+   "name": "an image in the sheet",
+   "ok": true,
+   "sample": [
+    "an image in the sheet"
+   ]
+  },
+  {
+   "name": "close not round",
+   "ok": true,
+   "sample": [
+    "close button is not round"
+   ]
+  },
+  {
+   "name": "label without a role",
+   "ok": true,
+   "sample": [
+    "a11y: a label VoiceOver may skip (no role): «اختبار»"
+   ]
+  },
+  {
+   "name": "overview scrolls",
+   "ok": true,
+   "sample": [
+    "s3 needs scrolling: 392.0 pt over",
+    "fades 0/0 do not match the scroll state (top 0, over 392.0)",
+    "brief text not fully visible: الخطوة 3 من 5 · الأقسام"
+   ]
+  },
+  {
+   "name": "dock underline missing",
+   "ok": true,
+   "sample": [
+    "dock underline missing or off: none 16pxx2px rgb(169, 188, 203) (want 16 x 2 in the section colour)"
+   ]
+  },
+  {
+   "name": "identity line colour",
+   "ok": true,
+   "sample": [
+    "panel top line \"\" rgb(63, 224, 208) 2px (want the section colour, 2 pt, at the top)"
+   ]
+  },
+  {
+   "name": "emblem size",
+   "ok": true,
+   "sample": [
+    "size 28.0x32.0 for .s-emb (want 32 x 32)"
+   ]
+  },
+  {
+   "name": "tile icons cyan",
+   "ok": true,
+   "sample": [
+    "white touch off: .r-tile color rgb(127, 233, 255) (want rgb(234, 242, 247))",
+    "white touch off: .r-tile color rgb(127, 233, 255) (want rgb(234, 242, 247))"
+   ]
+  },
+  {
+   "name": "close says only إغلاق",
+   "ok": true,
+   "sample": [
+    "a11y: the close says only «إغلاق»",
+    "a11y: the close does not say it skips the tour and the game stays paused"
+   ]
+  },
+  {
+   "name": "row read in part",
+   "ok": true,
+   "sample": [
+    "a11y: «جزء» does not read all it shows: التالي المؤشرات",
+    "the primary is not «التالي · المؤشرات» read as «التالي: المؤشرات، الخطوة 2 من 5»"
+   ]
+  },
+  {
+   "name": "a long headline label",
+   "ok": true,
+   "sample": [
+    "clipped text (sides): \"عنوان طويل جدًا لا يتسع لخانته أبدًا\" 385.38..539.25 y 124..141",
+    "text outside the sheet's 12 pt padding: \"عنوان طويل جدًا لا يتسع لخانته أبدًا\"",
+    "clipped text (sides): \"1\" 528.44..539.25 y 142..169"
+   ]
+  },
+  {
+   "name": "text wider than its box",
+   "ok": true,
+   "sample": [
+    "text wider than its box: «الخطوة 1 من 5 · بلدك» (101 in 20)"
+   ]
+  },
+  {
+   "name": "a long status cell",
+   "ok": true,
+   "sample": [
+    "clipped text (sides): \"قيمة طويلة جدًا لا تتسع لنصف الجدول\" 416.53..613.3 y 120.5..139.5",
+    "text outside the sheet's 12 pt padding: \"قيمة طويلة جدًا لا تتسع لنصف الجدول\"",
+    "horizontal overflow in خانةقيمة طويلة جدًا لا تتس"
+   ]
+  },
+  {
+   "name": "font weight (no tabs)",
+   "ok": true,
+   "sample": [
+    "font weight 11.5/700 for \"اللعبة متوقفة\"",
+    "font weight 11.5/700 for \"·\"",
+    "font weight 11.5/700 for \"1\""
+   ]
+  },
+  {
+   "name": "a tab row on a one-body sheet",
+   "ok": true,
+   "sample": [
+    "a tab row on a sheet that has one body"
+   ]
+  },
+  {
+   "name": "control height (no tabs)",
+   "ok": true,
+   "sample": [
+    "control height 40.00 for .r-x (want 32): تخطي الجولة، العودة إلى ال",
+    "close button is not round"
+   ]
+  },
+  {
+   "name": "icon size (no tabs)",
+   "ok": true,
+   "sample": [
+    "icon size 19x19 (want 16): i"
+   ]
+  },
+  {
+   "name": "fades wrong (no tabs)",
+   "ok": true,
+   "sample": [
+    "fades 0/1 do not match the scroll state (top 0, over 0.0)"
+   ]
+  },
+  {
+   "name": "brief text hidden (s1)",
+   "ok": true,
+   "sample": [
+    "brief text not fully visible: أنت تحكم مصر من 1 يناير 2011. اضغط أي محافظة على الخريطة لتفتح بطاقتها، وأي دولة لتعرف حالها وعلاقتك بها."
+   ]
+  },
+  {
+   "name": "18 pt misuse (s1)",
+   "ok": true,
+   "sample": [
+    "18 pt is for the panel's name and the adjusted values only: \"أنت تحكم مصر من\"",
+    "18 pt is for the panel's name and the adjusted values only: \"1\"",
+    "18 pt is for the panel's name and the adjusted values only: \"يناير\""
+   ]
+  },
+  {
+   "name": "text overlap (s1)",
+   "ok": true,
+   "sample": [
+    "text overlap \"التالي\" / \"المؤشرات\""
+   ]
+  },
+  {
+   "name": "clipped text (s1)",
+   "ok": true,
+   "sample": [
+    "clipped text (sides): \"الخطوة\" 885.53..921 y 115..132",
+    "text outside the sheet's 12 pt padding: \"الخطوة\"",
+    "text outside the sheet's 12 pt padding: \"1\""
+   ]
+  },
+  {
+   "name": "faint text (s1)",
+   "ok": true,
+   "sample": [
+    "brief text not fully visible: أنت تحكم مصر من 1 يناير 2011. اضغط أي محافظة على الخريطة لتفتح بطاقتها، وأي دولة لتعرف حالها وعلاقتك بها.",
+    "contrast 2.98 for \"أنت تحكم مصر من\"",
+    "contrast 2.98 for \"1\""
+   ]
+  },
+  {
+   "name": "gap (s1)",
+   "ok": true,
+   "sample": [
+    "gap 6 on الخطوة 1 من 5 · بلدك أنت ت",
+    "gap 6 on الخطوة 1 من 5 · بلدك أنت ت"
+   ]
+  },
+  {
+   "name": "% before its number (s1)",
+   "ok": true,
+   "sample": [
+    "% shown before its number: \"نسبة 20%\"",
+    "the step text is not the brief's",
+    "brief text missing: أنت تحكم مصر من 1 يناير 2011. اضغط أي محافظة على الخريطة لتفتح بطاقتها، وأي دولة لتعرف حالها وعلاقتك بها."
+   ]
+  },
+  {
+   "name": "hint chevron missing (forced overflow)",
+   "ok": true,
+   "sample": [
+    "scroll hint chevron missing with content below",
+    "brief text not fully visible: الخطوة 1 من 5 · بلدك",
+    "brief text not fully visible: أنت تحكم مصر من 1 يناير 2011. اضغط أي محافظة على الخريطة لتفتح بطاقتها، وأي دولة لتعرف حالها وعلاقتك بها."
+   ]
+  },
+  {
+   "name": "hint over the content (forced overflow)",
+   "ok": true,
+   "sample": [
+    "scroll hint not centred in the clear strip under the fade: y 198.0..216.0 (strip 344.0..366.0)",
+    "brief text not fully visible: الخطوة 1 من 5 · بلدك",
+    "brief text not fully visible: أنت تحكم مصر من 1 يناير 2011. اضغط أي محافظة على الخريطة لتفتح بطاقتها، وأي دولة لتعرف حالها وعلاقتك بها."
+   ]
+  },
+  {
+   "name": "text into a control (header)",
+   "ok": true,
+   "sample": [
+    "text outside the sheet's 12 pt padding: \"2011\"",
+    "text over a control: \"يناير\" runs into «تخطي الجولة، العودة »",
+    "text over a control: \"2011\" runs into «تخطي الجولة، العودة »"
+   ]
+  },
+  {
+   "name": "two steps shown",
+   "ok": true,
+   "sample": [
+    "clipped text (bottom): \"تعود إليها من المزيد › المساعدة\" 713.25..834 y 259..274",
+    "clipped text (bottom): \"تعود إليها من المزيد › المساعدة\" 713.25..834 y 413..428",
+    "control cut by its scroll area (bottom): تخطي الجولة: تعود إليها من"
+   ]
+  },
+  {
+   "name": "header off",
+   "ok": true,
+   "sample": [
+    "the header is not the start tour, paused, on 1 January 2011",
+    "brief text missing: اللعبة متوقفة · 1 يناير 2011",
+    "brief text missing: اللعبة متوقفة · 1 يناير 2011"
+   ]
+  },
+  {
+   "name": "emblem off",
+   "ok": true,
+   "sample": [
+    "the emblem is not the tour's"
+   ]
+  },
+  {
+   "name": "close unclear",
+   "ok": true,
+   "sample": [
+    "a11y: the close says only «إغلاق»",
+    "a11y: the close does not say it skips the tour and the game stays paused"
+   ]
+  },
+  {
+   "name": "a dimmer",
+   "ok": true,
+   "sample": [
+    "a dialog or a dimmer over the map (mapCentral)"
+   ]
+  },
+  {
+   "name": "game running",
+   "ok": true,
+   "sample": [
+    "the game is not shown paused (the play button)"
+   ]
+  },
+  {
+   "name": "step heading off",
+   "ok": true,
+   "sample": [
+    "the step heading is not «الخطوة 2 من 5 · المؤشرات»: الخطوة 3 من 5 · المؤشرات",
+    "brief text missing: الخطوة 2 من 5 · المؤشرات",
+    "brief text missing: الخطوة 2 من 5 · المؤشرات"
+   ]
+  },
+  {
+   "name": "step text off",
+   "ok": true,
+   "sample": [
+    "the step text is not the brief's",
+    "brief text missing: أنت تحكم مصر من 1 يناير 2011. اضغط أي محافظة على الخريطة لتفتح بطاقتها، وأي دولة لتعرف حالها وعلاقتك بها.",
+    "brief text missing: أنت تحكم مصر من 1 يناير 2011. اضغط أي محافظة على الخريطة لتفتح بطاقتها، وأي دولة لتعرف حالها وعلاقتك بها."
+   ]
+  },
+  {
+   "name": "next unnamed",
+   "ok": true,
+   "sample": [
+    "a11y: «التالي» does not read all it shows: المؤشرات",
+    "the primary is not «التالي · المؤشرات» read as «التالي: المؤشرات، الخطوة 2 من 5»"
+   ]
+  },
+  {
+   "name": "last step without start",
+   "ok": true,
+   "sample": [
+    "a11y: «ابدأ الحملة: يستأنف الوق» does not read all it shows: التالي",
+    "the primary is not «ابدأ الحملة · يستأنف الوقت بسرعة 1×» read as «ابدأ الحملة: يستأنف الوقت بسرعة 1×»",
+    "brief text missing: ابدأ الحملة"
+   ]
+  },
+  {
+   "name": "skip gone",
+   "ok": true,
+   "sample": [
+    "the skip is missing, misplaced or does not say the tour stays in the help",
+    "brief text missing: تخطي الجولة",
+    "brief text missing: تعود إليها من المزيد › المساعدة"
+   ]
+  },
+  {
+   "name": "ring on the wrong element",
+   "ok": true,
+   "sample": [
+    "the ring is not on the step's element .stats: nation glass bar tap",
+    "the ring is not a white 2 pt outline"
+   ]
+  },
+  {
+   "name": "ring not white",
+   "ok": true,
+   "sample": [
+    "the ring is not a white 2 pt outline"
+   ]
+  },
+  {
+   "name": "ring on the sections step",
+   "ok": true,
+   "sample": [
+    "a ring on the sections' step"
+   ]
+  },
+  {
+   "name": "ringed under the sheet",
+   "ok": true,
+   "sample": [
+    "control height 31.00: الدولة: مصر، حسني مبارك، ج",
+    "top row height 31 for الدولة: مصر، حسني مبارك، ج",
+    "icon over text: i / \"مصر\""
+   ]
+  },
+  {
+   "name": "indicators off",
+   "ok": true,
+   "sample": [
+    "the indicators named are not the HUD's: المال، الاستقرار، الشرعية، القوة البشرية، النفوذ، البحث"
+   ]
+  },
+  {
+   "name": "sections off",
+   "ok": true,
+   "sample": [
+    "the sections are not the dock's seven, in its order, with its icons"
+   ]
+  },
+  {
+   "name": "speeds off",
+   "ok": true,
+   "sample": [
+    "the speeds are not the speed menu's, 1× to «أقصى»"
+   ]
+  },
+  {
+   "name": "first news off",
+   "ok": true,
+   "sample": [
+    "HUD element moved from its B3 position: .toast x 62.0..239.3 y 56.0..88.0",
+    "the first news is not the toast's «انتخابات في السودان»"
+   ]
+  },
+  {
+   "name": "coverage reports a string no view shows",
+   "ok": true,
+   "sample": [
+    "s1: never shown clear of the fades in any view: نص غير معروض للاختبار"
+   ],
+   "midViewsAdd": []
+  }
+ ]
+}
