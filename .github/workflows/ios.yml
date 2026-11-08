@@ -37,7 +37,9 @@ jobs:
             -sdk iphoneos -destination 'generic/platform=iOS' -derivedDataPath build \
             CODE_SIGNING_ALLOWED=NO CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY="" build > build.log 2>&1 || {
               grep -nE "error:|warning:" build.log | head -150; tail -60 build.log; exit 1; }
-          if grep -nE "warning:" build.log; then echo "the build has warnings (above): treat them as errors"; exit 1; fi
+          # Apple's App Intents metadata tool notes that the app has no App Intents: not a warning about our code
+          if grep -nE "warning:" build.log | grep -v "appintentsmetadataprocessor.*No AppIntents.framework dependency found"; then
+            echo "the build has warnings (above): treat them as errors"; exit 1; fi
       - name: IPA
         run: |
           APP=$(find build/Build/Products/Release-iphoneos -maxdepth 1 -name '*.app' | head -1)
