@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-08T00:13:19.893Z",
+ "ranAt": "2026-11-08T00:23:04.894Z",
  "inputs": {
   "files": [
    "index.html",
@@ -24,7 +24,7 @@
    "header_cairo.jpg",
    "map_overlay_cairo.svg"
   ],
-  "sha1": "3e04edfed5007ff933ad56f22107bc74bbf9dd36"
+  "sha1": "93c25d2f25b68ee256bb6ab59e50fef4bdd37e62"
  },
  "cleanIssues": {
   "i16promax": [],
@@ -33,6 +33,8 @@
   "i16promax_done_end": [],
   "i16promax_stale": [],
   "i16promax_stale_end": [],
+  "i16promax_own": [],
+  "i16promax_own_end": [],
   "i16promax coverage": [],
   "se": [],
   "se_ask_end": [],
@@ -40,6 +42,8 @@
   "se_done_end": [],
   "se_stale": [],
   "se_stale_end": [],
+  "se_own": [],
+  "se_own_end": [],
   "se coverage": []
  },
  "results": [
@@ -518,6 +522,55 @@
    ]
   },
   {
+   "name": "refused: reason unsaid",
+   "ok": true,
+   "sample": [
+    "the folder refused does not say, first and to VoiceOver at once, that the folder is deleted with the game and to pick one outside it"
+   ]
+  },
+  {
+   "name": "refused: inside again",
+   "ok": true,
+   "sample": [
+    "a11y: «اختيار مجلد: خارج اللعبة» does not read all it shows: مرة واحدة",
+    "the folder refused: picking again does not say «خارج اللعبة» and that it opens the folder picker",
+    "brief text missing: خارج اللعبة · مثل iCloud Drive"
+   ]
+  },
+  {
+   "name": "refused: later differs",
+   "ok": true,
+   "sample": [
+    "a11y: «ليس الآن» does not read all it shows: لن يُعرض مرة أخرى",
+    "the folder refused: «ليس الآن» is not the ask's"
+   ]
+  },
+  {
+   "name": "refused reordered",
+   "ok": true,
+   "sample": [
+    "the «own» actions are not اختيار مجلد (primary) then ليس الآن: ليس الآن، اختيار مجلد",
+    "the folder refused: picking again does not say «خارج اللعبة» and that it opens the folder picker",
+    "the folder refused: «ليس الآن» is not the ask's"
+   ]
+  },
+  {
+   "name": "name split in a row",
+   "ok": true,
+   "sample": [
+    "content outside its control (اختيار مجلد: مرة واحدة، مث): اختيار مجلدمرة واحدة",
+    "content outside its control (اختيار مجلد: مرة واحدة، مث): اختيار مجلد",
+    "content outside its control (اختيار مجلد: مرة واحدة، مث): مرة واحدة · مثل iClo"
+   ]
+  },
+  {
+   "name": "red path in an icon",
+   "ok": true,
+   "sample": [
+    "red in the mirror sheet (nothing is deleted): an icon's use"
+   ]
+  },
+  {
    "name": "second above the first",
    "ok": true,
    "sample": [
@@ -610,7 +663,6 @@
    "ok": true,
    "sample": [
     "«ليس الآن» does not say it asks once and where the folder is picked later (الحفظ)",
-    "brief text missing: لن يُعرض مرة أخرى · المجلد لاحقًا من الحفظ",
     "brief text missing: لن يُعرض مرة أخرى · المجلد لاحقًا من الحفظ"
    ]
   },
@@ -669,14 +721,16 @@
    "name": "red icon",
    "ok": true,
    "sample": [
-    "red in the mirror sheet (nothing is deleted): an icon"
+    "red in the mirror sheet (nothing is deleted): an icon",
+    "red in the mirror sheet (nothing is deleted): an icon's use"
    ]
   },
   {
    "name": "red icon stroke",
    "ok": true,
    "sample": [
-    "red in the mirror sheet (nothing is deleted): an icon"
+    "red in the mirror sheet (nothing is deleted): an icon",
+    "red in the mirror sheet (nothing is deleted): an icon's use"
    ]
   },
   {
@@ -685,7 +739,7 @@
    "sample": [
     "white touch off: .r-tile color rgb(242, 112, 90) (want rgb(234, 242, 247))",
     "red in the mirror sheet (nothing is deleted): an icon",
-    "red in the mirror sheet: r-tile"
+    "red in the mirror sheet (nothing is deleted): an icon's use"
    ]
   },
   {
