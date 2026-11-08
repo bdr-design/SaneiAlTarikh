@@ -851,6 +851,13 @@ bound here; each item is a line in `docs/perf.md` (L12) and a test where one is 
   sheet's rows are static from the queue; the HUD's badge and toast change only on pause, resume and a new or cancelled
   order (no timer while paused, L1); a cancel removes one entry and rebuilds the sheet's model, and the map's route layer,
   once in the background.
+- **The front and its sectors (screen 27).** The front line is a layer-3 border style class (amber, dashed by arc length,
+  stencil-once) inside layer 3's ≤22 draws; the open front's sector bands are one instanced pass of layer 4 in the slot the
+  dropped player arrows left (layer 4 keeps its 3 draws; total ≤50, §2.5), however many sectors (L3). They are rebuilt only
+  when that front's provinces change controller or its sector allocation version changes, only for that front, coalesced
+  to one rebuild per snapshot publish; the allocation runs on the simulation engine inside the front-execution line (0.20
+  ms), the geometry on the map engine's background buffer task; nothing on the main thread. Opening the front is one camera
+  move (tiles under L7, the zoom clamped to 1.0 km/pt) and one background label placement (≤ once per 250 ms).
 
 ### 3.10 Names of any country (the second-country test, T-024)
 
@@ -1267,7 +1274,7 @@ Each type has up to 4 inputs, labour per tier, capital cost and emissions. **Coe
 
 **Rules and levers:** as before: political capital spending, cooldowns, selectorate theory, an age-based mortality hazard with succession events, and the same levers.
 
-### 5.4 Military and war (الجيش والحرب): automated fronts
+### 5.4 Military and war (الجيش والحرب): armies under full control, fronts and sectors
 
 **Entities:**
 - **Formations:** nominal 10,000 personnel, with actual strength **between 5,000 and 25,000** (reinforced). Types: infantry, mechanized, armour, airborne and marines, artillery and missiles, militia. Each carries **equipment allocations** per category (in equipment-value units) and its generation mix.
@@ -1279,10 +1286,11 @@ Each type has up to 4 inputs, labour per tier, capital cost and emissions. **Coe
 - **Armies:** 3–30 formations.
 - **Fronts:** one per contiguous contested border **between two sides of a war** (side-level). Each side's **lead** is the government with the largest committed strength. A front is divided into **per-government sectors**: contiguous runs of front provinces allocated in proportion to assigned strength, recomputed when assignments change. Sectors may share a province where they meet.
 
-**The player's tools:** `CreateArmy`, `AssignArmyToFront`, `SetSectorOrder(hold «تثبيت» | attack «هجوم», arrows ≤3 inside or adjacent to the own sector)`, `SetFrontPosture`, `Mobilize`, `Recruit`, `Disband`, `SetConscription` (the conscription law: changed in State › السياسات, §6.5), `AirMission`, `FleetMission`, `DeclareWar`, `ProposePeace`.
+**The player's tools:** `CreateArmy`, `AssignArmyToFront`, `SetSectorOrder(hold «تثبيت» | attack «هجوم»)` (the sector's posture: it covers only the sector's armies with no order of their own; an army's own order always comes first, the decision «military»; no player arrows: under «هجوم» the axes are chosen as for an AI sector, inside front execution; screen 27, 2026-11-08), `SetFrontPosture`, `Mobilize`, `Recruit`, `Disband`, `SetConscription` (the conscription law: changed in State › السياسات, §6.5), `AirMission`, `FleetMission`, `DeclareWar`, `ProposePeace`.
 - Without its own order, a contributor follows the lead's front-wide order when allied coordination is on (AI difficulty table).
 
 **Front execution** (one engine system for player and AI):
+- An army with its own order (screen 14: advance, attack, halt, waypoint) is moved by that order, never by its sector's posture.
 - Every 3 days per front, iterating sectors in serial order, it moves **only the owning government's formations** within its sector.
 - The **frontage cap per province** is shared among a side's governments in proportion to the strength present.
 - It launches an offensive on an arrow axis when the local ratio is ≥1.5, and **stops it only below 1.3** (hysteresis).
@@ -1541,7 +1549,7 @@ As in final-1.0, plus:
 |---|---|
 | **Approved** | Main play screen (as designed for the 17 Pro Max); UI tokens; main menu; new-game flow; **province panel** (2026-10-20: a 320 pt card first, the map stays the centre; «تفاصيل المحافظة» opens the full-height details with 4 tabs; `design/screen4/R`, brief `design/shared/SCREEN4_BRIEF.md`); **state panel** (2026-10-21, «اعتمد كل شي»: the full-height sheet with نظرة عامة / القيادة / السياسات / المشاريع, the section identity and white touches, one owner per law; `design/screen5/A`, brief `design/shared/SCREEN5_BRIEF.md`); **economy panel** (2026-10-21, approved by Claude under the owner's delegation: نظرة عامة / الميزانية / الضرائب والدعم / التجارة والعملة; `design/screen6/A`, brief `design/shared/SCREEN6_BRIEF.md`) |
 | **Pending design** (user's list) | the economy adjusters (budget line, tax, subsidy, money and currency; next); province details tabs الإنشاءات / القوات / السياسات; markets; politics and parties; internal and unrest; military fronts; forces and production; diplomacy; UN Security Council; intelligence; research; event and decision modal; war and peace; notifications; saves and settings; the "why" sheet; end screens |
-| **Pending design** (added) | Speed popover; map-mode popover; **front-sector arrow interaction** (own sector highlighted, partner sectors shown read-only); pending-orders list; credits and sources; onboarding; country info card; **government chooser** (D-29); **small-phone variants of the top row** (D-31); **save mirror prompt** (D-28) |
+| **Pending design** (added) | Speed popover; map-mode popover; **the front and its sectors** (screen 27: own sector highlighted, partner sectors shown read-only, the posture for armies with no order of their own; the player arrows dropped under the decision «military»); pending-orders list; credits and sources; onboarding; country info card; **government chooser** (D-29); **small-phone variants of the top row** (D-31); **save mirror prompt** (D-28) |
 
 **Economy panel, engine follow-up (from screen 6, 2026-10-21).** The economy panel shows items that §5.1 does not model yet. Until each one has a model, its values stay illustrative:
 - tourism receipts, as a traded-services flow;
