@@ -15,15 +15,16 @@ const OUT = path.resolve(__dirname, '..');
 const STEPS = [['s1', 'بلدك', '.nation'], ['s2', 'المؤشرات', '.stats'], ['s3', 'الأقسام', null], ['s4', 'الوقت', '.date'], ['s5', 'الأحداث', '.toast']];
 const HEAD = ['جولة البداية', 'اللعبة متوقفة · 1 يناير 2011'];
 const T = {
-  s1: 'أنت تحكم مصر من 1 يناير 2011، وبطاقتها في الأعلى تفتح لوحة الدولة. اضغط أي محافظة في مصر لتفتح بطاقتها، وأي دولة أخرى لتعرف حالها وعلاقتك بها.',
+  s1: 'أنت تحكم مصر من 1 يناير 2011، وبطاقة مصر في الأعلى تفتح لوحة الدولة. اضغط أي محافظة في مصر لتفتح بطاقتها، وأي دولة أخرى لتعرف حالها وعلاقتك بها.',
   s2: 'في الأعلى الخزينة والاستقرار والشرعية والقوة البشرية والنفوذ والبحث. السهم يبيّن الاتجاه؛ اضغط أي مؤشر لتعرف لماذا يتغير.',
   s3: 'تحكم من ثمانية أقسام في الشريط السفلي:',
-  s4: 'يمضي الوقت يومًا بعد يوم. اضغط 1× لتختار السرعة حتى «أقصى»، وزر التشغيل لتوقفه متى شئت؛ ما تأمر به والوقت متوقف يُنفَّذ عند الاستئناف.',
-  s5: 'الأخبار تصلك هنا، والجرس يجمع كل الإشعارات. القرارات العاجلة توقف الوقت حتى تختار أو تؤجلها، وأول قرار ينتظرك: احتجاجات واسعة في تونس.',
+  s4: 'يمضي الوقت يومًا بعد يوم. اضغط 1× لتختار السرعة حتى «أقصى»، وزر التشغيل والإيقاف لتوقفه متى شئت؛ ما تأمر به والوقت متوقف يُنفَّذ عند الاستئناف.',
+  s5: 'الأخبار تصلك هنا، والجرس يجمع كل الإشعارات. القرارات العاجلة توقف الوقت حتى تختار أو تؤجلها، وهذا الخبر أول قرار ينتظرك.',
 };
 const LAST = ['ابدأ الحملة', 'يفتح أول قرار: احتجاجات في تونس', 'ابدأ الحملة: يفتح أول قرار، احتجاجات في تونس'];
 const HELP = 'تعود إليها من المزيد › حول › المساعدة';
-const CLOSE = 'تخطي الجولة، تعود إليها من المزيد، حول، المساعدة. العودة إلى الخريطة واللعبة متوقفة';
+const CLOSE = 'تخطي الجولة، تعود إليها من المزيد، حول، المساعدة. ثم يفتح أول قرار، احتجاجات في تونس';
+const DECISION = 'احتجاجات في تونس';   // screen 15's title
 const BRIEF = Object.fromEntries(STEPS.map(([k, h], i) => [k, HEAD.concat(['الخطوة ' + (i + 1) + ' من 5 · ' + h, T[k], i < 4 ? 'التالي' : LAST[0], i < 4 ? STEPS[i + 1][1] : LAST[1]])]));
 STEPS.slice(0, 4).forEach(([k]) => { BRIEF['reach_' + k] = ['تخطي الجولة', HELP]; });
 
@@ -53,7 +54,7 @@ if (document.querySelector('[role="dialog"], [role="alertdialog"], dialog, .moda
 // the actions: one primary; «التالي» naming the next step, or «ابدأ الحملة» opening the first decision; the skip on every step but the last
 { const prim = [...body.querySelectorAll('.r-first')]; const want = i < 4 ? ['التالي', ST[i + 1][1], 'التالي: ' + ST[i + 1][1] + '، الخطوة ' + (i + 2) + ' من 5'] : DATA.last;
   if (prim.length !== 1 || W(T(prim[0].querySelector('.r-at b'))) !== want[0] || W(T(prim[0].querySelector('.r-at > span'))) !== want[1] || prim[0].getAttribute('aria-label') !== want[2]) issues.push('the primary is not «' + want[0] + ' · ' + want[1] + '» read as «' + want[2] + '»');
-  const sk = body.querySelector('.r-link'); if ((i < 4) !== !!sk || (sk && (W(T(sk.querySelector('.r-at b'))) !== 'تخطي الجولة' || W(T(sk.querySelector('.r-at > span'))) !== DATA.help || !/المزيد، حول، المساعدة/.test(sk.getAttribute('aria-label') || '')))) issues.push('the skip is missing, misplaced or does not say the tour stays in the help'); }
+  const sk = body.querySelector('.r-link'); if ((i < 4) !== !!sk || (sk && (W(T(sk.querySelector('.r-at b'))) !== 'تخطي الجولة' || W(T(sk.querySelector('.r-at > span'))) !== DATA.help || !/المزيد، حول، المساعدة\. ثم يفتح أول قرار، /.test(sk.getAttribute('aria-label') || '')))) issues.push('the skip is missing, misplaced or does not say the tour stays in the help and the first decision follows'); }
 // the ring: exactly the step's HUD element, and nothing else on the page ringed (an outline, a box-shadow spread or a white
 // border, the map included); a solid white 2 pt outline 3 pt outside; the element inside the side insets, the ring on
 // screen, clear of the sheet and of the map's focus; none on the sections' step
@@ -81,8 +82,10 @@ if (tab === 's3') { const dock = [...document.querySelectorAll('.dock .dock-item
   if (!/ثمانية أقسام/.test(DATA.text.s3) || dock.length !== 8 || !/الثمانية/.test(body.querySelector('.t-secs').getAttribute('aria-label') || '')) issues.push('the sections\\' count is not eight');
   const tops = new Set(items.map((e) => Math.round(e.getBoundingClientRect().top))); if (tops.size !== 2) issues.push('the sections are not two rows of four: ' + tops.size + ' rows'); }
 if (tab === 's4') { const rows = [...document.querySelectorAll('#speedmenu .mrow')].map((e) => W(T(e))), spd = W(T(document.querySelector('.hud .spd')));
-  if (rows[1] !== '1×' || rows[rows.length - 1] !== 'أقصى' || spd !== '1×' || !DATA.text.s4.includes('اضغط ' + spd + ' لتختار السرعة حتى «' + rows[rows.length - 1] + '»') || !/وزر التشغيل لتوقفه/.test(DATA.text.s4)) issues.push('the speeds are not the speed button\\'s and menu\\'s, 1× to «أقصى», or the pause is not named'); }
-if (tab === 's5') { const tx = W(T(document.querySelector('.hud .alert-prev .txt'))); if (!DATA.text.s5.endsWith('أول قرار ينتظرك: ' + tx + '.')) issues.push('the first decision is not the alert\\'s «' + tx + '»');
+  if (rows[1] !== '1×' || rows[rows.length - 1] !== 'أقصى' || spd !== '1×' || !DATA.text.s4.includes('اضغط ' + spd + ' لتختار السرعة حتى «' + rows[rows.length - 1] + '»') || !/وزر التشغيل والإيقاف لتوقفه/.test(DATA.text.s4)) issues.push('the speeds are not the speed button\\'s and menu\\'s, 1× to «أقصى», or the pause is not named'); }
+if (tab === 's5') { const tx = W(T(document.querySelector('.hud .alert-prev .txt')));
+  // the ringed alert is the first decision: its words carry the decision's title (screen 15), which the primary names
+  if (!DATA.text.s5.endsWith('وهذا الخبر أول قرار ينتظرك.') || DATA.decision.split(' ').some((w) => !tx.split(' ').includes(w)) || !DATA.last[1].endsWith(': ' + DATA.decision)) issues.push('the first decision is not the alert\\'s «' + tx + '»');
   if (!/الجرس/.test(DATA.text.s5) || !document.querySelector('.hud .toast .bell')) issues.push('the step does not name the bell its ring holds'); }
 `;
 
@@ -90,7 +93,7 @@ require(path.join(OUT, '../../shared/check/panelcheck.js'))({
   OUT, dock: 'المزيد', tabs: STEPS.map((s) => s[0]), noTabs: true, fitTab: 's3', longTab: 's3',
   inputs: ['_build/tour.css', '../../shared/paused_hud.py'],
   TOK: { sec: 'rgb(169, 188, 203)', ctlH: {}, sheetIcon: [['.t-secs svg', 16]], size: [] },
-  HEAD, BRIEF, screenChecks, DATA: { steps: STEPS, text: T, last: LAST, help: HELP, close: CLOSE },
+  HEAD, BRIEF, screenChecks, DATA: { steps: STEPS, text: T, last: LAST, help: HELP, close: CLOSE, decision: DECISION },
   // no headline numbers, status table, «لماذا؟», chip or arrowed value here, and the section colour is the «المزيد» grey:
   // those generic plants move to the tour's own targets below or do not apply
   skipGeneric: ['section colour on data', 'section colour on a rule', 'closed dock item coloured', 'brief text hidden', '18 pt misuse', 'gap', 'text overlap', 'clipped text', 'faint text', 'why without its subject', 'amber value without its icon', 'chip arrow against its sign', '% before its number', 'text into a control', 'emblem drawn grey', 'chip not white', 'hint chevron missing (no tabs)', 'hint over the content (no tabs)'],
@@ -127,6 +130,7 @@ require(path.join(OUT, '../../shared/check/panelcheck.js'))({
     ['extra action row', d, '&tab=s1', '', /the step body is not «sec,primary,skip»/, () => { const b = document.querySelector('.r-body[data-tab="s1"]'), a = b.querySelector('.r-act').cloneNode(true); a.classList.remove('r-first'); b.insertBefore(a, b.querySelector('.r-link')); }],
     ['primary bar hidden', d, '&tab=s1', '.r-first::after { content: none !important; }', /the primary's white bar is not drawn/],
     ['close without the help', d, '&tab=s1', '', /a11y: the close does not say it skips the tour, stays in the help/, () => { document.querySelector('.r-x').setAttribute('aria-label', 'تخطي الجولة، العودة إلى الخريطة واللعبة متوقفة'); }],
+    ['skip without the decision', d, '&tab=s1', '', /the skip is missing, misplaced or does not say the tour stays in the help/, () => { document.querySelector('.r-body[data-tab="s1"] .r-link').setAttribute('aria-label', 'تخطي الجولة: تعود إليها من المزيد، حول، المساعدة. يغلق الجولة واللعبة متوقفة'); }],
     ['skip path without «حول»', d, '&tab=s2', '', /the skip is missing, misplaced or does not say the tour stays in the help/, () => { document.querySelector('.r-body[data-tab="s2"] .r-link .r-at > span').textContent = 'تعود إليها من المزيد › المساعدة'; }],
     ['HUD date changed', d, '&tab=s1', '', /the header's date is not the HUD's/, () => { document.querySelector('.hud .date .dmy').textContent = '14 يناير 2011'; }],
     ['HUD country changed', d, '&tab=s1', '', /step 1's country and date are not the HUD's/, () => { document.querySelector('.hud .nation .nm').textContent = 'تونس'; }],
