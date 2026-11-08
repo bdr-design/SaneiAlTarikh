@@ -1,7 +1,7 @@
 {
  "se": {
   "device": "667x375 side 0 bottom 0 none",
-  "renderedAt": "2026-11-08T23:16:37.315Z",
+  "renderedAt": "2026-11-08T23:20:56.463Z",
   "inputs": {
    "files": [
     "index.html",
@@ -25,23 +25,12 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "2225237589352f4fd12a69fa63fdde8a1ed1ba17"
+   "sha1": "86a08cdf360f78008fd0a12222681e82fec3f6af"
   },
-  "issues": [
-   "s1: the ring is not on the step's element .nation alone: nation glass bar tap, flag",
-   "s1_end: the ring is not on the step's element .nation alone: nation glass bar tap, flag",
-   "s2: the ring is not on the step's element .stats alone: flag, stats glass bar",
-   "s2_end: the ring is not on the step's element .stats alone: flag, stats glass bar",
-   "s3: a ring on the sections' step: flag",
-   "s3_end: a ring on the sections' step: flag",
-   "s4: the ring is not on the step's element .date alone: flag, date glass bar",
-   "s4_end: the ring is not on the step's element .date alone: flag, date glass bar",
-   "s5: the ring is not on the step's element .toast alone: flag, toast glass ctl",
-   "s5_end: the ring is not on the step's element .toast alone: flag, toast glass ctl"
-  ],
+  "issues": [],
   "views": {
    "s1": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -452,7 +441,7 @@
     ]
    },
    "s1_end": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -863,7 +852,7 @@
     ]
    },
    "s2": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -1249,7 +1238,7 @@
     ]
    },
    "s2_end": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -1635,7 +1624,7 @@
     ]
    },
    "s3": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -2056,7 +2045,7 @@
     ]
    },
    "s3_end": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -2477,7 +2466,7 @@
     ]
    },
    "s4": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -2878,7 +2867,7 @@
     ]
    },
    "s4_end": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -3279,7 +3268,7 @@
     ]
    },
    "s5": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -3648,7 +3637,7 @@
     ]
    },
    "s5_end": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -4054,11 +4043,11 @@
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 10
+  "issueCount": 0
  },
  "mini": {
   "device": "812x375 side 50 bottom 21 notch",
-  "renderedAt": "2026-11-08T23:16:54.025Z",
+  "renderedAt": "2026-11-08T23:21:13.037Z",
   "inputs": {
    "files": [
     "index.html",
@@ -4082,23 +4071,12 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "2225237589352f4fd12a69fa63fdde8a1ed1ba17"
+   "sha1": "86a08cdf360f78008fd0a12222681e82fec3f6af"
   },
-  "issues": [
-   "s1: the ring is not on the step's element .nation alone: nation glass bar tap, flag",
-   "s1_end: the ring is not on the step's element .nation alone: nation glass bar tap, flag",
-   "s2: the ring is not on the step's element .stats alone: flag, stats glass bar",
-   "s2_end: the ring is not on the step's element .stats alone: flag, stats glass bar",
-   "s3: a ring on the sections' step: flag",
-   "s3_end: a ring on the sections' step: flag",
-   "s4: the ring is not on the step's element .date alone: flag, date glass bar",
-   "s4_end: the ring is not on the step's element .date alone: flag, date glass bar",
-   "s5: the ring is not on the step's element .toast alone: flag, toast glass ctl",
-   "s5_end: the ring is not on the step's element .toast alone: flag, toast glass ctl"
-  ],
+  "issues": [],
   "views": {
    "s1": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -4516,7 +4494,7 @@
     ]
    },
    "s1_end": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -4934,7 +4912,7 @@
     ]
    },
    "s2": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -5327,7 +5305,7 @@
     ]
    },
    "s2_end": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -5720,7 +5698,7 @@
     ]
    },
    "s3": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -6148,7 +6126,7 @@
     ]
    },
    "s3_end": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -6576,7 +6554,7 @@
     ]
    },
    "s4": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -6984,7 +6962,7 @@
     ]
    },
    "s4_end": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -7392,7 +7370,7 @@
     ]
    },
    "s5": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -7768,7 +7746,7 @@
     ]
    },
    "s5_end": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -8181,11 +8159,11 @@
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 10
+  "issueCount": 0
  },
  "i14": {
   "device": "844x390 side 47 bottom 21 notch",
-  "renderedAt": "2026-11-08T23:17:12.035Z",
+  "renderedAt": "2026-11-08T23:21:30.717Z",
   "inputs": {
    "files": [
     "index.html",
@@ -8209,23 +8187,12 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "2225237589352f4fd12a69fa63fdde8a1ed1ba17"
+   "sha1": "86a08cdf360f78008fd0a12222681e82fec3f6af"
   },
-  "issues": [
-   "s1: the ring is not on the step's element .nation alone: nation glass bar tap, flag",
-   "s1_end: the ring is not on the step's element .nation alone: nation glass bar tap, flag",
-   "s2: the ring is not on the step's element .stats alone: flag, stats glass bar",
-   "s2_end: the ring is not on the step's element .stats alone: flag, stats glass bar",
-   "s3: a ring on the sections' step: flag",
-   "s3_end: a ring on the sections' step: flag",
-   "s4: the ring is not on the step's element .date alone: flag, date glass bar",
-   "s4_end: the ring is not on the step's element .date alone: flag, date glass bar",
-   "s5: the ring is not on the step's element .toast alone: flag, toast glass ctl",
-   "s5_end: the ring is not on the step's element .toast alone: flag, toast glass ctl"
-  ],
+  "issues": [],
   "views": {
    "s1": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -8753,7 +8720,7 @@
     ]
    },
    "s1_end": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -9281,7 +9248,7 @@
     ]
    },
    "s2": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -9784,7 +9751,7 @@
     ]
    },
    "s2_end": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -10287,7 +10254,7 @@
     ]
    },
    "s3": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -10825,7 +10792,7 @@
     ]
    },
    "s3_end": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -11363,7 +11330,7 @@
     ]
    },
    "s4": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -11881,7 +11848,7 @@
     ]
    },
    "s4_end": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -12399,7 +12366,7 @@
     ]
    },
    "s5": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -12885,7 +12852,7 @@
     ]
    },
    "s5_end": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -13408,11 +13375,11 @@
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 10
+  "issueCount": 0
  },
  "i16": {
   "device": "852x393 side 59 bottom 21 island",
-  "renderedAt": "2026-11-08T23:17:30.083Z",
+  "renderedAt": "2026-11-08T23:21:48.933Z",
   "inputs": {
    "files": [
     "index.html",
@@ -13436,23 +13403,12 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "2225237589352f4fd12a69fa63fdde8a1ed1ba17"
+   "sha1": "86a08cdf360f78008fd0a12222681e82fec3f6af"
   },
-  "issues": [
-   "s1: the ring is not on the step's element .nation alone: nation glass bar tap, flag",
-   "s1_end: the ring is not on the step's element .nation alone: nation glass bar tap, flag",
-   "s2: the ring is not on the step's element .stats alone: flag, stats glass bar",
-   "s2_end: the ring is not on the step's element .stats alone: flag, stats glass bar",
-   "s3: a ring on the sections' step: flag",
-   "s3_end: a ring on the sections' step: flag",
-   "s4: the ring is not on the step's element .date alone: flag, date glass bar",
-   "s4_end: the ring is not on the step's element .date alone: flag, date glass bar",
-   "s5: the ring is not on the step's element .toast alone: flag, toast glass ctl",
-   "s5_end: the ring is not on the step's element .toast alone: flag, toast glass ctl"
-  ],
+  "issues": [],
   "views": {
    "s1": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -13969,7 +13925,7 @@
     ]
    },
    "s1_end": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -14486,7 +14442,7 @@
     ]
    },
    "s2": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -14978,7 +14934,7 @@
     ]
    },
    "s2_end": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -15470,7 +15426,7 @@
     ]
    },
    "s3": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -15997,7 +15953,7 @@
     ]
    },
    "s3_end": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -16524,7 +16480,7 @@
     ]
    },
    "s4": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -17031,7 +16987,7 @@
     ]
    },
    "s4_end": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -17538,7 +17494,7 @@
     ]
    },
    "s5": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -18013,7 +17969,7 @@
     ]
    },
    "s5_end": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -18525,11 +18481,11 @@
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 10
+  "issueCount": 0
  },
  "i16pro": {
   "device": "874x402 side 62 bottom 21 island",
-  "renderedAt": "2026-11-08T23:17:48.440Z",
+  "renderedAt": "2026-11-08T23:22:07.111Z",
   "inputs": {
    "files": [
     "index.html",
@@ -18553,23 +18509,12 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "2225237589352f4fd12a69fa63fdde8a1ed1ba17"
+   "sha1": "86a08cdf360f78008fd0a12222681e82fec3f6af"
   },
-  "issues": [
-   "s1: the ring is not on the step's element .nation alone: nation glass bar tap, flag",
-   "s1_end: the ring is not on the step's element .nation alone: nation glass bar tap, flag",
-   "s2: the ring is not on the step's element .stats alone: flag, stats glass bar",
-   "s2_end: the ring is not on the step's element .stats alone: flag, stats glass bar",
-   "s3: a ring on the sections' step: flag",
-   "s3_end: a ring on the sections' step: flag",
-   "s4: the ring is not on the step's element .date alone: flag, date glass bar",
-   "s4_end: the ring is not on the step's element .date alone: flag, date glass bar",
-   "s5: the ring is not on the step's element .toast alone: flag, toast glass ctl",
-   "s5_end: the ring is not on the step's element .toast alone: flag, toast glass ctl"
-  ],
+  "issues": [],
   "views": {
    "s1": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -19097,7 +19042,7 @@
     ]
    },
    "s1_end": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -19625,7 +19570,7 @@
     ]
    },
    "s2": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -20128,7 +20073,7 @@
     ]
    },
    "s2_end": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -20631,7 +20576,7 @@
     ]
    },
    "s3": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -21169,7 +21114,7 @@
     ]
    },
    "s3_end": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -21707,7 +21652,7 @@
     ]
    },
    "s4": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -22225,7 +22170,7 @@
     ]
    },
    "s4_end": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -22743,7 +22688,7 @@
     ]
    },
    "s5": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -23229,7 +23174,7 @@
     ]
    },
    "s5_end": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -23752,11 +23697,11 @@
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 10
+  "issueCount": 0
  },
  "i11": {
   "device": "896x414 side 48 bottom 21 notch",
-  "renderedAt": "2026-11-08T23:18:07.332Z",
+  "renderedAt": "2026-11-08T23:22:25.807Z",
   "inputs": {
    "files": [
     "index.html",
@@ -23780,23 +23725,12 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "2225237589352f4fd12a69fa63fdde8a1ed1ba17"
+   "sha1": "86a08cdf360f78008fd0a12222681e82fec3f6af"
   },
-  "issues": [
-   "s1: the ring is not on the step's element .nation alone: nation glass bar tap, flag",
-   "s1_end: the ring is not on the step's element .nation alone: nation glass bar tap, flag",
-   "s2: the ring is not on the step's element .stats alone: flag, stats glass bar",
-   "s2_end: the ring is not on the step's element .stats alone: flag, stats glass bar",
-   "s3: a ring on the sections' step: flag",
-   "s3_end: a ring on the sections' step: flag",
-   "s4: the ring is not on the step's element .date alone: flag, date glass bar",
-   "s4_end: the ring is not on the step's element .date alone: flag, date glass bar",
-   "s5: the ring is not on the step's element .toast alone: flag, toast glass ctl",
-   "s5_end: the ring is not on the step's element .toast alone: flag, toast glass ctl"
-  ],
+  "issues": [],
   "views": {
    "s1": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -24323,7 +24257,7 @@
     ]
    },
    "s1_end": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -24850,7 +24784,7 @@
     ]
    },
    "s2": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -25352,7 +25286,7 @@
     ]
    },
    "s2_end": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -25854,7 +25788,7 @@
     ]
    },
    "s3": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -26391,7 +26325,7 @@
     ]
    },
    "s3_end": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -26928,7 +26862,7 @@
     ]
    },
    "s4": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -27445,7 +27379,7 @@
     ]
    },
    "s4_end": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -27962,7 +27896,7 @@
     ]
    },
    "s5": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -28447,7 +28381,7 @@
     ]
    },
    "s5_end": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -28969,11 +28903,11 @@
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 10
+  "issueCount": 0
  },
  "i16promax": {
   "device": "956x440 side 62 bottom 21 island",
-  "renderedAt": "2026-11-08T23:18:26.290Z",
+  "renderedAt": "2026-11-08T23:22:44.790Z",
   "inputs": {
    "files": [
     "index.html",
@@ -28997,23 +28931,12 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "2225237589352f4fd12a69fa63fdde8a1ed1ba17"
+   "sha1": "86a08cdf360f78008fd0a12222681e82fec3f6af"
   },
-  "issues": [
-   "s1: the ring is not on the step's element .nation alone: nation glass bar tap, flag",
-   "s1_end: the ring is not on the step's element .nation alone: nation glass bar tap, flag",
-   "s2: the ring is not on the step's element .stats alone: flag, stats glass bar",
-   "s2_end: the ring is not on the step's element .stats alone: flag, stats glass bar",
-   "s3: a ring on the sections' step: flag",
-   "s3_end: a ring on the sections' step: flag",
-   "s4: the ring is not on the step's element .date alone: flag, date glass bar",
-   "s4_end: the ring is not on the step's element .date alone: flag, date glass bar",
-   "s5: the ring is not on the step's element .toast alone: flag, toast glass ctl",
-   "s5_end: the ring is not on the step's element .toast alone: flag, toast glass ctl"
-  ],
+  "issues": [],
   "views": {
    "s1": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -29539,7 +29462,7 @@
     ]
    },
    "s1_end": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -30065,7 +29988,7 @@
     ]
    },
    "s2": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -30566,7 +30489,7 @@
     ]
    },
    "s2_end": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -31067,7 +30990,7 @@
     ]
    },
    "s3": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -31603,7 +31526,7 @@
     ]
    },
    "s3_end": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -32139,7 +32062,7 @@
     ]
    },
    "s4": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -32655,7 +32578,7 @@
     ]
    },
    "s4_end": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -33171,7 +33094,7 @@
     ]
    },
    "s5": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -33655,7 +33578,7 @@
     ]
    },
    "s5_end": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -34176,6 +34099,6 @@
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 10
+  "issueCount": 0
  }
 }
