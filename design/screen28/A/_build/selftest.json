@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-08T12:36:35.849Z",
+ "ranAt": "2026-11-08T12:53:15.913Z",
  "inputs": {
   "files": [
    "index.html",
@@ -17,7 +17,9 @@
    "_build/card.css",
    "_build/sudan.json",
    "../../shared/flags/sd.svg",
+   "../../../tools/sudan_outline.py",
    "../../screen10/A/_build/sheet.html",
+   "../../screen11/A/_build/sheet.html",
    "../../screen16/A/_build/sheet.html",
    "../../screen22/A/_build/sheet.html",
    "../../shared/flag_eg.svg",
@@ -26,7 +28,7 @@
    "header_cairo.jpg",
    "map_overlay_cairo.svg"
   ],
-  "sha1": "3ab3e81f151d9694dcea7719e1985b1da56bc750"
+  "sha1": "05b3d76c2e2d31e4732abbf4d58a565762deae40"
  },
  "cleanIssues": {
   "i16promax": [],
@@ -83,8 +85,7 @@
    "ok": true,
    "sample": [
     "panel not opaque: السودان rgba(9, 17, 25, 0.66)",
-    "contrast 3.15 for \"مليون\"",
-    "contrast 4.13 for \"علاقتنا\""
+    "contrast 4.07 for \"استفتاء جنوب السودان في\""
    ]
   },
   {
@@ -107,6 +108,7 @@
    "name": "map faded",
    "ok": true,
    "sample": [
+    "the tapped country is not outlined on the map",
     "the map is dimmed (opacity 0.30, filter none)"
    ]
   },
@@ -122,9 +124,7 @@
    "name": "sheet width",
    "ok": true,
    "sample": [
-    "sheet width 330 (want round(clamp(43% of 832, 340, 380)), or the room the dock leaves if 330..: 358)",
-    "map label السعودية cut by a panel edge",
-    "map label السعودية squeezed between a panel and the screen edge"
+    "sheet width 330 (want round(clamp(43% of 832, 340, 380)), or the room the dock leaves if 330..: 358)"
    ]
   },
   {
@@ -149,7 +149,7 @@
    "sample": [
     "icon over text: i r-chev / \"الجيش\"",
     "icon over text: i / \"عملية جديدة في السودان\"",
-    "hit overlap الدولة / العلاقة مع السودان: موجب 1"
+    "hit overlap الدولة / عملية جديدة في السودان: ال"
    ]
   },
   {
@@ -166,8 +166,8 @@
    "ok": true,
    "sample": [
     "map label مصر cut by a panel edge",
-    "map label مصر squeezed between a panel and the screen edge",
-    "map label عمان cut by a panel edge"
+    "map label ليبيا sliced by the screen edge or the side inset",
+    "map label ليبيا squeezed between a panel and the screen edge"
    ]
   },
   {
@@ -213,22 +213,25 @@
    "name": "money unit",
    "ok": true,
    "sample": [
-    "money unit: «0.4 مليار» (under 1 billion is written in millions)",
-    "the referendum note is not dated as screens 10 and 16 (9 يناير 2011)"
+    "clipped text (top): \"0.4\" 866.09..881 y 108..123",
+    "clipped text (top): \"مليار $\" 838.42..866.09 y 108..123",
+    "money unit: «0.4 مليار» (under 1 billion is written in millions)"
    ]
   },
   {
    "name": "sign outside its number",
    "ok": true,
    "sample": [
-    "a sign outside its number: «تغير +3»",
-    "the referendum note is not dated as screens 10 and 16 (9 يناير 2011)"
+    "clipped text (top): \"تغير +\" 859.06..881 y 108..123",
+    "clipped text (top): \"3\" 853.06..859.06 y 108..123",
+    "a sign outside its number: «تغير +3»"
    ]
   },
   {
    "name": "colour alone",
    "ok": true,
    "sample": [
+    "clipped text (top): \"تراجع\" 860.27..881 y 108..123",
     "colour alone: «تراجع» has no arrow or icon",
     "the referendum note is not dated as screens 10 and 16 (9 يناير 2011)"
    ]
@@ -251,6 +254,7 @@
    "name": "label without a role",
    "ok": true,
    "sample": [
+    "clipped text (top): \"اختبار\" 860.25..881 y 108..123",
     "a11y: a label VoiceOver may skip (no role): «اختبار»",
     "the referendum note is not dated as screens 10 and 16 (9 يناير 2011)"
    ]
@@ -322,9 +326,9 @@
    "name": "a long headline label",
    "ok": true,
    "sample": [
-    "clipped text (sides): \"عنوان طويل جدًا لا يتسع لخانته أبدًا\" 385.38..539.25 y 124..141",
+    "clipped text (sides): \"عنوان طويل جدًا لا يتسع لخانته أبدًا\" 385.38..539.25 y 116..133",
     "text outside the sheet's 12 pt padding: \"عنوان طويل جدًا لا يتسع لخانته أبدًا\"",
-    "clipped text (sides): \"1\" 528.44..539.25 y 142..169"
+    "clipped text (sides): \"1\" 528.44..539.25 y 134..161"
    ]
   },
   {
@@ -338,7 +342,7 @@
    "name": "a long status cell",
    "ok": true,
    "sample": [
-    "clipped text (sides): \"قيمة طويلة جدًا لا تتسع لنصف الجدول\" 416.53..613.3 y 120.5..139.5",
+    "clipped text (sides): \"قيمة طويلة جدًا لا تتسع لنصف الجدول\" 416.53..613.3 y 112.5..131.5",
     "text outside the sheet's 12 pt padding: \"قيمة طويلة جدًا لا تتسع لنصف الجدول\"",
     "horizontal overflow in خانةقيمة طويلة جدًا لا تتس"
    ]
@@ -378,9 +382,9 @@
    "name": "fades wrong (no tabs)",
    "ok": true,
    "sample": [
-    "clipped text (bottom): \"الشبكة\" 570.3..599 y 358..373",
-    "clipped text (bottom): \"7\" 564.3..570.3 y 358..373",
-    "clipped text (bottom): \"من\" 547.34..564.3 y 358..373"
+    "control cut by its scroll area (bottom): عملية جديدة في السودان: ال",
+    "hit box shaved by its clip: عملية جديدة في السودان: ال",
+    "fades 0/0 do not match the scroll state (top 0, over 17.0)"
    ]
   },
   {
@@ -403,8 +407,8 @@
    "name": "clipped text (card)",
    "ok": true,
    "sample": [
-    "clipped text (sides): \"العلاقة مع السودان\" 736.95..834 y 288..307",
-    "clipped text (sides): \"ما يحركها والإجراءات\" 758.33..834 y 306..321",
+    "clipped text (sides): \"العلاقة مع السودان\" 736.95..834 y 280..299",
+    "clipped text (sides): \"ما يحركها والإجراءات\" 758.33..834 y 298..313",
     "horizontal overflow in العلاقة مع السودانما يحركه"
    ]
   },
@@ -454,9 +458,9 @@
    "name": "country covered",
    "ok": true,
    "sample": [
-    "Sudan's north covered by panel السودان",
-    "Sudan's north under the hit box of العلاقة مع السودان: موجب 1",
-    "Sudan's north under the hit box of عملية جديدة في السودان: ال"
+    "Sudan's name not shown on the map",
+    "Khartoum not shown on the map",
+    "Sudan's north covered by panel السودان"
    ]
   },
   {
@@ -524,9 +528,9 @@
    "name": "stability exact",
    "ok": true,
    "sample": [
-    "a11y: «الاستقرار: من 40 إلى 50،» does not read all it shows: 45",
+    "a11y: «الاستقرار: من 40% إلى 50» does not read all it shows: 45",
     "the stability is not an estimated range (D-19)",
-    "brief text missing: 40 إلى 50"
+    "brief text missing: 40%"
    ]
   },
   {
@@ -534,8 +538,25 @@
    "ok": true,
    "sample": [
     "the stability range is 4 wide, not ±5 for a network of 7",
-    "brief text missing: 40 إلى 50",
-    "brief text missing: 40 إلى 50"
+    "brief text missing: 40%",
+    "brief text missing: 50%"
+   ]
+  },
+  {
+   "name": "stability without %",
+   "ok": true,
+   "sample": [
+    "the stability is not an estimated range (D-19)",
+    "brief text missing: 40%",
+    "brief text missing: 50%"
+   ]
+  },
+  {
+   "name": "years swapped",
+   "ok": true,
+   "sample": [
+    "the population is not the country's, with its year, read whole",
+    "the output is not the country's, with its year, read whole"
    ]
   },
   {
@@ -630,12 +651,90 @@
    ]
   },
   {
+   "name": "outline faded",
+   "ok": true,
+   "sample": [
+    "the tapped country is not outlined on the map"
+   ]
+  },
+  {
+   "name": "outline see-through",
+   "ok": true,
+   "sample": [
+    "the tapped country is not outlined on the map"
+   ]
+  },
+  {
+   "name": "outline moved off",
+   "ok": true,
+   "sample": [
+    "the tapped country is not outlined on the map"
+   ]
+  },
+  {
+   "name": "outline empty",
+   "ok": true,
+   "sample": [
+    "the tapped country is not outlined on the map",
+    "the outline is not Sudan whole on 1 January 2011 (the south missing)"
+   ]
+  },
+  {
+   "name": "south missing",
+   "ok": true,
+   "sample": [
+    "the outline is not Sudan whole on 1 January 2011 (the south missing)"
+   ]
+  },
+  {
+   "name": "Sudan unnamed",
+   "ok": true,
+   "sample": [
+    "Sudan's name not shown on the map"
+   ]
+  },
+  {
+   "name": "Sudan name covered",
+   "ok": true,
+   "sample": [
+    "panel not opaque: glass rgba(0, 0, 0, 0)",
+    "panel radius glass: 0 (want 12)",
+    "Sudan's name not shown on the map"
+   ]
+  },
+  {
+   "name": "Khartoum hidden",
+   "ok": true,
+   "sample": [
+    "Khartoum not shown on the map",
+    "map city dot shown without its name: 5"
+   ]
+  },
+  {
    "name": "red in the card",
    "ok": true,
    "sample": [
     "text colour off-token rgb(224, 48, 42): \"علاقتنا\"",
     "text colour off-token rgb(224, 48, 42): \"المعاهدات\"",
     "text colour off-token rgb(224, 48, 42): \"النزاع\""
+   ]
+  },
+  {
+   "name": "red side border",
+   "ok": true,
+   "sample": [
+    "red in the card: DD",
+    "red in the card: DD",
+    "red in the card: DD"
+   ]
+  },
+  {
+   "name": "red shadow",
+   "ok": true,
+   "sample": [
+    "red in the card: r-kpi",
+    "red in the card: r-kpi",
+    "red in the card: r-kpi"
    ]
   },
   {

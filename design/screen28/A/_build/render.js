@@ -80,7 +80,8 @@ if (W(T(body.querySelector('.s-note'))) !== 'استفتاء جنوب السود�
   const shown = (t) => { if (!t || !t.getClientRects().length || t.classList.contains('cut')) return false; const r = t.getBoundingClientRect(), el = document.elementFromPoint((r.left + r.right) / 2, (r.top + r.bottom) / 2);
     return !(el && el.closest('.sheet, .dock, .top, .glass')); };
   if (!shown(sd)) issues.push('Sudan\\'s name not shown on the map');
-  if (!kh || kh.textContent !== 'الخرطوم' || !shown(kh) || !shown(kd)) issues.push('Khartoum not shown on the map'); }
+  if (!kh || kh.textContent !== 'الخرطوم' || !shown(kh) || !shown(kd)) issues.push('Khartoum not shown on the map');
+  else { const a = kh.getBBox(), c = kd.getBBox(); if (a.x + a.width > c.x - 2) issues.push('Khartoum\\'s dot under its name (the name goes west of the dot)'); } }
 // no red here
 { const isRed = (c) => { const m = (c || '').match(/rgba?\\((\\d+), (\\d+), (\\d+)/); if (!m) return false; const [r, g, b] = m.slice(1).map((v) => +v / 255);
     const mx = Math.max(r, g, b), mn = Math.min(r, g, b), sat = mx ? (mx - mn) / mx : 0; if (mx !== r || sat < 0.45 || mx < 0.25) return false; return Math.abs(60 * ((g - b) / (mx - mn))) <= 15; };
@@ -137,6 +138,7 @@ require(path.join(OUT, '../../shared/check/panelcheck.js'))({
     ['Sudan unnamed', d, '', '', /Sudan's name not shown on the map/, () => { [...document.querySelectorAll('.labels text')].find((t) => t.textContent === 'السودان').classList.add('cut'); }],
     ['Sudan name covered', d, '', '', /Sudan's name not shown on the map/, () => { const r = [...document.querySelectorAll('.labels text')].find((t) => t.textContent === 'السودان').getBoundingClientRect(), g = document.createElement('div');
       g.className = 'glass'; g.style.cssText = 'position: fixed; z-index: 99; left: ' + (r.left - 6) + 'px; top: ' + (r.top - 6) + 'px; width: ' + (r.width + 12) + 'px; height: ' + (r.height + 12) + 'px'; document.querySelector('.hud').appendChild(g); }],
+    ['Khartoum dot buried', d, '', '', /Khartoum's dot under its name/, () => { document.querySelector('.labels text[data-city="5"]').removeAttribute('direction'); }],
     ['Khartoum hidden', d, '', '', /Khartoum not shown on the map/, () => { document.querySelector('.labels text[data-city="5"]').classList.add('cut'); }],
     ['red in the card', d, '', '.r-sc dt { color: #E0302A !important; }', /red in the card/],
     ['red side border', d, '', '.r-sc dd { border-right: 3px solid #E0302A !important; }', /red in the card/],
