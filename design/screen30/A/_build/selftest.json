@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-08T22:59:14.933Z",
+ "ranAt": "2026-11-08T23:30:31.029Z",
  "inputs": {
   "files": [
    "index.html",
@@ -23,7 +23,7 @@
    "header_cairo.jpg",
    "map_overlay_cairo.svg"
   ],
-  "sha1": "b9a2a0222e02cd1760a4ffbf59ce6f6dc54efa3d"
+  "sha1": "c36879760ed7ba7424b37ee95acddef48bf13dd2"
  },
  "cleanIssues": {
   "i16promax": [],
@@ -79,7 +79,7 @@
    "sample": [
     "text in side inset: الخطوة",
     "text in side inset: أنت تحكم مصر من",
-    "text in side inset: ، وبطاقتها في الأعلى تفتح لوحة الدولة. اضغط أي محافظة في مصر لتفتح بطاقتها، وأي دولة أخرى لتعرف حالها وعلاقتك بها."
+    "text in side inset: ، وبطاقة مصر في الأعلى تفتح لوحة الدولة. اضغط أي محافظة في مصر لتفتح بطاقتها، وأي دولة أخرى لتعرف حالها وعلاقتك بها."
    ]
   },
   {
@@ -88,7 +88,7 @@
    "sample": [
     "text in side inset: الخطوة",
     "text in side inset: أنت تحكم مصر من",
-    "text in side inset: ، وبطاقتها في الأعلى تفتح لوحة الدولة. اضغط أي محافظة في مصر لتفتح بطاقتها، وأي دولة أخرى لتعرف حالها وعلاقتك بها."
+    "text in side inset: ، وبطاقة مصر في الأعلى تفتح لوحة الدولة. اضغط أي محافظة في مصر لتفتح بطاقتها، وأي دولة أخرى لتعرف حالها وعلاقتك بها."
    ]
   },
   {
@@ -400,7 +400,7 @@
    "name": "brief text hidden (s1)",
    "ok": true,
    "sample": [
-    "brief text not fully visible: أنت تحكم مصر من 1 يناير 2011، وبطاقتها في الأعلى تفتح لوحة الدولة. اضغط أي محافظة في مصر لتفتح بطاقتها، وأي دولة أخرى لتعرف حالها وعلاقتك بها."
+    "brief text not fully visible: أنت تحكم مصر من 1 يناير 2011، وبطاقة مصر في الأعلى تفتح لوحة الدولة. اضغط أي محافظة في مصر لتفتح بطاقتها، وأي دولة أخرى لتعرف حالها وعلاقتك بها."
    ]
   },
   {
@@ -432,7 +432,7 @@
    "name": "faint text (s1)",
    "ok": true,
    "sample": [
-    "brief text not fully visible: أنت تحكم مصر من 1 يناير 2011، وبطاقتها في الأعلى تفتح لوحة الدولة. اضغط أي محافظة في مصر لتفتح بطاقتها، وأي دولة أخرى لتعرف حالها وعلاقتك بها.",
+    "brief text not fully visible: أنت تحكم مصر من 1 يناير 2011، وبطاقة مصر في الأعلى تفتح لوحة الدولة. اضغط أي محافظة في مصر لتفتح بطاقتها، وأي دولة أخرى لتعرف حالها وعلاقتك بها.",
     "contrast 2.98 for \"أنت تحكم مصر من\"",
     "contrast 2.98 for \"1\""
    ]
@@ -451,7 +451,7 @@
    "sample": [
     "% shown before its number: \"نسبة 20%\"",
     "the step text is not the brief's",
-    "brief text missing: أنت تحكم مصر من 1 يناير 2011، وبطاقتها في الأعلى تفتح لوحة الدولة. اضغط أي محافظة في مصر لتفتح بطاقتها، وأي دولة أخرى لتعرف حالها وعلاقتك بها."
+    "brief text missing: أنت تحكم مصر من 1 يناير 2011، وبطاقة مصر في الأعلى تفتح لوحة الدولة. اضغط أي محافظة في مصر لتفتح بطاقتها، وأي دولة أخرى لتعرف حالها وعلاقتك بها."
    ]
   },
   {
@@ -460,7 +460,7 @@
    "sample": [
     "scroll hint chevron missing with content below",
     "brief text not fully visible: الخطوة 1 من 5 · بلدك",
-    "brief text not fully visible: أنت تحكم مصر من 1 يناير 2011، وبطاقتها في الأعلى تفتح لوحة الدولة. اضغط أي محافظة في مصر لتفتح بطاقتها، وأي دولة أخرى لتعرف حالها وعلاقتك بها."
+    "brief text not fully visible: أنت تحكم مصر من 1 يناير 2011، وبطاقة مصر في الأعلى تفتح لوحة الدولة. اضغط أي محافظة في مصر لتفتح بطاقتها، وأي دولة أخرى لتعرف حالها وعلاقتك بها."
    ]
   },
   {
@@ -469,7 +469,7 @@
    "sample": [
     "scroll hint not centred in the clear strip under the fade: y 198.0..216.0 (strip 344.0..366.0)",
     "brief text not fully visible: الخطوة 1 من 5 · بلدك",
-    "brief text not fully visible: أنت تحكم مصر من 1 يناير 2011، وبطاقتها في الأعلى تفتح لوحة الدولة. اضغط أي محافظة في مصر لتفتح بطاقتها، وأي دولة أخرى لتعرف حالها وعلاقتك بها."
+    "brief text not fully visible: أنت تحكم مصر من 1 يناير 2011، وبطاقة مصر في الأعلى تفتح لوحة الدولة. اضغط أي محافظة في مصر لتفتح بطاقتها، وأي دولة أخرى لتعرف حالها وعلاقتك بها."
    ]
   },
   {
@@ -542,8 +542,8 @@
    "ok": true,
    "sample": [
     "the step text is not the brief's",
-    "brief text missing: أنت تحكم مصر من 1 يناير 2011، وبطاقتها في الأعلى تفتح لوحة الدولة. اضغط أي محافظة في مصر لتفتح بطاقتها، وأي دولة أخرى لتعرف حالها وعلاقتك بها.",
-    "brief text missing: أنت تحكم مصر من 1 يناير 2011، وبطاقتها في الأعلى تفتح لوحة الدولة. اضغط أي محافظة في مصر لتفتح بطاقتها، وأي دولة أخرى لتعرف حالها وعلاقتك بها."
+    "brief text missing: أنت تحكم مصر من 1 يناير 2011، وبطاقة مصر في الأعلى تفتح لوحة الدولة. اضغط أي محافظة في مصر لتفتح بطاقتها، وأي دولة أخرى لتعرف حالها وعلاقتك بها.",
+    "brief text missing: أنت تحكم مصر من 1 يناير 2011، وبطاقة مصر في الأعلى تفتح لوحة الدولة. اضغط أي محافظة في مصر لتفتح بطاقتها، وأي دولة أخرى لتعرف حالها وعلاقتك بها."
    ]
   },
   {
@@ -568,8 +568,8 @@
    "ok": true,
    "sample": [
     "the step body is not «sec,primary,skip»: sec,primary",
-    "the skip is missing, misplaced or does not say the tour stays in the help",
-    "brief text missing: تخطي الجولة"
+    "the step body holds 1 controls, not 2",
+    "the skip is missing, misplaced or does not say the tour stays in the help and the first decision follows"
    ]
   },
   {
@@ -635,7 +635,8 @@
    "name": "extra action row",
    "ok": true,
    "sample": [
-    "the step body is not «sec,primary,skip»: sec,primary,r-act tap,skip"
+    "the step body is not «sec,primary,skip»: sec,primary,r-act tap,skip",
+    "the step body holds 3 controls, not 2"
    ]
   },
   {
@@ -653,10 +654,61 @@
    ]
   },
   {
+   "name": "skip without the decision",
+   "ok": true,
+   "sample": [
+    "the skip is missing, misplaced or does not say the tour stays in the help and the first decision follows"
+   ]
+  },
+  {
+   "name": "skip naming another decision",
+   "ok": true,
+   "sample": [
+    "the skip is missing, misplaced or does not say the tour stays in the help and the first decision follows"
+   ]
+  },
+  {
+   "name": "control inside the text",
+   "ok": true,
+   "sample": [
+    "sheet control without a size in the table: زر",
+    "font size 16 for \"زر\"",
+    "hit overlap زر / التالي: المؤشرات، الخطوة 2"
+   ]
+  },
+  {
+   "name": "second paragraph",
+   "ok": true,
+   "sample": [
+    "the step text section is not its heading and text: h3,text,text"
+   ]
+  },
+  {
+   "name": "ring by a pseudo-element",
+   "ok": true,
+   "sample": [
+    "a ring on the sections' step: date glass bar"
+   ]
+  },
+  {
+   "name": "ring by an offset shadow",
+   "ok": true,
+   "sample": [
+    "the ring is not on the step's element .stats alone: nation glass bar tap, stats glass bar"
+   ]
+  },
+  {
+   "name": "primary bar faded",
+   "ok": true,
+   "sample": [
+    "the primary's white bar is not drawn"
+   ]
+  },
+  {
    "name": "skip path without «حول»",
    "ok": true,
    "sample": [
-    "the skip is missing, misplaced or does not say the tour stays in the help",
+    "the skip is missing, misplaced or does not say the tour stays in the help and the first decision follows",
     "brief text missing: تعود إليها من المزيد › حول › المساعدة"
    ]
   },
