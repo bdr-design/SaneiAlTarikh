@@ -13,7 +13,7 @@ enum DeviceInfo {
         }
     }
 
-    static func thermalName(_ s: ProcessInfo.ThermalState) -> String {
+    nonisolated static func thermalName(_ s: ProcessInfo.ThermalState) -> String {
         switch s {
         case .nominal: return "nominal"
         case .fair: return "fair"
@@ -24,7 +24,10 @@ enum DeviceInfo {
     }
 
     /// The memory the app may still use before the system limits it, in MB.
-    static func availableMemoryMB() -> Double { Double(os_proc_available_memory()) / 1_048_576 }
+    nonisolated static func availableMemoryMB() -> Double { Double(os_proc_available_memory()) / 1_048_576 }
+
+    /// The model and the iOS version: fixed for the app's life (the app model reads it once).
+    static func staticLine() -> String { model() + " · iOS " + UIDevice.current.systemVersion }
 
     static func summaryLine() -> String {
         let p = ProcessInfo.processInfo

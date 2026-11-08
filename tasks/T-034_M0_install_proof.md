@@ -44,3 +44,20 @@ with the iOS SDK's annotations (checked by the build).
 Linux tests for `RingBuffer`; the iOS build and the IPA gate in CI; the device check is the owner's (never claimed from a
 simulator or a browser). Risks: the runner image and Xcode version; Swift 6 concurrency errors found only by the macOS
 build (each fixed at its cause, never by turning the language mode down without a recorded reason).
+
+## Recorded choices and deviations (after the six reviews, 2026-11-08)
+- Runner: `macos-15` with Xcode 26.3 selected (§2.8 names macos-26; the macos-15 image carries Xcode 26.3, which the
+  build needs, and the label change is not needed for it). `ios.yml` is manual only; tagged releases and a schedule wait
+  for M5 (the owner dispatches it). The XcodeGen zip is checked by its SHA-256.
+- The app is built only by `ios.yml` (no push trigger): every change to `App/**` is dispatched before it reaches `main`.
+  Simulator tests and an on-device determinism comparison (Linux hash against iPhone hash) wait for M1a, when there is a
+  real engine; M0 holds a golden hash test on Linux.
+- The overlay stays visible in M0 (the install proof is its screen); from M1 it hides behind a gesture. It is
+  event-driven: no timer.
+- Labels avoid counted words (a number beside a unit or a label: «المدة 65 ث», «الملفات (4)») until GameFormatter brings
+  the Arabic counted forms (§6.11).
+- The recorder records 5 idle seconds (render must draw 0 frames: L1) and 60 loaded seconds (render every refresh, the
+  simulation at 30 days a second through `GameHost.run`). Hitches come from presented times (`addPresentedHandler`).
+- `SaneiRuntime` (Foundation; the dedicated-thread executor and the engine meter) joins §2.1 and §2.2; App/Platform and
+  App/MapRenderer may import it.
+- The install steps for the owner: `docs/install.md`. M0's measured costs: `docs/perf.md`.

@@ -295,7 +295,7 @@ A rule that nothing enforces is not a rule here. Rule IDs are referenced in the 
 ```
 Package.swift                         # swift-tools 6.0, Swift 6 language mode
 Sources/
-  SaneiCore/ SaneiContent/ SaneiBake/ SaneiMap/ SaneiEngine/ SaneiAI/ SaneiPresentation/
+  SaneiCore/ SaneiRuntime/ SaneiContent/ SaneiBake/ SaneiMap/ SaneiEngine/ SaneiAI/ SaneiPresentation/
   simcli/  CZlib/                     # CZlib links system zlib, simcli only
 Tests/<Module>Tests/   Tests/Golden/{saves,replays,values}/   # values = DetRNG + DMath only
 App/project.yml                       # XcodeGen 2.46.0; .xcodeproj is gitignored
@@ -330,6 +330,7 @@ tools/{datapipeline/,imagery/,checks/}  CLAUDE.md
 | Module | May import | Contains | Must never |
 |---|---|---|---|
 | `SaneiCore` | stdlib only | `Idx<T>`, `Handle<T>`, `Serial`, `Interner`, `BP`, `Q32`, `LogQ`, `LCU`, `USDn`, `Money`, `Pop`, `GameDate`, `DetRNG`, `DMath`, `StateHasher`, `RingBuffer`, `HandleTable` (serial-ordered), `DenseMatrix`, `BitSet`, `TermSink` with `SumSink` and `TermBuffer12`, the column codec (varint, zigzag, raw). Hot types are `@frozen` and `@inlinable`. | Foundation |
+| `SaneiRuntime` | Foundation (no Core, no Engine) | The engines' threads (ADR 0001): `DedicatedThreadExecutor` (a `SerialExecutor` with a thread of its own, for `GameHost` and the I/O actor), `EngineMeter` (per-engine busy time, the threads each ran on) | Know the engine, content or UI; run work on the main thread |
 | `SaneiContent` | Core | <ul><li>Readers for `content.bin` and `scenario-*.bin`.</li><li>`ContentDB`, holding the static rules: goods, industries, input-output templates, adjacency, route clusters, regions, sea zones, chokepoints, terrain, units, techs, parameter sets, effect vocabulary, defines, modifiers, Arabic strings with morphology fields.</li><li>`ScenarioStart`, mapped only while a new game is being built.</li><li>The validator.</li></ul> | Parse JSON; know about `WorldState` |
 | `SaneiBake` | Core, Content, Foundation | JSON and CSV loaders with strict decoding; the baker; the evidence and stub-pack checks | Be linked into the app |
 | `SaneiMap` | Core | <ul><li>Readers for the map pack and the imagery index.</li><li>Projection, choice of level, chunks and tiles.</li><li>The tile-cache policy (pinned visible set).</li><li>Picking.</li><li>Label placement around HUD rectangles.</li><li>**Runtime label anchors.**</li><li>`FrameScheduler` and the governor policy.</li></ul> | Metal, UIKit, Content, Engine |
@@ -338,10 +339,10 @@ tools/{datapipeline/,imagery/,checks/}  CLAUDE.md
 | `SaneiPresentation` | Engine, Content, Core, Foundation | `GameFormatter` with the **Arabic morphology layer**; why-terms turned into rows; map-mode colour functions; view data; Arabic search normalization; notification text | SwiftUI, UIKit, Metal |
 | `simcli` | All modules, plus `SaneiBake` and `CZlib` | `validate`, `facts`, `evidence`, `stubs`, `bake`, `run`, `replay`, `bench`, `balance`, `history-check`, `save-inspect`, `peak-load` | — |
 | App/UI | All packages | SwiftUI shell, `GameScreen` screens, `DesignTokens`, `GlassStyle`, `DialogPresenter`, `GameStore`, the layout fit engine | Change state except through `host.submit` |
-| App/MapRenderer | Core, Map, Metal | Imagery, overlays, borders (stencil-once), glow, fronts, markers, arrows, distance-field labels, overlay counters | Read the engine or content |
-| App/Platform | Core | Storage (Documents, mirror bookmark), DEFLATE, the binary metadata reader, audio, haptics, thermal and power state, memory pressure, image decoding, **ring-buffer log**, MetricKit and `MXDiagnosticPayload` export, the 60 s recorder | — |
+| App/MapRenderer | Core, Runtime, Map, Metal | Imagery, overlays, borders (stencil-once), glow, fronts, markers, arrows, distance-field labels, overlay counters | Read the engine or content |
+| App/Platform | Core, Runtime | Storage (Documents, mirror bookmark), DEFLATE, the binary metadata reader, audio, haptics, thermal and power state, memory pressure, image decoding, **ring-buffer log**, MetricKit and `MXDiagnosticPayload` export, the 60 s recorder | — |
 
-Dependencies run one way: Core ← Content ← Engine ← AI; Core ← Map; Presentation depends on Engine. The Linux build leaves out the App targets.
+Dependencies run one way: Core ← Content ← Engine ← AI; Core ← Map; Presentation depends on Engine; Runtime stands alone (the app hands its executors to the engine, which takes any `SerialExecutor`). The Linux build leaves out the App targets.
 
 ### 2.3 Core primitives and the determinism kit
 

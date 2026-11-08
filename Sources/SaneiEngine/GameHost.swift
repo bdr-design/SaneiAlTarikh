@@ -21,9 +21,8 @@ public actor GameHost {
         self.dayProbe = dayProbe
     }
 
-    /// Advances `days` days and returns the world's hash.
-    @discardableResult
-    public func advance(days: Int) -> UInt64 {
+    /// Advances `days` days. The hash is separate (`stateHash`): a day never pays for it.
+    public func advance(days: Int) {
         let clock = ContinuousClock()
         for _ in 0..<days {
             let start = clock.now
@@ -31,7 +30,21 @@ public actor GameHost {
             let d = start.duration(to: clock.now).components
             dayProbe(UInt64(d.seconds) &* 1_000_000_000 &+ UInt64(d.attoseconds / 1_000_000_000))
         }
-        return stateHash
+    }
+
+    /// Runs the clock until the calling task is cancelled: `daysPerWake` days, then a sleep on this actor's own thread
+    /// until the next deadline (`period` apart, so the pace does not drift; a late wake never bursts to catch up).
+    /// D-16's top speed is 30 days a second: 3 days every 100 ms, which also caps the snapshots at 10 a second (§2.4).
+    public func run(daysPerWake: Int = 3, period: Duration = .milliseconds(100)) async {
+        let clock = ContinuousClock()
+        var next = clock.now
+        while !Task.isCancelled {
+            advance(days: daysPerWake)
+            next = next.advanced(by: period)
+            let now = clock.now
+            if next < now { next = now }
+            do { try await clock.sleep(until: next, tolerance: .milliseconds(5)) } catch { return }
+        }
     }
 
     private func step() {

@@ -41,6 +41,7 @@ targets:
         CADisableMinimumFrameDurationOnPhone: true
         ITSAppUsesNonExemptEncryption: false
         UIStatusBarHidden: true
+        UIUserInterfaceStyle: Dark
         UIViewControllerBasedStatusBarAppearance: false
         UIFileSharingEnabled: true
         LSSupportsOpeningDocumentsInPlace: true
@@ -69,3 +70,9 @@ targets:
         CODE_SIGN_IDENTITY: ""
         DEVELOPMENT_TEAM: ""
         ENABLE_BITCODE: NO
+      configs:
+        Release:
+          DEPLOYMENT_POSTPROCESSING: YES
+          STRIP_INSTALLED_PRODUCT: YES
+          STRIP_STYLE: all
+          DEAD_CODE_STRIPPING: YES

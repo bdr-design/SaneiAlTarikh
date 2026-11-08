@@ -1,11 +1,10 @@
 # The unsigned IPA (design_doc §2.8, M0 part): the owner runs it from the GitHub app ("Run workflow"), downloads the
-# artifact, signs it with their certificate and installs it. XcodeGen 2.46.0 makes the project; the build is Release,
-# arm64, unsigned; the IPA gate checks what M0 has.
+# artifact, signs it with their certificate and installs it (docs/install.md). XcodeGen 2.46.0 (its zip checked by
+# hash) makes the project; the build is Release, arm64, unsigned; the IPA gate checks what M0 has. Manual only: tagged
+# releases wait for M5. The runner is macos-15 with Xcode 26.3 selected (the image carries it).
 name: ios
 on:
   workflow_dispatch:
-  push:
-    tags: ['v*']
 concurrency:
   group: ios-${{ github.ref }}
   cancel-in-progress: true
@@ -26,6 +25,7 @@ jobs:
       - name: XcodeGen 2.46.0
         run: |
           curl -fsSL -o xcodegen.zip https://github.com/yonaskolb/XcodeGen/releases/download/2.46.0/xcodegen.zip
+          echo "4d9e34b62172d645eed6457cac13fc222569974098ef4ee9c3368bedf0196806  xcodegen.zip" | shasum -a 256 -c -
           unzip -q xcodegen.zip -d xcodegen-dist
           XG=$(find xcodegen-dist -type f -name xcodegen -perm -u+x | head -1)
           "$XG" --version

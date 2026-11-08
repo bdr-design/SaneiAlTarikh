@@ -3,22 +3,39 @@ import Metal
 import QuartzCore
 import SaneiRuntime
 
+/// What the render engine did since the last drain.
+struct FrameStats: Sendable {
+    /// Frames encoded while continuous (the recorder's load).
+    var frames = 0
+    /// Frames encoded while idle (one per request): 0 a second when nothing changes proves the link is paused (L1).
+    var idleFrames = 0
+    /// Continuous frames that missed their target: dropped (never presented) or presented more than half a refresh late.
+    var hitches = 0
+    /// The spacing of presented continuous frames, in ms (mean and worst).
+    var intervalMeanMs = 0.0
+    var intervalMaxMs = 0.0
+}
+
 /// The render engine (ADR 0001): its own thread `sanei.render` with its own run loop, driven by CAMetalDisplayLink
 /// (iOS 17) on the view's CAMetalLayer. Every Metal object is made and used on that thread; the main thread only sizes
 /// the layer and asks for frames. Paused when nothing changes (L1, L6): one frame per request, continuous only while the
-/// recorder runs. Each frame's encode time is metered under `.render`.
+/// recorder runs, paused in the background. Each frame's encode time is metered under `.render`.
 final class RenderEngine: NSObject, @unchecked Sendable {
     static let shared = RenderEngine()
 
     let device: MTLDevice? = MTLCreateSystemDefaultDevice()
 
-    // guarded by `lock`: the run loop once the thread is up, and the blocks waiting for it
+    // guarded by `lock`: the run loop once the thread is up, the blocks waiting for it, the counters (the presented
+    // handlers run on Metal's own thread)
     private let lock = NSLock()
     private var runLoop: CFRunLoop?
     private var pending: [@Sendable () -> Void] = []
     private var thread: Thread?
-    private var frames = 0
-    private var hitches = 0
+    private var stats = FrameStats()
+    private var intervalSum = 0.0
+    private var intervalCount = 0
+    private var lastPresented: CFTimeInterval = 0
+    private var framesSinceLaunch = 0
 
     // used only on the render thread
     private var link: CAMetalDisplayLink?
@@ -26,7 +43,7 @@ final class RenderEngine: NSObject, @unchecked Sendable {
     private var pipeline: MTLRenderPipelineState?
     private var angle: Float = 0
     private var continuous = false
-    private var lastCallback: CFTimeInterval = 0
+    private var lastTarget: CFTimeInterval = 0
 
     /// Starts the render thread (once).
     func start() {
@@ -49,11 +66,11 @@ final class RenderEngine: NSObject, @unchecked Sendable {
         let waiting = pending
         pending.removeAll()
         lock.unlock()
-        for block in waiting { block() }
+        for block in waiting { autoreleasepool { block() } }
         loop.run()
     }
 
-    /// Runs `block` on the render thread (queued until the thread is up).
+    /// Runs `block` on the render thread (queued until the thread is up), inside its own autorelease pool.
     private func perform(_ block: @escaping @Sendable () -> Void) {
         lock.lock()
         guard let loop = runLoop else {
@@ -62,7 +79,7 @@ final class RenderEngine: NSObject, @unchecked Sendable {
             return
         }
         lock.unlock()
-        CFRunLoopPerformBlock(loop, CFRunLoopMode.defaultMode.rawValue, block)
+        CFRunLoopPerformBlock(loop, CFRunLoopMode.defaultMode.rawValue) { autoreleasepool { block() } }
         CFRunLoopWakeUp(loop)
     }
 
@@ -81,16 +98,41 @@ final class RenderEngine: NSObject, @unchecked Sendable {
     func setContinuous(_ on: Bool) {
         perform { [self] in
             self.continuous = on
-            self.lastCallback = 0
+            self.lastTarget = 0
+            self.lock.lock()
+            self.lastPresented = 0
+            self.lock.unlock()
             self.link?.isPaused = false
         }
     }
 
-    /// Frames and hitches since the last call (a hitch: a callback over 1.5 x 1/60 s after the previous one).
-    func drainFrames() -> (frames: Int, hitches: Int) {
+    /// Stops drawing (the app went to the background); the next request draws again.
+    func pause() {
+        perform { [self] in
+            self.continuous = false
+            self.link?.isPaused = true
+        }
+    }
+
+    /// What happened since the last call, then reset.
+    func drainFrames() -> FrameStats {
         lock.lock()
-        defer { frames = 0; hitches = 0; lock.unlock() }
-        return (frames, hitches)
+        defer {
+            stats = FrameStats()
+            intervalSum = 0
+            intervalCount = 0
+            lock.unlock()
+        }
+        var s = stats
+        s.intervalMeanMs = intervalCount > 0 ? intervalSum / Double(intervalCount) * 1_000 : 0
+        return s
+    }
+
+    /// Every frame encoded since launch (the overlay shows it on request).
+    var totalFrames: Int {
+        lock.lock()
+        defer { lock.unlock() }
+        return framesSinceLaunch
     }
 
     private func setUp(_ layer: CAMetalLayer) {
@@ -118,25 +160,45 @@ final class RenderEngine: NSObject, @unchecked Sendable {
         link = l
         RingLog.shared.log("render: display link on \(Thread.current.name ?? "?") (\(device.name))")
     }
+
+    /// Called on Metal's thread when a continuous frame was presented (or dropped: presentedTime 0).
+    private func presented(at time: CFTimeInterval, target: CFTimeInterval, period: CFTimeInterval) {
+        lock.lock()
+        defer { lock.unlock() }
+        if time == 0 || time - target > period / 2 { stats.hitches += 1 }
+        guard time > 0 else { return }
+        if lastPresented > 0 {
+            let gap = time - lastPresented
+            intervalSum += gap
+            intervalCount += 1
+            stats.intervalMaxMs = max(stats.intervalMaxMs, gap * 1_000)
+        }
+        lastPresented = time
+    }
 }
 
 extension RenderEngine: CAMetalDisplayLinkDelegate {
     func metalDisplayLink(_ link: CAMetalDisplayLink, needsUpdate update: CAMetalDisplayLink.Update) {
-        let start = DispatchTime.now().uptimeNanoseconds
-        let now = CACurrentMediaTime()
-        var hitch = false
-        if continuous {
-            if lastCallback > 0, now - lastCallback > 1.5 / 60 { hitch = true }
-            lastCallback = now
-            angle += 0.02
+        autoreleasepool {
+            let start = DispatchTime.now().uptimeNanoseconds
+            let target = update.targetPresentationTimestamp
+            if continuous {
+                // the refresh period from consecutive targets, kept within the link's range (30 to 120 a second)
+                let period = lastTarget > 0 ? min(max(target - lastTarget, 1.0 / 120), 1.0 / 30) : 1.0 / 60
+                lastTarget = target
+                angle += 0.02
+                update.drawable.addPresentedHandler { [self] d in
+                    self.presented(at: d.presentedTime, target: target, period: period)
+                }
+            }
+            encode(into: update.drawable)
+            EngineMeter.shared.record(.render, nanoseconds: DispatchTime.now().uptimeNanoseconds &- start)
+            lock.lock()
+            if continuous { stats.frames += 1 } else { stats.idleFrames += 1 }
+            framesSinceLaunch += 1
+            lock.unlock()
+            if !continuous { link.isPaused = true }
         }
-        encode(into: update.drawable)
-        EngineMeter.shared.record(.render, nanoseconds: DispatchTime.now().uptimeNanoseconds &- start)
-        lock.lock()
-        frames += 1
-        if hitch { hitches += 1 }
-        lock.unlock()
-        if !continuous { link.isPaused = true }
     }
 
     private func encode(into drawable: CAMetalDrawable) {
@@ -152,8 +214,8 @@ extension RenderEngine: CAMetalDisplayLinkDelegate {
         encoder.setVertexBytes(&a, length: MemoryLayout<Float>.size, index: 0)
         encoder.drawPrimitives(type: .triangle, vertexStart: 0, vertexCount: 3)
         encoder.endEncoding()
+        buffer.present(drawable)
         buffer.commit()
-        drawable.present()
     }
 }
 

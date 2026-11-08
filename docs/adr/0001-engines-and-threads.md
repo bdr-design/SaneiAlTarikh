@@ -22,7 +22,7 @@ Every engine has its own thread from the first milestone, and new systems join a
 | MetricKit | its own queue | stores payloads (they go through the I/O engine's files) | — |
 
 Every engine is metered: each records its busy time into a lock-protected meter that the overlay shows and the
-recorder writes per second. A watchdog pings the main thread every 100 ms from the I/O thread and records the worst lag.
+recorder writes per second. A watchdog pings the main thread every 100 ms from the I/O thread and records the worst lag, timed on the main thread (in M0, while the recorder runs).
 The simulation's parallel work stays deterministic (§2.4: each job writes only its own rows; outboxes merged in serial
 order), and one core is enough (the governor can run it serially; the same state hash).
 

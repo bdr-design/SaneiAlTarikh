@@ -6,6 +6,7 @@ on:
     branches: [main, 'claude/**']
     paths: ['Package.swift', 'Sources/**', 'Tests/**', 'App/**', '.github/workflows/ci-linux.yml', 'tools/checks/**']
   pull_request:
+    paths: ['Package.swift', 'Sources/**', 'Tests/**', 'App/**', '.github/workflows/ci-linux.yml', 'tools/checks/**']
   workflow_dispatch:
 concurrency:
   group: ci-linux-${{ github.ref }}
@@ -22,10 +23,15 @@ jobs:
           set -e
           if find . -name '*.xcodeproj' -o -name '*.xcworkspace' | grep -q .; then
             echo "No Xcode project in the tree: XcodeGen makes it from App/project.yml"; exit 1; fi
-          if grep -rnE '^\s*import\s+(Foundation|Dispatch)' Sources/SaneiCore Sources/SaneiEngine; then
-            echo "SaneiCore and SaneiEngine never import Foundation or Dispatch (§2.2)"; exit 1; fi
-          if grep -rnE '\b(Float|Double)\b' Sources/SaneiEngine; then
-            echo "SaneiEngine never uses Float or Double (§2.2)"; exit 1; fi
+          # every import form: attributes (@preconcurrency, @_exported), access levels, kinds (import struct ...)
+          if grep -rnE '^\s*(@\w+\s+)*((public|internal|package|private|fileprivate)\s+)?import\s+(\w+\s+)?(Foundation\w*|Dispatch|CoreFoundation|Glibc|Darwin|Musl|WinSDK|ucrt|os)\b' Sources/SaneiCore Sources/SaneiEngine; then
+            echo "SaneiCore and SaneiEngine import the standard library only: no Foundation, Dispatch or C library (§2.2)"; exit 1; fi
+          if grep -rnE '\b(Float(16|32|64|80)?|Double|CGFloat)\b' Sources/SaneiEngine; then
+            echo "SaneiEngine never uses floating point (§2.2)"; exit 1; fi
+          # floating-point literals: 1.5, 1e9, 2.5e-3 (digit grouping with _ included); hex and member access excluded
+          # (comments are left out: «§2.4» is a section, not a number)
+          if find Sources/SaneiEngine -name '*.swift' -exec sed -E 's://.*$::' {} + | grep -nE '(^|[^0-9A-Za-z_.])[0-9][0-9_]*(\.[0-9][0-9_]*([eE][-+]?[0-9]+)?|[eE][-+]?[0-9]+)\b'; then
+            echo "SaneiEngine never uses floating-point literals (§2.2)"; exit 1; fi
       - name: Build (warnings as errors)
         run: swift build -Xswiftc -warnings-as-errors
       - name: Test

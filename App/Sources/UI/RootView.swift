@@ -12,6 +12,15 @@ struct RootView: View {
     private static let bg = Color(red: 0.043, green: 0.071, blue: 0.094)     // #0B1218
     private static let panel = Color(red: 0.035, green: 0.067, blue: 0.098).opacity(0.92)
 
+    /// Counted words are avoided (the counted forms wait for GameFormatter, §6.11): a number beside a unit or a label.
+    private var recordLabel: String {
+        guard model.recorder.isRecording else {
+            return String(format: "تسجيل الأداء · %ld ث", AppModel.idleSeconds + AppModel.loadSeconds)
+        }
+        let left = model.recorder.secondsLeft
+        return left > 0 ? String(format: "يسجّل… باقي %ld ث", left) : "يحفظ…"
+    }
+
     var body: some View {
         HStack(spacing: 16) {
             VStack(alignment: .leading, spacing: 12) {
@@ -24,9 +33,7 @@ struct RootView: View {
                     Button {
                         model.startRecording()
                     } label: {
-                        Text(verbatim: model.recorder.isRecording
-                             ? String(format: "يسجّل… %ld ثانية", model.recorder.secondsLeft)
-                             : "تسجيل 60 ثانية")
+                        Text(verbatim: recordLabel)
                     }
                     .buttonStyle(.borderedProminent)
                     .tint(Self.cyan)
@@ -44,12 +51,15 @@ struct RootView: View {
 
                     if !model.lastExport.isEmpty {
                         ShareLink(items: model.lastExport) {
-                            Text(verbatim: String(format: "مشاركة %ld ملفات", model.lastExport.count))
+                            Text(verbatim: String(format: "مشاركة الملفات (%ld)", model.lastExport.count))
                         }
                         .buttonStyle(.bordered)
                         .tint(Self.cyan)
                     }
                 }
+                Text(verbatim: String(format: "التسجيل: %ld ث بلا حركة ثم %ld ث تحت الحمل (الرسم كل تحديث والمحاكاة بأقصى سرعة)",
+                                      AppModel.idleSeconds, AppModel.loadSeconds))
+                    .font(.system(size: 11)).foregroundStyle(Self.t2)
                 if let e = model.exportError {
                     Text(verbatim: "تعذّر التصدير: " + e).font(.system(size: 11)).foregroundStyle(Self.t2)
                 }
@@ -61,6 +71,8 @@ struct RootView: View {
 
             MetalHost()
                 .clipShape(RoundedRectangle(cornerRadius: 16))
+                .accessibilityElement()
+                .accessibilityAddTraits(.isImage)
                 .accessibilityLabel(Text(verbatim: "مثلث مرسوم بـ Metal"))
         }
         .padding(.horizontal, 12)
