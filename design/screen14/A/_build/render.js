@@ -488,7 +488,8 @@ async function selftest(b) {
     ['bar read in part', d, '&t=0', '', /a11y: the bar's army does not read all it shows/, () => { document.querySelector('.o-unit').setAttribute('aria-label', 'المنطقة الغربية'); }],
     ['bar order reversed', d, '&t=0', '.orders { flex-direction: row-reverse !important; }', /the order bar is not army, move/],
     ['a weapon name', d, '&t=0', '', /a real weapon name on the map/, () => { document.querySelector('.u-tok[data-u="air"]').setAttribute('aria-label', 'مجموعة جوية، مصر: 24 طائرة F-16، بني سويف'); }],
-    ['city dot under its name', d, '&t=0', '', /map city dot under its own name/, () => { const inView = (e) => { if (!e.getClientRects().length) return false; const r = e.getBoundingClientRect(); return r.left >= 0 && r.right <= innerWidth && r.top >= 0 && r.bottom <= innerHeight; }; const t = [...document.querySelectorAll('.labels text[data-city]')].find((e) => inView(e) && inView(document.querySelector(`.labels circle[data-city="${e.getAttribute('data-city')}"]`))); t.removeAttribute('direction'); }],
+    // here every base-map city in view has its dot hidden under a unit (Cairo, Alexandria): the plant shows Cairo's dot and puts the name back over it
+    ['city dot under its name', d, '&t=0', '', /map city dot under its own name/, () => { const t = document.querySelector('.labels text[data-city="0"]'), c = document.querySelector('.labels circle[data-city="0"]'); c.classList.remove('cut'); c.style.setProperty('display', 'inline', 'important'); t.removeAttribute('direction'); }],
     ['label under a token', d, '&t=0', '.labels .cut { display: inline !important; }', /map label .* (under a unit|cut by a panel edge|sliced)/],
     ['faint text', d, '&t=0', '.o-tt span { opacity: .3 !important; }', /^contrast [0-3](\.\d+)? for/],
     ['text overlap', d, '&t=0', '.o-tt span { margin-top: -14px !important; }', /text overlap/],
