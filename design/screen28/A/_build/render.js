@@ -2,7 +2,7 @@
 // shared panel checker (design/shared/check/panelcheck.js), in the foreign section; the map's focus is Sudan's north
 // (sudan.json). This file adds the card's own rules: the header (the flag, the name, the leader and regime); the three
 // headline numbers in order, the country's population and output with their years, its stability an estimate (D-19)
-// whose half-width follows our network (±(12 − network)), in %; the status cells (our relation signed, the 1959 Nile
+// whose half-width follows our network (±(12 − network)), in %; the status cells (our relation as screen 10's, the 1959 Nile
 // agreement as screen 10 has it, the Halaib dispute, our network as screens 11 and 22); the referendum note as screens 10
 // and 16; the two links saying where they lead, the operation's line screen 22's; the country outlined on the map, whole
 // as on 1 January 2011 (sudan.json, built by tools/sudan_outline.py); Sudan's name and Khartoum shown on the map; no red;
@@ -14,14 +14,14 @@ const OUT = path.resolve(__dirname, '..');
 const rd = (f) => fs.readFileSync(path.join(OUT, f), 'utf8');
 const SD = JSON.parse(fs.readFileSync(path.join(__dirname, 'sudan.json'), 'utf8'));
 const SRC = (() => {
-  const s10 = rd('../../screen10/A/_build/sheet.html'), nile = s10.match(/aria-label="مياه النيل مع السودان، (\d{4}): حصة مصر/), ref10 = s10.match(/aria-label="السودان: استفتاء الجنوب في (\d+) (\S+) (\d{4})"/);
+  const s10 = rd('../../screen10/A/_build/sheet.html'), rel10 = s10.match(/aria-label="السودان: (سالب )?(\d+)،/), nile = s10.match(/aria-label="مياه النيل مع السودان، (\d{4}): حصة مصر/), ref10 = s10.match(/aria-label="السودان: استفتاء الجنوب في (\d+) (\S+) (\d{4})"/);
   const s22 = rd('../../screen22/A/_build/sheet.html'), net = s22.match(/<span class="r-at"><b>السودان<\/b><span>الشبكة <span class="ltr">(\d+)<\/span> من <span class="ltr">(\d+)<\/span> · (الانكشاف \S+)<\/span><\/span>/);
   const s11 = rd('../../screen11/A/_build/sheet.html'), net11 = s11.match(/aria-label="السودان: الشبكة (\d+) من (\d+)، (الانكشاف \S+)"/);
   const s16 = rd('../../screen16/A/_build/sheet.html'), ref16 = s16.match(/السودان: استفتاء الجنوب بعد <span class="ltr">\d+<\/span> أيام<\/b><span><span class="ltr">(\d+)<\/span> (\S+) <span class="ltr">(\d{4})<\/span>/);
-  if (!nile || !ref10 || !net || !net11 || !ref16) throw new Error('cannot read Sudan from screens 10, 11, 16 and 22: ' + [!!nile, !!ref10, !!net, !!net11, !!ref16]);
+  if (!rel10 || !nile || !ref10 || !net || !net11 || !ref16) throw new Error('cannot read Sudan from screens 10, 11, 16 and 22: ' + [!!rel10, !!nile, !!ref10, !!net, !!net11, !!ref16]);
   if (net11.slice(1).join(' ') !== net.slice(1).join(' ')) throw new Error('screens 11 and 22 disagree on the network in Sudan');
   if (ref10.slice(1).join(' ') !== ref16.slice(1).join(' ')) throw new Error('screens 10 and 16 disagree on the referendum');
-  return { nile: nile[1], ref: ref16.slice(1).join(' '), net: +net[1], netOf: +net[2], exposure: net[3] }; })();
+  return { rel: (rel10[1] ? '−' : '+') + rel10[2], nile: nile[1], ref: ref16.slice(1).join(' '), net: +net[1], netOf: +net[2], exposure: net[3] }; })();
 const HEAD = ['السودان', 'عمر البشير · جمهورية رئاسية'];
 const BRIEF = {
   card: HEAD.concat(['السكان', 'الناتج', 'الاستقرار', '44', '65', '40%', 'إلى', '50%', 'تقدير', 'علاقتنا', '+18', 'المعاهدات', 'مياه النيل 1959', 'النزاع', 'حلايب', 'شبكتنا', '7 من 10',
@@ -53,7 +53,7 @@ else {
 // the status cells, agreeing with the approved screens
 { const sc = Object.fromEntries([...body.querySelectorAll('.r-sc')].map((c) => [W(T(c.querySelector('dt'))), W(T(c.querySelector('dd')))]));
   if (Object.keys(sc).join('|') !== 'علاقتنا|المعاهدات|النزاع|شبكتنا') issues.push('the status cells are not relation, treaties, dispute, network: ' + Object.keys(sc).join('، '));
-  if (!/^[+−]\\d+$/.test(sc['علاقتنا'] || '')) issues.push('our relation is not a signed number');
+  if (sc['علاقتنا'] !== S.rel) issues.push('our relation is not screen 10\\'s (' + S.rel + ')');
   if (sc['المعاهدات'] !== 'مياه النيل ' + S.nile) issues.push('the treaty is not screen 10\\'s Nile agreement of ' + S.nile);
   if (sc['النزاع'] !== 'حلايب') issues.push('the dispute is not Halaib');
   if (sc['شبكتنا'] !== S.net + ' من ' + S.netOf) issues.push('our network is not screens 11 and 22\\'s (' + S.net + ' من ' + S.netOf + ')'); }
@@ -65,7 +65,7 @@ if (W(T(body.querySelector('.s-note'))) !== 'استفتاء جنوب السود�
   else { if (!/\\. يفتح العلاقة$/.test(L[0].getAttribute('aria-label') || '') || !(L[0].getAttribute('aria-label') || '').startsWith('العلاقة مع السودان: ' + (W(rel).startsWith('+') ? '' : 'سالب ') + W(rel).slice(1) + '،')) issues.push('a11y: the relation link does not say its value and where it leads');
     if (W(T(L[1].querySelector('.r-at > span'))) !== 'الشبكة ' + S.net + ' من ' + S.netOf + ' · ' + S.exposure || !/\\. يفتح العملية الجديدة$/.test(L[1].getAttribute('aria-label') || '')) issues.push('the operation link is not screen 22\\'s target line, or does not say where it leads'); } }
 // the country outlined on the map: drawn, white, fully opaque (its ancestors too), the whole of Sudan on 1 January 2011
-// (the south included: the ring runs along the base map's 10° N edge), on the map and its north in view (the shared
+// (the south included: Renk inside the ring), on the map and its north in view (the shared
 // checker keeps the north clear of the panels)
 { const p = q('.map svg.sel-country path'), cs = p && getComputedStyle(p);
   let op = 1; for (let e = p; e && e.nodeType === 1; e = e.parentElement) { const c = getComputedStyle(e); op *= parseFloat(c.opacity); if (c.display === 'none' || c.visibility === 'hidden') op = 0; }
@@ -73,8 +73,8 @@ if (W(T(body.querySelector('.s-note'))) !== 'استفتاء جنوب السود�
   const nb = [mr.left + N.x0 * kx, mr.top + N.y0 * ky, mr.left + N.x1 * kx, mr.top + N.y1 * ky];
   if (!p || cs.stroke !== 'rgb(255, 255, 255)' || parseFloat(cs.strokeWidth) < 1.9 || parseFloat(cs.strokeOpacity) < 1 || op < 0.99 || !bb.width || !bb.height
     || pr.left > nb[0] + 2 || pr.top > nb[1] + 2 || pr.right < nb[2] - 2 || pr.bottom < nb[1] + (nb[3] - nb[1]) * 0.5) issues.push('the tapped country is not outlined on the map');
-  const pts = ((p && p.getAttribute('d')) || '').match(/[\\d.]+,[\\d.]+/g) || [], edge = pts.map((v) => v.split(',').map(Number)).filter(([x, y]) => y > 1095);
-  if (!edge.length || Math.min(...edge.map((e) => e[0])) > 560 || Math.max(...edge.map((e) => e[0])) < 860) issues.push('the outline is not Sudan whole on 1 January 2011 (the south missing)'); }
+  /* Renk (32.78° E, 11.75° N), in South Sudan's north: inside the whole country, outside Sudan as after 9 July 2011 */
+  if (!p || !p.isPointInFill(new DOMPoint(822.7, 1044.1))) issues.push('the outline is not Sudan whole on 1 January 2011 (the south missing)'); }
 // the map names the tapped country on its north, and Khartoum with its dot: shown (not cut) and not under a panel
 { const lab = [...document.querySelectorAll('.labels text')], sd = lab.find((t) => t.textContent === 'السودان'), kh = document.querySelector('.labels text[data-city="5"]'), kd = document.querySelector('.labels circle[data-city="5"]');
   const shown = (t) => { if (!t || !t.getClientRects().length || t.classList.contains('cut')) return false; const r = t.getBoundingClientRect(), el = document.elementFromPoint((r.left + r.right) / 2, (r.top + r.bottom) / 2);
@@ -121,7 +121,8 @@ require(path.join(OUT, '../../shared/check/panelcheck.js'))({
     ['years swapped', d, '', '', /the population is not the country's, with its year/, () => { const k = document.querySelectorAll('.r-kpi'); k[0].querySelector('.r-kr .ltr').textContent = '2010'; k[0].setAttribute('aria-label', 'السكان: 44 مليون، 2010'); k[1].querySelector('.r-kr .ltr').textContent = '2011'; k[1].setAttribute('aria-label', 'الناتج: 65 مليار دولار، 2011'); }],
     ['stability unread', d, '', '', /a11y: the stability range is not read whole/, () => { document.querySelectorAll('.r-kpi')[2].setAttribute('aria-label', 'الاستقرار، تقدير'); }],
     ['cells reordered', d, '', '', /the status cells are not relation, treaties, dispute, network/, () => { const s = document.querySelector('.r-st'); s.appendChild(s.firstElementChild); }],
-    ['relation unsigned', d, '', '', /our relation is not a signed number/, () => { document.querySelector('.r-sc dd .ltr').textContent = '18'; }],
+    ['relation off', d, '', '', /our relation is not screen 10's/, () => { document.querySelector('.r-sc dd .ltr').textContent = '+20'; }],
+    ['relation unsigned', d, '', '', /our relation is not screen 10's/, () => { document.querySelector('.r-sc dd .ltr').textContent = '18'; }],
     ['treaty off', d, '', '', /the treaty is not screen 10's Nile agreement/, () => { document.querySelectorAll('.r-sc dd')[1].innerHTML = 'مياه النيل <span class="ltr">1929</span>'; }],
     ['dispute off', d, '', '', /the dispute is not Halaib/, () => { document.querySelectorAll('.r-sc dd')[2].textContent = 'لا يوجد'; }],
     ['network off', d, '', '', /our network is not screens 11 and 22's/, () => { document.querySelectorAll('.r-sc dd')[3].innerHTML = '<span class="ltr">5</span> من <span class="ltr">10</span>'; }],
@@ -134,7 +135,7 @@ require(path.join(OUT, '../../shared/check/panelcheck.js'))({
     ['outline see-through', d, '', '.sel-country path { stroke-opacity: 0 !important; }', /the tapped country is not outlined on the map/],
     ['outline moved off', d, '', '.map svg.sel-country { transform: translate(4000px, 0); }', /the tapped country is not outlined on the map/],
     ['outline empty', d, '', '', /the tapped country is not outlined on the map/, () => { document.querySelector('.map svg.sel-country path').setAttribute('d', ''); }],
-    ['south missing', d, '', '', /the outline is not Sudan whole on 1 January 2011/, () => { const p = document.querySelector('.map svg.sel-country path'); p.setAttribute('d', p.getAttribute('d').replace(/,(109[5-7](\.\d)?)/g, ',1080')); }],
+    ['south missing', d, '', '', /the outline is not Sudan whole on 1 January 2011/, new Function("document.querySelector('.map svg.sel-country path').setAttribute('d', " + JSON.stringify(SD.sdn_only) + ");")],
     ['Sudan unnamed', d, '', '', /Sudan's name not shown on the map/, () => { [...document.querySelectorAll('.labels text')].find((t) => t.textContent === 'السودان').classList.add('cut'); }],
     ['Sudan name covered', d, '', '', /Sudan's name not shown on the map/, () => { const r = [...document.querySelectorAll('.labels text')].find((t) => t.textContent === 'السودان').getBoundingClientRect(), g = document.createElement('div');
       g.className = 'glass'; g.style.cssText = 'position: fixed; z-index: 99; left: ' + (r.left - 6) + 'px; top: ' + (r.top - 6) + 'px; width: ' + (r.width + 12) + 'px; height: ' + (r.height + 12) + 'px'; document.querySelector('.hud').appendChild(g); }],

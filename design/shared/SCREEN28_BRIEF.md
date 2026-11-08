@@ -66,8 +66,8 @@ Sudan, administered by Egypt. Values illustrative within these bounds.
 `screen28/A/_build/render.js` uses the shared checker (the foreign section; its map focus Sudan's north) and adds: the
 header (flag, name, leader and regime); the emblem, the close; the headline numbers in order, population and output read
 whole with their years, stability an estimated range whose width follows the network, read whole; the status cells in
-order (a signed relation, screen 10's treaty, Halaib, the network as screens 11 and 22); the referendum dated as screens 10
+order (the relation as screen 10's Sudan row, screen 10's treaty, Halaib, the network as screens 11 and 22); the referendum dated as screens 10
 and 16; the links in order, saying where they lead (a positive relation read bare), the operation's line screen 22's;
-the country outlined (white, opaque, on the map over its north) and whole (the ring along the 10° N edge); Sudan's name
+the country outlined (white, opaque, on the map over its north) and whole (Renk, in the south's north, inside the ring; the plant swaps in Sudan without the south); Sudan's name
 and Khartoum with its dot shown on the map and not under a panel; population 2011 and output 2010; no red (borders,
 outlines and shadows included); no dialog. `--selftest` and `check_screen.py` must pass.
