@@ -1,0 +1,740 @@
+{
+ "ranAt": "2026-11-08T19:22:14.207Z",
+ "inputs": {
+  "files": [
+   "index.html",
+   "_build/render.js",
+   "_build/sheet.html",
+   "_build/assemble.py",
+   "../../shared/check/panelcheck.js",
+   "../../shared/check/panel_page.py",
+   "../../screen4/R/_build/panel.css",
+   "../../shared/section_identity.css",
+   "../../screen5/A/_build/state.css",
+   "../../screen4/A/index.html",
+   "../../screen1/B3/index.html",
+   "../../shared/devices.json",
+   "_build/credits.css",
+   "../../../design_doc/final_design.md",
+   "../../../CREDITS.md",
+   "../../screen13/A/_build/sheet.html",
+   "../../screen13/A/_build/assemble.py",
+   "../../screen4/A/map_overlay_cairo.svg",
+   "../../shared/flag_eg.svg",
+   "../../shared/flags/eg.svg",
+   "../../shared/map_mena_d1.jpg",
+   "header_cairo.jpg",
+   "map_overlay_cairo.svg"
+  ],
+  "sha1": "77cc342c051cf2890fdd3256c7e5415f23753b83"
+ },
+ "cleanIssues": {
+  "i16promax": [],
+  "i16promax_data_end": [],
+  "i16promax_maps": [],
+  "i16promax_maps_end": [],
+  "i16promax_values": [],
+  "i16promax_values_end": [],
+  "i16promax_data_at137": [],
+  "i16promax_data_at274": [],
+  "i16promax_data_at411": [],
+  "i16promax_data_at548": [],
+  "i16promax_maps_at137": [],
+  "i16promax coverage": [],
+  "se": [],
+  "se_data_end": [],
+  "se_maps": [],
+  "se_maps_end": [],
+  "se_values": [],
+  "se_values_end": [],
+  "se_data_at86": [],
+  "se_data_at172": [],
+  "se_data_at258": [],
+  "se_data_at344": [],
+  "se_data_at430": [],
+  "se_data_at516": [],
+  "se_data_at602": [],
+  "se_maps_at86": [],
+  "se_maps_at172": [],
+  "se_maps_at258": [],
+  "se coverage": []
+ },
+ "results": [
+  {
+   "name": "type size",
+   "ok": true,
+   "sample": [
+    "font size 17 for \"المصادر\""
+   ]
+  },
+  {
+   "name": "font weight",
+   "ok": true,
+   "sample": [
+    "font weight 11.5/700 for \"البيانات\"",
+    "font weight 11.5/700 for \"الخرائط والصور\"",
+    "font weight 11.5/700 for \"قيم تصميمية\""
+   ]
+  },
+  {
+   "name": "off-token colour",
+   "ok": true,
+   "sample": [
+    "text colour off-token rgb(136, 153, 170): \"المصادر\"",
+    "contrast 2.4 for \"المصادر\""
+   ]
+  },
+  {
+   "name": "radius",
+   "ok": true,
+   "sample": [
+    "panel radius المصادر والحقوق: 6 (want 12)",
+    "radius 6 for .sheet (want 12)"
+   ]
+  },
+  {
+   "name": "tap in the side inset",
+   "ok": true,
+   "sample": [
+    "text in side inset: أهم مصادر أرقام البداية ومعايرة النماذج، ثم تتغير بقراراتك.",
+    "text in side inset: السكان والاقتصاد",
+    "text in side inset: الأمم المتحدة: التوقعات السكانية في العالم"
+   ]
+  },
+  {
+   "name": "panel in the side inset",
+   "ok": true,
+   "sample": [
+    "text in side inset: أهم مصادر أرقام البداية ومعايرة النماذج، ثم تتغير بقراراتك.",
+    "text in side inset: السكان والاقتصاد",
+    "text in side inset: الأمم المتحدة: التوقعات السكانية في العالم"
+   ]
+  },
+  {
+   "name": "panel not opaque",
+   "ok": true,
+   "sample": [
+    "panel not opaque: المصادر والحقوق rgba(9, 17, 25, 0.66)",
+    "contrast 4.09 for \"البيانات\"",
+    "contrast 3.15 for \"أهم مصادر أرقام البداية \""
+   ]
+  },
+  {
+   "name": "see-through panel",
+   "ok": true,
+   "sample": [
+    "panel not opaque (opacity 0.60): المصادر والحقوق",
+    "brief text not fully visible: المصادر",
+    "brief text not fully visible: الحقوق والرخص · الإصدار 1.0"
+   ]
+  },
+  {
+   "name": "Egypt covered",
+   "ok": true,
+   "sample": [
+    "Nile delta covered by panel المصادر والحقوق",
+    "Nile delta under the hit box of البيانات",
+    "Nile delta under the hit box of الخرائط والصور"
+   ]
+  },
+  {
+   "name": "map dimmed",
+   "ok": true,
+   "sample": [
+    "the map is dimmed (opacity 1.00, filter brightness(0.35))"
+   ]
+  },
+  {
+   "name": "map faded",
+   "ok": true,
+   "sample": [
+    "the map is dimmed (opacity 0.30, filter none)"
+   ]
+  },
+  {
+   "name": "scrim over the map",
+   "ok": true,
+   "sample": [
+    "something drawn over the map: DIV (rgba(0, 0, 0, 0.55))",
+    "contrast 1.92 for \"3\""
+   ]
+  },
+  {
+   "name": "sheet width",
+   "ok": true,
+   "sample": [
+    "sheet width 330 (want round(clamp(43% of 832, 340, 380)), or the room the dock leaves if 330..: 358)",
+    "text wider than its box: «UCDP/PRIO · جامعة أوبسال» (294 in 288)"
+   ]
+  },
+  {
+   "name": "sheet top",
+   "ok": true,
+   "sample": [
+    "hit overlap الاستقرار 58% / إغلاق، العودة إلى حول",
+    "panel overlap الدولة: مصر، حسني مبارك، ج / المصادر والحقوق",
+    "panel overlap الخزينة 36.0 مليار $ الاست / المصادر والحقوق"
+   ]
+  },
+  {
+   "name": "dock hidden although it fits",
+   "ok": true,
+   "sample": [
+    "dock hidden although it fits left of the sheet"
+   ]
+  },
+  {
+   "name": "dock shown on the SE",
+   "ok": true,
+   "sample": [
+    "panel overlap الأقسام / المصادر والحقوق",
+    "dock shown although it does not fit left of the sheet",
+    "dock not 4 pt in from the left end of its B3 line: x 140.0 w 387.0 y 323.0 (want x 12 w 387.0 y 323.0)"
+   ]
+  },
+  {
+   "name": "left stack moved",
+   "ok": true,
+   "sample": [
+    "HUD element moved from its B3 position: .toast x 70.0..275.6 y 56.0..88.0",
+    "HUD element moved from its B3 position: .btn.mode x 70.0..191.6 y 96.0..128.0",
+    "HUD element moved from its B3 position: .btn.home x 70.0..141.5 y 136.0..168.0"
+   ]
+  },
+  {
+   "name": "fit not the loosest",
+   "ok": true,
+   "sample": [
+    "fit level 6 is not the loosest that fits: [[0,0]]"
+   ]
+  },
+  {
+   "name": "two tab bodies",
+   "ok": true,
+   "sample": [
+    "tab bodies shown: data, maps (want only data)",
+    "scroll hint not centred in the clear strip under the fade: y 395.0..413.0 (strip 293.9..315.9)"
+   ]
+  },
+  {
+   "name": "two tabs selected",
+   "ok": true,
+   "sample": [
+    "exactly the open tab must be selected"
+   ]
+  },
+  {
+   "name": "tabs not a tab list",
+   "ok": true,
+   "sample": [
+    "a11y: the tabs are not a tab list"
+   ]
+  },
+  {
+   "name": "tabs reversed",
+   "ok": true,
+   "sample": [
+    "tab 2 is not left of tab 1",
+    "tab 3 is not left of tab 2"
+   ]
+  },
+  {
+   "name": "fades wrong",
+   "ok": true,
+   "sample": [
+    "clipped text (bottom): \"كتاب حقائق العالم\" 778.61..873 y 399..418",
+    "clipped text (bottom): \"2011\" 747.41..778.61 y 399..418",
+    "clipped text (bottom): \"·\" 736.72..747.41 y 399..418"
+   ]
+  },
+  {
+   "name": "hint chevron missing",
+   "ok": true,
+   "sample": [
+    "scroll hint chevron missing with content below"
+   ]
+  },
+  {
+   "name": "hint over the content",
+   "ok": true,
+   "sample": [
+    "scroll hint not centred in the clear strip under the fade: y 249.0..267.0 (strip 395.0..417.0)",
+    "scroll hint over text: \"البنك الدولي: مؤشرات التنمية العالمية\""
+   ]
+  },
+  {
+   "name": "city dot under its name",
+   "ok": true,
+   "sample": [
+    "map city dot under its own name: 0"
+   ]
+  },
+  {
+   "name": "city name over a label",
+   "ok": true,
+   "sample": [
+    "map city name «القاهرة» over «مصر»"
+   ]
+  },
+  {
+   "name": "map label cut",
+   "ok": true,
+   "sample": [
+    "map label ليبيا sliced by the screen edge or the side inset",
+    "map label إيران sliced by the screen edge or the side inset",
+    "map label إيران squeezed between a panel and the screen edge"
+   ]
+  },
+  {
+   "name": "contrast",
+   "ok": true,
+   "sample": [
+    "contrast 1.73 for \"أهم مصادر أرقام البداية \"",
+    "contrast 1 for \"السكان والاقتصاد\""
+   ]
+  },
+  {
+   "name": "dock item not marked",
+   "ok": true,
+   "sample": [
+    "the open section «المزيد» is not marked in the dock"
+   ]
+  },
+  {
+   "name": "identity line missing",
+   "ok": true,
+   "sample": [
+    "panel top line none rgb(169, 188, 203) 2px (want the section colour, 2 pt, at the top)"
+   ]
+  },
+  {
+   "name": "open tab neutral",
+   "ok": true,
+   "sample": [
+    "open tab not in the section colour"
+   ]
+  },
+  {
+   "name": "money unit",
+   "ok": true,
+   "sample": [
+    "money unit: «0.4 مليار» (under 1 billion is written in millions)",
+    "the data tab's note is not the brief's"
+   ]
+  },
+  {
+   "name": "sign outside its number",
+   "ok": true,
+   "sample": [
+    "a sign outside its number: «تغير +3»",
+    "the data tab's note is not the brief's"
+   ]
+  },
+  {
+   "name": "colour alone",
+   "ok": true,
+   "sample": [
+    "colour alone: «تراجع» has no arrow or icon",
+    "the data tab's note is not the brief's"
+   ]
+  },
+  {
+   "name": "an image in the sheet",
+   "ok": true,
+   "sample": [
+    "an image in the sheet"
+   ]
+  },
+  {
+   "name": "close not round",
+   "ok": true,
+   "sample": [
+    "close button is not round"
+   ]
+  },
+  {
+   "name": "label without a role",
+   "ok": true,
+   "sample": [
+    "a11y: a label VoiceOver may skip (no role): «اختبار»",
+    "the data tab's note is not the brief's"
+   ]
+  },
+  {
+   "name": "overview scrolls",
+   "ok": true,
+   "sample": [
+    "values needs scrolling: 370.0 pt over",
+    "fades 0/0 do not match the scroll state (top 0, over 370.0)",
+    "brief text not fully visible: قيم ضبطناها للعب حيث لا توجد بيانات تُقاس بها، فلا نعدّها جزءًا من واقعية اللعبة."
+   ]
+  },
+  {
+   "name": "control height",
+   "ok": true,
+   "sample": [
+    "control height 40.00 for .r-tab (want 44): البيانات",
+    "control height 40.00 for .r-tab (want 44): الخرائط والصور",
+    "control height 40.00 for .r-tab (want 44): قيم تصميمية"
+   ]
+  },
+  {
+   "name": "icon size",
+   "ok": true,
+   "sample": [
+    "icon size 19x19 (want 17): i",
+    "icon size 19x19 (want 17): i",
+    "icon size 19x19 (want 17): i"
+   ]
+  },
+  {
+   "name": "dock underline missing",
+   "ok": true,
+   "sample": [
+    "dock underline missing or off: none 16pxx2px rgb(169, 188, 203) (want 16 x 2 in the section colour)"
+   ]
+  },
+  {
+   "name": "identity line colour",
+   "ok": true,
+   "sample": [
+    "panel top line \"\" rgb(63, 224, 208) 2px (want the section colour, 2 pt, at the top)"
+   ]
+  },
+  {
+   "name": "closed tabs like the open one",
+   "ok": true,
+   "sample": [
+    "open tab not in the section colour",
+    "closed tab not in the secondary grey: الخرائط والصور rgb(234, 242, 247)",
+    "closed tab not in the secondary grey: قيم تصميمية rgb(234, 242, 247)"
+   ]
+  },
+  {
+   "name": "emblem size",
+   "ok": true,
+   "sample": [
+    "size 28.0x32.0 for .s-emb (want 32 x 32)"
+   ]
+  },
+  {
+   "name": "close says only إغلاق",
+   "ok": true,
+   "sample": [
+    "a11y: the close says only «إغلاق»",
+    "a11y: the close does not say it returns to the about tab"
+   ]
+  },
+  {
+   "name": "a long headline label",
+   "ok": true,
+   "sample": [
+    "clipped text (sides): \"عنوان طويل جدًا لا يتسع لخانته أبدًا\" 385.38..539.25 y 169..186",
+    "text outside the sheet's 12 pt padding: \"عنوان طويل جدًا لا يتسع لخانته أبدًا\"",
+    "clipped text (sides): \"1\" 528.44..539.25 y 187..214"
+   ]
+  },
+  {
+   "name": "text wider than its box",
+   "ok": true,
+   "sample": [
+    "text wider than its box: «السكان والاقتصاد» (78 in 20)"
+   ]
+  },
+  {
+   "name": "a long status cell",
+   "ok": true,
+   "sample": [
+    "clipped text (sides): \"قيمة طويلة جدًا لا تتسع لنصف الجدول\" 416.53..613.3 y 165.5..184.5",
+    "text outside the sheet's 12 pt padding: \"قيمة طويلة جدًا لا تتسع لنصف الجدول\"",
+    "horizontal overflow in خانةقيمة طويلة جدًا لا تتس"
+   ]
+  },
+  {
+   "name": "brief text hidden (data)",
+   "ok": true,
+   "sample": [
+    "brief text not fully visible: الأمم المتحدة: التوقعات السكانية في العالم 2024",
+    "brief text cannot be scrolled clear of the fades: الأمم المتحدة: التوقعات السكانية في العالم 2024"
+   ]
+  },
+  {
+   "name": "18 pt misuse (data)",
+   "ok": true,
+   "sample": [
+    "18 pt is for the panel's name and the adjusted values only: \"السكان والأعمار والتوقعات ·\"",
+    "18 pt is for the panel's name and the adjusted values only: \"CC BY 3.0 IGO\"",
+    "18 pt is for the panel's name and the adjusted values only: \"الناتج والأسعار والقطاعات ·\""
+   ]
+  },
+  {
+   "name": "text overlap (data)",
+   "ok": true,
+   "sample": [
+    "text overlap \"الأمم المتحدة: التوقعات السكانية في العالم\" / \"السكان والأعمار والتوقعات ·\"",
+    "text overlap \"الأمم المتحدة: التوقعات السكانية في العالم\" / \"CC BY 3.0 IGO\"",
+    "text overlap \"البنك الدولي: مؤشرات التنمية العالمية\" / \"الناتج والأسعار والقطاعات ·\""
+   ]
+  },
+  {
+   "name": "clipped text (data)",
+   "ok": true,
+   "sample": [
+    "clipped text (sides): \"السكان والاقتصاد\" 843.22..921 y 182..199",
+    "text outside the sheet's 12 pt padding: \"السكان والاقتصاد\"",
+    "clipped text (sides): \"الأمم المتحدة: التوقعات السكانية في العالم\" 697.72..913 y 207..226"
+   ]
+  },
+  {
+   "name": "faint text (data)",
+   "ok": true,
+   "sample": [
+    "brief text not fully visible: السكان والأعمار والتوقعات · CC BY 3.0 IGO",
+    "brief text cannot be scrolled clear of the fades: السكان والأعمار والتوقعات · CC BY 3.0 IGO",
+    "brief text cannot be scrolled clear of the fades: الناتج والأسعار والقطاعات · CC BY 4.0"
+   ]
+  },
+  {
+   "name": "gap (data)",
+   "ok": true,
+   "sample": [
+    "gap 6 on أهم مصادر أرقام البداية وم",
+    "gap 6 on أهم مصادر أرقام البداية وم"
+   ]
+  },
+  {
+   "name": "% before its number (values)",
+   "ok": true,
+   "sample": [
+    "% shown before its number: \"نسبة 20%\"",
+    "the design values are not said to be no measured data and outside the game's realism (R5)",
+    "brief text missing: قيم ضبطناها للعب حيث لا توجد بيانات تُقاس بها، فلا نعدّها جزءًا من واقعية اللعبة."
+   ]
+  },
+  {
+   "name": "text into a control (header)",
+   "ok": true,
+   "sample": [
+    "text outside the sheet's 12 pt padding: \"الإصدار\"",
+    "clipped text (sides): \"1.0\" 530.41..547.55 y 84..101",
+    "text outside the sheet's 12 pt padding: \"1.0\""
+   ]
+  },
+  {
+   "name": "header off",
+   "ok": true,
+   "sample": [
+    "the header is not the sources with screen 13's version (1.0)",
+    "brief text missing: الحقوق والرخص · الإصدار 1.0",
+    "brief text missing: الحقوق والرخص · الإصدار 1.0"
+   ]
+  },
+  {
+   "name": "sheet read short",
+   "ok": true,
+   "sample": [
+    "a11y: the sheet is not read as screen 13's row «المصادر والحقوق»"
+   ]
+  },
+  {
+   "name": "emblem off",
+   "ok": true,
+   "sample": [
+    "the emblem is not the sources' document (screen 13's row icon)"
+   ]
+  },
+  {
+   "name": "close unclear",
+   "ok": true,
+   "sample": [
+    "a11y: the close says only «إغلاق»",
+    "a11y: the close does not say it returns to the about tab"
+   ]
+  },
+  {
+   "name": "sheet modal",
+   "ok": true,
+   "sample": [
+    "a dialog over the map (mapCentral)"
+   ]
+  },
+  {
+   "name": "tabs reordered",
+   "ok": true,
+   "sample": [
+    "tabs must be data, maps, values in that order",
+    "the tabs are not data, maps and images, design values: الخرائط والصور|قيم تصميمية|البيانات"
+   ]
+  },
+  {
+   "name": "web link",
+   "ok": true,
+   "sample": [
+    "text colour off-token rgb(0, 0, 238): \"الموقع\"",
+    "a web link in the sources (the game is offline)",
+    "the data tab's note is not the brief's"
+   ]
+  },
+  {
+   "name": "source missing",
+   "ok": true,
+   "sample": [
+    "the data tab lists 14 sources, not the 15 of §4 here",
+    "source missing: الناتج المحلي الشبكي · Kummu 2018",
+    "source «منظمة العمل الدولية: ILOSTAT» out of order"
+   ]
+  },
+  {
+   "name": "source added",
+   "ok": true,
+   "sample": [
+    "the data tab lists 16 sources, not the 15 of §4 here",
+    "source «UCDP/PRIO · جامعة أوبسالا ومعهد أوسلو لأبحاث السلام» out of order",
+    "source «WMEAT · الخارجية الأمريكية» out of order"
+   ]
+  },
+  {
+   "name": "map source added",
+   "ok": true,
+   "sample": [
+    "the maps tab lists 8 sources, not the 7 of §4 here",
+    "source «flag-icons · Panayiotis Lipiridis» out of order"
+   ]
+  },
+  {
+   "name": "sources reordered",
+   "ok": true,
+   "sample": [
+    "source «الأمم المتحدة: التوقعات السكانية في العالم 2024» out of order",
+    "source «البنك الدولي: مؤشرات التنمية العالمية» out of order",
+    "source «البنك الدولي: إحصاءات الديون الدولية» out of order"
+   ]
+  },
+  {
+   "name": "licence hidden",
+   "ok": true,
+   "sample": [
+    "brief text cannot be scrolled clear of the fades: الناتج والأسعار والقطاعات · CC BY 4.0"
+   ]
+  },
+  {
+   "name": "licence wrong",
+   "ok": true,
+   "sample": [
+    "source «البنك الدولي: مؤشرات التنمية العالمية» does not say what it feeds and its licence (CC BY 4.0): الناتج والأسعار والقطاعات · CC BY-SA 4.0",
+    "brief text missing: الناتج والأسعار والقطاعات · CC BY 4.0",
+    "brief text missing: الناتج والأسعار والقطاعات · CC BY 4.0"
+   ]
+  },
+  {
+   "name": "use unsaid",
+   "ok": true,
+   "sample": [
+    "source «UCDP/PRIO · جامعة أوبسالا ومعهد أوسلو لأبحاث السلام» does not say what it feeds and its licence (CC BY 4.0): CC BY 4.0",
+    "brief text missing: الحروب والحركات المسلحة · CC BY 4.0",
+    "brief text missing: الحروب والحركات المسلحة · CC BY 4.0"
+   ]
+  },
+  {
+   "name": "NASA uncredited",
+   "ok": true,
+   "sample": [
+    "source «NASA Blue Marble» does not say what it feeds and its licence (مرصد الأرض في ناسا، Reto Stöckli): صورة الأرض بتضاريسها وأعماقها",
+    "brief text missing: صورة الأرض بتضاريسها وأعماقها · مرصد الأرض في ناسا، Reto Stöckli",
+    "brief text missing: صورة الأرض بتضاريسها وأعماقها · مرصد الأرض في ناسا، Reto Stöckli"
+   ]
+  },
+  {
+   "name": "ETOPO back",
+   "ok": true,
+   "sample": [
+    "source missing: GMTED2010 · هيئة المساحة الأمريكية",
+    "brief text missing: GMTED2010 · هيئة المساحة الأمريكية",
+    "brief text missing: GMTED2010 · هيئة المساحة الأمريكية"
+   ]
+  },
+  {
+   "name": "NASA endorsement line gone",
+   "ok": true,
+   "sample": [
+    "NASA's no-endorsement line missing",
+    "brief text missing: استخدام صور ناسا لا يعني أن ناسا تؤيد اللعبة.",
+    "brief text missing: استخدام صور ناسا لا يعني أن ناسا تؤيد اللعبة."
+   ]
+  },
+  {
+   "name": "flags for anything",
+   "ok": true,
+   "sample": [
+    "the flags are not said to identify countries only",
+    "brief text missing: الأعلام لتعريف الدول داخل اللعبة فقط.",
+    "brief text missing: الأعلام لتعريف الدول داخل اللعبة فقط."
+   ]
+  },
+  {
+   "name": "images uncredited",
+   "ok": true,
+   "sample": [
+    "the game's images are not credited as made for this game",
+    "brief text missing: صُنعت خصيصًا لهذه اللعبة",
+    "brief text missing: صُنعت خصيصًا لهذه اللعبة"
+   ]
+  },
+  {
+   "name": "design values claimed real",
+   "ok": true,
+   "sample": [
+    "the design values are not said to be no measured data and outside the game's realism (R5)",
+    "brief text missing: قيم ضبطناها للعب حيث لا توجد بيانات تُقاس بها، فلا نعدّها جزءًا من واقعية اللعبة.",
+    "brief text missing: قيم ضبطناها للعب حيث لا توجد بيانات تُقاس بها، فلا نعدّها جزءًا من واقعية اللعبة."
+   ]
+  },
+  {
+   "name": "design value in the wrong section",
+   "ok": true,
+   "sample": [
+    "design value «تلاشي فرق الاضطراب الأولي» is not «نصف عمر 8 سنوات · الداخلية والسياسة» (the design doc's value and its section): نصف عمر 8 سنوات · الاقتصاد",
+    "brief text missing: نصف عمر 8 سنوات · الداخلية والسياسة",
+    "brief text missing: نصف عمر 8 سنوات · الداخلية والسياسة"
+   ]
+  },
+  {
+   "name": "design value off the doc",
+   "ok": true,
+   "sample": [
+    "design value «الاستيلاء على العتاد» is not «15% مما يخسره المهزوم · الجيش» (the design doc's value and its section): 20% مما يخسره المهزوم · الجيش",
+    "brief text missing: 15% مما يخسره المهزوم · الجيش",
+    "brief text missing: 15% مما يخسره المهزوم · الجيش"
+   ]
+  },
+  {
+   "name": "data note off",
+   "ok": true,
+   "sample": [
+    "the data tab's note is not the brief's",
+    "brief text missing: أهم مصادر أرقام البداية ومعايرة النماذج، ثم تتغير بقراراتك.",
+    "brief text missing: أهم مصادر أرقام البداية ومعايرة النماذج، ثم تتغير بقراراتك."
+   ]
+  },
+  {
+   "name": "source a control",
+   "ok": true,
+   "sample": [
+    "sheet control without a size in the table: الأمم المتحدة: التوقعات ال",
+    "a source row is a control"
+   ]
+  },
+  {
+   "name": "coverage reports a string no view shows",
+   "ok": true,
+   "sample": [
+    "data: never shown clear of the fades in any view: نص غير معروض للاختبار"
+   ],
+   "midViewsAdd": [
+    "data: never shown clear of the fades in any view: البنك الدولي: إحصاءات الديون الدولية",
+    "data: never shown clear of the fades in any view: الدين الخارجي · CC BY 4.0",
+    "data: never shown clear of the fades in any view: الأمم المتحدة: الحسابات القومية"
+   ]
+  }
+ ]
+}

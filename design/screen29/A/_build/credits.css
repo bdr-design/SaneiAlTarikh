@@ -1,0 +1,13 @@
+  /* ================= Screen 29, variant A: sources and rights ================= */
+  [data-tab="data"] .r-body[data-tab="data"], [data-tab="maps"] .r-body[data-tab="maps"], [data-tab="values"] .r-body[data-tab="values"] { display: flex; }
+  .r-body[data-tab] { padding-top: var(--s2); padding-bottom: var(--s3); gap: var(--s2); }
+  /* a source: one card row (screen 26's order row without its tile and button): its name, then what it feeds · its licence */
+  .c-list { display: flex; flex-direction: column; gap: var(--s1); margin: 0; padding: 0; list-style: none; }
+  .c-src { display: flex; align-items: center; min-height: 44px; padding: var(--s1) var(--s2);
+    border-radius: var(--r-ctl); background: var(--card); box-shadow: inset 0 0 0 1px var(--stroke); }
+  .c-src .r-at { flex: 1; min-width: 0; }
+  .c-src .r-at > span { font-size: var(--fs-label); line-height: var(--lh-label); }
+  /* three tabs: the tab row has three columns (as screens 12 and 20) */
+  .r-tabs { grid-template-columns: repeat(3, 1fr); }
+  /* every section heading alike: no first-section rule (the data and values tabs open with a note) */
+  .r-body[data-tab] .r-sec:first-child h3 { padding-bottom: 0; border-bottom: 0; }
