@@ -1,0 +1,841 @@
+{
+ "ranAt": "2026-11-08T02:30:02.536Z",
+ "inputs": {
+  "files": [
+   "index.html",
+   "_build/render.js",
+   "_build/sheet.html",
+   "_build/assemble.py",
+   "../../shared/check/panelcheck.js",
+   "../../shared/check/panel_page.py",
+   "../../screen4/R/_build/panel.css",
+   "../../shared/section_identity.css",
+   "../../screen5/A/_build/state.css",
+   "../../screen4/A/index.html",
+   "../../screen1/B3/index.html",
+   "../../shared/devices.json",
+   "_build/front.css",
+   "_build/front.json",
+   "../../shared/flags/ly.svg",
+   "../../shared/flags/ly_2011.svg",
+   "../../shared/flags/eg.svg",
+   "../../shared/map_mena_d1.jpg",
+   "../../shared/flag_eg.svg",
+   "../../shared/map_mena_d1_overlay.svg",
+   "header_cairo.jpg",
+   "map_overlay_cairo.svg"
+  ],
+  "sha1": "273d4becdbde66570520fb79db73fdb588bc3979"
+ },
+ "cleanIssues": {
+  "i16promax": [],
+  "i16promax_front_end": [],
+  "i16promax coverage": [],
+  "se": [],
+  "se_front_end": [],
+  "se coverage": []
+ },
+ "results": [
+  {
+   "name": "type size",
+   "ok": true,
+   "sample": [
+    "font size 17 for \"جبهة شرق ليبيا\""
+   ]
+  },
+  {
+   "name": "off-token colour",
+   "ok": true,
+   "sample": [
+    "text colour off-token rgb(136, 153, 170): \"جبهة شرق ليبيا\"",
+    "contrast 1.97 for \"جبهة شرق ليبيا\""
+   ]
+  },
+  {
+   "name": "radius",
+   "ok": true,
+   "sample": [
+    "panel radius جبهة شرق ليبيا: 6 (want 12)",
+    "radius 6 for .sheet (want 12)"
+   ]
+  },
+  {
+   "name": "panel in the side inset",
+   "ok": true,
+   "sample": [
+    "text in side inset: قطاعك",
+    "text in side inset: وضع القطاع",
+    "text in side inset: للجيوش بلا أمر خاص"
+   ]
+  },
+  {
+   "name": "panel not opaque",
+   "ok": true,
+   "sample": [
+    "panel not opaque: جبهة شرق ليبيا rgba(9, 17, 25, 0.66)",
+    "contrast 3.2 for \"من جنوب أجدابيا إلى جالو\""
+   ]
+  },
+  {
+   "name": "see-through panel",
+   "ok": true,
+   "sample": [
+    "panel not opaque (opacity 0.60): جبهة شرق ليبيا",
+    "brief text not fully visible: جبهة شرق ليبيا",
+    "brief text not fully visible: التحالف ضد حكومة القذافي · قطاعان"
+   ]
+  },
+  {
+   "name": "map dimmed",
+   "ok": true,
+   "sample": [
+    "the map is dimmed (opacity 1.00, filter brightness(0.35))"
+   ]
+  },
+  {
+   "name": "map faded",
+   "ok": true,
+   "sample": [
+    "the player's sector is not drawn (hidden or faint: 0.18)",
+    "the partner's sector is not drawn (hidden or faint: 0.14)",
+    "the map is dimmed (opacity 0.30, filter none)"
+   ]
+  },
+  {
+   "name": "scrim over the map",
+   "ok": true,
+   "sample": [
+    "something drawn over the map: DIV (rgba(0, 0, 0, 0.55))",
+    "contrast 1.92 for \"3\"",
+    "contrast 3.62 for \"تثبيت\""
+   ]
+  },
+  {
+   "name": "sheet width",
+   "ok": true,
+   "sample": [
+    "sheet width 330 (want round(clamp(43% of 832, 340, 380)), or the room the dock leaves if 330..: 358)",
+    "contrast 4.31 for \"جبهة شرق ليبيا\""
+   ]
+  },
+  {
+   "name": "sheet top",
+   "ok": true,
+   "sample": [
+    "hit overlap الاستقرار 58% / إغلاق، العودة إلى الخريطة",
+    "panel overlap الدولة: مصر، حسني مبارك، ج / جبهة شرق ليبيا",
+    "panel overlap الخزينة 36.0 مليار $ الاست / جبهة شرق ليبيا"
+   ]
+  },
+  {
+   "name": "dock hidden although it fits",
+   "ok": true,
+   "sample": [
+    "dock hidden although it fits left of the sheet"
+   ]
+  },
+  {
+   "name": "dock shown on the SE",
+   "ok": true,
+   "sample": [
+    "icon over text: i / \"قوات حكومة القذافي\"",
+    "panel overlap الأقسام / جبهة شرق ليبيا",
+    "dock shown although it does not fit left of the sheet"
+   ]
+  },
+  {
+   "name": "left stack moved",
+   "ok": true,
+   "sample": [
+    "HUD element moved from its B3 position: .toast x 70.0..275.6 y 56.0..88.0",
+    "HUD element moved from its B3 position: .btn.mode x 70.0..191.6 y 96.0..128.0",
+    "HUD element moved from its B3 position: .btn.home x 70.0..141.5 y 136.0..168.0"
+   ]
+  },
+  {
+   "name": "contrast",
+   "ok": true,
+   "sample": [
+    "contrast 1 for \"قطاعك\"",
+    "contrast 1.03 for \"قطاع الصحراء\"",
+    "contrast 1.67 for \"من جنوب أجدابيا إلى جالو\""
+   ]
+  },
+  {
+   "name": "dock item not marked",
+   "ok": true,
+   "sample": [
+    "the open section «الجيش» is not marked in the dock"
+   ]
+  },
+  {
+   "name": "identity line missing",
+   "ok": true,
+   "sample": [
+    "panel top line none rgb(189, 180, 106) 2px (want the section colour, 2 pt, at the top)"
+   ]
+  },
+  {
+   "name": "emblem drawn grey",
+   "ok": true,
+   "sample": [
+    "section emblem missing or not in the section colour"
+   ]
+  },
+  {
+   "name": "section colour on data",
+   "ok": true,
+   "sample": [
+    "section colour on data text: \"التحالف ضد حكومة القذافي\"",
+    "section colour on data text: \"قطاعان\"",
+    "section colour on data chrome: التحالف ضد حكومة القذافي ·"
+   ]
+  },
+  {
+   "name": "money unit",
+   "ok": true,
+   "sample": [
+    "money unit: «0.4 مليار» (under 1 billion is written in millions)"
+   ]
+  },
+  {
+   "name": "sign outside its number",
+   "ok": true,
+   "sample": [
+    "a sign outside its number: «تغير +3»"
+   ]
+  },
+  {
+   "name": "colour alone",
+   "ok": true,
+   "sample": [
+    "colour alone: «تراجع» has no arrow or icon"
+   ]
+  },
+  {
+   "name": "an image in the sheet",
+   "ok": true,
+   "sample": [
+    "an image in the sheet"
+   ]
+  },
+  {
+   "name": "close not round",
+   "ok": true,
+   "sample": [
+    "close button is not round"
+   ]
+  },
+  {
+   "name": "label without a role",
+   "ok": true,
+   "sample": [
+    "a11y: a label VoiceOver may skip (no role): «اختبار»"
+   ]
+  },
+  {
+   "name": "text overlap",
+   "ok": true,
+   "sample": [
+    "text overlap \"جبهة شرق ليبيا\" / \"التحالف ضد حكومة القذافي\""
+   ]
+  },
+  {
+   "name": "dock underline missing",
+   "ok": true,
+   "sample": [
+    "dock underline missing or off: none 16pxx2px rgb(189, 180, 106) (want 16 x 2 in the section colour)"
+   ]
+  },
+  {
+   "name": "closed dock item coloured",
+   "ok": true,
+   "sample": [
+    "dock item 1 (closed) not neutral as on B3: rgb(189, 180, 106) / rgb(234, 242, 247)",
+    "dock item 2 (closed) not neutral as on B3: rgb(189, 180, 106) / rgb(234, 242, 247)",
+    "dock item 3 (closed) not neutral as on B3: rgb(189, 180, 106) / rgb(234, 242, 247)"
+   ]
+  },
+  {
+   "name": "identity line colour",
+   "ok": true,
+   "sample": [
+    "panel top line \"\" rgb(63, 224, 208) 2px (want the section colour, 2 pt, at the top)"
+   ]
+  },
+  {
+   "name": "emblem size",
+   "ok": true,
+   "sample": [
+    "size 28.0x32.0 for .s-emb (want 32 x 32)"
+   ]
+  },
+  {
+   "name": "close says only إغلاق",
+   "ok": true,
+   "sample": [
+    "a11y: the close says only «إغلاق»",
+    "a11y: the close does not say where it returns"
+   ]
+  },
+  {
+   "name": "a long headline label",
+   "ok": true,
+   "sample": [
+    "clipped text (sides): \"عنوان طويل جدًا لا يتسع لخانته أبدًا\" 385.38..539.25 y 124..141",
+    "text outside the sheet's 12 pt padding: \"عنوان طويل جدًا لا يتسع لخانته أبدًا\"",
+    "clipped text (sides): \"1\" 528.44..539.25 y 142..169"
+   ]
+  },
+  {
+   "name": "text wider than its box",
+   "ok": true,
+   "sample": [
+    "text wider than its box: «قطاعك» (34 in 20)"
+   ]
+  },
+  {
+   "name": "a long status cell",
+   "ok": true,
+   "sample": [
+    "clipped text (sides): \"قيمة طويلة جدًا لا تتسع لنصف الجدول\" 416.53..613.3 y 120.5..139.5",
+    "text outside the sheet's 12 pt padding: \"قيمة طويلة جدًا لا تتسع لنصف الجدول\"",
+    "horizontal overflow in خانةقيمة طويلة جدًا لا تتس"
+   ]
+  },
+  {
+   "name": "font weight (no tabs)",
+   "ok": true,
+   "sample": [
+    "font weight 11.5/700 for \"التحالف ضد حكومة القذافي\"",
+    "font weight 11.5/700 for \"·\"",
+    "font weight 11.5/700 for \"قطاعان\""
+   ]
+  },
+  {
+   "name": "a tab row on a one-body sheet",
+   "ok": true,
+   "sample": [
+    "a tab row on a sheet that has one body"
+   ]
+  },
+  {
+   "name": "control height (no tabs)",
+   "ok": true,
+   "sample": [
+    "control height 40.00 for .r-x (want 32): إغلاق، العودة إلى الخريطة",
+    "close button is not round"
+   ]
+  },
+  {
+   "name": "icon size (no tabs)",
+   "ok": true,
+   "sample": [
+    "icon size 19x19 (want 16): i"
+   ]
+  },
+  {
+   "name": "fades wrong (no tabs)",
+   "ok": true,
+   "sample": [
+    "clipped text (bottom): \"نحو\" 591.58..608 y 355..370",
+    "clipped text (bottom): \"6\" 585.58..591.58 y 355..370",
+    "clipped text (bottom): \"إلى\" 571.05..585.58 y 355..370"
+   ]
+  },
+  {
+   "name": "brief text hidden (front)",
+   "ok": true,
+   "sample": [
+    "brief text not fully visible: قطاع الصحراء"
+   ]
+  },
+  {
+   "name": "18 pt misuse (front)",
+   "ok": true,
+   "sample": [
+    "18 pt is for the panel's name and the adjusted values only: \"من جنوب أجدابيا إلى جالو · جيشان ·\"",
+    "18 pt is for the panel's name and the adjusted values only: \"11\"",
+    "18 pt is for the panel's name and the adjusted values only: \"تشكيلًا\""
+   ]
+  },
+  {
+   "name": "clipped text (front)",
+   "ok": true,
+   "sample": [
+    "clipped text (sides): \"قطاع الصحراء\" 772.11..843 y 141..160",
+    "clipped text (sides): \"من جنوب أجدابيا إلى جالو · جيشان ·\" 702.33..843 y 159..174",
+    "horizontal overflow in قطاع الصحراءمن جنوب أجدابي"
+   ]
+  },
+  {
+   "name": "gap (front)",
+   "ok": true,
+   "sample": [
+    "gap 6 on قطاعك قطاع الصحراءمن جنوب ",
+    "gap 6 on قطاعك قطاع الصحراءمن جنوب "
+   ]
+  },
+  {
+   "name": "faint text (front)",
+   "ok": true,
+   "sample": [
+    "brief text not fully visible: من جنوب أجدابيا إلى جالو · جيشان · 11 تشكيلًا",
+    "brief text not fully visible: المجلس الوطني الانتقالي · الوضع: هجوم",
+    "brief text cannot be scrolled clear of the fades: نحو 6 إلى 9 تشكيلات · تقدير"
+   ]
+  },
+  {
+   "name": "% before its number (front)",
+   "ok": true,
+   "sample": [
+    "% shown before its number: \"نسبة 20%\"",
+    "the posture does not say an army's own order has priority (the decision «military»)",
+    "brief text missing: أمر الجيش الخاص (تقدّم، هجوم، توقّف) له الأولوية على وضع القطاع."
+   ]
+  },
+  {
+   "name": "text into a control (posture)",
+   "ok": true,
+   "sample": [
+    "setting 1: order must be .r-at, .s-seg (right to left)",
+    "contrast 1.06 for \"للجيوش بلا أمر خاص\""
+   ]
+  },
+  {
+   "name": "hint chevron missing",
+   "ok": true,
+   "sample": [
+    "scroll hint chevron missing with content below"
+   ]
+  },
+  {
+   "name": "hint over the content",
+   "ok": true,
+   "sample": [
+    "scroll hint not centred in the clear strip under the fade: y 198.0..216.0 (strip 344.0..366.0)"
+   ]
+  },
+  {
+   "name": "front covered",
+   "ok": true,
+   "sample": [
+    "the front line runs under a panel: sheet glass",
+    "the player's sector runs under a panel: sheet glass",
+    "the partner's sector runs under a panel: sheet glass"
+   ]
+  },
+  {
+   "name": "tap in the side inset (posture)",
+   "ok": true,
+   "sample": [
+    "text in side inset: جبهة شرق ليبيا",
+    "text in side inset: التحالف ضد حكومة القذافي",
+    "text in side inset: ·"
+   ]
+  },
+  {
+   "name": "front name cut",
+   "ok": true,
+   "sample": [
+    "the map name «أجدابيا» is cut by the screen edge"
+   ]
+  },
+  {
+   "name": "line under the sheet",
+   "ok": true,
+   "sample": [
+    "the front line runs under a panel: sheet glass",
+    "the player's sector runs under a panel: sheet glass",
+    "the partner's sector runs under a panel: sheet glass"
+   ]
+  },
+  {
+   "name": "line off screen",
+   "ok": true,
+   "sample": [
+    "the front line is not wholly on screen in the safe area",
+    "the player's sector is not wholly on screen in the safe area",
+    "the partner's sector is not wholly on screen in the safe area"
+   ]
+  },
+  {
+   "name": "line solid",
+   "ok": true,
+   "sample": [
+    "the front line is not amber and dashed"
+   ]
+  },
+  {
+   "name": "line red",
+   "ok": true,
+   "sample": [
+    "the front line is not amber and dashed",
+    "red in the front: f-line"
+   ]
+  },
+  {
+   "name": "own band not teal",
+   "ok": true,
+   "sample": [
+    "the player's sector band is not the player's teal",
+    "the partner's band is not told apart from the player's"
+   ]
+  },
+  {
+   "name": "partner band teal",
+   "ok": true,
+   "sample": [
+    "the partner's band is not told apart from the player's"
+   ]
+  },
+  {
+   "name": "bands swapped",
+   "ok": true,
+   "sample": [
+    "the sectors are not in their places (the partner's on the coast, the player's south of it)",
+    "the player's band does not run from south of Ajdabiya to Jalu (as the sheet says)"
+   ]
+  },
+  {
+   "name": "front moving",
+   "ok": true,
+   "sample": [
+    "the front marks or names move (they must be static, L6)"
+   ]
+  },
+  {
+   "name": "a name hidden",
+   "ok": true,
+   "sample": [
+    "the front's name «جالو» is not shown",
+    "a place dot without its name, or a name without its dot",
+    "the map name «جالو» is hidden though it fits"
+   ]
+  },
+  {
+   "name": "a name scaled",
+   "ok": true,
+   "sample": [
+    "the map name «أجدابيا» is 20px, not 14.93px",
+    "the map name «البريقة» is 20px, not 14.93px",
+    "the map name «جالو» is 20px, not 14.93px"
+   ]
+  },
+  {
+   "name": "a tag scaled",
+   "ok": true,
+   "sample": [
+    "the map name «قطاعك» is 14px, not 11.50px",
+    "the map name «قطاع الحليف» is 14px, not 11.50px",
+    "the map name «قوات القذافي» is 14px, not 11.50px"
+   ]
+  },
+  {
+   "name": "a name under a panel",
+   "ok": true,
+   "sample": [
+    "the map name «أجدابيا» is under a panel: sheet glass"
+   ]
+  },
+  {
+   "name": "names overlap",
+   "ok": true,
+   "sample": [
+    "the map names «قطاعك» and «قطاع الحليف» overlap"
+   ]
+  },
+  {
+   "name": "dot alone",
+   "ok": true,
+   "sample": [
+    "the front's name «جالو» is not shown",
+    "a place dot without its name, or a name without its dot",
+    "the map name «جالو» is hidden though it fits"
+   ]
+  },
+  {
+   "name": "own name not teal",
+   "ok": true,
+   "sample": [
+    "the map name «قطاعك» is not the player's teal"
+   ]
+  },
+  {
+   "name": "units drawn",
+   "ok": true,
+   "sample": [
+    "unit tokens drawn (screen 14's, the owner's)"
+   ]
+  },
+  {
+   "name": "date weekday off",
+   "ok": true,
+   "sample": [
+    "the HUD date is not 10 April 2011 on its weekday (الأحد): السبت 10 أبريل 2011"
+   ]
+  },
+  {
+   "name": "wrong flag",
+   "ok": true,
+   "sample": [
+    "the header flag is not the player's (مصر)"
+   ]
+  },
+  {
+   "name": "emblem not the front",
+   "ok": true,
+   "sample": [
+    "the emblem is not the front"
+   ]
+  },
+  {
+   "name": "close unclear",
+   "ok": true,
+   "sample": [
+    "a11y: the close says only «إغلاق»",
+    "a11y: the close does not say where it returns"
+   ]
+  },
+  {
+   "name": "sheet modal",
+   "ok": true,
+   "sample": [
+    "a dialog over the map (mapCentral)"
+   ]
+  },
+  {
+   "name": "own not apart",
+   "ok": true,
+   "sample": [
+    "the player's sector is not told apart (teal) or not read as «قطاعك»"
+   ]
+  },
+  {
+   "name": "three postures",
+   "ok": true,
+   "sample": [
+    "text overlap \"انسحاب\" / \"أمر الجيش الخاص (تقدّم، هجوم، توقّف) له الأولوية على وضع القطاع.\"",
+    "hit overlap تثبيت / انسحاب",
+    "setting 1: choices not right to left"
+   ]
+  },
+  {
+   "name": "posture drawn wrong",
+   "ok": true,
+   "sample": [
+    "setting 1: 2 chosen segments (1 aria-checked), not one",
+    "the chosen posture is not the one drawn"
+   ]
+  },
+  {
+   "name": "posture overrides",
+   "ok": true,
+   "sample": [
+    "the posture does not say an army's own order has priority (the decision «military»)",
+    "brief text missing: أمر الجيش الخاص (تقدّم، هجوم، توقّف) له الأولوية على وضع القطاع.",
+    "brief text missing: أمر الجيش الخاص (تقدّم، هجوم، توقّف) له الأولوية على وضع القطاع."
+   ]
+  },
+  {
+   "name": "partner band west",
+   "ok": true,
+   "sample": [
+    "the partner's sector is not wholly on the coalition's (east) side of the line",
+    "the map name «البريقة» is on the sector band"
+   ]
+  },
+  {
+   "name": "own band west",
+   "ok": true,
+   "sample": [
+    "the player's sector is not wholly on the coalition's (east) side of the line",
+    "the player's band does not run from south of Ajdabiya to Jalu (as the sheet says)"
+   ]
+  },
+  {
+   "name": "own band short of Jalu",
+   "ok": true,
+   "sample": [
+    "the player's band does not run from south of Ajdabiya to Jalu (as the sheet says)"
+   ]
+  },
+  {
+   "name": "enemy town drawn ours",
+   "ok": true,
+   "sample": [
+    "the place «البريقة» is on the other side but its dot is not hollow"
+   ]
+  },
+  {
+   "name": "partner band hidden",
+   "ok": true,
+   "sample": [
+    "the partner's sector is not drawn (hidden or faint: 0.00)"
+   ]
+  },
+  {
+   "name": "own band invisible",
+   "ok": true,
+   "sample": [
+    "the player's sector is not drawn (hidden or faint: 0.60)"
+   ]
+  },
+  {
+   "name": "band too wide",
+   "ok": true,
+   "sample": [
+    "the player's sector is 140px wide, not 9",
+    "the partner's sector runs under a panel: btn glass ctl tap mode",
+    "the partner's sector is 140px wide, not 9"
+   ]
+  },
+  {
+   "name": "zoom past 1 km/pt",
+   "ok": true,
+   "sample": [
+    "the front line is not wholly on screen in the safe area",
+    "the player's sector is not wholly on screen in the safe area",
+    "the partner's sector is not wholly on screen in the safe area"
+   ]
+  },
+  {
+   "name": "posture in the partner section",
+   "ok": true,
+   "sample": [
+    "the posture is not the sheet's one choice, in the player's sector",
+    "a control in the partner's sector (read-only)"
+   ]
+  },
+  {
+   "name": "attack locked",
+   "ok": true,
+   "sample": [
+    "the posture is locked though this is a war"
+   ]
+  },
+  {
+   "name": "posture segments wide",
+   "ok": true,
+   "sample": [
+    "size 80.0x26.0 for .s-sg (want 60 x 26)",
+    "size 80.0x26.0 for .s-sg (want 60 x 26)",
+    "a posture segment is not 60 pt"
+   ]
+  },
+  {
+   "name": "posture slot empty",
+   "ok": true,
+   "sample": [
+    "the posture's track is wider than its options (an empty slot)"
+   ]
+  },
+  {
+   "name": "own reads the wrong places",
+   "ok": true,
+   "sample": [
+    "a11y: «قطاع الصحراء» does not read all it shows (جنوب، أجدابيا، إلى، جالو)"
+   ]
+  },
+  {
+   "name": "enemy bound dropped",
+   "ok": true,
+   "sample": [
+    "a11y: «قوات حكومة القذافي» does not read all it shows (إلى، 9)"
+   ]
+  },
+  {
+   "name": "dot under the sheet",
+   "ok": true,
+   "sample": [
+    "the dot of «جالو» is under a panel: sheet glass"
+   ]
+  },
+  {
+   "name": "names animated",
+   "ok": true,
+   "sample": [
+    "the front marks or names move (they must be static, L6)"
+   ]
+  },
+  {
+   "name": "name hidden though it fits",
+   "ok": true,
+   "sample": [
+    "the front's name «جالو» is not shown",
+    "the map name «جالو» is hidden though it fits"
+   ]
+  },
+  {
+   "name": "name on the band",
+   "ok": true,
+   "sample": [
+    "the map name «جالو» is on the front line",
+    "the map name «جالو» is on the sector band"
+   ]
+  },
+  {
+   "name": "alert of January",
+   "ok": true,
+   "sample": [
+    "the HUD alert is not the day's («هجوم على أجدابيا»)"
+   ]
+  },
+  {
+   "name": "partner controllable",
+   "ok": true,
+   "sample": [
+    "a control in the partner's sector (read-only)"
+   ]
+  },
+  {
+   "name": "partner not read-only",
+   "ok": true,
+   "sample": [
+    "the partner's sector does not say it is read-only",
+    "brief text missing: للعرض فقط",
+    "brief text missing: للعرض فقط"
+   ]
+  },
+  {
+   "name": "partner flag",
+   "ok": true,
+   "sample": [
+    "the partner's flag is not the National Transitional Council's"
+   ]
+  },
+  {
+   "name": "enemy exact",
+   "ok": true,
+   "sample": [
+    "the enemy is not given as an estimated range (D-19)",
+    "a11y: «قوات حكومة القذافي» does not read all it shows (8)",
+    "brief text missing: نحو 6 إلى 9 تشكيلات · تقدير"
+   ]
+  },
+  {
+   "name": "group unread",
+   "ok": true,
+   "sample": [
+    "a11y: «قطاع الصحراء» does not read all it shows (من، جنوب، أجدابيا، إلى، جالو، جيشان، 11، تشكيلًا)"
+   ]
+  },
+  {
+   "name": "red in the sheet",
+   "ok": true,
+   "sample": [
+    "text colour off-token rgb(224, 48, 42): \"للعرض فقط\"",
+    "red in the front: f-ro",
+    "contrast 3.83 for \"للعرض فقط\""
+   ]
+  },
+  {
+   "name": "coverage reports a string no view shows",
+   "ok": true,
+   "sample": [
+    "front: never shown clear of the fades in any view: نص غير معروض للاختبار"
+   ],
+   "midViewsAdd": []
+  }
+ ]
+}

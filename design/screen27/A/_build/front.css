@@ -1,0 +1,50 @@
+  /* ================= Screen 27, variant A: the front and its sectors ================= */
+  .r-tabs { display: none; }
+  [data-tab="front"] .r-body[data-tab="front"] { display: flex; }
+  .r-body[data-tab="front"] { padding-top: var(--s2); padding-bottom: var(--s3); gap: var(--s2); }
+  /* a sector or the enemy: a quiet card row (36 pt), its flag 22 x 16.5 (4:3, as screen 14's order flag), two lines */
+  .f-sec { display: flex; align-items: center; gap: var(--s2); min-height: 36px; padding-inline: var(--s2); border-radius: var(--r-ctl);
+    background: var(--card); box-shadow: inset 0 0 0 1px var(--stroke); }
+  .f-sec .f-flag { width: 22px; height: 16.5px; border-radius: 2px; box-shadow: 0 0 0 1px rgba(255, 255, 255, .28); }
+  .f-sec .r-at { flex: 1; min-width: 0; }
+  .f-sec .r-at > span { font-size: var(--fs-label); line-height: var(--lh-label); }
+  /* the player's sector: the player's teal (as on the map: its band) */
+  .f-own { box-shadow: inset 0 0 0 1px rgba(63, 224, 208, .55); background: rgba(63, 224, 208, .08); }
+  /* read-only, said in words (no control on the partner's sector) */
+  .f-ro { flex: none; font-size: var(--fs-label); line-height: var(--lh-label); font-weight: 500; color: var(--t2); white-space: nowrap; }
+
+  /* the posture has two options: two 60 pt segments (as screen 19's two-option segments) */
+  .s-pol .s-seg { grid-template-columns: repeat(2, 60px); }
+  /* the HUD's alert of the day; its slot keeps B3's width (the text box, 115.6 pt), so the left column does not move */
+  .toast .alert-prev .txt { min-width: 115.6px; text-align: start; }
+
+  /* the map: the Egypt-centred labels give way to the front's own */
+  .map svg.labels { display: none; }
+  .map svg.front-lay { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+  /* static marks (L6): the line a layer-3 border style, the bands one instanced pass of layer 4 (§2.5); widths in points */
+  .f-band { fill: none; stroke-width: 9px; stroke-linecap: butt; stroke-linejoin: round; vector-effect: non-scaling-stroke; }
+  .f-mine { stroke: var(--teal); stroke-opacity: .6; }
+  .f-partner { stroke: #EAF2F7; stroke-opacity: .45; }
+  .f-line { fill: none; stroke: var(--amber); stroke-width: 2.5px; stroke-dasharray: 7 5; stroke-linecap: round; vector-effect: non-scaling-stroke; }
+  .f-labels { position: absolute; inset: 0; pointer-events: none; }
+  /* the places: the play map's city label at its screen size at any zoom (21 map units at the play zoom 0.63 H / 390, as
+     screen 14 keeps it), weight 600, its dark halo (4 map units, 0.7); the dot r 5 with its 2-unit ring at the same size */
+  .f-labels { --k: var(--kl, 1); }   /* 0.63 H / 390, set with the screen size (assemble.py) */
+  .f-lbl { position: absolute; left: calc(var(--x) * var(--map-s) * 1px); top: calc(var(--y) * var(--map-s) * 1px);
+    transform: translate(-50%, -50%); white-space: nowrap; font-size: calc(21px * var(--k)); line-height: 1.2; font-weight: 600;
+    color: #FFFFFF; --hl: rgba(11, 18, 24, 0.75);
+    text-shadow: 1.25px 0 0 var(--hl), -1.25px 0 0 var(--hl), 0 1.25px 0 var(--hl), 0 -1.25px 0 var(--hl), 0.9px 0.9px 0 var(--hl), -0.9px 0.9px 0 var(--hl),
+      0.9px -0.9px 0 var(--hl), -0.9px -0.9px 0 var(--hl), 0 0 2px var(--hl); }   /* a 1.25 pt dark ring, as the play map's stroke halo */
+  .f-lbl.city { transform: translate(calc(-100% - 8px), -50%); }   /* the name ends beside its dot, west of it (as the play map's labels) */
+  .f-lbl.city.east { transform: translate(8px, -50%); }            /* east of the dot where the front lies west of it */
+  .f-dot { position: absolute; left: calc(var(--x) * var(--map-s) * 1px); top: calc(var(--y) * var(--map-s) * 1px);
+    width: calc(10px * var(--k)); height: calc(10px * var(--k)); transform: translate(-50%, -50%); border-radius: 50%;
+    background: #FFFFFF; box-shadow: 0 0 0 calc(2px * var(--k)) #0B1218; }
+  .f-dot.enemy { background: #0B1218; box-shadow: inset 0 0 0 calc(2px * var(--k)) #FFFFFF, 0 0 0 calc(1px * var(--k)) #0B1218; }   /* held by the other side: hollow */
+  /* the sectors' names and the enemy's side: overlay tags at 11.5 pt */
+  .f-lbl.tag { font-size: var(--fs-sec); line-height: var(--lh-sec); font-weight: 700; }
+  .f-lbl.sec-mine { color: var(--teal); transform: translate(16px, -100%); }   /* above and east of its point on the band: the band runs
+     south-east from there, so the name stays clear of it */
+  .f-lbl.sec-partner { color: #EAF2F7; transform: translate(16px, -55%); }   /* between Ajdabiya's name and the player's band */
+  .f-lbl.enemy-tag { color: var(--t2); font-weight: 600; }
+  .f-labels .cut { display: none; }
