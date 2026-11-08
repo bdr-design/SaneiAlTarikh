@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-08T15:35:54.523Z",
+ "ranAt": "2026-11-08T16:35:03.694Z",
  "inputs": {
   "files": [
    "index.html",
@@ -23,7 +23,7 @@
    "header_cairo.jpg",
    "map_overlay_cairo.svg"
   ],
-  "sha1": "e9c91dc1b2955931daf3ddb114bb4e9f7e8b37ad"
+  "sha1": "091a4e848c1f2cf1c64a478b4ea1fa80d4bd56f1"
  },
  "cleanIssues": {
   "i16promax": [],
@@ -101,7 +101,7 @@
    "sample": [
     "panel not opaque: الأسواق: مصر rgba(9, 17, 25, 0.66)",
     "contrast 3.56 for \"السلع\"",
-    "contrast 3.15 for \"القمح أساسًا · نستورد\""
+    "contrast 4.07 for \"القمح أساسًا · نستورد\""
    ]
   },
   {

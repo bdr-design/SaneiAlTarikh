@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-08T15:35:31.964Z",
+ "ranAt": "2026-11-08T16:34:41.665Z",
  "inputs": {
   "files": [
    "index.html",
@@ -19,7 +19,7 @@
    "header_cairo.jpg",
    "map_overlay_cairo.svg"
   ],
-  "sha1": "426c7daabb6eea64be779b3084f852c59b0bb9dd"
+  "sha1": "2efec0b7f19f22c0f0015f64626d6d8d70bd1001"
  },
  "cleanIssues": {
   "i16promax": [],
@@ -164,8 +164,8 @@
    "ok": true,
    "sample": [
     "map label ليبيا sliced by the screen edge or the side inset",
-    "map label إيران sliced by the screen edge or the side inset",
-    "map label إيران squeezed between a panel and the screen edge"
+    "map label السعودية cut by a panel edge",
+    "map label إيران sliced by the screen edge or the side inset"
    ]
   },
   {
@@ -415,8 +415,8 @@
    "ok": true,
    "sample": [
     "map label ليبيا sliced by the screen edge or the side inset",
-    "map label إيران sliced by the screen edge or the side inset",
-    "map label إيران squeezed between a panel and the screen edge"
+    "map label السعودية cut by a panel edge",
+    "map label إيران sliced by the screen edge or the side inset"
    ]
   },
   {

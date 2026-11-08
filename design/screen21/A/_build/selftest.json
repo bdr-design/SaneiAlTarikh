@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-08T15:38:17.224Z",
+ "ranAt": "2026-11-08T16:37:28.619Z",
  "inputs": {
   "files": [
    "index.html",
@@ -23,7 +23,7 @@
    "header_cairo.jpg",
    "map_overlay_cairo.svg"
   ],
-  "sha1": "67f3c3ecdd44337a71d8463bad307f0da9ef2d19"
+  "sha1": "6d7610d29c1b3a4c1ff2475bbf0c9539dbca57f0"
  },
  "cleanIssues": {
   "i16promax": [],
@@ -74,8 +74,7 @@
    "ok": true,
    "sample": [
     "panel not opaque: العلاقة مع إثيوبيا rgba(9, 17, 25, 0.66)",
-    "contrast 4.07 for \"وقّعتها إثيوبيا في\"",
-    "contrast 3.15 for \"2010\""
+    "contrast 4.07 for \"وقّعتها إثيوبيا في\""
    ]
   },
   {

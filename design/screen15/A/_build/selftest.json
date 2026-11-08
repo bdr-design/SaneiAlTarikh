@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-08T15:46:48.592Z",
+ "ranAt": "2026-11-08T16:46:12.181Z",
  "inputs": {
   "files": [
    "index.html",
@@ -25,7 +25,7 @@
    "../../shared/map_mena_d1.jpg",
    "map_overlay_cairo.svg"
   ],
-  "sha1": "094d165ac066828cd6a549ef3622e7c950f7309f"
+  "sha1": "fde5b98abd647f8a6bacb37d48b860f1db2dbc0a"
  },
  "cleanIssues": {
   "i16promax": [],
