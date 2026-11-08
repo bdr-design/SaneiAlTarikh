@@ -7,8 +7,8 @@ The decision «military» (the owner, 2026-10-20: full control of each army, rep
 first: the owner's proxy (decisions_log 2026-11-08) redefined the item to fit it.
 
 ## Evidence
-§5.4 (fronts and sectors, SetSectorOrder), §6.1 pending-design row, §7 renderer layers 3 (the amber dashed front line)
-and 4 (fronts and arrows, static, ≤3 ms), L6 (static marks), risk row 3 («arrows are static»), D-19 (the enemy as an
+§5.4 (fronts and sectors, SetSectorOrder), §6.1 pending-design row, §2.5 renderer layers 3 (the amber dashed front line,
+≤22 draws) and 4 (fronts and arrows, 3 draws), L6 (static marks), risk row 3 («arrows are static»), D-19 (the enemy as an
 estimate), RH-11, the approved screen 14 (the military map: the army's own orders, its tokens and route, the owner's
 supervised part, untouched here), screen 9 (the army section), the decision «military», the proxy's answer. The example:
 eastern Libya, 10 April 2011, the front between Brega and Ajdabiya south to the desert near Jalu (where it ran in April
