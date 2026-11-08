@@ -1,0 +1,63 @@
+  <!-- The pending orders (screen 26, variant A; §6.4 «A pending-orders badge shows while paused», §6.7 «Pending orders
+       (أوامر معلقة) can be cancelled before time resumes»). The game is paused; the orders given since wait for time to
+       resume: here three, from approved screens (the fuel subsidy of screen 7, the operation of screen 22, the army's order
+       of screen 14). The HUD while paused: the play button carries their count (a badge in the sheet's colour) and the toast
+       slot holds them («3 أوامر تنتظر الاستئناف») and opens this list. A side sheet of no dock section, its own identity
+       (sheetIdentity), the map central (mapCentral). Two bodies and no tab row: the list (&tab=list, default) and the list
+       after one order is cancelled (&tab=less), where the HUD's counts follow (2). The cancel is screen 16's «إلغاء». -->
+  <section class="sheet glass" aria-label="أوامر معلّقة">
+    <div class="r-in">
+      <header class="r-hd">
+        <span class="r-flag"><img src="../../shared/flags/eg.svg" alt="علم مصر"></span>
+        <div class="r-tt">
+          <div class="r-row"><h2 class="r-name">أوامر معلّقة</h2></div>
+          <div class="r-sub">اللعبة متوقفة<span class="r-dot"> · </span><span class="ltr">1</span> يناير <span class="ltr">2011</span></div>
+        </div>
+        <span class="s-emb" aria-hidden="true"><svg class="i"><use href="#i-queue"/></svg></span>
+        <button class="r-x tap" aria-label="إغلاق، العودة إلى الخريطة واللعبة متوقفة"><svg class="i"><use href="#i-close"/></svg></button>
+      </header>
+
+      <div class="r-body" data-tab="list">
+        <section class="r-sec">
+          <h3>تُنفَّذ عند استئناف الوقت</h3>
+          <ol class="o-list" role="list" aria-label="الأوامر المعلّقة، 3">
+            <li class="o-row"><span class="r-tile"><svg class="i"><use href="#i-econ"/></svg></span>
+              <span class="r-at"><b>دعم الوقود <span class="ltr">−10%</span></b><span>الاقتصاد · <span class="ltr">11.7</span> إلى <span class="ltr">10.5</span> مليار $</span></span>
+              <button class="r-btn tap" aria-label="إلغاء أمر دعم الوقود −10%">إلغاء</button></li>
+            <li class="o-row"><span class="r-tile"><svg class="i"><use href="#i-eye"/></svg></span>
+              <span class="r-at"><b>جمع معلومات في السودان</b><span>الاستخبارات · <span class="ltr">3</span> أشهر · <span class="ltr">60</span> مليون $</span></span>
+              <button class="r-btn tap" aria-label="إلغاء أمر جمع معلومات في السودان">إلغاء</button></li>
+            <li class="o-row"><span class="r-tile"><svg class="i"><use href="#i-army"/></svg></span>
+              <span class="r-at"><b>المنطقة الغربية إلى سيوة</b><span>الجيش · <span class="ltr">4</span> تشكيلات · الوصول بعد <span class="ltr">7</span> أيام</span></span>
+              <button class="r-btn tap" aria-label="إلغاء أمر المنطقة الغربية إلى سيوة">إلغاء</button></li>
+          </ol>
+          <p class="s-note">لا يُخصم شيء ولا يتحرك شيء قبل الاستئناف. الأمر الملغى لا يكلّف&nbsp;شيئًا.</p>
+        </section>
+        <button class="r-act tap r-first" aria-label="استئناف الوقت: تُنفَّذ الأوامر الثلاثة">
+          <span class="r-tile"><svg class="i"><use href="#i-play"/></svg></span>
+          <span class="r-at"><b>استئناف الوقت</b><span>تُنفَّذ الأوامر الثلاثة</span></span>
+        </button>
+      </div>
+
+      <div class="r-body" data-tab="less">
+        <section class="r-sec">
+          <h3>تُنفَّذ عند استئناف الوقت</h3>
+          <ol class="o-list" role="list" aria-label="الأوامر المعلّقة، 2">
+            <li class="o-row"><span class="r-tile"><svg class="i"><use href="#i-econ"/></svg></span>
+              <span class="r-at"><b>دعم الوقود <span class="ltr">−10%</span></b><span>الاقتصاد · <span class="ltr">11.7</span> إلى <span class="ltr">10.5</span> مليار $</span></span>
+              <button class="r-btn tap" aria-label="إلغاء أمر دعم الوقود −10%">إلغاء</button></li>
+            <li class="o-row"><span class="r-tile"><svg class="i"><use href="#i-army"/></svg></span>
+              <span class="r-at"><b>المنطقة الغربية إلى سيوة</b><span>الجيش · <span class="ltr">4</span> تشكيلات · الوصول بعد <span class="ltr">7</span> أيام</span></span>
+              <button class="r-btn tap" aria-label="إلغاء أمر المنطقة الغربية إلى سيوة">إلغاء</button></li>
+          </ol>
+          <div class="o-done"><p class="s-note" role="status">أُلغي: جمع معلومات في السودان. لم يُخصم&nbsp;شيء.</p>
+            <button class="r-btn tap" aria-label="تراجع عن إلغاء أمر جمع معلومات في السودان">تراجع</button></div>
+        </section>
+        <button class="r-act tap r-first" aria-label="استئناف الوقت: يُنفَّذ الأمران">
+          <span class="r-tile"><svg class="i"><use href="#i-play"/></svg></span>
+          <span class="r-at"><b>استئناف الوقت</b><span>يُنفَّذ الأمران</span></span>
+        </button>
+      </div>
+      <span class="r-hint" aria-hidden="true"><svg class="i"><use href="#i-chev"/></svg></span>
+    </div>
+  </section>

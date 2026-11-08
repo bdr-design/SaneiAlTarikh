@@ -1,0 +1,22 @@
+  /* ================= Screen 26, variant A: the pending orders ================= */
+  /* its identity (sheetIdentity): a sheet of no dock section; chosen by measure as the others in section_identity.css
+     (ΔE2000 ≥ 16 from every section colour, every meaning hue and the other sheets; contrast 14.3 on the panel). The
+     token --sec-orders is defined with the paused HUD (design/shared/paused_hud.css), which carries the same colour. */
+  [data-sec="orders"] { --sec: var(--sec-orders); }
+  .r-tabs { display: none; }
+  [data-tab="list"] .r-body[data-tab="list"], [data-tab="less"] .r-body[data-tab="less"] { display: flex; }
+  .r-body[data-tab="list"], .r-body[data-tab="less"] { padding-top: var(--s2); padding-bottom: var(--s3); gap: var(--s2); }
+  /* the orders: one card row each (screen 16's pending-order row: 44 pt, the tile, two lines, «إلغاء» at the end) */
+  .o-list { display: flex; flex-direction: column; gap: var(--s1); margin: 0; padding: 0; list-style: none; }
+  .o-row { position: relative; display: flex; align-items: center; gap: var(--s2); height: 44px; padding-inline: 5px var(--s2);
+    border-radius: var(--r-ctl); background: var(--card); box-shadow: inset 0 0 0 1px var(--stroke); }
+  .o-row .r-tile { width: 34px; height: 34px; color: var(--t1); }
+  .o-row .r-at { flex: 1; min-width: 0; }
+  .o-row .r-at > span { font-size: var(--fs-label); line-height: var(--lh-label); }
+  /* the cancel said, with its undo (until time resumes or the sheet closes) */
+  .o-done { display: flex; align-items: center; gap: var(--s2); min-height: 44px; }   /* the undo's 44 pt touch inside its own line */
+  .o-done .s-note { flex: 1; min-width: 0; }
+  /* fit (the shared builder's ladder, measured on the list): level 1, the body's gap 4 pt (iPhone SE: the rows stay
+     44 pt); level 2 and up, the rows 40 pt too (iPhone 13 mini), where the cancels' 44 pt touches meet without overlap */
+  [data-rfit]:not([data-rfit="0"]) .r-body[data-tab="list"], [data-rfit]:not([data-rfit="0"]) .r-body[data-tab="less"] { gap: var(--s1); }
+  [data-rfit]:not([data-rfit="0"]):not([data-rfit="1"]) .o-row { height: 40px; }
