@@ -87,7 +87,7 @@ require(path.join(OUT, '../../shared/check/panelcheck.js'))({
   inputs: ['_build/orders.css', '../../screen7/A/_build/sheet.html', '../../screen22/A/_build/sheet.html', '../../shared/SCREEN14_BRIEF.md'],
   TOK: { sec: 'rgb(240, 231, 60)', ctlH: { '.o-x': 32 }, sheetIcon: [['.o-x svg', 16]], size: [], radius: { '.o-row': 10 } },
   HEAD, BRIEF, screenChecks, DATA: { src: SRC },
-  skipGeneric: ['section colour on a rule', 'why without its subject', 'amber value without its icon', '% before its number', 'brief text hidden', '18 pt misuse', 'clipped text', 'gap', 'faint text', 'text into a control', 'chip arrow against its sign', 'chip not white'],
+  skipGeneric: ['section colour on a rule', 'why without its subject', 'amber value without its icon', '% before its number', 'brief text hidden', '18 pt misuse', 'clipped text', 'gap', 'faint text', 'text into a control', 'chip arrow against its sign', 'chip not white', 'hint chevron missing (no tabs)', 'hint over the content (no tabs)'],
   cases: (d, se) => [
     ['brief text hidden (list)', d, '', '', /brief text not fully visible/, () => { document.querySelector('.r-body[data-tab="list"] .o-row .r-at b').style.opacity = '0'; }],
     ['18 pt misuse (list)', d, '', '.r-at > span { font-size: 18px !important; font-weight: 700 !important; }', /18 pt is for/],
@@ -95,7 +95,10 @@ require(path.join(OUT, '../../shared/check/panelcheck.js'))({
     ['gap (list)', d, '', '.r-body[data-tab="list"] { gap: 6px !important; }', /gap 6 on/],
     ['faint text (list)', d, '', '.o-row .r-at > span { opacity: .35 !important; }', /^contrast [0-3](\.\d+)? for/],
     ['% before its number (list)', d, '', '', /% shown before its number/, () => { document.querySelector('.r-body[data-tab="list"] .s-note').textContent = 'نسبة 20%'; }],
-    ['text into a control (row)', d, '', '.o-row .r-at { transform: translateX(-60px) !important; }', /text over a control|text overlap|hit overlap/],
+    ['text into a control (row)', d, '', '.o-row .r-at { transform: translateX(-60px) !important; }', /text over a control|text overlap|hit overlap|horizontal overflow/],
+    // every body fits whole on every phone (with the fit level), so the scroll-hint plants run with a forced overflow
+    ['hint chevron missing (forced overflow)', se, '', '.r-body[data-tab="list"] > :first-child { margin-top: 200px !important; } .r-hint { display: none !important; }', /scroll hint chevron missing with content below/, () => { document.documentElement.dataset.fbot = '1'; }],
+    ['hint over the content (forced overflow)', se, '', '.r-body[data-tab="list"] > :first-child { margin-top: 200px !important; } .r-hint { bottom: 150px !important; }', /scroll hint not centred in the clear strip/, () => { document.documentElement.dataset.fbot = '1'; }],
     ['running, not paused', d, '', '', /the HUD does not show the game paused/, () => { const p = document.querySelector('.date .play'); p.setAttribute('aria-label', 'إيقاف مؤقت (اللعبة تعمل)'); p.querySelector('use').setAttribute('href', '#i-pause'); }],
     ['play count unsaid', d, '', '', /the HUD does not show the game paused/, () => { document.querySelector('.date .play').setAttribute('aria-label', 'استئناف (اللعبة موقوفة)'); }],
     ['badge wrong', d, '', '', /the HUD badge does not count the 3 orders/, () => { document.querySelector('.o-badge').textContent = '2'; }],
