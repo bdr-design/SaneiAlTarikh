@@ -697,6 +697,9 @@ async function measure(p, d, b3, view) {
       const what = t.tagName === 'text' ? `label ${t.textContent}` : `city dot ${t.getAttribute('data-city')}`;
       if (!t.getClientRects().length) { if (t.tagName === 'text') hiddenLabels.push(t.textContent); return; }
       if (t.tagName === 'circle' && !document.querySelector(`.labels text[data-city="${t.getAttribute('data-city')}"]`).getClientRects().length) issues.push(`map city dot shown without its name: ${t.getAttribute('data-city')}`);
+      // a city's name sits west of its dot, never over it (direction rtl on the shared overlay)
+      if (t.tagName === 'circle') { const nm = document.querySelector(`.labels text[data-city="${t.getAttribute('data-city')}"]`), a = nm.getBBox(), c = t.getBBox();
+        if (nm.getClientRects().length && a.x + a.width > c.x - 2 && a.x < c.x + c.width + 2 && a.y + a.height > c.y && a.y < c.y + c.height) issues.push(`map city dot under its own name: ${t.getAttribute('data-city')}`); }
       const r = t.getBoundingClientRect(), sw = parseFloat(t.getAttribute('stroke-width') || 0) / 2 * m.s;
       const b = { x0: r.left - sw - 2, y0: r.top - sw - 2, x1: r.right + sw + 2, y1: r.bottom + sw + 2 };
       if (r.right + sw <= 0 || r.left - sw >= W || r.bottom + sw <= 0 || r.top - sw >= H) return;      // off screen
@@ -849,6 +852,7 @@ async function selftest(b) {
     ['% before its number', d, '', '', /% shown before its number/, () => { document.querySelector('.a-view[data-adjust="tax"] .a-title span').textContent = 'الشريحة العليا 20%'; }],
     ['brief text scrolled away', d, '&adjust=money', '', /brief text not fully visible: 9\.25%/, () => { const b = document.querySelector('.a-view[data-adjust="money"] > .r-body'); b.scrollTop = b.scrollHeight; }],
     ['hidden effect value', d, '', '', /brief text not fully visible: \+1 خلال 3 أشهر/, () => { document.querySelectorAll('.a-view[data-adjust="tax"] .a-e dd')[2].style.opacity = '0'; }],
+    ['city dot under its name', d, '', '', /map city dot under its own name/, () => { const t = [...document.querySelectorAll('.labels text[data-city]')].find((e) => e.getClientRects().length && document.querySelector(`.labels circle[data-city="${e.getAttribute('data-city')}"]`).getClientRects().length); t.removeAttribute('direction'); }],
     ['map label cut', d, '', '.labels .cut { display: inline !important; }', /map (label|city dot) .* cut by a panel edge/],
     ['map label at the screen edge', d, '', '.labels .cut { display: inline !important; }', /map (label|city dot) .* sliced by the screen edge or the side inset/],
     ['contrast', d, '', '.a-grid { background: rgb(234, 242, 247) !important; }', /^contrast [0-3](\.\d+)? for "الإيرادات"/],

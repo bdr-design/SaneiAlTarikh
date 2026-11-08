@@ -319,6 +319,9 @@ async function measure(p, d, b3) {
       const what = t.tagName === 'text' ? `label ${t.textContent}` : `city dot ${t.getAttribute('data-city')}`;
       if (!t.getClientRects().length) { if (t.tagName === 'text') hiddenLabels.push(t.textContent); return; }
       if (t.tagName === 'circle' && !document.querySelector(`.labels text[data-city="${t.getAttribute('data-city')}"]`).getClientRects().length) issues.push(`map city dot shown without its name: ${t.getAttribute('data-city')}`);
+      // a city's name sits west of its dot, never over it (direction rtl on the shared overlay)
+      if (t.tagName === 'circle') { const nm = document.querySelector(`.labels text[data-city="${t.getAttribute('data-city')}"]`), a = nm.getBBox(), c = t.getBBox();
+        if (nm.getClientRects().length && a.x + a.width > c.x - 2 && a.x < c.x + c.width + 2 && a.y + a.height > c.y && a.y < c.y + c.height) issues.push(`map city dot under its own name: ${t.getAttribute('data-city')}`); }
       const r = t.getBoundingClientRect(), sw = parseFloat(t.getAttribute('stroke-width') || 0) / 2 * m.s;
       const b = { x0: r.left - sw - 2, y0: r.top - sw - 2, x1: r.right + sw + 2, y1: r.bottom + sw + 2 };
       if (b.x1 <= 0 || b.x0 >= W || b.y1 <= 0 || b.y0 >= H) return;
@@ -412,6 +415,7 @@ async function selftest(b) {
     ['off-token colour', '.kv .k { color: #8899aa !important; }', /text colour off-token/],
     ['off-token #A2B6C6', '.kv .k { color: #A2B6C6 !important; }', /text colour off-token rgb\(162, 182, 198\)/],
     ['% before its number', '', /% shown before its number/, () => { document.querySelectorAll('.sf dd')[2].textContent = 'الحكومة · 100%'; }],
+    ['city dot under its name', '', /map city dot under its own name/, () => { const t = [...document.querySelectorAll('.labels text[data-city]')].find((e) => e.getClientRects().length && document.querySelector(`.labels circle[data-city="${e.getAttribute('data-city')}"]`).getClientRects().length); t.removeAttribute('direction'); }],
     ['map label cut', '.labels .cut { display: inline !important; }', /map (label|city dot) .* cut by a panel edge/],
     ['city dot without its name', '', /map city dot shown without its name/, () => { const t = [...document.querySelectorAll('.labels text[data-city]')].find((e) => e.getClientRects().length); t.style.display = 'none'; }],
   ];

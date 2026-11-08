@@ -547,6 +547,9 @@ module.exports = function makeChecker(cfg) {
       const what = t.tagName === 'text' ? `label ${t.textContent}` : `city dot ${t.getAttribute('data-city')}`;
       if (!t.getClientRects().length) { if (t.tagName === 'text') hiddenLabels.push(t.textContent); return; }
       if (t.tagName === 'circle' && !document.querySelector(`.labels text[data-city="${t.getAttribute('data-city')}"]`).getClientRects().length) issues.push(`map city dot shown without its name: ${t.getAttribute('data-city')}`);
+      // a city's name sits west of its dot, never over it (direction rtl on the shared overlay)
+      if (t.tagName === 'circle') { const nm = document.querySelector(`.labels text[data-city="${t.getAttribute('data-city')}"]`), a = nm.getBBox(), c = t.getBBox();
+        if (nm.getClientRects().length && a.x + a.width > c.x - 2 && a.x < c.x + c.width + 2 && a.y + a.height > c.y && a.y < c.y + c.height) issues.push(`map city dot under its own name: ${t.getAttribute('data-city')}`); }
       const r = t.getBoundingClientRect(), sw = parseFloat(t.getAttribute('stroke-width') || 0) / 2 * m.s;
       const b = { x0: r.left - sw - 2, y0: r.top - sw - 2, x1: r.right + sw + 2, y1: r.bottom + sw + 2 };
       if (r.right + sw <= 0 || r.left - sw >= W || r.bottom + sw <= 0 || r.top - sw >= H) return;      // off screen
@@ -657,6 +660,7 @@ module.exports = function makeChecker(cfg) {
       ['fades wrong', d, tabQ(long), '', /fades .* do not match the scroll state/, () => { document.documentElement.dataset.fbot = '0'; }],
       ['hint chevron missing', d, tabQ(long), '.r-hint { display: none !important; }', /scroll hint chevron missing with content below/],
       ['hint over the content', d, tabQ(long), '.r-hint { bottom: 150px !important; }', /scroll hint not centred in the clear strip/],
+      ['city dot under its name', d, '', '', /map city dot under its own name/, () => { const t = [...document.querySelectorAll('.labels text[data-city]')].find((e) => e.getClientRects().length && document.querySelector(`.labels circle[data-city="${e.getAttribute('data-city')}"]`).getClientRects().length); t.removeAttribute('direction'); }],
       ['map label cut', d, '', '.labels .cut { display: inline !important; }', /map (label|city dot) .* (cut by a panel edge|sliced by the screen edge)/],
       ['contrast', d, '', '.r-body { background: rgb(234, 242, 247) !important; }', /^contrast [0-3](\.\d+)? for/],
       ['dock item not marked', d, '', '', new RegExp('the open section «' + cfg.dock + '» is not marked in the dock'), () => { document.querySelector('.dock-item.on').classList.remove('on'); }],

@@ -334,6 +334,9 @@ async function measure(p, d, b3, view) {
       const r = t.getBoundingClientRect(), sw = parseFloat(t.getAttribute('stroke-width') || 0) / 2 * mk, b = { x0: r.left - sw - 2, y0: r.top - sw - 2, x1: r.right + sw + 2, y1: r.bottom + sw + 2 };
       if (r.right + sw <= 0 || r.left - sw >= W || r.bottom + sw <= 0 || r.top - sw >= H) return;
       const what = t.tagName === 'text' ? `label ${t.textContent}` : `city dot ${t.getAttribute('data-city')}`;
+      // a city's name sits west of its dot, never over it (direction rtl on the shared overlay)
+      if (t.tagName === 'circle') { const nm = document.querySelector(`.labels text[data-city="${t.getAttribute('data-city')}"]`), a = nm.getBBox(), c = t.getBBox();
+        if (nm.getClientRects().length && a.x + a.width > c.x - 2 && a.x < c.x + c.width + 2 && a.y + a.height > c.y && a.y < c.y + c.height) issues.push(`map city dot under its own name: ${t.getAttribute('data-city')}`); }
       if (marks.some((m) => inter(b, m))) issues.push(`map ${what} under a unit or a route mark`);
       const under = prs.some((o) => r.left - sw >= o.r.x0 && r.right + sw <= o.r.x1 && r.top - sw >= o.r.y0 && r.bottom + sw <= o.r.y1);
       if (!under && prs.some((o) => inter(b, o.r))) issues.push(`map ${what} cut by a panel edge`);
@@ -485,6 +488,7 @@ async function selftest(b) {
     ['bar read in part', d, '&t=0', '', /a11y: the bar's army does not read all it shows/, () => { document.querySelector('.o-unit').setAttribute('aria-label', 'المنطقة الغربية'); }],
     ['bar order reversed', d, '&t=0', '.orders { flex-direction: row-reverse !important; }', /the order bar is not army, move/],
     ['a weapon name', d, '&t=0', '', /a real weapon name on the map/, () => { document.querySelector('.u-tok[data-u="air"]').setAttribute('aria-label', 'مجموعة جوية، مصر: 24 طائرة F-16، بني سويف'); }],
+    ['city dot under its name', d, '&t=0', '', /map city dot under its own name/, () => { const t = [...document.querySelectorAll('.labels text[data-city]')].find((e) => e.getClientRects().length && document.querySelector(`.labels circle[data-city="${e.getAttribute('data-city')}"]`).getClientRects().length); t.removeAttribute('direction'); }],
     ['label under a token', d, '&t=0', '.labels .cut { display: inline !important; }', /map label .* (under a unit|cut by a panel edge|sliced)/],
     ['faint text', d, '&t=0', '.o-tt span { opacity: .3 !important; }', /^contrast [0-3](\.\d+)? for/],
     ['text overlap', d, '&t=0', '.o-tt span { margin-top: -14px !important; }', /text overlap/],
