@@ -593,7 +593,7 @@
   /* ================= Screen 28, variant A: the country info card ================= */
   .r-tabs { display: none; }
   [data-tab="card"] .r-body[data-tab="card"] { display: flex; }
-  .r-body[data-tab="card"] { padding-top: var(--s2); padding-bottom: var(--s3); gap: var(--s2); }
+  .r-body[data-tab="card"] { padding-top: 0; padding-bottom: var(--s3); gap: var(--s2); }
   /* the tapped country on the map: a white ring (2 pt) and a faint fill, as the selected province's ring (screen 4) */
   .map svg.sel-country { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; }
   .sel-country path { fill: rgba(255, 255, 255, 0.08); stroke: #FFFFFF; stroke-width: 2px; stroke-linejoin: round; vector-effect: non-scaling-stroke; }
@@ -644,12 +644,12 @@
 <div class="map" aria-hidden="true">
   <img src="../../shared/map_mena_d1.jpg" alt="">
   <img src="map_overlay_cairo.svg" alt="">
-  <svg class="sel-country" viewBox="0 0 1688 1097" preserveAspectRatio="none" aria-hidden="true"><path d="M531.8,1060.4L530.5,1054.8L526.3,1054.6L519.5,1047.7L521.6,1034.5L517.0,1035.7L517.8,1031.7L514.5,1022.7L516.6,1018.3L509.5,1014.3L506.6,1017.1L501.5,1017.4L497.8,1012.8L502.4,1003.6L507.6,1000.7L511.4,996.5L509.2,989.1L505.7,983.0L509.8,977.7L519.6,972.2L519.2,969.8L516.1,968.4L516.0,962.2L514.2,960.0L517.2,957.4L523.5,955.6L523.0,950.5L531.8,940.1L532.4,934.9L530.3,929.8L535.9,924.8L542.5,925.5L550.6,923.5L561.1,925.2L562.2,924.3L562.1,793.7L591.7,793.5L591.7,731.8L777.3,731.9L782.5,724.6L784.5,726.3L782.9,731.8L834.6,731.8L845.8,740.7L858.8,738.9L861.3,731.8L944.2,731.8L942.9,732.7L944.3,742.5L951.0,754.1L956.9,760.9L955.1,762.5L953.3,759.7L955.7,761.0L954.5,758.7L952.4,758.1L952.1,755.9L950.8,756.3L950.2,761.4L954.4,776.1L952.8,782.8L954.3,789.9L953.2,793.1L955.5,800.1L954.9,806.6L960.5,828.5L963.6,833.0L967.6,832.2L969.6,833.2L970.1,835.7L975.1,837.0L980.9,842.3L979.5,844.3L981.8,847.3L984.5,847.5L986.3,845.5L985.4,847.5L983.7,848.3L988.4,849.1L988.9,848.1L992.4,852.7L993.3,851.3L995.1,854.5L990.9,858.3L984.2,869.4L980.8,868.8L979.5,870.8L978.4,868.7L974.2,872.0L971.3,870.9L969.0,873.7L962.3,875.9L962.3,880.1L959.6,884.5L956.8,883.8L951.6,884.9L946.9,883.5L947.6,890.3L944.0,900.3L946.3,907.4L937.9,924.3L936.6,932.7L930.6,942.1L933.6,968.5L930.8,977.3L931.6,981.8L929.6,988.5L925.0,995.7L922.1,1005.6L921.7,1015.0L908.8,1016.8L898.9,1032.3L897.8,1035.9L894.8,1039.7L890.6,1042.1L889.6,1044.8L890.6,1050.2L886.8,1059.0L888.0,1061.1L885.9,1068.0L887.2,1069.5L883.6,1074.8L881.1,1076.1L881.0,1074.3L875.8,1070.1L871.2,1073.2L867.1,1079.7L868.5,1089.9L865.7,1096.6L857.3,1096.6L856.3,1091.4L840.5,1077.3L833.3,1074.5L834.6,1071.3L831.7,1048.7L833.1,1046.1L835.4,1030.3L821.2,1030.1L821.7,1036.6L802.0,1036.6L809.9,1045.6L809.9,1057.4L812.3,1064.2L797.9,1077.0L795.6,1082.4L789.7,1090.2L782.6,1096.6L753.4,1096.6L740.7,1088.5L729.0,1094.8L728.9,1096.6L625.7,1096.6L619.1,1091.2L618.7,1086.1L616.8,1084.0L594.6,1088.0L591.9,1096.6L549.7,1096.6L541.7,1083.4L533.2,1076.0L529.0,1069.9L531.8,1060.4ZM955.7,769.9L955.2,770.4L954.9,768.7L955.8,767.4L955.7,769.9Z"/></svg>
+  <svg class="sel-country" viewBox="0 0 1688 1097" preserveAspectRatio="none" aria-hidden="true"><path d="M549.8,1096.6L541.7,1083.4L533.2,1076.0L529.0,1069.9L531.8,1060.4L530.5,1054.8L526.3,1054.6L525.4,1052.7L521.0,1050.3L519.5,1047.7L521.6,1034.5L517.0,1035.7L517.8,1031.7L514.5,1022.7L516.6,1018.3L509.5,1014.3L506.6,1017.1L501.5,1017.4L497.8,1012.8L502.4,1003.6L507.6,1000.7L511.4,996.5L509.2,989.1L507.4,987.3L505.7,983.0L509.8,977.7L519.6,972.2L519.2,969.8L516.1,968.4L515.8,967.2L516.8,966.0L516.0,962.2L514.2,960.0L517.2,957.4L523.5,955.6L523.0,950.5L531.8,940.1L532.4,934.9L530.3,931.6L530.3,929.8L535.9,924.8L542.5,925.5L550.6,923.5L557.6,924.0L561.1,925.2L562.2,924.3L562.1,793.7L591.7,793.5L591.7,731.8L777.3,731.9L780.6,725.8L782.5,724.6L784.5,726.3L782.9,731.8L834.6,731.8L845.8,740.7L858.8,738.9L861.3,731.8L944.2,731.8L942.9,732.7L943.9,733.7L944.3,742.5L951.0,754.1L956.9,760.9L956.7,762.0L955.1,762.5L953.3,759.7L955.7,761.0L954.5,758.7L952.4,758.1L952.1,755.9L950.8,756.3L951.1,760.0L950.2,761.4L952.0,764.5L954.4,776.1L954.2,779.1L952.9,779.7L952.8,782.8L954.3,789.9L953.2,793.1L955.5,800.1L954.9,806.6L957.5,819.4L960.5,828.5L963.6,833.0L967.6,832.2L969.6,833.2L970.1,835.7L975.1,837.0L980.9,842.3L979.5,844.3L981.8,847.3L984.5,847.5L984.7,846.3L986.3,845.5L985.4,847.5L983.7,848.3L988.4,849.1L988.9,848.1L990.1,850.6L991.8,850.6L992.4,852.7L993.3,852.3L992.8,851.0L994.6,852.6L995.1,854.5L990.9,858.3L988.3,864.1L984.9,867.1L984.2,869.4L980.8,868.8L979.5,870.8L979.4,869.0L978.4,868.7L974.2,872.0L971.3,870.9L969.0,873.7L962.3,875.9L962.3,880.1L959.6,884.5L956.8,883.8L951.6,884.9L946.9,883.5L947.6,890.3L946.5,894.4L944.5,896.5L944.0,900.3L945.7,903.2L946.3,907.4L944.3,910.3L940.5,920.8L937.9,924.3L936.3,930.1L936.6,932.7L935.1,934.3L933.6,938.7L930.6,942.1L933.6,968.5L930.8,977.3L931.6,981.8L929.6,988.5L925.0,995.7L922.1,1005.6L921.7,1015.0L921.0,1015.7L918.9,1015.1L908.8,1016.8L901.1,1028.6L900.6,1030.7L898.9,1032.3L897.8,1035.9L894.8,1039.7L890.6,1042.1L889.6,1044.8L890.6,1050.2L886.8,1059.0L888.0,1061.1L885.9,1067.7L887.0,1070.6L881.5,1076.2L881.0,1074.3L875.8,1070.1L871.2,1073.2L867.1,1079.7L868.5,1089.9L867.8,1093.2L865.1,1096.6Z"/></svg>
   <!-- map labels: generated by _build/make_overlay.py from the D1 overlay -->
   <svg class="labels" viewBox="0 0 1688 1097">
     <text x="734" y="587" font-family="-apple-system, 'SF Arabic', 'Geeza Pro', 'Noto Sans Arabic', 'IBM Plex Sans Arabic', sans-serif" font-size="36" font-weight="700" fill="#FFFFFF" stroke="#0B1218" stroke-width="5" stroke-opacity="0.75" paint-order="stroke" text-anchor="middle">مصر</text>
     <text x="370" y="574" font-family="-apple-system, 'SF Arabic', 'Geeza Pro', 'Noto Sans Arabic', 'IBM Plex Sans Arabic', sans-serif" font-size="28" font-weight="700" fill="#FFFFFF" stroke="#0B1218" stroke-width="5" stroke-opacity="0.75" paint-order="stroke" text-anchor="middle">ليبيا</text>
-    <text x="740" y="992" font-family="-apple-system, 'SF Arabic', 'Geeza Pro', 'Noto Sans Arabic', 'IBM Plex Sans Arabic', sans-serif" font-size="28" font-weight="700" fill="#FFFFFF" stroke="#0B1218" stroke-width="5" stroke-opacity="0.75" paint-order="stroke" text-anchor="middle">السودان</text>
+    <text x="700" y="850" font-family="-apple-system, 'SF Arabic', 'Geeza Pro', 'Noto Sans Arabic', 'IBM Plex Sans Arabic', sans-serif" font-size="28" font-weight="700" fill="#FFFFFF" stroke="#0B1218" stroke-width="5" stroke-opacity="0.75" paint-order="stroke" text-anchor="middle">السودان</text>
     <text x="1170" y="669" font-family="-apple-system, 'SF Arabic', 'Geeza Pro', 'Noto Sans Arabic', 'IBM Plex Sans Arabic', sans-serif" font-size="28" font-weight="700" fill="#FFFFFF" stroke="#0B1218" stroke-width="5" stroke-opacity="0.75" paint-order="stroke" text-anchor="middle">السعودية</text>
     <text x="874" y="177" font-family="-apple-system, 'SF Arabic', 'Geeza Pro', 'Noto Sans Arabic', 'IBM Plex Sans Arabic', sans-serif" font-size="28" font-weight="700" fill="#FFFFFF" stroke="#0B1218" stroke-width="5" stroke-opacity="0.75" paint-order="stroke" text-anchor="middle">تركيا</text>
     <text x="1451" y="396" font-family="-apple-system, 'SF Arabic', 'Geeza Pro', 'Noto Sans Arabic', 'IBM Plex Sans Arabic', sans-serif" font-size="28" font-weight="700" fill="#FFFFFF" stroke="#0B1218" stroke-width="5" stroke-opacity="0.75" paint-order="stroke" text-anchor="middle">إيران</text>
@@ -807,9 +807,9 @@
             <span class="r-kv"><b class="ltr">65</b><span>مليار $</span></span>
             <span class="r-kr"><span class="ltr">2010</span></span>
           </div>
-          <div class="r-kpi" role="img" aria-label="الاستقرار: من 40 إلى 50، تقدير">
+          <div class="r-kpi" role="img" aria-label="الاستقرار: من 40% إلى 50%، تقدير">
             <span class="r-kl"><svg class="i"><use href="#i-anchor"/></svg>الاستقرار</span>
-            <span class="r-kv"><b><span class="ltr">40</span> إلى <span class="ltr">50</span></b></span>
+            <span class="r-kv"><b class="ltr">40%</b><span>إلى</span><b class="ltr">50%</b></span>
             <span class="r-kr">تقدير</span>
           </div>
         </div>
@@ -820,7 +820,7 @@
           <div class="r-sc"><dt>شبكتنا</dt><dd><span class="ltr">7</span> من <span class="ltr">10</span></dd></div>
         </dl>
         <p class="s-note">استفتاء جنوب السودان في <span class="ltr">9</span>&nbsp;يناير&nbsp;<span class="ltr">2011</span>.</p>
-        <div class="r-link tap" role="button" tabindex="0" aria-label="العلاقة مع السودان: موجب 18، ما يحركها والإجراءات. يفتح العلاقة">
+        <div class="r-link tap" role="button" tabindex="0" aria-label="العلاقة مع السودان: 18، ما يحركها والإجراءات. يفتح العلاقة">
           <span class="r-tile"><svg class="i"><use href="#i-hands"/></svg></span>
           <span class="r-at"><b>العلاقة مع السودان</b><span>ما يحركها والإجراءات</span></span>
           <svg class="i r-chev"><use href="#i-chev"/></svg>
@@ -944,12 +944,18 @@
   function placeMap() {
     var d = window.__dev, W = d.W, H = d.H;
     var s0 = 0.63 * H / 390, MW0 = 1688, MH0 = 1097;
-    var EG = { x0: 497.8, y0: 724.6, x1: 995.1, y1: 915.9, cx: 764, cy: 578 };   /* screen 28: Sudan's north; the anchor stays Egypt's centre */
+    var EG = { x0: 526.6, y0: 724.6, x1: 995.1, y1: 946.2, cx: 764, cy: 578 };   /* screen 28: Sudan's north; the anchor stays Egypt's centre */
+    var FC = { x: 760.9, y: 835.4 };                              /* screen 28: the focus centre the camera aims at */
     var DELTA = { x0: 722, y0: 428, x1: 836, y1: 492 };        /* Cairo Governorate + the Nile delta */
     var PAD = 8;                                                /* covers the 44 pt hit boxes (at most 6 beyond a control) */
     var LPAD = 2;                                               /* a label closer than 2 pt to a panel edge counts as cut */
     var obs = Array.prototype.filter.call(document.querySelectorAll('.hud .glass'), function (e) { return !e.classList.contains('menu') && e.getClientRects().length; })
       .map(function (e) { return e.getBoundingClientRect(); });
+    var HITS = Array.prototype.filter.call(document.querySelectorAll('.hud .tap'), function (e) { return e.getClientRects().length; }).map(function (e) {
+      var r = e.getBoundingClientRect(), cs = getComputedStyle(e), ps = getComputedStyle(e, '::before'), mm = new DOMMatrixReadOnly(ps.transform === 'none' ? undefined : ps.transform);
+      var w = parseFloat(ps.width), h = parseFloat(ps.height); if (!(w > 0 && h > 0)) return { left: r.left, top: r.top, right: r.right, bottom: r.bottom };
+      var x0 = r.left + parseFloat(cs.borderLeftWidth) + parseFloat(ps.left) + mm.e, y0 = r.top + parseFloat(cs.borderTopWidth) + parseFloat(ps.top) + mm.f;
+      return { left: x0, top: y0, right: x0 + w, bottom: y0 + h }; });   /* screen 28: the hit boxes, for the focus only (labels stay with the panels) */
     var top = $('.top').getBoundingClientRect(), sh = $('.sheet').getBoundingClientRect(), hud = $('.hud').getBoundingClientRect();
     var dk = $('.dock').getClientRects().length ? $('.dock').getBoundingClientRect() : null;
     var tx = (hud.left + sh.left) / 2, ty = (top.bottom + (dk ? dk.top : hud.bottom)) / 2;
@@ -965,7 +971,7 @@
     var LB = units.map(function (u) { return union(u.map(function (e) { var bb = e.getBBox(), w = hw(e); return [bb.x - w, bb.y - w, bb.x + bb.width + w, bb.y + bb.height + w]; })); });
     function clear(r) {
       if (r.x0 < safe.x0 || r.x1 > safe.x1 || r.y0 < safe.y0 || r.y1 > safe.y1) return false;
-      return !obs.some(function (o) { return !(r.x1 <= o.left || r.x0 >= o.right || r.y1 <= o.top || r.y0 >= o.bottom); });
+      return !obs.concat(HITS).some(function (o) { return !(r.x1 <= o.left || r.x0 >= o.right || r.y1 <= o.top || r.y0 >= o.bottom); });
     }
     function box(B, s, cx, cy) { return { x0: cx + (B.x0 - EG.cx) * s - PAD, x1: cx + (B.x1 - EG.cx) * s + PAD, y0: cy + (B.y0 - EG.cy) * s - PAD, y1: cy + (B.y1 - EG.cy) * s + PAD }; }
     /* is a label box cut by a panel edge (partly under a panel, or squeezed against one)? */
@@ -998,7 +1004,7 @@
         var L = cx - EG.cx * s, T = cy - EG.cy * s;
         if (L > 0 || L + MW < W || T > 0 || T + MH < H) continue;       /* map stays full-bleed */
         if (!clear(box(B, s, cx, cy))) continue;
-        var cost = (cx - tx) * (cx - tx) + 2 * (cy - ty) * (cy - ty);
+        var fx = cx + (FC.x - EG.cx) * s, fy = cy + (FC.y - EG.cy) * s, cost = (fx - tx) * (fx - tx) + 2 * (fy - ty) * (fy - ty);
         if (best && cost >= best.cost) continue;                          /* labels only ever add cost */
         cost += 2000 * cuts(s, cx, cy);
         if (!best || cost < best.cost) best = { cost: cost, cx: cx, cy: cy };

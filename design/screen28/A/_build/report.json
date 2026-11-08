@@ -1,7 +1,7 @@
 {
  "se": {
   "device": "667x375 side 0 bottom 0 none",
-  "renderedAt": "2026-11-08T12:34:42.761Z",
+  "renderedAt": "2026-11-08T12:49:43.349Z",
   "inputs": {
    "files": [
     "index.html",
@@ -19,7 +19,9 @@
     "_build/card.css",
     "_build/sudan.json",
     "../../shared/flags/sd.svg",
+    "../../../tools/sudan_outline.py",
     "../../screen10/A/_build/sheet.html",
+    "../../screen11/A/_build/sheet.html",
     "../../screen16/A/_build/sheet.html",
     "../../screen22/A/_build/sheet.html",
     "../../shared/flag_eg.svg",
@@ -28,12 +30,15 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "3ab3e81f151d9694dcea7719e1985b1da56bc750"
+   "sha1": "2109e90268c2a3a4cb47cc48015113bdcf95cca5"
   },
-  "issues": [],
+  "issues": [
+   "card: Sudan's north under the hit box of دولتي",
+   "card_end: Sudan's north under the hit box of دولتي"
+  ],
   "views": {
    "card": {
-    "issueCount": 0,
+    "issueCount": 1,
     "png": true,
     "fit": {
      "top": {
@@ -53,8 +58,8 @@
      "body": {
       "tab": "card",
       "shown": 257,
-      "full": 282,
-      "over": 25,
+      "full": 274,
+      "over": 17,
       "top": 0
      }
     },
@@ -69,26 +74,22 @@
     "map": {
      "ok": true,
      "egyptClear": true,
-     "zoom": 1
+     "zoom": 1.05
     },
     "hiddenLabels": [
-     "إيران",
-     "العراق",
-     "سوريا",
-     "اليمن",
+     "مصر",
+     "الأردن",
+     "عمان",
      "إريتريا",
-     "بنغازي",
-     "الخرطوم",
-     "بغداد",
-     "صنعاء"
+     "الإسكندرية"
     ],
     "typeSeen": {
      "10/500": 21,
      "13/600": 17,
-     "11.5/500": 17,
+     "11.5/500": 18,
      "10/700": 1,
      "11.5/600": 2,
-     "18/700": 6
+     "18/700": 5
     },
     "hits": [
      {
@@ -190,17 +191,17 @@
       "y1": 103
      },
      {
-      "l": "العلاقة مع السودان: موجب 1",
+      "l": "العلاقة مع السودان: 18، ما",
       "x0": 332,
       "x1": 646,
-      "y0": 283,
-      "y1": 327
+      "y0": 275,
+      "y1": 319
      },
      {
       "l": "عملية جديدة في السودان: ال",
       "x0": 332,
       "x1": 646,
-      "y0": 335,
+      "y0": 327,
       "y1": 366
      }
     ],
@@ -397,17 +398,17 @@
       "worst": 16.37
      },
      {
-      "t": "40",
+      "t": "40%",
       "fs": 18,
       "worst": 16.37
      },
      {
       "t": "إلى",
-      "fs": 18,
-      "worst": 16.37
+      "fs": 11.5,
+      "worst": 9.49
      },
      {
-      "t": "50",
+      "t": "50%",
       "fs": 18,
       "worst": 16.37
      },
@@ -500,11 +501,16 @@
       "t": "العلاقة مع السودان",
       "fs": 13,
       "worst": 15.37
+     },
+     {
+      "t": "ما يحركها والإجراءات",
+      "fs": 10,
+      "worst": 8.9
      }
     ]
    },
    "card_end": {
-    "issueCount": 0,
+    "issueCount": 1,
     "png": true,
     "fit": {
      "top": {
@@ -524,9 +530,9 @@
      "body": {
       "tab": "card",
       "shown": 257,
-      "full": 282,
-      "over": 25,
-      "top": 25
+      "full": 274,
+      "over": 17,
+      "top": 17
      }
     },
     "sheet": {
@@ -540,26 +546,22 @@
     "map": {
      "ok": true,
      "egyptClear": true,
-     "zoom": 1
+     "zoom": 1.05
     },
     "hiddenLabels": [
-     "إيران",
-     "العراق",
-     "سوريا",
-     "اليمن",
+     "مصر",
+     "الأردن",
+     "عمان",
      "إريتريا",
-     "بنغازي",
-     "الخرطوم",
-     "بغداد",
-     "صنعاء"
+     "الإسكندرية"
     ],
     "typeSeen": {
      "10/500": 21,
      "13/600": 17,
-     "11.5/500": 17,
+     "11.5/500": 18,
      "10/700": 1,
      "11.5/600": 2,
-     "18/700": 6
+     "18/700": 5
     },
     "hits": [
      {
@@ -661,7 +663,7 @@
       "y1": 103
      },
      {
-      "l": "العلاقة مع السودان: موجب 1",
+      "l": "العلاقة مع السودان: 18، ما",
       "x0": 332,
       "x1": 646,
       "y0": 258,
@@ -971,18 +973,18 @@
    "_build/se_card_end.png"
   ],
   "pngSha1": {
-   "se.png": "3ddf102c4c8c4efd111af0f4e04c109b0845ffb9",
-   "_build/se_hit.png": "0e619b96e2b6aec3d09801d10751ed55a2ce9414",
-   "_build/se_card_end.png": "3c2e507f117aad715648e91fde46cfa76a80b5f6"
+   "se.png": "6a5feb330fd44c28a6ca61459304c1e7ffe4cecb",
+   "_build/se_hit.png": "c94a2b789fa9f9753a6931df0aa8e86c5af87ea0",
+   "_build/se_card_end.png": "47c65e5879a9e75f751ad9df07813159bbd459e7"
   },
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 0
+  "issueCount": 2
  },
  "mini": {
   "device": "812x375 side 50 bottom 21 notch",
-  "renderedAt": "2026-11-08T12:34:47.244Z",
+  "renderedAt": "2026-11-08T12:49:47.987Z",
   "inputs": {
    "files": [
     "index.html",
@@ -1000,7 +1002,9 @@
     "_build/card.css",
     "_build/sudan.json",
     "../../shared/flags/sd.svg",
+    "../../../tools/sudan_outline.py",
     "../../screen10/A/_build/sheet.html",
+    "../../screen11/A/_build/sheet.html",
     "../../screen16/A/_build/sheet.html",
     "../../screen22/A/_build/sheet.html",
     "../../shared/flag_eg.svg",
@@ -1009,12 +1013,15 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "3ab3e81f151d9694dcea7719e1985b1da56bc750"
+   "sha1": "2109e90268c2a3a4cb47cc48015113bdcf95cca5"
   },
-  "issues": [],
+  "issues": [
+   "card: Sudan's north under the hit box of دولتي",
+   "card_end: Sudan's north under the hit box of دولتي"
+  ],
   "views": {
    "card": {
-    "issueCount": 0,
+    "issueCount": 1,
     "png": true,
     "fit": {
      "top": {
@@ -1034,8 +1041,8 @@
      "body": {
       "tab": "card",
       "shown": 243,
-      "full": 282,
-      "over": 39,
+      "full": 274,
+      "over": 31,
       "top": 0
      }
     },
@@ -1053,25 +1060,19 @@
      "zoom": 1.1
     },
     "hiddenLabels": [
-     "إيران",
-     "العراق",
-     "اليمن",
-     "عمان",
+     "مصر",
+     "الأردن",
      "تشاد",
-     "الكويت",
-     "القاهرة",
-     "الإسكندرية",
-     "بنغازي",
-     "صنعاء"
+     "القاهرة"
     ],
     "typeSeen": {
      "14/700": 1,
-     "10/500": 16,
+     "10/500": 21,
      "13/600": 17,
-     "11.5/500": 17,
+     "11.5/500": 18,
      "10/700": 1,
      "11.5/600": 2,
-     "18/700": 6
+     "18/700": 5
     },
     "hits": [
      {
@@ -1173,17 +1174,17 @@
       "y1": 103
      },
      {
-      "l": "العلاقة مع السودان: موجب 1",
+      "l": "العلاقة مع السودان: 18، ما",
       "x0": 435,
       "x1": 749,
-      "y0": 283,
-      "y1": 327
+      "y0": 275,
+      "y1": 319
      },
      {
       "l": "عملية جديدة في السودان: ال",
       "x0": 435,
       "x1": 749,
-      "y0": 335,
+      "y0": 327,
       "y1": 352
      }
     ],
@@ -1385,17 +1386,17 @@
       "worst": 16.37
      },
      {
-      "t": "40",
+      "t": "40%",
       "fs": 18,
       "worst": 16.37
      },
      {
       "t": "إلى",
-      "fs": 18,
-      "worst": 16.37
+      "fs": 11.5,
+      "worst": 9.49
      },
      {
-      "t": "50",
+      "t": "50%",
       "fs": 18,
       "worst": 16.37
      },
@@ -1483,11 +1484,16 @@
       "t": ".",
       "fs": 10,
       "worst": 9.49
+     },
+     {
+      "t": "العلاقة مع السودان",
+      "fs": 13,
+      "worst": 15.37
      }
     ]
    },
    "card_end": {
-    "issueCount": 0,
+    "issueCount": 1,
     "png": true,
     "fit": {
      "top": {
@@ -1507,9 +1513,9 @@
      "body": {
       "tab": "card",
       "shown": 243,
-      "full": 282,
-      "over": 39,
-      "top": 39
+      "full": 274,
+      "over": 31,
+      "top": 31
      }
     },
     "sheet": {
@@ -1526,25 +1532,19 @@
      "zoom": 1.1
     },
     "hiddenLabels": [
-     "إيران",
-     "العراق",
-     "اليمن",
-     "عمان",
+     "مصر",
+     "الأردن",
      "تشاد",
-     "الكويت",
-     "القاهرة",
-     "الإسكندرية",
-     "بنغازي",
-     "صنعاء"
+     "القاهرة"
     ],
     "typeSeen": {
      "14/700": 1,
      "10/500": 21,
      "13/600": 17,
-     "11.5/500": 14,
+     "11.5/500": 15,
      "10/700": 1,
      "11.5/600": 2,
-     "18/700": 6
+     "18/700": 5
     },
     "hits": [
      {
@@ -1646,7 +1646,7 @@
       "y1": 103
      },
      {
-      "l": "العلاقة مع السودان: موجب 1",
+      "l": "العلاقة مع السودان: 18، ما",
       "x0": 435,
       "x1": 749,
       "y0": 244,
@@ -1946,18 +1946,18 @@
    "_build/mini_card_end.png"
   ],
   "pngSha1": {
-   "mini.png": "3a415e7daa74e7bfd15a8aad88db290aec4224e2",
-   "_build/mini_hit.png": "e345be3d2052f5d128718e34d0f686b2829120a0",
-   "_build/mini_card_end.png": "61125df1fea94a90d8c4323624e725b06a9c1c54"
+   "mini.png": "dcbb787c8da31fcf4def61b69aa8de6bf9c80a0e",
+   "_build/mini_hit.png": "5f63df18d90feeca08c6622a98fa4f765e6313b7",
+   "_build/mini_card_end.png": "0a4d12ad75ee67a3f2609dc601773426b8db9e1f"
   },
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 0
+  "issueCount": 2
  },
  "i14": {
   "device": "844x390 side 47 bottom 21 notch",
-  "renderedAt": "2026-11-08T12:34:52.239Z",
+  "renderedAt": "2026-11-08T12:49:52.838Z",
   "inputs": {
    "files": [
     "index.html",
@@ -1975,7 +1975,9 @@
     "_build/card.css",
     "_build/sudan.json",
     "../../shared/flags/sd.svg",
+    "../../../tools/sudan_outline.py",
     "../../screen10/A/_build/sheet.html",
+    "../../screen11/A/_build/sheet.html",
     "../../screen16/A/_build/sheet.html",
     "../../screen22/A/_build/sheet.html",
     "../../shared/flag_eg.svg",
@@ -1984,7 +1986,7 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "3ab3e81f151d9694dcea7719e1985b1da56bc750"
+   "sha1": "2109e90268c2a3a4cb47cc48015113bdcf95cca5"
   },
   "issues": [],
   "views": {
@@ -2009,8 +2011,8 @@
      "body": {
       "tab": "card",
       "shown": 258,
-      "full": 282,
-      "over": 24,
+      "full": 274,
+      "over": 16,
       "top": 0
      }
     },
@@ -2025,25 +2027,24 @@
     "map": {
      "ok": true,
      "egyptClear": true,
-     "zoom": 1.1
+     "zoom": 1.05
     },
     "hiddenLabels": [
      "مصر",
-     "السودان",
+     "ليبيا",
+     "عمان",
      "تشاد",
      "إريتريا",
-     "الكويت",
-     "القاهرة",
-     "الخرطوم"
+     "الكويت"
     ],
     "typeSeen": {
      "14/700": 1,
      "10/500": 31,
      "13/600": 17,
-     "11.5/500": 17,
+     "11.5/500": 18,
      "10/700": 1,
      "11.5/600": 2,
-     "18/700": 6
+     "18/700": 5
     },
     "hits": [
      {
@@ -2201,17 +2202,17 @@
       "y1": 103
      },
      {
-      "l": "العلاقة مع السودان: موجب 1",
+      "l": "العلاقة مع السودان: 18، ما",
       "x0": 470,
       "x1": 784,
-      "y0": 283,
-      "y1": 327
+      "y0": 275,
+      "y1": 319
      },
      {
       "l": "عملية جديدة في السودان: ال",
       "x0": 470,
       "x1": 784,
-      "y0": 335,
+      "y0": 327,
       "y1": 367
      }
     ],
@@ -2463,17 +2464,17 @@
       "worst": 16.37
      },
      {
-      "t": "40",
+      "t": "40%",
       "fs": 18,
       "worst": 16.37
      },
      {
       "t": "إلى",
-      "fs": 18,
-      "worst": 16.37
+      "fs": 11.5,
+      "worst": 9.49
      },
      {
-      "t": "50",
+      "t": "50%",
       "fs": 18,
       "worst": 16.37
      },
@@ -2595,9 +2596,9 @@
      "body": {
       "tab": "card",
       "shown": 258,
-      "full": 282,
-      "over": 24,
-      "top": 24
+      "full": 274,
+      "over": 16,
+      "top": 16
      }
     },
     "sheet": {
@@ -2611,25 +2612,24 @@
     "map": {
      "ok": true,
      "egyptClear": true,
-     "zoom": 1.1
+     "zoom": 1.05
     },
     "hiddenLabels": [
      "مصر",
-     "السودان",
+     "ليبيا",
+     "عمان",
      "تشاد",
      "إريتريا",
-     "الكويت",
-     "القاهرة",
-     "الخرطوم"
+     "الكويت"
     ],
     "typeSeen": {
      "14/700": 1,
      "10/500": 31,
      "13/600": 17,
-     "11.5/500": 17,
+     "11.5/500": 18,
      "10/700": 1,
      "11.5/600": 2,
-     "18/700": 6
+     "18/700": 5
     },
     "hits": [
      {
@@ -2787,7 +2787,7 @@
       "y1": 103
      },
      {
-      "l": "العلاقة مع السودان: موجب 1",
+      "l": "العلاقة مع السودان: 18، ما",
       "x0": 470,
       "x1": 784,
       "y0": 259,
@@ -3152,9 +3152,9 @@
    "_build/i14_card_end.png"
   ],
   "pngSha1": {
-   "i14.png": "9b4f3a9b487d511f695e013c7bbe14cc21b3d71b",
-   "_build/i14_hit.png": "e2f5928d91dd35d0b25ff9016153591d29b4630f",
-   "_build/i14_card_end.png": "3b8c5cb3255605ac4a7d911097bc0d2840baa8ec"
+   "i14.png": "8a9760fa34406f7a6e1fff0e8323980062ff614b",
+   "_build/i14_hit.png": "046760a4477fb2aa42cb81d287de3e5ab40759f8",
+   "_build/i14_card_end.png": "73dab3faca28f8ea5765fb66bf8c966372e4e6fb"
   },
   "env": {
    "chromium": "153.0.8010.12"
@@ -3163,7 +3163,7 @@
  },
  "i16": {
   "device": "852x393 side 59 bottom 21 island",
-  "renderedAt": "2026-11-08T12:34:57.409Z",
+  "renderedAt": "2026-11-08T12:49:57.948Z",
   "inputs": {
    "files": [
     "index.html",
@@ -3181,7 +3181,9 @@
     "_build/card.css",
     "_build/sudan.json",
     "../../shared/flags/sd.svg",
+    "../../../tools/sudan_outline.py",
     "../../screen10/A/_build/sheet.html",
+    "../../screen11/A/_build/sheet.html",
     "../../screen16/A/_build/sheet.html",
     "../../screen22/A/_build/sheet.html",
     "../../shared/flag_eg.svg",
@@ -3190,12 +3192,15 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "3ab3e81f151d9694dcea7719e1985b1da56bc750"
+   "sha1": "2109e90268c2a3a4cb47cc48015113bdcf95cca5"
   },
-  "issues": [],
+  "issues": [
+   "card: Sudan's north under the hit box of دولتي",
+   "card_end: Sudan's north under the hit box of دولتي"
+  ],
   "views": {
    "card": {
-    "issueCount": 0,
+    "issueCount": 1,
     "png": true,
     "fit": {
      "top": {
@@ -3215,8 +3220,8 @@
      "body": {
       "tab": "card",
       "shown": 261,
-      "full": 282,
-      "over": 21,
+      "full": 274,
+      "over": 13,
       "top": 0
      }
     },
@@ -3231,26 +3236,24 @@
     "map": {
      "ok": true,
      "egyptClear": true,
-     "zoom": 1.1
+     "zoom": 1
     },
     "hiddenLabels": [
      "مصر",
-     "السودان",
-     "عمان",
+     "ليبيا",
+     "الأردن",
      "تشاد",
-     "إريتريا",
-     "الكويت",
      "القاهرة",
-     "الخرطوم"
+     "الإسكندرية"
     ],
     "typeSeen": {
      "14/700": 1,
      "10/500": 29,
      "13/600": 17,
-     "11.5/500": 17,
+     "11.5/500": 18,
      "10/700": 1,
      "11.5/600": 2,
-     "18/700": 6
+     "18/700": 5
     },
     "hits": [
      {
@@ -3408,17 +3411,17 @@
       "y1": 103
      },
      {
-      "l": "العلاقة مع السودان: موجب 1",
+      "l": "العلاقة مع السودان: 18، ما",
       "x0": 471,
       "x1": 780,
-      "y0": 283,
-      "y1": 327
+      "y0": 275,
+      "y1": 319
      },
      {
       "l": "عملية جديدة في السودان: ال",
       "x0": 471,
       "x1": 780,
-      "y0": 335,
+      "y0": 327,
       "y1": 370
      }
     ],
@@ -3660,17 +3663,17 @@
       "worst": 16.37
      },
      {
-      "t": "40",
+      "t": "40%",
       "fs": 18,
       "worst": 16.37
      },
      {
       "t": "إلى",
-      "fs": 18,
-      "worst": 16.37
+      "fs": 11.5,
+      "worst": 9.49
      },
      {
-      "t": "50",
+      "t": "50%",
       "fs": 18,
       "worst": 16.37
      },
@@ -3772,7 +3775,7 @@
     ]
    },
    "card_end": {
-    "issueCount": 0,
+    "issueCount": 1,
     "png": true,
     "fit": {
      "top": {
@@ -3792,9 +3795,9 @@
      "body": {
       "tab": "card",
       "shown": 261,
-      "full": 282,
-      "over": 21,
-      "top": 21
+      "full": 274,
+      "over": 13,
+      "top": 13
      }
     },
     "sheet": {
@@ -3808,26 +3811,24 @@
     "map": {
      "ok": true,
      "egyptClear": true,
-     "zoom": 1.1
+     "zoom": 1
     },
     "hiddenLabels": [
      "مصر",
-     "السودان",
-     "عمان",
+     "ليبيا",
+     "الأردن",
      "تشاد",
-     "إريتريا",
-     "الكويت",
      "القاهرة",
-     "الخرطوم"
+     "الإسكندرية"
     ],
     "typeSeen": {
      "14/700": 1,
      "10/500": 29,
      "13/600": 17,
-     "11.5/500": 17,
+     "11.5/500": 18,
      "10/700": 1,
      "11.5/600": 2,
-     "18/700": 6
+     "18/700": 5
     },
     "hits": [
      {
@@ -3985,7 +3986,7 @@
       "y1": 103
      },
      {
-      "l": "العلاقة مع السودان: موجب 1",
+      "l": "العلاقة مع السودان: 18، ما",
       "x0": 471,
       "x1": 780,
       "y0": 262,
@@ -4340,18 +4341,18 @@
    "_build/i16_card_end.png"
   ],
   "pngSha1": {
-   "i16.png": "cd0096ada058a7f509e66c9cb93c8a999279ae88",
-   "_build/i16_hit.png": "0359a38e1158472e174fcd05d2d8af6d7ec6c204",
-   "_build/i16_card_end.png": "e8e53f797bbf8bcfaacb1b7fc6caea47ad9d132b"
+   "i16.png": "03825361c905a521fc92664bed8f4f97272d6072",
+   "_build/i16_hit.png": "769ec6c49ab4e423253daf60b20995cd59e448cb",
+   "_build/i16_card_end.png": "a051f507f503a447d7fe906f703241cc72147ca8"
   },
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 0
+  "issueCount": 2
  },
  "i16pro": {
   "device": "874x402 side 62 bottom 21 island",
-  "renderedAt": "2026-11-08T12:35:02.648Z",
+  "renderedAt": "2026-11-08T12:50:02.926Z",
   "inputs": {
    "files": [
     "index.html",
@@ -4369,7 +4370,9 @@
     "_build/card.css",
     "_build/sudan.json",
     "../../shared/flags/sd.svg",
+    "../../../tools/sudan_outline.py",
     "../../screen10/A/_build/sheet.html",
+    "../../screen11/A/_build/sheet.html",
     "../../screen16/A/_build/sheet.html",
     "../../screen22/A/_build/sheet.html",
     "../../shared/flag_eg.svg",
@@ -4378,7 +4381,7 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "3ab3e81f151d9694dcea7719e1985b1da56bc750"
+   "sha1": "2109e90268c2a3a4cb47cc48015113bdcf95cca5"
   },
   "issues": [],
   "views": {
@@ -4403,8 +4406,8 @@
      "body": {
       "tab": "card",
       "shown": 270,
-      "full": 282,
-      "over": 12,
+      "full": 274,
+      "over": 4,
       "top": 0
      }
     },
@@ -4419,26 +4422,24 @@
     "map": {
      "ok": true,
      "egyptClear": true,
-     "zoom": 1.1
+     "zoom": 1.05
     },
     "hiddenLabels": [
      "مصر",
-     "السودان",
-     "الأردن",
+     "ليبيا",
      "عمان",
      "تشاد",
      "إريتريا",
-     "القاهرة",
-     "الخرطوم"
+     "الكويت"
     ],
     "typeSeen": {
      "14/700": 1,
      "10/500": 31,
      "13/600": 17,
-     "11.5/500": 17,
+     "11.5/500": 18,
      "10/700": 1,
      "11.5/600": 2,
-     "18/700": 6
+     "18/700": 5
     },
     "hits": [
      {
@@ -4596,18 +4597,18 @@
       "y1": 103
      },
      {
-      "l": "العلاقة مع السودان: موجب 1",
+      "l": "العلاقة مع السودان: 18، ما",
       "x0": 485,
       "x1": 799,
-      "y0": 283,
-      "y1": 327
+      "y0": 275,
+      "y1": 319
      },
      {
       "l": "عملية جديدة في السودان: ال",
       "x0": 485,
       "x1": 799,
-      "y0": 335,
-      "y1": 379
+      "y0": 327,
+      "y1": 371
      }
     ],
     "minContrast": 5.42,
@@ -4858,17 +4859,17 @@
       "worst": 16.37
      },
      {
-      "t": "40",
+      "t": "40%",
       "fs": 18,
       "worst": 16.37
      },
      {
       "t": "إلى",
-      "fs": 18,
-      "worst": 16.37
+      "fs": 11.5,
+      "worst": 9.49
      },
      {
-      "t": "50",
+      "t": "50%",
       "fs": 18,
       "worst": 16.37
      },
@@ -4990,9 +4991,9 @@
      "body": {
       "tab": "card",
       "shown": 270,
-      "full": 282,
-      "over": 12,
-      "top": 12
+      "full": 274,
+      "over": 4,
+      "top": 4
      }
     },
     "sheet": {
@@ -5006,26 +5007,24 @@
     "map": {
      "ok": true,
      "egyptClear": true,
-     "zoom": 1.1
+     "zoom": 1.05
     },
     "hiddenLabels": [
      "مصر",
-     "السودان",
-     "الأردن",
+     "ليبيا",
      "عمان",
      "تشاد",
      "إريتريا",
-     "القاهرة",
-     "الخرطوم"
+     "الكويت"
     ],
     "typeSeen": {
      "14/700": 1,
      "10/500": 31,
      "13/600": 17,
-     "11.5/500": 17,
+     "11.5/500": 18,
      "10/700": 1,
      "11.5/600": 2,
-     "18/700": 6
+     "18/700": 5
     },
     "hits": [
      {
@@ -5183,7 +5182,7 @@
       "y1": 103
      },
      {
-      "l": "العلاقة مع السودان: موجب 1",
+      "l": "العلاقة مع السودان: 18، ما",
       "x0": 485,
       "x1": 799,
       "y0": 271,
@@ -5420,6 +5419,11 @@
       "worst": 16.37
      },
      {
+      "t": "إلى",
+      "fs": 11.5,
+      "worst": 9.49
+     },
+     {
       "t": "تقدير",
       "fs": 11.5,
       "worst": 16.37
@@ -5558,9 +5562,9 @@
    "_build/i16pro_card_end.png"
   ],
   "pngSha1": {
-   "i16pro.png": "6229b933eefaad44ea31673aa90798e9d9b47021",
-   "_build/i16pro_hit.png": "6c2eca3643980109877b102b68f99b3d58a16f62",
-   "_build/i16pro_card_end.png": "5ceebb772b9bd21688133d2834f6d98e0e196064"
+   "i16pro.png": "3f6ecc76da2bec2b621f3340c8eb53ac946b8352",
+   "_build/i16pro_hit.png": "4c030ec1b49d64ed99fa661fa873b16b49b92f94",
+   "_build/i16pro_card_end.png": "f979788c93d3e581d122681f66148a77fcbf4a4b"
   },
   "env": {
    "chromium": "153.0.8010.12"
@@ -5569,7 +5573,7 @@
  },
  "i11": {
   "device": "896x414 side 48 bottom 21 notch",
-  "renderedAt": "2026-11-08T12:35:07.976Z",
+  "renderedAt": "2026-11-08T12:50:07.917Z",
   "inputs": {
    "files": [
     "index.html",
@@ -5587,7 +5591,9 @@
     "_build/card.css",
     "_build/sudan.json",
     "../../shared/flags/sd.svg",
+    "../../../tools/sudan_outline.py",
     "../../screen10/A/_build/sheet.html",
+    "../../screen11/A/_build/sheet.html",
     "../../screen16/A/_build/sheet.html",
     "../../screen22/A/_build/sheet.html",
     "../../shared/flag_eg.svg",
@@ -5596,7 +5602,7 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "3ab3e81f151d9694dcea7719e1985b1da56bc750"
+   "sha1": "2109e90268c2a3a4cb47cc48015113bdcf95cca5"
   },
   "issues": [],
   "views": {
@@ -5641,21 +5647,19 @@
     },
     "hiddenLabels": [
      "مصر",
-     "السودان",
-     "الأردن",
-     "تشاد",
-     "إريتريا",
-     "القاهرة",
-     "الخرطوم"
+     "ليبيا",
+     "عمان",
+     "الإمارات",
+     "تشاد"
     ],
     "typeSeen": {
      "14/700": 1,
      "10/500": 31,
      "13/600": 17,
-     "11.5/500": 17,
+     "11.5/500": 18,
      "10/700": 1,
      "11.5/600": 2,
-     "18/700": 6
+     "18/700": 5
     },
     "hits": [
      {
@@ -5813,18 +5817,18 @@
       "y1": 103
      },
      {
-      "l": "العلاقة مع السودان: موجب 1",
+      "l": "العلاقة مع السودان: 18، ما",
       "x0": 517,
       "x1": 835,
-      "y0": 283,
-      "y1": 327
+      "y0": 275,
+      "y1": 319
      },
      {
       "l": "عملية جديدة في السودان: ال",
       "x0": 517,
       "x1": 835,
-      "y0": 335,
-      "y1": 379
+      "y0": 327,
+      "y1": 371
      }
     ],
     "minContrast": 5.42,
@@ -6075,17 +6079,17 @@
       "worst": 16.37
      },
      {
-      "t": "40",
+      "t": "40%",
       "fs": 18,
       "worst": 16.37
      },
      {
       "t": "إلى",
-      "fs": 18,
-      "worst": 16.37
+      "fs": 11.5,
+      "worst": 9.49
      },
      {
-      "t": "50",
+      "t": "50%",
       "fs": 18,
       "worst": 16.37
      },
@@ -6257,21 +6261,19 @@
     },
     "hiddenLabels": [
      "مصر",
-     "السودان",
-     "الأردن",
-     "تشاد",
-     "إريتريا",
-     "القاهرة",
-     "الخرطوم"
+     "ليبيا",
+     "عمان",
+     "الإمارات",
+     "تشاد"
     ],
     "typeSeen": {
      "14/700": 1,
      "10/500": 31,
      "13/600": 17,
-     "11.5/500": 17,
+     "11.5/500": 18,
      "10/700": 1,
      "11.5/600": 2,
-     "18/700": 6
+     "18/700": 5
     },
     "hits": [
      {
@@ -6429,18 +6431,18 @@
       "y1": 103
      },
      {
-      "l": "العلاقة مع السودان: موجب 1",
+      "l": "العلاقة مع السودان: 18، ما",
       "x0": 517,
       "x1": 835,
-      "y0": 283,
-      "y1": 327
+      "y0": 275,
+      "y1": 319
      },
      {
       "l": "عملية جديدة في السودان: ال",
       "x0": 517,
       "x1": 835,
-      "y0": 335,
-      "y1": 379
+      "y0": 327,
+      "y1": 371
      }
     ],
     "minContrast": 5.42,
@@ -6691,17 +6693,17 @@
       "worst": 16.37
      },
      {
-      "t": "40",
+      "t": "40%",
       "fs": 18,
       "worst": 16.37
      },
      {
       "t": "إلى",
-      "fs": 18,
-      "worst": 16.37
+      "fs": 11.5,
+      "worst": 9.49
      },
      {
-      "t": "50",
+      "t": "50%",
       "fs": 18,
       "worst": 16.37
      },
@@ -6844,9 +6846,9 @@
    "_build/i11_card_end.png"
   ],
   "pngSha1": {
-   "i11.png": "7e2304721be555e5cc80b5f184fb45ac7d1001f1",
-   "_build/i11_hit.png": "5b3dc413c8fd616a4f483afd66ecfebcf0319edd",
-   "_build/i11_card_end.png": "7e2304721be555e5cc80b5f184fb45ac7d1001f1"
+   "i11.png": "ebd59e81abc7498e01f78e0163bf3b2012cf1865",
+   "_build/i11_hit.png": "355b9ccefe353f68c61a102d3130b76a02bce0fd",
+   "_build/i11_card_end.png": "ebd59e81abc7498e01f78e0163bf3b2012cf1865"
   },
   "env": {
    "chromium": "153.0.8010.12"
@@ -6855,7 +6857,7 @@
  },
  "i16promax": {
   "device": "956x440 side 62 bottom 21 island",
-  "renderedAt": "2026-11-08T12:35:13.155Z",
+  "renderedAt": "2026-11-08T12:50:12.948Z",
   "inputs": {
    "files": [
     "index.html",
@@ -6873,7 +6875,9 @@
     "_build/card.css",
     "_build/sudan.json",
     "../../shared/flags/sd.svg",
+    "../../../tools/sudan_outline.py",
     "../../screen10/A/_build/sheet.html",
+    "../../screen11/A/_build/sheet.html",
     "../../screen16/A/_build/sheet.html",
     "../../screen22/A/_build/sheet.html",
     "../../shared/flag_eg.svg",
@@ -6882,12 +6886,15 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "3ab3e81f151d9694dcea7719e1985b1da56bc750"
+   "sha1": "2109e90268c2a3a4cb47cc48015113bdcf95cca5"
   },
-  "issues": [],
+  "issues": [
+   "card: Sudan's north under the hit box of دولتي",
+   "card_end: Sudan's north under the hit box of دولتي"
+  ],
   "views": {
    "card": {
-    "issueCount": 0,
+    "issueCount": 1,
     "png": true,
     "fit": {
      "top": {
@@ -6927,19 +6934,17 @@
     },
     "hiddenLabels": [
      "مصر",
-     "عمان",
      "تشاد",
-     "الكويت",
-     "القاهرة"
+     "الكويت"
     ],
     "typeSeen": {
      "14/700": 1,
      "10/500": 31,
      "13/600": 17,
-     "11.5/500": 17,
+     "11.5/500": 18,
      "10/700": 1,
      "11.5/600": 2,
-     "18/700": 6
+     "18/700": 5
     },
     "hits": [
      {
@@ -7097,18 +7102,18 @@
       "y1": 103
      },
      {
-      "l": "العلاقة مع السودان: موجب 1",
+      "l": "العلاقة مع السودان: 18، ما",
       "x0": 549,
       "x1": 881,
-      "y0": 283,
-      "y1": 327
+      "y0": 275,
+      "y1": 319
      },
      {
       "l": "عملية جديدة في السودان: ال",
       "x0": 549,
       "x1": 881,
-      "y0": 335,
-      "y1": 379
+      "y0": 327,
+      "y1": 371
      }
     ],
     "minContrast": 5.42,
@@ -7359,17 +7364,17 @@
       "worst": 16.37
      },
      {
-      "t": "40",
+      "t": "40%",
       "fs": 18,
       "worst": 16.37
      },
      {
       "t": "إلى",
-      "fs": 18,
-      "worst": 16.37
+      "fs": 11.5,
+      "worst": 9.49
      },
      {
-      "t": "50",
+      "t": "50%",
       "fs": 18,
       "worst": 16.37
      },
@@ -7501,7 +7506,7 @@
     ]
    },
    "card_end": {
-    "issueCount": 0,
+    "issueCount": 1,
     "png": true,
     "fit": {
      "top": {
@@ -7541,19 +7546,17 @@
     },
     "hiddenLabels": [
      "مصر",
-     "عمان",
      "تشاد",
-     "الكويت",
-     "القاهرة"
+     "الكويت"
     ],
     "typeSeen": {
      "14/700": 1,
      "10/500": 31,
      "13/600": 17,
-     "11.5/500": 17,
+     "11.5/500": 18,
      "10/700": 1,
      "11.5/600": 2,
-     "18/700": 6
+     "18/700": 5
     },
     "hits": [
      {
@@ -7711,18 +7714,18 @@
       "y1": 103
      },
      {
-      "l": "العلاقة مع السودان: موجب 1",
+      "l": "العلاقة مع السودان: 18، ما",
       "x0": 549,
       "x1": 881,
-      "y0": 283,
-      "y1": 327
+      "y0": 275,
+      "y1": 319
      },
      {
       "l": "عملية جديدة في السودان: ال",
       "x0": 549,
       "x1": 881,
-      "y0": 335,
-      "y1": 379
+      "y0": 327,
+      "y1": 371
      }
     ],
     "minContrast": 5.42,
@@ -7973,17 +7976,17 @@
       "worst": 16.37
      },
      {
-      "t": "40",
+      "t": "40%",
       "fs": 18,
       "worst": 16.37
      },
      {
       "t": "إلى",
-      "fs": 18,
-      "worst": 16.37
+      "fs": 11.5,
+      "worst": 9.49
      },
      {
-      "t": "50",
+      "t": "50%",
       "fs": 18,
       "worst": 16.37
      },
@@ -8126,13 +8129,13 @@
    "_build/i16promax_card_end.png"
   ],
   "pngSha1": {
-   "i16promax.png": "55983fa3db16a9512dde59221cf18381f1f18ffd",
-   "_build/i16promax_hit.png": "8d183507de976dea75facfb38739b9cf859f9aa8",
-   "_build/i16promax_card_end.png": "55983fa3db16a9512dde59221cf18381f1f18ffd"
+   "i16promax.png": "95164a2880152254f5fbd478fd5760cd879218d1",
+   "_build/i16promax_hit.png": "076441f3db2aecfa5a46980ab2018dee1a147634",
+   "_build/i16promax_card_end.png": "95164a2880152254f5fbd478fd5760cd879218d1"
   },
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 0
+  "issueCount": 2
  }
 }

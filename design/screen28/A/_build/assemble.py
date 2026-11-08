@@ -17,10 +17,26 @@ SYMBOLS = """    <symbol id="i-hands" viewBox="0 0 24 24"><path d="M2.5 11.5 6 8
 SUBS = [
     ('<img src="map_overlay_cairo.svg" alt="">', '<img src="map_overlay_cairo.svg" alt="">\n  '
      '<svg class="sel-country" viewBox="0 0 1688 1097" preserveAspectRatio="none" aria-hidden="true"><path d="%s"/></svg>' % SD['d']),
-    # the map's focus: the country's north (to 16° N), clear of every panel; the zoom 0.6 to 1.1 x the play screen's
+    # the country's name on its north, in the map focus (the base map sets it at 13° N, south of the focus)
+    ('<text x="740" y="992" ', '<text x="700" y="850" '),
+    # the map's focus: the country's north (to 15° N, Khartoum and its name included), clear of every panel; the
+    # camera centres the focus (not Egypt) in the open map; the zoom 0.6 to 1.1 x the play screen's
     ('    var EG = { x0: 583, y0: 424, x1: 945, y1: 732, cx: 764, cy: 578 };',
-     '    var EG = { x0: %.1f, y0: %.1f, x1: %.1f, y1: %.1f, cx: 764, cy: 578 };   /* screen 28: Sudan\'s north; the anchor stays Egypt\'s centre */'
-     % (N['x0'], N['y0'], N['x1'], N['y1'])),
+     '    var EG = { x0: %.1f, y0: %.1f, x1: %.1f, y1: %.1f, cx: 764, cy: 578 };   /* screen 28: Sudan\'s north; the anchor stays Egypt\'s centre */\n'
+     '    var FC = { x: %.1f, y: %.1f };                              /* screen 28: the focus centre the camera aims at */'
+     % (N['x0'], N['y0'], N['x1'], N['y1'], (N['x0'] + N['x1']) / 2, (N['y0'] + N['y1']) / 2)),
+    ('        var cost = (cx - tx) * (cx - tx) + 2 * (cy - ty) * (cy - ty);',
+     '        var fx = cx + (FC.x - EG.cx) * s, fy = cy + (FC.y - EG.cy) * s, cost = (fx - tx) * (fx - tx) + 2 * (fy - ty) * (fy - ty);'),
+    # the controls' 44 pt hit boxes (their ::before, as the shared checker measures them) keep clear of the focus too
+    ("    var top = $('.top').getBoundingClientRect()",
+     "    var HITS = Array.prototype.filter.call(document.querySelectorAll('.hud .tap'), function (e) { return e.getClientRects().length; }).map(function (e) {\n"
+     "      var r = e.getBoundingClientRect(), cs = getComputedStyle(e), ps = getComputedStyle(e, '::before'), mm = new DOMMatrixReadOnly(ps.transform === 'none' ? undefined : ps.transform);\n"
+     "      var w = parseFloat(ps.width), h = parseFloat(ps.height); if (!(w > 0 && h > 0)) return { left: r.left, top: r.top, right: r.right, bottom: r.bottom };\n"
+     "      var x0 = r.left + parseFloat(cs.borderLeftWidth) + parseFloat(ps.left) + mm.e, y0 = r.top + parseFloat(cs.borderTopWidth) + parseFloat(ps.top) + mm.f;\n"
+     "      return { left: x0, top: y0, right: x0 + w, bottom: y0 + h }; });   /* screen 28: the hit boxes, for the focus only (labels stay with the panels) */\n"
+     "    var top = $('.top').getBoundingClientRect()"),
+    ('      return !obs.some(function (o) { return !(r.x1 <= o.left || r.x0 >= o.right || r.y1 <= o.top || r.y0 >= o.bottom); });',
+     '      return !obs.concat(HITS).some(function (o) { return !(r.x1 <= o.left || r.x0 >= o.right || r.y1 <= o.top || r.y0 >= o.bottom); });'),
     ('    for (z = 1.3; z >= 0.8 - 1e-6 && !pick; z -= 0.05)', '    for (z = 1.1; z >= 0.6 - 1e-6 && !pick; z -= 0.05)'),
 ]
 panel_page.build(R, S, D, title='السودان', sec='foreign', dock_label='الخارجية', dock_icon='i-globe',

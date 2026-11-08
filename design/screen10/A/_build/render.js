@@ -11,7 +11,7 @@ const OUT = path.resolve(__dirname, '..');
 
 const HEAD = ['الخارجية', 'معترف بها', 'مصر · عضو في الأمم المتحدة', 'نظرة عامة', 'العلاقات', 'المعاهدات', 'مجلس الأمن'];
 const RELS = [['الولايات المتحدة', 'حليف · معونة عسكرية', '+62'], ['السعودية', 'شريك · عمالة واستثمار', '+58'], ['الاتحاد الأوروبي', 'اتفاقية شراكة', '+44'],
-  ['الصين', 'تجارة واستثمار', '+30'], ['إسرائيل', 'سلام بارد · معاهدة 1979', '+12'], ['إثيوبيا', 'خلاف مياه النيل', '−22'], ['قطر', 'توتر إعلامي', '−30'],
+  ['الصين', 'تجارة واستثمار', '+30'], ['السودان', 'مياه النيل · حلايب', '+18'], ['إسرائيل', 'سلام بارد · معاهدة 1979', '+12'], ['إثيوبيا', 'خلاف مياه النيل', '−22'], ['قطر', 'توتر إعلامي', '−30'],
   ['الجزائر', 'أزمة مباراة 2009', '−41'], ['سوريا', 'فتور منذ 2006', '−44'], ['إيران', 'بلا سفارات منذ 1980', '−48']];
 // the pairs a swap must not pass: each label with its value, per tab
 const PAIRS = {
@@ -83,13 +83,13 @@ require(path.join(OUT, '../../shared/check/panelcheck.js'))({
     ['influence rise in amber', d, '', '.r-kpi:first-child .r-kr { color: var(--amber) !important; }', /influence's rise is not blue with its up arrow/],
     ['recognition swapped', d, '', '', /«الحكومة» is not «معترف بها»/, new Function("document.querySelectorAll('" + O + ".r-sc dd')[1].textContent = 'غير معترف بها';")],
     ['relations not best first', d, '&tab=relations', '', /the relations are not best first/, new Function("const r = document.querySelectorAll('" + R + ".f-rel'); r[0].before(r[3]);")],
-    ['standings swapped', d, '&tab=relations', '', /the relations differ from the brief/, new Function("const r = document.querySelectorAll('" + R + ".f-rel'); const a = r[5].querySelector('.r-at > span'), b = r[6].querySelector('.r-at > span'), x = a.innerHTML; a.innerHTML = b.innerHTML; b.innerHTML = x;")],
-    ['relation arrow wrong', d, '&tab=relations', '', /relation «إثيوبيا»: the arrow does not show its trend/, new Function("document.querySelectorAll('" + R + ".f-rel')[5].querySelector('use').setAttribute('href', '#t-up');")],
-    ['arrow on a steady relation', d, '&tab=relations', '', /relation «قطر»: the arrow does not show its trend/, new Function("document.querySelectorAll('" + R + ".f-rel')[6].querySelector('.f-v').insertAdjacentHTML('afterbegin', '<svg class=\"r-arr\" aria-hidden=\"true\"><use href=\"#t-flat\"/></svg>');")],
-    ['amber on a steady relation', d, '&tab=relations', '', /relation «قطر»: amber marks a fall/, new Function("document.querySelectorAll('" + R + ".f-rel')[6].querySelector('.f-v').classList.add('r-amber');")],
+    ['standings swapped', d, '&tab=relations', '', /the relations differ from the brief/, new Function("const r = document.querySelectorAll('" + R + ".f-rel'); const a = r[6].querySelector('.r-at > span'), b = r[7].querySelector('.r-at > span'), x = a.innerHTML; a.innerHTML = b.innerHTML; b.innerHTML = x;")],
+    ['relation arrow wrong', d, '&tab=relations', '', /relation «إثيوبيا»: the arrow does not show its trend/, new Function("document.querySelectorAll('" + R + ".f-rel')[6].querySelector('use').setAttribute('href', '#t-up');")],
+    ['arrow on a steady relation', d, '&tab=relations', '', /relation «قطر»: the arrow does not show its trend/, new Function("document.querySelectorAll('" + R + ".f-rel')[7].querySelector('.f-v').insertAdjacentHTML('afterbegin', '<svg class=\"r-arr\" aria-hidden=\"true\"><use href=\"#t-flat\"/></svg>');")],
+    ['amber on a steady relation', d, '&tab=relations', '', /relation «قطر»: amber marks a fall/, new Function("document.querySelectorAll('" + R + ".f-rel')[7].querySelector('.f-v').classList.add('r-amber');")],
     ['positive read as negative', d, '&tab=relations', '', /a11y: relation «الولايات المتحدة» does not say its sign right/, new Function("document.querySelector('" + R + ".f-rel').setAttribute('aria-label', 'الولايات المتحدة: سالب 62، حليف، معونة عسكرية، دون تغير. يفتح علاقتها');")],
     ['relation not a button', d, '&tab=relations', '', /relation «السعودية» does not open/, new Function("const r = document.querySelectorAll('" + R + ".f-rel')[1]; r.classList.remove('tap'); r.setAttribute('role', 'img');")],
-    ['strained count off', d, '&tab=relations', '', /the strained relations listed \(2\) are not the overview's 3/, new Function("document.querySelectorAll('" + R + ".f-rel')[7].remove();")],
+    ['strained count off', d, '&tab=relations', '', /the strained relations listed \(2\) are not the overview's 3/, new Function("document.querySelectorAll('" + R + ".f-rel')[8].remove();")],
     ['relation reversed', d, '&tab=relations', '.f-rel { flex-direction: row-reverse !important; }', /relation 1: order must be/],
     ['blocs swapped', d, '&tab=treaties', '', /«الجامعة العربية» is not «دولة المقر»/, new Function("const dd = document.querySelectorAll('" + T2 + ".r-sc dd'); dd[0].textContent = 'عضو'; dd[1].textContent = 'دولة المقر';")],
     ['council lists swapped', d, '&tab=un', '', /«منتخبون حتى 2011» is not/, new Function("const s = document.querySelectorAll('" + U + ".f-un > span:last-child'); const x = s[1].textContent; s[1].textContent = s[2].textContent; s[2].textContent = x;")],

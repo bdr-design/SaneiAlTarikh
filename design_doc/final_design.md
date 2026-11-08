@@ -858,6 +858,14 @@ bound here; each item is a line in `docs/perf.md` (L12) and a test where one is 
   to one rebuild per snapshot publish; the allocation runs on the simulation engine inside the front-execution line (0.20
   ms), the geometry on the map engine's background buffer task; nothing on the main thread. Opening the front is one camera
   move (tiles under L7, the zoom clamped to 1.0 km/pt) and one background label placement (≤ once per 250 ms).
+- **The country info card (screen 28).** The tapped country's outline is a layer-3 border style class: the selected
+  polity's id a uniform tested against the GPU sovereign array, stencil-once, inside layer 3's ≤22 draws; its faint fill the
+  same test in layer 2 (total ≤50, §2.5); nothing built per tap. The camera moves only when the country's focus would sit
+  under the sheet or the HUD (one move, tiles under L7, those under the sheet culled; close does not move it); the latest
+  tap wins, retargeting the move and cancelling the earlier country's jobs. One background label placement (≤ once per
+  250 ms); the header flag on demand, once per country. The model under the open-panel rule: the estimate only at an
+  intelligence refresh (D-19), the relation monthly, the network on an operation or intelligence change; nothing ticks;
+  main thread the tap and the finished model only (L14).
 
 ### 3.10 Names of any country (the second-country test, T-024)
 
