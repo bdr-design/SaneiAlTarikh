@@ -58,7 +58,8 @@ unbroken.
 step must fit) and adds: the header, emblem and close (saying the tour stays in the help); no dialog or dimmer; the game
 shown paused; each step's heading, number and text; each body exactly its text, one primary with its bar and (steps 1
 to 4) the skip; the primary naming the next step (the last «ابدأ الحملة», opening the first decision); the skip's path
-through «حول»; exactly the step's HUD element ringed and nothing else on the page (outline, shadow spread or white
-border, the map included), solid white 2 pt at 3 pt, inside the side insets, on screen and clear of the sheet, none on
-the sections' step; the date and country the HUD's; the six indicators the HUD's; the dock's eight sections (order,
+through «حول»; exactly the step's HUD element ringed and nothing else on the page (any outline, or a white border or
+shadow layer, alpha ≥ 0.5 and 1 pt or more, outer or inset, on an element or its ::before or ::after, the map included;
+no added layer at the page's top level), solid white 2 pt at 3 pt with no second white ring on it, inside the side
+insets, on screen and clear of the sheet, none on the sections' step; the date and country the HUD's; the six indicators the HUD's; the dock's eight sections (order,
 names, icons, two rows); the speed button and menu; the first decision the alert's and the bell named. `--selftest` and `check_screen.py` must pass.

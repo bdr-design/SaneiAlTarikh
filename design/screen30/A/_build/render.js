@@ -4,7 +4,8 @@
 // body holds exactly its text, one primary (with its bar) and, on steps 1 to 4, the skip; «التالي» names the next step,
 // the last «ابدأ الحملة» opens the first decision; the skip and the close end the tour and say it stays in the help
 // (المزيد › حول › المساعدة); each step rings exactly the HUD element it speaks about, and nothing else on the page is
-// ringed (an outline, a box-shadow spread or a white border, the map included): a solid white 2 pt outline 3 pt outside,
+// ringed (any outline, or a white border or shadow of 1 pt or more, on an element or its ::before or ::after, the map
+// included) and no layer is added: a solid white 2 pt outline 3 pt outside and no second white ring on it,
 // the element inside the side insets, the ring on screen and clear of the sheet, the sections' step none; the step texts
 // agree with the HUD: the date and the country, the six indicators by their labels, the dock's eight sections (names
 // and icons, two rows of four), the speed button and the speed menu, the first decision the alert's and the bell; no
@@ -51,7 +52,7 @@ if (document.querySelector('[role="dialog"], [role="alertdialog"], dialog, .moda
 { const kids = [...body.children].filter((e) => getComputedStyle(e).display !== 'none').map((e) => e.matches('.r-sec') ? 'sec' : e.matches('.r-act.r-first') ? 'primary' : e.matches('.r-link') ? 'skip' : (e.className || e.tagName));
   const want = i < 4 ? 'sec,primary,skip' : 'sec,primary'; if (kids.join(',') !== want) issues.push('the step body is not «' + want + '»: ' + kids.join(','));
   // and nothing more inside: the controls are the primary and the skip; the text section holds its heading, its text and (s3) the list
-  const ctl = [...body.querySelectorAll('button, [role="button"], a, .tap, input, select')].filter((e) => e.getClientRects().length);
+  const ctl = [...body.querySelectorAll('button, [role="button"], [role="link"], [role="tab"], [role="menuitem"], [role="switch"], [role="checkbox"], [tabindex]:not([tabindex="-1"]), a, .tap, input, select, textarea, summary, label')].filter((e) => e.getClientRects().length);
   if (ctl.length !== (i < 4 ? 2 : 1)) issues.push('the step body holds ' + ctl.length + ' controls, not ' + (i < 4 ? 2 : 1));
   const sec = body.querySelector('.r-sec'), inSec = sec ? [...sec.children].filter((e) => getComputedStyle(e).display !== 'none').map((e) => e.tagName === 'H3' ? 'h3' : e.matches('p.d-text') ? 'text' : e.matches('ul.t-secs') ? 'list' : (e.className || e.tagName)) : [];
   if (inSec.join(',') !== (tab === 's3' ? 'h3,text,list' : 'h3,text')) issues.push('the step text section is not its heading and text: ' + inSec.join(','));
@@ -63,22 +64,37 @@ if (document.querySelector('[role="dialog"], [role="alertdialog"], dialog, .moda
 // the ring: exactly the step's HUD element, and nothing else on the page ringed (an outline, a box-shadow spread or a white
 // border, the map included); a solid white 2 pt outline 3 pt outside; the element inside the side insets, the ring on
 // screen and clear of the sheet; none on the sections' step. A ring may be drawn by the element or its ::before or ::after,
-// by an outline, a white border (alpha ≥ 0.5) or an outer box-shadow layer with a white colour (alpha ≥ 0.5) and a spread
-// of 1.5 pt or more, at any offset or blur; the HUD's own hairlines (the flags' 1 pt rim at 22%, inset glass edges) are not rings
+// by any outline, or a white (alpha ≥ 0.5) border or box-shadow layer of 1 pt or more, outer or inset, at any offset or blur
+// (rgb, color(srgb) and oklch read); the HUD's own hairlines (the flags' rim at 22%, the cyan glass edge) are not white enough
 { const white = (c) => c === X.TOK.t1;
-  const whiteish = (col) => { const m = /rgba?\\(([\\d.]+), ([\\d.]+), ([\\d.]+)(?:, ([\\d.]+))?\\)/.exec(col || ''); return !!m && +m[1] > 200 && +m[2] > 200 && +m[3] > 200 && (m[4] === undefined || +m[4] >= 0.5); };
+  const whiteish = (col) => { col = col || '';
+    let m = /rgba?\\(([\\d.]+), ([\\d.]+), ([\\d.]+)(?:, ([\\d.]+))?\\)/.exec(col);
+    if (m) return +m[1] > 200 && +m[2] > 200 && +m[3] > 200 && (m[4] === undefined || +m[4] >= 0.5);
+    m = /color\\(srgb ([\\d.]+) ([\\d.]+) ([\\d.]+)(?: \\/ ([\\d.]+))?\\)/.exec(col);
+    if (m) return +m[1] > 0.78 && +m[2] > 0.78 && +m[3] > 0.78 && (m[4] === undefined || +m[4] >= 0.5);
+    m = /oklch\\(([\\d.]+)(%?) ([\\d.]+) [\\d.a-z]+(?: \\/ ([\\d.]+))?\\)/.exec(col);
+    if (m) { const L = m[2] ? +m[1] / 100 : +m[1]; return L > 0.88 && +m[3] < 0.06 && (m[4] === undefined || +m[4] >= 0.5); }
+    return false; };
   const layers = (bs) => { const out = []; let depth = 0, cur = ''; for (const ch of bs) { if (ch === '(') depth++; if (ch === ')') depth--; if (ch === ',' && !depth) { out.push(cur); cur = ''; } else cur += ch; } if (cur.trim()) out.push(cur); return out; };
   const ringStyle = (c) => { if (!c || c.display === 'none' || c.visibility === 'hidden') return false;
     if (c.outlineStyle !== 'none' && parseFloat(c.outlineWidth) > 0) return true;
-    if (c.boxShadow && c.boxShadow !== 'none' && layers(c.boxShadow).some((l) => { const col = (/rgba?\\([^)]*\\)/.exec(l) || [''])[0], px = l.replace(col, '').match(/-?[\\d.]+px/g) || []; return !/inset/.test(l) && whiteish(col) && px.length >= 4 && parseFloat(px[3]) >= 1.5; })) return true;
+    if (c.boxShadow && c.boxShadow !== 'none' && layers(c.boxShadow).some((l) => { const col = (/(rgba?|color|oklch)\\([^)]*\\)/.exec(l) || [''])[0], px = l.replace(col, '').match(/-?[\\d.]+px/g) || []; return whiteish(col) && px.length >= 4 && parseFloat(px[3]) >= 1; })) return true;
     return ['Top', 'Right', 'Bottom', 'Left'].some((sd) => parseFloat(c['border' + sd + 'Width']) >= 1 && c['border' + sd + 'Style'] !== 'none' && whiteish(c['border' + sd + 'Color'])); };
   const ringed = (e) => { if (!e.getClientRects().length || getComputedStyle(e).visibility === 'hidden') return false;
     if (ringStyle(getComputedStyle(e))) return true;
     return ['::before', '::after'].some((ps) => { const c = getComputedStyle(e, ps); return c.content !== 'none' && c.content !== 'normal' && ringStyle(c); }); };
+  // no added layer: the page's top level is the icon sprite, the map, the HUD (the sheet inside it) and the device frame
+  [...document.body.children].forEach((e) => { if (/^(SCRIPT|STYLE|LINK)$/.test(e.tagName) || e.matches('.map, .hud, .dev') || (e.tagName.toLowerCase() === 'svg' && !e.getClientRects().length) || (e.tagName.toLowerCase() === 'svg' && e.getBoundingClientRect().width * e.getBoundingClientRect().height === 0)) return;
+    const r = e.getBoundingClientRect(); if (r.width > 0 && r.height > 0 && getComputedStyle(e).visibility !== 'hidden' && getComputedStyle(e).display !== 'none') issues.push('a layer added over the page: ' + (e.className && e.className.baseVal !== undefined ? e.tagName : (e.className || e.tagName))); });
   const rings = [...document.body.querySelectorAll('*')].filter((e) => !e.closest('.sheet') && ringed(e));
   const want = ST[i][2], tgt = want && document.querySelector('.hud ' + want);
   if (!want) { if (rings.length) issues.push('a ring on the sections\\' step: ' + rings.map((e) => e.className || e.tagName).join(', ')); }
   else { if (rings.length !== 1 || rings[0] !== tgt) issues.push('the ring is not on the step\\'s element ' + want + ' alone: ' + rings.map((e) => e.className || e.tagName).join(', '));
+    const noOutline = (cs) => ringStyle(Object.assign({}, { display: cs.display, visibility: cs.visibility, outlineStyle: 'none', outlineWidth: '0px', boxShadow: cs.boxShadow,
+      borderTopWidth: cs.borderTopWidth, borderRightWidth: cs.borderRightWidth, borderBottomWidth: cs.borderBottomWidth, borderLeftWidth: cs.borderLeftWidth,
+      borderTopStyle: cs.borderTopStyle, borderRightStyle: cs.borderRightStyle, borderBottomStyle: cs.borderBottomStyle, borderLeftStyle: cs.borderLeftStyle,
+      borderTopColor: cs.borderTopColor, borderRightColor: cs.borderRightColor, borderBottomColor: cs.borderBottomColor, borderLeftColor: cs.borderLeftColor }));
+    if (noOutline(getComputedStyle(tgt)) || ['::before', '::after'].some((ps) => { const pc = getComputedStyle(tgt, ps); return pc.content !== 'none' && pc.content !== 'normal' && ringStyle(pc); })) issues.push('the step\\'s element ' + want + ' carries a second white ring besides its outline');
     const c = getComputedStyle(tgt); if (c.outlineStyle !== 'solid' || parseFloat(c.outlineWidth) !== 2 || parseFloat(c.outlineOffset) !== 3 || c.outlineColor !== X.TOK.t1) issues.push('the ring is not a solid white 2 pt outline 3 pt outside');
     const r = tgt.getBoundingClientRect(), o = parseFloat(c.outlineOffset) + parseFloat(c.outlineWidth), sh = q('.sheet').getBoundingClientRect(), S = +(new URLSearchParams(location.search).get('side') || 0);
     if (r.left < S - 0.5 || r.right > innerWidth - S + 0.5) issues.push('the ringed element ' + want + ' is not inside the side insets');
@@ -148,6 +164,12 @@ require(path.join(OUT, '../../shared/check/panelcheck.js'))({
     ['second paragraph', d, '&tab=s1', '', /the step text section is not its heading and text/, () => { const p = document.createElement('p'); p.className = 'd-text'; p.textContent = 'نص إضافي'; document.querySelector('.r-body[data-tab="s1"] .r-sec').appendChild(p); }],
     ['ring by a pseudo-element', d, '&tab=s3', '.hud .date { position: relative; } .hud .date::after { content: ""; position: absolute; inset: -5px; border: 2px solid #EAF2F7; }', /a ring on the sections' step/],
     ['ring by an offset shadow', d, '&tab=s2', '.hud .nation { box-shadow: 0 1px 0 3px rgba(234, 242, 247, .9) !important; }', /the ring is not on the step's element \.stats alone/],
+    ['inset white ring', d, '&tab=s2', '.hud .nation { box-shadow: inset 0 0 0 2px #EAF2F7 !important; }', /the ring is not on the step's element \.stats alone/],
+    ['1 pt white ring', d, '&tab=s2', '.hud .nation { box-shadow: 0 0 0 1px #EAF2F7 !important; }', /the ring is not on the step's element \.stats alone/],
+    ['ring in color-mix', d, '&tab=s4', '.hud .toast { box-shadow: 0 0 0 2px color-mix(in srgb, #EAF2F7 80%, transparent) !important; }', /the ring is not on the step's element \.date alone/],
+    ['second ring on the step element', d, '&tab=s2', '.hud .stats { box-shadow: 0 0 0 8px #EAF2F7 !important; }', /carries a second white ring besides its outline/],
+    ['text as a link', d, '&tab=s1', '', /the step body holds 3 controls/, () => { const t = document.querySelector('.r-body[data-tab="s1"] .d-text'); t.innerHTML = '<span role="link" tabindex="0">' + t.innerHTML + '</span>'; }],
+    ['SVG ring layer', d, '&tab=s2', '', /a layer added over the page/, () => { const n = document.querySelector('.hud .nation').getBoundingClientRect(), ns = 'http://www.w3.org/2000/svg', v = document.createElementNS(ns, 'svg'); v.setAttribute('style', 'position:fixed;left:' + (n.left - 5) + 'px;top:' + (n.top - 5) + 'px;width:' + (n.width + 10) + 'px;height:' + (n.height + 10) + 'px'); const r = document.createElementNS(ns, 'rect'); r.setAttribute('x', 1); r.setAttribute('y', 1); r.setAttribute('width', n.width + 8); r.setAttribute('height', n.height + 8); r.setAttribute('fill', 'none'); r.setAttribute('stroke', '#EAF2F7'); r.setAttribute('stroke-width', 2); v.appendChild(r); document.body.appendChild(v); }],
     ['primary bar faded', d, '&tab=s1', '.r-first::after { opacity: 0 !important; }', /the primary's white bar is not drawn/],
     ['skip path without «حول»', d, '&tab=s2', '', /the skip is missing, misplaced or does not say the tour stays in the help/, () => { document.querySelector('.r-body[data-tab="s2"] .r-link .r-at > span').textContent = 'تعود إليها من المزيد › المساعدة'; }],
     ['HUD date changed', d, '&tab=s1', '', /the header's date is not the HUD's/, () => { document.querySelector('.hud .date .dmy').textContent = '14 يناير 2011'; }],
