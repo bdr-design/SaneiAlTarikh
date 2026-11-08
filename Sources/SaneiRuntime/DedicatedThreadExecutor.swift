@@ -10,9 +10,10 @@ public final class DedicatedThreadExecutor: SerialExecutor, @unchecked Sendable 
     private var jobs: [UnownedJob] = []
     /// Set before the thread starts, only read afterwards.
     private var thread: Thread?
+    /// Guarded by `condition`: a quality of service the thread applies to itself before its next jobs.
+    private var pendingQoS: QualityOfService?
 
     /// Starts the thread at once; it lives as long as the executor (the engines' executors live for the app's life).
-    /// The quality of service is fixed at start (a `Thread`'s cannot change once it runs).
     public init(name: String, qos: QualityOfService) {
         self.name = name
         jobs.reserveCapacity(64)
@@ -32,9 +33,12 @@ public final class DedicatedThreadExecutor: SerialExecutor, @unchecked Sendable 
         batch.reserveCapacity(64)
         while true {
             condition.lock()
-            while jobs.isEmpty { condition.wait() }
+            while jobs.isEmpty && pendingQoS == nil { condition.wait() }
             swap(&batch, &jobs)
+            let qos = pendingQoS
+            pendingQoS = nil
             condition.unlock()
+            if let qos { Self.apply(qos) }
             for job in batch { Self.run(job, on: me) }
             batch.removeAll(keepingCapacity: true)
         }
@@ -48,6 +52,29 @@ public final class DedicatedThreadExecutor: SerialExecutor, @unchecked Sendable 
         autoreleasepool { job.runSynchronously(on: me) }
         #else
         job.runSynchronously(on: me)
+        #endif
+    }
+
+    /// Changes the thread's quality of service (on Apple's platforms the thread sets its own class before its next jobs;
+    /// elsewhere it is ignored). The simulation runs at utility and at user-initiated at its top speed (§2.4).
+    public func setQoS(_ qos: QualityOfService) {
+        condition.lock()
+        pendingQoS = qos
+        condition.signal()
+        condition.unlock()
+    }
+
+    private static func apply(_ qos: QualityOfService) {
+        #if canImport(Darwin)
+        let cls: qos_class_t
+        switch qos {
+        case .userInteractive: cls = QOS_CLASS_USER_INTERACTIVE
+        case .userInitiated: cls = QOS_CLASS_USER_INITIATED
+        case .utility: cls = QOS_CLASS_UTILITY
+        case .background: cls = QOS_CLASS_BACKGROUND
+        default: cls = QOS_CLASS_DEFAULT
+        }
+        pthread_set_qos_class_self_np(cls, 0)
         #endif
     }
 

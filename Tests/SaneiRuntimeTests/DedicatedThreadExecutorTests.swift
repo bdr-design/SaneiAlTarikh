@@ -61,6 +61,17 @@ final class DedicatedThreadExecutorTests: XCTestCase {
         XCTAssertEqual(all.count, 200)
     }
 
+    /// A change of quality of service never stops the thread: the jobs after it still run, in order.
+    func testSetQoSKeepsRunning() async {
+        let p = Probe()
+        Probe.executor.setQoS(.userInitiated)
+        await p.append(1)
+        Probe.executor.setQoS(.utility)
+        await p.append(2)
+        let all = await p.all()
+        XCTAssertEqual(Array(all.suffix(2)), [1, 2])
+    }
+
     func testNeverRunsTwoJobsAtOnce() async {
         let overlap = Overlap()
         let a = Busy(overlap), b = Busy(overlap)
@@ -102,6 +113,14 @@ final class EngineMeterTests: XCTestCase {
         t.start()
         done.wait()
         XCTAssertEqual(m.drain()[.sim]?.thread, "main+test.other")
+    }
+
+    /// A window keeps at most `maxThreads` names, the first ones seen, in order.
+    func testThreadNamesAreCapped() {
+        let m = EngineMeter()
+        for i in 1...6 { m.record(.io, nanoseconds: 1, thread: "t\(i)") }
+        XCTAssertEqual(m.drain()[.io]?.threads, ["t1", "t2", "t3", "t4"])
+        XCTAssertEqual(EngineMeter.Sample.maxThreads, 4)
     }
 
     func testMeasureReturnsTheResultAndTimesIt() {

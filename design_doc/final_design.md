@@ -339,8 +339,8 @@ tools/{datapipeline/,imagery/,checks/}  CLAUDE.md
 | `SaneiPresentation` | Engine, Content, Core, Foundation | `GameFormatter` with the **Arabic morphology layer**; why-terms turned into rows; map-mode colour functions; view data; Arabic search normalization; notification text | SwiftUI, UIKit, Metal |
 | `simcli` | All modules, plus `SaneiBake` and `CZlib` | `validate`, `facts`, `evidence`, `stubs`, `bake`, `run`, `replay`, `bench`, `balance`, `history-check`, `save-inspect`, `peak-load` | — |
 | App/UI | All packages | SwiftUI shell, `GameScreen` screens, `DesignTokens`, `GlassStyle`, `DialogPresenter`, `GameStore`, the layout fit engine | Change state except through `host.submit` |
-| App/MapRenderer | Core, Runtime, Map, Metal | Imagery, overlays, borders (stencil-once), glow, fronts, markers, arrows, distance-field labels, overlay counters | Read the engine or content |
-| App/Platform | Core, Runtime | Storage (Documents, mirror bookmark), DEFLATE, the binary metadata reader, audio, haptics, thermal and power state, memory pressure, image decoding, **ring-buffer log**, MetricKit and `MXDiagnosticPayload` export, the 60 s recorder | — |
+| App/MapRenderer | Core, Runtime, Map, Metal; Platform's log | Imagery, overlays, borders (stencil-once), glow, fronts, markers, arrows, distance-field labels, overlay counters; a control surface (frames on request, continuous, pause, frame stats) | Read the engine or content |
+| App/Platform | Core, Runtime; MapRenderer's control surface (the recorder) | Storage (Documents, mirror bookmark), DEFLATE, the binary metadata reader, audio, haptics, thermal and power state, memory pressure, image decoding, **ring-buffer log**, MetricKit and `MXDiagnosticPayload` export, the 60 s recorder | — |
 
 Dependencies run one way: Core ← Content ← Engine ← AI; Core ← Map; Presentation depends on Engine; Runtime stands alone (the app hands its executors to the engine, which takes any `SerialExecutor`). The Linux build leaves out the App targets.
 

@@ -24,7 +24,8 @@ struct PerfOverlay: View {
         .contentShape(Rectangle())
         .onTapGesture { model.refreshDeviceState() }
         .onAppear { model.refreshDeviceState() }
-        .accessibilityHint(Text(verbatim: "انقر مرتين لتحديث الذاكرة والإطارات"))
+        .accessibilityElement(children: .contain)
+        .accessibilityAction(named: Text(verbatim: "تحديث الذاكرة والإطارات")) { model.refreshDeviceState() }
     }
 
     private var memoryText: String {

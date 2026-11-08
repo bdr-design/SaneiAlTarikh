@@ -44,6 +44,7 @@ final class AppModel {
             let ok = await IOEngine.shared.prepareFolders()
             self.savesReady = ok
             RingLog.shared.log(ok ? "saves folder ready" : "saves folder failed")
+            await RingLog.shared.flush()        // this session's log reaches its file from the start
         }
     }
 
@@ -65,7 +66,12 @@ final class AppModel {
         }
         let host = self.host, ui = self.recorder, idle = Self.idleSeconds, loaded = Self.loadSeconds
         // the simulation's load runs on its own thread at the top speed; the recorder only starts and cancels it
-        let load: @Sendable () async -> Void = { await host.run(daysPerWake: 3, period: .milliseconds(100)) }
+        // the top speed runs at user-initiated, the rest of the time the simulation's thread is utility (§2.4)
+        let load: @Sendable () async -> Void = {
+            Engines.sim.setQoS(.userInitiated)
+            await host.run(daysPerWake: 3, period: .milliseconds(100))
+            Engines.sim.setQoS(.utility)
+        }
         Task.detached(priority: .utility) {
             await RecorderEngine.shared.record(idleSeconds: idle, loadSeconds: loaded, load: load, ui: ui)
         }
@@ -106,7 +112,7 @@ final class AppModel {
     }
 
     func enterForeground() {
-        RenderEngine.shared.requestFrame()
+        RenderEngine.shared.resume()
         refreshDeviceState()
     }
 }

@@ -23,8 +23,13 @@ actor IOEngine {
                 let current = logs.appendingPathComponent(Self.logName)
                 let previous = logs.appendingPathComponent(Self.previousLogName)
                 if fm.fileExists(atPath: current.path) {
-                    try? fm.removeItem(at: previous)
-                    try fm.moveItem(at: current, to: previous)
+                    // a failed rotation loses only the previous log, never the saves folder's state
+                    do {
+                        if fm.fileExists(atPath: previous.path) { try fm.removeItem(at: previous) }
+                        try fm.moveItem(at: current, to: previous)
+                    } catch {
+                        RingLog.shared.log("ring log rotate failed: \(error)")
+                    }
                 }
                 return true
             } catch {

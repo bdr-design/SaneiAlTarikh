@@ -56,18 +56,57 @@ final class GameHostTests: XCTestCase {
     func testRunPacesAndStops() async {
         let names = Names()
         let host = GameHost(executor: Self.simExecutor, cells: 64) { _ in names.add(Thread.current.name ?? "") }
+        let clock = ContinuousClock()
+        let start = clock.now
         let run = Task { await host.run(daysPerWake: 3, period: .milliseconds(20)) }
         try? await Task.sleep(for: .milliseconds(200))
         run.cancel()
-        await run.value
+        let e = start.duration(to: clock.now).components
+        let elapsedMs = Int(e.seconds) * 1_000 + Int(e.attoseconds / 1_000_000_000_000_000)
+        let stopped = await Self.finishes(run, within: .seconds(5))
+        XCTAssertTrue(stopped, "the run did not stop on cancel")
         let day = await host.day
         XCTAssertGreaterThanOrEqual(day, 3)
         XCTAssertEqual(day % 3, 0)
-        XCTAssertLessThan(day, 3 * 40, "the run sleeps between wakes")
+        XCTAssertLessThanOrEqual(day, 3 * (elapsedMs / 20 + 2), "the run sleeps between wakes (\(elapsedMs) ms)")
         XCTAssertEqual(Set(names.all), ["test.sim"])
-        try? await Task.sleep(for: .milliseconds(60))
-        let after = await host.day
-        XCTAssertEqual(after, day, "no day after the cancel")
+        let running = await host.running
+        XCTAssertFalse(running)
+    }
+
+    /// One clock: a second run while the first paces returns at once, so the speed never doubles.
+    func testSecondRunReturnsAtOnce() async {
+        let host = GameHost(executor: Self.simExecutor, cells: 64)
+        let first = Task { await host.run(daysPerWake: 3, period: .milliseconds(20)) }
+        try? await Task.sleep(for: .milliseconds(50))
+        let second = await Self.finishes(Task { await host.run(daysPerWake: 3, period: .milliseconds(20)) }, within: .seconds(2))
+        XCTAssertTrue(second, "a second run did not return at once")
+        first.cancel()
+        let stopped = await Self.finishes(first, within: .seconds(5))
+        XCTAssertTrue(stopped)
+    }
+
+    /// True when `task` ends within `limit`; false, never a hang, when it does not (the waits are unstructured, so a task
+    /// that ignores its cancel cannot hold the test).
+    static func finishes(_ task: Task<Void, Never>, within limit: Duration) async -> Bool {
+        let once = Once()
+        return await withCheckedContinuation { (c: CheckedContinuation<Bool, Never>) in
+            Task { await task.value; once.resume(c, true) }
+            Task { try? await Task.sleep(for: limit); once.resume(c, false) }
+        }
+    }
+}
+
+/// Resumes a continuation once, whichever side comes first.
+final class Once: @unchecked Sendable {
+    private let lock = NSLock()
+    private var done = false
+    func resume(_ c: CheckedContinuation<Bool, Never>, _ value: Bool) {
+        lock.lock()
+        let first = !done
+        done = true
+        lock.unlock()
+        if first { c.resume(returning: value) }
     }
 }
 

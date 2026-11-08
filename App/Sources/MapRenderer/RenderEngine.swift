@@ -9,7 +9,9 @@ struct FrameStats: Sendable {
     var frames = 0
     /// Frames encoded while idle (one per request): 0 a second when nothing changes proves the link is paused (L1).
     var idleFrames = 0
-    /// Continuous frames that missed their target: dropped (never presented) or presented more than half a refresh late.
+    /// Continuous frames that missed: refreshes the display link skipped, frames dropped (never presented) and frames
+    /// presented more than half a refresh late. Booked when known: a late or dropped frame in the row of the second it
+    /// was presented in (about two refreshes after it was encoded).
     var hitches = 0
     /// The spacing of presented continuous frames, in ms (mean and worst).
     var intervalMeanMs = 0.0
@@ -44,6 +46,11 @@ final class RenderEngine: NSObject, @unchecked Sendable {
     private var angle: Float = 0
     private var continuous = false
     private var lastTarget: CFTimeInterval = 0
+    /// The display's refresh period while continuous: the smallest spacing of consecutive targets seen (a skipped refresh
+    /// doubles a spacing, never halves it), 1/60 s until measured.
+    private var refresh: CFTimeInterval = 0
+    /// Set when the app goes to the background: nothing unpauses the link until `resume()`.
+    private var backgrounded = false
 
     /// Starts the render thread (once).
     func start() {
@@ -89,28 +96,39 @@ final class RenderEngine: NSObject, @unchecked Sendable {
         perform { [self] in self.setUp(box.value) }
     }
 
-    /// Asks for one frame.
+    /// Asks for one frame (ignored in the background).
     func requestFrame() {
-        perform { [self] in self.link?.isPaused = false }
+        perform { [self] in if !self.backgrounded { self.link?.isPaused = false } }
     }
 
-    /// Frames every display refresh while on (the recorder), one per request otherwise.
+    /// Frames every display refresh while on (the recorder), one per request otherwise. Turning it off never unpauses
+    /// the link: a running link draws one idle frame and pauses itself, a paused one stays paused.
     func setContinuous(_ on: Bool) {
         perform { [self] in
-            self.continuous = on
+            self.continuous = on && !self.backgrounded
             self.lastTarget = 0
+            self.refresh = 0
             self.lock.lock()
             self.lastPresented = 0
             self.lock.unlock()
-            self.link?.isPaused = false
+            if self.continuous { self.link?.isPaused = false }
         }
     }
 
-    /// Stops drawing (the app went to the background); the next request draws again.
+    /// Stops drawing (the app went to the background) until `resume()`.
     func pause() {
         perform { [self] in
+            self.backgrounded = true
             self.continuous = false
             self.link?.isPaused = true
+        }
+    }
+
+    /// Back in the foreground: one frame, then idle.
+    func resume() {
+        perform { [self] in
+            self.backgrounded = false
+            self.link?.isPaused = false
         }
     }
 
@@ -162,10 +180,10 @@ final class RenderEngine: NSObject, @unchecked Sendable {
     }
 
     /// Called on Metal's thread when a continuous frame was presented (or dropped: presentedTime 0).
-    private func presented(at time: CFTimeInterval, target: CFTimeInterval, period: CFTimeInterval) {
+    private func presented(at time: CFTimeInterval, target: CFTimeInterval, refresh: CFTimeInterval) {
         lock.lock()
         defer { lock.unlock() }
-        if time == 0 || time - target > period / 2 { stats.hitches += 1 }
+        if time == 0 || time - target > refresh / 2 { stats.hitches += 1 }
         guard time > 0 else { return }
         if lastPresented > 0 {
             let gap = time - lastPresented
@@ -183,12 +201,20 @@ extension RenderEngine: CAMetalDisplayLinkDelegate {
             let start = DispatchTime.now().uptimeNanoseconds
             let target = update.targetPresentationTimestamp
             if continuous {
-                // the refresh period from consecutive targets, kept within the link's range (30 to 120 a second)
-                let period = lastTarget > 0 ? min(max(target - lastTarget, 1.0 / 120), 1.0 / 30) : 1.0 / 60
+                if lastTarget > 0 {
+                    // the refresh: the smallest target spacing seen, within the link's range (30 to 120 a second)
+                    let spacing = target - lastTarget
+                    let seen = min(max(spacing, 1.0 / 120), 1.0 / 30)
+                    refresh = refresh > 0 ? min(refresh, seen) : seen
+                    // refreshes the link skipped since the last frame (the previous frame stayed on screen)
+                    let skipped = max(0, Int((spacing / refresh).rounded()) - 1)
+                    if skipped > 0 { lock.lock(); stats.hitches += skipped; lock.unlock() }
+                }
                 lastTarget = target
                 angle += 0.02
+                let r = refresh > 0 ? refresh : 1.0 / 60
                 update.drawable.addPresentedHandler { [self] d in
-                    self.presented(at: d.presentedTime, target: target, period: period)
+                    self.presented(at: d.presentedTime, target: target, refresh: r)
                 }
             }
             encode(into: update.drawable)

@@ -57,11 +57,19 @@ actor RecorderEngine {
         let clock = ContinuousClock()
         let begin = clock.now
         var lastDrain = begin
+        await RingLog.shared.flush()
         for second in 1...seconds {
+            if interrupted { break }
             let loaded = second > idleSeconds
             if second == idleSeconds + 1 {
+                RingLog.shared.log("recorder: load starts")
+                await RingLog.shared.flush()
+                if interrupted { break }
                 RenderEngine.shared.setContinuous(true)
                 sim = Task.detached(priority: .utility) { await load() }
+            } else if second % 10 == 0 {
+                // the log's file follows the recording (the heaviest moment), so a crash in it leaves its lines
+                await RingLog.shared.flush()
             }
             var lag = Duration.zero
             for k in 1...10 {
@@ -107,6 +115,7 @@ actor RecorderEngine {
             }
         }
         sim?.cancel()
+        await sim?.value
         RenderEngine.shared.setContinuous(false)
         let cut = done < seconds
         var file = ""

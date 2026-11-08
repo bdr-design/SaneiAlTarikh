@@ -53,6 +53,12 @@ jobs:
           name: SaneiAlTarikh-unsigned-ipa
           path: SaneiAlTarikh-unsigned.ipa
           retention-days: 30
+      # the symbols for MetricKit's crash and hang reports (the executable is stripped)
+      - uses: actions/upload-artifact@v4
+        with:
+          name: SaneiAlTarikh-dSYM
+          path: build/Build/Products/Release-iphoneos/*.dSYM
+          retention-days: 30
       - if: failure()
         uses: actions/upload-artifact@v4
         with:

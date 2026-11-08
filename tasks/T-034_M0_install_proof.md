@@ -61,3 +61,17 @@ build (each fixed at its cause, never by turning the language mode down without 
 - `SaneiRuntime` (Foundation; the dedicated-thread executor and the engine meter) joins §2.1 and §2.2; App/Platform and
   App/MapRenderer may import it.
 - The install steps for the owner: `docs/install.md`. M0's measured costs: `docs/perf.md`.
+
+## After the verification reviews (2026-11-08, `reviewEveryFix`)
+- The simulation's thread is utility and raises itself to user-initiated while it runs at the top speed
+  (`DedicatedThreadExecutor.setQoS`, §2.4); on Linux the call is a no-op.
+- The ring log's file is written at launch (after the folders), at the start of a recording, at its idle/load switch,
+  every 10 s while it runs, after it, after an export and on background: not a line-by-line mirror (§3.8's 1 MB file
+  waits for the real log volume, M1a). A crash report itself comes from MetricKit; the dSYM is kept with each IPA.
+- Hitches are booked when known: a skipped refresh at the next callback, a late or dropped frame in the row of the second
+  it was presented in (about two refreshes after encoding); the last second's frames in flight are not booked.
+- The CSV has no CPU time and no `phys_footprint` yet (free memory only); both join the recorder with M0b's map test.
+- ci-linux also runs on pushes to `claude/**` branches: the work is checked before a pull request exists (the owner
+  reviews on GitHub's app); the concurrency group cancels superseded runs.
+- App/Platform's recorder drives the render engine through its control calls, and App/MapRenderer logs through
+  Platform's ring log (§2.2's rows say so); CI fails if either reaches the engine (`SaneiEngine`, `GameHost`).

@@ -11,6 +11,8 @@ public actor GameHost {
     public nonisolated var unownedExecutor: UnownedSerialExecutor { executor.asUnownedSerialExecutor() }
 
     public private(set) var day = 0
+    /// True while `run` paces the clock: a second `run` returns at once (one clock, never twice the speed).
+    public private(set) var running = false
     private var cells: [UInt64]
     /// Called on the simulation's own thread after each day with that day's duration in nanoseconds.
     private let dayProbe: @Sendable (UInt64) -> Void
@@ -36,6 +38,9 @@ public actor GameHost {
     /// until the next deadline (`period` apart, so the pace does not drift; a late wake never bursts to catch up).
     /// D-16's top speed is 30 days a second: 3 days every 100 ms, which also caps the snapshots at 10 a second (§2.4).
     public func run(daysPerWake: Int = 3, period: Duration = .milliseconds(100)) async {
+        guard !running else { return }
+        running = true
+        defer { running = false }
         let clock = ContinuousClock()
         var next = clock.now
         while !Task.isCancelled {
