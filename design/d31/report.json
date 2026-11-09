@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-09T15:23:34.995Z",
+ "ranAt": "2026-11-09T15:29:01.519Z",
  "issues": [],
  "widestClasses": [
   [
@@ -67,7 +67,12 @@
    "a transparent date",
    "a hidden chip",
    "a label pushed out of its chip",
-   "a nation card without its role"
+   "a nation card hidden from VoiceOver",
+   "a value's digits at font-size 0",
+   "a value's digits transparent (modern colour syntax)",
+   "a wrong unit",
+   "a transparent country name",
+   "a country name at font-size 0"
   ],
   "missed": []
  },
