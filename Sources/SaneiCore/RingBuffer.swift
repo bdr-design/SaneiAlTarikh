@@ -7,6 +7,8 @@ public struct RingBuffer<Element> {
     private var storage: [Element?]
     private var head = 0          // index of the oldest element
     public private(set) var count = 0
+    /// Every element ever appended (the sequence number the next one gets); `removeAll` keeps it.
+    public private(set) var appendedTotal = 0
 
     public init(capacity: Int) {
         precondition(capacity > 0, "RingBuffer capacity must be positive")
@@ -20,6 +22,7 @@ public struct RingBuffer<Element> {
     /// Appends `element`; when the buffer is full, the oldest element is dropped and returned.
     @discardableResult
     public mutating func append(_ element: Element) -> Element? {
+        appendedTotal += 1
         if count < capacity {
             storage[(head + count) % capacity] = element
             count += 1
@@ -36,6 +39,19 @@ public struct RingBuffer<Element> {
         storage = Array(repeating: nil, count: capacity)
         head = 0
         count = 0
+    }
+
+    /// The elements whose sequence number is `start` or later, oldest first; the sequence number the next element will
+    /// get; and how many from `start` on are no longer held (dropped by later appends or by `removeAll`).
+    public func elements(since start: Int) -> (elements: [Element], next: Int, lost: Int) {
+        let first = appendedTotal - count
+        let from = min(max(0, start - first), count)
+        var out: [Element] = []
+        out.reserveCapacity(count - from)
+        for i in from..<count {
+            if let e = storage[(head + i) % capacity] { out.append(e) }
+        }
+        return (out, appendedTotal, max(0, first - max(0, start)))
     }
 
     /// The elements, oldest first.

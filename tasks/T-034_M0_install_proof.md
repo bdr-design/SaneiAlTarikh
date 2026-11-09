@@ -77,8 +77,37 @@ build (each fixed at its cause, never by turning the language mode down without 
   whatever caused it (a skipped refresh, a late callback, a GPU-late or dropped frame), so a run at 30 a second reads
   30 a second; booked when the later frame's presented handler runs (about two refreshes after encoding); the last
   second's frames in flight are not booked.
-- The CSV has no CPU time and no `phys_footprint` yet (free memory only); both join the recorder with M0b's map test.
+- The CSV has no CPU time and no `phys_footprint` yet (the memory headroom only, `os_proc_available_memory`); both join the recorder with M0b's map test.
 - ci-linux also runs on pushes to `claude/**` branches: the work is checked before a pull request exists (the owner
   reviews on GitHub's app); the concurrency group cancels superseded runs.
 - App/Platform's recorder drives the render engine through its control calls, and App/MapRenderer logs through
   Platform's ring log (§2.2's rows say so); CI fails if either reaches the engine (`SaneiEngine`, `GameHost`).
+
+## Measured on the owner's iPhone (2026-11-09)
+The owner installed the IPA from `main` (ios run 42544253797) on an iPhone 17 Pro Max (iPhone18,2, iOS 27.0.1) and sent
+the recorder CSV, `ring.log` and `device.txt` (kept in `docs/measurements/m0/`; the numbers in `docs/perf.md`):
+- Idle: 0 frames in the 5 idle seconds (L1). Load: 3,600 frames in 60 s, 0 hitches, every interval 16.67 ms; encode
+  0.107 ms mean, 0.239 ms worst (budget 1 ms).
+- Simulation: 1,800 days in 60 s (30 a second), a day 0.085 ms mean, 0.272 ms worst, on «sanei.sim/user-initiated»: the
+  QoS raise is proven on the device.
+- Main thread: its own work 0.123 ms worst (the recorder's metered closures; SwiftUI's re-render is not metered), worst
+  lag 0.12 ms (10 pings a second). Thermal nominal. Memory headroom (`os_proc_available_memory`, not free memory) 6,654 MB
+  at launch, 6,591 MB under load; L8's `phys_footprint` is not measured yet (M0b).
+- Every engine ran on its own thread (render, sim, io, main), as the CSV's thread columns show.
+- **Over budget:** I/O, worst 6.17 ms against 5 ms a write. 72 operations = 8 ring-log flushes + 64 CSV-row builds
+  (metered as `.io`, 0.10–0.20 ms). The flushes, each an atomic rewrite of a file under 1 KB, took 2.8–6.2 ms, 5 of 8
+  over budget, most likely the write's sync. They disturbed nothing (no hitch, main lag 0.12 ms), but the budget is the
+  budget.
+- **Fix (after two reviews, then their fixes):** `IOEngine.flushLog` opens the file once (open(2) with O_CREAT and
+  O_APPEND: no temporary file, no rename) and appends only the new lines (RingBuffer's sequence numbers, tested on
+  Linux), with no sync: an app crash or kill keeps every flushed line; a power loss or kernel panic may lose what the
+  kernel had not yet put on disk (the atomic write most likely synced). The file restarts in place from the lines held
+  after a failed or partial write (the next try a minute later), a deletion from Files (the folder made again), or 1 MB
+  of growth (§3.8), with a marker line; flushes wait for the launch rotation, which runs whatever happens to the other
+  folders (a file kept by a failed rotation gets a marker before this session's lines); the export flushes and copies
+  the file. The recorder logs a line before each 10-second flush (so
+  each is a real append), the I/O that ran before the recording (launch, exports, the last CSV, payloads) and the CSV
+  write's time, so the next IPA measures the one-off writes too. Re-measured with the next IPA.
+
+The fix passed the two reviews and four verification rounds (the last found nothing to fix); CI green (ci-linux, ios
+42657578013 on 2591bdf). The owner re-measures with that IPA.

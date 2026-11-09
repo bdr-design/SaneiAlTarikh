@@ -12,7 +12,7 @@ final class RecorderUI {
     var lastSummary: String?
     /// One line per engine from the last recording: its mean and worst time and the thread it ran on.
     var engineLines: [String] = []
-    /// Free memory, refreshed each second while recording (the overlay reads it then).
+    /// The memory headroom (`os_proc_available_memory`), refreshed each second while recording (the overlay reads it then).
     var memoryMB: Double?
 }
 
@@ -21,7 +21,8 @@ final class RecorderUI {
 /// simulation runs at its top speed (`load`, 30 days a second, D-16). Each second, on deadlines that do not drift, it
 /// writes one CSV row from the engines' meters (frames, encode time, hitches, frame spacing, the simulation's days and
 /// time per day, the I/O and main-thread work, each engine's threads), the main thread's worst lag (a ping every
-/// 100 ms, timed on the main thread), the real length of the row, thermal state, battery, Low Power Mode and free memory.
+/// 100 ms, timed on the main thread), the real length of the row, thermal state, battery, Low Power Mode and the memory headroom
+/// (`os_proc_available_memory`, not free memory).
 /// Going to the background interrupts it: the rows so far are written to a file marked "interrupted".
 actor RecorderEngine {
     static let shared = RecorderEngine()
@@ -47,7 +48,10 @@ actor RecorderEngine {
         running = true
         interrupted = false
         let seconds = idleSeconds + loadSeconds
-        _ = EngineMeter.shared.drain()
+        // what ran before the recording (launch, exports, the last recording's CSV, MetricKit payloads) is in no row:
+        // its I/O goes to the log, so the one-off writes are measured too
+        let before = EngineMeter.shared.drain()[.io] ?? EngineMeter.Sample()
+        RingLog.shared.log(String(format: "recorder: before it, io %ld operations, worst %.2f ms", before.count, before.maxMs))
         _ = RenderEngine.shared.drainFrames()
         var sim: Task<Void, Never>?
         var rows = [Self.header]
@@ -68,7 +72,9 @@ actor RecorderEngine {
                 RenderEngine.shared.setContinuous(true)
                 sim = Task.detached(priority: .utility) { await load() }
             } else if second % 10 == 0 {
-                // the log's file follows the recording (the heaviest moment), so a crash in it leaves its lines
+                // the log's file follows the recording (the heaviest moment), so a crash in it leaves its lines; the
+                // line written each time makes every flush a real append (the cost the recorder measures)
+                RingLog.shared.log("recorder: second \(second)")
                 await RingLog.shared.flush()
             }
             var lag = Duration.zero
@@ -119,9 +125,12 @@ actor RecorderEngine {
         RenderEngine.shared.setContinuous(false)
         let cut = done < seconds
         var file = ""
+        let writeStart = ContinuousClock.now
         do {
             let url = try await IOEngine.shared.writeCSV(rows, name: "recorder-\(Stamp.now())\(cut ? "-interrupted" : "").csv")
             file = url.lastPathComponent
+            RingLog.shared.log(String(format: "recorder: the CSV written in %.2f ms (with the wait for the I/O thread)",
+                                      Self.ms(writeStart.duration(to: .now))))
         } catch {
             RingLog.shared.log("recorder write failed: \(error)")
         }

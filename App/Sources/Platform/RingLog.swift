@@ -17,6 +17,15 @@ final class RingLog: @unchecked Sendable {
         lock.unlock()
     }
 
+    /// The lines from sequence number `start` on that are still held, the next sequence number, and how many lines from
+    /// `start` on have already dropped out of the buffer.
+    func lines(since start: Int) -> (lines: [String], next: Int, lost: Int) {
+        lock.lock()
+        defer { lock.unlock() }
+        let r = lines.elements(since: start)
+        return (r.elements, r.next, r.lost)
+    }
+
     /// The lines, oldest first.
     func snapshot() -> [String] {
         lock.lock()
@@ -24,8 +33,8 @@ final class RingLog: @unchecked Sendable {
         return lines.elements
     }
 
-    /// Hands the lines to the I/O engine, which writes the file on its thread.
+    /// Asks the I/O engine to add the lines logged since its last flush to the file, on its thread.
     func flush() async {
-        await IOEngine.shared.writeLog(snapshot())
+        await IOEngine.shared.flushLog()
     }
 }
