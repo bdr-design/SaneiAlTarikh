@@ -1,6 +1,6 @@
 // The simulation's random numbers (§2.3): SplitMix64, seeded from counters, never from a clock or the system's
 // generator. A draw depends only on (the game's seed, a key, a stream, a serial): the key is the day or, for fog of
-// war, the intelligence epoch; each purpose has its own stream; the serial is the entity's. So the order in which
+// war, the intelligence epoch; each system has its own stream; the serial is the entity's. So the order in which
 // systems or threads run never changes a result, and no generator is saved between days. stdlib only.
 
 /// A deterministic generator. It is deliberately not a `RandomNumberGenerator`: the standard library does not promise
@@ -16,8 +16,9 @@ public struct DetRNG: Sendable {
     /// skips the game's seed.
     @inlinable init(state: UInt64) { self.state = state }
 
-    /// The generator of one (seed, key, stream, serial). Each coordinate is mixed in on its own: were the seed and the
-    /// key added first, the game with seed 2012 would roll on each day what the game with seed 2011 rolls on the next.
+    /// The generator of one (seed, key, stream, serial). Each coordinate is mixed in on its own. If the seed and the
+    /// key were added first, the game with seed 2012 would roll on each day what the game with seed 2011 rolls on
+    /// the next.
     @inlinable
     public init(seed: UInt64, key: Int64, stream: UInt32, serial: UInt32) {
         let game = DetRNG.mix(seed &+ DetRNG.gamma)
@@ -58,7 +59,7 @@ public struct DetRNG: Sendable {
     }
 
     /// True with probability `p` (always from 100% up, never at 0 or below). One draw. The grain is 1 bp: a chance
-    /// that is not a whole number of basis points is not this function's to take.
+    /// that is not a whole number of basis points needs another function.
     @inlinable
     public mutating func chance(_ p: BP) -> Bool {
         bp() < p

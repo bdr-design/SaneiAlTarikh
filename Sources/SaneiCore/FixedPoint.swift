@@ -85,9 +85,10 @@ enum FixedMath {
         return divide(high: mx >> 32, low: mx << 32, by: y.magnitude, negative: (x < 0) != (y < 0))
     }
 
-    /// (high * 2^64 + low) / d for d > 0, to the nearest whole; nil when that does not fit in 64 bits.
+    /// (high * 2^64 + low) / d, to the nearest whole; nil when that does not fit in 64 bits, and when d is 0.
     @inlinable
     static func quotient(high: UInt64, low: UInt64, by d: UInt64) -> UInt64? {
+        if d == 0 { return nil }
         if high == 0 {
             // the dividend fits in 64 bits: one hardware division, not the 128-bit routine. q + 1 cannot wrap: a
             // quotient of 2^64 - 1 needs d = 1, and then nothing is left over
@@ -284,7 +285,7 @@ public struct LogQ: Sendable, Hashable, Comparable {
 
     /// The logarithm of a level, within 2e-7 (the bottom of the range, counted, when the level is not positive). It
     /// takes a level, not an exponent. A level below 1 has few bits as a `Q32` (1/20,500 is already 2e-6 off): build a
-    /// small level as the negated logarithm of its reciprocal, `-LogQ(Q32(20_500))`. A level within 0.2 of the top of
+    /// small level as the negated logarithm of its reciprocal, `-LogQ(Q32(20_500))`. A level within about 0.17 of the top of
     /// `Q32`'s range rounds to the logarithm 31, whose own level no longer fits.
     @inlinable public init(_ level: Q32) { self = DMath.log2(level) }
 
@@ -305,7 +306,7 @@ public struct LogQ: Sendable, Hashable, Comparable {
     @inlinable public var level: Q32 { DMath.exp2(self) }
 
     /// A bare whole number times the level: the way a price index or an exchange rate is applied, at any size of
-    /// level. Within 6e-8 of the true product, relative, or one unit: the level comes from a table, so this is not
+    /// level. Within 6e-8 of the true product plus one unit: the level comes from a table, so this is not
     /// exactly rounded and going there and back does not return the same number. For money use `Amount.times`.
     @inlinable public func applied(to amount: Int64) -> Int64 { DMath.scale(amount, by: self) }
 }

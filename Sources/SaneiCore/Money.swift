@@ -1,6 +1,6 @@
 // Money in the simulation (§2.3, §2.4's ledger, ADR 0019 to come): whole numbers in three kinds of unit. The types are
 // distinct, so adding a local-currency amount to a dollar amount does not compile. The compiler does not tell one
-// currency's `LCU` from another's, nor a currency before and after a redenomination: the ledger keeps those apart.
+// currency's `LCU` from another's, nor a currency before and after a redenomination: the ledger must keep those apart.
 // stdlib only.
 
 /// A whole amount in one unit. Sums clamp and count (Saturation); amounts of different units cannot be combined.
@@ -25,7 +25,7 @@ extension Amount {
     @inlinable public func times(_ factor: Q32) -> Self { Self(raw: factor.applied(to: raw)) }
 
     /// The amount times a level kept as a logarithm (a price index, a growth factor), in the same unit. Within 6e-8
-    /// of the true product, relative, or one unit; not exactly reversible (see `LogQ.applied`).
+    /// of the true product plus one unit; not exactly reversible (see `LogQ.applied`).
     @inlinable public func times(_ level: LogQ) -> Self { Self(raw: level.applied(to: raw)) }
 }
 
@@ -53,7 +53,8 @@ public struct USDn: Amount {
 }
 
 /// Constant 2011 US dollars, in units of $1,000: reports, comparisons, the score, «لماذا؟» values. Derived only: it is
-/// never posted to a ledger account (the ledger's postings take `LCU` and `USDn`; the type alone does not stop it).
+/// it must never be posted to a ledger account. The type alone does not stop that: the ledger's postings must take
+/// `LCU` and `USDn` only.
 @frozen
 public struct Money: Amount {
     public var raw: Int64

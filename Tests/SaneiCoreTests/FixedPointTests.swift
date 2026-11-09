@@ -35,6 +35,21 @@ final class FixedPointTests: XCTestCase {
         let sum = Saturation.counted { Q32.max + Q32.max + Q32.one }
         XCTAssertEqual(sum.result, Q32.max)
         XCTAssertEqual(sum.clamps, 2)
+        // it is a scope of its own: inside another scope, the outer counter does not see its clamps
+        let outer = SaturationCounter()
+        let inner = Saturation.counting(into: outer) { () -> UInt64 in
+            _ = Q32.max + Q32.one
+            return Saturation.counted {
+                _ = Q32.max + Q32.one
+                _ = Q32.min - Q32.one
+            }.clamps
+        }
+        XCTAssertEqual(inner, 2)
+        XCTAssertEqual(outer.count, 1)
+        // a quotient by zero is «does not fit», never a trap (the callers answer zero themselves; this is the floor)
+        XCTAssertNil(FixedMath.quotient(high: 0, low: 5, by: 0))
+        XCTAssertNil(FixedMath.quotient(high: 1, low: 5, by: 0))
+        XCTAssertNil(FixedMath.quotient(high: 0, low: 0, by: 0))
         // a scope that ends by an error has still counted, and is over
         struct Stop: Error {}
         let broken = SaturationCounter()
@@ -53,7 +68,8 @@ final class FixedPointTests: XCTestCase {
             for child in 0..<8 {
                 group.addTask {
                     Saturation.counted {
-                        for _ in 0..<(1_000 + child) { _ = Q32.max + Q32.one }
+                        // long enough for the children to run at the same time: a counter they shared would lose counts
+                        for _ in 0..<(200_000 + child) { _ = Q32.max + Q32.one }
                     }.clamps
                 }
             }
@@ -61,12 +77,54 @@ final class FixedPointTests: XCTestCase {
             for await clamps in group { sum += clamps }
             return sum
         }
-        XCTAssertEqual(total, 8_028, "8 children, 1,000 to 1,007 clamps each")
+        XCTAssertEqual(total, 1_600_028, "8 children, 200,000 to 200,007 clamps each")
         XCTAssertFalse(Saturation.isCounting)
         // a scope bound inside a task (the engine's case) counts the same way
         let c = SaturationCounter()
         Saturation.counting(into: c) { _ = Q32.max + Q32.one }
         XCTAssertEqual(c.count, 1)
+    }
+
+    /// The long scope (ADR 0002): one around a whole run of ticks. It follows its task across awaits, and a burst
+    /// inside it works as the engine's must: every child counts its own clamps and the parent adds them up.
+    func testTheLongScopeFollowsItsTask() async {
+        let c = SaturationCounter()
+        let fromChildren = await Saturation.countingAcrossAwaits(into: c) { () async -> UInt64 in
+            _ = Q32.max + Q32.one
+            await Task.yield()
+            XCTAssertTrue(Saturation.isCounting)
+            _ = Q32.max + Q32.one
+            let burst = await withTaskGroup(of: UInt64.self, returning: UInt64.self) { group in
+                for _ in 0..<4 {
+                    group.addTask {
+                        Saturation.counted {
+                            for _ in 0..<50_000 { _ = Q32.max + Q32.one }
+                        }.clamps
+                    }
+                }
+                var sum: UInt64 = 0
+                for await clamps in group { sum += clamps }
+                return sum
+            }
+            XCTAssertTrue(Saturation.isCounting, "still inside after the burst")
+            _ = Q32.max + Q32.one
+            return burst
+        }
+        XCTAssertEqual(c.count, 3, "the scope's own clamps, before and after its awaits; none of the children's")
+        XCTAssertEqual(fromChildren, 200_000)
+        XCTAssertFalse(Saturation.isCounting)
+        // an error ends it like any scope
+        struct Stop: Error {}
+        do {
+            try await Saturation.countingAcrossAwaits(into: c) {
+                _ = Q32.max + Q32.one
+                await Task.yield()
+                throw Stop()
+            }
+            XCTFail("the error must come out")
+        } catch {}
+        XCTAssertEqual(c.count, 4)
+        XCTAssertFalse(Saturation.isCounting)
     }
 
     /// The silent cases the ADR names: a clamp outside every scope is not counted. A detached task starts outside;

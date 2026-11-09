@@ -442,7 +442,8 @@ def vectors():
     ratios = [(1, 3), (2, 3), (-1, 3), (1, -3), (5, 0), (0, 0), (-5, 0), (I64_MAX, 1), (1 << 31, 1), ((1 << 31) - 1, 1), (-(1 << 31), 1), (7, 1 << 40), (I64_MIN, I64_MAX), (I64_MIN, -1), (5_000_000, 20_000_000), (3, 1 << 33)]
     fs.add('q32Ratio', [I64, I64, I64], [((a, b), lambda a=a, b=b: q_div_raw(a, b)) for a, b in ratios + [(s64(g, 50), s64(g, 30)) for _ in range(20)]], div_truth)
     g = fs.stream()
-    applies = [(ONE, 5), (ONE // 2, 5), (ONE // 2, -5), (ONE // 2, 3), (-ONE // 2, 3), (3 * ONE, I64_MAX), (ONE, I64_MIN), (I64_MAX, 2), (1, 1 << 31), (1, (1 << 31) - 1)]
+    applies = [(ONE, 5), (ONE // 2, 5), (ONE // 2, -5), (ONE // 2, 3), (-ONE // 2, 3), (3 * ONE, I64_MAX), (ONE, I64_MIN), (I64_MAX, 2), (1, 1 << 31), (1, (1 << 31) - 1),
+               (I64_MIN, 1), (I64_MIN, -1), (I64_MIN, I64_MIN), (I64_MAX, I64_MAX), (I64_MIN, 0), (0, I64_MIN)]
     fs.add('q32Apply', [I64, I64, I64], [((q, a), lambda q=q, a=a: q_apply(q, a)) for q, a in applies + [(s64(g, 36), s64(g, 60)) for _ in range(30)]], lambda q, a: want64(Fraction(q * a, ONE)))
     g = fs.stream()
     rounds = [0, 1, -1, ONE // 2, -ONE // 2, ONE // 2 - 1, -ONE // 2 - 1, ONE + ONE // 2, -ONE - ONE // 2, I64_MAX, I64_MIN] + [s64(g, 45) for _ in range(12)]
@@ -507,13 +508,25 @@ def vectors():
     fs.add('isqrt', [U64, U64], [((n,), lambda n=n: isqrt(n)) for n in ns + [g.next() for _ in range(15)] + [g.next() >> 30 for _ in range(10)]], isqrt_truth)
     g = fs.stream()
     qs = [0, 1, 2, 4, ONE, ONE - 1, ONE + 1, 4 * ONE, 2 * ONE, ONE // 4, ONE // 16, ONE // 16 - 1, I64_MAX, 1 << 62, -1, I64_MIN, 100 * ONE, 1 << 33, (1 << 33) - 1, 1 << 31, 42949673]
-    fs.add('q32Sqrt', [I64, I64], [((q,), lambda q=q: q_sqrt(q)) for q in qs + [g.next() >> 1 for _ in range(15)] + [g.next() >> 33 for _ in range(10)]])
+    def sqrt_truth(q):
+        if q < 0: return (0, 1)
+        r, true = q_sqrt(q), (Decimal(q) / ONE).sqrt() * ONE
+        assert r <= true and (true - r < 1 if q < ONE else (true - r) / true < Decimal(2) ** -30), q
+        return None
+    fs.add('q32Sqrt', [I64, I64], [((q,), lambda q=q: q_sqrt(q)) for q in qs + [g.next() >> 1 for _ in range(15)] + [g.next() >> 33 for _ in range(10)]], sqrt_truth)
     g = fs.stream()
     ls = [0, 1, -1, ONE, -ONE, 5 * ONE, -5 * ONE, 45 * ONE, 46 * ONE - 1, 46 * ONE, -46 * ONE, 100 * ONE, I64_MAX, I64_MIN, ONE // 1000, 8931133415, -8931133415, 17862266830, 8334305841]
-    fs.add('logistic', [I64, I64], [((x,), lambda x=x: logistic(x)) for x in ls + [s64(g, 38) for _ in range(30)]])
+    def logistic_truth(x):
+        t = (-(Decimal(abs(x)) / ONE)).exp()                        # e^-|x|: never too large for a decimal
+        low = t / (1 + t)
+        assert abs(Decimal(logistic(x)) / ONE - (low if x < 0 else 1 - low)) <= Decimal('2e-8'), x
+        return None
+    fs.add('logistic', [I64, I64], [((x,), lambda x=x: logistic(x)) for x in ls + [s64(g, 38) for _ in range(30)]], logistic_truth)
     seq = RNG(1234567)
     fs.add('rngSeq', [U64], [((), lambda: seq.next()) for _ in range(8)])
-    keys = [(0, 0, 0, 0), (1, 0, 0, 0), (0, 1, 0, 0), (0, 0, 1, 0), (0, 0, 0, 1), (2011, 14975, 3, 77), (2011, 14976, 3, 77), (2012, 14974, 3, 77), (2012, 14975, 3, 77), (2011, 14975, 4, 77), (2011, 14975, 3, 78), (M64, -1, 0xFFFFFFFF, 0xFFFFFFFF), (0xDEADBEEF, -43829, 12, 4000000000), (42, 84370, 1, 2)]
+    keys = [(0, 0, 0, 0), (1, 0, 0, 0), (0, 1, 0, 0), (0, 0, 1, 0), (0, 0, 0, 1), (2011, 14975, 3, 77), (2011, 14976, 3, 77), (2012, 14974, 3, 77), (2012, 14975, 3, 77), (2011, 14975, 4, 77), (2011, 14975, 3, 78), (M64, -1, 0xFFFFFFFF, 0xFFFFFFFF), (0xDEADBEEF, -43829, 12, 4000000000), (42, 84370, 1, 2),
+            (7, I64_MAX, 1, 2), (7, I64_MIN, 1, 2), (0xFEDCBA9876543210, 0x0123456789ABCDEF, 0x89ABCDEF, 0x76543210),
+            (0x7EDCBA9876543210, -0x0123456789ABCDEF, 0x89ABCDEF, 0x76543210), (0xFEDCBA9876543210, 0x0123456709ABCDEF, 0x89ABCDEF, 0x76543210)]
 
     def three(seed, key, stream, serial):
         k = RNG.keyed(seed, key, stream, serial)
@@ -529,7 +542,9 @@ def vectors():
     ds = [(1850, 1, 1), (1899, 12, 31), (1900, 2, 28), (1900, 3, 1), (1969, 12, 31), (1970, 1, 1), (2000, 2, 29), (2011, 1, 1), (2011, 1, 25), (2011, 7, 9), (2012, 2, 29), (2100, 2, 28), (2100, 3, 1), (2200, 12, 31), (1979, 2, 11), (1990, 8, 2), (2026, 1, 1)]
     fs.add('dates', [I32, I32, I32, I32, I32], [((y, m, d), lambda y=y, m=m, d=d: (days_from_civil(y, m, d), weekday(days_from_civil(y, m, d)))) for y, m, d in ds],
            lambda y, m, d: (((datetime.date(y, m, d) - EPOCH).days, (datetime.date(y, m, d).weekday() + 1) % 7), 0))
-    fs.add('monthFacts', [I32, I32, I32, I32], [((y, m), lambda y=y, m=m: (days_in(m, y), int(is_leap(y)))) for y, m in [(2011, 2), (2012, 2), (1900, 2), (2000, 2), (2100, 2), (2011, 1), (2011, 4), (2011, 12), (2011, 0), (2011, 13), (1850, 6), (2200, 9), (2011, -1)]])
+    fs.add('monthFacts', [I32, I32, I32, I32], [((y, m), lambda y=y, m=m: (days_in(m, y), int(is_leap(y)))) for y, m in [(2011, 2), (2012, 2), (1900, 2), (2000, 2), (2100, 2), (2011, 1), (2011, 4), (2011, 12), (2011, 0), (2011, 13), (1850, 6), (2200, 9), (2011, -1),
+           (I32_MAX, 12), (I32_MIN, 1), (2011, I32_MAX), (2011, I32_MIN), (-4, 2), (0, 2)]],
+           lambda y, m: ((calendar.monthrange(y, m)[1] if 1 <= m <= 12 and 1 <= y <= 9999 else days_in(m, y), int(calendar.isleap(y))), 0))
     INT_MAX, INT_MIN = I64_MAX, I64_MIN
     I32MAX, I32MIN = I32_MAX, I32_MIN
     d2011 = days_from_civil(2011, 1, 31)
@@ -551,11 +566,13 @@ def vectors():
     fs.add('startOfMonth', [I32, I32], [((z,), lambda z=z: start_of_month(z)) for z in starts + [days_from_civil(2011, 3, 1), days_from_civil(2100, 2, 28)]],
            lambda z: ((py_date(z).replace(day=1) - EPOCH).days, 0) if DAY_MIN <= z <= DAY_MAX else None)
     g = fs.stream()
-    defl = [(3000, 0), (3000, ONE), (3000, -ONE), (-3000, ONE // 2), (0, I64_MIN), (5, I64_MIN), (-5, I64_MIN), (I64_MAX, -1), (I64_MAX, 1), (1 << 40, 40 * ONE), (15_600_000_000, 2 * ONE + 12345)]
+    defl = [(3000, 0), (3000, ONE), (3000, -ONE), (-3000, ONE // 2), (0, I64_MIN), (5, I64_MIN), (-5, I64_MIN), (I64_MAX, -1), (I64_MAX, 1), (1 << 40, 40 * ONE), (15_600_000_000, 2 * ONE + 12345),
+            (I64_MIN, 0), (I64_MIN, ONE), (I64_MIN, -ONE), (5, I64_MAX), (I64_MAX, I64_MAX), (I64_MIN, I64_MAX), (I64_MIN, I64_MIN)]
 
     def deflate(nominal, d):
         return scale(nominal, q_neg(d))
-    fs.add('moneyDeflated', [I64, I64, I64], [((a, d), lambda a=a, d=d: deflate(a, d)) for a, d in defl + [(s64(g, 45), s64(g, 34)) for _ in range(10)]])
+    fs.add('moneyDeflated', [I64, I64, I64], [((a, d), lambda a=a, d=d: deflate(a, d)) for a, d in defl + [(s64(g, 45), s64(g, 34)) for _ in range(10)]],
+           lambda a, d: scale_truth(a, -d) if d != I64_MIN else None)
     return fs
 
 
@@ -589,7 +606,8 @@ def swift_golden(vs):
            "// the reference counted for that row.", "",
            "enum CoreGolden {"]
     for name, ty, rows in vs:
-        out.append(f"    /// {len(rows)} rows, {sum(r[-1] for r in rows)} clamps.")
+        clamps = sum(r[-1] for r in rows)
+        out.append(f"    /// {len(rows)} rows, {clamps} clamp{'' if clamps == 1 else 's'}.")
         out.append(f"    static let {name}: [{ty}] = [")
         out += ['        (' + ', '.join(str(v) for v in r) + '),' for r in rows]
         out.append("    ]")

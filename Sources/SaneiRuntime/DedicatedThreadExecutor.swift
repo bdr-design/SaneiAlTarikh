@@ -28,6 +28,16 @@ public final class DedicatedThreadExecutor: SerialExecutor, @unchecked Sendable 
     private func loop() {
         // name the thread from inside it: on Linux a name set before start never reaches the OS thread
         Thread.current.name = name
+        #if os(Linux)
+        // On Linux, Foundation's setter names the OS thread through the handle the creating thread stores after it
+        // has started this one. Under load this thread can run first, and the name was then not applied (seen as a
+        // test that failed once in 60 runs). So the thread also writes its own name where the kernel keeps it (the
+        // kernel cuts it to 15 bytes); if that file cannot be opened, the name stays as Foundation left it.
+        if let comm = fopen("/proc/thread-self/comm", "w") {
+            fputs(name, comm)
+            fclose(comm)
+        }
+        #endif
         let me = asUnownedSerialExecutor()
         var batch: [UnownedJob] = []
         batch.reserveCapacity(64)

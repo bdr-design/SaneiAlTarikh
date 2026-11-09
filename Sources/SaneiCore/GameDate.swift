@@ -9,8 +9,9 @@ public struct GameDate: Sendable, Hashable, Comparable {
     /// Days since 1970-01-01 (negative before it).
     public var days: Int32
 
-    /// Any day count, as a save or a column holds it. Not checked: ask `isSupported`. Adding to an unsupported date
-    /// brings it to the nearest end of the supported range, counted.
+    /// Any day count, as a save or a column holds it. Not checked: ask `isSupported`. A step from an unsupported
+    /// date is a plain step when it lands inside the supported range; when it lands outside, it comes back to the
+    /// nearest end, counted.
     @inlinable public init(days: Int32) { self.days = days }
 
     /// 1850-01-01: the first supported day (not the type's limit).
@@ -76,7 +77,7 @@ public struct GameDate: Sendable, Hashable, Comparable {
 
     /// The same day `n` months later (earlier when negative); a day past the month's end becomes its last day
     /// (31 January + 1 month = 28 or 29 February). So steps do not add up: one month three times from 31 January is
-    /// 28 April, three months at once 30 April; a term counts its months from its start date. Held at the ends of the
+    /// 28 or 29 April, three months at once 30 April; a term counts its months from its start date. Held at the ends of the
     /// supported range and counted there.
     public func adding(months n: Int) -> GameDate {
         let c = civil
