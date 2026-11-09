@@ -1,7 +1,7 @@
 {
  "se": {
   "device": "667x375 side 0 bottom 0 none",
-  "renderedAt": "2026-11-09T00:19:06.086Z",
+  "renderedAt": "2026-11-09T00:21:32.835Z",
   "inputs": {
    "files": [
     "index.html",
@@ -26,23 +26,12 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "d8d909e7f2e194b902a3c6c9f0244473aa0459d3"
+   "sha1": "76d7e6bac2d48d8b7880f6bf6b149d187c3c7c09"
   },
-  "issues": [
-   "s1: PIN 667x375:s1 88c3fd7e/233",
-   "s1_end: PIN 667x375:s1 88c3fd7e/233",
-   "s2: PIN 667x375:s2 5aceb0fe/233",
-   "s2_end: PIN 667x375:s2 5aceb0fe/233",
-   "s3: PIN 667x375:s3 96df1a55/233",
-   "s3_end: PIN 667x375:s3 96df1a55/233",
-   "s4: PIN 667x375:s4 a3ec4d20/233",
-   "s4_end: PIN 667x375:s4 a3ec4d20/233",
-   "s5: PIN 667x375:s5 c2eb9364/233",
-   "s5_end: PIN 667x375:s5 c2eb9364/233"
-  ],
+  "issues": [],
   "views": {
    "s1": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -453,7 +442,7 @@
     ]
    },
    "s1_end": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -864,7 +853,7 @@
     ]
    },
    "s2": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -1250,7 +1239,7 @@
     ]
    },
    "s2_end": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -1636,7 +1625,7 @@
     ]
    },
    "s3": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -2057,7 +2046,7 @@
     ]
    },
    "s3_end": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -2478,7 +2467,7 @@
     ]
    },
    "s4": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -2879,7 +2868,7 @@
     ]
    },
    "s4_end": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -3280,7 +3269,7 @@
     ]
    },
    "s5": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -3649,7 +3638,7 @@
     ]
    },
    "s5_end": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -4055,11 +4044,11 @@
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 10
+  "issueCount": 0
  },
  "mini": {
   "device": "812x375 side 50 bottom 21 notch",
-  "renderedAt": "2026-11-09T00:19:23.119Z",
+  "renderedAt": "2026-11-09T00:21:49.404Z",
   "inputs": {
    "files": [
     "index.html",
@@ -4084,23 +4073,12 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "d8d909e7f2e194b902a3c6c9f0244473aa0459d3"
+   "sha1": "76d7e6bac2d48d8b7880f6bf6b149d187c3c7c09"
   },
-  "issues": [
-   "s1: PIN 812x375:s1 d88e4dc/233",
-   "s1_end: PIN 812x375:s1 d88e4dc/233",
-   "s2: PIN 812x375:s2 109f2e94/233",
-   "s2_end: PIN 812x375:s2 109f2e94/233",
-   "s3: PIN 812x375:s3 c99aaf1b/233",
-   "s3_end: PIN 812x375:s3 c99aaf1b/233",
-   "s4: PIN 812x375:s4 49affd0e/233",
-   "s4_end: PIN 812x375:s4 49affd0e/233",
-   "s5: PIN 812x375:s5 4f60e0cc/233",
-   "s5_end: PIN 812x375:s5 4f60e0cc/233"
-  ],
+  "issues": [],
   "views": {
    "s1": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -4518,7 +4496,7 @@
     ]
    },
    "s1_end": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -4936,7 +4914,7 @@
     ]
    },
    "s2": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -5329,7 +5307,7 @@
     ]
    },
    "s2_end": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -5722,7 +5700,7 @@
     ]
    },
    "s3": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -6150,7 +6128,7 @@
     ]
    },
    "s3_end": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -6578,7 +6556,7 @@
     ]
    },
    "s4": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -6986,7 +6964,7 @@
     ]
    },
    "s4_end": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -7394,7 +7372,7 @@
     ]
    },
    "s5": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -7770,7 +7748,7 @@
     ]
    },
    "s5_end": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -8183,11 +8161,11 @@
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 10
+  "issueCount": 0
  },
  "i14": {
   "device": "844x390 side 47 bottom 21 notch",
-  "renderedAt": "2026-11-09T00:19:40.876Z",
+  "renderedAt": "2026-11-09T00:22:07.253Z",
   "inputs": {
    "files": [
     "index.html",
@@ -8212,23 +8190,12 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "d8d909e7f2e194b902a3c6c9f0244473aa0459d3"
+   "sha1": "76d7e6bac2d48d8b7880f6bf6b149d187c3c7c09"
   },
-  "issues": [
-   "s1: PIN 844x390:s1 c08def1d/233",
-   "s1_end: PIN 844x390:s1 c08def1d/233",
-   "s2: PIN 844x390:s2 9c913875/233",
-   "s2_end: PIN 844x390:s2 9c913875/233",
-   "s3: PIN 844x390:s3 4334887e/233",
-   "s3_end: PIN 844x390:s3 4334887e/233",
-   "s4: PIN 844x390:s4 51017367/233",
-   "s4_end: PIN 844x390:s4 51017367/233",
-   "s5: PIN 844x390:s5 6baa23fd/233",
-   "s5_end: PIN 844x390:s5 6baa23fd/233"
-  ],
+  "issues": [],
   "views": {
    "s1": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -8756,7 +8723,7 @@
     ]
    },
    "s1_end": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -9284,7 +9251,7 @@
     ]
    },
    "s2": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -9787,7 +9754,7 @@
     ]
    },
    "s2_end": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -10290,7 +10257,7 @@
     ]
    },
    "s3": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -10828,7 +10795,7 @@
     ]
    },
    "s3_end": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -11366,7 +11333,7 @@
     ]
    },
    "s4": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -11884,7 +11851,7 @@
     ]
    },
    "s4_end": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -12402,7 +12369,7 @@
     ]
    },
    "s5": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -12888,7 +12855,7 @@
     ]
    },
    "s5_end": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -13411,11 +13378,11 @@
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 10
+  "issueCount": 0
  },
  "i16": {
   "device": "852x393 side 59 bottom 21 island",
-  "renderedAt": "2026-11-09T00:19:59.080Z",
+  "renderedAt": "2026-11-09T00:22:25.439Z",
   "inputs": {
    "files": [
     "index.html",
@@ -13440,23 +13407,12 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "d8d909e7f2e194b902a3c6c9f0244473aa0459d3"
+   "sha1": "76d7e6bac2d48d8b7880f6bf6b149d187c3c7c09"
   },
-  "issues": [
-   "s1: PIN 852x393:s1 c652c195/233",
-   "s1_end: PIN 852x393:s1 c652c195/233",
-   "s2: PIN 852x393:s2 c961f949/233",
-   "s2_end: PIN 852x393:s2 c961f949/233",
-   "s3: PIN 852x393:s3 985c66a2/233",
-   "s3_end: PIN 852x393:s3 985c66a2/233",
-   "s4: PIN 852x393:s4 cd48cca3/233",
-   "s4_end: PIN 852x393:s4 cd48cca3/233",
-   "s5: PIN 852x393:s5 6e7655db/233",
-   "s5_end: PIN 852x393:s5 6e7655db/233"
-  ],
+  "issues": [],
   "views": {
    "s1": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -13973,7 +13929,7 @@
     ]
    },
    "s1_end": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -14490,7 +14446,7 @@
     ]
    },
    "s2": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -14982,7 +14938,7 @@
     ]
    },
    "s2_end": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -15474,7 +15430,7 @@
     ]
    },
    "s3": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -16001,7 +15957,7 @@
     ]
    },
    "s3_end": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -16528,7 +16484,7 @@
     ]
    },
    "s4": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -17035,7 +16991,7 @@
     ]
    },
    "s4_end": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -17542,7 +17498,7 @@
     ]
    },
    "s5": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -18017,7 +17973,7 @@
     ]
    },
    "s5_end": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -18529,11 +18485,11 @@
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 10
+  "issueCount": 0
  },
  "i16pro": {
   "device": "874x402 side 62 bottom 21 island",
-  "renderedAt": "2026-11-09T00:20:17.093Z",
+  "renderedAt": "2026-11-09T00:22:44.381Z",
   "inputs": {
    "files": [
     "index.html",
@@ -18558,23 +18514,12 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "d8d909e7f2e194b902a3c6c9f0244473aa0459d3"
+   "sha1": "76d7e6bac2d48d8b7880f6bf6b149d187c3c7c09"
   },
-  "issues": [
-   "s1: PIN 874x402:s1 e45b4ad6/233",
-   "s1_end: PIN 874x402:s1 e45b4ad6/233",
-   "s2: PIN 874x402:s2 201ebe42/233",
-   "s2_end: PIN 874x402:s2 201ebe42/233",
-   "s3: PIN 874x402:s3 beac587d/233",
-   "s3_end: PIN 874x402:s3 beac587d/233",
-   "s4: PIN 874x402:s4 b7a90d20/233",
-   "s4_end: PIN 874x402:s4 b7a90d20/233",
-   "s5: PIN 874x402:s5 d848058c/233",
-   "s5_end: PIN 874x402:s5 d848058c/233"
-  ],
+  "issues": [],
   "views": {
    "s1": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -19102,7 +19047,7 @@
     ]
    },
    "s1_end": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -19630,7 +19575,7 @@
     ]
    },
    "s2": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -20133,7 +20078,7 @@
     ]
    },
    "s2_end": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -20636,7 +20581,7 @@
     ]
    },
    "s3": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -21174,7 +21119,7 @@
     ]
    },
    "s3_end": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -21712,7 +21657,7 @@
     ]
    },
    "s4": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -22230,7 +22175,7 @@
     ]
    },
    "s4_end": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -22748,7 +22693,7 @@
     ]
    },
    "s5": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -23234,7 +23179,7 @@
     ]
    },
    "s5_end": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -23757,11 +23702,11 @@
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 10
+  "issueCount": 0
  },
  "i11": {
   "device": "896x414 side 48 bottom 21 notch",
-  "renderedAt": "2026-11-09T00:20:35.578Z",
+  "renderedAt": "2026-11-09T00:23:03.512Z",
   "inputs": {
    "files": [
     "index.html",
@@ -23786,23 +23731,12 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "d8d909e7f2e194b902a3c6c9f0244473aa0459d3"
+   "sha1": "76d7e6bac2d48d8b7880f6bf6b149d187c3c7c09"
   },
-  "issues": [
-   "s1: PIN 896x414:s1 91fdb858/233",
-   "s1_end: PIN 896x414:s1 91fdb858/233",
-   "s2: PIN 896x414:s2 4e1ab16a/233",
-   "s2_end: PIN 896x414:s2 4e1ab16a/233",
-   "s3: PIN 896x414:s3 4f5c4597/233",
-   "s3_end: PIN 896x414:s3 4f5c4597/233",
-   "s4: PIN 896x414:s4 796b7104/233",
-   "s4_end: PIN 896x414:s4 796b7104/233",
-   "s5: PIN 896x414:s5 4aa284f6/233",
-   "s5_end: PIN 896x414:s5 4aa284f6/233"
-  ],
+  "issues": [],
   "views": {
    "s1": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -24329,7 +24263,7 @@
     ]
    },
    "s1_end": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -24856,7 +24790,7 @@
     ]
    },
    "s2": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -25358,7 +25292,7 @@
     ]
    },
    "s2_end": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -25860,7 +25794,7 @@
     ]
    },
    "s3": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -26397,7 +26331,7 @@
     ]
    },
    "s3_end": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -26934,7 +26868,7 @@
     ]
    },
    "s4": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -27451,7 +27385,7 @@
     ]
    },
    "s4_end": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -27968,7 +27902,7 @@
     ]
    },
    "s5": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -28453,7 +28387,7 @@
     ]
    },
    "s5_end": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -28975,11 +28909,11 @@
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 10
+  "issueCount": 0
  },
  "i16promax": {
   "device": "956x440 side 62 bottom 21 island",
-  "renderedAt": "2026-11-09T00:20:54.355Z",
+  "renderedAt": "2026-11-09T00:23:23.090Z",
   "inputs": {
    "files": [
     "index.html",
@@ -29004,23 +28938,12 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "d8d909e7f2e194b902a3c6c9f0244473aa0459d3"
+   "sha1": "76d7e6bac2d48d8b7880f6bf6b149d187c3c7c09"
   },
-  "issues": [
-   "s1: PIN 956x440:s1 978dda22/233",
-   "s1_end: PIN 956x440:s1 978dda22/233",
-   "s2: PIN 956x440:s2 2ab410b0/233",
-   "s2_end: PIN 956x440:s2 2ab410b0/233",
-   "s3: PIN 956x440:s3 74822a3f/233",
-   "s3_end: PIN 956x440:s3 74822a3f/233",
-   "s4: PIN 956x440:s4 d2b8a626/233",
-   "s4_end: PIN 956x440:s4 d2b8a626/233",
-   "s5: PIN 956x440:s5 e74476d6/233",
-   "s5_end: PIN 956x440:s5 e74476d6/233"
-  ],
+  "issues": [],
   "views": {
    "s1": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -29546,7 +29469,7 @@
     ]
    },
    "s1_end": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -30072,7 +29995,7 @@
     ]
    },
    "s2": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -30573,7 +30496,7 @@
     ]
    },
    "s2_end": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -31074,7 +30997,7 @@
     ]
    },
    "s3": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -31610,7 +31533,7 @@
     ]
    },
    "s3_end": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -32146,7 +32069,7 @@
     ]
    },
    "s4": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -32662,7 +32585,7 @@
     ]
    },
    "s4_end": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -33178,7 +33101,7 @@
     ]
    },
    "s5": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -33662,7 +33585,7 @@
     ]
    },
    "s5_end": {
-    "issueCount": 1,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -34183,6 +34106,6 @@
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 10
+  "issueCount": 0
  }
 }

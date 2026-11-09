@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-09T00:05:46.092Z",
+ "ranAt": "2026-11-09T00:26:08.868Z",
  "inputs": {
   "files": [
    "index.html",
@@ -16,6 +16,7 @@
    "../../shared/devices.json",
    "_build/tour.css",
    "../../shared/paused_hud.py",
+   "_build/hud_pin.json",
    "../../screen4/A/map_overlay_cairo.svg",
    "../../shared/flag_eg.svg",
    "../../shared/flags/eg.svg",
@@ -23,30 +24,70 @@
    "header_cairo.jpg",
    "map_overlay_cairo.svg"
   ],
-  "sha1": "c8171815aca2ebd60456a2043b4d6ef5b7839fc9"
+  "sha1": "76d7e6bac2d48d8b7880f6bf6b149d187c3c7c09"
  },
  "cleanIssues": {
-  "i16promax": [],
-  "i16promax_s1_end": [],
-  "i16promax_s2": [],
-  "i16promax_s2_end": [],
-  "i16promax_s3": [],
-  "i16promax_s3_end": [],
-  "i16promax_s4": [],
-  "i16promax_s4_end": [],
-  "i16promax_s5": [],
-  "i16promax_s5_end": [],
+  "i16promax": [
+   "the page outside the sheet differs from the approved paused HUD (956x440:s1)"
+  ],
+  "i16promax_s1_end": [
+   "the page outside the sheet differs from the approved paused HUD (956x440:s1)"
+  ],
+  "i16promax_s2": [
+   "the page outside the sheet differs from the approved paused HUD (956x440:s2)"
+  ],
+  "i16promax_s2_end": [
+   "the page outside the sheet differs from the approved paused HUD (956x440:s2)"
+  ],
+  "i16promax_s3": [
+   "the page outside the sheet differs from the approved paused HUD (956x440:s3)"
+  ],
+  "i16promax_s3_end": [
+   "the page outside the sheet differs from the approved paused HUD (956x440:s3)"
+  ],
+  "i16promax_s4": [
+   "the page outside the sheet differs from the approved paused HUD (956x440:s4)"
+  ],
+  "i16promax_s4_end": [
+   "the page outside the sheet differs from the approved paused HUD (956x440:s4)"
+  ],
+  "i16promax_s5": [
+   "the page outside the sheet differs from the approved paused HUD (956x440:s5)"
+  ],
+  "i16promax_s5_end": [
+   "the page outside the sheet differs from the approved paused HUD (956x440:s5)"
+  ],
   "i16promax coverage": [],
-  "se": [],
-  "se_s1_end": [],
-  "se_s2": [],
-  "se_s2_end": [],
-  "se_s3": [],
-  "se_s3_end": [],
-  "se_s4": [],
-  "se_s4_end": [],
-  "se_s5": [],
-  "se_s5_end": [],
+  "se": [
+   "the page outside the sheet differs from the approved paused HUD (667x375:s1)"
+  ],
+  "se_s1_end": [
+   "the page outside the sheet differs from the approved paused HUD (667x375:s1)"
+  ],
+  "se_s2": [
+   "the page outside the sheet differs from the approved paused HUD (667x375:s2)"
+  ],
+  "se_s2_end": [
+   "the page outside the sheet differs from the approved paused HUD (667x375:s2)"
+  ],
+  "se_s3": [
+   "the page outside the sheet differs from the approved paused HUD (667x375:s3)"
+  ],
+  "se_s3_end": [
+   "the page outside the sheet differs from the approved paused HUD (667x375:s3)"
+  ],
+  "se_s4": [
+   "the page outside the sheet differs from the approved paused HUD (667x375:s4)"
+  ],
+  "se_s4_end": [
+   "the page outside the sheet differs from the approved paused HUD (667x375:s4)"
+  ],
+  "se_s5": [
+   "the page outside the sheet differs from the approved paused HUD (667x375:s5)"
+  ],
+  "se_s5_end": [
+   "the page outside the sheet differs from the approved paused HUD (667x375:s5)"
+  ],
   "se coverage": []
  },
  "results": [
@@ -54,7 +95,8 @@
    "name": "type size",
    "ok": true,
    "sample": [
-    "font size 17 for \"جولة البداية\""
+    "font size 17 for \"جولة البداية\"",
+    "the page outside the sheet differs from the approved paused HUD (956x440:s1)"
    ]
   },
   {
@@ -62,6 +104,7 @@
    "ok": true,
    "sample": [
     "text colour off-token rgb(136, 153, 170): \"جولة البداية\"",
+    "the page outside the sheet differs from the approved paused HUD (956x440:s1)",
     "contrast 1.97 for \"جولة البداية\""
    ]
   },
@@ -70,7 +113,8 @@
    "ok": true,
    "sample": [
     "panel radius جولة البداية: 6 (want 12)",
-    "radius 6 for .sheet (want 12)"
+    "radius 6 for .sheet (want 12)",
+    "the page outside the sheet differs from the approved paused HUD (956x440:s1)"
    ]
   },
   {
@@ -95,7 +139,8 @@
    "name": "panel not opaque",
    "ok": true,
    "sample": [
-    "panel not opaque: جولة البداية rgba(9, 17, 25, 0.66)"
+    "panel not opaque: جولة البداية rgba(9, 17, 25, 0.66)",
+    "the page outside the sheet differs from the approved paused HUD (956x440:s1)"
    ]
   },
   {
@@ -103,23 +148,24 @@
    "ok": true,
    "sample": [
     "panel not opaque (opacity 0.60): جولة البداية",
-    "brief text not fully visible: جولة البداية",
-    "brief text not fully visible: اللعبة متوقفة · 1 يناير 2011"
+    "the page outside the sheet differs from the approved paused HUD (956x440:s1)",
+    "brief text not fully visible: جولة البداية"
    ]
   },
   {
    "name": "Egypt covered",
    "ok": true,
    "sample": [
+    "the page outside the sheet differs from the approved paused HUD (956x440:s1)",
     "Nile delta covered by panel جولة البداية",
-    "Egypt covered by panel جولة البداية",
-    "Egypt under the hit box of التالي: المؤشرات، الخطوة 2"
+    "Egypt covered by panel جولة البداية"
    ]
   },
   {
    "name": "map dimmed",
    "ok": true,
    "sample": [
+    "the page outside the sheet differs from the approved paused HUD (956x440:s1)",
     "the map is dimmed (opacity 1.00, filter brightness(0.35))"
    ]
   },
@@ -127,6 +173,7 @@
    "name": "map faded",
    "ok": true,
    "sample": [
+    "the page outside the sheet differs from the approved paused HUD (956x440:s1)",
     "the map is dimmed (opacity 0.30, filter none)"
    ]
   },
@@ -135,15 +182,16 @@
    "ok": true,
    "sample": [
     "a layer added over the page: DIV",
-    "something drawn over the map: DIV (rgba(0, 0, 0, 0.55))",
-    "contrast 1.92 for \"3\""
+    "the page outside the sheet differs from the approved paused HUD (956x440:s1)",
+    "something drawn over the map: DIV (rgba(0, 0, 0, 0.55))"
    ]
   },
   {
    "name": "sheet width",
    "ok": true,
    "sample": [
-    "sheet width 330 (want round(clamp(43% of 832, 340, 380)), or the room the dock leaves if 330..: 358)"
+    "sheet width 330 (want round(clamp(43% of 832, 340, 380)), or the room the dock leaves if 330..: 358)",
+    "the page outside the sheet differs from the approved paused HUD (956x440:s1)"
    ]
   },
   {
@@ -159,7 +207,8 @@
    "name": "dock hidden although it fits",
    "ok": true,
    "sample": [
-    "dock hidden although it fits left of the sheet"
+    "dock hidden although it fits left of the sheet",
+    "the page outside the sheet differs from the approved paused HUD (956x440:s1)"
    ]
   },
   {
@@ -184,13 +233,15 @@
    "name": "fit not the loosest",
    "ok": true,
    "sample": [
-    "fit level 6 is not the loosest that fits: [[0,0]]"
+    "fit level 6 is not the loosest that fits: [[0,0]]",
+    "the page outside the sheet differs from the approved paused HUD (956x440:s1)"
    ]
   },
   {
    "name": "city dot under its name",
    "ok": true,
    "sample": [
+    "the page outside the sheet differs from the approved paused HUD (956x440:s1)",
     "map city dot under its own name: 0"
    ]
   },
@@ -198,6 +249,7 @@
    "name": "city name over a label",
    "ok": true,
    "sample": [
+    "the page outside the sheet differs from the approved paused HUD (956x440:s1)",
     "map city name «القاهرة» over «مصر»"
    ]
   },
@@ -205,32 +257,34 @@
    "name": "map label cut",
    "ok": true,
    "sample": [
+    "the page outside the sheet differs from the approved paused HUD (956x440:s1)",
     "map label ليبيا sliced by the screen edge or the side inset",
-    "map label إيران sliced by the screen edge or the side inset",
-    "map label إيران squeezed between a panel and the screen edge"
+    "map label إيران sliced by the screen edge or the side inset"
    ]
   },
   {
    "name": "contrast",
    "ok": true,
    "sample": [
+    "the page outside the sheet differs from the approved paused HUD (956x440:s1)",
     "contrast 1 for \"الخطوة\"",
-    "contrast 1 for \"1\"",
-    "contrast 1 for \"من\""
+    "contrast 1 for \"1\""
    ]
   },
   {
    "name": "dock item not marked",
    "ok": true,
    "sample": [
-    "the open section «المزيد» is not marked in the dock"
+    "the open section «المزيد» is not marked in the dock",
+    "the page outside the sheet differs from the approved paused HUD (956x440:s1)"
    ]
   },
   {
    "name": "identity line missing",
    "ok": true,
    "sample": [
-    "panel top line none rgb(169, 188, 203) 2px (want the section colour, 2 pt, at the top)"
+    "panel top line none rgb(169, 188, 203) 2px (want the section colour, 2 pt, at the top)",
+    "the page outside the sheet differs from the approved paused HUD (956x440:s1)"
    ]
   },
   {
@@ -238,7 +292,8 @@
    "ok": true,
    "sample": [
     "money unit: «0.4 مليار» (under 1 billion is written in millions)",
-    "the step body is not «sec,primary,skip»: s-note,sec,primary,skip"
+    "the step body is not «sec,primary,skip»: s-note,sec,primary,skip",
+    "the page outside the sheet differs from the approved paused HUD (956x440:s1)"
    ]
   },
   {
@@ -246,7 +301,8 @@
    "ok": true,
    "sample": [
     "a sign outside its number: «تغير +3»",
-    "the step body is not «sec,primary,skip»: s-note,sec,primary,skip"
+    "the step body is not «sec,primary,skip»: s-note,sec,primary,skip",
+    "the page outside the sheet differs from the approved paused HUD (956x440:s1)"
    ]
   },
   {
@@ -254,7 +310,8 @@
    "ok": true,
    "sample": [
     "colour alone: «تراجع» has no arrow or icon",
-    "the step body is not «sec,primary,skip»: s-note r-amber,sec,primary,skip"
+    "the step body is not «sec,primary,skip»: s-note r-amber,sec,primary,skip",
+    "the page outside the sheet differs from the approved paused HUD (956x440:s1)"
    ]
   },
   {
@@ -262,14 +319,16 @@
    "ok": true,
    "sample": [
     "an image in the sheet",
-    "the step body is not «sec,primary,skip»: IMG,sec,primary,skip"
+    "the step body is not «sec,primary,skip»: IMG,sec,primary,skip",
+    "the page outside the sheet differs from the approved paused HUD (956x440:s1)"
    ]
   },
   {
    "name": "close not round",
    "ok": true,
    "sample": [
-    "close button is not round"
+    "close button is not round",
+    "the page outside the sheet differs from the approved paused HUD (956x440:s1)"
    ]
   },
   {
@@ -277,7 +336,8 @@
    "ok": true,
    "sample": [
     "a11y: a label VoiceOver may skip (no role): «اختبار»",
-    "the step body is not «sec,primary,skip»: s-note,sec,primary,skip"
+    "the step body is not «sec,primary,skip»: s-note,sec,primary,skip",
+    "the page outside the sheet differs from the approved paused HUD (956x440:s1)"
    ]
   },
   {
@@ -286,28 +346,31 @@
    "sample": [
     "s3 needs scrolling: 364.0 pt over",
     "fades 0/0 do not match the scroll state (top 0, over 364.0)",
-    "brief text not fully visible: الخطوة 3 من 5 · الأقسام"
+    "the page outside the sheet differs from the approved paused HUD (667x375:s3)"
    ]
   },
   {
    "name": "dock underline missing",
    "ok": true,
    "sample": [
-    "dock underline missing or off: none 16pxx2px rgb(169, 188, 203) (want 16 x 2 in the section colour)"
+    "dock underline missing or off: none 16pxx2px rgb(169, 188, 203) (want 16 x 2 in the section colour)",
+    "the page outside the sheet differs from the approved paused HUD (956x440:s1)"
    ]
   },
   {
    "name": "identity line colour",
    "ok": true,
    "sample": [
-    "panel top line \"\" rgb(63, 224, 208) 2px (want the section colour, 2 pt, at the top)"
+    "panel top line \"\" rgb(63, 224, 208) 2px (want the section colour, 2 pt, at the top)",
+    "the page outside the sheet differs from the approved paused HUD (956x440:s1)"
    ]
   },
   {
    "name": "emblem size",
    "ok": true,
    "sample": [
-    "size 28.0x32.0 for .s-emb (want 32 x 32)"
+    "size 28.0x32.0 for .s-emb (want 32 x 32)",
+    "the page outside the sheet differs from the approved paused HUD (956x440:s1)"
    ]
   },
   {
@@ -315,7 +378,8 @@
    "ok": true,
    "sample": [
     "white touch off: .r-tile color rgb(127, 233, 255) (want rgb(234, 242, 247))",
-    "white touch off: .r-tile color rgb(127, 233, 255) (want rgb(234, 242, 247))"
+    "white touch off: .r-tile color rgb(127, 233, 255) (want rgb(234, 242, 247))",
+    "the page outside the sheet differs from the approved paused HUD (956x440:s1)"
    ]
   },
   {
@@ -323,7 +387,8 @@
    "ok": true,
    "sample": [
     "a11y: the close says only «إغلاق»",
-    "a11y: the close does not say it skips the tour, stays in the help and the game stays paused"
+    "a11y: the close does not say it skips the tour, stays in the help and the game stays paused",
+    "the page outside the sheet differs from the approved paused HUD (956x440:s1)"
    ]
   },
   {
@@ -331,7 +396,8 @@
    "ok": true,
    "sample": [
     "a11y: «جزء» does not read all it shows: التالي المؤشرات",
-    "the primary is not «التالي · المؤشرات» read as «التالي: المؤشرات، الخطوة 2 من 5»"
+    "the primary is not «التالي · المؤشرات» read as «التالي: المؤشرات، الخطوة 2 من 5»",
+    "the page outside the sheet differs from the approved paused HUD (956x440:s1)"
    ]
   },
   {
@@ -347,7 +413,8 @@
    "name": "text wider than its box",
    "ok": true,
    "sample": [
-    "text wider than its box: «الخطوة 1 من 5 · بلدك» (101 in 20)"
+    "text wider than its box: «الخطوة 1 من 5 · بلدك» (101 in 20)",
+    "the page outside the sheet differs from the approved paused HUD (956x440:s1)"
    ]
   },
   {
@@ -372,7 +439,8 @@
    "name": "a tab row on a one-body sheet",
    "ok": true,
    "sample": [
-    "a tab row on a sheet that has one body"
+    "a tab row on a sheet that has one body",
+    "the page outside the sheet differs from the approved paused HUD (956x440:s1)"
    ]
   },
   {
@@ -380,27 +448,32 @@
    "ok": true,
    "sample": [
     "control height 40.00 for .r-x (want 32): تخطي الجولة، تعود إليها من",
-    "close button is not round"
+    "close button is not round",
+    "the page outside the sheet differs from the approved paused HUD (956x440:s1)"
    ]
   },
   {
    "name": "icon size (no tabs)",
    "ok": true,
    "sample": [
-    "icon size 19x19 (want 16): i"
+    "icon size 19x19 (want 16): i",
+    "the page outside the sheet differs from the approved paused HUD (956x440:s1)"
    ]
   },
   {
    "name": "fades wrong (no tabs)",
    "ok": true,
    "sample": [
-    "fades 0/1 do not match the scroll state (top 0, over 0.0)"
+    "fades 0/1 do not match the scroll state (top 0, over 0.0)",
+    "the page outside the sheet differs from the approved paused HUD (667x375:s1)",
+    "a line on a sheet part that is not its chrome: span.r-hint shadow rgba(127, 233, 255, 0.13) 0px 0px 0px 1px inset"
    ]
   },
   {
    "name": "brief text hidden (s1)",
    "ok": true,
    "sample": [
+    "the page outside the sheet differs from the approved paused HUD (956x440:s1)",
     "brief text not fully visible: أنت تحكم مصر من 1 يناير 2011، وبطاقة مصر في الأعلى تفتح لوحة الدولة. اضغط أي محافظة في مصر لتفتح بطاقتها، وأي دولة أخرى لتعرف حالها وعلاقتك بها."
    ]
   },
@@ -417,7 +490,8 @@
    "name": "text overlap (s1)",
    "ok": true,
    "sample": [
-    "text overlap \"التالي\" / \"المؤشرات\""
+    "text overlap \"التالي\" / \"المؤشرات\"",
+    "the page outside the sheet differs from the approved paused HUD (956x440:s1)"
    ]
   },
   {
@@ -433,9 +507,9 @@
    "name": "faint text (s1)",
    "ok": true,
    "sample": [
+    "the page outside the sheet differs from the approved paused HUD (956x440:s1)",
     "brief text not fully visible: أنت تحكم مصر من 1 يناير 2011، وبطاقة مصر في الأعلى تفتح لوحة الدولة. اضغط أي محافظة في مصر لتفتح بطاقتها، وأي دولة أخرى لتعرف حالها وعلاقتك بها.",
-    "contrast 2.98 for \"أنت تحكم مصر من\"",
-    "contrast 2.98 for \"1\""
+    "contrast 2.98 for \"أنت تحكم مصر من\""
    ]
   },
   {
@@ -443,7 +517,8 @@
    "ok": true,
    "sample": [
     "gap 6 on الخطوة 1 من 5 · بلدك أنت ت",
-    "gap 6 on الخطوة 1 من 5 · بلدك أنت ت"
+    "gap 6 on الخطوة 1 من 5 · بلدك أنت ت",
+    "the page outside the sheet differs from the approved paused HUD (956x440:s1)"
    ]
   },
   {
@@ -452,7 +527,7 @@
    "sample": [
     "% shown before its number: \"نسبة 20%\"",
     "the step text is not the brief's",
-    "brief text missing: أنت تحكم مصر من 1 يناير 2011، وبطاقة مصر في الأعلى تفتح لوحة الدولة. اضغط أي محافظة في مصر لتفتح بطاقتها، وأي دولة أخرى لتعرف حالها وعلاقتك بها."
+    "the page outside the sheet differs from the approved paused HUD (956x440:s1)"
    ]
   },
   {
@@ -460,8 +535,8 @@
    "ok": true,
    "sample": [
     "scroll hint chevron missing with content below",
-    "brief text not fully visible: الخطوة 1 من 5 · بلدك",
-    "brief text not fully visible: أنت تحكم مصر من 1 يناير 2011، وبطاقة مصر في الأعلى تفتح لوحة الدولة. اضغط أي محافظة في مصر لتفتح بطاقتها، وأي دولة أخرى لتعرف حالها وعلاقتك بها."
+    "the page outside the sheet differs from the approved paused HUD (667x375:s1)",
+    "brief text not fully visible: الخطوة 1 من 5 · بلدك"
    ]
   },
   {
@@ -469,8 +544,8 @@
    "ok": true,
    "sample": [
     "scroll hint not centred in the clear strip under the fade: y 198.0..216.0 (strip 344.0..366.0)",
-    "brief text not fully visible: الخطوة 1 من 5 · بلدك",
-    "brief text not fully visible: أنت تحكم مصر من 1 يناير 2011، وبطاقة مصر في الأعلى تفتح لوحة الدولة. اضغط أي محافظة في مصر لتفتح بطاقتها، وأي دولة أخرى لتعرف حالها وعلاقتك بها."
+    "the page outside the sheet differs from the approved paused HUD (667x375:s1)",
+    "a line on a sheet part that is not its chrome: span.r-hint shadow rgba(127, 233, 255, 0.13) 0px 0px 0px 1px inset"
    ]
   },
   {
@@ -497,14 +572,15 @@
    "sample": [
     "the header is not the start tour, paused, on 1 January 2011",
     "the header's date is not the HUD's «1 يناير 2011»",
-    "brief text missing: اللعبة متوقفة · 1 يناير 2011"
+    "the page outside the sheet differs from the approved paused HUD (956x440:s1)"
    ]
   },
   {
    "name": "emblem off",
    "ok": true,
    "sample": [
-    "the emblem is not the tour's"
+    "the emblem is not the tour's",
+    "the page outside the sheet differs from the approved paused HUD (956x440:s1)"
    ]
   },
   {
@@ -512,7 +588,8 @@
    "ok": true,
    "sample": [
     "a11y: the close says only «إغلاق»",
-    "a11y: the close does not say it skips the tour, stays in the help and the game stays paused"
+    "a11y: the close does not say it skips the tour, stays in the help and the game stays paused",
+    "the page outside the sheet differs from the approved paused HUD (956x440:s1)"
    ]
   },
   {
@@ -520,14 +597,16 @@
    "ok": true,
    "sample": [
     "a dialog or a dimmer over the map (mapCentral)",
-    "a layer added over the page: scrim"
+    "a layer added over the page: scrim",
+    "the page outside the sheet differs from the approved paused HUD (956x440:s1)"
    ]
   },
   {
    "name": "game running",
    "ok": true,
    "sample": [
-    "the game is not shown paused (the play button)"
+    "the game is not shown paused (the play button)",
+    "the page outside the sheet differs from the approved paused HUD (956x440:s1)"
    ]
   },
   {
@@ -535,7 +614,7 @@
    "ok": true,
    "sample": [
     "the step heading is not «الخطوة 2 من 5 · المؤشرات»: الخطوة 3 من 5 · المؤشرات",
-    "brief text missing: الخطوة 2 من 5 · المؤشرات",
+    "the page outside the sheet differs from the approved paused HUD (956x440:s2)",
     "brief text missing: الخطوة 2 من 5 · المؤشرات"
    ]
   },
@@ -544,7 +623,7 @@
    "ok": true,
    "sample": [
     "the step text is not the brief's",
-    "brief text missing: أنت تحكم مصر من 1 يناير 2011، وبطاقة مصر في الأعلى تفتح لوحة الدولة. اضغط أي محافظة في مصر لتفتح بطاقتها، وأي دولة أخرى لتعرف حالها وعلاقتك بها.",
+    "the page outside the sheet differs from the approved paused HUD (956x440:s1)",
     "brief text missing: أنت تحكم مصر من 1 يناير 2011، وبطاقة مصر في الأعلى تفتح لوحة الدولة. اضغط أي محافظة في مصر لتفتح بطاقتها، وأي دولة أخرى لتعرف حالها وعلاقتك بها."
    ]
   },
@@ -553,7 +632,8 @@
    "ok": true,
    "sample": [
     "a11y: «التالي» does not read all it shows: المؤشرات",
-    "the primary is not «التالي · المؤشرات» read as «التالي: المؤشرات، الخطوة 2 من 5»"
+    "the primary is not «التالي · المؤشرات» read as «التالي: المؤشرات، الخطوة 2 من 5»",
+    "the page outside the sheet differs from the approved paused HUD (956x440:s1)"
    ]
   },
   {
@@ -562,7 +642,7 @@
    "sample": [
     "a11y: «ابدأ الحملة: يفتح أول قر» does not read all it shows: التالي",
     "the primary is not «ابدأ الحملة · يفتح أول قرار: احتجاجات في تونس» read as «ابدأ الحملة: يفتح أول قرار، احتجاجات في تونس»",
-    "brief text missing: ابدأ الحملة"
+    "the page outside the sheet differs from the approved paused HUD (956x440:s5)"
    ]
   },
   {
@@ -578,6 +658,7 @@
    "name": "ring on the wrong element",
    "ok": true,
    "sample": [
+    "the page outside the sheet differs from the approved paused HUD (956x440:s2)",
     "the ring is not on the step's element .stats alone: nation glass bar tap",
     "the ring is not a solid white 2 pt outline 3 pt outside"
    ]
@@ -586,6 +667,7 @@
    "name": "ring not white",
    "ok": true,
    "sample": [
+    "the page outside the sheet differs from the approved paused HUD (956x440:s4)",
     "the ring is not a solid white 2 pt outline 3 pt outside"
    ]
   },
@@ -593,6 +675,7 @@
    "name": "ring at offset 0",
    "ok": true,
    "sample": [
+    "the page outside the sheet differs from the approved paused HUD (956x440:s1)",
     "the ring is not a solid white 2 pt outline 3 pt outside"
    ]
   },
@@ -600,6 +683,7 @@
    "name": "ring dashed",
    "ok": true,
    "sample": [
+    "the page outside the sheet differs from the approved paused HUD (956x440:s5)",
     "the ring is not a solid white 2 pt outline 3 pt outside"
    ]
   },
@@ -607,6 +691,7 @@
    "name": "second ring by shadow",
    "ok": true,
    "sample": [
+    "the page outside the sheet differs from the approved paused HUD (956x440:s2)",
     "the ring is not on the step's element .stats alone: nation glass bar tap, stats glass bar"
    ]
   },
@@ -616,7 +701,7 @@
    "sample": [
     "panel border احتجاجات واسعة في تونس 3: 2px rgb(234, 242, 247)",
     "HUD element moved from its B3 position: .toast x 62.0..269.6 y 56.0..88.0",
-    "the ring is not on the step's element .date alone: date glass bar, toast glass ctl"
+    "the page outside the sheet differs from the approved paused HUD (956x440:s4)"
    ]
   },
   {
@@ -624,6 +709,7 @@
    "ok": true,
    "sample": [
     "a layer added over the page: DIV",
+    "the page outside the sheet differs from the approved paused HUD (956x440:s3)",
     "a ring on the sections' step: DIV"
    ]
   },
@@ -631,6 +717,7 @@
    "name": "map outlined",
    "ok": true,
    "sample": [
+    "the page outside the sheet differs from the approved paused HUD (956x440:s3)",
     "a ring on the sections' step: map"
    ]
   },
@@ -639,35 +726,40 @@
    "ok": true,
    "sample": [
     "the step body is not «sec,primary,skip»: sec,primary,r-act tap,skip",
-    "the step body holds 3 controls, not 2"
+    "the step body holds 3 controls, not 2",
+    "the page outside the sheet differs from the approved paused HUD (956x440:s1)"
    ]
   },
   {
    "name": "primary bar hidden",
    "ok": true,
    "sample": [
-    "the primary's white bar is not drawn"
+    "the primary's white bar is not drawn",
+    "the page outside the sheet differs from the approved paused HUD (956x440:s1)"
    ]
   },
   {
    "name": "close without the help",
    "ok": true,
    "sample": [
-    "a11y: the close does not say it skips the tour, stays in the help and the game stays paused"
+    "a11y: the close does not say it skips the tour, stays in the help and the game stays paused",
+    "the page outside the sheet differs from the approved paused HUD (956x440:s1)"
    ]
   },
   {
    "name": "skip without the decision",
    "ok": true,
    "sample": [
-    "the skip is missing, misplaced or does not say the tour stays in the help and the first decision follows"
+    "the skip is missing, misplaced or does not say the tour stays in the help and the first decision follows",
+    "the page outside the sheet differs from the approved paused HUD (956x440:s1)"
    ]
   },
   {
    "name": "skip naming another decision",
    "ok": true,
    "sample": [
-    "the skip is missing, misplaced or does not say the tour stays in the help and the first decision follows"
+    "the skip is missing, misplaced or does not say the tour stays in the help and the first decision follows",
+    "the page outside the sheet differs from the approved paused HUD (956x440:s1)"
    ]
   },
   {
@@ -683,13 +775,15 @@
    "name": "second paragraph",
    "ok": true,
    "sample": [
-    "the step text section is not its heading and text: h3,text,text"
+    "the step text section is not its heading and text: h3,text,text",
+    "the page outside the sheet differs from the approved paused HUD (956x440:s1)"
    ]
   },
   {
    "name": "ring by a pseudo-element",
    "ok": true,
    "sample": [
+    "the page outside the sheet differs from the approved paused HUD (956x440:s3)",
     "a ring on the sections' step: date glass bar"
    ]
   },
@@ -697,6 +791,7 @@
    "name": "ring by an offset shadow",
    "ok": true,
    "sample": [
+    "the page outside the sheet differs from the approved paused HUD (956x440:s2)",
     "the ring is not on the step's element .stats alone: nation glass bar tap, stats glass bar"
    ]
   },
@@ -704,6 +799,7 @@
    "name": "inset white ring",
    "ok": true,
    "sample": [
+    "the page outside the sheet differs from the approved paused HUD (956x440:s2)",
     "the ring is not on the step's element .stats alone: nation glass bar tap, stats glass bar"
    ]
   },
@@ -711,6 +807,7 @@
    "name": "1 pt white ring",
    "ok": true,
    "sample": [
+    "the page outside the sheet differs from the approved paused HUD (956x440:s2)",
     "the ring is not on the step's element .stats alone: nation glass bar tap, stats glass bar"
    ]
   },
@@ -718,6 +815,7 @@
    "name": "ring in color-mix",
    "ok": true,
    "sample": [
+    "the page outside the sheet differs from the approved paused HUD (956x440:s4)",
     "the ring is not on the step's element .date alone: date glass bar, toast glass ctl"
    ]
   },
@@ -725,6 +823,7 @@
    "name": "second ring on the step element",
    "ok": true,
    "sample": [
+    "the page outside the sheet differs from the approved paused HUD (956x440:s2)",
     "the step's element .stats carries a second white ring besides its outline"
    ]
   },
@@ -732,7 +831,8 @@
    "name": "text as a link",
    "ok": true,
    "sample": [
-    "the step body holds 3 controls, not 2"
+    "the step body holds 3 controls, not 2",
+    "the page outside the sheet differs from the approved paused HUD (956x440:s1)"
    ]
   },
   {
@@ -740,6 +840,7 @@
    "ok": true,
    "sample": [
     "a layer added over the page: svg",
+    "the page outside the sheet differs from the approved paused HUD (956x440:s2)",
     "the ring is not on the step's element .stats alone: stats glass bar, [object SVGAnimatedString]"
    ]
   },
@@ -748,6 +849,7 @@
    "ok": true,
    "sample": [
     "a layer added over the page: svg",
+    "the page outside the sheet differs from the approved paused HUD (956x440:s2)",
     "the ring is not on the step's element .stats alone: stats glass bar, [object SVGAnimatedString]"
    ]
   },
@@ -756,6 +858,7 @@
    "ok": true,
    "sample": [
     "a layer added over the page: DIV",
+    "the page outside the sheet differs from the approved paused HUD (956x440:s2)",
     "the ring is not on the step's element .stats alone: stats glass bar, DIV"
    ]
   },
@@ -763,13 +866,15 @@
    "name": "body pseudo ring",
    "ok": true,
    "sample": [
-    "a layer added over the page: body::after"
+    "a layer added over the page: body::after",
+    "the page outside the sheet differs from the approved paused HUD (956x440:s3)"
    ]
   },
   {
    "name": "display-p3 ring",
    "ok": true,
    "sample": [
+    "the page outside the sheet differs from the approved paused HUD (956x440:s2)",
     "the ring is not on the step's element .stats alone: nation glass bar tap, stats glass bar"
    ]
   },
@@ -777,6 +882,7 @@
    "name": "drop-shadow ring",
    "ok": true,
    "sample": [
+    "the page outside the sheet differs from the approved paused HUD (956x440:s2)",
     "the ring is not on the step's element .stats alone: nation glass bar tap, stats glass bar"
    ]
   },
@@ -784,6 +890,7 @@
    "name": "white glow",
    "ok": true,
    "sample": [
+    "the page outside the sheet differs from the approved paused HUD (956x440:s2)",
     "the ring is not on the step's element .stats alone: nation glass bar tap, stats glass bar"
    ]
   },
@@ -791,13 +898,15 @@
    "name": "text made clickable",
    "ok": true,
    "sample": [
-    "the step body holds 3 controls, not 2"
+    "the step body holds 3 controls, not 2",
+    "the page outside the sheet differs from the approved paused HUD (956x440:s1)"
    ]
   },
   {
    "name": "SVG ring in the map",
    "ok": true,
    "sample": [
+    "the page outside the sheet differs from the approved paused HUD (956x440:s3)",
     "a ring on the sections' step: [object SVGAnimatedString]"
    ]
   },
@@ -805,6 +914,7 @@
    "name": "SVG ring in the frame",
    "ok": true,
    "sample": [
+    "the page outside the sheet differs from the approved paused HUD (956x440:s1)",
     "the ring is not on the step's element .nation alone: nation glass bar tap, [object SVGAnimatedString]"
    ]
   },
@@ -812,6 +922,8 @@
    "name": "ring from inside the sheet",
    "ok": true,
    "sample": [
+    "the page outside the sheet differs from the approved paused HUD (956x440:s2)",
+    "a line on a sheet part that is not its chrome: div. border, border, border, border, fixed to the screen",
     "the ring is not on the step's element .stats alone: stats glass bar, DIV"
    ]
   },
@@ -819,14 +931,56 @@
    "name": "cyan second ring",
    "ok": true,
    "sample": [
+    "the page outside the sheet differs from the approved paused HUD (956x440:s2)",
     "the ring is not on the step's element .stats alone: nation glass bar tap, stats glass bar"
+   ]
+  },
+  {
+   "name": "icon ring over the map",
+   "ok": true,
+   "sample": [
+    "the page outside the sheet differs from the approved paused HUD (956x440:s3)"
+   ]
+  },
+  {
+   "name": "dim white second ring",
+   "ok": true,
+   "sample": [
+    "the page outside the sheet differs from the approved paused HUD (956x440:s2)",
+    "the ring is not on the step's element .stats alone: nation glass bar tap, stats glass bar"
+   ]
+  },
+  {
+   "name": "ring around the sheet",
+   "ok": true,
+   "sample": [
+    "the page outside the sheet differs from the approved paused HUD (956x440:s1)",
+    "a line on a sheet part that is not its chrome: section.sheet shadow rgb(234, 242, 247) 0px 0px 0px 2px, rgba(0, 0, 0, 0.45) 0px 12px 30px 0px"
+   ]
+  },
+  {
+   "name": "sheet pseudo ring",
+   "ok": true,
+   "sample": [
+    "the page outside the sheet differs from the approved paused HUD (956x440:s2)",
+    "a line on a sheet part that is not its chrome: section.r-sec::after border, border, border, border, fixed to the screen",
+    "contrast 1.73 for \"مليار $\""
+   ]
+  },
+  {
+   "name": "control nested in the skip",
+   "ok": true,
+   "sample": [
+    "the step body holds 3 controls, not 2",
+    "the page outside the sheet differs from the approved paused HUD (956x440:s2)"
    ]
   },
   {
    "name": "primary bar faded",
    "ok": true,
    "sample": [
-    "the primary's white bar is not drawn"
+    "the primary's white bar is not drawn",
+    "the page outside the sheet differs from the approved paused HUD (956x440:s1)"
    ]
   },
   {
@@ -834,6 +988,7 @@
    "ok": true,
    "sample": [
     "the skip is missing, misplaced or does not say the tour stays in the help and the first decision follows",
+    "the page outside the sheet differs from the approved paused HUD (956x440:s2)",
     "brief text missing: تعود إليها من المزيد › حول › المساعدة"
    ]
   },
@@ -842,20 +997,23 @@
    "ok": true,
    "sample": [
     "the header's date is not the HUD's «14 يناير 2011»",
-    "step 1's country and date are not the HUD's «مصر», «14 يناير 2011»"
+    "step 1's country and date are not the HUD's «مصر», «14 يناير 2011»",
+    "the page outside the sheet differs from the approved paused HUD (956x440:s1)"
    ]
   },
   {
    "name": "HUD country changed",
    "ok": true,
    "sample": [
-    "step 1's country and date are not the HUD's «تونس», «1 يناير 2011»"
+    "step 1's country and date are not the HUD's «تونس», «1 يناير 2011»",
+    "the page outside the sheet differs from the approved paused HUD (956x440:s1)"
    ]
   },
   {
    "name": "HUD speed changed",
    "ok": true,
    "sample": [
+    "the page outside the sheet differs from the approved paused HUD (956x440:s4)",
     "the speeds are not the speed button's and menu's, 1× to «أقصى», or the pause is not named"
    ]
   },
@@ -872,6 +1030,7 @@
    "name": "sections in three columns",
    "ok": true,
    "sample": [
+    "the page outside the sheet differs from the approved paused HUD (956x440:s3)",
     "the sections are not two rows of four: 3 rows"
    ]
   },
@@ -880,6 +1039,7 @@
    "ok": true,
    "sample": [
     "HUD element moved from its B3 position: .toast x 62.0..223.6 y 56.0..88.0",
+    "the page outside the sheet differs from the approved paused HUD (956x440:s5)",
     "the step does not name the bell its ring holds"
    ]
   },
@@ -887,6 +1047,7 @@
    "name": "ring on the sections step",
    "ok": true,
    "sample": [
+    "the page outside the sheet differs from the approved paused HUD (956x440:s3)",
     "a ring on the sections' step: dock glass bar"
    ]
   },
@@ -903,6 +1064,7 @@
    "name": "indicators off",
    "ok": true,
    "sample": [
+    "the page outside the sheet differs from the approved paused HUD (956x440:s2)",
     "the indicators named are not the HUD's: المال، الاستقرار، الشرعية، القوة البشرية، النفوذ، البحث"
    ]
   },
@@ -910,6 +1072,7 @@
    "name": "sections off",
    "ok": true,
    "sample": [
+    "the page outside the sheet differs from the approved paused HUD (956x440:s3)",
     "the sections are not the dock's eight, in its order, with its icons"
    ]
   },
@@ -917,6 +1080,7 @@
    "name": "speeds off",
    "ok": true,
    "sample": [
+    "the page outside the sheet differs from the approved paused HUD (956x440:s4)",
     "the speeds are not the speed button's and menu's, 1× to «أقصى», or the pause is not named"
    ]
   },
@@ -925,6 +1089,7 @@
    "ok": true,
    "sample": [
     "HUD element moved from its B3 position: .toast x 62.0..239.3 y 56.0..88.0",
+    "the page outside the sheet differs from the approved paused HUD (956x440:s5)",
     "the first decision is not the alert's «انتخابات في السودان»"
    ]
   },
