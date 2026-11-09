@@ -102,7 +102,9 @@ the recorder CSV, `ring.log` and `device.txt` (kept in `docs/measurements/m0/`; 
   O_APPEND: no temporary file, no rename) and appends only the new lines (RingBuffer's sequence numbers, tested on
   Linux), with no sync: an app crash or kill keeps every flushed line; a power loss or kernel panic may lose what the
   kernel had not yet put on disk (the atomic write most likely synced). The file restarts in place from the lines held
-  after a failed or partial write (the next try a minute later), a deletion from Files (the folder made again), or 1 MB of growth (§3.8), with a marker line; flushes wait for
-  the launch rotation; the export flushes and copies the file. The recorder logs a line before each 10-second flush (so
+  after a failed or partial write (the next try a minute later), a deletion from Files (the folder made again), or 1 MB
+  of growth (§3.8), with a marker line; flushes wait for the launch rotation, which runs whatever happens to the other
+  folders (a file kept by a failed rotation gets a marker before this session's lines); the export flushes and copies
+  the file. The recorder logs a line before each 10-second flush (so
   each is a real append), the I/O that ran before the recording (launch, exports, the last CSV, payloads) and the CSV
   write's time, so the next IPA measures the one-off writes too. Re-measured with the next IPA.

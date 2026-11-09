@@ -23,16 +23,23 @@ actor IOEngine {
     private var foldersReady = false    // no flush before the last session's log is rotated
     private var logURL: URL?            // Documents/Logs/ring.log, found when the file is opened
     private var logRetryAt: ContinuousClock.Instant?   // after a failed write, the next try waits a minute
+    private var logContinues = false    // the file opened with an earlier log in it: the next write marks the seam
 
     /// Makes Documents/Saves, Diagnostics and Logs, and keeps the last session's log as ring-previous.log (this session's
-    /// first flush starts a new ring.log; after a crash it is the previous log that matters). True when all exist. Log
-    /// flushes wait for it, whatever its outcome.
+    /// first flush starts a new ring.log; after a crash it is the previous log that matters). The rotation runs whatever
+    /// happens to the other folders. True when all exist. Log flushes wait for it, whatever its outcome.
     func prepareFolders() -> Bool {
         defer { foldersReady = true }
         return EngineMeter.shared.measure(.io) {
+            var ok = true
             do {
                 _ = try Storage.savesFolder()
                 _ = try Storage.diagnosticsFolder()
+            } catch {
+                RingLog.shared.log("folders failed: \(error)")
+                ok = false
+            }
+            do {
                 let logs = try Storage.logsFolder()
                 let fm = FileManager.default
                 let current = logs.appendingPathComponent(Self.logName)
@@ -46,11 +53,11 @@ actor IOEngine {
                         RingLog.shared.log("ring log rotate failed: \(error)")
                     }
                 }
-                return true
             } catch {
-                RingLog.shared.log("folders failed: \(error)")
-                return false
+                RingLog.shared.log("logs folder failed: \(error)")
+                ok = false
             }
+            return ok
         }
     }
 
@@ -58,9 +65,11 @@ actor IOEngine {
     /// O_CREAT | O_APPEND: no temporary file, no rename) and each flush is one append with no sync: an app crash or kill
     /// keeps every flushed line (it is in the kernel); a power loss or a kernel panic may lose what the kernel had not yet
     /// put on disk. The atomic rewrite this replaces took 2.8-6.2 ms a flush on the iPhone 17 Pro Max (M0) against the
-    /// 5 ms budget, most likely its sync. After a failed write the next try waits a minute (a full disk). The file restarts in place from the lines still held (at most 2,000) after a
-    /// failed write, when it was deleted (from Files), and once it has grown `logCapBytes` past its last restart, so it
-    /// never exceeds the held lines plus `logCapBytes`. Waits for `prepareFolders` (the lines stay in memory until then).
+    /// 5 ms budget, most likely its sync. After a failed write the next try waits a minute (a full disk). The file
+    /// restarts in place from the lines still held (at most 2,000) after a failed write, when it was deleted (from Files),
+    /// and once it has grown `logCapBytes` past its last restart, so it stays under the held lines plus `logCapBytes`. A
+    /// file found with lines in it (a failed rotation) gets a marker before this session's first lines. Waits for
+    /// `prepareFolders` (the lines stay in memory until then).
     @discardableResult
     func flushLog() -> URL? {
         guard foldersReady else { return nil }
@@ -81,10 +90,12 @@ actor IOEngine {
                     logBytes = try Int(h.seekToEnd())
                     logBase = 0                     // a file kept from before (a failed rotation) counts toward the bound
                     logHandle = h
+                    if logBytes > 0 && !logRestart { logContinues = true }
                 }
                 guard let h = logHandle, let url = logURL else { return nil }
                 var pending = RingLog.shared.lines(since: logWritten)
                 var head: [String] = []
+                if logContinues { head.append(Self.mark("an earlier log ends here; the lines below are this session's")) }
                 if pending.lost > 0 { head.append(Self.mark("\(pending.lost) lines dropped before this flush")) }
                 let size = pending.lines.reduce(0) { $0 + $1.utf8.count + 1 }
                 let restart = logRestart || logBytes - logBase + size > Self.logCapBytes
@@ -106,6 +117,7 @@ actor IOEngine {
                 if restart { logBase = logBytes }
                 logWritten = pending.next
                 logRetryAt = nil
+                logContinues = false
                 return url
             } catch {
                 closeLog()
