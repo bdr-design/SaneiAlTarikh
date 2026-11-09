@@ -59,9 +59,10 @@ const ROW13 = (() => { const m = S13.match(/aria-label="(المصادر والح
 const ICON13 = (() => { const m = A13.match(new RegExp('<symbol id="' + ROW13.icon + '" viewBox="0 0 24 24">(.*?)</symbol>')); if (!m) throw new Error('cannot read screen 13\'s row icon'); return m[1]; })();
 // the design values (R5), each with its value as the design doc records it
 const HALF = (() => { const m = DOC.match(/decays toward 0 with a half-life of (\d+) years \(`design-target`\)/); if (!m) throw new Error('§5.2: the unrest offset\'s half-life not found'); return m[1]; })();
+const RES = (() => { const m = DOC.match(/\*\*Research points a month\*\* = (\d+) × √\(S ÷ S₀\)/); if (!m) throw new Error('§5.7: the research rate not found'); return m[1]; })();
 const CAPT = (() => { const m = DOC.match(/capture rate: (\d+)% of the equipment the loser loses \(`design-target`/); if (!m) throw new Error('§5.4: the capture rate not found'); return m[1]; })();
 if (!/Agency levels \(`design-target`/.test(DOC)) throw new Error('§4.3: the agency levels are not design-target');
-const VALUES = [['تلاشي فرق الاضطراب الأولي', 'نصف عمر ' + HALF + ' سنوات', 'الداخلية والسياسة'], ['الاستيلاء على العتاد', CAPT + '% مما يخسره المهزوم', 'الجيش'], ['مستوى أجهزة الاستخبارات', 'يُضبط لكل دولة', 'الاستخبارات'], ['معدل نقاط البحث', 'يتناقص مع الإنفاق: 18 × جذر الإنفاق ÷ إنفاق مصر 2011', 'البحث']];
+const VALUES = [['تلاشي فرق الاضطراب الأولي', 'نصف عمر ' + HALF + ' سنوات', 'الداخلية والسياسة'], ['الاستيلاء على العتاد', CAPT + '% مما يخسره المهزوم', 'الجيش'], ['مستوى أجهزة الاستخبارات', 'يُضبط لكل دولة', 'الاستخبارات'], ['معدل نقاط البحث', 'يزيد مع الإنفاق بعائد متناقص: ' + RES + ' × جذر (الإنفاق ÷ إنفاق مصر 2011)', 'البحث']];
 const NOTES = { data: 'أهم مصادر أرقام البداية ومعايرة النماذج، ثم تتغير بقراراتك.', nasa: 'استخدام صور ناسا لا يعني أن ناسا تؤيد اللعبة.', flags: 'الأعلام لتعريف الدول داخل اللعبة فقط.',
   values: 'قيم ضبطناها للعب حيث لا توجد بيانات تُقاس بها، فلا نعدّها جزءًا من واقعية اللعبة.' };
 const IMAGES = ['صور اللعبة', 'صُنعت خصيصًا لهذه اللعبة'];
