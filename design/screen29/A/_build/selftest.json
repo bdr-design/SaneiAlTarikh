@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-09T14:47:43.657Z",
+ "ranAt": "2026-11-09T14:56:01.513Z",
  "inputs": {
   "files": [
    "index.html",
@@ -26,7 +26,7 @@
    "header_cairo.jpg",
    "map_overlay_cairo.svg"
   ],
-  "sha1": "fd0bf004ac37181da339e0a403e4f98190dd9299"
+  "sha1": "7f88a726260d7303285260df63100ad7f292689d"
  },
  "cleanIssues": {
   "i16promax": [],
@@ -46,13 +46,10 @@
   "se_maps": [],
   "se_maps_end": [],
   "se_values": [
-   "values needs scrolling: 6.0 pt over",
    "brief text not fully visible: معدل نقاط البحث",
    "brief text not fully visible: يتناقص مع الإنفاق: 18 × جذر الإنفاق ÷ إنفاق مصر 2011 · البحث"
   ],
-  "se_values_end": [
-   "values needs scrolling: 6.0 pt over"
-  ],
+  "se_values_end": [],
   "se_data_at98": [],
   "se_data_at196": [],
   "se_data_at294": [],
@@ -206,13 +203,6 @@
    ]
   },
   {
-   "name": "fit not the loosest",
-   "ok": true,
-   "sample": [
-    "fit level 6 is not the loosest that fits: [[0,0]]"
-   ]
-  },
-  {
    "name": "two tab bodies",
    "ok": true,
    "sample": [
@@ -362,15 +352,6 @@
    "sample": [
     "a11y: a label VoiceOver may skip (no role): «اختبار»",
     "the data tab's note is not the brief's"
-   ]
-  },
-  {
-   "name": "overview scrolls",
-   "ok": true,
-   "sample": [
-    "values needs scrolling: 406.0 pt over",
-    "brief text not fully visible: قيم ضبطناها للعب حيث لا توجد بيانات تُقاس بها، فلا نعدّها جزءًا من واقعية اللعبة.",
-    "brief text not fully visible: تلاشي فرق الاضطراب الأولي"
    ]
   },
   {

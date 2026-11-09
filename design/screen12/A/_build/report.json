@@ -1,7 +1,7 @@
 {
  "se": {
   "device": "667x375 side 0 bottom 0 none",
-  "renderedAt": "2026-11-09T14:40:02.125Z",
+  "renderedAt": "2026-11-09T14:48:29.883Z",
   "inputs": {
    "files": [
     "index.html",
@@ -24,17 +24,12 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "8f241954902b7fabc2fa71bb5c25726e9c09800e"
+   "sha1": "ab5f531c3a85fad614a7d1977377eb24d3e6bdbc"
   },
-  "issues": [
-   "overview: a11y: «رفع الإنفاق على البحث» does not read its numbers",
-   "overview: a11y: «رفع الإنفاق على البحث: 3» does not read all it shows: 4",
-   "overview_end: a11y: «رفع الإنفاق على البحث» does not read its numbers",
-   "overview_end: a11y: «رفع الإنفاق على البحث: 3» does not read all it shows: 4"
-  ],
+  "issues": [],
   "views": {
    "overview": {
-    "issueCount": 2,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -575,7 +570,7 @@
     ]
    },
    "overview_end": {
-    "issueCount": 2,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -3270,11 +3265,11 @@
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 4
+  "issueCount": 0
  },
  "mini": {
   "device": "812x375 side 50 bottom 21 notch",
-  "renderedAt": "2026-11-09T14:40:14.785Z",
+  "renderedAt": "2026-11-09T14:48:42.176Z",
   "inputs": {
    "files": [
     "index.html",
@@ -3297,17 +3292,12 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "8f241954902b7fabc2fa71bb5c25726e9c09800e"
+   "sha1": "ab5f531c3a85fad614a7d1977377eb24d3e6bdbc"
   },
-  "issues": [
-   "overview: a11y: «رفع الإنفاق على البحث» does not read its numbers",
-   "overview: a11y: «رفع الإنفاق على البحث: 3» does not read all it shows: 4",
-   "overview_end: a11y: «رفع الإنفاق على البحث» does not read its numbers",
-   "overview_end: a11y: «رفع الإنفاق على البحث: 3» does not read all it shows: 4"
-  ],
+  "issues": [],
   "views": {
    "overview": {
-    "issueCount": 2,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -3863,7 +3853,7 @@
     ]
    },
    "overview_end": {
-    "issueCount": 2,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -7023,11 +7013,11 @@
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 4
+  "issueCount": 0
  },
  "i14": {
   "device": "844x390 side 47 bottom 21 notch",
-  "renderedAt": "2026-11-09T14:40:29.408Z",
+  "renderedAt": "2026-11-09T14:48:57.513Z",
   "inputs": {
    "files": [
     "index.html",
@@ -7050,17 +7040,12 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "8f241954902b7fabc2fa71bb5c25726e9c09800e"
+   "sha1": "ab5f531c3a85fad614a7d1977377eb24d3e6bdbc"
   },
-  "issues": [
-   "overview: a11y: «رفع الإنفاق على البحث» does not read its numbers",
-   "overview: a11y: «رفع الإنفاق على البحث: 3» does not read all it shows: 4",
-   "overview_end: a11y: «رفع الإنفاق على البحث» does not read its numbers",
-   "overview_end: a11y: «رفع الإنفاق على البحث: 3» does not read all it shows: 4"
-  ],
+  "issues": [],
   "views": {
    "overview": {
-    "issueCount": 2,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -7718,7 +7703,7 @@
     ]
    },
    "overview_end": {
-    "issueCount": 2,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -11165,11 +11150,11 @@
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 4
+  "issueCount": 0
  },
  "i16": {
   "device": "852x393 side 59 bottom 21 island",
-  "renderedAt": "2026-11-09T14:40:43.435Z",
+  "renderedAt": "2026-11-09T14:49:10.795Z",
   "inputs": {
    "files": [
     "index.html",
@@ -11192,17 +11177,12 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "8f241954902b7fabc2fa71bb5c25726e9c09800e"
+   "sha1": "ab5f531c3a85fad614a7d1977377eb24d3e6bdbc"
   },
-  "issues": [
-   "overview: a11y: «رفع الإنفاق على البحث» does not read its numbers",
-   "overview: a11y: «رفع الإنفاق على البحث: 3» does not read all it shows: 4",
-   "overview_end: a11y: «رفع الإنفاق على البحث» does not read its numbers",
-   "overview_end: a11y: «رفع الإنفاق على البحث: 3» does not read all it shows: 4"
-  ],
+  "issues": [],
   "views": {
    "overview": {
-    "issueCount": 2,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -11849,7 +11829,7 @@
     ]
    },
    "overview_end": {
-    "issueCount": 2,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -15225,11 +15205,11 @@
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 4
+  "issueCount": 0
  },
  "i16pro": {
   "device": "874x402 side 62 bottom 21 island",
-  "renderedAt": "2026-11-09T14:40:57.138Z",
+  "renderedAt": "2026-11-09T14:49:24.423Z",
   "inputs": {
    "files": [
     "index.html",
@@ -15252,17 +15232,12 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "8f241954902b7fabc2fa71bb5c25726e9c09800e"
+   "sha1": "ab5f531c3a85fad614a7d1977377eb24d3e6bdbc"
   },
-  "issues": [
-   "overview: a11y: «رفع الإنفاق على البحث» does not read its numbers",
-   "overview: a11y: «رفع الإنفاق على البحث: 3» does not read all it shows: 4",
-   "overview_end: a11y: «رفع الإنفاق على البحث» does not read its numbers",
-   "overview_end: a11y: «رفع الإنفاق على البحث: 3» does not read all it shows: 4"
-  ],
+  "issues": [],
   "views": {
    "overview": {
-    "issueCount": 2,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -15920,7 +15895,7 @@
     ]
    },
    "overview_end": {
-    "issueCount": 2,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -18815,11 +18790,11 @@
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 4
+  "issueCount": 0
  },
  "i11": {
   "device": "896x414 side 48 bottom 21 notch",
-  "renderedAt": "2026-11-09T14:41:09.971Z",
+  "renderedAt": "2026-11-09T14:49:37.244Z",
   "inputs": {
    "files": [
     "index.html",
@@ -18842,17 +18817,12 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "8f241954902b7fabc2fa71bb5c25726e9c09800e"
+   "sha1": "ab5f531c3a85fad614a7d1977377eb24d3e6bdbc"
   },
-  "issues": [
-   "overview: a11y: «رفع الإنفاق على البحث» does not read its numbers",
-   "overview: a11y: «رفع الإنفاق على البحث: 3» does not read all it shows: 4",
-   "overview_end: a11y: «رفع الإنفاق على البحث» does not read its numbers",
-   "overview_end: a11y: «رفع الإنفاق على البحث: 3» does not read all it shows: 4"
-  ],
+  "issues": [],
   "views": {
    "overview": {
-    "issueCount": 2,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -19509,7 +19479,7 @@
     ]
    },
    "overview_end": {
-    "issueCount": 2,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -22431,11 +22401,11 @@
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 4
+  "issueCount": 0
  },
  "i16promax": {
   "device": "956x440 side 62 bottom 21 island",
-  "renderedAt": "2026-11-09T14:41:23.368Z",
+  "renderedAt": "2026-11-09T14:49:50.276Z",
   "inputs": {
    "files": [
     "index.html",
@@ -22458,17 +22428,12 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "8f241954902b7fabc2fa71bb5c25726e9c09800e"
+   "sha1": "ab5f531c3a85fad614a7d1977377eb24d3e6bdbc"
   },
-  "issues": [
-   "overview: a11y: «رفع الإنفاق على البحث» does not read its numbers",
-   "overview: a11y: «رفع الإنفاق على البحث: 3» does not read all it shows: 4",
-   "overview_end: a11y: «رفع الإنفاق على البحث» does not read its numbers",
-   "overview_end: a11y: «رفع الإنفاق على البحث: 3» does not read all it shows: 4"
-  ],
+  "issues": [],
   "views": {
    "overview": {
-    "issueCount": 2,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -23124,7 +23089,7 @@
     ]
    },
    "overview_end": {
-    "issueCount": 2,
+    "issueCount": 0,
     "png": true,
     "fit": {
      "top": {
@@ -26086,6 +26051,6 @@
   "env": {
    "chromium": "153.0.8010.12"
   },
-  "issueCount": 4
+  "issueCount": 0
  }
 }
