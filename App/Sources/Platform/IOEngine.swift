@@ -30,6 +30,12 @@ actor IOEngine {
     /// happens to the other folders. True when all exist. Log flushes wait for it, whatever its outcome.
     func prepareFolders() -> Bool {
         defer { foldersReady = true }
+        let start = ContinuousClock.now
+        defer {
+            let d = start.duration(to: .now).components
+            RingLog.shared.log(String(format: "io: folders and rotation in %.2f ms",
+                                      Double(d.seconds) * 1_000 + Double(d.attoseconds) / 1e15))
+        }
         return EngineMeter.shared.measure(.io) {
             var ok = true
             do {
@@ -41,17 +47,12 @@ actor IOEngine {
             }
             do {
                 let logs = try Storage.logsFolder()
-                let fm = FileManager.default
                 let current = logs.appendingPathComponent(Self.logName)
                 let previous = logs.appendingPathComponent(Self.previousLogName)
-                if fm.fileExists(atPath: current.path) {
-                    // a failed rotation loses only the previous log, never the saves folder's state
-                    do {
-                        if fm.fileExists(atPath: previous.path) { try fm.removeItem(at: previous) }
-                        try fm.moveItem(at: current, to: previous)
-                    } catch {
-                        RingLog.shared.log("ring log rotate failed: \(error)")
-                    }
+                // one rename(2): it replaces ring-previous.log in a single step; a missing ring.log (the first launch) is
+                // no failure. A failed rotation loses only the previous log, never the saves folder's state.
+                if rename(current.path, previous.path) != 0 && errno != ENOENT {
+                    RingLog.shared.log("ring log rotate failed: errno \(errno)")
                 }
             } catch {
                 RingLog.shared.log("logs folder failed: \(error)")
@@ -74,6 +75,7 @@ actor IOEngine {
     func flushLog() -> URL? {
         guard foldersReady else { return nil }
         if let t = logRetryAt, ContinuousClock.now < t { return nil }
+        var opened: Double?
         return EngineMeter.shared.measure(.io) {
             do {
                 if logHandle != nil, let u = logURL, !FileManager.default.fileExists(atPath: u.path) {  // deleted from Files
@@ -82,17 +84,22 @@ actor IOEngine {
                 }
                 if logHandle == nil {
                     // only on opening: the folder is found (and made again if it was deleted from Files)
+                    let openStart = ContinuousClock.now
                     let url = try Storage.logsFolder().appendingPathComponent(Self.logName)
                     logURL = url
                     let fd = open(url.path, O_WRONLY | O_CREAT | O_APPEND, 0o644)
                     guard fd >= 0 else { throw POSIXError(POSIXErrorCode(rawValue: errno) ?? .EIO) }
                     let h = FileHandle(fileDescriptor: fd, closeOnDealloc: true)
                     logBytes = try Int(h.seekToEnd())
+                    let d = openStart.duration(to: .now).components
+                    opened = Double(d.seconds) * 1_000 + Double(d.attoseconds) / 1e15
                     logBase = 0                     // a file kept from before (a failed rotation) counts toward the bound
                     logHandle = h
                     if logBytes > 0 && !logRestart { logContinues = true }
                 }
                 guard let h = logHandle, let url = logURL else { return nil }
+                // the open's own time goes in with this flush's lines (each open is rare: launch, a deletion, a failure)
+                if let ms = opened { RingLog.shared.log(String(format: "io: ring.log opened in %.2f ms", ms)) }
                 var pending = RingLog.shared.lines(since: logWritten)
                 var head: [String] = []
                 if logContinues { head.append(Self.mark("an earlier log ends here; the lines below are this session's")) }

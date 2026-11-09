@@ -9,7 +9,10 @@ enum Storage {
     /// Documents/<name>, made when missing.
     static func folder(_ name: String) throws -> URL {
         let url = try documents().appendingPathComponent(name, isDirectory: true)
-        try FileManager.default.createDirectory(at: url, withIntermediateDirectories: true)
+        var isDir: ObjCBool = false
+        if !(FileManager.default.fileExists(atPath: url.path, isDirectory: &isDir) && isDir.boolValue) {
+            try FileManager.default.createDirectory(at: url, withIntermediateDirectories: true)   // only when missing
+        }
         return url
     }
 

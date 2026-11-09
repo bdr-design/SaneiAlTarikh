@@ -184,7 +184,9 @@ final class RenderEngine: NSObject, @unchecked Sendable {
         link?.invalidate()
         let l = CAMetalDisplayLink(metalLayer: layer)
         l.delegate = self
-        l.preferredFrameRateRange = CAFrameRateRange(minimum: 30, maximum: 120, preferred: 60)
+        // 60 a second, fixed (§3's Interacting rate; 120 only while touching, a later milestone): the third build's
+        // run showed the system free to drop to 48 inside a 30–120 range, which reads as stale refreshes
+        l.preferredFrameRateRange = CAFrameRateRange(minimum: 60, maximum: 60, preferred: 60)
         l.preferredFrameLatency = 2
         l.add(to: .current, forMode: .default)
         link = l

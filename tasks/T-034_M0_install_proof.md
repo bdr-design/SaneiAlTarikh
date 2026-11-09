@@ -138,3 +138,22 @@ The fix passed the two reviews and four verification rounds (the last found noth
     was shown against its target, and dropped drawables. It logs each stall of 2+ refreshes with its time, at most 3
     lines a second.
   - Until that is measured, the 0-hitch budget is not met in 2 of 3 runs and the cause is unknown.
+
+## Third build on the owner's iPhone (2026-11-09, two runs, `docs/measurements/m0/run3/`)
+- **Pass:**
+  - The CSV write took 3.30 and 3.92 ms wall (the meter's worst before the second recording: 3.28 ms).
+  - Flushes were at most 0.66 ms.
+  - Idle 0 frames; encode ≤ 0.379 ms.
+  - Simulation 30 days a second, a day ≤ 0.181 ms.
+  - Main lag ≤ 0.28 ms; thermal nominal.
+- **Hitches:** run 2 had 0 (3,599 frames). Run 1 had 1: at second 56 the system dropped the cadence to 48 a second for
+  the last 10 seconds.
+  - The link was never late (0 ms) and frames were shown on time (≤ 0.03 ms), so the cadence was the system's choice
+    inside the link's 30–120 range.
+  - The new link columns also explain the earlier 54 ms gaps as the same kind of system rate change, though those runs
+    lacked the columns to prove it.
+  - Fix: the range is fixed at 60 (§3's Interacting rate).
+- **Over:** the launch's I/O was 2 operations, worst 7.13 ms (before: 2.91 ms). These are the folders, the rotation and
+  the first open of ring.log, metered together. Fix: folders are made only when missing, and the rotation is one
+  rename(2). Their times and the log file's open time go to the ring log separately.
+- 2–3 drawables are dropped at the start of each load (no gap, no hitch).
