@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-08T16:34:49.075Z",
+ "ranAt": "2026-11-09T14:43:24.429Z",
  "inputs": {
   "files": [
    "index.html",
@@ -22,18 +22,30 @@
    "header_cairo.jpg",
    "map_overlay_cairo.svg"
   ],
-  "sha1": "0e10f8809a2b2ab8fceff0cc7cb66874336fdf5f"
+  "sha1": "8f241954902b7fabc2fa71bb5c25726e9c09800e"
  },
  "cleanIssues": {
-  "i16promax": [],
-  "i16promax_overview_end": [],
+  "i16promax": [
+   "a11y: «رفع الإنفاق على البحث» does not read its numbers",
+   "a11y: «رفع الإنفاق على البحث: 3» does not read all it shows: 4"
+  ],
+  "i16promax_overview_end": [
+   "a11y: «رفع الإنفاق على البحث» does not read its numbers",
+   "a11y: «رفع الإنفاق على البحث: 3» does not read all it shows: 4"
+  ],
   "i16promax_domains": [],
   "i16promax_domains_end": [],
   "i16promax_coop": [],
   "i16promax_coop_end": [],
   "i16promax coverage": [],
-  "se": [],
-  "se_overview_end": [],
+  "se": [
+   "a11y: «رفع الإنفاق على البحث» does not read its numbers",
+   "a11y: «رفع الإنفاق على البحث: 3» does not read all it shows: 4"
+  ],
+  "se_overview_end": [
+   "a11y: «رفع الإنفاق على البحث» does not read its numbers",
+   "a11y: «رفع الإنفاق على البحث: 3» does not read all it shows: 4"
+  ],
   "se_domains": [],
   "se_domains_end": [],
   "se_coop": [],
@@ -46,7 +58,9 @@
    "name": "type size",
    "ok": true,
    "sample": [
-    "font size 17 for \"البحث\""
+    "font size 17 for \"البحث\"",
+    "a11y: «رفع الإنفاق على البحث» does not read its numbers",
+    "a11y: «رفع الإنفاق على البحث: 3» does not read all it shows: 4"
    ]
   },
   {
@@ -63,7 +77,8 @@
    "ok": true,
    "sample": [
     "text colour off-token rgb(136, 153, 170): \"البحث\"",
-    "contrast 2.4 for \"البحث\""
+    "a11y: «رفع الإنفاق على البحث» does not read its numbers",
+    "a11y: «رفع الإنفاق على البحث: 3» does not read all it shows: 4"
    ]
   },
   {
@@ -71,7 +86,8 @@
    "ok": true,
    "sample": [
     "panel radius البحث: مصر: 6 (want 12)",
-    "radius 6 for .sheet (want 12)"
+    "radius 6 for .sheet (want 12)",
+    "a11y: «رفع الإنفاق على البحث» does not read its numbers"
    ]
   },
   {
@@ -97,8 +113,8 @@
    "ok": true,
    "sample": [
     "panel not opaque: البحث: مصر rgba(9, 17, 25, 0.66)",
-    "contrast 3.35 for \"نظرة عامة\"",
-    "contrast 4.07 for \"يكتمل بعد\""
+    "a11y: «رفع الإنفاق على البحث» does not read its numbers",
+    "a11y: «رفع الإنفاق على البحث: 3» does not read all it shows: 4"
    ]
   },
   {
@@ -106,23 +122,25 @@
    "ok": true,
    "sample": [
     "panel not opaque (opacity 0.60): البحث: مصر",
-    "brief text not fully visible: البحث",
-    "brief text not fully visible: التركيز: الطاقة"
+    "a11y: «رفع الإنفاق على البحث» does not read its numbers",
+    "a11y: «رفع الإنفاق على البحث: 3» does not read all it shows: 4"
    ]
   },
   {
    "name": "Egypt covered",
    "ok": true,
    "sample": [
-    "Nile delta covered by panel البحث: مصر",
-    "Nile delta under the hit box of نظرة عامة",
-    "Nile delta under the hit box of المجالات"
+    "a11y: «رفع الإنفاق على البحث» does not read its numbers",
+    "a11y: «رفع الإنفاق على البحث: 3» does not read all it shows: 4",
+    "Nile delta covered by panel البحث: مصر"
    ]
   },
   {
    "name": "map dimmed",
    "ok": true,
    "sample": [
+    "a11y: «رفع الإنفاق على البحث» does not read its numbers",
+    "a11y: «رفع الإنفاق على البحث: 3» does not read all it shows: 4",
     "the map is dimmed (opacity 1.00, filter brightness(0.35))"
    ]
   },
@@ -130,6 +148,8 @@
    "name": "map faded",
    "ok": true,
    "sample": [
+    "a11y: «رفع الإنفاق على البحث» does not read its numbers",
+    "a11y: «رفع الإنفاق على البحث: 3» does not read all it shows: 4",
     "the map is dimmed (opacity 0.30, filter none)"
    ]
   },
@@ -137,15 +157,18 @@
    "name": "scrim over the map",
    "ok": true,
    "sample": [
-    "something drawn over the map: DIV (rgba(0, 0, 0, 0.55))",
-    "contrast 1.92 for \"3\""
+    "a11y: «رفع الإنفاق على البحث» does not read its numbers",
+    "a11y: «رفع الإنفاق على البحث: 3» does not read all it shows: 4",
+    "something drawn over the map: DIV (rgba(0, 0, 0, 0.55))"
    ]
   },
   {
    "name": "sheet width",
    "ok": true,
    "sample": [
-    "sheet width 330 (want round(clamp(43% of 832, 340, 380)), or the room the dock leaves if 330..: 358)"
+    "sheet width 330 (want round(clamp(43% of 832, 340, 380)), or the room the dock leaves if 330..: 358)",
+    "a11y: «رفع الإنفاق على البحث» does not read its numbers",
+    "a11y: «رفع الإنفاق على البحث: 3» does not read all it shows: 4"
    ]
   },
   {
@@ -161,7 +184,9 @@
    "name": "dock hidden although it fits",
    "ok": true,
    "sample": [
-    "dock hidden although it fits left of the sheet"
+    "dock hidden although it fits left of the sheet",
+    "a11y: «رفع الإنفاق على البحث» does not read its numbers",
+    "a11y: «رفع الإنفاق على البحث: 3» does not read all it shows: 4"
    ]
   },
   {
@@ -186,7 +211,9 @@
    "name": "fit not the loosest",
    "ok": true,
    "sample": [
-    "fit level 6 is not the loosest that fits: [[0,0]]"
+    "fit level 6 is not the loosest that fits: [[0,0]]",
+    "a11y: «رفع الإنفاق على البحث» does not read its numbers",
+    "a11y: «رفع الإنفاق على البحث: 3» does not read all it shows: 4"
    ]
   },
   {
@@ -202,14 +229,18 @@
    "name": "two tabs selected",
    "ok": true,
    "sample": [
-    "exactly the open tab must be selected"
+    "exactly the open tab must be selected",
+    "a11y: «رفع الإنفاق على البحث» does not read its numbers",
+    "a11y: «رفع الإنفاق على البحث: 3» does not read all it shows: 4"
    ]
   },
   {
    "name": "tabs not a tab list",
    "ok": true,
    "sample": [
-    "a11y: the tabs are not a tab list"
+    "a11y: the tabs are not a tab list",
+    "a11y: «رفع الإنفاق على البحث» does not read its numbers",
+    "a11y: «رفع الإنفاق على البحث: 3» does not read all it shows: 4"
    ]
   },
   {
@@ -217,7 +248,8 @@
    "ok": true,
    "sample": [
     "tab 2 is not left of tab 1",
-    "tab 3 is not left of tab 2"
+    "tab 3 is not left of tab 2",
+    "a11y: «رفع الإنفاق على البحث» does not read its numbers"
    ]
   },
   {
@@ -245,6 +277,8 @@
    "name": "city dot under its name",
    "ok": true,
    "sample": [
+    "a11y: «رفع الإنفاق على البحث» does not read its numbers",
+    "a11y: «رفع الإنفاق على البحث: 3» does not read all it shows: 4",
     "map city dot under its own name: 0"
    ]
   },
@@ -252,6 +286,8 @@
    "name": "city name over a label",
    "ok": true,
    "sample": [
+    "a11y: «رفع الإنفاق على البحث» does not read its numbers",
+    "a11y: «رفع الإنفاق على البحث: 3» does not read all it shows: 4",
     "map city name «القاهرة» over «مصر»"
    ]
   },
@@ -259,46 +295,54 @@
    "name": "map label cut",
    "ok": true,
    "sample": [
-    "map label ليبيا sliced by the screen edge or the side inset",
-    "map label إيران sliced by the screen edge or the side inset",
-    "map label إيران squeezed between a panel and the screen edge"
+    "a11y: «رفع الإنفاق على البحث» does not read its numbers",
+    "a11y: «رفع الإنفاق على البحث: 3» does not read all it shows: 4",
+    "map label ليبيا sliced by the screen edge or the side inset"
    ]
   },
   {
    "name": "contrast",
    "ok": true,
    "sample": [
-    "contrast 1 for \"البحث\"",
-    "contrast 1 for \"+18\"",
-    "contrast 1.73 for \"شهريًا\""
+    "a11y: «رفع الإنفاق على البحث» does not read its numbers",
+    "a11y: «رفع الإنفاق على البحث: 3» does not read all it shows: 4",
+    "contrast 1 for \"البحث\""
    ]
   },
   {
    "name": "dock item not marked",
    "ok": true,
    "sample": [
-    "the open section «البحث» is not marked in the dock"
+    "the open section «البحث» is not marked in the dock",
+    "a11y: «رفع الإنفاق على البحث» does not read its numbers",
+    "a11y: «رفع الإنفاق على البحث: 3» does not read all it shows: 4"
    ]
   },
   {
    "name": "identity line missing",
    "ok": true,
    "sample": [
-    "panel top line none rgb(158, 219, 91) 2px (want the section colour, 2 pt, at the top)"
+    "panel top line none rgb(158, 219, 91) 2px (want the section colour, 2 pt, at the top)",
+    "a11y: «رفع الإنفاق على البحث» does not read its numbers",
+    "a11y: «رفع الإنفاق على البحث: 3» does not read all it shows: 4"
    ]
   },
   {
    "name": "emblem drawn grey",
    "ok": true,
    "sample": [
-    "section emblem missing or not in the section colour"
+    "section emblem missing or not in the section colour",
+    "a11y: «رفع الإنفاق على البحث» does not read its numbers",
+    "a11y: «رفع الإنفاق على البحث: 3» does not read all it shows: 4"
    ]
   },
   {
    "name": "open tab neutral",
    "ok": true,
    "sample": [
-    "open tab not in the section colour"
+    "open tab not in the section colour",
+    "a11y: «رفع الإنفاق على البحث» does not read its numbers",
+    "a11y: «رفع الإنفاق على البحث: 3» does not read all it shows: 4"
    ]
   },
   {
@@ -314,7 +358,9 @@
    "name": "section colour on a rule",
    "ok": true,
    "sample": [
-    "section colour on data chrome: أقسام البحث"
+    "section colour on data chrome: أقسام البحث",
+    "a11y: «رفع الإنفاق على البحث» does not read its numbers",
+    "a11y: «رفع الإنفاق على البحث: 3» does not read all it shows: 4"
    ]
   },
   {
@@ -340,13 +386,16 @@
    "ok": true,
    "sample": [
     "clipped text (top): \"تراجع\" 860.27..881 y 153..168",
-    "colour alone: «تراجع» has no arrow or icon"
+    "colour alone: «تراجع» has no arrow or icon",
+    "a11y: «رفع الإنفاق على البحث» does not read its numbers"
    ]
   },
   {
    "name": "an image in the sheet",
    "ok": true,
    "sample": [
+    "a11y: «رفع الإنفاق على البحث» does not read its numbers",
+    "a11y: «رفع الإنفاق على البحث: 3» does not read all it shows: 4",
     "an image in the sheet"
    ]
   },
@@ -354,7 +403,9 @@
    "name": "close not round",
    "ok": true,
    "sample": [
-    "close button is not round"
+    "close button is not round",
+    "a11y: «رفع الإنفاق على البحث» does not read its numbers",
+    "a11y: «رفع الإنفاق على البحث: 3» does not read all it shows: 4"
    ]
   },
   {
@@ -362,15 +413,17 @@
    "ok": true,
    "sample": [
     "clipped text (top): \"اختبار\" 860.25..881 y 153..168",
-    "a11y: a label VoiceOver may skip (no role): «اختبار»"
+    "a11y: «رفع الإنفاق على البحث» does not read its numbers",
+    "a11y: «رفع الإنفاق على البحث: 3» does not read all it shows: 4"
    ]
   },
   {
    "name": "brief text hidden",
    "ok": true,
    "sample": [
-    "the research rate is not the HUD's",
-    "brief text not fully visible: +18"
+    "a11y: «رفع الإنفاق على البحث» does not read its numbers",
+    "a11y: «رفع الإنفاق على البحث: 3» does not read all it shows: 4",
+    "the research rate is not the HUD's"
    ]
   },
   {
@@ -379,7 +432,7 @@
    "sample": [
     "overview needs scrolling: 398.0 pt over",
     "fades 0/0 do not match the scroll state (top 0, over 398.0)",
-    "brief text not fully visible: +18"
+    "a11y: «رفع الإنفاق على البحث» does not read its numbers"
    ]
   },
   {
@@ -431,9 +484,9 @@
    "name": "text into a control",
    "ok": true,
    "sample": [
-    "text over a control: \"رفع الإنفاق على البحث\" runs into «البحث +8»",
+    "text over a control: \"رفع الإنفاق على البحث\" runs into «البحث +4»",
     "icon over text: r-arr / \"رفع الإنفاق على البحث\"",
-    "action row 1: order must be .r-tile, .r-at, .r-chip (right to left)"
+    "a11y: «رفع الإنفاق على البحث» does not read its numbers"
    ]
   },
   {
@@ -449,7 +502,9 @@
    "name": "dock underline missing",
    "ok": true,
    "sample": [
-    "dock underline missing or off: none 16pxx2px rgb(158, 219, 91) (want 16 x 2 in the section colour)"
+    "dock underline missing or off: none 16pxx2px rgb(158, 219, 91) (want 16 x 2 in the section colour)",
+    "a11y: «رفع الإنفاق على البحث» does not read its numbers",
+    "a11y: «رفع الإنفاق على البحث: 3» does not read all it shows: 4"
    ]
   },
   {
@@ -465,7 +520,9 @@
    "name": "identity line colour",
    "ok": true,
    "sample": [
-    "panel top line \"\" rgb(63, 224, 208) 2px (want the section colour, 2 pt, at the top)"
+    "panel top line \"\" rgb(63, 224, 208) 2px (want the section colour, 2 pt, at the top)",
+    "a11y: «رفع الإنفاق على البحث» does not read its numbers",
+    "a11y: «رفع الإنفاق على البحث: 3» does not read all it shows: 4"
    ]
   },
   {
@@ -481,7 +538,9 @@
    "name": "emblem size",
    "ok": true,
    "sample": [
-    "size 28.0x32.0 for .s-emb (want 32 x 32)"
+    "size 28.0x32.0 for .s-emb (want 32 x 32)",
+    "a11y: «رفع الإنفاق على البحث» does not read its numbers",
+    "a11y: «رفع الإنفاق على البحث: 3» does not read all it shows: 4"
    ]
   },
   {
@@ -489,43 +548,51 @@
    "ok": true,
    "sample": [
     "white touch off: .r-chip borderTopColor rgb(63, 224, 208) (want rgba(234, 242, 247, 0.5))",
-    "white touch off: .r-chip color rgb(63, 224, 208) (want rgb(234, 242, 247))"
+    "white touch off: .r-chip color rgb(63, 224, 208) (want rgb(234, 242, 247))",
+    "a11y: «رفع الإنفاق على البحث» does not read its numbers"
    ]
   },
   {
    "name": "tile icons cyan",
    "ok": true,
    "sample": [
-    "white touch off: .r-tile color rgb(127, 233, 255) (want rgb(234, 242, 247))"
+    "white touch off: .r-tile color rgb(127, 233, 255) (want rgb(234, 242, 247))",
+    "a11y: «رفع الإنفاق على البحث» does not read its numbers",
+    "a11y: «رفع الإنفاق على البحث: 3» does not read all it shows: 4"
    ]
   },
   {
    "name": "faint text",
    "ok": true,
    "sample": [
-    "brief text not fully visible: +1 شهريًا",
-    "brief text not fully visible: 0.3% من الناتج",
-    "brief text not fully visible: من 8 مجالات"
+    "a11y: «رفع الإنفاق على البحث» does not read its numbers",
+    "a11y: «رفع الإنفاق على البحث: 3» does not read all it shows: 4",
+    "brief text not fully visible: +1 شهريًا"
    ]
   },
   {
    "name": "why without its subject",
    "ok": true,
    "sample": [
-    "a11y: «لماذا؟» does not name its subject «الإنفاق»"
+    "a11y: «لماذا؟» does not name its subject «الإنفاق»",
+    "a11y: «رفع الإنفاق على البحث» does not read its numbers",
+    "a11y: «رفع الإنفاق على البحث: 3» does not read all it shows: 4"
    ]
   },
   {
    "name": "amber value without its icon",
    "ok": true,
    "sample": [
-    "colour alone: «+18» (its label's icon is not in its colour)"
+    "colour alone: «+18» (its label's icon is not in its colour)",
+    "a11y: «رفع الإنفاق على البحث» does not read its numbers",
+    "a11y: «رفع الإنفاق على البحث: 3» does not read all it shows: 4"
    ]
   },
   {
    "name": "chip arrow against its sign",
    "ok": true,
    "sample": [
+    "a11y: «رفع الإنفاق على البحث» does not read its numbers",
     "«رفع الإنفاق على البحث»: the chip's arrow does not agree with its sign",
     "a11y: «رفع الإنفاق على البحث» does not say the chip's direction in words"
    ]
@@ -534,6 +601,8 @@
    "name": "close says only إغلاق",
    "ok": true,
    "sample": [
+    "a11y: «رفع الإنفاق على البحث» does not read its numbers",
+    "a11y: «رفع الإنفاق على البحث: 3» does not read all it shows: 4",
     "a11y: the close says only «إغلاق»"
    ]
   },
@@ -541,7 +610,9 @@
    "name": "row read in part",
    "ok": true,
    "sample": [
-    "a11y: «جزء» does not read all it shows: الطاقة نحو المستوى يكتمل"
+    "a11y: «رفع الإنفاق على البحث» does not read its numbers",
+    "a11y: «جزء» does not read all it shows: الطاقة نحو المستوى يكتمل",
+    "a11y: «رفع الإنفاق على البحث: 3» does not read all it shows: 4"
    ]
   },
   {
@@ -557,7 +628,9 @@
    "name": "text wider than its box",
    "ok": true,
    "sample": [
-    "text wider than its box: «قيد البحث» (47 in 20)"
+    "text wider than its box: «قيد البحث» (47 in 20)",
+    "a11y: «رفع الإنفاق على البحث» does not read its numbers",
+    "a11y: «رفع الإنفاق على البحث: 3» does not read all it shows: 4"
    ]
   },
   {
@@ -575,22 +648,24 @@
    "sample": [
     "% shown before its number: \"نسبة 20%\"",
     "colour alone: «نسبة 20%» has no arrow or icon",
-    "the research trend is not the HUD's (up there, ? here)"
+    "a11y: «رفع الإنفاق على البحث» does not read its numbers"
    ]
   },
   {
    "name": "rate off the HUD",
    "ok": true,
    "sample": [
-    "the research rate is not the HUD's",
-    "headline 1 is not «البحث +18 شهريًا +1 شهريًا»: «البحث +20 شهريًا +1 شهريًا»",
-    "brief text missing: +18"
+    "a11y: «رفع الإنفاق على البحث» does not read its numbers",
+    "a11y: «رفع الإنفاق على البحث: 3» does not read all it shows: 4",
+    "the research rate is not the HUD's"
    ]
   },
   {
    "name": "project bar off",
    "ok": true,
    "sample": [
+    "a11y: «رفع الإنفاق على البحث» does not read its numbers",
+    "a11y: «رفع الإنفاق على البحث: 3» does not read all it shows: 4",
     "the project's bar is not at 62%"
    ]
   },
@@ -598,9 +673,9 @@
    "name": "project outside the focus",
    "ok": true,
    "sample": [
-    "the project under way is not in the focus (الصناعة والتصنيع)",
-    "brief text missing: التركيز: الطاقة",
-    "brief text missing: التركيز: الطاقة"
+    "a11y: «رفع الإنفاق على البحث» does not read its numbers",
+    "a11y: «رفع الإنفاق على البحث: 3» does not read all it shows: 4",
+    "the project under way is not in the focus (الصناعة والتصنيع)"
    ]
   },
   {
@@ -639,15 +714,17 @@
    "name": "trend off the HUD",
    "ok": true,
    "sample": [
-    "the research trend is not the HUD's (up there, flat here)",
-    "headline 1 is not «البحث +18 شهريًا +1 شهريًا»: «البحث +18 شهريًا دون تغير»",
-    "brief text missing: +1 شهريًا"
+    "a11y: «رفع الإنفاق على البحث» does not read its numbers",
+    "a11y: «رفع الإنفاق على البحث: 3» does not read all it shows: 4",
+    "the research trend is not the HUD's (up there, flat here)"
    ]
   },
   {
    "name": "HUD trend flipped",
    "ok": true,
    "sample": [
+    "a11y: «رفع الإنفاق على البحث» does not read its numbers",
+    "a11y: «رفع الإنفاق على البحث: 3» does not read all it shows: 4",
     "the research trend is not the HUD's (down there, up here)"
    ]
   },
@@ -655,17 +732,18 @@
    "name": "headline values swapped",
    "ok": true,
    "sample": [
-    "headline 2 is not «الإنفاق 700 مليون $ 0.3% من الناتج»: «الإنفاق 3.6 / 15 0.3% من الناتج»",
-    "headline 3 is not «المتوسط 3.6 / 15 من 8 مجالات»: «المتوسط 700 مليون $ من 8 مجالات»"
+    "a11y: «رفع الإنفاق على البحث» does not read its numbers",
+    "a11y: «رفع الإنفاق على البحث: 3» does not read all it shows: 4",
+    "headline 2 is not «الإنفاق 700 مليون $ 0.3% من الناتج»: «الإنفاق 3.6 / 15 0.3% من الناتج»"
    ]
   },
   {
    "name": "project level not the next",
    "ok": true,
    "sample": [
+    "a11y: «رفع الإنفاق على البحث» does not read its numbers",
     "a11y: «الطاقة، نحو المستوى 5: أ» does not read all it shows: 6",
-    "the project is not toward the focus's next level 5",
-    "brief text missing: الطاقة · نحو المستوى 5"
+    "a11y: «رفع الإنفاق على البحث: 3» does not read all it shows: 4"
    ]
   },
   {

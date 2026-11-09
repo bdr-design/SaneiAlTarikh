@@ -51,7 +51,7 @@ row of three: البيانات (default), الخرائط والصور, قيم ت
   sheet culled, §3.9). Main thread: the open and the tab change only (L14).
 
 ## Gate
-`screen29/A/_build/render.js` uses the shared checker (the «المزيد» section, three tabs, the values tab must fit, the data
+`screen29/A/_build/render.js` uses the shared checker (the «المزيد» section, three tabs, every tab scrolls when it overflows, the data
 tab scrolls) and adds: the header with screen 13's version, read as screen 13's row, its emblem screen 13's row icon; the
 close; the tabs in order; every source in order with what it feeds and its licence, the licence the licence cell of its
 row in §4's table (never pending), each tab's count, every §4 source whose licence asks for credit shown; NASA's credit and

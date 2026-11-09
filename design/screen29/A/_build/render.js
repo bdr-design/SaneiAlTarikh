@@ -113,7 +113,7 @@ qa('.sheet .c-src').forEach((r) => { if (r.matches('.tap, [role="button"], butto
 `;
 
 require(path.join(OUT, '../../shared/check/panelcheck.js'))({
-  OUT, dock: 'المزيد', tabs: ['data', 'maps', 'values'], longTab: 'data', fitTab: 'values',
+  OUT, dock: 'المزيد', tabs: ['data', 'maps', 'values'], longTab: 'data', fitTab: false,
   inputs: ['_build/credits.css', '../../../design_doc/final_design.md', '../../../CREDITS.md', '../../screen13/A/_build/sheet.html', '../../screen13/A/_build/assemble.py'],
   TOK: { sec: 'rgb(169, 188, 203)', ctlH: {}, sheetIcon: [], size: [] },
   HEAD, BRIEF, screenChecks, DATA: { src: SRC.map((x) => x.slice(0, 5)), ver: VER, row13: ROW13, icon13: ICON13, unshown: UNSHOWN, values: VALUES, notes: NOTES, images: IMAGES },
