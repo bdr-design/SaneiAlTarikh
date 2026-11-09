@@ -32,7 +32,7 @@ actor RecorderEngine {
     private var waiters: [CheckedContinuation<Void, Never>] = []
 
     static let header = "second,phase,elapsed_ms,render_frames,render_idle_frames,render_ms_mean,render_ms_max,render_hitches,"
-        + "frame_interval_ms_mean,frame_interval_ms_max,render_thread,sim_days,sim_ms_mean,sim_ms_max,sim_thread,"
+        + "frame_interval_ms_mean,frame_interval_ms_max,link_late_ms_max,link_skipped,present_late_ms_max,render_dropped,render_thread,sim_days,sim_ms_mean,sim_ms_max,sim_thread,"
         + "io_count,io_ms_max,io_thread,main_count,main_ms_max,main_thread,main_lag_ms_max,"
         + "thermal,battery_level,battery_state,low_power,mem_available_mb"
 
@@ -102,9 +102,9 @@ actor RecorderEngine {
                 let lagMs = Self.ms(lag)
                 let mem = Double(os_proc_available_memory()) / 1_048_576
                 total.add(loaded: loaded, r: r, s: s, io: io, main: main, frames: f, lagMs: lagMs)
-                let line = String(format: "%ld,%@,%.1f,%ld,%ld,%.3f,%.3f,%ld,%.2f,%.2f,%@,%ld,%.3f,%.3f,%@,%ld,%.3f,%@,%ld,%.3f,%@,%.2f,%@,%.2f,%ld,%ld,%.0f",
+                let line = String(format: "%ld,%@,%.1f,%ld,%ld,%.3f,%.3f,%ld,%.2f,%.2f,%.2f,%ld,%.2f,%ld,%@,%ld,%.3f,%.3f,%@,%ld,%.3f,%@,%ld,%.3f,%@,%.2f,%@,%.2f,%ld,%ld,%.0f",
                                   second, loaded ? "load" : "idle", elapsedMs,
-                                  f.frames, f.idleFrames, r.meanMs, r.maxMs, f.hitches, f.intervalMeanMs, f.intervalMaxMs, r.thread,
+                                  f.frames, f.idleFrames, r.meanMs, r.maxMs, f.hitches, f.intervalMeanMs, f.intervalMaxMs, f.linkLateMaxMs, f.linkSkipped, f.presentLateMaxMs, f.dropped, r.thread,
                                   s.count, s.meanMs, s.maxMs, s.thread,
                                   io.count, io.maxMs, io.thread, main.count, main.maxMs, main.thread, lagMs,
                                   DeviceInfo.thermalName(p.thermalState), device.0, device.1, p.isLowPowerModeEnabled ? 1 : 0, mem)
@@ -125,11 +125,12 @@ actor RecorderEngine {
         RenderEngine.shared.setContinuous(false)
         let cut = done < seconds
         var file = ""
+        let name = "recorder-\(Stamp.now())\(cut ? "-interrupted" : "").csv"
         let writeStart = ContinuousClock.now
         do {
-            let url = try await IOEngine.shared.writeCSV(rows, name: "recorder-\(Stamp.now())\(cut ? "-interrupted" : "").csv")
+            let url = try await IOEngine.shared.writeCSV(rows, name: name)
             file = url.lastPathComponent
-            RingLog.shared.log(String(format: "recorder: the CSV written in %.2f ms (with the wait for the I/O thread)",
+            RingLog.shared.log(String(format: "recorder: the CSV written in %.2f ms (wall, the write and the prune)",
                                       Self.ms(writeStart.duration(to: .now))))
         } catch {
             RingLog.shared.log("recorder write failed: \(error)")
