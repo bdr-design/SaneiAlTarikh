@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-09T00:34:03.063Z",
+ "ranAt": "2026-11-09T00:50:56.461Z",
  "inputs": {
   "files": [
    "index.html",
@@ -24,7 +24,7 @@
    "header_cairo.jpg",
    "map_overlay_cairo.svg"
   ],
-  "sha1": "c48f27282465cc59880d612bf9378bf926cb07b7"
+  "sha1": "05cfb94e49bfe93204eadf61a3c69120c210f504"
  },
  "cleanIssues": {
   "i16promax": [],
@@ -886,6 +886,23 @@
    "ok": true,
    "sample": [
     "the step body holds 3 controls, not 2"
+   ]
+  },
+  {
+   "name": "ring clipped by its parent",
+   "ok": true,
+   "sample": [
+    "the page outside the sheet differs from the approved paused HUD (956x440:s1)",
+    "the ring on .nation is clipped by top"
+   ]
+  },
+  {
+   "name": "flag changed",
+   "ok": true,
+   "sample": [
+    "horizontal overflow in IMG",
+    "vertical overflow in IMG",
+    "the page outside the sheet differs from the approved paused HUD (956x440:s1)"
    ]
   },
   {
