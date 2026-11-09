@@ -113,7 +113,8 @@ if (document.querySelector('[role="dialog"], [role="alertdialog"], dialog, .moda
   // PIN=1 and reviewed; remade when B3 or the paused HUD change, which the input fingerprints force)
   { const P = ['display', 'visibility', 'opacity', 'transform', 'backgroundColor', 'backgroundImage', 'outlineStyle', 'outlineWidth', 'outlineColor', 'outlineOffset',
       'borderTopWidth', 'borderTopStyle', 'borderTopColor', 'borderRightWidth', 'borderRightStyle', 'borderRightColor', 'borderBottomWidth', 'borderBottomStyle', 'borderBottomColor',
-      'borderLeftWidth', 'borderLeftStyle', 'borderLeftColor', 'boxShadow', 'filter', 'borderImageSource', 'stroke', 'strokeWidth', 'fill', 'color', 'clipPath', 'mask'];
+      'borderLeftWidth', 'borderLeftStyle', 'borderLeftColor', 'boxShadow', 'filter', 'borderImageSource', 'stroke', 'strokeWidth', 'fill', 'color', 'clipPath', 'mask',
+      'overflowX', 'overflowY', 'zIndex', 'textShadow', 'clip', 'mixBlendMode', 'backdropFilter', 'contain', 'position'];
     const tgtEl = ST[i][2] && document.querySelector('.hud ' + ST[i][2]);
     const sig = (e, ps) => { const c = getComputedStyle(e, ps || null); if (ps && (c.content === 'none' || c.content === 'normal')) return '';
       return P.map((k) => (e === tgtEl && !ps && /^outline/.test(k)) ? 'RING' : c[k]).join('|') + (ps ? '|' + c.content : ''); };
@@ -123,8 +124,10 @@ if (document.querySelector('[role="dialog"], [role="alertdialog"], dialog, .moda
       const r = e.getBoundingClientRect(), cls = e.className && e.className.baseVal !== undefined ? e.className.baseVal : String(e.className || '');
       // an SVG text's box moves a pixel with the screen's density (the shared checker places the labels); its paint is kept
       const box = /^(text|tspan)$/i.test(e.tagName) ? ['', '', '', ''] : [Math.round(r.left), Math.round(r.top), Math.round(r.width), Math.round(r.height)];
-      parts.push([e.tagName, cls, e.getAttribute('href') || ''].concat(box, [sig(e), sig(e, '::before'), sig(e, '::after')]).join('~')); });
-    let h = 2166136261; const str = parts.join('\\n'); for (let k = 0; k < str.length; k++) { h ^= str.charCodeAt(k); h = Math.imul(h, 16777619) >>> 0; }
+      parts.push([e.tagName, cls, e.getAttribute('href') || '', e.getAttribute('src') || ''].concat(box, [sig(e), sig(e, '::before'), sig(e, '::after')]).join('~')); });
+    // the same wherever the repository sits: resolved file URLs lose the folder above design/
+    const root = location.href.slice(0, location.href.indexOf('/design/'));
+    let h = 2166136261; const str = parts.join('\\n').split(root).join(''); for (let k = 0; k < str.length; k++) { h ^= str.charCodeAt(k); h = Math.imul(h, 16777619) >>> 0; }
     const key = innerWidth + 'x' + innerHeight + ':' + tab, hex = h.toString(16) + '/' + parts.length;
     if (DATA.pinMode) issues.push('PIN ' + key + ' ' + hex);
     else if (!DATA.pin[key]) issues.push('no pinned HUD for ' + key);
@@ -153,7 +156,11 @@ if (document.querySelector('[role="dialog"], [role="alertdialog"], dialog, .moda
     const r = tgt.getBoundingClientRect(), o = parseFloat(c.outlineOffset) + parseFloat(c.outlineWidth), sh = q('.sheet').getBoundingClientRect(), S = +(new URLSearchParams(location.search).get('side') || 0);
     if (r.left < S - 0.5 || r.right > innerWidth - S + 0.5) issues.push('the ringed element ' + want + ' is not inside the side insets');
     if (r.left - o < 0 || r.right + o > innerWidth || r.top - o < 0 || r.bottom + o > innerHeight) issues.push('the ringed element ' + want + ' runs off the screen');
-    if (!(r.right + o <= sh.left || r.left - o >= sh.right || r.bottom + o <= sh.top || r.top - o >= sh.bottom)) issues.push('the ringed element ' + want + ' is under the sheet'); } }
+    if (!(r.right + o <= sh.left || r.left - o >= sh.right || r.bottom + o <= sh.top || r.top - o >= sh.bottom)) issues.push('the ringed element ' + want + ' is under the sheet');
+    // the ring is drawn in full: no parent clips the outline's box
+    for (let a = tgt.parentElement; a && a !== document.documentElement; a = a.parentElement) { const ac = getComputedStyle(a);
+      if (ac.overflowX !== 'visible' || ac.overflowY !== 'visible' || /paint|strict|content/.test(ac.contain) || ac.clipPath !== 'none') { const ar = a.getBoundingClientRect();
+        if (r.left - o < ar.left - 0.5 || r.right + o > ar.right + 0.5 || r.top - o < ar.top - 0.5 || r.bottom + o > ar.bottom + 0.5) { issues.push('the ring on ' + want + ' is clipped by ' + (a.className || a.tagName)); break; } } } } }
 // the texts agree with the HUD
 if (tab === 's2') { const labels = qa('.hud .stat .lbl').map((e) => W(T(e))), t = DATA.text.s2;
   const named = ['الخزينة', 'الاستقرار', 'الشرعية', 'القوة البشرية', 'النفوذ', 'البحث']; if (named.join('|') !== labels.join('|')) issues.push('the indicators named are not the HUD\\'s: ' + labels.join('، '));
@@ -246,6 +253,8 @@ require(path.join(OUT, '../../shared/check/panelcheck.js'))({
     ['ring around the sheet', d, '&tab=s1', '.sheet { box-shadow: 0 0 0 2px #EAF2F7, 0 12px 30px rgba(0, 0, 0, .45) !important; }', /a line on a sheet part that is not its chrome: section\.sheet/],
     ['sheet pseudo ring', d, '&tab=s2', '.r-body[data-tab="s2"] .r-sec::after { content: ""; position: fixed; left: 600px; top: 10px; width: 100px; height: 40px; border: 2px solid #EAF2F7; }', /a line on a sheet part that is not its chrome/],
     ['control nested in the skip', d, '&tab=s2', '', /the step body holds 3 controls/, () => { const b = document.createElement('button'); b.className = 'r-x tap'; b.setAttribute('aria-label', 'لا تعرضها مجددا'); b.innerHTML = '<svg class="i"><use href="#i-close"/></svg>'; document.querySelector('.r-body[data-tab="s2"] .r-link').appendChild(b); }],
+    ['ring clipped by its parent', d, '&tab=s1', '', /the ring on \.nation is clipped by/, () => { const a = document.querySelector('.hud .nation').parentElement; a.style.overflow = 'hidden'; }],
+    ['flag changed', d, '&tab=s1', '', /the page outside the sheet differs/, () => { const f = document.querySelector('.hud .nation img'); if (f) f.setAttribute('src', f.getAttribute('src').replace(/[a-z]{2}\.svg$/, 'tn.svg')); }],
     ['primary bar faded', d, '&tab=s1', '.r-first::after { opacity: 0 !important; }', /the primary's white bar is not drawn/],
     ['skip path without «حول»', d, '&tab=s2', '', /the skip is missing, misplaced or does not say the tour stays in the help/, () => { document.querySelector('.r-body[data-tab="s2"] .r-link .r-at > span').textContent = 'تعود إليها من المزيد › المساعدة'; }],
     ['HUD date changed', d, '&tab=s1', '', /the header's date is not the HUD's/, () => { document.querySelector('.hud .date .dmy').textContent = '14 يناير 2011'; }],
