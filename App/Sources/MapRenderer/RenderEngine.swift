@@ -15,6 +15,10 @@ struct FrameStats: Sendable {
     /// a late callback, a GPU-late or dropped frame). A run at 30 a second therefore reads 30 a second. Booked in the row
     /// of the second the later frame is presented, about two refreshes after it was encoded.
     var hitches = 0
+    /// The excess of long presented gaps over a sixtieth: each gap of g sixtieths above 1.1 (clear of timing noise) adds
+    /// g - 1, and shorter gaps never subtract, so judder (a 25 ms gap then an 8 ms one) adds too. Unlike `hitches` it
+    /// sees a lowered cadence: 48 a second adds 12 a second.
+    var staleRefreshes = 0.0
     /// The spacing of presented continuous frames, in ms (mean and worst).
     var intervalMeanMs = 0.0
     var intervalMaxMs = 0.0
@@ -184,7 +188,10 @@ final class RenderEngine: NSObject, @unchecked Sendable {
         link?.invalidate()
         let l = CAMetalDisplayLink(metalLayer: layer)
         l.delegate = self
-        l.preferredFrameRateRange = CAFrameRateRange(minimum: 30, maximum: 120, preferred: 60)
+        // 60 a second, fixed (§3's Interacting rate) for M0's load: the third build's run showed the system free to drop
+        // to 48 inside a 30–120 range. The frame scheduler and governor set it later (120 while touching, 30 for Tween
+        // and when hot, §3)
+        l.preferredFrameRateRange = CAFrameRateRange(minimum: 60, maximum: 60, preferred: 60)
         l.preferredFrameLatency = 2
         l.add(to: .current, forMode: .default)
         link = l
@@ -203,6 +210,7 @@ final class RenderEngine: NSObject, @unchecked Sendable {
                 let gap = time - lastPresented
                 let stale = max(0, Int((gap * 60 + 0.25).rounded(.down)) - 1)
                 stats.hitches += stale
+                if gap * 60 > 1.1 { stats.staleRefreshes += gap * 60 - 1 }
                 intervalSum += gap
                 intervalCount += 1
                 stats.intervalMaxMs = max(stats.intervalMaxMs, gap * 1_000)

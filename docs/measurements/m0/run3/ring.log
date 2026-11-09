@@ -1,0 +1,25 @@
+    0.000 launch iPhone18,2 iOS 27.0.1 thermal nominal lowPower 0 memAvail 6654 MB
+    0.028 saves folder ready
+    0.056 scene inactive
+    0.075 render: display link on sanei.render (Apple A19 Pro GPU)
+    0.218 scene active
+    1.427 recorder: before it, io 2 operations, worst 7.13 ms
+    6.430 recorder: load starts
+   10.428 recorder: second 10
+   20.430 recorder: second 20
+   30.430 recorder: second 30
+   40.428 recorder: second 40
+   50.430 recorder: second 50
+   60.430 recorder: second 60
+   66.436 recorder: the CSV written in 3.30 ms (wall, the write and the prune)
+   66.436 recorder done recorder-20261109-221820-902.csv: الرسم: 0.09 م.ث للإطار (الأسوأ 0.30) · sanei.render | المحاكاة: الأيام 1800 · 0.08 م.ث لليوم (الأسوأ 0.14) · sanei.sim/user-initiated | الملفات: العمليات 72 · الأسوأ 0.58 م.ث · sanei.io | الواجهة: الأعمال 128 · الأسوأ 0.12 م.ث · أسوأ تأخر 0.2 م.ث · main
+   70.552 recorder: before it, io 3 operations, worst 3.28 ms
+   75.555 recorder: load starts
+   79.555 recorder: second 10
+   89.555 recorder: second 20
+   99.555 recorder: second 30
+  109.554 recorder: second 40
+  119.554 recorder: second 50
+  129.554 recorder: second 60
+  135.558 recorder: the CSV written in 3.92 ms (wall, the write and the prune)
+  135.558 recorder done recorder-20261109-221930-023.csv: الرسم: 0.09 م.ث للإطار (الأسوأ 0.38) · sanei.render | المحاكاة: الأيام 1800 · 0.08 م.ث لليوم (الأسوأ 0.18) · sanei.sim/user-initiated | الملفات: العمليات 72 · الأسوأ 0.66 م.ث · sanei.io | الواجهة: الأعمال 128 · الأسوأ 0.09 م.ث · أسوأ تأخر 0.3 م.ث · main

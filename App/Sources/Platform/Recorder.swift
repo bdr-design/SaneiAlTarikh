@@ -31,7 +31,7 @@ actor RecorderEngine {
     private var interrupted = false
     private var waiters: [CheckedContinuation<Void, Never>] = []
 
-    static let header = "second,phase,elapsed_ms,render_frames,render_idle_frames,render_ms_mean,render_ms_max,render_hitches,"
+    static let header = "second,phase,elapsed_ms,render_frames,render_idle_frames,render_ms_mean,render_ms_max,render_hitches,stale_refreshes,"
         + "frame_interval_ms_mean,frame_interval_ms_max,link_late_ms_max,link_skipped,present_late_ms_max,render_dropped,render_thread,sim_days,sim_ms_mean,sim_ms_max,sim_thread,"
         + "io_count,io_ms_max,io_thread,main_count,main_ms_max,main_thread,main_lag_ms_max,"
         + "thermal,battery_level,battery_state,low_power,mem_available_mb"
@@ -102,9 +102,9 @@ actor RecorderEngine {
                 let lagMs = Self.ms(lag)
                 let mem = Double(os_proc_available_memory()) / 1_048_576
                 total.add(loaded: loaded, r: r, s: s, io: io, main: main, frames: f, lagMs: lagMs)
-                let line = String(format: "%ld,%@,%.1f,%ld,%ld,%.3f,%.3f,%ld,%.2f,%.2f,%.2f,%ld,%.2f,%ld,%@,%ld,%.3f,%.3f,%@,%ld,%.3f,%@,%ld,%.3f,%@,%.2f,%@,%.2f,%ld,%ld,%.0f",
+                let line = String(format: "%ld,%@,%.1f,%ld,%ld,%.3f,%.3f,%ld,%.2f,%.2f,%.2f,%.2f,%ld,%.2f,%ld,%@,%ld,%.3f,%.3f,%@,%ld,%.3f,%@,%ld,%.3f,%@,%.2f,%@,%.2f,%ld,%ld,%.0f",
                                   second, loaded ? "load" : "idle", elapsedMs,
-                                  f.frames, f.idleFrames, r.meanMs, r.maxMs, f.hitches, f.intervalMeanMs, f.intervalMaxMs, f.linkLateMaxMs, f.linkSkipped, f.presentLateMaxMs, f.dropped, r.thread,
+                                  f.frames, f.idleFrames, r.meanMs, r.maxMs, f.hitches, f.staleRefreshes, f.intervalMeanMs, f.intervalMaxMs, f.linkLateMaxMs, f.linkSkipped, f.presentLateMaxMs, f.dropped, r.thread,
                                   s.count, s.meanMs, s.maxMs, s.thread,
                                   io.count, io.maxMs, io.thread, main.count, main.maxMs, main.thread, lagMs,
                                   DeviceInfo.thermalName(p.thermalState), device.0, device.1, p.isLowPowerModeEnabled ? 1 : 0, mem)
@@ -136,12 +136,13 @@ actor RecorderEngine {
             RingLog.shared.log("recorder write failed: \(error)")
         }
         let lines = total.lines()
-        RingLog.shared.log("recorder \(cut ? "interrupted at second \(done)" : "done") \(file): \(lines.joined(separator: " | "))")
+        RingLog.shared.log("recorder \(cut ? "interrupted at second \(done)" : "done") \(file): \(lines.joined(separator: " | "))"
+                           + String(format: " | hitches %ld, stale refreshes %.1f", total.hitches, total.stale))
         await RingLog.shared.flush()
         let summary = cut
             ? String(format: "انقطع عند الثانية %ld (خرج التطبيق للخلفية)", done)
-            : String(format: "المدة %ld ث · الإطارات %ld · التقطّعات %ld · إطارات الخمول %ld",
-                     done, total.frames, total.hitches, total.idleFrames)
+            : String(format: "%ld ث · الإطارات %ld · التقطّع %ld · الناقصة %.1f · الخمول %ld",
+                     done, total.frames, total.hitches, total.stale, total.idleFrames)
         await MainActor.run {
             ui.isRecording = false
             ui.secondsLeft = 0
@@ -159,6 +160,7 @@ actor RecorderEngine {
 
     private struct Totals {
         var frames = 0, idleFrames = 0, hitches = 0, days = 0
+        var stale = 0.0
         var renderNs: UInt64 = 0, renderCount = 0, renderMax = 0.0, renderThread = ""
         var simNs: UInt64 = 0, simMax = 0.0, simThread = ""
         var ioCount = 0, ioMax = 0.0, ioThread = ""
@@ -167,7 +169,7 @@ actor RecorderEngine {
 
         mutating func add(loaded: Bool, r: EngineMeter.Sample, s: EngineMeter.Sample, io: EngineMeter.Sample,
                           main: EngineMeter.Sample, frames f: FrameStats, lagMs: Double) {
-            frames += f.frames; idleFrames += f.idleFrames; hitches += f.hitches; days += s.count
+            frames += f.frames; idleFrames += f.idleFrames; hitches += f.hitches; stale += f.staleRefreshes; days += s.count
             renderNs &+= r.totalNanos; renderCount += r.count; renderMax = max(renderMax, r.maxMs)
             simNs &+= s.totalNanos; simMax = max(simMax, s.maxMs)
             ioCount += io.count; ioMax = max(ioMax, io.maxMs)
