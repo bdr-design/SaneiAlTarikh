@@ -59,3 +59,11 @@ jobs:
         run: swift build -Xswiftc -warnings-as-errors
       - name: Test
         run: swift test -Xswiftc -warnings-as-errors
+  # the reference model (ADR 0002): the generated tables and vectors match it, and its accuracy bounds hold
+  core-reference:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Reference model
+        run: python3 -I tools/checks/core_reference.py --check

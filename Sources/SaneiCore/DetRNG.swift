@@ -1,0 +1,60 @@
+// The simulation's random numbers (§2.3): SplitMix64, seeded from counters, never from a clock or the system's
+// generator. A draw depends only on (the game's seed, a key, a stream, a serial): the key is the day or, for fog of
+// war, the intelligence epoch; each system has its own stream; the serial is the entity's. So the order in which
+// systems or threads run never changes a result, and nothing has to be saved between days. stdlib only.
+
+/// A deterministic generator. It is deliberately not a `RandomNumberGenerator`: the standard library does not promise
+/// that `random(in:using:)` or `shuffled(using:)` map bits to values the same way in every Swift version, so the
+/// mappings here are our own, locked by golden values.
+@frozen
+public struct DetRNG: Sendable {
+    public var state: UInt64
+
+    /// A raw SplitMix64 state (the published sequence for a seed starts here).
+    @inlinable public init(state: UInt64) { self.state = state }
+
+    /// The generator of one (seed, key, stream, serial).
+    @inlinable
+    public init(seed: UInt64, key: Int64, stream: UInt32, serial: UInt32) {
+        let s = DetRNG.mix(seed &+ DetRNG.gamma &+ UInt64(bitPattern: key))
+        state = DetRNG.mix(s &+ DetRNG.gamma &+ ((UInt64(stream) << 32) | UInt64(serial)))
+    }
+
+    /// SplitMix64's increment (the golden ratio's bits).
+    @inlinable public static var gamma: UInt64 { 0x9E37_79B9_7F4A_7C15 }
+
+    /// SplitMix64's output function.
+    @inlinable
+    public static func mix(_ v: UInt64) -> UInt64 {
+        var z = v
+        z = (z ^ (z >> 30)) &* 0xBF58_476D_1CE4_E5B9
+        z = (z ^ (z >> 27)) &* 0x94D0_49BB_1331_11EB
+        return z ^ (z >> 31)
+    }
+
+    /// The next 64 bits.
+    @inlinable
+    public mutating func next() -> UInt64 {
+        state &+= DetRNG.gamma
+        return DetRNG.mix(state)
+    }
+
+    /// A number in 0..<n (0 when n is 0), from one draw: the high half of draw * n. No rejection loop, so every call
+    /// uses exactly one draw; the bias is below n / 2^64.
+    @inlinable
+    public mutating func below(_ n: UInt64) -> UInt64 {
+        next().multipliedFullWidth(by: n).high
+    }
+
+    /// A ratio in 0..<10,000 bp.
+    @inlinable
+    public mutating func bp() -> BP {
+        BP(raw: Int32(truncatingIfNeeded: below(10_000)))
+    }
+
+    /// True with probability `p` (always from 100% up, never at 0 or below). One draw.
+    @inlinable
+    public mutating func chance(_ p: BP) -> Bool {
+        bp() < p
+    }
+}
