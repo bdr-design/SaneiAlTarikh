@@ -108,3 +108,6 @@ the recorder CSV, `ring.log` and `device.txt` (kept in `docs/measurements/m0/`; 
   the file. The recorder logs a line before each 10-second flush (so
   each is a real append), the I/O that ran before the recording (launch, exports, the last CSV, payloads) and the CSV
   write's time, so the next IPA measures the one-off writes too. Re-measured with the next IPA.
+
+The fix passed the two reviews and four verification rounds (the last found nothing to fix); CI green (ci-linux, ios
+42657578013 on 2591bdf). The owner re-measures with that IPA.
