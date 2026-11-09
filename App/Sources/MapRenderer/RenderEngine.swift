@@ -18,6 +18,9 @@ struct FrameStats: Sendable {
     /// The spacing of presented continuous frames, in ms (mean and worst).
     var intervalMeanMs = 0.0
     var intervalMaxMs = 0.0
+    /// The longest wait between two display-link callbacks while continuous, in ms: with the presented gaps it tells a
+    /// starved link (no callback came) from a frame that was asked for on time and shown late.
+    var linkGapMaxMs = 0.0
 }
 
 /// The render engine (ADR 0001): its own thread `sanei.render` with its own run loop, driven by CAMetalDisplayLink
@@ -47,6 +50,7 @@ final class RenderEngine: NSObject, @unchecked Sendable {
     private var pipeline: MTLRenderPipelineState?
     private var angle: Float = 0
     private var continuous = false
+    private var lastCallback: CFTimeInterval = 0
     /// Set when the app goes to the background: nothing unpauses the link until `resume()`.
     private var backgrounded = false
 
@@ -104,6 +108,7 @@ final class RenderEngine: NSObject, @unchecked Sendable {
     func setContinuous(_ on: Bool) {
         perform { [self] in
             self.continuous = on && !self.backgrounded
+            self.lastCallback = 0
             self.lock.lock()
             self.lastPresented = 0
             self.lock.unlock()
@@ -182,7 +187,10 @@ final class RenderEngine: NSObject, @unchecked Sendable {
         guard time > 0 else { return }      // dropped: the gap to the next presented frame counts it
         if lastPresented > 0 {
             let gap = time - lastPresented
-            stats.hitches += max(0, Int((gap * 60 + 0.25).rounded(.down)) - 1)
+            let stale = max(0, Int((gap * 60 + 0.25).rounded(.down)) - 1)
+            stats.hitches += stale
+            // each stall goes to the log with its time, to be read beside whatever else happened then
+            if stale > 0 { RingLog.shared.log(String(format: "render: %.1f ms between presented frames (%ld stale)", gap * 1_000, stale)) }
             intervalSum += gap
             intervalCount += 1
             stats.intervalMaxMs = max(stats.intervalMaxMs, gap * 1_000)
@@ -196,6 +204,14 @@ extension RenderEngine: CAMetalDisplayLinkDelegate {
         autoreleasepool {
             let start = DispatchTime.now().uptimeNanoseconds
             if continuous {
+                let now = CACurrentMediaTime()
+                if lastCallback > 0 {
+                    let wait = (now - lastCallback) * 1_000
+                    lock.lock()
+                    stats.linkGapMaxMs = max(stats.linkGapMaxMs, wait)
+                    lock.unlock()
+                }
+                lastCallback = now
                 angle += 0.02
                 update.drawable.addPresentedHandler { [self] d in self.presented(at: d.presentedTime) }
             }

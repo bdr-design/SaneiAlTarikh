@@ -1,0 +1,10 @@
+    0.000 launch iPhone18,2 iOS 27.0.1 thermal nominal lowPower 0 memAvail 6654 MB
+    0.031 saves folder ready
+    0.049 scene inactive
+    0.119 render: display link on sanei.render (Apple A19 Pro GPU)
+    0.212 scene active
+    9.149 recorder: load starts
+   69.158 recorder done recorder-20261109-192512-550.csv: الرسم: 0.11 م.ث للإطار (الأسوأ 0.24) · sanei.render | المحاكاة: الأيام 1800 · 0.09 م.ث لليوم (الأسوأ 0.27) · sanei.sim/user-initiated | الملفات: العمليات 72 · الأسوأ 6.17 م.ث · sanei.io | الواجهة: الأعمال 128 · الأسوأ 0.12 م.ث · أسوأ تأخر 0.1 م.ث · main
+   70.845 diagnostics export: 3 files
+   78.529 scene inactive
+   81.019 scene background
