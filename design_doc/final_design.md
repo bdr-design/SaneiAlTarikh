@@ -295,7 +295,7 @@ A rule that nothing enforces is not a rule here. Rule IDs are referenced in the 
 ```
 Package.swift                         # swift-tools 6.0, Swift 6 language mode
 Sources/
-  SaneiCore/ SaneiContent/ SaneiBake/ SaneiMap/ SaneiEngine/ SaneiAI/ SaneiPresentation/
+  SaneiCore/ SaneiRuntime/ SaneiContent/ SaneiBake/ SaneiMap/ SaneiEngine/ SaneiAI/ SaneiPresentation/
   simcli/  CZlib/                     # CZlib links system zlib, simcli only
 Tests/<Module>Tests/   Tests/Golden/{saves,replays,values}/   # values = DetRNG + DMath only
 App/project.yml                       # XcodeGen 2.46.0; .xcodeproj is gitignored
@@ -330,6 +330,7 @@ tools/{datapipeline/,imagery/,checks/}  CLAUDE.md
 | Module | May import | Contains | Must never |
 |---|---|---|---|
 | `SaneiCore` | stdlib only | `Idx<T>`, `Handle<T>`, `Serial`, `Interner`, `BP`, `Q32`, `LogQ`, `LCU`, `USDn`, `Money`, `Pop`, `GameDate`, `DetRNG`, `DMath`, `StateHasher`, `RingBuffer`, `HandleTable` (serial-ordered), `DenseMatrix`, `BitSet`, `TermSink` with `SumSink` and `TermBuffer12`, the column codec (varint, zigzag, raw). Hot types are `@frozen` and `@inlinable`. | Foundation |
+| `SaneiRuntime` | Foundation (no Core, no Engine) | The engines' threads (ADR 0001): `DedicatedThreadExecutor` (a `SerialExecutor` with a thread of its own, for `GameHost` and the I/O actor), `EngineMeter` (per-engine busy time, the threads each ran on) | Know the engine, content or UI; run work on the main thread |
 | `SaneiContent` | Core | <ul><li>Readers for `content.bin` and `scenario-*.bin`.</li><li>`ContentDB`, holding the static rules: goods, industries, input-output templates, adjacency, route clusters, regions, sea zones, chokepoints, terrain, units, techs, parameter sets, effect vocabulary, defines, modifiers, Arabic strings with morphology fields.</li><li>`ScenarioStart`, mapped only while a new game is being built.</li><li>The validator.</li></ul> | Parse JSON; know about `WorldState` |
 | `SaneiBake` | Core, Content, Foundation | JSON and CSV loaders with strict decoding; the baker; the evidence and stub-pack checks | Be linked into the app |
 | `SaneiMap` | Core | <ul><li>Readers for the map pack and the imagery index.</li><li>Projection, choice of level, chunks and tiles.</li><li>The tile-cache policy (pinned visible set).</li><li>Picking.</li><li>Label placement around HUD rectangles.</li><li>**Runtime label anchors.**</li><li>`FrameScheduler` and the governor policy.</li></ul> | Metal, UIKit, Content, Engine |
@@ -338,10 +339,10 @@ tools/{datapipeline/,imagery/,checks/}  CLAUDE.md
 | `SaneiPresentation` | Engine, Content, Core, Foundation | `GameFormatter` with the **Arabic morphology layer**; why-terms turned into rows; map-mode colour functions; view data; Arabic search normalization; notification text | SwiftUI, UIKit, Metal |
 | `simcli` | All modules, plus `SaneiBake` and `CZlib` | `validate`, `facts`, `evidence`, `stubs`, `bake`, `run`, `replay`, `bench`, `balance`, `history-check`, `save-inspect`, `peak-load` | — |
 | App/UI | All packages | SwiftUI shell, `GameScreen` screens, `DesignTokens`, `GlassStyle`, `DialogPresenter`, `GameStore`, the layout fit engine | Change state except through `host.submit` |
-| App/MapRenderer | Core, Map, Metal | Imagery, overlays, borders (stencil-once), glow, fronts, markers, arrows, distance-field labels, overlay counters | Read the engine or content |
-| App/Platform | Core | Storage (Documents, mirror bookmark), DEFLATE, the binary metadata reader, audio, haptics, thermal and power state, memory pressure, image decoding, **ring-buffer log**, MetricKit and `MXDiagnosticPayload` export, the 60 s recorder | — |
+| App/MapRenderer | Core, Runtime, Map, Metal; Platform's log | Imagery, overlays, borders (stencil-once), glow, fronts, markers, arrows, distance-field labels, overlay counters; a control surface (frames on request, continuous, pause, frame stats) | Read the engine or content |
+| App/Platform | Core, Runtime; MapRenderer's control surface (the recorder) | Storage (Documents, mirror bookmark), DEFLATE, the binary metadata reader, audio, haptics, thermal and power state, memory pressure, image decoding, **ring-buffer log**, MetricKit and `MXDiagnosticPayload` export, the 60 s recorder | Read the engine (the recorder's load is a closure the app hands it) |
 
-Dependencies run one way: Core ← Content ← Engine ← AI; Core ← Map; Presentation depends on Engine. The Linux build leaves out the App targets.
+Dependencies run one way: Core ← Content ← Engine ← AI; Core ← Map; Presentation depends on Engine; Runtime stands alone (the app hands its executors to the engine, which takes any `SerialExecutor`). The Linux build leaves out the App targets.
 
 ### 2.3 Core primitives and the determinism kit
 
@@ -443,7 +444,7 @@ Dependencies run one way: Core ← Content ← Engine ← AI; Core ← Map; Pres
 - **Invariants:** per account, Δbalance = Σ postings, in its own unit. The world account is exactly 0 after each monthly close. The day-1 closure is checked in LCU and in USD.
 
 **Threading.**
-- `GameHost` is an `actor` on the default executor. Its loop runs in a `Task` at `.utility` priority from ×1 to ×10 and at `.userInitiated` at maximum speed.
+- `GameHost` is an `actor` on **its own thread**: a dedicated-thread serial executor (the owner's rule `threadSpread`, 2026-11-08; ADR 0001), never a long loop on the shared cooperative pool, whose threads are fixed at the core count and kept for bounded parallel bursts. Its thread runs at `.utility` priority from ×1 to ×10 and at `.userInitiated` at maximum speed. The render engine has its own thread too (`CAMetalDisplayLink`, iOS 17), and so has the platform I/O engine (saves, logs, exports).
 - It sleeps with `ContinuousClock`. At maximum speed it runs 3 days per wake-up.
 - If a wake-up overruns, the effective speed drops and the HUD shows it.
 - While paused it waits on a control stream with no wake-ups.
@@ -877,6 +878,13 @@ bound here; each item is a line in `docs/perf.md` (L12) and a test where one is 
   250 ms); the header flag on demand, once per country. The model under the open-panel rule: the estimate only at an
   intelligence refresh (D-19), the relation monthly, the network on an operation or intelligence change; nothing ticks;
   main thread the tap and the finished model only (L14).
+- **The start tour (screen 30).** A static sheet from the bundle's strings. At a new campaign it opens after the first
+  playable frame (outside §3.4's cold start) and ahead of the urgent decision waiting in the queue: the decision's sheet
+  model and category image are built and decoded only when the tour ends («ابدأ الحملة», skip or close), one sheet at a
+  time. The «المزيد» section's shared header image is copied once at open from the resident z4 base (off the main thread,
+  released on close, inside §3.3's panels line); the 40 pt flag on demand, cached apart and droppable (Flags). The ring is
+  a style on a HUD view (no layer, nothing drawn on the map); the game is paused, so no frames and no timers between taps,
+  and the held alert does not tick (L1); main thread the taps only (L14).
 
 ### 3.10 Names of any country (the second-country test, T-024)
 

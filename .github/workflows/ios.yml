@@ -1,11 +1,10 @@
 # The unsigned IPA (design_doc §2.8, M0 part): the owner runs it from the GitHub app ("Run workflow"), downloads the
-# artifact, signs it with their certificate and installs it. XcodeGen 2.46.0 makes the project; the build is Release,
-# arm64, unsigned; the IPA gate checks what M0 has.
+# artifact, signs it with their certificate and installs it (docs/install.md). XcodeGen 2.46.0 (its zip checked by
+# hash) makes the project; the build is Release, arm64, unsigned; the IPA gate checks what M0 has. Manual only: tagged
+# releases wait for M5. The runner is macos-15 with Xcode 26.3 selected (the image carries it).
 name: ios
 on:
   workflow_dispatch:
-  push:
-    tags: ['v*']
 concurrency:
   group: ios-${{ github.ref }}
   cancel-in-progress: true
@@ -15,19 +14,18 @@ jobs:
     timeout-minutes: 45
     steps:
       - uses: actions/checkout@v4
-      - name: Xcode (the newest installed)
+      - name: Xcode 26.3 (pinned)
         run: |
-          ls -d /Applications/Xcode*.app
-          XC=$(ls -d /Applications/Xcode_*.app | grep -v -i beta | sort -V | tail -1)
-          sudo xcode-select -s "$XC"
+          sudo xcode-select -s /Applications/Xcode_26.3.app
           xcodebuild -version
-      - name: Metal toolchain (needed from Xcode 26 on)
+      - name: Metal toolchain (Xcode 26 downloads it separately)
         run: |
           for i in 1 2 3; do xcodebuild -downloadComponent MetalToolchain && exit 0; sleep 20; done
-          echo "no separate Metal toolchain download (Xcode before 26 ships it)"
+          exit 1
       - name: XcodeGen 2.46.0
         run: |
           curl -fsSL -o xcodegen.zip https://github.com/yonaskolb/XcodeGen/releases/download/2.46.0/xcodegen.zip
+          echo "4d9e34b62172d645eed6457cac13fc222569974098ef4ee9c3368bedf0196806  xcodegen.zip" | shasum -a 256 -c -
           unzip -q xcodegen.zip -d xcodegen-dist
           XG=$(find xcodegen-dist -type f -name xcodegen -perm -u+x | head -1)
           "$XG" --version
@@ -39,7 +37,9 @@ jobs:
             -sdk iphoneos -destination 'generic/platform=iOS' -derivedDataPath build \
             CODE_SIGNING_ALLOWED=NO CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY="" build > build.log 2>&1 || {
               grep -nE "error:|warning:" build.log | head -150; tail -60 build.log; exit 1; }
-          grep -cE "warning:" build.log || true
+          # Apple's App Intents metadata tool notes that the app has no App Intents: not a warning about our code
+          if grep -nE "warning:" build.log | grep -v "appintentsmetadataprocessor.*No AppIntents.framework dependency found"; then
+            echo "the build has warnings (above): treat them as errors"; exit 1; fi
       - name: IPA
         run: |
           APP=$(find build/Build/Products/Release-iphoneos -maxdepth 1 -name '*.app' | head -1)
@@ -52,6 +52,13 @@ jobs:
         with:
           name: SaneiAlTarikh-unsigned-ipa
           path: SaneiAlTarikh-unsigned.ipa
+          retention-days: 30
+      # the symbols for MetricKit's crash and hang reports (the executable is stripped)
+      - uses: actions/upload-artifact@v4
+        with:
+          name: SaneiAlTarikh-dSYM
+          path: build/Build/Products/Release-iphoneos/*.dSYM
+          if-no-files-found: error
           retention-days: 30
       - if: failure()
         uses: actions/upload-artifact@v4

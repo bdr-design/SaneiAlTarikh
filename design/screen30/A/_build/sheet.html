@@ -1,0 +1,111 @@
+  <!-- The start tour (screen 30, variant A; onboarding, §6.1 and M8). Opens by itself when a new campaign starts, after the
+       first playable frame and before the urgent decision waiting in the queue (screen 15 opens when the tour ends), the
+       game paused (the play button shows play); and again from «المزيد» › «حول» › «المساعدة», where it shows the current
+       date and country, drops the first decision and ends with «إنهاء الجولة» (time as it was). Five steps, one body each
+       (&tab=s1..s5, no tab row): the country and the map, the indicators and «لماذا؟», the sections, time and the orders
+       while paused, the news and decisions. Each step but the sections' rings the HUD element it speaks about (tour.css: a
+       white outline, nothing over the map); the sections' step shows the dock's eight icons and names, since the dock
+       hides under the sheet on the smaller phones. «التالي» is the primary; «تخطي الجولة» and the close end it (it stays
+       in the help); the last step's primary starts the campaign and opens the first decision (time stays stopped until the
+       player chooses or puts it off). A side sheet in the «المزيد» section's frame (help lives there), its own emblem, the
+       map central and never dimmed (mapCentral). -->
+  <section class="sheet glass" aria-label="جولة البداية">
+    <div class="r-in">
+      <header class="r-hd">
+        <span class="r-flag"><img src="../../shared/flags/eg.svg" alt="علم مصر"></span>
+        <div class="r-tt">
+          <div class="r-row"><h2 class="r-name">جولة البداية</h2></div>
+          <div class="r-sub">اللعبة متوقفة<span class="r-dot"> · </span><span class="ltr">1</span> يناير <span class="ltr">2011</span></div>
+        </div>
+        <span class="s-emb" aria-hidden="true"><svg class="i"><use href="#i-tour"/></svg></span>
+        <button class="r-x tap" aria-label="تخطي الجولة، تعود إليها من المزيد، حول، المساعدة. ثم يفتح أول قرار، احتجاجات في تونس"><svg class="i"><use href="#i-close"/></svg></button>
+      </header>
+
+
+      <div class="r-body" data-tab="s1">
+        <section class="r-sec">
+          <h3>الخطوة <span class="ltr">1</span> من <span class="ltr">5</span> · بلدك</h3>
+          <p class="d-text">أنت تحكم مصر من <span class="ltr">1</span> يناير <span class="ltr">2011</span>، وبطاقة مصر في الأعلى تفتح لوحة الدولة. اضغط أي محافظة في مصر لتفتح بطاقتها، وأي دولة أخرى لتعرف حالها وعلاقتك بها.</p>
+        </section>
+        <button class="r-act tap r-first" aria-label="التالي: المؤشرات، الخطوة 2 من 5">
+          <span class="r-tile"><svg class="i"><use href="#i-next"/></svg></span>
+          <span class="r-at"><b>التالي</b><span>المؤشرات</span></span>
+        </button>
+        <div class="r-link tap" role="button" tabindex="0" aria-label="تخطي الجولة: تعود إليها من المزيد، حول، المساعدة. ثم يفتح أول قرار، احتجاجات في تونس">
+          <span class="r-tile"><svg class="i"><use href="#i-skip"/></svg></span>
+          <span class="r-at"><b>تخطي الجولة</b><span>تعود إليها من المزيد › حول › المساعدة</span></span>
+          <svg class="i r-chev"><use href="#i-chev"/></svg>
+        </div>
+      </div>
+
+      <div class="r-body" data-tab="s2">
+        <section class="r-sec">
+          <h3>الخطوة <span class="ltr">2</span> من <span class="ltr">5</span> · المؤشرات</h3>
+          <p class="d-text">في الأعلى الخزينة والاستقرار والشرعية والقوة البشرية والنفوذ والبحث. السهم&nbsp;يبيّن الاتجاه؛ اضغط أي مؤشر لتعرف لماذا يتغير.</p>
+        </section>
+        <button class="r-act tap r-first" aria-label="التالي: الأقسام، الخطوة 3 من 5">
+          <span class="r-tile"><svg class="i"><use href="#i-next"/></svg></span>
+          <span class="r-at"><b>التالي</b><span>الأقسام</span></span>
+        </button>
+        <div class="r-link tap" role="button" tabindex="0" aria-label="تخطي الجولة: تعود إليها من المزيد، حول، المساعدة. ثم يفتح أول قرار، احتجاجات في تونس">
+          <span class="r-tile"><svg class="i"><use href="#i-skip"/></svg></span>
+          <span class="r-at"><b>تخطي الجولة</b><span>تعود إليها من المزيد › حول › المساعدة</span></span>
+          <svg class="i r-chev"><use href="#i-chev"/></svg>
+        </div>
+      </div>
+
+      <div class="r-body" data-tab="s3">
+        <section class="r-sec">
+          <h3>الخطوة <span class="ltr">3</span> من <span class="ltr">5</span> · الأقسام</h3>
+          <p class="d-text">تحكم من ثمانية أقسام في الشريط السفلي:</p>
+          <ul class="t-secs" role="list" aria-label="الأقسام الثمانية">
+            <li><svg class="i"><use href="#i-state"/></svg><span>الدولة</span></li>
+            <li><svg class="i"><use href="#i-econ"/></svg><span>الاقتصاد</span></li>
+            <li><svg class="i"><use href="#i-pol"/></svg><span>الداخلية والسياسة</span></li>
+            <li><svg class="i"><use href="#i-army"/></svg><span>الجيش</span></li>
+            <li><svg class="i"><use href="#i-globe"/></svg><span>الخارجية</span></li>
+            <li><svg class="i"><use href="#i-eye"/></svg><span>الاستخبارات</span></li>
+            <li><svg class="i"><use href="#i-flask"/></svg><span>البحث</span></li>
+            <li><svg class="i"><use href="#i-more"/></svg><span>المزيد</span></li>
+          </ul>
+        </section>
+        <button class="r-act tap r-first" aria-label="التالي: الوقت، الخطوة 4 من 5">
+          <span class="r-tile"><svg class="i"><use href="#i-next"/></svg></span>
+          <span class="r-at"><b>التالي</b><span>الوقت</span></span>
+        </button>
+        <div class="r-link tap" role="button" tabindex="0" aria-label="تخطي الجولة: تعود إليها من المزيد، حول، المساعدة. ثم يفتح أول قرار، احتجاجات في تونس">
+          <span class="r-tile"><svg class="i"><use href="#i-skip"/></svg></span>
+          <span class="r-at"><b>تخطي الجولة</b><span>تعود إليها من المزيد › حول › المساعدة</span></span>
+          <svg class="i r-chev"><use href="#i-chev"/></svg>
+        </div>
+      </div>
+
+      <div class="r-body" data-tab="s4">
+        <section class="r-sec">
+          <h3>الخطوة <span class="ltr">4</span> من <span class="ltr">5</span> · الوقت</h3>
+          <p class="d-text">يمضي الوقت يومًا بعد يوم. اضغط <span class="ltr">1×</span> لتختار السرعة حتى «أقصى»، وزر&nbsp;التشغيل&nbsp;والإيقاف لتوقفه متى شئت؛ ما&nbsp;تأمر&nbsp;به والوقت متوقف يُنفَّذ عند الاستئناف.</p>
+        </section>
+        <button class="r-act tap r-first" aria-label="التالي: الأحداث، الخطوة 5 من 5">
+          <span class="r-tile"><svg class="i"><use href="#i-next"/></svg></span>
+          <span class="r-at"><b>التالي</b><span>الأحداث</span></span>
+        </button>
+        <div class="r-link tap" role="button" tabindex="0" aria-label="تخطي الجولة: تعود إليها من المزيد، حول، المساعدة. ثم يفتح أول قرار، احتجاجات في تونس">
+          <span class="r-tile"><svg class="i"><use href="#i-skip"/></svg></span>
+          <span class="r-at"><b>تخطي الجولة</b><span>تعود إليها من المزيد › حول › المساعدة</span></span>
+          <svg class="i r-chev"><use href="#i-chev"/></svg>
+        </div>
+      </div>
+
+      <div class="r-body" data-tab="s5">
+        <section class="r-sec">
+          <h3>الخطوة <span class="ltr">5</span> من <span class="ltr">5</span> · الأحداث</h3>
+          <p class="d-text">الأخبار تصلك هنا، والجرس يجمع كل الإشعارات. القرارات&nbsp;العاجلة توقف الوقت حتى تختار أو تؤجلها، وهذا الخبر أول&nbsp;قرار ينتظرك.</p>
+        </section>
+        <button class="r-act tap r-first" aria-label="ابدأ الحملة: يفتح أول قرار، احتجاجات في تونس">
+          <span class="r-tile"><svg class="i"><use href="#i-next"/></svg></span>
+          <span class="r-at"><b>ابدأ الحملة</b><span>يفتح أول قرار: احتجاجات في تونس</span></span>
+        </button>
+      </div>
+      <span class="r-hint" aria-hidden="true"><svg class="i"><use href="#i-chev"/></svg></span>
+    </div>
+  </section>

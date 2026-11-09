@@ -1,0 +1,79 @@
+# صانع التاريخ: the iOS app (design_doc/final_design.md §2.8). XcodeGen 2.46.0 makes SaneiAlTarikh.xcodeproj from this
+# file in CI; the .xcodeproj is never committed (.gitignore). iPhone only, landscape only, iOS 17, arm64, no entitlements,
+# a fixed bundle ID (keep it when re-signing so the app updates in place and keeps its data).
+name: SaneiAlTarikh
+options:
+  bundleIdPrefix: com.bdrdesign
+  deploymentTarget:
+    iOS: "17.0"
+  developmentLanguage: ar
+  createIntermediateGroups: true
+packages:
+  SaneiAlTarikh:
+    path: ..
+targets:
+  SaneiAlTarikh:
+    type: application
+    scheme: {}
+    platform: iOS
+    sources:
+      - path: Sources
+      - path: Resources
+    dependencies:
+      - package: SaneiAlTarikh
+        product: SaneiCore
+      - package: SaneiAlTarikh
+        product: SaneiRuntime
+      - package: SaneiAlTarikh
+        product: SaneiEngine
+    info:
+      path: Generated/Info.plist
+      properties:
+        CFBundleDisplayName: صانع التاريخ
+        CFBundleDevelopmentRegion: ar
+        CFBundleLocalizations: [ar]
+        CFBundleShortVersionString: $(MARKETING_VERSION)
+        CFBundleVersion: $(CURRENT_PROJECT_VERSION)
+        LSRequiresIPhoneOS: true
+        UILaunchScreen:
+          UIColorName: LaunchBackground      # #0B1218, the app's background: no colour jump at launch
+        UIRequiresFullScreen: true
+        UISupportedInterfaceOrientations: [UIInterfaceOrientationLandscapeLeft, UIInterfaceOrientationLandscapeRight]
+        CADisableMinimumFrameDurationOnPhone: true
+        ITSAppUsesNonExemptEncryption: false
+        UIStatusBarHidden: true
+        UIUserInterfaceStyle: Dark
+        UIViewControllerBasedStatusBarAppearance: false
+        UIFileSharingEnabled: true
+        LSSupportsOpeningDocumentsInPlace: true
+        UTExportedTypeDeclarations:
+          - UTTypeIdentifier: com.bdrdesign.SaneiAlTarikh.save
+            UTTypeDescription: حفظ صانع التاريخ
+            UTTypeConformsTo: [public.data]
+            UTTypeTagSpecification:
+              public.filename-extension: [sanei]
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.bdrdesign.SaneiAlTarikh
+        PRODUCT_NAME: SaneiAlTarikh
+        MARKETING_VERSION: "0.0.1"
+        CURRENT_PROJECT_VERSION: "1"
+        TARGETED_DEVICE_FAMILY: "1"
+        SUPPORTS_MACCATALYST: NO
+        SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD: NO
+        ARCHS: arm64
+        SWIFT_VERSION: "6.0"
+        SWIFT_TREAT_WARNINGS_AS_ERRORS: YES
+        GCC_TREAT_WARNINGS_AS_ERRORS: YES
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        CODE_SIGNING_ALLOWED: NO
+        CODE_SIGNING_REQUIRED: NO
+        CODE_SIGN_IDENTITY: ""
+        DEVELOPMENT_TEAM: ""
+        ENABLE_BITCODE: NO
+      configs:
+        Release:
+          DEPLOYMENT_POSTPROCESSING: YES
+          STRIP_INSTALLED_PRODUCT: YES
+          STRIP_STYLE: all
+          DEAD_CODE_STRIPPING: YES
