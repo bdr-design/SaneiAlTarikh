@@ -77,7 +77,7 @@ build (each fixed at its cause, never by turning the language mode down without 
   whatever caused it (a skipped refresh, a late callback, a GPU-late or dropped frame), so a run at 30 a second reads
   30 a second; booked when the later frame's presented handler runs (about two refreshes after encoding); the last
   second's frames in flight are not booked.
-- The CSV has no CPU time and no `phys_footprint` yet (free memory only); both join the recorder with M0b's map test.
+- The CSV has no CPU time and no `phys_footprint` yet (the memory headroom only, `os_proc_available_memory`); both join the recorder with M0b's map test.
 - ci-linux also runs on pushes to `claude/**` branches: the work is checked before a pull request exists (the owner
   reviews on GitHub's app); the concurrency group cancels superseded runs.
 - App/Platform's recorder drives the render engine through its control calls, and App/MapRenderer logs through
@@ -101,8 +101,8 @@ the recorder CSV, `ring.log` and `device.txt` (kept in `docs/measurements/m0/`; 
 - **Fix (after two reviews, then their fixes):** `IOEngine.flushLog` opens the file once (open(2) with O_CREAT and
   O_APPEND: no temporary file, no rename) and appends only the new lines (RingBuffer's sequence numbers, tested on
   Linux), with no sync: an app crash or kill keeps every flushed line; a power loss or kernel panic may lose what the
-  kernel had not yet put on disk, which the synced atomic write did not. The file restarts in place from the lines held
-  after a failed or partial write, a deletion from Files, or 1 MB of growth (§3.8), with a marker line; flushes wait for
+  kernel had not yet put on disk (the atomic write most likely synced). The file restarts in place from the lines held
+  after a failed or partial write (the next try a minute later), a deletion from Files (the folder made again), or 1 MB of growth (§3.8), with a marker line; flushes wait for
   the launch rotation; the export flushes and copies the file. The recorder logs a line before each 10-second flush (so
   each is a real append), the I/O that ran before the recording (launch, exports, the last CSV, payloads) and the CSV
   write's time, so the next IPA measures the one-off writes too. Re-measured with the next IPA.

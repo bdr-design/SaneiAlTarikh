@@ -12,7 +12,7 @@ final class RecorderUI {
     var lastSummary: String?
     /// One line per engine from the last recording: its mean and worst time and the thread it ran on.
     var engineLines: [String] = []
-    /// Free memory, refreshed each second while recording (the overlay reads it then).
+    /// The memory headroom (`os_proc_available_memory`), refreshed each second while recording (the overlay reads it then).
     var memoryMB: Double?
 }
 
@@ -21,7 +21,8 @@ final class RecorderUI {
 /// simulation runs at its top speed (`load`, 30 days a second, D-16). Each second, on deadlines that do not drift, it
 /// writes one CSV row from the engines' meters (frames, encode time, hitches, frame spacing, the simulation's days and
 /// time per day, the I/O and main-thread work, each engine's threads), the main thread's worst lag (a ping every
-/// 100 ms, timed on the main thread), the real length of the row, thermal state, battery, Low Power Mode and free memory.
+/// 100 ms, timed on the main thread), the real length of the row, thermal state, battery, Low Power Mode and the memory headroom
+/// (`os_proc_available_memory`, not free memory).
 /// Going to the background interrupts it: the rows so far are written to a file marked "interrupted".
 actor RecorderEngine {
     static let shared = RecorderEngine()

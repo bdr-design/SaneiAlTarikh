@@ -17,7 +17,7 @@ final class AppModel {
     /// The model and iOS version, read once.
     let deviceLine = DeviceInfo.staticLine()
     private(set) var thermal = DeviceInfo.thermalName(ProcessInfo.processInfo.thermalState)
-    /// Free memory, read when the overlay appears or is tapped (and each second while recording, from the recorder).
+    /// The memory headroom (`os_proc_available_memory`), read when the overlay appears or is tapped (and each second while recording, from the recorder).
     private(set) var memoryMB: Double?
     private(set) var framesSinceLaunch = 0
     private(set) var savesReady: Bool?

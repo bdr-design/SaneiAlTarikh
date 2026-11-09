@@ -10,8 +10,8 @@ actor IOEngine {
 
     static let keepCSVs = 10, keepPayloads = 20, keepExports = 3
     static let logName = "ring.log", previousLogName = "ring-previous.log"
-    /// The log file's bound (§3.8's 1 MB file): once it has grown this much past its last restart, it restarts in place
-    /// from the lines still in memory (the last 2,000).
+    /// The log file's bound (§3.8's 1 MB): once it has grown this much past its last restart, it restarts in place from
+    /// the lines still in memory (the last 2,000), so the file stays under those lines plus this.
     static let logCapBytes = 1_024 * 1_024
 
     // the log file, kept open between flushes: each flush appends only the new lines (no new file, no rename, no sync)
@@ -21,7 +21,8 @@ actor IOEngine {
     private var logBase = 0             // its size when it last restarted: it grows by at most logCapBytes past that
     private var logRestart = false      // the next flush rewrites the file from the lines held (after a failure)
     private var foldersReady = false    // no flush before the last session's log is rotated
-    private var logURL: URL?            // Documents/Logs/ring.log, found once
+    private var logURL: URL?            // Documents/Logs/ring.log, found when the file is opened
+    private var logRetryAt: ContinuousClock.Instant?   // after a failed write, the next try waits a minute
 
     /// Makes Documents/Saves, Diagnostics and Logs, and keeps the last session's log as ring-previous.log (this session's
     /// first flush starts a new ring.log; after a crash it is the previous log that matters). True when all exist. Log
@@ -36,7 +37,6 @@ actor IOEngine {
                 let fm = FileManager.default
                 let current = logs.appendingPathComponent(Self.logName)
                 let previous = logs.appendingPathComponent(Self.previousLogName)
-                logURL = current
                 if fm.fileExists(atPath: current.path) {
                     // a failed rotation loses only the previous log, never the saves folder's state
                     do {
@@ -58,27 +58,31 @@ actor IOEngine {
     /// O_CREAT | O_APPEND: no temporary file, no rename) and each flush is one append with no sync: an app crash or kill
     /// keeps every flushed line (it is in the kernel); a power loss or a kernel panic may lose what the kernel had not yet
     /// put on disk. The atomic rewrite this replaces took 2.8-6.2 ms a flush on the iPhone 17 Pro Max (M0) against the
-    /// 5 ms budget, most likely its sync. The file restarts in place from the lines still held (at most 2,000) after a
+    /// 5 ms budget, most likely its sync. After a failed write the next try waits a minute (a full disk). The file restarts in place from the lines still held (at most 2,000) after a
     /// failed write, when it was deleted (from Files), and once it has grown `logCapBytes` past its last restart, so it
     /// never exceeds the held lines plus `logCapBytes`. Waits for `prepareFolders` (the lines stay in memory until then).
     @discardableResult
     func flushLog() -> URL? {
-        guard foldersReady, let url = logURL else { return nil }
+        guard foldersReady else { return nil }
+        if let t = logRetryAt, ContinuousClock.now < t { return nil }
         return EngineMeter.shared.measure(.io) {
             do {
-                if logHandle != nil && !FileManager.default.fileExists(atPath: url.path) {   // deleted from Files
+                if logHandle != nil, let u = logURL, !FileManager.default.fileExists(atPath: u.path) {  // deleted from Files
                     closeLog()
                     logRestart = true
                 }
                 if logHandle == nil {
+                    // only on opening: the folder is found (and made again if it was deleted from Files)
+                    let url = try Storage.logsFolder().appendingPathComponent(Self.logName)
+                    logURL = url
                     let fd = open(url.path, O_WRONLY | O_CREAT | O_APPEND, 0o644)
                     guard fd >= 0 else { throw POSIXError(POSIXErrorCode(rawValue: errno) ?? .EIO) }
                     let h = FileHandle(fileDescriptor: fd, closeOnDealloc: true)
                     logBytes = try Int(h.seekToEnd())
-                    logBase = logRestart ? 0 : logBytes
+                    logBase = 0                     // a file kept from before (a failed rotation) counts toward the bound
                     logHandle = h
                 }
-                guard let h = logHandle else { return nil }
+                guard let h = logHandle, let url = logURL else { return nil }
                 var pending = RingLog.shared.lines(since: logWritten)
                 var head: [String] = []
                 if pending.lost > 0 { head.append(Self.mark("\(pending.lost) lines dropped before this flush")) }
@@ -101,11 +105,13 @@ actor IOEngine {
                 logBytes += data.count
                 if restart { logBase = logBytes }
                 logWritten = pending.next
+                logRetryAt = nil
                 return url
             } catch {
                 closeLog()
                 logRestart = true
-                RingLog.shared.log("ring log write failed: \(error)")
+                logRetryAt = ContinuousClock.now.advanced(by: .seconds(60))   // a full disk is not retried every flush
+                RingLog.shared.log("ring log write failed (next try in a minute): \(error)")
                 return nil
             }
         }

@@ -6,7 +6,7 @@ measured columns come from the in-app recorder's CSV on the owner's iPhone (§3.
 
 M0 measured on the owner's iPhone 17 Pro Max (iPhone18,2, iOS 27.0.1), 2026-11-09: thermal nominal throughout. Files:
 `docs/measurements/m0/` (the recorder CSV, `ring.log`, `device.txt`). The CSV's memory column is
-`os_proc_available_memory`, the headroom to the app's limit, not free memory: 6,654 MB at launch, 6,627 MB idle, 6,591
+`os_proc_available_memory`, the headroom to the app's limit, not free memory: 6,654 MB at launch, 6,626–6,627 MB idle, 6,591
 MB when the load began, 6,596 MB after; the app grew about 63 MB from launch to load. L8's `phys_footprint` budget is not
 measured yet (it joins the recorder with M0b).
 
