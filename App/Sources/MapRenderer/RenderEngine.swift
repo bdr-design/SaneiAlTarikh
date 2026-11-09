@@ -18,9 +18,15 @@ struct FrameStats: Sendable {
     /// The spacing of presented continuous frames, in ms (mean and worst).
     var intervalMeanMs = 0.0
     var intervalMaxMs = 0.0
-    /// The longest wait between two display-link callbacks while continuous, in ms: with the presented gaps it tells a
-    /// starved link (no callback came) from a frame that was asked for on time and shown late.
-    var linkGapMaxMs = 0.0
+    /// Where a stall comes from, from the display link's own times (continuous frames only):
+    /// how far past its deadline (`targetTimestamp`) a callback ran, in ms (the render thread or the link was late);
+    var linkLateMaxMs = 0.0
+    /// refreshes the link skipped between consecutive callbacks' `targetPresentationTimestamp`s (60 a second);
+    var linkSkipped = 0
+    /// how much later than its target presentation time a frame was shown, in ms (the compositor or the display);
+    var presentLateMaxMs = 0.0
+    /// drawables that were never shown (presentedTime 0).
+    var dropped = 0
 }
 
 /// The render engine (ADR 0001): its own thread `sanei.render` with its own run loop, driven by CAMetalDisplayLink
@@ -43,6 +49,8 @@ final class RenderEngine: NSObject, @unchecked Sendable {
     private var intervalCount = 0
     private var lastPresented: CFTimeInterval = 0
     private var framesSinceLaunch = 0
+    private var stallLines = 0          // stall lines logged since the last drain (at most `maxStallLines` a second)
+    private static let maxStallLines = 3
 
     // used only on the render thread
     private var link: CAMetalDisplayLink?
@@ -50,7 +58,7 @@ final class RenderEngine: NSObject, @unchecked Sendable {
     private var pipeline: MTLRenderPipelineState?
     private var angle: Float = 0
     private var continuous = false
-    private var lastCallback: CFTimeInterval = 0
+    private var lastTarget: CFTimeInterval = 0
     /// Set when the app goes to the background: nothing unpauses the link until `resume()`.
     private var backgrounded = false
 
@@ -108,7 +116,7 @@ final class RenderEngine: NSObject, @unchecked Sendable {
     func setContinuous(_ on: Bool) {
         perform { [self] in
             self.continuous = on && !self.backgrounded
-            self.lastCallback = 0
+            self.lastTarget = 0
             self.lock.lock()
             self.lastPresented = 0
             self.lock.unlock()
@@ -140,6 +148,7 @@ final class RenderEngine: NSObject, @unchecked Sendable {
             stats = FrameStats()
             intervalSum = 0
             intervalCount = 0
+            stallLines = 0
             lock.unlock()
         }
         var s = stats
@@ -180,22 +189,35 @@ final class RenderEngine: NSObject, @unchecked Sendable {
         RingLog.shared.log("render: display link on \(Thread.current.name ?? "?") (\(device.name))")
     }
 
-    /// Called on Metal's thread when a continuous frame was presented (or dropped: presentedTime 0).
-    private func presented(at time: CFTimeInterval) {
+    /// Called on Metal's thread when a continuous frame was presented (or dropped: presentedTime 0). `target` is the
+    /// presentation time the link aimed at.
+    private func presented(at time: CFTimeInterval, target: CFTimeInterval) {
+        var line: String?
         lock.lock()
-        defer { lock.unlock() }
-        guard time > 0 else { return }      // dropped: the gap to the next presented frame counts it
-        if lastPresented > 0 {
-            let gap = time - lastPresented
-            let stale = max(0, Int((gap * 60 + 0.25).rounded(.down)) - 1)
-            stats.hitches += stale
-            // each stall goes to the log with its time, to be read beside whatever else happened then
-            if stale > 0 { RingLog.shared.log(String(format: "render: %.1f ms between presented frames (%ld stale)", gap * 1_000, stale)) }
-            intervalSum += gap
-            intervalCount += 1
-            stats.intervalMaxMs = max(stats.intervalMaxMs, gap * 1_000)
+        if time > 0 {
+            let late = max(0, time - target)
+            stats.presentLateMaxMs = max(stats.presentLateMaxMs, late * 1_000)
+            if lastPresented > 0 {
+                let gap = time - lastPresented
+                let stale = max(0, Int((gap * 60 + 0.25).rounded(.down)) - 1)
+                stats.hitches += stale
+                intervalSum += gap
+                intervalCount += 1
+                stats.intervalMaxMs = max(stats.intervalMaxMs, gap * 1_000)
+                // a stall of 2 or more stale refreshes goes to the log with its time (a few a second at most, so a run
+                // throttled to 30 a second cannot push the launch lines out of the ring)
+                if stale >= 2 && stallLines < Self.maxStallLines {
+                    stallLines += 1
+                    line = String(format: "render: %.1f ms between presented frames (%ld stale), shown %.1f ms after its target",
+                                  gap * 1_000, stale, late * 1_000)
+                }
+            }
+            lastPresented = time
+        } else {
+            stats.dropped += 1                  // the gap to the next presented frame counts it as stale
         }
-        lastPresented = time
+        lock.unlock()
+        if let line { RingLog.shared.log(line) }
     }
 }
 
@@ -203,24 +225,34 @@ extension RenderEngine: CAMetalDisplayLinkDelegate {
     func metalDisplayLink(_ link: CAMetalDisplayLink, needsUpdate update: CAMetalDisplayLink.Update) {
         autoreleasepool {
             let start = DispatchTime.now().uptimeNanoseconds
+            var late = 0.0, skipped = 0
             if continuous {
-                let now = CACurrentMediaTime()
-                if lastCallback > 0 {
-                    let wait = (now - lastCallback) * 1_000
-                    lock.lock()
-                    stats.linkGapMaxMs = max(stats.linkGapMaxMs, wait)
-                    lock.unlock()
-                }
-                lastCallback = now
+                late = max(0, CACurrentMediaTime() - update.targetTimestamp)
+                let target = update.targetPresentationTimestamp
+                if lastTarget > 0 { skipped = max(0, Int(((target - lastTarget) * 60).rounded()) - 1) }
+                lastTarget = target
                 angle += 0.02
-                update.drawable.addPresentedHandler { [self] d in self.presented(at: d.presentedTime) }
+                update.drawable.addPresentedHandler { [self] d in self.presented(at: d.presentedTime, target: target) }
             }
             encode(into: update.drawable)
             EngineMeter.shared.record(.render, nanoseconds: DispatchTime.now().uptimeNanoseconds &- start)
+            var line: String?
             lock.lock()
-            if continuous { stats.frames += 1 } else { stats.idleFrames += 1 }
+            if continuous {
+                stats.frames += 1
+                stats.linkLateMaxMs = max(stats.linkLateMaxMs, late * 1_000)
+                stats.linkSkipped += skipped
+                if skipped >= 2 && stallLines < Self.maxStallLines {
+                    stallLines += 1
+                    line = String(format: "render: the link skipped %ld refreshes; the callback ran %.1f ms after its deadline",
+                                  skipped, late * 1_000)
+                }
+            } else {
+                stats.idleFrames += 1
+            }
             framesSinceLaunch += 1
             lock.unlock()
+            if let line { RingLog.shared.log(line) }
             if !continuous { link.isPaused = true }
         }
     }

@@ -113,15 +113,28 @@ The fix passed the two reviews and four verification rounds (the last found noth
 42657578013 on 2591bdf). The owner re-measures with that IPA.
 
 ## Second build on the owner's iPhone (2026-11-09, two runs, `docs/measurements/m0/run2/`)
-- **Pass:** the ring log's 16 flushes took 0.34–0.66 ms each (they were 2.8–6.2 ms). The launch's I/O was 2 operations,
-  worst 2.91 ms. Idle 0 frames. Encode 0.095 ms mean (worst 0.257 and 0.491 ms). Simulation 30 days a second, a day at
-  most 0.319 ms. Main lag at most 1.36 ms. Thermal nominal.
-- **Rotation works:** `ring-previous.log` is the first session's whole log (its export and its going to the background).
-- **Over budget:** the recorder's CSV write took 6.16 ms worst on the meter (6.94 and 8.91 ms wall), an atomic write
-  again. Fix: `IOEngine.writeCSV` writes a new file with one open(2) (O_CREAT | O_EXCL) and one write, with no sync or
-  rename.
-- **Hitches:** 4 and 2 in the two runs (0 in the first build's run). They are three single gaps of 54.17 ms between
-  presented frames (3.25 refreshes, so 2 stale refreshes each), in seconds 10, 11 and 53. Our encode, simulation and
-  main thread stayed small through them, so the cause is unknown. The next build logs each stall with its time and adds
-  `link_gap_ms_max` (the longest wait between display-link callbacks), which tells a starved link from a frame shown
-  late. Until it is measured, the 0-hitch budget is not met in 2 of 3 runs.
+- **Pass:**
+  - The ring log's flushes took at most 0.34–0.66 ms (they were 2.8–6.2 ms).
+  - The launch's I/O was 2 operations, worst 2.91 ms.
+  - Idle 0 frames; encode 0.095 ms mean (worst 0.257 and 0.491 ms).
+  - Simulation 30 days a second, a day at most 0.319 ms.
+  - Main lag at most 1.36 ms; thermal nominal.
+- **Rotation works:** `ring-previous.log` is the first session's whole log, with its export and its going to the
+  background.
+- **Over budget:** the I/O before the second recording was 3 operations, worst 6.16 ms. That covers the first
+  recording's CSV write and its prune listing; the ring log gave 8.91 and 6.94 ms wall, the file name included. The
+  write was atomic again. Fix: `IOEngine.writeCSV` writes a new file with one open(2) (O_CREAT | O_EXCL, a suffix if the
+  name exists) and one write, with no sync and no rename. A failed write removes the file.
+- **Hitches:** 4 and 2 in the two runs; the first build's run had 0.
+  - They come from three single gaps of 54.17 ms between presented frames, each counted as 2 stale refreshes: run 1
+    seconds 10 and 11, run 2 second 53.
+  - In those seconds encode was ≤ 0.212 ms and main lag ≤ 0.10 ms.
+  - The link called back fewer times there (59, 58, 59 frames), so no callback came during the stalls.
+  - 54.17 ms is 6.5 refreshes of the 120 Hz display. The timeline shifted by half a refresh, which points at the display
+    or the compositor; that is not proven.
+  - Run 2 second 59 had uncounted irregular spacing (a 25 ms gap, mean 16.88 ms). Its last 6 seconds also held the run's
+    worst encode and worst simulation day: something system-wide.
+  - The next build records per second how late the link's callback ran, the refreshes the link skipped, how late a frame
+    was shown against its target, and dropped drawables. It logs each stall of 2+ refreshes with its time, at most 3
+    lines a second.
+  - Until that is measured, the 0-hitch budget is not met in 2 of 3 runs and the cause is unknown.

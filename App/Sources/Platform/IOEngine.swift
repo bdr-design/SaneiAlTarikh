@@ -145,12 +145,23 @@ actor IOEngine {
     func writeCSV(_ rows: [String], name: String) throws -> URL {
         try EngineMeter.shared.measure(.io) {
             let diag = try Storage.diagnosticsFolder()
-            let url = diag.appendingPathComponent(name)
-            let fd = open(url.path, O_WRONLY | O_CREAT | O_EXCL, 0o644)
+            var url = diag.appendingPathComponent(name)
+            var fd = open(url.path, O_WRONLY | O_CREAT | O_EXCL, 0o644)
+            var n = 2
+            while fd < 0 && errno == EEXIST && n < 10 {          // the same millisecond twice: a suffix, as the exports
+                url = diag.appendingPathComponent((name as NSString).deletingPathExtension + "-\(n).csv")
+                fd = open(url.path, O_WRONLY | O_CREAT | O_EXCL, 0o644)
+                n += 1
+            }
             guard fd >= 0 else { throw POSIXError(POSIXErrorCode(rawValue: errno) ?? .EIO) }
             let h = FileHandle(fileDescriptor: fd, closeOnDealloc: true)
             defer { try? h.close() }
-            try h.write(contentsOf: Data((rows.joined(separator: "\n") + "\n").utf8))
+            do {
+                try h.write(contentsOf: Data((rows.joined(separator: "\n") + "\n").utf8))
+            } catch {
+                unlink(url.path)                                  // no short file under a recording's name
+                throw error
+            }
             Self.prune(Self.files(in: diag) { $0.lastPathComponent.hasPrefix("recorder-") && $0.pathExtension == "csv" }, keep: Self.keepCSVs)
             return url
         }
