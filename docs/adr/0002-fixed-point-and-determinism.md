@@ -1,6 +1,7 @@
 # ADR 0002: Fixed-point numbers and the determinism kit
 
-Status: accepted, 2026-11-09 (T-036). Implements design doc §2.3 and L5; decides what §2.3 leaves open.
+Status: accepted, 2026-11-09 (T-036); revised the same day after the six reviews (the seed mixing, the counter's
+scope rule, the qualified bounds). Implements design doc §2.3 and L5; decides what §2.3 leaves open.
 
 ## Context
 The simulation must give the same result on every device and in every build: a save continued on another phone, a
@@ -11,38 +12,82 @@ how a clamp is counted, where the tables come from or how a random draw is mappe
 ## Decisions
 1. **Types.** `Q32` is an Int64 with 32 binary places. `BP` is an Int32 in basis points. `LogQ` is a base-2 logarithm
    with 32 binary places, for levels that grow without bound (prices, exchange rates, the deflator). Money is a whole
-   Int64 in one of three distinct types (`LCU`, `USDn`, `Money`), so units cannot be mixed by accident.
+   Int64 in one of three distinct types (`LCU`, `USDn`, `Money`), so the three kinds of unit cannot be mixed by
+   accident. The compiler does not tell one currency's `LCU` from another's, nor a currency before and after a
+   redenomination, and it does not stop `Money` (derived, constant dollars) from being posted: those are the ledger's
+   job.
 2. **Rounding: to the nearest value, ties away from zero.** Arithmetic runs on magnitudes and the sign is put back at
    the end, so -(a × b) = (-a) × b and a refund is exactly the opposite of a charge. A multiply is one 128-bit product
-   and a shift; dividing by the constant 10,000 is two multiply-and-shift steps. Only a true division divides.
+   and a shift. Dividing by the constant 10,000 is written as two 64-bit divisions, which an optimised build turns into
+   multiplies and shifts. A true division is one hardware division when the dividend fits in 64 bits, and a 128-bit
+   division otherwise. The square root is the exception to «nearest»: it rounds down, so it is never above the true
+   root.
+   - Rounding cannot make parts add up to a whole: six shares of 1/6 are 10,002 bp. Where a sum must close (a budget,
+     seats, a population split), the exact split is used, never a share of each part (T-038).
 3. **Overflow clamps and is counted, never wraps, never traps.** The count belongs to one game (§8: it must stay 0 in
-   a game without cheats). It is reached through a task-local (`Saturation.counter`), read only on the cold path of a
-   clamp, so the hot path carries one overflow check and no extra argument. There is no shared mutable global
-   (`threadSpread`): a parallel burst binds a counter per child task and adds them in serial order. Outside a game
-   (tests, formatting) nothing is bound and a clamp is silent. Atomics are not used: the standard library's need
-   iOS 18, and the app supports iOS 17.
+   a game without cheats).
+   - A scope binds a counter to the running task: `Saturation.counting(into:)`. Only the cold path of a clamp reads
+     the binding, so the hot path carries one overflow check and no extra argument.
+   - There is no shared mutable global (`threadSpread`). The counter is a class that is deliberately not `Sendable`,
+     so the compiler refuses to hand it to another task; the task-local that holds it is internal.
+   - A scope is synchronous: it cannot hold an `await`. So the tick must bind inside each of its serial phases, and
+     each child of a parallel burst must count its own clamps (`Saturation.counted`) and hand the count back in its
+     result; the parent adds the counts in serial order.
+   - The silent cases: a clamp outside every scope is still a clamp, and nobody counts it. That is every test of plain
+     values and all formatting, and also a detached task and an actor's method whose caller did not bind. The engine's
+     entry points must each bind (the test that a tick's clamps are all counted comes with the engine).
+   - An unstructured `Task { }` started inside a scope copies the scope and would write the counter from another
+     thread. The engine must not start one: its bursts go through one helper, and a CI ban comes with the engine.
+   - Not counted, by decision: `exp2` of a logarithm below -33 is 0 (a level that small is 0 to a `Q32`).
+   - Atomics are not used: the standard library's need iOS 18, and the app supports iOS 17.
 4. **Division by zero is a counted clamp:** 0 ÷ 0 = 0; anything else is the end of the range on the dividend's side.
    `log2` of a non-positive level is the bottom of the range, `sqrt` of a negative number is 0; both counted.
 5. **Tables are data, generated and checked.** `tools/checks/core_reference.py` computes 2^(i/1024) and
    log2(1 + i/1024) for i = 0…1024 from 60-digit decimal arithmetic, correctly rounded to 32 binary places, and writes
-   them as a Swift file. `exp2` and `log2` interpolate linearly. Measured against decimals: `exp2` within 6e-8
-   (relative), `log2` within 2e-7 (absolute), a round trip within 2e-7; §2.3 asks for 1e-6. Whole powers of two are
-   exact both ways, and both functions keep the order of their inputs. `logistic` is exactly symmetric.
-6. **A reference model locks the arithmetic.** The same script holds every algorithm a second time in exact integer
-   arithmetic and writes vectors (inputs, outputs, saturations counted) that the Swift tests must reproduce exactly. CI
-   regenerates both files and fails on a difference. These are the golden values of §8 (`DetRNG` and `DMath`, with the
-   fixed-point arithmetic they stand on); simulation outputs are never golden values.
+   them as a Swift file. `exp2` and `log2` interpolate linearly. The reference asserts these bounds against decimals
+   (§2.3 asks for 1e-6):
+   - `exp2`: within 6e-8 of the true value, relative, from the level 1 up. Below 1 a `Q32` has few bits and its own
+     last step (2^-32) is the limit: the level 1/20,500 is already 2e-6 off.
+   - `scale` (a whole amount times 2^y, the way a price index or an exchange rate is applied): within 6e-8, relative,
+     or one unit, at any size of level. It is not exactly rounded, and scaling by y and then by -y does not return the
+     amount exactly.
+   - `log2`: within 2e-7, absolute, everywhere. A round trip `exp2(log2(x))`: within 2e-7, relative, from 1 up.
+   - `logistic`: within 2e-8, absolute, and exactly symmetric.
+   - `sqrt`: never above the true root; within one step below 1, and within 2^-30, relative, from 1 up.
+   - Whole powers of two are exact both ways, and `exp2` and `log2` keep the order of their inputs.
+6. **A reference model locks the arithmetic.** The same script holds the arithmetic a second time in exact integer
+   arithmetic and writes rows (inputs, outputs, and the clamps counted for that row) that the Swift tests must
+   reproduce exactly, row by row. Where an independent truth exists the script checks each row against it before
+   writing: exact fractions for the fixed-point arithmetic, 60-digit decimals for the tables and `scale`, Python's own
+   calendar for dates, SplitMix64's published sequence for the generator. CI regenerates both files and fails on a
+   difference, and the script fails when the Swift tests do not read a family. These are the golden values of §8
+   (`DetRNG` and `DMath`, with the fixed-point arithmetic they stand on); simulation outputs are never golden values.
+   - The rows are Swift source that the test target compiles, so they sit with the tests
+     (`Tests/SaneiCoreTests/CoreGolden.swift`), not under §2.1's `Tests/Golden/values/`; `Tests/Golden/` holds the
+     saves and replays when they come.
 7. **Random numbers.** SplitMix64. A generator is made from (the game's seed, a key, a stream, a serial): the key is
    the day or the intelligence epoch, the stream is the system's, the serial the entity's. A draw therefore does not
-   depend on the order systems or threads run in, and no generator state is saved. A number below n is the high half
-   of draw × n: one draw per value, no rejection loop (bias below n / 2^64). `DetRNG` is not a
-   `RandomNumberGenerator`: the standard library does not promise a stable mapping across Swift versions.
+   depend on the order systems or threads run in.
+   - Each coordinate is mixed in on its own: `mix(mix(mix(seed + γ) + γ + key) + γ + (stream << 32 | serial))`, with
+     SplitMix64's output function and increment. Were the seed and the key added first, the game with seed 2012 would
+     roll on each day what the game with seed 2011 rolls on the next.
+   - No generator is saved between days. The save's `RNG ` chunk (§7) holds the game's seed and the counters a key is
+     made of, never a generator's state.
+   - A number below n is the high half of draw × n: one draw per value, no rejection loop (bias below n / 2^64).
+   - `chance` has a grain of 1 bp. A chance that is not a whole number of basis points (n in d) comes with T-038.
+   - `DetRNG` is not a `RandomNumberGenerator`: the standard library does not promise a stable mapping across Swift
+     versions. CI bans the standard library's own randomness and `hashValue` in the simulation's sources.
 8. **The calendar.** `GameDate` is an Int32 day count from 1970-01-01 in the proleptic Gregorian calendar, converted
    by integer arithmetic. The supported range is 1850-01-01 to 2200-12-31; adding days or months holds at its ends,
-   counted.
+   counted. A day count from a save is not checked when it is made (`isSupported` answers). A weekday is 0 for Sunday
+   to 6 for Saturday. Adding months keeps the day of the month where the month has it, so steps do not add up: a term
+   counts its months from its start date.
 
 ## Consequences
 - A change to any algorithm here changes saves and replays: it needs a new ADR, the reference and the vectors
   regenerated together, and a save migration if state depends on it.
-- The engine binds its world's counter around each tick, and checks it with the other invariants.
-- `SaneiCore` stays free of Foundation and of floating point; the reference needs only Python's standard library.
+- The engine binds its world's counter inside each serial phase of a tick, and checks it with the other invariants.
+- `SaneiCore` stays free of Foundation and of floating point (CI scans it with the engine); the reference needs only
+  Python's standard library.
+- CI builds and tests both the debug and the optimised build: the app ships optimised, and an unchecked read or a
+  different inlining shows only there.

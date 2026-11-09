@@ -1,8 +1,9 @@
 // Table-based maths for the simulation (§2.3, L5): no floating point and no libm, whose last bit differs between
 // platforms. `exp2` and `log2` read 1,025-entry tables (DMathTables.swift, generated and checked by
-// tools/checks/core_reference.py) and interpolate linearly between two entries. Measured there against 60-digit
-// decimals: exp2 within 6e-8 of the true value (relative), log2 within 2e-7 (absolute), a round trip within 2e-7; the
-// design asks for 1e-6. Whole powers of two are exact both ways. stdlib only.
+// tools/checks/core_reference.py) and interpolate linearly between two entries. Asserted there against 60-digit
+// decimals: from the level 1 up, exp2 within 6e-8 of the true value (relative) and a round trip within 2e-7; below 1
+// a `Q32` level has few bits and its own last step is the limit (`scale` keeps 6e-8 at any size); log2 within 2e-7
+// (absolute) everywhere. The design asks for 1e-6. Whole powers of two are exact both ways. stdlib only.
 
 public enum DMath {
     /// The exponent and the mantissa, in [1, 2) with 32 binary places, of 2^(y / 2^32).
@@ -15,7 +16,8 @@ public enum DMath {
         return (y >> 32, e0 + (((e1 - e0) * (f & 0x3F_FFFF) + (UInt64(1) << 21)) >> 22))
     }
 
-    /// The level of a logarithm, 2^y: clamped and counted from 2^31 up, 0 below 2^-33.
+    /// The level of a logarithm, 2^y: clamped and counted from 2^31 up; below 1 the nearest step of 2^-32, so 0 below
+    /// 2^-33 (not counted: a level that small is 0 to a `Q32`).
     @inlinable
     public static func exp2(_ y: LogQ) -> Q32 {
         let (n, m) = mantissa(y.raw)
@@ -46,8 +48,11 @@ public enum DMath {
         return LogQ(raw: (Int64(31 - lz) << 32) + Int64(truncatingIfNeeded: l))
     }
 
-    /// A whole amount times 2^y, to the nearest whole: a price index or an exchange rate applied to money. The level
-    /// may be far outside Q32's range; only the result must fit.
+    /// A whole amount times 2^y: a price index or an exchange rate applied to money. The level may be far outside
+    /// `Q32`'s range; only the result must fit (clamped and counted when it does not). Within 6e-8 of the true
+    /// product, relative, or one unit: the mantissa of 2^y comes from the table, so the result is the nearest whole of
+    /// amount times the table's 2^y, not of the true product, and scaling by y and then by -y does not return the
+    /// amount exactly.
     public static func scale(_ amount: Int64, by y: LogQ) -> Int64 {
         let (n, m) = mantissa(y.raw)
         let p = amount.magnitude.multipliedFullWidth(by: m)         // below 2^96
@@ -112,7 +117,7 @@ public enum DMath {
     }
 
     /// The logistic curve 1 / (1 + e^-x), in [0, 1]. Exactly symmetric: logistic(x) + logistic(-x) is 1, and
-    /// logistic(0) is one half. Within 2e-8 of the true value.
+    /// logistic(0) is one half. Within 2e-8 of the true value (absolute).
     public static func logistic(_ x: Q32) -> Q32 {
         let a = x.raw.magnitude
         var s: UInt64 = 0                                           // logistic(-|x|), at most one half

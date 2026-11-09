@@ -15,7 +15,7 @@ jobs:
   build-test:
     runs-on: ubuntu-24.04
     container: swift:6.0.3-noble
-    timeout-minutes: 20
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
       - name: Hygiene
@@ -37,18 +37,29 @@ jobs:
             o=$(stmts "$f" | grep -nE "$IMP" | grep -vE 'import\s+(\w+\s+)?SaneiCore(\.\w+)*\s*$' || true); [ -n "$o" ] && bad="$bad$f: $o"$'\n'
           done
           if [ -n "$bad" ]; then echo "$bad"; echo "SaneiCore imports nothing and SaneiEngine only SaneiCore: the standard library only (§2.2)"; exit 1; fi
-          if grep -rnE '\b(Float(16|32|64|80)?|Double|CGFloat|CFloat|CDouble|CLongDouble)\b' Sources/SaneiEngine; then
-            echo "SaneiEngine never uses floating point (§2.2)"; exit 1; fi
+          # the simulation's sources: SaneiCore's numbers and the engine built on them
+          SIM="Sources/SaneiCore Sources/SaneiEngine"
+          if grep -rnE '\b(Float(16|32|64|80)?|Double|CGFloat|CFloat|CDouble|CLongDouble)\b' $SIM; then
+            echo "SaneiCore and SaneiEngine never use floating point (§2.2, L5)"; exit 1; fi
           # floating-point literals, per file with comments left out («§2.4» is a section): 1.5, 1e9, 2.5e-3, the 2.5 of
           # 1...2.5, hex floats (0x1.8p3); grouping with _ included; member access such as a.0 excluded.
-          # Known gap until M1a: Duration / Duration returns a Double with no keyword or literal in the source.
+          # Known gap: Duration / Duration returns a Double with no keyword or literal in the source.
           lit='(^|[^0-9A-Za-z_.])[0-9][0-9_]*(\.[0-9][0-9_]*([eE][-+]?[0-9]+)?|[eE][-+]?[0-9]+)\b|\.\.[.<]?[0-9][0-9_]*\.[0-9]|0x[0-9A-Fa-f_]*(\.[0-9A-Fa-f_]+)?[pP][-+]?[0-9]'
           found=0
-          for f in $(find Sources/SaneiEngine -name '*.swift'); do
+          for f in $(find $SIM -name '*.swift'); do
             out=$(sed -E 's://.*$::' "$f" | grep -nE "$lit" || true)
             if [ -n "$out" ]; then echo "$out" | sed "s|^|$f:|"; found=1; fi
           done
-          if [ "$found" = 1 ]; then echo "SaneiEngine never uses floating-point literals (§2.2)"; exit 1; fi
+          if [ "$found" = 1 ]; then echo "SaneiCore and SaneiEngine never use floating-point literals (§2.2, L5)"; exit 1; fi
+          # randomness and hashing that differ between runs or Swift versions (ADR 0002): the standard library's
+          # generator and its range mappings, and hash values, which are seeded per process. Comments left out.
+          rnd='\.(random|randomElement|shuffled|shuffle)\(|\bSystemRandomNumberGenerator\b|\bhashValue\b|\bHasher\('
+          found=0
+          for f in $(find $SIM -name '*.swift'); do
+            out=$(sed -E 's://.*$::' "$f" | grep -nE "$rnd" || true)
+            if [ -n "$out" ]; then echo "$out" | sed "s|^|$f:|"; found=1; fi
+          done
+          if [ "$found" = 1 ]; then echo "The simulation draws only from DetRNG and never reads a hash value (ADR 0002)"; exit 1; fi
           # the app's platform and render code never reach into the engine (§2.2: only App/App and App/UI hold it)
           eng=""
           for f in $(find App/Sources/Platform App/Sources/MapRenderer -name '*.swift'); do
@@ -59,6 +70,11 @@ jobs:
         run: swift build -Xswiftc -warnings-as-errors
       - name: Test
         run: swift test -Xswiftc -warnings-as-errors
+      # the app ships optimised: an unchecked read, a different inlining or a removed check shows only in this build
+      - name: Build optimised (warnings as errors)
+        run: swift build -c release -Xswiftc -warnings-as-errors
+      - name: Test optimised
+        run: swift test -c release -Xswiftc -enable-testing
   # the reference model (ADR 0002): the generated tables and vectors match it, and its accuracy bounds hold
   core-reference:
     runs-on: ubuntu-24.04

@@ -1,5 +1,7 @@
-// Money in the simulation (§2.3, §2.4's ledger, ADR 0019 to come): whole numbers in three units that never mix. The
-// types are distinct, so adding a local-currency amount to a dollar amount does not compile. stdlib only.
+// Money in the simulation (§2.3, §2.4's ledger, ADR 0019 to come): whole numbers in three kinds of unit. The types are
+// distinct, so adding a local-currency amount to a dollar amount does not compile. The compiler does not tell one
+// currency's `LCU` from another's, nor a currency before and after a redenomination: the ledger keeps those apart.
+// stdlib only.
 
 /// A whole amount in one unit. Sums clamp and count (Saturation); amounts of different units cannot be combined.
 public protocol Amount: Sendable, Hashable, Comparable {
@@ -22,7 +24,8 @@ extension Amount {
     /// The amount times a factor, to the nearest unit.
     @inlinable public func times(_ factor: Q32) -> Self { Self(raw: factor.applied(to: raw)) }
 
-    /// The amount times a level kept as a logarithm (a price index, an exchange rate), to the nearest unit.
+    /// The amount times a level kept as a logarithm (a price index, a growth factor), in the same unit. Within 6e-8
+    /// of the true product, relative, or one unit; not exactly reversible (see `LogQ.applied`).
     @inlinable public func times(_ level: LogQ) -> Self { Self(raw: level.applied(to: raw)) }
 }
 
@@ -32,9 +35,12 @@ extension Amount {
 public struct LCU: Amount {
     public var raw: Int64
     @inlinable public init(raw: Int64) { self.raw = raw }
+    @inlinable public static func == (a: LCU, b: LCU) -> Bool { a.raw == b.raw }
 
     /// A balance beyond this, either way, makes its currency redenominate (§2.3: 2^60).
     @inlinable public static var redenominationLimit: UInt64 { UInt64(1) << 60 }
+    /// True for one amount beyond the limit. The ledger asks it of a currency's largest aggregate, when it posts: nine
+    /// lines each under the limit can still sum past the range.
     @inlinable public var needsRedenomination: Bool { raw.magnitude > LCU.redenominationLimit }
 }
 
@@ -43,14 +49,16 @@ public struct LCU: Amount {
 public struct USDn: Amount {
     public var raw: Int64
     @inlinable public init(raw: Int64) { self.raw = raw }
+    @inlinable public static func == (a: USDn, b: USDn) -> Bool { a.raw == b.raw }
 }
 
 /// Constant 2011 US dollars, in units of $1,000: reports, comparisons, the score, «لماذا؟» values. Derived only: it is
-/// never posted to a ledger account.
+/// never posted to a ledger account (the ledger's postings take `LCU` and `USDn`; the type alone does not stop it).
 @frozen
 public struct Money: Amount {
     public var raw: Int64
     @inlinable public init(raw: Int64) { self.raw = raw }
+    @inlinable public static func == (a: Money, b: Money) -> Bool { a.raw == b.raw }
 
     /// Nominal dollars divided by the world USD deflator (a level, 1 in 2011).
     @inlinable

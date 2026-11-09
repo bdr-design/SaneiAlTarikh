@@ -1,18 +1,21 @@
 // The game's calendar (§2.3): a day count from 1970-01-01, signed, in the proleptic Gregorian calendar. The supported
 // range is 1850-01-01 to 2200-12-31 (every day of it is tested): leaders' birth dates and old treaty dates fit, and a
 // campaign that runs to 2100 stays far from the end. No Foundation: the civil-date conversion is integer arithmetic
-// (the era, year-of-era and day-of-year steps of the public-domain days_from_civil algorithm). stdlib only.
+// (eras of 400 years, the year of the era and the day of a year that starts in March; the reference model checks
+// every supported day against Python's own calendar). stdlib only.
 
 @frozen
 public struct GameDate: Sendable, Hashable, Comparable {
     /// Days since 1970-01-01 (negative before it).
     public var days: Int32
 
+    /// Any day count, as a save or a column holds it. Not checked: ask `isSupported`. Adding to an unsupported date
+    /// brings it to the nearest end of the supported range, counted.
     @inlinable public init(days: Int32) { self.days = days }
 
-    /// 1850-01-01.
+    /// 1850-01-01: the first supported day (not the type's limit).
     @inlinable public static var min: GameDate { GameDate(days: -43_829) }
-    /// 2200-12-31.
+    /// 2200-12-31: the last supported day (not the type's limit, and not a «never»: adding to it holds and counts).
     @inlinable public static var max: GameDate { GameDate(days: 84_370) }
 
     /// A civil date; nil when it is not a real day or lies outside the supported range.
@@ -27,6 +30,7 @@ public struct GameDate: Sendable, Hashable, Comparable {
         days = Int32(truncatingIfNeeded: era * 146_097 + doe - 719_468)
     }
 
+    @inlinable public static func == (a: GameDate, b: GameDate) -> Bool { a.days == b.days }
     @inlinable public static func < (a: GameDate, b: GameDate) -> Bool { a.days < b.days }
 
     /// True inside the supported range.
@@ -45,7 +49,7 @@ public struct GameDate: Sendable, Hashable, Comparable {
     /// Whole days from `other` to this date.
     @inlinable public func daysSince(_ other: GameDate) -> Int { Int(days) - Int(other.days) }
 
-    /// The civil date.
+    /// The civil date. `year`, `month` and `day` each work it out again: a loop takes `civil` once.
     public var civil: (year: Int, month: Int, day: Int) {
         let z = Int(days) + 719_468
         let era = GameDate.floorDiv(z, 146_097)
@@ -61,7 +65,7 @@ public struct GameDate: Sendable, Hashable, Comparable {
     public var month: Int { civil.month }
     public var day: Int { civil.day }
 
-    /// 0 for Sunday to 6 for Saturday (1970-01-01 was a Thursday).
+    /// 0 for Sunday to 6 for Saturday (1970-01-01 was a Thursday, 4). The formatter turns it into a name.
     public var weekday: Int {
         let w = (Int(days) + 4) % 7
         return w < 0 ? w + 7 : w
@@ -71,7 +75,9 @@ public struct GameDate: Sendable, Hashable, Comparable {
     public var startOfMonth: GameDate { adding(days: 1 - civil.day) }
 
     /// The same day `n` months later (earlier when negative); a day past the month's end becomes its last day
-    /// (31 January + 1 month = 28 or 29 February). Held at the ends of the supported range and counted there.
+    /// (31 January + 1 month = 28 or 29 February). So steps do not add up: one month three times from 31 January is
+    /// 28 April, three months at once 30 April; a term counts its months from its start date. Held at the ends of the
+    /// supported range and counted there.
     public func adding(months n: Int) -> GameDate {
         let c = civil
         let (total, overflow) = (c.year * 12 + (c.month - 1)).addingReportingOverflow(n)
@@ -80,7 +86,8 @@ public struct GameDate: Sendable, Hashable, Comparable {
             return n < 0 ? .min : .max
         }
         let year = GameDate.floorDiv(total, 12)
-        let month = total - year * 12 + 1
+        let rest = total % 12                                       // never `total - year * 12`: that can overflow
+        let month = (rest < 0 ? rest + 12 : rest) + 1
         if let d = GameDate(year: year, month: month, day: Swift.min(c.day, GameDate.daysIn(month: month, year: year))) {
             return d
         }
@@ -88,6 +95,7 @@ public struct GameDate: Sendable, Hashable, Comparable {
         return year < 1850 ? .min : .max
     }
 
+    /// The Gregorian rule: every fourth year, but a century only when 400 divides it.
     public static func isLeap(year: Int) -> Bool {
         year % 4 == 0 && (year % 100 != 0 || year % 400 == 0)
     }

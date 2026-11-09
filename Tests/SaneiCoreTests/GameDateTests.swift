@@ -89,4 +89,31 @@ final class GameDateTests: XCTestCase {
         }
         XCTAssertEqual(c.count, 8)
     }
+
+    /// Dates a save could hold but the game never makes. The month arithmetic once overflowed here (a trap); now every
+    /// one comes back to the nearest end of the supported range, counted.
+    func testStepsFromOutsideTheRange() {
+        let first = GameDate(days: .min)
+        let last = GameDate(days: .max)
+        XCTAssertFalse(first.isSupported)
+        XCTAssertFalse(last.isSupported)
+        let c = SaturationCounter()
+        Saturation.counting(into: c) {
+            for n in [Int.min, Int.min + 1, Int.min + 7, Int.min + 8, Int.min + 70_531_687, -1, 0] {
+                XCTAssertEqual(first.adding(months: n), GameDate.min, "the first day there is, \(n) months")
+            }
+            for n in [Int.max, Int.max - 70_531_687, 1, 0] {
+                XCTAssertEqual(last.adding(months: n), GameDate.max, "the last day there is, \(n) months")
+            }
+            XCTAssertEqual(first.adding(days: 0), GameDate.min)
+            XCTAssertEqual(last.adding(days: 0), GameDate.max)
+            XCTAssertEqual(first.startOfMonth, GameDate.min)
+            XCTAssertEqual(last.startOfMonth, GameDate.max)
+        }
+        XCTAssertEqual(c.count, 15)
+        // a step back into the range is a plain step: nothing to count
+        let back = Saturation.counted { GameDate(days: GameDate.max.days + 10).adding(days: -10) }
+        XCTAssertEqual(back.result, GameDate.max)
+        XCTAssertEqual(back.clamps, 0)
+    }
 }

@@ -1,7 +1,11 @@
 // The simulation's numbers (§2.3, L5): integers only. `Q32` is binary fixed point, `BP` a ratio in basis points, `LogQ`
 // a level kept as a base-2 logarithm. Results round to the nearest value, ties away from zero, so that -(a * b) equals
-// (-a) * b; a result outside the range is clamped and counted (Saturation). No division in a multiply. stdlib only.
-// tools/checks/core_reference.py holds the same arithmetic a second time; its vectors lock every operation here.
+// (-a) * b; a result outside the range is clamped and counted (Saturation). A multiply is a 128-bit product and a
+// shift; only a true division divides. stdlib only.
+// tools/checks/core_reference.py holds the same arithmetic a second time; its rows lock the operations here.
+//
+// Rounding cannot make parts add up to a whole (six shares of 1/6 are 10,002 bp): where sums must close, use the
+// exact split (T-038), never a share of each part.
 
 /// The integer steps the fixed-point types share: full-width products and quotients on magnitudes, with the sign put
 /// back at the end.
@@ -84,6 +88,13 @@ enum FixedMath {
     /// (high * 2^64 + low) / d for d > 0, to the nearest whole; nil when that does not fit in 64 bits.
     @inlinable
     static func quotient(high: UInt64, low: UInt64, by d: UInt64) -> UInt64? {
+        if high == 0 {
+            // the dividend fits in 64 bits: one hardware division, not the 128-bit routine. q + 1 cannot wrap: a
+            // quotient of 2^64 - 1 needs d = 1, and then nothing is left over
+            let q = low / d
+            let r = low % d
+            return r < d &- r ? q : q &+ 1
+        }
         if high >= d { return nil }
         let (q, r) = d.dividingFullWidth((high: high, low: low))
         if r < d &- r { return q }
@@ -108,9 +119,10 @@ enum FixedMath {
 public struct Q32: Sendable, Hashable, Comparable {
     public var raw: Int64
 
+    /// The stored bits: `1 << 32` is the number 1.
     @inlinable public init(raw: Int64) { self.raw = raw }
 
-    /// A whole number.
+    /// A whole number (clamped and counted beyond the range: below -2^31, or from 2^31 up).
     @inlinable
     public init(_ whole: Int64) {
         if whole > Int64(Int32.max) {
@@ -124,7 +136,8 @@ public struct Q32: Sendable, Hashable, Comparable {
         }
     }
 
-    /// The ratio of two whole numbers, n / d.
+    /// The ratio of two whole numbers, n / d. Dividing by zero is a counted clamp: 0 / 0 is 0, anything else the end
+    /// of the range on n's side.
     @inlinable public init(ratio n: Int64, _ d: Int64) { raw = FixedMath.divShift32(n, d) }
 
     /// A ratio in basis points as a number (10,000 bp = 1).
@@ -139,11 +152,13 @@ public struct Q32: Sendable, Hashable, Comparable {
     @inlinable public static var max: Q32 { Q32(raw: .max) }
     @inlinable public static var min: Q32 { Q32(raw: .min) }
 
+    @inlinable public static func == (a: Q32, b: Q32) -> Bool { a.raw == b.raw }
     @inlinable public static func < (a: Q32, b: Q32) -> Bool { a.raw < b.raw }
     @inlinable public static func + (a: Q32, b: Q32) -> Q32 { Q32(raw: FixedMath.add(a.raw, b.raw)) }
     @inlinable public static func - (a: Q32, b: Q32) -> Q32 { Q32(raw: FixedMath.subtract(a.raw, b.raw)) }
     @inlinable public static prefix func - (a: Q32) -> Q32 { Q32(raw: FixedMath.negate(a.raw)) }
     @inlinable public static func * (a: Q32, b: Q32) -> Q32 { Q32(raw: FixedMath.mulShift32(a.raw, b.raw)) }
+    /// Dividing by zero is a counted clamp: 0 / 0 is 0, anything else the end of the range on a's side.
     @inlinable public static func / (a: Q32, b: Q32) -> Q32 { Q32(raw: FixedMath.divShift32(a.raw, b.raw)) }
     @inlinable public static func += (a: inout Q32, b: Q32) { a = a + b }
     @inlinable public static func -= (a: inout Q32, b: Q32) { a = a - b }
@@ -152,17 +167,18 @@ public struct Q32: Sendable, Hashable, Comparable {
     /// A whole amount times this factor, to the nearest whole.
     @inlinable public func applied(to amount: Int64) -> Int64 { FixedMath.mulShift32(raw, amount) }
 
-    /// The whole part, rounding down.
+    /// The whole part as an Int64, rounding down (-1.5 gives -2).
     @inlinable public var floor: Int64 { raw >> 32 }
 
-    /// The nearest whole number.
+    /// The nearest whole number as an Int64, ties away from zero.
     @inlinable
     public var rounded: Int64 {
         let q = Int64(truncatingIfNeeded: (raw.magnitude + (UInt64(1) << 31)) >> 32)
         return raw < 0 ? -q : q
     }
 
-    /// The square root (0, counted, for a negative number). Never above the true root; within 2^-30 of it, relative.
+    /// The square root (0, counted, for a negative number). Never above the true root; within one step (2^-32) of it
+    /// below 1, and within 2^-30 of it, relative, from 1 up.
     @inlinable public func squareRoot() -> Q32 { DMath.sqrt(self) }
 }
 
@@ -171,9 +187,11 @@ public struct Q32: Sendable, Hashable, Comparable {
 public struct BP: Sendable, Hashable, Comparable {
     public var raw: Int32
 
+    /// The stored bits: 10,000 is the whole.
     @inlinable public init(raw: Int32) { self.raw = raw }
 
-    /// The ratio of two whole numbers, n / d, in basis points.
+    /// The ratio of two whole numbers, n / d, in basis points (clamped and counted beyond ±214,748.3647, and when d
+    /// is zero: 0 / 0 is 0, anything else the end of the range on n's side).
     @inlinable
     public init(ratio n: Int64, _ d: Int64) {
         let negative = (n < 0) != (d < 0)
@@ -191,7 +209,7 @@ public struct BP: Sendable, Hashable, Comparable {
         raw = FixedMath.clamp32(q, negative: negative)
     }
 
-    /// A number as a ratio in basis points (1 = 10,000 bp).
+    /// A number as a ratio in basis points (1 = 10,000 bp; clamped and counted beyond ±214,748.3647).
     @inlinable
     public init(_ q: Q32) {
         let p = q.raw.magnitude.multipliedFullWidth(by: 10_000)
@@ -204,6 +222,7 @@ public struct BP: Sendable, Hashable, Comparable {
     /// The whole: 100%.
     @inlinable public static var one: BP { BP(raw: 10_000) }
 
+    @inlinable public static func == (a: BP, b: BP) -> Bool { a.raw == b.raw }
     @inlinable public static func < (a: BP, b: BP) -> Bool { a.raw < b.raw }
 
     @inlinable
@@ -234,8 +253,9 @@ public struct BP: Sendable, Hashable, Comparable {
     @inlinable public static func += (a: inout BP, b: BP) { a = a + b }
     @inlinable public static func -= (a: inout BP, b: BP) { a = a - b }
 
-    /// This share of a whole amount, to the nearest whole. The product is 128 bits wide and the division by the
-    /// constant 10,000 is two multiply-and-shift steps, never a 128-bit division.
+    /// This share of a bare whole number, to the nearest whole, exactly rounded. For money use `Amount.times`, which
+    /// keeps the unit. The product is 128 bits wide; the division is by the constant 10,000, in two 64-bit steps, never
+    /// a 128-bit division (an optimised build turns a division by a constant into a multiply and a shift).
     @inlinable
     public func of(_ amount: Int64) -> Int64 {
         let p = amount.magnitude.multipliedFullWidth(by: UInt64(raw.magnitude))     // below 2^94
@@ -259,14 +279,19 @@ public struct BP: Sendable, Hashable, Comparable {
 public struct LogQ: Sendable, Hashable, Comparable {
     public var raw: Int64
 
+    /// The stored bits: `1 << 32` is the logarithm 1, the level 2.
     @inlinable public init(raw: Int64) { self.raw = raw }
 
-    /// The logarithm of a level (the bottom of the range, counted, when the level is not positive).
+    /// The logarithm of a level, within 2e-7 (the bottom of the range, counted, when the level is not positive). It
+    /// takes a level, not an exponent. A level below 1 has few bits as a `Q32` (1/20,500 is already 2e-6 off): build a
+    /// small level as the negated logarithm of its reciprocal, `-LogQ(Q32(20_500))`. A level within 0.2 of the top of
+    /// `Q32`'s range rounds to the logarithm 31, whose own level no longer fits.
     @inlinable public init(_ level: Q32) { self = DMath.log2(level) }
 
-    /// The level 1.
+    /// The logarithm 0: the level 1.
     @inlinable public static var zero: LogQ { LogQ(raw: 0) }
 
+    @inlinable public static func == (a: LogQ, b: LogQ) -> Bool { a.raw == b.raw }
     @inlinable public static func < (a: LogQ, b: LogQ) -> Bool { a.raw < b.raw }
     @inlinable public static func + (a: LogQ, b: LogQ) -> LogQ { LogQ(raw: FixedMath.add(a.raw, b.raw)) }
     @inlinable public static func - (a: LogQ, b: LogQ) -> LogQ { LogQ(raw: FixedMath.subtract(a.raw, b.raw)) }
@@ -274,9 +299,13 @@ public struct LogQ: Sendable, Hashable, Comparable {
     @inlinable public static func += (a: inout LogQ, b: LogQ) { a = a + b }
     @inlinable public static func -= (a: inout LogQ, b: LogQ) { a = a - b }
 
-    /// The level itself (clamped and counted from 2^31 up).
+    /// The level itself as a `Q32`: clamped and counted from 2^31 up, coarse below 1 (a `Q32` has few bits there) and
+    /// 0 below 2^-33. For showing a level, or a factor near 1. To apply a level to money use `applied(to:)` or
+    /// `Amount.times`, never `amount.times(level.level)`.
     @inlinable public var level: Q32 { DMath.exp2(self) }
 
-    /// A whole amount times the level, to the nearest whole: the way a price index or an exchange rate is applied.
+    /// A bare whole number times the level: the way a price index or an exchange rate is applied, at any size of
+    /// level. Within 6e-8 of the true product, relative, or one unit: the level comes from a table, so this is not
+    /// exactly rounded and going there and back does not return the same number. For money use `Amount.times`.
     @inlinable public func applied(to amount: Int64) -> Int64 { DMath.scale(amount, by: self) }
 }

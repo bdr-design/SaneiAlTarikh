@@ -11,24 +11,82 @@ final class FixedPointTests: XCTestCase {
         return (0..<count).map { _ in Int64(truncatingIfNeeded: (g.next() >> (64 - bits)) &- (UInt64(1) << (bits - 1))) }
     }
 
-    func testSaturationIsCountedOnlyInsideAGame() {
-        // no counter bound: a clamp is still a clamp
+    func testSaturationIsCountedOnlyInsideAScope() {
+        // no scope: a clamp is still a clamp, and nobody counts it
         XCTAssertEqual((Q32.max + Q32.one).raw, Int64.max)
-        XCTAssertNil(Saturation.counter)
+        XCTAssertFalse(Saturation.isCounting)
         let game = SaturationCounter()
         let other = SaturationCounter()
         Saturation.counting(into: game) {
+            XCTAssertTrue(Saturation.isCounting)
             _ = Q32.max + Q32.one
             _ = Q32.min - Q32.one
             _ = -Q32.min
             _ = Q32.one / Q32.zero
-            // a nested game counts its own
+            // a scope inside another counts for itself only
             Saturation.counting(into: other) { _ = Q32.max * Q32.max }
             _ = Q32.one + Q32.one                    // in range: not counted
         }
         XCTAssertEqual(game.count, 4)
         XCTAssertEqual(other.count, 1)
-        XCTAssertNil(Saturation.counter)
+        XCTAssertFalse(Saturation.isCounting)
+        XCTAssertEqual((-Q32.min).raw, Int64.max, "the opposite of the lowest number is the highest")
+        // the form that hands the count back with the result
+        let sum = Saturation.counted { Q32.max + Q32.max + Q32.one }
+        XCTAssertEqual(sum.result, Q32.max)
+        XCTAssertEqual(sum.clamps, 2)
+        // a scope that ends by an error has still counted, and is over
+        struct Stop: Error {}
+        let broken = SaturationCounter()
+        XCTAssertThrowsError(try Saturation.counting(into: broken) {
+            _ = Q32.max + Q32.one
+            throw Stop()
+        })
+        XCTAssertEqual(broken.count, 1)
+        XCTAssertFalse(Saturation.isCounting)
+    }
+
+    /// A parallel burst (ADR 0002): each child counts its own clamps and hands the count back in its result; the
+    /// parent adds them up. No two tasks ever write one counter.
+    func testEachChildOfABurstCountsItsOwn() async {
+        let total = await withTaskGroup(of: UInt64.self, returning: UInt64.self) { group in
+            for child in 0..<8 {
+                group.addTask {
+                    Saturation.counted {
+                        for _ in 0..<(1_000 + child) { _ = Q32.max + Q32.one }
+                    }.clamps
+                }
+            }
+            var sum: UInt64 = 0
+            for await clamps in group { sum += clamps }
+            return sum
+        }
+        XCTAssertEqual(total, 8_028, "8 children, 1,000 to 1,007 clamps each")
+        XCTAssertFalse(Saturation.isCounting)
+        // a scope bound inside a task (the engine's case) counts the same way
+        let c = SaturationCounter()
+        Saturation.counting(into: c) { _ = Q32.max + Q32.one }
+        XCTAssertEqual(c.count, 1)
+    }
+
+    /// The silent cases the ADR names: a clamp outside every scope is not counted. A detached task starts outside;
+    /// an actor's method called from outside a scope is outside (a scope cannot hold an `await`, so it never reaches
+    /// across one). An unstructured `Task { }` started inside a scope copies the scope: the rule against it.
+    func testWhoIsNotCounted() async {
+        let c = SaturationCounter()
+        let started = Saturation.counting(into: c) {
+            (detached: Task.detached { Saturation.isCounting }, copied: Task { Saturation.isCounting })
+        }
+        let detachedCounts = await started.detached.value
+        let copiedCounts = await started.copied.value
+        XCTAssertFalse(detachedCounts, "a detached task starts outside every scope")
+        XCTAssertTrue(copiedCounts, "an unstructured task copies the scope it was started in")
+        let outside = Clamper()
+        let seenInside = await outside.clampUnbound()
+        XCTAssertFalse(seenInside, "an actor called from outside a scope is outside")
+        let own = await outside.clampInItsOwnScope()
+        XCTAssertEqual(own, 1, "an actor's method counts when it binds a scope itself")
+        XCTAssertEqual(c.count, 0)
     }
 
     func testQ32Rules() {
@@ -61,6 +119,13 @@ final class FixedPointTests: XCTestCase {
         XCTAssertEqual(Q32(7).raw, 7 << 32)
         XCTAssertEqual(Q32.one, Q32(1))
         XCTAssertTrue(Q32(ratio: 1, 3) < Q32(ratio: 1, 2))
+        XCTAssertFalse(Q32.one < Q32.one)
+        XCTAssertTrue(Q32.min < Q32.max)
+        XCTAssertTrue(LogQ(raw: -1) < LogQ.zero)
+        XCTAssertFalse(LogQ.zero < LogQ.zero)
+        XCTAssertTrue(BP(raw: -1) < BP.zero)
+        XCTAssertFalse(BP.one < BP.one)
+        XCTAssertTrue(GameDate.min < GameDate.max)
     }
 
     func testBPRules() {
@@ -176,15 +241,42 @@ final class FixedPointTests: XCTestCase {
         XCTAssertEqual(c.count, 1)
     }
 
+    /// The seed, the key, the stream and the serial are mixed in apart. The fault this guards: with the seed and the
+    /// key added first, the game with seed 2012 rolled on each day what the game with seed 2011 rolled on the next.
+    func testNoTwoGamesShareADay() {
+        var firsts = Set<UInt64>()
+        for seed in UInt64(2_000)..<2_040 {
+            for key in Int64(14_960)..<15_000 {
+                var g = DetRNG(seed: seed, key: key, stream: 3, serial: 77)
+                firsts.insert(g.next())
+            }
+        }
+        XCTAssertEqual(firsts.count, 40 * 40, "40 seeds on 40 days: every first draw is its own")
+        var seedOne = DetRNG(seed: 1, key: 0, stream: 0, serial: 0)
+        var keyOne = DetRNG(seed: 0, key: 1, stream: 0, serial: 0)
+        XCTAssertNotEqual(seedOne.next(), keyOne.next())
+        var streamOne = DetRNG(seed: 0, key: 0, stream: 1, serial: 0)
+        var serialOne = DetRNG(seed: 0, key: 0, stream: 0, serial: 1)
+        XCTAssertNotEqual(streamOne.next(), serialOne.next())
+    }
+
     func testRandomDrawsDependOnlyOnTheirKeys() {
         var a = DetRNG(seed: 1, key: 14_975, stream: 2, serial: 3)
         var b = DetRNG(seed: 1, key: 14_975, stream: 2, serial: 3)
         var otherStream = DetRNG(seed: 1, key: 14_975, stream: 3, serial: 3)
         var otherDay = DetRNG(seed: 1, key: 14_976, stream: 2, serial: 3)
+        var otherSeed = DetRNG(seed: 2, key: 14_975, stream: 2, serial: 3)
+        var otherSerial = DetRNG(seed: 1, key: 14_975, stream: 2, serial: 4)
         let first = a.next()
         XCTAssertEqual(first, b.next())
         XCTAssertNotEqual(first, otherStream.next())
         XCTAssertNotEqual(first, otherDay.next())
+        XCTAssertNotEqual(first, otherSeed.next())
+        XCTAssertNotEqual(first, otherSerial.next())
+        // a generator is a value: a copy repeats the draws of the original
+        var copy = a
+        XCTAssertEqual(a.next(), copy.next())
+        XCTAssertEqual(a.below(1_000), copy.below(1_000))
         var g = DetRNG(seed: 99, key: 0, stream: 0, serial: 0)
         var buckets = [Int](repeating: 0, count: 10)
         for _ in 0..<10_000 {
@@ -204,5 +296,17 @@ final class FixedPointTests: XCTestCase {
             XCTAssertTrue(share >= .zero && share < .one)
         }
         XCTAssertTrue((2_300...2_700).contains(hits), "a 25% chance hit \(hits) of 10,000")
+    }
+}
+
+/// An actor that clamps: outside every scope when it is called from outside one.
+private actor Clamper {
+    func clampUnbound() -> Bool {
+        _ = Q32.max + Q32.one
+        return Saturation.isCounting
+    }
+
+    func clampInItsOwnScope() -> UInt64 {
+        Saturation.counted { _ = Q32.max + Q32.one }.clamps
     }
 }

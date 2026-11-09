@@ -1,19 +1,24 @@
 #!/usr/bin/env python3
 """The reference model of SaneiCore's determinism kit (design_doc §2.3, ADR 0002).
 
-Every algorithm of Sources/SaneiCore's fixed-point types, DMath, DetRNG and GameDate is written here a second time, in
+The arithmetic of Sources/SaneiCore's fixed-point types, DMath, DetRNG and GameDate is written here a second time, in
 exact integer arithmetic. From it come two generated Swift files:
 
   Sources/SaneiCore/DMathTables.swift       the exp2 and log2 tables (1,025 entries each), correctly rounded
-  Tests/SaneiCoreTests/CoreGolden.swift     input and output vectors the Swift tests must reproduce exactly
+  Tests/SaneiCoreTests/CoreGolden.swift     rows of inputs, outputs and the clamps counted, which the Swift tests
+                                            must reproduce exactly
 
   --write   regenerate both files
-  --check   (default) fail if the committed files differ, or an accuracy bound or a known value does not hold
+  --check   (default) fail if a committed file differs, a bound or a known value does not hold, or the Swift tests do
+            not read a family
 
-The accuracy bounds are measured against 60-digit decimal arithmetic, never against the platform's libm.
+Where an independent truth exists the model is checked against it, row by row: exact fractions for the rounding and
+the clamps, 60-digit decimals for the table maths (never the platform's libm), Python's own calendar for the dates,
+SplitMix64's published sequence.
 """
-import sys, os
+import sys, os, re, datetime, calendar
 from decimal import Decimal, getcontext
+from fractions import Fraction
 
 getcontext().prec = 60
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
@@ -192,9 +197,10 @@ class RNG:
 
     @classmethod
     def keyed(cls, seed, key, stream, serial):
-        s = mix64((seed + GOLD + (key & M64)) & M64)
-        s = mix64((s + GOLD + ((stream << 32) | serial)) & M64)
-        return cls(s)
+        """Each coordinate mixed in on its own: the seed, then the key, then stream and serial."""
+        game = mix64((seed + GOLD) & M64)
+        day = mix64((game + GOLD + (key & M64)) & M64)
+        return cls(mix64((day + GOLD + ((stream << 32) | serial)) & M64))
 
     def next(self):
         self.state = (self.state + GOLD) & M64
@@ -202,9 +208,13 @@ class RNG:
 
     def below(self, n): return (self.next() * n) >> 64
     def bp(self): return self.below(10000)
+    def chance(self, p): return self.bp() < p
 
 
 # ---- GameDate (days since 1970-01-01, proleptic Gregorian) ----
+DAY_MIN, DAY_MAX = -43829, 84370                 # 1850-01-01 and 2200-12-31
+
+
 def days_from_civil(y, m, d):
     y -= m <= 2
     era = y // 400
@@ -227,140 +237,333 @@ def civil_from_days(z):
     return (y + (m <= 2), m, d)
 
 
+def is_leap(y): return y % 4 == 0 and (y % 100 != 0 or y % 400 == 0)
+def days_in(m, y): return [31, 29 if is_leap(y) else 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31][m - 1] if 1 <= m <= 12 else 0
+def weekday(z): return (z + 4) % 7               # 0 = Sunday; 1970-01-01 was a Thursday
+
+
+def add_days(z, n):
+    """The day `n` days on, held at the ends of the supported range and counted there."""
+    s = z + n
+    if DAY_MIN <= s <= DAY_MAX: return s
+    SAT[0] += 1
+    return DAY_MIN if s < DAY_MIN else DAY_MAX
+
+
+def add_months(z, n):
+    """The same day `n` months on (a day past the month's end becomes its last day), held at the ends and counted."""
+    y, m, d = civil_from_days(z)
+    total = y * 12 + (m - 1) + n
+    y2, m2 = total // 12, total % 12 + 1
+    if 1850 <= y2 <= 2200: return days_from_civil(y2, m2, min(d, days_in(m2, y2)))
+    SAT[0] += 1
+    return DAY_MIN if y2 < 1850 else DAY_MAX
+
+
+def start_of_month(z): return add_days(z, 1 - civil_from_days(z)[2])
+
+
+# ---- independent truths ----
+EPOCH = datetime.date(1970, 1, 1)
+PY_MIN, PY_MAX = (datetime.date(1, 1, 1) - EPOCH).days, (datetime.date(9999, 12, 31) - EPOCH).days
+
+
+def near(x):
+    """A fraction to the nearest integer, ties away from zero: the rounding rule, stated without rdiv."""
+    x = Fraction(x)
+    n = abs(x.numerator) // x.denominator
+    if abs(x) - n >= Fraction(1, 2): n += 1
+    return -n if x < 0 else n
+
+
+def want(x, lo, hi):
+    """The rounded value clamped to [lo, hi], and whether it had to be clamped."""
+    v = near(x)
+    return (lo, 1) if v < lo else (hi, 1) if v > hi else (v, 0)
+
+
+def want64(x): return want(x, I64_MIN, I64_MAX)
+def want32(x): return want(x, I32_MIN, I32_MAX)
+
+
+def by_zero(a, lo, hi): return (0 if a == 0 else (hi if a > 0 else lo), 1)
+
+
+def counted(fn):
+    before = SAT[0]
+    v = fn()
+    return v, SAT[0] - before
+
+
+def py_date(z): return EPOCH + datetime.timedelta(days=z)
+
+
+def py_add_months(z, n):
+    """Month arithmetic through Python's own calendar; None when it leaves the years Python knows."""
+    if not PY_MIN <= z <= PY_MAX: return None
+    d = py_date(z)
+    y2, m2 = divmod(d.year * 12 + d.month - 1 + n, 12)
+    if not 1 <= y2 <= 9999: return None
+    return (datetime.date(y2, m2 + 1, min(d.day, calendar.monthrange(y2, m2 + 1)[1])) - EPOCH).days
+
+
 # ---- checks ----
 def check_bounds():
-    """The accuracy the design asks for (§2.3: relative error <= 1e-6), against 60-digit decimals."""
+    """The accuracy the design asks for (§2.3: 1e-6) and the tighter numbers the code's comments state."""
     two, ln2 = Decimal(2), Decimal(2).ln()
-    g = RNG(20110101)
+    g = RNG.keyed(20110101, 0, 0, 0)
     worst_e = worst_l = worst_r = Decimal(0)
-    ys = [g.next() % (60 * ONE) - 30 * ONE for _ in range(4000)] + [i << 22 for i in range(1025)] + [(i << 22) + (1 << 21) for i in range(1024)]
+    ys = [g.next() % (61 * ONE) - 30 * ONE for _ in range(4000)] + [i << 22 for i in range(1025)] + [(i << 22) + (1 << 21) for i in range(1024)]
+    ys += [30 * ONE + (i << 22) + (1 << 21) for i in range(1024)] + [-(g.next() % (40 * ONE)) for _ in range(2000)]
     for y in ys:
         if y >= 31 * ONE: continue
         true = two ** (Decimal(y) / ONE) * ONE
         err = abs(Decimal(exp2(y)) - true)
-        assert err <= true * Decimal('3e-7') + 1, y              # below 1.0 the result's own last bit is the limit
+        assert err <= true * Decimal('6e-8') + 1, y              # below 1 the result's own last bit is the limit
         if y >= 0: worst_e = max(worst_e, err / true)
-    xs = [(g.next() % (1 << 62)) + 1 for _ in range(4000)] + [ONE + (i << 22) + (1 << 21) for i in range(1024)] + [(g.next() % (1 << 40)) + (1 << 20) for _ in range(2000)]
+    xs = [(g.next() % (1 << 62)) + 1 for _ in range(4000)] + [ONE + (i << 22) + (1 << 21) for i in range(1024)]
+    xs += [(g.next() % (1 << 40)) + (1 << 20) for _ in range(2000)] + [(1 << 62) + (g.next() % (1 << 62)) for _ in range(1000)]
     for x in xs:
         true = (Decimal(x) / ONE).ln() / ln2
         worst_l = max(worst_l, abs(Decimal(log2(x)) / ONE - true))
-        back = abs(Decimal(exp2(log2(x))) - x)
-        assert back <= x * Decimal('6e-7') + 1, x
-        if x >= ONE: worst_r = max(worst_r, back / x)
-    assert worst_e < Decimal('3e-7'), worst_e
-    assert worst_l < Decimal('3e-7'), worst_l
-    assert worst_r < Decimal('1e-6'), worst_r
+        if x >= ONE and log2(x) < 31 * ONE:
+            worst_r = max(worst_r, abs(Decimal(exp2(log2(x))) - x) / x)
+    assert worst_e <= Decimal('6e-8'), worst_e                   # the numbers DMath.swift and ADR 0002 state
+    assert worst_l <= Decimal('2e-7'), worst_l
+    assert worst_r <= Decimal('2e-7'), worst_r
     worst_s = Decimal(0)
-    for x in [-40 * ONE + (g.next() % (80 * ONE)) for _ in range(3000)]:
+    for x in [-40 * ONE + (g.next() % (80 * ONE)) for _ in range(3000)] + [8931133415, -8931133415, 17862266830, 8334305841]:
         true = Decimal(1) / (Decimal(1) + (-(Decimal(x) / ONE)).exp())
         worst_s = max(worst_s, abs(Decimal(logistic(x)) / ONE - true))
         assert logistic(x) + logistic(-x) == ONE
-    assert worst_s < Decimal('3e-7'), worst_s
+    assert worst_s <= Decimal('2e-8'), worst_s
     assert logistic(0) == ONE // 2
-    for k in range(-20, 31): assert exp2(k * ONE) == (1 << (32 + k)) and log2(1 << (32 + k)) == k * ONE
-    for x in [g.next() % (1 << 63) for _ in range(3000)] + [0, 1, 2, 3, 4, (1 << 62), I64_MAX]:
+    # every whole power of two a Q32 holds is exact both ways
+    for k in range(-32, 31): assert exp2(k * ONE) == (1 << (32 + k)) and log2(1 << (32 + k)) == k * ONE, k
+    # a product by a level against decimals, at every size of shift
+    for a, y in [(g.next() % (1 << 50) + 1, g.next() % (60 * ONE) - 40 * ONE) for _ in range(3000)]:
+        true = Decimal(a) * two ** (Decimal(y) / ONE)
+        if true * Decimal('1.000001') < I64_MAX:
+            v, sat = counted(lambda: scale(a, y))
+            assert sat == 0 and abs(Decimal(v) - true) <= true * Decimal('6e-8') + 1, (a, y)
+            assert scale(-a, y) == -v
+    # roots: never above the true root; one step below 1, within 2^-30 relative from 1 up
+    for x in [g.next() % (1 << 63) for _ in range(3000)] + [g.next() % ONE for _ in range(2000)] + [0, 1, 2, 3, 4, (1 << 62), I64_MAX]:
         r = q_sqrt(x)
         true = (Decimal(x) / ONE).sqrt() * ONE
-        assert r <= true and (true - r <= 1 if x < ONE else (true - r) / true < Decimal(2) ** -30), x
+        assert r <= true and (true - r < 1 if x < ONE else (true - r) / true < Decimal(2) ** -30), x
     # the rounded quotient that needs 65 bits (2^64 exactly) must clamp, never wrap to 0
     n229 = ((229 << 64) - 64) // 10000
     assert n229 * 10000 == (229 << 64) - 64 and n229 <= I64_MAX and rdiv(n229 * 10000, 229) == 1 << 64
-    before = SAT[0]; assert bp_ratio(n229, 229) == I32_MAX and SAT[0] == before + 1; SAT[0] = before
+    assert counted(lambda: bp_ratio(n229, 229)) == (I32_MAX, 1)
+    SAT[0] = 0                                                   # that clamp was the point
     for n in [g.next() for _ in range(3000)] + [0, 1, 2, 3, 4, 15, 16, 17, M64, (1 << 32) ** 2 - 1, (1 << 32) ** 2]:
         r = isqrt(n & M64)
         assert r * r <= (n & M64) < (r + 1) * (r + 1)
-    # monotone: a higher level never gives a lower value
+    # never out of order: around every knot of both tables, and on a stride between
+    for n in range(-36, 31):
+        prev = exp2((n << 32) - 2)
+        for i in range(1025):
+            for y in ((n << 32) + (i << 22) + k for k in (-1, 0, 1)):
+                if y >= 31 * ONE: continue
+                v = exp2(y); assert v >= prev, y; prev = v
+    for p in range(11, 63):
+        prev = log2((1 << p) - 2)
+        for i in range(1025):
+            for x in ((1 << p) + ((i << p) >> 10) + k for k in (-1, 0, 1)):
+                if x > I64_MAX: continue
+                v = log2(x); assert v >= prev, x; prev = v
     prev = 0
     for y in range(-3 * ONE, 3 * ONE, 104729):
         v = exp2(y); assert v >= prev; prev = v
-    prev = I64_MIN
-    for x in range(1, 8 * ONE, 1299709):
-        v = log2(x); assert v >= prev; prev = v
-    # the calendar: every day of 1850-2200 round-trips, in order
-    lo, hi = days_from_civil(1850, 1, 1), days_from_civil(2200, 12, 31)
-    assert (lo, hi) == (-43829, 84370) and days_from_civil(2011, 1, 1) == 14975 and days_from_civil(1970, 1, 1) == 0
-    prev = None
-    import datetime
-    for z in range(lo, hi + 1):
+    # the calendar: every day of 1850-2200 is the day Python says, with its weekday, there and back
+    assert (days_from_civil(1850, 1, 1), days_from_civil(2200, 12, 31)) == (DAY_MIN, DAY_MAX)
+    assert days_from_civil(2011, 1, 1) == 14975 and days_from_civil(1970, 1, 1) == 0
+    for z in range(DAY_MIN, DAY_MAX + 1):
         c = civil_from_days(z)
-        assert days_from_civil(*c) == z
-        assert c == tuple((datetime.date(1970, 1, 1) + datetime.timedelta(days=z)).timetuple()[:3])
+        d = py_date(z)
+        assert days_from_civil(*c) == z and c == (d.year, d.month, d.day)
+        assert weekday(z) == (d.weekday() + 1) % 7
+    for y in range(1850, 2201):
+        for m in range(1, 13): assert days_in(m, y) == calendar.monthrange(y, m)[1] and is_leap(y) == calendar.isleap(y)
     # SplitMix64's published sequence for seed 1234567
     r = RNG(1234567)
     assert [r.next() for _ in range(5)] == [6457827717110365317, 3203168211198807973, 9817491932198370423,
                                              4593380528125082431, 16408922859458223821]
-    assert SAT[0] == 0, 'the bounds checks must not saturate'
+    # no two (seed, day) pairs share a generator: 250 seeds over 440 days
+    states = {RNG.keyed(s, 14975 + d, 3, 77).state for s in range(250) for d in range(440)}
+    assert len(states) == 250 * 440 and RNG.keyed(1, 0, 0, 0).state != RNG.keyed(0, 1, 0, 0).state
+    assert SAT[0] == 0, 'the bounds checks must not clamp'
     return worst_e, worst_l, worst_r, worst_s
 
 
+class Families(list):
+    """The golden families. Every row ends with the clamps the reference counted for that row alone."""
+
+    def add(self, name, types, rows, truth=None):
+        """`rows` are (inputs, lambda) pairs; `truth(*inputs)` is the independent (value, clamps), or None."""
+        out = []
+        for inputs, fn in rows:
+            v, n = counted(fn)
+            vs = v if isinstance(v, tuple) else (v,)
+            if truth is not None:
+                t = truth(*inputs)
+                assert t is None or t == (v, n), (name, inputs, (v, n), t)
+            out.append(tuple(inputs) + vs + (n,))
+        assert len(out) >= 5, name
+        self.append((name, '(' + ', '.join(types + ['UInt64']) + ')', out))
+
+    def stream(self):
+        """Each family draws its random rows from a stream of its own, so adding a family changes no other."""
+        return RNG.keyed(0x5A4E4549, 0, len(self) + 1, 0)
+
+
 def vectors():
-    """The golden vectors: (name, Swift element type, rows)."""
-    g = RNG(0x5A4E4549)                                    # the vectors' own fixed stream
-    def r64(): return g.next()
-    def s64(bits): return (r64() % (1 << bits)) - (1 << (bits - 1))
-    out = []
-    class Fam(list):
-        def append(self, item):                            # each family carries the saturations its rows counted
-            name, ty, rows = item
-            super().append((name, ty, rows, SAT[0] - self.mark))
-            self.mark = SAT[0]
-    out = Fam(); out.mark = SAT[0]
+    fs = Families()
+    I64, I32, U64, U32 = 'Int64', 'Int32', 'UInt64', 'UInt32'
+
+    def s64(g, bits): return (g.next() % (1 << bits)) - (1 << (bits - 1))
     edge = [0, 1, -1, ONE, -ONE, ONE // 2, 3 * ONE, I64_MAX, I64_MIN, I64_MAX - 1, I64_MIN + 1, 1 << 31, -(1 << 31), 10000 * ONE]
-    pairs = [(a, b) for a in edge for b in edge[:9]] + [(s64(40), s64(40)) for _ in range(40)] + [(s64(63), s64(34)) for _ in range(20)]
-    out.append(('q32Add', '(Int64, Int64, Int64)', [(a, b, q_add(a, b)) for a, b in pairs[:60]]))
-    out.append(('q32Sub', '(Int64, Int64, Int64)', [(a, b, q_sub(a, b)) for a, b in pairs[:60]]))
-    out.append(('q32Mul', '(Int64, Int64, Int64)', [(a, b, q_mul(a, b)) for a, b in pairs]))
-    out.append(('q32Div', '(Int64, Int64, Int64)', [(a, b, q_div(a, b)) for a, b in pairs]))
-    out.append(('q32Ratio', '(Int64, Int64, Int64)', [(a, b, q_div_raw(a, b)) for a, b in [(1, 3), (2, 3), (-1, 3), (1, -3), (5, 0), (0, 0), (-5, 0), (I64_MAX, 1), (1 << 31, 1), ((1 << 31) - 1, 1), (-(1 << 31), 1), (7, 1 << 40), (I64_MIN, I64_MAX), (I64_MIN, -1)] + [(s64(50), s64(30)) for _ in range(20)]]))
-    out.append(('q32Apply', '(Int64, Int64, Int64)', [(q, a, q_apply(q, a)) for q, a in [(ONE, 5), (ONE // 2, 5), (ONE // 2, -5), (ONE // 2, 3), (-ONE // 2, 3), (3 * ONE, I64_MAX), (ONE, I64_MIN), (I64_MAX, 2), (1, 1 << 31), (1, (1 << 31) - 1)] + [(s64(36), s64(60)) for _ in range(30)]]))
-    out.append(('q32Round', '(Int64, Int64, Int64)', [(q, q_floor(q), q_round(q)) for q in [0, 1, -1, ONE // 2, -ONE // 2, ONE // 2 - 1, -ONE // 2 - 1, ONE + ONE // 2, -ONE - ONE // 2, I64_MAX, I64_MIN] + [s64(45) for _ in range(12)]]))
-    out.append(('q32FromInt', '(Int64, Int64)', [(i, q_from_int(i)) for i in [0, 1, -1, (1 << 31) - 1, 1 << 31, -(1 << 31), -(1 << 31) - 1, I64_MAX, I64_MIN, 2011]]))
+
+    def pairs(g): return [(a, b) for a in edge for b in edge[:9]] + [(s64(g, 40), s64(g, 40)) for _ in range(40)] + [(s64(g, 63), s64(g, 34)) for _ in range(20)]
+
+    def div_truth(a, b): return by_zero(a, I64_MIN, I64_MAX) if b == 0 else want64(Fraction(a * ONE, b))
+    g = fs.stream()
+    fs.add('q32Add', [I64, I64, I64], [((a, b), lambda a=a, b=b: q_add(a, b)) for a, b in pairs(g)[:70]], lambda a, b: want64(a + b))
+    g = fs.stream()
+    fs.add('q32Sub', [I64, I64, I64], [((a, b), lambda a=a, b=b: q_sub(a, b)) for a, b in pairs(g)[:70]], lambda a, b: want64(a - b))
+    g = fs.stream()
+    fs.add('q32Neg', [I64, I64], [((a,), lambda a=a: q_neg(a)) for a in edge + [s64(g, 60) for _ in range(6)]], lambda a: want64(-a))
+    g = fs.stream()
+    fs.add('q32Mul', [I64, I64, I64], [((a, b), lambda a=a, b=b: q_mul(a, b)) for a, b in pairs(g)], lambda a, b: want64(Fraction(a * b, ONE)))
+    g = fs.stream()
+    fs.add('q32Div', [I64, I64, I64], [((a, b), lambda a=a, b=b: q_div(a, b)) for a, b in pairs(g)], div_truth)
+    g = fs.stream()
+    ratios = [(1, 3), (2, 3), (-1, 3), (1, -3), (5, 0), (0, 0), (-5, 0), (I64_MAX, 1), (1 << 31, 1), ((1 << 31) - 1, 1), (-(1 << 31), 1), (7, 1 << 40), (I64_MIN, I64_MAX), (I64_MIN, -1), (5_000_000, 20_000_000), (3, 1 << 33)]
+    fs.add('q32Ratio', [I64, I64, I64], [((a, b), lambda a=a, b=b: q_div_raw(a, b)) for a, b in ratios + [(s64(g, 50), s64(g, 30)) for _ in range(20)]], div_truth)
+    g = fs.stream()
+    applies = [(ONE, 5), (ONE // 2, 5), (ONE // 2, -5), (ONE // 2, 3), (-ONE // 2, 3), (3 * ONE, I64_MAX), (ONE, I64_MIN), (I64_MAX, 2), (1, 1 << 31), (1, (1 << 31) - 1)]
+    fs.add('q32Apply', [I64, I64, I64], [((q, a), lambda q=q, a=a: q_apply(q, a)) for q, a in applies + [(s64(g, 36), s64(g, 60)) for _ in range(30)]], lambda q, a: want64(Fraction(q * a, ONE)))
+    g = fs.stream()
+    rounds = [0, 1, -1, ONE // 2, -ONE // 2, ONE // 2 - 1, -ONE // 2 - 1, ONE + ONE // 2, -ONE - ONE // 2, I64_MAX, I64_MIN] + [s64(g, 45) for _ in range(12)]
+    fs.add('q32Round', [I64, I64, I64], [((q,), lambda q=q: (q_floor(q), q_round(q))) for q in rounds],
+           lambda q: ((Fraction(q, ONE).__floor__(), near(Fraction(q, ONE))), 0))
+    fs.add('q32FromInt', [I64, I64], [((i,), lambda i=i: q_from_int(i)) for i in [0, 1, -1, (1 << 31) - 1, 1 << 31, -(1 << 31), -(1 << 31) - 1, I64_MAX, I64_MIN, 2011]], lambda i: want64(i * ONE))
     bps = [0, 1, -1, 10000, -10000, 5000, 3333, I32_MAX, I32_MIN, 12345, -9999]
     amts = [0, 1, -1, 2, 3, -3, 10000, 5000, 15000, I64_MAX, I64_MIN, 1 << 60, -(1 << 60), 123456789012345]
-    out.append(('bpOf', '(Int32, Int64, Int64)', [(b, a, bp_of(b, a)) for b, a in [(b, a) for b in bps for a in amts] + [(s64(20), s64(62)) for _ in range(20)]]))
-    out.append(('bpArith', '(Int32, Int32, Int32, Int32, Int32)', [(a, b, bp_add(a, b), bp_sub(a, b), bp_mul(a, b)) for a in bps for b in bps[:8]]))
-    out.append(('bpRatio', '(Int64, Int64, Int32)', [(a, b, bp_ratio(a, b)) for a, b in [(1, 2), (1, 3), (2, 3), (-1, 3), (1, -3), (0, 5), (5, 0), (0, 0), (-5, 0), (I64_MAX, 1), (I64_MIN, 1), (I64_MAX, I64_MAX), (I64_MIN, I64_MAX), (1, I64_MAX), (214748, 1), (214749, 1), (1, 20000), (3, 20000), (I64_MAX, I64_MIN), (((229 << 64) - 64) // 10000, 229), (-(((229 << 64) - 64) // 10000), 229)] + [(s64(55), s64(50)) for _ in range(20)]]))
-    out.append(('bpQ32', '(Int32, Int64, Int32)', [(b, bp_to_q(b), q_to_bp(bp_to_q(b))) for b in bps + [1234, 9999, 2, 3]]))
-    out.append(('qToBP', '(Int64, Int32)', [(q, q_to_bp(q)) for q in [0, ONE, -ONE, ONE // 2, ONE // 3, I64_MAX, I64_MIN, 214748 * ONE, 214749 * ONE, 429497, 214748, 214749]]))
-    ys = [0, 1, -1, ONE, -ONE, ONE // 2, -ONE // 2, 30 * ONE, 31 * ONE - 1, 31 * ONE, -31 * ONE, -32 * ONE, -33 * ONE, -34 * ONE, -64 * ONE, -90 * ONE, I64_MAX, I64_MIN, (1 << 22) - 1, 1 << 22, 1023 << 22, (1024 << 22) - 1]
-    ys += [s64(37) for _ in range(40)]
-    out.append(('exp2', '(Int64, Int64)', [(y, exp2(y)) for y in ys]))
-    xs = [1, 2, 3, ONE, ONE - 1, ONE + 1, 2 * ONE, 2 * ONE - 1, 3 * ONE, ONE // 2, I64_MAX, 1 << 62, (1 << 62) - 1, 0, -1, I64_MIN, 10 * ONE, 1000 * ONE]
-    xs += [(r64() % (1 << 62)) + 1 for _ in range(30)] + [(r64() % (1 << 34)) + 1 for _ in range(10)]
-    out.append(('log2', '(Int64, Int64)', [(x, log2(x)) for x in xs]))
+    g = fs.stream()
+    fs.add('bpOf', [I32, I64, I64], [((b, a), lambda b=b, a=a: bp_of(b, a)) for b, a in [(b, a) for b in bps for a in amts] + [(s64(g, 20), s64(g, 62)) for _ in range(20)]], lambda b, a: want64(Fraction(b * a, 10000)))
+    bb = [(a, b) for a in bps for b in bps]
+    fs.add('bpAdd', [I32, I32, I32], [((a, b), lambda a=a, b=b: bp_add(a, b)) for a, b in bb], lambda a, b: want32(a + b))
+    fs.add('bpSub', [I32, I32, I32], [((a, b), lambda a=a, b=b: bp_sub(a, b)) for a, b in bb], lambda a, b: want32(a - b))
+    fs.add('bpMul', [I32, I32, I32], [((a, b), lambda a=a, b=b: bp_mul(a, b)) for a, b in bb], lambda a, b: want32(Fraction(a * b, 10000)))
+    fs.add('bpNeg', [I32, I32], [((a,), lambda a=a: sat32(-a)) for a in bps], lambda a: want32(-a))
+    g = fs.stream()
+    n229 = ((229 << 64) - 64) // 10000
+    bratios = [(1, 2), (1, 3), (2, 3), (-1, 3), (1, -3), (0, 5), (5, 0), (0, 0), (-5, 0), (I64_MAX, 1), (I64_MIN, 1), (I64_MAX, I64_MAX), (I64_MIN, I64_MAX), (1, I64_MAX), (214748, 1), (214749, 1), (1, 20000), (3, 20000), (I64_MAX, I64_MIN), (n229, 229), (-n229, 229), (5_000_000, 20_000_000), (1, 6)]
+    fs.add('bpRatio', ['Int64', 'Int64', I32], [((a, b), lambda a=a, b=b: bp_ratio(a, b)) for a, b in bratios + [(s64(g, 55), s64(g, 50)) for _ in range(20)]],
+           lambda a, b: by_zero(a, I32_MIN, I32_MAX) if b == 0 else want32(Fraction(a * 10000, b)))
+    fs.add('bpToQ32', [I32, I64], [((b,), lambda b=b: bp_to_q(b)) for b in bps + [1234, 9999, 2, 3]], lambda b: (near(Fraction(b * ONE, 10000)), 0))
+    qbps = [0, ONE, -ONE, ONE // 2, ONE // 3, I64_MAX, I64_MIN, 214748 * ONE, 214749 * ONE, 429497, 214748, 214749, 1 << 27, -(1 << 27), 3 << 27, 1844674407370955, -1844674407370955] + [bp_to_q(b) for b in bps]
+    fs.add('qToBP', [I64, I32], [((q,), lambda q=q: q_to_bp(q)) for q in qbps], lambda q: want32(Fraction(q * 10000, ONE)))
+    two, ln2 = Decimal(2), Decimal(2).ln()
+
+    def exp2_truth(y):
+        if -64 * ONE <= y < 31 * ONE:
+            true = two ** (Decimal(y) / ONE) * ONE
+            assert abs(Decimal(exp2(y)) - true) <= true * Decimal('6e-8') + 1, y
+        return None
+
+    def log2_truth(x):
+        if x > 0: assert abs(Decimal(log2(x)) / ONE - (Decimal(x) / ONE).ln() / ln2) <= Decimal('2e-7'), x
+        return None
+
+    def scale_truth(a, y):
+        true = Decimal(abs(a)) * two ** (Decimal(max(min(y, 200 * ONE), -200 * ONE)) / ONE)
+        if true * Decimal('1.000001') < I64_MAX:
+            v, n = counted(lambda: scale(a, y))
+            assert n == 0 and abs(Decimal(abs(v)) - true) <= true * Decimal('6e-8') + 1 and (v < 0) == (a < 0 and v != 0), (a, y)
+        elif true > Decimal(I64_MAX) * Decimal('1.000001') and abs(y) <= 200 * ONE:
+            assert counted(lambda: scale(a, y)) == (I64_MIN if a < 0 else I64_MAX, 1), (a, y)
+        return None
+    g = fs.stream()
+    ys = [0, 1, -1, ONE, -ONE, ONE // 2, -ONE // 2, 30 * ONE, 31 * ONE - 1, 31 * ONE, -31 * ONE, -32 * ONE, -33 * ONE, -33 * ONE - 1, -34 * ONE, -64 * ONE, -90 * ONE, I64_MAX, I64_MIN, (1 << 22) - 1, 1 << 22, 1023 << 22, (1024 << 22) - 1, 18874368, 30 * ONE + (1023 << 22) + 12345]
+    fs.add('exp2', [I64, I64], [((y,), lambda y=y: exp2(y)) for y in ys + [s64(g, 37) for _ in range(40)]], exp2_truth)
+    g = fs.stream()
+    xs = [1, 2, 3, ONE, ONE - 1, ONE + 1, 2 * ONE, 2 * ONE - 1, 3 * ONE, ONE // 2, I64_MAX, I64_MAX - 743440383, I64_MAX - 743440384, 1 << 62, (1 << 62) - 1, 0, -1, I64_MIN, 10 * ONE, 1000 * ONE, 4297064448]
+    fs.add('log2', [I64, I64], [((x,), lambda x=x: log2(x)) for x in xs + [(g.next() % (1 << 62)) + 1 for _ in range(30)] + [(g.next() % (1 << 34)) + 1 for _ in range(10)]], log2_truth)
+    g = fs.stream()
     sc = [(1000, 0), (1000, ONE), (1000, -ONE), (1000, ONE // 2), (-1000, ONE // 2), (1, -ONE), (3, -ONE), (-3, -ONE), (1, -2 * ONE), (I64_MAX, 0), (I64_MIN, 0), (I64_MAX, 1), (I64_MIN, 1), (1, 62 * ONE), (1, 63 * ONE), (-1, 63 * ONE), (-1, 64 * ONE), (0, 200 * ONE), (5, 200 * ONE), (1 << 62, -62 * ONE), (I64_MAX, -63 * ONE), (I64_MAX, -64 * ONE), (I64_MAX, -200 * ONE), (I64_MAX, I64_MIN), (7, I64_MAX), (0, I64_MAX), (123456789, 31 * ONE + 12345), (3, 61 * ONE + ONE // 2), (1, 95 * ONE), (1 << 40, -96 * ONE), (I64_MAX, -127 * ONE), (I64_MAX, -128 * ONE), (I64_MAX, -129 * ONE)]
-    sc += [(s64(50), s64(36)) for _ in range(30)]
-    out.append(('scale', '(Int64, Int64, Int64)', [(a, y, scale(a, y)) for a, y in sc]))
+    # every size of shift: the carry of the rounding add, a shift of exactly 64, the clamp of the high half each way
+    sc += [(4294967295, -ONE), (1 << 31, -32 * ONE), (3 << 31, -32 * ONE), (1 << 40, -32 * ONE), (-(1 << 40) - 1, -32 * ONE + 12345), (1 << 62, 2 * ONE), (-(1 << 62), 2 * ONE), (1 << 32, 32 * ONE), (-(1 << 40), 40 * ONE), (1 << 31, 32 * ONE), (10 ** 12, -15 * ONE + 987654321), (123456789, 20 * ONE + 55555), (I64_MAX, -50 * ONE), (10 ** 12, 1 << 21)]
+    fs.add('scale', [I64, I64, I64], [((a, y), lambda a=a, y=y: scale(a, y)) for a, y in sc + [(s64(g, 50), s64(g, 36)) for _ in range(30)]], scale_truth)
+    g = fs.stream()
     ns = [0, 1, 2, 3, 4, 8, 9, 15, 16, 17, 24, 25, 26, M64, M64 - 1, (1 << 32) ** 2 - 1, 1 << 62, (1 << 63) - 1, 1 << 63, 4294967295 * 4294967295, 4294967295 * 4294967295 - 1]
-    ns += [r64() for _ in range(15)] + [r64() >> 30 for _ in range(10)]
-    out.append(('isqrt', '(UInt64, UInt64)', [(n, isqrt(n)) for n in ns]))
-    qs = [0, 1, 2, 4, ONE, ONE - 1, ONE + 1, 4 * ONE, 2 * ONE, ONE // 4, I64_MAX, 1 << 62, -1, I64_MIN, 100 * ONE, 1 << 33, (1 << 33) - 1, 1 << 31]
-    qs += [r64() >> 1 for _ in range(15)] + [r64() >> 33 for _ in range(10)]
-    out.append(('q32Sqrt', '(Int64, Int64)', [(q, q_sqrt(q)) for q in qs]))
-    ls = [0, 1, -1, ONE, -ONE, 5 * ONE, -5 * ONE, 45 * ONE, 46 * ONE - 1, 46 * ONE, -46 * ONE, 100 * ONE, I64_MAX, I64_MIN, ONE // 1000]
-    ls += [s64(38) for _ in range(30)]
-    out.append(('logistic', '(Int64, Int64)', [(x, logistic(x)) for x in ls]))
+
+    def isqrt_truth(n):
+        r = isqrt(n)
+        assert r * r <= n < (r + 1) * (r + 1)
+        return (r, 0)
+    fs.add('isqrt', [U64, U64], [((n,), lambda n=n: isqrt(n)) for n in ns + [g.next() for _ in range(15)] + [g.next() >> 30 for _ in range(10)]], isqrt_truth)
+    g = fs.stream()
+    qs = [0, 1, 2, 4, ONE, ONE - 1, ONE + 1, 4 * ONE, 2 * ONE, ONE // 4, ONE // 16, ONE // 16 - 1, I64_MAX, 1 << 62, -1, I64_MIN, 100 * ONE, 1 << 33, (1 << 33) - 1, 1 << 31, 42949673]
+    fs.add('q32Sqrt', [I64, I64], [((q,), lambda q=q: q_sqrt(q)) for q in qs + [g.next() >> 1 for _ in range(15)] + [g.next() >> 33 for _ in range(10)]])
+    g = fs.stream()
+    ls = [0, 1, -1, ONE, -ONE, 5 * ONE, -5 * ONE, 45 * ONE, 46 * ONE - 1, 46 * ONE, -46 * ONE, 100 * ONE, I64_MAX, I64_MIN, ONE // 1000, 8931133415, -8931133415, 17862266830, 8334305841]
+    fs.add('logistic', [I64, I64], [((x,), lambda x=x: logistic(x)) for x in ls + [s64(g, 38) for _ in range(30)]])
     seq = RNG(1234567)
-    out.append(('rngSeq', 'UInt64', [seq.next() for _ in range(8)]))
-    keyed = []
-    for seed, key, stream, serial in [(0, 0, 0, 0), (1, 0, 0, 0), (0, 1, 0, 0), (0, 0, 1, 0), (0, 0, 0, 1), (2011, 14975, 3, 77), (2011, 14976, 3, 77), (2011, 14975, 4, 77), (2011, 14975, 3, 78), (M64, -1, 0xFFFFFFFF, 0xFFFFFFFF), (0xDEADBEEF, -43829, 12, 4000000000), (42, 84370, 1, 2)]:
+    fs.add('rngSeq', [U64], [((), lambda: seq.next()) for _ in range(8)])
+    keys = [(0, 0, 0, 0), (1, 0, 0, 0), (0, 1, 0, 0), (0, 0, 1, 0), (0, 0, 0, 1), (2011, 14975, 3, 77), (2011, 14976, 3, 77), (2012, 14974, 3, 77), (2012, 14975, 3, 77), (2011, 14975, 4, 77), (2011, 14975, 3, 78), (M64, -1, 0xFFFFFFFF, 0xFFFFFFFF), (0xDEADBEEF, -43829, 12, 4000000000), (42, 84370, 1, 2)]
+
+    def three(seed, key, stream, serial):
         k = RNG.keyed(seed, key, stream, serial)
-        keyed.append((seed, key, stream, serial, k.next(), k.next(), k.next()))
-    out.append(('rngKeyed', '(UInt64, Int64, UInt32, UInt32, UInt64, UInt64, UInt64)', keyed))
+        return (k.next(), k.next(), k.next())
+    fs.add('rngKeyed', [U64, I64, U32, U32, U64, U64, U64], [((a, b, c, d), lambda a=a, b=b, c=c, d=d: three(a, b, c, d)) for a, b, c, d in keys])
+    assert len({r[4] for r in fs[-1][2]}) == len(keys), 'no two of these keys share a first draw'
     b = RNG.keyed(7, 7, 7, 7)
-    out.append(('rngBelow', '(UInt64, UInt64)', [(n, b.below(n)) for n in [1, 2, 3, 10, 10000, 1 << 32, M64, 6, 6, 6, 100, 100, 1000000007, 1 << 63, 0]]))
-    b = RNG.keyed(9, 9, 9, 9)
-    out.append(('rngBP', 'Int32', [b.bp() for _ in range(16)]))
+    fs.add('rngBelow', [U64, U64], [((n,), lambda n=n: b.below(n)) for n in [1, 2, 3, 10, 10000, 1 << 32, M64, 6, 6, 6, 100, 100, 1000000007, 1 << 63, 0]])
+    b2 = RNG.keyed(9, 9, 9, 9)
+    fs.add('rngBP', [I32], [((), lambda: b2.bp()) for _ in range(16)])
+    b3 = RNG.keyed(5, 5, 5, 5)
+    fs.add('rngChance', [I32, I32], [((p,), lambda p=p: int(b3.chance(p))) for p in [-1, 0, 1, 2500, 5000, 9999, 10000, 10001, I32_MAX, I32_MIN] * 3])
     ds = [(1850, 1, 1), (1899, 12, 31), (1900, 2, 28), (1900, 3, 1), (1969, 12, 31), (1970, 1, 1), (2000, 2, 29), (2011, 1, 1), (2011, 1, 25), (2011, 7, 9), (2012, 2, 29), (2100, 2, 28), (2100, 3, 1), (2200, 12, 31), (1979, 2, 11), (1990, 8, 2), (2026, 1, 1)]
-    out.append(('dates', '(Int32, Int32, Int32, Int32, Int32)', [(y, m, d, days_from_civil(y, m, d), (days_from_civil(y, m, d) + 4) % 7) for y, m, d in ds]))
-    return out
+    fs.add('dates', [I32, I32, I32, I32, I32], [((y, m, d), lambda y=y, m=m, d=d: (days_from_civil(y, m, d), weekday(days_from_civil(y, m, d)))) for y, m, d in ds],
+           lambda y, m, d: (((datetime.date(y, m, d) - EPOCH).days, (datetime.date(y, m, d).weekday() + 1) % 7), 0))
+    fs.add('monthFacts', [I32, I32, I32, I32], [((y, m), lambda y=y, m=m: (days_in(m, y), int(is_leap(y)))) for y, m in [(2011, 2), (2012, 2), (1900, 2), (2000, 2), (2100, 2), (2011, 1), (2011, 4), (2011, 12), (2011, 0), (2011, 13), (1850, 6), (2200, 9), (2011, -1)]])
+    INT_MAX, INT_MIN = I64_MAX, I64_MIN
+    I32MAX, I32MIN = I32_MAX, I32_MIN
+    d2011 = days_from_civil(2011, 1, 31)
+    starts = [d2011, DAY_MIN, DAY_MAX, 0, days_from_civil(2012, 2, 29), DAY_MAX + 1, DAY_MIN - 1, 90000, -719528, I32MIN, I32MAX]
+
+    def add_days_truth(z, n):
+        if PY_MIN <= z <= PY_MAX and PY_MIN <= z + n <= PY_MAX:
+            s = (py_date(z) + datetime.timedelta(days=n) - EPOCH).days
+            return want(s, DAY_MIN, DAY_MAX)
+        return None
+    fs.add('dateAddDays', [I32, I64, I32], [((z, n), lambda z=z, n=n: add_days(z, n)) for z in starts for n in [0, 1, -1, 31, -31, 365, 100000, -100000, INT_MAX, INT_MIN]], add_days_truth)
+
+    def add_months_truth(z, n):
+        s = py_add_months(z, n)
+        if s is None: return None
+        return (s, 0) if 1850 <= py_date(s).year <= 2200 else want(s, DAY_MIN, DAY_MAX)[0:1] + (1,)
+    months = [0, 1, -1, 2, -2, 12, 13, 1068, -1932, 2280, 1 << 40, -(1 << 40), INT_MAX, INT_MIN, INT_MIN + 7, INT_MIN + 8, INT_MIN + 70_531_687]
+    fs.add('dateAddMonths', [I32, I64, I32], [((z, n), lambda z=z, n=n: add_months(z, n)) for z in starts for n in months], add_months_truth)
+    fs.add('startOfMonth', [I32, I32], [((z,), lambda z=z: start_of_month(z)) for z in starts + [days_from_civil(2011, 3, 1), days_from_civil(2100, 2, 28)]],
+           lambda z: ((py_date(z).replace(day=1) - EPOCH).days, 0) if DAY_MIN <= z <= DAY_MAX else None)
+    g = fs.stream()
+    defl = [(3000, 0), (3000, ONE), (3000, -ONE), (-3000, ONE // 2), (0, I64_MIN), (5, I64_MIN), (-5, I64_MIN), (I64_MAX, -1), (I64_MAX, 1), (1 << 40, 40 * ONE), (15_600_000_000, 2 * ONE + 12345)]
+
+    def deflate(nominal, d):
+        return scale(nominal, q_neg(d))
+    fs.add('moneyDeflated', [I64, I64, I64], [((a, d), lambda a=a, d=d: deflate(a, d)) for a, d in defl + [(s64(g, 45), s64(g, 34)) for _ in range(10)]])
+    return fs
 
 
 def swift_tables():
     def rows(t): return '\n'.join('        ' + ', '.join(str(v) for v in t[i:i + 8]) + ',' for i in range(0, len(t), 8))
     return f"""// GENERATED by tools/checks/core_reference.py --write. Do not edit: CI regenerates it and fails on a difference.
 // DMath's tables (§2.3): 2^(i/1024) and log2(1 + i/1024) for i = 0...1024, in Q32.32, each correctly rounded from
-// 60-digit decimal arithmetic. Fixed data, so every platform computes the same values (L5).
+// 60-digit decimal arithmetic. Fixed data, so the same on every platform by construction (L5).
 
 extension DMath {{
     /// round(2^(i/1024) * 2^32), i = 0...1024.
@@ -381,18 +584,23 @@ extension DMath {{
 
 def swift_golden(vs):
     out = ["// GENERATED by tools/checks/core_reference.py --write. Do not edit: CI regenerates it and fails on a difference.",
-           "// The reference model's vectors (exact integer arithmetic, written a second time in Python): the Swift code must",
-           "// reproduce every one exactly (§2.3: golden values lock the maths).", "",
+           "// The reference model's rows (exact integer arithmetic, written a second time in Python): the Swift code must",
+           "// reproduce every one exactly (§2.3: golden values lock the maths). The last number of a row is how many clamps",
+           "// the reference counted for that row.", "",
            "enum CoreGolden {"]
-    for name, ty, rows, sat in vs:
-        out.append(f"    /// {len(rows)} rows; the reference counted {sat} saturations making them.")
+    for name, ty, rows in vs:
+        out.append(f"    /// {len(rows)} rows, {sum(r[-1] for r in rows)} clamps.")
         out.append(f"    static let {name}: [{ty}] = [")
-        for r in rows:
-            out.append('        ' + (('(' + ', '.join(str(v) for v in r) + ')') if isinstance(r, tuple) else str(r)) + ',')
+        out += ['        (' + ', '.join(str(v) for v in r) + '),' for r in rows]
         out.append("    ]")
-        out.append(f"    static let {name}Saturations: UInt64 = {sat}")
     out.append("}")
     return '\n'.join(out) + '\n'
+
+
+def tests_read_every_family(vs):
+    """The Swift tests name every family: a family nobody asserts is a hole."""
+    text = ''.join(open(os.path.join(ROOT, 'Tests/SaneiCoreTests', f)).read() for f in ('CoreGoldenTests.swift',))
+    return [name for name, _, _ in vs if not re.search(r'\bCoreGolden\.' + name + r'\b', text)]
 
 
 def main():
@@ -409,8 +617,12 @@ def main():
         elif not os.path.exists(path) or open(path).read() != text:
             print(f"DIFFERS from the reference: {os.path.relpath(path, ROOT)} (run tools/checks/core_reference.py --write)")
             bad = 1
+    unread = tests_read_every_family(vs)
+    if unread:
+        print("NOT READ by Tests/SaneiCoreTests/CoreGoldenTests.swift: " + ', '.join(unread))
+        bad = 1
     print(f"core reference: exp2 rel {e:.2e}, log2 abs {l:.2e}, round trip rel {r:.2e}, logistic abs {s:.2e}; "
-          f"{sum(len(rows) for _, _, rows, _ in vs)} vectors, {SAT[0]} saturations; {'written' if write else ('FAIL' if bad else 'OK')}")
+          f"{len(vs)} families, {sum(len(rows) for _, _, rows in vs)} rows, {SAT[0]} clamps; {'written' if write else ('FAIL' if bad else 'OK')}")
     sys.exit(bad)
 
 
