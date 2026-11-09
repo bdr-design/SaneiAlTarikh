@@ -7,6 +7,8 @@ final class RingLog: @unchecked Sendable {
     static let shared = RingLog()
     private let lock = NSLock()
     private var lines = RingBuffer<String>(capacity: 2_000)
+    /// Every line logged since launch (the sequence number of the next line).
+    private var appended = 0
     private let started = DispatchTime.now().uptimeNanoseconds
 
     func log(_ message: String) {
@@ -14,7 +16,19 @@ final class RingLog: @unchecked Sendable {
         let line = String(format: "%9.3f ", t) + message
         lock.lock()
         lines.append(line)
+        appended += 1
         lock.unlock()
+    }
+
+    /// The lines from sequence number `start` on that are still held, the next sequence number, and how many lines from
+    /// `start` on have already dropped out of the buffer.
+    func lines(since start: Int) -> (lines: [String], next: Int, lost: Int) {
+        lock.lock()
+        defer { lock.unlock() }
+        let first = appended - lines.count
+        let all = lines.elements
+        let from = max(0, start - first)
+        return (from < all.count ? Array(all[from...]) : [], appended, max(0, first - start))
     }
 
     /// The lines, oldest first.
@@ -24,8 +38,8 @@ final class RingLog: @unchecked Sendable {
         return lines.elements
     }
 
-    /// Hands the lines to the I/O engine, which writes the file on its thread.
+    /// Asks the I/O engine to add the lines logged since its last flush to the file, on its thread.
     func flush() async {
-        await IOEngine.shared.writeLog(snapshot())
+        await IOEngine.shared.flushLog()
     }
 }

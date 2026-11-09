@@ -82,3 +82,18 @@ build (each fixed at its cause, never by turning the language mode down without 
   reviews on GitHub's app); the concurrency group cancels superseded runs.
 - App/Platform's recorder drives the render engine through its control calls, and App/MapRenderer logs through
   Platform's ring log (§2.2's rows say so); CI fails if either reaches the engine (`SaneiEngine`, `GameHost`).
+
+## Measured on the owner's iPhone (2026-11-09)
+The owner installed the IPA from `main` (ios run 42544253797) on an iPhone 17 Pro Max (iPhone18,2, iOS 27.0.1) and sent
+the recorder CSV, `ring.log` and `device.txt` (kept in `docs/measurements/m0/`; the numbers in `docs/perf.md`):
+- Idle: 0 frames in the 5 idle seconds (L1). Load: 3,600 frames in 60 s, 0 hitches, every interval 16.67 ms; encode
+  0.107 ms mean, 0.239 ms worst (budget 1 ms).
+- Simulation: 1,800 days in 60 s (30 a second), a day 0.085 ms mean, 0.272 ms worst, on «sanei.sim/user-initiated»: the
+  QoS raise is proven on the device.
+- Main thread: its own work 0.123 ms worst, worst lag 0.12 ms. Thermal nominal; free memory steady near 6.6 GB.
+- Every engine ran on its own thread (render, sim, io, main), as the CSV's thread columns show.
+- **Over budget:** I/O, worst 6.17 ms against 5 ms a write: the ring log's atomic rewrite every 10 s (4.6–6.2 ms, 5 of 7).
+  It disturbed nothing (no hitch, main lag 0.12 ms), but the budget is the budget. Fix: `IOEngine.flushLog` keeps the
+  file open and appends only the new lines, with no sync (an app crash keeps them; a power loss may lose the last
+  seconds, as before with no fsync guarantee), cut back in place past 512 KB. Re-measured with the next IPA (M0b's
+  device test needs one anyway); until then M0's exit stands on every other line, with this one fixed and unmeasured.

@@ -10,6 +10,13 @@ actor IOEngine {
 
     static let keepCSVs = 10, keepPayloads = 20, keepExports = 3
     static let logName = "ring.log", previousLogName = "ring-previous.log"
+    /// The log file's size bound: past it the file restarts from the lines still in memory (the last 2,000).
+    static let logCapBytes = 512 * 1_024
+
+    // the log file, kept open between flushes: each flush appends only the new lines (no new file, no rename)
+    private var logHandle: FileHandle?
+    private var logWritten = 0          // RingLog's sequence number of the first line not yet in the file
+    private var logBytes = 0
 
     /// Makes Documents/Saves, Diagnostics and Logs, and keeps the last session's log as ring-previous.log (the next
     /// flush would overwrite it; after a crash it is the log that matters). True when all exist.
@@ -22,6 +29,9 @@ actor IOEngine {
                 let fm = FileManager.default
                 let current = logs.appendingPathComponent(Self.logName)
                 let previous = logs.appendingPathComponent(Self.previousLogName)
+                // a flush that ran first wrote this session's lines: the next flush starts a fresh file with all of them
+                closeLog()
+                logWritten = 0
                 if fm.fileExists(atPath: current.path) {
                     // a failed rotation loses only the previous log, never the saves folder's state
                     do {
@@ -39,19 +49,54 @@ actor IOEngine {
         }
     }
 
-    /// Writes the ring log's lines to Documents/Logs/ring.log (atomically).
+    /// Adds the lines logged since the last flush to Documents/Logs/ring.log. The file stays open and each flush is one
+    /// append, without a sync: an app crash or kill keeps what was written (it is in the kernel). Measured on the
+    /// iPhone 17 Pro Max (M0), the atomic rewrite this replaces took 4.6-6.2 ms a flush against the 5 ms budget. Past
+    /// `logCapBytes` the file is cut back to the lines still in memory, in place.
     @discardableResult
-    func writeLog(_ lines: [String]) -> URL? {
+    func flushLog() -> URL? {
         EngineMeter.shared.measure(.io) {
             do {
                 let url = try Storage.logsFolder().appendingPathComponent(Self.logName)
-                try (lines.joined(separator: "\n") + "\n").write(to: url, atomically: true, encoding: .utf8)
+                let fm = FileManager.default
+                if logHandle != nil && !fm.fileExists(atPath: url.path) { closeLog() }     // deleted from Files: start again
+                if logHandle == nil {
+                    if !fm.fileExists(atPath: url.path) { _ = fm.createFile(atPath: url.path, contents: nil) }
+                    let h = try FileHandle(forWritingTo: url)
+                    logBytes = try Int(h.seekToEnd())
+                    logHandle = h
+                }
+                guard let h = logHandle else { return nil }
+                let pending = RingLog.shared.lines(since: logWritten)
+                var lines = pending.lines, next = pending.next
+                let lost = pending.lost
+                if lost > 0 { lines.insert(String(repeating: " ", count: 10) + "(\(lost) lines dropped before this flush)", at: 0) }
+                guard !lines.isEmpty else { return url }
+                var data = Data((lines.joined(separator: "\n") + "\n").utf8)
+                if logBytes + data.count > Self.logCapBytes {
+                    // the bound: restart the file from the lines still held (at most 2,000)
+                    let held = RingLog.shared.lines(since: 0)
+                    data = Data((held.lines.joined(separator: "\n") + "\n").utf8)
+                    next = held.next
+                    try h.truncate(atOffset: 0)
+                    logBytes = 0
+                }
+                try h.write(contentsOf: data)
+                logBytes += data.count
+                logWritten = next
                 return url
             } catch {
+                closeLog()
                 RingLog.shared.log("ring log write failed: \(error)")
                 return nil
             }
         }
+    }
+
+    private func closeLog() {
+        try? logHandle?.close()
+        logHandle = nil
+        logBytes = 0
     }
 
     /// Writes rows as Documents/Diagnostics/<name> (atomically), then keeps only the newest recordings.
