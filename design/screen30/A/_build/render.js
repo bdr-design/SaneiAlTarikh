@@ -121,7 +121,9 @@ if (document.querySelector('[role="dialog"], [role="alertdialog"], dialog, .moda
     [document.documentElement, document.body].forEach((e) => parts.push(e.tagName + sig(e, '::before') + sig(e, '::after')));
     [...document.body.querySelectorAll('*')].filter((e) => !e.closest('.sheet') && !e.closest('symbol, defs, script, style')).forEach((e) => {
       const r = e.getBoundingClientRect(), cls = e.className && e.className.baseVal !== undefined ? e.className.baseVal : String(e.className || '');
-      parts.push([e.tagName, cls, e.getAttribute('href') || '', Math.round(r.left), Math.round(r.top), Math.round(r.width), Math.round(r.height), sig(e), sig(e, '::before'), sig(e, '::after')].join('~')); });
+      // an SVG text's box moves a pixel with the screen's density (the shared checker places the labels); its paint is kept
+      const box = /^(text|tspan)$/i.test(e.tagName) ? ['', '', '', ''] : [Math.round(r.left), Math.round(r.top), Math.round(r.width), Math.round(r.height)];
+      parts.push([e.tagName, cls, e.getAttribute('href') || ''].concat(box, [sig(e), sig(e, '::before'), sig(e, '::after')]).join('~')); });
     let h = 2166136261; const str = parts.join('\\n'); for (let k = 0; k < str.length; k++) { h ^= str.charCodeAt(k); h = Math.imul(h, 16777619) >>> 0; }
     const key = innerWidth + 'x' + innerHeight + ':' + tab, hex = h.toString(16) + '/' + parts.length;
     if (DATA.pinMode) issues.push('PIN ' + key + ' ' + hex);
@@ -178,7 +180,8 @@ require(path.join(OUT, '../../shared/check/panelcheck.js'))({
     sheetChrome: ['section.sheet rgba(0, 0, 0, 0.45) 0px 12px 30px 0px', 'span.s-emb color(srgb 0.662745 0.737255 0.796078 / 0.45) 0px 0px 0px 1px inset',
       'header.r-hd rgba(127, 233, 255, 0.13) 0px -1px 0px 0px inset', 'button.r-act rgba(127, 233, 255, 0.14) 0px 0px 0px 1px inset',
       'div.r-link rgba(127, 233, 255, 0.14) 0px 0px 0px 1px inset', 'span.r-tile rgba(127, 233, 255, 0.14) 0px 0px 0px 1px inset',
-      'button.r-x rgba(255, 255, 255, 0.18) 0px 0px 0px 1px inset, rgba(0, 0, 0, 0.4) 0px 2px 6px 0px', 'span.r-flag rgba(255, 255, 255, 0.28) 0px 0px 0px 1px, rgba(0, 0, 0, 0.45) 0px 2px 6px 0px'] },
+      'button.r-x rgba(255, 255, 255, 0.18) 0px 0px 0px 1px inset, rgba(0, 0, 0, 0.4) 0px 2px 6px 0px', 'span.r-flag rgba(255, 255, 255, 0.28) 0px 0px 0px 1px, rgba(0, 0, 0, 0.45) 0px 2px 6px 0px',
+      'span.r-hint rgba(127, 233, 255, 0.13) 0px 0px 0px 1px inset'] },
   // no headline numbers, status table, «لماذا؟», chip or arrowed value here, and the section colour is the «المزيد» grey:
   // those generic plants move to the tour's own targets below or do not apply
   skipGeneric: ['section colour on data', 'section colour on a rule', 'closed dock item coloured', 'brief text hidden', '18 pt misuse', 'gap', 'text overlap', 'clipped text', 'faint text', 'why without its subject', 'amber value without its icon', 'chip arrow against its sign', '% before its number', 'text into a control', 'emblem drawn grey', 'chip not white', 'hint chevron missing (no tabs)', 'hint over the content (no tabs)'],
