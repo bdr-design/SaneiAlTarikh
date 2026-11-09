@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-08T23:50:38.612Z",
+ "ranAt": "2026-11-09T00:05:46.092Z",
  "inputs": {
   "files": [
    "index.html",
@@ -23,7 +23,7 @@
    "header_cairo.jpg",
    "map_overlay_cairo.svg"
   ],
-  "sha1": "eeef69932541b30ac43c951310f469c54a95ec31"
+  "sha1": "c8171815aca2ebd60456a2043b4d6ef5b7839fc9"
  },
  "cleanIssues": {
   "i16promax": [],
@@ -739,14 +739,16 @@
    "name": "SVG ring layer",
    "ok": true,
    "sample": [
-    "a layer added over the page: svg"
+    "a layer added over the page: svg",
+    "the ring is not on the step's element .stats alone: stats glass bar, [object SVGAnimatedString]"
    ]
   },
   {
    "name": "zero-size SVG ring",
    "ok": true,
    "sample": [
-    "a layer added over the page: svg"
+    "a layer added over the page: svg",
+    "the ring is not on the step's element .stats alone: stats glass bar, [object SVGAnimatedString]"
    ]
   },
   {
@@ -790,6 +792,34 @@
    "ok": true,
    "sample": [
     "the step body holds 3 controls, not 2"
+   ]
+  },
+  {
+   "name": "SVG ring in the map",
+   "ok": true,
+   "sample": [
+    "a ring on the sections' step: [object SVGAnimatedString]"
+   ]
+  },
+  {
+   "name": "SVG ring in the frame",
+   "ok": true,
+   "sample": [
+    "the ring is not on the step's element .nation alone: nation glass bar tap, [object SVGAnimatedString]"
+   ]
+  },
+  {
+   "name": "ring from inside the sheet",
+   "ok": true,
+   "sample": [
+    "the ring is not on the step's element .stats alone: stats glass bar, DIV"
+   ]
+  },
+  {
+   "name": "cyan second ring",
+   "ok": true,
+   "sample": [
+    "the ring is not on the step's element .stats alone: nation glass bar tap, stats glass bar"
    ]
   },
   {
