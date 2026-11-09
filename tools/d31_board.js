@@ -77,7 +77,7 @@ const MEASURE = () => {
     // across: inside its own part; up and down: inside the glass pill that holds it (an Arabic glyph's box runs past a
     // tight line box, as the date's does by 1-2 pt, without leaving its pill)
     const part = el.closest(PARTS), P = part ? part.getBoundingClientRect() : T, pill = el.closest('.bar, .ctl, .spd, .play'), V = pill ? pill.getBoundingClientRect() : T;
-    const who = (Object.keys(NAMES).find((k) => el.closest('.' + k)) || '') , label = (NAMES[who] || who || el.tagName) + ' «' + n.textContent.trim() + '»';
+    const who = (Object.keys(NAMES).find((k) => el.classList.contains(k)) || Object.keys(NAMES).find((k) => el.closest('.' + k)) || ''), label = (NAMES[who] || who || el.tagName) + ' «' + n.textContent.trim() + '»';
     rects.forEach((x) => {
       if (x.left < P.left - 0.5 || x.right > P.right + 0.5 || x.top < V.top - 0.5 || x.bottom > V.bottom + 0.5) clips.push('خارج جزئه: ' + label);
       if (x.left < T.left - 0.5 || x.right > T.right + 0.5 || x.top < T.top - 0.5 || x.bottom > T.bottom + 0.5) clips.push('خارج الصف: ' + label);
@@ -158,7 +158,7 @@ figcaption b { color: var(--t1); }
 thead th { color: var(--t2); font-weight: 500; } tbody th { text-align: start; font-weight: 500; }
 </style></head><body>
 <h1>الصف العلوي في الجوالات الصغيرة (D-31)</h1>
-<p>شاشة اللعب المعتمدة (B3). المستويات: 1 القائد بجانب الاسم، 2 الاسم وحده، 3 مؤشرات أضيق، 4 العلم وحده (الاسم في لوحة الدولة وفي قراءة VoiceOver)، 5 السنة بجانب اليوم. «أعرض القيم»: كل مؤشر بأعرض قيمة ممكنة، وهي المساحة اللي تحجزها اللعبة. ${issues.length ? 'مشاكل: ' + issues.length + '.' : 'لا مشاكل في المستويات التلقائية.'}</p>
+<p>شاشة اللعب المعتمدة (B3). المستويات: 0 البطاقة كاملة، 1 القائد بجانب الاسم، 2 الاسم وحده، 3 مؤشرات أضيق، 4 العلم وحده (الاسم في لوحة الدولة وفي قراءة VoiceOver)، 5 السنة بجانب اليوم. «أعرض القيم»: كل مؤشر بأعرض قيمة ممكنة، وهي المساحة اللي تحجزها اللعبة. ${issues.length ? 'مشاكل: ' + issues.length + '.' : 'لا مشاكل في المستويات التلقائية.'}</p>
 <h2>المستوى الذي يصل إليه كل جوال</h2>
 <div class="wrap">${table}</div>
 <h2>المستوى التلقائي بأعرض القيم</h2>
