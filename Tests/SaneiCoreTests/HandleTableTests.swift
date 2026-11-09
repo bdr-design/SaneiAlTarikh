@@ -84,8 +84,18 @@ final class HandleTableTests: XCTestCase {
         XCTAssertEqual(loaded.serials, t.serials)
         XCTAssertEqual(loaded.rows, t.rows)
         XCTAssertEqual(loaded.nextSerial, t.nextSerial)
+        // the loaded game goes on as the running one would: full tables refuse, and the next thing gets the next serial
         var continued = loaded
+        var running = t
+        XCTAssertTrue(t.isFull, "this life ends with the table full")
+        XCTAssertNil(continued.insert(-1))
+        XCTAssertNil(running.insert(-1))
+        let oldest = try XCTUnwrap(t.serials.first)
+        XCTAssertEqual(continued.remove(oldest), running.remove(oldest))
         XCTAssertEqual(continued.insert(-1)?.raw, t.nextSerial)
+        XCTAssertEqual(running.insert(-1)?.raw, t.nextSerial)
+        XCTAssertEqual(continued.serials, running.serials)
+        XCTAssertEqual(continued.rows, running.rows)
     }
 
     func testAnInconsistentSaveIsRefused() {
