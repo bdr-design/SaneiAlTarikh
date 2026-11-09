@@ -1,7 +1,7 @@
 {
  "se": {
   "device": "667x375 side 0 bottom 0 none",
-  "renderedAt": "2026-11-09T14:56:38.957Z",
+  "renderedAt": "2026-11-09T15:22:57.054Z",
   "inputs": {
    "files": [
     "index.html",
@@ -28,7 +28,7 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "e101a67b1559dcabb027bd54c9f315c58e5b522b"
+   "sha1": "669837ce55e4cad2b831ac9eefcb313a2598c704"
   },
   "issues": [],
   "views": {
@@ -2583,7 +2583,7 @@
       "worst": 15.37
      },
      {
-      "t": "يتناقص مع الإنفاق:",
+      "t": "عائد متناقص:",
       "fs": 10,
       "worst": 8.9
      },
@@ -2593,7 +2593,7 @@
       "worst": 8.9
      },
      {
-      "t": "× جذر الإنفاق ÷ إنفاق مص",
+      "t": "× جذر (الإنفاق ÷ إنفاق م",
       "fs": 10,
       "worst": 8.9
      },
@@ -2603,7 +2603,7 @@
       "worst": 8.9
      },
      {
-      "t": "· البحث",
+      "t": ") · البحث",
       "fs": 10,
       "worst": 8.9
      }
@@ -5998,8 +5998,8 @@
    "_build/se_data_end.png": "d4f4f79dfae94407e44b4b63c9c57153a7830fdb",
    "_build/se_maps.png": "87b4f800db2b0df3a4faa8efb1a39a1e99e0bd78",
    "_build/se_maps_end.png": "b51990995e73b7f3df90b2dec9833a11de79ffc1",
-   "_build/se_values.png": "210db06351c56808f81405017a35d52a29f05beb",
-   "_build/se_values_end.png": "805f11fb2328744424567028468a038c93cf799f"
+   "_build/se_values.png": "0d903b0d50769e523db8aa69b6e8962bdce20516",
+   "_build/se_values_end.png": "7e85e2b909e7543db6dc4a2413a71d74003f393e"
   },
   "env": {
    "chromium": "153.0.8010.12"
@@ -6008,7 +6008,7 @@
  },
  "mini": {
   "device": "812x375 side 50 bottom 21 notch",
-  "renderedAt": "2026-11-09T14:56:57.441Z",
+  "renderedAt": "2026-11-09T15:23:15.937Z",
   "inputs": {
    "files": [
     "index.html",
@@ -6035,7 +6035,7 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "e101a67b1559dcabb027bd54c9f315c58e5b522b"
+   "sha1": "669837ce55e4cad2b831ac9eefcb313a2598c704"
   },
   "issues": [],
   "views": {
@@ -8612,7 +8612,7 @@
       "worst": 15.37
      },
      {
-      "t": "يتناقص مع الإنفاق:",
+      "t": "عائد متناقص:",
       "fs": 10,
       "worst": 8.9
      },
@@ -8622,7 +8622,7 @@
       "worst": 8.9
      },
      {
-      "t": "× جذر الإنفاق ÷ إنفاق مص",
+      "t": "× جذر (الإنفاق ÷ إنفاق م",
       "fs": 10,
       "worst": 8.9
      },
@@ -8632,7 +8632,7 @@
       "worst": 8.9
      },
      {
-      "t": "· البحث",
+      "t": ") · البحث",
       "fs": 10,
       "worst": 8.9
      }
@@ -12887,7 +12887,7 @@
    "_build/mini_maps.png": "fd9f0cf96ab2ec10195a950a665d03fba5f8ad87",
    "_build/mini_maps_end.png": "40a37f5f667c4413e27601547f22307ef4884486",
    "_build/mini_values.png": "bd700968822fab45234ede629f56a38a6a4724ad",
-   "_build/mini_values_end.png": "ef9ae7cc7ea800b1a996b8010d681d41583ae89a"
+   "_build/mini_values_end.png": "4f00d418f292f9f9bce1c0760f67b85b5ba0dc0b"
   },
   "env": {
    "chromium": "153.0.8010.12"
@@ -12896,7 +12896,7 @@
  },
  "i14": {
   "device": "844x390 side 47 bottom 21 notch",
-  "renderedAt": "2026-11-09T14:57:19.048Z",
+  "renderedAt": "2026-11-09T15:23:38.249Z",
   "inputs": {
    "files": [
     "index.html",
@@ -12923,7 +12923,7 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "e101a67b1559dcabb027bd54c9f315c58e5b522b"
+   "sha1": "669837ce55e4cad2b831ac9eefcb313a2598c704"
   },
   "issues": [],
   "views": {
@@ -16180,7 +16180,7 @@
       "worst": 15.37
      },
      {
-      "t": "يتناقص مع الإنفاق:",
+      "t": "عائد متناقص:",
       "fs": 10,
       "worst": 8.9
      },
@@ -16190,7 +16190,7 @@
       "worst": 8.9
      },
      {
-      "t": "× جذر الإنفاق ÷ إنفاق مص",
+      "t": "× جذر (الإنفاق ÷ إنفاق م",
       "fs": 10,
       "worst": 8.9
      },
@@ -16200,7 +16200,7 @@
       "worst": 8.9
      },
      {
-      "t": "· البحث",
+      "t": ") · البحث",
       "fs": 10,
       "worst": 8.9
      }
@@ -20536,8 +20536,8 @@
    "_build/i14_data_end.png": "d6426728d7ae2e2188b6efd172c07ccbad1c0f52",
    "_build/i14_maps.png": "d7cb5bceca7c890d7e667128c180503c6ae4509c",
    "_build/i14_maps_end.png": "4bb2bb88bd49c8793daadc3dde6dfd8b71e15439",
-   "_build/i14_values.png": "f411be7d619d1f43440ef0df139e55ad7a47d6f1",
-   "_build/i14_values_end.png": "e149cebbdf47c73447549ca8165c545319121b9e"
+   "_build/i14_values.png": "3d8a5b51244210216cd1788a883a6c95dd2f345c",
+   "_build/i14_values_end.png": "fd825365d31b26402aca80a24eb87fbe07ebaa12"
   },
   "env": {
    "chromium": "153.0.8010.12"
@@ -20546,7 +20546,7 @@
  },
  "i16": {
   "device": "852x393 side 59 bottom 21 island",
-  "renderedAt": "2026-11-09T14:57:39.264Z",
+  "renderedAt": "2026-11-09T15:23:58.465Z",
   "inputs": {
    "files": [
     "index.html",
@@ -20573,7 +20573,7 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "e101a67b1559dcabb027bd54c9f315c58e5b522b"
+   "sha1": "669837ce55e4cad2b831ac9eefcb313a2598c704"
   },
   "issues": [],
   "views": {
@@ -23779,7 +23779,7 @@
       "worst": 15.37
      },
      {
-      "t": "يتناقص مع الإنفاق:",
+      "t": "عائد متناقص:",
       "fs": 10,
       "worst": 8.9
      },
@@ -23789,7 +23789,7 @@
       "worst": 8.9
      },
      {
-      "t": "× جذر الإنفاق ÷ إنفاق مص",
+      "t": "× جذر (الإنفاق ÷ إنفاق م",
       "fs": 10,
       "worst": 8.9
      },
@@ -23799,7 +23799,7 @@
       "worst": 8.9
      },
      {
-      "t": "· البحث",
+      "t": ") · البحث",
       "fs": 10,
       "worst": 8.9
      }
@@ -27530,7 +27530,7 @@
    "_build/i16_maps.png": "cc70e7cfa99a871e4b68163318bc86019f4e9498",
    "_build/i16_maps_end.png": "4f3f5cbddab3752845bc7080b0f555ff39ec96d5",
    "_build/i16_values.png": "c30307ae04278e46e26d82a44d53d460b83a7067",
-   "_build/i16_values_end.png": "7e85df50598f0d13981f76c3671c57455ebaf951"
+   "_build/i16_values_end.png": "9aa8542fbf131e26de68629843d4effb73d9d1ed"
   },
   "env": {
    "chromium": "153.0.8010.12"
@@ -27539,7 +27539,7 @@
  },
  "i16pro": {
   "device": "874x402 side 62 bottom 21 island",
-  "renderedAt": "2026-11-09T14:57:58.632Z",
+  "renderedAt": "2026-11-09T15:24:17.978Z",
   "inputs": {
    "files": [
     "index.html",
@@ -27566,7 +27566,7 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "e101a67b1559dcabb027bd54c9f315c58e5b522b"
+   "sha1": "669837ce55e4cad2b831ac9eefcb313a2598c704"
   },
   "issues": [],
   "views": {
@@ -30249,7 +30249,7 @@
       "worst": 15.37
      },
      {
-      "t": "يتناقص مع الإنفاق:",
+      "t": "عائد متناقص:",
       "fs": 10,
       "worst": 8.9
      },
@@ -30259,7 +30259,7 @@
       "worst": 8.9
      },
      {
-      "t": "× جذر الإنفاق ÷ إنفاق مص",
+      "t": "× جذر (الإنفاق ÷ إنفاق م",
       "fs": 10,
       "worst": 8.9
      },
@@ -30269,7 +30269,7 @@
       "worst": 8.9
      },
      {
-      "t": "· البحث",
+      "t": ") · البحث",
       "fs": 10,
       "worst": 8.9
      }
@@ -30806,7 +30806,7 @@
       "worst": 15.37
      },
      {
-      "t": "يتناقص مع الإنفاق:",
+      "t": "عائد متناقص:",
       "fs": 10,
       "worst": 8.9
      },
@@ -30816,7 +30816,7 @@
       "worst": 8.9
      },
      {
-      "t": "× جذر الإنفاق ÷ إنفاق مص",
+      "t": "× جذر (الإنفاق ÷ إنفاق م",
       "fs": 10,
       "worst": 8.9
      },
@@ -30826,7 +30826,7 @@
       "worst": 8.9
      },
      {
-      "t": "· البحث",
+      "t": ") · البحث",
       "fs": 10,
       "worst": 8.9
      }
@@ -34579,8 +34579,8 @@
    "_build/i16pro_data_end.png": "8f848a95d6a23433d938c00f5309c41ba8c74f73",
    "_build/i16pro_maps.png": "a1f01694c7f83e391364613378ed7e2fa4a5524e",
    "_build/i16pro_maps_end.png": "e7c72c252db6bbe2376d9d30c2f06080bc2b9e2b",
-   "_build/i16pro_values.png": "6dd91157855e198d6c5c0481da840a4a082fce5f",
-   "_build/i16pro_values_end.png": "6dd91157855e198d6c5c0481da840a4a082fce5f"
+   "_build/i16pro_values.png": "371134811edc6c441d98c81f49eeb7d5ed7282a1",
+   "_build/i16pro_values_end.png": "371134811edc6c441d98c81f49eeb7d5ed7282a1"
   },
   "env": {
    "chromium": "153.0.8010.12"
@@ -34589,7 +34589,7 @@
  },
  "i11": {
   "device": "896x414 side 48 bottom 21 notch",
-  "renderedAt": "2026-11-09T14:58:18.151Z",
+  "renderedAt": "2026-11-09T15:24:37.339Z",
   "inputs": {
    "files": [
     "index.html",
@@ -34616,7 +34616,7 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "e101a67b1559dcabb027bd54c9f315c58e5b522b"
+   "sha1": "669837ce55e4cad2b831ac9eefcb313a2598c704"
   },
   "issues": [],
   "views": {
@@ -37234,7 +37234,7 @@
       "worst": 15.37
      },
      {
-      "t": "يتناقص مع الإنفاق:",
+      "t": "عائد متناقص:",
       "fs": 10,
       "worst": 8.9
      },
@@ -37244,7 +37244,7 @@
       "worst": 8.9
      },
      {
-      "t": "× جذر الإنفاق ÷ إنفاق مص",
+      "t": "× جذر (الإنفاق ÷ إنفاق م",
       "fs": 10,
       "worst": 8.9
      },
@@ -37254,7 +37254,7 @@
       "worst": 8.9
      },
      {
-      "t": "· البحث",
+      "t": ") · البحث",
       "fs": 10,
       "worst": 8.9
      }
@@ -37778,7 +37778,7 @@
       "worst": 15.37
      },
      {
-      "t": "يتناقص مع الإنفاق:",
+      "t": "عائد متناقص:",
       "fs": 10,
       "worst": 8.9
      },
@@ -37788,7 +37788,7 @@
       "worst": 8.9
      },
      {
-      "t": "× جذر الإنفاق ÷ إنفاق مص",
+      "t": "× جذر (الإنفاق ÷ إنفاق م",
       "fs": 10,
       "worst": 8.9
      },
@@ -37798,7 +37798,7 @@
       "worst": 8.9
      },
      {
-      "t": "· البحث",
+      "t": ") · البحث",
       "fs": 10,
       "worst": 8.9
      }
@@ -41420,8 +41420,8 @@
    "_build/i11_data_end.png": "8ba5a6fd5f5e51daecfcd4d00b416cf2f6ac23c1",
    "_build/i11_maps.png": "9a016dbeb09b980c6a4ce6ec8e2dd04d8b8ee672",
    "_build/i11_maps_end.png": "80ace1b56bb3bfeefdb30ad0a481bbc89b86db37",
-   "_build/i11_values.png": "af8e62ebef33e26a53175511a5a6a3a2a9705a5c",
-   "_build/i11_values_end.png": "af8e62ebef33e26a53175511a5a6a3a2a9705a5c"
+   "_build/i11_values.png": "92d26903a3475c985d18319d5563642e21c3e3c9",
+   "_build/i11_values_end.png": "92d26903a3475c985d18319d5563642e21c3e3c9"
   },
   "env": {
    "chromium": "153.0.8010.12"
@@ -41430,7 +41430,7 @@
  },
  "i16promax": {
   "device": "956x440 side 62 bottom 21 island",
-  "renderedAt": "2026-11-09T14:58:37.749Z",
+  "renderedAt": "2026-11-09T15:24:57.538Z",
   "inputs": {
    "files": [
     "index.html",
@@ -41457,7 +41457,7 @@
     "header_cairo.jpg",
     "map_overlay_cairo.svg"
    ],
-   "sha1": "e101a67b1559dcabb027bd54c9f315c58e5b522b"
+   "sha1": "669837ce55e4cad2b831ac9eefcb313a2598c704"
   },
   "issues": [],
   "views": {
@@ -44100,7 +44100,7 @@
       "worst": 15.37
      },
      {
-      "t": "يتناقص مع الإنفاق:",
+      "t": "عائد متناقص:",
       "fs": 10,
       "worst": 8.9
      },
@@ -44110,7 +44110,7 @@
       "worst": 8.9
      },
      {
-      "t": "× جذر الإنفاق ÷ إنفاق مص",
+      "t": "× جذر (الإنفاق ÷ إنفاق م",
       "fs": 10,
       "worst": 8.9
      },
@@ -44120,7 +44120,7 @@
       "worst": 8.9
      },
      {
-      "t": "· البحث",
+      "t": ") · البحث",
       "fs": 10,
       "worst": 8.9
      }
@@ -44643,7 +44643,7 @@
       "worst": 15.37
      },
      {
-      "t": "يتناقص مع الإنفاق:",
+      "t": "عائد متناقص:",
       "fs": 10,
       "worst": 8.9
      },
@@ -44653,7 +44653,7 @@
       "worst": 8.9
      },
      {
-      "t": "× جذر الإنفاق ÷ إنفاق مص",
+      "t": "× جذر (الإنفاق ÷ إنفاق م",
       "fs": 10,
       "worst": 8.9
      },
@@ -44663,7 +44663,7 @@
       "worst": 8.9
      },
      {
-      "t": "· البحث",
+      "t": ") · البحث",
       "fs": 10,
       "worst": 8.9
      }
@@ -47317,8 +47317,8 @@
    "_build/i16promax_data_end.png": "7c6c69d54d9b23da617e0f9d2a48e6b21f1b2afc",
    "_build/i16promax_maps.png": "f57bd81c5dbea3391bbd0aa9f7a5fefd6dfd8c27",
    "_build/i16promax_maps_end.png": "9e7882f9905dcc27f20d9dbdd28babc2be002ebd",
-   "_build/i16promax_values.png": "b2b5771ce1670cd669ebc4671693b398e50e6d1c",
-   "_build/i16promax_values_end.png": "b2b5771ce1670cd669ebc4671693b398e50e6d1c"
+   "_build/i16promax_values.png": "0ce98ab8d91536104d4b6d0bd97130c3e33346d4",
+   "_build/i16promax_values_end.png": "0ce98ab8d91536104d4b6d0bd97130c3e33346d4"
   },
   "env": {
    "chromium": "153.0.8010.12"
