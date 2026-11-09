@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-09T14:56:01.513Z",
+ "ranAt": "2026-11-09T15:00:49.023Z",
  "inputs": {
   "files": [
    "index.html",
@@ -26,7 +26,7 @@
    "header_cairo.jpg",
    "map_overlay_cairo.svg"
   ],
-  "sha1": "7f88a726260d7303285260df63100ad7f292689d"
+  "sha1": "e101a67b1559dcabb027bd54c9f315c58e5b522b"
  },
  "cleanIssues": {
   "i16promax": [],
@@ -45,10 +45,7 @@
   "se_data_end": [],
   "se_maps": [],
   "se_maps_end": [],
-  "se_values": [
-   "brief text not fully visible: معدل نقاط البحث",
-   "brief text not fully visible: يتناقص مع الإنفاق: 18 × جذر الإنفاق ÷ إنفاق مصر 2011 · البحث"
-  ],
+  "se_values": [],
   "se_values_end": [],
   "se_data_at98": [],
   "se_data_at196": [],
