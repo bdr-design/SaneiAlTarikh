@@ -1605,7 +1605,7 @@ Unchanged:
 | Small controls | 32 pt visual, **44 pt hit area** |
 | Bottom dock | 44 pt, above the home-indicator inset |
 | Type sizes | 10 / 11.5 / 13 / 14, plus a display title size |
-| Spacing | 4 / 8 / 12 |
+| Spacing | 4 / 8 / 12 (one exception: the top row's indicator chips at 2 pt a side from fit level 3, §6.3, D-31) |
 | Radii | 10 / 12 |
 | Glass | Superseded by D-3: every HUD box and panel is opaque `rgb(12,20,28)` with the 1 px cyan-tinted border and no blur. The approved mockups of screens 1–3 still draw `rgba(9,17,25,0.66)` with blur; the build drops it (shown to the owner first). |
 | Accents | Cyan and teal; calm, low-glare palette; not pure black; no harsh neon |
@@ -1637,7 +1637,7 @@ Unchanged:
 
 ```
 ┌──────────────────────────────────────────────────────────────────────────────────────────┐
-│ [⏸ ×2 ▾] 12 مارس 2011 │ البحث · النفوذ · القوى البشرية · الشرعية · الاستقرار · الخزينة │ [علم] مصر │ 36 pt
+│ [⏸ ×2 ▾] 12 مارس 2011 │ البحث · النفوذ · القوة البشرية · الشرعية · الاستقرار · الخزينة │ [علم] مصر │ 36 pt
 │ ┌toast┐                                                                                  │
 │ [▦ أوضاع الخريطة]                 satellite map, full-bleed (left-to-right inside)       │
 │ [⌖ دولتي]                         labels hide under every HUD rectangle                  │
@@ -1646,45 +1646,61 @@ Unchanged:
 └──────────────────────────────────────────────────────────────────────────────────────────┘
 ```
 
-**Width classes use the usable width** U = safe-area width − 2 × 8 pt:
+**The row's width** is B3's: W = screen width − 2 × max(side safe inset, 8 pt) (the HUD's gutter: 8 pt only where the
+inset is smaller). Measured: SE 651, 12/13 mini 712, 14/15 750, 16 734, 16 Pro 750, XR/11 800, Pro Max 832. There are no
+width classes: the level comes from measurement alone, on every phone the same chain.
 
-| Class | U (pt) | Typical devices (U est.) | Starting variant |
-|---|---|---|---|
-| Wide | ≥820 | 17 Pro Max ≈ 820–830; 16 Plus / Pro Max ≈ 790–810 fall to Regular | Flag, name (full if it fits, else short), regime line if it fits; chips with trends |
-| Regular | 700–819 | 844–896 pt models ≈ 700–790; 12/13 mini (812) ≈ 700–710 | Flag and short name; chips with trends if they fit |
-| Compact | <700 | SE 667 ≈ 651 | Flag and short name; values at 11.5 pt; no trends |
+**Reserved widths.** Each indicator chip is measured at its widest value class, not the value shown, so a value
+changing in play never moves the row or changes the level (§2.5): the treasury «−999.9 مليار $» or «−99.9 تريليون $»,
+stability «100%», legitimacy «100», manpower «999.9 مليون» or «99.9 مليار», influence «100», research «+999 / شهر» or
+«−999 / شهر» (the widest of each set reserved). The date keeps the room of the widest of «28/30 <month> 2088/2100» over
+all twelve months and of the seven weekday names; at level 5, of «28/30 <month>» and «<weekday> · 2088».
 
 **Fit engine (D-31, as screen 1 B3 implements it and the owner approved).** The name is always the short name (§3.10).
-A deterministic chain of levels runs from 0 until the measured top row (nation card + 8 + indicators + 8 + date and
-speed) fits U and no name runs out of its box:
-0. full card: flag, name and leader on the first line, the regime below
-1. the regime moves under the name and leader (one grid, no separator)
+A deterministic chain of levels runs from 0 until the top row (nation card + 8 + indicators + 8 + date and speed) fits
+W and no name runs out of its box:
+0. full card: flag, the name on the first line, «leader · regime» below
+1. the leader moves up beside the name and the regime stands alone below (same three lines' text, no separator):
+   narrower only when the leader line is the longest; otherwise the chain goes straight on to 2
 2. the name alone (leader and regime leave the card)
-3. the indicator chips' side padding tightens (2 pt per chip, 4 pt inside the row)
-4. the nation card shows the flag alone; the name stays in the card's VoiceOver label («الدولة: name، leader، regime»)
-   and in the State panel's header
+3. the indicator chips tighten: each chip's side padding 4 → 2 pt (chips 4 pt apart instead of 8) and the strip's end
+   padding 8 → 4 pt (text 6 pt from the strip's ends instead of 12); the 44 pt minimum chip width and the 44 × 44 hit
+   boxes stay. The 2 pt is an approved exception to the 4/8/12 scale (§6.2), kept at levels 3–5: the chips' hairline
+   dividers still separate them, and without it the SE does not fit (level 5 with the widest values needs 640.7 of
+   651; untightened it would need about 669). A flag-only level with untightened chips is not added: it would fit only
+   phones that already fit level 4, for one more level and one more re-layout (lightness).
+4. the nation card shows the flag alone (22 × 16.5, in a 48 × 36 card that stays a button to the State panel); the
+   country is still named by the map's label, by «دولتي» which recentres on it, by the card's VoiceOver label
+   («الدولة: name، leader، regime») and by the State panel's header
 5. the year moves up beside the weekday («السبت · 2011» over «1 يناير»)
-The date keeps the room of the widest date at every level («28 أغسطس 2088»; at level 5 the widest without the year),
-so the row never moves as the days pass. Not used: dropping the trend arrows, 10 pt values and the «12/3/2011» short
-date (the arrows carry the trend in colour and words; 10 pt values and a numeric date read worse than the flag-only card).
-Levels reached with the 2011 names (`design/d31/board.html`, `tools/d31_board.js`): the SE at 4 with every name,
-Egypt's included; the mini at 2 with Egypt and at 4 with the longest short name («الكونغو الديمقراطية»); the 14 and
-16 Pro at 1 to 3; the 16 at 2 to 4; the 11 and the 17 Pro Max at 0. Level 5 is a safety net no 2011 name reaches; it
-fits the SE with the longest name.
+Not used: dropping the trend arrows, 10 pt values and the «12/3/2011» short date (the arrows carry the trend in colour
+and words; smaller values and a numeric date read worse than the flag-only card).
 
-Measurements use the **player's current name, leader and regime** (measured again only when one of them changes, §2.5's fit engine) and **reserved widths for each chip's longest value class**, for example «−999.9 مليار» for the treasury, in Western digits.
+**Where it runs.** The fit never runs on the main thread (L14, ADR 0001): on a trigger (a campaign's start, an inset
+change, or a change of the player's name, leader or regime, §2.5) a bounded background job measures each string once
+with the bundled font and thread-safe CoreText (CTLine typographic bounds): the name, leader and regime in their
+styles, each chip at both paddings with its reserved value class, and the date rooms. It picks the level by adding up
+widths (no layout per level) and hands the main thread only the level and the card's VoiceOver label. The date rooms
+and the chip reservations do not depend on the country, so they are measured once per launch and cached (the HUD has
+no Dynamic Type, §6.10). ViewThatFits and per-pass measurement are not used for the top row.
+
+**Levels reached** (`tools/d31_board.js`, `design/d31/board.html`), with the reserved widths, for Egypt / the longest
+short name «الكونغو الديمقراطية» with its 2011 leader and regime / a worst case (that name with «عبدالله بن عبدالعزيز»
+and «جمهورية رئاسية اتحادية»): SE 5 / 5 / 5; mini 3 / 4 / 4; 14 and 16 Pro 2 / 4 / 4; 16 3 / 4 / 4; 11 1 / 3 / 3;
+Pro Max 0 / 2 / 2. Level 5 fits the SE in every case with 10 pt to spare. (With the mock-up's own 2011 values the
+levels are lower: the SE at 4, the 11 and the Pro Max at 0 with Egypt.)
 
 **Snapshot fit tests** run in CI for the SE (667), 12/13 mini (812), XR/11 (896), 14/15 (844/852), 16 Pro (874), Plus/Pro Max (926/932) and 17 Pro Max (956). They use the longest short names the HUD shows (§3.10: «الكونغو الديمقراطية», «سانت فينسنت») with their leaders and regimes, and the widest values. Nothing may clip.
 
-The small-phone variants (levels 4 and 5) were approved under the owner's delegation (T-035, decisions.json
-`d31SmallPhoneTopRow`) after the owner approved screen 1 on all 7 phones. Safe-area inset values per model are
+The small-phone variants (levels 3 to 5) are recorded for approval under the owner's delegation (T-035, under review),
+after the owner approved screen 1 on all 7 phones. Safe-area inset values per model are
 unverified, so the tests read them from the simulator.
 
 ### 6.4 HUD components
 
 As before:
-- **Nation card (top right):** flag 24×16, name at 13 pt (or a fit-engine variant). Tap opens the State panel.
-- **Indicator strip (top centre):** الخزينة (treasury, with the monthly net arrow), الاستقرار (stability), الشرعية (legitimacy), القوى البشرية (available manpower), النفوذ (influence), البحث (research points per month).
+- **Nation card (top right):** flag 22×16.5 (4:3), name 14 pt bold (17 pt line), leader and regime 10 pt medium (12 pt line), 12 pt side padding; or a fit level of §6.3 (48 × 36 at flag-only). Tap opens the State panel.
+- **Indicator strip (top centre):** الخزينة (treasury, with the monthly net arrow), الاستقرار (stability), الشرعية (legitimacy), القوة البشرية (available manpower), النفوذ (influence), البحث (research points per month).
   - Values are rounded and update at most 4 times a second. Tapping a chip opens its «لماذا؟» sheet.
   - Stability bands: <25 red, 25–49 amber, 50–74 neutral, ≥75 teal.
   - **Manpower shows available plus the reserve pool** («+ احتياط», plus reserve).
@@ -2260,7 +2276,7 @@ These answers override the defaults below. They are logged in `decisions/decisio
 | D-26 | NASA Blue Marble NG with topography and bathymetry | Chosen from the owner's criteria (light and realistic). An AI-generated map was declined because it cannot match real geography. Pending: bathymetry licence check; owner approves the look on the device. |
 | D-27 | Equipment: 20-year spending + legacy stock + imports | As recommended. |
 | D-30 | No personality traits for real leaders | As recommended. |
-| D-31 | Small-phone top row | Covered: the owner approved screen 1 (B3) after seeing all 7 devices; its fit levels recorded and the small-phone variants approved under the delegation (T-035, §6.3). |
+| D-31 | Small-phone top row | Covered: the owner approved screen 1 (B3) after seeing all 7 devices; its fit levels recorded for the small-phone variants (T-035, §6.3, under review). |
 | **Military control** | **Full control of each army** (owner's reference: «الجنرال | الحرب العالمية») | **Replaces "automated fronts only" (§5.4).** The player orders each army: move, attack, halt and waypoints. AI countries run their own armies the same way. Consequences: an order queue and unit selection UI, per-army routing on demand (the daily routing budget in §5.4 must be re-measured), operational AI per army, and the M4 estimate grows (roughly +3–5 weeks; unverified, re-estimate at M4 planning). Equipment stays generic; air and naval stay simplified in v1. |
 
 ### 13.1 Design and technical choices
@@ -2302,7 +2318,7 @@ These answers override the defaults below. They are logged in `decisions/decisio
 | D-27 Equipment stock rule | M4 (seed data starts in M2) | <ul><li>**Default: your 20-year spending rule, plus the older inventories that existed in 1991 and arms received from abroad**, kept as a running stock with losses and captures. About +2 weeks of data work. Fixes understated starting forces for Ukraine, Syria, North Korea and Egypt.</li><li>Spending only, as originally stated: simpler, but those countries start with a fraction of their real forces.</li></ul> |
 | D-29 Rival governments | M1c | <ul><li>**Default: any government that administers at least one province on the start date is playable**, chosen from a small chooser. The UN-seat holder is selected by default (for example Ouattara or Gbagbo in Côte d'Ivoire). About 1 week of UI work plus one screen design.</li><li>Only UN-seat holders playable: no chooser.</li><li>Also governments in exile at the start: needs exile gameplay at the start (for 1990 packs).</li></ul> |
 | D-30 Leaders' traits | M3 | <ul><li>**Default: no personality traits are written or shown for real people.** AI behaviour comes from regime, bloc and data. Generated future leaders may have traits marked «شخصية مولّدة» (generated character). Neutral, and lower legal and App Store risk.</li><li>Traits for real leaders with a disclaimer: more flavour, but invented judgements of real people. Not recommended.</li></ul> |
-| D-31 Small-phone top row | M1c | **Designed and approved (T-035):** the ordered levels of §6.3 (regime under the name → the name alone → tighter chips → flag-only card → the year beside the weekday), as screen 1 B3 implements them; `design/d31/board.html` shows every phone's level. |
+| D-31 Small-phone top row | M1c | **Designed, under review (T-035):** the ordered levels of §6.3 (regime under the name → the name alone → tighter chips → flag-only card → the year beside the weekday), as screen 1 B3 implements them; `design/d31/board.html` shows every phone's level. |
 | D-25 Schedule and cut policy | M0 | <ul><li>**Default: a planning range of 95–125 weeks**, re-estimated from measured velocity after M0b and M1a. When slipping, cut content in the §9 order. Anything touching your decisions (markets, parties, full espionage, scenarios, satellite map) comes back to you. No hidden cost; honest dates.</li><li>A fixed date (for example 70 weeks) with feature cuts: earlier release, but your v1 decisions would have to shrink.</li><li>An earlier "v0.5" with economy, politics and the map only, then the rest: something to play sooner; same total time.</li></ul> |
 
 ### 13.3 Approvals and inputs the user must provide
