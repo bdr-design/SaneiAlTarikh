@@ -8,7 +8,9 @@
 // four sides. At the automatic level and at the flag-only levels it checks the accessible name VoiceOver gets for the
 // nation card (computed by the browser, so aria-hidden or a lost role fails). Writes design/d31/board.html, its strips
 // and design/d31/report.json. Exit 1 on a clip or a row that does not fit at any automatic level, a wrong accessible
-// name, or a level 5 that does not fit the SE with the widest values and the worst names.
+// name, a level 5 that does not fit the SE with the widest values and the worst names, or a planted break the board
+// misses (its own self-test on the SE: a removed label or unit, a value at font-size 0, a transparent date, a hidden chip,
+// a label pushed out of its chip, a nation card without its role).
 // Usage: NODE_PATH=... node tools/d31_board.js
 const fs = require('fs'), path = require('path');
 const { chromium } = require('playwright');
@@ -97,14 +99,21 @@ const MEASURE = () => {
   // every part shows what it must, as the browser sees it (display, visibility and opacity up the tree): six chips, each
   // with its label, value and unit; the date's two lines; the name except where the level drops it
   const seen = (e) => !!e && e.getClientRects().length > 0 && e.checkVisibility({ opacityProperty: true, visibilityProperty: true });
+  // the parts each chip must have, in order: its label, its value and, for three of them, its unit
+  const MUST = [['الخزينة', true], ['الاستقرار', false], ['الشرعية', false], ['القوة البشرية', true], ['النفوذ', false], ['البحث', true]];
   const chips = [...document.querySelectorAll('.top .stat')];
   if (chips.filter(seen).length !== 6) clips.push('مؤشرات ظاهرة: ' + chips.filter(seen).length + ' من 6');
-  chips.forEach((c) => { const lb = c.querySelector('.lbl'); ['.lbl', '.num', '.unit'].forEach((sel) => c.querySelectorAll(sel).forEach((e) => { if (!seen(e)) clips.push('نص مخفي في «' + (lb ? lb.textContent.trim() : '?') + '»: ' + sel); }));
-    if (!c.querySelector('.num')) clips.push('مؤشر بلا قيمة: «' + (lb ? lb.textContent.trim() : '?') + '»'); });
-  ['.date .dow', '.date .dmy'].forEach((sel) => { if (!seen(document.querySelector(sel))) clips.push('نص مخفي: ' + sel); });
+  // text that is there but cannot be read: no box, zero size, or no colour
+  const readable = (e) => { if (!seen(e) || !e.textContent.trim()) return false; const c = getComputedStyle(e);
+    return parseFloat(c.fontSize) > 0 && !/rgba\([^)]*,\s*0\)|transparent/.test(c.color) && [...e.getClientRects()].some((x) => x.width > 0.5 && x.height > 0.5); };
+  MUST.forEach(([name, unit], i) => { const c = chips[i]; if (!c) { clips.push('مؤشر ناقص: «' + name + '»'); return; }
+    const lb = c.querySelector('.lbl'); if (!lb || lb.textContent.trim() !== name || !readable(lb)) clips.push('اسم المؤشر ناقص أو مخفي: «' + name + '»');
+    const num = c.querySelector('.num'); if (!num || !readable(num)) clips.push('قيمة ناقصة أو مخفية: «' + name + '»');
+    const u = c.querySelector('.unit'); if (unit && (!u || !readable(u))) clips.push('وحدة ناقصة أو مخفية: «' + name + '»'); });
+  ['.date .dow', '.date .dmy'].forEach((sel) => { if (!readable(document.querySelector(sel))) clips.push('نص مخفي: ' + sel); });
   const lvl = +root.dataset.fit;
-  if (lvl < 4 && !seen(document.querySelector('.ntext .nm'))) clips.push('نص مخفي: اسم الدولة');
-  if (lvl < 2) ['.ntext .ldr', '.ntext .rg'].forEach((sel) => { if (!seen(document.querySelector(sel))) clips.push('نص مخفي: ' + sel); });
+  if (lvl < 4 && !readable(document.querySelector('.ntext .nm'))) clips.push('نص مخفي: اسم الدولة');
+  if (lvl < 2) ['.ntext .ldr', '.ntext .rg'].forEach((sel) => { if (!readable(document.querySelector(sel))) clips.push('نص مخفي: ' + sel); });
   if (!seen(document.querySelector('.nation .flag, .nation img'))) clips.push('العلم مخفي');
   for (let i = 0; i < texts.length; i++) for (let j = i + 1; j < texts.length; j++) {
     const a = texts[i], b = texts[j]; if (a.node === b.node) continue;
@@ -157,8 +166,40 @@ const MEASURE = () => {
       }
     } finally { fs.unlinkSync(tmp); }
   }
+  // the board's own planted tests: each break, on the SE (worst names, widest values, the automatic level), must be caught
+  const PLANTS = [
+    ['a removed label', () => document.querySelector('.stat .lbl').remove()],
+    ['a removed unit', () => document.querySelector('.stat .unit').remove()],
+    ['a value at font-size 0', () => { document.querySelectorAll('.stat .num')[1].style.fontSize = '0px'; }],
+    ['a transparent date', () => { document.querySelector('.date .dmy').style.color = 'transparent'; }],
+    ['a hidden chip', () => { document.querySelectorAll('.stat')[5].style.display = 'none'; }],
+    ['a label pushed out of its chip', () => { const l = document.querySelector('.stat .lbl'); l.style.position = 'relative'; l.style.left = '40px'; }],
+    ['a nation card without its role', () => { document.querySelector('.nation').setAttribute('aria-hidden', 'true'); }],
+  ];
+  const se = DEV.find((d) => d.id === 'se'), s0 = SETS.worst, missed = [];
+  const tmp0 = path.join(D, 'screen1/B3', 'index.d31_plant.html'); fs.writeFileSync(tmp0, sub(raw, s0));
+  try {
+    const ctx = await b.newContext({ viewport: { width: se.w, height: se.h }, deviceScaleFactor: 1 });
+    for (const [label, plant] of [['none', null], ...PLANTS]) {
+      const p = await ctx.newPage();
+      await p.goto('file://' + tmp0 + `?w=${se.w}&h=${se.h}&side=${se.side}&bottom=${se.bottom}&cutout=${se.cutout}`);
+      await p.waitForFunction(() => window.__ready === true, null, { timeout: 30000 }).catch(() => {});
+      await p.evaluate(PREPARE, { widest: true, force: null, classes: WIDEST });
+      if (plant) await p.evaluate(plant);
+      await p.waitForTimeout(50);
+      const m = await p.evaluate(MEASURE);
+      const voice = await p.getByRole('button', { name: `الدولة: ${s0.nm}، ${s0.ldr}، ${s0.rg}`, exact: true }).count();
+      await p.close();
+      const caught = m.clips.length > 0 || !m.fits || voice !== 1;
+      if (!plant && caught) issues.push('board self-test: the clean SE render reports ' + (m.clips.join('; ') || 'a fault'));
+      if (plant && !caught) missed.push(label);
+    }
+    await ctx.close();
+  } finally { fs.unlinkSync(tmp0); }
+  if (missed.length) issues.push('board self-test missed: ' + missed.join(', '));
+  else console.log(`board self-test OK: ${PLANTS.length} planted breaks caught`);
   await b.close();
-  fs.writeFileSync(path.join(OUT, 'report.json'), JSON.stringify({ ranAt: new Date().toISOString(), issues, widestClasses: WIDEST, rows }, null, 1));
+  fs.writeFileSync(path.join(OUT, 'report.json'), JSON.stringify({ ranAt: new Date().toISOString(), issues, widestClasses: WIDEST, selfTest: { plants: PLANTS.map((x) => x[0]), missed }, rows }, null, 1));
   const esc = (t) => String(t).replace(/&/g, '&amp;').replace(/</g, '&lt;');
   const LV = ['0 · البطاقة كاملة', '1 · القائد بجانب الاسم', '2 · الاسم وحده', '3 · مؤشرات أضيق', '4 · العلم وحده', '5 · السنة بجانب اليوم'];
   const MODE = { sample: 'قيم 2011', widest: 'أعرض القيم' };

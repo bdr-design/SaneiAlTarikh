@@ -62,7 +62,7 @@ const HALF = (() => { const m = DOC.match(/decays toward 0 with a half-life of (
 const RES = (() => { const m = DOC.match(/\*\*Research points a month\*\* = (\d+) × √\(S ÷ S₀\)/); if (!m) throw new Error('§5.7: the research rate not found'); return m[1]; })();
 const CAPT = (() => { const m = DOC.match(/capture rate: (\d+)% of the equipment the loser loses \(`design-target`/); if (!m) throw new Error('§5.4: the capture rate not found'); return m[1]; })();
 if (!/Agency levels \(`design-target`/.test(DOC)) throw new Error('§4.3: the agency levels are not design-target');
-const VALUES = [['تلاشي فرق الاضطراب الأولي', 'نصف عمر ' + HALF + ' سنوات', 'الداخلية والسياسة'], ['الاستيلاء على العتاد', CAPT + '% مما يخسره المهزوم', 'الجيش'], ['مستوى أجهزة الاستخبارات', 'يُضبط لكل دولة', 'الاستخبارات'], ['معدل نقاط البحث', 'يزيد مع الإنفاق بعائد متناقص: ' + RES + ' × جذر (الإنفاق ÷ إنفاق مصر 2011)', 'البحث']];
+const VALUES = [['تلاشي فرق الاضطراب الأولي', 'نصف عمر ' + HALF + ' سنوات', 'الداخلية والسياسة'], ['الاستيلاء على العتاد', CAPT + '% مما يخسره المهزوم', 'الجيش'], ['مستوى أجهزة الاستخبارات', 'يُضبط لكل دولة', 'الاستخبارات'], ['معدل نقاط البحث', 'عائد متناقص: ' + RES + ' × جذر (الإنفاق ÷ إنفاق مصر 2011)', 'البحث']];
 const NOTES = { data: 'أهم مصادر أرقام البداية ومعايرة النماذج، ثم تتغير بقراراتك.', nasa: 'استخدام صور ناسا لا يعني أن ناسا تؤيد اللعبة.', flags: 'الأعلام لتعريف الدول داخل اللعبة فقط.',
   values: 'قيم ضبطناها للعب حيث لا توجد بيانات تُقاس بها، فلا نعدّها جزءًا من واقعية اللعبة.' };
 const IMAGES = ['صور اللعبة', 'صُنعت خصيصًا لهذه اللعبة'];

@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-09T14:38:32.304Z",
+ "ranAt": "2026-11-09T15:23:34.995Z",
  "issues": [],
  "widestClasses": [
   [
@@ -59,6 +59,18 @@
    ]
   ]
  ],
+ "selfTest": {
+  "plants": [
+   "a removed label",
+   "a removed unit",
+   "a value at font-size 0",
+   "a transparent date",
+   "a hidden chip",
+   "a label pushed out of its chip",
+   "a nation card without its role"
+  ],
+  "missed": []
+ },
  "rows": [
   {
    "dev": "se",
