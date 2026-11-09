@@ -51,8 +51,14 @@ actor IOEngine {
                 let previous = logs.appendingPathComponent(Self.previousLogName)
                 // one rename(2): it replaces ring-previous.log in a single step; a missing ring.log (the first launch) is
                 // no failure. A failed rotation loses only the previous log, never the saves folder's state.
-                if rename(current.path, previous.path) != 0 && errno != ENOENT {
-                    RingLog.shared.log("ring log rotate failed: errno \(errno)")
+                if rename(current.path, previous.path) != 0 {
+                    var e = errno
+                    if e == EISDIR || e == ENOTEMPTY || e == EEXIST {
+                        // ring-previous.log is a folder (made in Files): the old code removed it, so does this
+                        try? FileManager.default.removeItem(at: previous)
+                        e = rename(current.path, previous.path) == 0 ? 0 : errno
+                    }
+                    if e != 0 && e != ENOENT { RingLog.shared.log("ring log rotate failed: \(String(cString: strerror(e)))") }
                 }
             } catch {
                 RingLog.shared.log("logs folder failed: \(error)")

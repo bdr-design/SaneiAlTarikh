@@ -150,10 +150,15 @@ The fix passed the two reviews and four verification rounds (the last found noth
   the last 10 seconds.
   - The link was never late (0 ms) and frames were shown on time (≤ 0.03 ms), so the cadence was the system's choice
     inside the link's 30–120 range.
-  - The new link columns also explain the earlier 54 ms gaps as the same kind of system rate change, though those runs
-    lacked the columns to prove it.
-  - Fix: the range is fixed at 60 (§3's Interacting rate).
-- **Over:** the launch's I/O was 2 operations, worst 7.13 ms (before: 2.91 ms). These are the folders, the rotation and
-  the first open of ring.log, metered together. Fix: folders are made only when missing, and the rotation is one
-  rename(2). Their times and the log file's open time go to the ring log separately.
+  - The hitch rule hides such a step (48 a second is counted 0 a gap): run 1 was 120 frames short of 3,600 (3.3 %).
+  - The second build's 54 ms gaps looked different: single gaps with an instant return, missing callbacks, off the
+    120 Hz grid. They remain unexplained; the third build had none.
+  - Fix: the range is fixed at 60 (§3's Interacting rate). A new column, `stale_refreshes`, adds g − 1 for every
+    presented gap of g sixtieths above 1.1, so a lowered cadence shows.
+  - Overall the 0-hitch budget is not met in 3 of 5 runs.
+- **Over:** the launch's I/O was 2 operations, worst 7.13 ms (2.91 ms in the second build, with the same code). The two
+  operations are `prepareFolders` and the first flush. Only the worst is reported, so which one cost it is not known,
+  and neither is whether it is one launch's variance. Done: instrumented (the folders-and-rotation time and the log
+  file's open time go to the ring log; the first write is what remains) and a small trim (folders are made only when
+  missing; the rotation is one rename(2), removing a ring-previous.log folder first, as before).
 - 2–3 drawables are dropped at the start of each load (no gap, no hitch).
