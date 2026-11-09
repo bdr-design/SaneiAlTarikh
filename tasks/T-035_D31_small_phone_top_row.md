@@ -38,3 +38,12 @@ longest; level 5 never, with the mock-up's own values: the reviewers showed the 
    test, `tools/stress_names.js`, checks screen 5's header).
 3. §6.3 matches B3 exactly; §9 and §13 rows for D-31 updated.
 4. Six independent read-only reviews; every confirmed finding fixed; verification reviews of the fixes.
+
+## Outcome (2026-11-09)
+Approved by Claude under the owner's delegation (`d31SmallPhoneTopRow`). AC1: the board shows every phone at its automatic
+level (3 name sets × 2 value modes) and levels 0–5 forced on the SE and the mini; no clip at any automatic level; level 5
+fits the SE with the widest values and the worst names (648.5 of 651 pt); the board's own self-test catches 14 planted
+breaks. AC2: the accessible name is checked through the browser's computed role and name; the second-country test
+(`tools/stress_names.js`, screen 5 included) gives 560 renders, 0 issues. AC3: §6.3 matches B3; §9 and §13 rows updated.
+AC4: six reviewers, then six verification rounds (`reviewEveryFix`); every confirmed finding fixed; the last round found
+nothing. Side effects: §5.7's research rate became 18 × √(S ÷ S₀) (OWNER PROXY); screens 12 and 29 regated PASS.
