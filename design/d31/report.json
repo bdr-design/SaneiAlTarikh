@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-09T15:29:01.519Z",
+ "ranAt": "2026-11-09T15:36:25.082Z",
  "issues": [],
  "widestClasses": [
   [
@@ -71,6 +71,8 @@
    "a value's digits at font-size 0",
    "a value's digits transparent (modern colour syntax)",
    "a wrong unit",
+   "digits with a transparent text fill",
+   "digits squeezed to no width",
    "a transparent country name",
    "a country name at font-size 0"
   ],

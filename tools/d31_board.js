@@ -10,8 +10,9 @@
 // and design/d31/report.json. Exit 1 on a clip or a row that does not fit at any automatic level, a wrong accessible
 // name, a level 5 that does not fit the SE with the widest values and the worst names, or a planted break the board
 // misses (its own self-test: on the SE, a removed label or unit, a wrong unit, a value or its digits at font-size 0,
-// transparent digits, a transparent date, a hidden chip, a label pushed out of its chip, a nation card hidden from
-// VoiceOver; on the iPhone 16 with Egypt's names (level 3), a transparent or zero-size country name).
+// transparent digits or text fill, digits squeezed to no width, a transparent date, a hidden chip, a label pushed out of
+// its chip, a nation card hidden from VoiceOver; on the iPhone 16 with Egypt's names (level 3), a transparent or
+// zero-size country name).
 // Usage: NODE_PATH=... node tools/d31_board.js
 const fs = require('fs'), path = require('path');
 const { chromium } = require('playwright');
@@ -102,12 +103,12 @@ const MEASURE = () => {
   const seen = (e) => !!e && e.getClientRects().length > 0 && e.checkVisibility({ opacityProperty: true, visibilityProperty: true });
   // the parts each chip must have, in order: its label, its value and, for three of them, its unit
   // (the unit as a pattern its text must match: a money word with $, a count word, «/ شهر»)
-  const MUST = [['الخزينة', /^(ألف|مليون|مليار|تريليون) \$$/], ['الاستقرار', null], ['الشرعية', null], ['القوة البشرية', /^(ألف|مليون|مليار)$/], ['النفوذ', null], ['البحث', /^\/ شهر$/]];
+  const MUST = [['الخزينة', /^(ألف|مليون|مليار|تريليون)[ \u00a0]\$$/], ['الاستقرار', null], ['الشرعية', null], ['القوة البشرية', /^(ألف|مليون|مليار)$/], ['النفوذ', null], ['البحث', /^\/ شهر$/]];
   const chips = [...document.querySelectorAll('.top .stat')];
   if (chips.filter(seen).length !== 6) clips.push('مؤشرات ظاهرة: ' + chips.filter(seen).length + ' من 6');
   // text that is there but cannot be read: no box, zero size, or no colour, tested on every text node's own parent (the
   // element that holds the glyphs, e.g. a value's .ltr span), not only on the part
-  const clear = (c) => !/transparent|^rgba\([^)]*,\s*0\)$|\/\s*0\)$/.test(c.color.trim());
+  const clear = (c) => [c.color, c.webkitTextFillColor].every((v) => !/transparent|^rgba\([^)]*,\s*0\)$|\/\s*0\)$/.test(String(v || '').trim()));
   const readable = (e) => { if (!seen(e) || !e.textContent.trim()) return false;
     const w = document.createTreeWalker(e, NodeFilter.SHOW_TEXT); let n, any = false;
     while ((n = w.nextNode())) { if (!n.textContent.trim()) continue; const pe = n.parentElement, c = getComputedStyle(pe), rg = document.createRange();
@@ -187,6 +188,8 @@ const MEASURE = () => {
     ['a value\'s digits at font-size 0', () => { document.querySelector('.stat .num .ltr').style.fontSize = '0px'; }],
     ['a value\'s digits transparent (modern colour syntax)', () => { document.querySelector('.stat .num .ltr').style.color = 'oklch(0.9 0 0 / 0)'; }],
     ['a wrong unit', () => { document.querySelector('.stat .unit').textContent = ' $'; }],
+    ['digits with a transparent text fill', () => { document.querySelector('.stat .num .ltr').style.webkitTextFillColor = 'transparent'; }],
+    ['digits squeezed to no width', () => { const e = document.querySelector('.stat .num .ltr'); e.style.display = 'inline-block'; e.style.transform = 'scaleX(0)'; }],
   ];
   // and below the flag-only levels (Egypt on the iPhone 16, level 3), the nation texts
   const PLANTS_NAME = [
