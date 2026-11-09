@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-08T19:22:14.207Z",
+ "ranAt": "2026-11-09T15:27:09.429Z",
  "inputs": {
   "files": [
    "index.html",
@@ -26,7 +26,7 @@
    "header_cairo.jpg",
    "map_overlay_cairo.svg"
   ],
-  "sha1": "77cc342c051cf2890fdd3256c7e5415f23753b83"
+  "sha1": "669837ce55e4cad2b831ac9eefcb313a2598c704"
  },
  "cleanIssues": {
   "i16promax": [],
@@ -47,16 +47,14 @@
   "se_maps_end": [],
   "se_values": [],
   "se_values_end": [],
-  "se_data_at86": [],
-  "se_data_at172": [],
-  "se_data_at258": [],
-  "se_data_at344": [],
-  "se_data_at430": [],
-  "se_data_at516": [],
-  "se_data_at602": [],
-  "se_maps_at86": [],
-  "se_maps_at172": [],
-  "se_maps_at258": [],
+  "se_data_at98": [],
+  "se_data_at196": [],
+  "se_data_at294": [],
+  "se_data_at392": [],
+  "se_data_at490": [],
+  "se_data_at588": [],
+  "se_maps_at98": [],
+  "se_maps_at196": [],
   "se coverage": []
  },
  "results": [
@@ -187,9 +185,9 @@
    "name": "dock shown on the SE",
    "ok": true,
    "sample": [
+    "icon over text: i / \"الأمم المتحدة: الحسابات القومية\"",
     "panel overlap الأقسام / المصادر والحقوق",
-    "dock shown although it does not fit left of the sheet",
-    "dock not 4 pt in from the left end of its B3 line: x 140.0 w 387.0 y 323.0 (want x 12 w 387.0 y 323.0)"
+    "dock shown although it does not fit left of the sheet"
    ]
   },
   {
@@ -199,13 +197,6 @@
     "HUD element moved from its B3 position: .toast x 70.0..275.6 y 56.0..88.0",
     "HUD element moved from its B3 position: .btn.mode x 70.0..191.6 y 96.0..128.0",
     "HUD element moved from its B3 position: .btn.home x 70.0..141.5 y 136.0..168.0"
-   ]
-  },
-  {
-   "name": "fit not the loosest",
-   "ok": true,
-   "sample": [
-    "fit level 6 is not the loosest that fits: [[0,0]]"
    ]
   },
   {
@@ -358,15 +349,6 @@
    "sample": [
     "a11y: a label VoiceOver may skip (no role): «اختبار»",
     "the data tab's note is not the brief's"
-   ]
-  },
-  {
-   "name": "overview scrolls",
-   "ok": true,
-   "sample": [
-    "values needs scrolling: 370.0 pt over",
-    "fades 0/0 do not match the scroll state (top 0, over 370.0)",
-    "brief text not fully visible: قيم ضبطناها للعب حيث لا توجد بيانات تُقاس بها، فلا نعدّها جزءًا من واقعية اللعبة."
    ]
   },
   {
@@ -731,9 +713,9 @@
     "data: never shown clear of the fades in any view: نص غير معروض للاختبار"
    ],
    "midViewsAdd": [
-    "data: never shown clear of the fades in any view: البنك الدولي: إحصاءات الديون الدولية",
     "data: never shown clear of the fades in any view: الدين الخارجي · CC BY 4.0",
-    "data: never shown clear of the fades in any view: الأمم المتحدة: الحسابات القومية"
+    "data: never shown clear of the fades in any view: الأمم المتحدة: الحسابات القومية",
+    "data: never shown clear of the fades in any view: ناتج كوريا الشمالية · شروط UNdata"
    ]
   }
  ]

@@ -59,9 +59,10 @@ const ROW13 = (() => { const m = S13.match(/aria-label="(المصادر والح
 const ICON13 = (() => { const m = A13.match(new RegExp('<symbol id="' + ROW13.icon + '" viewBox="0 0 24 24">(.*?)</symbol>')); if (!m) throw new Error('cannot read screen 13\'s row icon'); return m[1]; })();
 // the design values (R5), each with its value as the design doc records it
 const HALF = (() => { const m = DOC.match(/decays toward 0 with a half-life of (\d+) years \(`design-target`\)/); if (!m) throw new Error('§5.2: the unrest offset\'s half-life not found'); return m[1]; })();
+const RES = (() => { const m = DOC.match(/\*\*Research points a month\*\* = (\d+) × √\(S ÷ S₀\)/); if (!m) throw new Error('§5.7: the research rate not found'); return m[1]; })();
 const CAPT = (() => { const m = DOC.match(/capture rate: (\d+)% of the equipment the loser loses \(`design-target`/); if (!m) throw new Error('§5.4: the capture rate not found'); return m[1]; })();
 if (!/Agency levels \(`design-target`/.test(DOC)) throw new Error('§4.3: the agency levels are not design-target');
-const VALUES = [['تلاشي فرق الاضطراب الأولي', 'نصف عمر ' + HALF + ' سنوات', 'الداخلية والسياسة'], ['الاستيلاء على العتاد', CAPT + '% مما يخسره المهزوم', 'الجيش'], ['مستوى أجهزة الاستخبارات', 'يُضبط لكل دولة', 'الاستخبارات']];
+const VALUES = [['تلاشي فرق الاضطراب الأولي', 'نصف عمر ' + HALF + ' سنوات', 'الداخلية والسياسة'], ['الاستيلاء على العتاد', CAPT + '% مما يخسره المهزوم', 'الجيش'], ['مستوى أجهزة الاستخبارات', 'يُضبط لكل دولة', 'الاستخبارات'], ['معدل نقاط البحث', 'عائد متناقص: ' + RES + ' × جذر (الإنفاق ÷ إنفاق مصر 2011)', 'البحث']];
 const NOTES = { data: 'أهم مصادر أرقام البداية ومعايرة النماذج، ثم تتغير بقراراتك.', nasa: 'استخدام صور ناسا لا يعني أن ناسا تؤيد اللعبة.', flags: 'الأعلام لتعريف الدول داخل اللعبة فقط.',
   values: 'قيم ضبطناها للعب حيث لا توجد بيانات تُقاس بها، فلا نعدّها جزءًا من واقعية اللعبة.' };
 const IMAGES = ['صور اللعبة', 'صُنعت خصيصًا لهذه اللعبة'];
@@ -72,7 +73,8 @@ const BRIEF = {
   reach_data: SRC.filter((x) => x[0] === 'data').flatMap((x) => [x[1], sub(x)]).concat(['الأمن والسياسة', 'الأرض والمناخ']),
   maps: HEAD.concat(['الخرائط والأسماء', 'NASA Blue Marble', sub(SRC.find((x) => x[1] === 'NASA Blue Marble'))]),
   reach_maps: SRC.filter((x) => x[0] === 'maps').flatMap((x) => [x[1], sub(x)]).concat([NOTES.nasa, 'الأعلام والصور', NOTES.flags], IMAGES),
-  values: HEAD.concat([NOTES.values]).concat(VALUES.flatMap((v) => [v[0], v[1] + ' · ' + v[2]])),
+  values: HEAD.concat([NOTES.values]).concat(VALUES.slice(0, 1).flatMap((v) => [v[0], v[1] + ' · ' + v[2]])),
+  reach_values: VALUES.flatMap((v) => [v[0], v[1] + ' · ' + v[2]]),
 };
 
 const screenChecks = `
@@ -113,7 +115,7 @@ qa('.sheet .c-src').forEach((r) => { if (r.matches('.tap, [role="button"], butto
 `;
 
 require(path.join(OUT, '../../shared/check/panelcheck.js'))({
-  OUT, dock: 'المزيد', tabs: ['data', 'maps', 'values'], longTab: 'data', fitTab: 'values',
+  OUT, dock: 'المزيد', tabs: ['data', 'maps', 'values'], longTab: 'data', fitTab: false,
   inputs: ['_build/credits.css', '../../../design_doc/final_design.md', '../../../CREDITS.md', '../../screen13/A/_build/sheet.html', '../../screen13/A/_build/assemble.py'],
   TOK: { sec: 'rgb(169, 188, 203)', ctlH: {}, sheetIcon: [], size: [] },
   HEAD, BRIEF, screenChecks, DATA: { src: SRC.map((x) => x.slice(0, 5)), ver: VER, row13: ROW13, icon13: ICON13, unshown: UNSHOWN, values: VALUES, notes: NOTES, images: IMAGES },
