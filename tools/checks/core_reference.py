@@ -317,7 +317,7 @@ def vectors():
     out.append(('q32FromInt', '(Int64, Int64)', [(i, q_from_int(i)) for i in [0, 1, -1, (1 << 31) - 1, 1 << 31, -(1 << 31), -(1 << 31) - 1, I64_MAX, I64_MIN, 2011]]))
     bps = [0, 1, -1, 10000, -10000, 5000, 3333, I32_MAX, I32_MIN, 12345, -9999]
     amts = [0, 1, -1, 2, 3, -3, 10000, 5000, 15000, I64_MAX, I64_MIN, 1 << 60, -(1 << 60), 123456789012345]
-    out.append(('bpOf', '(Int32, Int64, Int64)', [(b, a, bp_of(b, a)) for b in bps for a in amts][:120] + [(b, a, bp_of(b, a)) for b, a in [(s64(20), s64(62)) for _ in range(20)]]))
+    out.append(('bpOf', '(Int32, Int64, Int64)', [(b, a, bp_of(b, a)) for b, a in [(b, a) for b in bps for a in amts] + [(s64(20), s64(62)) for _ in range(20)]]))
     out.append(('bpArith', '(Int32, Int32, Int32, Int32, Int32)', [(a, b, bp_add(a, b), bp_sub(a, b), bp_mul(a, b)) for a in bps for b in bps[:8]]))
     out.append(('bpRatio', '(Int64, Int64, Int32)', [(a, b, bp_ratio(a, b)) for a, b in [(1, 2), (1, 3), (2, 3), (-1, 3), (1, -3), (0, 5), (5, 0), (0, 0), (-5, 0), (I64_MAX, 1), (I64_MIN, 1), (I64_MAX, I64_MAX), (I64_MIN, I64_MAX), (1, I64_MAX), (214748, 1), (214749, 1), (1, 20000), (3, 20000), (I64_MAX, I64_MIN), (((229 << 64) - 64) // 10000, 229), (-(((229 << 64) - 64) // 10000), 229)] + [(s64(55), s64(50)) for _ in range(20)]]))
     out.append(('bpQ32', '(Int32, Int64, Int32)', [(b, bp_to_q(b), q_to_bp(bp_to_q(b))) for b in bps + [1234, 9999, 2, 3]]))
