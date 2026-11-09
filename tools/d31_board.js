@@ -21,14 +21,16 @@ const SETS = {
   // a worst case: the longest short name with the widest 2011 leader and regime of T-024's sets (leaders change in play)
   worst: { label: 'أسوأ حالة', nm: 'الكونغو الديمقراطية', ldr: 'عبدالله بن عبدالعزيز', rg: 'جمهورية رئاسية اتحادية', flag: 'cd' },
 };
-// each chip's value classes (§6.3); the widest measured one is reserved
+// each chip's value classes, from GameFormatter's HUD scale rule (§6.11): amounts with one decimal and up to 999.9 per
+// scale word (مليون, مليار, تريليون), signed when negative; indices and percentages 0-100; research points a whole
+// number 0-999 a month (never negative); the widest measured one is reserved
 const WIDEST = [
-  [['−999.9', ' مليار $'], ['−99.9', ' تريليون $']],            // the treasury
-  [['100%', '']],                                                 // stability
-  [['100', '']],                                                  // legitimacy
-  [['999.9', ' مليون'], ['99.9', ' مليار']],                      // manpower
-  [['100', '']],                                                  // influence
-  [['+999', ' / شهر'], ['−999', ' / شهر']],                       // research
+  [['−999.9', ' مليار $'], ['−999.9', ' تريليون $']],                 // the treasury
+  [['100%', '']],                                                      // stability
+  [['100', '']],                                                       // legitimacy
+  [['999.9', ' مليون'], ['9.9', ' مليار']],                            // manpower (at most the world's people)
+  [['100', '']],                                                       // influence
+  [['+999', ' / شهر']],                                                // research
 ];
 const sub = (t, s) => t
   .replace(/<b class="nm">مصر<\/b>/g, `<b class="nm">${s.nm}</b>`)
@@ -71,22 +73,32 @@ const MEASURE = () => {
   const clips = [], texts = [], w = document.createTreeWalker(top, NodeFilter.SHOW_TEXT); let n;
   while ((n = w.nextNode())) {
     if (!n.textContent.trim()) continue;
-    const el = n.parentElement; if (getComputedStyle(el).visibility === 'hidden') continue;
+    const el = n.parentElement;
+    if (getComputedStyle(el).visibility === 'hidden' || parseFloat(getComputedStyle(el).opacity) === 0) {
+      // a value, unit, label or name hidden while its part shows is a clip
+      const pt = el.closest('.stat, .nation, .dtext'); if (pt && getComputedStyle(pt).visibility !== 'hidden' && el.closest('.num, .unit, .lbl, .nm, .ldr, .rg, .dow, .dmy') && getComputedStyle(el.closest('.ntext') || el).display !== 'none') clips.push('نص مخفي: «' + n.textContent.trim() + '»');
+      continue; }
     const r = document.createRange(); r.selectNodeContents(n);
     const rects = [...r.getClientRects()].filter((x) => x.width > 0.5 && x.height > 0.5); if (!rects.length) continue;
     // across: inside its own part; up and down: inside the glass pill that holds it (an Arabic glyph's box runs past a
     // tight line box, as the date's does by 1-2 pt, without leaving its pill)
     const part = el.closest(PARTS), P = part ? part.getBoundingClientRect() : T, pill = el.closest('.bar, .ctl, .spd, .play'), V = pill ? pill.getBoundingClientRect() : T;
     const who = (Object.keys(NAMES).find((k) => el.classList.contains(k)) || Object.keys(NAMES).find((k) => el.closest('.' + k)) || ''), label = (NAMES[who] || who || el.tagName) + ' «' + n.textContent.trim() + '»';
+    // any box between the text and the row that clips (overflow, clip-path) must hold the text
+    const clippers = []; for (let a = el; a && a !== top; a = a.parentElement) { const ac = getComputedStyle(a); if (ac.overflowX !== 'visible' || ac.overflowY !== 'visible' || ac.clipPath !== 'none') clippers.push(a); }
     rects.forEach((x) => {
+      clippers.forEach((a) => { const A = a.getBoundingClientRect(); const cp = getComputedStyle(a).clipPath;
+        if (cp !== 'none' || x.left < A.left - 0.5 || x.right > A.right + 0.5 || x.top < A.top - 2 || x.bottom > A.bottom + 2) clips.push('مقصوص: ' + label); });
       if (x.left < P.left - 0.5 || x.right > P.right + 0.5 || x.top < V.top - 0.5 || x.bottom > V.bottom + 0.5) clips.push('خارج جزئه: ' + label);
       if (x.left < T.left - 0.5 || x.right > T.right + 0.5 || x.top < T.top - 0.5 || x.bottom > T.bottom + 0.5) clips.push('خارج الصف: ' + label);
-      texts.push({ x, part, label });
+      texts.push({ x, part, label, node: n });
     });
   }
   for (let i = 0; i < texts.length; i++) for (let j = i + 1; j < texts.length; j++) {
-    const a = texts[i], b = texts[j]; if (a.part === b.part) continue;
-    if (a.x.left < b.x.right - 0.5 && b.x.left < a.x.right - 0.5 && a.x.top < b.x.bottom - 0.5 && b.x.top < a.x.bottom - 0.5) clips.push('فوق نص آخر: ' + a.label + ' و' + b.label);
+    const a = texts[i], b = texts[j]; if (a.node === b.node) continue;
+    // stacked lines in one part touch by their glyph boxes (1-3 pt, the date's two lines); more than 4 pt is an overlap
+    const tol = a.part === b.part ? 4 : 0.5;
+    if (a.x.left < b.x.right - 0.5 && b.x.left < a.x.right - 0.5 && a.x.top < b.x.bottom - tol && b.x.top < a.x.bottom - tol) clips.push('فوق نص آخر: ' + a.label + ' و' + b.label);
   }
   const shown = getComputedStyle(document.querySelector('.ntext')).display === 'none' ? 'flag only' : 'name';
   return { level: +root.dataset.fit, need: Math.round(need * 10) / 10, avail: top.clientWidth, fits: need <= top.clientWidth + 0.01, clips: [...new Set(clips)],

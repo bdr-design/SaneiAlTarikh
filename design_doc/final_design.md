@@ -1651,9 +1651,9 @@ inset is smaller). Measured: SE 651, 12/13 mini 712, 14 750, 15/16 734, 16 Pro 7
 width classes: the level comes from measurement alone, on every phone the same chain.
 
 **Reserved widths.** Each indicator chip is measured at its widest value class, not the value shown, so a value
-changing in play never moves the row or changes the level (§2.5): the treasury «−999.9 مليار $» or «−99.9 تريليون $»,
-stability «100%», legitimacy «100», manpower «999.9 مليون» or «99.9 مليار», influence «100», research «+999 / شهر» or
-«−999 / شهر» (the widest of each set reserved). The date keeps the room of the widest of «28/30 <month> 2088/2100» over
+changing in play never moves the row or changes the level (§2.6), from GameFormatter's HUD scale rule (§6.11): the
+treasury «−999.9 مليار $» or «−999.9 تريليون $», stability «100%», legitimacy «100», manpower «999.9 مليون» or
+«9.9 مليار», influence «100», research «+999 / شهر» (the widest of each set reserved). The date keeps the room of the widest of «28/30 <month> 2088/2100» over
 all twelve months and of the seven weekday names; at level 5, of «28/30 <month>» and «<weekday> · 2088».
 
 **Fit engine (D-31, as screen 1 B3 implements it and the owner approved).** The name is always the short name (§3.10).
@@ -1667,8 +1667,8 @@ W and no name runs out of its box:
 3. the indicator chips tighten: each chip's side padding 4 → 2 pt (chips 4 pt apart instead of 8) and the strip's end
    padding 8 → 4 pt (text 6 pt from the strip's ends instead of 12); the 44 pt minimum chip width and the 44 × 44 hit
    boxes stay. The 2 pt is an approved exception to the 4/8/12 scale (§6.2), kept at levels 3–5: the chips' hairline
-   dividers still separate them, and without it the SE does not fit (level 5 with the widest values needs 640.7 of
-   651; untightened it would need about 673). A flag-only level with untightened chips is not added, though it would fit
+   dividers still separate them, and without it the SE does not fit (level 5 with the widest values needs 648.5 of
+   651; untightened it would need about 680.5). A flag-only level with untightened chips is not added, though it would fit
    the mini, the 15/16, the 14 and the 16 Pro with the longest names: B3, which the owner approved on all 7 phones, has
    this chain, and an extra level would change the approved HUD on every screen that shows it, for 2 pt of padding;
    the 2 pt chips keep their dividers, their 44 pt width and their hit boxes.
@@ -1680,17 +1680,18 @@ Not used: dropping the trend arrows, 10 pt values and the «12/3/2011» short da
 and words; smaller values and a numeric date read worse than the flag-only card).
 
 **Where it runs.** The fit never runs on the main thread (L14, ADR 0001): on a trigger (a campaign's start, an inset
-change, or a change of the player's name, leader or regime, §2.5) a bounded background job measures each string once
+change, or a change of the player's name, leader or regime, §2.6) a bounded background job measures each string once
 with the bundled font and thread-safe CoreText (CTLine typographic bounds): the name, leader and regime in their
 styles, each chip at both paddings with its reserved value class, and the date rooms. It picks the level by adding up
-widths (no layout per level) and hands the main thread only the level and the card's VoiceOver label. The date rooms
+widths (no layout per level) and hands the main thread only the level and the card's VoiceOver label (§2.6's triggers). The date rooms
 and the chip reservations do not depend on the country, so they are measured once per launch and cached (the HUD has
 no Dynamic Type, §6.10). ViewThatFits and per-pass measurement are not used for the top row.
 
 **Levels reached** (`tools/d31_board.js`, `design/d31/board.html`), with the reserved widths, for Egypt / the longest
 short name «الكونغو الديمقراطية» with its 2011 leader and regime / a worst case (that name with «عبدالله بن عبدالعزيز»
-and «جمهورية رئاسية اتحادية»): SE 5 / 5 / 5; mini 3 / 4 / 4; 14 and 16 Pro 2 / 4 / 4; 15/16 3 / 4 / 4; 11 1 / 3 / 3;
-16/17 Pro Max 0 / 2 / 2. Level 5 fits the SE in every case with 10 pt to spare. (With the mock-up's own 2011 values the
+and «جمهورية رئاسية اتحادية»): SE 5 / 5 / 5; mini 4 / 4 / 4; 14 and 16 Pro 2 / 4 / 4; 15/16 3 / 4 / 4; 11 2 / 3 / 3;
+16/17 Pro Max 1 / 2 / 2. Level 5 fits the SE in every case, with 2.5 pt to spare (the scale rule's widest treasury,
+«−999.9 تريليون $», sets it; the board fails the build if a change takes it away). (With the mock-up's own 2011 values the
 levels are lower: the SE at 4, the 11 and the Pro Max at 0 with Egypt.)
 
 **Snapshot fit tests** run in CI for the SE (667), 12/13 mini (812), XR/11 (896), 14/15 (844/852), 16 Pro (874), Plus/Pro Max (926/932) and 17 Pro Max (956). They use the longest short names the HUD shows (§3.10: «الكونغو الديمقراطية», «سانت فينسنت») with their leaders and regimes, and the widest values. Nothing may clip.
@@ -1804,6 +1805,7 @@ As before:
 
 - Arabic only in v1, ready for English: semantic keys, CLDR plurals, Unicode isolates, and **per-locale morphology fields** on every name.
 - **`GameFormatter`** is the only formatter: Western digits always (`ar@numbers=latn`), Arabic money scale words, percentages, dates with Arabic month names (D-7), and **agreement selectors and preposition forms**.
+- **The HUD's scale rule** (the top row's reserved widths, §6.3): amounts with one decimal and at most 999.9 per scale word, «مليون» → «مليار» → «تريليون» (from 1,000 of the smaller word), with «−» when negative; stability, legitimacy and influence whole numbers 0–100 (stability with «%»); research points a whole number 0–999 a month, never negative (research costs are scaled so no country reaches 1,000; the display clamps and an engine test asserts it).
 
 ### 6.12 Visual style, sound, haptics and images
 
