@@ -126,7 +126,7 @@ if (document.querySelector('[role="dialog"], [role="alertdialog"], dialog, .moda
       const box = /^(text|tspan)$/i.test(e.tagName) ? ['', '', '', ''] : [Math.round(r.left), Math.round(r.top), Math.round(r.width), Math.round(r.height)];
       parts.push([e.tagName, cls, e.getAttribute('href') || '', e.getAttribute('src') || ''].concat(box, [sig(e), sig(e, '::before'), sig(e, '::after')]).join('~')); });
     // the same wherever the repository sits: resolved file URLs lose the folder above design/
-    const root = location.href.slice(0, location.href.indexOf('/design/'));
+    const root = location.href.slice(0, location.href.lastIndexOf('/design/'));   // the page sits at <repo>/design/screen30/A
     let h = 2166136261; const str = parts.join('\\n').split(root).join(''); for (let k = 0; k < str.length; k++) { h ^= str.charCodeAt(k); h = Math.imul(h, 16777619) >>> 0; }
     const key = innerWidth + 'x' + innerHeight + ':' + tab, hex = h.toString(16) + '/' + parts.length;
     if (DATA.pinMode) issues.push('PIN ' + key + ' ' + hex);
