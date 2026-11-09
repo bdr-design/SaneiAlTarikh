@@ -26,6 +26,8 @@ struct FrameStats: Sendable {
     /// how much later than its target presentation time a frame was shown, in ms (the compositor or the display);
     var presentLateMaxMs = 0.0
     /// drawables that were never shown (presentedTime 0).
+    /// The link's two are booked when the callback runs; the presentation's two and the hitches when the frame is shown,
+    /// about two refreshes later: a stall near a second's edge can show in two adjacent rows, read together.
     var dropped = 0
 }
 
@@ -192,7 +194,7 @@ final class RenderEngine: NSObject, @unchecked Sendable {
     /// Called on Metal's thread when a continuous frame was presented (or dropped: presentedTime 0). `target` is the
     /// presentation time the link aimed at.
     private func presented(at time: CFTimeInterval, target: CFTimeInterval) {
-        var line: String?
+        var stall: (CFTimeInterval, Int, CFTimeInterval)?
         lock.lock()
         if time > 0 {
             let late = max(0, time - target)
@@ -208,8 +210,7 @@ final class RenderEngine: NSObject, @unchecked Sendable {
                 // throttled to 30 a second cannot push the launch lines out of the ring)
                 if stale >= 2 && stallLines < Self.maxStallLines {
                     stallLines += 1
-                    line = String(format: "render: %.1f ms between presented frames (%ld stale), shown %.1f ms after its target",
-                                  gap * 1_000, stale, late * 1_000)
+                    stall = (gap, stale, late)
                 }
             }
             lastPresented = time
@@ -217,7 +218,10 @@ final class RenderEngine: NSObject, @unchecked Sendable {
             stats.dropped += 1                  // the gap to the next presented frame counts it as stale
         }
         lock.unlock()
-        if let line { RingLog.shared.log(line) }
+        if let (gap, stale, late) = stall {
+            RingLog.shared.log(String(format: "render: %.1f ms between presented frames (%ld stale), shown %.1f ms after its target",
+                                      gap * 1_000, stale, late * 1_000))
+        }
     }
 }
 
@@ -229,14 +233,14 @@ extension RenderEngine: CAMetalDisplayLinkDelegate {
             if continuous {
                 late = max(0, CACurrentMediaTime() - update.targetTimestamp)
                 let target = update.targetPresentationTimestamp
-                if lastTarget > 0 { skipped = max(0, Int(((target - lastTarget) * 60).rounded()) - 1) }
+                if lastTarget > 0 { skipped = max(0, Int(((target - lastTarget) * 60 + 0.25).rounded(.down)) - 1) }   // as hitches
                 lastTarget = target
                 angle += 0.02
                 update.drawable.addPresentedHandler { [self] d in self.presented(at: d.presentedTime, target: target) }
             }
             encode(into: update.drawable)
             EngineMeter.shared.record(.render, nanoseconds: DispatchTime.now().uptimeNanoseconds &- start)
-            var line: String?
+            var logSkip = false
             lock.lock()
             if continuous {
                 stats.frames += 1
@@ -244,15 +248,17 @@ extension RenderEngine: CAMetalDisplayLinkDelegate {
                 stats.linkSkipped += skipped
                 if skipped >= 2 && stallLines < Self.maxStallLines {
                     stallLines += 1
-                    line = String(format: "render: the link skipped %ld refreshes; the callback ran %.1f ms after its deadline",
-                                  skipped, late * 1_000)
+                    logSkip = true
                 }
             } else {
                 stats.idleFrames += 1
             }
             framesSinceLaunch += 1
             lock.unlock()
-            if let line { RingLog.shared.log(line) }
+            if logSkip {
+                RingLog.shared.log(String(format: "render: the link skipped %ld refreshes; the callback ran %.1f ms after its deadline",
+                                          skipped, late * 1_000))
+            }
             if !continuous { link.isPaused = true }
         }
     }

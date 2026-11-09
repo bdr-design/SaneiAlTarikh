@@ -122,14 +122,14 @@ The fix passed the two reviews and four verification rounds (the last found noth
 - **Rotation works:** `ring-previous.log` is the first session's whole log, with its export and its going to the
   background.
 - **Over budget:** the I/O before the second recording was 3 operations, worst 6.16 ms. That covers the first
-  recording's CSV write and its prune listing; the ring log gave 8.91 and 6.94 ms wall, the file name included. The
+  recording's CSV write and its prune listing; the ring log gave 8.91 ms wall for it (the second recording's own write: 6.94 ms). The
   write was atomic again. Fix: `IOEngine.writeCSV` writes a new file with one open(2) (O_CREAT | O_EXCL, a suffix if the
   name exists) and one write, with no sync and no rename. A failed write removes the file.
 - **Hitches:** 4 and 2 in the two runs; the first build's run had 0.
   - They come from three single gaps of 54.17 ms between presented frames, each counted as 2 stale refreshes: run 1
     seconds 10 and 11, run 2 second 53.
   - In those seconds encode was ≤ 0.212 ms and main lag ≤ 0.10 ms.
-  - The link called back fewer times there (59, 58, 59 frames), so no callback came during the stalls.
+  - The link called back fewer times there (59, 58, 59 frames: 1, 2 and 1 short), so some callbacks were missed.
   - 54.17 ms is 6.5 refreshes of the 120 Hz display. The timeline shifted by half a refresh, which points at the display
     or the compositor; that is not proven.
   - Run 2 second 59 had uncounted irregular spacing (a 25 ms gap, mean 16.88 ms). Its last 6 seconds also held the run's
