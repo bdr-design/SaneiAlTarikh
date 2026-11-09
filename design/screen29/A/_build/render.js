@@ -72,7 +72,8 @@ const BRIEF = {
   reach_data: SRC.filter((x) => x[0] === 'data').flatMap((x) => [x[1], sub(x)]).concat(['الأمن والسياسة', 'الأرض والمناخ']),
   maps: HEAD.concat(['الخرائط والأسماء', 'NASA Blue Marble', sub(SRC.find((x) => x[1] === 'NASA Blue Marble'))]),
   reach_maps: SRC.filter((x) => x[0] === 'maps').flatMap((x) => [x[1], sub(x)]).concat([NOTES.nasa, 'الأعلام والصور', NOTES.flags], IMAGES),
-  values: HEAD.concat([NOTES.values]).concat(VALUES.flatMap((v) => [v[0], v[1] + ' · ' + v[2]])),
+  values: HEAD.concat([NOTES.values]).concat(VALUES.slice(0, 1).flatMap((v) => [v[0], v[1] + ' · ' + v[2]])),
+  reach_values: VALUES.flatMap((v) => [v[0], v[1] + ' · ' + v[2]]),
 };
 
 const screenChecks = `
