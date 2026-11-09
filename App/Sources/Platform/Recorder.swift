@@ -141,7 +141,7 @@ actor RecorderEngine {
         await RingLog.shared.flush()
         let summary = cut
             ? String(format: "انقطع عند الثانية %ld (خرج التطبيق للخلفية)", done)
-            : String(format: "المدة %ld ث · الإطارات %ld · التقطّعات %ld · الإطارات الفايتة %.1f · إطارات الخمول %ld",
+            : String(format: "%ld ث · الإطارات %ld · التقطّع %ld · الناقصة %.1f · الخمول %ld",
                      done, total.frames, total.hitches, total.stale, total.idleFrames)
         await MainActor.run {
             ui.isRecording = false
