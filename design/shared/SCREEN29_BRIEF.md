@@ -37,9 +37,9 @@ row of three: البيانات (default), الخرائط والصور, قيم ت
 - **قيم تصميمية:** (R5) the note «قيم ضبطناها للعب حيث لا توجد بيانات تُقاس بها، فلا نعدّها جزءًا من واقعية اللعبة.», then
   the values, each its value · its section, as the design doc records them: تلاشي فرق الاضطراب الأولي (half-life 8
   years, §5.2's unrest offset: الداخلية والسياسة), الاستيلاء على العتاد (15% of what the loser loses, §5.4: الجيش), مستوى
-  أجهزة الاستخبارات (set per country, §4 stage 25: الاستخبارات). The shipped list is generated (§4.8); the tab must fit
-  without scrolling, so it holds at most 3 values and a note of at most 2 lines on the narrowest sheet (314 pt); a longer
-  list makes the tab scroll like the others.
+  أجهزة الاستخبارات (set per country, §4 stage 25: الاستخبارات), معدل نقاط البحث (diminishing with spending: 18 × the
+  square root of spending ÷ Egypt's 2011, §5.7: البحث; added 2026-11-09 by the owner proxy's answer, T-035). The shipped
+  list is generated (§4.8); while it fits, the tab does not scroll; a longer list scrolls like the other tabs.
 
 ## Rules
 - Offline (L10): nothing opens the web. Rows are text, not controls. Western digits; no red.

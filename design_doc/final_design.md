@@ -1411,6 +1411,7 @@ As before:
 - **8 domains × 15 levels:** industry and manufacturing; energy; computing, electronics and AI; biotech, health and agriculture; land systems; air, sea and space; missiles, deterrence and missile defence; cyber and intelligence.
 - Levels 1–7 cover about 1975–2025 (real), 8–11 about 2026–2050 (published projections), and 12–15 cover 2051–2100, labelled «مُسقَط» (projected).
 - cost(L) = base × 1.35^L × (1 + k·max(0, year(L) − current year)²); a catch-up bonus; theft and cooperation transfer progress.
+- **Research points a month** = 18 × √(S ÷ S₀), where S is the yearly research spending at national prices (PPP, §5.1's price level, as research staff are paid, §0.3 item 7) and S₀ is Egypt's in 2011 (700 مليون $ nominal), so Egypt reads +18 and the US about +254 in 2011. Diminishing returns: more spending buys ever fewer points («ideas get harder to find»). The exponent ½ and the 18 are `design-target` (listed as design values on screen 29); cost(L) is calibrated against this rate in M1a, and an engine test asserts that no country reaches 1,000 a month (the HUD's research chip reserves «+999 / شهر», §6.3, §6.11). Owner proxy, 2026-11-09.
 - Start levels are `estimate`.
 - Effects include equipment generations G4 → G6.
 
@@ -1652,9 +1653,9 @@ width classes: the level comes from measurement alone, on every phone the same c
 
 **Reserved widths.** Each indicator chip is measured at its widest value class, not the value shown, so a value
 changing in play never moves the row or changes the level (§2.6), from GameFormatter's HUD scale rule (§6.11): the
-treasury «−999.9 مليار $» or «−999.9 تريليون $», stability «100%», legitimacy «100», manpower «999.9 مليون» or
-«9.9 مليار», influence «100», research «+999 / شهر» (the widest of each set reserved). The date keeps the room of the widest of «28/30 <month> 2088/2100» over
-all twelve months and of the seven weekday names; at level 5, of «28/30 <month>» and «<weekday> · 2088».
+treasury «−999.9» with «ألف $», «مليون $», «مليار $» or «تريليون $», stability «100%», legitimacy «100», manpower
+«999.9 ألف», «999.9 مليون» or «9.9 مليار», influence «100», research «+999 / شهر» (the widest of each set reserved).
+The date keeps the room of the widest of «28/30 <month> 2088/2100» over all twelve months and of the seven weekday names; at level 5, of «28/30 <month>» and «<weekday> · 2088».
 
 **Fit engine (D-31, as screen 1 B3 implements it and the owner approved).** The name is always the short name (§3.10).
 A deterministic chain of levels runs from 0 until the top row (nation card + 8 + indicators + 8 + date and speed) fits
@@ -1669,7 +1670,7 @@ W and no name runs out of its box:
    boxes stay. The 2 pt is an approved exception to the 4/8/12 scale (§6.2), kept at levels 3–5: the chips' hairline
    dividers still separate them, and without it the SE does not fit (level 5 with the widest values needs 648.5 of
    651; untightened it would need about 680.5). A flag-only level with untightened chips is not added, though it would fit
-   the mini, the 15/16, the 14 and the 16 Pro with the longest names: B3, which the owner approved on all 7 phones, has
+   the 15/16, the 14 and the 16 Pro with the longest names (714.5 pt; not the mini's 712): B3, which the owner approved on all 7 phones, has
    this chain, and an extra level would change the approved HUD on every screen that shows it, for 2 pt of padding;
    the 2 pt chips keep their dividers, their 44 pt width and their hit boxes.
 4. the nation card shows the flag alone (22 × 16.5, in a 48 × 36 card that stays a button to the State panel); the
@@ -1805,7 +1806,7 @@ As before:
 
 - Arabic only in v1, ready for English: semantic keys, CLDR plurals, Unicode isolates, and **per-locale morphology fields** on every name.
 - **`GameFormatter`** is the only formatter: Western digits always (`ar@numbers=latn`), Arabic money scale words, percentages, dates with Arabic month names (D-7), and **agreement selectors and preposition forms**.
-- **The HUD's scale rule** (the top row's reserved widths, §6.3): amounts with one decimal and at most 999.9 per scale word, «مليون» → «مليار» → «تريليون» (from 1,000 of the smaller word), with «−» when negative; stability, legitimacy and influence whole numbers 0–100 (stability with «%»); research points a whole number 0–999 a month, never negative (research costs are scaled so no country reaches 1,000; the display clamps and an engine test asserts it).
+- **The HUD's scale rule** (the top row's reserved widths, §6.3): amounts with one decimal and at most 999.9 per scale word, «ألف» → «مليون» → «مليار» → «تريليون» (from 1,000 of the smaller word; under 1,000 the plain number), with «−» when negative (a microstate's manpower reads «46.0 ألف», never «0.0 مليون»); stability, legitimacy and influence whole numbers 0–100 (stability with «%»); research points a whole number 0–999 a month, never negative (the rate's diminishing returns, §5.7, keep every country under 1,000; an engine test asserts it, and the display clamps as a guard).
 
 ### 6.12 Visual style, sound, haptics and images
 

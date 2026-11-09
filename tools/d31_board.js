@@ -22,13 +22,13 @@ const SETS = {
   worst: { label: 'أسوأ حالة', nm: 'الكونغو الديمقراطية', ldr: 'عبدالله بن عبدالعزيز', rg: 'جمهورية رئاسية اتحادية', flag: 'cd' },
 };
 // each chip's value classes, from GameFormatter's HUD scale rule (§6.11): amounts with one decimal and up to 999.9 per
-// scale word (مليون, مليار, تريليون), signed when negative; indices and percentages 0-100; research points a whole
+// scale word (ألف, مليون, مليار, تريليون), signed when negative; indices and percentages 0-100; research points a whole
 // number 0-999 a month (never negative); the widest measured one is reserved
 const WIDEST = [
-  [['−999.9', ' مليار $'], ['−999.9', ' تريليون $']],                 // the treasury
+  [['−999.9', ' ألف $'], ['−999.9', ' مليون $'], ['−999.9', ' مليار $'], ['−999.9', ' تريليون $']],   // the treasury
   [['100%', '']],                                                      // stability
   [['100', '']],                                                       // legitimacy
-  [['999.9', ' مليون'], ['9.9', ' مليار']],                            // manpower (at most the world's people)
+  [['999.9', ' ألف'], ['999.9', ' مليون'], ['9.9', ' مليار']],          // manpower (at most the world's people)
   [['100', '']],                                                       // influence
   [['+999', ' / شهر']],                                                // research
 ];
@@ -94,6 +94,18 @@ const MEASURE = () => {
       texts.push({ x, part, label, node: n });
     });
   }
+  // every part shows what it must, as the browser sees it (display, visibility and opacity up the tree): six chips, each
+  // with its label, value and unit; the date's two lines; the name except where the level drops it
+  const seen = (e) => !!e && e.getClientRects().length > 0 && e.checkVisibility({ opacityProperty: true, visibilityProperty: true });
+  const chips = [...document.querySelectorAll('.top .stat')];
+  if (chips.filter(seen).length !== 6) clips.push('مؤشرات ظاهرة: ' + chips.filter(seen).length + ' من 6');
+  chips.forEach((c) => { const lb = c.querySelector('.lbl'); ['.lbl', '.num', '.unit'].forEach((sel) => c.querySelectorAll(sel).forEach((e) => { if (!seen(e)) clips.push('نص مخفي في «' + (lb ? lb.textContent.trim() : '?') + '»: ' + sel); }));
+    if (!c.querySelector('.num')) clips.push('مؤشر بلا قيمة: «' + (lb ? lb.textContent.trim() : '?') + '»'); });
+  ['.date .dow', '.date .dmy'].forEach((sel) => { if (!seen(document.querySelector(sel))) clips.push('نص مخفي: ' + sel); });
+  const lvl = +root.dataset.fit;
+  if (lvl < 4 && !seen(document.querySelector('.ntext .nm'))) clips.push('نص مخفي: اسم الدولة');
+  if (lvl < 2) ['.ntext .ldr', '.ntext .rg'].forEach((sel) => { if (!seen(document.querySelector(sel))) clips.push('نص مخفي: ' + sel); });
+  if (!seen(document.querySelector('.nation .flag, .nation img'))) clips.push('العلم مخفي');
   for (let i = 0; i < texts.length; i++) for (let j = i + 1; j < texts.length; j++) {
     const a = texts[i], b = texts[j]; if (a.node === b.node) continue;
     // stacked lines in one part touch by their glyph boxes (1-3 pt, the date's two lines); more than 4 pt is an overlap
