@@ -45,4 +45,40 @@ final class RingBufferTests: XCTestCase {
         XCTAssertEqual(r.append(2), 1)
         XCTAssertEqual(r.elements, [2])
     }
+
+    func testSequenceBeforeTheBufferWraps() {
+        var r = RingBuffer<Int>(capacity: 4)
+        XCTAssertEqual(r.elements(since: 0).elements, [])
+        XCTAssertEqual(r.elements(since: 0).next, 0)
+        r.append(10); r.append(11); r.append(12)
+        let a = r.elements(since: 0)
+        XCTAssertEqual(a.elements, [10, 11, 12]); XCTAssertEqual(a.next, 3); XCTAssertEqual(a.lost, 0)
+        let b = r.elements(since: 2)
+        XCTAssertEqual(b.elements, [12]); XCTAssertEqual(b.next, 3); XCTAssertEqual(b.lost, 0)
+        let c = r.elements(since: 3)
+        XCTAssertEqual(c.elements, []); XCTAssertEqual(c.next, 3); XCTAssertEqual(c.lost, 0)
+    }
+
+    func testSequenceAfterTheBufferWraps() {
+        var r = RingBuffer<Int>(capacity: 3)
+        for v in 0..<10 { r.append(v) }              // holds 7, 8, 9 (sequence numbers 7, 8, 9)
+        let a = r.elements(since: 0)
+        XCTAssertEqual(a.elements, [7, 8, 9]); XCTAssertEqual(a.next, 10); XCTAssertEqual(a.lost, 7)
+        let b = r.elements(since: 5)
+        XCTAssertEqual(b.elements, [7, 8, 9]); XCTAssertEqual(b.lost, 2)
+        let c = r.elements(since: 8)
+        XCTAssertEqual(c.elements, [8, 9]); XCTAssertEqual(c.lost, 0)
+        let d = r.elements(since: 12)               // beyond the end: nothing, nothing lost
+        XCTAssertEqual(d.elements, []); XCTAssertEqual(d.next, 10); XCTAssertEqual(d.lost, 0)
+    }
+
+    func testSequenceSurvivesRemoveAll() {
+        var r = RingBuffer<Int>(capacity: 3)
+        r.append(1); r.append(2)
+        r.removeAll()
+        XCTAssertEqual(r.appendedTotal, 2)
+        r.append(3)
+        let a = r.elements(since: 1)
+        XCTAssertEqual(a.elements, [3]); XCTAssertEqual(a.next, 3); XCTAssertEqual(a.lost, 1)
+    }
 }

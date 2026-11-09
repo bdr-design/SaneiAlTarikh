@@ -90,10 +90,19 @@ the recorder CSV, `ring.log` and `device.txt` (kept in `docs/measurements/m0/`; 
   0.107 ms mean, 0.239 ms worst (budget 1 ms).
 - Simulation: 1,800 days in 60 s (30 a second), a day 0.085 ms mean, 0.272 ms worst, on «sanei.sim/user-initiated»: the
   QoS raise is proven on the device.
-- Main thread: its own work 0.123 ms worst, worst lag 0.12 ms. Thermal nominal; free memory steady near 6.6 GB.
+- Main thread: its own work 0.123 ms worst (the recorder's metered closures; SwiftUI's re-render is not metered), worst
+  lag 0.12 ms (10 pings a second). Thermal nominal. Memory headroom (`os_proc_available_memory`, not free memory) 6,654 MB
+  at launch, 6,591 MB under load; L8's `phys_footprint` is not measured yet (M0b).
 - Every engine ran on its own thread (render, sim, io, main), as the CSV's thread columns show.
-- **Over budget:** I/O, worst 6.17 ms against 5 ms a write: the ring log's atomic rewrite every 10 s (4.6–6.2 ms, 5 of 7).
-  It disturbed nothing (no hitch, main lag 0.12 ms), but the budget is the budget. Fix: `IOEngine.flushLog` keeps the
-  file open and appends only the new lines, with no sync (an app crash keeps them; a power loss may lose the last
-  seconds, as before with no fsync guarantee), cut back in place past 512 KB. Re-measured with the next IPA (M0b's
-  device test needs one anyway); until then M0's exit stands on every other line, with this one fixed and unmeasured.
+- **Over budget:** I/O, worst 6.17 ms against 5 ms a write. 72 operations = 8 ring-log flushes + 64 CSV-row builds
+  (metered as `.io`, 0.10–0.20 ms). The flushes, each an atomic rewrite of a file under 1 KB, took 2.8–6.2 ms, 5 of 8
+  over budget, most likely the write's sync. They disturbed nothing (no hitch, main lag 0.12 ms), but the budget is the
+  budget.
+- **Fix (after two reviews, then their fixes):** `IOEngine.flushLog` opens the file once (open(2) with O_CREAT and
+  O_APPEND: no temporary file, no rename) and appends only the new lines (RingBuffer's sequence numbers, tested on
+  Linux), with no sync: an app crash or kill keeps every flushed line; a power loss or kernel panic may lose what the
+  kernel had not yet put on disk, which the synced atomic write did not. The file restarts in place from the lines held
+  after a failed or partial write, a deletion from Files, or 1 MB of growth (§3.8), with a marker line; flushes wait for
+  the launch rotation; the export flushes and copies the file. The recorder logs a line before each 10-second flush (so
+  each is a real append), the I/O that ran before the recording (launch, exports, the last CSV, payloads) and the CSV
+  write's time, so the next IPA measures the one-off writes too. Re-measured with the next IPA.

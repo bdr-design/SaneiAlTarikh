@@ -10,18 +10,25 @@ actor IOEngine {
 
     static let keepCSVs = 10, keepPayloads = 20, keepExports = 3
     static let logName = "ring.log", previousLogName = "ring-previous.log"
-    /// The log file's size bound: past it the file restarts from the lines still in memory (the last 2,000).
-    static let logCapBytes = 512 * 1_024
+    /// The log file's bound (§3.8's 1 MB file): once it has grown this much past its last restart, it restarts in place
+    /// from the lines still in memory (the last 2,000).
+    static let logCapBytes = 1_024 * 1_024
 
-    // the log file, kept open between flushes: each flush appends only the new lines (no new file, no rename)
+    // the log file, kept open between flushes: each flush appends only the new lines (no new file, no rename, no sync)
     private var logHandle: FileHandle?
     private var logWritten = 0          // RingLog's sequence number of the first line not yet in the file
-    private var logBytes = 0
+    private var logBytes = 0            // the file's size
+    private var logBase = 0             // its size when it last restarted: it grows by at most logCapBytes past that
+    private var logRestart = false      // the next flush rewrites the file from the lines held (after a failure)
+    private var foldersReady = false    // no flush before the last session's log is rotated
+    private var logURL: URL?            // Documents/Logs/ring.log, found once
 
-    /// Makes Documents/Saves, Diagnostics and Logs, and keeps the last session's log as ring-previous.log (the next
-    /// flush would overwrite it; after a crash it is the log that matters). True when all exist.
+    /// Makes Documents/Saves, Diagnostics and Logs, and keeps the last session's log as ring-previous.log (this session's
+    /// first flush starts a new ring.log; after a crash it is the previous log that matters). True when all exist. Log
+    /// flushes wait for it, whatever its outcome.
     func prepareFolders() -> Bool {
-        EngineMeter.shared.measure(.io) {
+        defer { foldersReady = true }
+        return EngineMeter.shared.measure(.io) {
             do {
                 _ = try Storage.savesFolder()
                 _ = try Storage.diagnosticsFolder()
@@ -29,9 +36,7 @@ actor IOEngine {
                 let fm = FileManager.default
                 let current = logs.appendingPathComponent(Self.logName)
                 let previous = logs.appendingPathComponent(Self.previousLogName)
-                // a flush that ran first wrote this session's lines: the next flush starts a fresh file with all of them
-                closeLog()
-                logWritten = 0
+                logURL = current
                 if fm.fileExists(atPath: current.path) {
                     // a failed rotation loses only the previous log, never the saves folder's state
                     do {
@@ -49,54 +54,70 @@ actor IOEngine {
         }
     }
 
-    /// Adds the lines logged since the last flush to Documents/Logs/ring.log. The file stays open and each flush is one
-    /// append, without a sync: an app crash or kill keeps what was written (it is in the kernel). Measured on the
-    /// iPhone 17 Pro Max (M0), the atomic rewrite this replaces took 4.6-6.2 ms a flush against the 5 ms budget. Past
-    /// `logCapBytes` the file is cut back to the lines still in memory, in place.
+    /// Adds the lines logged since the last flush to Documents/Logs/ring.log. The file is opened once (open(2) with
+    /// O_CREAT | O_APPEND: no temporary file, no rename) and each flush is one append with no sync: an app crash or kill
+    /// keeps every flushed line (it is in the kernel); a power loss or a kernel panic may lose what the kernel had not yet
+    /// put on disk. The atomic rewrite this replaces took 2.8-6.2 ms a flush on the iPhone 17 Pro Max (M0) against the
+    /// 5 ms budget, most likely its sync. The file restarts in place from the lines still held (at most 2,000) after a
+    /// failed write, when it was deleted (from Files), and once it has grown `logCapBytes` past its last restart, so it
+    /// never exceeds the held lines plus `logCapBytes`. Waits for `prepareFolders` (the lines stay in memory until then).
     @discardableResult
     func flushLog() -> URL? {
-        EngineMeter.shared.measure(.io) {
+        guard foldersReady, let url = logURL else { return nil }
+        return EngineMeter.shared.measure(.io) {
             do {
-                let url = try Storage.logsFolder().appendingPathComponent(Self.logName)
-                let fm = FileManager.default
-                if logHandle != nil && !fm.fileExists(atPath: url.path) { closeLog() }     // deleted from Files: start again
+                if logHandle != nil && !FileManager.default.fileExists(atPath: url.path) {   // deleted from Files
+                    closeLog()
+                    logRestart = true
+                }
                 if logHandle == nil {
-                    if !fm.fileExists(atPath: url.path) { _ = fm.createFile(atPath: url.path, contents: nil) }
-                    let h = try FileHandle(forWritingTo: url)
+                    let fd = open(url.path, O_WRONLY | O_CREAT | O_APPEND, 0o644)
+                    guard fd >= 0 else { throw POSIXError(POSIXErrorCode(rawValue: errno) ?? .EIO) }
+                    let h = FileHandle(fileDescriptor: fd, closeOnDealloc: true)
                     logBytes = try Int(h.seekToEnd())
+                    logBase = logRestart ? 0 : logBytes
                     logHandle = h
                 }
                 guard let h = logHandle else { return nil }
-                let pending = RingLog.shared.lines(since: logWritten)
-                var lines = pending.lines, next = pending.next
-                let lost = pending.lost
-                if lost > 0 { lines.insert(String(repeating: " ", count: 10) + "(\(lost) lines dropped before this flush)", at: 0) }
-                guard !lines.isEmpty else { return url }
-                var data = Data((lines.joined(separator: "\n") + "\n").utf8)
-                if logBytes + data.count > Self.logCapBytes {
-                    // the bound: restart the file from the lines still held (at most 2,000)
-                    let held = RingLog.shared.lines(since: 0)
-                    data = Data((held.lines.joined(separator: "\n") + "\n").utf8)
-                    next = held.next
+                var pending = RingLog.shared.lines(since: logWritten)
+                var head: [String] = []
+                if pending.lost > 0 { head.append(Self.mark("\(pending.lost) lines dropped before this flush")) }
+                let size = pending.lines.reduce(0) { $0 + $1.utf8.count + 1 }
+                let restart = logRestart || logBytes - logBase + size > Self.logCapBytes
+                if restart {
+                    let why = logRestart ? "the log file restarted after a failed write or a deletion"
+                                         : "the log file restarted at its \(Self.logCapBytes / 1_048_576) MB bound"
+                    pending = RingLog.shared.lines(since: 0)
+                    head = [Self.mark(why + "; the lines still held follow")]
+                    logRestart = true               // until the write below is done
                     try h.truncate(atOffset: 0)
                     logBytes = 0
                 }
+                guard !pending.lines.isEmpty || !head.isEmpty else { return url }
+                let data = Data(((head + pending.lines).joined(separator: "\n") + "\n").utf8)
+                logRestart = true                   // a partial write is rewritten by the next flush
                 try h.write(contentsOf: data)
+                logRestart = false
                 logBytes += data.count
-                logWritten = next
+                if restart { logBase = logBytes }
+                logWritten = pending.next
                 return url
             } catch {
                 closeLog()
+                logRestart = true
                 RingLog.shared.log("ring log write failed: \(error)")
                 return nil
             }
         }
     }
 
+    private static func mark(_ text: String) -> String { String(repeating: " ", count: 10) + "(" + text + ")" }
+
     private func closeLog() {
         try? logHandle?.close()
         logHandle = nil
         logBytes = 0
+        logBase = 0
     }
 
     /// Writes rows as Documents/Diagnostics/<name> (atomically), then keeps only the newest recordings.
@@ -129,7 +150,8 @@ actor IOEngine {
     /// newest recorder CSVs, the newest MetricKit payloads and the device summary; returns its files for the share
     /// sheet (also visible in Files). Only the newest `keepExports` export folders are kept.
     func exportDiagnostics(deviceSummary: String, logLines: [String]) throws -> [URL] {
-        try EngineMeter.shared.measure(.io) {
+        let flushed = flushLog() != nil
+        return try EngineMeter.shared.measure(.io) {
             let fm = FileManager.default
             let diag = try Storage.diagnosticsFolder()
             let stamp = Stamp.now()
@@ -140,7 +162,12 @@ actor IOEngine {
                 n += 1
             }
             try fm.createDirectory(at: out, withIntermediateDirectories: true)
-            try (logLines.joined(separator: "\n") + "\n").write(to: out.appendingPathComponent(Self.logName), atomically: true, encoding: .utf8)
+            // the log file (every line flushed this session, up to its bound), or the lines held when there is none
+            if let log = logURL, flushed, fm.fileExists(atPath: log.path) {
+                try fm.copyItem(at: log, to: out.appendingPathComponent(Self.logName))
+            } else {
+                try (logLines.joined(separator: "\n") + "\n").write(to: out.appendingPathComponent(Self.logName), atomically: true, encoding: .utf8)
+            }
             let previous = try Storage.logsFolder().appendingPathComponent(Self.previousLogName)
             if fm.fileExists(atPath: previous.path) {
                 try fm.copyItem(at: previous, to: out.appendingPathComponent(Self.previousLogName))
@@ -184,9 +211,8 @@ actor IOEngine {
 /// A file-name time stamp in Western digits, to the millisecond.
 enum Stamp {
     static func now() -> String {
-        let f = DateFormatter()
-        f.locale = Locale(identifier: "en_US_POSIX")
-        f.dateFormat = "yyyyMMdd-HHmmss-SSS"
-        return f.string(from: Date())
+        let d = Calendar(identifier: .gregorian).dateComponents([.year, .month, .day, .hour, .minute, .second, .nanosecond], from: Date())
+        return String(format: "%04ld%02ld%02ld-%02ld%02ld%02ld-%03ld", d.year ?? 0, d.month ?? 0, d.day ?? 0,
+                      d.hour ?? 0, d.minute ?? 0, d.second ?? 0, (d.nanosecond ?? 0) / 1_000_000)
     }
 }
