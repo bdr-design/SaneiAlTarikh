@@ -53,8 +53,9 @@ actor IOEngine {
                 // no failure. A failed rotation loses only the previous log, never the saves folder's state.
                 if rename(current.path, previous.path) != 0 {
                     var e = errno
-                    if e == EISDIR || e == ENOTEMPTY || e == EEXIST {
-                        // ring-previous.log is a folder (made in Files): the old code removed it, so does this
+                    if e == EISDIR || e == ENOTEMPTY || e == EEXIST || e == ENOTDIR {
+                        // ring-previous.log is in the way (a folder, or a file under a ring.log folder, made in Files):
+                        // the old code removed it before moving, this removes it after the first try and tries again
                         try? FileManager.default.removeItem(at: previous)
                         e = rename(current.path, previous.path) == 0 ? 0 : errno
                     }

@@ -15,8 +15,9 @@ struct FrameStats: Sendable {
     /// a late callback, a GPU-late or dropped frame). A run at 30 a second therefore reads 30 a second. Booked in the row
     /// of the second the later frame is presented, about two refreshes after it was encoded.
     var hitches = 0
-    /// Refreshes missed against the requested 60 a second, as a fraction: each presented gap of g sixtieths adds g - 1
-    /// (from 1.1 on, clear of timing noise). Unlike `hitches` it sees a lowered cadence: 48 a second adds 12 a second.
+    /// The excess of long presented gaps over a sixtieth: each gap of g sixtieths above 1.1 (clear of timing noise) adds
+    /// g - 1, and shorter gaps never subtract, so judder (a 25 ms gap then an 8 ms one) adds too. Unlike `hitches` it
+    /// sees a lowered cadence: 48 a second adds 12 a second.
     var staleRefreshes = 0.0
     /// The spacing of presented continuous frames, in ms (mean and worst).
     var intervalMeanMs = 0.0

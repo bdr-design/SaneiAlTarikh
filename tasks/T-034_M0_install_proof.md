@@ -160,5 +160,5 @@ The fix passed the two reviews and four verification rounds (the last found noth
   operations are `prepareFolders` and the first flush. Only the worst is reported, so which one cost it is not known,
   and neither is whether it is one launch's variance. Done: instrumented (the folders-and-rotation time and the log
   file's open time go to the ring log; the first write is what remains) and a small trim (folders are made only when
-  missing; the rotation is one rename(2), removing a ring-previous.log folder first, as before).
+  missing; the rotation is one rename(2); a ring-previous.log in the way is removed and the rename tried again).
 - 2–3 drawables are dropped at the start of each load (no gap, no hitch).

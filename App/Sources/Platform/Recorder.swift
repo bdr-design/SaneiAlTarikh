@@ -136,12 +136,13 @@ actor RecorderEngine {
             RingLog.shared.log("recorder write failed: \(error)")
         }
         let lines = total.lines()
-        RingLog.shared.log("recorder \(cut ? "interrupted at second \(done)" : "done") \(file): \(lines.joined(separator: " | "))")
+        RingLog.shared.log("recorder \(cut ? "interrupted at second \(done)" : "done") \(file): \(lines.joined(separator: " | "))"
+                           + String(format: " | hitches %ld, stale refreshes %.1f", total.hitches, total.stale))
         await RingLog.shared.flush()
         let summary = cut
             ? String(format: "انقطع عند الثانية %ld (خرج التطبيق للخلفية)", done)
-            : String(format: "المدة %ld ث · الإطارات %ld · التقطّعات %ld · إطارات الخمول %ld",
-                     done, total.frames, total.hitches, total.idleFrames)
+            : String(format: "المدة %ld ث · الإطارات %ld · التقطّعات %ld · الإطارات الفايتة %.1f · إطارات الخمول %ld",
+                     done, total.frames, total.hitches, total.stale, total.idleFrames)
         await MainActor.run {
             ui.isRecording = false
             ui.secondsLeft = 0
@@ -159,6 +160,7 @@ actor RecorderEngine {
 
     private struct Totals {
         var frames = 0, idleFrames = 0, hitches = 0, days = 0
+        var stale = 0.0
         var renderNs: UInt64 = 0, renderCount = 0, renderMax = 0.0, renderThread = ""
         var simNs: UInt64 = 0, simMax = 0.0, simThread = ""
         var ioCount = 0, ioMax = 0.0, ioThread = ""
@@ -167,7 +169,7 @@ actor RecorderEngine {
 
         mutating func add(loaded: Bool, r: EngineMeter.Sample, s: EngineMeter.Sample, io: EngineMeter.Sample,
                           main: EngineMeter.Sample, frames f: FrameStats, lagMs: Double) {
-            frames += f.frames; idleFrames += f.idleFrames; hitches += f.hitches; days += s.count
+            frames += f.frames; idleFrames += f.idleFrames; hitches += f.hitches; stale += f.staleRefreshes; days += s.count
             renderNs &+= r.totalNanos; renderCount += r.count; renderMax = max(renderMax, r.maxMs)
             simNs &+= s.totalNanos; simMax = max(simMax, s.maxMs)
             ioCount += io.count; ioMax = max(ioMax, io.maxMs)
