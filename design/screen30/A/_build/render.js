@@ -29,6 +29,7 @@ const DECISION = 'احتجاجات في تونس';   // screen 15's title
 const BRIEF = Object.fromEntries(STEPS.map(([k, h], i) => [k, HEAD.concat(['الخطوة ' + (i + 1) + ' من 5 · ' + h, T[k], i < 4 ? 'التالي' : LAST[0], i < 4 ? STEPS[i + 1][1] : LAST[1]])]));
 STEPS.slice(0, 4).forEach(([k]) => { BRIEF['reach_' + k] = ['تخطي الجولة', HELP]; });
 
+const PIN = (() => { try { return require('./hud_pin.json'); } catch (e) { return {}; } })();
 const screenChecks = `
 const { issues, qa, q, T, DATA, tab } = X;
 const W = (s) => (s || '').replace(/\\s+/g, ' ').trim();
@@ -55,7 +56,10 @@ if (document.querySelector('[role="dialog"], [role="alertdialog"], dialog, .moda
   const tapSel = 'button, a, .tap, input, select, textarea, summary, label, [onclick], [tabindex]:not([tabindex="-1"]), [contenteditable]:not([contenteditable="false"]), '
     + ['button', 'link', 'tab', 'menuitem', 'menuitemradio', 'menuitemcheckbox', 'switch', 'checkbox', 'radio', 'option', 'slider', 'combobox', 'textbox', 'searchbox', 'spinbutton'].map((r) => '[role="' + r + '"]').join(', ');
   const cand = [...body.querySelectorAll('*')].filter((e) => e.getClientRects().length && (e.matches(tapSel) || getComputedStyle(e).cursor === 'pointer'));
-  const ctl = cand.filter((e) => !cand.some((o) => o !== e && o.contains(e)));   // a tappable thing counted once, at its outermost element
+  const interactive = 'button, a, input, select, textarea, summary, [onclick], [tabindex]:not([tabindex="-1"]), [contenteditable]:not([contenteditable="false"]), '
+    + ['button', 'link', 'tab', 'menuitem', 'menuitemradio', 'menuitemcheckbox', 'switch', 'checkbox', 'radio', 'option', 'slider', 'combobox', 'textbox', 'searchbox', 'spinbutton'].map((r) => '[role="' + r + '"]').join(', ');
+  // a tappable thing counted once, at its outermost element; an interactive control nested in another counts on its own
+  const ctl = cand.filter((e) => e.matches(interactive) || !cand.some((o) => o !== e && o.contains(e)));
   if (ctl.length !== (i < 4 ? 2 : 1)) issues.push('the step body holds ' + ctl.length + ' controls, not ' + (i < 4 ? 2 : 1));
   const sec = body.querySelector('.r-sec'), inSec = sec ? [...sec.children].filter((e) => getComputedStyle(e).display !== 'none').map((e) => e.tagName === 'H3' ? 'h3' : e.matches('p.d-text') ? 'text' : e.matches('ul.t-secs') ? 'list' : (e.className || e.tagName)) : [];
   if (inSec.join(',') !== (tab === 's3' ? 'h3,text,list' : 'h3,text')) issues.push('the step text section is not its heading and text: ' + inSec.join(','));
@@ -75,9 +79,9 @@ if (document.querySelector('[role="dialog"], [role="alertdialog"], dialog, .moda
   const cv = document.createElement('canvas'); cv.width = cv.height = 1; const cx = cv.getContext('2d', { willReadFrequently: true }), seenCol = new Map();
   const whiteish = (col) => { if (!col || col === 'transparent' || col === 'none') return false; if (seenCol.has(col)) return seenCol.get(col);
     cx.clearRect(0, 0, 1, 1); cx.fillStyle = 'rgba(0, 0, 0, 0)'; cx.fillStyle = col; cx.fillRect(0, 0, 1, 1); const [r, g, b, a] = cx.getImageData(0, 0, 1, 1).data;
-    // a ring colour: visible (alpha ≥ 0.3) and not dark (the HUD's own shadows and halos are dark; its hairlines, the flags'
-    // rim and the speed button's edge, are under 0.25)
-    const w = a >= 77 && Math.max(r, g, b) > 60; seenCol.set(col, w); return w; };
+    // a ring colour: visible (alpha ≥ 0.25) and not dark (the HUD's own shadows and halos are dark; its hairlines, the glass
+    // edge 0.14, the speed button's 0.16 and the flags' rim 0.22, are under 0.25)
+    const w = a >= 64 && Math.max(r, g, b) > 60; seenCol.set(col, w); return w; };
   const layers = (bs) => { const out = []; let depth = 0, cur = ''; for (const ch of bs) { if (ch === '(') depth++; if (ch === ')') depth--; if (ch === ',' && !depth) { out.push(cur); cur = ''; } else cur += ch; } if (cur.trim()) out.push(cur); return out; };
   const ringStyle = (c) => { if (!c || c.display === 'none' || c.visibility === 'hidden') return false;
     if (c.outlineStyle !== 'none' && parseFloat(c.outlineWidth) > 0) return true;
@@ -104,6 +108,37 @@ if (document.querySelector('[role="dialog"], [role="alertdialog"], dialog, .moda
   const shR = q('.sheet').getBoundingClientRect();
   const outside = (e) => { const r = e.getBoundingClientRect(); return r.left < shR.left - 8 || r.right > shR.right + 8 || r.top < shR.top - 8 || r.bottom > shR.bottom + 8; };
   const rings = [...document.body.querySelectorAll('*')].filter((e) => (!e.closest('.sheet') || outside(e)) && (ringed(e) || shaped(e)));
+  // the page outside the sheet is exactly the approved paused HUD, map and frame (B3 with paused_hud.py) for this phone
+  // and step, the step's outline aside: its paint signature is pinned in hud_pin.json (made from the clean page with
+  // PIN=1 and reviewed; remade when B3 or the paused HUD change, which the input fingerprints force)
+  { const P = ['display', 'visibility', 'opacity', 'transform', 'backgroundColor', 'backgroundImage', 'outlineStyle', 'outlineWidth', 'outlineColor', 'outlineOffset',
+      'borderTopWidth', 'borderTopStyle', 'borderTopColor', 'borderRightWidth', 'borderRightStyle', 'borderRightColor', 'borderBottomWidth', 'borderBottomStyle', 'borderBottomColor',
+      'borderLeftWidth', 'borderLeftStyle', 'borderLeftColor', 'boxShadow', 'filter', 'borderImageSource', 'stroke', 'strokeWidth', 'fill', 'color', 'clipPath', 'mask'];
+    const tgtEl = ST[i][2] && document.querySelector('.hud ' + ST[i][2]);
+    const sig = (e, ps) => { const c = getComputedStyle(e, ps || null); if (ps && (c.content === 'none' || c.content === 'normal')) return '';
+      return P.map((k) => (e === tgtEl && !ps && /^outline/.test(k)) ? 'RING' : c[k]).join('|') + (ps ? '|' + c.content : ''); };
+    const parts = [];
+    [document.documentElement, document.body].forEach((e) => parts.push(e.tagName + sig(e, '::before') + sig(e, '::after')));
+    [...document.body.querySelectorAll('*')].filter((e) => !e.closest('.sheet') && !e.closest('symbol, defs, script, style')).forEach((e) => {
+      const r = e.getBoundingClientRect(), cls = e.className && e.className.baseVal !== undefined ? e.className.baseVal : String(e.className || '');
+      parts.push([e.tagName, cls, e.getAttribute('href') || '', Math.round(r.left), Math.round(r.top), Math.round(r.width), Math.round(r.height), sig(e), sig(e, '::before'), sig(e, '::after')].join('~')); });
+    let h = 2166136261; const str = parts.join('\\n'); for (let k = 0; k < str.length; k++) { h ^= str.charCodeAt(k); h = Math.imul(h, 16777619) >>> 0; }
+    const key = innerWidth + 'x' + innerHeight + ':' + tab, hex = h.toString(16) + '/' + parts.length;
+    if (DATA.pinMode) issues.push('PIN ' + key + ' ' + hex);
+    else if (!DATA.pin[key]) issues.push('no pinned HUD for ' + key);
+    else if (DATA.pin[key] !== hex) issues.push('the page outside the sheet differs from the approved paused HUD (' + key + ')'); }
+  // the sheet: a ring around it, or a line on one of its parts that is not its own chrome, or a part fixed to the screen
+  { const chrome = DATA.sheetChrome, shEl = q('.sheet');
+    [shEl, ...shEl.querySelectorAll('*')].filter((e) => e.getClientRects().length).forEach((e) => ['', '::before', '::after'].forEach((ps) => {
+      const c = getComputedStyle(e, ps || null); if (ps && (c.content === 'none' || c.content === 'normal')) return;
+      const nm = e.tagName.toLowerCase() + '.' + (e.className && e.className.baseVal !== undefined ? e.className.baseVal : String(e.className || '').split(' ')[0]) + ps;
+      const lines = [];
+      if (c.outlineStyle !== 'none' && parseFloat(c.outlineWidth) > 0) lines.push('outline');
+      ['Top', 'Right', 'Bottom', 'Left'].forEach((sd) => { if (parseFloat(c['border' + sd + 'Width']) >= 1 && c['border' + sd + 'Style'] !== 'none' && whiteish(c['border' + sd + 'Color'])) lines.push('border'); });
+      if (c.boxShadow !== 'none' && !chrome.includes(nm + ' ' + c.boxShadow)) lines.push('shadow ' + c.boxShadow);
+      if (c.filter !== 'none' || (c.borderImageSource && c.borderImageSource !== 'none')) lines.push('filter or border image');
+      if (c.position === 'fixed') lines.push('fixed to the screen');
+      if (lines.length) issues.push('a line on a sheet part that is not its chrome: ' + nm + ' ' + lines.join(', ')); })); }
   const want = ST[i][2], tgt = want && document.querySelector('.hud ' + want);
   if (!want) { if (rings.length) issues.push('a ring on the sections\\' step: ' + rings.map((e) => e.className || e.tagName).join(', ')); }
   else { if (rings.length !== 1 || rings[0] !== tgt) issues.push('the ring is not on the step\\'s element ' + want + ' alone: ' + rings.map((e) => e.className || e.tagName).join(', '));
@@ -136,9 +171,14 @@ if (tab === 's5') { const tx = W(T(document.querySelector('.hud .alert-prev .txt
 
 require(path.join(OUT, '../../shared/check/panelcheck.js'))({
   OUT, dock: 'المزيد', tabs: STEPS.map((s) => s[0]), noTabs: true, fitTab: 's3', longTab: 's3',
-  inputs: ['_build/tour.css', '../../shared/paused_hud.py'],
+  inputs: ['_build/tour.css', '../../shared/paused_hud.py', '_build/hud_pin.json'],
   TOK: { sec: 'rgb(169, 188, 203)', ctlH: {}, sheetIcon: [['.t-secs svg', 16]], size: [] },
-  HEAD, BRIEF, screenChecks, DATA: { steps: STEPS, text: T, last: LAST, help: HELP, close: CLOSE, decision: DECISION },
+  HEAD, BRIEF, screenChecks, DATA: { steps: STEPS, text: T, last: LAST, help: HELP, close: CLOSE, decision: DECISION, pinMode: process.env.PIN === '1', pin: PIN,
+    // the sheet's own chrome lines (measured on the clean page; every other line on a sheet part is a mistake)
+    sheetChrome: ['section.sheet rgba(0, 0, 0, 0.45) 0px 12px 30px 0px', 'span.s-emb color(srgb 0.662745 0.737255 0.796078 / 0.45) 0px 0px 0px 1px inset',
+      'header.r-hd rgba(127, 233, 255, 0.13) 0px -1px 0px 0px inset', 'button.r-act rgba(127, 233, 255, 0.14) 0px 0px 0px 1px inset',
+      'div.r-link rgba(127, 233, 255, 0.14) 0px 0px 0px 1px inset', 'span.r-tile rgba(127, 233, 255, 0.14) 0px 0px 0px 1px inset',
+      'button.r-x rgba(255, 255, 255, 0.18) 0px 0px 0px 1px inset, rgba(0, 0, 0, 0.4) 0px 2px 6px 0px', 'span.r-flag rgba(255, 255, 255, 0.28) 0px 0px 0px 1px, rgba(0, 0, 0, 0.45) 0px 2px 6px 0px'] },
   // no headline numbers, status table, «لماذا؟», chip or arrowed value here, and the section colour is the «المزيد» grey:
   // those generic plants move to the tour's own targets below or do not apply
   skipGeneric: ['section colour on data', 'section colour on a rule', 'closed dock item coloured', 'brief text hidden', '18 pt misuse', 'gap', 'text overlap', 'clipped text', 'faint text', 'why without its subject', 'amber value without its icon', 'chip arrow against its sign', '% before its number', 'text into a control', 'emblem drawn grey', 'chip not white', 'hint chevron missing (no tabs)', 'hint over the content (no tabs)'],
@@ -198,6 +238,11 @@ require(path.join(OUT, '../../shared/check/panelcheck.js'))({
     ['SVG ring in the frame', d, '&tab=s1', '', /the ring is not on the step's element \.nation alone/, () => { const ns = 'http://www.w3.org/2000/svg', v = document.createElementNS(ns, 'svg'); v.setAttribute('style', 'position:absolute;left:300px;top:150px;width:120px;height:80px'); const c = document.createElementNS(ns, 'rect'); [['x', 2], ['y', 2], ['width', 116], ['height', 76], ['fill', 'none'], ['stroke', '#EAF2F7'], ['stroke-width', 2]].forEach(([k, v2]) => c.setAttribute(k, v2)); v.appendChild(c); document.querySelector('.dev .safe').appendChild(v); }],
     ['ring from inside the sheet', d, '&tab=s2', '', /the ring is not on the step's element \.stats alone/, () => { const n = document.querySelector('.hud .nation').getBoundingClientRect(), e = document.createElement('div'); e.style.cssText = 'position:fixed;left:' + (n.left - 5) + 'px;top:' + (n.top - 5) + 'px;width:' + (n.width + 10) + 'px;height:' + (n.height + 10) + 'px;border:2px solid #EAF2F7;box-sizing:border-box;pointer-events:none'; document.querySelector('.sheet .r-in').appendChild(e); }],
     ['cyan second ring', d, '&tab=s2', '.hud .nation { box-shadow: 0 0 0 2px #7FE9FF !important; }', /the ring is not on the step's element \.stats alone/],
+    ['icon ring over the map', d, '&tab=s3', '', /the page outside the sheet differs/, () => { const ns = 'http://www.w3.org/2000/svg', v = document.createElementNS(ns, 'svg'); v.setAttribute('class', 'i'); v.setAttribute('style', 'position:fixed;left:270px;top:110px;width:48px;height:48px;color:#EAF2F7'); const u = document.createElementNS(ns, 'use'); u.setAttribute('href', '#i-locate'); v.appendChild(u); document.querySelector('.map').appendChild(v); }],
+    ['dim white second ring', d, '&tab=s2', '.hud .nation { box-shadow: 0 0 0 2px rgba(234, 242, 247, .28) !important; }', /the ring is not on the step's element \.stats alone/],
+    ['ring around the sheet', d, '&tab=s1', '.sheet { box-shadow: 0 0 0 2px #EAF2F7, 0 12px 30px rgba(0, 0, 0, .45) !important; }', /a line on a sheet part that is not its chrome: section\.sheet/],
+    ['sheet pseudo ring', d, '&tab=s2', '.r-body[data-tab="s2"] .r-sec::after { content: ""; position: fixed; left: 600px; top: 10px; width: 100px; height: 40px; border: 2px solid #EAF2F7; }', /a line on a sheet part that is not its chrome/],
+    ['control nested in the skip', d, '&tab=s2', '', /the step body holds 3 controls/, () => { const b = document.createElement('button'); b.className = 'r-x tap'; b.setAttribute('aria-label', 'لا تعرضها مجددا'); b.innerHTML = '<svg class="i"><use href="#i-close"/></svg>'; document.querySelector('.r-body[data-tab="s2"] .r-link').appendChild(b); }],
     ['primary bar faded', d, '&tab=s1', '.r-first::after { opacity: 0 !important; }', /the primary's white bar is not drawn/],
     ['skip path without «حول»', d, '&tab=s2', '', /the skip is missing, misplaced or does not say the tour stays in the help/, () => { document.querySelector('.r-body[data-tab="s2"] .r-link .r-at > span').textContent = 'تعود إليها من المزيد › المساعدة'; }],
     ['HUD date changed', d, '&tab=s1', '', /the header's date is not the HUD's/, () => { document.querySelector('.hud .date .dmy').textContent = '14 يناير 2011'; }],
