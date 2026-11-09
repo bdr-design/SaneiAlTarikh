@@ -25,6 +25,13 @@ equal hashes; Linux x86 equals macOS arm64; the `TermSink` equality test), R9. `
 - Out of scope: the self-describing table and chunks of a save, `SaveTree`, migrations (the engine's `SaveCodec`);
   `BitSet`, `DenseMatrix`, `Interner` (when a system needs them); column tables per kind in `WorldState`.
 
+## A decision the design did not make
+§2.3's sketch gives `TermSink.add(_ id: TermID, _ v: Q32)`. A `Q32` holds at most 2,147,483,647 whole units, and money
+is in units of $1,000: the United States' 2011 federal revenue (about $2.3 trillion) would clamp, and count, in a game
+without cheats (T-036's design review, TG4). So a sink is typed by the value it explains: `SumSink<Q32>` for a number,
+`SumSink<USDn>` or `<LCU>` or `<Money>` for money, through the `TermValue` protocol. Terms of different units cannot be
+added into one sheet. `BP` values are explained as `Q32` (`Q32(bp)`).
+
 ## Acceptance criteria
 1. `ci-linux` green: build with warnings as errors, all tests, both reference checks.
 2. The codec writes exactly the reference's bytes for every vector and reads them back; a varint has one byte string
