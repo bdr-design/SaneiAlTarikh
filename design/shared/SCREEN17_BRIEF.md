@@ -22,7 +22,8 @@ Status cells: الآن 58% · الهدف 56% · التغير −1 شهريًا (
 - **The sum:** «يتجه إلى» · «55 + 16 − 15» (shown, in the secondary grey) · 56%; VoiceOver «المجموع: يتجه إلى 56%، من 55 نقطة، ترفعه 16 نقطة وتخفضه 15 نقطة».
 - A link row: «لوحة الدولة» · «الاستقرار والشرعية» (opens the state panel).
 A rise is blue with an up arrow, a fall amber with a down arrow (colour never alone); rows sorted by size within each
-section. Up to 12 terms; a 13th and beyond fold into one «أخرى» row (the sum stays exact). Later (D-6): a money value's
+section. At most 12 rows, the starting level included: with more than 12 terms, the 11 largest stay (the starting
+level always) and the rest are one «أخرى» row; a term of exactly 0 has no row (the sum stays exact; §2.3, T-037). Later (D-6): a money value's
 sheet adds its constant 2011 USD line.
 
 ## Gate

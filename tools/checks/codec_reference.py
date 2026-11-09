@@ -6,8 +6,12 @@ second time and its vectors are generated: Tests/SaneiCoreTests/CodecGolden.swif
 
   --write   regenerate the file
   --check   (default) fail if the committed file differs
+
+Before it writes anything it checks itself against things that are not this code: published LEB128 and protobuf
+bytes, Python's struct for the raw encoding, a second decoder written another way, SplitMix64's published first
+output, and the hash on every state of three small boxes (no two may hash alike).
 """
-import sys, os
+import sys, os, struct
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
 GOLDEN = os.path.join(ROOT, 'Tests/SaneiCoreTests/CodecGolden.swift')
@@ -79,23 +83,87 @@ def mix64(z):
 
 
 class Hasher:
+    """StateHasher: each 64-bit word goes in as state = mix(state ^ word); a column is its length, then its values."""
     def __init__(self): self.state = 0xCBF29CE484222325
-    def combine(self, v): self.state = ((self.state ^ (v & M64)) * 0x100000001B3) & M64
+    def combine(self, v): self.state = mix64(self.state ^ (v & M64))
     def column(self, vs):
         self.combine(len(vs))
         for v in vs: self.combine(v)
-    def value(self): return mix64(self.state)
+    def value(self): return self.state
+
+
+def hash_of(cols):
+    h = Hasher()
+    for c in cols: h.column(c)
+    return h.value()
+
+
+def decode_another_way(b, count, enc, bits, is_signed):
+    """A column read back by a decoder that shares no code with the writer above: bytes to values, or None."""
+    at, out, run = 0, [], 0
+    for _ in range(count):
+        if enc == RAW:
+            w = bits // 8
+            if at + w > len(b): return None
+            out.append(int.from_bytes(bytes(b[at:at + w]), 'little', signed=is_signed)); at += w
+            continue
+        u, n = 0, 0
+        while True:                                          # 7 bits a byte, low first
+            if at >= len(b): return None
+            x = b[at]; at += 1
+            u += (x & 0x7F) * (128 ** n); n += 1
+            if x < 0x80: break
+        z = u // 2 if u % 2 == 0 else -(u + 1) // 2         # undo the zigzag by its definition
+        if enc == DELTA:
+            run = (run + z + (1 << 63)) % (1 << 64) - (1 << 63)
+            z = run
+        out.append(z % (1 << 64) if not is_signed and bits == 64 else z)
+    return out if at == len(b) else None
 
 
 def self_check():
-    # the zigzag order, and every varint read back; LEB128's known bytes for 300 and 624485
+    I64_MAX, I64_MIN = (1 << 63) - 1, -(1 << 63)
+    # the zigzag order, protobuf's table with both ends, and every varint read back
     assert [zz(v) for v in (0, -1, 1, -2, 2)] == [0, 1, 2, 3, 4]
+    assert [zz(v) for v in (2147483647, -2147483648, I64_MAX, I64_MIN)] == [4294967294, 4294967295, M64 - 1, M64]
+    # LEB128's known bytes for 300 and 624485, protobuf's for 150
     assert varint(300) == [0xAC, 0x02] and varint(624485) == [0xE5, 0x8E, 0x26] and varint(0) == [0]
-    for v in [0, 1, 127, 128, 16383, 16384, (1 << 63) - 1, 1 << 63, M64] + [(1 << k) - 1 for k in range(1, 65)]:
+    assert varint(150) == [0x96, 0x01]
+    for v in [0, 1, 127, 128, 16383, 16384, I64_MAX, 1 << 63, M64] + [(1 << k) - 1 for k in range(1, 65)]:
         assert read_varint(varint(v)) == (v, len(varint(v)))
     assert len(varint(M64)) == 10 and varint(M64)[-1] == 1
-    # FNV-1a's published offset and prime
-    assert Hasher().state == 14695981039346656037 and 0x100000001B3 == 1099511628211
+    # one byte string per value: every string of one or two bytes, and three-byte strings over a spread of first
+    # bytes, is read exactly as the rule says, stated here a second time, and is what the writer writes for its value
+    spread = [0x80, 0x81, 0x82, 0x90, 0xA5, 0xC0, 0xFE, 0xFF, 0x00, 0x01, 0x7F, 0x40]
+    strings = [[a] for a in range(256)] + [[a, c] for a in range(256) for c in range(256)]
+    strings += [[a, c, d] for a in spread for c in spread for d in range(256)]
+    for bs in strings:
+        end = next((i for i, x in enumerate(bs) if x < 0x80), None)             # the first byte without the top bit
+        if end is None or (end > 0 and bs[end] == 0): want = None                 # cut short, or a longer form
+        else: want = (sum((x & 0x7F) << (7 * i) for i, x in enumerate(bs[:end + 1])), end + 1)
+        assert read_varint(bs) == want, bs
+        if want is not None: assert varint(want[0]) == bs[:end + 1], bs
+    # the raw encoding against Python's struct, low byte first
+    assert column([-2, 0x1122334455667788], RAW, 64, True) == list(struct.pack('<qq', -2, 0x1122334455667788))
+    assert column([0x11223344, 7], RAW, 32, False) == list(struct.pack('<II', 0x11223344, 7))
+    assert column([-2, 513], RAW, 16, True) == list(struct.pack('<hh', -2, 513))
+    # a delta column worked by hand: 100, -10, +5, -100, +5 as zigzags 200, 19, 10, 199, 10
+    assert column([100, 90, 95, -5, 0], DELTA, 64, True) == [0xC8, 0x01, 0x13, 0x0A, 0xC7, 0x01, 0x0A]
+    # SplitMix64's published first output for the seed 0: the function the hash is made of
+    assert mix64(0x9E3779B97F4A7C15) == 0xE220A8397B1DCDAF and Hasher().state == 14695981039346656037
+    # the hash tells apart every state of three boxes where a multiply per word did not (signs, top bits, order,
+    # whole numbers in Q32, a flag set on a pair and on its mirror)
+    box = {hash_of([[a, c]]) for a in range(-100, 101) for c in range(-100, 101)}
+    assert len(box) == 201 * 201, 'two values in -100...100'
+    box = {hash_of([[a, c, d, e]]) for a in range(-4, 5) for c in range(-4, 5) for d in range(-4, 5) for e in range(-4, 5)}
+    assert len(box) == 9 ** 4, 'four values in -4...4'
+    box = {hash_of([[a << 32, c << 32]]) for a in range(150) for c in range(150)}
+    assert len(box) == 150 * 150, 'two whole numbers as Q32'
+    top = 1 << 63
+    alike = [([[0, 0]], [[I64_MIN, I64_MIN]]), ([[-1, 1, 0]], [[1, -1, 0]]), ([[0, 0]], [[-2, -2]]), ([[I64_MAX, -1]], [[-1, I64_MAX]]),
+             ([[-1, -1]], [[I64_MAX, I64_MAX]]), ([[0, 397 << 32]], [[1 << 32, 48 << 32]]), ([[1], [2]], [[1 | top], [2 | top]]),
+             ([[0, I64_MIN]], [[I64_MIN, 0]]), ([[5, 6, 7, 8]], [[5 | top, 6, 7, 8 | top]]), ([[1 << 62, 3, 1 << 62]], [[0, 3, 0]])]
+    for one, two in alike: assert hash_of(one) != hash_of(two), (one, two)
 
 
 def vectors():
@@ -107,6 +175,8 @@ def vectors():
     out.append(('zigzags', '(Int64, [UInt8])', [(v, zigzag(v)) for v in zs]))
     bad = [[], [0x80], [0xFF, 0xFF], [0x80, 0x00], [0xFF, 0x00], [0x81, 0x80, 0x00],
            [0xFF] * 9 + [0x02], [0xFF] * 9 + [0x7F], [0xFF] * 10, [0x80] * 10 + [0x01], [0xFF] * 9 + [0x81, 0x00]]
+    # a longer form of a smaller value, at every length up to the tenth byte
+    bad += [[0x80] * k + [0x00] for k in range(2, 10)] + [[0xFF] * 9 + [0x00], [0x81] + [0x80] * 8 + [0x00]]
     for b in bad: assert read_varint(b) is None, b
     out.append(('badVarints', '[UInt8]', bad))
     cols64 = [[], [0], [5, 5, 5, 5], [1, 2, 3, 4, 5], [100, 90, 95, -5, 0], [I64_MAX, I64_MIN, 0, -1, 1],
@@ -120,11 +190,18 @@ def vectors():
     out.append(('columnsU64', '(UInt8, [UInt64], [UInt8])', [(e, c, column(c, e, 64, False)) for c in colsu64 for e in (RAW, DELTA, ZIGZAG)]))
     cols8 = [[0, 1, -1, 127, -128], []]
     out.append(('columns8', '(UInt8, [Int8], [UInt8])', [(e, c, column(c, e, 8, True)) for c in cols8 for e in (RAW, DELTA, ZIGZAG)]))
+    # a column of serials: what a handle table's first column is
+    colsu32 = [[], [1, 2, 3, 7, 8, 4000000000], [(1 << 32) - 2, (1 << 32) - 1, 0], [1100, 1, 599]]
+    out.append(('columnsU32', '(UInt8, [UInt32], [UInt8])', [(e, c, column(c, e, 32, False)) for c in colsu32 for e in (RAW, DELTA, ZIGZAG)]))
+    # every column above read back by the second decoder
+    for name, ty, rows in out[3:]:
+        kind = ty.split('[')[1]
+        bits = int(''.join(ch for ch in kind if ch.isdigit()))
+        for e, c, bs in rows: assert decode_another_way(bs, len(c), e, bits, 'UInt' not in kind) == c, (name, e, c)
     hs = []
-    for cols in [[], [[]], [[1]], [[1], [2]], [[1, 2]], [[2, 1]], [[-1]], [[0, 0, 0]], [[0, 0]], [[I64_MAX, I64_MIN], [14975]]]:
-        h = Hasher()
-        for c in cols: h.column(c)
-        hs.append((cols, h.value()))
+    states = [[], [[]], [[1]], [[1], [2]], [[1, 2]], [[2, 1]], [[-1]], [[0, 0, 0]], [[0, 0]], [[I64_MAX, I64_MIN], [14975]],
+              [[I64_MIN, I64_MIN]], [[-1, 1, 0]], [[1, -1, 0]], [[I64_MAX, -1]], [[-1, I64_MAX]], [[0], [0]], [[], []]]
+    for cols in states: hs.append((cols, hash_of(cols)))
     assert len({v for _, v in hs}) == len(hs), 'every state here hashes apart'
     out.append(('hashes', '([[Int64]], UInt64)', hs))
     return out
@@ -149,6 +226,9 @@ def swift(vs):
 
 
 def main():
+    if '--write' in sys.argv and '--check' in sys.argv:
+        print("codec reference: --write or --check, not both")
+        sys.exit(2)
     self_check()
     vs = vectors()
     text = swift(vs)

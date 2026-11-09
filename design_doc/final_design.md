@@ -366,13 +366,17 @@ Dependencies run one way: Core ← Content ← Engine ← AI; Core ← Map; Pres
 - **`TermSink`:**
 
   ```swift
-  protocol TermSink { mutating func add(_ id: TermID, _ v: Q32) }
-  @frozen struct SumSink: TermSink { var total: Q32 }        // simulation, 0 allocations
-  @frozen struct TermBuffer12: TermSink { /* 12-slot tuple */ } // «لماذا؟», still 0 allocations
-  func stabilityTarget<S: TermSink>(_ g: GovIdx, _ w: borrowing WorldState, into s: inout S)
+  protocol TermSink {
+    associatedtype Value: TermValue                     // a number (Q32), or money in one unit (LCU, USDn, Money)
+    mutating func base(_ id: TermID, _ v: Value)        // the starting level, when the value has one
+    mutating func add(_ id: TermID, _ v: Value)
+  }
+  @frozen struct SumSink<Value>: TermSink { var total: Value }          // simulation, 0 allocations
+  @frozen struct TermBuffer12<Value>: TermSink { /* 12-slot tuple */ }  // «لماذا؟», still 0 allocations
+  func stabilityTarget<S: TermSink>(_ g: GovIdx, _ w: borrowing WorldState, into s: inout S) where S.Value == Q32
   ```
 
-  A 13th term in the list sink folds into «أخرى» (other). The sum stays exact.
+  A sink is typed by the value it explains: a `Q32` holds about 2.1 billion whole units, and a large country's revenue in units of $1,000 is more. A sheet has at most 12 rows. A term of exactly 0 takes no row. With more than 12 terms, the list sink keeps 11 rows (the starting level, and the largest terms by size; of two of one size, the lower `TermID`) and folds the rest into one «أخرى» (other) row. The sum stays exact (T-037).
 
 ### 2.4 Simulation engine and threading
 
@@ -390,7 +394,7 @@ Dependencies run one way: Core ← Content ← Engine ← AI; Core ← Map; Pres
 | Government pairs, dense | 384² × 8 B | Opinion, treaty bits, **recognises-state** bit, **recognises-government** bit, sanction bits, escalation rung, claim bit | 1.18 MB |
 | Pair extension (sparse) | ~6,000 | Spy network, intelligence level, exposure heat, **intel epoch**, partner share | 0.10 MB |
 | Handle tables | Capped (L3) | Formations (with equipment allocations), armies, fronts and sectors, wars, fleets, air groups, operations, projects, treaties. Each row carries its `Serial`. | ≤0.9 MB |
-| Queues and history | — | Event queue, decisions, **the pending-command queue (≤64 entries while paused, each ≤600 B with what was worked out when given: the route and ETA, the previewed values; ≤40 KB; §3.9)**, a 512-entry notification ring, a 512-entry campaign log ring (each entry its title, date and stored `TermBuffer12`, about 90 B; §3.9). History: 12 series × existing governments × (60 monthly + 125 yearly) plus a campaign-start baseline row. | ≤2.6 MB |
+| Queues and history | — | Event queue, decisions, **the pending-command queue (≤64 entries while paused, each ≤600 B with what was worked out when given: the route and ETA, the previewed values; ≤40 KB; §3.9)**, a 512-entry notification ring, a 512-entry campaign log ring (each entry its title, date and stored `TermBuffer12`, about 160 B, 82 KB in all; §3.9). History: 12 series × existing governments × (60 monthly + 125 yearly) plus a campaign-start baseline row. | ≤2.6 MB |
 | World | 1 | 22 world prices and stocks, world interest rate, **USD deflator**, chokepoint disruption (~10), CO₂, temperature, sea level, entity counters | <2 KB |
 | **Total** | | | **≈7.3 MB** (≤8 MB) |
 
@@ -1136,7 +1140,7 @@ Stage 50 generates «المصادر والحقوق» (sources and rights) with t
 
 - **Cadence codes:** D daily · M monthly in the government's slot · S strategic-AI stagger · Q quarterly · Y yearly in January · E on event or input change.
 - **Six scarce resources:** money, manpower (plus the reserve pool), political capital, influence, research points, intelligence capacity.
-- **«لماذا؟».** Every derived value is written once against `TermSink`; the UI shows up to 12 terms, with any overflow folded into «أخرى» (other).
+- **«لماذا؟».** Every derived value is written once against `TermSink`; the UI shows at most 12 rows: with more than 12 terms, the 11 largest and one «أخرى» (other) row (§2.3).
 - **Modifiers** come from `modifiers.json`.
 - **Coefficients** are untuned starting values. Each carries a `calibratedAgainst` class (R5); values with no data are `design-target`.
 

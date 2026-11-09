@@ -1,14 +1,17 @@
 // «لماذا؟»: every derived value is written once, as a function that adds its terms into a sink (R9, §2.3). The
-// simulation passes a sink that only sums; the «لماذا؟» sheet passes one that keeps the terms. The same function gives
-// both, so the explanation can never drift from the value. Neither sink allocates. A sink is typed by the value it
-// explains (a number, or money in one unit), so terms of different units cannot be added into one sheet. stdlib only.
+// simulation passes a sink that only sums; the «لماذا؟» sheet passes one that keeps the terms. The same function
+// gives both, so the two totals are the same additions in the same order and can never drift apart. Neither sink
+// allocates. A sink is typed by the value it explains (a number, or money in one unit), so terms of different units
+// cannot be added into one sheet. stdlib only.
 
 /// The stable number of a term (a row of a «لماذا؟» sheet). Stored in saves (the campaign log): never renumbered.
+/// A value function gives each of its terms a number of its own and adds each term once: a cause summed over
+/// neighbours is added as one term, its sum. 65,535 is reserved for «أخرى»: no real term uses it.
 @frozen
 public struct TermID: Sendable, Hashable {
     public var raw: UInt16
     @inlinable public init(raw: UInt16) { self.raw = raw }
-    /// «أخرى»: what the terms past the twelfth add up to.
+    /// «أخرى»: the terms a sheet has no row for, as one amount. Always 65,535.
     @inlinable public static var other: TermID { TermID(raw: .max) }
 }
 
@@ -25,8 +28,16 @@ extension LCU: TermValue {}
 extension USDn: TermValue {}
 extension Money: TermValue {}
 
+/// Where a value function puts its terms. The total is the terms added in the order given, clamped and counted like
+/// any other sum, so the order is part of the function.
 public protocol TermSink {
     associatedtype Value: TermValue
+
+    /// The value's starting level, when it has one (a stability target starts from a level and the causes move it).
+    /// Given first and once. A sheet always shows it, first, whatever its size.
+    mutating func base(_ id: TermID, _ value: Value)
+
+    /// One cause: what it adds to the value, or takes from it.
     mutating func add(_ id: TermID, _ value: Value)
 }
 
@@ -35,62 +46,189 @@ public protocol TermSink {
 public struct SumSink<Value: TermValue>: TermSink, Sendable {
     public var total: Value
     @inlinable public init() { total = Value(raw: 0) }
+    @inlinable public mutating func base(_ id: TermID, _ value: Value) { total = total + value }
     @inlinable public mutating func add(_ id: TermID, _ value: Value) { total = total + value }
 }
 
-/// The «لماذا؟» sink: the first twelve terms, held inline, and the total. A thirteenth term and those after it fold
-/// into one «أخرى» amount, so the total always equals what `SumSink` gives for the same value.
+/// The «لماذا؟» sink: at most twelve rows, held inline, and the total. The total always equals what `SumSink` gives
+/// for the same value function, and counts the same clamps.
+///
+/// What a sheet shows (screen 17):
+/// - A term of exactly 0 takes no row: it neither raises nor lowers.
+/// - Up to twelve rows are kept as they are, in the order they were added, the starting level first.
+/// - With more than twelve, eleven rows are kept and the rest are one row, «أخرى». The kept ones are the starting
+///   level and the largest terms by size; of two terms of one size, the one with the lower `TermID` is kept. So what
+///   is shown does not depend on the order the terms were added in.
+/// - «أخرى» is a row whenever a term was left out, also when those terms cancel to 0: the sheet never hides that
+///   something was left out.
+/// - While nothing clamps, the rows add up to the total exactly. Past the range of an Int64 they cannot: the total
+///   clamps as the simulation's does, and «أخرى» clamps by itself, without counting.
 @frozen
 public struct TermBuffer12<Value: TermValue>: TermSink, Sendable {
     public typealias IDs = (UInt16, UInt16, UInt16, UInt16, UInt16, UInt16, UInt16, UInt16, UInt16, UInt16, UInt16, UInt16)
     public typealias Raws = (Int64, Int64, Int64, Int64, Int64, Int64, Int64, Int64, Int64, Int64, Int64, Int64)
 
-    public var ids: IDs
-    public var raws: Raws
-    /// How many of the twelve slots are used.
-    public var count: UInt8
-    /// The sum of the terms that did not get a slot.
-    public var other: Value
-    /// True once a term has been folded into `other`.
-    public var hasOther: Bool
-    public var total: Value
+    // the 8-byte fields first, so no room is lost between them: 144 bytes for a value of 8
+    @usableFromInline var raws: Raws
+    @usableFromInline var otherRaw: Int64
+    @usableFromInline var sum: Value
+    @usableFromInline var ids: IDs
+    /// How many of the twelve slots are used: never above 12, and 11 once a term has been left out.
+    @usableFromInline var used: UInt8
+    /// 1 when slot 0 holds the starting level, which is never left out.
+    @usableFromInline var pinned: UInt8
+    /// True once a term has been left out into «أخرى».
+    @usableFromInline var folded: Bool
 
+    @inlinable
     public init() {
-        ids = (0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
         raws = (0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-        count = 0
-        other = Value(raw: 0)
-        hasOther = false
-        total = Value(raw: 0)
+        otherRaw = 0
+        sum = Value(raw: 0)
+        ids = (0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+        used = 0
+        pinned = 0
+        folded = false
     }
 
-    public mutating func add(_ id: TermID, _ value: Value) {
-        total = total + value
-        if count < 12 {
-            let slot = Int(count)
-            let raw = value.raw
-            withUnsafeMutableBytes(of: &ids) { $0.storeBytes(of: id.raw, toByteOffset: slot * 2, as: UInt16.self) }
-            withUnsafeMutableBytes(of: &raws) { $0.storeBytes(of: raw, toByteOffset: slot * 8, as: Int64.self) }
-            count += 1
+    /// A sheet as a save holds it (the campaign log keeps each entry's «لماذا؟» as it was): the kept rows in order,
+    /// whether the first is the starting level, the «أخرى» amount when terms were left out, and the total. Nil when it
+    /// could not be a sheet this type makes: more than twelve rows, «أخرى» beside any number of rows but eleven, or a
+    /// starting level with no rows.
+    @inlinable
+    public init?(saved rows: [(id: TermID, value: Value)], hasBase: Bool, other: Value?, total: Value) {
+        guard rows.count <= 12, other == nil || rows.count == 11, !hasBase || !rows.isEmpty else { return nil }
+        self.init()
+        for (slot, row) in rows.enumerated() { set(slot, id: row.id.raw, raw: row.value.raw) }
+        used = UInt8(truncatingIfNeeded: rows.count)
+        pinned = hasBase ? 1 : 0
+        folded = other != nil
+        otherRaw = other?.raw ?? 0
+        sum = total
+    }
+
+    /// The kept rows, the starting level included: 0...12.
+    @inlinable public var count: Int { Int(used) }
+    /// True when the first row is the value's starting level.
+    @inlinable public var hasBase: Bool { pinned != 0 }
+    /// True once a term has been left out into «أخرى».
+    @inlinable public var hasOther: Bool { folded }
+    /// What the terms that were left out add up to (0 when none was).
+    @inlinable public var other: Value { Value(raw: otherRaw) }
+    /// The value: every term added in order, as `SumSink` adds them.
+    @inlinable public var total: Value { sum }
+
+    // The slots are two tuples read and written by position. Every caller keeps `slot` in 0..<12.
+    @inlinable
+    func id(at slot: Int) -> UInt16 {
+        withUnsafeBytes(of: ids) { $0.load(fromByteOffset: slot * 2, as: UInt16.self) }
+    }
+
+    @inlinable
+    func raw(at slot: Int) -> Int64 {
+        withUnsafeBytes(of: raws) { $0.load(fromByteOffset: slot * 8, as: Int64.self) }
+    }
+
+    @inlinable
+    mutating func set(_ slot: Int, id: UInt16, raw: Int64) {
+        withUnsafeMutableBytes(of: &ids) { $0.storeBytes(of: id, toByteOffset: slot * 2, as: UInt16.self) }
+        withUnsafeMutableBytes(of: &raws) { $0.storeBytes(of: raw, toByteOffset: slot * 8, as: Int64.self) }
+    }
+
+    /// Adds into «أخرى»: clamped, not counted. The simulation's sink has no such sum, so a clamp here must not raise
+    /// the game's count.
+    @inlinable
+    mutating func leaveOut(_ raw: Int64) {
+        let (v, overflow) = otherRaw.addingReportingOverflow(raw)
+        otherRaw = overflow ? (otherRaw < 0 ? .min : .max) : v
+        folded = true
+    }
+
+    /// The slot of the kept term that goes first when a row is needed: the smallest by size; of two of one size, the
+    /// one with the higher number; of two with one number, the later. Never the starting level.
+    @inlinable
+    func smallestSlot() -> Int {
+        var slot = Int(pinned)
+        var size = raw(at: slot).magnitude
+        var number = id(at: slot)
+        var i = slot + 1
+        while i < Int(used) {
+            let s = raw(at: i).magnitude
+            let n = id(at: i)
+            if s < size || (s == size && n >= number) {
+                slot = i
+                size = s
+                number = n
+            }
+            i += 1
+        }
+        return slot
+    }
+
+    /// Takes a slot's term out of the rows and into «أخرى»; the rows after it move up, so the order stays.
+    @inlinable
+    mutating func leaveOutSlot(_ slot: Int) {
+        leaveOut(raw(at: slot))
+        var i = slot
+        while i + 1 < Int(used) {
+            set(i, id: id(at: i + 1), raw: raw(at: i + 1))
+            i += 1
+        }
+        used -= 1
+    }
+
+    @inlinable
+    public mutating func base(_ id: TermID, _ value: Value) {
+        if used == 0 {
+            sum = sum + value
+            set(0, id: id.raw, raw: value.raw)
+            used = 1
+            pinned = 1
         } else {
-            other = other + value
-            hasOther = true
+            add(id, value)                                          // not given first: a term like any other
         }
     }
 
-    /// The term in a slot (0..<count), in the order the terms were added; nil past the last one.
-    public func term(_ slot: Int) -> (id: TermID, value: Value)? {
-        guard slot >= 0, slot < Int(count) else { return nil }
-        let id = withUnsafeBytes(of: ids) { $0.load(fromByteOffset: slot * 2, as: UInt16.self) }
-        let raw = withUnsafeBytes(of: raws) { $0.load(fromByteOffset: slot * 8, as: Int64.self) }
-        return (TermID(raw: id), Value(raw: raw))
+    @inlinable
+    public mutating func add(_ id: TermID, _ value: Value) {
+        sum = sum + value
+        let raw = value.raw
+        if raw == 0 { return }
+        if !folded {
+            if used < 12 {
+                set(Int(used), id: id.raw, raw: raw)
+                used += 1
+                return
+            }
+            leaveOutSlot(smallestSlot())                            // a thirteenth term: eleven rows and «أخرى» from now on
+        }
+        // eleven rows are kept: the new term takes a row only if it outranks the smallest of them
+        let slot = smallestSlot()
+        let size = self.raw(at: slot).magnitude
+        let number = self.id(at: slot)
+        if raw.magnitude > size || (raw.magnitude == size && id.raw < number) {
+            leaveOutSlot(slot)
+            set(Int(used), id: id.raw, raw: raw)
+            used += 1
+        } else {
+            leaveOut(raw)
+        }
     }
 
-    /// The rows a sheet shows: the kept terms, then «أخرى» when anything was folded.
-    public var rowCount: Int { Int(count) + (hasOther ? 1 : 0) }
+    /// The kept row in a slot (0..<count), in the order the terms were added; nil outside.
+    @inlinable
+    public func term(_ slot: Int) -> (id: TermID, value: Value)? {
+        guard slot >= 0, slot < Swift.min(Int(used), 12) else { return nil }
+        return (TermID(raw: id(at: slot)), Value(raw: raw(at: slot)))
+    }
 
+    /// The rows a sheet shows: the kept rows, then «أخرى» when a term was left out. Never above 12.
+    @inlinable public var rowCount: Int { Int(used) + (folded ? 1 : 0) }
+
+    /// A row of the sheet (0..<rowCount): a kept row, or «أخرى» (`TermID.other`) as the last one; nil outside.
+    @inlinable
     public func row(_ i: Int) -> (id: TermID, value: Value)? {
         if let t = term(i) { return t }
-        return hasOther && i == Int(count) ? (TermID.other, other) : nil
+        return folded && i == Int(used) ? (TermID.other, other) : nil
     }
 }
