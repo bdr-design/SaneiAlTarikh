@@ -112,6 +112,28 @@ enum FixedMath {
         }
         return clamp(q, negative: negative)
     }
+
+    /// a * n / d to the nearest whole, ties away from zero: the product is 128 bits wide, so nothing is lost before
+    /// the division. Clamped and counted when the result does not fit, and when d is zero: 0 when the product is 0
+    /// too, anything else the end of the range on the product's side.
+    @inlinable
+    static func mulDiv(_ a: Int64, _ n: Int64, _ d: Int64) -> Int64 {
+        let p = a.magnitude.multipliedFullWidth(by: n.magnitude)
+        let productNegative = (a < 0) != (n < 0)
+        if d == 0 {
+            Saturation.record()
+            return p.high == 0 && p.low == 0 ? 0 : (productNegative ? .min : .max)
+        }
+        return divide(high: p.high, low: p.low, by: d.magnitude, negative: productNegative != (d < 0))
+    }
+
+    /// A magnitude and a sign as an Int64, held at the ends of the range and not counted: for a result its caller
+    /// bounds anyway.
+    @inlinable
+    static func held(_ m: UInt64, negative: Bool) -> Int64 {
+        if negative { return m <= UInt64(1) << 63 ? Int64(truncatingIfNeeded: 0 &- m) : .min }
+        return m <= UInt64(Int64.max) ? Int64(truncatingIfNeeded: m) : .max
+    }
 }
 
 /// A number with 32 binary places in an Int64: about ±2.1 billion, in steps of 2^-32. Growth, productivity,
@@ -140,6 +162,27 @@ public struct Q32: Sendable, Hashable, Comparable {
     /// The ratio of two whole numbers, n / d. Dividing by zero is a counted clamp: 0 / 0 is 0, anything else the end
     /// of the range on n's side.
     @inlinable public init(ratio n: Int64, _ d: Int64) { raw = FixedMath.divShift32(n, d) }
+
+    /// n / d held inside `bounds`, and never counted. For a ratio the model bounds anyway (a gap between demand and
+    /// supply held to ±8%), where a divisor of zero is an ordinary day, not a fault: the game's count of clamps stays
+    /// 0. With d = 0: the upper bound when n is above 0, the lower when it is below, and 0, held inside the bounds,
+    /// when n is 0 too.
+    @inlinable
+    public init(ratio n: Int64, _ d: Int64, within bounds: ClosedRange<Q32>) {
+        var v: Int64
+        if d == 0 {
+            v = n == 0 ? 0 : (n < 0 ? .min : .max)
+        } else {
+            let negative = (n < 0) != (d < 0)
+            let m = n.magnitude
+            if let q = FixedMath.quotient(high: m >> 32, low: m << 32, by: d.magnitude) {
+                v = FixedMath.held(q, negative: negative)
+            } else {
+                v = negative ? .min : .max
+            }
+        }
+        raw = Swift.min(Swift.max(v, bounds.lowerBound.raw), bounds.upperBound.raw)
+    }
 
     /// A ratio in basis points as a number (10,000 bp = 1).
     @inlinable
@@ -181,6 +224,15 @@ public struct Q32: Sendable, Hashable, Comparable {
     /// The square root (0, counted, for a negative number). Never above the true root; within one step (2^-32) of it
     /// below 1, and within 2^-30 of it, relative, from 1 up.
     @inlinable public func squareRoot() -> Q32 { DMath.sqrt(self) }
+
+    /// The size of the number, without its sign (the opposite of the lowest number is the highest, counted).
+    @inlinable public var magnitude: Q32 { raw < 0 ? Q32(raw: FixedMath.negate(raw)) : self }
+
+    /// The number held inside `bounds`: a bound the model sets. Not counted.
+    @inlinable
+    public func clamped(to bounds: ClosedRange<Q32>) -> Q32 {
+        Q32(raw: Swift.min(Swift.max(raw, bounds.lowerBound.raw), bounds.upperBound.raw))
+    }
 }
 
 /// A ratio in basis points in an Int32: 1 bp = 1/10,000, so 10,000 is the whole. Shares, rates, unrest, party support.
@@ -208,6 +260,25 @@ public struct BP: Sendable, Hashable, Comparable {
             return
         }
         raw = FixedMath.clamp32(q, negative: negative)
+    }
+
+    /// n / d in basis points held inside `bounds`, and never counted (see `Q32.init(ratio:_:within:)`). With d = 0:
+    /// the upper bound when n is above 0, the lower when it is below, and 0, held inside the bounds, when n is 0 too.
+    @inlinable
+    public init(ratio n: Int64, _ d: Int64, within bounds: ClosedRange<BP>) {
+        var v: Int64
+        if d == 0 {
+            v = n == 0 ? 0 : (n < 0 ? .min : .max)
+        } else {
+            let negative = (n < 0) != (d < 0)
+            let p = n.magnitude.multipliedFullWidth(by: 10_000)
+            if let q = FixedMath.quotient(high: p.high, low: p.low, by: d.magnitude) {
+                v = FixedMath.held(q, negative: negative)
+            } else {
+                v = negative ? .min : .max
+            }
+        }
+        raw = Int32(truncatingIfNeeded: Swift.min(Swift.max(v, Int64(bounds.lowerBound.raw)), Int64(bounds.upperBound.raw)))
     }
 
     /// A number as a ratio in basis points (1 = 10,000 bp; clamped and counted beyond ±214,748.3647).
@@ -272,6 +343,12 @@ public struct BP: Sendable, Hashable, Comparable {
         }
         return FixedMath.clamp((q1 << 32) | (t0 / 10_000), negative: negative)
     }
+
+    /// The ratio held inside `bounds`: a bound the model sets. Not counted.
+    @inlinable
+    public func clamped(to bounds: ClosedRange<BP>) -> BP {
+        BP(raw: Swift.min(Swift.max(raw, bounds.lowerBound.raw), bounds.upperBound.raw))
+    }
 }
 
 /// A level kept as its base-2 logarithm, with 32 binary places: price levels, exchange rates, the USD deflator.
@@ -283,11 +360,23 @@ public struct LogQ: Sendable, Hashable, Comparable {
     /// The stored bits: `1 << 32` is the logarithm 1, the level 2.
     @inlinable public init(raw: Int64) { self.raw = raw }
 
-    /// The logarithm of a level, within 2e-7 (the bottom of the range, counted, when the level is not positive). It
-    /// takes a level, not an exponent. A level below 1 has few bits as a `Q32` (1/20,500 is already 2e-6 off): build a
-    /// small level as the negated logarithm of its reciprocal, `-LogQ(Q32(20_500))`. A level within about 0.17 of the top of
-    /// `Q32`'s range rounds to the logarithm 31, whose own level no longer fits.
-    @inlinable public init(_ level: Q32) { self = DMath.log2(level) }
+    /// The logarithm of a level, within 2e-7 (the bottom of the range, counted, when the level is not positive). A
+    /// level below 1 has few bits as a `Q32` (1/20,500 is already 2e-6 off): build a small level from two whole
+    /// numbers, `LogQ(ratio: 1, 20_500)`. A level within about 0.17 of the top of `Q32`'s range rounds to the
+    /// logarithm 31, whose own level no longer fits.
+    @inlinable public init(level: Q32) { self = DMath.log2(level) }
+
+    /// The logarithm with this value: `LogQ(exponent: Q32(3))` is the level 2^3 = 8. Nothing is computed: the label
+    /// says the number is already a logarithm, where `init(level:)` takes one.
+    @inlinable public init(exponent: Q32) { raw = exponent.raw }
+
+    /// The logarithm of n / d for two whole numbers above 0, of any size (a price index from two totals, a small
+    /// rate): within 4e-7. Counted when either is not above 0: the bottom of the range when n is not, the top when
+    /// only d is not.
+    @inlinable public init(ratio n: Int64, _ d: Int64) { self = DMath.log2(ratio: n, d) }
+
+    /// The logarithm as a plain number: the power of 2 the level is.
+    @inlinable public var exponent: Q32 { Q32(raw: raw) }
 
     /// The logarithm 0: the level 1.
     @inlinable public static var zero: LogQ { LogQ(raw: 0) }
@@ -299,6 +388,16 @@ public struct LogQ: Sendable, Hashable, Comparable {
     @inlinable public static prefix func - (a: LogQ) -> LogQ { LogQ(raw: FixedMath.negate(a.raw)) }
     @inlinable public static func += (a: inout LogQ, b: LogQ) { a = a + b }
     @inlinable public static func -= (a: inout LogQ, b: LogQ) { a = a - b }
+
+    /// The level raised to a power: an elasticity applied to a level, or a decay. Level 8 to the power 1/3 is
+    /// `LogQ(exponent: Q32(3)) * Q32(ratio: 1, 3)`, the level 2. Clamped and counted like any product.
+    @inlinable public static func * (a: LogQ, b: Q32) -> LogQ { LogQ(raw: FixedMath.mulShift32(a.raw, b.raw)) }
+
+    /// The logarithm held inside `bounds`: a bound the model sets. Not counted.
+    @inlinable
+    public func clamped(to bounds: ClosedRange<LogQ>) -> LogQ {
+        LogQ(raw: Swift.min(Swift.max(raw, bounds.lowerBound.raw), bounds.upperBound.raw))
+    }
 
     /// The level itself as a `Q32`: clamped and counted from 2^31 up, coarse below 1 (a `Q32` has few bits there) and
     /// 0 below 2^-33. For showing a level, or a factor near 1. To apply a level to money use `applied(to:)` or

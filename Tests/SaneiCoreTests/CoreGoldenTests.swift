@@ -203,7 +203,7 @@ final class CoreGoldenTests: XCTestCase {
             return n
         }
         each(CoreGolden.log2) { x, r, n in
-            XCTAssertEqual(LogQ(Q32(raw: x)).raw, r, "the logarithm of \(x)")
+            XCTAssertEqual(LogQ(level: Q32(raw: x)).raw, r, "the logarithm of \(x)")
             return n
         }
         each(CoreGolden.scale) { a, y, r, n in

@@ -1,7 +1,7 @@
-// Money in the simulation (§2.3, §2.4's ledger, ADR 0019 to come): whole numbers in three kinds of unit. The types are
-// distinct, so adding a local-currency amount to a dollar amount does not compile. The compiler does not tell one
-// currency's `LCU` from another's, nor a currency before and after a redenomination: the ledger must keep those apart.
-// stdlib only.
+// Money and people in the simulation (§2.3, §2.4's ledger, ADR 0019 to come): whole numbers, money in three kinds of
+// unit. The types are distinct, so adding a local-currency amount to a dollar amount, or to people, does not compile.
+// The compiler does not tell one currency's `LCU` from another's, nor a currency before and after a redenomination:
+// the ledger must keep those apart. stdlib only.
 
 /// A whole amount in one unit. Sums clamp and count (Saturation); amounts of different units cannot be combined.
 public protocol Amount: Sendable, Hashable, Comparable {
@@ -27,6 +27,45 @@ extension Amount {
     /// The amount times a level kept as a logarithm (a price index, a growth factor), in the same unit. Within 6e-8
     /// of the true product plus one unit; not exactly reversible (see `LogQ.applied`).
     @inlinable public func times(_ level: LogQ) -> Self { Self(raw: level.applied(to: raw)) }
+
+    /// The amount a whole number of times (a wage times a headcount). Clamped and counted.
+    @inlinable
+    public func times(_ count: Int64) -> Self {
+        let (v, overflow) = raw.multipliedReportingOverflow(by: count)
+        if !overflow { return Self(raw: v) }
+        Saturation.record()
+        return Self(raw: (raw < 0) != (count < 0) ? .min : .max)
+    }
+
+    /// The amount times n / d, exactly rounded at any size: the product is 128 bits wide, so 1/7 of 10^15 is right to
+    /// the unit, where a `Q32` or `BP` factor has already been rounded. Clamped and counted when the result does not
+    /// fit, and when d is zero (0 when the product is 0 too).
+    @inlinable public func times(_ n: Int64, over d: Int64) -> Self { Self(raw: FixedMath.mulDiv(raw, n, d)) }
+
+    /// The amount shared among a whole number, to the nearest unit (a total over a headcount). Dividing by zero is a
+    /// counted clamp: 0 for an amount of 0, anything else the end of the range on the amount's side. The parts do not
+    /// add up to the amount: where they must, use `ShareSplitter`.
+    @inlinable public func divided(by count: Int64) -> Self { Self(raw: FixedMath.mulDiv(raw, 1, count)) }
+
+    /// How many times `other` goes into this amount, as a number: the ratio of two amounts of one unit (debt to
+    /// revenue). Dividing by zero is a counted clamp; for a ratio the model bounds, use `ratio(to:within:)`.
+    @inlinable public func ratio(to other: Self) -> Q32 { Q32(ratio: raw, other.raw) }
+
+    /// The same ratio held inside `bounds` and never counted (see `Q32.init(ratio:_:within:)`).
+    @inlinable
+    public func ratio(to other: Self, within bounds: ClosedRange<Q32>) -> Q32 { Q32(ratio: raw, other.raw, within: bounds) }
+
+    /// This amount as a share of a total of the same unit, in basis points. Dividing by zero is a counted clamp.
+    @inlinable public func share(of total: Self) -> BP { BP(ratio: raw, total.raw) }
+
+    /// The size of the amount, without its sign (the opposite of the lowest amount is the highest, counted).
+    @inlinable public var magnitude: Self { raw < 0 ? Self(raw: FixedMath.negate(raw)) : self }
+
+    /// The amount held inside `bounds`: a bound the model sets. Not counted.
+    @inlinable
+    public func clamped(to bounds: ClosedRange<Self>) -> Self {
+        Self(raw: Swift.min(Swift.max(raw, bounds.lowerBound.raw), bounds.upperBound.raw))
+    }
 }
 
 /// Local currency, in the currency's own scale (10^k local units): treasury, taxes, domestic debt, the money base,
@@ -66,4 +105,49 @@ public struct Money: Amount {
     public init(_ nominal: USDn, deflator: LogQ) {
         raw = (-deflator).applied(to: nominal.raw)
     }
+}
+
+/// People, as one government counts them (§2.3): a whole number in an Int64. It adds, scales and splits like any
+/// amount; a province or a cohort keeps its people in the narrower `Pop32`.
+@frozen
+public struct Pop: Amount {
+    public var raw: Int64
+    @inlinable public init(raw: Int64) { self.raw = raw }
+    @inlinable public static func == (a: Pop, b: Pop) -> Bool { a.raw == b.raw }
+
+    /// A province's or a cohort's people, widened. Always fits.
+    @inlinable public init(_ narrow: Pop32) { raw = Int64(narrow.raw) }
+}
+
+/// People in one province or one cohort (§2.3): an Int32, about 2.1 billion at most. Half the bytes of `Pop` in the
+/// largest columns. Sums clamp and count; a country's total is a `Pop`.
+@frozen
+public struct Pop32: Sendable, Hashable, Comparable {
+    public var raw: Int32
+    @inlinable public init(raw: Int32) { self.raw = raw }
+
+    /// A count of people narrowed to a province's or a cohort's width (clamped and counted beyond it).
+    @inlinable
+    public init(_ wide: Pop) {
+        raw = FixedMath.clamp32(wide.raw.magnitude, negative: wide.raw < 0)
+    }
+
+    @inlinable public static var zero: Pop32 { Pop32(raw: 0) }
+    @inlinable public static func == (a: Pop32, b: Pop32) -> Bool { a.raw == b.raw }
+    @inlinable public static func < (a: Pop32, b: Pop32) -> Bool { a.raw < b.raw }
+
+    @inlinable
+    public static func + (a: Pop32, b: Pop32) -> Pop32 {
+        let v = Int64(a.raw) + Int64(b.raw)
+        return Pop32(raw: FixedMath.clamp32(v.magnitude, negative: v < 0))
+    }
+
+    @inlinable
+    public static func - (a: Pop32, b: Pop32) -> Pop32 {
+        let v = Int64(a.raw) - Int64(b.raw)
+        return Pop32(raw: FixedMath.clamp32(v.magnitude, negative: v < 0))
+    }
+
+    @inlinable public static func += (a: inout Pop32, b: Pop32) { a = a + b }
+    @inlinable public static func -= (a: inout Pop32, b: Pop32) { a = a - b }
 }

@@ -64,4 +64,61 @@ public struct DetRNG: Sendable {
     public mutating func chance(_ p: BP) -> Bool {
         bp() < p
     }
+
+    /// True with probability n / d, for chances finer than a basis point (a once-in-50-years daily hazard is
+    /// 1 in 18,250). One draw, always. Never when n is 0 or d is 0; always when n is d or more.
+    @inlinable
+    public mutating func chance(_ n: UInt64, in d: UInt64) -> Bool {
+        let draw = below(d)
+        return d != 0 && draw < n
+    }
+
+    /// Picks one of the weights' positions with a chance in proportion to its weight: one draw. Nil, with no draw,
+    /// when there are no weights or none is above 0. A weight below 0 counts as 0. If the weights' sum passes the
+    /// range of a `UInt64` it is held there, counted, and the last weights lose their chance.
+    @inlinable
+    public mutating func pick<Weights: Collection>(_ weights: Weights, weight: (Weights.Element) -> Int64) -> Weights.Index? {
+        var total: UInt64 = 0
+        for w in weights {
+            let v = weight(w)
+            if v <= 0 { continue }
+            let (sum, overflow) = total.addingReportingOverflow(UInt64(v))
+            if overflow {
+                Saturation.record()
+                total = .max
+                break
+            }
+            total = sum
+        }
+        if total == 0 { return nil }
+        var left = below(total)
+        var i = weights.startIndex
+        while i != weights.endIndex {
+            let v = weight(weights[i])
+            if v > 0 {
+                if left < UInt64(v) { return i }
+                left -= UInt64(v)
+            }
+            weights.formIndex(after: &i)
+        }
+        return nil                                                  // not reached: the draw is below the sum
+    }
+
+    /// Picks a position of `weights` with a chance in proportion to its weight (see the general form).
+    @inlinable
+    public mutating func pick(_ weights: [Int64]) -> Int? {
+        pick(weights) { $0 }
+    }
+
+    /// Puts `items` in a random order, every order with the same chance: one draw per item but the last (none for
+    /// fewer than two items). Our own mapping, not the standard library's, which may change between Swift versions.
+    @inlinable
+    public mutating func shuffle<Items: MutableCollection & RandomAccessCollection>(_ items: inout Items) {
+        var n = items.count
+        while n > 1 {
+            let j = Int(truncatingIfNeeded: below(UInt64(n)))
+            n -= 1
+            items.swapAt(items.index(items.startIndex, offsetBy: n), items.index(items.startIndex, offsetBy: j))
+        }
+    }
 }

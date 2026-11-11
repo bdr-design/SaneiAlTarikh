@@ -215,7 +215,7 @@ final class FixedPointTests: XCTestCase {
     }
 
     func testLevelsAsLogarithms() {
-        XCTAssertEqual(LogQ(Q32.one), LogQ.zero)
+        XCTAssertEqual(LogQ(level: Q32.one), LogQ.zero)
         XCTAssertEqual(LogQ.zero.level, Q32.one)
         let double = LogQ(raw: 1 << 32)
         XCTAssertEqual(double.level, Q32(2))
@@ -225,7 +225,7 @@ final class FixedPointTests: XCTestCase {
         // whole powers of two are exact both ways
         for k in -20...30 {
             let level = Q32(raw: Int64(1) << Int64(32 + k))
-            XCTAssertEqual(LogQ(level).raw, Int64(k) << 32, "log2 of 2^\(k)")
+            XCTAssertEqual(LogQ(level: level).raw, Int64(k) << 32, "log2 of 2^\(k)")
             XCTAssertEqual(LogQ(raw: Int64(k) << 32).level, level, "2^\(k)")
         }
         // there and back within one part in a million (§2.3), and never out of order

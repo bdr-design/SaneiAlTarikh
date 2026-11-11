@@ -33,6 +33,18 @@ public enum DMath {
         return Q32(raw: Int64(truncatingIfNeeded: (m + (UInt64(1) << (s - 1))) >> s))
     }
 
+    /// The base-2 logarithm of a whole number above 0, with 32 binary places (0 for 1, 63 and a fraction at most).
+    @inlinable
+    static func log2Bits(_ r: UInt64) -> Int64 {
+        let lz = r.leadingZeroBitCount                              // 0...63
+        let u = r << UInt64(lz)                                     // the top bit set
+        let i = Int(truncatingIfNeeded: (u >> 53) & 0x3FF)
+        let l0 = log2Table[i]
+        let l1 = log2Table[i + 1]
+        let l = l0 + (((l1 - l0) * ((u >> 21) & 0xFFFF_FFFF) + (UInt64(1) << 31)) >> 32)
+        return (Int64(63 - lz) << 32) + Int64(truncatingIfNeeded: l)
+    }
+
     /// The base-2 logarithm of a level (the bottom of the range, counted, when the level is not positive).
     @inlinable
     public static func log2(_ x: Q32) -> LogQ {
@@ -40,14 +52,20 @@ public enum DMath {
             Saturation.record()
             return LogQ(raw: .min)
         }
-        let r = UInt64(truncatingIfNeeded: x.raw)
-        let lz = r.leadingZeroBitCount                              // 1...63
-        let u = r << UInt64(lz)                                     // the top bit set
-        let i = Int(truncatingIfNeeded: (u >> 53) & 0x3FF)
-        let l0 = log2Table[i]
-        let l1 = log2Table[i + 1]
-        let l = l0 + (((l1 - l0) * ((u >> 21) & 0xFFFF_FFFF) + (UInt64(1) << 31)) >> 32)
-        return LogQ(raw: (Int64(31 - lz) << 32) + Int64(truncatingIfNeeded: l))
+        // a level is its stored whole number over 2^32
+        return LogQ(raw: log2Bits(UInt64(truncatingIfNeeded: x.raw)) - (Int64(32) << 32))
+    }
+
+    /// The base-2 logarithm of n / d for two whole numbers above 0: the difference of their logarithms, so it keeps
+    /// its accuracy (within 4e-7) however large or small the ratio is. Counted when either is not above 0: the bottom
+    /// of the range when n is not, the top when only d is not.
+    @inlinable
+    public static func log2(ratio n: Int64, _ d: Int64) -> LogQ {
+        if n <= 0 || d <= 0 {
+            Saturation.record()
+            return LogQ(raw: n <= 0 ? .min : .max)
+        }
+        return LogQ(raw: log2Bits(UInt64(truncatingIfNeeded: n)) - log2Bits(UInt64(truncatingIfNeeded: d)))
     }
 
     /// A whole amount times 2^y: a price index or an exchange rate applied to money. The level may be far outside
