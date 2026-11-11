@@ -103,6 +103,91 @@ def bp_to_q(bp): return rdiv(bp << 32, 10000)
 def q_to_bp(q): return sat32(rshift(q * 10000, 32))
 
 
+# ---- exact shares and helpers (T-038) ----
+def mul_div(a, n, d):
+    """a * n / d to the nearest whole, ties away from zero; clamped and counted. d = 0 is counted: 0 when the product
+    is 0 too, anything else the end of the range on the product's side."""
+    if d == 0:
+        SAT[0] += 1
+        return 0 if a * n == 0 else (I64_MIN if a * n < 0 else I64_MAX)
+    return sat64(rdiv(a * n, d))
+
+
+def held(v, lo, hi): return lo if v < lo else hi if v > hi else v
+
+
+def q_ratio_within(n, d, lo, hi):
+    """n / d as a Q32, held inside [lo, hi]; never counted."""
+    if d == 0: return held(0 if n == 0 else (I64_MIN if n < 0 else I64_MAX), lo, hi)
+    return held(held(rdiv(n << 32, d), I64_MIN, I64_MAX), lo, hi)
+
+
+def bp_ratio_within(n, d, lo, hi):
+    if d == 0: return held(0 if n == 0 else (I64_MIN if n < 0 else I64_MAX), lo, hi)
+    return held(rdiv(n * 10000, d), lo, hi)
+
+
+def split(whole, weights):
+    """The largest-remainder split: parts in proportion to the weights that add up to the whole."""
+    count = len(weights)
+    if count == 0:
+        if whole != 0: SAT[0] += 1
+        return []
+    ws = []
+    for w in weights:
+        if w < 0: SAT[0] += 1
+        ws.append(max(w, 0))
+    if sum(ws) > M64:
+        SAT[0] += 1
+        while sum(ws) > M64: ws = [w >> 1 for w in ws]
+    total = sum(ws)
+    if total == 0: ws, total = [1] * count, count
+    size = abs(whole)
+    floors = [size * w // total for w in ws]
+    rems = [size * w % total for w in ws]
+    left = size - sum(floors)
+    # the units left over: the largest remainders, the earlier part first among equals
+    order = sorted(range(count), key=lambda i: (-rems[i], i))
+    for i in order[:left]: floors[i] += 1
+    return [-q if whole < 0 else q for q in floors]
+
+
+def split_truth(whole, weights):
+    """What a split must be, said without the algorithm: exact fractions, and the rule's own words."""
+    parts, n = counted(lambda: split(whole, weights))
+    if not weights: return ([], 1 if whole != 0 else 0)
+    assert sum(parts) == whole, (whole, weights)
+    ws = [max(w, 0) for w in weights]
+    clamps = sum(1 for w in weights if w < 0) + (1 if sum(ws) > M64 else 0)
+    if sum(ws) <= M64:
+        total = sum(ws)
+        exact = [Fraction(whole * w, total) if total else Fraction(whole, len(ws)) for w in ws]
+        for part, x in zip(parts, exact):
+            assert abs(part - x) < 1 and (part == 0 or (part < 0) == (whole < 0)), (whole, weights)
+        # a part rounded up never lost less by the rounding than a part rounded down; among equals the earlier is up
+        lost = [abs(x) - abs(x).__floor__() for x in exact]
+        ups = [i for i, (part, x) in enumerate(zip(parts, exact)) if abs(part) > abs(x).__floor__()]
+        downs = [i for i in range(len(ws)) if i not in ups]
+        for u in ups:
+            for dn in downs: assert lost[u] > lost[dn] or (lost[u] == lost[dn] and u < dn), (whole, weights, u, dn)
+    return (parts, clamps)
+
+
+def log2_bits(r):
+    """log2 of a whole number above 0, with 32 binary places."""
+    p = r.bit_length() - 1
+    u = (r << (63 - p)) & M64
+    i, t = (u >> 53) & 0x3FF, (u >> 21) & 0xFFFFFFFF
+    return (p << 32) + LOG2[i] + (((LOG2[i + 1] - LOG2[i]) * t + (1 << 31)) >> 32)
+
+
+def log2_ratio(n, d):
+    if n <= 0 or d <= 0:
+        SAT[0] += 1
+        return I64_MIN if n <= 0 else I64_MAX
+    return log2_bits(n) - log2_bits(d)
+
+
 # ---- DMath ----
 def make_tables():
     two = Decimal(2)
@@ -140,6 +225,7 @@ def log2(x):
     u = (x << (63 - p)) & M64
     i, t = (u >> 53) & 0x3FF, (u >> 21) & 0xFFFFFFFF
     l = LOG2[i] + (((LOG2[i + 1] - LOG2[i]) * t + (1 << 31)) >> 32)
+    assert ((p - 32) << 32) + l == log2_bits(x) - (32 << 32)
     return ((p - 32) << 32) + l
 
 
@@ -209,6 +295,36 @@ class RNG:
     def below(self, n): return (self.next() * n) >> 64
     def bp(self): return self.below(10000)
     def chance(self, p): return self.bp() < p
+
+    def chance_in(self, n, d):
+        draw = self.below(d)
+        return d != 0 and draw < n
+
+    def pick(self, weights):
+        """A position with a chance in proportion to its weight, or -1 with no draw when no weight is above 0."""
+        total = 0
+        for w in weights:
+            if w <= 0: continue
+            if total + w > M64:
+                SAT[0] += 1
+                total = M64
+                break
+            total += w
+        if total == 0: return -1
+        left = self.below(total)
+        for i, w in enumerate(weights):
+            if w > 0:
+                if left < w: return i
+                left -= w
+        raise AssertionError('the draw is below the sum')
+
+    def shuffle(self, items):
+        n = len(items)
+        while n > 1:
+            j = self.below(n)
+            n -= 1
+            items[n], items[j] = items[j], items[n]
+        return items
 
 
 # ---- GameDate (days since 1970-01-01, proleptic Gregorian) ----
@@ -573,7 +689,66 @@ def vectors():
         return scale(nominal, q_neg(d))
     fs.add('moneyDeflated', [I64, I64, I64], [((a, d), lambda a=a, d=d: deflate(a, d)) for a, d in defl + [(s64(g, 45), s64(g, 34)) for _ in range(10)]],
            lambda a, d: scale_truth(a, -d) if d != I64_MIN else None)
+    shares(fs, s64)
     return fs
+
+
+def shares(fs, s64):
+    """T-038: sums that close, exact n / d, bounded ratios, logarithms of ratios, finer chances, choices, people."""
+    I64, I32, U64 = 'Int64', 'Int32', 'UInt64'
+    g = fs.stream()
+    big = 10 ** 15
+    mds = [(big, 1, 7), (big, 2, 3), (-big, 1, 7), (big, -1, 7), (big, 1, -7), (10, 1, 4), (10, 3, 4), (-10, 1, 4), (5, 1, 2), (-5, 1, 2), (7, 0, 5),
+           (0, 9, 0), (7, 1, 0), (-7, 1, 0), (7, -1, 0), (I64_MAX, I64_MAX, I64_MAX), (I64_MIN, I64_MIN, I64_MAX), (I64_MIN, 1, -1), (I64_MIN, -1, -1),
+           (I64_MAX, 2, 1), (I64_MAX, 2, 2), (I64_MAX, 3, 2), (I64_MIN, 3, 3), (1, 1, I64_MIN), (I64_MAX, 1, I64_MIN), (I64_MIN, 1, I64_MIN),
+           (3, 1, 2), (1, 1, 2), (-1, 1, 2), (1, 1, 3), (2, 1, 3), (300_000_000, 1, 225), ((1 << 62) + 1, 1 << 40, 1 << 39)]
+    fs.add('mulDiv', [I64, I64, I64, I64], [((a, n, d), lambda a=a, n=n, d=d: mul_div(a, n, d)) for a, n, d in mds + [(s64(g, 62), s64(g, 40), s64(g, 38)) for _ in range(40)]],
+           lambda a, n, d: by_zero(a * n, I64_MIN, I64_MAX) if d == 0 else want64(Fraction(a * n, d)))
+    g = fs.stream()
+    counts = [(1000, 3), (1000, -3), (-1000, 3), (0, 5), (5, 0), (I64_MAX, 1), (I64_MAX, 2), (I64_MIN, -1), (I64_MIN, 1), (I64_MAX, -2), (1 << 32, 1 << 31), (1 << 32, -(1 << 31)), (-(1 << 32), -(1 << 31)), (3_037_000_500, 3_037_000_500)]
+    fs.add('amountTimesCount', [I64, I64, I64], [((a, n), lambda a=a, n=n: sat64(a * n)) for a, n in counts + [(s64(g, 40), s64(g, 26)) for _ in range(20)]], lambda a, n: want64(a * n))
+    fs.add('amountDividedBy', [I64, I64, I64], [((a, n), lambda a=a, n=n: mul_div(a, 1, n)) for a, n in counts + [(10, 4), (-10, 4), (10, -4), (1, 2), (-1, 2), (I64_MIN, -1), (0, 0), (-3, 0)] + [(s64(g, 60), s64(g, 20)) for _ in range(20)]],
+           lambda a, n: by_zero(a, I64_MIN, I64_MAX) if n == 0 else want64(Fraction(a, n)))
+    g = fs.stream()
+    pct8 = (-ONE * 8 // 100, ONE * 8 // 100)
+    rws = [(5, 0, *pct8), (-5, 0, *pct8), (0, 0, *pct8), (0, 0, ONE, 2 * ONE), (1, 100, *pct8), (9, 100, *pct8), (-9, 100, *pct8), (8, 100, *pct8), (1, 3, 0, ONE), (4, 3, 0, ONE), (-1, 3, 0, ONE),
+           (I64_MAX, 1, I64_MIN, I64_MAX), (I64_MIN, 1, I64_MIN, I64_MAX), (I64_MIN, -1, I64_MIN, I64_MAX), (I64_MAX, -1, -5, 5), (7, I64_MIN, I64_MIN, I64_MAX), (1, 2, ONE // 2, ONE // 2), (1, 2, I64_MIN, I64_MAX), (-1, 2, I64_MIN, I64_MAX)]
+    fs.add('q32RatioWithin', [I64, I64, I64, I64, I64], [((n, d, lo, hi), lambda n=n, d=d, lo=lo, hi=hi: q_ratio_within(n, d, lo, hi)) for n, d, lo, hi in rws + [(s64(g, 50), s64(g, 30), -ONE, ONE) for _ in range(15)]],
+           lambda n, d, lo, hi: (held(0 if n == 0 else (lo if n < 0 else hi), lo, hi) if d == 0 else held(near(Fraction(n * ONE, d)), lo, hi), 0))
+    bws = [(5, 0, -800, 800), (-5, 0, -800, 800), (0, 0, -800, 800), (0, 0, 100, 200), (1, 100, -800, 800), (9, 100, -800, 800), (-9, 100, -800, 800), (1, 3, 0, 10000), (2, 3, 0, 10000), (4, 3, 0, 10000),
+           (I64_MAX, 1, I32_MIN, I32_MAX), (I64_MIN, 1, I32_MIN, I32_MAX), (I64_MIN, -1, I32_MIN, I32_MAX), (1, 6, I32_MIN, I32_MAX), (1, 20000, 0, 10000), (3, 20000, 0, 10000), ((229 << 64) // 10000, 229, I32_MIN, I32_MAX)]
+    fs.add('bpRatioWithin', [I64, I64, I32, I32, I32], [((n, d, lo, hi), lambda n=n, d=d, lo=lo, hi=hi: bp_ratio_within(n, d, lo, hi)) for n, d, lo, hi in bws + [(s64(g, 50), s64(g, 48), -20000, 20000) for _ in range(15)]],
+           lambda n, d, lo, hi: (held(0 if n == 0 else (lo if n < 0 else hi), lo, hi) if d == 0 else held(near(Fraction(n * 10000, d)), lo, hi), 0))
+    g = fs.stream()
+    two_ln = Decimal(2).ln()
+
+    def log_ratio_truth(n, d):
+        if n > 0 and d > 0: assert abs(Decimal(log2_ratio(n, d)) / ONE - (Decimal(n) / Decimal(d)).ln() / two_ln) <= Decimal('4e-7'), (n, d)
+        return None
+    lrs = [(1, 1), (2, 1), (1, 2), (8, 1), (1, 8), (1, 20500), (20500, 1), (3, 1), (1, 3), (I64_MAX, 1), (1, I64_MAX), (I64_MAX, I64_MAX), (1 << 62, 1 << 31), (10, 4), (0, 5), (-1, 5), (5, 0), (5, -1), (0, 0), (-3, -3), (1, 18250), (1000003, 999983)]
+    fs.add('logRatio', [I64, I64, I64], [((n, d), lambda n=n, d=d: log2_ratio(n, d)) for n, d in lrs + [((g.next() % (1 << 60)) + 1, (g.next() % (1 << 44)) + 1) for _ in range(20)]], log_ratio_truth)
+    g = fs.stream()
+    wide = [I64_MAX, I64_MAX, I64_MAX]
+    sps = [(10000, [1, 1, 1, 1, 1, 1]), (10, [1, 1, 1, 1]), (300_000_000, [1] * 225), (10, [0, 0, 0]), (10, [0, 0, 5]), (-10, [1, 1, 1, 1]), (-7, [3, 1]), (7, [3, 1]), (0, [1, 2, 3]), (5, []), (0, []),
+           (100, [1]), (100, [0]), (1, [1, 1, 1]), (2, [1, 1, 1]), (-1, [1, 1, 1]), (10, [5, -3, 5]), (10, [-1, -1]), (7, [2, 2, 2, 2, 2]), (I64_MAX, [1, 1]), (I64_MIN, [1, 1]), (I64_MIN, [1]), (I64_MAX, [I64_MAX, 1]),
+           (1000, wide), (I64_MAX, wide), (I64_MIN, wide + [1]), (10000, [3271, 2910, 1885, 1002, 932]), (450, [7, 7, 7, 1]), (12, [1, 1, 1, 1, 1, 1, 1, 1]), (99, [50, 50]), (-99, [50, 50]), (3, [1, 2, 4, 8, 16])]
+    for _ in range(30):
+        n = 1 + g.next() % 12
+        sps.append((s64(g, 40), [g.next() % (1 << (1 + g.next() % 30)) for _ in range(n)]))
+    fs.add('splits', [I64, '[Int64]', '[Int64]'], [((w, ws), lambda w=w, ws=ws: split(w, ws)) for w, ws in sps], split_truth)
+    # party support: 10,000 bp over the votes, and the same split over a country's provinces by population
+    fs.add('splitsBP', [I32, '[Int64]', '[Int32]'], [((w, ws), lambda w=w, ws=ws: split(w, ws)) for w, ws in
+           [(10000, [1, 1, 1, 1, 1, 1]), (10000, [5_421_332, 4_898_112, 1_200_904, 98_001]), (10000, [0, 0]), (10000, []), (-10000, [1, 2]), (0, [4, 4]), (I32_MAX, [1, 1, 1]), (I32_MIN, [1, 1, 1]), (9999, [1, 1])]], split_truth)
+    c = RNG.keyed(4, 4, 4, 4)
+    fs.add('rngChanceIn', [U64, U64, I32], [((n, d), lambda n=n, d=d: int(c.chance_in(n, d))) for n, d in [(0, 10), (10, 10), (11, 10), (1, 0), (0, 0), (1, 18250), (9125, 18250), (18249, 18250), (1, 2), (1, 2), (1, 2), (1, 2), (M64, M64), (M64 - 1, M64), (1, M64), (3, 7), (3, 7), (3, 7), (3, 7), (3, 7)]])
+    k = RNG.keyed(6, 6, 6, 6)
+    pks = [[1], [0, 1], [1, 0], [0, 0], [], [-5, 3], [3, -5], [-1, -1], [1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 1], [1, 2, 3, 4], [1, 2, 3, 4], [1, 2, 3, 4], [1, 2, 3, 4], [1000, 1], [1, 1000],
+           [I64_MAX, I64_MAX], [I64_MAX, I64_MAX, I64_MAX], [I64_MAX, I64_MAX, I64_MAX], [0, 0, 7, 0], [5, 0, 0, 5], [5, 0, 0, 5], [5, 0, 0, 5]]
+    fs.add('rngPick', ['[Int64]', I32], [((ws,), lambda ws=ws: k.pick(ws)) for ws in pks])
+    h = RNG.keyed(8, 8, 8, 8)
+    fs.add('rngShuffle', [I32, '[Int32]'], [((n,), lambda n=n: h.shuffle(list(range(n)))) for n in [0, 1, 2, 2, 2, 3, 3, 3, 5, 8, 13, 13, 52]])
+    for row in fs[-1][2]: assert sorted(row[1]) == list(range(row[0])), 'a shuffle keeps every item once'
+    fs.add('popNarrowed', [I64, I32], [((v,), lambda v=v: sat32(v)) for v in [0, 1, -1, I32_MAX, I32_MAX + 1, I32_MIN, I32_MIN - 1, I64_MAX, I64_MIN, 1_339_724_852]], lambda v: want32(v))
 
 
 def swift_tables():
@@ -617,7 +792,7 @@ def swift_golden(vs):
 
 def tests_read_every_family(vs):
     """The Swift tests name every family: a family nobody asserts is a hole."""
-    text = ''.join(open(os.path.join(ROOT, 'Tests/SaneiCoreTests', f)).read() for f in ('CoreGoldenTests.swift',))
+    text = ''.join(open(os.path.join(ROOT, 'Tests/SaneiCoreTests', f)).read() for f in ('CoreGoldenTests.swift', 'SharesTests.swift'))
     return [name for name, _, _ in vs if not re.search(r'\bCoreGolden\.' + name + r'\b', text)]
 
 
@@ -637,7 +812,7 @@ def main():
             bad = 1
     unread = tests_read_every_family(vs)
     if unread:
-        print("NOT READ by Tests/SaneiCoreTests/CoreGoldenTests.swift: " + ', '.join(unread))
+        print("NOT READ by Tests/SaneiCoreTests/CoreGoldenTests.swift or SharesTests.swift: " + ', '.join(unread))
         bad = 1
     print(f"core reference: exp2 rel {e:.2e}, log2 abs {l:.2e}, round trip rel {r:.2e}, logistic abs {s:.2e}; "
           f"{len(vs)} families, {sum(len(rows) for _, _, rows in vs)} rows, {SAT[0]} clamps; {'written' if write else ('FAIL' if bad else 'OK')}")

@@ -91,6 +91,28 @@ how a clamp is counted, where the tables come from or how a random draw is mappe
    to 6 for Saturday. Adding months keeps the day of the month where the month has it, so steps do not add up: a term
    counts its months from its start date.
 
+9. **Sums that must close, and the helpers around them (T-038).**
+   - A split (`ShareSplitter`) gives each part its exact share rounded toward zero, then hands the units left over,
+     one each, to the largest remainders; of two equal remainders the earlier part first. So the parts add up to the
+     whole exactly, each is within one unit of its exact share, and the result depends only on the inputs. A whole
+     below 0 splits as its opposite, signs turned. A weight below 0 counts as 0, counted as a clamp. No weight above 0:
+     equal parts. No parts: nothing, counted when the whole is not 0. Weights whose sum passes 64 bits are halved
+     until it fits, counted once. For monthly work on tens to hundreds of parts; it allocates nothing once its room
+     fits the longest list (it sorts with a heap sort of its own).
+   - An amount times n / d is exactly rounded at any size (a 128-bit product, one division); dividing by zero is a
+     counted clamp. An amount times or over a whole count, the ratio of two amounts of one unit, and a share of a
+     total follow the same rules.
+   - A bounded ratio (`Q32(ratio:_:within:)`, `BP(ratio:_:within:)`) is for a ratio the model bounds anyway: a zero
+     divisor there is an ordinary day, so it is held inside the bounds and never counted. `clamped(to:)` likewise.
+   - `LogQ(level:)` takes a level, `LogQ(exponent:)` a number that is already a logarithm (nothing computed), and
+     `LogQ(ratio: n, d)` the logarithm of a ratio of two whole numbers, within 4e-7 at any size. A level to a power is
+     the logarithm times a `Q32`, clamped and counted like a product.
+   - `chance(n, in: d)` takes chances finer than a basis point, in one draw. `pick` chooses a position in proportion
+     to whole-number weights, in one draw (none when no weight is above 0). `shuffle` is Fisher–Yates on `below`, one
+     draw per item but the last. All three are our own mappings, locked by rows.
+   - People: `Pop` (an Int64, an `Amount`) per government, `Pop32` (an Int32) per province or cohort; narrowing
+     clamps and counts.
+
 ## Consequences
 - A change to any algorithm here changes saves and replays: it needs a new ADR, the reference and the vectors
   regenerated together, and a save migration if state depends on it.

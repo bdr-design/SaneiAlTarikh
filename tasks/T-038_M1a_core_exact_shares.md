@@ -45,3 +45,19 @@ vectors).
 ## Test and risks
 As T-036. Risk: the split's cost on long inputs (a sort of remainders): it is for monthly work on tens to hundreds of
 parts, not for per-province daily loops; the doc comment says so.
+
+## What was built
+- `Sources/SaneiCore/Shares.swift`: `ShareSplitter` (the rule in ADR 0002 decision 9), with forms for whole numbers,
+  any `Amount` and `BP`, and a general form that reads a weight from and writes a part into any column.
+- `FixedPoint.swift`: `FixedMath.mulDiv`; `Q32(ratio:_:within:)`, `BP(ratio:_:within:)`; `magnitude` and
+  `clamped(to:)`; `LogQ(level:)` (it was `LogQ(_:)`), `LogQ(exponent:)`, `LogQ(ratio:)`, `exponent`, `LogQ * Q32`.
+- `DMath.swift`: `log2(ratio:)` on one shared table step (`log2Bits`).
+- `Money.swift`: an amount `times(count)`, `times(n, over: d)`, `divided(by:)`, `ratio(to:)` (and bounded),
+  `share(of:)`, `magnitude`, `clamped(to:)`; `Pop` and `Pop32`.
+- `DetRNG.swift`: `chance(_:in:)`, `pick`, `shuffle`.
+- The reference: 12 families (mulDiv, amountTimesCount, amountDividedBy, q32RatioWithin, bpRatioWithin, logRatio,
+  splits, splitsBP, rngChanceIn, rngPick, rngShuffle, popNarrowed), each checked against exact fractions, decimals
+  or the split rule stated a second time, except the random draws, which are their own definitions.
+- `Tests/SaneiCoreTests/SharesTests.swift`: every row with its clamp count; the split's properties on 3,000 random
+  inputs; the hazard and choice frequencies.
+
