@@ -116,23 +116,24 @@ def mul_div(a, n, d):
 def held(v, lo, hi): return lo if v < lo else hi if v > hi else v
 
 
-def q_ratio_within(n, d, lo, hi):
-    """n / d as a Q32, held inside [lo, hi]; never counted."""
-    if d == 0: return held(0 if n == 0 else (I64_MIN if n < 0 else I64_MAX), lo, hi)
+def q_ratio_within(n, d, lo, hi, u=0):
+    """n / d as a Q32, held inside [lo, hi]; never counted. u is the value for 0 / 0."""
+    if d == 0: return held(u if n == 0 else (I64_MIN if n < 0 else I64_MAX), lo, hi)
     return held(held(rdiv(n << 32, d), I64_MIN, I64_MAX), lo, hi)
 
 
-def bp_ratio_within(n, d, lo, hi):
-    if d == 0: return held(0 if n == 0 else (I64_MIN if n < 0 else I64_MAX), lo, hi)
+def bp_ratio_within(n, d, lo, hi, u=0):
+    if d == 0: return held(u if n == 0 else (I64_MIN if n < 0 else I64_MAX), lo, hi)
     return held(rdiv(n * 10000, d), lo, hi)
 
 
 def split(whole, weights):
-    """The largest-remainder split: parts in proportion to the weights that add up to the whole."""
+    """The largest-remainder split (Hare): parts in proportion to the weights that add up to the whole, and whether
+    any weight was above 0."""
     count = len(weights)
     if count == 0:
         if whole != 0: SAT[0] += 1
-        return []
+        return ([], 0)
     ws = []
     for w in weights:
         if w < 0: SAT[0] += 1
@@ -141,36 +142,44 @@ def split(whole, weights):
         SAT[0] += 1
         while sum(ws) > M64: ws = [w >> 1 for w in ws]
     total = sum(ws)
+    claimed = int(total != 0)
     if total == 0: ws, total = [1] * count, count
     size = abs(whole)
     floors = [size * w // total for w in ws]
     rems = [size * w % total for w in ws]
     left = size - sum(floors)
-    # the units left over: the largest remainders, the earlier part first among equals
-    order = sorted(range(count), key=lambda i: (-rems[i], i))
+    # the units left over: the largest remainders, then the larger weight, then the earlier part
+    order = sorted(range(count), key=lambda i: (-rems[i], -ws[i], i))
     for i in order[:left]: floors[i] += 1
-    return [-q if whole < 0 else q for q in floors]
+    return ([-q if whole < 0 else q for q in floors], claimed)
 
 
-def split_truth(whole, weights):
+def split_truth(whole, weights, narrow=False):
     """What a split must be, said without the algorithm: exact fractions, and the rule's own words."""
-    parts, n = counted(lambda: split(whole, weights))
-    if not weights: return ([], 1 if whole != 0 else 0)
+    (parts, claimed), n = counted(lambda: split(whole, weights))
+    if not weights: return (([], 0), 1 if whole != 0 else 0)
     assert sum(parts) == whole, (whole, weights)
     ws = [max(w, 0) for w in weights]
     clamps = sum(1 for w in weights if w < 0) + (1 if sum(ws) > M64 else 0)
+    assert claimed == int(sum(ws) > 0)
     if sum(ws) <= M64:
+        if sum(ws) == 0: ws = [1] * len(ws)
         total = sum(ws)
-        exact = [Fraction(whole * w, total) if total else Fraction(whole, len(ws)) for w in ws]
+        exact = [Fraction(whole * w, total) for w in ws]
         for part, x in zip(parts, exact):
             assert abs(part - x) < 1 and (part == 0 or (part < 0) == (whole < 0)), (whole, weights)
-        # a part rounded up never lost less by the rounding than a part rounded down; among equals the earlier is up
+        # a part rounded up lost more by the rounding than a part rounded down; among equals, the larger weight,
+        # then the earlier part; and a smaller weight never gets more than a larger one
         lost = [abs(x) - abs(x).__floor__() for x in exact]
         ups = [i for i, (part, x) in enumerate(zip(parts, exact)) if abs(part) > abs(x).__floor__()]
         downs = [i for i in range(len(ws)) if i not in ups]
         for u in ups:
-            for dn in downs: assert lost[u] > lost[dn] or (lost[u] == lost[dn] and u < dn), (whole, weights, u, dn)
-    return (parts, clamps)
+            for dn in downs:
+                assert lost[u] > lost[dn] or (lost[u] == lost[dn] and (ws[u] > ws[dn] or (ws[u] == ws[dn] and u < dn))), (whole, weights, u, dn)
+        for i in range(len(ws)):
+            for j in range(len(ws)):
+                if ws[i] < ws[j]: assert abs(parts[i]) <= abs(parts[j]), (whole, weights)
+    return ((parts, claimed), clamps)
 
 
 def log2_bits(r):
@@ -297,21 +306,26 @@ class RNG:
     def chance(self, p): return self.bp() < p
 
     def chance_in(self, n, d):
-        draw = self.below(d)
-        return d != 0 and draw < n
+        draw = self.below(d if d > 0 else 0)
+        return n > 0 and d > 0 and draw < n
+
+    def chance_q(self, p):
+        draw = self.below(1 << 32)
+        return p > 0 and draw < p
 
     def pick(self, weights):
-        """A position with a chance in proportion to its weight, or -1 with no draw when no weight is above 0."""
-        total = 0
+        """An index with a chance in proportion to its weight, or -1 when no weight is above 0; one draw always."""
+        total, full = 0, False
         for w in weights:
-            if w <= 0: continue
+            if w < 0: SAT[0] += 1
+            if w <= 0 or full: continue
             if total + w > M64:
                 SAT[0] += 1
-                total = M64
-                break
-            total += w
-        if total == 0: return -1
+                total, full = M64, True
+            else:
+                total += w
         left = self.below(total)
+        if total == 0: return -1
         for i, w in enumerate(weights):
             if w > 0:
                 if left < w: return i
@@ -735,19 +749,37 @@ def shares(fs, s64):
     for _ in range(30):
         n = 1 + g.next() % 12
         sps.append((s64(g, 40), [g.next() % (1 << (1 + g.next() % 30)) for _ in range(n)]))
-    fs.add('splits', [I64, '[Int64]', '[Int64]'], [((w, ws), lambda w=w, ws=ws: split(w, ws)) for w, ws in sps], split_truth)
+    sps += [(5, [10, 30, 60]), (2, [1, 3]), (2, [3, 1]), (1, [1, 1]), (3, [2, 2, 1, 1]), (10, [0, 0, 0]), (-10, [0, 0, 0]), (7, [1, 3, 3, 1]),
+            (6, [-1, 4, 2]), (450, [32_371_737, 12_599_507, 8_695_522, 6_541_834])]
+    fs.add('splits', [I64, '[Int64]', '[Int64]', I32], [((w, ws), lambda w=w, ws=ws: split(w, ws)) for w, ws in sps], split_truth)
     # party support: 10,000 bp over the votes, and the same split over a country's provinces by population
-    fs.add('splitsBP', [I32, '[Int64]', '[Int32]'], [((w, ws), lambda w=w, ws=ws: split(w, ws)) for w, ws in
+    fs.add('splitsBP', [I32, '[Int64]', '[Int32]', I32], [((w, ws), lambda w=w, ws=ws: split(w, ws)) for w, ws in
            [(10000, [1, 1, 1, 1, 1, 1]), (10000, [5_421_332, 4_898_112, 1_200_904, 98_001]), (10000, [0, 0]), (10000, []), (-10000, [1, 2]), (0, [4, 4]), (I32_MAX, [1, 1, 1]), (I32_MIN, [1, 1, 1]), (9999, [1, 1])]], split_truth)
     c = RNG.keyed(4, 4, 4, 4)
-    fs.add('rngChanceIn', [U64, U64, I32], [((n, d), lambda n=n, d=d: int(c.chance_in(n, d))) for n, d in [(0, 10), (10, 10), (11, 10), (1, 0), (0, 0), (1, 18250), (9125, 18250), (18249, 18250), (1, 2), (1, 2), (1, 2), (1, 2), (M64, M64), (M64 - 1, M64), (1, M64), (3, 7), (3, 7), (3, 7), (3, 7), (3, 7)]])
+    fs.add('rngChanceIn', [I64, I64, I32], [((n, d), lambda n=n, d=d: int(c.chance_in(n, d))) for n, d in [(0, 10), (10, 10), (11, 10), (1, 0), (0, 0), (1, 18250), (9125, 18250), (18249, 18250), (1, 2), (1, 2), (1, 2), (1, 2), (I64_MAX, I64_MAX), (I64_MAX - 1, I64_MAX), (1, I64_MAX), (3, 7), (3, 7), (3, 7), (3, 7), (3, 7),
+           (-1, 10), (5, -10), (I64_MIN, 10), (-3, -7), (3, 7)]])
+    cq = RNG.keyed(3, 3, 3, 3)
+    fs.add('rngChanceQ32', [I64, I32], [((p,), lambda p=p: int(cq.chance_q(p))) for p in [0, -1, I64_MIN, 1, ONE // 2, ONE // 2, ONE // 2, ONE - 1, ONE, ONE + 1, I64_MAX, ONE // 18250, ONE // 3, ONE // 3, ONE // 3]])
     k = RNG.keyed(6, 6, 6, 6)
     pks = [[1], [0, 1], [1, 0], [0, 0], [], [-5, 3], [3, -5], [-1, -1], [1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 1], [1, 2, 3, 4], [1, 2, 3, 4], [1, 2, 3, 4], [1, 2, 3, 4], [1000, 1], [1, 1000],
            [I64_MAX, I64_MAX], [I64_MAX, I64_MAX, I64_MAX], [I64_MAX, I64_MAX, I64_MAX], [0, 0, 7, 0], [5, 0, 0, 5], [5, 0, 0, 5], [5, 0, 0, 5]]
+    pks += [[-1, 5], [5, -1, -1], [I64_MIN, I64_MIN], [I64_MAX, I64_MAX, -1, 3], [0], [-2], [2, 2]]
     fs.add('rngPick', ['[Int64]', I32], [((ws,), lambda ws=ws: k.pick(ws)) for ws in pks])
     h = RNG.keyed(8, 8, 8, 8)
     fs.add('rngShuffle', [I32, '[Int32]'], [((n,), lambda n=n: h.shuffle(list(range(n)))) for n in [0, 1, 2, 2, 2, 3, 3, 3, 5, 8, 13, 13, 52]])
     for row in fs[-1][2]: assert sorted(row[1]) == list(range(row[0])), 'a shuffle keeps every item once'
+    uws = [(0, 0, 0, ONE, ONE), (0, 0, -ONE, ONE, ONE), (0, 0, 0, ONE // 2, ONE), (0, 0, 2 * ONE, 3 * ONE, ONE), (5, 0, 0, ONE, ONE), (-5, 0, 0, ONE, ONE), (1, 2, 0, ONE, ONE), (0, 0, I64_MIN, I64_MAX, I64_MIN), (0, 0, -ONE, ONE, -ONE)]
+    fs.add('q32RatioUndefined', [I64, I64, I64, I64, I64, I64], [((n, d, lo, hi, u), lambda n=n, d=d, lo=lo, hi=hi, u=u: q_ratio_within(n, d, lo, hi, u)) for n, d, lo, hi, u in uws],
+           lambda n, d, lo, hi, u: (held((u if n == 0 else (lo if n < 0 else hi)) if d == 0 else near(Fraction(n * ONE, d)), lo, hi), 0))
+    ubs = [(0, 0, 0, 10000, 10000), (0, 0, 0, 5000, 10000), (0, 0, -100, 100, -10000), (7, 0, 0, 10000, 3), (-7, 0, -5, 5, 3), (1, 4, 0, 10000, 10000), (0, 0, I32_MIN, I32_MAX, I32_MIN)]
+    fs.add('bpRatioUndefined', [I64, I64, I32, I32, I32, I32], [((n, d, lo, hi, u), lambda n=n, d=d, lo=lo, hi=hi, u=u: bp_ratio_within(n, d, lo, hi, u)) for n, d, lo, hi, u in ubs],
+           lambda n, d, lo, hi, u: (held((u if n == 0 else (lo if n < 0 else hi)) if d == 0 else near(Fraction(n * 10000, d)), lo, hi), 0))
+
+    def split32(whole, weights):
+        (parts, claimed) = split(whole, weights)
+        return ([sat32(q) for q in parts], claimed)
+    fs.add('splitsPop32', [I64, '[Int64]', '[Int32]', I32], [((w, ws), lambda w=w, ws=ws: split32(w, ws)) for w, ws in
+           [(82_000_000, [5, 3, 2]), (199_812_341, [1]), (5_000_000_000, [1, 1]), (5_000_000_000, [1, 1, 1]), (-5_000_000_000, [1, 1]), (7, [0, 0]), (0, [1, 2]), (10, [-1, 1]), (I64_MAX, [1, 1])]])
     fs.add('popNarrowed', [I64, I32], [((v,), lambda v=v: sat32(v)) for v in [0, 1, -1, I32_MAX, I32_MAX + 1, I32_MIN, I32_MIN - 1, I64_MAX, I64_MIN, 1_339_724_852]], lambda v: want32(v))
 
 

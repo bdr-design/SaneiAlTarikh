@@ -347,8 +347,8 @@ final class FixedPointTests: XCTestCase {
         XCTAssertEqual(g.below(1), 0)
         var hits = 0
         for _ in 0..<10_000 {
-            XCTAssertFalse(g.chance(.zero))
-            XCTAssertTrue(g.chance(.one))
+            XCTAssertFalse(g.chance(BP.zero))
+            XCTAssertTrue(g.chance(BP.one))
             if g.chance(BP(raw: 2_500)) { hits += 1 }
             let share = g.bp()
             XCTAssertTrue(share >= .zero && share < .one)

@@ -66,32 +66,51 @@ public struct DetRNG: Sendable {
     }
 
     /// True with probability n / d, for chances finer than a basis point (a once-in-50-years daily hazard is
-    /// 1 in 18,250). One draw, always. Never when n is 0 or d is 0; always when n is d or more.
+    /// 1 in 18,250), to within the bias of `below`. One draw, always, so a stream's later draws never shift. Never
+    /// when n is 0 or below or d is 0 or below (a count that dipped below 0 is no chance, not a crash); always when n
+    /// is d or more.
     @inlinable
-    public mutating func chance(_ n: UInt64, in d: UInt64) -> Bool {
-        let draw = below(d)
-        return d != 0 && draw < n
+    public mutating func chance(_ n: Int64, in d: Int64) -> Bool {
+        let draw = below(d > 0 ? UInt64(d) : 0)
+        return n > 0 && d > 0 && draw < UInt64(n)
     }
 
-    /// Picks one of the weights' positions with a chance in proportion to its weight: one draw. Nil, with no draw,
-    /// when there are no weights or none is above 0. A weight below 0 counts as 0. If the weights' sum passes the
-    /// range of a `UInt64` it is held there, counted, and the last weights lose their chance.
+    /// True with probability `p`, a number from 0 to 1 in steps of 2^-32 (a hazard a model works out). One draw,
+    /// always. Never at 0 or below, always from 1 up. A yearly probability P is not a daily one: the daily one is
+    /// 1 - (1 - P)^(1/365), not P / 365, which is about 8% low for P = 0.17. The model that owns the hazard says which.
     @inlinable
-    public mutating func pick<Weights: Collection>(_ weights: Weights, weight: (Weights.Element) -> Int64) -> Weights.Index? {
+    public mutating func chance(_ p: Q32) -> Bool {
+        let draw = below(UInt64(1) << 32)
+        return p.raw > 0 && draw < UInt64(p.raw)
+    }
+
+    /// Picks an index of `weights` with a chance in proportion to its weight, to within the bias of `below`: one draw,
+    /// always (also when it picks nothing), so a stream's later draws never shift. Nil when there are no weights or
+    /// none is above 0. A weight below 0 counts as 0, and is counted as a clamp: a weight is a size. If the weights'
+    /// sum passes the range of a `UInt64` it is held there, counted, and the last weights lose their chance.
+    ///
+    /// The result is an index of `weights` (for a slice, the slice's own index, not an offset from 0). `weight` is
+    /// called once or twice per element and must give the same value each time. The weights are a random-access
+    /// collection: never a set or a dictionary, whose order changes from one run to the next.
+    @inlinable
+    public mutating func pick<Weights: RandomAccessCollection>(_ weights: Weights, weight: (Weights.Element) -> Int64) -> Weights.Index? {
         var total: UInt64 = 0
+        var full = false
         for w in weights {
             let v = weight(w)
-            if v <= 0 { continue }
+            if v < 0 { Saturation.record() }
+            if v <= 0 || full { continue }
             let (sum, overflow) = total.addingReportingOverflow(UInt64(v))
             if overflow {
                 Saturation.record()
                 total = .max
-                break
+                full = true
+            } else {
+                total = sum
             }
-            total = sum
         }
-        if total == 0 { return nil }
         var left = below(total)
+        if total == 0 { return nil }
         var i = weights.startIndex
         while i != weights.endIndex {
             let v = weight(weights[i])
@@ -104,14 +123,15 @@ public struct DetRNG: Sendable {
         return nil                                                  // not reached: the draw is below the sum
     }
 
-    /// Picks a position of `weights` with a chance in proportion to its weight (see the general form).
+    /// Picks an index of `weights` with a chance in proportion to its weight (see the general form).
     @inlinable
     public mutating func pick(_ weights: [Int64]) -> Int? {
         pick(weights) { $0 }
     }
 
-    /// Puts `items` in a random order, every order with the same chance: one draw per item but the last (none for
-    /// fewer than two items). Our own mapping, not the standard library's, which may change between Swift versions.
+    /// Puts `items` in a random order, every order with the same chance to within the bias of `below`: one draw per
+    /// item but the last (none for fewer than two items). Our own mapping, not the standard library's, which may
+    /// change between Swift versions.
     @inlinable
     public mutating func shuffle<Items: MutableCollection & RandomAccessCollection>(_ items: inout Items) {
         var n = items.count

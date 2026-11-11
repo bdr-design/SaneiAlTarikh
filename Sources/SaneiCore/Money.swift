@@ -28,9 +28,10 @@ extension Amount {
     /// of the true product plus one unit; not exactly reversible (see `LogQ.applied`).
     @inlinable public func times(_ level: LogQ) -> Self { Self(raw: level.applied(to: raw)) }
 
-    /// The amount a whole number of times (a wage times a headcount). Clamped and counted.
+    /// The amount a whole number of times (a wage times a headcount). Clamped and counted. The label keeps a count
+    /// apart from a share: a share in basis points is `times(BP(raw: 2_500))`, never `times(count: 2_500)`.
     @inlinable
-    public func times(_ count: Int64) -> Self {
+    public func times(count: Int64) -> Self {
         let (v, overflow) = raw.multipliedReportingOverflow(by: count)
         if !overflow { return Self(raw: v) }
         Saturation.record()
@@ -51,12 +52,22 @@ extension Amount {
     /// revenue). Dividing by zero is a counted clamp; for a ratio the model bounds, use `ratio(to:within:)`.
     @inlinable public func ratio(to other: Self) -> Q32 { Q32(ratio: raw, other.raw) }
 
-    /// The same ratio held inside `bounds` and never counted (see `Q32.init(ratio:_:within:)`).
+    /// The same ratio held inside `bounds` and never counted; `undefined` is the ratio when both are 0 (see
+    /// `Q32.init(ratio:_:within:undefined:)`).
     @inlinable
-    public func ratio(to other: Self, within bounds: ClosedRange<Q32>) -> Q32 { Q32(ratio: raw, other.raw, within: bounds) }
+    public func ratio(to other: Self, within bounds: ClosedRange<Q32>, undefined: Q32 = .zero) -> Q32 {
+        Q32(ratio: raw, other.raw, within: bounds, undefined: undefined)
+    }
 
-    /// This amount as a share of a total of the same unit, in basis points. Dividing by zero is a counted clamp.
+    /// This amount as a share of a total of the same unit, in basis points. Dividing by zero is a counted clamp; where
+    /// a total of 0 is an ordinary day (a new government's budget, an emptied province), use `share(of:within:)`.
     @inlinable public func share(of total: Self) -> BP { BP(ratio: raw, total.raw) }
+
+    /// The same share held inside `bounds` and never counted; `undefined` is the share when both are 0.
+    @inlinable
+    public func share(of total: Self, within bounds: ClosedRange<BP>, undefined: BP = .zero) -> BP {
+        BP(ratio: raw, total.raw, within: bounds, undefined: undefined)
+    }
 
     /// The size of the amount, without its sign (the opposite of the lowest amount is the highest, counted).
     @inlinable public var magnitude: Self { raw < 0 ? Self(raw: FixedMath.negate(raw)) : self }

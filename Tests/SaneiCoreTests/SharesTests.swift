@@ -24,7 +24,7 @@ final class SharesTests: XCTestCase {
             return clamps
         }
         each(CoreGolden.amountTimesCount) { a, n, r, clamps in
-            XCTAssertEqual(USDn(raw: a).times(n).raw, r, "\(a) × \(n)")
+            XCTAssertEqual(USDn(raw: a).times(count: n).raw, r, "\(a) × \(n)")
             return clamps
         }
         each(CoreGolden.amountDividedBy) { a, n, r, clamps in
@@ -54,6 +54,19 @@ final class SharesTests: XCTestCase {
         XCTAssertEqual(LCU(raw: 50).ratio(to: LCU(raw: 0), within: eight), Q32(ratio: 8, 100))
         XCTAssertEqual(LCU(raw: 3).ratio(to: LCU(raw: 2)), Q32(ratio: 3, 2))
         XCTAssertEqual(USDn(raw: 1).share(of: USDn(raw: 3)), BP(raw: 3_333))
+        // 0 / 0 is the caller's: a price over its base, or a share of an empty budget
+        each(CoreGolden.q32RatioUndefined) { n, d, lo, hi, u, r, clamps in
+            XCTAssertEqual(Q32(ratio: n, d, within: Q32(raw: lo)...Q32(raw: hi), undefined: Q32(raw: u)).raw, r, "\(n) / \(d), 0 / 0 = \(u)")
+            return clamps
+        }
+        each(CoreGolden.bpRatioUndefined) { n, d, lo, hi, u, r, clamps in
+            XCTAssertEqual(BP(ratio: n, d, within: BP(raw: lo)...BP(raw: hi), undefined: BP(raw: u)).raw, r, "\(n) / \(d), 0 / 0 = \(u)")
+            return clamps
+        }
+        let empty = Saturation.counted { (LCU.zero.share(of: .zero, within: BP.zero...BP.one), LCU.zero.ratio(to: .zero, within: Q32.zero...Q32(2), undefined: .one)) }
+        XCTAssertEqual(empty.result.0, BP.zero)
+        XCTAssertEqual(empty.result.1, Q32.one)
+        XCTAssertEqual(empty.clamps, 0, "an empty budget is an ordinary day")
     }
 
     func testLogarithmsOfRatiosAndPowers() {
@@ -71,26 +84,39 @@ final class SharesTests: XCTestCase {
         XCTAssertEqual(LogQ(level: Q32(8)), LogQ(exponent: Q32(3)))
         // a level to a power is the logarithm times the power: the products of the Q32 rows
         each(CoreGolden.q32Mul) { a, b, r, clamps in
-            XCTAssertEqual((LogQ(raw: a) * Q32(raw: b)).raw, r, "log \(a) × \(b)")
+            XCTAssertEqual(LogQ(raw: a).raised(to: Q32(raw: b)).raw, r, "log \(a) raised to \(b)")
             return clamps
         }
-        XCTAssertEqual((LogQ(exponent: Q32(3)) * Q32(ratio: 1, 3)).applied(to: 1_000), 2_000, "the cube root of 8")
+        XCTAssertEqual(LogQ(exponent: Q32(3)).raised(to: Q32(ratio: 1, 3)).applied(to: 1_000), 2_000, "the cube root of 8")
+        XCTAssertEqual(LogQ(exponent: Q32(3)).raised(to: Q32(ratio: 1, 3)).raw, (1 << 32) - 1, "about 2: one step below")
     }
 
     func testSplitsCloseExactly() {
         var splitter = ShareSplitter(capacity: 300)
         var parts: [Int64] = []
-        each(CoreGolden.splits) { whole, weights, expected, clamps in
-            splitter.split(whole, by: weights, into: &parts)
+        each(CoreGolden.splits) { whole, weights, expected, claimed, clamps in
+            XCTAssertEqual(splitter.split(whole, by: weights, into: &parts), claimed == 1, "\(whole) by \(weights): claimed")
             XCTAssertEqual(parts, expected, "\(whole) by \(weights)")
             return clamps
         }
         var shares: [BP] = []
-        each(CoreGolden.splitsBP) { whole, weights, expected, clamps in
-            splitter.split(BP(raw: whole), by: weights, into: &shares)
+        each(CoreGolden.splitsBP) { whole, weights, expected, claimed, clamps in
+            XCTAssertEqual(splitter.split(BP(raw: whole), by: weights, into: &shares), claimed == 1)
             XCTAssertEqual(shares.map { $0.raw }, expected, "\(whole) bp by \(weights)")
             return clamps
         }
+        var provinces: [Pop32] = []
+        each(CoreGolden.splitsPop32) { whole, weights, expected, claimed, clamps in
+            XCTAssertEqual(splitter.split(Pop(raw: whole), by: weights, into: &provinces), claimed == 1)
+            XCTAssertEqual(provinces.map { $0.raw }, expected, "\(whole) people by \(weights)")
+            return clamps
+        }
+        // a tie goes to the larger weight: the party with 30 votes, not the one with 10
+        splitter.split(5, by: [10, 30, 60], into: &parts)
+        XCTAssertEqual(parts, [0, 2, 3])
+        // nobody has a claim: equal shares by the same rule, and the caller is told
+        XCTAssertFalse(splitter.split(10, by: [0, 0, 0], into: &parts))
+        XCTAssertEqual(parts, [4, 3, 3])
         // the card's examples: six sixths of 10,000 bp, four quarters of 10, 225 equal shares of 300,000,000
         splitter.split(10_000, by: [1, 1, 1, 1, 1, 1], into: &parts)
         XCTAssertEqual(parts.reduce(0, +), 10_000)
@@ -146,10 +172,36 @@ final class SharesTests: XCTestCase {
         }
     }
 
+    /// The general form reads each weight once, so a weight that changes between reads cannot break the sum; it takes
+    /// any random-access collection, a slice included; and a list longer than the room makes it grow once.
+    func testTheGeneralFormReadsEachWeightOnce() {
+        var splitter = ShareSplitter()
+        var parts: [Int64] = []
+        var reads = 0
+        splitter.split(10, by: [1, 1, 1], into: &parts, weight: { _ in reads += 1; return Int64(reads) }, part: { $0 })
+        XCTAssertEqual(reads, 3)
+        XCTAssertEqual(parts.reduce(0, +), 10)
+        XCTAssertEqual(parts, [2, 3, 5])
+        let weights: [Int64] = [9, 9, 1, 2, 3, 9]
+        splitter.split(60, by: weights[2..<5], into: &parts, weight: { $0 }, part: { $0 })
+        XCTAssertEqual(parts, [10, 20, 30])
+        var grown = ShareSplitter(capacity: 2)
+        grown.split(1_000, by: [Int64](repeating: 1, count: 500), into: &parts)
+        XCTAssertGreaterThanOrEqual(grown.floors.capacity, 500)
+        XCTAssertGreaterThanOrEqual(grown.weights.capacity, 500)
+        XCTAssertGreaterThanOrEqual(grown.sorted.capacity, 500)
+        XCTAssertGreaterThanOrEqual(parts.capacity, 500)
+    }
+
     func testFinerChancesChoicesAndShuffles() {
         var chances = DetRNG(seed: 4, key: 4, stream: 4, serial: 4)
         each(CoreGolden.rngChanceIn) { n, d, hit, clamps in
             XCTAssertEqual(chances.chance(n, in: d), hit == 1, "\(n) in \(d)")
+            return clamps
+        }
+        var hazards = DetRNG(seed: 3, key: 3, stream: 3, serial: 3)
+        each(CoreGolden.rngChanceQ32) { p, hit, clamps in
+            XCTAssertEqual(hazards.chance(Q32(raw: p)), hit == 1, "a chance of \(p)")
             return clamps
         }
         var picks = DetRNG(seed: 6, key: 6, stream: 6, serial: 6)
@@ -173,8 +225,18 @@ final class SharesTests: XCTestCase {
         var counts = [0, 0, 0]
         for _ in 0..<60_000 { counts[g.pick([1, 2, 3]) ?? 0] += 1 }
         XCTAssertTrue((9_000...11_000).contains(counts[0]) && (19_000...21_000).contains(counts[1]), "\(counts)")
-        XCTAssertNil(g.pick([]))
-        XCTAssertNil(g.pick([0, -4]))
+        // nothing to pick: nil, and the one draw is still made, so the next draw is the same as after a pick
+        var a = DetRNG(seed: 2, key: 0, stream: 0, serial: 0)
+        var b = a
+        XCTAssertNil(a.pick([]))
+        _ = b.pick([1, 1])
+        XCTAssertEqual(a.next(), b.next())
+        let negative = Saturation.counted { g.pick([0, -4]) }
+        XCTAssertNil(negative.result)
+        XCTAssertEqual(negative.clamps, 1, "a weight below 0 is counted, as in a split")
+        // a slice's own index
+        let ws: [Int64] = [0, 0, 0, 5, 0]
+        XCTAssertEqual(g.pick(ws[3...]) { $0 }, 3)
     }
 
     func testPeople() {
@@ -188,6 +250,8 @@ final class SharesTests: XCTestCase {
         XCTAssertEqual(province.raw, Int32.max)
         XCTAssertEqual(c.clamps, 1)
         XCTAssertEqual(Pop(raw: 82_000_000).times(3, over: 4), Pop(raw: 61_500_000))
+        XCTAssertEqual(LCU(raw: 1_000).times(count: 3), LCU(raw: 3_000))
+        XCTAssertEqual(LCU(raw: 1_000).times(BP(raw: 2_500)), LCU(raw: 250), "a share is a BP, a count is labelled")
     }
 
     func testMagnitudesAndModelBounds() {

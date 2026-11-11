@@ -163,15 +163,21 @@ public struct Q32: Sendable, Hashable, Comparable {
     /// of the range on n's side.
     @inlinable public init(ratio n: Int64, _ d: Int64) { raw = FixedMath.divShift32(n, d) }
 
-    /// n / d held inside `bounds`, and never counted. For a ratio the model bounds anyway (a gap between demand and
-    /// supply held to ±8%), where a divisor of zero is an ordinary day, not a fault: the game's count of clamps stays
-    /// 0. With d = 0: the upper bound when n is above 0, the lower when it is below, and 0, held inside the bounds,
-    /// when n is 0 too.
+    /// n / d held inside `bounds`, and never counted: for a ratio whose divisor can be 0 on an ordinary day, where
+    /// the model bounds the use of the result anyway, so the game's count of clamps stays 0. §5.1's market gap
+    /// (D − S) / S is one: with no supply it is held at the upper bound. Its bounds need only be wide enough not to
+    /// bind; the ±8% of §5.1 limits the monthly price change, so it belongs on the change itself (a `LogQ` held to
+    /// log2(0.92)...log2(1.08), which is not symmetric), not on this gap (±8% of the price is a gap of about -0.24 to
+    /// +0.22 at κ = 0.5).
+    ///
+    /// With d = 0: the upper bound when n is above 0, the lower when it is below, and `undefined`, held inside the
+    /// bounds, when n is 0 too. Give `undefined` where 0 / 0 means 1 (a ratio of a price to its base, S / D for a
+    /// shortage).
     @inlinable
-    public init(ratio n: Int64, _ d: Int64, within bounds: ClosedRange<Q32>) {
+    public init(ratio n: Int64, _ d: Int64, within bounds: ClosedRange<Q32>, undefined: Q32 = .zero) {
         var v: Int64
         if d == 0 {
-            v = n == 0 ? 0 : (n < 0 ? .min : .max)
+            v = n == 0 ? undefined.raw : (n < 0 ? .min : .max)
         } else {
             let negative = (n < 0) != (d < 0)
             let m = n.magnitude
@@ -262,13 +268,14 @@ public struct BP: Sendable, Hashable, Comparable {
         raw = FixedMath.clamp32(q, negative: negative)
     }
 
-    /// n / d in basis points held inside `bounds`, and never counted (see `Q32.init(ratio:_:within:)`). With d = 0:
-    /// the upper bound when n is above 0, the lower when it is below, and 0, held inside the bounds, when n is 0 too.
+    /// n / d in basis points held inside `bounds`, and never counted (see `Q32.init(ratio:_:within:undefined:)`). With
+    /// d = 0: the upper bound when n is above 0, the lower when it is below, and `undefined`, held inside the bounds,
+    /// when n is 0 too.
     @inlinable
-    public init(ratio n: Int64, _ d: Int64, within bounds: ClosedRange<BP>) {
+    public init(ratio n: Int64, _ d: Int64, within bounds: ClosedRange<BP>, undefined: BP = .zero) {
         var v: Int64
         if d == 0 {
-            v = n == 0 ? 0 : (n < 0 ? .min : .max)
+            v = n == 0 ? Int64(undefined.raw) : (n < 0 ? .min : .max)
         } else {
             let negative = (n < 0) != (d < 0)
             let p = n.magnitude.multipliedFullWidth(by: 10_000)
@@ -375,7 +382,8 @@ public struct LogQ: Sendable, Hashable, Comparable {
     /// only d is not.
     @inlinable public init(ratio n: Int64, _ d: Int64) { self = DMath.log2(ratio: n, d) }
 
-    /// The logarithm as a plain number: the power of 2 the level is.
+    /// The logarithm as a plain number: the power of 2 the level is (the level 1.05 has the exponent 0.07). Not a
+    /// factor: to apply the level to money use `applied(to:)` or `Amount.times(_: LogQ)`, never `times(level.exponent)`.
     @inlinable public var exponent: Q32 { Q32(raw: raw) }
 
     /// The logarithm 0: the level 1.
@@ -389,9 +397,10 @@ public struct LogQ: Sendable, Hashable, Comparable {
     @inlinable public static func += (a: inout LogQ, b: LogQ) { a = a + b }
     @inlinable public static func -= (a: inout LogQ, b: LogQ) { a = a - b }
 
-    /// The level raised to a power: an elasticity applied to a level, or a decay. Level 8 to the power 1/3 is
-    /// `LogQ(exponent: Q32(3)) * Q32(ratio: 1, 3)`, the level 2. Clamped and counted like any product.
-    @inlinable public static func * (a: LogQ, b: Q32) -> LogQ { LogQ(raw: FixedMath.mulShift32(a.raw, b.raw)) }
+    /// The level raised to a power: an elasticity applied to a level, or a decay (not the level scaled: the price
+    /// level 1.5 raised to 2 is 2.25). The level 8 raised to 1/3 is `LogQ(exponent: Q32(3)).raised(to: Q32(ratio: 1, 3))`,
+    /// about 2 (one step below, as 1/3 is rounded). Clamped and counted like any product.
+    @inlinable public func raised(to power: Q32) -> LogQ { LogQ(raw: FixedMath.mulShift32(raw, power.raw)) }
 
     /// The logarithm held inside `bounds`: a bound the model sets. Not counted.
     @inlinable
