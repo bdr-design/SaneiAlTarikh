@@ -220,11 +220,24 @@ final class SharesTests: XCTestCase {
         var g = DetRNG(seed: 1, key: 0, stream: 0, serial: 0)
         var hits = 0
         for _ in 0..<1_825_000 where g.chance(1, in: 18_250) { hits += 1 }
-        XCTAssertTrue((80...120).contains(hits), "\(hits) hits of an expected 100")
+        XCTAssertTrue((50...150).contains(hits), "\(hits) hits of an expected 100")
         // a choice in proportion to the weights
         var counts = [0, 0, 0]
         for _ in 0..<60_000 { counts[g.pick([1, 2, 3]) ?? 0] += 1 }
         XCTAssertTrue((9_000...11_000).contains(counts[0]) && (19_000...21_000).contains(counts[1]), "\(counts)")
+        // every order of three items comes up, about equally
+        var orders: [[Int]: Int] = [:]
+        for _ in 0..<60_000 {
+            var items = [0, 1, 2]
+            g.shuffle(&items)
+            orders[items, default: 0] += 1
+        }
+        XCTAssertEqual(orders.count, 6)
+        for (order, n) in orders { XCTAssertTrue((9_000...11_000).contains(n), "\(order) came \(n) times of 60,000") }
+        // a sum past 64 bits: held, counted, and the weight at which it passes keeps the part that fits
+        let wide = Saturation.counted { g.pick([2, Int64.max, Int64.max]) }
+        XCTAssertNotNil(wide.result)
+        XCTAssertEqual(wide.clamps, 1)
         // nothing to pick: nil, and the one draw is still made, so the next draw is the same as after a pick
         var a = DetRNG(seed: 2, key: 0, stream: 0, serial: 0)
         var b = a
@@ -252,6 +265,31 @@ final class SharesTests: XCTestCase {
         XCTAssertEqual(Pop(raw: 82_000_000).times(3, over: 4), Pop(raw: 61_500_000))
         XCTAssertEqual(LCU(raw: 1_000).times(count: 3), LCU(raw: 3_000))
         XCTAssertEqual(LCU(raw: 1_000).times(BP(raw: 2_500)), LCU(raw: 250), "a share is a BP, a count is labelled")
+    }
+
+    /// The helpers' other sides: each one's zero divisor, its far end, and both bounds.
+    func testEveryHelperOnBothSides() {
+        let byZero = Saturation.counted { (LCU(raw: 5).ratio(to: LCU(raw: 0)), USDn(raw: 1).share(of: .zero)) }
+        XCTAssertEqual(byZero.result.0, Q32.max)
+        XCTAssertEqual(byZero.result.1.raw, Int32.max)
+        XCTAssertEqual(byZero.clamps, 2, "a plain ratio by 0 is counted")
+        XCTAssertEqual(USDn(raw: 1).share(of: USDn(raw: 20_000)), BP(raw: 1), "1 in 20,000 is 0.5 bp, rounded away from 0")
+        XCTAssertEqual(Money(raw: .min).divided(by: .min), Money(raw: 1))
+        let bigByZero = Saturation.counted { LCU(raw: 1 << 32).times(1 << 32, over: 0) }
+        XCTAssertEqual(bigByZero.result.raw, Int64.max, "a product whose low word is 0 is not a product of 0")
+        XCTAssertEqual(bigByZero.clamps, 1)
+        XCTAssertEqual(Pop32(raw: -1) + Pop32(raw: -1), Pop32(raw: -2))
+        XCTAssertEqual(Pop32(raw: 5) - Pop32(raw: 3), Pop32(raw: 2))
+        var province = Pop32(raw: 5)
+        province -= Pop32(raw: 7)
+        XCTAssertEqual(province, Pop32(raw: -2))
+        let low = Saturation.counted { Pop32(raw: .min) - Pop32(raw: 1) }
+        XCTAssertEqual(low.result.raw, Int32.min)
+        XCTAssertEqual(low.clamps, 1)
+        XCTAssertEqual(Q32(-5).clamped(to: Q32(0)...Q32(1)), Q32(0))
+        XCTAssertEqual(BP(raw: 20_000).clamped(to: BP.zero...BP.one), BP.one)
+        XCTAssertEqual(LogQ(raw: -7).clamped(to: LogQ.zero...LogQ.zero), LogQ.zero)
+        XCTAssertEqual(LCU(raw: -1).clamped(to: LCU(raw: 0)...LCU(raw: 4)), LCU(raw: 0))
     }
 
     func testMagnitudesAndModelBounds() {

@@ -162,7 +162,8 @@ def split_truth(whole, weights, narrow=False):
     ws = [max(w, 0) for w in weights]
     clamps = sum(1 for w in weights if w < 0) + (1 if sum(ws) > M64 else 0)
     assert claimed == int(sum(ws) > 0)
-    if sum(ws) <= M64:
+    while sum(ws) > M64: ws = [w // 2 for w in ws]                 # the rule: halve every weight until the sum fits
+    if True:
         if sum(ws) == 0: ws = [1] * len(ws)
         total = sum(ws)
         exact = [Fraction(whole * w, total) for w in ws]
@@ -726,7 +727,8 @@ def shares(fs, s64):
     g = fs.stream()
     pct8 = (-ONE * 8 // 100, ONE * 8 // 100)
     rws = [(5, 0, *pct8), (-5, 0, *pct8), (0, 0, *pct8), (0, 0, ONE, 2 * ONE), (1, 100, *pct8), (9, 100, *pct8), (-9, 100, *pct8), (8, 100, *pct8), (1, 3, 0, ONE), (4, 3, 0, ONE), (-1, 3, 0, ONE),
-           (I64_MAX, 1, I64_MIN, I64_MAX), (I64_MIN, 1, I64_MIN, I64_MAX), (I64_MIN, -1, I64_MIN, I64_MAX), (I64_MAX, -1, -5, 5), (7, I64_MIN, I64_MIN, I64_MAX), (1, 2, ONE // 2, ONE // 2), (1, 2, I64_MIN, I64_MAX), (-1, 2, I64_MIN, I64_MAX)]
+           (I64_MAX, 1, I64_MIN, I64_MAX), (I64_MIN, 1, I64_MIN, I64_MAX), (I64_MIN, -1, I64_MIN, I64_MAX), (I64_MAX, -1, -5, 5), (7, I64_MIN, I64_MIN, I64_MAX), (1, 2, ONE // 2, ONE // 2), (1, 2, I64_MIN, I64_MAX), (-1, 2, I64_MIN, I64_MAX),
+           (3 << 61, 1 << 31, I64_MIN, I64_MAX), (-(3 << 61), 1 << 31, I64_MIN, I64_MAX), (3 << 61, -(1 << 31), I64_MIN, I64_MAX), (1 << 62, 1 << 30, I64_MIN, I64_MAX)]
     fs.add('q32RatioWithin', [I64, I64, I64, I64, I64], [((n, d, lo, hi), lambda n=n, d=d, lo=lo, hi=hi: q_ratio_within(n, d, lo, hi)) for n, d, lo, hi in rws + [(s64(g, 50), s64(g, 30), -ONE, ONE) for _ in range(15)]],
            lambda n, d, lo, hi: (held(0 if n == 0 else (lo if n < 0 else hi), lo, hi) if d == 0 else held(near(Fraction(n * ONE, d)), lo, hi), 0))
     bws = [(5, 0, -800, 800), (-5, 0, -800, 800), (0, 0, -800, 800), (0, 0, 100, 200), (1, 100, -800, 800), (9, 100, -800, 800), (-9, 100, -800, 800), (1, 3, 0, 10000), (2, 3, 0, 10000), (4, 3, 0, 10000),
@@ -737,8 +739,13 @@ def shares(fs, s64):
     two_ln = Decimal(2).ln()
 
     def log_ratio_truth(n, d):
-        if n > 0 and d > 0: assert abs(Decimal(log2_ratio(n, d)) / ONE - (Decimal(n) / Decimal(d)).ln() / two_ln) <= Decimal('4e-7'), (n, d)
-        return None
+        if n <= 0: return (I64_MIN, 1)
+        if d <= 0: return (I64_MAX, 1)
+        v = log2_ratio(n, d)
+        if n == d: return (0, 0)
+        if n & (n - 1) == 0 and d & (d - 1) == 0: return (((n.bit_length() - d.bit_length()) << 32), 0)
+        assert abs(Decimal(v) / ONE - (Decimal(n) / Decimal(d)).ln() / two_ln) <= Decimal('4e-7'), (n, d)
+        return (v, 0)
     lrs = [(1, 1), (2, 1), (1, 2), (8, 1), (1, 8), (1, 20500), (20500, 1), (3, 1), (1, 3), (I64_MAX, 1), (1, I64_MAX), (I64_MAX, I64_MAX), (1 << 62, 1 << 31), (10, 4), (0, 5), (-1, 5), (5, 0), (5, -1), (0, 0), (-3, -3), (1, 18250), (1000003, 999983)]
     fs.add('logRatio', [I64, I64, I64], [((n, d), lambda n=n, d=d: log2_ratio(n, d)) for n, d in lrs + [((g.next() % (1 << 60)) + 1, (g.next() % (1 << 44)) + 1) for _ in range(20)]], log_ratio_truth)
     g = fs.stream()
@@ -749,24 +756,70 @@ def shares(fs, s64):
     for _ in range(30):
         n = 1 + g.next() % 12
         sps.append((s64(g, 40), [g.next() % (1 << (1 + g.next() % 30)) for _ in range(n)]))
-    sps += [(5, [10, 30, 60]), (2, [1, 3]), (2, [3, 1]), (1, [1, 1]), (3, [2, 2, 1, 1]), (10, [0, 0, 0]), (-10, [0, 0, 0]), (7, [1, 3, 3, 1]),
+    sps += [(I64_MAX, [I64_MAX, I64_MAX, 3]), (I64_MAX, [I64_MAX, I64_MAX, 1, 1, 1]), (I64_MIN, [I64_MAX, 5, I64_MAX, 7]), (10 ** 18, [I64_MAX, I64_MAX // 3, 99, I64_MAX // 7]),
+            (5, [10, 30, 60]), (2, [1, 3]), (2, [3, 1]), (1, [1, 1]), (3, [2, 2, 1, 1]), (10, [0, 0, 0]), (-10, [0, 0, 0]), (7, [1, 3, 3, 1]),
             (6, [-1, 4, 2]), (450, [32_371_737, 12_599_507, 8_695_522, 6_541_834])]
     fs.add('splits', [I64, '[Int64]', '[Int64]', I32], [((w, ws), lambda w=w, ws=ws: split(w, ws)) for w, ws in sps], split_truth)
     # party support: 10,000 bp over the votes, and the same split over a country's provinces by population
     fs.add('splitsBP', [I32, '[Int64]', '[Int32]', I32], [((w, ws), lambda w=w, ws=ws: split(w, ws)) for w, ws in
            [(10000, [1, 1, 1, 1, 1, 1]), (10000, [5_421_332, 4_898_112, 1_200_904, 98_001]), (10000, [0, 0]), (10000, []), (-10000, [1, 2]), (0, [4, 4]), (I32_MAX, [1, 1, 1]), (I32_MIN, [1, 1, 1]), (9999, [1, 1])]], split_truth)
     c = RNG.keyed(4, 4, 4, 4)
+    def drawn(g, start, k, name):
+        assert g.state == (start + k * GOLD) & M64, name + ': the draws are not what the docs say'
+
+    def chance_rule(n, d):
+        if n <= 0 or d <= 0: return (0, 0)
+        if n >= d: return (1, 0)
+        return None
+    c0 = c.state
     fs.add('rngChanceIn', [I64, I64, I32], [((n, d), lambda n=n, d=d: int(c.chance_in(n, d))) for n, d in [(0, 10), (10, 10), (11, 10), (1, 0), (0, 0), (1, 18250), (9125, 18250), (18249, 18250), (1, 2), (1, 2), (1, 2), (1, 2), (I64_MAX, I64_MAX), (I64_MAX - 1, I64_MAX), (1, I64_MAX), (3, 7), (3, 7), (3, 7), (3, 7), (3, 7),
-           (-1, 10), (5, -10), (I64_MIN, 10), (-3, -7), (3, 7)]])
+           (-1, 10), (5, -10), (I64_MIN, 10), (-3, -7), (3, 7)]], chance_rule)
+    drawn(c, c0, len(fs[-1][2]), 'rngChanceIn')
     cq = RNG.keyed(3, 3, 3, 3)
-    fs.add('rngChanceQ32', [I64, I32], [((p,), lambda p=p: int(cq.chance_q(p))) for p in [0, -1, I64_MIN, 1, ONE // 2, ONE // 2, ONE // 2, ONE - 1, ONE, ONE + 1, I64_MAX, ONE // 18250, ONE // 3, ONE // 3, ONE // 3]])
+    q0 = cq.state
+    fs.add('rngChanceQ32', [I64, I32], [((p,), lambda p=p: int(cq.chance_q(p))) for p in [0, -1, I64_MIN, 1, ONE // 2, ONE // 2, ONE // 2, ONE - 1, ONE, ONE + 1, I64_MAX, ONE // 18250, ONE // 3, ONE // 3, ONE // 3]],
+           lambda p: (0, 0) if p <= 0 else ((1, 0) if p >= ONE else None))
+    drawn(cq, q0, len(fs[-1][2]), 'rngChanceQ32')
     k = RNG.keyed(6, 6, 6, 6)
     pks = [[1], [0, 1], [1, 0], [0, 0], [], [-5, 3], [3, -5], [-1, -1], [1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 1], [1, 2, 3, 4], [1, 2, 3, 4], [1, 2, 3, 4], [1, 2, 3, 4], [1000, 1], [1, 1000],
            [I64_MAX, I64_MAX], [I64_MAX, I64_MAX, I64_MAX], [I64_MAX, I64_MAX, I64_MAX], [0, 0, 7, 0], [5, 0, 0, 5], [5, 0, 0, 5], [5, 0, 0, 5]]
-    pks += [[-1, 5], [5, -1, -1], [I64_MIN, I64_MIN], [I64_MAX, I64_MAX, -1, 3], [0], [-2], [2, 2]]
-    fs.add('rngPick', ['[Int64]', I32], [((ws,), lambda ws=ws: k.pick(ws)) for ws in pks])
+    pks += [[-1, 5], [5, -1, -1], [I64_MIN, I64_MIN], [I64_MAX, I64_MAX, -1, 3], [0], [-2], [2, 2], [2, I64_MAX, I64_MAX], [1, I64_MAX, I64_MAX, 1]]
+
+    def pick_again(ws):
+        """pick said a second way: the draw below the held sum, then the first running sum above it."""
+        clone = RNG(k.state)
+        sizes = [max(w, 0) for w in ws]
+        clamps = sum(1 for w in ws if w < 0)
+        sums, run = [], 0
+        for v in sizes:
+            run += v
+            sums.append(min(run, M64))
+        total = sums[-1] if sums else 0
+        if sizes and sum(sizes) > M64: clamps += 1
+        draw = clone.below(total)
+        if total == 0: return (-1, clamps)
+        return (next(i for i, (v, t) in enumerate(zip(sizes, sums)) if v > 0 and draw < t), clamps)
+    k0 = k.state
+    rows = []
+    for ws in pks:
+        want = pick_again(ws)
+        got = counted(lambda ws=ws: k.pick(ws))
+        assert got == want, (ws, got, want)
+        rows.append((ws, got[0], got[1]))
+    drawn(k, k0, len(pks), 'rngPick')
+    fs.append(('rngPick', '([Int64], Int32, UInt64)', rows))
     h = RNG.keyed(8, 8, 8, 8)
-    fs.add('rngShuffle', [I32, '[Int32]'], [((n,), lambda n=n: h.shuffle(list(range(n)))) for n in [0, 1, 2, 2, 2, 3, 3, 3, 5, 8, 13, 13, 52]])
+    h0 = h.state
+    sizes = [0, 1, 2, 2, 2, 3, 3, 3, 5, 8, 13, 13, 52]
+    fs.add('rngShuffle', [I32, '[Int32]'], [((n,), lambda n=n: h.shuffle(list(range(n)))) for n in sizes])
+    drawn(h, h0, sum(max(0, n - 1) for n in sizes), 'rngShuffle')
+    # every order of three items comes up, about equally: Fisher-Yates, not Sattolo's cycles
+    f = RNG.keyed(10, 10, 10, 10)
+    seen = {}
+    for _ in range(6000):
+        o = tuple(f.shuffle([0, 1, 2]))
+        seen[o] = seen.get(o, 0) + 1
+    assert len(seen) == 6 and all(800 <= v <= 1200 for v in seen.values()), seen
     for row in fs[-1][2]: assert sorted(row[1]) == list(range(row[0])), 'a shuffle keeps every item once'
     uws = [(0, 0, 0, ONE, ONE), (0, 0, -ONE, ONE, ONE), (0, 0, 0, ONE // 2, ONE), (0, 0, 2 * ONE, 3 * ONE, ONE), (5, 0, 0, ONE, ONE), (-5, 0, 0, ONE, ONE), (1, 2, 0, ONE, ONE), (0, 0, I64_MIN, I64_MAX, I64_MIN), (0, 0, -ONE, ONE, -ONE)]
     fs.add('q32RatioUndefined', [I64, I64, I64, I64, I64, I64], [((n, d, lo, hi, u), lambda n=n, d=d, lo=lo, hi=hi, u=u: q_ratio_within(n, d, lo, hi, u)) for n, d, lo, hi, u in uws],

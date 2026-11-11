@@ -2,8 +2,8 @@
 // sums to 10,000 bp; R4: province sums equal country totals exactly). Rounding each part to the nearest value cannot
 // do that: six shares of 1/6 in basis points are 10,002. A split gives every part its share rounded down, then hands
 // the units left over, one each, to the parts that lost most by the rounding: the largest remainder (Hare's method).
-// The parts always add up to the whole, each is within one unit of its exact share, and the result depends on nothing
-// but the inputs. Elections that count by highest averages (d'Hondt, Sainte-Laguë) need an allocator of their own:
+// The parts always add up to the whole, each is within one unit of its exact share (of the halved weights' share when
+// the weights' sum passes 64 bits), and the result depends on nothing but the inputs. Elections that count by highest averages (d'Hondt, Sainte-Laguë) need an allocator of their own:
 // this is not it. stdlib only.
 
 /// Splits a whole among parts in proportion to weights. It keeps its working room between calls: a list longer than
@@ -53,7 +53,8 @@ public struct ShareSplitter: Sendable {
     /// - A whole below 0 splits as its opposite does, with every part's sign turned.
     /// - A weight below 0 counts as 0, and is counted as a clamp: a weight is a size.
     /// - If the weights' sum passes the range of a `UInt64`, every weight is halved until it fits, counted once: the
-    ///   parts still add up, and the shares are as exact as the halved weights.
+    ///   parts still add up, and each is within one unit of its share by the halved weights (not of its share by the
+    ///   weights as given: `[max, max, 1, 1, 1]` of `Int64.max` puts the first part 1.25 units off).
     /// - With no parts there is nowhere to put the whole: `parts` is empty, counted when the whole is not 0.
     ///
     /// Returns false when no weight is above 0. Nobody then has a claim, and the whole is split as if every weight were

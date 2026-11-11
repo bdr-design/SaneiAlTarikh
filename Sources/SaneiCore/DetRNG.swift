@@ -87,7 +87,8 @@ public struct DetRNG: Sendable {
     /// Picks an index of `weights` with a chance in proportion to its weight, to within the bias of `below`: one draw,
     /// always (also when it picks nothing), so a stream's later draws never shift. Nil when there are no weights or
     /// none is above 0. A weight below 0 counts as 0, and is counted as a clamp: a weight is a size. If the weights'
-    /// sum passes the range of a `UInt64` it is held there, counted, and the last weights lose their chance.
+    /// sum passes the range of a `UInt64` it is held there, counted: the weight at which it passes keeps only the
+    /// part that fits, and the weights after it lose their chance.
     ///
     /// The result is an index of `weights` (for a slice, the slice's own index, not an offset from 0). `weight` is
     /// called once or twice per element and must give the same value each time. The weights are a random-access

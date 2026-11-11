@@ -46,9 +46,10 @@ vectors).
 ## Acceptance criteria
 1. `ci-linux` green (debug and optimised), with the reference checks.
 2. For any weights and any whole, the split's parts sum to the whole exactly, each part is within one unit of its exact
-   share, and the result does not depend on anything but the inputs (ties by index).
+   share (of its share by the halved weights when their sum passes 64 bits), a smaller weight never gets more than a
+   larger one, and the result does not depend on anything but the inputs (ties by weight, then by index).
 3. amount × n ÷ d equals the exactly rounded quotient for every vector, at any size that fits.
-4. Nothing traps or wraps; a clamp is counted, except in the bounded ratio, which never counts.
+4. Nothing traps or wraps; a clamp is counted, except in a bounded ratio and in `clamped(to:)`, which never count.
 5. Six independent read-only reviews; every confirmed finding fixed; verification reviews of the fixes.
 
 ## Test and risks
@@ -91,4 +92,9 @@ identical). This round fixed what they found:
   power of a level (it was `*`, which read as scaling); a warning on `exponent`.
 - **Words and numbers:** the copy of a splitter, the closures' calls, the output column, 0 weights, «about 2», the
   bias of `below`, the cost line measured.
+- **The checker (the sixth review, 78 Swift and 36 Python mutants):** the split's truth now holds the halved weights
+  to the one-unit rule too, with rows of unequal wide weights; the bounded ratio's overflow rows; the logarithm of a
+  ratio checked at its ends and exact at powers of two; every draw family checked for the number of draws it makes,
+  `pick` restated a second way, the chance rule's rows, a shuffle's six orders counted; each helper tested on both
+  sides (a zero divisor, the far end, both bounds).
 

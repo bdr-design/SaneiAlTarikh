@@ -99,7 +99,7 @@ how a clamp is counted, where the tables come from or how a random draw is mappe
      inputs. A whole below 0 splits as its opposite, signs turned. A weight below 0 counts as 0, counted as a clamp.
      No weight above 0: the whole is split as if every weight were 1, and the split says so (it returns false), for
      the caller to decide. No parts: nothing, counted when the whole is not 0. Weights whose sum passes 64 bits are
-     halved until it fits, counted once. Each weight is read once; the weights are a random-access collection, never a
+     halved until it fits, counted once; each part is then within one unit of its share by the halved weights. Each weight is read once; the weights are a random-access collection, never a
      set or a dictionary. Elections that count by highest averages (d'Hondt, Sainte-Laguë) need their own allocator,
      with the elections.
    - An amount times n / d is exactly rounded at any size (a 128-bit product, one division); dividing by zero is a
