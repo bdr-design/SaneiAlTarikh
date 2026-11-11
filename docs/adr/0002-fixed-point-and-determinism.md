@@ -29,15 +29,21 @@ how a clamp is counted, where the tables come from or how a random draw is mappe
    - A scope binds a counter to the running task: `Saturation.counting(into:)`. Only the cold path of a clamp reads
      the binding, so the hot path carries one overflow check and no extra argument.
    - There is no shared mutable global (`threadSpread`). The counter is a class that is deliberately not `Sendable`,
-     so the compiler refuses to hand it to another task; the task-local that holds it is internal.
-   - A scope is synchronous: it cannot hold an `await`. So the tick must bind inside each of its serial phases, and
-     each child of a parallel burst must count its own clamps (`Saturation.counted`) and hand the count back in its
-     result; the parent adds the counts in serial order.
+     so the compiler refuses to let two tasks hold it; the task-local that holds it is internal.
+   - Opening a scope allocates once (measured on Linux: 72 bytes, freed when it ends). So the simulation's loop opens
+     one long scope around a whole run of ticks (`Saturation.countingAcrossAwaits`), which follows its task across
+     awaits and allocates nothing while it lasts; a tick does not open a scope per phase (§8: 0 allocations a tick).
+     The short synchronous scope (`counting(into:)`) is for single calls and tests.
+   - Each child of a parallel burst must count its own clamps (`Saturation.counted`) and hand the count back in its
+     result; the parent adds the counts in serial order. Per-child counters from a pool, so a burst allocates
+     nothing, are the engine's (its burst helper).
    - The silent cases: a clamp outside every scope is still a clamp, and nobody counts it. That is every test of plain
      values and all formatting, and also a detached task and an actor's method whose caller did not bind. The engine's
      entry points must each bind (the test that a tick's clamps are all counted comes with the engine).
-   - An unstructured `Task { }` started inside a scope copies the scope and would write the counter from another
-     thread. The engine must not start one: its bursts go through one helper, and a CI ban comes with the engine.
+   - No task of any kind is started inside a scope: an unstructured `Task { }` and a child added to a group made
+     outside (`group.addTask`) both copy the scope and would write the counter from another thread (a reviewer saw
+     counts lost). The engine starts its bursts through one helper, and a CI ban on `Task {`, `addTask` and
+     `async let` elsewhere in the engine comes with it.
    - Not counted, by decision: `exp2` of a logarithm below -33 is 0 (a level that small is 0 to a `Q32`).
    - Atomics are not used: the standard library's need iOS 18, and the app supports iOS 17.
 4. **Division by zero is a counted clamp:** 0 ÷ 0 = 0; anything else is the end of the range on the dividend's side.
@@ -46,10 +52,11 @@ how a clamp is counted, where the tables come from or how a random draw is mappe
    log2(1 + i/1024) for i = 0…1024 from 60-digit decimal arithmetic, correctly rounded to 32 binary places, and writes
    them as a Swift file. `exp2` and `log2` interpolate linearly. The reference asserts these bounds against decimals
    (§2.3 asks for 1e-6):
-   - `exp2`: within 6e-8 of the true value, relative, from the level 1 up. Below 1 a `Q32` has few bits and its own
-     last step (2^-32) is the limit: the level 1/20,500 is already 2e-6 off.
-   - `scale` (a whole amount times 2^y, the way a price index or an exchange rate is applied): within 6e-8, relative,
-     or one unit, at any size of level. It is not exactly rounded, and scaling by y and then by -y does not return the
+   - `exp2`: within 6e-8 of the true value, relative, from the level 1 up. Below 1 a `Q32` has few bits: within 6e-8
+     of the true level plus one step of 2^-32 (the level 1/20,500 is already 2e-6 off). A small level is better built
+     as `LogQ` from two whole numbers.
+   - `scale` (a whole amount times 2^y, the way a price index or an exchange rate is applied): within 6e-8 of the true
+     product plus one unit, at any size of level. It is not exactly rounded, and scaling by y and then by -y does not return the
      amount exactly.
    - `log2`: within 2e-7, absolute, everywhere. A round trip `exp2(log2(x))`: within 2e-7, relative, from 1 up.
    - `logistic`: within 2e-8, absolute, and exactly symmetric.
@@ -61,16 +68,17 @@ how a clamp is counted, where the tables come from or how a random draw is mappe
    writing: exact fractions for the fixed-point arithmetic, 60-digit decimals for the tables and `scale`, Python's own
    calendar for dates, SplitMix64's published sequence for the generator. CI regenerates both files and fails on a
    difference, and the script fails when the Swift tests do not read a family. These are the golden values of §8
-   (`DetRNG` and `DMath`, with the fixed-point arithmetic they stand on); simulation outputs are never golden values.
+   (`DetRNG` and `DMath`, with the fixed-point arithmetic, the calendar and the deflator they stand on); simulation
+   outputs are never golden values.
    - The rows are Swift source that the test target compiles, so they sit with the tests
      (`Tests/SaneiCoreTests/CoreGolden.swift`), not under §2.1's `Tests/Golden/values/`; `Tests/Golden/` holds the
      saves and replays when they come.
 7. **Random numbers.** SplitMix64. A generator is made from (the game's seed, a key, a stream, a serial): the key is
-   the day or the intelligence epoch, the stream is the system's, the serial the entity's. A draw therefore does not
+   the day or the intelligence epoch, the stream is the system's (one per system, §2.3), the serial the entity's. A draw therefore does not
    depend on the order systems or threads run in.
    - Each coordinate is mixed in on its own: `mix(mix(mix(seed + γ) + γ + key) + γ + (stream << 32 | serial))`, with
-     SplitMix64's output function and increment. Were the seed and the key added first, the game with seed 2012 would
-     roll on each day what the game with seed 2011 rolls on the next.
+     SplitMix64's output function and increment. If the seed and the key were added first, the game with seed 2012
+     would roll on each day what the game with seed 2011 rolls on the next.
    - No generator is saved between days. The save's `RNG ` chunk (§7) holds the game's seed and the counters a key is
      made of, never a generator's state.
    - A number below n is the high half of draw × n: one draw per value, no rejection loop (bias below n / 2^64).
@@ -86,8 +94,9 @@ how a clamp is counted, where the tables come from or how a random draw is mappe
 ## Consequences
 - A change to any algorithm here changes saves and replays: it needs a new ADR, the reference and the vectors
   regenerated together, and a save migration if state depends on it.
-- The engine binds its world's counter inside each serial phase of a tick, and checks it with the other invariants.
+- The engine opens one long counting scope around its run of ticks, and checks the count with the other invariants.
 - `SaneiCore` stays free of Foundation and of floating point (CI scans it with the engine); the reference needs only
   Python's standard library.
 - CI builds and tests both the debug and the optimised build: the app ships optimised, and an unchecked read or a
-  different inlining shows only there.
+  different inlining shows only there. The optimised tests run on a build made for testing (`-enable-testing`); the
+  plain optimised build is built, with warnings as errors, but not tested.
