@@ -143,7 +143,10 @@ public struct SaveColumn: Sendable, Equatable {
         var out: [[UInt8]] = []
         out.reserveCapacity(count)
         for _ in 0..<count {
-            guard let n = r.varint(), n <= UInt64(itemLimit), n <= UInt64(range.upperBound - r.offset) else { return nil }
+            // the length must end inside the column: in a shared buffer, a varint cut at the column's end would read on
+            // into the next column's bytes
+            guard let n = r.varint(), r.offset <= range.upperBound, n <= UInt64(itemLimit), n <= UInt64(range.upperBound - r.offset)
+            else { return nil }
             let start = r.offset
             out.append(Array(buffer[start..<(start + Int(n))]))
             r = ByteReader(buffer, offset: start + Int(n))

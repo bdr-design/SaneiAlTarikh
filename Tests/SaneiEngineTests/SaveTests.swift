@@ -169,6 +169,48 @@ final class SaveTests: XCTestCase {
         XCTAssertEqual(metaReport.defaulted, ["META.playtime"])
     }
 
+    /// A length that a column's last byte starts and the next column's bytes would finish is refused, never read on:
+    /// through the saves list (no trailer check) and through a full read of a sealed file.
+    func testAnItemLengthNeverReadsIntoTheNextColumn() {
+        // META: gameVersion's one item has a length byte 0x81, and a column named "z" follows
+        var metaChunk = SaveMeta(formatVersion: 1).chunk
+        metaChunk.columns = metaChunk.columns.map { $0.name == "gameVersion" ? SaveColumn(name: "gameVersion", type: .items, encoding: .raw, count: 1, data: [0x81]) : $0 }
+        metaChunk.columns.append(SaveColumn(name: "z", type: .u8, encoding: .raw, count: 1, data: [7]))
+        let metaBytes = SaveTree(formatVersion: 1, chunks: [metaChunk]).write()
+        var w = ByteWriter()
+        w.bytes.append(contentsOf: SaveFile.magic)
+        w.fixed(UInt16(1), as: UInt16.self)
+        w.u8(0)
+        w.u8(0)
+        w.fixed(UInt32(metaBytes.count), as: UInt32.self)
+        w.bytes.append(contentsOf: metaBytes)
+        XCTAssertEqual(SaveFile.readMeta(w.bytes).failureValue, .badMeta)
+        // the queue: the same shape in CMDQ, in a sealed file
+        let s = Self.busyWorld().state
+        var tree = s.saveTree()
+        tree.dropColumn("commands", from: "CMDQ")
+        tree.addColumn(SaveColumn(name: "commands", type: .items, encoding: .raw, count: 1, data: [0x81]), to: "CMDQ")
+        tree.addColumn(SaveColumn(name: "z", type: .u8, encoding: .raw, count: 1, data: [7]), to: "CMDQ")
+        var m = meta(s)
+        m.formatVersion = 1
+        m.date = s.world.date.days
+        m.seed = s.world.seed
+        XCTAssertEqual(SaveCodec.read(SaveFile.write(meta: m, payload: tree.write())).failureValue, .badState)
+    }
+
+    /// Submit and load ask one rule of the governments a command names, so every state submit allows saves and loads.
+    func testWhatSubmitAllowsAlwaysSaves() throws {
+        var sim = Self.busyWorld()
+        let d = sim.state.world.date.adding(days: 1)
+        let row0 = sim.state.governments.ref(0)
+        let madeUp = GovRef(row: row0.row, serial: Serial(raw: row0.serial.raw + 1))     // a serial given, but to another row
+        XCTAssertEqual(sim.submit(IssuedCommand(day: d, issuer: .ai(madeUp), sequence: 9, command: .setTaxRate(government: madeUp, rate: .zero))), .invalid)
+        let never = GovRef(row: Idx(raw: 50), serial: Serial(raw: 4_000_000))
+        XCTAssertEqual(sim.submit(IssuedCommand(day: d, issuer: .ai(row0), sequence: 9, command: .setTaxRate(government: never, rate: .zero))), .invalid)
+        XCTAssertEqual(sim.submit(IssuedCommand(day: d, issuer: .ai(row0), sequence: 10, command: .setTaxRate(government: row0, rate: .zero))), .queued)
+        XCTAssertEqual(try SaveCodec.read(SaveCodec.write(sim.state, meta: meta(sim.state))).get().state, sim.state)
+    }
+
     /// META's own report reaches the full read's report.
     func testAFullReadKeepsMetasReport() throws {
         let s = Self.busyWorld().state
@@ -258,7 +300,7 @@ final class SaveTests: XCTestCase {
         replace(&far, "GOVT", .of("aiNextStrategic", [Int64](repeating: Int64(GameDate.max.days), count: n), .i32, .zigzag))
         var farReport = SaveReport()
         XCTAssertEqual(WorldState.load(far, report: &farReport)?.governments.aiNextStrategic.first,
-                       base.world.date.adding(days: Simulation.strategicPeriod))
+                       base.world.date.adding(days: Simulation.strategicPeriod - 1), "the latest a look can be: a period less a day")
         refused({ replace(&$0, "PROV", .of("administrator", [UInt64(200), 0, 0, 0], .u16, .varintDelta)) }, "a province held by no such row")
         // row 3 marked dissolved while it still holds province 3 (and nothing else changed)
         var alive = [Bool](repeating: true, count: n)

@@ -110,6 +110,7 @@ public struct SaveMeta: Sendable, Equatable {
             guard let v = col.values(Int64.self, as: .i32, atMost: 1), v.count == 1, v[0] >= Int64(Int32.min), v[0] <= Int64(Int32.max) else { return nil }
             m.date = Int32(v[0])
         }
+        if m.playerSerial == 0 { m.playerRow = 0 }                // no player: the row means nothing
         if let col = present("cheatsUsed") {
             guard let f = col.flags(atMost: 1), f.count == 1 else { return nil }
             m.cheatsUsed = f[0]

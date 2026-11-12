@@ -234,6 +234,12 @@ public struct GovernmentTable: Sendable, Equatable {
         taxBase[row] = taxBase[row].times(1, over: 1_000)
     }
 
+    /// True for a government the game has made, alive or not: its row exists, its serial was given, and not after the
+    /// row's own (a row's serials only rise). Submit and load ask the same, so a state submit allows always saves.
+    public func wasMade(_ g: GovRef) -> Bool {
+        g.row.int < rows && counter.hasGiven(g.serial) && g.serial.raw <= serial[g.row.int].raw
+    }
+
     /// True while a new serial can be given (a create or a succession).
     var canTakeSerial: Bool { counter.next < UInt32.max }
 
@@ -324,7 +330,8 @@ public struct WorldState: Sendable, Equatable {
     /// Nil past 2^60 for the treasury or the tax base (the command's rule, here too for the scenario's set-up), or a
     /// rate outside 0 to 100%.
     mutating func createGovernment(polity p: Idx<PolityKind>, treasury: LCU, taxBase: LCU, taxRate: BP, strategicPeriod: Int) -> GovRef? {
-        guard !treasury.needsRedenomination, !taxBase.needsRedenomination, taxRate >= .zero, taxRate <= .one else { return nil }
+        guard treasury >= .zero, taxBase >= .zero, !treasury.needsRedenomination, !taxBase.needsRedenomination, taxRate >= .zero,
+              taxRate <= .one else { return nil }
         guard let g = governments.create(polity: p, on: world.date, taxBase: taxBase, taxRate: taxRate, strategicPeriod: strategicPeriod) else {
             return nil
         }

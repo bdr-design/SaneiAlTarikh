@@ -265,7 +265,7 @@ struct Loader {
             guard lm[i] == never || (lm[i] >= 0 && lm[i] <= month), ly[i] == never || (ly[i] >= 0 && ly[i] <= year),
                   GameDate(days: Int32(ai[i])).isSupported else { return nil }
             guard gc.hasGiven(Serial(raw: UInt32(gs[i]))), gp[i] < Int64(np), slot[i] >= 1, slot[i] <= 28 /* format 1: 28 slots */,
-                  tr[i] >= 0, tr[i] <= Int64(BP.one.raw), tb[i] >= 0, i == 0 || seen[i] > seen[i - 1],
+                  tr[i] >= 0, tr[i] <= Int64(BP.one.raw), tb[i] >= 0, !LCU(raw: tb[i]).needsRedenomination, i == 0 || seen[i] > seen[i - 1],
                   GameDate(days: Int32(ai[i])).isSupported else { return nil }
         }
         var gt = GovernmentTable()
@@ -277,7 +277,7 @@ struct Loader {
         gt.lastYearlyRun = filled(ly, GovernmentTable.capacity) { Int32($0) }
         // a look further ahead than this build's period allows (a save from a slower difficulty, a rule since changed)
         // comes back within it: a rule's value is brought into the rule, never a reason to refuse the save
-        let latest = Int64(date.days) + Int64(Simulation.strategicPeriod)
+        let latest = Int64(date.days) + Int64(Simulation.strategicPeriod) - 1
         gt.aiNextStrategic = filled(ai, GovernmentTable.capacity) { GameDate(days: Int32(Swift.min($0, latest))) }
         gt.taxRate = filled(tr, GovernmentTable.capacity) { BP(raw: Int32($0)) }
         gt.taxBase = filled(tb, GovernmentTable.capacity) { LCU(raw: $0) }
@@ -363,7 +363,7 @@ struct Loader {
         var rooms = (0, 0, 0)
         // the player's and the AI's governments were made: the row exists, the serial was given, and not after the row's
         // own (an event may name a government an earlier command will make, by the serial the counter will give)
-        func made(_ g: GovRef) -> Bool { g.row.int < ng && gc.hasGiven(g.serial) && Int64(g.serial.raw) <= gs[g.row.int] }
+        func made(_ g: GovRef) -> Bool { s.governments.wasMade(g) }   // the rule submit asks
         for c in items {
             let named = c.issuer == .event || c.command.governments.allSatisfy(made)
             guard c.day >= date, c.command.isWritable, c.issuer.government.map(made) ?? true, named else { return nil }

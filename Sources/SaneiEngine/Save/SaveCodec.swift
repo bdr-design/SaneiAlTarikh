@@ -25,6 +25,8 @@ public enum SaveCodec {
     /// The file's bytes. The format, the date and the seed in META are the state's, whatever `meta` says, and a player's
     /// government the state never made is left out: every file this writes reads back. Make the bytes on the I/O
     /// thread from a copy of the state (a copy is free until a column is written): never on the simulation's (§3.5).
+    /// A save is taken between days, as the host does: then every redenomination mark is cleared (a state posted to
+    /// outside a day and not stepped since may hold one, and its save is refused).
     public static func write(_ state: WorldState, meta: SaveMeta, compressor: (any SaveCompressor)? = nil) -> [UInt8] {
         var m = meta
         m.formatVersion = WorldState.saveFormat

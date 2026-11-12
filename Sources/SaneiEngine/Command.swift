@@ -6,8 +6,8 @@ import SaneiCore
 // replays: never renumber one. Written through the column codec, never through synthesised Codable. stdlib only,
 // through SaneiCore.
 
-/// Who gave a command. The order of a day's commands is (day, rank, the issuer's serial, sequence): the player first,
-/// then events, then the governments' AI, each AI by its government's serial and row.
+/// Who gave a command. The order of a day's commands is (day, rank, the issuer's serial and row, sequence): the player
+/// first, then events, then the governments' AI, each AI by its government's serial and row.
 public enum Issuer: Sendable, Hashable {
     /// The player, for the government they lead.
     case player(GovRef)

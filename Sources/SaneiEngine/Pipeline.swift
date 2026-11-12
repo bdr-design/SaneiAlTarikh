@@ -94,7 +94,10 @@ public struct Simulation: Sendable {
         // table, is refused now (no arrival time changes that). Whether the government still lives is checked on the
         // command's day, so an AI result refused because its government ended meanwhile is refused the same way
         // however early or late it arrived (§2.4: the result never depends on how fast the AI ran).
-        if let g = c.issuer.government, !state.governments.counter.hasGiven(g.serial) || g.row.int >= state.governments.rows { return .invalid }
+        if let g = c.issuer.government, !state.governments.wasMade(g) { return .invalid }
+        // the player's and the AI's commands name only governments the game made (an event may name one an earlier
+        // command will make, by the serial the counter will give)
+        if c.issuer != .event, !c.command.governments.allSatisfy(state.governments.wasMade) { return .invalid }
         // the place in order, by halving (the queue is always in order); a command with the same key would sit there
         var lo = 0, hi = state.pending.count
         while lo < hi {
@@ -144,7 +147,7 @@ public struct Simulation: Sendable {
         let monthIndex = Int32(civil.year * 12 + civil.month - 1)
         let year = Int32(civil.year)
 
-        // 1. commands due today, in (day, rank, issuer, sequence) order
+        // 1. commands due today, in (day, rank, the issuer's serial and row, sequence) order
         applyCommands(upTo: date)
 
         // 2. the calendar jobs (their systems come with M2 and M6; the counters show they ran, and when), then the
