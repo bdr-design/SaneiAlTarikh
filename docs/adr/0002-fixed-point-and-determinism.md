@@ -40,10 +40,11 @@ how a clamp is counted, where the tables come from or how a random draw is mappe
    - The silent cases: a clamp outside every scope is still a clamp, and nobody counts it. That is every test of plain
      values and all formatting, and also a detached task and an actor's method whose caller did not bind. The engine's
      entry points must each bind (the test that a tick's clamps are all counted comes with the engine).
-   - No task of any kind is started inside a scope: an unstructured `Task { }` and a child added to a group made
-     outside (`group.addTask`) both copy the scope and would write the counter from another thread (a reviewer saw
-     counts lost). The engine starts its bursts through one helper, and a CI ban on `Task {`, `addTask` and
-     `async let` elsewhere in the engine comes with it.
+   - Inside the short scope (`counting(into:)`), no task of any kind is started: an unstructured `Task { }` and a
+     child added to a group made outside (`group.addTask`) both copy the scope, outlive it and would write the counter
+     from another thread (a reviewer saw counts lost). Inside the long scope, the only tasks started are a parallel
+     burst's children, each counting its own clamps (`counted` around its whole body), and only through the engine's
+     one burst helper; a CI ban on `Task {`, `addTask` and `async let` elsewhere in the engine comes with it.
    - Not counted, by decision: `exp2` of a logarithm below -33 is 0 (a level that small is 0 to a `Q32`).
    - Atomics are not used: the standard library's need iOS 18, and the app supports iOS 17.
 4. **Division by zero is a counted clamp:** 0 ÷ 0 = 0; anything else is the end of the range on the dividend's side.

@@ -10,13 +10,14 @@ public struct StateHasher: Sendable {
 
     @inlinable public init() { state = 0xCBF2_9CE4_8422_2325 }
 
-    /// Mixes in one 64-bit value: the state and the value together through SplitMix64's output function. Every bit
-    /// of a value reaches every bit of the state, so states that differ by a sign, by a top bit (a flag in a packed
-    /// word) or by the order of two values hash apart. A plain multiply per value did not do that: a bit only moved
-    /// up, and two changes of a top bit cancelled.
+    /// Mixes in one 64-bit value: the state and the value together, plus SplitMix64's step, through its output
+    /// function. Every bit of a value reaches every bit of the state, so states that differ by a sign, by a top bit
+    /// (a flag in a packed word) or by the order of two values hash apart. A plain multiply per value did not do that:
+    /// a bit only moved up, and two changes of a top bit cancelled. The step keeps a state of 0 from staying 0 when
+    /// zeros follow (the mix takes 0 to 0), so an empty column or a `false` always moves the hash.
     @inlinable
     public mutating func combine(_ v: UInt64) {
-        state = DetRNG.mix(state ^ v)
+        state = DetRNG.mix((state ^ v) &+ DetRNG.gamma)
     }
 
     /// Mixes in a whole number of up to 64 bits (a signed one is sign-extended, so -1 is the same in every width, and

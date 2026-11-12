@@ -53,7 +53,9 @@ jobs:
           if [ "$found" = 1 ]; then echo "SaneiCore and SaneiEngine never use floating-point literals (§2.2, L5)"; exit 1; fi
           # randomness and hashing that differ between runs or Swift versions (ADR 0002): the standard library's
           # generator and its range mappings, and hash values, which are seeded per process. Comments left out.
-          rnd='\.(random|randomElement|shuffled|shuffle)\(|\bSystemRandomNumberGenerator\b|\bhashValue\b|\bHasher\('
+          # (`DetRNG.shuffle(&items)` is the project's own deterministic shuffle: only the standard library's shapes,
+          # `.shuffle()` and `.shuffle(using:)`, are banned)
+          rnd='\.(random|randomElement|shuffled)\(|\.shuffle\((\)|using:)|\bSystemRandomNumberGenerator\b|\bhashValue\b|\bHasher\('
           found=0
           for f in $(find $SIM -name '*.swift'); do
             out=$(sed -E 's://.*$::' "$f" | grep -nE "$rnd" || true)

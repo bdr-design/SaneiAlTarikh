@@ -245,5 +245,21 @@ final class ColumnCodecTests: XCTestCase {
         bits.combine(UInt8(0))
         XCTAssertEqual(flags.value, bits.value)
         XCTAssertEqual(StateHasher().value, 0xCBF2_9CE4_8422_2325, "nothing mixed in")
+        // a state of 0 does not swallow the zeros after it: an empty column and a `false` still move the hash
+        var zero = StateHasher()
+        zero.state = 0
+        var seen: Set<UInt64> = [zero.value]
+        zero.combine([UInt8]())
+        XCTAssertTrue(seen.insert(zero.value).inserted)
+        zero.combine(false)
+        XCTAssertTrue(seen.insert(zero.value).inserted)
+        zero.combine(UInt64(0))
+        XCTAssertTrue(seen.insert(zero.value).inserted)
+        // a hasher's value mixed into another fresh one is not a dead end either
+        var outer = StateHasher()
+        outer.combine(StateHasher().value)
+        let afterValue = outer.value
+        outer.combine([Int64]())
+        XCTAssertNotEqual(outer.value, afterValue)
     }
 }

@@ -93,11 +93,16 @@ public struct TermBuffer12<Value: TermValue>: TermSink, Sendable {
 
     /// A sheet as a save holds it (the campaign log keeps each entry's «لماذا؟» as it was): the kept rows in order,
     /// whether the first is the starting level, the «أخرى» amount when terms were left out, and the total. Nil when it
-    /// could not be a sheet this type makes: more than twelve rows, «أخرى» beside any number of rows but eleven, or a
-    /// starting level with no rows.
+    /// could not be a sheet this type makes: more than twelve rows, «أخرى» beside any number of rows but eleven, a
+    /// starting level with no rows, a row numbered 65,535 (that is «أخرى»'s), or a cause of exactly 0 (it takes no
+    /// row; a starting level of 0 does). The total is taken as saved, not checked against the rows: the additions may
+    /// have clamped on the way, and then the rows do not add up to it.
     @inlinable
     public init?(saved rows: [(id: TermID, value: Value)], hasBase: Bool, other: Value?, total: Value) {
         guard rows.count <= 12, other == nil || rows.count == 11, !hasBase || !rows.isEmpty else { return nil }
+        for (slot, row) in rows.enumerated() {
+            if row.id == .other || (row.value.raw == 0 && !(hasBase && slot == 0)) { return nil }
+        }
         self.init()
         for (slot, row) in rows.enumerated() { set(slot, id: row.id.raw, raw: row.value.raw) }
         used = UInt8(truncatingIfNeeded: rows.count)
@@ -179,6 +184,7 @@ public struct TermBuffer12<Value: TermValue>: TermSink, Sendable {
 
     @inlinable
     public mutating func base(_ id: TermID, _ value: Value) {
+        assert(id != .other, "65,535 is «أخرى»'s number: no term uses it")
         if used == 0 {
             sum = sum + value
             set(0, id: id.raw, raw: value.raw)
@@ -191,6 +197,7 @@ public struct TermBuffer12<Value: TermValue>: TermSink, Sendable {
 
     @inlinable
     public mutating func add(_ id: TermID, _ value: Value) {
+        assert(id != .other, "65,535 is «أخرى»'s number: no term uses it")
         sum = sum + value
         let raw = value.raw
         if raw == 0 { return }

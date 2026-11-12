@@ -280,6 +280,14 @@ final class TermSinkTests: XCTestCase {
         XCTAssertNil(TermBuffer12<Q32>(saved: [(id: TermID, value: Q32)](repeating: row, count: 10), hasBase: false, other: Q32(1), total: Q32(11)),
                      "a term is left out only when eleven are kept")
         XCTAssertNil(TermBuffer12<Q32>(saved: [], hasBase: true, other: nil, total: .zero), "a starting level with no rows")
+        XCTAssertNil(TermBuffer12<Q32>(saved: [(id: TermID.other, value: Q32(1))], hasBase: false, other: nil, total: Q32(1)),
+                     "65,535 is «أخرى»'s number")
+        XCTAssertNil(TermBuffer12<Q32>(saved: [row, (id: TermID(raw: 2), value: .zero)], hasBase: false, other: nil, total: Q32(1)),
+                     "a cause of 0 takes no row")
+        XCTAssertNotNil(TermBuffer12<Q32>(saved: [(id: TermID(raw: 2), value: .zero), row], hasBase: true, other: nil, total: Q32(1)),
+                        "a starting level of 0 keeps its row")
+        XCTAssertNil(TermBuffer12<Q32>(saved: [row, (id: TermID(raw: 2), value: .zero)], hasBase: true, other: nil, total: Q32(1)),
+                     "only the starting level may be 0")
     }
 
     /// The sizes the cost line states (docs/perf.md), and the layout the slots' byte offsets stand on.

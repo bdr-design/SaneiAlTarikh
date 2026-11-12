@@ -17,6 +17,7 @@ ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
 GOLDEN = os.path.join(ROOT, 'Tests/SaneiCoreTests/CodecGolden.swift')
 M64 = (1 << 64) - 1
 RAW, DELTA, ZIGZAG = 0, 1, 2                      # ColumnEncoding's stored numbers
+GAMMA = 0x9E3779B97F4A7C15                         # SplitMix64's step (DetRNG.gamma)
 
 
 def varint(v):
@@ -83,9 +84,10 @@ def mix64(z):
 
 
 class Hasher:
-    """StateHasher: each 64-bit word goes in as state = mix(state ^ word); a column is its length, then its values."""
+    """StateHasher: each 64-bit word goes in as state = mix((state ^ word) + gamma); a column is its length, then its
+    values. The step keeps a state of 0 from swallowing the zeros that follow."""
     def __init__(self): self.state = 0xCBF29CE484222325
-    def combine(self, v): self.state = mix64(self.state ^ (v & M64))
+    def combine(self, v): self.state = mix64(((self.state ^ (v & M64)) + GAMMA) & M64)
     def column(self, vs):
         self.combine(len(vs))
         for v in vs: self.combine(v)
