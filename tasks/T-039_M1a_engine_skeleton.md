@@ -1,0 +1,41 @@
+# T-039: M1a, part 4: the engine skeleton (world state, the daily pipeline, commands, the state hash)
+
+## The need
+M1a's Engine line (§9 checklist): `WorldState` as column tables, the `Pipeline` with stored slots and the strategic
+stagger, Commands with stable tags. Every later system plugs into these, so their shape is settled before any system
+is written: the order of a day, exactly one monthly run per government, a rejected command that changes nothing, the
+same hash in every run and after a copy.
+
+## Evidence
+design_doc §2.4 (the tables, the daily pipeline in its 14 steps, the slot rule for a new government, the stagger at
+most 15 a day ordered by (due date, serial), Commands with stable numeric tags, `validate` and `apply`, never
+synthesised `Codable`), §2.3 (Core), §7 (columns in saves), §8 (two runs give equal hashes; a rejected command leaves
+the hash unchanged), L3 (caps: 384 governments and polities), ADR 0001 (the host on its own thread), ADR 0002.
+
+## Scope
+- `Sources/SaneiEngine`: `WorldState` (the world row, polities, governments, provinces as dense column tables with
+  caps; each government's scheduling columns `monthlySlot`, `lastMonthlyRun`, `lastYearlyRun`, `aiNextStrategic`; a
+  thin fiscal set: treasury, tax rate, tax base), `Pipeline` (one day in §2.4's order: commands sorted by (day,
+  issuerRank, sequence); the calendar hooks; the monthly slot; the yearly run in the January slot; the strategic
+  stagger), the slot rule for a new government, `Command` (an enum, a stable `UInt16` tag per case, `validate`,
+  `apply`, a column-codec form), the state hash over every column, and two thin systems on the monthly slot (taxes into
+  the treasury; a counter of runs).
+- Tests: two runs equal; a copy continued equals the original; exactly one monthly run per government per month over
+  years, with governments created and dissolved mid-month; the stagger never above 15 a day and in (due, serial)
+  order; commands submitted in any order give the same day; a rejected command leaves the hash unchanged; every command
+  survives its codec.
+- Out of scope, each with its place: every other column group (they arrive with their systems in the next M1a
+  slices, declared with defaults before M1a ends); the ledger (T-040); the save container, META, migrations and
+  golden saves (T-041); content loading (T-042); moving `GameHost` from its M0 stand-in onto this world (with the
+  save container, T-041); parallel monthly slots (with the burst helper).
+
+## Acceptance criteria
+1. `ci-linux` green, debug and optimised; the reference checks.
+2. The day runs §2.4's steps in order; each government runs its monthly systems exactly once in every month it exists,
+   whatever day it was created; the yearly run comes once a year in its January slot.
+3. The stagger runs at most 15 governments a day, ordered by (due date, serial).
+4. Commands: a stable tag per case (pinned by a test); a rejected command changes nothing (the hash is equal); the
+   order of submission within a day never changes the result; every case writes and reads back through the codec.
+5. Determinism: two runs of the same world give equal hashes; a copy continued gives the original's hash.
+6. SaneiEngine imports only SaneiCore; nothing in it allocates per day once its tables are made (measured).
+7. Six independent read-only reviews; every confirmed finding fixed; verification reviews of the fixes.
