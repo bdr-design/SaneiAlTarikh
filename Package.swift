@@ -20,7 +20,8 @@ let package = Package(
         .target(name: "SaneiEngine", dependencies: ["SaneiCore"], path: "Sources/SaneiEngine"),
         .testTarget(name: "SaneiCoreTests", dependencies: ["SaneiCore"], path: "Tests/SaneiCoreTests"),
         .testTarget(name: "SaneiRuntimeTests", dependencies: ["SaneiRuntime"], path: "Tests/SaneiRuntimeTests"),
-        .testTarget(name: "SaneiEngineTests", dependencies: ["SaneiEngine", "SaneiRuntime"], path: "Tests/SaneiEngineTests"),
+        // the golden saves are read by path, not bundled
+        .testTarget(name: "SaneiEngineTests", dependencies: ["SaneiEngine", "SaneiRuntime"], path: "Tests/SaneiEngineTests", exclude: ["Golden"]),
     ],
     swiftLanguageModes: [.v6]
 )
