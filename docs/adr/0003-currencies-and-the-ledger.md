@@ -56,12 +56,12 @@ the world account is exactly 0 after each monthly close.
    starting treasury and tax base are within 2^60 (its command is refused otherwise). Every LCU amount in that currency is divided by 1,000 to
    the nearest unit: every government row's local balances (dissolved rows included), the money base, the governments'
    tax bases (and every LCU column the economy adds, M2), and the LCU fields of the commands waiting to make a
-   government in it (commands are worked out from the live state when given; a command that carries LCU worked out on
-   an older view, as the AI's budget commands will, is stamped with its currency's scale and rescaled or refused when
-   applied: M2). The whole change of each balance is posted under `redenomination`, so the month's sums span the
+   government in it (an event works its amounts out from the live state when it is given; a command that carries LCU
+   worked out on an older view, as the AI's budget commands will, is stamped with its currency's scale and rescaled or
+   refused when applied: M2). The whole change of each balance is posted under `redenomination`, so the month's sums span the
    change of scale; M2's inflation, its exchange-rate pass-through and the money base's growth must take that step out
    (by `scaleExponent`). The scale moves by 3, and the rate and the price index follow by `LogQ(ratio: 1, 1_000)`,
-   within 4e-7 of log2(1/1000), so a value at the rate drifts by about 3e-7 per redenomination. The count of
+   within about 6e-11 of log2(1/1000), so a value at the rate hardly drifts (measured by a reviewer). The count of
    redenominations per currency is the log; a notification comes with the notification ring (M1c). The scale is a
    UInt16: 21,845 redenominations, which no game reaches; past that the currency stops redenominating. Dollars never
    redenominate: a dollar hyperinflation has no rule. The aggregates that M2 adds (a budget's lines, nominal output, a

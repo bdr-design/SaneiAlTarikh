@@ -7,7 +7,7 @@ import SaneiCore
 // through SaneiCore.
 
 /// Who gave a command. The order of a day's commands is (day, rank, the issuer's serial, sequence): the player first,
-/// then events (and the scenario's set-up), then the governments' AI, each AI by its government's serial.
+/// then events, then the governments' AI, each AI by its government's serial (and row).
 public enum Issuer: Sendable, Hashable {
     /// The player, for the government they lead.
     case player(GovRef)
@@ -61,8 +61,9 @@ public enum Command: Sendable, Equatable {
     /// the references to the one that ended reach nothing. Its policies are its predecessor's until it changes them,
     /// and the player's waiting orders for the one that ended become the successor's (the host takes the successor's
     /// reference from the row: T-044); the AI's waiting commands for it are refused on their day and counted, as its
-    /// successor's AI looks afresh. A successor made earlier the same day is named by its row and the serial the
-    /// counter will give (`governments.counter.next`), the one way to name it before it exists.
+    /// successor's AI looks afresh. As an event's target, a successor made earlier the same day is named by its row and
+    /// the serial the counter will give (`governments.counter.next`), the one way to name it before it exists (a player
+    /// or AI issuer must name a government already made).
     case succeedGovernment(government: GovRef)
 
     /// The stored number of each case. Never renumber one; a new case takes a new number.
@@ -240,6 +241,10 @@ public struct IssuedCommand: Sendable, Equatable {
         if a.day != b.day { return a.day < b.day }
         if a.issuer.rank != b.issuer.rank { return a.issuer.rank < b.issuer.rank }
         if a.issuer.serial != b.issuer.serial { return a.issuer.serial < b.issuer.serial }
+        // the row after the serial: real governments never share a serial, so their order is the serial's; a made-up
+        // issuer with a real serial and another row is another key, and takes nothing from the real one
+        let ra = a.issuer.government?.row.raw ?? 0, rb = b.issuer.government?.row.raw ?? 0
+        if ra != rb { return ra < rb }
         return a.sequence < b.sequence
     }
 

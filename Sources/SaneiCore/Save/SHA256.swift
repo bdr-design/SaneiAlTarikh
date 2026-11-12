@@ -19,6 +19,7 @@ public enum SHA256 {
     /// The 32-byte digest of `bytes[range]`.
     public static func hash(_ bytes: [UInt8], _ range: Range<Int>? = nil) -> [UInt8] {
         let r = range ?? 0..<bytes.count
+        precondition(r.lowerBound >= 0 && r.upperBound <= bytes.count, "SHA256.hash: the range is outside the bytes")
         var h: (UInt32, UInt32, UInt32, UInt32, UInt32, UInt32, UInt32, UInt32) =
             (0x6a09e667, 0xbb67ae85, 0x3c6ef372, 0xa54ff53a, 0x510e527f, 0x9b05688c, 0x1f83d9ab, 0x5be0cd19)
         var w = [UInt32](repeating: 0, count: 64)

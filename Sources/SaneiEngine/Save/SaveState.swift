@@ -1,45 +1,55 @@
 import SaneiCore
 
 // The state's chunks (§7): `WorldState` into a `SaveTree` and back. Every value read is checked against the rules the
-// running game keeps (rows within caps, serials given by their counters and never twice, references in range, the
-// waiting commands in order and within their rooms), so a bad or forged file is refused, never trusted, and a state
-// that loads is one the game could have made. A missing column takes its default (`SaveDefaults`); an unknown chunk, an
-// unknown column and a command of an unknown tag are skipped and reported. stdlib only.
+// running game keeps (rows within caps, serials given by their counters and never twice, references in range, runs
+// not ahead of the date, the ledger's invariants, the waiting commands in order and within their rooms), so a bad or
+// forged file is refused, never trusted, and a state that loads keeps every rule the game checks. A missing column
+// takes its default (`SaveDefaults`), except the keys every save has; an unknown chunk, an unknown column and a
+// command of an unknown tag are skipped and reported. Each table is one chunk with one row count (the world row's
+// values, the world account's included, are in `WRLD`); a value per account is a column per account, by its stored
+// name, so an account added later is a column added. stdlib only.
 
-/// What a load skipped or filled in, for the log.
-public struct SaveReport: Sendable, Equatable {
-    /// Chunks and columns this version does not know, as "TAG" and "TAG.column".
-    public var skipped: [String] = []
-    /// Columns the save lacks, filled with their defaults, as "TAG.column".
-    public var defaulted: [String] = []
-    /// Waiting commands of a tag this version does not know.
-    public var skippedCommands = 0
-    public init() {}
+/// Every column the engine writes, with its default: a missing column takes it, for every row (§7). `nil` marks a key
+/// every save has (a date, a serial, a table's row-defining column): a save without it is refused. A test fails when a
+/// written column is not here, or a stored property of the state is not written.
+enum SaveDefaults {
+    static let all: [(chunk: String, column: String, value: Int64?)] = {
+        var a: [(chunk: String, column: String, value: Int64?)] = [
+            ("WRLD", "date", nil), ("WRLD", "seed", nil), ("WRLD", "monthStarts", 0), ("WRLD", "quarterStarts", 0), ("WRLD", "yearStarts", 0),
+            ("WRLD", "ledgerFailures", 0), ("WRLD", "refusedCommands", 0), ("WRLD", "refusedPostings", 0), ("WRLD", "refusedSubmits", 0),
+            ("WRLD", "worldAccount", 0), ("WRLD", "worldAccountOpening", 0), ("WRLD", "worldAccountPosted", 0),
+            ("SERL", "polities", nil), ("SERL", "governments", nil),
+            ("POLI", "exists", 1), ("POLI", "serial", nil),
+            ("GOVT", "exists", 0), ("GOVT", "serial", nil), ("GOVT", "polity", nil), ("GOVT", "monthlySlot", 1),
+            ("GOVT", "lastMonthlyRun", Int64(GovernmentTable.never)), ("GOVT", "lastYearlyRun", Int64(GovernmentTable.never)),
+            ("GOVT", "aiNextStrategic", nil), ("GOVT", "taxRate", 0), ("GOVT", "taxBase", 0),
+            ("GOVT", "monthlyRuns", 0), ("GOVT", "yearlyRuns", 0), ("GOVT", "strategicRuns", 0),
+            ("PROV", "sovereign", nil), ("PROV", "administrator", Int64(Idx<GovernmentKind>.absent.raw)), ("PROV", "population", 0),
+            ("CURR", "scaleExponent", 0), ("CURR", "rate", nil), ("CURR", "priceIndex", 0), ("CURR", "redenominations", 0),
+            ("CURR", "redenominationDue", 0), ("CURR", "moneyBase", 0), ("CURR", "moneyBaseOpening", 0), ("CURR", "moneyBasePosted", 0),
+            ("LEDG", "currency", nil), ("LEDG", "reserves", 0), ("LEDG", "reservesOpening", 0), ("LEDG", "reservesPosted", 0),
+            ("CMDQ", "commands", 0),
+        ]
+        for account in LocalAccount.allCases {
+            for suffix in ["", "Opening", "Posted"] { a.append(("LEDG", account.saveName + suffix, 0)) }
+        }
+        return a
+    }()
+
+    /// The column's entry: nil when the engine does not write it; `.some(nil)` for a key.
+    static func entry(_ chunk: String, _ column: String) -> Int64?? {
+        guard let e = all.first(where: { $0.chunk == chunk && $0.column == column }) else { return nil }
+        return .some(e.value)
+    }
 }
 
-/// The default of every column the engine writes: a missing column takes it, for every row (§7). A test fails when a
-/// written column has none.
-public enum SaveDefaults {
-    public static let all: [(chunk: String, column: String, value: Int64)] = [
-        ("WRLD", "date", 0), ("WRLD", "seed", 0), ("WRLD", "monthStarts", 0), ("WRLD", "quarterStarts", 0), ("WRLD", "yearStarts", 0),
-        ("WRLD", "ledgerFailures", 0), ("WRLD", "refusedCommands", 0), ("WRLD", "refusedPostings", 0), ("WRLD", "refusedSubmits", 0),
-        ("SERL", "polities", 1), ("SERL", "governments", 1),
-        ("POLI", "exists", 1), ("POLI", "serial", 0),
-        ("GOVT", "exists", 0), ("GOVT", "serial", 0), ("GOVT", "polity", 0), ("GOVT", "monthlySlot", 1),
-        ("GOVT", "lastMonthlyRun", Int64(GovernmentTable.never)), ("GOVT", "lastYearlyRun", Int64(GovernmentTable.never)),
-        ("GOVT", "aiNextStrategic", 0), ("GOVT", "taxRate", 0), ("GOVT", "taxBase", 0),
-        ("GOVT", "monthlyRuns", 0), ("GOVT", "yearlyRuns", 0), ("GOVT", "strategicRuns", 0),
-        ("PROV", "sovereign", 0), ("PROV", "administrator", Int64(Idx<GovernmentKind>.absent.raw)), ("PROV", "population", 0),
-        ("CURR", "scaleExponent", 0), ("CURR", "rate", 0), ("CURR", "priceIndex", 0), ("CURR", "redenominations", 0),
-        ("CURR", "redenominationDue", 0), ("CURR", "moneyBase", 0), ("CURR", "moneyBaseOpening", 0), ("CURR", "moneyBasePosted", 0),
-        ("LEDG", "currency", 0), ("LEDG", "local", 0), ("LEDG", "localOpening", 0), ("LEDG", "localPosted", 0),
-        ("LEDG", "reserves", 0), ("LEDG", "reservesOpening", 0), ("LEDG", "reservesPosted", 0),
-        ("LEDG", "world", 0), ("LEDG", "worldOpening", 0), ("LEDG", "worldPosted", 0),
-        ("CMDQ", "commands", 0),
-    ]
-
-    public static func value(_ chunk: String, _ column: String) -> Int64? {
-        all.first { $0.chunk == chunk && $0.column == column }?.value
+extension LocalAccount {
+    /// The account's stored name in a save: never changed when the Swift case is renamed.
+    var saveName: String {
+        switch self {
+        case .treasury: return "treasury"
+        case .domesticDebt: return "domesticDebt"
+        }
     }
 }
 
@@ -57,6 +67,8 @@ extension WorldState {
             one("yearStarts", Int64(world.yearStarts), .u32), one("ledgerFailures", Int64(world.ledgerFailures), .u32),
             one("refusedCommands", Int64(world.refusedCommands), .u32), one("refusedPostings", Int64(world.refusedPostings), .u32),
             one("refusedSubmits", Int64(world.refusedSubmits), .u32),
+            one("worldAccount", l.world.raw, .i64), one("worldAccountOpening", l.worldOpening.raw, .i64),
+            one("worldAccountPosted", l.worldPosted.raw, .i64),
         ])
         let serl = SaveChunk(tag: "SERL", columns: [
             .of("polities", [UInt64(polities.counter.next)], .u32, .raw), .of("governments", [UInt64(g.counter.next)], .u32, .raw),
@@ -87,14 +99,20 @@ extension WorldState {
             .of("moneyBase", c.moneyBase.map { $0.raw }, .i64, .zigzag), .of("moneyBaseOpening", c.moneyBaseOpening.map { $0.raw }, .i64, .zigzag),
             .of("moneyBasePosted", c.moneyBasePosted.map { $0.raw }, .i64, .zigzag),
         ])
-        let ledg = SaveChunk(tag: "LEDG", columns: [
+        var ledgColumns: [SaveColumn] = [
             .of("currency", l.currency.map { UInt64($0.raw) }, .u16, .varintDelta),
-            .of("local", l.local.map { $0.raw }, .i64, .zigzag), .of("localOpening", l.localOpening.map { $0.raw }, .i64, .zigzag),
-            .of("localPosted", l.localPosted.map { $0.raw }, .i64, .zigzag),
             .of("reserves", l.reserves.map { $0.raw }, .i64, .zigzag), .of("reservesOpening", l.reservesOpening.map { $0.raw }, .i64, .zigzag),
             .of("reservesPosted", l.reservesPosted.map { $0.raw }, .i64, .zigzag),
-            one("world", l.world.raw, .i64), one("worldOpening", l.worldOpening.raw, .i64), one("worldPosted", l.worldPosted.raw, .i64),
-        ])
+        ]
+        let a = LedgerTable.accountsPerRow
+        for account in LocalAccount.allCases {
+            let k = Int(account.rawValue)
+            func column(_ values: [LCU]) -> [Int64] { stride(from: k, to: values.count, by: a).map { values[$0].raw } }
+            ledgColumns.append(.of(account.saveName, column(l.local), .i64, .zigzag))
+            ledgColumns.append(.of(account.saveName + "Opening", column(l.localOpening), .i64, .zigzag))
+            ledgColumns.append(.of(account.saveName + "Posted", column(l.localPosted), .i64, .zigzag))
+        }
+        let ledg = SaveChunk(tag: "LEDG", columns: ledgColumns)
         let cmdq = SaveChunk(tag: "CMDQ", columns: [.items("commands", pending.map { c in
             var w = ByteWriter()
             c.write(to: &w)
@@ -130,8 +148,9 @@ struct Loader {
     /// default for every row when the column is missing. Nil when the column is there but wrong.
     mutating func ints(_ tag: String, _ name: String, _ type: SaveType, rows: Int) -> [Int64]? {
         guard let col = tree.chunk(tag)?.column(name) else {
+            // a key is in every save; any other column takes its default
+            guard let entry = SaveDefaults.entry(tag, name), let d = entry else { return nil }
             report.defaulted.append("\(tag).\(name)")
-            guard let d = SaveDefaults.value(tag, name) else { return nil }
             return [Int64](repeating: d, count: rows)
         }
         guard col.count == rows else { return nil }
@@ -186,7 +205,8 @@ struct Loader {
               let ms = ints("WRLD", "monthStarts", .u32, rows: 1), let qs = ints("WRLD", "quarterStarts", .u32, rows: 1),
               let ys = ints("WRLD", "yearStarts", .u32, rows: 1), let lf = ints("WRLD", "ledgerFailures", .u32, rows: 1),
               let rc = ints("WRLD", "refusedCommands", .u32, rows: 1), let rp = ints("WRLD", "refusedPostings", .u32, rows: 1),
-              let rs = ints("WRLD", "refusedSubmits", .u32, rows: 1)
+              let rs = ints("WRLD", "refusedSubmits", .u32, rows: 1), let wa = ints("WRLD", "worldAccount", .i64, rows: 1),
+              let wo = ints("WRLD", "worldAccountOpening", .i64, rows: 1), let wp = ints("WRLD", "worldAccountPosted", .i64, rows: 1)
         else { return nil }
         let date = GameDate(days: Int32(w[0]))
         guard date.isSupported else { return nil }
@@ -220,10 +240,15 @@ struct Loader {
               let tb = ints("GOVT", "taxBase", .i64, rows: ng), let mr = ints("GOVT", "monthlyRuns", .u32, rows: ng),
               let yr = ints("GOVT", "yearlyRuns", .u32, rows: ng), let sr = ints("GOVT", "strategicRuns", .u32, rows: ng)
         else { return nil }
-        // every serial given by the counter and never twice (a reused row has a new one)
+        // every serial given by the counter and never twice (a reused row has a new one); no run ahead of the date
         var seen = gs
         seen.sort()
+        let civil = date.civil
+        let month = Int64(civil.year * 12 + civil.month - 1), year = Int64(civil.year)
+        let never = Int64(GovernmentTable.never)
         for i in 0..<ng {
+            guard lm[i] == never || (lm[i] >= 0 && lm[i] <= month), ly[i] == never || (ly[i] >= 0 && ly[i] <= year),
+                  ai[i] <= Int64(date.days) + Int64(Simulation.strategicPeriod) else { return nil }
             guard gc.hasGiven(Serial(raw: UInt32(gs[i]))), gp[i] < Int64(np), slot[i] >= 1, slot[i] <= Int64(GovernmentTable.slots),
                   tr[i] >= 0, tr[i] <= Int64(BP.one.raw), tb[i] >= 0, i == 0 || seen[i] > seen[i - 1],
                   GameDate(days: Int32(ai[i])).isSupported else { return nil }
@@ -250,7 +275,9 @@ struct Loader {
         guard nv <= ProvinceTable.capacity, let so = ints("PROV", "sovereign", .u16, rows: nv),
               let ad = ints("PROV", "administrator", .u16, rows: nv), let po = ints("PROV", "population", .i32, rows: nv) else { return nil }
         for i in 0..<nv {
-            guard so[i] < Int64(np), ad[i] < Int64(ng) || ad[i] == Int64(Idx<GovernmentKind>.absent.raw), po[i] >= 0 else { return nil }
+            // held by a live government, or by nobody: a dissolved government's provinces always pass on
+            guard so[i] < Int64(np), (ad[i] < Int64(ng) && ge[Int(ad[i])] == 1) || ad[i] == Int64(Idx<GovernmentKind>.absent.raw), po[i] >= 0
+            else { return nil }
         }
         var pt = ProvinceTable()
         pt.sovereign = so.map { Idx(raw: UInt16($0)) }
@@ -271,6 +298,7 @@ struct Loader {
         ct.rate = ra.map { LogQ(raw: $0) }
         ct.priceIndex = pi.map { LogQ(raw: $0) }
         ct.redenominations = re.map { UInt16($0) }
+        guard rd.allSatisfy({ $0 == 0 }) else { return nil }      // marks are cleared at every day's end, before a save
         ct.redenominationDue = rd.map { $0 == 1 }
         ct.moneyBase = mb.map { LCU(raw: $0) }
         ct.moneyBaseOpening = mo.map { LCU(raw: $0) }
@@ -281,12 +309,17 @@ struct Loader {
         // the ledger: one row per government row
         let nl = rows("LEDG", key: "currency")
         let a = LedgerTable.accountsPerRow
-        guard nl == ng, let cu = ints("LEDG", "currency", .u16, rows: nl),
-              let lo = ints("LEDG", "local", .i64, rows: a * nl), let lop = ints("LEDG", "localOpening", .i64, rows: a * nl),
-              let lps = ints("LEDG", "localPosted", .i64, rows: a * nl), let rs = ints("LEDG", "reserves", .i64, rows: nl),
-              let rso = ints("LEDG", "reservesOpening", .i64, rows: nl), let rsp = ints("LEDG", "reservesPosted", .i64, rows: nl),
-              let wa = ints("LEDG", "world", .i64, rows: 1), let wo = ints("LEDG", "worldOpening", .i64, rows: 1),
-              let wp = ints("LEDG", "worldPosted", .i64, rows: 1) else { return nil }
+        guard nl == ng, let cu = ints("LEDG", "currency", .u16, rows: nl), let rsv = ints("LEDG", "reserves", .i64, rows: nl),
+              let rso = ints("LEDG", "reservesOpening", .i64, rows: nl), let rsp = ints("LEDG", "reservesPosted", .i64, rows: nl) else { return nil }
+        var lo = [Int64](repeating: 0, count: a * nl), lop = lo, lps = lo
+        for account in LocalAccount.allCases {
+            let k = Int(account.rawValue)
+            guard let b = ints("LEDG", account.saveName, .i64, rows: nl), let o = ints("LEDG", account.saveName + "Opening", .i64, rows: nl),
+                  let p = ints("LEDG", account.saveName + "Posted", .i64, rows: nl) else { return nil }
+            for row in 0..<nl {
+                lo[row * a + k] = b[row]; lop[row * a + k] = o[row]; lps[row * a + k] = p[row]
+            }
+        }
         for i in 0..<nl {
             // a government's accounts are in its polity's currency
             guard cu[i] < Int64(nc), cu[i] == gp[i] else { return nil }
@@ -296,19 +329,26 @@ struct Loader {
         lt.local = lo.map { LCU(raw: $0) }
         lt.localOpening = lop.map { LCU(raw: $0) }
         lt.localPosted = lps.map { LCU(raw: $0) }
-        lt.reserves = rs.map { USDn(raw: $0) }
+        lt.reserves = rsv.map { USDn(raw: $0) }
         lt.reservesOpening = rso.map { USDn(raw: $0) }
         lt.reservesPosted = rsp.map { USDn(raw: $0) }
         lt.world = USDn(raw: wa[0]); lt.worldOpening = USDn(raw: wo[0]); lt.worldPosted = USDn(raw: wp[0])
         lt.keepRoom()
         s.ledger = lt
 
+        // the ledger's invariants hold, as at the end of every day the game runs
+        guard s.ledgerViolations().isEmpty else { return nil }
+
         // the waiting commands: each decodes whole, is dated today or later, and the queue is in order with no two
         // keys alike and each issuer within its room; a command of an unknown tag is skipped
         guard let items = commands() else { return nil }
         var rooms = (0, 0, 0)
+        // the player's and the AI's governments were made: the row exists, the serial was given, and not after the row's
+        // own (an event may name a government an earlier command will make, by the serial the counter will give)
+        func made(_ g: GovRef) -> Bool { g.row.int < ng && gc.hasGiven(g.serial) && Int64(g.serial.raw) <= gs[g.row.int] }
         for c in items {
-            guard c.day >= date, c.command.isWritable, c.issuer.government.map(Command.isWritable) ?? true else { return nil }
+            let named = c.issuer == .event || c.command.governments.allSatisfy(made)
+            guard c.day >= date, c.command.isWritable, c.issuer.government.map(made) ?? true, named else { return nil }
             if let last = s.pending.last, !IssuedCommand.precedes(last, c) { return nil }
             switch c.issuer {
             case .player: rooms.0 += 1
@@ -331,8 +371,8 @@ struct Loader {
         var out: [IssuedCommand] = []
         out.reserveCapacity(items.count)
         for bytes in items {
-            guard let tag = IssuedCommand.peekTag(bytes) else { return nil }
-            guard Command.knownTags.contains(tag) else { report.skippedCommands += 1; continue }
+            guard let peeked = IssuedCommand.peekTag(bytes) else { return nil }
+            guard let tag = peeked, Command.knownTags.contains(tag) else { report.skippedCommands += 1; continue }
             var r = ByteReader(bytes)
             guard let c = IssuedCommand.read(from: &r), r.remaining == 0 else { return nil }
             out.append(c)
@@ -342,21 +382,33 @@ struct Loader {
 }
 
 extension Command {
-    /// The tags this version can read.
+    /// The tags this version can read (a test checks every case's tag is here).
     static let knownTags: [UInt16] = [1, 100, 101, 102]
+
+    /// Every government the command names.
+    var governments: [GovRef] {
+        switch self {
+        case let .setTaxRate(g, _): return [g]
+        case .createGovernment: return []
+        case let .dissolveGovernment(g, to): return to.map { [g, $0] } ?? [g]
+        case let .succeedGovernment(g): return [g]
+        }
+    }
 }
 
 extension IssuedCommand {
     /// The command's tag, read past the day, the issuer and the sequence; nil when those are malformed.
-    static func peekTag(_ bytes: [UInt8]) -> UInt16? {
+    /// nil when malformed; `.some(nil)` for an issuer of a rank this version does not know (a later version's kind of
+    /// issuer: the command is skipped, like an unknown tag).
+    static func peekTag(_ bytes: [UInt8]) -> UInt16?? {
         var r = ByteReader(bytes)
         guard r.zigzag() != nil, let rank = r.u8() else { return nil }
         switch rank {
         case 0, 2: guard r.varint() != nil, r.varint() != nil else { return nil }
         case 1: break
-        default: return nil
+        default: return .some(nil)
         }
-        guard r.varint() != nil else { return nil }
-        return r.fixed(UInt16.self)
+        guard r.varint() != nil, let tag = r.fixed(UInt16.self) else { return nil }
+        return .some(tag)
     }
 }

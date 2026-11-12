@@ -1,0 +1,40 @@
+# Stable numbers stored in saves and replays (design_doc §7, F6). A line once written is never changed or removed, and
+# a number is never reused; a new case adds a line. Tests/SaneiEngineTests/SaveTests.swift checks the code against
+# this file, both ways.
+# group name number
+Command setTaxRate 1
+Command createGovernment 100
+Command dissolveGovernment 101
+Command succeedGovernment 102
+Issuer player 0
+Issuer event 1
+Issuer ai 2
+PostingCategory tax 1
+PostingCategory spending 2
+PostingCategory fx 3
+PostingCategory revaluation 4
+PostingCategory trade 5
+PostingCategory transport 6
+PostingCategory aid 7
+PostingCategory redenomination 8
+PostingCategory cheat 9
+PostingCategory interest 10
+LocalAccount treasury 0
+LocalAccount domesticDebt 1
+SaveType u8 1
+SaveType u16 2
+SaveType u32 3
+SaveType u64 4
+SaveType i8 5
+SaveType i16 6
+SaveType i32 7
+SaveType i64 8
+SaveType bool 9
+SaveType items 10
+ColumnEncoding raw 0
+ColumnEncoding varintDelta 1
+ColumnEncoding zigzag 2
+Compression none 0
+Compression rawDeflate 1
+Container version 1
+Format state 1

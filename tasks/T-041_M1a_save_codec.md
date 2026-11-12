@@ -18,34 +18,41 @@ pending-command queue is part of the state), the M1a checklist («Saves: contain
 a reader can skip an unknown field, and whether a held copy keeps the cap's room (answered in T-039's fix round).
 
 ## Scope
-- `Sources/SaneiEngine/Save/`:
+- `Sources/SaneiCore/Save/` (so App/Platform reads META with the same reader, and Linux tests it; §2.2 updated):
   - `SaveTree`: chunks, each a four-letter tag and its columns; a column is its name, its type tag, its encoding, its
-    count and its bytes (the column codec of T-037); written and read in one pass; an unknown chunk or column is kept
-    aside and skipped (and reported), a malformed one refuses the whole tree.
-  - `SaveDefaults`: the default of every column the engine writes; a missing column takes it.
-  - The state's chunks: `WRLD` (the world row), `SERL` (the serial counters), `POLI`, `GOVT`, `PROV`, `CURR`
-    (currencies and money bases), `LEDG` (the balances and the month's sums), `CMDQ` (the waiting commands, each in its
+    count and its bytes (the column codec of T-037), a range of the file's one buffer when read (nothing copied);
+    an unknown chunk or column is skipped (and reported), a malformed one refuses the whole tree.
+  - `SaveFile`: the container (header, META, payload, trailer) and `SaveMeta` in plain values, with a default for every
+    META column but the format; SHA-256 in stdlib Swift, checked against the published vectors.
+- `Sources/SaneiEngine/Save/`:
+  - `SaveDefaults`: the default of every column the engine writes (none for the keys every save has); a missing
+    column takes it; a test checks every stored property of the state is written.
+  - The state's chunks: `WRLD` (the world row and the world account), `SERL` (the serial counters), `POLI`, `GOVT`,
+    `PROV`, `CURR` (currencies and money bases), `LEDG` (per government row, a column per account by its stored name), `CMDQ` (the waiting commands, each in its
     tagged codec form with its length, so a reader can skip one it does not know); `WorldState` from a tree and back,
     with every value checked (rows within caps, serials given by their counters, references in range, the queue in
     order), so a bad file is refused, never trusted.
   - META: a self-describing table (format version, game version and build, scenario ID, map version, rules hash,
     scenario hash, game date, player government ID and display name, playtime, preset, difficulty, cheats used, seed),
     readable without the payload.
-  - The container frame: header, META, payload (raw and stored lengths, then the chunks), trailer SHA-256 over
-    everything before it. Compression is a byte (0 none, 1 raw DEFLATE); the engine writes 0, and a compressor is
-    handed in by the platform (App/Platform supplies raw DEFLATE, T-043). SHA-256 in stdlib Swift, checked against the
-    published test vectors.
+  - `SaveCodec`: the state in the container; the engine fills META's format, date and seed from the state, so a file
+    it writes always reads back; compression is a byte (0 none, 1 raw DEFLATE), handed in by the platform (T-043).
+  - `tags.lock` at the root: every stored number, checked by a test both ways.
   - Migrations: `SaveMigrations[n → n+1]` as column-level steps (add, rename, drop a column; add a chunk); format 1
     has none; a test runs a made-up format-0 tree through a step.
-- A golden save of format 1 in `Tests/SaneiEngineTests/Golden/`, written once; a test loads it and continues to a
-  stated hash, and fails if the format changes without a new golden save.
-- Out of scope, each with its place: raw DEFLATE (App/Platform with Apple's Compression, and the device fixture read
+- A golden save of format 1 in `Tests/SaneiEngineTests/Golden/`, written once and never rewritten; a test loads it
+  with nothing skipped or defaulted, checks values written in the test, and checks the current format writes it back
+  to its own bytes. The format policy (what bumps the format) is in §7 and in `SaveCodec.swift`.
+- Out of scope, each with its place (tasks/BACKLOG.md): raw DEFLATE (App/Platform with Apple's Compression, and the device fixture read
   on Linux: T-043); storage, atomic writes, autosave rotation, the mirror and export (App/Platform, T-043); the peak-load
   test on a 90-year save, the start, mid-war and 30-year golden saves (when the systems exist, M1a's thin systems and later; the
   first is the start save of T-042's scenario); `.saneibug` and `simcli replay` (T-044, with the host); content ID
   lists `IDxx` and `aliases.json` (T-042, with content IDs); `CMDJ`, the build-scoped command journal (T-044, with
   replays); moving `GameHost` onto this simulation, the host holding a day until the AI's results are in, the test that
-  every entry point binds a counter scope, and the Set/Dictionary lint (T-044).
+  every entry point binds a counter scope, the Set/Dictionary lint, the ledger's invariants after every day, the load
+  procedure, the host following the player onto a successor, and the append-only check of `tags.lock` (T-044); the
+  rules-hash message (T-043); the migration operations `convertUnits`, `splitProvince` and `splitChunk` (with the
+  first format that needs each) and `remapIDs` (T-042).
 
 ## Acceptance criteria
 1. `ci-linux` green, debug and optimised; the reference checks.
@@ -58,7 +65,9 @@ a reader can skip an unknown field, and whether a held copy keeps the cap's room
    serials past a counter, references out of range, a queue out of order, a wrong SHA-256) is refused, never trusted,
    and never crashes (a fuzz test).
 5. META is read without decoding the payload.
-6. SHA-256 matches the published vectors; the golden save loads and continues to its stated hash.
-7. Writing allocates its output once (sized first); reading allocates no more than the caps allow (measured).
+6. SHA-256 matches the published vectors; the golden save of format 1 loads, holds its written values and is the
+   current format's bytes; every stored number is in `tags.lock`.
+7. Writing sizes its output once; reading copies no payload; both bounded by the caps (measured at the caps:
+   docs/perf.md).
 8. Six independent read-only reviews; every confirmed finding fixed; verification reviews of the fixes; nothing pushed
    before the reviews are clean (`reviewBeforePush`).

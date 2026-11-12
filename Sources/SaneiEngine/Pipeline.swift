@@ -27,7 +27,7 @@ public enum SubmitResult: Sendable, Equatable {
     /// A command with the same (day, issuer, sequence) is already waiting: each issuer numbers its own commands.
     case duplicateKey
     /// The player's order cannot be carried out as things stand (a government that has ended, a rate past 100%): it
-    /// is refused now, with this reason, not dropped on its day.
+    /// is refused now, with this reason, not dropped on its day. Also any issuer naming a government never made.
     case invalid
     /// The command names what the codec cannot write and read back as it is (a serial of 0, a row of 65,535): from
     /// any issuer, so a save or a replay never holds a command it cannot read.
@@ -90,9 +90,11 @@ public struct Simulation: Sendable {
         if c.day < state.world.date { return .late }
         if let g = c.issuer.government, !Command.isWritable(g) { return .unwritable }
         if !c.command.isWritable { return .unwritable }
-        // a government's issuer must be live when its command arrives: a stale or made-up one cannot hold a key that
-        // the real government's command would then find taken
-        if let g = c.issuer.government, !state.governments.isLive(g) { return .invalid }
+        // an issuer must name a government that was ever made: a serial the counter has not given, or a row past the
+        // table, is refused now (no arrival time changes that). Whether the government still lives is checked on the
+        // command's day, so an AI result refused because its government ended meanwhile is refused the same way
+        // however early or late it arrived (§2.4: the result never depends on how fast the AI ran).
+        if let g = c.issuer.government, !state.governments.counter.hasGiven(g.serial) || g.row.int >= state.governments.rows { return .invalid }
         // the place in order, by halving (the queue is always in order); a command with the same key would sit there
         var lo = 0, hi = state.pending.count
         while lo < hi {

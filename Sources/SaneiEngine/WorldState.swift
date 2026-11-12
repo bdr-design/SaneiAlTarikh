@@ -26,8 +26,10 @@ public struct WorldRow: Sendable, Equatable {
     /// Commands refused when their day came (their government ended meanwhile, say). Only the count is kept here; the
     /// record of which order was refused and why comes with the notification ring (M1c), which screen 26 reads.
     public internal(set) var refusedCommands: UInt32
-    /// Postings refused: a flow from or to a government that has ended, a local transfer across two currencies, an
-    /// exchange whose dollar leg rounds to 0. Money never vanishes silently: each refusal is counted here.
+    /// Postings refused: a flow from or to a government that has ended, a local transfer across two currencies, a
+    /// posting that would take a balance or a month's sum past the range, an exchange of 0 or of Int64.min, or one whose
+    /// dollar leg comes to 0 or would pass the range. Money never vanishes silently and never clamps: each refusal is
+    /// counted here.
     public internal(set) var refusedPostings: UInt32
     /// Commands of the AI and events refused when submitted (late, full, a key taken, unwritable, an issuer that has
     /// ended): kept in the state so no effect is dropped without a trace. The player's refusals are shown to the player.
@@ -318,7 +320,10 @@ public struct WorldState: Sendable, Equatable {
     public func currency(of p: Idx<PolityKind>) -> Idx<CurrencyKind> { Idx(raw: p.raw) }
 
     /// Makes a government for a polity, with its accounts open: the treasury starts at `treasury`, the rest at 0.
+    /// Nil past 2^60 for the treasury or the tax base (the command's rule, here too for the scenario's set-up), or a
+    /// rate outside 0 to 100%.
     mutating func createGovernment(polity p: Idx<PolityKind>, treasury: LCU, taxBase: LCU, taxRate: BP, strategicPeriod: Int) -> GovRef? {
+        guard !treasury.needsRedenomination, !taxBase.needsRedenomination, taxRate >= .zero, taxRate <= .one else { return nil }
         guard let g = governments.create(polity: p, on: world.date, taxBase: taxBase, taxRate: taxRate, strategicPeriod: strategicPeriod) else {
             return nil
         }
@@ -327,7 +332,8 @@ public struct WorldState: Sendable, Equatable {
     }
 
     /// The player's waiting orders given for `old` become `new`'s: the issuer and, for an order about `old` itself, its
-    /// target. Their place in the queue moves with the issuer's new serial (an insertion pass, in place: no allocation).
+    /// target. Their place in the queue moves with the issuer's new serial (an insertion pass, in place: no allocation,
+    /// unless a copy of the state is held, when the queue is copied once).
     mutating func handOverPlayerOrders(from old: GovRef, to new: GovRef) {
         var changed = false
         for i in 0..<pending.count where pending[i].issuer == .player(old) {

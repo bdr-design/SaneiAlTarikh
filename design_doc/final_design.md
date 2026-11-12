@@ -329,7 +329,7 @@ tools/{datapipeline/,imagery/,checks/}  CLAUDE.md
 
 | Module | May import | Contains | Must never |
 |---|---|---|---|
-| `SaneiCore` | stdlib only | `Idx<T>`, `Handle<T>`, `Serial`, `Interner`, `BP`, `Q32`, `LogQ`, `LCU`, `USDn`, `Money`, `Pop`, `GameDate`, `DetRNG`, `DMath`, `StateHasher`, `RingBuffer`, `HandleTable` (serial-ordered), `DenseMatrix`, `BitSet`, `TermSink` with `SumSink` and `TermBuffer12`, the column codec (varint, zigzag, raw). Hot types are `@frozen` and `@inlinable`. | Foundation |
+| `SaneiCore` | stdlib only | `Idx<T>`, `Handle<T>`, `Serial`, `Interner`, `BP`, `Q32`, `LogQ`, `LCU`, `USDn`, `Money`, `Pop`, `GameDate`, `DetRNG`, `DMath`, `StateHasher`, `RingBuffer`, `HandleTable` (serial-ordered), `DenseMatrix`, `BitSet`, `TermSink` with `SumSink` and `TermBuffer12`, the column codec (varint, zigzag, raw); the save's container and tree (`SaveFile`, `SaveTree`, `SaveMeta`, SHA-256), so App/Platform reads a save's META with the engine's own reader (T-041). Hot types are `@frozen` and `@inlinable`. | Foundation |
 | `SaneiRuntime` | Foundation (no Core, no Engine) | The engines' threads (ADR 0001): `DedicatedThreadExecutor` (a `SerialExecutor` with a thread of its own, for `GameHost` and the I/O actor), `EngineMeter` (per-engine busy time, the threads each ran on) | Know the engine, content or UI; run work on the main thread |
 | `SaneiContent` | Core | <ul><li>Readers for `content.bin` and `scenario-*.bin`.</li><li>`ContentDB`, holding the static rules: goods, industries, input-output templates, adjacency, route clusters, regions, sea zones, chokepoints, terrain, units, techs, parameter sets, effect vocabulary, defines, modifiers, Arabic strings with morphology fields.</li><li>`ScenarioStart`, mapped only while a new game is being built.</li><li>The validator.</li></ul> | Parse JSON; know about `WorldState` |
 | `SaneiBake` | Core, Content, Foundation | JSON and CSV loaders with strict decoding; the baker; the evidence and stub-pack checks | Be linked into the app |
@@ -394,13 +394,13 @@ Dependencies run one way: Core ← Content ← Engine ← AI; Core ← Map; Pres
 | Government pairs, dense | 384² × 8 B | Opinion, treaty bits, **recognises-state** bit, **recognises-government** bit, sanction bits, escalation rung, claim bit | 1.18 MB |
 | Pair extension (sparse) | ~6,000 | Spy network, intelligence level, exposure heat, **intel epoch**, partner share | 0.10 MB |
 | Handle tables | Capped (L3) | Formations (with equipment allocations), armies, fronts and sectors, wars, fleets, air groups, operations, projects, treaties. Each row carries its `Serial`. | ≤0.9 MB |
-| Queues and history | — | Event queue, decisions, **the pending-command queue (≤64 entries while paused, each ≤600 B with what was worked out when given: the route and ETA, the previewed values; ≤40 KB; §3.9), and in the same queue, in the order they apply, the AI's (≤448) and the events' (≤64) commands waiting for their landing day. A queue entry stays a fixed few dozen bytes (56 B today; ≤40 KB for all 576); the player's worked-out data sits beside it in a side table of 64 slots keyed by the command's key, so only the player's orders pay for it**, a 512-entry notification ring, a 512-entry campaign log ring (each entry its title, date and stored `TermBuffer12`, about 160 B, 82 KB in all; §3.9). History: 12 series × existing governments × (60 monthly + 125 yearly) plus a campaign-start baseline row. | ≤2.6 MB |
+| Queues and history | — | Event queue, decisions, **the pending-command queue (≤64 of the player's orders while paused, each with ≤600 B of what was worked out when given: the route and ETA, the previewed values, ≤40 KB, kept in the side table below; §3.9), and in the same queue, in the order they apply, the AI's (≤448) and the events' (≤64) commands waiting for their landing day. A queue entry stays a fixed few dozen bytes (56 B today; ≤40 KB for all 576); the player's worked-out data sits beside it in a side table of 64 slots keyed by the command's key, so only the player's orders pay for it**, a 512-entry notification ring, a 512-entry campaign log ring (each entry its title, date and stored `TermBuffer12`, about 160 B, 82 KB in all; §3.9). History: 12 series × existing governments × (60 monthly + 125 yearly) plus a campaign-start baseline row. | ≤2.6 MB |
 | World | 1 | 22 world prices and stocks, world interest rate, **USD deflator**, chokepoint disruption (~10), CO₂, temperature, sea level, entity counters | <2 KB |
 | **Total** | | | **≈7.3 MB** (≤8 MB) |
 
 **Daily pipeline** (`Pipeline.swift`, in this order):
 
-1. `ApplyCommands`, sorted by (day, issuerRank, sequence).
+1. `ApplyCommands`, sorted by (day, issuerRank, the issuer's serial and row, sequence) (T-039).
 2. **Global calendar jobs:**
    - Day 1 of each month: the world-market step, then the transport payout.
    - Day 1 of each quarter: world interest rate and ratings.
@@ -459,7 +459,7 @@ Dependencies run one way: Core ← Content ← Engine ← AI; Core ← Map; Pres
 
 **Spreading the work across cores (L14).** Determinism stays exact, because each parallel job writes only its own rows and the results are merged in serial order:
 - **Monthly slot in parallel.** The governments due today run `Economy`, `Population`, `Internal`, `Politics`, `Intelligence`, `Research` and `DiplomacyDrift` in a `TaskGroup`, one task per government. Each reads yesterday's shared state and writes only that government's rows. Anything that crosses to another government (trade, aid, migration, ledger postings) goes into the task's own outbox. After the group, the outboxes are applied in (government serial, sequence) order. `ConditionalEvents` then run serially.
-- **AI on its own task.** Strategic and diplomatic AI read an immutable snapshot on a separate task and return Commands. The host applies them at a fixed latency (the next day boundary after the snapshot's day plus 1), in (day, issuerRank, sequence) order, so the result does not depend on how fast the AI task ran. Operational AI stays inside the day, within its 0.25 ms line.
+- **AI on its own task.** Strategic and diplomatic AI read an immutable snapshot on a separate task and return Commands. The host applies them at a fixed latency (the next day boundary after the snapshot's day plus 1), in (day, issuerRank, the issuer's serial and row, sequence) order, so the result does not depend on how fast the AI task ran. Operational AI stays inside the day, within its 0.25 ms line.
 - **Bounded per day.** The owner set **225 playable governments at the start** («خلها 225», 2026-11-07); every government keeps its monthly slot. The monthly slots spread about 7–8 governments over each day; strategic AI runs at most 15 a day; route searches at most 12 a day; front execution every 3 days, staggered.
 - **One core is enough.** On a phone under thermal pressure the governor can run the group serially; the state hash is the same either way (tested on Linux in CI).
 
@@ -863,7 +863,7 @@ bound here; each item is a line in `docs/perf.md` (L12) and a test where one is 
 - **The pending orders (screen 26).** Orders given while paused go to the pending-command queue (§2.4, ≤64, L3); each
   carries what was worked out when it was given (an army's route on the cluster graph and its ETA, the previewed values),
   so applying it on resume costs O(1) with no new route search. Resuming applies the queue in one `ApplyCommands` in
-  (day, issuerRank, sequence) order, inside the commands line; the units ordered go under D-15's glide cap of 8. The
+  (day, issuerRank, the issuer's serial and row, sequence) order, inside the commands line; the units ordered go under D-15's glide cap of 8. The
   sheet's rows are static from the queue; the HUD's badge and toast change only on pause, resume and a new or cancelled
   order (no timer while paused, L1); a cancel removes one entry and rebuilds the sheet's model, and the map's route layer,
   once in the background.
@@ -1844,7 +1844,12 @@ As before:
 | Payload | Compressed and raw lengths, then compressed chunks |
 | Trailer | SHA-256 |
 
+**The bytes** (T-041; the code's comments are the same): the header is the magic (8 bytes), `containerVersion` u16 little-endian, compression u8, flags u8 (0; a file with an unknown flag is refused) and `metaLength` u32 (at most 65,536). META is a tree of one chunk `META`. The payload is its raw length u64 and its stored length u64, then the stored bytes. The trailer is the SHA-256 of everything before it, checked before any other byte is believed. A tree is its format u16, the number of chunks (varint), and each chunk: its four-letter tag, the length of its body (varint), the number of columns (varint) and each column: name length and name (ASCII, 1 to 64 bytes), type u8 (`SaveType`), encoding u8, count (varint), data length (varint) and data; a raw value takes its type's width.
+
+**Format versions.** The format rises when a change needs a migration step: a column renamed, dropped, re-typed or re-encoded, units or IDs remapped, a chunk split. A column or chunk only added keeps the format: an older save lacks it and takes its default; an older version skips it, reported. A format past the reader's is refused. Each format has a golden save, written once and never rewritten: the test loads it through the migrations and checks literal values; the current format's golden save also writes back to its own bytes. Replaying to a hash is a separate, build-scoped check.
+
 **Chunks:**
+- `WRLD` (the world row and the world account), `SERL`, `POLI`, `GOVT`, `PROV`, `CURR` (currencies: scale, rate, price index, money base and its month), `LEDG` (per government row: its currency, a column per local account by its stored name with the month's opening and postings, and the reserves), `CMDQ` (the waiting commands, each in the command codec's tagged form with its length, so a command of an unknown tag or issuer kind is skipped) (T-041)
 - `IDxx`: ID lists per kind, including the **runtime `dyn:` IDs**
 - `SERL`: serial counters per kind
 - `PROV`, `GRPR` (group rows), `INDU`, `POLI` (polities), `GOVT`, `ACTR`, `PSUP` (party support), `PAIR`, `PEXT` (pair extension)
@@ -1857,7 +1862,7 @@ As before:
   - An unknown chunk or column is skipped and logged.
   - A missing column takes its value from `SaveDefaults`. A test fails if any engine column has no default.
 - **Persisted enums and commands** use **stable numeric tags** registered in `tags.lock`. Renaming a Swift case or field never changes the bytes. A tag is never reused.
-- **`SaveTree` = typed column buffers.** Each is raw bytes plus a type tag and encoding, decoded per chunk in streaming fashion. Migration steps `SaveMigrations[n → n+1]` are **column-level operations**: `addColumn`, `renameColumn`, `dropColumn`, `convertUnits` (for example constant-USD columns → LCU with the stored deflator), `remapIDs(aliases)`, `splitProvince(pop weights)`, `addChunk`, `splitChunk`. Old Swift types are never kept.
+- **`SaveTree` = typed column buffers.** Each is raw bytes plus a type tag and encoding, decoded per chunk in streaming fashion. Migration steps `SaveMigrations[n → n+1]` are **column-level operations**: `addColumn`, `renameColumn`, `dropColumn`, `convertUnits` (for example constant-USD columns → LCU with the stored deflator), `remapIDs(aliases)`, `splitProvince(pop weights)`, `addChunk`, `splitChunk`. Old Swift types are never kept. (T-041 has `addColumn`, `renameColumn`, `dropColumn` and `addChunk`; `remapIDs` comes with content IDs, T-042; the others with the first format that needs each.) A changed command's fields are a new format, with a step that rewrites the `CMDQ` items.
 - **Load procedure:** pause; release the old `WorldState` and its snapshot; decode; migrate; build the state.
   - Peak ≤ in-game footprint + 16 MB.
   - `simcli peak-load` runs on a 90-year save in CI, and the device recorder logs the peak.

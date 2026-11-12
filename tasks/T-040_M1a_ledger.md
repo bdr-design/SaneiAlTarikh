@@ -33,7 +33,7 @@ postings, the redenomination trigger on aggregates, `USDn` never redenominating.
   with the budget and the history); a redenomination's notification (the notification ring, M1c); inflation, pass-
   through and money-base growth taking a redenomination step out (M2); the trigger on aggregates (a budget's lines,
   nominal output, a union's money base: M2, with them); the day-1 closure checked in LCU and in USD and §8's `--t0`
-  closure (T-042, with the baked start); the ledger's invariants after every day in debug and test builds (T-041, with
+  closure (T-042, with the baked start); the ledger's invariants after every day in debug and test builds (T-044, with
   the invariant checker the host runs); the daily ledger step, step 9 (M2); a typed LCU ↔ USDn conversion that does not
   post (trade prices and the display of D-6: M2, with the world market); an exchange set by its dollar side (M2, with
   trade settlement); the posting outboxes of the parallel monthly slots (M2, with the burst helper); how a dissolved
