@@ -61,7 +61,7 @@ final class LedgerTests: XCTestCase {
         XCTAssertTrue(w.ledgerViolations().isEmpty)
         // a government that no longer exists: nothing moves
         var gone = w
-        XCTAssertTrue(Command.dissolveGovernment(government: g[2]).apply(to: &gone, strategicPeriod: 30))
+        XCTAssertTrue(Command.dissolveGovernment(government: g[2]).apply(to: &gone, by: .event, strategicPeriod: 30))
         let before = gone.hash
         XCTAssertEqual(gone.exchange(g[2], local: LCU(raw: 100)), .zero)
         gone.transfer(USDn(raw: 7), from: .world, to: .reserves(g[2]), .trade)
@@ -97,9 +97,9 @@ final class LedgerTests: XCTestCase {
         for _ in 0..<50 { _ = w.addPolity() }
         var sim = Simulation(state: w)
         for p in 0..<50 {
-            sim.submit(IssuedCommand(day: start, issuerRank: 100, sequence: UInt64(p),
+            sim.submit(IssuedCommand(day: start, issuer: .event, sequence: UInt64(p),
                                      command: .createGovernment(polity: Idx(raw: UInt16(p)), treasury: LCU(raw: 10), taxBase: LCU(raw: 7_777), taxRate: BP(raw: 1_234))))
-            if sim.pending.count == Simulation.pendingCapacity { sim.step() }
+            if sim.pending.count == Simulation.othersCapacity { sim.step() }
         }
         sim.advance(days: 800)
         XCTAssertEqual(sim.state.world.ledgerFailures, 0)

@@ -23,6 +23,9 @@ public struct WorldRow: Sendable, Equatable {
     public var yearStarts: UInt32
     /// Monthly closes at which the ledger's invariants did not hold (0 in every game; §8 checks it).
     public var ledgerFailures: UInt32
+    /// Commands refused when their day came (their government ended meanwhile, say): screen 26 and the notifications
+    /// will show them.
+    public var refusedCommands: UInt32
 
     public init(date: GameDate, seed: UInt64) {
         self.date = date
@@ -31,10 +34,12 @@ public struct WorldRow: Sendable, Equatable {
         quarterStarts = 0
         yearStarts = 0
         ledgerFailures = 0
+        refusedCommands = 0
     }
 }
 
-/// A state, as an index and the serial of the polity (state) in it. A polity's row is never reused.
+/// The polities (states): dense rows up to the cap, each with its serial. A polity's row is never reused, so a bare
+/// index to one stays good; the cap is therefore for the whole game, not at one time.
 @frozen
 public struct PolityTable: Sendable, Equatable {
     /// L3's cap.
@@ -145,32 +150,26 @@ public struct GovernmentTable: Sendable, Equatable {
 
     public func ref(_ row: Int) -> GovRef { GovRef(row: Idx(raw: UInt16(row)), serial: serial[row]) }
 
-    /// Live governments by slot day (index 0 unused).
-    func load(ofSlot day: UInt8) -> Int {
-        var n = 0
-        for i in 0..<exists.count where exists[i] && monthlySlot[i] == day { n += 1 }
-        return n
-    }
 
     /// The slot rule for a new government (§2.4): the least-loaded slot whose day has not passed this month (today's
     /// counts: the monthly step comes after the commands); of two equally loaded, the earlier day. When none is left
     /// (the 29th to the 31st), the least-loaded slot overall, and the first run is next month.
     func slot(forNewOn date: GameDate) -> (slot: UInt8, firstRunNextMonth: Bool) {
+        // the load of every slot in one pass over the rows, counted on the stack
+        var load = (0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+        withUnsafeMutableBytes(of: &load) { b in
+            let counts = b.bindMemory(to: Int.self)
+            for i in 0..<exists.count where exists[i] { counts[Int(monthlySlot[i]) - 1] += 1 }
+        }
         let today = date.day
-        var best: UInt8 = 0
-        var bestLoad = Int.max
-        if today <= Int(Self.slots) {
-            for d in UInt8(today)...Self.slots {
-                let l = load(ofSlot: d)
-                if l < bestLoad { best = d; bestLoad = l }
-            }
-            return (best, false)
+        let nextMonth = today > Int(Self.slots)
+        let first = nextMonth ? 1 : today
+        return withUnsafeBytes(of: &load) { b in
+            let counts = b.bindMemory(to: Int.self)
+            var best = first
+            for d in first...Int(Self.slots) where counts[d - 1] < counts[best - 1] { best = d }
+            return (UInt8(best), nextMonth)
         }
-        for d in 1...Self.slots {
-            let l = load(ofSlot: d)
-            if l < bestLoad { best = d; bestLoad = l }
-        }
-        return (best, true)
     }
 
     /// Makes a government in the first free row; nil at the cap (every row live) or when the serials have run out.
@@ -245,7 +244,9 @@ public struct WorldState: Sendable, Equatable {
     public internal(set) var provinces: ProvinceTable
     public internal(set) var currencies: CurrencyTable
     public internal(set) var ledger: LedgerTable
-    /// The game's count of clamped results lives with the host, not here: it is not state that a save restores.
+    /// The commands waiting for their day (§2.4 lists the queue with the state: a save keeps it).
+    public internal(set) var pending: [IssuedCommand]
+    // The game's count of clamped results lives with the host, not here: it is not state that a save restores.
 
     public init(start: GameDate, seed: UInt64) {
         world = WorldRow(date: start, seed: seed)
@@ -254,9 +255,12 @@ public struct WorldState: Sendable, Equatable {
         provinces = ProvinceTable()
         currencies = CurrencyTable()
         ledger = LedgerTable()
+        pending = []
+        pending.reserveCapacity(Simulation.playerCapacity + Simulation.othersCapacity)
     }
 
-    /// Adds a polity, with its currency (a scenario's set-up; at runtime, a lifecycle command). A polity's row is
+    /// Adds a polity, with its currency (a scenario's set-up; the lifecycle commands that make polities come with
+    /// succession and unification). A polity's row is
     /// never reused, so its currency's row is its own: both tables have the same cap.
     public mutating func addPolity() -> Idx<PolityKind>? {
         guard polities.count < PolityTable.capacity, currencies.count < CurrencyTable.capacity, let p = polities.add() else { return nil }
@@ -277,8 +281,10 @@ public struct WorldState: Sendable, Equatable {
     }
 
     /// Adds a province (a scenario's set-up).
+    /// Adds a province (a scenario's set-up); nil when the polity or the government does not exist, or at the cap.
     public mutating func addProvince(sovereign s: Idx<PolityKind>, administrator a: GovRef, population p: Pop32) -> Idx<ProvinceKind>? {
-        provinces.add(sovereign: s, administrator: a.row, population: p)
+        guard polities.isLive(s), governments.isLive(a) else { return nil }
+        return provinces.add(sovereign: s, administrator: a.row, population: p)
     }
 
     /// The hash of every column (§8): equal states give equal hashes on every platform. Only for tests, debug builds
@@ -291,6 +297,7 @@ public struct WorldState: Sendable, Equatable {
         h.combine(world.quarterStarts)
         h.combine(world.yearStarts)
         h.combine(world.ledgerFailures)
+        h.combine(world.refusedCommands)
         let p = polities
         h.combine(UInt64(p.count))
         for i in 0..<p.count {
@@ -346,6 +353,13 @@ public struct WorldState: Sendable, Equatable {
         h.combine(l.world.raw)
         h.combine(l.worldOpening.raw)
         h.combine(l.worldPosted.raw)
+        // the waiting commands, as their stored bytes
+        h.combine(UInt64(pending.count))
+        for c in pending {
+            var w = ByteWriter()
+            c.write(to: &w)
+            h.combine(w.bytes)
+        }
         return h.value
     }
 }

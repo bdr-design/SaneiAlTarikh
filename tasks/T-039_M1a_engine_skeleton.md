@@ -27,7 +27,12 @@ the hash unchanged), L3 (caps: 384 governments and polities), ADR 0001 (the host
 - Out of scope, each with its place: every other column group (they arrive with their systems in the next M1a
   slices, declared with defaults before M1a ends); the ledger (T-040); the save container, META, migrations and
   golden saves (T-041); content loading (T-042); moving `GameHost` from its M0 stand-in onto this world (with the
-  save container, T-041); parallel monthly slots (with the burst helper).
+  save container, T-041); parallel monthly slots (with the burst helper). Named by the reviews and placed: content
+  IDs, dormant polities and ending a polity, and starting slots spread evenly across the 28 (T-042); tagged codec
+  fields with lengths so that a reader can skip an unknown field, and whether a held copy keeps the cap's room (T-041);
+  the strategic period set by difficulty and its feasibility for the expert level (§5.10's card); this month's flows
+  initialised pro rata for a government made mid-month (M2, with the daily ledger); a date on the observer's steps
+  (with the history step, M1b).
 
 ## Acceptance criteria
 1. `ci-linux` green, debug and optimised; the reference checks.
