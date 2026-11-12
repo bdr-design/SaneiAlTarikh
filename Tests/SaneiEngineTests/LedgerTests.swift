@@ -27,15 +27,17 @@ final class LedgerTests: XCTestCase {
         for month in 0..<24 {
             for _ in 0..<200 {
                 let who = g[Int(r.below(3))]
-                switch r.below(4) {
+                switch r.below(6) {
                 case 0: w.post(who, .treasury, .tax, LCU(raw: Int64(r.below(50_000))))
                 case 1: w.post(who, .domesticDebt, .interest, LCU(raw: -Int64(r.below(9_000))))
                 case 2: w.exchange(who, local: LCU(raw: Int64(r.below(100_000)) - 50_000))
+                case 3: w.post(moneyBase: Idx(raw: UInt16(r.below(3))), .spending, LCU(raw: Int64(r.below(70_000))))
+                case 4: w.transfer(from: (who, .treasury), to: (who, .domesticDebt), .spending, LCU(raw: Int64(r.below(5_000))))
                 default:
                     // a sale on the world market: the world account pays, then is paid by the buyer
                     let amount = USDn(raw: Int64(r.below(400)))
-                    w.transfer(amount, from: .world, to: .reserves(who), .trade)
-                    w.transfer(amount, from: .reserves(g[Int(r.below(3))]), to: .world, .trade)
+                    w.transfer(from: .world, to: .reserves(who), .trade, amount)
+                    w.transfer(from: .reserves(g[Int(r.below(3))]), to: .world, .trade, amount)
                 }
                 XCTAssertTrue(w.ledgerViolations().isEmpty, "month \(month)")
             }
@@ -53,53 +55,79 @@ final class LedgerTests: XCTestCase {
         let dollars = w.exchange(g[1], local: LCU(raw: 5_950_000))
         XCTAssertEqual(dollars, USDn(raw: 1_000), "5,950,000 pounds is about $1,000,000: 1,000 units of $1,000")
         XCTAssertEqual(w.ledger.balance(1, .treasury), pounds - LCU(raw: 5_950_000))
-        XCTAssertEqual(w.ledger.reserves[1], dollars)
+        XCTAssertEqual(w.ledger.reserves[1], USDn(raw: 1_000))
         // back the other way, at the same rate
-        let back = w.exchange(g[1], local: LCU(raw: -5_950_000))
-        XCTAssertEqual(back, USDn(raw: -1_000))
+        XCTAssertEqual(w.exchange(g[1], local: LCU(raw: -5_950_000)), USDn(raw: -1_000))
         XCTAssertEqual(w.ledger.balance(1, .treasury), pounds)
         XCTAssertTrue(w.ledgerViolations().isEmpty)
-        // a government that no longer exists: nothing moves
+        // a dollar leg that would round to 0 gives nothing for something: refused, counted
+        let before = w.hash
+        XCTAssertNil(w.exchange(g[1], local: LCU(raw: 2_974)))
+        XCTAssertEqual(w.world.refusedPostings, 1)
+        XCTAssertEqual(w.ledger.balance(1, .treasury), pounds)
+        XCTAssertNotEqual(w.hash, before, "only the count moved")
+        // a government that no longer exists: nothing moves, and each refusal is counted
         var gone = w
-        XCTAssertTrue(Command.dissolveGovernment(government: g[2]).apply(to: &gone, by: .event, strategicPeriod: 30))
-        let before = gone.hash
-        XCTAssertEqual(gone.exchange(g[2], local: LCU(raw: 100)), .zero)
-        gone.transfer(USDn(raw: 7), from: .world, to: .reserves(g[2]), .trade)
-        gone.post(g[2], .treasury, .tax, LCU(raw: 9))
-        XCTAssertEqual(gone.hash, before)
+        XCTAssertTrue(Command.dissolveGovernment(government: g[2]).apply(to: &gone, by: .event))
+        let balances = gone.ledger
+        XCTAssertNil(gone.exchange(g[2], local: LCU(raw: 100)))
+        XCTAssertFalse(gone.transfer(from: .world, to: .reserves(g[2]), .trade, USDn(raw: 7)))
+        XCTAssertFalse(gone.post(g[2], .treasury, .tax, LCU(raw: 9)))
+        XCTAssertFalse(gone.transfer(from: (g[0], .treasury), to: (g[2], .treasury), .aid, LCU(raw: 400)))
+        XCTAssertEqual(gone.ledger, balances)
+        XCTAssertEqual(gone.world.refusedPostings, 5)
+        // and two currencies are never mixed in one local transfer
+        XCTAssertFalse(w.transfer(from: (g[0], .treasury), to: (g[1], .treasury), .aid, LCU(raw: 400)))
     }
 
-    /// A balance past 2^60 makes its currency redenominate at once: only that currency moves, by 10^3, the rounding is
-    /// posted, and every invariant still holds.
-    func testARedenominationKeepsEveryInvariant() {
+    /// A balance past 2^60 marks its currency; at the day's end every LCU amount in that currency is divided by 1,000:
+    /// the balances, the money base, the tax bases and the commands waiting to make a government in it. Only that
+    /// currency moves, the change is posted, and every invariant still holds.
+    func testARedenominationRescalesEveryAmountInItsCurrency() {
         var (w, g) = world()
-        w.post(g[1], .moneyBase, .spending, LCU(raw: 123_456_789))
+        w.governments.taxBase[1] = LCU(raw: 1_000_000_000)
+        w.post(moneyBase: Idx(raw: 1), .spending, LCU(raw: 123_456_789))
+        w.post(g[1], .domesticDebt, .spending, LCU(raw: -5_000_000))
+        w.pending.append(IssuedCommand(day: start.adding(days: 3), issuer: .event, sequence: 1,
+                                       command: .createGovernment(polity: Idx(raw: 1), treasury: LCU(raw: 7_000_000), taxBase: LCU(raw: 9_499), taxRate: .zero)))
         let otherBefore = w.ledger.balance(0, .treasury)
         let rateBefore = w.currencies.rate[1]
-        w.post(g[1], .treasury, .spending, LCU(raw: (1 << 60) + 1))
+        // a flow of two legs: the first passes 2^60, the second is still in the same scale
+        let x = LCU(raw: (1 << 60) + 5)
+        w.post(g[1], .treasury, .spending, x)
+        XCTAssertTrue(w.currencies.redenominationDue[1])
+        XCTAssertEqual(w.currencies.redenominations[1], 0, "not in the middle of a flow")
+        w.post(g[1], .domesticDebt, .spending, -x)
+        w.redenominateDue()
         XCTAssertEqual(w.currencies.redenominations[1], 1)
+        XCTAssertFalse(w.currencies.redenominationDue[1])
         XCTAssertEqual(w.currencies.scaleExponent[1], 3)
         XCTAssertEqual(w.currencies.redenominations[0], 0, "only the passing currency moves")
         XCTAssertEqual(w.ledger.balance(0, .treasury), otherBefore)
-        XCTAssertEqual(w.ledger.balance(1, .moneyBase), LCU(raw: 123_457), "123,456,789 / 1,000 to the nearest")
-        XCTAssertLessThanOrEqual(w.ledger.balance(1, .treasury).raw.magnitude, LedgerTable.redenominationLimit)
+        XCTAssertEqual(w.currencies.moneyBase[1], LCU(raw: 123_457), "123,456,789 / 1,000 to the nearest")
+        XCTAssertEqual(w.governments.taxBase[1], LCU(raw: 1_000_000))
+        XCTAssertEqual(w.ledger.balance(1, .treasury), LCU(raw: 2_000 + (x.raw + 500) / 1_000), "(2,000,000 + x) / 1,000 to the nearest")
+        guard case let .createGovernment(_, treasury, taxBase, _) = w.pending[0].command else { return XCTFail() }
+        XCTAssertEqual(treasury, LCU(raw: 7_000))
+        XCTAssertEqual(taxBase, LCU(raw: 9))
         XCTAssertEqual(w.currencies.rate[1], rateBefore + LogQ(ratio: 1, 1_000))
         XCTAssertTrue(w.ledgerViolations().isEmpty)
         XCTAssertEqual(w.closeMonth(), [])
         // dollars never redenominate
         w.post(.reserves(g[0]), .trade, USDn(raw: .max / 2))
+        w.redenominateDue()
         XCTAssertEqual(w.currencies.redenominations[0], 0)
     }
 
-    /// The pipeline closes the month on day 1, after the calendar jobs, and taxes are posted, not written.
-    func testThePipelineClosesEveryMonth() {
+    /// The pipeline closes the month on day 1, after the calendar jobs; taxes are posted, not written; a currency that
+    /// passes 2^60 redenominates at the day's end and the next taxes come in the new scale.
+    func testThePipelineClosesEveryMonthAndRedenominatesAtTheDaysEnd() {
         var w = WorldState(start: start, seed: 1)
         for _ in 0..<50 { _ = w.addPolity() }
         var sim = Simulation(state: w)
         for p in 0..<50 {
             sim.submit(IssuedCommand(day: start, issuer: .event, sequence: UInt64(p),
                                      command: .createGovernment(polity: Idx(raw: UInt16(p)), treasury: LCU(raw: 10), taxBase: LCU(raw: 7_777), taxRate: BP(raw: 1_234))))
-            if sim.pending.count == Simulation.othersCapacity { sim.step() }
         }
         sim.advance(days: 800)
         XCTAssertEqual(sim.state.world.ledgerFailures, 0)
@@ -109,16 +137,33 @@ final class LedgerTests: XCTestCase {
         let revenue = LCU(raw: 7_777).times(BP(raw: 1_234))
         for row in 0..<50 {
             let slot = Int(sim.state.governments.monthlySlot[row])
-            XCTAssertEqual(sim.state.ledger.localPosted[row * 3], slot <= ran ? revenue : .zero, "government \(row), slot \(slot)")
+            XCTAssertEqual(sim.state.ledger.localPosted[LedgerTable.index(row, .treasury)], slot <= ran ? revenue : .zero,
+                           "government \(row), slot \(slot)")
         }
+        // a hyperinflation: government 0's tax base is huge, its treasury passes 2^60 on its slot day
+        let g = sim.state.governments.ref(0)
+        sim.state.governments.taxBase[0] = LCU(raw: Int64(1) << 61)
+        sim.state.governments.taxRate[0] = .one
+        sim.advance(days: 31)
+        XCTAssertEqual(sim.state.currencies.redenominations[0], 1)
+        XCTAssertEqual(sim.state.governments.taxBase[0], LCU(raw: (Int64(1) << 61) / 1_000 + 1), "2^61 / 1,000 to the nearest")
+        XCTAssertTrue(sim.state.governments.isLive(g))
+        sim.advance(days: 62)
+        XCTAssertEqual(sim.state.currencies.redenominations[0], 1, "the next taxes are in the new scale: no second one")
+        XCTAssertEqual(sim.state.world.ledgerFailures, 0)
     }
 
-    /// The units are kept apart by type: these do not compile, so they are listed here, not run.
-    /// `w.post(g, .treasury, .tax, USDn(raw: 1))`, `w.post(.world, .trade, LCU(raw: 1))`, and `Money` has no `post` at all.
-    func testUnitsAreKeptApartByType() {
+    /// The stored numbers never change: each by its name. And the accounts are where the design puts them: the money
+    /// base is the currency's (§5.1).
+    func testTheStoredNumbersAndTheAccounts() {
         let (w, _) = world()
-        XCTAssertEqual(PostingCategory.allCases.map { $0.rawValue }, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10], "the stored numbers never change")
-        XCTAssertEqual(LocalAccount.allCases.map { $0.rawValue }, [0, 1, 2])
+        let numbers: [(PostingCategory, UInt16)] = [(.tax, 1), (.spending, 2), (.fx, 3), (.revaluation, 4), (.trade, 5), (.transport, 6),
+                                                    (.aid, 7), (.redenomination, 8), (.cheat, 9), (.interest, 10)]
+        for (c, n) in numbers { XCTAssertEqual(c.rawValue, n, "\(c)") }
+        XCTAssertEqual(PostingCategory.allCases.count, numbers.count)
+        XCTAssertEqual(LocalAccount.treasury.rawValue, 0)
+        XCTAssertEqual(LocalAccount.domesticDebt.rawValue, 1)
+        XCTAssertEqual(w.currencies.moneyBase.count, 3)
         XCTAssertEqual(w.currency(of: Idx(raw: 2)), Idx(raw: 2))
     }
 }

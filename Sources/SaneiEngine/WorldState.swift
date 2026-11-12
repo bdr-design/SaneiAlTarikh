@@ -14,18 +14,21 @@ public enum ProvinceKind {}
 @frozen
 public struct WorldRow: Sendable, Equatable {
     /// The day the next step runs.
-    public var date: GameDate
+    public internal(set) var date: GameDate
     /// The game's seed (`DetRNG`).
-    public var seed: UInt64
+    public internal(set) var seed: UInt64
     /// The calendar jobs run so far (§2.4 step 2), by kind: month starts, quarter starts, year starts.
-    public var monthStarts: UInt32
-    public var quarterStarts: UInt32
-    public var yearStarts: UInt32
+    public internal(set) var monthStarts: UInt32
+    public internal(set) var quarterStarts: UInt32
+    public internal(set) var yearStarts: UInt32
     /// Monthly closes at which the ledger's invariants did not hold (0 in every game; §8 checks it).
-    public var ledgerFailures: UInt32
-    /// Commands refused when their day came (their government ended meanwhile, say): screen 26 and the notifications
-    /// will show them.
-    public var refusedCommands: UInt32
+    public internal(set) var ledgerFailures: UInt32
+    /// Commands refused when their day came (their government ended meanwhile, say). Only the count is kept here; the
+    /// record of which order was refused and why comes with the notification ring (M1b), which screen 26 reads.
+    public internal(set) var refusedCommands: UInt32
+    /// Postings refused: a flow from or to a government that has ended, a local transfer across two currencies, an
+    /// exchange whose dollar leg rounds to 0. Money never vanishes silently: each refusal is counted here.
+    public internal(set) var refusedPostings: UInt32
 
     public init(date: GameDate, seed: UInt64) {
         self.date = date
@@ -35,6 +38,7 @@ public struct WorldRow: Sendable, Equatable {
         yearStarts = 0
         ledgerFailures = 0
         refusedCommands = 0
+        refusedPostings = 0
     }
 }
 
@@ -52,6 +56,12 @@ public struct PolityTable: Sendable, Equatable {
         exists = []
         serial = []
         counter = SerialCounter()
+        keepRoom()
+    }
+
+    /// Reserves every column to the cap. Called before each append as well: a column first written by subscript after
+    /// a copy of the state was taken keeps only its count's room, and would otherwise grow past the cap in steps.
+    mutating func keepRoom() {
         exists.reserveCapacity(Self.capacity)
         serial.reserveCapacity(Self.capacity)
     }
@@ -61,6 +71,7 @@ public struct PolityTable: Sendable, Equatable {
     /// Adds a polity; nil at the cap or when the serials have run out.
     public mutating func add() -> Idx<PolityKind>? {
         guard exists.count < Self.capacity, let s = counter.take() else { return nil }
+        keepRoom()
         exists.append(true)
         serial.append(s)
         return Idx(raw: UInt16(exists.count - 1))
@@ -126,6 +137,11 @@ public struct GovernmentTable: Sendable, Equatable {
         yearlyRuns = []
         strategicRuns = []
         counter = SerialCounter()
+        keepRoom()
+    }
+
+    /// Reserves every column to the cap (also before each append: see `PolityTable.keepRoom`).
+    mutating func keepRoom() {
         let n = Self.capacity
         exists.reserveCapacity(n)
         serial.reserveCapacity(n)
@@ -188,6 +204,7 @@ public struct GovernmentTable: Sendable, Equatable {
         // first strategic look: spread over the period by serial, so governments made together do not all come due
         let firstLook = date.adding(days: Int(s.raw % UInt32(Swift.max(1, strategicPeriod))))
         if row == exists.count {
+            keepRoom()
             exists.append(true); serial.append(s); polity.append(p); monthlySlot.append(slot)
             lastMonthlyRun.append(nextMonth ? month : Self.never); lastYearlyRun.append(Self.never)
             aiNextStrategic.append(firstLook); taxRate.append(r); taxBase.append(b)
@@ -204,6 +221,25 @@ public struct GovernmentTable: Sendable, Equatable {
     mutating func dissolve(_ g: GovRef) {
         exists[g.row.int] = false
     }
+
+    /// Divides a row's tax base by 1,000 to the nearest unit: its currency redenominated.
+    mutating func rescaleTaxBase(row: Int) {
+        taxBase[row] = taxBase[row].times(1, over: 1_000)
+    }
+
+    /// True while a new serial can be given (a create or a succession).
+    var canTakeSerial: Bool { counter.next < UInt32.max }
+
+    /// A government's successor takes its place: the same row with a new serial, so references to the one that
+    /// ended no longer reach it, and everything the row holds carries over (the slot, the calendar, the policies,
+    /// the due date of the strategic look); only the counts of runs start again. Nil when the serials have run out.
+    mutating func succeed(_ g: GovRef) -> GovRef? {
+        guard let s = counter.take() else { return nil }
+        let row = g.row.int
+        serial[row] = s
+        monthlyRuns[row] = 0; yearlyRuns[row] = 0; strategicRuns[row] = 0
+        return ref(row)
+    }
 }
 
 /// The provinces (§2.4), as far as the skeleton needs them: who holds each one and its people.
@@ -218,6 +254,11 @@ public struct ProvinceTable: Sendable, Equatable {
         sovereign = []
         administrator = []
         population = []
+        keepRoom()
+    }
+
+    /// Reserves every column to the cap (also before each append: see `PolityTable.keepRoom`).
+    mutating func keepRoom() {
         sovereign.reserveCapacity(Self.capacity)
         administrator.reserveCapacity(Self.capacity)
         population.reserveCapacity(Self.capacity)
@@ -228,6 +269,7 @@ public struct ProvinceTable: Sendable, Equatable {
     /// Adds a province; nil at the cap.
     public mutating func add(sovereign s: Idx<PolityKind>, administrator a: Idx<GovernmentKind>, population p: Pop32) -> Idx<ProvinceKind>? {
         guard sovereign.count < Self.capacity else { return nil }
+        keepRoom()
         sovereign.append(s)
         administrator.append(a)
         population.append(p)
@@ -238,7 +280,7 @@ public struct ProvinceTable: Sendable, Equatable {
 /// The whole state of one game.
 @frozen
 public struct WorldState: Sendable, Equatable {
-    public var world: WorldRow
+    public internal(set) var world: WorldRow
     public internal(set) var polities: PolityTable
     public internal(set) var governments: GovernmentTable
     public internal(set) var provinces: ProvinceTable
@@ -256,12 +298,12 @@ public struct WorldState: Sendable, Equatable {
         currencies = CurrencyTable()
         ledger = LedgerTable()
         pending = []
-        pending.reserveCapacity(Simulation.playerCapacity + Simulation.othersCapacity)
+        pending.reserveCapacity(Simulation.queueCapacity)
     }
 
-    /// Adds a polity, with its currency (a scenario's set-up; the lifecycle commands that make polities come with
-    /// succession and unification). A polity's row is
-    /// never reused, so its currency's row is its own: both tables have the same cap.
+    /// Adds a polity, with its currency: a scenario's set-up, before the simulation starts (the lifecycle effects that
+    /// make polities, independence and unification, come with content, T-042). A polity's row is never reused, so its
+    /// currency's row is its own: both tables have the same cap.
     public mutating func addPolity() -> Idx<PolityKind>? {
         guard polities.count < PolityTable.capacity, currencies.count < CurrencyTable.capacity, let p = polities.add() else { return nil }
         _ = currencies.add(scaleExponent: 0, rate: .zero)
@@ -280,7 +322,6 @@ public struct WorldState: Sendable, Equatable {
         return g
     }
 
-    /// Adds a province (a scenario's set-up).
     /// Adds a province (a scenario's set-up); nil when the polity or the government does not exist, or at the cap.
     public mutating func addProvince(sovereign s: Idx<PolityKind>, administrator a: GovRef, population p: Pop32) -> Idx<ProvinceKind>? {
         guard polities.isLive(s), governments.isLive(a) else { return nil }
@@ -298,6 +339,7 @@ public struct WorldState: Sendable, Equatable {
         h.combine(world.yearStarts)
         h.combine(world.ledgerFailures)
         h.combine(world.refusedCommands)
+        h.combine(world.refusedPostings)
         let p = polities
         h.combine(UInt64(p.count))
         for i in 0..<p.count {
@@ -336,6 +378,10 @@ public struct WorldState: Sendable, Equatable {
             h.combine(c.rate[i].raw)
             h.combine(c.priceIndex[i].raw)
             h.combine(c.redenominations[i])
+            h.combine(c.redenominationDue[i])
+            h.combine(c.moneyBase[i].raw)
+            h.combine(c.moneyBaseOpening[i].raw)
+            h.combine(c.moneyBasePosted[i].raw)
         }
         let l = ledger
         h.combine(UInt64(l.currency.count))

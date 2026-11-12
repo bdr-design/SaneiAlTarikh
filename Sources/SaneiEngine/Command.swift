@@ -46,13 +46,19 @@ public enum Issuer: Sendable, Hashable {
 public enum Command: Sendable, Equatable {
     /// A government sets its tax rate (0 to 100%). Given by that government (its player or its AI), or by an event.
     case setTaxRate(government: GovRef, rate: BP)
-    /// A lifecycle effect, from events only: a new government for a polity. A successor (Côte d'Ivoire's next
-    /// government, a revolution's) names the government it follows and takes over its yearly calendar, so a year's
-    /// yearly run is not made twice.
-    case createGovernment(polity: Idx<PolityKind>, treasury: LCU, taxBase: LCU, taxRate: BP, successorOf: GovRef? = nil)
-    /// A lifecycle effect, from events only: a government ends. Its provinces go to `provincesTo`, or to nobody until
-    /// an event gives them; its row is then free for a new government, which inherits nothing.
+    /// A lifecycle effect, from events only: a new government for a polity, beside any it has (a breakaway, a rival
+    /// government): its accounts, its slot and its calendar start afresh. A government that follows another in
+    /// power is `succeedGovernment`.
+    case createGovernment(polity: Idx<PolityKind>, treasury: LCU, taxBase: LCU, taxRate: BP)
+    /// A lifecycle effect, from events only: a government ends. Its provinces go to `provincesTo`, an existing
+    /// government of the same polity, or to nobody (an effect that gives provinces comes with the lifecycle effects,
+    /// T-042); its row is then free for a new government, which inherits nothing.
     case dissolveGovernment(government: GovRef, provincesTo: GovRef? = nil)
+    /// A lifecycle effect, from events only: a government ends and its successor takes its place in one step (Côte
+    /// d'Ivoire's next government, a revolution's). The successor keeps the row, so the provinces, the accounts, the
+    /// monthly slot and the calendar carry over and no month's or year's run is made twice; it gets a new serial, so
+    /// the references to the one that ended reach nothing. Its policies are its predecessor's until it changes them.
+    case succeedGovernment(government: GovRef)
 
     /// The stored number of each case. Never renumber one; a new case takes a new number.
     public var tag: UInt16 {
@@ -60,6 +66,7 @@ public enum Command: Sendable, Equatable {
         case .setTaxRate: return 1
         case .createGovernment: return 100
         case .dissolveGovernment: return 101
+        case .succeedGovernment: return 102
         }
     }
 
@@ -70,33 +77,48 @@ public enum Command: Sendable, Equatable {
         case let .setTaxRate(g, rate):
             guard issuer == .event || issuer.government == g else { return false }
             return state.governments.isLive(g) && rate >= .zero && rate <= .one
-        case let .createGovernment(p, _, taxBase, rate, _):
-            guard issuer == .event, state.polities.isLive(p), taxBase >= .zero, rate >= .zero, rate <= .one else { return false }
+        case let .createGovernment(p, treasury, taxBase, rate):
+            guard issuer == .event, state.polities.isLive(p), treasury >= .zero, taxBase >= .zero, rate >= .zero, rate <= .one
+            else { return false }
             let t = state.governments
-            return t.rows < GovernmentTable.capacity || t.exists.contains(false)
+            return t.canTakeSerial && (t.rows < GovernmentTable.capacity || t.exists.contains(false))
         case let .dissolveGovernment(g, to):
             guard issuer == .event, state.governments.isLive(g) else { return false }
-            if let to { return to != g && state.governments.isLive(to) }
+            // provinces pass only within the polity: giving them to another polity is annexation (§2.4's `Annex`, with
+            // the lifecycle effects, T-042)
+            if let to { return to != g && state.governments.isLive(to) && state.governments.polity[to.row.int] == state.governments.polity[g.row.int] }
             return true
+        case let .succeedGovernment(g):
+            return issuer == .event && state.governments.isLive(g) && state.governments.canTakeSerial
         }
     }
 
+    /// True when the codec can write the command and read it back as it is: every government named has a serial
+    /// (0 is no government's) and a row and polity below 65,535 (the reader's bound). A command outside this is
+    /// refused when submitted, whoever gives it, so a save or a replay never holds one it cannot read.
+    public var isWritable: Bool {
+        switch self {
+        case let .setTaxRate(g, _): return Command.isWritable(g)
+        case let .createGovernment(p, _, _, _): return p.raw < UInt16.max
+        case let .dissolveGovernment(g, to): return Command.isWritable(g) && (to.map(Command.isWritable) ?? true)
+        case let .succeedGovernment(g): return Command.isWritable(g)
+        }
+    }
+
+    static func isWritable(_ g: GovRef) -> Bool { g.row.raw < UInt16.max && g.serial.raw >= 1 }
+
     /// Applies the command when it is valid; false, and nothing changes, when it is not.
     @discardableResult
-    public func apply(to state: inout WorldState, by issuer: Issuer, strategicPeriod: Int) -> Bool {
+    public func apply(to state: inout WorldState, by issuer: Issuer) -> Bool {
         guard validate(state, by: issuer) else { return false }
         switch self {
         case let .setTaxRate(g, rate):
             state.governments.taxRate[g.row.int] = rate
-        case let .createGovernment(p, treasury, taxBase, rate, predecessor):
-            // read the predecessor's calendar before the new government may take its row
-            var year: Int32?
-            if let f = predecessor, f.row.int < state.governments.rows, state.governments.serial[f.row.int] == f.serial {
-                year = state.governments.lastYearlyRun[f.row.int]
-            }
-            guard let g = state.createGovernment(polity: p, treasury: treasury, taxBase: taxBase, taxRate: rate,
-                                                 strategicPeriod: strategicPeriod) else { return false }
-            if let year { state.governments.lastYearlyRun[g.row.int] = year }
+        case let .createGovernment(p, treasury, taxBase, rate):
+            guard state.createGovernment(polity: p, treasury: treasury, taxBase: taxBase, taxRate: rate,
+                                         strategicPeriod: Simulation.strategicPeriod) != nil else { return false }
+        case let .succeedGovernment(g):
+            guard state.governments.succeed(g) != nil else { return false }
         case let .dissolveGovernment(g, to):
             let heir: Idx<GovernmentKind> = to?.row ?? .absent
             for i in 0..<state.provinces.count where state.provinces.administrator[i] == g.row {
@@ -116,15 +138,16 @@ public enum Command: Sendable, Equatable {
         case let .setTaxRate(g, rate):
             Command.write(g, to: &w)
             w.zigzag(Int64(rate.raw))
-        case let .createGovernment(p, treasury, taxBase, rate, predecessor):
+        case let .createGovernment(p, treasury, taxBase, rate):
             w.varint(UInt64(p.raw))
             w.zigzag(treasury.raw)
             w.zigzag(taxBase.raw)
             w.zigzag(Int64(rate.raw))
-            Command.write(predecessor, to: &w)
         case let .dissolveGovernment(g, to):
             Command.write(g, to: &w)
             Command.write(to, to: &w)
+        case let .succeedGovernment(g):
+            Command.write(g, to: &w)
         }
     }
 
@@ -137,13 +160,13 @@ public enum Command: Sendable, Equatable {
         case 1:
             if let g = readGov(&c), let rate = readBP(&c) { command = .setTaxRate(government: g, rate: rate) } else { command = nil }
         case 100:
-            if let p = c.varint(), p < UInt64(UInt16.max), let t = c.zigzag(), let b = c.zigzag(), let rate = readBP(&c),
-               let predecessor = readOptionalGov(&c) {
-                command = .createGovernment(polity: Idx(raw: UInt16(p)), treasury: LCU(raw: t), taxBase: LCU(raw: b), taxRate: rate,
-                                            successorOf: predecessor)
+            if let p = c.varint(), p < UInt64(UInt16.max), let t = c.zigzag(), let b = c.zigzag(), let rate = readBP(&c) {
+                command = .createGovernment(polity: Idx(raw: UInt16(p)), treasury: LCU(raw: t), taxBase: LCU(raw: b), taxRate: rate)
             } else { command = nil }
         case 101:
             if let g = readGov(&c), let to = readOptionalGov(&c) { command = .dissolveGovernment(government: g, provincesTo: to) } else { command = nil }
+        case 102:
+            if let g = readGov(&c) { command = .succeedGovernment(government: g) } else { command = nil }
         default:
             command = nil
         }
@@ -188,7 +211,9 @@ public enum Command: Sendable, Equatable {
 @frozen
 public struct IssuedCommand: Sendable, Equatable {
     /// The day it takes effect: applied at the start of that day. A command for a day already run is refused when it
-    /// is submitted: the AI's results land at a fixed day (§2.4), so a slow phone never plays a different game.
+    /// is submitted. Refusing is not what keeps a game the same on every phone: the host does, by not running a day
+    /// until every AI result due on it has been submitted (§2.4's fixed landing day; the host's work, T-041). A late
+    /// result from the AI or an event is therefore the host's fault, never normal play.
     public var day: GameDate
     public var issuer: Issuer
     /// The issuer's own number, rising: it orders an issuer's commands within a day.

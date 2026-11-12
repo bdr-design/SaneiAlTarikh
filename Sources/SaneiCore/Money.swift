@@ -1,4 +1,4 @@
-// Money and people in the simulation (§2.3, §2.4's ledger, ADR 0019 to come): whole numbers, money in three kinds of
+// Money and people in the simulation (§2.3, §2.4's ledger, ADR 0003): whole numbers, money in three kinds of
 // unit. The types are distinct, so adding a local-currency amount to a dollar amount, or to people, does not compile.
 // The compiler does not tell one currency's `LCU` from another's, nor a currency before and after a redenomination:
 // the ledger must keep those apart. stdlib only.
@@ -89,8 +89,9 @@ public struct LCU: Amount {
 
     /// A balance beyond this, either way, makes its currency redenominate (§2.3: 2^60).
     @inlinable public static var redenominationLimit: UInt64 { UInt64(1) << 60 }
-    /// True for one amount beyond the limit. The ledger asks it of a currency's largest aggregate, when it posts: nine
-    /// lines each under the limit can still sum past the range.
+    /// True for one amount beyond the limit. The ledger asks it of each balance it posts to; the aggregates that come
+    /// with the economy (a budget's lines, nominal output, a union's money base: M2) must ask it of their sums, since
+    /// nine lines each under the limit can still sum past the range.
     @inlinable public var needsRedenomination: Bool { raw.magnitude > LCU.redenominationLimit }
 }
 

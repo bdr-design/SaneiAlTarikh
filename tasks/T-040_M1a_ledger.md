@@ -16,18 +16,28 @@ postings, the redenomination trigger on aggregates, `USDn` never redenominating.
 
 ## Scope
 - `Sources/SaneiEngine/Ledger.swift`: currencies (each with its scale 10^k, its exchange rate and price index as
-  logarithms); each government's accounts (treasury, money base and domestic debt in its currency, FX reserves in
-  USDn); the world account in USDn; `post(account, category, amount)` in the account's own unit, with stable category
-  numbers; an FX pair at the day's rate; a transfer between USDn accounts; the redenomination of a currency when one of
-  its balances passes 2^60 (every balance of that currency rescaled by 10^3, the rounding posted); the monthly close;
-  the invariants as a check that names what failed.
+  logarithms, and its money base, §5.1); each government's accounts (treasury and domestic debt in its currency, FX
+  reserves in USDn); the world account in USDn; `post(account, category, amount)` in the account's own unit, with
+  stable category numbers; an FX pair at the day's rate; transfers between two local accounts of one currency and
+  between USDn accounts; refusals counted; the redenomination of a currency when one of its balances passes 2^60, at
+  the day's end (every LCU amount of that currency rescaled by 10^3, the whole change posted); the monthly close; the
+  invariants as a check that names what failed.
 - The skeleton's thin taxes post through the ledger.
 - `docs/adr/0003-currencies-and-the-ledger.md` (the design's ADR 0019, numbered in this repository's sequence).
 - Tests: conservation over random postings; the world account 0 after closes with trade settled through it; an FX
   pair conserves value at the rate; a redenomination keeps every invariant; `Money` and the other units cannot be
   posted to the wrong account (by type).
-- Out of scope: the economy's flows (M2), debt by currency bucket and its revaluation (M2, with debt), currency unions
-  and pegs (M2), the money base's growth (M2), cheats (M8's settings; the category is reserved now).
+- Out of scope, each with its place: the economy's flows (M2), debt by currency bucket and the revaluation of debt and
+  reserves (M2, with debt), currency unions and pegs (M2), the money base's growth (M2), cheats (M8's settings; the
+  category is reserved now). Named by the reviews and placed: the sums per posting category and their «لماذا؟» (M2,
+  with the budget and the history); a redenomination's notification (the notification ring, M1b); inflation, pass-
+  through and money-base growth taking a redenomination step out (M2); the trigger on aggregates (a budget's lines,
+  nominal output, a union's money base: M2, with them); the day-1 closure checked in LCU and in USD and §8's `--t0`
+  closure (T-042, with the baked start); the ledger's invariants after every day in debug and test builds (T-041, with
+  the invariant checker the host runs); the daily ledger step, step 9 (M2); a typed LCU ↔ USDn conversion that does not
+  post (trade prices and the display of D-6: M2, with the world market); an exchange set by its dollar side (M2, with
+  trade settlement); the posting outboxes of the parallel monthly slots (M2, with the burst helper); how a dissolved
+  state's money and debts are shared out (T-042, with the lifecycle effects and the stub packs).
 
 ## Acceptance criteria
 1. `ci-linux` green, debug and optimised.
@@ -35,7 +45,10 @@ postings, the redenomination trigger on aggregates, `USDn` never redenominating.
    postings, in its own unit, exactly.
 3. The world account is exactly 0 after every monthly close in the tests; a USDn transfer moves value, never makes it.
 4. An FX pair is in two units at one rate; the LCU leg and the USDn leg are each exact in their own unit.
-5. A redenomination never breaks 2 or 3, is logged as a posting, and only the passing currency moves.
-6. Posting money of the wrong unit to an account does not compile; `Money` cannot be posted at all.
+5. A redenomination never breaks 2 or 3, posts the whole change of each balance under `redenomination` and is counted
+   per currency (the log until the notification ring), comes at the day's end so a flow of several postings stays in
+   one scale, rescales every LCU amount of that currency, and only the passing currency moves.
+6. Posting money of the wrong unit to an account does not compile; `Money` cannot be posted at all (a CI step proves
+   it with snippets that must fail).
 7. Nothing allocates per posting or per day (measured).
 8. Six independent read-only reviews; every confirmed finding fixed; verification reviews of the fixes.

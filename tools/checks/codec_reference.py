@@ -153,6 +153,8 @@ def self_check():
     assert column([100, 90, 95, -5, 0], DELTA, 64, True) == [0xC8, 0x01, 0x13, 0x0A, 0xC7, 0x01, 0x0A]
     # SplitMix64's published first output for the seed 0: the function the hash is made of
     assert mix64(0x9E3779B97F4A7C15) == 0xE220A8397B1DCDAF and Hasher().state == 14695981039346656037
+    zero = Hasher(); zero.state = 0; zero.combine(0)
+    assert zero.state != 0, "a state of 0 must not swallow a zero word"
     # the hash tells apart every state of three boxes where a multiply per word did not (signs, top bits, order,
     # whole numbers in Q32, a flag set on a pair and on its mirror)
     box = {hash_of([[a, c]]) for a in range(-100, 101) for c in range(-100, 101)}

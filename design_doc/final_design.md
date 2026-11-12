@@ -230,7 +230,7 @@ A rule that nothing enforces is not a rule here. Rule IDs are referenced in the 
 |---|---|---|
 | L1 | **Idle costs nothing.** Paused with no touch means 0 frames, 0 simulation wake-ups and no timers. | `FrameScheduler` unit tests on Linux; a simulator smoke test reads the counters over 5 s; the device overlay. |
 | L2 | **Nothing is parsed on the phone.** `content.bin`, `scenario-<id>.bin`, `world-N.mappack` and `world-N.imagery` are baked offline and memory-mapped. Save metadata is binary. JSON parsing lives only in `SaneiBake`, which only `simcli` links. | The IPA gate rejects `*.geojson`, `*.csv` and `*.json` over 64 KB. `imports.sh` forbids `JSONDecoder` and `JSONSerialization` outside `SaneiBake`. |
-| L3 | **The world is bounded.** Hard limits: <ul><li>land provinces ≤3,000; sea zones ≤300; total ≤3,300</li><li>polities ≤384 and governments ≤384 (registry ≤320 plus 64 runtime)</li><li>political actors ≤2,048</li><li>formations ≤8,192 worldwide, plus a quota per government (§5.4); armies ≤1,024; fronts ≤256 (sectors ≤1,024)</li><li>fleets ≤512; air groups ≤1,024</li><li>active spy operations ≤512</li><li>notification ring of 512; history in fixed windows</li><li>pending commands while paused ≤64 (a new order beyond is refused with its reason)</li></ul> | The invariant checker. A weekly all-AI run from 2011 to 2100 checks the maximum counts and that state stays ≤8 MB. The wartime benchmark measures the formation cap. |
+| L3 | **The world is bounded.** Hard limits: <ul><li>land provinces ≤3,000; sea zones ≤300; total ≤3,300</li><li>polities ≤384 and governments ≤384 (registry ≤320 plus 64 runtime)</li><li>political actors ≤2,048</li><li>formations ≤8,192 worldwide, plus a quota per government (§5.4); armies ≤1,024; fronts ≤256 (sectors ≤1,024)</li><li>fleets ≤512; air groups ≤1,024</li><li>active spy operations ≤512</li><li>notification ring of 512; history in fixed windows</li><li>pending commands while paused ≤64 (a new order beyond is refused with its reason); commands waiting for their landing day: the AI's ≤448 and the events' ≤64, each in its own room so the AI never keeps out an event (T-039)</li></ul> | The invariant checker. A weekly all-AI run from 2011 to 2100 checks the maximum counts and that state stays ≤8 MB. The wartime benchmark measures the formation cap. |
 | L4 | **Daily work grows only with provinces and active entities.** Monthly work runs on each government's stored slot day. Yearly work runs in its January slot. Strategic AI has its own stagger. Supply, routes, labels, anchors and colour tables are recomputed only when their inputs change. | The work-counter gate (§8). |
 | L5 | **The simulation uses integers only**, with binary fixed-point and table-based math. | `banned_api.sh` and the golden values. |
 | L6 | **Redraw only on change.** Redraws caused by the simulation happen at most 10 times a second, and nothing animates continuously. The one bounded exception is the unit glide (D-15, §3.9): at most 30 map frames a second, only for on-screen units that are selected or recently ordered (cap 8), redrawing only the unit layer from cached buffers; above the cap or over the GPU budget it falls back to day steps at ≤10 Hz. | Frame-counter tests, including one with a front on screen at ×1. |
@@ -394,7 +394,7 @@ Dependencies run one way: Core ← Content ← Engine ← AI; Core ← Map; Pres
 | Government pairs, dense | 384² × 8 B | Opinion, treaty bits, **recognises-state** bit, **recognises-government** bit, sanction bits, escalation rung, claim bit | 1.18 MB |
 | Pair extension (sparse) | ~6,000 | Spy network, intelligence level, exposure heat, **intel epoch**, partner share | 0.10 MB |
 | Handle tables | Capped (L3) | Formations (with equipment allocations), armies, fronts and sectors, wars, fleets, air groups, operations, projects, treaties. Each row carries its `Serial`. | ≤0.9 MB |
-| Queues and history | — | Event queue, decisions, **the pending-command queue (≤64 entries while paused, each ≤600 B with what was worked out when given: the route and ETA, the previewed values; ≤40 KB; §3.9)**, a 512-entry notification ring, a 512-entry campaign log ring (each entry its title, date and stored `TermBuffer12`, about 160 B, 82 KB in all; §3.9). History: 12 series × existing governments × (60 monthly + 125 yearly) plus a campaign-start baseline row. | ≤2.6 MB |
+| Queues and history | — | Event queue, decisions, **the pending-command queue (≤64 entries while paused, each ≤600 B with what was worked out when given: the route and ETA, the previewed values; ≤40 KB; §3.9), and in the same queue, in the order they apply, the AI's (≤448) and the events' (≤64) commands waiting for their landing day, a few dozen bytes each (≤40 KB)**, a 512-entry notification ring, a 512-entry campaign log ring (each entry its title, date and stored `TermBuffer12`, about 160 B, 82 KB in all; §3.9). History: 12 series × existing governments × (60 monthly + 125 yearly) plus a campaign-start baseline row. | ≤2.6 MB |
 | World | 1 | 22 world prices and stocks, world interest rate, **USD deflator**, chokepoint disruption (~10), CO₂, temperature, sea level, entity counters | <2 KB |
 | **Total** | | | **≈7.3 MB** (≤8 MB) |
 
@@ -1531,12 +1531,16 @@ As before:
   Small per-game noise is added. **No authored traits for real leaders.** Generated fictional leaders may add traits (R8, D-30).
 - **Parity:** the AI uses Commands only and sees through `Visibility`, with stable epoch estimates.
 
-**Difficulty changes decision quality only** (periods are now actually achievable):
+**Difficulty changes decision quality only.** The strategic period is a target under the cap of 15 governments a day
+(§2.4 step 11, §3.2): the governments due run oldest first, by (due date, serial), so none waits for ever. At most 289
+governments in play (225 at the start plus 64, L3), Easy, Normal and Hard always keep their periods (15 a day hold 300
+governments at 20 days); Expert's 14 stretches to about 15 days at 225 governments and about 19 at 289 (the owner's
+proxy, 2026-11-12: the cap stays, for lightness):
 
 | | Easy (سهل) | Normal (عادي) | Hard (صعب) | Expert (خبير) |
 |---|---|---|---|---|
 | Choice temperature | 0.6 | 0.3 | 0.15 | 0.05 |
-| Strategic period (days) | 60 | 30 | 20 | 14 |
+| Strategic period (days, a target) | 60 | 30 | 20 | up to 14 |
 | Operational period (days) | 7 | 5 | 4 | 3 |
 | Allied coordination (follow the front lead) | Off | Partial | On | On |
 | Advanced levers | None | Some | All | All |

@@ -29,6 +29,9 @@ public enum SubmitResult: Sendable, Equatable {
     /// The player's order cannot be carried out as things stand (a government that has ended, a rate past 100%): it
     /// is refused now, with this reason, not dropped on its day.
     case invalid
+    /// The command names what the codec cannot write and read back as it is (a serial of 0, a row of 65,535): from
+    /// any issuer, so a save or a replay never holds a command it cannot read.
+    case unwritable
 }
 
 /// A game being simulated: its state (the waiting commands included) and the working room a day needs.
@@ -37,21 +40,28 @@ public enum SubmitResult: Sendable, Equatable {
 /// days (`Saturation.countingAcrossAwaits`, ADR 0002) and the days run inside it. A day run outside every scope still
 /// clamps, uncounted.
 public struct Simulation: Sendable {
-    /// How many days apart a government's strategic looks are (difficulty sets it, §5.10: it becomes saved state then).
+    /// How many days apart a government's strategic looks are: a target under the daily cap (§5.10; difficulty sets
+    /// it in M7, and it becomes saved state then). The one source of the period: the stagger and new governments both
+    /// read it.
     public static let strategicPeriod = 30
     /// The most governments the strategic AI looks at in a day (§2.4).
     public static let strategicPerDay = 15
     /// The player's orders waiting at once (§3.9: 64 while paused).
     public static let playerCapacity = 64
-    /// The AI's and events' commands waiting at once (about 15 strategic looks a day, each a few commands, landing
-    /// 2 days later, plus events).
-    public static let othersCapacity = 512
+    /// The events' commands waiting at once (L3): their own room, so an event's effect is never refused because the
+    /// AI's commands filled the queue.
+    public static let eventCapacity = 64
+    /// The AI's commands waiting at once (L3: about 15 strategic looks a day, each a few commands, landing 2 days
+    /// later).
+    public static let aiCapacity = 448
+    /// The whole queue's room: 576.
+    public static var queueCapacity: Int { playerCapacity + eventCapacity + aiCapacity }
 
     public internal(set) var state: WorldState
     /// The working room of the stagger: governments due, as (due, serial, row).
     var due: [(GameDate, UInt32, Int)]
     /// Called at each step, for tests (nil in the game: no cost).
-    public var observe: (@Sendable (DayStep) -> Void)?
+    var observe: (@Sendable (DayStep) -> Void)?
 
     public init(state: WorldState) {
         self.state = state
@@ -63,29 +73,49 @@ public struct Simulation: Sendable {
     /// The commands waiting for their day.
     public var pending: [IssuedCommand] { state.pending }
 
-    /// Queues a command for its day.
+    /// Queues a command for its day, at its place in the order commands are applied in: the queue is always in that
+    /// order, so the state (and its hash, and a save) never depends on the order commands arrived in.
+    ///
+    /// The host runs a day only once every AI result due on it has been submitted (§2.4's fixed landing day): a
+    /// command for a day already run is refused as `.late`, and from the AI or an event that is the host's fault.
     @discardableResult
     public mutating func submit(_ c: IssuedCommand) -> SubmitResult {
         if c.day < state.world.date { return .late }
-        var players = 0
-        for p in state.pending {
-            if IssuedCommand.sameKey(p, c) { return .duplicateKey }
-            if p.issuer.rank == 0 { players += 1 }
+        if let g = c.issuer.government, !Command.isWritable(g) { return .unwritable }
+        if !c.command.isWritable { return .unwritable }
+        // the place in order, by halving (the queue is always in order); a command with the same key would sit there
+        var lo = 0, hi = state.pending.count
+        while lo < hi {
+            let mid = (lo + hi) / 2
+            if IssuedCommand.precedes(state.pending[mid], c) { lo = mid + 1 } else { hi = mid }
         }
-        let others = state.pending.count - players
-        if c.issuer.rank == 0 ? players >= Self.playerCapacity : others >= Self.othersCapacity { return .full }
+        let place = lo
+        if place < state.pending.count && IssuedCommand.sameKey(state.pending[place], c) { return .duplicateKey }
+        // the issuer's room: one pass over the ranks only
+        let rank = c.issuer.rank
+        var same = 0
+        for p in state.pending where p.issuer.rank == rank { same += 1 }
+        let room: Int
+        switch c.issuer {
+        case .player: room = Self.playerCapacity
+        case .event: room = Self.eventCapacity
+        case .ai: room = Self.aiCapacity
+        }
+        if same >= room { return .full }
         // the player's orders are checked when given; the AI's and events' when their day comes, as the world may
         // have changed by then (a government made by an earlier command that day)
         if c.issuer.rank == 0 && !c.command.validate(state, by: c.issuer) { return .invalid }
-        state.pending.append(c)
+        state.pending.reserveCapacity(Self.queueCapacity)   // the room, kept across a held copy
+        state.pending.insert(c, at: place)
         return .queued
     }
 
-    /// Takes back a waiting command (screen 26): the one with this day, issuer and sequence. False when none waits.
+    /// Takes back one of the player's waiting orders (screen 26): the one given for `government` with this day and
+    /// sequence. False when none waits. The AI's and events' commands cannot be taken back.
     @discardableResult
-    public mutating func cancel(day: GameDate, issuer: Issuer, sequence: UInt64) -> Bool {
-        let key = IssuedCommand(day: day, issuer: issuer, sequence: sequence, command: .setTaxRate(government: GovRef(row: .absent, serial: .absent), rate: .zero))
-        guard let i = state.pending.firstIndex(where: { IssuedCommand.sameKey($0, key) }) else { return false }
+    public mutating func cancel(day: GameDate, government: GovRef, sequence: UInt64) -> Bool {
+        guard let i = state.pending.firstIndex(where: { $0.day == day && $0.issuer == .player(government) && $0.sequence == sequence })
+        else { return false }
         state.pending.remove(at: i)
         return true
     }
@@ -106,7 +136,8 @@ public struct Simulation: Sendable {
         applyCommands(upTo: date)
 
         // 2. the calendar jobs (their systems come with M2 and M6; the counters show they ran, and when), then the
-        // monthly close, after the world market and the transport payout, which settle through the world account
+        // monthly close, after the world market and the transport payout (to come, M2), which settle through the
+        // world account
         if civil.day == 1 {
             state.world.monthStarts &+= 1
             observe?(.monthStart)
@@ -118,7 +149,7 @@ public struct Simulation: Sendable {
                 state.world.yearStarts &+= 1
                 observe?(.yearStart)
             }
-            if !state.closeMonth().isEmpty { state.world.ledgerFailures &+= 1 }
+            if !state.closeMonth().isEmpty { state.world.ledgerFailures &+= 1 }   // a failed close, counted once
             observe?(.monthClose)
         }
 
@@ -151,28 +182,21 @@ public struct Simulation: Sendable {
             }
         }
 
-        // 13, 14: operational AI, notifications, history (to come)
+        // 13, 14: operational AI, notifications, history (to come); then the currencies marked today redenominate,
+        // after every posting of the day
+        state.redenominateDue()
         state.world.date = date.adding(days: 1)
     }
 
     /// Applies, in order, every waiting command whose day has come, and keeps the rest. A command refused when its day
-    /// comes (its government ended meanwhile, say) is counted and shown to the observer.
+    /// comes (its government ended meanwhile, say) is counted and shown to the observer. The queue is kept in order
+    /// by `submit` (and by the loader, which refuses a save whose queue is not), so the due ones are its front.
     mutating func applyCommands(upTo date: GameDate) {
         if state.pending.isEmpty { return }
-        // an insertion sort: the queue is short, and the standard library's sort may allocate
-        for i in 1..<Swift.max(1, state.pending.count) {
-            let c = state.pending[i]
-            var j = i - 1
-            while j >= 0 && IssuedCommand.precedes(c, state.pending[j]) {
-                state.pending[j + 1] = state.pending[j]
-                j -= 1
-            }
-            state.pending[j + 1] = c
-        }
         var applied = 0
         while applied < state.pending.count && state.pending[applied].day <= date {
             let c = state.pending[applied]
-            if !c.command.apply(to: &state, by: c.issuer, strategicPeriod: Self.strategicPeriod) {
+            if !c.command.apply(to: &state, by: c.issuer) {
                 state.world.refusedCommands &+= 1
                 observe?(.refused(c))
             }

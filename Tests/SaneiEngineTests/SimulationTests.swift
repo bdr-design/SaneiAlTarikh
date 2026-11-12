@@ -19,14 +19,21 @@ final class SimulationTests: XCTestCase {
     private func world(_ n: Int, seed: UInt64 = 2011) -> Simulation {
         var w = WorldState(start: start, seed: seed)
         for _ in 0..<n { _ = w.addPolity() }
+        // the scenario's set-up: the first 64 governments by the events of the first day, the rest before it starts
+        // (an event's room is 64), so the commands' step is exercised and any number can be made
+        let direct = Swift.max(0, n - Simulation.eventCapacity)
+        for p in 0..<direct {
+            _ = w.createGovernment(polity: Idx(raw: UInt16(p)), treasury: LCU(raw: 1_000), taxBase: LCU(raw: 10_000 + Int64(p)),
+                                   taxRate: BP(raw: 2_000), strategicPeriod: Simulation.strategicPeriod)
+        }
         var sim = Simulation(state: w)
         var seq: UInt64 = 0
-        for p in 0..<n {
+        for p in direct..<n {
             seq += 1
-            sim.submit(IssuedCommand(day: start, issuer: .event, sequence: seq,
-                                     command: .createGovernment(polity: Idx(raw: UInt16(p)), treasury: LCU(raw: 1_000),
-                                                                taxBase: LCU(raw: 10_000 + Int64(p)), taxRate: BP(raw: 2_000))))
-            if sim.pending.count == Simulation.othersCapacity { sim.step() }
+            let queued = sim.submit(IssuedCommand(day: start, issuer: .event, sequence: seq,
+                                                  command: .createGovernment(polity: Idx(raw: UInt16(p)), treasury: LCU(raw: 1_000),
+                                                                             taxBase: LCU(raw: 10_000 + Int64(p)), taxRate: BP(raw: 2_000))))
+            precondition(queued == .queued)
         }
         return sim
     }
@@ -150,7 +157,7 @@ final class SimulationTests: XCTestCase {
         var perDay: [Int32: Int] = [:]
         for (date, step) in steps.all { if case .strategic = step { perDay[date.days, default: 0] += 1 } }
         XCTAssertLessThanOrEqual(perDay.values.max() ?? 0, Simulation.strategicPerDay)
-        // over 120 days, 200 governments with a 30-day period: everyone looked at, nobody twice within 30 days
+        // over 120 days, 200 governments with a 30-day period: everyone looked at 2 to 5 times
         let runs = (0..<200).map { sim.state.governments.strategicRuns[$0] }
         XCTAssertTrue(runs.allSatisfy { $0 >= 2 }, "every government had its turns: \(runs.min() ?? 0)")
         XCTAssertTrue(runs.allSatisfy { $0 <= 5 })
@@ -197,17 +204,18 @@ final class SimulationTests: XCTestCase {
             .dissolveGovernment(government: GovRef(row: Idx(raw: 300), serial: Serial(raw: 1))),
             .dissolveGovernment(government: live, provincesTo: live),
             .dissolveGovernment(government: live, provincesTo: stale),
+            .dissolveGovernment(government: live, provincesTo: GovRef(row: Idx(raw: 2), serial: Serial(raw: 3))),  // another polity's
         ]
         for c in rejected {
             var s = sim.state
             XCTAssertFalse(c.validate(s, by: .event), "\(c)")
-            XCTAssertFalse(c.apply(to: &s, by: .event, strategicPeriod: Simulation.strategicPeriod))
+            XCTAssertFalse(c.apply(to: &s, by: .event))
             XCTAssertEqual(s.hash, before.hash, "\(c) changed the state")
         }
         // and a dissolved government's reference stays dead after its row is reused
         var s = sim.state
-        XCTAssertTrue(Command.dissolveGovernment(government: live).apply(to: &s, by: .event, strategicPeriod: 30))
-        XCTAssertTrue(Command.createGovernment(polity: Idx(raw: 1), treasury: .zero, taxBase: .zero, taxRate: .zero).apply(to: &s, by: .event, strategicPeriod: 30))
+        XCTAssertTrue(Command.dissolveGovernment(government: live).apply(to: &s, by: .event))
+        XCTAssertTrue(Command.createGovernment(polity: Idx(raw: 1), treasury: .zero, taxBase: .zero, taxRate: .zero).apply(to: &s, by: .event))
         XCTAssertTrue(s.governments.exists[live.row.int], "the row is reused")
         XCTAssertFalse(s.governments.isLive(live), "the old reference finds nothing")
         XCTAssertFalse(Command.setTaxRate(government: live, rate: .zero).validate(s, by: .event))
@@ -220,6 +228,7 @@ final class SimulationTests: XCTestCase {
             .setTaxRate(government: GovRef(row: Idx(raw: 0), serial: Serial(raw: 1)), rate: .zero),
             .createGovernment(polity: Idx(raw: 383), treasury: LCU(raw: .min), taxBase: LCU(raw: .max), taxRate: BP(raw: 2_500)),
             .dissolveGovernment(government: g),
+            .succeedGovernment(government: g),
         ]
         var w = ByteWriter()
         for c in all { c.write(to: &w) }
@@ -227,7 +236,7 @@ final class SimulationTests: XCTestCase {
         for c in all { XCTAssertEqual(Command.read(from: &r), c) }
         XCTAssertEqual(r.remaining, 0)
         // the stored numbers never change
-        XCTAssertEqual(all.map { $0.tag }, [1, 1, 100, 101])
+        XCTAssertEqual(all.map { $0.tag }, [1, 1, 100, 101, 102])
         // an unknown number, or bytes cut short: nil, and the reader stays
         var unknown = ByteReader([7, 0, 1, 2])
         XCTAssertNil(Command.read(from: &unknown))
@@ -276,6 +285,23 @@ final class SimulationTests: XCTestCase {
         }
         XCTAssertEqual(Array(kinds.prefix(5)), ["commands", "month", "quarter", "year", "close"])
         XCTAssertTrue(kinds.contains("monthly"), "the government made today ran in today's slot")
+        // and after them, on a January slot day with a look due: the monthly slot, the stagger, then the yearly run
+        var later = world(1)
+        later.advance(days: 365)                                   // the next day to run is 1 January 2012
+        XCTAssertEqual(later.state.world.date, GameDate(year: 2012, month: 1, day: 1))
+        later.state.governments.aiNextStrategic[0] = later.state.world.date
+        let laterSteps = Steps()
+        later.observe = { laterSteps.add($0) }
+        later.step()
+        let order = laterSteps.all.compactMap { step -> String? in
+            switch step.1 {
+            case .monthly: return "monthly"
+            case .strategic: return "strategic"
+            case .yearly: return "yearly"
+            default: return nil
+            }
+        }
+        XCTAssertEqual(order, ["monthly", "strategic", "yearly"])
     }
 }
 
@@ -302,6 +328,10 @@ extension SimulationTests {
             row += 3
         }
         XCTAssertEqual(ran, expected)
+        // the oldest due always runs first, so none waits for ever: 300 due at once have all had their look 20 days on
+        sim.observe = nil
+        sim.advance(days: 19)
+        XCTAssertTrue((0..<300).allSatisfy { sim.state.governments.strategicRuns[$0] >= 1 }, "nobody skipped")
     }
 
     func testAnInvalidPlayerOrderIsRefusedWhenGivenAndOneCanBeCancelled() {
@@ -311,8 +341,8 @@ extension SimulationTests {
         let today = sim.state.world.date
         XCTAssertEqual(sim.submit(IssuedCommand(day: today, issuer: .player(g), sequence: 1, command: .setTaxRate(government: g, rate: BP(raw: 50_000)))), .invalid)
         XCTAssertEqual(sim.submit(IssuedCommand(day: today, issuer: .player(g), sequence: 2, command: .setTaxRate(government: g, rate: BP(raw: 500)))), .queued)
-        XCTAssertTrue(sim.cancel(day: today, issuer: .player(g), sequence: 2))
-        XCTAssertFalse(sim.cancel(day: today, issuer: .player(g), sequence: 2))
+        XCTAssertTrue(sim.cancel(day: today, government: g, sequence: 2))
+        XCTAssertFalse(sim.cancel(day: today, government: g, sequence: 2))
         XCTAssertTrue(sim.pending.isEmpty)
         XCTAssertNil(sim.state.addProvince(sovereign: Idx(raw: 77), administrator: g, population: Pop32(raw: 1)), "no such polity")
     }
@@ -333,6 +363,15 @@ extension SimulationTests {
         XCTAssertEqual(sim.submit(IssuedCommand(day: today, issuer: .player(g), sequence: 999, command: .setTaxRate(government: g, rate: .zero))), .full)
         XCTAssertEqual(sim.submit(IssuedCommand(day: today, issuer: .ai(g), sequence: 999, command: .setTaxRate(government: g, rate: .zero))), .queued,
                        "the player's room is full, the AI's is not")
+        // the AI filling its room never keeps out an event
+        for k in 1000..<(1000 + Simulation.aiCapacity) {
+            _ = sim.submit(IssuedCommand(day: today, issuer: .ai(g), sequence: UInt64(k), command: .setTaxRate(government: g, rate: .zero)))
+        }
+        XCTAssertEqual(sim.submit(IssuedCommand(day: today, issuer: .ai(g), sequence: 5_000, command: .setTaxRate(government: g, rate: .zero))), .full)
+        XCTAssertEqual(sim.submit(IssuedCommand(day: today, issuer: .event, sequence: 1, command: .dissolveGovernment(government: g))), .queued)
+        XCTAssertEqual(sim.pending.count, Simulation.playerCapacity + Simulation.aiCapacity + 1)
+        // only the player's orders can be taken back
+        XCTAssertFalse(sim.cancel(day: today, government: g, sequence: 999))
         // the queue is part of the state: two states that differ only in a waiting command hash apart
         var other = world(2)
         other.step()
@@ -354,7 +393,7 @@ extension SimulationTests {
         XCTAssertTrue(Command.dissolveGovernment(government: theirs).validate(s, by: .event))
         // an issuer whose government has ended gives nothing
         var gone = s
-        XCTAssertTrue(Command.dissolveGovernment(government: mine).apply(to: &gone, by: .event, strategicPeriod: 30))
+        XCTAssertTrue(Command.dissolveGovernment(government: mine).apply(to: &gone, by: .event))
         XCTAssertFalse(Command.setTaxRate(government: theirs, rate: .zero).validate(gone, by: .player(mine)))
     }
 
@@ -362,24 +401,29 @@ extension SimulationTests {
     func testADissolvedGovernmentsProvincesNeverPassToTheNextInItsRow() {
         var sim = world(3)
         sim.step()
+        // Côte d'Ivoire, 2011: two governments of one polity
+        sim.submit(IssuedCommand(day: sim.state.world.date, issuer: .event, sequence: 1,
+                                 command: .createGovernment(polity: Idx(raw: 0), treasury: .zero, taxBase: .zero, taxRate: .zero)))
+        sim.step()
         let gbagbo = sim.state.governments.ref(0)
-        let ouattara = sim.state.governments.ref(1)
+        let ouattara = sim.state.governments.ref(3)
         let other = sim.state.governments.ref(2)
+        XCTAssertEqual(sim.state.governments.polity[ouattara.row.int], Idx(raw: 0))
         let abidjan = sim.state.addProvince(sovereign: Idx(raw: 0), administrator: gbagbo, population: Pop32(raw: 4_700_000))!
         let north = sim.state.addProvince(sovereign: Idx(raw: 0), administrator: gbagbo, population: Pop32(raw: 1_000_000))!
         let elsewhere = sim.state.addProvince(sovereign: Idx(raw: 2), administrator: other, population: Pop32(raw: 9))!
         var s = sim.state
-        XCTAssertTrue(Command.dissolveGovernment(government: gbagbo, provincesTo: ouattara).apply(to: &s, by: .event, strategicPeriod: 30))
+        XCTAssertTrue(Command.dissolveGovernment(government: gbagbo, provincesTo: ouattara).apply(to: &s, by: .event))
         XCTAssertEqual(s.provinces.administrator[abidjan.int], ouattara.row)
         XCTAssertEqual(s.provinces.administrator[north.int], ouattara.row)
         XCTAssertEqual(s.provinces.administrator[elsewhere.int], other.row)
         // a new government in the freed row administers nothing
-        XCTAssertTrue(Command.createGovernment(polity: Idx(raw: 2), treasury: .zero, taxBase: .zero, taxRate: .zero).apply(to: &s, by: .event, strategicPeriod: 30))
+        XCTAssertTrue(Command.createGovernment(polity: Idx(raw: 2), treasury: .zero, taxBase: .zero, taxRate: .zero).apply(to: &s, by: .event))
         XCTAssertTrue(s.governments.exists[gbagbo.row.int])
         XCTAssertFalse(s.provinces.administrator.contains(gbagbo.row))
         // with no successor, nobody
         var t = sim.state
-        XCTAssertTrue(Command.dissolveGovernment(government: gbagbo).apply(to: &t, by: .event, strategicPeriod: 30))
+        XCTAssertTrue(Command.dissolveGovernment(government: gbagbo).apply(to: &t, by: .event))
         XCTAssertEqual(t.provinces.administrator[abidjan.int], Idx<GovernmentKind>.absent)
     }
 
@@ -389,11 +433,11 @@ extension SimulationTests {
         sim.advance(days: 40)
         var s = sim.state
         let old = s.governments.ref(0)
-        XCTAssertTrue(Command.dissolveGovernment(government: old).apply(to: &s, by: .event, strategicPeriod: 30))
-        XCTAssertTrue(Command.createGovernment(polity: Idx(raw: 0), treasury: LCU(raw: 5), taxBase: LCU(raw: 6), taxRate: BP(raw: 7)).apply(to: &s, by: .event, strategicPeriod: 30))
+        XCTAssertTrue(Command.dissolveGovernment(government: old).apply(to: &s, by: .event))
+        XCTAssertTrue(Command.createGovernment(polity: Idx(raw: 0), treasury: LCU(raw: 5), taxBase: LCU(raw: 6), taxRate: BP(raw: 7)).apply(to: &s, by: .event))
         var fresh = WorldState(start: s.world.date, seed: 1)
         _ = fresh.addPolity()
-        XCTAssertTrue(Command.createGovernment(polity: Idx(raw: 0), treasury: LCU(raw: 5), taxBase: LCU(raw: 6), taxRate: BP(raw: 7)).apply(to: &fresh, by: .event, strategicPeriod: 30))
+        XCTAssertTrue(Command.createGovernment(polity: Idx(raw: 0), treasury: LCU(raw: 5), taxBase: LCU(raw: 6), taxRate: BP(raw: 7)).apply(to: &fresh, by: .event))
         let g = s.governments, f = fresh.governments
         let r = old.row.int
         XCTAssertEqual(g.polity[r], f.polity[0])
@@ -405,23 +449,71 @@ extension SimulationTests {
         XCTAssertEqual(g.yearlyRuns[r], 0)
         XCTAssertEqual(g.strategicRuns[r], 0)
         XCTAssertEqual(s.ledger.balance(r, .treasury), LCU(raw: 5))
-        XCTAssertEqual(s.ledger.balance(r, .moneyBase), .zero)
+        XCTAssertEqual(s.ledger.balance(r, .domesticDebt), .zero)
         XCTAssertEqual(s.ledger.reserves[r], .zero)
         XCTAssertNotEqual(g.serial[r], old.serial, "a new serial")
     }
 
-    /// A successor takes over its predecessor's yearly calendar, so the year's yearly run is not made twice.
-    func testASuccessorDoesNotRepeatTheYearlyRun() {
-        var sim = world(1)
-        sim.advance(days: 3)
+    /// A successor takes its predecessor's place in one step: its provinces, its accounts, its slot and its calendar,
+    /// so neither this month's run nor this year's is made twice; the references to the one that ended reach nothing.
+    /// A government made in between (which a create-then-name design would have let take the row) changes nothing.
+    func testASuccessorTakesThePlaceAndRepeatsNoRun() {
+        var sim = world(2)
+        sim.advance(days: 9)                                       // January's monthly and yearly runs are made
         let first = sim.state.governments.ref(0)
+        let province = sim.state.addProvince(sovereign: Idx(raw: 0), administrator: first, population: Pop32(raw: 5))!
+        let treasury = sim.state.ledger.balance(0, .treasury)
+        let slot = sim.state.governments.monthlySlot[0]
         XCTAssertEqual(sim.state.governments.lastYearlyRun[0], 2011)
-        sim.submit(IssuedCommand(day: sim.state.world.date, issuer: .event, sequence: 1, command: .dissolveGovernment(government: first)))
-        sim.submit(IssuedCommand(day: sim.state.world.date, issuer: .event, sequence: 2,
-                                 command: .createGovernment(polity: Idx(raw: 0), treasury: .zero, taxBase: .zero, taxRate: .zero, successorOf: first)))
-        sim.advance(days: 30)
-        XCTAssertEqual(sim.state.governments.lastYearlyRun[0], 2011)
-        XCTAssertEqual(sim.state.governments.yearlyRuns[0], 0, "the predecessor already ran 2011's")
+        let today = sim.state.world.date
+        sim.submit(IssuedCommand(day: today, issuer: .event, sequence: 1,
+                                 command: .createGovernment(polity: Idx(raw: 1), treasury: .zero, taxBase: .zero, taxRate: .zero)))
+        sim.submit(IssuedCommand(day: today, issuer: .event, sequence: 2, command: .succeedGovernment(government: first)))
+        sim.step()
+        let next = sim.state.governments.ref(0)
+        XCTAssertNotEqual(next.serial, first.serial)
+        XCTAssertTrue(sim.state.governments.isLive(next))
+        XCTAssertFalse(sim.state.governments.isLive(first), "the old reference reaches nothing")
+        XCTAssertEqual(sim.state.provinces.administrator[province.int], next.row)
+        XCTAssertEqual(sim.state.ledger.balance(0, .treasury), treasury)
+        XCTAssertEqual(sim.state.governments.monthlySlot[0], slot)
+        sim.advance(days: 21)                                      // to the end of January
+        XCTAssertEqual(sim.state.governments.monthlyRuns[0], 0, "January's monthly run was made by the predecessor")
+        XCTAssertEqual(sim.state.governments.yearlyRuns[0], 0, "and 2011's yearly run")
+        XCTAssertTrue(sim.state.ledgerViolations().isEmpty)
+        sim.advance(days: 28)                                      // February
+        XCTAssertEqual(sim.state.governments.monthlyRuns[0], 1, "February's, once")
+        // the old government can give nothing any more
+        XCTAssertEqual(sim.submit(IssuedCommand(day: sim.state.world.date, issuer: .player(first), sequence: 1,
+                                                command: .setTaxRate(government: first, rate: .zero))), .invalid)
+    }
+
+    /// The queue is kept in the order commands are applied in, so the state, its hash and a save taken between days
+    /// never depend on the order commands arrived in; a command the codec cannot read back is refused from anyone.
+    func testTheQueueNeverDependsOnArrivalAndHoldsOnlyWhatItCanSave() {
+        var sim = world(3)
+        sim.step()
+        let g = sim.state.governments.ref(1)
+        let day = sim.state.world.date.adding(days: 2)
+        let a = IssuedCommand(day: day, issuer: .ai(g), sequence: 4, command: .setTaxRate(government: g, rate: BP(raw: 100)))
+        let b = IssuedCommand(day: day, issuer: .event, sequence: 9, command: .setTaxRate(government: g, rate: BP(raw: 200)))
+        let c = IssuedCommand(day: day.adding(days: -1), issuer: .player(g), sequence: 1, command: .setTaxRate(government: g, rate: BP(raw: 300)))
+        var one = sim, two = sim
+        for x in [a, b, c] { XCTAssertEqual(one.submit(x), .queued) }
+        for x in [c, a, b] { XCTAssertEqual(two.submit(x), .queued) }
+        XCTAssertEqual(one.state, two.state)
+        XCTAssertEqual(one.state.hash, two.state.hash)
+        XCTAssertEqual(one.pending, [c, b, a])
+        let none = GovRef(row: Idx(raw: 1), serial: Serial(raw: 0))
+        let today = sim.state.world.date
+        XCTAssertEqual(sim.submit(IssuedCommand(day: today, issuer: .event, sequence: 1, command: .dissolveGovernment(government: none))), .unwritable)
+        XCTAssertEqual(sim.submit(IssuedCommand(day: today, issuer: .event, sequence: 2,
+                                                command: .dissolveGovernment(government: g, provincesTo: GovRef(row: Idx(raw: 0), serial: Serial(raw: 0))))), .unwritable)
+        XCTAssertEqual(sim.submit(IssuedCommand(day: today, issuer: .event, sequence: 3,
+                                                command: .createGovernment(polity: .absent, treasury: .zero, taxBase: .zero, taxRate: .zero))), .unwritable)
+        XCTAssertEqual(sim.submit(IssuedCommand(day: today, issuer: .ai(GovRef(row: .absent, serial: Serial(raw: 5))), sequence: 4,
+                                                command: .setTaxRate(government: g, rate: .zero))), .unwritable)
+        XCTAssertTrue(sim.pending.isEmpty)
     }
 
     /// A command refused when its day comes is counted, and the observer sees it.
@@ -439,20 +531,25 @@ extension SimulationTests {
         XCTAssertTrue(steps.all.contains { if case .refused = $0.1 { return true } else { return false } })
     }
 
-    /// The day's clamps are counted by the host's long scope: the days run inside it, and a clamp made by a system is
-    /// counted once.
+    /// The day's clamps are counted by the host's long scope: the days run inside it, and a clamp a day's system
+    /// makes by itself is counted (here the monthly taxes of a base at the top of the range at 100%, which clamp).
     func testADaysClampsAreCountedInsideTheHostsScope() async {
-        var sim = world(1)
-        sim.step()
-        let g = sim.state.governments.ref(0)
-        sim.state.post(g, .treasury, .spending, LCU(raw: (1 << 60) - sim.state.ledger.balance(0, .treasury).raw))
-        let c = SaturationCounter()
-        await Saturation.countingAcrossAwaits(into: c) {
-            sim.state.post(g, .treasury, .tax, LCU(raw: .max))
+        var w = WorldState(start: start, seed: 1)
+        _ = w.addPolity()
+        var sim = Simulation(state: w)
+        sim.submit(IssuedCommand(day: start, issuer: .event, sequence: 1,
+                                 command: .createGovernment(polity: Idx(raw: 0), treasury: LCU(raw: .max), taxBase: LCU(raw: .max), taxRate: .one)))
+        let outside = SaturationCounter()
+        let inside = SaturationCounter()
+        Saturation.counting(into: outside) { sim.step() }          // the 1st: made, and its first monthly run, which clamps
+        // the currency redenominated at the 1st's end; the base is set at the top again, so February's run clamps too
+        sim.state.governments.taxBase[0] = LCU(raw: .max)
+        await Saturation.countingAcrossAwaits(into: inside) {
             await Task.yield()
-            sim.advance(days: 1)
+            sim.advance(days: 31)                                  // February's run, on the same slot, clamps again
         }
-        XCTAssertGreaterThanOrEqual(c.count, 1, "the clamp of a posting past the range is counted")
+        XCTAssertGreaterThanOrEqual(outside.count, 1)
+        XCTAssertGreaterThanOrEqual(inside.count, 1, "a clamp made by the day itself is counted by the host's scope")
     }
 
     func testIssuedCommandsSurviveTheirCodec() {
@@ -460,7 +557,8 @@ extension SimulationTests {
         let all = [
             IssuedCommand(day: start, issuer: .player(g), sequence: 1, command: .setTaxRate(government: g, rate: BP(raw: 1))),
             IssuedCommand(day: start.adding(days: 40), issuer: .event, sequence: .max, command: .dissolveGovernment(government: g, provincesTo: GovRef(row: Idx(raw: 1), serial: Serial(raw: 2)))),
-            IssuedCommand(day: GameDate(days: -43_829), issuer: .ai(g), sequence: 0, command: .createGovernment(polity: Idx(raw: 3), treasury: .zero, taxBase: .zero, taxRate: .zero, successorOf: g)),
+            IssuedCommand(day: GameDate(days: -43_829), issuer: .ai(g), sequence: 0, command: .createGovernment(polity: Idx(raw: 3), treasury: .zero, taxBase: .zero, taxRate: .zero)),
+            IssuedCommand(day: start.adding(days: 3), issuer: .event, sequence: 2, command: .succeedGovernment(government: g)),
         ]
         var w = ByteWriter()
         for c in all { c.write(to: &w) }

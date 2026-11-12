@@ -46,8 +46,8 @@ since the fix round also locally in the CI's own image (docker).
     `addTask` and `async let` outside it: the engine's card;
   - `USDn` never redenominates (a dollar hyperinflation has no rule): the ledger's card;
   - a check that no simulation code walks a `Set` or a `Dictionary` (their order differs between runs and Swift
-    versions; a grep cannot see a walk, so it is a lint over the engine's sources): the engine's card, before M1a
-    ends;
+    versions; a grep cannot see a walk, so it is a lint over the engine's sources): T-041's CI, before M1a ends (placed
+    by T-039, which carries the other «engine's card» items above with their places);
   - a bench counter and costs measured on a phone (they need the engine's loops).
 
 ## Acceptance criteria

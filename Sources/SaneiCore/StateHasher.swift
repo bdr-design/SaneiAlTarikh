@@ -14,7 +14,8 @@ public struct StateHasher: Sendable {
     /// function. Every bit of a value reaches every bit of the state, so states that differ by a sign, by a top bit
     /// (a flag in a packed word) or by the order of two values hash apart. A plain multiply per value did not do that:
     /// a bit only moved up, and two changes of a top bit cancelled. The step keeps a state of 0 from staying 0 when
-    /// zeros follow (the mix takes 0 to 0), so an empty column or a `false` always moves the hash.
+    /// zeros follow (the mix takes 0 to 0), so a state of 0 no longer swallows an empty column or a `false`. Never
+    /// mix a hasher's own value back into it: `h.combine(h.value)` sends every state to one constant.
     @inlinable
     public mutating func combine(_ v: UInt64) {
         state = DetRNG.mix((state ^ v) &+ DetRNG.gamma)

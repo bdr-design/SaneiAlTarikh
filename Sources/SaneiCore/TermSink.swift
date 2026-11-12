@@ -184,7 +184,7 @@ public struct TermBuffer12<Value: TermValue>: TermSink, Sendable {
 
     @inlinable
     public mutating func base(_ id: TermID, _ value: Value) {
-        assert(id != .other, "65,535 is «أخرى»'s number: no term uses it")
+        precondition(id != .other, "65,535 is «أخرى»'s number: no term uses it")
         if used == 0 {
             sum = sum + value
             set(0, id: id.raw, raw: value.raw)
@@ -197,7 +197,7 @@ public struct TermBuffer12<Value: TermValue>: TermSink, Sendable {
 
     @inlinable
     public mutating func add(_ id: TermID, _ value: Value) {
-        assert(id != .other, "65,535 is «أخرى»'s number: no term uses it")
+        precondition(id != .other, "65,535 is «أخرى»'s number: no term uses it")
         sum = sum + value
         let raw = value.raw
         if raw == 0 { return }

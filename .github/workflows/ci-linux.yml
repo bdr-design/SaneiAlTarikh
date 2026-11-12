@@ -55,13 +55,22 @@ jobs:
           # generator and its range mappings, and hash values, which are seeded per process. Comments left out.
           # (`DetRNG.shuffle(&items)` is the project's own deterministic shuffle: only the standard library's shapes,
           # `.shuffle()` and `.shuffle(using:)`, are banned)
-          rnd='\.(random|randomElement|shuffled)\(|\.shuffle\((\)|using:)|\bSystemRandomNumberGenerator\b|\bhashValue\b|\bHasher\('
+          # (a space before or inside the parenthesis, or `using:` on the next line, is still caught)
+          rnd='\.(random|randomElement|shuffled)\s*\(|\.shuffle\s*\(\s*([^&[:space:]]|$)|\bSystemRandomNumberGenerator\b|\bhashValue\b|\bHasher\s*\('
           found=0
           for f in $(find $SIM -name '*.swift'); do
             out=$(sed -E 's://.*$::' "$f" | grep -nE "$rnd" || true)
             if [ -n "$out" ]; then echo "$out" | sed "s|^|$f:|"; found=1; fi
           done
           if [ "$found" = 1 ]; then echo "The simulation draws only from DetRNG and never reads a hash value (ADR 0002)"; exit 1; fi
+          # money is never rebuilt from another unit's raw value outside SaneiCore (ADR 0003): `LCU(raw: dollars.raw)`
+          xu='\b(LCU|USDn|Money)\(raw:\s*[A-Za-z_][A-Za-z0-9_.]*\.raw\s*\)'
+          found=0
+          for f in $(find Sources/SaneiEngine -name '*.swift'); do
+            out=$(sed -E 's://.*$::' "$f" | grep -nE "$xu" || true)
+            if [ -n "$out" ]; then echo "$out" | sed "s|^|$f:|"; found=1; fi
+          done
+          if [ "$found" = 1 ]; then echo "An amount changes unit only through the ledger's exchange at a rate (ADR 0003)"; exit 1; fi
           # the app's platform and render code never reach into the engine (§2.2: only App/App and App/UI hold it)
           eng=""
           for f in $(find App/Sources/Platform App/Sources/MapRenderer -name '*.swift'); do
@@ -72,6 +81,9 @@ jobs:
         run: swift build -Xswiftc -warnings-as-errors
       - name: Test
         run: swift test -Xswiftc -warnings-as-errors
+      # the units kept apart by type (ADR 0003): wrong-unit postings must not compile
+      - name: Units refused by the compiler
+        run: tools/checks/units/check.sh .build/debug
       # the app ships optimised: an unchecked read, a different inlining or a removed check shows only in this build
       - name: Build optimised (warnings as errors)
         run: swift build -c release -Xswiftc -warnings-as-errors

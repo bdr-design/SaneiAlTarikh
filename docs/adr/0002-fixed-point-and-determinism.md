@@ -45,6 +45,8 @@ how a clamp is counted, where the tables come from or how a random draw is mappe
      from another thread (a reviewer saw counts lost). Inside the long scope, the only tasks started are a parallel
      burst's children, each counting its own clamps (`counted` around its whole body), and only through the engine's
      one burst helper; a CI ban on `Task {`, `addTask` and `async let` elsewhere in the engine comes with it.
+   - No scope is opened in the body of a task group (`withTaskGroup { … }`), where the parent merges its children:
+     the runtimes before Swift 6, iOS 17's among them, stop the program there. A child opens its own.
    - Not counted, by decision: `exp2` of a logarithm below -33 is 0 (a level that small is 0 to a `Q32`).
    - Atomics are not used: the standard library's need iOS 18, and the app supports iOS 17.
 4. **Division by zero is a counted clamp:** 0 ÷ 0 = 0; anything else is the end of the range on the dividend's side.

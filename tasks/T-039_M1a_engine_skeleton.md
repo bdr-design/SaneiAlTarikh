@@ -16,7 +16,8 @@ the hash unchanged), L3 (caps: 384 governments and polities), ADR 0001 (the host
 - `Sources/SaneiEngine`: `WorldState` (the world row, polities, governments, provinces as dense column tables with
   caps; each government's scheduling columns `monthlySlot`, `lastMonthlyRun`, `lastYearlyRun`, `aiNextStrategic`; a
   thin fiscal set: treasury, tax rate, tax base), `Pipeline` (one day in §2.4's order: commands sorted by (day,
-  issuerRank, sequence); the calendar hooks; the monthly slot; the yearly run in the January slot; the strategic
+  issuerRank, sequence), refined by the reviews to (day, rank, the issuer's serial, sequence) so two issuers of one
+  rank never tie, and kept in that order as they are submitted; the calendar hooks; the monthly slot; the yearly run in the January slot; the strategic
   stagger), the slot rule for a new government, `Command` (an enum, a stable `UInt16` tag per case, `validate`,
   `apply`, a column-codec form), the state hash over every column, and two thin systems on the monthly slot (taxes into
   the treasury; a counter of runs).
@@ -30,9 +31,21 @@ the hash unchanged), L3 (caps: 384 governments and polities), ADR 0001 (the host
   save container, T-041); parallel monthly slots (with the burst helper). Named by the reviews and placed: content
   IDs, dormant polities and ending a polity, and starting slots spread evenly across the 28 (T-042); tagged codec
   fields with lengths so that a reader can skip an unknown field, and whether a held copy keeps the cap's room (T-041);
-  the strategic period set by difficulty and its feasibility for the expert level (§5.10's card); this month's flows
-  initialised pro rata for a government made mid-month (M2, with the daily ledger); a date on the observer's steps
-  (with the history step, M1b).
+  the strategic period set by difficulty (the difficulty settings, M7; its feasibility answered by the owner's proxy on
+  2026-11-12: 15 a day on every level, the period a target, §5.10 corrected); this month's flows initialised pro rata
+  for a government made mid-month (M2, with the daily ledger); a date on the observer's steps (with the history step,
+  M1b); the host holding a day until every AI result due on it has been submitted, so a late result never splits two
+  phones' games (T-041, with `GameHost`); a government made by step 10's conditional events given its slot from
+  tomorrow on (with the conditional events, M1b); the record of which order was refused and why, for screen 26 (the
+  notification ring, M1b); the lifecycle effects beyond succession and dissolution: independence, unification,
+  recognition, annexation (§2.4's `Annex`, giving provinces to another polity), an effect that gives provinces held by
+  nobody, and polities made after the start (T-042).
+  Carried from T-036 («the engine's card») and placed: the registry of random streams and the packing of a fog-of-war
+  key (the first system that draws, M1b's events); the one burst helper with its per-child counters from a pool and
+  the CI ban on `Task {`, `addTask` and `async let` outside it (with parallel monthly slots, M2); the test that every
+  entry point binds a counter scope (T-041, when `GameHost` runs this simulation); a lint that no simulation code walks
+  a `Set` or a `Dictionary` (T-041's CI, before M1a ends). `GameDate.civil` once per day is done: the day computes it
+  once.
 
 ## Acceptance criteria
 1. `ci-linux` green, debug and optimised; the reference checks.
