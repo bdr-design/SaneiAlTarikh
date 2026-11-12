@@ -9,7 +9,7 @@ import SaneiCore
 /// The steps of a day that a test can watch (`Simulation.observe`).
 public enum DayStep: Sendable, Equatable {
     case commands
-    case monthStart, quarterStart, yearStart
+    case monthStart, quarterStart, yearStart, monthClose
     case monthly(GovRef)
     case yearly(GovRef)
     case strategic(GovRef)
@@ -76,6 +76,10 @@ public struct Simulation: Sendable {
                 state.world.yearStarts &+= 1
                 observe?(.yearStart)
             }
+            // the monthly close, after the world market and the transport payout (they settle through the world
+            // account): the invariants are checked and the next month opens
+            if !state.closeMonth().isEmpty { state.world.ledgerFailures &+= 1 }
+            observe?(.monthClose)
         }
 
         // 3 to 9: dated events, diplomacy, fronts, movement, combat, espionage, construction, the daily ledger (to come)
@@ -130,9 +134,8 @@ public struct Simulation: Sendable {
 
     /// The monthly systems of one government (thin: taxes into the treasury, and a count).
     mutating func monthly(_ i: Int) {
-        // read into locals first: a copy of the table held across a write would make the write copy the column
         let revenue = state.governments.taxBase[i].times(state.governments.taxRate[i])
-        state.governments.treasury[i] += revenue
+        state.post(state.governments.ref(i), .treasury, .tax, revenue)
         state.governments.monthlyRuns[i] &+= 1
     }
 

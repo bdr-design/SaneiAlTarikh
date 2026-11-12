@@ -21,6 +21,8 @@ public struct WorldRow: Sendable, Equatable {
     public var monthStarts: UInt32
     public var quarterStarts: UInt32
     public var yearStarts: UInt32
+    /// Monthly closes at which the ledger's invariants did not hold (0 in every game; §8 checks it).
+    public var ledgerFailures: UInt32
 
     public init(date: GameDate, seed: UInt64) {
         self.date = date
@@ -28,6 +30,7 @@ public struct WorldRow: Sendable, Equatable {
         monthStarts = 0
         quarterStarts = 0
         yearStarts = 0
+        ledgerFailures = 0
     }
 }
 
@@ -94,8 +97,7 @@ public struct GovernmentTable: Sendable, Equatable {
     /// The year of the last yearly run.
     public internal(set) var lastYearlyRun: [Int32]
     public internal(set) var aiNextStrategic: [GameDate]
-    // a thin fiscal set (the ledger and the 9 budget lines come with T-040 and M2)
-    public internal(set) var treasury: [LCU]
+    // a thin fiscal set (the balances live in the ledger; the 9 budget lines come with M2)
     public internal(set) var taxRate: [BP]
     /// What a month's taxes are levied on, in the government's currency.
     public internal(set) var taxBase: [LCU]
@@ -113,7 +115,6 @@ public struct GovernmentTable: Sendable, Equatable {
         lastMonthlyRun = []
         lastYearlyRun = []
         aiNextStrategic = []
-        treasury = []
         taxRate = []
         taxBase = []
         monthlyRuns = []
@@ -128,7 +129,6 @@ public struct GovernmentTable: Sendable, Equatable {
         lastMonthlyRun.reserveCapacity(n)
         lastYearlyRun.reserveCapacity(n)
         aiNextStrategic.reserveCapacity(n)
-        treasury.reserveCapacity(n)
         taxRate.reserveCapacity(n)
         taxBase.reserveCapacity(n)
         monthlyRuns.reserveCapacity(n)
@@ -174,7 +174,7 @@ public struct GovernmentTable: Sendable, Equatable {
     }
 
     /// Makes a government in the first free row; nil at the cap (every row live) or when the serials have run out.
-    mutating func create(polity p: Idx<PolityKind>, on date: GameDate, treasury t: LCU, taxBase b: LCU, taxRate r: BP,
+    mutating func create(polity p: Idx<PolityKind>, on date: GameDate, taxBase b: LCU, taxRate r: BP,
                          strategicPeriod: Int) -> GovRef? {
         var row = -1
         for i in 0..<exists.count where !exists[i] { row = i; break }
@@ -191,12 +191,12 @@ public struct GovernmentTable: Sendable, Equatable {
         if row == exists.count {
             exists.append(true); serial.append(s); polity.append(p); monthlySlot.append(slot)
             lastMonthlyRun.append(nextMonth ? month : Self.never); lastYearlyRun.append(Self.never)
-            aiNextStrategic.append(firstLook); treasury.append(t); taxRate.append(r); taxBase.append(b)
+            aiNextStrategic.append(firstLook); taxRate.append(r); taxBase.append(b)
             monthlyRuns.append(0); yearlyRuns.append(0); strategicRuns.append(0)
         } else {
             exists[row] = true; serial[row] = s; polity[row] = p; monthlySlot[row] = slot
             lastMonthlyRun[row] = nextMonth ? month : Self.never; lastYearlyRun[row] = Self.never
-            aiNextStrategic[row] = firstLook; treasury[row] = t; taxRate[row] = r; taxBase[row] = b
+            aiNextStrategic[row] = firstLook; taxRate[row] = r; taxBase[row] = b
             monthlyRuns[row] = 0; yearlyRuns[row] = 0; strategicRuns[row] = 0
         }
         return ref(row)
@@ -243,6 +243,8 @@ public struct WorldState: Sendable, Equatable {
     public internal(set) var polities: PolityTable
     public internal(set) var governments: GovernmentTable
     public internal(set) var provinces: ProvinceTable
+    public internal(set) var currencies: CurrencyTable
+    public internal(set) var ledger: LedgerTable
     /// The game's count of clamped results lives with the host, not here: it is not state that a save restores.
 
     public init(start: GameDate, seed: UInt64) {
@@ -250,10 +252,29 @@ public struct WorldState: Sendable, Equatable {
         polities = PolityTable()
         governments = GovernmentTable()
         provinces = ProvinceTable()
+        currencies = CurrencyTable()
+        ledger = LedgerTable()
     }
 
-    /// Adds a polity (a scenario's set-up; at runtime, a lifecycle command).
-    public mutating func addPolity() -> Idx<PolityKind>? { polities.add() }
+    /// Adds a polity, with its currency (a scenario's set-up; at runtime, a lifecycle command). A polity's row is
+    /// never reused, so its currency's row is its own: both tables have the same cap.
+    public mutating func addPolity() -> Idx<PolityKind>? {
+        guard polities.count < PolityTable.capacity, currencies.count < CurrencyTable.capacity, let p = polities.add() else { return nil }
+        _ = currencies.add(scaleExponent: 0, rate: .zero)
+        return p
+    }
+
+    /// The currency a polity's governments use (currency unions come with M2).
+    public func currency(of p: Idx<PolityKind>) -> Idx<CurrencyKind> { Idx(raw: p.raw) }
+
+    /// Makes a government for a polity, with its accounts open: the treasury starts at `treasury`, the rest at 0.
+    mutating func createGovernment(polity p: Idx<PolityKind>, treasury: LCU, taxBase: LCU, taxRate: BP, strategicPeriod: Int) -> GovRef? {
+        guard let g = governments.create(polity: p, on: world.date, taxBase: taxBase, taxRate: taxRate, strategicPeriod: strategicPeriod) else {
+            return nil
+        }
+        ledger.open(row: g.row.int, currency: currency(of: p), treasury: treasury)
+        return g
+    }
 
     /// Adds a province (a scenario's set-up).
     public mutating func addProvince(sovereign s: Idx<PolityKind>, administrator a: GovRef, population p: Pop32) -> Idx<ProvinceKind>? {
@@ -269,6 +290,7 @@ public struct WorldState: Sendable, Equatable {
         h.combine(world.monthStarts)
         h.combine(world.quarterStarts)
         h.combine(world.yearStarts)
+        h.combine(world.ledgerFailures)
         let p = polities
         h.combine(UInt64(p.count))
         for i in 0..<p.count {
@@ -286,7 +308,6 @@ public struct WorldState: Sendable, Equatable {
             h.combine(g.lastMonthlyRun[i])
             h.combine(g.lastYearlyRun[i])
             h.combine(Int64(g.aiNextStrategic[i].days))
-            h.combine(g.treasury[i].raw)
             h.combine(g.taxRate[i].raw)
             h.combine(g.taxBase[i].raw)
             h.combine(g.monthlyRuns[i])
@@ -301,6 +322,30 @@ public struct WorldState: Sendable, Equatable {
             h.combine(v.administrator[i].raw)
             h.combine(v.population[i].raw)
         }
+        let c = currencies
+        h.combine(UInt64(c.count))
+        for i in 0..<c.count {
+            h.combine(c.scaleExponent[i])
+            h.combine(c.rate[i].raw)
+            h.combine(c.priceIndex[i].raw)
+            h.combine(c.redenominations[i])
+        }
+        let l = ledger
+        h.combine(UInt64(l.currency.count))
+        for i in 0..<l.currency.count {
+            h.combine(l.currency[i].raw)
+            h.combine(l.reserves[i].raw)
+            h.combine(l.reservesOpening[i].raw)
+            h.combine(l.reservesPosted[i].raw)
+        }
+        for i in 0..<l.local.count {
+            h.combine(l.local[i].raw)
+            h.combine(l.localOpening[i].raw)
+            h.combine(l.localPosted[i].raw)
+        }
+        h.combine(l.world.raw)
+        h.combine(l.worldOpening.raw)
+        h.combine(l.worldPosted.raw)
         return h.value
     }
 }

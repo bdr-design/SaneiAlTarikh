@@ -45,8 +45,8 @@ public enum Command: Sendable, Equatable {
         case let .setTaxRate(g, rate):
             state.governments.taxRate[g.row.int] = rate
         case let .createGovernment(p, treasury, taxBase, rate):
-            return state.governments.create(polity: p, on: state.world.date, treasury: treasury, taxBase: taxBase,
-                                            taxRate: rate, strategicPeriod: strategicPeriod) != nil
+            return state.createGovernment(polity: p, treasury: treasury, taxBase: taxBase, taxRate: rate,
+                                          strategicPeriod: strategicPeriod) != nil
         case let .dissolveGovernment(g):
             state.governments.dissolve(g)
         }

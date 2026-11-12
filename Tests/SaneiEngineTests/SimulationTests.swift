@@ -242,7 +242,9 @@ final class SimulationTests: XCTestCase {
         var sim = world(1)
         sim.advance(days: 365)
         // 12 months of 20% of 10,000
-        XCTAssertEqual(sim.state.governments.treasury[0], LCU(raw: 1_000 + 12 * 2_000))
+        XCTAssertEqual(sim.state.ledger.balance(0, .treasury), LCU(raw: 1_000 + 12 * 2_000))
+        XCTAssertTrue(sim.state.ledgerViolations().isEmpty)
+        XCTAssertEqual(sim.state.world.ledgerFailures, 0)
         XCTAssertEqual(sim.state.governments.monthlyRuns[0], 12)
         XCTAssertEqual(sim.state.world.monthStarts, 12)
         XCTAssertEqual(sim.state.world.quarterStarts, 4)
@@ -262,12 +264,13 @@ final class SimulationTests: XCTestCase {
             case .monthStart: return "month"
             case .quarterStart: return "quarter"
             case .yearStart: return "year"
+            case .monthClose: return "close"
             case .monthly: return "monthly"
             case .yearly: return "yearly"
             case .strategic: return "strategic"
             }
         }
-        XCTAssertEqual(Array(kinds.prefix(4)), ["commands", "month", "quarter", "year"])
+        XCTAssertEqual(Array(kinds.prefix(5)), ["commands", "month", "quarter", "year", "close"])
         XCTAssertTrue(kinds.contains("monthly"), "the government made today ran in today's slot")
     }
 }
