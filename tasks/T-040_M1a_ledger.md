@@ -24,9 +24,9 @@ postings, the redenomination trigger on aggregates, `USDn` never redenominating.
   invariants as a check that names what failed.
 - The skeleton's thin taxes post through the ledger.
 - `docs/adr/0003-currencies-and-the-ledger.md` (the design's ADR 0019, numbered in this repository's sequence).
-- Tests: conservation over random postings; the world account 0 after closes with trade settled through it; an FX
-  pair conserves value at the rate; a redenomination keeps every invariant; `Money` and the other units cannot be
-  posted to the wrong account (by type).
+- Tests: conservation over random postings; the world account 0 after closes with trade settled through it; an FX pair
+  conserves value at the rate; a redenomination keeps every invariant; `Money` and the other units cannot be posted to
+  the wrong account (by type).
 - Out of scope, each with its place: the economy's flows (M2), debt by currency bucket and the revaluation of debt and
   reserves (M2, with debt), currency unions and pegs (M2), the money base's growth (M2), cheats (M8's settings; the
   category is reserved now). Named by the reviews and placed: the sums per posting category and their «لماذا؟» (M2,
@@ -34,12 +34,12 @@ postings, the redenomination trigger on aggregates, `USDn` never redenominating.
   through and money-base growth taking a redenomination step out (M2); the trigger on aggregates (a budget's lines,
   nominal output, a union's money base: M2, with them); the day-1 closure checked in LCU and in USD and §8's `--t0`
   closure (T-042, with the baked start); the ledger's invariants after every day in debug and test builds (T-044, with
-  the invariant checker the host runs); the daily ledger step, step 9 (M2); a typed LCU ↔ USDn conversion that does not
-  post (trade prices and the display of D-6: M2, with the world market); an exchange set by its dollar side (M2, with
-  trade settlement); the posting outboxes of the parallel monthly slots (M2, with the burst helper); how a dissolved
-  state's money and debts are shared out (T-042, with the lifecycle effects and the stub packs); a command carrying
-  LCU worked out on an older view stamped with its currency's scale and rescaled or refused when applied (M2, with the
-  AI's budget commands); the redenomination's change routed through the per-category sums (M2, with them).
+  the invariant checker the host runs); the daily ledger step, step 9 (M2); a typed LCU ↔ USDn conversion that does
+  not post (trade prices and the display of D-6: M2, with the world market); an exchange set by its dollar side (M2,
+  with trade settlement); the posting outboxes of the parallel monthly slots (M2, with the burst helper); how a
+  dissolved state's money and debts are shared out (T-042, with the lifecycle effects and the stub packs); a command
+  carrying LCU worked out on an older view stamped with its currency's scale and rescaled or refused when applied (M2,
+  with the AI's budget commands); the redenomination's change routed through the per-category sums (M2, with them).
 
 ## Acceptance criteria
 1. `ci-linux` green, debug and optimised.

@@ -97,7 +97,7 @@ public struct Simulation: Sendable {
         if let g = c.issuer.government, !state.governments.wasMade(g) { return .invalid }
         // the player's and the AI's commands name only governments the game made (an event may name one an earlier
         // command will make, by the serial the counter will give)
-        if c.issuer != .event, !c.command.governments.allSatisfy(state.governments.wasMade) { return .invalid }
+        if c.issuer != .event, !c.command.namesOnly({ state.governments.wasMade($0) }) { return .invalid }
         // the place in order, by halving (the queue is always in order); a command with the same key would sit there
         var lo = 0, hi = state.pending.count
         while lo < hi {

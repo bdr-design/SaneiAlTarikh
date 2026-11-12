@@ -518,7 +518,7 @@ final class SaveTests: XCTestCase {
             "PostingCategory": PostingCategory.allCases.map { UInt64($0.rawValue) },
             "LocalAccount": LocalAccount.allCases.map { UInt64($0.rawValue) },
             "SaveType": SaveType.allCases.map { UInt64($0.rawValue) },
-            "ColumnEncoding": [ColumnEncoding.raw, .varintDelta, .zigzag].map { UInt64($0.rawValue) },
+            "ColumnEncoding": ColumnEncoding.allCases.map { UInt64($0.rawValue) },
             "Compression": SaveCompression.allCases.map { UInt64($0.rawValue) },
         ]
         for (group, numbers) in code.sorted(by: { $0.key < $1.key }) {
@@ -529,6 +529,9 @@ final class SaveTests: XCTestCase {
             XCTAssertEqual(locked[group]?.max(), current, "\(group): the current version is the highest locked")
         }
         XCTAssertEqual(Set(locked.keys), Set(code.keys).union(["Container", "Format"]))
+        for (group, numbers) in locked.sorted(by: { $0.key < $1.key }) {
+            XCTAssertEqual(Set(numbers).count, numbers.count, "tags.lock repeats a number in \(group)")
+        }
         // the loader knows every kind, and every kind's tag is its own
         XCTAssertEqual(Command.knownTags, CommandKind.allCases.map { $0.rawValue })
         XCTAssertEqual(Command.setTaxRate(government: g, rate: .zero).tag, 1)

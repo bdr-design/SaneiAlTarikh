@@ -46,8 +46,8 @@ since the fix round also locally in the CI's own image (docker).
     `addTask` and `async let` outside it: the engine's card;
   - `USDn` never redenominates (a dollar hyperinflation has no rule): the ledger's card;
   - a check that no simulation code walks a `Set` or a `Dictionary` (their order differs between runs and Swift
-    versions; a grep cannot see a walk, so it is a lint over the engine's sources): T-044's CI, before M1a ends (placed
-    by T-039, which carries the other «engine's card» items above with their places);
+    versions; a grep cannot see a walk, so it is a lint over the engine's sources): T-044's CI, before M1a ends
+    (placed by T-039, which carries the other «engine's card» items above with their places);
   - a bench counter and costs measured on a phone (they need the engine's loops).
 
 ## Acceptance criteria
@@ -55,11 +55,10 @@ since the fix round also locally in the CI's own image (docker).
 2. The Swift results equal the reference's on every row, and every row counts the clamps the reference counted for it.
 3. Asserted in the reference against 60-digit decimals: `exp2` within 6e-8, relative, from the level 1 up (below 1,
    6e-8 plus one step of 2^-32); `scale` within 6e-8 of the true product plus one unit, at any size; `log2` within
-   2e-7, absolute;
-   the round trip within 2e-7 from 1 up; `logistic` within 2e-8; whole powers of two exact both ways; `exp2` and `log2`
-   never out of order. §2.3 asks for 1e-6.
-4. No operation wraps or traps by design: a result outside its range is clamped and counted. The rows hold the ends
-   of each operand's range; the first errors review compared 86 million random cases with the reference, and the
+   2e-7, absolute; the round trip within 2e-7 from 1 up; `logistic` within 2e-8; whole powers of two exact both ways;
+   `exp2` and `log2` never out of order. §2.3 asks for 1e-6.
+4. No operation wraps or traps by design: a result outside its range is clamped and counted. The rows hold the ends of
+   each operand's range; the first errors review compared 86 million random cases with the reference, and the
    verification after the fix round 11.4 million more in both builds, and 1.85 billion calendar steps, without a
    difference or a trap. No shared mutable global.
 5. `SaneiCore` imports nothing and has no floating point; CI scans for both.
@@ -75,20 +74,20 @@ type checker finds slow. Each is fixed at its cause.
 First version: 5494421 and 219e1b2 (`ci-linux` green). Six reviews (design and game, concurrency and determinism,
 heaviness, API and words, errors, checker) then found, and this round fixed:
 - **A fault in the random numbers (must).** The seed and the key were added before mixing, so (seed + 1, day - 1)
-  rolled what (seed, day) rolls. Now each coordinate is mixed in on its own; rows with neighbouring seeds and a test of
-  40 seeds on 40 days lock it.
+  rolled what (seed, day) rolls. Now each coordinate is mixed in on its own; rows with neighbouring seeds and a test
+  of 40 seeds on 40 days lock it.
 - **A trap in the calendar.** `adding(months:)` overflowed for dates a save could hold (before year 0). The month now
   comes from a remainder that cannot overflow; rows and a test from the first and last day an Int32 holds.
 - **The counter's rule was not enforced.** `SaturationCounter` is no longer `Sendable`; the binding is internal; a
   form that hands the count back (`counted`) serves the children of a burst. Tests inside tasks.
-- **Words that said more than the code:** the bounds (`exp2` from 1 up; `scale` and `times(LogQ)` not exactly
-  rounded, not reversible; `sqrt` rounds down), what clamps and what divides by zero, one `LCU` type for every
-  currency, `Money` not postable by type alone.
+- **Words that said more than the code:** the bounds (`exp2` from 1 up; `scale` and `times(LogQ)` not exactly rounded,
+  not reversible; `sqrt` rounds down), what clamps and what divides by zero, one `LCU` type for every currency,
+  `Money` not postable by type alone.
 - **The checker:** 16 holes closed. Every row now carries its own clamp count, and is checked against an independent
   truth where one exists (the random-number rows are their own definitions); 34 families against 24 (negation, BP
-  arithmetic one operation each, date steps, month facts, chances,
-  constant dollars); the four untested regions of `scale`; dropped carries and ties pinned; each family its own random
-  stream; the reference fails when the tests skip a family.
+  arithmetic one operation each, date steps, month facts, chances, constant dollars); the four untested regions of
+  `scale`; dropped carries and ties pinned; each family its own random stream; the reference fails when the tests skip
+  a family.
 - **Cost:** a division whose dividend fits in 64 bits is one hardware division; `==` is inlinable; CI builds and tests
   the optimised build; the perf line says what is estimated and what allocates.
 - **Gates:** `SaneiCore` is scanned for floating point; the simulation's sources for the standard library's randomness

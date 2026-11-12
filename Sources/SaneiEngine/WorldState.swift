@@ -31,7 +31,8 @@ public struct WorldRow: Sendable, Equatable {
     /// dollar leg comes to 0 or would pass the range. Money never vanishes silently and never clamps: each refusal is
     /// counted here.
     public internal(set) var refusedPostings: UInt32
-    /// Commands of the AI and events refused when submitted (late, full, a key taken, unwritable, an issuer never made;
+    /// Commands of the AI and events refused when submitted (late, full, a key taken, unwritable, an issuer never made, a
+    /// player's or AI's command naming a government never made;
     /// one whose government ended is refused on its day, in `refusedCommands`): kept in the state so no effect is
     /// dropped without a trace. The player's refusals are shown to the player.
     public internal(set) var refusedSubmits: UInt32
@@ -327,8 +328,8 @@ public struct WorldState: Sendable, Equatable {
     public func currency(of p: Idx<PolityKind>) -> Idx<CurrencyKind> { Idx(raw: p.raw) }
 
     /// Makes a government for a polity, with its accounts open: the treasury starts at `treasury`, the rest at 0.
-    /// Nil past 2^60 for the treasury or the tax base (the command's rule, here too for the scenario's set-up), or a
-    /// rate outside 0 to 100%.
+    /// Nil for a treasury or a tax base below 0 or past 2^60 (the command's rule, here too for the scenario's set-up),
+    /// or a rate outside 0 to 100%.
     mutating func createGovernment(polity p: Idx<PolityKind>, treasury: LCU, taxBase: LCU, taxRate: BP, strategicPeriod: Int) -> GovRef? {
         guard treasury >= .zero, taxBase >= .zero, !treasury.needsRedenomination, !taxBase.needsRedenomination, taxRate >= .zero,
               taxRate <= .one else { return nil }

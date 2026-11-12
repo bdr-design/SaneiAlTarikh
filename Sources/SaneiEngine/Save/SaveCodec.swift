@@ -23,8 +23,9 @@ extension SaveMeta {
 /// A game's save file: writing and reading it.
 public enum SaveCodec {
     /// The file's bytes. The format, the date and the seed in META are the state's, whatever `meta` says, and a player's
-    /// government the state never made is left out: every file this writes reads back. Make the bytes on the I/O
-    /// thread from a copy of the state (a copy is free until a column is written): never on the simulation's (§3.5).
+    /// government the state never made is left out, so every file this writes from a state between days reads back. Make the bytes on the I/O
+    /// thread (`sanei.io`, ADR 0001, `threadSpread`) from a copy of the state (a copy is free until a column is written):
+    /// never on the simulation's (§3.5).
     /// A save is taken between days, as the host does: then every redenomination mark is cleared (a state posted to
     /// outside a day and not stepped since may hold one, and its save is refused).
     public static func write(_ state: WorldState, meta: SaveMeta, compressor: (any SaveCompressor)? = nil) -> [UInt8] {
@@ -33,8 +34,7 @@ public enum SaveCodec {
         m.date = state.world.date.days
         m.seed = state.world.seed
         // a player's government the state never made is left out, so the file reads back
-        if let p = m.playerGovernment, !(p.row.int < state.governments.rows && state.governments.counter.hasGiven(p.serial)
-                                         && p.serial.raw <= state.governments.serial[p.row.int].raw) { m.playerGovernment = nil }
+        if let p = m.playerGovernment, !state.governments.wasMade(p) { m.playerGovernment = nil }
         if m.playerSerial == 0 { m.playerRow = 0 }
         return SaveFile.write(meta: m, payload: state.saveTree().write(), compressor: compressor)
     }
@@ -57,10 +57,7 @@ public enum SaveCodec {
         guard let state = WorldState.load(tree, report: &report), state.world.date.days == opened.meta.date,
               state.world.seed == opened.meta.seed else { return .failure(.badState) }
         // the player's government, when there is one, is one the game made
-        if let p = opened.meta.playerGovernment {
-            guard p.row.int < state.governments.rows, state.governments.counter.hasGiven(p.serial),
-                  p.serial.raw <= state.governments.serial[p.row.int].raw else { return .failure(.badMeta) }
-        }
+        if let p = opened.meta.playerGovernment, !state.governments.wasMade(p) { return .failure(.badMeta) }
         return .success((state, opened.meta, report))
     }
 }

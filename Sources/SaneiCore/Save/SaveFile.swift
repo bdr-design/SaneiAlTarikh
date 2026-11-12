@@ -155,9 +155,12 @@ public enum SaveFile {
     public static let magic: [UInt8] = Array("SANEISAV".utf8)
     public static let containerVersion: UInt16 = 1
     /// The most bytes a payload may hold, raw and stored: §3.5's 8 MB raw for a save, with half again as margin. A file
-    /// past it is refused before it is hashed, and a decompressor is asked for no more, so a load's peak stays within
-    /// §7's footprint plus 16 MB whatever the file says.
+    /// past it is refused before it is hashed, and a decompressor is asked for no more; with `mostCompressedBytes`, a
+    /// load's peak stays within §7's footprint plus 16 MB whatever the file says.
     public static let mostPayloadBytes = 12 << 20
+    /// The most stored bytes of a compressed payload: §3.5's 2 MB compressed for a save, twice over, so the stored and
+    /// the raw bytes of a compressed file together stay within §7's footprint plus 16 MB.
+    public static let mostCompressedBytes = 4 << 20
     public static let mostMetaBytes = 1 << 16
     static let headerBytes = 8 + 2 + 1 + 1 + 4
 
@@ -260,6 +263,7 @@ public enum SaveFile {
             guard rawLength == storedLength else { return .failure(.badPayload) }
             return .success((meta.meta, meta.report, bytes, r.offset..<body))
         }
+        guard storedLength <= UInt64(mostCompressedBytes) else { return .failure(.badPayload) }
         guard let d = decompressor, d.compression.rawValue == h.compression else { return .failure(.compressionUnavailable(h.compression)) }
         guard let raw = d.decompress(bytes[r.offset..<body], rawLength: Int(rawLength)), raw.count == Int(rawLength) else { return .failure(.badPayload) }
         return .success((meta.meta, meta.report, raw, 0..<raw.count))

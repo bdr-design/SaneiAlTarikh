@@ -52,16 +52,16 @@ equal hashes; Linux x86 equals macOS arm64; the `TermSink` equality test), R9. `
 2. **What a sheet keeps** (the owner's proxy, 2026-11-09, logged; the approved screen 17 and T-017 said it already):
    at most 12 rows; a term of exactly 0 takes no row; with more than 12 terms, 11 rows and one «أخرى»; the kept ones
    are the starting level (`base`, always first) and the largest by size, the lower `TermID` among equals, so what is
-   shown does not depend on the order the terms were added in. «أخرى» stays a row when its terms cancel to 0. The
-   list sink counts exactly the clamps the summing sink counts: «أخرى» clamps by itself, uncounted.
-3. **A handle is typed by its table's row.** `HandleTable<Formation>` gives and takes `Handle<Formation>` only; a
-   bare `Serial` is for the save. 0 is «no thing» (`absent`), named so and never given out. `SerialCounter` is the one
-   rule for every kind that needs serials, dense kinds included.
-4. **The state hash mixes each value through SplitMix64's output function.** A multiply per value (the FNV-1a step
-   on a whole word) let a bit move only upward: two changes of a top bit cancelled, and a swap of -1 and 1 was not
-   seen (four reviewers reproduced it). The hash runs in tests, debug builds and replays only.
-5. **A table is saved and loaded as columns** (`serials`, `rows`, the counter): in rising order they are taken as
-   they are; any other order is put right; an inconsistent save is refused.
+   shown does not depend on the order the terms were added in. «أخرى» stays a row when its terms cancel to 0. The list
+   sink counts exactly the clamps the summing sink counts: «أخرى» clamps by itself, uncounted.
+3. **A handle is typed by its table's row.** `HandleTable<Formation>` gives and takes `Handle<Formation>` only; a bare
+   `Serial` is for the save. 0 is «no thing» (`absent`), named so and never given out. `SerialCounter` is the one rule
+   for every kind that needs serials, dense kinds included.
+4. **The state hash mixes each value through SplitMix64's output function.** A multiply per value (the FNV-1a step on
+   a whole word) let a bit move only upward: two changes of a top bit cancelled, and a swap of -1 and 1 was not seen
+   (four reviewers reproduced it). The hash runs in tests, debug builds and replays only.
+5. **A table is saved and loaded as columns** (`serials`, `rows`, the counter): in rising order they are taken as they
+   are; any other order is put right; an inconsistent save is refused.
 6. **A column read takes the caller's limit** (its table's cap): the bytes alone do not bound the memory, because a
    varint can be one byte and its value eight.
 7. **Everything generic is `@inlinable` on `@frozen` types** (§2.2): measured from another module, the unspecialised
@@ -72,18 +72,18 @@ equal hashes; Linux x86 equals macOS arm64; the `TermSink` equality test), R9. `
 2. The codec writes exactly the reference's bytes for every vector and reads them back; a varint has one byte string
    per value (a longer form is refused at every length up to ten bytes).
 3. No read traps. A truncated column, a count above the caller's limit or above what the bytes could hold, a value
-   that does not fit the column's type and a varint in a longer form all return nil and leave the reader where it
-   was; random bytes either do that or read as a column that writes back to the same bytes. A read reserves its array
-   only after the count has passed both checks.
+   that does not fit the column's type and a varint in a longer form all return nil and leave the reader where it was;
+   random bytes either do that or read as a column that writes back to the same bytes. A read reserves its array only
+   after the count has passed both checks.
 4. `HandleTable`: rows always in serial order; an insert at the cap is refused and takes no serial; a removed handle
    is never found and its serial never given again, also after a save and a load; a table rebuilt from its saved
    columns in any order, with the counter, equals the original; an inconsistent save is refused; the room for the cap
    is kept across a snapshot.
 5. For any number of terms the list sink's total equals the summing sink's and counts the same clamps; a sheet never
    has more than 12 rows; while nothing clamps, its rows add up to the total exactly.
-6. The state hash is the same for the same numbers at any integer width, alone or in a column; it depends on order
-   and on column lengths; and it tells apart every state of the reference's three boxes and the pairs the first
-   version confused.
+6. The state hash is the same for the same numbers at any integer width, alone or in a column; it depends on order and
+   on column lengths; and it tells apart every state of the reference's three boxes and the pairs the first version
+   confused.
 7. Six independent read-only reviews; every confirmed finding fixed; verification reviews of the fixes.
 
 ## Test and risks
@@ -95,9 +95,9 @@ state, which nothing outside can set; a saved sheet is checked before it is take
 ## Outcome
 First version: 22200a3, 82e9507, ec3e2eb (`ci-linux` green). Six reviews (API and words, errors, design and saves,
 concurrency and safety, checker, heaviness) then found, and this round fixed:
-- **The state hash could not tell natural differences apart (must, four reviewers):** `[0, 0]` and
-  `[Int64.min, Int64.min]`, `[-1, 1, 0]` and `[1, -1, 0]`, a flag at the top bit set on a pair and on its mirror. A
-  new step; the reference asserts no collision on 40,401 + 6,561 + 22,500 states and on the pairs found.
+- **The state hash could not tell natural differences apart (must, four reviewers):** `[0, 0]` and `[Int64.min,
+  Int64.min]`, `[-1, 1, 0]` and `[1, -1, 0]`, a flag at the top bit set on a pair and on its mirror. A new step; the
+  reference asserts no collision on 40,401 + 6,561 + 22,500 states and on the pairs found.
 - **Nothing generic was inlinable (must, measured by the heaviness reviewer in the CI's image):** a walk 21 ns a row
   against 1.7, the raw codec 385 and 468 ns a value against 9 and 13, a 7.3 MB save about 350 ms to encode. Now
   `@frozen` and `@inlinable` throughout; measured again after the fix (`docs/perf.md`).

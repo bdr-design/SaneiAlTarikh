@@ -126,7 +126,7 @@ public struct ByteReader: Sendable {
 }
 
 /// How a column's values are written. The numbers are stored in files: never renumber one.
-public enum ColumnEncoding: UInt8, Sendable {
+public enum ColumnEncoding: UInt8, Sendable, CaseIterable {
     case raw = 0
     case varintDelta = 1
     case zigzag = 2

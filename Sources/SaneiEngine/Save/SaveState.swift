@@ -37,7 +37,7 @@ enum SaveDefaults {
         return a
     }()
 
-    /// The column's entry: nil when the engine does not write it; `.some(nil)` for a key.
+    /// The column's entry: nil when the engine does not write it; `.some(nil)` for a required column.
     static func entry(_ chunk: String, _ column: String) -> Int64?? {
         guard let e = all.first(where: { $0.chunk == chunk && $0.column == column }) else { return nil }
         return .some(e.value)
@@ -365,7 +365,7 @@ struct Loader {
         // own (an event may name a government an earlier command will make, by the serial the counter will give)
         func made(_ g: GovRef) -> Bool { s.governments.wasMade(g) }   // the rule submit asks
         for c in items {
-            let named = c.issuer == .event || c.command.governments.allSatisfy(made)
+            let named = c.issuer == .event || c.command.namesOnly(made)
             guard c.day >= date, c.command.isWritable, c.issuer.government.map(made) ?? true, named else { return nil }
             if let last = s.pending.last, !IssuedCommand.precedes(last, c) { return nil }
             switch c.issuer {
@@ -404,13 +404,13 @@ extension Command {
     /// The tags this version can read: every kind's.
     static let knownTags: [UInt16] = CommandKind.allCases.map { $0.rawValue }
 
-    /// Every government the command names.
-    var governments: [GovRef] {
+    /// True when every government the command names passes `test` (no allocation: a submit asks it).
+    func namesOnly(_ test: (GovRef) -> Bool) -> Bool {
         switch self {
-        case let .setTaxRate(g, _): return [g]
-        case .createGovernment: return []
-        case let .dissolveGovernment(g, to): return to.map { [g, $0] } ?? [g]
-        case let .succeedGovernment(g): return [g]
+        case let .setTaxRate(g, _): return test(g)
+        case .createGovernment: return true
+        case let .dissolveGovernment(g, to): return test(g) && (to.map(test) ?? true)
+        case let .succeedGovernment(g): return test(g)
         }
     }
 }
