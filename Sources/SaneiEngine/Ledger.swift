@@ -313,7 +313,8 @@ extension WorldState {
     mutating func exchange(_ g: GovRef, local amount: LCU) -> USDn? {
         guard governments.isLive(g), amount != .zero, amount.raw != .min else { world.refusedPostings &+= 1; return nil }
         let rate = currencies.rate[ledger.currency[g.row.int].int]
-        // a dollar leg past 2^62 is refused before it is worked out, so the scaling never clamps (nor counts a clamp)
+        // a dollar leg that could pass 2^62 (bounded from the sizes, so one from 2^61 may be refused) is refused before
+        // it is worked out, so the scaling never clamps (nor counts a clamp)
         let bits = Int64(64 - amount.raw.magnitude.leadingZeroBitCount)
         if bits + ((-rate).raw >> 32) + 1 > 62 { world.refusedPostings &+= 1; return nil }
         let value = (-rate).applied(to: amount.raw)
@@ -403,12 +404,22 @@ extension WorldState {
         return out
     }
 
+    /// True when every invariant holds: the same check as `ledgerViolations`, without building a message (the close and
+    /// the load ask only this; nothing is allocated).
+    public func ledgerHolds() -> Bool {
+        let l = ledger
+        for i in 0..<l.local.count where l.local[i] - l.localOpening[i] != l.localPosted[i] { return false }
+        for i in 0..<l.reserves.count where l.reserves[i] - l.reservesOpening[i] != l.reservesPosted[i] { return false }
+        let c = currencies
+        for i in 0..<c.count where c.moneyBase[i] - c.moneyBaseOpening[i] != c.moneyBasePosted[i] { return false }
+        return l.world - l.worldOpening == l.worldPosted
+    }
+
     /// Closes the month: checks the invariants (the world account must be exactly 0), then opens the next month at
-    /// the balances as they are. Returns what failed: empty when everything held. A world account left owed fails
-    /// every close until it is settled, so the count of failed closes is not a count of faults.
-    mutating func closeMonth() -> [String] {
-        var failed = ledgerViolations()
-        if ledger.world != .zero { failed.append("world account not 0 at the close: \(ledger.world)") }
+    /// the balances as they are. True when everything held (`ledgerViolations` says what did not). A world account
+    /// left owed fails every close until it is settled, so the count of failed closes is not a count of faults.
+    mutating func closeMonth() -> Bool {
+        let held = ledgerHolds() && ledger.world == .zero
         for i in 0..<ledger.local.count {
             ledger.localOpening[i] = ledger.local[i]
             ledger.localPosted[i] = .zero
@@ -423,6 +434,6 @@ extension WorldState {
         }
         ledger.worldOpening = ledger.world
         ledger.worldPosted = .zero
-        return failed
+        return held
     }
 }

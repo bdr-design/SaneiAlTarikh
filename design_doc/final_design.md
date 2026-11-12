@@ -269,7 +269,7 @@ A rule that nothing enforces is not a rule here. Rule IDs are referenced in the 
 | F3 | Commands are the only way to change state. The AI uses the same Commands. | Access control; an import allowlist for `SaneiAI`. |
 | F4 | Stable IDs live in registries that can only grow. Removing an ID needs an alias with population weights. **Runtime IDs** (`dyn:<serial>` for polities, governments and actors) live in the save's ID lists and never collide with registry IDs. | `ids_lock.py`; the runtime-namespace test. |
 | F5 | Behaviour lives in data: `defines.json`, modifiers, regime, electoral, monetary and constitutional parameter sets, and the effect vocabulary. **Scenarios are data only.** | <ul><li>The validator.</li><li>The **stub-pack test**: CI parses stub packs for 2026, 1990, 1985 and 1979 and runs each for 30 days on a tiny world from M1a.</li><li>The scenario gate: path allowlist in §2.8.</li></ul> |
-| F6 | **Saves load forever:** self-describing columns, typed migration buffers, `SaveDefaults`, golden saves, and stable numeric tags for every persisted enum case and field. | The golden-save gate; the `SaveDefaults` test; a tag-registry lock. |
+| F6 | **Saves load forever:** self-describing columns, typed migration buffers, `SaveDefaults`, golden saves, and stable numeric tags for every persisted enum case (a command's fields are versioned with the save's format: a length per command lets a reader skip an unknown one, and a changed command is a new format with a step, T-041). | The golden-save gate; the `SaveDefaults` test; a tag-registry lock. |
 | F7 | One file, `Pipeline.swift`, owns the order of the daily stages, and each system declares the columns it reads and writes. | A test that fails on two writers of one column in a phase. |
 | F8 | **Repository hygiene.** <ul><li>Git holds text.</li><li>Map, imagery and graded-tile packs are release assets pinned by SHA-256.</li><li>No archives in git.</li><li>The Xcode project is generated.</li><li>Versions are pinned.</li></ul> | CI gates. |
 | F9 | Decisions are recorded in ADRs. `CLAUDE.md` stays ≤150 lines. Files fail at 600 lines. No names containing V2, Patch, Fix, Old or New. `jscpd` allows 0 new clones. | Lint. |
@@ -334,13 +334,13 @@ tools/{datapipeline/,imagery/,checks/}  CLAUDE.md
 | `SaneiContent` | Core | <ul><li>Readers for `content.bin` and `scenario-*.bin`.</li><li>`ContentDB`, holding the static rules: goods, industries, input-output templates, adjacency, route clusters, regions, sea zones, chokepoints, terrain, units, techs, parameter sets, effect vocabulary, defines, modifiers, Arabic strings with morphology fields.</li><li>`ScenarioStart`, mapped only while a new game is being built.</li><li>The validator.</li></ul> | Parse JSON; know about `WorldState` |
 | `SaneiBake` | Core, Content, Foundation | JSON and CSV loaders with strict decoding; the baker; the evidence and stub-pack checks | Be linked into the app |
 | `SaneiMap` | Core | <ul><li>Readers for the map pack and the imagery index.</li><li>Projection, choice of level, chunks and tiles.</li><li>The tile-cache policy (pinned visible set).</li><li>Picking.</li><li>Label placement around HUD rectangles.</li><li>**Runtime label anchors.**</li><li>`FrameScheduler` and the governor policy.</li></ul> | Metal, UIKit, Content, Engine |
-| `SaneiEngine` | Core, Content | `WorldState`, the systems, `Pipeline`, `Command` (with numeric tags), `Ledger` (per currency), `Visibility`, invariants, front execution, `SaveCodec`, `SaveTree` (typed columns), migrations | SaneiMap, Foundation dates or timers, Dispatch, `Float`/`Double`, libm, `.random`, iterating a Dictionary or Set, `Codable` on persisted types |
+| `SaneiEngine` | Core, Content | `WorldState`, the systems, `Pipeline`, `Command` (with numeric tags), `Ledger` (per currency), `Visibility`, invariants, front execution, `SaveCodec` (the state's chunks in SaneiCore's `SaveTree`), migrations | SaneiMap, Foundation dates or timers, Dispatch, `Float`/`Double`, libm, `.random`, iterating a Dictionary or Set, `Codable` on persisted types |
 | `SaneiAI` | Engine's public API, Content, Core | Strategic, operational, diplomatic and intelligence AI. Outputs Commands only. | Touch `WorldState` internals |
 | `SaneiPresentation` | Engine, Content, Core, Foundation | `GameFormatter` with the **Arabic morphology layer**; why-terms turned into rows; map-mode colour functions; view data; Arabic search normalization; notification text | SwiftUI, UIKit, Metal |
 | `simcli` | All modules, plus `SaneiBake` and `CZlib` | `validate`, `facts`, `evidence`, `stubs`, `bake`, `run`, `replay`, `bench`, `balance`, `history-check`, `save-inspect`, `peak-load` | — |
 | App/UI | All packages | SwiftUI shell, `GameScreen` screens, `DesignTokens`, `GlassStyle`, `DialogPresenter`, `GameStore`, the layout fit engine | Change state except through `host.submit` |
 | App/MapRenderer | Core, Runtime, Map, Metal; Platform's log | Imagery, overlays, borders (stencil-once), glow, fronts, markers, arrows, distance-field labels, overlay counters; a control surface (frames on request, continuous, pause, frame stats) | Read the engine or content |
-| App/Platform | Core, Runtime; MapRenderer's control surface (the recorder) | Storage (Documents, mirror bookmark), DEFLATE, the binary metadata reader, audio, haptics, thermal and power state, memory pressure, image decoding, **ring-buffer log**, MetricKit and `MXDiagnosticPayload` export, the 60 s recorder | Read the engine (the recorder's load is a closure the app hands it) |
+| App/Platform | Core, Runtime; MapRenderer's control surface (the recorder) | Storage (Documents, mirror bookmark), DEFLATE, the saves list (reading META through SaneiCore's `SaveFile.readMeta`), audio, haptics, thermal and power state, memory pressure, image decoding, **ring-buffer log**, MetricKit and `MXDiagnosticPayload` export, the 60 s recorder | Read the engine (the recorder's load is a closure the app hands it) |
 
 Dependencies run one way: Core ← Content ← Engine ← AI; Core ← Map; Presentation depends on Engine; Runtime stands alone (the app hands its executors to the engine, which takes any `SerialExecutor`). The Linux build leaves out the App targets.
 
@@ -433,7 +433,7 @@ Dependencies run one way: Core ← Content ← Engine ← AI; Core ← Map; Pres
 13. `AIOperational` for governments at war (every 3–7 days).
 14. `Notifications`, `HistorySample`. In debug and test builds, the invariants and, in replay mode, the state hash.
 
-**Commands.** `enum Command: Sendable`. Each case has a **stable numeric tag** (`UInt16`) and tagged fields, written in the column codec. Synthesised `Codable` is never used for persisted data. Each case has `validate` and `apply`, and a rejected command leaves the state hash unchanged. Important cases:
+**Commands.** `enum Command: Sendable`. Each case has a **stable numeric tag** (`UInt16`, its `CommandKind`) and its fields after it, written in the column codec with the command's length, so a reader skips a command it does not know (T-041). Synthesised `Codable` is never used for persisted data. Each case has `validate` and `apply`, and a rejected command leaves the state hash unchanged. Important cases:
 - `RenameLeader`; `StartProject`, `CancelProject`; `SetBudget`, `SetTax`, `SetPolicy`
 - `AssignArmyToFront`, `SetSectorOrder(hold|attack, arrows[≤3])`, `AirMission`, `FleetMission`, `Mobilize`
 - `LaunchSpyOp(target: ActorRef|GovRef, …)`, `CancelSpyOp`
@@ -1840,27 +1840,26 @@ As before:
 | Part | Contents |
 |---|---|
 | Header | Magic `SANEISAV`, `containerVersion` u16, compression u8 (0 none, **1 raw DEFLATE**), flags, `metaLength` |
-| **META (uncompressed, binary)** | A small self-describing table in the same column codec: `formatVersion`, game version and build, `scenarioId`, `mapVersion`, **`rulesHash` (`content.bin`)**, **`scenarioHash`**, game date, player government (ID and display name), playtime, preset, difficulty, `cheatsUsed`, seed. Read by `Platform`'s 200-line reader; no JSON. |
-| Payload | Compressed and raw lengths, then compressed chunks |
+| **META (uncompressed, binary)** | A small self-describing table in the same column codec: `formatVersion`, game version and build, `scenarioId`, `mapVersion`, **`rulesHash` (`content.bin`)**, **`scenarioHash`**, game date, player government (ID and display name), playtime, preset, difficulty, `cheatsUsed`, seed. Read through SaneiCore's `SaveFile.readMeta`, which App/Platform uses for the saves list, without the payload or the trailer; no JSON. |
+| Payload | Raw and stored lengths, then the stored bytes (the tree, compressed or not) |
 | Trailer | SHA-256 |
 
-**The bytes** (T-041; the code's comments are the same): the header is the magic (8 bytes), `containerVersion` u16 little-endian, compression u8, flags u8 (0; a file with an unknown flag is refused) and `metaLength` u32 (at most 65,536). META is a tree of one chunk `META`. The payload is its raw length u64 and its stored length u64, then the stored bytes. The trailer is the SHA-256 of everything before it, checked before any other byte is believed. A tree is its format u16, the number of chunks (varint), and each chunk: its four-letter tag, the length of its body (varint), the number of columns (varint) and each column: name length and name (ASCII, 1 to 64 bytes), type u8 (`SaveType`), encoding u8, count (varint), data length (varint) and data; a raw value takes its type's width.
+**The bytes** (T-041; the code's comments are the same). Every fixed-width number is little-endian. A varint is LEB128 in its shortest form; zigzag maps a signed value to a varint (0, −1, 1, −2 … → 0, 1, 2, 3 …); varint-delta writes each value's difference from the one before it (from 0), zigzag-coded. The header is the magic (8 bytes), `containerVersion` u16, compression u8 (`SaveCompression`), flags u8 (0; a file with an unknown flag is refused) and `metaLength` u32 (at most 65,536). META is a tree of one chunk `META`. The payload is its raw length u64 and its stored length u64, then the stored bytes. The trailer is the SHA-256 of everything before it, checked before any other byte is believed. A tree is its format u16, the number of chunks (varint), and each chunk: its four-letter tag, the length of its body (varint), the number of columns (varint) and each column: name length and name (ASCII, 1 to 64 bytes), type u8 (`SaveType`), encoding u8, count (varint), data length (varint) and data; a raw value takes its type's width, a flag is one byte (0 or 1), and an items column is each item's length (varint) and bytes. A `CMDQ` item is the day (zigzag), the issuer's rank (u8), for the player and the AI the government's row and serial (varints), the sequence (varint), the command's tag (u16) and its fields in the command codec. `readMeta`, for the saves list, reads the header and META only and does not check the trailer; a full read checks the trailer before any other byte is believed.
 
 **Format versions.** The format rises when a change needs a migration step: a column renamed, dropped, re-typed or re-encoded, units or IDs remapped, a chunk split. A column or chunk only added keeps the format: an older save lacks it and takes its default; an older version skips it, reported. A format past the reader's is refused. Each format has a golden save, written once and never rewritten: the test loads it through the migrations and checks literal values; the current format's golden save also writes back to its own bytes. Replaying to a hash is a separate, build-scoped check.
 
 **Chunks:**
 - `WRLD` (the world row and the world account), `SERL`, `POLI`, `GOVT`, `PROV`, `CURR` (currencies: scale, rate, price index, money base and its month), `LEDG` (per government row: its currency, a column per local account by its stored name with the month's opening and postings, and the reserves), `CMDQ` (the waiting commands, each in the command codec's tagged form with its length, so a command of an unknown tag or issuer kind is skipped) (T-041)
 - `IDxx`: ID lists per kind, including the **runtime `dyn:` IDs**
-- `SERL`: serial counters per kind
-- `PROV`, `GRPR` (group rows), `INDU`, `POLI` (polities), `GOVT`, `ACTR`, `PSUP` (party support), `PAIR`, `PEXT` (pair extension)
+- `SERL`, `POLI`, `GOVT`, `PROV` (above) gain their kinds and columns with their systems, as do `GRPR` (group rows), `INDU`, `ACTR`, `PSUP` (party support), `PAIR`, `PEXT` (pair extension)
 - `FORM`, `ARMY`, `FRNT` (fronts and sectors), `WARS`, `FLET`, `AIRG`, `SPYO`, `PROJ`, `TRTY`
-- `EVTQ`, `DECN`, `NOTI`, `HIST`, `CLIM`, `WRLD`, `RNG `
+- `EVTQ`, `DECN`, `NOTI`, `HIST`, `CLIM`, `RNG `
 - `CMDJ`: command journal, **build-scoped**
 
 **Rules:**
 - **Self-describing tables.** Columns `{name, typeTag, encoding (raw | varint-delta | **zigzag**), data}`. References are indices into the save's own ID lists. **Every handle row stores its `Serial`.** On load, handle tables are rebuilt in serial order, so random keys, tie-breaks and iteration order are identical to the running game.
   - An unknown chunk or column is skipped and logged.
-  - A missing column takes its value from `SaveDefaults`. A test fails if any engine column has no default.
+  - A missing column takes its value from `SaveDefaults`, except the keys every save has (a date, a serial, a table's row-defining column), whose absence refuses the file. A test fails if any written column is not in `SaveDefaults`, or any stored property of the state is not written.
 - **Persisted enums and commands** use **stable numeric tags** registered in `tags.lock`. Renaming a Swift case or field never changes the bytes. A tag is never reused.
 - **`SaveTree` = typed column buffers.** Each is raw bytes plus a type tag and encoding, decoded per chunk in streaming fashion. Migration steps `SaveMigrations[n → n+1]` are **column-level operations**: `addColumn`, `renameColumn`, `dropColumn`, `convertUnits` (for example constant-USD columns → LCU with the stored deflator), `remapIDs(aliases)`, `splitProvince(pop weights)`, `addChunk`, `splitChunk`. Old Swift types are never kept. (T-041 has `addColumn`, `renameColumn`, `dropColumn` and `addChunk`; `remapIDs` comes with content IDs, T-042; the others with the first format that needs each.) A changed command's fields are a new format, with a step that rewrites the `CMDQ` items.
 - **Load procedure:** pause; release the old `WorldState` and its snapshot; decode; migrate; build the state.
@@ -1908,7 +1907,7 @@ As before:
 4. **Determinism within one build:**
    - two runs give equal hashes
    - **Linux x86 equals macOS arm64** (hash artifact compared in `ios.yml`)
-   - **save → load → continue equals an uninterrupted run**, with saves taken mid-war with full handle tables and freed slots
+   - **save → load → continue equals an uninterrupted run**, with saves taken mid-war with full handle tables and with rows dissolved and reused
    - golden values only for `DetRNG` and `DMath`
 5. **Golden saves and replays**, plus `peak-load`.
 6. **Content:**

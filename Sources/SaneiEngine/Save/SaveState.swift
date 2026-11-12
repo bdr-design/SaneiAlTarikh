@@ -9,8 +9,9 @@ import SaneiCore
 // values, the world account's included, are in `WRLD`); a value per account is a column per account, by its stored
 // name, so an account added later is a column added. stdlib only.
 
-/// Every column the engine writes, with its default: a missing column takes it, for every row (§7). `nil` marks a key
-/// every save has (a date, a serial, a table's row-defining column): a save without it is refused. A test fails when a
+/// Every column the engine writes, with its default: a missing column takes it, for every row (§7). `nil` marks a column
+/// every save has (a date, a serial, a table's row-defining column, a column with no meaningful default): a save
+/// without it is refused. A test fails when a
 /// written column is not here, or a stored property of the state is not written.
 enum SaveDefaults {
     static let all: [(chunk: String, column: String, value: Int64?)] = {
@@ -113,11 +114,16 @@ extension WorldState {
             ledgColumns.append(.of(account.saveName + "Posted", column(l.localPosted), .i64, .zigzag))
         }
         let ledg = SaveChunk(tag: "LEDG", columns: ledgColumns)
-        let cmdq = SaveChunk(tag: "CMDQ", columns: [.items("commands", pending.map { c in
-            var w = ByteWriter()
-            c.write(to: &w)
-            return w.bytes
-        })])
+        // every command with its length, into one writer (one scratch writer for each command's bytes, reused)
+        var items = ByteWriter(capacity: pending.count * 48)
+        var one = ByteWriter(capacity: 64)
+        for c in pending {
+            one.removeAll()
+            c.write(to: &one)
+            items.varint(UInt64(one.bytes.count))
+            items.bytes.append(contentsOf: one.bytes)
+        }
+        let cmdq = SaveChunk(tag: "CMDQ", columns: [SaveColumn(name: "commands", type: .items, encoding: .raw, count: pending.count, data: items.bytes)])
         return SaveTree(formatVersion: Self.saveFormat, chunks: [wrld, serl, poli, govt, prov, curr, ledg, cmdq])
     }
 
@@ -126,6 +132,7 @@ extension WorldState {
     public static func load(_ tree: SaveTree, report: inout SaveReport) -> WorldState? {
         guard tree.formatVersion == saveFormat else { return nil }
         var l = Loader(tree: tree)
+        l.report = report                                          // what META's read already reported stays
         let state = l.state()
         report = l.report
         return state
@@ -148,7 +155,7 @@ struct Loader {
     /// default for every row when the column is missing. Nil when the column is there but wrong.
     mutating func ints(_ tag: String, _ name: String, _ type: SaveType, rows: Int) -> [Int64]? {
         guard let col = tree.chunk(tag)?.column(name) else {
-            // a key is in every save; any other column takes its default
+            // a required column is in every save; any other column takes its default
             guard let entry = SaveDefaults.entry(tag, name), let d = entry else { return nil }
             report.defaulted.append("\(tag).\(name)")
             return [Int64](repeating: d, count: rows)
@@ -174,6 +181,14 @@ struct Loader {
         case .items:
             return nil
         }
+    }
+
+    /// The values as the table's column, reserved to the cap at once (so the table keeps its room with no second copy).
+    func filled<V, X>(_ values: [V], _ cap: Int, _ f: (V) -> X) -> [X] {
+        var out: [X] = []
+        out.reserveCapacity(Swift.max(cap, values.count))
+        for v in values { out.append(f(v)) }
+        return out
     }
 
     static func range(_ t: SaveType) -> (Int64, Int64) {
@@ -225,8 +240,8 @@ struct Loader {
         for i in 0..<np {
             guard pc.hasGiven(Serial(raw: UInt32(ps[i]))), i == 0 || ps[i] > ps[i - 1] else { return nil }
         }
-        s.polities.exists = pe.map { $0 == 1 }
-        s.polities.serial = ps.map { Serial(raw: UInt32($0)) }
+        s.polities.exists = filled(pe, PolityTable.capacity) { $0 == 1 }
+        s.polities.serial = filled(ps, PolityTable.capacity) { Serial(raw: UInt32($0)) }
         s.polities.counter = pc
         s.polities.keepRoom()
 
@@ -248,24 +263,27 @@ struct Loader {
         let never = Int64(GovernmentTable.never)
         for i in 0..<ng {
             guard lm[i] == never || (lm[i] >= 0 && lm[i] <= month), ly[i] == never || (ly[i] >= 0 && ly[i] <= year),
-                  ai[i] <= Int64(date.days) + Int64(Simulation.strategicPeriod) else { return nil }
-            guard gc.hasGiven(Serial(raw: UInt32(gs[i]))), gp[i] < Int64(np), slot[i] >= 1, slot[i] <= Int64(GovernmentTable.slots),
+                  GameDate(days: Int32(ai[i])).isSupported else { return nil }
+            guard gc.hasGiven(Serial(raw: UInt32(gs[i]))), gp[i] < Int64(np), slot[i] >= 1, slot[i] <= 28 /* format 1: 28 slots */,
                   tr[i] >= 0, tr[i] <= Int64(BP.one.raw), tb[i] >= 0, i == 0 || seen[i] > seen[i - 1],
                   GameDate(days: Int32(ai[i])).isSupported else { return nil }
         }
         var gt = GovernmentTable()
-        gt.exists = ge.map { $0 == 1 }
-        gt.serial = gs.map { Serial(raw: UInt32($0)) }
-        gt.polity = gp.map { Idx(raw: UInt16($0)) }
-        gt.monthlySlot = slot.map { UInt8($0) }
-        gt.lastMonthlyRun = lm.map { Int32($0) }
-        gt.lastYearlyRun = ly.map { Int32($0) }
-        gt.aiNextStrategic = ai.map { GameDate(days: Int32($0)) }
-        gt.taxRate = tr.map { BP(raw: Int32($0)) }
-        gt.taxBase = tb.map { LCU(raw: $0) }
-        gt.monthlyRuns = mr.map { UInt32($0) }
-        gt.yearlyRuns = yr.map { UInt32($0) }
-        gt.strategicRuns = sr.map { UInt32($0) }
+        gt.exists = filled(ge, GovernmentTable.capacity) { $0 == 1 }
+        gt.serial = filled(gs, GovernmentTable.capacity) { Serial(raw: UInt32($0)) }
+        gt.polity = filled(gp, GovernmentTable.capacity) { Idx(raw: UInt16($0)) }
+        gt.monthlySlot = filled(slot, GovernmentTable.capacity) { UInt8($0) }
+        gt.lastMonthlyRun = filled(lm, GovernmentTable.capacity) { Int32($0) }
+        gt.lastYearlyRun = filled(ly, GovernmentTable.capacity) { Int32($0) }
+        // a look further ahead than this build's period allows (a save from a slower difficulty, a rule since changed)
+        // comes back within it: a rule's value is brought into the rule, never a reason to refuse the save
+        let latest = Int64(date.days) + Int64(Simulation.strategicPeriod)
+        gt.aiNextStrategic = filled(ai, GovernmentTable.capacity) { GameDate(days: Int32(Swift.min($0, latest))) }
+        gt.taxRate = filled(tr, GovernmentTable.capacity) { BP(raw: Int32($0)) }
+        gt.taxBase = filled(tb, GovernmentTable.capacity) { LCU(raw: $0) }
+        gt.monthlyRuns = filled(mr, GovernmentTable.capacity) { UInt32($0) }
+        gt.yearlyRuns = filled(yr, GovernmentTable.capacity) { UInt32($0) }
+        gt.strategicRuns = filled(sr, GovernmentTable.capacity) { UInt32($0) }
         gt.counter = gc
         gt.keepRoom()
         s.governments = gt
@@ -280,9 +298,9 @@ struct Loader {
             else { return nil }
         }
         var pt = ProvinceTable()
-        pt.sovereign = so.map { Idx(raw: UInt16($0)) }
-        pt.administrator = ad.map { Idx(raw: UInt16($0)) }
-        pt.population = po.map { Pop32(raw: Int32($0)) }
+        pt.sovereign = filled(so, ProvinceTable.capacity) { Idx(raw: UInt16($0)) }
+        pt.administrator = filled(ad, ProvinceTable.capacity) { Idx(raw: UInt16($0)) }
+        pt.population = filled(po, ProvinceTable.capacity) { Pop32(raw: Int32($0)) }
         pt.keepRoom()
         s.provinces = pt
 
@@ -294,15 +312,15 @@ struct Loader {
               let mo = ints("CURR", "moneyBaseOpening", .i64, rows: nc), let mp = ints("CURR", "moneyBasePosted", .i64, rows: nc)
         else { return nil }
         var ct = CurrencyTable()
-        ct.scaleExponent = ke.map { UInt16($0) }
-        ct.rate = ra.map { LogQ(raw: $0) }
-        ct.priceIndex = pi.map { LogQ(raw: $0) }
-        ct.redenominations = re.map { UInt16($0) }
+        ct.scaleExponent = filled(ke, CurrencyTable.capacity) { UInt16($0) }
+        ct.rate = filled(ra, CurrencyTable.capacity) { LogQ(raw: $0) }
+        ct.priceIndex = filled(pi, CurrencyTable.capacity) { LogQ(raw: $0) }
+        ct.redenominations = filled(re, CurrencyTable.capacity) { UInt16($0) }
         guard rd.allSatisfy({ $0 == 0 }) else { return nil }      // marks are cleared at every day's end, before a save
-        ct.redenominationDue = rd.map { $0 == 1 }
-        ct.moneyBase = mb.map { LCU(raw: $0) }
-        ct.moneyBaseOpening = mo.map { LCU(raw: $0) }
-        ct.moneyBasePosted = mp.map { LCU(raw: $0) }
+        ct.redenominationDue = filled(rd, CurrencyTable.capacity) { $0 == 1 }
+        ct.moneyBase = filled(mb, CurrencyTable.capacity) { LCU(raw: $0) }
+        ct.moneyBaseOpening = filled(mo, CurrencyTable.capacity) { LCU(raw: $0) }
+        ct.moneyBasePosted = filled(mp, CurrencyTable.capacity) { LCU(raw: $0) }
         ct.keepRoom()
         s.currencies = ct
 
@@ -325,19 +343,19 @@ struct Loader {
             guard cu[i] < Int64(nc), cu[i] == gp[i] else { return nil }
         }
         var lt = LedgerTable()
-        lt.currency = cu.map { Idx(raw: UInt16($0)) }
-        lt.local = lo.map { LCU(raw: $0) }
-        lt.localOpening = lop.map { LCU(raw: $0) }
-        lt.localPosted = lps.map { LCU(raw: $0) }
-        lt.reserves = rsv.map { USDn(raw: $0) }
-        lt.reservesOpening = rso.map { USDn(raw: $0) }
-        lt.reservesPosted = rsp.map { USDn(raw: $0) }
+        lt.currency = filled(cu, GovernmentTable.capacity) { Idx(raw: UInt16($0)) }
+        lt.local = filled(lo, LedgerTable.accountsPerRow * GovernmentTable.capacity) { LCU(raw: $0) }
+        lt.localOpening = filled(lop, LedgerTable.accountsPerRow * GovernmentTable.capacity) { LCU(raw: $0) }
+        lt.localPosted = filled(lps, LedgerTable.accountsPerRow * GovernmentTable.capacity) { LCU(raw: $0) }
+        lt.reserves = filled(rsv, GovernmentTable.capacity) { USDn(raw: $0) }
+        lt.reservesOpening = filled(rso, GovernmentTable.capacity) { USDn(raw: $0) }
+        lt.reservesPosted = filled(rsp, GovernmentTable.capacity) { USDn(raw: $0) }
         lt.world = USDn(raw: wa[0]); lt.worldOpening = USDn(raw: wo[0]); lt.worldPosted = USDn(raw: wp[0])
         lt.keepRoom()
         s.ledger = lt
 
         // the ledger's invariants hold, as at the end of every day the game runs
-        guard s.ledgerViolations().isEmpty else { return nil }
+        guard s.ledgerHolds() else { return nil }
 
         // the waiting commands: each decodes whole, is dated today or later, and the queue is in order with no two
         // keys alike and each issuer within its room; a command of an unknown tag is skipped
@@ -357,7 +375,8 @@ struct Loader {
             }
             s.pending.append(c)
         }
-        guard rooms.0 <= Simulation.playerCapacity, rooms.1 <= Simulation.eventCapacity, rooms.2 <= Simulation.aiCapacity else { return nil }
+        // format 1's rooms (L3), fixed with the format: a later build's rooms do not refuse an older save
+        guard rooms.0 <= 64, rooms.1 <= 64, rooms.2 <= 448 else { return nil }
         return s
     }
 
@@ -382,8 +401,8 @@ struct Loader {
 }
 
 extension Command {
-    /// The tags this version can read (a test checks every case's tag is here).
-    static let knownTags: [UInt16] = [1, 100, 101, 102]
+    /// The tags this version can read: every kind's.
+    static let knownTags: [UInt16] = CommandKind.allCases.map { $0.rawValue }
 
     /// Every government the command names.
     var governments: [GovRef] {

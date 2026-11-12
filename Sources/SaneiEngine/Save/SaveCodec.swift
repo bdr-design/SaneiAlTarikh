@@ -22,12 +22,17 @@ extension SaveMeta {
 
 /// A game's save file: writing and reading it.
 public enum SaveCodec {
-    /// The file's bytes. The format, the date and the seed in META are the state's, whatever `meta` says.
+    /// The file's bytes. The format, the date and the seed in META are the state's, whatever `meta` says, and a player's
+    /// government the state never made is left out: every file this writes reads back. Make the bytes on the I/O
+    /// thread from a copy of the state (a copy is free until a column is written): never on the simulation's (§3.5).
     public static func write(_ state: WorldState, meta: SaveMeta, compressor: (any SaveCompressor)? = nil) -> [UInt8] {
         var m = meta
         m.formatVersion = WorldState.saveFormat
         m.date = state.world.date.days
         m.seed = state.world.seed
+        // a player's government the state never made is left out, so the file reads back
+        if let p = m.playerGovernment, !(p.row.int < state.governments.rows && state.governments.counter.hasGiven(p.serial)
+                                         && p.serial.raw <= state.governments.serial[p.row.int].raw) { m.playerGovernment = nil }
         if m.playerSerial == 0 { m.playerRow = 0 }
         return SaveFile.write(meta: m, payload: state.saveTree().write(), compressor: compressor)
     }
@@ -64,9 +69,9 @@ public enum SaveCodec {
 /// the first format that needs each.
 public struct SaveMigrations: Sendable {
     /// `steps[n]` takes a tree of format n to n + 1.
-    public var steps: [UInt16: @Sendable (inout SaveTree) -> Bool]
+    var steps: [UInt16: @Sendable (inout SaveTree) -> Bool]
 
-    public init(steps: [UInt16: @Sendable (inout SaveTree) -> Bool]) { self.steps = steps }
+    init(steps: [UInt16: @Sendable (inout SaveTree) -> Bool]) { self.steps = steps }
 
     /// This version's steps (none yet: format 1 is the first).
     public static let current = SaveMigrations(steps: [:])

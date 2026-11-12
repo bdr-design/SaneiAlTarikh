@@ -41,7 +41,7 @@ equal hashes; Linux x86 equals macOS arm64; the `TermSink` equality test), R9. `
   - where the «أخرى» row sits on the sheet, and its words when the left-out terms cancel: with the sheet's screen;
   - a remembered position for repeated lookups, the 1.2× cross-module bench, the work counters: the engine's bench;
   - `GameHost`'s stand-in hash (M0) still uses the old step; the engine skeleton replaces it with `StateHasher`;
-  - §8's words «freed slots»: this table has no slots to free; reword with the engine's save test.
+  - §8's words «freed slots»: this table has no slots to free; reworded by T-041 («rows dissolved and reused»).
 
 ## Decisions the design did not make
 1. **A sink is typed by the value it explains.** §2.3's sketch gave `TermSink.add(_ id: TermID, _ v: Q32)`. A `Q32`

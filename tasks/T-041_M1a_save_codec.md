@@ -12,7 +12,8 @@ a small self-describing table in the column codec; the payload as chunks; the tr
 `{name, typeTag, encoding, data}`; unknown chunks and columns skipped; missing columns from `SaveDefaults`, with a test
 that fails when an engine column has no default; persisted enums and commands by stable numeric tags; `SaveTree` as
 typed column buffers with column-level migrations; each save a full snapshot; golden saves), §2.2 (`SaveCodec`,
-`SaveTree` and migrations live in SaneiEngine, stdlib only; DEFLATE and storage in App/Platform), §2.4 (the
+`SaveTree` and migrations live in SaneiEngine, stdlib only (T-041 moved the container and the tree to SaneiCore, so
+the platform reads META with the same reader; §2.2 updated); DEFLATE and storage in App/Platform), §2.4 (the
 pending-command queue is part of the state), the M1a checklist («Saves: container, binary META, format 1, typed
 `SaveTree` migrations, golden saves …»). T-039's out-of-scope list sent here: tagged codec fields with lengths so that
 a reader can skip an unknown field, and whether a held copy keeps the cap's room (answered in T-039's fix round).
@@ -28,7 +29,8 @@ a reader can skip an unknown field, and whether a held copy keeps the cap's room
   - `SaveDefaults`: the default of every column the engine writes (none for the keys every save has); a missing
     column takes it; a test checks every stored property of the state is written.
   - The state's chunks: `WRLD` (the world row and the world account), `SERL` (the serial counters), `POLI`, `GOVT`,
-    `PROV`, `CURR` (currencies and money bases), `LEDG` (per government row, a column per account by its stored name), `CMDQ` (the waiting commands, each in its
+    `PROV`, `CURR` (currencies and money bases), `LEDG` (per government row, a column per account by its stored
+    name), `CMDQ` (the waiting commands, each in its
     tagged codec form with its length, so a reader can skip one it does not know); `WorldState` from a tree and back,
     with every value checked (rows within caps, serials given by their counters, references in range, the queue in
     order), so a bad file is refused, never trusted.
@@ -36,16 +38,20 @@ a reader can skip an unknown field, and whether a held copy keeps the cap's room
     scenario hash, game date, player government ID and display name, playtime, preset, difficulty, cheats used, seed),
     readable without the payload.
   - `SaveCodec`: the state in the container; the engine fills META's format, date and seed from the state, so a file
-    it writes always reads back; compression is a byte (0 none, 1 raw DEFLATE), handed in by the platform (T-043).
+    it writes always reads back (a player's government it never made is left out); compression is a byte (0 none, 1
+    raw DEFLATE), handed in by the platform (T-043).
   - `tags.lock` at the root: every stored number, checked by a test both ways.
   - Migrations: `SaveMigrations[n → n+1]` as column-level steps (add, rename, drop a column; add a chunk); format 1
     has none; a test runs a made-up format-0 tree through a step.
 - A golden save of format 1 in `Tests/SaneiEngineTests/Golden/`, written once and never rewritten; a test loads it
   with nothing skipped or defaulted, checks values written in the test, and checks the current format writes it back
   to its own bytes. The format policy (what bumps the format) is in §7 and in `SaveCodec.swift`.
-- Out of scope, each with its place (tasks/BACKLOG.md): raw DEFLATE (App/Platform with Apple's Compression, and the device fixture read
-  on Linux: T-043); storage, atomic writes, autosave rotation, the mirror and export (App/Platform, T-043); the peak-load
-  test on a 90-year save, the start, mid-war and 30-year golden saves (when the systems exist, M1a's thin systems and later; the
+- Out of scope, each with its place (tasks/BACKLOG.md): raw DEFLATE (App/Platform with Apple's Compression, and the
+  device fixture read
+  on Linux: T-043); storage, atomic writes, autosave rotation, the mirror and export (App/Platform, T-043); the
+  peak-load
+  test on a 90-year save, the start, mid-war and 30-year golden saves (when the systems exist, M1a's thin systems and
+  later; the
   first is the start save of T-042's scenario); `.saneibug` and `simcli replay` (T-044, with the host); content ID
   lists `IDxx` and `aliases.json` (T-042, with content IDs); `CMDJ`, the build-scoped command journal (T-044, with
   replays); moving `GameHost` onto this simulation, the host holding a day until the AI's results are in, the test that
@@ -59,8 +65,9 @@ a reader can skip an unknown field, and whether a held copy keeps the cap's room
 2. A state saved and loaded is equal to the original (`==` and the hash), for worlds with dissolved rows, reused
    rows, successions, waiting commands of every kind, a redenomination and a failed close; and a loaded game continued
    gives the same hash as the game that never stopped.
-3. An unknown chunk, an unknown column and an unknown command tag are skipped and reported; a missing column takes its
-   default; every engine column has a default (a test fails otherwise).
+3. An unknown chunk, an unknown column and an unknown command tag or issuer kind are skipped and reported; a missing
+   column takes its default, except the keys every save has (their absence refuses the file); every written column is
+   in `SaveDefaults` and every stored property of the state is written (a test fails otherwise).
 4. Every byte of a save is checked on load: a truncated, flipped or forged file (lengths, counts, rows past a cap,
    serials past a counter, references out of range, a queue out of order, a wrong SHA-256) is refused, never trusted,
    and never crashes (a fuzz test).

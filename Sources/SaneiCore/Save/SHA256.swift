@@ -2,8 +2,8 @@
 // tests and tools included, without Foundation or CryptoKit. Not for secrets: a save is the player's own file.
 // stdlib only.
 
-/// SHA-256 of a byte string, in one pass: three small allocations (the 64-byte block, the 64-word schedule and the
-/// 32-byte result), whatever the length.
+/// SHA-256 of a byte string, in one pass: three small allocations (the tail block, the 64-word schedule and the 32-byte
+/// result), whatever the length.
 public enum SHA256 {
     static let k: [UInt32] = [
         0x428a2f98, 0x71374491, 0xb5c0fbcf, 0xe9b5dba5, 0x3956c25b, 0x59f111f1, 0x923f82a4, 0xab1c5ed5,
@@ -16,28 +16,28 @@ public enum SHA256 {
         0x748f82ee, 0x78a5636f, 0x84c87814, 0x8cc70208, 0x90befffa, 0xa4506ceb, 0xbef9a3f7, 0xc67178f2,
     ]
 
-    /// The 32-byte digest of `bytes[range]`.
+    /// The 32-byte digest of `bytes[range]`. Whole 64-byte blocks are read straight from the buffer; only the last
+    /// one or two blocks (the tail, 0x80, zeros and the length) are put together in a small buffer.
     public static func hash(_ bytes: [UInt8], _ range: Range<Int>? = nil) -> [UInt8] {
         let r = range ?? 0..<bytes.count
         precondition(r.lowerBound >= 0 && r.upperBound <= bytes.count, "SHA256.hash: the range is outside the bytes")
         var h: (UInt32, UInt32, UInt32, UInt32, UInt32, UInt32, UInt32, UInt32) =
             (0x6a09e667, 0xbb67ae85, 0x3c6ef372, 0xa54ff53a, 0x510e527f, 0x9b05688c, 0x1f83d9ab, 0x5be0cd19)
         var w = [UInt32](repeating: 0, count: 64)
-        var block = [UInt8](repeating: 0, count: 64)
         let length = r.count
-        // the message, then 0x80, zeros, and the length in bits (big-endian), in 64-byte blocks
-        let total = (length + 9 + 63) / 64 * 64
-        var at = 0
-        while at < total {
-            for j in 0..<64 {
-                let p = at + j
-                if p < length { block[j] = bytes[r.lowerBound + p] }
-                else if p == length { block[j] = 0x80 }
-                else if p >= total - 8 { block[j] = UInt8(truncatingIfNeeded: (UInt64(length) &* 8) >> UInt64(8 * (total - 1 - p))) }
-                else { block[j] = 0 }
-            }
-            compress(&h, block, &w)
-            at += 64
+        let whole = length / 64
+        bytes.withUnsafeBufferPointer { buf in
+            for b in 0..<whole { compress(&h, buf, r.lowerBound + 64 * b, &w) }
+        }
+        // the tail: what is left, 0x80, zeros, and the length in bits, big-endian
+        let left = length - 64 * whole
+        var tail = [UInt8](repeating: 0, count: left < 56 ? 64 : 128)
+        for j in 0..<left { tail[j] = bytes[r.lowerBound + 64 * whole + j] }
+        tail[left] = 0x80
+        let bits = UInt64(length) &* 8
+        for j in 0..<8 { tail[tail.count - 1 - j] = UInt8(truncatingIfNeeded: bits >> UInt64(8 * j)) }
+        tail.withUnsafeBufferPointer { buf in
+            for b in 0..<(tail.count / 64) { compress(&h, buf, 64 * b, &w) }
         }
         var out = [UInt8]()
         out.reserveCapacity(32)
@@ -50,9 +50,12 @@ public enum SHA256 {
 
     @inline(__always) static func rotr(_ x: UInt32, _ n: UInt32) -> UInt32 { (x >> n) | (x << (32 - n)) }
 
-    static func compress(_ h: inout (UInt32, UInt32, UInt32, UInt32, UInt32, UInt32, UInt32, UInt32), _ block: [UInt8], _ w: inout [UInt32]) {
+    /// One block, the 64 bytes at `at` (the caller keeps `at + 64` within the buffer).
+    static func compress(_ h: inout (UInt32, UInt32, UInt32, UInt32, UInt32, UInt32, UInt32, UInt32), _ block: UnsafeBufferPointer<UInt8>,
+                         _ at: Int, _ w: inout [UInt32]) {
         for t in 0..<16 {
-            w[t] = UInt32(block[4 * t]) << 24 | UInt32(block[4 * t + 1]) << 16 | UInt32(block[4 * t + 2]) << 8 | UInt32(block[4 * t + 3])
+            let i = at + 4 * t
+            w[t] = UInt32(block[i]) << 24 | UInt32(block[i + 1]) << 16 | UInt32(block[i + 2]) << 8 | UInt32(block[i + 3])
         }
         for t in 16..<64 {
             let s0 = rotr(w[t - 15], 7) ^ rotr(w[t - 15], 18) ^ (w[t - 15] >> 3)

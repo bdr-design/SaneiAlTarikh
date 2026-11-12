@@ -87,7 +87,10 @@ public struct SaveMeta: Sendable, Equatable {
         }
         func text(_ n: String, _ into: inout String) -> Bool {
             guard let col = present(n) else { return true }
-            guard let b = col.items(atMost: 1, itemLimit: mostTextBytes), b.count == 1, let s = String(validating: b[0], as: UTF8.self) else { return false }
+            // valid UTF-8 only (decoded, then compared byte for byte: on every OS the app supports)
+            guard let b = col.items(atMost: 1, itemLimit: mostTextBytes), b.count == 1 else { return false }
+            let s = String(decoding: b[0], as: UTF8.self)
+            guard s.utf8.elementsEqual(b[0]) else { return false }
             into = s
             return true
         }
@@ -115,11 +118,19 @@ public struct SaveMeta: Sendable, Equatable {
     }
 }
 
-/// A compressor the platform hands in (App/Platform: raw DEFLATE with Apple's Compression).
+/// The compressions a header names. The numbers are stored in saves and registered in `tags.lock`.
+public enum SaveCompression: UInt8, Sendable, CaseIterable {
+    case none = 0
+    case rawDeflate = 1
+}
+
+/// A compressor the platform hands in (App/Platform: raw DEFLATE with Apple's Compression, streaming into the file).
 public protocol SaveCompressor: Sendable {
-    /// The stored number of this compression in the header (1 for raw DEFLATE).
-    var code: UInt8 { get }
-    func compress(_ bytes: [UInt8]) -> [UInt8]
+    /// The compression it makes (never `.none`).
+    var compression: SaveCompression { get }
+    /// Appends the compressed bytes to `out`; false (and `out` as it was) when it cannot, and the file then stores the
+    /// payload as it is.
+    func compress(_ bytes: [UInt8], appendingTo out: inout [UInt8]) -> Bool
     /// The raw bytes, exactly `rawLength` of them; nil when the stored bytes do not make them.
     func decompress(_ bytes: ArraySlice<UInt8>, rawLength: Int) -> [UInt8]?
 }
@@ -142,24 +153,38 @@ public enum SaveError: Error, Sendable, Equatable {
 public enum SaveFile {
     public static let magic: [UInt8] = Array("SANEISAV".utf8)
     public static let containerVersion: UInt16 = 1
-    /// The most bytes a payload may hold, raw: far above a 90-year save (≤8 MB of state, L3), so a forged length is
-    /// refused before anything is allocated.
-    public static let mostPayloadBytes = 64 << 20
+    /// The most bytes a payload may hold, raw and stored: §3.5's 8 MB raw for a save, with half again as margin. A file
+    /// past it is refused before it is hashed, and a decompressor is asked for no more, so a load's peak stays within
+    /// §7's footprint plus 16 MB whatever the file says.
+    public static let mostPayloadBytes = 12 << 20
     public static let mostMetaBytes = 1 << 16
     static let headerBytes = 8 + 2 + 1 + 1 + 4
 
-    /// The file's bytes. With no compressor the payload is stored as it is (compression 0). META is made readable on
-    /// the way: a text past 256 bytes is cut at a character's boundary, and a hash that is not 32 bytes is left out.
+    /// The bytes before META ends, from the header's first 16 bytes: what the saves list reads of each file
+    /// (`readMeta` takes any prefix that covers META).
+    public static func metaPrefixLength(_ first16: [UInt8]) -> Result<Int, SaveError> {
+        switch header(first16) {
+        case let .failure(e) where e != .truncated: return .failure(e)
+        case .failure:
+            guard first16.count >= headerBytes else { return .failure(.truncated) }
+            var r = ByteReader(first16, offset: headerBytes - 4)
+            guard let length = r.fixed(UInt32.self), Int(length) <= mostMetaBytes else { return .failure(.badMeta) }
+            return .success(headerBytes + Int(length))
+        case let .success(h): return .success(headerBytes + h.metaLength)
+        }
+    }
+
+    /// The file's bytes. With no compressor (or one that fails) the payload is stored as it is (compression 0). META is
+    /// made readable on the way: a text past 256 bytes is cut at a UTF-8 character's boundary (by bytes, so every OS
+    /// cuts it alike), and a hash that is not 32 bytes is left out.
     public static func write(meta: SaveMeta, payload: [UInt8], compressor: (any SaveCompressor)? = nil) -> [UInt8] {
         var meta = meta
         func cut(_ s: String) -> String {
-            guard s.utf8.count > SaveMeta.mostTextBytes else { return s }
-            var out = ""
-            for ch in s {
-                if out.utf8.count + String(ch).utf8.count > SaveMeta.mostTextBytes { break }
-                out.append(ch)
-            }
-            return out
+            let b = Array(s.utf8)
+            guard b.count > SaveMeta.mostTextBytes else { return s }
+            var end = SaveMeta.mostTextBytes
+            while end > 0 && b[end] & 0xC0 == 0x80 { end -= 1 }        // step back over continuation bytes
+            return String(decoding: b[0..<end], as: UTF8.self)
         }
         meta.gameVersion = cut(meta.gameVersion); meta.build = cut(meta.build); meta.scenarioId = cut(meta.scenarioId)
         meta.playerName = cut(meta.playerName)
@@ -167,17 +192,27 @@ public enum SaveFile {
         if meta.scenarioHash.count != 32 { meta.scenarioHash = [] }
         let metaBytes = SaveTree(formatVersion: meta.formatVersion, chunks: [meta.chunk]).write()
         precondition(metaBytes.count <= mostMetaBytes, "META is small")
-        let stored = compressor?.compress(payload) ?? payload
-        var w = ByteWriter(capacity: headerBytes + metaBytes.count + 16 + stored.count + 32)
+        precondition(compressor.map { $0.compression != .none } ?? true, "a compressor compresses")
+        var w = ByteWriter(capacity: headerBytes + metaBytes.count + 16 + payload.count + 32)
         w.bytes.append(contentsOf: magic)
         w.fixed(containerVersion, as: UInt16.self)
-        w.u8(compressor?.code ?? 0)
+        let codeAt = w.bytes.count
+        w.u8(SaveCompression.none.rawValue)
         w.u8(0)
         w.fixed(UInt32(metaBytes.count), as: UInt32.self)
         w.bytes.append(contentsOf: metaBytes)
         w.fixed(UInt64(payload.count), as: UInt64.self)
-        w.fixed(UInt64(stored.count), as: UInt64.self)
-        w.bytes.append(contentsOf: stored)
+        let storedAt = w.bytes.count
+        w.fixed(UInt64(0), as: UInt64.self)
+        let payloadAt = w.bytes.count
+        if let c = compressor, c.compress(payload, appendingTo: &w.bytes), w.bytes.count >= payloadAt {
+            w.bytes[codeAt] = c.compression.rawValue
+        } else {
+            w.bytes.removeSubrange(payloadAt...)
+            w.bytes.append(contentsOf: payload)
+        }
+        let stored = UInt64(w.bytes.count - payloadAt)
+        for k in 0..<8 { w.bytes[storedAt + k] = UInt8(truncatingIfNeeded: stored >> UInt64(8 * k)) }
         w.bytes.append(contentsOf: SHA256.hash(w.bytes))
         return w.bytes
     }
@@ -218,12 +253,13 @@ public enum SaveFile {
         }
         var r = ByteReader(bytes, offset: headerBytes + h.metaLength)
         guard let rawLength = r.fixed(UInt64.self), let storedLength = r.fixed(UInt64.self),
-              rawLength <= UInt64(mostPayloadBytes), storedLength == UInt64(body - r.offset) else { return .failure(.badPayload) }
+              rawLength <= UInt64(mostPayloadBytes), storedLength <= UInt64(mostPayloadBytes), storedLength == UInt64(body - r.offset)
+        else { return .failure(.badPayload) }
         if h.compression == 0 {
             guard rawLength == storedLength else { return .failure(.badPayload) }
             return .success((meta.meta, meta.report, bytes, r.offset..<body))
         }
-        guard let d = decompressor, d.code == h.compression else { return .failure(.compressionUnavailable(h.compression)) }
+        guard let d = decompressor, d.compression.rawValue == h.compression else { return .failure(.compressionUnavailable(h.compression)) }
         guard let raw = d.decompress(bytes[r.offset..<body], rawLength: Int(rawLength)), raw.count == Int(rawLength) else { return .failure(.badPayload) }
         return .success((meta.meta, meta.report, raw, 0..<raw.count))
     }

@@ -85,7 +85,8 @@ heaviness, API and words, errors, checker) then found, and this round fixed:
   rounded, not reversible; `sqrt` rounds down), what clamps and what divides by zero, one `LCU` type for every
   currency, `Money` not postable by type alone.
 - **The checker:** 16 holes closed. Every row now carries its own clamp count, and is checked against an independent
-  truth where one exists (the random-number rows are their own definitions); 34 families against 24 (negation, BP arithmetic one operation each, date steps, month facts, chances,
+  truth where one exists (the random-number rows are their own definitions); 34 families against 24 (negation, BP
+  arithmetic one operation each, date steps, month facts, chances,
   constant dollars); the four untested regions of `scale`; dropped carries and ties pinned; each family its own random
   stream; the reference fails when the tests skip a family.
 - **Cost:** a division whose dividend fits in 64 bits is one hardware division; `==` is inlinable; CI builds and tests

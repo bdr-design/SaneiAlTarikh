@@ -161,7 +161,7 @@ public struct Simulation: Sendable {
                 state.world.yearStarts &+= 1
                 observe?(.yearStart)
             }
-            if !state.closeMonth().isEmpty { state.world.ledgerFailures &+= 1 }   // a failed close, counted once
+            if !state.closeMonth() { state.world.ledgerFailures &+= 1 }   // a failed close, counted once
             observe?(.monthClose)
         }
 

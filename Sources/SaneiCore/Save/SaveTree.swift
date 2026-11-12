@@ -53,7 +53,14 @@ public struct SaveColumn: Sendable, Equatable {
     /// A column of whole numbers. Raw values take the stored type's width (a `.u8` column is one byte a value,
     /// whatever Swift type holds them); varints are the same whatever the width.
     public static func of<T: FixedWidthInteger>(_ name: String, _ values: [T], _ type: SaveType, _ encoding: ColumnEncoding) -> SaveColumn {
-        var w = ByteWriter(capacity: values.count * 8)
+        let width: Int
+        switch type {
+        case .u8, .i8, .bool, .items: width = 1
+        case .u16, .i16: width = 2
+        case .u32, .i32: width = 4
+        case .u64, .i64: width = 8
+        }
+        var w = ByteWriter(capacity: values.count * (encoding == .raw ? width : Swift.min(width, 3)) + 8)
         if encoding == .raw {
             switch type {
             case .u8, .i8: for v in values { w.fixed(UInt8(truncatingIfNeeded: v), as: UInt8.self) }
@@ -160,9 +167,10 @@ public struct SaveChunk: Sendable, Equatable {
 
 /// The payload: the format version and the chunks in the order written.
 public struct SaveTree: Sendable, Equatable {
-    /// The most chunks, columns per chunk and name length a reader accepts.
-    public static let mostChunks = 256
-    public static let mostColumns = 256
+    /// The most chunks, columns per chunk and name length a reader accepts: several times what the engine writes, so
+    /// later versions have room, and small enough that a forged tree costs little to refuse.
+    public static let mostChunks = 64
+    public static let mostColumns = 96
     public static let mostNameBytes = 64
 
     public var formatVersion: UInt16

@@ -1,6 +1,8 @@
 # Stable numbers stored in saves and replays (design_doc §7, F6). A line once written is never changed or removed, and
-# a number is never reused; a new case adds a line. Tests/SaneiEngineTests/SaveTests.swift checks the code against
-# this file, both ways.
+# a number is never reused: a new case or a new version adds a line. The name is for people (a Swift case may be
+# renamed; its number never changes). Tests/SaneiEngineTests/SaveTests.swift checks the code against this file: every
+# number the code stores is here, every number here is the code's (or, for the versions, an older one), the current
+# versions are the highest, and no group repeats a number.
 # group name number
 Command setTaxRate 1
 Command createGovernment 100
@@ -36,5 +38,5 @@ ColumnEncoding varintDelta 1
 ColumnEncoding zigzag 2
 Compression none 0
 Compression rawDeflate 1
-Container version 1
-Format state 1
+Container v1 1
+Format v1 1

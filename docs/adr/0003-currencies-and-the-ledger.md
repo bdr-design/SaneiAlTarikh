@@ -19,8 +19,8 @@ the world account is exactly 0 after each monthly close.
    types do not cover: one currency's `LCU` from another's (a posting lands in the account's own currency, and a local
    transfer refuses two currencies), and a value rebuilt from another unit's `raw` (`raw` and `init(raw:)` are public
    for the codec and the save). A CI lint bans the shapes a line shows in the engine (`LCU(raw: x.raw)`,
-   `.init(raw: x.raw)`, `LCU(raw: Int64(x.raw))`, `a.raw = b.raw`); a generic helper or a call split over lines is not
-   seen by it, and reviews check those.
+   `.init(raw: x.raw)`, `LCU(raw: Int64(x.raw))`, `a.raw = b.raw`, `a.raw += b.raw`); a generic helper, a value
+   passed through a local, or a call split over lines is not seen by it, and reviews check those.
 2. **Accounts.** Each government row has two local accounts (treasury and domestic debt) and its FX reserves; each
    currency has its money base (§5.1: the money is the currency's, and one currency can serve several governments, as
    with Côte d'Ivoire's two in 2011 and the unions of M2); the world market has one dollar account. A government that
@@ -40,11 +40,12 @@ the world account is exactly 0 after each monthly close.
    reserved for the cheats (§5.11, M8); nothing gates it yet.
 5. **Exchanges and transfers.** An exchange is two postings under `fx` at the day's rate, from or to the treasury: the
    LCU leg and the USDn leg, each exact in its own unit, their values equal at the rate to within the rounding of the
-   dollar leg in the market's favour: the rate's value (`LogQ.applied`, measured up to about 1.2e-7 relative above
-   the true value) less a margin of 1/2^21 of it (about 4.8e-7) and one unit, so a buy gets at most its value and a
-   sale gives at least its value, and no round trip makes money (a spread of about 5e-7 and a unit, far below a
-   bank's); a test checks it over 4,000 sizes at three rates. A buy whose dollar leg comes
-   to 0 is refused, so local currency is never given for nothing.
+   dollar leg in the market's favour: the rate's value (`LogQ.applied`, within 6e-8 above the rate's own value)
+   less a margin of 1/2^21 of it (about 4.8e-7) and one unit. The margin covers that 8 times, and also a rate made by
+   `LogQ(ratio:)` (within 2.8e-7 of its n/d), so a buy gets at most its value and a sale gives at least its value,
+   and no round trip makes money (a round trip costs about 1e-6 and two units, far below a bank's spread); a test
+   checks it over 4,000 sizes at three rates, and a reviewer over a million at six. A buy whose dollar leg comes to 0
+   is refused, so local currency is never given for nothing.
    A transfer, local or in dollars, is two postings that cancel; both sides are checked before either leg posts. No
    balance is checked: overdrafts are the economy's rule (M2). A posting, transfer or exchange that touches a government
    that has ended, mixes two currencies, or would take a balance or a month's sum past the range of an Int64 moves
@@ -53,12 +54,14 @@ the world account is exactly 0 after each monthly close.
    after every posting of the day, the currency redenominates if one of them is still past 2^60 (a flow that passed
    and came back leaves it as it is), so a flow of several postings is all in one scale. A balance under 2^60 has 7
    times 2^60 of room for the rest of the day, and a posting that would pass the range is refused; a government's
-   starting treasury and tax base are within 2^60 (its command is refused otherwise). Every LCU amount in that currency is divided by 1,000 to
+   starting treasury and tax base are within 2^60 (its command is refused otherwise). Every LCU amount in that
+   currency is divided by 1,000 to
    the nearest unit: every government row's local balances (dissolved rows included), the money base, the governments'
    tax bases (and every LCU column the economy adds, M2), and the LCU fields of the commands waiting to make a
    government in it (an event works its amounts out from the live state when it is given; a command that carries LCU
    worked out on an older view, as the AI's budget commands will, is stamped with its currency's scale and rescaled or
-   refused when applied: M2). The whole change of each balance is posted under `redenomination`, so the month's sums span the
+   refused when applied: M2). The whole change of each balance is posted under `redenomination`, so the month's sums
+   span the
    change of scale; M2's inflation, its exchange-rate pass-through and the money base's growth must take that step out
    (by `scaleExponent`). The scale moves by 3, and the rate and the price index follow by `LogQ(ratio: 1, 1_000)`,
    within about 6e-11 of log2(1/1000), so a value at the rate hardly drifts (measured by a reviewer). The count of

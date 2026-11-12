@@ -42,11 +42,12 @@ final class LedgerTests: XCTestCase {
                 XCTAssertTrue(w.ledgerViolations().isEmpty, "month \(month)")
             }
             XCTAssertEqual(w.ledger.world, .zero)
-            XCTAssertEqual(w.closeMonth(), [], "month \(month)")
+            XCTAssertTrue(w.closeMonth(), "month \(month)")
         }
         // a month that leaves the world account owed is caught at the close
         w.post(.world, .trade, USDn(raw: 5))
-        XCTAssertEqual(w.closeMonth().count, 1)
+        XCTAssertTrue(w.ledgerHolds())
+        XCTAssertFalse(w.closeMonth(), "the world account is owed")
     }
 
     func testAnExchangeIsExactInEachUnit() {
@@ -135,7 +136,7 @@ final class LedgerTests: XCTestCase {
         XCTAssertEqual(taxBase, LCU(raw: 9))
         XCTAssertEqual(w.currencies.rate[1], rateBefore + LogQ(ratio: 1, 1_000))
         XCTAssertTrue(w.ledgerViolations().isEmpty)
-        XCTAssertEqual(w.closeMonth(), [])
+        XCTAssertTrue(w.closeMonth())
         // dollars never redenominate
         w.post(.reserves(g[0]), .trade, USDn(raw: .max / 2))
         w.redenominateDue()

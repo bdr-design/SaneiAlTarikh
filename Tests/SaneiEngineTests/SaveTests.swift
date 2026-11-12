@@ -169,6 +169,31 @@ final class SaveTests: XCTestCase {
         XCTAssertEqual(metaReport.defaulted, ["META.playtime"])
     }
 
+    /// META's own report reaches the full read's report.
+    func testAFullReadKeepsMetasReport() throws {
+        let s = Self.busyWorld().state
+        var metaTree = SaveTree(formatVersion: 1, chunks: [SaveMeta(formatVersion: 1, date: s.world.date.days, seed: s.world.seed).chunk])
+        metaTree.addColumn(.of("future", [UInt64(1)], .u8, .raw), to: "META")
+        metaTree.dropColumn("playtime", from: "META")
+        // the file built by hand with the changed META
+        let metaBytes = metaTree.write()
+        var w = ByteWriter()
+        w.bytes.append(contentsOf: SaveFile.magic)
+        w.fixed(UInt16(1), as: UInt16.self)
+        w.u8(0)
+        w.u8(0)
+        w.fixed(UInt32(metaBytes.count), as: UInt32.self)
+        w.bytes.append(contentsOf: metaBytes)
+        let payload = s.saveTree().write()
+        w.fixed(UInt64(payload.count), as: UInt64.self)
+        w.fixed(UInt64(payload.count), as: UInt64.self)
+        w.bytes.append(contentsOf: payload)
+        w.bytes.append(contentsOf: SHA256.hash(w.bytes))
+        let read = try SaveCodec.read(w.bytes).get()
+        XCTAssertEqual(read.report.skipped, ["META.future"])
+        XCTAssertEqual(read.report.defaulted, ["META.playtime"])
+    }
+
     /// Every column the engine writes has an entry in `SaveDefaults`, every entry is written, and every stored property
     /// of the state and its tables is written: a column added to the state without a save column fails here.
     func testEveryStoredValueIsSavedWithADefault() {
@@ -228,8 +253,12 @@ final class SaveTests: XCTestCase {
         refused({ replace(&$0, "GOVT", .of("polity", [UInt64](repeating: 300, count: n), .u16, .varintDelta)) }, "a polity out of range")
         refused({ replace(&$0, "GOVT", .of("serial", g.serial.map { _ in UInt64(1) }, .u32, .varintDelta)) }, "one serial twice")
         refused({ replace(&$0, "GOVT", .of("lastMonthlyRun", [Int64](repeating: Int64(Int32.max), count: n), .i32, .zigzag)) }, "a run in the future")
-        refused({ replace(&$0, "GOVT", .of("aiNextStrategic", [Int64](repeating: Int64(GameDate.max.days), count: n), .i32, .zigzag)) },
-                "a look far in the future")
+        // a look further ahead than this build's period is a rule's value: brought within the rule, not refused
+        var far = tree
+        replace(&far, "GOVT", .of("aiNextStrategic", [Int64](repeating: Int64(GameDate.max.days), count: n), .i32, .zigzag))
+        var farReport = SaveReport()
+        XCTAssertEqual(WorldState.load(far, report: &farReport)?.governments.aiNextStrategic.first,
+                       base.world.date.adding(days: Simulation.strategicPeriod))
         refused({ replace(&$0, "PROV", .of("administrator", [UInt64(200), 0, 0, 0], .u16, .varintDelta)) }, "a province held by no such row")
         // row 3 marked dissolved while it still holds province 3 (and nothing else changed)
         var alive = [Bool](repeating: true, count: n)
@@ -269,7 +298,13 @@ final class SaveTests: XCTestCase {
         // META's player must be a government the game made
         var m = meta(base)
         m.playerGovernment = GovRef(row: Idx(raw: 9_000), serial: Serial(raw: 77_777))
-        XCTAssertEqual(SaveCodec.read(SaveCodec.write(base, meta: m)).failureValue, .badMeta)
+        XCTAssertNil(try SaveCodec.read(SaveCodec.write(base, meta: m)).get().meta.playerGovernment, "left out by the writer")
+        m.formatVersion = WorldState.saveFormat
+        m.date = base.world.date.days
+        m.seed = base.world.seed
+        var forged = SaveFile.write(meta: m, payload: base.saveTree().write())
+        XCTAssertEqual(SaveCodec.read(forged).failureValue, .badMeta, "and refused when a file names it")
+        forged.removeAll()
         // a flag this version does not know refuses the file
         var flagged = SaveCodec.write(base, meta: meta(base))
         flagged[11] = 1
@@ -312,14 +347,26 @@ final class SaveTests: XCTestCase {
     /// A compressed file needs its decompressor; with it, the file loads as the plain one.
     func testCompressionIsThePlatformsAndRefusedWithout() throws {
         struct Reverse: SaveCompressor {
-            var code: UInt8 { 1 }
-            func compress(_ bytes: [UInt8]) -> [UInt8] { bytes.reversed() }
+            var compression: SaveCompression { .rawDeflate }
+            func compress(_ bytes: [UInt8], appendingTo out: inout [UInt8]) -> Bool { out.append(contentsOf: bytes.reversed()); return true }
             func decompress(_ bytes: ArraySlice<UInt8>, rawLength: Int) -> [UInt8]? { bytes.count == rawLength ? bytes.reversed() : nil }
+        }
+        struct Failing: SaveCompressor {
+            var compression: SaveCompression { .rawDeflate }
+            func compress(_ bytes: [UInt8], appendingTo out: inout [UInt8]) -> Bool { false }
+            func decompress(_ bytes: ArraySlice<UInt8>, rawLength: Int) -> [UInt8]? { nil }
         }
         let sim = Self.busyWorld()
         let bytes = SaveCodec.write(sim.state, meta: meta(sim.state), compressor: Reverse())
         XCTAssertEqual(SaveCodec.read(bytes).failureValue, .compressionUnavailable(1))
         XCTAssertEqual(try SaveCodec.read(bytes, decompressor: Reverse()).get().state, sim.state)
+        // a compressor that fails leaves the payload stored as it is: the file still reads, without one
+        let plain = SaveCodec.write(sim.state, meta: meta(sim.state), compressor: Failing())
+        XCTAssertEqual(try SaveCodec.read(plain).get().state, sim.state)
+        XCTAssertEqual(plain, SaveCodec.write(sim.state, meta: meta(sim.state)))
+        // the saves list learns how much of a file to read from its first 16 bytes
+        let prefix = try SaveFile.metaPrefixLength(Array(bytes.prefix(16))).get()
+        XCTAssertEqual(try SaveFile.readMeta(Array(bytes.prefix(prefix))).get().meta.playerName, "مصر")
     }
 
     /// Migrations are column-level steps: a made-up format-0 tree, whose tax rates were called «rate», becomes format 1.
@@ -337,9 +384,14 @@ final class SaveTests: XCTestCase {
         XCTAssertEqual(WorldState.load(tree, report: &report), s)
     }
 
-    /// The golden save of format 1, written once and never rewritten: it loads with nothing skipped or defaulted, holds
-    /// the values written below, and writes back to its own payload's bytes (this format is the current one). A new
-    /// format adds its own golden save beside this one; this file then loads through the migrations.
+    /// The columns a later build adds to format 1 (which keeps the format, §7): the golden save lacks them, and loads
+    /// them with their defaults. Each one added goes here; nothing else may be defaulted.
+    static let addedSinceFormat1Golden: [String] = []
+
+    /// The golden save of format 1, written once and never rewritten: it loads with only the columns added since
+    /// defaulted, holds the values written below, and every column it has is written back to the same bytes (columns
+    /// added since are allowed). A new format adds its own golden save beside this one; this file then loads through
+    /// the migrations. No rule of the day is tested here: only what the file holds.
     func testTheGoldenSaveOfFormat1Loads() throws {
         let url = URL(fileURLWithPath: #filePath).deletingLastPathComponent().appendingPathComponent("Golden/format1.sanei")
         if ProcessInfo.processInfo.environment["SANEI_WRITE_GOLDEN"] == "1" && !FileManager.default.fileExists(atPath: url.path) {
@@ -348,7 +400,9 @@ final class SaveTests: XCTestCase {
         }
         let bytes = [UInt8](try Data(contentsOf: url))
         let loaded = try SaveCodec.read(bytes).get()
-        XCTAssertEqual(loaded.report, SaveReport())
+        XCTAssertEqual(loaded.report.skipped, [])
+        XCTAssertEqual(loaded.report.skippedCommands, 0)
+        XCTAssertEqual(loaded.report.defaulted, Self.addedSinceFormat1Golden)
         let s = loaded.state
         XCTAssertEqual(s.world.date, GameDate(year: 2011, month: 3, day: 6))
         XCTAssertEqual(s.world.seed, 77)
@@ -358,35 +412,49 @@ final class SaveTests: XCTestCase {
         XCTAssertEqual(s.ledger.world, USDn(raw: 3))
         XCTAssertEqual(s.pending.map { $0.command.tag }, [1, 100, 1, 101, 102])
         XCTAssertEqual(loaded.meta.build, "golden")
-        guard case let .success(opened) = SaveFile.open(bytes) else { return XCTFail() }
-        XCTAssertEqual(s.saveTree().write(), Array(opened.payload[opened.range]), "format 1's bytes are unchanged")
+        guard case let .success(opened) = SaveFile.open(bytes), let golden = SaveTree.read(opened.payload, opened.range) else { return XCTFail() }
+        let now = s.saveTree()
+        for chunk in golden.chunks {
+            for column in chunk.columns {
+                XCTAssertEqual(now.chunk(chunk.tag)?.column(column.name), column, "\(chunk.tag).\(column.name) is written as format 1 wrote it")
+            }
+        }
     }
 
-    /// Every stored number is in tags.lock, and every line of tags.lock is in the code: a number renamed, reused or
-    /// dropped fails here.
+    /// Every stored number is in tags.lock and every number there is the code's (the versions: the current one is the
+    /// highest locked); no group repeats a number. Names are not compared: a renamed case keeps its number.
     func testTheStoredNumbersAreTheLockedOnes() throws {
         let url = URL(fileURLWithPath: #filePath).deletingLastPathComponent().deletingLastPathComponent().deletingLastPathComponent()
             .appendingPathComponent("tags.lock")
         let text = try String(contentsOf: url, encoding: .utf8)
-        let locked = Set(text.split(separator: "\n").filter { !$0.hasPrefix("#") && !$0.isEmpty }.map(String.init))
-        let g = GovRef(row: Idx(raw: 0), serial: Serial(raw: 1))
-        var code: [String] = []
-        let commands: [(String, Command)] = [("setTaxRate", .setTaxRate(government: g, rate: .zero)),
-                                             ("createGovernment", .createGovernment(polity: Idx(raw: 0), treasury: .zero, taxBase: .zero, taxRate: .zero)),
-                                             ("dissolveGovernment", .dissolveGovernment(government: g)), ("succeedGovernment", .succeedGovernment(government: g))]
-        for (name, c) in commands {
-            code.append("Command \(name) \(c.tag)")
-            XCTAssertTrue(Command.knownTags.contains(c.tag), "the loader knows \(name)")
+        var locked: [String: [UInt64]] = [:]
+        for line in text.split(separator: "\n") where !line.hasPrefix("#") && !line.isEmpty {
+            let f = line.split(separator: " ")
+            XCTAssertEqual(f.count, 3, "\(line)")
+            locked[String(f[0]), default: []].append(UInt64(f[2])!)
         }
-        XCTAssertEqual(Command.knownTags.count, commands.count)
-        code += ["Issuer player \(Issuer.player(g).rank)", "Issuer event \(Issuer.event.rank)", "Issuer ai \(Issuer.ai(g).rank)"]
-        code += PostingCategory.allCases.map { "PostingCategory \($0) \($0.rawValue)" }
-        code += LocalAccount.allCases.map { "LocalAccount \($0.saveName) \($0.rawValue)" }
-        code += SaveType.allCases.map { "SaveType \($0) \($0.rawValue)" }
-        code += ["ColumnEncoding raw \(ColumnEncoding.raw.rawValue)", "ColumnEncoding varintDelta \(ColumnEncoding.varintDelta.rawValue)",
-                 "ColumnEncoding zigzag \(ColumnEncoding.zigzag.rawValue)"]
-        code += ["Compression none 0", "Compression rawDeflate 1", "Container version \(SaveFile.containerVersion)", "Format state \(WorldState.saveFormat)"]
-        XCTAssertEqual(Set(code), locked)
+        let g = GovRef(row: Idx(raw: 0), serial: Serial(raw: 1))
+        let code: [String: [UInt64]] = [
+            "Command": CommandKind.allCases.map { UInt64($0.rawValue) },
+            "Issuer": [Issuer.player(g), .event, .ai(g)].map { UInt64($0.rank) },
+            "PostingCategory": PostingCategory.allCases.map { UInt64($0.rawValue) },
+            "LocalAccount": LocalAccount.allCases.map { UInt64($0.rawValue) },
+            "SaveType": SaveType.allCases.map { UInt64($0.rawValue) },
+            "ColumnEncoding": [ColumnEncoding.raw, .varintDelta, .zigzag].map { UInt64($0.rawValue) },
+            "Compression": SaveCompression.allCases.map { UInt64($0.rawValue) },
+        ]
+        for (group, numbers) in code.sorted(by: { $0.key < $1.key }) {
+            XCTAssertEqual(Set(numbers).count, numbers.count, "\(group) repeats a number")
+            XCTAssertEqual(Set(numbers), Set(locked[group] ?? []), "\(group)")
+        }
+        for (group, current) in [("Container", UInt64(SaveFile.containerVersion)), ("Format", UInt64(WorldState.saveFormat))] {
+            XCTAssertEqual(locked[group]?.max(), current, "\(group): the current version is the highest locked")
+        }
+        XCTAssertEqual(Set(locked.keys), Set(code.keys).union(["Container", "Format"]))
+        // the loader knows every kind, and every kind's tag is its own
+        XCTAssertEqual(Command.knownTags, CommandKind.allCases.map { $0.rawValue })
+        XCTAssertEqual(Command.setTaxRate(government: g, rate: .zero).tag, 1)
+        XCTAssertEqual(Command.succeedGovernment(government: g).tag, 102)
     }
 }
 

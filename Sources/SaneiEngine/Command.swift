@@ -7,7 +7,7 @@ import SaneiCore
 // through SaneiCore.
 
 /// Who gave a command. The order of a day's commands is (day, rank, the issuer's serial, sequence): the player first,
-/// then events, then the governments' AI, each AI by its government's serial (and row).
+/// then events, then the governments' AI, each AI by its government's serial and row.
 public enum Issuer: Sendable, Hashable {
     /// The player, for the government they lead.
     case player(GovRef)
@@ -43,6 +43,14 @@ public enum Issuer: Sendable, Hashable {
     }
 }
 
+/// The kinds of command, with their stored numbers (registered in `tags.lock`): never renumber one.
+public enum CommandKind: UInt16, Sendable, CaseIterable {
+    case setTaxRate = 1
+    case createGovernment = 100
+    case dissolveGovernment = 101
+    case succeedGovernment = 102
+}
+
 /// One command.
 public enum Command: Sendable, Equatable {
     /// A government sets its tax rate (0 to 100%). Given by that government (its player or its AI), or by an event.
@@ -67,12 +75,16 @@ public enum Command: Sendable, Equatable {
     case succeedGovernment(government: GovRef)
 
     /// The stored number of each case. Never renumber one; a new case takes a new number.
-    public var tag: UInt16 {
+    public var tag: UInt16 { kind.rawValue }
+
+    /// The command's kind, by an exhaustive switch: a new case does not compile until it has a kind, and the kinds are
+    /// what the loader knows (`CommandKind.allCases`).
+    public var kind: CommandKind {
         switch self {
-        case .setTaxRate: return 1
-        case .createGovernment: return 100
-        case .dissolveGovernment: return 101
-        case .succeedGovernment: return 102
+        case .setTaxRate: return .setTaxRate
+        case .createGovernment: return .createGovernment
+        case .dissolveGovernment: return .dissolveGovernment
+        case .succeedGovernment: return .succeedGovernment
         }
     }
 
@@ -213,15 +225,15 @@ public enum Command: Sendable, Equatable {
     }
 }
 
-/// A command with when and by whom it was given. A day applies its commands in (day, rank, the issuer's serial,
-/// sequence) order (§2.4), so the result never depends on the order they arrived in (within the issuers' rooms); each
+/// A command with when and by whom it was given. A day applies its commands in (day, rank, the issuer's serial and
+/// row, sequence) order (§2.4), so the result never depends on the order they arrived in (within the issuers' rooms); each
 /// issuer numbers its own commands, rising, and a second command with a key already waiting is refused, so no two
 /// share one.
 @frozen
 public struct IssuedCommand: Sendable, Equatable {
     /// The day it takes effect: applied at the start of that day. A command for a day already run is refused when it
     /// is submitted. Refusing is not what keeps a game the same on every phone: the host does, by not running a day
-    /// until every AI result due on it has been submitted (§2.4's fixed landing day; the host's work, T-041). A late
+    /// until every AI result due on it has been submitted (§2.4's fixed landing day; the host's work, T-044). A late
     /// result from the AI or an event is therefore the host's fault, never normal play.
     public var day: GameDate
     public var issuer: Issuer
