@@ -56,15 +56,17 @@ jobs:
           # (`DetRNG.shuffle(&items)` is the project's own deterministic shuffle: only the standard library's shapes,
           # `.shuffle()` and `.shuffle(using:)`, are banned)
           # (a space before or inside the parenthesis, or `using:` on the next line, is still caught)
-          rnd='\.(random|randomElement|shuffled)\s*\(|\.shuffle\s*\(\s*([^&[:space:]]|$)|\bSystemRandomNumberGenerator\b|\bhashValue\b|\bHasher\s*\('
+          rnd='\.(random|randomElement|shuffled)\s*\(|\.shuffle\s*\(\s*([^&[:space:]]|$)|\bSystemRandomNumberGenerator\b|\bhashValue\b|\bHasher\s*\(|\bHasher\s*\.\s*init\b|:\s*Hasher\b'
           found=0
           for f in $(find $SIM -name '*.swift'); do
             out=$(sed -E 's://.*$::' "$f" | grep -nE "$rnd" || true)
             if [ -n "$out" ]; then echo "$out" | sed "s|^|$f:|"; found=1; fi
           done
           if [ "$found" = 1 ]; then echo "The simulation draws only from DetRNG and never reads a hash value (ADR 0002)"; exit 1; fi
-          # money is never rebuilt from another unit's raw value outside SaneiCore (ADR 0003): `LCU(raw: dollars.raw)`
-          xu='\b(LCU|USDn|Money)\(raw:\s*[A-Za-z_][A-Za-z0-9_.]*\.raw\s*\)'
+          # money is never rebuilt from another unit's raw value in the engine (ADR 0003): `LCU(raw: dollars.raw)`,
+          # `.init(raw: x.raw)`, `LCU(raw: Int64(x.raw))`, `a.raw = b.raw` (a generic helper or a call split over lines
+          # is not seen: reviews check those)
+          xu='(\b(LCU|USDn|Money)|\.init)\s*\(\s*raw:[^)]*\.raw\b|\.raw\s*=[^=]'
           found=0
           for f in $(find Sources/SaneiEngine -name '*.swift'); do
             out=$(sed -E 's://.*$::' "$f" | grep -nE "$xu" || true)

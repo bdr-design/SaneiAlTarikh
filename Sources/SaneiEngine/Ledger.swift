@@ -6,9 +6,10 @@ import SaneiCore
 // equals the sum of the month's postings, in its own unit; the world account is exactly 0 after each monthly close.
 //
 // The types keep the units apart: an LCU amount can only be posted to an LCU account, a USDn amount to a USDn account,
-// and constant dollars (`Money`) not at all. Two limits the types do not cover, so the ledger does: one currency's LCU
-// from another's (a posting lands in the account's own currency, and a local transfer refuses two currencies), and a
-// value rebuilt from another unit's `raw` (`LCU(raw: dollars.raw)`), which no code outside SaneiCore may write.
+// and constant dollars (`Money`) not at all. Two limits the types do not cover: one currency's LCU from another's (a
+// posting lands in the account's own currency, and a local transfer refuses two currencies), and a value rebuilt from
+// another unit's `raw` (`LCU(raw: dollars.raw)`), which the engine never writes: a CI lint bans the shapes a line
+// shows, and reviews check the rest (ADR 0003).
 // Everything here that moves money is internal: the systems of this module post; nothing outside writes money.
 // stdlib only.
 
@@ -52,8 +53,9 @@ public enum DollarAccount: Sendable, Equatable {
 @frozen
 public struct CurrencyTable: Sendable, Equatable {
     public static let capacity = 384
-    /// One LCU unit is 10^k of the currency's own units (a UInt8: 85 redenominations, 10^255, are never reached).
-    public internal(set) var scaleExponent: [UInt8]
+    /// One LCU unit is 10^k of the currency's own units (a UInt16: 21,845 redenominations, which no game reaches, even
+    /// with the cheats' money; past that a currency stops redenominating and its balances clamp, counted).
+    public internal(set) var scaleExponent: [UInt16]
     /// LCU units per USDn unit, as a logarithm.
     public internal(set) var rate: [LogQ]
     /// The price level, as a logarithm (1 in 2011).
@@ -96,7 +98,7 @@ public struct CurrencyTable: Sendable, Equatable {
 
     /// Adds a currency; nil at the cap. Only `WorldState.addPolity` adds one, so a polity's currency is in its row
     /// (`WorldState.currency(of:)`); currency unions change that (M2).
-    mutating func add(scaleExponent k: UInt8, rate r: LogQ) -> Idx<CurrencyKind>? {
+    mutating func add(scaleExponent k: UInt16, rate r: LogQ) -> Idx<CurrencyKind>? {
         guard rate.count < Self.capacity else { return nil }
         keepRoom()
         scaleExponent.append(k)
@@ -200,7 +202,7 @@ extension WorldState {
     /// ended moves nothing. A balance past 2^60 marks its currency to redenominate at the day's end.
     @discardableResult
     mutating func post(_ g: GovRef, _ account: LocalAccount, _ category: PostingCategory, _ amount: LCU) -> Bool {
-        guard governments.isLive(g) else { world.refusedPostings &+= 1; return false }
+        guard canPost(g, account, amount) else { world.refusedPostings &+= 1; return false }
         let i = LedgerTable.index(g.row.int, account)
         ledger.local[i] += amount
         ledger.localPosted[i] += amount
@@ -208,10 +210,33 @@ extension WorldState {
         return true
     }
 
+    /// True when the posting can be made exactly: the government lives, and neither the balance nor the month's sum
+    /// would pass the range of an Int64 (a posting that would clamp is refused, so no money is ever lost to a clamp
+    /// and the invariant always sees every posting).
+    func canPost(_ g: GovRef, _ account: LocalAccount, _ amount: LCU) -> Bool {
+        guard governments.isLive(g) else { return false }
+        let i = LedgerTable.index(g.row.int, account)
+        return !ledger.local[i].raw.addingReportingOverflow(amount.raw).overflow
+            && !ledger.localPosted[i].raw.addingReportingOverflow(amount.raw).overflow
+    }
+
+    func canPost(_ account: DollarAccount, _ amount: USDn) -> Bool {
+        switch account {
+        case let .reserves(g):
+            guard governments.isLive(g) else { return false }
+            return !ledger.reserves[g.row.int].raw.addingReportingOverflow(amount.raw).overflow
+                && !ledger.reservesPosted[g.row.int].raw.addingReportingOverflow(amount.raw).overflow
+        case .world:
+            return !ledger.world.raw.addingReportingOverflow(amount.raw).overflow
+                && !ledger.worldPosted.raw.addingReportingOverflow(amount.raw).overflow
+        }
+    }
+
     /// Posts an amount to a currency's money base, in that currency's LCU. False, and counted, for no such currency.
     @discardableResult
     mutating func post(moneyBase c: Idx<CurrencyKind>, _ category: PostingCategory, _ amount: LCU) -> Bool {
-        guard currencies.exists(c) else { world.refusedPostings &+= 1; return false }
+        guard currencies.exists(c), !currencies.moneyBase[c.int].raw.addingReportingOverflow(amount.raw).overflow,
+              !currencies.moneyBasePosted[c.int].raw.addingReportingOverflow(amount.raw).overflow else { world.refusedPostings &+= 1; return false }
         currencies.moneyBase[c.int] += amount
         currencies.moneyBasePosted[c.int] += amount
         if currencies.moneyBase[c.int].needsRedenomination { currencies.redenominationDue[c.int] = true }
@@ -219,12 +244,13 @@ extension WorldState {
     }
 
     /// Posts an amount in dollars to a dollar account. Dollars never redenominate (a dollar hyperinflation has no
-    /// rule). False, and counted, for the reserves of a government that no longer exists.
+    /// rule). False, and counted, for the reserves of a government that no longer exists, or a posting that would
+    /// pass the range.
     @discardableResult
     mutating func post(_ account: DollarAccount, _ category: PostingCategory, _ amount: USDn) -> Bool {
+        guard canPost(account, amount) else { world.refusedPostings &+= 1; return false }
         switch account {
         case let .reserves(g):
-            guard governments.isLive(g) else { world.refusedPostings &+= 1; return false }
             ledger.reserves[g.row.int] += amount
             ledger.reservesPosted[g.row.int] += amount
         case .world:
@@ -238,8 +264,9 @@ extension WorldState {
     /// that cancel. Both sides are checked first, alive and in one currency; otherwise nothing moves, and false.
     @discardableResult
     mutating func transfer(from: (GovRef, LocalAccount), to: (GovRef, LocalAccount), _ category: PostingCategory, _ amount: LCU) -> Bool {
-        guard governments.isLive(from.0), governments.isLive(to.0),
-              ledger.currency[from.0.row.int] == ledger.currency[to.0.row.int] else { world.refusedPostings &+= 1; return false }
+        guard governments.isLive(from.0), governments.isLive(to.0), amount.raw != .min,
+              ledger.currency[from.0.row.int] == ledger.currency[to.0.row.int],
+              canPost(from.0, from.1, -amount), canPost(to.0, to.1, amount) else { world.refusedPostings &+= 1; return false }
         post(from.0, from.1, category, -amount)
         post(to.0, to.1, category, amount)
         return true
@@ -249,8 +276,7 @@ extension WorldState {
     /// sides are checked first; nothing moves, and false, when either is a government that no longer exists.
     @discardableResult
     mutating func transfer(from: DollarAccount, to: DollarAccount, _ category: PostingCategory, _ amount: USDn) -> Bool {
-        if case let .reserves(g) = from, !governments.isLive(g) { world.refusedPostings &+= 1; return false }
-        if case let .reserves(g) = to, !governments.isLive(g) { world.refusedPostings &+= 1; return false }
+        guard amount.raw != .min, canPost(from, -amount), canPost(to, amount) else { world.refusedPostings &+= 1; return false }
         post(from, category, -amount)
         post(to, category, amount)
         return true
@@ -258,28 +284,42 @@ extension WorldState {
 
     /// Changes local currency from a government's treasury into dollars in its reserves (a positive amount), or
     /// dollars into local currency (a negative one), at the day's rate: two postings under `fx`, each exact in its own
-    /// unit, and their values equal at the rate to within the rounding of the dollar leg. Returns the dollars posted
-    /// to the reserves (negative when sold). Nil, and nothing moves, when the government no longer exists or when the
-    /// dollar leg would round to 0 (so local currency is never given for nothing). No balance is checked: whether a
-    /// treasury or the reserves may go below 0 is the economy's rule (M2). An exchange set by its dollar side, for an
-    /// exact bill in dollars, comes with trade settlement (M2).
+    /// unit. The dollar leg is always in the market's favour, never the government's: the rate's value (`LogQ.applied`,
+    /// measured up to about 1.2e-7 relative above the true value) less a margin of 1/2^21 of it (about 4.8e-7) and one
+    /// unit, so a buy gets at most its value and a sale gives at least its value, and no round trip ever makes money (a
+    /// spread of about 5e-7 and a unit, far below a bank's). Returns the dollars posted to the reserves (negative when sold). Nil, and nothing moves (counted),
+    /// when the government no longer exists, when a buy's dollar leg comes to 0 or less (local currency is never given
+    /// for nothing), or when a leg would pass the range. No balance is checked: whether a treasury or the reserves may
+    /// go below 0 is the economy's rule (M2). An exchange set by its dollar side, for an exact bill in dollars, comes
+    /// with trade settlement (M2).
     @discardableResult
     mutating func exchange(_ g: GovRef, local amount: LCU) -> USDn? {
-        guard governments.isLive(g) else { world.refusedPostings &+= 1; return nil }
+        guard governments.isLive(g), amount != .zero, amount.raw != .min else { world.refusedPostings &+= 1; return nil }
         let rate = currencies.rate[ledger.currency[g.row.int].int]
-        let dollars = USDn(raw: (-rate).applied(to: amount.raw))
-        if dollars == .zero && amount != .zero { world.refusedPostings &+= 1; return nil }
+        let value = (-rate).applied(to: amount.raw)
+        let margin = value.magnitude >> 21 + 1                    // 1/2,097,152: about 4.8e-7, four times the error measured
+        let (d, overflow) = value.subtractingReportingOverflow(Int64(margin))
+        guard !overflow, value.magnitude < UInt64(Int64.max), !(amount.raw > 0 && d <= 0) else { world.refusedPostings &+= 1; return nil }
+        let dollars = USDn(raw: d)
+        guard canPost(g, .treasury, -amount), canPost(.reserves(g), dollars) else { world.refusedPostings &+= 1; return nil }
         post(g, .treasury, .fx, -amount)
         post(.reserves(g), .fx, dollars)
         return dollars
     }
 
-    /// Redenominates every currency marked today (the pipeline calls it at the day's end, after every posting of the
-    /// day, so a flow of several postings is all in one scale; Int64 leaves 8 times 2^60 of room for the rest of the
-    /// day).
+    /// Redenominates every currency marked today whose balances are still past 2^60 at the day's end (a flow that
+    /// passed the limit and came back leaves the currency as it is). The pipeline calls it after every posting of the
+    /// day, so a flow of several postings is all in one scale: a balance under 2^60 has 7 times 2^60 of room for the
+    /// rest of the day, and a posting that would pass the range is refused, never clamped.
     mutating func redenominateDue() {
         for c in 0..<currencies.count where currencies.redenominationDue[c] {
-            redenominate(Idx(raw: UInt16(c)))
+            currencies.redenominationDue[c] = false
+            let idx = Idx<CurrencyKind>(raw: UInt16(c))
+            var still = currencies.moneyBase[c].needsRedenomination
+            for row in 0..<ledger.currency.count where !still && ledger.currency[row] == idx {
+                for k in 0..<LedgerTable.accountsPerRow where ledger.local[row * LedgerTable.accountsPerRow + k].needsRedenomination { still = true }
+            }
+            if still && currencies.scaleExponent[c] <= UInt16.max - 3 { redenominate(idx) }
         }
     }
 
@@ -290,7 +330,7 @@ extension WorldState {
     /// its pass-through and the money base's growth must take the step out, by `scaleExponent`). The rate and the
     /// price index follow, by log2(1/1000) to within 4e-7, so values at the rate drift by about 3e-7 per
     /// redenomination. The count in `redenominations` is the log; a notification comes with the notification ring
-    /// (M1b).
+    /// (M1c).
     mutating func redenominate(_ c: Idx<CurrencyKind>) {
         let a = LedgerTable.accountsPerRow
         for row in 0..<ledger.currency.count where ledger.currency[row] == c {
@@ -321,8 +361,8 @@ extension WorldState {
     }
 
     /// What the ledger's invariants say: an empty list when they hold. The monthly close asks it in every build (a
-    /// walk of the columns once a month); tests, debug builds and replays may ask it at any time. A balance that
-    /// clamped breaks its invariant on purpose: money past the range was lost, and the close counts it.
+    /// walk of the columns once a month); tests, debug builds and replays may ask it at any time. No posting clamps (one
+    /// that would is refused), so every posting is in the sums it checks.
     public func ledgerViolations() -> [String] {
         var out: [String] = []
         let l = ledger

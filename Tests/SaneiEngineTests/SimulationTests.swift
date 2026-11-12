@@ -488,6 +488,32 @@ extension SimulationTests {
                                                 command: .setTaxRate(government: first, rate: .zero))), .invalid)
     }
 
+    /// A succession hands the player's waiting orders to the successor; a stale or made-up issuer is refused when it
+    /// submits; the AI's and events' refusals at submit are counted in the state.
+    func testASuccessionKeepsThePlayersOrdersAndStaleIssuersAreRefused() {
+        var sim = world(3)
+        sim.step()
+        let mine = sim.state.governments.ref(1)
+        let today = sim.state.world.date
+        XCTAssertEqual(sim.submit(IssuedCommand(day: today.adding(days: 3), issuer: .player(mine), sequence: 1,
+                                                command: .setTaxRate(government: mine, rate: BP(raw: 4_321)))), .queued)
+        XCTAssertEqual(sim.submit(IssuedCommand(day: today.adding(days: 1), issuer: .event, sequence: 1, command: .succeedGovernment(government: mine))), .queued)
+        sim.advance(days: 4)
+        let next = sim.state.governments.ref(1)
+        XCTAssertNotEqual(next.serial, mine.serial)
+        XCTAssertEqual(sim.state.governments.taxRate[1], BP(raw: 4_321), "the order went through, as the successor's")
+        XCTAssertEqual(sim.state.world.refusedCommands, 0)
+        // a made-up AI issuer cannot take the key of the real one
+        let fake = GovRef(row: Idx(raw: 2), serial: Serial(raw: 99))
+        let d = sim.state.world.date
+        XCTAssertEqual(sim.submit(IssuedCommand(day: d, issuer: .ai(fake), sequence: 5, command: .setTaxRate(government: fake, rate: .zero))), .invalid)
+        XCTAssertEqual(sim.state.world.refusedSubmits, 1)
+        XCTAssertEqual(sim.submit(IssuedCommand(day: d.adding(days: -1), issuer: .event, sequence: 5, command: .dissolveGovernment(government: next))), .late)
+        XCTAssertEqual(sim.state.world.refusedSubmits, 2)
+        XCTAssertEqual(sim.submit(IssuedCommand(day: d, issuer: .player(next), sequence: 9, command: .setTaxRate(government: next, rate: BP(raw: 99_999)))), .invalid)
+        XCTAssertEqual(sim.state.world.refusedSubmits, 2, "the player's refusals are shown to the player, not counted")
+    }
+
     /// The queue is kept in the order commands are applied in, so the state, its hash and a save taken between days
     /// never depend on the order commands arrived in; a command the codec cannot read back is refused from anyone.
     func testTheQueueNeverDependsOnArrivalAndHoldsOnlyWhatItCanSave() {
@@ -532,24 +558,27 @@ extension SimulationTests {
     }
 
     /// The day's clamps are counted by the host's long scope: the days run inside it, and a clamp a day's system
-    /// makes by itself is counted (here the monthly taxes of a base at the top of the range at 100%, which clamp).
+    /// makes by itself is counted. (The ledger never clamps, it refuses; the tax's own product does clamp when a base at
+    /// the top of the range meets a rate set past 100% here by hand, which no command allows.)
     func testADaysClampsAreCountedInsideTheHostsScope() async {
         var w = WorldState(start: start, seed: 1)
         _ = w.addPolity()
         var sim = Simulation(state: w)
         sim.submit(IssuedCommand(day: start, issuer: .event, sequence: 1,
-                                 command: .createGovernment(polity: Idx(raw: 0), treasury: LCU(raw: .max), taxBase: LCU(raw: .max), taxRate: .one)))
+                                 command: .createGovernment(polity: Idx(raw: 0), treasury: LCU(raw: 10), taxBase: LCU(raw: 10), taxRate: .one)))
+        sim.step()                                                 // the 1st: made, and its first monthly run
+        sim.state.governments.taxBase[0] = LCU(raw: .max)
+        sim.state.governments.taxRate[0] = BP(raw: 20_000)
         let outside = SaturationCounter()
         let inside = SaturationCounter()
-        Saturation.counting(into: outside) { sim.step() }          // the 1st: made, and its first monthly run, which clamps
-        // the currency redenominated at the 1st's end; the base is set at the top again, so February's run clamps too
-        sim.state.governments.taxBase[0] = LCU(raw: .max)
+        Saturation.counting(into: outside) { sim.advance(days: 2) }  // no slot day: nothing clamps
         await Saturation.countingAcrossAwaits(into: inside) {
             await Task.yield()
-            sim.advance(days: 31)                                  // February's run, on the same slot, clamps again
+            sim.advance(days: 31)                                  // February's run, on its slot, clamps
         }
-        XCTAssertGreaterThanOrEqual(outside.count, 1)
+        XCTAssertEqual(outside.count, 0)
         XCTAssertGreaterThanOrEqual(inside.count, 1, "a clamp made by the day itself is counted by the host's scope")
+        XCTAssertGreaterThanOrEqual(sim.state.world.refusedPostings, 1, "and the ledger refused the clamped amount")
     }
 
     func testIssuedCommandsSurviveTheirCodec() {

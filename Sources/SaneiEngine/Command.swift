@@ -11,7 +11,8 @@ import SaneiCore
 public enum Issuer: Sendable, Hashable {
     /// The player, for the government they lead.
     case player(GovRef)
-    /// An event, a peace deal or a negotiation, and the scenario's set-up: the only issuer of lifecycle effects.
+    /// An event, a peace deal or a negotiation: the only issuer of lifecycle effects. (The scenario's set-up is not a
+    /// command: it builds the state directly before the start.)
     case event
     /// A government's AI, for that government.
     case ai(GovRef)
@@ -57,7 +58,11 @@ public enum Command: Sendable, Equatable {
     /// A lifecycle effect, from events only: a government ends and its successor takes its place in one step (Côte
     /// d'Ivoire's next government, a revolution's). The successor keeps the row, so the provinces, the accounts, the
     /// monthly slot and the calendar carry over and no month's or year's run is made twice; it gets a new serial, so
-    /// the references to the one that ended reach nothing. Its policies are its predecessor's until it changes them.
+    /// the references to the one that ended reach nothing. Its policies are its predecessor's until it changes them,
+    /// and the player's waiting orders for the one that ended become the successor's (the host takes the successor's
+    /// reference from the row: T-044); the AI's waiting commands for it are refused on their day and counted, as its
+    /// successor's AI looks afresh. A successor made earlier the same day is named by its row and the serial the
+    /// counter will give (`governments.counter.next`), the one way to name it before it exists.
     case succeedGovernment(government: GovRef)
 
     /// The stored number of each case. Never renumber one; a new case takes a new number.
@@ -78,8 +83,9 @@ public enum Command: Sendable, Equatable {
             guard issuer == .event || issuer.government == g else { return false }
             return state.governments.isLive(g) && rate >= .zero && rate <= .one
         case let .createGovernment(p, treasury, taxBase, rate):
-            guard issuer == .event, state.polities.isLive(p), treasury >= .zero, taxBase >= .zero, rate >= .zero, rate <= .one
-            else { return false }
+            // the starting amounts within the redenomination limit, so the first postings stay exact
+            guard issuer == .event, state.polities.isLive(p), treasury >= .zero, taxBase >= .zero, !treasury.needsRedenomination,
+                  !taxBase.needsRedenomination, rate >= .zero, rate <= .one else { return false }
             let t = state.governments
             return t.canTakeSerial && (t.rows < GovernmentTable.capacity || t.exists.contains(false))
         case let .dissolveGovernment(g, to):
@@ -118,7 +124,8 @@ public enum Command: Sendable, Equatable {
             guard state.createGovernment(polity: p, treasury: treasury, taxBase: taxBase, taxRate: rate,
                                          strategicPeriod: Simulation.strategicPeriod) != nil else { return false }
         case let .succeedGovernment(g):
-            guard state.governments.succeed(g) != nil else { return false }
+            guard let next = state.governments.succeed(g) else { return false }
+            state.handOverPlayerOrders(from: g, to: next)
         case let .dissolveGovernment(g, to):
             let heir: Idx<GovernmentKind> = to?.row ?? .absent
             for i in 0..<state.provinces.count where state.provinces.administrator[i] == g.row {
@@ -206,8 +213,9 @@ public enum Command: Sendable, Equatable {
 }
 
 /// A command with when and by whom it was given. A day applies its commands in (day, rank, the issuer's serial,
-/// sequence) order (§2.4), so the result never depends on the order they arrived in; each issuer numbers its own
-/// commands, rising, and a second command with a key already waiting is refused, so no two share one.
+/// sequence) order (§2.4), so the result never depends on the order they arrived in (within the issuers' rooms); each
+/// issuer numbers its own commands, rising, and a second command with a key already waiting is refused, so no two
+/// share one.
 @frozen
 public struct IssuedCommand: Sendable, Equatable {
     /// The day it takes effect: applied at the start of that day. A command for a day already run is refused when it

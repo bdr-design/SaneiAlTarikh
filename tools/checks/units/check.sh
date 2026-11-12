@@ -33,4 +33,4 @@ check money_to_a_dollar_account 'w.post(.world, .trade, Money(raw: 1))' Money
 check dollars_to_the_money_base 'w.post(moneyBase: c, .spending, USDn(raw: 1))' USDn
 check dollars_in_a_local_transfer 'w.transfer(from: (g, .treasury), to: (g, .domesticDebt), .aid, USDn(raw: 1))' USDn
 check local_plus_dollars 'let x = LCU(raw: 1) + USDn(raw: 1)' USDn
-echo "units: 7 wrong-unit postings refused by the compiler; the control compiles"
+echo "units: 6 wrong-unit postings and 1 wrong-unit sum refused by the compiler; the control compiles"

@@ -53,18 +53,41 @@ final class LedgerTests: XCTestCase {
         var (w, g) = world()
         let pounds = w.ledger.balance(1, .treasury)
         let dollars = w.exchange(g[1], local: LCU(raw: 5_950_000))
-        XCTAssertEqual(dollars, USDn(raw: 1_000), "5,950,000 pounds is about $1,000,000: 1,000 units of $1,000")
+        XCTAssertEqual(dollars, USDn(raw: 999), "5,950,000 pounds is $1,000,000, 1,000 units of $1,000, less the market's unit")
         XCTAssertEqual(w.ledger.balance(1, .treasury), pounds - LCU(raw: 5_950_000))
-        XCTAssertEqual(w.ledger.reserves[1], USDn(raw: 1_000))
-        // back the other way, at the same rate
-        XCTAssertEqual(w.exchange(g[1], local: LCU(raw: -5_950_000)), USDn(raw: -1_000))
+        XCTAssertEqual(w.ledger.reserves[1], USDn(raw: 999))
+        // back the other way: the sale gives a unit more, so the round trip costs the government, never the market
+        XCTAssertEqual(w.exchange(g[1], local: LCU(raw: -5_950_000)), USDn(raw: -1_001))
         XCTAssertEqual(w.ledger.balance(1, .treasury), pounds)
+        XCTAssertEqual(w.ledger.reserves[1], USDn(raw: -2))
         XCTAssertTrue(w.ledgerViolations().isEmpty)
+        // at every size, a buy gets at most its value at the rate and a sale gives at least its value: rounding never
+        // makes money (5,950 pounds to one unit of $1,000)
+        var r = DetRNG(seed: 11, key: 0, stream: 0, serial: 0)
+        // at three rates: 5,950 pounds to a unit, 7 to a unit, and a unit for 3 (a strong currency)
+        for (num, den) in [(Int64(5_950), Int64(1)), (7, 1), (1, 3)] {
+            w.currencies.rate[1] = LogQ(ratio: num, den)
+            for k in 0..<4_000 {
+                let size = Int64(r.below(UInt64(1) << UInt64(20 + k % 40)))
+                let amount = LCU(raw: k % 2 == 0 ? size + 6_000 : -size - 1)
+                guard let d = w.exchange(g[1], local: amount) else { continue }
+                // the value at the rate num/den: amount × den / num, compared without overflow by dividing
+                let a = amount.raw.magnitude
+                let floorValue = a / UInt64(num) * UInt64(den) + (a % UInt64(num)) * UInt64(den) / UInt64(num)
+                if amount.raw > 0 {
+                    XCTAssertLessThanOrEqual(UInt64(d.raw), floorValue, "a buy of \(amount.raw) at \(num)/\(den) gets at most its value")
+                } else {
+                    XCTAssertGreaterThanOrEqual(d.raw.magnitude, floorValue, "a sale of \(amount.raw) at \(num)/\(den) gives at least its value")
+                }
+            }
+        }
+        w.currencies.rate[1] = LogQ(ratio: 5_950, 1)
+        XCTAssertTrue(w.ledgerViolations().isEmpty)
+        w = world().0
         // a dollar leg that would round to 0 gives nothing for something: refused, counted
         let before = w.hash
         XCTAssertNil(w.exchange(g[1], local: LCU(raw: 2_974)))
         XCTAssertEqual(w.world.refusedPostings, 1)
-        XCTAssertEqual(w.ledger.balance(1, .treasury), pounds)
         XCTAssertNotEqual(w.hash, before, "only the count moved")
         // a government that no longer exists: nothing moves, and each refusal is counted
         var gone = w
@@ -151,6 +174,34 @@ final class LedgerTests: XCTestCase {
         sim.advance(days: 62)
         XCTAssertEqual(sim.state.currencies.redenominations[0], 1, "the next taxes are in the new scale: no second one")
         XCTAssertEqual(sim.state.world.ledgerFailures, 0)
+    }
+
+    /// No posting clamps: one that would pass the range is refused and counted, so the invariant sees every posting; a
+    /// starting amount past 2^60 is refused; a flow that passes 2^60 and comes back the same day leaves the currency as
+    /// it is.
+    func testNothingClampsAndOnlyAStandingBalanceRedenominates() {
+        var (w, g) = world()
+        XCTAssertTrue(w.post(moneyBase: Idx(raw: 0), .cheat, LCU(raw: .max)))
+        XCTAssertFalse(w.post(moneyBase: Idx(raw: 0), .cheat, LCU(raw: 1_000)), "it would clamp")
+        XCTAssertEqual(w.world.refusedPostings, 1)
+        XCTAssertTrue(w.ledgerViolations().isEmpty)
+        XCTAssertFalse(w.transfer(from: .world, to: .world, .trade, USDn(raw: .min)))
+        XCTAssertFalse(w.exchange(g[0], local: LCU(raw: .min)) != nil)
+        w.redenominateDue()
+        XCTAssertEqual(w.currencies.redenominations[0], 1, "the money base stood past 2^60 at the day's end")
+        // a flow past 2^60 and back the same day
+        let before = w.ledger.balance(1, .treasury)
+        w.post(g[1], .treasury, .spending, LCU(raw: (1 << 60) + 1))
+        w.post(g[1], .treasury, .spending, LCU(raw: -((1 << 60) + 1)))
+        w.redenominateDue()
+        XCTAssertEqual(w.currencies.redenominations[1], 0)
+        XCTAssertEqual(w.ledger.balance(1, .treasury), before)
+        XCTAssertFalse(w.currencies.redenominationDue[1])
+        // a starting treasury or tax base past 2^60 is refused
+        let big = LCU(raw: (1 << 60) + 1)
+        XCTAssertFalse(Command.createGovernment(polity: Idx(raw: 0), treasury: big, taxBase: .zero, taxRate: .zero).validate(w, by: .event))
+        XCTAssertFalse(Command.createGovernment(polity: Idx(raw: 0), treasury: .zero, taxBase: big, taxRate: .one).validate(w, by: .event))
+        XCTAssertTrue(Command.createGovernment(polity: Idx(raw: 0), treasury: LCU(raw: 1 << 60), taxBase: LCU(raw: 1 << 60), taxRate: .one).validate(w, by: .event))
     }
 
     /// The stored numbers never change: each by its name. And the accounts are where the design puts them: the money

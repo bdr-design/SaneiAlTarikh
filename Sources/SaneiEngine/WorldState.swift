@@ -24,11 +24,14 @@ public struct WorldRow: Sendable, Equatable {
     /// Monthly closes at which the ledger's invariants did not hold (0 in every game; §8 checks it).
     public internal(set) var ledgerFailures: UInt32
     /// Commands refused when their day came (their government ended meanwhile, say). Only the count is kept here; the
-    /// record of which order was refused and why comes with the notification ring (M1b), which screen 26 reads.
+    /// record of which order was refused and why comes with the notification ring (M1c), which screen 26 reads.
     public internal(set) var refusedCommands: UInt32
     /// Postings refused: a flow from or to a government that has ended, a local transfer across two currencies, an
     /// exchange whose dollar leg rounds to 0. Money never vanishes silently: each refusal is counted here.
     public internal(set) var refusedPostings: UInt32
+    /// Commands of the AI and events refused when submitted (late, full, a key taken, unwritable, an issuer that has
+    /// ended): kept in the state so no effect is dropped without a trace. The player's refusals are shown to the player.
+    public internal(set) var refusedSubmits: UInt32
 
     public init(date: GameDate, seed: UInt64) {
         self.date = date
@@ -39,6 +42,7 @@ public struct WorldRow: Sendable, Equatable {
         ledgerFailures = 0
         refusedCommands = 0
         refusedPostings = 0
+        refusedSubmits = 0
     }
 }
 
@@ -48,9 +52,9 @@ public struct WorldRow: Sendable, Equatable {
 public struct PolityTable: Sendable, Equatable {
     /// L3's cap.
     public static let capacity = 384
-    public private(set) var exists: [Bool]
-    public private(set) var serial: [Serial]
-    public private(set) var counter: SerialCounter
+    public internal(set) var exists: [Bool]
+    public internal(set) var serial: [Serial]
+    public internal(set) var counter: SerialCounter
 
     public init() {
         exists = []
@@ -103,9 +107,9 @@ public struct GovernmentTable: Sendable, Equatable {
     /// A month the government has not run in yet: lower than any month index.
     public static let never: Int32 = .min
 
-    public private(set) var exists: [Bool]
-    public private(set) var serial: [Serial]
-    public private(set) var polity: [Idx<PolityKind>]
+    public internal(set) var exists: [Bool]
+    public internal(set) var serial: [Serial]
+    public internal(set) var polity: [Idx<PolityKind>]
     // scheduling (§2.4)
     public internal(set) var monthlySlot: [UInt8]
     /// The month index (year × 12 + month − 1) of the last monthly run.
@@ -121,7 +125,7 @@ public struct GovernmentTable: Sendable, Equatable {
     public internal(set) var monthlyRuns: [UInt32]
     public internal(set) var yearlyRuns: [UInt32]
     public internal(set) var strategicRuns: [UInt32]
-    public private(set) var counter: SerialCounter
+    public internal(set) var counter: SerialCounter
 
     public init() {
         exists = []
@@ -322,6 +326,29 @@ public struct WorldState: Sendable, Equatable {
         return g
     }
 
+    /// The player's waiting orders given for `old` become `new`'s: the issuer and, for an order about `old` itself, its
+    /// target. Their place in the queue moves with the issuer's new serial (an insertion pass, in place: no allocation).
+    mutating func handOverPlayerOrders(from old: GovRef, to new: GovRef) {
+        var changed = false
+        for i in 0..<pending.count where pending[i].issuer == .player(old) {
+            pending[i].issuer = .player(new)
+            if case let .setTaxRate(target, rate) = pending[i].command, target == old {
+                pending[i].command = .setTaxRate(government: new, rate: rate)
+            }
+            changed = true
+        }
+        guard changed else { return }
+        for i in 1..<Swift.max(1, pending.count) {
+            let c = pending[i]
+            var j = i - 1
+            while j >= 0 && IssuedCommand.precedes(c, pending[j]) {
+                pending[j + 1] = pending[j]
+                j -= 1
+            }
+            pending[j + 1] = c
+        }
+    }
+
     /// Adds a province (a scenario's set-up); nil when the polity or the government does not exist, or at the cap.
     public mutating func addProvince(sovereign s: Idx<PolityKind>, administrator a: GovRef, population p: Pop32) -> Idx<ProvinceKind>? {
         guard polities.isLive(s), governments.isLive(a) else { return nil }
@@ -340,6 +367,7 @@ public struct WorldState: Sendable, Equatable {
         h.combine(world.ledgerFailures)
         h.combine(world.refusedCommands)
         h.combine(world.refusedPostings)
+        h.combine(world.refusedSubmits)
         let p = polities
         h.combine(UInt64(p.count))
         for i in 0..<p.count {

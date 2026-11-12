@@ -14,10 +14,13 @@ the world account is exactly 0 after each monthly close.
 1. **Units by type.** A government's local accounts and a currency's money base hold `LCU`; FX reserves and the world
    account hold `USDn`. A balance changes only by a posting (`post` for one amount, `transfer` and `exchange` for two
    that belong together), by the opening of a government's accounts, and by a redenomination; a wrong unit does not
-   compile, and CI proves it (`tools/checks/units/check.sh`: seven wrong-unit postings must fail, a control must
-   compile). `Money` (constant dollars) has no posting at all: it is derived for reports. Two limits the types do not
-   cover: one currency's `LCU` from another's (a posting lands in the account's own currency, and a local transfer
-   refuses two currencies), and a value rebuilt from another unit's `raw`, which a CI lint bans outside SaneiCore.
+   compile, and CI proves it (`tools/checks/units/check.sh`: six wrong-unit postings and one wrong-unit sum must fail,
+   a control must compile). `Money` (constant dollars) has no posting at all: it is derived for reports. Two limits the
+   types do not cover: one currency's `LCU` from another's (a posting lands in the account's own currency, and a local
+   transfer refuses two currencies), and a value rebuilt from another unit's `raw` (`raw` and `init(raw:)` are public
+   for the codec and the save). A CI lint bans the shapes a line shows in the engine (`LCU(raw: x.raw)`,
+   `.init(raw: x.raw)`, `LCU(raw: Int64(x.raw))`, `a.raw = b.raw`); a generic helper or a call split over lines is not
+   seen by it, and reviews check those.
 2. **Accounts.** Each government row has two local accounts (treasury and domestic debt) and its FX reserves; each
    currency has its money base (§5.1: the money is the currency's, and one currency can serve several governments, as
    with Côte d'Ivoire's two in 2011 and the unions of M2); the world market has one dollar account. A government that
@@ -37,28 +40,37 @@ the world account is exactly 0 after each monthly close.
    reserved for the cheats (§5.11, M8); nothing gates it yet.
 5. **Exchanges and transfers.** An exchange is two postings under `fx` at the day's rate, from or to the treasury: the
    LCU leg and the USDn leg, each exact in its own unit, their values equal at the rate to within the rounding of the
-   dollar leg. An exchange whose dollar leg would round to 0 is refused, so local currency is never given for nothing.
+   dollar leg in the market's favour: the rate's value (`LogQ.applied`, measured up to about 1.2e-7 relative above
+   the true value) less a margin of 1/2^21 of it (about 4.8e-7) and one unit, so a buy gets at most its value and a
+   sale gives at least its value, and no round trip makes money (a spread of about 5e-7 and a unit, far below a
+   bank's); a test checks it over 4,000 sizes at three rates. A buy whose dollar leg comes
+   to 0 is refused, so local currency is never given for nothing.
    A transfer, local or in dollars, is two postings that cancel; both sides are checked before either leg posts. No
    balance is checked: overdrafts are the economy's rule (M2). A posting, transfer or exchange that touches a government
-   that has ended, or mixes two currencies, moves nothing and is counted in the world row (`refusedPostings`), so money
-   never vanishes silently.
+   that has ended, mixes two currencies, or would take a balance or a month's sum past the range of an Int64 moves
+   nothing and is counted in the world row (`refusedPostings`), so money never vanishes silently and never clamps.
 6. **Redenomination.** A local balance or a money base past 2^60 either way marks its currency; at the day's end,
-   after every posting of the day, the currency redenominates, so a flow of several postings is all in one scale
-   (Int64 leaves 8 times 2^60 of room for the rest of the day). Every LCU amount in that currency is divided by 1,000 to
+   after every posting of the day, the currency redenominates if one of them is still past 2^60 (a flow that passed
+   and came back leaves it as it is), so a flow of several postings is all in one scale. A balance under 2^60 has 7
+   times 2^60 of room for the rest of the day, and a posting that would pass the range is refused; a government's
+   starting treasury and tax base are within 2^60 (its command is refused otherwise). Every LCU amount in that currency is divided by 1,000 to
    the nearest unit: every government row's local balances (dissolved rows included), the money base, the governments'
    tax bases (and every LCU column the economy adds, M2), and the LCU fields of the commands waiting to make a
-   government in it. The whole change of each balance is posted under `redenomination`, so the month's sums span the
+   government in it (commands are worked out from the live state when given; a command that carries LCU worked out on
+   an older view, as the AI's budget commands will, is stamped with its currency's scale and rescaled or refused when
+   applied: M2). The whole change of each balance is posted under `redenomination`, so the month's sums span the
    change of scale; M2's inflation, its exchange-rate pass-through and the money base's growth must take that step out
    (by `scaleExponent`). The scale moves by 3, and the rate and the price index follow by `LogQ(ratio: 1, 1_000)`,
    within 4e-7 of log2(1/1000), so a value at the rate drifts by about 3e-7 per redenomination. The count of
-   redenominations per currency is the log; a notification comes with the notification ring (M1b). Dollars never
+   redenominations per currency is the log; a notification comes with the notification ring (M1c). The scale is a
+   UInt16: 21,845 redenominations, which no game reaches; past that the currency stops redenominating. Dollars never
    redenominate: a dollar hyperinflation has no rule. The aggregates that M2 adds (a budget's lines, nominal output, a
    union's money base) must ask the same of their sums.
 7. **The monthly close** runs on day 1, after the calendar jobs (and, from M2, after the world market and the transport
    payout, which settle through the world account). It checks the invariants in every build, a walk of the columns once
    a month, and that the world account is 0; a failed close is counted in the world row (0 in every game), and the
-   month opens at the balances as they are. A balance that clamped fails its invariant on purpose: money past the range
-   was lost. A world account left owed fails every close until it is settled, so the count is of failed closes.
+   month opens at the balances as they are. No posting clamps (decision 5), so the invariant sees every posting. A
+   world account left owed fails every close until it is settled, so the count is of failed closes.
 8. **The surface.** Everything that moves money is internal to the engine: its systems post; nothing outside writes a
    balance. The parallel monthly slots (M2) cannot post into the state from their tasks: each task fills an outbox of
    postings (an account, a category, an amount in the account's unit), applied in serial order after the burst; that is
@@ -68,4 +80,5 @@ the world account is exactly 0 after each monthly close.
 - Every system that moves money posts it; nothing writes a balance directly.
 - A failed close and every refused posting are visible in the state and its hash; the engine's tests fail on them.
 - Revaluation postings for debt and reserves held in other currencies come with the debt system (M2): a reserve's
-  revaluation is in its local value, so it posts to the government's local accounts, never to the dollar balance.
+  revaluation is in its local value, so it posts to the government's treasury under `revaluation`, never to the
+  dollar balance.

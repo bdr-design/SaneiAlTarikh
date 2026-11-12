@@ -74,15 +74,25 @@ public struct Simulation: Sendable {
     public var pending: [IssuedCommand] { state.pending }
 
     /// Queues a command for its day, at its place in the order commands are applied in: the queue is always in that
-    /// order, so the state (and its hash, and a save) never depends on the order commands arrived in.
+    /// order, so the state (and its hash, and a save) never depends on the order commands arrived in, while each
+    /// issuer stays within its room (once a room is full, the first to arrive keep their places).
     ///
     /// The host runs a day only once every AI result due on it has been submitted (§2.4's fixed landing day): a
     /// command for a day already run is refused as `.late`, and from the AI or an event that is the host's fault.
     @discardableResult
     public mutating func submit(_ c: IssuedCommand) -> SubmitResult {
+        let result = place(c)
+        if result != .queued && c.issuer.rank != 0 { state.world.refusedSubmits &+= 1 }
+        return result
+    }
+
+    mutating func place(_ c: IssuedCommand) -> SubmitResult {
         if c.day < state.world.date { return .late }
         if let g = c.issuer.government, !Command.isWritable(g) { return .unwritable }
         if !c.command.isWritable { return .unwritable }
+        // a government's issuer must be live when its command arrives: a stale or made-up one cannot hold a key that
+        // the real government's command would then find taken
+        if let g = c.issuer.government, !state.governments.isLive(g) { return .invalid }
         // the place in order, by halving (the queue is always in order); a command with the same key would sit there
         var lo = 0, hi = state.pending.count
         while lo < hi {

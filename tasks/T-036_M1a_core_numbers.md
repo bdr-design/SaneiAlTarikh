@@ -99,7 +99,8 @@ fixed what they found:
   allocations a tick. Now one long scope follows the task across a whole run of ticks (`countingAcrossAwaits`,
   measured: 0 allocations over 1,000 ticks); the short form is for single calls and tests.
 - **A child added with `addTask` inside a scope wrote the parent's counter from another thread** (counts lost). The
-  rule is now «no task of any kind inside a scope», in the code, the ADR and the engine's card.
+  rule is now «no task of any kind inside a scope», in the code, the ADR and the engine's card (since narrowed: the
+  long scope allows a burst's children through the one helper, ADR 0002).
 - **`FixedMath.quotient` trapped on a divisor of 0** on its new fast path (no caller reached it); it answers nil.
 - **Bounds worded as the reference asserts them:** «6e-8 plus one unit» for `scale`, «plus one step» for `exp2` below
   1; about 0.17 below the top for `LogQ`.

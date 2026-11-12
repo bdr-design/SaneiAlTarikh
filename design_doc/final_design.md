@@ -394,7 +394,7 @@ Dependencies run one way: Core ← Content ← Engine ← AI; Core ← Map; Pres
 | Government pairs, dense | 384² × 8 B | Opinion, treaty bits, **recognises-state** bit, **recognises-government** bit, sanction bits, escalation rung, claim bit | 1.18 MB |
 | Pair extension (sparse) | ~6,000 | Spy network, intelligence level, exposure heat, **intel epoch**, partner share | 0.10 MB |
 | Handle tables | Capped (L3) | Formations (with equipment allocations), armies, fronts and sectors, wars, fleets, air groups, operations, projects, treaties. Each row carries its `Serial`. | ≤0.9 MB |
-| Queues and history | — | Event queue, decisions, **the pending-command queue (≤64 entries while paused, each ≤600 B with what was worked out when given: the route and ETA, the previewed values; ≤40 KB; §3.9), and in the same queue, in the order they apply, the AI's (≤448) and the events' (≤64) commands waiting for their landing day, a few dozen bytes each (≤40 KB)**, a 512-entry notification ring, a 512-entry campaign log ring (each entry its title, date and stored `TermBuffer12`, about 160 B, 82 KB in all; §3.9). History: 12 series × existing governments × (60 monthly + 125 yearly) plus a campaign-start baseline row. | ≤2.6 MB |
+| Queues and history | — | Event queue, decisions, **the pending-command queue (≤64 entries while paused, each ≤600 B with what was worked out when given: the route and ETA, the previewed values; ≤40 KB; §3.9), and in the same queue, in the order they apply, the AI's (≤448) and the events' (≤64) commands waiting for their landing day. A queue entry stays a fixed few dozen bytes (56 B today; ≤40 KB for all 576); the player's worked-out data sits beside it in a side table of 64 slots keyed by the command's key, so only the player's orders pay for it**, a 512-entry notification ring, a 512-entry campaign log ring (each entry its title, date and stored `TermBuffer12`, about 160 B, 82 KB in all; §3.9). History: 12 series × existing governments × (60 monthly + 125 yearly) plus a campaign-start baseline row. | ≤2.6 MB |
 | World | 1 | 22 world prices and stocks, world interest rate, **USD deflator**, chokepoint disruption (~10), CO₂, temperature, sea level, entity counters | <2 KB |
 | **Total** | | | **≈7.3 MB** (≤8 MB) |
 
@@ -1533,7 +1533,7 @@ As before:
 
 **Difficulty changes decision quality only.** The strategic period is a target under the cap of 15 governments a day
 (§2.4 step 11, §3.2): the governments due run oldest first, by (due date, serial), so none waits for ever. At most 289
-governments in play (225 at the start plus 64, L3), Easy, Normal and Hard always keep their periods (15 a day hold 300
+governments in play (225 at the start plus 64: playableCountries, §3.2), Easy, Normal and Hard always keep their periods (15 a day hold 300
 governments at 20 days); Expert's 14 stretches to about 15 days at 225 governments and about 19 at 289 (the owner's
 proxy, 2026-11-12: the cap stays, for lightness):
 
