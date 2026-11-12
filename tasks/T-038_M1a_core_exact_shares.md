@@ -26,7 +26,7 @@ vectors).
 
 ## Scope
 - `Sources/SaneiCore`: `Shares.swift` (a largest-remainder split of a whole amount by weights into a caller's buffer,
-  with a total tie rule: the larger remainder first, then the lower index; exact n ÷ d of an amount), additions to
+  with a total tie rule: the larger remainder first, then the larger weight, then the lower index; exact n ÷ d of an amount), additions to
   `Money.swift`, `FixedPoint.swift`, `DetRNG.swift`, `Pop`.
 - The reference model gains each algorithm and vectors; the tests assert them and the closing properties (the parts
   sum to the whole for any weights, including all-zero weights and a negative whole).
@@ -46,8 +46,8 @@ vectors).
 ## Acceptance criteria
 1. `ci-linux` green (debug and optimised), with the reference checks.
 2. For any weights and any whole, the split's parts sum to the whole exactly, each part is within one unit of its exact
-   share (of its share by the halved weights when their sum passes 64 bits), a smaller weight never gets more than a
-   larger one, and the result does not depend on anything but the inputs (ties by weight, then by index).
+   share, and a smaller weight never gets more than a larger one (both of the halved weights when their sum passes
+   64 bits), and the result does not depend on anything but the inputs (ties by weight, then by index).
 3. amount × n ÷ d equals the exactly rounded quotient for every vector, at any size that fits.
 4. Nothing traps or wraps; a clamp is counted, except in a bounded ratio and in `clamped(to:)`, which never count.
 5. Six independent read-only reviews; every confirmed finding fixed; verification reviews of the fixes.
@@ -58,16 +58,19 @@ parts, not for per-province daily loops; the doc comment says so.
 
 ## What was built
 - `Sources/SaneiCore/Shares.swift`: `ShareSplitter` (the rule in ADR 0002 decision 9), with forms for whole numbers,
-  any `Amount` and `BP`, and a general form that reads a weight from and writes a part into any column.
+  any `Amount`, `BP` and `Pop32`, and a general form that reads a weight from any random-access collection and makes
+  each part through a closure, into an array.
 - `FixedPoint.swift`: `FixedMath.mulDiv`; `Q32(ratio:_:within:)`, `BP(ratio:_:within:)`; `magnitude` and
-  `clamped(to:)`; `LogQ(level:)` (it was `LogQ(_:)`), `LogQ(exponent:)`, `LogQ(ratio:)`, `exponent`, `LogQ * Q32`.
+  `clamped(to:)`; `LogQ(level:)` (it was `LogQ(_:)`), `LogQ(exponent:)`, `LogQ(ratio:)`, `exponent`, `raised(to:)`.
 - `DMath.swift`: `log2(ratio:)` on one shared table step (`log2Bits`).
-- `Money.swift`: an amount `times(count)`, `times(n, over: d)`, `divided(by:)`, `ratio(to:)` (and bounded),
-  `share(of:)`, `magnitude`, `clamped(to:)`; `Pop` and `Pop32`.
-- `DetRNG.swift`: `chance(_:in:)`, `pick`, `shuffle`.
-- The reference: 12 families (mulDiv, amountTimesCount, amountDividedBy, q32RatioWithin, bpRatioWithin, logRatio,
-  splits, splitsBP, rngChanceIn, rngPick, rngShuffle, popNarrowed), each checked against exact fractions, decimals
-  or the split rule stated a second time, except the random draws, which are their own definitions.
+- `Money.swift`: an amount `times(count:)`, `times(n, over: d)`, `divided(by:)`, `ratio(to:)` and
+  `ratio(to:within:undefined:)`, `share(of:)` and `share(of:within:undefined:)`, `magnitude`, `clamped(to:)`; `Pop` and
+  `Pop32`.
+- `DetRNG.swift`: `chance(_:in:)` on Int64 counts, `chance(_: Q32)`, `pick`, `shuffle`.
+- The reference: 16 families (mulDiv, amountTimesCount, amountDividedBy, q32RatioWithin, bpRatioWithin,
+  q32RatioUndefined, bpRatioUndefined, logRatio, splits, splitsBP, splitsPop32, rngChanceIn, rngChanceQ32, rngPick,
+  rngShuffle, popNarrowed), each checked against exact fractions, decimals or the split rule stated a second time;
+  the random draws by the number of draws each makes, `pick` said a second way, and the chances' rule rows.
 - `Tests/SaneiCoreTests/SharesTests.swift`: every row with its clamp count; the split's properties on 3,000 random
   inputs; the hazard and choice frequencies.
 

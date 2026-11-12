@@ -102,7 +102,7 @@ public struct USDn: Amount {
     @inlinable public static func == (a: USDn, b: USDn) -> Bool { a.raw == b.raw }
 }
 
-/// Constant 2011 US dollars, in units of $1,000: reports, comparisons, the score, «لماذا؟» values. Derived only: it is
+/// Constant 2011 US dollars, in units of $1,000: reports, comparisons, the score, «لماذا؟» values. Derived only:
 /// it must never be posted to a ledger account. The type alone does not stop that: the ledger's postings must take
 /// `LCU` and `USDn` only.
 @frozen

@@ -77,7 +77,7 @@ public struct DetRNG: Sendable {
 
     /// True with probability `p`, a number from 0 to 1 in steps of 2^-32 (a hazard a model works out). One draw,
     /// always. Never at 0 or below, always from 1 up. A yearly probability P is not a daily one: the daily one is
-    /// 1 - (1 - P)^(1/365), not P / 365, which is about 8% low for P = 0.17. The model that owns the hazard says which.
+    /// 1 - (1 - P)^(1/365), not P / 365, which is about 9% low for P = 0.17. The model that owns the hazard says which.
     @inlinable
     public mutating func chance(_ p: Q32) -> Bool {
         let draw = below(UInt64(1) << 32)
@@ -96,20 +96,21 @@ public struct DetRNG: Sendable {
     @inlinable
     public mutating func pick<Weights: RandomAccessCollection>(_ weights: Weights, weight: (Weights.Element) -> Int64) -> Weights.Index? {
         var total: UInt64 = 0
+        var negatives = 0
         var full = false
         for w in weights {
             let v = weight(w)
-            if v < 0 { Saturation.record() }
-            if v <= 0 || full { continue }
-            let (sum, overflow) = total.addingReportingOverflow(UInt64(v))
-            if overflow {
-                Saturation.record()
-                total = .max
-                full = true
-            } else {
-                total = sum
+            if v <= 0 {
+                if v < 0 { negatives += 1 }
+                continue
             }
+            let (sum, overflow) = total.addingReportingOverflow(UInt64(v))
+            total = overflow || full ? .max : sum
+            full = full || overflow
         }
+        // the clamps are recorded after the loop, so the loop stays free of calls
+        for _ in 0..<negatives { Saturation.record() }
+        if full { Saturation.record() }
         var left = below(total)
         if total == 0 { return nil }
         var i = weights.startIndex

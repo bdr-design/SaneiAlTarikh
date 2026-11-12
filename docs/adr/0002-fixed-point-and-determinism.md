@@ -95,8 +95,8 @@ how a clamp is counted, where the tables come from or how a random draw is mappe
    - A split (`ShareSplitter`) is the largest-remainder method (Hare's): each part is its exact share rounded toward
      zero, and the units left over go one each to the largest remainders; of two equal remainders, to the larger
      weight; of two equal weights, to the earlier part. So the parts add up to the whole exactly, each is within one
-     unit of its exact share, a smaller weight never gets more than a larger one, and the result depends only on the
-     inputs. A whole below 0 splits as its opposite, signs turned. A weight below 0 counts as 0, counted as a clamp.
+     unit of its exact share, a smaller weight never gets more than a larger one (of the halved weights, past 64 bits), and the
+     result depends only on the inputs. A whole below 0 splits as its opposite, signs turned. A weight below 0 counts as 0, counted as a clamp.
      No weight above 0: the whole is split as if every weight were 1, and the split says so (it returns false), for
      the caller to decide. No parts: nothing, counted when the whole is not 0. Weights whose sum passes 64 bits are
      halved until it fits, counted once; each part is then within one unit of its share by the halved weights. Each weight is read once; the weights are a random-access collection, never a

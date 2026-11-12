@@ -7,13 +7,14 @@
 // this is not it. stdlib only.
 
 /// Splits a whole among parts in proportion to weights. It keeps its working room between calls: a list longer than
-/// the room makes it grow once, to that length, and after that no call allocates (the caller's `parts` needs the room
-/// too). A copy is independent of the original: its first call makes room of its own, so a system keeps one splitter
-/// per worker, made before the loop, never one made or copied inside a task.
+/// the room makes it grow once, to that length or to twice the room, whichever is more, and after that no call
+/// allocates (the caller's `parts` needs the room too). A copy shares the room until one of the two splits: that one
+/// then makes room of its own. So a system keeps one splitter per worker, made before the loop, never one made or
+/// copied inside a task.
 ///
-/// Cost (measured on x86-64, optimised, from another module): about 17 to 21 ns a part for 12 parts, 13 to 24 ns a
-/// part for 100. For monthly work and for events, not for every province every day: 3,000 provinces of 12 parties is
-/// about 1.5 ms.
+/// Cost (measured on x86-64, optimised, from another module): about 25 to 41 ns a part for 12 parts with units left
+/// over. For monthly work and for events, not for every province every day: 3,000 provinces of 12 parties is about
+/// 2 ms.
 @frozen
 public struct ShareSplitter: Sendable {
     @usableFromInline var weights: [UInt64]
@@ -28,11 +29,21 @@ public struct ShareSplitter: Sendable {
         floors = []
         remainders = []
         sorted = []
-        reserve(Swift.max(0, capacity))
+        reserveExactly(Swift.max(0, capacity))
     }
 
     @inlinable
     mutating func reserve(_ count: Int) {
+        if count <= weights.capacity && count <= floors.capacity && count <= remainders.capacity && count <= sorted.capacity { return }
+        let room = Swift.max(count, 2 * weights.capacity)
+        weights.reserveCapacity(room)
+        floors.reserveCapacity(room)
+        remainders.reserveCapacity(room)
+        sorted.reserveCapacity(room)
+    }
+
+    @inlinable
+    mutating func reserveExactly(_ count: Int) {
         weights.reserveCapacity(count)
         floors.reserveCapacity(count)
         remainders.reserveCapacity(count)
@@ -49,7 +60,8 @@ public struct ShareSplitter: Sendable {
     /// - Each part is its exact share rounded toward zero. The units left over go one each to the largest
     ///   remainders; of two equal remainders, to the larger weight; of two equal weights, to the earlier part. So the
     ///   parts add up to `whole` exactly, each is within one unit of its exact share, and a smaller weight never gets
-    ///   more than a larger one.
+    ///   more than a larger one (of the halved weights, when their sum passes 64 bits: two weights that halve to one
+    ///   size are then equal).
     /// - A whole below 0 splits as its opposite does, with every part's sign turned.
     /// - A weight below 0 counts as 0, and is counted as a clamp: a weight is a size.
     /// - If the weights' sum passes the range of a `UInt64`, every weight is halved until it fits, counted once: the
@@ -79,15 +91,17 @@ public struct ShareSplitter: Sendable {
         // each weight read once, and their sum
         var total: UInt64 = 0
         var overflow = false
+        var negatives = 0
         for w in weights {
             let v = weight(w)
-            if v < 0 { Saturation.record() }
+            if v < 0 { negatives += 1 }
             let size = v > 0 ? UInt64(v) : 0
             self.weights.append(size)
             let (sum, carried) = total.addingReportingOverflow(size)
             total = sum
             overflow = overflow || carried
         }
+        for _ in 0..<negatives { Saturation.record() }
         if overflow {
             Saturation.record()
             repeat {
