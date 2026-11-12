@@ -61,6 +61,19 @@ final class SaveTests: XCTestCase {
         sim.state.post(g2, .treasury, .cheat, LCU(raw: (1 << 60) + 9))
         sim.step()
         sim.advance(days: 20)                                      // a close fails: the world account is owed 3
+        // distinct counts in every counter, so a test sees two columns' names swapped: three commands refused on their
+        // day, five postings refused, six submits refused; and a quarter start
+        let g4 = sim.state.governments.ref(4)
+        for k in 0..<4 {
+            sim.submit(IssuedCommand(day: sim.state.world.date, issuer: .event, sequence: UInt64(50 + k), command: .dissolveGovernment(government: g4)))
+        }
+        sim.step()
+        for _ in 0..<5 { sim.state.post(g4, .treasury, .spending, LCU(raw: 1)) }
+        for k in 0..<6 {
+            sim.submit(IssuedCommand(day: sim.state.world.date.adding(days: -1), issuer: .event, sequence: UInt64(60 + k),
+                                     command: .dissolveGovernment(government: g0)))
+        }
+        sim.advance(days: 26)                                      // to the 2nd of April: a quarter has started
         let d = sim.state.world.date.adding(days: 3)
         let g3 = sim.state.governments.ref(3)
         sim.submit(IssuedCommand(day: d, issuer: .player(g3), sequence: 1, command: .setTaxRate(government: g3, rate: BP(raw: 2_000))))
@@ -430,30 +443,43 @@ final class SaveTests: XCTestCase {
     /// them with their defaults. Each one added goes here; nothing else may be defaulted.
     static let addedSinceFormat1Golden: [String] = []
 
-    /// The golden save of format 1, written once and never rewritten: it loads with only the columns added since
-    /// defaulted, holds the values written below, and every column it has is written back to the same bytes (columns
-    /// added since are allowed). A new format adds its own golden save beside this one; this file then loads through
-    /// the migrations. No rule of the day is tested here: only what the file holds.
+    /// The golden save of format 1, written once and never rewritten (its SHA-256 is pinned below): it loads with only
+    /// the columns added since defaulted, holds the values written below, and every column it has, META's included, is
+    /// written back to the same bytes (columns added since are allowed). Every counter and META field holds a value of
+    /// its own, so two columns' names swapped show. A new format adds its own golden save beside this one; this file
+    /// then loads through the migrations. No rule of the day is tested here: only what the file holds.
     func testTheGoldenSaveOfFormat1Loads() throws {
         let url = URL(fileURLWithPath: #filePath).deletingLastPathComponent().appendingPathComponent("Golden/format1.sanei")
+        var goldenMeta = SaveMeta(gameVersion: "0.1", build: "golden", scenarioId: "test", mapVersion: 3,
+                                  rulesHash: [UInt8](repeating: 1, count: 32), scenarioHash: [UInt8](repeating: 2, count: 32),
+                                  playerName: "مصر", playtime: 3_600, preset: 1, difficulty: 2, cheatsUsed: true)
         if ProcessInfo.processInfo.environment["SANEI_WRITE_GOLDEN"] == "1" && !FileManager.default.fileExists(atPath: url.path) {
             let s = Self.busyWorld().state
-            try Data(SaveCodec.write(s, meta: SaveMeta(gameVersion: "0.1", build: "golden", scenarioId: "test"))).write(to: url)
+            goldenMeta.playerGovernment = s.governments.ref(3)
+            try Data(SaveCodec.write(s, meta: goldenMeta)).write(to: url)
         }
         let bytes = [UInt8](try Data(contentsOf: url))
+        XCTAssertEqual(hex(SHA256.hash(bytes)), Self.format1GoldenSHA256, "the golden save is never rewritten")
         let loaded = try SaveCodec.read(bytes).get()
         XCTAssertEqual(loaded.report.skipped, [])
         XCTAssertEqual(loaded.report.skippedCommands, 0)
         XCTAssertEqual(loaded.report.defaulted, Self.addedSinceFormat1Golden)
         let s = loaded.state
-        XCTAssertEqual(s.world.date, GameDate(year: 2011, month: 3, day: 6))
-        XCTAssertEqual(s.world.seed, 77)
+        let w = s.world
+        XCTAssertEqual(w.date, GameDate(year: 2011, month: 4, day: 2))
+        XCTAssertEqual(w.seed, 77)
+        XCTAssertEqual([w.monthStarts, w.quarterStarts, w.yearStarts, w.refusedCommands, w.refusedPostings, w.refusedSubmits],
+                       Self.goldenCounters)
+        XCTAssertEqual(Set(Self.goldenCounters).count, Self.goldenCounters.count, "every counter holds a value of its own")
         XCTAssertEqual(s.governments.rows, 6)
         XCTAssertEqual(s.governments.serial.map { $0.raw }, [1, 7, 3, 4, 5, 8])
         XCTAssertEqual(s.currencies.redenominations, [0, 0, 1, 0, 0, 0])
         XCTAssertEqual(s.ledger.world, USDn(raw: 3))
         XCTAssertEqual(s.pending.map { $0.command.tag }, [1, 100, 1, 101, 102])
         XCTAssertEqual(loaded.meta.build, "golden")
+        XCTAssertEqual([UInt64(loaded.meta.mapVersion), loaded.meta.playtime, UInt64(loaded.meta.preset), UInt64(loaded.meta.difficulty)], [3, 3_600, 1, 2])
+        XCTAssertTrue(loaded.meta.cheatsUsed)
+        XCTAssertEqual(loaded.meta.rulesHash, [UInt8](repeating: 1, count: 32))
         guard case let .success(opened) = SaveFile.open(bytes), let golden = SaveTree.read(opened.payload, opened.range) else { return XCTFail() }
         let now = s.saveTree()
         for chunk in golden.chunks {
@@ -461,7 +487,17 @@ final class SaveTests: XCTestCase {
                 XCTAssertEqual(now.chunk(chunk.tag)?.column(column.name), column, "\(chunk.tag).\(column.name) is written as format 1 wrote it")
             }
         }
+        // META's columns too: each is written as format 1 wrote it
+        let metaEnd = try SaveFile.metaPrefixLength(Array(bytes.prefix(16))).get()
+        guard let goldenMetaTree = SaveTree.read(bytes, 16..<metaEnd) else { return XCTFail() }
+        let nowMeta = loaded.meta.chunk
+        for column in goldenMetaTree.chunks[0].columns {
+            XCTAssertEqual(nowMeta.column(column.name), column, "META.\(column.name) is written as format 1 wrote it")
+        }
     }
+
+    static let format1GoldenSHA256 = "3acc629e49f80bbfaf196fba03bbbdd6d9f43908da33841b6c8b87b9d7a53135"
+    static let goldenCounters: [UInt32] = [4, 2, 1, 3, 5, 6]
 
     /// Every stored number is in tags.lock and every number there is the code's (the versions: the current one is the
     /// highest locked); no group repeats a number. Names are not compared: a renamed case keeps its number.

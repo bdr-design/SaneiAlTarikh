@@ -14,7 +14,8 @@ the world account is exactly 0 after each monthly close.
 1. **Units by type.** A government's local accounts and a currency's money base hold `LCU`; FX reserves and the world
    account hold `USDn`. A balance changes only by a posting (`post` for one amount, `transfer` and `exchange` for two
    that belong together), by the opening of a government's accounts, and by a redenomination; a wrong unit does not
-   compile, and CI proves it (`tools/checks/units/check.sh`: six wrong-unit postings and one wrong-unit sum must fail,
+   compile, and CI proves it (`tools/checks/units/check.sh`: eleven wrong-unit postings, transfers and exchanges and one
+   wrong-unit sum must fail,
    a control must compile). `Money` (constant dollars) has no posting at all: it is derived for reports. Two limits the
    types do not cover: one currency's `LCU` from another's (a posting lands in the account's own currency, and a local
    transfer refuses two currencies), and a value rebuilt from another unit's `raw` (`raw` and `init(raw:)` are public

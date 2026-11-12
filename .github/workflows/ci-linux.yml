@@ -4,9 +4,9 @@ name: ci-linux
 on:
   push:
     branches: [main, 'claude/**']
-    paths: ['Package.swift', 'Sources/**', 'Tests/**', 'App/**', '.github/workflows/ci-linux.yml', 'tools/checks/**']
+    paths: ['Package.swift', 'Sources/**', 'Tests/**', 'App/**', '.github/workflows/ci-linux.yml', 'tools/checks/**', 'tags.lock']
   pull_request:
-    paths: ['Package.swift', 'Sources/**', 'Tests/**', 'App/**', '.github/workflows/ci-linux.yml', 'tools/checks/**']
+    paths: ['Package.swift', 'Sources/**', 'Tests/**', 'App/**', '.github/workflows/ci-linux.yml', 'tools/checks/**', 'tags.lock']
   workflow_dispatch:
 concurrency:
   group: ci-linux-${{ github.ref }}
@@ -90,7 +90,7 @@ jobs:
       - name: Build optimised (warnings as errors)
         run: swift build -c release -Xswiftc -warnings-as-errors
       - name: Test optimised
-        run: swift test -c release -Xswiftc -enable-testing
+        run: swift test -c release -Xswiftc -enable-testing -Xswiftc -warnings-as-errors
   # the reference model (ADR 0002): the generated tables and vectors match it, and its accuracy bounds hold
   core-reference:
     runs-on: ubuntu-24.04

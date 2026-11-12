@@ -25,7 +25,7 @@ check() {   # name, body, the wrong type the compiler must name ("" for the cont
         echo "$out" | grep -q "'$3'" || { echo "units: $1 failed for another reason:"; echo "$out"; exit 1; }
     fi
 }
-check control 'w.post(g, .treasury, .tax, LCU(raw: 1)); w.post(.world, .trade, USDn(raw: 1)); w.post(moneyBase: c, .spending, LCU(raw: 1))' ""
+check control 'w.post(g, .treasury, .tax, LCU(raw: 1)); w.post(.world, .trade, USDn(raw: 1)); w.post(moneyBase: c, .spending, LCU(raw: 1)); w.transfer(from: .world, to: .reserves(g), .trade, USDn(raw: 1)); w.exchange(g, local: LCU(raw: 1))' ""
 check dollars_to_a_local_account 'w.post(g, .treasury, .tax, USDn(raw: 1))' USDn
 check local_to_a_dollar_account 'w.post(.world, .trade, LCU(raw: 1))' LCU
 check money_to_a_local_account 'w.post(g, .treasury, .tax, Money(raw: 1))' Money
@@ -33,4 +33,9 @@ check money_to_a_dollar_account 'w.post(.world, .trade, Money(raw: 1))' Money
 check dollars_to_the_money_base 'w.post(moneyBase: c, .spending, USDn(raw: 1))' USDn
 check dollars_in_a_local_transfer 'w.transfer(from: (g, .treasury), to: (g, .domesticDebt), .aid, USDn(raw: 1))' USDn
 check local_plus_dollars 'let x = LCU(raw: 1) + USDn(raw: 1)' USDn
-echo "units: 6 wrong-unit postings and 1 wrong-unit sum refused by the compiler; the control compiles"
+check local_in_a_dollar_transfer 'w.transfer(from: .world, to: .reserves(g), .trade, LCU(raw: 1))' LCU
+check money_in_a_dollar_transfer 'w.transfer(from: .world, to: .reserves(g), .trade, Money(raw: 1))' Money
+check dollars_exchanged_as_local 'w.exchange(g, local: USDn(raw: 1))' USDn
+check money_exchanged 'w.exchange(g, local: Money(raw: 1))' Money
+check money_to_the_money_base 'w.post(moneyBase: c, .spending, Money(raw: 1))' Money
+echo "units: 11 wrong-unit postings and 1 wrong-unit sum refused by the compiler; the control compiles"

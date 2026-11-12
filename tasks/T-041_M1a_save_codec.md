@@ -43,7 +43,8 @@ a reader can skip an unknown field, and whether a held copy keeps the cap's room
   - `tags.lock` at the root: every stored number, checked by a test both ways.
   - Migrations: `SaveMigrations[n → n+1]` as column-level steps (add, rename, drop a column; add a chunk); format 1
     has none; a test runs a made-up format-0 tree through a step.
-- A golden save of format 1 in `Tests/SaneiEngineTests/Golden/`, written once and never rewritten; a test loads it
+- A golden save of format 1 in `Tests/SaneiEngineTests/Golden/`, made final on 2026-11-12 after the reviews (every
+  counter and META field a value of its own) and never rewritten since: its SHA-256 is pinned in the test; a test loads it
   with nothing skipped or defaulted, checks values written in the test, and checks the current format writes it back
   to its own bytes. The format policy (what bumps the format) is in §7 and in `SaveCodec.swift`.
 - Out of scope, each with its place (tasks/BACKLOG.md): raw DEFLATE (App/Platform with Apple's Compression, and the
