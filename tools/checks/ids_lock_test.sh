@@ -62,9 +62,12 @@ check pass 'polity a\npolity b\npolity c\npolity d\n' "grows from the last push"
 # both guard at once: a lock that keeps the last push's but not main's fails
 on_main 'polity a\npolity x\n'
 check fail 'polity a\npolity b\npolity c\npolity d\n' "main's lock changed, the last push's kept" "$pushed"
-on_main 'polity a\npolity b\n'
+# the shortest locks: empty (a prefix of any) and one byte (still compared)
 on_main ''
 check pass 'polity a\n' "main's lock empty: a prefix of any"
+on_main '\n'
+check fail 'polity a\n' "main's lock of one byte, not kept"
+check pass '\npolity a\n' "main's lock of one byte, kept"
 on_main 'polity a\npolity b'
 check fail 'polity a\npolity bz\n' "main's lock without its last line break"
 git rm -q -f "$lock"; git commit -q -m "no lock"; git push -q -f origin main 2>/dev/null

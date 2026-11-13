@@ -73,14 +73,16 @@ postings, the redenomination trigger on aggregates, `USDn` never redenominating.
   loads.
 
 ## Approval
-Approved by Claude under the owner's delegation on 2026-11-13 (decisions.json `m1aLedger`). The per-currency ledger with the world account (ADR 0003): each government's accounts in its currency, reserves and
-the world account in dollars, postings by category, transfers, the exchange's margin, redenomination past 2^60 at the
-day's end, the monthly close and its invariants checked exactly; every overflow refused and counted, never clamped;
-wrong units refused by the compiler; a load refuses amounts past 2^60 and rates past ±2^52, and the writer refuses the
-same states.
+Approved by Claude under the owner's delegation on 2026-11-13 (decisions.json `m1aLedger`; ADR 0003): the
+per-currency ledger with the world account: each government's accounts in its currency, reserves and the world
+account in dollars, postings by category, transfers, the exchange's margin, redenomination past 2^60 at the day's end,
+the monthly close and its invariants checked exactly; every overflow refused and counted, never clamped; wrong units
+refused by the compiler; a load refuses amounts past 2^60 and rates past ±2^52, and the writer refuses the same states.
 - **Reviews:** design fidelity, API and words, errors, heaviness, the tests and planted faults, then a concurrency and
-  determinism review (the first rounds had none) and the verification rounds above; then the branch's rounds FV6 to
-  FV13.
+  determinism review (the first rounds had none) and the verification rounds above (FV6, FV7 on this task's fixes).
+- Pushes: the commits up to 4211b32 on the owner's order «ارفع» while a words-only verification still ran (it
+reported clean); those up to 352a10e on his second «ارفع» while FV11 ran, 677d943 among them unverified (FV12 then
+verified it: no must); the rest only once FV13 was clean (decisions_log).
 - **Measured** (x86-64 Linux, not a phone; docs/perf.md): a posting about 12 ns, 0 allocations over 365 days of
   1,125 money operations a day with 225 governments.
 

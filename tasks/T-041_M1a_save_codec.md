@@ -94,18 +94,23 @@ a reader can skip an unknown field, and whether a held copy keeps the cap's room
   names, or a count past Int32.max (the engine never makes them; the reader refuses them).
 
 ## Approval
-Approved by Claude under the owner's delegation on 2026-11-13 (decisions.json `m1aSaveCodec`). The save codec, format 1: `SaveTree`, binary META, the container with its SHA-256, the state's chunks loaded with every
-rule checked, defaults, migrations as column steps, `tags.lock`, the golden save pinned by its SHA-256; the bounds
-12 MB raw, 2 MB compressed (stored as it is past that), 64 KB META; a write that would make a file no load takes
-returns nothing, and the platform keeps the last good save (T-043).
+Approved by Claude under the owner's delegation on 2026-11-13 (decisions.json `m1aSaveCodec`): the save codec,
+format 1: `SaveTree`, binary META, the container with its SHA-256, the state's chunks loaded with every rule checked,
+defaults, migrations as column steps, `tags.lock`, the golden save pinned by its SHA-256; the bounds 12 MB raw, 2 MB
+compressed (stored as it is past that), 64 KB META; for every state the engine makes, a write whose file a load would
+refuse returns nothing, and the platform keeps the last good save (T-043). (The writer does not refuse repeated tags or
+column names or a count past Int32.max, which the engine never makes; the reader refuses them.)
 - **Reviews:** design, API and words, errors, heaviness, determinism and platform, the tests and planted faults, then
-  verification rounds; an API and words review and its verification on 2026-11-13; then the branch's rounds FV6 to
-  FV13. Pushes: the commits up to 4211b32 on the owner's order «ارفع» while a words-only verification was still
-  running (it reported clean), and those up to 352a10e on a second «ارفع» while FV11 ran (its findings fixed and
-  verified after, in 068bdbc and c38208d, pushed once FV13 was clean).
-- **Fuzzed:** over 3 million mutants of a busy save, 0 crashes.
+  verification rounds; an API and words review and its verification on 2026-11-13 (FV6), and the writer's bounds
+  verified in FV7 and FV8.
+- Pushes: the commits up to 4211b32 on the owner's order «ارفع» while a words-only verification still ran (it
+reported clean); those up to 352a10e on his second «ارفع» while FV11 ran, 677d943 among them unverified (FV12 then
+verified it: no must); the rest only once FV13 was clean (decisions_log).
+- **Fuzzed:** in round 5 (6053e6d), over 3 million mutants of a busy save (about 520,000 structured, 2.6 million raw),
+  0 crashes; the codec changed after that round, and later rounds fuzzed the ledger's states (60,000, FV7).
 - **Measured** (x86-64 Linux, not a phone; docs/perf.md): a state at the caps (384 governments, 3,300 provinces, 576
-  waiting commands) makes a 46 to 51 KB file; writing 0.7 to 1.0 ms, reading 1.1 to 1.5 ms; a load's peak within 16 MB
-  in the optimised build at the bounds.
+  waiting commands) makes a 46 to 51 KB file; writing 0.7 to 1.0 ms, reading 1.1 to 1.5 ms. A load's peak, measured
+  once by a reviewer on a forged file at the bounds in the optimised build at today's caps: 15.4 to 15.5 MiB beyond
+  §7's footprint, within the 16 MB.
 
 Tests: 219, debug and optimised, warnings as errors; `ci-linux` green on c38208d (run 43435523810).

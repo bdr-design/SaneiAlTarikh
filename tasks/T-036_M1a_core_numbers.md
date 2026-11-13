@@ -132,9 +132,10 @@ the review of the approval records), so both were run again on the whole of Sane
   on, and the sheet asserts in debug builds that a term comes once.
 
 ## Approval
-Approved by Claude under the owner's delegation on 2026-11-13 (decisions.json `m1aCoreNumbers`). SaneiCore's numbers and the determinism kit as built and reviewed above. The reviews: six lenses (design and game,
-concurrency and determinism, heaviness, API and words, errors, the checker), then verification rounds; the checker and
-words rounds that were cut off before they reported were run again on the whole of SaneiCore (2026-11-13), and the
-whole branch then went through the verification rounds FV6 to FV13 (`reviewEveryFix`, `reviewBeforePush`).
+Approved by Claude under the owner's delegation on 2026-11-13 (decisions.json `m1aCoreNumbers`): SaneiCore's numbers
+and the determinism kit as built and reviewed above. The reviews: six lenses (design and game, concurrency and determinism, heaviness, API and words, errors, the
+checker), then verification rounds; the checker and words verifications that were cut off before they reported were
+run again on the whole of SaneiCore (2026-11-13), and the first of the branch's later rounds (FV6) verified those
+fixes. The rounds after it (FV7 to FV13) checked later fix commits, not this task's code as a whole.
 
 Tests: 219, debug and optimised, warnings as errors; `ci-linux` green on c38208d (run 43435523810).

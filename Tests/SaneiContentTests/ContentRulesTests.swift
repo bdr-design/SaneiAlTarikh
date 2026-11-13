@@ -155,10 +155,10 @@ final class ContentRulesTests: XCTestCase, ContentFixtures {
         refused(polity(name("ا\u{E000}ب")), "polities", row: 0, "a private-use")
         refused(polity(name("\u{200D}اب")), "polities", row: 0, "starts with a mark or a joiner")
         refused(polity(name("اب\u{200C}")), "polities", row: 0, "ends with a joiner")
+        // one message names every rule of a name's text at once: each of the next cases checks its input is refused
+        // and that the message holds that rule's words (U+0378, unassigned, is refused by its age)
         refused(polity(name("ا\u{034F}ب")), "polities", row: 0, "an invisible or ignorable character")
         refused(polity(name("ا\u{FFFD}ب")), "polities", row: 0, "a replacement character")
-        // U+0378, unassigned: refused by its age; the message names every rule of a name's text at once, so these lines
-        // check each input is refused and that the message holds each rule's words
         refused(polity(name("ا" + String(Unicode.Scalar(0x0378 as UInt32)!) + "ب")), "polities", row: 0, "one past Unicode 15.0")
         holds(polity(name("ا\u{200C}ب")), "the zero-width non-joiner")
         holds(polity(name("ا\u{200D}ب")), "the zero-width joiner")

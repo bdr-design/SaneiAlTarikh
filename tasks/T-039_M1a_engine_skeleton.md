@@ -78,14 +78,6 @@ the hash unchanged), L3 (caps: 384 governments and polities), ADR 0001 (the host
   skeleton's tests split so no file passes F9's 600 lines.
 
 ## Approval
-Approved by Claude under the owner's delegation on 2026-11-13 (decisions.json `m1aEngineSkeleton`). The engine skeleton: `WorldState`'s column tables, the daily `Pipeline` in §2.4's order with the monthly slots and the
-strategic stagger, `Command` with stable tags, the queue kept sorted by (day, rank, the issuer's serial and row,
-sequence) with rooms of 64, 64 and 448, one «was made» rule for submit and load, `succeedGovernment`, the state hash
-over every column.
-- **Reviews:** design and game, concurrency and determinism, heaviness, API and words, errors and the checker; the
-  first round's errors and checker reviewers never reported, so later rounds covered both, with a mutation review of
-  the skeleton (counts above); then the branch's rounds FV6 to FV13.
-- **Measured** (x86-64 Linux, not a phone; docs/perf.md): a day about 0.8 to 1 µs with 225 governments and 1.3 to
-  1.7 µs with 384; 0 allocations over 365 days with commands while no copy is held.
-
-Tests: 219, debug and optimised, warnings as errors; `ci-linux` green on c38208d (run 43435523810).
+Not yet: no errors-lens review of the skeleton ever reported (the first round's was cut off, and later rounds checked
+its correctness, not its errors), so acceptance criterion 7 is not met. An errors review runs on 2026-11-13; the
+approval follows once its findings are fixed and verified.

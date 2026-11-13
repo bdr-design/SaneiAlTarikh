@@ -138,11 +138,27 @@ registries; runtime namespace; aliases; ID lock; tag lock»), CI's ID lock on `c
     caught.
 
 ## Approval
-Approved by Claude under the owner's delegation on 2026-11-13 (decisions.json `m1aContentFoundation`). The content foundation: `SaneiContent` (the registries, `ContentDB`, `content.bin` in SaveTree columns with its own
+Approved by Claude under the owner's delegation on 2026-11-13 (decisions.json `m1aContentFoundation`): the
+content foundation: `SaneiContent` (the registries, `ContentDB`, `content.bin` in SaveTree columns with its own
 container and SHA-256, the validator), `SaneiBake` (the strict CSV and JSON readers, the bake), `simcli validate` and
-`bake`, the registries seeded with M1a's cases, `aliases.json`, the ID lock and its CI check with its own test.
-- **Reviews:** the six lenses and the verification rounds recorded above; then the branch's rounds to FV13.
+`bake`, the registries seeded with M1a's cases, `aliases.json`, the ID lock and its CI check with its own test. A
+name takes characters of Unicode 15.0 or older: that iOS 17.0 carries Unicode 15.0 is taken, not measured, and is
+checked on the iOS 17.0 simulator in T-043.
+- **Reviews:** the six lenses and the verification rounds recorded above. The later rounds planted, and caught:
+  - FV10: 30 faults in the Swift (26 caught; the noncharacters' sample, the message, and 2 equivalent) and 15 in the
+    lock script (11 caught; the default target, a 1-byte lock, and 2 equivalent).
+  - FV11: 24 in the Swift (16 caught; the noncharacters' neighbours, three message phrases, and 3 equivalent) and 20
+    in the lock script (15 caught; «no lock yet», and 4 equivalent).
+  - FV12: 10 in the Swift, all caught, and 18 in the lock script (15 caught; the target beside the last push, a 1-byte
+    lock, and 1 equivalent).
+  - FV13: 7 in the lock script (5 caught; a 1-byte lock, and 1 equivalent).
+  - Each survivor that changes behaviour got its test and was planted again: caught, the last of them the 1-byte lock;
+    FV13's 3 nits (a long code line, a lock-test line with no effect, a comment's place) are fixed in the same commit.
+- Pushes: the commits up to 4211b32 on the owner's order «ارفع» while a words-only verification still ran (it
+reported clean); those up to 352a10e on his second «ارفع» while FV11 ran, 677d943 among them unverified (FV12 then
+verified it: no must); the rest only once FV13 was clean (decisions_log).
 - **Measured** (x86-64 Linux, not a phone; docs/perf.md): `content.bin` 616 KB at the caps, read and checked in 13 to
-  14 ms; today's registries bake to 4,838 bytes, the same on every build, pinned.
+  14 ms; today's registries bake to 4,838 bytes, the same in debug and optimised builds on Linux, pinned (Apple's bake
+  is checked against the pin in T-043).
 
 Tests: 219, debug and optimised, warnings as errors; `ci-linux` green on c38208d (run 43435523810).

@@ -128,7 +128,8 @@ extension ContentDB {
             where !Self.isNameText(t) {
                 add(table, k, "\(field) is empty, past \(Self.mostTextBytes) bytes, spaced at an end, starts with a mark or a joiner, "
                     + "ends with a joiner, or holds a control, an invisible or ignorable character, a replacement character, or a "
-                    + "private-use, unassigned or noncharacter code point, or one past Unicode \(Self.unicodeVersion.major).\(Self.unicodeVersion.minor)")
+                    + "private-use, unassigned or noncharacter code point, or one past Unicode "
+                    + "\(Self.unicodeVersion.major).\(Self.unicodeVersion.minor)")
             }
             if n.human && n.number == .singular { add(table, k, "human is for plural names of people; this one is singular") }
         }
