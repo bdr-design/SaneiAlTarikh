@@ -63,10 +63,10 @@ postings, the redenomination trigger on aggregates, `USDn` never redenominating.
   past 2^60 and rates past ±2^52 (ADR 0003, decision 6), the exchange refuses a rate it cannot negate, and a short
   run's hash is pinned.
 - **Its verification (FV6):** a state a save wrote but no load took (a posting before the close on a month's first
-  day leaves an opening past 2^60): the writer now refuses every state past the ledger's bounds that the loader refuses
-  (ADR 0003, decisions 6 and 7); four tests that could not catch their faults remade (each bound on its own and exactly at 2^60, a currency at
-  and past its ceiling, a wrapped difference, the exchange's clamp count).
-- **Its verification (FV7):** 60,000 random ledger states, none written that a load refused; the writer's own checks
-  then got a test of their own (4,000 states at and around every bound, with a government whose row is not its
-  currency's number: a state is written exactly when its tree loads); the 13 faults that verification planted in the
-  writer and the reader are all caught.
+  day leaves an opening past 2^60): the writer now refuses every state past the ledger's bounds that the loader
+  refuses (ADR 0003, decisions 6 and 7); four tests that could not catch their faults remade (each bound on its own
+  and exactly at 2^60, a currency at and past its ceiling, a wrapped difference, the exchange's clamp count).
+- **Its verification (FV7):** 60,000 random ledger states, none written that a load refused; it planted 15 faults
+  in the writer and the loader, and the 10 that survived (each check of the writer, its last row and currency, the
+  ceiling either way) are caught now by a test of the writer's own checks: 4,000 states at and around every bound,
+  with a government whose row is not its currency's number, each written exactly when its tree loads.

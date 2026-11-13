@@ -149,7 +149,7 @@ final class ContentRulesTests: XCTestCase, ContentFixtures {
         refused(polity(name("اسم ")), "polities", row: 0, "spaced at an end")
         refused(polity(name(" اسم")), "polities", row: 0, "spaced at an end")
         for v: UInt32 in [0x01, 0x1F, 0x7F, 0x85, 0x9F, 0x2028, 0x2029, 0xFEFF, 0x202A, 0x202C, 0x202E, 0x2066, 0x2069, 0x200E, 0x200F, 0x061C] {
-            refused(polity(name("ا" + String(Unicode.Scalar(v)!) + "ب")), "polities", row: 0, "control or an invisible")
+            refused(polity(name("ا" + String(Unicode.Scalar(v)!) + "ب")), "polities", row: 0, "a control, an invisible")
         }
         holds(polity(name("ا\u{200C}ب")), "the zero-width non-joiner")
         holds(polity(name("ا\u{200D}ب")), "the zero-width joiner")

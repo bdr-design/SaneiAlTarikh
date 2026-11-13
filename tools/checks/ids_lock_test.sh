@@ -5,6 +5,8 @@ set -euo pipefail
 script="$PWD/tools/checks/ids_lock.sh"
 root=$(mktemp -d)
 trap 'rm -rf "$root"' EXIT
+# git's global settings in the throwaway folder: the check under test adds a safe.directory each run
+export GIT_CONFIG_GLOBAL="$root/gitconfig"
 git init -q --bare "$root/origin.git"
 git init -q -b main "$root/work"
 cd "$root/work"
@@ -16,7 +18,7 @@ lock=content/registry/ids.lock
 failures=0
 # main's lock: pushed as the target branch
 on_main() { printf "$1" > "$lock"; git add -A; git commit -q -m main --allow-empty; git push -q -f origin main 2>/dev/null; }
-# the work tree's lock, then the check; $3 the refs' env
+# the work tree's lock, then the check: $1 pass or fail, $2 the lock's text, $3 the case's name, $4 BEFORE
 check() {
   local want=$1 text=$2 name=$3 before=${4:-}
   mkdir -p content/registry; printf "$text" > "$lock"

@@ -379,6 +379,16 @@ final class ContentTests: XCTestCase, ContentFixtures {
                   "\u{F0000}دولة", "د\u{115F}ولة"] {
             XCTAssertFalse(ContentDB.isNameText(t), t.unicodeScalars.map { String($0.value, radix: 16) }.joined(separator: " "))
         }
+        // only characters every supported system knows: Unicode 15.0 or older (iOS 17's)
+        XCTAssertTrue(ContentDB.unicodeVersion == (15, 0))
+        XCTAssertEqual(Unicode.Scalar(0x11F04)!.properties.age.map { [$0.major, $0.minor] }, [15, 0], "a letter of Unicode 15.0")
+        XCTAssertTrue(ContentDB.isNameText("د\u{11F04}ولة"), "a 15.0 letter is taken")
+        // a letter of Unicode 16.0: unassigned to this toolchain, past the version to a newer one (an Apple bake): refused
+        // either way
+        XCTAssertFalse(ContentDB.isNameText("د\u{31EF}ولة"))
+        XCTAssertTrue(ContentDB.isNameText("د\u{0889}ولة"), "an Arabic letter of 14.0 is taken")
+        XCTAssertTrue(ContentDB.isNameText("مَدِينَةٌ\u{0670}"), "the harakat and the superscript alef after letters")
+        XCTAssertFalse(ContentDB.isNameText("\u{064E}مدينة"), "a haraka first")
         for v: UInt32 in [0x0651, 0x064E, 0x0301, 0x20DD, 0x0903] {
             XCTAssertFalse(ContentDB.isNameText(String(Unicode.Scalar(v)!) + "دولة"), "a mark first: U+\(String(v, radix: 16))")
         }

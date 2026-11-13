@@ -28,9 +28,11 @@ extension ContentDB {
     /// shows nothing: a control, a line or paragraph separator, every format character (a bidi embedding, override,
     /// isolate or mark, a zero-width space, a soft hyphen, a word joiner, a byte-order mark, an annotation mark) and
     /// every other character Unicode lets a renderer ignore (a filler, a variation selector, the grapheme joiner), and
-    /// the blank braille pattern, but the joiners Arabic needs (U+200C, U+200D), which go between letters, never at an
-    /// end; and no unassigned or private-use code point (the rule reads the running system's Unicode tables: a
-    /// character assigned later could be classed otherwise there, so only assigned ones are taken).
+    /// the blank braille pattern, but the joiners Arabic needs (U+200C, U+200D), which may stand anywhere but at an
+    /// end; and no private-use code point, and none Unicode assigned after `unicodeVersion` (or not at all). The rule
+    /// reads the running system's Unicode tables, at the bake and on the phone: a character newer than the oldest
+    /// system the game runs on could be unknown there, or classed otherwise, so only characters every supported system
+    /// knows are taken.
     static func isNameText(_ t: String) -> Bool {
         guard !t.isEmpty, t.utf8.count <= mostTextBytes, let first = t.unicodeScalars.first, let last = t.unicodeScalars.last,
               !isSpace(first.value), !isSpace(last.value), !isJoiner(first.value), !isJoiner(last.value) else { return false }
@@ -42,17 +44,26 @@ extension ContentDB {
         }
         for s in t.unicodeScalars {
             let v = s.value
-            if isPlain(v) || v == 0x20 { continue }
+            if isPlain(v) || v == 0x20 || isArabicMark(v) { continue }
             if v < 0x20 || (v >= 0x7F && v <= 0x9F) || v == 0x2028 || v == 0x2029 { return false }
             if v == 0x2800 { return false }
             if isJoiner(v) { continue }
+            guard let age = s.properties.age, age.major < unicodeVersion.major
+                    || (age.major == unicodeVersion.major && age.minor <= unicodeVersion.minor) else { return false }
             switch s.properties.generalCategory {
-            case .format, .unassigned, .privateUse, .surrogate: return false
+            case .format, .privateUse: return false
             default: if s.properties.isDefaultIgnorableCodePoint { return false }
             }
         }
         return true
     }
+
+    /// The newest Unicode a name's character may come from: iOS 17's, the oldest system the game runs on.
+    public static let unicodeVersion = (major: 15, minor: 0)
+
+    /// The Arabic marks (the harakat, U+064B to U+0652, and the superscript alef, U+0670): marks of Unicode 1.1, none
+    /// a format or ignorable character, so a name may hold them after a letter without a lookup.
+    @inline(__always) static func isArabicMark(_ v: UInt32) -> Bool { (v >= 0x064B && v <= 0x0652) || v == 0x0670 }
 
     /// The joiners Arabic needs: U+200C (zero-width non-joiner) and U+200D (zero-width joiner).
     @inline(__always) static func isJoiner(_ v: UInt32) -> Bool { v == 0x200C || v == 0x200D }
@@ -87,7 +98,9 @@ extension ContentDB {
         func name(_ table: String, _ k: Int, _ n: NameRecord) {
             for (field, t) in [("name", n.name), ("short", n.short), ("oblique", n.oblique), ("withLi", n.withLi), ("withBi", n.withBi)]
             where !Self.isNameText(t) {
-                add(table, k, "\(field) is empty, past \(Self.mostTextBytes) bytes, spaced at an end, starts with a mark, or holds a control or an invisible format character")
+                add(table, k, "\(field) is empty, past \(Self.mostTextBytes) bytes, spaced at an end, starts with a mark or a joiner, "
+                    + "ends with a joiner, or holds a control, an invisible or ignorable character, or a private-use code point or "
+                    + "one past Unicode \(Self.unicodeVersion.major).\(Self.unicodeVersion.minor)")
             }
             if n.human && n.number == .singular { add(table, k, "human is for plural names of people; this one is singular") }
         }
