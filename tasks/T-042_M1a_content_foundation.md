@@ -152,11 +152,14 @@ checked on the iOS 17.0 simulator in T-043.
   - FV12: 10 in the Swift, all caught, and 18 in the lock script (15 caught; the target beside the last push, a 1-byte
     lock, and 1 equivalent).
   - FV13: 7 in the lock script (5 caught; a 1-byte lock, and 1 equivalent).
-  - Each survivor that changes behaviour got its test and was planted again: caught, the last of them the 1-byte lock;
+  - Each survivor that changes behaviour got its test and was planted again: caught, the last of them the 1-byte lock,
+    but one (the noncharacters' mask widened), which the refused replacement characters made equivalent;
     FV13's 3 nits (a long code line, a lock-test line with no effect, a comment's place) are fixed in the same commit.
-- Pushes: the commits up to 4211b32 on the owner's order «ارفع» while a words-only verification still ran (it
-reported clean); those up to 352a10e on his second «ارفع» while FV11 ran, 677d943 among them unverified (FV12 then
-verified it: no must); the rest only once FV13 was clean (decisions_log).
+- **Pushes** (decisions_log): the commits up to 4211b32 on the owner's order «ارفع», when a words-only verification
+  still ran (it reported clean), SaneiCore's checker and words verifications had not reported (they were run again
+  after, and their fixes verified in FV6) and the skeleton (T-039) had no errors review; those up to 352a10e on his
+  second «ارفع» while FV11 ran, 677d943 among them unverified (FV12 then verified it: no must); 068bdbc and c38208d
+  once FV13 was clean.
 - **Measured** (x86-64 Linux, not a phone; docs/perf.md): `content.bin` 616 KB at the caps, read and checked in 13 to
   14 ms; today's registries bake to 4,838 bytes, the same in debug and optimised builds on Linux, pinned (Apple's bake
   is checked against the pin in T-043).

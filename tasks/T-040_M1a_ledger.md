@@ -80,9 +80,13 @@ the monthly close and its invariants checked exactly; every overflow refused and
 refused by the compiler; a load refuses amounts past 2^60 and rates past ±2^52, and the writer refuses the same states.
 - **Reviews:** design fidelity, API and words, errors, heaviness, the tests and planted faults, then a concurrency and
   determinism review (the first rounds had none) and the verification rounds above (FV6, FV7 on this task's fixes).
-- Pushes: the commits up to 4211b32 on the owner's order «ارفع» while a words-only verification still ran (it
-reported clean); those up to 352a10e on his second «ارفع» while FV11 ran, 677d943 among them unverified (FV12 then
-verified it: no must); the rest only once FV13 was clean (decisions_log).
+- **Pushes** (decisions_log): the commits up to 4211b32 on the owner's order «ارفع», when a words-only verification
+  still ran (it reported clean), SaneiCore's checker and words verifications had not reported (they were run again
+  after, and their fixes verified in FV6) and the skeleton (T-039) had no errors review; those up to 352a10e on his
+  second «ارفع» while FV11 ran, 677d943 among them unverified (FV12 then verified it: no must); 068bdbc and c38208d
+  once FV13 was clean.
+- **It rests on the skeleton (T-039),** whose errors review still runs: a fix it brings to `WorldState` is verified
+  against the ledger's tests too.
 - **Measured** (x86-64 Linux, not a phone; docs/perf.md): a posting about 12 ns, 0 allocations over 365 days of
   1,125 money operations a day with 225 governments.
 

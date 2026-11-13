@@ -131,9 +131,14 @@ the review of the approval records), so both were run again on the whole of Sane
 
 ## Approval
 Approved by Claude under the owner's delegation on 2026-11-13 (decisions.json `m1aCoreStructures`): SaneiCore's
-structures as built and reviewed above. The reviews: six lenses (design and game, concurrency and determinism, heaviness, API and words, errors, the
-checker), then verification rounds; the checker and words verifications that were cut off before they reported were
-run again on the whole of SaneiCore (2026-11-13), and the first of the branch's later rounds (FV6) verified those
-fixes. The rounds after it (FV7 to FV13) checked later fix commits, not this task's code as a whole.
+structures as built and reviewed above. The reviews: six lenses (design and game, concurrency and determinism,
+heaviness, API and words, errors, the checker), then verification rounds; the checker and words verifications that were
+cut off before they reported were run again on the whole of SaneiCore (2026-11-13), and the first of the branch's later
+rounds (FV6) verified those fixes. The rounds after it (FV7 to FV13) checked later fix commits, not this task's code as
+a whole.
+
+- **Pushes** (decisions_log): this task's code went out with the commits up to 4211b32, on the owner's order «ارفع»,
+  before its checker and words verifications had reported (they were run again after, and their fixes verified in
+  FV6).
 
 Tests: 219, debug and optimised, warnings as errors; `ci-linux` green on c38208d (run 43435523810).

@@ -103,14 +103,18 @@ column names or a count past Int32.max, which the engine never makes; the reader
 - **Reviews:** design, API and words, errors, heaviness, determinism and platform, the tests and planted faults, then
   verification rounds; an API and words review and its verification on 2026-11-13 (FV6), and the writer's bounds
   verified in FV7 and FV8.
-- Pushes: the commits up to 4211b32 on the owner's order «ارفع» while a words-only verification still ran (it
-reported clean); those up to 352a10e on his second «ارفع» while FV11 ran, 677d943 among them unverified (FV12 then
-verified it: no must); the rest only once FV13 was clean (decisions_log).
+- **Pushes** (decisions_log): the commits up to 4211b32 on the owner's order «ارفع», when a words-only verification
+  still ran (it reported clean), SaneiCore's checker and words verifications had not reported (they were run again
+  after, and their fixes verified in FV6) and the skeleton (T-039) had no errors review; those up to 352a10e on his
+  second «ارفع» while FV11 ran, 677d943 among them unverified (FV12 then verified it: no must); 068bdbc and c38208d
+  once FV13 was clean.
+- **It rests on the skeleton (T-039),** whose errors review still runs: a fix it brings to the tables is verified
+  against the save's tests and the golden save too.
 - **Fuzzed:** in round 5 (6053e6d), over 3 million mutants of a busy save (about 520,000 structured, 2.6 million raw),
   0 crashes; the codec changed after that round, and later rounds fuzzed the ledger's states (60,000, FV7).
 - **Measured** (x86-64 Linux, not a phone; docs/perf.md): a state at the caps (384 governments, 3,300 provinces, 576
   waiting commands) makes a 46 to 51 KB file; writing 0.7 to 1.0 ms, reading 1.1 to 1.5 ms. A load's peak, measured
-  once by a reviewer on a forged file at the bounds in the optimised build at today's caps: 15.4 to 15.5 MiB beyond
-  §7's footprint, within the 16 MB.
+  once by a reviewer on a forged file at the bounds in the optimised build at today's caps: 15.4 to 15.5 MB, within
+  the 16 MB (docs/perf.md), on 2959ee3 and 3752d18 (round 3); the codec changed after, and T-044 measures it again.
 
 Tests: 219, debug and optimised, warnings as errors; `ci-linux` green on c38208d (run 43435523810).
