@@ -115,6 +115,6 @@ column names or a count past Int32.max, which the engine never makes; the reader
 - **Measured** (x86-64 Linux, not a phone; docs/perf.md): a state at the caps (384 governments, 3,300 provinces, 576
   waiting commands) makes a 46 to 51 KB file; writing 0.7 to 1.0 ms, reading 1.1 to 1.5 ms. A load's peak, measured
   once by a reviewer on a forged file at the bounds in the optimised build at today's caps: 15.4 to 15.5 MB, within
-  the 16 MB (docs/perf.md), on 2959ee3 and 3752d18 (round 3); the codec changed after, and T-044 measures it again.
+  the 16 MB (docs/perf.md; MB here as in the code's bounds, 2^20 bytes: `12 << 20`), on 2959ee3 and 3752d18 (round 3); the codec changed after, and T-044 measures it again.
 
 Tests: 219, debug and optimised, warnings as errors; `ci-linux` green on c38208d (run 43435523810).
