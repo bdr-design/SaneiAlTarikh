@@ -88,6 +88,28 @@ final class SaveRulesTests: XCTestCase {
         }
     }
 
+    /// What a game ever saves: amounts within 2^60 (the day's end redenominates past it), rates and price indices
+    /// within ±2^52. Each case keeps the ledger's sums (the opening moves with the balance), so only the bound refuses.
+    func testTheAmountsAndRatesBounds() {
+        let past = (Int64(1) << 60) + 1
+        func shifted(_ t: inout SaveTree, _ tag: String, _ balance: String, _ opening: String, to x: Int64) {
+            let b = ints(t.chunk(tag)!.column(balance)!), o = ints(t.chunk(tag)!.column(opening)!)
+            change(&t, tag, opening) { v in [x] + v.dropFirst() }
+            change(&t, tag, balance) { v in [x + (b[0] - o[0])] + v.dropFirst() }
+        }
+        var atBound = tree
+        shifted(&atBound, "LEDG", "treasury", "treasuryOpening", to: (Int64(1) << 60) - 1_000_000)
+        XCTAssertNotNil(load(atBound), "the control: within 2^60")
+        refused("a treasury past 2^60") { t in shifted(&t, "LEDG", "treasury", "treasuryOpening", to: past) }
+        refused("a debt past 2^60") { t in shifted(&t, "LEDG", "domesticDebt", "domesticDebtOpening", to: -past - 1_000_000) }
+        refused("a money base past 2^60") { t in shifted(&t, "CURR", "moneyBase", "moneyBaseOpening", to: past) }
+        refused("a rate past 2^52") { t in self.change(&t, "CURR", "rate") { v in [(Int64(1) << 52) + 1] + v.dropFirst() } }
+        refused("a price index past 2^52") { t in self.change(&t, "CURR", "priceIndex") { v in [-(Int64(1) << 52) - 1] + v.dropFirst() } }
+        var rate = tree
+        change(&rate, "CURR", "rate") { v in [Int64(1) << 52] + v.dropFirst() }
+        XCTAssertNotNil(load(rate), "a rate at 2^52 loads")
+    }
+
     func testTheProvincesAndCountsRules() {
         refused("a sovereign polity out of range") { t in self.change(&t, "PROV", "sovereign") { v in [Int64(self.base.polities.count)] + v.dropFirst() } }
         refused("people below 0") { t in self.change(&t, "PROV", "population") { v in [-1] + v.dropFirst() } }

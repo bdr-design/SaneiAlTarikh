@@ -311,6 +311,14 @@ struct Loader {
               let rd = ints("CURR", "redenominationDue", .bool, rows: nc), let mb = ints("CURR", "moneyBase", .i64, rows: nc),
               let mo = ints("CURR", "moneyBaseOpening", .i64, rows: nc), let mp = ints("CURR", "moneyBasePosted", .i64, rows: nc)
         else { return nil }
+        // amounts within 2^60 (every day's end redenominates past it, unless the scale is at its ceiling) and rates and
+        // price indices within ±2^52 (21,845 redenominations take a log by about 2^50): what a game ever saves
+        let past = Int64(1) << 60
+        func within(_ v: Int64, _ ceiling: Bool) -> Bool { ceiling || (v >= -past && v <= past) }
+        for i in 0..<nc {
+            let ceiling = ke[i] > Int64(UInt16.max - 3)
+            guard within(mb[i], ceiling), within(mo[i], ceiling), ra[i].magnitude <= 1 << 52, pi[i].magnitude <= 1 << 52 else { return nil }
+        }
         var ct = CurrencyTable()
         ct.scaleExponent = filled(ke, CurrencyTable.capacity) { UInt16($0) }
         ct.rate = filled(ra, CurrencyTable.capacity) { LogQ(raw: $0) }
@@ -339,8 +347,10 @@ struct Loader {
             }
         }
         for i in 0..<nl {
-            // a government's accounts are in its polity's currency
+            // a government's accounts are in its polity's currency, its balances and openings within 2^60 (as above)
             guard cu[i] < Int64(nc), cu[i] == gp[i] else { return nil }
+            let ceiling = ke[Int(cu[i])] > Int64(UInt16.max - 3)
+            for k in 0..<a where !within(lo[i * a + k], ceiling) || !within(lop[i * a + k], ceiling) { return nil }
         }
         var lt = LedgerTable()
         lt.currency = filled(cu, GovernmentTable.capacity) { Idx(raw: UInt16($0)) }

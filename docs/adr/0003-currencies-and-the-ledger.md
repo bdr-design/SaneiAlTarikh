@@ -51,23 +51,23 @@ the world account is exactly 0 after each monthly close.
    (M2). A posting, transfer or exchange that touches a government that has ended, mixes two currencies, or would take
    a balance or a month's sum past the range of an Int64 moves nothing and is counted in the world row
    (`refusedPostings`), so money never vanishes silently and never clamps.
-6. **Redenomination.** A local balance or a money base past 2^60 either way marks its currency; at the day's end,
-   after every posting of the day, the currency redenominates if one of them is still past 2^60 (a flow that passed
-   and came back leaves it as it is), so a flow of several postings is all in one scale. A balance under 2^60 has 7
-   times 2^60 of room for the rest of the day, and a posting that would pass the range is refused; a government's
-   starting treasury and tax base are within 2^60 (its command is refused otherwise). Every LCU amount in that
-   currency is divided by 1,000 to the nearest unit: every government row's local balances (dissolved rows included),
-   the money base, the governments' tax bases (and every LCU column the economy adds, M2), and the LCU fields of the
+6. **Redenomination.** A local balance or a money base past 2^60 either way marks its currency; at the day's end, after
+   every posting of the day, the currency redenominates if one of them is still past 2^60 (a flow that passed and came
+   back leaves it as it is), so a flow of several postings is all in one scale. A balance under 2^60 has 7 times 2^60 of
+   room for the rest of the day, and a posting that would pass the range is refused; a government's starting treasury
+   and tax base are within 2^60 (its command is refused otherwise). Every LCU amount in that currency is divided by
+   1,000 to the nearest unit (ties away from zero): every government row's local balances (dissolved rows included), the
+   money base, the governments' tax bases (and every LCU column the economy adds, M2), and the LCU fields of the
    commands waiting to make a government in it (an event works its amounts out from the live state when it is given; a
    command that carries LCU worked out on an older view, as the AI's budget commands will, is stamped with its
    currency's scale and rescaled or refused when applied: M2). The whole change of each balance is posted under
    `redenomination`, so the month's sums span the change of scale; M2's inflation, its exchange-rate pass-through and
    the money base's growth must take that step out (by `scaleExponent`). The scale moves by 3, and the rate and the
    price index follow by `LogQ(ratio: 1, 1_000)`, within about 6e-11 of log2(1/1000), so a value at the rate hardly
-   drifts (measured by a reviewer). The count of redenominations per currency is the log; a notification comes with
-   the notification ring (M1c). The scale is a UInt16: 21,845 redenominations, which no game reaches; past that the
-   currency stops redenominating. Dollars never redenominate: a dollar hyperinflation has no rule. The aggregates that
-   M2 adds (a budget's lines, nominal output, a union's money base) must ask the same of their sums.
+   drifts (measured by a reviewer). The count of redenominations per currency is the log; a notification comes with the
+   notification ring (M1c). The scale is a UInt16: 21,845 redenominations, which no game reaches; past that the currency
+   stops redenominating. Dollars never redenominate: a dollar hyperinflation has no rule. The aggregates that M2 adds (a
+   budget's lines, nominal output, a union's money base) must ask the same of their sums.
 7. **The monthly close** runs on day 1, after the calendar jobs (and, from M2, after the world market and the
    transport payout, which settle through the world account). It checks the invariants in every build, a walk of the
    columns once a month, and that the world account is 0; a failed close is counted in the world row (0 in every

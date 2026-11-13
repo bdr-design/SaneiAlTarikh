@@ -313,6 +313,8 @@ extension WorldState {
     mutating func exchange(_ g: GovRef, local amount: LCU) -> USDn? {
         guard governments.isLive(g), amount != .zero, amount.raw != .min else { world.refusedPostings &+= 1; return nil }
         let rate = currencies.rate[ledger.currency[g.row.int].int]
+        // a rate of Int64.min cannot be negated: refused before it is (a load bounds the rate; M2's rates stay far inside)
+        guard rate.raw != .min else { world.refusedPostings &+= 1; return nil }
         // a dollar leg that could pass 2^62 (bounded from the sizes, so one from 2^61 may be refused) is refused before
         // it is worked out, so the scaling never clamps (nor counts a clamp)
         let bits = Int64(64 - amount.raw.magnitude.leadingZeroBitCount)
@@ -344,7 +346,7 @@ extension WorldState {
         }
     }
 
-    /// Moves a currency's scale by 10^3: every LCU amount in that currency is divided by 1,000 to the nearest unit.
+    /// Moves a currency's scale by 10^3: every LCU amount in that currency is divided by 1,000 to the nearest unit (ties away from zero).
     /// That is every local balance of every government row in it (dissolved rows included), its money base, its
     /// governments' tax bases, and the LCU fields of the commands waiting to make a government in it; the change of
     /// each balance is posted under `redenomination` (the month's sums then span the change of scale: M2's inflation,
@@ -361,6 +363,8 @@ extension WorldState {
                 let old = ledger.local[i]
                 let new = old.times(1, over: 1_000)
                 ledger.local[i] = new
+                // the change is within the balance's size, and the month's sum within the range while the month opened
+                // within 2^60 (every day's end and every load keep it there), so this sum does not clamp
                 ledger.localPosted[i] += new - old
             }
             governments.rescaleTaxBase(row: row)
@@ -389,30 +393,39 @@ extension WorldState {
         var out: [String] = []
         let l = ledger
         let a = LedgerTable.accountsPerRow
-        for i in 0..<l.local.count where l.local[i] - l.localOpening[i] != l.localPosted[i] {
+        for i in 0..<l.local.count where !Self.adds(l.local[i].raw, l.localOpening[i].raw, l.localPosted[i].raw) {
             let account = LocalAccount(rawValue: UInt8(i % a))!
-            out.append("government row \(i / a), \(account): balance moved \(l.local[i] - l.localOpening[i]), postings \(l.localPosted[i])")
+            out.append("government row \(i / a), \(account): balance \(l.local[i]), opening \(l.localOpening[i]), postings \(l.localPosted[i])")
         }
-        for i in 0..<l.reserves.count where l.reserves[i] - l.reservesOpening[i] != l.reservesPosted[i] {
-            out.append("government row \(i), reserves: balance moved \(l.reserves[i] - l.reservesOpening[i]), postings \(l.reservesPosted[i])")
+        for i in 0..<l.reserves.count where !Self.adds(l.reserves[i].raw, l.reservesOpening[i].raw, l.reservesPosted[i].raw) {
+            out.append("government row \(i), reserves: balance \(l.reserves[i]), opening \(l.reservesOpening[i]), postings \(l.reservesPosted[i])")
         }
         let c = currencies
-        for i in 0..<c.count where c.moneyBase[i] - c.moneyBaseOpening[i] != c.moneyBasePosted[i] {
-            out.append("currency \(i), money base: moved \(c.moneyBase[i] - c.moneyBaseOpening[i]), postings \(c.moneyBasePosted[i])")
+        for i in 0..<c.count where !Self.adds(c.moneyBase[i].raw, c.moneyBaseOpening[i].raw, c.moneyBasePosted[i].raw) {
+            out.append("currency \(i), money base: \(c.moneyBase[i]), opening \(c.moneyBaseOpening[i]), postings \(c.moneyBasePosted[i])")
         }
-        if l.world - l.worldOpening != l.worldPosted { out.append("world account: moved \(l.world - l.worldOpening), postings \(l.worldPosted)") }
+        if !Self.adds(l.world.raw, l.worldOpening.raw, l.worldPosted.raw) {
+            out.append("world account: \(l.world), opening \(l.worldOpening), postings \(l.worldPosted)")
+        }
         return out
+    }
+
+    /// True when a balance is exactly its opening plus its postings: worked out without clamping, so an amount at the
+    /// range's ends (a forged save) can never pass by a clamp.
+    @inline(__always) static func adds(_ balance: Int64, _ opening: Int64, _ posted: Int64) -> Bool {
+        let (moved, overflow) = balance.subtractingReportingOverflow(opening)
+        return !overflow && moved == posted
     }
 
     /// True when every invariant holds: the same check as `ledgerViolations`, without building a message (the close and
     /// the load ask only this; nothing is allocated).
     public func ledgerHolds() -> Bool {
         let l = ledger
-        for i in 0..<l.local.count where l.local[i] - l.localOpening[i] != l.localPosted[i] { return false }
-        for i in 0..<l.reserves.count where l.reserves[i] - l.reservesOpening[i] != l.reservesPosted[i] { return false }
+        for i in 0..<l.local.count where !Self.adds(l.local[i].raw, l.localOpening[i].raw, l.localPosted[i].raw) { return false }
+        for i in 0..<l.reserves.count where !Self.adds(l.reserves[i].raw, l.reservesOpening[i].raw, l.reservesPosted[i].raw) { return false }
         let c = currencies
-        for i in 0..<c.count where c.moneyBase[i] - c.moneyBaseOpening[i] != c.moneyBasePosted[i] { return false }
-        return l.world - l.worldOpening == l.worldPosted
+        for i in 0..<c.count where !Self.adds(c.moneyBase[i].raw, c.moneyBaseOpening[i].raw, c.moneyBasePosted[i].raw) { return false }
+        return Self.adds(l.world.raw, l.worldOpening.raw, l.worldPosted.raw)
     }
 
     /// Closes the month: checks the invariants (the world account must be exactly 0), then opens the next month at

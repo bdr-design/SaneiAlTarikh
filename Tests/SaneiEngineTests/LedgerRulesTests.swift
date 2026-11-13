@@ -239,6 +239,54 @@ final class LedgerRulesTests: XCTestCase {
         XCTAssertEqual(w.currencies.redenominations[2], 1)
     }
 
+    /// The checker works out each sum exactly: a balance at the range's ends whose clamped difference would match is
+    /// still refused (a forged save).
+    func testTheCheckerNeverPassesByAClamp() {
+        var (w, _) = world()
+        let i = LedgerTable.index(0, .treasury)
+        w.ledger.local[i] = LCU(raw: .max)
+        w.ledger.localOpening[i] = LCU(raw: .min)
+        w.ledger.localPosted[i] = LCU(raw: .max)
+        XCTAssertFalse(w.ledgerHolds())
+        XCTAssertEqual(w.ledgerViolations().count, 1)
+        w.ledger.world = USDn(raw: .max)
+        w.ledger.worldOpening = USDn(raw: .min)
+        w.ledger.worldPosted = USDn(raw: .max)
+        XCTAssertEqual(w.ledgerViolations().count, 2)
+    }
+
+    /// An exchange at a rate that cannot be negated is refused, counted, and moves nothing.
+    func testAnExchangeAtTheLowestRateIsRefused() {
+        var (w, g) = world()
+        w.currencies.rate[1] = LogQ(raw: .min)
+        let ledger = w.ledger
+        XCTAssertNil(w.exchange(g[1], local: LCU(raw: 1_000)))
+        XCTAssertEqual(w.ledger, ledger)
+        XCTAssertEqual(w.world.refusedPostings, 1)
+    }
+
+    /// A short run of postings, exchanges, transfers and redenominations gives one hash, pinned: the debug and the
+    /// optimised builds, and later the device's, must all reach it.
+    func testALedgerRunsHashIsPinned() {
+        var (w, g) = world()
+        var sim = Simulation(state: w)
+        for day in 0..<120 {
+            let k = Int64(day)
+            sim.state.post(g[day % 4], .treasury, .spending, LCU(raw: -(k * 7_919 % 50_000)))
+            sim.state.post(g[(day + 1) % 4], .domesticDebt, .interest, LCU(raw: k * 104_729 % 90_000))
+            sim.state.exchange(g[day % 3], local: LCU(raw: (k % 2 == 0 ? 1 : -1) * (k * 31_337 % 400_000 + 1)))
+            sim.state.transfer(from: (g[1], .treasury), to: (g[3], .treasury), .aid, LCU(raw: k % 97))
+            if day == 40 { sim.state.post(g[1], .domesticDebt, .cheat, LCU(raw: (1 << 60) + 12_345)) }
+            sim.step()
+        }
+        w = sim.state
+        XCTAssertEqual(w.currencies.redenominations[1], 1)
+        XCTAssertTrue(w.ledgerHolds())
+        XCTAssertEqual(w.hash, Self.pinnedLedgerRunHash)
+    }
+
+    static let pinnedLedgerRunHash: UInt64 = 15_582_663_620_535_342_169
+
     /// A refused exchange leaves the ledger as it was: only the count moves.
     func testARefusedExchangeMovesOnlyTheCount() {
         var (w, g) = world()
