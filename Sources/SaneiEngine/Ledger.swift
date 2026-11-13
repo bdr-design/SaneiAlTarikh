@@ -116,7 +116,7 @@ public struct CurrencyTable: Sendable, Equatable {
 
 /// The balances, one row per government row, and the world account. A dissolved government's balances stay, in their
 /// currency's scale, until a new government takes the row: then they are dropped, unposted (the allocation of a
-/// dissolved state's money and debts comes with the lifecycle effects and the stub packs, T-042). A successor keeps
+/// dissolved state's money and debts comes with the lifecycle effects, T-048). A successor keeps
 /// the row (`succeedGovernment`), so its predecessor's balances are its own.
 @frozen
 public struct LedgerTable: Sendable, Equatable {

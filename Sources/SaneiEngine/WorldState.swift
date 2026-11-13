@@ -316,7 +316,7 @@ public struct WorldState: Sendable, Equatable {
     }
 
     /// Adds a polity, with its currency: a scenario's set-up, before the simulation starts (the lifecycle effects that
-    /// make polities, independence and unification, come with content, T-042). A polity's row is never reused, so its
+    /// make polities, independence and unification, come with the start, T-048). A polity's row is never reused, so its
     /// currency's row is its own: both tables have the same cap.
     public mutating func addPolity() -> Idx<PolityKind>? {
         guard polities.count < PolityTable.capacity, currencies.count < CurrencyTable.capacity, let p = polities.add() else { return nil }

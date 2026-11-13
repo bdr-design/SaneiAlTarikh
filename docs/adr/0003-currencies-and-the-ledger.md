@@ -28,7 +28,7 @@ the world account is exactly 0 after each monthly close.
    follows another in power (`succeedGovernment`) keeps the row, so the balances are its own. A dissolved government's
    balances stay, in their currency's scale, until a new government takes the row; then they are dropped, unposted,
    and the new treasury starts at its amount, which is an opening balance, not a posting. How a dissolved state's
-   money and debts are shared out comes with the lifecycle effects and the stub packs (T-042). Debt by currency bucket
+   money and debts are shared out comes with the lifecycle effects (T-048). Debt by currency bucket
    comes with the debt system (M2).
 3. **Currencies.** Each polity has one currency, in the same row (both tables are capped at 384, a polity's row is
    never reused, and only the polity's set-up adds a currency). A currency has its scale (one LCU unit is 10^k of its

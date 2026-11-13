@@ -8,14 +8,14 @@
 // the Linux tests check that reader. Compression is handed in (App/Platform: raw DEFLATE). stdlib only.
 
 /// What a save says about itself, for the saves list (screen 23), read without the payload. Plain values only: the
-/// player's government is its row and serial (a content ID comes with T-042).
+/// player's government is its row and serial (a content ID comes with the start, T-048).
 public struct SaveMeta: Sendable, Equatable {
     public var formatVersion: UInt16
     public var gameVersion: String
     public var build: String
     public var scenarioId: String
     public var mapVersion: UInt32
-    /// SHA-256 of `content.bin` and of the scenario file (32 bytes each; empty until content exists, T-042).
+    /// SHA-256 of `content.bin` and of the scenario file (32 bytes each; empty until the start fills them, T-048).
     public var rulesHash: [UInt8]
     public var scenarioHash: [UInt8]
     /// The game date, as a day count (`GameDate.days`).

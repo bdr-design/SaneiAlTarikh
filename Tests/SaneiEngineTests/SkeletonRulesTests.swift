@@ -304,4 +304,85 @@ final class SkeletonRulesTests: XCTestCase {
         w.governments.dissolve(ended)
         XCTAssertNil(w.addProvince(sovereign: Idx(raw: 1), administrator: ended, population: Pop32(raw: 1)))
     }
+
+    /// A succession starts every count of runs again, the strategic one included (checked once each count has run).
+    func testASuccessionStartsEveryCountAgain() {
+        var sim = Simulation(state: world(4))
+        sim.advance(days: 400)
+        let g = sim.state.governments.ref(1)
+        XCTAssertGreaterThan(sim.state.governments.monthlyRuns[1], 0)
+        XCTAssertGreaterThan(sim.state.governments.yearlyRuns[1], 0)
+        XCTAssertGreaterThan(sim.state.governments.strategicRuns[1], 0)
+        XCTAssertTrue(Command.succeedGovernment(government: g).apply(to: &sim.state, by: .event))
+        XCTAssertEqual([sim.state.governments.monthlyRuns[1], sim.state.governments.yearlyRuns[1], sim.state.governments.strategicRuns[1]],
+                       [0, 0, 0])
+    }
+
+    /// The cap's room comes back with every append, even to a column that lost it: a copy written by subscript keeps only
+    /// its count's room (a dissolution and a re-used row do that after a held copy), and here each column is also made
+    /// to lose it outright. The queue keeps its room across a held copy and a take-back, the stagger's working room is
+    /// reserved when the simulation is made, and no table passes its cap.
+    func testTheRoomComesBackWithEveryAppend() {
+        // governments: a held copy, a dissolution and its row re-used (written by subscript), then an append
+        var w = world(3)
+        var held = w
+        w.governments.dissolve(w.governments.ref(0))
+        _ = w.createGovernment(polity: Idx(raw: 0), treasury: .zero, taxBase: .zero, taxRate: .zero, strategicPeriod: 30)
+        _ = w.addPolity()
+        _ = w.createGovernment(polity: Idx(raw: 3), treasury: .zero, taxBase: .zero, taxRate: .zero, strategicPeriod: 30)
+        func governmentRoom(_ t: GovernmentTable, _ m: String) {
+            for c in [t.exists.capacity, t.serial.capacity, t.polity.capacity, t.monthlySlot.capacity, t.lastMonthlyRun.capacity,
+                      t.lastYearlyRun.capacity, t.aiNextStrategic.capacity, t.taxRate.capacity, t.taxBase.capacity,
+                      t.monthlyRuns.capacity, t.yearlyRuns.capacity, t.strategicRuns.capacity] {
+                XCTAssertGreaterThanOrEqual(c, GovernmentTable.capacity, m)
+            }
+        }
+        governmentRoom(w.governments, "after a re-used row and an append")
+        // every column made to lose its room, then one append each
+        w = world(3)
+        held = w
+        w.polities.exists = w.polities.exists.map { $0 }
+        w.polities.serial = w.polities.serial.map { $0 }
+        _ = w.addPolity()
+        XCTAssertGreaterThanOrEqual(w.polities.exists.capacity, PolityTable.capacity)
+        XCTAssertGreaterThanOrEqual(w.polities.serial.capacity, PolityTable.capacity)
+        var t = w.governments
+        t.exists = t.exists.map { $0 }; t.serial = t.serial.map { $0 }; t.polity = t.polity.map { $0 }
+        t.monthlySlot = t.monthlySlot.map { $0 }; t.lastMonthlyRun = t.lastMonthlyRun.map { $0 }; t.lastYearlyRun = t.lastYearlyRun.map { $0 }
+        t.aiNextStrategic = t.aiNextStrategic.map { $0 }; t.taxRate = t.taxRate.map { $0 }; t.taxBase = t.taxBase.map { $0 }
+        t.monthlyRuns = t.monthlyRuns.map { $0 }; t.yearlyRuns = t.yearlyRuns.map { $0 }; t.strategicRuns = t.strategicRuns.map { $0 }
+        w.governments = t
+        _ = w.createGovernment(polity: Idx(raw: 3), treasury: .zero, taxBase: .zero, taxRate: .zero, strategicPeriod: 30)
+        governmentRoom(w.governments, "after columns that lost their room and an append")
+        _ = w.addProvince(sovereign: Idx(raw: 0), administrator: w.governments.ref(0), population: Pop32(raw: 1))
+        w.provinces.sovereign = w.provinces.sovereign.map { $0 }
+        w.provinces.administrator = w.provinces.administrator.map { $0 }
+        w.provinces.population = w.provinces.population.map { $0 }
+        _ = w.addProvince(sovereign: Idx(raw: 1), administrator: w.governments.ref(1), population: Pop32(raw: 2))
+        for c in [w.provinces.sovereign.capacity, w.provinces.administrator.capacity, w.provinces.population.capacity] {
+            XCTAssertGreaterThanOrEqual(c, ProvinceTable.capacity)
+        }
+        XCTAssertEqual(held.polities.count, 3, "the held copy is unchanged")
+        // the queue: a held copy, a take-back (written after the copy), then a new order
+        var sim = Simulation(state: world(3))
+        XCTAssertGreaterThanOrEqual(sim.due.capacity, GovernmentTable.capacity, "the stagger's room, reserved when made")
+        let d = start.adding(days: 3), g = sim.state.governments.ref(0)
+        for k in 0..<3 {
+            XCTAssertEqual(sim.submit(IssuedCommand(day: d, issuer: .player(g), sequence: UInt64(k), command: .setTaxRate(government: g, rate: .zero))), .queued)
+        }
+        let heldSim = sim
+        XCTAssertTrue(sim.cancel(day: d, government: g, sequence: 1))
+        XCTAssertEqual(sim.submit(IssuedCommand(day: d, issuer: .player(g), sequence: 9, command: .setTaxRate(government: g, rate: .zero))), .queued)
+        XCTAssertGreaterThanOrEqual(sim.state.pending.capacity, Simulation.queueCapacity)
+        XCTAssertEqual(heldSim.pending.count, 3)
+        // no table passes its cap
+        var full = WorldState(start: start, seed: 1)
+        for _ in 0..<PolityTable.capacity { XCTAssertNotNil(full.addPolity()) }
+        XCTAssertNil(full.addPolity(), "the polities' cap")
+        XCTAssertEqual(full.polities.count, PolityTable.capacity)
+        var table = PolityTable()                                   // the table's own cap, under the world's
+        for _ in 0..<PolityTable.capacity { XCTAssertNotNil(table.add()) }
+        XCTAssertNil(table.add(), "the polity table's own cap")
+        XCTAssertEqual(table.count, PolityTable.capacity)
+    }
 }

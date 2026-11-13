@@ -61,7 +61,7 @@ public enum Command: Sendable, Equatable {
     case createGovernment(polity: Idx<PolityKind>, treasury: LCU, taxBase: LCU, taxRate: BP)
     /// A lifecycle effect, from events only: a government ends. Its provinces go to `provincesTo`, an existing
     /// government of the same polity, or to nobody (an effect that gives provinces comes with the lifecycle effects,
-    /// T-042); its row is then free for a new government, which inherits nothing.
+    /// T-048); its row is then free for a new government, which inherits nothing.
     case dissolveGovernment(government: GovRef, provincesTo: GovRef? = nil)
     /// A lifecycle effect, from events only: a government ends and its successor takes its place in one step (Côte
     /// d'Ivoire's next government, a revolution's). The successor keeps the row, so the provinces, the accounts, the
@@ -104,7 +104,7 @@ public enum Command: Sendable, Equatable {
         case let .dissolveGovernment(g, to):
             guard issuer == .event, state.governments.isLive(g) else { return false }
             // provinces pass only within the polity: giving them to another polity is annexation (§2.4's `Annex`, with
-            // the lifecycle effects, T-042)
+            // the lifecycle effects, T-048)
             if let to { return to != g && state.governments.isLive(to) && state.governments.polity[to.row.int] == state.governments.polity[g.row.int] }
             return true
         case let .succeedGovernment(g):
