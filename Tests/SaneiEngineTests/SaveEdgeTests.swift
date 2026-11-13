@@ -11,6 +11,16 @@ final class SaveEdgeTests: XCTestCase {
     private func metaLength(_ file: [UInt8]) -> Int { Int(file[12]) | Int(file[13]) << 8 | Int(file[14]) << 16 | Int(file[15]) << 24 }
     private func reseal(_ b: inout [UInt8]) { b.replaceSubrange((b.count - 32)..., with: SHA256.hash(b, 0..<(b.count - 32))) }
 
+    /// A decompressor a file past a bound must never reach: the bounds cap what a load holds, so they come first.
+    private struct NeverAsked: SaveCompressor {
+        var compression: SaveCompression { .rawDeflate }
+        func compress(_ bytes: [UInt8], appendingTo out: inout [UInt8]) -> Bool { false }
+        func decompress(_ bytes: ArraySlice<UInt8>, rawLength: Int) -> [UInt8]? {
+            XCTFail("the decompressor was asked for a file past a bound")
+            return [UInt8](repeating: 0, count: rawLength)
+        }
+    }
+
     /// The bounds the file keeps are the documented ones (§3.5, §7).
     func testTheBoundsAreTheDocumentedOnes() {
         XCTAssertEqual(SaveFile.mostPayloadBytes, 12 << 20, "§3.5's 8 MB raw and half again")
@@ -62,6 +72,7 @@ final class SaveEdgeTests: XCTestCase {
         for k in 0..<8 { forged[at + k] = UInt8(truncatingIfNeeded: stored >> UInt64(8 * k)) }
         reseal(&forged)
         XCTAssertEqual(SaveCodec.read(forged, decompressor: atBound).failureValue, .badPayload)
+        XCTAssertEqual(SaveCodec.read(forged, decompressor: NeverAsked()).failureValue, .badPayload)
     }
 
     /// A compressed file whose raw length is the bound opens; one byte more is refused before the decompressor is asked.
@@ -82,6 +93,7 @@ final class SaveEdgeTests: XCTestCase {
         guard case let .success(o) = SaveFile.open(withRaw(SaveFile.mostPayloadBytes), decompressor: Zeros()) else { return XCTFail("at the bound") }
         XCTAssertEqual(o.payload.count, SaveFile.mostPayloadBytes)
         XCTAssertEqual(SaveFile.open(withRaw(SaveFile.mostPayloadBytes + 1), decompressor: Zeros()).failureValue, .badPayload)
+        XCTAssertEqual(SaveFile.open(withRaw(SaveFile.mostPayloadBytes + 1), decompressor: NeverAsked()).failureValue, .badPayload)
     }
 
     /// The saves list's prefix: from 16 bytes, from the whole file, and each refusal of the header.

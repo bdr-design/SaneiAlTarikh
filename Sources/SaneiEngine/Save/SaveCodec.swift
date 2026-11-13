@@ -39,7 +39,7 @@ public enum SaveCodec {
         if let p = m.playerGovernment, !state.governments.wasMade(p) { m.playerGovernment = nil }
         if m.playerSerial == 0 { m.playerRow = 0 }
         let payload = state.saveTree().write()
-        guard payload.count <= SaveFile.mostPayloadBytes else { return nil }
+        guard payload.count <= SaveFile.mostPayloadBytes else { return nil }    // unreachable at today's caps (about 50 KB)
         return SaveFile.write(meta: m, payload: payload, compressor: compressor)
     }
 

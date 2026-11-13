@@ -235,7 +235,8 @@ final class SaveTests: XCTestCase {
     }
 
     /// Every kind of order an AI may give is checked by the governments it names, and the queue it leaves saves; an event
-    /// may name a government an earlier command will make (the next serial, the next row).
+    /// may name the government the next create will make (the next serial, the next row): accepted at submit and saved;
+    /// on its day it applies only if that create has come before it in the queue.
     func testEveryKindOfOrderIsCheckedByTheGovernmentsItNames() throws {
         var sim = Self.busyWorld()
         let d = sim.state.world.date.adding(days: 5)
@@ -248,6 +249,7 @@ final class SaveTests: XCTestCase {
         XCTAssertEqual(submit(1, .ai(g), .createGovernment(polity: polity, treasury: .zero, taxBase: .zero, taxRate: .zero)), .queued, "a create")
         XCTAssertEqual(submit(2, .ai(g), .dissolveGovernment(government: g)), .queued, "a dissolve with no heir")
         XCTAssertEqual(submit(3, .ai(g), .dissolveGovernment(government: g, provincesTo: never)), .invalid, "an heir never made")
+        XCTAssertEqual(submit(9, .ai(g), .dissolveGovernment(government: g, provincesTo: sim.state.governments.ref(1))), .queued, "an heir made")
         XCTAssertEqual(submit(4, .ai(g), .dissolveGovernment(government: never)), .invalid, "a dissolve of one never made")
         XCTAssertEqual(submit(5, .ai(g), .succeedGovernment(government: never)), .invalid, "a succession of one never made")
         XCTAssertEqual(submit(6, .ai(g), .succeedGovernment(government: g)), .queued, "a succession")
