@@ -101,7 +101,8 @@ public struct Aliases: Sendable, Equatable {
 
     /// Strict (`JSON`, one reader): exactly these keys, these types, a known kind other than `government` (aliases of
     /// governments come with T-048), well-formed IDs, each target once and other than the alias's own, weights from 1
-    /// to 10,000 summing to 10,000, an ID replaced at most once.
+    /// to 10,000 summing to 10,000, an ID replaced at most once, and `\n` line ends only (as the CSV files and the
+    /// lock).
     public static func parse(_ data: [UInt8], file: String = "aliases.json") throws -> Aliases {
         // \n line ends only, as the CSV files and the lock
         guard !data.contains(0x0D) else { throw BakeError(file, 0, "a carriage return: save with \\n line ends") }

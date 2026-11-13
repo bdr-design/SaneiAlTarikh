@@ -168,9 +168,10 @@ final class ContentRulesTests: XCTestCase, ContentFixtures {
         }
     }
 
-    /// The hidden characters written out are Unicode 15.0's (checked on the pinned toolchain, whose tables are 15.0):
-    /// for every character of 15.0 or older, in the list exactly when it is a format, private-use or default-ignorable
-    /// character other than the joiners; the ranges in rising order, apart.
+    /// The hidden characters written out are `unicodeVersion`'s (checked on the pinned toolchain, whose tables are
+    /// 15.0): for every character of that version or older, and every private-use one, in the list exactly when it is
+    /// a format, private-use or default-ignorable character other than the joiners; the ranges in rising order, apart.
+    /// A character newer than the toolchain is not checked here: `isNameText` refuses it by its age.
     func testTheHiddenListIsUnicode15s() {
         let ranges = ContentDB.hiddenRanges
         for k in ranges.indices {
@@ -180,7 +181,9 @@ final class ContentRulesTests: XCTestCase, ContentFixtures {
         var checked = 0
         for v in UInt32(0)...0x10FFFF {
             guard let s = Unicode.Scalar(v), let age = s.properties.age,
-                  age.major < 15 || (age.major == 15 && age.minor == 0) || s.properties.generalCategory == .privateUse else { continue }
+                  age.major < ContentDB.unicodeVersion.major
+                    || (age.major == ContentDB.unicodeVersion.major && age.minor <= ContentDB.unicodeVersion.minor)
+                    || s.properties.generalCategory == .privateUse else { continue }
             let hidden: Bool
             switch s.properties.generalCategory {
             case .format, .privateUse: hidden = true

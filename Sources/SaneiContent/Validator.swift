@@ -79,9 +79,11 @@ extension ContentDB {
     }
 
     /// The newest Unicode a name's character may come from: that of the Swift runtime in the oldest system the game
-    /// runs on (iOS 17 and macOS 14 carry Swift 5.9's runtime, whose tables are Unicode 15.0; Swift 6.0's are 15.0 too,
-    /// 6.1's 16.0). Raised only with the minimum system (Package.swift, App/project.yml, §3.10), with `hiddenRanges`
-    /// made again from that version's tables.
+    /// runs on. On Apple's systems that runtime is the system's own, not the toolchain's: iOS 17.0 and macOS 14.0 are
+    /// taken to carry Swift 5.9's, whose tables are Unicode 15.0 (a later 17.x or 14.x carries 5.10's, 15.0 as well;
+    /// the pinned Linux toolchain, Swift 6.0.3, is 15.0 too, and Swift 6.1 is 16.0). Which Unicode each Apple runtime
+    /// carries is from no measurement of ours: T-043 checks it on the iOS 17.0 simulator. Raised only with the minimum
+    /// system (Package.swift, App/project.yml, §3.10), with `hiddenRanges` made again from that version's tables.
     public static let unicodeVersion = (major: 15, minor: 0)
 
     /// The Arabic marks (the harakat, U+064B to U+0652, and the superscript alef, U+0670): marks of Unicode 1.1, none

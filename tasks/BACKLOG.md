@@ -37,9 +37,9 @@ listed under each, so a deferred item always has a place that exists.
   passed the bound) logged, as such a file is up to 12 MB, past §3.5's 2 MB; the Linux inflater for the device fixture
   (a zlib test target, as simcli's `CZlib`), comparing decompressed payloads (Apple's DEFLATE bytes vary by OS version);
   a macOS build in CI so an API newer than iOS 17 is caught, which also bakes `content.bin` with Apple's toolchain and
-  checks it against the hash the tests pin (T-042), and runs the name rule's tests on the iOS 17 simulator, with one
-  asserting its runtime's tables are Unicode 15.0 (U+11F04 of age 15.0, U+2EBF0 unknown), as `ContentDB.unicodeVersion`
-  assumes (T-042).
+  checks it against the hash the tests pin (T-042), and runs the name rule's tests on the iOS 17.0 simulator runtime
+  (the minimum, installed beside the current Xcode), with one asserting that runtime's tables are Unicode 15.0
+  (U+11F04 of age 15.0, U+2EBF0 unknown), which `ContentDB.unicodeVersion` assumes and nothing has measured (T-042).
 - **T-044: the host on the simulation.** `GameHost` runs `Simulation` inside one long counting scope; the test that
   every entry point binds a counter scope; the host holding a day until every AI result due on it has been submitted;
   the host following the player onto a successor's row after `succeedGovernment`, with one sequence of player orders
@@ -53,7 +53,8 @@ listed under each, so a deferred item always has a place that exists.
   T-036, the remembered position of T-037); `content.bin` read at launch from a memory map (the reader taking a buffer
   that is not an array, or the map saves nothing: today's reader takes an array, so a map would first be copied) and its
   launch time measured against §3.4 (on x86-64 Linux at the registries' caps: 13 to 14 ms, of which the SHA-256 about
-  2.3 ms, at about 200 to 260 MB/s, so 24 to 31 ms for a 6 MB file, and the validator's rules about 3 ms; whether the
+  2.3 ms, at about 200 to 260 MB/s, so 24 to 31 ms for a 6 MB file, and the validator's rules about 3 ms on today's
+  names, 4.3 to 4.9 on fully vowelled ones; whether the
   release build keeps the text rules or leaves them to the bake is decided there), with the decoded content's memory
   budgeted against §3.3's line (at today's caps the largest registries the validator takes, every text at 256 bytes and
   every ID at 64, make a 5.2 MB file: its kept memory measured there, as 4.4 MB of 250-byte texts kept 5.9 MB; for names

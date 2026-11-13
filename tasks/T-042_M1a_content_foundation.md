@@ -122,9 +122,14 @@ registries; runtime namespace; aliases; ID lock; tag lock»), CI's ID lock on `c
 - **The fix verifications (FV8, FV9):** a name now takes only characters of Unicode 15.0 or older, the tables of the
   Swift runtime in iOS 17 and macOS 14, and the characters it refuses are written out as 15.0 has them (a test checks
   the list against the toolchain's tables), with the 66 noncharacters, which the tables give an age, so the bake and
-  every phone judge a name alike (§3.10; a device check on the iOS 17 simulator is T-043's). The harakat skip the
-  lookups (a fully vowelled name about 6 times cheaper to check). They planted 12 and 62 more faults: the survivors
-  (a fathatan first, an ISO code twice where it sorts first, a dual of people, a payload length one short, a carriage
-  return in aliases.json, the lock compared with the last push, an empty old lock) got tests and are caught; the
-  Unicode version's minor and major bounds are equivalent on the pinned toolchain, which knows nothing past 15.0
-  (letters of 15.1 and 16.0 catch them on a newer one).
+  every phone judge a name alike (§3.10; its check on the iOS 17.0 simulator runtime is T-043's). The harakat skip the
+  lookups (a fully vowelled name about 6 times cheaper to check: 26 to 28 ms down to 4.3).
+  - **What FV8 planted:** 62 faults in the content and the engine (56 caught, 1 equivalent, 5 survived), 13 in the
+    lock script (9 caught, 2 equivalent, 2 survived) and 12 more on the next commit (9 caught, 1 equivalent, 2
+    survived).
+  - **The survivors** (a fathatan first, an ISO code twice where it sorts first, a dual of people, a payload length
+    one short, a carriage return in aliases.json, the lock compared with the last push, an empty old lock) got tests
+    and are caught; the two left are the Unicode version's minor and major bounds, equivalent on the pinned
+    toolchain, which knows nothing past 15.0 (letters of 15.1 and 16.0 catch them on a newer one).
+  - **Planted again on the fixes:** 18 faults, 16 caught and those 2 equivalent; and 9 in the lock script, all
+    caught.
