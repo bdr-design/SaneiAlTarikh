@@ -73,6 +73,10 @@ final class SaveEdgeTests: XCTestCase {
         reseal(&forged)
         XCTAssertEqual(SaveCodec.read(forged, decompressor: atBound).failureValue, .badPayload)
         XCTAssertEqual(SaveCodec.read(forged, decompressor: NeverAsked()).failureValue, .badPayload)
+        // the same file damaged: the trailer is checked first, so it reads as damaged
+        var damaged = forged
+        damaged[damaged.count - 1] ^= 1
+        XCTAssertEqual(SaveCodec.read(damaged, decompressor: NeverAsked()).failureValue, .damaged)
     }
 
     /// A compressed file whose raw length is the bound opens; one byte more is refused before the decompressor is asked.

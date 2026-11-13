@@ -20,15 +20,16 @@ listed under each, so a deferred item always has a place that exists.
   `sanei.io` (ADR 0001, `threadSpread`): the tree, DEFLATE, the SHA-256 and the file; the platform checks a file's
   size before reading it, reads it into one buffer, and reads only `SaveFile.metaPrefixLength` bytes for the list;
   DEFLATE streaming into the file (`compress(appendingTo:)`), stopping at `SaveFile.mostCompressedBytes` rather than
-  making bytes the file then stores as they are; the Linux inflater for the device fixture (a zlib test
+  making bytes the file then stores as they are, and a write that fell back to storing them logged (such a file is up
+  to 12 MB, past §3.5's 2 MB); the Linux inflater for the device fixture (a zlib test
   target, as simcli's `CZlib`), comparing decompressed payloads (Apple's DEFLATE bytes vary by OS version); a macOS
   build in CI so an API newer than iOS 17 is caught.
 - **T-044: the host on the simulation.** `GameHost` runs `Simulation` inside one long counting scope; the test that
   every entry point binds a counter scope; the host holding a day until every AI result due on it has been submitted;
   the host following the player onto a successor's row after `succeedGovernment`, with one sequence of player orders
   across a succession (so a new order never takes a handed-over order's key); the load procedure (pause, release the
-  old state and its snapshot, decode, migrate, build) and the peak-load measure, with a forged file at the bounds (a
-  tree of 6,144 columns) and `mostPayloadBytes` and `mostCompressedBytes` worked out again against the grown state
+  old state and its snapshot, decode, migrate, build) and the peak-load measure in the optimised build (a debug build
+  runs about 0.4 MB higher), with a forged file at the bounds (a tree of 6,144 columns) and `mostPayloadBytes` and `mostCompressedBytes` worked out again against the grown state
   and §3.3's split; the build-scoped command journal
   `CMDJ`, `.saneibug` and `simcli replay`; the ledger's invariants after every day in debug and test builds; the lint
   that no simulation code walks a `Set` or a `Dictionary`; the append-only check of `tags.lock` in CI; the engine's
