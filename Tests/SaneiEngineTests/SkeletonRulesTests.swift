@@ -404,4 +404,63 @@ final class SkeletonRulesTests: XCTestCase {
         XCTAssertNil(IssuedCommand.read(from: &bad))
         XCTAssertEqual(bad.offset, 0)
     }
+
+    /// The guards that keep each run once: a row that says it ran this month (or year) does not run again on its slot
+    /// day; a successor keeps its predecessor's calendar; the observer hears of commands only on a day some were due.
+    func testTheOnceGuardsAndTheCalendarCarriedOver() {
+        var sim = Simulation(state: world(3))
+        let rec = Recorder()
+        run(&sim, days: 1, rec)                                    // 1 January: the close, slot 1's runs
+        // the next slot day of government 1, with its row saying it already ran this month and this year
+        let civil = sim.state.world.date.civil                    // 2 January: government 1's slot, in January
+        XCTAssertEqual([Int(sim.state.governments.monthlySlot[1]), civil.day, civil.month], [2, 2, 1])
+        sim.state.governments.lastMonthlyRun[1] = Int32(civil.year * 12 + civil.month - 1)
+        sim.state.governments.lastYearlyRun[1] = Int32(civil.year)
+        let before = rec.all.count
+        run(&sim, days: 1, rec)
+        let ref = sim.state.governments.ref(1)
+        XCTAssertFalse(rec.all[before...].contains { $0.1 == .monthly(ref) || $0.1 == .yearly(ref) }, "a row that ran runs no more")
+        XCTAssertTrue(rec.all[before...].contains { if case .monthly = $0.1 { return false }; return true }, "the day ran")
+        // a succession keeps the calendar: the month's and the year's runs (row 1's say it ran), the slot and the next look
+        let row = 1
+        let calendar = { (s: Simulation) in
+            [Int64(s.state.governments.lastMonthlyRun[row]), Int64(s.state.governments.lastYearlyRun[row]),
+             Int64(s.state.governments.monthlySlot[row]), Int64(s.state.governments.aiNextStrategic[row].days)]
+        }
+        let kept = calendar(sim)
+        XCTAssertFalse(kept.prefix(2).contains(Int64(GovernmentTable.never)), "the row has a month and a year to keep")
+        XCTAssertTrue(Command.succeedGovernment(government: sim.state.governments.ref(row)).apply(to: &sim.state, by: .event))
+        XCTAssertEqual(calendar(sim), kept)
+        // commands heard of only on a day some are due
+        let g = sim.state.governments.ref(0)
+        let later = sim.state.world.date.adding(days: 3)
+        XCTAssertEqual(sim.submit(IssuedCommand(day: later, issuer: .player(g), sequence: 1, command: .setTaxRate(government: g, rate: .zero))), .queued)
+        let mark = rec.all.count
+        run(&sim, days: 1, rec)
+        XCTAssertFalse(rec.all[mark...].contains { $0.1 == .commands }, "nothing due today: nothing to hear")
+        run(&sim, days: 3, rec)
+        XCTAssertTrue(rec.all[mark...].contains { $0.1 == .commands })
+    }
+
+    /// The making of a government is checked when given: its amounts, its rate and the room for its row.
+    func testAGovernmentsMakingIsCheckedWhenGiven() {
+        var w = world(2)
+        _ = w.addPolity()
+        let p = Idx<PolityKind>(raw: 2)
+        XCTAssertTrue(Command.createGovernment(polity: p, treasury: .zero, taxBase: .zero, taxRate: .one).validate(w, by: .event))
+        XCTAssertFalse(Command.createGovernment(polity: p, treasury: LCU(raw: -1), taxBase: .zero, taxRate: .zero).validate(w, by: .event))
+        XCTAssertFalse(Command.createGovernment(polity: p, treasury: .zero, taxBase: LCU(raw: -1), taxRate: .zero).validate(w, by: .event))
+        XCTAssertFalse(Command.createGovernment(polity: p, treasury: .zero, taxBase: .zero, taxRate: BP(raw: 10_001)).validate(w, by: .event))
+        XCTAssertFalse(Command.createGovernment(polity: p, treasury: .zero, taxBase: .zero, taxRate: BP(raw: -1)).validate(w, by: .event))
+        // every row live at the cap: no room; a dissolved row makes room again
+        var full = WorldState(start: start, seed: 3)
+        for _ in 0..<GovernmentTable.capacity {
+            let q = full.addPolity()!
+            XCTAssertNotNil(full.createGovernment(polity: q, treasury: .zero, taxBase: .zero, taxRate: .zero, strategicPeriod: 30))
+        }
+        let make = Command.createGovernment(polity: Idx(raw: 0), treasury: .zero, taxBase: .zero, taxRate: .zero)
+        XCTAssertFalse(make.validate(full, by: .event), "no room at the cap")
+        full.governments.dissolve(full.governments.ref(5))
+        XCTAssertTrue(make.validate(full, by: .event), "a dissolved row is room")
+    }
 }

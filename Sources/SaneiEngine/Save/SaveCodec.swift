@@ -9,9 +9,9 @@ import SaneiCore
 // re-encoded, units or IDs remapped, a chunk split, a command's fields changed (a step then rewrites the CMDQ items).
 // Each rise brings a migration step (`SaveMigrations`; a drop's step is `dropColumn`), so that every golden save,
 // migrated to the current format, holds only columns the current version writes, each written back byte for byte
-// (columns added since are absent from it, and listed). A column or chunk only added keeps the
-// format: an older save lacks it and takes its default, and an older version skips it, reported, as long as its type
-// and encoding are ones format 1 knows and the tree stays within its caps (64 chunks, 96 columns, names of 64 bytes);
+// (columns added since are absent from it, and listed). A column or chunk only added keeps the format: an older save
+// lacks it and takes its default, and an older version skips it, reported, as long as its type and encoding are ones
+// format 1 knows and the tree stays within its caps (64 chunks, 96 columns, names of 64 bytes);
 // a column of a new type or encoding, or past a cap, is not skippable by an older reader, so it raises the format too.
 // A format past the reader's own is refused as newer, from META once the file is whole, before its tree is read. Every format has its
 // golden save, written once and never rewritten (Tests/SaneiEngineTests/Golden).

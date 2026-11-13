@@ -95,3 +95,23 @@ registries; runtime namespace; aliases; ID lock; tag lock»), CI's ID lock on `c
 - Risk: facts without sources. Each seeded row carries an evidence ID (one per table today: the official names from
   UNTERM, the codes from ISO 4217; a short form is the game's display choice, §3.10); the evidence records and the
   gate are T-048's (§9 puts the evidence gate in M1a).
+
+## Reviews and their verification (2026-11-13)
+- **The first four reviews** (API and words, design, determinism, errors) on 7e4b004: 6 must, 37 should, fixed in
+  f7a0330. The main ones: a forged `content.bin` could trap the reader, now every column is read with the writer's
+  type and encoding; every problem is located with its file, line and rule; the registries hold only what is true in
+  every scenario; and the names carry the short form's grammar.
+- **Heaviness:** the perf row had been measured on names shorter than today's, and is measured again (616 KB at the
+  caps, 13 to 14 ms, about 16,600 allocations, 1.8 MB kept). Texts are now decoded once, straight from the file. The
+  bake refuses a file past §3.6's 6 MB, and the launch read's parts are budgeted in T-044. One nit was declined: the
+  oblique form is kept explicit (about 90 KB at the caps).
+- **The checkers (mutation):** 159 planted faults; 158 compiled, 79 caught, 11 equivalent, and 62 changed behaviour
+  untested, plus 6 in simcli. Tests were added for every rule at its edge, simcli's options moved where tests reach
+  them, CI checks simcli's exit codes, and the lock script has a self-test in CI. Planted again, together with faults
+  in the fixes: 100 planted, 98 caught, 2 equivalent (a search that returns before the changed line; a space allowed
+  mid-name either way). The lock script: 8 planted, 6 caught, 2 equivalent.
+- **The fix verifications (FV6, FV7):** they found two problems in the fixes. The reader took files in another layout
+  (one content, two hashes); it now takes only the writer's layout. The name rule let invisible characters through;
+  it now refuses format and ignorable characters, unassigned and private-use code points, joiners at an end and a
+  mark at the start. Alias lines are where each alias starts, and a government's ID in the lock names a registry's
+  polity. They fuzzed 120,000 forged files: 0 traps, and every file accepted was its content's own bytes.

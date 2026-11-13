@@ -25,12 +25,15 @@ extension ContentDB {
 
     /// True for a name's text: not empty, at most `mostTextBytes` bytes, no space at either end, no mark at its start
     /// (a mark belongs to the letter before it), and no character that changes how the text around it shows or that
-    /// shows nothing: a control, a line or paragraph separator, and every format character (a bidi embedding, override,
-    /// isolate or mark, a zero-width space, a soft hyphen, a word joiner, a byte-order mark, an annotation mark) but
-    /// the joiners Arabic needs (U+200C, U+200D).
+    /// shows nothing: a control, a line or paragraph separator, every format character (a bidi embedding, override,
+    /// isolate or mark, a zero-width space, a soft hyphen, a word joiner, a byte-order mark, an annotation mark) and
+    /// every other character Unicode lets a renderer ignore (a filler, a variation selector, the grapheme joiner), and
+    /// the blank braille pattern, but the joiners Arabic needs (U+200C, U+200D), which go between letters, never at an
+    /// end; and no unassigned or private-use code point (the rule reads the running system's Unicode tables: a
+    /// character assigned later could be classed otherwise there, so only assigned ones are taken).
     static func isNameText(_ t: String) -> Bool {
         guard !t.isEmpty, t.utf8.count <= mostTextBytes, let first = t.unicodeScalars.first, let last = t.unicodeScalars.last,
-              !isSpace(first.value), !isSpace(last.value) else { return false }
+              !isSpace(first.value), !isSpace(last.value), !isJoiner(first.value), !isJoiner(last.value) else { return false }
         if !isPlain(first.value) {
             switch first.properties.generalCategory {
             case .nonspacingMark, .spacingMark, .enclosingMark: return false
@@ -41,10 +44,18 @@ extension ContentDB {
             let v = s.value
             if isPlain(v) || v == 0x20 { continue }
             if v < 0x20 || (v >= 0x7F && v <= 0x9F) || v == 0x2028 || v == 0x2029 { return false }
-            if v != 0x200C && v != 0x200D && s.properties.generalCategory == .format { return false }
+            if v == 0x2800 { return false }
+            if isJoiner(v) { continue }
+            switch s.properties.generalCategory {
+            case .format, .unassigned, .privateUse, .surrogate: return false
+            default: if s.properties.isDefaultIgnorableCodePoint { return false }
+            }
         }
         return true
     }
+
+    /// The joiners Arabic needs: U+200C (zero-width non-joiner) and U+200D (zero-width joiner).
+    @inline(__always) static func isJoiner(_ v: UInt32) -> Bool { v == 0x200C || v == 0x200D }
 
     /// A scalar no rule of a name's text is about: printable ASCII and the Arabic letters and digits (U+0621 to U+064A,
     /// U+0660 to U+0669), so the common case looks no property up.

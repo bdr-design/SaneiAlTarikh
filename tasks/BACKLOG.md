@@ -51,16 +51,19 @@ listed under each, so a deferred item always has a place that exists.
   T-036, the remembered position of T-037); `content.bin` read at launch from a memory map (the reader taking a buffer
   that is not an array, or the map saves nothing: today's reader takes an array, so a map would first be copied) and its
   launch time measured against §3.4 (on x86-64 Linux at the registries' caps: 13 to 14 ms, of which the SHA-256 about
-  2.3 ms, at about 200 MB/s, so about 30 ms for a 6 MB file, and the validator's rules about 3 ms; whether the release
+  2.3 ms, at about 260 MB/s, so 24 to 31 ms for a 6 MB file, and the validator's rules about 3 ms; whether the release
   build keeps the text rules or leaves them to the bake is decided there), with the decoded content's memory budgeted
-  (about 3 times the file: 1.8 MB kept for a 616 KB file, so about 17 MB for a full 6 MB file decoded the same way,
-  against §3.3's line), and fixed-width columns and offset tables for the large static tables if it needs them
+  against §3.3's line (at today's caps it keeps at most about 6 MB: the largest registries the validator takes make a
+  4.4 MB file that keeps 5.9 MB; for names as long as today's, about 3 times the file, 1.8 MB for 616 KB; worked out
+  again when a cap rises or the static rules join), and fixed-width columns and offset tables for the large static tables if it needs them
   (T-042).
 - **T-045: the thin systems.** Time, taxes, budget, cohorts, stability through `TermSink`, projects, rename; the event
   scheduler with the 5 real events (South Sudan's succession, Côte d'Ivoire's resolution, Libya's NTC, the NDP's
   dissolution, the US withdrawal from Iraq) and step 10's conditional events (a government they make takes its slot
   from tomorrow on); the registry of random streams; the AI stub on the stagger; the peak-load measure on a 90-year
-  save (`simcli peak-load`, the optimised build) once these systems run 90 years.
+  save (`simcli peak-load`, the optimised build) once these systems run 90 years; and the ledger's rule for a month's
+  first day (ADR 0003, decision 7): a posting before the close never takes a balance past 2^60, or the close comes
+  first, so a save is never refused for the month.
 - **T-046: `Visibility`.** The engine's view through fog, declared in M1a with the packing of a fog-of-war key (epoch
   fog itself is M5).
 - **T-047: every column group for M1 to M6 declared** (§9's M1a checklist): polities, governments, actors, party rows,

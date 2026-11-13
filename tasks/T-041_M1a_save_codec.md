@@ -89,6 +89,6 @@ a reader can skip an unknown field, and whether a held copy keeps the cap's room
 - **Its verification (FV6):** the policy's words matched to the golden test (a golden save holds only columns the
   current version writes, each byte for byte; a drop's step is `dropColumn`); `compression(of:)`'s nil cases stated;
   tests on a compressed file, an unknown compression and the size bound at `mostFileBytes`. Still open, by choice:
-  a compressor whose output is no shorter than the payload is stored as it gives it (the compressor's contract
-  asks it to answer false then; the platform's comes with T-043), and the writer does not refuse repeated tags or column names (the engine never makes
-  them; the reader refuses them).
+  a compressor whose output is no shorter than the payload is stored as it gives it (the compressor's contract asks
+  it to answer false then; the platform's comes with T-043), and the writer does not refuse repeated tags or column
+  names, or a count past Int32.max (the engine never makes them; the reader refuses them).

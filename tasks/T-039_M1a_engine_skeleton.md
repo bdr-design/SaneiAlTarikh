@@ -66,7 +66,13 @@ the hash unchanged), L3 (caps: 384 governments and polities), ADR 0001 (the host
   Its most serious find, a stale succession re-serialling a live row, was a planted fault the tests missed, not a bug
   (`validate` checks the target is live); a test now covers it. The survivors that change behaviour got their tests
   (every slot runs, the hash covers every column, the rooms and the queue's order, who may give each command, a
-  succession's hand-over); re-planted, 52 of 60 were caught, and the last 8 (a succession's strategic count, the room
-  after a copy written by subscript, the polity table's own cap) got tests: all 9 planted again are caught.
+  succession's hand-over). Of the 70 survivors, 60 were planted again first: 52 caught, and the other 8 (a
+  succession's strategic count, the room after a copy written by subscript, the polity table's own cap) got tests;
+  planted again with K09 (a province past the cap), all 9 are caught. The 10 left out the first time were planted
+  later: one (M03, the month's run not written) was already caught, one (V01, the acting issuer's liveness) is
+  equivalent, as every command a government gives is for itself and its own liveness is checked, and 8 got tests (the
+  guards that keep the monthly and yearly runs once, the observer hearing of commands only on a day some are due, the
+  making of a government checked when given: its amounts, its rate and its room, and a successor keeping the
+  calendar); all 8 are now caught.
 - **Its verification (FV6):** 11 of 11 planted faults caught; the pointers to work moved to T-048 corrected; the
   skeleton's tests split so no file passes F9's 600 lines.

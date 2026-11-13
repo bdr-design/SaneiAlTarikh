@@ -44,7 +44,7 @@ public struct IDLock: Sendable, Equatable {
     }
 
     /// The first problem between the lock, the registries and the aliases, with its file and line: a registry ID missing
-    /// from the lock (the registry's row), a locked government whose ID is not `<polity>.<name>` of a polity the
+    /// from the lock (the registry's row), a locked government whose ID is not `<polity>.<slug>` of a polity the
     /// registries hold or replace, a locked ID that no registry holds and no alias replaces (the lock's line), an
     /// alias of an ID still held, never issued, or pointing to an ID no registry holds (the alias's line).
     public func firstProblem(_ reg: Registries, _ aliases: Aliases) -> BakeError? {
@@ -60,7 +60,7 @@ public struct IDLock: Sendable, Equatable {
             let polity = String(e.id.prefix { $0 != "." })
             guard ContentID.isGovernmentID(e.id, of: polity),
                   held.contains("polity " + polity) || aliases.replacement("polity", polity) != nil else {
-                return BakeError("ids.lock", k + 1, "government \(e.id) is not <polity>.<name> of a polity the registries hold or replace")
+                return BakeError("ids.lock", k + 1, "government \(e.id) is not <polity>.<slug> of a polity the registries hold or replace")
             }
         }
         for (k, e) in entries.enumerated() where e.kind != "government" && !held.contains(e.kind + " " + e.id) && aliases.replacement(e.kind, e.id) == nil {

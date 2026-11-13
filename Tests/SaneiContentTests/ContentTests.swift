@@ -7,7 +7,7 @@ import XCTest
 /// The content foundation (T-042): the repository's registries bake to their pinned bytes and read back; each rule of
 /// the CSV reader, the JSON reader, the rows, the validator, the ID lock and the aliases refuses its own case with its
 /// file, line and rule (the others hold), so removing a rule fails a test.
-final class ContentTests: XCTestCase {
+final class ContentTests: XCTestCase, ContentFixtures {
     static let root = URL(fileURLWithPath: #filePath).deletingLastPathComponent().deletingLastPathComponent().deletingLastPathComponent()
     static let content = root.appendingPathComponent("content")
     static let registry = content.appendingPathComponent("registry")
@@ -15,41 +15,6 @@ final class ContentTests: XCTestCase {
     /// The SHA-256 of the repository's `content.bin`: every build, Linux and Apple, debug and optimised, must make these
     /// bytes. Changed only on purpose, with the content.
     static let pinnedContentSHA256 = "b83fbbdfa84266cf9668249432aac7f44d883067dda6a2fc4013ed1b52b50034"
-
-    func hex(_ b: [UInt8]) -> String { b.map { String(format: "%02x", $0) }.joined() }
-
-    /// A copy of the repository's content in a new folder, with `change` applied to one file's text.
-    func copy(_ file: String? = nil, _ change: (String) -> String = { $0 }) throws -> URL {
-        let dir = FileManager.default.temporaryDirectory.appendingPathComponent("content-\(UUID().uuidString)")
-        let reg = dir.appendingPathComponent("registry")
-        try FileManager.default.createDirectory(at: reg, withIntermediateDirectories: true)
-        for name in try FileManager.default.contentsOfDirectory(atPath: Self.registry.path) {
-            var text = try String(contentsOf: Self.registry.appendingPathComponent(name), encoding: .utf8)
-            if name == file { text = change(text) }
-            try Data(text.utf8).write(to: reg.appendingPathComponent(name))
-        }
-        addTeardownBlock { try? FileManager.default.removeItem(at: dir) }
-        return dir
-    }
-
-    /// Refused by the bake, with this file and line, and a message holding `rule`.
-    func refused(_ dir: URL, file: String, line: Int, _ rule: String, _ at: UInt = #line) {
-        do {
-            _ = try Bake.validate(dir)
-            XCTFail("«\(rule)»: not refused", line: at)
-        } catch let e as BakeError {
-            XCTAssertEqual(e.file, file, "\(e)", line: at)
-            XCTAssertEqual(e.line, line, "\(e)", line: at)
-            XCTAssertTrue(e.message.contains(rule), "«\(rule)» not in «\(e.message)»", line: at)
-        } catch { XCTFail("\(error)", line: at) }
-    }
-
-    func swap(_ old: String, _ new: String) -> (String) -> String {
-        { s in
-            XCTAssertTrue(s.contains(old), "«\(old)» is not in the file")
-            return s.replacingOccurrences(of: old, with: new)
-        }
-    }
 
     // MARK: the repository's content
 
@@ -84,21 +49,6 @@ final class ContentTests: XCTestCase {
     }
 
     // MARK: content.bin
-
-    func reseal(_ b: inout [UInt8]) { b.replaceSubrange((b.count - 32)..., with: SHA256.hash(b, 0..<(b.count - 32))) }
-
-    /// A file made from these chunks, sealed.
-    func file(_ chunks: [SaveChunk], format: UInt16 = ContentFile.format) -> [UInt8] {
-        let payload = SaveTree(formatVersion: format, chunks: chunks).write()
-        var w = ByteWriter()
-        w.bytes.append(contentsOf: ContentFile.magic)
-        w.fixed(ContentFile.containerVersion, as: UInt16.self)
-        w.fixed(UInt16(0), as: UInt16.self)
-        w.fixed(UInt32(payload.count), as: UInt32.self)
-        w.bytes.append(contentsOf: payload)
-        w.bytes.append(contentsOf: SHA256.hash(w.bytes))
-        return w.bytes
-    }
 
     func testADamagedOrForeignFileIsRefused() throws {
         let good = try Bake.contentFile(Self.content)
@@ -341,9 +291,11 @@ final class ContentTests: XCTestCase {
         refused(try copy(lock) { String($0.dropLast()) }, file: lock, line: 0, "its line break")
         XCTAssertNoThrow(try Bake.validate(try copy(lock) { $0 + "government sdn.gov\n" }), "a government ID locked ahead of its scenario")
         XCTAssertNoThrow(try Bake.validate(try copy(lock) { $0 + "government civ.gbagbo\n" }), "a rival government")
-        refused(try copy(lock) { $0 + "government act.sdn.ncp\n" }, file: lock, line: 27, "is not <polity>.<name>")
-        refused(try copy(lock) { $0 + "government zzz.gov\n" }, file: lock, line: 27, "is not <polity>.<name>")
-        refused(try copy(lock) { $0 + "government sdn\n" }, file: lock, line: 27, "is not <polity>.<name>")
+        refused(try copy(lock) { $0 + "government act.sdn.ncp\n" }, file: lock, line: 27, "is not <polity>.<slug>")
+        refused(try copy(lock) { $0 + "government zzz.gov\n" }, file: lock, line: 27, "is not <polity>.<slug>")
+        refused(try copy(lock) { $0 + "government sdn\n" }, file: lock, line: 27, "is not <polity>.<slug>")
+        refused(try copy(lock) { $0 + "government sdn.\n" }, file: lock, line: 27, "is not <polity>.<slug>")
+        refused(try copy(lock) { $0 + "government sdn.gov.x\n" }, file: lock, line: 27, "is not <polity>.<slug>")
     }
 
     func testAliasesAreReadStrictly() throws {
@@ -400,6 +352,12 @@ final class ContentTests: XCTestCase {
             XCTAssertNil(SaveColumn.items("t", [Array("a".utf8), bad]).strings(atMost: 2, itemLimit: 10), "not UTF-8: \(bad)")
         }
         XCTAssertNil(SaveColumn.of("t", [UInt8(1)], .u8, .raw).strings(atMost: 1, itemLimit: 10), "not an items column")
+        // the items fill their column exactly: a byte after the last one is refused, in a buffer shared past it too
+        let two = SaveColumn.items("t", [Array("ab".utf8), Array("c".utf8)])
+        let longer = SaveColumn(name: "t", type: .items, encoding: .raw, count: 2, buffer: two.data + [0x41], range: 0..<(two.data.count + 1))
+        XCTAssertNil(longer.strings(atMost: 2, itemLimit: 10), "a byte after the last item")
+        let shared = SaveColumn(name: "t", type: .items, encoding: .raw, count: 2, buffer: two.data + [0x41], range: 0..<two.data.count)
+        XCTAssertEqual(shared.strings(atMost: 2, itemLimit: 10), ["ab", "c"], "the next column's bytes are not this one's")
         // every White_Space scalar but the controls is a space at an end; nothing else is
         for v in UInt32(0x20)...UInt32(0x3000) {
             guard let s = Unicode.Scalar(v), v >= 0x20, !(v >= 0x7F && v <= 0x9F), v != 0x2028, v != 0x2029 else { continue }
@@ -411,9 +369,15 @@ final class ContentTests: XCTestCase {
         XCTAssertTrue(ContentDB.isNameText("مُحمَّد"), "marks after their letters")
         XCTAssertTrue(ContentDB.isNameText("Côte d'Ivoire"))
         // what shows nothing, or shows on the letter before: refused
-        for v: UInt32 in [0x200B, 0x2060, 0xAD, 0xFFF9, 0x180E, 0x061C, 0x200E, 0x202E, 0x2066, 0xFEFF, 0x0600, 0xE0001] {
+        for v: UInt32 in [0x200B, 0x2060, 0xAD, 0xFFF9, 0x180E, 0x061C, 0x200E, 0x202E, 0x2066, 0xFEFF, 0x0600, 0xE0001,
+                          0x3164, 0xFFA0, 0x2800, 0x034F, 0xFE0F, 0x180B] {
             let s = String(Unicode.Scalar(v)!)
             for t in ["دولة" + s + "نامية", s + "دولة", "دولة" + s] { XCTAssertFalse(ContentDB.isNameText(t), "U+\(String(v, radix: 16)) in «\(t)»") }
+        }
+        // the joiners only between letters; nothing unassigned or private
+        for t in ["\u{200C}", "\u{200D}", "\u{200D}\u{064E}دولة", "\u{200C}دولة", "دولة\u{200D}", "دولة\u{0378}", "دولة\u{E000}نامية",
+                  "\u{F0000}دولة", "د\u{115F}ولة"] {
+            XCTAssertFalse(ContentDB.isNameText(t), t.unicodeScalars.map { String($0.value, radix: 16) }.joined(separator: " "))
         }
         for v: UInt32 in [0x0651, 0x064E, 0x0301, 0x20DD, 0x0903] {
             XCTAssertFalse(ContentDB.isNameText(String(Unicode.Scalar(v)!) + "دولة"), "a mark first: U+\(String(v, radix: 16))")

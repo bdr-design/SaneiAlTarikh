@@ -107,11 +107,11 @@ the review of the approval records), so both were run again on the whole of Sane
 - **Words and cost:** the code keeps every fix the rounds made; the counter's rule as the compiler keeps it (handing it
   to one task compiles); the burst's runtime task allocations a bounded line of their own in §3.2 (OWNER PROXY
   2026-11-13); perf rows as measured (x86 Linux, not a phone).
-- **Checker:** 165 planted faults; 164 compiled (one did not, and another took its place), 145 of them caught; of the
-  19 that survived, 8 change nothing (equivalent) and 11 change behaviour. Each of the 11 got its test (a whole number
+- **Checker:** 165 planted faults; 164 compiled and ran (one did not compile), 145 of them caught; of the 19 that
+  survived, 8 change nothing (equivalent) and 11 change behaviour. Each of the 11 got its test (a whole number
   hashed as its 64-bit word, the division's wide-path ties, a bounded ratio in basis points never counted, a chance
   true exactly below its draw, a removal that takes nothing copies nothing, a splitter that doubles), and a saved
   sheet now refuses one term on two rows; re-planted, 9 of the 11 are caught and the other 2 are unreachable now that
   the sheet refuses the repeat.
 - **Its verification (FV6, 2026-11-13):** every test caught its fault; the repeat check now also has a term two rows
-  on, and the sheet asserts in debug and test builds that a term comes once.
+  on, and the sheet asserts in debug builds that a term comes once.

@@ -48,7 +48,7 @@ jobs:
           if grep -nE 'SaneiBake' App/project.yml; then off="${off}App/project.yml links SaneiBake"$'\n'; fi
           if [ -n "$off" ]; then echo "$off"; echo "Nothing is parsed on the phone: JSON lives only in SaneiBake, which only simcli and the tests link (L2)"; exit 1; fi
           # the content's lookups walk no dictionary or set (T-042: a search by halving over each table's IDs)
-          if sed -E 's://.*$::' Sources/SaneiContent/*.swift | grep -nE '\b(Dictionary|Set)\b|\[ *[A-Za-z_][A-Za-z0-9_.<>]* *: *[A-Za-z_(\[]|\[:\]'; then
+          if sed -E 's://.*$::' Sources/SaneiContent/*.swift | grep -nE '\b(Dictionary|Set)\b|\[:\]|\[ *("[^"]*"|[0-9]+|\.[A-Za-z_]+|\[[^]]*\]|[A-Za-z_][A-Za-z0-9_.<>?]*) *: *[^] ]'; then
             echo "SaneiContent keeps no dictionary or set: its lookups search sorted IDs (T-042)"; exit 1; fi
           # the simulation's sources: SaneiCore's numbers, the content and the engine built on them
           SIM="Sources/SaneiCore Sources/SaneiContent Sources/SaneiEngine"
@@ -114,6 +114,12 @@ jobs:
           pin=$(grep -oE 'pinnedContentSHA256 = "[0-9a-f]{64}"' Tests/SaneiContentTests/ContentTests.swift | cut -d'"' -f2)
           test -n "$pin"
           echo "$pin  .build/bundle/content.bin" | sha256sum -c -
+          # every failure exits 1 (`if`, as `set -e` ignores a command under `!`): a missing content folder, an option
+          # twice, an option given as a value
+          if .build/release/simcli validate --content .build/no-such-content 2>/dev/null; then exit 1; fi
+          if .build/release/simcli bake --out .build/bundle/x.bin --out .build/bundle/y.bin 2>/dev/null; then exit 1; fi
+          if .build/release/simcli bake --out --content 2>/dev/null; then exit 1; fi
+          test ! -e .build/bundle/x.bin
   # the reference model (ADR 0002): the generated tables and vectors match it, and its accuracy bounds hold; the ID lock
   # only grows (git alone, no Swift)
   core-reference:
@@ -121,6 +127,9 @@ jobs:
     timeout-minutes: 5
     steps:
       - uses: actions/checkout@v4
+      - name: The ID lock check's own test
+        shell: bash
+        run: tools/checks/ids_lock_test.sh
       - name: The ID lock only grows
         shell: bash
         env:
