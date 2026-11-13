@@ -49,8 +49,13 @@ listed under each, so a deferred item always has a place that exists.
   and test builds; the lint that no simulation code walks a `Set` or a `Dictionary`; the append-only check of
   `tags.lock` in CI; the engine's bench in CI (the work counters, the 1.2× cross-module bench, the bench counter of
   T-036, the remembered position of T-037); `content.bin` read at launch from a memory map (the reader taking a buffer
-  that is not an array) and its launch time measured against §3.4, with fixed-width columns and offset tables for the
-  large static tables if it needs them (T-042).
+  that is not an array, or the map saves nothing: today's reader takes an array, so a map would first be copied) and its
+  launch time measured against §3.4 (on x86-64 Linux at the registries' caps: 13 to 14 ms, of which the SHA-256 about
+  2.3 ms, at about 200 MB/s, so about 30 ms for a 6 MB file, and the validator's rules about 3 ms; whether the release
+  build keeps the text rules or leaves them to the bake is decided there), with the decoded content's memory budgeted
+  (about 3 times the file: 1.8 MB kept for a 616 KB file, so about 17 MB for a full 6 MB file decoded the same way,
+  against §3.3's line), and fixed-width columns and offset tables for the large static tables if it needs them
+  (T-042).
 - **T-045: the thin systems.** Time, taxes, budget, cohorts, stability through `TermSink`, projects, rename; the event
   scheduler with the 5 real events (South Sudan's succession, Côte d'Ivoire's resolution, Libya's NTC, the NDP's
   dissolution, the US withdrawal from Iraq) and step 10's conditional events (a government they make takes its slot

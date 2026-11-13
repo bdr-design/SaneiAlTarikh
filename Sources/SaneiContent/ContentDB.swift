@@ -29,15 +29,29 @@ public struct ContentDB: Sendable, Equatable {
     }
 
     /// Equal when every row is equal: text compared by its bytes, never by Unicode equivalence (two spellings of one
-    /// name are two contents, as their `content.bin` bytes are).
+    /// name are two contents, as their `content.bin` bytes are). It writes both contents out (about the cost of one
+    /// write): for tests and the bake, never at launch.
     public static func == (a: ContentDB, b: ContentDB) -> Bool {
         ContentFile.chunks(a) == ContentFile.chunks(b)
+    }
+
+    /// The order of two texts by their bytes, in one walk: below 0, 0 or above 0.
+    static func order(_ a: String, _ b: String) -> Int {
+        var i = a.utf8.makeIterator(), j = b.utf8.makeIterator()
+        while true {
+            switch (i.next(), j.next()) {
+            case (nil, nil): return 0
+            case (nil, _): return -1
+            case (_, nil): return 1
+            case let (x?, y?): if x != y { return x < y ? -1 : 1 }
+            }
+        }
     }
 
     /// The rows' positions ordered by their IDs' bytes.
     static func sortedOrder(_ ids: [String]) -> [Int32] {
         var order = (0..<ids.count).map { Int32($0) }
-        order.sort { ids[Int($0)].utf8.lexicographicallyPrecedes(ids[Int($1)].utf8) }
+        order.sort { Self.order(ids[Int($0)], ids[Int($1)]) < 0 }
         return order
     }
 
@@ -47,9 +61,9 @@ public struct ContentDB: Sendable, Equatable {
         while lo < hi {
             let mid = (lo + hi) / 2
             let row = Int(order[mid])
-            let other = ids[row]
-            if other.utf8.elementsEqual(id.utf8) { return row }
-            if other.utf8.lexicographicallyPrecedes(id.utf8) { lo = mid + 1 } else { hi = mid }
+            let o = Self.order(ids[row], id)
+            if o == 0 { return row }
+            if o < 0 { lo = mid + 1 } else { hi = mid }
         }
         return nil
     }
@@ -66,7 +80,7 @@ public struct ContentDB: Sendable, Equatable {
     /// The later of two rows with one ID, as a position in the table; nil when every ID is unique.
     static func repeated(_ order: [Int32], _ ids: [String]) -> Int? {
         guard order.count > 1 else { return nil }
-        for k in 1..<order.count where ids[Int(order[k])].utf8.elementsEqual(ids[Int(order[k - 1])].utf8) {
+        for k in 1..<order.count where Self.order(ids[Int(order[k])], ids[Int(order[k - 1])]) == 0 {
             return Int(Swift.max(order[k], order[k - 1]))
         }
         return nil

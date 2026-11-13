@@ -27,9 +27,16 @@ public enum Bake {
     public static func contentFile(_ content: URL) throws -> [UInt8] {
         let db = try validate(content)
         let bytes = ContentFile.write(db)
+        if let problem = budgetProblem(bytes.count) { throw problem }
         guard case let .success(back) = ContentFile.read(bytes), ContentFile.write(back.db) == bytes else {
             throw BakeError("content.bin", 0, "the file does not read back to the same bytes")
         }
         return bytes
+    }
+
+    /// The bake's refusal of a file past §3.6's budget for `content.bin` (`ContentFile.budgetBytes`); nil within it.
+    static func budgetProblem(_ count: Int) -> BakeError? {
+        count <= ContentFile.budgetBytes ? nil
+            : BakeError("content.bin", 0, "\(count) bytes, past §3.6's budget of \(ContentFile.budgetBytes) bytes")
     }
 }

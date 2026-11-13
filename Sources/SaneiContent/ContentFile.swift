@@ -15,7 +15,9 @@ public enum ContentFile {
     public static let containerVersion: UInt16 = 1
     /// The content format: rises when a column is renamed, dropped or retyped (an added column keeps it, §7's rule).
     public static let format: UInt16 = 1
-    /// The most bytes a file may hold: §3.6's 6 MB budget for `content.bin`, with half again as margin.
+    /// §3.6's budget for `content.bin`: the bake refuses a file past it.
+    public static let budgetBytes = 6 << 20
+    /// The most bytes the reader takes: the budget with half again as margin.
     public static let mostBytes = 9 << 20
     static let headerBytes = 8 + 2 + 2 + 4
 
@@ -124,17 +126,7 @@ public enum ContentFile {
             return col
         }
 
-        func texts(_ n: String) -> [String]? {
-            guard let items = column(n, .items)?.items(atMost: rows, itemLimit: ContentDB.mostTextBytes) else { return nil }
-            var out: [String] = []
-            out.reserveCapacity(rows)
-            for b in items {
-                let s = String(decoding: b, as: UTF8.self)
-                guard s.utf8.elementsEqual(b) else { return nil }        // valid UTF-8 only
-                out.append(s)
-            }
-            return out
-        }
+        func texts(_ n: String) -> [String]? { column(n, .items)?.strings(atMost: rows, itemLimit: ContentDB.mostTextBytes) }
 
         func flags(_ n: String) -> [Bool]? { column(n, .bool)?.flags(atMost: rows) }
 

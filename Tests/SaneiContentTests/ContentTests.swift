@@ -336,6 +336,39 @@ final class ContentTests: XCTestCase {
         refused(#"{"format": 1, "aliases": [\#(twice), \#(twice)]}"#, "replaced twice")
         refused("[]", "the keys «format» (1) and «aliases»")
     }
+
+    /// The cheaper forms the heaviness review asked for keep the rules: text decoded straight from the file's buffer
+    /// (valid UTF-8 only, within its limit), the spaces at a name's ends listed out, one walk to order two IDs, and the
+    /// bake's budget.
+    func testTheCheaperFormsKeepTheRules() {
+        let ok = SaveColumn.items("t", [Array("دولار".utf8), [], Array("abc".utf8)])
+        XCTAssertEqual(ok.strings(atMost: 3, itemLimit: 10), ["دولار", "", "abc"])
+        XCTAssertNil(ok.strings(atMost: 2, itemLimit: 10), "more items than allowed")
+        XCTAssertNil(ok.strings(atMost: 3, itemLimit: 9), "an item past its limit")
+        for bad: [UInt8] in [[0xFF], [0xC3], [0xED, 0xA0, 0x80], [0xC0, 0x80]] {
+            XCTAssertNil(SaveColumn.items("t", [Array("a".utf8), bad]).strings(atMost: 2, itemLimit: 10), "not UTF-8: \(bad)")
+        }
+        XCTAssertNil(SaveColumn.of("t", [UInt8(1)], .u8, .raw).strings(atMost: 1, itemLimit: 10), "not an items column")
+        // every White_Space scalar but the controls is a space at an end; nothing else is
+        for v in UInt32(0x20)...UInt32(0x3000) {
+            guard let s = Unicode.Scalar(v), v >= 0x20, !(v >= 0x7F && v <= 0x9F), v != 0x2028, v != 0x2029 else { continue }
+            XCTAssertEqual(ContentDB.isSpace(v), s.properties.isWhitespace, "U+\(String(v, radix: 16))")
+        }
+        for t in ["\u{A0}دولة", "دولة\u{3000}", "\u{2007}دولة", "دولة\u{202F}", " دولة"] { XCTAssertFalse(ContentDB.isNameText(t), t) }
+        XCTAssertTrue(ContentDB.isNameText("دولة\u{200C}نامية"))
+        // one walk orders as the bytes do
+        let ids = ["", "a", "ab", "b", "act.sdn.splm", "act.sdn.splm_n", "cur.sdg", "cur.ssp", "سودان", "a\u{0}", "\u{7F}", "é", "e\u{301}"]
+        for a in ids {
+            for b in ids {
+                let want = a.utf8.elementsEqual(b.utf8) ? 0 : (a.utf8.lexicographicallyPrecedes(b.utf8) ? -1 : 1)
+                XCTAssertEqual(ContentDB.order(a, b).signum(), want, "\(a) against \(b)")
+            }
+        }
+        XCTAssertNil(Bake.budgetProblem(ContentFile.budgetBytes))
+        XCTAssertNotNil(Bake.budgetProblem(ContentFile.budgetBytes + 1))
+        XCTAssertEqual(ContentFile.budgetBytes, 6 << 20)
+        XCTAssertLessThan(ContentFile.budgetBytes, ContentFile.mostBytes)
+    }
 }
 
 extension Result {

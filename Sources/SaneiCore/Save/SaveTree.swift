@@ -154,6 +154,25 @@ public struct SaveColumn: Sendable, Equatable {
         }
         return r.offset == range.upperBound ? out : nil
     }
+
+    /// The items as text, when the column holds them and each is valid UTF-8 of at most `itemLimit` bytes: each string
+    /// decoded straight from the buffer, with no byte array in between.
+    public func strings(atMost limit: Int, itemLimit: Int) -> [String]? {
+        guard type == .items, encoding == .raw, count <= limit, count <= range.count else { return nil }
+        var r = ByteReader(buffer, offset: range.lowerBound)
+        var out: [String] = []
+        out.reserveCapacity(count)
+        for _ in 0..<count {
+            guard let n = r.varint(), r.offset <= range.upperBound, n <= UInt64(itemLimit), n <= UInt64(range.upperBound - r.offset)
+            else { return nil }
+            let item = buffer[r.offset..<(r.offset + Int(n))]
+            let s = String(decoding: item, as: UTF8.self)
+            guard s.utf8.elementsEqual(item) else { return nil }        // valid UTF-8 only: a repaired byte differs
+            out.append(s)
+            r = ByteReader(buffer, offset: r.offset + Int(n))
+        }
+        return r.offset == range.upperBound ? out : nil
+    }
 }
 
 /// One chunk: its tag (four ASCII letters) and its columns, each name at most once.

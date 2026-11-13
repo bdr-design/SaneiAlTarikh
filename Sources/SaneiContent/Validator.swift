@@ -26,14 +26,20 @@ extension ContentDB {
     /// changes how the text around it shows (a control, a line or paragraph separator, a bidi embedding, override or
     /// isolate, a byte-order mark); the joiners Arabic needs (U+200C, U+200D) are allowed.
     static func isNameText(_ t: String) -> Bool {
-        guard !t.isEmpty, t.utf8.count <= mostTextBytes, t.unicodeScalars.first?.properties.isWhitespace == false,
-              t.unicodeScalars.last?.properties.isWhitespace == false else { return false }
+        guard !t.isEmpty, t.utf8.count <= mostTextBytes, let first = t.unicodeScalars.first, let last = t.unicodeScalars.last,
+              !isSpace(first.value), !isSpace(last.value) else { return false }
         for s in t.unicodeScalars {
             let v = s.value
             if v < 0x20 || (v >= 0x7F && v <= 0x9F) || v == 0x2028 || v == 0x2029 || v == 0xFEFF { return false }
             if (v >= 0x202A && v <= 0x202E) || (v >= 0x2066 && v <= 0x2069) || v == 0x200E || v == 0x200F || v == 0x061C { return false }
         }
         return true
+    }
+
+    /// A space by Unicode's White_Space property, the controls apart (they are refused anywhere in a name): the list
+    /// written out, as looking the property up cost two thirds of the rule's time.
+    static func isSpace(_ v: UInt32) -> Bool {
+        v == 0x20 || v == 0xA0 || v == 0x1680 || (v >= 0x2000 && v <= 0x200A) || v == 0x202F || v == 0x205F || v == 0x3000
     }
 
     /// Every rule a registry keeps; empty when the content holds.
@@ -83,16 +89,23 @@ extension ContentDB {
             name("groups", k, g.name)
             evidence("groups", k, g.evidence)
         }
-        var isoSeen: [String] = []
+        // a code used before: the rows ordered by (code, position), each after the first of its run
+        var isoUsed = [Bool](repeating: false, count: currencies.count)
+        let isoOrder = (0..<currencies.count).sorted {
+            let o = Self.order(currencies[$0].iso, currencies[$1].iso)
+            return o != 0 ? o < 0 : $0 < $1
+        }
+        for k in isoOrder.indices.dropFirst() where Self.order(currencies[isoOrder[k]].iso, currencies[isoOrder[k - 1]].iso) == 0 {
+            isoUsed[isoOrder[k]] = true
+        }
         for (k, c) in currencies.enumerated() {
             if !ContentID.isWellFormed(c.id) { add("currencies", k, "the ID «\(c.id)» is not well formed") }
             name("currencies", k, c.name)
             if !(c.iso.utf8.count == 3 && c.iso.utf8.allSatisfy { $0 >= 0x41 && $0 <= 0x5A }) {
                 add("currencies", k, "the ISO code «\(c.iso)» is not three capital letters")
-            } else if isoSeen.contains(c.iso) {
+            } else if isoUsed[k] {
                 add("currencies", k, "the ISO code \(c.iso) is another currency's")
             }
-            isoSeen.append(c.iso)
             evidence("currencies", k, c.evidence)
         }
         return out
