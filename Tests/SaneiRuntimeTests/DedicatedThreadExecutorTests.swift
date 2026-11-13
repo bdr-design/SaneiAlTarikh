@@ -132,6 +132,14 @@ final class EngineMeterTests: XCTestCase {
         let done = DispatchSemaphore(value: 0)
         let t = Thread {
             Thread.current.name = "test.other"
+            #if os(Linux)
+            // as the executor does: Foundation names the OS thread through a handle the creating thread may not have
+            // stored yet (seen failing once in about 130 runs), so the thread writes its own name too
+            if let comm = fopen("/proc/thread-self/comm", "w") {
+                fputs("test.other", comm)
+                fclose(comm)
+            }
+            #endif
             m.record(.sim, nanoseconds: 1)
             m.record(.sim, nanoseconds: 1)
             done.signal()

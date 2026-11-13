@@ -153,9 +153,28 @@ final class SaveRulesTests: XCTestCase {
             XCTAssertNotNil(load(with(issuer, room - now)), "\(issuer): its room full")
             XCTAssertNil(load(with(issuer, room - now + 1)), "\(issuer): one past its room")
         }
+        // every room full at once: 576 items, the queue's bound, load (in the queue's order: player, event, AI)
+        var full = tree
+        var all = items(full)
+        var sequence: UInt64 = 1_000
+        for (issuer, n) in [(Issuer.player(g3), 64 - held.player), (.event, 64 - held.event), (.ai(g3), 448 - held.ai)] {
+            for _ in 0..<n {
+                all.append(bytes(IssuedCommand(day: last, issuer: issuer, sequence: sequence, command: .setTaxRate(government: g3, rate: .zero))))
+                sequence += 1
+            }
+        }
+        set(&full, all)
+        XCTAssertEqual(all.count, 576)
+        XCTAssertNotNil(load(full), "every room full")
         let never = GovRef(row: Idx(raw: 2), serial: Serial(raw: 3_000))
         refused("an AI's order naming a government never made") { t in
             set(&t, items(t) + [bytes(IssuedCommand(day: last, issuer: .ai(g3), sequence: 1, command: .setTaxRate(government: never, rate: .zero)))])
+        }
+        refused("a dissolve of a government never made") { t in
+            set(&t, items(t) + [bytes(IssuedCommand(day: last, issuer: .ai(g3), sequence: 1, command: .dissolveGovernment(government: never)))])
+        }
+        refused("a succession of a government never made") { t in
+            set(&t, items(t) + [bytes(IssuedCommand(day: last, issuer: .ai(g3), sequence: 1, command: .succeedGovernment(government: never)))])
         }
         refused("a dissolve handing its provinces to a government never made") { t in
             set(&t, items(t) + [bytes(IssuedCommand(day: last, issuer: .ai(g3), sequence: 1,

@@ -117,13 +117,42 @@ final class SaveEdgeTests: XCTestCase {
     func testATextIsCutAtACharactersBoundaryByBytes() throws {
         let payload = base.saveTree().write()
         for (name, kept) in [("a" + String(repeating: "م", count: 200), 255), (String(repeating: "x", count: 300), 256),
-                             (String(repeating: "م", count: 200), 256), (String(repeating: "y", count: 256), 256)] {
+                             (String(repeating: "م", count: 200), 256), (String(repeating: "y", count: 256), 256),
+                             ("ab" + String(repeating: "€", count: 100), 254), ("a" + String(repeating: "😀", count: 80), 253),
+                             ("abc" + String(repeating: "😀", count: 80), 255)] {
             var m = meta()
             m.playerName = name
             let read = try SaveFile.readMeta(SaveFile.write(meta: m, payload: payload)).get().meta.playerName
             XCTAssertEqual(read.utf8.count, kept, "\(name.utf8.count) bytes")
             XCTAssertTrue(name.utf8.starts(with: read.utf8))
         }
+    }
+
+    /// Every text of META is cut, not only the player's name.
+    func testEveryTextIsCut() throws {
+        let long = String(repeating: "x", count: 300)
+        var m = meta()
+        m.gameVersion = long; m.build = long; m.scenarioId = long; m.playerName = long
+        let read = try SaveFile.readMeta(SaveFile.write(meta: m, payload: base.saveTree().write())).get().meta
+        XCTAssertEqual([read.gameVersion, read.build, read.scenarioId, read.playerName].map { $0.utf8.count }, [256, 256, 256, 256])
+    }
+
+    /// A payload at the bound makes a file `open` keeps; stored lengths shorter than the bytes are refused.
+    func testTheFileBoundsMatchWhatWriteMakes() throws {
+        var m = meta()
+        m.gameVersion = String(repeating: "x", count: 300)
+        let full = SaveFile.write(meta: m, payload: [UInt8](repeating: 0, count: SaveFile.mostPayloadBytes))
+        guard case let .success(o) = SaveFile.open(full) else { return XCTFail("a file write makes, at the bound") }
+        XCTAssertEqual(o.range.count, SaveFile.mostPayloadBytes)
+        var short = try XCTUnwrap(SaveCodec.write(base, meta: meta()))
+        let at = SaveFile.headerBytes + metaLength(short)
+        let n = UInt64(short.count - 32 - at - 16) - 1
+        for k in 0..<8 {
+            short[at + k] = UInt8(truncatingIfNeeded: n >> UInt64(8 * k))
+            short[at + 8 + k] = UInt8(truncatingIfNeeded: n >> UInt64(8 * k))
+        }
+        reseal(&short)
+        XCTAssertEqual(SaveFile.open(short).failureValue, .badPayload, "raw and stored one short of the bytes")
     }
 
     /// With no player, the row means nothing: it is cleared when META is read and when a save is written.
@@ -154,6 +183,19 @@ final class SaveEdgeTests: XCTestCase {
     func testAnItemsColumnEndsWithItsLastItem() {
         XCTAssertEqual(SaveColumn(name: "x", type: .items, encoding: .raw, count: 1, data: [1, 5]).items(atMost: 4, itemLimit: 8), [[5]])
         XCTAssertNil(SaveColumn(name: "x", type: .items, encoding: .raw, count: 1, data: [1, 5, 9]).items(atMost: 4, itemLimit: 8))
+        XCTAssertNil(SaveColumn(name: "x", type: .items, encoding: .raw, count: 1, data: [5, 1]).items(atMost: 4, itemLimit: 8),
+                     "an item longer than the bytes left")
+    }
+
+    /// A chunk whose length runs one byte past the tree is refused, though its column's name would fit the bytes.
+    func testAChunkPastTheTreeIsRefused() {
+        func tree(nameLength k: Int, chunkLength: UInt64) -> [UInt8] {
+            var w = ByteWriter()
+            w.fixed(UInt16(1), as: UInt16.self); w.varint(1); w.bytes.append(contentsOf: Array("AAAA".utf8))
+            w.varint(chunkLength); w.varint(1); w.varint(UInt64(k)); w.bytes.append(contentsOf: [UInt8](repeating: 0x41, count: k - 1))
+            return w.bytes
+        }
+        XCTAssertNil(SaveTree.read(tree(nameLength: 5, chunkLength: 7)))
     }
 
     /// A tree's chunks and a chunk's columns at their caps read; one more is refused.

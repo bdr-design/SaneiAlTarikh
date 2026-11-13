@@ -215,7 +215,28 @@ final class LedgerRulesTests: XCTestCase {
         let p = w.addPolity()!
         XCTAssertNil(w.createGovernment(polity: p, treasury: LCU(raw: -1), taxBase: .zero, taxRate: .zero, strategicPeriod: 30))
         XCTAssertNil(w.createGovernment(polity: p, treasury: .zero, taxBase: LCU(raw: -1), taxRate: .zero, strategicPeriod: 30))
+        let past = LCU(raw: (1 << 60) + 1)
+        XCTAssertNil(w.createGovernment(polity: p, treasury: past, taxBase: .zero, taxRate: .zero, strategicPeriod: 30), "a treasury past 2^60")
+        XCTAssertNil(w.createGovernment(polity: p, treasury: .zero, taxBase: past, taxRate: .zero, strategicPeriod: 30), "a tax base past 2^60")
+        XCTAssertNil(w.createGovernment(polity: p, treasury: .zero, taxBase: .zero, taxRate: BP(raw: -1), strategicPeriod: 30), "a rate below 0")
+        XCTAssertNil(w.createGovernment(polity: p, treasury: .zero, taxBase: .zero, taxRate: BP(raw: BP.one.raw + 1), strategicPeriod: 30),
+                     "a rate past 100%")
+        XCTAssertNotNil(w.createGovernment(polity: p, treasury: LCU(raw: 1 << 60), taxBase: LCU(raw: 1 << 60), taxRate: .one, strategicPeriod: 30),
+                        "the bounds themselves")
         XCTAssertNotNil(w.createGovernment(polity: p, treasury: .zero, taxBase: .zero, taxRate: .zero, strategicPeriod: 30))
+    }
+
+    /// A currency whose own balances came back within range is not moved because another currency's balance stands past
+    /// 2^60: each currency looks at its own governments' balances only.
+    func testARedenominationLooksAtItsOwnCurrencysBalancesOnly() {
+        var (w, g) = world()
+        w.post(g[2], .treasury, .cheat, LCU(raw: (1 << 60) + 9))                      // currency 2 stands past 2^60
+        w.post(g[1], .treasury, .spending, LCU(raw: (1 << 60) + 1))                   // currency 1 passes it, then comes back
+        w.post(g[1], .treasury, .spending, LCU(raw: -((1 << 60) + 1)))
+        XCTAssertTrue(w.currencies.redenominationDue[1])
+        w.redenominateDue()
+        XCTAssertEqual(w.currencies.redenominations[1], 0)
+        XCTAssertEqual(w.currencies.redenominations[2], 1)
     }
 
     /// A refused exchange leaves the ledger as it was: only the count moves.

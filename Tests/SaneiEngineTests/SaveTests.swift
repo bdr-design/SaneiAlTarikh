@@ -234,6 +234,30 @@ final class SaveTests: XCTestCase {
         XCTAssertEqual(try SaveCodec.read(SaveCodec.write(sim.state, meta: meta(sim.state))!).get().state, sim.state)
     }
 
+    /// Every kind of order an AI may give is checked by the governments it names, and the queue it leaves saves; an event
+    /// may name a government an earlier command will make (the next serial, the next row).
+    func testEveryKindOfOrderIsCheckedByTheGovernmentsItNames() throws {
+        var sim = Self.busyWorld()
+        let d = sim.state.world.date.adding(days: 5)
+        let g = sim.state.governments.ref(2)
+        let never = GovRef(row: Idx(raw: 2), serial: Serial(raw: 3_000))
+        func submit(_ seq: UInt64, _ issuer: Issuer, _ c: Command) -> SubmitResult {
+            sim.submit(IssuedCommand(day: d, issuer: issuer, sequence: seq, command: c))
+        }
+        let polity = sim.state.governments.polity[2]
+        XCTAssertEqual(submit(1, .ai(g), .createGovernment(polity: polity, treasury: .zero, taxBase: .zero, taxRate: .zero)), .queued, "a create")
+        XCTAssertEqual(submit(2, .ai(g), .dissolveGovernment(government: g)), .queued, "a dissolve with no heir")
+        XCTAssertEqual(submit(3, .ai(g), .dissolveGovernment(government: g, provincesTo: never)), .invalid, "an heir never made")
+        XCTAssertEqual(submit(4, .ai(g), .dissolveGovernment(government: never)), .invalid, "a dissolve of one never made")
+        XCTAssertEqual(submit(5, .ai(g), .succeedGovernment(government: never)), .invalid, "a succession of one never made")
+        XCTAssertEqual(submit(6, .ai(g), .succeedGovernment(government: g)), .queued, "a succession")
+        let future = GovRef(row: Idx(raw: UInt16(sim.state.governments.rows)), serial: Serial(raw: sim.state.governments.counter.next))
+        XCTAssertFalse(sim.state.governments.wasMade(future))
+        XCTAssertEqual(submit(7, .event, .setTaxRate(government: future, rate: .zero)), .queued, "an event naming the next government")
+        XCTAssertEqual(submit(8, .ai(g), .setTaxRate(government: future, rate: .zero)), .invalid, "the AI cannot")
+        XCTAssertEqual(try SaveCodec.read(SaveCodec.write(sim.state, meta: meta(sim.state))!).get().state, sim.state)
+    }
+
     /// META's own report reaches the full read's report.
     func testAFullReadKeepsMetasReport() throws {
         let s = Self.busyWorld().state

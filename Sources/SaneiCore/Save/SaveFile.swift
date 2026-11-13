@@ -171,9 +171,10 @@ public enum SaveFile {
         switch header(first16) {
         case let .failure(e) where e != .truncated: return .failure(e)
         case .failure:
+            // a prefix that ends inside META: `header` has checked META's length against its bound
             guard first16.count >= headerBytes else { return .failure(.truncated) }
             var r = ByteReader(first16, offset: headerBytes - 4)
-            guard let length = r.fixed(UInt32.self), Int(length) <= mostMetaBytes else { return .failure(.badMeta) }
+            guard let length = r.fixed(UInt32.self) else { return .failure(.truncated) }
             return .success(headerBytes + Int(length))
         case let .success(h): return .success(headerBytes + h.metaLength)
         }
