@@ -156,12 +156,13 @@ public enum SaveFile {
     public static let containerVersion: UInt16 = 1
     /// The most bytes a payload may hold, raw and stored: §3.5's 8 MB raw for a save, with half again as margin. A file
     /// past it is refused before it is hashed, and a decompressor is asked for no more; with `mostCompressedBytes`, a
-    /// load's peak stays within §7's footprint plus 16 MB whatever the file says (15 MB of payload, META's 64 KB and
-    /// the loader's working columns, about 0.3 MB at the caps).
+    /// load's peak at today's caps stays within §7's footprint plus 16 MB whatever the file says: 14 MB of payload,
+    /// META's 64 KB, the tree's index (at most 6,144 columns, about 1.1 MB), the report (about 0.1 MB) and the
+    /// loader's working columns (about 0.3 MB), about 15.6 MB. Worked out again when the state grows (T-044).
     public static let mostPayloadBytes = 12 << 20
-    /// The most stored bytes of a compressed payload: §3.5's 2 MB compressed for a save, with half again as margin, so
-    /// the stored and the raw bytes of a compressed file together are 15 MB at most (checked after the hash).
-    public static let mostCompressedBytes = 3 << 20
+    /// The most stored bytes of a compressed payload: §3.5's 2 MB compressed for a save (checked after the hash); a
+    /// compressor's bytes past it are stored as they are instead.
+    public static let mostCompressedBytes = 2 << 20
     public static let mostMetaBytes = 1 << 16
     static let headerBytes = 8 + 2 + 1 + 1 + 4
 

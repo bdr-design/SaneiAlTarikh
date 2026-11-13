@@ -14,7 +14,7 @@ final class SaveEdgeTests: XCTestCase {
     /// The bounds the file keeps are the documented ones (§3.5, §7).
     func testTheBoundsAreTheDocumentedOnes() {
         XCTAssertEqual(SaveFile.mostPayloadBytes, 12 << 20, "§3.5's 8 MB raw and half again")
-        XCTAssertEqual(SaveFile.mostCompressedBytes, 3 << 20, "§3.5's 2 MB compressed and half again")
+        XCTAssertEqual(SaveFile.mostCompressedBytes, 2 << 20, "§3.5's 2 MB compressed")
         XCTAssertEqual(SaveFile.mostMetaBytes, 1 << 16)
         XCTAssertEqual(SaveTree.mostChunks, 64)
         XCTAssertEqual(SaveTree.mostColumns, 96)
@@ -187,7 +187,8 @@ final class SaveEdgeTests: XCTestCase {
                      "an item longer than the bytes left")
     }
 
-    /// A chunk whose length runs one byte past the tree is refused, though its column's name would fit the bytes.
+    /// A chunk whose length runs one byte past the tree is refused, though its column's name would fit the chunk's stated
+    /// length.
     func testAChunkPastTheTreeIsRefused() {
         func tree(nameLength k: Int, chunkLength: UInt64) -> [UInt8] {
             var w = ByteWriter()

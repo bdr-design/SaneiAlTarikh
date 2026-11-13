@@ -39,7 +39,7 @@ a reader can skip an unknown field, and whether a held copy keeps the cap's room
   - `SaveCodec`: the state in the container; the engine fills META's format, date and seed from the state, so a file
     it writes from a state between days always reads back (a player's government it never made is left out);
     compression is a byte (0 none, 1 raw DEFLATE), handed in by the platform (T-043); a compressor that fails, or
-    whose bytes pass the 3 MB a read keeps, leaves the payload stored as it is; a state whose tree passes 12 MB
+    whose bytes pass the 2 MB a read keeps, leaves the payload stored as it is; a state whose tree passes 12 MB
     writes nothing (nil), so the platform keeps the last save.
   - `tags.lock` at the root: every stored number, checked by a test both ways.
   - Migrations: `SaveMigrations[n → n+1]` as column-level steps (add, rename, drop a column; add a chunk); format 1
