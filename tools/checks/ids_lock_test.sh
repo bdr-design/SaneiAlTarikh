@@ -3,8 +3,9 @@
 # and whether tools/checks/ids_lock.sh must pass or fail. Run from the repository's root; git alone.
 set -euo pipefail
 script="$PWD/tools/checks/ids_lock.sh"
-# nothing from the caller's git: no repository named by the environment (as inside a hook), no system settings
-unset GIT_DIR GIT_WORK_TREE GIT_INDEX_FILE GIT_OBJECT_DIRECTORY GIT_COMMON_DIR GIT_ALTERNATE_OBJECT_DIRECTORIES
+# nothing from the caller's git: no repository named by the environment (as inside a hook), no settings passed on
+# (`git -c`), no templates, no system settings
+unset $(git rev-parse --local-env-vars) GIT_TEMPLATE_DIR GIT_NAMESPACE GIT_CONFIG_PARAMETERS GIT_CONFIG_COUNT
 export GIT_CONFIG_NOSYSTEM=1
 root=$(mktemp -d)
 trap 'rm -rf "$root"' EXIT
@@ -30,6 +31,13 @@ check() {
 }
 on_main 'polity a\npolity b\n'
 check pass 'polity a\npolity b\n' "unchanged"
+# TARGET unset: main by default, so a lock that grows passes and one that changes a line fails
+if ! (printf 'polity a\npolity b\npolity c\n' > "$lock"; env -u TARGET BEFORE= bash "$script" > /dev/null 2>&1); then
+  echo "ids_lock_test: TARGET unset, a lock that grows: wanted pass, got fail"; failures=$((failures + 1))
+fi
+if (printf 'polity a\npolity bz\n' > "$lock"; env -u TARGET BEFORE= bash "$script" > /dev/null 2>&1); then
+  echo "ids_lock_test: TARGET unset, a line changed: wanted fail, got pass"; failures=$((failures + 1))
+fi
 check pass 'polity a\npolity b\npolity c\n' "grows at the end"
 check fail 'polity a\npolity bz\n' "a line changed"
 check fail 'polity a\npolity b\npolity c' "the new last line without its line break"

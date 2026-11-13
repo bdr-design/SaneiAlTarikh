@@ -392,8 +392,10 @@ final class ContentTests: XCTestCase, ContentFixtures {
         XCTAssertFalse(ContentDB.isNameText("د\u{2EBF0}ولة"))
         XCTAssertFalse(ContentDB.isNameText("د\u{10EC2}ولة"))
         // the noncharacters, which carry an age in the tables
-        for v: UInt32 in [0xFDD0, 0xFDEF, 0xFFFE, 0xFFFF, 0x1FFFE, 0x10FFFF] {
-            XCTAssertFalse(ContentDB.isNameText("د" + String(Unicode.Scalar(v)!) + "ولة"), "U+\(String(v, radix: 16))")
+        let noncharacters = Array(UInt32(0xFDD0)...0xFDEF) + (0...16).flatMap { (p: UInt32) in [p << 16 | 0xFFFE, p << 16 | 0xFFFF] }
+        XCTAssertEqual(noncharacters.count, 66)
+        for v in noncharacters {
+            XCTAssertFalse(ContentDB.isNameText("د" + String(Unicode.Scalar(v)!) + "ولة"), "U+\(String(v, radix: 16, uppercase: true))")
         }
         XCTAssertTrue(ContentDB.isNameText("د\u{FDCF}ولة"), "U+FDCF, next to them, is an Arabic ligature")
         XCTAssertTrue(ContentDB.isNameText("د\u{0889}ولة"), "an Arabic letter of 14.0 is taken")
