@@ -59,7 +59,7 @@ public struct DetRNG: Sendable {
     }
 
     /// True with probability `p` (always from 100% up, never at 0 or below). One draw. The grain is 1 bp: a chance
-    /// that is not a whole number of basis points needs another function.
+    /// that is not a whole number of basis points is `chance(_:in:)` or `chance(_: Q32)`.
     @inlinable
     public mutating func chance(_ p: BP) -> Bool {
         bp() < p

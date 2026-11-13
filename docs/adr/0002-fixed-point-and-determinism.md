@@ -1,7 +1,8 @@
 # ADR 0002: Fixed-point numbers and the determinism kit
 
-Status: accepted, 2026-11-09 (T-036); revised the same day after the six reviews (the seed mixing, the counter's
-scope rule, the qualified bounds). Implements design doc §2.3 and L5; decides what §2.3 leaves open.
+Status: accepted, 2026-11-09 (T-036); revised the same day after the six reviews (the seed mixing, the counter's scope
+rule, the qualified bounds); decision 9 added with T-038 (sums that must close and their helpers). Implements design doc
+§2.3 and L5; decides what §2.3 leaves open.
 
 ## Context
 The simulation must give the same result on every device and in every build: a save continued on another phone, a
@@ -35,8 +36,10 @@ how a clamp is counted, where the tables come from or how a random draw is mappe
      awaits and allocates nothing while it lasts; a tick does not open a scope per phase (§8: 0 allocations a tick).
      The short synchronous scope (`counting(into:)`) is for single calls and tests.
    - Each child of a parallel burst must count its own clamps (`Saturation.counted`) and hand the count back in its
-     result; the parent adds the counts in serial order. Per-child counters from a pool, so a burst allocates
-     nothing, are the engine's (its burst helper).
+     result; the parent adds the counts in serial order. Per-child counters from a pool, so the counters add no
+     allocation, are the engine's (its burst helper); the burst's child tasks still allocate in the Swift runtime
+     (about 53 allocations for 8 children, measured on x86 Linux), a bounded line of their own in §3.2 (OWNER PROXY
+     2026-11-13: at most the core count of children, each a stripe of the day's governments).
    - The silent cases: a clamp outside every scope is still a clamp, and nobody counts it. That is every test of plain
      values and all formatting, and also a detached task and an actor's method whose caller did not bind. The engine's
      entry points must each bind (the test that a tick's clamps are all counted comes with the engine).
@@ -85,7 +88,8 @@ how a clamp is counted, where the tables come from or how a random draw is mappe
    - No generator is saved between days. Format 1 keeps the game's seed in `WRLD.seed` (§7); the counters a key is made
      of come with their systems (the `RNG ` chunk, §7), never a generator's state.
    - A number below n is the high half of draw × n: one draw per value, no rejection loop (bias below n / 2^64).
-   - `chance` has a grain of 1 bp. A chance that is not a whole number of basis points (n in d) comes with T-038.
+   - `chance` has a grain of 1 bp. A chance that is not a whole number of basis points is `chance(_:in:)` (n in d) or
+     `chance(_: Q32)` (T-038, decision 9).
    - `DetRNG` is not a `RandomNumberGenerator`: the standard library does not promise a stable mapping across Swift
      versions. CI bans the standard library's own randomness and `hashValue` in the simulation's sources.
 8. **The calendar.** `GameDate` is an Int32 day count from 1970-01-01 in the proleptic Gregorian calendar, converted

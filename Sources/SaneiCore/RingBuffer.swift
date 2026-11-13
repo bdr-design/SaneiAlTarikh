@@ -1,5 +1,6 @@
 // A fixed-capacity ring buffer: appends overwrite the oldest element once full. Used by the app's ring log (M0) and
-// later by the engine's histories. stdlib only (§2.2: SaneiCore never imports Foundation).
+// later by the engine's histories (before then it becomes `@frozen` and `@inlinable`, as §2.2 asks of hot types, and
+// its `removeAll` and `elements` stop allocating: T-047). stdlib only (§2.2: SaneiCore never imports Foundation).
 
 /// A first-in, first-out buffer of at most `capacity` elements; when full, `append` drops the oldest.
 public struct RingBuffer<Element> {

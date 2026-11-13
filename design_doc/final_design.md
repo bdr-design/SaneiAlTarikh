@@ -358,7 +358,7 @@ Dependencies run one way: Core ← Content ← Engine ← AI; Core ← Map; Pres
 | `GameDate` | Int32 days since 1970-01-01, signed | 1850–2200 (tested) | Zigzag varints in saves |
 | `Serial` | UInt32 from a saved counter per entity kind | Runtime entity identity | Never reused |
 
-- **`DMath`:** `log2` and `exp2` from 1,024-entry tables, `isqrt`, logistic. Relative error ≤1×10⁻⁶, locked by golden values.
+- **`DMath`:** `log2` and `exp2` from 1,024-entry tables, `isqrt`, logistic. Their bounds are ADR 0002's decision 5 (`log2` within an absolute bound, since a relative error means nothing near 1; `exp2` relative from 1 up and within one step of 2^-32 below it), locked by golden values.
 - **`DetRNG`:** SplitMix64 with counter-based seeds `rng(seed, key, stream, serial)`, where `key` is the day or, for fog of war, the intelligence epoch. One stream per system.
 - **Overflow** saturates (clamps), and a saturation counter must stay at 0 in games without cheats.
 - **Sorting:** total key (value, then serial or stable ID).
@@ -667,7 +667,8 @@ It must not touch `Sources/**`, `App/Sources/**` or `content/packs/base/**`. Map
 | Mean day | ≤2 ms on A12 (≤2.15 ms at expert difficulty) | Work counters (blocking); wall-clock blocks only above 2× the Linux baseline |
 | Worst 1% of days | ≤8 ms; no day over 16 ms | The same |
 | Fresh route searches | ≤5 per day on average, ≤12 on any one day | Counter |
-| Heap allocations per steady-state tick | 0, including «لماذا؟» values (TermSink) | Linux `mallinfo2` difference |
+| Heap allocations per steady-state tick | 0 in the game's own code, including «لماذا؟» values (TermSink) | Linux `mallinfo2` difference, the monthly slot's burst measured on its own |
+| The monthly slot's burst: the Swift runtime's task allocations (OWNER PROXY 2026-11-13) | At most one task's worth per child (about 7 allocations, 1.6 KB on x86 Linux), the children at most the core count, each a stripe of the day's governments in serial order; all freed the same day | Counter over the burst alone; re-measured on the device |
 | Snapshot copy per publish | ≤2 MB | Counter |
 
 **Sub-budget per day** (A12, averages):

@@ -29,25 +29,25 @@ the hash unchanged), L3 (caps: 384 governments and polities), ADR 0001 (the host
   declared with defaults before M1a ends); the ledger (T-040); the save container, META, migrations and golden saves
   (T-041); content loading (T-042); moving `GameHost` from its M0 stand-in onto this world (T-044, after the save
   container of T-041); parallel monthly slots (with the burst helper). Named by the reviews and placed: content IDs,
-  dormant polities and ending a polity, and starting slots spread evenly across the 28 (T-042); tagged codec fields
-  with lengths so that a reader can skip an unknown field (T-041 decided: a length per command, so an unknown command
-  is skipped; a changed command's fields are a new format with a step that rewrites the queue's items; whether a held
-  copy keeps the cap's room was measured and fixed in this card's fix round: every append re-reserves); the strategic
-  period set by difficulty (the difficulty settings, M7; its feasibility answered by the owner's proxy on 2026-11-12:
-  15 a day on every level, the period a target, §5.10 corrected); this month's flows initialised pro rata for a
-  government made mid-month (M2, with the daily ledger); the observer's steps carry no date (a test that needs one
-  keeps its own); the host holding a day until every AI result due on it has been submitted, so a late result never
-  splits two phones' games (T-044, with `GameHost`); a government made by step 10's conditional events given its slot
-  from tomorrow on (with the event scheduler, M1a's thin systems, T-045); the record of which order was refused and
-  why, for screen 26 (the notification ring, M1c); the lifecycle effects beyond succession and dissolution:
-  independence, unification, recognition, annexation (§2.4's `Annex`, giving provinces to another polity), an effect
-  that gives provinces held by nobody, and polities made after the start (T-042). Carried from T-036 («the engine's
-  card») and placed: the registry of random streams and the packing of a fog-of-war key (the registry with the event
-  scheduler, T-045; the fog-of-war key with `Visibility`, T-046); the one burst helper with its per-child counters
-  from a pool and the CI ban on `Task {`, `addTask` and `async let` outside it (with parallel monthly slots, M2); the
-  test that every entry point binds a counter scope (T-044, when `GameHost` runs this simulation); a lint that no
-  simulation code walks a `Set` or a `Dictionary` (T-044's CI, before M1a ends). `GameDate.civil` once per day is
-  done: the day computes it once.
+  dormant polities and ending a polity, and starting slots spread evenly across the 28 (T-042); tagged codec fields with
+  lengths so that a reader can skip an unknown field (T-041 decided: a length per command, so an unknown command is
+  skipped; a changed command's fields are a new format with a step that rewrites the queue's items; whether a held copy
+  keeps the cap's room was measured and fixed in this card's fix round: every append re-reserves); the strategic period
+  set by difficulty (the difficulty settings, M7; its feasibility answered by the owner's proxy on 2026-11-12: 15 a day
+  on every level, the period a target, §5.10 corrected); this month's flows initialised pro rata for a government made
+  mid-month (M2, with the daily ledger); the observer's steps carry no date (a test that needs one keeps its own); the
+  host holding a day until every AI result due on it has been submitted, so a late result never splits two phones' games
+  (T-044, with `GameHost`); a government made by step 10's conditional events given its slot from tomorrow on (with the
+  event scheduler, M1a's thin systems, T-045); the record of which order was refused and why, for screen 26 (the
+  notification ring, M1c); the lifecycle effects beyond succession and dissolution: independence, unification,
+  recognition, annexation (§2.4's `Annex`, giving provinces to another polity), an effect that gives provinces held by
+  nobody, and polities made after the start (T-042). Carried from T-036 («the engine's card») and placed: the registry
+  of random streams and the packing of a fog-of-war key (the registry with the event scheduler, T-045; the fog-of-war
+  key with `Visibility`, T-046); the one burst helper with its per-child counters from a pool, at most the core count of
+  children each a stripe of the day's governments (§3.2's bounded line, OWNER PROXY 2026-11-13), and the CI ban on `Task
+  {`, `addTask` and `async let` outside it (with parallel monthly slots, M2); the test that every entry point binds a
+  counter scope (T-044, when `GameHost` runs this simulation); a lint that no simulation code walks a `Set` or a
+  `Dictionary` (T-044's CI, before M1a ends). `GameDate.civil` once per day is done: the day computes it once.
 
 ## Acceptance criteria
 1. `ci-linux` green, debug and optimised; the reference checks.

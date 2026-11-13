@@ -4,10 +4,10 @@
 
 /// One game's count of clamped results. The engine makes one per world and reads it after each tick.
 ///
-/// It is deliberately not `Sendable`: the compiler then refuses to let two tasks hold it (a use after it was handed
-/// to another task, or a capture by a child task, does not compile), so two threads cannot write the same counter by
-/// accident. A parallel burst must give each child task a count of its own (`Saturation.counted` inside the child)
-/// and add them up in serial order when the burst ends.
+/// It is deliberately not `Sendable`: the compiler then refuses to let two tasks hold it (a use after it was handed to
+/// another task, or a second task holding it, does not compile; handing it to one task compiles and is safe), so two
+/// threads cannot write the same counter by accident. A parallel burst must give each child task a count of its own
+/// (`Saturation.counted` inside the child) and add them up in serial order when the burst ends.
 public final class SaturationCounter {
     public var count: UInt64 = 0
     public init() {}

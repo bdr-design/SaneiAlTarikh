@@ -42,8 +42,9 @@ since the fix round also locally in the CI's own image (docker).
   - the registry of random streams, the packing of a fog-of-war key, the one burst helper with its CI ban on
     unstructured tasks, the test that every entry point binds a counter scope, `GameDate.civil` once per tick: the
     engine's card;
-  - the burst helper's per-child counters from a pool (so a burst allocates nothing), and the CI ban on `Task {`,
-    `addTask` and `async let` outside it: the engine's card;
+  - the burst helper's per-child counters from a pool (so the counters add no allocation; the child tasks' own runtime
+    allocations are §3.2's bounded line, OWNER PROXY 2026-11-13), and the CI ban on `Task {`, `addTask` and `async let`
+    outside it: the engine's card;
   - `USDn` never redenominates (a dollar hyperinflation has no rule): the ledger's card;
   - a check that no simulation code walks a `Set` or a `Dictionary` (their order differs between runs and Swift
     versions; a grep cannot see a walk, so it is a lint over the engine's sources): T-044's CI, before M1a ends
