@@ -265,8 +265,8 @@ struct Loader {
             guard lm[i] == never || (lm[i] >= 0 && lm[i] <= month), ly[i] == never || (ly[i] >= 0 && ly[i] <= year),
                   GameDate(days: Int32(ai[i])).isSupported else { return nil }
             guard gc.hasGiven(Serial(raw: UInt32(gs[i]))), gp[i] < Int64(np), slot[i] >= 1, slot[i] <= 28 /* format 1: 28 slots */,
-                  tr[i] >= 0, tr[i] <= Int64(BP.one.raw), tb[i] >= 0, !LCU(raw: tb[i]).needsRedenomination, i == 0 || seen[i] > seen[i - 1],
-                  GameDate(days: Int32(ai[i])).isSupported else { return nil }
+                  tr[i] >= 0, tr[i] <= Int64(BP.one.raw), tb[i] >= 0, !LCU(raw: tb[i]).needsRedenomination, i == 0 || seen[i] > seen[i - 1]
+            else { return nil }
         }
         var gt = GovernmentTable()
         gt.exists = filled(ge, GovernmentTable.capacity) { $0 == 1 }
@@ -386,7 +386,7 @@ struct Loader {
             report.defaulted.append("CMDQ.commands")
             return []
         }
-        guard let items = col.items(atMost: Simulation.queueCapacity, itemLimit: 256) else { return nil }
+        guard let items = col.items(atMost: 576 /* format 1: the rooms' sum, L3 */, itemLimit: 256) else { return nil }
         var out: [IssuedCommand] = []
         out.reserveCapacity(items.count)
         for bytes in items {

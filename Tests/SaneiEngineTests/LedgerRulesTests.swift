@@ -188,6 +188,36 @@ final class LedgerRulesTests: XCTestCase {
         XCTAssertTrue(steps.all.contains(.monthly(sim.state.governments.ref(0))))
     }
 
+    /// A month's close reports a ledger that does not add up, even with the world account at 0.
+    func testAMonthsCloseReportsABrokenLedger() {
+        var (w, _) = world()
+        XCTAssertTrue(w.closeMonth(), "the control")
+        w.ledger.reserves[2] = USDn(raw: 9)                    // a balance moved without a posting
+        XCTAssertEqual(w.ledger.world, .zero)
+        XCTAssertFalse(w.closeMonth())
+    }
+
+    /// A currency whose scale would pass the exponent's ceiling is not moved again; one step below it is.
+    func testTheScalesCeiling() {
+        for (exponent, moves) in [(UInt16.max - 3, true), (UInt16.max - 2, false)] {
+            var (w, g) = world()
+            w.currencies.scaleExponent[1] = exponent
+            w.post(g[1], .domesticDebt, .spending, -LCU(raw: (1 << 60) + 4_000))
+            w.redenominateDue()
+            XCTAssertEqual(w.currencies.redenominations[1], moves ? 1 : 0, "exponent \(exponent)")
+            XCTAssertFalse(w.currencies.redenominationDue[1])
+        }
+    }
+
+    /// The scenario's set-up refuses a negative treasury or tax base, as the command does.
+    func testSetUpRefusesNegativeAmounts() {
+        var w = WorldState(start: start, seed: 1)
+        let p = w.addPolity()!
+        XCTAssertNil(w.createGovernment(polity: p, treasury: LCU(raw: -1), taxBase: .zero, taxRate: .zero, strategicPeriod: 30))
+        XCTAssertNil(w.createGovernment(polity: p, treasury: .zero, taxBase: LCU(raw: -1), taxRate: .zero, strategicPeriod: 30))
+        XCTAssertNotNil(w.createGovernment(polity: p, treasury: .zero, taxBase: .zero, taxRate: .zero, strategicPeriod: 30))
+    }
+
     /// A refused exchange leaves the ledger as it was: only the count moves.
     func testARefusedExchangeMovesOnlyTheCount() {
         var (w, g) = world()

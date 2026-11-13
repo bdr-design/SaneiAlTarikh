@@ -218,6 +218,13 @@ final class SaveTests: XCTestCase {
         let row0 = sim.state.governments.ref(0)
         let madeUp = GovRef(row: row0.row, serial: Serial(raw: row0.serial.raw + 1))     // a serial given, but to another row
         XCTAssertEqual(sim.submit(IssuedCommand(day: d, issuer: .ai(madeUp), sequence: 9, command: .setTaxRate(government: madeUp, rate: .zero))), .invalid)
+        // the issuer alone made up: its order names a government that was made
+        XCTAssertEqual(sim.submit(IssuedCommand(day: d, issuer: .ai(madeUp), sequence: 9, command: .setTaxRate(government: row0, rate: .zero))), .invalid)
+        // a row one past the last, with a serial the counter gave
+        let pastRows = GovRef(row: Idx(raw: UInt16(sim.state.governments.rows)), serial: Serial(raw: 2))
+        XCTAssertTrue(sim.state.governments.counter.hasGiven(pastRows.serial))
+        XCTAssertFalse(sim.state.governments.wasMade(pastRows))
+        XCTAssertEqual(sim.submit(IssuedCommand(day: d, issuer: .ai(row0), sequence: 9, command: .setTaxRate(government: pastRows, rate: .zero))), .invalid)
         let never = GovRef(row: Idx(raw: 50), serial: Serial(raw: 4_000_000))
         XCTAssertEqual(sim.submit(IssuedCommand(day: d, issuer: .ai(row0), sequence: 9, command: .setTaxRate(government: never, rate: .zero))), .invalid)
         XCTAssertEqual(sim.submit(IssuedCommand(day: d, issuer: .ai(row0), sequence: 10, command: .setTaxRate(government: row0, rate: .zero))), .queued)

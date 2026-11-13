@@ -178,10 +178,13 @@ public enum SaveFile {
         }
     }
 
-    /// The file's bytes. With no compressor (or one that fails) the payload is stored as it is (compression 0). META is
-    /// made readable on the way: a text past 256 bytes is cut at a UTF-8 character's boundary (by bytes, so every OS
-    /// cuts it alike), and a hash that is not 32 bytes is left out.
+    /// The file's bytes. With no compressor, one that fails, or compressed bytes past `mostCompressedBytes`, the payload
+    /// is stored as it is (compression 0), so `open` keeps every file this writes. META is made readable on the way: a
+    /// text past 256 bytes is cut at a UTF-8 character's boundary (by bytes, so every OS cuts it alike), and a hash that
+    /// is not 32 bytes is left out. The payload is at most `mostPayloadBytes` (§3.5 budgets 8 MB; a state at the caps makes
+    /// about 50 KB today).
     public static func write(meta: SaveMeta, payload: [UInt8], compressor: (any SaveCompressor)? = nil) -> [UInt8] {
+        precondition(payload.count <= mostPayloadBytes, "a payload within the bound a read keeps")
         var meta = meta
         func cut(_ s: String) -> String {
             let b = Array(s.utf8)
@@ -209,7 +212,9 @@ public enum SaveFile {
         let storedAt = w.bytes.count
         w.fixed(UInt64(0), as: UInt64.self)
         let payloadAt = w.bytes.count
-        if let c = compressor, c.compress(payload, appendingTo: &w.bytes), w.bytes.count >= payloadAt {
+        let made = compressor?.compress(payload, appendingTo: &w.bytes) ?? false
+        precondition(w.bytes.count >= payloadAt, "a compressor only appends to the bytes it is handed")
+        if made, let c = compressor, w.bytes.count - payloadAt <= mostCompressedBytes {
             w.bytes[codeAt] = c.compression.rawValue
         } else {
             w.bytes.removeSubrange(payloadAt...)
@@ -257,8 +262,9 @@ public enum SaveFile {
         }
         var r = ByteReader(bytes, offset: headerBytes + h.metaLength)
         guard let rawLength = r.fixed(UInt64.self), let storedLength = r.fixed(UInt64.self),
-              rawLength <= UInt64(mostPayloadBytes), storedLength <= UInt64(mostPayloadBytes), storedLength == UInt64(body - r.offset)
+              rawLength <= UInt64(mostPayloadBytes), storedLength == UInt64(body - r.offset)
         else { return .failure(.badPayload) }
+        // the stored bytes are bounded too: by the raw length when stored as they are, by `mostCompressedBytes` when not
         if h.compression == 0 {
             guard rawLength == storedLength else { return .failure(.badPayload) }
             return .success((meta.meta, meta.report, bytes, r.offset..<body))

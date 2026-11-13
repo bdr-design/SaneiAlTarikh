@@ -73,7 +73,8 @@ final class SaveRulesTests: XCTestCase {
         refused("a tax base below 0") { t in self.change(&t, "GOVT", "taxBase") { v in [-1] + v.dropFirst() } }
         refused("a tax base past 2^60") { t in self.change(&t, "GOVT", "taxBase") { v in [(1 << 60) + 1] + v.dropFirst() } }
         refused("a look on a day outside the calendar") { t in self.change(&t, "GOVT", "aiNextStrategic") { v in [Int64(GameDate.min.days) - 1] + v.dropFirst() } }
-        refused("a value past its type") { t in self.change(&t, "GOVT", "lastMonthlyRun") { v in [Int64(1) << 40] + v.dropFirst() } }
+        // a look 2^40 days ahead: no other rule reads it before the type's range (it would trap at Int32)
+        refused("a value past its type") { t in self.change(&t, "GOVT", "aiNextStrategic") { v in [Int64(1) << 40] + v.dropFirst() } }
         // 385 governments, each consistent (unique serials, a polity, an empty ledger row): only the cap refuses
         refused("past the cap") { t in
             let m = GovernmentTable.capacity + 1
@@ -125,6 +126,39 @@ final class SaveRulesTests: XCTestCase {
         XCTAssertNotNil(load(ok))
     }
 
+    /// Each issuer's room exactly: full, it loads; one more is refused (the player's 64, the events' 64, the AI's 448);
+    /// and an AI's order, as a player's, names only governments that were made.
+    func testEachIssuersRoomExactly() {
+        func items(_ t: SaveTree) -> [[UInt8]] { t.chunk("CMDQ")!.column("commands")!.items(atMost: 600, itemLimit: 256)! }
+        func bytes(_ c: IssuedCommand) -> [UInt8] { var w = ByteWriter(); c.write(to: &w); return w.bytes }
+        func set(_ t: inout SaveTree, _ v: [[UInt8]]) { t.dropColumn("commands", from: "CMDQ"); t.addColumn(.items("commands", v), to: "CMDQ") }
+        let last = base.pending.map { $0.day }.max()!.adding(days: 10)
+        let g3 = base.governments.ref(3)
+        var held = (player: 0, event: 0, ai: 0)
+        for c in base.pending {
+            switch c.issuer {
+            case .player: held.player += 1
+            case .event: held.event += 1
+            case .ai: held.ai += 1
+            }
+        }
+        func with(_ issuer: Issuer, _ n: Int) -> SaveTree {
+            var t = tree
+            set(&t, items(t) + (0..<n).map { k in
+                bytes(IssuedCommand(day: last, issuer: issuer, sequence: UInt64(1_000 + k), command: .setTaxRate(government: g3, rate: .zero)))
+            })
+            return t
+        }
+        for (issuer, room, now) in [(Issuer.player(g3), 64, held.player), (.event, 64, held.event), (.ai(g3), 448, held.ai)] {
+            XCTAssertNotNil(load(with(issuer, room - now)), "\(issuer): its room full")
+            XCTAssertNil(load(with(issuer, room - now + 1)), "\(issuer): one past its room")
+        }
+        let never = GovRef(row: Idx(raw: 2), serial: Serial(raw: 3_000))
+        refused("an AI's order naming a government never made") { t in
+            set(&t, items(t) + [bytes(IssuedCommand(day: last, issuer: .ai(g3), sequence: 1, command: .setTaxRate(government: never, rate: .zero)))])
+        }
+    }
+
     /// The tree's own rules.
     func testTheTreesRules() {
         XCTAssertNil(SaveTree.read(SaveTree(formatVersion: 1, chunks: [SaveChunk(tag: "AAAA", columns: []), SaveChunk(tag: "AAAA", columns: [])]).write()),
@@ -133,10 +167,17 @@ final class SaveRulesTests: XCTestCase {
         XCTAssertNil(SaveTree.read(SaveTree(formatVersion: 1, chunks: [SaveChunk(tag: "AAAA", columns: [col, col])]).write()), "one name twice")
         XCTAssertNil(SaveTree.read(SaveTree(formatVersion: 1, chunks: [SaveChunk(tag: "AAAA", columns: [.of("a b", [UInt8(1)], .u8, .raw)])]).write()),
                      "a name with a space")
-        // a chunk whose body is longer than its columns, and a tree with a byte after its last chunk
-        var w = ByteWriter()
-        w.fixed(UInt16(1), as: UInt16.self); w.varint(1); w.bytes.append(contentsOf: Array("AAAA".utf8)); w.varint(2); w.varint(0); w.u8(0)
-        XCTAssertNil(SaveTree.read(w.bytes), "a chunk's end past its columns")
+        // a chunk whose length covers the next whole chunk: the tree's bytes end where they should, so only the chunk's
+        // own end refuses it
+        func twoChunks(firstLength: UInt64) -> [UInt8] {
+            var w = ByteWriter()
+            w.fixed(UInt16(1), as: UInt16.self); w.varint(2)
+            w.bytes.append(contentsOf: Array("AAAA".utf8)); w.varint(firstLength); w.varint(0)
+            w.bytes.append(contentsOf: Array("BBBB".utf8)); w.varint(1); w.varint(0)
+            return w.bytes
+        }
+        XCTAssertEqual(SaveTree.read(twoChunks(firstLength: 1))?.chunks.map(\.tag), ["AAAA", "BBBB"], "the control")
+        XCTAssertNil(SaveTree.read(twoChunks(firstLength: 7)), "a chunk's end past its columns")
         let good = SaveTree(formatVersion: 1, chunks: [SaveChunk(tag: "AAAA", columns: [col])]).write()
         XCTAssertNotNil(SaveTree.read(good))
         XCTAssertNil(SaveTree.read(good + [0]), "a byte after the last chunk")
