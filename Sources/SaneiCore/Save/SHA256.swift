@@ -2,8 +2,9 @@
 // tests and tools included, without Foundation or CryptoKit. Not for secrets: a save is the player's own file.
 // stdlib only.
 
-/// SHA-256 of a byte string, in one pass: three small allocations (the tail block, the 64-word schedule and the 32-byte
-/// result), whatever the length.
+/// SHA-256 of a byte string (or a range of it, which must lie inside the bytes: a programmer's error traps), in one
+/// pass over the bytes in memory: a few small allocations (the tail block, the 64-word schedule and the 32-byte result;
+/// a debug build may add one), whatever the length.
 public enum SHA256 {
     static let k: [UInt32] = [
         0x428a2f98, 0x71374491, 0xb5c0fbcf, 0xe9b5dba5, 0x3956c25b, 0x59f111f1, 0x923f82a4, 0xab1c5ed5,

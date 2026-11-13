@@ -60,7 +60,8 @@ public struct SaveColumn: Sendable, Equatable {
         case .u32, .i32: width = 4
         case .u64, .i64: width = 8
         }
-        var w = ByteWriter(capacity: values.count * (encoding == .raw ? width : Swift.min(width, 3)) + 8)
+        // a varint of a w-byte value takes at most ⌈8w/7⌉ bytes: sized once, whatever the values
+        var w = ByteWriter(capacity: values.count * (encoding == .raw ? width : (8 * width + 6) / 7) + 8)
         if encoding == .raw {
             switch type {
             case .u8, .i8: for v in values { w.fixed(UInt8(truncatingIfNeeded: v), as: UInt8.self) }
@@ -223,8 +224,19 @@ public struct SaveTree: Sendable, Equatable {
 
     // MARK: bytes
 
-    /// The tree's bytes, sized once.
+    /// The tree's bytes, sized once. Traps (a programmer's error) on a tree `read` would refuse: more than
+    /// `mostChunks` chunks or `mostColumns` columns in one, a tag not four printable ASCII bytes, a column name empty,
+    /// past `mostNameBytes` or outside 0x21–0x7E.
     public func write() -> [UInt8] {
+        precondition(chunks.count <= Self.mostChunks, "a tree holds at most \(Self.mostChunks) chunks")
+        for c in chunks {
+            precondition(c.columns.count <= Self.mostColumns, "a chunk holds at most \(Self.mostColumns) columns")
+            for col in c.columns {
+                let n = col.name.utf8
+                precondition(!n.isEmpty && n.count <= Self.mostNameBytes && n.allSatisfy { $0 >= 0x21 && $0 <= 0x7E },
+                             "a column name is 1 to \(Self.mostNameBytes) printable ASCII bytes with no space")
+            }
+        }
         func bodySize(_ c: SaveChunk) -> Int { 10 + c.columns.reduce(0) { $0 + 40 + $1.name.utf8.count + $1.dataCount } }
         var w = ByteWriter(capacity: 16 + chunks.reduce(0) { $0 + 14 + bodySize($1) })
         w.fixed(formatVersion, as: UInt16.self)
@@ -323,7 +335,7 @@ public struct SaveReport: Sendable, Equatable {
     public var skipped: [String] = []
     /// Columns the save lacks, filled with their defaults, as "TAG.column".
     public var defaulted: [String] = []
-    /// Waiting commands of a tag this version does not know.
+    /// Waiting commands this version does not know (a later tag, or an issuer of a later rank), skipped.
     public var skippedCommands = 0
     public init() {}
 }

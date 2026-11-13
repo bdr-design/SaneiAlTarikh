@@ -517,7 +517,9 @@ final class SaveTests: XCTestCase {
         XCTAssertEqual([UInt64(loaded.meta.mapVersion), loaded.meta.playtime, UInt64(loaded.meta.preset), UInt64(loaded.meta.difficulty)], [3, 3_600, 1, 2])
         XCTAssertTrue(loaded.meta.cheatsUsed)
         XCTAssertEqual(loaded.meta.rulesHash, [UInt8](repeating: 1, count: 32))
-        guard case let .success(opened) = SaveFile.open(bytes), let golden = SaveTree.read(opened.payload, opened.range) else { return XCTFail() }
+        guard case let .success(opened) = SaveFile.open(bytes), var golden = SaveTree.read(opened.payload, opened.range) else { return XCTFail() }
+        // the golden tree migrated to the current format holds exactly what the current version writes (§7's policy)
+        XCTAssertTrue(SaveMigrations.current.migrate(&golden))
         let now = s.saveTree()
         for chunk in golden.chunks {
             for column in chunk.columns {

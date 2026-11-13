@@ -82,8 +82,8 @@ how a clamp is counted, where the tables come from or how a random draw is mappe
    - Each coordinate is mixed in on its own: `mix(mix(mix(seed + γ) + γ + key) + γ + (stream << 32 | serial))`, with
      SplitMix64's output function and increment. If the seed and the key were added first, the game with seed 2012
      would roll on each day what the game with seed 2011 rolls on the next.
-   - No generator is saved between days. The save's `RNG ` chunk (§7) holds the game's seed and the counters a key is
-     made of, never a generator's state.
+   - No generator is saved between days. Format 1 keeps the game's seed in `WRLD.seed` (§7); the counters a key is made
+     of come with their systems (the `RNG ` chunk, §7), never a generator's state.
    - A number below n is the high half of draw × n: one draw per value, no rejection loop (bias below n / 2^64).
    - `chance` has a grain of 1 bp. A chance that is not a whole number of basis points (n in d) comes with T-038.
    - `DetRNG` is not a `RandomNumberGenerator`: the standard library does not promise a stable mapping across Swift

@@ -5,7 +5,7 @@ import SaneiCore
 // not ahead of the date, the ledger's invariants, the waiting commands in order and within their rooms), so a bad or
 // forged file is refused, never trusted, and a state that loads keeps every rule the game checks. A missing column
 // takes its default (`SaveDefaults`), except the required columns; an unknown chunk, an unknown column and a
-// command of an unknown tag are skipped and reported. Each table is one chunk with one row count (the world row's
+// command of an unknown tag or issuer rank are skipped and reported. Each table is one chunk with one row count (the world row's
 // values, the world account's included, are in `WRLD`); a value per account is a column per account, by its stored
 // name, so an account added later is a column added. stdlib only.
 
@@ -416,9 +416,9 @@ extension Command {
 }
 
 extension IssuedCommand {
-    /// The command's tag, read past the day, the issuer and the sequence; nil when those are malformed.
-    /// nil when malformed; `.some(nil)` for an issuer of a rank this version does not know (a later version's kind of
-    /// issuer: the command is skipped, like an unknown tag).
+    /// The command's tag, read past the day, the issuer and the sequence: nil when those are malformed; `.some(nil)` for
+    /// an issuer of a rank this version does not know (a later version's kind of issuer: the command is skipped, like an
+    /// unknown tag).
     static func peekTag(_ bytes: [UInt8]) -> UInt16?? {
         var r = ByteReader(bytes)
         guard r.zigzag() != nil, let rank = r.u8() else { return nil }

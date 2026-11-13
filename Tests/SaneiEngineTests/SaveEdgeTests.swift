@@ -100,6 +100,48 @@ final class SaveEdgeTests: XCTestCase {
         XCTAssertEqual(SaveFile.open(withRaw(SaveFile.mostPayloadBytes + 1), decompressor: NeverAsked()).failureValue, .badPayload)
     }
 
+    /// A later format is told from META, even when its tree holds what this version cannot read (a column of a new
+    /// type); an older format with no step to the current one is told as such.
+    func testANewerAndAnOlderFormatAreToldThroughRead() throws {
+        var tree = base.saveTree()
+        tree.addColumn(.of("zz_new", [UInt8(1)], .u8, .raw), to: "WRLD")
+        var m = meta()
+        m.formatVersion = 2
+        tree.formatVersion = 2
+        var payload = tree.write()
+        let name = Array("zz_new".utf8)
+        let at = try XCTUnwrap((0...(payload.count - name.count)).first { Array(payload[$0..<($0 + name.count)]) == name })
+        payload[at + name.count] = 99                       // the column's type: one this version does not know
+        XCTAssertNil(SaveTree.read(payload), "this version cannot read the tree")
+        XCTAssertEqual(SaveCodec.read(SaveFile.write(meta: m, payload: payload)).failureValue, .newerFormat(2))
+        var old = base.saveTree()
+        old.formatVersion = 0
+        m.formatVersion = 0
+        XCTAssertEqual(SaveCodec.read(SaveFile.write(meta: m, payload: old.write())).failureValue, .noMigration(0))
+    }
+
+    /// A state that still holds a redenomination mark is not written (its file would not load): nil, so the last good
+    /// save is kept.
+    func testAStateWithARedenominationMarkIsNotWritten() {
+        var s = base
+        XCTAssertNotNil(SaveCodec.write(s, meta: meta()), "the control")
+        s.currencies.redenominationDue[0] = true
+        XCTAssertNil(SaveCodec.write(s, meta: meta()))
+    }
+
+    /// The bounds the platform reads: the largest file, the header, a file's compression.
+    func testThePlatformsBoundsAndAFilesCompression() throws {
+        XCTAssertEqual(SaveFile.mostFileBytes, SaveFile.mostPayloadBytes + SaveFile.mostMetaBytes + 16 + 16 + 32)
+        XCTAssertEqual(SaveFile.headerBytes, 16)
+        let plain = try XCTUnwrap(SaveCodec.write(base, meta: meta()))
+        XCTAssertEqual(SaveFile.compression(of: plain), SaveCompression.none)
+        XCTAssertNil(SaveFile.compression(of: Array("NOTASAVE".utf8)))
+        guard case let .success(c) = SaveFile.check(plain) else { return XCTFail() }
+        XCTAssertEqual(c.compression, .none)
+        XCTAssertEqual(c.rawLength, c.stored.count)
+        XCTAssertEqual(c.meta.date, base.world.date.days)
+    }
+
     /// The saves list's prefix: from 16 bytes, from the whole file, and each refusal of the header.
     func testTheSavesListsPrefix() throws {
         let file = SaveCodec.write(base, meta: meta())!

@@ -51,15 +51,15 @@ a reader can skip an unknown field, and whether a held copy keeps the cap's room
   policy (what bumps the format) is in §7 and in `SaveCodec.swift`.
 - Out of scope, each with its place (tasks/BACKLOG.md): raw DEFLATE (App/Platform with Apple's Compression, and the
   device fixture read on Linux: T-043); storage, atomic writes, autosave rotation, the mirror and export
-  (App/Platform, T-043); the peak-load test on a 90-year save, the start, mid-war and 30-year golden saves (when the
-  systems exist, M1a's thin systems and later; the first is the start save of T-042's scenario); `.saneibug` and
-  `simcli replay` (T-044, with the host); content ID lists `IDxx` and `aliases.json` (T-042, with content IDs);
+  (App/Platform, T-043); the peak-load test on a 90-year save (T-045), the start, mid-war and 30-year golden saves
+  (when the systems exist; the first is the start save, T-048); `.saneibug` and
+  `simcli replay` (T-044, with the host); content ID lists `IDxx` and `remapIDs` (T-048; `aliases.json` came with T-042);
   `CMDJ`, the build-scoped command journal (T-044, with replays); moving `GameHost` onto this simulation, the host
   holding a day until the AI's results are in, the test that every entry point binds a counter scope, the
   Set/Dictionary lint, the ledger's invariants after every day, the load procedure, the host following the player onto
   a successor, and the append-only check of `tags.lock` (T-044); the rules-hash message (T-043); the migration
-  operations `convertUnits`, `splitProvince` and `splitChunk` (with the first format that needs each) and `remapIDs`
-  (T-042).
+  operations `remapIDs` (T-048), `splitChunk` (T-047), `splitProvince` (map v2's alias migration, M1b) and
+  `convertUnits` (the first unit to change, M2).
 
 ## Acceptance criteria
 1. `ci-linux` green, debug and optimised; the reference checks.

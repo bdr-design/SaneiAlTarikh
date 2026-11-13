@@ -199,13 +199,17 @@ final class SaveRulesTests: XCTestCase {
     }
 
     /// The tree's own rules.
-    func testTheTreesRules() {
+    func testTheTreesRules() throws {
         XCTAssertNil(SaveTree.read(SaveTree(formatVersion: 1, chunks: [SaveChunk(tag: "AAAA", columns: []), SaveChunk(tag: "AAAA", columns: [])]).write()),
                      "two chunks with one tag")
         let col = SaveColumn.of("x", [UInt8(1)], .u8, .raw)
         XCTAssertNil(SaveTree.read(SaveTree(formatVersion: 1, chunks: [SaveChunk(tag: "AAAA", columns: [col, col])]).write()), "one name twice")
-        XCTAssertNil(SaveTree.read(SaveTree(formatVersion: 1, chunks: [SaveChunk(tag: "AAAA", columns: [.of("a b", [UInt8(1)], .u8, .raw)])]).write()),
-                     "a name with a space")
+        // a name with a space (the writer refuses to make one: the bytes are made by hand)
+        var spaced = SaveTree(formatVersion: 1, chunks: [SaveChunk(tag: "AAAA", columns: [.of("a_b", [UInt8(1)], .u8, .raw)])]).write()
+        let underscore = try XCTUnwrap(spaced.firstIndex(of: 0x5F))
+        XCTAssertNotNil(SaveTree.read(spaced), "the control")
+        spaced[underscore] = 0x20
+        XCTAssertNil(SaveTree.read(spaced), "a name with a space")
         // a chunk whose length covers the next whole chunk: the tree's bytes end where they should, so only the chunk's
         // own end refuses it
         func twoChunks(firstLength: UInt64) -> [UInt8] {

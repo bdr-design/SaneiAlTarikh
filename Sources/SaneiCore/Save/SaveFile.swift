@@ -125,28 +125,43 @@ public enum SaveCompression: UInt8, Sendable, CaseIterable {
     case rawDeflate = 1
 }
 
-/// A compressor the platform hands in (App/Platform: raw DEFLATE with Apple's Compression, streaming into the file).
+/// A compressor the platform hands in (App/Platform: raw DEFLATE with Apple's Compression). It appends to the file's
+/// one buffer in memory; the platform then writes that buffer to the file (T-043).
 public protocol SaveCompressor: Sendable {
-    /// The compression it makes (never `.none`).
+    /// The compression it makes (never `.none`; `SaveFile.write` traps on `.none`).
     var compression: SaveCompression { get }
     /// Appends the compressed bytes to `out`; false (and `out` as it was) when it cannot, and the file then stores the
-    /// payload as it is.
+    /// payload as it is. It should stop, and answer false, once it passes `SaveFile.mostCompressedBytes` (a file keeps no
+    /// more), or once its bytes are no fewer than the payload's. It only appends: removing bytes from `out` traps.
     func compress(_ bytes: [UInt8], appendingTo out: inout [UInt8]) -> Bool
     /// The raw bytes, exactly `rawLength` of them; nil when the stored bytes do not make them.
     func decompress(_ bytes: ArraySlice<UInt8>, rawLength: Int) -> [UInt8]?
 }
 
-/// Why a file was refused.
+/// Why a file was refused. Screen 23 shows «من إصدار أحدث» for `newerContainer` and `newerFormat`, and «تالف» for the
+/// rest (the platform logs which).
 public enum SaveError: Error, Sendable, Equatable {
+    /// Not a save: no magic (any function), or a container version of 0.
     case notASave
+    /// A container this version does not read: its version (above `containerVersion`), or this version's own when the
+    /// header sets a flag it does not know.
     case newerContainer(UInt16)
+    /// Too short for its own lengths: a file under the smallest a save can be, or one whose lengths run past its end.
+    /// A real save cut short usually reads as `damaged` (its trailer is no longer its hash).
     case truncated
+    /// The trailer is not the hash of the bytes before it.
     case damaged
+    /// Compressed, and no decompressor of its compression was handed in.
     case compressionUnavailable(UInt8)
+    /// META is malformed, or names a player's government the state never made.
     case badMeta
+    /// The payload's lengths, bounds, decompression or tree are malformed.
     case badPayload
+    /// A save format past this version's (`SaveCodec.read`).
     case newerFormat(UInt16)
+    /// An older format with no migration step to the current one (`SaveCodec.read`).
     case noMigration(UInt16)
+    /// The tree is whole but its values break a rule the game keeps (`SaveCodec.read`).
     case badState
 }
 
@@ -156,7 +171,7 @@ public enum SaveFile {
     public static let containerVersion: UInt16 = 1
     /// The most bytes a payload may hold, raw and stored: §3.5's 8 MB raw for a save, with half again as margin. A file
     /// past it is refused before it is hashed, and a decompressor is asked for no more; with `mostCompressedBytes`, a
-    /// load's peak at today's caps stays within §7's footprint plus 16 MB whatever the file says: 14 MB of payload,
+    /// load's peak at today's caps stays within §7's footprint plus 16 MB whatever the file says, in the optimised build: 14 MB of payload,
     /// META's 64 KB, the tree's index (at most 6,144 columns, about 1.1 MB), the report (about 0.1 MB) and the
     /// loader's working columns (about 0.3 MB), about 15.6 MB. Worked out again when the state grows (T-044).
     public static let mostPayloadBytes = 12 << 20
@@ -164,7 +179,16 @@ public enum SaveFile {
     /// compressor's bytes past it are stored as they are instead.
     public static let mostCompressedBytes = 2 << 20
     public static let mostMetaBytes = 1 << 16
-    static let headerBytes = 8 + 2 + 1 + 1 + 4
+    /// The header's bytes: the magic, the container version, the compression, the flags, META's length.
+    public static let headerBytes = 8 + 2 + 1 + 1 + 4
+    /// The most bytes a file may hold: what the platform checks before it reads one (T-043).
+    public static let mostFileBytes = mostPayloadBytes + mostMetaBytes + headerBytes + 16 + 32
+
+    /// The compression a file's header names; nil when the bytes are not a save's header.
+    public static func compression(of bytes: [UInt8]) -> SaveCompression? {
+        guard case .success = header(bytes) else { return nil }
+        return SaveCompression(rawValue: bytes[10])
+    }
 
     /// The bytes before META ends, from the header's first 16 bytes: what the saves list reads of each file
     /// (`readMeta` takes any prefix that covers META).
@@ -241,15 +265,23 @@ public enum SaveFile {
         }
     }
 
-    /// The whole file checked (the trailer, META, the lengths) and its payload: the file's own bytes and a range when
-    /// it is stored as it is (nothing is copied), or the decompressed bytes.
-    public static func open(_ bytes: [UInt8], decompressor: (any SaveCompressor)? = nil)
-        -> Result<(meta: SaveMeta, metaReport: SaveReport, payload: [UInt8], range: Range<Int>), SaveError> {
+    /// What `check` found: META and its report, the compression, where the stored payload is, and its raw length.
+    public struct Checked: Sendable {
+        public var meta: SaveMeta
+        public var metaReport: SaveReport
+        public var compression: SaveCompression
+        public var stored: Range<Int>
+        public var rawLength: Int
+    }
+
+    /// The whole file checked without decompressing it (the magic, the size, the trailer, the header, META, the
+    /// lengths): what the platform runs before it releases the old state (§3.3's load spike, screen 23).
+    public static func check(_ bytes: [UInt8]) -> Result<Checked, SaveError> {
         // the magic, then the file's size bounded, then the trailer, before any other byte is believed: a damaged
         // header reads as damaged, never as a newer version
         guard bytes.count >= 8, Array(bytes[0..<8]) == magic else { return .failure(.notASave) }
         guard bytes.count >= headerBytes + 16 + 32 else { return .failure(.truncated) }
-        guard bytes.count <= mostPayloadBytes + mostMetaBytes + headerBytes + 16 + 32 else { return .failure(.badPayload) }
+        guard bytes.count <= mostFileBytes else { return .failure(.badPayload) }
         let body = bytes.count - 32
         guard SHA256.hash(bytes, 0..<body) == Array(bytes[body...]) else { return .failure(.damaged) }
         let h: Header
@@ -270,12 +302,27 @@ public enum SaveFile {
         // the stored bytes are bounded too: by the raw length when stored as they are, by `mostCompressedBytes` when not
         if h.compression == 0 {
             guard rawLength == storedLength else { return .failure(.badPayload) }
-            return .success((meta.meta, meta.report, bytes, r.offset..<body))
+        } else {
+            guard storedLength <= UInt64(mostCompressedBytes) else { return .failure(.badPayload) }
         }
-        guard storedLength <= UInt64(mostCompressedBytes) else { return .failure(.badPayload) }
-        guard let d = decompressor, d.compression.rawValue == h.compression else { return .failure(.compressionUnavailable(h.compression)) }
-        guard let raw = d.decompress(bytes[r.offset..<body], rawLength: Int(rawLength)), raw.count == Int(rawLength) else { return .failure(.badPayload) }
-        return .success((meta.meta, meta.report, raw, 0..<raw.count))
+        guard let compression = SaveCompression(rawValue: h.compression) else { return .failure(.compressionUnavailable(h.compression)) }
+        return .success(Checked(meta: meta.meta, metaReport: meta.report, compression: compression, stored: r.offset..<body,
+                                rawLength: Int(rawLength)))
+    }
+
+    /// The whole file checked (`check`) and its payload: the file's own bytes and a range when it is stored as it is
+    /// (nothing is copied), or the decompressed bytes.
+    public static func open(_ bytes: [UInt8], decompressor: (any SaveCompressor)? = nil)
+        -> Result<(meta: SaveMeta, metaReport: SaveReport, payload: [UInt8], range: Range<Int>), SaveError> {
+        let c: Checked
+        switch check(bytes) {
+        case let .failure(e): return .failure(e)
+        case let .success(x): c = x
+        }
+        if c.compression == .none { return .success((c.meta, c.metaReport, bytes, c.stored)) }
+        guard let d = decompressor, d.compression == c.compression else { return .failure(.compressionUnavailable(c.compression.rawValue)) }
+        guard let raw = d.decompress(bytes[c.stored], rawLength: c.rawLength), raw.count == c.rawLength else { return .failure(.badPayload) }
+        return .success((c.meta, c.metaReport, raw, 0..<raw.count))
     }
 
     struct Header {

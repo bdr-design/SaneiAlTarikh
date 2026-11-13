@@ -43,7 +43,7 @@ thread, released when the sheet closes, inside §3.3's panels line); nothing liv
   sends one write event and the model is rebuilt once (no timer, no folder polling, L1).
 - Export hands the existing file's URL to the system share sheet as is: no decode, no re-encode, off the main thread.
 - Load, on «تحميل»: pause; the platform engine first checks the header, META (formatVersion, rulesHash) and the trailer
-  hash (a streaming SHA-256 with a small fixed buffer: over ≤2 MB compressed, about 10 ms; over ≤12 MB when stored
+  hash (`SaveFile.check`: a SHA-256 over the file in memory, with no decompression: over ≤2 MB compressed, about 10 ms; over ≤12 MB when stored
   as it is, about 60 ms, at 195 MB/s measured on x86 Linux, not a phone); on failure the game is kept and the sheet
   says why («تالف» or «من إصدار أحدث»). Then the sheet closes and the panel models are dropped, the old state is
   released, and the file is decoded on the platform engine (§3.3 load spike and §7: peak ≤ footprint + 16 MB, L8).

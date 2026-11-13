@@ -18,7 +18,9 @@ listed under each, so a deferred item always has a place that exists.
 - **T-043: the platform's saves.** Raw DEFLATE with Apple's Compression (a `SaveCompressor` of `.rawDeflate`) and the
   device fixture read on Linux; storage in `Documents/Saves`, atomic writes (temp, fsync, rename, verify, «last
   good»), autosave rotation, the mirror (D-28), export and import, the saves list from `SaveFile.readMeta`, corrupt
-  files shown as «تالف»; a write that returns nothing (a tree past 12 MB) keeps the last good save and is logged;
+  files shown as «تالف» and a later format as «من إصدار أحدث» (App/UI compares META's `formatVersion` with
+  `WorldState.saveFormat`: App/Platform may not import the engine); `SaveFile.check` before the old state is released,
+  `SaveFile.mostFileBytes` before a file is read; a write that returns nothing (a tree past 12 MB) keeps the last good save and is logged;
   the rules-hash message «تغيّرت قواعد اللعبة منذ هذا الحفظ» once. The bytes made from a copy
   of the state handed from the simulation's thread (§3.5: a stall of at most 2 ms) and made on the I/O thread
   `sanei.io` (ADR 0001, `threadSpread`): the tree, DEFLATE, the SHA-256 and the file; the platform checks a file's
@@ -42,7 +44,8 @@ listed under each, so a deferred item always has a place that exists.
 - **T-045: the thin systems.** Time, taxes, budget, cohorts, stability through `TermSink`, projects, rename; the event
   scheduler with the 5 real events (South Sudan's succession, Côte d'Ivoire's resolution, Libya's NTC, the NDP's
   dissolution, the US withdrawal from Iraq) and step 10's conditional events (a government they make takes its slot
-  from tomorrow on); the registry of random streams; the AI stub on the stagger.
+  from tomorrow on); the registry of random streams; the AI stub on the stagger; the peak-load measure on a 90-year
+  save (`simcli peak-load`, the optimised build) once these systems run 90 years.
 - **T-046: `Visibility`.** The engine's view through fog, declared in M1a with the packing of a fog-of-war key (epoch
   fog itself is M5).
 - **T-047: every column group for M1 to M6 declared** (§9's M1a checklist): polities, governments, actors, party rows,
