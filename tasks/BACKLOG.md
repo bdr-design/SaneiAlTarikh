@@ -54,8 +54,8 @@ listed under each, so a deferred item always has a place that exists.
   that is not an array, or the map saves nothing: today's reader takes an array, so a map would first be copied) and its
   launch time measured against §3.4 (on x86-64 Linux at the registries' caps: 13 to 14 ms, of which the SHA-256 about
   2.3 ms, at about 200 to 260 MB/s, so 24 to 31 ms for a 6 MB file, and the validator's rules about 3 ms on today's
-  names, 4.3 to 4.9 on fully vowelled ones; whether the
-  release build keeps the text rules or leaves them to the bake is decided there), with the decoded content's memory
+  names, 4.3 to 4.9 on fully vowelled ones; whether the release build keeps the text rules or leaves them to the bake
+  is decided there), with the decoded content's memory
   budgeted against §3.3's line (at today's caps the largest registries the validator takes, every text at 256 bytes and
   every ID at 64, make a 5.2 MB file: its kept memory measured there, as 4.4 MB of 250-byte texts kept 5.9 MB; for names
   as long as today's, about 3 times the file, 1.8 MB for 616 KB; worked out again when a cap rises or the static rules

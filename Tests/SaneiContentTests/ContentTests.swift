@@ -381,8 +381,8 @@ final class ContentTests: XCTestCase, ContentFixtures {
                   "\u{F0000}دولة", "د\u{115F}ولة"] {
             XCTAssertFalse(ContentDB.isNameText(t), t.unicodeScalars.map { String($0.value, radix: 16) }.joined(separator: " "))
         }
-        // only characters every supported system knows: Unicode 15.0 or older (iOS 17's)
-        XCTAssertTrue(ContentDB.unicodeVersion == (15, 0), "the oldest system's Unicode: iOS 17.0's runtime")
+        // only characters every supported system knows: Unicode 15.0 or older (what iOS 17.0's runtime is taken to carry)
+        XCTAssertTrue(ContentDB.unicodeVersion == (15, 0), "the oldest system's Unicode, as taken: iOS 17.0's runtime")
         XCTAssertEqual(Unicode.Scalar(0x11F04)!.properties.age.map { [$0.major, $0.minor] }, [15, 0], "a letter of Unicode 15.0")
         XCTAssertTrue(ContentDB.isNameText("د\u{11F04}ولة"), "a 15.0 letter is taken")
         // characters of Unicode 15.1 (a symbol, a CJK letter) and 16.0 (an Arabic letter): unassigned to this

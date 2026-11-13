@@ -3,9 +3,9 @@
 # and whether tools/checks/ids_lock.sh must pass or fail. Run from the repository's root; git alone.
 set -euo pipefail
 script="$PWD/tools/checks/ids_lock.sh"
-# nothing from the caller's git: no repository named by the environment (as inside a hook), no settings passed on
-# (`git -c`), no templates, no system settings
-unset $(git rev-parse --local-env-vars) GIT_TEMPLATE_DIR GIT_NAMESPACE GIT_CONFIG_PARAMETERS GIT_CONFIG_COUNT
+# nothing from the caller's git: no repository named by the environment (as inside a hook) and no settings passed on
+# (`git -c`), both in --local-env-vars; no templates of the caller's; no system settings
+unset $(git rev-parse --local-env-vars) GIT_TEMPLATE_DIR GIT_NAMESPACE
 export GIT_CONFIG_NOSYSTEM=1
 root=$(mktemp -d)
 trap 'rm -rf "$root"' EXIT

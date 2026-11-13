@@ -153,6 +153,7 @@ final class ContentRulesTests: XCTestCase, ContentFixtures {
         }
         refused(polity(name("ا" + String(Unicode.Scalar(0xFDD0 as UInt32)!) + "ب")), "polities", row: 0, "unassigned or noncharacter code point")
         refused(polity(name("ا\u{E000}ب")), "polities", row: 0, "a private-use")
+        refused(polity(name("ا" + String(Unicode.Scalar(0x0378 as UInt32)!) + "ب")), "polities", row: 0, "one past Unicode 15.0")
         holds(polity(name("ا\u{200C}ب")), "the zero-width non-joiner")
         holds(polity(name("ا\u{200D}ب")), "the zero-width joiner")
         // each field on its own, named in the problem

@@ -119,12 +119,14 @@ registries; runtime namespace; aliases; ID lock; tag lock»), CI's ID lock on `c
   mark at the start. Alias lines are where each alias starts, and a government's ID in the lock names a registry's
   polity. They fuzzed 270,000 forged files (FV6, which found the layout) and 120,000 more (FV7): 0 traps, and in
   FV7 every file accepted was its content's own bytes.
-- **The fix verifications (FV8, FV9):** a name now takes only characters of Unicode 15.0 or older, the tables of the
-  Swift runtime in iOS 17 and macOS 14, and the characters it refuses are written out as 15.0 has them (a test checks
-  the list against the toolchain's tables), with the 66 noncharacters, which the tables give an age, so the bake and
-  every phone judge a name alike (§3.10; its check on the iOS 17.0 simulator runtime is T-043's). The harakat skip the
-  lookups (a fully vowelled name about 6 times cheaper to check: 26 to 28 ms down to 4.3).
-  - **What FV8 planted:** 62 faults in the content and the engine (56 caught, 1 equivalent, 5 survived), 13 in the
+- **The fix verifications (FV8 to FV11):** a name now takes only characters of Unicode 15.0 or older, the tables of
+  the Swift runtime in iOS 17.0 and macOS 14.0 as they are taken to be (T-043 checks iOS 17.0's on its simulator), and
+  the characters it refuses are written out as 15.0 has them (a test checks the list against the toolchain's tables),
+  with the 66 noncharacters, which the tables give an age, so the bake and every phone judge a name alike, but for a
+  first character whose mark category a later Unicode changes (§3.10). The harakat skip the lookups (on x86-64 Linux
+  at the caps, a fully vowelled name about 6 times cheaper to check: 26 to 28 ms down to 4.3 to 4.9).
+  - **What FV8 planted:** 62 faults in the content and the engine, the engine's 12 among them (56 caught, the engine's
+    all; 1 equivalent; 5 survived), 13 in the
     lock script (9 caught, 2 equivalent, 2 survived) and 12 more on the next commit (9 caught, 1 equivalent, 2
     survived).
   - **The survivors** (a fathatan first, an ISO code twice where it sorts first, a dual of people, a payload length

@@ -5,7 +5,8 @@ import PackageDescription
 
 let package = Package(
     name: "SaneiAlTarikh",
-    // the minimum systems; their Swift runtime's Unicode (15.0) bounds a name's characters: ContentDB.unicodeVersion
+    // the minimum systems; their Swift runtime's Unicode (taken to be 15.0) bounds a name's characters:
+    // ContentDB.unicodeVersion
     platforms: [.iOS(.v17), .macOS(.v14)],
     products: [
         .library(name: "SaneiCore", targets: ["SaneiCore"]),

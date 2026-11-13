@@ -28,8 +28,8 @@ extension ContentDB {
     /// paragraph separator, every format character (a bidi embedding, override, isolate or mark, a zero-width space, a
     /// soft hyphen, a word joiner, a byte-order mark, an annotation mark), every other character Unicode lets a
     /// renderer ignore (a filler, a variation selector, the grapheme joiner) and every private-use code point
-    /// (`hiddenRanges`), the blank braille pattern and the 66 noncharacters (U+FDD0 to U+FDEF, and the last two of every
-    /// plane: never characters, by Unicode's own rule); but the joiners Arabic needs (U+200C, U+200D), which may stand
+    /// (`hiddenRanges`), the blank braille pattern and the 66 noncharacters (U+FDD0 to U+FDEF, and the last two of
+    /// every plane: never characters, by Unicode's own rule); but the joiners Arabic needs (U+200C, U+200D), which may stand
     /// anywhere but at an end; and no character Unicode assigned after `unicodeVersion` (or not at all).
     ///
     /// The bake and the phone must judge a name alike, whatever Unicode their systems carry. So the hidden characters
@@ -82,7 +82,7 @@ extension ContentDB {
     /// runs on. On Apple's systems that runtime is the system's own, not the toolchain's: iOS 17.0 and macOS 14.0 are
     /// taken to carry Swift 5.9's, whose tables are Unicode 15.0 (a later 17.x or 14.x carries 5.10's, 15.0 as well;
     /// the pinned Linux toolchain, Swift 6.0.3, is 15.0 too, and Swift 6.1 is 16.0). Which Unicode each Apple runtime
-    /// carries is from no measurement of ours: T-043 checks it on the iOS 17.0 simulator. Raised only with the minimum
+    /// carries is from no measurement of ours: T-043 checks iOS 17.0's on its simulator; macOS 14.0's stays unchecked. Raised only with the minimum
     /// system (Package.swift, App/project.yml, §3.10), with `hiddenRanges` made again from that version's tables.
     public static let unicodeVersion = (major: 15, minor: 0)
 
