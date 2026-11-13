@@ -71,3 +71,17 @@ postings, the redenomination trigger on aggregates, `USDn` never redenominating.
   row and currency, the ceiling either way) are caught now by a test of the writer's own checks: 4,000 states at and
   around every bound, with a government whose row is not its currency's number, each written exactly when its tree
   loads.
+
+## Approval
+Approved by Claude under the owner's delegation on 2026-11-13 (decisions.json `m1aLedger`). The per-currency ledger with the world account (ADR 0003): each government's accounts in its currency, reserves and
+the world account in dollars, postings by category, transfers, the exchange's margin, redenomination past 2^60 at the
+day's end, the monthly close and its invariants checked exactly; every overflow refused and counted, never clamped;
+wrong units refused by the compiler; a load refuses amounts past 2^60 and rates past ±2^52, and the writer refuses the
+same states.
+- **Reviews:** design fidelity, API and words, errors, heaviness, the tests and planted faults, then a concurrency and
+  determinism review (the first rounds had none) and the verification rounds above; then the branch's rounds FV6 to
+  FV13.
+- **Measured** (x86-64 Linux, not a phone; docs/perf.md): a posting about 12 ns, 0 allocations over 365 days of
+  1,125 money operations a day with 225 governments.
+
+Tests: 219, debug and optimised, warnings as errors; `ci-linux` green on c38208d (run 43435523810).

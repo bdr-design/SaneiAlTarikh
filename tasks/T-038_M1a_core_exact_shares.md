@@ -115,3 +115,9 @@ the review of the approval records), so both were run again on the whole of Sane
   the sheet refuses the repeat.
 - **Its verification (FV6, 2026-11-13):** every test caught its fault; the repeat check now also has a term two rows
   on, and the sheet asserts in debug builds that a term comes once.
+
+## Approval
+Approved by Claude under the owner's delegation on 2026-11-13 (decisions.json `m1aExactShares`). The exact shares and helpers as built and reviewed above (`Pop` among them), with the same rounds as T-036: six lenses,
+verification rounds, the re-run checker and words verification of 2026-11-13, and the branch's rounds FV6 to FV13.
+
+Tests: 219, debug and optimised, warnings as errors; `ci-linux` green on c38208d (run 43435523810).

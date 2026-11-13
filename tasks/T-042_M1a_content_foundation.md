@@ -136,3 +136,13 @@ registries; runtime namespace; aliases; ID lock; tag lock»), CI's ID lock on `c
     toolchain, which knows nothing past 15.0 (letters of 15.1 and 16.0 catch them on a newer one).
   - **Planted again on the fixes:** 18 faults, 16 caught and those 2 equivalent; and 9 in the lock script, all
     caught.
+
+## Approval
+Approved by Claude under the owner's delegation on 2026-11-13 (decisions.json `m1aContentFoundation`). The content foundation: `SaneiContent` (the registries, `ContentDB`, `content.bin` in SaveTree columns with its own
+container and SHA-256, the validator), `SaneiBake` (the strict CSV and JSON readers, the bake), `simcli validate` and
+`bake`, the registries seeded with M1a's cases, `aliases.json`, the ID lock and its CI check with its own test.
+- **Reviews:** the six lenses and the verification rounds recorded above; then the branch's rounds to FV13.
+- **Measured** (x86-64 Linux, not a phone; docs/perf.md): `content.bin` 616 KB at the caps, read and checked in 13 to
+  14 ms; today's registries bake to 4,838 bytes, the same on every build, pinned.
+
+Tests: 219, debug and optimised, warnings as errors; `ci-linux` green on c38208d (run 43435523810).

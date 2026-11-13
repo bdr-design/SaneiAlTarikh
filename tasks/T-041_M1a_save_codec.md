@@ -92,3 +92,20 @@ a reader can skip an unknown field, and whether a held copy keeps the cap's room
   a compressor whose output is no shorter than the payload is stored as it gives it (the compressor's contract asks
   it to answer false then; the platform's comes with T-043), and the writer does not refuse repeated tags or column
   names, or a count past Int32.max (the engine never makes them; the reader refuses them).
+
+## Approval
+Approved by Claude under the owner's delegation on 2026-11-13 (decisions.json `m1aSaveCodec`). The save codec, format 1: `SaveTree`, binary META, the container with its SHA-256, the state's chunks loaded with every
+rule checked, defaults, migrations as column steps, `tags.lock`, the golden save pinned by its SHA-256; the bounds
+12 MB raw, 2 MB compressed (stored as it is past that), 64 KB META; a write that would make a file no load takes
+returns nothing, and the platform keeps the last good save (T-043).
+- **Reviews:** design, API and words, errors, heaviness, determinism and platform, the tests and planted faults, then
+  verification rounds; an API and words review and its verification on 2026-11-13; then the branch's rounds FV6 to
+  FV13. Pushes: the commits up to 4211b32 on the owner's order «ارفع» while a words-only verification was still
+  running (it reported clean), and those up to 352a10e on a second «ارفع» while FV11 ran (its findings fixed and
+  verified after, in 068bdbc and c38208d, pushed once FV13 was clean).
+- **Fuzzed:** over 3 million mutants of a busy save, 0 crashes.
+- **Measured** (x86-64 Linux, not a phone; docs/perf.md): a state at the caps (384 governments, 3,300 provinces, 576
+  waiting commands) makes a 46 to 51 KB file; writing 0.7 to 1.0 ms, reading 1.1 to 1.5 ms; a load's peak within 16 MB
+  in the optimised build at the bounds.
+
+Tests: 219, debug and optimised, warnings as errors; `ci-linux` green on c38208d (run 43435523810).
