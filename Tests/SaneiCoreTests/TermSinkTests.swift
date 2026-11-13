@@ -269,15 +269,17 @@ final class TermSinkTests: XCTestCase {
             }
         }
         let row = (id: TermID(raw: 1), value: Q32(1))
+        // n rows of n different terms, each 1
+        func distinct(_ n: Int) -> [(id: TermID, value: Q32)] { (0..<n).map { (TermID(raw: UInt16($0 + 1)), Q32(1)) } }
         XCTAssertNotNil(TermBuffer12<Q32>(saved: [], hasBase: false, other: nil, total: .zero))
-        XCTAssertNotNil(TermBuffer12<Q32>(saved: [(id: TermID, value: Q32)](repeating: row, count: 12), hasBase: true, other: nil, total: Q32(12)))
-        XCTAssertNotNil(TermBuffer12<Q32>(saved: [(id: TermID, value: Q32)](repeating: row, count: 11), hasBase: false, other: .zero, total: Q32(11)))
-        XCTAssertNil(TermBuffer12<Q32>(saved: [(id: TermID, value: Q32)](repeating: row, count: 13), hasBase: false, other: nil, total: Q32(13)),
+        XCTAssertNotNil(TermBuffer12<Q32>(saved: distinct(12), hasBase: true, other: nil, total: Q32(12)))
+        XCTAssertNotNil(TermBuffer12<Q32>(saved: distinct(11), hasBase: false, other: .zero, total: Q32(11)))
+        XCTAssertNil(TermBuffer12<Q32>(saved: distinct(13), hasBase: false, other: nil, total: Q32(13)),
                      "more rows than the sheet has")
-        XCTAssertNil(TermBuffer12<Q32>(saved: [(id: TermID, value: Q32)](repeating: row, count: 200), hasBase: false, other: nil, total: .zero))
-        XCTAssertNil(TermBuffer12<Q32>(saved: [(id: TermID, value: Q32)](repeating: row, count: 12), hasBase: false, other: Q32(1), total: Q32(13)),
+        XCTAssertNil(TermBuffer12<Q32>(saved: distinct(200), hasBase: false, other: nil, total: .zero))
+        XCTAssertNil(TermBuffer12<Q32>(saved: distinct(12), hasBase: false, other: Q32(1), total: Q32(13)),
                      "«أخرى» beside twelve rows would be thirteen")
-        XCTAssertNil(TermBuffer12<Q32>(saved: [(id: TermID, value: Q32)](repeating: row, count: 10), hasBase: false, other: Q32(1), total: Q32(11)),
+        XCTAssertNil(TermBuffer12<Q32>(saved: distinct(10), hasBase: false, other: Q32(1), total: Q32(11)),
                      "a term is left out only when eleven are kept")
         XCTAssertNil(TermBuffer12<Q32>(saved: [], hasBase: true, other: nil, total: .zero), "a starting level with no rows")
         XCTAssertNil(TermBuffer12<Q32>(saved: [(id: TermID.other, value: Q32(1))], hasBase: false, other: nil, total: Q32(1)),
