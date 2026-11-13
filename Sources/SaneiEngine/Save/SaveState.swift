@@ -4,7 +4,7 @@ import SaneiCore
 // running game keeps (rows within caps, serials given by their counters and never twice, references in range, runs
 // not ahead of the date, the ledger's invariants, the waiting commands in order and within their rooms), so a bad or
 // forged file is refused, never trusted, and a state that loads keeps every rule the game checks. A missing column
-// takes its default (`SaveDefaults`), except the keys every save has; an unknown chunk, an unknown column and a
+// takes its default (`SaveDefaults`), except the required columns; an unknown chunk, an unknown column and a
 // command of an unknown tag are skipped and reported. Each table is one chunk with one row count (the world row's
 // values, the world account's included, are in `WRLD`); a value per account is a column per account, by its stored
 // name, so an account added later is a column added. stdlib only.

@@ -1,8 +1,8 @@
 import SaneiCore
 
 // A game's save (§7): the state's tree in SaneiCore's container. The engine fills the META fields that are the state's
-// (the format, the date, the seed) itself, so a file it writes always reads back; reading migrates an older tree to the
-// current format and loads it with every value checked. stdlib only.
+// (the format, the date, the seed) itself, so a file it writes from a state between days reads back; reading migrates
+// an older tree to the current format and loads it with every value checked. stdlib only.
 //
 // The format version (`WorldState.saveFormat`) rises when a change needs a migration step: a column renamed, dropped,
 // re-typed or re-encoded, units or IDs remapped, a chunk split. A column or chunk only added keeps the format: an older
@@ -27,8 +27,10 @@ public enum SaveCodec {
     /// thread (`sanei.io`, ADR 0001, `threadSpread`) from a copy of the state (a copy is free until a column is written):
     /// never on the simulation's (§3.5).
     /// A save is taken between days, as the host does: then every redenomination mark is cleared (a state posted to
-    /// outside a day and not stepped since may hold one, and its save is refused).
-    public static func write(_ state: WorldState, meta: SaveMeta, compressor: (any SaveCompressor)? = nil) -> [UInt8] {
+    /// outside a day and not stepped since may hold one, and its save is refused). Nil when the state's tree passes
+    /// `SaveFile.mostPayloadBytes`, which a read refuses (a state at the caps makes about 50 KB; §3.5 budgets 8 MB): the
+    /// platform then keeps the last good save and logs it (T-043), never a crash on the I/O thread.
+    public static func write(_ state: WorldState, meta: SaveMeta, compressor: (any SaveCompressor)? = nil) -> [UInt8]? {
         var m = meta
         m.formatVersion = WorldState.saveFormat
         m.date = state.world.date.days
@@ -36,7 +38,9 @@ public enum SaveCodec {
         // a player's government the state never made is left out, so the file reads back
         if let p = m.playerGovernment, !state.governments.wasMade(p) { m.playerGovernment = nil }
         if m.playerSerial == 0 { m.playerRow = 0 }
-        return SaveFile.write(meta: m, payload: state.saveTree().write(), compressor: compressor)
+        let payload = state.saveTree().write()
+        guard payload.count <= SaveFile.mostPayloadBytes else { return nil }
+        return SaveFile.write(meta: m, payload: payload, compressor: compressor)
     }
 
     /// The whole file: checked, decompressed, migrated to the current format and loaded with every value checked.

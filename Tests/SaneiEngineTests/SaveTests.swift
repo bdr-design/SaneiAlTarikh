@@ -95,7 +95,7 @@ final class SaveTests: XCTestCase {
         XCTAssertGreaterThan(sim.state.world.ledgerFailures, 0)
         XCTAssertEqual(sim.state.currencies.redenominations[2], 1)
         XCTAssertEqual(sim.pending.count, 5)
-        let bytes = SaveCodec.write(sim.state, meta: meta(sim.state))
+        let bytes = SaveCodec.write(sim.state, meta: meta(sim.state))!
         let loaded = try SaveCodec.read(bytes).get()
         XCTAssertEqual(loaded.state, sim.state)
         XCTAssertEqual(loaded.state.hash, sim.state.hash)
@@ -127,7 +127,7 @@ final class SaveTests: XCTestCase {
         m.rulesHash = [1, 2, 3]
         m.date = 5
         m.seed = 6
-        let loaded = try SaveCodec.read(SaveCodec.write(sim.state, meta: m)).get()
+        let loaded = try SaveCodec.read(SaveCodec.write(sim.state, meta: m)!).get()
         XCTAssertLessThanOrEqual(loaded.meta.playerName.utf8.count, SaveMeta.mostTextBytes)
         XCTAssertTrue(loaded.meta.playerName.allSatisfy { $0 == "م" })
         XCTAssertEqual(loaded.meta.rulesHash, [])
@@ -225,10 +225,13 @@ final class SaveTests: XCTestCase {
         XCTAssertTrue(sim.state.governments.counter.hasGiven(pastRows.serial))
         XCTAssertFalse(sim.state.governments.wasMade(pastRows))
         XCTAssertEqual(sim.submit(IssuedCommand(day: d, issuer: .ai(row0), sequence: 9, command: .setTaxRate(government: pastRows, rate: .zero))), .invalid)
+        // a dissolve that hands its provinces to a government never made
+        XCTAssertEqual(sim.submit(IssuedCommand(day: d, issuer: .ai(row0), sequence: 9,
+                                                command: .dissolveGovernment(government: row0, provincesTo: GovRef(row: Idx(raw: 50), serial: Serial(raw: 4_000_000))))), .invalid)
         let never = GovRef(row: Idx(raw: 50), serial: Serial(raw: 4_000_000))
         XCTAssertEqual(sim.submit(IssuedCommand(day: d, issuer: .ai(row0), sequence: 9, command: .setTaxRate(government: never, rate: .zero))), .invalid)
         XCTAssertEqual(sim.submit(IssuedCommand(day: d, issuer: .ai(row0), sequence: 10, command: .setTaxRate(government: row0, rate: .zero))), .queued)
-        XCTAssertEqual(try SaveCodec.read(SaveCodec.write(sim.state, meta: meta(sim.state))).get().state, sim.state)
+        XCTAssertEqual(try SaveCodec.read(SaveCodec.write(sim.state, meta: meta(sim.state))!).get().state, sim.state)
     }
 
     /// META's own report reaches the full read's report.
@@ -360,7 +363,7 @@ final class SaveTests: XCTestCase {
         // META's player must be a government the game made
         var m = meta(base)
         m.playerGovernment = GovRef(row: Idx(raw: 9_000), serial: Serial(raw: 77_777))
-        XCTAssertNil(try SaveCodec.read(SaveCodec.write(base, meta: m)).get().meta.playerGovernment, "left out by the writer")
+        XCTAssertNil(try SaveCodec.read(SaveCodec.write(base, meta: m)!).get().meta.playerGovernment, "left out by the writer")
         m.formatVersion = WorldState.saveFormat
         m.date = base.world.date.days
         m.seed = base.world.seed
@@ -368,7 +371,7 @@ final class SaveTests: XCTestCase {
         XCTAssertEqual(SaveCodec.read(forged).failureValue, .badMeta, "and refused when a file names it")
         forged.removeAll()
         // a flag this version does not know refuses the file
-        var flagged = SaveCodec.write(base, meta: meta(base))
+        var flagged = SaveCodec.write(base, meta: meta(base))!
         flagged[11] = 1
         flagged.replaceSubrange((flagged.count - 32)..., with: SHA256.hash(flagged, 0..<(flagged.count - 32)))
         XCTAssertEqual(SaveCodec.read(flagged).failureValue, .newerContainer(1))
@@ -379,7 +382,7 @@ final class SaveTests: XCTestCase {
     func testForgedFilesNeverCrashAndWhatLoadsHolds() {
         let sim = Self.busyWorld()
         let raw = sim.state.saveTree().write()
-        guard case let .success(read) = SaveFile.readMeta(SaveCodec.write(sim.state, meta: meta(sim.state))) else { return XCTFail() }
+        guard case let .success(read) = SaveFile.readMeta(SaveCodec.write(sim.state, meta: meta(sim.state))!) else { return XCTFail() }
         let goodMeta = read.meta
         var r = DetRNG(seed: 4, key: 0, stream: 0, serial: 0)
         var loaded = 0
@@ -396,13 +399,13 @@ final class SaveTests: XCTestCase {
             let file = SaveFile.write(meta: goodMeta, payload: b)
             guard case let .success(x) = SaveCodec.read(file) else { continue }
             loaded += 1
-            guard case let .success(y) = SaveCodec.read(SaveCodec.write(x.state, meta: x.meta)) else { XCTFail("what loads saves again"); continue }
+            guard case let .success(y) = SaveCodec.read(SaveCodec.write(x.state, meta: x.meta)!) else { XCTFail("what loads saves again"); continue }
             XCTAssertEqual(y.state, x.state)
             var go = Simulation(state: x.state)
             go.advance(days: 30)
         }
         XCTAssertLessThan(loaded, 1_500)
-        XCTAssertEqual(SaveCodec.read(Array(SaveCodec.write(sim.state, meta: goodMeta).prefix(10))).failureValue, .truncated)
+        XCTAssertEqual(SaveCodec.read(Array(SaveCodec.write(sim.state, meta: goodMeta)!.prefix(10))).failureValue, .truncated)
         XCTAssertEqual(SaveCodec.read(Array("NOTASAVE and more bytes".utf8)).failureValue, .notASave)
     }
 
@@ -419,13 +422,13 @@ final class SaveTests: XCTestCase {
             func decompress(_ bytes: ArraySlice<UInt8>, rawLength: Int) -> [UInt8]? { nil }
         }
         let sim = Self.busyWorld()
-        let bytes = SaveCodec.write(sim.state, meta: meta(sim.state), compressor: Reverse())
+        let bytes = SaveCodec.write(sim.state, meta: meta(sim.state), compressor: Reverse())!
         XCTAssertEqual(SaveCodec.read(bytes).failureValue, .compressionUnavailable(1))
         XCTAssertEqual(try SaveCodec.read(bytes, decompressor: Reverse()).get().state, sim.state)
         // a compressor that fails leaves the payload stored as it is: the file still reads, without one
-        let plain = SaveCodec.write(sim.state, meta: meta(sim.state), compressor: Failing())
+        let plain = SaveCodec.write(sim.state, meta: meta(sim.state), compressor: Failing())!
         XCTAssertEqual(try SaveCodec.read(plain).get().state, sim.state)
-        XCTAssertEqual(plain, SaveCodec.write(sim.state, meta: meta(sim.state)))
+        XCTAssertEqual(plain, SaveCodec.write(sim.state, meta: meta(sim.state))!)
         // the saves list learns how much of a file to read from its first 16 bytes
         let prefix = try SaveFile.metaPrefixLength(Array(bytes.prefix(16))).get()
         XCTAssertEqual(try SaveFile.readMeta(Array(bytes.prefix(prefix))).get().meta.playerName, "مصر")
@@ -463,7 +466,7 @@ final class SaveTests: XCTestCase {
         if ProcessInfo.processInfo.environment["SANEI_WRITE_GOLDEN"] == "1" && !FileManager.default.fileExists(atPath: url.path) {
             let s = Self.busyWorld().state
             goldenMeta.playerGovernment = s.governments.ref(3)
-            try Data(SaveCodec.write(s, meta: goldenMeta)).write(to: url)
+            try Data(SaveCodec.write(s, meta: goldenMeta)!).write(to: url)
         }
         let bytes = [UInt8](try Data(contentsOf: url))
         XCTAssertEqual(hex(SHA256.hash(bytes)), Self.format1GoldenSHA256, "the golden save is never rewritten")

@@ -157,6 +157,26 @@ final class SaveRulesTests: XCTestCase {
         refused("an AI's order naming a government never made") { t in
             set(&t, items(t) + [bytes(IssuedCommand(day: last, issuer: .ai(g3), sequence: 1, command: .setTaxRate(government: never, rate: .zero)))])
         }
+        refused("a dissolve handing its provinces to a government never made") { t in
+            set(&t, items(t) + [bytes(IssuedCommand(day: last, issuer: .ai(g3), sequence: 1,
+                                                    command: .dissolveGovernment(government: g3, provincesTo: never)))])
+        }
+        // format 1's queue holds 576 items, a later build's commands included (skipped here): 577 is refused by that
+        // bound alone, as the known ones stay within their rooms
+        func unknown(_ k: Int) -> [UInt8] {
+            var w = ByteWriter()
+            w.zigzag(Int64(last.days)); w.u8(1); w.varint(UInt64(5_000 + k)); w.fixed(UInt16(9_999), as: UInt16.self)
+            return w.bytes
+        }
+        func padded(_ n: Int) -> SaveTree {
+            var t = tree
+            set(&t, items(t) + (0..<(n - items(t).count)).map(unknown))
+            return t
+        }
+        var report = SaveReport()
+        XCTAssertNotNil(WorldState.load(padded(576), report: &report), "576 items, the unknown ones skipped")
+        XCTAssertEqual(report.skippedCommands, 576 - base.pending.count)
+        XCTAssertNil(load(padded(577)))
     }
 
     /// The tree's own rules.
@@ -185,7 +205,7 @@ final class SaveRulesTests: XCTestCase {
                      "values that end before the column's bytes do")
         XCTAssertNil(SaveColumn(name: "x", type: .bool, encoding: .raw, count: 1, data: [2]).flags(atMost: 4), "a flag of 2")
         // reading copies nothing: a column read from a file's bytes points into them
-        let file = SaveCodec.write(base, meta: SaveMeta())
+        let file = SaveCodec.write(base, meta: SaveMeta())!
         guard case let .success(o) = SaveFile.open(file), let t = SaveTree.read(o.payload, o.range) else { return XCTFail() }
         let fileStart = file.withUnsafeBufferPointer { UInt(bitPattern: $0.baseAddress) }
         let colStart = t.chunks[0].columns[0].buffer.withUnsafeBufferPointer { UInt(bitPattern: $0.baseAddress) }

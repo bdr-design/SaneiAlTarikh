@@ -14,7 +14,8 @@ listed under each, so a deferred item always has a place that exists.
 - **T-043: the platform's saves.** Raw DEFLATE with Apple's Compression (a `SaveCompressor` of `.rawDeflate`) and the
   device fixture read on Linux; storage in `Documents/Saves`, atomic writes (temp, fsync, rename, verify, «last
   good»), autosave rotation, the mirror (D-28), export and import, the saves list from `SaveFile.readMeta`, corrupt
-  files shown as «تالف»; the rules-hash message «تغيّرت قواعد اللعبة منذ هذا الحفظ» once. The bytes made from a copy
+  files shown as «تالف»; a write that returns nothing (a tree past 12 MB) keeps the last good save and is logged;
+  the rules-hash message «تغيّرت قواعد اللعبة منذ هذا الحفظ» once. The bytes made from a copy
   of the state handed from the simulation's thread (§3.5: a stall of at most 2 ms) and made on the I/O thread
   `sanei.io` (ADR 0001, `threadSpread`): the tree, DEFLATE, the SHA-256 and the file; the platform checks a file's
   size before reading it, reads it into one buffer, and reads only `SaveFile.metaPrefixLength` bytes for the list;
@@ -39,7 +40,8 @@ listed under each, so a deferred item always has a place that exists.
 - **T-047: every column group for M1 to M6 declared** (§9's M1a checklist): polities, governments, actors, party rows,
   group rows, currencies and accounts, the equipment pool and allocations, the reserve pool, front sectors, the pair
   extension with epochs, climate, single-year cohorts, each with its defaults and its save columns (an added column
-  keeps format 1; the golden save's list of added columns grows).
+  keeps format 1; the golden save's list of added columns grows); the loader reads each column straight into its
+  typed column (no whole-number copy: today's peak is about 3 times the typed state, docs/perf.md).
 
 Placed elsewhere: the notification ring and the record of refused orders for screen 26 (M1c, the notification
 centre); the player's worked-out data for a queued order, in a side table of 64 slots keyed by the command's key (M1c,

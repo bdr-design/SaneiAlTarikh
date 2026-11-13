@@ -156,11 +156,12 @@ public enum SaveFile {
     public static let containerVersion: UInt16 = 1
     /// The most bytes a payload may hold, raw and stored: §3.5's 8 MB raw for a save, with half again as margin. A file
     /// past it is refused before it is hashed, and a decompressor is asked for no more; with `mostCompressedBytes`, a
-    /// load's peak stays within §7's footprint plus 16 MB whatever the file says.
+    /// load's peak stays within §7's footprint plus 16 MB whatever the file says (15 MB of payload, META's 64 KB and
+    /// the loader's working columns, about 0.3 MB at the caps).
     public static let mostPayloadBytes = 12 << 20
-    /// The most stored bytes of a compressed payload: §3.5's 2 MB compressed for a save, twice over, so the stored and
-    /// the raw bytes of a compressed file together stay within §7's footprint plus 16 MB.
-    public static let mostCompressedBytes = 4 << 20
+    /// The most stored bytes of a compressed payload: §3.5's 2 MB compressed for a save, with half again as margin, so
+    /// the stored and the raw bytes of a compressed file together are 15 MB at most (checked after the hash).
+    public static let mostCompressedBytes = 3 << 20
     public static let mostMetaBytes = 1 << 16
     static let headerBytes = 8 + 2 + 1 + 1 + 4
 
@@ -213,7 +214,7 @@ public enum SaveFile {
         w.fixed(UInt64(0), as: UInt64.self)
         let payloadAt = w.bytes.count
         let made = compressor?.compress(payload, appendingTo: &w.bytes) ?? false
-        precondition(w.bytes.count >= payloadAt, "a compressor only appends to the bytes it is handed")
+        precondition(w.bytes.count >= payloadAt, "a compressor never shortens the bytes it is handed")
         if made, let c = compressor, w.bytes.count - payloadAt <= mostCompressedBytes {
             w.bytes[codeAt] = c.compression.rawValue
         } else {

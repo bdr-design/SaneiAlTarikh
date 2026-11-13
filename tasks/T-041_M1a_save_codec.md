@@ -39,14 +39,16 @@ a reader can skip an unknown field, and whether a held copy keeps the cap's room
   - `SaveCodec`: the state in the container; the engine fills META's format, date and seed from the state, so a file
     it writes from a state between days always reads back (a player's government it never made is left out);
     compression is a byte (0 none, 1 raw DEFLATE), handed in by the platform (T-043); a compressor that fails, or
-    whose bytes pass the 4 MB a read keeps, leaves the payload stored as it is.
+    whose bytes pass the 3 MB a read keeps, leaves the payload stored as it is; a state whose tree passes 12 MB
+    writes nothing (nil), so the platform keeps the last save.
   - `tags.lock` at the root: every stored number, checked by a test both ways.
   - Migrations: `SaveMigrations[n → n+1]` as column-level steps (add, rename, drop a column; add a chunk); format 1
     has none; a test runs a made-up format-0 tree through a step.
 - A golden save of format 1 in `Tests/SaneiEngineTests/Golden/`, made final on 2026-11-12 after the reviews (every
   counter and META field a value of its own) and never rewritten since: its SHA-256 is pinned in the test; a test
   loads it with nothing skipped or defaulted, checks values written in the test, and checks the current format writes
-  it back to its own bytes. The format policy (what bumps the format) is in §7 and in `SaveCodec.swift`.
+  it back column by column, META's included, each column's bytes equal (columns added since are listed). The format
+  policy (what bumps the format) is in §7 and in `SaveCodec.swift`.
 - Out of scope, each with its place (tasks/BACKLOG.md): raw DEFLATE (App/Platform with Apple's Compression, and the
   device fixture read on Linux: T-043); storage, atomic writes, autosave rotation, the mirror and export
   (App/Platform, T-043); the peak-load test on a 90-year save, the start, mid-war and 30-year golden saves (when the
@@ -71,8 +73,9 @@ a reader can skip an unknown field, and whether a held copy keeps the cap's room
    serials past a counter, references out of range, a queue out of order, a wrong SHA-256) is refused, never trusted,
    and never crashes (a fuzz test).
 5. META is read without decoding the payload.
-6. SHA-256 matches the published vectors; the golden save of format 1 loads, holds its written values and is the
-   current format's bytes; every stored number is in `tags.lock`.
+6. SHA-256 matches the published vectors; the golden save of format 1 loads, holds its written values, its SHA-256 is
+   the pinned one, and the current format writes each of its columns to the same bytes (META's included); every
+   stored number is in `tags.lock`.
 7. Writing sizes its output once; reading copies no payload; both bounded by the caps (measured at the caps:
    docs/perf.md).
 8. Six independent read-only reviews; every confirmed finding fixed; verification reviews of the fixes; nothing pushed

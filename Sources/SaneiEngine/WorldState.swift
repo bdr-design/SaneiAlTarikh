@@ -31,8 +31,8 @@ public struct WorldRow: Sendable, Equatable {
     /// dollar leg comes to 0 or would pass the range. Money never vanishes silently and never clamps: each refusal is
     /// counted here.
     public internal(set) var refusedPostings: UInt32
-    /// Commands of the AI and events refused when submitted (late, full, a key taken, unwritable, an issuer never made, a
-    /// player's or AI's command naming a government never made;
+    /// Commands of the AI and events refused when submitted (late, full, a key taken, unwritable, an issuer never made, an
+    /// AI's command naming a government never made;
     /// one whose government ended is refused on its day, in `refusedCommands`): kept in the state so no effect is
     /// dropped without a trace. The player's refusals are shown to the player.
     public internal(set) var refusedSubmits: UInt32

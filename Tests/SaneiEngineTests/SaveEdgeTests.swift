@@ -14,7 +14,7 @@ final class SaveEdgeTests: XCTestCase {
     /// The bounds the file keeps are the documented ones (§3.5, §7).
     func testTheBoundsAreTheDocumentedOnes() {
         XCTAssertEqual(SaveFile.mostPayloadBytes, 12 << 20, "§3.5's 8 MB raw and half again")
-        XCTAssertEqual(SaveFile.mostCompressedBytes, 4 << 20, "§3.5's 2 MB compressed, twice over")
+        XCTAssertEqual(SaveFile.mostCompressedBytes, 3 << 20, "§3.5's 2 MB compressed and half again")
         XCTAssertEqual(SaveFile.mostMetaBytes, 1 << 16)
         XCTAssertEqual(SaveTree.mostChunks, 64)
         XCTAssertEqual(SaveTree.mostColumns, 96)
@@ -28,7 +28,7 @@ final class SaveEdgeTests: XCTestCase {
             func compress(_ bytes: [UInt8], appendingTo out: inout [UInt8]) -> Bool { out.append(0xAA); out.append(contentsOf: bytes); return true }
             func decompress(_ bytes: ArraySlice<UInt8>, rawLength: Int) -> [UInt8]? { bytes.count == rawLength + 1 ? Array(bytes.dropFirst()) : nil }
         }
-        let file = SaveCodec.write(base, meta: meta(), compressor: Padded())
+        let file = SaveCodec.write(base, meta: meta(), compressor: Padded())!
         XCTAssertEqual(file[10], SaveCompression.rawDeflate.rawValue)
         XCTAssertEqual(try SaveCodec.read(file, decompressor: Padded()).get().state, base)
     }
@@ -47,12 +47,21 @@ final class SaveEdgeTests: XCTestCase {
             func decompress(_ bytes: ArraySlice<UInt8>, rawLength: Int) -> [UInt8]? { Array(bytes.prefix(rawLength)) }
         }
         let atBound = Sized(size: SaveFile.mostCompressedBytes)
-        let kept = SaveCodec.write(base, meta: meta(), compressor: atBound)
+        let kept = SaveCodec.write(base, meta: meta(), compressor: atBound)!
         XCTAssertEqual(kept[10], SaveCompression.rawDeflate.rawValue)
         XCTAssertEqual(try SaveCodec.read(kept, decompressor: atBound).get().state, base)
-        let past = SaveCodec.write(base, meta: meta(), compressor: Sized(size: SaveFile.mostCompressedBytes + 1))
+        let past = SaveCodec.write(base, meta: meta(), compressor: Sized(size: SaveFile.mostCompressedBytes + 1))!
         XCTAssertEqual(past[10], SaveCompression.none.rawValue)
         XCTAssertEqual(try SaveCodec.read(past).get().state, base)
+        // a file another writer made, with one stored byte more than the bound: refused before the decompressor is
+        // asked, though this decompressor would make the payload from it
+        var forged = kept
+        forged.insert(0, at: forged.count - 32)
+        let at = SaveFile.headerBytes + metaLength(forged) + 8
+        let stored = UInt64(SaveFile.mostCompressedBytes + 1)
+        for k in 0..<8 { forged[at + k] = UInt8(truncatingIfNeeded: stored >> UInt64(8 * k)) }
+        reseal(&forged)
+        XCTAssertEqual(SaveCodec.read(forged, decompressor: atBound).failureValue, .badPayload)
     }
 
     /// A compressed file whose raw length is the bound opens; one byte more is refused before the decompressor is asked.
@@ -62,7 +71,7 @@ final class SaveEdgeTests: XCTestCase {
             func compress(_ bytes: [UInt8], appendingTo out: inout [UInt8]) -> Bool { out.append(contentsOf: bytes); return true }
             func decompress(_ bytes: ArraySlice<UInt8>, rawLength: Int) -> [UInt8]? { [UInt8](repeating: 0, count: rawLength) }
         }
-        let file = SaveCodec.write(base, meta: meta(), compressor: Zeros())
+        let file = SaveCodec.write(base, meta: meta(), compressor: Zeros())!
         let at = SaveFile.headerBytes + metaLength(file)
         func withRaw(_ n: Int) -> [UInt8] {
             var b = file
@@ -77,7 +86,7 @@ final class SaveEdgeTests: XCTestCase {
 
     /// The saves list's prefix: from 16 bytes, from the whole file, and each refusal of the header.
     func testTheSavesListsPrefix() throws {
-        let file = SaveCodec.write(base, meta: meta())
+        let file = SaveCodec.write(base, meta: meta())!
         let first16 = Array(file.prefix(16))
         XCTAssertEqual(try SaveFile.metaPrefixLength(first16).get(), 16 + metaLength(file))
         XCTAssertEqual(try SaveFile.metaPrefixLength(file).get(), 16 + metaLength(file), "a header with its META")
@@ -124,7 +133,7 @@ final class SaveEdgeTests: XCTestCase {
         m.playerSerial = 0
         var r = SaveReport()
         XCTAssertEqual(SaveMeta.read(m.chunk, report: &r)?.playerRow, 0, "read")
-        let file = SaveCodec.write(base, meta: m)
+        let file = SaveCodec.write(base, meta: m)!
         let tree = try XCTUnwrap(SaveTree.read(file, SaveFile.headerBytes..<(SaveFile.headerBytes + metaLength(file))))
         XCTAssertEqual(tree.chunks[0].column("playerRow")?.values(UInt64.self, as: .u16, atMost: 1), [0], "written")
     }
@@ -136,9 +145,9 @@ final class SaveEdgeTests: XCTestCase {
         XCTAssertTrue(base.governments.counter.hasGiven(ahead.serial))
         XCTAssertFalse(base.governments.wasMade(ahead))
         m.playerGovernment = ahead
-        XCTAssertNil(try SaveCodec.read(SaveCodec.write(base, meta: m)).get().meta.playerGovernment)
+        XCTAssertNil(try SaveCodec.read(SaveCodec.write(base, meta: m)!).get().meta.playerGovernment)
         m.playerGovernment = base.governments.ref(1)
-        XCTAssertEqual(try SaveCodec.read(SaveCodec.write(base, meta: m)).get().meta.playerGovernment, base.governments.ref(1))
+        XCTAssertEqual(try SaveCodec.read(SaveCodec.write(base, meta: m)!).get().meta.playerGovernment, base.governments.ref(1))
     }
 
     /// An items column ends with its last item: a byte after it refuses the column.
