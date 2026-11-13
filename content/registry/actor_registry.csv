@@ -1,0 +1,7 @@
+id,polity,kind,name,short,gender,number,definite,withLi,withBi,evidence
+act.sdn.ncp,sdn,party,حزب المؤتمر الوطني,المؤتمر الوطني,m,singular,1,لحزب المؤتمر الوطني,بحزب المؤتمر الوطني,src.parties2011
+act.sdn.splm,sdn,party,الحركة الشعبية لتحرير السودان,الحركة الشعبية,f,singular,1,للحركة الشعبية لتحرير السودان,بالحركة الشعبية لتحرير السودان,src.parties2011
+act.egy.ndp,egy,party,الحزب الوطني الديمقراطي,الحزب الوطني,m,singular,1,للحزب الوطني الديمقراطي,بالحزب الوطني الديمقراطي,src.parties2011
+act.civ.fpi,civ,party,الجبهة الشعبية الإيفوارية,الجبهة الشعبية,f,singular,1,للجبهة الشعبية الإيفوارية,بالجبهة الشعبية الإيفوارية,src.parties2011
+act.civ.rdr,civ,party,تجمع الجمهوريين,تجمع الجمهوريين,m,singular,1,لتجمع الجمهوريين,بتجمع الجمهوريين,src.parties2011
+act.lby.ntc,lby,institution,المجلس الوطني الانتقالي,المجلس الانتقالي,m,singular,1,للمجلس الوطني الانتقالي,بالمجلس الوطني الانتقالي,src.parties2011

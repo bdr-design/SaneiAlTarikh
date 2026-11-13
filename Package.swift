@@ -10,6 +10,9 @@ let package = Package(
         .library(name: "SaneiCore", targets: ["SaneiCore"]),
         .library(name: "SaneiRuntime", targets: ["SaneiRuntime"]),
         .library(name: "SaneiEngine", targets: ["SaneiEngine"]),
+        .library(name: "SaneiContent", targets: ["SaneiContent"]),
+        // the offline tools; SaneiBake (JSON and CSV) is linked by simcli and the tests only, never by the app (L2)
+        .executable(name: "simcli", targets: ["simcli"]),
     ],
     targets: [
         // stdlib only, never Foundation (§2.2)
@@ -18,10 +21,16 @@ let package = Package(
         .target(name: "SaneiRuntime", path: "Sources/SaneiRuntime"),
         // the simulation (no Foundation: its executor comes from outside)
         .target(name: "SaneiEngine", dependencies: ["SaneiCore"], path: "Sources/SaneiEngine"),
+        // the content's readers and the validator (stdlib only, no JSON: L2)
+        .target(name: "SaneiContent", dependencies: ["SaneiCore"], path: "Sources/SaneiContent"),
+        // the strict CSV and JSON loaders and the baker (Foundation; never in the app)
+        .target(name: "SaneiBake", dependencies: ["SaneiCore", "SaneiContent"], path: "Sources/SaneiBake"),
+        .executableTarget(name: "simcli", dependencies: ["SaneiBake"], path: "Sources/simcli"),
         .testTarget(name: "SaneiCoreTests", dependencies: ["SaneiCore"], path: "Tests/SaneiCoreTests"),
+        .testTarget(name: "SaneiContentTests", dependencies: ["SaneiContent", "SaneiBake"], path: "Tests/SaneiContentTests"),
         .testTarget(name: "SaneiRuntimeTests", dependencies: ["SaneiRuntime"], path: "Tests/SaneiRuntimeTests"),
         // the golden saves are read by path, not bundled
-        .testTarget(name: "SaneiEngineTests", dependencies: ["SaneiEngine", "SaneiRuntime"], path: "Tests/SaneiEngineTests", exclude: ["Golden"]),
+        .testTarget(name: "SaneiEngineTests", dependencies: ["SaneiEngine", "SaneiRuntime", "SaneiContent"], path: "Tests/SaneiEngineTests", exclude: ["Golden"]),
     ],
     swiftLanguageModes: [.v6]
 )

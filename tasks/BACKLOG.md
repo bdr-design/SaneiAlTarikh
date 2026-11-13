@@ -3,14 +3,18 @@
 Each becomes a card with acceptance criteria before its work starts (PROCESS.md). The items other cards place here are
 listed under each, so a deferred item always has a place that exists.
 
-- **T-042: content and the start.** The content loader, validator and baker; content IDs and the `IDxx` lists,
-  `aliases.json` and `remapIDs`; the polity, actor, group and currency registries; dormant polities and ending a
-  polity; the lifecycle effects beyond succession and dissolution (independence, unification, recognition, annexation
-  `Annex`, an effect that gives provinces held by nobody, polities made after the start); starting slots spread evenly
-  across the 28; the scenario's set-up of the start state (directly, not through commands) with its amounts within
-  2^60; the day-1 closure in LCU and in USD and §8's `--t0` closure; the stub packs and how a dissolved state's money
-  and debts are shared out; the start golden save; META's player as a content ID, and its `rulesHash` and
-  `scenarioHash` filled from `content.bin` and the scenario file.
+- **T-042: the content foundation** (card: tasks/T-042_M1a_content_foundation.md): `SaneiContent` (`ContentDB`,
+  `ContentFile`, the validator), `SaneiBake` (the strict CSV and JSON readers, the baker), `simcli validate` and
+  `bake`, the registries (polities, actors, groups, currencies) seeded with M1a's cases, `aliases.json`, the ID lock.
+- **T-048: the start.** Content IDs in the save (`IDxx`) and `remapIDs`; dormant polities and ending a polity; the
+  lifecycle effects beyond succession and dissolution (independence, unification, recognition, annexation `Annex`, an
+  effect that gives provinces held by nobody, polities made after the start); starting slots spread evenly across the
+  28; the scenario's set-up of the start state (directly, not through commands) with its amounts within 2^60, from
+  `scenario-*.bin` and each scenario's `governments.csv` (rival and exile governments); the day-1 closure in LCU and in
+  USD and §8's `--t0` closure; how a dissolved state's money and debts are shared out; the start golden save; META's
+  player as a content ID, and its `rulesHash` and `scenarioHash` filled from `content.bin` and the scenario file.
+- **T-049: the stub packs and the effect vocabulary's schema** (§5.9): the packs for 2026, 1990, 1985 and 1979 (CI
+  parses each), every effect exercised by them, the validator's rules on events and templates (agreement selectors).
 - **T-043: the platform's saves.** Raw DEFLATE with Apple's Compression (a `SaveCompressor` of `.rawDeflate`) and the
   device fixture read on Linux; storage in `Documents/Saves`, atomic writes (temp, fsync, rename, verify, «last
   good»), autosave rotation, the mirror (D-28), export and import, the saves list from `SaveFile.readMeta`, corrupt

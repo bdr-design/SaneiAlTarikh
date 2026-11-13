@@ -1,0 +1,8 @@
+id,iso,kind,name,short,gender,number,definite,withLi,withBi,evidence
+cur.sdg,SDG,national,الجنيه السوداني,الجنيه السوداني,m,singular,1,للجنيه السوداني,بالجنيه السوداني,src.iso4217
+cur.ssp,SSP,national,جنيه جنوب السودان,جنيه جنوب السودان,m,singular,1,لجنيه جنوب السودان,بجنيه جنوب السودان,src.iso4217
+cur.xof,XOF,union,فرنك غرب أفريقيا,فرنك غرب أفريقيا,m,singular,1,لفرنك غرب أفريقيا,بفرنك غرب أفريقيا,src.iso4217
+cur.lyd,LYD,national,الدينار الليبي,الدينار الليبي,m,singular,1,للدينار الليبي,بالدينار الليبي,src.iso4217
+cur.egp,EGP,national,الجنيه المصري,الجنيه المصري,m,singular,1,للجنيه المصري,بالجنيه المصري,src.iso4217
+cur.iqd,IQD,national,الدينار العراقي,الدينار العراقي,m,singular,1,للدينار العراقي,بالدينار العراقي,src.iso4217
+cur.usd,USD,national,الدولار الأمريكي,الدولار,m,singular,1,للدولار الأمريكي,بالدولار الأمريكي,src.iso4217

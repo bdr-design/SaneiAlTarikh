@@ -4,9 +4,9 @@ name: ci-linux
 on:
   push:
     branches: [main, 'claude/**']
-    paths: ['Package.swift', 'Sources/**', 'Tests/**', 'App/**', '.github/workflows/ci-linux.yml', 'tools/checks/**', 'tags.lock']
+    paths: ['Package.swift', 'Sources/**', 'Tests/**', 'App/**', '.github/workflows/ci-linux.yml', 'tools/checks/**', 'tags.lock', 'content/**']
   pull_request:
-    paths: ['Package.swift', 'Sources/**', 'Tests/**', 'App/**', '.github/workflows/ci-linux.yml', 'tools/checks/**', 'tags.lock']
+    paths: ['Package.swift', 'Sources/**', 'Tests/**', 'App/**', '.github/workflows/ci-linux.yml', 'tools/checks/**', 'tags.lock', 'content/**']
   workflow_dispatch:
 concurrency:
   group: ci-linux-${{ github.ref }}
@@ -24,8 +24,8 @@ jobs:
           set -e
           if find . -name '*.xcodeproj' -o -name '*.xcworkspace' | grep -q .; then
             echo "No Xcode project in the tree: XcodeGen makes it from App/project.yml"; exit 1; fi
-          # imports: an allow list. SaneiCore imports nothing; SaneiEngine only SaneiCore (any attribute, access level or
-          # kind). Each file is read with trailing // comments cut and statements split at ';'.
+          # imports: an allow list. SaneiCore imports nothing; SaneiEngine and SaneiContent only SaneiCore (any attribute,
+          # access level or kind). Each file is read with trailing // comments cut and statements split at ';'.
           # Known gaps: an import split over two lines; a // inside a string literal.
           IMP='^\s*(@\w+(\([^)]*\))?\s+)*((public|internal|package|private|fileprivate)\s+)?import\s'
           stmts() { sed -E 's://.*$::; s/;/\n/g' "$1"; }
@@ -33,14 +33,24 @@ jobs:
           for f in $(find Sources/SaneiCore -name '*.swift'); do
             o=$(stmts "$f" | grep -nE "$IMP" || true); [ -n "$o" ] && bad="$bad$f: $o"$'\n'
           done
-          for f in $(find Sources/SaneiEngine -name '*.swift'); do
+          for f in $(find Sources/SaneiEngine Sources/SaneiContent -name '*.swift'); do
             o=$(stmts "$f" | grep -nE "$IMP" | grep -vE 'import\s+(\w+\s+)?SaneiCore(\.\w+)*\s*$' || true); [ -n "$o" ] && bad="$bad$f: $o"$'\n'
           done
-          if [ -n "$bad" ]; then echo "$bad"; echo "SaneiCore imports nothing and SaneiEngine only SaneiCore: the standard library only (§2.2)"; exit 1; fi
-          # the simulation's sources: SaneiCore's numbers and the engine built on them
-          SIM="Sources/SaneiCore Sources/SaneiEngine"
+          if [ -n "$bad" ]; then echo "$bad"; echo "SaneiCore imports nothing; SaneiEngine and SaneiContent only SaneiCore: the standard library only (§2.2)"; exit 1; fi
+          # JSON and SaneiBake stay offline (L2): JSON only in SaneiBake, and only simcli and the tests import SaneiBake
+          off=""
+          for f in $(find Sources App -name '*.swift' -not -path 'Sources/SaneiBake/*'); do
+            o=$(sed -E 's://.*$::' "$f" | grep -nE '\bJSON(Serialization|Decoder|Encoder)\b' || true); [ -n "$o" ] && off="$off$f: $o"$'\n'
+          done
+          for f in $(find Sources App -name '*.swift' -not -path 'Sources/SaneiBake/*' -not -path 'Sources/simcli/*'); do
+            o=$(stmts "$f" | grep -nE "$IMP" | grep -E 'import\s+(\w+\s+)?SaneiBake\b' || true); [ -n "$o" ] && off="$off$f: $o"$'\n'
+          done
+          if grep -nE 'SaneiBake' App/project.yml; then off="${off}App/project.yml links SaneiBake"$'\n'; fi
+          if [ -n "$off" ]; then echo "$off"; echo "Nothing is parsed on the phone: JSON lives only in SaneiBake, which only simcli and the tests link (L2)"; exit 1; fi
+          # the simulation's sources: SaneiCore's numbers, the content and the engine built on them
+          SIM="Sources/SaneiCore Sources/SaneiContent Sources/SaneiEngine"
           if grep -rnE '\b(Float(16|32|64|80)?|Double|CGFloat|CFloat|CDouble|CLongDouble)\b' $SIM; then
-            echo "SaneiCore and SaneiEngine never use floating point (§2.2, L5)"; exit 1; fi
+            echo "SaneiCore, SaneiContent and SaneiEngine never use floating point (§2.2, L5)"; exit 1; fi
           # floating-point literals, per file with comments left out («§2.4» is a section): 1.5, 1e9, 2.5e-3, the 2.5 of
           # 1...2.5, hex floats (0x1.8p3); grouping with _ included; member access such as a.0 excluded.
           # Known gap: Duration / Duration returns a Double with no keyword or literal in the source.
@@ -50,7 +60,7 @@ jobs:
             out=$(sed -E 's://.*$::' "$f" | grep -nE "$lit" || true)
             if [ -n "$out" ]; then echo "$out" | sed "s|^|$f:|"; found=1; fi
           done
-          if [ "$found" = 1 ]; then echo "SaneiCore and SaneiEngine never use floating-point literals (§2.2, L5)"; exit 1; fi
+          if [ "$found" = 1 ]; then echo "SaneiCore, SaneiContent and SaneiEngine never use floating-point literals (§2.2, L5)"; exit 1; fi
           # randomness and hashing that differ between runs or Swift versions (ADR 0002): the standard library's
           # generator and its range mappings, and hash values, which are seeded per process. Comments left out.
           # (`DetRNG.shuffle(&items)` is the project's own deterministic shuffle: only the standard library's shapes,
@@ -97,6 +107,18 @@ jobs:
     timeout-minutes: 5
     steps:
       - uses: actions/checkout@v4
+      - name: Content validates and bakes the same twice
+        run: |
+          swift run -c release simcli validate
+          swift run -c release simcli bake --out .build/bundle/content.bin
+          swift run -c release simcli bake --out .build/bundle/content-again.bin
+          cmp .build/bundle/content.bin .build/bundle/content-again.bin
+      - name: The ID lock only grows
+        shell: bash
+        env:
+          TARGET: ${{ github.base_ref || 'main' }}
+          BEFORE: ${{ github.event.before }}
+        run: tools/checks/ids_lock.sh
       - name: Reference model
         run: python3 -I tools/checks/core_reference.py --check
       - name: Codec reference

@@ -1,6 +1,7 @@
 import Foundation
 import XCTest
 import SaneiCore
+import SaneiContent
 @testable import SaneiEngine
 
 final class SaveTests: XCTestCase {
@@ -556,15 +557,23 @@ final class SaveTests: XCTestCase {
             "SaveType": SaveType.allCases.map { UInt64($0.rawValue) },
             "ColumnEncoding": ColumnEncoding.allCases.map { UInt64($0.rawValue) },
             "Compression": SaveCompression.allCases.map { UInt64($0.rawValue) },
+            // content.bin's stored numbers (T-042)
+            "Gender": Gender.allCases.map { UInt64($0.rawValue) },
+            "GrammaticalNumber": GrammaticalNumber.allCases.map { UInt64($0.rawValue) },
+            "PolityKind": PolityKind.allCases.map { UInt64($0.rawValue) },
+            "ActorKind": ActorKind.allCases.map { UInt64($0.rawValue) },
+            "GroupDimension": GroupDimension.allCases.map { UInt64($0.rawValue) },
+            "CurrencyKind": CurrencyKind.allCases.map { UInt64($0.rawValue) },
         ]
         for (group, numbers) in code.sorted(by: { $0.key < $1.key }) {
             XCTAssertEqual(Set(numbers).count, numbers.count, "\(group) repeats a number")
             XCTAssertEqual(Set(numbers), Set(locked[group] ?? []), "\(group)")
         }
-        for (group, current) in [("Container", UInt64(SaveFile.containerVersion)), ("Format", UInt64(WorldState.saveFormat))] {
+        for (group, current) in [("Container", UInt64(SaveFile.containerVersion)), ("Format", UInt64(WorldState.saveFormat)),
+                                 ("ContentContainer", UInt64(ContentFile.containerVersion)), ("ContentFormat", UInt64(ContentFile.format))] {
             XCTAssertEqual(locked[group]?.max(), current, "\(group): the current version is the highest locked")
         }
-        XCTAssertEqual(Set(locked.keys), Set(code.keys).union(["Container", "Format"]))
+        XCTAssertEqual(Set(locked.keys), Set(code.keys).union(["Container", "Format", "ContentContainer", "ContentFormat"]))
         for (group, numbers) in locked.sorted(by: { $0.key < $1.key }) {
             XCTAssertEqual(Set(numbers).count, numbers.count, "tags.lock repeats a number in \(group)")
         }

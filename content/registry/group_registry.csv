@@ -1,0 +1,5 @@
+id,dimension,name,short,gender,number,definite,withLi,withBi,evidence
+grp.arab,ethnolinguistic,العرب,العرب,m,plural,1,للعرب,بالعرب,src.groups
+grp.dinka,ethnolinguistic,الدينكا,الدينكا,m,plural,1,للدينكا,بالدينكا,src.groups
+grp.muslim_sunni,religious,المسلمون السنة,السنة,m,plural,1,للمسلمين السنة,بالمسلمين السنة,src.groups
+grp.christian,religious,المسيحيون,المسيحيون,m,plural,1,للمسيحيين,بالمسيحيين,src.groups
