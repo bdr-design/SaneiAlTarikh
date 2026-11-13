@@ -18,8 +18,10 @@ public struct BakeError: Error, Sendable, Equatable, CustomStringConvertible {
 
 /// A strict CSV reader (RFC 4180 with stricter rules): UTF-8 only, no byte-order mark, lines ending in `\n` alone, no
 /// empty line, the first line the header, every row as many fields as the header. A field may be quoted, with `""`
-/// for a quote inside; a quoted field never holds a line break. Nothing is guessed: a file that breaks a rule is
-/// refused with its line.
+/// for a quote inside; a quoted field never holds a line break; an unquoted one never starts or ends with a space. The
+/// file is split on its bytes (a comma, a quote and a line break are single ASCII bytes, never inside a character), so
+/// how it splits never depends on Unicode's tables. Nothing is guessed: a file that breaks a rule is refused with its
+/// line.
 public struct CSV: Sendable {
     public var header: [String]
     /// The rows with their line numbers.
@@ -27,17 +29,15 @@ public struct CSV: Sendable {
 
     public static func parse(_ data: [UInt8], file: String) throws -> CSV {
         if data.starts(with: [0xEF, 0xBB, 0xBF]) { throw BakeError(file, 1, "a byte-order mark: save as UTF-8 without one") }
-        let text = String(decoding: data, as: UTF8.self)
-        guard text.utf8.elementsEqual(data) else { throw BakeError(file, 0, "not valid UTF-8") }
+        guard String(decoding: data, as: UTF8.self).utf8.elementsEqual(data) else { throw BakeError(file, 0, "not valid UTF-8") }
         if data.contains(0x0D) { throw BakeError(file, 0, "a carriage return: lines end in \\n alone") }
-        var lines = text.split(separator: "\n", omittingEmptySubsequences: false).map(String.init)
-        if lines.last == "" { lines.removeLast() }
+        var lines = data.split(separator: 0x0A, omittingEmptySubsequences: false)
+        if lines.last?.isEmpty == true { lines.removeLast() }
         guard !lines.isEmpty else { throw BakeError(file, 0, "empty: no header") }
         let header = try fields(lines[0], file: file, line: 1)
-        var seen = Set<String>()
-        for h in header {
+        for (k, h) in header.enumerated() {
             if h.isEmpty { throw BakeError(file, 1, "an empty column name") }
-            if !seen.insert(h).inserted { throw BakeError(file, 1, "the column «\(h)» twice") }
+            if header[..<k].contains(where: { $0.utf8.elementsEqual(h.utf8) }) { throw BakeError(file, 1, "the column «\(h)» twice") }
         }
         var rows: [(Int, [String])] = []
         for (k, l) in lines.enumerated().dropFirst() {
@@ -51,38 +51,39 @@ public struct CSV: Sendable {
         return CSV(header: header, rows: rows)
     }
 
-    static func fields(_ line: String, file: String, line n: Int) throws -> [String] {
-        let chars = Array(line)
+    static func fields(_ line: ArraySlice<UInt8>, file: String, line n: Int) throws -> [String] {
+        let comma: UInt8 = 0x2C, quote: UInt8 = 0x22
         var out: [String] = []
-        var i = 0
+        var i = line.startIndex
         while true {
-            var f = ""
-            if i < chars.count && chars[i] == "\"" {
+            var f: [UInt8] = []
+            if i < line.endIndex && line[i] == quote {
                 i += 1
                 while true {
-                    guard i < chars.count else { throw BakeError(file, n, "a quote never closed") }
-                    if chars[i] == "\"" {
-                        if i + 1 < chars.count && chars[i + 1] == "\"" { f.append("\""); i += 2; continue }
+                    guard i < line.endIndex else { throw BakeError(file, n, "a quote never closed") }
+                    if line[i] == quote {
+                        if i + 1 < line.endIndex && line[i + 1] == quote { f.append(quote); i += 2; continue }
                         i += 1
                         break
                     }
-                    f.append(chars[i])
+                    f.append(line[i])
                     i += 1
                 }
-                out.append(f)
-                if i == chars.count { return out }
-                guard chars[i] == "," else { throw BakeError(file, n, "text after a closing quote") }
+                out.append(String(decoding: f, as: UTF8.self))
+                if i == line.endIndex { return out }
+                guard line[i] == comma else { throw BakeError(file, n, "text after a closing quote") }
             } else {
-                while i < chars.count && chars[i] != "," {
-                    if chars[i] == "\"" { throw BakeError(file, n, "a quote inside an unquoted field") }
-                    f.append(chars[i])
+                while i < line.endIndex && line[i] != comma {
+                    if line[i] == quote { throw BakeError(file, n, "a quote inside an unquoted field") }
+                    f.append(line[i])
                     i += 1
                 }
-                if f.first?.isWhitespace == true || f.last?.isWhitespace == true {
-                    throw BakeError(file, n, "a space around «\(f)»: quote it, or take the space out")
+                let s = String(decoding: f, as: UTF8.self)
+                if s.unicodeScalars.first?.properties.isWhitespace == true || s.unicodeScalars.last?.properties.isWhitespace == true {
+                    throw BakeError(file, n, "a space around «\(s)»: quote it, or take the space out")
                 }
-                out.append(f)
-                if i == chars.count { return out }
+                out.append(s)
+                if i == line.endIndex { return out }
             }
             i += 1                                          // the comma
         }

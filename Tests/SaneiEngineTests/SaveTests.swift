@@ -562,10 +562,10 @@ final class SaveTests: XCTestCase {
             // content.bin's stored numbers (T-042)
             "Gender": Gender.allCases.map { UInt64($0.rawValue) },
             "GrammaticalNumber": GrammaticalNumber.allCases.map { UInt64($0.rawValue) },
-            "PolityKind": PolityKind.allCases.map { UInt64($0.rawValue) },
+            "PolityStatus": PolityStatus.allCases.map { UInt64($0.rawValue) },
             "ActorKind": ActorKind.allCases.map { UInt64($0.rawValue) },
             "GroupDimension": GroupDimension.allCases.map { UInt64($0.rawValue) },
-            "CurrencyKind": CurrencyKind.allCases.map { UInt64($0.rawValue) },
+            "CurrencyReach": CurrencyReach.allCases.map { UInt64($0.rawValue) },
         ]
         for (group, numbers) in code.sorted(by: { $0.key < $1.key }) {
             XCTAssertEqual(Set(numbers).count, numbers.count, "\(group) repeats a number")

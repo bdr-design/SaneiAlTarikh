@@ -267,7 +267,7 @@ A rule that nothing enforces is not a rule here. Rule IDs are referenced in the 
 | F1 | The engine is pure Swift and builds on Linux. Dependencies point one way only. | The SwiftPM target graph and `imports.sh`. |
 | F2 | **Determinism kit:** <ul><li>binary fixed-point</li><li>seeded random streams keyed by **persistent serials**</li><li>no iteration over a Dictionary or Set</li><li>every sort uses a total key (value, then serial or stable ID)</li><li>iteration over handle tables follows serial order</li><li>no libm, `Date` or `.random` in the engine</li></ul> | `banned_api.sh`; within-build determinism tests, including save → load → continue. |
 | F3 | Commands are the only way to change state. The AI uses the same Commands. | Access control; an import allowlist for `SaneiAI`. |
-| F4 | Stable IDs live in registries that can only grow. Removing an ID needs an alias with population weights. **Runtime IDs** (`dyn:<serial>` for polities, governments and actors) live in the save's ID lists and never collide with registry IDs. | `ids_lock.py`; the runtime-namespace test. |
+| F4 | Stable IDs live in registries that can only grow. Removing an ID needs an alias with population weights. **Runtime IDs** (`dyn:<serial>` for polities, governments and actors) live in the save's ID lists and never collide with registry IDs. | `IDLock` (`ids.lock`) and `tools/checks/ids_lock.sh`; the runtime-namespace test. |
 | F5 | Behaviour lives in data: `defines.json`, modifiers, regime, electoral, monetary and constitutional parameter sets, and the effect vocabulary. **Scenarios are data only.** | <ul><li>The validator.</li><li>The **stub-pack test**: CI parses stub packs for 2026, 1990, 1985 and 1979 and runs each for 30 days on a tiny world from M1a.</li><li>The scenario gate: path allowlist in §2.8.</li></ul> |
 | F6 | **Saves load forever:** self-describing columns, typed migration buffers, `SaveDefaults`, golden saves, and stable numeric tags for every persisted enum case (a command's fields are versioned with the save's format: a length per command lets a reader skip an unknown one, and a changed command is a new format with a step, T-041). | The golden-save gate; the `SaveDefaults` test; a tag-registry lock. |
 | F7 | One file, `Pipeline.swift`, owns the order of the daily stages, and each system declares the columns it reads and writes. | A test that fails on two writers of one column in a phase. |
@@ -896,7 +896,7 @@ bound here; each item is a line in `docs/perf.md` (L12) and a test where one is 
 - Every polity has a **short name**, the one shown on screen everywhere: the HUD's nation card, every panel's title and
   sub-line, the bodies, the new-game card («السعودية», «الولايات المتحدة», «أفريقيا الوسطى», «سانت فينسنت»). Its bound
   is measured, not counted: in the panel title's type (18 pt bold) it is at most as wide as «الكونغو الديمقراطية»
-  (the widest the stress test proves); `ids_lock.py` measures it with the bundled font. The full official name
+  (the widest the stress test proves); a check with the bundled font measures it (M1c's fit engine). The full official name
   («المملكة العربية السعودية», «جمهورية الكونغو الديمقراطية») is read by VoiceOver with the state panel's title.
 - Leaders have a short form for their lines («الملك عبدالله بن عبدالعزيز · منذ 2005»), so a reign's year stays shown.
 - The HUD's nation card condenses by its fit levels: the leader and regime go first, then the indicators tighten with the
@@ -1459,7 +1459,7 @@ As before:
     {"id": "recognize", "aiWeight": 95, "effects": [{"succession": {
       "predecessor": "sdn", "continuator": "sdn",
       "successors": [{"polity": "ssd", "government": {"id": "ssd.gov", "rulingActor": "act.sdn.splm",
-                      "regime": "regime.presidential_partial", "currency": "cur.ssp"},
+                      "regime": "regime.presidential_partial", "currency": "cur.sdg"},
                       "provinces": {"adminRegionSet": "sdn.south_10"}, "capital": "p_slug.juba"}],
       "allocate": {"treasury": "continuator", "domesticDebt": "continuator", "externalDebt": "continuator",
                    "formations": "byLocation", "equipment": "byLocation", "nuclear": "continuator",
@@ -1471,6 +1471,9 @@ As before:
   "defaultOption": "recognize", "expiresDays": 14, "pausePolicy": "major",
   "evidence": ["ev.sdn.2011.independence"] }
 ```
+
+South Sudan keeps the Sudanese pound at independence: the South Sudanese pound (`cur.ssp`) comes on 18 July 2011 by
+its own currency event, and the Sudanese pound stays legal tender in the South until 1 September 2011 (T-049).
 
 **Text and Arabic grammar.**
 - Templates use **typed slots with agreement selectors**, for example `{subj:country}` and `{v:أعلن|أعلنت}`. The selector is resolved from the subject's gender and number, giving «أعلنت مصر» but «أعلن العراق».

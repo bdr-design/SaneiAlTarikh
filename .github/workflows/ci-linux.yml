@@ -47,6 +47,9 @@ jobs:
           done
           if grep -nE 'SaneiBake' App/project.yml; then off="${off}App/project.yml links SaneiBake"$'\n'; fi
           if [ -n "$off" ]; then echo "$off"; echo "Nothing is parsed on the phone: JSON lives only in SaneiBake, which only simcli and the tests link (L2)"; exit 1; fi
+          # the content's lookups walk no dictionary or set (T-042: a search by halving over each table's IDs)
+          if sed -E 's://.*$::' Sources/SaneiContent/*.swift | grep -nE '\b(Dictionary|Set)\b|\[[A-Za-z]+ *: *[A-Za-z]+\]'; then
+            echo "SaneiContent keeps no dictionary or set: its lookups search sorted IDs (T-042)"; exit 1; fi
           # the simulation's sources: SaneiCore's numbers, the content and the engine built on them
           SIM="Sources/SaneiCore Sources/SaneiContent Sources/SaneiEngine"
           if grep -rnE '\b(Float(16|32|64|80)?|Double|CGFloat|CFloat|CDouble|CLongDouble)\b' $SIM; then
@@ -101,18 +104,20 @@ jobs:
         run: swift build -c release -Xswiftc -warnings-as-errors
       - name: Test optimised
         run: swift test -c release -Xswiftc -enable-testing -Xswiftc -warnings-as-errors
-  # the reference model (ADR 0002): the generated tables and vectors match it, and its accuracy bounds hold
+      # the pinned toolchain's simcli, in two processes (each with its own hash seed), against the bytes the tests pin
+      - name: Content validates and bakes the same twice
+        run: |
+          .build/release/simcli validate
+          .build/release/simcli bake --out .build/bundle/content.bin
+          .build/release/simcli bake --out .build/bundle/content-again.bin
+          cmp .build/bundle/content.bin .build/bundle/content-again.bin
+  # the reference model (ADR 0002): the generated tables and vectors match it, and its accuracy bounds hold; the ID lock
+  # only grows (git alone, no Swift)
   core-reference:
     runs-on: ubuntu-24.04
     timeout-minutes: 5
     steps:
       - uses: actions/checkout@v4
-      - name: Content validates and bakes the same twice
-        run: |
-          swift run -c release simcli validate
-          swift run -c release simcli bake --out .build/bundle/content.bin
-          swift run -c release simcli bake --out .build/bundle/content-again.bin
-          cmp .build/bundle/content.bin .build/bundle/content-again.bin
       - name: The ID lock only grows
         shell: bash
         env:

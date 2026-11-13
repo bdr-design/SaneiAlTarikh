@@ -12,9 +12,16 @@ listed under each, so a deferred item always has a place that exists.
   28; the scenario's set-up of the start state (directly, not through commands) with its amounts within 2^60, from
   `scenario-*.bin` and each scenario's `governments.csv` (rival and exile governments); the day-1 closure in LCU and in
   USD and §8's `--t0` closure; how a dissolved state's money and debts are shared out; the start golden save; META's
-  player as a content ID, and its `rulesHash` and `scenarioHash` filled from `content.bin` and the scenario file.
+  player as a content ID, and its `rulesHash` and `scenarioHash` filled from `content.bin` and the scenario file. From
+  T-042's reviews: whether each polity exists at the start (the scenario's polities, not the registry); each scenario's
+  governments (`<polity>.gov` by default, rival and exile ones, the UN seat's holder, D-29) and their currencies; the
+  actors' roles at the start; polity names and flags by date (Libya's name changes in 2011); a group's sect or
+  denomination; the evidence records, `SOURCES.yaml` and the evidence gate (§9: M1a), with the registries' evidence IDs
+  resolved; the IDs in the save (`IDxx`) and the engine's import of SaneiContent (CI's allow list widened for
+  SaneiEngine).
 - **T-049: the stub packs and the effect vocabulary's schema** (§5.9): the packs for 2026, 1990, 1985 and 1979 (CI
-  parses each), every effect exercised by them, the validator's rules on events and templates (agreement selectors).
+  parses each), every effect exercised by them, the validator's rules on events and templates (agreement selectors);
+  the currency events (South Sudan's pound on 18 July 2011, the Sudanese pound legal there until 1 September).
 - **T-043: the platform's saves.** Raw DEFLATE with Apple's Compression (a `SaveCompressor` of `.rawDeflate`) and the
   device fixture read on Linux; storage in `Documents/Saves`, atomic writes (temp, fsync, rename, verify, «last good»),
   autosave rotation, the mirror (D-28), export and import, the saves list from `SaveFile.readMeta`, corrupt files shown
@@ -29,7 +36,8 @@ listed under each, so a deferred item always has a place that exists.
   as they are; every write handed a compressor whose file is stored as it is (compression 0: the compressor failed or
   passed the bound) logged, as such a file is up to 12 MB, past §3.5's 2 MB; the Linux inflater for the device fixture
   (a zlib test target, as simcli's `CZlib`), comparing decompressed payloads (Apple's DEFLATE bytes vary by OS version);
-  a macOS build in CI so an API newer than iOS 17 is caught.
+  a macOS build in CI so an API newer than iOS 17 is caught, which also bakes `content.bin` with Apple's toolchain and
+  checks it against the hash the tests pin (T-042).
 - **T-044: the host on the simulation.** `GameHost` runs `Simulation` inside one long counting scope; the test that
   every entry point binds a counter scope; the host holding a day until every AI result due on it has been submitted;
   the host following the player onto a successor's row after `succeedGovernment`, with one sequence of player orders
@@ -40,7 +48,9 @@ listed under each, so a deferred item always has a place that exists.
   build-scoped command journal `CMDJ`, `.saneibug` and `simcli replay`; the ledger's invariants after every day in debug
   and test builds; the lint that no simulation code walks a `Set` or a `Dictionary`; the append-only check of
   `tags.lock` in CI; the engine's bench in CI (the work counters, the 1.2× cross-module bench, the bench counter of
-  T-036, the remembered position of T-037).
+  T-036, the remembered position of T-037); `content.bin` read at launch from a memory map (the reader taking a buffer
+  that is not an array) and its launch time measured against §3.4, with fixed-width columns and offset tables for the
+  large static tables if it needs them (T-042).
 - **T-045: the thin systems.** Time, taxes, budget, cohorts, stability through `TermSink`, projects, rename; the event
   scheduler with the 5 real events (South Sudan's succession, Côte d'Ivoire's resolution, Libya's NTC, the NDP's
   dissolution, the US withdrawal from Iraq) and step 10's conditional events (a government they make takes its slot

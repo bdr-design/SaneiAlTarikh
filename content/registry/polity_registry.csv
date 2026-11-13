@@ -1,8 +1,8 @@
-id,kind,name,short,gender,number,definite,withLi,withBi,colour,currency,from,until,evidence
-sdn,state,جمهورية السودان,السودان,m,singular,1,للسودان,بالسودان,#C8A15A,cur.sdg,,,src.unterm
-ssd,state,جمهورية جنوب السودان,جنوب السودان,m,singular,1,لجنوب السودان,بجنوب السودان,#5A8C3C,cur.ssp,2011-07-09,,src.unterm
-civ,state,جمهورية كوت ديفوار,كوت ديفوار,f,singular,1,لكوت ديفوار,بكوت ديفوار,#E08A2C,cur.xof,,,src.unterm
-lby,state,الجماهيرية العربية الليبية الشعبية الاشتراكية العظمى,ليبيا,f,singular,1,لليبيا,بليبيا,#4F9A5E,cur.lyd,,,src.unterm
-egy,state,جمهورية مصر العربية,مصر,f,singular,1,لمصر,بمصر,#D9C27A,cur.egp,,,src.unterm
-irq,state,جمهورية العراق,العراق,m,singular,1,للعراق,بالعراق,#7C9B4E,cur.iqd,,,src.unterm
-usa,state,الولايات المتحدة الأمريكية,الولايات المتحدة,f,plural,1,للولايات المتحدة,بالولايات المتحدة,#3B6EA5,cur.usd,,,src.unterm
+id,status,name,short,gender,number,human,definite,oblique,withLi,withBi,colour,evidence
+sdn,state,جمهورية السودان,السودان,m,singular,0,1,السودان,للسودان,بالسودان,#A8743C,src.unterm
+ssd,state,جمهورية جنوب السودان,جنوب السودان,m,singular,0,0,جنوب السودان,لجنوب السودان,بجنوب السودان,#5A8C3C,src.unterm
+civ,state,جمهورية كوت ديفوار,كوت ديفوار,f,singular,0,0,كوت ديفوار,لكوت ديفوار,بكوت ديفوار,#E08A2C,src.unterm
+lby,state,الجماهيرية العربية الليبية الشعبية الاشتراكية العظمى,ليبيا,f,singular,0,0,ليبيا,لليبيا,بليبيا,#4F9A5E,src.unterm
+egy,state,جمهورية مصر العربية,مصر,f,singular,0,0,مصر,لمصر,بمصر,#D9C27A,src.unterm
+irq,state,جمهورية العراق,العراق,m,singular,0,1,العراق,للعراق,بالعراق,#7C9B4E,src.unterm
+usa,state,الولايات المتحدة الأمريكية,الولايات المتحدة,f,plural,0,1,الولايات المتحدة,للولايات المتحدة,بالولايات المتحدة,#3B6EA5,src.unterm

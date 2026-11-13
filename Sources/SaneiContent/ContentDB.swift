@@ -1,52 +1,52 @@
 import SaneiCore
 
 /// The content the game runs on: the registries (T-042; the static rules join them in later tasks). Read from
-/// `content.bin` once at launch; each table keeps its rows in registry order and an index sorted by ID, so a lookup by
-/// ID is a search by halving that allocates nothing and walks no dictionary.
+/// `content.bin` once at launch; each table keeps its rows in registry order, and its IDs apart with an order sorted by
+/// their bytes, so finding a row by ID is a search by halving over the IDs alone: it allocates nothing and walks no
+/// dictionary. The tables never change once made, so their orders always match them.
 public struct ContentDB: Sendable, Equatable {
-    public private(set) var polities: [PolityRow]
-    public private(set) var actors: [ActorRow]
-    public private(set) var groups: [GroupRow]
-    public private(set) var currencies: [CurrencyRow]
+    public let polities: [PolityRow]
+    public let actors: [ActorRow]
+    public let groups: [GroupRow]
+    public let currencies: [CurrencyRow]
 
-    /// Per table: its IDs in row order, and its rows' positions ordered by ID (a step of a lookup reads one ID, never
-    /// a whole row).
-    var polityIDs: [String] = [], polityIndex: [Int32] = []
-    var actorIDs: [String] = [], actorIndex: [Int32] = []
-    var groupIDs: [String] = [], groupIndex: [Int32] = []
-    var currencyIDs: [String] = [], currencyIndex: [Int32] = []
+    let polityIDs: [String], polityOrder: [Int32]
+    let actorIDs: [String], actorOrder: [Int32]
+    let groupIDs: [String], groupOrder: [Int32]
+    let currencyIDs: [String], currencyOrder: [Int32]
 
-    /// The tables as given (the baker checks them first; `ContentFile.read` checks what it reads).
-    public init(polities: [PolityRow], actors: [ActorRow], groups: [GroupRow],
-                currencies: [CurrencyRow]) {
+    /// The tables as given; `problems()` says whether they keep the rules (the bake checks it first, `ContentFile.read`
+    /// checks what it reads).
+    public init(polities: [PolityRow], actors: [ActorRow], groups: [GroupRow], currencies: [CurrencyRow]) {
         self.polities = polities
         self.actors = actors
         self.groups = groups
         self.currencies = currencies
-        polityIDs = polities.map(\.id); polityIndex = Self.sortedIndex(polityIDs)
-        actorIDs = actors.map(\.id); actorIndex = Self.sortedIndex(actorIDs)
-        groupIDs = groups.map(\.id); groupIndex = Self.sortedIndex(groupIDs)
-        currencyIDs = currencies.map(\.id); currencyIndex = Self.sortedIndex(currencyIDs)
+        polityIDs = polities.map(\.id); polityOrder = Self.sortedOrder(polityIDs)
+        actorIDs = actors.map(\.id); actorOrder = Self.sortedOrder(actorIDs)
+        groupIDs = groups.map(\.id); groupOrder = Self.sortedOrder(groupIDs)
+        currencyIDs = currencies.map(\.id); currencyOrder = Self.sortedOrder(currencyIDs)
     }
 
+    /// Equal when every row is equal: text compared by its bytes, never by Unicode equivalence (two spellings of one
+    /// name are two contents, as their `content.bin` bytes are).
     public static func == (a: ContentDB, b: ContentDB) -> Bool {
-        a.polities == b.polities && a.actors == b.actors && a.groups == b.groups
-            && a.currencies == b.currencies
+        ContentFile.chunks(a) == ContentFile.chunks(b)
     }
 
     /// The rows' positions ordered by their IDs' bytes.
-    static func sortedIndex(_ ids: [String]) -> [Int32] {
-        var index = (0..<ids.count).map { Int32($0) }
-        index.sort { ids[Int($0)].utf8.lexicographicallyPrecedes(ids[Int($1)].utf8) }
-        return index
+    static func sortedOrder(_ ids: [String]) -> [Int32] {
+        var order = (0..<ids.count).map { Int32($0) }
+        order.sort { ids[Int($0)].utf8.lexicographicallyPrecedes(ids[Int($1)].utf8) }
+        return order
     }
 
-    /// The row whose ID is `id`, by halving over the sorted index; nil when there is none.
-    static func find(_ id: String, _ index: [Int32], _ ids: [String]) -> Int? {
-        var lo = 0, hi = index.count
+    /// The position of the row whose ID is `id`, by halving over the sorted IDs; nil when there is none.
+    static func find(_ id: String, _ order: [Int32], _ ids: [String]) -> Int? {
+        var lo = 0, hi = order.count
         while lo < hi {
             let mid = (lo + hi) / 2
-            let row = Int(index[mid])
+            let row = Int(order[mid])
             let other = ids[row]
             if other.utf8.elementsEqual(id.utf8) { return row }
             if other.utf8.lexicographicallyPrecedes(id.utf8) { lo = mid + 1 } else { hi = mid }
@@ -54,26 +54,21 @@ public struct ContentDB: Sendable, Equatable {
         return nil
     }
 
-    public func polity(_ id: String) -> Int? { Self.find(id, polityIndex, polityIDs) }
-    public func actor(_ id: String) -> Int? { Self.find(id, actorIndex, actorIDs) }
-    public func group(_ id: String) -> Int? { Self.find(id, groupIndex, groupIDs) }
-    public func currency(_ id: String) -> Int? { Self.find(id, currencyIndex, currencyIDs) }
+    /// The position in `polities` of the polity whose ID is `id`; nil when there is none.
+    public func polityRow(id: String) -> Int? { Self.find(id, polityOrder, polityIDs) }
+    /// The position in `actors` of the actor whose ID is `id`; nil when there is none.
+    public func actorRow(id: String) -> Int? { Self.find(id, actorOrder, actorIDs) }
+    /// The position in `groups` of the group whose ID is `id`; nil when there is none.
+    public func groupRow(id: String) -> Int? { Self.find(id, groupOrder, groupIDs) }
+    /// The position in `currencies` of the currency whose ID is `id`; nil when there is none.
+    public func currencyRow(id: String) -> Int? { Self.find(id, currencyOrder, currencyIDs) }
 
-    /// Two rows of a table with one ID: the first such ID, or nil. (Uses the sorted index: neighbours.)
-    static func repeated(_ index: [Int32], _ ids: [String]) -> String? {
-        guard index.count > 1 else { return nil }
-        for k in 1..<index.count where ids[Int(index[k])].utf8.elementsEqual(ids[Int(index[k - 1])].utf8) {
-            return ids[Int(index[k])]
+    /// The later of two rows with one ID, as a position in the table; nil when every ID is unique.
+    static func repeated(_ order: [Int32], _ ids: [String]) -> Int? {
+        guard order.count > 1 else { return nil }
+        for k in 1..<order.count where ids[Int(order[k])].utf8.elementsEqual(ids[Int(order[k - 1])].utf8) {
+            return Int(Swift.max(order[k], order[k - 1]))
         }
-        return nil
-    }
-
-    /// The first ID that two rows of one table share, with the table's name; nil when every ID is unique.
-    public func repeatedID() -> (table: String, id: String)? {
-        if let id = Self.repeated(polityIndex, polityIDs) { return ("polities", id) }
-        if let id = Self.repeated(actorIndex, actorIDs) { return ("actors", id) }
-        if let id = Self.repeated(groupIndex, groupIDs) { return ("groups", id) }
-        if let id = Self.repeated(currencyIndex, currencyIDs) { return ("currencies", id) }
         return nil
     }
 }

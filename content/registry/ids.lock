@@ -18,6 +18,8 @@ actor act.egy.ndp
 actor act.civ.fpi
 actor act.civ.rdr
 actor act.lby.ntc
+actor act.civ.fn
+actor act.sdn.splm_n
 group grp.arab
 group grp.dinka
 group grp.muslim_sunni
