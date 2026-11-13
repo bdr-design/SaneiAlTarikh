@@ -136,6 +136,20 @@ final class SaveEdgeTests: XCTestCase {
         let plain = try XCTUnwrap(SaveCodec.write(base, meta: meta()))
         XCTAssertEqual(SaveFile.compression(of: plain), SaveCompression.none)
         XCTAssertNil(SaveFile.compression(of: Array("NOTASAVE".utf8)))
+        struct Shifted: SaveCompressor {
+            var compression: SaveCompression { .rawDeflate }
+            func compress(_ bytes: [UInt8], appendingTo out: inout [UInt8]) -> Bool { out.append(0xAA); out.append(contentsOf: bytes); return true }
+            func decompress(_ bytes: ArraySlice<UInt8>, rawLength: Int) -> [UInt8]? { Array(bytes.dropFirst()) }
+        }
+        var packed = try XCTUnwrap(SaveCodec.write(base, meta: meta(), compressor: Shifted()))
+        XCTAssertEqual(SaveFile.compression(of: packed), .rawDeflate)
+        packed[10] = 0xEE                                          // a compression this version does not know
+        XCTAssertNil(SaveFile.compression(of: packed))
+        // the size bound: a file of exactly `mostFileBytes` is read on to its trailer, one byte more is refused first
+        var huge = SaveFile.magic + [UInt8](repeating: 0, count: SaveFile.mostFileBytes - 8)
+        guard case .failure(.damaged) = SaveFile.check(huge) else { return XCTFail("at the bound: read on to the trailer") }
+        huge.append(0)
+        guard case .failure(.badPayload) = SaveFile.check(huge) else { return XCTFail("past the bound: refused by its size") }
         guard case let .success(c) = SaveFile.check(plain) else { return XCTFail() }
         XCTAssertEqual(c.compression, .none)
         XCTAssertEqual(c.rawLength, c.stored.count)

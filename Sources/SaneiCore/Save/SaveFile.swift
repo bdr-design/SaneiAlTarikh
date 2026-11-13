@@ -184,7 +184,9 @@ public enum SaveFile {
     /// The most bytes a file may hold: what the platform checks before it reads one (T-043).
     public static let mostFileBytes = mostPayloadBytes + mostMetaBytes + headerBytes + 16 + 32
 
-    /// The compression a file's header names; nil when the bytes are not a save's header.
+    /// The compression a file's header names; nil when the bytes are not a save's header, a header this version
+    /// refuses (a newer container, a flag, META past its bound), too few to hold META whole, or a compression this
+    /// version does not know.
     public static func compression(of bytes: [UInt8]) -> SaveCompression? {
         guard case .success = header(bytes) else { return nil }
         return SaveCompression(rawValue: bytes[10])

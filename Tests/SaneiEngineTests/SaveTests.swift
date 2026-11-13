@@ -518,7 +518,8 @@ final class SaveTests: XCTestCase {
         XCTAssertTrue(loaded.meta.cheatsUsed)
         XCTAssertEqual(loaded.meta.rulesHash, [UInt8](repeating: 1, count: 32))
         guard case let .success(opened) = SaveFile.open(bytes), var golden = SaveTree.read(opened.payload, opened.range) else { return XCTFail() }
-        // the golden tree migrated to the current format holds exactly what the current version writes (§7's policy)
+        // the golden tree migrated to the current format holds only columns the current version writes, each byte for byte
+        // (columns added since are absent from it: §7's policy)
         XCTAssertTrue(SaveMigrations.current.migrate(&golden))
         let now = s.saveTree()
         for chunk in golden.chunks {

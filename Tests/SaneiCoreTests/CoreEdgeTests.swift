@@ -82,5 +82,7 @@ final class CoreEdgeTests: XCTestCase {
         let a = TermID(raw: 3), b = TermID(raw: 4)
         XCTAssertNotNil(TermBuffer12<Q32>(saved: [(a, Q32(raw: 5)), (b, Q32(raw: 6))], hasBase: false, other: nil, total: Q32(raw: 11)))
         XCTAssertNil(TermBuffer12<Q32>(saved: [(a, Q32(raw: 5)), (a, Q32(raw: 6))], hasBase: false, other: nil, total: Q32(raw: 11)))
+        XCTAssertNil(TermBuffer12<Q32>(saved: [(a, Q32(raw: 5)), (b, Q32(raw: 6)), (a, Q32(raw: 7))], hasBase: false, other: nil,
+                                       total: Q32(raw: 18)), "a term again two rows on")
     }
 }

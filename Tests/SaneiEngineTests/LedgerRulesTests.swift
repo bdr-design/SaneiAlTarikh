@@ -253,6 +253,11 @@ final class LedgerRulesTests: XCTestCase {
         w.ledger.worldOpening = USDn(raw: .min)
         w.ledger.worldPosted = USDn(raw: .max)
         XCTAssertEqual(w.ledgerViolations().count, 2)
+        // a difference that wraps: max − min overflows to −1, which a check that ignored the overflow would take
+        XCTAssertFalse(WorldState.adds(.max, -1, .min))
+        XCTAssertFalse(WorldState.adds(.min, 1, .max))
+        XCTAssertTrue(WorldState.adds(.max, 0, .max))
+        XCTAssertTrue(WorldState.adds(-1, .max, .min))
     }
 
     /// An exchange at a rate that cannot be negated is refused, counted, and moves nothing.
@@ -260,9 +265,29 @@ final class LedgerRulesTests: XCTestCase {
         var (w, g) = world()
         w.currencies.rate[1] = LogQ(raw: .min)
         let ledger = w.ledger
-        XCTAssertNil(w.exchange(g[1], local: LCU(raw: 1_000)))
+        let clamps = SaturationCounter()
+        XCTAssertNil(Saturation.counting(into: clamps) { w.exchange(g[1], local: LCU(raw: 1_000)) })
+        XCTAssertEqual(clamps.count, 0, "refused before the rate is negated: nothing clamps")
         XCTAssertEqual(w.ledger, ledger)
         XCTAssertEqual(w.world.refusedPostings, 1)
+    }
+
+    /// A balance taken past 2^60 before the close on a month's first day leaves an opening past it for the month: the
+    /// writer refuses that state, as a load would, and saves again from the next close on.
+    func testAStateNoLoadTakesIsNotWritten() {
+        var (w, g) = world()                                       // the world's date is 1 January: the close comes today
+        XCTAssertTrue(w.post(g[0], .treasury, .spending, LCU(raw: (Int64(1) << 60) + 5)))
+        var sim = Simulation(state: w)
+        sim.step()                                                 // the close copies the balance, then the day's end redenominates
+        XCTAssertGreaterThan(sim.state.ledger.localOpening[LedgerTable.index(g[0].row.int, .treasury)].raw, Int64(1) << 60)
+        XCTAssertFalse(sim.state.currencies.redenominationDue.contains(true))
+        let meta = { SaveMeta(formatVersion: 1, date: sim.state.world.date.days, seed: sim.state.world.seed) }
+        XCTAssertFalse(sim.state.ledgerWithinSaveBounds)
+        XCTAssertNil(SaveCodec.write(sim.state, meta: meta()), "no file a load refuses")
+        sim.advance(days: 31)                                      // 1 February's close
+        XCTAssertTrue(sim.state.ledgerWithinSaveBounds)
+        guard let file = SaveCodec.write(sim.state, meta: meta()), case let .success(back) = SaveCodec.read(file) else { return XCTFail() }
+        XCTAssertEqual(back.state, sim.state)
     }
 
     /// A short run of postings, exchanges, transfers and redenominations gives one hash, pinned: the debug and the

@@ -127,6 +127,40 @@ final class ContentTests: XCTestCase {
         XCTAssertEqual(ContentFile.read(length).failureValue, .malformed)
         XCTAssertEqual(ContentFile.read(file(ContentFile.chunks(db), format: ContentFile.format + 1)).failureValue, .newerFormat(ContentFile.format + 1))
         XCTAssertEqual(ContentFile.read(file(Array(ContentFile.chunks(db).dropLast()))).failureValue, .malformed, "a table missing")
+        // one content, one file: a table or column added or out of the writer's order is refused
+        let written = ContentFile.chunks(db)
+        XCTAssertEqual(ContentFile.read(file(written + [SaveChunk(tag: "XTRA", columns: [])])).failureValue, .malformed, "a table added")
+        XCTAssertEqual(ContentFile.read(file([written[1], written[0]] + written.dropFirst(2))).failureValue, .malformed, "tables reordered")
+        var added = written
+        added[0].columns.append(.flags("extra", db.currencies.map { _ in false }))
+        XCTAssertEqual(ContentFile.read(file(added)).failureValue, .malformed, "a column added")
+        var swapped = written
+        swapped[0].columns.swapAt(0, 1)
+        XCTAssertEqual(ContentFile.read(file(swapped)).failureValue, .malformed, "columns reordered")
+        // and every file it takes is the bytes its content writes: bytes changed one at a time, sealed again
+        struct Mix {
+            var s: UInt64
+            mutating func next() -> UInt64 {
+                s &+= 0x9E37_79B9_7F4A_7C15
+                var z = s
+                z = (z ^ (z >> 30)) &* 0xBF58_476D_1CE4_E5B9
+                z = (z ^ (z >> 27)) &* 0x94D0_49BB_1331_11EB
+                return z ^ (z >> 31)
+            }
+        }
+        var rng = Mix(s: 42)
+        var taken = 0
+        for _ in 0..<3_000 {
+            var b = good
+            let at = 16 + Int(rng.next() % UInt64(good.count - 48))
+            b[at] ^= UInt8(truncatingIfNeeded: 1 + rng.next() % 255)
+            reseal(&b)
+            if case let .success(l) = ContentFile.read(b) {
+                taken += 1
+                XCTAssertEqual(ContentFile.write(l.db), b, "an accepted file is its content's own bytes (byte \(at))")
+            }
+        }
+        XCTAssertGreaterThan(taken, 0, "some changed texts still read")
         var huge = [UInt8](repeating: 0, count: ContentFile.mostBytes + 1)
         huge.replaceSubrange(0..<8, with: ContentFile.magic)
         XCTAssertEqual(ContentFile.read(huge).failureValue, .malformed)
@@ -306,6 +340,10 @@ final class ContentTests: XCTestCase {
         refused(try copy(lock) { $0 + "polity  zzz\n" }, file: lock, line: 27, "known kind")
         refused(try copy(lock) { String($0.dropLast()) }, file: lock, line: 0, "its line break")
         XCTAssertNoThrow(try Bake.validate(try copy(lock) { $0 + "government sdn.gov\n" }), "a government ID locked ahead of its scenario")
+        XCTAssertNoThrow(try Bake.validate(try copy(lock) { $0 + "government civ.gbagbo\n" }), "a rival government")
+        refused(try copy(lock) { $0 + "government act.sdn.ncp\n" }, file: lock, line: 27, "is not <polity>.<name>")
+        refused(try copy(lock) { $0 + "government zzz.gov\n" }, file: lock, line: 27, "is not <polity>.<name>")
+        refused(try copy(lock) { $0 + "government sdn\n" }, file: lock, line: 27, "is not <polity>.<name>")
     }
 
     func testAliasesAreReadStrictly() throws {
@@ -335,6 +373,19 @@ final class ContentTests: XCTestCase {
         let twice = #"{"kind": "polity", "from": "a", "to": [{"id": "b", "weight": 10000}]}"#
         refused(#"{"format": 1, "aliases": [\#(twice), \#(twice)]}"#, "replaced twice")
         refused("[]", "the keys «format» (1) and «aliases»")
+        // each alias's line is where it starts, whatever its text holds
+        func line(_ json: String) -> Int? {
+            do { _ = try Aliases.parse(Array(json.utf8)); return nil } catch { return (error as? BakeError)?.line }
+        }
+        let good = #"{"kind": "polity", "from": "from", "to": [{"id": "b", "weight": 10000}]}"#
+        XCTAssertEqual(line("{\"format\": 1, \"aliases\": [\n\(good),\n{\"kind\": \"polity\", \"frm\": \"a\", \"to\": []}]}"), 3)
+        XCTAssertEqual(line("{\"format\": 1, \"aliases\": [\n\(good),\n\n  \"text\",\n\(good)]}"), 4, "an item that is not an object")
+        XCTAssertEqual(line("{\"format\": 1,\n \"aliases\": [\(good),\n\(good)]}"), 3, "the second «from» replaced twice")
+        // keys by their bytes: two spellings of é are two keys, and the lookup takes only its own
+        let e1 = "\u{E9}", e2 = "e\u{301}"
+        let j = try JSON.parse(Array("{\"\(e1)\": 1, \"\(e2)\": 2}".utf8), file: "t")
+        XCTAssertEqual(j[e1], .integer(1))
+        XCTAssertEqual(j[e2], .integer(2))
     }
 
     /// The cheaper forms the heaviness review asked for keep the rules: text decoded straight from the file's buffer
@@ -356,6 +407,17 @@ final class ContentTests: XCTestCase {
         }
         for t in ["\u{A0}دولة", "دولة\u{3000}", "\u{2007}دولة", "دولة\u{202F}", " دولة"] { XCTAssertFalse(ContentDB.isNameText(t), t) }
         XCTAssertTrue(ContentDB.isNameText("دولة\u{200C}نامية"))
+        XCTAssertTrue(ContentDB.isNameText("دولة\u{200D}نامية"))
+        XCTAssertTrue(ContentDB.isNameText("مُحمَّد"), "marks after their letters")
+        XCTAssertTrue(ContentDB.isNameText("Côte d'Ivoire"))
+        // what shows nothing, or shows on the letter before: refused
+        for v: UInt32 in [0x200B, 0x2060, 0xAD, 0xFFF9, 0x180E, 0x061C, 0x200E, 0x202E, 0x2066, 0xFEFF, 0x0600, 0xE0001] {
+            let s = String(Unicode.Scalar(v)!)
+            for t in ["دولة" + s + "نامية", s + "دولة", "دولة" + s] { XCTAssertFalse(ContentDB.isNameText(t), "U+\(String(v, radix: 16)) in «\(t)»") }
+        }
+        for v: UInt32 in [0x0651, 0x064E, 0x0301, 0x20DD, 0x0903] {
+            XCTAssertFalse(ContentDB.isNameText(String(Unicode.Scalar(v)!) + "دولة"), "a mark first: U+\(String(v, radix: 16))")
+        }
         // one walk orders as the bytes do
         let ids = ["", "a", "ab", "b", "act.sdn.splm", "act.sdn.splm_n", "cur.sdg", "cur.ssp", "سودان", "a\u{0}", "\u{7F}", "é", "e\u{301}"]
         for a in ids {

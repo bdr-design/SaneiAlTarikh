@@ -29,7 +29,7 @@ the hash unchanged), L3 (caps: 384 governments and polities), ADR 0001 (the host
   declared with defaults before M1a ends); the ledger (T-040); the save container, META, migrations and golden saves
   (T-041); content loading (T-042); moving `GameHost` from its M0 stand-in onto this world (T-044, after the save
   container of T-041); parallel monthly slots (with the burst helper). Named by the reviews and placed: content IDs,
-  dormant polities and ending a polity, and starting slots spread evenly across the 28 (T-042); tagged codec fields with
+  dormant polities and ending a polity, and starting slots spread evenly across the 28 (T-048); tagged codec fields with
   lengths so that a reader can skip an unknown field (T-041 decided: a length per command, so an unknown command is
   skipped; a changed command's fields are a new format with a step that rewrites the queue's items; whether a held copy
   keeps the cap's room was measured and fixed in this card's fix round: every append re-reserves); the strategic period
@@ -41,7 +41,7 @@ the hash unchanged), L3 (caps: 384 governments and polities), ADR 0001 (the host
   event scheduler, M1a's thin systems, T-045); the record of which order was refused and why, for screen 26 (the
   notification ring, M1c); the lifecycle effects beyond succession and dissolution: independence, unification,
   recognition, annexation (§2.4's `Annex`, giving provinces to another polity), an effect that gives provinces held by
-  nobody, and polities made after the start (T-042). Carried from T-036 («the engine's card») and placed: the registry
+  nobody, and polities made after the start (T-048). Carried from T-036 («the engine's card») and placed: the registry
   of random streams and the packing of a fog-of-war key (the registry with the event scheduler, T-045; the fog-of-war
   key with `Visibility`, T-046); the one burst helper with its per-child counters from a pool, at most the core count of
   children each a stripe of the day's governments (§3.2's bounded line, OWNER PROXY 2026-11-13), and the CI ban on `Task
@@ -60,3 +60,13 @@ the hash unchanged), L3 (caps: 384 governments and polities), ADR 0001 (the host
 6. SaneiEngine imports only SaneiCore; nothing in it allocates per day once its tables are made, while no copy of the
    state is held (measured; with a copy held, the first write to each column copies it once, also measured).
 7. Six independent read-only reviews; every confirmed finding fixed; verification reviews of the fixes.
+
+## Verification of the fixes (2026-11-13)
+- **A mutation review of the skeleton** (the first round's checker never reported): 161 planted faults, 91 caught.
+  Its most serious find, a stale succession re-serialling a live row, was a planted fault the tests missed, not a bug
+  (`validate` checks the target is live); a test now covers it. The survivors that change behaviour got their tests
+  (every slot runs, the hash covers every column, the rooms and the queue's order, who may give each command, a
+  succession's hand-over); re-planted, 52 of 60 were caught, and the last 8 (a succession's strategic count, the room
+  after a copy written by subscript, the polity table's own cap) got tests: all 9 planted again are caught.
+- **Its verification (FV6):** 11 of 11 planted faults caught; the pointers to work moved to T-048 corrected; the
+  skeleton's tests split so no file passes F9's 600 lines.

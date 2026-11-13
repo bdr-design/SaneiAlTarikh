@@ -183,6 +183,14 @@ public enum ContentID {
         return isWellFormed(id) && id.utf8.starts(with: prefix.utf8) && id.utf8.count > prefix.utf8.count
     }
 
+    /// True when `id` is a government's: `<polity>.<slug>` of the given polity, with a slug that is not empty and has no
+    /// dot (`sdn.gov`, `civ.gbagbo`).
+    public static func isGovernmentID(_ id: String, of polity: String) -> Bool {
+        let prefix = polity + "."
+        return isWellFormed(id) && id.utf8.starts(with: prefix.utf8) && id.utf8.count > prefix.utf8.count
+            && !id.utf8.dropFirst(prefix.utf8.count).contains(0x2E)
+    }
+
     /// The ID of a polity's default government (§4.4: one per polity, `sdn.gov`). A scenario may give the polity other
     /// governments (`civ.ouattara`, `civ.gbagbo`: rival and exile governments, and which holds the UN seat, D-29) and
     /// leave this one unused; no other government's slug is `gov` (T-048).

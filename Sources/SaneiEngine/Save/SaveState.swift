@@ -58,6 +58,37 @@ extension WorldState {
     /// The current format of the state's chunks.
     public static let saveFormat: UInt16 = 1
 
+    /// The bounds a load checks on the ledger's values (what a game ever saves): an LCU balance, opening, money base
+    /// and its opening within 2^60 (every day's end redenominates past it), unless the currency's scale is past
+    /// `ceilingExponent`, where it stops redenominating; a rate and a price index within ±2^52 (21,845
+    /// redenominations take a log by about 2^50).
+    static let mostSavedAmount = Int64(1) << 60
+    static let mostSavedLog = Int64(1) << 52
+    static let ceilingExponent = Int64(UInt16.max - 3)
+
+    static func amountWithin(_ v: Int64, ceiling: Bool) -> Bool { ceiling || (v >= -mostSavedAmount && v <= mostSavedAmount) }
+
+    /// True when every value the load bounds is within its bound, so `SaveCodec.write` makes no file a load refuses. A
+    /// month's opening can pass 2^60 when a posting before the close on a month's first day takes a balance past it
+    /// (the close copies the balance before the day's end redenominates): such a state is not saved until the next
+    /// close (ADR 0003, decision 7).
+    var ledgerWithinSaveBounds: Bool {
+        for i in 0..<currencies.scaleExponent.count {
+            let ceiling = Int64(currencies.scaleExponent[i]) > Self.ceilingExponent
+            guard Self.amountWithin(currencies.moneyBase[i].raw, ceiling: ceiling),
+                  Self.amountWithin(currencies.moneyBaseOpening[i].raw, ceiling: ceiling),
+                  currencies.rate[i].raw.magnitude <= UInt64(Self.mostSavedLog),
+                  currencies.priceIndex[i].raw.magnitude <= UInt64(Self.mostSavedLog) else { return false }
+        }
+        let a = LedgerTable.accountsPerRow
+        for row in 0..<ledger.currency.count {
+            let ceiling = Int64(currencies.scaleExponent[ledger.currency[row].int]) > Self.ceilingExponent
+            for k in 0..<a where !Self.amountWithin(ledger.local[row * a + k].raw, ceiling: ceiling)
+                || !Self.amountWithin(ledger.localOpening[row * a + k].raw, ceiling: ceiling) { return false }
+        }
+        return true
+    }
+
     /// The state as a tree of the current format.
     public func saveTree() -> SaveTree {
         let g = governments, l = ledger, c = currencies, v = provinces
@@ -311,13 +342,12 @@ struct Loader {
               let rd = ints("CURR", "redenominationDue", .bool, rows: nc), let mb = ints("CURR", "moneyBase", .i64, rows: nc),
               let mo = ints("CURR", "moneyBaseOpening", .i64, rows: nc), let mp = ints("CURR", "moneyBasePosted", .i64, rows: nc)
         else { return nil }
-        // amounts within 2^60 (every day's end redenominates past it, unless the scale is at its ceiling) and rates and
-        // price indices within ±2^52 (21,845 redenominations take a log by about 2^50): what a game ever saves
-        let past = Int64(1) << 60
-        func within(_ v: Int64, _ ceiling: Bool) -> Bool { ceiling || (v >= -past && v <= past) }
+        // the ledger's bounds (`mostSavedAmount`, `mostSavedLog`): what a game ever saves
+        func within(_ v: Int64, _ ceiling: Bool) -> Bool { WorldState.amountWithin(v, ceiling: ceiling) }
         for i in 0..<nc {
-            let ceiling = ke[i] > Int64(UInt16.max - 3)
-            guard within(mb[i], ceiling), within(mo[i], ceiling), ra[i].magnitude <= 1 << 52, pi[i].magnitude <= 1 << 52 else { return nil }
+            let ceiling = ke[i] > WorldState.ceilingExponent
+            guard within(mb[i], ceiling), within(mo[i], ceiling), ra[i].magnitude <= UInt64(WorldState.mostSavedLog),
+                  pi[i].magnitude <= UInt64(WorldState.mostSavedLog) else { return nil }
         }
         var ct = CurrencyTable()
         ct.scaleExponent = filled(ke, CurrencyTable.capacity) { UInt16($0) }
@@ -349,7 +379,7 @@ struct Loader {
         for i in 0..<nl {
             // a government's accounts are in its polity's currency, its balances and openings within 2^60 (as above)
             guard cu[i] < Int64(nc), cu[i] == gp[i] else { return nil }
-            let ceiling = ke[Int(cu[i])] > Int64(UInt16.max - 3)
+            let ceiling = ke[Int(cu[i])] > WorldState.ceilingExponent
             for k in 0..<a where !within(lo[i * a + k], ceiling) || !within(lop[i * a + k], ceiling) { return nil }
         }
         var lt = LedgerTable()

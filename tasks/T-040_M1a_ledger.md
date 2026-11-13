@@ -33,11 +33,11 @@ postings, the redenomination trigger on aggregates, `USDn` never redenominating.
   with the budget and the history); a redenomination's notification (the notification ring, M1c); inflation, pass-
   through and money-base growth taking a redenomination step out (M2); the trigger on aggregates (a budget's lines,
   nominal output, a union's money base: M2, with them); the day-1 closure checked in LCU and in USD and §8's `--t0`
-  closure (T-042, with the baked start); the ledger's invariants after every day in debug and test builds (T-044, with
+  closure (T-048, with the start); the ledger's invariants after every day in debug and test builds (T-044, with
   the invariant checker the host runs); the daily ledger step, step 9 (M2); a typed LCU ↔ USDn conversion that does
   not post (trade prices and the display of D-6: M2, with the world market); an exchange set by its dollar side (M2,
   with trade settlement); the posting outboxes of the parallel monthly slots (M2, with the burst helper); how a
-  dissolved state's money and debts are shared out (T-042, with the lifecycle effects and the stub packs); a command
+  dissolved state's money and debts are shared out (T-048, with the lifecycle effects); a command
   carrying LCU worked out on an older view stamped with its currency's scale and rescaled or refused when applied (M2,
   with the AI's budget commands); the redenomination's change routed through the per-category sums (M2, with them).
 
@@ -54,3 +54,15 @@ postings, the redenomination trigger on aggregates, `USDn` never redenominating.
    it with snippets that must fail).
 7. Nothing allocates per posting or per day (measured).
 8. Six independent read-only reviews; every confirmed finding fixed; verification reviews of the fixes.
+
+## Verification of the fixes (2026-11-13)
+- **A concurrency and determinism review** (the first rounds had none): debug and optimised hashes equal over 30
+  years with 3,132 redenominations, 200 orders of the same postings one hash, the close and the redenomination each
+  idempotent, a snapshot read on another thread unchanged, the thread sanitizer clean. It found the checks' sums
+  clamping on forged extremes, loose bounds at load and no pinned run: the sums are now exact, a load refuses amounts
+  past 2^60 and rates past ±2^52 (ADR 0003, decision 6), the exchange refuses a rate it cannot negate, and a short
+  run's hash is pinned.
+- **Its verification (FV6):** a state a save wrote but no load took (a posting before the close on a month's first
+  day leaves an opening past 2^60): the writer now refuses exactly what the loader refuses (ADR 0003, decisions 6 and
+  7); four tests that could not catch their faults remade (each bound on its own and exactly at 2^60, a currency at
+  and past its ceiling, a wrapped difference, the exchange's clamp count).

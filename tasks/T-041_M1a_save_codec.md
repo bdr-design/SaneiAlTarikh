@@ -80,3 +80,15 @@ a reader can skip an unknown field, and whether a held copy keeps the cap's room
    docs/perf.md).
 8. Six independent read-only reviews; every confirmed finding fixed; verification reviews of the fixes; nothing pushed
    before the reviews are clean (`reviewBeforePush`).
+
+## Verification of the fixes (2026-11-13)
+- **An API and words review** (0 must, 9 should, 11 nits), fixed: a newer format told from META before its tree is
+  read; no file written for a state with a redenomination mark; `SaveFile.check`, `compression(of:)`, `mostFileBytes`
+  and `headerBytes` for the platform; the format policy stated once, in `SaveCodec.swift` and §7, with format 1's
+  bounds; the golden save migrated before it is compared.
+- **Its verification (FV6):** the policy's words matched to the golden test (a golden save holds only columns the
+  current version writes, each byte for byte; a drop's step is `dropColumn`); `compression(of:)`'s nil cases stated;
+  tests on a compressed file, an unknown compression and the size bound at `mostFileBytes`. Still open, by choice:
+  a compressor whose output is no shorter than the payload is stored as it gives it (the compressor's contract
+  asks it to answer false then; the platform's comes with T-043), and the writer does not refuse repeated tags or column names (the engine never makes
+  them; the reader refuses them).

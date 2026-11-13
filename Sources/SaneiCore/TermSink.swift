@@ -200,6 +200,9 @@ public struct TermBuffer12<Value: TermValue>: TermSink, Sendable {
     @inlinable
     public mutating func add(_ id: TermID, _ value: Value) {
         precondition(id != .other, "65,535 is «أخرى»'s number: no term uses it")
+        // a term once per value (the value function's contract; a saved sheet refuses one term on two rows), checked
+        // in debug and test builds against the kept rows
+        assert(!(0..<Int(used)).contains { self.id(at: $0) == id.raw }, "a term given twice to one sheet")
         sum = sum + value
         let raw = value.raw
         if raw == 0 { return }

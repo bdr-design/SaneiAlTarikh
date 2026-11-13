@@ -364,7 +364,9 @@ extension WorldState {
                 let new = old.times(1, over: 1_000)
                 ledger.local[i] = new
                 // the change is within the balance's size, and the month's sum within the range while the month opened
-                // within 2^60 (every day's end and every load keep it there), so this sum does not clamp
+                // within 2^60, so this sum does not clamp: a load checks the openings, and a close takes balances the
+                // last day's end kept within 2^60 (today only a government's making posts before a month's close, within
+                // 2^60; a posting before the close on a month's first day, as M2's day-1 commands, must keep this)
                 ledger.localPosted[i] += new - old
             }
             governments.rescaleTaxBase(row: row)

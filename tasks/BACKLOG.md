@@ -66,7 +66,8 @@ listed under each, so a deferred item always has a place that exists.
 - **T-047: every column group for M1 to M6 declared** (§9's M1a checklist): polities, governments, actors, party rows,
   group rows, currencies and accounts, the equipment pool and allocations, the reserve pool, front sectors, the pair
   extension with epochs, climate, single-year cohorts, each with its defaults and its save columns (an added column
-  keeps format 1; the golden save's list of added columns grows); the loader reads each column straight into its typed
+  keeps format 1; the golden save's list of added columns grows; `splitChunk`, the migration operation that splits a
+  chunk, made when a group first needs it); the loader reads each column straight into its typed
   column (no whole-number copy: today's peak is about 3 times the typed state, docs/perf.md); `RingBuffer` made
   `@frozen` and `@inlinable`, with a `removeAll` and an `elements` that allocate nothing, before the histories use it.
 

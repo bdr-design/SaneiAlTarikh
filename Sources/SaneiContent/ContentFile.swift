@@ -34,7 +34,8 @@ public enum ContentFile {
         /// The trailer is not the hash of the bytes before it.
         case damaged
         /// Past `mostBytes`, a payload length that is not the bytes', an older format, a table or column missing,
-        /// or a column of another type, encoding, length or value range than the writer gives it.
+        /// added or out of the writer's order, or a column of another type, encoding, length or value range than the
+        /// writer gives it.
         case malformed
         /// The rows break a rule of the validator (the first problem).
         case invalid(ContentProblem)
@@ -87,8 +88,10 @@ public enum ContentFile {
 
     // MARK: reading
 
-    /// The content in `bytes`, checked: the magic, the size, the trailer, the header, every column (its type, encoding
-    /// and length the writer's), then every rule of the validator.
+    /// The content in `bytes`, checked: the magic, the size, the trailer, the header, the writer's tables and columns in
+    /// its order, every column (its type, encoding and length the writer's), then every rule of the validator. The
+    /// rules only the bake checks are the source files' own: the CSV and JSON forms, text in NFC, the ID lock and the
+    /// aliases.
     public static func read(_ bytes: [UInt8]) -> Result<Loaded, Failure> {
         guard bytes.count >= 8, Array(bytes[0..<8]) == magic else { return .failure(.notContent) }
         guard bytes.count >= headerBytes + 32 else { return .failure(.truncated) }
@@ -105,7 +108,7 @@ public enum ContentFile {
         guard Int(length) == body - headerBytes else { return .failure(.malformed) }
         guard let tree = SaveTree.read(bytes, headerBytes..<body) else { return .failure(.malformed) }
         guard tree.formatVersion <= format else { return .failure(.newerFormat(tree.formatVersion)) }
-        guard tree.formatVersion == format, let db = decode(tree) else { return .failure(.malformed) }
+        guard tree.formatVersion == format, hasTheWritersLayout(tree), let db = decode(tree) else { return .failure(.malformed) }
         if let first = db.problems().first { return .failure(.invalid(first)) }
         return .success(Loaded(db: db, rulesHash: hash))
     }
@@ -150,6 +153,23 @@ public enum ContentFile {
                            definite: definite[$0], oblique: oblique[$0], withLi: li[$0], withBi: bi[$0])
             }
         }
+    }
+
+    /// The tables and columns the writer gives, in its order: what an empty content writes.
+    static let layout: [(tag: String, columns: [String])] = chunks(ContentDB(polities: [], actors: [], groups: [], currencies: []))
+        .map { ($0.tag, $0.columns.map(\.name)) }
+
+    /// True when the tree holds exactly the writer's tables and columns, in its order, and nothing else: with every
+    /// column read with the writer's type and encoding, and every length and number in its shortest form (the column
+    /// codec's rule), the bytes of an accepted file are the bytes its content writes, so one content has one file and
+    /// one `rulesHash`.
+    static func hasTheWritersLayout(_ tree: SaveTree) -> Bool {
+        guard tree.chunks.count == layout.count else { return false }
+        for (chunk, want) in zip(tree.chunks, layout) {
+            guard chunk.tag == want.tag, chunk.columns.count == want.columns.count,
+                  zip(chunk.columns, want.columns).allSatisfy({ $0.name == $1 }) else { return false }
+        }
+        return true
     }
 
     static func decode(_ tree: SaveTree) -> ContentDB? {

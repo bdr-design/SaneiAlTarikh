@@ -583,24 +583,6 @@ extension SimulationTests {
         XCTAssertGreaterThanOrEqual(inside.count, 1, "a clamp made by the day itself is counted by the host's scope")
         XCTAssertGreaterThanOrEqual(sim.state.world.refusedPostings, 1, "and the ledger refused the clamped amount")
     }
-
-    func testIssuedCommandsSurviveTheirCodec() {
-        let g = GovRef(row: Idx(raw: 7), serial: Serial(raw: 9))
-        let all = [
-            IssuedCommand(day: start, issuer: .player(g), sequence: 1, command: .setTaxRate(government: g, rate: BP(raw: 1))),
-            IssuedCommand(day: start.adding(days: 40), issuer: .event, sequence: .max, command: .dissolveGovernment(government: g, provincesTo: GovRef(row: Idx(raw: 1), serial: Serial(raw: 2)))),
-            IssuedCommand(day: GameDate(days: -43_829), issuer: .ai(g), sequence: 0, command: .createGovernment(polity: Idx(raw: 3), treasury: .zero, taxBase: .zero, taxRate: .zero)),
-            IssuedCommand(day: start.adding(days: 3), issuer: .event, sequence: 2, command: .succeedGovernment(government: g)),
-        ]
-        var w = ByteWriter()
-        for c in all { c.write(to: &w) }
-        var r = ByteReader(w.bytes)
-        for c in all { XCTAssertEqual(IssuedCommand.read(from: &r), c) }
-        XCTAssertEqual(r.remaining, 0)
-        var bad = ByteReader([0, 9])
-        XCTAssertNil(IssuedCommand.read(from: &bad))
-        XCTAssertEqual(bad.offset, 0)
-    }
 }
 
 extension WorldState {

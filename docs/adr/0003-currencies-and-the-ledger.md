@@ -67,12 +67,19 @@ the world account is exactly 0 after each monthly close.
    drifts (measured by a reviewer). The count of redenominations per currency is the log; a notification comes with the
    notification ring (M1c). The scale is a UInt16: 21,845 redenominations, which no game reaches; past that the currency
    stops redenominating. Dollars never redenominate: a dollar hyperinflation has no rule. The aggregates that M2 adds (a
-   budget's lines, nominal output, a union's money base) must ask the same of their sums.
+   budget's lines, nominal output, a union's money base) must ask the same of their sums. So a load refuses what no
+   game saves: an LCU balance, opening, money base or its opening past 2^60 either way while its currency's scale is
+   below the ceiling, and a rate or a price index past ±2^52 (21,845 redenominations take a log by about 2^50); the
+   save's writer refuses the same state (`ledgerWithinSaveBounds`), so a written save always loads.
 7. **The monthly close** runs on day 1, after the calendar jobs (and, from M2, after the world market and the
    transport payout, which settle through the world account). It checks the invariants in every build, a walk of the
    columns once a month, and that the world account is 0; a failed close is counted in the world row (0 in every
    game), and the month opens at the balances as they are. No posting clamps (decision 5), so the invariant sees every
-   posting. A world account left owed fails every close until it is settled, so the count is of failed closes.
+   posting. A world account left owed fails every close until it is settled, so the count is of failed closes. The
+   close copies each balance into its opening before the day's end redenominates: a posting before the close on a
+   month's first day that takes a balance past 2^60 (none does in M1a; M2's day-1 commands could) leaves an opening
+   past it for the month, a state no save takes. M2 keeps such postings after the close, or rescales the openings with
+   the balances.
 8. **The surface.** Everything that moves money is internal to the engine: its systems post; nothing outside writes a
    balance. The parallel monthly slots (M2) cannot post into the state from their tasks: each task fills an outbox of
    postings (an account, a category, an amount in the account's unit), applied in serial order after the burst; that

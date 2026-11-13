@@ -44,7 +44,8 @@ public struct IDLock: Sendable, Equatable {
     }
 
     /// The first problem between the lock, the registries and the aliases, with its file and line: a registry ID missing
-    /// from the lock (the registry's row), a locked ID that no registry holds and no alias replaces (the lock's line), an
+    /// from the lock (the registry's row), a locked government whose ID is not `<polity>.<name>` of a polity the
+    /// registries hold or replace, a locked ID that no registry holds and no alias replaces (the lock's line), an
     /// alias of an ID still held, never issued, or pointing to an ID no registry holds (the alias's line).
     public func firstProblem(_ reg: Registries, _ aliases: Aliases) -> BakeError? {
         var held = Set<String>()
@@ -53,6 +54,14 @@ public struct IDLock: Sendable, Equatable {
         for e in entries { locked.insert(e.kind + " " + e.id) }
         for e in Self.ids(of: reg.db) where !locked.contains(e.kind + " " + e.id) {
             return reg.located(ContentProblem(table: e.table, row: e.row, message: "\(e.kind) \(e.id) is not in ids.lock: add it at the end"))
+        }
+        for (k, e) in entries.enumerated() where e.kind == "government" {
+            // a government's ID names its polity: one a registry holds, or one an alias replaces
+            let polity = String(e.id.prefix { $0 != "." })
+            guard ContentID.isGovernmentID(e.id, of: polity),
+                  held.contains("polity " + polity) || aliases.replacement("polity", polity) != nil else {
+                return BakeError("ids.lock", k + 1, "government \(e.id) is not <polity>.<name> of a polity the registries hold or replace")
+            }
         }
         for (k, e) in entries.enumerated() where e.kind != "government" && !held.contains(e.kind + " " + e.id) && aliases.replacement(e.kind, e.id) == nil {
             return BakeError("ids.lock", k + 1, "\(e.kind) \(e.id) is locked but no registry holds it and no alias replaces it")
@@ -94,17 +103,14 @@ public struct Aliases: Sendable, Equatable {
     /// governments come with T-048), well-formed IDs, each target once and other than the alias's own, weights from 1
     /// to 10,000 summing to 10,000, an ID replaced at most once.
     public static func parse(_ data: [UInt8], file: String = "aliases.json") throws -> Aliases {
-        let root = try JSON.parse(data, file: file)
+        var starts: [(depth: Int, line: Int)] = []
+        let root = try JSON.parse(data, file: file, valueStarts: &starts)
         func fail(_ m: String) -> BakeError { BakeError(file, 0, m) }
         guard root.keys.sorted() == ["aliases", "format"], case .integer(1)? = root["format"], case let .array(list)? = root["aliases"] else {
             throw fail("an object with the keys «format» (1) and «aliases» (a list)")
         }
-        // each alias's line, for messages: the n-th «"from"» in the file
-        let text = String(decoding: data, as: UTF8.self)
-        var fromLines: [Int] = []
-        for (k, l) in text.split(separator: "\n", omittingEmptySubsequences: false).enumerated() {
-            for _ in 0..<l.components(separatedBy: "\"from\"").count - 1 { fromLines.append(k + 1) }
-        }
+        // each alias's line, for messages: where its item starts (the list's items are the values two levels down)
+        let fromLines = starts.filter { $0.depth == 2 }.map(\.line)
         var out: [Alias] = []
         for (k, item) in list.enumerated() {
             let line = k < fromLines.count ? fromLines[k] : 0

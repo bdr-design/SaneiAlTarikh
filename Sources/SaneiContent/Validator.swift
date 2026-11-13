@@ -17,23 +17,39 @@ public struct ContentProblem: Sendable, Equatable, CustomStringConvertible {
 }
 
 /// The validator's rules on the registries (§2.2: the validator lives here, so the reader of `content.bin` checks what
-/// it reads with the same rules the bake checks before it writes).
+/// it reads with the rules on the rows that the bake checks before it writes; the source files' own rules, the CSV and
+/// JSON forms, text in NFC, the ID lock and the aliases, are the bake's alone).
 extension ContentDB {
     /// The longest text a name field holds, in UTF-8 bytes.
     public static let mostTextBytes = 256
 
-    /// True for a name's text: not empty, at most `mostTextBytes` bytes, no space at either end, and no character that
-    /// changes how the text around it shows (a control, a line or paragraph separator, a bidi embedding, override or
-    /// isolate, a byte-order mark); the joiners Arabic needs (U+200C, U+200D) are allowed.
+    /// True for a name's text: not empty, at most `mostTextBytes` bytes, no space at either end, no mark at its start
+    /// (a mark belongs to the letter before it), and no character that changes how the text around it shows or that
+    /// shows nothing: a control, a line or paragraph separator, and every format character (a bidi embedding, override,
+    /// isolate or mark, a zero-width space, a soft hyphen, a word joiner, a byte-order mark, an annotation mark) but
+    /// the joiners Arabic needs (U+200C, U+200D).
     static func isNameText(_ t: String) -> Bool {
         guard !t.isEmpty, t.utf8.count <= mostTextBytes, let first = t.unicodeScalars.first, let last = t.unicodeScalars.last,
               !isSpace(first.value), !isSpace(last.value) else { return false }
+        if !isPlain(first.value) {
+            switch first.properties.generalCategory {
+            case .nonspacingMark, .spacingMark, .enclosingMark: return false
+            default: break
+            }
+        }
         for s in t.unicodeScalars {
             let v = s.value
-            if v < 0x20 || (v >= 0x7F && v <= 0x9F) || v == 0x2028 || v == 0x2029 || v == 0xFEFF { return false }
-            if (v >= 0x202A && v <= 0x202E) || (v >= 0x2066 && v <= 0x2069) || v == 0x200E || v == 0x200F || v == 0x061C { return false }
+            if isPlain(v) || v == 0x20 { continue }
+            if v < 0x20 || (v >= 0x7F && v <= 0x9F) || v == 0x2028 || v == 0x2029 { return false }
+            if v != 0x200C && v != 0x200D && s.properties.generalCategory == .format { return false }
         }
         return true
+    }
+
+    /// A scalar no rule of a name's text is about: printable ASCII and the Arabic letters and digits (U+0621 to U+064A,
+    /// U+0660 to U+0669), so the common case looks no property up.
+    @inline(__always) static func isPlain(_ v: UInt32) -> Bool {
+        (v >= 0x21 && v <= 0x7E) || (v >= 0x0621 && v <= 0x064A) || (v >= 0x0660 && v <= 0x0669)
     }
 
     /// A space by Unicode's White_Space property, the controls apart (they are refused anywhere in a name): the list
@@ -60,7 +76,7 @@ extension ContentDB {
         func name(_ table: String, _ k: Int, _ n: NameRecord) {
             for (field, t) in [("name", n.name), ("short", n.short), ("oblique", n.oblique), ("withLi", n.withLi), ("withBi", n.withBi)]
             where !Self.isNameText(t) {
-                add(table, k, "\(field) is empty, past \(Self.mostTextBytes) bytes, spaced at an end, or holds a control or direction mark")
+                add(table, k, "\(field) is empty, past \(Self.mostTextBytes) bytes, spaced at an end, starts with a mark, or holds a control or an invisible format character")
             }
             if n.human && n.number == .singular { add(table, k, "human is for plural names of people; this one is singular") }
         }

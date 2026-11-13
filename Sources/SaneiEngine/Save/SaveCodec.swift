@@ -7,11 +7,12 @@ import SaneiCore
 // The format policy (§7, F6; stated here and in §7 only). The format version (`WorldState.saveFormat`) rises when a
 // change alters how a released format's columns are read or written: a column renamed, dropped, re-typed or
 // re-encoded, units or IDs remapped, a chunk split, a command's fields changed (a step then rewrites the CMDQ items).
-// Each rise brings a migration step (`SaveMigrations`; a drop's step may be empty), so that every golden save, migrated
-// to the current format, holds exactly the columns the current version writes. A column or chunk only added keeps the
+// Each rise brings a migration step (`SaveMigrations`; a drop's step is `dropColumn`), so that every golden save,
+// migrated to the current format, holds only columns the current version writes, each written back byte for byte
+// (columns added since are absent from it, and listed). A column or chunk only added keeps the
 // format: an older save lacks it and takes its default, and an older version skips it, reported, as long as its type
 // and encoding are ones format 1 knows and the tree stays within its caps (64 chunks, 96 columns, names of 64 bytes);
-// a column of a new type or encoding, or past a cap, is not skippable by an older reader, so it rises the format too.
+// a column of a new type or encoding, or past a cap, is not skippable by an older reader, so it raises the format too.
 // A format past the reader's own is refused as newer, from META once the file is whole, before its tree is read. Every format has its
 // golden save, written once and never rewritten (Tests/SaneiEngineTests/Golden).
 
@@ -29,16 +30,18 @@ extension SaveMeta {
 /// A game's save file: writing and reading it.
 public enum SaveCodec {
     /// The file's bytes. The format, the date and the seed in META are the state's, whatever `meta` says, and a player's
-    /// government the state never made is left out, so every file this writes from a state between days reads back. Make the bytes on the I/O
-    /// thread (`sanei.io`, ADR 0001, `threadSpread`) from a copy of the state (a copy is free until a column is written):
-    /// never on the simulation's (§3.5).
-    /// Nil for a state no read would load, so the platform keeps the last good save and logs it (T-043), never a crash
-    /// on the I/O thread and never a file that replaces a good save and cannot load: a state that still holds a
-    /// redenomination mark (a save is taken between days, as the host does, when every mark is cleared; a state posted
-    /// to outside a day and not stepped since may hold one), and a state whose tree passes `SaveFile.mostPayloadBytes`
-    /// (a state at the caps makes about 50 KB; §3.5 budgets 8 MB).
+    /// government the state never made is left out. Make the bytes on the I/O thread (`sanei.io`, ADR 0001,
+    /// `threadSpread`) from a copy of the state (a copy is free until a column is written): never on the simulation's
+    /// (§3.5).
+    ///
+    /// Nil for a state a read would refuse, so the platform keeps the last good save and logs it (T-043): never a
+    /// crash on the I/O thread, and never a file that replaces a good save and cannot load. Three cases are such a
+    /// state: one that still holds a redenomination mark (a save is taken between days, as the host does, when every
+    /// mark is cleared; a state posted to outside a day and not stepped since may hold one); one whose ledger passes
+    /// the bounds a load checks (`ledgerWithinSaveBounds`); and one whose tree passes `SaveFile.mostPayloadBytes` (a
+    /// state at the caps makes about 50 KB; §3.5 budgets 8 MB).
     public static func write(_ state: WorldState, meta: SaveMeta, compressor: (any SaveCompressor)? = nil) -> [UInt8]? {
-        guard !state.currencies.redenominationDue.contains(true) else { return nil }
+        guard !state.currencies.redenominationDue.contains(true), state.ledgerWithinSaveBounds else { return nil }
         var m = meta
         m.formatVersion = WorldState.saveFormat
         m.date = state.world.date.days

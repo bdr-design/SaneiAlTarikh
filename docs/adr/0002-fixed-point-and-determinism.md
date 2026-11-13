@@ -33,12 +33,12 @@ how a clamp is counted, where the tables come from or how a random draw is mappe
      so the compiler refuses to let two tasks hold it; the task-local that holds it is internal.
    - Opening a scope allocates once (measured on Linux: 72 bytes, freed when it ends). So the simulation's loop opens
      one long scope around a whole run of ticks (`Saturation.countingAcrossAwaits`), which follows its task across
-     awaits and allocates nothing while it lasts; a tick does not open a scope per phase (§8: 0 allocations a tick).
+     awaits and allocates nothing while it lasts; a tick does not open a scope per phase (§8: 0 allocations a tick in the game's own code; §3.2 gives the burst's runtime task allocations a line of their own).
      The short synchronous scope (`counting(into:)`) is for single calls and tests.
    - Each child of a parallel burst must count its own clamps (`Saturation.counted`) and hand the count back in its
      result; the parent adds the counts in serial order. Per-child counters from a pool, so the counters add no
      allocation, are the engine's (its burst helper); the burst's child tasks still allocate in the Swift runtime
-     (about 53 allocations for 8 children, measured on x86 Linux), a bounded line of their own in §3.2 (OWNER PROXY
+     (63 to 64 allocations for 8 children, the group's own 3 among them, measured on x86 Linux), a bounded line of their own in §3.2 (OWNER PROXY
      2026-11-13: at most the core count of children, each a stripe of the day's governments).
    - The silent cases: a clamp outside every scope is still a clamp, and nobody counts it. That is every test of plain
      values and all formatting, and also a detached task and an actor's method whose caller did not bind. The engine's
@@ -57,7 +57,7 @@ how a clamp is counted, where the tables come from or how a random draw is mappe
 5. **Tables are data, generated and checked.** `tools/checks/core_reference.py` computes 2^(i/1024) and
    log2(1 + i/1024) for i = 0…1024 from 60-digit decimal arithmetic, correctly rounded to 32 binary places, and writes
    them as a Swift file. `exp2` and `log2` interpolate linearly. The reference asserts these bounds against decimals
-   (§2.3 asks for 1e-6):
+   (§2.3 points here for them):
    - `exp2`: within 6e-8 of the true value, relative, from the level 1 up. Below 1 a `Q32` has few bits: within 6e-8
      of the true level plus one step of 2^-32 (the level 1/20,500 is already 2e-6 off). A small level is better built
      as `LogQ` from two whole numbers.

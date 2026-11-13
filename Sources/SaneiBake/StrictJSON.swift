@@ -2,8 +2,9 @@ import Foundation
 
 /// A strict JSON reader for the content's few JSON files (`aliases.json`): one parser, so there is one reading of every
 /// file. It refuses what a lenient parser would let through: a byte-order mark, a key twice in one object, a number
-/// with a fraction or an exponent (numbers are whole, at most 18 digits), a control character in a string, more than
-/// 64 levels of nesting, and anything after the value.
+/// with a fraction or an exponent (numbers are whole, at most 18 digits), a control character in a string, a value
+/// more than 64 levels deep (the whole value is the first level, so 64 nested arrays may hold nothing: a value inside
+/// the 64th is the 65th level), and anything after the value. Keys are compared by their bytes.
 public enum JSON: Sendable, Equatable {
     case object([(key: String, value: JSON)])
     case array([JSON])
@@ -27,7 +28,7 @@ public enum JSON: Sendable, Equatable {
     /// The object's value for `key` (keys are unique: the reader refuses a repeated one).
     public subscript(key: String) -> JSON? {
         guard case let .object(pairs) = self else { return nil }
-        return pairs.first { $0.key == key }?.value
+        return pairs.first { $0.key.utf8.elementsEqual(key.utf8) }?.value
     }
 
     public var keys: [String] {
@@ -36,7 +37,15 @@ public enum JSON: Sendable, Equatable {
     }
 
     public static func parse(_ data: [UInt8], file: String) throws -> JSON {
+        var starts: [(depth: Int, line: Int)] = []
+        return try parse(data, file: file, valueStarts: &starts)
+    }
+
+    /// The value, and where each value in it starts: its depth (the whole value at 0) and its line, in the order the
+    /// values open.
+    public static func parse(_ data: [UInt8], file: String, valueStarts: inout [(depth: Int, line: Int)]) throws -> JSON {
         var p = Parser(bytes: data, file: file)
+        defer { valueStarts = p.valueStarts }
         if data.starts(with: [0xEF, 0xBB, 0xBF]) { throw p.fail("a byte-order mark: save as UTF-8 without one") }
         guard String(decoding: data, as: UTF8.self).utf8.elementsEqual(data) else { throw p.fail("not valid UTF-8") }
         p.space()
@@ -50,13 +59,21 @@ public enum JSON: Sendable, Equatable {
         let bytes: [UInt8]
         let file: String
         var i = 0
+        /// The line `i` is on: a line break is only ever white space (a string refuses a control character).
+        var line = 1
+        var valueStarts: [(depth: Int, line: Int)] = []
 
         func fail(_ m: String) -> BakeError {
             let line = 1 + bytes[..<Swift.min(i, bytes.count)].filter { $0 == 0x0A }.count
             return BakeError(file, line, m)
         }
 
-        mutating func space() { while i < bytes.count, [0x20, 0x09, 0x0A, 0x0D].contains(bytes[i]) { i += 1 } }
+        mutating func space() {
+            while i < bytes.count, [0x20, 0x09, 0x0A, 0x0D].contains(bytes[i]) {
+                if bytes[i] == 0x0A { line += 1 }
+                i += 1
+            }
+        }
 
         mutating func expect(_ word: String) throws {
             let w = Array(word.utf8)
@@ -66,6 +83,7 @@ public enum JSON: Sendable, Equatable {
 
         mutating func value(depth: Int) throws -> JSON {
             guard depth < 64 else { throw fail("nested past 64 levels") }
+            valueStarts.append((depth, line))
             guard i < bytes.count else { throw fail("a value is missing") }
             switch bytes[i] {
             case 0x7B: return try object(depth: depth)

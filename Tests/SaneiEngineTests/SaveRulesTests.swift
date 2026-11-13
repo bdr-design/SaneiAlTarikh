@@ -110,6 +110,42 @@ final class SaveRulesTests: XCTestCase {
         XCTAssertNotNil(load(rate), "a rate at 2^52 loads")
     }
 
+    /// Each bound on its own: an account's balance, opening and month's sum set together (the sums kept), so one value
+    /// at a time passes 2^60; exactly 2^60 either way loads; a currency past its ceiling takes any amount, one at the
+    /// ceiling does not; the money base and its opening each on their own.
+    func testEachLedgerBoundOnItsOwn() {
+        let edge = Int64(1) << 60
+        func account(_ t: inout SaveTree, _ name: String, balance b: Int64, opening o: Int64) {
+            change(&t, "LEDG", name) { v in [b] + v.dropFirst() }
+            change(&t, "LEDG", name + "Opening") { v in [o] + v.dropFirst() }
+            change(&t, "LEDG", name + "Posted") { v in [b - o] + v.dropFirst() }
+        }
+        func moneyBase(_ t: inout SaveTree, _ b: Int64, _ o: Int64) {
+            change(&t, "CURR", "moneyBase") { v in [b] + v.dropFirst() }
+            change(&t, "CURR", "moneyBaseOpening") { v in [o] + v.dropFirst() }
+            change(&t, "CURR", "moneyBasePosted") { v in [b - o] + v.dropFirst() }
+        }
+        for x in [edge, -edge] {
+            var t = tree
+            account(&t, "treasury", balance: x, opening: x)
+            XCTAssertNotNil(load(t), "exactly \(x) loads")
+        }
+        refused("a balance past 2^60, its opening within") { t in account(&t, "treasury", balance: edge + 1, opening: 0) }
+        refused("an opening past 2^60, its balance within") { t in account(&t, "treasury", balance: 0, opening: -edge - 1) }
+        refused("a money base past 2^60, its opening within") { t in moneyBase(&t, edge + 1, 0) }
+        refused("a money base's opening past 2^60, the base within") { t in moneyBase(&t, 0, edge + 1) }
+        // the ceiling: the scale of the first ledger row's currency
+        let currency = Int(ints(tree.chunk("LEDG")!.column("currency")!)[0])
+        func scaled(_ t: inout SaveTree, _ e: Int64) {
+            change(&t, "CURR", "scaleExponent") { v in var v = v; v[currency] = e; return v }
+            account(&t, "treasury", balance: 2 * edge, opening: 2 * edge)
+        }
+        var past = tree
+        scaled(&past, Int64(UInt16.max - 2))
+        XCTAssertNotNil(load(past), "a currency past its ceiling takes 2^61")
+        refused("a currency at its ceiling does not") { t in scaled(&t, Int64(UInt16.max - 3)) }
+    }
+
     func testTheProvincesAndCountsRules() {
         refused("a sovereign polity out of range") { t in self.change(&t, "PROV", "sovereign") { v in [Int64(self.base.polities.count)] + v.dropFirst() } }
         refused("people below 0") { t in self.change(&t, "PROV", "population") { v in [-1] + v.dropFirst() } }
