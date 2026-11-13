@@ -84,8 +84,9 @@ extension ContentDB {
     /// runs on. On Apple's systems that runtime is the system's own, not the toolchain's: iOS 17.0 and macOS 14.0 are
     /// taken to carry Swift 5.9's, whose tables are Unicode 15.0 (a later 17.x or 14.x carries 5.10's, 15.0 as well;
     /// the pinned Linux toolchain, Swift 6.0.3, is 15.0 too, and Swift 6.1 is 16.0). Which Unicode each Apple runtime
-    /// carries is from no measurement of ours: T-043 checks iOS 17.0's on its simulator; macOS 14.0's stays unchecked. Raised only with the minimum
-    /// system (Package.swift, App/project.yml, §3.10), with `hiddenRanges` made again from that version's tables.
+    /// carries is from no measurement of ours: T-043 checks iOS 17.0's on its simulator; macOS 14.0's stays unchecked.
+    /// Raised only with the minimum system (Package.swift, App/project.yml, §3.10), with `hiddenRanges` made again from
+    /// that version's tables.
     public static let unicodeVersion = (major: 15, minor: 0)
 
     /// The Arabic marks (the harakat, U+064B to U+0652, and the superscript alef, U+0670): marks of Unicode 1.1, none
@@ -126,8 +127,8 @@ extension ContentDB {
             for (field, t) in [("name", n.name), ("short", n.short), ("oblique", n.oblique), ("withLi", n.withLi), ("withBi", n.withBi)]
             where !Self.isNameText(t) {
                 add(table, k, "\(field) is empty, past \(Self.mostTextBytes) bytes, spaced at an end, starts with a mark or a joiner, "
-                    + "ends with a joiner, or holds a control, an invisible or ignorable character, or a private-use, unassigned or "
-                    + "noncharacter code point, or one past Unicode \(Self.unicodeVersion.major).\(Self.unicodeVersion.minor)")
+                    + "ends with a joiner, or holds a control, an invisible or ignorable character, a replacement character, or a "
+                    + "private-use, unassigned or noncharacter code point, or one past Unicode \(Self.unicodeVersion.major).\(Self.unicodeVersion.minor)")
             }
             if n.human && n.number == .singular { add(table, k, "human is for plural names of people; this one is singular") }
         }

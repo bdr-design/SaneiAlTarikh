@@ -907,11 +907,11 @@ bound here; each item is a line in `docs/perf.md` (L12) and a test where one is 
 - A header sub-line that is still too long gives way at its end with an ellipsis; a number in it is hidden whole, never
   cut to its last digits; VoiceOver reads the line whole. The widest names do this on a few panels (§T-024's list).
 - A name's characters are Unicode 15.0 or older: the tables of the Swift runtime in the oldest system the game runs on
-  (iOS 17.0 and macOS 14.0, taken to carry Unicode 15.0; T-043 checks iOS 17.0's on its simulator). The validator
-  writes out the characters it refuses (format, ignorable, private-use, the noncharacters) as 15.0 has them, and looks
-  up only a character's age and whether the first is a mark, so the bake and every phone judge a name alike, but for a
-  first character whose mark category a later Unicode changes (`ContentDB.unicodeVersion`, raised only with the
-  minimum system; T-042).
+  (iOS 17.0 and macOS 14.0, taken to carry Unicode 15.0; T-043 checks iOS 17.0's on its simulator). The validator writes
+  out the characters it refuses (format, ignorable, private-use, the replacement characters U+FFFC and U+FFFD, the
+  noncharacters) as 15.0 has them, and looks up only a character's age and whether the first is a mark, so the bake and
+  every phone judge a name alike, but for a first character whose mark category a later Unicode changes
+  (`ContentDB.unicodeVersion`, raised only with the minimum system; T-042).
 - `tools/stress_names.js` renders the pages that name the player's country with Egypt (the baseline), Saudi Arabia, the
   United States, the Central African Republic and the widest short name on the 7 phones; it runs with the full gate
   (`STRESS=1 tools/gate_all.sh …`) and must report 0 issues.

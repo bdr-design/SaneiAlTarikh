@@ -59,6 +59,10 @@ pushed=$(git rev-parse HEAD)
 git checkout -q main
 check fail 'polity a\npolity b\n' "a line the last push added, removed" "$pushed"
 check pass 'polity a\npolity b\npolity c\npolity d\n' "grows from the last push" "$pushed"
+# both guard at once: a lock that keeps the last push's but not main's fails
+on_main 'polity a\npolity x\n'
+check fail 'polity a\npolity b\npolity c\npolity d\n' "main's lock changed, the last push's kept" "$pushed"
+on_main 'polity a\npolity b\n'
 on_main ''
 check pass 'polity a\n' "main's lock empty: a prefix of any"
 on_main 'polity a\npolity b'
