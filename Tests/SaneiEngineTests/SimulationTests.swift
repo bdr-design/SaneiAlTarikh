@@ -71,9 +71,10 @@ final class SimulationTests: XCTestCase {
         for _ in 0..<(3 * 365) {
             let today = sim.state.world.date
             steps.date = today
-            // now and then a government ends and another begins, on any day of the month
+            // now and then a government ends and another begins, on any day of the month (the first 10 rows never end,
+            // so the three Januaries below are checked on governments that live through them)
             if g.chance(1, in: 6) {
-                let live = (0..<sim.state.governments.rows).filter { sim.state.governments.exists[$0] }
+                let live = (10..<sim.state.governments.rows).filter { sim.state.governments.exists[$0] }
                 if let row = live.isEmpty ? nil : live[Int(g.below(UInt64(live.count)))] {
                     let ref = sim.state.governments.ref(row)
                     seq += 1
@@ -96,14 +97,15 @@ final class SimulationTests: XCTestCase {
         XCTAssertFalse(runs.isEmpty)
         for (serial, months) in runs {
             for (m, n) in months { XCTAssertEqual(n, 1, "government \(serial) ran \(n) times in month \(m)") }
-            // a government still alive at the end ran in every full month from its first one
-            if dissolvedOn[serial] == nil {
-                let made = createdOn[serial] ?? start
-                let first = month(made) + (made.day > Int(GovernmentTable.slots) ? 1 : 0)
-                let last = month(end) - 1
-                if first <= last {
-                    for m in first...last { XCTAssertEqual(months[m], 1, "government \(serial) missed month \(m)") }
-                }
+        }
+        // every government alive at the end (whether it ever ran or not) ran in every full month from its first one
+        for row in 0..<sim.state.governments.rows where sim.state.governments.exists[row] {
+            let serial = sim.state.governments.serial[row].raw
+            let made = createdOn[serial] ?? start
+            let first = month(made) + (made.day > Int(GovernmentTable.slots) ? 1 : 0)
+            let last = month(end) - 1
+            if first <= last {
+                for m in first...last { XCTAssertEqual(runs[serial]?[m], 1, "government \(serial) missed month \(m)") }
             }
         }
         // the yearly run: once a year, in January
@@ -116,7 +118,8 @@ final class SimulationTests: XCTestCase {
         }
         for (serial, years) in yearly { for (y, n) in years { XCTAssertEqual(n, 1, "government \(serial), year \(y)") } }
         // the first governments, made on 1 January 2011 and never dissolved: three Januaries each
-        for serial in UInt32(1)...40 where dissolvedOn[serial] == nil {
+        for serial in UInt32(1)...10 {
+            XCTAssertNil(dissolvedOn[serial])
             XCTAssertEqual(yearly[serial]?.keys.sorted(), [2011, 2012, 2013], "government \(serial)")
         }
     }

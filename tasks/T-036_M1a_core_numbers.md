@@ -94,8 +94,9 @@ heaviness, API and words, errors, checker) then found, and this round fixed:
 - **Gates:** `SaneiCore` is scanned for floating point; the simulation's sources for the standard library's randomness
   and for hash values.
 
-Then three verification reviews (code and concurrency, checker, words and cost) checked the fixes; a second round
-fixed what they found:
+Then three verification reviews were started (code and concurrency, checker, words and cost); the code and
+concurrency one and the words one reported (the checker's was cut off before it reported: see the round of
+2026-11-13 below), and a second round fixed what they found:
 - **A scope allocated each time it opened** (72 bytes, measured), so «a scope per phase of a tick» broke §8's 0
   allocations a tick. Now one long scope follows the task across a whole run of ticks (`countingAcrossAwaits`,
   measured: 0 allocations over 1,000 ticks); the short form is for single calls and tests.
@@ -115,3 +116,14 @@ fixed what they found:
 - **Outside the card:** on Linux the dedicated-thread executor now writes its own thread's name where the kernel keeps
   it (a runtime test saw the old name once in 60 runs under load).
 
+## Verification of the fixes (2026-11-13)
+The earlier verification rounds of SaneiCore's checker and words lenses were cut off before they reported (found by
+the review of the approval records), so both were run again on the whole of SaneiCore (Save/ apart):
+- **Words and cost:** the code keeps every fix the rounds made; the counter's rule as the compiler keeps it (handing it
+  to one task compiles); the burst's runtime task allocations a bounded line of their own in §3.2 (OWNER PROXY
+  2026-11-13); perf rows as measured (x86 Linux, not a phone).
+- **Checker:** 165 planted faults, 145 caught; of the survivors that change behaviour, each got its test (a whole
+  number hashed as its 64-bit word, the division's wide-path ties, a bounded ratio in basis points never counted, a
+  chance true exactly below its draw, a removal that takes nothing copies nothing, a splitter that doubles), and a
+  saved sheet now refuses one term on two rows; re-planted, every one is caught but two that the refusal makes
+  unreachable.

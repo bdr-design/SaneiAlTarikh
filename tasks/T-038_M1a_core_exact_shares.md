@@ -101,3 +101,14 @@ identical). This round fixed what they found:
   `pick` restated a second way, the chance rule's rows, a shuffle's six orders counted; each helper tested on both
   sides (a zero divisor, the far end, both bounds).
 
+## Verification of the fixes (2026-11-13)
+The earlier verification rounds of SaneiCore's checker and words lenses were cut off before they reported (found by
+the review of the approval records), so both were run again on the whole of SaneiCore (Save/ apart):
+- **Words and cost:** the code keeps every fix the rounds made; the counter's rule as the compiler keeps it (handing it
+  to one task compiles); the burst's runtime task allocations a bounded line of their own in §3.2 (OWNER PROXY
+  2026-11-13); perf rows as measured (x86 Linux, not a phone).
+- **Checker:** 165 planted faults, 145 caught; of the survivors that change behaviour, each got its test (a whole
+  number hashed as its 64-bit word, the division's wide-path ties, a bounded ratio in basis points never counted, a
+  chance true exactly below its draw, a removal that takes nothing copies nothing, a splitter that doubles), and a
+  saved sheet now refuses one term on two rows; re-planted, every one is caught but two that the refusal makes
+  unreachable.
