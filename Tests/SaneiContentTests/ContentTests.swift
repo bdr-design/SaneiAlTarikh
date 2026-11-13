@@ -71,10 +71,12 @@ final class ContentTests: XCTestCase, ContentFixtures {
         flags[10] = 1
         reseal(&flags)
         XCTAssertEqual(ContentFile.read(flags).failureValue, .newerContainer(1))
-        var length = good
-        length[12] &+= 1
-        reseal(&length)
-        XCTAssertEqual(ContentFile.read(length).failureValue, .malformed)
+        for change: UInt8 in [1, 255] {                            // a payload length one more, one less
+            var length = good
+            length[12] &+= change
+            reseal(&length)
+            XCTAssertEqual(ContentFile.read(length).failureValue, .malformed)
+        }
         XCTAssertEqual(ContentFile.read(file(ContentFile.chunks(db), format: ContentFile.format + 1)).failureValue, .newerFormat(ContentFile.format + 1))
         XCTAssertEqual(ContentFile.read(file(Array(ContentFile.chunks(db).dropLast()))).failureValue, .malformed, "a table missing")
         // one content, one file: a table or column added or out of the writer's order is refused
@@ -383,13 +385,20 @@ final class ContentTests: XCTestCase, ContentFixtures {
         XCTAssertTrue(ContentDB.unicodeVersion == (15, 0))
         XCTAssertEqual(Unicode.Scalar(0x11F04)!.properties.age.map { [$0.major, $0.minor] }, [15, 0], "a letter of Unicode 15.0")
         XCTAssertTrue(ContentDB.isNameText("د\u{11F04}ولة"), "a 15.0 letter is taken")
-        // a letter of Unicode 16.0: unassigned to this toolchain, past the version to a newer one (an Apple bake): refused
-        // either way
+        // characters of Unicode 15.1 (a symbol, a CJK letter) and 16.0 (an Arabic letter): unassigned to this toolchain,
+        // past the version to a newer one (an Apple bake): refused either way; the 15.1 ones test the minor version
         XCTAssertFalse(ContentDB.isNameText("د\u{31EF}ولة"))
+        XCTAssertFalse(ContentDB.isNameText("د\u{2EBF0}ولة"))
+        XCTAssertFalse(ContentDB.isNameText("د\u{10EC2}ولة"))
+        // the noncharacters, which carry an age in the tables
+        for v: UInt32 in [0xFDD0, 0xFDEF, 0xFFFE, 0xFFFF, 0x1FFFE, 0x10FFFF] {
+            XCTAssertFalse(ContentDB.isNameText("د" + String(Unicode.Scalar(v)!) + "ولة"), "U+\(String(v, radix: 16))")
+        }
+        XCTAssertTrue(ContentDB.isNameText("د\u{FDCF}ولة"), "U+FDCF, next to them, is an Arabic ligature")
         XCTAssertTrue(ContentDB.isNameText("د\u{0889}ولة"), "an Arabic letter of 14.0 is taken")
         XCTAssertTrue(ContentDB.isNameText("مَدِينَةٌ\u{0670}"), "the harakat and the superscript alef after letters")
         XCTAssertFalse(ContentDB.isNameText("\u{064E}مدينة"), "a haraka first")
-        for v: UInt32 in [0x0651, 0x064E, 0x0301, 0x20DD, 0x0903] {
+        for v: UInt32 in [0x064B, 0x0651, 0x064E, 0x0652, 0x0670, 0x0301, 0x20DD, 0x0903] {
             XCTAssertFalse(ContentDB.isNameText(String(Unicode.Scalar(v)!) + "دولة"), "a mark first: U+\(String(v, radix: 16))")
         }
         // one walk orders as the bytes do

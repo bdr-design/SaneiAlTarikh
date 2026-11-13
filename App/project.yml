@@ -5,6 +5,7 @@ name: SaneiAlTarikh
 options:
   bundleIdPrefix: com.bdrdesign
   deploymentTarget:
+    # the minimum system: its Swift runtime's Unicode (15.0) bounds a name's characters (ContentDB.unicodeVersion)
     iOS: "17.0"
   developmentLanguage: ar
   createIntermediateGroups: true

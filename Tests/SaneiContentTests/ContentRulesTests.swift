@@ -168,6 +168,31 @@ final class ContentRulesTests: XCTestCase, ContentFixtures {
         }
     }
 
+    /// The hidden characters written out are Unicode 15.0's (checked on the pinned toolchain, whose tables are 15.0):
+    /// for every character of 15.0 or older, in the list exactly when it is a format, private-use or default-ignorable
+    /// character other than the joiners; the ranges in rising order, apart.
+    func testTheHiddenListIsUnicode15s() {
+        let ranges = ContentDB.hiddenRanges
+        for k in ranges.indices {
+            XCTAssertLessThanOrEqual(ranges[k].0, ranges[k].1)
+            if k > 0 { XCTAssertLessThan(ranges[k - 1].1 + 1, ranges[k].0, "apart: \(k)") }
+        }
+        var checked = 0
+        for v in UInt32(0)...0x10FFFF {
+            guard let s = Unicode.Scalar(v), let age = s.properties.age,
+                  age.major < 15 || (age.major == 15 && age.minor == 0) || s.properties.generalCategory == .privateUse else { continue }
+            let hidden: Bool
+            switch s.properties.generalCategory {
+            case .format, .privateUse: hidden = true
+            default: hidden = s.properties.isDefaultIgnorableCodePoint
+            }
+            let want = hidden && v != 0x200C && v != 0x200D
+            if ContentDB.isHidden(v) != want { XCTFail("U+\(String(v, radix: 16)): \(want)") }
+            checked += 1
+        }
+        XCTAssertGreaterThan(checked, 140_000)
+    }
+
     // MARK: the rows, each rule on its own
 
     func testEachRowRuleOnItsOwn() throws {
@@ -220,12 +245,21 @@ final class ContentRulesTests: XCTestCase, ContentFixtures {
             c[0].iso = ok
             holds(with(db, currencies: c), ok)
         }
+        // a code used twice wherever it sorts: the first two in the order, and the last two
+        for code in ["AAA", "AAC"] {                                // AAA, AAB, AAC with the middle one changed
+            c = content(currencies: 3).currencies
+            c[1].iso = code
+            refused(with(db, currencies: c), "currencies", "is another currency's")
+        }
         for bad in ["AB@", "AB[", "ab1", "AB", "ABCD", "AÉB"] {
             c = db.currencies
             c[0].iso = bad
             refused(with(db, currencies: c), "currencies", row: 0, "is not three capital letters")
         }
-        // human only on plurals
+        // human only on plurals and duals
+        g = db.groups
+        g[0].name = name(number: .dual, human: true)
+        holds(with(db, groups: g), "a dual of people")
         g = db.groups
         g[0].name = name(number: .singular, human: true)
         refused(with(db, groups: g), "groups", row: 0, "human is for plural names")
@@ -246,9 +280,11 @@ final class ContentRulesTests: XCTestCase, ContentFixtures {
         XCTAssertEqual(ContentFile.read(ContentFile.magic + [UInt8](repeating: 0, count: least - 9)).failureValue, .truncated)
         XCTAssertEqual(ContentFile.read(ContentFile.magic + [UInt8](repeating: 0, count: least - 8)).failureValue, .damaged)
         // every byte of the magic
-        var magic = good
-        magic[7] ^= 1
-        XCTAssertEqual(ContentFile.read(magic).failureValue, .notContent)
+        for k in 0..<8 {
+            var magic = good
+            magic[k] ^= 1
+            XCTAssertEqual(ContentFile.read(magic).failureValue, .notContent, "magic byte \(k)")
+        }
         // an older format
         XCTAssertEqual(ContentFile.read(file(ContentFile.chunks(db), format: 0)).failureValue, .malformed)
         // a column shorter than its table
@@ -324,6 +360,11 @@ final class ContentRulesTests: XCTestCase, ContentFixtures {
         // the bytes
         XCTAssertThrowsError(try JSON.parse([0x22, 0xFF, 0x22], file: "f.json")) { e in
             XCTAssertTrue((e as? BakeError)?.message.contains("not valid UTF-8") == true, "\(e)")
+        }
+        // a carriage return is white space to the reader; aliases.json refuses it, as the CSV files and the lock do
+        XCTAssertEqual(try parse("[1,\r\n2]"), .array([.integer(1), .integer(2)]))
+        XCTAssertThrowsError(try Aliases.parse(Array("{\"format\": 1,\r\n\"aliases\": []}".utf8))) { e in
+            XCTAssertTrue((e as? BakeError)?.message.contains("carriage return") == true, "\(e)")
         }
         // equality looks at values
         XCTAssertNotEqual(JSON.object([("a", .integer(1))]), .object([("a", .integer(2))]))

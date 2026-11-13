@@ -23,16 +23,20 @@ extension ContentDB {
     /// The longest text a name field holds, in UTF-8 bytes.
     public static let mostTextBytes = 256
 
-    /// True for a name's text: not empty, at most `mostTextBytes` bytes, no space at either end, no mark at its start
-    /// (a mark belongs to the letter before it), and no character that changes how the text around it shows or that
-    /// shows nothing: a control, a line or paragraph separator, every format character (a bidi embedding, override,
-    /// isolate or mark, a zero-width space, a soft hyphen, a word joiner, a byte-order mark, an annotation mark) and
-    /// every other character Unicode lets a renderer ignore (a filler, a variation selector, the grapheme joiner), and
-    /// the blank braille pattern, but the joiners Arabic needs (U+200C, U+200D), which may stand anywhere but at an
-    /// end; and no private-use code point, and none Unicode assigned after `unicodeVersion` (or not at all). The rule
-    /// reads the running system's Unicode tables, at the bake and on the phone: a character newer than the oldest
-    /// system the game runs on could be unknown there, or classed otherwise, so only characters every supported system
-    /// knows are taken.
+    /// True for a name's text: not empty, at most `mostTextBytes` bytes, no space at either end, no mark at its start,
+    /// and no character that changes how the text around it shows or that shows nothing: a control, a line or
+    /// paragraph separator, every format character (a bidi embedding, override, isolate or mark, a zero-width space, a
+    /// soft hyphen, a word joiner, a byte-order mark, an annotation mark), every other character Unicode lets a
+    /// renderer ignore (a filler, a variation selector, the grapheme joiner) and every private-use code point
+    /// (`hiddenRanges`), the blank braille pattern and the 66 noncharacters (U+FDD0 to U+FDEF, and the last two of every
+    /// plane: never characters, by Unicode's own rule); but the joiners Arabic needs (U+200C, U+200D), which may stand
+    /// anywhere but at an end; and no character Unicode assigned after `unicodeVersion` (or not at all).
+    ///
+    /// The bake and the phone must judge a name alike, whatever Unicode their systems carry. So the hidden characters
+    /// are Unicode 15.0's, written out (a test checks the list against the toolchain's tables), and only two stable
+    /// facts are looked up: a character's age (fixed once it is assigned; a character newer than the system is unknown
+    /// to it and refused, on an older system too) and whether the first is a mark (a mark that later becomes a letter,
+    /// or the reverse, would change only that one rule).
     static func isNameText(_ t: String) -> Bool {
         guard !t.isEmpty, t.utf8.count <= mostTextBytes, let first = t.unicodeScalars.first, let last = t.unicodeScalars.last,
               !isSpace(first.value), !isSpace(last.value), !isJoiner(first.value), !isJoiner(last.value) else { return false }
@@ -45,20 +49,39 @@ extension ContentDB {
         for s in t.unicodeScalars {
             let v = s.value
             if isPlain(v) || v == 0x20 || isArabicMark(v) { continue }
-            if v < 0x20 || (v >= 0x7F && v <= 0x9F) || v == 0x2028 || v == 0x2029 { return false }
-            if v == 0x2800 { return false }
+            if v < 0x20 || (v >= 0x7F && v <= 0x9F) || v == 0x2028 || v == 0x2029 || v == 0x2800 { return false }
+            if (v >= 0xFDD0 && v <= 0xFDEF) || v & 0xFFFE == 0xFFFE { return false }   // the noncharacters
             if isJoiner(v) { continue }
+            if isHidden(v) { return false }
             guard let age = s.properties.age, age.major < unicodeVersion.major
                     || (age.major == unicodeVersion.major && age.minor <= unicodeVersion.minor) else { return false }
-            switch s.properties.generalCategory {
-            case .format, .privateUse: return false
-            default: if s.properties.isDefaultIgnorableCodePoint { return false }
-            }
         }
         return true
     }
 
-    /// The newest Unicode a name's character may come from: iOS 17's, the oldest system the game runs on.
+    /// Unicode 15.0's format characters, other default-ignorable code points and private-use code points, the joiners
+    /// apart, as ranges in rising order (made from the pinned toolchain's tables; `testTheHiddenListIsUnicode15s`).
+    static let hiddenRanges: [(UInt32, UInt32)] = [
+        (0xAD, 0xAD), (0x34F, 0x34F), (0x600, 0x605), (0x61C, 0x61C), (0x6DD, 0x6DD), (0x70F, 0x70F), (0x890, 0x891),
+        (0x8E2, 0x8E2), (0x115F, 0x1160), (0x17B4, 0x17B5), (0x180B, 0x180F), (0x200B, 0x200B), (0x200E, 0x200F),
+        (0x202A, 0x202E), (0x2060, 0x206F), (0x3164, 0x3164), (0xE000, 0xF8FF), (0xFE00, 0xFE0F), (0xFEFF, 0xFEFF),
+        (0xFFA0, 0xFFA0), (0xFFF0, 0xFFFB), (0x110BD, 0x110BD), (0x110CD, 0x110CD), (0x13430, 0x1343F),
+        (0x1BCA0, 0x1BCA3), (0x1D173, 0x1D17A), (0xE0000, 0xE0FFF), (0xF0000, 0xFFFFD), (0x100000, 0x10FFFD),
+    ]
+
+    /// True when `v` is in `hiddenRanges`.
+    static func isHidden(_ v: UInt32) -> Bool {
+        for (lo, hi) in hiddenRanges {
+            if v < lo { return false }
+            if v <= hi { return true }
+        }
+        return false
+    }
+
+    /// The newest Unicode a name's character may come from: that of the Swift runtime in the oldest system the game
+    /// runs on (iOS 17 and macOS 14 carry Swift 5.9's runtime, whose tables are Unicode 15.0; Swift 6.0's are 15.0 too,
+    /// 6.1's 16.0). Raised only with the minimum system (Package.swift, App/project.yml, §3.10), with `hiddenRanges`
+    /// made again from that version's tables.
     public static let unicodeVersion = (major: 15, minor: 0)
 
     /// The Arabic marks (the harakat, U+064B to U+0652, and the superscript alef, U+0670): marks of Unicode 1.1, none
@@ -99,8 +122,8 @@ extension ContentDB {
             for (field, t) in [("name", n.name), ("short", n.short), ("oblique", n.oblique), ("withLi", n.withLi), ("withBi", n.withBi)]
             where !Self.isNameText(t) {
                 add(table, k, "\(field) is empty, past \(Self.mostTextBytes) bytes, spaced at an end, starts with a mark or a joiner, "
-                    + "ends with a joiner, or holds a control, an invisible or ignorable character, or a private-use code point or "
-                    + "one past Unicode \(Self.unicodeVersion.major).\(Self.unicodeVersion.minor)")
+                    + "ends with a joiner, or holds a control, an invisible or ignorable character, or a private-use, unassigned or "
+                    + "noncharacter code point, or one past Unicode \(Self.unicodeVersion.major).\(Self.unicodeVersion.minor)")
             }
             if n.human && n.number == .singular { add(table, k, "human is for plural names of people; this one is singular") }
         }

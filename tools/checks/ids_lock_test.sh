@@ -3,6 +3,9 @@
 # and whether tools/checks/ids_lock.sh must pass or fail. Run from the repository's root; git alone.
 set -euo pipefail
 script="$PWD/tools/checks/ids_lock.sh"
+# nothing from the caller's git: no repository named by the environment (as inside a hook), no system settings
+unset GIT_DIR GIT_WORK_TREE GIT_INDEX_FILE GIT_OBJECT_DIRECTORY GIT_COMMON_DIR GIT_ALTERNATE_OBJECT_DIRECTORIES
+export GIT_CONFIG_NOSYSTEM=1
 root=$(mktemp -d)
 trap 'rm -rf "$root"' EXIT
 # git's global settings in the throwaway folder: the check under test adds a safe.directory each run
@@ -37,6 +40,15 @@ check fail 'polity x\npolity b\npolity c\n' "an ID changed in front"
 check fail '' "emptied"
 check pass 'polity a\npolity b\npolity c\n' "BEFORE all zeros is skipped" 0000000000000000000000000000000000000000
 check fail 'polity a\npolity b\n' "an unfetchable BEFORE" 1111111111111111111111111111111111111111
+# the commit before the push: its lock kept too, even where main's is shorter
+git checkout -q -b pushed
+printf 'polity a\npolity b\npolity c\n' > "$lock"; git commit -q -am pushed; git push -q origin pushed 2>/dev/null
+pushed=$(git rev-parse HEAD)
+git checkout -q main
+check fail 'polity a\npolity b\n' "a line the last push added, removed" "$pushed"
+check pass 'polity a\npolity b\npolity c\npolity d\n' "grows from the last push" "$pushed"
+on_main ''
+check pass 'polity a\n' "main's lock empty: a prefix of any"
 on_main 'polity a\npolity b'
 check fail 'polity a\npolity bz\n' "main's lock without its last line break"
 git rm -q -f "$lock"; git commit -q -m "no lock"; git push -q -f origin main 2>/dev/null

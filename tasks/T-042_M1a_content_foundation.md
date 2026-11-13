@@ -107,17 +107,24 @@ registries; runtime namespace; aliases; ID lock; tag lock»), CI's ID lock on `c
   oblique form is kept explicit (about 90 KB at the caps).
 - **The checkers (mutation):** 159 planted faults; 158 compiled, 79 caught, 11 equivalent, and 62 changed behaviour
   untested, plus 6 in simcli (2 of which the CI's bake step caught). Tests were added for every rule at its edge,
-  simcli's options moved where tests reach them, CI checks simcli's exit codes, and the lock script has a self-test
-  in CI. Planted again, together with faults
-  in the fixes: 100 written, 99 planted (one pattern missed the code, then planted on its own and caught), 97 caught
-  (4 of them by the fault's own trap), 2 equivalent (a search that returns before the changed line; a space allowed
-  mid-name either way). The fix verification's own survivors in the content (the strings reader's end, the
-  government ID's slug) are caught. The lock script: 8 planted, 6 caught, 2 equivalent (a check `cmp` already makes,
-  a comparison over no bytes).
+  simcli's options moved where tests reach them, CI checks simcli's exit codes, and the lock script has a self-test in
+  CI. Planted again, together with faults in the fixes: 100 written, 99 planted (one pattern missed the code, then
+  planted on its own and caught), 97 caught (4 of them by the fault's own trap), 2 equivalent (a search that returns
+  before the changed line; a space allowed mid-name either way). The fix verification's own survivors in the content
+  (the strings reader's end, the government ID's slug) are caught. The lock script: 8 planted, 6 caught, 2 equivalent (a
+  check `cmp` already makes, a comparison over no bytes).
 - **The fix verifications (FV6, FV7):** they found two problems in the fixes. The reader took files in another layout
   (one content, two hashes); it now takes only the writer's layout. The name rule let invisible characters through;
   it now refuses format and ignorable characters, unassigned and private-use code points, joiners at an end and a
   mark at the start. Alias lines are where each alias starts, and a government's ID in the lock names a registry's
   polity. They fuzzed 270,000 forged files (FV6, which found the layout) and 120,000 more (FV7): 0 traps, and in
-  FV7's every file accepted was its content's own bytes. Names now take only characters of Unicode 15.0 or older,
-  iOS 17's, so the bake and every phone read a name alike.
+  FV7 every file accepted was its content's own bytes.
+- **The fix verifications (FV8, FV9):** a name now takes only characters of Unicode 15.0 or older, the tables of the
+  Swift runtime in iOS 17 and macOS 14, and the characters it refuses are written out as 15.0 has them (a test checks
+  the list against the toolchain's tables), with the 66 noncharacters, which the tables give an age, so the bake and
+  every phone judge a name alike (§3.10; a device check on the iOS 17 simulator is T-043's). The harakat skip the
+  lookups (a fully vowelled name about 6 times cheaper to check). They planted 12 and 62 more faults: the survivors
+  (a fathatan first, an ISO code twice where it sorts first, a dual of people, a payload length one short, a carriage
+  return in aliases.json, the lock compared with the last push, an empty old lock) got tests and are caught; the
+  Unicode version's minor and major bounds are equivalent on the pinned toolchain, which knows nothing past 15.0
+  (letters of 15.1 and 16.0 catch them on a newer one).
