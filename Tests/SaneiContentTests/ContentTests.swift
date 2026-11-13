@@ -387,7 +387,7 @@ final class ContentTests: XCTestCase, ContentFixtures {
         XCTAssertTrue(ContentDB.isNameText("د\u{11F04}ولة"), "a 15.0 letter is taken")
         // characters of Unicode 15.1 (a symbol, a CJK letter) and 16.0 (an Arabic letter): unassigned to this
         // toolchain, past the version to a runtime that knows them (a macOS runner's, an Apple bake): refused either
-        // way; the 15.1 ones test the minor version
+        // way; on such a runtime, the 15.1 ones test the minor version
         XCTAssertFalse(ContentDB.isNameText("د\u{31EF}ولة"))
         XCTAssertFalse(ContentDB.isNameText("د\u{2EBF0}ولة"))
         XCTAssertFalse(ContentDB.isNameText("د\u{10EC2}ولة"))
@@ -397,7 +397,10 @@ final class ContentTests: XCTestCase, ContentFixtures {
         for v in noncharacters {
             XCTAssertFalse(ContentDB.isNameText("د" + String(Unicode.Scalar(v)!) + "ولة"), "U+\(String(v, radix: 16, uppercase: true))")
         }
-        XCTAssertTrue(ContentDB.isNameText("د\u{FDCF}ولة"), "U+FDCF, next to them, is an Arabic ligature")
+        XCTAssertTrue(ContentDB.isNameText("د\u{FDCF}ولة"), "U+FDCF, before them, is an Arabic ligature")
+        XCTAssertTrue(ContentDB.isNameText("د\u{FDF0}ولة"), "U+FDF0, after them, is an Arabic ligature")
+        XCTAssertTrue(ContentDB.isNameText("د\u{FFE8}ولة"), "U+FFE8, a halfwidth form below the specials, is a character")
+        for t in ["د\u{FFFC}ولة", "د\u{FFFD}ولة"] { XCTAssertFalse(ContentDB.isNameText(t), "a replacement character") }
         XCTAssertTrue(ContentDB.isNameText("د\u{0889}ولة"), "an Arabic letter of 14.0 is taken")
         XCTAssertTrue(ContentDB.isNameText("مَدِينَةٌ\u{0670}"), "the harakat and the superscript alef after letters")
         XCTAssertFalse(ContentDB.isNameText("\u{064E}مدينة"), "a haraka first")

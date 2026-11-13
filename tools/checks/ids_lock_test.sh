@@ -3,6 +3,7 @@
 # and whether tools/checks/ids_lock.sh must pass or fail. Run from the repository's root; git alone.
 set -euo pipefail
 script="$PWD/tools/checks/ids_lock.sh"
+if [ ! -f "$script" ]; then echo "ids_lock_test: run from the repository's root (no $script)"; exit 1; fi
 # nothing from the caller's git: no repository named by the environment (as inside a hook) and no settings passed on
 # (`git -c`), both in --local-env-vars; no templates of the caller's; no system settings
 unset $(git rev-parse --local-env-vars) GIT_TEMPLATE_DIR GIT_NAMESPACE
@@ -21,7 +22,10 @@ mkdir -p content/registry
 lock=content/registry/ids.lock
 failures=0
 # main's lock: pushed as the target branch
-on_main() { printf "$1" > "$lock"; git add -A; git commit -q -m main --allow-empty; git push -q -f origin main 2>/dev/null; }
+on_main() {
+  printf "$1" > "$lock"; git add -A; git commit -q -m main --allow-empty
+  if ! git push -q -f origin main 2>/dev/null; then echo "ids_lock_test: the push to the throwaway origin failed"; exit 1; fi
+}
 # the work tree's lock, then the check: $1 pass or fail, $2 the lock's text, $3 the case's name, $4 BEFORE
 check() {
   local want=$1 text=$2 name=$3 before=${4:-}
@@ -61,5 +65,8 @@ on_main 'polity a\npolity b'
 check fail 'polity a\npolity bz\n' "main's lock without its last line break"
 git rm -q -f "$lock"; git commit -q -m "no lock"; git push -q -f origin main 2>/dev/null
 check pass 'polity a\n' "main has no lock yet"
+# main without a lock: the last push's lock still guards
+check fail 'polity a\n' "main has no lock, the last push's line removed" "$pushed"
+check pass 'polity a\npolity b\npolity c\n' "main has no lock, the last push's kept" "$pushed"
 if [ "$failures" -gt 0 ]; then exit 1; fi
 echo "ids_lock_test: every case as wanted"

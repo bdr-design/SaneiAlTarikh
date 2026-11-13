@@ -28,8 +28,9 @@ extension ContentDB {
     /// paragraph separator, every format character (a bidi embedding, override, isolate or mark, a zero-width space, a
     /// soft hyphen, a word joiner, a byte-order mark, an annotation mark), every other character Unicode lets a
     /// renderer ignore (a filler, a variation selector, the grapheme joiner) and every private-use code point
-    /// (`hiddenRanges`), the blank braille pattern and the 66 noncharacters (U+FDD0 to U+FDEF, and the last two of
-    /// every plane: never characters, by Unicode's own rule); but the joiners Arabic needs (U+200C, U+200D), which may stand
+    /// (`hiddenRanges`), the blank braille pattern, the two replacement characters (U+FFFC, U+FFFD: a character
+    /// missing or broken, never one of a name) and the 66 noncharacters (U+FDD0 to U+FDEF, and the last two of every
+    /// plane: never characters, by Unicode's own rule); but the joiners Arabic needs (U+200C, U+200D), which may stand
     /// anywhere but at an end; and no character Unicode assigned after `unicodeVersion` (or not at all).
     ///
     /// The bake and the phone must judge a name alike, whatever Unicode their systems carry. So the hidden characters
@@ -51,6 +52,7 @@ extension ContentDB {
             if isPlain(v) || v == 0x20 || isArabicMark(v) { continue }
             if v < 0x20 || (v >= 0x7F && v <= 0x9F) || v == 0x2028 || v == 0x2029 || v == 0x2800 { return false }
             if (v >= 0xFDD0 && v <= 0xFDEF) || v & 0xFFFE == 0xFFFE { return false }   // the noncharacters
+            if v == 0xFFFC || v == 0xFFFD { return false }       // the replacement characters: a missing or broken one
             if isJoiner(v) { continue }
             if isHidden(v) { return false }
             guard let age = s.properties.age, age.major < unicodeVersion.major
